@@ -61,8 +61,8 @@ type JOBOBJECT_BASIC_UI_RESTRICTIONS struct {
 	UIRestrictionsClass JOB_OBJECT_UILIMIT
 }
 
-// JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -179,20 +179,20 @@ type JOBOBJECT_LIMIT_VIOLATION_INFORMATION struct {
 	RateControlToleranceLimit JOBOBJECT_RATE_CONTROL_TOLERANCE
 }
 
-// JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
@@ -236,20 +236,20 @@ type JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION struct {
 	LimitFlags                   JOB_OBJECT_LIMIT
 }
 
-// JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union struct {
 	Data [1]uint32
 }

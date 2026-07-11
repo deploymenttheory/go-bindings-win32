@@ -36,8 +36,8 @@ type CF_CALLBACK_INFO struct {
 	RequestKey             int64
 }
 
-// CF_CALLBACK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CF_CALLBACK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CF_CALLBACK_PARAMETERS_Anonymous_e__Union struct {
 	Data [7]uint64
 }
@@ -83,8 +83,8 @@ type CF_OPERATION_INFO struct {
 	RequestKey        int64
 }
 
-// CF_OPERATION_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CF_OPERATION_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CF_OPERATION_PARAMETERS_Anonymous_e__Union struct {
 	Data [5]uint64
 }

@@ -44,8 +44,12 @@ func RtlFlushNonVolatileMemory(NvToken unsafe.Pointer, NvBuffer unsafe.Pointer, 
 }
 
 // RtlFlushNonVolatileMemoryRanges calls ntdll!RtlFlushNonVolatileMemoryRanges.
-func RtlFlushNonVolatileMemoryRanges(NvToken unsafe.Pointer, NvRanges *NV_MEMORY_RANGE, NumRanges uintptr, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procRtlFlushNonVolatileMemoryRanges.Addr(), uintptr(unsafe.Pointer(NvToken)), uintptr(unsafe.Pointer(NvRanges)), uintptr(NumRanges), uintptr(Flags))
+func RtlFlushNonVolatileMemoryRanges(NvToken unsafe.Pointer, NvRanges []NV_MEMORY_RANGE, Flags uint32) uint32 {
+	var _NvRanges *NV_MEMORY_RANGE
+	if len(NvRanges) > 0 {
+		_NvRanges = &NvRanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlFlushNonVolatileMemoryRanges.Addr(), uintptr(unsafe.Pointer(NvToken)), uintptr(unsafe.Pointer(_NvRanges)), uintptr(len(NvRanges)), uintptr(Flags))
 	return uint32(r1)
 }
 

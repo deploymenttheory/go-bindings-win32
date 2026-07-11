@@ -48,11 +48,11 @@ var (
 	procAddSecureMemoryCacheCallback            = modKERNEL32.NewProc("AddSecureMemoryCacheCallback")
 	procAllocateUserPhysicalPages               = modKERNEL32.NewProc("AllocateUserPhysicalPages")
 	procAllocateUserPhysicalPagesNuma           = modKERNEL32.NewProc("AllocateUserPhysicalPagesNuma")
+	procCreateFileMapping                       = modKERNEL32.NewProc("CreateFileMappingW")
 	procCreateFileMappingA                      = modKERNEL32.NewProc("CreateFileMappingA")
 	procCreateFileMappingFromApp                = modKERNEL32.NewProc("CreateFileMappingFromApp")
+	procCreateFileMappingNuma                   = modKERNEL32.NewProc("CreateFileMappingNumaW")
 	procCreateFileMappingNumaA                  = modKERNEL32.NewProc("CreateFileMappingNumaA")
-	procCreateFileMappingNumaW                  = modKERNEL32.NewProc("CreateFileMappingNumaW")
-	procCreateFileMappingW                      = modKERNEL32.NewProc("CreateFileMappingW")
 	procCreateMemoryResourceNotification        = modKERNEL32.NewProc("CreateMemoryResourceNotification")
 	procDiscardVirtualMemory                    = modKERNEL32.NewProc("DiscardVirtualMemory")
 	procFlushViewOfFile                         = modKERNEL32.NewProc("FlushViewOfFile")
@@ -87,8 +87,8 @@ var (
 	procHeapWalk                                = modKERNEL32.NewProc("HeapWalk")
 	procIsBadCodePtr                            = modKERNEL32.NewProc("IsBadCodePtr")
 	procIsBadReadPtr                            = modKERNEL32.NewProc("IsBadReadPtr")
+	procIsBadStringPtr                          = modKERNEL32.NewProc("IsBadStringPtrW")
 	procIsBadStringPtrA                         = modKERNEL32.NewProc("IsBadStringPtrA")
-	procIsBadStringPtrW                         = modKERNEL32.NewProc("IsBadStringPtrW")
 	procIsBadWritePtr                           = modKERNEL32.NewProc("IsBadWritePtr")
 	procLocalAlloc                              = modKERNEL32.NewProc("LocalAlloc")
 	procLocalFlags                              = modKERNEL32.NewProc("LocalFlags")
@@ -104,8 +104,8 @@ var (
 	procMapViewOfFileExNuma                     = modKERNEL32.NewProc("MapViewOfFileExNuma")
 	procMapViewOfFileFromApp                    = modKERNEL32.NewProc("MapViewOfFileFromApp")
 	procOfferVirtualMemory                      = modKERNEL32.NewProc("OfferVirtualMemory")
+	procOpenFileMapping                         = modKERNEL32.NewProc("OpenFileMappingW")
 	procOpenFileMappingA                        = modKERNEL32.NewProc("OpenFileMappingA")
-	procOpenFileMappingW                        = modKERNEL32.NewProc("OpenFileMappingW")
 	procPrefetchVirtualMemory                   = modKERNEL32.NewProc("PrefetchVirtualMemory")
 	procQueryMemoryResourceNotification         = modKERNEL32.NewProc("QueryMemoryResourceNotification")
 	procReclaimVirtualMemory                    = modKERNEL32.NewProc("ReclaimVirtualMemory")
@@ -157,9 +157,13 @@ func AllocateUserPhysicalPages(hProcess foundation.HANDLE, NumberOfPages *uintpt
 }
 
 // AllocateUserPhysicalPages2 calls api-ms-win-core-memory-l1-1-8!AllocateUserPhysicalPages2.
-func AllocateUserPhysicalPages2(ObjectHandle foundation.HANDLE, NumberOfPages *uintptr, PageArray *uintptr, ExtendedParameters *MEM_EXTENDED_PARAMETER, ExtendedParameterCount uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAllocateUserPhysicalPages2.Addr(), uintptr(ObjectHandle), uintptr(unsafe.Pointer(NumberOfPages)), uintptr(unsafe.Pointer(PageArray)), uintptr(unsafe.Pointer(ExtendedParameters)), uintptr(ExtendedParameterCount))
-	return foundation.BOOL(r1)
+func AllocateUserPhysicalPages2(ObjectHandle foundation.HANDLE, NumberOfPages *uintptr, PageArray *uintptr, ExtendedParameters []MEM_EXTENDED_PARAMETER) bool {
+	var _ExtendedParameters *MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAllocateUserPhysicalPages2.Addr(), uintptr(ObjectHandle), uintptr(unsafe.Pointer(NumberOfPages)), uintptr(unsafe.Pointer(PageArray)), uintptr(unsafe.Pointer(_ExtendedParameters)), uintptr(len(ExtendedParameters)))
+	return r1 != 0
 }
 
 // AllocateUserPhysicalPagesNuma calls KERNEL32!AllocateUserPhysicalPagesNuma.
@@ -173,10 +177,28 @@ func AllocateUserPhysicalPagesNuma(hProcess foundation.HANDLE, NumberOfPages *ui
 	return nil
 }
 
+// CreateFileMapping calls KERNEL32!CreateFileMappingW.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw
+// Minimum OS: windows5.1.2600.
+func CreateFileMapping(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName string) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateFileMapping.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpFileMappingAttributes)), uintptr(flProtect), uintptr(dwMaximumSizeHigh), uintptr(dwMaximumSizeLow), uintptr(unsafe.Pointer(_lpName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CreateFileMapping2 calls api-ms-win-core-memory-l1-1-7!CreateFileMapping2.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemapping2
-func CreateFileMapping2(File foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, DesiredAccess uint32, PageProtection PAGE_PROTECTION_FLAGS, AllocationAttributes uint32, MaximumSize uint64, Name foundation.PWSTR, ExtendedParameters *MEM_EXTENDED_PARAMETER, ParameterCount uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateFileMapping2.Addr(), uintptr(File), uintptr(unsafe.Pointer(SecurityAttributes)), uintptr(DesiredAccess), uintptr(PageProtection), uintptr(AllocationAttributes), uintptr(MaximumSize), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(ExtendedParameters)), uintptr(ParameterCount))
+func CreateFileMapping2(File foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, DesiredAccess uint32, PageProtection PAGE_PROTECTION_FLAGS, AllocationAttributes uint32, MaximumSize uint64, Name string, ExtendedParameters []MEM_EXTENDED_PARAMETER) (foundation.HANDLE, error) {
+	_Name := win32.UTF16Ptr(Name)
+	var _ExtendedParameters *MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCreateFileMapping2.Addr(), uintptr(File), uintptr(unsafe.Pointer(SecurityAttributes)), uintptr(DesiredAccess), uintptr(PageProtection), uintptr(AllocationAttributes), uintptr(MaximumSize), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(_ExtendedParameters)), uintptr(len(ExtendedParameters)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -199,8 +221,22 @@ func CreateFileMappingA(hFile foundation.HANDLE, lpFileMappingAttributes *securi
 // CreateFileMappingFromApp calls KERNEL32!CreateFileMappingFromApp.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingfromapp
 // Minimum OS: windows8.0.
-func CreateFileMappingFromApp(hFile foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, PageProtection PAGE_PROTECTION_FLAGS, MaximumSize uint64, Name foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateFileMappingFromApp.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(SecurityAttributes)), uintptr(PageProtection), uintptr(MaximumSize), uintptr(unsafe.Pointer(Name)))
+func CreateFileMappingFromApp(hFile foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, PageProtection PAGE_PROTECTION_FLAGS, MaximumSize uint64, Name string) (foundation.HANDLE, error) {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procCreateFileMappingFromApp.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(SecurityAttributes)), uintptr(PageProtection), uintptr(MaximumSize), uintptr(unsafe.Pointer(_Name)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// CreateFileMappingNuma calls KERNEL32!CreateFileMappingNumaW.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingnumaw
+// Minimum OS: windows6.0.6000.
+func CreateFileMappingNuma(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName string, nndPreferred uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateFileMappingNuma.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpFileMappingAttributes)), uintptr(flProtect), uintptr(dwMaximumSizeHigh), uintptr(dwMaximumSizeLow), uintptr(unsafe.Pointer(_lpName)), uintptr(nndPreferred))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -213,30 +249,6 @@ func CreateFileMappingFromApp(hFile foundation.HANDLE, SecurityAttributes *secur
 // Minimum OS: windows6.0.6000.
 func CreateFileMappingNumaA(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName foundation.PSTR, nndPreferred uint32) (foundation.HANDLE, error) {
 	r1, _, e1 := syscall.SyscallN(procCreateFileMappingNumaA.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpFileMappingAttributes)), uintptr(flProtect), uintptr(dwMaximumSizeHigh), uintptr(dwMaximumSizeLow), uintptr(unsafe.Pointer(lpName)), uintptr(nndPreferred))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateFileMappingNumaW calls KERNEL32!CreateFileMappingNumaW.
-// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingnumaw
-// Minimum OS: windows6.0.6000.
-func CreateFileMappingNumaW(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName foundation.PWSTR, nndPreferred uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateFileMappingNumaW.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpFileMappingAttributes)), uintptr(flProtect), uintptr(dwMaximumSizeHigh), uintptr(dwMaximumSizeLow), uintptr(unsafe.Pointer(lpName)), uintptr(nndPreferred))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateFileMappingW calls KERNEL32!CreateFileMappingW.
-// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw
-// Minimum OS: windows5.1.2600.
-func CreateFileMappingW(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateFileMappingW.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpFileMappingAttributes)), uintptr(flProtect), uintptr(dwMaximumSizeHigh), uintptr(dwMaximumSizeLow), uintptr(unsafe.Pointer(lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -306,15 +318,15 @@ func GetMemoryErrorHandlingCapabilities(Capabilities *uint32) error {
 }
 
 // GetMemoryNumaClosestInitiatorNode calls api-ms-win-core-memory-l1-1-9!GetMemoryNumaClosestInitiatorNode.
-func GetMemoryNumaClosestInitiatorNode(TargetNodeNumber uint32, InitiatorNodeNumber *uint32) foundation.BOOL {
+func GetMemoryNumaClosestInitiatorNode(TargetNodeNumber uint32, InitiatorNodeNumber *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetMemoryNumaClosestInitiatorNode.Addr(), uintptr(TargetNodeNumber), uintptr(unsafe.Pointer(InitiatorNodeNumber)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetMemoryNumaPerformanceInformation calls api-ms-win-core-memory-l1-1-9!GetMemoryNumaPerformanceInformation.
-func GetMemoryNumaPerformanceInformation(NodeNumber uint32, DataType byte, PerfInfo **WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT) foundation.BOOL {
+func GetMemoryNumaPerformanceInformation(NodeNumber uint32, DataType byte, PerfInfo **WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT) bool {
 	r1, _, _ := syscall.SyscallN(procGetMemoryNumaPerformanceInformation.Addr(), uintptr(NodeNumber), uintptr(DataType), uintptr(unsafe.Pointer(PerfInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetProcessHeap calls KERNEL32!GetProcessHeap.
@@ -332,8 +344,12 @@ func GetProcessHeap() (foundation.HANDLE, error) {
 // GetProcessHeaps calls KERNEL32!GetProcessHeaps.
 // https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-getprocessheaps
 // Minimum OS: windows5.1.2600.
-func GetProcessHeaps(NumberOfHeaps uint32, ProcessHeaps *foundation.HANDLE) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetProcessHeaps.Addr(), uintptr(NumberOfHeaps), uintptr(unsafe.Pointer(ProcessHeaps)))
+func GetProcessHeaps(ProcessHeaps []foundation.HANDLE) (uint32, error) {
+	var _ProcessHeaps *foundation.HANDLE
+	if len(ProcessHeaps) > 0 {
+		_ProcessHeaps = &ProcessHeaps[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetProcessHeaps.Addr(), uintptr(len(ProcessHeaps)), uintptr(unsafe.Pointer(_ProcessHeaps)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -343,9 +359,9 @@ func GetProcessHeaps(NumberOfHeaps uint32, ProcessHeaps *foundation.HANDLE) (uin
 // GetProcessWorkingSetSizeEx calls KERNEL32!GetProcessWorkingSetSizeEx.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-getprocessworkingsetsizeex
 // Minimum OS: windows6.0.6000.
-func GetProcessWorkingSetSizeEx(hProcess foundation.HANDLE, lpMinimumWorkingSetSize *uintptr, lpMaximumWorkingSetSize *uintptr, Flags *uint32) foundation.BOOL {
+func GetProcessWorkingSetSizeEx(hProcess foundation.HANDLE, lpMinimumWorkingSetSize *uintptr, lpMaximumWorkingSetSize *uintptr, Flags *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetProcessWorkingSetSizeEx.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpMinimumWorkingSetSize)), uintptr(unsafe.Pointer(lpMaximumWorkingSetSize)), uintptr(unsafe.Pointer(Flags)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetSystemFileCacheSize calls KERNEL32!GetSystemFileCacheSize.
@@ -552,9 +568,9 @@ func HeapSize(hHeap foundation.HANDLE, dwFlags HEAP_FLAGS, lpMem unsafe.Pointer)
 
 // HeapSummary calls KERNEL32!HeapSummary.
 // https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapsummary
-func HeapSummary(hHeap foundation.HANDLE, dwFlags uint32, lpSummary *HEAP_SUMMARY) foundation.BOOL {
+func HeapSummary(hHeap foundation.HANDLE, dwFlags uint32, lpSummary *HEAP_SUMMARY) bool {
 	r1, _, _ := syscall.SyscallN(procHeapSummary.Addr(), uintptr(hHeap), uintptr(dwFlags), uintptr(unsafe.Pointer(lpSummary)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // HeapUnlock calls KERNEL32!HeapUnlock.
@@ -571,9 +587,9 @@ func HeapUnlock(hHeap foundation.HANDLE) error {
 // HeapValidate calls KERNEL32!HeapValidate.
 // https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapvalidate
 // Minimum OS: windows5.1.2600.
-func HeapValidate(hHeap foundation.HANDLE, dwFlags HEAP_FLAGS, lpMem unsafe.Pointer) foundation.BOOL {
+func HeapValidate(hHeap foundation.HANDLE, dwFlags HEAP_FLAGS, lpMem unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procHeapValidate.Addr(), uintptr(hHeap), uintptr(dwFlags), uintptr(unsafe.Pointer(lpMem)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // HeapWalk calls KERNEL32!HeapWalk.
@@ -601,33 +617,34 @@ func IsBadCodePtr(lpfn foundation.FARPROC) error {
 // IsBadReadPtr calls KERNEL32!IsBadReadPtr.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-isbadreadptr
 // Minimum OS: windows5.1.2600.
-func IsBadReadPtr(lp unsafe.Pointer, ucb uintptr) foundation.BOOL {
+func IsBadReadPtr(lp unsafe.Pointer, ucb uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procIsBadReadPtr.Addr(), uintptr(unsafe.Pointer(lp)), uintptr(ucb))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// IsBadStringPtr calls KERNEL32!IsBadStringPtrW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-isbadstringptrw
+// Minimum OS: windows5.1.2600.
+func IsBadStringPtr(lpsz string, ucchMax uintptr) bool {
+	_lpsz := win32.UTF16Ptr(lpsz)
+	r1, _, _ := syscall.SyscallN(procIsBadStringPtr.Addr(), uintptr(unsafe.Pointer(_lpsz)), uintptr(ucchMax))
+	return r1 != 0
 }
 
 // IsBadStringPtrA calls KERNEL32!IsBadStringPtrA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-isbadstringptra
 // Minimum OS: windows5.1.2600.
-func IsBadStringPtrA(lpsz foundation.PSTR, ucchMax uintptr) foundation.BOOL {
+func IsBadStringPtrA(lpsz foundation.PSTR, ucchMax uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procIsBadStringPtrA.Addr(), uintptr(unsafe.Pointer(lpsz)), uintptr(ucchMax))
-	return foundation.BOOL(r1)
-}
-
-// IsBadStringPtrW calls KERNEL32!IsBadStringPtrW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-isbadstringptrw
-// Minimum OS: windows5.1.2600.
-func IsBadStringPtrW(lpsz foundation.PWSTR, ucchMax uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIsBadStringPtrW.Addr(), uintptr(unsafe.Pointer(lpsz)), uintptr(ucchMax))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsBadWritePtr calls KERNEL32!IsBadWritePtr.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-isbadwriteptr
 // Minimum OS: windows5.1.2600.
-func IsBadWritePtr(lp unsafe.Pointer, ucb uintptr) foundation.BOOL {
+func IsBadWritePtr(lp unsafe.Pointer, ucb uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procIsBadWritePtr.Addr(), uintptr(unsafe.Pointer(lp)), uintptr(ucb))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LocalAlloc calls KERNEL32!LocalAlloc.
@@ -714,8 +731,12 @@ func LocalUnlock(hMem foundation.HLOCAL) error {
 // MapUserPhysicalPages calls KERNEL32!MapUserPhysicalPages.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-mapuserphysicalpages
 // Minimum OS: windows5.1.2600.
-func MapUserPhysicalPages(VirtualAddress unsafe.Pointer, NumberOfPages uintptr, PageArray *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procMapUserPhysicalPages.Addr(), uintptr(unsafe.Pointer(VirtualAddress)), uintptr(NumberOfPages), uintptr(unsafe.Pointer(PageArray)))
+func MapUserPhysicalPages(VirtualAddress unsafe.Pointer, PageArray []uintptr) error {
+	var _PageArray *uintptr
+	if len(PageArray) > 0 {
+		_PageArray = &PageArray[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procMapUserPhysicalPages.Addr(), uintptr(unsafe.Pointer(VirtualAddress)), uintptr(len(PageArray)), uintptr(unsafe.Pointer(_PageArray)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -748,8 +769,12 @@ func MapViewOfFile(hFileMappingObject foundation.HANDLE, dwDesiredAccess FILE_MA
 // MapViewOfFile3 calls api-ms-win-core-memory-l1-1-6!MapViewOfFile3.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile3
 // Minimum OS: windows10.0.17134.
-func MapViewOfFile3(FileMapping foundation.HANDLE, Process foundation.HANDLE, BaseAddress unsafe.Pointer, Offset uint64, ViewSize uintptr, AllocationType VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters *MEM_EXTENDED_PARAMETER, ParameterCount uint32) (MEMORY_MAPPED_VIEW_ADDRESS, error) {
-	r1, _, e1 := syscall.SyscallN(procMapViewOfFile3.Addr(), uintptr(FileMapping), uintptr(Process), uintptr(unsafe.Pointer(BaseAddress)), uintptr(Offset), uintptr(ViewSize), uintptr(AllocationType), uintptr(PageProtection), uintptr(unsafe.Pointer(ExtendedParameters)), uintptr(ParameterCount))
+func MapViewOfFile3(FileMapping foundation.HANDLE, Process foundation.HANDLE, BaseAddress unsafe.Pointer, Offset uint64, ViewSize uintptr, AllocationType VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters []MEM_EXTENDED_PARAMETER) (MEMORY_MAPPED_VIEW_ADDRESS, error) {
+	var _ExtendedParameters *MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procMapViewOfFile3.Addr(), uintptr(FileMapping), uintptr(Process), uintptr(unsafe.Pointer(BaseAddress)), uintptr(Offset), uintptr(ViewSize), uintptr(AllocationType), uintptr(PageProtection), uintptr(unsafe.Pointer(_ExtendedParameters)), uintptr(len(ExtendedParameters)))
 	ret := MEMORY_MAPPED_VIEW_ADDRESS(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -760,8 +785,12 @@ func MapViewOfFile3(FileMapping foundation.HANDLE, Process foundation.HANDLE, Ba
 // MapViewOfFile3FromApp calls api-ms-win-core-memory-l1-1-6!MapViewOfFile3FromApp.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile3fromapp
 // Minimum OS: windows10.0.10240.
-func MapViewOfFile3FromApp(FileMapping foundation.HANDLE, Process foundation.HANDLE, BaseAddress unsafe.Pointer, Offset uint64, ViewSize uintptr, AllocationType VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters *MEM_EXTENDED_PARAMETER, ParameterCount uint32) (MEMORY_MAPPED_VIEW_ADDRESS, error) {
-	r1, _, e1 := syscall.SyscallN(procMapViewOfFile3FromApp.Addr(), uintptr(FileMapping), uintptr(Process), uintptr(unsafe.Pointer(BaseAddress)), uintptr(Offset), uintptr(ViewSize), uintptr(AllocationType), uintptr(PageProtection), uintptr(unsafe.Pointer(ExtendedParameters)), uintptr(ParameterCount))
+func MapViewOfFile3FromApp(FileMapping foundation.HANDLE, Process foundation.HANDLE, BaseAddress unsafe.Pointer, Offset uint64, ViewSize uintptr, AllocationType VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters []MEM_EXTENDED_PARAMETER) (MEMORY_MAPPED_VIEW_ADDRESS, error) {
+	var _ExtendedParameters *MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procMapViewOfFile3FromApp.Addr(), uintptr(FileMapping), uintptr(Process), uintptr(unsafe.Pointer(BaseAddress)), uintptr(Offset), uintptr(ViewSize), uintptr(AllocationType), uintptr(PageProtection), uintptr(unsafe.Pointer(_ExtendedParameters)), uintptr(len(ExtendedParameters)))
 	ret := MEMORY_MAPPED_VIEW_ADDRESS(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -826,16 +855,32 @@ func OfferVirtualMemory(VirtualAddress unsafe.Pointer, Size uintptr, Priority OF
 }
 
 // OpenDedicatedMemoryPartition calls api-ms-win-core-memory-l1-1-8!OpenDedicatedMemoryPartition.
-func OpenDedicatedMemoryPartition(Partition foundation.HANDLE, DedicatedMemoryTypeId uint64, DesiredAccess uint32, InheritHandle foundation.BOOL) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procOpenDedicatedMemoryPartition.Addr(), uintptr(Partition), uintptr(DedicatedMemoryTypeId), uintptr(DesiredAccess), uintptr(InheritHandle))
+func OpenDedicatedMemoryPartition(Partition foundation.HANDLE, DedicatedMemoryTypeId uint64, DesiredAccess uint32, InheritHandle bool) foundation.HANDLE {
+	_InheritHandle := win32.Bool32(InheritHandle)
+	r1, _, _ := syscall.SyscallN(procOpenDedicatedMemoryPartition.Addr(), uintptr(Partition), uintptr(DedicatedMemoryTypeId), uintptr(DesiredAccess), uintptr(_InheritHandle))
 	return foundation.HANDLE(r1)
+}
+
+// OpenFileMapping calls KERNEL32!OpenFileMappingW.
+// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-openfilemappingw
+// Minimum OS: windows5.1.2600.
+func OpenFileMapping(dwDesiredAccess uint32, bInheritHandle bool, lpName string) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procOpenFileMapping.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(_lpName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // OpenFileMappingA calls KERNEL32!OpenFileMappingA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openfilemappinga
 // Minimum OS: windows5.1.2600.
-func OpenFileMappingA(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lpName foundation.PSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenFileMappingA.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
+func OpenFileMappingA(dwDesiredAccess uint32, bInheritHandle bool, lpName foundation.PSTR) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, e1 := syscall.SyscallN(procOpenFileMappingA.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -846,20 +891,10 @@ func OpenFileMappingA(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lp
 // OpenFileMappingFromApp calls api-ms-win-core-memory-l1-1-3!OpenFileMappingFromApp.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-openfilemappingfromapp
 // Minimum OS: windows10.0.10240.
-func OpenFileMappingFromApp(DesiredAccess uint32, InheritHandle foundation.BOOL, Name foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenFileMappingFromApp.Addr(), uintptr(DesiredAccess), uintptr(InheritHandle), uintptr(unsafe.Pointer(Name)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// OpenFileMappingW calls KERNEL32!OpenFileMappingW.
-// https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-openfilemappingw
-// Minimum OS: windows5.1.2600.
-func OpenFileMappingW(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenFileMappingW.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
+func OpenFileMappingFromApp(DesiredAccess uint32, InheritHandle bool, Name string) (foundation.HANDLE, error) {
+	_InheritHandle := win32.Bool32(InheritHandle)
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procOpenFileMappingFromApp.Addr(), uintptr(DesiredAccess), uintptr(_InheritHandle), uintptr(unsafe.Pointer(_Name)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -870,8 +905,12 @@ func OpenFileMappingW(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lp
 // PrefetchVirtualMemory calls KERNEL32!PrefetchVirtualMemory.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-prefetchvirtualmemory
 // Minimum OS: windows8.0.
-func PrefetchVirtualMemory(hProcess foundation.HANDLE, NumberOfEntries uintptr, VirtualAddresses *WIN32_MEMORY_RANGE_ENTRY, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procPrefetchVirtualMemory.Addr(), uintptr(hProcess), uintptr(NumberOfEntries), uintptr(unsafe.Pointer(VirtualAddresses)), uintptr(Flags))
+func PrefetchVirtualMemory(hProcess foundation.HANDLE, VirtualAddresses []WIN32_MEMORY_RANGE_ENTRY, Flags uint32) error {
+	var _VirtualAddresses *WIN32_MEMORY_RANGE_ENTRY
+	if len(VirtualAddresses) > 0 {
+		_VirtualAddresses = &VirtualAddresses[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procPrefetchVirtualMemory.Addr(), uintptr(hProcess), uintptr(len(VirtualAddresses)), uintptr(unsafe.Pointer(_VirtualAddresses)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -890,9 +929,9 @@ func QueryMemoryResourceNotification(ResourceNotificationHandle foundation.HANDL
 }
 
 // QueryPartitionInformation calls api-ms-win-core-memory-l1-1-8!QueryPartitionInformation.
-func QueryPartitionInformation(Partition foundation.HANDLE, PartitionInformationClass WIN32_MEMORY_PARTITION_INFORMATION_CLASS, PartitionInformation unsafe.Pointer, PartitionInformationLength uint32) foundation.BOOL {
+func QueryPartitionInformation(Partition foundation.HANDLE, PartitionInformationClass WIN32_MEMORY_PARTITION_INFORMATION_CLASS, PartitionInformation unsafe.Pointer, PartitionInformationLength uint32) bool {
 	r1, _, _ := syscall.SyscallN(procQueryPartitionInformation.Addr(), uintptr(Partition), uintptr(PartitionInformationClass), uintptr(unsafe.Pointer(PartitionInformation)), uintptr(PartitionInformationLength))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QueryVirtualMemoryInformation calls api-ms-win-core-memory-l1-1-4!QueryVirtualMemoryInformation.
@@ -925,9 +964,9 @@ func RegisterBadMemoryNotification(Callback PBAD_MEMORY_CALLBACK_ROUTINE) unsafe
 // RemoveSecureMemoryCacheCallback calls KERNEL32!RemoveSecureMemoryCacheCallback.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-removesecurememorycachecallback
 // Minimum OS: windows6.0.6000.
-func RemoveSecureMemoryCacheCallback(pfnCallBack PSECURE_MEMORY_CACHE_CALLBACK) foundation.BOOL {
+func RemoveSecureMemoryCacheCallback(pfnCallBack PSECURE_MEMORY_CACHE_CALLBACK) bool {
 	r1, _, _ := syscall.SyscallN(procRemoveSecureMemoryCacheCallback.Addr(), uintptr(pfnCallBack))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ResetWriteWatch calls KERNEL32!ResetWriteWatch.
@@ -965,8 +1004,12 @@ func RtlIsZeroMemory(Buffer unsafe.Pointer, Length uintptr) foundation.BOOLEAN {
 // SetProcessValidCallTargets calls api-ms-win-core-memory-l1-1-3!SetProcessValidCallTargets.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-setprocessvalidcalltargets
 // Minimum OS: windows10.0.10240.
-func SetProcessValidCallTargets(hProcess foundation.HANDLE, VirtualAddress unsafe.Pointer, RegionSize uintptr, NumberOfOffsets uint32, OffsetInformation *CFG_CALL_TARGET_INFO) error {
-	r1, _, e1 := syscall.SyscallN(procSetProcessValidCallTargets.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(VirtualAddress)), uintptr(RegionSize), uintptr(NumberOfOffsets), uintptr(unsafe.Pointer(OffsetInformation)))
+func SetProcessValidCallTargets(hProcess foundation.HANDLE, VirtualAddress unsafe.Pointer, RegionSize uintptr, OffsetInformation []CFG_CALL_TARGET_INFO) error {
+	var _OffsetInformation *CFG_CALL_TARGET_INFO
+	if len(OffsetInformation) > 0 {
+		_OffsetInformation = &OffsetInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetProcessValidCallTargets.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(VirtualAddress)), uintptr(RegionSize), uintptr(len(OffsetInformation)), uintptr(unsafe.Pointer(_OffsetInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -974,9 +1017,13 @@ func SetProcessValidCallTargets(hProcess foundation.HANDLE, VirtualAddress unsaf
 }
 
 // SetProcessValidCallTargetsForMappedView calls api-ms-win-core-memory-l1-1-7!SetProcessValidCallTargetsForMappedView.
-func SetProcessValidCallTargetsForMappedView(Process foundation.HANDLE, VirtualAddress unsafe.Pointer, RegionSize uintptr, NumberOfOffsets uint32, OffsetInformation *CFG_CALL_TARGET_INFO, Section foundation.HANDLE, ExpectedFileOffset uint64) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetProcessValidCallTargetsForMappedView.Addr(), uintptr(Process), uintptr(unsafe.Pointer(VirtualAddress)), uintptr(RegionSize), uintptr(NumberOfOffsets), uintptr(unsafe.Pointer(OffsetInformation)), uintptr(Section), uintptr(ExpectedFileOffset))
-	return foundation.BOOL(r1)
+func SetProcessValidCallTargetsForMappedView(Process foundation.HANDLE, VirtualAddress unsafe.Pointer, RegionSize uintptr, OffsetInformation []CFG_CALL_TARGET_INFO, Section foundation.HANDLE, ExpectedFileOffset uint64) bool {
+	var _OffsetInformation *CFG_CALL_TARGET_INFO
+	if len(OffsetInformation) > 0 {
+		_OffsetInformation = &OffsetInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetProcessValidCallTargetsForMappedView.Addr(), uintptr(Process), uintptr(unsafe.Pointer(VirtualAddress)), uintptr(RegionSize), uintptr(len(OffsetInformation)), uintptr(unsafe.Pointer(_OffsetInformation)), uintptr(Section), uintptr(ExpectedFileOffset))
+	return r1 != 0
 }
 
 // SetProcessWorkingSetSizeEx calls KERNEL32!SetProcessWorkingSetSizeEx.
@@ -1060,8 +1107,12 @@ func VirtualAlloc(lpAddress unsafe.Pointer, dwSize uintptr, flAllocationType VIR
 // VirtualAlloc2 calls api-ms-win-core-memory-l1-1-6!VirtualAlloc2.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc2
 // Minimum OS: windows10.0.10240.
-func VirtualAlloc2(Process foundation.HANDLE, BaseAddress unsafe.Pointer, Size uintptr, AllocationType VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters *MEM_EXTENDED_PARAMETER, ParameterCount uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procVirtualAlloc2.Addr(), uintptr(Process), uintptr(unsafe.Pointer(BaseAddress)), uintptr(Size), uintptr(AllocationType), uintptr(PageProtection), uintptr(unsafe.Pointer(ExtendedParameters)), uintptr(ParameterCount))
+func VirtualAlloc2(Process foundation.HANDLE, BaseAddress unsafe.Pointer, Size uintptr, AllocationType VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters []MEM_EXTENDED_PARAMETER) (unsafe.Pointer, error) {
+	var _ExtendedParameters *MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procVirtualAlloc2.Addr(), uintptr(Process), uintptr(unsafe.Pointer(BaseAddress)), uintptr(Size), uintptr(AllocationType), uintptr(PageProtection), uintptr(unsafe.Pointer(_ExtendedParameters)), uintptr(len(ExtendedParameters)))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -1072,8 +1123,12 @@ func VirtualAlloc2(Process foundation.HANDLE, BaseAddress unsafe.Pointer, Size u
 // VirtualAlloc2FromApp calls api-ms-win-core-memory-l1-1-6!VirtualAlloc2FromApp.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc2fromapp
 // Minimum OS: windows10.0.10240.
-func VirtualAlloc2FromApp(Process foundation.HANDLE, BaseAddress unsafe.Pointer, Size uintptr, AllocationType VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters *MEM_EXTENDED_PARAMETER, ParameterCount uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procVirtualAlloc2FromApp.Addr(), uintptr(Process), uintptr(unsafe.Pointer(BaseAddress)), uintptr(Size), uintptr(AllocationType), uintptr(PageProtection), uintptr(unsafe.Pointer(ExtendedParameters)), uintptr(ParameterCount))
+func VirtualAlloc2FromApp(Process foundation.HANDLE, BaseAddress unsafe.Pointer, Size uintptr, AllocationType VIRTUAL_ALLOCATION_TYPE, PageProtection uint32, ExtendedParameters []MEM_EXTENDED_PARAMETER) (unsafe.Pointer, error) {
+	var _ExtendedParameters *MEM_EXTENDED_PARAMETER
+	if len(ExtendedParameters) > 0 {
+		_ExtendedParameters = &ExtendedParameters[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procVirtualAlloc2FromApp.Addr(), uintptr(Process), uintptr(unsafe.Pointer(BaseAddress)), uintptr(Size), uintptr(AllocationType), uintptr(PageProtection), uintptr(unsafe.Pointer(_ExtendedParameters)), uintptr(len(ExtendedParameters)))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -1217,7 +1272,7 @@ func VirtualUnlock(lpAddress unsafe.Pointer, dwSize uintptr) error {
 }
 
 // VirtualUnlockEx calls api-ms-win-core-memory-l1-1-5!VirtualUnlockEx.
-func VirtualUnlockEx(Process foundation.HANDLE, Address unsafe.Pointer, Size uintptr) foundation.BOOL {
+func VirtualUnlockEx(Process foundation.HANDLE, Address unsafe.Pointer, Size uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procVirtualUnlockEx.Addr(), uintptr(Process), uintptr(unsafe.Pointer(Address)), uintptr(Size))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

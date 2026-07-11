@@ -81,8 +81,9 @@ var (
 // WinHttpAddRequestHeaders calls WINHTTP!WinHttpAddRequestHeaders.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpaddrequestheaders
 // Minimum OS: windows5.1.2600.
-func WinHttpAddRequestHeaders(hRequest unsafe.Pointer, lpszHeaders foundation.PWSTR, dwHeadersLength uint32, dwModifiers uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWinHttpAddRequestHeaders.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpszHeaders)), uintptr(dwHeadersLength), uintptr(dwModifiers))
+func WinHttpAddRequestHeaders(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, dwModifiers uint32) error {
+	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
+	r1, _, e1 := syscall.SyscallN(procWinHttpAddRequestHeaders.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(dwModifiers))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -91,8 +92,12 @@ func WinHttpAddRequestHeaders(hRequest unsafe.Pointer, lpszHeaders foundation.PW
 
 // WinHttpAddRequestHeadersEx calls WINHTTP!WinHttpAddRequestHeadersEx.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpaddrequestheadersex
-func WinHttpAddRequestHeadersEx(hRequest unsafe.Pointer, dwModifiers uint32, ullFlags uint64, ullExtra uint64, cHeaders uint32, pHeaders *WINHTTP_EXTENDED_HEADER) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpAddRequestHeadersEx.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(dwModifiers), uintptr(ullFlags), uintptr(ullExtra), uintptr(cHeaders), uintptr(unsafe.Pointer(pHeaders)))
+func WinHttpAddRequestHeadersEx(hRequest unsafe.Pointer, dwModifiers uint32, ullFlags uint64, ullExtra uint64, pHeaders []WINHTTP_EXTENDED_HEADER) uint32 {
+	var _pHeaders *WINHTTP_EXTENDED_HEADER
+	if len(pHeaders) > 0 {
+		_pHeaders = &pHeaders[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinHttpAddRequestHeadersEx.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(dwModifiers), uintptr(ullFlags), uintptr(ullExtra), uintptr(len(pHeaders)), uintptr(unsafe.Pointer(_pHeaders)))
 	return uint32(r1)
 }
 
@@ -121,8 +126,9 @@ func WinHttpCloseHandle(hInternet unsafe.Pointer) error {
 // WinHttpConnect calls WINHTTP!WinHttpConnect.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpconnect
 // Minimum OS: windows5.1.2600.
-func WinHttpConnect(hSession unsafe.Pointer, pswzServerName foundation.PWSTR, nServerPort uint16, dwReserved uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procWinHttpConnect.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(unsafe.Pointer(pswzServerName)), uintptr(nServerPort), uintptr(dwReserved))
+func WinHttpConnect(hSession unsafe.Pointer, pswzServerName string, nServerPort uint16, dwReserved uint32) (unsafe.Pointer, error) {
+	_pswzServerName := win32.UTF16Ptr(pswzServerName)
+	r1, _, e1 := syscall.SyscallN(procWinHttpConnect.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(unsafe.Pointer(_pswzServerName)), uintptr(nServerPort), uintptr(dwReserved))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -133,8 +139,9 @@ func WinHttpConnect(hSession unsafe.Pointer, pswzServerName foundation.PWSTR, nS
 // WinHttpCrackUrl calls WINHTTP!WinHttpCrackUrl.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpcrackurl
 // Minimum OS: windows5.1.2600.
-func WinHttpCrackUrl(pwszUrl foundation.PWSTR, dwUrlLength uint32, dwFlags uint32, lpUrlComponents *URL_COMPONENTS) error {
-	r1, _, e1 := syscall.SyscallN(procWinHttpCrackUrl.Addr(), uintptr(unsafe.Pointer(pwszUrl)), uintptr(dwUrlLength), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUrlComponents)))
+func WinHttpCrackUrl(pwszUrl string, dwUrlLength uint32, dwFlags uint32, lpUrlComponents *URL_COMPONENTS) error {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, e1 := syscall.SyscallN(procWinHttpCrackUrl.Addr(), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(dwUrlLength), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUrlComponents)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -226,8 +233,9 @@ func WinHttpGetIEProxyConfigForCurrentUser(pProxyConfig *WINHTTP_CURRENT_USER_IE
 // WinHttpGetProxyForUrl calls WINHTTP!WinHttpGetProxyForUrl.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpgetproxyforurl
 // Minimum OS: windows5.1.2600.
-func WinHttpGetProxyForUrl(hSession unsafe.Pointer, lpcwszUrl foundation.PWSTR, pAutoProxyOptions *WINHTTP_AUTOPROXY_OPTIONS, pProxyInfo *WINHTTP_PROXY_INFO) error {
-	r1, _, e1 := syscall.SyscallN(procWinHttpGetProxyForUrl.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(unsafe.Pointer(lpcwszUrl)), uintptr(unsafe.Pointer(pAutoProxyOptions)), uintptr(unsafe.Pointer(pProxyInfo)))
+func WinHttpGetProxyForUrl(hSession unsafe.Pointer, lpcwszUrl string, pAutoProxyOptions *WINHTTP_AUTOPROXY_OPTIONS, pProxyInfo *WINHTTP_PROXY_INFO) error {
+	_lpcwszUrl := win32.UTF16Ptr(lpcwszUrl)
+	r1, _, e1 := syscall.SyscallN(procWinHttpGetProxyForUrl.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(unsafe.Pointer(_lpcwszUrl)), uintptr(unsafe.Pointer(pAutoProxyOptions)), uintptr(unsafe.Pointer(pProxyInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -237,14 +245,16 @@ func WinHttpGetProxyForUrl(hSession unsafe.Pointer, lpcwszUrl foundation.PWSTR, 
 // WinHttpGetProxyForUrlEx calls WINHTTP!WinHttpGetProxyForUrlEx.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpgetproxyforurlex
 // Minimum OS: windows8.0.
-func WinHttpGetProxyForUrlEx(hResolver unsafe.Pointer, pcwszUrl foundation.PWSTR, pAutoProxyOptions *WINHTTP_AUTOPROXY_OPTIONS, pContext uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpGetProxyForUrlEx.Addr(), uintptr(unsafe.Pointer(hResolver)), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(unsafe.Pointer(pAutoProxyOptions)), uintptr(pContext))
+func WinHttpGetProxyForUrlEx(hResolver unsafe.Pointer, pcwszUrl string, pAutoProxyOptions *WINHTTP_AUTOPROXY_OPTIONS, pContext uintptr) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	r1, _, _ := syscall.SyscallN(procWinHttpGetProxyForUrlEx.Addr(), uintptr(unsafe.Pointer(hResolver)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pAutoProxyOptions)), uintptr(pContext))
 	return uint32(r1)
 }
 
 // WinHttpGetProxyForUrlEx2 calls WINHTTP!WinHttpGetProxyForUrlEx2.
-func WinHttpGetProxyForUrlEx2(hResolver unsafe.Pointer, pcwszUrl foundation.PWSTR, pAutoProxyOptions *WINHTTP_AUTOPROXY_OPTIONS, cbInterfaceSelectionContext uint32, pInterfaceSelectionContext *byte, pContext uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpGetProxyForUrlEx2.Addr(), uintptr(unsafe.Pointer(hResolver)), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(unsafe.Pointer(pAutoProxyOptions)), uintptr(cbInterfaceSelectionContext), uintptr(unsafe.Pointer(pInterfaceSelectionContext)), uintptr(pContext))
+func WinHttpGetProxyForUrlEx2(hResolver unsafe.Pointer, pcwszUrl string, pAutoProxyOptions *WINHTTP_AUTOPROXY_OPTIONS, cbInterfaceSelectionContext uint32, pInterfaceSelectionContext *byte, pContext uintptr) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	r1, _, _ := syscall.SyscallN(procWinHttpGetProxyForUrlEx2.Addr(), uintptr(unsafe.Pointer(hResolver)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pAutoProxyOptions)), uintptr(cbInterfaceSelectionContext), uintptr(unsafe.Pointer(pInterfaceSelectionContext)), uintptr(pContext))
 	return uint32(r1)
 }
 
@@ -285,8 +295,11 @@ func WinHttpGetProxySettingsVersion(hSession unsafe.Pointer, pdwProxySettingsVer
 // WinHttpOpen calls WINHTTP!WinHttpOpen.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpopen
 // Minimum OS: windows5.1.2600.
-func WinHttpOpen(pszAgentW foundation.PWSTR, dwAccessType WINHTTP_ACCESS_TYPE, pszProxyW foundation.PWSTR, pszProxyBypassW foundation.PWSTR, dwFlags uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procWinHttpOpen.Addr(), uintptr(unsafe.Pointer(pszAgentW)), uintptr(dwAccessType), uintptr(unsafe.Pointer(pszProxyW)), uintptr(unsafe.Pointer(pszProxyBypassW)), uintptr(dwFlags))
+func WinHttpOpen(pszAgentW string, dwAccessType WINHTTP_ACCESS_TYPE, pszProxyW string, pszProxyBypassW string, dwFlags uint32) (unsafe.Pointer, error) {
+	_pszAgentW := win32.UTF16Ptr(pszAgentW)
+	_pszProxyW := win32.UTF16Ptr(pszProxyW)
+	_pszProxyBypassW := win32.UTF16Ptr(pszProxyBypassW)
+	r1, _, e1 := syscall.SyscallN(procWinHttpOpen.Addr(), uintptr(unsafe.Pointer(_pszAgentW)), uintptr(dwAccessType), uintptr(unsafe.Pointer(_pszProxyW)), uintptr(unsafe.Pointer(_pszProxyBypassW)), uintptr(dwFlags))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -297,8 +310,12 @@ func WinHttpOpen(pszAgentW foundation.PWSTR, dwAccessType WINHTTP_ACCESS_TYPE, p
 // WinHttpOpenRequest calls WINHTTP!WinHttpOpenRequest.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpopenrequest
 // Minimum OS: windows5.1.2600.
-func WinHttpOpenRequest(hConnect unsafe.Pointer, pwszVerb foundation.PWSTR, pwszObjectName foundation.PWSTR, pwszVersion foundation.PWSTR, pwszReferrer foundation.PWSTR, ppwszAcceptTypes *foundation.PWSTR, dwFlags WINHTTP_OPEN_REQUEST_FLAGS) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procWinHttpOpenRequest.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(pwszVerb)), uintptr(unsafe.Pointer(pwszObjectName)), uintptr(unsafe.Pointer(pwszVersion)), uintptr(unsafe.Pointer(pwszReferrer)), uintptr(unsafe.Pointer(ppwszAcceptTypes)), uintptr(dwFlags))
+func WinHttpOpenRequest(hConnect unsafe.Pointer, pwszVerb string, pwszObjectName string, pwszVersion string, pwszReferrer string, ppwszAcceptTypes *foundation.PWSTR, dwFlags WINHTTP_OPEN_REQUEST_FLAGS) (unsafe.Pointer, error) {
+	_pwszVerb := win32.UTF16Ptr(pwszVerb)
+	_pwszObjectName := win32.UTF16Ptr(pwszObjectName)
+	_pwszVersion := win32.UTF16Ptr(pwszVersion)
+	_pwszReferrer := win32.UTF16Ptr(pwszReferrer)
+	r1, _, e1 := syscall.SyscallN(procWinHttpOpenRequest.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_pwszVerb)), uintptr(unsafe.Pointer(_pwszObjectName)), uintptr(unsafe.Pointer(_pwszVersion)), uintptr(unsafe.Pointer(_pwszReferrer)), uintptr(unsafe.Pointer(ppwszAcceptTypes)), uintptr(dwFlags))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -356,8 +373,9 @@ func WinHttpQueryDataAvailable(hRequest unsafe.Pointer, lpdwNumberOfBytesAvailab
 // WinHttpQueryHeaders calls WINHTTP!WinHttpQueryHeaders.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpqueryheaders
 // Minimum OS: windows5.1.2600.
-func WinHttpQueryHeaders(hRequest unsafe.Pointer, dwInfoLevel uint32, pwszName foundation.PWSTR, lpBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpdwIndex *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWinHttpQueryHeaders.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(pwszName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpdwIndex)))
+func WinHttpQueryHeaders(hRequest unsafe.Pointer, dwInfoLevel uint32, pwszName string, lpBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpdwIndex *uint32) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	r1, _, e1 := syscall.SyscallN(procWinHttpQueryHeaders.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpdwIndex)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -401,8 +419,11 @@ func WinHttpReadDataEx(hRequest unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumbe
 }
 
 // WinHttpReadProxySettings calls WINHTTP!WinHttpReadProxySettings.
-func WinHttpReadProxySettings(hSession unsafe.Pointer, pcwszConnectionName foundation.PWSTR, fFallBackToDefaultSettings foundation.BOOL, fSetAutoDiscoverForDefaultSettings foundation.BOOL, pdwSettingsVersion *uint32, pfDefaultSettingsAreReturned *foundation.BOOL, pWinHttpProxySettings *WINHTTP_PROXY_SETTINGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpReadProxySettings.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(unsafe.Pointer(pcwszConnectionName)), uintptr(fFallBackToDefaultSettings), uintptr(fSetAutoDiscoverForDefaultSettings), uintptr(unsafe.Pointer(pdwSettingsVersion)), uintptr(unsafe.Pointer(pfDefaultSettingsAreReturned)), uintptr(unsafe.Pointer(pWinHttpProxySettings)))
+func WinHttpReadProxySettings(hSession unsafe.Pointer, pcwszConnectionName string, fFallBackToDefaultSettings bool, fSetAutoDiscoverForDefaultSettings bool, pdwSettingsVersion *uint32, pfDefaultSettingsAreReturned *foundation.BOOL, pWinHttpProxySettings *WINHTTP_PROXY_SETTINGS) uint32 {
+	_pcwszConnectionName := win32.UTF16Ptr(pcwszConnectionName)
+	_fFallBackToDefaultSettings := win32.Bool32(fFallBackToDefaultSettings)
+	_fSetAutoDiscoverForDefaultSettings := win32.Bool32(fSetAutoDiscoverForDefaultSettings)
+	r1, _, _ := syscall.SyscallN(procWinHttpReadProxySettings.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(unsafe.Pointer(_pcwszConnectionName)), uintptr(_fFallBackToDefaultSettings), uintptr(_fSetAutoDiscoverForDefaultSettings), uintptr(unsafe.Pointer(pdwSettingsVersion)), uintptr(unsafe.Pointer(pfDefaultSettingsAreReturned)), uintptr(unsafe.Pointer(pWinHttpProxySettings)))
 	return uint32(r1)
 }
 
@@ -435,8 +456,9 @@ func WinHttpResetAutoProxy(hSession unsafe.Pointer, dwFlags uint32) uint32 {
 // WinHttpSendRequest calls WINHTTP!WinHttpSendRequest.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpsendrequest
 // Minimum OS: windows5.1.2600.
-func WinHttpSendRequest(hRequest unsafe.Pointer, lpszHeaders foundation.PWSTR, dwHeadersLength uint32, lpOptional unsafe.Pointer, dwOptionalLength uint32, dwTotalLength uint32, dwContext uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procWinHttpSendRequest.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(lpOptional)), uintptr(dwOptionalLength), uintptr(dwTotalLength), uintptr(dwContext))
+func WinHttpSendRequest(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, lpOptional unsafe.Pointer, dwOptionalLength uint32, dwTotalLength uint32, dwContext uintptr) error {
+	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
+	r1, _, e1 := syscall.SyscallN(procWinHttpSendRequest.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(lpOptional)), uintptr(dwOptionalLength), uintptr(dwTotalLength), uintptr(dwContext))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -446,8 +468,10 @@ func WinHttpSendRequest(hRequest unsafe.Pointer, lpszHeaders foundation.PWSTR, d
 // WinHttpSetCredentials calls WINHTTP!WinHttpSetCredentials.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpsetcredentials
 // Minimum OS: windows5.1.2600.
-func WinHttpSetCredentials(hRequest unsafe.Pointer, AuthTargets uint32, AuthScheme uint32, pwszUserName foundation.PWSTR, pwszPassword foundation.PWSTR, pAuthParams unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procWinHttpSetCredentials.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(AuthTargets), uintptr(AuthScheme), uintptr(unsafe.Pointer(pwszUserName)), uintptr(unsafe.Pointer(pwszPassword)), uintptr(unsafe.Pointer(pAuthParams)))
+func WinHttpSetCredentials(hRequest unsafe.Pointer, AuthTargets uint32, AuthScheme uint32, pwszUserName string, pwszPassword string, pAuthParams unsafe.Pointer) error {
+	_pwszUserName := win32.UTF16Ptr(pwszUserName)
+	_pwszPassword := win32.UTF16Ptr(pwszPassword)
+	r1, _, e1 := syscall.SyscallN(procWinHttpSetCredentials.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(AuthTargets), uintptr(AuthScheme), uintptr(unsafe.Pointer(_pwszUserName)), uintptr(unsafe.Pointer(_pwszPassword)), uintptr(unsafe.Pointer(pAuthParams)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -477,8 +501,9 @@ func WinHttpSetOption(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe
 }
 
 // WinHttpSetProxySettingsPerUser calls WINHTTP!WinHttpSetProxySettingsPerUser.
-func WinHttpSetProxySettingsPerUser(fProxySettingsPerUser foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpSetProxySettingsPerUser.Addr(), uintptr(fProxySettingsPerUser))
+func WinHttpSetProxySettingsPerUser(fProxySettingsPerUser bool) uint32 {
+	_fProxySettingsPerUser := win32.Bool32(fProxySettingsPerUser)
+	r1, _, _ := syscall.SyscallN(procWinHttpSetProxySettingsPerUser.Addr(), uintptr(_fProxySettingsPerUser))
 	return uint32(r1)
 }
 
@@ -518,8 +543,9 @@ func WinHttpTimeFromSystemTime(pst *foundation.SYSTEMTIME, pwszTime foundation.P
 // WinHttpTimeToSystemTime calls WINHTTP!WinHttpTimeToSystemTime.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttptimetosystemtime
 // Minimum OS: windows5.1.2600.
-func WinHttpTimeToSystemTime(pwszTime foundation.PWSTR, pst *foundation.SYSTEMTIME) error {
-	r1, _, e1 := syscall.SyscallN(procWinHttpTimeToSystemTime.Addr(), uintptr(unsafe.Pointer(pwszTime)), uintptr(unsafe.Pointer(pst)))
+func WinHttpTimeToSystemTime(pwszTime string, pst *foundation.SYSTEMTIME) error {
+	_pwszTime := win32.UTF16Ptr(pwszTime)
+	r1, _, e1 := syscall.SyscallN(procWinHttpTimeToSystemTime.Addr(), uintptr(unsafe.Pointer(_pwszTime)), uintptr(unsafe.Pointer(pst)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -597,7 +623,8 @@ func WinHttpWriteData(hRequest unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumber
 }
 
 // WinHttpWriteProxySettings calls WINHTTP!WinHttpWriteProxySettings.
-func WinHttpWriteProxySettings(hSession unsafe.Pointer, fForceUpdate foundation.BOOL, pWinHttpProxySettings *WINHTTP_PROXY_SETTINGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpWriteProxySettings.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(fForceUpdate), uintptr(unsafe.Pointer(pWinHttpProxySettings)))
+func WinHttpWriteProxySettings(hSession unsafe.Pointer, fForceUpdate bool, pWinHttpProxySettings *WINHTTP_PROXY_SETTINGS) uint32 {
+	_fForceUpdate := win32.Bool32(fForceUpdate)
+	r1, _, _ := syscall.SyscallN(procWinHttpWriteProxySettings.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(_fForceUpdate), uintptr(unsafe.Pointer(pWinHttpProxySettings)))
 	return uint32(r1)
 }

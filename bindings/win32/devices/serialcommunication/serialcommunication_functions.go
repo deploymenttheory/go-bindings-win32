@@ -35,8 +35,9 @@ func ComDBClaimNextFreePort(HComDB HCOMDB, ComNumber *uint32) int32 {
 
 // ComDBClaimPort calls MSPORTS!ComDBClaimPort.
 // https://learn.microsoft.com/windows/win32/api/msports/nf-msports-comdbclaimport
-func ComDBClaimPort(HComDB HCOMDB, ComNumber uint32, ForceClaim foundation.BOOL, Forced *foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procComDBClaimPort.Addr(), uintptr(HComDB), uintptr(ComNumber), uintptr(ForceClaim), uintptr(unsafe.Pointer(Forced)))
+func ComDBClaimPort(HComDB HCOMDB, ComNumber uint32, ForceClaim bool, Forced *foundation.BOOL) int32 {
+	_ForceClaim := win32.Bool32(ForceClaim)
+	r1, _, _ := syscall.SyscallN(procComDBClaimPort.Addr(), uintptr(HComDB), uintptr(ComNumber), uintptr(_ForceClaim), uintptr(unsafe.Pointer(Forced)))
 	return int32(r1)
 }
 

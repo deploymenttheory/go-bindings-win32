@@ -80,8 +80,8 @@ type ATTRIBUTE_INFO_4 struct {
 	DwScalingPercentY         uint32
 }
 
-// BIDI_DATA_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BIDI_DATA_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BIDI_DATA_u_e__Union struct {
 	Data [2]uint64
 }
@@ -132,8 +132,8 @@ type BidiRequestContainer struct {
 type BidiSpl struct {
 }
 
-// BranchOfficeJobData_JobInfo_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BranchOfficeJobData_JobInfo_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BranchOfficeJobData_JobInfo_e__Union struct {
 	Data [11]uint64
 }
@@ -235,8 +235,8 @@ type CORE_PRINTER_DRIVERW struct {
 	SzPackageID      [260]uint16
 }
 
-// CPSUICBPARAM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CPSUICBPARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CPSUICBPARAM_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -307,8 +307,8 @@ type DEVQUERYPRINT_INFO struct {
 	CchNeeded   uint32
 }
 
-// DLGPAGE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DLGPAGE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DLGPAGE_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -656,14 +656,14 @@ type EXTCHKBOX struct {
 	DwReserved   [2]uintptr
 }
 
-// EXTPUSH_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EXTPUSH_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EXTPUSH_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// EXTPUSH_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EXTPUSH_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EXTPUSH_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1172,14 +1172,14 @@ type OPTCOMBO struct {
 	DwReserved [3]uint32
 }
 
-// OPTITEM_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// OPTITEM_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type OPTITEM_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// OPTITEM_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// OPTITEM_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type OPTITEM_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1502,8 +1502,8 @@ type PRINTER_NOTIFY_INFO struct {
 	AData   [1]PRINTER_NOTIFY_INFO_DATA
 }
 
-// PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union struct {
 	Data [2]uint64
 }
@@ -1796,8 +1796,8 @@ type PROPSHEETUI_INFO struct {
 	Result          uintptr
 }
 
-// PROPSHEETUI_INFO_HEADER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETUI_INFO_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETUI_INFO_HEADER_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1864,8 +1864,8 @@ type PrintPropertiesCollection struct {
 	PropertiesCollection *PrintNamedProperty
 }
 
-// PrintPropertyValue_value_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PrintPropertyValue_value_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PrintPropertyValue_value_e__Union struct {
 	Data [2]uint64
 }
@@ -1953,8 +1953,8 @@ type SPLCLIENT_INFO_INTERNAL struct {
 	DwSessionId            uint32
 }
 
-// TRANSDATA_uCode_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRANSDATA_uCode_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRANSDATA_uCode_e__Union struct {
 	Data [1]uint16
 }

@@ -76,8 +76,8 @@ type ACTRL_CONTROL_INFOW struct {
 	LpControlName foundation.PWSTR
 }
 
-// ACTRL_OVERLAPPED_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// ACTRL_OVERLAPPED_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type ACTRL_OVERLAPPED_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -119,14 +119,14 @@ type AUDIT_OBJECT_TYPES struct {
 	PObjectTypes *AUDIT_OBJECT_TYPE
 }
 
-// AUDIT_PARAM_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// AUDIT_PARAM_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type AUDIT_PARAM_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// AUDIT_PARAM_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// AUDIT_PARAM_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type AUDIT_PARAM_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -178,8 +178,8 @@ type AUTHZ_AUDIT_EVENT_TYPE_OLD struct {
 	U        AUTHZ_AUDIT_EVENT_TYPE_UNION
 }
 
-// AUTHZ_AUDIT_EVENT_TYPE_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// AUTHZ_AUDIT_EVENT_TYPE_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type AUTHZ_AUDIT_EVENT_TYPE_UNION struct {
 	Data [3]uint16
 }
@@ -212,8 +212,8 @@ type AUTHZ_RPC_INIT_INFO_CLIENT struct {
 	ServerSpn   foundation.PWSTR
 }
 
-// AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union struct {
 	Data [1]uint64
 }
@@ -238,8 +238,8 @@ type AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE struct {
 	ValueLength uint32
 }
 
-// AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union struct {
 	Data [1]uint64
 }
@@ -254,8 +254,8 @@ type AUTHZ_SECURITY_ATTRIBUTE_V1 struct {
 	Values     AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union
 }
 
-// AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union struct {
 	Data [1]uint64
 }

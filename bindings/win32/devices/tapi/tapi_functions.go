@@ -44,10 +44,10 @@ var (
 	procLineConfigDialogEditW         = modTAPI32.NewProc("lineConfigDialogEditW")
 	procLineConfigDialogW             = modTAPI32.NewProc("lineConfigDialogW")
 	procLineConfigProvider            = modTAPI32.NewProc("lineConfigProvider")
+	procLineCreateAgent               = modTAPI32.NewProc("lineCreateAgentW")
 	procLineCreateAgentA              = modTAPI32.NewProc("lineCreateAgentA")
+	procLineCreateAgentSession        = modTAPI32.NewProc("lineCreateAgentSessionW")
 	procLineCreateAgentSessionA       = modTAPI32.NewProc("lineCreateAgentSessionA")
-	procLineCreateAgentSessionW       = modTAPI32.NewProc("lineCreateAgentSessionW")
-	procLineCreateAgentW              = modTAPI32.NewProc("lineCreateAgentW")
 	procLineDeallocateCall            = modTAPI32.NewProc("lineDeallocateCall")
 	procLineDevSpecific               = modTAPI32.NewProc("lineDevSpecific")
 	procLineDevSpecificFeature        = modTAPI32.NewProc("lineDevSpecificFeature")
@@ -74,17 +74,17 @@ var (
 	procLineGetAddressStatus          = modTAPI32.NewProc("lineGetAddressStatus")
 	procLineGetAddressStatusA         = modTAPI32.NewProc("lineGetAddressStatusA")
 	procLineGetAddressStatusW         = modTAPI32.NewProc("lineGetAddressStatusW")
+	procLineGetAgentActivityList      = modTAPI32.NewProc("lineGetAgentActivityListW")
 	procLineGetAgentActivityListA     = modTAPI32.NewProc("lineGetAgentActivityListA")
-	procLineGetAgentActivityListW     = modTAPI32.NewProc("lineGetAgentActivityListW")
+	procLineGetAgentCaps              = modTAPI32.NewProc("lineGetAgentCapsW")
 	procLineGetAgentCapsA             = modTAPI32.NewProc("lineGetAgentCapsA")
-	procLineGetAgentCapsW             = modTAPI32.NewProc("lineGetAgentCapsW")
+	procLineGetAgentGroupList         = modTAPI32.NewProc("lineGetAgentGroupListW")
 	procLineGetAgentGroupListA        = modTAPI32.NewProc("lineGetAgentGroupListA")
-	procLineGetAgentGroupListW        = modTAPI32.NewProc("lineGetAgentGroupListW")
 	procLineGetAgentInfo              = modTAPI32.NewProc("lineGetAgentInfo")
 	procLineGetAgentSessionInfo       = modTAPI32.NewProc("lineGetAgentSessionInfo")
 	procLineGetAgentSessionList       = modTAPI32.NewProc("lineGetAgentSessionList")
+	procLineGetAgentStatus            = modTAPI32.NewProc("lineGetAgentStatusW")
 	procLineGetAgentStatusA           = modTAPI32.NewProc("lineGetAgentStatusA")
-	procLineGetAgentStatusW           = modTAPI32.NewProc("lineGetAgentStatusW")
 	procLineGetAppPriority            = modTAPI32.NewProc("lineGetAppPriority")
 	procLineGetAppPriorityA           = modTAPI32.NewProc("lineGetAppPriorityA")
 	procLineGetAppPriorityW           = modTAPI32.NewProc("lineGetAppPriorityW")
@@ -102,8 +102,8 @@ var (
 	procLineGetDevConfig              = modTAPI32.NewProc("lineGetDevConfig")
 	procLineGetDevConfigA             = modTAPI32.NewProc("lineGetDevConfigA")
 	procLineGetDevConfigW             = modTAPI32.NewProc("lineGetDevConfigW")
+	procLineGetGroupList              = modTAPI32.NewProc("lineGetGroupListW")
 	procLineGetGroupListA             = modTAPI32.NewProc("lineGetGroupListA")
-	procLineGetGroupListW             = modTAPI32.NewProc("lineGetGroupListW")
 	procLineGetID                     = modTAPI32.NewProc("lineGetID")
 	procLineGetIDA                    = modTAPI32.NewProc("lineGetIDA")
 	procLineGetIDW                    = modTAPI32.NewProc("lineGetIDW")
@@ -121,8 +121,8 @@ var (
 	procLineGetProviderListW          = modTAPI32.NewProc("lineGetProviderListW")
 	procLineGetProxyStatus            = modTAPI32.NewProc("lineGetProxyStatus")
 	procLineGetQueueInfo              = modTAPI32.NewProc("lineGetQueueInfo")
+	procLineGetQueueList              = modTAPI32.NewProc("lineGetQueueListW")
 	procLineGetQueueListA             = modTAPI32.NewProc("lineGetQueueListA")
-	procLineGetQueueListW             = modTAPI32.NewProc("lineGetQueueListW")
 	procLineGetRequest                = modTAPI32.NewProc("lineGetRequest")
 	procLineGetRequestA               = modTAPI32.NewProc("lineGetRequestA")
 	procLineGetRequestW               = modTAPI32.NewProc("lineGetRequestW")
@@ -135,8 +135,8 @@ var (
 	procLineHandoffW                  = modTAPI32.NewProc("lineHandoffW")
 	procLineHold                      = modTAPI32.NewProc("lineHold")
 	procLineInitialize                = modTAPI32.NewProc("lineInitialize")
+	procLineInitializeEx              = modTAPI32.NewProc("lineInitializeExW")
 	procLineInitializeExA             = modTAPI32.NewProc("lineInitializeExA")
-	procLineInitializeExW             = modTAPI32.NewProc("lineInitializeExW")
 	procLineMakeCall                  = modTAPI32.NewProc("lineMakeCall")
 	procLineMakeCallA                 = modTAPI32.NewProc("lineMakeCallA")
 	procLineMakeCallW                 = modTAPI32.NewProc("lineMakeCallW")
@@ -246,8 +246,8 @@ var (
 	procPhoneGetStatusW               = modTAPI32.NewProc("phoneGetStatusW")
 	procPhoneGetVolume                = modTAPI32.NewProc("phoneGetVolume")
 	procPhoneInitialize               = modTAPI32.NewProc("phoneInitialize")
+	procPhoneInitializeEx             = modTAPI32.NewProc("phoneInitializeExW")
 	procPhoneInitializeExA            = modTAPI32.NewProc("phoneInitializeExA")
-	procPhoneInitializeExW            = modTAPI32.NewProc("phoneInitializeExW")
 	procPhoneNegotiateAPIVersion      = modTAPI32.NewProc("phoneNegotiateAPIVersion")
 	procPhoneNegotiateExtVersion      = modTAPI32.NewProc("phoneNegotiateExtVersion")
 	procPhoneOpen                     = modTAPI32.NewProc("phoneOpen")
@@ -277,1761 +277,1804 @@ var (
 
 // GetTnefStreamCodepage calls MAPI32!GetTnefStreamCodepage.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/gettnefstreamcodepage
-func GetTnefStreamCodepage(lpStream *systemcom.IStream, lpulCodepage *uint32, lpulSubCodepage *uint32) foundation.HRESULT {
+func GetTnefStreamCodepage(lpStream *systemcom.IStream, lpulCodepage *uint32, lpulSubCodepage *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetTnefStreamCodepage.Addr(), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpulCodepage)), uintptr(unsafe.Pointer(lpulSubCodepage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// OpenTnefStream calls MAPI32!OpenTnefStream.
-// https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstream
-func OpenTnefStream(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lppTNEF **ITnef) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOpenTnefStream.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpMessage)), uintptr(wKeyVal), uintptr(unsafe.Pointer(lppTNEF)))
-	return foundation.HRESULT(r1)
-}
-
-// OpenTnefStreamEx calls MAPI32!OpenTnefStreamEx.
-// https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstreamex
-func OpenTnefStreamEx(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lpAdressBook *systemaddressbook.IAddrBook, lppTNEF **ITnef) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOpenTnefStreamEx.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpMessage)), uintptr(wKeyVal), uintptr(unsafe.Pointer(lpAdressBook)), uintptr(unsafe.Pointer(lppTNEF)))
-	return foundation.HRESULT(r1)
-}
-
-// lineAccept calls TAPI32!lineAccept.
+// LineAccept calls TAPI32!lineAccept.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineaccept
 func LineAccept(hCall uint32, lpsUserUserInfo foundation.PSTR, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineAccept.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpsUserUserInfo)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineAddProvider calls TAPI32!lineAddProvider.
+// LineAddProvider calls TAPI32!lineAddProvider.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineaddprovider
 func LineAddProvider(lpszProviderFilename foundation.PSTR, hwndOwner foundation.HWND, lpdwPermanentProviderID *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineAddProvider.Addr(), uintptr(unsafe.Pointer(lpszProviderFilename)), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpdwPermanentProviderID)))
 	return int32(r1)
 }
 
-// lineAddProviderA calls TAPI32!lineAddProviderA.
+// LineAddProviderA calls TAPI32!lineAddProviderA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineaddprovidera
 func LineAddProviderA(lpszProviderFilename foundation.PSTR, hwndOwner foundation.HWND, lpdwPermanentProviderID *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineAddProviderA.Addr(), uintptr(unsafe.Pointer(lpszProviderFilename)), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpdwPermanentProviderID)))
 	return int32(r1)
 }
 
-// lineAddProviderW calls TAPI32!lineAddProviderW.
+// LineAddProviderW calls TAPI32!lineAddProviderW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineaddproviderw
-func LineAddProviderW(lpszProviderFilename foundation.PWSTR, hwndOwner foundation.HWND, lpdwPermanentProviderID *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineAddProviderW.Addr(), uintptr(unsafe.Pointer(lpszProviderFilename)), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpdwPermanentProviderID)))
+func LineAddProviderW(lpszProviderFilename string, hwndOwner foundation.HWND, lpdwPermanentProviderID *uint32) int32 {
+	_lpszProviderFilename := win32.UTF16Ptr(lpszProviderFilename)
+	r1, _, _ := syscall.SyscallN(procLineAddProviderW.Addr(), uintptr(unsafe.Pointer(_lpszProviderFilename)), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpdwPermanentProviderID)))
 	return int32(r1)
 }
 
-// lineAddToConference calls TAPI32!lineAddToConference.
+// LineAddToConference calls TAPI32!lineAddToConference.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineaddtoconference
 func LineAddToConference(hConfCall uint32, hConsultCall uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineAddToConference.Addr(), uintptr(hConfCall), uintptr(hConsultCall))
 	return int32(r1)
 }
 
-// lineAgentSpecific calls TAPI32!lineAgentSpecific.
+// LineAgentSpecific calls TAPI32!lineAgentSpecific.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineagentspecific
 func LineAgentSpecific(hLine uint32, dwAddressID uint32, dwAgentExtensionIDIndex uint32, lpParams unsafe.Pointer, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineAgentSpecific.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(dwAgentExtensionIDIndex), uintptr(unsafe.Pointer(lpParams)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineAnswer calls TAPI32!lineAnswer.
+// LineAnswer calls TAPI32!lineAnswer.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineanswer
 func LineAnswer(hCall uint32, lpsUserUserInfo foundation.PSTR, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineAnswer.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpsUserUserInfo)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineBlindTransfer calls TAPI32!lineBlindTransfer.
+// LineBlindTransfer calls TAPI32!lineBlindTransfer.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineblindtransfer
 func LineBlindTransfer(hCall uint32, lpszDestAddress foundation.PSTR, dwCountryCode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineBlindTransfer.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode))
 	return int32(r1)
 }
 
-// lineBlindTransferA calls TAPI32!lineBlindTransferA.
+// LineBlindTransferA calls TAPI32!lineBlindTransferA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineblindtransfera
 func LineBlindTransferA(hCall uint32, lpszDestAddress foundation.PSTR, dwCountryCode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineBlindTransferA.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode))
 	return int32(r1)
 }
 
-// lineBlindTransferW calls TAPI32!lineBlindTransferW.
+// LineBlindTransferW calls TAPI32!lineBlindTransferW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineblindtransferw
-func LineBlindTransferW(hCall uint32, lpszDestAddressW foundation.PWSTR, dwCountryCode uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineBlindTransferW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszDestAddressW)), uintptr(dwCountryCode))
+func LineBlindTransferW(hCall uint32, lpszDestAddressW string, dwCountryCode uint32) int32 {
+	_lpszDestAddressW := win32.UTF16Ptr(lpszDestAddressW)
+	r1, _, _ := syscall.SyscallN(procLineBlindTransferW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(_lpszDestAddressW)), uintptr(dwCountryCode))
 	return int32(r1)
 }
 
-// lineClose calls TAPI32!lineClose.
+// LineClose calls TAPI32!lineClose.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineclose
 func LineClose(hLine uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineClose.Addr(), uintptr(hLine))
 	return int32(r1)
 }
 
-// lineCompleteCall calls TAPI32!lineCompleteCall.
+// LineCompleteCall calls TAPI32!lineCompleteCall.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecompletecall
 func LineCompleteCall(hCall uint32, lpdwCompletionID *uint32, dwCompletionMode uint32, dwMessageID uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineCompleteCall.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpdwCompletionID)), uintptr(dwCompletionMode), uintptr(dwMessageID))
 	return int32(r1)
 }
 
-// lineCompleteTransfer calls TAPI32!lineCompleteTransfer.
+// LineCompleteTransfer calls TAPI32!lineCompleteTransfer.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecompletetransfer
 func LineCompleteTransfer(hCall uint32, hConsultCall uint32, lphConfCall *uint32, dwTransferMode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineCompleteTransfer.Addr(), uintptr(hCall), uintptr(hConsultCall), uintptr(unsafe.Pointer(lphConfCall)), uintptr(dwTransferMode))
 	return int32(r1)
 }
 
-// lineConfigDialog calls TAPI32!lineConfigDialog.
+// LineConfigDialog calls TAPI32!lineConfigDialog.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineconfigdialog
 func LineConfigDialog(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineConfigDialog.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineConfigDialogA calls TAPI32!lineConfigDialogA.
+// LineConfigDialogA calls TAPI32!lineConfigDialogA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineconfigdialoga
 func LineConfigDialogA(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineConfigDialogA.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineConfigDialogEdit calls TAPI32!lineConfigDialogEdit.
+// LineConfigDialogEdit calls TAPI32!lineConfigDialogEdit.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineconfigdialogedit
 func LineConfigDialogEdit(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass foundation.PSTR, lpDeviceConfigIn unsafe.Pointer, dwSize uint32, lpDeviceConfigOut unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineConfigDialogEdit.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lpDeviceConfigIn)), uintptr(dwSize), uintptr(unsafe.Pointer(lpDeviceConfigOut)))
 	return int32(r1)
 }
 
-// lineConfigDialogEditA calls TAPI32!lineConfigDialogEditA.
+// LineConfigDialogEditA calls TAPI32!lineConfigDialogEditA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineconfigdialogedita
 func LineConfigDialogEditA(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass foundation.PSTR, lpDeviceConfigIn unsafe.Pointer, dwSize uint32, lpDeviceConfigOut unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineConfigDialogEditA.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lpDeviceConfigIn)), uintptr(dwSize), uintptr(unsafe.Pointer(lpDeviceConfigOut)))
 	return int32(r1)
 }
 
-// lineConfigDialogEditW calls TAPI32!lineConfigDialogEditW.
+// LineConfigDialogEditW calls TAPI32!lineConfigDialogEditW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineconfigdialogeditw
-func LineConfigDialogEditW(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass foundation.PWSTR, lpDeviceConfigIn unsafe.Pointer, dwSize uint32, lpDeviceConfigOut unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineConfigDialogEditW.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lpDeviceConfigIn)), uintptr(dwSize), uintptr(unsafe.Pointer(lpDeviceConfigOut)))
+func LineConfigDialogEditW(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass string, lpDeviceConfigIn unsafe.Pointer, dwSize uint32, lpDeviceConfigOut unsafe.Pointer) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	r1, _, _ := syscall.SyscallN(procLineConfigDialogEditW.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(_lpszDeviceClass)), uintptr(unsafe.Pointer(lpDeviceConfigIn)), uintptr(dwSize), uintptr(unsafe.Pointer(lpDeviceConfigOut)))
 	return int32(r1)
 }
 
-// lineConfigDialogW calls TAPI32!lineConfigDialogW.
+// LineConfigDialogW calls TAPI32!lineConfigDialogW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineconfigdialogw
-func LineConfigDialogW(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLineConfigDialogW.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszDeviceClass)))
+func LineConfigDialogW(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass string) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	r1, _, _ := syscall.SyscallN(procLineConfigDialogW.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(_lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineConfigProvider calls TAPI32!lineConfigProvider.
+// LineConfigProvider calls TAPI32!lineConfigProvider.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineconfigprovider
 func LineConfigProvider(hwndOwner foundation.HWND, dwPermanentProviderID uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineConfigProvider.Addr(), uintptr(hwndOwner), uintptr(dwPermanentProviderID))
 	return int32(r1)
 }
 
-// lineCreateAgentA calls TAPI32!lineCreateAgentA.
+// LineCreateAgent calls TAPI32!lineCreateAgentW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecreateagentw
+func LineCreateAgent(hLine uint32, lpszAgentID string, lpszAgentPIN string, lphAgent *uint32) int32 {
+	_lpszAgentID := win32.UTF16Ptr(lpszAgentID)
+	_lpszAgentPIN := win32.UTF16Ptr(lpszAgentPIN)
+	r1, _, _ := syscall.SyscallN(procLineCreateAgent.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(_lpszAgentID)), uintptr(unsafe.Pointer(_lpszAgentPIN)), uintptr(unsafe.Pointer(lphAgent)))
+	return int32(r1)
+}
+
+// LineCreateAgentA calls TAPI32!lineCreateAgentA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecreateagenta
 func LineCreateAgentA(hLine uint32, lpszAgentID foundation.PSTR, lpszAgentPIN foundation.PSTR, lphAgent *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineCreateAgentA.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpszAgentID)), uintptr(unsafe.Pointer(lpszAgentPIN)), uintptr(unsafe.Pointer(lphAgent)))
 	return int32(r1)
 }
 
-// lineCreateAgentSessionA calls TAPI32!lineCreateAgentSessionA.
+// LineCreateAgentSession calls TAPI32!lineCreateAgentSessionW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecreateagentsessionw
+func LineCreateAgentSession(hLine uint32, hAgent uint32, lpszAgentPIN string, dwWorkingAddressID uint32, lpGroupID *win32.GUID, lphAgentSession *uint32) int32 {
+	_lpszAgentPIN := win32.UTF16Ptr(lpszAgentPIN)
+	r1, _, _ := syscall.SyscallN(procLineCreateAgentSession.Addr(), uintptr(hLine), uintptr(hAgent), uintptr(unsafe.Pointer(_lpszAgentPIN)), uintptr(dwWorkingAddressID), uintptr(unsafe.Pointer(lpGroupID)), uintptr(unsafe.Pointer(lphAgentSession)))
+	return int32(r1)
+}
+
+// LineCreateAgentSessionA calls TAPI32!lineCreateAgentSessionA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecreateagentsessiona
 func LineCreateAgentSessionA(hLine uint32, hAgent uint32, lpszAgentPIN foundation.PSTR, dwWorkingAddressID uint32, lpGroupID *win32.GUID, lphAgentSession *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineCreateAgentSessionA.Addr(), uintptr(hLine), uintptr(hAgent), uintptr(unsafe.Pointer(lpszAgentPIN)), uintptr(dwWorkingAddressID), uintptr(unsafe.Pointer(lpGroupID)), uintptr(unsafe.Pointer(lphAgentSession)))
 	return int32(r1)
 }
 
-// lineCreateAgentSessionW calls TAPI32!lineCreateAgentSessionW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecreateagentsessionw
-func LineCreateAgentSessionW(hLine uint32, hAgent uint32, lpszAgentPIN foundation.PWSTR, dwWorkingAddressID uint32, lpGroupID *win32.GUID, lphAgentSession *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineCreateAgentSessionW.Addr(), uintptr(hLine), uintptr(hAgent), uintptr(unsafe.Pointer(lpszAgentPIN)), uintptr(dwWorkingAddressID), uintptr(unsafe.Pointer(lpGroupID)), uintptr(unsafe.Pointer(lphAgentSession)))
-	return int32(r1)
-}
-
-// lineCreateAgentW calls TAPI32!lineCreateAgentW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecreateagentw
-func LineCreateAgentW(hLine uint32, lpszAgentID foundation.PWSTR, lpszAgentPIN foundation.PWSTR, lphAgent *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineCreateAgentW.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpszAgentID)), uintptr(unsafe.Pointer(lpszAgentPIN)), uintptr(unsafe.Pointer(lphAgent)))
-	return int32(r1)
-}
-
-// lineDeallocateCall calls TAPI32!lineDeallocateCall.
+// LineDeallocateCall calls TAPI32!lineDeallocateCall.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linedeallocatecall
 func LineDeallocateCall(hCall uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineDeallocateCall.Addr(), uintptr(hCall))
 	return int32(r1)
 }
 
-// lineDevSpecific calls TAPI32!lineDevSpecific.
+// LineDevSpecific calls TAPI32!lineDevSpecific.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linedevspecific
 func LineDevSpecific(hLine uint32, dwAddressID uint32, hCall uint32, lpParams unsafe.Pointer, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineDevSpecific.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(hCall), uintptr(unsafe.Pointer(lpParams)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineDevSpecificFeature calls TAPI32!lineDevSpecificFeature.
+// LineDevSpecificFeature calls TAPI32!lineDevSpecificFeature.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linedevspecificfeature
 func LineDevSpecificFeature(hLine uint32, dwFeature uint32, lpParams unsafe.Pointer, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineDevSpecificFeature.Addr(), uintptr(hLine), uintptr(dwFeature), uintptr(unsafe.Pointer(lpParams)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineDial calls TAPI32!lineDial.
+// LineDial calls TAPI32!lineDial.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linedial
 func LineDial(hCall uint32, lpszDestAddress foundation.PSTR, dwCountryCode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineDial.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode))
 	return int32(r1)
 }
 
-// lineDialA calls TAPI32!lineDialA.
+// LineDialA calls TAPI32!lineDialA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linediala
 func LineDialA(hCall uint32, lpszDestAddress foundation.PSTR, dwCountryCode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineDialA.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode))
 	return int32(r1)
 }
 
-// lineDialW calls TAPI32!lineDialW.
+// LineDialW calls TAPI32!lineDialW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linedialw
-func LineDialW(hCall uint32, lpszDestAddress foundation.PWSTR, dwCountryCode uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineDialW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode))
+func LineDialW(hCall uint32, lpszDestAddress string, dwCountryCode uint32) int32 {
+	_lpszDestAddress := win32.UTF16Ptr(lpszDestAddress)
+	r1, _, _ := syscall.SyscallN(procLineDialW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(_lpszDestAddress)), uintptr(dwCountryCode))
 	return int32(r1)
 }
 
-// lineDrop calls TAPI32!lineDrop.
+// LineDrop calls TAPI32!lineDrop.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linedrop
 func LineDrop(hCall uint32, lpsUserUserInfo foundation.PSTR, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineDrop.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpsUserUserInfo)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineForward calls TAPI32!lineForward.
+// LineForward calls TAPI32!lineForward.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineforward
 func LineForward(hLine uint32, bAllAddresses uint32, dwAddressID uint32, lpForwardList unsafe.Pointer, dwNumRingsNoAnswer uint32, lphConsultCall *uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineForward.Addr(), uintptr(hLine), uintptr(bAllAddresses), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpForwardList)), uintptr(dwNumRingsNoAnswer), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineForwardA calls TAPI32!lineForwardA.
+// LineForwardA calls TAPI32!lineForwardA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineforwarda
 func LineForwardA(hLine uint32, bAllAddresses uint32, dwAddressID uint32, lpForwardList unsafe.Pointer, dwNumRingsNoAnswer uint32, lphConsultCall *uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineForwardA.Addr(), uintptr(hLine), uintptr(bAllAddresses), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpForwardList)), uintptr(dwNumRingsNoAnswer), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineForwardW calls TAPI32!lineForwardW.
+// LineForwardW calls TAPI32!lineForwardW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineforwardw
 func LineForwardW(hLine uint32, bAllAddresses uint32, dwAddressID uint32, lpForwardList unsafe.Pointer, dwNumRingsNoAnswer uint32, lphConsultCall *uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineForwardW.Addr(), uintptr(hLine), uintptr(bAllAddresses), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpForwardList)), uintptr(dwNumRingsNoAnswer), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineGatherDigits calls TAPI32!lineGatherDigits.
+// LineGatherDigits calls TAPI32!lineGatherDigits.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegatherdigits
 func LineGatherDigits(hCall uint32, dwDigitModes uint32, lpsDigits foundation.PSTR, dwNumDigits uint32, lpszTerminationDigits foundation.PSTR, dwFirstDigitTimeout uint32, dwInterDigitTimeout uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGatherDigits.Addr(), uintptr(hCall), uintptr(dwDigitModes), uintptr(unsafe.Pointer(lpsDigits)), uintptr(dwNumDigits), uintptr(unsafe.Pointer(lpszTerminationDigits)), uintptr(dwFirstDigitTimeout), uintptr(dwInterDigitTimeout))
 	return int32(r1)
 }
 
-// lineGatherDigitsA calls TAPI32!lineGatherDigitsA.
+// LineGatherDigitsA calls TAPI32!lineGatherDigitsA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegatherdigitsa
 func LineGatherDigitsA(hCall uint32, dwDigitModes uint32, lpsDigits foundation.PSTR, dwNumDigits uint32, lpszTerminationDigits foundation.PSTR, dwFirstDigitTimeout uint32, dwInterDigitTimeout uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGatherDigitsA.Addr(), uintptr(hCall), uintptr(dwDigitModes), uintptr(unsafe.Pointer(lpsDigits)), uintptr(dwNumDigits), uintptr(unsafe.Pointer(lpszTerminationDigits)), uintptr(dwFirstDigitTimeout), uintptr(dwInterDigitTimeout))
 	return int32(r1)
 }
 
-// lineGatherDigitsW calls TAPI32!lineGatherDigitsW.
+// LineGatherDigitsW calls TAPI32!lineGatherDigitsW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegatherdigitsw
-func LineGatherDigitsW(hCall uint32, dwDigitModes uint32, lpsDigits foundation.PWSTR, dwNumDigits uint32, lpszTerminationDigits foundation.PWSTR, dwFirstDigitTimeout uint32, dwInterDigitTimeout uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGatherDigitsW.Addr(), uintptr(hCall), uintptr(dwDigitModes), uintptr(unsafe.Pointer(lpsDigits)), uintptr(dwNumDigits), uintptr(unsafe.Pointer(lpszTerminationDigits)), uintptr(dwFirstDigitTimeout), uintptr(dwInterDigitTimeout))
+func LineGatherDigitsW(hCall uint32, dwDigitModes uint32, lpsDigits foundation.PWSTR, dwNumDigits uint32, lpszTerminationDigits string, dwFirstDigitTimeout uint32, dwInterDigitTimeout uint32) int32 {
+	_lpszTerminationDigits := win32.UTF16Ptr(lpszTerminationDigits)
+	r1, _, _ := syscall.SyscallN(procLineGatherDigitsW.Addr(), uintptr(hCall), uintptr(dwDigitModes), uintptr(unsafe.Pointer(lpsDigits)), uintptr(dwNumDigits), uintptr(unsafe.Pointer(_lpszTerminationDigits)), uintptr(dwFirstDigitTimeout), uintptr(dwInterDigitTimeout))
 	return int32(r1)
 }
 
-// lineGenerateDigits calls TAPI32!lineGenerateDigits.
+// LineGenerateDigits calls TAPI32!lineGenerateDigits.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegeneratedigits
 func LineGenerateDigits(hCall uint32, dwDigitMode uint32, lpszDigits foundation.PSTR, dwDuration uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGenerateDigits.Addr(), uintptr(hCall), uintptr(dwDigitMode), uintptr(unsafe.Pointer(lpszDigits)), uintptr(dwDuration))
 	return int32(r1)
 }
 
-// lineGenerateDigitsA calls TAPI32!lineGenerateDigitsA.
+// LineGenerateDigitsA calls TAPI32!lineGenerateDigitsA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegeneratedigitsa
 func LineGenerateDigitsA(hCall uint32, dwDigitMode uint32, lpszDigits foundation.PSTR, dwDuration uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGenerateDigitsA.Addr(), uintptr(hCall), uintptr(dwDigitMode), uintptr(unsafe.Pointer(lpszDigits)), uintptr(dwDuration))
 	return int32(r1)
 }
 
-// lineGenerateDigitsW calls TAPI32!lineGenerateDigitsW.
+// LineGenerateDigitsW calls TAPI32!lineGenerateDigitsW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegeneratedigitsw
-func LineGenerateDigitsW(hCall uint32, dwDigitMode uint32, lpszDigits foundation.PWSTR, dwDuration uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGenerateDigitsW.Addr(), uintptr(hCall), uintptr(dwDigitMode), uintptr(unsafe.Pointer(lpszDigits)), uintptr(dwDuration))
+func LineGenerateDigitsW(hCall uint32, dwDigitMode uint32, lpszDigits string, dwDuration uint32) int32 {
+	_lpszDigits := win32.UTF16Ptr(lpszDigits)
+	r1, _, _ := syscall.SyscallN(procLineGenerateDigitsW.Addr(), uintptr(hCall), uintptr(dwDigitMode), uintptr(unsafe.Pointer(_lpszDigits)), uintptr(dwDuration))
 	return int32(r1)
 }
 
-// lineGenerateTone calls TAPI32!lineGenerateTone.
+// LineGenerateTone calls TAPI32!lineGenerateTone.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegeneratetone
 func LineGenerateTone(hCall uint32, dwToneMode uint32, dwDuration uint32, dwNumTones uint32, lpTones unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGenerateTone.Addr(), uintptr(hCall), uintptr(dwToneMode), uintptr(dwDuration), uintptr(dwNumTones), uintptr(unsafe.Pointer(lpTones)))
 	return int32(r1)
 }
 
-// lineGetAddressCaps calls TAPI32!lineGetAddressCaps.
+// LineGetAddressCaps calls TAPI32!lineGetAddressCaps.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetaddresscaps
 func LineGetAddressCaps(hLineApp uint32, dwDeviceID uint32, dwAddressID uint32, dwAPIVersion uint32, dwExtVersion uint32, lpAddressCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAddressCaps.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAddressID), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(unsafe.Pointer(lpAddressCaps)))
 	return int32(r1)
 }
 
-// lineGetAddressCapsA calls TAPI32!lineGetAddressCapsA.
+// LineGetAddressCapsA calls TAPI32!lineGetAddressCapsA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetaddresscapsa
 func LineGetAddressCapsA(hLineApp uint32, dwDeviceID uint32, dwAddressID uint32, dwAPIVersion uint32, dwExtVersion uint32, lpAddressCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAddressCapsA.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAddressID), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(unsafe.Pointer(lpAddressCaps)))
 	return int32(r1)
 }
 
-// lineGetAddressCapsW calls TAPI32!lineGetAddressCapsW.
+// LineGetAddressCapsW calls TAPI32!lineGetAddressCapsW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetaddresscapsw
 func LineGetAddressCapsW(hLineApp uint32, dwDeviceID uint32, dwAddressID uint32, dwAPIVersion uint32, dwExtVersion uint32, lpAddressCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAddressCapsW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAddressID), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(unsafe.Pointer(lpAddressCaps)))
 	return int32(r1)
 }
 
-// lineGetAddressID calls TAPI32!lineGetAddressID.
+// LineGetAddressID calls TAPI32!lineGetAddressID.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetaddressid
 func LineGetAddressID(hLine uint32, lpdwAddressID *uint32, dwAddressMode uint32, lpsAddress foundation.PSTR, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAddressID.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpdwAddressID)), uintptr(dwAddressMode), uintptr(unsafe.Pointer(lpsAddress)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineGetAddressIDA calls TAPI32!lineGetAddressIDA.
+// LineGetAddressIDA calls TAPI32!lineGetAddressIDA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetaddressida
 func LineGetAddressIDA(hLine uint32, lpdwAddressID *uint32, dwAddressMode uint32, lpsAddress foundation.PSTR, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAddressIDA.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpdwAddressID)), uintptr(dwAddressMode), uintptr(unsafe.Pointer(lpsAddress)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineGetAddressIDW calls TAPI32!lineGetAddressIDW.
+// LineGetAddressIDW calls TAPI32!lineGetAddressIDW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetaddressidw
-func LineGetAddressIDW(hLine uint32, lpdwAddressID *uint32, dwAddressMode uint32, lpsAddress foundation.PWSTR, dwSize uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetAddressIDW.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpdwAddressID)), uintptr(dwAddressMode), uintptr(unsafe.Pointer(lpsAddress)), uintptr(dwSize))
+func LineGetAddressIDW(hLine uint32, lpdwAddressID *uint32, dwAddressMode uint32, lpsAddress string, dwSize uint32) int32 {
+	_lpsAddress := win32.UTF16Ptr(lpsAddress)
+	r1, _, _ := syscall.SyscallN(procLineGetAddressIDW.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpdwAddressID)), uintptr(dwAddressMode), uintptr(unsafe.Pointer(_lpsAddress)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineGetAddressStatus calls TAPI32!lineGetAddressStatus.
+// LineGetAddressStatus calls TAPI32!lineGetAddressStatus.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetaddressstatus
 func LineGetAddressStatus(hLine uint32, dwAddressID uint32, lpAddressStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAddressStatus.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAddressStatus)))
 	return int32(r1)
 }
 
-// lineGetAddressStatusA calls TAPI32!lineGetAddressStatusA.
+// LineGetAddressStatusA calls TAPI32!lineGetAddressStatusA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetaddressstatusa
 func LineGetAddressStatusA(hLine uint32, dwAddressID uint32, lpAddressStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAddressStatusA.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAddressStatus)))
 	return int32(r1)
 }
 
-// lineGetAddressStatusW calls TAPI32!lineGetAddressStatusW.
+// LineGetAddressStatusW calls TAPI32!lineGetAddressStatusW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetaddressstatusw
 func LineGetAddressStatusW(hLine uint32, dwAddressID uint32, lpAddressStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAddressStatusW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAddressStatus)))
 	return int32(r1)
 }
 
-// lineGetAgentActivityListA calls TAPI32!lineGetAgentActivityListA.
+// LineGetAgentActivityList calls TAPI32!lineGetAgentActivityListW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentactivitylistw
+func LineGetAgentActivityList(hLine uint32, dwAddressID uint32, lpAgentActivityList unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procLineGetAgentActivityList.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentActivityList)))
+	return int32(r1)
+}
+
+// LineGetAgentActivityListA calls TAPI32!lineGetAgentActivityListA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentactivitylista
 func LineGetAgentActivityListA(hLine uint32, dwAddressID uint32, lpAgentActivityList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAgentActivityListA.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentActivityList)))
 	return int32(r1)
 }
 
-// lineGetAgentActivityListW calls TAPI32!lineGetAgentActivityListW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentactivitylistw
-func LineGetAgentActivityListW(hLine uint32, dwAddressID uint32, lpAgentActivityList unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetAgentActivityListW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentActivityList)))
+// LineGetAgentCaps calls TAPI32!lineGetAgentCapsW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentcapsw
+func LineGetAgentCaps(hLineApp uint32, dwDeviceID uint32, dwAddressID uint32, dwAppAPIVersion uint32, lpAgentCaps unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procLineGetAgentCaps.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAddressID), uintptr(dwAppAPIVersion), uintptr(unsafe.Pointer(lpAgentCaps)))
 	return int32(r1)
 }
 
-// lineGetAgentCapsA calls TAPI32!lineGetAgentCapsA.
+// LineGetAgentCapsA calls TAPI32!lineGetAgentCapsA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentcapsa
 func LineGetAgentCapsA(hLineApp uint32, dwDeviceID uint32, dwAddressID uint32, dwAppAPIVersion uint32, lpAgentCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAgentCapsA.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAddressID), uintptr(dwAppAPIVersion), uintptr(unsafe.Pointer(lpAgentCaps)))
 	return int32(r1)
 }
 
-// lineGetAgentCapsW calls TAPI32!lineGetAgentCapsW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentcapsw
-func LineGetAgentCapsW(hLineApp uint32, dwDeviceID uint32, dwAddressID uint32, dwAppAPIVersion uint32, lpAgentCaps unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetAgentCapsW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAddressID), uintptr(dwAppAPIVersion), uintptr(unsafe.Pointer(lpAgentCaps)))
+// LineGetAgentGroupList calls TAPI32!lineGetAgentGroupListW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentgrouplistw
+func LineGetAgentGroupList(hLine uint32, dwAddressID uint32, lpAgentGroupList unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procLineGetAgentGroupList.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentGroupList)))
 	return int32(r1)
 }
 
-// lineGetAgentGroupListA calls TAPI32!lineGetAgentGroupListA.
+// LineGetAgentGroupListA calls TAPI32!lineGetAgentGroupListA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentgrouplista
 func LineGetAgentGroupListA(hLine uint32, dwAddressID uint32, lpAgentGroupList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAgentGroupListA.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentGroupList)))
 	return int32(r1)
 }
 
-// lineGetAgentGroupListW calls TAPI32!lineGetAgentGroupListW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentgrouplistw
-func LineGetAgentGroupListW(hLine uint32, dwAddressID uint32, lpAgentGroupList unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetAgentGroupListW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentGroupList)))
-	return int32(r1)
-}
-
-// lineGetAgentInfo calls TAPI32!lineGetAgentInfo.
+// LineGetAgentInfo calls TAPI32!lineGetAgentInfo.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentinfo
 func LineGetAgentInfo(hLine uint32, hAgent uint32, lpAgentInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAgentInfo.Addr(), uintptr(hLine), uintptr(hAgent), uintptr(unsafe.Pointer(lpAgentInfo)))
 	return int32(r1)
 }
 
-// lineGetAgentSessionInfo calls TAPI32!lineGetAgentSessionInfo.
+// LineGetAgentSessionInfo calls TAPI32!lineGetAgentSessionInfo.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentsessioninfo
 func LineGetAgentSessionInfo(hLine uint32, hAgentSession uint32, lpAgentSessionInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAgentSessionInfo.Addr(), uintptr(hLine), uintptr(hAgentSession), uintptr(unsafe.Pointer(lpAgentSessionInfo)))
 	return int32(r1)
 }
 
-// lineGetAgentSessionList calls TAPI32!lineGetAgentSessionList.
+// LineGetAgentSessionList calls TAPI32!lineGetAgentSessionList.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentsessionlist
 func LineGetAgentSessionList(hLine uint32, hAgent uint32, lpAgentSessionList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAgentSessionList.Addr(), uintptr(hLine), uintptr(hAgent), uintptr(unsafe.Pointer(lpAgentSessionList)))
 	return int32(r1)
 }
 
-// lineGetAgentStatusA calls TAPI32!lineGetAgentStatusA.
+// LineGetAgentStatus calls TAPI32!lineGetAgentStatusW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentstatusw
+func LineGetAgentStatus(hLine uint32, dwAddressID uint32, lpAgentStatus unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procLineGetAgentStatus.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentStatus)))
+	return int32(r1)
+}
+
+// LineGetAgentStatusA calls TAPI32!lineGetAgentStatusA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentstatusa
 func LineGetAgentStatusA(hLine uint32, dwAddressID uint32, lpAgentStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAgentStatusA.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentStatus)))
 	return int32(r1)
 }
 
-// lineGetAgentStatusW calls TAPI32!lineGetAgentStatusW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetagentstatusw
-func LineGetAgentStatusW(hLine uint32, dwAddressID uint32, lpAgentStatus unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetAgentStatusW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentStatus)))
-	return int32(r1)
-}
-
-// lineGetAppPriority calls TAPI32!lineGetAppPriority.
+// LineGetAppPriority calls TAPI32!lineGetAppPriority.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetapppriority
 func LineGetAppPriority(lpszAppFilename foundation.PSTR, dwMediaMode uint32, lpExtensionID unsafe.Pointer, dwRequestMode uint32, lpExtensionName unsafe.Pointer, lpdwPriority *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAppPriority.Addr(), uintptr(unsafe.Pointer(lpszAppFilename)), uintptr(dwMediaMode), uintptr(unsafe.Pointer(lpExtensionID)), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpExtensionName)), uintptr(unsafe.Pointer(lpdwPriority)))
 	return int32(r1)
 }
 
-// lineGetAppPriorityA calls TAPI32!lineGetAppPriorityA.
+// LineGetAppPriorityA calls TAPI32!lineGetAppPriorityA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetappprioritya
 func LineGetAppPriorityA(lpszAppFilename foundation.PSTR, dwMediaMode uint32, lpExtensionID unsafe.Pointer, dwRequestMode uint32, lpExtensionName unsafe.Pointer, lpdwPriority *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetAppPriorityA.Addr(), uintptr(unsafe.Pointer(lpszAppFilename)), uintptr(dwMediaMode), uintptr(unsafe.Pointer(lpExtensionID)), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpExtensionName)), uintptr(unsafe.Pointer(lpdwPriority)))
 	return int32(r1)
 }
 
-// lineGetAppPriorityW calls TAPI32!lineGetAppPriorityW.
+// LineGetAppPriorityW calls TAPI32!lineGetAppPriorityW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetapppriorityw
-func LineGetAppPriorityW(lpszAppFilename foundation.PWSTR, dwMediaMode uint32, lpExtensionID unsafe.Pointer, dwRequestMode uint32, lpExtensionName unsafe.Pointer, lpdwPriority *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetAppPriorityW.Addr(), uintptr(unsafe.Pointer(lpszAppFilename)), uintptr(dwMediaMode), uintptr(unsafe.Pointer(lpExtensionID)), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpExtensionName)), uintptr(unsafe.Pointer(lpdwPriority)))
+func LineGetAppPriorityW(lpszAppFilename string, dwMediaMode uint32, lpExtensionID unsafe.Pointer, dwRequestMode uint32, lpExtensionName unsafe.Pointer, lpdwPriority *uint32) int32 {
+	_lpszAppFilename := win32.UTF16Ptr(lpszAppFilename)
+	r1, _, _ := syscall.SyscallN(procLineGetAppPriorityW.Addr(), uintptr(unsafe.Pointer(_lpszAppFilename)), uintptr(dwMediaMode), uintptr(unsafe.Pointer(lpExtensionID)), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpExtensionName)), uintptr(unsafe.Pointer(lpdwPriority)))
 	return int32(r1)
 }
 
-// lineGetCallInfo calls TAPI32!lineGetCallInfo.
+// LineGetCallInfo calls TAPI32!lineGetCallInfo.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetcallinfo
 func LineGetCallInfo(hCall uint32, lpCallInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetCallInfo.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpCallInfo)))
 	return int32(r1)
 }
 
-// lineGetCallInfoA calls TAPI32!lineGetCallInfoA.
+// LineGetCallInfoA calls TAPI32!lineGetCallInfoA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetcallinfoa
 func LineGetCallInfoA(hCall uint32, lpCallInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetCallInfoA.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpCallInfo)))
 	return int32(r1)
 }
 
-// lineGetCallInfoW calls TAPI32!lineGetCallInfoW.
+// LineGetCallInfoW calls TAPI32!lineGetCallInfoW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetcallinfow
 func LineGetCallInfoW(hCall uint32, lpCallInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetCallInfoW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpCallInfo)))
 	return int32(r1)
 }
 
-// lineGetCallStatus calls TAPI32!lineGetCallStatus.
+// LineGetCallStatus calls TAPI32!lineGetCallStatus.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetcallstatus
 func LineGetCallStatus(hCall uint32, lpCallStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetCallStatus.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpCallStatus)))
 	return int32(r1)
 }
 
-// lineGetConfRelatedCalls calls TAPI32!lineGetConfRelatedCalls.
+// LineGetConfRelatedCalls calls TAPI32!lineGetConfRelatedCalls.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetconfrelatedcalls
 func LineGetConfRelatedCalls(hCall uint32, lpCallList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetConfRelatedCalls.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpCallList)))
 	return int32(r1)
 }
 
-// lineGetCountry calls TAPI32!lineGetCountry.
+// LineGetCountry calls TAPI32!lineGetCountry.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetcountry
 func LineGetCountry(dwCountryID uint32, dwAPIVersion uint32, lpLineCountryList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetCountry.Addr(), uintptr(dwCountryID), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpLineCountryList)))
 	return int32(r1)
 }
 
-// lineGetCountryA calls TAPI32!lineGetCountryA.
+// LineGetCountryA calls TAPI32!lineGetCountryA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetcountrya
 func LineGetCountryA(dwCountryID uint32, dwAPIVersion uint32, lpLineCountryList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetCountryA.Addr(), uintptr(dwCountryID), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpLineCountryList)))
 	return int32(r1)
 }
 
-// lineGetCountryW calls TAPI32!lineGetCountryW.
+// LineGetCountryW calls TAPI32!lineGetCountryW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetcountryw
 func LineGetCountryW(dwCountryID uint32, dwAPIVersion uint32, lpLineCountryList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetCountryW.Addr(), uintptr(dwCountryID), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpLineCountryList)))
 	return int32(r1)
 }
 
-// lineGetDevCaps calls TAPI32!lineGetDevCaps.
+// LineGetDevCaps calls TAPI32!lineGetDevCaps.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetdevcaps
 func LineGetDevCaps(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, dwExtVersion uint32, lpLineDevCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetDevCaps.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(unsafe.Pointer(lpLineDevCaps)))
 	return int32(r1)
 }
 
-// lineGetDevCapsA calls TAPI32!lineGetDevCapsA.
+// LineGetDevCapsA calls TAPI32!lineGetDevCapsA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetdevcapsa
 func LineGetDevCapsA(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, dwExtVersion uint32, lpLineDevCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetDevCapsA.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(unsafe.Pointer(lpLineDevCaps)))
 	return int32(r1)
 }
 
-// lineGetDevCapsW calls TAPI32!lineGetDevCapsW.
+// LineGetDevCapsW calls TAPI32!lineGetDevCapsW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetdevcapsw
 func LineGetDevCapsW(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, dwExtVersion uint32, lpLineDevCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetDevCapsW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(unsafe.Pointer(lpLineDevCaps)))
 	return int32(r1)
 }
 
-// lineGetDevConfig calls TAPI32!lineGetDevConfig.
+// LineGetDevConfig calls TAPI32!lineGetDevConfig.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetdevconfig
 func LineGetDevConfig(dwDeviceID uint32, lpDeviceConfig unsafe.Pointer, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetDevConfig.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpDeviceConfig)), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineGetDevConfigA calls TAPI32!lineGetDevConfigA.
+// LineGetDevConfigA calls TAPI32!lineGetDevConfigA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetdevconfiga
 func LineGetDevConfigA(dwDeviceID uint32, lpDeviceConfig unsafe.Pointer, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetDevConfigA.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpDeviceConfig)), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineGetDevConfigW calls TAPI32!lineGetDevConfigW.
+// LineGetDevConfigW calls TAPI32!lineGetDevConfigW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetdevconfigw
-func LineGetDevConfigW(dwDeviceID uint32, lpDeviceConfig unsafe.Pointer, lpszDeviceClass foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetDevConfigW.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpDeviceConfig)), uintptr(unsafe.Pointer(lpszDeviceClass)))
+func LineGetDevConfigW(dwDeviceID uint32, lpDeviceConfig unsafe.Pointer, lpszDeviceClass string) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	r1, _, _ := syscall.SyscallN(procLineGetDevConfigW.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpDeviceConfig)), uintptr(unsafe.Pointer(_lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineGetGroupListA calls TAPI32!lineGetGroupListA.
+// LineGetGroupList calls TAPI32!lineGetGroupListW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetgrouplistw
+func LineGetGroupList(hLine uint32, lpGroupList unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procLineGetGroupList.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpGroupList)))
+	return int32(r1)
+}
+
+// LineGetGroupListA calls TAPI32!lineGetGroupListA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetgrouplista
 func LineGetGroupListA(hLine uint32, lpGroupList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetGroupListA.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpGroupList)))
 	return int32(r1)
 }
 
-// lineGetGroupListW calls TAPI32!lineGetGroupListW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetgrouplistw
-func LineGetGroupListW(hLine uint32, lpGroupList unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetGroupListW.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpGroupList)))
-	return int32(r1)
-}
-
-// lineGetID calls TAPI32!lineGetID.
+// LineGetID calls TAPI32!lineGetID.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetid
 func LineGetID(hLine uint32, dwAddressID uint32, hCall uint32, dwSelect uint32, lpDeviceID unsafe.Pointer, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetID.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(hCall), uintptr(dwSelect), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineGetIDA calls TAPI32!lineGetIDA.
+// LineGetIDA calls TAPI32!lineGetIDA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetida
 func LineGetIDA(hLine uint32, dwAddressID uint32, hCall uint32, dwSelect uint32, lpDeviceID unsafe.Pointer, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetIDA.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(hCall), uintptr(dwSelect), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineGetIDW calls TAPI32!lineGetIDW.
+// LineGetIDW calls TAPI32!lineGetIDW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetidw
-func LineGetIDW(hLine uint32, dwAddressID uint32, hCall uint32, dwSelect uint32, lpDeviceID unsafe.Pointer, lpszDeviceClass foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetIDW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(hCall), uintptr(dwSelect), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(unsafe.Pointer(lpszDeviceClass)))
+func LineGetIDW(hLine uint32, dwAddressID uint32, hCall uint32, dwSelect uint32, lpDeviceID unsafe.Pointer, lpszDeviceClass string) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	r1, _, _ := syscall.SyscallN(procLineGetIDW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(hCall), uintptr(dwSelect), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(unsafe.Pointer(_lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineGetIcon calls TAPI32!lineGetIcon.
+// LineGetIcon calls TAPI32!lineGetIcon.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegeticon
 func LineGetIcon(dwDeviceID uint32, lpszDeviceClass foundation.PSTR, lphIcon *uiwindowsandmessaging.HICON) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetIcon.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lphIcon)))
 	return int32(r1)
 }
 
-// lineGetIconA calls TAPI32!lineGetIconA.
+// LineGetIconA calls TAPI32!lineGetIconA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegeticona
 func LineGetIconA(dwDeviceID uint32, lpszDeviceClass foundation.PSTR, lphIcon *uiwindowsandmessaging.HICON) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetIconA.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lphIcon)))
 	return int32(r1)
 }
 
-// lineGetIconW calls TAPI32!lineGetIconW.
+// LineGetIconW calls TAPI32!lineGetIconW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegeticonw
-func LineGetIconW(dwDeviceID uint32, lpszDeviceClass foundation.PWSTR, lphIcon *uiwindowsandmessaging.HICON) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetIconW.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lphIcon)))
+func LineGetIconW(dwDeviceID uint32, lpszDeviceClass string, lphIcon *uiwindowsandmessaging.HICON) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	r1, _, _ := syscall.SyscallN(procLineGetIconW.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(_lpszDeviceClass)), uintptr(unsafe.Pointer(lphIcon)))
 	return int32(r1)
 }
 
-// lineGetLineDevStatus calls TAPI32!lineGetLineDevStatus.
+// LineGetLineDevStatus calls TAPI32!lineGetLineDevStatus.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetlinedevstatus
 func LineGetLineDevStatus(hLine uint32, lpLineDevStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetLineDevStatus.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpLineDevStatus)))
 	return int32(r1)
 }
 
-// lineGetLineDevStatusA calls TAPI32!lineGetLineDevStatusA.
+// LineGetLineDevStatusA calls TAPI32!lineGetLineDevStatusA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetlinedevstatusa
 func LineGetLineDevStatusA(hLine uint32, lpLineDevStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetLineDevStatusA.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpLineDevStatus)))
 	return int32(r1)
 }
 
-// lineGetLineDevStatusW calls TAPI32!lineGetLineDevStatusW.
+// LineGetLineDevStatusW calls TAPI32!lineGetLineDevStatusW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetlinedevstatusw
 func LineGetLineDevStatusW(hLine uint32, lpLineDevStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetLineDevStatusW.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpLineDevStatus)))
 	return int32(r1)
 }
 
-// lineGetMessage calls TAPI32!lineGetMessage.
+// LineGetMessage calls TAPI32!lineGetMessage.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetmessage
 func LineGetMessage(hLineApp uint32, lpMessage unsafe.Pointer, dwTimeout uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetMessage.Addr(), uintptr(hLineApp), uintptr(unsafe.Pointer(lpMessage)), uintptr(dwTimeout))
 	return int32(r1)
 }
 
-// lineGetNewCalls calls TAPI32!lineGetNewCalls.
+// LineGetNewCalls calls TAPI32!lineGetNewCalls.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetnewcalls
 func LineGetNewCalls(hLine uint32, dwAddressID uint32, dwSelect uint32, lpCallList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetNewCalls.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(dwSelect), uintptr(unsafe.Pointer(lpCallList)))
 	return int32(r1)
 }
 
-// lineGetNumRings calls TAPI32!lineGetNumRings.
+// LineGetNumRings calls TAPI32!lineGetNumRings.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetnumrings
 func LineGetNumRings(hLine uint32, dwAddressID uint32, lpdwNumRings *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetNumRings.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpdwNumRings)))
 	return int32(r1)
 }
 
-// lineGetProviderList calls TAPI32!lineGetProviderList.
+// LineGetProviderList calls TAPI32!lineGetProviderList.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetproviderlist
 func LineGetProviderList(dwAPIVersion uint32, lpProviderList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetProviderList.Addr(), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpProviderList)))
 	return int32(r1)
 }
 
-// lineGetProviderListA calls TAPI32!lineGetProviderListA.
+// LineGetProviderListA calls TAPI32!lineGetProviderListA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetproviderlista
 func LineGetProviderListA(dwAPIVersion uint32, lpProviderList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetProviderListA.Addr(), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpProviderList)))
 	return int32(r1)
 }
 
-// lineGetProviderListW calls TAPI32!lineGetProviderListW.
+// LineGetProviderListW calls TAPI32!lineGetProviderListW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetproviderlistw
 func LineGetProviderListW(dwAPIVersion uint32, lpProviderList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetProviderListW.Addr(), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpProviderList)))
 	return int32(r1)
 }
 
-// lineGetProxyStatus calls TAPI32!lineGetProxyStatus.
+// LineGetProxyStatus calls TAPI32!lineGetProxyStatus.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetproxystatus
 func LineGetProxyStatus(hLineApp uint32, dwDeviceID uint32, dwAppAPIVersion uint32, lpLineProxyReqestList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetProxyStatus.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAppAPIVersion), uintptr(unsafe.Pointer(lpLineProxyReqestList)))
 	return int32(r1)
 }
 
-// lineGetQueueInfo calls TAPI32!lineGetQueueInfo.
+// LineGetQueueInfo calls TAPI32!lineGetQueueInfo.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetqueueinfo
 func LineGetQueueInfo(hLine uint32, dwQueueID uint32, lpLineQueueInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetQueueInfo.Addr(), uintptr(hLine), uintptr(dwQueueID), uintptr(unsafe.Pointer(lpLineQueueInfo)))
 	return int32(r1)
 }
 
-// lineGetQueueListA calls TAPI32!lineGetQueueListA.
+// LineGetQueueList calls TAPI32!lineGetQueueListW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetqueuelistw
+func LineGetQueueList(hLine uint32, lpGroupID *win32.GUID, lpQueueList unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procLineGetQueueList.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpGroupID)), uintptr(unsafe.Pointer(lpQueueList)))
+	return int32(r1)
+}
+
+// LineGetQueueListA calls TAPI32!lineGetQueueListA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetqueuelista
 func LineGetQueueListA(hLine uint32, lpGroupID *win32.GUID, lpQueueList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetQueueListA.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpGroupID)), uintptr(unsafe.Pointer(lpQueueList)))
 	return int32(r1)
 }
 
-// lineGetQueueListW calls TAPI32!lineGetQueueListW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetqueuelistw
-func LineGetQueueListW(hLine uint32, lpGroupID *win32.GUID, lpQueueList unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineGetQueueListW.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpGroupID)), uintptr(unsafe.Pointer(lpQueueList)))
-	return int32(r1)
-}
-
-// lineGetRequest calls TAPI32!lineGetRequest.
+// LineGetRequest calls TAPI32!lineGetRequest.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetrequest
 func LineGetRequest(hLineApp uint32, dwRequestMode uint32, lpRequestBuffer unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetRequest.Addr(), uintptr(hLineApp), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpRequestBuffer)))
 	return int32(r1)
 }
 
-// lineGetRequestA calls TAPI32!lineGetRequestA.
+// LineGetRequestA calls TAPI32!lineGetRequestA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetrequesta
 func LineGetRequestA(hLineApp uint32, dwRequestMode uint32, lpRequestBuffer unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetRequestA.Addr(), uintptr(hLineApp), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpRequestBuffer)))
 	return int32(r1)
 }
 
-// lineGetRequestW calls TAPI32!lineGetRequestW.
+// LineGetRequestW calls TAPI32!lineGetRequestW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetrequestw
 func LineGetRequestW(hLineApp uint32, dwRequestMode uint32, lpRequestBuffer unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetRequestW.Addr(), uintptr(hLineApp), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpRequestBuffer)))
 	return int32(r1)
 }
 
-// lineGetStatusMessages calls TAPI32!lineGetStatusMessages.
+// LineGetStatusMessages calls TAPI32!lineGetStatusMessages.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegetstatusmessages
 func LineGetStatusMessages(hLine uint32, lpdwLineStates *uint32, lpdwAddressStates *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetStatusMessages.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpdwLineStates)), uintptr(unsafe.Pointer(lpdwAddressStates)))
 	return int32(r1)
 }
 
-// lineGetTranslateCaps calls TAPI32!lineGetTranslateCaps.
+// LineGetTranslateCaps calls TAPI32!lineGetTranslateCaps.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegettranslatecaps
 func LineGetTranslateCaps(hLineApp uint32, dwAPIVersion uint32, lpTranslateCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetTranslateCaps.Addr(), uintptr(hLineApp), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpTranslateCaps)))
 	return int32(r1)
 }
 
-// lineGetTranslateCapsA calls TAPI32!lineGetTranslateCapsA.
+// LineGetTranslateCapsA calls TAPI32!lineGetTranslateCapsA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegettranslatecapsa
 func LineGetTranslateCapsA(hLineApp uint32, dwAPIVersion uint32, lpTranslateCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetTranslateCapsA.Addr(), uintptr(hLineApp), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpTranslateCaps)))
 	return int32(r1)
 }
 
-// lineGetTranslateCapsW calls TAPI32!lineGetTranslateCapsW.
+// LineGetTranslateCapsW calls TAPI32!lineGetTranslateCapsW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linegettranslatecapsw
 func LineGetTranslateCapsW(hLineApp uint32, dwAPIVersion uint32, lpTranslateCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineGetTranslateCapsW.Addr(), uintptr(hLineApp), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpTranslateCaps)))
 	return int32(r1)
 }
 
-// lineHandoff calls TAPI32!lineHandoff.
+// LineHandoff calls TAPI32!lineHandoff.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linehandoff
 func LineHandoff(hCall uint32, lpszFileName foundation.PSTR, dwMediaMode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineHandoff.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwMediaMode))
 	return int32(r1)
 }
 
-// lineHandoffA calls TAPI32!lineHandoffA.
+// LineHandoffA calls TAPI32!lineHandoffA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linehandoffa
 func LineHandoffA(hCall uint32, lpszFileName foundation.PSTR, dwMediaMode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineHandoffA.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwMediaMode))
 	return int32(r1)
 }
 
-// lineHandoffW calls TAPI32!lineHandoffW.
+// LineHandoffW calls TAPI32!lineHandoffW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linehandoffw
-func LineHandoffW(hCall uint32, lpszFileName foundation.PWSTR, dwMediaMode uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineHandoffW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwMediaMode))
+func LineHandoffW(hCall uint32, lpszFileName string, dwMediaMode uint32) int32 {
+	_lpszFileName := win32.UTF16Ptr(lpszFileName)
+	r1, _, _ := syscall.SyscallN(procLineHandoffW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(dwMediaMode))
 	return int32(r1)
 }
 
-// lineHold calls TAPI32!lineHold.
+// LineHold calls TAPI32!lineHold.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linehold
 func LineHold(hCall uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineHold.Addr(), uintptr(hCall))
 	return int32(r1)
 }
 
-// lineInitialize calls TAPI32!lineInitialize.
+// LineInitialize calls TAPI32!lineInitialize.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineinitialize
 func LineInitialize(lphLineApp *uint32, hInstance foundation.HINSTANCE, lpfnCallback LINECALLBACK, lpszAppName foundation.PSTR, lpdwNumDevs *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineInitialize.Addr(), uintptr(unsafe.Pointer(lphLineApp)), uintptr(hInstance), uintptr(lpfnCallback), uintptr(unsafe.Pointer(lpszAppName)), uintptr(unsafe.Pointer(lpdwNumDevs)))
 	return int32(r1)
 }
 
-// lineInitializeExA calls TAPI32!lineInitializeExA.
+// LineInitializeEx calls TAPI32!lineInitializeExW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineinitializeexw
+func LineInitializeEx(lphLineApp *uint32, hInstance foundation.HINSTANCE, lpfnCallback LINECALLBACK, lpszFriendlyAppName string, lpdwNumDevs *uint32, lpdwAPIVersion *uint32, lpLineInitializeExParams unsafe.Pointer) int32 {
+	_lpszFriendlyAppName := win32.UTF16Ptr(lpszFriendlyAppName)
+	r1, _, _ := syscall.SyscallN(procLineInitializeEx.Addr(), uintptr(unsafe.Pointer(lphLineApp)), uintptr(hInstance), uintptr(lpfnCallback), uintptr(unsafe.Pointer(_lpszFriendlyAppName)), uintptr(unsafe.Pointer(lpdwNumDevs)), uintptr(unsafe.Pointer(lpdwAPIVersion)), uintptr(unsafe.Pointer(lpLineInitializeExParams)))
+	return int32(r1)
+}
+
+// LineInitializeExA calls TAPI32!lineInitializeExA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineinitializeexa
 func LineInitializeExA(lphLineApp *uint32, hInstance foundation.HINSTANCE, lpfnCallback LINECALLBACK, lpszFriendlyAppName foundation.PSTR, lpdwNumDevs *uint32, lpdwAPIVersion *uint32, lpLineInitializeExParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineInitializeExA.Addr(), uintptr(unsafe.Pointer(lphLineApp)), uintptr(hInstance), uintptr(lpfnCallback), uintptr(unsafe.Pointer(lpszFriendlyAppName)), uintptr(unsafe.Pointer(lpdwNumDevs)), uintptr(unsafe.Pointer(lpdwAPIVersion)), uintptr(unsafe.Pointer(lpLineInitializeExParams)))
 	return int32(r1)
 }
 
-// lineInitializeExW calls TAPI32!lineInitializeExW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineinitializeexw
-func LineInitializeExW(lphLineApp *uint32, hInstance foundation.HINSTANCE, lpfnCallback LINECALLBACK, lpszFriendlyAppName foundation.PWSTR, lpdwNumDevs *uint32, lpdwAPIVersion *uint32, lpLineInitializeExParams unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineInitializeExW.Addr(), uintptr(unsafe.Pointer(lphLineApp)), uintptr(hInstance), uintptr(lpfnCallback), uintptr(unsafe.Pointer(lpszFriendlyAppName)), uintptr(unsafe.Pointer(lpdwNumDevs)), uintptr(unsafe.Pointer(lpdwAPIVersion)), uintptr(unsafe.Pointer(lpLineInitializeExParams)))
-	return int32(r1)
-}
-
-// lineMakeCall calls TAPI32!lineMakeCall.
+// LineMakeCall calls TAPI32!lineMakeCall.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linemakecall
 func LineMakeCall(hLine uint32, lphCall *uint32, lpszDestAddress foundation.PSTR, dwCountryCode uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineMakeCall.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineMakeCallA calls TAPI32!lineMakeCallA.
+// LineMakeCallA calls TAPI32!lineMakeCallA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linemakecalla
 func LineMakeCallA(hLine uint32, lphCall *uint32, lpszDestAddress foundation.PSTR, dwCountryCode uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineMakeCallA.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineMakeCallW calls TAPI32!lineMakeCallW.
+// LineMakeCallW calls TAPI32!lineMakeCallW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linemakecallw
-func LineMakeCallW(hLine uint32, lphCall *uint32, lpszDestAddress foundation.PWSTR, dwCountryCode uint32, lpCallParams unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineMakeCallW.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode), uintptr(unsafe.Pointer(lpCallParams)))
+func LineMakeCallW(hLine uint32, lphCall *uint32, lpszDestAddress string, dwCountryCode uint32, lpCallParams unsafe.Pointer) int32 {
+	_lpszDestAddress := win32.UTF16Ptr(lpszDestAddress)
+	r1, _, _ := syscall.SyscallN(procLineMakeCallW.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(_lpszDestAddress)), uintptr(dwCountryCode), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineMonitorDigits calls TAPI32!lineMonitorDigits.
+// LineMonitorDigits calls TAPI32!lineMonitorDigits.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linemonitordigits
 func LineMonitorDigits(hCall uint32, dwDigitModes uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineMonitorDigits.Addr(), uintptr(hCall), uintptr(dwDigitModes))
 	return int32(r1)
 }
 
-// lineMonitorMedia calls TAPI32!lineMonitorMedia.
+// LineMonitorMedia calls TAPI32!lineMonitorMedia.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linemonitormedia
 func LineMonitorMedia(hCall uint32, dwMediaModes uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineMonitorMedia.Addr(), uintptr(hCall), uintptr(dwMediaModes))
 	return int32(r1)
 }
 
-// lineMonitorTones calls TAPI32!lineMonitorTones.
+// LineMonitorTones calls TAPI32!lineMonitorTones.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linemonitortones
 func LineMonitorTones(hCall uint32, lpToneList unsafe.Pointer, dwNumEntries uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineMonitorTones.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpToneList)), uintptr(dwNumEntries))
 	return int32(r1)
 }
 
-// lineNegotiateAPIVersion calls TAPI32!lineNegotiateAPIVersion.
+// LineNegotiateAPIVersion calls TAPI32!lineNegotiateAPIVersion.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linenegotiateapiversion
 func LineNegotiateAPIVersion(hLineApp uint32, dwDeviceID uint32, dwAPILowVersion uint32, dwAPIHighVersion uint32, lpdwAPIVersion *uint32, lpExtensionID unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineNegotiateAPIVersion.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPILowVersion), uintptr(dwAPIHighVersion), uintptr(unsafe.Pointer(lpdwAPIVersion)), uintptr(unsafe.Pointer(lpExtensionID)))
 	return int32(r1)
 }
 
-// lineNegotiateExtVersion calls TAPI32!lineNegotiateExtVersion.
+// LineNegotiateExtVersion calls TAPI32!lineNegotiateExtVersion.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linenegotiateextversion
 func LineNegotiateExtVersion(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, dwExtLowVersion uint32, dwExtHighVersion uint32, lpdwExtVersion *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineNegotiateExtVersion.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(dwExtLowVersion), uintptr(dwExtHighVersion), uintptr(unsafe.Pointer(lpdwExtVersion)))
 	return int32(r1)
 }
 
-// lineOpen calls TAPI32!lineOpen.
+// LineOpen calls TAPI32!lineOpen.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineopen
 func LineOpen(hLineApp uint32, dwDeviceID uint32, lphLine *uint32, dwAPIVersion uint32, dwExtVersion uint32, dwCallbackInstance uintptr, dwPrivileges uint32, dwMediaModes uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineOpen.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lphLine)), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(dwCallbackInstance), uintptr(dwPrivileges), uintptr(dwMediaModes), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineOpenA calls TAPI32!lineOpenA.
+// LineOpenA calls TAPI32!lineOpenA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineopena
 func LineOpenA(hLineApp uint32, dwDeviceID uint32, lphLine *uint32, dwAPIVersion uint32, dwExtVersion uint32, dwCallbackInstance uintptr, dwPrivileges uint32, dwMediaModes uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineOpenA.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lphLine)), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(dwCallbackInstance), uintptr(dwPrivileges), uintptr(dwMediaModes), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineOpenW calls TAPI32!lineOpenW.
+// LineOpenW calls TAPI32!lineOpenW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineopenw
 func LineOpenW(hLineApp uint32, dwDeviceID uint32, lphLine *uint32, dwAPIVersion uint32, dwExtVersion uint32, dwCallbackInstance uintptr, dwPrivileges uint32, dwMediaModes uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineOpenW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lphLine)), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(dwCallbackInstance), uintptr(dwPrivileges), uintptr(dwMediaModes), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// linePark calls TAPI32!linePark.
+// LinePark calls TAPI32!linePark.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linepark
 func LinePark(hCall uint32, dwParkMode uint32, lpszDirAddress foundation.PSTR, lpNonDirAddress unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLinePark.Addr(), uintptr(hCall), uintptr(dwParkMode), uintptr(unsafe.Pointer(lpszDirAddress)), uintptr(unsafe.Pointer(lpNonDirAddress)))
 	return int32(r1)
 }
 
-// lineParkA calls TAPI32!lineParkA.
+// LineParkA calls TAPI32!lineParkA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineparka
 func LineParkA(hCall uint32, dwParkMode uint32, lpszDirAddress foundation.PSTR, lpNonDirAddress unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineParkA.Addr(), uintptr(hCall), uintptr(dwParkMode), uintptr(unsafe.Pointer(lpszDirAddress)), uintptr(unsafe.Pointer(lpNonDirAddress)))
 	return int32(r1)
 }
 
-// lineParkW calls TAPI32!lineParkW.
+// LineParkW calls TAPI32!lineParkW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineparkw
-func LineParkW(hCall uint32, dwParkMode uint32, lpszDirAddress foundation.PWSTR, lpNonDirAddress unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineParkW.Addr(), uintptr(hCall), uintptr(dwParkMode), uintptr(unsafe.Pointer(lpszDirAddress)), uintptr(unsafe.Pointer(lpNonDirAddress)))
+func LineParkW(hCall uint32, dwParkMode uint32, lpszDirAddress string, lpNonDirAddress unsafe.Pointer) int32 {
+	_lpszDirAddress := win32.UTF16Ptr(lpszDirAddress)
+	r1, _, _ := syscall.SyscallN(procLineParkW.Addr(), uintptr(hCall), uintptr(dwParkMode), uintptr(unsafe.Pointer(_lpszDirAddress)), uintptr(unsafe.Pointer(lpNonDirAddress)))
 	return int32(r1)
 }
 
-// linePickup calls TAPI32!linePickup.
+// LinePickup calls TAPI32!linePickup.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linepickup
 func LinePickup(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddress foundation.PSTR, lpszGroupID foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLinePickup.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(unsafe.Pointer(lpszGroupID)))
 	return int32(r1)
 }
 
-// linePickupA calls TAPI32!linePickupA.
+// LinePickupA calls TAPI32!linePickupA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linepickupa
 func LinePickupA(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddress foundation.PSTR, lpszGroupID foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLinePickupA.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(unsafe.Pointer(lpszGroupID)))
 	return int32(r1)
 }
 
-// linePickupW calls TAPI32!linePickupW.
+// LinePickupW calls TAPI32!linePickupW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linepickupw
-func LinePickupW(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddress foundation.PWSTR, lpszGroupID foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLinePickupW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(unsafe.Pointer(lpszGroupID)))
+func LinePickupW(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddress string, lpszGroupID string) int32 {
+	_lpszDestAddress := win32.UTF16Ptr(lpszDestAddress)
+	_lpszGroupID := win32.UTF16Ptr(lpszGroupID)
+	r1, _, _ := syscall.SyscallN(procLinePickupW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(_lpszDestAddress)), uintptr(unsafe.Pointer(_lpszGroupID)))
 	return int32(r1)
 }
 
-// linePrepareAddToConference calls TAPI32!linePrepareAddToConference.
+// LinePrepareAddToConference calls TAPI32!linePrepareAddToConference.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineprepareaddtoconference
 func LinePrepareAddToConference(hConfCall uint32, lphConsultCall *uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLinePrepareAddToConference.Addr(), uintptr(hConfCall), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// linePrepareAddToConferenceA calls TAPI32!linePrepareAddToConferenceA.
+// LinePrepareAddToConferenceA calls TAPI32!linePrepareAddToConferenceA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineprepareaddtoconferencea
 func LinePrepareAddToConferenceA(hConfCall uint32, lphConsultCall *uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLinePrepareAddToConferenceA.Addr(), uintptr(hConfCall), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// linePrepareAddToConferenceW calls TAPI32!linePrepareAddToConferenceW.
+// LinePrepareAddToConferenceW calls TAPI32!linePrepareAddToConferenceW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineprepareaddtoconferencew
 func LinePrepareAddToConferenceW(hConfCall uint32, lphConsultCall *uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLinePrepareAddToConferenceW.Addr(), uintptr(hConfCall), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineProxyMessage calls TAPI32!lineProxyMessage.
+// LineProxyMessage calls TAPI32!lineProxyMessage.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineproxymessage
 func LineProxyMessage(hLine uint32, hCall uint32, dwMsg uint32, dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineProxyMessage.Addr(), uintptr(hLine), uintptr(hCall), uintptr(dwMsg), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
 	return int32(r1)
 }
 
-// lineProxyResponse calls TAPI32!lineProxyResponse.
+// LineProxyResponse calls TAPI32!lineProxyResponse.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineproxyresponse
 func LineProxyResponse(hLine uint32, lpProxyRequest unsafe.Pointer, dwResult uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineProxyResponse.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(lpProxyRequest)), uintptr(dwResult))
 	return int32(r1)
 }
 
-// lineRedirect calls TAPI32!lineRedirect.
+// LineRedirect calls TAPI32!lineRedirect.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineredirect
 func LineRedirect(hCall uint32, lpszDestAddress foundation.PSTR, dwCountryCode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineRedirect.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode))
 	return int32(r1)
 }
 
-// lineRedirectA calls TAPI32!lineRedirectA.
+// LineRedirectA calls TAPI32!lineRedirectA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineredirecta
 func LineRedirectA(hCall uint32, lpszDestAddress foundation.PSTR, dwCountryCode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineRedirectA.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode))
 	return int32(r1)
 }
 
-// lineRedirectW calls TAPI32!lineRedirectW.
+// LineRedirectW calls TAPI32!lineRedirectW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineredirectw
-func LineRedirectW(hCall uint32, lpszDestAddress foundation.PWSTR, dwCountryCode uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineRedirectW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(dwCountryCode))
+func LineRedirectW(hCall uint32, lpszDestAddress string, dwCountryCode uint32) int32 {
+	_lpszDestAddress := win32.UTF16Ptr(lpszDestAddress)
+	r1, _, _ := syscall.SyscallN(procLineRedirectW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(_lpszDestAddress)), uintptr(dwCountryCode))
 	return int32(r1)
 }
 
-// lineRegisterRequestRecipient calls TAPI32!lineRegisterRequestRecipient.
+// LineRegisterRequestRecipient calls TAPI32!lineRegisterRequestRecipient.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineregisterrequestrecipient
 func LineRegisterRequestRecipient(hLineApp uint32, dwRegistrationInstance uint32, dwRequestMode uint32, bEnable uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineRegisterRequestRecipient.Addr(), uintptr(hLineApp), uintptr(dwRegistrationInstance), uintptr(dwRequestMode), uintptr(bEnable))
 	return int32(r1)
 }
 
-// lineReleaseUserUserInfo calls TAPI32!lineReleaseUserUserInfo.
+// LineReleaseUserUserInfo calls TAPI32!lineReleaseUserUserInfo.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linereleaseuseruserinfo
 func LineReleaseUserUserInfo(hCall uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineReleaseUserUserInfo.Addr(), uintptr(hCall))
 	return int32(r1)
 }
 
-// lineRemoveFromConference calls TAPI32!lineRemoveFromConference.
+// LineRemoveFromConference calls TAPI32!lineRemoveFromConference.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineremovefromconference
 func LineRemoveFromConference(hCall uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineRemoveFromConference.Addr(), uintptr(hCall))
 	return int32(r1)
 }
 
-// lineRemoveProvider calls TAPI32!lineRemoveProvider.
+// LineRemoveProvider calls TAPI32!lineRemoveProvider.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineremoveprovider
 func LineRemoveProvider(dwPermanentProviderID uint32, hwndOwner foundation.HWND) int32 {
 	r1, _, _ := syscall.SyscallN(procLineRemoveProvider.Addr(), uintptr(dwPermanentProviderID), uintptr(hwndOwner))
 	return int32(r1)
 }
 
-// lineSecureCall calls TAPI32!lineSecureCall.
+// LineSecureCall calls TAPI32!lineSecureCall.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesecurecall
 func LineSecureCall(hCall uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSecureCall.Addr(), uintptr(hCall))
 	return int32(r1)
 }
 
-// lineSendUserUserInfo calls TAPI32!lineSendUserUserInfo.
+// LineSendUserUserInfo calls TAPI32!lineSendUserUserInfo.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesenduseruserinfo
 func LineSendUserUserInfo(hCall uint32, lpsUserUserInfo foundation.PSTR, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSendUserUserInfo.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpsUserUserInfo)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineSetAgentActivity calls TAPI32!lineSetAgentActivity.
+// LineSetAgentActivity calls TAPI32!lineSetAgentActivity.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetagentactivity
 func LineSetAgentActivity(hLine uint32, dwAddressID uint32, dwActivityID uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetAgentActivity.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(dwActivityID))
 	return int32(r1)
 }
 
-// lineSetAgentGroup calls TAPI32!lineSetAgentGroup.
+// LineSetAgentGroup calls TAPI32!lineSetAgentGroup.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetagentgroup
 func LineSetAgentGroup(hLine uint32, dwAddressID uint32, lpAgentGroupList unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetAgentGroup.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lpAgentGroupList)))
 	return int32(r1)
 }
 
-// lineSetAgentMeasurementPeriod calls TAPI32!lineSetAgentMeasurementPeriod.
+// LineSetAgentMeasurementPeriod calls TAPI32!lineSetAgentMeasurementPeriod.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetagentmeasurementperiod
 func LineSetAgentMeasurementPeriod(hLine uint32, hAgent uint32, dwMeasurementPeriod uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetAgentMeasurementPeriod.Addr(), uintptr(hLine), uintptr(hAgent), uintptr(dwMeasurementPeriod))
 	return int32(r1)
 }
 
-// lineSetAgentSessionState calls TAPI32!lineSetAgentSessionState.
+// LineSetAgentSessionState calls TAPI32!lineSetAgentSessionState.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetagentsessionstate
 func LineSetAgentSessionState(hLine uint32, hAgentSession uint32, dwAgentSessionState uint32, dwNextAgentSessionState uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetAgentSessionState.Addr(), uintptr(hLine), uintptr(hAgentSession), uintptr(dwAgentSessionState), uintptr(dwNextAgentSessionState))
 	return int32(r1)
 }
 
-// lineSetAgentState calls TAPI32!lineSetAgentState.
+// LineSetAgentState calls TAPI32!lineSetAgentState.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetagentstate
 func LineSetAgentState(hLine uint32, dwAddressID uint32, dwAgentState uint32, dwNextAgentState uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetAgentState.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(dwAgentState), uintptr(dwNextAgentState))
 	return int32(r1)
 }
 
-// lineSetAgentStateEx calls TAPI32!lineSetAgentStateEx.
+// LineSetAgentStateEx calls TAPI32!lineSetAgentStateEx.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetagentstateex
 func LineSetAgentStateEx(hLine uint32, hAgent uint32, dwAgentState uint32, dwNextAgentState uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetAgentStateEx.Addr(), uintptr(hLine), uintptr(hAgent), uintptr(dwAgentState), uintptr(dwNextAgentState))
 	return int32(r1)
 }
 
-// lineSetAppPriority calls TAPI32!lineSetAppPriority.
+// LineSetAppPriority calls TAPI32!lineSetAppPriority.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetapppriority
 func LineSetAppPriority(lpszAppFilename foundation.PSTR, dwMediaMode uint32, lpExtensionID unsafe.Pointer, dwRequestMode uint32, lpszExtensionName foundation.PSTR, dwPriority uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetAppPriority.Addr(), uintptr(unsafe.Pointer(lpszAppFilename)), uintptr(dwMediaMode), uintptr(unsafe.Pointer(lpExtensionID)), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpszExtensionName)), uintptr(dwPriority))
 	return int32(r1)
 }
 
-// lineSetAppPriorityA calls TAPI32!lineSetAppPriorityA.
+// LineSetAppPriorityA calls TAPI32!lineSetAppPriorityA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetappprioritya
 func LineSetAppPriorityA(lpszAppFilename foundation.PSTR, dwMediaMode uint32, lpExtensionID unsafe.Pointer, dwRequestMode uint32, lpszExtensionName foundation.PSTR, dwPriority uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetAppPriorityA.Addr(), uintptr(unsafe.Pointer(lpszAppFilename)), uintptr(dwMediaMode), uintptr(unsafe.Pointer(lpExtensionID)), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpszExtensionName)), uintptr(dwPriority))
 	return int32(r1)
 }
 
-// lineSetAppPriorityW calls TAPI32!lineSetAppPriorityW.
+// LineSetAppPriorityW calls TAPI32!lineSetAppPriorityW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetapppriorityw
-func LineSetAppPriorityW(lpszAppFilename foundation.PWSTR, dwMediaMode uint32, lpExtensionID unsafe.Pointer, dwRequestMode uint32, lpszExtensionName foundation.PWSTR, dwPriority uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineSetAppPriorityW.Addr(), uintptr(unsafe.Pointer(lpszAppFilename)), uintptr(dwMediaMode), uintptr(unsafe.Pointer(lpExtensionID)), uintptr(dwRequestMode), uintptr(unsafe.Pointer(lpszExtensionName)), uintptr(dwPriority))
+func LineSetAppPriorityW(lpszAppFilename string, dwMediaMode uint32, lpExtensionID unsafe.Pointer, dwRequestMode uint32, lpszExtensionName string, dwPriority uint32) int32 {
+	_lpszAppFilename := win32.UTF16Ptr(lpszAppFilename)
+	_lpszExtensionName := win32.UTF16Ptr(lpszExtensionName)
+	r1, _, _ := syscall.SyscallN(procLineSetAppPriorityW.Addr(), uintptr(unsafe.Pointer(_lpszAppFilename)), uintptr(dwMediaMode), uintptr(unsafe.Pointer(lpExtensionID)), uintptr(dwRequestMode), uintptr(unsafe.Pointer(_lpszExtensionName)), uintptr(dwPriority))
 	return int32(r1)
 }
 
-// lineSetAppSpecific calls TAPI32!lineSetAppSpecific.
+// LineSetAppSpecific calls TAPI32!lineSetAppSpecific.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetappspecific
 func LineSetAppSpecific(hCall uint32, dwAppSpecific uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetAppSpecific.Addr(), uintptr(hCall), uintptr(dwAppSpecific))
 	return int32(r1)
 }
 
-// lineSetCallData calls TAPI32!lineSetCallData.
+// LineSetCallData calls TAPI32!lineSetCallData.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetcalldata
 func LineSetCallData(hCall uint32, lpCallData unsafe.Pointer, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetCallData.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpCallData)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// lineSetCallParams calls TAPI32!lineSetCallParams.
+// LineSetCallParams calls TAPI32!lineSetCallParams.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetcallparams
 func LineSetCallParams(hCall uint32, dwBearerMode uint32, dwMinRate uint32, dwMaxRate uint32, lpDialParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetCallParams.Addr(), uintptr(hCall), uintptr(dwBearerMode), uintptr(dwMinRate), uintptr(dwMaxRate), uintptr(unsafe.Pointer(lpDialParams)))
 	return int32(r1)
 }
 
-// lineSetCallPrivilege calls TAPI32!lineSetCallPrivilege.
+// LineSetCallPrivilege calls TAPI32!lineSetCallPrivilege.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetcallprivilege
 func LineSetCallPrivilege(hCall uint32, dwCallPrivilege uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetCallPrivilege.Addr(), uintptr(hCall), uintptr(dwCallPrivilege))
 	return int32(r1)
 }
 
-// lineSetCallQualityOfService calls TAPI32!lineSetCallQualityOfService.
+// LineSetCallQualityOfService calls TAPI32!lineSetCallQualityOfService.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetcallqualityofservice
 func LineSetCallQualityOfService(hCall uint32, lpSendingFlowspec unsafe.Pointer, dwSendingFlowspecSize uint32, lpReceivingFlowspec unsafe.Pointer, dwReceivingFlowspecSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetCallQualityOfService.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lpSendingFlowspec)), uintptr(dwSendingFlowspecSize), uintptr(unsafe.Pointer(lpReceivingFlowspec)), uintptr(dwReceivingFlowspecSize))
 	return int32(r1)
 }
 
-// lineSetCallTreatment calls TAPI32!lineSetCallTreatment.
+// LineSetCallTreatment calls TAPI32!lineSetCallTreatment.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetcalltreatment
 func LineSetCallTreatment(hCall uint32, dwTreatment uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetCallTreatment.Addr(), uintptr(hCall), uintptr(dwTreatment))
 	return int32(r1)
 }
 
-// lineSetCurrentLocation calls TAPI32!lineSetCurrentLocation.
+// LineSetCurrentLocation calls TAPI32!lineSetCurrentLocation.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetcurrentlocation
 func LineSetCurrentLocation(hLineApp uint32, dwLocation uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetCurrentLocation.Addr(), uintptr(hLineApp), uintptr(dwLocation))
 	return int32(r1)
 }
 
-// lineSetDevConfig calls TAPI32!lineSetDevConfig.
+// LineSetDevConfig calls TAPI32!lineSetDevConfig.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetdevconfig
 func LineSetDevConfig(dwDeviceID uint32, lpDeviceConfig unsafe.Pointer, dwSize uint32, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetDevConfig.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpDeviceConfig)), uintptr(dwSize), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineSetDevConfigA calls TAPI32!lineSetDevConfigA.
+// LineSetDevConfigA calls TAPI32!lineSetDevConfigA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetdevconfiga
 func LineSetDevConfigA(dwDeviceID uint32, lpDeviceConfig unsafe.Pointer, dwSize uint32, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetDevConfigA.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpDeviceConfig)), uintptr(dwSize), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineSetDevConfigW calls TAPI32!lineSetDevConfigW.
+// LineSetDevConfigW calls TAPI32!lineSetDevConfigW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetdevconfigw
-func LineSetDevConfigW(dwDeviceID uint32, lpDeviceConfig unsafe.Pointer, dwSize uint32, lpszDeviceClass foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLineSetDevConfigW.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpDeviceConfig)), uintptr(dwSize), uintptr(unsafe.Pointer(lpszDeviceClass)))
+func LineSetDevConfigW(dwDeviceID uint32, lpDeviceConfig unsafe.Pointer, dwSize uint32, lpszDeviceClass string) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	r1, _, _ := syscall.SyscallN(procLineSetDevConfigW.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpDeviceConfig)), uintptr(dwSize), uintptr(unsafe.Pointer(_lpszDeviceClass)))
 	return int32(r1)
 }
 
-// lineSetLineDevStatus calls TAPI32!lineSetLineDevStatus.
+// LineSetLineDevStatus calls TAPI32!lineSetLineDevStatus.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetlinedevstatus
 func LineSetLineDevStatus(hLine uint32, dwStatusToChange uint32, fStatus uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetLineDevStatus.Addr(), uintptr(hLine), uintptr(dwStatusToChange), uintptr(fStatus))
 	return int32(r1)
 }
 
-// lineSetMediaControl calls TAPI32!lineSetMediaControl.
+// LineSetMediaControl calls TAPI32!lineSetMediaControl.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetmediacontrol
 func LineSetMediaControl(hLine uint32, dwAddressID uint32, hCall uint32, dwSelect uint32, lpDigitList unsafe.Pointer, dwDigitNumEntries uint32, lpMediaList unsafe.Pointer, dwMediaNumEntries uint32, lpToneList unsafe.Pointer, dwToneNumEntries uint32, lpCallStateList unsafe.Pointer, dwCallStateNumEntries uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetMediaControl.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(hCall), uintptr(dwSelect), uintptr(unsafe.Pointer(lpDigitList)), uintptr(dwDigitNumEntries), uintptr(unsafe.Pointer(lpMediaList)), uintptr(dwMediaNumEntries), uintptr(unsafe.Pointer(lpToneList)), uintptr(dwToneNumEntries), uintptr(unsafe.Pointer(lpCallStateList)), uintptr(dwCallStateNumEntries))
 	return int32(r1)
 }
 
-// lineSetMediaMode calls TAPI32!lineSetMediaMode.
+// LineSetMediaMode calls TAPI32!lineSetMediaMode.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetmediamode
 func LineSetMediaMode(hCall uint32, dwMediaModes uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetMediaMode.Addr(), uintptr(hCall), uintptr(dwMediaModes))
 	return int32(r1)
 }
 
-// lineSetNumRings calls TAPI32!lineSetNumRings.
+// LineSetNumRings calls TAPI32!lineSetNumRings.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetnumrings
 func LineSetNumRings(hLine uint32, dwAddressID uint32, dwNumRings uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetNumRings.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(dwNumRings))
 	return int32(r1)
 }
 
-// lineSetQueueMeasurementPeriod calls TAPI32!lineSetQueueMeasurementPeriod.
+// LineSetQueueMeasurementPeriod calls TAPI32!lineSetQueueMeasurementPeriod.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetqueuemeasurementperiod
 func LineSetQueueMeasurementPeriod(hLine uint32, dwQueueID uint32, dwMeasurementPeriod uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetQueueMeasurementPeriod.Addr(), uintptr(hLine), uintptr(dwQueueID), uintptr(dwMeasurementPeriod))
 	return int32(r1)
 }
 
-// lineSetStatusMessages calls TAPI32!lineSetStatusMessages.
+// LineSetStatusMessages calls TAPI32!lineSetStatusMessages.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetstatusmessages
 func LineSetStatusMessages(hLine uint32, dwLineStates uint32, dwAddressStates uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetStatusMessages.Addr(), uintptr(hLine), uintptr(dwLineStates), uintptr(dwAddressStates))
 	return int32(r1)
 }
 
-// lineSetTerminal calls TAPI32!lineSetTerminal.
+// LineSetTerminal calls TAPI32!lineSetTerminal.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetterminal
 func LineSetTerminal(hLine uint32, dwAddressID uint32, hCall uint32, dwSelect uint32, dwTerminalModes uint32, dwTerminalID uint32, bEnable uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetTerminal.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(hCall), uintptr(dwSelect), uintptr(dwTerminalModes), uintptr(dwTerminalID), uintptr(bEnable))
 	return int32(r1)
 }
 
-// lineSetTollList calls TAPI32!lineSetTollList.
+// LineSetTollList calls TAPI32!lineSetTollList.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesettolllist
 func LineSetTollList(hLineApp uint32, dwDeviceID uint32, lpszAddressIn foundation.PSTR, dwTollListOption uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetTollList.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpszAddressIn)), uintptr(dwTollListOption))
 	return int32(r1)
 }
 
-// lineSetTollListA calls TAPI32!lineSetTollListA.
+// LineSetTollListA calls TAPI32!lineSetTollListA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesettolllista
 func LineSetTollListA(hLineApp uint32, dwDeviceID uint32, lpszAddressIn foundation.PSTR, dwTollListOption uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetTollListA.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpszAddressIn)), uintptr(dwTollListOption))
 	return int32(r1)
 }
 
-// lineSetTollListW calls TAPI32!lineSetTollListW.
+// LineSetTollListW calls TAPI32!lineSetTollListW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesettolllistw
-func LineSetTollListW(hLineApp uint32, dwDeviceID uint32, lpszAddressInW foundation.PWSTR, dwTollListOption uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procLineSetTollListW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpszAddressInW)), uintptr(dwTollListOption))
+func LineSetTollListW(hLineApp uint32, dwDeviceID uint32, lpszAddressInW string, dwTollListOption uint32) int32 {
+	_lpszAddressInW := win32.UTF16Ptr(lpszAddressInW)
+	r1, _, _ := syscall.SyscallN(procLineSetTollListW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(unsafe.Pointer(_lpszAddressInW)), uintptr(dwTollListOption))
 	return int32(r1)
 }
 
-// lineSetupConference calls TAPI32!lineSetupConference.
+// LineSetupConference calls TAPI32!lineSetupConference.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetupconference
 func LineSetupConference(hCall uint32, hLine uint32, lphConfCall *uint32, lphConsultCall *uint32, dwNumParties uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetupConference.Addr(), uintptr(hCall), uintptr(hLine), uintptr(unsafe.Pointer(lphConfCall)), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(dwNumParties), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineSetupConferenceA calls TAPI32!lineSetupConferenceA.
+// LineSetupConferenceA calls TAPI32!lineSetupConferenceA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetupconferencea
 func LineSetupConferenceA(hCall uint32, hLine uint32, lphConfCall *uint32, lphConsultCall *uint32, dwNumParties uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetupConferenceA.Addr(), uintptr(hCall), uintptr(hLine), uintptr(unsafe.Pointer(lphConfCall)), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(dwNumParties), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineSetupConferenceW calls TAPI32!lineSetupConferenceW.
+// LineSetupConferenceW calls TAPI32!lineSetupConferenceW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetupconferencew
 func LineSetupConferenceW(hCall uint32, hLine uint32, lphConfCall *uint32, lphConsultCall *uint32, dwNumParties uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetupConferenceW.Addr(), uintptr(hCall), uintptr(hLine), uintptr(unsafe.Pointer(lphConfCall)), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(dwNumParties), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineSetupTransfer calls TAPI32!lineSetupTransfer.
+// LineSetupTransfer calls TAPI32!lineSetupTransfer.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetuptransfer
 func LineSetupTransfer(hCall uint32, lphConsultCall *uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetupTransfer.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineSetupTransferA calls TAPI32!lineSetupTransferA.
+// LineSetupTransferA calls TAPI32!lineSetupTransferA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetuptransfera
 func LineSetupTransferA(hCall uint32, lphConsultCall *uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetupTransferA.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineSetupTransferW calls TAPI32!lineSetupTransferW.
+// LineSetupTransferW calls TAPI32!lineSetupTransferW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linesetuptransferw
 func LineSetupTransferW(hCall uint32, lphConsultCall *uint32, lpCallParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSetupTransferW.Addr(), uintptr(hCall), uintptr(unsafe.Pointer(lphConsultCall)), uintptr(unsafe.Pointer(lpCallParams)))
 	return int32(r1)
 }
 
-// lineShutdown calls TAPI32!lineShutdown.
+// LineShutdown calls TAPI32!lineShutdown.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineshutdown
 func LineShutdown(hLineApp uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineShutdown.Addr(), uintptr(hLineApp))
 	return int32(r1)
 }
 
-// lineSwapHold calls TAPI32!lineSwapHold.
+// LineSwapHold calls TAPI32!lineSwapHold.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineswaphold
 func LineSwapHold(hActiveCall uint32, hHeldCall uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineSwapHold.Addr(), uintptr(hActiveCall), uintptr(hHeldCall))
 	return int32(r1)
 }
 
-// lineTranslateAddress calls TAPI32!lineTranslateAddress.
+// LineTranslateAddress calls TAPI32!lineTranslateAddress.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linetranslateaddress
 func LineTranslateAddress(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, lpszAddressIn foundation.PSTR, dwCard uint32, dwTranslateOptions uint32, lpTranslateOutput unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineTranslateAddress.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpszAddressIn)), uintptr(dwCard), uintptr(dwTranslateOptions), uintptr(unsafe.Pointer(lpTranslateOutput)))
 	return int32(r1)
 }
 
-// lineTranslateAddressA calls TAPI32!lineTranslateAddressA.
+// LineTranslateAddressA calls TAPI32!lineTranslateAddressA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linetranslateaddressa
 func LineTranslateAddressA(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, lpszAddressIn foundation.PSTR, dwCard uint32, dwTranslateOptions uint32, lpTranslateOutput unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procLineTranslateAddressA.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpszAddressIn)), uintptr(dwCard), uintptr(dwTranslateOptions), uintptr(unsafe.Pointer(lpTranslateOutput)))
 	return int32(r1)
 }
 
-// lineTranslateAddressW calls TAPI32!lineTranslateAddressW.
+// LineTranslateAddressW calls TAPI32!lineTranslateAddressW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linetranslateaddressw
-func LineTranslateAddressW(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, lpszAddressIn foundation.PWSTR, dwCard uint32, dwTranslateOptions uint32, lpTranslateOutput unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procLineTranslateAddressW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(lpszAddressIn)), uintptr(dwCard), uintptr(dwTranslateOptions), uintptr(unsafe.Pointer(lpTranslateOutput)))
+func LineTranslateAddressW(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, lpszAddressIn string, dwCard uint32, dwTranslateOptions uint32, lpTranslateOutput unsafe.Pointer) int32 {
+	_lpszAddressIn := win32.UTF16Ptr(lpszAddressIn)
+	r1, _, _ := syscall.SyscallN(procLineTranslateAddressW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(unsafe.Pointer(_lpszAddressIn)), uintptr(dwCard), uintptr(dwTranslateOptions), uintptr(unsafe.Pointer(lpTranslateOutput)))
 	return int32(r1)
 }
 
-// lineTranslateDialog calls TAPI32!lineTranslateDialog.
+// LineTranslateDialog calls TAPI32!lineTranslateDialog.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linetranslatedialog
 func LineTranslateDialog(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, hwndOwner foundation.HWND, lpszAddressIn foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineTranslateDialog.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszAddressIn)))
 	return int32(r1)
 }
 
-// lineTranslateDialogA calls TAPI32!lineTranslateDialogA.
+// LineTranslateDialogA calls TAPI32!lineTranslateDialogA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linetranslatedialoga
 func LineTranslateDialogA(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, hwndOwner foundation.HWND, lpszAddressIn foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineTranslateDialogA.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszAddressIn)))
 	return int32(r1)
 }
 
-// lineTranslateDialogW calls TAPI32!lineTranslateDialogW.
+// LineTranslateDialogW calls TAPI32!lineTranslateDialogW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linetranslatedialogw
-func LineTranslateDialogW(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, hwndOwner foundation.HWND, lpszAddressIn foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLineTranslateDialogW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszAddressIn)))
+func LineTranslateDialogW(hLineApp uint32, dwDeviceID uint32, dwAPIVersion uint32, hwndOwner foundation.HWND, lpszAddressIn string) int32 {
+	_lpszAddressIn := win32.UTF16Ptr(lpszAddressIn)
+	r1, _, _ := syscall.SyscallN(procLineTranslateDialogW.Addr(), uintptr(hLineApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(hwndOwner), uintptr(unsafe.Pointer(_lpszAddressIn)))
 	return int32(r1)
 }
 
-// lineUncompleteCall calls TAPI32!lineUncompleteCall.
+// LineUncompleteCall calls TAPI32!lineUncompleteCall.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineuncompletecall
 func LineUncompleteCall(hLine uint32, dwCompletionID uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineUncompleteCall.Addr(), uintptr(hLine), uintptr(dwCompletionID))
 	return int32(r1)
 }
 
-// lineUnhold calls TAPI32!lineUnhold.
+// LineUnhold calls TAPI32!lineUnhold.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineunhold
 func LineUnhold(hCall uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procLineUnhold.Addr(), uintptr(hCall))
 	return int32(r1)
 }
 
-// lineUnpark calls TAPI32!lineUnpark.
+// LineUnpark calls TAPI32!lineUnpark.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineunpark
 func LineUnpark(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddress foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineUnpark.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(lpszDestAddress)))
 	return int32(r1)
 }
 
-// lineUnparkA calls TAPI32!lineUnparkA.
+// LineUnparkA calls TAPI32!lineUnparkA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineunparka
 func LineUnparkA(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddress foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procLineUnparkA.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(lpszDestAddress)))
 	return int32(r1)
 }
 
-// lineUnparkW calls TAPI32!lineUnparkW.
+// LineUnparkW calls TAPI32!lineUnparkW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-lineunparkw
-func LineUnparkW(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddress foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLineUnparkW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(lpszDestAddress)))
+func LineUnparkW(hLine uint32, dwAddressID uint32, lphCall *uint32, lpszDestAddress string) int32 {
+	_lpszDestAddress := win32.UTF16Ptr(lpszDestAddress)
+	r1, _, _ := syscall.SyscallN(procLineUnparkW.Addr(), uintptr(hLine), uintptr(dwAddressID), uintptr(unsafe.Pointer(lphCall)), uintptr(unsafe.Pointer(_lpszDestAddress)))
 	return int32(r1)
 }
 
-// phoneClose calls TAPI32!phoneClose.
+// OpenTnefStream calls MAPI32!OpenTnefStream.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstream
+func OpenTnefStream(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lppTNEF **ITnef) error {
+	r1, _, _ := syscall.SyscallN(procOpenTnefStream.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpMessage)), uintptr(wKeyVal), uintptr(unsafe.Pointer(lppTNEF)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// OpenTnefStreamEx calls MAPI32!OpenTnefStreamEx.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/opentnefstreamex
+func OpenTnefStreamEx(lpvSupport unsafe.Pointer, lpStream *systemcom.IStream, lpszStreamName *int8, ulFlags uint32, lpMessage *systemaddressbook.IMessage, wKeyVal uint16, lpAdressBook *systemaddressbook.IAddrBook, lppTNEF **ITnef) error {
+	r1, _, _ := syscall.SyscallN(procOpenTnefStreamEx.Addr(), uintptr(unsafe.Pointer(lpvSupport)), uintptr(unsafe.Pointer(lpStream)), uintptr(unsafe.Pointer(lpszStreamName)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpMessage)), uintptr(wKeyVal), uintptr(unsafe.Pointer(lpAdressBook)), uintptr(unsafe.Pointer(lppTNEF)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// PhoneClose calls TAPI32!phoneClose.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneclose
 func PhoneClose(hPhone uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneClose.Addr(), uintptr(hPhone))
 	return int32(r1)
 }
 
-// phoneConfigDialog calls TAPI32!phoneConfigDialog.
+// PhoneConfigDialog calls TAPI32!phoneConfigDialog.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneconfigdialog
 func PhoneConfigDialog(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneConfigDialog.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// phoneConfigDialogA calls TAPI32!phoneConfigDialogA.
+// PhoneConfigDialogA calls TAPI32!phoneConfigDialogA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneconfigdialoga
 func PhoneConfigDialogA(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneConfigDialogA.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// phoneConfigDialogW calls TAPI32!phoneConfigDialogW.
+// PhoneConfigDialogW calls TAPI32!phoneConfigDialogW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneconfigdialogw
-func PhoneConfigDialogW(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procPhoneConfigDialogW.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpszDeviceClass)))
+func PhoneConfigDialogW(dwDeviceID uint32, hwndOwner foundation.HWND, lpszDeviceClass string) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	r1, _, _ := syscall.SyscallN(procPhoneConfigDialogW.Addr(), uintptr(dwDeviceID), uintptr(hwndOwner), uintptr(unsafe.Pointer(_lpszDeviceClass)))
 	return int32(r1)
 }
 
-// phoneDevSpecific calls TAPI32!phoneDevSpecific.
+// PhoneDevSpecific calls TAPI32!phoneDevSpecific.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonedevspecific
 func PhoneDevSpecific(hPhone uint32, lpParams unsafe.Pointer, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneDevSpecific.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpParams)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// phoneGetButtonInfo calls TAPI32!phoneGetButtonInfo.
+// PhoneGetButtonInfo calls TAPI32!phoneGetButtonInfo.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetbuttoninfo
 func PhoneGetButtonInfo(hPhone uint32, dwButtonLampID uint32, lpButtonInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetButtonInfo.Addr(), uintptr(hPhone), uintptr(dwButtonLampID), uintptr(unsafe.Pointer(lpButtonInfo)))
 	return int32(r1)
 }
 
-// phoneGetButtonInfoA calls TAPI32!phoneGetButtonInfoA.
+// PhoneGetButtonInfoA calls TAPI32!phoneGetButtonInfoA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetbuttoninfoa
 func PhoneGetButtonInfoA(hPhone uint32, dwButtonLampID uint32, lpButtonInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetButtonInfoA.Addr(), uintptr(hPhone), uintptr(dwButtonLampID), uintptr(unsafe.Pointer(lpButtonInfo)))
 	return int32(r1)
 }
 
-// phoneGetButtonInfoW calls TAPI32!phoneGetButtonInfoW.
+// PhoneGetButtonInfoW calls TAPI32!phoneGetButtonInfoW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetbuttoninfow
 func PhoneGetButtonInfoW(hPhone uint32, dwButtonLampID uint32, lpButtonInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetButtonInfoW.Addr(), uintptr(hPhone), uintptr(dwButtonLampID), uintptr(unsafe.Pointer(lpButtonInfo)))
 	return int32(r1)
 }
 
-// phoneGetData calls TAPI32!phoneGetData.
+// PhoneGetData calls TAPI32!phoneGetData.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetdata
 func PhoneGetData(hPhone uint32, dwDataID uint32, lpData unsafe.Pointer, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetData.Addr(), uintptr(hPhone), uintptr(dwDataID), uintptr(unsafe.Pointer(lpData)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// phoneGetDevCaps calls TAPI32!phoneGetDevCaps.
+// PhoneGetDevCaps calls TAPI32!phoneGetDevCaps.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetdevcaps
 func PhoneGetDevCaps(hPhoneApp uint32, dwDeviceID uint32, dwAPIVersion uint32, dwExtVersion uint32, lpPhoneCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetDevCaps.Addr(), uintptr(hPhoneApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(unsafe.Pointer(lpPhoneCaps)))
 	return int32(r1)
 }
 
-// phoneGetDevCapsA calls TAPI32!phoneGetDevCapsA.
+// PhoneGetDevCapsA calls TAPI32!phoneGetDevCapsA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetdevcapsa
 func PhoneGetDevCapsA(hPhoneApp uint32, dwDeviceID uint32, dwAPIVersion uint32, dwExtVersion uint32, lpPhoneCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetDevCapsA.Addr(), uintptr(hPhoneApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(unsafe.Pointer(lpPhoneCaps)))
 	return int32(r1)
 }
 
-// phoneGetDevCapsW calls TAPI32!phoneGetDevCapsW.
+// PhoneGetDevCapsW calls TAPI32!phoneGetDevCapsW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetdevcapsw
 func PhoneGetDevCapsW(hPhoneApp uint32, dwDeviceID uint32, dwAPIVersion uint32, dwExtVersion uint32, lpPhoneCaps unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetDevCapsW.Addr(), uintptr(hPhoneApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(unsafe.Pointer(lpPhoneCaps)))
 	return int32(r1)
 }
 
-// phoneGetDisplay calls TAPI32!phoneGetDisplay.
+// PhoneGetDisplay calls TAPI32!phoneGetDisplay.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetdisplay
 func PhoneGetDisplay(hPhone uint32, lpDisplay unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetDisplay.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpDisplay)))
 	return int32(r1)
 }
 
-// phoneGetGain calls TAPI32!phoneGetGain.
+// PhoneGetGain calls TAPI32!phoneGetGain.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetgain
 func PhoneGetGain(hPhone uint32, dwHookSwitchDev uint32, lpdwGain *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetGain.Addr(), uintptr(hPhone), uintptr(dwHookSwitchDev), uintptr(unsafe.Pointer(lpdwGain)))
 	return int32(r1)
 }
 
-// phoneGetHookSwitch calls TAPI32!phoneGetHookSwitch.
+// PhoneGetHookSwitch calls TAPI32!phoneGetHookSwitch.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegethookswitch
 func PhoneGetHookSwitch(hPhone uint32, lpdwHookSwitchDevs *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetHookSwitch.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpdwHookSwitchDevs)))
 	return int32(r1)
 }
 
-// phoneGetID calls TAPI32!phoneGetID.
+// PhoneGetID calls TAPI32!phoneGetID.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetid
 func PhoneGetID(hPhone uint32, lpDeviceID unsafe.Pointer, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetID.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// phoneGetIDA calls TAPI32!phoneGetIDA.
+// PhoneGetIDA calls TAPI32!phoneGetIDA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetida
 func PhoneGetIDA(hPhone uint32, lpDeviceID unsafe.Pointer, lpszDeviceClass foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetIDA.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(unsafe.Pointer(lpszDeviceClass)))
 	return int32(r1)
 }
 
-// phoneGetIDW calls TAPI32!phoneGetIDW.
+// PhoneGetIDW calls TAPI32!phoneGetIDW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetidw
-func PhoneGetIDW(hPhone uint32, lpDeviceID unsafe.Pointer, lpszDeviceClass foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procPhoneGetIDW.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(unsafe.Pointer(lpszDeviceClass)))
+func PhoneGetIDW(hPhone uint32, lpDeviceID unsafe.Pointer, lpszDeviceClass string) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	r1, _, _ := syscall.SyscallN(procPhoneGetIDW.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(unsafe.Pointer(_lpszDeviceClass)))
 	return int32(r1)
 }
 
-// phoneGetIcon calls TAPI32!phoneGetIcon.
+// PhoneGetIcon calls TAPI32!phoneGetIcon.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegeticon
 func PhoneGetIcon(dwDeviceID uint32, lpszDeviceClass foundation.PSTR, lphIcon *uiwindowsandmessaging.HICON) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetIcon.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lphIcon)))
 	return int32(r1)
 }
 
-// phoneGetIconA calls TAPI32!phoneGetIconA.
+// PhoneGetIconA calls TAPI32!phoneGetIconA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegeticona
 func PhoneGetIconA(dwDeviceID uint32, lpszDeviceClass foundation.PSTR, lphIcon *uiwindowsandmessaging.HICON) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetIconA.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lphIcon)))
 	return int32(r1)
 }
 
-// phoneGetIconW calls TAPI32!phoneGetIconW.
+// PhoneGetIconW calls TAPI32!phoneGetIconW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegeticonw
-func PhoneGetIconW(dwDeviceID uint32, lpszDeviceClass foundation.PWSTR, lphIcon *uiwindowsandmessaging.HICON) int32 {
-	r1, _, _ := syscall.SyscallN(procPhoneGetIconW.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lphIcon)))
+func PhoneGetIconW(dwDeviceID uint32, lpszDeviceClass string, lphIcon *uiwindowsandmessaging.HICON) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	r1, _, _ := syscall.SyscallN(procPhoneGetIconW.Addr(), uintptr(dwDeviceID), uintptr(unsafe.Pointer(_lpszDeviceClass)), uintptr(unsafe.Pointer(lphIcon)))
 	return int32(r1)
 }
 
-// phoneGetLamp calls TAPI32!phoneGetLamp.
+// PhoneGetLamp calls TAPI32!phoneGetLamp.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetlamp
 func PhoneGetLamp(hPhone uint32, dwButtonLampID uint32, lpdwLampMode *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetLamp.Addr(), uintptr(hPhone), uintptr(dwButtonLampID), uintptr(unsafe.Pointer(lpdwLampMode)))
 	return int32(r1)
 }
 
-// phoneGetMessage calls TAPI32!phoneGetMessage.
+// PhoneGetMessage calls TAPI32!phoneGetMessage.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetmessage
 func PhoneGetMessage(hPhoneApp uint32, lpMessage unsafe.Pointer, dwTimeout uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetMessage.Addr(), uintptr(hPhoneApp), uintptr(unsafe.Pointer(lpMessage)), uintptr(dwTimeout))
 	return int32(r1)
 }
 
-// phoneGetRing calls TAPI32!phoneGetRing.
+// PhoneGetRing calls TAPI32!phoneGetRing.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetring
 func PhoneGetRing(hPhone uint32, lpdwRingMode *uint32, lpdwVolume *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetRing.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpdwRingMode)), uintptr(unsafe.Pointer(lpdwVolume)))
 	return int32(r1)
 }
 
-// phoneGetStatus calls TAPI32!phoneGetStatus.
+// PhoneGetStatus calls TAPI32!phoneGetStatus.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetstatus
 func PhoneGetStatus(hPhone uint32, lpPhoneStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetStatus.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpPhoneStatus)))
 	return int32(r1)
 }
 
-// phoneGetStatusA calls TAPI32!phoneGetStatusA.
+// PhoneGetStatusA calls TAPI32!phoneGetStatusA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetstatusa
 func PhoneGetStatusA(hPhone uint32, lpPhoneStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetStatusA.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpPhoneStatus)))
 	return int32(r1)
 }
 
-// phoneGetStatusMessages calls TAPI32!phoneGetStatusMessages.
+// PhoneGetStatusMessages calls TAPI32!phoneGetStatusMessages.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetstatusmessages
 func PhoneGetStatusMessages(hPhone uint32, lpdwPhoneStates *uint32, lpdwButtonModes *uint32, lpdwButtonStates *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetStatusMessages.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpdwPhoneStates)), uintptr(unsafe.Pointer(lpdwButtonModes)), uintptr(unsafe.Pointer(lpdwButtonStates)))
 	return int32(r1)
 }
 
-// phoneGetStatusW calls TAPI32!phoneGetStatusW.
+// PhoneGetStatusW calls TAPI32!phoneGetStatusW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetstatusw
 func PhoneGetStatusW(hPhone uint32, lpPhoneStatus unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetStatusW.Addr(), uintptr(hPhone), uintptr(unsafe.Pointer(lpPhoneStatus)))
 	return int32(r1)
 }
 
-// phoneGetVolume calls TAPI32!phoneGetVolume.
+// PhoneGetVolume calls TAPI32!phoneGetVolume.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonegetvolume
 func PhoneGetVolume(hPhone uint32, dwHookSwitchDev uint32, lpdwVolume *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneGetVolume.Addr(), uintptr(hPhone), uintptr(dwHookSwitchDev), uintptr(unsafe.Pointer(lpdwVolume)))
 	return int32(r1)
 }
 
-// phoneInitialize calls TAPI32!phoneInitialize.
+// PhoneInitialize calls TAPI32!phoneInitialize.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneinitialize
 func PhoneInitialize(lphPhoneApp *uint32, hInstance foundation.HINSTANCE, lpfnCallback PHONECALLBACK, lpszAppName foundation.PSTR, lpdwNumDevs *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneInitialize.Addr(), uintptr(unsafe.Pointer(lphPhoneApp)), uintptr(hInstance), uintptr(lpfnCallback), uintptr(unsafe.Pointer(lpszAppName)), uintptr(unsafe.Pointer(lpdwNumDevs)))
 	return int32(r1)
 }
 
-// phoneInitializeExA calls TAPI32!phoneInitializeExA.
+// PhoneInitializeEx calls TAPI32!phoneInitializeExW.
+// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneinitializeexw
+func PhoneInitializeEx(lphPhoneApp *uint32, hInstance foundation.HINSTANCE, lpfnCallback PHONECALLBACK, lpszFriendlyAppName string, lpdwNumDevs *uint32, lpdwAPIVersion *uint32, lpPhoneInitializeExParams unsafe.Pointer) int32 {
+	_lpszFriendlyAppName := win32.UTF16Ptr(lpszFriendlyAppName)
+	r1, _, _ := syscall.SyscallN(procPhoneInitializeEx.Addr(), uintptr(unsafe.Pointer(lphPhoneApp)), uintptr(hInstance), uintptr(lpfnCallback), uintptr(unsafe.Pointer(_lpszFriendlyAppName)), uintptr(unsafe.Pointer(lpdwNumDevs)), uintptr(unsafe.Pointer(lpdwAPIVersion)), uintptr(unsafe.Pointer(lpPhoneInitializeExParams)))
+	return int32(r1)
+}
+
+// PhoneInitializeExA calls TAPI32!phoneInitializeExA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneinitializeexa
 func PhoneInitializeExA(lphPhoneApp *uint32, hInstance foundation.HINSTANCE, lpfnCallback PHONECALLBACK, lpszFriendlyAppName foundation.PSTR, lpdwNumDevs *uint32, lpdwAPIVersion *uint32, lpPhoneInitializeExParams unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneInitializeExA.Addr(), uintptr(unsafe.Pointer(lphPhoneApp)), uintptr(hInstance), uintptr(lpfnCallback), uintptr(unsafe.Pointer(lpszFriendlyAppName)), uintptr(unsafe.Pointer(lpdwNumDevs)), uintptr(unsafe.Pointer(lpdwAPIVersion)), uintptr(unsafe.Pointer(lpPhoneInitializeExParams)))
 	return int32(r1)
 }
 
-// phoneInitializeExW calls TAPI32!phoneInitializeExW.
-// https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneinitializeexw
-func PhoneInitializeExW(lphPhoneApp *uint32, hInstance foundation.HINSTANCE, lpfnCallback PHONECALLBACK, lpszFriendlyAppName foundation.PWSTR, lpdwNumDevs *uint32, lpdwAPIVersion *uint32, lpPhoneInitializeExParams unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procPhoneInitializeExW.Addr(), uintptr(unsafe.Pointer(lphPhoneApp)), uintptr(hInstance), uintptr(lpfnCallback), uintptr(unsafe.Pointer(lpszFriendlyAppName)), uintptr(unsafe.Pointer(lpdwNumDevs)), uintptr(unsafe.Pointer(lpdwAPIVersion)), uintptr(unsafe.Pointer(lpPhoneInitializeExParams)))
-	return int32(r1)
-}
-
-// phoneNegotiateAPIVersion calls TAPI32!phoneNegotiateAPIVersion.
+// PhoneNegotiateAPIVersion calls TAPI32!phoneNegotiateAPIVersion.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonenegotiateapiversion
 func PhoneNegotiateAPIVersion(hPhoneApp uint32, dwDeviceID uint32, dwAPILowVersion uint32, dwAPIHighVersion uint32, lpdwAPIVersion *uint32, lpExtensionID unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneNegotiateAPIVersion.Addr(), uintptr(hPhoneApp), uintptr(dwDeviceID), uintptr(dwAPILowVersion), uintptr(dwAPIHighVersion), uintptr(unsafe.Pointer(lpdwAPIVersion)), uintptr(unsafe.Pointer(lpExtensionID)))
 	return int32(r1)
 }
 
-// phoneNegotiateExtVersion calls TAPI32!phoneNegotiateExtVersion.
+// PhoneNegotiateExtVersion calls TAPI32!phoneNegotiateExtVersion.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonenegotiateextversion
 func PhoneNegotiateExtVersion(hPhoneApp uint32, dwDeviceID uint32, dwAPIVersion uint32, dwExtLowVersion uint32, dwExtHighVersion uint32, lpdwExtVersion *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneNegotiateExtVersion.Addr(), uintptr(hPhoneApp), uintptr(dwDeviceID), uintptr(dwAPIVersion), uintptr(dwExtLowVersion), uintptr(dwExtHighVersion), uintptr(unsafe.Pointer(lpdwExtVersion)))
 	return int32(r1)
 }
 
-// phoneOpen calls TAPI32!phoneOpen.
+// PhoneOpen calls TAPI32!phoneOpen.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneopen
 func PhoneOpen(hPhoneApp uint32, dwDeviceID uint32, lphPhone *uint32, dwAPIVersion uint32, dwExtVersion uint32, dwCallbackInstance uintptr, dwPrivilege uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneOpen.Addr(), uintptr(hPhoneApp), uintptr(dwDeviceID), uintptr(unsafe.Pointer(lphPhone)), uintptr(dwAPIVersion), uintptr(dwExtVersion), uintptr(dwCallbackInstance), uintptr(dwPrivilege))
 	return int32(r1)
 }
 
-// phoneSetButtonInfo calls TAPI32!phoneSetButtonInfo.
+// PhoneSetButtonInfo calls TAPI32!phoneSetButtonInfo.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetbuttoninfo
 func PhoneSetButtonInfo(hPhone uint32, dwButtonLampID uint32, lpButtonInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetButtonInfo.Addr(), uintptr(hPhone), uintptr(dwButtonLampID), uintptr(unsafe.Pointer(lpButtonInfo)))
 	return int32(r1)
 }
 
-// phoneSetButtonInfoA calls TAPI32!phoneSetButtonInfoA.
+// PhoneSetButtonInfoA calls TAPI32!phoneSetButtonInfoA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetbuttoninfoa
 func PhoneSetButtonInfoA(hPhone uint32, dwButtonLampID uint32, lpButtonInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetButtonInfoA.Addr(), uintptr(hPhone), uintptr(dwButtonLampID), uintptr(unsafe.Pointer(lpButtonInfo)))
 	return int32(r1)
 }
 
-// phoneSetButtonInfoW calls TAPI32!phoneSetButtonInfoW.
+// PhoneSetButtonInfoW calls TAPI32!phoneSetButtonInfoW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetbuttoninfow
 func PhoneSetButtonInfoW(hPhone uint32, dwButtonLampID uint32, lpButtonInfo unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetButtonInfoW.Addr(), uintptr(hPhone), uintptr(dwButtonLampID), uintptr(unsafe.Pointer(lpButtonInfo)))
 	return int32(r1)
 }
 
-// phoneSetData calls TAPI32!phoneSetData.
+// PhoneSetData calls TAPI32!phoneSetData.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetdata
 func PhoneSetData(hPhone uint32, dwDataID uint32, lpData unsafe.Pointer, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetData.Addr(), uintptr(hPhone), uintptr(dwDataID), uintptr(unsafe.Pointer(lpData)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// phoneSetDisplay calls TAPI32!phoneSetDisplay.
+// PhoneSetDisplay calls TAPI32!phoneSetDisplay.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetdisplay
 func PhoneSetDisplay(hPhone uint32, dwRow uint32, dwColumn uint32, lpsDisplay foundation.PSTR, dwSize uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetDisplay.Addr(), uintptr(hPhone), uintptr(dwRow), uintptr(dwColumn), uintptr(unsafe.Pointer(lpsDisplay)), uintptr(dwSize))
 	return int32(r1)
 }
 
-// phoneSetGain calls TAPI32!phoneSetGain.
+// PhoneSetGain calls TAPI32!phoneSetGain.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetgain
 func PhoneSetGain(hPhone uint32, dwHookSwitchDev uint32, dwGain uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetGain.Addr(), uintptr(hPhone), uintptr(dwHookSwitchDev), uintptr(dwGain))
 	return int32(r1)
 }
 
-// phoneSetHookSwitch calls TAPI32!phoneSetHookSwitch.
+// PhoneSetHookSwitch calls TAPI32!phoneSetHookSwitch.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesethookswitch
 func PhoneSetHookSwitch(hPhone uint32, dwHookSwitchDevs uint32, dwHookSwitchMode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetHookSwitch.Addr(), uintptr(hPhone), uintptr(dwHookSwitchDevs), uintptr(dwHookSwitchMode))
 	return int32(r1)
 }
 
-// phoneSetLamp calls TAPI32!phoneSetLamp.
+// PhoneSetLamp calls TAPI32!phoneSetLamp.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetlamp
 func PhoneSetLamp(hPhone uint32, dwButtonLampID uint32, dwLampMode uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetLamp.Addr(), uintptr(hPhone), uintptr(dwButtonLampID), uintptr(dwLampMode))
 	return int32(r1)
 }
 
-// phoneSetRing calls TAPI32!phoneSetRing.
+// PhoneSetRing calls TAPI32!phoneSetRing.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetring
 func PhoneSetRing(hPhone uint32, dwRingMode uint32, dwVolume uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetRing.Addr(), uintptr(hPhone), uintptr(dwRingMode), uintptr(dwVolume))
 	return int32(r1)
 }
 
-// phoneSetStatusMessages calls TAPI32!phoneSetStatusMessages.
+// PhoneSetStatusMessages calls TAPI32!phoneSetStatusMessages.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetstatusmessages
 func PhoneSetStatusMessages(hPhone uint32, dwPhoneStates uint32, dwButtonModes uint32, dwButtonStates uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetStatusMessages.Addr(), uintptr(hPhone), uintptr(dwPhoneStates), uintptr(dwButtonModes), uintptr(dwButtonStates))
 	return int32(r1)
 }
 
-// phoneSetVolume calls TAPI32!phoneSetVolume.
+// PhoneSetVolume calls TAPI32!phoneSetVolume.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phonesetvolume
 func PhoneSetVolume(hPhone uint32, dwHookSwitchDev uint32, dwVolume uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneSetVolume.Addr(), uintptr(hPhone), uintptr(dwHookSwitchDev), uintptr(dwVolume))
 	return int32(r1)
 }
 
-// phoneShutdown calls TAPI32!phoneShutdown.
+// PhoneShutdown calls TAPI32!phoneShutdown.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-phoneshutdown
 func PhoneShutdown(hPhoneApp uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procPhoneShutdown.Addr(), uintptr(hPhoneApp))
 	return int32(r1)
 }
 
-// tapiGetLocationInfo calls TAPI32!tapiGetLocationInfo.
+// TapiGetLocationInfo calls TAPI32!tapiGetLocationInfo.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-tapigetlocationinfo
 func TapiGetLocationInfo(lpszCountryCode foundation.PSTR, lpszCityCode foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procTapiGetLocationInfo.Addr(), uintptr(unsafe.Pointer(lpszCountryCode)), uintptr(unsafe.Pointer(lpszCityCode)))
 	return int32(r1)
 }
 
-// tapiGetLocationInfoA calls TAPI32!tapiGetLocationInfoA.
+// TapiGetLocationInfoA calls TAPI32!tapiGetLocationInfoA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-tapigetlocationinfoa
 func TapiGetLocationInfoA(lpszCountryCode foundation.PSTR, lpszCityCode foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procTapiGetLocationInfoA.Addr(), uintptr(unsafe.Pointer(lpszCountryCode)), uintptr(unsafe.Pointer(lpszCityCode)))
 	return int32(r1)
 }
 
-// tapiGetLocationInfoW calls TAPI32!tapiGetLocationInfoW.
+// TapiGetLocationInfoW calls TAPI32!tapiGetLocationInfoW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-tapigetlocationinfow
 func TapiGetLocationInfoW(lpszCountryCodeW foundation.PWSTR, lpszCityCodeW foundation.PWSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procTapiGetLocationInfoW.Addr(), uintptr(unsafe.Pointer(lpszCountryCodeW)), uintptr(unsafe.Pointer(lpszCityCodeW)))
 	return int32(r1)
 }
 
-// tapiRequestDrop calls TAPI32!tapiRequestDrop.
+// TapiRequestDrop calls TAPI32!tapiRequestDrop.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-tapirequestdrop
 func TapiRequestDrop(hwnd foundation.HWND, wRequestID foundation.WPARAM) int32 {
 	r1, _, _ := syscall.SyscallN(procTapiRequestDrop.Addr(), uintptr(hwnd), uintptr(wRequestID))
 	return int32(r1)
 }
 
-// tapiRequestMakeCall calls TAPI32!tapiRequestMakeCall.
+// TapiRequestMakeCall calls TAPI32!tapiRequestMakeCall.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-tapirequestmakecall
 func TapiRequestMakeCall(lpszDestAddress foundation.PSTR, lpszAppName foundation.PSTR, lpszCalledParty foundation.PSTR, lpszComment foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procTapiRequestMakeCall.Addr(), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(unsafe.Pointer(lpszAppName)), uintptr(unsafe.Pointer(lpszCalledParty)), uintptr(unsafe.Pointer(lpszComment)))
 	return int32(r1)
 }
 
-// tapiRequestMakeCallA calls TAPI32!tapiRequestMakeCallA.
+// TapiRequestMakeCallA calls TAPI32!tapiRequestMakeCallA.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-tapirequestmakecalla
 func TapiRequestMakeCallA(lpszDestAddress foundation.PSTR, lpszAppName foundation.PSTR, lpszCalledParty foundation.PSTR, lpszComment foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procTapiRequestMakeCallA.Addr(), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(unsafe.Pointer(lpszAppName)), uintptr(unsafe.Pointer(lpszCalledParty)), uintptr(unsafe.Pointer(lpszComment)))
 	return int32(r1)
 }
 
-// tapiRequestMakeCallW calls TAPI32!tapiRequestMakeCallW.
+// TapiRequestMakeCallW calls TAPI32!tapiRequestMakeCallW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-tapirequestmakecallw
-func TapiRequestMakeCallW(lpszDestAddress foundation.PWSTR, lpszAppName foundation.PWSTR, lpszCalledParty foundation.PWSTR, lpszComment foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procTapiRequestMakeCallW.Addr(), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(unsafe.Pointer(lpszAppName)), uintptr(unsafe.Pointer(lpszCalledParty)), uintptr(unsafe.Pointer(lpszComment)))
+func TapiRequestMakeCallW(lpszDestAddress string, lpszAppName string, lpszCalledParty string, lpszComment string) int32 {
+	_lpszDestAddress := win32.UTF16Ptr(lpszDestAddress)
+	_lpszAppName := win32.UTF16Ptr(lpszAppName)
+	_lpszCalledParty := win32.UTF16Ptr(lpszCalledParty)
+	_lpszComment := win32.UTF16Ptr(lpszComment)
+	r1, _, _ := syscall.SyscallN(procTapiRequestMakeCallW.Addr(), uintptr(unsafe.Pointer(_lpszDestAddress)), uintptr(unsafe.Pointer(_lpszAppName)), uintptr(unsafe.Pointer(_lpszCalledParty)), uintptr(unsafe.Pointer(_lpszComment)))
 	return int32(r1)
 }
 
-// tapiRequestMediaCall calls TAPI32!tapiRequestMediaCall.
+// TapiRequestMediaCall calls TAPI32!tapiRequestMediaCall.
 func TapiRequestMediaCall(hwnd foundation.HWND, wRequestID foundation.WPARAM, lpszDeviceClass foundation.PSTR, lpDeviceID foundation.PSTR, dwSize uint32, dwSecure uint32, lpszDestAddress foundation.PSTR, lpszAppName foundation.PSTR, lpszCalledParty foundation.PSTR, lpszComment foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procTapiRequestMediaCall.Addr(), uintptr(hwnd), uintptr(wRequestID), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(dwSize), uintptr(dwSecure), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(unsafe.Pointer(lpszAppName)), uintptr(unsafe.Pointer(lpszCalledParty)), uintptr(unsafe.Pointer(lpszComment)))
 	return int32(r1)
 }
 
-// tapiRequestMediaCallA calls TAPI32!tapiRequestMediaCallA.
+// TapiRequestMediaCallA calls TAPI32!tapiRequestMediaCallA.
 func TapiRequestMediaCallA(hwnd foundation.HWND, wRequestID foundation.WPARAM, lpszDeviceClass foundation.PSTR, lpDeviceID foundation.PSTR, dwSize uint32, dwSecure uint32, lpszDestAddress foundation.PSTR, lpszAppName foundation.PSTR, lpszCalledParty foundation.PSTR, lpszComment foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procTapiRequestMediaCallA.Addr(), uintptr(hwnd), uintptr(wRequestID), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(dwSize), uintptr(dwSecure), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(unsafe.Pointer(lpszAppName)), uintptr(unsafe.Pointer(lpszCalledParty)), uintptr(unsafe.Pointer(lpszComment)))
 	return int32(r1)
 }
 
-// tapiRequestMediaCallW calls TAPI32!tapiRequestMediaCallW.
-func TapiRequestMediaCallW(hwnd foundation.HWND, wRequestID foundation.WPARAM, lpszDeviceClass foundation.PWSTR, lpDeviceID foundation.PWSTR, dwSize uint32, dwSecure uint32, lpszDestAddress foundation.PWSTR, lpszAppName foundation.PWSTR, lpszCalledParty foundation.PWSTR, lpszComment foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procTapiRequestMediaCallW.Addr(), uintptr(hwnd), uintptr(wRequestID), uintptr(unsafe.Pointer(lpszDeviceClass)), uintptr(unsafe.Pointer(lpDeviceID)), uintptr(dwSize), uintptr(dwSecure), uintptr(unsafe.Pointer(lpszDestAddress)), uintptr(unsafe.Pointer(lpszAppName)), uintptr(unsafe.Pointer(lpszCalledParty)), uintptr(unsafe.Pointer(lpszComment)))
+// TapiRequestMediaCallW calls TAPI32!tapiRequestMediaCallW.
+func TapiRequestMediaCallW(hwnd foundation.HWND, wRequestID foundation.WPARAM, lpszDeviceClass string, lpDeviceID string, dwSize uint32, dwSecure uint32, lpszDestAddress string, lpszAppName string, lpszCalledParty string, lpszComment string) int32 {
+	_lpszDeviceClass := win32.UTF16Ptr(lpszDeviceClass)
+	_lpDeviceID := win32.UTF16Ptr(lpDeviceID)
+	_lpszDestAddress := win32.UTF16Ptr(lpszDestAddress)
+	_lpszAppName := win32.UTF16Ptr(lpszAppName)
+	_lpszCalledParty := win32.UTF16Ptr(lpszCalledParty)
+	_lpszComment := win32.UTF16Ptr(lpszComment)
+	r1, _, _ := syscall.SyscallN(procTapiRequestMediaCallW.Addr(), uintptr(hwnd), uintptr(wRequestID), uintptr(unsafe.Pointer(_lpszDeviceClass)), uintptr(unsafe.Pointer(_lpDeviceID)), uintptr(dwSize), uintptr(dwSecure), uintptr(unsafe.Pointer(_lpszDestAddress)), uintptr(unsafe.Pointer(_lpszAppName)), uintptr(unsafe.Pointer(_lpszCalledParty)), uintptr(unsafe.Pointer(_lpszComment)))
 	return int32(r1)
 }

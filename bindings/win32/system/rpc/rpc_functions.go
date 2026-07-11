@@ -25,64 +25,64 @@ var (
 	procI_RpcNsSendReceive                             = modRPCNS4.NewProc("I_RpcNsSendReceive")
 	procI_RpcReBindBuffer                              = modRPCNS4.NewProc("I_RpcReBindBuffer")
 	procRpcIfIdVectorFree                              = modRPCNS4.NewProc("RpcIfIdVectorFree")
+	procRpcNsBindingExport                             = modRPCNS4.NewProc("RpcNsBindingExportW")
 	procRpcNsBindingExportA                            = modRPCNS4.NewProc("RpcNsBindingExportA")
+	procRpcNsBindingExportPnP                          = modRPCNS4.NewProc("RpcNsBindingExportPnPW")
 	procRpcNsBindingExportPnPA                         = modRPCNS4.NewProc("RpcNsBindingExportPnPA")
-	procRpcNsBindingExportPnPW                         = modRPCNS4.NewProc("RpcNsBindingExportPnPW")
-	procRpcNsBindingExportW                            = modRPCNS4.NewProc("RpcNsBindingExportW")
+	procRpcNsBindingImportBegin                        = modRPCNS4.NewProc("RpcNsBindingImportBeginW")
 	procRpcNsBindingImportBeginA                       = modRPCNS4.NewProc("RpcNsBindingImportBeginA")
-	procRpcNsBindingImportBeginW                       = modRPCNS4.NewProc("RpcNsBindingImportBeginW")
 	procRpcNsBindingImportDone                         = modRPCNS4.NewProc("RpcNsBindingImportDone")
 	procRpcNsBindingImportNext                         = modRPCNS4.NewProc("RpcNsBindingImportNext")
+	procRpcNsBindingLookupBegin                        = modRPCNS4.NewProc("RpcNsBindingLookupBeginW")
 	procRpcNsBindingLookupBeginA                       = modRPCNS4.NewProc("RpcNsBindingLookupBeginA")
-	procRpcNsBindingLookupBeginW                       = modRPCNS4.NewProc("RpcNsBindingLookupBeginW")
 	procRpcNsBindingLookupDone                         = modRPCNS4.NewProc("RpcNsBindingLookupDone")
 	procRpcNsBindingLookupNext                         = modRPCNS4.NewProc("RpcNsBindingLookupNext")
 	procRpcNsBindingSelect                             = modRPCNS4.NewProc("RpcNsBindingSelect")
+	procRpcNsBindingUnexport                           = modRPCNS4.NewProc("RpcNsBindingUnexportW")
 	procRpcNsBindingUnexportA                          = modRPCNS4.NewProc("RpcNsBindingUnexportA")
+	procRpcNsBindingUnexportPnP                        = modRPCNS4.NewProc("RpcNsBindingUnexportPnPW")
 	procRpcNsBindingUnexportPnPA                       = modRPCNS4.NewProc("RpcNsBindingUnexportPnPA")
-	procRpcNsBindingUnexportPnPW                       = modRPCNS4.NewProc("RpcNsBindingUnexportPnPW")
-	procRpcNsBindingUnexportW                          = modRPCNS4.NewProc("RpcNsBindingUnexportW")
+	procRpcNsEntryExpandName                           = modRPCNS4.NewProc("RpcNsEntryExpandNameW")
 	procRpcNsEntryExpandNameA                          = modRPCNS4.NewProc("RpcNsEntryExpandNameA")
-	procRpcNsEntryExpandNameW                          = modRPCNS4.NewProc("RpcNsEntryExpandNameW")
+	procRpcNsEntryObjectInqBegin                       = modRPCNS4.NewProc("RpcNsEntryObjectInqBeginW")
 	procRpcNsEntryObjectInqBeginA                      = modRPCNS4.NewProc("RpcNsEntryObjectInqBeginA")
-	procRpcNsEntryObjectInqBeginW                      = modRPCNS4.NewProc("RpcNsEntryObjectInqBeginW")
 	procRpcNsEntryObjectInqDone                        = modRPCNS4.NewProc("RpcNsEntryObjectInqDone")
 	procRpcNsEntryObjectInqNext                        = modRPCNS4.NewProc("RpcNsEntryObjectInqNext")
+	procRpcNsGroupDelete                               = modRPCNS4.NewProc("RpcNsGroupDeleteW")
 	procRpcNsGroupDeleteA                              = modRPCNS4.NewProc("RpcNsGroupDeleteA")
-	procRpcNsGroupDeleteW                              = modRPCNS4.NewProc("RpcNsGroupDeleteW")
+	procRpcNsGroupMbrAdd                               = modRPCNS4.NewProc("RpcNsGroupMbrAddW")
 	procRpcNsGroupMbrAddA                              = modRPCNS4.NewProc("RpcNsGroupMbrAddA")
-	procRpcNsGroupMbrAddW                              = modRPCNS4.NewProc("RpcNsGroupMbrAddW")
+	procRpcNsGroupMbrInqBegin                          = modRPCNS4.NewProc("RpcNsGroupMbrInqBeginW")
 	procRpcNsGroupMbrInqBeginA                         = modRPCNS4.NewProc("RpcNsGroupMbrInqBeginA")
-	procRpcNsGroupMbrInqBeginW                         = modRPCNS4.NewProc("RpcNsGroupMbrInqBeginW")
 	procRpcNsGroupMbrInqDone                           = modRPCNS4.NewProc("RpcNsGroupMbrInqDone")
+	procRpcNsGroupMbrInqNext                           = modRPCNS4.NewProc("RpcNsGroupMbrInqNextW")
 	procRpcNsGroupMbrInqNextA                          = modRPCNS4.NewProc("RpcNsGroupMbrInqNextA")
-	procRpcNsGroupMbrInqNextW                          = modRPCNS4.NewProc("RpcNsGroupMbrInqNextW")
+	procRpcNsGroupMbrRemove                            = modRPCNS4.NewProc("RpcNsGroupMbrRemoveW")
 	procRpcNsGroupMbrRemoveA                           = modRPCNS4.NewProc("RpcNsGroupMbrRemoveA")
-	procRpcNsGroupMbrRemoveW                           = modRPCNS4.NewProc("RpcNsGroupMbrRemoveW")
+	procRpcNsMgmtBindingUnexport                       = modRPCNS4.NewProc("RpcNsMgmtBindingUnexportW")
 	procRpcNsMgmtBindingUnexportA                      = modRPCNS4.NewProc("RpcNsMgmtBindingUnexportA")
-	procRpcNsMgmtBindingUnexportW                      = modRPCNS4.NewProc("RpcNsMgmtBindingUnexportW")
+	procRpcNsMgmtEntryCreate                           = modRPCNS4.NewProc("RpcNsMgmtEntryCreateW")
 	procRpcNsMgmtEntryCreateA                          = modRPCNS4.NewProc("RpcNsMgmtEntryCreateA")
-	procRpcNsMgmtEntryCreateW                          = modRPCNS4.NewProc("RpcNsMgmtEntryCreateW")
+	procRpcNsMgmtEntryDelete                           = modRPCNS4.NewProc("RpcNsMgmtEntryDeleteW")
 	procRpcNsMgmtEntryDeleteA                          = modRPCNS4.NewProc("RpcNsMgmtEntryDeleteA")
-	procRpcNsMgmtEntryDeleteW                          = modRPCNS4.NewProc("RpcNsMgmtEntryDeleteW")
+	procRpcNsMgmtEntryInqIfIds                         = modRPCNS4.NewProc("RpcNsMgmtEntryInqIfIdsW")
 	procRpcNsMgmtEntryInqIfIdsA                        = modRPCNS4.NewProc("RpcNsMgmtEntryInqIfIdsA")
-	procRpcNsMgmtEntryInqIfIdsW                        = modRPCNS4.NewProc("RpcNsMgmtEntryInqIfIdsW")
 	procRpcNsMgmtHandleSetExpAge                       = modRPCNS4.NewProc("RpcNsMgmtHandleSetExpAge")
 	procRpcNsMgmtInqExpAge                             = modRPCNS4.NewProc("RpcNsMgmtInqExpAge")
 	procRpcNsMgmtSetExpAge                             = modRPCNS4.NewProc("RpcNsMgmtSetExpAge")
+	procRpcNsProfileDelete                             = modRPCNS4.NewProc("RpcNsProfileDeleteW")
 	procRpcNsProfileDeleteA                            = modRPCNS4.NewProc("RpcNsProfileDeleteA")
-	procRpcNsProfileDeleteW                            = modRPCNS4.NewProc("RpcNsProfileDeleteW")
+	procRpcNsProfileEltAdd                             = modRPCNS4.NewProc("RpcNsProfileEltAddW")
 	procRpcNsProfileEltAddA                            = modRPCNS4.NewProc("RpcNsProfileEltAddA")
-	procRpcNsProfileEltAddW                            = modRPCNS4.NewProc("RpcNsProfileEltAddW")
+	procRpcNsProfileEltInqBegin                        = modRPCNS4.NewProc("RpcNsProfileEltInqBeginW")
 	procRpcNsProfileEltInqBeginA                       = modRPCNS4.NewProc("RpcNsProfileEltInqBeginA")
-	procRpcNsProfileEltInqBeginW                       = modRPCNS4.NewProc("RpcNsProfileEltInqBeginW")
 	procRpcNsProfileEltInqDone                         = modRPCNS4.NewProc("RpcNsProfileEltInqDone")
+	procRpcNsProfileEltInqNext                         = modRPCNS4.NewProc("RpcNsProfileEltInqNextW")
 	procRpcNsProfileEltInqNextA                        = modRPCNS4.NewProc("RpcNsProfileEltInqNextA")
-	procRpcNsProfileEltInqNextW                        = modRPCNS4.NewProc("RpcNsProfileEltInqNextW")
+	procRpcNsProfileEltRemove                          = modRPCNS4.NewProc("RpcNsProfileEltRemoveW")
 	procRpcNsProfileEltRemoveA                         = modRPCNS4.NewProc("RpcNsProfileEltRemoveA")
-	procRpcNsProfileEltRemoveW                         = modRPCNS4.NewProc("RpcNsProfileEltRemoveW")
+	procDceErrorInqText                                = modRPCRT4.NewProc("DceErrorInqTextW")
 	procDceErrorInqTextA                               = modRPCRT4.NewProc("DceErrorInqTextA")
-	procDceErrorInqTextW                               = modRPCRT4.NewProc("DceErrorInqTextW")
 	procIUnknown_AddRef_Proxy                          = modRPCRT4.NewProc("IUnknown_AddRef_Proxy")
 	procIUnknown_QueryInterface_Proxy                  = modRPCRT4.NewProc("IUnknown_QueryInterface_Proxy")
 	procIUnknown_Release_Proxy                         = modRPCRT4.NewProc("IUnknown_Release_Proxy")
@@ -93,8 +93,8 @@ var (
 	procI_RpcBindingCreateNP                           = modRPCRT4.NewProc("I_RpcBindingCreateNP")
 	procI_RpcBindingHandleToAsyncHandle                = modRPCRT4.NewProc("I_RpcBindingHandleToAsyncHandle")
 	procI_RpcBindingInqClientTokenAttributes           = modRPCRT4.NewProc("I_RpcBindingInqClientTokenAttributes")
+	procI_RpcBindingInqDynamicEndpoint                 = modRPCRT4.NewProc("I_RpcBindingInqDynamicEndpointW")
 	procI_RpcBindingInqDynamicEndpointA                = modRPCRT4.NewProc("I_RpcBindingInqDynamicEndpointA")
-	procI_RpcBindingInqDynamicEndpointW                = modRPCRT4.NewProc("I_RpcBindingInqDynamicEndpointW")
 	procI_RpcBindingInqLocalClientPID                  = modRPCRT4.NewProc("I_RpcBindingInqLocalClientPID")
 	procI_RpcBindingInqMarshalledTargetInfo            = modRPCRT4.NewProc("I_RpcBindingInqMarshalledTargetInfo")
 	procI_RpcBindingInqSecurityContext                 = modRPCRT4.NewProc("I_RpcBindingInqSecurityContext")
@@ -120,8 +120,8 @@ var (
 	procI_RpcMapWin32Status                            = modRPCRT4.NewProc("I_RpcMapWin32Status")
 	procI_RpcMgmtEnableDedicatedThreadPool             = modRPCRT4.NewProc("I_RpcMgmtEnableDedicatedThreadPool")
 	procI_RpcNegotiateTransferSyntax                   = modRPCRT4.NewProc("I_RpcNegotiateTransferSyntax")
+	procI_RpcNsBindingSetEntryName                     = modRPCRT4.NewProc("I_RpcNsBindingSetEntryNameW")
 	procI_RpcNsBindingSetEntryNameA                    = modRPCRT4.NewProc("I_RpcNsBindingSetEntryNameA")
-	procI_RpcNsBindingSetEntryNameW                    = modRPCRT4.NewProc("I_RpcNsBindingSetEntryNameW")
 	procI_RpcNsInterfaceExported                       = modRPCRT4.NewProc("I_RpcNsInterfaceExported")
 	procI_RpcNsInterfaceUnexported                     = modRPCRT4.NewProc("I_RpcNsInterfaceUnexported")
 	procI_RpcOpenClientProcess                         = modRPCRT4.NewProc("I_RpcOpenClientProcess")
@@ -144,10 +144,10 @@ var (
 	procI_RpcServerStartService                        = modRPCRT4.NewProc("I_RpcServerStartService")
 	procI_RpcServerSubscribeForDisconnectNotification  = modRPCRT4.NewProc("I_RpcServerSubscribeForDisconnectNotification")
 	procI_RpcServerSubscribeForDisconnectNotification2 = modRPCRT4.NewProc("I_RpcServerSubscribeForDisconnectNotification2")
+	procI_RpcServerUseProtseq2                         = modRPCRT4.NewProc("I_RpcServerUseProtseq2W")
 	procI_RpcServerUseProtseq2A                        = modRPCRT4.NewProc("I_RpcServerUseProtseq2A")
-	procI_RpcServerUseProtseq2W                        = modRPCRT4.NewProc("I_RpcServerUseProtseq2W")
+	procI_RpcServerUseProtseqEp2                       = modRPCRT4.NewProc("I_RpcServerUseProtseqEp2W")
 	procI_RpcServerUseProtseqEp2A                      = modRPCRT4.NewProc("I_RpcServerUseProtseqEp2A")
-	procI_RpcServerUseProtseqEp2W                      = modRPCRT4.NewProc("I_RpcServerUseProtseqEp2W")
 	procI_RpcSessionStrictContextHandle                = modRPCRT4.NewProc("I_RpcSessionStrictContextHandle")
 	procI_RpcSsDontSerializeContext                    = modRPCRT4.NewProc("I_RpcSsDontSerializeContext")
 	procI_RpcSystemHandleTypeSpecificWork              = modRPCRT4.NewProc("I_RpcSystemHandleTypeSpecificWork")
@@ -344,42 +344,42 @@ var (
 	procRpcAsyncRegisterInfo                           = modRPCRT4.NewProc("RpcAsyncRegisterInfo")
 	procRpcBindingBind                                 = modRPCRT4.NewProc("RpcBindingBind")
 	procRpcBindingCopy                                 = modRPCRT4.NewProc("RpcBindingCopy")
+	procRpcBindingCreate                               = modRPCRT4.NewProc("RpcBindingCreateW")
 	procRpcBindingCreateA                              = modRPCRT4.NewProc("RpcBindingCreateA")
-	procRpcBindingCreateW                              = modRPCRT4.NewProc("RpcBindingCreateW")
 	procRpcBindingFree                                 = modRPCRT4.NewProc("RpcBindingFree")
+	procRpcBindingFromStringBinding                    = modRPCRT4.NewProc("RpcBindingFromStringBindingW")
 	procRpcBindingFromStringBindingA                   = modRPCRT4.NewProc("RpcBindingFromStringBindingA")
-	procRpcBindingFromStringBindingW                   = modRPCRT4.NewProc("RpcBindingFromStringBindingW")
+	procRpcBindingInqAuthClient                        = modRPCRT4.NewProc("RpcBindingInqAuthClientW")
 	procRpcBindingInqAuthClientA                       = modRPCRT4.NewProc("RpcBindingInqAuthClientA")
+	procRpcBindingInqAuthClientEx                      = modRPCRT4.NewProc("RpcBindingInqAuthClientExW")
 	procRpcBindingInqAuthClientExA                     = modRPCRT4.NewProc("RpcBindingInqAuthClientExA")
-	procRpcBindingInqAuthClientExW                     = modRPCRT4.NewProc("RpcBindingInqAuthClientExW")
-	procRpcBindingInqAuthClientW                       = modRPCRT4.NewProc("RpcBindingInqAuthClientW")
+	procRpcBindingInqAuthInfo                          = modRPCRT4.NewProc("RpcBindingInqAuthInfoW")
 	procRpcBindingInqAuthInfoA                         = modRPCRT4.NewProc("RpcBindingInqAuthInfoA")
+	procRpcBindingInqAuthInfoEx                        = modRPCRT4.NewProc("RpcBindingInqAuthInfoExW")
 	procRpcBindingInqAuthInfoExA                       = modRPCRT4.NewProc("RpcBindingInqAuthInfoExA")
-	procRpcBindingInqAuthInfoExW                       = modRPCRT4.NewProc("RpcBindingInqAuthInfoExW")
-	procRpcBindingInqAuthInfoW                         = modRPCRT4.NewProc("RpcBindingInqAuthInfoW")
 	procRpcBindingInqMaxCalls                          = modRPCRT4.NewProc("RpcBindingInqMaxCalls")
 	procRpcBindingInqObject                            = modRPCRT4.NewProc("RpcBindingInqObject")
 	procRpcBindingInqOption                            = modRPCRT4.NewProc("RpcBindingInqOption")
 	procRpcBindingReset                                = modRPCRT4.NewProc("RpcBindingReset")
 	procRpcBindingServerFromClient                     = modRPCRT4.NewProc("RpcBindingServerFromClient")
+	procRpcBindingSetAuthInfo                          = modRPCRT4.NewProc("RpcBindingSetAuthInfoW")
 	procRpcBindingSetAuthInfoA                         = modRPCRT4.NewProc("RpcBindingSetAuthInfoA")
+	procRpcBindingSetAuthInfoEx                        = modRPCRT4.NewProc("RpcBindingSetAuthInfoExW")
 	procRpcBindingSetAuthInfoExA                       = modRPCRT4.NewProc("RpcBindingSetAuthInfoExA")
-	procRpcBindingSetAuthInfoExW                       = modRPCRT4.NewProc("RpcBindingSetAuthInfoExW")
-	procRpcBindingSetAuthInfoW                         = modRPCRT4.NewProc("RpcBindingSetAuthInfoW")
 	procRpcBindingSetObject                            = modRPCRT4.NewProc("RpcBindingSetObject")
 	procRpcBindingSetOption                            = modRPCRT4.NewProc("RpcBindingSetOption")
+	procRpcBindingToStringBinding                      = modRPCRT4.NewProc("RpcBindingToStringBindingW")
 	procRpcBindingToStringBindingA                     = modRPCRT4.NewProc("RpcBindingToStringBindingA")
-	procRpcBindingToStringBindingW                     = modRPCRT4.NewProc("RpcBindingToStringBindingW")
 	procRpcBindingUnbind                               = modRPCRT4.NewProc("RpcBindingUnbind")
 	procRpcBindingVectorFree                           = modRPCRT4.NewProc("RpcBindingVectorFree")
 	procRpcCancelThread                                = modRPCRT4.NewProc("RpcCancelThread")
 	procRpcCancelThreadEx                              = modRPCRT4.NewProc("RpcCancelThreadEx")
+	procRpcCertGeneratePrincipalName                   = modRPCRT4.NewProc("RpcCertGeneratePrincipalNameW")
 	procRpcCertGeneratePrincipalNameA                  = modRPCRT4.NewProc("RpcCertGeneratePrincipalNameA")
-	procRpcCertGeneratePrincipalNameW                  = modRPCRT4.NewProc("RpcCertGeneratePrincipalNameW")
+	procRpcEpRegister                                  = modRPCRT4.NewProc("RpcEpRegisterW")
 	procRpcEpRegisterA                                 = modRPCRT4.NewProc("RpcEpRegisterA")
+	procRpcEpRegisterNoReplace                         = modRPCRT4.NewProc("RpcEpRegisterNoReplaceW")
 	procRpcEpRegisterNoReplaceA                        = modRPCRT4.NewProc("RpcEpRegisterNoReplaceA")
-	procRpcEpRegisterNoReplaceW                        = modRPCRT4.NewProc("RpcEpRegisterNoReplaceW")
-	procRpcEpRegisterW                                 = modRPCRT4.NewProc("RpcEpRegisterW")
 	procRpcEpResolveBinding                            = modRPCRT4.NewProc("RpcEpResolveBinding")
 	procRpcEpUnregister                                = modRPCRT4.NewProc("RpcEpUnregister")
 	procRpcErrorAddRecord                              = modRPCRT4.NewProc("RpcErrorAddRecord")
@@ -400,14 +400,14 @@ var (
 	procRpcMgmtEnableIdleCleanup                       = modRPCRT4.NewProc("RpcMgmtEnableIdleCleanup")
 	procRpcMgmtEpEltInqBegin                           = modRPCRT4.NewProc("RpcMgmtEpEltInqBegin")
 	procRpcMgmtEpEltInqDone                            = modRPCRT4.NewProc("RpcMgmtEpEltInqDone")
+	procRpcMgmtEpEltInqNext                            = modRPCRT4.NewProc("RpcMgmtEpEltInqNextW")
 	procRpcMgmtEpEltInqNextA                           = modRPCRT4.NewProc("RpcMgmtEpEltInqNextA")
-	procRpcMgmtEpEltInqNextW                           = modRPCRT4.NewProc("RpcMgmtEpEltInqNextW")
 	procRpcMgmtEpUnregister                            = modRPCRT4.NewProc("RpcMgmtEpUnregister")
 	procRpcMgmtInqComTimeout                           = modRPCRT4.NewProc("RpcMgmtInqComTimeout")
 	procRpcMgmtInqDefaultProtectLevel                  = modRPCRT4.NewProc("RpcMgmtInqDefaultProtectLevel")
 	procRpcMgmtInqIfIds                                = modRPCRT4.NewProc("RpcMgmtInqIfIds")
+	procRpcMgmtInqServerPrincName                      = modRPCRT4.NewProc("RpcMgmtInqServerPrincNameW")
 	procRpcMgmtInqServerPrincNameA                     = modRPCRT4.NewProc("RpcMgmtInqServerPrincNameA")
-	procRpcMgmtInqServerPrincNameW                     = modRPCRT4.NewProc("RpcMgmtInqServerPrincNameW")
 	procRpcMgmtInqStats                                = modRPCRT4.NewProc("RpcMgmtInqStats")
 	procRpcMgmtIsServerListening                       = modRPCRT4.NewProc("RpcMgmtIsServerListening")
 	procRpcMgmtSetAuthorizationFn                      = modRPCRT4.NewProc("RpcMgmtSetAuthorizationFn")
@@ -417,17 +417,17 @@ var (
 	procRpcMgmtStatsVectorFree                         = modRPCRT4.NewProc("RpcMgmtStatsVectorFree")
 	procRpcMgmtStopServerListening                     = modRPCRT4.NewProc("RpcMgmtStopServerListening")
 	procRpcMgmtWaitServerListen                        = modRPCRT4.NewProc("RpcMgmtWaitServerListen")
+	procRpcNetworkInqProtseqs                          = modRPCRT4.NewProc("RpcNetworkInqProtseqsW")
 	procRpcNetworkInqProtseqsA                         = modRPCRT4.NewProc("RpcNetworkInqProtseqsA")
-	procRpcNetworkInqProtseqsW                         = modRPCRT4.NewProc("RpcNetworkInqProtseqsW")
+	procRpcNetworkIsProtseqValid                       = modRPCRT4.NewProc("RpcNetworkIsProtseqValidW")
 	procRpcNetworkIsProtseqValidA                      = modRPCRT4.NewProc("RpcNetworkIsProtseqValidA")
-	procRpcNetworkIsProtseqValidW                      = modRPCRT4.NewProc("RpcNetworkIsProtseqValidW")
+	procRpcNsBindingInqEntryName                       = modRPCRT4.NewProc("RpcNsBindingInqEntryNameW")
 	procRpcNsBindingInqEntryNameA                      = modRPCRT4.NewProc("RpcNsBindingInqEntryNameA")
-	procRpcNsBindingInqEntryNameW                      = modRPCRT4.NewProc("RpcNsBindingInqEntryNameW")
 	procRpcObjectInqType                               = modRPCRT4.NewProc("RpcObjectInqType")
 	procRpcObjectSetInqFn                              = modRPCRT4.NewProc("RpcObjectSetInqFn")
 	procRpcObjectSetType                               = modRPCRT4.NewProc("RpcObjectSetType")
+	procRpcProtseqVectorFree                           = modRPCRT4.NewProc("RpcProtseqVectorFreeW")
 	procRpcProtseqVectorFreeA                          = modRPCRT4.NewProc("RpcProtseqVectorFreeA")
-	procRpcProtseqVectorFreeW                          = modRPCRT4.NewProc("RpcProtseqVectorFreeW")
 	procRpcRaiseException                              = modRPCRT4.NewProc("RpcRaiseException")
 	procRpcRevertContainerImpersonation                = modRPCRT4.NewProc("RpcRevertContainerImpersonation")
 	procRpcRevertToSelf                                = modRPCRT4.NewProc("RpcRevertToSelf")
@@ -436,20 +436,20 @@ var (
 	procRpcServerInqBindingHandle                      = modRPCRT4.NewProc("RpcServerInqBindingHandle")
 	procRpcServerInqBindings                           = modRPCRT4.NewProc("RpcServerInqBindings")
 	procRpcServerInqBindingsEx                         = modRPCRT4.NewProc("RpcServerInqBindingsEx")
+	procRpcServerInqCallAttributes                     = modRPCRT4.NewProc("RpcServerInqCallAttributesW")
 	procRpcServerInqCallAttributesA                    = modRPCRT4.NewProc("RpcServerInqCallAttributesA")
-	procRpcServerInqCallAttributesW                    = modRPCRT4.NewProc("RpcServerInqCallAttributesW")
+	procRpcServerInqDefaultPrincName                   = modRPCRT4.NewProc("RpcServerInqDefaultPrincNameW")
 	procRpcServerInqDefaultPrincNameA                  = modRPCRT4.NewProc("RpcServerInqDefaultPrincNameA")
-	procRpcServerInqDefaultPrincNameW                  = modRPCRT4.NewProc("RpcServerInqDefaultPrincNameW")
 	procRpcServerInqIf                                 = modRPCRT4.NewProc("RpcServerInqIf")
 	procRpcServerInterfaceGroupActivate                = modRPCRT4.NewProc("RpcServerInterfaceGroupActivate")
 	procRpcServerInterfaceGroupClose                   = modRPCRT4.NewProc("RpcServerInterfaceGroupClose")
+	procRpcServerInterfaceGroupCreate                  = modRPCRT4.NewProc("RpcServerInterfaceGroupCreateW")
 	procRpcServerInterfaceGroupCreateA                 = modRPCRT4.NewProc("RpcServerInterfaceGroupCreateA")
-	procRpcServerInterfaceGroupCreateW                 = modRPCRT4.NewProc("RpcServerInterfaceGroupCreateW")
 	procRpcServerInterfaceGroupDeactivate              = modRPCRT4.NewProc("RpcServerInterfaceGroupDeactivate")
 	procRpcServerInterfaceGroupInqBindings             = modRPCRT4.NewProc("RpcServerInterfaceGroupInqBindings")
 	procRpcServerListen                                = modRPCRT4.NewProc("RpcServerListen")
+	procRpcServerRegisterAuthInfo                      = modRPCRT4.NewProc("RpcServerRegisterAuthInfoW")
 	procRpcServerRegisterAuthInfoA                     = modRPCRT4.NewProc("RpcServerRegisterAuthInfoA")
-	procRpcServerRegisterAuthInfoW                     = modRPCRT4.NewProc("RpcServerRegisterAuthInfoW")
 	procRpcServerRegisterIf                            = modRPCRT4.NewProc("RpcServerRegisterIf")
 	procRpcServerRegisterIf2                           = modRPCRT4.NewProc("RpcServerRegisterIf2")
 	procRpcServerRegisterIf3                           = modRPCRT4.NewProc("RpcServerRegisterIf3")
@@ -463,18 +463,18 @@ var (
 	procRpcServerUseAllProtseqsEx                      = modRPCRT4.NewProc("RpcServerUseAllProtseqsEx")
 	procRpcServerUseAllProtseqsIf                      = modRPCRT4.NewProc("RpcServerUseAllProtseqsIf")
 	procRpcServerUseAllProtseqsIfEx                    = modRPCRT4.NewProc("RpcServerUseAllProtseqsIfEx")
+	procRpcServerUseProtseq                            = modRPCRT4.NewProc("RpcServerUseProtseqW")
 	procRpcServerUseProtseqA                           = modRPCRT4.NewProc("RpcServerUseProtseqA")
+	procRpcServerUseProtseqEp                          = modRPCRT4.NewProc("RpcServerUseProtseqEpW")
 	procRpcServerUseProtseqEpA                         = modRPCRT4.NewProc("RpcServerUseProtseqEpA")
+	procRpcServerUseProtseqEpEx                        = modRPCRT4.NewProc("RpcServerUseProtseqEpExW")
 	procRpcServerUseProtseqEpExA                       = modRPCRT4.NewProc("RpcServerUseProtseqEpExA")
-	procRpcServerUseProtseqEpExW                       = modRPCRT4.NewProc("RpcServerUseProtseqEpExW")
-	procRpcServerUseProtseqEpW                         = modRPCRT4.NewProc("RpcServerUseProtseqEpW")
+	procRpcServerUseProtseqEx                          = modRPCRT4.NewProc("RpcServerUseProtseqExW")
 	procRpcServerUseProtseqExA                         = modRPCRT4.NewProc("RpcServerUseProtseqExA")
-	procRpcServerUseProtseqExW                         = modRPCRT4.NewProc("RpcServerUseProtseqExW")
+	procRpcServerUseProtseqIf                          = modRPCRT4.NewProc("RpcServerUseProtseqIfW")
 	procRpcServerUseProtseqIfA                         = modRPCRT4.NewProc("RpcServerUseProtseqIfA")
+	procRpcServerUseProtseqIfEx                        = modRPCRT4.NewProc("RpcServerUseProtseqIfExW")
 	procRpcServerUseProtseqIfExA                       = modRPCRT4.NewProc("RpcServerUseProtseqIfExA")
-	procRpcServerUseProtseqIfExW                       = modRPCRT4.NewProc("RpcServerUseProtseqIfExW")
-	procRpcServerUseProtseqIfW                         = modRPCRT4.NewProc("RpcServerUseProtseqIfW")
-	procRpcServerUseProtseqW                           = modRPCRT4.NewProc("RpcServerUseProtseqW")
 	procRpcServerYield                                 = modRPCRT4.NewProc("RpcServerYield")
 	procRpcSmAllocate                                  = modRPCRT4.NewProc("RpcSmAllocate")
 	procRpcSmClientFree                                = modRPCRT4.NewProc("RpcSmClientFree")
@@ -499,12 +499,12 @@ var (
 	procRpcSsSetClientAllocFree                        = modRPCRT4.NewProc("RpcSsSetClientAllocFree")
 	procRpcSsSetThreadHandle                           = modRPCRT4.NewProc("RpcSsSetThreadHandle")
 	procRpcSsSwapClientAllocFree                       = modRPCRT4.NewProc("RpcSsSwapClientAllocFree")
+	procRpcStringBindingCompose                        = modRPCRT4.NewProc("RpcStringBindingComposeW")
 	procRpcStringBindingComposeA                       = modRPCRT4.NewProc("RpcStringBindingComposeA")
-	procRpcStringBindingComposeW                       = modRPCRT4.NewProc("RpcStringBindingComposeW")
+	procRpcStringBindingParse                          = modRPCRT4.NewProc("RpcStringBindingParseW")
 	procRpcStringBindingParseA                         = modRPCRT4.NewProc("RpcStringBindingParseA")
-	procRpcStringBindingParseW                         = modRPCRT4.NewProc("RpcStringBindingParseW")
+	procRpcStringFree                                  = modRPCRT4.NewProc("RpcStringFreeW")
 	procRpcStringFreeA                                 = modRPCRT4.NewProc("RpcStringFreeA")
-	procRpcStringFreeW                                 = modRPCRT4.NewProc("RpcStringFreeW")
 	procRpcTestCancel                                  = modRPCRT4.NewProc("RpcTestCancel")
 	procRpcUserFree                                    = modRPCRT4.NewProc("RpcUserFree")
 	procUuidCompare                                    = modRPCRT4.NewProc("UuidCompare")
@@ -512,27 +512,27 @@ var (
 	procUuidCreateNil                                  = modRPCRT4.NewProc("UuidCreateNil")
 	procUuidCreateSequential                           = modRPCRT4.NewProc("UuidCreateSequential")
 	procUuidEqual                                      = modRPCRT4.NewProc("UuidEqual")
+	procUuidFromString                                 = modRPCRT4.NewProc("UuidFromStringW")
 	procUuidFromStringA                                = modRPCRT4.NewProc("UuidFromStringA")
-	procUuidFromStringW                                = modRPCRT4.NewProc("UuidFromStringW")
 	procUuidHash                                       = modRPCRT4.NewProc("UuidHash")
 	procUuidIsNil                                      = modRPCRT4.NewProc("UuidIsNil")
+	procUuidToString                                   = modRPCRT4.NewProc("UuidToStringW")
 	procUuidToStringA                                  = modRPCRT4.NewProc("UuidToStringA")
-	procUuidToStringW                                  = modRPCRT4.NewProc("UuidToStringW")
 )
+
+// DceErrorInqText calls RPCRT4!DceErrorInqTextW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-dceerrorinqtextw
+// Minimum OS: windows5.0.
+func DceErrorInqText(RpcStatus RPC_STATUS, ErrorText foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procDceErrorInqText.Addr(), uintptr(RpcStatus), uintptr(unsafe.Pointer(ErrorText)))
+	return RPC_STATUS(r1)
+}
 
 // DceErrorInqTextA calls RPCRT4!DceErrorInqTextA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-dceerrorinqtexta
 // Minimum OS: windows5.0.
 func DceErrorInqTextA(RpcStatus RPC_STATUS, ErrorText foundation.PSTR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procDceErrorInqTextA.Addr(), uintptr(RpcStatus), uintptr(unsafe.Pointer(ErrorText)))
-	return RPC_STATUS(r1)
-}
-
-// DceErrorInqTextW calls RPCRT4!DceErrorInqTextW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-dceerrorinqtextw
-// Minimum OS: windows5.0.
-func DceErrorInqTextW(RpcStatus RPC_STATUS, ErrorText foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procDceErrorInqTextW.Addr(), uintptr(RpcStatus), uintptr(unsafe.Pointer(ErrorText)))
 	return RPC_STATUS(r1)
 }
 
@@ -547,9 +547,9 @@ func IUnknown_AddRef_Proxy(This *systemcom.IUnknown) uint32 {
 // IUnknown_QueryInterface_Proxy calls RPCRT4!IUnknown_QueryInterface_Proxy.
 // https://learn.microsoft.com/windows/win32/api/unknwnbase/nf-unknwnbase-iunknown_queryinterface_proxy
 // Minimum OS: windows5.0.
-func IUnknown_QueryInterface_Proxy(This *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func IUnknown_QueryInterface_Proxy(This *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procIUnknown_QueryInterface_Proxy.Addr(), uintptr(unsafe.Pointer(This)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUnknown_Release_Proxy calls RPCRT4!IUnknown_Release_Proxy.
@@ -585,8 +585,11 @@ func I_RpcBindingCopy(SourceBinding unsafe.Pointer, DestinationBinding *unsafe.P
 }
 
 // I_RpcBindingCreateNP calls RPCRT4!I_RpcBindingCreateNP.
-func I_RpcBindingCreateNP(ServerName foundation.PWSTR, ServiceName foundation.PWSTR, NetworkOptions foundation.PWSTR, Binding *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procI_RpcBindingCreateNP.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(ServiceName)), uintptr(unsafe.Pointer(NetworkOptions)), uintptr(unsafe.Pointer(Binding)))
+func I_RpcBindingCreateNP(ServerName string, ServiceName string, NetworkOptions string, Binding *unsafe.Pointer) RPC_STATUS {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_ServiceName := win32.UTF16Ptr(ServiceName)
+	_NetworkOptions := win32.UTF16Ptr(NetworkOptions)
+	r1, _, _ := syscall.SyscallN(procI_RpcBindingCreateNP.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_ServiceName)), uintptr(unsafe.Pointer(_NetworkOptions)), uintptr(unsafe.Pointer(Binding)))
 	return RPC_STATUS(r1)
 }
 
@@ -602,15 +605,15 @@ func I_RpcBindingInqClientTokenAttributes(Binding unsafe.Pointer, TokenId *found
 	return RPC_STATUS(r1)
 }
 
-// I_RpcBindingInqDynamicEndpointA calls RPCRT4!I_RpcBindingInqDynamicEndpointA.
-func I_RpcBindingInqDynamicEndpointA(Binding unsafe.Pointer, DynamicEndpoint *foundation.PSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procI_RpcBindingInqDynamicEndpointA.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(DynamicEndpoint)))
+// I_RpcBindingInqDynamicEndpoint calls RPCRT4!I_RpcBindingInqDynamicEndpointW.
+func I_RpcBindingInqDynamicEndpoint(Binding unsafe.Pointer, DynamicEndpoint *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procI_RpcBindingInqDynamicEndpoint.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(DynamicEndpoint)))
 	return RPC_STATUS(r1)
 }
 
-// I_RpcBindingInqDynamicEndpointW calls RPCRT4!I_RpcBindingInqDynamicEndpointW.
-func I_RpcBindingInqDynamicEndpointW(Binding unsafe.Pointer, DynamicEndpoint *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procI_RpcBindingInqDynamicEndpointW.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(DynamicEndpoint)))
+// I_RpcBindingInqDynamicEndpointA calls RPCRT4!I_RpcBindingInqDynamicEndpointA.
+func I_RpcBindingInqDynamicEndpointA(Binding unsafe.Pointer, DynamicEndpoint *foundation.PSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procI_RpcBindingInqDynamicEndpointA.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(DynamicEndpoint)))
 	return RPC_STATUS(r1)
 }
 
@@ -764,15 +767,16 @@ func I_RpcNegotiateTransferSyntax(Message *RPC_MESSAGE) RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
-// I_RpcNsBindingSetEntryNameA calls RPCRT4!I_RpcNsBindingSetEntryNameA.
-func I_RpcNsBindingSetEntryNameA(Binding unsafe.Pointer, EntryNameSyntax uint32, EntryName foundation.PSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procI_RpcNsBindingSetEntryNameA.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)))
+// I_RpcNsBindingSetEntryName calls RPCRT4!I_RpcNsBindingSetEntryNameW.
+func I_RpcNsBindingSetEntryName(Binding unsafe.Pointer, EntryNameSyntax uint32, EntryName string) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procI_RpcNsBindingSetEntryName.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)))
 	return RPC_STATUS(r1)
 }
 
-// I_RpcNsBindingSetEntryNameW calls RPCRT4!I_RpcNsBindingSetEntryNameW.
-func I_RpcNsBindingSetEntryNameW(Binding unsafe.Pointer, EntryNameSyntax uint32, EntryName foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procI_RpcNsBindingSetEntryNameW.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)))
+// I_RpcNsBindingSetEntryNameA calls RPCRT4!I_RpcNsBindingSetEntryNameA.
+func I_RpcNsBindingSetEntryNameA(Binding unsafe.Pointer, EntryNameSyntax uint32, EntryName foundation.PSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procI_RpcNsBindingSetEntryNameA.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)))
 	return RPC_STATUS(r1)
 }
 
@@ -911,8 +915,10 @@ func I_RpcServerSetAddressChangeFn(pAddressChangeFn *RPC_ADDRESS_CHANGE_FN) RPC_
 }
 
 // I_RpcServerStartService calls RPCRT4!I_RpcServerStartService.
-func I_RpcServerStartService(Protseq foundation.PWSTR, Endpoint foundation.PWSTR, IfSpec unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procI_RpcServerStartService.Addr(), uintptr(unsafe.Pointer(Protseq)), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(IfSpec)))
+func I_RpcServerStartService(Protseq string, Endpoint string, IfSpec unsafe.Pointer) RPC_STATUS {
+	_Protseq := win32.UTF16Ptr(Protseq)
+	_Endpoint := win32.UTF16Ptr(Endpoint)
+	r1, _, _ := syscall.SyscallN(procI_RpcServerStartService.Addr(), uintptr(unsafe.Pointer(_Protseq)), uintptr(unsafe.Pointer(_Endpoint)), uintptr(unsafe.Pointer(IfSpec)))
 	return RPC_STATUS(r1)
 }
 
@@ -928,27 +934,32 @@ func I_RpcServerSubscribeForDisconnectNotification2(Binding unsafe.Pointer, hEve
 	return RPC_STATUS(r1)
 }
 
+// I_RpcServerUseProtseq2 calls RPCRT4!I_RpcServerUseProtseq2W.
+func I_RpcServerUseProtseq2(NetworkAddress string, Protseq string, MaxCalls uint32, SecurityDescriptor unsafe.Pointer, Policy unsafe.Pointer) RPC_STATUS {
+	_NetworkAddress := win32.UTF16Ptr(NetworkAddress)
+	_Protseq := win32.UTF16Ptr(Protseq)
+	r1, _, _ := syscall.SyscallN(procI_RpcServerUseProtseq2.Addr(), uintptr(unsafe.Pointer(_NetworkAddress)), uintptr(unsafe.Pointer(_Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
+	return RPC_STATUS(r1)
+}
+
 // I_RpcServerUseProtseq2A calls RPCRT4!I_RpcServerUseProtseq2A.
 func I_RpcServerUseProtseq2A(NetworkAddress foundation.PSTR, Protseq foundation.PSTR, MaxCalls uint32, SecurityDescriptor unsafe.Pointer, Policy unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procI_RpcServerUseProtseq2A.Addr(), uintptr(unsafe.Pointer(NetworkAddress)), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
 	return RPC_STATUS(r1)
 }
 
-// I_RpcServerUseProtseq2W calls RPCRT4!I_RpcServerUseProtseq2W.
-func I_RpcServerUseProtseq2W(NetworkAddress foundation.PWSTR, Protseq foundation.PWSTR, MaxCalls uint32, SecurityDescriptor unsafe.Pointer, Policy unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procI_RpcServerUseProtseq2W.Addr(), uintptr(unsafe.Pointer(NetworkAddress)), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
+// I_RpcServerUseProtseqEp2 calls RPCRT4!I_RpcServerUseProtseqEp2W.
+func I_RpcServerUseProtseqEp2(NetworkAddress string, Protseq string, MaxCalls uint32, Endpoint string, SecurityDescriptor unsafe.Pointer, Policy unsafe.Pointer) RPC_STATUS {
+	_NetworkAddress := win32.UTF16Ptr(NetworkAddress)
+	_Protseq := win32.UTF16Ptr(Protseq)
+	_Endpoint := win32.UTF16Ptr(Endpoint)
+	r1, _, _ := syscall.SyscallN(procI_RpcServerUseProtseqEp2.Addr(), uintptr(unsafe.Pointer(_NetworkAddress)), uintptr(unsafe.Pointer(_Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(_Endpoint)), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
 	return RPC_STATUS(r1)
 }
 
 // I_RpcServerUseProtseqEp2A calls RPCRT4!I_RpcServerUseProtseqEp2A.
 func I_RpcServerUseProtseqEp2A(NetworkAddress foundation.PSTR, Protseq foundation.PSTR, MaxCalls uint32, Endpoint foundation.PSTR, SecurityDescriptor unsafe.Pointer, Policy unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procI_RpcServerUseProtseqEp2A.Addr(), uintptr(unsafe.Pointer(NetworkAddress)), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
-	return RPC_STATUS(r1)
-}
-
-// I_RpcServerUseProtseqEp2W calls RPCRT4!I_RpcServerUseProtseqEp2W.
-func I_RpcServerUseProtseqEp2W(NetworkAddress foundation.PWSTR, Protseq foundation.PWSTR, MaxCalls uint32, Endpoint foundation.PWSTR, SecurityDescriptor unsafe.Pointer, Policy unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procI_RpcServerUseProtseqEp2W.Addr(), uintptr(unsafe.Pointer(NetworkAddress)), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
 	return RPC_STATUS(r1)
 }
 
@@ -1527,9 +1538,9 @@ func NdrGetBuffer(pStubMsg *MIDL_STUB_MESSAGE, BufferLength uint32, Handle unsaf
 }
 
 // NdrGetDcomProtocolVersion calls RPCRT4!NdrGetDcomProtocolVersion.
-func NdrGetDcomProtocolVersion(pStubMsg *MIDL_STUB_MESSAGE, pVersion *RPC_VERSION) foundation.HRESULT {
+func NdrGetDcomProtocolVersion(pStubMsg *MIDL_STUB_MESSAGE, pVersion *RPC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(procNdrGetDcomProtocolVersion.Addr(), uintptr(unsafe.Pointer(pStubMsg)), uintptr(unsafe.Pointer(pVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdrGetUserMarshalInfo calls RPCRT4!NdrGetUserMarshalInfo.
@@ -2102,8 +2113,9 @@ func RpcAsyncAbortCall(pAsync *RPC_ASYNC_STATE, ExceptionCode uint32) RPC_STATUS
 // RpcAsyncCancelCall calls RPCRT4!RpcAsyncCancelCall.
 // https://learn.microsoft.com/windows/win32/api/rpcasync/nf-rpcasync-rpcasynccancelcall
 // Minimum OS: windows5.0.
-func RpcAsyncCancelCall(pAsync *RPC_ASYNC_STATE, fAbort foundation.BOOL) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcAsyncCancelCall.Addr(), uintptr(unsafe.Pointer(pAsync)), uintptr(fAbort))
+func RpcAsyncCancelCall(pAsync *RPC_ASYNC_STATE, fAbort bool) RPC_STATUS {
+	_fAbort := win32.Bool32(fAbort)
+	r1, _, _ := syscall.SyscallN(procRpcAsyncCancelCall.Addr(), uintptr(unsafe.Pointer(pAsync)), uintptr(_fAbort))
 	return RPC_STATUS(r1)
 }
 
@@ -2155,19 +2167,19 @@ func RpcBindingCopy(SourceBinding unsafe.Pointer, DestinationBinding *unsafe.Poi
 	return RPC_STATUS(r1)
 }
 
+// RpcBindingCreate calls RPCRT4!RpcBindingCreateW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingcreatew
+// Minimum OS: windows6.0.6000.
+func RpcBindingCreate(Template *RPC_BINDING_HANDLE_TEMPLATE_V1_W, Security *RPC_BINDING_HANDLE_SECURITY_V1_W, Options *RPC_BINDING_HANDLE_OPTIONS_V1, Binding *unsafe.Pointer) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcBindingCreate.Addr(), uintptr(unsafe.Pointer(Template)), uintptr(unsafe.Pointer(Security)), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(Binding)))
+	return RPC_STATUS(r1)
+}
+
 // RpcBindingCreateA calls RPCRT4!RpcBindingCreateA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingcreatea
 // Minimum OS: windows6.0.6000.
 func RpcBindingCreateA(Template *RPC_BINDING_HANDLE_TEMPLATE_V1_A, Security *RPC_BINDING_HANDLE_SECURITY_V1_A, Options *RPC_BINDING_HANDLE_OPTIONS_V1, Binding *unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcBindingCreateA.Addr(), uintptr(unsafe.Pointer(Template)), uintptr(unsafe.Pointer(Security)), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(Binding)))
-	return RPC_STATUS(r1)
-}
-
-// RpcBindingCreateW calls RPCRT4!RpcBindingCreateW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingcreatew
-// Minimum OS: windows6.0.6000.
-func RpcBindingCreateW(Template *RPC_BINDING_HANDLE_TEMPLATE_V1_W, Security *RPC_BINDING_HANDLE_SECURITY_V1_W, Options *RPC_BINDING_HANDLE_OPTIONS_V1, Binding *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcBindingCreateW.Addr(), uintptr(unsafe.Pointer(Template)), uintptr(unsafe.Pointer(Security)), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(Binding)))
 	return RPC_STATUS(r1)
 }
 
@@ -2179,6 +2191,15 @@ func RpcBindingFree(Binding *unsafe.Pointer) RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
+// RpcBindingFromStringBinding calls RPCRT4!RpcBindingFromStringBindingW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingfromstringbindingw
+// Minimum OS: windows5.0.
+func RpcBindingFromStringBinding(StringBinding string, Binding *unsafe.Pointer) RPC_STATUS {
+	_StringBinding := win32.UTF16Ptr(StringBinding)
+	r1, _, _ := syscall.SyscallN(procRpcBindingFromStringBinding.Addr(), uintptr(unsafe.Pointer(_StringBinding)), uintptr(unsafe.Pointer(Binding)))
+	return RPC_STATUS(r1)
+}
+
 // RpcBindingFromStringBindingA calls RPCRT4!RpcBindingFromStringBindingA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingfromstringbindinga
 // Minimum OS: windows5.0.
@@ -2187,11 +2208,11 @@ func RpcBindingFromStringBindingA(StringBinding foundation.PSTR, Binding *unsafe
 	return RPC_STATUS(r1)
 }
 
-// RpcBindingFromStringBindingW calls RPCRT4!RpcBindingFromStringBindingW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingfromstringbindingw
+// RpcBindingInqAuthClient calls RPCRT4!RpcBindingInqAuthClientW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthclientw
 // Minimum OS: windows5.0.
-func RpcBindingFromStringBindingW(StringBinding foundation.PWSTR, Binding *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcBindingFromStringBindingW.Addr(), uintptr(unsafe.Pointer(StringBinding)), uintptr(unsafe.Pointer(Binding)))
+func RpcBindingInqAuthClient(ClientBinding unsafe.Pointer, Privs *unsafe.Pointer, ServerPrincName *foundation.PWSTR, AuthnLevel *uint32, AuthnSvc *uint32, AuthzSvc *uint32) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcBindingInqAuthClient.Addr(), uintptr(unsafe.Pointer(ClientBinding)), uintptr(unsafe.Pointer(Privs)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(unsafe.Pointer(AuthnLevel)), uintptr(unsafe.Pointer(AuthnSvc)), uintptr(unsafe.Pointer(AuthzSvc)))
 	return RPC_STATUS(r1)
 }
 
@@ -2203,6 +2224,14 @@ func RpcBindingInqAuthClientA(ClientBinding unsafe.Pointer, Privs *unsafe.Pointe
 	return RPC_STATUS(r1)
 }
 
+// RpcBindingInqAuthClientEx calls RPCRT4!RpcBindingInqAuthClientExW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthclientexw
+// Minimum OS: windows5.0.
+func RpcBindingInqAuthClientEx(ClientBinding unsafe.Pointer, Privs *unsafe.Pointer, ServerPrincName *foundation.PWSTR, AuthnLevel *uint32, AuthnSvc *uint32, AuthzSvc *uint32, Flags uint32) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcBindingInqAuthClientEx.Addr(), uintptr(unsafe.Pointer(ClientBinding)), uintptr(unsafe.Pointer(Privs)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(unsafe.Pointer(AuthnLevel)), uintptr(unsafe.Pointer(AuthnSvc)), uintptr(unsafe.Pointer(AuthzSvc)), uintptr(Flags))
+	return RPC_STATUS(r1)
+}
+
 // RpcBindingInqAuthClientExA calls RPCRT4!RpcBindingInqAuthClientExA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthclientexa
 // Minimum OS: windows5.0.
@@ -2211,19 +2240,11 @@ func RpcBindingInqAuthClientExA(ClientBinding unsafe.Pointer, Privs *unsafe.Poin
 	return RPC_STATUS(r1)
 }
 
-// RpcBindingInqAuthClientExW calls RPCRT4!RpcBindingInqAuthClientExW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthclientexw
+// RpcBindingInqAuthInfo calls RPCRT4!RpcBindingInqAuthInfoW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthinfow
 // Minimum OS: windows5.0.
-func RpcBindingInqAuthClientExW(ClientBinding unsafe.Pointer, Privs *unsafe.Pointer, ServerPrincName *foundation.PWSTR, AuthnLevel *uint32, AuthnSvc *uint32, AuthzSvc *uint32, Flags uint32) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcBindingInqAuthClientExW.Addr(), uintptr(unsafe.Pointer(ClientBinding)), uintptr(unsafe.Pointer(Privs)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(unsafe.Pointer(AuthnLevel)), uintptr(unsafe.Pointer(AuthnSvc)), uintptr(unsafe.Pointer(AuthzSvc)), uintptr(Flags))
-	return RPC_STATUS(r1)
-}
-
-// RpcBindingInqAuthClientW calls RPCRT4!RpcBindingInqAuthClientW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthclientw
-// Minimum OS: windows5.0.
-func RpcBindingInqAuthClientW(ClientBinding unsafe.Pointer, Privs *unsafe.Pointer, ServerPrincName *foundation.PWSTR, AuthnLevel *uint32, AuthnSvc *uint32, AuthzSvc *uint32) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcBindingInqAuthClientW.Addr(), uintptr(unsafe.Pointer(ClientBinding)), uintptr(unsafe.Pointer(Privs)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(unsafe.Pointer(AuthnLevel)), uintptr(unsafe.Pointer(AuthnSvc)), uintptr(unsafe.Pointer(AuthzSvc)))
+func RpcBindingInqAuthInfo(Binding unsafe.Pointer, ServerPrincName *foundation.PWSTR, AuthnLevel *uint32, AuthnSvc *uint32, AuthIdentity *unsafe.Pointer, AuthzSvc *uint32) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcBindingInqAuthInfo.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(unsafe.Pointer(AuthnLevel)), uintptr(unsafe.Pointer(AuthnSvc)), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(AuthzSvc)))
 	return RPC_STATUS(r1)
 }
 
@@ -2235,27 +2256,19 @@ func RpcBindingInqAuthInfoA(Binding unsafe.Pointer, ServerPrincName *foundation.
 	return RPC_STATUS(r1)
 }
 
+// RpcBindingInqAuthInfoEx calls RPCRT4!RpcBindingInqAuthInfoExW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthinfoexw
+// Minimum OS: windows5.0.
+func RpcBindingInqAuthInfoEx(Binding unsafe.Pointer, ServerPrincName *foundation.PWSTR, AuthnLevel *uint32, AuthnSvc *uint32, AuthIdentity *unsafe.Pointer, AuthzSvc *uint32, RpcQosVersion uint32, SecurityQOS *RPC_SECURITY_QOS) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcBindingInqAuthInfoEx.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(unsafe.Pointer(AuthnLevel)), uintptr(unsafe.Pointer(AuthnSvc)), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(AuthzSvc)), uintptr(RpcQosVersion), uintptr(unsafe.Pointer(SecurityQOS)))
+	return RPC_STATUS(r1)
+}
+
 // RpcBindingInqAuthInfoExA calls RPCRT4!RpcBindingInqAuthInfoExA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthinfoexa
 // Minimum OS: windows5.0.
 func RpcBindingInqAuthInfoExA(Binding unsafe.Pointer, ServerPrincName *foundation.PSTR, AuthnLevel *uint32, AuthnSvc *uint32, AuthIdentity *unsafe.Pointer, AuthzSvc *uint32, RpcQosVersion uint32, SecurityQOS *RPC_SECURITY_QOS) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcBindingInqAuthInfoExA.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(unsafe.Pointer(AuthnLevel)), uintptr(unsafe.Pointer(AuthnSvc)), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(AuthzSvc)), uintptr(RpcQosVersion), uintptr(unsafe.Pointer(SecurityQOS)))
-	return RPC_STATUS(r1)
-}
-
-// RpcBindingInqAuthInfoExW calls RPCRT4!RpcBindingInqAuthInfoExW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthinfoexw
-// Minimum OS: windows5.0.
-func RpcBindingInqAuthInfoExW(Binding unsafe.Pointer, ServerPrincName *foundation.PWSTR, AuthnLevel *uint32, AuthnSvc *uint32, AuthIdentity *unsafe.Pointer, AuthzSvc *uint32, RpcQosVersion uint32, SecurityQOS *RPC_SECURITY_QOS) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcBindingInqAuthInfoExW.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(unsafe.Pointer(AuthnLevel)), uintptr(unsafe.Pointer(AuthnSvc)), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(AuthzSvc)), uintptr(RpcQosVersion), uintptr(unsafe.Pointer(SecurityQOS)))
-	return RPC_STATUS(r1)
-}
-
-// RpcBindingInqAuthInfoW calls RPCRT4!RpcBindingInqAuthInfoW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindinginqauthinfow
-// Minimum OS: windows5.0.
-func RpcBindingInqAuthInfoW(Binding unsafe.Pointer, ServerPrincName *foundation.PWSTR, AuthnLevel *uint32, AuthnSvc *uint32, AuthIdentity *unsafe.Pointer, AuthzSvc *uint32) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcBindingInqAuthInfoW.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(unsafe.Pointer(AuthnLevel)), uintptr(unsafe.Pointer(AuthnSvc)), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(AuthzSvc)))
 	return RPC_STATUS(r1)
 }
 
@@ -2297,6 +2310,15 @@ func RpcBindingServerFromClient(ClientBinding unsafe.Pointer, ServerBinding *uns
 	return RPC_STATUS(r1)
 }
 
+// RpcBindingSetAuthInfo calls RPCRT4!RpcBindingSetAuthInfoW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingsetauthinfow
+// Minimum OS: windows5.0.
+func RpcBindingSetAuthInfo(Binding unsafe.Pointer, ServerPrincName string, AuthnLevel uint32, AuthnSvc uint32, AuthIdentity unsafe.Pointer, AuthzSvc uint32) RPC_STATUS {
+	_ServerPrincName := win32.UTF16Ptr(ServerPrincName)
+	r1, _, _ := syscall.SyscallN(procRpcBindingSetAuthInfo.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(_ServerPrincName)), uintptr(AuthnLevel), uintptr(AuthnSvc), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(AuthzSvc))
+	return RPC_STATUS(r1)
+}
+
 // RpcBindingSetAuthInfoA calls RPCRT4!RpcBindingSetAuthInfoA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingsetauthinfoa
 // Minimum OS: windows5.0.
@@ -2305,27 +2327,20 @@ func RpcBindingSetAuthInfoA(Binding unsafe.Pointer, ServerPrincName foundation.P
 	return RPC_STATUS(r1)
 }
 
+// RpcBindingSetAuthInfoEx calls RPCRT4!RpcBindingSetAuthInfoExW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingsetauthinfoexw
+// Minimum OS: windows5.0.
+func RpcBindingSetAuthInfoEx(Binding unsafe.Pointer, ServerPrincName string, AuthnLevel uint32, AuthnSvc uint32, AuthIdentity unsafe.Pointer, AuthzSvc uint32, SecurityQOS *RPC_SECURITY_QOS) RPC_STATUS {
+	_ServerPrincName := win32.UTF16Ptr(ServerPrincName)
+	r1, _, _ := syscall.SyscallN(procRpcBindingSetAuthInfoEx.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(_ServerPrincName)), uintptr(AuthnLevel), uintptr(AuthnSvc), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(AuthzSvc), uintptr(unsafe.Pointer(SecurityQOS)))
+	return RPC_STATUS(r1)
+}
+
 // RpcBindingSetAuthInfoExA calls RPCRT4!RpcBindingSetAuthInfoExA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingsetauthinfoexa
 // Minimum OS: windows5.0.
 func RpcBindingSetAuthInfoExA(Binding unsafe.Pointer, ServerPrincName foundation.PSTR, AuthnLevel uint32, AuthnSvc uint32, AuthIdentity unsafe.Pointer, AuthzSvc uint32, SecurityQos *RPC_SECURITY_QOS) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcBindingSetAuthInfoExA.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(AuthnLevel), uintptr(AuthnSvc), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(AuthzSvc), uintptr(unsafe.Pointer(SecurityQos)))
-	return RPC_STATUS(r1)
-}
-
-// RpcBindingSetAuthInfoExW calls RPCRT4!RpcBindingSetAuthInfoExW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingsetauthinfoexw
-// Minimum OS: windows5.0.
-func RpcBindingSetAuthInfoExW(Binding unsafe.Pointer, ServerPrincName foundation.PWSTR, AuthnLevel uint32, AuthnSvc uint32, AuthIdentity unsafe.Pointer, AuthzSvc uint32, SecurityQOS *RPC_SECURITY_QOS) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcBindingSetAuthInfoExW.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(AuthnLevel), uintptr(AuthnSvc), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(AuthzSvc), uintptr(unsafe.Pointer(SecurityQOS)))
-	return RPC_STATUS(r1)
-}
-
-// RpcBindingSetAuthInfoW calls RPCRT4!RpcBindingSetAuthInfoW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingsetauthinfow
-// Minimum OS: windows5.0.
-func RpcBindingSetAuthInfoW(Binding unsafe.Pointer, ServerPrincName foundation.PWSTR, AuthnLevel uint32, AuthnSvc uint32, AuthIdentity unsafe.Pointer, AuthzSvc uint32) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcBindingSetAuthInfoW.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(AuthnLevel), uintptr(AuthnSvc), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(AuthzSvc))
 	return RPC_STATUS(r1)
 }
 
@@ -2345,19 +2360,19 @@ func RpcBindingSetOption(hBinding unsafe.Pointer, option uint32, optionValue uin
 	return RPC_STATUS(r1)
 }
 
+// RpcBindingToStringBinding calls RPCRT4!RpcBindingToStringBindingW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingtostringbindingw
+// Minimum OS: windows5.0.
+func RpcBindingToStringBinding(Binding unsafe.Pointer, StringBinding *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcBindingToStringBinding.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(StringBinding)))
+	return RPC_STATUS(r1)
+}
+
 // RpcBindingToStringBindingA calls RPCRT4!RpcBindingToStringBindingA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingtostringbindinga
 // Minimum OS: windows5.0.
 func RpcBindingToStringBindingA(Binding unsafe.Pointer, StringBinding *foundation.PSTR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcBindingToStringBindingA.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(StringBinding)))
-	return RPC_STATUS(r1)
-}
-
-// RpcBindingToStringBindingW calls RPCRT4!RpcBindingToStringBindingW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcbindingtostringbindingw
-// Minimum OS: windows5.0.
-func RpcBindingToStringBindingW(Binding unsafe.Pointer, StringBinding *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcBindingToStringBindingW.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(StringBinding)))
 	return RPC_STATUS(r1)
 }
 
@@ -2393,6 +2408,14 @@ func RpcCancelThreadEx(Thread unsafe.Pointer, Timeout int32) RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
+// RpcCertGeneratePrincipalName calls RPCRT4!RpcCertGeneratePrincipalNameW.
+// https://learn.microsoft.com/windows/win32/api/rpcssl/nf-rpcssl-rpccertgenerateprincipalnamew
+// Minimum OS: windows5.0.
+func RpcCertGeneratePrincipalName(Context *securitycryptography.CERT_CONTEXT, Flags uint32, pBuffer *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcCertGeneratePrincipalName.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(Flags), uintptr(unsafe.Pointer(pBuffer)))
+	return RPC_STATUS(r1)
+}
+
 // RpcCertGeneratePrincipalNameA calls RPCRT4!RpcCertGeneratePrincipalNameA.
 // https://learn.microsoft.com/windows/win32/api/rpcssl/nf-rpcssl-rpccertgenerateprincipalnamea
 // Minimum OS: windows5.0.
@@ -2401,11 +2424,12 @@ func RpcCertGeneratePrincipalNameA(Context *securitycryptography.CERT_CONTEXT, F
 	return RPC_STATUS(r1)
 }
 
-// RpcCertGeneratePrincipalNameW calls RPCRT4!RpcCertGeneratePrincipalNameW.
-// https://learn.microsoft.com/windows/win32/api/rpcssl/nf-rpcssl-rpccertgenerateprincipalnamew
+// RpcEpRegister calls RPCRT4!RpcEpRegisterW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcepregisterw
 // Minimum OS: windows5.0.
-func RpcCertGeneratePrincipalNameW(Context *securitycryptography.CERT_CONTEXT, Flags uint32, pBuffer *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcCertGeneratePrincipalNameW.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(Flags), uintptr(unsafe.Pointer(pBuffer)))
+func RpcEpRegister(IfSpec unsafe.Pointer, BindingVector *RPC_BINDING_VECTOR, UuidVector *UUID_VECTOR, Annotation string) RPC_STATUS {
+	_Annotation := win32.UTF16Ptr(Annotation)
+	r1, _, _ := syscall.SyscallN(procRpcEpRegister.Addr(), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(BindingVector)), uintptr(unsafe.Pointer(UuidVector)), uintptr(unsafe.Pointer(_Annotation)))
 	return RPC_STATUS(r1)
 }
 
@@ -2417,27 +2441,20 @@ func RpcEpRegisterA(IfSpec unsafe.Pointer, BindingVector *RPC_BINDING_VECTOR, Uu
 	return RPC_STATUS(r1)
 }
 
+// RpcEpRegisterNoReplace calls RPCRT4!RpcEpRegisterNoReplaceW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcepregisternoreplacew
+// Minimum OS: windows5.0.
+func RpcEpRegisterNoReplace(IfSpec unsafe.Pointer, BindingVector *RPC_BINDING_VECTOR, UuidVector *UUID_VECTOR, Annotation string) RPC_STATUS {
+	_Annotation := win32.UTF16Ptr(Annotation)
+	r1, _, _ := syscall.SyscallN(procRpcEpRegisterNoReplace.Addr(), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(BindingVector)), uintptr(unsafe.Pointer(UuidVector)), uintptr(unsafe.Pointer(_Annotation)))
+	return RPC_STATUS(r1)
+}
+
 // RpcEpRegisterNoReplaceA calls RPCRT4!RpcEpRegisterNoReplaceA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcepregisternoreplacea
 // Minimum OS: windows5.0.
 func RpcEpRegisterNoReplaceA(IfSpec unsafe.Pointer, BindingVector *RPC_BINDING_VECTOR, UuidVector *UUID_VECTOR, Annotation foundation.PSTR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcEpRegisterNoReplaceA.Addr(), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(BindingVector)), uintptr(unsafe.Pointer(UuidVector)), uintptr(unsafe.Pointer(Annotation)))
-	return RPC_STATUS(r1)
-}
-
-// RpcEpRegisterNoReplaceW calls RPCRT4!RpcEpRegisterNoReplaceW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcepregisternoreplacew
-// Minimum OS: windows5.0.
-func RpcEpRegisterNoReplaceW(IfSpec unsafe.Pointer, BindingVector *RPC_BINDING_VECTOR, UuidVector *UUID_VECTOR, Annotation foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcEpRegisterNoReplaceW.Addr(), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(BindingVector)), uintptr(unsafe.Pointer(UuidVector)), uintptr(unsafe.Pointer(Annotation)))
-	return RPC_STATUS(r1)
-}
-
-// RpcEpRegisterW calls RPCRT4!RpcEpRegisterW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcepregisterw
-// Minimum OS: windows5.0.
-func RpcEpRegisterW(IfSpec unsafe.Pointer, BindingVector *RPC_BINDING_VECTOR, UuidVector *UUID_VECTOR, Annotation foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcEpRegisterW.Addr(), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(BindingVector)), uintptr(unsafe.Pointer(UuidVector)), uintptr(unsafe.Pointer(Annotation)))
 	return RPC_STATUS(r1)
 }
 
@@ -2483,8 +2500,9 @@ func RpcErrorEndEnumeration(EnumHandle *RPC_ERROR_ENUM_HANDLE) RPC_STATUS {
 // RpcErrorGetNextRecord calls RPCRT4!RpcErrorGetNextRecord.
 // https://learn.microsoft.com/windows/win32/api/rpcasync/nf-rpcasync-rpcerrorgetnextrecord
 // Minimum OS: windows5.1.2600.
-func RpcErrorGetNextRecord(EnumHandle *RPC_ERROR_ENUM_HANDLE, CopyStrings foundation.BOOL, ErrorInfo *RPC_EXTENDED_ERROR_INFO) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcErrorGetNextRecord.Addr(), uintptr(unsafe.Pointer(EnumHandle)), uintptr(CopyStrings), uintptr(unsafe.Pointer(ErrorInfo)))
+func RpcErrorGetNextRecord(EnumHandle *RPC_ERROR_ENUM_HANDLE, CopyStrings bool, ErrorInfo *RPC_EXTENDED_ERROR_INFO) RPC_STATUS {
+	_CopyStrings := win32.Bool32(CopyStrings)
+	r1, _, _ := syscall.SyscallN(procRpcErrorGetNextRecord.Addr(), uintptr(unsafe.Pointer(EnumHandle)), uintptr(_CopyStrings), uintptr(unsafe.Pointer(ErrorInfo)))
 	return RPC_STATUS(r1)
 }
 
@@ -2606,19 +2624,19 @@ func RpcMgmtEpEltInqDone(InquiryContext **unsafe.Pointer) RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
+// RpcMgmtEpEltInqNext calls RPCRT4!RpcMgmtEpEltInqNextW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcmgmtepeltinqnextw
+// Minimum OS: windows5.0.
+func RpcMgmtEpEltInqNext(InquiryContext *unsafe.Pointer, IfId *RPC_IF_ID, Binding *unsafe.Pointer, ObjectUuid *win32.GUID, Annotation *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcMgmtEpEltInqNext.Addr(), uintptr(unsafe.Pointer(InquiryContext)), uintptr(unsafe.Pointer(IfId)), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ObjectUuid)), uintptr(unsafe.Pointer(Annotation)))
+	return RPC_STATUS(r1)
+}
+
 // RpcMgmtEpEltInqNextA calls RPCRT4!RpcMgmtEpEltInqNextA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcmgmtepeltinqnexta
 // Minimum OS: windows5.0.
 func RpcMgmtEpEltInqNextA(InquiryContext *unsafe.Pointer, IfId *RPC_IF_ID, Binding *unsafe.Pointer, ObjectUuid *win32.GUID, Annotation *foundation.PSTR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcMgmtEpEltInqNextA.Addr(), uintptr(unsafe.Pointer(InquiryContext)), uintptr(unsafe.Pointer(IfId)), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ObjectUuid)), uintptr(unsafe.Pointer(Annotation)))
-	return RPC_STATUS(r1)
-}
-
-// RpcMgmtEpEltInqNextW calls RPCRT4!RpcMgmtEpEltInqNextW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcmgmtepeltinqnextw
-// Minimum OS: windows5.0.
-func RpcMgmtEpEltInqNextW(InquiryContext *unsafe.Pointer, IfId *RPC_IF_ID, Binding *unsafe.Pointer, ObjectUuid *win32.GUID, Annotation *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcMgmtEpEltInqNextW.Addr(), uintptr(unsafe.Pointer(InquiryContext)), uintptr(unsafe.Pointer(IfId)), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(ObjectUuid)), uintptr(unsafe.Pointer(Annotation)))
 	return RPC_STATUS(r1)
 }
 
@@ -2653,19 +2671,19 @@ func RpcMgmtInqIfIds(Binding unsafe.Pointer, IfIdVector **RPC_IF_ID_VECTOR) RPC_
 	return RPC_STATUS(r1)
 }
 
+// RpcMgmtInqServerPrincName calls RPCRT4!RpcMgmtInqServerPrincNameW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcmgmtinqserverprincnamew
+// Minimum OS: windows5.0.
+func RpcMgmtInqServerPrincName(Binding unsafe.Pointer, AuthnSvc uint32, ServerPrincName *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcMgmtInqServerPrincName.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(AuthnSvc), uintptr(unsafe.Pointer(ServerPrincName)))
+	return RPC_STATUS(r1)
+}
+
 // RpcMgmtInqServerPrincNameA calls RPCRT4!RpcMgmtInqServerPrincNameA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcmgmtinqserverprincnamea
 // Minimum OS: windows5.0.
 func RpcMgmtInqServerPrincNameA(Binding unsafe.Pointer, AuthnSvc uint32, ServerPrincName *foundation.PSTR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcMgmtInqServerPrincNameA.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(AuthnSvc), uintptr(unsafe.Pointer(ServerPrincName)))
-	return RPC_STATUS(r1)
-}
-
-// RpcMgmtInqServerPrincNameW calls RPCRT4!RpcMgmtInqServerPrincNameW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcmgmtinqserverprincnamew
-// Minimum OS: windows5.0.
-func RpcMgmtInqServerPrincNameW(Binding unsafe.Pointer, AuthnSvc uint32, ServerPrincName *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcMgmtInqServerPrincNameW.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(AuthnSvc), uintptr(unsafe.Pointer(ServerPrincName)))
 	return RPC_STATUS(r1)
 }
 
@@ -2741,6 +2759,14 @@ func RpcMgmtWaitServerListen() RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
+// RpcNetworkInqProtseqs calls RPCRT4!RpcNetworkInqProtseqsW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcnetworkinqprotseqsw
+// Minimum OS: windows5.0.
+func RpcNetworkInqProtseqs(ProtseqVector **RPC_PROTSEQ_VECTORW) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcNetworkInqProtseqs.Addr(), uintptr(unsafe.Pointer(ProtseqVector)))
+	return RPC_STATUS(r1)
+}
+
 // RpcNetworkInqProtseqsA calls RPCRT4!RpcNetworkInqProtseqsA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcnetworkinqprotseqsa
 // Minimum OS: windows5.0.
@@ -2749,11 +2775,12 @@ func RpcNetworkInqProtseqsA(ProtseqVector **RPC_PROTSEQ_VECTORA) RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
-// RpcNetworkInqProtseqsW calls RPCRT4!RpcNetworkInqProtseqsW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcnetworkinqprotseqsw
+// RpcNetworkIsProtseqValid calls RPCRT4!RpcNetworkIsProtseqValidW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcnetworkisprotseqvalidw
 // Minimum OS: windows5.0.
-func RpcNetworkInqProtseqsW(ProtseqVector **RPC_PROTSEQ_VECTORW) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNetworkInqProtseqsW.Addr(), uintptr(unsafe.Pointer(ProtseqVector)))
+func RpcNetworkIsProtseqValid(Protseq string) RPC_STATUS {
+	_Protseq := win32.UTF16Ptr(Protseq)
+	r1, _, _ := syscall.SyscallN(procRpcNetworkIsProtseqValid.Addr(), uintptr(unsafe.Pointer(_Protseq)))
 	return RPC_STATUS(r1)
 }
 
@@ -2765,11 +2792,12 @@ func RpcNetworkIsProtseqValidA(Protseq foundation.PSTR) RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
-// RpcNetworkIsProtseqValidW calls RPCRT4!RpcNetworkIsProtseqValidW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcnetworkisprotseqvalidw
+// RpcNsBindingExport calls RPCNS4!RpcNsBindingExportW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingexportw
 // Minimum OS: windows5.0.
-func RpcNetworkIsProtseqValidW(Protseq foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNetworkIsProtseqValidW.Addr(), uintptr(unsafe.Pointer(Protseq)))
+func RpcNsBindingExport(EntryNameSyntax uint32, EntryName string, IfSpec unsafe.Pointer, BindingVec *RPC_BINDING_VECTOR, ObjectUuidVec *UUID_VECTOR) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsBindingExport.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(BindingVec)), uintptr(unsafe.Pointer(ObjectUuidVec)))
 	return RPC_STATUS(r1)
 }
 
@@ -2781,6 +2809,15 @@ func RpcNsBindingExportA(EntryNameSyntax uint32, EntryName foundation.PSTR, IfSp
 	return RPC_STATUS(r1)
 }
 
+// RpcNsBindingExportPnP calls RPCNS4!RpcNsBindingExportPnPW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingexportpnpw
+// Minimum OS: windows5.0.
+func RpcNsBindingExportPnP(EntryNameSyntax uint32, EntryName string, IfSpec unsafe.Pointer, ObjectVector *UUID_VECTOR) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsBindingExportPnP.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjectVector)))
+	return RPC_STATUS(r1)
+}
+
 // RpcNsBindingExportPnPA calls RPCNS4!RpcNsBindingExportPnPA.
 // https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingexportpnpa
 // Minimum OS: windows5.0.
@@ -2789,19 +2826,12 @@ func RpcNsBindingExportPnPA(EntryNameSyntax uint32, EntryName foundation.PSTR, I
 	return RPC_STATUS(r1)
 }
 
-// RpcNsBindingExportPnPW calls RPCNS4!RpcNsBindingExportPnPW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingexportpnpw
+// RpcNsBindingImportBegin calls RPCNS4!RpcNsBindingImportBeginW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingimportbeginw
 // Minimum OS: windows5.0.
-func RpcNsBindingExportPnPW(EntryNameSyntax uint32, EntryName foundation.PWSTR, IfSpec unsafe.Pointer, ObjectVector *UUID_VECTOR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsBindingExportPnPW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjectVector)))
-	return RPC_STATUS(r1)
-}
-
-// RpcNsBindingExportW calls RPCNS4!RpcNsBindingExportW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingexportw
-// Minimum OS: windows5.0.
-func RpcNsBindingExportW(EntryNameSyntax uint32, EntryName foundation.PWSTR, IfSpec unsafe.Pointer, BindingVec *RPC_BINDING_VECTOR, ObjectUuidVec *UUID_VECTOR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsBindingExportW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(BindingVec)), uintptr(unsafe.Pointer(ObjectUuidVec)))
+func RpcNsBindingImportBegin(EntryNameSyntax uint32, EntryName string, IfSpec unsafe.Pointer, ObjUuid *win32.GUID, ImportContext *unsafe.Pointer) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsBindingImportBegin.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjUuid)), uintptr(unsafe.Pointer(ImportContext)))
 	return RPC_STATUS(r1)
 }
 
@@ -2810,14 +2840,6 @@ func RpcNsBindingExportW(EntryNameSyntax uint32, EntryName foundation.PWSTR, IfS
 // Minimum OS: windows5.0.
 func RpcNsBindingImportBeginA(EntryNameSyntax uint32, EntryName foundation.PSTR, IfSpec unsafe.Pointer, ObjUuid *win32.GUID, ImportContext *unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcNsBindingImportBeginA.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjUuid)), uintptr(unsafe.Pointer(ImportContext)))
-	return RPC_STATUS(r1)
-}
-
-// RpcNsBindingImportBeginW calls RPCNS4!RpcNsBindingImportBeginW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingimportbeginw
-// Minimum OS: windows5.0.
-func RpcNsBindingImportBeginW(EntryNameSyntax uint32, EntryName foundation.PWSTR, IfSpec unsafe.Pointer, ObjUuid *win32.GUID, ImportContext *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsBindingImportBeginW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjUuid)), uintptr(unsafe.Pointer(ImportContext)))
 	return RPC_STATUS(r1)
 }
 
@@ -2837,6 +2859,14 @@ func RpcNsBindingImportNext(ImportContext unsafe.Pointer, Binding *unsafe.Pointe
 	return RPC_STATUS(r1)
 }
 
+// RpcNsBindingInqEntryName calls RPCRT4!RpcNsBindingInqEntryNameW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcnsbindinginqentrynamew
+// Minimum OS: windows5.0.
+func RpcNsBindingInqEntryName(Binding unsafe.Pointer, EntryNameSyntax uint32, EntryName *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcNsBindingInqEntryName.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)))
+	return RPC_STATUS(r1)
+}
+
 // RpcNsBindingInqEntryNameA calls RPCRT4!RpcNsBindingInqEntryNameA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcnsbindinginqentrynamea
 // Minimum OS: windows5.0.
@@ -2845,11 +2875,12 @@ func RpcNsBindingInqEntryNameA(Binding unsafe.Pointer, EntryNameSyntax uint32, E
 	return RPC_STATUS(r1)
 }
 
-// RpcNsBindingInqEntryNameW calls RPCRT4!RpcNsBindingInqEntryNameW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcnsbindinginqentrynamew
+// RpcNsBindingLookupBegin calls RPCNS4!RpcNsBindingLookupBeginW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindinglookupbeginw
 // Minimum OS: windows5.0.
-func RpcNsBindingInqEntryNameW(Binding unsafe.Pointer, EntryNameSyntax uint32, EntryName *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsBindingInqEntryNameW.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)))
+func RpcNsBindingLookupBegin(EntryNameSyntax uint32, EntryName string, IfSpec unsafe.Pointer, ObjUuid *win32.GUID, BindingMaxCount uint32, LookupContext *unsafe.Pointer) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsBindingLookupBegin.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjUuid)), uintptr(BindingMaxCount), uintptr(unsafe.Pointer(LookupContext)))
 	return RPC_STATUS(r1)
 }
 
@@ -2858,14 +2889,6 @@ func RpcNsBindingInqEntryNameW(Binding unsafe.Pointer, EntryNameSyntax uint32, E
 // Minimum OS: windows5.0.
 func RpcNsBindingLookupBeginA(EntryNameSyntax uint32, EntryName foundation.PSTR, IfSpec unsafe.Pointer, ObjUuid *win32.GUID, BindingMaxCount uint32, LookupContext *unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcNsBindingLookupBeginA.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjUuid)), uintptr(BindingMaxCount), uintptr(unsafe.Pointer(LookupContext)))
-	return RPC_STATUS(r1)
-}
-
-// RpcNsBindingLookupBeginW calls RPCNS4!RpcNsBindingLookupBeginW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindinglookupbeginw
-// Minimum OS: windows5.0.
-func RpcNsBindingLookupBeginW(EntryNameSyntax uint32, EntryName foundation.PWSTR, IfSpec unsafe.Pointer, ObjUuid *win32.GUID, BindingMaxCount uint32, LookupContext *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsBindingLookupBeginW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjUuid)), uintptr(BindingMaxCount), uintptr(unsafe.Pointer(LookupContext)))
 	return RPC_STATUS(r1)
 }
 
@@ -2893,11 +2916,29 @@ func RpcNsBindingSelect(BindingVec *RPC_BINDING_VECTOR, Binding *unsafe.Pointer)
 	return RPC_STATUS(r1)
 }
 
+// RpcNsBindingUnexport calls RPCNS4!RpcNsBindingUnexportW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingunexportw
+// Minimum OS: windows5.0.
+func RpcNsBindingUnexport(EntryNameSyntax uint32, EntryName string, IfSpec unsafe.Pointer, ObjectUuidVec *UUID_VECTOR) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsBindingUnexport.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjectUuidVec)))
+	return RPC_STATUS(r1)
+}
+
 // RpcNsBindingUnexportA calls RPCNS4!RpcNsBindingUnexportA.
 // https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingunexporta
 // Minimum OS: windows5.0.
 func RpcNsBindingUnexportA(EntryNameSyntax uint32, EntryName foundation.PSTR, IfSpec unsafe.Pointer, ObjectUuidVec *UUID_VECTOR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcNsBindingUnexportA.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjectUuidVec)))
+	return RPC_STATUS(r1)
+}
+
+// RpcNsBindingUnexportPnP calls RPCNS4!RpcNsBindingUnexportPnPW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingunexportpnpw
+// Minimum OS: windows5.0.
+func RpcNsBindingUnexportPnP(EntryNameSyntax uint32, EntryName string, IfSpec unsafe.Pointer, ObjectVector *UUID_VECTOR) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsBindingUnexportPnP.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjectVector)))
 	return RPC_STATUS(r1)
 }
 
@@ -2909,19 +2950,12 @@ func RpcNsBindingUnexportPnPA(EntryNameSyntax uint32, EntryName foundation.PSTR,
 	return RPC_STATUS(r1)
 }
 
-// RpcNsBindingUnexportPnPW calls RPCNS4!RpcNsBindingUnexportPnPW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingunexportpnpw
+// RpcNsEntryExpandName calls RPCNS4!RpcNsEntryExpandNameW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsentryexpandnamew
 // Minimum OS: windows5.0.
-func RpcNsBindingUnexportPnPW(EntryNameSyntax uint32, EntryName foundation.PWSTR, IfSpec unsafe.Pointer, ObjectVector *UUID_VECTOR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsBindingUnexportPnPW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjectVector)))
-	return RPC_STATUS(r1)
-}
-
-// RpcNsBindingUnexportW calls RPCNS4!RpcNsBindingUnexportW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsbindingunexportw
-// Minimum OS: windows5.0.
-func RpcNsBindingUnexportW(EntryNameSyntax uint32, EntryName foundation.PWSTR, IfSpec unsafe.Pointer, ObjectUuidVec *UUID_VECTOR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsBindingUnexportW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(ObjectUuidVec)))
+func RpcNsEntryExpandName(EntryNameSyntax uint32, EntryName string, ExpandedName *foundation.PWSTR) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsEntryExpandName.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(ExpandedName)))
 	return RPC_STATUS(r1)
 }
 
@@ -2933,11 +2967,12 @@ func RpcNsEntryExpandNameA(EntryNameSyntax uint32, EntryName foundation.PSTR, Ex
 	return RPC_STATUS(r1)
 }
 
-// RpcNsEntryExpandNameW calls RPCNS4!RpcNsEntryExpandNameW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsentryexpandnamew
+// RpcNsEntryObjectInqBegin calls RPCNS4!RpcNsEntryObjectInqBeginW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsentryobjectinqbeginw
 // Minimum OS: windows5.0.
-func RpcNsEntryExpandNameW(EntryNameSyntax uint32, EntryName foundation.PWSTR, ExpandedName *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsEntryExpandNameW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(ExpandedName)))
+func RpcNsEntryObjectInqBegin(EntryNameSyntax uint32, EntryName string, InquiryContext *unsafe.Pointer) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsEntryObjectInqBegin.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(InquiryContext)))
 	return RPC_STATUS(r1)
 }
 
@@ -2946,14 +2981,6 @@ func RpcNsEntryExpandNameW(EntryNameSyntax uint32, EntryName foundation.PWSTR, E
 // Minimum OS: windows5.0.
 func RpcNsEntryObjectInqBeginA(EntryNameSyntax uint32, EntryName foundation.PSTR, InquiryContext *unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcNsEntryObjectInqBeginA.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(InquiryContext)))
-	return RPC_STATUS(r1)
-}
-
-// RpcNsEntryObjectInqBeginW calls RPCNS4!RpcNsEntryObjectInqBeginW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsentryobjectinqbeginw
-// Minimum OS: windows5.0.
-func RpcNsEntryObjectInqBeginW(EntryNameSyntax uint32, EntryName foundation.PWSTR, InquiryContext *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsEntryObjectInqBeginW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(InquiryContext)))
 	return RPC_STATUS(r1)
 }
 
@@ -2973,6 +3000,15 @@ func RpcNsEntryObjectInqNext(InquiryContext unsafe.Pointer, ObjUuid *win32.GUID)
 	return RPC_STATUS(r1)
 }
 
+// RpcNsGroupDelete calls RPCNS4!RpcNsGroupDeleteW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupdeletew
+// Minimum OS: windows5.0.
+func RpcNsGroupDelete(GroupNameSyntax GROUP_NAME_SYNTAX, GroupName string) RPC_STATUS {
+	_GroupName := win32.UTF16Ptr(GroupName)
+	r1, _, _ := syscall.SyscallN(procRpcNsGroupDelete.Addr(), uintptr(GroupNameSyntax), uintptr(unsafe.Pointer(_GroupName)))
+	return RPC_STATUS(r1)
+}
+
 // RpcNsGroupDeleteA calls RPCNS4!RpcNsGroupDeleteA.
 // https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupdeletea
 // Minimum OS: windows5.0.
@@ -2981,11 +3017,13 @@ func RpcNsGroupDeleteA(GroupNameSyntax GROUP_NAME_SYNTAX, GroupName foundation.P
 	return RPC_STATUS(r1)
 }
 
-// RpcNsGroupDeleteW calls RPCNS4!RpcNsGroupDeleteW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupdeletew
+// RpcNsGroupMbrAdd calls RPCNS4!RpcNsGroupMbrAddW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupmbraddw
 // Minimum OS: windows5.0.
-func RpcNsGroupDeleteW(GroupNameSyntax GROUP_NAME_SYNTAX, GroupName foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsGroupDeleteW.Addr(), uintptr(GroupNameSyntax), uintptr(unsafe.Pointer(GroupName)))
+func RpcNsGroupMbrAdd(GroupNameSyntax uint32, GroupName string, MemberNameSyntax uint32, MemberName string) RPC_STATUS {
+	_GroupName := win32.UTF16Ptr(GroupName)
+	_MemberName := win32.UTF16Ptr(MemberName)
+	r1, _, _ := syscall.SyscallN(procRpcNsGroupMbrAdd.Addr(), uintptr(GroupNameSyntax), uintptr(unsafe.Pointer(_GroupName)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(_MemberName)))
 	return RPC_STATUS(r1)
 }
 
@@ -2997,11 +3035,12 @@ func RpcNsGroupMbrAddA(GroupNameSyntax uint32, GroupName foundation.PSTR, Member
 	return RPC_STATUS(r1)
 }
 
-// RpcNsGroupMbrAddW calls RPCNS4!RpcNsGroupMbrAddW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupmbraddw
+// RpcNsGroupMbrInqBegin calls RPCNS4!RpcNsGroupMbrInqBeginW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupmbrinqbeginw
 // Minimum OS: windows5.0.
-func RpcNsGroupMbrAddW(GroupNameSyntax uint32, GroupName foundation.PWSTR, MemberNameSyntax uint32, MemberName foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsGroupMbrAddW.Addr(), uintptr(GroupNameSyntax), uintptr(unsafe.Pointer(GroupName)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(MemberName)))
+func RpcNsGroupMbrInqBegin(GroupNameSyntax uint32, GroupName string, MemberNameSyntax uint32, InquiryContext *unsafe.Pointer) RPC_STATUS {
+	_GroupName := win32.UTF16Ptr(GroupName)
+	r1, _, _ := syscall.SyscallN(procRpcNsGroupMbrInqBegin.Addr(), uintptr(GroupNameSyntax), uintptr(unsafe.Pointer(_GroupName)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(InquiryContext)))
 	return RPC_STATUS(r1)
 }
 
@@ -3013,19 +3052,19 @@ func RpcNsGroupMbrInqBeginA(GroupNameSyntax uint32, GroupName foundation.PSTR, M
 	return RPC_STATUS(r1)
 }
 
-// RpcNsGroupMbrInqBeginW calls RPCNS4!RpcNsGroupMbrInqBeginW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupmbrinqbeginw
-// Minimum OS: windows5.0.
-func RpcNsGroupMbrInqBeginW(GroupNameSyntax uint32, GroupName foundation.PWSTR, MemberNameSyntax uint32, InquiryContext *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsGroupMbrInqBeginW.Addr(), uintptr(GroupNameSyntax), uintptr(unsafe.Pointer(GroupName)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(InquiryContext)))
-	return RPC_STATUS(r1)
-}
-
 // RpcNsGroupMbrInqDone calls RPCNS4!RpcNsGroupMbrInqDone.
 // https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupmbrinqdone
 // Minimum OS: windows5.0.
 func RpcNsGroupMbrInqDone(InquiryContext *unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcNsGroupMbrInqDone.Addr(), uintptr(unsafe.Pointer(InquiryContext)))
+	return RPC_STATUS(r1)
+}
+
+// RpcNsGroupMbrInqNext calls RPCNS4!RpcNsGroupMbrInqNextW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupmbrinqnextw
+// Minimum OS: windows5.0.
+func RpcNsGroupMbrInqNext(InquiryContext unsafe.Pointer, MemberName *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcNsGroupMbrInqNext.Addr(), uintptr(unsafe.Pointer(InquiryContext)), uintptr(unsafe.Pointer(MemberName)))
 	return RPC_STATUS(r1)
 }
 
@@ -3037,11 +3076,13 @@ func RpcNsGroupMbrInqNextA(InquiryContext unsafe.Pointer, MemberName *foundation
 	return RPC_STATUS(r1)
 }
 
-// RpcNsGroupMbrInqNextW calls RPCNS4!RpcNsGroupMbrInqNextW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupmbrinqnextw
+// RpcNsGroupMbrRemove calls RPCNS4!RpcNsGroupMbrRemoveW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupmbrremovew
 // Minimum OS: windows5.0.
-func RpcNsGroupMbrInqNextW(InquiryContext unsafe.Pointer, MemberName *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsGroupMbrInqNextW.Addr(), uintptr(unsafe.Pointer(InquiryContext)), uintptr(unsafe.Pointer(MemberName)))
+func RpcNsGroupMbrRemove(GroupNameSyntax uint32, GroupName string, MemberNameSyntax uint32, MemberName string) RPC_STATUS {
+	_GroupName := win32.UTF16Ptr(GroupName)
+	_MemberName := win32.UTF16Ptr(MemberName)
+	r1, _, _ := syscall.SyscallN(procRpcNsGroupMbrRemove.Addr(), uintptr(GroupNameSyntax), uintptr(unsafe.Pointer(_GroupName)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(_MemberName)))
 	return RPC_STATUS(r1)
 }
 
@@ -3053,11 +3094,12 @@ func RpcNsGroupMbrRemoveA(GroupNameSyntax uint32, GroupName foundation.PSTR, Mem
 	return RPC_STATUS(r1)
 }
 
-// RpcNsGroupMbrRemoveW calls RPCNS4!RpcNsGroupMbrRemoveW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsgroupmbrremovew
+// RpcNsMgmtBindingUnexport calls RPCNS4!RpcNsMgmtBindingUnexportW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsmgmtbindingunexportw
 // Minimum OS: windows5.0.
-func RpcNsGroupMbrRemoveW(GroupNameSyntax uint32, GroupName foundation.PWSTR, MemberNameSyntax uint32, MemberName foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsGroupMbrRemoveW.Addr(), uintptr(GroupNameSyntax), uintptr(unsafe.Pointer(GroupName)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(MemberName)))
+func RpcNsMgmtBindingUnexport(EntryNameSyntax uint32, EntryName string, IfId *RPC_IF_ID, VersOption uint32, ObjectUuidVec *UUID_VECTOR) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsMgmtBindingUnexport.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(IfId)), uintptr(VersOption), uintptr(unsafe.Pointer(ObjectUuidVec)))
 	return RPC_STATUS(r1)
 }
 
@@ -3069,11 +3111,12 @@ func RpcNsMgmtBindingUnexportA(EntryNameSyntax uint32, EntryName foundation.PSTR
 	return RPC_STATUS(r1)
 }
 
-// RpcNsMgmtBindingUnexportW calls RPCNS4!RpcNsMgmtBindingUnexportW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsmgmtbindingunexportw
+// RpcNsMgmtEntryCreate calls RPCNS4!RpcNsMgmtEntryCreateW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsmgmtentrycreatew
 // Minimum OS: windows5.0.
-func RpcNsMgmtBindingUnexportW(EntryNameSyntax uint32, EntryName foundation.PWSTR, IfId *RPC_IF_ID, VersOption uint32, ObjectUuidVec *UUID_VECTOR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsMgmtBindingUnexportW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfId)), uintptr(VersOption), uintptr(unsafe.Pointer(ObjectUuidVec)))
+func RpcNsMgmtEntryCreate(EntryNameSyntax uint32, EntryName string) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsMgmtEntryCreate.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)))
 	return RPC_STATUS(r1)
 }
 
@@ -3085,11 +3128,12 @@ func RpcNsMgmtEntryCreateA(EntryNameSyntax uint32, EntryName foundation.PSTR) RP
 	return RPC_STATUS(r1)
 }
 
-// RpcNsMgmtEntryCreateW calls RPCNS4!RpcNsMgmtEntryCreateW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsmgmtentrycreatew
+// RpcNsMgmtEntryDelete calls RPCNS4!RpcNsMgmtEntryDeleteW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsmgmtentrydeletew
 // Minimum OS: windows5.0.
-func RpcNsMgmtEntryCreateW(EntryNameSyntax uint32, EntryName foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsMgmtEntryCreateW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)))
+func RpcNsMgmtEntryDelete(EntryNameSyntax uint32, EntryName string) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsMgmtEntryDelete.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)))
 	return RPC_STATUS(r1)
 }
 
@@ -3101,11 +3145,12 @@ func RpcNsMgmtEntryDeleteA(EntryNameSyntax uint32, EntryName foundation.PSTR) RP
 	return RPC_STATUS(r1)
 }
 
-// RpcNsMgmtEntryDeleteW calls RPCNS4!RpcNsMgmtEntryDeleteW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsmgmtentrydeletew
+// RpcNsMgmtEntryInqIfIds calls RPCNS4!RpcNsMgmtEntryInqIfIdsW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsmgmtentryinqifidsw
 // Minimum OS: windows5.0.
-func RpcNsMgmtEntryDeleteW(EntryNameSyntax uint32, EntryName foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsMgmtEntryDeleteW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)))
+func RpcNsMgmtEntryInqIfIds(EntryNameSyntax uint32, EntryName string, IfIdVec **RPC_IF_ID_VECTOR) RPC_STATUS {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	r1, _, _ := syscall.SyscallN(procRpcNsMgmtEntryInqIfIds.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(IfIdVec)))
 	return RPC_STATUS(r1)
 }
 
@@ -3114,14 +3159,6 @@ func RpcNsMgmtEntryDeleteW(EntryNameSyntax uint32, EntryName foundation.PWSTR) R
 // Minimum OS: windows5.0.
 func RpcNsMgmtEntryInqIfIdsA(EntryNameSyntax uint32, EntryName foundation.PSTR, IfIdVec **RPC_IF_ID_VECTOR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcNsMgmtEntryInqIfIdsA.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfIdVec)))
-	return RPC_STATUS(r1)
-}
-
-// RpcNsMgmtEntryInqIfIdsW calls RPCNS4!RpcNsMgmtEntryInqIfIdsW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsmgmtentryinqifidsw
-// Minimum OS: windows5.0.
-func RpcNsMgmtEntryInqIfIdsW(EntryNameSyntax uint32, EntryName foundation.PWSTR, IfIdVec **RPC_IF_ID_VECTOR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsMgmtEntryInqIfIdsW.Addr(), uintptr(EntryNameSyntax), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(IfIdVec)))
 	return RPC_STATUS(r1)
 }
 
@@ -3149,6 +3186,15 @@ func RpcNsMgmtSetExpAge(ExpirationAge uint32) RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
+// RpcNsProfileDelete calls RPCNS4!RpcNsProfileDeleteW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofiledeletew
+// Minimum OS: windows5.0.
+func RpcNsProfileDelete(ProfileNameSyntax uint32, ProfileName string) RPC_STATUS {
+	_ProfileName := win32.UTF16Ptr(ProfileName)
+	r1, _, _ := syscall.SyscallN(procRpcNsProfileDelete.Addr(), uintptr(ProfileNameSyntax), uintptr(unsafe.Pointer(_ProfileName)))
+	return RPC_STATUS(r1)
+}
+
 // RpcNsProfileDeleteA calls RPCNS4!RpcNsProfileDeleteA.
 // https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofiledeletea
 // Minimum OS: windows5.0.
@@ -3157,11 +3203,14 @@ func RpcNsProfileDeleteA(ProfileNameSyntax uint32, ProfileName foundation.PSTR) 
 	return RPC_STATUS(r1)
 }
 
-// RpcNsProfileDeleteW calls RPCNS4!RpcNsProfileDeleteW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofiledeletew
+// RpcNsProfileEltAdd calls RPCNS4!RpcNsProfileEltAddW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofileeltaddw
 // Minimum OS: windows5.0.
-func RpcNsProfileDeleteW(ProfileNameSyntax uint32, ProfileName foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsProfileDeleteW.Addr(), uintptr(ProfileNameSyntax), uintptr(unsafe.Pointer(ProfileName)))
+func RpcNsProfileEltAdd(ProfileNameSyntax uint32, ProfileName string, IfId *RPC_IF_ID, MemberNameSyntax uint32, MemberName string, Priority uint32, Annotation string) RPC_STATUS {
+	_ProfileName := win32.UTF16Ptr(ProfileName)
+	_MemberName := win32.UTF16Ptr(MemberName)
+	_Annotation := win32.UTF16Ptr(Annotation)
+	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltAdd.Addr(), uintptr(ProfileNameSyntax), uintptr(unsafe.Pointer(_ProfileName)), uintptr(unsafe.Pointer(IfId)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(_MemberName)), uintptr(Priority), uintptr(unsafe.Pointer(_Annotation)))
 	return RPC_STATUS(r1)
 }
 
@@ -3173,11 +3222,13 @@ func RpcNsProfileEltAddA(ProfileNameSyntax uint32, ProfileName foundation.PSTR, 
 	return RPC_STATUS(r1)
 }
 
-// RpcNsProfileEltAddW calls RPCNS4!RpcNsProfileEltAddW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofileeltaddw
+// RpcNsProfileEltInqBegin calls RPCNS4!RpcNsProfileEltInqBeginW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofileeltinqbeginw
 // Minimum OS: windows5.0.
-func RpcNsProfileEltAddW(ProfileNameSyntax uint32, ProfileName foundation.PWSTR, IfId *RPC_IF_ID, MemberNameSyntax uint32, MemberName foundation.PWSTR, Priority uint32, Annotation foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltAddW.Addr(), uintptr(ProfileNameSyntax), uintptr(unsafe.Pointer(ProfileName)), uintptr(unsafe.Pointer(IfId)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(MemberName)), uintptr(Priority), uintptr(unsafe.Pointer(Annotation)))
+func RpcNsProfileEltInqBegin(ProfileNameSyntax uint32, ProfileName string, InquiryType uint32, IfId *RPC_IF_ID, VersOption uint32, MemberNameSyntax uint32, MemberName string, InquiryContext *unsafe.Pointer) RPC_STATUS {
+	_ProfileName := win32.UTF16Ptr(ProfileName)
+	_MemberName := win32.UTF16Ptr(MemberName)
+	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltInqBegin.Addr(), uintptr(ProfileNameSyntax), uintptr(unsafe.Pointer(_ProfileName)), uintptr(InquiryType), uintptr(unsafe.Pointer(IfId)), uintptr(VersOption), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(_MemberName)), uintptr(unsafe.Pointer(InquiryContext)))
 	return RPC_STATUS(r1)
 }
 
@@ -3189,19 +3240,19 @@ func RpcNsProfileEltInqBeginA(ProfileNameSyntax uint32, ProfileName foundation.P
 	return RPC_STATUS(r1)
 }
 
-// RpcNsProfileEltInqBeginW calls RPCNS4!RpcNsProfileEltInqBeginW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofileeltinqbeginw
-// Minimum OS: windows5.0.
-func RpcNsProfileEltInqBeginW(ProfileNameSyntax uint32, ProfileName foundation.PWSTR, InquiryType uint32, IfId *RPC_IF_ID, VersOption uint32, MemberNameSyntax uint32, MemberName foundation.PWSTR, InquiryContext *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltInqBeginW.Addr(), uintptr(ProfileNameSyntax), uintptr(unsafe.Pointer(ProfileName)), uintptr(InquiryType), uintptr(unsafe.Pointer(IfId)), uintptr(VersOption), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(MemberName)), uintptr(unsafe.Pointer(InquiryContext)))
-	return RPC_STATUS(r1)
-}
-
 // RpcNsProfileEltInqDone calls RPCNS4!RpcNsProfileEltInqDone.
 // https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofileeltinqdone
 // Minimum OS: windows5.0.
 func RpcNsProfileEltInqDone(InquiryContext *unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltInqDone.Addr(), uintptr(unsafe.Pointer(InquiryContext)))
+	return RPC_STATUS(r1)
+}
+
+// RpcNsProfileEltInqNext calls RPCNS4!RpcNsProfileEltInqNextW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofileeltinqnextw
+// Minimum OS: windows5.0.
+func RpcNsProfileEltInqNext(InquiryContext unsafe.Pointer, IfId *RPC_IF_ID, MemberName *foundation.PWSTR, Priority *uint32, Annotation *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltInqNext.Addr(), uintptr(unsafe.Pointer(InquiryContext)), uintptr(unsafe.Pointer(IfId)), uintptr(unsafe.Pointer(MemberName)), uintptr(unsafe.Pointer(Priority)), uintptr(unsafe.Pointer(Annotation)))
 	return RPC_STATUS(r1)
 }
 
@@ -3213,11 +3264,13 @@ func RpcNsProfileEltInqNextA(InquiryContext unsafe.Pointer, IfId *RPC_IF_ID, Mem
 	return RPC_STATUS(r1)
 }
 
-// RpcNsProfileEltInqNextW calls RPCNS4!RpcNsProfileEltInqNextW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofileeltinqnextw
+// RpcNsProfileEltRemove calls RPCNS4!RpcNsProfileEltRemoveW.
+// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofileeltremovew
 // Minimum OS: windows5.0.
-func RpcNsProfileEltInqNextW(InquiryContext unsafe.Pointer, IfId *RPC_IF_ID, MemberName *foundation.PWSTR, Priority *uint32, Annotation *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltInqNextW.Addr(), uintptr(unsafe.Pointer(InquiryContext)), uintptr(unsafe.Pointer(IfId)), uintptr(unsafe.Pointer(MemberName)), uintptr(unsafe.Pointer(Priority)), uintptr(unsafe.Pointer(Annotation)))
+func RpcNsProfileEltRemove(ProfileNameSyntax uint32, ProfileName string, IfId *RPC_IF_ID, MemberNameSyntax uint32, MemberName string) RPC_STATUS {
+	_ProfileName := win32.UTF16Ptr(ProfileName)
+	_MemberName := win32.UTF16Ptr(MemberName)
+	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltRemove.Addr(), uintptr(ProfileNameSyntax), uintptr(unsafe.Pointer(_ProfileName)), uintptr(unsafe.Pointer(IfId)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(_MemberName)))
 	return RPC_STATUS(r1)
 }
 
@@ -3226,14 +3279,6 @@ func RpcNsProfileEltInqNextW(InquiryContext unsafe.Pointer, IfId *RPC_IF_ID, Mem
 // Minimum OS: windows5.0.
 func RpcNsProfileEltRemoveA(ProfileNameSyntax uint32, ProfileName foundation.PSTR, IfId *RPC_IF_ID, MemberNameSyntax uint32, MemberName foundation.PSTR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltRemoveA.Addr(), uintptr(ProfileNameSyntax), uintptr(unsafe.Pointer(ProfileName)), uintptr(unsafe.Pointer(IfId)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(MemberName)))
-	return RPC_STATUS(r1)
-}
-
-// RpcNsProfileEltRemoveW calls RPCNS4!RpcNsProfileEltRemoveW.
-// https://learn.microsoft.com/windows/win32/api/rpcnsi/nf-rpcnsi-rpcnsprofileeltremovew
-// Minimum OS: windows5.0.
-func RpcNsProfileEltRemoveW(ProfileNameSyntax uint32, ProfileName foundation.PWSTR, IfId *RPC_IF_ID, MemberNameSyntax uint32, MemberName foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcNsProfileEltRemoveW.Addr(), uintptr(ProfileNameSyntax), uintptr(unsafe.Pointer(ProfileName)), uintptr(unsafe.Pointer(IfId)), uintptr(MemberNameSyntax), uintptr(unsafe.Pointer(MemberName)))
 	return RPC_STATUS(r1)
 }
 
@@ -3261,19 +3306,19 @@ func RpcObjectSetType(ObjUuid *win32.GUID, TypeUuid *win32.GUID) RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
+// RpcProtseqVectorFree calls RPCRT4!RpcProtseqVectorFreeW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcprotseqvectorfreew
+// Minimum OS: windows5.0.
+func RpcProtseqVectorFree(ProtseqVector **RPC_PROTSEQ_VECTORW) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcProtseqVectorFree.Addr(), uintptr(unsafe.Pointer(ProtseqVector)))
+	return RPC_STATUS(r1)
+}
+
 // RpcProtseqVectorFreeA calls RPCRT4!RpcProtseqVectorFreeA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcprotseqvectorfreea
 // Minimum OS: windows5.0.
 func RpcProtseqVectorFreeA(ProtseqVector **RPC_PROTSEQ_VECTORA) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcProtseqVectorFreeA.Addr(), uintptr(unsafe.Pointer(ProtseqVector)))
-	return RPC_STATUS(r1)
-}
-
-// RpcProtseqVectorFreeW calls RPCRT4!RpcProtseqVectorFreeW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcprotseqvectorfreew
-// Minimum OS: windows5.0.
-func RpcProtseqVectorFreeW(ProtseqVector **RPC_PROTSEQ_VECTORW) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcProtseqVectorFreeW.Addr(), uintptr(unsafe.Pointer(ProtseqVector)))
 	return RPC_STATUS(r1)
 }
 
@@ -3338,6 +3383,14 @@ func RpcServerInqBindingsEx(SecurityDescriptor unsafe.Pointer, BindingVector **R
 	return RPC_STATUS(r1)
 }
 
+// RpcServerInqCallAttributes calls RPCRT4!RpcServerInqCallAttributesW.
+// https://learn.microsoft.com/windows/win32/api/rpcasync/nf-rpcasync-rpcserverinqcallattributesw
+// Minimum OS: windows5.1.2600.
+func RpcServerInqCallAttributes(ClientBinding unsafe.Pointer, RpcCallAttributes unsafe.Pointer) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcServerInqCallAttributes.Addr(), uintptr(unsafe.Pointer(ClientBinding)), uintptr(unsafe.Pointer(RpcCallAttributes)))
+	return RPC_STATUS(r1)
+}
+
 // RpcServerInqCallAttributesA calls RPCRT4!RpcServerInqCallAttributesA.
 // https://learn.microsoft.com/windows/win32/api/rpcasync/nf-rpcasync-rpcserverinqcallattributesa
 // Minimum OS: windows5.1.2600.
@@ -3346,11 +3399,11 @@ func RpcServerInqCallAttributesA(ClientBinding unsafe.Pointer, RpcCallAttributes
 	return RPC_STATUS(r1)
 }
 
-// RpcServerInqCallAttributesW calls RPCRT4!RpcServerInqCallAttributesW.
-// https://learn.microsoft.com/windows/win32/api/rpcasync/nf-rpcasync-rpcserverinqcallattributesw
-// Minimum OS: windows5.1.2600.
-func RpcServerInqCallAttributesW(ClientBinding unsafe.Pointer, RpcCallAttributes unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerInqCallAttributesW.Addr(), uintptr(unsafe.Pointer(ClientBinding)), uintptr(unsafe.Pointer(RpcCallAttributes)))
+// RpcServerInqDefaultPrincName calls RPCRT4!RpcServerInqDefaultPrincNameW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverinqdefaultprincnamew
+// Minimum OS: windows5.0.
+func RpcServerInqDefaultPrincName(AuthnSvc uint32, PrincName *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcServerInqDefaultPrincName.Addr(), uintptr(AuthnSvc), uintptr(unsafe.Pointer(PrincName)))
 	return RPC_STATUS(r1)
 }
 
@@ -3359,14 +3412,6 @@ func RpcServerInqCallAttributesW(ClientBinding unsafe.Pointer, RpcCallAttributes
 // Minimum OS: windows5.0.
 func RpcServerInqDefaultPrincNameA(AuthnSvc uint32, PrincName *foundation.PSTR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcServerInqDefaultPrincNameA.Addr(), uintptr(AuthnSvc), uintptr(unsafe.Pointer(PrincName)))
-	return RPC_STATUS(r1)
-}
-
-// RpcServerInqDefaultPrincNameW calls RPCRT4!RpcServerInqDefaultPrincNameW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverinqdefaultprincnamew
-// Minimum OS: windows5.0.
-func RpcServerInqDefaultPrincNameW(AuthnSvc uint32, PrincName *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerInqDefaultPrincNameW.Addr(), uintptr(AuthnSvc), uintptr(unsafe.Pointer(PrincName)))
 	return RPC_STATUS(r1)
 }
 
@@ -3394,19 +3439,35 @@ func RpcServerInterfaceGroupClose(IfGroup unsafe.Pointer) RPC_STATUS {
 	return RPC_STATUS(r1)
 }
 
-// RpcServerInterfaceGroupCreateA calls RPCRT4!RpcServerInterfaceGroupCreateA.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverinterfacegroupcreatea
+// RpcServerInterfaceGroupCreate calls RPCRT4!RpcServerInterfaceGroupCreateW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverinterfacegroupcreatew
 // Minimum OS: windows8.0.
-func RpcServerInterfaceGroupCreateA(Interfaces *RPC_INTERFACE_TEMPLATEA, NumIfs uint32, Endpoints *RPC_ENDPOINT_TEMPLATEA, NumEndpoints uint32, IdlePeriod uint32, IdleCallbackFn RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext unsafe.Pointer, IfGroup *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerInterfaceGroupCreateA.Addr(), uintptr(unsafe.Pointer(Interfaces)), uintptr(NumIfs), uintptr(unsafe.Pointer(Endpoints)), uintptr(NumEndpoints), uintptr(IdlePeriod), uintptr(IdleCallbackFn), uintptr(unsafe.Pointer(IdleCallbackContext)), uintptr(unsafe.Pointer(IfGroup)))
+func RpcServerInterfaceGroupCreate(Interfaces []RPC_INTERFACE_TEMPLATEW, Endpoints []RPC_ENDPOINT_TEMPLATEW, IdlePeriod uint32, IdleCallbackFn RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext unsafe.Pointer, IfGroup *unsafe.Pointer) RPC_STATUS {
+	var _Interfaces *RPC_INTERFACE_TEMPLATEW
+	if len(Interfaces) > 0 {
+		_Interfaces = &Interfaces[0]
+	}
+	var _Endpoints *RPC_ENDPOINT_TEMPLATEW
+	if len(Endpoints) > 0 {
+		_Endpoints = &Endpoints[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRpcServerInterfaceGroupCreate.Addr(), uintptr(unsafe.Pointer(_Interfaces)), uintptr(len(Interfaces)), uintptr(unsafe.Pointer(_Endpoints)), uintptr(len(Endpoints)), uintptr(IdlePeriod), uintptr(IdleCallbackFn), uintptr(unsafe.Pointer(IdleCallbackContext)), uintptr(unsafe.Pointer(IfGroup)))
 	return RPC_STATUS(r1)
 }
 
-// RpcServerInterfaceGroupCreateW calls RPCRT4!RpcServerInterfaceGroupCreateW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverinterfacegroupcreatew
+// RpcServerInterfaceGroupCreateA calls RPCRT4!RpcServerInterfaceGroupCreateA.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverinterfacegroupcreatea
 // Minimum OS: windows8.0.
-func RpcServerInterfaceGroupCreateW(Interfaces *RPC_INTERFACE_TEMPLATEW, NumIfs uint32, Endpoints *RPC_ENDPOINT_TEMPLATEW, NumEndpoints uint32, IdlePeriod uint32, IdleCallbackFn RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext unsafe.Pointer, IfGroup *unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerInterfaceGroupCreateW.Addr(), uintptr(unsafe.Pointer(Interfaces)), uintptr(NumIfs), uintptr(unsafe.Pointer(Endpoints)), uintptr(NumEndpoints), uintptr(IdlePeriod), uintptr(IdleCallbackFn), uintptr(unsafe.Pointer(IdleCallbackContext)), uintptr(unsafe.Pointer(IfGroup)))
+func RpcServerInterfaceGroupCreateA(Interfaces []RPC_INTERFACE_TEMPLATEA, Endpoints []RPC_ENDPOINT_TEMPLATEA, IdlePeriod uint32, IdleCallbackFn RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext unsafe.Pointer, IfGroup *unsafe.Pointer) RPC_STATUS {
+	var _Interfaces *RPC_INTERFACE_TEMPLATEA
+	if len(Interfaces) > 0 {
+		_Interfaces = &Interfaces[0]
+	}
+	var _Endpoints *RPC_ENDPOINT_TEMPLATEA
+	if len(Endpoints) > 0 {
+		_Endpoints = &Endpoints[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRpcServerInterfaceGroupCreateA.Addr(), uintptr(unsafe.Pointer(_Interfaces)), uintptr(len(Interfaces)), uintptr(unsafe.Pointer(_Endpoints)), uintptr(len(Endpoints)), uintptr(IdlePeriod), uintptr(IdleCallbackFn), uintptr(unsafe.Pointer(IdleCallbackContext)), uintptr(unsafe.Pointer(IfGroup)))
 	return RPC_STATUS(r1)
 }
 
@@ -3434,19 +3495,20 @@ func RpcServerListen(MinimumCallThreads uint32, MaxCalls uint32, DontWait uint32
 	return RPC_STATUS(r1)
 }
 
+// RpcServerRegisterAuthInfo calls RPCRT4!RpcServerRegisterAuthInfoW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverregisterauthinfow
+// Minimum OS: windows5.0.
+func RpcServerRegisterAuthInfo(ServerPrincName string, AuthnSvc uint32, GetKeyFn RPC_AUTH_KEY_RETRIEVAL_FN, Arg unsafe.Pointer) RPC_STATUS {
+	_ServerPrincName := win32.UTF16Ptr(ServerPrincName)
+	r1, _, _ := syscall.SyscallN(procRpcServerRegisterAuthInfo.Addr(), uintptr(unsafe.Pointer(_ServerPrincName)), uintptr(AuthnSvc), uintptr(GetKeyFn), uintptr(unsafe.Pointer(Arg)))
+	return RPC_STATUS(r1)
+}
+
 // RpcServerRegisterAuthInfoA calls RPCRT4!RpcServerRegisterAuthInfoA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverregisterauthinfoa
 // Minimum OS: windows5.0.
 func RpcServerRegisterAuthInfoA(ServerPrincName foundation.PSTR, AuthnSvc uint32, GetKeyFn RPC_AUTH_KEY_RETRIEVAL_FN, Arg unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcServerRegisterAuthInfoA.Addr(), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(AuthnSvc), uintptr(GetKeyFn), uintptr(unsafe.Pointer(Arg)))
-	return RPC_STATUS(r1)
-}
-
-// RpcServerRegisterAuthInfoW calls RPCRT4!RpcServerRegisterAuthInfoW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserverregisterauthinfow
-// Minimum OS: windows5.0.
-func RpcServerRegisterAuthInfoW(ServerPrincName foundation.PWSTR, AuthnSvc uint32, GetKeyFn RPC_AUTH_KEY_RETRIEVAL_FN, Arg unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerRegisterAuthInfoW.Addr(), uintptr(unsafe.Pointer(ServerPrincName)), uintptr(AuthnSvc), uintptr(GetKeyFn), uintptr(unsafe.Pointer(Arg)))
 	return RPC_STATUS(r1)
 }
 
@@ -3554,11 +3616,30 @@ func RpcServerUseAllProtseqsIfEx(MaxCalls uint32, IfSpec unsafe.Pointer, Securit
 	return RPC_STATUS(r1)
 }
 
+// RpcServerUseProtseq calls RPCRT4!RpcServerUseProtseqW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqw
+// Minimum OS: windows5.0.
+func RpcServerUseProtseq(Protseq string, MaxCalls uint32, SecurityDescriptor unsafe.Pointer) RPC_STATUS {
+	_Protseq := win32.UTF16Ptr(Protseq)
+	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseq.Addr(), uintptr(unsafe.Pointer(_Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(SecurityDescriptor)))
+	return RPC_STATUS(r1)
+}
+
 // RpcServerUseProtseqA calls RPCRT4!RpcServerUseProtseqA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqa
 // Minimum OS: windows5.0.
 func RpcServerUseProtseqA(Protseq foundation.PSTR, MaxCalls uint32, SecurityDescriptor unsafe.Pointer) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqA.Addr(), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(SecurityDescriptor)))
+	return RPC_STATUS(r1)
+}
+
+// RpcServerUseProtseqEp calls RPCRT4!RpcServerUseProtseqEpW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqepw
+// Minimum OS: windows5.0.
+func RpcServerUseProtseqEp(Protseq string, MaxCalls uint32, Endpoint string, SecurityDescriptor unsafe.Pointer) RPC_STATUS {
+	_Protseq := win32.UTF16Ptr(Protseq)
+	_Endpoint := win32.UTF16Ptr(Endpoint)
+	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqEp.Addr(), uintptr(unsafe.Pointer(_Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(_Endpoint)), uintptr(unsafe.Pointer(SecurityDescriptor)))
 	return RPC_STATUS(r1)
 }
 
@@ -3570,6 +3651,16 @@ func RpcServerUseProtseqEpA(Protseq foundation.PSTR, MaxCalls uint32, Endpoint f
 	return RPC_STATUS(r1)
 }
 
+// RpcServerUseProtseqEpEx calls RPCRT4!RpcServerUseProtseqEpExW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqepexw
+// Minimum OS: windows5.0.
+func RpcServerUseProtseqEpEx(Protseq string, MaxCalls uint32, Endpoint string, SecurityDescriptor unsafe.Pointer, Policy *RPC_POLICY) RPC_STATUS {
+	_Protseq := win32.UTF16Ptr(Protseq)
+	_Endpoint := win32.UTF16Ptr(Endpoint)
+	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqEpEx.Addr(), uintptr(unsafe.Pointer(_Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(_Endpoint)), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
+	return RPC_STATUS(r1)
+}
+
 // RpcServerUseProtseqEpExA calls RPCRT4!RpcServerUseProtseqEpExA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqepexa
 // Minimum OS: windows5.0.
@@ -3578,19 +3669,12 @@ func RpcServerUseProtseqEpExA(Protseq foundation.PSTR, MaxCalls uint32, Endpoint
 	return RPC_STATUS(r1)
 }
 
-// RpcServerUseProtseqEpExW calls RPCRT4!RpcServerUseProtseqEpExW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqepexw
+// RpcServerUseProtseqEx calls RPCRT4!RpcServerUseProtseqExW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqexw
 // Minimum OS: windows5.0.
-func RpcServerUseProtseqEpExW(Protseq foundation.PWSTR, MaxCalls uint32, Endpoint foundation.PWSTR, SecurityDescriptor unsafe.Pointer, Policy *RPC_POLICY) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqEpExW.Addr(), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
-	return RPC_STATUS(r1)
-}
-
-// RpcServerUseProtseqEpW calls RPCRT4!RpcServerUseProtseqEpW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqepw
-// Minimum OS: windows5.0.
-func RpcServerUseProtseqEpW(Protseq foundation.PWSTR, MaxCalls uint32, Endpoint foundation.PWSTR, SecurityDescriptor unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqEpW.Addr(), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(SecurityDescriptor)))
+func RpcServerUseProtseqEx(Protseq string, MaxCalls uint32, SecurityDescriptor unsafe.Pointer, Policy *RPC_POLICY) RPC_STATUS {
+	_Protseq := win32.UTF16Ptr(Protseq)
+	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqEx.Addr(), uintptr(unsafe.Pointer(_Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
 	return RPC_STATUS(r1)
 }
 
@@ -3602,11 +3686,12 @@ func RpcServerUseProtseqExA(Protseq foundation.PSTR, MaxCalls uint32, SecurityDe
 	return RPC_STATUS(r1)
 }
 
-// RpcServerUseProtseqExW calls RPCRT4!RpcServerUseProtseqExW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqexw
+// RpcServerUseProtseqIf calls RPCRT4!RpcServerUseProtseqIfW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqifw
 // Minimum OS: windows5.0.
-func RpcServerUseProtseqExW(Protseq foundation.PWSTR, MaxCalls uint32, SecurityDescriptor unsafe.Pointer, Policy *RPC_POLICY) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqExW.Addr(), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
+func RpcServerUseProtseqIf(Protseq string, MaxCalls uint32, IfSpec unsafe.Pointer, SecurityDescriptor unsafe.Pointer) RPC_STATUS {
+	_Protseq := win32.UTF16Ptr(Protseq)
+	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqIf.Addr(), uintptr(unsafe.Pointer(_Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(SecurityDescriptor)))
 	return RPC_STATUS(r1)
 }
 
@@ -3618,35 +3703,20 @@ func RpcServerUseProtseqIfA(Protseq foundation.PSTR, MaxCalls uint32, IfSpec uns
 	return RPC_STATUS(r1)
 }
 
+// RpcServerUseProtseqIfEx calls RPCRT4!RpcServerUseProtseqIfExW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqifexw
+// Minimum OS: windows5.1.2600.
+func RpcServerUseProtseqIfEx(Protseq string, MaxCalls uint32, IfSpec unsafe.Pointer, SecurityDescriptor unsafe.Pointer, Policy *RPC_POLICY) RPC_STATUS {
+	_Protseq := win32.UTF16Ptr(Protseq)
+	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqIfEx.Addr(), uintptr(unsafe.Pointer(_Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
+	return RPC_STATUS(r1)
+}
+
 // RpcServerUseProtseqIfExA calls RPCRT4!RpcServerUseProtseqIfExA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqifexa
 // Minimum OS: windows5.1.2600.
 func RpcServerUseProtseqIfExA(Protseq foundation.PSTR, MaxCalls uint32, IfSpec unsafe.Pointer, SecurityDescriptor unsafe.Pointer, Policy *RPC_POLICY) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqIfExA.Addr(), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
-	return RPC_STATUS(r1)
-}
-
-// RpcServerUseProtseqIfExW calls RPCRT4!RpcServerUseProtseqIfExW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqifexw
-// Minimum OS: windows5.1.2600.
-func RpcServerUseProtseqIfExW(Protseq foundation.PWSTR, MaxCalls uint32, IfSpec unsafe.Pointer, SecurityDescriptor unsafe.Pointer, Policy *RPC_POLICY) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqIfExW.Addr(), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(Policy)))
-	return RPC_STATUS(r1)
-}
-
-// RpcServerUseProtseqIfW calls RPCRT4!RpcServerUseProtseqIfW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqifw
-// Minimum OS: windows5.0.
-func RpcServerUseProtseqIfW(Protseq foundation.PWSTR, MaxCalls uint32, IfSpec unsafe.Pointer, SecurityDescriptor unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqIfW.Addr(), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(IfSpec)), uintptr(unsafe.Pointer(SecurityDescriptor)))
-	return RPC_STATUS(r1)
-}
-
-// RpcServerUseProtseqW calls RPCRT4!RpcServerUseProtseqW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcserveruseprotseqw
-// Minimum OS: windows5.0.
-func RpcServerUseProtseqW(Protseq foundation.PWSTR, MaxCalls uint32, SecurityDescriptor unsafe.Pointer) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcServerUseProtseqW.Addr(), uintptr(unsafe.Pointer(Protseq)), uintptr(MaxCalls), uintptr(unsafe.Pointer(SecurityDescriptor)))
 	return RPC_STATUS(r1)
 }
 
@@ -3829,6 +3899,19 @@ func RpcSsSwapClientAllocFree(ClientAlloc RPC_CLIENT_ALLOC, ClientFree RPC_CLIEN
 	syscall.SyscallN(procRpcSsSwapClientAllocFree.Addr(), uintptr(ClientAlloc), uintptr(ClientFree), uintptr(unsafe.Pointer(OldClientAlloc)), uintptr(unsafe.Pointer(OldClientFree)))
 }
 
+// RpcStringBindingCompose calls RPCRT4!RpcStringBindingComposeW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcstringbindingcomposew
+// Minimum OS: windows5.0.
+func RpcStringBindingCompose(ObjUuid string, ProtSeq string, NetworkAddr string, Endpoint string, Options string, StringBinding *foundation.PWSTR) RPC_STATUS {
+	_ObjUuid := win32.UTF16Ptr(ObjUuid)
+	_ProtSeq := win32.UTF16Ptr(ProtSeq)
+	_NetworkAddr := win32.UTF16Ptr(NetworkAddr)
+	_Endpoint := win32.UTF16Ptr(Endpoint)
+	_Options := win32.UTF16Ptr(Options)
+	r1, _, _ := syscall.SyscallN(procRpcStringBindingCompose.Addr(), uintptr(unsafe.Pointer(_ObjUuid)), uintptr(unsafe.Pointer(_ProtSeq)), uintptr(unsafe.Pointer(_NetworkAddr)), uintptr(unsafe.Pointer(_Endpoint)), uintptr(unsafe.Pointer(_Options)), uintptr(unsafe.Pointer(StringBinding)))
+	return RPC_STATUS(r1)
+}
+
 // RpcStringBindingComposeA calls RPCRT4!RpcStringBindingComposeA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcstringbindingcomposea
 // Minimum OS: windows5.0.
@@ -3837,11 +3920,12 @@ func RpcStringBindingComposeA(ObjUuid foundation.PSTR, ProtSeq foundation.PSTR, 
 	return RPC_STATUS(r1)
 }
 
-// RpcStringBindingComposeW calls RPCRT4!RpcStringBindingComposeW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcstringbindingcomposew
+// RpcStringBindingParse calls RPCRT4!RpcStringBindingParseW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcstringbindingparsew
 // Minimum OS: windows5.0.
-func RpcStringBindingComposeW(ObjUuid foundation.PWSTR, ProtSeq foundation.PWSTR, NetworkAddr foundation.PWSTR, Endpoint foundation.PWSTR, Options foundation.PWSTR, StringBinding *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcStringBindingComposeW.Addr(), uintptr(unsafe.Pointer(ObjUuid)), uintptr(unsafe.Pointer(ProtSeq)), uintptr(unsafe.Pointer(NetworkAddr)), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(StringBinding)))
+func RpcStringBindingParse(StringBinding string, ObjUuid *foundation.PWSTR, Protseq *foundation.PWSTR, NetworkAddr *foundation.PWSTR, Endpoint *foundation.PWSTR, NetworkOptions *foundation.PWSTR) RPC_STATUS {
+	_StringBinding := win32.UTF16Ptr(StringBinding)
+	r1, _, _ := syscall.SyscallN(procRpcStringBindingParse.Addr(), uintptr(unsafe.Pointer(_StringBinding)), uintptr(unsafe.Pointer(ObjUuid)), uintptr(unsafe.Pointer(Protseq)), uintptr(unsafe.Pointer(NetworkAddr)), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(NetworkOptions)))
 	return RPC_STATUS(r1)
 }
 
@@ -3853,11 +3937,11 @@ func RpcStringBindingParseA(StringBinding foundation.PSTR, ObjUuid *foundation.P
 	return RPC_STATUS(r1)
 }
 
-// RpcStringBindingParseW calls RPCRT4!RpcStringBindingParseW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcstringbindingparsew
+// RpcStringFree calls RPCRT4!RpcStringFreeW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcstringfreew
 // Minimum OS: windows5.0.
-func RpcStringBindingParseW(StringBinding foundation.PWSTR, ObjUuid *foundation.PWSTR, Protseq *foundation.PWSTR, NetworkAddr *foundation.PWSTR, Endpoint *foundation.PWSTR, NetworkOptions *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcStringBindingParseW.Addr(), uintptr(unsafe.Pointer(StringBinding)), uintptr(unsafe.Pointer(ObjUuid)), uintptr(unsafe.Pointer(Protseq)), uintptr(unsafe.Pointer(NetworkAddr)), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(NetworkOptions)))
+func RpcStringFree(String *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procRpcStringFree.Addr(), uintptr(unsafe.Pointer(String)))
 	return RPC_STATUS(r1)
 }
 
@@ -3866,14 +3950,6 @@ func RpcStringBindingParseW(StringBinding foundation.PWSTR, ObjUuid *foundation.
 // Minimum OS: windows5.0.
 func RpcStringFreeA(String *foundation.PSTR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procRpcStringFreeA.Addr(), uintptr(unsafe.Pointer(String)))
-	return RPC_STATUS(r1)
-}
-
-// RpcStringFreeW calls RPCRT4!RpcStringFreeW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-rpcstringfreew
-// Minimum OS: windows5.0.
-func RpcStringFreeW(String *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcStringFreeW.Addr(), uintptr(unsafe.Pointer(String)))
 	return RPC_STATUS(r1)
 }
 
@@ -3932,19 +4008,20 @@ func UuidEqual(Uuid1 *win32.GUID, Uuid2 *win32.GUID, Status *RPC_STATUS) int32 {
 	return int32(r1)
 }
 
+// UuidFromString calls RPCRT4!UuidFromStringW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-uuidfromstringw
+// Minimum OS: windows5.0.
+func UuidFromString(StringUuid string, Uuid *win32.GUID) RPC_STATUS {
+	_StringUuid := win32.UTF16Ptr(StringUuid)
+	r1, _, _ := syscall.SyscallN(procUuidFromString.Addr(), uintptr(unsafe.Pointer(_StringUuid)), uintptr(unsafe.Pointer(Uuid)))
+	return RPC_STATUS(r1)
+}
+
 // UuidFromStringA calls RPCRT4!UuidFromStringA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-uuidfromstringa
 // Minimum OS: windows5.0.
 func UuidFromStringA(StringUuid foundation.PSTR, Uuid *win32.GUID) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procUuidFromStringA.Addr(), uintptr(unsafe.Pointer(StringUuid)), uintptr(unsafe.Pointer(Uuid)))
-	return RPC_STATUS(r1)
-}
-
-// UuidFromStringW calls RPCRT4!UuidFromStringW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-uuidfromstringw
-// Minimum OS: windows5.0.
-func UuidFromStringW(StringUuid foundation.PWSTR, Uuid *win32.GUID) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procUuidFromStringW.Addr(), uintptr(unsafe.Pointer(StringUuid)), uintptr(unsafe.Pointer(Uuid)))
 	return RPC_STATUS(r1)
 }
 
@@ -3964,18 +4041,18 @@ func UuidIsNil(Uuid *win32.GUID, Status *RPC_STATUS) int32 {
 	return int32(r1)
 }
 
+// UuidToString calls RPCRT4!UuidToStringW.
+// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-uuidtostringw
+// Minimum OS: windows5.0.
+func UuidToString(Uuid *win32.GUID, StringUuid *foundation.PWSTR) RPC_STATUS {
+	r1, _, _ := syscall.SyscallN(procUuidToString.Addr(), uintptr(unsafe.Pointer(Uuid)), uintptr(unsafe.Pointer(StringUuid)))
+	return RPC_STATUS(r1)
+}
+
 // UuidToStringA calls RPCRT4!UuidToStringA.
 // https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-uuidtostringa
 // Minimum OS: windows5.0.
 func UuidToStringA(Uuid *win32.GUID, StringUuid *foundation.PSTR) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procUuidToStringA.Addr(), uintptr(unsafe.Pointer(Uuid)), uintptr(unsafe.Pointer(StringUuid)))
-	return RPC_STATUS(r1)
-}
-
-// UuidToStringW calls RPCRT4!UuidToStringW.
-// https://learn.microsoft.com/windows/win32/api/rpcdce/nf-rpcdce-uuidtostringw
-// Minimum OS: windows5.0.
-func UuidToStringW(Uuid *win32.GUID, StringUuid *foundation.PWSTR) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procUuidToStringW.Addr(), uintptr(unsafe.Pointer(Uuid)), uintptr(unsafe.Pointer(StringUuid)))
 	return RPC_STATUS(r1)
 }

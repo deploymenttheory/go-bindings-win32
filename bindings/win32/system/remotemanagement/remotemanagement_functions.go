@@ -85,37 +85,44 @@ func WSManCloseShell(shellHandle WSMAN_SHELL_HANDLE, flags uint32, async *WSMAN_
 // WSManConnectShell calls WsmSvc!WSManConnectShell.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanconnectshell
 // Minimum OS: windows8.0.
-func WSManConnectShell(session WSMAN_SESSION_HANDLE, flags uint32, resourceUri foundation.PWSTR, shellID foundation.PWSTR, options *WSMAN_OPTION_SET, connectXml *WSMAN_DATA, async *WSMAN_SHELL_ASYNC, shell *WSMAN_SHELL_HANDLE) {
-	syscall.SyscallN(procWSManConnectShell.Addr(), uintptr(session), uintptr(flags), uintptr(unsafe.Pointer(resourceUri)), uintptr(unsafe.Pointer(shellID)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(connectXml)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(shell)))
+func WSManConnectShell(session WSMAN_SESSION_HANDLE, flags uint32, resourceUri string, shellID string, options *WSMAN_OPTION_SET, connectXml *WSMAN_DATA, async *WSMAN_SHELL_ASYNC, shell *WSMAN_SHELL_HANDLE) {
+	_resourceUri := win32.UTF16Ptr(resourceUri)
+	_shellID := win32.UTF16Ptr(shellID)
+	syscall.SyscallN(procWSManConnectShell.Addr(), uintptr(session), uintptr(flags), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_shellID)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(connectXml)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(shell)))
 }
 
 // WSManConnectShellCommand calls WsmSvc!WSManConnectShellCommand.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanconnectshellcommand
 // Minimum OS: windows8.0.
-func WSManConnectShellCommand(shell WSMAN_SHELL_HANDLE, flags uint32, commandID foundation.PWSTR, options *WSMAN_OPTION_SET, connectXml *WSMAN_DATA, async *WSMAN_SHELL_ASYNC, command *WSMAN_COMMAND_HANDLE) {
-	syscall.SyscallN(procWSManConnectShellCommand.Addr(), uintptr(shell), uintptr(flags), uintptr(unsafe.Pointer(commandID)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(connectXml)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(command)))
+func WSManConnectShellCommand(shell WSMAN_SHELL_HANDLE, flags uint32, commandID string, options *WSMAN_OPTION_SET, connectXml *WSMAN_DATA, async *WSMAN_SHELL_ASYNC, command *WSMAN_COMMAND_HANDLE) {
+	_commandID := win32.UTF16Ptr(commandID)
+	syscall.SyscallN(procWSManConnectShellCommand.Addr(), uintptr(shell), uintptr(flags), uintptr(unsafe.Pointer(_commandID)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(connectXml)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(command)))
 }
 
 // WSManCreateSession calls WsmSvc!WSManCreateSession.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmancreatesession
 // Minimum OS: windows6.1.
-func WSManCreateSession(apiHandle WSMAN_API_HANDLE, connection foundation.PWSTR, flags uint32, serverAuthenticationCredentials *WSMAN_AUTHENTICATION_CREDENTIALS, proxyInfo *WSMAN_PROXY_INFO, session *WSMAN_SESSION_HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procWSManCreateSession.Addr(), uintptr(apiHandle), uintptr(unsafe.Pointer(connection)), uintptr(flags), uintptr(unsafe.Pointer(serverAuthenticationCredentials)), uintptr(unsafe.Pointer(proxyInfo)), uintptr(unsafe.Pointer(session)))
+func WSManCreateSession(apiHandle WSMAN_API_HANDLE, connection string, flags uint32, serverAuthenticationCredentials *WSMAN_AUTHENTICATION_CREDENTIALS, proxyInfo *WSMAN_PROXY_INFO, session *WSMAN_SESSION_HANDLE) uint32 {
+	_connection := win32.UTF16Ptr(connection)
+	r1, _, _ := syscall.SyscallN(procWSManCreateSession.Addr(), uintptr(apiHandle), uintptr(unsafe.Pointer(_connection)), uintptr(flags), uintptr(unsafe.Pointer(serverAuthenticationCredentials)), uintptr(unsafe.Pointer(proxyInfo)), uintptr(unsafe.Pointer(session)))
 	return uint32(r1)
 }
 
 // WSManCreateShell calls WsmSvc!WSManCreateShell.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmancreateshell
 // Minimum OS: windows6.1.
-func WSManCreateShell(session WSMAN_SESSION_HANDLE, flags uint32, resourceUri foundation.PWSTR, startupInfo *WSMAN_SHELL_STARTUP_INFO_V11, options *WSMAN_OPTION_SET, createXml *WSMAN_DATA, async *WSMAN_SHELL_ASYNC, shell *WSMAN_SHELL_HANDLE) {
-	syscall.SyscallN(procWSManCreateShell.Addr(), uintptr(session), uintptr(flags), uintptr(unsafe.Pointer(resourceUri)), uintptr(unsafe.Pointer(startupInfo)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(createXml)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(shell)))
+func WSManCreateShell(session WSMAN_SESSION_HANDLE, flags uint32, resourceUri string, startupInfo *WSMAN_SHELL_STARTUP_INFO_V11, options *WSMAN_OPTION_SET, createXml *WSMAN_DATA, async *WSMAN_SHELL_ASYNC, shell *WSMAN_SHELL_HANDLE) {
+	_resourceUri := win32.UTF16Ptr(resourceUri)
+	syscall.SyscallN(procWSManCreateShell.Addr(), uintptr(session), uintptr(flags), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(startupInfo)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(createXml)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(shell)))
 }
 
 // WSManCreateShellEx calls WsmSvc!WSManCreateShellEx.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmancreateshellex
 // Minimum OS: windows8.0.
-func WSManCreateShellEx(session WSMAN_SESSION_HANDLE, flags uint32, resourceUri foundation.PWSTR, shellId foundation.PWSTR, startupInfo *WSMAN_SHELL_STARTUP_INFO_V11, options *WSMAN_OPTION_SET, createXml *WSMAN_DATA, async *WSMAN_SHELL_ASYNC, shell *WSMAN_SHELL_HANDLE) {
-	syscall.SyscallN(procWSManCreateShellEx.Addr(), uintptr(session), uintptr(flags), uintptr(unsafe.Pointer(resourceUri)), uintptr(unsafe.Pointer(shellId)), uintptr(unsafe.Pointer(startupInfo)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(createXml)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(shell)))
+func WSManCreateShellEx(session WSMAN_SESSION_HANDLE, flags uint32, resourceUri string, shellId string, startupInfo *WSMAN_SHELL_STARTUP_INFO_V11, options *WSMAN_OPTION_SET, createXml *WSMAN_DATA, async *WSMAN_SHELL_ASYNC, shell *WSMAN_SHELL_HANDLE) {
+	_resourceUri := win32.UTF16Ptr(resourceUri)
+	_shellId := win32.UTF16Ptr(shellId)
+	syscall.SyscallN(procWSManCreateShellEx.Addr(), uintptr(session), uintptr(flags), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_shellId)), uintptr(unsafe.Pointer(startupInfo)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(createXml)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(shell)))
 }
 
 // WSManDeinitialize calls WsmSvc!WSManDeinitialize.
@@ -136,8 +143,9 @@ func WSManDisconnectShell(shell WSMAN_SHELL_HANDLE, flags uint32, disconnectInfo
 // WSManGetErrorMessage calls WsmSvc!WSManGetErrorMessage.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmangeterrormessage
 // Minimum OS: windows6.1.
-func WSManGetErrorMessage(apiHandle WSMAN_API_HANDLE, flags uint32, languageCode foundation.PWSTR, errorCode uint32, messageLength uint32, message foundation.PWSTR, messageLengthUsed *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWSManGetErrorMessage.Addr(), uintptr(apiHandle), uintptr(flags), uintptr(unsafe.Pointer(languageCode)), uintptr(errorCode), uintptr(messageLength), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(messageLengthUsed)))
+func WSManGetErrorMessage(apiHandle WSMAN_API_HANDLE, languageCode string, errorCode uint32, messageLength uint32, message foundation.PWSTR, messageLengthUsed *uint32) uint32 {
+	_languageCode := win32.UTF16Ptr(languageCode)
+	r1, _, _ := syscall.SyscallN(procWSManGetErrorMessage.Addr(), uintptr(apiHandle), 0, uintptr(unsafe.Pointer(_languageCode)), uintptr(errorCode), uintptr(messageLength), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(messageLengthUsed)))
 	return uint32(r1)
 }
 
@@ -168,24 +176,28 @@ func WSManInitialize(flags uint32, apiHandle *WSMAN_API_HANDLE) uint32 {
 // WSManPluginAuthzOperationComplete calls WsmSvc!WSManPluginAuthzOperationComplete.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginauthzoperationcomplete
 // Minimum OS: windows6.1.
-func WSManPluginAuthzOperationComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, userAuthorizationContext unsafe.Pointer, errorCode uint32, extendedErrorInformation foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procWSManPluginAuthzOperationComplete.Addr(), uintptr(unsafe.Pointer(senderDetails)), uintptr(flags), uintptr(unsafe.Pointer(userAuthorizationContext)), uintptr(errorCode), uintptr(unsafe.Pointer(extendedErrorInformation)))
+func WSManPluginAuthzOperationComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, userAuthorizationContext unsafe.Pointer, errorCode uint32, extendedErrorInformation string) uint32 {
+	_extendedErrorInformation := win32.UTF16Ptr(extendedErrorInformation)
+	r1, _, _ := syscall.SyscallN(procWSManPluginAuthzOperationComplete.Addr(), uintptr(unsafe.Pointer(senderDetails)), uintptr(flags), uintptr(unsafe.Pointer(userAuthorizationContext)), uintptr(errorCode), uintptr(unsafe.Pointer(_extendedErrorInformation)))
 	return uint32(r1)
 }
 
 // WSManPluginAuthzQueryQuotaComplete calls WsmSvc!WSManPluginAuthzQueryQuotaComplete.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginauthzqueryquotacomplete
 // Minimum OS: windows6.1.
-func WSManPluginAuthzQueryQuotaComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, quota *WSMAN_AUTHZ_QUOTA, errorCode uint32, extendedErrorInformation foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procWSManPluginAuthzQueryQuotaComplete.Addr(), uintptr(unsafe.Pointer(senderDetails)), uintptr(flags), uintptr(unsafe.Pointer(quota)), uintptr(errorCode), uintptr(unsafe.Pointer(extendedErrorInformation)))
+func WSManPluginAuthzQueryQuotaComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, quota *WSMAN_AUTHZ_QUOTA, errorCode uint32, extendedErrorInformation string) uint32 {
+	_extendedErrorInformation := win32.UTF16Ptr(extendedErrorInformation)
+	r1, _, _ := syscall.SyscallN(procWSManPluginAuthzQueryQuotaComplete.Addr(), uintptr(unsafe.Pointer(senderDetails)), uintptr(flags), uintptr(unsafe.Pointer(quota)), uintptr(errorCode), uintptr(unsafe.Pointer(_extendedErrorInformation)))
 	return uint32(r1)
 }
 
 // WSManPluginAuthzUserComplete calls WsmSvc!WSManPluginAuthzUserComplete.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginauthzusercomplete
 // Minimum OS: windows6.1.
-func WSManPluginAuthzUserComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, userAuthorizationContext unsafe.Pointer, impersonationToken foundation.HANDLE, userIsAdministrator foundation.BOOL, errorCode uint32, extendedErrorInformation foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procWSManPluginAuthzUserComplete.Addr(), uintptr(unsafe.Pointer(senderDetails)), uintptr(flags), uintptr(unsafe.Pointer(userAuthorizationContext)), uintptr(impersonationToken), uintptr(userIsAdministrator), uintptr(errorCode), uintptr(unsafe.Pointer(extendedErrorInformation)))
+func WSManPluginAuthzUserComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, userAuthorizationContext unsafe.Pointer, impersonationToken foundation.HANDLE, userIsAdministrator bool, errorCode uint32, extendedErrorInformation string) uint32 {
+	_userIsAdministrator := win32.Bool32(userIsAdministrator)
+	_extendedErrorInformation := win32.UTF16Ptr(extendedErrorInformation)
+	r1, _, _ := syscall.SyscallN(procWSManPluginAuthzUserComplete.Addr(), uintptr(unsafe.Pointer(senderDetails)), uintptr(flags), uintptr(unsafe.Pointer(userAuthorizationContext)), uintptr(impersonationToken), uintptr(_userIsAdministrator), uintptr(errorCode), uintptr(unsafe.Pointer(_extendedErrorInformation)))
 	return uint32(r1)
 }
 
@@ -214,16 +226,19 @@ func WSManPluginGetOperationParameters(requestDetails *WSMAN_PLUGIN_REQUEST, fla
 // WSManPluginOperationComplete calls WsmSvc!WSManPluginOperationComplete.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginoperationcomplete
 // Minimum OS: windows6.1.
-func WSManPluginOperationComplete(requestDetails *WSMAN_PLUGIN_REQUEST, flags uint32, errorCode uint32, extendedInformation foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procWSManPluginOperationComplete.Addr(), uintptr(unsafe.Pointer(requestDetails)), uintptr(flags), uintptr(errorCode), uintptr(unsafe.Pointer(extendedInformation)))
+func WSManPluginOperationComplete(requestDetails *WSMAN_PLUGIN_REQUEST, flags uint32, errorCode uint32, extendedInformation string) uint32 {
+	_extendedInformation := win32.UTF16Ptr(extendedInformation)
+	r1, _, _ := syscall.SyscallN(procWSManPluginOperationComplete.Addr(), uintptr(unsafe.Pointer(requestDetails)), uintptr(flags), uintptr(errorCode), uintptr(unsafe.Pointer(_extendedInformation)))
 	return uint32(r1)
 }
 
 // WSManPluginReceiveResult calls WsmSvc!WSManPluginReceiveResult.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginreceiveresult
 // Minimum OS: windows6.1.
-func WSManPluginReceiveResult(requestDetails *WSMAN_PLUGIN_REQUEST, flags uint32, stream foundation.PWSTR, streamResult *WSMAN_DATA, commandState foundation.PWSTR, exitCode uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWSManPluginReceiveResult.Addr(), uintptr(unsafe.Pointer(requestDetails)), uintptr(flags), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(streamResult)), uintptr(unsafe.Pointer(commandState)), uintptr(exitCode))
+func WSManPluginReceiveResult(requestDetails *WSMAN_PLUGIN_REQUEST, flags uint32, stream string, streamResult *WSMAN_DATA, commandState string, exitCode uint32) uint32 {
+	_stream := win32.UTF16Ptr(stream)
+	_commandState := win32.UTF16Ptr(commandState)
+	r1, _, _ := syscall.SyscallN(procWSManPluginReceiveResult.Addr(), uintptr(unsafe.Pointer(requestDetails)), uintptr(flags), uintptr(unsafe.Pointer(_stream)), uintptr(unsafe.Pointer(streamResult)), uintptr(unsafe.Pointer(_commandState)), uintptr(exitCode))
 	return uint32(r1)
 }
 
@@ -265,22 +280,27 @@ func WSManReconnectShellCommand(commandHandle WSMAN_COMMAND_HANDLE, flags uint32
 // WSManRunShellCommand calls WsmSvc!WSManRunShellCommand.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanrunshellcommand
 // Minimum OS: windows6.1.
-func WSManRunShellCommand(shell WSMAN_SHELL_HANDLE, flags uint32, commandLine foundation.PWSTR, args *WSMAN_COMMAND_ARG_SET, options *WSMAN_OPTION_SET, async *WSMAN_SHELL_ASYNC, command *WSMAN_COMMAND_HANDLE) {
-	syscall.SyscallN(procWSManRunShellCommand.Addr(), uintptr(shell), uintptr(flags), uintptr(unsafe.Pointer(commandLine)), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(command)))
+func WSManRunShellCommand(shell WSMAN_SHELL_HANDLE, flags uint32, commandLine string, args *WSMAN_COMMAND_ARG_SET, options *WSMAN_OPTION_SET, async *WSMAN_SHELL_ASYNC, command *WSMAN_COMMAND_HANDLE) {
+	_commandLine := win32.UTF16Ptr(commandLine)
+	syscall.SyscallN(procWSManRunShellCommand.Addr(), uintptr(shell), uintptr(flags), uintptr(unsafe.Pointer(_commandLine)), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(command)))
 }
 
 // WSManRunShellCommandEx calls WsmSvc!WSManRunShellCommandEx.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanrunshellcommandex
 // Minimum OS: windows8.0.
-func WSManRunShellCommandEx(shell WSMAN_SHELL_HANDLE, flags uint32, commandId foundation.PWSTR, commandLine foundation.PWSTR, args *WSMAN_COMMAND_ARG_SET, options *WSMAN_OPTION_SET, async *WSMAN_SHELL_ASYNC, command *WSMAN_COMMAND_HANDLE) {
-	syscall.SyscallN(procWSManRunShellCommandEx.Addr(), uintptr(shell), uintptr(flags), uintptr(unsafe.Pointer(commandId)), uintptr(unsafe.Pointer(commandLine)), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(command)))
+func WSManRunShellCommandEx(shell WSMAN_SHELL_HANDLE, flags uint32, commandId string, commandLine string, args *WSMAN_COMMAND_ARG_SET, options *WSMAN_OPTION_SET, async *WSMAN_SHELL_ASYNC, command *WSMAN_COMMAND_HANDLE) {
+	_commandId := win32.UTF16Ptr(commandId)
+	_commandLine := win32.UTF16Ptr(commandLine)
+	syscall.SyscallN(procWSManRunShellCommandEx.Addr(), uintptr(shell), uintptr(flags), uintptr(unsafe.Pointer(_commandId)), uintptr(unsafe.Pointer(_commandLine)), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(command)))
 }
 
 // WSManSendShellInput calls WsmSvc!WSManSendShellInput.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmansendshellinput
 // Minimum OS: windows6.1.
-func WSManSendShellInput(shell WSMAN_SHELL_HANDLE, command WSMAN_COMMAND_HANDLE, flags uint32, streamId foundation.PWSTR, streamData *WSMAN_DATA, endOfStream foundation.BOOL, async *WSMAN_SHELL_ASYNC, sendOperation *WSMAN_OPERATION_HANDLE) {
-	syscall.SyscallN(procWSManSendShellInput.Addr(), uintptr(shell), uintptr(command), uintptr(flags), uintptr(unsafe.Pointer(streamId)), uintptr(unsafe.Pointer(streamData)), uintptr(endOfStream), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(sendOperation)))
+func WSManSendShellInput(shell WSMAN_SHELL_HANDLE, command WSMAN_COMMAND_HANDLE, flags uint32, streamId string, streamData *WSMAN_DATA, endOfStream bool, async *WSMAN_SHELL_ASYNC, sendOperation *WSMAN_OPERATION_HANDLE) {
+	_streamId := win32.UTF16Ptr(streamId)
+	_endOfStream := win32.Bool32(endOfStream)
+	syscall.SyscallN(procWSManSendShellInput.Addr(), uintptr(shell), uintptr(command), uintptr(flags), uintptr(unsafe.Pointer(_streamId)), uintptr(unsafe.Pointer(streamData)), uintptr(_endOfStream), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(sendOperation)))
 }
 
 // WSManSetSessionOption calls WsmSvc!WSManSetSessionOption.
@@ -294,6 +314,7 @@ func WSManSetSessionOption(session WSMAN_SESSION_HANDLE, option WSManSessionOpti
 // WSManSignalShell calls WsmSvc!WSManSignalShell.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmansignalshell
 // Minimum OS: windows6.1.
-func WSManSignalShell(shell WSMAN_SHELL_HANDLE, command WSMAN_COMMAND_HANDLE, flags uint32, code foundation.PWSTR, async *WSMAN_SHELL_ASYNC, signalOperation *WSMAN_OPERATION_HANDLE) {
-	syscall.SyscallN(procWSManSignalShell.Addr(), uintptr(shell), uintptr(command), uintptr(flags), uintptr(unsafe.Pointer(code)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(signalOperation)))
+func WSManSignalShell(shell WSMAN_SHELL_HANDLE, command WSMAN_COMMAND_HANDLE, flags uint32, code string, async *WSMAN_SHELL_ASYNC, signalOperation *WSMAN_OPERATION_HANDLE) {
+	_code := win32.UTF16Ptr(code)
+	syscall.SyscallN(procWSManSignalShell.Addr(), uintptr(shell), uintptr(command), uintptr(flags), uintptr(unsafe.Pointer(_code)), uintptr(unsafe.Pointer(async)), uintptr(unsafe.Pointer(signalOperation)))
 }

@@ -64,142 +64,151 @@ var (
 
 // HcnCloseEndpoint calls computenetwork!HcnCloseEndpoint.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCloseEndpoint
-func HcnCloseEndpoint(Endpoint unsafe.Pointer) foundation.HRESULT {
+func HcnCloseEndpoint(Endpoint unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcnCloseEndpoint.Addr(), uintptr(unsafe.Pointer(Endpoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnCloseGuestNetworkService calls computenetwork!HcnCloseGuestNetworkService.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCloseGuestNetworkService
-func HcnCloseGuestNetworkService(GuestNetworkService unsafe.Pointer) foundation.HRESULT {
+func HcnCloseGuestNetworkService(GuestNetworkService unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcnCloseGuestNetworkService.Addr(), uintptr(unsafe.Pointer(GuestNetworkService)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnCloseLoadBalancer calls computenetwork!HcnCloseLoadBalancer.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCloseLoadBalancer
-func HcnCloseLoadBalancer(LoadBalancer unsafe.Pointer) foundation.HRESULT {
+func HcnCloseLoadBalancer(LoadBalancer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcnCloseLoadBalancer.Addr(), uintptr(unsafe.Pointer(LoadBalancer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnCloseNamespace calls computenetwork!HcnCloseNamespace.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCloseNamespace
-func HcnCloseNamespace(Namespace unsafe.Pointer) foundation.HRESULT {
+func HcnCloseNamespace(Namespace unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcnCloseNamespace.Addr(), uintptr(unsafe.Pointer(Namespace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnCloseNetwork calls computenetwork!HcnCloseNetwork.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCloseNetwork
-func HcnCloseNetwork(Network unsafe.Pointer) foundation.HRESULT {
+func HcnCloseNetwork(Network unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcnCloseNetwork.Addr(), uintptr(unsafe.Pointer(Network)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnCreateEndpoint calls computenetwork!HcnCreateEndpoint.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCreateEndpoint
-func HcnCreateEndpoint(Network unsafe.Pointer, Id *win32.GUID, Settings foundation.PWSTR, Endpoint *unsafe.Pointer, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnCreateEndpoint.Addr(), uintptr(unsafe.Pointer(Network)), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnCreateEndpoint(Network unsafe.Pointer, Id *win32.GUID, Settings string, Endpoint *unsafe.Pointer, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnCreateEndpoint.Addr(), uintptr(unsafe.Pointer(Network)), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnCreateGuestNetworkService calls computenetwork!HcnCreateGuestNetworkService.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCreateGuestNetworkService
-func HcnCreateGuestNetworkService(Id *win32.GUID, Settings foundation.PWSTR, GuestNetworkService *unsafe.Pointer, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnCreateGuestNetworkService.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(GuestNetworkService)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnCreateGuestNetworkService(Id *win32.GUID, Settings string, GuestNetworkService *unsafe.Pointer, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnCreateGuestNetworkService.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(GuestNetworkService)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnCreateLoadBalancer calls computenetwork!HcnCreateLoadBalancer.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCreateLoadBalancer
-func HcnCreateLoadBalancer(Id *win32.GUID, Settings foundation.PWSTR, LoadBalancer *unsafe.Pointer, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnCreateLoadBalancer.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(LoadBalancer)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnCreateLoadBalancer(Id *win32.GUID, Settings string, LoadBalancer *unsafe.Pointer, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnCreateLoadBalancer.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(LoadBalancer)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnCreateNamespace calls computenetwork!HcnCreateNamespace.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCreateNamespace
-func HcnCreateNamespace(Id *win32.GUID, Settings foundation.PWSTR, Namespace *unsafe.Pointer, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnCreateNamespace.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(Namespace)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnCreateNamespace(Id *win32.GUID, Settings string, Namespace *unsafe.Pointer, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnCreateNamespace.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(Namespace)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnCreateNetwork calls computenetwork!HcnCreateNetwork.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCreateNetwork
-func HcnCreateNetwork(Id *win32.GUID, Settings foundation.PWSTR, Network *unsafe.Pointer, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnCreateNetwork.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(Network)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnCreateNetwork(Id *win32.GUID, Settings string, Network *unsafe.Pointer, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnCreateNetwork.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(Network)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnDeleteEndpoint calls computenetwork!HcnDeleteEndpoint.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnDeleteEndpoint
-func HcnDeleteEndpoint(Id *win32.GUID, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
+func HcnDeleteEndpoint(Id *win32.GUID, ErrorRecord *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcnDeleteEndpoint.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnDeleteGuestNetworkService calls computenetwork!HcnDeleteGuestNetworkService.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnDeleteGuestNetworkService
-func HcnDeleteGuestNetworkService(Id *win32.GUID, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
+func HcnDeleteGuestNetworkService(Id *win32.GUID, ErrorRecord *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcnDeleteGuestNetworkService.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnDeleteLoadBalancer calls computenetwork!HcnDeleteLoadBalancer.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnDeleteLoadBalancer
-func HcnDeleteLoadBalancer(Id *win32.GUID, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
+func HcnDeleteLoadBalancer(Id *win32.GUID, ErrorRecord *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcnDeleteLoadBalancer.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnDeleteNamespace calls computenetwork!HcnDeleteNamespace.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnDeleteNamespace
-func HcnDeleteNamespace(Id *win32.GUID, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
+func HcnDeleteNamespace(Id *win32.GUID, ErrorRecord *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcnDeleteNamespace.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnDeleteNetwork calls computenetwork!HcnDeleteNetwork.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnDeleteNetwork
-func HcnDeleteNetwork(Id *win32.GUID, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
+func HcnDeleteNetwork(Id *win32.GUID, ErrorRecord *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcnDeleteNetwork.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnEnumerateEndpoints calls computenetwork!HcnEnumerateEndpoints.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnEnumerateEndpoints
-func HcnEnumerateEndpoints(Query foundation.PWSTR, Endpoints *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnEnumerateEndpoints.Addr(), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Endpoints)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnEnumerateEndpoints(Query string, Endpoints *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnEnumerateEndpoints.Addr(), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(Endpoints)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnEnumerateGuestNetworkPortReservations calls computenetwork!HcnEnumerateGuestNetworkPortReservations.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnEnumerateGuestNetworkPortReservations
-func HcnEnumerateGuestNetworkPortReservations(ReturnCount *uint32, PortEntries **HCN_PORT_RANGE_ENTRY) foundation.HRESULT {
+func HcnEnumerateGuestNetworkPortReservations(ReturnCount *uint32, PortEntries **HCN_PORT_RANGE_ENTRY) error {
 	r1, _, _ := syscall.SyscallN(procHcnEnumerateGuestNetworkPortReservations.Addr(), uintptr(unsafe.Pointer(ReturnCount)), uintptr(unsafe.Pointer(PortEntries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnEnumerateLoadBalancers calls computenetwork!HcnEnumerateLoadBalancers.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnEnumerateLoadBalancers
-func HcnEnumerateLoadBalancers(Query foundation.PWSTR, LoadBalancer *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnEnumerateLoadBalancers.Addr(), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(LoadBalancer)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnEnumerateLoadBalancers(Query string, LoadBalancer *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnEnumerateLoadBalancers.Addr(), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(LoadBalancer)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnEnumerateNamespaces calls computenetwork!HcnEnumerateNamespaces.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnEnumerateNamespaces
-func HcnEnumerateNamespaces(Query foundation.PWSTR, Namespaces *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnEnumerateNamespaces.Addr(), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Namespaces)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnEnumerateNamespaces(Query string, Namespaces *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnEnumerateNamespaces.Addr(), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(Namespaces)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnEnumerateNetworks calls computenetwork!HcnEnumerateNetworks.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnEnumerateNetworks
-func HcnEnumerateNetworks(Query foundation.PWSTR, Networks *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnEnumerateNetworks.Addr(), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Networks)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnEnumerateNetworks(Query string, Networks *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnEnumerateNetworks.Addr(), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(Networks)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnFreeGuestNetworkPortReservations calls computenetwork!HcnFreeGuestNetworkPortReservations.
@@ -210,152 +219,163 @@ func HcnFreeGuestNetworkPortReservations(PortEntries *HCN_PORT_RANGE_ENTRY) {
 
 // HcnModifyEndpoint calls computenetwork!HcnModifyEndpoint.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnModifyEndpoint
-func HcnModifyEndpoint(Endpoint unsafe.Pointer, Settings foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnModifyEndpoint.Addr(), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnModifyEndpoint(Endpoint unsafe.Pointer, Settings string, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnModifyEndpoint.Addr(), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnModifyGuestNetworkService calls computenetwork!HcnModifyGuestNetworkService.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnModifyGuestNetworkService
-func HcnModifyGuestNetworkService(GuestNetworkService unsafe.Pointer, Settings foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnModifyGuestNetworkService.Addr(), uintptr(unsafe.Pointer(GuestNetworkService)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnModifyGuestNetworkService(GuestNetworkService unsafe.Pointer, Settings string, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnModifyGuestNetworkService.Addr(), uintptr(unsafe.Pointer(GuestNetworkService)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnModifyLoadBalancer calls computenetwork!HcnModifyLoadBalancer.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnModifyLoadBalancer
-func HcnModifyLoadBalancer(LoadBalancer unsafe.Pointer, Settings foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnModifyLoadBalancer.Addr(), uintptr(unsafe.Pointer(LoadBalancer)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnModifyLoadBalancer(LoadBalancer unsafe.Pointer, Settings string, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnModifyLoadBalancer.Addr(), uintptr(unsafe.Pointer(LoadBalancer)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnModifyNamespace calls computenetwork!HcnModifyNamespace.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnModifyNamespace
-func HcnModifyNamespace(Namespace unsafe.Pointer, Settings foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnModifyNamespace.Addr(), uintptr(unsafe.Pointer(Namespace)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnModifyNamespace(Namespace unsafe.Pointer, Settings string, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnModifyNamespace.Addr(), uintptr(unsafe.Pointer(Namespace)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnModifyNetwork calls computenetwork!HcnModifyNetwork.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnModifyNetwork
-func HcnModifyNetwork(Network unsafe.Pointer, Settings foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnModifyNetwork.Addr(), uintptr(unsafe.Pointer(Network)), uintptr(unsafe.Pointer(Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnModifyNetwork(Network unsafe.Pointer, Settings string, ErrorRecord *foundation.PWSTR) error {
+	_Settings := win32.UTF16Ptr(Settings)
+	r1, _, _ := syscall.SyscallN(procHcnModifyNetwork.Addr(), uintptr(unsafe.Pointer(Network)), uintptr(unsafe.Pointer(_Settings)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnOpenEndpoint calls computenetwork!HcnOpenEndpoint.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnOpenEndpoint
-func HcnOpenEndpoint(Id *win32.GUID, Endpoint *unsafe.Pointer, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
+func HcnOpenEndpoint(Id *win32.GUID, Endpoint *unsafe.Pointer, ErrorRecord *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcnOpenEndpoint.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnOpenLoadBalancer calls computenetwork!HcnOpenLoadBalancer.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnOpenLoadBalancer
-func HcnOpenLoadBalancer(Id *win32.GUID, LoadBalancer *unsafe.Pointer, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
+func HcnOpenLoadBalancer(Id *win32.GUID, LoadBalancer *unsafe.Pointer, ErrorRecord *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcnOpenLoadBalancer.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(LoadBalancer)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnOpenNamespace calls computenetwork!HcnOpenNamespace.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnOpenNamespace
-func HcnOpenNamespace(Id *win32.GUID, Namespace *unsafe.Pointer, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
+func HcnOpenNamespace(Id *win32.GUID, Namespace *unsafe.Pointer, ErrorRecord *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcnOpenNamespace.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Namespace)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnOpenNetwork calls computenetwork!HcnOpenNetwork.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnOpenNetwork
-func HcnOpenNetwork(Id *win32.GUID, Network *unsafe.Pointer, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
+func HcnOpenNetwork(Id *win32.GUID, Network *unsafe.Pointer, ErrorRecord *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procHcnOpenNetwork.Addr(), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Network)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnQueryEndpointAddresses calls computenetwork!HcnQueryEndpointAddresses.
-func HcnQueryEndpointAddresses(Endpoint unsafe.Pointer, Query foundation.PWSTR, Addresses *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnQueryEndpointAddresses.Addr(), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Addresses)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnQueryEndpointAddresses(Endpoint unsafe.Pointer, Query string, Addresses *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnQueryEndpointAddresses.Addr(), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(Addresses)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnQueryEndpointProperties calls computenetwork!HcnQueryEndpointProperties.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnQueryEndpointProperties
-func HcnQueryEndpointProperties(Endpoint unsafe.Pointer, Query foundation.PWSTR, Properties *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnQueryEndpointProperties.Addr(), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Properties)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnQueryEndpointProperties(Endpoint unsafe.Pointer, Query string, Properties *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnQueryEndpointProperties.Addr(), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(Properties)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnQueryEndpointStats calls computenetwork!HcnQueryEndpointStats.
-func HcnQueryEndpointStats(Endpoint unsafe.Pointer, Query foundation.PWSTR, Stats *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnQueryEndpointStats.Addr(), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Stats)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnQueryEndpointStats(Endpoint unsafe.Pointer, Query string, Stats *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnQueryEndpointStats.Addr(), uintptr(unsafe.Pointer(Endpoint)), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(Stats)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnQueryLoadBalancerProperties calls computenetwork!HcnQueryLoadBalancerProperties.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnQueryLoadBalancerProperties
-func HcnQueryLoadBalancerProperties(LoadBalancer unsafe.Pointer, Query foundation.PWSTR, Properties *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnQueryLoadBalancerProperties.Addr(), uintptr(unsafe.Pointer(LoadBalancer)), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Properties)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnQueryLoadBalancerProperties(LoadBalancer unsafe.Pointer, Query string, Properties *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnQueryLoadBalancerProperties.Addr(), uintptr(unsafe.Pointer(LoadBalancer)), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(Properties)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnQueryNamespaceProperties calls computenetwork!HcnQueryNamespaceProperties.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnQueryNamespaceProperties
-func HcnQueryNamespaceProperties(Namespace unsafe.Pointer, Query foundation.PWSTR, Properties *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnQueryNamespaceProperties.Addr(), uintptr(unsafe.Pointer(Namespace)), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Properties)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnQueryNamespaceProperties(Namespace unsafe.Pointer, Query string, Properties *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnQueryNamespaceProperties.Addr(), uintptr(unsafe.Pointer(Namespace)), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(Properties)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnQueryNetworkProperties calls computenetwork!HcnQueryNetworkProperties.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnQueryNetworkProperties
-func HcnQueryNetworkProperties(Network unsafe.Pointer, Query foundation.PWSTR, Properties *foundation.PWSTR, ErrorRecord *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHcnQueryNetworkProperties.Addr(), uintptr(unsafe.Pointer(Network)), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Properties)), uintptr(unsafe.Pointer(ErrorRecord)))
-	return foundation.HRESULT(r1)
+func HcnQueryNetworkProperties(Network unsafe.Pointer, Query string, Properties *foundation.PWSTR, ErrorRecord *foundation.PWSTR) error {
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, _ := syscall.SyscallN(procHcnQueryNetworkProperties.Addr(), uintptr(unsafe.Pointer(Network)), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(Properties)), uintptr(unsafe.Pointer(ErrorRecord)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnRegisterGuestNetworkServiceCallback calls computenetwork!HcnRegisterGuestNetworkServiceCallback.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnRegisterGuestNetworkServiceCallback
-func HcnRegisterGuestNetworkServiceCallback(GuestNetworkService unsafe.Pointer, Callback HCN_NOTIFICATION_CALLBACK, Context unsafe.Pointer, CallbackHandle *unsafe.Pointer) foundation.HRESULT {
+func HcnRegisterGuestNetworkServiceCallback(GuestNetworkService unsafe.Pointer, Callback HCN_NOTIFICATION_CALLBACK, Context unsafe.Pointer, CallbackHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcnRegisterGuestNetworkServiceCallback.Addr(), uintptr(unsafe.Pointer(GuestNetworkService)), uintptr(Callback), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(CallbackHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnRegisterServiceCallback calls computenetwork!HcnRegisterServiceCallback.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnRegisterServiceCallback
-func HcnRegisterServiceCallback(Callback HCN_NOTIFICATION_CALLBACK, Context unsafe.Pointer, CallbackHandle *unsafe.Pointer) foundation.HRESULT {
+func HcnRegisterServiceCallback(Callback HCN_NOTIFICATION_CALLBACK, Context unsafe.Pointer, CallbackHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcnRegisterServiceCallback.Addr(), uintptr(Callback), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(CallbackHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnReleaseGuestNetworkServicePortReservationHandle calls computenetwork!HcnReleaseGuestNetworkServicePortReservationHandle.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnReleaseGuestNetworkServicePortReservationHandle
-func HcnReleaseGuestNetworkServicePortReservationHandle(PortReservationHandle foundation.HANDLE) foundation.HRESULT {
+func HcnReleaseGuestNetworkServicePortReservationHandle(PortReservationHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procHcnReleaseGuestNetworkServicePortReservationHandle.Addr(), uintptr(PortReservationHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnReserveGuestNetworkServicePort calls computenetwork!HcnReserveGuestNetworkServicePort.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnReserveGuestNetworkServicePort
-func HcnReserveGuestNetworkServicePort(GuestNetworkService unsafe.Pointer, Protocol HCN_PORT_PROTOCOL, Access HCN_PORT_ACCESS, Port uint16, PortReservationHandle *foundation.HANDLE) foundation.HRESULT {
+func HcnReserveGuestNetworkServicePort(GuestNetworkService unsafe.Pointer, Protocol HCN_PORT_PROTOCOL, Access HCN_PORT_ACCESS, Port uint16, PortReservationHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procHcnReserveGuestNetworkServicePort.Addr(), uintptr(unsafe.Pointer(GuestNetworkService)), uintptr(Protocol), uintptr(Access), uintptr(Port), uintptr(unsafe.Pointer(PortReservationHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnReserveGuestNetworkServicePortRange calls computenetwork!HcnReserveGuestNetworkServicePortRange.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnReserveGuestNetworkServicePortRange
-func HcnReserveGuestNetworkServicePortRange(GuestNetworkService unsafe.Pointer, PortCount uint16, PortRangeReservation *HCN_PORT_RANGE_RESERVATION, PortReservationHandle *foundation.HANDLE) foundation.HRESULT {
+func HcnReserveGuestNetworkServicePortRange(GuestNetworkService unsafe.Pointer, PortCount uint16, PortRangeReservation *HCN_PORT_RANGE_RESERVATION, PortReservationHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procHcnReserveGuestNetworkServicePortRange.Addr(), uintptr(unsafe.Pointer(GuestNetworkService)), uintptr(PortCount), uintptr(unsafe.Pointer(PortRangeReservation)), uintptr(unsafe.Pointer(PortReservationHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnUnregisterGuestNetworkServiceCallback calls computenetwork!HcnUnregisterGuestNetworkServiceCallback.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnUnregisterGuestNetworkServiceCallback
-func HcnUnregisterGuestNetworkServiceCallback(CallbackHandle unsafe.Pointer) foundation.HRESULT {
+func HcnUnregisterGuestNetworkServiceCallback(CallbackHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcnUnregisterGuestNetworkServiceCallback.Addr(), uintptr(unsafe.Pointer(CallbackHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HcnUnregisterServiceCallback calls computenetwork!HcnUnregisterServiceCallback.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnUnregisterServiceCallback
-func HcnUnregisterServiceCallback(CallbackHandle unsafe.Pointer) foundation.HRESULT {
+func HcnUnregisterServiceCallback(CallbackHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHcnUnregisterServiceCallback.Addr(), uintptr(unsafe.Pointer(CallbackHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

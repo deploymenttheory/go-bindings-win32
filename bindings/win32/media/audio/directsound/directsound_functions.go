@@ -20,73 +20,73 @@ var (
 var (
 	procDirectSoundCaptureCreate     = modDSOUND.NewProc("DirectSoundCaptureCreate")
 	procDirectSoundCaptureCreate8    = modDSOUND.NewProc("DirectSoundCaptureCreate8")
+	procDirectSoundCaptureEnumerate  = modDSOUND.NewProc("DirectSoundCaptureEnumerateW")
 	procDirectSoundCaptureEnumerateA = modDSOUND.NewProc("DirectSoundCaptureEnumerateA")
-	procDirectSoundCaptureEnumerateW = modDSOUND.NewProc("DirectSoundCaptureEnumerateW")
 	procDirectSoundCreate            = modDSOUND.NewProc("DirectSoundCreate")
 	procDirectSoundCreate8           = modDSOUND.NewProc("DirectSoundCreate8")
+	procDirectSoundEnumerate         = modDSOUND.NewProc("DirectSoundEnumerateW")
 	procDirectSoundEnumerateA        = modDSOUND.NewProc("DirectSoundEnumerateA")
-	procDirectSoundEnumerateW        = modDSOUND.NewProc("DirectSoundEnumerateW")
 	procDirectSoundFullDuplexCreate  = modDSOUND.NewProc("DirectSoundFullDuplexCreate")
 	procGetDeviceID                  = modDSOUND.NewProc("GetDeviceID")
 )
 
 // DirectSoundCaptureCreate calls DSOUND!DirectSoundCaptureCreate.
-func DirectSoundCaptureCreate(pcGuidDevice *win32.GUID, ppDSC **IDirectSoundCapture, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func DirectSoundCaptureCreate(pcGuidDevice *win32.GUID, ppDSC **IDirectSoundCapture, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectSoundCaptureCreate.Addr(), uintptr(unsafe.Pointer(pcGuidDevice)), uintptr(unsafe.Pointer(ppDSC)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectSoundCaptureCreate8 calls DSOUND!DirectSoundCaptureCreate8.
-func DirectSoundCaptureCreate8(pcGuidDevice *win32.GUID, ppDSC8 **IDirectSoundCapture, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func DirectSoundCaptureCreate8(pcGuidDevice *win32.GUID, ppDSC8 **IDirectSoundCapture, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectSoundCaptureCreate8.Addr(), uintptr(unsafe.Pointer(pcGuidDevice)), uintptr(unsafe.Pointer(ppDSC8)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// DirectSoundCaptureEnumerate calls DSOUND!DirectSoundCaptureEnumerateW.
+func DirectSoundCaptureEnumerate(pDSEnumCallback LPDSENUMCALLBACKW, pContext unsafe.Pointer) error {
+	r1, _, _ := syscall.SyscallN(procDirectSoundCaptureEnumerate.Addr(), uintptr(pDSEnumCallback), uintptr(unsafe.Pointer(pContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectSoundCaptureEnumerateA calls DSOUND!DirectSoundCaptureEnumerateA.
-func DirectSoundCaptureEnumerateA(pDSEnumCallback LPDSENUMCALLBACKA, pContext unsafe.Pointer) foundation.HRESULT {
+func DirectSoundCaptureEnumerateA(pDSEnumCallback LPDSENUMCALLBACKA, pContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDirectSoundCaptureEnumerateA.Addr(), uintptr(pDSEnumCallback), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
-}
-
-// DirectSoundCaptureEnumerateW calls DSOUND!DirectSoundCaptureEnumerateW.
-func DirectSoundCaptureEnumerateW(pDSEnumCallback LPDSENUMCALLBACKW, pContext unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirectSoundCaptureEnumerateW.Addr(), uintptr(pDSEnumCallback), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectSoundCreate calls DSOUND!DirectSoundCreate.
-func DirectSoundCreate(pcGuidDevice *win32.GUID, ppDS **IDirectSound, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func DirectSoundCreate(pcGuidDevice *win32.GUID, ppDS **IDirectSound, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectSoundCreate.Addr(), uintptr(unsafe.Pointer(pcGuidDevice)), uintptr(unsafe.Pointer(ppDS)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectSoundCreate8 calls DSOUND!DirectSoundCreate8.
-func DirectSoundCreate8(pcGuidDevice *win32.GUID, ppDS8 **IDirectSound8, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func DirectSoundCreate8(pcGuidDevice *win32.GUID, ppDS8 **IDirectSound8, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectSoundCreate8.Addr(), uintptr(unsafe.Pointer(pcGuidDevice)), uintptr(unsafe.Pointer(ppDS8)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// DirectSoundEnumerate calls DSOUND!DirectSoundEnumerateW.
+func DirectSoundEnumerate(pDSEnumCallback LPDSENUMCALLBACKW, pContext unsafe.Pointer) error {
+	r1, _, _ := syscall.SyscallN(procDirectSoundEnumerate.Addr(), uintptr(pDSEnumCallback), uintptr(unsafe.Pointer(pContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectSoundEnumerateA calls DSOUND!DirectSoundEnumerateA.
-func DirectSoundEnumerateA(pDSEnumCallback LPDSENUMCALLBACKA, pContext unsafe.Pointer) foundation.HRESULT {
+func DirectSoundEnumerateA(pDSEnumCallback LPDSENUMCALLBACKA, pContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDirectSoundEnumerateA.Addr(), uintptr(pDSEnumCallback), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
-}
-
-// DirectSoundEnumerateW calls DSOUND!DirectSoundEnumerateW.
-func DirectSoundEnumerateW(pDSEnumCallback LPDSENUMCALLBACKW, pContext unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirectSoundEnumerateW.Addr(), uintptr(pDSEnumCallback), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectSoundFullDuplexCreate calls DSOUND!DirectSoundFullDuplexCreate.
 // https://learn.microsoft.com/windows/win32/DevNotes/directsoundfullduplexcreate
-func DirectSoundFullDuplexCreate(pcGuidCaptureDevice *win32.GUID, pcGuidRenderDevice *win32.GUID, pcDSCBufferDesc *DSCBUFFERDESC, pcDSBufferDesc *DSBUFFERDESC, hWnd foundation.HWND, dwLevel uint32, ppDSFD **IDirectSoundFullDuplex, ppDSCBuffer8 **IDirectSoundCaptureBuffer8, ppDSBuffer8 **IDirectSoundBuffer8, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func DirectSoundFullDuplexCreate(pcGuidCaptureDevice *win32.GUID, pcGuidRenderDevice *win32.GUID, pcDSCBufferDesc *DSCBUFFERDESC, pcDSBufferDesc *DSBUFFERDESC, hWnd foundation.HWND, dwLevel uint32, ppDSFD **IDirectSoundFullDuplex, ppDSCBuffer8 **IDirectSoundCaptureBuffer8, ppDSBuffer8 **IDirectSoundBuffer8, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectSoundFullDuplexCreate.Addr(), uintptr(unsafe.Pointer(pcGuidCaptureDevice)), uintptr(unsafe.Pointer(pcGuidRenderDevice)), uintptr(unsafe.Pointer(pcDSCBufferDesc)), uintptr(unsafe.Pointer(pcDSBufferDesc)), uintptr(hWnd), uintptr(dwLevel), uintptr(unsafe.Pointer(ppDSFD)), uintptr(unsafe.Pointer(ppDSCBuffer8)), uintptr(unsafe.Pointer(ppDSBuffer8)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceID calls DSOUND!GetDeviceID.
-func GetDeviceID(pGuidSrc *win32.GUID, pGuidDest *win32.GUID) foundation.HRESULT {
+func GetDeviceID(pGuidSrc *win32.GUID, pGuidDest *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procGetDeviceID.Addr(), uintptr(unsafe.Pointer(pGuidSrc)), uintptr(unsafe.Pointer(pGuidDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -24,9 +24,10 @@ type IDisplayDeviceInterop struct {
 var IID_IDisplayDeviceInterop = win32.GUID{Data1: 0x64338358, Data2: 0x366a, Data3: 0x471b, Data4: [8]byte{0xbd, 0x56, 0xdd, 0x8e, 0xf4, 0x8e, 0x43, 0x9b}}
 
 // CreateSharedHandle dispatches through IDisplayDeviceInterop's vtable slot 3.
-func (self *IDisplayDeviceInterop) CreateSharedHandle(pObject *systemwinrt.IInspectable, pSecurityAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name systemwinrt.HSTRING, pHandle *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pSecurityAttributes)), uintptr(Access), uintptr(Name), uintptr(unsafe.Pointer(pHandle)))
-	return foundation.HRESULT(r1)
+func (self *IDisplayDeviceInterop) CreateSharedHandle(pObject *systemwinrt.IInspectable, pSecurityAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name systemwinrt.HSTRING) (foundation.HANDLE, error) {
+	var _pHandle foundation.HANDLE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pSecurityAttributes)), uintptr(Access), uintptr(Name), uintptr(unsafe.Pointer(&_pHandle)))
+	return _pHandle, win32.HRESULTError(int32(r1))
 }
 
 // IID: a6ba4205-e59e-4e71-b25b-4e436d21ee3d
@@ -38,13 +39,15 @@ type IDisplayPathInterop struct {
 var IID_IDisplayPathInterop = win32.GUID{Data1: 0xa6ba4205, Data2: 0xe59e, Data3: 0x4e71, Data4: [8]byte{0xb2, 0x5b, 0x4e, 0x43, 0x6d, 0x21, 0xee, 0x3d}}
 
 // CreateSourcePresentationHandle dispatches through IDisplayPathInterop's vtable slot 3.
-func (self *IDisplayPathInterop) CreateSourcePresentationHandle(pValue *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+func (self *IDisplayPathInterop) CreateSourcePresentationHandle() (foundation.HANDLE, error) {
+	var _pValue foundation.HANDLE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pValue)))
+	return _pValue, win32.HRESULTError(int32(r1))
 }
 
 // GetSourceId dispatches through IDisplayPathInterop's vtable slot 4.
-func (self *IDisplayPathInterop) GetSourceId(pSourceId *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceId)))
-	return foundation.HRESULT(r1)
+func (self *IDisplayPathInterop) GetSourceId() (uint32, error) {
+	var _pSourceId uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pSourceId)))
+	return _pSourceId, win32.HRESULTError(int32(r1))
 }

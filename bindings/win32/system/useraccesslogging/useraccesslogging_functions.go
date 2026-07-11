@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -26,31 +25,34 @@ var (
 // UalInstrument calls ualapi!UalInstrument.
 // https://learn.microsoft.com/windows/win32/api/ual/nf-ual-ualinstrument
 // Minimum OS: windows8.0.
-func UalInstrument(Data *UAL_DATA_BLOB) foundation.HRESULT {
+func UalInstrument(Data *UAL_DATA_BLOB) error {
 	r1, _, _ := syscall.SyscallN(procUalInstrument.Addr(), uintptr(unsafe.Pointer(Data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UalRegisterProduct calls ualapi!UalRegisterProduct.
 // https://learn.microsoft.com/windows/win32/api/ual/nf-ual-ualregisterproduct
 // Minimum OS: windows8.0.
-func UalRegisterProduct(wszProductName foundation.PWSTR, wszRoleName foundation.PWSTR, wszGuid foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUalRegisterProduct.Addr(), uintptr(unsafe.Pointer(wszProductName)), uintptr(unsafe.Pointer(wszRoleName)), uintptr(unsafe.Pointer(wszGuid)))
-	return foundation.HRESULT(r1)
+func UalRegisterProduct(wszProductName string, wszRoleName string, wszGuid string) error {
+	_wszProductName := win32.UTF16Ptr(wszProductName)
+	_wszRoleName := win32.UTF16Ptr(wszRoleName)
+	_wszGuid := win32.UTF16Ptr(wszGuid)
+	r1, _, _ := syscall.SyscallN(procUalRegisterProduct.Addr(), uintptr(unsafe.Pointer(_wszProductName)), uintptr(unsafe.Pointer(_wszRoleName)), uintptr(unsafe.Pointer(_wszGuid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UalStart calls ualapi!UalStart.
 // https://learn.microsoft.com/windows/win32/api/ual/nf-ual-ualstart
 // Minimum OS: windows8.0.
-func UalStart(Data *UAL_DATA_BLOB) foundation.HRESULT {
+func UalStart(Data *UAL_DATA_BLOB) error {
 	r1, _, _ := syscall.SyscallN(procUalStart.Addr(), uintptr(unsafe.Pointer(Data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UalStop calls ualapi!UalStop.
 // https://learn.microsoft.com/windows/win32/api/ual/nf-ual-ualstop
 // Minimum OS: windows8.0.
-func UalStop(Data *UAL_DATA_BLOB) foundation.HRESULT {
+func UalStop(Data *UAL_DATA_BLOB) error {
 	r1, _, _ := syscall.SyscallN(procUalStop.Addr(), uintptr(unsafe.Pointer(Data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

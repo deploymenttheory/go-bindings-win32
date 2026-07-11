@@ -26,9 +26,9 @@ type IConnectionRequestCallback struct {
 var IID_IConnectionRequestCallback = win32.GUID{Data1: 0x272c9ae0, Data2: 0x7161, Data3: 0x4ae0, Data4: [8]byte{0x91, 0xbd, 0x9f, 0x44, 0x8e, 0xe9, 0xc4, 0x27}}
 
 // OnComplete dispatches through IConnectionRequestCallback's vtable slot 3.
-func (self *IConnectionRequestCallback) OnComplete(hrStatus foundation.HRESULT) foundation.HRESULT {
+func (self *IConnectionRequestCallback) OnComplete(hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumPortableDeviceConnectors: https://learn.microsoft.com/windows/win32/wpd_sdk/ienumportabledeviceconnectors
@@ -41,27 +41,27 @@ type IEnumPortableDeviceConnectors struct {
 var IID_IEnumPortableDeviceConnectors = win32.GUID{Data1: 0xbfdef549, Data2: 0x9247, Data3: 0x454f, Data4: [8]byte{0xbd, 0x82, 0x06, 0xfe, 0x80, 0x85, 0x3f, 0xaa}}
 
 // Next dispatches through IEnumPortableDeviceConnectors's vtable slot 3.
-func (self *IEnumPortableDeviceConnectors) Next(cRequested uint32, pConnectors **IPortableDeviceConnector, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumPortableDeviceConnectors) Next(cRequested uint32, pConnectors **IPortableDeviceConnector, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cRequested), uintptr(unsafe.Pointer(pConnectors)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumPortableDeviceConnectors's vtable slot 4.
-func (self *IEnumPortableDeviceConnectors) Skip(cConnectors uint32) foundation.HRESULT {
+func (self *IEnumPortableDeviceConnectors) Skip(cConnectors uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cConnectors))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumPortableDeviceConnectors's vtable slot 5.
-func (self *IEnumPortableDeviceConnectors) Reset() foundation.HRESULT {
+func (self *IEnumPortableDeviceConnectors) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumPortableDeviceConnectors's vtable slot 6.
-func (self *IEnumPortableDeviceConnectors) Clone(ppEnum **IEnumPortableDeviceConnectors) foundation.HRESULT {
+func (self *IEnumPortableDeviceConnectors) Clone(ppEnum **IEnumPortableDeviceConnectors) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumPortableDeviceObjectIDs: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-ienumportabledeviceobjectids
@@ -74,33 +74,33 @@ type IEnumPortableDeviceObjectIDs struct {
 var IID_IEnumPortableDeviceObjectIDs = win32.GUID{Data1: 0x10ece955, Data2: 0xcf41, Data3: 0x4728, Data4: [8]byte{0xbf, 0xa0, 0x41, 0xee, 0xdf, 0x1b, 0xbf, 0x19}}
 
 // Next dispatches through IEnumPortableDeviceObjectIDs's vtable slot 3.
-func (self *IEnumPortableDeviceObjectIDs) Next(cObjects uint32, pObjIDs *foundation.PWSTR, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumPortableDeviceObjectIDs) Next(cObjects uint32, pObjIDs *foundation.PWSTR, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cObjects), uintptr(unsafe.Pointer(pObjIDs)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumPortableDeviceObjectIDs's vtable slot 4.
-func (self *IEnumPortableDeviceObjectIDs) Skip(cObjects uint32) foundation.HRESULT {
+func (self *IEnumPortableDeviceObjectIDs) Skip(cObjects uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cObjects))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumPortableDeviceObjectIDs's vtable slot 5.
-func (self *IEnumPortableDeviceObjectIDs) Reset() foundation.HRESULT {
+func (self *IEnumPortableDeviceObjectIDs) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumPortableDeviceObjectIDs's vtable slot 6.
-func (self *IEnumPortableDeviceObjectIDs) Clone(ppEnum **IEnumPortableDeviceObjectIDs) foundation.HRESULT {
+func (self *IEnumPortableDeviceObjectIDs) Clone(ppEnum **IEnumPortableDeviceObjectIDs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IEnumPortableDeviceObjectIDs's vtable slot 7.
-func (self *IEnumPortableDeviceObjectIDs) Cancel() foundation.HRESULT {
+func (self *IEnumPortableDeviceObjectIDs) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6cfdcab5-fc47-42a5-9241-074b58830e73
@@ -112,15 +112,15 @@ type IMediaRadioManager struct {
 var IID_IMediaRadioManager = win32.GUID{Data1: 0x6cfdcab5, Data2: 0xfc47, Data3: 0x42a5, Data4: [8]byte{0x92, 0x41, 0x07, 0x4b, 0x58, 0x83, 0x0e, 0x73}}
 
 // GetRadioInstances dispatches through IMediaRadioManager's vtable slot 3.
-func (self *IMediaRadioManager) GetRadioInstances(ppCollection **IRadioInstanceCollection) foundation.HRESULT {
+func (self *IMediaRadioManager) GetRadioInstances(ppCollection **IRadioInstanceCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSystemRadioStateChange dispatches through IMediaRadioManager's vtable slot 4.
-func (self *IMediaRadioManager) OnSystemRadioStateChange(sysRadioState SYSTEM_RADIO_STATE, uTimeoutSec uint32) foundation.HRESULT {
+func (self *IMediaRadioManager) OnSystemRadioStateChange(sysRadioState SYSTEM_RADIO_STATE, uTimeoutSec uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(sysRadioState), uintptr(uTimeoutSec))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 89d81f5f-c147-49ed-a11c-77b20c31e7c9
@@ -132,21 +132,21 @@ type IMediaRadioManagerNotifySink struct {
 var IID_IMediaRadioManagerNotifySink = win32.GUID{Data1: 0x89d81f5f, Data2: 0xc147, Data3: 0x49ed, Data4: [8]byte{0xa1, 0x1c, 0x77, 0xb2, 0x0c, 0x31, 0xe7, 0xc9}}
 
 // OnInstanceAdd dispatches through IMediaRadioManagerNotifySink's vtable slot 3.
-func (self *IMediaRadioManagerNotifySink) OnInstanceAdd(pRadioInstance *IRadioInstance) foundation.HRESULT {
+func (self *IMediaRadioManagerNotifySink) OnInstanceAdd(pRadioInstance *IRadioInstance) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRadioInstance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnInstanceRemove dispatches through IMediaRadioManagerNotifySink's vtable slot 4.
-func (self *IMediaRadioManagerNotifySink) OnInstanceRemove(bstrRadioInstanceId foundation.BSTR) foundation.HRESULT {
+func (self *IMediaRadioManagerNotifySink) OnInstanceRemove(bstrRadioInstanceId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRadioInstanceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnInstanceRadioChange dispatches through IMediaRadioManagerNotifySink's vtable slot 5.
-func (self *IMediaRadioManagerNotifySink) OnInstanceRadioChange(bstrRadioInstanceId foundation.BSTR, radioState DEVICE_RADIO_STATE) foundation.HRESULT {
+func (self *IMediaRadioManagerNotifySink) OnInstanceRadioChange(bstrRadioInstanceId foundation.BSTR, radioState DEVICE_RADIO_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRadioInstanceId)), uintptr(radioState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDevice: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevice
@@ -159,57 +159,59 @@ type IPortableDevice struct {
 var IID_IPortableDevice = win32.GUID{Data1: 0x625e2df8, Data2: 0x6392, Data3: 0x4cf0, Data4: [8]byte{0x9a, 0xd1, 0x3c, 0xfa, 0x5f, 0x17, 0x77, 0x5c}}
 
 // Open dispatches through IPortableDevice's vtable slot 3.
-func (self *IPortableDevice) Open(pszPnPDeviceID foundation.PWSTR, pClientInfo *IPortableDeviceValues) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPDeviceID)), uintptr(unsafe.Pointer(pClientInfo)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDevice) Open(pszPnPDeviceID string, pClientInfo *IPortableDeviceValues) error {
+	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(pClientInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendCommand dispatches through IPortableDevice's vtable slot 4.
-func (self *IPortableDevice) SendCommand(dwFlags uint32, pParameters *IPortableDeviceValues, ppResults **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDevice) SendCommand(dwFlags uint32, pParameters *IPortableDeviceValues, ppResults **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppResults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Content dispatches through IPortableDevice's vtable slot 5.
-func (self *IPortableDevice) Content(ppContent **IPortableDeviceContent) foundation.HRESULT {
+func (self *IPortableDevice) Content(ppContent **IPortableDeviceContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Capabilities dispatches through IPortableDevice's vtable slot 6.
-func (self *IPortableDevice) Capabilities(ppCapabilities **IPortableDeviceCapabilities) foundation.HRESULT {
+func (self *IPortableDevice) Capabilities(ppCapabilities **IPortableDeviceCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCapabilities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDevice's vtable slot 7.
-func (self *IPortableDevice) Cancel() foundation.HRESULT {
+func (self *IPortableDevice) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IPortableDevice's vtable slot 8.
-func (self *IPortableDevice) Close() foundation.HRESULT {
+func (self *IPortableDevice) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Advise dispatches through IPortableDevice's vtable slot 9.
-func (self *IPortableDevice) Advise(dwFlags uint32, pCallback *IPortableDeviceEventCallback, pParameters *IPortableDeviceValues, ppszCookie *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDevice) Advise(dwFlags uint32, pCallback *IPortableDeviceEventCallback, pParameters *IPortableDeviceValues, ppszCookie *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppszCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unadvise dispatches through IPortableDevice's vtable slot 10.
-func (self *IPortableDevice) Unadvise(pszCookie foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCookie)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDevice) Unadvise(pszCookie string) error {
+	_pszCookie := win32.UTF16Ptr(pszCookie)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCookie)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPnPDeviceID dispatches through IPortableDevice's vtable slot 11.
-func (self *IPortableDevice) GetPnPDeviceID(ppszPnPDeviceID *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDevice) GetPnPDeviceID(ppszPnPDeviceID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPnPDeviceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceCapabilities: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicecapabilities
@@ -222,69 +224,69 @@ type IPortableDeviceCapabilities struct {
 var IID_IPortableDeviceCapabilities = win32.GUID{Data1: 0x2c8c6dbf, Data2: 0xe3dc, Data3: 0x4061, Data4: [8]byte{0xbe, 0xcc, 0x85, 0x42, 0xe8, 0x10, 0xd1, 0x26}}
 
 // GetSupportedCommands dispatches through IPortableDeviceCapabilities's vtable slot 3.
-func (self *IPortableDeviceCapabilities) GetSupportedCommands(ppCommands **IPortableDeviceKeyCollection) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetSupportedCommands(ppCommands **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCommands)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCommandOptions dispatches through IPortableDeviceCapabilities's vtable slot 4.
-func (self *IPortableDeviceCapabilities) GetCommandOptions(Command *foundation.PROPERTYKEY, ppOptions **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetCommandOptions(Command *foundation.PROPERTYKEY, ppOptions **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Command)), uintptr(unsafe.Pointer(ppOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFunctionalCategories dispatches through IPortableDeviceCapabilities's vtable slot 5.
-func (self *IPortableDeviceCapabilities) GetFunctionalCategories(ppCategories **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetFunctionalCategories(ppCategories **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCategories)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFunctionalObjects dispatches through IPortableDeviceCapabilities's vtable slot 6.
-func (self *IPortableDeviceCapabilities) GetFunctionalObjects(Category *win32.GUID, ppObjectIDs **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetFunctionalObjects(Category *win32.GUID, ppObjectIDs **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Category)), uintptr(unsafe.Pointer(ppObjectIDs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedContentTypes dispatches through IPortableDeviceCapabilities's vtable slot 7.
-func (self *IPortableDeviceCapabilities) GetSupportedContentTypes(Category *win32.GUID, ppContentTypes **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetSupportedContentTypes(Category *win32.GUID, ppContentTypes **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Category)), uintptr(unsafe.Pointer(ppContentTypes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedFormats dispatches through IPortableDeviceCapabilities's vtable slot 8.
-func (self *IPortableDeviceCapabilities) GetSupportedFormats(ContentType *win32.GUID, ppFormats **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetSupportedFormats(ContentType *win32.GUID, ppFormats **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ContentType)), uintptr(unsafe.Pointer(ppFormats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedFormatProperties dispatches through IPortableDeviceCapabilities's vtable slot 9.
-func (self *IPortableDeviceCapabilities) GetSupportedFormatProperties(Format *win32.GUID, ppKeys **IPortableDeviceKeyCollection) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetSupportedFormatProperties(Format *win32.GUID, ppKeys **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppKeys)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFixedPropertyAttributes dispatches through IPortableDeviceCapabilities's vtable slot 10.
-func (self *IPortableDeviceCapabilities) GetFixedPropertyAttributes(Format *win32.GUID, Key *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetFixedPropertyAttributes(Format *win32.GUID, Key *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceCapabilities's vtable slot 11.
-func (self *IPortableDeviceCapabilities) Cancel() foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedEvents dispatches through IPortableDeviceCapabilities's vtable slot 12.
-func (self *IPortableDeviceCapabilities) GetSupportedEvents(ppEvents **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetSupportedEvents(ppEvents **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEvents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventOptions dispatches through IPortableDeviceCapabilities's vtable slot 13.
-func (self *IPortableDeviceCapabilities) GetEventOptions(Event *win32.GUID, ppOptions **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceCapabilities) GetEventOptions(Event *win32.GUID, ppOptions **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(ppOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceConnector: https://learn.microsoft.com/windows/win32/api/portabledeviceconnectapi/nn-portabledeviceconnectapi-iportabledeviceconnector
@@ -297,39 +299,39 @@ type IPortableDeviceConnector struct {
 var IID_IPortableDeviceConnector = win32.GUID{Data1: 0x625e2df8, Data2: 0x6392, Data3: 0x4cf0, Data4: [8]byte{0x9a, 0xd1, 0x3c, 0xfa, 0x5f, 0x17, 0x77, 0x5c}}
 
 // Connect dispatches through IPortableDeviceConnector's vtable slot 3.
-func (self *IPortableDeviceConnector) Connect(pCallback *IConnectionRequestCallback) foundation.HRESULT {
+func (self *IPortableDeviceConnector) Connect(pCallback *IConnectionRequestCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through IPortableDeviceConnector's vtable slot 4.
-func (self *IPortableDeviceConnector) Disconnect(pCallback *IConnectionRequestCallback) foundation.HRESULT {
+func (self *IPortableDeviceConnector) Disconnect(pCallback *IConnectionRequestCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceConnector's vtable slot 5.
-func (self *IPortableDeviceConnector) Cancel(pCallback *IConnectionRequestCallback) foundation.HRESULT {
+func (self *IPortableDeviceConnector) Cancel(pCallback *IConnectionRequestCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through IPortableDeviceConnector's vtable slot 6.
-func (self *IPortableDeviceConnector) GetProperty(pPropertyKey *foundation.DEVPROPKEY, pPropertyType *devicesproperties.DEVPROPTYPE, ppData **byte, pcbData *uint32) foundation.HRESULT {
+func (self *IPortableDeviceConnector) GetProperty(pPropertyKey *foundation.DEVPROPKEY, pPropertyType *devicesproperties.DEVPROPTYPE, ppData **byte, pcbData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropertyKey)), uintptr(unsafe.Pointer(pPropertyType)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pcbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through IPortableDeviceConnector's vtable slot 7.
-func (self *IPortableDeviceConnector) SetProperty(pPropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, pData *byte, cbData uint32) foundation.HRESULT {
+func (self *IPortableDeviceConnector) SetProperty(pPropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, pData *byte, cbData uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPnPID dispatches through IPortableDeviceConnector's vtable slot 8.
-func (self *IPortableDeviceConnector) GetPnPID(ppwszPnPID *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDeviceConnector) GetPnPID(ppwszPnPID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszPnPID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceContent: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicecontent
@@ -342,63 +344,66 @@ type IPortableDeviceContent struct {
 var IID_IPortableDeviceContent = win32.GUID{Data1: 0x6a96ed84, Data2: 0x7c73, Data3: 0x4480, Data4: [8]byte{0x99, 0x38, 0xbf, 0x5a, 0xf4, 0x77, 0xd4, 0x26}}
 
 // EnumObjects dispatches through IPortableDeviceContent's vtable slot 3.
-func (self *IPortableDeviceContent) EnumObjects(dwFlags uint32, pszParentObjectID foundation.PWSTR, pFilter *IPortableDeviceValues, ppEnum **IEnumPortableDeviceObjectIDs) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszParentObjectID)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceContent) EnumObjects(dwFlags uint32, pszParentObjectID string, pFilter *IPortableDeviceValues, ppEnum **IEnumPortableDeviceObjectIDs) error {
+	_pszParentObjectID := win32.UTF16Ptr(pszParentObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszParentObjectID)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(ppEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Properties dispatches through IPortableDeviceContent's vtable slot 4.
-func (self *IPortableDeviceContent) Properties(ppProperties **IPortableDeviceProperties) foundation.HRESULT {
+func (self *IPortableDeviceContent) Properties(ppProperties **IPortableDeviceProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Transfer dispatches through IPortableDeviceContent's vtable slot 5.
-func (self *IPortableDeviceContent) Transfer(ppResources **IPortableDeviceResources) foundation.HRESULT {
+func (self *IPortableDeviceContent) Transfer(ppResources **IPortableDeviceResources) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateObjectWithPropertiesOnly dispatches through IPortableDeviceContent's vtable slot 6.
-func (self *IPortableDeviceContent) CreateObjectWithPropertiesOnly(pValues *IPortableDeviceValues, ppszObjectID *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDeviceContent) CreateObjectWithPropertiesOnly(pValues *IPortableDeviceValues, ppszObjectID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValues)), uintptr(unsafe.Pointer(ppszObjectID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateObjectWithPropertiesAndData dispatches through IPortableDeviceContent's vtable slot 7.
-func (self *IPortableDeviceContent) CreateObjectWithPropertiesAndData(pValues *IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDeviceContent) CreateObjectWithPropertiesAndData(pValues *IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValues)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pdwOptimalWriteBufferSize)), uintptr(unsafe.Pointer(ppszCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IPortableDeviceContent's vtable slot 8.
-func (self *IPortableDeviceContent) Delete(dwOptions uint32, pObjectIDs *IPortableDevicePropVariantCollection, ppResults **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceContent) Delete(dwOptions uint32, pObjectIDs *IPortableDevicePropVariantCollection, ppResults **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwOptions), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(ppResults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjectIDsFromPersistentUniqueIDs dispatches through IPortableDeviceContent's vtable slot 9.
-func (self *IPortableDeviceContent) GetObjectIDsFromPersistentUniqueIDs(pPersistentUniqueIDs *IPortableDevicePropVariantCollection, ppObjectIDs **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceContent) GetObjectIDsFromPersistentUniqueIDs(pPersistentUniqueIDs *IPortableDevicePropVariantCollection, ppObjectIDs **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPersistentUniqueIDs)), uintptr(unsafe.Pointer(ppObjectIDs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceContent's vtable slot 10.
-func (self *IPortableDeviceContent) Cancel() foundation.HRESULT {
+func (self *IPortableDeviceContent) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Move dispatches through IPortableDeviceContent's vtable slot 11.
-func (self *IPortableDeviceContent) Move(pObjectIDs *IPortableDevicePropVariantCollection, pszDestinationFolderObjectID foundation.PWSTR, ppResults **IPortableDevicePropVariantCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(pszDestinationFolderObjectID)), uintptr(unsafe.Pointer(ppResults)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceContent) Move(pObjectIDs *IPortableDevicePropVariantCollection, pszDestinationFolderObjectID string, ppResults **IPortableDevicePropVariantCollection) error {
+	_pszDestinationFolderObjectID := win32.UTF16Ptr(pszDestinationFolderObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(_pszDestinationFolderObjectID)), uintptr(unsafe.Pointer(ppResults)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Copy dispatches through IPortableDeviceContent's vtable slot 12.
-func (self *IPortableDeviceContent) Copy(pObjectIDs *IPortableDevicePropVariantCollection, pszDestinationFolderObjectID foundation.PWSTR, ppResults **IPortableDevicePropVariantCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(pszDestinationFolderObjectID)), uintptr(unsafe.Pointer(ppResults)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceContent) Copy(pObjectIDs *IPortableDevicePropVariantCollection, pszDestinationFolderObjectID string, ppResults **IPortableDevicePropVariantCollection) error {
+	_pszDestinationFolderObjectID := win32.UTF16Ptr(pszDestinationFolderObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(_pszDestinationFolderObjectID)), uintptr(unsafe.Pointer(ppResults)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceContent2: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicecontent2
@@ -411,9 +416,10 @@ type IPortableDeviceContent2 struct {
 var IID_IPortableDeviceContent2 = win32.GUID{Data1: 0x9b4add96, Data2: 0xf6bf, Data3: 0x4034, Data4: [8]byte{0x87, 0x08, 0xec, 0xa7, 0x2b, 0xf1, 0x05, 0x54}}
 
 // UpdateObjectWithPropertiesAndData dispatches through IPortableDeviceContent2's vtable slot 13.
-func (self *IPortableDeviceContent2) UpdateObjectWithPropertiesAndData(pszObjectID foundation.PWSTR, pProperties *IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(pProperties)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pdwOptimalWriteBufferSize)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceContent2) UpdateObjectWithPropertiesAndData(pszObjectID string, pProperties *IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pProperties)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pdwOptimalWriteBufferSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceDataStream: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicedatastream
@@ -426,15 +432,15 @@ type IPortableDeviceDataStream struct {
 var IID_IPortableDeviceDataStream = win32.GUID{Data1: 0x88e04db3, Data2: 0x1012, Data3: 0x4d64, Data4: [8]byte{0x99, 0x96, 0xf7, 0x03, 0xa9, 0x50, 0xd3, 0xf4}}
 
 // GetObjectID dispatches through IPortableDeviceDataStream's vtable slot 14.
-func (self *IPortableDeviceDataStream) GetObjectID(ppszObjectID *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDeviceDataStream) GetObjectID(ppszObjectID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszObjectID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceDataStream's vtable slot 15.
-func (self *IPortableDeviceDataStream) Cancel() foundation.HRESULT {
+func (self *IPortableDeviceDataStream) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceDispatchFactory: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicedispatchfactory
@@ -447,9 +453,10 @@ type IPortableDeviceDispatchFactory struct {
 var IID_IPortableDeviceDispatchFactory = win32.GUID{Data1: 0x5e1eafc3, Data2: 0xe3d7, Data3: 0x4132, Data4: [8]byte{0x96, 0xfa, 0x75, 0x9c, 0x0f, 0x9d, 0x1e, 0x0f}}
 
 // GetDeviceDispatch dispatches through IPortableDeviceDispatchFactory's vtable slot 3.
-func (self *IPortableDeviceDispatchFactory) GetDeviceDispatch(pszPnPDeviceID foundation.PWSTR, ppDeviceDispatch **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPDeviceID)), uintptr(unsafe.Pointer(ppDeviceDispatch)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceDispatchFactory) GetDeviceDispatch(pszPnPDeviceID string, ppDeviceDispatch **systemcom.IDispatch) error {
+	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(ppDeviceDispatch)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceEventCallback: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceeventcallback
@@ -462,9 +469,9 @@ type IPortableDeviceEventCallback struct {
 var IID_IPortableDeviceEventCallback = win32.GUID{Data1: 0xa8792a31, Data2: 0xf385, Data3: 0x493c, Data4: [8]byte{0xa8, 0x93, 0x40, 0xf6, 0x4e, 0xb4, 0x5f, 0x6e}}
 
 // OnEvent dispatches through IPortableDeviceEventCallback's vtable slot 3.
-func (self *IPortableDeviceEventCallback) OnEvent(pEventParameters *IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceEventCallback) OnEvent(pEventParameters *IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceKeyCollection: https://learn.microsoft.com/windows/win32/wpd_sdk/iportabledevicekeycollection
@@ -477,33 +484,33 @@ type IPortableDeviceKeyCollection struct {
 var IID_IPortableDeviceKeyCollection = win32.GUID{Data1: 0xdada2357, Data2: 0xe0ad, Data3: 0x492e, Data4: [8]byte{0x98, 0xdb, 0xdd, 0x61, 0xc5, 0x3b, 0xa3, 0x53}}
 
 // GetCount dispatches through IPortableDeviceKeyCollection's vtable slot 3.
-func (self *IPortableDeviceKeyCollection) GetCount(pcElems *uint32) foundation.HRESULT {
+func (self *IPortableDeviceKeyCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through IPortableDeviceKeyCollection's vtable slot 4.
-func (self *IPortableDeviceKeyCollection) GetAt(dwIndex uint32, pKey *foundation.PROPERTYKEY) foundation.HRESULT {
+func (self *IPortableDeviceKeyCollection) GetAt(dwIndex uint32, pKey *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IPortableDeviceKeyCollection's vtable slot 5.
-func (self *IPortableDeviceKeyCollection) Add(Key *foundation.PROPERTYKEY) foundation.HRESULT {
+func (self *IPortableDeviceKeyCollection) Add(Key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Key)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IPortableDeviceKeyCollection's vtable slot 6.
-func (self *IPortableDeviceKeyCollection) Clear() foundation.HRESULT {
+func (self *IPortableDeviceKeyCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAt dispatches through IPortableDeviceKeyCollection's vtable slot 7.
-func (self *IPortableDeviceKeyCollection) RemoveAt(dwIndex uint32) foundation.HRESULT {
+func (self *IPortableDeviceKeyCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceManager: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicemanager
@@ -516,45 +523,50 @@ type IPortableDeviceManager struct {
 var IID_IPortableDeviceManager = win32.GUID{Data1: 0xa1567595, Data2: 0x4c2f, Data3: 0x4574, Data4: [8]byte{0xa6, 0xfa, 0xec, 0xef, 0x91, 0x7b, 0x9a, 0x40}}
 
 // GetDevices dispatches through IPortableDeviceManager's vtable slot 3.
-func (self *IPortableDeviceManager) GetDevices(pPnPDeviceIDs *foundation.PWSTR, pcPnPDeviceIDs *uint32) foundation.HRESULT {
+func (self *IPortableDeviceManager) GetDevices(pPnPDeviceIDs *foundation.PWSTR, pcPnPDeviceIDs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPnPDeviceIDs)), uintptr(unsafe.Pointer(pcPnPDeviceIDs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RefreshDeviceList dispatches through IPortableDeviceManager's vtable slot 4.
-func (self *IPortableDeviceManager) RefreshDeviceList() foundation.HRESULT {
+func (self *IPortableDeviceManager) RefreshDeviceList() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceFriendlyName dispatches through IPortableDeviceManager's vtable slot 5.
-func (self *IPortableDeviceManager) GetDeviceFriendlyName(pszPnPDeviceID foundation.PWSTR, pDeviceFriendlyName foundation.PWSTR, pcchDeviceFriendlyName *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPDeviceID)), uintptr(unsafe.Pointer(pDeviceFriendlyName)), uintptr(unsafe.Pointer(pcchDeviceFriendlyName)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceManager) GetDeviceFriendlyName(pszPnPDeviceID string, pDeviceFriendlyName foundation.PWSTR, pcchDeviceFriendlyName *uint32) error {
+	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(pDeviceFriendlyName)), uintptr(unsafe.Pointer(pcchDeviceFriendlyName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceDescription dispatches through IPortableDeviceManager's vtable slot 6.
-func (self *IPortableDeviceManager) GetDeviceDescription(pszPnPDeviceID foundation.PWSTR, pDeviceDescription foundation.PWSTR, pcchDeviceDescription *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPDeviceID)), uintptr(unsafe.Pointer(pDeviceDescription)), uintptr(unsafe.Pointer(pcchDeviceDescription)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceManager) GetDeviceDescription(pszPnPDeviceID string, pDeviceDescription foundation.PWSTR, pcchDeviceDescription *uint32) error {
+	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(pDeviceDescription)), uintptr(unsafe.Pointer(pcchDeviceDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceManufacturer dispatches through IPortableDeviceManager's vtable slot 7.
-func (self *IPortableDeviceManager) GetDeviceManufacturer(pszPnPDeviceID foundation.PWSTR, pDeviceManufacturer foundation.PWSTR, pcchDeviceManufacturer *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPDeviceID)), uintptr(unsafe.Pointer(pDeviceManufacturer)), uintptr(unsafe.Pointer(pcchDeviceManufacturer)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceManager) GetDeviceManufacturer(pszPnPDeviceID string, pDeviceManufacturer foundation.PWSTR, pcchDeviceManufacturer *uint32) error {
+	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(pDeviceManufacturer)), uintptr(unsafe.Pointer(pcchDeviceManufacturer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceProperty dispatches through IPortableDeviceManager's vtable slot 8.
-func (self *IPortableDeviceManager) GetDeviceProperty(pszPnPDeviceID foundation.PWSTR, pszDevicePropertyName foundation.PWSTR, pData *byte, pcbData *uint32, pdwType *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPDeviceID)), uintptr(unsafe.Pointer(pszDevicePropertyName)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(pdwType)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceManager) GetDeviceProperty(pszPnPDeviceID string, pszDevicePropertyName string, pData *byte, pcbData *uint32, pdwType *uint32) error {
+	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
+	_pszDevicePropertyName := win32.UTF16Ptr(pszDevicePropertyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(_pszDevicePropertyName)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(pdwType)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrivateDevices dispatches through IPortableDeviceManager's vtable slot 9.
-func (self *IPortableDeviceManager) GetPrivateDevices(pPnPDeviceIDs *foundation.PWSTR, pcPnPDeviceIDs *uint32) foundation.HRESULT {
+func (self *IPortableDeviceManager) GetPrivateDevices(pPnPDeviceIDs *foundation.PWSTR, pcPnPDeviceIDs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPnPDeviceIDs)), uintptr(unsafe.Pointer(pcPnPDeviceIDs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDevicePropVariantCollection: https://learn.microsoft.com/windows/win32/wpd_sdk/iportabledevicepropvariantcollection
@@ -567,45 +579,45 @@ type IPortableDevicePropVariantCollection struct {
 var IID_IPortableDevicePropVariantCollection = win32.GUID{Data1: 0x89b2e422, Data2: 0x4f1b, Data3: 0x4316, Data4: [8]byte{0xbc, 0xef, 0xa4, 0x4a, 0xfe, 0xa8, 0x3e, 0xb3}}
 
 // GetCount dispatches through IPortableDevicePropVariantCollection's vtable slot 3.
-func (self *IPortableDevicePropVariantCollection) GetCount(pcElems *uint32) foundation.HRESULT {
+func (self *IPortableDevicePropVariantCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through IPortableDevicePropVariantCollection's vtable slot 4.
-func (self *IPortableDevicePropVariantCollection) GetAt(dwIndex uint32, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IPortableDevicePropVariantCollection) GetAt(dwIndex uint32, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IPortableDevicePropVariantCollection's vtable slot 5.
-func (self *IPortableDevicePropVariantCollection) Add(pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IPortableDevicePropVariantCollection) Add(pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetType dispatches through IPortableDevicePropVariantCollection's vtable slot 6.
-func (self *IPortableDevicePropVariantCollection) GetType(pvt *uint16) foundation.HRESULT {
+func (self *IPortableDevicePropVariantCollection) GetType(pvt *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeType dispatches through IPortableDevicePropVariantCollection's vtable slot 7.
-func (self *IPortableDevicePropVariantCollection) ChangeType(vt uint16) foundation.HRESULT {
+func (self *IPortableDevicePropVariantCollection) ChangeType(vt uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(vt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IPortableDevicePropVariantCollection's vtable slot 8.
-func (self *IPortableDevicePropVariantCollection) Clear() foundation.HRESULT {
+func (self *IPortableDevicePropVariantCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAt dispatches through IPortableDevicePropVariantCollection's vtable slot 9.
-func (self *IPortableDevicePropVariantCollection) RemoveAt(dwIndex uint32) foundation.HRESULT {
+func (self *IPortableDevicePropVariantCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceProperties: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceproperties
@@ -618,39 +630,44 @@ type IPortableDeviceProperties struct {
 var IID_IPortableDeviceProperties = win32.GUID{Data1: 0x7f6d695c, Data2: 0x03df, Data3: 0x4439, Data4: [8]byte{0xa8, 0x09, 0x59, 0x26, 0x6b, 0xee, 0xe3, 0xa6}}
 
 // GetSupportedProperties dispatches through IPortableDeviceProperties's vtable slot 3.
-func (self *IPortableDeviceProperties) GetSupportedProperties(pszObjectID foundation.PWSTR, ppKeys **IPortableDeviceKeyCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(ppKeys)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceProperties) GetSupportedProperties(pszObjectID string, ppKeys **IPortableDeviceKeyCollection) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(ppKeys)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyAttributes dispatches through IPortableDeviceProperties's vtable slot 4.
-func (self *IPortableDeviceProperties) GetPropertyAttributes(pszObjectID foundation.PWSTR, Key *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceProperties) GetPropertyAttributes(pszObjectID string, Key *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppAttributes)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValues dispatches through IPortableDeviceProperties's vtable slot 5.
-func (self *IPortableDeviceProperties) GetValues(pszObjectID foundation.PWSTR, pKeys *IPortableDeviceKeyCollection, ppValues **IPortableDeviceValues) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(ppValues)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceProperties) GetValues(pszObjectID string, pKeys *IPortableDeviceKeyCollection, ppValues **IPortableDeviceValues) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(ppValues)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValues dispatches through IPortableDeviceProperties's vtable slot 6.
-func (self *IPortableDeviceProperties) SetValues(pszObjectID foundation.PWSTR, pValues *IPortableDeviceValues, ppResults **IPortableDeviceValues) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(pValues)), uintptr(unsafe.Pointer(ppResults)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceProperties) SetValues(pszObjectID string, pValues *IPortableDeviceValues, ppResults **IPortableDeviceValues) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pValues)), uintptr(unsafe.Pointer(ppResults)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IPortableDeviceProperties's vtable slot 7.
-func (self *IPortableDeviceProperties) Delete(pszObjectID foundation.PWSTR, pKeys *IPortableDeviceKeyCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(pKeys)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceProperties) Delete(pszObjectID string, pKeys *IPortableDeviceKeyCollection) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pKeys)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceProperties's vtable slot 8.
-func (self *IPortableDeviceProperties) Cancel() foundation.HRESULT {
+func (self *IPortableDeviceProperties) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDevicePropertiesBulk: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicepropertiesbulk
@@ -663,33 +680,34 @@ type IPortableDevicePropertiesBulk struct {
 var IID_IPortableDevicePropertiesBulk = win32.GUID{Data1: 0x482b05c0, Data2: 0x4056, Data3: 0x44ed, Data4: [8]byte{0x9e, 0x0f, 0x5e, 0x23, 0xb0, 0x09, 0xda, 0x93}}
 
 // QueueGetValuesByObjectList dispatches through IPortableDevicePropertiesBulk's vtable slot 3.
-func (self *IPortableDevicePropertiesBulk) QueueGetValuesByObjectList(pObjectIDs *IPortableDevicePropVariantCollection, pKeys *IPortableDeviceKeyCollection, pCallback *IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) foundation.HRESULT {
+func (self *IPortableDevicePropertiesBulk) QueueGetValuesByObjectList(pObjectIDs *IPortableDevicePropVariantCollection, pKeys *IPortableDeviceKeyCollection, pCallback *IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectIDs)), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueueGetValuesByObjectFormat dispatches through IPortableDevicePropertiesBulk's vtable slot 4.
-func (self *IPortableDevicePropertiesBulk) QueueGetValuesByObjectFormat(pguidObjectFormat *win32.GUID, pszParentObjectID foundation.PWSTR, dwDepth uint32, pKeys *IPortableDeviceKeyCollection, pCallback *IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidObjectFormat)), uintptr(unsafe.Pointer(pszParentObjectID)), uintptr(dwDepth), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDevicePropertiesBulk) QueueGetValuesByObjectFormat(pguidObjectFormat *win32.GUID, pszParentObjectID string, dwDepth uint32, pKeys *IPortableDeviceKeyCollection, pCallback *IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
+	_pszParentObjectID := win32.UTF16Ptr(pszParentObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidObjectFormat)), uintptr(unsafe.Pointer(_pszParentObjectID)), uintptr(dwDepth), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueueSetValuesByObjectList dispatches through IPortableDevicePropertiesBulk's vtable slot 5.
-func (self *IPortableDevicePropertiesBulk) QueueSetValuesByObjectList(pObjectValues *IPortableDeviceValuesCollection, pCallback *IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) foundation.HRESULT {
+func (self *IPortableDevicePropertiesBulk) QueueSetValuesByObjectList(pObjectValues *IPortableDeviceValuesCollection, pCallback *IPortableDevicePropertiesBulkCallback, pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectValues)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IPortableDevicePropertiesBulk's vtable slot 6.
-func (self *IPortableDevicePropertiesBulk) Start(pContext *win32.GUID) foundation.HRESULT {
+func (self *IPortableDevicePropertiesBulk) Start(pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDevicePropertiesBulk's vtable slot 7.
-func (self *IPortableDevicePropertiesBulk) Cancel(pContext *win32.GUID) foundation.HRESULT {
+func (self *IPortableDevicePropertiesBulk) Cancel(pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDevicePropertiesBulkCallback: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicepropertiesbulkcallback
@@ -702,21 +720,21 @@ type IPortableDevicePropertiesBulkCallback struct {
 var IID_IPortableDevicePropertiesBulkCallback = win32.GUID{Data1: 0x9deacb80, Data2: 0x11e8, Data3: 0x40e3, Data4: [8]byte{0xa9, 0xf3, 0xf5, 0x57, 0x98, 0x6a, 0x78, 0x45}}
 
 // OnStart dispatches through IPortableDevicePropertiesBulkCallback's vtable slot 3.
-func (self *IPortableDevicePropertiesBulkCallback) OnStart(pContext *win32.GUID) foundation.HRESULT {
+func (self *IPortableDevicePropertiesBulkCallback) OnStart(pContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnProgress dispatches through IPortableDevicePropertiesBulkCallback's vtable slot 4.
-func (self *IPortableDevicePropertiesBulkCallback) OnProgress(pContext *win32.GUID, pResults *IPortableDeviceValuesCollection) foundation.HRESULT {
+func (self *IPortableDevicePropertiesBulkCallback) OnProgress(pContext *win32.GUID, pResults *IPortableDeviceValuesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pResults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEnd dispatches through IPortableDevicePropertiesBulkCallback's vtable slot 5.
-func (self *IPortableDevicePropertiesBulkCallback) OnEnd(pContext *win32.GUID, hrStatus foundation.HRESULT) foundation.HRESULT {
+func (self *IPortableDevicePropertiesBulkCallback) OnEnd(pContext *win32.GUID, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)), uintptr(hrStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceResources: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceresources
@@ -729,39 +747,43 @@ type IPortableDeviceResources struct {
 var IID_IPortableDeviceResources = win32.GUID{Data1: 0xfd8878ac, Data2: 0xd841, Data3: 0x4d17, Data4: [8]byte{0x89, 0x1c, 0xe6, 0x82, 0x9c, 0xdb, 0x69, 0x34}}
 
 // GetSupportedResources dispatches through IPortableDeviceResources's vtable slot 3.
-func (self *IPortableDeviceResources) GetSupportedResources(pszObjectID foundation.PWSTR, ppKeys **IPortableDeviceKeyCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(ppKeys)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceResources) GetSupportedResources(pszObjectID string, ppKeys **IPortableDeviceKeyCollection) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(ppKeys)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResourceAttributes dispatches through IPortableDeviceResources's vtable slot 4.
-func (self *IPortableDeviceResources) GetResourceAttributes(pszObjectID foundation.PWSTR, Key *foundation.PROPERTYKEY, ppResourceAttributes **IPortableDeviceValues) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppResourceAttributes)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceResources) GetResourceAttributes(pszObjectID string, Key *foundation.PROPERTYKEY, ppResourceAttributes **IPortableDeviceValues) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppResourceAttributes)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStream dispatches through IPortableDeviceResources's vtable slot 5.
-func (self *IPortableDeviceResources) GetStream(pszObjectID foundation.PWSTR, Key *foundation.PROPERTYKEY, dwMode uint32, pdwOptimalBufferSize *uint32, ppStream **systemcom.IStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(Key)), uintptr(dwMode), uintptr(unsafe.Pointer(pdwOptimalBufferSize)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceResources) GetStream(pszObjectID string, Key *foundation.PROPERTYKEY, dwMode uint32, pdwOptimalBufferSize *uint32, ppStream **systemcom.IStream) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(Key)), uintptr(dwMode), uintptr(unsafe.Pointer(pdwOptimalBufferSize)), uintptr(unsafe.Pointer(ppStream)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IPortableDeviceResources's vtable slot 6.
-func (self *IPortableDeviceResources) Delete(pszObjectID foundation.PWSTR, pKeys *IPortableDeviceKeyCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszObjectID)), uintptr(unsafe.Pointer(pKeys)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceResources) Delete(pszObjectID string, pKeys *IPortableDeviceKeyCollection) error {
+	_pszObjectID := win32.UTF16Ptr(pszObjectID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszObjectID)), uintptr(unsafe.Pointer(pKeys)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceResources's vtable slot 7.
-func (self *IPortableDeviceResources) Cancel() foundation.HRESULT {
+func (self *IPortableDeviceResources) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateResource dispatches through IPortableDeviceResources's vtable slot 8.
-func (self *IPortableDeviceResources) CreateResource(pResourceAttributes *IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDeviceResources) CreateResource(pResourceAttributes *IPortableDeviceValues, ppData **systemcom.IStream, pdwOptimalWriteBufferSize *uint32, ppszCookie *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceAttributes)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pdwOptimalWriteBufferSize)), uintptr(unsafe.Pointer(ppszCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceService: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservice
@@ -774,69 +796,71 @@ type IPortableDeviceService struct {
 var IID_IPortableDeviceService = win32.GUID{Data1: 0xd3bd3a44, Data2: 0xd7b5, Data3: 0x40a9, Data4: [8]byte{0x98, 0xb7, 0x2f, 0xa4, 0xd0, 0x1d, 0xec, 0x08}}
 
 // Open dispatches through IPortableDeviceService's vtable slot 3.
-func (self *IPortableDeviceService) Open(pszPnPServiceID foundation.PWSTR, pClientInfo *IPortableDeviceValues) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPServiceID)), uintptr(unsafe.Pointer(pClientInfo)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceService) Open(pszPnPServiceID string, pClientInfo *IPortableDeviceValues) error {
+	_pszPnPServiceID := win32.UTF16Ptr(pszPnPServiceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPServiceID)), uintptr(unsafe.Pointer(pClientInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Capabilities dispatches through IPortableDeviceService's vtable slot 4.
-func (self *IPortableDeviceService) Capabilities(ppCapabilities **IPortableDeviceServiceCapabilities) foundation.HRESULT {
+func (self *IPortableDeviceService) Capabilities(ppCapabilities **IPortableDeviceServiceCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCapabilities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Content dispatches through IPortableDeviceService's vtable slot 5.
-func (self *IPortableDeviceService) Content(ppContent **IPortableDeviceContent2) foundation.HRESULT {
+func (self *IPortableDeviceService) Content(ppContent **IPortableDeviceContent2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Methods dispatches through IPortableDeviceService's vtable slot 6.
-func (self *IPortableDeviceService) Methods(ppMethods **IPortableDeviceServiceMethods) foundation.HRESULT {
+func (self *IPortableDeviceService) Methods(ppMethods **IPortableDeviceServiceMethods) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMethods)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceService's vtable slot 7.
-func (self *IPortableDeviceService) Cancel() foundation.HRESULT {
+func (self *IPortableDeviceService) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IPortableDeviceService's vtable slot 8.
-func (self *IPortableDeviceService) Close() foundation.HRESULT {
+func (self *IPortableDeviceService) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetServiceObjectID dispatches through IPortableDeviceService's vtable slot 9.
-func (self *IPortableDeviceService) GetServiceObjectID(ppszServiceObjectID *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDeviceService) GetServiceObjectID(ppszServiceObjectID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszServiceObjectID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPnPServiceID dispatches through IPortableDeviceService's vtable slot 10.
-func (self *IPortableDeviceService) GetPnPServiceID(ppszPnPServiceID *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDeviceService) GetPnPServiceID(ppszPnPServiceID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPnPServiceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Advise dispatches through IPortableDeviceService's vtable slot 11.
-func (self *IPortableDeviceService) Advise(dwFlags uint32, pCallback *IPortableDeviceEventCallback, pParameters *IPortableDeviceValues, ppszCookie *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDeviceService) Advise(dwFlags uint32, pCallback *IPortableDeviceEventCallback, pParameters *IPortableDeviceValues, ppszCookie *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppszCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unadvise dispatches through IPortableDeviceService's vtable slot 12.
-func (self *IPortableDeviceService) Unadvise(pszCookie foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCookie)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceService) Unadvise(pszCookie string) error {
+	_pszCookie := win32.UTF16Ptr(pszCookie)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCookie)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendCommand dispatches through IPortableDeviceService's vtable slot 13.
-func (self *IPortableDeviceService) SendCommand(dwFlags uint32, pParameters *IPortableDeviceValues, ppResults **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceService) SendCommand(dwFlags uint32, pParameters *IPortableDeviceValues, ppResults **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppResults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e56b0534-d9b9-425c-9b99-75f97cb3d7c8
@@ -848,15 +872,16 @@ type IPortableDeviceServiceActivation struct {
 var IID_IPortableDeviceServiceActivation = win32.GUID{Data1: 0xe56b0534, Data2: 0xd9b9, Data3: 0x425c, Data4: [8]byte{0x9b, 0x99, 0x75, 0xf9, 0x7c, 0xb3, 0xd7, 0xc8}}
 
 // OpenAsync dispatches through IPortableDeviceServiceActivation's vtable slot 3.
-func (self *IPortableDeviceServiceActivation) OpenAsync(pszPnPServiceID foundation.PWSTR, pClientInfo *IPortableDeviceValues, pCallback *IPortableDeviceServiceOpenCallback) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPServiceID)), uintptr(unsafe.Pointer(pClientInfo)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceServiceActivation) OpenAsync(pszPnPServiceID string, pClientInfo *IPortableDeviceValues, pCallback *IPortableDeviceServiceOpenCallback) error {
+	_pszPnPServiceID := win32.UTF16Ptr(pszPnPServiceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPServiceID)), uintptr(unsafe.Pointer(pClientInfo)), uintptr(unsafe.Pointer(pCallback)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelOpenAsync dispatches through IPortableDeviceServiceActivation's vtable slot 4.
-func (self *IPortableDeviceServiceActivation) CancelOpenAsync() foundation.HRESULT {
+func (self *IPortableDeviceServiceActivation) CancelOpenAsync() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceServiceCapabilities: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservicecapabilities
@@ -869,99 +894,99 @@ type IPortableDeviceServiceCapabilities struct {
 var IID_IPortableDeviceServiceCapabilities = win32.GUID{Data1: 0x24dbd89d, Data2: 0x413e, Data3: 0x43e0, Data4: [8]byte{0xbd, 0x5b, 0x19, 0x7f, 0x3c, 0x56, 0xc8, 0x86}}
 
 // GetSupportedMethods dispatches through IPortableDeviceServiceCapabilities's vtable slot 3.
-func (self *IPortableDeviceServiceCapabilities) GetSupportedMethods(ppMethods **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetSupportedMethods(ppMethods **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMethods)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedMethodsByFormat dispatches through IPortableDeviceServiceCapabilities's vtable slot 4.
-func (self *IPortableDeviceServiceCapabilities) GetSupportedMethodsByFormat(Format *win32.GUID, ppMethods **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetSupportedMethodsByFormat(Format *win32.GUID, ppMethods **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppMethods)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMethodAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 5.
-func (self *IPortableDeviceServiceCapabilities) GetMethodAttributes(Method *win32.GUID, ppAttributes **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetMethodAttributes(Method *win32.GUID, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMethodParameterAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 6.
-func (self *IPortableDeviceServiceCapabilities) GetMethodParameterAttributes(Method *win32.GUID, Parameter *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetMethodParameterAttributes(Method *win32.GUID, Parameter *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(unsafe.Pointer(Parameter)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedFormats dispatches through IPortableDeviceServiceCapabilities's vtable slot 7.
-func (self *IPortableDeviceServiceCapabilities) GetSupportedFormats(ppFormats **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetSupportedFormats(ppFormats **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFormats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormatAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 8.
-func (self *IPortableDeviceServiceCapabilities) GetFormatAttributes(Format *win32.GUID, ppAttributes **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetFormatAttributes(Format *win32.GUID, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedFormatProperties dispatches through IPortableDeviceServiceCapabilities's vtable slot 9.
-func (self *IPortableDeviceServiceCapabilities) GetSupportedFormatProperties(Format *win32.GUID, ppKeys **IPortableDeviceKeyCollection) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetSupportedFormatProperties(Format *win32.GUID, ppKeys **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppKeys)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormatPropertyAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 10.
-func (self *IPortableDeviceServiceCapabilities) GetFormatPropertyAttributes(Format *win32.GUID, Property *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetFormatPropertyAttributes(Format *win32.GUID, Property *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(Property)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedEvents dispatches through IPortableDeviceServiceCapabilities's vtable slot 11.
-func (self *IPortableDeviceServiceCapabilities) GetSupportedEvents(ppEvents **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetSupportedEvents(ppEvents **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEvents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 12.
-func (self *IPortableDeviceServiceCapabilities) GetEventAttributes(Event *win32.GUID, ppAttributes **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetEventAttributes(Event *win32.GUID, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventParameterAttributes dispatches through IPortableDeviceServiceCapabilities's vtable slot 13.
-func (self *IPortableDeviceServiceCapabilities) GetEventParameterAttributes(Event *win32.GUID, Parameter *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetEventParameterAttributes(Event *win32.GUID, Parameter *foundation.PROPERTYKEY, ppAttributes **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(Parameter)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInheritedServices dispatches through IPortableDeviceServiceCapabilities's vtable slot 14.
-func (self *IPortableDeviceServiceCapabilities) GetInheritedServices(dwInheritanceType uint32, ppServices **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetInheritedServices(dwInheritanceType uint32, ppServices **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwInheritanceType), uintptr(unsafe.Pointer(ppServices)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormatRenderingProfiles dispatches through IPortableDeviceServiceCapabilities's vtable slot 15.
-func (self *IPortableDeviceServiceCapabilities) GetFormatRenderingProfiles(Format *win32.GUID, ppRenderingProfiles **IPortableDeviceValuesCollection) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetFormatRenderingProfiles(Format *win32.GUID, ppRenderingProfiles **IPortableDeviceValuesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)), uintptr(unsafe.Pointer(ppRenderingProfiles)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedCommands dispatches through IPortableDeviceServiceCapabilities's vtable slot 16.
-func (self *IPortableDeviceServiceCapabilities) GetSupportedCommands(ppCommands **IPortableDeviceKeyCollection) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetSupportedCommands(ppCommands **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCommands)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCommandOptions dispatches through IPortableDeviceServiceCapabilities's vtable slot 17.
-func (self *IPortableDeviceServiceCapabilities) GetCommandOptions(Command *foundation.PROPERTYKEY, ppOptions **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) GetCommandOptions(Command *foundation.PROPERTYKEY, ppOptions **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Command)), uintptr(unsafe.Pointer(ppOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceServiceCapabilities's vtable slot 18.
-func (self *IPortableDeviceServiceCapabilities) Cancel() foundation.HRESULT {
+func (self *IPortableDeviceServiceCapabilities) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceServiceManager: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservicemanager
@@ -974,15 +999,17 @@ type IPortableDeviceServiceManager struct {
 var IID_IPortableDeviceServiceManager = win32.GUID{Data1: 0xa8abc4e9, Data2: 0xa84a, Data3: 0x47a9, Data4: [8]byte{0x80, 0xb3, 0xc5, 0xd9, 0xb1, 0x72, 0xa9, 0x61}}
 
 // GetDeviceServices dispatches through IPortableDeviceServiceManager's vtable slot 3.
-func (self *IPortableDeviceServiceManager) GetDeviceServices(pszPnPDeviceID foundation.PWSTR, guidServiceCategory *win32.GUID, pServices *foundation.PWSTR, pcServices *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPDeviceID)), uintptr(unsafe.Pointer(guidServiceCategory)), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pcServices)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceServiceManager) GetDeviceServices(pszPnPDeviceID string, guidServiceCategory *win32.GUID, pServices *foundation.PWSTR, pcServices *uint32) error {
+	_pszPnPDeviceID := win32.UTF16Ptr(pszPnPDeviceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPDeviceID)), uintptr(unsafe.Pointer(guidServiceCategory)), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pcServices)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceForService dispatches through IPortableDeviceServiceManager's vtable slot 4.
-func (self *IPortableDeviceServiceManager) GetDeviceForService(pszPnPServiceID foundation.PWSTR, ppszPnPDeviceID *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPnPServiceID)), uintptr(unsafe.Pointer(ppszPnPDeviceID)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceServiceManager) GetDeviceForService(pszPnPServiceID string, ppszPnPDeviceID *foundation.PWSTR) error {
+	_pszPnPServiceID := win32.UTF16Ptr(pszPnPServiceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPnPServiceID)), uintptr(unsafe.Pointer(ppszPnPDeviceID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceServiceMethodCallback: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservicemethodcallback
@@ -995,9 +1022,9 @@ type IPortableDeviceServiceMethodCallback struct {
 var IID_IPortableDeviceServiceMethodCallback = win32.GUID{Data1: 0xc424233c, Data2: 0xafce, Data3: 0x4828, Data4: [8]byte{0xa7, 0x56, 0x7e, 0xd7, 0xa2, 0x35, 0x00, 0x83}}
 
 // OnComplete dispatches through IPortableDeviceServiceMethodCallback's vtable slot 3.
-func (self *IPortableDeviceServiceMethodCallback) OnComplete(hrStatus foundation.HRESULT, pResults *IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceServiceMethodCallback) OnComplete(hrStatus foundation.HRESULT, pResults *IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrStatus), uintptr(unsafe.Pointer(pResults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceServiceMethods: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceservicemethods
@@ -1010,21 +1037,21 @@ type IPortableDeviceServiceMethods struct {
 var IID_IPortableDeviceServiceMethods = win32.GUID{Data1: 0xe20333c9, Data2: 0xfd34, Data3: 0x412d, Data4: [8]byte{0xa3, 0x81, 0xcc, 0x6f, 0x2d, 0x82, 0x0d, 0xf7}}
 
 // Invoke dispatches through IPortableDeviceServiceMethods's vtable slot 3.
-func (self *IPortableDeviceServiceMethods) Invoke(Method *win32.GUID, pParameters *IPortableDeviceValues, ppResults **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceServiceMethods) Invoke(Method *win32.GUID, pParameters *IPortableDeviceValues, ppResults **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(ppResults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InvokeAsync dispatches through IPortableDeviceServiceMethods's vtable slot 4.
-func (self *IPortableDeviceServiceMethods) InvokeAsync(Method *win32.GUID, pParameters *IPortableDeviceValues, pCallback *IPortableDeviceServiceMethodCallback) foundation.HRESULT {
+func (self *IPortableDeviceServiceMethods) InvokeAsync(Method *win32.GUID, pParameters *IPortableDeviceValues, pCallback *IPortableDeviceServiceMethodCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceServiceMethods's vtable slot 5.
-func (self *IPortableDeviceServiceMethods) Cancel(pCallback *IPortableDeviceServiceMethodCallback) foundation.HRESULT {
+func (self *IPortableDeviceServiceMethods) Cancel(pCallback *IPortableDeviceServiceMethodCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bced49c8-8efe-41ed-960b-61313abd47a9
@@ -1036,9 +1063,9 @@ type IPortableDeviceServiceOpenCallback struct {
 var IID_IPortableDeviceServiceOpenCallback = win32.GUID{Data1: 0xbced49c8, Data2: 0x8efe, Data3: 0x41ed, Data4: [8]byte{0x96, 0x0b, 0x61, 0x31, 0x3a, 0xbd, 0x47, 0xa9}}
 
 // OnComplete dispatches through IPortableDeviceServiceOpenCallback's vtable slot 3.
-func (self *IPortableDeviceServiceOpenCallback) OnComplete(hrStatus foundation.HRESULT) foundation.HRESULT {
+func (self *IPortableDeviceServiceOpenCallback) OnComplete(hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceUnitsStream: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledeviceunitsstream
@@ -1051,15 +1078,15 @@ type IPortableDeviceUnitsStream struct {
 var IID_IPortableDeviceUnitsStream = win32.GUID{Data1: 0x5e98025f, Data2: 0xbfc4, Data3: 0x47a2, Data4: [8]byte{0x9a, 0x5f, 0xbc, 0x90, 0x0a, 0x50, 0x7c, 0x67}}
 
 // SeekInUnits dispatches through IPortableDeviceUnitsStream's vtable slot 3.
-func (self *IPortableDeviceUnitsStream) SeekInUnits(dlibMove int64, units WPD_STREAM_UNITS, dwOrigin uint32, plibNewPosition *uint64) foundation.HRESULT {
+func (self *IPortableDeviceUnitsStream) SeekInUnits(dlibMove int64, units WPD_STREAM_UNITS, dwOrigin uint32, plibNewPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dlibMove), uintptr(units), uintptr(dwOrigin), uintptr(unsafe.Pointer(plibNewPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPortableDeviceUnitsStream's vtable slot 4.
-func (self *IPortableDeviceUnitsStream) Cancel() foundation.HRESULT {
+func (self *IPortableDeviceUnitsStream) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceValues: https://learn.microsoft.com/windows/win32/wpd_sdk/iportabledevicevalues
@@ -1072,237 +1099,239 @@ type IPortableDeviceValues struct {
 var IID_IPortableDeviceValues = win32.GUID{Data1: 0x6848f6f2, Data2: 0x3155, Data3: 0x4f86, Data4: [8]byte{0xb6, 0xf5, 0x26, 0x3e, 0xee, 0xab, 0x31, 0x43}}
 
 // GetCount dispatches through IPortableDeviceValues's vtable slot 3.
-func (self *IPortableDeviceValues) GetCount(pcelt *uint32) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through IPortableDeviceValues's vtable slot 4.
-func (self *IPortableDeviceValues) GetAt(index uint32, pKey *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetAt(index uint32, pKey *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValue dispatches through IPortableDeviceValues's vtable slot 5.
-func (self *IPortableDeviceValues) SetValue(key *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetValue(key *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValue dispatches through IPortableDeviceValues's vtable slot 6.
-func (self *IPortableDeviceValues) GetValue(key *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetValue(key *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStringValue dispatches through IPortableDeviceValues's vtable slot 7.
-func (self *IPortableDeviceValues) SetStringValue(key *foundation.PROPERTYKEY, Value foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceValues) SetStringValue(key *foundation.PROPERTYKEY, Value string) error {
+	_Value := win32.UTF16Ptr(Value)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(_Value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStringValue dispatches through IPortableDeviceValues's vtable slot 8.
-func (self *IPortableDeviceValues) GetStringValue(key *foundation.PROPERTYKEY, pValue *foundation.PWSTR) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetStringValue(key *foundation.PROPERTYKEY, pValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUnsignedIntegerValue dispatches through IPortableDeviceValues's vtable slot 9.
-func (self *IPortableDeviceValues) SetUnsignedIntegerValue(key *foundation.PROPERTYKEY, Value uint32) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetUnsignedIntegerValue(key *foundation.PROPERTYKEY, Value uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUnsignedIntegerValue dispatches through IPortableDeviceValues's vtable slot 10.
-func (self *IPortableDeviceValues) GetUnsignedIntegerValue(key *foundation.PROPERTYKEY, pValue *uint32) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetUnsignedIntegerValue(key *foundation.PROPERTYKEY, pValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSignedIntegerValue dispatches through IPortableDeviceValues's vtable slot 11.
-func (self *IPortableDeviceValues) SetSignedIntegerValue(key *foundation.PROPERTYKEY, Value int32) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetSignedIntegerValue(key *foundation.PROPERTYKEY, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignedIntegerValue dispatches through IPortableDeviceValues's vtable slot 12.
-func (self *IPortableDeviceValues) GetSignedIntegerValue(key *foundation.PROPERTYKEY, pValue *int32) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetSignedIntegerValue(key *foundation.PROPERTYKEY, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUnsignedLargeIntegerValue dispatches through IPortableDeviceValues's vtable slot 13.
-func (self *IPortableDeviceValues) SetUnsignedLargeIntegerValue(key *foundation.PROPERTYKEY, Value uint64) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetUnsignedLargeIntegerValue(key *foundation.PROPERTYKEY, Value uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUnsignedLargeIntegerValue dispatches through IPortableDeviceValues's vtable slot 14.
-func (self *IPortableDeviceValues) GetUnsignedLargeIntegerValue(key *foundation.PROPERTYKEY, pValue *uint64) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetUnsignedLargeIntegerValue(key *foundation.PROPERTYKEY, pValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSignedLargeIntegerValue dispatches through IPortableDeviceValues's vtable slot 15.
-func (self *IPortableDeviceValues) SetSignedLargeIntegerValue(key *foundation.PROPERTYKEY, Value int64) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetSignedLargeIntegerValue(key *foundation.PROPERTYKEY, Value int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignedLargeIntegerValue dispatches through IPortableDeviceValues's vtable slot 16.
-func (self *IPortableDeviceValues) GetSignedLargeIntegerValue(key *foundation.PROPERTYKEY, pValue *int64) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetSignedLargeIntegerValue(key *foundation.PROPERTYKEY, pValue *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFloatValue dispatches through IPortableDeviceValues's vtable slot 18.
-func (self *IPortableDeviceValues) GetFloatValue(key *foundation.PROPERTYKEY, pValue *float32) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetFloatValue(key *foundation.PROPERTYKEY, pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetErrorValue dispatches through IPortableDeviceValues's vtable slot 19.
-func (self *IPortableDeviceValues) SetErrorValue(key *foundation.PROPERTYKEY, Value foundation.HRESULT) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetErrorValue(key *foundation.PROPERTYKEY, Value foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorValue dispatches through IPortableDeviceValues's vtable slot 20.
-func (self *IPortableDeviceValues) GetErrorValue(key *foundation.PROPERTYKEY, pValue *foundation.HRESULT) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetErrorValue(key *foundation.PROPERTYKEY, pValue *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetKeyValue dispatches through IPortableDeviceValues's vtable slot 21.
-func (self *IPortableDeviceValues) SetKeyValue(key *foundation.PROPERTYKEY, Value *foundation.PROPERTYKEY) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetKeyValue(key *foundation.PROPERTYKEY, Value *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKeyValue dispatches through IPortableDeviceValues's vtable slot 22.
-func (self *IPortableDeviceValues) GetKeyValue(key *foundation.PROPERTYKEY, pValue *foundation.PROPERTYKEY) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetKeyValue(key *foundation.PROPERTYKEY, pValue *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBoolValue dispatches through IPortableDeviceValues's vtable slot 23.
-func (self *IPortableDeviceValues) SetBoolValue(key *foundation.PROPERTYKEY, Value foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(Value))
-	return foundation.HRESULT(r1)
+func (self *IPortableDeviceValues) SetBoolValue(key *foundation.PROPERTYKEY, Value bool) error {
+	_Value := win32.Bool32(Value)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(_Value))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBoolValue dispatches through IPortableDeviceValues's vtable slot 24.
-func (self *IPortableDeviceValues) GetBoolValue(key *foundation.PROPERTYKEY, pValue *foundation.BOOL) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetBoolValue(key *foundation.PROPERTYKEY, pValue *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIUnknownValue dispatches through IPortableDeviceValues's vtable slot 25.
-func (self *IPortableDeviceValues) SetIUnknownValue(key *foundation.PROPERTYKEY, pValue *systemcom.IUnknown) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetIUnknownValue(key *foundation.PROPERTYKEY, pValue *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIUnknownValue dispatches through IPortableDeviceValues's vtable slot 26.
-func (self *IPortableDeviceValues) GetIUnknownValue(key *foundation.PROPERTYKEY, ppValue **systemcom.IUnknown) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetIUnknownValue(key *foundation.PROPERTYKEY, ppValue **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGuidValue dispatches through IPortableDeviceValues's vtable slot 27.
-func (self *IPortableDeviceValues) SetGuidValue(key *foundation.PROPERTYKEY, Value *win32.GUID) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetGuidValue(key *foundation.PROPERTYKEY, Value *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuidValue dispatches through IPortableDeviceValues's vtable slot 28.
-func (self *IPortableDeviceValues) GetGuidValue(key *foundation.PROPERTYKEY, pValue *win32.GUID) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetGuidValue(key *foundation.PROPERTYKEY, pValue *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBufferValue dispatches through IPortableDeviceValues's vtable slot 29.
-func (self *IPortableDeviceValues) SetBufferValue(key *foundation.PROPERTYKEY, pValue *byte, cbValue uint32) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetBufferValue(key *foundation.PROPERTYKEY, pValue *byte, cbValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)), uintptr(cbValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferValue dispatches through IPortableDeviceValues's vtable slot 30.
-func (self *IPortableDeviceValues) GetBufferValue(key *foundation.PROPERTYKEY, ppValue **byte, pcbValue *uint32) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetBufferValue(key *foundation.PROPERTYKEY, ppValue **byte, pcbValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)), uintptr(unsafe.Pointer(pcbValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIPortableDeviceValuesValue dispatches through IPortableDeviceValues's vtable slot 31.
-func (self *IPortableDeviceValues) SetIPortableDeviceValuesValue(key *foundation.PROPERTYKEY, pValue *IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetIPortableDeviceValuesValue(key *foundation.PROPERTYKEY, pValue *IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIPortableDeviceValuesValue dispatches through IPortableDeviceValues's vtable slot 32.
-func (self *IPortableDeviceValues) GetIPortableDeviceValuesValue(key *foundation.PROPERTYKEY, ppValue **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetIPortableDeviceValuesValue(key *foundation.PROPERTYKEY, ppValue **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIPortableDevicePropVariantCollectionValue dispatches through IPortableDeviceValues's vtable slot 33.
-func (self *IPortableDeviceValues) SetIPortableDevicePropVariantCollectionValue(key *foundation.PROPERTYKEY, pValue *IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetIPortableDevicePropVariantCollectionValue(key *foundation.PROPERTYKEY, pValue *IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIPortableDevicePropVariantCollectionValue dispatches through IPortableDeviceValues's vtable slot 34.
-func (self *IPortableDeviceValues) GetIPortableDevicePropVariantCollectionValue(key *foundation.PROPERTYKEY, ppValue **IPortableDevicePropVariantCollection) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetIPortableDevicePropVariantCollectionValue(key *foundation.PROPERTYKEY, ppValue **IPortableDevicePropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIPortableDeviceKeyCollectionValue dispatches through IPortableDeviceValues's vtable slot 35.
-func (self *IPortableDeviceValues) SetIPortableDeviceKeyCollectionValue(key *foundation.PROPERTYKEY, pValue *IPortableDeviceKeyCollection) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetIPortableDeviceKeyCollectionValue(key *foundation.PROPERTYKEY, pValue *IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIPortableDeviceKeyCollectionValue dispatches through IPortableDeviceValues's vtable slot 36.
-func (self *IPortableDeviceValues) GetIPortableDeviceKeyCollectionValue(key *foundation.PROPERTYKEY, ppValue **IPortableDeviceKeyCollection) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetIPortableDeviceKeyCollectionValue(key *foundation.PROPERTYKEY, ppValue **IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIPortableDeviceValuesCollectionValue dispatches through IPortableDeviceValues's vtable slot 37.
-func (self *IPortableDeviceValues) SetIPortableDeviceValuesCollectionValue(key *foundation.PROPERTYKEY, pValue *IPortableDeviceValuesCollection) foundation.HRESULT {
+func (self *IPortableDeviceValues) SetIPortableDeviceValuesCollectionValue(key *foundation.PROPERTYKEY, pValue *IPortableDeviceValuesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIPortableDeviceValuesCollectionValue dispatches through IPortableDeviceValues's vtable slot 38.
-func (self *IPortableDeviceValues) GetIPortableDeviceValuesCollectionValue(key *foundation.PROPERTYKEY, ppValue **IPortableDeviceValuesCollection) foundation.HRESULT {
+func (self *IPortableDeviceValues) GetIPortableDeviceValuesCollectionValue(key *foundation.PROPERTYKEY, ppValue **IPortableDeviceValuesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveValue dispatches through IPortableDeviceValues's vtable slot 39.
-func (self *IPortableDeviceValues) RemoveValue(key *foundation.PROPERTYKEY) foundation.HRESULT {
+func (self *IPortableDeviceValues) RemoveValue(key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyValuesFromPropertyStore dispatches through IPortableDeviceValues's vtable slot 40.
-func (self *IPortableDeviceValues) CopyValuesFromPropertyStore(pStore *uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IPortableDeviceValues) CopyValuesFromPropertyStore(pStore *uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyValuesToPropertyStore dispatches through IPortableDeviceValues's vtable slot 41.
-func (self *IPortableDeviceValues) CopyValuesToPropertyStore(pStore *uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IPortableDeviceValues) CopyValuesToPropertyStore(pStore *uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IPortableDeviceValues's vtable slot 42.
-func (self *IPortableDeviceValues) Clear() foundation.HRESULT {
+func (self *IPortableDeviceValues) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceValuesCollection: https://learn.microsoft.com/windows/win32/wpd_sdk/iportabledevicevaluescollection
@@ -1315,33 +1344,33 @@ type IPortableDeviceValuesCollection struct {
 var IID_IPortableDeviceValuesCollection = win32.GUID{Data1: 0x6e3f2d79, Data2: 0x4e07, Data3: 0x48c4, Data4: [8]byte{0x82, 0x08, 0xd8, 0xc2, 0xe5, 0xaf, 0x4a, 0x99}}
 
 // GetCount dispatches through IPortableDeviceValuesCollection's vtable slot 3.
-func (self *IPortableDeviceValuesCollection) GetCount(pcElems *uint32) foundation.HRESULT {
+func (self *IPortableDeviceValuesCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through IPortableDeviceValuesCollection's vtable slot 4.
-func (self *IPortableDeviceValuesCollection) GetAt(dwIndex uint32, ppValues **IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceValuesCollection) GetAt(dwIndex uint32, ppValues **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IPortableDeviceValuesCollection's vtable slot 5.
-func (self *IPortableDeviceValuesCollection) Add(pValues *IPortableDeviceValues) foundation.HRESULT {
+func (self *IPortableDeviceValuesCollection) Add(pValues *IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IPortableDeviceValuesCollection's vtable slot 6.
-func (self *IPortableDeviceValuesCollection) Clear() foundation.HRESULT {
+func (self *IPortableDeviceValuesCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAt dispatches through IPortableDeviceValuesCollection's vtable slot 7.
-func (self *IPortableDeviceValuesCollection) RemoveAt(dwIndex uint32) foundation.HRESULT {
+func (self *IPortableDeviceValuesCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPortableDeviceWebControl: https://learn.microsoft.com/windows/win32/api/portabledeviceapi/nn-portabledeviceapi-iportabledevicewebcontrol
@@ -1354,15 +1383,15 @@ type IPortableDeviceWebControl struct {
 var IID_IPortableDeviceWebControl = win32.GUID{Data1: 0x94fc7953, Data2: 0x5ca1, Data3: 0x483a, Data4: [8]byte{0x8a, 0xee, 0xdf, 0x52, 0xe7, 0x74, 0x7d, 0x00}}
 
 // GetDeviceFromId dispatches through IPortableDeviceWebControl's vtable slot 7.
-func (self *IPortableDeviceWebControl) GetDeviceFromId(deviceId foundation.BSTR, ppDevice **systemcom.IDispatch) foundation.HRESULT {
+func (self *IPortableDeviceWebControl) GetDeviceFromId(deviceId foundation.BSTR, ppDevice **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceId)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceFromIdAsync dispatches through IPortableDeviceWebControl's vtable slot 8.
-func (self *IPortableDeviceWebControl) GetDeviceFromIdAsync(deviceId foundation.BSTR, pCompletionHandler *systemcom.IDispatch, pErrorHandler *systemcom.IDispatch) foundation.HRESULT {
+func (self *IPortableDeviceWebControl) GetDeviceFromIdAsync(deviceId foundation.BSTR, pCompletionHandler *systemcom.IDispatch, pErrorHandler *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceId)), uintptr(unsafe.Pointer(pCompletionHandler)), uintptr(unsafe.Pointer(pErrorHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 70aa1c9e-f2b4-4c61-86d3-6b9fb75fd1a2
@@ -1374,33 +1403,33 @@ type IRadioInstance struct {
 var IID_IRadioInstance = win32.GUID{Data1: 0x70aa1c9e, Data2: 0xf2b4, Data3: 0x4c61, Data4: [8]byte{0x86, 0xd3, 0x6b, 0x9f, 0xb7, 0x5f, 0xd1, 0xa2}}
 
 // GetRadioManagerSignature dispatches through IRadioInstance's vtable slot 3.
-func (self *IRadioInstance) GetRadioManagerSignature(pguidSignature *win32.GUID) foundation.HRESULT {
+func (self *IRadioInstance) GetRadioManagerSignature(pguidSignature *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidSignature)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInstanceSignature dispatches through IRadioInstance's vtable slot 4.
-func (self *IRadioInstance) GetInstanceSignature(pbstrId *foundation.BSTR) foundation.HRESULT {
+func (self *IRadioInstance) GetInstanceSignature(pbstrId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFriendlyName dispatches through IRadioInstance's vtable slot 5.
-func (self *IRadioInstance) GetFriendlyName(lcid uint32, pbstrName *foundation.BSTR) foundation.HRESULT {
+func (self *IRadioInstance) GetFriendlyName(lcid uint32, pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lcid), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRadioState dispatches through IRadioInstance's vtable slot 6.
-func (self *IRadioInstance) GetRadioState(pRadioState *DEVICE_RADIO_STATE) foundation.HRESULT {
+func (self *IRadioInstance) GetRadioState(pRadioState *DEVICE_RADIO_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRadioState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRadioState dispatches through IRadioInstance's vtable slot 7.
-func (self *IRadioInstance) SetRadioState(radioState DEVICE_RADIO_STATE, uTimeoutSec uint32) foundation.HRESULT {
+func (self *IRadioInstance) SetRadioState(radioState DEVICE_RADIO_STATE, uTimeoutSec uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(radioState), uintptr(uTimeoutSec))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsMultiComm dispatches through IRadioInstance's vtable slot 8.
@@ -1424,15 +1453,15 @@ type IRadioInstanceCollection struct {
 var IID_IRadioInstanceCollection = win32.GUID{Data1: 0xe5791fae, Data2: 0x5665, Data3: 0x4e0c, Data4: [8]byte{0x95, 0xbe, 0x5f, 0xde, 0x31, 0x64, 0x41, 0x85}}
 
 // GetCount dispatches through IRadioInstanceCollection's vtable slot 3.
-func (self *IRadioInstanceCollection) GetCount(pcInstance *uint32) foundation.HRESULT {
+func (self *IRadioInstanceCollection) GetCount(pcInstance *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcInstance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through IRadioInstanceCollection's vtable slot 4.
-func (self *IRadioInstanceCollection) GetAt(uIndex uint32, ppRadioInstance **IRadioInstance) foundation.HRESULT {
+func (self *IRadioInstanceCollection) GetAt(uIndex uint32, ppRadioInstance **IRadioInstance) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppRadioInstance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWpdSerializer: https://learn.microsoft.com/windows/win32/wpd_sdk/iwpdserializer
@@ -1445,25 +1474,25 @@ type IWpdSerializer struct {
 var IID_IWpdSerializer = win32.GUID{Data1: 0xb32f4002, Data2: 0xbb27, Data3: 0x45ff, Data4: [8]byte{0xaf, 0x4f, 0x06, 0x63, 0x1c, 0x1e, 0x8d, 0xad}}
 
 // GetIPortableDeviceValuesFromBuffer dispatches through IWpdSerializer's vtable slot 3.
-func (self *IWpdSerializer) GetIPortableDeviceValuesFromBuffer(pBuffer *byte, dwInputBufferLength uint32, ppParams **IPortableDeviceValues) foundation.HRESULT {
+func (self *IWpdSerializer) GetIPortableDeviceValuesFromBuffer(pBuffer *byte, dwInputBufferLength uint32, ppParams **IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwInputBufferLength), uintptr(unsafe.Pointer(ppParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteIPortableDeviceValuesToBuffer dispatches through IWpdSerializer's vtable slot 4.
-func (self *IWpdSerializer) WriteIPortableDeviceValuesToBuffer(dwOutputBufferLength uint32, pResults *IPortableDeviceValues, pBuffer *byte, pdwBytesWritten *uint32) foundation.HRESULT {
+func (self *IWpdSerializer) WriteIPortableDeviceValuesToBuffer(dwOutputBufferLength uint32, pResults *IPortableDeviceValues, pBuffer *byte, pdwBytesWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwOutputBufferLength), uintptr(unsafe.Pointer(pResults)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pdwBytesWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferFromIPortableDeviceValues dispatches through IWpdSerializer's vtable slot 5.
-func (self *IWpdSerializer) GetBufferFromIPortableDeviceValues(pSource *IPortableDeviceValues, ppBuffer **byte, pdwBufferSize *uint32) foundation.HRESULT {
+func (self *IWpdSerializer) GetBufferFromIPortableDeviceValues(pSource *IPortableDeviceValues, ppBuffer **byte, pdwBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pdwBufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSerializedSize dispatches through IWpdSerializer's vtable slot 6.
-func (self *IWpdSerializer) GetSerializedSize(pSource *IPortableDeviceValues, pdwSize *uint32) foundation.HRESULT {
+func (self *IWpdSerializer) GetSerializedSize(pSource *IPortableDeviceValues, pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

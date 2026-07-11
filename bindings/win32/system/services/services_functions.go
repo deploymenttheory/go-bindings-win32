@@ -23,56 +23,56 @@ var (
 )
 
 var (
+	procChangeServiceConfig                   = modADVAPI32.NewProc("ChangeServiceConfigW")
+	procChangeServiceConfig2                  = modADVAPI32.NewProc("ChangeServiceConfig2W")
 	procChangeServiceConfig2A                 = modADVAPI32.NewProc("ChangeServiceConfig2A")
-	procChangeServiceConfig2W                 = modADVAPI32.NewProc("ChangeServiceConfig2W")
 	procChangeServiceConfigA                  = modADVAPI32.NewProc("ChangeServiceConfigA")
-	procChangeServiceConfigW                  = modADVAPI32.NewProc("ChangeServiceConfigW")
 	procCloseServiceHandle                    = modADVAPI32.NewProc("CloseServiceHandle")
 	procControlService                        = modADVAPI32.NewProc("ControlService")
+	procControlServiceEx                      = modADVAPI32.NewProc("ControlServiceExW")
 	procControlServiceExA                     = modADVAPI32.NewProc("ControlServiceExA")
-	procControlServiceExW                     = modADVAPI32.NewProc("ControlServiceExW")
+	procCreateService                         = modADVAPI32.NewProc("CreateServiceW")
 	procCreateServiceA                        = modADVAPI32.NewProc("CreateServiceA")
-	procCreateServiceW                        = modADVAPI32.NewProc("CreateServiceW")
 	procDeleteService                         = modADVAPI32.NewProc("DeleteService")
+	procEnumDependentServices                 = modADVAPI32.NewProc("EnumDependentServicesW")
 	procEnumDependentServicesA                = modADVAPI32.NewProc("EnumDependentServicesA")
-	procEnumDependentServicesW                = modADVAPI32.NewProc("EnumDependentServicesW")
+	procEnumServicesStatus                    = modADVAPI32.NewProc("EnumServicesStatusW")
 	procEnumServicesStatusA                   = modADVAPI32.NewProc("EnumServicesStatusA")
+	procEnumServicesStatusEx                  = modADVAPI32.NewProc("EnumServicesStatusExW")
 	procEnumServicesStatusExA                 = modADVAPI32.NewProc("EnumServicesStatusExA")
-	procEnumServicesStatusExW                 = modADVAPI32.NewProc("EnumServicesStatusExW")
-	procEnumServicesStatusW                   = modADVAPI32.NewProc("EnumServicesStatusW")
+	procGetServiceDisplayName                 = modADVAPI32.NewProc("GetServiceDisplayNameW")
 	procGetServiceDisplayNameA                = modADVAPI32.NewProc("GetServiceDisplayNameA")
-	procGetServiceDisplayNameW                = modADVAPI32.NewProc("GetServiceDisplayNameW")
+	procGetServiceKeyName                     = modADVAPI32.NewProc("GetServiceKeyNameW")
 	procGetServiceKeyNameA                    = modADVAPI32.NewProc("GetServiceKeyNameA")
-	procGetServiceKeyNameW                    = modADVAPI32.NewProc("GetServiceKeyNameW")
 	procLockServiceDatabase                   = modADVAPI32.NewProc("LockServiceDatabase")
 	procNotifyBootConfigStatus                = modADVAPI32.NewProc("NotifyBootConfigStatus")
+	procNotifyServiceStatusChange             = modADVAPI32.NewProc("NotifyServiceStatusChangeW")
 	procNotifyServiceStatusChangeA            = modADVAPI32.NewProc("NotifyServiceStatusChangeA")
-	procNotifyServiceStatusChangeW            = modADVAPI32.NewProc("NotifyServiceStatusChangeW")
+	procOpenSCManager                         = modADVAPI32.NewProc("OpenSCManagerW")
 	procOpenSCManagerA                        = modADVAPI32.NewProc("OpenSCManagerA")
-	procOpenSCManagerW                        = modADVAPI32.NewProc("OpenSCManagerW")
+	procOpenService                           = modADVAPI32.NewProc("OpenServiceW")
 	procOpenServiceA                          = modADVAPI32.NewProc("OpenServiceA")
-	procOpenServiceW                          = modADVAPI32.NewProc("OpenServiceW")
+	procQueryServiceConfig                    = modADVAPI32.NewProc("QueryServiceConfigW")
+	procQueryServiceConfig2                   = modADVAPI32.NewProc("QueryServiceConfig2W")
 	procQueryServiceConfig2A                  = modADVAPI32.NewProc("QueryServiceConfig2A")
-	procQueryServiceConfig2W                  = modADVAPI32.NewProc("QueryServiceConfig2W")
 	procQueryServiceConfigA                   = modADVAPI32.NewProc("QueryServiceConfigA")
-	procQueryServiceConfigW                   = modADVAPI32.NewProc("QueryServiceConfigW")
 	procQueryServiceDynamicInformation        = modADVAPI32.NewProc("QueryServiceDynamicInformation")
+	procQueryServiceLockStatus                = modADVAPI32.NewProc("QueryServiceLockStatusW")
 	procQueryServiceLockStatusA               = modADVAPI32.NewProc("QueryServiceLockStatusA")
-	procQueryServiceLockStatusW               = modADVAPI32.NewProc("QueryServiceLockStatusW")
 	procQueryServiceObjectSecurity            = modADVAPI32.NewProc("QueryServiceObjectSecurity")
 	procQueryServiceStatus                    = modADVAPI32.NewProc("QueryServiceStatus")
 	procQueryServiceStatusEx                  = modADVAPI32.NewProc("QueryServiceStatusEx")
+	procRegisterServiceCtrlHandler            = modADVAPI32.NewProc("RegisterServiceCtrlHandlerW")
 	procRegisterServiceCtrlHandlerA           = modADVAPI32.NewProc("RegisterServiceCtrlHandlerA")
+	procRegisterServiceCtrlHandlerEx          = modADVAPI32.NewProc("RegisterServiceCtrlHandlerExW")
 	procRegisterServiceCtrlHandlerExA         = modADVAPI32.NewProc("RegisterServiceCtrlHandlerExA")
-	procRegisterServiceCtrlHandlerExW         = modADVAPI32.NewProc("RegisterServiceCtrlHandlerExW")
-	procRegisterServiceCtrlHandlerW           = modADVAPI32.NewProc("RegisterServiceCtrlHandlerW")
 	procSetServiceBits                        = modADVAPI32.NewProc("SetServiceBits")
 	procSetServiceObjectSecurity              = modADVAPI32.NewProc("SetServiceObjectSecurity")
 	procSetServiceStatus                      = modADVAPI32.NewProc("SetServiceStatus")
+	procStartService                          = modADVAPI32.NewProc("StartServiceW")
 	procStartServiceA                         = modADVAPI32.NewProc("StartServiceA")
+	procStartServiceCtrlDispatcher            = modADVAPI32.NewProc("StartServiceCtrlDispatcherW")
 	procStartServiceCtrlDispatcherA           = modADVAPI32.NewProc("StartServiceCtrlDispatcherA")
-	procStartServiceCtrlDispatcherW           = modADVAPI32.NewProc("StartServiceCtrlDispatcherW")
-	procStartServiceW                         = modADVAPI32.NewProc("StartServiceW")
 	procUnlockServiceDatabase                 = modADVAPI32.NewProc("UnlockServiceDatabase")
 	procWaitServiceState                      = modADVAPI32.NewProc("WaitServiceState")
 	procGetServiceRegistryStateKey            = modapi_ms_win_service_core_l1_1_3.NewProc("GetServiceRegistryStateKey")
@@ -82,6 +82,34 @@ var (
 	procSubscribeServiceChangeNotifications   = modSecHost.NewProc("SubscribeServiceChangeNotifications")
 	procUnsubscribeServiceChangeNotifications = modSecHost.NewProc("UnsubscribeServiceChangeNotifications")
 )
+
+// ChangeServiceConfig calls ADVAPI32!ChangeServiceConfigW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-changeserviceconfigw
+// Minimum OS: windows5.1.2600.
+func ChangeServiceConfig(hService SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName string, lpLoadOrderGroup string, lpdwTagId *uint32, lpDependencies string, lpServiceStartName string, lpPassword string, lpDisplayName string) error {
+	_lpBinaryPathName := win32.UTF16Ptr(lpBinaryPathName)
+	_lpLoadOrderGroup := win32.UTF16Ptr(lpLoadOrderGroup)
+	_lpDependencies := win32.UTF16Ptr(lpDependencies)
+	_lpServiceStartName := win32.UTF16Ptr(lpServiceStartName)
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpDisplayName := win32.UTF16Ptr(lpDisplayName)
+	r1, _, e1 := syscall.SyscallN(procChangeServiceConfig.Addr(), uintptr(hService), uintptr(dwServiceType), uintptr(dwStartType), uintptr(dwErrorControl), uintptr(unsafe.Pointer(_lpBinaryPathName)), uintptr(unsafe.Pointer(_lpLoadOrderGroup)), uintptr(unsafe.Pointer(lpdwTagId)), uintptr(unsafe.Pointer(_lpDependencies)), uintptr(unsafe.Pointer(_lpServiceStartName)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpDisplayName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// ChangeServiceConfig2 calls ADVAPI32!ChangeServiceConfig2W.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-changeserviceconfig2w
+// Minimum OS: windows5.1.2600.
+func ChangeServiceConfig2(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpInfo unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procChangeServiceConfig2.Addr(), uintptr(hService), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpInfo)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
 
 // ChangeServiceConfig2A calls ADVAPI32!ChangeServiceConfig2A.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-changeserviceconfig2a
@@ -94,33 +122,11 @@ func ChangeServiceConfig2A(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpInf
 	return nil
 }
 
-// ChangeServiceConfig2W calls ADVAPI32!ChangeServiceConfig2W.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-changeserviceconfig2w
-// Minimum OS: windows5.1.2600.
-func ChangeServiceConfig2W(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpInfo unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procChangeServiceConfig2W.Addr(), uintptr(hService), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpInfo)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // ChangeServiceConfigA calls ADVAPI32!ChangeServiceConfigA.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-changeserviceconfiga
 // Minimum OS: windows5.1.2600.
 func ChangeServiceConfigA(hService SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName foundation.PSTR, lpLoadOrderGroup foundation.PSTR, lpdwTagId *uint32, lpDependencies foundation.PSTR, lpServiceStartName foundation.PSTR, lpPassword foundation.PSTR, lpDisplayName foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procChangeServiceConfigA.Addr(), uintptr(hService), uintptr(dwServiceType), uintptr(dwStartType), uintptr(dwErrorControl), uintptr(unsafe.Pointer(lpBinaryPathName)), uintptr(unsafe.Pointer(lpLoadOrderGroup)), uintptr(unsafe.Pointer(lpdwTagId)), uintptr(unsafe.Pointer(lpDependencies)), uintptr(unsafe.Pointer(lpServiceStartName)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(lpDisplayName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// ChangeServiceConfigW calls ADVAPI32!ChangeServiceConfigW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-changeserviceconfigw
-// Minimum OS: windows5.1.2600.
-func ChangeServiceConfigW(hService SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName foundation.PWSTR, lpLoadOrderGroup foundation.PWSTR, lpdwTagId *uint32, lpDependencies foundation.PWSTR, lpServiceStartName foundation.PWSTR, lpPassword foundation.PWSTR, lpDisplayName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procChangeServiceConfigW.Addr(), uintptr(hService), uintptr(dwServiceType), uintptr(dwStartType), uintptr(dwErrorControl), uintptr(unsafe.Pointer(lpBinaryPathName)), uintptr(unsafe.Pointer(lpLoadOrderGroup)), uintptr(unsafe.Pointer(lpdwTagId)), uintptr(unsafe.Pointer(lpDependencies)), uintptr(unsafe.Pointer(lpServiceStartName)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(lpDisplayName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -149,6 +155,17 @@ func ControlService(hService SC_HANDLE, dwControl uint32, lpServiceStatus *SERVI
 	return nil
 }
 
+// ControlServiceEx calls ADVAPI32!ControlServiceExW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-controlserviceexw
+// Minimum OS: windows6.0.6000.
+func ControlServiceEx(hService SC_HANDLE, dwControl uint32, dwInfoLevel uint32, pControlParams unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procControlServiceEx.Addr(), uintptr(hService), uintptr(dwControl), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(pControlParams)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // ControlServiceExA calls ADVAPI32!ControlServiceExA.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-controlserviceexa
 // Minimum OS: windows6.0.6000.
@@ -160,22 +177,18 @@ func ControlServiceExA(hService SC_HANDLE, dwControl uint32, dwInfoLevel uint32,
 	return nil
 }
 
-// ControlServiceExW calls ADVAPI32!ControlServiceExW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-controlserviceexw
-// Minimum OS: windows6.0.6000.
-func ControlServiceExW(hService SC_HANDLE, dwControl uint32, dwInfoLevel uint32, pControlParams unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procControlServiceExW.Addr(), uintptr(hService), uintptr(dwControl), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(pControlParams)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CreateServiceA calls ADVAPI32!CreateServiceA.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-createservicea
+// CreateService calls ADVAPI32!CreateServiceW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-createservicew
 // Minimum OS: windows5.1.2600.
-func CreateServiceA(hSCManager SC_HANDLE, lpServiceName foundation.PSTR, lpDisplayName foundation.PSTR, dwDesiredAccess uint32, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName foundation.PSTR, lpLoadOrderGroup foundation.PSTR, lpdwTagId *uint32, lpDependencies foundation.PSTR, lpServiceStartName foundation.PSTR, lpPassword foundation.PSTR) (SC_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateServiceA.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpDisplayName)), uintptr(dwDesiredAccess), uintptr(dwServiceType), uintptr(dwStartType), uintptr(dwErrorControl), uintptr(unsafe.Pointer(lpBinaryPathName)), uintptr(unsafe.Pointer(lpLoadOrderGroup)), uintptr(unsafe.Pointer(lpdwTagId)), uintptr(unsafe.Pointer(lpDependencies)), uintptr(unsafe.Pointer(lpServiceStartName)), uintptr(unsafe.Pointer(lpPassword)))
+func CreateService(hSCManager SC_HANDLE, lpServiceName string, lpDisplayName string, dwDesiredAccess uint32, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName string, lpLoadOrderGroup string, lpdwTagId *uint32, lpDependencies string, lpServiceStartName string, lpPassword string) (SC_HANDLE, error) {
+	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+	_lpDisplayName := win32.UTF16Ptr(lpDisplayName)
+	_lpBinaryPathName := win32.UTF16Ptr(lpBinaryPathName)
+	_lpLoadOrderGroup := win32.UTF16Ptr(lpLoadOrderGroup)
+	_lpDependencies := win32.UTF16Ptr(lpDependencies)
+	_lpServiceStartName := win32.UTF16Ptr(lpServiceStartName)
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	r1, _, e1 := syscall.SyscallN(procCreateService.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(unsafe.Pointer(_lpDisplayName)), uintptr(dwDesiredAccess), uintptr(dwServiceType), uintptr(dwStartType), uintptr(dwErrorControl), uintptr(unsafe.Pointer(_lpBinaryPathName)), uintptr(unsafe.Pointer(_lpLoadOrderGroup)), uintptr(unsafe.Pointer(lpdwTagId)), uintptr(unsafe.Pointer(_lpDependencies)), uintptr(unsafe.Pointer(_lpServiceStartName)), uintptr(unsafe.Pointer(_lpPassword)))
 	ret := SC_HANDLE(r1)
 	if ret == ^SC_HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -183,11 +196,11 @@ func CreateServiceA(hSCManager SC_HANDLE, lpServiceName foundation.PSTR, lpDispl
 	return ret, nil
 }
 
-// CreateServiceW calls ADVAPI32!CreateServiceW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-createservicew
+// CreateServiceA calls ADVAPI32!CreateServiceA.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-createservicea
 // Minimum OS: windows5.1.2600.
-func CreateServiceW(hSCManager SC_HANDLE, lpServiceName foundation.PWSTR, lpDisplayName foundation.PWSTR, dwDesiredAccess uint32, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName foundation.PWSTR, lpLoadOrderGroup foundation.PWSTR, lpdwTagId *uint32, lpDependencies foundation.PWSTR, lpServiceStartName foundation.PWSTR, lpPassword foundation.PWSTR) (SC_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateServiceW.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpDisplayName)), uintptr(dwDesiredAccess), uintptr(dwServiceType), uintptr(dwStartType), uintptr(dwErrorControl), uintptr(unsafe.Pointer(lpBinaryPathName)), uintptr(unsafe.Pointer(lpLoadOrderGroup)), uintptr(unsafe.Pointer(lpdwTagId)), uintptr(unsafe.Pointer(lpDependencies)), uintptr(unsafe.Pointer(lpServiceStartName)), uintptr(unsafe.Pointer(lpPassword)))
+func CreateServiceA(hSCManager SC_HANDLE, lpServiceName foundation.PSTR, lpDisplayName foundation.PSTR, dwDesiredAccess uint32, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName foundation.PSTR, lpLoadOrderGroup foundation.PSTR, lpdwTagId *uint32, lpDependencies foundation.PSTR, lpServiceStartName foundation.PSTR, lpPassword foundation.PSTR) (SC_HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateServiceA.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpDisplayName)), uintptr(dwDesiredAccess), uintptr(dwServiceType), uintptr(dwStartType), uintptr(dwErrorControl), uintptr(unsafe.Pointer(lpBinaryPathName)), uintptr(unsafe.Pointer(lpLoadOrderGroup)), uintptr(unsafe.Pointer(lpdwTagId)), uintptr(unsafe.Pointer(lpDependencies)), uintptr(unsafe.Pointer(lpServiceStartName)), uintptr(unsafe.Pointer(lpPassword)))
 	ret := SC_HANDLE(r1)
 	if ret == ^SC_HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -206,6 +219,17 @@ func DeleteService(hService SC_HANDLE) error {
 	return nil
 }
 
+// EnumDependentServices calls ADVAPI32!EnumDependentServicesW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumdependentservicesw
+// Minimum OS: windows5.1.2600.
+func EnumDependentServices(hService SC_HANDLE, dwServiceState ENUM_SERVICE_STATE, lpServices *ENUM_SERVICE_STATUSW, cbBufSize uint32, pcbBytesNeeded *uint32, lpServicesReturned *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEnumDependentServices.Addr(), uintptr(hService), uintptr(dwServiceState), uintptr(unsafe.Pointer(lpServices)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // EnumDependentServicesA calls ADVAPI32!EnumDependentServicesA.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumdependentservicesa
 // Minimum OS: windows5.1.2600.
@@ -217,11 +241,11 @@ func EnumDependentServicesA(hService SC_HANDLE, dwServiceState ENUM_SERVICE_STAT
 	return nil
 }
 
-// EnumDependentServicesW calls ADVAPI32!EnumDependentServicesW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumdependentservicesw
+// EnumServicesStatus calls ADVAPI32!EnumServicesStatusW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusw
 // Minimum OS: windows5.1.2600.
-func EnumDependentServicesW(hService SC_HANDLE, dwServiceState ENUM_SERVICE_STATE, lpServices *ENUM_SERVICE_STATUSW, cbBufSize uint32, pcbBytesNeeded *uint32, lpServicesReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumDependentServicesW.Addr(), uintptr(hService), uintptr(dwServiceState), uintptr(unsafe.Pointer(lpServices)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)))
+func EnumServicesStatus(hSCManager SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices *ENUM_SERVICE_STATUSW, cbBufSize uint32, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEnumServicesStatus.Addr(), uintptr(hSCManager), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(lpServices)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -239,33 +263,23 @@ func EnumServicesStatusA(hSCManager SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, 
 	return nil
 }
 
+// EnumServicesStatusEx calls ADVAPI32!EnumServicesStatusExW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexw
+// Minimum OS: windows5.1.2600.
+func EnumServicesStatusEx(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices *byte, cbBufSize uint32, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32, pszGroupName string) error {
+	_pszGroupName := win32.UTF16Ptr(pszGroupName)
+	r1, _, e1 := syscall.SyscallN(procEnumServicesStatusEx.Addr(), uintptr(hSCManager), uintptr(InfoLevel), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(lpServices)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)), uintptr(unsafe.Pointer(_pszGroupName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // EnumServicesStatusExA calls ADVAPI32!EnumServicesStatusExA.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexa
 // Minimum OS: windows5.1.2600.
 func EnumServicesStatusExA(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices *byte, cbBufSize uint32, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32, pszGroupName foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procEnumServicesStatusExA.Addr(), uintptr(hSCManager), uintptr(InfoLevel), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(lpServices)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)), uintptr(unsafe.Pointer(pszGroupName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// EnumServicesStatusExW calls ADVAPI32!EnumServicesStatusExW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexw
-// Minimum OS: windows5.1.2600.
-func EnumServicesStatusExW(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices *byte, cbBufSize uint32, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32, pszGroupName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procEnumServicesStatusExW.Addr(), uintptr(hSCManager), uintptr(InfoLevel), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(lpServices)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)), uintptr(unsafe.Pointer(pszGroupName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// EnumServicesStatusW calls ADVAPI32!EnumServicesStatusW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusw
-// Minimum OS: windows5.1.2600.
-func EnumServicesStatusW(hSCManager SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices *ENUM_SERVICE_STATUSW, cbBufSize uint32, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumServicesStatusW.Addr(), uintptr(hSCManager), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(lpServices)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -280,6 +294,18 @@ func GetServiceDirectory(hServiceStatus SERVICE_STATUS_HANDLE, eDirectoryType SE
 	return uint32(r1)
 }
 
+// GetServiceDisplayName calls ADVAPI32!GetServiceDisplayNameW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-getservicedisplaynamew
+// Minimum OS: windows5.1.2600.
+func GetServiceDisplayName(hSCManager SC_HANDLE, lpServiceName string, lpDisplayName foundation.PWSTR, lpcchBuffer *uint32) error {
+	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+	r1, _, e1 := syscall.SyscallN(procGetServiceDisplayName.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(unsafe.Pointer(lpDisplayName)), uintptr(unsafe.Pointer(lpcchBuffer)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetServiceDisplayNameA calls ADVAPI32!GetServiceDisplayNameA.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-getservicedisplaynamea
 // Minimum OS: windows5.1.2600.
@@ -291,11 +317,12 @@ func GetServiceDisplayNameA(hSCManager SC_HANDLE, lpServiceName foundation.PSTR,
 	return nil
 }
 
-// GetServiceDisplayNameW calls ADVAPI32!GetServiceDisplayNameW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-getservicedisplaynamew
+// GetServiceKeyName calls ADVAPI32!GetServiceKeyNameW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-getservicekeynamew
 // Minimum OS: windows5.1.2600.
-func GetServiceDisplayNameW(hSCManager SC_HANDLE, lpServiceName foundation.PWSTR, lpDisplayName foundation.PWSTR, lpcchBuffer *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetServiceDisplayNameW.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpDisplayName)), uintptr(unsafe.Pointer(lpcchBuffer)))
+func GetServiceKeyName(hSCManager SC_HANDLE, lpDisplayName string, lpServiceName foundation.PWSTR, lpcchBuffer *uint32) error {
+	_lpDisplayName := win32.UTF16Ptr(lpDisplayName)
+	r1, _, e1 := syscall.SyscallN(procGetServiceKeyName.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(_lpDisplayName)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpcchBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -307,17 +334,6 @@ func GetServiceDisplayNameW(hSCManager SC_HANDLE, lpServiceName foundation.PWSTR
 // Minimum OS: windows5.1.2600.
 func GetServiceKeyNameA(hSCManager SC_HANDLE, lpDisplayName foundation.PSTR, lpServiceName foundation.PSTR, lpcchBuffer *uint32) error {
 	r1, _, e1 := syscall.SyscallN(procGetServiceKeyNameA.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpDisplayName)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpcchBuffer)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetServiceKeyNameW calls ADVAPI32!GetServiceKeyNameW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-getservicekeynamew
-// Minimum OS: windows5.1.2600.
-func GetServiceKeyNameW(hSCManager SC_HANDLE, lpDisplayName foundation.PWSTR, lpServiceName foundation.PWSTR, lpcchBuffer *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetServiceKeyNameW.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpDisplayName)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpcchBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -361,12 +377,21 @@ func LockServiceDatabase(hSCManager SC_HANDLE) (unsafe.Pointer, error) {
 // NotifyBootConfigStatus calls ADVAPI32!NotifyBootConfigStatus.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-notifybootconfigstatus
 // Minimum OS: windows5.1.2600.
-func NotifyBootConfigStatus(BootAcceptable foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procNotifyBootConfigStatus.Addr(), uintptr(BootAcceptable))
+func NotifyBootConfigStatus(BootAcceptable bool) error {
+	_BootAcceptable := win32.Bool32(BootAcceptable)
+	r1, _, e1 := syscall.SyscallN(procNotifyBootConfigStatus.Addr(), uintptr(_BootAcceptable))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// NotifyServiceStatusChange calls ADVAPI32!NotifyServiceStatusChangeW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-notifyservicestatuschangew
+// Minimum OS: windows6.0.6000.
+func NotifyServiceStatusChange(hService SC_HANDLE, dwNotifyMask SERVICE_NOTIFY, pNotifyBuffer *SERVICE_NOTIFY_2W) uint32 {
+	r1, _, _ := syscall.SyscallN(procNotifyServiceStatusChange.Addr(), uintptr(hService), uintptr(dwNotifyMask), uintptr(unsafe.Pointer(pNotifyBuffer)))
+	return uint32(r1)
 }
 
 // NotifyServiceStatusChangeA calls ADVAPI32!NotifyServiceStatusChangeA.
@@ -377,12 +402,18 @@ func NotifyServiceStatusChangeA(hService SC_HANDLE, dwNotifyMask SERVICE_NOTIFY,
 	return uint32(r1)
 }
 
-// NotifyServiceStatusChangeW calls ADVAPI32!NotifyServiceStatusChangeW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-notifyservicestatuschangew
-// Minimum OS: windows6.0.6000.
-func NotifyServiceStatusChangeW(hService SC_HANDLE, dwNotifyMask SERVICE_NOTIFY, pNotifyBuffer *SERVICE_NOTIFY_2W) uint32 {
-	r1, _, _ := syscall.SyscallN(procNotifyServiceStatusChangeW.Addr(), uintptr(hService), uintptr(dwNotifyMask), uintptr(unsafe.Pointer(pNotifyBuffer)))
-	return uint32(r1)
+// OpenSCManager calls ADVAPI32!OpenSCManagerW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-openscmanagerw
+// Minimum OS: windows5.1.2600.
+func OpenSCManager(lpMachineName string, lpDatabaseName string, dwDesiredAccess uint32) (SC_HANDLE, error) {
+	_lpMachineName := win32.UTF16Ptr(lpMachineName)
+	_lpDatabaseName := win32.UTF16Ptr(lpDatabaseName)
+	r1, _, e1 := syscall.SyscallN(procOpenSCManager.Addr(), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpDatabaseName)), uintptr(dwDesiredAccess))
+	ret := SC_HANDLE(r1)
+	if ret == ^SC_HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // OpenSCManagerA calls ADVAPI32!OpenSCManagerA.
@@ -397,11 +428,12 @@ func OpenSCManagerA(lpMachineName foundation.PSTR, lpDatabaseName foundation.PST
 	return ret, nil
 }
 
-// OpenSCManagerW calls ADVAPI32!OpenSCManagerW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-openscmanagerw
+// OpenService calls ADVAPI32!OpenServiceW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-openservicew
 // Minimum OS: windows5.1.2600.
-func OpenSCManagerW(lpMachineName foundation.PWSTR, lpDatabaseName foundation.PWSTR, dwDesiredAccess uint32) (SC_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenSCManagerW.Addr(), uintptr(unsafe.Pointer(lpMachineName)), uintptr(unsafe.Pointer(lpDatabaseName)), uintptr(dwDesiredAccess))
+func OpenService(hSCManager SC_HANDLE, lpServiceName string, dwDesiredAccess uint32) (SC_HANDLE, error) {
+	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+	r1, _, e1 := syscall.SyscallN(procOpenService.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(dwDesiredAccess))
 	ret := SC_HANDLE(r1)
 	if ret == ^SC_HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -421,16 +453,26 @@ func OpenServiceA(hSCManager SC_HANDLE, lpServiceName foundation.PSTR, dwDesired
 	return ret, nil
 }
 
-// OpenServiceW calls ADVAPI32!OpenServiceW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-openservicew
+// QueryServiceConfig calls ADVAPI32!QueryServiceConfigW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfigw
 // Minimum OS: windows5.1.2600.
-func OpenServiceW(hSCManager SC_HANDLE, lpServiceName foundation.PWSTR, dwDesiredAccess uint32) (SC_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenServiceW.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpServiceName)), uintptr(dwDesiredAccess))
-	ret := SC_HANDLE(r1)
-	if ret == ^SC_HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
+func QueryServiceConfig(hService SC_HANDLE, lpServiceConfig *QUERY_SERVICE_CONFIGW, cbBufSize uint32, pcbBytesNeeded *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procQueryServiceConfig.Addr(), uintptr(hService), uintptr(unsafe.Pointer(lpServiceConfig)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return ret, nil
+	return nil
+}
+
+// QueryServiceConfig2 calls ADVAPI32!QueryServiceConfig2W.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfig2w
+// Minimum OS: windows5.1.2600.
+func QueryServiceConfig2(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpBuffer *byte, cbBufSize uint32, pcbBytesNeeded *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procQueryServiceConfig2.Addr(), uintptr(hService), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // QueryServiceConfig2A calls ADVAPI32!QueryServiceConfig2A.
@@ -438,17 +480,6 @@ func OpenServiceW(hSCManager SC_HANDLE, lpServiceName foundation.PWSTR, dwDesire
 // Minimum OS: windows5.1.2600.
 func QueryServiceConfig2A(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpBuffer *byte, cbBufSize uint32, pcbBytesNeeded *uint32) error {
 	r1, _, e1 := syscall.SyscallN(procQueryServiceConfig2A.Addr(), uintptr(hService), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// QueryServiceConfig2W calls ADVAPI32!QueryServiceConfig2W.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfig2w
-// Minimum OS: windows5.1.2600.
-func QueryServiceConfig2W(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpBuffer *byte, cbBufSize uint32, pcbBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryServiceConfig2W.Addr(), uintptr(hService), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -466,17 +497,6 @@ func QueryServiceConfigA(hService SC_HANDLE, lpServiceConfig *QUERY_SERVICE_CONF
 	return nil
 }
 
-// QueryServiceConfigW calls ADVAPI32!QueryServiceConfigW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfigw
-// Minimum OS: windows5.1.2600.
-func QueryServiceConfigW(hService SC_HANDLE, lpServiceConfig *QUERY_SERVICE_CONFIGW, cbBufSize uint32, pcbBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryServiceConfigW.Addr(), uintptr(hService), uintptr(unsafe.Pointer(lpServiceConfig)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // QueryServiceDynamicInformation calls ADVAPI32!QueryServiceDynamicInformation.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryservicedynamicinformation
 // Minimum OS: windows8.0.
@@ -488,22 +508,22 @@ func QueryServiceDynamicInformation(hServiceStatus SERVICE_STATUS_HANDLE, dwInfo
 	return nil
 }
 
-// QueryServiceLockStatusA calls ADVAPI32!QueryServiceLockStatusA.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryservicelockstatusa
+// QueryServiceLockStatus calls ADVAPI32!QueryServiceLockStatusW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryservicelockstatusw
 // Minimum OS: windows5.1.2600.
-func QueryServiceLockStatusA(hSCManager SC_HANDLE, lpLockStatus *QUERY_SERVICE_LOCK_STATUSA, cbBufSize uint32, pcbBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryServiceLockStatusA.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpLockStatus)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
+func QueryServiceLockStatus(hSCManager SC_HANDLE, lpLockStatus *QUERY_SERVICE_LOCK_STATUSW, cbBufSize uint32, pcbBytesNeeded *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procQueryServiceLockStatus.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpLockStatus)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// QueryServiceLockStatusW calls ADVAPI32!QueryServiceLockStatusW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryservicelockstatusw
+// QueryServiceLockStatusA calls ADVAPI32!QueryServiceLockStatusA.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryservicelockstatusa
 // Minimum OS: windows5.1.2600.
-func QueryServiceLockStatusW(hSCManager SC_HANDLE, lpLockStatus *QUERY_SERVICE_LOCK_STATUSW, cbBufSize uint32, pcbBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryServiceLockStatusW.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpLockStatus)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
+func QueryServiceLockStatusA(hSCManager SC_HANDLE, lpLockStatus *QUERY_SERVICE_LOCK_STATUSA, cbBufSize uint32, pcbBytesNeeded *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procQueryServiceLockStatusA.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(lpLockStatus)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -543,11 +563,37 @@ func QueryServiceStatusEx(hService SC_HANDLE, InfoLevel SC_STATUS_TYPE, lpBuffer
 	return nil
 }
 
+// RegisterServiceCtrlHandler calls ADVAPI32!RegisterServiceCtrlHandlerW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-registerservicectrlhandlerw
+// Minimum OS: windows5.1.2600.
+func RegisterServiceCtrlHandler(lpServiceName string, lpHandlerProc LPHANDLER_FUNCTION) (SERVICE_STATUS_HANDLE, error) {
+	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+	r1, _, e1 := syscall.SyscallN(procRegisterServiceCtrlHandler.Addr(), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(lpHandlerProc))
+	ret := SERVICE_STATUS_HANDLE(r1)
+	if ret == ^SERVICE_STATUS_HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // RegisterServiceCtrlHandlerA calls ADVAPI32!RegisterServiceCtrlHandlerA.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-registerservicectrlhandlera
 // Minimum OS: windows5.1.2600.
 func RegisterServiceCtrlHandlerA(lpServiceName foundation.PSTR, lpHandlerProc LPHANDLER_FUNCTION) (SERVICE_STATUS_HANDLE, error) {
 	r1, _, e1 := syscall.SyscallN(procRegisterServiceCtrlHandlerA.Addr(), uintptr(unsafe.Pointer(lpServiceName)), uintptr(lpHandlerProc))
+	ret := SERVICE_STATUS_HANDLE(r1)
+	if ret == ^SERVICE_STATUS_HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// RegisterServiceCtrlHandlerEx calls ADVAPI32!RegisterServiceCtrlHandlerExW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-registerservicectrlhandlerexw
+// Minimum OS: windows5.1.2600.
+func RegisterServiceCtrlHandlerEx(lpServiceName string, lpHandlerProc LPHANDLER_FUNCTION_EX, lpContext unsafe.Pointer) (SERVICE_STATUS_HANDLE, error) {
+	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+	r1, _, e1 := syscall.SyscallN(procRegisterServiceCtrlHandlerEx.Addr(), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(lpHandlerProc), uintptr(unsafe.Pointer(lpContext)))
 	ret := SERVICE_STATUS_HANDLE(r1)
 	if ret == ^SERVICE_STATUS_HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -567,35 +613,13 @@ func RegisterServiceCtrlHandlerExA(lpServiceName foundation.PSTR, lpHandlerProc 
 	return ret, nil
 }
 
-// RegisterServiceCtrlHandlerExW calls ADVAPI32!RegisterServiceCtrlHandlerExW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-registerservicectrlhandlerexw
-// Minimum OS: windows5.1.2600.
-func RegisterServiceCtrlHandlerExW(lpServiceName foundation.PWSTR, lpHandlerProc LPHANDLER_FUNCTION_EX, lpContext unsafe.Pointer) (SERVICE_STATUS_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procRegisterServiceCtrlHandlerExW.Addr(), uintptr(unsafe.Pointer(lpServiceName)), uintptr(lpHandlerProc), uintptr(unsafe.Pointer(lpContext)))
-	ret := SERVICE_STATUS_HANDLE(r1)
-	if ret == ^SERVICE_STATUS_HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// RegisterServiceCtrlHandlerW calls ADVAPI32!RegisterServiceCtrlHandlerW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-registerservicectrlhandlerw
-// Minimum OS: windows5.1.2600.
-func RegisterServiceCtrlHandlerW(lpServiceName foundation.PWSTR, lpHandlerProc LPHANDLER_FUNCTION) (SERVICE_STATUS_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procRegisterServiceCtrlHandlerW.Addr(), uintptr(unsafe.Pointer(lpServiceName)), uintptr(lpHandlerProc))
-	ret := SERVICE_STATUS_HANDLE(r1)
-	if ret == ^SERVICE_STATUS_HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
 // SetServiceBits calls ADVAPI32!SetServiceBits.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-setservicebits
 // Minimum OS: windows5.1.2600.
-func SetServiceBits(hServiceStatus SERVICE_STATUS_HANDLE, dwServiceBits uint32, bSetBitsOn foundation.BOOL, bUpdateImmediately foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetServiceBits.Addr(), uintptr(hServiceStatus), uintptr(dwServiceBits), uintptr(bSetBitsOn), uintptr(bUpdateImmediately))
+func SetServiceBits(hServiceStatus SERVICE_STATUS_HANDLE, dwServiceBits uint32, bSetBitsOn bool, bUpdateImmediately bool) error {
+	_bSetBitsOn := win32.Bool32(bSetBitsOn)
+	_bUpdateImmediately := win32.Bool32(bUpdateImmediately)
+	r1, _, e1 := syscall.SyscallN(procSetServiceBits.Addr(), uintptr(hServiceStatus), uintptr(dwServiceBits), uintptr(_bSetBitsOn), uintptr(_bUpdateImmediately))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -624,11 +648,41 @@ func SetServiceStatus(hServiceStatus SERVICE_STATUS_HANDLE, lpServiceStatus *SER
 	return nil
 }
 
+// StartService calls ADVAPI32!StartServiceW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-startservicew
+// Minimum OS: windows5.1.2600.
+func StartService(hService SC_HANDLE, lpServiceArgVectors []foundation.PWSTR) error {
+	var _lpServiceArgVectors *foundation.PWSTR
+	if len(lpServiceArgVectors) > 0 {
+		_lpServiceArgVectors = &lpServiceArgVectors[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procStartService.Addr(), uintptr(hService), uintptr(len(lpServiceArgVectors)), uintptr(unsafe.Pointer(_lpServiceArgVectors)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // StartServiceA calls ADVAPI32!StartServiceA.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-startservicea
 // Minimum OS: windows5.1.2600.
-func StartServiceA(hService SC_HANDLE, dwNumServiceArgs uint32, lpServiceArgVectors *foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procStartServiceA.Addr(), uintptr(hService), uintptr(dwNumServiceArgs), uintptr(unsafe.Pointer(lpServiceArgVectors)))
+func StartServiceA(hService SC_HANDLE, lpServiceArgVectors []foundation.PSTR) error {
+	var _lpServiceArgVectors *foundation.PSTR
+	if len(lpServiceArgVectors) > 0 {
+		_lpServiceArgVectors = &lpServiceArgVectors[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procStartServiceA.Addr(), uintptr(hService), uintptr(len(lpServiceArgVectors)), uintptr(unsafe.Pointer(_lpServiceArgVectors)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// StartServiceCtrlDispatcher calls ADVAPI32!StartServiceCtrlDispatcherW.
+// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-startservicectrldispatcherw
+// Minimum OS: windows5.1.2600.
+func StartServiceCtrlDispatcher(lpServiceStartTable *SERVICE_TABLE_ENTRYW) error {
+	r1, _, e1 := syscall.SyscallN(procStartServiceCtrlDispatcher.Addr(), uintptr(unsafe.Pointer(lpServiceStartTable)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -640,28 +694,6 @@ func StartServiceA(hService SC_HANDLE, dwNumServiceArgs uint32, lpServiceArgVect
 // Minimum OS: windows5.1.2600.
 func StartServiceCtrlDispatcherA(lpServiceStartTable *SERVICE_TABLE_ENTRYA) error {
 	r1, _, e1 := syscall.SyscallN(procStartServiceCtrlDispatcherA.Addr(), uintptr(unsafe.Pointer(lpServiceStartTable)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// StartServiceCtrlDispatcherW calls ADVAPI32!StartServiceCtrlDispatcherW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-startservicectrldispatcherw
-// Minimum OS: windows5.1.2600.
-func StartServiceCtrlDispatcherW(lpServiceStartTable *SERVICE_TABLE_ENTRYW) error {
-	r1, _, e1 := syscall.SyscallN(procStartServiceCtrlDispatcherW.Addr(), uintptr(unsafe.Pointer(lpServiceStartTable)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// StartServiceW calls ADVAPI32!StartServiceW.
-// https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-startservicew
-// Minimum OS: windows5.1.2600.
-func StartServiceW(hService SC_HANDLE, dwNumServiceArgs uint32, lpServiceArgVectors *foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procStartServiceW.Addr(), uintptr(hService), uintptr(dwNumServiceArgs), uintptr(unsafe.Pointer(lpServiceArgVectors)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

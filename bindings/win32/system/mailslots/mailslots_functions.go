@@ -18,17 +18,18 @@ var (
 )
 
 var (
+	procCreateMailslot  = modKERNEL32.NewProc("CreateMailslotW")
 	procCreateMailslotA = modKERNEL32.NewProc("CreateMailslotA")
-	procCreateMailslotW = modKERNEL32.NewProc("CreateMailslotW")
 	procGetMailslotInfo = modKERNEL32.NewProc("GetMailslotInfo")
 	procSetMailslotInfo = modKERNEL32.NewProc("SetMailslotInfo")
 )
 
-// CreateMailslotA calls KERNEL32!CreateMailslotA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createmailslota
+// CreateMailslot calls KERNEL32!CreateMailslotW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createmailslotw
 // Minimum OS: windows5.0.
-func CreateMailslotA(lpName foundation.PSTR, nMaxMessageSize uint32, lReadTimeout uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateMailslotA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(nMaxMessageSize), uintptr(lReadTimeout), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+func CreateMailslot(lpName string, nMaxMessageSize uint32, lReadTimeout uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateMailslot.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(nMaxMessageSize), uintptr(lReadTimeout), uintptr(unsafe.Pointer(lpSecurityAttributes)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -36,11 +37,11 @@ func CreateMailslotA(lpName foundation.PSTR, nMaxMessageSize uint32, lReadTimeou
 	return ret, nil
 }
 
-// CreateMailslotW calls KERNEL32!CreateMailslotW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createmailslotw
+// CreateMailslotA calls KERNEL32!CreateMailslotA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createmailslota
 // Minimum OS: windows5.0.
-func CreateMailslotW(lpName foundation.PWSTR, nMaxMessageSize uint32, lReadTimeout uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateMailslotW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(nMaxMessageSize), uintptr(lReadTimeout), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+func CreateMailslotA(lpName foundation.PSTR, nMaxMessageSize uint32, lReadTimeout uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateMailslotA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(nMaxMessageSize), uintptr(lReadTimeout), uintptr(unsafe.Pointer(lpSecurityAttributes)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)

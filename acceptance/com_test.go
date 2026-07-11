@@ -6,61 +6,67 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 )
 
 // TestComStreamRoundTrip drives a real COM object end-to-end through the
-// generated vtable wrappers: CreateStreamOnHGlobal → IStream.Write → Seek →
-// Read → QueryInterface → Release.
+// generated vtable structs. The generated IStream IS the COM object (obtained
+// by casting a factory out-param); its methods return Go errors, and base
+// methods (Write/Read from ISequentialStream, QueryInterface from IUnknown)
+// are promoted through embedding.
 func TestComStreamRoundTrip(t *testing.T) {
-	var stream *systemcom.IStream
-	hr := structuredstorage.CreateStreamOnHGlobal(0, 1, &stream)
-	if !win32.Succeeded(int32(hr)) {
-		t.Fatalf("CreateStreamOnHGlobal: %v", win32.HRESULTError(int32(hr)))
+	var stream *com.IStream
+	if err := structuredstorage.CreateStreamOnHGlobal(0, true, &stream); err != nil {
+		t.Fatalf("CreateStreamOnHGlobal: %v", err)
 	}
 	if stream == nil {
-		t.Fatal("CreateStreamOnHGlobal returned nil stream without failure")
+		t.Fatal("CreateStreamOnHGlobal returned nil stream without error")
 	}
 	defer stream.Release()
 
-	// Write through the ISequentialStream slot promoted via embedding.
+	// Write via the promoted ISequentialStream method — returns error.
 	payload := []byte("go-bindings-win32 COM round trip")
 	var written uint32
-	hr = stream.Write(unsafe.Pointer(&payload[0]), uint32(len(payload)), &written)
-	if !win32.Succeeded(int32(hr)) || written != uint32(len(payload)) {
-		t.Fatalf("IStream.Write: hr=%#x written=%d", uint32(hr), written)
+	if err := stream.Write(unsafe.Pointer(&payload[0]), uint32(len(payload)), &written); err != nil {
+		t.Fatalf("IStream.Write: %v", err)
+	}
+	if written != uint32(len(payload)) {
+		t.Fatalf("wrote %d bytes, want %d", written, len(payload))
 	}
 
-	// Seek back to the start (STREAM_SEEK_SET = 0).
+	// Seek back to the start (STREAM_SEEK_SET = 0) — own method, returns error.
 	var position uint64
-	hr = stream.Seek(0, 0, &position)
-	if !win32.Succeeded(int32(hr)) || position != 0 {
-		t.Fatalf("IStream.Seek: hr=%#x position=%d", uint32(hr), position)
+	if err := stream.Seek(0, 0, &position); err != nil {
+		t.Fatalf("IStream.Seek: %v", err)
+	}
+	if position != 0 {
+		t.Fatalf("Seek position = %d, want 0", position)
 	}
 
-	// Read the payload back.
+	// Read the payload back via the promoted method.
 	readBack := make([]byte, len(payload))
 	var read uint32
-	hr = stream.Read(unsafe.Pointer(&readBack[0]), uint32(len(readBack)), &read)
-	if !win32.Succeeded(int32(hr)) || read != uint32(len(payload)) {
-		t.Fatalf("IStream.Read: hr=%#x read=%d", uint32(hr), read)
+	if err := stream.Read(unsafe.Pointer(&readBack[0]), uint32(len(readBack)), &read); err != nil {
+		t.Fatalf("IStream.Read: %v", err)
 	}
 	if string(readBack) != string(payload) {
 		t.Fatalf("round trip = %q, want %q", readBack, payload)
 	}
 
-	// QueryInterface for IUnknown through the generated IID constant.
+	// QueryInterface for IUnknown promoted from IUnknown through the generated
+	// IID constant — returns error.
 	var unknownPtr unsafe.Pointer
-	hr = stream.QueryInterface(&systemcom.IID_IUnknown, &unknownPtr)
-	if !win32.Succeeded(int32(hr)) || unknownPtr == nil {
-		t.Fatalf("QueryInterface(IID_IUnknown): hr=%#x", uint32(hr))
+	if err := stream.QueryInterface(&com.IID_IUnknown, &unknownPtr); err != nil {
+		t.Fatalf("QueryInterface(IID_IUnknown): %v", err)
 	}
-	unknown := (*systemcom.IUnknown)(unknownPtr)
+	if unknownPtr == nil {
+		t.Fatal("QueryInterface returned nil without error")
+	}
+	unknown := (*com.IUnknown)(unknownPtr)
 
 	// Release the QI reference; the object must survive (stream still holds
-	// one), so the returned refcount is non-zero after AddRef/Release pairs.
+	// one), so the returned refcount is non-zero.
 	if refs := unknown.Release(); refs == 0 {
 		t.Fatal("Release after QueryInterface freed the object while a reference remained")
 	}

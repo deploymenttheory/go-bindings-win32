@@ -9,8 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-// APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union struct {
 	Data [8]uint32
 }
@@ -21,8 +21,8 @@ type APPLY_SNAPSHOT_VHDSET_PARAMETERS struct {
 	Anonymous APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
-// ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -33,8 +33,8 @@ type ATTACH_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
-// COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -45,8 +45,8 @@ type COMPACT_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
-// CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [22]uint64
 }
@@ -57,8 +57,8 @@ type CREATE_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
-// DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -69,8 +69,8 @@ type DELETE_SNAPSHOT_VHDSET_PARAMETERS struct {
 	Anonymous DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
-// EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -81,8 +81,8 @@ type EXPAND_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
-// FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -92,8 +92,8 @@ type FORK_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
-// GET_VIRTUAL_DISK_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GET_VIRTUAL_DISK_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GET_VIRTUAL_DISK_INFO_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -104,8 +104,8 @@ type GET_VIRTUAL_DISK_INFO struct {
 	Anonymous GET_VIRTUAL_DISK_INFO_Anonymous_e__Union
 }
 
-// MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [2]uint32
 }
@@ -116,8 +116,8 @@ type MERGE_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
-// MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -128,8 +128,8 @@ type MIRROR_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
-// MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -140,8 +140,8 @@ type MODIFY_VHDSET_PARAMETERS struct {
 	Anonymous MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
-// OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [10]uint32
 }
@@ -159,8 +159,8 @@ type QUERY_CHANGES_VIRTUAL_DISK_RANGE struct {
 	Reserved   uint64
 }
 
-// RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [5]uint64
 }
@@ -171,8 +171,8 @@ type RAW_SCSI_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
-// RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union struct {
 	Data [2]uint32
 }
@@ -183,8 +183,8 @@ type RAW_SCSI_VIRTUAL_DISK_RESPONSE struct {
 	Anonymous RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union
 }
 
-// RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -195,8 +195,8 @@ type RESIZE_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
-// SET_VIRTUAL_DISK_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SET_VIRTUAL_DISK_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SET_VIRTUAL_DISK_INFO_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -207,8 +207,8 @@ type SET_VIRTUAL_DISK_INFO struct {
 	Anonymous SET_VIRTUAL_DISK_INFO_Anonymous_e__Union
 }
 
-// STORAGE_DEPENDENCY_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_DEPENDENCY_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_DEPENDENCY_INFO_Anonymous_e__Union struct {
 	Data [8]uint64
 }
@@ -239,8 +239,8 @@ type STORAGE_DEPENDENCY_INFO_TYPE_2 struct {
 	DependentVolumeRelativePath foundation.PWSTR
 }
 
-// TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union struct {
 	Data [4]uint32
 }

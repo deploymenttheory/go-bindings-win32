@@ -23,9 +23,9 @@ type IMSMQApplication struct {
 var IID_IMSMQApplication = win32.GUID{Data1: 0xd7d6e085, Data2: 0xdccd, Data3: 0x11d0, Data4: [8]byte{0xaa, 0x4b, 0x00, 0x60, 0x97, 0x0d, 0xeb, 0xae}}
 
 // MachineIdOfMachineName dispatches through IMSMQApplication's vtable slot 7.
-func (self *IMSMQApplication) MachineIdOfMachineName(MachineName foundation.BSTR, pbstrGuid *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQApplication) MachineIdOfMachineName(MachineName foundation.BSTR, pbstrGuid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(pbstrGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 12a30900-7300-11d2-b0e6-00e02c074f6b
@@ -37,45 +37,45 @@ type IMSMQApplication2 struct {
 var IID_IMSMQApplication2 = win32.GUID{Data1: 0x12a30900, Data2: 0x7300, Data3: 0x11d2, Data4: [8]byte{0xb0, 0xe6, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // RegisterCertificate dispatches through IMSMQApplication2's vtable slot 8.
-func (self *IMSMQApplication2) RegisterCertificate(Flags *systemvariant.VARIANT, ExternalCertificate *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQApplication2) RegisterCertificate(Flags *systemvariant.VARIANT, ExternalCertificate *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Flags)), uintptr(unsafe.Pointer(ExternalCertificate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MachineNameOfMachineId dispatches through IMSMQApplication2's vtable slot 9.
-func (self *IMSMQApplication2) MachineNameOfMachineId(bstrGuid foundation.BSTR, pbstrMachineName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQApplication2) MachineNameOfMachineId(bstrGuid foundation.BSTR, pbstrMachineName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuid)), uintptr(unsafe.Pointer(pbstrMachineName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MSMQVersionMajor dispatches through IMSMQApplication2's vtable slot 10.
-func (self *IMSMQApplication2) Get_MSMQVersionMajor(psMSMQVersionMajor *int16) foundation.HRESULT {
+func (self *IMSMQApplication2) Get_MSMQVersionMajor(psMSMQVersionMajor *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psMSMQVersionMajor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MSMQVersionMinor dispatches through IMSMQApplication2's vtable slot 11.
-func (self *IMSMQApplication2) Get_MSMQVersionMinor(psMSMQVersionMinor *int16) foundation.HRESULT {
+func (self *IMSMQApplication2) Get_MSMQVersionMinor(psMSMQVersionMinor *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psMSMQVersionMinor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MSMQVersionBuild dispatches through IMSMQApplication2's vtable slot 12.
-func (self *IMSMQApplication2) Get_MSMQVersionBuild(psMSMQVersionBuild *int16) foundation.HRESULT {
+func (self *IMSMQApplication2) Get_MSMQVersionBuild(psMSMQVersionBuild *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psMSMQVersionBuild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsDsEnabled dispatches through IMSMQApplication2's vtable slot 13.
-func (self *IMSMQApplication2) Get_IsDsEnabled(pfIsDsEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQApplication2) Get_IsDsEnabled(pfIsDsEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsDsEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQApplication2's vtable slot 14.
-func (self *IMSMQApplication2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQApplication2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b1f-2168-11d3-898c-00e02c074f6b
@@ -87,63 +87,63 @@ type IMSMQApplication3 struct {
 var IID_IMSMQApplication3 = win32.GUID{Data1: 0xeba96b1f, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_ActiveQueues dispatches through IMSMQApplication3's vtable slot 15.
-func (self *IMSMQApplication3) Get_ActiveQueues(pvActiveQueues *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQApplication3) Get_ActiveQueues(pvActiveQueues *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvActiveQueues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateQueues dispatches through IMSMQApplication3's vtable slot 16.
-func (self *IMSMQApplication3) Get_PrivateQueues(pvPrivateQueues *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQApplication3) Get_PrivateQueues(pvPrivateQueues *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvPrivateQueues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DirectoryServiceServer dispatches through IMSMQApplication3's vtable slot 17.
-func (self *IMSMQApplication3) Get_DirectoryServiceServer(pbstrDirectoryServiceServer *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQApplication3) Get_DirectoryServiceServer(pbstrDirectoryServiceServer *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDirectoryServiceServer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsConnected dispatches through IMSMQApplication3's vtable slot 18.
-func (self *IMSMQApplication3) Get_IsConnected(pfIsConnected *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQApplication3) Get_IsConnected(pfIsConnected *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsConnected)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BytesInAllQueues dispatches through IMSMQApplication3's vtable slot 19.
-func (self *IMSMQApplication3) Get_BytesInAllQueues(pvBytesInAllQueues *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQApplication3) Get_BytesInAllQueues(pvBytesInAllQueues *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvBytesInAllQueues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Machine dispatches through IMSMQApplication3's vtable slot 20.
-func (self *IMSMQApplication3) Put_Machine(bstrMachine foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQApplication3) Put_Machine(bstrMachine foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMachine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Machine dispatches through IMSMQApplication3's vtable slot 21.
-func (self *IMSMQApplication3) Get_Machine(pbstrMachine *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQApplication3) Get_Machine(pbstrMachine *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMachine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Connect dispatches through IMSMQApplication3's vtable slot 22.
-func (self *IMSMQApplication3) Connect() foundation.HRESULT {
+func (self *IMSMQApplication3) Connect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through IMSMQApplication3's vtable slot 23.
-func (self *IMSMQApplication3) Disconnect() foundation.HRESULT {
+func (self *IMSMQApplication3) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Tidy dispatches through IMSMQApplication3's vtable slot 24.
-func (self *IMSMQApplication3) Tidy() foundation.HRESULT {
+func (self *IMSMQApplication3) Tidy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0188ac2f-ecb3-4173-9779-635ca2039c72
@@ -155,21 +155,21 @@ type IMSMQCollection struct {
 var IID_IMSMQCollection = win32.GUID{Data1: 0x0188ac2f, Data2: 0xecb3, Data3: 0x4173, Data4: [8]byte{0x97, 0x79, 0x63, 0x5c, 0xa2, 0x03, 0x9c, 0x72}}
 
 // Item dispatches through IMSMQCollection's vtable slot 7.
-func (self *IMSMQCollection) Item(Index *systemvariant.VARIANT, pvarRet *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQCollection) Item(Index *systemvariant.VARIANT, pvarRet *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Index)), uintptr(unsafe.Pointer(pvarRet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IMSMQCollection's vtable slot 8.
-func (self *IMSMQCollection) Get_Count(pCount *int32) foundation.HRESULT {
+func (self *IMSMQCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NewEnum dispatches through IMSMQCollection's vtable slot 9.
-func (self *IMSMQCollection) NewEnum(ppunk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMSMQCollection) NewEnum(ppunk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppunk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e081-dccd-11d0-aa4b-0060970debae
@@ -181,9 +181,9 @@ type IMSMQCoordinatedTransactionDispenser struct {
 var IID_IMSMQCoordinatedTransactionDispenser = win32.GUID{Data1: 0xd7d6e081, Data2: 0xdccd, Data3: 0x11d0, Data4: [8]byte{0xaa, 0x4b, 0x00, 0x60, 0x97, 0x0d, 0xeb, 0xae}}
 
 // BeginTransaction dispatches through IMSMQCoordinatedTransactionDispenser's vtable slot 7.
-func (self *IMSMQCoordinatedTransactionDispenser) BeginTransaction(ptransaction **IMSMQTransaction) foundation.HRESULT {
+func (self *IMSMQCoordinatedTransactionDispenser) BeginTransaction(ptransaction **IMSMQTransaction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b10-2168-11d3-898c-00e02c074f6b
@@ -195,15 +195,15 @@ type IMSMQCoordinatedTransactionDispenser2 struct {
 var IID_IMSMQCoordinatedTransactionDispenser2 = win32.GUID{Data1: 0xeba96b10, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // BeginTransaction dispatches through IMSMQCoordinatedTransactionDispenser2's vtable slot 7.
-func (self *IMSMQCoordinatedTransactionDispenser2) BeginTransaction(ptransaction **IMSMQTransaction2) foundation.HRESULT {
+func (self *IMSMQCoordinatedTransactionDispenser2) BeginTransaction(ptransaction **IMSMQTransaction2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQCoordinatedTransactionDispenser2's vtable slot 8.
-func (self *IMSMQCoordinatedTransactionDispenser2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQCoordinatedTransactionDispenser2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b14-2168-11d3-898c-00e02c074f6b
@@ -215,15 +215,15 @@ type IMSMQCoordinatedTransactionDispenser3 struct {
 var IID_IMSMQCoordinatedTransactionDispenser3 = win32.GUID{Data1: 0xeba96b14, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // BeginTransaction dispatches through IMSMQCoordinatedTransactionDispenser3's vtable slot 7.
-func (self *IMSMQCoordinatedTransactionDispenser3) BeginTransaction(ptransaction **IMSMQTransaction3) foundation.HRESULT {
+func (self *IMSMQCoordinatedTransactionDispenser3) BeginTransaction(ptransaction **IMSMQTransaction3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQCoordinatedTransactionDispenser3's vtable slot 8.
-func (self *IMSMQCoordinatedTransactionDispenser3) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQCoordinatedTransactionDispenser3) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b16-2168-11d3-898c-00e02c074f6b
@@ -235,87 +235,87 @@ type IMSMQDestination struct {
 var IID_IMSMQDestination = win32.GUID{Data1: 0xeba96b16, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Open dispatches through IMSMQDestination's vtable slot 7.
-func (self *IMSMQDestination) Open() foundation.HRESULT {
+func (self *IMSMQDestination) Open() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMSMQDestination's vtable slot 8.
-func (self *IMSMQDestination) Close() foundation.HRESULT {
+func (self *IMSMQDestination) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsOpen dispatches through IMSMQDestination's vtable slot 9.
-func (self *IMSMQDestination) Get_IsOpen(pfIsOpen *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQDestination) Get_IsOpen(pfIsOpen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsOpen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IADs dispatches through IMSMQDestination's vtable slot 10.
-func (self *IMSMQDestination) Get_IADs(ppIADs **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQDestination) Get_IADs(ppIADs **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIADs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_IADs dispatches through IMSMQDestination's vtable slot 11.
-func (self *IMSMQDestination) Putref_IADs(pIADs *systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQDestination) Putref_IADs(pIADs *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIADs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ADsPath dispatches through IMSMQDestination's vtable slot 12.
-func (self *IMSMQDestination) Get_ADsPath(pbstrADsPath *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQDestination) Get_ADsPath(pbstrADsPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrADsPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ADsPath dispatches through IMSMQDestination's vtable slot 13.
-func (self *IMSMQDestination) Put_ADsPath(bstrADsPath foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQDestination) Put_ADsPath(bstrADsPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrADsPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PathName dispatches through IMSMQDestination's vtable slot 14.
-func (self *IMSMQDestination) Get_PathName(pbstrPathName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQDestination) Get_PathName(pbstrPathName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PathName dispatches through IMSMQDestination's vtable slot 15.
-func (self *IMSMQDestination) Put_PathName(bstrPathName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQDestination) Put_PathName(bstrPathName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FormatName dispatches through IMSMQDestination's vtable slot 16.
-func (self *IMSMQDestination) Get_FormatName(pbstrFormatName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQDestination) Get_FormatName(pbstrFormatName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_FormatName dispatches through IMSMQDestination's vtable slot 17.
-func (self *IMSMQDestination) Put_FormatName(bstrFormatName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQDestination) Put_FormatName(bstrFormatName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Destinations dispatches through IMSMQDestination's vtable slot 18.
-func (self *IMSMQDestination) Get_Destinations(ppDestinations **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQDestination) Get_Destinations(ppDestinations **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDestinations)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_Destinations dispatches through IMSMQDestination's vtable slot 19.
-func (self *IMSMQDestination) Putref_Destinations(pDestinations *systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQDestination) Putref_Destinations(pDestinations *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinations)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQDestination's vtable slot 20.
-func (self *IMSMQDestination) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQDestination) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e077-dccd-11d0-aa4b-0060970debae
@@ -335,9 +335,9 @@ type IMSMQEvent2 struct {
 var IID_IMSMQEvent2 = win32.GUID{Data1: 0xeba96b12, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_Properties dispatches through IMSMQEvent2's vtable slot 7.
-func (self *IMSMQEvent2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQEvent2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b1c-2168-11d3-898c-00e02c074f6b
@@ -357,57 +357,57 @@ type IMSMQManagement struct {
 var IID_IMSMQManagement = win32.GUID{Data1: 0xbe5f0241, Data2: 0xe489, Data3: 0x4957, Data4: [8]byte{0x8c, 0xc4, 0xa4, 0x52, 0xfc, 0xf3, 0xe2, 0x3e}}
 
 // Init dispatches through IMSMQManagement's vtable slot 7.
-func (self *IMSMQManagement) Init(Machine *systemvariant.VARIANT, Pathname *systemvariant.VARIANT, FormatName *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQManagement) Init(Machine *systemvariant.VARIANT, Pathname *systemvariant.VARIANT, FormatName *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Machine)), uintptr(unsafe.Pointer(Pathname)), uintptr(unsafe.Pointer(FormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FormatName dispatches through IMSMQManagement's vtable slot 8.
-func (self *IMSMQManagement) Get_FormatName(pbstrFormatName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQManagement) Get_FormatName(pbstrFormatName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Machine dispatches through IMSMQManagement's vtable slot 9.
-func (self *IMSMQManagement) Get_Machine(pbstrMachine *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQManagement) Get_Machine(pbstrMachine *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMachine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MessageCount dispatches through IMSMQManagement's vtable slot 10.
-func (self *IMSMQManagement) Get_MessageCount(plMessageCount *int32) foundation.HRESULT {
+func (self *IMSMQManagement) Get_MessageCount(plMessageCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMessageCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ForeignStatus dispatches through IMSMQManagement's vtable slot 11.
-func (self *IMSMQManagement) Get_ForeignStatus(plForeignStatus *int32) foundation.HRESULT {
+func (self *IMSMQManagement) Get_ForeignStatus(plForeignStatus *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plForeignStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueueType dispatches through IMSMQManagement's vtable slot 12.
-func (self *IMSMQManagement) Get_QueueType(plQueueType *int32) foundation.HRESULT {
+func (self *IMSMQManagement) Get_QueueType(plQueueType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plQueueType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsLocal dispatches through IMSMQManagement's vtable slot 13.
-func (self *IMSMQManagement) Get_IsLocal(pfIsLocal *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQManagement) Get_IsLocal(pfIsLocal *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsLocal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TransactionalStatus dispatches through IMSMQManagement's vtable slot 14.
-func (self *IMSMQManagement) Get_TransactionalStatus(plTransactionalStatus *int32) foundation.HRESULT {
+func (self *IMSMQManagement) Get_TransactionalStatus(plTransactionalStatus *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTransactionalStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BytesInQueue dispatches through IMSMQManagement's vtable slot 15.
-func (self *IMSMQManagement) Get_BytesInQueue(pvBytesInQueue *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQManagement) Get_BytesInQueue(pvBytesInQueue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvBytesInQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e074-dccd-11d0-aa4b-0060970debae
@@ -419,279 +419,279 @@ type IMSMQMessage struct {
 var IID_IMSMQMessage = win32.GUID{Data1: 0xd7d6e074, Data2: 0xdccd, Data3: 0x11d0, Data4: [8]byte{0xaa, 0x4b, 0x00, 0x60, 0x97, 0x0d, 0xeb, 0xae}}
 
 // Get_Class dispatches through IMSMQMessage's vtable slot 7.
-func (self *IMSMQMessage) Get_Class(plClass *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_Class(plClass *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivLevel dispatches through IMSMQMessage's vtable slot 8.
-func (self *IMSMQMessage) Get_PrivLevel(plPrivLevel *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_PrivLevel(plPrivLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrivLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PrivLevel dispatches through IMSMQMessage's vtable slot 9.
-func (self *IMSMQMessage) Put_PrivLevel(lPrivLevel int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_PrivLevel(lPrivLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lPrivLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthLevel dispatches through IMSMQMessage's vtable slot 10.
-func (self *IMSMQMessage) Get_AuthLevel(plAuthLevel *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_AuthLevel(plAuthLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthLevel dispatches through IMSMQMessage's vtable slot 11.
-func (self *IMSMQMessage) Put_AuthLevel(lAuthLevel int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_AuthLevel(lAuthLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lAuthLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsAuthenticated dispatches through IMSMQMessage's vtable slot 12.
-func (self *IMSMQMessage) Get_IsAuthenticated(pisAuthenticated *int16) foundation.HRESULT {
+func (self *IMSMQMessage) Get_IsAuthenticated(pisAuthenticated *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisAuthenticated)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Delivery dispatches through IMSMQMessage's vtable slot 13.
-func (self *IMSMQMessage) Get_Delivery(plDelivery *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_Delivery(plDelivery *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDelivery)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Delivery dispatches through IMSMQMessage's vtable slot 14.
-func (self *IMSMQMessage) Put_Delivery(lDelivery int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_Delivery(lDelivery int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lDelivery))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Trace dispatches through IMSMQMessage's vtable slot 15.
-func (self *IMSMQMessage) Get_Trace(plTrace *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_Trace(plTrace *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTrace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Trace dispatches through IMSMQMessage's vtable slot 16.
-func (self *IMSMQMessage) Put_Trace(lTrace int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_Trace(lTrace int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lTrace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Priority dispatches through IMSMQMessage's vtable slot 17.
-func (self *IMSMQMessage) Get_Priority(plPriority *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_Priority(plPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Priority dispatches through IMSMQMessage's vtable slot 18.
-func (self *IMSMQMessage) Put_Priority(lPriority int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_Priority(lPriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Journal dispatches through IMSMQMessage's vtable slot 19.
-func (self *IMSMQMessage) Get_Journal(plJournal *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_Journal(plJournal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Journal dispatches through IMSMQMessage's vtable slot 20.
-func (self *IMSMQMessage) Put_Journal(lJournal int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_Journal(lJournal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lJournal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseQueueInfo dispatches through IMSMQMessage's vtable slot 21.
-func (self *IMSMQMessage) Get_ResponseQueueInfo(ppqinfoResponse **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage) Get_ResponseQueueInfo(ppqinfoResponse **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseQueueInfo dispatches through IMSMQMessage's vtable slot 22.
-func (self *IMSMQMessage) Putref_ResponseQueueInfo(pqinfoResponse *IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage) Putref_ResponseQueueInfo(pqinfoResponse *IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AppSpecific dispatches through IMSMQMessage's vtable slot 23.
-func (self *IMSMQMessage) Get_AppSpecific(plAppSpecific *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_AppSpecific(plAppSpecific *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAppSpecific)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AppSpecific dispatches through IMSMQMessage's vtable slot 24.
-func (self *IMSMQMessage) Put_AppSpecific(lAppSpecific int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_AppSpecific(lAppSpecific int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lAppSpecific))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SourceMachineGuid dispatches through IMSMQMessage's vtable slot 25.
-func (self *IMSMQMessage) Get_SourceMachineGuid(pbstrGuidSrcMachine *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage) Get_SourceMachineGuid(pbstrGuidSrcMachine *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidSrcMachine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BodyLength dispatches through IMSMQMessage's vtable slot 26.
-func (self *IMSMQMessage) Get_BodyLength(pcbBody *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_BodyLength(pcbBody *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Body dispatches through IMSMQMessage's vtable slot 27.
-func (self *IMSMQMessage) Get_Body(pvarBody *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage) Get_Body(pvarBody *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdminQueueInfo dispatches through IMSMQMessage's vtable slot 29.
-func (self *IMSMQMessage) Get_AdminQueueInfo(ppqinfoAdmin **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage) Get_AdminQueueInfo(ppqinfoAdmin **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AdminQueueInfo dispatches through IMSMQMessage's vtable slot 30.
-func (self *IMSMQMessage) Putref_AdminQueueInfo(pqinfoAdmin *IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage) Putref_AdminQueueInfo(pqinfoAdmin *IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IMSMQMessage's vtable slot 31.
-func (self *IMSMQMessage) Get_Id(pvarMsgId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage) Get_Id(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CorrelationId dispatches through IMSMQMessage's vtable slot 32.
-func (self *IMSMQMessage) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Ack dispatches through IMSMQMessage's vtable slot 34.
-func (self *IMSMQMessage) Get_Ack(plAck *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_Ack(plAck *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAck)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Ack dispatches through IMSMQMessage's vtable slot 35.
-func (self *IMSMQMessage) Put_Ack(lAck int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_Ack(lAck int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(lAck))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Label dispatches through IMSMQMessage's vtable slot 36.
-func (self *IMSMQMessage) Get_Label(pbstrLabel *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage) Get_Label(pbstrLabel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Label dispatches through IMSMQMessage's vtable slot 37.
-func (self *IMSMQMessage) Put_Label(bstrLabel foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage) Put_Label(bstrLabel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxTimeToReachQueue dispatches through IMSMQMessage's vtable slot 38.
-func (self *IMSMQMessage) Get_MaxTimeToReachQueue(plMaxTimeToReachQueue *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_MaxTimeToReachQueue(plMaxTimeToReachQueue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxTimeToReachQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MaxTimeToReachQueue dispatches through IMSMQMessage's vtable slot 39.
-func (self *IMSMQMessage) Put_MaxTimeToReachQueue(lMaxTimeToReachQueue int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_MaxTimeToReachQueue(lMaxTimeToReachQueue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(lMaxTimeToReachQueue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxTimeToReceive dispatches through IMSMQMessage's vtable slot 40.
-func (self *IMSMQMessage) Get_MaxTimeToReceive(plMaxTimeToReceive *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_MaxTimeToReceive(plMaxTimeToReceive *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxTimeToReceive)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MaxTimeToReceive dispatches through IMSMQMessage's vtable slot 41.
-func (self *IMSMQMessage) Put_MaxTimeToReceive(lMaxTimeToReceive int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_MaxTimeToReceive(lMaxTimeToReceive int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(lMaxTimeToReceive))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HashAlgorithm dispatches through IMSMQMessage's vtable slot 42.
-func (self *IMSMQMessage) Get_HashAlgorithm(plHashAlg *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_HashAlgorithm(plHashAlg *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHashAlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through IMSMQMessage's vtable slot 43.
-func (self *IMSMQMessage) Put_HashAlgorithm(lHashAlg int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_HashAlgorithm(lHashAlg int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(lHashAlg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EncryptAlgorithm dispatches through IMSMQMessage's vtable slot 44.
-func (self *IMSMQMessage) Get_EncryptAlgorithm(plEncryptAlg *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_EncryptAlgorithm(plEncryptAlg *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plEncryptAlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EncryptAlgorithm dispatches through IMSMQMessage's vtable slot 45.
-func (self *IMSMQMessage) Put_EncryptAlgorithm(lEncryptAlg int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_EncryptAlgorithm(lEncryptAlg int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(lEncryptAlg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SentTime dispatches through IMSMQMessage's vtable slot 46.
-func (self *IMSMQMessage) Get_SentTime(pvarSentTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage) Get_SentTime(pvarSentTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSentTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ArrivedTime dispatches through IMSMQMessage's vtable slot 47.
-func (self *IMSMQMessage) Get_ArrivedTime(plArrivedTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage) Get_ArrivedTime(plArrivedTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plArrivedTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DestinationQueueInfo dispatches through IMSMQMessage's vtable slot 48.
-func (self *IMSMQMessage) Get_DestinationQueueInfo(ppqinfoDest **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage) Get_DestinationQueueInfo(ppqinfoDest **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderCertificate dispatches through IMSMQMessage's vtable slot 49.
-func (self *IMSMQMessage) Get_SenderCertificate(pvarSenderCert *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage) Get_SenderCertificate(pvarSenderCert *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderCert)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderId dispatches through IMSMQMessage's vtable slot 51.
-func (self *IMSMQMessage) Get_SenderId(pvarSenderId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage) Get_SenderId(pvarSenderId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderIdType dispatches through IMSMQMessage's vtable slot 52.
-func (self *IMSMQMessage) Get_SenderIdType(plSenderIdType *int32) foundation.HRESULT {
+func (self *IMSMQMessage) Get_SenderIdType(plSenderIdType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSenderIdType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SenderIdType dispatches through IMSMQMessage's vtable slot 53.
-func (self *IMSMQMessage) Put_SenderIdType(lSenderIdType int32) foundation.HRESULT {
+func (self *IMSMQMessage) Put_SenderIdType(lSenderIdType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(lSenderIdType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Send dispatches through IMSMQMessage's vtable slot 54.
-func (self *IMSMQMessage) Send(DestinationQueue *IMSMQQueue, Transaction *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage) Send(DestinationQueue *IMSMQQueue, Transaction *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DestinationQueue)), uintptr(unsafe.Pointer(Transaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AttachCurrentSecurityContext dispatches through IMSMQMessage's vtable slot 55.
-func (self *IMSMQMessage) AttachCurrentSecurityContext() foundation.HRESULT {
+func (self *IMSMQMessage) AttachCurrentSecurityContext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d9933be0-a567-11d2-b0f3-00e02c074f6b
@@ -703,411 +703,411 @@ type IMSMQMessage2 struct {
 var IID_IMSMQMessage2 = win32.GUID{Data1: 0xd9933be0, Data2: 0xa567, Data3: 0x11d2, Data4: [8]byte{0xb0, 0xf3, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_Class dispatches through IMSMQMessage2's vtable slot 7.
-func (self *IMSMQMessage2) Get_Class(plClass *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Class(plClass *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivLevel dispatches through IMSMQMessage2's vtable slot 8.
-func (self *IMSMQMessage2) Get_PrivLevel(plPrivLevel *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_PrivLevel(plPrivLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrivLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PrivLevel dispatches through IMSMQMessage2's vtable slot 9.
-func (self *IMSMQMessage2) Put_PrivLevel(lPrivLevel int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_PrivLevel(lPrivLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lPrivLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthLevel dispatches through IMSMQMessage2's vtable slot 10.
-func (self *IMSMQMessage2) Get_AuthLevel(plAuthLevel *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_AuthLevel(plAuthLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthLevel dispatches through IMSMQMessage2's vtable slot 11.
-func (self *IMSMQMessage2) Put_AuthLevel(lAuthLevel int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_AuthLevel(lAuthLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lAuthLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsAuthenticated dispatches through IMSMQMessage2's vtable slot 12.
-func (self *IMSMQMessage2) Get_IsAuthenticated(pisAuthenticated *int16) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_IsAuthenticated(pisAuthenticated *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisAuthenticated)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Delivery dispatches through IMSMQMessage2's vtable slot 13.
-func (self *IMSMQMessage2) Get_Delivery(plDelivery *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Delivery(plDelivery *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDelivery)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Delivery dispatches through IMSMQMessage2's vtable slot 14.
-func (self *IMSMQMessage2) Put_Delivery(lDelivery int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_Delivery(lDelivery int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lDelivery))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Trace dispatches through IMSMQMessage2's vtable slot 15.
-func (self *IMSMQMessage2) Get_Trace(plTrace *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Trace(plTrace *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTrace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Trace dispatches through IMSMQMessage2's vtable slot 16.
-func (self *IMSMQMessage2) Put_Trace(lTrace int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_Trace(lTrace int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lTrace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Priority dispatches through IMSMQMessage2's vtable slot 17.
-func (self *IMSMQMessage2) Get_Priority(plPriority *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Priority(plPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Priority dispatches through IMSMQMessage2's vtable slot 18.
-func (self *IMSMQMessage2) Put_Priority(lPriority int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_Priority(lPriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Journal dispatches through IMSMQMessage2's vtable slot 19.
-func (self *IMSMQMessage2) Get_Journal(plJournal *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Journal(plJournal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Journal dispatches through IMSMQMessage2's vtable slot 20.
-func (self *IMSMQMessage2) Put_Journal(lJournal int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_Journal(lJournal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lJournal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseQueueInfo_v1 dispatches through IMSMQMessage2's vtable slot 21.
-func (self *IMSMQMessage2) Get_ResponseQueueInfo_v1(ppqinfoResponse **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_ResponseQueueInfo_v1(ppqinfoResponse **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseQueueInfo_v1 dispatches through IMSMQMessage2's vtable slot 22.
-func (self *IMSMQMessage2) Putref_ResponseQueueInfo_v1(pqinfoResponse *IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage2) Putref_ResponseQueueInfo_v1(pqinfoResponse *IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AppSpecific dispatches through IMSMQMessage2's vtable slot 23.
-func (self *IMSMQMessage2) Get_AppSpecific(plAppSpecific *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_AppSpecific(plAppSpecific *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAppSpecific)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AppSpecific dispatches through IMSMQMessage2's vtable slot 24.
-func (self *IMSMQMessage2) Put_AppSpecific(lAppSpecific int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_AppSpecific(lAppSpecific int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lAppSpecific))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SourceMachineGuid dispatches through IMSMQMessage2's vtable slot 25.
-func (self *IMSMQMessage2) Get_SourceMachineGuid(pbstrGuidSrcMachine *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_SourceMachineGuid(pbstrGuidSrcMachine *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidSrcMachine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BodyLength dispatches through IMSMQMessage2's vtable slot 26.
-func (self *IMSMQMessage2) Get_BodyLength(pcbBody *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_BodyLength(pcbBody *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Body dispatches through IMSMQMessage2's vtable slot 27.
-func (self *IMSMQMessage2) Get_Body(pvarBody *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Body(pvarBody *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdminQueueInfo_v1 dispatches through IMSMQMessage2's vtable slot 29.
-func (self *IMSMQMessage2) Get_AdminQueueInfo_v1(ppqinfoAdmin **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_AdminQueueInfo_v1(ppqinfoAdmin **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AdminQueueInfo_v1 dispatches through IMSMQMessage2's vtable slot 30.
-func (self *IMSMQMessage2) Putref_AdminQueueInfo_v1(pqinfoAdmin *IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage2) Putref_AdminQueueInfo_v1(pqinfoAdmin *IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IMSMQMessage2's vtable slot 31.
-func (self *IMSMQMessage2) Get_Id(pvarMsgId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Id(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CorrelationId dispatches through IMSMQMessage2's vtable slot 32.
-func (self *IMSMQMessage2) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Ack dispatches through IMSMQMessage2's vtable slot 34.
-func (self *IMSMQMessage2) Get_Ack(plAck *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Ack(plAck *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAck)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Ack dispatches through IMSMQMessage2's vtable slot 35.
-func (self *IMSMQMessage2) Put_Ack(lAck int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_Ack(lAck int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(lAck))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Label dispatches through IMSMQMessage2's vtable slot 36.
-func (self *IMSMQMessage2) Get_Label(pbstrLabel *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Label(pbstrLabel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Label dispatches through IMSMQMessage2's vtable slot 37.
-func (self *IMSMQMessage2) Put_Label(bstrLabel foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_Label(bstrLabel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxTimeToReachQueue dispatches through IMSMQMessage2's vtable slot 38.
-func (self *IMSMQMessage2) Get_MaxTimeToReachQueue(plMaxTimeToReachQueue *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_MaxTimeToReachQueue(plMaxTimeToReachQueue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxTimeToReachQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MaxTimeToReachQueue dispatches through IMSMQMessage2's vtable slot 39.
-func (self *IMSMQMessage2) Put_MaxTimeToReachQueue(lMaxTimeToReachQueue int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_MaxTimeToReachQueue(lMaxTimeToReachQueue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(lMaxTimeToReachQueue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxTimeToReceive dispatches through IMSMQMessage2's vtable slot 40.
-func (self *IMSMQMessage2) Get_MaxTimeToReceive(plMaxTimeToReceive *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_MaxTimeToReceive(plMaxTimeToReceive *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxTimeToReceive)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MaxTimeToReceive dispatches through IMSMQMessage2's vtable slot 41.
-func (self *IMSMQMessage2) Put_MaxTimeToReceive(lMaxTimeToReceive int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_MaxTimeToReceive(lMaxTimeToReceive int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(lMaxTimeToReceive))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HashAlgorithm dispatches through IMSMQMessage2's vtable slot 42.
-func (self *IMSMQMessage2) Get_HashAlgorithm(plHashAlg *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_HashAlgorithm(plHashAlg *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHashAlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through IMSMQMessage2's vtable slot 43.
-func (self *IMSMQMessage2) Put_HashAlgorithm(lHashAlg int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_HashAlgorithm(lHashAlg int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(lHashAlg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EncryptAlgorithm dispatches through IMSMQMessage2's vtable slot 44.
-func (self *IMSMQMessage2) Get_EncryptAlgorithm(plEncryptAlg *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_EncryptAlgorithm(plEncryptAlg *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plEncryptAlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EncryptAlgorithm dispatches through IMSMQMessage2's vtable slot 45.
-func (self *IMSMQMessage2) Put_EncryptAlgorithm(lEncryptAlg int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_EncryptAlgorithm(lEncryptAlg int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(lEncryptAlg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SentTime dispatches through IMSMQMessage2's vtable slot 46.
-func (self *IMSMQMessage2) Get_SentTime(pvarSentTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_SentTime(pvarSentTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSentTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ArrivedTime dispatches through IMSMQMessage2's vtable slot 47.
-func (self *IMSMQMessage2) Get_ArrivedTime(plArrivedTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_ArrivedTime(plArrivedTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plArrivedTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DestinationQueueInfo dispatches through IMSMQMessage2's vtable slot 48.
-func (self *IMSMQMessage2) Get_DestinationQueueInfo(ppqinfoDest **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_DestinationQueueInfo(ppqinfoDest **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderCertificate dispatches through IMSMQMessage2's vtable slot 49.
-func (self *IMSMQMessage2) Get_SenderCertificate(pvarSenderCert *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_SenderCertificate(pvarSenderCert *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderCert)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderId dispatches through IMSMQMessage2's vtable slot 51.
-func (self *IMSMQMessage2) Get_SenderId(pvarSenderId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_SenderId(pvarSenderId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderIdType dispatches through IMSMQMessage2's vtable slot 52.
-func (self *IMSMQMessage2) Get_SenderIdType(plSenderIdType *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_SenderIdType(plSenderIdType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSenderIdType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SenderIdType dispatches through IMSMQMessage2's vtable slot 53.
-func (self *IMSMQMessage2) Put_SenderIdType(lSenderIdType int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_SenderIdType(lSenderIdType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(lSenderIdType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Send dispatches through IMSMQMessage2's vtable slot 54.
-func (self *IMSMQMessage2) Send(DestinationQueue *IMSMQQueue2, Transaction *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Send(DestinationQueue *IMSMQQueue2, Transaction *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DestinationQueue)), uintptr(unsafe.Pointer(Transaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AttachCurrentSecurityContext dispatches through IMSMQMessage2's vtable slot 55.
-func (self *IMSMQMessage2) AttachCurrentSecurityContext() foundation.HRESULT {
+func (self *IMSMQMessage2) AttachCurrentSecurityContext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderVersion dispatches through IMSMQMessage2's vtable slot 56.
-func (self *IMSMQMessage2) Get_SenderVersion(plSenderVersion *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_SenderVersion(plSenderVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSenderVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Extension dispatches through IMSMQMessage2's vtable slot 57.
-func (self *IMSMQMessage2) Get_Extension(pvarExtension *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Extension(pvarExtension *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarExtension)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ConnectorTypeGuid dispatches through IMSMQMessage2's vtable slot 59.
-func (self *IMSMQMessage2) Get_ConnectorTypeGuid(pbstrGuidConnectorType *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_ConnectorTypeGuid(pbstrGuidConnectorType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidConnectorType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ConnectorTypeGuid dispatches through IMSMQMessage2's vtable slot 60.
-func (self *IMSMQMessage2) Put_ConnectorTypeGuid(bstrGuidConnectorType foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_ConnectorTypeGuid(bstrGuidConnectorType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuidConnectorType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TransactionStatusQueueInfo dispatches through IMSMQMessage2's vtable slot 61.
-func (self *IMSMQMessage2) Get_TransactionStatusQueueInfo(ppqinfoXactStatus **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_TransactionStatusQueueInfo(ppqinfoXactStatus **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoXactStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DestinationSymmetricKey dispatches through IMSMQMessage2's vtable slot 62.
-func (self *IMSMQMessage2) Get_DestinationSymmetricKey(pvarDestSymmKey *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_DestinationSymmetricKey(pvarDestSymmKey *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDestSymmKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Signature dispatches through IMSMQMessage2's vtable slot 64.
-func (self *IMSMQMessage2) Get_Signature(pvarSignature *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Signature(pvarSignature *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSignature)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthenticationProviderType dispatches through IMSMQMessage2's vtable slot 66.
-func (self *IMSMQMessage2) Get_AuthenticationProviderType(plAuthProvType *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_AuthenticationProviderType(plAuthProvType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthProvType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthenticationProviderType dispatches through IMSMQMessage2's vtable slot 67.
-func (self *IMSMQMessage2) Put_AuthenticationProviderType(lAuthProvType int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_AuthenticationProviderType(lAuthProvType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(lAuthProvType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthenticationProviderName dispatches through IMSMQMessage2's vtable slot 68.
-func (self *IMSMQMessage2) Get_AuthenticationProviderName(pbstrAuthProvName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_AuthenticationProviderName(pbstrAuthProvName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrAuthProvName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthenticationProviderName dispatches through IMSMQMessage2's vtable slot 69.
-func (self *IMSMQMessage2) Put_AuthenticationProviderName(bstrAuthProvName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_AuthenticationProviderName(bstrAuthProvName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAuthProvName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MsgClass dispatches through IMSMQMessage2's vtable slot 71.
-func (self *IMSMQMessage2) Get_MsgClass(plMsgClass *int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_MsgClass(plMsgClass *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMsgClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MsgClass dispatches through IMSMQMessage2's vtable slot 72.
-func (self *IMSMQMessage2) Put_MsgClass(lMsgClass int32) foundation.HRESULT {
+func (self *IMSMQMessage2) Put_MsgClass(lMsgClass int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(lMsgClass))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQMessage2's vtable slot 73.
-func (self *IMSMQMessage2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TransactionId dispatches through IMSMQMessage2's vtable slot 74.
-func (self *IMSMQMessage2) Get_TransactionId(pvarXactId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_TransactionId(pvarXactId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarXactId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsFirstInTransaction dispatches through IMSMQMessage2's vtable slot 75.
-func (self *IMSMQMessage2) Get_IsFirstInTransaction(pisFirstInXact *int16) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_IsFirstInTransaction(pisFirstInXact *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisFirstInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsLastInTransaction dispatches through IMSMQMessage2's vtable slot 76.
-func (self *IMSMQMessage2) Get_IsLastInTransaction(pisLastInXact *int16) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_IsLastInTransaction(pisLastInXact *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisLastInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseQueueInfo dispatches through IMSMQMessage2's vtable slot 77.
-func (self *IMSMQMessage2) Get_ResponseQueueInfo(ppqinfoResponse **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_ResponseQueueInfo(ppqinfoResponse **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseQueueInfo dispatches through IMSMQMessage2's vtable slot 78.
-func (self *IMSMQMessage2) Putref_ResponseQueueInfo(pqinfoResponse *IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage2) Putref_ResponseQueueInfo(pqinfoResponse *IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdminQueueInfo dispatches through IMSMQMessage2's vtable slot 79.
-func (self *IMSMQMessage2) Get_AdminQueueInfo(ppqinfoAdmin **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_AdminQueueInfo(ppqinfoAdmin **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AdminQueueInfo dispatches through IMSMQMessage2's vtable slot 80.
-func (self *IMSMQMessage2) Putref_AdminQueueInfo(pqinfoAdmin *IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage2) Putref_AdminQueueInfo(pqinfoAdmin *IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReceivedAuthenticationLevel dispatches through IMSMQMessage2's vtable slot 81.
-func (self *IMSMQMessage2) Get_ReceivedAuthenticationLevel(psReceivedAuthenticationLevel *int16) foundation.HRESULT {
+func (self *IMSMQMessage2) Get_ReceivedAuthenticationLevel(psReceivedAuthenticationLevel *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psReceivedAuthenticationLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b1a-2168-11d3-898c-00e02c074f6b
@@ -1119,507 +1119,507 @@ type IMSMQMessage3 struct {
 var IID_IMSMQMessage3 = win32.GUID{Data1: 0xeba96b1a, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_Class dispatches through IMSMQMessage3's vtable slot 7.
-func (self *IMSMQMessage3) Get_Class(plClass *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Class(plClass *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivLevel dispatches through IMSMQMessage3's vtable slot 8.
-func (self *IMSMQMessage3) Get_PrivLevel(plPrivLevel *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_PrivLevel(plPrivLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrivLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PrivLevel dispatches through IMSMQMessage3's vtable slot 9.
-func (self *IMSMQMessage3) Put_PrivLevel(lPrivLevel int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_PrivLevel(lPrivLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lPrivLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthLevel dispatches through IMSMQMessage3's vtable slot 10.
-func (self *IMSMQMessage3) Get_AuthLevel(plAuthLevel *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_AuthLevel(plAuthLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthLevel dispatches through IMSMQMessage3's vtable slot 11.
-func (self *IMSMQMessage3) Put_AuthLevel(lAuthLevel int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_AuthLevel(lAuthLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lAuthLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsAuthenticated dispatches through IMSMQMessage3's vtable slot 12.
-func (self *IMSMQMessage3) Get_IsAuthenticated(pisAuthenticated *int16) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_IsAuthenticated(pisAuthenticated *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisAuthenticated)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Delivery dispatches through IMSMQMessage3's vtable slot 13.
-func (self *IMSMQMessage3) Get_Delivery(plDelivery *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Delivery(plDelivery *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDelivery)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Delivery dispatches through IMSMQMessage3's vtable slot 14.
-func (self *IMSMQMessage3) Put_Delivery(lDelivery int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_Delivery(lDelivery int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lDelivery))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Trace dispatches through IMSMQMessage3's vtable slot 15.
-func (self *IMSMQMessage3) Get_Trace(plTrace *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Trace(plTrace *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTrace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Trace dispatches through IMSMQMessage3's vtable slot 16.
-func (self *IMSMQMessage3) Put_Trace(lTrace int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_Trace(lTrace int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lTrace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Priority dispatches through IMSMQMessage3's vtable slot 17.
-func (self *IMSMQMessage3) Get_Priority(plPriority *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Priority(plPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Priority dispatches through IMSMQMessage3's vtable slot 18.
-func (self *IMSMQMessage3) Put_Priority(lPriority int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_Priority(lPriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Journal dispatches through IMSMQMessage3's vtable slot 19.
-func (self *IMSMQMessage3) Get_Journal(plJournal *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Journal(plJournal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Journal dispatches through IMSMQMessage3's vtable slot 20.
-func (self *IMSMQMessage3) Put_Journal(lJournal int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_Journal(lJournal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lJournal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseQueueInfo_v1 dispatches through IMSMQMessage3's vtable slot 21.
-func (self *IMSMQMessage3) Get_ResponseQueueInfo_v1(ppqinfoResponse **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_ResponseQueueInfo_v1(ppqinfoResponse **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseQueueInfo_v1 dispatches through IMSMQMessage3's vtable slot 22.
-func (self *IMSMQMessage3) Putref_ResponseQueueInfo_v1(pqinfoResponse *IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage3) Putref_ResponseQueueInfo_v1(pqinfoResponse *IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AppSpecific dispatches through IMSMQMessage3's vtable slot 23.
-func (self *IMSMQMessage3) Get_AppSpecific(plAppSpecific *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_AppSpecific(plAppSpecific *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAppSpecific)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AppSpecific dispatches through IMSMQMessage3's vtable slot 24.
-func (self *IMSMQMessage3) Put_AppSpecific(lAppSpecific int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_AppSpecific(lAppSpecific int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lAppSpecific))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SourceMachineGuid dispatches through IMSMQMessage3's vtable slot 25.
-func (self *IMSMQMessage3) Get_SourceMachineGuid(pbstrGuidSrcMachine *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_SourceMachineGuid(pbstrGuidSrcMachine *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidSrcMachine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BodyLength dispatches through IMSMQMessage3's vtable slot 26.
-func (self *IMSMQMessage3) Get_BodyLength(pcbBody *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_BodyLength(pcbBody *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Body dispatches through IMSMQMessage3's vtable slot 27.
-func (self *IMSMQMessage3) Get_Body(pvarBody *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Body(pvarBody *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdminQueueInfo_v1 dispatches through IMSMQMessage3's vtable slot 29.
-func (self *IMSMQMessage3) Get_AdminQueueInfo_v1(ppqinfoAdmin **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_AdminQueueInfo_v1(ppqinfoAdmin **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AdminQueueInfo_v1 dispatches through IMSMQMessage3's vtable slot 30.
-func (self *IMSMQMessage3) Putref_AdminQueueInfo_v1(pqinfoAdmin *IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage3) Putref_AdminQueueInfo_v1(pqinfoAdmin *IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IMSMQMessage3's vtable slot 31.
-func (self *IMSMQMessage3) Get_Id(pvarMsgId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Id(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CorrelationId dispatches through IMSMQMessage3's vtable slot 32.
-func (self *IMSMQMessage3) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Ack dispatches through IMSMQMessage3's vtable slot 34.
-func (self *IMSMQMessage3) Get_Ack(plAck *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Ack(plAck *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAck)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Ack dispatches through IMSMQMessage3's vtable slot 35.
-func (self *IMSMQMessage3) Put_Ack(lAck int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_Ack(lAck int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(lAck))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Label dispatches through IMSMQMessage3's vtable slot 36.
-func (self *IMSMQMessage3) Get_Label(pbstrLabel *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Label(pbstrLabel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Label dispatches through IMSMQMessage3's vtable slot 37.
-func (self *IMSMQMessage3) Put_Label(bstrLabel foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_Label(bstrLabel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxTimeToReachQueue dispatches through IMSMQMessage3's vtable slot 38.
-func (self *IMSMQMessage3) Get_MaxTimeToReachQueue(plMaxTimeToReachQueue *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_MaxTimeToReachQueue(plMaxTimeToReachQueue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxTimeToReachQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MaxTimeToReachQueue dispatches through IMSMQMessage3's vtable slot 39.
-func (self *IMSMQMessage3) Put_MaxTimeToReachQueue(lMaxTimeToReachQueue int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_MaxTimeToReachQueue(lMaxTimeToReachQueue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(lMaxTimeToReachQueue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxTimeToReceive dispatches through IMSMQMessage3's vtable slot 40.
-func (self *IMSMQMessage3) Get_MaxTimeToReceive(plMaxTimeToReceive *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_MaxTimeToReceive(plMaxTimeToReceive *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxTimeToReceive)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MaxTimeToReceive dispatches through IMSMQMessage3's vtable slot 41.
-func (self *IMSMQMessage3) Put_MaxTimeToReceive(lMaxTimeToReceive int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_MaxTimeToReceive(lMaxTimeToReceive int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(lMaxTimeToReceive))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HashAlgorithm dispatches through IMSMQMessage3's vtable slot 42.
-func (self *IMSMQMessage3) Get_HashAlgorithm(plHashAlg *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_HashAlgorithm(plHashAlg *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHashAlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through IMSMQMessage3's vtable slot 43.
-func (self *IMSMQMessage3) Put_HashAlgorithm(lHashAlg int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_HashAlgorithm(lHashAlg int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(lHashAlg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EncryptAlgorithm dispatches through IMSMQMessage3's vtable slot 44.
-func (self *IMSMQMessage3) Get_EncryptAlgorithm(plEncryptAlg *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_EncryptAlgorithm(plEncryptAlg *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plEncryptAlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EncryptAlgorithm dispatches through IMSMQMessage3's vtable slot 45.
-func (self *IMSMQMessage3) Put_EncryptAlgorithm(lEncryptAlg int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_EncryptAlgorithm(lEncryptAlg int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(lEncryptAlg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SentTime dispatches through IMSMQMessage3's vtable slot 46.
-func (self *IMSMQMessage3) Get_SentTime(pvarSentTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_SentTime(pvarSentTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSentTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ArrivedTime dispatches through IMSMQMessage3's vtable slot 47.
-func (self *IMSMQMessage3) Get_ArrivedTime(plArrivedTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_ArrivedTime(plArrivedTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plArrivedTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DestinationQueueInfo dispatches through IMSMQMessage3's vtable slot 48.
-func (self *IMSMQMessage3) Get_DestinationQueueInfo(ppqinfoDest **IMSMQQueueInfo3) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_DestinationQueueInfo(ppqinfoDest **IMSMQQueueInfo3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderCertificate dispatches through IMSMQMessage3's vtable slot 49.
-func (self *IMSMQMessage3) Get_SenderCertificate(pvarSenderCert *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_SenderCertificate(pvarSenderCert *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderCert)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderId dispatches through IMSMQMessage3's vtable slot 51.
-func (self *IMSMQMessage3) Get_SenderId(pvarSenderId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_SenderId(pvarSenderId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderIdType dispatches through IMSMQMessage3's vtable slot 52.
-func (self *IMSMQMessage3) Get_SenderIdType(plSenderIdType *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_SenderIdType(plSenderIdType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSenderIdType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SenderIdType dispatches through IMSMQMessage3's vtable slot 53.
-func (self *IMSMQMessage3) Put_SenderIdType(lSenderIdType int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_SenderIdType(lSenderIdType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(lSenderIdType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Send dispatches through IMSMQMessage3's vtable slot 54.
-func (self *IMSMQMessage3) Send(DestinationQueue *systemcom.IDispatch, Transaction *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Send(DestinationQueue *systemcom.IDispatch, Transaction *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DestinationQueue)), uintptr(unsafe.Pointer(Transaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AttachCurrentSecurityContext dispatches through IMSMQMessage3's vtable slot 55.
-func (self *IMSMQMessage3) AttachCurrentSecurityContext() foundation.HRESULT {
+func (self *IMSMQMessage3) AttachCurrentSecurityContext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderVersion dispatches through IMSMQMessage3's vtable slot 56.
-func (self *IMSMQMessage3) Get_SenderVersion(plSenderVersion *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_SenderVersion(plSenderVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSenderVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Extension dispatches through IMSMQMessage3's vtable slot 57.
-func (self *IMSMQMessage3) Get_Extension(pvarExtension *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Extension(pvarExtension *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarExtension)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ConnectorTypeGuid dispatches through IMSMQMessage3's vtable slot 59.
-func (self *IMSMQMessage3) Get_ConnectorTypeGuid(pbstrGuidConnectorType *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_ConnectorTypeGuid(pbstrGuidConnectorType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidConnectorType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ConnectorTypeGuid dispatches through IMSMQMessage3's vtable slot 60.
-func (self *IMSMQMessage3) Put_ConnectorTypeGuid(bstrGuidConnectorType foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_ConnectorTypeGuid(bstrGuidConnectorType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuidConnectorType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TransactionStatusQueueInfo dispatches through IMSMQMessage3's vtable slot 61.
-func (self *IMSMQMessage3) Get_TransactionStatusQueueInfo(ppqinfoXactStatus **IMSMQQueueInfo3) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_TransactionStatusQueueInfo(ppqinfoXactStatus **IMSMQQueueInfo3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoXactStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DestinationSymmetricKey dispatches through IMSMQMessage3's vtable slot 62.
-func (self *IMSMQMessage3) Get_DestinationSymmetricKey(pvarDestSymmKey *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_DestinationSymmetricKey(pvarDestSymmKey *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDestSymmKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Signature dispatches through IMSMQMessage3's vtable slot 64.
-func (self *IMSMQMessage3) Get_Signature(pvarSignature *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Signature(pvarSignature *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSignature)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthenticationProviderType dispatches through IMSMQMessage3's vtable slot 66.
-func (self *IMSMQMessage3) Get_AuthenticationProviderType(plAuthProvType *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_AuthenticationProviderType(plAuthProvType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthProvType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthenticationProviderType dispatches through IMSMQMessage3's vtable slot 67.
-func (self *IMSMQMessage3) Put_AuthenticationProviderType(lAuthProvType int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_AuthenticationProviderType(lAuthProvType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(lAuthProvType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthenticationProviderName dispatches through IMSMQMessage3's vtable slot 68.
-func (self *IMSMQMessage3) Get_AuthenticationProviderName(pbstrAuthProvName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_AuthenticationProviderName(pbstrAuthProvName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrAuthProvName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthenticationProviderName dispatches through IMSMQMessage3's vtable slot 69.
-func (self *IMSMQMessage3) Put_AuthenticationProviderName(bstrAuthProvName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_AuthenticationProviderName(bstrAuthProvName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAuthProvName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MsgClass dispatches through IMSMQMessage3's vtable slot 71.
-func (self *IMSMQMessage3) Get_MsgClass(plMsgClass *int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_MsgClass(plMsgClass *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMsgClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MsgClass dispatches through IMSMQMessage3's vtable slot 72.
-func (self *IMSMQMessage3) Put_MsgClass(lMsgClass int32) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_MsgClass(lMsgClass int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(lMsgClass))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQMessage3's vtable slot 73.
-func (self *IMSMQMessage3) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TransactionId dispatches through IMSMQMessage3's vtable slot 74.
-func (self *IMSMQMessage3) Get_TransactionId(pvarXactId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_TransactionId(pvarXactId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarXactId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsFirstInTransaction dispatches through IMSMQMessage3's vtable slot 75.
-func (self *IMSMQMessage3) Get_IsFirstInTransaction(pisFirstInXact *int16) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_IsFirstInTransaction(pisFirstInXact *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisFirstInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsLastInTransaction dispatches through IMSMQMessage3's vtable slot 76.
-func (self *IMSMQMessage3) Get_IsLastInTransaction(pisLastInXact *int16) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_IsLastInTransaction(pisLastInXact *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisLastInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseQueueInfo_v2 dispatches through IMSMQMessage3's vtable slot 77.
-func (self *IMSMQMessage3) Get_ResponseQueueInfo_v2(ppqinfoResponse **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_ResponseQueueInfo_v2(ppqinfoResponse **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseQueueInfo_v2 dispatches through IMSMQMessage3's vtable slot 78.
-func (self *IMSMQMessage3) Putref_ResponseQueueInfo_v2(pqinfoResponse *IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage3) Putref_ResponseQueueInfo_v2(pqinfoResponse *IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdminQueueInfo_v2 dispatches through IMSMQMessage3's vtable slot 79.
-func (self *IMSMQMessage3) Get_AdminQueueInfo_v2(ppqinfoAdmin **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_AdminQueueInfo_v2(ppqinfoAdmin **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AdminQueueInfo_v2 dispatches through IMSMQMessage3's vtable slot 80.
-func (self *IMSMQMessage3) Putref_AdminQueueInfo_v2(pqinfoAdmin *IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage3) Putref_AdminQueueInfo_v2(pqinfoAdmin *IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReceivedAuthenticationLevel dispatches through IMSMQMessage3's vtable slot 81.
-func (self *IMSMQMessage3) Get_ReceivedAuthenticationLevel(psReceivedAuthenticationLevel *int16) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_ReceivedAuthenticationLevel(psReceivedAuthenticationLevel *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psReceivedAuthenticationLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseQueueInfo dispatches through IMSMQMessage3's vtable slot 82.
-func (self *IMSMQMessage3) Get_ResponseQueueInfo(ppqinfoResponse **IMSMQQueueInfo3) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_ResponseQueueInfo(ppqinfoResponse **IMSMQQueueInfo3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseQueueInfo dispatches through IMSMQMessage3's vtable slot 83.
-func (self *IMSMQMessage3) Putref_ResponseQueueInfo(pqinfoResponse *IMSMQQueueInfo3) foundation.HRESULT {
+func (self *IMSMQMessage3) Putref_ResponseQueueInfo(pqinfoResponse *IMSMQQueueInfo3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdminQueueInfo dispatches through IMSMQMessage3's vtable slot 84.
-func (self *IMSMQMessage3) Get_AdminQueueInfo(ppqinfoAdmin **IMSMQQueueInfo3) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_AdminQueueInfo(ppqinfoAdmin **IMSMQQueueInfo3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AdminQueueInfo dispatches through IMSMQMessage3's vtable slot 85.
-func (self *IMSMQMessage3) Putref_AdminQueueInfo(pqinfoAdmin *IMSMQQueueInfo3) foundation.HRESULT {
+func (self *IMSMQMessage3) Putref_AdminQueueInfo(pqinfoAdmin *IMSMQQueueInfo3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseDestination dispatches through IMSMQMessage3's vtable slot 86.
-func (self *IMSMQMessage3) Get_ResponseDestination(ppdestResponse **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_ResponseDestination(ppdestResponse **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdestResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseDestination dispatches through IMSMQMessage3's vtable slot 87.
-func (self *IMSMQMessage3) Putref_ResponseDestination(pdestResponse *systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQMessage3) Putref_ResponseDestination(pdestResponse *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdestResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Destination dispatches through IMSMQMessage3's vtable slot 88.
-func (self *IMSMQMessage3) Get_Destination(ppdestDestination **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_Destination(ppdestDestination **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdestDestination)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LookupId dispatches through IMSMQMessage3's vtable slot 89.
-func (self *IMSMQMessage3) Get_LookupId(pvarLookupId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_LookupId(pvarLookupId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarLookupId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsAuthenticated2 dispatches through IMSMQMessage3's vtable slot 90.
-func (self *IMSMQMessage3) Get_IsAuthenticated2(pisAuthenticated *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_IsAuthenticated2(pisAuthenticated *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisAuthenticated)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsFirstInTransaction2 dispatches through IMSMQMessage3's vtable slot 91.
-func (self *IMSMQMessage3) Get_IsFirstInTransaction2(pisFirstInXact *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_IsFirstInTransaction2(pisFirstInXact *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisFirstInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsLastInTransaction2 dispatches through IMSMQMessage3's vtable slot 92.
-func (self *IMSMQMessage3) Get_IsLastInTransaction2(pisLastInXact *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_IsLastInTransaction2(pisLastInXact *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisLastInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AttachCurrentSecurityContext2 dispatches through IMSMQMessage3's vtable slot 93.
-func (self *IMSMQMessage3) AttachCurrentSecurityContext2() foundation.HRESULT {
+func (self *IMSMQMessage3) AttachCurrentSecurityContext2() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SoapEnvelope dispatches through IMSMQMessage3's vtable slot 94.
-func (self *IMSMQMessage3) Get_SoapEnvelope(pbstrSoapEnvelope *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_SoapEnvelope(pbstrSoapEnvelope *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSoapEnvelope)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CompoundMessage dispatches through IMSMQMessage3's vtable slot 95.
-func (self *IMSMQMessage3) Get_CompoundMessage(pvarCompoundMessage *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage3) Get_CompoundMessage(pvarCompoundMessage *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarCompoundMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SoapHeader dispatches through IMSMQMessage3's vtable slot 96.
-func (self *IMSMQMessage3) Put_SoapHeader(bstrSoapHeader foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_SoapHeader(bstrSoapHeader foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSoapHeader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SoapBody dispatches through IMSMQMessage3's vtable slot 97.
-func (self *IMSMQMessage3) Put_SoapBody(bstrSoapBody foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage3) Put_SoapBody(bstrSoapBody foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSoapBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b23-2168-11d3-898c-00e02c074f6b
@@ -1631,507 +1631,507 @@ type IMSMQMessage4 struct {
 var IID_IMSMQMessage4 = win32.GUID{Data1: 0xeba96b23, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_Class dispatches through IMSMQMessage4's vtable slot 7.
-func (self *IMSMQMessage4) Get_Class(plClass *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Class(plClass *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivLevel dispatches through IMSMQMessage4's vtable slot 8.
-func (self *IMSMQMessage4) Get_PrivLevel(plPrivLevel *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_PrivLevel(plPrivLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrivLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PrivLevel dispatches through IMSMQMessage4's vtable slot 9.
-func (self *IMSMQMessage4) Put_PrivLevel(lPrivLevel int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_PrivLevel(lPrivLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lPrivLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthLevel dispatches through IMSMQMessage4's vtable slot 10.
-func (self *IMSMQMessage4) Get_AuthLevel(plAuthLevel *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_AuthLevel(plAuthLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthLevel dispatches through IMSMQMessage4's vtable slot 11.
-func (self *IMSMQMessage4) Put_AuthLevel(lAuthLevel int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_AuthLevel(lAuthLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lAuthLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsAuthenticated dispatches through IMSMQMessage4's vtable slot 12.
-func (self *IMSMQMessage4) Get_IsAuthenticated(pisAuthenticated *int16) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_IsAuthenticated(pisAuthenticated *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisAuthenticated)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Delivery dispatches through IMSMQMessage4's vtable slot 13.
-func (self *IMSMQMessage4) Get_Delivery(plDelivery *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Delivery(plDelivery *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDelivery)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Delivery dispatches through IMSMQMessage4's vtable slot 14.
-func (self *IMSMQMessage4) Put_Delivery(lDelivery int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_Delivery(lDelivery int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lDelivery))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Trace dispatches through IMSMQMessage4's vtable slot 15.
-func (self *IMSMQMessage4) Get_Trace(plTrace *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Trace(plTrace *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTrace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Trace dispatches through IMSMQMessage4's vtable slot 16.
-func (self *IMSMQMessage4) Put_Trace(lTrace int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_Trace(lTrace int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lTrace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Priority dispatches through IMSMQMessage4's vtable slot 17.
-func (self *IMSMQMessage4) Get_Priority(plPriority *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Priority(plPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Priority dispatches through IMSMQMessage4's vtable slot 18.
-func (self *IMSMQMessage4) Put_Priority(lPriority int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_Priority(lPriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Journal dispatches through IMSMQMessage4's vtable slot 19.
-func (self *IMSMQMessage4) Get_Journal(plJournal *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Journal(plJournal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Journal dispatches through IMSMQMessage4's vtable slot 20.
-func (self *IMSMQMessage4) Put_Journal(lJournal int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_Journal(lJournal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lJournal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseQueueInfo_v1 dispatches through IMSMQMessage4's vtable slot 21.
-func (self *IMSMQMessage4) Get_ResponseQueueInfo_v1(ppqinfoResponse **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_ResponseQueueInfo_v1(ppqinfoResponse **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseQueueInfo_v1 dispatches through IMSMQMessage4's vtable slot 22.
-func (self *IMSMQMessage4) Putref_ResponseQueueInfo_v1(pqinfoResponse *IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage4) Putref_ResponseQueueInfo_v1(pqinfoResponse *IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AppSpecific dispatches through IMSMQMessage4's vtable slot 23.
-func (self *IMSMQMessage4) Get_AppSpecific(plAppSpecific *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_AppSpecific(plAppSpecific *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAppSpecific)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AppSpecific dispatches through IMSMQMessage4's vtable slot 24.
-func (self *IMSMQMessage4) Put_AppSpecific(lAppSpecific int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_AppSpecific(lAppSpecific int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lAppSpecific))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SourceMachineGuid dispatches through IMSMQMessage4's vtable slot 25.
-func (self *IMSMQMessage4) Get_SourceMachineGuid(pbstrGuidSrcMachine *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_SourceMachineGuid(pbstrGuidSrcMachine *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidSrcMachine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BodyLength dispatches through IMSMQMessage4's vtable slot 26.
-func (self *IMSMQMessage4) Get_BodyLength(pcbBody *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_BodyLength(pcbBody *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Body dispatches through IMSMQMessage4's vtable slot 27.
-func (self *IMSMQMessage4) Get_Body(pvarBody *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Body(pvarBody *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdminQueueInfo_v1 dispatches through IMSMQMessage4's vtable slot 29.
-func (self *IMSMQMessage4) Get_AdminQueueInfo_v1(ppqinfoAdmin **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_AdminQueueInfo_v1(ppqinfoAdmin **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AdminQueueInfo_v1 dispatches through IMSMQMessage4's vtable slot 30.
-func (self *IMSMQMessage4) Putref_AdminQueueInfo_v1(pqinfoAdmin *IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQMessage4) Putref_AdminQueueInfo_v1(pqinfoAdmin *IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IMSMQMessage4's vtable slot 31.
-func (self *IMSMQMessage4) Get_Id(pvarMsgId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Id(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CorrelationId dispatches through IMSMQMessage4's vtable slot 32.
-func (self *IMSMQMessage4) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Ack dispatches through IMSMQMessage4's vtable slot 34.
-func (self *IMSMQMessage4) Get_Ack(plAck *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Ack(plAck *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAck)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Ack dispatches through IMSMQMessage4's vtable slot 35.
-func (self *IMSMQMessage4) Put_Ack(lAck int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_Ack(lAck int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(lAck))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Label dispatches through IMSMQMessage4's vtable slot 36.
-func (self *IMSMQMessage4) Get_Label(pbstrLabel *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Label(pbstrLabel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Label dispatches through IMSMQMessage4's vtable slot 37.
-func (self *IMSMQMessage4) Put_Label(bstrLabel foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_Label(bstrLabel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxTimeToReachQueue dispatches through IMSMQMessage4's vtable slot 38.
-func (self *IMSMQMessage4) Get_MaxTimeToReachQueue(plMaxTimeToReachQueue *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_MaxTimeToReachQueue(plMaxTimeToReachQueue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxTimeToReachQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MaxTimeToReachQueue dispatches through IMSMQMessage4's vtable slot 39.
-func (self *IMSMQMessage4) Put_MaxTimeToReachQueue(lMaxTimeToReachQueue int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_MaxTimeToReachQueue(lMaxTimeToReachQueue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(lMaxTimeToReachQueue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxTimeToReceive dispatches through IMSMQMessage4's vtable slot 40.
-func (self *IMSMQMessage4) Get_MaxTimeToReceive(plMaxTimeToReceive *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_MaxTimeToReceive(plMaxTimeToReceive *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxTimeToReceive)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MaxTimeToReceive dispatches through IMSMQMessage4's vtable slot 41.
-func (self *IMSMQMessage4) Put_MaxTimeToReceive(lMaxTimeToReceive int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_MaxTimeToReceive(lMaxTimeToReceive int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(lMaxTimeToReceive))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HashAlgorithm dispatches through IMSMQMessage4's vtable slot 42.
-func (self *IMSMQMessage4) Get_HashAlgorithm(plHashAlg *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_HashAlgorithm(plHashAlg *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHashAlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_HashAlgorithm dispatches through IMSMQMessage4's vtable slot 43.
-func (self *IMSMQMessage4) Put_HashAlgorithm(lHashAlg int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_HashAlgorithm(lHashAlg int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(lHashAlg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EncryptAlgorithm dispatches through IMSMQMessage4's vtable slot 44.
-func (self *IMSMQMessage4) Get_EncryptAlgorithm(plEncryptAlg *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_EncryptAlgorithm(plEncryptAlg *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plEncryptAlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EncryptAlgorithm dispatches through IMSMQMessage4's vtable slot 45.
-func (self *IMSMQMessage4) Put_EncryptAlgorithm(lEncryptAlg int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_EncryptAlgorithm(lEncryptAlg int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(lEncryptAlg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SentTime dispatches through IMSMQMessage4's vtable slot 46.
-func (self *IMSMQMessage4) Get_SentTime(pvarSentTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_SentTime(pvarSentTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSentTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ArrivedTime dispatches through IMSMQMessage4's vtable slot 47.
-func (self *IMSMQMessage4) Get_ArrivedTime(plArrivedTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_ArrivedTime(plArrivedTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plArrivedTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DestinationQueueInfo dispatches through IMSMQMessage4's vtable slot 48.
-func (self *IMSMQMessage4) Get_DestinationQueueInfo(ppqinfoDest **IMSMQQueueInfo4) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_DestinationQueueInfo(ppqinfoDest **IMSMQQueueInfo4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderCertificate dispatches through IMSMQMessage4's vtable slot 49.
-func (self *IMSMQMessage4) Get_SenderCertificate(pvarSenderCert *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_SenderCertificate(pvarSenderCert *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderCert)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderId dispatches through IMSMQMessage4's vtable slot 51.
-func (self *IMSMQMessage4) Get_SenderId(pvarSenderId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_SenderId(pvarSenderId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderIdType dispatches through IMSMQMessage4's vtable slot 52.
-func (self *IMSMQMessage4) Get_SenderIdType(plSenderIdType *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_SenderIdType(plSenderIdType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSenderIdType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SenderIdType dispatches through IMSMQMessage4's vtable slot 53.
-func (self *IMSMQMessage4) Put_SenderIdType(lSenderIdType int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_SenderIdType(lSenderIdType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(lSenderIdType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Send dispatches through IMSMQMessage4's vtable slot 54.
-func (self *IMSMQMessage4) Send(DestinationQueue *systemcom.IDispatch, Transaction *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Send(DestinationQueue *systemcom.IDispatch, Transaction *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DestinationQueue)), uintptr(unsafe.Pointer(Transaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AttachCurrentSecurityContext dispatches through IMSMQMessage4's vtable slot 55.
-func (self *IMSMQMessage4) AttachCurrentSecurityContext() foundation.HRESULT {
+func (self *IMSMQMessage4) AttachCurrentSecurityContext() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SenderVersion dispatches through IMSMQMessage4's vtable slot 56.
-func (self *IMSMQMessage4) Get_SenderVersion(plSenderVersion *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_SenderVersion(plSenderVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSenderVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Extension dispatches through IMSMQMessage4's vtable slot 57.
-func (self *IMSMQMessage4) Get_Extension(pvarExtension *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Extension(pvarExtension *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarExtension)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ConnectorTypeGuid dispatches through IMSMQMessage4's vtable slot 59.
-func (self *IMSMQMessage4) Get_ConnectorTypeGuid(pbstrGuidConnectorType *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_ConnectorTypeGuid(pbstrGuidConnectorType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidConnectorType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ConnectorTypeGuid dispatches through IMSMQMessage4's vtable slot 60.
-func (self *IMSMQMessage4) Put_ConnectorTypeGuid(bstrGuidConnectorType foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_ConnectorTypeGuid(bstrGuidConnectorType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuidConnectorType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TransactionStatusQueueInfo dispatches through IMSMQMessage4's vtable slot 61.
-func (self *IMSMQMessage4) Get_TransactionStatusQueueInfo(ppqinfoXactStatus **IMSMQQueueInfo4) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_TransactionStatusQueueInfo(ppqinfoXactStatus **IMSMQQueueInfo4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoXactStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DestinationSymmetricKey dispatches through IMSMQMessage4's vtable slot 62.
-func (self *IMSMQMessage4) Get_DestinationSymmetricKey(pvarDestSymmKey *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_DestinationSymmetricKey(pvarDestSymmKey *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDestSymmKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Signature dispatches through IMSMQMessage4's vtable slot 64.
-func (self *IMSMQMessage4) Get_Signature(pvarSignature *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Signature(pvarSignature *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSignature)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthenticationProviderType dispatches through IMSMQMessage4's vtable slot 66.
-func (self *IMSMQMessage4) Get_AuthenticationProviderType(plAuthProvType *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_AuthenticationProviderType(plAuthProvType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthProvType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthenticationProviderType dispatches through IMSMQMessage4's vtable slot 67.
-func (self *IMSMQMessage4) Put_AuthenticationProviderType(lAuthProvType int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_AuthenticationProviderType(lAuthProvType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(lAuthProvType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthenticationProviderName dispatches through IMSMQMessage4's vtable slot 68.
-func (self *IMSMQMessage4) Get_AuthenticationProviderName(pbstrAuthProvName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_AuthenticationProviderName(pbstrAuthProvName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrAuthProvName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthenticationProviderName dispatches through IMSMQMessage4's vtable slot 69.
-func (self *IMSMQMessage4) Put_AuthenticationProviderName(bstrAuthProvName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_AuthenticationProviderName(bstrAuthProvName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAuthProvName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MsgClass dispatches through IMSMQMessage4's vtable slot 71.
-func (self *IMSMQMessage4) Get_MsgClass(plMsgClass *int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_MsgClass(plMsgClass *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMsgClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MsgClass dispatches through IMSMQMessage4's vtable slot 72.
-func (self *IMSMQMessage4) Put_MsgClass(lMsgClass int32) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_MsgClass(lMsgClass int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(lMsgClass))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQMessage4's vtable slot 73.
-func (self *IMSMQMessage4) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TransactionId dispatches through IMSMQMessage4's vtable slot 74.
-func (self *IMSMQMessage4) Get_TransactionId(pvarXactId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_TransactionId(pvarXactId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarXactId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsFirstInTransaction dispatches through IMSMQMessage4's vtable slot 75.
-func (self *IMSMQMessage4) Get_IsFirstInTransaction(pisFirstInXact *int16) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_IsFirstInTransaction(pisFirstInXact *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisFirstInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsLastInTransaction dispatches through IMSMQMessage4's vtable slot 76.
-func (self *IMSMQMessage4) Get_IsLastInTransaction(pisLastInXact *int16) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_IsLastInTransaction(pisLastInXact *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisLastInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseQueueInfo_v2 dispatches through IMSMQMessage4's vtable slot 77.
-func (self *IMSMQMessage4) Get_ResponseQueueInfo_v2(ppqinfoResponse **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_ResponseQueueInfo_v2(ppqinfoResponse **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseQueueInfo_v2 dispatches through IMSMQMessage4's vtable slot 78.
-func (self *IMSMQMessage4) Putref_ResponseQueueInfo_v2(pqinfoResponse *IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage4) Putref_ResponseQueueInfo_v2(pqinfoResponse *IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdminQueueInfo_v2 dispatches through IMSMQMessage4's vtable slot 79.
-func (self *IMSMQMessage4) Get_AdminQueueInfo_v2(ppqinfoAdmin **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_AdminQueueInfo_v2(ppqinfoAdmin **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AdminQueueInfo_v2 dispatches through IMSMQMessage4's vtable slot 80.
-func (self *IMSMQMessage4) Putref_AdminQueueInfo_v2(pqinfoAdmin *IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQMessage4) Putref_AdminQueueInfo_v2(pqinfoAdmin *IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReceivedAuthenticationLevel dispatches through IMSMQMessage4's vtable slot 81.
-func (self *IMSMQMessage4) Get_ReceivedAuthenticationLevel(psReceivedAuthenticationLevel *int16) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_ReceivedAuthenticationLevel(psReceivedAuthenticationLevel *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psReceivedAuthenticationLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseQueueInfo dispatches through IMSMQMessage4's vtable slot 82.
-func (self *IMSMQMessage4) Get_ResponseQueueInfo(ppqinfoResponse **IMSMQQueueInfo4) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_ResponseQueueInfo(ppqinfoResponse **IMSMQQueueInfo4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseQueueInfo dispatches through IMSMQMessage4's vtable slot 83.
-func (self *IMSMQMessage4) Putref_ResponseQueueInfo(pqinfoResponse *IMSMQQueueInfo4) foundation.HRESULT {
+func (self *IMSMQMessage4) Putref_ResponseQueueInfo(pqinfoResponse *IMSMQQueueInfo4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdminQueueInfo dispatches through IMSMQMessage4's vtable slot 84.
-func (self *IMSMQMessage4) Get_AdminQueueInfo(ppqinfoAdmin **IMSMQQueueInfo4) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_AdminQueueInfo(ppqinfoAdmin **IMSMQQueueInfo4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AdminQueueInfo dispatches through IMSMQMessage4's vtable slot 85.
-func (self *IMSMQMessage4) Putref_AdminQueueInfo(pqinfoAdmin *IMSMQQueueInfo4) foundation.HRESULT {
+func (self *IMSMQMessage4) Putref_AdminQueueInfo(pqinfoAdmin *IMSMQQueueInfo4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqinfoAdmin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResponseDestination dispatches through IMSMQMessage4's vtable slot 86.
-func (self *IMSMQMessage4) Get_ResponseDestination(ppdestResponse **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_ResponseDestination(ppdestResponse **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdestResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_ResponseDestination dispatches through IMSMQMessage4's vtable slot 87.
-func (self *IMSMQMessage4) Putref_ResponseDestination(pdestResponse *systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQMessage4) Putref_ResponseDestination(pdestResponse *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdestResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Destination dispatches through IMSMQMessage4's vtable slot 88.
-func (self *IMSMQMessage4) Get_Destination(ppdestDestination **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_Destination(ppdestDestination **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdestDestination)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LookupId dispatches through IMSMQMessage4's vtable slot 89.
-func (self *IMSMQMessage4) Get_LookupId(pvarLookupId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_LookupId(pvarLookupId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarLookupId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsAuthenticated2 dispatches through IMSMQMessage4's vtable slot 90.
-func (self *IMSMQMessage4) Get_IsAuthenticated2(pisAuthenticated *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_IsAuthenticated2(pisAuthenticated *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisAuthenticated)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsFirstInTransaction2 dispatches through IMSMQMessage4's vtable slot 91.
-func (self *IMSMQMessage4) Get_IsFirstInTransaction2(pisFirstInXact *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_IsFirstInTransaction2(pisFirstInXact *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisFirstInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsLastInTransaction2 dispatches through IMSMQMessage4's vtable slot 92.
-func (self *IMSMQMessage4) Get_IsLastInTransaction2(pisLastInXact *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_IsLastInTransaction2(pisLastInXact *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisLastInXact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AttachCurrentSecurityContext2 dispatches through IMSMQMessage4's vtable slot 93.
-func (self *IMSMQMessage4) AttachCurrentSecurityContext2() foundation.HRESULT {
+func (self *IMSMQMessage4) AttachCurrentSecurityContext2() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SoapEnvelope dispatches through IMSMQMessage4's vtable slot 94.
-func (self *IMSMQMessage4) Get_SoapEnvelope(pbstrSoapEnvelope *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_SoapEnvelope(pbstrSoapEnvelope *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSoapEnvelope)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CompoundMessage dispatches through IMSMQMessage4's vtable slot 95.
-func (self *IMSMQMessage4) Get_CompoundMessage(pvarCompoundMessage *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQMessage4) Get_CompoundMessage(pvarCompoundMessage *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarCompoundMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SoapHeader dispatches through IMSMQMessage4's vtable slot 96.
-func (self *IMSMQMessage4) Put_SoapHeader(bstrSoapHeader foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_SoapHeader(bstrSoapHeader foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSoapHeader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SoapBody dispatches through IMSMQMessage4's vtable slot 97.
-func (self *IMSMQMessage4) Put_SoapBody(bstrSoapBody foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQMessage4) Put_SoapBody(bstrSoapBody foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSoapBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 64c478fb-f9b0-4695-8a7f-439ac94326d3
@@ -2143,39 +2143,39 @@ type IMSMQOutgoingQueueManagement struct {
 var IID_IMSMQOutgoingQueueManagement = win32.GUID{Data1: 0x64c478fb, Data2: 0xf9b0, Data3: 0x4695, Data4: [8]byte{0x8a, 0x7f, 0x43, 0x9a, 0xc9, 0x43, 0x26, 0xd3}}
 
 // Get_State dispatches through IMSMQOutgoingQueueManagement's vtable slot 16.
-func (self *IMSMQOutgoingQueueManagement) Get_State(plState *int32) foundation.HRESULT {
+func (self *IMSMQOutgoingQueueManagement) Get_State(plState *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NextHops dispatches through IMSMQOutgoingQueueManagement's vtable slot 17.
-func (self *IMSMQOutgoingQueueManagement) Get_NextHops(pvNextHops *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQOutgoingQueueManagement) Get_NextHops(pvNextHops *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvNextHops)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EodGetSendInfo dispatches through IMSMQOutgoingQueueManagement's vtable slot 18.
-func (self *IMSMQOutgoingQueueManagement) EodGetSendInfo(ppCollection **IMSMQCollection) foundation.HRESULT {
+func (self *IMSMQOutgoingQueueManagement) EodGetSendInfo(ppCollection **IMSMQCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through IMSMQOutgoingQueueManagement's vtable slot 19.
-func (self *IMSMQOutgoingQueueManagement) Resume() foundation.HRESULT {
+func (self *IMSMQOutgoingQueueManagement) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IMSMQOutgoingQueueManagement's vtable slot 20.
-func (self *IMSMQOutgoingQueueManagement) Pause() foundation.HRESULT {
+func (self *IMSMQOutgoingQueueManagement) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EodResend dispatches through IMSMQOutgoingQueueManagement's vtable slot 21.
-func (self *IMSMQOutgoingQueueManagement) EodResend() foundation.HRESULT {
+func (self *IMSMQOutgoingQueueManagement) EodResend() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b17-2168-11d3-898c-00e02c074f6b
@@ -2187,9 +2187,9 @@ type IMSMQPrivateDestination struct {
 var IID_IMSMQPrivateDestination = win32.GUID{Data1: 0xeba96b17, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_Handle dispatches through IMSMQPrivateDestination's vtable slot 7.
-func (self *IMSMQPrivateDestination) Get_Handle(pvarHandle *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQPrivateDestination) Get_Handle(pvarHandle *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7ab3341-c9d3-11d1-bb47-0080c7c5a2c0
@@ -2201,21 +2201,21 @@ type IMSMQPrivateEvent struct {
 var IID_IMSMQPrivateEvent = win32.GUID{Data1: 0xd7ab3341, Data2: 0xc9d3, Data3: 0x11d1, Data4: [8]byte{0xbb, 0x47, 0x00, 0x80, 0xc7, 0xc5, 0xa2, 0xc0}}
 
 // Get_Hwnd dispatches through IMSMQPrivateEvent's vtable slot 7.
-func (self *IMSMQPrivateEvent) Get_Hwnd(phwnd *int32) foundation.HRESULT {
+func (self *IMSMQPrivateEvent) Get_Hwnd(phwnd *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FireArrivedEvent dispatches through IMSMQPrivateEvent's vtable slot 8.
-func (self *IMSMQPrivateEvent) FireArrivedEvent(pq *IMSMQQueue, msgcursor int32) foundation.HRESULT {
+func (self *IMSMQPrivateEvent) FireArrivedEvent(pq *IMSMQQueue, msgcursor int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pq)), uintptr(msgcursor))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FireArrivedErrorEvent dispatches through IMSMQPrivateEvent's vtable slot 9.
-func (self *IMSMQPrivateEvent) FireArrivedErrorEvent(pq *IMSMQQueue, hrStatus foundation.HRESULT, msgcursor int32) foundation.HRESULT {
+func (self *IMSMQPrivateEvent) FireArrivedErrorEvent(pq *IMSMQQueue, hrStatus foundation.HRESULT, msgcursor int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pq)), uintptr(hrStatus), uintptr(msgcursor))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e072-dccd-11d0-aa4b-0060970debae
@@ -2227,9 +2227,9 @@ type IMSMQQuery struct {
 var IID_IMSMQQuery = win32.GUID{Data1: 0xd7d6e072, Data2: 0xdccd, Data3: 0x11d0, Data4: [8]byte{0xaa, 0x4b, 0x00, 0x60, 0x97, 0x0d, 0xeb, 0xae}}
 
 // LookupQueue dispatches through IMSMQQuery's vtable slot 7.
-func (self *IMSMQQuery) LookupQueue(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos) foundation.HRESULT {
+func (self *IMSMQQuery) LookupQueue(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(QueueGuid)), uintptr(unsafe.Pointer(ServiceTypeGuid)), uintptr(unsafe.Pointer(Label)), uintptr(unsafe.Pointer(CreateTime)), uintptr(unsafe.Pointer(ModifyTime)), uintptr(unsafe.Pointer(RelServiceType)), uintptr(unsafe.Pointer(RelLabel)), uintptr(unsafe.Pointer(RelCreateTime)), uintptr(unsafe.Pointer(RelModifyTime)), uintptr(unsafe.Pointer(ppqinfos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b0e-2168-11d3-898c-00e02c074f6b
@@ -2241,15 +2241,15 @@ type IMSMQQuery2 struct {
 var IID_IMSMQQuery2 = win32.GUID{Data1: 0xeba96b0e, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // LookupQueue dispatches through IMSMQQuery2's vtable slot 7.
-func (self *IMSMQQuery2) LookupQueue(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos2) foundation.HRESULT {
+func (self *IMSMQQuery2) LookupQueue(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(QueueGuid)), uintptr(unsafe.Pointer(ServiceTypeGuid)), uintptr(unsafe.Pointer(Label)), uintptr(unsafe.Pointer(CreateTime)), uintptr(unsafe.Pointer(ModifyTime)), uintptr(unsafe.Pointer(RelServiceType)), uintptr(unsafe.Pointer(RelLabel)), uintptr(unsafe.Pointer(RelCreateTime)), uintptr(unsafe.Pointer(RelModifyTime)), uintptr(unsafe.Pointer(ppqinfos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQuery2's vtable slot 8.
-func (self *IMSMQQuery2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQuery2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b19-2168-11d3-898c-00e02c074f6b
@@ -2261,21 +2261,21 @@ type IMSMQQuery3 struct {
 var IID_IMSMQQuery3 = win32.GUID{Data1: 0xeba96b19, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // LookupQueue_v2 dispatches through IMSMQQuery3's vtable slot 7.
-func (self *IMSMQQuery3) LookupQueue_v2(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos3) foundation.HRESULT {
+func (self *IMSMQQuery3) LookupQueue_v2(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(QueueGuid)), uintptr(unsafe.Pointer(ServiceTypeGuid)), uintptr(unsafe.Pointer(Label)), uintptr(unsafe.Pointer(CreateTime)), uintptr(unsafe.Pointer(ModifyTime)), uintptr(unsafe.Pointer(RelServiceType)), uintptr(unsafe.Pointer(RelLabel)), uintptr(unsafe.Pointer(RelCreateTime)), uintptr(unsafe.Pointer(RelModifyTime)), uintptr(unsafe.Pointer(ppqinfos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQuery3's vtable slot 8.
-func (self *IMSMQQuery3) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQuery3) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LookupQueue dispatches through IMSMQQuery3's vtable slot 9.
-func (self *IMSMQQuery3) LookupQueue(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, MulticastAddress *systemvariant.VARIANT, RelMulticastAddress *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos3) foundation.HRESULT {
+func (self *IMSMQQuery3) LookupQueue(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, MulticastAddress *systemvariant.VARIANT, RelMulticastAddress *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(QueueGuid)), uintptr(unsafe.Pointer(ServiceTypeGuid)), uintptr(unsafe.Pointer(Label)), uintptr(unsafe.Pointer(CreateTime)), uintptr(unsafe.Pointer(ModifyTime)), uintptr(unsafe.Pointer(RelServiceType)), uintptr(unsafe.Pointer(RelLabel)), uintptr(unsafe.Pointer(RelCreateTime)), uintptr(unsafe.Pointer(RelModifyTime)), uintptr(unsafe.Pointer(MulticastAddress)), uintptr(unsafe.Pointer(RelMulticastAddress)), uintptr(unsafe.Pointer(ppqinfos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b24-2168-11d3-898c-00e02c074f6b
@@ -2287,21 +2287,21 @@ type IMSMQQuery4 struct {
 var IID_IMSMQQuery4 = win32.GUID{Data1: 0xeba96b24, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // LookupQueue_v2 dispatches through IMSMQQuery4's vtable slot 7.
-func (self *IMSMQQuery4) LookupQueue_v2(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos4) foundation.HRESULT {
+func (self *IMSMQQuery4) LookupQueue_v2(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(QueueGuid)), uintptr(unsafe.Pointer(ServiceTypeGuid)), uintptr(unsafe.Pointer(Label)), uintptr(unsafe.Pointer(CreateTime)), uintptr(unsafe.Pointer(ModifyTime)), uintptr(unsafe.Pointer(RelServiceType)), uintptr(unsafe.Pointer(RelLabel)), uintptr(unsafe.Pointer(RelCreateTime)), uintptr(unsafe.Pointer(RelModifyTime)), uintptr(unsafe.Pointer(ppqinfos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQuery4's vtable slot 8.
-func (self *IMSMQQuery4) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQuery4) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LookupQueue dispatches through IMSMQQuery4's vtable slot 9.
-func (self *IMSMQQuery4) LookupQueue(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, MulticastAddress *systemvariant.VARIANT, RelMulticastAddress *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos4) foundation.HRESULT {
+func (self *IMSMQQuery4) LookupQueue(QueueGuid *systemvariant.VARIANT, ServiceTypeGuid *systemvariant.VARIANT, Label *systemvariant.VARIANT, CreateTime *systemvariant.VARIANT, ModifyTime *systemvariant.VARIANT, RelServiceType *systemvariant.VARIANT, RelLabel *systemvariant.VARIANT, RelCreateTime *systemvariant.VARIANT, RelModifyTime *systemvariant.VARIANT, MulticastAddress *systemvariant.VARIANT, RelMulticastAddress *systemvariant.VARIANT, ppqinfos **IMSMQQueueInfos4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(QueueGuid)), uintptr(unsafe.Pointer(ServiceTypeGuid)), uintptr(unsafe.Pointer(Label)), uintptr(unsafe.Pointer(CreateTime)), uintptr(unsafe.Pointer(ModifyTime)), uintptr(unsafe.Pointer(RelServiceType)), uintptr(unsafe.Pointer(RelLabel)), uintptr(unsafe.Pointer(RelCreateTime)), uintptr(unsafe.Pointer(RelModifyTime)), uintptr(unsafe.Pointer(MulticastAddress)), uintptr(unsafe.Pointer(RelMulticastAddress)), uintptr(unsafe.Pointer(ppqinfos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e076-dccd-11d0-aa4b-0060970debae
@@ -2313,81 +2313,81 @@ type IMSMQQueue struct {
 var IID_IMSMQQueue = win32.GUID{Data1: 0xd7d6e076, Data2: 0xdccd, Data3: 0x11d0, Data4: [8]byte{0xaa, 0x4b, 0x00, 0x60, 0x97, 0x0d, 0xeb, 0xae}}
 
 // Get_Access dispatches through IMSMQQueue's vtable slot 7.
-func (self *IMSMQQueue) Get_Access(plAccess *int32) foundation.HRESULT {
+func (self *IMSMQQueue) Get_Access(plAccess *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ShareMode dispatches through IMSMQQueue's vtable slot 8.
-func (self *IMSMQQueue) Get_ShareMode(plShareMode *int32) foundation.HRESULT {
+func (self *IMSMQQueue) Get_ShareMode(plShareMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plShareMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueueInfo dispatches through IMSMQQueue's vtable slot 9.
-func (self *IMSMQQueue) Get_QueueInfo(ppqinfo **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQQueue) Get_QueueInfo(ppqinfo **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through IMSMQQueue's vtable slot 10.
-func (self *IMSMQQueue) Get_Handle(plHandle *int32) foundation.HRESULT {
+func (self *IMSMQQueue) Get_Handle(plHandle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsOpen dispatches through IMSMQQueue's vtable slot 11.
-func (self *IMSMQQueue) Get_IsOpen(pisOpen *int16) foundation.HRESULT {
+func (self *IMSMQQueue) Get_IsOpen(pisOpen *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisOpen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMSMQQueue's vtable slot 12.
-func (self *IMSMQQueue) Close() foundation.HRESULT {
+func (self *IMSMQQueue) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Receive dispatches through IMSMQQueue's vtable slot 13.
-func (self *IMSMQQueue) Receive(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue) Receive(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Peek dispatches through IMSMQQueue's vtable slot 14.
-func (self *IMSMQQueue) Peek(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue) Peek(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableNotification dispatches through IMSMQQueue's vtable slot 15.
-func (self *IMSMQQueue) EnableNotification(Event *IMSMQEvent, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueue) EnableNotification(Event *IMSMQEvent, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(Cursor)), uintptr(unsafe.Pointer(ReceiveTimeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IMSMQQueue's vtable slot 16.
-func (self *IMSMQQueue) Reset() foundation.HRESULT {
+func (self *IMSMQQueue) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveCurrent dispatches through IMSMQQueue's vtable slot 17.
-func (self *IMSMQQueue) ReceiveCurrent(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue) ReceiveCurrent(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekNext dispatches through IMSMQQueue's vtable slot 18.
-func (self *IMSMQQueue) PeekNext(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue) PeekNext(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekCurrent dispatches through IMSMQQueue's vtable slot 19.
-func (self *IMSMQQueue) PeekCurrent(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue) PeekCurrent(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ef0574e0-06d8-11d3-b100-00e02c074f6b
@@ -2399,117 +2399,117 @@ type IMSMQQueue2 struct {
 var IID_IMSMQQueue2 = win32.GUID{Data1: 0xef0574e0, Data2: 0x06d8, Data3: 0x11d3, Data4: [8]byte{0xb1, 0x00, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_Access dispatches through IMSMQQueue2's vtable slot 7.
-func (self *IMSMQQueue2) Get_Access(plAccess *int32) foundation.HRESULT {
+func (self *IMSMQQueue2) Get_Access(plAccess *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ShareMode dispatches through IMSMQQueue2's vtable slot 8.
-func (self *IMSMQQueue2) Get_ShareMode(plShareMode *int32) foundation.HRESULT {
+func (self *IMSMQQueue2) Get_ShareMode(plShareMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plShareMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueueInfo dispatches through IMSMQQueue2's vtable slot 9.
-func (self *IMSMQQueue2) Get_QueueInfo(ppqinfo **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQQueue2) Get_QueueInfo(ppqinfo **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through IMSMQQueue2's vtable slot 10.
-func (self *IMSMQQueue2) Get_Handle(plHandle *int32) foundation.HRESULT {
+func (self *IMSMQQueue2) Get_Handle(plHandle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsOpen dispatches through IMSMQQueue2's vtable slot 11.
-func (self *IMSMQQueue2) Get_IsOpen(pisOpen *int16) foundation.HRESULT {
+func (self *IMSMQQueue2) Get_IsOpen(pisOpen *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisOpen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMSMQQueue2's vtable slot 12.
-func (self *IMSMQQueue2) Close() foundation.HRESULT {
+func (self *IMSMQQueue2) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Receive_v1 dispatches through IMSMQQueue2's vtable slot 13.
-func (self *IMSMQQueue2) Receive_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue2) Receive_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Peek_v1 dispatches through IMSMQQueue2's vtable slot 14.
-func (self *IMSMQQueue2) Peek_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue2) Peek_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableNotification dispatches through IMSMQQueue2's vtable slot 15.
-func (self *IMSMQQueue2) EnableNotification(Event *IMSMQEvent2, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueue2) EnableNotification(Event *IMSMQEvent2, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(Cursor)), uintptr(unsafe.Pointer(ReceiveTimeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IMSMQQueue2's vtable slot 16.
-func (self *IMSMQQueue2) Reset() foundation.HRESULT {
+func (self *IMSMQQueue2) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveCurrent_v1 dispatches through IMSMQQueue2's vtable slot 17.
-func (self *IMSMQQueue2) ReceiveCurrent_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue2) ReceiveCurrent_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekNext_v1 dispatches through IMSMQQueue2's vtable slot 18.
-func (self *IMSMQQueue2) PeekNext_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue2) PeekNext_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekCurrent_v1 dispatches through IMSMQQueue2's vtable slot 19.
-func (self *IMSMQQueue2) PeekCurrent_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue2) PeekCurrent_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Receive dispatches through IMSMQQueue2's vtable slot 20.
-func (self *IMSMQQueue2) Receive(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) foundation.HRESULT {
+func (self *IMSMQQueue2) Receive(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Peek dispatches through IMSMQQueue2's vtable slot 21.
-func (self *IMSMQQueue2) Peek(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) foundation.HRESULT {
+func (self *IMSMQQueue2) Peek(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveCurrent dispatches through IMSMQQueue2's vtable slot 22.
-func (self *IMSMQQueue2) ReceiveCurrent(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) foundation.HRESULT {
+func (self *IMSMQQueue2) ReceiveCurrent(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekNext dispatches through IMSMQQueue2's vtable slot 23.
-func (self *IMSMQQueue2) PeekNext(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) foundation.HRESULT {
+func (self *IMSMQQueue2) PeekNext(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekCurrent dispatches through IMSMQQueue2's vtable slot 24.
-func (self *IMSMQQueue2) PeekCurrent(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) foundation.HRESULT {
+func (self *IMSMQQueue2) PeekCurrent(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQueue2's vtable slot 25.
-func (self *IMSMQQueue2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQueue2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b1b-2168-11d3-898c-00e02c074f6b
@@ -2521,159 +2521,159 @@ type IMSMQQueue3 struct {
 var IID_IMSMQQueue3 = win32.GUID{Data1: 0xeba96b1b, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_Access dispatches through IMSMQQueue3's vtable slot 7.
-func (self *IMSMQQueue3) Get_Access(plAccess *int32) foundation.HRESULT {
+func (self *IMSMQQueue3) Get_Access(plAccess *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ShareMode dispatches through IMSMQQueue3's vtable slot 8.
-func (self *IMSMQQueue3) Get_ShareMode(plShareMode *int32) foundation.HRESULT {
+func (self *IMSMQQueue3) Get_ShareMode(plShareMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plShareMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueueInfo dispatches through IMSMQQueue3's vtable slot 9.
-func (self *IMSMQQueue3) Get_QueueInfo(ppqinfo **IMSMQQueueInfo3) foundation.HRESULT {
+func (self *IMSMQQueue3) Get_QueueInfo(ppqinfo **IMSMQQueueInfo3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through IMSMQQueue3's vtable slot 10.
-func (self *IMSMQQueue3) Get_Handle(plHandle *int32) foundation.HRESULT {
+func (self *IMSMQQueue3) Get_Handle(plHandle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsOpen dispatches through IMSMQQueue3's vtable slot 11.
-func (self *IMSMQQueue3) Get_IsOpen(pisOpen *int16) foundation.HRESULT {
+func (self *IMSMQQueue3) Get_IsOpen(pisOpen *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisOpen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMSMQQueue3's vtable slot 12.
-func (self *IMSMQQueue3) Close() foundation.HRESULT {
+func (self *IMSMQQueue3) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Receive_v1 dispatches through IMSMQQueue3's vtable slot 13.
-func (self *IMSMQQueue3) Receive_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue3) Receive_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Peek_v1 dispatches through IMSMQQueue3's vtable slot 14.
-func (self *IMSMQQueue3) Peek_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue3) Peek_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableNotification dispatches through IMSMQQueue3's vtable slot 15.
-func (self *IMSMQQueue3) EnableNotification(Event *IMSMQEvent3, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueue3) EnableNotification(Event *IMSMQEvent3, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(Cursor)), uintptr(unsafe.Pointer(ReceiveTimeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IMSMQQueue3's vtable slot 16.
-func (self *IMSMQQueue3) Reset() foundation.HRESULT {
+func (self *IMSMQQueue3) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveCurrent_v1 dispatches through IMSMQQueue3's vtable slot 17.
-func (self *IMSMQQueue3) ReceiveCurrent_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue3) ReceiveCurrent_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekNext_v1 dispatches through IMSMQQueue3's vtable slot 18.
-func (self *IMSMQQueue3) PeekNext_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue3) PeekNext_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekCurrent_v1 dispatches through IMSMQQueue3's vtable slot 19.
-func (self *IMSMQQueue3) PeekCurrent_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue3) PeekCurrent_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Receive dispatches through IMSMQQueue3's vtable slot 20.
-func (self *IMSMQQueue3) Receive(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) foundation.HRESULT {
+func (self *IMSMQQueue3) Receive(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Peek dispatches through IMSMQQueue3's vtable slot 21.
-func (self *IMSMQQueue3) Peek(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) foundation.HRESULT {
+func (self *IMSMQQueue3) Peek(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveCurrent dispatches through IMSMQQueue3's vtable slot 22.
-func (self *IMSMQQueue3) ReceiveCurrent(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) foundation.HRESULT {
+func (self *IMSMQQueue3) ReceiveCurrent(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekNext dispatches through IMSMQQueue3's vtable slot 23.
-func (self *IMSMQQueue3) PeekNext(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) foundation.HRESULT {
+func (self *IMSMQQueue3) PeekNext(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekCurrent dispatches through IMSMQQueue3's vtable slot 24.
-func (self *IMSMQQueue3) PeekCurrent(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) foundation.HRESULT {
+func (self *IMSMQQueue3) PeekCurrent(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQueue3's vtable slot 25.
-func (self *IMSMQQueue3) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQueue3) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle2 dispatches through IMSMQQueue3's vtable slot 26.
-func (self *IMSMQQueue3) Get_Handle2(pvarHandle *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueue3) Get_Handle2(pvarHandle *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveFirstByLookupId dispatches through IMSMQQueue3's vtable slot 30.
-func (self *IMSMQQueue3) ReceiveFirstByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) foundation.HRESULT {
+func (self *IMSMQQueue3) ReceiveFirstByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveLastByLookupId dispatches through IMSMQQueue3's vtable slot 31.
-func (self *IMSMQQueue3) ReceiveLastByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) foundation.HRESULT {
+func (self *IMSMQQueue3) ReceiveLastByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekFirstByLookupId dispatches through IMSMQQueue3's vtable slot 35.
-func (self *IMSMQQueue3) PeekFirstByLookupId(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) foundation.HRESULT {
+func (self *IMSMQQueue3) PeekFirstByLookupId(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekLastByLookupId dispatches through IMSMQQueue3's vtable slot 36.
-func (self *IMSMQQueue3) PeekLastByLookupId(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) foundation.HRESULT {
+func (self *IMSMQQueue3) PeekLastByLookupId(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Purge dispatches through IMSMQQueue3's vtable slot 37.
-func (self *IMSMQQueue3) Purge() foundation.HRESULT {
+func (self *IMSMQQueue3) Purge() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsOpen2 dispatches through IMSMQQueue3's vtable slot 38.
-func (self *IMSMQQueue3) Get_IsOpen2(pisOpen *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQQueue3) Get_IsOpen2(pisOpen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisOpen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b20-2168-11d3-898c-00e02c074f6b
@@ -2685,159 +2685,159 @@ type IMSMQQueue4 struct {
 var IID_IMSMQQueue4 = win32.GUID{Data1: 0xeba96b20, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_Access dispatches through IMSMQQueue4's vtable slot 7.
-func (self *IMSMQQueue4) Get_Access(plAccess *int32) foundation.HRESULT {
+func (self *IMSMQQueue4) Get_Access(plAccess *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ShareMode dispatches through IMSMQQueue4's vtable slot 8.
-func (self *IMSMQQueue4) Get_ShareMode(plShareMode *int32) foundation.HRESULT {
+func (self *IMSMQQueue4) Get_ShareMode(plShareMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plShareMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueueInfo dispatches through IMSMQQueue4's vtable slot 9.
-func (self *IMSMQQueue4) Get_QueueInfo(ppqinfo **IMSMQQueueInfo4) foundation.HRESULT {
+func (self *IMSMQQueue4) Get_QueueInfo(ppqinfo **IMSMQQueueInfo4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through IMSMQQueue4's vtable slot 10.
-func (self *IMSMQQueue4) Get_Handle(plHandle *int32) foundation.HRESULT {
+func (self *IMSMQQueue4) Get_Handle(plHandle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsOpen dispatches through IMSMQQueue4's vtable slot 11.
-func (self *IMSMQQueue4) Get_IsOpen(pisOpen *int16) foundation.HRESULT {
+func (self *IMSMQQueue4) Get_IsOpen(pisOpen *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisOpen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMSMQQueue4's vtable slot 12.
-func (self *IMSMQQueue4) Close() foundation.HRESULT {
+func (self *IMSMQQueue4) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Receive_v1 dispatches through IMSMQQueue4's vtable slot 13.
-func (self *IMSMQQueue4) Receive_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue4) Receive_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Peek_v1 dispatches through IMSMQQueue4's vtable slot 14.
-func (self *IMSMQQueue4) Peek_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue4) Peek_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableNotification dispatches through IMSMQQueue4's vtable slot 15.
-func (self *IMSMQQueue4) EnableNotification(Event *IMSMQEvent3, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueue4) EnableNotification(Event *IMSMQEvent3, Cursor *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(Cursor)), uintptr(unsafe.Pointer(ReceiveTimeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IMSMQQueue4's vtable slot 16.
-func (self *IMSMQQueue4) Reset() foundation.HRESULT {
+func (self *IMSMQQueue4) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveCurrent_v1 dispatches through IMSMQQueue4's vtable slot 17.
-func (self *IMSMQQueue4) ReceiveCurrent_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue4) ReceiveCurrent_v1(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekNext_v1 dispatches through IMSMQQueue4's vtable slot 18.
-func (self *IMSMQQueue4) PeekNext_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue4) PeekNext_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekCurrent_v1 dispatches through IMSMQQueue4's vtable slot 19.
-func (self *IMSMQQueue4) PeekCurrent_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) foundation.HRESULT {
+func (self *IMSMQQueue4) PeekCurrent_v1(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, ppmsg **IMSMQMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Receive dispatches through IMSMQQueue4's vtable slot 20.
-func (self *IMSMQQueue4) Receive(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) foundation.HRESULT {
+func (self *IMSMQQueue4) Receive(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Peek dispatches through IMSMQQueue4's vtable slot 21.
-func (self *IMSMQQueue4) Peek(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) foundation.HRESULT {
+func (self *IMSMQQueue4) Peek(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveCurrent dispatches through IMSMQQueue4's vtable slot 22.
-func (self *IMSMQQueue4) ReceiveCurrent(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) foundation.HRESULT {
+func (self *IMSMQQueue4) ReceiveCurrent(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekNext dispatches through IMSMQQueue4's vtable slot 23.
-func (self *IMSMQQueue4) PeekNext(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) foundation.HRESULT {
+func (self *IMSMQQueue4) PeekNext(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekCurrent dispatches through IMSMQQueue4's vtable slot 24.
-func (self *IMSMQQueue4) PeekCurrent(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) foundation.HRESULT {
+func (self *IMSMQQueue4) PeekCurrent(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, ReceiveTimeout *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(ReceiveTimeout)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQueue4's vtable slot 25.
-func (self *IMSMQQueue4) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQueue4) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle2 dispatches through IMSMQQueue4's vtable slot 26.
-func (self *IMSMQQueue4) Get_Handle2(pvarHandle *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueue4) Get_Handle2(pvarHandle *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveFirstByLookupId dispatches through IMSMQQueue4's vtable slot 30.
-func (self *IMSMQQueue4) ReceiveFirstByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) foundation.HRESULT {
+func (self *IMSMQQueue4) ReceiveFirstByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveLastByLookupId dispatches through IMSMQQueue4's vtable slot 31.
-func (self *IMSMQQueue4) ReceiveLastByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) foundation.HRESULT {
+func (self *IMSMQQueue4) ReceiveLastByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekFirstByLookupId dispatches through IMSMQQueue4's vtable slot 35.
-func (self *IMSMQQueue4) PeekFirstByLookupId(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) foundation.HRESULT {
+func (self *IMSMQQueue4) PeekFirstByLookupId(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeekLastByLookupId dispatches through IMSMQQueue4's vtable slot 36.
-func (self *IMSMQQueue4) PeekLastByLookupId(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) foundation.HRESULT {
+func (self *IMSMQQueue4) PeekLastByLookupId(WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Purge dispatches through IMSMQQueue4's vtable slot 37.
-func (self *IMSMQQueue4) Purge() foundation.HRESULT {
+func (self *IMSMQQueue4) Purge() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsOpen2 dispatches through IMSMQQueue4's vtable slot 38.
-func (self *IMSMQQueue4) Get_IsOpen2(pisOpen *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQQueue4) Get_IsOpen2(pisOpen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisOpen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e07b-dccd-11d0-aa4b-0060970debae
@@ -2849,183 +2849,183 @@ type IMSMQQueueInfo struct {
 var IID_IMSMQQueueInfo = win32.GUID{Data1: 0xd7d6e07b, Data2: 0xdccd, Data3: 0x11d0, Data4: [8]byte{0xaa, 0x4b, 0x00, 0x60, 0x97, 0x0d, 0xeb, 0xae}}
 
 // Get_QueueGuid dispatches through IMSMQQueueInfo's vtable slot 7.
-func (self *IMSMQQueueInfo) Get_QueueGuid(pbstrGuidQueue *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_QueueGuid(pbstrGuidQueue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceTypeGuid dispatches through IMSMQQueueInfo's vtable slot 8.
-func (self *IMSMQQueueInfo) Get_ServiceTypeGuid(pbstrGuidServiceType *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_ServiceTypeGuid(pbstrGuidServiceType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidServiceType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ServiceTypeGuid dispatches through IMSMQQueueInfo's vtable slot 9.
-func (self *IMSMQQueueInfo) Put_ServiceTypeGuid(bstrGuidServiceType foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_ServiceTypeGuid(bstrGuidServiceType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuidServiceType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Label dispatches through IMSMQQueueInfo's vtable slot 10.
-func (self *IMSMQQueueInfo) Get_Label(pbstrLabel *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_Label(pbstrLabel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Label dispatches through IMSMQQueueInfo's vtable slot 11.
-func (self *IMSMQQueueInfo) Put_Label(bstrLabel foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_Label(bstrLabel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PathName dispatches through IMSMQQueueInfo's vtable slot 12.
-func (self *IMSMQQueueInfo) Get_PathName(pbstrPathName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_PathName(pbstrPathName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PathName dispatches through IMSMQQueueInfo's vtable slot 13.
-func (self *IMSMQQueueInfo) Put_PathName(bstrPathName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_PathName(bstrPathName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FormatName dispatches through IMSMQQueueInfo's vtable slot 14.
-func (self *IMSMQQueueInfo) Get_FormatName(pbstrFormatName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_FormatName(pbstrFormatName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_FormatName dispatches through IMSMQQueueInfo's vtable slot 15.
-func (self *IMSMQQueueInfo) Put_FormatName(bstrFormatName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_FormatName(bstrFormatName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsTransactional dispatches through IMSMQQueueInfo's vtable slot 16.
-func (self *IMSMQQueueInfo) Get_IsTransactional(pisTransactional *int16) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_IsTransactional(pisTransactional *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisTransactional)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivLevel dispatches through IMSMQQueueInfo's vtable slot 17.
-func (self *IMSMQQueueInfo) Get_PrivLevel(plPrivLevel *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_PrivLevel(plPrivLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrivLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PrivLevel dispatches through IMSMQQueueInfo's vtable slot 18.
-func (self *IMSMQQueueInfo) Put_PrivLevel(lPrivLevel int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_PrivLevel(lPrivLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lPrivLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Journal dispatches through IMSMQQueueInfo's vtable slot 19.
-func (self *IMSMQQueueInfo) Get_Journal(plJournal *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_Journal(plJournal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Journal dispatches through IMSMQQueueInfo's vtable slot 20.
-func (self *IMSMQQueueInfo) Put_Journal(lJournal int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_Journal(lJournal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lJournal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Quota dispatches through IMSMQQueueInfo's vtable slot 21.
-func (self *IMSMQQueueInfo) Get_Quota(plQuota *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_Quota(plQuota *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plQuota)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Quota dispatches through IMSMQQueueInfo's vtable slot 22.
-func (self *IMSMQQueueInfo) Put_Quota(lQuota int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_Quota(lQuota int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(lQuota))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BasePriority dispatches through IMSMQQueueInfo's vtable slot 23.
-func (self *IMSMQQueueInfo) Get_BasePriority(plBasePriority *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_BasePriority(plBasePriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBasePriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_BasePriority dispatches through IMSMQQueueInfo's vtable slot 24.
-func (self *IMSMQQueueInfo) Put_BasePriority(lBasePriority int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_BasePriority(lBasePriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lBasePriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CreateTime dispatches through IMSMQQueueInfo's vtable slot 25.
-func (self *IMSMQQueueInfo) Get_CreateTime(pvarCreateTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_CreateTime(pvarCreateTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarCreateTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ModifyTime dispatches through IMSMQQueueInfo's vtable slot 26.
-func (self *IMSMQQueueInfo) Get_ModifyTime(pvarModifyTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_ModifyTime(pvarModifyTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarModifyTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Authenticate dispatches through IMSMQQueueInfo's vtable slot 27.
-func (self *IMSMQQueueInfo) Get_Authenticate(plAuthenticate *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_Authenticate(plAuthenticate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthenticate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Authenticate dispatches through IMSMQQueueInfo's vtable slot 28.
-func (self *IMSMQQueueInfo) Put_Authenticate(lAuthenticate int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_Authenticate(lAuthenticate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lAuthenticate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_JournalQuota dispatches through IMSMQQueueInfo's vtable slot 29.
-func (self *IMSMQQueueInfo) Get_JournalQuota(plJournalQuota *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_JournalQuota(plJournalQuota *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournalQuota)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_JournalQuota dispatches through IMSMQQueueInfo's vtable slot 30.
-func (self *IMSMQQueueInfo) Put_JournalQuota(lJournalQuota int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Put_JournalQuota(lJournalQuota int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(lJournalQuota))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsWorldReadable dispatches through IMSMQQueueInfo's vtable slot 31.
-func (self *IMSMQQueueInfo) Get_IsWorldReadable(pisWorldReadable *int16) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Get_IsWorldReadable(pisWorldReadable *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through IMSMQQueueInfo's vtable slot 32.
-func (self *IMSMQQueueInfo) Create(IsTransactional *systemvariant.VARIANT, IsWorldReadable *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Create(IsTransactional *systemvariant.VARIANT, IsWorldReadable *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsTransactional)), uintptr(unsafe.Pointer(IsWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IMSMQQueueInfo's vtable slot 33.
-func (self *IMSMQQueueInfo) Delete() foundation.HRESULT {
+func (self *IMSMQQueueInfo) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Open dispatches through IMSMQQueueInfo's vtable slot 34.
-func (self *IMSMQQueueInfo) Open(Access int32, ShareMode int32, ppq **IMSMQQueue) foundation.HRESULT {
+func (self *IMSMQQueueInfo) Open(Access int32, ShareMode int32, ppq **IMSMQQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Access), uintptr(ShareMode), uintptr(unsafe.Pointer(ppq)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IMSMQQueueInfo's vtable slot 35.
-func (self *IMSMQQueueInfo) Refresh() foundation.HRESULT {
+func (self *IMSMQQueueInfo) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through IMSMQQueueInfo's vtable slot 36.
-func (self *IMSMQQueueInfo) Update() foundation.HRESULT {
+func (self *IMSMQQueueInfo) Update() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: fd174a80-89cf-11d2-b0f2-00e02c074f6b
@@ -3037,201 +3037,201 @@ type IMSMQQueueInfo2 struct {
 var IID_IMSMQQueueInfo2 = win32.GUID{Data1: 0xfd174a80, Data2: 0x89cf, Data3: 0x11d2, Data4: [8]byte{0xb0, 0xf2, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_QueueGuid dispatches through IMSMQQueueInfo2's vtable slot 7.
-func (self *IMSMQQueueInfo2) Get_QueueGuid(pbstrGuidQueue *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_QueueGuid(pbstrGuidQueue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceTypeGuid dispatches through IMSMQQueueInfo2's vtable slot 8.
-func (self *IMSMQQueueInfo2) Get_ServiceTypeGuid(pbstrGuidServiceType *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_ServiceTypeGuid(pbstrGuidServiceType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidServiceType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ServiceTypeGuid dispatches through IMSMQQueueInfo2's vtable slot 9.
-func (self *IMSMQQueueInfo2) Put_ServiceTypeGuid(bstrGuidServiceType foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_ServiceTypeGuid(bstrGuidServiceType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuidServiceType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Label dispatches through IMSMQQueueInfo2's vtable slot 10.
-func (self *IMSMQQueueInfo2) Get_Label(pbstrLabel *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_Label(pbstrLabel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Label dispatches through IMSMQQueueInfo2's vtable slot 11.
-func (self *IMSMQQueueInfo2) Put_Label(bstrLabel foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_Label(bstrLabel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PathName dispatches through IMSMQQueueInfo2's vtable slot 12.
-func (self *IMSMQQueueInfo2) Get_PathName(pbstrPathName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_PathName(pbstrPathName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PathName dispatches through IMSMQQueueInfo2's vtable slot 13.
-func (self *IMSMQQueueInfo2) Put_PathName(bstrPathName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_PathName(bstrPathName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FormatName dispatches through IMSMQQueueInfo2's vtable slot 14.
-func (self *IMSMQQueueInfo2) Get_FormatName(pbstrFormatName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_FormatName(pbstrFormatName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_FormatName dispatches through IMSMQQueueInfo2's vtable slot 15.
-func (self *IMSMQQueueInfo2) Put_FormatName(bstrFormatName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_FormatName(bstrFormatName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsTransactional dispatches through IMSMQQueueInfo2's vtable slot 16.
-func (self *IMSMQQueueInfo2) Get_IsTransactional(pisTransactional *int16) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_IsTransactional(pisTransactional *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisTransactional)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivLevel dispatches through IMSMQQueueInfo2's vtable slot 17.
-func (self *IMSMQQueueInfo2) Get_PrivLevel(plPrivLevel *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_PrivLevel(plPrivLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrivLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PrivLevel dispatches through IMSMQQueueInfo2's vtable slot 18.
-func (self *IMSMQQueueInfo2) Put_PrivLevel(lPrivLevel int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_PrivLevel(lPrivLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lPrivLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Journal dispatches through IMSMQQueueInfo2's vtable slot 19.
-func (self *IMSMQQueueInfo2) Get_Journal(plJournal *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_Journal(plJournal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Journal dispatches through IMSMQQueueInfo2's vtable slot 20.
-func (self *IMSMQQueueInfo2) Put_Journal(lJournal int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_Journal(lJournal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lJournal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Quota dispatches through IMSMQQueueInfo2's vtable slot 21.
-func (self *IMSMQQueueInfo2) Get_Quota(plQuota *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_Quota(plQuota *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plQuota)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Quota dispatches through IMSMQQueueInfo2's vtable slot 22.
-func (self *IMSMQQueueInfo2) Put_Quota(lQuota int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_Quota(lQuota int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(lQuota))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BasePriority dispatches through IMSMQQueueInfo2's vtable slot 23.
-func (self *IMSMQQueueInfo2) Get_BasePriority(plBasePriority *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_BasePriority(plBasePriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBasePriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_BasePriority dispatches through IMSMQQueueInfo2's vtable slot 24.
-func (self *IMSMQQueueInfo2) Put_BasePriority(lBasePriority int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_BasePriority(lBasePriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lBasePriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CreateTime dispatches through IMSMQQueueInfo2's vtable slot 25.
-func (self *IMSMQQueueInfo2) Get_CreateTime(pvarCreateTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_CreateTime(pvarCreateTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarCreateTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ModifyTime dispatches through IMSMQQueueInfo2's vtable slot 26.
-func (self *IMSMQQueueInfo2) Get_ModifyTime(pvarModifyTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_ModifyTime(pvarModifyTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarModifyTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Authenticate dispatches through IMSMQQueueInfo2's vtable slot 27.
-func (self *IMSMQQueueInfo2) Get_Authenticate(plAuthenticate *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_Authenticate(plAuthenticate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthenticate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Authenticate dispatches through IMSMQQueueInfo2's vtable slot 28.
-func (self *IMSMQQueueInfo2) Put_Authenticate(lAuthenticate int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_Authenticate(lAuthenticate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lAuthenticate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_JournalQuota dispatches through IMSMQQueueInfo2's vtable slot 29.
-func (self *IMSMQQueueInfo2) Get_JournalQuota(plJournalQuota *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_JournalQuota(plJournalQuota *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournalQuota)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_JournalQuota dispatches through IMSMQQueueInfo2's vtable slot 30.
-func (self *IMSMQQueueInfo2) Put_JournalQuota(lJournalQuota int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Put_JournalQuota(lJournalQuota int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(lJournalQuota))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsWorldReadable dispatches through IMSMQQueueInfo2's vtable slot 31.
-func (self *IMSMQQueueInfo2) Get_IsWorldReadable(pisWorldReadable *int16) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_IsWorldReadable(pisWorldReadable *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through IMSMQQueueInfo2's vtable slot 32.
-func (self *IMSMQQueueInfo2) Create(IsTransactional *systemvariant.VARIANT, IsWorldReadable *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Create(IsTransactional *systemvariant.VARIANT, IsWorldReadable *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsTransactional)), uintptr(unsafe.Pointer(IsWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IMSMQQueueInfo2's vtable slot 33.
-func (self *IMSMQQueueInfo2) Delete() foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Open dispatches through IMSMQQueueInfo2's vtable slot 34.
-func (self *IMSMQQueueInfo2) Open(Access int32, ShareMode int32, ppq **IMSMQQueue2) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Open(Access int32, ShareMode int32, ppq **IMSMQQueue2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Access), uintptr(ShareMode), uintptr(unsafe.Pointer(ppq)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IMSMQQueueInfo2's vtable slot 35.
-func (self *IMSMQQueueInfo2) Refresh() foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through IMSMQQueueInfo2's vtable slot 36.
-func (self *IMSMQQueueInfo2) Update() foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Update() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PathNameDNS dispatches through IMSMQQueueInfo2's vtable slot 37.
-func (self *IMSMQQueueInfo2) Get_PathNameDNS(pbstrPathNameDNS *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_PathNameDNS(pbstrPathNameDNS *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPathNameDNS)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQueueInfo2's vtable slot 38.
-func (self *IMSMQQueueInfo2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Security dispatches through IMSMQQueueInfo2's vtable slot 39.
-func (self *IMSMQQueueInfo2) Get_Security(pvarSecurity *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo2) Get_Security(pvarSecurity *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSecurity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b1d-2168-11d3-898c-00e02c074f6b
@@ -3243,231 +3243,231 @@ type IMSMQQueueInfo3 struct {
 var IID_IMSMQQueueInfo3 = win32.GUID{Data1: 0xeba96b1d, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_QueueGuid dispatches through IMSMQQueueInfo3's vtable slot 7.
-func (self *IMSMQQueueInfo3) Get_QueueGuid(pbstrGuidQueue *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_QueueGuid(pbstrGuidQueue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceTypeGuid dispatches through IMSMQQueueInfo3's vtable slot 8.
-func (self *IMSMQQueueInfo3) Get_ServiceTypeGuid(pbstrGuidServiceType *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_ServiceTypeGuid(pbstrGuidServiceType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidServiceType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ServiceTypeGuid dispatches through IMSMQQueueInfo3's vtable slot 9.
-func (self *IMSMQQueueInfo3) Put_ServiceTypeGuid(bstrGuidServiceType foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_ServiceTypeGuid(bstrGuidServiceType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuidServiceType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Label dispatches through IMSMQQueueInfo3's vtable slot 10.
-func (self *IMSMQQueueInfo3) Get_Label(pbstrLabel *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_Label(pbstrLabel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Label dispatches through IMSMQQueueInfo3's vtable slot 11.
-func (self *IMSMQQueueInfo3) Put_Label(bstrLabel foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_Label(bstrLabel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PathName dispatches through IMSMQQueueInfo3's vtable slot 12.
-func (self *IMSMQQueueInfo3) Get_PathName(pbstrPathName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_PathName(pbstrPathName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PathName dispatches through IMSMQQueueInfo3's vtable slot 13.
-func (self *IMSMQQueueInfo3) Put_PathName(bstrPathName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_PathName(bstrPathName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FormatName dispatches through IMSMQQueueInfo3's vtable slot 14.
-func (self *IMSMQQueueInfo3) Get_FormatName(pbstrFormatName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_FormatName(pbstrFormatName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_FormatName dispatches through IMSMQQueueInfo3's vtable slot 15.
-func (self *IMSMQQueueInfo3) Put_FormatName(bstrFormatName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_FormatName(bstrFormatName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsTransactional dispatches through IMSMQQueueInfo3's vtable slot 16.
-func (self *IMSMQQueueInfo3) Get_IsTransactional(pisTransactional *int16) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_IsTransactional(pisTransactional *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisTransactional)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivLevel dispatches through IMSMQQueueInfo3's vtable slot 17.
-func (self *IMSMQQueueInfo3) Get_PrivLevel(plPrivLevel *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_PrivLevel(plPrivLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrivLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PrivLevel dispatches through IMSMQQueueInfo3's vtable slot 18.
-func (self *IMSMQQueueInfo3) Put_PrivLevel(lPrivLevel int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_PrivLevel(lPrivLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lPrivLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Journal dispatches through IMSMQQueueInfo3's vtable slot 19.
-func (self *IMSMQQueueInfo3) Get_Journal(plJournal *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_Journal(plJournal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Journal dispatches through IMSMQQueueInfo3's vtable slot 20.
-func (self *IMSMQQueueInfo3) Put_Journal(lJournal int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_Journal(lJournal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lJournal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Quota dispatches through IMSMQQueueInfo3's vtable slot 21.
-func (self *IMSMQQueueInfo3) Get_Quota(plQuota *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_Quota(plQuota *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plQuota)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Quota dispatches through IMSMQQueueInfo3's vtable slot 22.
-func (self *IMSMQQueueInfo3) Put_Quota(lQuota int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_Quota(lQuota int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(lQuota))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BasePriority dispatches through IMSMQQueueInfo3's vtable slot 23.
-func (self *IMSMQQueueInfo3) Get_BasePriority(plBasePriority *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_BasePriority(plBasePriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBasePriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_BasePriority dispatches through IMSMQQueueInfo3's vtable slot 24.
-func (self *IMSMQQueueInfo3) Put_BasePriority(lBasePriority int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_BasePriority(lBasePriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lBasePriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CreateTime dispatches through IMSMQQueueInfo3's vtable slot 25.
-func (self *IMSMQQueueInfo3) Get_CreateTime(pvarCreateTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_CreateTime(pvarCreateTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarCreateTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ModifyTime dispatches through IMSMQQueueInfo3's vtable slot 26.
-func (self *IMSMQQueueInfo3) Get_ModifyTime(pvarModifyTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_ModifyTime(pvarModifyTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarModifyTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Authenticate dispatches through IMSMQQueueInfo3's vtable slot 27.
-func (self *IMSMQQueueInfo3) Get_Authenticate(plAuthenticate *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_Authenticate(plAuthenticate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthenticate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Authenticate dispatches through IMSMQQueueInfo3's vtable slot 28.
-func (self *IMSMQQueueInfo3) Put_Authenticate(lAuthenticate int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_Authenticate(lAuthenticate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lAuthenticate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_JournalQuota dispatches through IMSMQQueueInfo3's vtable slot 29.
-func (self *IMSMQQueueInfo3) Get_JournalQuota(plJournalQuota *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_JournalQuota(plJournalQuota *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournalQuota)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_JournalQuota dispatches through IMSMQQueueInfo3's vtable slot 30.
-func (self *IMSMQQueueInfo3) Put_JournalQuota(lJournalQuota int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_JournalQuota(lJournalQuota int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(lJournalQuota))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsWorldReadable dispatches through IMSMQQueueInfo3's vtable slot 31.
-func (self *IMSMQQueueInfo3) Get_IsWorldReadable(pisWorldReadable *int16) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_IsWorldReadable(pisWorldReadable *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through IMSMQQueueInfo3's vtable slot 32.
-func (self *IMSMQQueueInfo3) Create(IsTransactional *systemvariant.VARIANT, IsWorldReadable *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Create(IsTransactional *systemvariant.VARIANT, IsWorldReadable *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsTransactional)), uintptr(unsafe.Pointer(IsWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IMSMQQueueInfo3's vtable slot 33.
-func (self *IMSMQQueueInfo3) Delete() foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Open dispatches through IMSMQQueueInfo3's vtable slot 34.
-func (self *IMSMQQueueInfo3) Open(Access int32, ShareMode int32, ppq **IMSMQQueue3) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Open(Access int32, ShareMode int32, ppq **IMSMQQueue3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Access), uintptr(ShareMode), uintptr(unsafe.Pointer(ppq)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IMSMQQueueInfo3's vtable slot 35.
-func (self *IMSMQQueueInfo3) Refresh() foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through IMSMQQueueInfo3's vtable slot 36.
-func (self *IMSMQQueueInfo3) Update() foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Update() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PathNameDNS dispatches through IMSMQQueueInfo3's vtable slot 37.
-func (self *IMSMQQueueInfo3) Get_PathNameDNS(pbstrPathNameDNS *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_PathNameDNS(pbstrPathNameDNS *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPathNameDNS)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQueueInfo3's vtable slot 38.
-func (self *IMSMQQueueInfo3) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Security dispatches through IMSMQQueueInfo3's vtable slot 39.
-func (self *IMSMQQueueInfo3) Get_Security(pvarSecurity *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_Security(pvarSecurity *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSecurity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsTransactional2 dispatches through IMSMQQueueInfo3's vtable slot 41.
-func (self *IMSMQQueueInfo3) Get_IsTransactional2(pisTransactional *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_IsTransactional2(pisTransactional *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisTransactional)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsWorldReadable2 dispatches through IMSMQQueueInfo3's vtable slot 42.
-func (self *IMSMQQueueInfo3) Get_IsWorldReadable2(pisWorldReadable *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_IsWorldReadable2(pisWorldReadable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MulticastAddress dispatches through IMSMQQueueInfo3's vtable slot 43.
-func (self *IMSMQQueueInfo3) Get_MulticastAddress(pbstrMulticastAddress *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_MulticastAddress(pbstrMulticastAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMulticastAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MulticastAddress dispatches through IMSMQQueueInfo3's vtable slot 44.
-func (self *IMSMQQueueInfo3) Put_MulticastAddress(bstrMulticastAddress foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Put_MulticastAddress(bstrMulticastAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMulticastAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ADsPath dispatches through IMSMQQueueInfo3's vtable slot 45.
-func (self *IMSMQQueueInfo3) Get_ADsPath(pbstrADsPath *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo3) Get_ADsPath(pbstrADsPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrADsPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b21-2168-11d3-898c-00e02c074f6b
@@ -3479,231 +3479,231 @@ type IMSMQQueueInfo4 struct {
 var IID_IMSMQQueueInfo4 = win32.GUID{Data1: 0xeba96b21, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_QueueGuid dispatches through IMSMQQueueInfo4's vtable slot 7.
-func (self *IMSMQQueueInfo4) Get_QueueGuid(pbstrGuidQueue *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_QueueGuid(pbstrGuidQueue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceTypeGuid dispatches through IMSMQQueueInfo4's vtable slot 8.
-func (self *IMSMQQueueInfo4) Get_ServiceTypeGuid(pbstrGuidServiceType *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_ServiceTypeGuid(pbstrGuidServiceType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidServiceType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ServiceTypeGuid dispatches through IMSMQQueueInfo4's vtable slot 9.
-func (self *IMSMQQueueInfo4) Put_ServiceTypeGuid(bstrGuidServiceType foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_ServiceTypeGuid(bstrGuidServiceType foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGuidServiceType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Label dispatches through IMSMQQueueInfo4's vtable slot 10.
-func (self *IMSMQQueueInfo4) Get_Label(pbstrLabel *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_Label(pbstrLabel *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Label dispatches through IMSMQQueueInfo4's vtable slot 11.
-func (self *IMSMQQueueInfo4) Put_Label(bstrLabel foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_Label(bstrLabel foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrLabel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PathName dispatches through IMSMQQueueInfo4's vtable slot 12.
-func (self *IMSMQQueueInfo4) Get_PathName(pbstrPathName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_PathName(pbstrPathName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PathName dispatches through IMSMQQueueInfo4's vtable slot 13.
-func (self *IMSMQQueueInfo4) Put_PathName(bstrPathName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_PathName(bstrPathName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FormatName dispatches through IMSMQQueueInfo4's vtable slot 14.
-func (self *IMSMQQueueInfo4) Get_FormatName(pbstrFormatName *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_FormatName(pbstrFormatName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_FormatName dispatches through IMSMQQueueInfo4's vtable slot 15.
-func (self *IMSMQQueueInfo4) Put_FormatName(bstrFormatName foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_FormatName(bstrFormatName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFormatName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsTransactional dispatches through IMSMQQueueInfo4's vtable slot 16.
-func (self *IMSMQQueueInfo4) Get_IsTransactional(pisTransactional *int16) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_IsTransactional(pisTransactional *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisTransactional)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivLevel dispatches through IMSMQQueueInfo4's vtable slot 17.
-func (self *IMSMQQueueInfo4) Get_PrivLevel(plPrivLevel *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_PrivLevel(plPrivLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPrivLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PrivLevel dispatches through IMSMQQueueInfo4's vtable slot 18.
-func (self *IMSMQQueueInfo4) Put_PrivLevel(lPrivLevel int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_PrivLevel(lPrivLevel int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lPrivLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Journal dispatches through IMSMQQueueInfo4's vtable slot 19.
-func (self *IMSMQQueueInfo4) Get_Journal(plJournal *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_Journal(plJournal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Journal dispatches through IMSMQQueueInfo4's vtable slot 20.
-func (self *IMSMQQueueInfo4) Put_Journal(lJournal int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_Journal(lJournal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lJournal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Quota dispatches through IMSMQQueueInfo4's vtable slot 21.
-func (self *IMSMQQueueInfo4) Get_Quota(plQuota *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_Quota(plQuota *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plQuota)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Quota dispatches through IMSMQQueueInfo4's vtable slot 22.
-func (self *IMSMQQueueInfo4) Put_Quota(lQuota int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_Quota(lQuota int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(lQuota))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BasePriority dispatches through IMSMQQueueInfo4's vtable slot 23.
-func (self *IMSMQQueueInfo4) Get_BasePriority(plBasePriority *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_BasePriority(plBasePriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBasePriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_BasePriority dispatches through IMSMQQueueInfo4's vtable slot 24.
-func (self *IMSMQQueueInfo4) Put_BasePriority(lBasePriority int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_BasePriority(lBasePriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lBasePriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CreateTime dispatches through IMSMQQueueInfo4's vtable slot 25.
-func (self *IMSMQQueueInfo4) Get_CreateTime(pvarCreateTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_CreateTime(pvarCreateTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarCreateTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ModifyTime dispatches through IMSMQQueueInfo4's vtable slot 26.
-func (self *IMSMQQueueInfo4) Get_ModifyTime(pvarModifyTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_ModifyTime(pvarModifyTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarModifyTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Authenticate dispatches through IMSMQQueueInfo4's vtable slot 27.
-func (self *IMSMQQueueInfo4) Get_Authenticate(plAuthenticate *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_Authenticate(plAuthenticate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAuthenticate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Authenticate dispatches through IMSMQQueueInfo4's vtable slot 28.
-func (self *IMSMQQueueInfo4) Put_Authenticate(lAuthenticate int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_Authenticate(lAuthenticate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lAuthenticate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_JournalQuota dispatches through IMSMQQueueInfo4's vtable slot 29.
-func (self *IMSMQQueueInfo4) Get_JournalQuota(plJournalQuota *int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_JournalQuota(plJournalQuota *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournalQuota)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_JournalQuota dispatches through IMSMQQueueInfo4's vtable slot 30.
-func (self *IMSMQQueueInfo4) Put_JournalQuota(lJournalQuota int32) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_JournalQuota(lJournalQuota int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(lJournalQuota))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsWorldReadable dispatches through IMSMQQueueInfo4's vtable slot 31.
-func (self *IMSMQQueueInfo4) Get_IsWorldReadable(pisWorldReadable *int16) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_IsWorldReadable(pisWorldReadable *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through IMSMQQueueInfo4's vtable slot 32.
-func (self *IMSMQQueueInfo4) Create(IsTransactional *systemvariant.VARIANT, IsWorldReadable *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Create(IsTransactional *systemvariant.VARIANT, IsWorldReadable *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsTransactional)), uintptr(unsafe.Pointer(IsWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IMSMQQueueInfo4's vtable slot 33.
-func (self *IMSMQQueueInfo4) Delete() foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Open dispatches through IMSMQQueueInfo4's vtable slot 34.
-func (self *IMSMQQueueInfo4) Open(Access int32, ShareMode int32, ppq **IMSMQQueue4) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Open(Access int32, ShareMode int32, ppq **IMSMQQueue4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Access), uintptr(ShareMode), uintptr(unsafe.Pointer(ppq)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IMSMQQueueInfo4's vtable slot 35.
-func (self *IMSMQQueueInfo4) Refresh() foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through IMSMQQueueInfo4's vtable slot 36.
-func (self *IMSMQQueueInfo4) Update() foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Update() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PathNameDNS dispatches through IMSMQQueueInfo4's vtable slot 37.
-func (self *IMSMQQueueInfo4) Get_PathNameDNS(pbstrPathNameDNS *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_PathNameDNS(pbstrPathNameDNS *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPathNameDNS)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQueueInfo4's vtable slot 38.
-func (self *IMSMQQueueInfo4) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Security dispatches through IMSMQQueueInfo4's vtable slot 39.
-func (self *IMSMQQueueInfo4) Get_Security(pvarSecurity *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_Security(pvarSecurity *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSecurity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsTransactional2 dispatches through IMSMQQueueInfo4's vtable slot 41.
-func (self *IMSMQQueueInfo4) Get_IsTransactional2(pisTransactional *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_IsTransactional2(pisTransactional *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisTransactional)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsWorldReadable2 dispatches through IMSMQQueueInfo4's vtable slot 42.
-func (self *IMSMQQueueInfo4) Get_IsWorldReadable2(pisWorldReadable *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_IsWorldReadable2(pisWorldReadable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisWorldReadable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MulticastAddress dispatches through IMSMQQueueInfo4's vtable slot 43.
-func (self *IMSMQQueueInfo4) Get_MulticastAddress(pbstrMulticastAddress *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_MulticastAddress(pbstrMulticastAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMulticastAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MulticastAddress dispatches through IMSMQQueueInfo4's vtable slot 44.
-func (self *IMSMQQueueInfo4) Put_MulticastAddress(bstrMulticastAddress foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Put_MulticastAddress(bstrMulticastAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMulticastAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ADsPath dispatches through IMSMQQueueInfo4's vtable slot 45.
-func (self *IMSMQQueueInfo4) Get_ADsPath(pbstrADsPath *foundation.BSTR) foundation.HRESULT {
+func (self *IMSMQQueueInfo4) Get_ADsPath(pbstrADsPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrADsPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e07d-dccd-11d0-aa4b-0060970debae
@@ -3715,15 +3715,15 @@ type IMSMQQueueInfos struct {
 var IID_IMSMQQueueInfos = win32.GUID{Data1: 0xd7d6e07d, Data2: 0xdccd, Data3: 0x11d0, Data4: [8]byte{0xaa, 0x4b, 0x00, 0x60, 0x97, 0x0d, 0xeb, 0xae}}
 
 // Reset dispatches through IMSMQQueueInfos's vtable slot 7.
-func (self *IMSMQQueueInfos) Reset() foundation.HRESULT {
+func (self *IMSMQQueueInfos) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IMSMQQueueInfos's vtable slot 8.
-func (self *IMSMQQueueInfos) Next(ppqinfoNext **IMSMQQueueInfo) foundation.HRESULT {
+func (self *IMSMQQueueInfos) Next(ppqinfoNext **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoNext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b0f-2168-11d3-898c-00e02c074f6b
@@ -3735,21 +3735,21 @@ type IMSMQQueueInfos2 struct {
 var IID_IMSMQQueueInfos2 = win32.GUID{Data1: 0xeba96b0f, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Reset dispatches through IMSMQQueueInfos2's vtable slot 7.
-func (self *IMSMQQueueInfos2) Reset() foundation.HRESULT {
+func (self *IMSMQQueueInfos2) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IMSMQQueueInfos2's vtable slot 8.
-func (self *IMSMQQueueInfos2) Next(ppqinfoNext **IMSMQQueueInfo2) foundation.HRESULT {
+func (self *IMSMQQueueInfos2) Next(ppqinfoNext **IMSMQQueueInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoNext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQueueInfos2's vtable slot 9.
-func (self *IMSMQQueueInfos2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQueueInfos2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b1e-2168-11d3-898c-00e02c074f6b
@@ -3761,21 +3761,21 @@ type IMSMQQueueInfos3 struct {
 var IID_IMSMQQueueInfos3 = win32.GUID{Data1: 0xeba96b1e, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Reset dispatches through IMSMQQueueInfos3's vtable slot 7.
-func (self *IMSMQQueueInfos3) Reset() foundation.HRESULT {
+func (self *IMSMQQueueInfos3) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IMSMQQueueInfos3's vtable slot 8.
-func (self *IMSMQQueueInfos3) Next(ppqinfoNext **IMSMQQueueInfo3) foundation.HRESULT {
+func (self *IMSMQQueueInfos3) Next(ppqinfoNext **IMSMQQueueInfo3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoNext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQueueInfos3's vtable slot 9.
-func (self *IMSMQQueueInfos3) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQueueInfos3) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b22-2168-11d3-898c-00e02c074f6b
@@ -3787,21 +3787,21 @@ type IMSMQQueueInfos4 struct {
 var IID_IMSMQQueueInfos4 = win32.GUID{Data1: 0xeba96b22, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Reset dispatches through IMSMQQueueInfos4's vtable slot 7.
-func (self *IMSMQQueueInfos4) Reset() foundation.HRESULT {
+func (self *IMSMQQueueInfos4) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IMSMQQueueInfos4's vtable slot 8.
-func (self *IMSMQQueueInfos4) Next(ppqinfoNext **IMSMQQueueInfo4) foundation.HRESULT {
+func (self *IMSMQQueueInfos4) Next(ppqinfoNext **IMSMQQueueInfo4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoNext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQQueueInfos4's vtable slot 9.
-func (self *IMSMQQueueInfos4) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQQueueInfos4) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7fbe7759-5760-444d-b8a5-5e7ab9a84cce
@@ -3813,21 +3813,21 @@ type IMSMQQueueManagement struct {
 var IID_IMSMQQueueManagement = win32.GUID{Data1: 0x7fbe7759, Data2: 0x5760, Data3: 0x444d, Data4: [8]byte{0xb8, 0xa5, 0x5e, 0x7a, 0xb9, 0xa8, 0x4c, 0xce}}
 
 // Get_JournalMessageCount dispatches through IMSMQQueueManagement's vtable slot 16.
-func (self *IMSMQQueueManagement) Get_JournalMessageCount(plJournalMessageCount *int32) foundation.HRESULT {
+func (self *IMSMQQueueManagement) Get_JournalMessageCount(plJournalMessageCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plJournalMessageCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BytesInJournal dispatches through IMSMQQueueManagement's vtable slot 17.
-func (self *IMSMQQueueManagement) Get_BytesInJournal(pvBytesInJournal *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueManagement) Get_BytesInJournal(pvBytesInJournal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvBytesInJournal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EodGetReceiveInfo dispatches through IMSMQQueueManagement's vtable slot 18.
-func (self *IMSMQQueueManagement) EodGetReceiveInfo(pvCollection *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQQueueManagement) EodGetReceiveInfo(pvCollection *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e07f-dccd-11d0-aa4b-0060970debae
@@ -3839,21 +3839,21 @@ type IMSMQTransaction struct {
 var IID_IMSMQTransaction = win32.GUID{Data1: 0xd7d6e07f, Data2: 0xdccd, Data3: 0x11d0, Data4: [8]byte{0xaa, 0x4b, 0x00, 0x60, 0x97, 0x0d, 0xeb, 0xae}}
 
 // Get_Transaction dispatches through IMSMQTransaction's vtable slot 7.
-func (self *IMSMQTransaction) Get_Transaction(plTransaction *int32) foundation.HRESULT {
+func (self *IMSMQTransaction) Get_Transaction(plTransaction *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Commit dispatches through IMSMQTransaction's vtable slot 8.
-func (self *IMSMQTransaction) Commit(fRetaining *systemvariant.VARIANT, grfTC *systemvariant.VARIANT, grfRM *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQTransaction) Commit(fRetaining *systemvariant.VARIANT, grfTC *systemvariant.VARIANT, grfRM *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fRetaining)), uintptr(unsafe.Pointer(grfTC)), uintptr(unsafe.Pointer(grfRM)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IMSMQTransaction's vtable slot 9.
-func (self *IMSMQTransaction) Abort(fRetaining *systemvariant.VARIANT, fAsync *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQTransaction) Abort(fRetaining *systemvariant.VARIANT, fAsync *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fRetaining)), uintptr(unsafe.Pointer(fAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2ce0c5b0-6e67-11d2-b0e6-00e02c074f6b
@@ -3865,9 +3865,9 @@ type IMSMQTransaction2 struct {
 var IID_IMSMQTransaction2 = win32.GUID{Data1: 0x2ce0c5b0, Data2: 0x6e67, Data3: 0x11d2, Data4: [8]byte{0xb0, 0xe6, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_Properties dispatches through IMSMQTransaction2's vtable slot 11.
-func (self *IMSMQTransaction2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQTransaction2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b13-2168-11d3-898c-00e02c074f6b
@@ -3879,9 +3879,9 @@ type IMSMQTransaction3 struct {
 var IID_IMSMQTransaction3 = win32.GUID{Data1: 0xeba96b13, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // Get_ITransaction dispatches through IMSMQTransaction3's vtable slot 12.
-func (self *IMSMQTransaction3) Get_ITransaction(pvarITransaction *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMSMQTransaction3) Get_ITransaction(pvarITransaction *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarITransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e083-dccd-11d0-aa4b-0060970debae
@@ -3893,9 +3893,9 @@ type IMSMQTransactionDispenser struct {
 var IID_IMSMQTransactionDispenser = win32.GUID{Data1: 0xd7d6e083, Data2: 0xdccd, Data3: 0x11d0, Data4: [8]byte{0xaa, 0x4b, 0x00, 0x60, 0x97, 0x0d, 0xeb, 0xae}}
 
 // BeginTransaction dispatches through IMSMQTransactionDispenser's vtable slot 7.
-func (self *IMSMQTransactionDispenser) BeginTransaction(ptransaction **IMSMQTransaction) foundation.HRESULT {
+func (self *IMSMQTransactionDispenser) BeginTransaction(ptransaction **IMSMQTransaction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b11-2168-11d3-898c-00e02c074f6b
@@ -3907,15 +3907,15 @@ type IMSMQTransactionDispenser2 struct {
 var IID_IMSMQTransactionDispenser2 = win32.GUID{Data1: 0xeba96b11, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // BeginTransaction dispatches through IMSMQTransactionDispenser2's vtable slot 7.
-func (self *IMSMQTransactionDispenser2) BeginTransaction(ptransaction **IMSMQTransaction2) foundation.HRESULT {
+func (self *IMSMQTransactionDispenser2) BeginTransaction(ptransaction **IMSMQTransaction2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQTransactionDispenser2's vtable slot 8.
-func (self *IMSMQTransactionDispenser2) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQTransactionDispenser2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eba96b15-2168-11d3-898c-00e02c074f6b
@@ -3927,15 +3927,15 @@ type IMSMQTransactionDispenser3 struct {
 var IID_IMSMQTransactionDispenser3 = win32.GUID{Data1: 0xeba96b15, Data2: 0x2168, Data3: 0x11d3, Data4: [8]byte{0x89, 0x8c, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
 
 // BeginTransaction dispatches through IMSMQTransactionDispenser3's vtable slot 7.
-func (self *IMSMQTransactionDispenser3) BeginTransaction(ptransaction **IMSMQTransaction3) foundation.HRESULT {
+func (self *IMSMQTransactionDispenser3) BeginTransaction(ptransaction **IMSMQTransaction3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IMSMQTransactionDispenser3's vtable slot 8.
-func (self *IMSMQTransactionDispenser3) Get_Properties(ppcolProperties **systemcom.IDispatch) foundation.HRESULT {
+func (self *IMSMQTransactionDispenser3) Get_Properties(ppcolProperties **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcolProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d7d6e078-dccd-11d0-aa4b-0060970debae

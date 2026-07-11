@@ -36,8 +36,8 @@ type BINDINFO struct {
 }
 
 // BINDPTR: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-bindptr
-// BINDPTR is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BINDPTR is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BINDPTR struct {
 	Data [1]uint64
 }
@@ -145,8 +145,8 @@ type CUSTDATAITEM struct {
 }
 
 // CY: https://learn.microsoft.com/windows/win32/api/wtypes/ns-wtypes-cy~r1
-// CY is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CY is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CY struct {
 	Data [1]uint64
 }
@@ -191,8 +191,8 @@ type DWORD_SIZEDARR struct {
 	PData  *uint32
 }
 
-// ELEMDESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// ELEMDESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type ELEMDESC_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -259,8 +259,8 @@ type FUNCDESC struct {
 	WFuncFlags        FUNCFLAGS
 }
 
-// GDI_OBJECT_u_e__Struct is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GDI_OBJECT_u_e__Struct is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GDI_OBJECT_u_e__Struct struct {
 	Data [1]uint64
 }
@@ -392,8 +392,8 @@ type STATSTG struct {
 	Reserved          uint32
 }
 
-// STGMEDIUM_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STGMEDIUM_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STGMEDIUM_u_e__Union struct {
 	Data [1]uint64
 }
@@ -444,8 +444,8 @@ type TYPEATTR struct {
 	IdldescType      IDLDESC
 }
 
-// TYPEDESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TYPEDESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TYPEDESC_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -456,8 +456,8 @@ type TYPEDESC struct {
 	Vt        systemvariant.VARENUM
 }
 
-// VARDESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VARDESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VARDESC_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -482,8 +482,8 @@ type WORD_SIZEDARR struct {
 	PData  *uint16
 }
 
-// UCLSSPEC_tagged_union_e__Struct is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// UCLSSPEC_tagged_union_e__Struct is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type UCLSSPEC_tagged_union_e__Struct struct {
 	Data [4]uint64
 }
@@ -499,8 +499,8 @@ type UserFLAG_STGMEDIUM struct {
 	Stgmed         UserSTGMEDIUM
 }
 
-// UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type UserSTGMEDIUM_STGMEDIUM_UNION_u_e__Struct struct {
 	Data [1]uint64
 }

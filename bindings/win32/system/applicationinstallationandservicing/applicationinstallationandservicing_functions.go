@@ -26,313 +26,313 @@ var (
 var (
 	procActivateActCtx                    = modKERNEL32.NewProc("ActivateActCtx")
 	procAddRefActCtx                      = modKERNEL32.NewProc("AddRefActCtx")
+	procCreateActCtx                      = modKERNEL32.NewProc("CreateActCtxW")
 	procCreateActCtxA                     = modKERNEL32.NewProc("CreateActCtxA")
-	procCreateActCtxW                     = modKERNEL32.NewProc("CreateActCtxW")
 	procDeactivateActCtx                  = modKERNEL32.NewProc("DeactivateActCtx")
 	procFindActCtxSectionGuid             = modKERNEL32.NewProc("FindActCtxSectionGuid")
+	procFindActCtxSectionString           = modKERNEL32.NewProc("FindActCtxSectionStringW")
 	procFindActCtxSectionStringA          = modKERNEL32.NewProc("FindActCtxSectionStringA")
-	procFindActCtxSectionStringW          = modKERNEL32.NewProc("FindActCtxSectionStringW")
 	procGetCurrentActCtx                  = modKERNEL32.NewProc("GetCurrentActCtx")
 	procQueryActCtxSettingsW              = modKERNEL32.NewProc("QueryActCtxSettingsW")
 	procQueryActCtxW                      = modKERNEL32.NewProc("QueryActCtxW")
 	procReleaseActCtx                     = modKERNEL32.NewProc("ReleaseActCtx")
 	procZombifyActCtx                     = modKERNEL32.NewProc("ZombifyActCtx")
+	procApplyDelta                        = modmsdelta.NewProc("ApplyDeltaW")
 	procApplyDeltaA                       = modmsdelta.NewProc("ApplyDeltaA")
-	procApplyDeltaW                       = modmsdelta.NewProc("ApplyDeltaW")
 	procDeltaFree                         = modmsdelta.NewProc("DeltaFree")
+	procGetDeltaInfo                      = modmsdelta.NewProc("GetDeltaInfoW")
 	procGetDeltaInfoA                     = modmsdelta.NewProc("GetDeltaInfoA")
-	procGetDeltaInfoW                     = modmsdelta.NewProc("GetDeltaInfoW")
+	procGetDeltaSignature                 = modmsdelta.NewProc("GetDeltaSignatureW")
 	procGetDeltaSignatureA                = modmsdelta.NewProc("GetDeltaSignatureA")
-	procGetDeltaSignatureW                = modmsdelta.NewProc("GetDeltaSignatureW")
+	procMsiAdvertiseProduct               = modmsi.NewProc("MsiAdvertiseProductW")
 	procMsiAdvertiseProductA              = modmsi.NewProc("MsiAdvertiseProductA")
+	procMsiAdvertiseProductEx             = modmsi.NewProc("MsiAdvertiseProductExW")
 	procMsiAdvertiseProductExA            = modmsi.NewProc("MsiAdvertiseProductExA")
-	procMsiAdvertiseProductExW            = modmsi.NewProc("MsiAdvertiseProductExW")
-	procMsiAdvertiseProductW              = modmsi.NewProc("MsiAdvertiseProductW")
+	procMsiAdvertiseScript                = modmsi.NewProc("MsiAdvertiseScriptW")
 	procMsiAdvertiseScriptA               = modmsi.NewProc("MsiAdvertiseScriptA")
-	procMsiAdvertiseScriptW               = modmsi.NewProc("MsiAdvertiseScriptW")
+	procMsiApplyMultiplePatches           = modmsi.NewProc("MsiApplyMultiplePatchesW")
 	procMsiApplyMultiplePatchesA          = modmsi.NewProc("MsiApplyMultiplePatchesA")
-	procMsiApplyMultiplePatchesW          = modmsi.NewProc("MsiApplyMultiplePatchesW")
+	procMsiApplyPatch                     = modmsi.NewProc("MsiApplyPatchW")
 	procMsiApplyPatchA                    = modmsi.NewProc("MsiApplyPatchA")
-	procMsiApplyPatchW                    = modmsi.NewProc("MsiApplyPatchW")
+	procMsiBeginTransaction               = modmsi.NewProc("MsiBeginTransactionW")
 	procMsiBeginTransactionA              = modmsi.NewProc("MsiBeginTransactionA")
-	procMsiBeginTransactionW              = modmsi.NewProc("MsiBeginTransactionW")
 	procMsiCloseAllHandles                = modmsi.NewProc("MsiCloseAllHandles")
 	procMsiCloseHandle                    = modmsi.NewProc("MsiCloseHandle")
+	procMsiCollectUserInfo                = modmsi.NewProc("MsiCollectUserInfoW")
 	procMsiCollectUserInfoA               = modmsi.NewProc("MsiCollectUserInfoA")
-	procMsiCollectUserInfoW               = modmsi.NewProc("MsiCollectUserInfoW")
+	procMsiConfigureFeature               = modmsi.NewProc("MsiConfigureFeatureW")
 	procMsiConfigureFeatureA              = modmsi.NewProc("MsiConfigureFeatureA")
-	procMsiConfigureFeatureW              = modmsi.NewProc("MsiConfigureFeatureW")
+	procMsiConfigureProduct               = modmsi.NewProc("MsiConfigureProductW")
 	procMsiConfigureProductA              = modmsi.NewProc("MsiConfigureProductA")
+	procMsiConfigureProductEx             = modmsi.NewProc("MsiConfigureProductExW")
 	procMsiConfigureProductExA            = modmsi.NewProc("MsiConfigureProductExA")
-	procMsiConfigureProductExW            = modmsi.NewProc("MsiConfigureProductExW")
-	procMsiConfigureProductW              = modmsi.NewProc("MsiConfigureProductW")
 	procMsiCreateRecord                   = modmsi.NewProc("MsiCreateRecord")
+	procMsiCreateTransformSummaryInfo     = modmsi.NewProc("MsiCreateTransformSummaryInfoW")
 	procMsiCreateTransformSummaryInfoA    = modmsi.NewProc("MsiCreateTransformSummaryInfoA")
-	procMsiCreateTransformSummaryInfoW    = modmsi.NewProc("MsiCreateTransformSummaryInfoW")
+	procMsiDatabaseApplyTransform         = modmsi.NewProc("MsiDatabaseApplyTransformW")
 	procMsiDatabaseApplyTransformA        = modmsi.NewProc("MsiDatabaseApplyTransformA")
-	procMsiDatabaseApplyTransformW        = modmsi.NewProc("MsiDatabaseApplyTransformW")
 	procMsiDatabaseCommit                 = modmsi.NewProc("MsiDatabaseCommit")
+	procMsiDatabaseExport                 = modmsi.NewProc("MsiDatabaseExportW")
 	procMsiDatabaseExportA                = modmsi.NewProc("MsiDatabaseExportA")
-	procMsiDatabaseExportW                = modmsi.NewProc("MsiDatabaseExportW")
+	procMsiDatabaseGenerateTransform      = modmsi.NewProc("MsiDatabaseGenerateTransformW")
 	procMsiDatabaseGenerateTransformA     = modmsi.NewProc("MsiDatabaseGenerateTransformA")
-	procMsiDatabaseGenerateTransformW     = modmsi.NewProc("MsiDatabaseGenerateTransformW")
+	procMsiDatabaseGetPrimaryKeys         = modmsi.NewProc("MsiDatabaseGetPrimaryKeysW")
 	procMsiDatabaseGetPrimaryKeysA        = modmsi.NewProc("MsiDatabaseGetPrimaryKeysA")
-	procMsiDatabaseGetPrimaryKeysW        = modmsi.NewProc("MsiDatabaseGetPrimaryKeysW")
+	procMsiDatabaseImport                 = modmsi.NewProc("MsiDatabaseImportW")
 	procMsiDatabaseImportA                = modmsi.NewProc("MsiDatabaseImportA")
-	procMsiDatabaseImportW                = modmsi.NewProc("MsiDatabaseImportW")
+	procMsiDatabaseIsTablePersistent      = modmsi.NewProc("MsiDatabaseIsTablePersistentW")
 	procMsiDatabaseIsTablePersistentA     = modmsi.NewProc("MsiDatabaseIsTablePersistentA")
-	procMsiDatabaseIsTablePersistentW     = modmsi.NewProc("MsiDatabaseIsTablePersistentW")
+	procMsiDatabaseMerge                  = modmsi.NewProc("MsiDatabaseMergeW")
 	procMsiDatabaseMergeA                 = modmsi.NewProc("MsiDatabaseMergeA")
-	procMsiDatabaseMergeW                 = modmsi.NewProc("MsiDatabaseMergeW")
+	procMsiDatabaseOpenView               = modmsi.NewProc("MsiDatabaseOpenViewW")
 	procMsiDatabaseOpenViewA              = modmsi.NewProc("MsiDatabaseOpenViewA")
-	procMsiDatabaseOpenViewW              = modmsi.NewProc("MsiDatabaseOpenViewW")
+	procMsiDetermineApplicablePatches     = modmsi.NewProc("MsiDetermineApplicablePatchesW")
 	procMsiDetermineApplicablePatchesA    = modmsi.NewProc("MsiDetermineApplicablePatchesA")
-	procMsiDetermineApplicablePatchesW    = modmsi.NewProc("MsiDetermineApplicablePatchesW")
+	procMsiDeterminePatchSequence         = modmsi.NewProc("MsiDeterminePatchSequenceW")
 	procMsiDeterminePatchSequenceA        = modmsi.NewProc("MsiDeterminePatchSequenceA")
-	procMsiDeterminePatchSequenceW        = modmsi.NewProc("MsiDeterminePatchSequenceW")
+	procMsiDoAction                       = modmsi.NewProc("MsiDoActionW")
 	procMsiDoActionA                      = modmsi.NewProc("MsiDoActionA")
-	procMsiDoActionW                      = modmsi.NewProc("MsiDoActionW")
+	procMsiEnableLog                      = modmsi.NewProc("MsiEnableLogW")
 	procMsiEnableLogA                     = modmsi.NewProc("MsiEnableLogA")
-	procMsiEnableLogW                     = modmsi.NewProc("MsiEnableLogW")
 	procMsiEnableUIPreview                = modmsi.NewProc("MsiEnableUIPreview")
 	procMsiEndTransaction                 = modmsi.NewProc("MsiEndTransaction")
+	procMsiEnumClients                    = modmsi.NewProc("MsiEnumClientsW")
 	procMsiEnumClientsA                   = modmsi.NewProc("MsiEnumClientsA")
+	procMsiEnumClientsEx                  = modmsi.NewProc("MsiEnumClientsExW")
 	procMsiEnumClientsExA                 = modmsi.NewProc("MsiEnumClientsExA")
-	procMsiEnumClientsExW                 = modmsi.NewProc("MsiEnumClientsExW")
-	procMsiEnumClientsW                   = modmsi.NewProc("MsiEnumClientsW")
+	procMsiEnumComponentCosts             = modmsi.NewProc("MsiEnumComponentCostsW")
 	procMsiEnumComponentCostsA            = modmsi.NewProc("MsiEnumComponentCostsA")
-	procMsiEnumComponentCostsW            = modmsi.NewProc("MsiEnumComponentCostsW")
+	procMsiEnumComponentQualifiers        = modmsi.NewProc("MsiEnumComponentQualifiersW")
 	procMsiEnumComponentQualifiersA       = modmsi.NewProc("MsiEnumComponentQualifiersA")
-	procMsiEnumComponentQualifiersW       = modmsi.NewProc("MsiEnumComponentQualifiersW")
+	procMsiEnumComponents                 = modmsi.NewProc("MsiEnumComponentsW")
 	procMsiEnumComponentsA                = modmsi.NewProc("MsiEnumComponentsA")
+	procMsiEnumComponentsEx               = modmsi.NewProc("MsiEnumComponentsExW")
 	procMsiEnumComponentsExA              = modmsi.NewProc("MsiEnumComponentsExA")
-	procMsiEnumComponentsExW              = modmsi.NewProc("MsiEnumComponentsExW")
-	procMsiEnumComponentsW                = modmsi.NewProc("MsiEnumComponentsW")
+	procMsiEnumFeatures                   = modmsi.NewProc("MsiEnumFeaturesW")
 	procMsiEnumFeaturesA                  = modmsi.NewProc("MsiEnumFeaturesA")
-	procMsiEnumFeaturesW                  = modmsi.NewProc("MsiEnumFeaturesW")
+	procMsiEnumPatches                    = modmsi.NewProc("MsiEnumPatchesW")
 	procMsiEnumPatchesA                   = modmsi.NewProc("MsiEnumPatchesA")
+	procMsiEnumPatchesEx                  = modmsi.NewProc("MsiEnumPatchesExW")
 	procMsiEnumPatchesExA                 = modmsi.NewProc("MsiEnumPatchesExA")
-	procMsiEnumPatchesExW                 = modmsi.NewProc("MsiEnumPatchesExW")
-	procMsiEnumPatchesW                   = modmsi.NewProc("MsiEnumPatchesW")
+	procMsiEnumProducts                   = modmsi.NewProc("MsiEnumProductsW")
 	procMsiEnumProductsA                  = modmsi.NewProc("MsiEnumProductsA")
+	procMsiEnumProductsEx                 = modmsi.NewProc("MsiEnumProductsExW")
 	procMsiEnumProductsExA                = modmsi.NewProc("MsiEnumProductsExA")
-	procMsiEnumProductsExW                = modmsi.NewProc("MsiEnumProductsExW")
-	procMsiEnumProductsW                  = modmsi.NewProc("MsiEnumProductsW")
+	procMsiEnumRelatedProducts            = modmsi.NewProc("MsiEnumRelatedProductsW")
 	procMsiEnumRelatedProductsA           = modmsi.NewProc("MsiEnumRelatedProductsA")
-	procMsiEnumRelatedProductsW           = modmsi.NewProc("MsiEnumRelatedProductsW")
+	procMsiEvaluateCondition              = modmsi.NewProc("MsiEvaluateConditionW")
 	procMsiEvaluateConditionA             = modmsi.NewProc("MsiEvaluateConditionA")
-	procMsiEvaluateConditionW             = modmsi.NewProc("MsiEvaluateConditionW")
+	procMsiExtractPatchXMLData            = modmsi.NewProc("MsiExtractPatchXMLDataW")
 	procMsiExtractPatchXMLDataA           = modmsi.NewProc("MsiExtractPatchXMLDataA")
-	procMsiExtractPatchXMLDataW           = modmsi.NewProc("MsiExtractPatchXMLDataW")
+	procMsiFormatRecord                   = modmsi.NewProc("MsiFormatRecordW")
 	procMsiFormatRecordA                  = modmsi.NewProc("MsiFormatRecordA")
-	procMsiFormatRecordW                  = modmsi.NewProc("MsiFormatRecordW")
 	procMsiGetActiveDatabase              = modmsi.NewProc("MsiGetActiveDatabase")
+	procMsiGetComponentPath               = modmsi.NewProc("MsiGetComponentPathW")
 	procMsiGetComponentPathA              = modmsi.NewProc("MsiGetComponentPathA")
+	procMsiGetComponentPathEx             = modmsi.NewProc("MsiGetComponentPathExW")
 	procMsiGetComponentPathExA            = modmsi.NewProc("MsiGetComponentPathExA")
-	procMsiGetComponentPathExW            = modmsi.NewProc("MsiGetComponentPathExW")
-	procMsiGetComponentPathW              = modmsi.NewProc("MsiGetComponentPathW")
+	procMsiGetComponentState              = modmsi.NewProc("MsiGetComponentStateW")
 	procMsiGetComponentStateA             = modmsi.NewProc("MsiGetComponentStateA")
-	procMsiGetComponentStateW             = modmsi.NewProc("MsiGetComponentStateW")
 	procMsiGetDatabaseState               = modmsi.NewProc("MsiGetDatabaseState")
+	procMsiGetFeatureCost                 = modmsi.NewProc("MsiGetFeatureCostW")
 	procMsiGetFeatureCostA                = modmsi.NewProc("MsiGetFeatureCostA")
-	procMsiGetFeatureCostW                = modmsi.NewProc("MsiGetFeatureCostW")
+	procMsiGetFeatureInfo                 = modmsi.NewProc("MsiGetFeatureInfoW")
 	procMsiGetFeatureInfoA                = modmsi.NewProc("MsiGetFeatureInfoA")
-	procMsiGetFeatureInfoW                = modmsi.NewProc("MsiGetFeatureInfoW")
+	procMsiGetFeatureState                = modmsi.NewProc("MsiGetFeatureStateW")
 	procMsiGetFeatureStateA               = modmsi.NewProc("MsiGetFeatureStateA")
-	procMsiGetFeatureStateW               = modmsi.NewProc("MsiGetFeatureStateW")
+	procMsiGetFeatureUsage                = modmsi.NewProc("MsiGetFeatureUsageW")
 	procMsiGetFeatureUsageA               = modmsi.NewProc("MsiGetFeatureUsageA")
-	procMsiGetFeatureUsageW               = modmsi.NewProc("MsiGetFeatureUsageW")
+	procMsiGetFeatureValidStates          = modmsi.NewProc("MsiGetFeatureValidStatesW")
 	procMsiGetFeatureValidStatesA         = modmsi.NewProc("MsiGetFeatureValidStatesA")
-	procMsiGetFeatureValidStatesW         = modmsi.NewProc("MsiGetFeatureValidStatesW")
+	procMsiGetFileHash                    = modmsi.NewProc("MsiGetFileHashW")
 	procMsiGetFileHashA                   = modmsi.NewProc("MsiGetFileHashA")
-	procMsiGetFileHashW                   = modmsi.NewProc("MsiGetFileHashW")
+	procMsiGetFileSignatureInformation    = modmsi.NewProc("MsiGetFileSignatureInformationW")
 	procMsiGetFileSignatureInformationA   = modmsi.NewProc("MsiGetFileSignatureInformationA")
-	procMsiGetFileSignatureInformationW   = modmsi.NewProc("MsiGetFileSignatureInformationW")
+	procMsiGetFileVersion                 = modmsi.NewProc("MsiGetFileVersionW")
 	procMsiGetFileVersionA                = modmsi.NewProc("MsiGetFileVersionA")
-	procMsiGetFileVersionW                = modmsi.NewProc("MsiGetFileVersionW")
 	procMsiGetLanguage                    = modmsi.NewProc("MsiGetLanguage")
 	procMsiGetLastErrorRecord             = modmsi.NewProc("MsiGetLastErrorRecord")
 	procMsiGetMode                        = modmsi.NewProc("MsiGetMode")
+	procMsiGetPatchFileList               = modmsi.NewProc("MsiGetPatchFileListW")
 	procMsiGetPatchFileListA              = modmsi.NewProc("MsiGetPatchFileListA")
-	procMsiGetPatchFileListW              = modmsi.NewProc("MsiGetPatchFileListW")
+	procMsiGetPatchInfo                   = modmsi.NewProc("MsiGetPatchInfoW")
 	procMsiGetPatchInfoA                  = modmsi.NewProc("MsiGetPatchInfoA")
+	procMsiGetPatchInfoEx                 = modmsi.NewProc("MsiGetPatchInfoExW")
 	procMsiGetPatchInfoExA                = modmsi.NewProc("MsiGetPatchInfoExA")
-	procMsiGetPatchInfoExW                = modmsi.NewProc("MsiGetPatchInfoExW")
-	procMsiGetPatchInfoW                  = modmsi.NewProc("MsiGetPatchInfoW")
+	procMsiGetProductCode                 = modmsi.NewProc("MsiGetProductCodeW")
 	procMsiGetProductCodeA                = modmsi.NewProc("MsiGetProductCodeA")
-	procMsiGetProductCodeW                = modmsi.NewProc("MsiGetProductCodeW")
+	procMsiGetProductInfo                 = modmsi.NewProc("MsiGetProductInfoW")
 	procMsiGetProductInfoA                = modmsi.NewProc("MsiGetProductInfoA")
+	procMsiGetProductInfoEx               = modmsi.NewProc("MsiGetProductInfoExW")
 	procMsiGetProductInfoExA              = modmsi.NewProc("MsiGetProductInfoExA")
-	procMsiGetProductInfoExW              = modmsi.NewProc("MsiGetProductInfoExW")
+	procMsiGetProductInfoFromScript       = modmsi.NewProc("MsiGetProductInfoFromScriptW")
 	procMsiGetProductInfoFromScriptA      = modmsi.NewProc("MsiGetProductInfoFromScriptA")
-	procMsiGetProductInfoFromScriptW      = modmsi.NewProc("MsiGetProductInfoFromScriptW")
-	procMsiGetProductInfoW                = modmsi.NewProc("MsiGetProductInfoW")
+	procMsiGetProductProperty             = modmsi.NewProc("MsiGetProductPropertyW")
 	procMsiGetProductPropertyA            = modmsi.NewProc("MsiGetProductPropertyA")
-	procMsiGetProductPropertyW            = modmsi.NewProc("MsiGetProductPropertyW")
+	procMsiGetProperty                    = modmsi.NewProc("MsiGetPropertyW")
 	procMsiGetPropertyA                   = modmsi.NewProc("MsiGetPropertyA")
-	procMsiGetPropertyW                   = modmsi.NewProc("MsiGetPropertyW")
+	procMsiGetShortcutTarget              = modmsi.NewProc("MsiGetShortcutTargetW")
 	procMsiGetShortcutTargetA             = modmsi.NewProc("MsiGetShortcutTargetA")
-	procMsiGetShortcutTargetW             = modmsi.NewProc("MsiGetShortcutTargetW")
+	procMsiGetSourcePath                  = modmsi.NewProc("MsiGetSourcePathW")
 	procMsiGetSourcePathA                 = modmsi.NewProc("MsiGetSourcePathA")
-	procMsiGetSourcePathW                 = modmsi.NewProc("MsiGetSourcePathW")
+	procMsiGetSummaryInformation          = modmsi.NewProc("MsiGetSummaryInformationW")
 	procMsiGetSummaryInformationA         = modmsi.NewProc("MsiGetSummaryInformationA")
-	procMsiGetSummaryInformationW         = modmsi.NewProc("MsiGetSummaryInformationW")
+	procMsiGetTargetPath                  = modmsi.NewProc("MsiGetTargetPathW")
 	procMsiGetTargetPathA                 = modmsi.NewProc("MsiGetTargetPathA")
-	procMsiGetTargetPathW                 = modmsi.NewProc("MsiGetTargetPathW")
+	procMsiGetUserInfo                    = modmsi.NewProc("MsiGetUserInfoW")
 	procMsiGetUserInfoA                   = modmsi.NewProc("MsiGetUserInfoA")
-	procMsiGetUserInfoW                   = modmsi.NewProc("MsiGetUserInfoW")
+	procMsiInstallMissingComponent        = modmsi.NewProc("MsiInstallMissingComponentW")
 	procMsiInstallMissingComponentA       = modmsi.NewProc("MsiInstallMissingComponentA")
-	procMsiInstallMissingComponentW       = modmsi.NewProc("MsiInstallMissingComponentW")
+	procMsiInstallMissingFile             = modmsi.NewProc("MsiInstallMissingFileW")
 	procMsiInstallMissingFileA            = modmsi.NewProc("MsiInstallMissingFileA")
-	procMsiInstallMissingFileW            = modmsi.NewProc("MsiInstallMissingFileW")
+	procMsiInstallProduct                 = modmsi.NewProc("MsiInstallProductW")
 	procMsiInstallProductA                = modmsi.NewProc("MsiInstallProductA")
-	procMsiInstallProductW                = modmsi.NewProc("MsiInstallProductW")
+	procMsiIsProductElevated              = modmsi.NewProc("MsiIsProductElevatedW")
 	procMsiIsProductElevatedA             = modmsi.NewProc("MsiIsProductElevatedA")
-	procMsiIsProductElevatedW             = modmsi.NewProc("MsiIsProductElevatedW")
 	procMsiJoinTransaction                = modmsi.NewProc("MsiJoinTransaction")
+	procMsiLocateComponent                = modmsi.NewProc("MsiLocateComponentW")
 	procMsiLocateComponentA               = modmsi.NewProc("MsiLocateComponentA")
-	procMsiLocateComponentW               = modmsi.NewProc("MsiLocateComponentW")
+	procMsiNotifySidChange                = modmsi.NewProc("MsiNotifySidChangeW")
 	procMsiNotifySidChangeA               = modmsi.NewProc("MsiNotifySidChangeA")
-	procMsiNotifySidChangeW               = modmsi.NewProc("MsiNotifySidChangeW")
+	procMsiOpenDatabase                   = modmsi.NewProc("MsiOpenDatabaseW")
 	procMsiOpenDatabaseA                  = modmsi.NewProc("MsiOpenDatabaseA")
-	procMsiOpenDatabaseW                  = modmsi.NewProc("MsiOpenDatabaseW")
+	procMsiOpenPackage                    = modmsi.NewProc("MsiOpenPackageW")
 	procMsiOpenPackageA                   = modmsi.NewProc("MsiOpenPackageA")
+	procMsiOpenPackageEx                  = modmsi.NewProc("MsiOpenPackageExW")
 	procMsiOpenPackageExA                 = modmsi.NewProc("MsiOpenPackageExA")
-	procMsiOpenPackageExW                 = modmsi.NewProc("MsiOpenPackageExW")
-	procMsiOpenPackageW                   = modmsi.NewProc("MsiOpenPackageW")
+	procMsiOpenProduct                    = modmsi.NewProc("MsiOpenProductW")
 	procMsiOpenProductA                   = modmsi.NewProc("MsiOpenProductA")
-	procMsiOpenProductW                   = modmsi.NewProc("MsiOpenProductW")
+	procMsiPreviewBillboard               = modmsi.NewProc("MsiPreviewBillboardW")
 	procMsiPreviewBillboardA              = modmsi.NewProc("MsiPreviewBillboardA")
-	procMsiPreviewBillboardW              = modmsi.NewProc("MsiPreviewBillboardW")
+	procMsiPreviewDialog                  = modmsi.NewProc("MsiPreviewDialogW")
 	procMsiPreviewDialogA                 = modmsi.NewProc("MsiPreviewDialogA")
-	procMsiPreviewDialogW                 = modmsi.NewProc("MsiPreviewDialogW")
+	procMsiProcessAdvertiseScript         = modmsi.NewProc("MsiProcessAdvertiseScriptW")
 	procMsiProcessAdvertiseScriptA        = modmsi.NewProc("MsiProcessAdvertiseScriptA")
-	procMsiProcessAdvertiseScriptW        = modmsi.NewProc("MsiProcessAdvertiseScriptW")
 	procMsiProcessMessage                 = modmsi.NewProc("MsiProcessMessage")
+	procMsiProvideAssembly                = modmsi.NewProc("MsiProvideAssemblyW")
 	procMsiProvideAssemblyA               = modmsi.NewProc("MsiProvideAssemblyA")
-	procMsiProvideAssemblyW               = modmsi.NewProc("MsiProvideAssemblyW")
+	procMsiProvideComponent               = modmsi.NewProc("MsiProvideComponentW")
 	procMsiProvideComponentA              = modmsi.NewProc("MsiProvideComponentA")
-	procMsiProvideComponentW              = modmsi.NewProc("MsiProvideComponentW")
+	procMsiProvideQualifiedComponent      = modmsi.NewProc("MsiProvideQualifiedComponentW")
 	procMsiProvideQualifiedComponentA     = modmsi.NewProc("MsiProvideQualifiedComponentA")
+	procMsiProvideQualifiedComponentEx    = modmsi.NewProc("MsiProvideQualifiedComponentExW")
 	procMsiProvideQualifiedComponentExA   = modmsi.NewProc("MsiProvideQualifiedComponentExA")
-	procMsiProvideQualifiedComponentExW   = modmsi.NewProc("MsiProvideQualifiedComponentExW")
-	procMsiProvideQualifiedComponentW     = modmsi.NewProc("MsiProvideQualifiedComponentW")
+	procMsiQueryComponentState            = modmsi.NewProc("MsiQueryComponentStateW")
 	procMsiQueryComponentStateA           = modmsi.NewProc("MsiQueryComponentStateA")
-	procMsiQueryComponentStateW           = modmsi.NewProc("MsiQueryComponentStateW")
+	procMsiQueryFeatureState              = modmsi.NewProc("MsiQueryFeatureStateW")
 	procMsiQueryFeatureStateA             = modmsi.NewProc("MsiQueryFeatureStateA")
+	procMsiQueryFeatureStateEx            = modmsi.NewProc("MsiQueryFeatureStateExW")
 	procMsiQueryFeatureStateExA           = modmsi.NewProc("MsiQueryFeatureStateExA")
-	procMsiQueryFeatureStateExW           = modmsi.NewProc("MsiQueryFeatureStateExW")
-	procMsiQueryFeatureStateW             = modmsi.NewProc("MsiQueryFeatureStateW")
+	procMsiQueryProductState              = modmsi.NewProc("MsiQueryProductStateW")
 	procMsiQueryProductStateA             = modmsi.NewProc("MsiQueryProductStateA")
-	procMsiQueryProductStateW             = modmsi.NewProc("MsiQueryProductStateW")
 	procMsiRecordClearData                = modmsi.NewProc("MsiRecordClearData")
 	procMsiRecordDataSize                 = modmsi.NewProc("MsiRecordDataSize")
 	procMsiRecordGetFieldCount            = modmsi.NewProc("MsiRecordGetFieldCount")
 	procMsiRecordGetInteger               = modmsi.NewProc("MsiRecordGetInteger")
+	procMsiRecordGetString                = modmsi.NewProc("MsiRecordGetStringW")
 	procMsiRecordGetStringA               = modmsi.NewProc("MsiRecordGetStringA")
-	procMsiRecordGetStringW               = modmsi.NewProc("MsiRecordGetStringW")
 	procMsiRecordIsNull                   = modmsi.NewProc("MsiRecordIsNull")
 	procMsiRecordReadStream               = modmsi.NewProc("MsiRecordReadStream")
 	procMsiRecordSetInteger               = modmsi.NewProc("MsiRecordSetInteger")
+	procMsiRecordSetStream                = modmsi.NewProc("MsiRecordSetStreamW")
 	procMsiRecordSetStreamA               = modmsi.NewProc("MsiRecordSetStreamA")
-	procMsiRecordSetStreamW               = modmsi.NewProc("MsiRecordSetStreamW")
+	procMsiRecordSetString                = modmsi.NewProc("MsiRecordSetStringW")
 	procMsiRecordSetStringA               = modmsi.NewProc("MsiRecordSetStringA")
-	procMsiRecordSetStringW               = modmsi.NewProc("MsiRecordSetStringW")
+	procMsiReinstallFeature               = modmsi.NewProc("MsiReinstallFeatureW")
 	procMsiReinstallFeatureA              = modmsi.NewProc("MsiReinstallFeatureA")
-	procMsiReinstallFeatureW              = modmsi.NewProc("MsiReinstallFeatureW")
+	procMsiReinstallProduct               = modmsi.NewProc("MsiReinstallProductW")
 	procMsiReinstallProductA              = modmsi.NewProc("MsiReinstallProductA")
-	procMsiReinstallProductW              = modmsi.NewProc("MsiReinstallProductW")
+	procMsiRemovePatches                  = modmsi.NewProc("MsiRemovePatchesW")
 	procMsiRemovePatchesA                 = modmsi.NewProc("MsiRemovePatchesA")
-	procMsiRemovePatchesW                 = modmsi.NewProc("MsiRemovePatchesW")
+	procMsiSequence                       = modmsi.NewProc("MsiSequenceW")
 	procMsiSequenceA                      = modmsi.NewProc("MsiSequenceA")
-	procMsiSequenceW                      = modmsi.NewProc("MsiSequenceW")
+	procMsiSetComponentState              = modmsi.NewProc("MsiSetComponentStateW")
 	procMsiSetComponentStateA             = modmsi.NewProc("MsiSetComponentStateA")
-	procMsiSetComponentStateW             = modmsi.NewProc("MsiSetComponentStateW")
+	procMsiSetExternalUI                  = modmsi.NewProc("MsiSetExternalUIW")
 	procMsiSetExternalUIA                 = modmsi.NewProc("MsiSetExternalUIA")
 	procMsiSetExternalUIRecord            = modmsi.NewProc("MsiSetExternalUIRecord")
-	procMsiSetExternalUIW                 = modmsi.NewProc("MsiSetExternalUIW")
+	procMsiSetFeatureAttributes           = modmsi.NewProc("MsiSetFeatureAttributesW")
 	procMsiSetFeatureAttributesA          = modmsi.NewProc("MsiSetFeatureAttributesA")
-	procMsiSetFeatureAttributesW          = modmsi.NewProc("MsiSetFeatureAttributesW")
+	procMsiSetFeatureState                = modmsi.NewProc("MsiSetFeatureStateW")
 	procMsiSetFeatureStateA               = modmsi.NewProc("MsiSetFeatureStateA")
-	procMsiSetFeatureStateW               = modmsi.NewProc("MsiSetFeatureStateW")
 	procMsiSetInstallLevel                = modmsi.NewProc("MsiSetInstallLevel")
 	procMsiSetInternalUI                  = modmsi.NewProc("MsiSetInternalUI")
 	procMsiSetMode                        = modmsi.NewProc("MsiSetMode")
+	procMsiSetProperty                    = modmsi.NewProc("MsiSetPropertyW")
 	procMsiSetPropertyA                   = modmsi.NewProc("MsiSetPropertyA")
-	procMsiSetPropertyW                   = modmsi.NewProc("MsiSetPropertyW")
+	procMsiSetTargetPath                  = modmsi.NewProc("MsiSetTargetPathW")
 	procMsiSetTargetPathA                 = modmsi.NewProc("MsiSetTargetPathA")
-	procMsiSetTargetPathW                 = modmsi.NewProc("MsiSetTargetPathW")
+	procMsiSourceListAddMediaDisk         = modmsi.NewProc("MsiSourceListAddMediaDiskW")
 	procMsiSourceListAddMediaDiskA        = modmsi.NewProc("MsiSourceListAddMediaDiskA")
-	procMsiSourceListAddMediaDiskW        = modmsi.NewProc("MsiSourceListAddMediaDiskW")
+	procMsiSourceListAddSource            = modmsi.NewProc("MsiSourceListAddSourceW")
 	procMsiSourceListAddSourceA           = modmsi.NewProc("MsiSourceListAddSourceA")
+	procMsiSourceListAddSourceEx          = modmsi.NewProc("MsiSourceListAddSourceExW")
 	procMsiSourceListAddSourceExA         = modmsi.NewProc("MsiSourceListAddSourceExA")
-	procMsiSourceListAddSourceExW         = modmsi.NewProc("MsiSourceListAddSourceExW")
-	procMsiSourceListAddSourceW           = modmsi.NewProc("MsiSourceListAddSourceW")
+	procMsiSourceListClearAll             = modmsi.NewProc("MsiSourceListClearAllW")
 	procMsiSourceListClearAllA            = modmsi.NewProc("MsiSourceListClearAllA")
+	procMsiSourceListClearAllEx           = modmsi.NewProc("MsiSourceListClearAllExW")
 	procMsiSourceListClearAllExA          = modmsi.NewProc("MsiSourceListClearAllExA")
-	procMsiSourceListClearAllExW          = modmsi.NewProc("MsiSourceListClearAllExW")
-	procMsiSourceListClearAllW            = modmsi.NewProc("MsiSourceListClearAllW")
+	procMsiSourceListClearMediaDisk       = modmsi.NewProc("MsiSourceListClearMediaDiskW")
 	procMsiSourceListClearMediaDiskA      = modmsi.NewProc("MsiSourceListClearMediaDiskA")
-	procMsiSourceListClearMediaDiskW      = modmsi.NewProc("MsiSourceListClearMediaDiskW")
+	procMsiSourceListClearSource          = modmsi.NewProc("MsiSourceListClearSourceW")
 	procMsiSourceListClearSourceA         = modmsi.NewProc("MsiSourceListClearSourceA")
-	procMsiSourceListClearSourceW         = modmsi.NewProc("MsiSourceListClearSourceW")
+	procMsiSourceListEnumMediaDisks       = modmsi.NewProc("MsiSourceListEnumMediaDisksW")
 	procMsiSourceListEnumMediaDisksA      = modmsi.NewProc("MsiSourceListEnumMediaDisksA")
-	procMsiSourceListEnumMediaDisksW      = modmsi.NewProc("MsiSourceListEnumMediaDisksW")
+	procMsiSourceListEnumSources          = modmsi.NewProc("MsiSourceListEnumSourcesW")
 	procMsiSourceListEnumSourcesA         = modmsi.NewProc("MsiSourceListEnumSourcesA")
-	procMsiSourceListEnumSourcesW         = modmsi.NewProc("MsiSourceListEnumSourcesW")
+	procMsiSourceListForceResolution      = modmsi.NewProc("MsiSourceListForceResolutionW")
 	procMsiSourceListForceResolutionA     = modmsi.NewProc("MsiSourceListForceResolutionA")
+	procMsiSourceListForceResolutionEx    = modmsi.NewProc("MsiSourceListForceResolutionExW")
 	procMsiSourceListForceResolutionExA   = modmsi.NewProc("MsiSourceListForceResolutionExA")
-	procMsiSourceListForceResolutionExW   = modmsi.NewProc("MsiSourceListForceResolutionExW")
-	procMsiSourceListForceResolutionW     = modmsi.NewProc("MsiSourceListForceResolutionW")
+	procMsiSourceListGetInfo              = modmsi.NewProc("MsiSourceListGetInfoW")
 	procMsiSourceListGetInfoA             = modmsi.NewProc("MsiSourceListGetInfoA")
-	procMsiSourceListGetInfoW             = modmsi.NewProc("MsiSourceListGetInfoW")
+	procMsiSourceListSetInfo              = modmsi.NewProc("MsiSourceListSetInfoW")
 	procMsiSourceListSetInfoA             = modmsi.NewProc("MsiSourceListSetInfoA")
-	procMsiSourceListSetInfoW             = modmsi.NewProc("MsiSourceListSetInfoW")
+	procMsiSummaryInfoGetProperty         = modmsi.NewProc("MsiSummaryInfoGetPropertyW")
 	procMsiSummaryInfoGetPropertyA        = modmsi.NewProc("MsiSummaryInfoGetPropertyA")
 	procMsiSummaryInfoGetPropertyCount    = modmsi.NewProc("MsiSummaryInfoGetPropertyCount")
-	procMsiSummaryInfoGetPropertyW        = modmsi.NewProc("MsiSummaryInfoGetPropertyW")
 	procMsiSummaryInfoPersist             = modmsi.NewProc("MsiSummaryInfoPersist")
+	procMsiSummaryInfoSetProperty         = modmsi.NewProc("MsiSummaryInfoSetPropertyW")
 	procMsiSummaryInfoSetPropertyA        = modmsi.NewProc("MsiSummaryInfoSetPropertyA")
-	procMsiSummaryInfoSetPropertyW        = modmsi.NewProc("MsiSummaryInfoSetPropertyW")
+	procMsiUseFeature                     = modmsi.NewProc("MsiUseFeatureW")
 	procMsiUseFeatureA                    = modmsi.NewProc("MsiUseFeatureA")
+	procMsiUseFeatureEx                   = modmsi.NewProc("MsiUseFeatureExW")
 	procMsiUseFeatureExA                  = modmsi.NewProc("MsiUseFeatureExA")
-	procMsiUseFeatureExW                  = modmsi.NewProc("MsiUseFeatureExW")
-	procMsiUseFeatureW                    = modmsi.NewProc("MsiUseFeatureW")
 	procMsiVerifyDiskSpace                = modmsi.NewProc("MsiVerifyDiskSpace")
+	procMsiVerifyPackage                  = modmsi.NewProc("MsiVerifyPackageW")
 	procMsiVerifyPackageA                 = modmsi.NewProc("MsiVerifyPackageA")
-	procMsiVerifyPackageW                 = modmsi.NewProc("MsiVerifyPackageW")
 	procMsiViewClose                      = modmsi.NewProc("MsiViewClose")
 	procMsiViewExecute                    = modmsi.NewProc("MsiViewExecute")
 	procMsiViewFetch                      = modmsi.NewProc("MsiViewFetch")
 	procMsiViewGetColumnInfo              = modmsi.NewProc("MsiViewGetColumnInfo")
+	procMsiViewGetError                   = modmsi.NewProc("MsiViewGetErrorW")
 	procMsiViewGetErrorA                  = modmsi.NewProc("MsiViewGetErrorA")
-	procMsiViewGetErrorW                  = modmsi.NewProc("MsiViewGetErrorW")
 	procMsiViewModify                     = modmsi.NewProc("MsiViewModify")
+	procApplyPatchToFile                  = modmspatcha.NewProc("ApplyPatchToFileW")
 	procApplyPatchToFileA                 = modmspatcha.NewProc("ApplyPatchToFileA")
 	procApplyPatchToFileByBuffers         = modmspatcha.NewProc("ApplyPatchToFileByBuffers")
 	procApplyPatchToFileByHandles         = modmspatcha.NewProc("ApplyPatchToFileByHandles")
 	procApplyPatchToFileByHandlesEx       = modmspatcha.NewProc("ApplyPatchToFileByHandlesEx")
+	procApplyPatchToFileEx                = modmspatcha.NewProc("ApplyPatchToFileExW")
 	procApplyPatchToFileExA               = modmspatcha.NewProc("ApplyPatchToFileExA")
-	procApplyPatchToFileExW               = modmspatcha.NewProc("ApplyPatchToFileExW")
-	procApplyPatchToFileW                 = modmspatcha.NewProc("ApplyPatchToFileW")
+	procGetFilePatchSignature             = modmspatcha.NewProc("GetFilePatchSignatureW")
 	procGetFilePatchSignatureA            = modmspatcha.NewProc("GetFilePatchSignatureA")
 	procGetFilePatchSignatureByBuffer     = modmspatcha.NewProc("GetFilePatchSignatureByBuffer")
 	procGetFilePatchSignatureByHandle     = modmspatcha.NewProc("GetFilePatchSignatureByHandle")
-	procGetFilePatchSignatureW            = modmspatcha.NewProc("GetFilePatchSignatureW")
 	procNormalizeFileForPatchSignature    = modmspatcha.NewProc("NormalizeFileForPatchSignature")
+	procTestApplyPatchToFile              = modmspatcha.NewProc("TestApplyPatchToFileW")
 	procTestApplyPatchToFileA             = modmspatcha.NewProc("TestApplyPatchToFileA")
 	procTestApplyPatchToFileByBuffers     = modmspatcha.NewProc("TestApplyPatchToFileByBuffers")
 	procTestApplyPatchToFileByHandles     = modmspatcha.NewProc("TestApplyPatchToFileByHandles")
-	procTestApplyPatchToFileW             = modmspatcha.NewProc("TestApplyPatchToFileW")
+	procCreatePatchFile                   = modmspatchc.NewProc("CreatePatchFileW")
 	procCreatePatchFileA                  = modmspatchc.NewProc("CreatePatchFileA")
 	procCreatePatchFileByHandles          = modmspatchc.NewProc("CreatePatchFileByHandles")
 	procCreatePatchFileByHandlesEx        = modmspatchc.NewProc("CreatePatchFileByHandlesEx")
+	procCreatePatchFileEx                 = modmspatchc.NewProc("CreatePatchFileExW")
 	procCreatePatchFileExA                = modmspatchc.NewProc("CreatePatchFileExA")
-	procCreatePatchFileExW                = modmspatchc.NewProc("CreatePatchFileExW")
-	procCreatePatchFileW                  = modmspatchc.NewProc("CreatePatchFileW")
+	procExtractPatchHeaderToFile          = modmspatchc.NewProc("ExtractPatchHeaderToFileW")
 	procExtractPatchHeaderToFileA         = modmspatchc.NewProc("ExtractPatchHeaderToFileA")
 	procExtractPatchHeaderToFileByHandles = modmspatchc.NewProc("ExtractPatchHeaderToFileByHandles")
-	procExtractPatchHeaderToFileW         = modmspatchc.NewProc("ExtractPatchHeaderToFileW")
 	procSfcGetNextProtectedFile           = modsfc.NewProc("SfcGetNextProtectedFile")
 	procSfcIsFileProtected                = modsfc.NewProc("SfcIsFileProtected")
 	procSfcIsKeyProtected                 = modsfc.NewProc("SfcIsKeyProtected")
@@ -357,59 +357,80 @@ func AddRefActCtx(hActCtx foundation.HANDLE) {
 	syscall.SyscallN(procAddRefActCtx.Addr(), uintptr(hActCtx))
 }
 
-// ApplyDeltaA calls msdelta!ApplyDeltaA.
-func ApplyDeltaA(ApplyFlags int64, lpSourceName foundation.PSTR, lpDeltaName foundation.PSTR, lpTargetName foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procApplyDeltaA.Addr(), uintptr(ApplyFlags), uintptr(unsafe.Pointer(lpSourceName)), uintptr(unsafe.Pointer(lpDeltaName)), uintptr(unsafe.Pointer(lpTargetName)))
-	return foundation.BOOL(r1)
+// ApplyDelta calls msdelta!ApplyDeltaW.
+// https://learn.microsoft.com/windows/win32/DevNotes/msdelta-applydeltaw
+func ApplyDelta(ApplyFlags int64, lpSourceName string, lpDeltaName string, lpTargetName string) bool {
+	_lpSourceName := win32.UTF16Ptr(lpSourceName)
+	_lpDeltaName := win32.UTF16Ptr(lpDeltaName)
+	_lpTargetName := win32.UTF16Ptr(lpTargetName)
+	r1, _, _ := syscall.SyscallN(procApplyDelta.Addr(), uintptr(ApplyFlags), uintptr(unsafe.Pointer(_lpSourceName)), uintptr(unsafe.Pointer(_lpDeltaName)), uintptr(unsafe.Pointer(_lpTargetName)))
+	return r1 != 0
 }
 
-// ApplyDeltaW calls msdelta!ApplyDeltaW.
-// https://learn.microsoft.com/windows/win32/DevNotes/msdelta-applydeltaw
-func ApplyDeltaW(ApplyFlags int64, lpSourceName foundation.PWSTR, lpDeltaName foundation.PWSTR, lpTargetName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procApplyDeltaW.Addr(), uintptr(ApplyFlags), uintptr(unsafe.Pointer(lpSourceName)), uintptr(unsafe.Pointer(lpDeltaName)), uintptr(unsafe.Pointer(lpTargetName)))
-	return foundation.BOOL(r1)
+// ApplyDeltaA calls msdelta!ApplyDeltaA.
+func ApplyDeltaA(ApplyFlags int64, lpSourceName foundation.PSTR, lpDeltaName foundation.PSTR, lpTargetName foundation.PSTR) bool {
+	r1, _, _ := syscall.SyscallN(procApplyDeltaA.Addr(), uintptr(ApplyFlags), uintptr(unsafe.Pointer(lpSourceName)), uintptr(unsafe.Pointer(lpDeltaName)), uintptr(unsafe.Pointer(lpTargetName)))
+	return r1 != 0
+}
+
+// ApplyPatchToFile calls mspatcha!ApplyPatchToFileW.
+func ApplyPatchToFile(PatchFileName string, OldFileName string, NewFileName string, ApplyOptionFlags uint32) bool {
+	_PatchFileName := win32.UTF16Ptr(PatchFileName)
+	_OldFileName := win32.UTF16Ptr(OldFileName)
+	_NewFileName := win32.UTF16Ptr(NewFileName)
+	r1, _, _ := syscall.SyscallN(procApplyPatchToFile.Addr(), uintptr(unsafe.Pointer(_PatchFileName)), uintptr(unsafe.Pointer(_OldFileName)), uintptr(unsafe.Pointer(_NewFileName)), uintptr(ApplyOptionFlags))
+	return r1 != 0
 }
 
 // ApplyPatchToFileA calls mspatcha!ApplyPatchToFileA.
-func ApplyPatchToFileA(PatchFileName foundation.PSTR, OldFileName foundation.PSTR, NewFileName foundation.PSTR, ApplyOptionFlags uint32) foundation.BOOL {
+func ApplyPatchToFileA(PatchFileName foundation.PSTR, OldFileName foundation.PSTR, NewFileName foundation.PSTR, ApplyOptionFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procApplyPatchToFileA.Addr(), uintptr(unsafe.Pointer(PatchFileName)), uintptr(unsafe.Pointer(OldFileName)), uintptr(unsafe.Pointer(NewFileName)), uintptr(ApplyOptionFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ApplyPatchToFileByBuffers calls mspatcha!ApplyPatchToFileByBuffers.
-func ApplyPatchToFileByBuffers(PatchFileMapped *byte, PatchFileSize uint32, OldFileMapped *byte, OldFileSize uint32, NewFileBuffer **byte, NewFileBufferSize uint32, NewFileActualSize *uint32, NewFileTime *foundation.FILETIME, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) foundation.BOOL {
+func ApplyPatchToFileByBuffers(PatchFileMapped *byte, PatchFileSize uint32, OldFileMapped *byte, OldFileSize uint32, NewFileBuffer **byte, NewFileBufferSize uint32, NewFileActualSize *uint32, NewFileTime *foundation.FILETIME, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procApplyPatchToFileByBuffers.Addr(), uintptr(unsafe.Pointer(PatchFileMapped)), uintptr(PatchFileSize), uintptr(unsafe.Pointer(OldFileMapped)), uintptr(OldFileSize), uintptr(unsafe.Pointer(NewFileBuffer)), uintptr(NewFileBufferSize), uintptr(unsafe.Pointer(NewFileActualSize)), uintptr(unsafe.Pointer(NewFileTime)), uintptr(ApplyOptionFlags), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ApplyPatchToFileByHandles calls mspatcha!ApplyPatchToFileByHandles.
-func ApplyPatchToFileByHandles(PatchFileHandle foundation.HANDLE, OldFileHandle foundation.HANDLE, NewFileHandle foundation.HANDLE, ApplyOptionFlags uint32) foundation.BOOL {
+func ApplyPatchToFileByHandles(PatchFileHandle foundation.HANDLE, OldFileHandle foundation.HANDLE, NewFileHandle foundation.HANDLE, ApplyOptionFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procApplyPatchToFileByHandles.Addr(), uintptr(PatchFileHandle), uintptr(OldFileHandle), uintptr(NewFileHandle), uintptr(ApplyOptionFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ApplyPatchToFileByHandlesEx calls mspatcha!ApplyPatchToFileByHandlesEx.
-func ApplyPatchToFileByHandlesEx(PatchFileHandle foundation.HANDLE, OldFileHandle foundation.HANDLE, NewFileHandle foundation.HANDLE, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) foundation.BOOL {
+func ApplyPatchToFileByHandlesEx(PatchFileHandle foundation.HANDLE, OldFileHandle foundation.HANDLE, NewFileHandle foundation.HANDLE, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procApplyPatchToFileByHandlesEx.Addr(), uintptr(PatchFileHandle), uintptr(OldFileHandle), uintptr(NewFileHandle), uintptr(ApplyOptionFlags), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ApplyPatchToFileEx calls mspatcha!ApplyPatchToFileExW.
+func ApplyPatchToFileEx(PatchFileName string, OldFileName string, NewFileName string, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
+	_PatchFileName := win32.UTF16Ptr(PatchFileName)
+	_OldFileName := win32.UTF16Ptr(OldFileName)
+	_NewFileName := win32.UTF16Ptr(NewFileName)
+	r1, _, _ := syscall.SyscallN(procApplyPatchToFileEx.Addr(), uintptr(unsafe.Pointer(_PatchFileName)), uintptr(unsafe.Pointer(_OldFileName)), uintptr(unsafe.Pointer(_NewFileName)), uintptr(ApplyOptionFlags), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
+	return r1 != 0
 }
 
 // ApplyPatchToFileExA calls mspatcha!ApplyPatchToFileExA.
-func ApplyPatchToFileExA(PatchFileName foundation.PSTR, OldFileName foundation.PSTR, NewFileName foundation.PSTR, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) foundation.BOOL {
+func ApplyPatchToFileExA(PatchFileName foundation.PSTR, OldFileName foundation.PSTR, NewFileName foundation.PSTR, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procApplyPatchToFileExA.Addr(), uintptr(unsafe.Pointer(PatchFileName)), uintptr(unsafe.Pointer(OldFileName)), uintptr(unsafe.Pointer(NewFileName)), uintptr(ApplyOptionFlags), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// ApplyPatchToFileExW calls mspatcha!ApplyPatchToFileExW.
-func ApplyPatchToFileExW(PatchFileName foundation.PWSTR, OldFileName foundation.PWSTR, NewFileName foundation.PWSTR, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procApplyPatchToFileExW.Addr(), uintptr(unsafe.Pointer(PatchFileName)), uintptr(unsafe.Pointer(OldFileName)), uintptr(unsafe.Pointer(NewFileName)), uintptr(ApplyOptionFlags), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
-	return foundation.BOOL(r1)
-}
-
-// ApplyPatchToFileW calls mspatcha!ApplyPatchToFileW.
-func ApplyPatchToFileW(PatchFileName foundation.PWSTR, OldFileName foundation.PWSTR, NewFileName foundation.PWSTR, ApplyOptionFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procApplyPatchToFileW.Addr(), uintptr(unsafe.Pointer(PatchFileName)), uintptr(unsafe.Pointer(OldFileName)), uintptr(unsafe.Pointer(NewFileName)), uintptr(ApplyOptionFlags))
-	return foundation.BOOL(r1)
+// CreateActCtx calls KERNEL32!CreateActCtxW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createactctxw
+// Minimum OS: windows5.1.2600.
+func CreateActCtx(pActCtx *ACTCTXW) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateActCtx.Addr(), uintptr(unsafe.Pointer(pActCtx)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // CreateActCtxA calls KERNEL32!CreateActCtxA.
@@ -424,54 +445,59 @@ func CreateActCtxA(pActCtx *ACTCTXA) (foundation.HANDLE, error) {
 	return ret, nil
 }
 
-// CreateActCtxW calls KERNEL32!CreateActCtxW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createactctxw
-// Minimum OS: windows5.1.2600.
-func CreateActCtxW(pActCtx *ACTCTXW) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateActCtxW.Addr(), uintptr(unsafe.Pointer(pActCtx)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
+// CreatePatchFile calls mspatchc!CreatePatchFileW.
+func CreatePatchFile(OldFileName string, NewFileName string, PatchFileName string, OptionFlags uint32, OptionData *PATCH_OPTION_DATA) bool {
+	_OldFileName := win32.UTF16Ptr(OldFileName)
+	_NewFileName := win32.UTF16Ptr(NewFileName)
+	_PatchFileName := win32.UTF16Ptr(PatchFileName)
+	r1, _, _ := syscall.SyscallN(procCreatePatchFile.Addr(), uintptr(unsafe.Pointer(_OldFileName)), uintptr(unsafe.Pointer(_NewFileName)), uintptr(unsafe.Pointer(_PatchFileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)))
+	return r1 != 0
 }
 
 // CreatePatchFileA calls mspatchc!CreatePatchFileA.
-func CreatePatchFileA(OldFileName foundation.PSTR, NewFileName foundation.PSTR, PatchFileName foundation.PSTR, OptionFlags uint32, OptionData *PATCH_OPTION_DATA) foundation.BOOL {
+func CreatePatchFileA(OldFileName foundation.PSTR, NewFileName foundation.PSTR, PatchFileName foundation.PSTR, OptionFlags uint32, OptionData *PATCH_OPTION_DATA) bool {
 	r1, _, _ := syscall.SyscallN(procCreatePatchFileA.Addr(), uintptr(unsafe.Pointer(OldFileName)), uintptr(unsafe.Pointer(NewFileName)), uintptr(unsafe.Pointer(PatchFileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CreatePatchFileByHandles calls mspatchc!CreatePatchFileByHandles.
-func CreatePatchFileByHandles(OldFileHandle foundation.HANDLE, NewFileHandle foundation.HANDLE, PatchFileHandle foundation.HANDLE, OptionFlags uint32, OptionData *PATCH_OPTION_DATA) foundation.BOOL {
+func CreatePatchFileByHandles(OldFileHandle foundation.HANDLE, NewFileHandle foundation.HANDLE, PatchFileHandle foundation.HANDLE, OptionFlags uint32, OptionData *PATCH_OPTION_DATA) bool {
 	r1, _, _ := syscall.SyscallN(procCreatePatchFileByHandles.Addr(), uintptr(OldFileHandle), uintptr(NewFileHandle), uintptr(PatchFileHandle), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CreatePatchFileByHandlesEx calls mspatchc!CreatePatchFileByHandlesEx.
-func CreatePatchFileByHandlesEx(OldFileCount uint32, OldFileInfoArray *PATCH_OLD_FILE_INFO_H, NewFileHandle foundation.HANDLE, PatchFileHandle foundation.HANDLE, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreatePatchFileByHandlesEx.Addr(), uintptr(OldFileCount), uintptr(unsafe.Pointer(OldFileInfoArray)), uintptr(NewFileHandle), uintptr(PatchFileHandle), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
-	return foundation.BOOL(r1)
+func CreatePatchFileByHandlesEx(OldFileInfoArray []PATCH_OLD_FILE_INFO_H, NewFileHandle foundation.HANDLE, PatchFileHandle foundation.HANDLE, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
+	var _OldFileInfoArray *PATCH_OLD_FILE_INFO_H
+	if len(OldFileInfoArray) > 0 {
+		_OldFileInfoArray = &OldFileInfoArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCreatePatchFileByHandlesEx.Addr(), uintptr(len(OldFileInfoArray)), uintptr(unsafe.Pointer(_OldFileInfoArray)), uintptr(NewFileHandle), uintptr(PatchFileHandle), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
+	return r1 != 0
+}
+
+// CreatePatchFileEx calls mspatchc!CreatePatchFileExW.
+// https://learn.microsoft.com/windows/win32/DevNotes/patchapi-createpatchfileex
+func CreatePatchFileEx(OldFileInfoArray []PATCH_OLD_FILE_INFO_W, NewFileName string, PatchFileName string, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
+	var _OldFileInfoArray *PATCH_OLD_FILE_INFO_W
+	if len(OldFileInfoArray) > 0 {
+		_OldFileInfoArray = &OldFileInfoArray[0]
+	}
+	_NewFileName := win32.UTF16Ptr(NewFileName)
+	_PatchFileName := win32.UTF16Ptr(PatchFileName)
+	r1, _, _ := syscall.SyscallN(procCreatePatchFileEx.Addr(), uintptr(len(OldFileInfoArray)), uintptr(unsafe.Pointer(_OldFileInfoArray)), uintptr(unsafe.Pointer(_NewFileName)), uintptr(unsafe.Pointer(_PatchFileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
+	return r1 != 0
 }
 
 // CreatePatchFileExA calls mspatchc!CreatePatchFileExA.
 // https://learn.microsoft.com/windows/win32/DevNotes/patchapi-createpatchfileex
-func CreatePatchFileExA(OldFileCount uint32, OldFileInfoArray *PATCH_OLD_FILE_INFO_A, NewFileName foundation.PSTR, PatchFileName foundation.PSTR, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreatePatchFileExA.Addr(), uintptr(OldFileCount), uintptr(unsafe.Pointer(OldFileInfoArray)), uintptr(unsafe.Pointer(NewFileName)), uintptr(unsafe.Pointer(PatchFileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
-	return foundation.BOOL(r1)
-}
-
-// CreatePatchFileExW calls mspatchc!CreatePatchFileExW.
-// https://learn.microsoft.com/windows/win32/DevNotes/patchapi-createpatchfileex
-func CreatePatchFileExW(OldFileCount uint32, OldFileInfoArray *PATCH_OLD_FILE_INFO_W, NewFileName foundation.PWSTR, PatchFileName foundation.PWSTR, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreatePatchFileExW.Addr(), uintptr(OldFileCount), uintptr(unsafe.Pointer(OldFileInfoArray)), uintptr(unsafe.Pointer(NewFileName)), uintptr(unsafe.Pointer(PatchFileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
-	return foundation.BOOL(r1)
-}
-
-// CreatePatchFileW calls mspatchc!CreatePatchFileW.
-func CreatePatchFileW(OldFileName foundation.PWSTR, NewFileName foundation.PWSTR, PatchFileName foundation.PWSTR, OptionFlags uint32, OptionData *PATCH_OPTION_DATA) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreatePatchFileW.Addr(), uintptr(unsafe.Pointer(OldFileName)), uintptr(unsafe.Pointer(NewFileName)), uintptr(unsafe.Pointer(PatchFileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)))
-	return foundation.BOOL(r1)
+func CreatePatchFileExA(OldFileInfoArray []PATCH_OLD_FILE_INFO_A, NewFileName foundation.PSTR, PatchFileName foundation.PSTR, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
+	var _OldFileInfoArray *PATCH_OLD_FILE_INFO_A
+	if len(OldFileInfoArray) > 0 {
+		_OldFileInfoArray = &OldFileInfoArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCreatePatchFileExA.Addr(), uintptr(len(OldFileInfoArray)), uintptr(unsafe.Pointer(_OldFileInfoArray)), uintptr(unsafe.Pointer(NewFileName)), uintptr(unsafe.Pointer(PatchFileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
+	return r1 != 0
 }
 
 // DeactivateActCtx calls KERNEL32!DeactivateActCtx.
@@ -487,36 +513,50 @@ func DeactivateActCtx(dwFlags uint32, ulCookie uintptr) error {
 
 // DeltaFree calls msdelta!DeltaFree.
 // https://learn.microsoft.com/windows/win32/DevNotes/msdelta-deltafree
-func DeltaFree(lpMemory unsafe.Pointer) foundation.BOOL {
+func DeltaFree(lpMemory unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procDeltaFree.Addr(), uintptr(unsafe.Pointer(lpMemory)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ExtractPatchHeaderToFile calls mspatchc!ExtractPatchHeaderToFileW.
+// https://learn.microsoft.com/windows/win32/DevNotes/patchapi-extractpatchheadertofile
+func ExtractPatchHeaderToFile(PatchFileName string, PatchHeaderFileName string) bool {
+	_PatchFileName := win32.UTF16Ptr(PatchFileName)
+	_PatchHeaderFileName := win32.UTF16Ptr(PatchHeaderFileName)
+	r1, _, _ := syscall.SyscallN(procExtractPatchHeaderToFile.Addr(), uintptr(unsafe.Pointer(_PatchFileName)), uintptr(unsafe.Pointer(_PatchHeaderFileName)))
+	return r1 != 0
 }
 
 // ExtractPatchHeaderToFileA calls mspatchc!ExtractPatchHeaderToFileA.
 // https://learn.microsoft.com/windows/win32/DevNotes/patchapi-extractpatchheadertofile
-func ExtractPatchHeaderToFileA(PatchFileName foundation.PSTR, PatchHeaderFileName foundation.PSTR) foundation.BOOL {
+func ExtractPatchHeaderToFileA(PatchFileName foundation.PSTR, PatchHeaderFileName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procExtractPatchHeaderToFileA.Addr(), uintptr(unsafe.Pointer(PatchFileName)), uintptr(unsafe.Pointer(PatchHeaderFileName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ExtractPatchHeaderToFileByHandles calls mspatchc!ExtractPatchHeaderToFileByHandles.
-func ExtractPatchHeaderToFileByHandles(PatchFileHandle foundation.HANDLE, PatchHeaderFileHandle foundation.HANDLE) foundation.BOOL {
+func ExtractPatchHeaderToFileByHandles(PatchFileHandle foundation.HANDLE, PatchHeaderFileHandle foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procExtractPatchHeaderToFileByHandles.Addr(), uintptr(PatchFileHandle), uintptr(PatchHeaderFileHandle))
-	return foundation.BOOL(r1)
-}
-
-// ExtractPatchHeaderToFileW calls mspatchc!ExtractPatchHeaderToFileW.
-// https://learn.microsoft.com/windows/win32/DevNotes/patchapi-extractpatchheadertofile
-func ExtractPatchHeaderToFileW(PatchFileName foundation.PWSTR, PatchHeaderFileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procExtractPatchHeaderToFileW.Addr(), uintptr(unsafe.Pointer(PatchFileName)), uintptr(unsafe.Pointer(PatchHeaderFileName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FindActCtxSectionGuid calls KERNEL32!FindActCtxSectionGuid.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findactctxsectionguid
 // Minimum OS: windows5.1.2600.
-func FindActCtxSectionGuid(dwFlags uint32, lpExtensionGuid *win32.GUID, ulSectionId uint32, lpGuidToFind *win32.GUID, ReturnedData *ACTCTX_SECTION_KEYED_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procFindActCtxSectionGuid.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpExtensionGuid)), uintptr(ulSectionId), uintptr(unsafe.Pointer(lpGuidToFind)), uintptr(unsafe.Pointer(ReturnedData)))
+func FindActCtxSectionGuid(dwFlags uint32, ulSectionId uint32, lpGuidToFind *win32.GUID, ReturnedData *ACTCTX_SECTION_KEYED_DATA) error {
+	r1, _, e1 := syscall.SyscallN(procFindActCtxSectionGuid.Addr(), uintptr(dwFlags), 0, uintptr(ulSectionId), uintptr(unsafe.Pointer(lpGuidToFind)), uintptr(unsafe.Pointer(ReturnedData)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// FindActCtxSectionString calls KERNEL32!FindActCtxSectionStringW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findactctxsectionstringw
+// Minimum OS: windows5.1.2600.
+func FindActCtxSectionString(dwFlags uint32, ulSectionId uint32, lpStringToFind string, ReturnedData *ACTCTX_SECTION_KEYED_DATA) error {
+	_lpStringToFind := win32.UTF16Ptr(lpStringToFind)
+	r1, _, e1 := syscall.SyscallN(procFindActCtxSectionString.Addr(), uintptr(dwFlags), 0, uintptr(ulSectionId), uintptr(unsafe.Pointer(_lpStringToFind)), uintptr(unsafe.Pointer(ReturnedData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -526,19 +566,8 @@ func FindActCtxSectionGuid(dwFlags uint32, lpExtensionGuid *win32.GUID, ulSectio
 // FindActCtxSectionStringA calls KERNEL32!FindActCtxSectionStringA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findactctxsectionstringa
 // Minimum OS: windows5.1.2600.
-func FindActCtxSectionStringA(dwFlags uint32, lpExtensionGuid *win32.GUID, ulSectionId uint32, lpStringToFind foundation.PSTR, ReturnedData *ACTCTX_SECTION_KEYED_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procFindActCtxSectionStringA.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpExtensionGuid)), uintptr(ulSectionId), uintptr(unsafe.Pointer(lpStringToFind)), uintptr(unsafe.Pointer(ReturnedData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// FindActCtxSectionStringW calls KERNEL32!FindActCtxSectionStringW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findactctxsectionstringw
-// Minimum OS: windows5.1.2600.
-func FindActCtxSectionStringW(dwFlags uint32, lpExtensionGuid *win32.GUID, ulSectionId uint32, lpStringToFind foundation.PWSTR, ReturnedData *ACTCTX_SECTION_KEYED_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procFindActCtxSectionStringW.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpExtensionGuid)), uintptr(ulSectionId), uintptr(unsafe.Pointer(lpStringToFind)), uintptr(unsafe.Pointer(ReturnedData)))
+func FindActCtxSectionStringA(dwFlags uint32, ulSectionId uint32, lpStringToFind foundation.PSTR, ReturnedData *ACTCTX_SECTION_KEYED_DATA) error {
+	r1, _, e1 := syscall.SyscallN(procFindActCtxSectionStringA.Addr(), uintptr(dwFlags), 0, uintptr(ulSectionId), uintptr(unsafe.Pointer(lpStringToFind)), uintptr(unsafe.Pointer(ReturnedData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -556,52 +585,98 @@ func GetCurrentActCtx(lphActCtx *foundation.HANDLE) error {
 	return nil
 }
 
-// GetDeltaInfoA calls msdelta!GetDeltaInfoA.
-func GetDeltaInfoA(lpDeltaName foundation.PSTR, lpHeaderInfo *DELTA_HEADER_INFO) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetDeltaInfoA.Addr(), uintptr(unsafe.Pointer(lpDeltaName)), uintptr(unsafe.Pointer(lpHeaderInfo)))
-	return foundation.BOOL(r1)
+// GetDeltaInfo calls msdelta!GetDeltaInfoW.
+func GetDeltaInfo(lpDeltaName string, lpHeaderInfo *DELTA_HEADER_INFO) bool {
+	_lpDeltaName := win32.UTF16Ptr(lpDeltaName)
+	r1, _, _ := syscall.SyscallN(procGetDeltaInfo.Addr(), uintptr(unsafe.Pointer(_lpDeltaName)), uintptr(unsafe.Pointer(lpHeaderInfo)))
+	return r1 != 0
 }
 
-// GetDeltaInfoW calls msdelta!GetDeltaInfoW.
-func GetDeltaInfoW(lpDeltaName foundation.PWSTR, lpHeaderInfo *DELTA_HEADER_INFO) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetDeltaInfoW.Addr(), uintptr(unsafe.Pointer(lpDeltaName)), uintptr(unsafe.Pointer(lpHeaderInfo)))
-	return foundation.BOOL(r1)
+// GetDeltaInfoA calls msdelta!GetDeltaInfoA.
+func GetDeltaInfoA(lpDeltaName foundation.PSTR, lpHeaderInfo *DELTA_HEADER_INFO) bool {
+	r1, _, _ := syscall.SyscallN(procGetDeltaInfoA.Addr(), uintptr(unsafe.Pointer(lpDeltaName)), uintptr(unsafe.Pointer(lpHeaderInfo)))
+	return r1 != 0
+}
+
+// GetDeltaSignature calls msdelta!GetDeltaSignatureW.
+func GetDeltaSignature(FileTypeSet int64, HashAlgId securitycryptography.ALG_ID, lpSourceName string, lpHash *DELTA_HASH) bool {
+	_lpSourceName := win32.UTF16Ptr(lpSourceName)
+	r1, _, _ := syscall.SyscallN(procGetDeltaSignature.Addr(), uintptr(FileTypeSet), uintptr(HashAlgId), uintptr(unsafe.Pointer(_lpSourceName)), uintptr(unsafe.Pointer(lpHash)))
+	return r1 != 0
 }
 
 // GetDeltaSignatureA calls msdelta!GetDeltaSignatureA.
-func GetDeltaSignatureA(FileTypeSet int64, HashAlgId securitycryptography.ALG_ID, lpSourceName foundation.PSTR, lpHash *DELTA_HASH) foundation.BOOL {
+func GetDeltaSignatureA(FileTypeSet int64, HashAlgId securitycryptography.ALG_ID, lpSourceName foundation.PSTR, lpHash *DELTA_HASH) bool {
 	r1, _, _ := syscall.SyscallN(procGetDeltaSignatureA.Addr(), uintptr(FileTypeSet), uintptr(HashAlgId), uintptr(unsafe.Pointer(lpSourceName)), uintptr(unsafe.Pointer(lpHash)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetDeltaSignatureW calls msdelta!GetDeltaSignatureW.
-func GetDeltaSignatureW(FileTypeSet int64, HashAlgId securitycryptography.ALG_ID, lpSourceName foundation.PWSTR, lpHash *DELTA_HASH) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetDeltaSignatureW.Addr(), uintptr(FileTypeSet), uintptr(HashAlgId), uintptr(unsafe.Pointer(lpSourceName)), uintptr(unsafe.Pointer(lpHash)))
-	return foundation.BOOL(r1)
+// GetFilePatchSignature calls mspatcha!GetFilePatchSignatureW.
+func GetFilePatchSignature(FileName string, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []PATCH_IGNORE_RANGE, RetainRangeArray []PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PWSTR) bool {
+	_FileName := win32.UTF16Ptr(FileName)
+	var _IgnoreRangeArray *PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetFilePatchSignature.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(len(IgnoreRangeArray)), uintptr(unsafe.Pointer(_IgnoreRangeArray)), uintptr(len(RetainRangeArray)), uintptr(unsafe.Pointer(_RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
+	return r1 != 0
 }
 
 // GetFilePatchSignatureA calls mspatcha!GetFilePatchSignatureA.
-func GetFilePatchSignatureA(FileName foundation.PSTR, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeCount uint32, IgnoreRangeArray *PATCH_IGNORE_RANGE, RetainRangeCount uint32, RetainRangeArray *PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetFilePatchSignatureA.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(IgnoreRangeCount), uintptr(unsafe.Pointer(IgnoreRangeArray)), uintptr(RetainRangeCount), uintptr(unsafe.Pointer(RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
-	return foundation.BOOL(r1)
+func GetFilePatchSignatureA(FileName foundation.PSTR, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []PATCH_IGNORE_RANGE, RetainRangeArray []PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
+	var _IgnoreRangeArray *PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetFilePatchSignatureA.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(len(IgnoreRangeArray)), uintptr(unsafe.Pointer(_IgnoreRangeArray)), uintptr(len(RetainRangeArray)), uintptr(unsafe.Pointer(_RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
+	return r1 != 0
 }
 
 // GetFilePatchSignatureByBuffer calls mspatcha!GetFilePatchSignatureByBuffer.
-func GetFilePatchSignatureByBuffer(FileBufferWritable *byte, FileSize uint32, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeCount uint32, IgnoreRangeArray *PATCH_IGNORE_RANGE, RetainRangeCount uint32, RetainRangeArray *PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetFilePatchSignatureByBuffer.Addr(), uintptr(unsafe.Pointer(FileBufferWritable)), uintptr(FileSize), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(IgnoreRangeCount), uintptr(unsafe.Pointer(IgnoreRangeArray)), uintptr(RetainRangeCount), uintptr(unsafe.Pointer(RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
-	return foundation.BOOL(r1)
+func GetFilePatchSignatureByBuffer(FileBufferWritable *byte, FileSize uint32, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []PATCH_IGNORE_RANGE, RetainRangeArray []PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
+	var _IgnoreRangeArray *PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetFilePatchSignatureByBuffer.Addr(), uintptr(unsafe.Pointer(FileBufferWritable)), uintptr(FileSize), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(len(IgnoreRangeArray)), uintptr(unsafe.Pointer(_IgnoreRangeArray)), uintptr(len(RetainRangeArray)), uintptr(unsafe.Pointer(_RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
+	return r1 != 0
 }
 
 // GetFilePatchSignatureByHandle calls mspatcha!GetFilePatchSignatureByHandle.
-func GetFilePatchSignatureByHandle(FileHandle foundation.HANDLE, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeCount uint32, IgnoreRangeArray *PATCH_IGNORE_RANGE, RetainRangeCount uint32, RetainRangeArray *PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetFilePatchSignatureByHandle.Addr(), uintptr(FileHandle), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(IgnoreRangeCount), uintptr(unsafe.Pointer(IgnoreRangeArray)), uintptr(RetainRangeCount), uintptr(unsafe.Pointer(RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
-	return foundation.BOOL(r1)
+func GetFilePatchSignatureByHandle(FileHandle foundation.HANDLE, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []PATCH_IGNORE_RANGE, RetainRangeArray []PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
+	var _IgnoreRangeArray *PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetFilePatchSignatureByHandle.Addr(), uintptr(FileHandle), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(len(IgnoreRangeArray)), uintptr(unsafe.Pointer(_IgnoreRangeArray)), uintptr(len(RetainRangeArray)), uintptr(unsafe.Pointer(_RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
+	return r1 != 0
 }
 
-// GetFilePatchSignatureW calls mspatcha!GetFilePatchSignatureW.
-func GetFilePatchSignatureW(FileName foundation.PWSTR, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeCount uint32, IgnoreRangeArray *PATCH_IGNORE_RANGE, RetainRangeCount uint32, RetainRangeArray *PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetFilePatchSignatureW.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(IgnoreRangeCount), uintptr(unsafe.Pointer(IgnoreRangeArray)), uintptr(RetainRangeCount), uintptr(unsafe.Pointer(RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
-	return foundation.BOOL(r1)
+// MsiAdvertiseProduct calls msi!MsiAdvertiseProductW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiadvertiseproductw
+// Minimum OS: windows8.0.
+func MsiAdvertiseProduct(szPackagePath string, szScriptfilePath string, szTransforms string, lgidLanguage uint16) uint32 {
+	_szPackagePath := win32.UTF16Ptr(szPackagePath)
+	_szScriptfilePath := win32.UTF16Ptr(szScriptfilePath)
+	_szTransforms := win32.UTF16Ptr(szTransforms)
+	r1, _, _ := syscall.SyscallN(procMsiAdvertiseProduct.Addr(), uintptr(unsafe.Pointer(_szPackagePath)), uintptr(unsafe.Pointer(_szScriptfilePath)), uintptr(unsafe.Pointer(_szTransforms)), uintptr(lgidLanguage))
+	return uint32(r1)
 }
 
 // MsiAdvertiseProductA calls msi!MsiAdvertiseProductA.
@@ -609,6 +684,17 @@ func GetFilePatchSignatureW(FileName foundation.PWSTR, OptionFlags uint32, Optio
 // Minimum OS: windows8.0.
 func MsiAdvertiseProductA(szPackagePath foundation.PSTR, szScriptfilePath foundation.PSTR, szTransforms foundation.PSTR, lgidLanguage uint16) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiAdvertiseProductA.Addr(), uintptr(unsafe.Pointer(szPackagePath)), uintptr(unsafe.Pointer(szScriptfilePath)), uintptr(unsafe.Pointer(szTransforms)), uintptr(lgidLanguage))
+	return uint32(r1)
+}
+
+// MsiAdvertiseProductEx calls msi!MsiAdvertiseProductExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiadvertiseproductexw
+// Minimum OS: windows8.0.
+func MsiAdvertiseProductEx(szPackagePath string, szScriptfilePath string, szTransforms string, lgidLanguage uint16, dwPlatform uint32, dwOptions uint32) uint32 {
+	_szPackagePath := win32.UTF16Ptr(szPackagePath)
+	_szScriptfilePath := win32.UTF16Ptr(szScriptfilePath)
+	_szTransforms := win32.UTF16Ptr(szTransforms)
+	r1, _, _ := syscall.SyscallN(procMsiAdvertiseProductEx.Addr(), uintptr(unsafe.Pointer(_szPackagePath)), uintptr(unsafe.Pointer(_szScriptfilePath)), uintptr(unsafe.Pointer(_szTransforms)), uintptr(lgidLanguage), uintptr(dwPlatform), uintptr(dwOptions))
 	return uint32(r1)
 }
 
@@ -620,35 +706,33 @@ func MsiAdvertiseProductExA(szPackagePath foundation.PSTR, szScriptfilePath foun
 	return uint32(r1)
 }
 
-// MsiAdvertiseProductExW calls msi!MsiAdvertiseProductExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiadvertiseproductexw
+// MsiAdvertiseScript calls msi!MsiAdvertiseScriptW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiadvertisescriptw
 // Minimum OS: windows8.0.
-func MsiAdvertiseProductExW(szPackagePath foundation.PWSTR, szScriptfilePath foundation.PWSTR, szTransforms foundation.PWSTR, lgidLanguage uint16, dwPlatform uint32, dwOptions uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiAdvertiseProductExW.Addr(), uintptr(unsafe.Pointer(szPackagePath)), uintptr(unsafe.Pointer(szScriptfilePath)), uintptr(unsafe.Pointer(szTransforms)), uintptr(lgidLanguage), uintptr(dwPlatform), uintptr(dwOptions))
-	return uint32(r1)
-}
-
-// MsiAdvertiseProductW calls msi!MsiAdvertiseProductW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiadvertiseproductw
-// Minimum OS: windows8.0.
-func MsiAdvertiseProductW(szPackagePath foundation.PWSTR, szScriptfilePath foundation.PWSTR, szTransforms foundation.PWSTR, lgidLanguage uint16) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiAdvertiseProductW.Addr(), uintptr(unsafe.Pointer(szPackagePath)), uintptr(unsafe.Pointer(szScriptfilePath)), uintptr(unsafe.Pointer(szTransforms)), uintptr(lgidLanguage))
+func MsiAdvertiseScript(szScriptFile string, dwFlags uint32, phRegData *systemregistry.HKEY, fRemoveItems bool) uint32 {
+	_szScriptFile := win32.UTF16Ptr(szScriptFile)
+	_fRemoveItems := win32.Bool32(fRemoveItems)
+	r1, _, _ := syscall.SyscallN(procMsiAdvertiseScript.Addr(), uintptr(unsafe.Pointer(_szScriptFile)), uintptr(dwFlags), uintptr(unsafe.Pointer(phRegData)), uintptr(_fRemoveItems))
 	return uint32(r1)
 }
 
 // MsiAdvertiseScriptA calls msi!MsiAdvertiseScriptA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiadvertisescripta
 // Minimum OS: windows8.0.
-func MsiAdvertiseScriptA(szScriptFile foundation.PSTR, dwFlags uint32, phRegData *systemregistry.HKEY, fRemoveItems foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiAdvertiseScriptA.Addr(), uintptr(unsafe.Pointer(szScriptFile)), uintptr(dwFlags), uintptr(unsafe.Pointer(phRegData)), uintptr(fRemoveItems))
+func MsiAdvertiseScriptA(szScriptFile foundation.PSTR, dwFlags uint32, phRegData *systemregistry.HKEY, fRemoveItems bool) uint32 {
+	_fRemoveItems := win32.Bool32(fRemoveItems)
+	r1, _, _ := syscall.SyscallN(procMsiAdvertiseScriptA.Addr(), uintptr(unsafe.Pointer(szScriptFile)), uintptr(dwFlags), uintptr(unsafe.Pointer(phRegData)), uintptr(_fRemoveItems))
 	return uint32(r1)
 }
 
-// MsiAdvertiseScriptW calls msi!MsiAdvertiseScriptW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiadvertisescriptw
+// MsiApplyMultiplePatches calls msi!MsiApplyMultiplePatchesW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiapplymultiplepatchesw
 // Minimum OS: windows8.0.
-func MsiAdvertiseScriptW(szScriptFile foundation.PWSTR, dwFlags uint32, phRegData *systemregistry.HKEY, fRemoveItems foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiAdvertiseScriptW.Addr(), uintptr(unsafe.Pointer(szScriptFile)), uintptr(dwFlags), uintptr(unsafe.Pointer(phRegData)), uintptr(fRemoveItems))
+func MsiApplyMultiplePatches(szPatchPackages string, szProductCode string, szPropertiesList string) uint32 {
+	_szPatchPackages := win32.UTF16Ptr(szPatchPackages)
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szPropertiesList := win32.UTF16Ptr(szPropertiesList)
+	r1, _, _ := syscall.SyscallN(procMsiApplyMultiplePatches.Addr(), uintptr(unsafe.Pointer(_szPatchPackages)), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szPropertiesList)))
 	return uint32(r1)
 }
 
@@ -660,11 +744,14 @@ func MsiApplyMultiplePatchesA(szPatchPackages foundation.PSTR, szProductCode fou
 	return uint32(r1)
 }
 
-// MsiApplyMultiplePatchesW calls msi!MsiApplyMultiplePatchesW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiapplymultiplepatchesw
+// MsiApplyPatch calls msi!MsiApplyPatchW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiapplypatchw
 // Minimum OS: windows8.0.
-func MsiApplyMultiplePatchesW(szPatchPackages foundation.PWSTR, szProductCode foundation.PWSTR, szPropertiesList foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiApplyMultiplePatchesW.Addr(), uintptr(unsafe.Pointer(szPatchPackages)), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szPropertiesList)))
+func MsiApplyPatch(szPatchPackage string, szInstallPackage string, eInstallType INSTALLTYPE, szCommandLine string) uint32 {
+	_szPatchPackage := win32.UTF16Ptr(szPatchPackage)
+	_szInstallPackage := win32.UTF16Ptr(szInstallPackage)
+	_szCommandLine := win32.UTF16Ptr(szCommandLine)
+	r1, _, _ := syscall.SyscallN(procMsiApplyPatch.Addr(), uintptr(unsafe.Pointer(_szPatchPackage)), uintptr(unsafe.Pointer(_szInstallPackage)), uintptr(eInstallType), uintptr(unsafe.Pointer(_szCommandLine)))
 	return uint32(r1)
 }
 
@@ -676,11 +763,12 @@ func MsiApplyPatchA(szPatchPackage foundation.PSTR, szInstallPackage foundation.
 	return uint32(r1)
 }
 
-// MsiApplyPatchW calls msi!MsiApplyPatchW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiapplypatchw
+// MsiBeginTransaction calls msi!MsiBeginTransactionW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msibegintransactionw
 // Minimum OS: windows8.0.
-func MsiApplyPatchW(szPatchPackage foundation.PWSTR, szInstallPackage foundation.PWSTR, eInstallType INSTALLTYPE, szCommandLine foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiApplyPatchW.Addr(), uintptr(unsafe.Pointer(szPatchPackage)), uintptr(unsafe.Pointer(szInstallPackage)), uintptr(eInstallType), uintptr(unsafe.Pointer(szCommandLine)))
+func MsiBeginTransaction(szName string, dwTransactionAttributes uint32, phTransactionHandle *MSIHANDLE, phChangeOfOwnerEvent *foundation.HANDLE) uint32 {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(procMsiBeginTransaction.Addr(), uintptr(unsafe.Pointer(_szName)), uintptr(dwTransactionAttributes), uintptr(unsafe.Pointer(phTransactionHandle)), uintptr(unsafe.Pointer(phChangeOfOwnerEvent)))
 	return uint32(r1)
 }
 
@@ -689,14 +777,6 @@ func MsiApplyPatchW(szPatchPackage foundation.PWSTR, szInstallPackage foundation
 // Minimum OS: windows8.0.
 func MsiBeginTransactionA(szName foundation.PSTR, dwTransactionAttributes uint32, phTransactionHandle *MSIHANDLE, phChangeOfOwnerEvent *foundation.HANDLE) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiBeginTransactionA.Addr(), uintptr(unsafe.Pointer(szName)), uintptr(dwTransactionAttributes), uintptr(unsafe.Pointer(phTransactionHandle)), uintptr(unsafe.Pointer(phChangeOfOwnerEvent)))
-	return uint32(r1)
-}
-
-// MsiBeginTransactionW calls msi!MsiBeginTransactionW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msibegintransactionw
-// Minimum OS: windows8.0.
-func MsiBeginTransactionW(szName foundation.PWSTR, dwTransactionAttributes uint32, phTransactionHandle *MSIHANDLE, phChangeOfOwnerEvent *foundation.HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiBeginTransactionW.Addr(), uintptr(unsafe.Pointer(szName)), uintptr(dwTransactionAttributes), uintptr(unsafe.Pointer(phTransactionHandle)), uintptr(unsafe.Pointer(phChangeOfOwnerEvent)))
 	return uint32(r1)
 }
 
@@ -716,6 +796,15 @@ func MsiCloseHandle(hAny MSIHANDLE) uint32 {
 	return uint32(r1)
 }
 
+// MsiCollectUserInfo calls msi!MsiCollectUserInfoW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msicollectuserinfow
+// Minimum OS: windows8.0.
+func MsiCollectUserInfo(szProduct string) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiCollectUserInfo.Addr(), uintptr(unsafe.Pointer(_szProduct)))
+	return uint32(r1)
+}
+
 // MsiCollectUserInfoA calls msi!MsiCollectUserInfoA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msicollectuserinfoa
 // Minimum OS: windows8.0.
@@ -724,11 +813,13 @@ func MsiCollectUserInfoA(szProduct foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// MsiCollectUserInfoW calls msi!MsiCollectUserInfoW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msicollectuserinfow
+// MsiConfigureFeature calls msi!MsiConfigureFeatureW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiconfigurefeaturew
 // Minimum OS: windows8.0.
-func MsiCollectUserInfoW(szProduct foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiCollectUserInfoW.Addr(), uintptr(unsafe.Pointer(szProduct)))
+func MsiConfigureFeature(szProduct string, szFeature string, eInstallState INSTALLSTATE) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiConfigureFeature.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szFeature)), uintptr(eInstallState))
 	return uint32(r1)
 }
 
@@ -740,11 +831,12 @@ func MsiConfigureFeatureA(szProduct foundation.PSTR, szFeature foundation.PSTR, 
 	return uint32(r1)
 }
 
-// MsiConfigureFeatureW calls msi!MsiConfigureFeatureW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiconfigurefeaturew
+// MsiConfigureProduct calls msi!MsiConfigureProductW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiconfigureproductw
 // Minimum OS: windows8.0.
-func MsiConfigureFeatureW(szProduct foundation.PWSTR, szFeature foundation.PWSTR, eInstallState INSTALLSTATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiConfigureFeatureW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)), uintptr(eInstallState))
+func MsiConfigureProduct(szProduct string, iInstallLevel INSTALLLEVEL, eInstallState INSTALLSTATE) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiConfigureProduct.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(iInstallLevel), uintptr(eInstallState))
 	return uint32(r1)
 }
 
@@ -756,27 +848,21 @@ func MsiConfigureProductA(szProduct foundation.PSTR, iInstallLevel INSTALLLEVEL,
 	return uint32(r1)
 }
 
+// MsiConfigureProductEx calls msi!MsiConfigureProductExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiconfigureproductexw
+// Minimum OS: windows8.0.
+func MsiConfigureProductEx(szProduct string, iInstallLevel INSTALLLEVEL, eInstallState INSTALLSTATE, szCommandLine string) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szCommandLine := win32.UTF16Ptr(szCommandLine)
+	r1, _, _ := syscall.SyscallN(procMsiConfigureProductEx.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(iInstallLevel), uintptr(eInstallState), uintptr(unsafe.Pointer(_szCommandLine)))
+	return uint32(r1)
+}
+
 // MsiConfigureProductExA calls msi!MsiConfigureProductExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiconfigureproductexa
 // Minimum OS: windows8.0.
 func MsiConfigureProductExA(szProduct foundation.PSTR, iInstallLevel INSTALLLEVEL, eInstallState INSTALLSTATE, szCommandLine foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiConfigureProductExA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(iInstallLevel), uintptr(eInstallState), uintptr(unsafe.Pointer(szCommandLine)))
-	return uint32(r1)
-}
-
-// MsiConfigureProductExW calls msi!MsiConfigureProductExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiconfigureproductexw
-// Minimum OS: windows8.0.
-func MsiConfigureProductExW(szProduct foundation.PWSTR, iInstallLevel INSTALLLEVEL, eInstallState INSTALLSTATE, szCommandLine foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiConfigureProductExW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(iInstallLevel), uintptr(eInstallState), uintptr(unsafe.Pointer(szCommandLine)))
-	return uint32(r1)
-}
-
-// MsiConfigureProductW calls msi!MsiConfigureProductW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiconfigureproductw
-// Minimum OS: windows8.0.
-func MsiConfigureProductW(szProduct foundation.PWSTR, iInstallLevel INSTALLLEVEL, eInstallState INSTALLSTATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiConfigureProductW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(iInstallLevel), uintptr(eInstallState))
 	return uint32(r1)
 }
 
@@ -788,6 +874,15 @@ func MsiCreateRecord(cParams uint32) MSIHANDLE {
 	return MSIHANDLE(r1)
 }
 
+// MsiCreateTransformSummaryInfo calls msi!MsiCreateTransformSummaryInfoW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msicreatetransformsummaryinfow
+// Minimum OS: windows8.0.
+func MsiCreateTransformSummaryInfo(hDatabase MSIHANDLE, hDatabaseReference MSIHANDLE, szTransformFile string, iErrorConditions MSITRANSFORM_ERROR, iValidation MSITRANSFORM_VALIDATE) uint32 {
+	_szTransformFile := win32.UTF16Ptr(szTransformFile)
+	r1, _, _ := syscall.SyscallN(procMsiCreateTransformSummaryInfo.Addr(), uintptr(hDatabase), uintptr(hDatabaseReference), uintptr(unsafe.Pointer(_szTransformFile)), uintptr(iErrorConditions), uintptr(iValidation))
+	return uint32(r1)
+}
+
 // MsiCreateTransformSummaryInfoA calls msi!MsiCreateTransformSummaryInfoA.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msicreatetransformsummaryinfoa
 // Minimum OS: windows8.0.
@@ -796,11 +891,12 @@ func MsiCreateTransformSummaryInfoA(hDatabase MSIHANDLE, hDatabaseReference MSIH
 	return uint32(r1)
 }
 
-// MsiCreateTransformSummaryInfoW calls msi!MsiCreateTransformSummaryInfoW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msicreatetransformsummaryinfow
+// MsiDatabaseApplyTransform calls msi!MsiDatabaseApplyTransformW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseapplytransformw
 // Minimum OS: windows8.0.
-func MsiCreateTransformSummaryInfoW(hDatabase MSIHANDLE, hDatabaseReference MSIHANDLE, szTransformFile foundation.PWSTR, iErrorConditions MSITRANSFORM_ERROR, iValidation MSITRANSFORM_VALIDATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiCreateTransformSummaryInfoW.Addr(), uintptr(hDatabase), uintptr(hDatabaseReference), uintptr(unsafe.Pointer(szTransformFile)), uintptr(iErrorConditions), uintptr(iValidation))
+func MsiDatabaseApplyTransform(hDatabase MSIHANDLE, szTransformFile string, iErrorConditions MSITRANSFORM_ERROR) uint32 {
+	_szTransformFile := win32.UTF16Ptr(szTransformFile)
+	r1, _, _ := syscall.SyscallN(procMsiDatabaseApplyTransform.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(_szTransformFile)), uintptr(iErrorConditions))
 	return uint32(r1)
 }
 
@@ -812,19 +908,22 @@ func MsiDatabaseApplyTransformA(hDatabase MSIHANDLE, szTransformFile foundation.
 	return uint32(r1)
 }
 
-// MsiDatabaseApplyTransformW calls msi!MsiDatabaseApplyTransformW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseapplytransformw
-// Minimum OS: windows8.0.
-func MsiDatabaseApplyTransformW(hDatabase MSIHANDLE, szTransformFile foundation.PWSTR, iErrorConditions MSITRANSFORM_ERROR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDatabaseApplyTransformW.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(szTransformFile)), uintptr(iErrorConditions))
-	return uint32(r1)
-}
-
 // MsiDatabaseCommit calls msi!MsiDatabaseCommit.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabasecommit
 // Minimum OS: windows8.0.
 func MsiDatabaseCommit(hDatabase MSIHANDLE) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiDatabaseCommit.Addr(), uintptr(hDatabase))
+	return uint32(r1)
+}
+
+// MsiDatabaseExport calls msi!MsiDatabaseExportW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseexportw
+// Minimum OS: windows8.0.
+func MsiDatabaseExport(hDatabase MSIHANDLE, szTableName string, szFolderPath string, szFileName string) uint32 {
+	_szTableName := win32.UTF16Ptr(szTableName)
+	_szFolderPath := win32.UTF16Ptr(szFolderPath)
+	_szFileName := win32.UTF16Ptr(szFileName)
+	r1, _, _ := syscall.SyscallN(procMsiDatabaseExport.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(_szTableName)), uintptr(unsafe.Pointer(_szFolderPath)), uintptr(unsafe.Pointer(_szFileName)))
 	return uint32(r1)
 }
 
@@ -836,27 +935,29 @@ func MsiDatabaseExportA(hDatabase MSIHANDLE, szTableName foundation.PSTR, szFold
 	return uint32(r1)
 }
 
-// MsiDatabaseExportW calls msi!MsiDatabaseExportW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseexportw
+// MsiDatabaseGenerateTransform calls msi!MsiDatabaseGenerateTransformW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabasegeneratetransformw
 // Minimum OS: windows8.0.
-func MsiDatabaseExportW(hDatabase MSIHANDLE, szTableName foundation.PWSTR, szFolderPath foundation.PWSTR, szFileName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDatabaseExportW.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szFolderPath)), uintptr(unsafe.Pointer(szFileName)))
+func MsiDatabaseGenerateTransform(hDatabase MSIHANDLE, hDatabaseReference MSIHANDLE, szTransformFile string) uint32 {
+	_szTransformFile := win32.UTF16Ptr(szTransformFile)
+	r1, _, _ := syscall.SyscallN(procMsiDatabaseGenerateTransform.Addr(), uintptr(hDatabase), uintptr(hDatabaseReference), uintptr(unsafe.Pointer(_szTransformFile)), 0, 0)
 	return uint32(r1)
 }
 
 // MsiDatabaseGenerateTransformA calls msi!MsiDatabaseGenerateTransformA.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabasegeneratetransforma
 // Minimum OS: windows8.0.
-func MsiDatabaseGenerateTransformA(hDatabase MSIHANDLE, hDatabaseReference MSIHANDLE, szTransformFile foundation.PSTR, iReserved1 int32, iReserved2 int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDatabaseGenerateTransformA.Addr(), uintptr(hDatabase), uintptr(hDatabaseReference), uintptr(unsafe.Pointer(szTransformFile)), uintptr(iReserved1), uintptr(iReserved2))
+func MsiDatabaseGenerateTransformA(hDatabase MSIHANDLE, hDatabaseReference MSIHANDLE, szTransformFile foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiDatabaseGenerateTransformA.Addr(), uintptr(hDatabase), uintptr(hDatabaseReference), uintptr(unsafe.Pointer(szTransformFile)), 0, 0)
 	return uint32(r1)
 }
 
-// MsiDatabaseGenerateTransformW calls msi!MsiDatabaseGenerateTransformW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabasegeneratetransformw
+// MsiDatabaseGetPrimaryKeys calls msi!MsiDatabaseGetPrimaryKeysW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabasegetprimarykeysw
 // Minimum OS: windows8.0.
-func MsiDatabaseGenerateTransformW(hDatabase MSIHANDLE, hDatabaseReference MSIHANDLE, szTransformFile foundation.PWSTR, iReserved1 int32, iReserved2 int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDatabaseGenerateTransformW.Addr(), uintptr(hDatabase), uintptr(hDatabaseReference), uintptr(unsafe.Pointer(szTransformFile)), uintptr(iReserved1), uintptr(iReserved2))
+func MsiDatabaseGetPrimaryKeys(hDatabase MSIHANDLE, szTableName string, phRecord *MSIHANDLE) uint32 {
+	_szTableName := win32.UTF16Ptr(szTableName)
+	r1, _, _ := syscall.SyscallN(procMsiDatabaseGetPrimaryKeys.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(_szTableName)), uintptr(unsafe.Pointer(phRecord)))
 	return uint32(r1)
 }
 
@@ -868,11 +969,13 @@ func MsiDatabaseGetPrimaryKeysA(hDatabase MSIHANDLE, szTableName foundation.PSTR
 	return uint32(r1)
 }
 
-// MsiDatabaseGetPrimaryKeysW calls msi!MsiDatabaseGetPrimaryKeysW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabasegetprimarykeysw
+// MsiDatabaseImport calls msi!MsiDatabaseImportW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseimportw
 // Minimum OS: windows8.0.
-func MsiDatabaseGetPrimaryKeysW(hDatabase MSIHANDLE, szTableName foundation.PWSTR, phRecord *MSIHANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDatabaseGetPrimaryKeysW.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(phRecord)))
+func MsiDatabaseImport(hDatabase MSIHANDLE, szFolderPath string, szFileName string) uint32 {
+	_szFolderPath := win32.UTF16Ptr(szFolderPath)
+	_szFileName := win32.UTF16Ptr(szFileName)
+	r1, _, _ := syscall.SyscallN(procMsiDatabaseImport.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(_szFolderPath)), uintptr(unsafe.Pointer(_szFileName)))
 	return uint32(r1)
 }
 
@@ -884,12 +987,13 @@ func MsiDatabaseImportA(hDatabase MSIHANDLE, szFolderPath foundation.PSTR, szFil
 	return uint32(r1)
 }
 
-// MsiDatabaseImportW calls msi!MsiDatabaseImportW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseimportw
+// MsiDatabaseIsTablePersistent calls msi!MsiDatabaseIsTablePersistentW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseistablepersistentw
 // Minimum OS: windows8.0.
-func MsiDatabaseImportW(hDatabase MSIHANDLE, szFolderPath foundation.PWSTR, szFileName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDatabaseImportW.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(szFolderPath)), uintptr(unsafe.Pointer(szFileName)))
-	return uint32(r1)
+func MsiDatabaseIsTablePersistent(hDatabase MSIHANDLE, szTableName string) MSICONDITION {
+	_szTableName := win32.UTF16Ptr(szTableName)
+	r1, _, _ := syscall.SyscallN(procMsiDatabaseIsTablePersistent.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(_szTableName)))
+	return MSICONDITION(r1)
 }
 
 // MsiDatabaseIsTablePersistentA calls msi!MsiDatabaseIsTablePersistentA.
@@ -900,12 +1004,13 @@ func MsiDatabaseIsTablePersistentA(hDatabase MSIHANDLE, szTableName foundation.P
 	return MSICONDITION(r1)
 }
 
-// MsiDatabaseIsTablePersistentW calls msi!MsiDatabaseIsTablePersistentW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseistablepersistentw
+// MsiDatabaseMerge calls msi!MsiDatabaseMergeW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabasemergew
 // Minimum OS: windows8.0.
-func MsiDatabaseIsTablePersistentW(hDatabase MSIHANDLE, szTableName foundation.PWSTR) MSICONDITION {
-	r1, _, _ := syscall.SyscallN(procMsiDatabaseIsTablePersistentW.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(szTableName)))
-	return MSICONDITION(r1)
+func MsiDatabaseMerge(hDatabase MSIHANDLE, hDatabaseMerge MSIHANDLE, szTableName string) uint32 {
+	_szTableName := win32.UTF16Ptr(szTableName)
+	r1, _, _ := syscall.SyscallN(procMsiDatabaseMerge.Addr(), uintptr(hDatabase), uintptr(hDatabaseMerge), uintptr(unsafe.Pointer(_szTableName)))
+	return uint32(r1)
 }
 
 // MsiDatabaseMergeA calls msi!MsiDatabaseMergeA.
@@ -916,11 +1021,12 @@ func MsiDatabaseMergeA(hDatabase MSIHANDLE, hDatabaseMerge MSIHANDLE, szTableNam
 	return uint32(r1)
 }
 
-// MsiDatabaseMergeW calls msi!MsiDatabaseMergeW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabasemergew
+// MsiDatabaseOpenView calls msi!MsiDatabaseOpenViewW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseopenvieww
 // Minimum OS: windows8.0.
-func MsiDatabaseMergeW(hDatabase MSIHANDLE, hDatabaseMerge MSIHANDLE, szTableName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDatabaseMergeW.Addr(), uintptr(hDatabase), uintptr(hDatabaseMerge), uintptr(unsafe.Pointer(szTableName)))
+func MsiDatabaseOpenView(hDatabase MSIHANDLE, szQuery string, phView *MSIHANDLE) uint32 {
+	_szQuery := win32.UTF16Ptr(szQuery)
+	r1, _, _ := syscall.SyscallN(procMsiDatabaseOpenView.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(_szQuery)), uintptr(unsafe.Pointer(phView)))
 	return uint32(r1)
 }
 
@@ -932,43 +1038,63 @@ func MsiDatabaseOpenViewA(hDatabase MSIHANDLE, szQuery foundation.PSTR, phView *
 	return uint32(r1)
 }
 
-// MsiDatabaseOpenViewW calls msi!MsiDatabaseOpenViewW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidatabaseopenvieww
+// MsiDetermineApplicablePatches calls msi!MsiDetermineApplicablePatchesW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msidetermineapplicablepatchesw
 // Minimum OS: windows8.0.
-func MsiDatabaseOpenViewW(hDatabase MSIHANDLE, szQuery foundation.PWSTR, phView *MSIHANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDatabaseOpenViewW.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(szQuery)), uintptr(unsafe.Pointer(phView)))
+func MsiDetermineApplicablePatches(szProductPackagePath string, pPatchInfo []MSIPATCHSEQUENCEINFOW) uint32 {
+	_szProductPackagePath := win32.UTF16Ptr(szProductPackagePath)
+	var _pPatchInfo *MSIPATCHSEQUENCEINFOW
+	if len(pPatchInfo) > 0 {
+		_pPatchInfo = &pPatchInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMsiDetermineApplicablePatches.Addr(), uintptr(unsafe.Pointer(_szProductPackagePath)), uintptr(len(pPatchInfo)), uintptr(unsafe.Pointer(_pPatchInfo)))
 	return uint32(r1)
 }
 
 // MsiDetermineApplicablePatchesA calls msi!MsiDetermineApplicablePatchesA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msidetermineapplicablepatchesa
 // Minimum OS: windows8.0.
-func MsiDetermineApplicablePatchesA(szProductPackagePath foundation.PSTR, cPatchInfo uint32, pPatchInfo *MSIPATCHSEQUENCEINFOA) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDetermineApplicablePatchesA.Addr(), uintptr(unsafe.Pointer(szProductPackagePath)), uintptr(cPatchInfo), uintptr(unsafe.Pointer(pPatchInfo)))
+func MsiDetermineApplicablePatchesA(szProductPackagePath foundation.PSTR, pPatchInfo []MSIPATCHSEQUENCEINFOA) uint32 {
+	var _pPatchInfo *MSIPATCHSEQUENCEINFOA
+	if len(pPatchInfo) > 0 {
+		_pPatchInfo = &pPatchInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMsiDetermineApplicablePatchesA.Addr(), uintptr(unsafe.Pointer(szProductPackagePath)), uintptr(len(pPatchInfo)), uintptr(unsafe.Pointer(_pPatchInfo)))
 	return uint32(r1)
 }
 
-// MsiDetermineApplicablePatchesW calls msi!MsiDetermineApplicablePatchesW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msidetermineapplicablepatchesw
+// MsiDeterminePatchSequence calls msi!MsiDeterminePatchSequenceW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msideterminepatchsequencew
 // Minimum OS: windows8.0.
-func MsiDetermineApplicablePatchesW(szProductPackagePath foundation.PWSTR, cPatchInfo uint32, pPatchInfo *MSIPATCHSEQUENCEINFOW) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDetermineApplicablePatchesW.Addr(), uintptr(unsafe.Pointer(szProductPackagePath)), uintptr(cPatchInfo), uintptr(unsafe.Pointer(pPatchInfo)))
+func MsiDeterminePatchSequence(szProductCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, pPatchInfo []MSIPATCHSEQUENCEINFOW) uint32 {
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	var _pPatchInfo *MSIPATCHSEQUENCEINFOW
+	if len(pPatchInfo) > 0 {
+		_pPatchInfo = &pPatchInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMsiDeterminePatchSequence.Addr(), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(len(pPatchInfo)), uintptr(unsafe.Pointer(_pPatchInfo)))
 	return uint32(r1)
 }
 
 // MsiDeterminePatchSequenceA calls msi!MsiDeterminePatchSequenceA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msideterminepatchsequencea
 // Minimum OS: windows8.0.
-func MsiDeterminePatchSequenceA(szProductCode foundation.PSTR, szUserSid foundation.PSTR, dwContext MSIINSTALLCONTEXT, cPatchInfo uint32, pPatchInfo *MSIPATCHSEQUENCEINFOA) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDeterminePatchSequenceA.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(cPatchInfo), uintptr(unsafe.Pointer(pPatchInfo)))
+func MsiDeterminePatchSequenceA(szProductCode foundation.PSTR, szUserSid foundation.PSTR, dwContext MSIINSTALLCONTEXT, pPatchInfo []MSIPATCHSEQUENCEINFOA) uint32 {
+	var _pPatchInfo *MSIPATCHSEQUENCEINFOA
+	if len(pPatchInfo) > 0 {
+		_pPatchInfo = &pPatchInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMsiDeterminePatchSequenceA.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(len(pPatchInfo)), uintptr(unsafe.Pointer(_pPatchInfo)))
 	return uint32(r1)
 }
 
-// MsiDeterminePatchSequenceW calls msi!MsiDeterminePatchSequenceW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msideterminepatchsequencew
+// MsiDoAction calls msi!MsiDoActionW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidoactionw
 // Minimum OS: windows8.0.
-func MsiDeterminePatchSequenceW(szProductCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, cPatchInfo uint32, pPatchInfo *MSIPATCHSEQUENCEINFOW) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDeterminePatchSequenceW.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(cPatchInfo), uintptr(unsafe.Pointer(pPatchInfo)))
+func MsiDoAction(hInstall MSIHANDLE, szAction string) uint32 {
+	_szAction := win32.UTF16Ptr(szAction)
+	r1, _, _ := syscall.SyscallN(procMsiDoAction.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szAction)))
 	return uint32(r1)
 }
 
@@ -980,11 +1106,12 @@ func MsiDoActionA(hInstall MSIHANDLE, szAction foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// MsiDoActionW calls msi!MsiDoActionW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msidoactionw
+// MsiEnableLog calls msi!MsiEnableLogW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienablelogw
 // Minimum OS: windows8.0.
-func MsiDoActionW(hInstall MSIHANDLE, szAction foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiDoActionW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szAction)))
+func MsiEnableLog(dwLogMode uint32, szLogFile string, dwLogAttributes uint32) uint32 {
+	_szLogFile := win32.UTF16Ptr(szLogFile)
+	r1, _, _ := syscall.SyscallN(procMsiEnableLog.Addr(), uintptr(dwLogMode), uintptr(unsafe.Pointer(_szLogFile)), uintptr(dwLogAttributes))
 	return uint32(r1)
 }
 
@@ -993,14 +1120,6 @@ func MsiDoActionW(hInstall MSIHANDLE, szAction foundation.PWSTR) uint32 {
 // Minimum OS: windows8.0.
 func MsiEnableLogA(dwLogMode uint32, szLogFile foundation.PSTR, dwLogAttributes uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiEnableLogA.Addr(), uintptr(dwLogMode), uintptr(unsafe.Pointer(szLogFile)), uintptr(dwLogAttributes))
-	return uint32(r1)
-}
-
-// MsiEnableLogW calls msi!MsiEnableLogW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienablelogw
-// Minimum OS: windows8.0.
-func MsiEnableLogW(dwLogMode uint32, szLogFile foundation.PWSTR, dwLogAttributes uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnableLogW.Addr(), uintptr(dwLogMode), uintptr(unsafe.Pointer(szLogFile)), uintptr(dwLogAttributes))
 	return uint32(r1)
 }
 
@@ -1020,11 +1139,30 @@ func MsiEndTransaction(dwTransactionState MSITRANSACTIONSTATE) uint32 {
 	return uint32(r1)
 }
 
+// MsiEnumClients calls msi!MsiEnumClientsW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumclientsw
+// Minimum OS: windows8.0.
+func MsiEnumClients(szComponent string, iProductIndex uint32, lpProductBuf foundation.PWSTR) uint32 {
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiEnumClients.Addr(), uintptr(unsafe.Pointer(_szComponent)), uintptr(iProductIndex), uintptr(unsafe.Pointer(lpProductBuf)))
+	return uint32(r1)
+}
+
 // MsiEnumClientsA calls msi!MsiEnumClientsA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumclientsa
 // Minimum OS: windows8.0.
 func MsiEnumClientsA(szComponent foundation.PSTR, iProductIndex uint32, lpProductBuf foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiEnumClientsA.Addr(), uintptr(unsafe.Pointer(szComponent)), uintptr(iProductIndex), uintptr(unsafe.Pointer(lpProductBuf)))
+	return uint32(r1)
+}
+
+// MsiEnumClientsEx calls msi!MsiEnumClientsExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumclientsexw
+// Minimum OS: windows8.0.
+func MsiEnumClientsEx(szComponent string, szUserSid string, dwContext uint32, dwProductIndex uint32, szProductBuf foundation.PWSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PWSTR, pcchSid *uint32) uint32 {
+	_szComponent := win32.UTF16Ptr(szComponent)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiEnumClientsEx.Addr(), uintptr(unsafe.Pointer(_szComponent)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwProductIndex), uintptr(unsafe.Pointer(szProductBuf)), uintptr(unsafe.Pointer(pdwInstalledContext)), uintptr(unsafe.Pointer(szSid)), uintptr(unsafe.Pointer(pcchSid)))
 	return uint32(r1)
 }
 
@@ -1036,19 +1174,12 @@ func MsiEnumClientsExA(szComponent foundation.PSTR, szUserSid foundation.PSTR, d
 	return uint32(r1)
 }
 
-// MsiEnumClientsExW calls msi!MsiEnumClientsExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumclientsexw
+// MsiEnumComponentCosts calls msi!MsiEnumComponentCostsW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msienumcomponentcostsw
 // Minimum OS: windows8.0.
-func MsiEnumClientsExW(szComponent foundation.PWSTR, szUserSid foundation.PWSTR, dwContext uint32, dwProductIndex uint32, szProductBuf foundation.PWSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PWSTR, pcchSid *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumClientsExW.Addr(), uintptr(unsafe.Pointer(szComponent)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwProductIndex), uintptr(unsafe.Pointer(szProductBuf)), uintptr(unsafe.Pointer(pdwInstalledContext)), uintptr(unsafe.Pointer(szSid)), uintptr(unsafe.Pointer(pcchSid)))
-	return uint32(r1)
-}
-
-// MsiEnumClientsW calls msi!MsiEnumClientsW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumclientsw
-// Minimum OS: windows8.0.
-func MsiEnumClientsW(szComponent foundation.PWSTR, iProductIndex uint32, lpProductBuf foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumClientsW.Addr(), uintptr(unsafe.Pointer(szComponent)), uintptr(iProductIndex), uintptr(unsafe.Pointer(lpProductBuf)))
+func MsiEnumComponentCosts(hInstall MSIHANDLE, szComponent string, dwIndex uint32, iState INSTALLSTATE, szDriveBuf foundation.PWSTR, pcchDriveBuf *uint32, piCost *int32, piTempCost *int32) uint32 {
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiEnumComponentCosts.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szComponent)), uintptr(dwIndex), uintptr(iState), uintptr(unsafe.Pointer(szDriveBuf)), uintptr(unsafe.Pointer(pcchDriveBuf)), uintptr(unsafe.Pointer(piCost)), uintptr(unsafe.Pointer(piTempCost)))
 	return uint32(r1)
 }
 
@@ -1060,11 +1191,12 @@ func MsiEnumComponentCostsA(hInstall MSIHANDLE, szComponent foundation.PSTR, dwI
 	return uint32(r1)
 }
 
-// MsiEnumComponentCostsW calls msi!MsiEnumComponentCostsW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msienumcomponentcostsw
+// MsiEnumComponentQualifiers calls msi!MsiEnumComponentQualifiersW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumcomponentqualifiersw
 // Minimum OS: windows8.0.
-func MsiEnumComponentCostsW(hInstall MSIHANDLE, szComponent foundation.PWSTR, dwIndex uint32, iState INSTALLSTATE, szDriveBuf foundation.PWSTR, pcchDriveBuf *uint32, piCost *int32, piTempCost *int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumComponentCostsW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szComponent)), uintptr(dwIndex), uintptr(iState), uintptr(unsafe.Pointer(szDriveBuf)), uintptr(unsafe.Pointer(pcchDriveBuf)), uintptr(unsafe.Pointer(piCost)), uintptr(unsafe.Pointer(piTempCost)))
+func MsiEnumComponentQualifiers(szComponent string, iIndex uint32, lpQualifierBuf foundation.PWSTR, pcchQualifierBuf *uint32, lpApplicationDataBuf foundation.PWSTR, pcchApplicationDataBuf *uint32) uint32 {
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiEnumComponentQualifiers.Addr(), uintptr(unsafe.Pointer(_szComponent)), uintptr(iIndex), uintptr(unsafe.Pointer(lpQualifierBuf)), uintptr(unsafe.Pointer(pcchQualifierBuf)), uintptr(unsafe.Pointer(lpApplicationDataBuf)), uintptr(unsafe.Pointer(pcchApplicationDataBuf)))
 	return uint32(r1)
 }
 
@@ -1076,11 +1208,11 @@ func MsiEnumComponentQualifiersA(szComponent foundation.PSTR, iIndex uint32, lpQ
 	return uint32(r1)
 }
 
-// MsiEnumComponentQualifiersW calls msi!MsiEnumComponentQualifiersW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumcomponentqualifiersw
+// MsiEnumComponents calls msi!MsiEnumComponentsW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumcomponentsw
 // Minimum OS: windows8.0.
-func MsiEnumComponentQualifiersW(szComponent foundation.PWSTR, iIndex uint32, lpQualifierBuf foundation.PWSTR, pcchQualifierBuf *uint32, lpApplicationDataBuf foundation.PWSTR, pcchApplicationDataBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumComponentQualifiersW.Addr(), uintptr(unsafe.Pointer(szComponent)), uintptr(iIndex), uintptr(unsafe.Pointer(lpQualifierBuf)), uintptr(unsafe.Pointer(pcchQualifierBuf)), uintptr(unsafe.Pointer(lpApplicationDataBuf)), uintptr(unsafe.Pointer(pcchApplicationDataBuf)))
+func MsiEnumComponents(iComponentIndex uint32, lpComponentBuf foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiEnumComponents.Addr(), uintptr(iComponentIndex), uintptr(unsafe.Pointer(lpComponentBuf)))
 	return uint32(r1)
 }
 
@@ -1092,6 +1224,15 @@ func MsiEnumComponentsA(iComponentIndex uint32, lpComponentBuf foundation.PSTR) 
 	return uint32(r1)
 }
 
+// MsiEnumComponentsEx calls msi!MsiEnumComponentsExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumcomponentsexw
+// Minimum OS: windows8.0.
+func MsiEnumComponentsEx(szUserSid string, dwContext uint32, dwIndex uint32, szInstalledComponentCode foundation.PWSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PWSTR, pcchSid *uint32) uint32 {
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiEnumComponentsEx.Addr(), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwIndex), uintptr(unsafe.Pointer(szInstalledComponentCode)), uintptr(unsafe.Pointer(pdwInstalledContext)), uintptr(unsafe.Pointer(szSid)), uintptr(unsafe.Pointer(pcchSid)))
+	return uint32(r1)
+}
+
 // MsiEnumComponentsExA calls msi!MsiEnumComponentsExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumcomponentsexa
 // Minimum OS: windows8.0.
@@ -1100,19 +1241,12 @@ func MsiEnumComponentsExA(szUserSid foundation.PSTR, dwContext uint32, dwIndex u
 	return uint32(r1)
 }
 
-// MsiEnumComponentsExW calls msi!MsiEnumComponentsExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumcomponentsexw
+// MsiEnumFeatures calls msi!MsiEnumFeaturesW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumfeaturesw
 // Minimum OS: windows8.0.
-func MsiEnumComponentsExW(szUserSid foundation.PWSTR, dwContext uint32, dwIndex uint32, szInstalledComponentCode foundation.PWSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PWSTR, pcchSid *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumComponentsExW.Addr(), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwIndex), uintptr(unsafe.Pointer(szInstalledComponentCode)), uintptr(unsafe.Pointer(pdwInstalledContext)), uintptr(unsafe.Pointer(szSid)), uintptr(unsafe.Pointer(pcchSid)))
-	return uint32(r1)
-}
-
-// MsiEnumComponentsW calls msi!MsiEnumComponentsW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumcomponentsw
-// Minimum OS: windows8.0.
-func MsiEnumComponentsW(iComponentIndex uint32, lpComponentBuf foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumComponentsW.Addr(), uintptr(iComponentIndex), uintptr(unsafe.Pointer(lpComponentBuf)))
+func MsiEnumFeatures(szProduct string, iFeatureIndex uint32, lpFeatureBuf foundation.PWSTR, lpParentBuf foundation.PWSTR) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiEnumFeatures.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(iFeatureIndex), uintptr(unsafe.Pointer(lpFeatureBuf)), uintptr(unsafe.Pointer(lpParentBuf)))
 	return uint32(r1)
 }
 
@@ -1124,11 +1258,12 @@ func MsiEnumFeaturesA(szProduct foundation.PSTR, iFeatureIndex uint32, lpFeature
 	return uint32(r1)
 }
 
-// MsiEnumFeaturesW calls msi!MsiEnumFeaturesW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumfeaturesw
+// MsiEnumPatches calls msi!MsiEnumPatchesW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumpatchesw
 // Minimum OS: windows8.0.
-func MsiEnumFeaturesW(szProduct foundation.PWSTR, iFeatureIndex uint32, lpFeatureBuf foundation.PWSTR, lpParentBuf foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumFeaturesW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(iFeatureIndex), uintptr(unsafe.Pointer(lpFeatureBuf)), uintptr(unsafe.Pointer(lpParentBuf)))
+func MsiEnumPatches(szProduct string, iPatchIndex uint32, lpPatchBuf foundation.PWSTR, lpTransformsBuf foundation.PWSTR, pcchTransformsBuf *uint32) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiEnumPatches.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(iPatchIndex), uintptr(unsafe.Pointer(lpPatchBuf)), uintptr(unsafe.Pointer(lpTransformsBuf)), uintptr(unsafe.Pointer(pcchTransformsBuf)))
 	return uint32(r1)
 }
 
@@ -1140,6 +1275,16 @@ func MsiEnumPatchesA(szProduct foundation.PSTR, iPatchIndex uint32, lpPatchBuf f
 	return uint32(r1)
 }
 
+// MsiEnumPatchesEx calls msi!MsiEnumPatchesExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumpatchesexw
+// Minimum OS: windows8.0.
+func MsiEnumPatchesEx(szProductCode string, szUserSid string, dwContext uint32, dwFilter uint32, dwIndex uint32, szPatchCode foundation.PWSTR, szTargetProductCode foundation.PWSTR, pdwTargetProductContext *MSIINSTALLCONTEXT, szTargetUserSid foundation.PWSTR, pcchTargetUserSid *uint32) uint32 {
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiEnumPatchesEx.Addr(), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwFilter), uintptr(dwIndex), uintptr(unsafe.Pointer(szPatchCode)), uintptr(unsafe.Pointer(szTargetProductCode)), uintptr(unsafe.Pointer(pdwTargetProductContext)), uintptr(unsafe.Pointer(szTargetUserSid)), uintptr(unsafe.Pointer(pcchTargetUserSid)))
+	return uint32(r1)
+}
+
 // MsiEnumPatchesExA calls msi!MsiEnumPatchesExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumpatchesexa
 // Minimum OS: windows8.0.
@@ -1148,19 +1293,11 @@ func MsiEnumPatchesExA(szProductCode foundation.PSTR, szUserSid foundation.PSTR,
 	return uint32(r1)
 }
 
-// MsiEnumPatchesExW calls msi!MsiEnumPatchesExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumpatchesexw
+// MsiEnumProducts calls msi!MsiEnumProductsW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumproductsw
 // Minimum OS: windows8.0.
-func MsiEnumPatchesExW(szProductCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext uint32, dwFilter uint32, dwIndex uint32, szPatchCode foundation.PWSTR, szTargetProductCode foundation.PWSTR, pdwTargetProductContext *MSIINSTALLCONTEXT, szTargetUserSid foundation.PWSTR, pcchTargetUserSid *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumPatchesExW.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwFilter), uintptr(dwIndex), uintptr(unsafe.Pointer(szPatchCode)), uintptr(unsafe.Pointer(szTargetProductCode)), uintptr(unsafe.Pointer(pdwTargetProductContext)), uintptr(unsafe.Pointer(szTargetUserSid)), uintptr(unsafe.Pointer(pcchTargetUserSid)))
-	return uint32(r1)
-}
-
-// MsiEnumPatchesW calls msi!MsiEnumPatchesW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumpatchesw
-// Minimum OS: windows8.0.
-func MsiEnumPatchesW(szProduct foundation.PWSTR, iPatchIndex uint32, lpPatchBuf foundation.PWSTR, lpTransformsBuf foundation.PWSTR, pcchTransformsBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumPatchesW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(iPatchIndex), uintptr(unsafe.Pointer(lpPatchBuf)), uintptr(unsafe.Pointer(lpTransformsBuf)), uintptr(unsafe.Pointer(pcchTransformsBuf)))
+func MsiEnumProducts(iProductIndex uint32, lpProductBuf foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiEnumProducts.Addr(), uintptr(iProductIndex), uintptr(unsafe.Pointer(lpProductBuf)))
 	return uint32(r1)
 }
 
@@ -1172,6 +1309,16 @@ func MsiEnumProductsA(iProductIndex uint32, lpProductBuf foundation.PSTR) uint32
 	return uint32(r1)
 }
 
+// MsiEnumProductsEx calls msi!MsiEnumProductsExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumproductsexw
+// Minimum OS: windows8.0.
+func MsiEnumProductsEx(szProductCode string, szUserSid string, dwContext uint32, dwIndex uint32, szInstalledProductCode foundation.PWSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PWSTR, pcchSid *uint32) uint32 {
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiEnumProductsEx.Addr(), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwIndex), uintptr(unsafe.Pointer(szInstalledProductCode)), uintptr(unsafe.Pointer(pdwInstalledContext)), uintptr(unsafe.Pointer(szSid)), uintptr(unsafe.Pointer(pcchSid)))
+	return uint32(r1)
+}
+
 // MsiEnumProductsExA calls msi!MsiEnumProductsExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumproductsexa
 // Minimum OS: windows8.0.
@@ -1180,36 +1327,30 @@ func MsiEnumProductsExA(szProductCode foundation.PSTR, szUserSid foundation.PSTR
 	return uint32(r1)
 }
 
-// MsiEnumProductsExW calls msi!MsiEnumProductsExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumproductsexw
+// MsiEnumRelatedProducts calls msi!MsiEnumRelatedProductsW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumrelatedproductsw
 // Minimum OS: windows8.0.
-func MsiEnumProductsExW(szProductCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext uint32, dwIndex uint32, szInstalledProductCode foundation.PWSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PWSTR, pcchSid *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumProductsExW.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwIndex), uintptr(unsafe.Pointer(szInstalledProductCode)), uintptr(unsafe.Pointer(pdwInstalledContext)), uintptr(unsafe.Pointer(szSid)), uintptr(unsafe.Pointer(pcchSid)))
-	return uint32(r1)
-}
-
-// MsiEnumProductsW calls msi!MsiEnumProductsW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumproductsw
-// Minimum OS: windows8.0.
-func MsiEnumProductsW(iProductIndex uint32, lpProductBuf foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumProductsW.Addr(), uintptr(iProductIndex), uintptr(unsafe.Pointer(lpProductBuf)))
+func MsiEnumRelatedProducts(lpUpgradeCode string, iProductIndex uint32, lpProductBuf foundation.PWSTR) uint32 {
+	_lpUpgradeCode := win32.UTF16Ptr(lpUpgradeCode)
+	r1, _, _ := syscall.SyscallN(procMsiEnumRelatedProducts.Addr(), uintptr(unsafe.Pointer(_lpUpgradeCode)), 0, uintptr(iProductIndex), uintptr(unsafe.Pointer(lpProductBuf)))
 	return uint32(r1)
 }
 
 // MsiEnumRelatedProductsA calls msi!MsiEnumRelatedProductsA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumrelatedproductsa
 // Minimum OS: windows8.0.
-func MsiEnumRelatedProductsA(lpUpgradeCode foundation.PSTR, dwReserved uint32, iProductIndex uint32, lpProductBuf foundation.PSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumRelatedProductsA.Addr(), uintptr(unsafe.Pointer(lpUpgradeCode)), uintptr(dwReserved), uintptr(iProductIndex), uintptr(unsafe.Pointer(lpProductBuf)))
+func MsiEnumRelatedProductsA(lpUpgradeCode foundation.PSTR, iProductIndex uint32, lpProductBuf foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiEnumRelatedProductsA.Addr(), uintptr(unsafe.Pointer(lpUpgradeCode)), 0, uintptr(iProductIndex), uintptr(unsafe.Pointer(lpProductBuf)))
 	return uint32(r1)
 }
 
-// MsiEnumRelatedProductsW calls msi!MsiEnumRelatedProductsW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumrelatedproductsw
+// MsiEvaluateCondition calls msi!MsiEvaluateConditionW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msievaluateconditionw
 // Minimum OS: windows8.0.
-func MsiEnumRelatedProductsW(lpUpgradeCode foundation.PWSTR, dwReserved uint32, iProductIndex uint32, lpProductBuf foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiEnumRelatedProductsW.Addr(), uintptr(unsafe.Pointer(lpUpgradeCode)), uintptr(dwReserved), uintptr(iProductIndex), uintptr(unsafe.Pointer(lpProductBuf)))
-	return uint32(r1)
+func MsiEvaluateCondition(hInstall MSIHANDLE, szCondition string) MSICONDITION {
+	_szCondition := win32.UTF16Ptr(szCondition)
+	r1, _, _ := syscall.SyscallN(procMsiEvaluateCondition.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szCondition)))
+	return MSICONDITION(r1)
 }
 
 // MsiEvaluateConditionA calls msi!MsiEvaluateConditionA.
@@ -1220,27 +1361,28 @@ func MsiEvaluateConditionA(hInstall MSIHANDLE, szCondition foundation.PSTR) MSIC
 	return MSICONDITION(r1)
 }
 
-// MsiEvaluateConditionW calls msi!MsiEvaluateConditionW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msievaluateconditionw
-// Minimum OS: windows8.0.
-func MsiEvaluateConditionW(hInstall MSIHANDLE, szCondition foundation.PWSTR) MSICONDITION {
-	r1, _, _ := syscall.SyscallN(procMsiEvaluateConditionW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szCondition)))
-	return MSICONDITION(r1)
+// MsiExtractPatchXMLData calls msi!MsiExtractPatchXMLDataW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiextractpatchxmldataw
+// Minimum OS: windows6.0.6000.
+func MsiExtractPatchXMLData(szPatchPath string, szXMLData foundation.PWSTR, pcchXMLData *uint32) uint32 {
+	_szPatchPath := win32.UTF16Ptr(szPatchPath)
+	r1, _, _ := syscall.SyscallN(procMsiExtractPatchXMLData.Addr(), uintptr(unsafe.Pointer(_szPatchPath)), 0, uintptr(unsafe.Pointer(szXMLData)), uintptr(unsafe.Pointer(pcchXMLData)))
+	return uint32(r1)
 }
 
 // MsiExtractPatchXMLDataA calls msi!MsiExtractPatchXMLDataA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiextractpatchxmldataa
 // Minimum OS: windows6.0.6000.
-func MsiExtractPatchXMLDataA(szPatchPath foundation.PSTR, dwReserved uint32, szXMLData foundation.PSTR, pcchXMLData *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiExtractPatchXMLDataA.Addr(), uintptr(unsafe.Pointer(szPatchPath)), uintptr(dwReserved), uintptr(unsafe.Pointer(szXMLData)), uintptr(unsafe.Pointer(pcchXMLData)))
+func MsiExtractPatchXMLDataA(szPatchPath foundation.PSTR, szXMLData foundation.PSTR, pcchXMLData *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiExtractPatchXMLDataA.Addr(), uintptr(unsafe.Pointer(szPatchPath)), 0, uintptr(unsafe.Pointer(szXMLData)), uintptr(unsafe.Pointer(pcchXMLData)))
 	return uint32(r1)
 }
 
-// MsiExtractPatchXMLDataW calls msi!MsiExtractPatchXMLDataW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiextractpatchxmldataw
-// Minimum OS: windows6.0.6000.
-func MsiExtractPatchXMLDataW(szPatchPath foundation.PWSTR, dwReserved uint32, szXMLData foundation.PWSTR, pcchXMLData *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiExtractPatchXMLDataW.Addr(), uintptr(unsafe.Pointer(szPatchPath)), uintptr(dwReserved), uintptr(unsafe.Pointer(szXMLData)), uintptr(unsafe.Pointer(pcchXMLData)))
+// MsiFormatRecord calls msi!MsiFormatRecordW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msiformatrecordw
+// Minimum OS: windows8.0.
+func MsiFormatRecord(hInstall MSIHANDLE, hRecord MSIHANDLE, szResultBuf foundation.PWSTR, pcchResultBuf *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiFormatRecord.Addr(), uintptr(hInstall), uintptr(hRecord), uintptr(unsafe.Pointer(szResultBuf)), uintptr(unsafe.Pointer(pcchResultBuf)))
 	return uint32(r1)
 }
 
@@ -1252,14 +1394,6 @@ func MsiFormatRecordA(hInstall MSIHANDLE, hRecord MSIHANDLE, szResultBuf foundat
 	return uint32(r1)
 }
 
-// MsiFormatRecordW calls msi!MsiFormatRecordW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msiformatrecordw
-// Minimum OS: windows8.0.
-func MsiFormatRecordW(hInstall MSIHANDLE, hRecord MSIHANDLE, szResultBuf foundation.PWSTR, pcchResultBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiFormatRecordW.Addr(), uintptr(hInstall), uintptr(hRecord), uintptr(unsafe.Pointer(szResultBuf)), uintptr(unsafe.Pointer(pcchResultBuf)))
-	return uint32(r1)
-}
-
 // MsiGetActiveDatabase calls msi!MsiGetActiveDatabase.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetactivedatabase
 // Minimum OS: windows8.0.
@@ -1268,11 +1402,32 @@ func MsiGetActiveDatabase(hInstall MSIHANDLE) MSIHANDLE {
 	return MSIHANDLE(r1)
 }
 
+// MsiGetComponentPath calls msi!MsiGetComponentPathW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetcomponentpathw
+// Minimum OS: windows8.0.
+func MsiGetComponentPath(szProduct string, szComponent string, lpPathBuf foundation.PWSTR, pcchBuf *uint32) INSTALLSTATE {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiGetComponentPath.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szComponent)), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchBuf)))
+	return INSTALLSTATE(r1)
+}
+
 // MsiGetComponentPathA calls msi!MsiGetComponentPathA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetcomponentpatha
 // Minimum OS: windows8.0.
 func MsiGetComponentPathA(szProduct foundation.PSTR, szComponent foundation.PSTR, lpPathBuf foundation.PSTR, pcchBuf *uint32) INSTALLSTATE {
 	r1, _, _ := syscall.SyscallN(procMsiGetComponentPathA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szComponent)), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchBuf)))
+	return INSTALLSTATE(r1)
+}
+
+// MsiGetComponentPathEx calls msi!MsiGetComponentPathExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetcomponentpathexw
+// Minimum OS: windows8.0.
+func MsiGetComponentPathEx(szProductCode string, szComponentCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, lpOutPathBuffer foundation.PWSTR, pcchOutPathBuffer *uint32) INSTALLSTATE {
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szComponentCode := win32.UTF16Ptr(szComponentCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiGetComponentPathEx.Addr(), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szComponentCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(lpOutPathBuffer)), uintptr(unsafe.Pointer(pcchOutPathBuffer)))
 	return INSTALLSTATE(r1)
 }
 
@@ -1284,20 +1439,13 @@ func MsiGetComponentPathExA(szProductCode foundation.PSTR, szComponentCode found
 	return INSTALLSTATE(r1)
 }
 
-// MsiGetComponentPathExW calls msi!MsiGetComponentPathExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetcomponentpathexw
+// MsiGetComponentState calls msi!MsiGetComponentStateW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetcomponentstatew
 // Minimum OS: windows8.0.
-func MsiGetComponentPathExW(szProductCode foundation.PWSTR, szComponentCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, lpOutPathBuffer foundation.PWSTR, pcchOutPathBuffer *uint32) INSTALLSTATE {
-	r1, _, _ := syscall.SyscallN(procMsiGetComponentPathExW.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szComponentCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(lpOutPathBuffer)), uintptr(unsafe.Pointer(pcchOutPathBuffer)))
-	return INSTALLSTATE(r1)
-}
-
-// MsiGetComponentPathW calls msi!MsiGetComponentPathW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetcomponentpathw
-// Minimum OS: windows8.0.
-func MsiGetComponentPathW(szProduct foundation.PWSTR, szComponent foundation.PWSTR, lpPathBuf foundation.PWSTR, pcchBuf *uint32) INSTALLSTATE {
-	r1, _, _ := syscall.SyscallN(procMsiGetComponentPathW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szComponent)), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchBuf)))
-	return INSTALLSTATE(r1)
+func MsiGetComponentState(hInstall MSIHANDLE, szComponent string, piInstalled *INSTALLSTATE, piAction *INSTALLSTATE) uint32 {
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiGetComponentState.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szComponent)), uintptr(unsafe.Pointer(piInstalled)), uintptr(unsafe.Pointer(piAction)))
+	return uint32(r1)
 }
 
 // MsiGetComponentStateA calls msi!MsiGetComponentStateA.
@@ -1305,14 +1453,6 @@ func MsiGetComponentPathW(szProduct foundation.PWSTR, szComponent foundation.PWS
 // Minimum OS: windows8.0.
 func MsiGetComponentStateA(hInstall MSIHANDLE, szComponent foundation.PSTR, piInstalled *INSTALLSTATE, piAction *INSTALLSTATE) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiGetComponentStateA.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szComponent)), uintptr(unsafe.Pointer(piInstalled)), uintptr(unsafe.Pointer(piAction)))
-	return uint32(r1)
-}
-
-// MsiGetComponentStateW calls msi!MsiGetComponentStateW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetcomponentstatew
-// Minimum OS: windows8.0.
-func MsiGetComponentStateW(hInstall MSIHANDLE, szComponent foundation.PWSTR, piInstalled *INSTALLSTATE, piAction *INSTALLSTATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetComponentStateW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szComponent)), uintptr(unsafe.Pointer(piInstalled)), uintptr(unsafe.Pointer(piAction)))
 	return uint32(r1)
 }
 
@@ -1324,6 +1464,15 @@ func MsiGetDatabaseState(hDatabase MSIHANDLE) MSIDBSTATE {
 	return MSIDBSTATE(r1)
 }
 
+// MsiGetFeatureCost calls msi!MsiGetFeatureCostW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetfeaturecostw
+// Minimum OS: windows8.0.
+func MsiGetFeatureCost(hInstall MSIHANDLE, szFeature string, iCostTree MSICOSTTREE, iState INSTALLSTATE, piCost *int32) uint32 {
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiGetFeatureCost.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szFeature)), uintptr(iCostTree), uintptr(iState), uintptr(unsafe.Pointer(piCost)))
+	return uint32(r1)
+}
+
 // MsiGetFeatureCostA calls msi!MsiGetFeatureCostA.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetfeaturecosta
 // Minimum OS: windows8.0.
@@ -1332,11 +1481,12 @@ func MsiGetFeatureCostA(hInstall MSIHANDLE, szFeature foundation.PSTR, iCostTree
 	return uint32(r1)
 }
 
-// MsiGetFeatureCostW calls msi!MsiGetFeatureCostW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetfeaturecostw
+// MsiGetFeatureInfo calls msi!MsiGetFeatureInfoW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfeatureinfow
 // Minimum OS: windows8.0.
-func MsiGetFeatureCostW(hInstall MSIHANDLE, szFeature foundation.PWSTR, iCostTree MSICOSTTREE, iState INSTALLSTATE, piCost *int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetFeatureCostW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szFeature)), uintptr(iCostTree), uintptr(iState), uintptr(unsafe.Pointer(piCost)))
+func MsiGetFeatureInfo(hProduct MSIHANDLE, szFeature string, lpAttributes *uint32, lpTitleBuf foundation.PWSTR, pcchTitleBuf *uint32, lpHelpBuf foundation.PWSTR, pcchHelpBuf *uint32) uint32 {
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiGetFeatureInfo.Addr(), uintptr(hProduct), uintptr(unsafe.Pointer(_szFeature)), uintptr(unsafe.Pointer(lpAttributes)), uintptr(unsafe.Pointer(lpTitleBuf)), uintptr(unsafe.Pointer(pcchTitleBuf)), uintptr(unsafe.Pointer(lpHelpBuf)), uintptr(unsafe.Pointer(pcchHelpBuf)))
 	return uint32(r1)
 }
 
@@ -1348,11 +1498,12 @@ func MsiGetFeatureInfoA(hProduct MSIHANDLE, szFeature foundation.PSTR, lpAttribu
 	return uint32(r1)
 }
 
-// MsiGetFeatureInfoW calls msi!MsiGetFeatureInfoW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfeatureinfow
+// MsiGetFeatureState calls msi!MsiGetFeatureStateW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetfeaturestatew
 // Minimum OS: windows8.0.
-func MsiGetFeatureInfoW(hProduct MSIHANDLE, szFeature foundation.PWSTR, lpAttributes *uint32, lpTitleBuf foundation.PWSTR, pcchTitleBuf *uint32, lpHelpBuf foundation.PWSTR, pcchHelpBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetFeatureInfoW.Addr(), uintptr(hProduct), uintptr(unsafe.Pointer(szFeature)), uintptr(unsafe.Pointer(lpAttributes)), uintptr(unsafe.Pointer(lpTitleBuf)), uintptr(unsafe.Pointer(pcchTitleBuf)), uintptr(unsafe.Pointer(lpHelpBuf)), uintptr(unsafe.Pointer(pcchHelpBuf)))
+func MsiGetFeatureState(hInstall MSIHANDLE, szFeature string, piInstalled *INSTALLSTATE, piAction *INSTALLSTATE) uint32 {
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiGetFeatureState.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szFeature)), uintptr(unsafe.Pointer(piInstalled)), uintptr(unsafe.Pointer(piAction)))
 	return uint32(r1)
 }
 
@@ -1364,11 +1515,13 @@ func MsiGetFeatureStateA(hInstall MSIHANDLE, szFeature foundation.PSTR, piInstal
 	return uint32(r1)
 }
 
-// MsiGetFeatureStateW calls msi!MsiGetFeatureStateW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetfeaturestatew
+// MsiGetFeatureUsage calls msi!MsiGetFeatureUsageW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfeatureusagew
 // Minimum OS: windows8.0.
-func MsiGetFeatureStateW(hInstall MSIHANDLE, szFeature foundation.PWSTR, piInstalled *INSTALLSTATE, piAction *INSTALLSTATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetFeatureStateW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szFeature)), uintptr(unsafe.Pointer(piInstalled)), uintptr(unsafe.Pointer(piAction)))
+func MsiGetFeatureUsage(szProduct string, szFeature string, pdwUseCount *uint32, pwDateUsed *uint16) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiGetFeatureUsage.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szFeature)), uintptr(unsafe.Pointer(pdwUseCount)), uintptr(unsafe.Pointer(pwDateUsed)))
 	return uint32(r1)
 }
 
@@ -1380,11 +1533,12 @@ func MsiGetFeatureUsageA(szProduct foundation.PSTR, szFeature foundation.PSTR, p
 	return uint32(r1)
 }
 
-// MsiGetFeatureUsageW calls msi!MsiGetFeatureUsageW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfeatureusagew
+// MsiGetFeatureValidStates calls msi!MsiGetFeatureValidStatesW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetfeaturevalidstatesw
 // Minimum OS: windows8.0.
-func MsiGetFeatureUsageW(szProduct foundation.PWSTR, szFeature foundation.PWSTR, pdwUseCount *uint32, pwDateUsed *uint16) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetFeatureUsageW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)), uintptr(unsafe.Pointer(pdwUseCount)), uintptr(unsafe.Pointer(pwDateUsed)))
+func MsiGetFeatureValidStates(hInstall MSIHANDLE, szFeature string, lpInstallStates *uint32) uint32 {
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiGetFeatureValidStates.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szFeature)), uintptr(unsafe.Pointer(lpInstallStates)))
 	return uint32(r1)
 }
 
@@ -1396,11 +1550,12 @@ func MsiGetFeatureValidStatesA(hInstall MSIHANDLE, szFeature foundation.PSTR, lp
 	return uint32(r1)
 }
 
-// MsiGetFeatureValidStatesW calls msi!MsiGetFeatureValidStatesW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetfeaturevalidstatesw
+// MsiGetFileHash calls msi!MsiGetFileHashW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfilehashw
 // Minimum OS: windows8.0.
-func MsiGetFeatureValidStatesW(hInstall MSIHANDLE, szFeature foundation.PWSTR, lpInstallStates *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetFeatureValidStatesW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szFeature)), uintptr(unsafe.Pointer(lpInstallStates)))
+func MsiGetFileHash(szFilePath string, dwOptions uint32, pHash *MSIFILEHASHINFO) uint32 {
+	_szFilePath := win32.UTF16Ptr(szFilePath)
+	r1, _, _ := syscall.SyscallN(procMsiGetFileHash.Addr(), uintptr(unsafe.Pointer(_szFilePath)), uintptr(dwOptions), uintptr(unsafe.Pointer(pHash)))
 	return uint32(r1)
 }
 
@@ -1412,28 +1567,30 @@ func MsiGetFileHashA(szFilePath foundation.PSTR, dwOptions uint32, pHash *MSIFIL
 	return uint32(r1)
 }
 
-// MsiGetFileHashW calls msi!MsiGetFileHashW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfilehashw
+// MsiGetFileSignatureInformation calls msi!MsiGetFileSignatureInformationW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfilesignatureinformationw
 // Minimum OS: windows8.0.
-func MsiGetFileHashW(szFilePath foundation.PWSTR, dwOptions uint32, pHash *MSIFILEHASHINFO) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetFileHashW.Addr(), uintptr(unsafe.Pointer(szFilePath)), uintptr(dwOptions), uintptr(unsafe.Pointer(pHash)))
-	return uint32(r1)
+func MsiGetFileSignatureInformation(szSignedObjectPath string, dwFlags uint32, ppcCertContext **securitycryptography.CERT_CONTEXT, pbHashData *byte, pcbHashData *uint32) error {
+	_szSignedObjectPath := win32.UTF16Ptr(szSignedObjectPath)
+	r1, _, _ := syscall.SyscallN(procMsiGetFileSignatureInformation.Addr(), uintptr(unsafe.Pointer(_szSignedObjectPath)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppcCertContext)), uintptr(unsafe.Pointer(pbHashData)), uintptr(unsafe.Pointer(pcbHashData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MsiGetFileSignatureInformationA calls msi!MsiGetFileSignatureInformationA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfilesignatureinformationa
 // Minimum OS: windows8.0.
-func MsiGetFileSignatureInformationA(szSignedObjectPath foundation.PSTR, dwFlags uint32, ppcCertContext **securitycryptography.CERT_CONTEXT, pbHashData *byte, pcbHashData *uint32) foundation.HRESULT {
+func MsiGetFileSignatureInformationA(szSignedObjectPath foundation.PSTR, dwFlags uint32, ppcCertContext **securitycryptography.CERT_CONTEXT, pbHashData *byte, pcbHashData *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMsiGetFileSignatureInformationA.Addr(), uintptr(unsafe.Pointer(szSignedObjectPath)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppcCertContext)), uintptr(unsafe.Pointer(pbHashData)), uintptr(unsafe.Pointer(pcbHashData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// MsiGetFileSignatureInformationW calls msi!MsiGetFileSignatureInformationW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfilesignatureinformationw
+// MsiGetFileVersion calls msi!MsiGetFileVersionW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfileversionw
 // Minimum OS: windows8.0.
-func MsiGetFileSignatureInformationW(szSignedObjectPath foundation.PWSTR, dwFlags uint32, ppcCertContext **securitycryptography.CERT_CONTEXT, pbHashData *byte, pcbHashData *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMsiGetFileSignatureInformationW.Addr(), uintptr(unsafe.Pointer(szSignedObjectPath)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppcCertContext)), uintptr(unsafe.Pointer(pbHashData)), uintptr(unsafe.Pointer(pcbHashData)))
-	return foundation.HRESULT(r1)
+func MsiGetFileVersion(szFilePath string, lpVersionBuf foundation.PWSTR, pcchVersionBuf *uint32, lpLangBuf foundation.PWSTR, pcchLangBuf *uint32) uint32 {
+	_szFilePath := win32.UTF16Ptr(szFilePath)
+	r1, _, _ := syscall.SyscallN(procMsiGetFileVersion.Addr(), uintptr(unsafe.Pointer(_szFilePath)), uintptr(unsafe.Pointer(lpVersionBuf)), uintptr(unsafe.Pointer(pcchVersionBuf)), uintptr(unsafe.Pointer(lpLangBuf)), uintptr(unsafe.Pointer(pcchLangBuf)))
+	return uint32(r1)
 }
 
 // MsiGetFileVersionA calls msi!MsiGetFileVersionA.
@@ -1441,14 +1598,6 @@ func MsiGetFileSignatureInformationW(szSignedObjectPath foundation.PWSTR, dwFlag
 // Minimum OS: windows8.0.
 func MsiGetFileVersionA(szFilePath foundation.PSTR, lpVersionBuf foundation.PSTR, pcchVersionBuf *uint32, lpLangBuf foundation.PSTR, pcchLangBuf *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiGetFileVersionA.Addr(), uintptr(unsafe.Pointer(szFilePath)), uintptr(unsafe.Pointer(lpVersionBuf)), uintptr(unsafe.Pointer(pcchVersionBuf)), uintptr(unsafe.Pointer(lpLangBuf)), uintptr(unsafe.Pointer(pcchLangBuf)))
-	return uint32(r1)
-}
-
-// MsiGetFileVersionW calls msi!MsiGetFileVersionW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetfileversionw
-// Minimum OS: windows8.0.
-func MsiGetFileVersionW(szFilePath foundation.PWSTR, lpVersionBuf foundation.PWSTR, pcchVersionBuf *uint32, lpLangBuf foundation.PWSTR, pcchLangBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetFileVersionW.Addr(), uintptr(unsafe.Pointer(szFilePath)), uintptr(unsafe.Pointer(lpVersionBuf)), uintptr(unsafe.Pointer(pcchVersionBuf)), uintptr(unsafe.Pointer(lpLangBuf)), uintptr(unsafe.Pointer(pcchLangBuf)))
 	return uint32(r1)
 }
 
@@ -1471,9 +1620,19 @@ func MsiGetLastErrorRecord() MSIHANDLE {
 // MsiGetMode calls msi!MsiGetMode.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetmode
 // Minimum OS: windows8.0.
-func MsiGetMode(hInstall MSIHANDLE, eRunMode MSIRUNMODE) foundation.BOOL {
+func MsiGetMode(hInstall MSIHANDLE, eRunMode MSIRUNMODE) bool {
 	r1, _, _ := syscall.SyscallN(procMsiGetMode.Addr(), uintptr(hInstall), uintptr(eRunMode))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// MsiGetPatchFileList calls msi!MsiGetPatchFileListW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetpatchfilelistw
+// Minimum OS: windows8.0.
+func MsiGetPatchFileList(szProductCode string, szPatchPackages string, pcFiles *uint32, pphFileRecords **MSIHANDLE) uint32 {
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szPatchPackages := win32.UTF16Ptr(szPatchPackages)
+	r1, _, _ := syscall.SyscallN(procMsiGetPatchFileList.Addr(), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szPatchPackages)), uintptr(unsafe.Pointer(pcFiles)), uintptr(unsafe.Pointer(pphFileRecords)))
+	return uint32(r1)
 }
 
 // MsiGetPatchFileListA calls msi!MsiGetPatchFileListA.
@@ -1484,11 +1643,13 @@ func MsiGetPatchFileListA(szProductCode foundation.PSTR, szPatchPackages foundat
 	return uint32(r1)
 }
 
-// MsiGetPatchFileListW calls msi!MsiGetPatchFileListW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetpatchfilelistw
+// MsiGetPatchInfo calls msi!MsiGetPatchInfoW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetpatchinfow
 // Minimum OS: windows8.0.
-func MsiGetPatchFileListW(szProductCode foundation.PWSTR, szPatchPackages foundation.PWSTR, pcFiles *uint32, pphFileRecords **MSIHANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetPatchFileListW.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szPatchPackages)), uintptr(unsafe.Pointer(pcFiles)), uintptr(unsafe.Pointer(pphFileRecords)))
+func MsiGetPatchInfo(szPatch string, szAttribute string, lpValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
+	_szPatch := win32.UTF16Ptr(szPatch)
+	_szAttribute := win32.UTF16Ptr(szAttribute)
+	r1, _, _ := syscall.SyscallN(procMsiGetPatchInfo.Addr(), uintptr(unsafe.Pointer(_szPatch)), uintptr(unsafe.Pointer(_szAttribute)), uintptr(unsafe.Pointer(lpValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
 	return uint32(r1)
 }
 
@@ -1500,6 +1661,18 @@ func MsiGetPatchInfoA(szPatch foundation.PSTR, szAttribute foundation.PSTR, lpVa
 	return uint32(r1)
 }
 
+// MsiGetPatchInfoEx calls msi!MsiGetPatchInfoExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetpatchinfoexw
+// Minimum OS: windows8.0.
+func MsiGetPatchInfoEx(szPatchCode string, szProductCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, szProperty string, lpValue foundation.PWSTR, pcchValue *uint32) uint32 {
+	_szPatchCode := win32.UTF16Ptr(szPatchCode)
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	_szProperty := win32.UTF16Ptr(szProperty)
+	r1, _, _ := syscall.SyscallN(procMsiGetPatchInfoEx.Addr(), uintptr(unsafe.Pointer(_szPatchCode)), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(_szProperty)), uintptr(unsafe.Pointer(lpValue)), uintptr(unsafe.Pointer(pcchValue)))
+	return uint32(r1)
+}
+
 // MsiGetPatchInfoExA calls msi!MsiGetPatchInfoExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetpatchinfoexa
 // Minimum OS: windows8.0.
@@ -1508,19 +1681,12 @@ func MsiGetPatchInfoExA(szPatchCode foundation.PSTR, szProductCode foundation.PS
 	return uint32(r1)
 }
 
-// MsiGetPatchInfoExW calls msi!MsiGetPatchInfoExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetpatchinfoexw
+// MsiGetProductCode calls msi!MsiGetProductCodeW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductcodew
 // Minimum OS: windows8.0.
-func MsiGetPatchInfoExW(szPatchCode foundation.PWSTR, szProductCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, szProperty foundation.PWSTR, lpValue foundation.PWSTR, pcchValue *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetPatchInfoExW.Addr(), uintptr(unsafe.Pointer(szPatchCode)), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(szProperty)), uintptr(unsafe.Pointer(lpValue)), uintptr(unsafe.Pointer(pcchValue)))
-	return uint32(r1)
-}
-
-// MsiGetPatchInfoW calls msi!MsiGetPatchInfoW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetpatchinfow
-// Minimum OS: windows8.0.
-func MsiGetPatchInfoW(szPatch foundation.PWSTR, szAttribute foundation.PWSTR, lpValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetPatchInfoW.Addr(), uintptr(unsafe.Pointer(szPatch)), uintptr(unsafe.Pointer(szAttribute)), uintptr(unsafe.Pointer(lpValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
+func MsiGetProductCode(szComponent string, lpBuf39 foundation.PWSTR) uint32 {
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiGetProductCode.Addr(), uintptr(unsafe.Pointer(_szComponent)), uintptr(unsafe.Pointer(lpBuf39)))
 	return uint32(r1)
 }
 
@@ -1532,11 +1698,13 @@ func MsiGetProductCodeA(szComponent foundation.PSTR, lpBuf39 foundation.PSTR) ui
 	return uint32(r1)
 }
 
-// MsiGetProductCodeW calls msi!MsiGetProductCodeW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductcodew
+// MsiGetProductInfo calls msi!MsiGetProductInfoW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductinfow
 // Minimum OS: windows8.0.
-func MsiGetProductCodeW(szComponent foundation.PWSTR, lpBuf39 foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetProductCodeW.Addr(), uintptr(unsafe.Pointer(szComponent)), uintptr(unsafe.Pointer(lpBuf39)))
+func MsiGetProductInfo(szProduct string, szAttribute string, lpValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szAttribute := win32.UTF16Ptr(szAttribute)
+	r1, _, _ := syscall.SyscallN(procMsiGetProductInfo.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szAttribute)), uintptr(unsafe.Pointer(lpValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
 	return uint32(r1)
 }
 
@@ -1548,6 +1716,17 @@ func MsiGetProductInfoA(szProduct foundation.PSTR, szAttribute foundation.PSTR, 
 	return uint32(r1)
 }
 
+// MsiGetProductInfoEx calls msi!MsiGetProductInfoExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductinfoexw
+// Minimum OS: windows8.0.
+func MsiGetProductInfoEx(szProductCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, szProperty string, szValue foundation.PWSTR, pcchValue *uint32) uint32 {
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	_szProperty := win32.UTF16Ptr(szProperty)
+	r1, _, _ := syscall.SyscallN(procMsiGetProductInfoEx.Addr(), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(_szProperty)), uintptr(unsafe.Pointer(szValue)), uintptr(unsafe.Pointer(pcchValue)))
+	return uint32(r1)
+}
+
 // MsiGetProductInfoExA calls msi!MsiGetProductInfoExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductinfoexa
 // Minimum OS: windows8.0.
@@ -1556,11 +1735,12 @@ func MsiGetProductInfoExA(szProductCode foundation.PSTR, szUserSid foundation.PS
 	return uint32(r1)
 }
 
-// MsiGetProductInfoExW calls msi!MsiGetProductInfoExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductinfoexw
+// MsiGetProductInfoFromScript calls msi!MsiGetProductInfoFromScriptW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductinfofromscriptw
 // Minimum OS: windows8.0.
-func MsiGetProductInfoExW(szProductCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, szProperty foundation.PWSTR, szValue foundation.PWSTR, pcchValue *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetProductInfoExW.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(szProperty)), uintptr(unsafe.Pointer(szValue)), uintptr(unsafe.Pointer(pcchValue)))
+func MsiGetProductInfoFromScript(szScriptFile string, lpProductBuf39 foundation.PWSTR, plgidLanguage *uint16, pdwVersion *uint32, lpNameBuf foundation.PWSTR, pcchNameBuf *uint32, lpPackageBuf foundation.PWSTR, pcchPackageBuf *uint32) uint32 {
+	_szScriptFile := win32.UTF16Ptr(szScriptFile)
+	r1, _, _ := syscall.SyscallN(procMsiGetProductInfoFromScript.Addr(), uintptr(unsafe.Pointer(_szScriptFile)), uintptr(unsafe.Pointer(lpProductBuf39)), uintptr(unsafe.Pointer(plgidLanguage)), uintptr(unsafe.Pointer(pdwVersion)), uintptr(unsafe.Pointer(lpNameBuf)), uintptr(unsafe.Pointer(pcchNameBuf)), uintptr(unsafe.Pointer(lpPackageBuf)), uintptr(unsafe.Pointer(pcchPackageBuf)))
 	return uint32(r1)
 }
 
@@ -1572,19 +1752,12 @@ func MsiGetProductInfoFromScriptA(szScriptFile foundation.PSTR, lpProductBuf39 f
 	return uint32(r1)
 }
 
-// MsiGetProductInfoFromScriptW calls msi!MsiGetProductInfoFromScriptW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductinfofromscriptw
+// MsiGetProductProperty calls msi!MsiGetProductPropertyW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductpropertyw
 // Minimum OS: windows8.0.
-func MsiGetProductInfoFromScriptW(szScriptFile foundation.PWSTR, lpProductBuf39 foundation.PWSTR, plgidLanguage *uint16, pdwVersion *uint32, lpNameBuf foundation.PWSTR, pcchNameBuf *uint32, lpPackageBuf foundation.PWSTR, pcchPackageBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetProductInfoFromScriptW.Addr(), uintptr(unsafe.Pointer(szScriptFile)), uintptr(unsafe.Pointer(lpProductBuf39)), uintptr(unsafe.Pointer(plgidLanguage)), uintptr(unsafe.Pointer(pdwVersion)), uintptr(unsafe.Pointer(lpNameBuf)), uintptr(unsafe.Pointer(pcchNameBuf)), uintptr(unsafe.Pointer(lpPackageBuf)), uintptr(unsafe.Pointer(pcchPackageBuf)))
-	return uint32(r1)
-}
-
-// MsiGetProductInfoW calls msi!MsiGetProductInfoW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductinfow
-// Minimum OS: windows8.0.
-func MsiGetProductInfoW(szProduct foundation.PWSTR, szAttribute foundation.PWSTR, lpValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetProductInfoW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szAttribute)), uintptr(unsafe.Pointer(lpValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
+func MsiGetProductProperty(hProduct MSIHANDLE, szProperty string, lpValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
+	_szProperty := win32.UTF16Ptr(szProperty)
+	r1, _, _ := syscall.SyscallN(procMsiGetProductProperty.Addr(), uintptr(hProduct), uintptr(unsafe.Pointer(_szProperty)), uintptr(unsafe.Pointer(lpValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
 	return uint32(r1)
 }
 
@@ -1596,11 +1769,12 @@ func MsiGetProductPropertyA(hProduct MSIHANDLE, szProperty foundation.PSTR, lpVa
 	return uint32(r1)
 }
 
-// MsiGetProductPropertyW calls msi!MsiGetProductPropertyW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetproductpropertyw
+// MsiGetProperty calls msi!MsiGetPropertyW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetpropertyw
 // Minimum OS: windows8.0.
-func MsiGetProductPropertyW(hProduct MSIHANDLE, szProperty foundation.PWSTR, lpValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetProductPropertyW.Addr(), uintptr(hProduct), uintptr(unsafe.Pointer(szProperty)), uintptr(unsafe.Pointer(lpValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
+func MsiGetProperty(hInstall MSIHANDLE, szName string, szValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(procMsiGetProperty.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(szValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
 	return uint32(r1)
 }
 
@@ -1612,11 +1786,12 @@ func MsiGetPropertyA(hInstall MSIHANDLE, szName foundation.PSTR, szValueBuf foun
 	return uint32(r1)
 }
 
-// MsiGetPropertyW calls msi!MsiGetPropertyW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetpropertyw
+// MsiGetShortcutTarget calls msi!MsiGetShortcutTargetW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetshortcuttargetw
 // Minimum OS: windows8.0.
-func MsiGetPropertyW(hInstall MSIHANDLE, szName foundation.PWSTR, szValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetPropertyW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(szValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
+func MsiGetShortcutTarget(szShortcutPath string, szProductCode foundation.PWSTR, szFeatureId foundation.PWSTR, szComponentCode foundation.PWSTR) uint32 {
+	_szShortcutPath := win32.UTF16Ptr(szShortcutPath)
+	r1, _, _ := syscall.SyscallN(procMsiGetShortcutTarget.Addr(), uintptr(unsafe.Pointer(_szShortcutPath)), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szFeatureId)), uintptr(unsafe.Pointer(szComponentCode)))
 	return uint32(r1)
 }
 
@@ -1628,11 +1803,12 @@ func MsiGetShortcutTargetA(szShortcutPath foundation.PSTR, szProductCode foundat
 	return uint32(r1)
 }
 
-// MsiGetShortcutTargetW calls msi!MsiGetShortcutTargetW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetshortcuttargetw
+// MsiGetSourcePath calls msi!MsiGetSourcePathW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetsourcepathw
 // Minimum OS: windows8.0.
-func MsiGetShortcutTargetW(szShortcutPath foundation.PWSTR, szProductCode foundation.PWSTR, szFeatureId foundation.PWSTR, szComponentCode foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetShortcutTargetW.Addr(), uintptr(unsafe.Pointer(szShortcutPath)), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szFeatureId)), uintptr(unsafe.Pointer(szComponentCode)))
+func MsiGetSourcePath(hInstall MSIHANDLE, szFolder string, szPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+	_szFolder := win32.UTF16Ptr(szFolder)
+	r1, _, _ := syscall.SyscallN(procMsiGetSourcePath.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szFolder)), uintptr(unsafe.Pointer(szPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
 	return uint32(r1)
 }
 
@@ -1644,11 +1820,12 @@ func MsiGetSourcePathA(hInstall MSIHANDLE, szFolder foundation.PSTR, szPathBuf f
 	return uint32(r1)
 }
 
-// MsiGetSourcePathW calls msi!MsiGetSourcePathW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetsourcepathw
+// MsiGetSummaryInformation calls msi!MsiGetSummaryInformationW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetsummaryinformationw
 // Minimum OS: windows8.0.
-func MsiGetSourcePathW(hInstall MSIHANDLE, szFolder foundation.PWSTR, szPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetSourcePathW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szFolder)), uintptr(unsafe.Pointer(szPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
+func MsiGetSummaryInformation(hDatabase MSIHANDLE, szDatabasePath string, uiUpdateCount uint32, phSummaryInfo *MSIHANDLE) uint32 {
+	_szDatabasePath := win32.UTF16Ptr(szDatabasePath)
+	r1, _, _ := syscall.SyscallN(procMsiGetSummaryInformation.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(_szDatabasePath)), uintptr(uiUpdateCount), uintptr(unsafe.Pointer(phSummaryInfo)))
 	return uint32(r1)
 }
 
@@ -1660,11 +1837,12 @@ func MsiGetSummaryInformationA(hDatabase MSIHANDLE, szDatabasePath foundation.PS
 	return uint32(r1)
 }
 
-// MsiGetSummaryInformationW calls msi!MsiGetSummaryInformationW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigetsummaryinformationw
+// MsiGetTargetPath calls msi!MsiGetTargetPathW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigettargetpathw
 // Minimum OS: windows8.0.
-func MsiGetSummaryInformationW(hDatabase MSIHANDLE, szDatabasePath foundation.PWSTR, uiUpdateCount uint32, phSummaryInfo *MSIHANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetSummaryInformationW.Addr(), uintptr(hDatabase), uintptr(unsafe.Pointer(szDatabasePath)), uintptr(uiUpdateCount), uintptr(unsafe.Pointer(phSummaryInfo)))
+func MsiGetTargetPath(hInstall MSIHANDLE, szFolder string, szPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+	_szFolder := win32.UTF16Ptr(szFolder)
+	r1, _, _ := syscall.SyscallN(procMsiGetTargetPath.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szFolder)), uintptr(unsafe.Pointer(szPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
 	return uint32(r1)
 }
 
@@ -1676,12 +1854,13 @@ func MsiGetTargetPathA(hInstall MSIHANDLE, szFolder foundation.PSTR, szPathBuf f
 	return uint32(r1)
 }
 
-// MsiGetTargetPathW calls msi!MsiGetTargetPathW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msigettargetpathw
+// MsiGetUserInfo calls msi!MsiGetUserInfoW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetuserinfow
 // Minimum OS: windows8.0.
-func MsiGetTargetPathW(hInstall MSIHANDLE, szFolder foundation.PWSTR, szPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiGetTargetPathW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szFolder)), uintptr(unsafe.Pointer(szPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
-	return uint32(r1)
+func MsiGetUserInfo(szProduct string, lpUserNameBuf foundation.PWSTR, pcchUserNameBuf *uint32, lpOrgNameBuf foundation.PWSTR, pcchOrgNameBuf *uint32, lpSerialBuf foundation.PWSTR, pcchSerialBuf *uint32) USERINFOSTATE {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiGetUserInfo.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(lpUserNameBuf)), uintptr(unsafe.Pointer(pcchUserNameBuf)), uintptr(unsafe.Pointer(lpOrgNameBuf)), uintptr(unsafe.Pointer(pcchOrgNameBuf)), uintptr(unsafe.Pointer(lpSerialBuf)), uintptr(unsafe.Pointer(pcchSerialBuf)))
+	return USERINFOSTATE(r1)
 }
 
 // MsiGetUserInfoA calls msi!MsiGetUserInfoA.
@@ -1692,12 +1871,14 @@ func MsiGetUserInfoA(szProduct foundation.PSTR, lpUserNameBuf foundation.PSTR, p
 	return USERINFOSTATE(r1)
 }
 
-// MsiGetUserInfoW calls msi!MsiGetUserInfoW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msigetuserinfow
+// MsiInstallMissingComponent calls msi!MsiInstallMissingComponentW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiinstallmissingcomponentw
 // Minimum OS: windows8.0.
-func MsiGetUserInfoW(szProduct foundation.PWSTR, lpUserNameBuf foundation.PWSTR, pcchUserNameBuf *uint32, lpOrgNameBuf foundation.PWSTR, pcchOrgNameBuf *uint32, lpSerialBuf foundation.PWSTR, pcchSerialBuf *uint32) USERINFOSTATE {
-	r1, _, _ := syscall.SyscallN(procMsiGetUserInfoW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(lpUserNameBuf)), uintptr(unsafe.Pointer(pcchUserNameBuf)), uintptr(unsafe.Pointer(lpOrgNameBuf)), uintptr(unsafe.Pointer(pcchOrgNameBuf)), uintptr(unsafe.Pointer(lpSerialBuf)), uintptr(unsafe.Pointer(pcchSerialBuf)))
-	return USERINFOSTATE(r1)
+func MsiInstallMissingComponent(szProduct string, szComponent string, eInstallState INSTALLSTATE) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiInstallMissingComponent.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szComponent)), uintptr(eInstallState))
+	return uint32(r1)
 }
 
 // MsiInstallMissingComponentA calls msi!MsiInstallMissingComponentA.
@@ -1708,11 +1889,13 @@ func MsiInstallMissingComponentA(szProduct foundation.PSTR, szComponent foundati
 	return uint32(r1)
 }
 
-// MsiInstallMissingComponentW calls msi!MsiInstallMissingComponentW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiinstallmissingcomponentw
+// MsiInstallMissingFile calls msi!MsiInstallMissingFileW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiinstallmissingfilew
 // Minimum OS: windows8.0.
-func MsiInstallMissingComponentW(szProduct foundation.PWSTR, szComponent foundation.PWSTR, eInstallState INSTALLSTATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiInstallMissingComponentW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szComponent)), uintptr(eInstallState))
+func MsiInstallMissingFile(szProduct string, szFile string) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procMsiInstallMissingFile.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szFile)))
 	return uint32(r1)
 }
 
@@ -1724,11 +1907,13 @@ func MsiInstallMissingFileA(szProduct foundation.PSTR, szFile foundation.PSTR) u
 	return uint32(r1)
 }
 
-// MsiInstallMissingFileW calls msi!MsiInstallMissingFileW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiinstallmissingfilew
+// MsiInstallProduct calls msi!MsiInstallProductW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiinstallproductw
 // Minimum OS: windows8.0.
-func MsiInstallMissingFileW(szProduct foundation.PWSTR, szFile foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiInstallMissingFileW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFile)))
+func MsiInstallProduct(szPackagePath string, szCommandLine string) uint32 {
+	_szPackagePath := win32.UTF16Ptr(szPackagePath)
+	_szCommandLine := win32.UTF16Ptr(szCommandLine)
+	r1, _, _ := syscall.SyscallN(procMsiInstallProduct.Addr(), uintptr(unsafe.Pointer(_szPackagePath)), uintptr(unsafe.Pointer(_szCommandLine)))
 	return uint32(r1)
 }
 
@@ -1740,11 +1925,12 @@ func MsiInstallProductA(szPackagePath foundation.PSTR, szCommandLine foundation.
 	return uint32(r1)
 }
 
-// MsiInstallProductW calls msi!MsiInstallProductW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiinstallproductw
+// MsiIsProductElevated calls msi!MsiIsProductElevatedW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiisproductelevatedw
 // Minimum OS: windows8.0.
-func MsiInstallProductW(szPackagePath foundation.PWSTR, szCommandLine foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiInstallProductW.Addr(), uintptr(unsafe.Pointer(szPackagePath)), uintptr(unsafe.Pointer(szCommandLine)))
+func MsiIsProductElevated(szProduct string, pfElevated *foundation.BOOL) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiIsProductElevated.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(pfElevated)))
 	return uint32(r1)
 }
 
@@ -1756,20 +1942,21 @@ func MsiIsProductElevatedA(szProduct foundation.PSTR, pfElevated *foundation.BOO
 	return uint32(r1)
 }
 
-// MsiIsProductElevatedW calls msi!MsiIsProductElevatedW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiisproductelevatedw
-// Minimum OS: windows8.0.
-func MsiIsProductElevatedW(szProduct foundation.PWSTR, pfElevated *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiIsProductElevatedW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(pfElevated)))
-	return uint32(r1)
-}
-
 // MsiJoinTransaction calls msi!MsiJoinTransaction.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msijointransaction
 // Minimum OS: windows8.0.
 func MsiJoinTransaction(hTransactionHandle MSIHANDLE, dwTransactionAttributes uint32, phChangeOfOwnerEvent *foundation.HANDLE) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiJoinTransaction.Addr(), uintptr(hTransactionHandle), uintptr(dwTransactionAttributes), uintptr(unsafe.Pointer(phChangeOfOwnerEvent)))
 	return uint32(r1)
+}
+
+// MsiLocateComponent calls msi!MsiLocateComponentW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msilocatecomponentw
+// Minimum OS: windows8.0.
+func MsiLocateComponent(szComponent string, lpPathBuf foundation.PWSTR, pcchBuf *uint32) INSTALLSTATE {
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiLocateComponent.Addr(), uintptr(unsafe.Pointer(_szComponent)), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchBuf)))
+	return INSTALLSTATE(r1)
 }
 
 // MsiLocateComponentA calls msi!MsiLocateComponentA.
@@ -1780,12 +1967,14 @@ func MsiLocateComponentA(szComponent foundation.PSTR, lpPathBuf foundation.PSTR,
 	return INSTALLSTATE(r1)
 }
 
-// MsiLocateComponentW calls msi!MsiLocateComponentW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msilocatecomponentw
+// MsiNotifySidChange calls msi!MsiNotifySidChangeW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msinotifysidchangew
 // Minimum OS: windows8.0.
-func MsiLocateComponentW(szComponent foundation.PWSTR, lpPathBuf foundation.PWSTR, pcchBuf *uint32) INSTALLSTATE {
-	r1, _, _ := syscall.SyscallN(procMsiLocateComponentW.Addr(), uintptr(unsafe.Pointer(szComponent)), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchBuf)))
-	return INSTALLSTATE(r1)
+func MsiNotifySidChange(pOldSid string, pNewSid string) uint32 {
+	_pOldSid := win32.UTF16Ptr(pOldSid)
+	_pNewSid := win32.UTF16Ptr(pNewSid)
+	r1, _, _ := syscall.SyscallN(procMsiNotifySidChange.Addr(), uintptr(unsafe.Pointer(_pOldSid)), uintptr(unsafe.Pointer(_pNewSid)))
+	return uint32(r1)
 }
 
 // MsiNotifySidChangeA calls msi!MsiNotifySidChangeA.
@@ -1796,11 +1985,13 @@ func MsiNotifySidChangeA(pOldSid foundation.PSTR, pNewSid foundation.PSTR) uint3
 	return uint32(r1)
 }
 
-// MsiNotifySidChangeW calls msi!MsiNotifySidChangeW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msinotifysidchangew
+// MsiOpenDatabase calls msi!MsiOpenDatabaseW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msiopendatabasew
 // Minimum OS: windows8.0.
-func MsiNotifySidChangeW(pOldSid foundation.PWSTR, pNewSid foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiNotifySidChangeW.Addr(), uintptr(unsafe.Pointer(pOldSid)), uintptr(unsafe.Pointer(pNewSid)))
+func MsiOpenDatabase(szDatabasePath string, szPersist string, phDatabase *MSIHANDLE) uint32 {
+	_szDatabasePath := win32.UTF16Ptr(szDatabasePath)
+	_szPersist := win32.UTF16Ptr(szPersist)
+	r1, _, _ := syscall.SyscallN(procMsiOpenDatabase.Addr(), uintptr(unsafe.Pointer(_szDatabasePath)), uintptr(unsafe.Pointer(_szPersist)), uintptr(unsafe.Pointer(phDatabase)))
 	return uint32(r1)
 }
 
@@ -1812,11 +2003,12 @@ func MsiOpenDatabaseA(szDatabasePath foundation.PSTR, szPersist foundation.PSTR,
 	return uint32(r1)
 }
 
-// MsiOpenDatabaseW calls msi!MsiOpenDatabaseW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msiopendatabasew
+// MsiOpenPackage calls msi!MsiOpenPackageW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiopenpackagew
 // Minimum OS: windows8.0.
-func MsiOpenDatabaseW(szDatabasePath foundation.PWSTR, szPersist foundation.PWSTR, phDatabase *MSIHANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiOpenDatabaseW.Addr(), uintptr(unsafe.Pointer(szDatabasePath)), uintptr(unsafe.Pointer(szPersist)), uintptr(unsafe.Pointer(phDatabase)))
+func MsiOpenPackage(szPackagePath string, hProduct *MSIHANDLE) uint32 {
+	_szPackagePath := win32.UTF16Ptr(szPackagePath)
+	r1, _, _ := syscall.SyscallN(procMsiOpenPackage.Addr(), uintptr(unsafe.Pointer(_szPackagePath)), uintptr(unsafe.Pointer(hProduct)))
 	return uint32(r1)
 }
 
@@ -1828,6 +2020,15 @@ func MsiOpenPackageA(szPackagePath foundation.PSTR, hProduct *MSIHANDLE) uint32 
 	return uint32(r1)
 }
 
+// MsiOpenPackageEx calls msi!MsiOpenPackageExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiopenpackageexw
+// Minimum OS: windows8.0.
+func MsiOpenPackageEx(szPackagePath string, dwOptions uint32, hProduct *MSIHANDLE) uint32 {
+	_szPackagePath := win32.UTF16Ptr(szPackagePath)
+	r1, _, _ := syscall.SyscallN(procMsiOpenPackageEx.Addr(), uintptr(unsafe.Pointer(_szPackagePath)), uintptr(dwOptions), uintptr(unsafe.Pointer(hProduct)))
+	return uint32(r1)
+}
+
 // MsiOpenPackageExA calls msi!MsiOpenPackageExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiopenpackageexa
 // Minimum OS: windows8.0.
@@ -1836,19 +2037,12 @@ func MsiOpenPackageExA(szPackagePath foundation.PSTR, dwOptions uint32, hProduct
 	return uint32(r1)
 }
 
-// MsiOpenPackageExW calls msi!MsiOpenPackageExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiopenpackageexw
+// MsiOpenProduct calls msi!MsiOpenProductW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiopenproductw
 // Minimum OS: windows8.0.
-func MsiOpenPackageExW(szPackagePath foundation.PWSTR, dwOptions uint32, hProduct *MSIHANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiOpenPackageExW.Addr(), uintptr(unsafe.Pointer(szPackagePath)), uintptr(dwOptions), uintptr(unsafe.Pointer(hProduct)))
-	return uint32(r1)
-}
-
-// MsiOpenPackageW calls msi!MsiOpenPackageW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiopenpackagew
-// Minimum OS: windows8.0.
-func MsiOpenPackageW(szPackagePath foundation.PWSTR, hProduct *MSIHANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiOpenPackageW.Addr(), uintptr(unsafe.Pointer(szPackagePath)), uintptr(unsafe.Pointer(hProduct)))
+func MsiOpenProduct(szProduct string, hProduct *MSIHANDLE) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiOpenProduct.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(hProduct)))
 	return uint32(r1)
 }
 
@@ -1860,11 +2054,13 @@ func MsiOpenProductA(szProduct foundation.PSTR, hProduct *MSIHANDLE) uint32 {
 	return uint32(r1)
 }
 
-// MsiOpenProductW calls msi!MsiOpenProductW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiopenproductw
+// MsiPreviewBillboard calls msi!MsiPreviewBillboardW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msipreviewbillboardw
 // Minimum OS: windows8.0.
-func MsiOpenProductW(szProduct foundation.PWSTR, hProduct *MSIHANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiOpenProductW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(hProduct)))
+func MsiPreviewBillboard(hPreview MSIHANDLE, szControlName string, szBillboard string) uint32 {
+	_szControlName := win32.UTF16Ptr(szControlName)
+	_szBillboard := win32.UTF16Ptr(szBillboard)
+	r1, _, _ := syscall.SyscallN(procMsiPreviewBillboard.Addr(), uintptr(hPreview), uintptr(unsafe.Pointer(_szControlName)), uintptr(unsafe.Pointer(_szBillboard)))
 	return uint32(r1)
 }
 
@@ -1876,11 +2072,12 @@ func MsiPreviewBillboardA(hPreview MSIHANDLE, szControlName foundation.PSTR, szB
 	return uint32(r1)
 }
 
-// MsiPreviewBillboardW calls msi!MsiPreviewBillboardW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msipreviewbillboardw
+// MsiPreviewDialog calls msi!MsiPreviewDialogW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msipreviewdialogw
 // Minimum OS: windows8.0.
-func MsiPreviewBillboardW(hPreview MSIHANDLE, szControlName foundation.PWSTR, szBillboard foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiPreviewBillboardW.Addr(), uintptr(hPreview), uintptr(unsafe.Pointer(szControlName)), uintptr(unsafe.Pointer(szBillboard)))
+func MsiPreviewDialog(hPreview MSIHANDLE, szDialogName string) uint32 {
+	_szDialogName := win32.UTF16Ptr(szDialogName)
+	r1, _, _ := syscall.SyscallN(procMsiPreviewDialog.Addr(), uintptr(hPreview), uintptr(unsafe.Pointer(_szDialogName)))
 	return uint32(r1)
 }
 
@@ -1892,27 +2089,25 @@ func MsiPreviewDialogA(hPreview MSIHANDLE, szDialogName foundation.PSTR) uint32 
 	return uint32(r1)
 }
 
-// MsiPreviewDialogW calls msi!MsiPreviewDialogW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msipreviewdialogw
+// MsiProcessAdvertiseScript calls msi!MsiProcessAdvertiseScriptW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprocessadvertisescriptw
 // Minimum OS: windows8.0.
-func MsiPreviewDialogW(hPreview MSIHANDLE, szDialogName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiPreviewDialogW.Addr(), uintptr(hPreview), uintptr(unsafe.Pointer(szDialogName)))
+func MsiProcessAdvertiseScript(szScriptFile string, szIconFolder string, hRegData systemregistry.HKEY, fShortcuts bool, fRemoveItems bool) uint32 {
+	_szScriptFile := win32.UTF16Ptr(szScriptFile)
+	_szIconFolder := win32.UTF16Ptr(szIconFolder)
+	_fShortcuts := win32.Bool32(fShortcuts)
+	_fRemoveItems := win32.Bool32(fRemoveItems)
+	r1, _, _ := syscall.SyscallN(procMsiProcessAdvertiseScript.Addr(), uintptr(unsafe.Pointer(_szScriptFile)), uintptr(unsafe.Pointer(_szIconFolder)), uintptr(hRegData), uintptr(_fShortcuts), uintptr(_fRemoveItems))
 	return uint32(r1)
 }
 
 // MsiProcessAdvertiseScriptA calls msi!MsiProcessAdvertiseScriptA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprocessadvertisescripta
 // Minimum OS: windows8.0.
-func MsiProcessAdvertiseScriptA(szScriptFile foundation.PSTR, szIconFolder foundation.PSTR, hRegData systemregistry.HKEY, fShortcuts foundation.BOOL, fRemoveItems foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiProcessAdvertiseScriptA.Addr(), uintptr(unsafe.Pointer(szScriptFile)), uintptr(unsafe.Pointer(szIconFolder)), uintptr(hRegData), uintptr(fShortcuts), uintptr(fRemoveItems))
-	return uint32(r1)
-}
-
-// MsiProcessAdvertiseScriptW calls msi!MsiProcessAdvertiseScriptW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprocessadvertisescriptw
-// Minimum OS: windows8.0.
-func MsiProcessAdvertiseScriptW(szScriptFile foundation.PWSTR, szIconFolder foundation.PWSTR, hRegData systemregistry.HKEY, fShortcuts foundation.BOOL, fRemoveItems foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiProcessAdvertiseScriptW.Addr(), uintptr(unsafe.Pointer(szScriptFile)), uintptr(unsafe.Pointer(szIconFolder)), uintptr(hRegData), uintptr(fShortcuts), uintptr(fRemoveItems))
+func MsiProcessAdvertiseScriptA(szScriptFile foundation.PSTR, szIconFolder foundation.PSTR, hRegData systemregistry.HKEY, fShortcuts bool, fRemoveItems bool) uint32 {
+	_fShortcuts := win32.Bool32(fShortcuts)
+	_fRemoveItems := win32.Bool32(fRemoveItems)
+	r1, _, _ := syscall.SyscallN(procMsiProcessAdvertiseScriptA.Addr(), uintptr(unsafe.Pointer(szScriptFile)), uintptr(unsafe.Pointer(szIconFolder)), uintptr(hRegData), uintptr(_fShortcuts), uintptr(_fRemoveItems))
 	return uint32(r1)
 }
 
@@ -1924,6 +2119,16 @@ func MsiProcessMessage(hInstall MSIHANDLE, eMessageType INSTALLMESSAGE, hRecord 
 	return int32(r1)
 }
 
+// MsiProvideAssembly calls msi!MsiProvideAssemblyW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovideassemblyw
+// Minimum OS: windows8.0.
+func MsiProvideAssembly(szAssemblyName string, szAppContext string, dwInstallMode uint32, dwAssemblyInfo MSIASSEMBLYINFO, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+	_szAssemblyName := win32.UTF16Ptr(szAssemblyName)
+	_szAppContext := win32.UTF16Ptr(szAppContext)
+	r1, _, _ := syscall.SyscallN(procMsiProvideAssembly.Addr(), uintptr(unsafe.Pointer(_szAssemblyName)), uintptr(unsafe.Pointer(_szAppContext)), uintptr(dwInstallMode), uintptr(dwAssemblyInfo), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
+	return uint32(r1)
+}
+
 // MsiProvideAssemblyA calls msi!MsiProvideAssemblyA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovideassemblya
 // Minimum OS: windows8.0.
@@ -1932,11 +2137,14 @@ func MsiProvideAssemblyA(szAssemblyName foundation.PSTR, szAppContext foundation
 	return uint32(r1)
 }
 
-// MsiProvideAssemblyW calls msi!MsiProvideAssemblyW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovideassemblyw
+// MsiProvideComponent calls msi!MsiProvideComponentW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidecomponentw
 // Minimum OS: windows8.0.
-func MsiProvideAssemblyW(szAssemblyName foundation.PWSTR, szAppContext foundation.PWSTR, dwInstallMode uint32, dwAssemblyInfo MSIASSEMBLYINFO, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiProvideAssemblyW.Addr(), uintptr(unsafe.Pointer(szAssemblyName)), uintptr(unsafe.Pointer(szAppContext)), uintptr(dwInstallMode), uintptr(dwAssemblyInfo), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
+func MsiProvideComponent(szProduct string, szFeature string, szComponent string, dwInstallMode uint32, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szFeature := win32.UTF16Ptr(szFeature)
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiProvideComponent.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szFeature)), uintptr(unsafe.Pointer(_szComponent)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
 	return uint32(r1)
 }
 
@@ -1948,11 +2156,13 @@ func MsiProvideComponentA(szProduct foundation.PSTR, szFeature foundation.PSTR, 
 	return uint32(r1)
 }
 
-// MsiProvideComponentW calls msi!MsiProvideComponentW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidecomponentw
+// MsiProvideQualifiedComponent calls msi!MsiProvideQualifiedComponentW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidequalifiedcomponentw
 // Minimum OS: windows8.0.
-func MsiProvideComponentW(szProduct foundation.PWSTR, szFeature foundation.PWSTR, szComponent foundation.PWSTR, dwInstallMode uint32, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiProvideComponentW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)), uintptr(unsafe.Pointer(szComponent)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
+func MsiProvideQualifiedComponent(szCategory string, szQualifier string, dwInstallMode uint32, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+	_szCategory := win32.UTF16Ptr(szCategory)
+	_szQualifier := win32.UTF16Ptr(szQualifier)
+	r1, _, _ := syscall.SyscallN(procMsiProvideQualifiedComponent.Addr(), uintptr(unsafe.Pointer(_szCategory)), uintptr(unsafe.Pointer(_szQualifier)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
 	return uint32(r1)
 }
 
@@ -1964,27 +2174,33 @@ func MsiProvideQualifiedComponentA(szCategory foundation.PSTR, szQualifier found
 	return uint32(r1)
 }
 
+// MsiProvideQualifiedComponentEx calls msi!MsiProvideQualifiedComponentExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidequalifiedcomponentexw
+// Minimum OS: windows8.0.
+func MsiProvideQualifiedComponentEx(szCategory string, szQualifier string, dwInstallMode uint32, szProduct string, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+	_szCategory := win32.UTF16Ptr(szCategory)
+	_szQualifier := win32.UTF16Ptr(szQualifier)
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiProvideQualifiedComponentEx.Addr(), uintptr(unsafe.Pointer(_szCategory)), uintptr(unsafe.Pointer(_szQualifier)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(_szProduct)), 0, 0, uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
+	return uint32(r1)
+}
+
 // MsiProvideQualifiedComponentExA calls msi!MsiProvideQualifiedComponentExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidequalifiedcomponentexa
 // Minimum OS: windows8.0.
-func MsiProvideQualifiedComponentExA(szCategory foundation.PSTR, szQualifier foundation.PSTR, dwInstallMode uint32, szProduct foundation.PSTR, dwUnused1 uint32, dwUnused2 uint32, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiProvideQualifiedComponentExA.Addr(), uintptr(unsafe.Pointer(szCategory)), uintptr(unsafe.Pointer(szQualifier)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(szProduct)), uintptr(dwUnused1), uintptr(dwUnused2), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
+func MsiProvideQualifiedComponentExA(szCategory foundation.PSTR, szQualifier foundation.PSTR, dwInstallMode uint32, szProduct foundation.PSTR, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiProvideQualifiedComponentExA.Addr(), uintptr(unsafe.Pointer(szCategory)), uintptr(unsafe.Pointer(szQualifier)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(szProduct)), 0, 0, uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
 	return uint32(r1)
 }
 
-// MsiProvideQualifiedComponentExW calls msi!MsiProvideQualifiedComponentExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidequalifiedcomponentexw
+// MsiQueryComponentState calls msi!MsiQueryComponentStateW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiquerycomponentstatew
 // Minimum OS: windows8.0.
-func MsiProvideQualifiedComponentExW(szCategory foundation.PWSTR, szQualifier foundation.PWSTR, dwInstallMode uint32, szProduct foundation.PWSTR, dwUnused1 uint32, dwUnused2 uint32, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiProvideQualifiedComponentExW.Addr(), uintptr(unsafe.Pointer(szCategory)), uintptr(unsafe.Pointer(szQualifier)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(szProduct)), uintptr(dwUnused1), uintptr(dwUnused2), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
-	return uint32(r1)
-}
-
-// MsiProvideQualifiedComponentW calls msi!MsiProvideQualifiedComponentW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidequalifiedcomponentw
-// Minimum OS: windows8.0.
-func MsiProvideQualifiedComponentW(szCategory foundation.PWSTR, szQualifier foundation.PWSTR, dwInstallMode uint32, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiProvideQualifiedComponentW.Addr(), uintptr(unsafe.Pointer(szCategory)), uintptr(unsafe.Pointer(szQualifier)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
+func MsiQueryComponentState(szProductCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, szComponentCode string, pdwState *INSTALLSTATE) uint32 {
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	_szComponentCode := win32.UTF16Ptr(szComponentCode)
+	r1, _, _ := syscall.SyscallN(procMsiQueryComponentState.Addr(), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(_szComponentCode)), uintptr(unsafe.Pointer(pdwState)))
 	return uint32(r1)
 }
 
@@ -1996,12 +2212,14 @@ func MsiQueryComponentStateA(szProductCode foundation.PSTR, szUserSid foundation
 	return uint32(r1)
 }
 
-// MsiQueryComponentStateW calls msi!MsiQueryComponentStateW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiquerycomponentstatew
+// MsiQueryFeatureState calls msi!MsiQueryFeatureStateW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiqueryfeaturestatew
 // Minimum OS: windows8.0.
-func MsiQueryComponentStateW(szProductCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, szComponentCode foundation.PWSTR, pdwState *INSTALLSTATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiQueryComponentStateW.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(szComponentCode)), uintptr(unsafe.Pointer(pdwState)))
-	return uint32(r1)
+func MsiQueryFeatureState(szProduct string, szFeature string) INSTALLSTATE {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiQueryFeatureState.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szFeature)))
+	return INSTALLSTATE(r1)
 }
 
 // MsiQueryFeatureStateA calls msi!MsiQueryFeatureStateA.
@@ -2012,6 +2230,17 @@ func MsiQueryFeatureStateA(szProduct foundation.PSTR, szFeature foundation.PSTR)
 	return INSTALLSTATE(r1)
 }
 
+// MsiQueryFeatureStateEx calls msi!MsiQueryFeatureStateExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiqueryfeaturestateexw
+// Minimum OS: windows8.0.
+func MsiQueryFeatureStateEx(szProductCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, szFeature string, pdwState *INSTALLSTATE) uint32 {
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiQueryFeatureStateEx.Addr(), uintptr(unsafe.Pointer(_szProductCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(_szFeature)), uintptr(unsafe.Pointer(pdwState)))
+	return uint32(r1)
+}
+
 // MsiQueryFeatureStateExA calls msi!MsiQueryFeatureStateExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiqueryfeaturestateexa
 // Minimum OS: windows8.0.
@@ -2020,19 +2249,12 @@ func MsiQueryFeatureStateExA(szProductCode foundation.PSTR, szUserSid foundation
 	return uint32(r1)
 }
 
-// MsiQueryFeatureStateExW calls msi!MsiQueryFeatureStateExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiqueryfeaturestateexw
+// MsiQueryProductState calls msi!MsiQueryProductStateW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiqueryproductstatew
 // Minimum OS: windows8.0.
-func MsiQueryFeatureStateExW(szProductCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, szFeature foundation.PWSTR, pdwState *INSTALLSTATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiQueryFeatureStateExW.Addr(), uintptr(unsafe.Pointer(szProductCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(unsafe.Pointer(szFeature)), uintptr(unsafe.Pointer(pdwState)))
-	return uint32(r1)
-}
-
-// MsiQueryFeatureStateW calls msi!MsiQueryFeatureStateW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiqueryfeaturestatew
-// Minimum OS: windows8.0.
-func MsiQueryFeatureStateW(szProduct foundation.PWSTR, szFeature foundation.PWSTR) INSTALLSTATE {
-	r1, _, _ := syscall.SyscallN(procMsiQueryFeatureStateW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)))
+func MsiQueryProductState(szProduct string) INSTALLSTATE {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiQueryProductState.Addr(), uintptr(unsafe.Pointer(_szProduct)))
 	return INSTALLSTATE(r1)
 }
 
@@ -2041,14 +2263,6 @@ func MsiQueryFeatureStateW(szProduct foundation.PWSTR, szFeature foundation.PWST
 // Minimum OS: windows8.0.
 func MsiQueryProductStateA(szProduct foundation.PSTR) INSTALLSTATE {
 	r1, _, _ := syscall.SyscallN(procMsiQueryProductStateA.Addr(), uintptr(unsafe.Pointer(szProduct)))
-	return INSTALLSTATE(r1)
-}
-
-// MsiQueryProductStateW calls msi!MsiQueryProductStateW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiqueryproductstatew
-// Minimum OS: windows8.0.
-func MsiQueryProductStateW(szProduct foundation.PWSTR) INSTALLSTATE {
-	r1, _, _ := syscall.SyscallN(procMsiQueryProductStateW.Addr(), uintptr(unsafe.Pointer(szProduct)))
 	return INSTALLSTATE(r1)
 }
 
@@ -2084,6 +2298,14 @@ func MsiRecordGetInteger(hRecord MSIHANDLE, iField uint32) int32 {
 	return int32(r1)
 }
 
+// MsiRecordGetString calls msi!MsiRecordGetStringW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msirecordgetstringw
+// Minimum OS: windows8.0.
+func MsiRecordGetString(hRecord MSIHANDLE, iField uint32, szValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiRecordGetString.Addr(), uintptr(hRecord), uintptr(iField), uintptr(unsafe.Pointer(szValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
+	return uint32(r1)
+}
+
 // MsiRecordGetStringA calls msi!MsiRecordGetStringA.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msirecordgetstringa
 // Minimum OS: windows8.0.
@@ -2092,20 +2314,12 @@ func MsiRecordGetStringA(hRecord MSIHANDLE, iField uint32, szValueBuf foundation
 	return uint32(r1)
 }
 
-// MsiRecordGetStringW calls msi!MsiRecordGetStringW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msirecordgetstringw
-// Minimum OS: windows8.0.
-func MsiRecordGetStringW(hRecord MSIHANDLE, iField uint32, szValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiRecordGetStringW.Addr(), uintptr(hRecord), uintptr(iField), uintptr(unsafe.Pointer(szValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
-	return uint32(r1)
-}
-
 // MsiRecordIsNull calls msi!MsiRecordIsNull.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msirecordisnull
 // Minimum OS: windows8.0.
-func MsiRecordIsNull(hRecord MSIHANDLE, iField uint32) foundation.BOOL {
+func MsiRecordIsNull(hRecord MSIHANDLE, iField uint32) bool {
 	r1, _, _ := syscall.SyscallN(procMsiRecordIsNull.Addr(), uintptr(hRecord), uintptr(iField))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MsiRecordReadStream calls msi!MsiRecordReadStream.
@@ -2124,6 +2338,15 @@ func MsiRecordSetInteger(hRecord MSIHANDLE, iField uint32, iValue int32) uint32 
 	return uint32(r1)
 }
 
+// MsiRecordSetStream calls msi!MsiRecordSetStreamW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msirecordsetstreamw
+// Minimum OS: windows8.0.
+func MsiRecordSetStream(hRecord MSIHANDLE, iField uint32, szFilePath string) uint32 {
+	_szFilePath := win32.UTF16Ptr(szFilePath)
+	r1, _, _ := syscall.SyscallN(procMsiRecordSetStream.Addr(), uintptr(hRecord), uintptr(iField), uintptr(unsafe.Pointer(_szFilePath)))
+	return uint32(r1)
+}
+
 // MsiRecordSetStreamA calls msi!MsiRecordSetStreamA.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msirecordsetstreama
 // Minimum OS: windows8.0.
@@ -2132,11 +2355,12 @@ func MsiRecordSetStreamA(hRecord MSIHANDLE, iField uint32, szFilePath foundation
 	return uint32(r1)
 }
 
-// MsiRecordSetStreamW calls msi!MsiRecordSetStreamW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msirecordsetstreamw
+// MsiRecordSetString calls msi!MsiRecordSetStringW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msirecordsetstringw
 // Minimum OS: windows8.0.
-func MsiRecordSetStreamW(hRecord MSIHANDLE, iField uint32, szFilePath foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiRecordSetStreamW.Addr(), uintptr(hRecord), uintptr(iField), uintptr(unsafe.Pointer(szFilePath)))
+func MsiRecordSetString(hRecord MSIHANDLE, iField uint32, szValue string) uint32 {
+	_szValue := win32.UTF16Ptr(szValue)
+	r1, _, _ := syscall.SyscallN(procMsiRecordSetString.Addr(), uintptr(hRecord), uintptr(iField), uintptr(unsafe.Pointer(_szValue)))
 	return uint32(r1)
 }
 
@@ -2148,11 +2372,13 @@ func MsiRecordSetStringA(hRecord MSIHANDLE, iField uint32, szValue foundation.PS
 	return uint32(r1)
 }
 
-// MsiRecordSetStringW calls msi!MsiRecordSetStringW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msirecordsetstringw
+// MsiReinstallFeature calls msi!MsiReinstallFeatureW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msireinstallfeaturew
 // Minimum OS: windows8.0.
-func MsiRecordSetStringW(hRecord MSIHANDLE, iField uint32, szValue foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiRecordSetStringW.Addr(), uintptr(hRecord), uintptr(iField), uintptr(unsafe.Pointer(szValue)))
+func MsiReinstallFeature(szProduct string, szFeature string, dwReinstallMode uint32) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiReinstallFeature.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szFeature)), uintptr(dwReinstallMode))
 	return uint32(r1)
 }
 
@@ -2164,11 +2390,12 @@ func MsiReinstallFeatureA(szProduct foundation.PSTR, szFeature foundation.PSTR, 
 	return uint32(r1)
 }
 
-// MsiReinstallFeatureW calls msi!MsiReinstallFeatureW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msireinstallfeaturew
+// MsiReinstallProduct calls msi!MsiReinstallProductW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msireinstallproductw
 // Minimum OS: windows8.0.
-func MsiReinstallFeatureW(szProduct foundation.PWSTR, szFeature foundation.PWSTR, dwReinstallMode uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiReinstallFeatureW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)), uintptr(dwReinstallMode))
+func MsiReinstallProduct(szProduct string, szReinstallMode uint32) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	r1, _, _ := syscall.SyscallN(procMsiReinstallProduct.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(szReinstallMode))
 	return uint32(r1)
 }
 
@@ -2180,11 +2407,14 @@ func MsiReinstallProductA(szProduct foundation.PSTR, szReinstallMode uint32) uin
 	return uint32(r1)
 }
 
-// MsiReinstallProductW calls msi!MsiReinstallProductW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msireinstallproductw
+// MsiRemovePatches calls msi!MsiRemovePatchesW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiremovepatchesw
 // Minimum OS: windows8.0.
-func MsiReinstallProductW(szProduct foundation.PWSTR, szReinstallMode uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiReinstallProductW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(szReinstallMode))
+func MsiRemovePatches(szPatchList string, szProductCode string, eUninstallType INSTALLTYPE, szPropertyList string) uint32 {
+	_szPatchList := win32.UTF16Ptr(szPatchList)
+	_szProductCode := win32.UTF16Ptr(szProductCode)
+	_szPropertyList := win32.UTF16Ptr(szPropertyList)
+	r1, _, _ := syscall.SyscallN(procMsiRemovePatches.Addr(), uintptr(unsafe.Pointer(_szPatchList)), uintptr(unsafe.Pointer(_szProductCode)), uintptr(eUninstallType), uintptr(unsafe.Pointer(_szPropertyList)))
 	return uint32(r1)
 }
 
@@ -2196,11 +2426,12 @@ func MsiRemovePatchesA(szPatchList foundation.PSTR, szProductCode foundation.PST
 	return uint32(r1)
 }
 
-// MsiRemovePatchesW calls msi!MsiRemovePatchesW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiremovepatchesw
+// MsiSequence calls msi!MsiSequenceW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisequencew
 // Minimum OS: windows8.0.
-func MsiRemovePatchesW(szPatchList foundation.PWSTR, szProductCode foundation.PWSTR, eUninstallType INSTALLTYPE, szPropertyList foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiRemovePatchesW.Addr(), uintptr(unsafe.Pointer(szPatchList)), uintptr(unsafe.Pointer(szProductCode)), uintptr(eUninstallType), uintptr(unsafe.Pointer(szPropertyList)))
+func MsiSequence(hInstall MSIHANDLE, szTable string, iSequenceMode int32) uint32 {
+	_szTable := win32.UTF16Ptr(szTable)
+	r1, _, _ := syscall.SyscallN(procMsiSequence.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szTable)), uintptr(iSequenceMode))
 	return uint32(r1)
 }
 
@@ -2212,11 +2443,12 @@ func MsiSequenceA(hInstall MSIHANDLE, szTable foundation.PSTR, iSequenceMode int
 	return uint32(r1)
 }
 
-// MsiSequenceW calls msi!MsiSequenceW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisequencew
+// MsiSetComponentState calls msi!MsiSetComponentStateW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisetcomponentstatew
 // Minimum OS: windows8.0.
-func MsiSequenceW(hInstall MSIHANDLE, szTable foundation.PWSTR, iSequenceMode int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSequenceW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szTable)), uintptr(iSequenceMode))
+func MsiSetComponentState(hInstall MSIHANDLE, szComponent string, iState INSTALLSTATE) uint32 {
+	_szComponent := win32.UTF16Ptr(szComponent)
+	r1, _, _ := syscall.SyscallN(procMsiSetComponentState.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szComponent)), uintptr(iState))
 	return uint32(r1)
 }
 
@@ -2228,12 +2460,12 @@ func MsiSetComponentStateA(hInstall MSIHANDLE, szComponent foundation.PSTR, iSta
 	return uint32(r1)
 }
 
-// MsiSetComponentStateW calls msi!MsiSetComponentStateW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisetcomponentstatew
+// MsiSetExternalUI calls msi!MsiSetExternalUIW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisetexternaluiw
 // Minimum OS: windows8.0.
-func MsiSetComponentStateW(hInstall MSIHANDLE, szComponent foundation.PWSTR, iState INSTALLSTATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSetComponentStateW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szComponent)), uintptr(iState))
-	return uint32(r1)
+func MsiSetExternalUI(puiHandler INSTALLUI_HANDLERW, dwMessageFilter uint32, pvContext unsafe.Pointer) INSTALLUI_HANDLERW {
+	r1, _, _ := syscall.SyscallN(procMsiSetExternalUI.Addr(), uintptr(puiHandler), uintptr(dwMessageFilter), uintptr(unsafe.Pointer(pvContext)))
+	return INSTALLUI_HANDLERW(r1)
 }
 
 // MsiSetExternalUIA calls msi!MsiSetExternalUIA.
@@ -2252,12 +2484,13 @@ func MsiSetExternalUIRecord(puiHandler PINSTALLUI_HANDLER_RECORD, dwMessageFilte
 	return uint32(r1)
 }
 
-// MsiSetExternalUIW calls msi!MsiSetExternalUIW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisetexternaluiw
+// MsiSetFeatureAttributes calls msi!MsiSetFeatureAttributesW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisetfeatureattributesw
 // Minimum OS: windows8.0.
-func MsiSetExternalUIW(puiHandler INSTALLUI_HANDLERW, dwMessageFilter uint32, pvContext unsafe.Pointer) INSTALLUI_HANDLERW {
-	r1, _, _ := syscall.SyscallN(procMsiSetExternalUIW.Addr(), uintptr(puiHandler), uintptr(dwMessageFilter), uintptr(unsafe.Pointer(pvContext)))
-	return INSTALLUI_HANDLERW(r1)
+func MsiSetFeatureAttributes(hInstall MSIHANDLE, szFeature string, dwAttributes uint32) uint32 {
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiSetFeatureAttributes.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szFeature)), uintptr(dwAttributes))
+	return uint32(r1)
 }
 
 // MsiSetFeatureAttributesA calls msi!MsiSetFeatureAttributesA.
@@ -2268,11 +2501,12 @@ func MsiSetFeatureAttributesA(hInstall MSIHANDLE, szFeature foundation.PSTR, dwA
 	return uint32(r1)
 }
 
-// MsiSetFeatureAttributesW calls msi!MsiSetFeatureAttributesW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisetfeatureattributesw
+// MsiSetFeatureState calls msi!MsiSetFeatureStateW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisetfeaturestatew
 // Minimum OS: windows8.0.
-func MsiSetFeatureAttributesW(hInstall MSIHANDLE, szFeature foundation.PWSTR, dwAttributes uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSetFeatureAttributesW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szFeature)), uintptr(dwAttributes))
+func MsiSetFeatureState(hInstall MSIHANDLE, szFeature string, iState INSTALLSTATE) uint32 {
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiSetFeatureState.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szFeature)), uintptr(iState))
 	return uint32(r1)
 }
 
@@ -2281,14 +2515,6 @@ func MsiSetFeatureAttributesW(hInstall MSIHANDLE, szFeature foundation.PWSTR, dw
 // Minimum OS: windows8.0.
 func MsiSetFeatureStateA(hInstall MSIHANDLE, szFeature foundation.PSTR, iState INSTALLSTATE) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiSetFeatureStateA.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szFeature)), uintptr(iState))
-	return uint32(r1)
-}
-
-// MsiSetFeatureStateW calls msi!MsiSetFeatureStateW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisetfeaturestatew
-// Minimum OS: windows8.0.
-func MsiSetFeatureStateW(hInstall MSIHANDLE, szFeature foundation.PWSTR, iState INSTALLSTATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSetFeatureStateW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szFeature)), uintptr(iState))
 	return uint32(r1)
 }
 
@@ -2311,8 +2537,19 @@ func MsiSetInternalUI(dwUILevel INSTALLUILEVEL, phWnd *foundation.HWND) INSTALLU
 // MsiSetMode calls msi!MsiSetMode.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisetmode
 // Minimum OS: windows8.0.
-func MsiSetMode(hInstall MSIHANDLE, eRunMode MSIRUNMODE, fState foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSetMode.Addr(), uintptr(hInstall), uintptr(eRunMode), uintptr(fState))
+func MsiSetMode(hInstall MSIHANDLE, eRunMode MSIRUNMODE, fState bool) uint32 {
+	_fState := win32.Bool32(fState)
+	r1, _, _ := syscall.SyscallN(procMsiSetMode.Addr(), uintptr(hInstall), uintptr(eRunMode), uintptr(_fState))
+	return uint32(r1)
+}
+
+// MsiSetProperty calls msi!MsiSetPropertyW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisetpropertyw
+// Minimum OS: windows8.0.
+func MsiSetProperty(hInstall MSIHANDLE, szName string, szValue string) uint32 {
+	_szName := win32.UTF16Ptr(szName)
+	_szValue := win32.UTF16Ptr(szValue)
+	r1, _, _ := syscall.SyscallN(procMsiSetProperty.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(_szValue)))
 	return uint32(r1)
 }
 
@@ -2324,11 +2561,13 @@ func MsiSetPropertyA(hInstall MSIHANDLE, szName foundation.PSTR, szValue foundat
 	return uint32(r1)
 }
 
-// MsiSetPropertyW calls msi!MsiSetPropertyW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisetpropertyw
+// MsiSetTargetPath calls msi!MsiSetTargetPathW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisettargetpathw
 // Minimum OS: windows8.0.
-func MsiSetPropertyW(hInstall MSIHANDLE, szName foundation.PWSTR, szValue foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSetPropertyW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(szValue)))
+func MsiSetTargetPath(hInstall MSIHANDLE, szFolder string, szFolderPath string) uint32 {
+	_szFolder := win32.UTF16Ptr(szFolder)
+	_szFolderPath := win32.UTF16Ptr(szFolderPath)
+	r1, _, _ := syscall.SyscallN(procMsiSetTargetPath.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(_szFolder)), uintptr(unsafe.Pointer(_szFolderPath)))
 	return uint32(r1)
 }
 
@@ -2340,11 +2579,15 @@ func MsiSetTargetPathA(hInstall MSIHANDLE, szFolder foundation.PSTR, szFolderPat
 	return uint32(r1)
 }
 
-// MsiSetTargetPathW calls msi!MsiSetTargetPathW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisettargetpathw
+// MsiSourceListAddMediaDisk calls msi!MsiSourceListAddMediaDiskW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistaddmediadiskw
 // Minimum OS: windows8.0.
-func MsiSetTargetPathW(hInstall MSIHANDLE, szFolder foundation.PWSTR, szFolderPath foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSetTargetPathW.Addr(), uintptr(hInstall), uintptr(unsafe.Pointer(szFolder)), uintptr(unsafe.Pointer(szFolderPath)))
+func MsiSourceListAddMediaDisk(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32, dwDiskId uint32, szVolumeLabel string, szDiskPrompt string) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	_szVolumeLabel := win32.UTF16Ptr(szVolumeLabel)
+	_szDiskPrompt := win32.UTF16Ptr(szDiskPrompt)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListAddMediaDisk.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(dwDiskId), uintptr(unsafe.Pointer(_szVolumeLabel)), uintptr(unsafe.Pointer(_szDiskPrompt)))
 	return uint32(r1)
 }
 
@@ -2356,19 +2599,33 @@ func MsiSourceListAddMediaDiskA(szProductCodeOrPatchCode foundation.PSTR, szUser
 	return uint32(r1)
 }
 
-// MsiSourceListAddMediaDiskW calls msi!MsiSourceListAddMediaDiskW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistaddmediadiskw
+// MsiSourceListAddSource calls msi!MsiSourceListAddSourceW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistaddsourcew
 // Minimum OS: windows8.0.
-func MsiSourceListAddMediaDiskW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32, dwDiskId uint32, szVolumeLabel foundation.PWSTR, szDiskPrompt foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListAddMediaDiskW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(dwDiskId), uintptr(unsafe.Pointer(szVolumeLabel)), uintptr(unsafe.Pointer(szDiskPrompt)))
+func MsiSourceListAddSource(szProduct string, szUserName string, szSource string) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szUserName := win32.UTF16Ptr(szUserName)
+	_szSource := win32.UTF16Ptr(szSource)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListAddSource.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szUserName)), 0, uintptr(unsafe.Pointer(_szSource)))
 	return uint32(r1)
 }
 
 // MsiSourceListAddSourceA calls msi!MsiSourceListAddSourceA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistaddsourcea
 // Minimum OS: windows8.0.
-func MsiSourceListAddSourceA(szProduct foundation.PSTR, szUserName foundation.PSTR, dwReserved uint32, szSource foundation.PSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListAddSourceA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szUserName)), uintptr(dwReserved), uintptr(unsafe.Pointer(szSource)))
+func MsiSourceListAddSourceA(szProduct foundation.PSTR, szUserName foundation.PSTR, szSource foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiSourceListAddSourceA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szUserName)), 0, uintptr(unsafe.Pointer(szSource)))
+	return uint32(r1)
+}
+
+// MsiSourceListAddSourceEx calls msi!MsiSourceListAddSourceExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistaddsourceexw
+// Minimum OS: windows8.0.
+func MsiSourceListAddSourceEx(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32, szSource string, dwIndex uint32) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	_szSource := win32.UTF16Ptr(szSource)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListAddSourceEx.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(unsafe.Pointer(_szSource)), uintptr(dwIndex))
 	return uint32(r1)
 }
 
@@ -2380,27 +2637,31 @@ func MsiSourceListAddSourceExA(szProductCodeOrPatchCode foundation.PSTR, szUserS
 	return uint32(r1)
 }
 
-// MsiSourceListAddSourceExW calls msi!MsiSourceListAddSourceExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistaddsourceexw
+// MsiSourceListClearAll calls msi!MsiSourceListClearAllW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistclearallw
 // Minimum OS: windows8.0.
-func MsiSourceListAddSourceExW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32, szSource foundation.PWSTR, dwIndex uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListAddSourceExW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(unsafe.Pointer(szSource)), uintptr(dwIndex))
-	return uint32(r1)
-}
-
-// MsiSourceListAddSourceW calls msi!MsiSourceListAddSourceW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistaddsourcew
-// Minimum OS: windows8.0.
-func MsiSourceListAddSourceW(szProduct foundation.PWSTR, szUserName foundation.PWSTR, dwReserved uint32, szSource foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListAddSourceW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szUserName)), uintptr(dwReserved), uintptr(unsafe.Pointer(szSource)))
+func MsiSourceListClearAll(szProduct string, szUserName string) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szUserName := win32.UTF16Ptr(szUserName)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListClearAll.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szUserName)), 0)
 	return uint32(r1)
 }
 
 // MsiSourceListClearAllA calls msi!MsiSourceListClearAllA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistclearalla
 // Minimum OS: windows8.0.
-func MsiSourceListClearAllA(szProduct foundation.PSTR, szUserName foundation.PSTR, dwReserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListClearAllA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szUserName)), uintptr(dwReserved))
+func MsiSourceListClearAllA(szProduct foundation.PSTR, szUserName foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiSourceListClearAllA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szUserName)), 0)
+	return uint32(r1)
+}
+
+// MsiSourceListClearAllEx calls msi!MsiSourceListClearAllExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistclearallexw
+// Minimum OS: windows8.0.
+func MsiSourceListClearAllEx(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListClearAllEx.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions))
 	return uint32(r1)
 }
 
@@ -2412,19 +2673,13 @@ func MsiSourceListClearAllExA(szProductCodeOrPatchCode foundation.PSTR, szUserSi
 	return uint32(r1)
 }
 
-// MsiSourceListClearAllExW calls msi!MsiSourceListClearAllExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistclearallexw
+// MsiSourceListClearMediaDisk calls msi!MsiSourceListClearMediaDiskW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistclearmediadiskw
 // Minimum OS: windows8.0.
-func MsiSourceListClearAllExW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListClearAllExW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions))
-	return uint32(r1)
-}
-
-// MsiSourceListClearAllW calls msi!MsiSourceListClearAllW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistclearallw
-// Minimum OS: windows8.0.
-func MsiSourceListClearAllW(szProduct foundation.PWSTR, szUserName foundation.PWSTR, dwReserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListClearAllW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szUserName)), uintptr(dwReserved))
+func MsiSourceListClearMediaDisk(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32, dwDiskId uint32) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListClearMediaDisk.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(dwDiskId))
 	return uint32(r1)
 }
 
@@ -2436,11 +2691,14 @@ func MsiSourceListClearMediaDiskA(szProductCodeOrPatchCode foundation.PSTR, szUs
 	return uint32(r1)
 }
 
-// MsiSourceListClearMediaDiskW calls msi!MsiSourceListClearMediaDiskW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistclearmediadiskw
+// MsiSourceListClearSource calls msi!MsiSourceListClearSourceW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistclearsourcew
 // Minimum OS: windows8.0.
-func MsiSourceListClearMediaDiskW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32, dwDiskId uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListClearMediaDiskW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(dwDiskId))
+func MsiSourceListClearSource(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32, szSource string) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	_szSource := win32.UTF16Ptr(szSource)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListClearSource.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(unsafe.Pointer(_szSource)))
 	return uint32(r1)
 }
 
@@ -2452,11 +2710,13 @@ func MsiSourceListClearSourceA(szProductCodeOrPatchCode foundation.PSTR, szUserS
 	return uint32(r1)
 }
 
-// MsiSourceListClearSourceW calls msi!MsiSourceListClearSourceW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistclearsourcew
+// MsiSourceListEnumMediaDisks calls msi!MsiSourceListEnumMediaDisksW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistenummediadisksw
 // Minimum OS: windows8.0.
-func MsiSourceListClearSourceW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32, szSource foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListClearSourceW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(unsafe.Pointer(szSource)))
+func MsiSourceListEnumMediaDisks(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32, dwIndex uint32, pdwDiskId *uint32, szVolumeLabel foundation.PWSTR, pcchVolumeLabel *uint32, szDiskPrompt foundation.PWSTR, pcchDiskPrompt *uint32) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListEnumMediaDisks.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(dwIndex), uintptr(unsafe.Pointer(pdwDiskId)), uintptr(unsafe.Pointer(szVolumeLabel)), uintptr(unsafe.Pointer(pcchVolumeLabel)), uintptr(unsafe.Pointer(szDiskPrompt)), uintptr(unsafe.Pointer(pcchDiskPrompt)))
 	return uint32(r1)
 }
 
@@ -2468,11 +2728,13 @@ func MsiSourceListEnumMediaDisksA(szProductCodeOrPatchCode foundation.PSTR, szUs
 	return uint32(r1)
 }
 
-// MsiSourceListEnumMediaDisksW calls msi!MsiSourceListEnumMediaDisksW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistenummediadisksw
+// MsiSourceListEnumSources calls msi!MsiSourceListEnumSourcesW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistenumsourcesw
 // Minimum OS: windows8.0.
-func MsiSourceListEnumMediaDisksW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32, dwIndex uint32, pdwDiskId *uint32, szVolumeLabel foundation.PWSTR, pcchVolumeLabel *uint32, szDiskPrompt foundation.PWSTR, pcchDiskPrompt *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListEnumMediaDisksW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(dwIndex), uintptr(unsafe.Pointer(pdwDiskId)), uintptr(unsafe.Pointer(szVolumeLabel)), uintptr(unsafe.Pointer(pcchVolumeLabel)), uintptr(unsafe.Pointer(szDiskPrompt)), uintptr(unsafe.Pointer(pcchDiskPrompt)))
+func MsiSourceListEnumSources(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32, dwIndex uint32, szSource foundation.PWSTR, pcchSource *uint32) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListEnumSources.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(dwIndex), uintptr(unsafe.Pointer(szSource)), uintptr(unsafe.Pointer(pcchSource)))
 	return uint32(r1)
 }
 
@@ -2484,19 +2746,31 @@ func MsiSourceListEnumSourcesA(szProductCodeOrPatchCode foundation.PSTR, szUserS
 	return uint32(r1)
 }
 
-// MsiSourceListEnumSourcesW calls msi!MsiSourceListEnumSourcesW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistenumsourcesw
+// MsiSourceListForceResolution calls msi!MsiSourceListForceResolutionW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistforceresolutionw
 // Minimum OS: windows8.0.
-func MsiSourceListEnumSourcesW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32, dwIndex uint32, szSource foundation.PWSTR, pcchSource *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListEnumSourcesW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(dwIndex), uintptr(unsafe.Pointer(szSource)), uintptr(unsafe.Pointer(pcchSource)))
+func MsiSourceListForceResolution(szProduct string, szUserName string) uint32 {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szUserName := win32.UTF16Ptr(szUserName)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListForceResolution.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szUserName)), 0)
 	return uint32(r1)
 }
 
 // MsiSourceListForceResolutionA calls msi!MsiSourceListForceResolutionA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistforceresolutiona
 // Minimum OS: windows8.0.
-func MsiSourceListForceResolutionA(szProduct foundation.PSTR, szUserName foundation.PSTR, dwReserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListForceResolutionA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szUserName)), uintptr(dwReserved))
+func MsiSourceListForceResolutionA(szProduct foundation.PSTR, szUserName foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiSourceListForceResolutionA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szUserName)), 0)
+	return uint32(r1)
+}
+
+// MsiSourceListForceResolutionEx calls msi!MsiSourceListForceResolutionExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistforceresolutionexw
+// Minimum OS: windows8.0.
+func MsiSourceListForceResolutionEx(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListForceResolutionEx.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions))
 	return uint32(r1)
 }
 
@@ -2508,19 +2782,14 @@ func MsiSourceListForceResolutionExA(szProductCodeOrPatchCode foundation.PSTR, s
 	return uint32(r1)
 }
 
-// MsiSourceListForceResolutionExW calls msi!MsiSourceListForceResolutionExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistforceresolutionexw
+// MsiSourceListGetInfo calls msi!MsiSourceListGetInfoW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistgetinfow
 // Minimum OS: windows8.0.
-func MsiSourceListForceResolutionExW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListForceResolutionExW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions))
-	return uint32(r1)
-}
-
-// MsiSourceListForceResolutionW calls msi!MsiSourceListForceResolutionW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistforceresolutionw
-// Minimum OS: windows8.0.
-func MsiSourceListForceResolutionW(szProduct foundation.PWSTR, szUserName foundation.PWSTR, dwReserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListForceResolutionW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szUserName)), uintptr(dwReserved))
+func MsiSourceListGetInfo(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32, szProperty string, szValue foundation.PWSTR, pcchValue *uint32) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	_szProperty := win32.UTF16Ptr(szProperty)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListGetInfo.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(unsafe.Pointer(_szProperty)), uintptr(unsafe.Pointer(szValue)), uintptr(unsafe.Pointer(pcchValue)))
 	return uint32(r1)
 }
 
@@ -2532,11 +2801,15 @@ func MsiSourceListGetInfoA(szProductCodeOrPatchCode foundation.PSTR, szUserSid f
 	return uint32(r1)
 }
 
-// MsiSourceListGetInfoW calls msi!MsiSourceListGetInfoW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistgetinfow
+// MsiSourceListSetInfo calls msi!MsiSourceListSetInfoW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistsetinfow
 // Minimum OS: windows8.0.
-func MsiSourceListGetInfoW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32, szProperty foundation.PWSTR, szValue foundation.PWSTR, pcchValue *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListGetInfoW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(unsafe.Pointer(szProperty)), uintptr(unsafe.Pointer(szValue)), uintptr(unsafe.Pointer(pcchValue)))
+func MsiSourceListSetInfo(szProductCodeOrPatchCode string, szUserSid string, dwContext MSIINSTALLCONTEXT, dwOptions uint32, szProperty string, szValue string) uint32 {
+	_szProductCodeOrPatchCode := win32.UTF16Ptr(szProductCodeOrPatchCode)
+	_szUserSid := win32.UTF16Ptr(szUserSid)
+	_szProperty := win32.UTF16Ptr(szProperty)
+	_szValue := win32.UTF16Ptr(szValue)
+	r1, _, _ := syscall.SyscallN(procMsiSourceListSetInfo.Addr(), uintptr(unsafe.Pointer(_szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(unsafe.Pointer(_szProperty)), uintptr(unsafe.Pointer(_szValue)))
 	return uint32(r1)
 }
 
@@ -2548,11 +2821,11 @@ func MsiSourceListSetInfoA(szProductCodeOrPatchCode foundation.PSTR, szUserSid f
 	return uint32(r1)
 }
 
-// MsiSourceListSetInfoW calls msi!MsiSourceListSetInfoW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msisourcelistsetinfow
+// MsiSummaryInfoGetProperty calls msi!MsiSummaryInfoGetPropertyW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisummaryinfogetpropertyw
 // Minimum OS: windows8.0.
-func MsiSourceListSetInfoW(szProductCodeOrPatchCode foundation.PWSTR, szUserSid foundation.PWSTR, dwContext MSIINSTALLCONTEXT, dwOptions uint32, szProperty foundation.PWSTR, szValue foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSourceListSetInfoW.Addr(), uintptr(unsafe.Pointer(szProductCodeOrPatchCode)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwOptions), uintptr(unsafe.Pointer(szProperty)), uintptr(unsafe.Pointer(szValue)))
+func MsiSummaryInfoGetProperty(hSummaryInfo MSIHANDLE, uiProperty uint32, puiDataType *uint32, piValue *int32, pftValue *foundation.FILETIME, szValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMsiSummaryInfoGetProperty.Addr(), uintptr(hSummaryInfo), uintptr(uiProperty), uintptr(unsafe.Pointer(puiDataType)), uintptr(unsafe.Pointer(piValue)), uintptr(unsafe.Pointer(pftValue)), uintptr(unsafe.Pointer(szValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
 	return uint32(r1)
 }
 
@@ -2572,19 +2845,20 @@ func MsiSummaryInfoGetPropertyCount(hSummaryInfo MSIHANDLE, puiPropertyCount *ui
 	return uint32(r1)
 }
 
-// MsiSummaryInfoGetPropertyW calls msi!MsiSummaryInfoGetPropertyW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisummaryinfogetpropertyw
-// Minimum OS: windows8.0.
-func MsiSummaryInfoGetPropertyW(hSummaryInfo MSIHANDLE, uiProperty uint32, puiDataType *uint32, piValue *int32, pftValue *foundation.FILETIME, szValueBuf foundation.PWSTR, pcchValueBuf *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSummaryInfoGetPropertyW.Addr(), uintptr(hSummaryInfo), uintptr(uiProperty), uintptr(unsafe.Pointer(puiDataType)), uintptr(unsafe.Pointer(piValue)), uintptr(unsafe.Pointer(pftValue)), uintptr(unsafe.Pointer(szValueBuf)), uintptr(unsafe.Pointer(pcchValueBuf)))
-	return uint32(r1)
-}
-
 // MsiSummaryInfoPersist calls msi!MsiSummaryInfoPersist.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisummaryinfopersist
 // Minimum OS: windows8.0.
 func MsiSummaryInfoPersist(hSummaryInfo MSIHANDLE) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiSummaryInfoPersist.Addr(), uintptr(hSummaryInfo))
+	return uint32(r1)
+}
+
+// MsiSummaryInfoSetProperty calls msi!MsiSummaryInfoSetPropertyW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisummaryinfosetpropertyw
+// Minimum OS: windows8.0.
+func MsiSummaryInfoSetProperty(hSummaryInfo MSIHANDLE, uiProperty uint32, uiDataType uint32, iValue int32, pftValue *foundation.FILETIME, szValue string) uint32 {
+	_szValue := win32.UTF16Ptr(szValue)
+	r1, _, _ := syscall.SyscallN(procMsiSummaryInfoSetProperty.Addr(), uintptr(hSummaryInfo), uintptr(uiProperty), uintptr(uiDataType), uintptr(iValue), uintptr(unsafe.Pointer(pftValue)), uintptr(unsafe.Pointer(_szValue)))
 	return uint32(r1)
 }
 
@@ -2596,12 +2870,14 @@ func MsiSummaryInfoSetPropertyA(hSummaryInfo MSIHANDLE, uiProperty uint32, uiDat
 	return uint32(r1)
 }
 
-// MsiSummaryInfoSetPropertyW calls msi!MsiSummaryInfoSetPropertyW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msisummaryinfosetpropertyw
+// MsiUseFeature calls msi!MsiUseFeatureW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiusefeaturew
 // Minimum OS: windows8.0.
-func MsiSummaryInfoSetPropertyW(hSummaryInfo MSIHANDLE, uiProperty uint32, uiDataType uint32, iValue int32, pftValue *foundation.FILETIME, szValue foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiSummaryInfoSetPropertyW.Addr(), uintptr(hSummaryInfo), uintptr(uiProperty), uintptr(uiDataType), uintptr(iValue), uintptr(unsafe.Pointer(pftValue)), uintptr(unsafe.Pointer(szValue)))
-	return uint32(r1)
+func MsiUseFeature(szProduct string, szFeature string) INSTALLSTATE {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiUseFeature.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szFeature)))
+	return INSTALLSTATE(r1)
 }
 
 // MsiUseFeatureA calls msi!MsiUseFeatureA.
@@ -2612,27 +2888,21 @@ func MsiUseFeatureA(szProduct foundation.PSTR, szFeature foundation.PSTR) INSTAL
 	return INSTALLSTATE(r1)
 }
 
+// MsiUseFeatureEx calls msi!MsiUseFeatureExW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiusefeatureexw
+// Minimum OS: windows8.0.
+func MsiUseFeatureEx(szProduct string, szFeature string, dwInstallMode uint32) INSTALLSTATE {
+	_szProduct := win32.UTF16Ptr(szProduct)
+	_szFeature := win32.UTF16Ptr(szFeature)
+	r1, _, _ := syscall.SyscallN(procMsiUseFeatureEx.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szFeature)), uintptr(dwInstallMode), 0)
+	return INSTALLSTATE(r1)
+}
+
 // MsiUseFeatureExA calls msi!MsiUseFeatureExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiusefeatureexa
 // Minimum OS: windows8.0.
-func MsiUseFeatureExA(szProduct foundation.PSTR, szFeature foundation.PSTR, dwInstallMode uint32, dwReserved uint32) INSTALLSTATE {
-	r1, _, _ := syscall.SyscallN(procMsiUseFeatureExA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)), uintptr(dwInstallMode), uintptr(dwReserved))
-	return INSTALLSTATE(r1)
-}
-
-// MsiUseFeatureExW calls msi!MsiUseFeatureExW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiusefeatureexw
-// Minimum OS: windows8.0.
-func MsiUseFeatureExW(szProduct foundation.PWSTR, szFeature foundation.PWSTR, dwInstallMode uint32, dwReserved uint32) INSTALLSTATE {
-	r1, _, _ := syscall.SyscallN(procMsiUseFeatureExW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)), uintptr(dwInstallMode), uintptr(dwReserved))
-	return INSTALLSTATE(r1)
-}
-
-// MsiUseFeatureW calls msi!MsiUseFeatureW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiusefeaturew
-// Minimum OS: windows8.0.
-func MsiUseFeatureW(szProduct foundation.PWSTR, szFeature foundation.PWSTR) INSTALLSTATE {
-	r1, _, _ := syscall.SyscallN(procMsiUseFeatureW.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)))
+func MsiUseFeatureExA(szProduct foundation.PSTR, szFeature foundation.PSTR, dwInstallMode uint32) INSTALLSTATE {
+	r1, _, _ := syscall.SyscallN(procMsiUseFeatureExA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)), uintptr(dwInstallMode), 0)
 	return INSTALLSTATE(r1)
 }
 
@@ -2644,19 +2914,20 @@ func MsiVerifyDiskSpace(hInstall MSIHANDLE) uint32 {
 	return uint32(r1)
 }
 
+// MsiVerifyPackage calls msi!MsiVerifyPackageW.
+// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiverifypackagew
+// Minimum OS: windows8.0.
+func MsiVerifyPackage(szPackagePath string) uint32 {
+	_szPackagePath := win32.UTF16Ptr(szPackagePath)
+	r1, _, _ := syscall.SyscallN(procMsiVerifyPackage.Addr(), uintptr(unsafe.Pointer(_szPackagePath)))
+	return uint32(r1)
+}
+
 // MsiVerifyPackageA calls msi!MsiVerifyPackageA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiverifypackagea
 // Minimum OS: windows8.0.
 func MsiVerifyPackageA(szPackagePath foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiVerifyPackageA.Addr(), uintptr(unsafe.Pointer(szPackagePath)))
-	return uint32(r1)
-}
-
-// MsiVerifyPackageW calls msi!MsiVerifyPackageW.
-// https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiverifypackagew
-// Minimum OS: windows8.0.
-func MsiVerifyPackageW(szPackagePath foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiVerifyPackageW.Addr(), uintptr(unsafe.Pointer(szPackagePath)))
 	return uint32(r1)
 }
 
@@ -2692,19 +2963,19 @@ func MsiViewGetColumnInfo(hView MSIHANDLE, eColumnInfo MSICOLINFO, phRecord *MSI
 	return uint32(r1)
 }
 
+// MsiViewGetError calls msi!MsiViewGetErrorW.
+// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msiviewgeterrorw
+// Minimum OS: windows8.0.
+func MsiViewGetError(hView MSIHANDLE, szColumnNameBuffer foundation.PWSTR, pcchBuf *uint32) MSIDBERROR {
+	r1, _, _ := syscall.SyscallN(procMsiViewGetError.Addr(), uintptr(hView), uintptr(unsafe.Pointer(szColumnNameBuffer)), uintptr(unsafe.Pointer(pcchBuf)))
+	return MSIDBERROR(r1)
+}
+
 // MsiViewGetErrorA calls msi!MsiViewGetErrorA.
 // https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msiviewgeterrora
 // Minimum OS: windows8.0.
 func MsiViewGetErrorA(hView MSIHANDLE, szColumnNameBuffer foundation.PSTR, pcchBuf *uint32) MSIDBERROR {
 	r1, _, _ := syscall.SyscallN(procMsiViewGetErrorA.Addr(), uintptr(hView), uintptr(unsafe.Pointer(szColumnNameBuffer)), uintptr(unsafe.Pointer(pcchBuf)))
-	return MSIDBERROR(r1)
-}
-
-// MsiViewGetErrorW calls msi!MsiViewGetErrorW.
-// https://learn.microsoft.com/windows/win32/api/msiquery/nf-msiquery-msiviewgeterrorw
-// Minimum OS: windows8.0.
-func MsiViewGetErrorW(hView MSIHANDLE, szColumnNameBuffer foundation.PWSTR, pcchBuf *uint32) MSIDBERROR {
-	r1, _, _ := syscall.SyscallN(procMsiViewGetErrorW.Addr(), uintptr(hView), uintptr(unsafe.Pointer(szColumnNameBuffer)), uintptr(unsafe.Pointer(pcchBuf)))
 	return MSIDBERROR(r1)
 }
 
@@ -2717,16 +2988,26 @@ func MsiViewModify(hView MSIHANDLE, eModifyMode MSIMODIFY, hRecord MSIHANDLE) ui
 }
 
 // NormalizeFileForPatchSignature calls mspatcha!NormalizeFileForPatchSignature.
-func NormalizeFileForPatchSignature(FileBuffer unsafe.Pointer, FileSize uint32, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, NewFileCoffBase uint32, NewFileCoffTime uint32, IgnoreRangeCount uint32, IgnoreRangeArray *PATCH_IGNORE_RANGE, RetainRangeCount uint32, RetainRangeArray *PATCH_RETAIN_RANGE) int32 {
-	r1, _, _ := syscall.SyscallN(procNormalizeFileForPatchSignature.Addr(), uintptr(unsafe.Pointer(FileBuffer)), uintptr(FileSize), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(NewFileCoffBase), uintptr(NewFileCoffTime), uintptr(IgnoreRangeCount), uintptr(unsafe.Pointer(IgnoreRangeArray)), uintptr(RetainRangeCount), uintptr(unsafe.Pointer(RetainRangeArray)))
+func NormalizeFileForPatchSignature(FileBuffer unsafe.Pointer, FileSize uint32, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, NewFileCoffBase uint32, NewFileCoffTime uint32, IgnoreRangeArray []PATCH_IGNORE_RANGE, RetainRangeArray []PATCH_RETAIN_RANGE) int32 {
+	var _IgnoreRangeArray *PATCH_IGNORE_RANGE
+	if len(IgnoreRangeArray) > 0 {
+		_IgnoreRangeArray = &IgnoreRangeArray[0]
+	}
+	var _RetainRangeArray *PATCH_RETAIN_RANGE
+	if len(RetainRangeArray) > 0 {
+		_RetainRangeArray = &RetainRangeArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procNormalizeFileForPatchSignature.Addr(), uintptr(unsafe.Pointer(FileBuffer)), uintptr(FileSize), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(NewFileCoffBase), uintptr(NewFileCoffTime), uintptr(len(IgnoreRangeArray)), uintptr(unsafe.Pointer(_IgnoreRangeArray)), uintptr(len(RetainRangeArray)), uintptr(unsafe.Pointer(_RetainRangeArray)))
 	return int32(r1)
 }
 
 // QueryActCtxSettingsW calls KERNEL32!QueryActCtxSettingsW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-queryactctxsettingsw
 // Minimum OS: windows6.0.6000.
-func QueryActCtxSettingsW(dwFlags uint32, hActCtx foundation.HANDLE, settingsNameSpace foundation.PWSTR, settingName foundation.PWSTR, pvBuffer foundation.PWSTR, dwBuffer uintptr, pdwWrittenOrRequired *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procQueryActCtxSettingsW.Addr(), uintptr(dwFlags), uintptr(hActCtx), uintptr(unsafe.Pointer(settingsNameSpace)), uintptr(unsafe.Pointer(settingName)), uintptr(unsafe.Pointer(pvBuffer)), uintptr(dwBuffer), uintptr(unsafe.Pointer(pdwWrittenOrRequired)))
+func QueryActCtxSettingsW(dwFlags uint32, hActCtx foundation.HANDLE, settingsNameSpace string, settingName string, pvBuffer foundation.PWSTR, dwBuffer uintptr, pdwWrittenOrRequired *uintptr) error {
+	_settingsNameSpace := win32.UTF16Ptr(settingsNameSpace)
+	_settingName := win32.UTF16Ptr(settingName)
+	r1, _, e1 := syscall.SyscallN(procQueryActCtxSettingsW.Addr(), uintptr(dwFlags), uintptr(hActCtx), uintptr(unsafe.Pointer(_settingsNameSpace)), uintptr(unsafe.Pointer(_settingName)), uintptr(unsafe.Pointer(pvBuffer)), uintptr(dwBuffer), uintptr(unsafe.Pointer(pdwWrittenOrRequired)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2765,47 +3046,51 @@ func SfcGetNextProtectedFile(RpcHandle foundation.HANDLE, ProtFileData *PROTECTE
 // SfcIsFileProtected calls sfc!SfcIsFileProtected.
 // https://learn.microsoft.com/windows/win32/api/sfc/nf-sfc-sfcisfileprotected
 // Minimum OS: windows5.1.2600.
-func SfcIsFileProtected(RpcHandle foundation.HANDLE, ProtFileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSfcIsFileProtected.Addr(), uintptr(RpcHandle), uintptr(unsafe.Pointer(ProtFileName)))
-	return foundation.BOOL(r1)
+func SfcIsFileProtected(RpcHandle foundation.HANDLE, ProtFileName string) bool {
+	_ProtFileName := win32.UTF16Ptr(ProtFileName)
+	r1, _, _ := syscall.SyscallN(procSfcIsFileProtected.Addr(), uintptr(RpcHandle), uintptr(unsafe.Pointer(_ProtFileName)))
+	return r1 != 0
 }
 
 // SfcIsKeyProtected calls sfc!SfcIsKeyProtected.
 // https://learn.microsoft.com/windows/win32/api/sfc/nf-sfc-sfciskeyprotected
 // Minimum OS: windows6.0.6000.
-func SfcIsKeyProtected(KeyHandle systemregistry.HKEY, SubKeyName foundation.PWSTR, KeySam uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSfcIsKeyProtected.Addr(), uintptr(KeyHandle), uintptr(unsafe.Pointer(SubKeyName)), uintptr(KeySam))
-	return foundation.BOOL(r1)
+func SfcIsKeyProtected(KeyHandle systemregistry.HKEY, SubKeyName string, KeySam uint32) bool {
+	_SubKeyName := win32.UTF16Ptr(SubKeyName)
+	r1, _, _ := syscall.SyscallN(procSfcIsKeyProtected.Addr(), uintptr(KeyHandle), uintptr(unsafe.Pointer(_SubKeyName)), uintptr(KeySam))
+	return r1 != 0
 }
 
 // SfpVerifyFile calls sfc!SfpVerifyFile.
-func SfpVerifyFile(pszFileName foundation.PSTR, pszError foundation.PSTR, dwErrSize uint32) foundation.BOOL {
+func SfpVerifyFile(pszFileName foundation.PSTR, pszError foundation.PSTR, dwErrSize uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSfpVerifyFile.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pszError)), uintptr(dwErrSize))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// TestApplyPatchToFile calls mspatcha!TestApplyPatchToFileW.
+func TestApplyPatchToFile(PatchFileName string, OldFileName string, ApplyOptionFlags uint32) bool {
+	_PatchFileName := win32.UTF16Ptr(PatchFileName)
+	_OldFileName := win32.UTF16Ptr(OldFileName)
+	r1, _, _ := syscall.SyscallN(procTestApplyPatchToFile.Addr(), uintptr(unsafe.Pointer(_PatchFileName)), uintptr(unsafe.Pointer(_OldFileName)), uintptr(ApplyOptionFlags))
+	return r1 != 0
 }
 
 // TestApplyPatchToFileA calls mspatcha!TestApplyPatchToFileA.
-func TestApplyPatchToFileA(PatchFileName foundation.PSTR, OldFileName foundation.PSTR, ApplyOptionFlags uint32) foundation.BOOL {
+func TestApplyPatchToFileA(PatchFileName foundation.PSTR, OldFileName foundation.PSTR, ApplyOptionFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procTestApplyPatchToFileA.Addr(), uintptr(unsafe.Pointer(PatchFileName)), uintptr(unsafe.Pointer(OldFileName)), uintptr(ApplyOptionFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TestApplyPatchToFileByBuffers calls mspatcha!TestApplyPatchToFileByBuffers.
-func TestApplyPatchToFileByBuffers(PatchFileBuffer *byte, PatchFileSize uint32, OldFileBuffer *byte, OldFileSize uint32, NewFileSize *uint32, ApplyOptionFlags uint32) foundation.BOOL {
+func TestApplyPatchToFileByBuffers(PatchFileBuffer *byte, PatchFileSize uint32, OldFileBuffer *byte, OldFileSize uint32, NewFileSize *uint32, ApplyOptionFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procTestApplyPatchToFileByBuffers.Addr(), uintptr(unsafe.Pointer(PatchFileBuffer)), uintptr(PatchFileSize), uintptr(unsafe.Pointer(OldFileBuffer)), uintptr(OldFileSize), uintptr(unsafe.Pointer(NewFileSize)), uintptr(ApplyOptionFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TestApplyPatchToFileByHandles calls mspatcha!TestApplyPatchToFileByHandles.
-func TestApplyPatchToFileByHandles(PatchFileHandle foundation.HANDLE, OldFileHandle foundation.HANDLE, ApplyOptionFlags uint32) foundation.BOOL {
+func TestApplyPatchToFileByHandles(PatchFileHandle foundation.HANDLE, OldFileHandle foundation.HANDLE, ApplyOptionFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procTestApplyPatchToFileByHandles.Addr(), uintptr(PatchFileHandle), uintptr(OldFileHandle), uintptr(ApplyOptionFlags))
-	return foundation.BOOL(r1)
-}
-
-// TestApplyPatchToFileW calls mspatcha!TestApplyPatchToFileW.
-func TestApplyPatchToFileW(PatchFileName foundation.PWSTR, OldFileName foundation.PWSTR, ApplyOptionFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procTestApplyPatchToFileW.Addr(), uintptr(unsafe.Pointer(PatchFileName)), uintptr(unsafe.Pointer(OldFileName)), uintptr(ApplyOptionFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ZombifyActCtx calls KERNEL32!ZombifyActCtx.

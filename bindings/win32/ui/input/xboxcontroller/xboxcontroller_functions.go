@@ -28,8 +28,9 @@ var (
 
 // XInputEnable calls xinput1_4!XInputEnable.
 // https://learn.microsoft.com/windows/win32/api/xinput/nf-xinput-xinputenable
-func XInputEnable(enable foundation.BOOL) {
-	syscall.SyscallN(procXInputEnable.Addr(), uintptr(enable))
+func XInputEnable(enable bool) {
+	_enable := win32.Bool32(enable)
+	syscall.SyscallN(procXInputEnable.Addr(), uintptr(_enable))
 }
 
 // XInputGetAudioDeviceIds calls xinput1_4!XInputGetAudioDeviceIds.
@@ -55,8 +56,8 @@ func XInputGetCapabilities(dwUserIndex uint32, dwFlags XINPUT_FLAG, pCapabilitie
 
 // XInputGetKeystroke calls xinput1_4!XInputGetKeystroke.
 // https://learn.microsoft.com/windows/win32/api/xinput/nf-xinput-xinputgetkeystroke
-func XInputGetKeystroke(dwUserIndex uint32, dwReserved uint32, pKeystroke *XINPUT_KEYSTROKE) uint32 {
-	r1, _, _ := syscall.SyscallN(procXInputGetKeystroke.Addr(), uintptr(dwUserIndex), uintptr(dwReserved), uintptr(unsafe.Pointer(pKeystroke)))
+func XInputGetKeystroke(dwUserIndex uint32, pKeystroke *XINPUT_KEYSTROKE) uint32 {
+	r1, _, _ := syscall.SyscallN(procXInputGetKeystroke.Addr(), uintptr(dwUserIndex), 0, uintptr(unsafe.Pointer(pKeystroke)))
 	return uint32(r1)
 }
 

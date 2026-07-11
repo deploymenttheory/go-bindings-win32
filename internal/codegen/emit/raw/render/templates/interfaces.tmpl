@@ -21,8 +21,17 @@ var {{.IIDVar}} = {{.IIDLiteral}}
 {{- range .CommentLines}}// {{.}}
 {{end -}}
 func (self *{{$.TypeName}}) {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
+{{- range .Preamble}}
+	{{.}}
+{{- end}}
 {{- if eq .ReturnKind 0}}
 	syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
+{{- else if eq .ReturnKind 5}}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
+	return win32.HRESULTError(int32(r1))
+{{- else if eq .ReturnKind 7}}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
+	return {{range .ReturnValues}}{{.}}, {{end}}win32.HRESULTError(int32(r1))
 {{- else}}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[{{.Slot}}], uintptr(unsafe.Pointer(self)){{range .ArgExprs}}, {{.}}{{end}})
 	return {{.RetExpr}}

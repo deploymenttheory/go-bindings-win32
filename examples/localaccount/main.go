@@ -3,11 +3,10 @@
 // (NetUserGetInfo), enumerate (NetUserEnum), and delete (NetUserDel) — all in
 // netapi32.dll's NetworkManagement.NetManagement surface.
 //
-// It uses ONLY the idiomatic package (plus the shared runtime) — the
-// idiomatic layer is self-contained: it re-exports the USER_INFO_1 struct,
-// the typed constants, and pass-through helpers like NetApiBufferFree, so a
-// consumer never imports bindings/win32 directly. The runtime provides the
-// UTF-16 conversion the struct's PWSTR fields need.
+// It uses the generated bindings under bindings/win32 (plus the shared
+// runtime): the USER_INFO_1 struct, the typed constants, and idiomatic-shaped
+// calls like NetApiBufferFree all live in the one tree. The runtime provides
+// the UTF-16 conversion the struct's PWSTR fields need.
 //
 // Creating a local account modifies the system and requires Administrator
 // rights, so mutation is gated behind -apply. Without it the program does a
@@ -31,8 +30,8 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/foundation"
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/networkmanagement/netmanagement"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/networkmanagement/netmanagement"
 )
 
 // Selected NET_API_STATUS / Win32 error codes returned by the NetUser* APIs.

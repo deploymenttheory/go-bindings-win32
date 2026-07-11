@@ -33,8 +33,8 @@ type PSS_AUXILIARY_PAGE_ENTRY struct {
 	PageSize         uint32
 }
 
-// PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union struct {
 	Data [6]uint64
 }

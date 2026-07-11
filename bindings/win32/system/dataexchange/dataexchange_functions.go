@@ -22,22 +22,22 @@ var (
 
 var (
 	procSetWinMetaFileBits            = modGDI32.NewProc("SetWinMetaFileBits")
+	procAddAtom                       = modKERNEL32.NewProc("AddAtomW")
 	procAddAtomA                      = modKERNEL32.NewProc("AddAtomA")
-	procAddAtomW                      = modKERNEL32.NewProc("AddAtomW")
 	procDeleteAtom                    = modKERNEL32.NewProc("DeleteAtom")
+	procFindAtom                      = modKERNEL32.NewProc("FindAtomW")
 	procFindAtomA                     = modKERNEL32.NewProc("FindAtomA")
-	procFindAtomW                     = modKERNEL32.NewProc("FindAtomW")
+	procGetAtomName                   = modKERNEL32.NewProc("GetAtomNameW")
 	procGetAtomNameA                  = modKERNEL32.NewProc("GetAtomNameA")
-	procGetAtomNameW                  = modKERNEL32.NewProc("GetAtomNameW")
+	procGlobalAddAtom                 = modKERNEL32.NewProc("GlobalAddAtomW")
 	procGlobalAddAtomA                = modKERNEL32.NewProc("GlobalAddAtomA")
+	procGlobalAddAtomEx               = modKERNEL32.NewProc("GlobalAddAtomExW")
 	procGlobalAddAtomExA              = modKERNEL32.NewProc("GlobalAddAtomExA")
-	procGlobalAddAtomExW              = modKERNEL32.NewProc("GlobalAddAtomExW")
-	procGlobalAddAtomW                = modKERNEL32.NewProc("GlobalAddAtomW")
 	procGlobalDeleteAtom              = modKERNEL32.NewProc("GlobalDeleteAtom")
+	procGlobalFindAtom                = modKERNEL32.NewProc("GlobalFindAtomW")
 	procGlobalFindAtomA               = modKERNEL32.NewProc("GlobalFindAtomA")
-	procGlobalFindAtomW               = modKERNEL32.NewProc("GlobalFindAtomW")
+	procGlobalGetAtomName             = modKERNEL32.NewProc("GlobalGetAtomNameW")
 	procGlobalGetAtomNameA            = modKERNEL32.NewProc("GlobalGetAtomNameA")
-	procGlobalGetAtomNameW            = modKERNEL32.NewProc("GlobalGetAtomNameW")
 	procInitAtomTable                 = modKERNEL32.NewProc("InitAtomTable")
 	procAddClipboardFormatListener    = modUSER32.NewProc("AddClipboardFormatListener")
 	procChangeClipboardChain          = modUSER32.NewProc("ChangeClipboardChain")
@@ -51,8 +51,8 @@ var (
 	procDdeConnect                    = modUSER32.NewProc("DdeConnect")
 	procDdeConnectList                = modUSER32.NewProc("DdeConnectList")
 	procDdeCreateDataHandle           = modUSER32.NewProc("DdeCreateDataHandle")
+	procDdeCreateStringHandle         = modUSER32.NewProc("DdeCreateStringHandleW")
 	procDdeCreateStringHandleA        = modUSER32.NewProc("DdeCreateStringHandleA")
-	procDdeCreateStringHandleW        = modUSER32.NewProc("DdeCreateStringHandleW")
 	procDdeDisconnect                 = modUSER32.NewProc("DdeDisconnect")
 	procDdeDisconnectList             = modUSER32.NewProc("DdeDisconnectList")
 	procDdeEnableCallback             = modUSER32.NewProc("DdeEnableCallback")
@@ -61,15 +61,15 @@ var (
 	procDdeGetData                    = modUSER32.NewProc("DdeGetData")
 	procDdeGetLastError               = modUSER32.NewProc("DdeGetLastError")
 	procDdeImpersonateClient          = modUSER32.NewProc("DdeImpersonateClient")
+	procDdeInitialize                 = modUSER32.NewProc("DdeInitializeW")
 	procDdeInitializeA                = modUSER32.NewProc("DdeInitializeA")
-	procDdeInitializeW                = modUSER32.NewProc("DdeInitializeW")
 	procDdeKeepStringHandle           = modUSER32.NewProc("DdeKeepStringHandle")
 	procDdeNameService                = modUSER32.NewProc("DdeNameService")
 	procDdePostAdvise                 = modUSER32.NewProc("DdePostAdvise")
 	procDdeQueryConvInfo              = modUSER32.NewProc("DdeQueryConvInfo")
 	procDdeQueryNextServer            = modUSER32.NewProc("DdeQueryNextServer")
+	procDdeQueryString                = modUSER32.NewProc("DdeQueryStringW")
 	procDdeQueryStringA               = modUSER32.NewProc("DdeQueryStringA")
-	procDdeQueryStringW               = modUSER32.NewProc("DdeQueryStringW")
 	procDdeReconnect                  = modUSER32.NewProc("DdeReconnect")
 	procDdeSetQualityOfService        = modUSER32.NewProc("DdeSetQualityOfService")
 	procDdeSetUserHandle              = modUSER32.NewProc("DdeSetUserHandle")
@@ -79,8 +79,8 @@ var (
 	procEnumClipboardFormats          = modUSER32.NewProc("EnumClipboardFormats")
 	procFreeDDElParam                 = modUSER32.NewProc("FreeDDElParam")
 	procGetClipboardData              = modUSER32.NewProc("GetClipboardData")
+	procGetClipboardFormatName        = modUSER32.NewProc("GetClipboardFormatNameW")
 	procGetClipboardFormatNameA       = modUSER32.NewProc("GetClipboardFormatNameA")
-	procGetClipboardFormatNameW       = modUSER32.NewProc("GetClipboardFormatNameW")
 	procGetClipboardOwner             = modUSER32.NewProc("GetClipboardOwner")
 	procGetClipboardSequenceNumber    = modUSER32.NewProc("GetClipboardSequenceNumber")
 	procGetClipboardViewer            = modUSER32.NewProc("GetClipboardViewer")
@@ -91,8 +91,8 @@ var (
 	procIsClipboardFormatAvailable    = modUSER32.NewProc("IsClipboardFormatAvailable")
 	procOpenClipboard                 = modUSER32.NewProc("OpenClipboard")
 	procPackDDElParam                 = modUSER32.NewProc("PackDDElParam")
+	procRegisterClipboardFormat       = modUSER32.NewProc("RegisterClipboardFormatW")
 	procRegisterClipboardFormatA      = modUSER32.NewProc("RegisterClipboardFormatA")
-	procRegisterClipboardFormatW      = modUSER32.NewProc("RegisterClipboardFormatW")
 	procRemoveClipboardFormatListener = modUSER32.NewProc("RemoveClipboardFormatListener")
 	procReuseDDElParam                = modUSER32.NewProc("ReuseDDElParam")
 	procSetClipboardData              = modUSER32.NewProc("SetClipboardData")
@@ -100,22 +100,23 @@ var (
 	procUnpackDDElParam               = modUSER32.NewProc("UnpackDDElParam")
 )
 
-// AddAtomA calls KERNEL32!AddAtomA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-addatoma
+// AddAtom calls KERNEL32!AddAtomW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-addatomw
 // Minimum OS: windows5.0.
-func AddAtomA(lpString foundation.PSTR) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procAddAtomA.Addr(), uintptr(unsafe.Pointer(lpString)))
+func AddAtom(lpString string) (uint16, error) {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procAddAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1
 	}
 	return uint16(r1), nil
 }
 
-// AddAtomW calls KERNEL32!AddAtomW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-addatomw
+// AddAtomA calls KERNEL32!AddAtomA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-addatoma
 // Minimum OS: windows5.0.
-func AddAtomW(lpString foundation.PWSTR) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procAddAtomW.Addr(), uintptr(unsafe.Pointer(lpString)))
+func AddAtomA(lpString foundation.PSTR) (uint16, error) {
+	r1, _, e1 := syscall.SyscallN(procAddAtomA.Addr(), uintptr(unsafe.Pointer(lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1
 	}
@@ -136,9 +137,9 @@ func AddClipboardFormatListener(hwnd foundation.HWND) error {
 // ChangeClipboardChain calls USER32!ChangeClipboardChain.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-changeclipboardchain
 // Minimum OS: windows5.0.
-func ChangeClipboardChain(hWndRemove foundation.HWND, hWndNewNext foundation.HWND) foundation.BOOL {
+func ChangeClipboardChain(hWndRemove foundation.HWND, hWndNewNext foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procChangeClipboardChain.Addr(), uintptr(hWndRemove), uintptr(hWndNewNext))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CloseClipboard calls USER32!CloseClipboard.
@@ -166,9 +167,9 @@ func CountClipboardFormats() (int32, error) {
 // DdeAbandonTransaction calls USER32!DdeAbandonTransaction.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddeabandontransaction
 // Minimum OS: windows5.0.
-func DdeAbandonTransaction(idInst uint32, hConv HCONV, idTransaction uint32) foundation.BOOL {
+func DdeAbandonTransaction(idInst uint32, hConv HCONV, idTransaction uint32) bool {
 	r1, _, _ := syscall.SyscallN(procDdeAbandonTransaction.Addr(), uintptr(idInst), uintptr(hConv), uintptr(idTransaction))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeAccessData calls USER32!DdeAccessData.
@@ -227,6 +228,15 @@ func DdeCreateDataHandle(idInst uint32, pSrc *byte, cb uint32, cbOff uint32, hsz
 	return HDDEDATA(r1)
 }
 
+// DdeCreateStringHandle calls USER32!DdeCreateStringHandleW.
+// https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddecreatestringhandlew
+// Minimum OS: windows5.0.
+func DdeCreateStringHandle(idInst uint32, psz string, iCodePage int32) HSZ {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(procDdeCreateStringHandle.Addr(), uintptr(idInst), uintptr(unsafe.Pointer(_psz)), uintptr(iCodePage))
+	return HSZ(r1)
+}
+
 // DdeCreateStringHandleA calls USER32!DdeCreateStringHandleA.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddecreatestringhandlea
 // Minimum OS: windows5.0.
@@ -235,52 +245,44 @@ func DdeCreateStringHandleA(idInst uint32, psz foundation.PSTR, iCodePage int32)
 	return HSZ(r1)
 }
 
-// DdeCreateStringHandleW calls USER32!DdeCreateStringHandleW.
-// https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddecreatestringhandlew
-// Minimum OS: windows5.0.
-func DdeCreateStringHandleW(idInst uint32, psz foundation.PWSTR, iCodePage int32) HSZ {
-	r1, _, _ := syscall.SyscallN(procDdeCreateStringHandleW.Addr(), uintptr(idInst), uintptr(unsafe.Pointer(psz)), uintptr(iCodePage))
-	return HSZ(r1)
-}
-
 // DdeDisconnect calls USER32!DdeDisconnect.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddedisconnect
 // Minimum OS: windows5.0.
-func DdeDisconnect(hConv HCONV) foundation.BOOL {
+func DdeDisconnect(hConv HCONV) bool {
 	r1, _, _ := syscall.SyscallN(procDdeDisconnect.Addr(), uintptr(hConv))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeDisconnectList calls USER32!DdeDisconnectList.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddedisconnectlist
 // Minimum OS: windows5.0.
-func DdeDisconnectList(hConvList HCONVLIST) foundation.BOOL {
+func DdeDisconnectList(hConvList HCONVLIST) bool {
 	r1, _, _ := syscall.SyscallN(procDdeDisconnectList.Addr(), uintptr(hConvList))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeEnableCallback calls USER32!DdeEnableCallback.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddeenablecallback
 // Minimum OS: windows5.0.
-func DdeEnableCallback(idInst uint32, hConv HCONV, wCmd DDE_ENABLE_CALLBACK_CMD) foundation.BOOL {
+func DdeEnableCallback(idInst uint32, hConv HCONV, wCmd DDE_ENABLE_CALLBACK_CMD) bool {
 	r1, _, _ := syscall.SyscallN(procDdeEnableCallback.Addr(), uintptr(idInst), uintptr(hConv), uintptr(wCmd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeFreeDataHandle calls USER32!DdeFreeDataHandle.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddefreedatahandle
 // Minimum OS: windows5.0.
-func DdeFreeDataHandle(hData HDDEDATA) foundation.BOOL {
+func DdeFreeDataHandle(hData HDDEDATA) bool {
 	r1, _, _ := syscall.SyscallN(procDdeFreeDataHandle.Addr(), uintptr(hData))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeFreeStringHandle calls USER32!DdeFreeStringHandle.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddefreestringhandle
 // Minimum OS: windows5.0.
-func DdeFreeStringHandle(idInst uint32, hsz HSZ) foundation.BOOL {
+func DdeFreeStringHandle(idInst uint32, hsz HSZ) bool {
 	r1, _, _ := syscall.SyscallN(procDdeFreeStringHandle.Addr(), uintptr(idInst), uintptr(hsz))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeGetData calls USER32!DdeGetData.
@@ -310,28 +312,28 @@ func DdeImpersonateClient(hConv HCONV) error {
 	return nil
 }
 
-// DdeInitializeA calls USER32!DdeInitializeA.
-// https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddeinitializea
+// DdeInitialize calls USER32!DdeInitializeW.
+// https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddeinitializew
 // Minimum OS: windows5.0.
-func DdeInitializeA(pidInst *uint32, pfnCallback PFNCALLBACK, afCmd DDE_INITIALIZE_COMMAND, ulRes uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procDdeInitializeA.Addr(), uintptr(unsafe.Pointer(pidInst)), uintptr(pfnCallback), uintptr(afCmd), uintptr(ulRes))
+func DdeInitialize(pidInst *uint32, pfnCallback PFNCALLBACK, afCmd DDE_INITIALIZE_COMMAND) uint32 {
+	r1, _, _ := syscall.SyscallN(procDdeInitialize.Addr(), uintptr(unsafe.Pointer(pidInst)), uintptr(pfnCallback), uintptr(afCmd), 0)
 	return uint32(r1)
 }
 
-// DdeInitializeW calls USER32!DdeInitializeW.
-// https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddeinitializew
+// DdeInitializeA calls USER32!DdeInitializeA.
+// https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddeinitializea
 // Minimum OS: windows5.0.
-func DdeInitializeW(pidInst *uint32, pfnCallback PFNCALLBACK, afCmd DDE_INITIALIZE_COMMAND, ulRes uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procDdeInitializeW.Addr(), uintptr(unsafe.Pointer(pidInst)), uintptr(pfnCallback), uintptr(afCmd), uintptr(ulRes))
+func DdeInitializeA(pidInst *uint32, pfnCallback PFNCALLBACK, afCmd DDE_INITIALIZE_COMMAND) uint32 {
+	r1, _, _ := syscall.SyscallN(procDdeInitializeA.Addr(), uintptr(unsafe.Pointer(pidInst)), uintptr(pfnCallback), uintptr(afCmd), 0)
 	return uint32(r1)
 }
 
 // DdeKeepStringHandle calls USER32!DdeKeepStringHandle.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddekeepstringhandle
 // Minimum OS: windows5.0.
-func DdeKeepStringHandle(idInst uint32, hsz HSZ) foundation.BOOL {
+func DdeKeepStringHandle(idInst uint32, hsz HSZ) bool {
 	r1, _, _ := syscall.SyscallN(procDdeKeepStringHandle.Addr(), uintptr(idInst), uintptr(hsz))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeNameService calls USER32!DdeNameService.
@@ -345,9 +347,9 @@ func DdeNameService(idInst uint32, hsz1 HSZ, hsz2 HSZ, afCmd DDE_NAME_SERVICE_CM
 // DdePostAdvise calls USER32!DdePostAdvise.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddepostadvise
 // Minimum OS: windows5.0.
-func DdePostAdvise(idInst uint32, hszTopic HSZ, hszItem HSZ) foundation.BOOL {
+func DdePostAdvise(idInst uint32, hszTopic HSZ, hszItem HSZ) bool {
 	r1, _, _ := syscall.SyscallN(procDdePostAdvise.Addr(), uintptr(idInst), uintptr(hszTopic), uintptr(hszItem))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeQueryConvInfo calls USER32!DdeQueryConvInfo.
@@ -366,19 +368,19 @@ func DdeQueryNextServer(hConvList HCONVLIST, hConvPrev HCONV) HCONV {
 	return HCONV(r1)
 }
 
+// DdeQueryString calls USER32!DdeQueryStringW.
+// https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddequerystringw
+// Minimum OS: windows5.0.
+func DdeQueryString(idInst uint32, hsz HSZ, psz foundation.PWSTR, cchMax uint32, iCodePage int32) uint32 {
+	r1, _, _ := syscall.SyscallN(procDdeQueryString.Addr(), uintptr(idInst), uintptr(hsz), uintptr(unsafe.Pointer(psz)), uintptr(cchMax), uintptr(iCodePage))
+	return uint32(r1)
+}
+
 // DdeQueryStringA calls USER32!DdeQueryStringA.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddequerystringa
 // Minimum OS: windows5.0.
 func DdeQueryStringA(idInst uint32, hsz HSZ, psz foundation.PSTR, cchMax uint32, iCodePage int32) uint32 {
 	r1, _, _ := syscall.SyscallN(procDdeQueryStringA.Addr(), uintptr(idInst), uintptr(hsz), uintptr(unsafe.Pointer(psz)), uintptr(cchMax), uintptr(iCodePage))
-	return uint32(r1)
-}
-
-// DdeQueryStringW calls USER32!DdeQueryStringW.
-// https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddequerystringw
-// Minimum OS: windows5.0.
-func DdeQueryStringW(idInst uint32, hsz HSZ, psz foundation.PWSTR, cchMax uint32, iCodePage int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procDdeQueryStringW.Addr(), uintptr(idInst), uintptr(hsz), uintptr(unsafe.Pointer(psz)), uintptr(cchMax), uintptr(iCodePage))
 	return uint32(r1)
 }
 
@@ -404,25 +406,25 @@ func DdeSetQualityOfService(hwndClient foundation.HWND, pqosNew *security.SECURI
 // DdeSetUserHandle calls USER32!DdeSetUserHandle.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddesetuserhandle
 // Minimum OS: windows5.0.
-func DdeSetUserHandle(hConv HCONV, id uint32, hUser uintptr) foundation.BOOL {
+func DdeSetUserHandle(hConv HCONV, id uint32, hUser uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procDdeSetUserHandle.Addr(), uintptr(hConv), uintptr(id), uintptr(hUser))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeUnaccessData calls USER32!DdeUnaccessData.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddeunaccessdata
 // Minimum OS: windows5.0.
-func DdeUnaccessData(hData HDDEDATA) foundation.BOOL {
+func DdeUnaccessData(hData HDDEDATA) bool {
 	r1, _, _ := syscall.SyscallN(procDdeUnaccessData.Addr(), uintptr(hData))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DdeUninitialize calls USER32!DdeUninitialize.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddeuninitialize
 // Minimum OS: windows5.0.
-func DdeUninitialize(idInst uint32) foundation.BOOL {
+func DdeUninitialize(idInst uint32) bool {
 	r1, _, _ := syscall.SyscallN(procDdeUninitialize.Addr(), uintptr(idInst))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DeleteAtom calls KERNEL32!DeleteAtom.
@@ -458,6 +460,18 @@ func EnumClipboardFormats(format uint32) (uint32, error) {
 	return uint32(r1), nil
 }
 
+// FindAtom calls KERNEL32!FindAtomW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findatomw
+// Minimum OS: windows5.0.
+func FindAtom(lpString string) (uint16, error) {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procFindAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
+	if e1 != 0 {
+		return uint16(r1), e1
+	}
+	return uint16(r1), nil
+}
+
 // FindAtomA calls KERNEL32!FindAtomA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findatoma
 // Minimum OS: windows5.0.
@@ -469,23 +483,23 @@ func FindAtomA(lpString foundation.PSTR) (uint16, error) {
 	return uint16(r1), nil
 }
 
-// FindAtomW calls KERNEL32!FindAtomW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findatomw
-// Minimum OS: windows5.0.
-func FindAtomW(lpString foundation.PWSTR) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procFindAtomW.Addr(), uintptr(unsafe.Pointer(lpString)))
-	if e1 != 0 {
-		return uint16(r1), e1
-	}
-	return uint16(r1), nil
-}
-
 // FreeDDElParam calls USER32!FreeDDElParam.
 // https://learn.microsoft.com/windows/win32/api/dde/nf-dde-freeddelparam
 // Minimum OS: windows5.0.
-func FreeDDElParam(msg uint32, lParam foundation.LPARAM) foundation.BOOL {
+func FreeDDElParam(msg uint32, lParam foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procFreeDDElParam.Addr(), uintptr(msg), uintptr(lParam))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetAtomName calls KERNEL32!GetAtomNameW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getatomnamew
+// Minimum OS: windows5.0.
+func GetAtomName(nAtom uint16, lpBuffer foundation.PWSTR, nSize int32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetAtomName.Addr(), uintptr(nAtom), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // GetAtomNameA calls KERNEL32!GetAtomNameA.
@@ -493,17 +507,6 @@ func FreeDDElParam(msg uint32, lParam foundation.LPARAM) foundation.BOOL {
 // Minimum OS: windows5.0.
 func GetAtomNameA(nAtom uint16, lpBuffer foundation.PSTR, nSize int32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetAtomNameA.Addr(), uintptr(nAtom), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetAtomNameW calls KERNEL32!GetAtomNameW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getatomnamew
-// Minimum OS: windows5.0.
-func GetAtomNameW(nAtom uint16, lpBuffer foundation.PWSTR, nSize int32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetAtomNameW.Addr(), uintptr(nAtom), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -522,22 +525,22 @@ func GetClipboardData(uFormat uint32) (foundation.HANDLE, error) {
 	return ret, nil
 }
 
-// GetClipboardFormatNameA calls USER32!GetClipboardFormatNameA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclipboardformatnamea
+// GetClipboardFormatName calls USER32!GetClipboardFormatNameW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclipboardformatnamew
 // Minimum OS: windows5.0.
-func GetClipboardFormatNameA(format uint32, lpszFormatName foundation.PSTR, cchMaxCount int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetClipboardFormatNameA.Addr(), uintptr(format), uintptr(unsafe.Pointer(lpszFormatName)), uintptr(cchMaxCount))
+func GetClipboardFormatName(format uint32, lpszFormatName foundation.PWSTR, cchMaxCount int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetClipboardFormatName.Addr(), uintptr(format), uintptr(unsafe.Pointer(lpszFormatName)), uintptr(cchMaxCount))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// GetClipboardFormatNameW calls USER32!GetClipboardFormatNameW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclipboardformatnamew
+// GetClipboardFormatNameA calls USER32!GetClipboardFormatNameA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclipboardformatnamea
 // Minimum OS: windows5.0.
-func GetClipboardFormatNameW(format uint32, lpszFormatName foundation.PWSTR, cchMaxCount int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetClipboardFormatNameW.Addr(), uintptr(format), uintptr(unsafe.Pointer(lpszFormatName)), uintptr(cchMaxCount))
+func GetClipboardFormatNameA(format uint32, lpszFormatName foundation.PSTR, cchMaxCount int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetClipboardFormatNameA.Addr(), uintptr(format), uintptr(unsafe.Pointer(lpszFormatName)), uintptr(cchMaxCount))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -591,8 +594,12 @@ func GetOpenClipboardWindow() (foundation.HWND, error) {
 // GetPriorityClipboardFormat calls USER32!GetPriorityClipboardFormat.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getpriorityclipboardformat
 // Minimum OS: windows5.0.
-func GetPriorityClipboardFormat(paFormatPriorityList *uint32, cFormats int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetPriorityClipboardFormat.Addr(), uintptr(unsafe.Pointer(paFormatPriorityList)), uintptr(cFormats))
+func GetPriorityClipboardFormat(paFormatPriorityList []uint32) (int32, error) {
+	var _paFormatPriorityList *uint32
+	if len(paFormatPriorityList) > 0 {
+		_paFormatPriorityList = &paFormatPriorityList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetPriorityClipboardFormat.Addr(), uintptr(unsafe.Pointer(_paFormatPriorityList)), uintptr(len(paFormatPriorityList)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -602,12 +609,28 @@ func GetPriorityClipboardFormat(paFormatPriorityList *uint32, cFormats int32) (i
 // GetUpdatedClipboardFormats calls USER32!GetUpdatedClipboardFormats.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getupdatedclipboardformats
 // Minimum OS: windows6.0.6000.
-func GetUpdatedClipboardFormats(lpuiFormats *uint32, cFormats uint32, pcFormatsOut *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetUpdatedClipboardFormats.Addr(), uintptr(unsafe.Pointer(lpuiFormats)), uintptr(cFormats), uintptr(unsafe.Pointer(pcFormatsOut)))
+func GetUpdatedClipboardFormats(lpuiFormats []uint32, pcFormatsOut *uint32) error {
+	var _lpuiFormats *uint32
+	if len(lpuiFormats) > 0 {
+		_lpuiFormats = &lpuiFormats[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetUpdatedClipboardFormats.Addr(), uintptr(unsafe.Pointer(_lpuiFormats)), uintptr(len(lpuiFormats)), uintptr(unsafe.Pointer(pcFormatsOut)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// GlobalAddAtom calls KERNEL32!GlobalAddAtomW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomw
+// Minimum OS: windows5.0.
+func GlobalAddAtom(lpString string) (uint16, error) {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procGlobalAddAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
+	if e1 != 0 {
+		return uint16(r1), e1
+	}
+	return uint16(r1), nil
 }
 
 // GlobalAddAtomA calls KERNEL32!GlobalAddAtomA.
@@ -621,31 +644,21 @@ func GlobalAddAtomA(lpString foundation.PSTR) (uint16, error) {
 	return uint16(r1), nil
 }
 
+// GlobalAddAtomEx calls KERNEL32!GlobalAddAtomExW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomexw
+func GlobalAddAtomEx(lpString string, Flags uint32) (uint16, error) {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procGlobalAddAtomEx.Addr(), uintptr(unsafe.Pointer(_lpString)), uintptr(Flags))
+	if e1 != 0 {
+		return uint16(r1), e1
+	}
+	return uint16(r1), nil
+}
+
 // GlobalAddAtomExA calls KERNEL32!GlobalAddAtomExA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomexa
 func GlobalAddAtomExA(lpString foundation.PSTR, Flags uint32) (uint16, error) {
 	r1, _, e1 := syscall.SyscallN(procGlobalAddAtomExA.Addr(), uintptr(unsafe.Pointer(lpString)), uintptr(Flags))
-	if e1 != 0 {
-		return uint16(r1), e1
-	}
-	return uint16(r1), nil
-}
-
-// GlobalAddAtomExW calls KERNEL32!GlobalAddAtomExW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomexw
-func GlobalAddAtomExW(lpString foundation.PWSTR, Flags uint32) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procGlobalAddAtomExW.Addr(), uintptr(unsafe.Pointer(lpString)), uintptr(Flags))
-	if e1 != 0 {
-		return uint16(r1), e1
-	}
-	return uint16(r1), nil
-}
-
-// GlobalAddAtomW calls KERNEL32!GlobalAddAtomW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomw
-// Minimum OS: windows5.0.
-func GlobalAddAtomW(lpString foundation.PWSTR) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procGlobalAddAtomW.Addr(), uintptr(unsafe.Pointer(lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1
 	}
@@ -663,6 +676,18 @@ func GlobalDeleteAtom(nAtom uint16) (uint16, error) {
 	return uint16(r1), nil
 }
 
+// GlobalFindAtom calls KERNEL32!GlobalFindAtomW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalfindatomw
+// Minimum OS: windows5.0.
+func GlobalFindAtom(lpString string) (uint16, error) {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procGlobalFindAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
+	if e1 != 0 {
+		return uint16(r1), e1
+	}
+	return uint16(r1), nil
+}
+
 // GlobalFindAtomA calls KERNEL32!GlobalFindAtomA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalfindatoma
 // Minimum OS: windows5.0.
@@ -674,15 +699,15 @@ func GlobalFindAtomA(lpString foundation.PSTR) (uint16, error) {
 	return uint16(r1), nil
 }
 
-// GlobalFindAtomW calls KERNEL32!GlobalFindAtomW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalfindatomw
+// GlobalGetAtomName calls KERNEL32!GlobalGetAtomNameW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalgetatomnamew
 // Minimum OS: windows5.0.
-func GlobalFindAtomW(lpString foundation.PWSTR) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procGlobalFindAtomW.Addr(), uintptr(unsafe.Pointer(lpString)))
+func GlobalGetAtomName(nAtom uint16, lpBuffer foundation.PWSTR, nSize int32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGlobalGetAtomName.Addr(), uintptr(nAtom), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
 	if e1 != 0 {
-		return uint16(r1), e1
+		return uint32(r1), e1
 	}
-	return uint16(r1), nil
+	return uint32(r1), nil
 }
 
 // GlobalGetAtomNameA calls KERNEL32!GlobalGetAtomNameA.
@@ -690,17 +715,6 @@ func GlobalFindAtomW(lpString foundation.PWSTR) (uint16, error) {
 // Minimum OS: windows5.0.
 func GlobalGetAtomNameA(nAtom uint16, lpBuffer foundation.PSTR, nSize int32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGlobalGetAtomNameA.Addr(), uintptr(nAtom), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GlobalGetAtomNameW calls KERNEL32!GlobalGetAtomNameW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalgetatomnamew
-// Minimum OS: windows5.0.
-func GlobalGetAtomNameW(nAtom uint16, lpBuffer foundation.PWSTR, nSize int32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGlobalGetAtomNameW.Addr(), uintptr(nAtom), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -721,9 +735,9 @@ func ImpersonateDdeClientWindow(hWndClient foundation.HWND, hWndServer foundatio
 // InitAtomTable calls KERNEL32!InitAtomTable.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-initatomtable
 // Minimum OS: windows5.0.
-func InitAtomTable(nSize uint32) foundation.BOOL {
+func InitAtomTable(nSize uint32) bool {
 	r1, _, _ := syscall.SyscallN(procInitAtomTable.Addr(), uintptr(nSize))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsClipboardFormatAvailable calls USER32!IsClipboardFormatAvailable.
@@ -756,22 +770,23 @@ func PackDDElParam(msg uint32, uiLo uintptr, uiHi uintptr) foundation.LPARAM {
 	return foundation.LPARAM(r1)
 }
 
-// RegisterClipboardFormatA calls USER32!RegisterClipboardFormatA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerclipboardformata
+// RegisterClipboardFormat calls USER32!RegisterClipboardFormatW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerclipboardformatw
 // Minimum OS: windows5.0.
-func RegisterClipboardFormatA(lpszFormat foundation.PSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procRegisterClipboardFormatA.Addr(), uintptr(unsafe.Pointer(lpszFormat)))
+func RegisterClipboardFormat(lpszFormat string) (uint32, error) {
+	_lpszFormat := win32.UTF16Ptr(lpszFormat)
+	r1, _, e1 := syscall.SyscallN(procRegisterClipboardFormat.Addr(), uintptr(unsafe.Pointer(_lpszFormat)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
-// RegisterClipboardFormatW calls USER32!RegisterClipboardFormatW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerclipboardformatw
+// RegisterClipboardFormatA calls USER32!RegisterClipboardFormatA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerclipboardformata
 // Minimum OS: windows5.0.
-func RegisterClipboardFormatW(lpszFormat foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procRegisterClipboardFormatW.Addr(), uintptr(unsafe.Pointer(lpszFormat)))
+func RegisterClipboardFormatA(lpszFormat foundation.PSTR) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procRegisterClipboardFormatA.Addr(), uintptr(unsafe.Pointer(lpszFormat)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -832,7 +847,7 @@ func SetWinMetaFileBits(nSize uint32, lpMeta16Data *byte, hdcRef graphicsgdi.HDC
 // UnpackDDElParam calls USER32!UnpackDDElParam.
 // https://learn.microsoft.com/windows/win32/api/dde/nf-dde-unpackddelparam
 // Minimum OS: windows5.0.
-func UnpackDDElParam(msg uint32, lParam foundation.LPARAM, puiLo *uintptr, puiHi *uintptr) foundation.BOOL {
+func UnpackDDElParam(msg uint32, lParam foundation.LPARAM, puiLo *uintptr, puiHi *uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procUnpackDDElParam.Addr(), uintptr(msg), uintptr(lParam), uintptr(unsafe.Pointer(puiLo)), uintptr(unsafe.Pointer(puiHi)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

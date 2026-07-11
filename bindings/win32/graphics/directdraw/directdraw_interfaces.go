@@ -23,27 +23,27 @@ type IDDVideoPortContainer struct {
 var IID_IDDVideoPortContainer = win32.GUID{Data1: 0x6c142760, Data2: 0xa733, Data3: 0x11ce, Data4: [8]byte{0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60}}
 
 // CreateVideoPort dispatches through IDDVideoPortContainer's vtable slot 3.
-func (self *IDDVideoPortContainer) CreateVideoPort(param0 uint32, param1 *DDVIDEOPORTDESC, param2 **IDirectDrawVideoPort, param3 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDDVideoPortContainer) CreateVideoPort(param0 uint32, param1 *DDVIDEOPORTDESC, param2 **IDirectDrawVideoPort, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumVideoPorts dispatches through IDDVideoPortContainer's vtable slot 4.
-func (self *IDDVideoPortContainer) EnumVideoPorts(param0 uint32, param1 *DDVIDEOPORTCAPS, param2 unsafe.Pointer, param3 LPDDENUMVIDEOCALLBACK) foundation.HRESULT {
+func (self *IDDVideoPortContainer) EnumVideoPorts(param0 uint32, param1 *DDVIDEOPORTCAPS, param2 unsafe.Pointer, param3 LPDDENUMVIDEOCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoPortConnectInfo dispatches through IDDVideoPortContainer's vtable slot 5.
-func (self *IDDVideoPortContainer) GetVideoPortConnectInfo(param0 uint32, pcInfo *uint32, param2 *DDVIDEOPORTCONNECT) foundation.HRESULT {
+func (self *IDDVideoPortContainer) GetVideoPortConnectInfo(param0 uint32, pcInfo *uint32, param2 *DDVIDEOPORTCONNECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(pcInfo)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryVideoPortStatus dispatches through IDDVideoPortContainer's vtable slot 6.
-func (self *IDDVideoPortContainer) QueryVideoPortStatus(param0 uint32, param1 *DDVIDEOPORTSTATUS) foundation.HRESULT {
+func (self *IDDVideoPortContainer) QueryVideoPortStatus(param0 uint32, param1 *DDVIDEOPORTSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6c14db80-a733-11ce-a521-0020af0be560
@@ -55,123 +55,123 @@ type IDirectDraw struct {
 var IID_IDirectDraw = win32.GUID{Data1: 0x6c14db80, Data2: 0xa733, Data3: 0x11ce, Data4: [8]byte{0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60}}
 
 // Compact dispatches through IDirectDraw's vtable slot 3.
-func (self *IDirectDraw) Compact() foundation.HRESULT {
+func (self *IDirectDraw) Compact() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateClipper dispatches through IDirectDraw's vtable slot 4.
-func (self *IDirectDraw) CreateClipper(param0 uint32, param1 **IDirectDrawClipper, param2 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw) CreateClipper(param0 uint32, param1 **IDirectDrawClipper, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePalette dispatches through IDirectDraw's vtable slot 5.
-func (self *IDirectDraw) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **IDirectDrawPalette, param3 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **IDirectDrawPalette, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSurface dispatches through IDirectDraw's vtable slot 6.
-func (self *IDirectDraw) CreateSurface(param0 *DDSURFACEDESC, param1 **IDirectDrawSurface, param2 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw) CreateSurface(param0 *DDSURFACEDESC, param1 **IDirectDrawSurface, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DuplicateSurface dispatches through IDirectDraw's vtable slot 7.
-func (self *IDirectDraw) DuplicateSurface(param0 *IDirectDrawSurface, param1 **IDirectDrawSurface) foundation.HRESULT {
+func (self *IDirectDraw) DuplicateSurface(param0 *IDirectDrawSurface, param1 **IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumDisplayModes dispatches through IDirectDraw's vtable slot 8.
-func (self *IDirectDraw) EnumDisplayModes(param0 uint32, param1 *DDSURFACEDESC, param2 unsafe.Pointer, param3 LPDDENUMMODESCALLBACK) foundation.HRESULT {
+func (self *IDirectDraw) EnumDisplayModes(param0 uint32, param1 *DDSURFACEDESC, param2 unsafe.Pointer, param3 LPDDENUMMODESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumSurfaces dispatches through IDirectDraw's vtable slot 9.
-func (self *IDirectDraw) EnumSurfaces(param0 uint32, param1 *DDSURFACEDESC, param2 unsafe.Pointer, param3 LPDDENUMSURFACESCALLBACK) foundation.HRESULT {
+func (self *IDirectDraw) EnumSurfaces(param0 uint32, param1 *DDSURFACEDESC, param2 unsafe.Pointer, param3 LPDDENUMSURFACESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FlipToGDISurface dispatches through IDirectDraw's vtable slot 10.
-func (self *IDirectDraw) FlipToGDISurface() foundation.HRESULT {
+func (self *IDirectDraw) FlipToGDISurface() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDraw's vtable slot 11.
-func (self *IDirectDraw) GetCaps(param0 *DDCAPS_DX7, param1 *DDCAPS_DX7) foundation.HRESULT {
+func (self *IDirectDraw) GetCaps(param0 *DDCAPS_DX7, param1 *DDCAPS_DX7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayMode dispatches through IDirectDraw's vtable slot 12.
-func (self *IDirectDraw) GetDisplayMode(param0 *DDSURFACEDESC) foundation.HRESULT {
+func (self *IDirectDraw) GetDisplayMode(param0 *DDSURFACEDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFourCCCodes dispatches through IDirectDraw's vtable slot 13.
-func (self *IDirectDraw) GetFourCCCodes(param0 *uint32, param1 *uint32) foundation.HRESULT {
+func (self *IDirectDraw) GetFourCCCodes(param0 *uint32, param1 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGDISurface dispatches through IDirectDraw's vtable slot 14.
-func (self *IDirectDraw) GetGDISurface(param0 **IDirectDrawSurface) foundation.HRESULT {
+func (self *IDirectDraw) GetGDISurface(param0 **IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMonitorFrequency dispatches through IDirectDraw's vtable slot 15.
-func (self *IDirectDraw) GetMonitorFrequency(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDraw) GetMonitorFrequency(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScanLine dispatches through IDirectDraw's vtable slot 16.
-func (self *IDirectDraw) GetScanLine(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDraw) GetScanLine(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVerticalBlankStatus dispatches through IDirectDraw's vtable slot 17.
-func (self *IDirectDraw) GetVerticalBlankStatus(param0 *foundation.BOOL) foundation.HRESULT {
+func (self *IDirectDraw) GetVerticalBlankStatus(param0 *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDraw's vtable slot 18.
-func (self *IDirectDraw) Initialize(param0 *win32.GUID) foundation.HRESULT {
+func (self *IDirectDraw) Initialize(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreDisplayMode dispatches through IDirectDraw's vtable slot 19.
-func (self *IDirectDraw) RestoreDisplayMode() foundation.HRESULT {
+func (self *IDirectDraw) RestoreDisplayMode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectDraw's vtable slot 20.
-func (self *IDirectDraw) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) foundation.HRESULT {
+func (self *IDirectDraw) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisplayMode dispatches through IDirectDraw's vtable slot 21.
-func (self *IDirectDraw) SetDisplayMode(param0 uint32, param1 uint32, param2 uint32) foundation.HRESULT {
+func (self *IDirectDraw) SetDisplayMode(param0 uint32, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForVerticalBlank dispatches through IDirectDraw's vtable slot 22.
-func (self *IDirectDraw) WaitForVerticalBlank(param0 uint32, param1 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDraw) WaitForVerticalBlank(param0 uint32, param1 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b3a6f3e0-2b43-11cf-a2de-00aa00b93356
@@ -183,129 +183,129 @@ type IDirectDraw2 struct {
 var IID_IDirectDraw2 = win32.GUID{Data1: 0xb3a6f3e0, Data2: 0x2b43, Data3: 0x11cf, Data4: [8]byte{0xa2, 0xde, 0x00, 0xaa, 0x00, 0xb9, 0x33, 0x56}}
 
 // Compact dispatches through IDirectDraw2's vtable slot 3.
-func (self *IDirectDraw2) Compact() foundation.HRESULT {
+func (self *IDirectDraw2) Compact() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateClipper dispatches through IDirectDraw2's vtable slot 4.
-func (self *IDirectDraw2) CreateClipper(param0 uint32, param1 **IDirectDrawClipper, param2 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw2) CreateClipper(param0 uint32, param1 **IDirectDrawClipper, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePalette dispatches through IDirectDraw2's vtable slot 5.
-func (self *IDirectDraw2) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **IDirectDrawPalette, param3 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw2) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **IDirectDrawPalette, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSurface dispatches through IDirectDraw2's vtable slot 6.
-func (self *IDirectDraw2) CreateSurface(param0 *DDSURFACEDESC, param1 **IDirectDrawSurface, param2 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw2) CreateSurface(param0 *DDSURFACEDESC, param1 **IDirectDrawSurface, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DuplicateSurface dispatches through IDirectDraw2's vtable slot 7.
-func (self *IDirectDraw2) DuplicateSurface(param0 *IDirectDrawSurface, param1 **IDirectDrawSurface) foundation.HRESULT {
+func (self *IDirectDraw2) DuplicateSurface(param0 *IDirectDrawSurface, param1 **IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumDisplayModes dispatches through IDirectDraw2's vtable slot 8.
-func (self *IDirectDraw2) EnumDisplayModes(param0 uint32, param1 *DDSURFACEDESC, param2 unsafe.Pointer, param3 LPDDENUMMODESCALLBACK) foundation.HRESULT {
+func (self *IDirectDraw2) EnumDisplayModes(param0 uint32, param1 *DDSURFACEDESC, param2 unsafe.Pointer, param3 LPDDENUMMODESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumSurfaces dispatches through IDirectDraw2's vtable slot 9.
-func (self *IDirectDraw2) EnumSurfaces(param0 uint32, param1 *DDSURFACEDESC, param2 unsafe.Pointer, param3 LPDDENUMSURFACESCALLBACK) foundation.HRESULT {
+func (self *IDirectDraw2) EnumSurfaces(param0 uint32, param1 *DDSURFACEDESC, param2 unsafe.Pointer, param3 LPDDENUMSURFACESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FlipToGDISurface dispatches through IDirectDraw2's vtable slot 10.
-func (self *IDirectDraw2) FlipToGDISurface() foundation.HRESULT {
+func (self *IDirectDraw2) FlipToGDISurface() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDraw2's vtable slot 11.
-func (self *IDirectDraw2) GetCaps(param0 *DDCAPS_DX7, param1 *DDCAPS_DX7) foundation.HRESULT {
+func (self *IDirectDraw2) GetCaps(param0 *DDCAPS_DX7, param1 *DDCAPS_DX7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayMode dispatches through IDirectDraw2's vtable slot 12.
-func (self *IDirectDraw2) GetDisplayMode(param0 *DDSURFACEDESC) foundation.HRESULT {
+func (self *IDirectDraw2) GetDisplayMode(param0 *DDSURFACEDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFourCCCodes dispatches through IDirectDraw2's vtable slot 13.
-func (self *IDirectDraw2) GetFourCCCodes(param0 *uint32, param1 *uint32) foundation.HRESULT {
+func (self *IDirectDraw2) GetFourCCCodes(param0 *uint32, param1 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGDISurface dispatches through IDirectDraw2's vtable slot 14.
-func (self *IDirectDraw2) GetGDISurface(param0 **IDirectDrawSurface) foundation.HRESULT {
+func (self *IDirectDraw2) GetGDISurface(param0 **IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMonitorFrequency dispatches through IDirectDraw2's vtable slot 15.
-func (self *IDirectDraw2) GetMonitorFrequency(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDraw2) GetMonitorFrequency(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScanLine dispatches through IDirectDraw2's vtable slot 16.
-func (self *IDirectDraw2) GetScanLine(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDraw2) GetScanLine(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVerticalBlankStatus dispatches through IDirectDraw2's vtable slot 17.
-func (self *IDirectDraw2) GetVerticalBlankStatus(param0 *foundation.BOOL) foundation.HRESULT {
+func (self *IDirectDraw2) GetVerticalBlankStatus(param0 *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDraw2's vtable slot 18.
-func (self *IDirectDraw2) Initialize(param0 *win32.GUID) foundation.HRESULT {
+func (self *IDirectDraw2) Initialize(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreDisplayMode dispatches through IDirectDraw2's vtable slot 19.
-func (self *IDirectDraw2) RestoreDisplayMode() foundation.HRESULT {
+func (self *IDirectDraw2) RestoreDisplayMode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectDraw2's vtable slot 20.
-func (self *IDirectDraw2) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) foundation.HRESULT {
+func (self *IDirectDraw2) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisplayMode dispatches through IDirectDraw2's vtable slot 21.
-func (self *IDirectDraw2) SetDisplayMode(param0 uint32, param1 uint32, param2 uint32, param3 uint32, param4 uint32) foundation.HRESULT {
+func (self *IDirectDraw2) SetDisplayMode(param0 uint32, param1 uint32, param2 uint32, param3 uint32, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(param4))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForVerticalBlank dispatches through IDirectDraw2's vtable slot 22.
-func (self *IDirectDraw2) WaitForVerticalBlank(param0 uint32, param1 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDraw2) WaitForVerticalBlank(param0 uint32, param1 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAvailableVidMem dispatches through IDirectDraw2's vtable slot 23.
-func (self *IDirectDraw2) GetAvailableVidMem(param0 *DDSCAPS, param1 *uint32, param2 *uint32) foundation.HRESULT {
+func (self *IDirectDraw2) GetAvailableVidMem(param0 *DDSCAPS, param1 *uint32, param2 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9c59509a-39bd-11d1-8c4a-00c04fd930c5
@@ -317,153 +317,153 @@ type IDirectDraw4 struct {
 var IID_IDirectDraw4 = win32.GUID{Data1: 0x9c59509a, Data2: 0x39bd, Data3: 0x11d1, Data4: [8]byte{0x8c, 0x4a, 0x00, 0xc0, 0x4f, 0xd9, 0x30, 0xc5}}
 
 // Compact dispatches through IDirectDraw4's vtable slot 3.
-func (self *IDirectDraw4) Compact() foundation.HRESULT {
+func (self *IDirectDraw4) Compact() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateClipper dispatches through IDirectDraw4's vtable slot 4.
-func (self *IDirectDraw4) CreateClipper(param0 uint32, param1 **IDirectDrawClipper, param2 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw4) CreateClipper(param0 uint32, param1 **IDirectDrawClipper, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePalette dispatches through IDirectDraw4's vtable slot 5.
-func (self *IDirectDraw4) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **IDirectDrawPalette, param3 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw4) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **IDirectDrawPalette, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSurface dispatches through IDirectDraw4's vtable slot 6.
-func (self *IDirectDraw4) CreateSurface(param0 *DDSURFACEDESC2, param1 **IDirectDrawSurface4, param2 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw4) CreateSurface(param0 *DDSURFACEDESC2, param1 **IDirectDrawSurface4, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DuplicateSurface dispatches through IDirectDraw4's vtable slot 7.
-func (self *IDirectDraw4) DuplicateSurface(param0 *IDirectDrawSurface4, param1 **IDirectDrawSurface4) foundation.HRESULT {
+func (self *IDirectDraw4) DuplicateSurface(param0 *IDirectDrawSurface4, param1 **IDirectDrawSurface4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumDisplayModes dispatches through IDirectDraw4's vtable slot 8.
-func (self *IDirectDraw4) EnumDisplayModes(param0 uint32, param1 *DDSURFACEDESC2, param2 unsafe.Pointer, param3 LPDDENUMMODESCALLBACK2) foundation.HRESULT {
+func (self *IDirectDraw4) EnumDisplayModes(param0 uint32, param1 *DDSURFACEDESC2, param2 unsafe.Pointer, param3 LPDDENUMMODESCALLBACK2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumSurfaces dispatches through IDirectDraw4's vtable slot 9.
-func (self *IDirectDraw4) EnumSurfaces(param0 uint32, param1 *DDSURFACEDESC2, param2 unsafe.Pointer, param3 LPDDENUMSURFACESCALLBACK2) foundation.HRESULT {
+func (self *IDirectDraw4) EnumSurfaces(param0 uint32, param1 *DDSURFACEDESC2, param2 unsafe.Pointer, param3 LPDDENUMSURFACESCALLBACK2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FlipToGDISurface dispatches through IDirectDraw4's vtable slot 10.
-func (self *IDirectDraw4) FlipToGDISurface() foundation.HRESULT {
+func (self *IDirectDraw4) FlipToGDISurface() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDraw4's vtable slot 11.
-func (self *IDirectDraw4) GetCaps(param0 *DDCAPS_DX7, param1 *DDCAPS_DX7) foundation.HRESULT {
+func (self *IDirectDraw4) GetCaps(param0 *DDCAPS_DX7, param1 *DDCAPS_DX7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayMode dispatches through IDirectDraw4's vtable slot 12.
-func (self *IDirectDraw4) GetDisplayMode(param0 *DDSURFACEDESC2) foundation.HRESULT {
+func (self *IDirectDraw4) GetDisplayMode(param0 *DDSURFACEDESC2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFourCCCodes dispatches through IDirectDraw4's vtable slot 13.
-func (self *IDirectDraw4) GetFourCCCodes(param0 *uint32, param1 *uint32) foundation.HRESULT {
+func (self *IDirectDraw4) GetFourCCCodes(param0 *uint32, param1 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGDISurface dispatches through IDirectDraw4's vtable slot 14.
-func (self *IDirectDraw4) GetGDISurface(param0 **IDirectDrawSurface4) foundation.HRESULT {
+func (self *IDirectDraw4) GetGDISurface(param0 **IDirectDrawSurface4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMonitorFrequency dispatches through IDirectDraw4's vtable slot 15.
-func (self *IDirectDraw4) GetMonitorFrequency(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDraw4) GetMonitorFrequency(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScanLine dispatches through IDirectDraw4's vtable slot 16.
-func (self *IDirectDraw4) GetScanLine(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDraw4) GetScanLine(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVerticalBlankStatus dispatches through IDirectDraw4's vtable slot 17.
-func (self *IDirectDraw4) GetVerticalBlankStatus(param0 *foundation.BOOL) foundation.HRESULT {
+func (self *IDirectDraw4) GetVerticalBlankStatus(param0 *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDraw4's vtable slot 18.
-func (self *IDirectDraw4) Initialize(param0 *win32.GUID) foundation.HRESULT {
+func (self *IDirectDraw4) Initialize(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreDisplayMode dispatches through IDirectDraw4's vtable slot 19.
-func (self *IDirectDraw4) RestoreDisplayMode() foundation.HRESULT {
+func (self *IDirectDraw4) RestoreDisplayMode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectDraw4's vtable slot 20.
-func (self *IDirectDraw4) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) foundation.HRESULT {
+func (self *IDirectDraw4) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisplayMode dispatches through IDirectDraw4's vtable slot 21.
-func (self *IDirectDraw4) SetDisplayMode(param0 uint32, param1 uint32, param2 uint32, param3 uint32, param4 uint32) foundation.HRESULT {
+func (self *IDirectDraw4) SetDisplayMode(param0 uint32, param1 uint32, param2 uint32, param3 uint32, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(param4))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForVerticalBlank dispatches through IDirectDraw4's vtable slot 22.
-func (self *IDirectDraw4) WaitForVerticalBlank(param0 uint32, param1 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDraw4) WaitForVerticalBlank(param0 uint32, param1 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAvailableVidMem dispatches through IDirectDraw4's vtable slot 23.
-func (self *IDirectDraw4) GetAvailableVidMem(param0 *DDSCAPS2, param1 *uint32, param2 *uint32) foundation.HRESULT {
+func (self *IDirectDraw4) GetAvailableVidMem(param0 *DDSCAPS2, param1 *uint32, param2 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSurfaceFromDC dispatches through IDirectDraw4's vtable slot 24.
-func (self *IDirectDraw4) GetSurfaceFromDC(param0 graphicsgdi.HDC, param1 **IDirectDrawSurface4) foundation.HRESULT {
+func (self *IDirectDraw4) GetSurfaceFromDC(param0 graphicsgdi.HDC, param1 **IDirectDrawSurface4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreAllSurfaces dispatches through IDirectDraw4's vtable slot 25.
-func (self *IDirectDraw4) RestoreAllSurfaces() foundation.HRESULT {
+func (self *IDirectDraw4) RestoreAllSurfaces() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TestCooperativeLevel dispatches through IDirectDraw4's vtable slot 26.
-func (self *IDirectDraw4) TestCooperativeLevel() foundation.HRESULT {
+func (self *IDirectDraw4) TestCooperativeLevel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceIdentifier dispatches through IDirectDraw4's vtable slot 27.
-func (self *IDirectDraw4) GetDeviceIdentifier(param0 *DDDEVICEIDENTIFIER, param1 uint32) foundation.HRESULT {
+func (self *IDirectDraw4) GetDeviceIdentifier(param0 *DDDEVICEIDENTIFIER, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectDraw7: https://learn.microsoft.com/windows/win32/api/ddraw/nn-ddraw-idirectdraw7
@@ -476,165 +476,165 @@ type IDirectDraw7 struct {
 var IID_IDirectDraw7 = win32.GUID{Data1: 0x15e65ec0, Data2: 0x3b9c, Data3: 0x11d2, Data4: [8]byte{0xb9, 0x2f, 0x00, 0x60, 0x97, 0x97, 0xea, 0x5b}}
 
 // Compact dispatches through IDirectDraw7's vtable slot 3.
-func (self *IDirectDraw7) Compact() foundation.HRESULT {
+func (self *IDirectDraw7) Compact() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateClipper dispatches through IDirectDraw7's vtable slot 4.
-func (self *IDirectDraw7) CreateClipper(param0 uint32, param1 **IDirectDrawClipper, param2 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw7) CreateClipper(param0 uint32, param1 **IDirectDrawClipper, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePalette dispatches through IDirectDraw7's vtable slot 5.
-func (self *IDirectDraw7) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **IDirectDrawPalette, param3 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw7) CreatePalette(param0 uint32, param1 *graphicsgdi.PALETTEENTRY, param2 **IDirectDrawPalette, param3 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSurface dispatches through IDirectDraw7's vtable slot 6.
-func (self *IDirectDraw7) CreateSurface(param0 *DDSURFACEDESC2, param1 **IDirectDrawSurface7, param2 *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectDraw7) CreateSurface(param0 *DDSURFACEDESC2, param1 **IDirectDrawSurface7, param2 *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DuplicateSurface dispatches through IDirectDraw7's vtable slot 7.
-func (self *IDirectDraw7) DuplicateSurface(param0 *IDirectDrawSurface7, param1 **IDirectDrawSurface7) foundation.HRESULT {
+func (self *IDirectDraw7) DuplicateSurface(param0 *IDirectDrawSurface7, param1 **IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumDisplayModes dispatches through IDirectDraw7's vtable slot 8.
-func (self *IDirectDraw7) EnumDisplayModes(param0 uint32, param1 *DDSURFACEDESC2, param2 unsafe.Pointer, param3 LPDDENUMMODESCALLBACK2) foundation.HRESULT {
+func (self *IDirectDraw7) EnumDisplayModes(param0 uint32, param1 *DDSURFACEDESC2, param2 unsafe.Pointer, param3 LPDDENUMMODESCALLBACK2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumSurfaces dispatches through IDirectDraw7's vtable slot 9.
-func (self *IDirectDraw7) EnumSurfaces(param0 uint32, param1 *DDSURFACEDESC2, param2 unsafe.Pointer, param3 LPDDENUMSURFACESCALLBACK7) foundation.HRESULT {
+func (self *IDirectDraw7) EnumSurfaces(param0 uint32, param1 *DDSURFACEDESC2, param2 unsafe.Pointer, param3 LPDDENUMSURFACESCALLBACK7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FlipToGDISurface dispatches through IDirectDraw7's vtable slot 10.
-func (self *IDirectDraw7) FlipToGDISurface() foundation.HRESULT {
+func (self *IDirectDraw7) FlipToGDISurface() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDraw7's vtable slot 11.
-func (self *IDirectDraw7) GetCaps(param0 *DDCAPS_DX7, param1 *DDCAPS_DX7) foundation.HRESULT {
+func (self *IDirectDraw7) GetCaps(param0 *DDCAPS_DX7, param1 *DDCAPS_DX7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayMode dispatches through IDirectDraw7's vtable slot 12.
-func (self *IDirectDraw7) GetDisplayMode(param0 *DDSURFACEDESC2) foundation.HRESULT {
+func (self *IDirectDraw7) GetDisplayMode(param0 *DDSURFACEDESC2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFourCCCodes dispatches through IDirectDraw7's vtable slot 13.
-func (self *IDirectDraw7) GetFourCCCodes(param0 *uint32, param1 *uint32) foundation.HRESULT {
+func (self *IDirectDraw7) GetFourCCCodes(param0 *uint32, param1 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGDISurface dispatches through IDirectDraw7's vtable slot 14.
-func (self *IDirectDraw7) GetGDISurface(param0 **IDirectDrawSurface7) foundation.HRESULT {
+func (self *IDirectDraw7) GetGDISurface(param0 **IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMonitorFrequency dispatches through IDirectDraw7's vtable slot 15.
-func (self *IDirectDraw7) GetMonitorFrequency(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDraw7) GetMonitorFrequency(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScanLine dispatches through IDirectDraw7's vtable slot 16.
-func (self *IDirectDraw7) GetScanLine(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDraw7) GetScanLine(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVerticalBlankStatus dispatches through IDirectDraw7's vtable slot 17.
-func (self *IDirectDraw7) GetVerticalBlankStatus(param0 *foundation.BOOL) foundation.HRESULT {
+func (self *IDirectDraw7) GetVerticalBlankStatus(param0 *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDraw7's vtable slot 18.
-func (self *IDirectDraw7) Initialize(param0 *win32.GUID) foundation.HRESULT {
+func (self *IDirectDraw7) Initialize(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreDisplayMode dispatches through IDirectDraw7's vtable slot 19.
-func (self *IDirectDraw7) RestoreDisplayMode() foundation.HRESULT {
+func (self *IDirectDraw7) RestoreDisplayMode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectDraw7's vtable slot 20.
-func (self *IDirectDraw7) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) foundation.HRESULT {
+func (self *IDirectDraw7) SetCooperativeLevel(param0 foundation.HWND, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisplayMode dispatches through IDirectDraw7's vtable slot 21.
-func (self *IDirectDraw7) SetDisplayMode(param0 uint32, param1 uint32, param2 uint32, param3 uint32, param4 uint32) foundation.HRESULT {
+func (self *IDirectDraw7) SetDisplayMode(param0 uint32, param1 uint32, param2 uint32, param3 uint32, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(param4))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForVerticalBlank dispatches through IDirectDraw7's vtable slot 22.
-func (self *IDirectDraw7) WaitForVerticalBlank(param0 uint32, param1 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDraw7) WaitForVerticalBlank(param0 uint32, param1 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAvailableVidMem dispatches through IDirectDraw7's vtable slot 23.
-func (self *IDirectDraw7) GetAvailableVidMem(param0 *DDSCAPS2, param1 *uint32, param2 *uint32) foundation.HRESULT {
+func (self *IDirectDraw7) GetAvailableVidMem(param0 *DDSCAPS2, param1 *uint32, param2 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSurfaceFromDC dispatches through IDirectDraw7's vtable slot 24.
-func (self *IDirectDraw7) GetSurfaceFromDC(param0 graphicsgdi.HDC, param1 **IDirectDrawSurface7) foundation.HRESULT {
+func (self *IDirectDraw7) GetSurfaceFromDC(param0 graphicsgdi.HDC, param1 **IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreAllSurfaces dispatches through IDirectDraw7's vtable slot 25.
-func (self *IDirectDraw7) RestoreAllSurfaces() foundation.HRESULT {
+func (self *IDirectDraw7) RestoreAllSurfaces() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TestCooperativeLevel dispatches through IDirectDraw7's vtable slot 26.
-func (self *IDirectDraw7) TestCooperativeLevel() foundation.HRESULT {
+func (self *IDirectDraw7) TestCooperativeLevel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceIdentifier dispatches through IDirectDraw7's vtable slot 27.
-func (self *IDirectDraw7) GetDeviceIdentifier(param0 *DDDEVICEIDENTIFIER2, param1 uint32) foundation.HRESULT {
+func (self *IDirectDraw7) GetDeviceIdentifier(param0 *DDDEVICEIDENTIFIER2, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartModeTest dispatches through IDirectDraw7's vtable slot 28.
-func (self *IDirectDraw7) StartModeTest(param0 *foundation.SIZE, param1 uint32, param2 uint32) foundation.HRESULT {
+func (self *IDirectDraw7) StartModeTest(param0 *foundation.SIZE, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EvaluateMode dispatches through IDirectDraw7's vtable slot 29.
-func (self *IDirectDraw7) EvaluateMode(param0 uint32, param1 *uint32) foundation.HRESULT {
+func (self *IDirectDraw7) EvaluateMode(param0 uint32, param1 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectDrawClipper: https://learn.microsoft.com/windows/win32/api/ddraw/nn-ddraw-idirectdrawclipper
@@ -647,39 +647,39 @@ type IDirectDrawClipper struct {
 var IID_IDirectDrawClipper = win32.GUID{Data1: 0x6c14db85, Data2: 0xa733, Data3: 0x11ce, Data4: [8]byte{0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60}}
 
 // GetClipList dispatches through IDirectDrawClipper's vtable slot 3.
-func (self *IDirectDrawClipper) GetClipList(param0 *foundation.RECT, param1 *graphicsgdi.RGNDATA, param2 *uint32) foundation.HRESULT {
+func (self *IDirectDrawClipper) GetClipList(param0 *foundation.RECT, param1 *graphicsgdi.RGNDATA, param2 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHWnd dispatches through IDirectDrawClipper's vtable slot 4.
-func (self *IDirectDrawClipper) GetHWnd(param0 *foundation.HWND) foundation.HRESULT {
+func (self *IDirectDrawClipper) GetHWnd(param0 *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDrawClipper's vtable slot 5.
-func (self *IDirectDrawClipper) Initialize(param0 *IDirectDraw, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawClipper) Initialize(param0 *IDirectDraw, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsClipListChanged dispatches through IDirectDrawClipper's vtable slot 6.
-func (self *IDirectDrawClipper) IsClipListChanged(param0 *foundation.BOOL) foundation.HRESULT {
+func (self *IDirectDrawClipper) IsClipListChanged(param0 *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClipList dispatches through IDirectDrawClipper's vtable slot 7.
-func (self *IDirectDrawClipper) SetClipList(param0 *graphicsgdi.RGNDATA, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawClipper) SetClipList(param0 *graphicsgdi.RGNDATA, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHWnd dispatches through IDirectDrawClipper's vtable slot 8.
-func (self *IDirectDrawClipper) SetHWnd(param0 uint32, param1 foundation.HWND) foundation.HRESULT {
+func (self *IDirectDrawClipper) SetHWnd(param0 uint32, param1 foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectDrawColorControl: https://learn.microsoft.com/windows/win32/api/ddraw/nn-ddraw-idirectdrawcolorcontrol
@@ -692,15 +692,15 @@ type IDirectDrawColorControl struct {
 var IID_IDirectDrawColorControl = win32.GUID{Data1: 0x4b9f0ee0, Data2: 0x0d7e, Data3: 0x11d0, Data4: [8]byte{0x9b, 0x06, 0x00, 0xa0, 0xc9, 0x03, 0xa3, 0xb8}}
 
 // GetColorControls dispatches through IDirectDrawColorControl's vtable slot 3.
-func (self *IDirectDrawColorControl) GetColorControls(param0 *DDCOLORCONTROL) foundation.HRESULT {
+func (self *IDirectDrawColorControl) GetColorControls(param0 *DDCOLORCONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorControls dispatches through IDirectDrawColorControl's vtable slot 4.
-func (self *IDirectDrawColorControl) SetColorControls(param0 *DDCOLORCONTROL) foundation.HRESULT {
+func (self *IDirectDrawColorControl) SetColorControls(param0 *DDCOLORCONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectDrawGammaControl: https://learn.microsoft.com/windows/win32/api/ddraw/nn-ddraw-idirectdrawgammacontrol
@@ -713,15 +713,15 @@ type IDirectDrawGammaControl struct {
 var IID_IDirectDrawGammaControl = win32.GUID{Data1: 0x69c11c3e, Data2: 0xb46b, Data3: 0x11d1, Data4: [8]byte{0xad, 0x7a, 0x00, 0xc0, 0x4f, 0xc2, 0x9b, 0x4e}}
 
 // GetGammaRamp dispatches through IDirectDrawGammaControl's vtable slot 3.
-func (self *IDirectDrawGammaControl) GetGammaRamp(param0 uint32, param1 *DDGAMMARAMP) foundation.HRESULT {
+func (self *IDirectDrawGammaControl) GetGammaRamp(param0 uint32, param1 *DDGAMMARAMP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGammaRamp dispatches through IDirectDrawGammaControl's vtable slot 4.
-func (self *IDirectDrawGammaControl) SetGammaRamp(param0 uint32, param1 *DDGAMMARAMP) foundation.HRESULT {
+func (self *IDirectDrawGammaControl) SetGammaRamp(param0 uint32, param1 *DDGAMMARAMP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectDrawKernel: https://learn.microsoft.com/windows/win32/api/ddkernel/nn-ddkernel-idirectdrawkernel
@@ -734,21 +734,21 @@ type IDirectDrawKernel struct {
 var IID_IDirectDrawKernel = win32.GUID{Data1: 0x8d56c120, Data2: 0x6a08, Data3: 0x11d0, Data4: [8]byte{0x9b, 0x06, 0x00, 0xa0, 0xc9, 0x03, 0xa3, 0xb8}}
 
 // GetCaps dispatches through IDirectDrawKernel's vtable slot 3.
-func (self *IDirectDrawKernel) GetCaps(param0 *DDKERNELCAPS) foundation.HRESULT {
+func (self *IDirectDrawKernel) GetCaps(param0 *DDKERNELCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKernelHandle dispatches through IDirectDrawKernel's vtable slot 4.
-func (self *IDirectDrawKernel) GetKernelHandle(param0 *uintptr) foundation.HRESULT {
+func (self *IDirectDrawKernel) GetKernelHandle(param0 *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseKernelHandle dispatches through IDirectDrawKernel's vtable slot 5.
-func (self *IDirectDrawKernel) ReleaseKernelHandle() foundation.HRESULT {
+func (self *IDirectDrawKernel) ReleaseKernelHandle() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectDrawPalette: https://learn.microsoft.com/windows/win32/api/ddraw/nn-ddraw-idirectdrawpalette
@@ -761,27 +761,27 @@ type IDirectDrawPalette struct {
 var IID_IDirectDrawPalette = win32.GUID{Data1: 0x6c14db84, Data2: 0xa733, Data3: 0x11ce, Data4: [8]byte{0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60}}
 
 // GetCaps dispatches through IDirectDrawPalette's vtable slot 3.
-func (self *IDirectDrawPalette) GetCaps(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDrawPalette) GetCaps(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEntries dispatches through IDirectDrawPalette's vtable slot 4.
-func (self *IDirectDrawPalette) GetEntries(param0 uint32, param1 uint32, param2 uint32, param3 *graphicsgdi.PALETTEENTRY) foundation.HRESULT {
+func (self *IDirectDrawPalette) GetEntries(param0 uint32, param1 uint32, param2 uint32, param3 *graphicsgdi.PALETTEENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDrawPalette's vtable slot 5.
-func (self *IDirectDrawPalette) Initialize(param0 *IDirectDraw, param1 uint32, param2 *graphicsgdi.PALETTEENTRY) foundation.HRESULT {
+func (self *IDirectDrawPalette) Initialize(param0 *IDirectDraw, param1 uint32, param2 *graphicsgdi.PALETTEENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEntries dispatches through IDirectDrawPalette's vtable slot 6.
-func (self *IDirectDrawPalette) SetEntries(param0 uint32, param1 uint32, param2 uint32, param3 *graphicsgdi.PALETTEENTRY) foundation.HRESULT {
+func (self *IDirectDrawPalette) SetEntries(param0 uint32, param1 uint32, param2 uint32, param3 *graphicsgdi.PALETTEENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6c14db81-a733-11ce-a521-0020af0be560
@@ -793,201 +793,201 @@ type IDirectDrawSurface struct {
 var IID_IDirectDrawSurface = win32.GUID{Data1: 0x6c14db81, Data2: 0xa733, Data3: 0x11ce, Data4: [8]byte{0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60}}
 
 // AddAttachedSurface dispatches through IDirectDrawSurface's vtable slot 3.
-func (self *IDirectDrawSurface) AddAttachedSurface(param0 *IDirectDrawSurface) foundation.HRESULT {
+func (self *IDirectDrawSurface) AddAttachedSurface(param0 *IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddOverlayDirtyRect dispatches through IDirectDrawSurface's vtable slot 4.
-func (self *IDirectDrawSurface) AddOverlayDirtyRect(param0 *foundation.RECT) foundation.HRESULT {
+func (self *IDirectDrawSurface) AddOverlayDirtyRect(param0 *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Blt dispatches through IDirectDrawSurface's vtable slot 5.
-func (self *IDirectDrawSurface) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) foundation.HRESULT {
+func (self *IDirectDrawSurface) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltBatch dispatches through IDirectDrawSurface's vtable slot 6.
-func (self *IDirectDrawSurface) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltFast dispatches through IDirectDrawSurface's vtable slot 7.
-func (self *IDirectDrawSurface) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface, param3 *foundation.RECT, param4 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface, param3 *foundation.RECT, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAttachedSurface dispatches through IDirectDrawSurface's vtable slot 8.
-func (self *IDirectDrawSurface) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface) foundation.HRESULT {
+func (self *IDirectDrawSurface) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumAttachedSurfaces dispatches through IDirectDrawSurface's vtable slot 9.
-func (self *IDirectDrawSurface) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK) foundation.HRESULT {
+func (self *IDirectDrawSurface) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumOverlayZOrders dispatches through IDirectDrawSurface's vtable slot 10.
-func (self *IDirectDrawSurface) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK) foundation.HRESULT {
+func (self *IDirectDrawSurface) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flip dispatches through IDirectDrawSurface's vtable slot 11.
-func (self *IDirectDrawSurface) Flip(param0 *IDirectDrawSurface, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface) Flip(param0 *IDirectDrawSurface, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttachedSurface dispatches through IDirectDrawSurface's vtable slot 12.
-func (self *IDirectDrawSurface) GetAttachedSurface(param0 *DDSCAPS, param1 **IDirectDrawSurface) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetAttachedSurface(param0 *DDSCAPS, param1 **IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBltStatus dispatches through IDirectDrawSurface's vtable slot 13.
-func (self *IDirectDrawSurface) GetBltStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetBltStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDrawSurface's vtable slot 14.
-func (self *IDirectDrawSurface) GetCaps(param0 *DDSCAPS) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetCaps(param0 *DDSCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipper dispatches through IDirectDrawSurface's vtable slot 15.
-func (self *IDirectDrawSurface) GetClipper(param0 **IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetClipper(param0 **IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColorKey dispatches through IDirectDrawSurface's vtable slot 16.
-func (self *IDirectDrawSurface) GetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDC dispatches through IDirectDrawSurface's vtable slot 17.
-func (self *IDirectDrawSurface) GetDC(param0 *graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetDC(param0 *graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlipStatus dispatches through IDirectDrawSurface's vtable slot 18.
-func (self *IDirectDrawSurface) GetFlipStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetFlipStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOverlayPosition dispatches through IDirectDrawSurface's vtable slot 19.
-func (self *IDirectDrawSurface) GetOverlayPosition(param0 *int32, param1 *int32) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetOverlayPosition(param0 *int32, param1 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPalette dispatches through IDirectDrawSurface's vtable slot 20.
-func (self *IDirectDrawSurface) GetPalette(param0 **IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetPalette(param0 **IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelFormat dispatches through IDirectDrawSurface's vtable slot 21.
-func (self *IDirectDrawSurface) GetPixelFormat(param0 *DDPIXELFORMAT) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetPixelFormat(param0 *DDPIXELFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSurfaceDesc dispatches through IDirectDrawSurface's vtable slot 22.
-func (self *IDirectDrawSurface) GetSurfaceDesc(param0 *DDSURFACEDESC) foundation.HRESULT {
+func (self *IDirectDrawSurface) GetSurfaceDesc(param0 *DDSURFACEDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDrawSurface's vtable slot 23.
-func (self *IDirectDrawSurface) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC) foundation.HRESULT {
+func (self *IDirectDrawSurface) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsLost dispatches through IDirectDrawSurface's vtable slot 24.
-func (self *IDirectDrawSurface) IsLost() foundation.HRESULT {
+func (self *IDirectDrawSurface) IsLost() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Lock dispatches through IDirectDrawSurface's vtable slot 25.
-func (self *IDirectDrawSurface) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC, param2 uint32, param3 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDrawSurface) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC, param2 uint32, param3 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseDC dispatches through IDirectDrawSurface's vtable slot 26.
-func (self *IDirectDrawSurface) ReleaseDC(param0 graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface) ReleaseDC(param0 graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Restore dispatches through IDirectDrawSurface's vtable slot 27.
-func (self *IDirectDrawSurface) Restore() foundation.HRESULT {
+func (self *IDirectDrawSurface) Restore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClipper dispatches through IDirectDrawSurface's vtable slot 28.
-func (self *IDirectDrawSurface) SetClipper(param0 *IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface) SetClipper(param0 *IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorKey dispatches through IDirectDrawSurface's vtable slot 29.
-func (self *IDirectDrawSurface) SetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface) SetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOverlayPosition dispatches through IDirectDrawSurface's vtable slot 30.
-func (self *IDirectDrawSurface) SetOverlayPosition(param0 int32, param1 int32) foundation.HRESULT {
+func (self *IDirectDrawSurface) SetOverlayPosition(param0 int32, param1 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPalette dispatches through IDirectDrawSurface's vtable slot 31.
-func (self *IDirectDrawSurface) SetPalette(param0 *IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface) SetPalette(param0 *IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IDirectDrawSurface's vtable slot 32.
-func (self *IDirectDrawSurface) Unlock(param0 unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectDrawSurface) Unlock(param0 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlay dispatches through IDirectDrawSurface's vtable slot 33.
-func (self *IDirectDrawSurface) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) foundation.HRESULT {
+func (self *IDirectDrawSurface) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayDisplay dispatches through IDirectDrawSurface's vtable slot 34.
-func (self *IDirectDrawSurface) UpdateOverlayDisplay(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface) UpdateOverlayDisplay(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayZOrder dispatches through IDirectDrawSurface's vtable slot 35.
-func (self *IDirectDrawSurface) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface) foundation.HRESULT {
+func (self *IDirectDrawSurface) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 57805885-6eec-11cf-9441-a82303c10e27
@@ -999,219 +999,219 @@ type IDirectDrawSurface2 struct {
 var IID_IDirectDrawSurface2 = win32.GUID{Data1: 0x57805885, Data2: 0x6eec, Data3: 0x11cf, Data4: [8]byte{0x94, 0x41, 0xa8, 0x23, 0x03, 0xc1, 0x0e, 0x27}}
 
 // AddAttachedSurface dispatches through IDirectDrawSurface2's vtable slot 3.
-func (self *IDirectDrawSurface2) AddAttachedSurface(param0 *IDirectDrawSurface2) foundation.HRESULT {
+func (self *IDirectDrawSurface2) AddAttachedSurface(param0 *IDirectDrawSurface2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddOverlayDirtyRect dispatches through IDirectDrawSurface2's vtable slot 4.
-func (self *IDirectDrawSurface2) AddOverlayDirtyRect(param0 *foundation.RECT) foundation.HRESULT {
+func (self *IDirectDrawSurface2) AddOverlayDirtyRect(param0 *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Blt dispatches through IDirectDrawSurface2's vtable slot 5.
-func (self *IDirectDrawSurface2) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface2, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) foundation.HRESULT {
+func (self *IDirectDrawSurface2) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface2, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltBatch dispatches through IDirectDrawSurface2's vtable slot 6.
-func (self *IDirectDrawSurface2) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltFast dispatches through IDirectDrawSurface2's vtable slot 7.
-func (self *IDirectDrawSurface2) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface2, param3 *foundation.RECT, param4 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface2, param3 *foundation.RECT, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAttachedSurface dispatches through IDirectDrawSurface2's vtable slot 8.
-func (self *IDirectDrawSurface2) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface2) foundation.HRESULT {
+func (self *IDirectDrawSurface2) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumAttachedSurfaces dispatches through IDirectDrawSurface2's vtable slot 9.
-func (self *IDirectDrawSurface2) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK) foundation.HRESULT {
+func (self *IDirectDrawSurface2) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumOverlayZOrders dispatches through IDirectDrawSurface2's vtable slot 10.
-func (self *IDirectDrawSurface2) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK) foundation.HRESULT {
+func (self *IDirectDrawSurface2) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flip dispatches through IDirectDrawSurface2's vtable slot 11.
-func (self *IDirectDrawSurface2) Flip(param0 *IDirectDrawSurface2, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) Flip(param0 *IDirectDrawSurface2, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttachedSurface dispatches through IDirectDrawSurface2's vtable slot 12.
-func (self *IDirectDrawSurface2) GetAttachedSurface(param0 *DDSCAPS, param1 **IDirectDrawSurface2) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetAttachedSurface(param0 *DDSCAPS, param1 **IDirectDrawSurface2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBltStatus dispatches through IDirectDrawSurface2's vtable slot 13.
-func (self *IDirectDrawSurface2) GetBltStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetBltStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDrawSurface2's vtable slot 14.
-func (self *IDirectDrawSurface2) GetCaps(param0 *DDSCAPS) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetCaps(param0 *DDSCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipper dispatches through IDirectDrawSurface2's vtable slot 15.
-func (self *IDirectDrawSurface2) GetClipper(param0 **IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetClipper(param0 **IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColorKey dispatches through IDirectDrawSurface2's vtable slot 16.
-func (self *IDirectDrawSurface2) GetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDC dispatches through IDirectDrawSurface2's vtable slot 17.
-func (self *IDirectDrawSurface2) GetDC(param0 *graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetDC(param0 *graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlipStatus dispatches through IDirectDrawSurface2's vtable slot 18.
-func (self *IDirectDrawSurface2) GetFlipStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetFlipStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOverlayPosition dispatches through IDirectDrawSurface2's vtable slot 19.
-func (self *IDirectDrawSurface2) GetOverlayPosition(param0 *int32, param1 *int32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetOverlayPosition(param0 *int32, param1 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPalette dispatches through IDirectDrawSurface2's vtable slot 20.
-func (self *IDirectDrawSurface2) GetPalette(param0 **IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetPalette(param0 **IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelFormat dispatches through IDirectDrawSurface2's vtable slot 21.
-func (self *IDirectDrawSurface2) GetPixelFormat(param0 *DDPIXELFORMAT) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetPixelFormat(param0 *DDPIXELFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSurfaceDesc dispatches through IDirectDrawSurface2's vtable slot 22.
-func (self *IDirectDrawSurface2) GetSurfaceDesc(param0 *DDSURFACEDESC) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetSurfaceDesc(param0 *DDSURFACEDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDrawSurface2's vtable slot 23.
-func (self *IDirectDrawSurface2) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC) foundation.HRESULT {
+func (self *IDirectDrawSurface2) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsLost dispatches through IDirectDrawSurface2's vtable slot 24.
-func (self *IDirectDrawSurface2) IsLost() foundation.HRESULT {
+func (self *IDirectDrawSurface2) IsLost() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Lock dispatches through IDirectDrawSurface2's vtable slot 25.
-func (self *IDirectDrawSurface2) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC, param2 uint32, param3 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDrawSurface2) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC, param2 uint32, param3 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseDC dispatches through IDirectDrawSurface2's vtable slot 26.
-func (self *IDirectDrawSurface2) ReleaseDC(param0 graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface2) ReleaseDC(param0 graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Restore dispatches through IDirectDrawSurface2's vtable slot 27.
-func (self *IDirectDrawSurface2) Restore() foundation.HRESULT {
+func (self *IDirectDrawSurface2) Restore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClipper dispatches through IDirectDrawSurface2's vtable slot 28.
-func (self *IDirectDrawSurface2) SetClipper(param0 *IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface2) SetClipper(param0 *IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorKey dispatches through IDirectDrawSurface2's vtable slot 29.
-func (self *IDirectDrawSurface2) SetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface2) SetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOverlayPosition dispatches through IDirectDrawSurface2's vtable slot 30.
-func (self *IDirectDrawSurface2) SetOverlayPosition(param0 int32, param1 int32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) SetOverlayPosition(param0 int32, param1 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPalette dispatches through IDirectDrawSurface2's vtable slot 31.
-func (self *IDirectDrawSurface2) SetPalette(param0 *IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface2) SetPalette(param0 *IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IDirectDrawSurface2's vtable slot 32.
-func (self *IDirectDrawSurface2) Unlock(param0 unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectDrawSurface2) Unlock(param0 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlay dispatches through IDirectDrawSurface2's vtable slot 33.
-func (self *IDirectDrawSurface2) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface2, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) foundation.HRESULT {
+func (self *IDirectDrawSurface2) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface2, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayDisplay dispatches through IDirectDrawSurface2's vtable slot 34.
-func (self *IDirectDrawSurface2) UpdateOverlayDisplay(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) UpdateOverlayDisplay(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayZOrder dispatches through IDirectDrawSurface2's vtable slot 35.
-func (self *IDirectDrawSurface2) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface2) foundation.HRESULT {
+func (self *IDirectDrawSurface2) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDDInterface dispatches through IDirectDrawSurface2's vtable slot 36.
-func (self *IDirectDrawSurface2) GetDDInterface(param0 *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectDrawSurface2) GetDDInterface(param0 *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PageLock dispatches through IDirectDrawSurface2's vtable slot 37.
-func (self *IDirectDrawSurface2) PageLock(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) PageLock(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PageUnlock dispatches through IDirectDrawSurface2's vtable slot 38.
-func (self *IDirectDrawSurface2) PageUnlock(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface2) PageUnlock(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: da044e00-69b2-11d0-a1d5-00aa00b8dfbb
@@ -1223,225 +1223,225 @@ type IDirectDrawSurface3 struct {
 var IID_IDirectDrawSurface3 = win32.GUID{Data1: 0xda044e00, Data2: 0x69b2, Data3: 0x11d0, Data4: [8]byte{0xa1, 0xd5, 0x00, 0xaa, 0x00, 0xb8, 0xdf, 0xbb}}
 
 // AddAttachedSurface dispatches through IDirectDrawSurface3's vtable slot 3.
-func (self *IDirectDrawSurface3) AddAttachedSurface(param0 *IDirectDrawSurface3) foundation.HRESULT {
+func (self *IDirectDrawSurface3) AddAttachedSurface(param0 *IDirectDrawSurface3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddOverlayDirtyRect dispatches through IDirectDrawSurface3's vtable slot 4.
-func (self *IDirectDrawSurface3) AddOverlayDirtyRect(param0 *foundation.RECT) foundation.HRESULT {
+func (self *IDirectDrawSurface3) AddOverlayDirtyRect(param0 *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Blt dispatches through IDirectDrawSurface3's vtable slot 5.
-func (self *IDirectDrawSurface3) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface3, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) foundation.HRESULT {
+func (self *IDirectDrawSurface3) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface3, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltBatch dispatches through IDirectDrawSurface3's vtable slot 6.
-func (self *IDirectDrawSurface3) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltFast dispatches through IDirectDrawSurface3's vtable slot 7.
-func (self *IDirectDrawSurface3) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface3, param3 *foundation.RECT, param4 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface3, param3 *foundation.RECT, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAttachedSurface dispatches through IDirectDrawSurface3's vtable slot 8.
-func (self *IDirectDrawSurface3) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface3) foundation.HRESULT {
+func (self *IDirectDrawSurface3) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumAttachedSurfaces dispatches through IDirectDrawSurface3's vtable slot 9.
-func (self *IDirectDrawSurface3) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK) foundation.HRESULT {
+func (self *IDirectDrawSurface3) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumOverlayZOrders dispatches through IDirectDrawSurface3's vtable slot 10.
-func (self *IDirectDrawSurface3) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK) foundation.HRESULT {
+func (self *IDirectDrawSurface3) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flip dispatches through IDirectDrawSurface3's vtable slot 11.
-func (self *IDirectDrawSurface3) Flip(param0 *IDirectDrawSurface3, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) Flip(param0 *IDirectDrawSurface3, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttachedSurface dispatches through IDirectDrawSurface3's vtable slot 12.
-func (self *IDirectDrawSurface3) GetAttachedSurface(param0 *DDSCAPS, param1 **IDirectDrawSurface3) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetAttachedSurface(param0 *DDSCAPS, param1 **IDirectDrawSurface3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBltStatus dispatches through IDirectDrawSurface3's vtable slot 13.
-func (self *IDirectDrawSurface3) GetBltStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetBltStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDrawSurface3's vtable slot 14.
-func (self *IDirectDrawSurface3) GetCaps(param0 *DDSCAPS) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetCaps(param0 *DDSCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipper dispatches through IDirectDrawSurface3's vtable slot 15.
-func (self *IDirectDrawSurface3) GetClipper(param0 **IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetClipper(param0 **IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColorKey dispatches through IDirectDrawSurface3's vtable slot 16.
-func (self *IDirectDrawSurface3) GetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDC dispatches through IDirectDrawSurface3's vtable slot 17.
-func (self *IDirectDrawSurface3) GetDC(param0 *graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetDC(param0 *graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlipStatus dispatches through IDirectDrawSurface3's vtable slot 18.
-func (self *IDirectDrawSurface3) GetFlipStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetFlipStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOverlayPosition dispatches through IDirectDrawSurface3's vtable slot 19.
-func (self *IDirectDrawSurface3) GetOverlayPosition(param0 *int32, param1 *int32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetOverlayPosition(param0 *int32, param1 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPalette dispatches through IDirectDrawSurface3's vtable slot 20.
-func (self *IDirectDrawSurface3) GetPalette(param0 **IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetPalette(param0 **IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelFormat dispatches through IDirectDrawSurface3's vtable slot 21.
-func (self *IDirectDrawSurface3) GetPixelFormat(param0 *DDPIXELFORMAT) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetPixelFormat(param0 *DDPIXELFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSurfaceDesc dispatches through IDirectDrawSurface3's vtable slot 22.
-func (self *IDirectDrawSurface3) GetSurfaceDesc(param0 *DDSURFACEDESC) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetSurfaceDesc(param0 *DDSURFACEDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDrawSurface3's vtable slot 23.
-func (self *IDirectDrawSurface3) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC) foundation.HRESULT {
+func (self *IDirectDrawSurface3) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsLost dispatches through IDirectDrawSurface3's vtable slot 24.
-func (self *IDirectDrawSurface3) IsLost() foundation.HRESULT {
+func (self *IDirectDrawSurface3) IsLost() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Lock dispatches through IDirectDrawSurface3's vtable slot 25.
-func (self *IDirectDrawSurface3) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC, param2 uint32, param3 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDrawSurface3) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC, param2 uint32, param3 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseDC dispatches through IDirectDrawSurface3's vtable slot 26.
-func (self *IDirectDrawSurface3) ReleaseDC(param0 graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface3) ReleaseDC(param0 graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Restore dispatches through IDirectDrawSurface3's vtable slot 27.
-func (self *IDirectDrawSurface3) Restore() foundation.HRESULT {
+func (self *IDirectDrawSurface3) Restore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClipper dispatches through IDirectDrawSurface3's vtable slot 28.
-func (self *IDirectDrawSurface3) SetClipper(param0 *IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface3) SetClipper(param0 *IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorKey dispatches through IDirectDrawSurface3's vtable slot 29.
-func (self *IDirectDrawSurface3) SetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface3) SetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOverlayPosition dispatches through IDirectDrawSurface3's vtable slot 30.
-func (self *IDirectDrawSurface3) SetOverlayPosition(param0 int32, param1 int32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) SetOverlayPosition(param0 int32, param1 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPalette dispatches through IDirectDrawSurface3's vtable slot 31.
-func (self *IDirectDrawSurface3) SetPalette(param0 *IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface3) SetPalette(param0 *IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IDirectDrawSurface3's vtable slot 32.
-func (self *IDirectDrawSurface3) Unlock(param0 unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectDrawSurface3) Unlock(param0 unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlay dispatches through IDirectDrawSurface3's vtable slot 33.
-func (self *IDirectDrawSurface3) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface3, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) foundation.HRESULT {
+func (self *IDirectDrawSurface3) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface3, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayDisplay dispatches through IDirectDrawSurface3's vtable slot 34.
-func (self *IDirectDrawSurface3) UpdateOverlayDisplay(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) UpdateOverlayDisplay(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayZOrder dispatches through IDirectDrawSurface3's vtable slot 35.
-func (self *IDirectDrawSurface3) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface3) foundation.HRESULT {
+func (self *IDirectDrawSurface3) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDDInterface dispatches through IDirectDrawSurface3's vtable slot 36.
-func (self *IDirectDrawSurface3) GetDDInterface(param0 *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectDrawSurface3) GetDDInterface(param0 *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PageLock dispatches through IDirectDrawSurface3's vtable slot 37.
-func (self *IDirectDrawSurface3) PageLock(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) PageLock(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PageUnlock dispatches through IDirectDrawSurface3's vtable slot 38.
-func (self *IDirectDrawSurface3) PageUnlock(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) PageUnlock(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSurfaceDesc dispatches through IDirectDrawSurface3's vtable slot 39.
-func (self *IDirectDrawSurface3) SetSurfaceDesc(param0 *DDSURFACEDESC, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface3) SetSurfaceDesc(param0 *DDSURFACEDESC, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0b2b8630-ad35-11d0-8ea6-00609797ea5b
@@ -1453,255 +1453,255 @@ type IDirectDrawSurface4 struct {
 var IID_IDirectDrawSurface4 = win32.GUID{Data1: 0x0b2b8630, Data2: 0xad35, Data3: 0x11d0, Data4: [8]byte{0x8e, 0xa6, 0x00, 0x60, 0x97, 0x97, 0xea, 0x5b}}
 
 // AddAttachedSurface dispatches through IDirectDrawSurface4's vtable slot 3.
-func (self *IDirectDrawSurface4) AddAttachedSurface(param0 *IDirectDrawSurface4) foundation.HRESULT {
+func (self *IDirectDrawSurface4) AddAttachedSurface(param0 *IDirectDrawSurface4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddOverlayDirtyRect dispatches through IDirectDrawSurface4's vtable slot 4.
-func (self *IDirectDrawSurface4) AddOverlayDirtyRect(param0 *foundation.RECT) foundation.HRESULT {
+func (self *IDirectDrawSurface4) AddOverlayDirtyRect(param0 *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Blt dispatches through IDirectDrawSurface4's vtable slot 5.
-func (self *IDirectDrawSurface4) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface4, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) foundation.HRESULT {
+func (self *IDirectDrawSurface4) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface4, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltBatch dispatches through IDirectDrawSurface4's vtable slot 6.
-func (self *IDirectDrawSurface4) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltFast dispatches through IDirectDrawSurface4's vtable slot 7.
-func (self *IDirectDrawSurface4) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface4, param3 *foundation.RECT, param4 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface4, param3 *foundation.RECT, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAttachedSurface dispatches through IDirectDrawSurface4's vtable slot 8.
-func (self *IDirectDrawSurface4) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface4) foundation.HRESULT {
+func (self *IDirectDrawSurface4) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumAttachedSurfaces dispatches through IDirectDrawSurface4's vtable slot 9.
-func (self *IDirectDrawSurface4) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK2) foundation.HRESULT {
+func (self *IDirectDrawSurface4) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumOverlayZOrders dispatches through IDirectDrawSurface4's vtable slot 10.
-func (self *IDirectDrawSurface4) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK2) foundation.HRESULT {
+func (self *IDirectDrawSurface4) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flip dispatches through IDirectDrawSurface4's vtable slot 11.
-func (self *IDirectDrawSurface4) Flip(param0 *IDirectDrawSurface4, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) Flip(param0 *IDirectDrawSurface4, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttachedSurface dispatches through IDirectDrawSurface4's vtable slot 12.
-func (self *IDirectDrawSurface4) GetAttachedSurface(param0 *DDSCAPS2, param1 **IDirectDrawSurface4) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetAttachedSurface(param0 *DDSCAPS2, param1 **IDirectDrawSurface4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBltStatus dispatches through IDirectDrawSurface4's vtable slot 13.
-func (self *IDirectDrawSurface4) GetBltStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetBltStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDrawSurface4's vtable slot 14.
-func (self *IDirectDrawSurface4) GetCaps(param0 *DDSCAPS2) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetCaps(param0 *DDSCAPS2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipper dispatches through IDirectDrawSurface4's vtable slot 15.
-func (self *IDirectDrawSurface4) GetClipper(param0 **IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetClipper(param0 **IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColorKey dispatches through IDirectDrawSurface4's vtable slot 16.
-func (self *IDirectDrawSurface4) GetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDC dispatches through IDirectDrawSurface4's vtable slot 17.
-func (self *IDirectDrawSurface4) GetDC(param0 *graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetDC(param0 *graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlipStatus dispatches through IDirectDrawSurface4's vtable slot 18.
-func (self *IDirectDrawSurface4) GetFlipStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetFlipStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOverlayPosition dispatches through IDirectDrawSurface4's vtable slot 19.
-func (self *IDirectDrawSurface4) GetOverlayPosition(param0 *int32, param1 *int32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetOverlayPosition(param0 *int32, param1 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPalette dispatches through IDirectDrawSurface4's vtable slot 20.
-func (self *IDirectDrawSurface4) GetPalette(param0 **IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetPalette(param0 **IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelFormat dispatches through IDirectDrawSurface4's vtable slot 21.
-func (self *IDirectDrawSurface4) GetPixelFormat(param0 *DDPIXELFORMAT) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetPixelFormat(param0 *DDPIXELFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSurfaceDesc dispatches through IDirectDrawSurface4's vtable slot 22.
-func (self *IDirectDrawSurface4) GetSurfaceDesc(param0 *DDSURFACEDESC2) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetSurfaceDesc(param0 *DDSURFACEDESC2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDrawSurface4's vtable slot 23.
-func (self *IDirectDrawSurface4) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC2) foundation.HRESULT {
+func (self *IDirectDrawSurface4) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsLost dispatches through IDirectDrawSurface4's vtable slot 24.
-func (self *IDirectDrawSurface4) IsLost() foundation.HRESULT {
+func (self *IDirectDrawSurface4) IsLost() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Lock dispatches through IDirectDrawSurface4's vtable slot 25.
-func (self *IDirectDrawSurface4) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC2, param2 uint32, param3 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDrawSurface4) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC2, param2 uint32, param3 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseDC dispatches through IDirectDrawSurface4's vtable slot 26.
-func (self *IDirectDrawSurface4) ReleaseDC(param0 graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface4) ReleaseDC(param0 graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Restore dispatches through IDirectDrawSurface4's vtable slot 27.
-func (self *IDirectDrawSurface4) Restore() foundation.HRESULT {
+func (self *IDirectDrawSurface4) Restore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClipper dispatches through IDirectDrawSurface4's vtable slot 28.
-func (self *IDirectDrawSurface4) SetClipper(param0 *IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface4) SetClipper(param0 *IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorKey dispatches through IDirectDrawSurface4's vtable slot 29.
-func (self *IDirectDrawSurface4) SetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface4) SetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOverlayPosition dispatches through IDirectDrawSurface4's vtable slot 30.
-func (self *IDirectDrawSurface4) SetOverlayPosition(param0 int32, param1 int32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) SetOverlayPosition(param0 int32, param1 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPalette dispatches through IDirectDrawSurface4's vtable slot 31.
-func (self *IDirectDrawSurface4) SetPalette(param0 *IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface4) SetPalette(param0 *IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IDirectDrawSurface4's vtable slot 32.
-func (self *IDirectDrawSurface4) Unlock(param0 *foundation.RECT) foundation.HRESULT {
+func (self *IDirectDrawSurface4) Unlock(param0 *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlay dispatches through IDirectDrawSurface4's vtable slot 33.
-func (self *IDirectDrawSurface4) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface4, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) foundation.HRESULT {
+func (self *IDirectDrawSurface4) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface4, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayDisplay dispatches through IDirectDrawSurface4's vtable slot 34.
-func (self *IDirectDrawSurface4) UpdateOverlayDisplay(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) UpdateOverlayDisplay(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayZOrder dispatches through IDirectDrawSurface4's vtable slot 35.
-func (self *IDirectDrawSurface4) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface4) foundation.HRESULT {
+func (self *IDirectDrawSurface4) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDDInterface dispatches through IDirectDrawSurface4's vtable slot 36.
-func (self *IDirectDrawSurface4) GetDDInterface(param0 *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetDDInterface(param0 *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PageLock dispatches through IDirectDrawSurface4's vtable slot 37.
-func (self *IDirectDrawSurface4) PageLock(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) PageLock(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PageUnlock dispatches through IDirectDrawSurface4's vtable slot 38.
-func (self *IDirectDrawSurface4) PageUnlock(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) PageUnlock(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSurfaceDesc dispatches through IDirectDrawSurface4's vtable slot 39.
-func (self *IDirectDrawSurface4) SetSurfaceDesc(param0 *DDSURFACEDESC2, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) SetSurfaceDesc(param0 *DDSURFACEDESC2, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPrivateData dispatches through IDirectDrawSurface4's vtable slot 40.
-func (self *IDirectDrawSurface4) SetPrivateData(param0 *win32.GUID, param1 unsafe.Pointer, param2 uint32, param3 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) SetPrivateData(param0 *win32.GUID, param1 unsafe.Pointer, param2 uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrivateData dispatches through IDirectDrawSurface4's vtable slot 41.
-func (self *IDirectDrawSurface4) GetPrivateData(param0 *win32.GUID, param1 unsafe.Pointer, param2 *uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetPrivateData(param0 *win32.GUID, param1 unsafe.Pointer, param2 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreePrivateData dispatches through IDirectDrawSurface4's vtable slot 42.
-func (self *IDirectDrawSurface4) FreePrivateData(param0 *win32.GUID) foundation.HRESULT {
+func (self *IDirectDrawSurface4) FreePrivateData(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUniquenessValue dispatches through IDirectDrawSurface4's vtable slot 43.
-func (self *IDirectDrawSurface4) GetUniquenessValue(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface4) GetUniquenessValue(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeUniquenessValue dispatches through IDirectDrawSurface4's vtable slot 44.
-func (self *IDirectDrawSurface4) ChangeUniquenessValue() foundation.HRESULT {
+func (self *IDirectDrawSurface4) ChangeUniquenessValue() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectDrawSurface7: https://learn.microsoft.com/windows/win32/api/ddraw/nn-ddraw-idirectdrawsurface7
@@ -1714,279 +1714,279 @@ type IDirectDrawSurface7 struct {
 var IID_IDirectDrawSurface7 = win32.GUID{Data1: 0x06675a80, Data2: 0x3b9b, Data3: 0x11d2, Data4: [8]byte{0xb9, 0x2f, 0x00, 0x60, 0x97, 0x97, 0xea, 0x5b}}
 
 // AddAttachedSurface dispatches through IDirectDrawSurface7's vtable slot 3.
-func (self *IDirectDrawSurface7) AddAttachedSurface(param0 *IDirectDrawSurface7) foundation.HRESULT {
+func (self *IDirectDrawSurface7) AddAttachedSurface(param0 *IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddOverlayDirtyRect dispatches through IDirectDrawSurface7's vtable slot 4.
-func (self *IDirectDrawSurface7) AddOverlayDirtyRect(param0 *foundation.RECT) foundation.HRESULT {
+func (self *IDirectDrawSurface7) AddOverlayDirtyRect(param0 *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Blt dispatches through IDirectDrawSurface7's vtable slot 5.
-func (self *IDirectDrawSurface7) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface7, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) foundation.HRESULT {
+func (self *IDirectDrawSurface7) Blt(param0 *foundation.RECT, param1 *IDirectDrawSurface7, param2 *foundation.RECT, param3 uint32, param4 *DDBLTFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltBatch dispatches through IDirectDrawSurface7's vtable slot 6.
-func (self *IDirectDrawSurface7) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) BltBatch(param0 *DDBLTBATCH, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BltFast dispatches through IDirectDrawSurface7's vtable slot 7.
-func (self *IDirectDrawSurface7) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface7, param3 *foundation.RECT, param4 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) BltFast(param0 uint32, param1 uint32, param2 *IDirectDrawSurface7, param3 *foundation.RECT, param4 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAttachedSurface dispatches through IDirectDrawSurface7's vtable slot 8.
-func (self *IDirectDrawSurface7) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface7) foundation.HRESULT {
+func (self *IDirectDrawSurface7) DeleteAttachedSurface(param0 uint32, param1 *IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumAttachedSurfaces dispatches through IDirectDrawSurface7's vtable slot 9.
-func (self *IDirectDrawSurface7) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK7) foundation.HRESULT {
+func (self *IDirectDrawSurface7) EnumAttachedSurfaces(param0 unsafe.Pointer, param1 LPDDENUMSURFACESCALLBACK7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumOverlayZOrders dispatches through IDirectDrawSurface7's vtable slot 10.
-func (self *IDirectDrawSurface7) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK7) foundation.HRESULT {
+func (self *IDirectDrawSurface7) EnumOverlayZOrders(param0 uint32, param1 unsafe.Pointer, param2 LPDDENUMSURFACESCALLBACK7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flip dispatches through IDirectDrawSurface7's vtable slot 11.
-func (self *IDirectDrawSurface7) Flip(param0 *IDirectDrawSurface7, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) Flip(param0 *IDirectDrawSurface7, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttachedSurface dispatches through IDirectDrawSurface7's vtable slot 12.
-func (self *IDirectDrawSurface7) GetAttachedSurface(param0 *DDSCAPS2, param1 **IDirectDrawSurface7) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetAttachedSurface(param0 *DDSCAPS2, param1 **IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBltStatus dispatches through IDirectDrawSurface7's vtable slot 13.
-func (self *IDirectDrawSurface7) GetBltStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetBltStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectDrawSurface7's vtable slot 14.
-func (self *IDirectDrawSurface7) GetCaps(param0 *DDSCAPS2) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetCaps(param0 *DDSCAPS2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipper dispatches through IDirectDrawSurface7's vtable slot 15.
-func (self *IDirectDrawSurface7) GetClipper(param0 **IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetClipper(param0 **IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColorKey dispatches through IDirectDrawSurface7's vtable slot 16.
-func (self *IDirectDrawSurface7) GetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDC dispatches through IDirectDrawSurface7's vtable slot 17.
-func (self *IDirectDrawSurface7) GetDC(param0 *graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetDC(param0 *graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlipStatus dispatches through IDirectDrawSurface7's vtable slot 18.
-func (self *IDirectDrawSurface7) GetFlipStatus(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetFlipStatus(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOverlayPosition dispatches through IDirectDrawSurface7's vtable slot 19.
-func (self *IDirectDrawSurface7) GetOverlayPosition(param0 *int32, param1 *int32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetOverlayPosition(param0 *int32, param1 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPalette dispatches through IDirectDrawSurface7's vtable slot 20.
-func (self *IDirectDrawSurface7) GetPalette(param0 **IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetPalette(param0 **IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelFormat dispatches through IDirectDrawSurface7's vtable slot 21.
-func (self *IDirectDrawSurface7) GetPixelFormat(param0 *DDPIXELFORMAT) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetPixelFormat(param0 *DDPIXELFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSurfaceDesc dispatches through IDirectDrawSurface7's vtable slot 22.
-func (self *IDirectDrawSurface7) GetSurfaceDesc(param0 *DDSURFACEDESC2) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetSurfaceDesc(param0 *DDSURFACEDESC2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectDrawSurface7's vtable slot 23.
-func (self *IDirectDrawSurface7) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC2) foundation.HRESULT {
+func (self *IDirectDrawSurface7) Initialize(param0 *IDirectDraw, param1 *DDSURFACEDESC2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsLost dispatches through IDirectDrawSurface7's vtable slot 24.
-func (self *IDirectDrawSurface7) IsLost() foundation.HRESULT {
+func (self *IDirectDrawSurface7) IsLost() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Lock dispatches through IDirectDrawSurface7's vtable slot 25.
-func (self *IDirectDrawSurface7) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC2, param2 uint32, param3 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDrawSurface7) Lock(param0 *foundation.RECT, param1 *DDSURFACEDESC2, param2 uint32, param3 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseDC dispatches through IDirectDrawSurface7's vtable slot 26.
-func (self *IDirectDrawSurface7) ReleaseDC(param0 graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirectDrawSurface7) ReleaseDC(param0 graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Restore dispatches through IDirectDrawSurface7's vtable slot 27.
-func (self *IDirectDrawSurface7) Restore() foundation.HRESULT {
+func (self *IDirectDrawSurface7) Restore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClipper dispatches through IDirectDrawSurface7's vtable slot 28.
-func (self *IDirectDrawSurface7) SetClipper(param0 *IDirectDrawClipper) foundation.HRESULT {
+func (self *IDirectDrawSurface7) SetClipper(param0 *IDirectDrawClipper) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorKey dispatches through IDirectDrawSurface7's vtable slot 29.
-func (self *IDirectDrawSurface7) SetColorKey(param0 uint32, param1 *DDCOLORKEY) foundation.HRESULT {
+func (self *IDirectDrawSurface7) SetColorKey(param0 uint32, param1 *DDCOLORKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOverlayPosition dispatches through IDirectDrawSurface7's vtable slot 30.
-func (self *IDirectDrawSurface7) SetOverlayPosition(param0 int32, param1 int32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) SetOverlayPosition(param0 int32, param1 int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPalette dispatches through IDirectDrawSurface7's vtable slot 31.
-func (self *IDirectDrawSurface7) SetPalette(param0 *IDirectDrawPalette) foundation.HRESULT {
+func (self *IDirectDrawSurface7) SetPalette(param0 *IDirectDrawPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IDirectDrawSurface7's vtable slot 32.
-func (self *IDirectDrawSurface7) Unlock(param0 *foundation.RECT) foundation.HRESULT {
+func (self *IDirectDrawSurface7) Unlock(param0 *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlay dispatches through IDirectDrawSurface7's vtable slot 33.
-func (self *IDirectDrawSurface7) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface7, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) foundation.HRESULT {
+func (self *IDirectDrawSurface7) UpdateOverlay(param0 *foundation.RECT, param1 *IDirectDrawSurface7, param2 *foundation.RECT, param3 uint32, param4 *DDOVERLAYFX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayDisplay dispatches through IDirectDrawSurface7's vtable slot 34.
-func (self *IDirectDrawSurface7) UpdateOverlayDisplay(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) UpdateOverlayDisplay(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOverlayZOrder dispatches through IDirectDrawSurface7's vtable slot 35.
-func (self *IDirectDrawSurface7) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface7) foundation.HRESULT {
+func (self *IDirectDrawSurface7) UpdateOverlayZOrder(param0 uint32, param1 *IDirectDrawSurface7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDDInterface dispatches through IDirectDrawSurface7's vtable slot 36.
-func (self *IDirectDrawSurface7) GetDDInterface(param0 *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetDDInterface(param0 *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PageLock dispatches through IDirectDrawSurface7's vtable slot 37.
-func (self *IDirectDrawSurface7) PageLock(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) PageLock(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PageUnlock dispatches through IDirectDrawSurface7's vtable slot 38.
-func (self *IDirectDrawSurface7) PageUnlock(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) PageUnlock(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSurfaceDesc dispatches through IDirectDrawSurface7's vtable slot 39.
-func (self *IDirectDrawSurface7) SetSurfaceDesc(param0 *DDSURFACEDESC2, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) SetSurfaceDesc(param0 *DDSURFACEDESC2, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPrivateData dispatches through IDirectDrawSurface7's vtable slot 40.
-func (self *IDirectDrawSurface7) SetPrivateData(param0 *win32.GUID, param1 unsafe.Pointer, param2 uint32, param3 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) SetPrivateData(param0 *win32.GUID, param1 unsafe.Pointer, param2 uint32, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrivateData dispatches through IDirectDrawSurface7's vtable slot 41.
-func (self *IDirectDrawSurface7) GetPrivateData(param0 *win32.GUID, param1 unsafe.Pointer, param2 *uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetPrivateData(param0 *win32.GUID, param1 unsafe.Pointer, param2 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreePrivateData dispatches through IDirectDrawSurface7's vtable slot 42.
-func (self *IDirectDrawSurface7) FreePrivateData(param0 *win32.GUID) foundation.HRESULT {
+func (self *IDirectDrawSurface7) FreePrivateData(param0 *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUniquenessValue dispatches through IDirectDrawSurface7's vtable slot 43.
-func (self *IDirectDrawSurface7) GetUniquenessValue(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetUniquenessValue(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeUniquenessValue dispatches through IDirectDrawSurface7's vtable slot 44.
-func (self *IDirectDrawSurface7) ChangeUniquenessValue() foundation.HRESULT {
+func (self *IDirectDrawSurface7) ChangeUniquenessValue() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPriority dispatches through IDirectDrawSurface7's vtable slot 45.
-func (self *IDirectDrawSurface7) SetPriority(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) SetPriority(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPriority dispatches through IDirectDrawSurface7's vtable slot 46.
-func (self *IDirectDrawSurface7) GetPriority(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetPriority(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLOD dispatches through IDirectDrawSurface7's vtable slot 47.
-func (self *IDirectDrawSurface7) SetLOD(param0 uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) SetLOD(param0 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLOD dispatches through IDirectDrawSurface7's vtable slot 48.
-func (self *IDirectDrawSurface7) GetLOD(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDrawSurface7) GetLOD(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectDrawSurfaceKernel: https://learn.microsoft.com/windows/win32/api/ddkernel/nn-ddkernel-idirectdrawsurfacekernel
@@ -1999,15 +1999,15 @@ type IDirectDrawSurfaceKernel struct {
 var IID_IDirectDrawSurfaceKernel = win32.GUID{Data1: 0x60755da0, Data2: 0x6a40, Data3: 0x11d0, Data4: [8]byte{0x9b, 0x06, 0x00, 0xa0, 0xc9, 0x03, 0xa3, 0xb8}}
 
 // GetKernelHandle dispatches through IDirectDrawSurfaceKernel's vtable slot 3.
-func (self *IDirectDrawSurfaceKernel) GetKernelHandle(param0 *uintptr) foundation.HRESULT {
+func (self *IDirectDrawSurfaceKernel) GetKernelHandle(param0 *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseKernelHandle dispatches through IDirectDrawSurfaceKernel's vtable slot 4.
-func (self *IDirectDrawSurfaceKernel) ReleaseKernelHandle() foundation.HRESULT {
+func (self *IDirectDrawSurfaceKernel) ReleaseKernelHandle() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b36d93e0-2b43-11cf-a2de-00aa00b93356
@@ -2019,87 +2019,87 @@ type IDirectDrawVideoPort struct {
 var IID_IDirectDrawVideoPort = win32.GUID{Data1: 0xb36d93e0, Data2: 0x2b43, Data3: 0x11cf, Data4: [8]byte{0xa2, 0xde, 0x00, 0xaa, 0x00, 0xb9, 0x33, 0x56}}
 
 // Flip dispatches through IDirectDrawVideoPort's vtable slot 3.
-func (self *IDirectDrawVideoPort) Flip(param0 *IDirectDrawSurface, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) Flip(param0 *IDirectDrawSurface, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBandwidthInfo dispatches through IDirectDrawVideoPort's vtable slot 4.
-func (self *IDirectDrawVideoPort) GetBandwidthInfo(param0 *DDPIXELFORMAT, param1 uint32, param2 uint32, param3 uint32, param4 *DDVIDEOPORTBANDWIDTH) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) GetBandwidthInfo(param0 *DDPIXELFORMAT, param1 uint32, param2 uint32, param3 uint32, param4 *DDVIDEOPORTBANDWIDTH) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColorControls dispatches through IDirectDrawVideoPort's vtable slot 5.
-func (self *IDirectDrawVideoPort) GetColorControls(param0 *DDCOLORCONTROL) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) GetColorControls(param0 *DDCOLORCONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputFormats dispatches through IDirectDrawVideoPort's vtable slot 6.
-func (self *IDirectDrawVideoPort) GetInputFormats(lpNumFormats *uint32, param1 *DDPIXELFORMAT, param2 uint32) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) GetInputFormats(lpNumFormats *uint32, param1 *DDPIXELFORMAT, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpNumFormats)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputFormats dispatches through IDirectDrawVideoPort's vtable slot 7.
-func (self *IDirectDrawVideoPort) GetOutputFormats(param0 *DDPIXELFORMAT, lpNumFormats *uint32, param2 *DDPIXELFORMAT, param3 uint32) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) GetOutputFormats(param0 *DDPIXELFORMAT, lpNumFormats *uint32, param2 *DDPIXELFORMAT, param3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(lpNumFormats)), uintptr(unsafe.Pointer(param2)), uintptr(param3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFieldPolarity dispatches through IDirectDrawVideoPort's vtable slot 8.
-func (self *IDirectDrawVideoPort) GetFieldPolarity(param0 *foundation.BOOL) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) GetFieldPolarity(param0 *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoLine dispatches through IDirectDrawVideoPort's vtable slot 9.
-func (self *IDirectDrawVideoPort) GetVideoLine(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) GetVideoLine(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoSignalStatus dispatches through IDirectDrawVideoPort's vtable slot 10.
-func (self *IDirectDrawVideoPort) GetVideoSignalStatus(param0 *uint32) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) GetVideoSignalStatus(param0 *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorControls dispatches through IDirectDrawVideoPort's vtable slot 11.
-func (self *IDirectDrawVideoPort) SetColorControls(param0 *DDCOLORCONTROL) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) SetColorControls(param0 *DDCOLORCONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTargetSurface dispatches through IDirectDrawVideoPort's vtable slot 12.
-func (self *IDirectDrawVideoPort) SetTargetSurface(param0 *IDirectDrawSurface, param1 uint32) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) SetTargetSurface(param0 *IDirectDrawSurface, param1 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartVideo dispatches through IDirectDrawVideoPort's vtable slot 13.
-func (self *IDirectDrawVideoPort) StartVideo(param0 *DDVIDEOPORTINFO) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) StartVideo(param0 *DDVIDEOPORTINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopVideo dispatches through IDirectDrawVideoPort's vtable slot 14.
-func (self *IDirectDrawVideoPort) StopVideo() foundation.HRESULT {
+func (self *IDirectDrawVideoPort) StopVideo() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateVideo dispatches through IDirectDrawVideoPort's vtable slot 15.
-func (self *IDirectDrawVideoPort) UpdateVideo(param0 *DDVIDEOPORTINFO) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) UpdateVideo(param0 *DDVIDEOPORTINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForSync dispatches through IDirectDrawVideoPort's vtable slot 16.
-func (self *IDirectDrawVideoPort) WaitForSync(param0 uint32, param1 uint32, param2 uint32) foundation.HRESULT {
+func (self *IDirectDrawVideoPort) WaitForSync(param0 uint32, param1 uint32, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(param1), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a655fb94-0589-4e57-b333-567a89468c88
@@ -2111,13 +2111,13 @@ type IDirectDrawVideoPortNotify struct {
 var IID_IDirectDrawVideoPortNotify = win32.GUID{Data1: 0xa655fb94, Data2: 0x0589, Data3: 0x4e57, Data4: [8]byte{0xb3, 0x33, 0x56, 0x7a, 0x89, 0x46, 0x8c, 0x88}}
 
 // AcquireNotification dispatches through IDirectDrawVideoPortNotify's vtable slot 3.
-func (self *IDirectDrawVideoPortNotify) AcquireNotification(param0 *foundation.HANDLE, param1 *DDVIDEOPORTNOTIFY) foundation.HRESULT {
+func (self *IDirectDrawVideoPortNotify) AcquireNotification(param0 *foundation.HANDLE, param1 *DDVIDEOPORTNOTIFY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseNotification dispatches through IDirectDrawVideoPortNotify's vtable slot 4.
-func (self *IDirectDrawVideoPortNotify) ReleaseNotification(param0 foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectDrawVideoPortNotify) ReleaseNotification(param0 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

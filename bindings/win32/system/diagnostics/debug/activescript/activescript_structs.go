@@ -55,8 +55,8 @@ type MachineDebugManager_DEBUG struct {
 type MachineDebugManager_RETAIL struct {
 }
 
-// PROFILER_HEAP_OBJECT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROFILER_HEAP_OBJECT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROFILER_HEAP_OBJECT_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -70,8 +70,8 @@ type PROFILER_HEAP_OBJECT struct {
 	OptionalInfoCount uint16
 }
 
-// PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -81,8 +81,8 @@ type PROFILER_HEAP_OBJECT_OPTIONAL_INFO struct {
 	Anonymous PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union
 }
 
-// PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union struct {
 	Data [1]uint64
 }

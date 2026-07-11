@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -27,33 +26,33 @@ var (
 )
 
 // CreateAudioReverb calls XAudio2_8!CreateAudioReverb.
-func CreateAudioReverb(ppApo **systemcom.IUnknown) foundation.HRESULT {
+func CreateAudioReverb(ppApo **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateAudioReverb.Addr(), uintptr(unsafe.Pointer(ppApo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAudioVolumeMeter calls XAudio2_8!CreateAudioVolumeMeter.
-func CreateAudioVolumeMeter(ppApo **systemcom.IUnknown) foundation.HRESULT {
+func CreateAudioVolumeMeter(ppApo **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateAudioVolumeMeter.Addr(), uintptr(unsafe.Pointer(ppApo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateFX calls XAudio2_8!CreateFX.
 // https://learn.microsoft.com/windows/win32/api/xapofx/nf-xapofx-createfx
-func CreateFX(clsid *win32.GUID, pEffect **systemcom.IUnknown, pInitDat unsafe.Pointer, InitDataByteSize uint32) foundation.HRESULT {
+func CreateFX(clsid *win32.GUID, pEffect **systemcom.IUnknown, pInitDat unsafe.Pointer, InitDataByteSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procCreateFX.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pEffect)), uintptr(unsafe.Pointer(pInitDat)), uintptr(InitDataByteSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateHrtfApo calls HrtfApo!CreateHrtfApo.
 // https://learn.microsoft.com/windows/win32/api/hrtfapoapi/nf-hrtfapoapi-createhrtfapo
-func CreateHrtfApo(init *HrtfApoInit, xApo **IXAPO) foundation.HRESULT {
+func CreateHrtfApo(init *HrtfApoInit, xApo **IXAPO) error {
 	r1, _, _ := syscall.SyscallN(procCreateHrtfApo.Addr(), uintptr(unsafe.Pointer(init)), uintptr(unsafe.Pointer(xApo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // XAudio2CreateWithVersionInfo calls XAudio2_8!XAudio2CreateWithVersionInfo.
-func XAudio2CreateWithVersionInfo(ppXAudio2 **IXAudio2, Flags uint32, XAudio2Processor uint32, ntddiVersion uint32) foundation.HRESULT {
+func XAudio2CreateWithVersionInfo(ppXAudio2 **IXAudio2, Flags uint32, XAudio2Processor uint32, ntddiVersion uint32) error {
 	r1, _, _ := syscall.SyscallN(procXAudio2CreateWithVersionInfo.Addr(), uintptr(unsafe.Pointer(ppXAudio2)), uintptr(Flags), uintptr(XAudio2Processor), uintptr(ntddiVersion))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -25,15 +25,15 @@ type IVssAdmin struct {
 var IID_IVssAdmin = win32.GUID{Data1: 0x77ed5996, Data2: 0x2f63, Data3: 0x11d3, Data4: [8]byte{0x8a, 0x39, 0x00, 0xc0, 0x4f, 0x72, 0xd8, 0xe3}}
 
 // QueryProviders dispatches through IVssAdmin's vtable slot 5.
-func (self *IVssAdmin) QueryProviders(ppEnum **IVssEnumObject) foundation.HRESULT {
+func (self *IVssAdmin) QueryProviders(ppEnum **IVssEnumObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AbortAllSnapshotsInProgress dispatches through IVssAdmin's vtable slot 6.
-func (self *IVssAdmin) AbortAllSnapshotsInProgress() foundation.HRESULT {
+func (self *IVssAdmin) AbortAllSnapshotsInProgress() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7858a9f8-b1fa-41a6-964f-b9b36b8cd8d8
@@ -54,21 +54,21 @@ type IVssAsync struct {
 var IID_IVssAsync = win32.GUID{Data1: 0x507c37b4, Data2: 0xcf5b, Data3: 0x4e95, Data4: [8]byte{0xb0, 0xaf, 0x14, 0xeb, 0x97, 0x67, 0x46, 0x7e}}
 
 // Cancel dispatches through IVssAsync's vtable slot 3.
-func (self *IVssAsync) Cancel() foundation.HRESULT {
+func (self *IVssAsync) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Wait dispatches through IVssAsync's vtable slot 4.
-func (self *IVssAsync) Wait(dwMilliseconds uint32) foundation.HRESULT {
+func (self *IVssAsync) Wait(dwMilliseconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwMilliseconds))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryStatus dispatches through IVssAsync's vtable slot 5.
-func (self *IVssAsync) QueryStatus(pHrResult *foundation.HRESULT, pReserved *int32) foundation.HRESULT {
+func (self *IVssAsync) QueryStatus(pHrResult *foundation.HRESULT, pReserved *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHrResult)), uintptr(unsafe.Pointer(pReserved)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssBackupComponents: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivssbackupcomponents
@@ -81,171 +81,171 @@ type IVssBackupComponents struct {
 var IID_IVssBackupComponents = win32.GUID{Data1: 0x665c1d5f, Data2: 0xc218, Data3: 0x414d, Data4: [8]byte{0xa0, 0x5d, 0x7f, 0xef, 0x5f, 0x9d, 0x5c, 0x86}}
 
 // GetWriterComponentsCount dispatches through IVssBackupComponents's vtable slot 3.
-func (self *IVssBackupComponents) GetWriterComponentsCount(pcComponents *uint32) foundation.HRESULT {
+func (self *IVssBackupComponents) GetWriterComponentsCount(pcComponents *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcComponents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWriterComponents dispatches through IVssBackupComponents's vtable slot 4.
-func (self *IVssBackupComponents) GetWriterComponents(iWriter uint32, ppWriter **IVssWriterComponentsExt) foundation.HRESULT {
+func (self *IVssBackupComponents) GetWriterComponents(iWriter uint32, ppWriter **IVssWriterComponentsExt) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iWriter), uintptr(unsafe.Pointer(ppWriter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitializeForBackup dispatches through IVssBackupComponents's vtable slot 5.
-func (self *IVssBackupComponents) InitializeForBackup(bstrXML foundation.BSTR) foundation.HRESULT {
+func (self *IVssBackupComponents) InitializeForBackup(bstrXML foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXML)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBackupState dispatches through IVssBackupComponents's vtable slot 6.
-func (self *IVssBackupComponents) SetBackupState(bSelectComponents byte, bBackupBootableSystemState byte, backupType VSS_BACKUP_TYPE, bPartialFileSupport byte) foundation.HRESULT {
+func (self *IVssBackupComponents) SetBackupState(bSelectComponents byte, bBackupBootableSystemState byte, backupType VSS_BACKUP_TYPE, bPartialFileSupport byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(bSelectComponents), uintptr(bBackupBootableSystemState), uintptr(backupType), uintptr(bPartialFileSupport))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitializeForRestore dispatches through IVssBackupComponents's vtable slot 7.
-func (self *IVssBackupComponents) InitializeForRestore(bstrXML foundation.BSTR) foundation.HRESULT {
+func (self *IVssBackupComponents) InitializeForRestore(bstrXML foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXML)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRestoreState dispatches through IVssBackupComponents's vtable slot 8.
-func (self *IVssBackupComponents) SetRestoreState(restoreType VSS_RESTORE_TYPE) foundation.HRESULT {
+func (self *IVssBackupComponents) SetRestoreState(restoreType VSS_RESTORE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(restoreType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GatherWriterMetadata dispatches through IVssBackupComponents's vtable slot 9.
-func (self *IVssBackupComponents) GatherWriterMetadata(pAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponents) GatherWriterMetadata(pAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWriterMetadataCount dispatches through IVssBackupComponents's vtable slot 10.
-func (self *IVssBackupComponents) GetWriterMetadataCount(pcWriters *uint32) foundation.HRESULT {
+func (self *IVssBackupComponents) GetWriterMetadataCount(pcWriters *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcWriters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWriterMetadata dispatches through IVssBackupComponents's vtable slot 11.
-func (self *IVssBackupComponents) GetWriterMetadata(iWriter uint32, pidInstance *win32.GUID, ppMetadata **IVssExamineWriterMetadata) foundation.HRESULT {
+func (self *IVssBackupComponents) GetWriterMetadata(iWriter uint32, pidInstance *win32.GUID, ppMetadata **IVssExamineWriterMetadata) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(iWriter), uintptr(unsafe.Pointer(pidInstance)), uintptr(unsafe.Pointer(ppMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeWriterMetadata dispatches through IVssBackupComponents's vtable slot 12.
-func (self *IVssBackupComponents) FreeWriterMetadata() foundation.HRESULT {
+func (self *IVssBackupComponents) FreeWriterMetadata() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrepareForBackup dispatches through IVssBackupComponents's vtable slot 14.
-func (self *IVssBackupComponents) PrepareForBackup(ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponents) PrepareForBackup(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AbortBackup dispatches through IVssBackupComponents's vtable slot 15.
-func (self *IVssBackupComponents) AbortBackup() foundation.HRESULT {
+func (self *IVssBackupComponents) AbortBackup() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GatherWriterStatus dispatches through IVssBackupComponents's vtable slot 16.
-func (self *IVssBackupComponents) GatherWriterStatus(pAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponents) GatherWriterStatus(pAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWriterStatusCount dispatches through IVssBackupComponents's vtable slot 17.
-func (self *IVssBackupComponents) GetWriterStatusCount(pcWriters *uint32) foundation.HRESULT {
+func (self *IVssBackupComponents) GetWriterStatusCount(pcWriters *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcWriters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeWriterStatus dispatches through IVssBackupComponents's vtable slot 18.
-func (self *IVssBackupComponents) FreeWriterStatus() foundation.HRESULT {
+func (self *IVssBackupComponents) FreeWriterStatus() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWriterStatus dispatches through IVssBackupComponents's vtable slot 19.
-func (self *IVssBackupComponents) GetWriterStatus(iWriter uint32, pidInstance *win32.GUID, pidWriter *win32.GUID, pbstrWriter *foundation.BSTR, pnStatus *VSS_WRITER_STATE, phResultFailure *foundation.HRESULT) foundation.HRESULT {
+func (self *IVssBackupComponents) GetWriterStatus(iWriter uint32, pidInstance *win32.GUID, pidWriter *win32.GUID, pbstrWriter *foundation.BSTR, pnStatus *VSS_WRITER_STATE, phResultFailure *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(iWriter), uintptr(unsafe.Pointer(pidInstance)), uintptr(unsafe.Pointer(pidWriter)), uintptr(unsafe.Pointer(pbstrWriter)), uintptr(unsafe.Pointer(pnStatus)), uintptr(unsafe.Pointer(phResultFailure)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveAsXML dispatches through IVssBackupComponents's vtable slot 26.
-func (self *IVssBackupComponents) SaveAsXML(pbstrXML *foundation.BSTR) foundation.HRESULT {
+func (self *IVssBackupComponents) SaveAsXML(pbstrXML *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrXML)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BackupComplete dispatches through IVssBackupComponents's vtable slot 27.
-func (self *IVssBackupComponents) BackupComplete(ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponents) BackupComplete(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PreRestore dispatches through IVssBackupComponents's vtable slot 33.
-func (self *IVssBackupComponents) PreRestore(ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponents) PreRestore(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PostRestore dispatches through IVssBackupComponents's vtable slot 34.
-func (self *IVssBackupComponents) PostRestore(ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponents) PostRestore(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContext dispatches through IVssBackupComponents's vtable slot 35.
-func (self *IVssBackupComponents) SetContext(lContext int32) foundation.HRESULT {
+func (self *IVssBackupComponents) SetContext(lContext int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(lContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartSnapshotSet dispatches through IVssBackupComponents's vtable slot 36.
-func (self *IVssBackupComponents) StartSnapshotSet(pSnapshotSetId *win32.GUID) foundation.HRESULT {
+func (self *IVssBackupComponents) StartSnapshotSet(pSnapshotSetId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSnapshotSetId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DoSnapshotSet dispatches through IVssBackupComponents's vtable slot 38.
-func (self *IVssBackupComponents) DoSnapshotSet(ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponents) DoSnapshotSet(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ImportSnapshots dispatches through IVssBackupComponents's vtable slot 40.
-func (self *IVssBackupComponents) ImportSnapshots(ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponents) ImportSnapshots(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisableWriterClasses dispatches through IVssBackupComponents's vtable slot 45.
-func (self *IVssBackupComponents) DisableWriterClasses(rgWriterClassId *win32.GUID, cClassId uint32) foundation.HRESULT {
+func (self *IVssBackupComponents) DisableWriterClasses(rgWriterClassId *win32.GUID, cClassId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rgWriterClassId)), uintptr(cClassId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableWriterClasses dispatches through IVssBackupComponents's vtable slot 46.
-func (self *IVssBackupComponents) EnableWriterClasses(rgWriterClassId *win32.GUID, cClassId uint32) foundation.HRESULT {
+func (self *IVssBackupComponents) EnableWriterClasses(rgWriterClassId *win32.GUID, cClassId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rgWriterClassId)), uintptr(cClassId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisableWriterInstances dispatches through IVssBackupComponents's vtable slot 47.
-func (self *IVssBackupComponents) DisableWriterInstances(rgWriterInstanceId *win32.GUID, cInstanceId uint32) foundation.HRESULT {
+func (self *IVssBackupComponents) DisableWriterInstances(rgWriterInstanceId *win32.GUID, cInstanceId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rgWriterInstanceId)), uintptr(cInstanceId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryRevertStatus dispatches through IVssBackupComponents's vtable slot 50.
-func (self *IVssBackupComponents) QueryRevertStatus(pwszVolume *uint16, ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponents) QueryRevertStatus(pwszVolume *uint16, ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolume)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssBackupComponentsEx: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivssbackupcomponentsex
@@ -258,9 +258,9 @@ type IVssBackupComponentsEx struct {
 var IID_IVssBackupComponentsEx = win32.GUID{Data1: 0x963f03ad, Data2: 0x9e4c, Data3: 0x4a34, Data4: [8]byte{0xac, 0x15, 0xe4, 0xb6, 0x17, 0x4e, 0x50, 0x36}}
 
 // GetWriterMetadataEx dispatches through IVssBackupComponentsEx's vtable slot 51.
-func (self *IVssBackupComponentsEx) GetWriterMetadataEx(iWriter uint32, pidInstance *win32.GUID, ppMetadata **IVssExamineWriterMetadataEx) foundation.HRESULT {
+func (self *IVssBackupComponentsEx) GetWriterMetadataEx(iWriter uint32, pidInstance *win32.GUID, ppMetadata **IVssExamineWriterMetadataEx) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(iWriter), uintptr(unsafe.Pointer(pidInstance)), uintptr(unsafe.Pointer(ppMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssBackupComponentsEx2: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivssbackupcomponentsex2
@@ -282,21 +282,21 @@ type IVssBackupComponentsEx3 struct {
 var IID_IVssBackupComponentsEx3 = win32.GUID{Data1: 0xc191bfbc, Data2: 0xb602, Data3: 0x4675, Data4: [8]byte{0x8b, 0xd1, 0x67, 0xd6, 0x42, 0xf5, 0x29, 0xd5}}
 
 // GetWriterStatusEx dispatches through IVssBackupComponentsEx3's vtable slot 60.
-func (self *IVssBackupComponentsEx3) GetWriterStatusEx(iWriter uint32, pidInstance *win32.GUID, pidWriter *win32.GUID, pbstrWriter *foundation.BSTR, pnStatus *VSS_WRITER_STATE, phrFailureWriter *foundation.HRESULT, phrApplication *foundation.HRESULT, pbstrApplicationMessage *foundation.BSTR) foundation.HRESULT {
+func (self *IVssBackupComponentsEx3) GetWriterStatusEx(iWriter uint32, pidInstance *win32.GUID, pidWriter *win32.GUID, pbstrWriter *foundation.BSTR, pnStatus *VSS_WRITER_STATE, phrFailureWriter *foundation.HRESULT, phrApplication *foundation.HRESULT, pbstrApplicationMessage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(iWriter), uintptr(unsafe.Pointer(pidInstance)), uintptr(unsafe.Pointer(pidWriter)), uintptr(unsafe.Pointer(pbstrWriter)), uintptr(unsafe.Pointer(pnStatus)), uintptr(unsafe.Pointer(phrFailureWriter)), uintptr(unsafe.Pointer(phrApplication)), uintptr(unsafe.Pointer(pbstrApplicationMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RecoverSet dispatches through IVssBackupComponentsEx3's vtable slot 62.
-func (self *IVssBackupComponentsEx3) RecoverSet(dwFlags uint32, ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssBackupComponentsEx3) RecoverSet(dwFlags uint32, ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSessionId dispatches through IVssBackupComponentsEx3's vtable slot 63.
-func (self *IVssBackupComponentsEx3) GetSessionId(idSession *win32.GUID) foundation.HRESULT {
+func (self *IVssBackupComponentsEx3) GetSessionId(idSession *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(idSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssBackupComponentsEx4: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivssbackupcomponentsex4
@@ -309,9 +309,10 @@ type IVssBackupComponentsEx4 struct {
 var IID_IVssBackupComponentsEx4 = win32.GUID{Data1: 0xf434c2fd, Data2: 0xb553, Data3: 0x4961, Data4: [8]byte{0xa9, 0xf9, 0xa8, 0xe9, 0x0b, 0x67, 0x3e, 0x53}}
 
 // GetRootAndLogicalPrefixPaths dispatches through IVssBackupComponentsEx4's vtable slot 64.
-func (self *IVssBackupComponentsEx4) GetRootAndLogicalPrefixPaths(pwszFilePath *uint16, ppwszRootPath **uint16, ppwszLogicalPrefix **uint16, bNormalizeFQDNforRootPath foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszFilePath)), uintptr(unsafe.Pointer(ppwszRootPath)), uintptr(unsafe.Pointer(ppwszLogicalPrefix)), uintptr(bNormalizeFQDNforRootPath))
-	return foundation.HRESULT(r1)
+func (self *IVssBackupComponentsEx4) GetRootAndLogicalPrefixPaths(pwszFilePath *uint16, ppwszRootPath **uint16, ppwszLogicalPrefix **uint16, bNormalizeFQDNforRootPath bool) error {
+	_bNormalizeFQDNforRootPath := win32.Bool32(bNormalizeFQDNforRootPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszFilePath)), uintptr(unsafe.Pointer(ppwszRootPath)), uintptr(unsafe.Pointer(ppwszLogicalPrefix)), uintptr(_bNormalizeFQDNforRootPath))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssComponent: https://learn.microsoft.com/windows/win32/api/vswriter/nl-vswriter-ivsscomponent
@@ -324,225 +325,243 @@ type IVssComponent struct {
 var IID_IVssComponent = win32.GUID{Data1: 0xd2c72c96, Data2: 0xc121, Data3: 0x4518, Data4: [8]byte{0xb6, 0x27, 0xe5, 0xa9, 0x3d, 0x01, 0x0e, 0xad}}
 
 // GetLogicalPath dispatches through IVssComponent's vtable slot 3.
-func (self *IVssComponent) GetLogicalPath(pbstrPath *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetLogicalPath(pbstrPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetComponentType dispatches through IVssComponent's vtable slot 4.
-func (self *IVssComponent) GetComponentType(pct *VSS_COMPONENT_TYPE) foundation.HRESULT {
+func (self *IVssComponent) GetComponentType(pct *VSS_COMPONENT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pct)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetComponentName dispatches through IVssComponent's vtable slot 5.
-func (self *IVssComponent) GetComponentName(pbstrName *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetComponentName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackupSucceeded dispatches through IVssComponent's vtable slot 6.
-func (self *IVssComponent) GetBackupSucceeded(pbSucceeded *bool) foundation.HRESULT {
+func (self *IVssComponent) GetBackupSucceeded(pbSucceeded *bool) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSucceeded)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAlternateLocationMappingCount dispatches through IVssComponent's vtable slot 7.
-func (self *IVssComponent) GetAlternateLocationMappingCount(pcMappings *uint32) foundation.HRESULT {
+func (self *IVssComponent) GetAlternateLocationMappingCount(pcMappings *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcMappings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAlternateLocationMapping dispatches through IVssComponent's vtable slot 8.
-func (self *IVssComponent) GetAlternateLocationMapping(iMapping uint32, ppFiledesc **IVssWMFiledesc) foundation.HRESULT {
+func (self *IVssComponent) GetAlternateLocationMapping(iMapping uint32, ppFiledesc **IVssWMFiledesc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iMapping), uintptr(unsafe.Pointer(ppFiledesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBackupMetadata dispatches through IVssComponent's vtable slot 9.
-func (self *IVssComponent) SetBackupMetadata(wszData foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszData)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponent) SetBackupMetadata(wszData string) error {
+	_wszData := win32.UTF16Ptr(wszData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackupMetadata dispatches through IVssComponent's vtable slot 10.
-func (self *IVssComponent) GetBackupMetadata(pbstrData *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetBackupMetadata(pbstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPartialFile dispatches through IVssComponent's vtable slot 11.
-func (self *IVssComponent) AddPartialFile(wszPath foundation.PWSTR, wszFilename foundation.PWSTR, wszRanges foundation.PWSTR, wszMetadata foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPath)), uintptr(unsafe.Pointer(wszFilename)), uintptr(unsafe.Pointer(wszRanges)), uintptr(unsafe.Pointer(wszMetadata)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponent) AddPartialFile(wszPath string, wszFilename string, wszRanges string, wszMetadata string) error {
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilename := win32.UTF16Ptr(wszFilename)
+	_wszRanges := win32.UTF16Ptr(wszRanges)
+	_wszMetadata := win32.UTF16Ptr(wszMetadata)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilename)), uintptr(unsafe.Pointer(_wszRanges)), uintptr(unsafe.Pointer(_wszMetadata)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPartialFileCount dispatches through IVssComponent's vtable slot 12.
-func (self *IVssComponent) GetPartialFileCount(pcPartialFiles *uint32) foundation.HRESULT {
+func (self *IVssComponent) GetPartialFileCount(pcPartialFiles *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcPartialFiles)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPartialFile dispatches through IVssComponent's vtable slot 13.
-func (self *IVssComponent) GetPartialFile(iPartialFile uint32, pbstrPath *foundation.BSTR, pbstrFilename *foundation.BSTR, pbstrRange *foundation.BSTR, pbstrMetadata *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetPartialFile(iPartialFile uint32, pbstrPath *foundation.BSTR, pbstrFilename *foundation.BSTR, pbstrRange *foundation.BSTR, pbstrMetadata *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(iPartialFile), uintptr(unsafe.Pointer(pbstrPath)), uintptr(unsafe.Pointer(pbstrFilename)), uintptr(unsafe.Pointer(pbstrRange)), uintptr(unsafe.Pointer(pbstrMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsSelectedForRestore dispatches through IVssComponent's vtable slot 14.
-func (self *IVssComponent) IsSelectedForRestore(pbSelectedForRestore *bool) foundation.HRESULT {
+func (self *IVssComponent) IsSelectedForRestore(pbSelectedForRestore *bool) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSelectedForRestore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdditionalRestores dispatches through IVssComponent's vtable slot 15.
-func (self *IVssComponent) GetAdditionalRestores(pbAdditionalRestores *bool) foundation.HRESULT {
+func (self *IVssComponent) GetAdditionalRestores(pbAdditionalRestores *bool) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAdditionalRestores)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNewTargetCount dispatches through IVssComponent's vtable slot 16.
-func (self *IVssComponent) GetNewTargetCount(pcNewTarget *uint32) foundation.HRESULT {
+func (self *IVssComponent) GetNewTargetCount(pcNewTarget *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcNewTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNewTarget dispatches through IVssComponent's vtable slot 17.
-func (self *IVssComponent) GetNewTarget(iNewTarget uint32, ppFiledesc **IVssWMFiledesc) foundation.HRESULT {
+func (self *IVssComponent) GetNewTarget(iNewTarget uint32, ppFiledesc **IVssWMFiledesc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(iNewTarget), uintptr(unsafe.Pointer(ppFiledesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDirectedTarget dispatches through IVssComponent's vtable slot 18.
-func (self *IVssComponent) AddDirectedTarget(wszSourcePath foundation.PWSTR, wszSourceFilename foundation.PWSTR, wszSourceRangeList foundation.PWSTR, wszDestinationPath foundation.PWSTR, wszDestinationFilename foundation.PWSTR, wszDestinationRangeList foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszSourcePath)), uintptr(unsafe.Pointer(wszSourceFilename)), uintptr(unsafe.Pointer(wszSourceRangeList)), uintptr(unsafe.Pointer(wszDestinationPath)), uintptr(unsafe.Pointer(wszDestinationFilename)), uintptr(unsafe.Pointer(wszDestinationRangeList)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponent) AddDirectedTarget(wszSourcePath string, wszSourceFilename string, wszSourceRangeList string, wszDestinationPath string, wszDestinationFilename string, wszDestinationRangeList string) error {
+	_wszSourcePath := win32.UTF16Ptr(wszSourcePath)
+	_wszSourceFilename := win32.UTF16Ptr(wszSourceFilename)
+	_wszSourceRangeList := win32.UTF16Ptr(wszSourceRangeList)
+	_wszDestinationPath := win32.UTF16Ptr(wszDestinationPath)
+	_wszDestinationFilename := win32.UTF16Ptr(wszDestinationFilename)
+	_wszDestinationRangeList := win32.UTF16Ptr(wszDestinationRangeList)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszSourcePath)), uintptr(unsafe.Pointer(_wszSourceFilename)), uintptr(unsafe.Pointer(_wszSourceRangeList)), uintptr(unsafe.Pointer(_wszDestinationPath)), uintptr(unsafe.Pointer(_wszDestinationFilename)), uintptr(unsafe.Pointer(_wszDestinationRangeList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDirectedTargetCount dispatches through IVssComponent's vtable slot 19.
-func (self *IVssComponent) GetDirectedTargetCount(pcDirectedTarget *uint32) foundation.HRESULT {
+func (self *IVssComponent) GetDirectedTargetCount(pcDirectedTarget *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDirectedTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDirectedTarget dispatches through IVssComponent's vtable slot 20.
-func (self *IVssComponent) GetDirectedTarget(iDirectedTarget uint32, pbstrSourcePath *foundation.BSTR, pbstrSourceFileName *foundation.BSTR, pbstrSourceRangeList *foundation.BSTR, pbstrDestinationPath *foundation.BSTR, pbstrDestinationFilename *foundation.BSTR, pbstrDestinationRangeList *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetDirectedTarget(iDirectedTarget uint32, pbstrSourcePath *foundation.BSTR, pbstrSourceFileName *foundation.BSTR, pbstrSourceRangeList *foundation.BSTR, pbstrDestinationPath *foundation.BSTR, pbstrDestinationFilename *foundation.BSTR, pbstrDestinationRangeList *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(iDirectedTarget), uintptr(unsafe.Pointer(pbstrSourcePath)), uintptr(unsafe.Pointer(pbstrSourceFileName)), uintptr(unsafe.Pointer(pbstrSourceRangeList)), uintptr(unsafe.Pointer(pbstrDestinationPath)), uintptr(unsafe.Pointer(pbstrDestinationFilename)), uintptr(unsafe.Pointer(pbstrDestinationRangeList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRestoreMetadata dispatches through IVssComponent's vtable slot 21.
-func (self *IVssComponent) SetRestoreMetadata(wszRestoreMetadata foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszRestoreMetadata)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponent) SetRestoreMetadata(wszRestoreMetadata string) error {
+	_wszRestoreMetadata := win32.UTF16Ptr(wszRestoreMetadata)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszRestoreMetadata)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestoreMetadata dispatches through IVssComponent's vtable slot 22.
-func (self *IVssComponent) GetRestoreMetadata(pbstrRestoreMetadata *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetRestoreMetadata(pbstrRestoreMetadata *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrRestoreMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRestoreTarget dispatches through IVssComponent's vtable slot 23.
-func (self *IVssComponent) SetRestoreTarget(target VSS_RESTORE_TARGET) foundation.HRESULT {
+func (self *IVssComponent) SetRestoreTarget(target VSS_RESTORE_TARGET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(target))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestoreTarget dispatches through IVssComponent's vtable slot 24.
-func (self *IVssComponent) GetRestoreTarget(pTarget *VSS_RESTORE_TARGET) foundation.HRESULT {
+func (self *IVssComponent) GetRestoreTarget(pTarget *VSS_RESTORE_TARGET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPreRestoreFailureMsg dispatches through IVssComponent's vtable slot 25.
-func (self *IVssComponent) SetPreRestoreFailureMsg(wszPreRestoreFailureMsg foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPreRestoreFailureMsg)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponent) SetPreRestoreFailureMsg(wszPreRestoreFailureMsg string) error {
+	_wszPreRestoreFailureMsg := win32.UTF16Ptr(wszPreRestoreFailureMsg)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszPreRestoreFailureMsg)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreRestoreFailureMsg dispatches through IVssComponent's vtable slot 26.
-func (self *IVssComponent) GetPreRestoreFailureMsg(pbstrPreRestoreFailureMsg *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetPreRestoreFailureMsg(pbstrPreRestoreFailureMsg *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPreRestoreFailureMsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPostRestoreFailureMsg dispatches through IVssComponent's vtable slot 27.
-func (self *IVssComponent) SetPostRestoreFailureMsg(wszPostRestoreFailureMsg foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPostRestoreFailureMsg)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponent) SetPostRestoreFailureMsg(wszPostRestoreFailureMsg string) error {
+	_wszPostRestoreFailureMsg := win32.UTF16Ptr(wszPostRestoreFailureMsg)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszPostRestoreFailureMsg)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPostRestoreFailureMsg dispatches through IVssComponent's vtable slot 28.
-func (self *IVssComponent) GetPostRestoreFailureMsg(pbstrPostRestoreFailureMsg *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetPostRestoreFailureMsg(pbstrPostRestoreFailureMsg *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPostRestoreFailureMsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBackupStamp dispatches through IVssComponent's vtable slot 29.
-func (self *IVssComponent) SetBackupStamp(wszBackupStamp foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszBackupStamp)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponent) SetBackupStamp(wszBackupStamp string) error {
+	_wszBackupStamp := win32.UTF16Ptr(wszBackupStamp)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszBackupStamp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackupStamp dispatches through IVssComponent's vtable slot 30.
-func (self *IVssComponent) GetBackupStamp(pbstrBackupStamp *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetBackupStamp(pbstrBackupStamp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBackupStamp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreviousBackupStamp dispatches through IVssComponent's vtable slot 31.
-func (self *IVssComponent) GetPreviousBackupStamp(pbstrBackupStamp *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetPreviousBackupStamp(pbstrBackupStamp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBackupStamp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackupOptions dispatches through IVssComponent's vtable slot 32.
-func (self *IVssComponent) GetBackupOptions(pbstrBackupOptions *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetBackupOptions(pbstrBackupOptions *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrBackupOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestoreOptions dispatches through IVssComponent's vtable slot 33.
-func (self *IVssComponent) GetRestoreOptions(pbstrRestoreOptions *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponent) GetRestoreOptions(pbstrRestoreOptions *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrRestoreOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestoreSubcomponentCount dispatches through IVssComponent's vtable slot 34.
-func (self *IVssComponent) GetRestoreSubcomponentCount(pcRestoreSubcomponent *uint32) foundation.HRESULT {
+func (self *IVssComponent) GetRestoreSubcomponentCount(pcRestoreSubcomponent *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcRestoreSubcomponent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestoreSubcomponent dispatches through IVssComponent's vtable slot 35.
-func (self *IVssComponent) GetRestoreSubcomponent(iComponent uint32, pbstrLogicalPath *foundation.BSTR, pbstrComponentName *foundation.BSTR, pbRepair *bool) foundation.HRESULT {
+func (self *IVssComponent) GetRestoreSubcomponent(iComponent uint32, pbstrLogicalPath *foundation.BSTR, pbstrComponentName *foundation.BSTR, pbRepair *bool) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(iComponent), uintptr(unsafe.Pointer(pbstrLogicalPath)), uintptr(unsafe.Pointer(pbstrComponentName)), uintptr(unsafe.Pointer(pbRepair)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileRestoreStatus dispatches through IVssComponent's vtable slot 36.
-func (self *IVssComponent) GetFileRestoreStatus(pStatus *VSS_FILE_RESTORE_STATUS) foundation.HRESULT {
+func (self *IVssComponent) GetFileRestoreStatus(pStatus *VSS_FILE_RESTORE_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDifferencedFilesByLastModifyLSN dispatches through IVssComponent's vtable slot 38.
-func (self *IVssComponent) AddDifferencedFilesByLastModifyLSN(wszPath foundation.PWSTR, wszFilespec foundation.PWSTR, bRecursive foundation.BOOL, bstrLsnString foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPath)), uintptr(unsafe.Pointer(wszFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(bstrLsnString)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponent) AddDifferencedFilesByLastModifyLSN(wszPath string, wszFilespec string, bRecursive bool, bstrLsnString foundation.BSTR) error {
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	_bRecursive := win32.Bool32(bRecursive)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(_bRecursive), uintptr(unsafe.Pointer(bstrLsnString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDifferencedFilesCount dispatches through IVssComponent's vtable slot 39.
-func (self *IVssComponent) GetDifferencedFilesCount(pcDifferencedFiles *uint32) foundation.HRESULT {
+func (self *IVssComponent) GetDifferencedFilesCount(pcDifferencedFiles *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDifferencedFiles)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDifferencedFile dispatches through IVssComponent's vtable slot 40.
-func (self *IVssComponent) GetDifferencedFile(iDifferencedFile uint32, pbstrPath *foundation.BSTR, pbstrFilespec *foundation.BSTR, pbRecursive *foundation.BOOL, pbstrLsnString *foundation.BSTR, pftLastModifyTime *foundation.FILETIME) foundation.HRESULT {
+func (self *IVssComponent) GetDifferencedFile(iDifferencedFile uint32, pbstrPath *foundation.BSTR, pbstrFilespec *foundation.BSTR, pbRecursive *foundation.BOOL, pbstrLsnString *foundation.BSTR, pftLastModifyTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(iDifferencedFile), uintptr(unsafe.Pointer(pbstrPath)), uintptr(unsafe.Pointer(pbstrFilespec)), uintptr(unsafe.Pointer(pbRecursive)), uintptr(unsafe.Pointer(pbstrLsnString)), uintptr(unsafe.Pointer(pftLastModifyTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssComponentEx: https://learn.microsoft.com/windows/win32/api/vswriter/nl-vswriter-ivsscomponentex
@@ -555,45 +574,47 @@ type IVssComponentEx struct {
 var IID_IVssComponentEx = win32.GUID{Data1: 0x156c8b5e, Data2: 0xf131, Data3: 0x4bd7, Data4: [8]byte{0x9c, 0x97, 0xd1, 0x92, 0x3b, 0xe7, 0xe1, 0xfa}}
 
 // SetPrepareForBackupFailureMsg dispatches through IVssComponentEx's vtable slot 41.
-func (self *IVssComponentEx) SetPrepareForBackupFailureMsg(wszFailureMsg foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszFailureMsg)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponentEx) SetPrepareForBackupFailureMsg(wszFailureMsg string) error {
+	_wszFailureMsg := win32.UTF16Ptr(wszFailureMsg)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszFailureMsg)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPostSnapshotFailureMsg dispatches through IVssComponentEx's vtable slot 42.
-func (self *IVssComponentEx) SetPostSnapshotFailureMsg(wszFailureMsg foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszFailureMsg)))
-	return foundation.HRESULT(r1)
+func (self *IVssComponentEx) SetPostSnapshotFailureMsg(wszFailureMsg string) error {
+	_wszFailureMsg := win32.UTF16Ptr(wszFailureMsg)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszFailureMsg)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrepareForBackupFailureMsg dispatches through IVssComponentEx's vtable slot 43.
-func (self *IVssComponentEx) GetPrepareForBackupFailureMsg(pbstrFailureMsg *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponentEx) GetPrepareForBackupFailureMsg(pbstrFailureMsg *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFailureMsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPostSnapshotFailureMsg dispatches through IVssComponentEx's vtable slot 44.
-func (self *IVssComponentEx) GetPostSnapshotFailureMsg(pbstrFailureMsg *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponentEx) GetPostSnapshotFailureMsg(pbstrFailureMsg *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFailureMsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAuthoritativeRestore dispatches through IVssComponentEx's vtable slot 45.
-func (self *IVssComponentEx) GetAuthoritativeRestore(pbAuth *bool) foundation.HRESULT {
+func (self *IVssComponentEx) GetAuthoritativeRestore(pbAuth *bool) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAuth)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRollForward dispatches through IVssComponentEx's vtable slot 46.
-func (self *IVssComponentEx) GetRollForward(pRollType *VSS_ROLLFORWARD_TYPE, pbstrPoint *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponentEx) GetRollForward(pRollType *VSS_ROLLFORWARD_TYPE, pbstrPoint *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRollType)), uintptr(unsafe.Pointer(pbstrPoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestoreName dispatches through IVssComponentEx's vtable slot 47.
-func (self *IVssComponentEx) GetRestoreName(pbstrName *foundation.BSTR) foundation.HRESULT {
+func (self *IVssComponentEx) GetRestoreName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssComponentEx2: https://learn.microsoft.com/windows/win32/api/vswriter/nl-vswriter-ivsscomponentex2
@@ -606,15 +627,16 @@ type IVssComponentEx2 struct {
 var IID_IVssComponentEx2 = win32.GUID{Data1: 0x3b5be0f2, Data2: 0x07a9, Data3: 0x4e4b, Data4: [8]byte{0xbd, 0xd3, 0xcf, 0xdc, 0x8e, 0x2c, 0x0d, 0x2d}}
 
 // SetFailure dispatches through IVssComponentEx2's vtable slot 48.
-func (self *IVssComponentEx2) SetFailure(hr foundation.HRESULT, hrApplication foundation.HRESULT, wszApplicationMessage foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(hrApplication), uintptr(unsafe.Pointer(wszApplicationMessage)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *IVssComponentEx2) SetFailure(hr foundation.HRESULT, hrApplication foundation.HRESULT, wszApplicationMessage string, dwReserved uint32) error {
+	_wszApplicationMessage := win32.UTF16Ptr(wszApplicationMessage)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(hrApplication), uintptr(unsafe.Pointer(_wszApplicationMessage)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFailure dispatches through IVssComponentEx2's vtable slot 49.
-func (self *IVssComponentEx2) GetFailure(phr *foundation.HRESULT, phrApplication *foundation.HRESULT, pbstrApplicationMessage *foundation.BSTR, pdwReserved *uint32) foundation.HRESULT {
+func (self *IVssComponentEx2) GetFailure(phr *foundation.HRESULT, phrApplication *foundation.HRESULT, pbstrApplicationMessage *foundation.BSTR, pdwReserved *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phr)), uintptr(unsafe.Pointer(phrApplication)), uintptr(unsafe.Pointer(pbstrApplicationMessage)), uintptr(unsafe.Pointer(pdwReserved)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssCreateExpressWriterMetadata: https://learn.microsoft.com/windows/win32/api/vswriter/nl-vswriter-ivsscreateexpresswritermetadata
@@ -627,39 +649,51 @@ type IVssCreateExpressWriterMetadata struct {
 var IID_IVssCreateExpressWriterMetadata = win32.GUID{Data1: 0x9c772e77, Data2: 0xb26e, Data3: 0x427f, Data4: [8]byte{0x92, 0xdd, 0xc9, 0x96, 0xf4, 0x1e, 0xa5, 0xe3}}
 
 // AddExcludeFiles dispatches through IVssCreateExpressWriterMetadata's vtable slot 3.
-func (self *IVssCreateExpressWriterMetadata) AddExcludeFiles(wszPath foundation.PWSTR, wszFilespec foundation.PWSTR, bRecursive byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPath)), uintptr(unsafe.Pointer(wszFilespec)), uintptr(bRecursive))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateExpressWriterMetadata) AddExcludeFiles(wszPath string, wszFilespec string, bRecursive byte) error {
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(bRecursive))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddComponent dispatches through IVssCreateExpressWriterMetadata's vtable slot 4.
-func (self *IVssCreateExpressWriterMetadata) AddComponent(ct VSS_COMPONENT_TYPE, wszLogicalPath foundation.PWSTR, wszComponentName foundation.PWSTR, wszCaption foundation.PWSTR, pbIcon *byte, cbIcon uint32, bRestoreMetadata byte, bNotifyOnBackupComplete byte, bSelectable byte, bSelectableForRestore byte, dwComponentFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(wszLogicalPath)), uintptr(unsafe.Pointer(wszComponentName)), uintptr(unsafe.Pointer(wszCaption)), uintptr(unsafe.Pointer(pbIcon)), uintptr(cbIcon), uintptr(bRestoreMetadata), uintptr(bNotifyOnBackupComplete), uintptr(bSelectable), uintptr(bSelectableForRestore), uintptr(dwComponentFlags))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateExpressWriterMetadata) AddComponent(ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, wszCaption string, pbIcon *byte, cbIcon uint32, bRestoreMetadata byte, bNotifyOnBackupComplete byte, bSelectable byte, bSelectableForRestore byte, dwComponentFlags uint32) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszCaption := win32.UTF16Ptr(wszCaption)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszCaption)), uintptr(unsafe.Pointer(pbIcon)), uintptr(cbIcon), uintptr(bRestoreMetadata), uintptr(bNotifyOnBackupComplete), uintptr(bSelectable), uintptr(bSelectableForRestore), uintptr(dwComponentFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddFilesToFileGroup dispatches through IVssCreateExpressWriterMetadata's vtable slot 5.
-func (self *IVssCreateExpressWriterMetadata) AddFilesToFileGroup(wszLogicalPath foundation.PWSTR, wszGroupName foundation.PWSTR, wszPath foundation.PWSTR, wszFilespec foundation.PWSTR, bRecursive byte, wszAlternateLocation foundation.PWSTR, dwBackupTypeMask uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszLogicalPath)), uintptr(unsafe.Pointer(wszGroupName)), uintptr(unsafe.Pointer(wszPath)), uintptr(unsafe.Pointer(wszFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(wszAlternateLocation)), uintptr(dwBackupTypeMask))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateExpressWriterMetadata) AddFilesToFileGroup(wszLogicalPath string, wszGroupName string, wszPath string, wszFilespec string, bRecursive byte, wszAlternateLocation string, dwBackupTypeMask uint32) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszGroupName := win32.UTF16Ptr(wszGroupName)
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	_wszAlternateLocation := win32.UTF16Ptr(wszAlternateLocation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszGroupName)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(_wszAlternateLocation)), uintptr(dwBackupTypeMask))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRestoreMethod dispatches through IVssCreateExpressWriterMetadata's vtable slot 6.
-func (self *IVssCreateExpressWriterMetadata) SetRestoreMethod(method VSS_RESTOREMETHOD_ENUM, wszService foundation.PWSTR, wszUserProcedure foundation.PWSTR, writerRestore VSS_WRITERRESTORE_ENUM, bRebootRequired byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(method), uintptr(unsafe.Pointer(wszService)), uintptr(unsafe.Pointer(wszUserProcedure)), uintptr(writerRestore), uintptr(bRebootRequired))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateExpressWriterMetadata) SetRestoreMethod(method VSS_RESTOREMETHOD_ENUM, wszService string, wszUserProcedure string, writerRestore VSS_WRITERRESTORE_ENUM, bRebootRequired byte) error {
+	_wszService := win32.UTF16Ptr(wszService)
+	_wszUserProcedure := win32.UTF16Ptr(wszUserProcedure)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(method), uintptr(unsafe.Pointer(_wszService)), uintptr(unsafe.Pointer(_wszUserProcedure)), uintptr(writerRestore), uintptr(bRebootRequired))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBackupSchema dispatches through IVssCreateExpressWriterMetadata's vtable slot 8.
-func (self *IVssCreateExpressWriterMetadata) SetBackupSchema(dwSchemaMask uint32) foundation.HRESULT {
+func (self *IVssCreateExpressWriterMetadata) SetBackupSchema(dwSchemaMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwSchemaMask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveAsXML dispatches through IVssCreateExpressWriterMetadata's vtable slot 9.
-func (self *IVssCreateExpressWriterMetadata) SaveAsXML(pbstrXML *foundation.BSTR) foundation.HRESULT {
+func (self *IVssCreateExpressWriterMetadata) SaveAsXML(pbstrXML *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrXML)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssCreateWriterMetadata: https://learn.microsoft.com/windows/win32/api/vswriter/nl-vswriter-ivsscreatewritermetadata
@@ -668,69 +702,95 @@ type IVssCreateWriterMetadata struct {
 }
 
 // AddIncludeFiles dispatches through IVssCreateWriterMetadata's vtable slot 0.
-func (self *IVssCreateWriterMetadata) AddIncludeFiles(wszPath foundation.PWSTR, wszFilespec foundation.PWSTR, bRecursive byte, wszAlternateLocation foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPath)), uintptr(unsafe.Pointer(wszFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(wszAlternateLocation)))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateWriterMetadata) AddIncludeFiles(wszPath string, wszFilespec string, bRecursive byte, wszAlternateLocation string) error {
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	_wszAlternateLocation := win32.UTF16Ptr(wszAlternateLocation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(_wszAlternateLocation)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddExcludeFiles dispatches through IVssCreateWriterMetadata's vtable slot 1.
-func (self *IVssCreateWriterMetadata) AddExcludeFiles(wszPath foundation.PWSTR, wszFilespec foundation.PWSTR, bRecursive byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[1], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPath)), uintptr(unsafe.Pointer(wszFilespec)), uintptr(bRecursive))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateWriterMetadata) AddExcludeFiles(wszPath string, wszFilespec string, bRecursive byte) error {
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[1], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(bRecursive))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddComponent dispatches through IVssCreateWriterMetadata's vtable slot 2.
-func (self *IVssCreateWriterMetadata) AddComponent(ct VSS_COMPONENT_TYPE, wszLogicalPath foundation.PWSTR, wszComponentName foundation.PWSTR, wszCaption foundation.PWSTR, pbIcon *byte, cbIcon uint32, bRestoreMetadata byte, bNotifyOnBackupComplete byte, bSelectable byte, bSelectableForRestore byte, dwComponentFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[2], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(wszLogicalPath)), uintptr(unsafe.Pointer(wszComponentName)), uintptr(unsafe.Pointer(wszCaption)), uintptr(unsafe.Pointer(pbIcon)), uintptr(cbIcon), uintptr(bRestoreMetadata), uintptr(bNotifyOnBackupComplete), uintptr(bSelectable), uintptr(bSelectableForRestore), uintptr(dwComponentFlags))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateWriterMetadata) AddComponent(ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, wszCaption string, pbIcon *byte, cbIcon uint32, bRestoreMetadata byte, bNotifyOnBackupComplete byte, bSelectable byte, bSelectableForRestore byte, dwComponentFlags uint32) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszCaption := win32.UTF16Ptr(wszCaption)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[2], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszCaption)), uintptr(unsafe.Pointer(pbIcon)), uintptr(cbIcon), uintptr(bRestoreMetadata), uintptr(bNotifyOnBackupComplete), uintptr(bSelectable), uintptr(bSelectableForRestore), uintptr(dwComponentFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDatabaseFiles dispatches through IVssCreateWriterMetadata's vtable slot 3.
-func (self *IVssCreateWriterMetadata) AddDatabaseFiles(wszLogicalPath foundation.PWSTR, wszDatabaseName foundation.PWSTR, wszPath foundation.PWSTR, wszFilespec foundation.PWSTR, dwBackupTypeMask uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszLogicalPath)), uintptr(unsafe.Pointer(wszDatabaseName)), uintptr(unsafe.Pointer(wszPath)), uintptr(unsafe.Pointer(wszFilespec)), uintptr(dwBackupTypeMask))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateWriterMetadata) AddDatabaseFiles(wszLogicalPath string, wszDatabaseName string, wszPath string, wszFilespec string, dwBackupTypeMask uint32) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszDatabaseName := win32.UTF16Ptr(wszDatabaseName)
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszDatabaseName)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(dwBackupTypeMask))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDatabaseLogFiles dispatches through IVssCreateWriterMetadata's vtable slot 4.
-func (self *IVssCreateWriterMetadata) AddDatabaseLogFiles(wszLogicalPath foundation.PWSTR, wszDatabaseName foundation.PWSTR, wszPath foundation.PWSTR, wszFilespec foundation.PWSTR, dwBackupTypeMask uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszLogicalPath)), uintptr(unsafe.Pointer(wszDatabaseName)), uintptr(unsafe.Pointer(wszPath)), uintptr(unsafe.Pointer(wszFilespec)), uintptr(dwBackupTypeMask))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateWriterMetadata) AddDatabaseLogFiles(wszLogicalPath string, wszDatabaseName string, wszPath string, wszFilespec string, dwBackupTypeMask uint32) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszDatabaseName := win32.UTF16Ptr(wszDatabaseName)
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszDatabaseName)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(dwBackupTypeMask))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddFilesToFileGroup dispatches through IVssCreateWriterMetadata's vtable slot 5.
-func (self *IVssCreateWriterMetadata) AddFilesToFileGroup(wszLogicalPath foundation.PWSTR, wszGroupName foundation.PWSTR, wszPath foundation.PWSTR, wszFilespec foundation.PWSTR, bRecursive byte, wszAlternateLocation foundation.PWSTR, dwBackupTypeMask uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszLogicalPath)), uintptr(unsafe.Pointer(wszGroupName)), uintptr(unsafe.Pointer(wszPath)), uintptr(unsafe.Pointer(wszFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(wszAlternateLocation)), uintptr(dwBackupTypeMask))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateWriterMetadata) AddFilesToFileGroup(wszLogicalPath string, wszGroupName string, wszPath string, wszFilespec string, bRecursive byte, wszAlternateLocation string, dwBackupTypeMask uint32) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszGroupName := win32.UTF16Ptr(wszGroupName)
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	_wszAlternateLocation := win32.UTF16Ptr(wszAlternateLocation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszGroupName)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(_wszAlternateLocation)), uintptr(dwBackupTypeMask))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRestoreMethod dispatches through IVssCreateWriterMetadata's vtable slot 6.
-func (self *IVssCreateWriterMetadata) SetRestoreMethod(method VSS_RESTOREMETHOD_ENUM, wszService foundation.PWSTR, wszUserProcedure foundation.PWSTR, writerRestore VSS_WRITERRESTORE_ENUM, bRebootRequired byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(method), uintptr(unsafe.Pointer(wszService)), uintptr(unsafe.Pointer(wszUserProcedure)), uintptr(writerRestore), uintptr(bRebootRequired))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateWriterMetadata) SetRestoreMethod(method VSS_RESTOREMETHOD_ENUM, wszService string, wszUserProcedure string, writerRestore VSS_WRITERRESTORE_ENUM, bRebootRequired byte) error {
+	_wszService := win32.UTF16Ptr(wszService)
+	_wszUserProcedure := win32.UTF16Ptr(wszUserProcedure)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(method), uintptr(unsafe.Pointer(_wszService)), uintptr(unsafe.Pointer(_wszUserProcedure)), uintptr(writerRestore), uintptr(bRebootRequired))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddAlternateLocationMapping dispatches through IVssCreateWriterMetadata's vtable slot 7.
-func (self *IVssCreateWriterMetadata) AddAlternateLocationMapping(wszSourcePath foundation.PWSTR, wszSourceFilespec foundation.PWSTR, bRecursive byte, wszDestination foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszSourcePath)), uintptr(unsafe.Pointer(wszSourceFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(wszDestination)))
-	return foundation.HRESULT(r1)
+func (self *IVssCreateWriterMetadata) AddAlternateLocationMapping(wszSourcePath string, wszSourceFilespec string, bRecursive byte, wszDestination string) error {
+	_wszSourcePath := win32.UTF16Ptr(wszSourcePath)
+	_wszSourceFilespec := win32.UTF16Ptr(wszSourceFilespec)
+	_wszDestination := win32.UTF16Ptr(wszDestination)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszSourcePath)), uintptr(unsafe.Pointer(_wszSourceFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(_wszDestination)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBackupSchema dispatches through IVssCreateWriterMetadata's vtable slot 9.
-func (self *IVssCreateWriterMetadata) SetBackupSchema(dwSchemaMask uint32) foundation.HRESULT {
+func (self *IVssCreateWriterMetadata) SetBackupSchema(dwSchemaMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwSchemaMask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocument dispatches through IVssCreateWriterMetadata's vtable slot 10.
-func (self *IVssCreateWriterMetadata) GetDocument(pDoc **dataxmlmsxml.IXMLDOMDocument) foundation.HRESULT {
+func (self *IVssCreateWriterMetadata) GetDocument(pDoc **dataxmlmsxml.IXMLDOMDocument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDoc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveAsXML dispatches through IVssCreateWriterMetadata's vtable slot 11.
-func (self *IVssCreateWriterMetadata) SaveAsXML(pbstrXML *foundation.BSTR) foundation.HRESULT {
+func (self *IVssCreateWriterMetadata) SaveAsXML(pbstrXML *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrXML)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssDifferentialSoftwareSnapshotMgmt: https://learn.microsoft.com/windows/win32/api/vsmgmt/nn-vsmgmt-ivssdifferentialsoftwaresnapshotmgmt
@@ -743,33 +803,33 @@ type IVssDifferentialSoftwareSnapshotMgmt struct {
 var IID_IVssDifferentialSoftwareSnapshotMgmt = win32.GUID{Data1: 0x214a0f28, Data2: 0xb737, Data3: 0x4026, Data4: [8]byte{0xb8, 0x47, 0x4f, 0x9e, 0x37, 0xd7, 0x95, 0x29}}
 
 // AddDiffArea dispatches through IVssDifferentialSoftwareSnapshotMgmt's vtable slot 3.
-func (self *IVssDifferentialSoftwareSnapshotMgmt) AddDiffArea(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, llMaximumDiffSpace int64) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt) AddDiffArea(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, llMaximumDiffSpace int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pwszDiffAreaVolumeName)), uintptr(llMaximumDiffSpace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeDiffAreaMaximumSize dispatches through IVssDifferentialSoftwareSnapshotMgmt's vtable slot 4.
-func (self *IVssDifferentialSoftwareSnapshotMgmt) ChangeDiffAreaMaximumSize(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, llMaximumDiffSpace int64) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt) ChangeDiffAreaMaximumSize(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, llMaximumDiffSpace int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pwszDiffAreaVolumeName)), uintptr(llMaximumDiffSpace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryVolumesSupportedForDiffAreas dispatches through IVssDifferentialSoftwareSnapshotMgmt's vtable slot 5.
-func (self *IVssDifferentialSoftwareSnapshotMgmt) QueryVolumesSupportedForDiffAreas(pwszOriginalVolumeName *uint16, ppEnum **IVssEnumMgmtObject) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt) QueryVolumesSupportedForDiffAreas(pwszOriginalVolumeName *uint16, ppEnum **IVssEnumMgmtObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszOriginalVolumeName)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryDiffAreasForVolume dispatches through IVssDifferentialSoftwareSnapshotMgmt's vtable slot 6.
-func (self *IVssDifferentialSoftwareSnapshotMgmt) QueryDiffAreasForVolume(pwszVolumeName *uint16, ppEnum **IVssEnumMgmtObject) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt) QueryDiffAreasForVolume(pwszVolumeName *uint16, ppEnum **IVssEnumMgmtObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryDiffAreasOnVolume dispatches through IVssDifferentialSoftwareSnapshotMgmt's vtable slot 7.
-func (self *IVssDifferentialSoftwareSnapshotMgmt) QueryDiffAreasOnVolume(pwszVolumeName *uint16, ppEnum **IVssEnumMgmtObject) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt) QueryDiffAreasOnVolume(pwszVolumeName *uint16, ppEnum **IVssEnumMgmtObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssDifferentialSoftwareSnapshotMgmt2: https://learn.microsoft.com/windows/win32/api/vsmgmt/nn-vsmgmt-ivssdifferentialsoftwaresnapshotmgmt2
@@ -782,21 +842,22 @@ type IVssDifferentialSoftwareSnapshotMgmt2 struct {
 var IID_IVssDifferentialSoftwareSnapshotMgmt2 = win32.GUID{Data1: 0x949d7353, Data2: 0x675f, Data3: 0x4275, Data4: [8]byte{0x89, 0x69, 0xf0, 0x44, 0xc6, 0x27, 0x78, 0x15}}
 
 // ChangeDiffAreaMaximumSizeEx dispatches through IVssDifferentialSoftwareSnapshotMgmt2's vtable slot 9.
-func (self *IVssDifferentialSoftwareSnapshotMgmt2) ChangeDiffAreaMaximumSizeEx(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, llMaximumDiffSpace int64, bVolatile foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pwszDiffAreaVolumeName)), uintptr(llMaximumDiffSpace), uintptr(bVolatile))
-	return foundation.HRESULT(r1)
+func (self *IVssDifferentialSoftwareSnapshotMgmt2) ChangeDiffAreaMaximumSizeEx(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, llMaximumDiffSpace int64, bVolatile bool) error {
+	_bVolatile := win32.Bool32(bVolatile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pwszDiffAreaVolumeName)), uintptr(llMaximumDiffSpace), uintptr(_bVolatile))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MigrateDiffAreas dispatches through IVssDifferentialSoftwareSnapshotMgmt2's vtable slot 10.
-func (self *IVssDifferentialSoftwareSnapshotMgmt2) MigrateDiffAreas(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, pwszNewDiffAreaVolumeName *uint16) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt2) MigrateDiffAreas(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, pwszNewDiffAreaVolumeName *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pwszDiffAreaVolumeName)), uintptr(unsafe.Pointer(pwszNewDiffAreaVolumeName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryMigrationStatus dispatches through IVssDifferentialSoftwareSnapshotMgmt2's vtable slot 11.
-func (self *IVssDifferentialSoftwareSnapshotMgmt2) QueryMigrationStatus(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt2) QueryMigrationStatus(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pwszDiffAreaVolumeName)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssDifferentialSoftwareSnapshotMgmt3: https://learn.microsoft.com/windows/win32/api/vsmgmt/nn-vsmgmt-ivssdifferentialsoftwaresnapshotmgmt3
@@ -809,27 +870,27 @@ type IVssDifferentialSoftwareSnapshotMgmt3 struct {
 var IID_IVssDifferentialSoftwareSnapshotMgmt3 = win32.GUID{Data1: 0x383f7e71, Data2: 0xa4c5, Data3: 0x401f, Data4: [8]byte{0xb2, 0x7f, 0xf8, 0x26, 0x28, 0x9f, 0x84, 0x58}}
 
 // SetVolumeProtectLevel dispatches through IVssDifferentialSoftwareSnapshotMgmt3's vtable slot 13.
-func (self *IVssDifferentialSoftwareSnapshotMgmt3) SetVolumeProtectLevel(pwszVolumeName *uint16, protectionLevel VSS_PROTECTION_LEVEL) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt3) SetVolumeProtectLevel(pwszVolumeName *uint16, protectionLevel VSS_PROTECTION_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(protectionLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolumeProtectLevel dispatches through IVssDifferentialSoftwareSnapshotMgmt3's vtable slot 14.
-func (self *IVssDifferentialSoftwareSnapshotMgmt3) GetVolumeProtectLevel(pwszVolumeName *uint16, protectionLevel *VSS_VOLUME_PROTECTION_INFO) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt3) GetVolumeProtectLevel(pwszVolumeName *uint16, protectionLevel *VSS_VOLUME_PROTECTION_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(protectionLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearVolumeProtectFault dispatches through IVssDifferentialSoftwareSnapshotMgmt3's vtable slot 15.
-func (self *IVssDifferentialSoftwareSnapshotMgmt3) ClearVolumeProtectFault(pwszVolumeName *uint16) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt3) ClearVolumeProtectFault(pwszVolumeName *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteUnusedDiffAreas dispatches through IVssDifferentialSoftwareSnapshotMgmt3's vtable slot 16.
-func (self *IVssDifferentialSoftwareSnapshotMgmt3) DeleteUnusedDiffAreas(pwszDiffAreaVolumeName *uint16) foundation.HRESULT {
+func (self *IVssDifferentialSoftwareSnapshotMgmt3) DeleteUnusedDiffAreas(pwszDiffAreaVolumeName *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszDiffAreaVolumeName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssEnumMgmtObject: https://learn.microsoft.com/windows/win32/api/vsmgmt/nn-vsmgmt-ivssenummgmtobject
@@ -842,27 +903,27 @@ type IVssEnumMgmtObject struct {
 var IID_IVssEnumMgmtObject = win32.GUID{Data1: 0x01954e6b, Data2: 0x9254, Data3: 0x4e6e, Data4: [8]byte{0x80, 0x8c, 0xc9, 0xe0, 0x5d, 0x00, 0x76, 0x96}}
 
 // Next dispatches through IVssEnumMgmtObject's vtable slot 3.
-func (self *IVssEnumMgmtObject) Next(celt uint32, rgelt *VSS_MGMT_OBJECT_PROP, pceltFetched *uint32) foundation.HRESULT {
+func (self *IVssEnumMgmtObject) Next(celt uint32, rgelt *VSS_MGMT_OBJECT_PROP, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IVssEnumMgmtObject's vtable slot 4.
-func (self *IVssEnumMgmtObject) Skip(celt uint32) foundation.HRESULT {
+func (self *IVssEnumMgmtObject) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IVssEnumMgmtObject's vtable slot 5.
-func (self *IVssEnumMgmtObject) Reset() foundation.HRESULT {
+func (self *IVssEnumMgmtObject) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IVssEnumMgmtObject's vtable slot 6.
-func (self *IVssEnumMgmtObject) Clone(ppenum **IVssEnumMgmtObject) foundation.HRESULT {
+func (self *IVssEnumMgmtObject) Clone(ppenum **IVssEnumMgmtObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssEnumObject: https://learn.microsoft.com/windows/win32/api/vss/nn-vss-ivssenumobject
@@ -875,27 +936,27 @@ type IVssEnumObject struct {
 var IID_IVssEnumObject = win32.GUID{Data1: 0xae1c7110, Data2: 0x2f60, Data3: 0x11d3, Data4: [8]byte{0x8a, 0x39, 0x00, 0xc0, 0x4f, 0x72, 0xd8, 0xe3}}
 
 // Next dispatches through IVssEnumObject's vtable slot 3.
-func (self *IVssEnumObject) Next(celt uint32, rgelt *VSS_OBJECT_PROP, pceltFetched *uint32) foundation.HRESULT {
+func (self *IVssEnumObject) Next(celt uint32, rgelt *VSS_OBJECT_PROP, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IVssEnumObject's vtable slot 4.
-func (self *IVssEnumObject) Skip(celt uint32) foundation.HRESULT {
+func (self *IVssEnumObject) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IVssEnumObject's vtable slot 5.
-func (self *IVssEnumObject) Reset() foundation.HRESULT {
+func (self *IVssEnumObject) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IVssEnumObject's vtable slot 6.
-func (self *IVssEnumObject) Clone(ppenum **IVssEnumObject) foundation.HRESULT {
+func (self *IVssEnumObject) Clone(ppenum **IVssEnumObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssExamineWriterMetadata: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivssexaminewritermetadata
@@ -908,69 +969,69 @@ type IVssExamineWriterMetadata struct {
 var IID_IVssExamineWriterMetadata = win32.GUID{Data1: 0x902fcf7f, Data2: 0xb7fd, Data3: 0x42f8, Data4: [8]byte{0x81, 0xf1, 0xb2, 0xe4, 0x00, 0xb1, 0xe5, 0xbd}}
 
 // GetIdentity dispatches through IVssExamineWriterMetadata's vtable slot 3.
-func (self *IVssExamineWriterMetadata) GetIdentity(pidInstance *win32.GUID, pidWriter *win32.GUID, pbstrWriterName *foundation.BSTR, pUsage *VSS_USAGE_TYPE, pSource *VSS_SOURCE_TYPE) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) GetIdentity(pidInstance *win32.GUID, pidWriter *win32.GUID, pbstrWriterName *foundation.BSTR, pUsage *VSS_USAGE_TYPE, pSource *VSS_SOURCE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pidInstance)), uintptr(unsafe.Pointer(pidWriter)), uintptr(unsafe.Pointer(pbstrWriterName)), uintptr(unsafe.Pointer(pUsage)), uintptr(unsafe.Pointer(pSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileCounts dispatches through IVssExamineWriterMetadata's vtable slot 4.
-func (self *IVssExamineWriterMetadata) GetFileCounts(pcIncludeFiles *uint32, pcExcludeFiles *uint32, pcComponents *uint32) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) GetFileCounts(pcIncludeFiles *uint32, pcExcludeFiles *uint32, pcComponents *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcIncludeFiles)), uintptr(unsafe.Pointer(pcExcludeFiles)), uintptr(unsafe.Pointer(pcComponents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIncludeFile dispatches through IVssExamineWriterMetadata's vtable slot 5.
-func (self *IVssExamineWriterMetadata) GetIncludeFile(iFile uint32, ppFiledesc **IVssWMFiledesc) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) GetIncludeFile(iFile uint32, ppFiledesc **IVssWMFiledesc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iFile), uintptr(unsafe.Pointer(ppFiledesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExcludeFile dispatches through IVssExamineWriterMetadata's vtable slot 6.
-func (self *IVssExamineWriterMetadata) GetExcludeFile(iFile uint32, ppFiledesc **IVssWMFiledesc) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) GetExcludeFile(iFile uint32, ppFiledesc **IVssWMFiledesc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iFile), uintptr(unsafe.Pointer(ppFiledesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetComponent dispatches through IVssExamineWriterMetadata's vtable slot 7.
-func (self *IVssExamineWriterMetadata) GetComponent(iComponent uint32, ppComponent **IVssWMComponent) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) GetComponent(iComponent uint32, ppComponent **IVssWMComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(iComponent), uintptr(unsafe.Pointer(ppComponent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestoreMethod dispatches through IVssExamineWriterMetadata's vtable slot 8.
-func (self *IVssExamineWriterMetadata) GetRestoreMethod(pMethod *VSS_RESTOREMETHOD_ENUM, pbstrService *foundation.BSTR, pbstrUserProcedure *foundation.BSTR, pwriterRestore *VSS_WRITERRESTORE_ENUM, pbRebootRequired *bool, pcMappings *uint32) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) GetRestoreMethod(pMethod *VSS_RESTOREMETHOD_ENUM, pbstrService *foundation.BSTR, pbstrUserProcedure *foundation.BSTR, pwriterRestore *VSS_WRITERRESTORE_ENUM, pbRebootRequired *bool, pcMappings *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMethod)), uintptr(unsafe.Pointer(pbstrService)), uintptr(unsafe.Pointer(pbstrUserProcedure)), uintptr(unsafe.Pointer(pwriterRestore)), uintptr(unsafe.Pointer(pbRebootRequired)), uintptr(unsafe.Pointer(pcMappings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAlternateLocationMapping dispatches through IVssExamineWriterMetadata's vtable slot 9.
-func (self *IVssExamineWriterMetadata) GetAlternateLocationMapping(iMapping uint32, ppFiledesc **IVssWMFiledesc) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) GetAlternateLocationMapping(iMapping uint32, ppFiledesc **IVssWMFiledesc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(iMapping), uintptr(unsafe.Pointer(ppFiledesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackupSchema dispatches through IVssExamineWriterMetadata's vtable slot 10.
-func (self *IVssExamineWriterMetadata) GetBackupSchema(pdwSchemaMask *uint32) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) GetBackupSchema(pdwSchemaMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSchemaMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocument dispatches through IVssExamineWriterMetadata's vtable slot 11.
-func (self *IVssExamineWriterMetadata) GetDocument(pDoc **dataxmlmsxml.IXMLDOMDocument) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) GetDocument(pDoc **dataxmlmsxml.IXMLDOMDocument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDoc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveAsXML dispatches through IVssExamineWriterMetadata's vtable slot 12.
-func (self *IVssExamineWriterMetadata) SaveAsXML(pbstrXML *foundation.BSTR) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) SaveAsXML(pbstrXML *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrXML)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadFromXML dispatches through IVssExamineWriterMetadata's vtable slot 13.
-func (self *IVssExamineWriterMetadata) LoadFromXML(bstrXML foundation.BSTR) foundation.HRESULT {
+func (self *IVssExamineWriterMetadata) LoadFromXML(bstrXML foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXML)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssExamineWriterMetadataEx: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivssexaminewritermetadataex
@@ -983,9 +1044,9 @@ type IVssExamineWriterMetadataEx struct {
 var IID_IVssExamineWriterMetadataEx = win32.GUID{Data1: 0x0c0e5ec0, Data2: 0xca44, Data3: 0x472b, Data4: [8]byte{0xb7, 0x02, 0xe6, 0x52, 0xdb, 0x1c, 0x04, 0x51}}
 
 // GetIdentityEx dispatches through IVssExamineWriterMetadataEx's vtable slot 14.
-func (self *IVssExamineWriterMetadataEx) GetIdentityEx(pidInstance *win32.GUID, pidWriter *win32.GUID, pbstrWriterName *foundation.BSTR, pbstrInstanceName *foundation.BSTR, pUsage *VSS_USAGE_TYPE, pSource *VSS_SOURCE_TYPE) foundation.HRESULT {
+func (self *IVssExamineWriterMetadataEx) GetIdentityEx(pidInstance *win32.GUID, pidWriter *win32.GUID, pbstrWriterName *foundation.BSTR, pbstrInstanceName *foundation.BSTR, pUsage *VSS_USAGE_TYPE, pSource *VSS_SOURCE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pidInstance)), uintptr(unsafe.Pointer(pidWriter)), uintptr(unsafe.Pointer(pbstrWriterName)), uintptr(unsafe.Pointer(pbstrInstanceName)), uintptr(unsafe.Pointer(pUsage)), uintptr(unsafe.Pointer(pSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssExamineWriterMetadataEx2: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivssexaminewritermetadataex2
@@ -998,21 +1059,21 @@ type IVssExamineWriterMetadataEx2 struct {
 var IID_IVssExamineWriterMetadataEx2 = win32.GUID{Data1: 0xce115780, Data2: 0xa611, Data3: 0x431b, Data4: [8]byte{0xb5, 0x7f, 0xc3, 0x83, 0x03, 0xab, 0x6a, 0xee}}
 
 // GetVersion dispatches through IVssExamineWriterMetadataEx2's vtable slot 15.
-func (self *IVssExamineWriterMetadataEx2) GetVersion(pdwMajorVersion *uint32, pdwMinorVersion *uint32) foundation.HRESULT {
+func (self *IVssExamineWriterMetadataEx2) GetVersion(pdwMajorVersion *uint32, pdwMinorVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMajorVersion)), uintptr(unsafe.Pointer(pdwMinorVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExcludeFromSnapshotCount dispatches through IVssExamineWriterMetadataEx2's vtable slot 16.
-func (self *IVssExamineWriterMetadataEx2) GetExcludeFromSnapshotCount(pcExcludedFromSnapshot *uint32) foundation.HRESULT {
+func (self *IVssExamineWriterMetadataEx2) GetExcludeFromSnapshotCount(pcExcludedFromSnapshot *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcExcludedFromSnapshot)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExcludeFromSnapshotFile dispatches through IVssExamineWriterMetadataEx2's vtable slot 17.
-func (self *IVssExamineWriterMetadataEx2) GetExcludeFromSnapshotFile(iFile uint32, ppFiledesc **IVssWMFiledesc) foundation.HRESULT {
+func (self *IVssExamineWriterMetadataEx2) GetExcludeFromSnapshotFile(iFile uint32, ppFiledesc **IVssWMFiledesc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(iFile), uintptr(unsafe.Pointer(ppFiledesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssExpressWriter: https://learn.microsoft.com/windows/win32/api/vswriter/nl-vswriter-ivssexpresswriter
@@ -1025,15 +1086,16 @@ type IVssExpressWriter struct {
 var IID_IVssExpressWriter = win32.GUID{Data1: 0xe33affdc, Data2: 0x59c7, Data3: 0x47b1, Data4: [8]byte{0x97, 0xd5, 0x42, 0x66, 0x59, 0x8f, 0x62, 0x35}}
 
 // LoadMetadata dispatches through IVssExpressWriter's vtable slot 4.
-func (self *IVssExpressWriter) LoadMetadata(metadata foundation.PWSTR, reserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(metadata)), uintptr(reserved))
-	return foundation.HRESULT(r1)
+func (self *IVssExpressWriter) LoadMetadata(metadata string, reserved uint32) error {
+	_metadata := win32.UTF16Ptr(metadata)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_metadata)), uintptr(reserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Register dispatches through IVssExpressWriter's vtable slot 5.
-func (self *IVssExpressWriter) Register() foundation.HRESULT {
+func (self *IVssExpressWriter) Register() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssFileShareSnapshotProvider: https://learn.microsoft.com/windows/win32/api/vsprov/nn-vsprov-ivssfilesharesnapshotprovider
@@ -1046,21 +1108,21 @@ type IVssFileShareSnapshotProvider struct {
 var IID_IVssFileShareSnapshotProvider = win32.GUID{Data1: 0xc8636060, Data2: 0x7c2e, Data3: 0x11df, Data4: [8]byte{0x8c, 0x4a, 0x08, 0x00, 0x20, 0x0c, 0x9a, 0x66}}
 
 // SetContext dispatches through IVssFileShareSnapshotProvider's vtable slot 3.
-func (self *IVssFileShareSnapshotProvider) SetContext(lContext int32) foundation.HRESULT {
+func (self *IVssFileShareSnapshotProvider) SetContext(lContext int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsPathSupported dispatches through IVssFileShareSnapshotProvider's vtable slot 8.
-func (self *IVssFileShareSnapshotProvider) IsPathSupported(pwszSharePath *uint16, pbSupportedByThisProvider *foundation.BOOL) foundation.HRESULT {
+func (self *IVssFileShareSnapshotProvider) IsPathSupported(pwszSharePath *uint16, pbSupportedByThisProvider *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSharePath)), uintptr(unsafe.Pointer(pbSupportedByThisProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsPathSnapshotted dispatches through IVssFileShareSnapshotProvider's vtable slot 9.
-func (self *IVssFileShareSnapshotProvider) IsPathSnapshotted(pwszSharePath *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCompatibility *int32) foundation.HRESULT {
+func (self *IVssFileShareSnapshotProvider) IsPathSnapshotted(pwszSharePath *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCompatibility *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSharePath)), uintptr(unsafe.Pointer(pbSnapshotsPresent)), uintptr(unsafe.Pointer(plSnapshotCompatibility)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssHardwareSnapshotProvider: https://learn.microsoft.com/windows/win32/api/vsprov/nn-vsprov-ivsshardwaresnapshotprovider
@@ -1073,33 +1135,33 @@ type IVssHardwareSnapshotProvider struct {
 var IID_IVssHardwareSnapshotProvider = win32.GUID{Data1: 0x9593a157, Data2: 0x44e9, Data3: 0x4344, Data4: [8]byte{0xbb, 0xeb, 0x44, 0xfb, 0xf9, 0xb0, 0x6b, 0x10}}
 
 // AreLunsSupported dispatches through IVssHardwareSnapshotProvider's vtable slot 3.
-func (self *IVssHardwareSnapshotProvider) AreLunsSupported(lLunCount int32, lContext int32, rgwszDevices **uint16, pLunInformation *storagevirtualdiskservice.VDS_LUN_INFORMATION, pbIsSupported *foundation.BOOL) foundation.HRESULT {
+func (self *IVssHardwareSnapshotProvider) AreLunsSupported(lLunCount int32, lContext int32, rgwszDevices **uint16, pLunInformation *storagevirtualdiskservice.VDS_LUN_INFORMATION, pbIsSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lLunCount), uintptr(lContext), uintptr(unsafe.Pointer(rgwszDevices)), uintptr(unsafe.Pointer(pLunInformation)), uintptr(unsafe.Pointer(pbIsSupported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FillInLunInfo dispatches through IVssHardwareSnapshotProvider's vtable slot 4.
-func (self *IVssHardwareSnapshotProvider) FillInLunInfo(wszDeviceName *uint16, pLunInfo *storagevirtualdiskservice.VDS_LUN_INFORMATION, pbIsSupported *foundation.BOOL) foundation.HRESULT {
+func (self *IVssHardwareSnapshotProvider) FillInLunInfo(wszDeviceName *uint16, pLunInfo *storagevirtualdiskservice.VDS_LUN_INFORMATION, pbIsSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszDeviceName)), uintptr(unsafe.Pointer(pLunInfo)), uintptr(unsafe.Pointer(pbIsSupported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTargetLuns dispatches through IVssHardwareSnapshotProvider's vtable slot 6.
-func (self *IVssHardwareSnapshotProvider) GetTargetLuns(lLunCount int32, rgDeviceNames **uint16, rgSourceLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, rgDestinationLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION) foundation.HRESULT {
+func (self *IVssHardwareSnapshotProvider) GetTargetLuns(lLunCount int32, rgDeviceNames **uint16, rgSourceLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, rgDestinationLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lLunCount), uintptr(unsafe.Pointer(rgDeviceNames)), uintptr(unsafe.Pointer(rgSourceLuns)), uintptr(unsafe.Pointer(rgDestinationLuns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LocateLuns dispatches through IVssHardwareSnapshotProvider's vtable slot 7.
-func (self *IVssHardwareSnapshotProvider) LocateLuns(lLunCount int32, rgSourceLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION) foundation.HRESULT {
+func (self *IVssHardwareSnapshotProvider) LocateLuns(lLunCount int32, rgSourceLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lLunCount), uintptr(unsafe.Pointer(rgSourceLuns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnLunEmpty dispatches through IVssHardwareSnapshotProvider's vtable slot 8.
-func (self *IVssHardwareSnapshotProvider) OnLunEmpty(wszDeviceName *uint16, pInformation *storagevirtualdiskservice.VDS_LUN_INFORMATION) foundation.HRESULT {
+func (self *IVssHardwareSnapshotProvider) OnLunEmpty(wszDeviceName *uint16, pInformation *storagevirtualdiskservice.VDS_LUN_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszDeviceName)), uintptr(unsafe.Pointer(pInformation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssHardwareSnapshotProviderEx: https://learn.microsoft.com/windows/win32/api/vsprov/nn-vsprov-ivsshardwaresnapshotproviderex
@@ -1112,27 +1174,27 @@ type IVssHardwareSnapshotProviderEx struct {
 var IID_IVssHardwareSnapshotProviderEx = win32.GUID{Data1: 0x7f5ba925, Data2: 0xcdb1, Data3: 0x4d11, Data4: [8]byte{0xa7, 0x1f, 0x33, 0x9e, 0xb7, 0xe7, 0x09, 0xfd}}
 
 // GetProviderCapabilities dispatches through IVssHardwareSnapshotProviderEx's vtable slot 9.
-func (self *IVssHardwareSnapshotProviderEx) GetProviderCapabilities(pllOriginalCapabilityMask *uint64) foundation.HRESULT {
+func (self *IVssHardwareSnapshotProviderEx) GetProviderCapabilities(pllOriginalCapabilityMask *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllOriginalCapabilityMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnLunStateChange dispatches through IVssHardwareSnapshotProviderEx's vtable slot 10.
-func (self *IVssHardwareSnapshotProviderEx) OnLunStateChange(pSnapshotLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, pOriginalLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, dwCount uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IVssHardwareSnapshotProviderEx) OnLunStateChange(pSnapshotLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, pOriginalLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, dwCount uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSnapshotLuns)), uintptr(unsafe.Pointer(pOriginalLuns)), uintptr(dwCount), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResyncLuns dispatches through IVssHardwareSnapshotProviderEx's vtable slot 11.
-func (self *IVssHardwareSnapshotProviderEx) ResyncLuns(pSourceLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, pTargetLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, dwCount uint32, ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssHardwareSnapshotProviderEx) ResyncLuns(pSourceLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, pTargetLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, dwCount uint32, ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceLuns)), uintptr(unsafe.Pointer(pTargetLuns)), uintptr(dwCount), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnReuseLuns dispatches through IVssHardwareSnapshotProviderEx's vtable slot 12.
-func (self *IVssHardwareSnapshotProviderEx) OnReuseLuns(pSnapshotLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, pOriginalLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, dwCount uint32) foundation.HRESULT {
+func (self *IVssHardwareSnapshotProviderEx) OnReuseLuns(pSnapshotLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, pOriginalLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION, dwCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSnapshotLuns)), uintptr(unsafe.Pointer(pOriginalLuns)), uintptr(dwCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssProviderCreateSnapshotSet: https://learn.microsoft.com/windows/win32/api/vsprov/nn-vsprov-ivssprovidercreatesnapshotset
@@ -1154,15 +1216,16 @@ type IVssProviderNotifications struct {
 var IID_IVssProviderNotifications = win32.GUID{Data1: 0xe561901f, Data2: 0x03a5, Data3: 0x4afe, Data4: [8]byte{0x86, 0xd0, 0x72, 0xba, 0xee, 0xce, 0x70, 0x04}}
 
 // OnLoad dispatches through IVssProviderNotifications's vtable slot 3.
-func (self *IVssProviderNotifications) OnLoad(pCallback *systemcom.IUnknown) foundation.HRESULT {
+func (self *IVssProviderNotifications) OnLoad(pCallback *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnUnload dispatches through IVssProviderNotifications's vtable slot 4.
-func (self *IVssProviderNotifications) OnUnload(bForceUnload foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(bForceUnload))
-	return foundation.HRESULT(r1)
+func (self *IVssProviderNotifications) OnUnload(bForceUnload bool) error {
+	_bForceUnload := win32.Bool32(bForceUnload)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_bForceUnload))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssSnapshotMgmt: https://learn.microsoft.com/windows/win32/api/vsmgmt/nn-vsmgmt-ivsssnapshotmgmt
@@ -1184,9 +1247,9 @@ type IVssSnapshotMgmt2 struct {
 var IID_IVssSnapshotMgmt2 = win32.GUID{Data1: 0x0f61ec39, Data2: 0xfe82, Data3: 0x45f2, Data4: [8]byte{0xa3, 0xf0, 0x76, 0x8b, 0x5d, 0x42, 0x71, 0x02}}
 
 // GetMinDiffAreaSize dispatches through IVssSnapshotMgmt2's vtable slot 3.
-func (self *IVssSnapshotMgmt2) GetMinDiffAreaSize(pllMinDiffAreaSize *int64) foundation.HRESULT {
+func (self *IVssSnapshotMgmt2) GetMinDiffAreaSize(pllMinDiffAreaSize *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllMinDiffAreaSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssSoftwareSnapshotProvider: https://learn.microsoft.com/windows/win32/api/vsprov/nn-vsprov-ivsssoftwaresnapshotprovider
@@ -1199,27 +1262,27 @@ type IVssSoftwareSnapshotProvider struct {
 var IID_IVssSoftwareSnapshotProvider = win32.GUID{Data1: 0x609e123e, Data2: 0x2c5a, Data3: 0x44d3, Data4: [8]byte{0x8f, 0x01, 0x0b, 0x1d, 0x9a, 0x47, 0xd1, 0xff}}
 
 // SetContext dispatches through IVssSoftwareSnapshotProvider's vtable slot 3.
-func (self *IVssSoftwareSnapshotProvider) SetContext(lContext int32) foundation.HRESULT {
+func (self *IVssSoftwareSnapshotProvider) SetContext(lContext int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsVolumeSupported dispatches through IVssSoftwareSnapshotProvider's vtable slot 8.
-func (self *IVssSoftwareSnapshotProvider) IsVolumeSupported(pwszVolumeName *uint16, pbSupportedByThisProvider *foundation.BOOL) foundation.HRESULT {
+func (self *IVssSoftwareSnapshotProvider) IsVolumeSupported(pwszVolumeName *uint16, pbSupportedByThisProvider *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSupportedByThisProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsVolumeSnapshotted dispatches through IVssSoftwareSnapshotProvider's vtable slot 9.
-func (self *IVssSoftwareSnapshotProvider) IsVolumeSnapshotted(pwszVolumeName *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCompatibility *int32) foundation.HRESULT {
+func (self *IVssSoftwareSnapshotProvider) IsVolumeSnapshotted(pwszVolumeName *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCompatibility *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSnapshotsPresent)), uintptr(unsafe.Pointer(plSnapshotCompatibility)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryRevertStatus dispatches through IVssSoftwareSnapshotProvider's vtable slot 12.
-func (self *IVssSoftwareSnapshotProvider) QueryRevertStatus(pwszVolume *uint16, ppAsync **IVssAsync) foundation.HRESULT {
+func (self *IVssSoftwareSnapshotProvider) QueryRevertStatus(pwszVolume *uint16, ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolume)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssWMComponent: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivsswmcomponent
@@ -1228,39 +1291,39 @@ type IVssWMComponent struct {
 }
 
 // GetComponentInfo dispatches through IVssWMComponent's vtable slot 3.
-func (self *IVssWMComponent) GetComponentInfo(ppInfo **VSS_COMPONENTINFO) foundation.HRESULT {
+func (self *IVssWMComponent) GetComponentInfo(ppInfo **VSS_COMPONENTINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeComponentInfo dispatches through IVssWMComponent's vtable slot 4.
-func (self *IVssWMComponent) FreeComponentInfo(pInfo *VSS_COMPONENTINFO) foundation.HRESULT {
+func (self *IVssWMComponent) FreeComponentInfo(pInfo *VSS_COMPONENTINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFile dispatches through IVssWMComponent's vtable slot 5.
-func (self *IVssWMComponent) GetFile(iFile uint32, ppFiledesc **IVssWMFiledesc) foundation.HRESULT {
+func (self *IVssWMComponent) GetFile(iFile uint32, ppFiledesc **IVssWMFiledesc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iFile), uintptr(unsafe.Pointer(ppFiledesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDatabaseFile dispatches through IVssWMComponent's vtable slot 6.
-func (self *IVssWMComponent) GetDatabaseFile(iDBFile uint32, ppFiledesc **IVssWMFiledesc) foundation.HRESULT {
+func (self *IVssWMComponent) GetDatabaseFile(iDBFile uint32, ppFiledesc **IVssWMFiledesc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iDBFile), uintptr(unsafe.Pointer(ppFiledesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDatabaseLogFile dispatches through IVssWMComponent's vtable slot 7.
-func (self *IVssWMComponent) GetDatabaseLogFile(iDbLogFile uint32, ppFiledesc **IVssWMFiledesc) foundation.HRESULT {
+func (self *IVssWMComponent) GetDatabaseLogFile(iDbLogFile uint32, ppFiledesc **IVssWMFiledesc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(iDbLogFile), uintptr(unsafe.Pointer(ppFiledesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDependency dispatches through IVssWMComponent's vtable slot 8.
-func (self *IVssWMComponent) GetDependency(iDependency uint32, ppDependency **IVssWMDependency) foundation.HRESULT {
+func (self *IVssWMComponent) GetDependency(iDependency uint32, ppDependency **IVssWMDependency) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iDependency), uintptr(unsafe.Pointer(ppDependency)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssWMDependency: https://learn.microsoft.com/windows/win32/api/vswriter/nl-vswriter-ivsswmdependency
@@ -1269,21 +1332,21 @@ type IVssWMDependency struct {
 }
 
 // GetWriterId dispatches through IVssWMDependency's vtable slot 3.
-func (self *IVssWMDependency) GetWriterId(pWriterId *win32.GUID) foundation.HRESULT {
+func (self *IVssWMDependency) GetWriterId(pWriterId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWriterId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLogicalPath dispatches through IVssWMDependency's vtable slot 4.
-func (self *IVssWMDependency) GetLogicalPath(pbstrLogicalPath *foundation.BSTR) foundation.HRESULT {
+func (self *IVssWMDependency) GetLogicalPath(pbstrLogicalPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLogicalPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetComponentName dispatches through IVssWMDependency's vtable slot 5.
-func (self *IVssWMDependency) GetComponentName(pbstrComponentName *foundation.BSTR) foundation.HRESULT {
+func (self *IVssWMDependency) GetComponentName(pbstrComponentName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrComponentName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssWMFiledesc: https://learn.microsoft.com/windows/win32/api/vswriter/nl-vswriter-ivsswmfiledesc
@@ -1292,33 +1355,33 @@ type IVssWMFiledesc struct {
 }
 
 // GetPath dispatches through IVssWMFiledesc's vtable slot 3.
-func (self *IVssWMFiledesc) GetPath(pbstrPath *foundation.BSTR) foundation.HRESULT {
+func (self *IVssWMFiledesc) GetPath(pbstrPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilespec dispatches through IVssWMFiledesc's vtable slot 4.
-func (self *IVssWMFiledesc) GetFilespec(pbstrFilespec *foundation.BSTR) foundation.HRESULT {
+func (self *IVssWMFiledesc) GetFilespec(pbstrFilespec *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFilespec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecursive dispatches through IVssWMFiledesc's vtable slot 5.
-func (self *IVssWMFiledesc) GetRecursive(pbRecursive *bool) foundation.HRESULT {
+func (self *IVssWMFiledesc) GetRecursive(pbRecursive *bool) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRecursive)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAlternateLocation dispatches through IVssWMFiledesc's vtable slot 6.
-func (self *IVssWMFiledesc) GetAlternateLocation(pbstrAlternateLocation *foundation.BSTR) foundation.HRESULT {
+func (self *IVssWMFiledesc) GetAlternateLocation(pbstrAlternateLocation *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrAlternateLocation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackupTypeMask dispatches through IVssWMFiledesc's vtable slot 7.
-func (self *IVssWMFiledesc) GetBackupTypeMask(pdwTypeMask *uint32) foundation.HRESULT {
+func (self *IVssWMFiledesc) GetBackupTypeMask(pdwTypeMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwTypeMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssWriterComponents: https://learn.microsoft.com/windows/win32/api/vswriter/nl-vswriter-ivsswritercomponents
@@ -1327,21 +1390,21 @@ type IVssWriterComponents struct {
 }
 
 // GetComponentCount dispatches through IVssWriterComponents's vtable slot 0.
-func (self *IVssWriterComponents) GetComponentCount(pcComponents *uint32) foundation.HRESULT {
+func (self *IVssWriterComponents) GetComponentCount(pcComponents *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcComponents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWriterInfo dispatches through IVssWriterComponents's vtable slot 1.
-func (self *IVssWriterComponents) GetWriterInfo(pidInstance *win32.GUID, pidWriter *win32.GUID) foundation.HRESULT {
+func (self *IVssWriterComponents) GetWriterInfo(pidInstance *win32.GUID, pidWriter *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[1], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pidInstance)), uintptr(unsafe.Pointer(pidWriter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetComponent dispatches through IVssWriterComponents's vtable slot 2.
-func (self *IVssWriterComponents) GetComponent(iComponent uint32, ppComponent **IVssComponent) foundation.HRESULT {
+func (self *IVssWriterComponents) GetComponent(iComponent uint32, ppComponent **IVssComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[2], uintptr(unsafe.Pointer(self)), uintptr(iComponent), uintptr(unsafe.Pointer(ppComponent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVssWriterComponentsExt: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivsswritercomponentsext

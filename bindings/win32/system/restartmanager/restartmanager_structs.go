@@ -8,8 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-// RM_FILTER_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RM_FILTER_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RM_FILTER_INFO_Anonymous_e__Union struct {
 	Data [2]uint64
 }

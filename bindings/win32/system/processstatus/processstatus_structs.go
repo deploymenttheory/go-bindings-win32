@@ -88,15 +88,15 @@ type PROCESS_MEMORY_COUNTERS_EX2 struct {
 }
 
 // PSAPI_WORKING_SET_BLOCK: https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-psapi_working_set_block
-// PSAPI_WORKING_SET_BLOCK is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PSAPI_WORKING_SET_BLOCK is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PSAPI_WORKING_SET_BLOCK struct {
 	Data [1]uint64
 }
 
 // PSAPI_WORKING_SET_EX_BLOCK: https://learn.microsoft.com/windows/win32/api/psapi/ns-psapi-psapi_working_set_ex_block
-// PSAPI_WORKING_SET_EX_BLOCK is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PSAPI_WORKING_SET_EX_BLOCK is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PSAPI_WORKING_SET_EX_BLOCK struct {
 	Data [1]uint64
 }

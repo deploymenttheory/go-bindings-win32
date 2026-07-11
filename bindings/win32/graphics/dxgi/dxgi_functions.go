@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -27,46 +26,46 @@ var (
 
 // CreateDXGIFactory calls dxgi!CreateDXGIFactory.
 // https://learn.microsoft.com/windows/win32/api/dxgi/nf-dxgi-createdxgifactory
-func CreateDXGIFactory(riid *win32.GUID, ppFactory *unsafe.Pointer) foundation.HRESULT {
+func CreateDXGIFactory(riid *win32.GUID, ppFactory *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreateDXGIFactory.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppFactory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDXGIFactory1 calls dxgi!CreateDXGIFactory1.
 // https://learn.microsoft.com/windows/win32/api/dxgi/nf-dxgi-createdxgifactory1
 // Minimum OS: windows6.1.
-func CreateDXGIFactory1(riid *win32.GUID, ppFactory *unsafe.Pointer) foundation.HRESULT {
+func CreateDXGIFactory1(riid *win32.GUID, ppFactory *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreateDXGIFactory1.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppFactory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDXGIFactory2 calls dxgi!CreateDXGIFactory2.
 // https://learn.microsoft.com/windows/win32/api/dxgi1_3/nf-dxgi1_3-createdxgifactory2
 // Minimum OS: windows8.1.
-func CreateDXGIFactory2(Flags DXGI_CREATE_FACTORY_FLAGS, riid *win32.GUID, ppFactory *unsafe.Pointer) foundation.HRESULT {
+func CreateDXGIFactory2(Flags DXGI_CREATE_FACTORY_FLAGS, riid *win32.GUID, ppFactory *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreateDXGIFactory2.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppFactory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DXGIDeclareAdapterRemovalSupport calls dxgi!DXGIDeclareAdapterRemovalSupport.
 // https://learn.microsoft.com/windows/win32/api/dxgi1_6/nf-dxgi1_6-dxgideclareadapterremovalsupport
 // Minimum OS: windows10.0.17134.
-func DXGIDeclareAdapterRemovalSupport() foundation.HRESULT {
+func DXGIDeclareAdapterRemovalSupport() error {
 	r1, _, _ := syscall.SyscallN(procDXGIDeclareAdapterRemovalSupport.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DXGIDisableVBlankVirtualization calls dxgi!DXGIDisableVBlankVirtualization.
 // https://learn.microsoft.com/windows/win32/api/dxgi1_6/nf-dxgi1_6-dxgidisablevblankvirtualization
-func DXGIDisableVBlankVirtualization() foundation.HRESULT {
+func DXGIDisableVBlankVirtualization() error {
 	r1, _, _ := syscall.SyscallN(procDXGIDisableVBlankVirtualization.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DXGIGetDebugInterface1 calls dxgi!DXGIGetDebugInterface1.
 // https://learn.microsoft.com/windows/win32/api/dxgi1_3/nf-dxgi1_3-dxgigetdebuginterface1
 // Minimum OS: windows8.1.
-func DXGIGetDebugInterface1(Flags uint32, riid *win32.GUID, pDebug *unsafe.Pointer) foundation.HRESULT {
+func DXGIGetDebugInterface1(Flags uint32, riid *win32.GUID, pDebug *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDXGIGetDebugInterface1.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pDebug)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 )
 
@@ -45,175 +44,225 @@ var (
 // NetDfsAdd calls NETAPI32!NetDfsAdd.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsadd
 // Minimum OS: windows6.0.6000.
-func NetDfsAdd(DfsEntryPath foundation.PWSTR, ServerName foundation.PWSTR, ShareName foundation.PWSTR, Comment foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsAdd.Addr(), uintptr(unsafe.Pointer(DfsEntryPath)), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(ShareName)), uintptr(unsafe.Pointer(Comment)), uintptr(Flags))
+func NetDfsAdd(DfsEntryPath string, ServerName string, ShareName string, Comment string, Flags uint32) uint32 {
+	_DfsEntryPath := win32.UTF16Ptr(DfsEntryPath)
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_ShareName := win32.UTF16Ptr(ShareName)
+	_Comment := win32.UTF16Ptr(Comment)
+	r1, _, _ := syscall.SyscallN(procNetDfsAdd.Addr(), uintptr(unsafe.Pointer(_DfsEntryPath)), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_ShareName)), uintptr(unsafe.Pointer(_Comment)), uintptr(Flags))
 	return uint32(r1)
 }
 
 // NetDfsAddFtRoot calls NETAPI32!NetDfsAddFtRoot.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsaddftroot
 // Minimum OS: windows6.0.6000.
-func NetDfsAddFtRoot(ServerName foundation.PWSTR, RootShare foundation.PWSTR, FtDfsName foundation.PWSTR, Comment foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsAddFtRoot.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(RootShare)), uintptr(unsafe.Pointer(FtDfsName)), uintptr(unsafe.Pointer(Comment)), uintptr(Flags))
+func NetDfsAddFtRoot(ServerName string, RootShare string, FtDfsName string, Comment string, Flags uint32) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_RootShare := win32.UTF16Ptr(RootShare)
+	_FtDfsName := win32.UTF16Ptr(FtDfsName)
+	_Comment := win32.UTF16Ptr(Comment)
+	r1, _, _ := syscall.SyscallN(procNetDfsAddFtRoot.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_RootShare)), uintptr(unsafe.Pointer(_FtDfsName)), uintptr(unsafe.Pointer(_Comment)), uintptr(Flags))
 	return uint32(r1)
 }
 
 // NetDfsAddRootTarget calls NETAPI32!NetDfsAddRootTarget.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsaddroottarget
 // Minimum OS: windows6.0.6000.
-func NetDfsAddRootTarget(pDfsPath foundation.PWSTR, pTargetPath foundation.PWSTR, MajorVersion uint32, pComment foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsAddRootTarget.Addr(), uintptr(unsafe.Pointer(pDfsPath)), uintptr(unsafe.Pointer(pTargetPath)), uintptr(MajorVersion), uintptr(unsafe.Pointer(pComment)), uintptr(Flags))
+func NetDfsAddRootTarget(pDfsPath string, pTargetPath string, MajorVersion uint32, pComment string, Flags uint32) uint32 {
+	_pDfsPath := win32.UTF16Ptr(pDfsPath)
+	_pTargetPath := win32.UTF16Ptr(pTargetPath)
+	_pComment := win32.UTF16Ptr(pComment)
+	r1, _, _ := syscall.SyscallN(procNetDfsAddRootTarget.Addr(), uintptr(unsafe.Pointer(_pDfsPath)), uintptr(unsafe.Pointer(_pTargetPath)), uintptr(MajorVersion), uintptr(unsafe.Pointer(_pComment)), uintptr(Flags))
 	return uint32(r1)
 }
 
 // NetDfsAddStdRoot calls NETAPI32!NetDfsAddStdRoot.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsaddstdroot
 // Minimum OS: windows6.0.6000.
-func NetDfsAddStdRoot(ServerName foundation.PWSTR, RootShare foundation.PWSTR, Comment foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsAddStdRoot.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(RootShare)), uintptr(unsafe.Pointer(Comment)), uintptr(Flags))
+func NetDfsAddStdRoot(ServerName string, RootShare string, Comment string, Flags uint32) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_RootShare := win32.UTF16Ptr(RootShare)
+	_Comment := win32.UTF16Ptr(Comment)
+	r1, _, _ := syscall.SyscallN(procNetDfsAddStdRoot.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_RootShare)), uintptr(unsafe.Pointer(_Comment)), uintptr(Flags))
 	return uint32(r1)
 }
 
 // NetDfsEnum calls NETAPI32!NetDfsEnum.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsenum
 // Minimum OS: windows6.0.6000.
-func NetDfsEnum(DfsName foundation.PWSTR, Level uint32, PrefMaxLen uint32, Buffer **byte, EntriesRead *uint32, ResumeHandle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsEnum.Addr(), uintptr(unsafe.Pointer(DfsName)), uintptr(Level), uintptr(PrefMaxLen), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(EntriesRead)), uintptr(unsafe.Pointer(ResumeHandle)))
+func NetDfsEnum(DfsName string, Level uint32, PrefMaxLen uint32, Buffer **byte, EntriesRead *uint32, ResumeHandle *uint32) uint32 {
+	_DfsName := win32.UTF16Ptr(DfsName)
+	r1, _, _ := syscall.SyscallN(procNetDfsEnum.Addr(), uintptr(unsafe.Pointer(_DfsName)), uintptr(Level), uintptr(PrefMaxLen), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(EntriesRead)), uintptr(unsafe.Pointer(ResumeHandle)))
 	return uint32(r1)
 }
 
 // NetDfsGetClientInfo calls NETAPI32!NetDfsGetClientInfo.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsgetclientinfo
 // Minimum OS: windows6.0.6000.
-func NetDfsGetClientInfo(DfsEntryPath foundation.PWSTR, ServerName foundation.PWSTR, ShareName foundation.PWSTR, Level uint32, Buffer **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsGetClientInfo.Addr(), uintptr(unsafe.Pointer(DfsEntryPath)), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(ShareName)), uintptr(Level), uintptr(unsafe.Pointer(Buffer)))
+func NetDfsGetClientInfo(DfsEntryPath string, ServerName string, ShareName string, Level uint32, Buffer **byte) uint32 {
+	_DfsEntryPath := win32.UTF16Ptr(DfsEntryPath)
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_ShareName := win32.UTF16Ptr(ShareName)
+	r1, _, _ := syscall.SyscallN(procNetDfsGetClientInfo.Addr(), uintptr(unsafe.Pointer(_DfsEntryPath)), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_ShareName)), uintptr(Level), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
 // NetDfsGetFtContainerSecurity calls NETAPI32!NetDfsGetFtContainerSecurity.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsgetftcontainersecurity
 // Minimum OS: windows6.0.6000.
-func NetDfsGetFtContainerSecurity(DomainName foundation.PWSTR, SecurityInformation uint32, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsGetFtContainerSecurity.Addr(), uintptr(unsafe.Pointer(DomainName)), uintptr(SecurityInformation), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(unsafe.Pointer(lpcbSecurityDescriptor)))
+func NetDfsGetFtContainerSecurity(DomainName string, SecurityInformation uint32, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor *uint32) uint32 {
+	_DomainName := win32.UTF16Ptr(DomainName)
+	r1, _, _ := syscall.SyscallN(procNetDfsGetFtContainerSecurity.Addr(), uintptr(unsafe.Pointer(_DomainName)), uintptr(SecurityInformation), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(unsafe.Pointer(lpcbSecurityDescriptor)))
 	return uint32(r1)
 }
 
 // NetDfsGetInfo calls NETAPI32!NetDfsGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsgetinfo
 // Minimum OS: windows6.0.6000.
-func NetDfsGetInfo(DfsEntryPath foundation.PWSTR, ServerName foundation.PWSTR, ShareName foundation.PWSTR, Level uint32, Buffer **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsGetInfo.Addr(), uintptr(unsafe.Pointer(DfsEntryPath)), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(ShareName)), uintptr(Level), uintptr(unsafe.Pointer(Buffer)))
+func NetDfsGetInfo(DfsEntryPath string, ServerName string, ShareName string, Level uint32, Buffer **byte) uint32 {
+	_DfsEntryPath := win32.UTF16Ptr(DfsEntryPath)
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_ShareName := win32.UTF16Ptr(ShareName)
+	r1, _, _ := syscall.SyscallN(procNetDfsGetInfo.Addr(), uintptr(unsafe.Pointer(_DfsEntryPath)), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_ShareName)), uintptr(Level), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
 // NetDfsGetSecurity calls NETAPI32!NetDfsGetSecurity.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsgetsecurity
 // Minimum OS: windows6.0.6000.
-func NetDfsGetSecurity(DfsEntryPath foundation.PWSTR, SecurityInformation uint32, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsGetSecurity.Addr(), uintptr(unsafe.Pointer(DfsEntryPath)), uintptr(SecurityInformation), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(unsafe.Pointer(lpcbSecurityDescriptor)))
+func NetDfsGetSecurity(DfsEntryPath string, SecurityInformation uint32, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor *uint32) uint32 {
+	_DfsEntryPath := win32.UTF16Ptr(DfsEntryPath)
+	r1, _, _ := syscall.SyscallN(procNetDfsGetSecurity.Addr(), uintptr(unsafe.Pointer(_DfsEntryPath)), uintptr(SecurityInformation), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(unsafe.Pointer(lpcbSecurityDescriptor)))
 	return uint32(r1)
 }
 
 // NetDfsGetStdContainerSecurity calls NETAPI32!NetDfsGetStdContainerSecurity.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsgetstdcontainersecurity
 // Minimum OS: windows6.0.6000.
-func NetDfsGetStdContainerSecurity(MachineName foundation.PWSTR, SecurityInformation uint32, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsGetStdContainerSecurity.Addr(), uintptr(unsafe.Pointer(MachineName)), uintptr(SecurityInformation), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(unsafe.Pointer(lpcbSecurityDescriptor)))
+func NetDfsGetStdContainerSecurity(MachineName string, SecurityInformation uint32, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor *uint32) uint32 {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, _ := syscall.SyscallN(procNetDfsGetStdContainerSecurity.Addr(), uintptr(unsafe.Pointer(_MachineName)), uintptr(SecurityInformation), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(unsafe.Pointer(lpcbSecurityDescriptor)))
 	return uint32(r1)
 }
 
 // NetDfsGetSupportedNamespaceVersion calls NETAPI32!NetDfsGetSupportedNamespaceVersion.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsgetsupportednamespaceversion
 // Minimum OS: windows6.0.6000.
-func NetDfsGetSupportedNamespaceVersion(Origin DFS_NAMESPACE_VERSION_ORIGIN, pName foundation.PWSTR, ppVersionInfo **DFS_SUPPORTED_NAMESPACE_VERSION_INFO) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsGetSupportedNamespaceVersion.Addr(), uintptr(Origin), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(ppVersionInfo)))
+func NetDfsGetSupportedNamespaceVersion(Origin DFS_NAMESPACE_VERSION_ORIGIN, pName string, ppVersionInfo **DFS_SUPPORTED_NAMESPACE_VERSION_INFO) uint32 {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(procNetDfsGetSupportedNamespaceVersion.Addr(), uintptr(Origin), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(ppVersionInfo)))
 	return uint32(r1)
 }
 
 // NetDfsMove calls NETAPI32!NetDfsMove.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsmove
 // Minimum OS: windows6.0.6000.
-func NetDfsMove(OldDfsEntryPath foundation.PWSTR, NewDfsEntryPath foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsMove.Addr(), uintptr(unsafe.Pointer(OldDfsEntryPath)), uintptr(unsafe.Pointer(NewDfsEntryPath)), uintptr(Flags))
+func NetDfsMove(OldDfsEntryPath string, NewDfsEntryPath string, Flags uint32) uint32 {
+	_OldDfsEntryPath := win32.UTF16Ptr(OldDfsEntryPath)
+	_NewDfsEntryPath := win32.UTF16Ptr(NewDfsEntryPath)
+	r1, _, _ := syscall.SyscallN(procNetDfsMove.Addr(), uintptr(unsafe.Pointer(_OldDfsEntryPath)), uintptr(unsafe.Pointer(_NewDfsEntryPath)), uintptr(Flags))
 	return uint32(r1)
 }
 
 // NetDfsRemove calls NETAPI32!NetDfsRemove.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsremove
 // Minimum OS: windows6.0.6000.
-func NetDfsRemove(DfsEntryPath foundation.PWSTR, ServerName foundation.PWSTR, ShareName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsRemove.Addr(), uintptr(unsafe.Pointer(DfsEntryPath)), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(ShareName)))
+func NetDfsRemove(DfsEntryPath string, ServerName string, ShareName string) uint32 {
+	_DfsEntryPath := win32.UTF16Ptr(DfsEntryPath)
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_ShareName := win32.UTF16Ptr(ShareName)
+	r1, _, _ := syscall.SyscallN(procNetDfsRemove.Addr(), uintptr(unsafe.Pointer(_DfsEntryPath)), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_ShareName)))
 	return uint32(r1)
 }
 
 // NetDfsRemoveFtRoot calls NETAPI32!NetDfsRemoveFtRoot.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsremoveftroot
 // Minimum OS: windows6.0.6000.
-func NetDfsRemoveFtRoot(ServerName foundation.PWSTR, RootShare foundation.PWSTR, FtDfsName foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsRemoveFtRoot.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(RootShare)), uintptr(unsafe.Pointer(FtDfsName)), uintptr(Flags))
+func NetDfsRemoveFtRoot(ServerName string, RootShare string, FtDfsName string) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_RootShare := win32.UTF16Ptr(RootShare)
+	_FtDfsName := win32.UTF16Ptr(FtDfsName)
+	r1, _, _ := syscall.SyscallN(procNetDfsRemoveFtRoot.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_RootShare)), uintptr(unsafe.Pointer(_FtDfsName)), 0)
 	return uint32(r1)
 }
 
 // NetDfsRemoveFtRootForced calls NETAPI32!NetDfsRemoveFtRootForced.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsremoveftrootforced
 // Minimum OS: windows6.0.6000.
-func NetDfsRemoveFtRootForced(DomainName foundation.PWSTR, ServerName foundation.PWSTR, RootShare foundation.PWSTR, FtDfsName foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsRemoveFtRootForced.Addr(), uintptr(unsafe.Pointer(DomainName)), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(RootShare)), uintptr(unsafe.Pointer(FtDfsName)), uintptr(Flags))
+func NetDfsRemoveFtRootForced(DomainName string, ServerName string, RootShare string, FtDfsName string) uint32 {
+	_DomainName := win32.UTF16Ptr(DomainName)
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_RootShare := win32.UTF16Ptr(RootShare)
+	_FtDfsName := win32.UTF16Ptr(FtDfsName)
+	r1, _, _ := syscall.SyscallN(procNetDfsRemoveFtRootForced.Addr(), uintptr(unsafe.Pointer(_DomainName)), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_RootShare)), uintptr(unsafe.Pointer(_FtDfsName)), 0)
 	return uint32(r1)
 }
 
 // NetDfsRemoveRootTarget calls NETAPI32!NetDfsRemoveRootTarget.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsremoveroottarget
 // Minimum OS: windows6.0.6000.
-func NetDfsRemoveRootTarget(pDfsPath foundation.PWSTR, pTargetPath foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsRemoveRootTarget.Addr(), uintptr(unsafe.Pointer(pDfsPath)), uintptr(unsafe.Pointer(pTargetPath)), uintptr(Flags))
+func NetDfsRemoveRootTarget(pDfsPath string, pTargetPath string, Flags uint32) uint32 {
+	_pDfsPath := win32.UTF16Ptr(pDfsPath)
+	_pTargetPath := win32.UTF16Ptr(pTargetPath)
+	r1, _, _ := syscall.SyscallN(procNetDfsRemoveRootTarget.Addr(), uintptr(unsafe.Pointer(_pDfsPath)), uintptr(unsafe.Pointer(_pTargetPath)), uintptr(Flags))
 	return uint32(r1)
 }
 
 // NetDfsRemoveStdRoot calls NETAPI32!NetDfsRemoveStdRoot.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsremovestdroot
 // Minimum OS: windows6.0.6000.
-func NetDfsRemoveStdRoot(ServerName foundation.PWSTR, RootShare foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsRemoveStdRoot.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(RootShare)), uintptr(Flags))
+func NetDfsRemoveStdRoot(ServerName string, RootShare string) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_RootShare := win32.UTF16Ptr(RootShare)
+	r1, _, _ := syscall.SyscallN(procNetDfsRemoveStdRoot.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_RootShare)), 0)
 	return uint32(r1)
 }
 
 // NetDfsSetClientInfo calls NETAPI32!NetDfsSetClientInfo.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfssetclientinfo
 // Minimum OS: windows6.0.6000.
-func NetDfsSetClientInfo(DfsEntryPath foundation.PWSTR, ServerName foundation.PWSTR, ShareName foundation.PWSTR, Level uint32, Buffer *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsSetClientInfo.Addr(), uintptr(unsafe.Pointer(DfsEntryPath)), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(ShareName)), uintptr(Level), uintptr(unsafe.Pointer(Buffer)))
+func NetDfsSetClientInfo(DfsEntryPath string, ServerName string, ShareName string, Level uint32, Buffer *byte) uint32 {
+	_DfsEntryPath := win32.UTF16Ptr(DfsEntryPath)
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_ShareName := win32.UTF16Ptr(ShareName)
+	r1, _, _ := syscall.SyscallN(procNetDfsSetClientInfo.Addr(), uintptr(unsafe.Pointer(_DfsEntryPath)), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_ShareName)), uintptr(Level), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
 // NetDfsSetFtContainerSecurity calls NETAPI32!NetDfsSetFtContainerSecurity.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfssetftcontainersecurity
 // Minimum OS: windows6.0.6000.
-func NetDfsSetFtContainerSecurity(DomainName foundation.PWSTR, SecurityInformation uint32, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsSetFtContainerSecurity.Addr(), uintptr(unsafe.Pointer(DomainName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
+func NetDfsSetFtContainerSecurity(DomainName string, SecurityInformation uint32, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) uint32 {
+	_DomainName := win32.UTF16Ptr(DomainName)
+	r1, _, _ := syscall.SyscallN(procNetDfsSetFtContainerSecurity.Addr(), uintptr(unsafe.Pointer(_DomainName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
 	return uint32(r1)
 }
 
 // NetDfsSetInfo calls NETAPI32!NetDfsSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfssetinfo
 // Minimum OS: windows6.0.6000.
-func NetDfsSetInfo(DfsEntryPath foundation.PWSTR, ServerName foundation.PWSTR, ShareName foundation.PWSTR, Level uint32, Buffer *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsSetInfo.Addr(), uintptr(unsafe.Pointer(DfsEntryPath)), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(ShareName)), uintptr(Level), uintptr(unsafe.Pointer(Buffer)))
+func NetDfsSetInfo(DfsEntryPath string, ServerName string, ShareName string, Level uint32, Buffer *byte) uint32 {
+	_DfsEntryPath := win32.UTF16Ptr(DfsEntryPath)
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_ShareName := win32.UTF16Ptr(ShareName)
+	r1, _, _ := syscall.SyscallN(procNetDfsSetInfo.Addr(), uintptr(unsafe.Pointer(_DfsEntryPath)), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_ShareName)), uintptr(Level), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
 // NetDfsSetSecurity calls NETAPI32!NetDfsSetSecurity.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfssetsecurity
 // Minimum OS: windows6.0.6000.
-func NetDfsSetSecurity(DfsEntryPath foundation.PWSTR, SecurityInformation uint32, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsSetSecurity.Addr(), uintptr(unsafe.Pointer(DfsEntryPath)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
+func NetDfsSetSecurity(DfsEntryPath string, SecurityInformation uint32, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) uint32 {
+	_DfsEntryPath := win32.UTF16Ptr(DfsEntryPath)
+	r1, _, _ := syscall.SyscallN(procNetDfsSetSecurity.Addr(), uintptr(unsafe.Pointer(_DfsEntryPath)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
 	return uint32(r1)
 }
 
 // NetDfsSetStdContainerSecurity calls NETAPI32!NetDfsSetStdContainerSecurity.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfssetstdcontainersecurity
 // Minimum OS: windows6.0.6000.
-func NetDfsSetStdContainerSecurity(MachineName foundation.PWSTR, SecurityInformation uint32, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetDfsSetStdContainerSecurity.Addr(), uintptr(unsafe.Pointer(MachineName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
+func NetDfsSetStdContainerSecurity(MachineName string, SecurityInformation uint32, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) uint32 {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, _ := syscall.SyscallN(procNetDfsSetStdContainerSecurity.Addr(), uintptr(unsafe.Pointer(_MachineName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
 	return uint32(r1)
 }

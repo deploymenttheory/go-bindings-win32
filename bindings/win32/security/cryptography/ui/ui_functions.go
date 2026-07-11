@@ -21,8 +21,8 @@ var (
 	procCertSelectionGetSerializedBlob       = modCRYPTUI.NewProc("CertSelectionGetSerializedBlob")
 	procCryptUIDlgCertMgr                    = modCRYPTUI.NewProc("CryptUIDlgCertMgr")
 	procCryptUIDlgSelectCertificateFromStore = modCRYPTUI.NewProc("CryptUIDlgSelectCertificateFromStore")
+	procCryptUIDlgViewCertificate            = modCRYPTUI.NewProc("CryptUIDlgViewCertificateW")
 	procCryptUIDlgViewCertificateA           = modCRYPTUI.NewProc("CryptUIDlgViewCertificateA")
-	procCryptUIDlgViewCertificateW           = modCRYPTUI.NewProc("CryptUIDlgViewCertificateW")
 	procCryptUIDlgViewContext                = modCRYPTUI.NewProc("CryptUIDlgViewContext")
 	procCryptUIWizDigitalSign                = modCRYPTUI.NewProc("CryptUIWizDigitalSign")
 	procCryptUIWizExport                     = modCRYPTUI.NewProc("CryptUIWizExport")
@@ -33,25 +33,38 @@ var (
 // CertSelectionGetSerializedBlob calls CRYPTUI!CertSelectionGetSerializedBlob.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-certselectiongetserializedblob
 // Minimum OS: windows6.1.
-func CertSelectionGetSerializedBlob(pcsi *CERT_SELECTUI_INPUT, ppOutBuffer *unsafe.Pointer, pulOutBufferSize *uint32) foundation.HRESULT {
+func CertSelectionGetSerializedBlob(pcsi *CERT_SELECTUI_INPUT, ppOutBuffer *unsafe.Pointer, pulOutBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSelectionGetSerializedBlob.Addr(), uintptr(unsafe.Pointer(pcsi)), uintptr(unsafe.Pointer(ppOutBuffer)), uintptr(unsafe.Pointer(pulOutBufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CryptUIDlgCertMgr calls CRYPTUI!CryptUIDlgCertMgr.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuidlgcertmgr
 // Minimum OS: windows5.1.2600.
-func CryptUIDlgCertMgr(pCryptUICertMgr *CRYPTUI_CERT_MGR_STRUCT) foundation.BOOL {
+func CryptUIDlgCertMgr(pCryptUICertMgr *CRYPTUI_CERT_MGR_STRUCT) bool {
 	r1, _, _ := syscall.SyscallN(procCryptUIDlgCertMgr.Addr(), uintptr(unsafe.Pointer(pCryptUICertMgr)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CryptUIDlgSelectCertificateFromStore calls CRYPTUI!CryptUIDlgSelectCertificateFromStore.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuidlgselectcertificatefromstore
 // Minimum OS: windows5.1.2600.
-func CryptUIDlgSelectCertificateFromStore(hCertStore securitycryptography.HCERTSTORE, hwnd foundation.HWND, pwszTitle foundation.PWSTR, pwszDisplayString foundation.PWSTR, dwDontUseColumn uint32, dwFlags uint32, pvReserved unsafe.Pointer) *securitycryptography.CERT_CONTEXT {
-	r1, _, _ := syscall.SyscallN(procCryptUIDlgSelectCertificateFromStore.Addr(), uintptr(hCertStore), uintptr(hwnd), uintptr(unsafe.Pointer(pwszTitle)), uintptr(unsafe.Pointer(pwszDisplayString)), uintptr(dwDontUseColumn), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
+func CryptUIDlgSelectCertificateFromStore(hCertStore securitycryptography.HCERTSTORE, hwnd foundation.HWND, pwszTitle string, pwszDisplayString string, dwDontUseColumn uint32, dwFlags uint32, pvReserved unsafe.Pointer) *securitycryptography.CERT_CONTEXT {
+	_pwszTitle := win32.UTF16Ptr(pwszTitle)
+	_pwszDisplayString := win32.UTF16Ptr(pwszDisplayString)
+	r1, _, _ := syscall.SyscallN(procCryptUIDlgSelectCertificateFromStore.Addr(), uintptr(hCertStore), uintptr(hwnd), uintptr(unsafe.Pointer(_pwszTitle)), uintptr(unsafe.Pointer(_pwszDisplayString)), uintptr(dwDontUseColumn), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
 	return (*securitycryptography.CERT_CONTEXT)(unsafe.Pointer(r1))
+}
+
+// CryptUIDlgViewCertificate calls CRYPTUI!CryptUIDlgViewCertificateW.
+// https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuidlgviewcertificatew
+// Minimum OS: windows5.1.2600.
+func CryptUIDlgViewCertificate(pCertViewInfo *CRYPTUI_VIEWCERTIFICATE_STRUCTW, pfPropertiesChanged *foundation.BOOL) error {
+	r1, _, e1 := syscall.SyscallN(procCryptUIDlgViewCertificate.Addr(), uintptr(unsafe.Pointer(pCertViewInfo)), uintptr(unsafe.Pointer(pfPropertiesChanged)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // CryptUIDlgViewCertificateA calls CRYPTUI!CryptUIDlgViewCertificateA.
@@ -65,38 +78,30 @@ func CryptUIDlgViewCertificateA(pCertViewInfo *CRYPTUI_VIEWCERTIFICATE_STRUCTA, 
 	return nil
 }
 
-// CryptUIDlgViewCertificateW calls CRYPTUI!CryptUIDlgViewCertificateW.
-// https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuidlgviewcertificatew
-// Minimum OS: windows5.1.2600.
-func CryptUIDlgViewCertificateW(pCertViewInfo *CRYPTUI_VIEWCERTIFICATE_STRUCTW, pfPropertiesChanged *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCryptUIDlgViewCertificateW.Addr(), uintptr(unsafe.Pointer(pCertViewInfo)), uintptr(unsafe.Pointer(pfPropertiesChanged)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // CryptUIDlgViewContext calls CRYPTUI!CryptUIDlgViewContext.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuidlgviewcontext
 // Minimum OS: windows5.1.2600.
-func CryptUIDlgViewContext(dwContextType uint32, pvContext unsafe.Pointer, hwnd foundation.HWND, pwszTitle foundation.PWSTR, dwFlags uint32, pvReserved unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCryptUIDlgViewContext.Addr(), uintptr(dwContextType), uintptr(unsafe.Pointer(pvContext)), uintptr(hwnd), uintptr(unsafe.Pointer(pwszTitle)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.BOOL(r1)
+func CryptUIDlgViewContext(dwContextType uint32, pvContext unsafe.Pointer, hwnd foundation.HWND, pwszTitle string, dwFlags uint32, pvReserved unsafe.Pointer) bool {
+	_pwszTitle := win32.UTF16Ptr(pwszTitle)
+	r1, _, _ := syscall.SyscallN(procCryptUIDlgViewContext.Addr(), uintptr(dwContextType), uintptr(unsafe.Pointer(pvContext)), uintptr(hwnd), uintptr(unsafe.Pointer(_pwszTitle)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
+	return r1 != 0
 }
 
 // CryptUIWizDigitalSign calls CRYPTUI!CryptUIWizDigitalSign.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuiwizdigitalsign
 // Minimum OS: windows5.1.2600.
-func CryptUIWizDigitalSign(dwFlags uint32, hwndParent foundation.HWND, pwszWizardTitle foundation.PWSTR, pDigitalSignInfo *CRYPTUI_WIZ_DIGITAL_SIGN_INFO, ppSignContext **CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCryptUIWizDigitalSign.Addr(), uintptr(dwFlags), uintptr(hwndParent), uintptr(unsafe.Pointer(pwszWizardTitle)), uintptr(unsafe.Pointer(pDigitalSignInfo)), uintptr(unsafe.Pointer(ppSignContext)))
-	return foundation.BOOL(r1)
+func CryptUIWizDigitalSign(dwFlags uint32, hwndParent foundation.HWND, pwszWizardTitle string, pDigitalSignInfo *CRYPTUI_WIZ_DIGITAL_SIGN_INFO, ppSignContext **CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT) bool {
+	_pwszWizardTitle := win32.UTF16Ptr(pwszWizardTitle)
+	r1, _, _ := syscall.SyscallN(procCryptUIWizDigitalSign.Addr(), uintptr(dwFlags), uintptr(hwndParent), uintptr(unsafe.Pointer(_pwszWizardTitle)), uintptr(unsafe.Pointer(pDigitalSignInfo)), uintptr(unsafe.Pointer(ppSignContext)))
+	return r1 != 0
 }
 
 // CryptUIWizExport calls CRYPTUI!CryptUIWizExport.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuiwizexport
 // Minimum OS: windows5.1.2600.
-func CryptUIWizExport(dwFlags CRYPTUI_WIZ_FLAGS, hwndParent foundation.HWND, pwszWizardTitle foundation.PWSTR, pExportInfo *CRYPTUI_WIZ_EXPORT_INFO, pvoid unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procCryptUIWizExport.Addr(), uintptr(dwFlags), uintptr(hwndParent), uintptr(unsafe.Pointer(pwszWizardTitle)), uintptr(unsafe.Pointer(pExportInfo)), uintptr(unsafe.Pointer(pvoid)))
+func CryptUIWizExport(dwFlags CRYPTUI_WIZ_FLAGS, hwndParent foundation.HWND, pwszWizardTitle string, pExportInfo *CRYPTUI_WIZ_EXPORT_INFO, pvoid unsafe.Pointer) error {
+	_pwszWizardTitle := win32.UTF16Ptr(pwszWizardTitle)
+	r1, _, e1 := syscall.SyscallN(procCryptUIWizExport.Addr(), uintptr(dwFlags), uintptr(hwndParent), uintptr(unsafe.Pointer(_pwszWizardTitle)), uintptr(unsafe.Pointer(pExportInfo)), uintptr(unsafe.Pointer(pvoid)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -106,16 +111,17 @@ func CryptUIWizExport(dwFlags CRYPTUI_WIZ_FLAGS, hwndParent foundation.HWND, pws
 // CryptUIWizFreeDigitalSignContext calls CRYPTUI!CryptUIWizFreeDigitalSignContext.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuiwizfreedigitalsigncontext
 // Minimum OS: windows5.1.2600.
-func CryptUIWizFreeDigitalSignContext(pSignContext *CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT) foundation.BOOL {
+func CryptUIWizFreeDigitalSignContext(pSignContext *CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT) bool {
 	r1, _, _ := syscall.SyscallN(procCryptUIWizFreeDigitalSignContext.Addr(), uintptr(unsafe.Pointer(pSignContext)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CryptUIWizImport calls CRYPTUI!CryptUIWizImport.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuiwizimport
 // Minimum OS: windows5.1.2600.
-func CryptUIWizImport(dwFlags CRYPTUI_WIZ_FLAGS, hwndParent foundation.HWND, pwszWizardTitle foundation.PWSTR, pImportSrc *CRYPTUI_WIZ_IMPORT_SRC_INFO, hDestCertStore securitycryptography.HCERTSTORE) error {
-	r1, _, e1 := syscall.SyscallN(procCryptUIWizImport.Addr(), uintptr(dwFlags), uintptr(hwndParent), uintptr(unsafe.Pointer(pwszWizardTitle)), uintptr(unsafe.Pointer(pImportSrc)), uintptr(hDestCertStore))
+func CryptUIWizImport(dwFlags CRYPTUI_WIZ_FLAGS, hwndParent foundation.HWND, pwszWizardTitle string, pImportSrc *CRYPTUI_WIZ_IMPORT_SRC_INFO, hDestCertStore securitycryptography.HCERTSTORE) error {
+	_pwszWizardTitle := win32.UTF16Ptr(pwszWizardTitle)
+	r1, _, e1 := syscall.SyscallN(procCryptUIWizImport.Addr(), uintptr(dwFlags), uintptr(hwndParent), uintptr(unsafe.Pointer(_pwszWizardTitle)), uintptr(unsafe.Pointer(pImportSrc)), uintptr(hDestCertStore))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

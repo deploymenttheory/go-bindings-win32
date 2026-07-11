@@ -155,82 +155,100 @@ var (
 	procNetWkstaUserEnum                     = modNETAPI32.NewProc("NetWkstaUserEnum")
 	procNetWkstaUserGetInfo                  = modNETAPI32.NewProc("NetWkstaUserGetInfo")
 	procNetWkstaUserSetInfo                  = modNETAPI32.NewProc("NetWkstaUserSetInfo")
+	procLogError                             = modrtutils.NewProc("LogErrorW")
 	procLogErrorA                            = modrtutils.NewProc("LogErrorA")
-	procLogErrorW                            = modrtutils.NewProc("LogErrorW")
+	procLogEvent                             = modrtutils.NewProc("LogEventW")
 	procLogEventA                            = modrtutils.NewProc("LogEventA")
-	procLogEventW                            = modrtutils.NewProc("LogEventW")
 	procMprSetupProtocolEnum                 = modrtutils.NewProc("MprSetupProtocolEnum")
 	procMprSetupProtocolFree                 = modrtutils.NewProc("MprSetupProtocolFree")
 	procRouterAssert                         = modrtutils.NewProc("RouterAssert")
+	procRouterGetErrorString                 = modrtutils.NewProc("RouterGetErrorStringW")
 	procRouterGetErrorStringA                = modrtutils.NewProc("RouterGetErrorStringA")
-	procRouterGetErrorStringW                = modrtutils.NewProc("RouterGetErrorStringW")
+	procRouterLogDeregister                  = modrtutils.NewProc("RouterLogDeregisterW")
 	procRouterLogDeregisterA                 = modrtutils.NewProc("RouterLogDeregisterA")
-	procRouterLogDeregisterW                 = modrtutils.NewProc("RouterLogDeregisterW")
+	procRouterLogEvent                       = modrtutils.NewProc("RouterLogEventW")
 	procRouterLogEventA                      = modrtutils.NewProc("RouterLogEventA")
+	procRouterLogEventData                   = modrtutils.NewProc("RouterLogEventDataW")
 	procRouterLogEventDataA                  = modrtutils.NewProc("RouterLogEventDataA")
-	procRouterLogEventDataW                  = modrtutils.NewProc("RouterLogEventDataW")
+	procRouterLogEventEx                     = modrtutils.NewProc("RouterLogEventExW")
 	procRouterLogEventExA                    = modrtutils.NewProc("RouterLogEventExA")
-	procRouterLogEventExW                    = modrtutils.NewProc("RouterLogEventExW")
+	procRouterLogEventString                 = modrtutils.NewProc("RouterLogEventStringW")
 	procRouterLogEventStringA                = modrtutils.NewProc("RouterLogEventStringA")
-	procRouterLogEventStringW                = modrtutils.NewProc("RouterLogEventStringW")
+	procRouterLogEventValistEx               = modrtutils.NewProc("RouterLogEventValistExW")
 	procRouterLogEventValistExA              = modrtutils.NewProc("RouterLogEventValistExA")
-	procRouterLogEventValistExW              = modrtutils.NewProc("RouterLogEventValistExW")
-	procRouterLogEventW                      = modrtutils.NewProc("RouterLogEventW")
+	procRouterLogRegister                    = modrtutils.NewProc("RouterLogRegisterW")
 	procRouterLogRegisterA                   = modrtutils.NewProc("RouterLogRegisterA")
-	procRouterLogRegisterW                   = modrtutils.NewProc("RouterLogRegisterW")
+	procTraceDeregister                      = modrtutils.NewProc("TraceDeregisterW")
 	procTraceDeregisterA                     = modrtutils.NewProc("TraceDeregisterA")
+	procTraceDeregisterEx                    = modrtutils.NewProc("TraceDeregisterExW")
 	procTraceDeregisterExA                   = modrtutils.NewProc("TraceDeregisterExA")
-	procTraceDeregisterExW                   = modrtutils.NewProc("TraceDeregisterExW")
-	procTraceDeregisterW                     = modrtutils.NewProc("TraceDeregisterW")
+	procTraceDumpEx                          = modrtutils.NewProc("TraceDumpExW")
 	procTraceDumpExA                         = modrtutils.NewProc("TraceDumpExA")
-	procTraceDumpExW                         = modrtutils.NewProc("TraceDumpExW")
+	procTraceGetConsole                      = modrtutils.NewProc("TraceGetConsoleW")
 	procTraceGetConsoleA                     = modrtutils.NewProc("TraceGetConsoleA")
-	procTraceGetConsoleW                     = modrtutils.NewProc("TraceGetConsoleW")
+	procTracePrintf                          = modrtutils.NewProc("TracePrintfW")
 	procTracePrintfA                         = modrtutils.NewProc("TracePrintfA")
+	procTracePrintfEx                        = modrtutils.NewProc("TracePrintfExW")
 	procTracePrintfExA                       = modrtutils.NewProc("TracePrintfExA")
-	procTracePrintfExW                       = modrtutils.NewProc("TracePrintfExW")
-	procTracePrintfW                         = modrtutils.NewProc("TracePrintfW")
+	procTracePutsEx                          = modrtutils.NewProc("TracePutsExW")
 	procTracePutsExA                         = modrtutils.NewProc("TracePutsExA")
-	procTracePutsExW                         = modrtutils.NewProc("TracePutsExW")
+	procTraceRegisterEx                      = modrtutils.NewProc("TraceRegisterExW")
 	procTraceRegisterExA                     = modrtutils.NewProc("TraceRegisterExA")
-	procTraceRegisterExW                     = modrtutils.NewProc("TraceRegisterExW")
+	procTraceVprintfEx                       = modrtutils.NewProc("TraceVprintfExW")
 	procTraceVprintfExA                      = modrtutils.NewProc("TraceVprintfExA")
-	procTraceVprintfExW                      = modrtutils.NewProc("TraceVprintfExW")
 )
 
 // GetNetScheduleAccountInformation calls mstask!GetNetScheduleAccountInformation.
 // https://learn.microsoft.com/windows/win32/api/atacct/nf-atacct-getnetscheduleaccountinformation
 // Minimum OS: windows6.0.6000.
-func GetNetScheduleAccountInformation(pwszServerName foundation.PWSTR, ccAccount uint32, wszAccount foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetNetScheduleAccountInformation.Addr(), uintptr(unsafe.Pointer(pwszServerName)), uintptr(ccAccount), uintptr(unsafe.Pointer(wszAccount)))
-	return foundation.HRESULT(r1)
+func GetNetScheduleAccountInformation(pwszServerName string, ccAccount uint32, wszAccount foundation.PWSTR) error {
+	_pwszServerName := win32.UTF16Ptr(pwszServerName)
+	r1, _, _ := syscall.SyscallN(procGetNetScheduleAccountInformation.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(ccAccount), uintptr(unsafe.Pointer(wszAccount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // I_NetLogonControl2 calls NETAPI32!I_NetLogonControl2.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-i_netlogoncontrol2
-func I_NetLogonControl2(ServerName foundation.PWSTR, FunctionCode uint32, QueryLevel uint32, Data *byte, Buffer **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procI_NetLogonControl2.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(FunctionCode), uintptr(QueryLevel), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(Buffer)))
+func I_NetLogonControl2(ServerName string, FunctionCode uint32, QueryLevel uint32, Data *byte, Buffer **byte) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	r1, _, _ := syscall.SyscallN(procI_NetLogonControl2.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(FunctionCode), uintptr(QueryLevel), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
-// LogErrorA calls rtutils!LogErrorA.
-func LogErrorA(dwMessageId uint32, cNumberOfSubStrings uint32, plpwsSubStrings *foundation.PSTR, dwErrorCode uint32) {
-	syscall.SyscallN(procLogErrorA.Addr(), uintptr(dwMessageId), uintptr(cNumberOfSubStrings), uintptr(unsafe.Pointer(plpwsSubStrings)), uintptr(dwErrorCode))
+// LogError calls rtutils!LogErrorW.
+func LogError(dwMessageId uint32, plpwsSubStrings []foundation.PWSTR, dwErrorCode uint32) {
+	var _plpwsSubStrings *foundation.PWSTR
+	if len(plpwsSubStrings) > 0 {
+		_plpwsSubStrings = &plpwsSubStrings[0]
+	}
+	syscall.SyscallN(procLogError.Addr(), uintptr(dwMessageId), uintptr(len(plpwsSubStrings)), uintptr(unsafe.Pointer(_plpwsSubStrings)), uintptr(dwErrorCode))
 }
 
-// LogErrorW calls rtutils!LogErrorW.
-func LogErrorW(dwMessageId uint32, cNumberOfSubStrings uint32, plpwsSubStrings *foundation.PWSTR, dwErrorCode uint32) {
-	syscall.SyscallN(procLogErrorW.Addr(), uintptr(dwMessageId), uintptr(cNumberOfSubStrings), uintptr(unsafe.Pointer(plpwsSubStrings)), uintptr(dwErrorCode))
+// LogErrorA calls rtutils!LogErrorA.
+func LogErrorA(dwMessageId uint32, plpwsSubStrings []foundation.PSTR, dwErrorCode uint32) {
+	var _plpwsSubStrings *foundation.PSTR
+	if len(plpwsSubStrings) > 0 {
+		_plpwsSubStrings = &plpwsSubStrings[0]
+	}
+	syscall.SyscallN(procLogErrorA.Addr(), uintptr(dwMessageId), uintptr(len(plpwsSubStrings)), uintptr(unsafe.Pointer(_plpwsSubStrings)), uintptr(dwErrorCode))
+}
+
+// LogEvent calls rtutils!LogEventW.
+func LogEvent(wEventType uint32, dwMessageId uint32, plpwsSubStrings []foundation.PWSTR) {
+	var _plpwsSubStrings *foundation.PWSTR
+	if len(plpwsSubStrings) > 0 {
+		_plpwsSubStrings = &plpwsSubStrings[0]
+	}
+	syscall.SyscallN(procLogEvent.Addr(), uintptr(wEventType), uintptr(dwMessageId), uintptr(len(plpwsSubStrings)), uintptr(unsafe.Pointer(_plpwsSubStrings)))
 }
 
 // LogEventA calls rtutils!LogEventA.
-func LogEventA(wEventType uint32, dwMessageId uint32, cNumberOfSubStrings uint32, plpwsSubStrings *foundation.PSTR) {
-	syscall.SyscallN(procLogEventA.Addr(), uintptr(wEventType), uintptr(dwMessageId), uintptr(cNumberOfSubStrings), uintptr(unsafe.Pointer(plpwsSubStrings)))
-}
-
-// LogEventW calls rtutils!LogEventW.
-func LogEventW(wEventType uint32, dwMessageId uint32, cNumberOfSubStrings uint32, plpwsSubStrings *foundation.PWSTR) {
-	syscall.SyscallN(procLogEventW.Addr(), uintptr(wEventType), uintptr(dwMessageId), uintptr(cNumberOfSubStrings), uintptr(unsafe.Pointer(plpwsSubStrings)))
+func LogEventA(wEventType uint32, dwMessageId uint32, plpwsSubStrings []foundation.PSTR) {
+	var _plpwsSubStrings *foundation.PSTR
+	if len(plpwsSubStrings) > 0 {
+		_plpwsSubStrings = &plpwsSubStrings[0]
+	}
+	syscall.SyscallN(procLogEventA.Addr(), uintptr(wEventType), uintptr(dwMessageId), uintptr(len(plpwsSubStrings)), uintptr(unsafe.Pointer(_plpwsSubStrings)))
 }
 
 // MprSetupProtocolEnum calls rtutils!MprSetupProtocolEnum.
@@ -248,80 +266,102 @@ func MprSetupProtocolFree(lpBuffer unsafe.Pointer) uint32 {
 // NetAccessAdd calls NETAPI32!NetAccessAdd.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccessadd
 // Minimum OS: windows5.0.
-func NetAccessAdd(servername foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAccessAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetAccessAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetAccessAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetAccessDel calls NETAPI32!NetAccessDel.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccessdel
 // Minimum OS: windows5.0.
-func NetAccessDel(servername foundation.PWSTR, resource foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAccessDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(resource)))
+func NetAccessDel(servername string, resource string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_resource := win32.UTF16Ptr(resource)
+	r1, _, _ := syscall.SyscallN(procNetAccessDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_resource)))
 	return uint32(r1)
 }
 
 // NetAccessEnum calls NETAPI32!NetAccessEnum.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccessenum
 // Minimum OS: windows5.0.
-func NetAccessEnum(servername foundation.PWSTR, BasePath foundation.PWSTR, Recursive uint32, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAccessEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(BasePath)), uintptr(Recursive), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetAccessEnum(servername string, BasePath string, Recursive uint32, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_BasePath := win32.UTF16Ptr(BasePath)
+	r1, _, _ := syscall.SyscallN(procNetAccessEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_BasePath)), uintptr(Recursive), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetAccessGetInfo calls NETAPI32!NetAccessGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccessgetinfo
 // Minimum OS: windows5.0.
-func NetAccessGetInfo(servername foundation.PWSTR, resource foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAccessGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(resource)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetAccessGetInfo(servername string, resource string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_resource := win32.UTF16Ptr(resource)
+	r1, _, _ := syscall.SyscallN(procNetAccessGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_resource)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetAccessGetUserPerms calls NETAPI32!NetAccessGetUserPerms.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccessgetuserperms
 // Minimum OS: windows5.0.
-func NetAccessGetUserPerms(servername foundation.PWSTR, UGname foundation.PWSTR, resource foundation.PWSTR, Perms *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAccessGetUserPerms.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(UGname)), uintptr(unsafe.Pointer(resource)), uintptr(unsafe.Pointer(Perms)))
+func NetAccessGetUserPerms(servername string, UGname string, resource string, Perms *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_UGname := win32.UTF16Ptr(UGname)
+	_resource := win32.UTF16Ptr(resource)
+	r1, _, _ := syscall.SyscallN(procNetAccessGetUserPerms.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_UGname)), uintptr(unsafe.Pointer(_resource)), uintptr(unsafe.Pointer(Perms)))
 	return uint32(r1)
 }
 
 // NetAccessSetInfo calls NETAPI32!NetAccessSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccesssetinfo
 // Minimum OS: windows5.0.
-func NetAccessSetInfo(servername foundation.PWSTR, resource foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAccessSetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(resource)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetAccessSetInfo(servername string, resource string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_resource := win32.UTF16Ptr(resource)
+	r1, _, _ := syscall.SyscallN(procNetAccessSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_resource)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetAddAlternateComputerName calls NETAPI32!NetAddAlternateComputerName.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netaddalternatecomputername
 // Minimum OS: windows5.1.2600.
-func NetAddAlternateComputerName(Server foundation.PWSTR, AlternateName foundation.PWSTR, DomainAccount foundation.PWSTR, DomainAccountPassword foundation.PWSTR, Reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAddAlternateComputerName.Addr(), uintptr(unsafe.Pointer(Server)), uintptr(unsafe.Pointer(AlternateName)), uintptr(unsafe.Pointer(DomainAccount)), uintptr(unsafe.Pointer(DomainAccountPassword)), uintptr(Reserved))
+func NetAddAlternateComputerName(Server string, AlternateName string, DomainAccount string, DomainAccountPassword string, Reserved uint32) uint32 {
+	_Server := win32.UTF16Ptr(Server)
+	_AlternateName := win32.UTF16Ptr(AlternateName)
+	_DomainAccount := win32.UTF16Ptr(DomainAccount)
+	_DomainAccountPassword := win32.UTF16Ptr(DomainAccountPassword)
+	r1, _, _ := syscall.SyscallN(procNetAddAlternateComputerName.Addr(), uintptr(unsafe.Pointer(_Server)), uintptr(unsafe.Pointer(_AlternateName)), uintptr(unsafe.Pointer(_DomainAccount)), uintptr(unsafe.Pointer(_DomainAccountPassword)), uintptr(Reserved))
 	return uint32(r1)
 }
 
 // NetAddServiceAccount calls NETAPI32!NetAddServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaddserviceaccount
 // Minimum OS: windows6.1.
-func NetAddServiceAccount(ServerName foundation.PWSTR, AccountName foundation.PWSTR, Password foundation.PWSTR, Flags uint32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procNetAddServiceAccount.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(AccountName)), uintptr(unsafe.Pointer(Password)), uintptr(Flags))
+func NetAddServiceAccount(ServerName string, AccountName string, Password string, Flags uint32) foundation.NTSTATUS {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_AccountName := win32.UTF16Ptr(AccountName)
+	_Password := win32.UTF16Ptr(Password)
+	r1, _, _ := syscall.SyscallN(procNetAddServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(unsafe.Pointer(_Password)), uintptr(Flags))
 	return foundation.NTSTATUS(r1)
 }
 
 // NetAlertRaise calls NETAPI32!NetAlertRaise.
 // https://learn.microsoft.com/windows/win32/api/lmalert/nf-lmalert-netalertraise
 // Minimum OS: windows5.0.
-func NetAlertRaise(AlertType foundation.PWSTR, Buffer unsafe.Pointer, BufferSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAlertRaise.Addr(), uintptr(unsafe.Pointer(AlertType)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+func NetAlertRaise(AlertType string, Buffer unsafe.Pointer, BufferSize uint32) uint32 {
+	_AlertType := win32.UTF16Ptr(AlertType)
+	r1, _, _ := syscall.SyscallN(procNetAlertRaise.Addr(), uintptr(unsafe.Pointer(_AlertType)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
 	return uint32(r1)
 }
 
 // NetAlertRaiseEx calls NETAPI32!NetAlertRaiseEx.
 // https://learn.microsoft.com/windows/win32/api/lmalert/nf-lmalert-netalertraiseex
 // Minimum OS: windows5.0.
-func NetAlertRaiseEx(AlertType foundation.PWSTR, VariableInfo unsafe.Pointer, VariableInfoSize uint32, ServiceName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAlertRaiseEx.Addr(), uintptr(unsafe.Pointer(AlertType)), uintptr(unsafe.Pointer(VariableInfo)), uintptr(VariableInfoSize), uintptr(unsafe.Pointer(ServiceName)))
+func NetAlertRaiseEx(AlertType string, VariableInfo unsafe.Pointer, VariableInfoSize uint32, ServiceName string) uint32 {
+	_AlertType := win32.UTF16Ptr(AlertType)
+	_ServiceName := win32.UTF16Ptr(ServiceName)
+	r1, _, _ := syscall.SyscallN(procNetAlertRaiseEx.Addr(), uintptr(unsafe.Pointer(_AlertType)), uintptr(unsafe.Pointer(VariableInfo)), uintptr(VariableInfoSize), uintptr(unsafe.Pointer(_ServiceName)))
 	return uint32(r1)
 }
 
@@ -359,43 +399,57 @@ func NetApiBufferSize(Buffer unsafe.Pointer, ByteCount *uint32) uint32 {
 
 // NetAuditClear calls NETAPI32!NetAuditClear.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netauditclear
-func NetAuditClear(server foundation.PWSTR, backupfile foundation.PWSTR, service foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAuditClear.Addr(), uintptr(unsafe.Pointer(server)), uintptr(unsafe.Pointer(backupfile)), uintptr(unsafe.Pointer(service)))
+func NetAuditClear(server string, backupfile string, service string) uint32 {
+	_server := win32.UTF16Ptr(server)
+	_backupfile := win32.UTF16Ptr(backupfile)
+	_service := win32.UTF16Ptr(service)
+	r1, _, _ := syscall.SyscallN(procNetAuditClear.Addr(), uintptr(unsafe.Pointer(_server)), uintptr(unsafe.Pointer(_backupfile)), uintptr(unsafe.Pointer(_service)))
 	return uint32(r1)
 }
 
 // NetAuditRead calls NETAPI32!NetAuditRead.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netauditread
-func NetAuditRead(server foundation.PWSTR, service foundation.PWSTR, auditloghandle *HLOG, offset uint32, reserved1 *uint32, reserved2 uint32, offsetflag uint32, bufptr **byte, prefmaxlen uint32, bytesread *uint32, totalavailable *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAuditRead.Addr(), uintptr(unsafe.Pointer(server)), uintptr(unsafe.Pointer(service)), uintptr(unsafe.Pointer(auditloghandle)), uintptr(offset), uintptr(unsafe.Pointer(reserved1)), uintptr(reserved2), uintptr(offsetflag), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(bytesread)), uintptr(unsafe.Pointer(totalavailable)))
+func NetAuditRead(server string, service string, auditloghandle *HLOG, offset uint32, reserved1 *uint32, reserved2 uint32, offsetflag uint32, bufptr **byte, prefmaxlen uint32, bytesread *uint32, totalavailable *uint32) uint32 {
+	_server := win32.UTF16Ptr(server)
+	_service := win32.UTF16Ptr(service)
+	r1, _, _ := syscall.SyscallN(procNetAuditRead.Addr(), uintptr(unsafe.Pointer(_server)), uintptr(unsafe.Pointer(_service)), uintptr(unsafe.Pointer(auditloghandle)), uintptr(offset), uintptr(unsafe.Pointer(reserved1)), uintptr(reserved2), uintptr(offsetflag), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(bytesread)), uintptr(unsafe.Pointer(totalavailable)))
 	return uint32(r1)
 }
 
 // NetAuditWrite calls NETAPI32!NetAuditWrite.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netauditwrite
-func NetAuditWrite(type_ uint32, buf *byte, numbytes uint32, service foundation.PWSTR, reserved *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetAuditWrite.Addr(), uintptr(type_), uintptr(unsafe.Pointer(buf)), uintptr(numbytes), uintptr(unsafe.Pointer(service)), uintptr(unsafe.Pointer(reserved)))
+func NetAuditWrite(type_ uint32, buf *byte, numbytes uint32, service string, reserved *byte) uint32 {
+	_service := win32.UTF16Ptr(service)
+	r1, _, _ := syscall.SyscallN(procNetAuditWrite.Addr(), uintptr(type_), uintptr(unsafe.Pointer(buf)), uintptr(numbytes), uintptr(unsafe.Pointer(_service)), uintptr(unsafe.Pointer(reserved)))
 	return uint32(r1)
 }
 
 // NetConfigGet calls NETAPI32!NetConfigGet.
 // https://learn.microsoft.com/windows/win32/api/lmconfig/nf-lmconfig-netconfigget
-func NetConfigGet(server foundation.PWSTR, component foundation.PWSTR, parameter foundation.PWSTR, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetConfigGet.Addr(), uintptr(unsafe.Pointer(server)), uintptr(unsafe.Pointer(component)), uintptr(unsafe.Pointer(parameter)), uintptr(unsafe.Pointer(bufptr)))
+func NetConfigGet(server string, component string, parameter string, bufptr **byte) uint32 {
+	_server := win32.UTF16Ptr(server)
+	_component := win32.UTF16Ptr(component)
+	_parameter := win32.UTF16Ptr(parameter)
+	r1, _, _ := syscall.SyscallN(procNetConfigGet.Addr(), uintptr(unsafe.Pointer(_server)), uintptr(unsafe.Pointer(_component)), uintptr(unsafe.Pointer(_parameter)), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetConfigGetAll calls NETAPI32!NetConfigGetAll.
 // https://learn.microsoft.com/windows/win32/api/lmconfig/nf-lmconfig-netconfiggetall
-func NetConfigGetAll(server foundation.PWSTR, component foundation.PWSTR, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetConfigGetAll.Addr(), uintptr(unsafe.Pointer(server)), uintptr(unsafe.Pointer(component)), uintptr(unsafe.Pointer(bufptr)))
+func NetConfigGetAll(server string, component string, bufptr **byte) uint32 {
+	_server := win32.UTF16Ptr(server)
+	_component := win32.UTF16Ptr(component)
+	r1, _, _ := syscall.SyscallN(procNetConfigGetAll.Addr(), uintptr(unsafe.Pointer(_server)), uintptr(unsafe.Pointer(_component)), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetConfigSet calls NETAPI32!NetConfigSet.
 // https://learn.microsoft.com/windows/win32/api/lmconfig/nf-lmconfig-netconfigset
-func NetConfigSet(server foundation.PWSTR, reserved1 foundation.PWSTR, component foundation.PWSTR, level uint32, reserved2 uint32, buf *byte, reserved3 uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetConfigSet.Addr(), uintptr(unsafe.Pointer(server)), uintptr(unsafe.Pointer(reserved1)), uintptr(unsafe.Pointer(component)), uintptr(level), uintptr(reserved2), uintptr(unsafe.Pointer(buf)), uintptr(reserved3))
+func NetConfigSet(server string, reserved1 string, component string, level uint32, reserved2 uint32, buf *byte, reserved3 uint32) uint32 {
+	_server := win32.UTF16Ptr(server)
+	_reserved1 := win32.UTF16Ptr(reserved1)
+	_component := win32.UTF16Ptr(component)
+	r1, _, _ := syscall.SyscallN(procNetConfigSet.Addr(), uintptr(unsafe.Pointer(_server)), uintptr(unsafe.Pointer(_reserved1)), uintptr(unsafe.Pointer(_component)), uintptr(level), uintptr(reserved2), uintptr(unsafe.Pointer(buf)), uintptr(reserved3))
 	return uint32(r1)
 }
 
@@ -410,37 +464,44 @@ func NetCreateProvisioningPackage(pProvisioningParams *NETSETUP_PROVISIONING_PAR
 // NetEnumerateComputerNames calls NETAPI32!NetEnumerateComputerNames.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netenumeratecomputernames
 // Minimum OS: windows5.1.2600.
-func NetEnumerateComputerNames(Server foundation.PWSTR, NameType NET_COMPUTER_NAME_TYPE, Reserved uint32, EntryCount *uint32, ComputerNames **foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetEnumerateComputerNames.Addr(), uintptr(unsafe.Pointer(Server)), uintptr(NameType), uintptr(Reserved), uintptr(unsafe.Pointer(EntryCount)), uintptr(unsafe.Pointer(ComputerNames)))
+func NetEnumerateComputerNames(Server string, NameType NET_COMPUTER_NAME_TYPE, Reserved uint32, EntryCount *uint32, ComputerNames **foundation.PWSTR) uint32 {
+	_Server := win32.UTF16Ptr(Server)
+	r1, _, _ := syscall.SyscallN(procNetEnumerateComputerNames.Addr(), uintptr(unsafe.Pointer(_Server)), uintptr(NameType), uintptr(Reserved), uintptr(unsafe.Pointer(EntryCount)), uintptr(unsafe.Pointer(ComputerNames)))
 	return uint32(r1)
 }
 
 // NetEnumerateServiceAccounts calls NETAPI32!NetEnumerateServiceAccounts.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netenumerateserviceaccounts
 // Minimum OS: windows6.1.
-func NetEnumerateServiceAccounts(ServerName foundation.PWSTR, Flags uint32, AccountsCount *uint32, Accounts ***uint16) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procNetEnumerateServiceAccounts.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(Flags), uintptr(unsafe.Pointer(AccountsCount)), uintptr(unsafe.Pointer(Accounts)))
+func NetEnumerateServiceAccounts(ServerName string, Flags uint32, AccountsCount *uint32, Accounts ***uint16) foundation.NTSTATUS {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	r1, _, _ := syscall.SyscallN(procNetEnumerateServiceAccounts.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(Flags), uintptr(unsafe.Pointer(AccountsCount)), uintptr(unsafe.Pointer(Accounts)))
 	return foundation.NTSTATUS(r1)
 }
 
 // NetErrorLogClear calls NETAPI32!NetErrorLogClear.
 // https://learn.microsoft.com/windows/win32/api/lmerrlog/nf-lmerrlog-neterrorlogclear
-func NetErrorLogClear(UncServerName foundation.PWSTR, BackupFile foundation.PWSTR, Reserved *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetErrorLogClear.Addr(), uintptr(unsafe.Pointer(UncServerName)), uintptr(unsafe.Pointer(BackupFile)), uintptr(unsafe.Pointer(Reserved)))
+func NetErrorLogClear(UncServerName string, BackupFile string, Reserved *byte) uint32 {
+	_UncServerName := win32.UTF16Ptr(UncServerName)
+	_BackupFile := win32.UTF16Ptr(BackupFile)
+	r1, _, _ := syscall.SyscallN(procNetErrorLogClear.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(_BackupFile)), uintptr(unsafe.Pointer(Reserved)))
 	return uint32(r1)
 }
 
 // NetErrorLogRead calls NETAPI32!NetErrorLogRead.
 // https://learn.microsoft.com/windows/win32/api/lmerrlog/nf-lmerrlog-neterrorlogread
-func NetErrorLogRead(UncServerName foundation.PWSTR, Reserved1 foundation.PWSTR, ErrorLogHandle *HLOG, Offset uint32, Reserved2 *uint32, Reserved3 uint32, OffsetFlag uint32, BufPtr **byte, PrefMaxSize uint32, BytesRead *uint32, TotalAvailable *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetErrorLogRead.Addr(), uintptr(unsafe.Pointer(UncServerName)), uintptr(unsafe.Pointer(Reserved1)), uintptr(unsafe.Pointer(ErrorLogHandle)), uintptr(Offset), uintptr(unsafe.Pointer(Reserved2)), uintptr(Reserved3), uintptr(OffsetFlag), uintptr(unsafe.Pointer(BufPtr)), uintptr(PrefMaxSize), uintptr(unsafe.Pointer(BytesRead)), uintptr(unsafe.Pointer(TotalAvailable)))
+func NetErrorLogRead(UncServerName string, Reserved1 string, ErrorLogHandle *HLOG, Offset uint32, Reserved2 *uint32, Reserved3 uint32, OffsetFlag uint32, BufPtr **byte, PrefMaxSize uint32, BytesRead *uint32, TotalAvailable *uint32) uint32 {
+	_UncServerName := win32.UTF16Ptr(UncServerName)
+	_Reserved1 := win32.UTF16Ptr(Reserved1)
+	r1, _, _ := syscall.SyscallN(procNetErrorLogRead.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(_Reserved1)), uintptr(unsafe.Pointer(ErrorLogHandle)), uintptr(Offset), uintptr(unsafe.Pointer(Reserved2)), uintptr(Reserved3), uintptr(OffsetFlag), uintptr(unsafe.Pointer(BufPtr)), uintptr(PrefMaxSize), uintptr(unsafe.Pointer(BytesRead)), uintptr(unsafe.Pointer(TotalAvailable)))
 	return uint32(r1)
 }
 
 // NetErrorLogWrite calls NETAPI32!NetErrorLogWrite.
 // https://learn.microsoft.com/windows/win32/api/lmerrlog/nf-lmerrlog-neterrorlogwrite
-func NetErrorLogWrite(Reserved1 *byte, Code uint32, Component foundation.PWSTR, Buffer *byte, NumBytes uint32, MsgBuf *byte, StrCount uint32, Reserved2 *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetErrorLogWrite.Addr(), uintptr(unsafe.Pointer(Reserved1)), uintptr(Code), uintptr(unsafe.Pointer(Component)), uintptr(unsafe.Pointer(Buffer)), uintptr(NumBytes), uintptr(unsafe.Pointer(MsgBuf)), uintptr(StrCount), uintptr(unsafe.Pointer(Reserved2)))
+func NetErrorLogWrite(Reserved1 *byte, Code uint32, Component string, Buffer *byte, NumBytes uint32, MsgBuf *byte, StrCount uint32, Reserved2 *byte) uint32 {
+	_Component := win32.UTF16Ptr(Component)
+	r1, _, _ := syscall.SyscallN(procNetErrorLogWrite.Addr(), uintptr(unsafe.Pointer(Reserved1)), uintptr(Code), uintptr(unsafe.Pointer(_Component)), uintptr(unsafe.Pointer(Buffer)), uintptr(NumBytes), uintptr(unsafe.Pointer(MsgBuf)), uintptr(StrCount), uintptr(unsafe.Pointer(Reserved2)))
 	return uint32(r1)
 }
 
@@ -454,594 +515,744 @@ func NetFreeAadJoinInformation(pJoinInfo *DSREG_JOIN_INFO) {
 // NetGetAadJoinInformation calls NETAPI32!NetGetAadJoinInformation.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netgetaadjoininformation
 // Minimum OS: windows10.0.10240.
-func NetGetAadJoinInformation(pcszTenantId foundation.PWSTR, ppJoinInfo **DSREG_JOIN_INFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNetGetAadJoinInformation.Addr(), uintptr(unsafe.Pointer(pcszTenantId)), uintptr(unsafe.Pointer(ppJoinInfo)))
-	return foundation.HRESULT(r1)
+func NetGetAadJoinInformation(pcszTenantId string, ppJoinInfo **DSREG_JOIN_INFO) error {
+	_pcszTenantId := win32.UTF16Ptr(pcszTenantId)
+	r1, _, _ := syscall.SyscallN(procNetGetAadJoinInformation.Addr(), uintptr(unsafe.Pointer(_pcszTenantId)), uintptr(unsafe.Pointer(ppJoinInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NetGetAnyDCName calls NETAPI32!NetGetAnyDCName.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgetanydcname
 // Minimum OS: windows5.0.
-func NetGetAnyDCName(ServerName foundation.PWSTR, DomainName foundation.PWSTR, Buffer **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGetAnyDCName.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(DomainName)), uintptr(unsafe.Pointer(Buffer)))
+func NetGetAnyDCName(ServerName string, DomainName string, Buffer **byte) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_DomainName := win32.UTF16Ptr(DomainName)
+	r1, _, _ := syscall.SyscallN(procNetGetAnyDCName.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_DomainName)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
 // NetGetDCName calls NETAPI32!NetGetDCName.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgetdcname
 // Minimum OS: windows5.0.
-func NetGetDCName(ServerName foundation.PWSTR, DomainName foundation.PWSTR, Buffer **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGetDCName.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(DomainName)), uintptr(unsafe.Pointer(Buffer)))
+func NetGetDCName(ServerName string, DomainName string, Buffer **byte) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_DomainName := win32.UTF16Ptr(DomainName)
+	r1, _, _ := syscall.SyscallN(procNetGetDCName.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_DomainName)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
 // NetGetDisplayInformationIndex calls NETAPI32!NetGetDisplayInformationIndex.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgetdisplayinformationindex
 // Minimum OS: windows5.0.
-func NetGetDisplayInformationIndex(ServerName foundation.PWSTR, Level uint32, Prefix foundation.PWSTR, Index *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGetDisplayInformationIndex.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(Level), uintptr(unsafe.Pointer(Prefix)), uintptr(unsafe.Pointer(Index)))
+func NetGetDisplayInformationIndex(ServerName string, Level uint32, Prefix string, Index *uint32) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_Prefix := win32.UTF16Ptr(Prefix)
+	r1, _, _ := syscall.SyscallN(procNetGetDisplayInformationIndex.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(Level), uintptr(unsafe.Pointer(_Prefix)), uintptr(unsafe.Pointer(Index)))
 	return uint32(r1)
 }
 
 // NetGetJoinInformation calls NETAPI32!NetGetJoinInformation.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netgetjoininformation
 // Minimum OS: windows5.0.
-func NetGetJoinInformation(lpServer foundation.PWSTR, lpNameBuffer *foundation.PWSTR, BufferType *NETSETUP_JOIN_STATUS) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGetJoinInformation.Addr(), uintptr(unsafe.Pointer(lpServer)), uintptr(unsafe.Pointer(lpNameBuffer)), uintptr(unsafe.Pointer(BufferType)))
+func NetGetJoinInformation(lpServer string, lpNameBuffer *foundation.PWSTR, BufferType *NETSETUP_JOIN_STATUS) uint32 {
+	_lpServer := win32.UTF16Ptr(lpServer)
+	r1, _, _ := syscall.SyscallN(procNetGetJoinInformation.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(lpNameBuffer)), uintptr(unsafe.Pointer(BufferType)))
 	return uint32(r1)
 }
 
 // NetGetJoinableOUs calls NETAPI32!NetGetJoinableOUs.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netgetjoinableous
 // Minimum OS: windows5.0.
-func NetGetJoinableOUs(lpServer foundation.PWSTR, lpDomain foundation.PWSTR, lpAccount foundation.PWSTR, lpPassword foundation.PWSTR, OUCount *uint32, OUs **foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGetJoinableOUs.Addr(), uintptr(unsafe.Pointer(lpServer)), uintptr(unsafe.Pointer(lpDomain)), uintptr(unsafe.Pointer(lpAccount)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(OUCount)), uintptr(unsafe.Pointer(OUs)))
+func NetGetJoinableOUs(lpServer string, lpDomain string, lpAccount string, lpPassword string, OUCount *uint32, OUs **foundation.PWSTR) uint32 {
+	_lpServer := win32.UTF16Ptr(lpServer)
+	_lpDomain := win32.UTF16Ptr(lpDomain)
+	_lpAccount := win32.UTF16Ptr(lpAccount)
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	r1, _, _ := syscall.SyscallN(procNetGetJoinableOUs.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpDomain)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(OUCount)), uintptr(unsafe.Pointer(OUs)))
 	return uint32(r1)
 }
 
 // NetGroupAdd calls NETAPI32!NetGroupAdd.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupadd
 // Minimum OS: windows5.0.
-func NetGroupAdd(servername foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGroupAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetGroupAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetGroupAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetGroupAddUser calls NETAPI32!NetGroupAddUser.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupadduser
 // Minimum OS: windows5.0.
-func NetGroupAddUser(servername foundation.PWSTR, GroupName foundation.PWSTR, username foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGroupAddUser.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(GroupName)), uintptr(unsafe.Pointer(username)))
+func NetGroupAddUser(servername string, GroupName string, username string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_GroupName := win32.UTF16Ptr(GroupName)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetGroupAddUser.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_GroupName)), uintptr(unsafe.Pointer(_username)))
 	return uint32(r1)
 }
 
 // NetGroupDel calls NETAPI32!NetGroupDel.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupdel
 // Minimum OS: windows5.0.
-func NetGroupDel(servername foundation.PWSTR, groupname foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGroupDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)))
+func NetGroupDel(servername string, groupname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetGroupDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)))
 	return uint32(r1)
 }
 
 // NetGroupDelUser calls NETAPI32!NetGroupDelUser.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupdeluser
 // Minimum OS: windows5.0.
-func NetGroupDelUser(servername foundation.PWSTR, GroupName foundation.PWSTR, Username foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGroupDelUser.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(GroupName)), uintptr(unsafe.Pointer(Username)))
+func NetGroupDelUser(servername string, GroupName string, Username string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_GroupName := win32.UTF16Ptr(GroupName)
+	_Username := win32.UTF16Ptr(Username)
+	r1, _, _ := syscall.SyscallN(procNetGroupDelUser.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_GroupName)), uintptr(unsafe.Pointer(_Username)))
 	return uint32(r1)
 }
 
 // NetGroupEnum calls NETAPI32!NetGroupEnum.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupenum
 // Minimum OS: windows5.0.
-func NetGroupEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGroupEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetGroupEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uintptr) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetGroupEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetGroupGetInfo calls NETAPI32!NetGroupGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupgetinfo
 // Minimum OS: windows5.0.
-func NetGroupGetInfo(servername foundation.PWSTR, groupname foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGroupGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetGroupGetInfo(servername string, groupname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetGroupGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetGroupGetUsers calls NETAPI32!NetGroupGetUsers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupgetusers
 // Minimum OS: windows5.0.
-func NetGroupGetUsers(servername foundation.PWSTR, groupname foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, ResumeHandle *uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGroupGetUsers.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(ResumeHandle)))
+func NetGroupGetUsers(servername string, groupname string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, ResumeHandle *uintptr) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetGroupGetUsers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(ResumeHandle)))
 	return uint32(r1)
 }
 
 // NetGroupSetInfo calls NETAPI32!NetGroupSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupsetinfo
 // Minimum OS: windows5.0.
-func NetGroupSetInfo(servername foundation.PWSTR, groupname foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGroupSetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetGroupSetInfo(servername string, groupname string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetGroupSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetGroupSetUsers calls NETAPI32!NetGroupSetUsers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupsetusers
 // Minimum OS: windows5.0.
-func NetGroupSetUsers(servername foundation.PWSTR, groupname foundation.PWSTR, level uint32, buf *byte, totalentries uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetGroupSetUsers.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
+func NetGroupSetUsers(servername string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetGroupSetUsers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
 	return uint32(r1)
 }
 
 // NetIsServiceAccount calls NETAPI32!NetIsServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netisserviceaccount
 // Minimum OS: windows6.1.
-func NetIsServiceAccount(ServerName foundation.PWSTR, AccountName foundation.PWSTR, IsService *foundation.BOOL) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(AccountName)), uintptr(unsafe.Pointer(IsService)))
+func NetIsServiceAccount(ServerName string, AccountName string, IsService *foundation.BOOL) foundation.NTSTATUS {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_AccountName := win32.UTF16Ptr(AccountName)
+	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(unsafe.Pointer(IsService)))
 	return foundation.NTSTATUS(r1)
 }
 
 // NetIsServiceAccount2 calls NETAPI32!NetIsServiceAccount2.
-func NetIsServiceAccount2(ServerName foundation.PWSTR, AccountName foundation.PWSTR, IsService *foundation.BOOL, AccountType *MSA_INFO_ACCOUNT_TYPE) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount2.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(AccountName)), uintptr(unsafe.Pointer(IsService)), uintptr(unsafe.Pointer(AccountType)))
+func NetIsServiceAccount2(ServerName string, AccountName string, IsService *foundation.BOOL, AccountType *MSA_INFO_ACCOUNT_TYPE) foundation.NTSTATUS {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_AccountName := win32.UTF16Ptr(AccountName)
+	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount2.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(unsafe.Pointer(IsService)), uintptr(unsafe.Pointer(AccountType)))
 	return foundation.NTSTATUS(r1)
 }
 
 // NetJoinDomain calls NETAPI32!NetJoinDomain.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netjoindomain
 // Minimum OS: windows5.0.
-func NetJoinDomain(lpServer foundation.PWSTR, lpDomain foundation.PWSTR, lpMachineAccountOU foundation.PWSTR, lpAccount foundation.PWSTR, lpPassword foundation.PWSTR, fJoinOptions NET_JOIN_DOMAIN_JOIN_OPTIONS) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetJoinDomain.Addr(), uintptr(unsafe.Pointer(lpServer)), uintptr(unsafe.Pointer(lpDomain)), uintptr(unsafe.Pointer(lpMachineAccountOU)), uintptr(unsafe.Pointer(lpAccount)), uintptr(unsafe.Pointer(lpPassword)), uintptr(fJoinOptions))
+func NetJoinDomain(lpServer string, lpDomain string, lpMachineAccountOU string, lpAccount string, lpPassword string, fJoinOptions NET_JOIN_DOMAIN_JOIN_OPTIONS) uint32 {
+	_lpServer := win32.UTF16Ptr(lpServer)
+	_lpDomain := win32.UTF16Ptr(lpDomain)
+	_lpMachineAccountOU := win32.UTF16Ptr(lpMachineAccountOU)
+	_lpAccount := win32.UTF16Ptr(lpAccount)
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	r1, _, _ := syscall.SyscallN(procNetJoinDomain.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpDomain)), uintptr(unsafe.Pointer(_lpMachineAccountOU)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(fJoinOptions))
 	return uint32(r1)
 }
 
 // NetLocalGroupAdd calls NETAPI32!NetLocalGroupAdd.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupadd
 // Minimum OS: windows5.0.
-func NetLocalGroupAdd(servername foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetLocalGroupAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetLocalGroupAddMember calls NETAPI32!NetLocalGroupAddMember.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupaddmember
-func NetLocalGroupAddMember(servername foundation.PWSTR, groupname foundation.PWSTR, membersid security.PSID) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupAddMember.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(membersid))
+func NetLocalGroupAddMember(servername string, groupname string, membersid security.PSID) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupAddMember.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(membersid))
 	return uint32(r1)
 }
 
 // NetLocalGroupAddMembers calls NETAPI32!NetLocalGroupAddMembers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupaddmembers
 // Minimum OS: windows5.0.
-func NetLocalGroupAddMembers(servername foundation.PWSTR, groupname foundation.PWSTR, level uint32, buf *byte, totalentries uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupAddMembers.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
+func NetLocalGroupAddMembers(servername string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupAddMembers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
 	return uint32(r1)
 }
 
 // NetLocalGroupDel calls NETAPI32!NetLocalGroupDel.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupdel
 // Minimum OS: windows5.0.
-func NetLocalGroupDel(servername foundation.PWSTR, groupname foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)))
+func NetLocalGroupDel(servername string, groupname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)))
 	return uint32(r1)
 }
 
 // NetLocalGroupDelMember calls NETAPI32!NetLocalGroupDelMember.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupdelmember
-func NetLocalGroupDelMember(servername foundation.PWSTR, groupname foundation.PWSTR, membersid security.PSID) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupDelMember.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(membersid))
+func NetLocalGroupDelMember(servername string, groupname string, membersid security.PSID) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupDelMember.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(membersid))
 	return uint32(r1)
 }
 
 // NetLocalGroupDelMembers calls NETAPI32!NetLocalGroupDelMembers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupdelmembers
 // Minimum OS: windows5.0.
-func NetLocalGroupDelMembers(servername foundation.PWSTR, groupname foundation.PWSTR, level uint32, buf *byte, totalentries uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupDelMembers.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
+func NetLocalGroupDelMembers(servername string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupDelMembers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
 	return uint32(r1)
 }
 
 // NetLocalGroupEnum calls NETAPI32!NetLocalGroupEnum.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupenum
 // Minimum OS: windows5.0.
-func NetLocalGroupEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
+func NetLocalGroupEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uintptr) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
 }
 
 // NetLocalGroupGetInfo calls NETAPI32!NetLocalGroupGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupgetinfo
 // Minimum OS: windows5.0.
-func NetLocalGroupGetInfo(servername foundation.PWSTR, groupname foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetLocalGroupGetInfo(servername string, groupname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetLocalGroupGetMembers calls NETAPI32!NetLocalGroupGetMembers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupgetmembers
 // Minimum OS: windows5.0.
-func NetLocalGroupGetMembers(servername foundation.PWSTR, localgroupname foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupGetMembers.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(localgroupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
+func NetLocalGroupGetMembers(servername string, localgroupname string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uintptr) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_localgroupname := win32.UTF16Ptr(localgroupname)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupGetMembers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_localgroupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
 }
 
 // NetLocalGroupSetInfo calls NETAPI32!NetLocalGroupSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupsetinfo
 // Minimum OS: windows5.0.
-func NetLocalGroupSetInfo(servername foundation.PWSTR, groupname foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupSetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetLocalGroupSetInfo(servername string, groupname string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetLocalGroupSetMembers calls NETAPI32!NetLocalGroupSetMembers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupsetmembers
 // Minimum OS: windows5.0.
-func NetLocalGroupSetMembers(servername foundation.PWSTR, groupname foundation.PWSTR, level uint32, buf *byte, totalentries uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetLocalGroupSetMembers.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
+func NetLocalGroupSetMembers(servername string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_groupname := win32.UTF16Ptr(groupname)
+	r1, _, _ := syscall.SyscallN(procNetLocalGroupSetMembers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
 	return uint32(r1)
 }
 
 // NetMessageBufferSend calls NETAPI32!NetMessageBufferSend.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagebuffersend
 // Minimum OS: windows5.0.
-func NetMessageBufferSend(servername foundation.PWSTR, msgname foundation.PWSTR, fromname foundation.PWSTR, buf *byte, buflen uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetMessageBufferSend.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(msgname)), uintptr(unsafe.Pointer(fromname)), uintptr(unsafe.Pointer(buf)), uintptr(buflen))
+func NetMessageBufferSend(servername string, msgname string, fromname string, buf *byte, buflen uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_msgname := win32.UTF16Ptr(msgname)
+	_fromname := win32.UTF16Ptr(fromname)
+	r1, _, _ := syscall.SyscallN(procNetMessageBufferSend.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_msgname)), uintptr(unsafe.Pointer(_fromname)), uintptr(unsafe.Pointer(buf)), uintptr(buflen))
 	return uint32(r1)
 }
 
 // NetMessageNameAdd calls NETAPI32!NetMessageNameAdd.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagenameadd
 // Minimum OS: windows5.0.
-func NetMessageNameAdd(servername foundation.PWSTR, msgname foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetMessageNameAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(msgname)))
+func NetMessageNameAdd(servername string, msgname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_msgname := win32.UTF16Ptr(msgname)
+	r1, _, _ := syscall.SyscallN(procNetMessageNameAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_msgname)))
 	return uint32(r1)
 }
 
 // NetMessageNameDel calls NETAPI32!NetMessageNameDel.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagenamedel
 // Minimum OS: windows5.0.
-func NetMessageNameDel(servername foundation.PWSTR, msgname foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetMessageNameDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(msgname)))
+func NetMessageNameDel(servername string, msgname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_msgname := win32.UTF16Ptr(msgname)
+	r1, _, _ := syscall.SyscallN(procNetMessageNameDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_msgname)))
 	return uint32(r1)
 }
 
 // NetMessageNameEnum calls NETAPI32!NetMessageNameEnum.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagenameenum
 // Minimum OS: windows5.0.
-func NetMessageNameEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetMessageNameEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetMessageNameEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetMessageNameEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetMessageNameGetInfo calls NETAPI32!NetMessageNameGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagenamegetinfo
 // Minimum OS: windows5.0.
-func NetMessageNameGetInfo(servername foundation.PWSTR, msgname foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetMessageNameGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(msgname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetMessageNameGetInfo(servername string, msgname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_msgname := win32.UTF16Ptr(msgname)
+	r1, _, _ := syscall.SyscallN(procNetMessageNameGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_msgname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetProvisionComputerAccount calls NETAPI32!NetProvisionComputerAccount.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netprovisioncomputeraccount
 // Minimum OS: windows6.1.
-func NetProvisionComputerAccount(lpDomain foundation.PWSTR, lpMachineName foundation.PWSTR, lpMachineAccountOU foundation.PWSTR, lpDcName foundation.PWSTR, dwOptions NETSETUP_PROVISION, pProvisionBinData **byte, pdwProvisionBinDataSize *uint32, pProvisionTextData *foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetProvisionComputerAccount.Addr(), uintptr(unsafe.Pointer(lpDomain)), uintptr(unsafe.Pointer(lpMachineName)), uintptr(unsafe.Pointer(lpMachineAccountOU)), uintptr(unsafe.Pointer(lpDcName)), uintptr(dwOptions), uintptr(unsafe.Pointer(pProvisionBinData)), uintptr(unsafe.Pointer(pdwProvisionBinDataSize)), uintptr(unsafe.Pointer(pProvisionTextData)))
+func NetProvisionComputerAccount(lpDomain string, lpMachineName string, lpMachineAccountOU string, lpDcName string, dwOptions NETSETUP_PROVISION, pProvisionBinData **byte, pdwProvisionBinDataSize *uint32, pProvisionTextData *foundation.PWSTR) uint32 {
+	_lpDomain := win32.UTF16Ptr(lpDomain)
+	_lpMachineName := win32.UTF16Ptr(lpMachineName)
+	_lpMachineAccountOU := win32.UTF16Ptr(lpMachineAccountOU)
+	_lpDcName := win32.UTF16Ptr(lpDcName)
+	r1, _, _ := syscall.SyscallN(procNetProvisionComputerAccount.Addr(), uintptr(unsafe.Pointer(_lpDomain)), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpMachineAccountOU)), uintptr(unsafe.Pointer(_lpDcName)), uintptr(dwOptions), uintptr(unsafe.Pointer(pProvisionBinData)), uintptr(unsafe.Pointer(pdwProvisionBinDataSize)), uintptr(unsafe.Pointer(pProvisionTextData)))
 	return uint32(r1)
 }
 
 // NetQueryDisplayInformation calls NETAPI32!NetQueryDisplayInformation.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netquerydisplayinformation
 // Minimum OS: windows5.0.
-func NetQueryDisplayInformation(ServerName foundation.PWSTR, Level uint32, Index uint32, EntriesRequested uint32, PreferredMaximumLength uint32, ReturnedEntryCount *uint32, SortedBuffer *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetQueryDisplayInformation.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(Level), uintptr(Index), uintptr(EntriesRequested), uintptr(PreferredMaximumLength), uintptr(unsafe.Pointer(ReturnedEntryCount)), uintptr(unsafe.Pointer(SortedBuffer)))
+func NetQueryDisplayInformation(ServerName string, Level uint32, Index uint32, EntriesRequested uint32, PreferredMaximumLength uint32, ReturnedEntryCount *uint32, SortedBuffer *unsafe.Pointer) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	r1, _, _ := syscall.SyscallN(procNetQueryDisplayInformation.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(Level), uintptr(Index), uintptr(EntriesRequested), uintptr(PreferredMaximumLength), uintptr(unsafe.Pointer(ReturnedEntryCount)), uintptr(unsafe.Pointer(SortedBuffer)))
 	return uint32(r1)
 }
 
 // NetQueryServiceAccount calls NETAPI32!NetQueryServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netqueryserviceaccount
 // Minimum OS: windows6.1.
-func NetQueryServiceAccount(ServerName foundation.PWSTR, AccountName foundation.PWSTR, InfoLevel uint32, Buffer **byte) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procNetQueryServiceAccount.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(AccountName)), uintptr(InfoLevel), uintptr(unsafe.Pointer(Buffer)))
+func NetQueryServiceAccount(ServerName string, AccountName string, InfoLevel uint32, Buffer **byte) foundation.NTSTATUS {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_AccountName := win32.UTF16Ptr(AccountName)
+	r1, _, _ := syscall.SyscallN(procNetQueryServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(InfoLevel), uintptr(unsafe.Pointer(Buffer)))
 	return foundation.NTSTATUS(r1)
 }
 
 // NetRemoteComputerSupports calls NETAPI32!NetRemoteComputerSupports.
 // https://learn.microsoft.com/windows/win32/api/lmremutl/nf-lmremutl-netremotecomputersupports
 // Minimum OS: windows5.0.
-func NetRemoteComputerSupports(UncServerName foundation.PWSTR, OptionsWanted NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS, OptionsSupported *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetRemoteComputerSupports.Addr(), uintptr(unsafe.Pointer(UncServerName)), uintptr(OptionsWanted), uintptr(unsafe.Pointer(OptionsSupported)))
+func NetRemoteComputerSupports(UncServerName string, OptionsWanted NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS, OptionsSupported *uint32) uint32 {
+	_UncServerName := win32.UTF16Ptr(UncServerName)
+	r1, _, _ := syscall.SyscallN(procNetRemoteComputerSupports.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(OptionsWanted), uintptr(unsafe.Pointer(OptionsSupported)))
 	return uint32(r1)
 }
 
 // NetRemoteTOD calls NETAPI32!NetRemoteTOD.
 // https://learn.microsoft.com/windows/win32/api/lmremutl/nf-lmremutl-netremotetod
 // Minimum OS: windows5.0.
-func NetRemoteTOD(UncServerName foundation.PWSTR, BufferPtr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetRemoteTOD.Addr(), uintptr(unsafe.Pointer(UncServerName)), uintptr(unsafe.Pointer(BufferPtr)))
+func NetRemoteTOD(UncServerName string, BufferPtr **byte) uint32 {
+	_UncServerName := win32.UTF16Ptr(UncServerName)
+	r1, _, _ := syscall.SyscallN(procNetRemoteTOD.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(BufferPtr)))
 	return uint32(r1)
 }
 
 // NetRemoveAlternateComputerName calls NETAPI32!NetRemoveAlternateComputerName.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netremovealternatecomputername
 // Minimum OS: windows5.1.2600.
-func NetRemoveAlternateComputerName(Server foundation.PWSTR, AlternateName foundation.PWSTR, DomainAccount foundation.PWSTR, DomainAccountPassword foundation.PWSTR, Reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetRemoveAlternateComputerName.Addr(), uintptr(unsafe.Pointer(Server)), uintptr(unsafe.Pointer(AlternateName)), uintptr(unsafe.Pointer(DomainAccount)), uintptr(unsafe.Pointer(DomainAccountPassword)), uintptr(Reserved))
+func NetRemoveAlternateComputerName(Server string, AlternateName string, DomainAccount string, DomainAccountPassword string, Reserved uint32) uint32 {
+	_Server := win32.UTF16Ptr(Server)
+	_AlternateName := win32.UTF16Ptr(AlternateName)
+	_DomainAccount := win32.UTF16Ptr(DomainAccount)
+	_DomainAccountPassword := win32.UTF16Ptr(DomainAccountPassword)
+	r1, _, _ := syscall.SyscallN(procNetRemoveAlternateComputerName.Addr(), uintptr(unsafe.Pointer(_Server)), uintptr(unsafe.Pointer(_AlternateName)), uintptr(unsafe.Pointer(_DomainAccount)), uintptr(unsafe.Pointer(_DomainAccountPassword)), uintptr(Reserved))
 	return uint32(r1)
 }
 
 // NetRemoveServiceAccount calls NETAPI32!NetRemoveServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netremoveserviceaccount
 // Minimum OS: windows6.1.
-func NetRemoveServiceAccount(ServerName foundation.PWSTR, AccountName foundation.PWSTR, Flags uint32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procNetRemoveServiceAccount.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(AccountName)), uintptr(Flags))
+func NetRemoveServiceAccount(ServerName string, AccountName string, Flags uint32) foundation.NTSTATUS {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_AccountName := win32.UTF16Ptr(AccountName)
+	r1, _, _ := syscall.SyscallN(procNetRemoveServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(Flags))
 	return foundation.NTSTATUS(r1)
 }
 
 // NetRenameMachineInDomain calls NETAPI32!NetRenameMachineInDomain.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netrenamemachineindomain
 // Minimum OS: windows5.0.
-func NetRenameMachineInDomain(lpServer foundation.PWSTR, lpNewMachineName foundation.PWSTR, lpAccount foundation.PWSTR, lpPassword foundation.PWSTR, fRenameOptions uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetRenameMachineInDomain.Addr(), uintptr(unsafe.Pointer(lpServer)), uintptr(unsafe.Pointer(lpNewMachineName)), uintptr(unsafe.Pointer(lpAccount)), uintptr(unsafe.Pointer(lpPassword)), uintptr(fRenameOptions))
+func NetRenameMachineInDomain(lpServer string, lpNewMachineName string, lpAccount string, lpPassword string, fRenameOptions uint32) uint32 {
+	_lpServer := win32.UTF16Ptr(lpServer)
+	_lpNewMachineName := win32.UTF16Ptr(lpNewMachineName)
+	_lpAccount := win32.UTF16Ptr(lpAccount)
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	r1, _, _ := syscall.SyscallN(procNetRenameMachineInDomain.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpNewMachineName)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(fRenameOptions))
 	return uint32(r1)
 }
 
 // NetReplExportDirAdd calls NETAPI32!NetReplExportDirAdd.
-func NetReplExportDirAdd(servername foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplExportDirAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetReplExportDirAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetReplExportDirAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetReplExportDirDel calls NETAPI32!NetReplExportDirDel.
-func NetReplExportDirDel(servername foundation.PWSTR, dirname foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplExportDirDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(dirname)))
+func NetReplExportDirDel(servername string, dirname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_dirname := win32.UTF16Ptr(dirname)
+	r1, _, _ := syscall.SyscallN(procNetReplExportDirDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_dirname)))
 	return uint32(r1)
 }
 
 // NetReplExportDirEnum calls NETAPI32!NetReplExportDirEnum.
-func NetReplExportDirEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplExportDirEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
+func NetReplExportDirEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetReplExportDirEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
 }
 
 // NetReplExportDirGetInfo calls NETAPI32!NetReplExportDirGetInfo.
-func NetReplExportDirGetInfo(servername foundation.PWSTR, dirname foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplExportDirGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(dirname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetReplExportDirGetInfo(servername string, dirname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_dirname := win32.UTF16Ptr(dirname)
+	r1, _, _ := syscall.SyscallN(procNetReplExportDirGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_dirname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetReplExportDirLock calls NETAPI32!NetReplExportDirLock.
-func NetReplExportDirLock(servername foundation.PWSTR, dirname foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplExportDirLock.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(dirname)))
+func NetReplExportDirLock(servername string, dirname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_dirname := win32.UTF16Ptr(dirname)
+	r1, _, _ := syscall.SyscallN(procNetReplExportDirLock.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_dirname)))
 	return uint32(r1)
 }
 
 // NetReplExportDirSetInfo calls NETAPI32!NetReplExportDirSetInfo.
-func NetReplExportDirSetInfo(servername foundation.PWSTR, dirname foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplExportDirSetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(dirname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetReplExportDirSetInfo(servername string, dirname string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_dirname := win32.UTF16Ptr(dirname)
+	r1, _, _ := syscall.SyscallN(procNetReplExportDirSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_dirname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetReplExportDirUnlock calls NETAPI32!NetReplExportDirUnlock.
-func NetReplExportDirUnlock(servername foundation.PWSTR, dirname foundation.PWSTR, unlockforce uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplExportDirUnlock.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(dirname)), uintptr(unlockforce))
+func NetReplExportDirUnlock(servername string, dirname string, unlockforce uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_dirname := win32.UTF16Ptr(dirname)
+	r1, _, _ := syscall.SyscallN(procNetReplExportDirUnlock.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_dirname)), uintptr(unlockforce))
 	return uint32(r1)
 }
 
 // NetReplGetInfo calls NETAPI32!NetReplGetInfo.
-func NetReplGetInfo(servername foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetReplGetInfo(servername string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetReplGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetReplImportDirAdd calls NETAPI32!NetReplImportDirAdd.
-func NetReplImportDirAdd(servername foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplImportDirAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetReplImportDirAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetReplImportDirAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetReplImportDirDel calls NETAPI32!NetReplImportDirDel.
-func NetReplImportDirDel(servername foundation.PWSTR, dirname foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplImportDirDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(dirname)))
+func NetReplImportDirDel(servername string, dirname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_dirname := win32.UTF16Ptr(dirname)
+	r1, _, _ := syscall.SyscallN(procNetReplImportDirDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_dirname)))
 	return uint32(r1)
 }
 
 // NetReplImportDirEnum calls NETAPI32!NetReplImportDirEnum.
-func NetReplImportDirEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplImportDirEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
+func NetReplImportDirEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetReplImportDirEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
 }
 
 // NetReplImportDirGetInfo calls NETAPI32!NetReplImportDirGetInfo.
-func NetReplImportDirGetInfo(servername foundation.PWSTR, dirname foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplImportDirGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(dirname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetReplImportDirGetInfo(servername string, dirname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_dirname := win32.UTF16Ptr(dirname)
+	r1, _, _ := syscall.SyscallN(procNetReplImportDirGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_dirname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetReplImportDirLock calls NETAPI32!NetReplImportDirLock.
-func NetReplImportDirLock(servername foundation.PWSTR, dirname foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplImportDirLock.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(dirname)))
+func NetReplImportDirLock(servername string, dirname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_dirname := win32.UTF16Ptr(dirname)
+	r1, _, _ := syscall.SyscallN(procNetReplImportDirLock.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_dirname)))
 	return uint32(r1)
 }
 
 // NetReplImportDirUnlock calls NETAPI32!NetReplImportDirUnlock.
-func NetReplImportDirUnlock(servername foundation.PWSTR, dirname foundation.PWSTR, unlockforce uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplImportDirUnlock.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(dirname)), uintptr(unlockforce))
+func NetReplImportDirUnlock(servername string, dirname string, unlockforce uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_dirname := win32.UTF16Ptr(dirname)
+	r1, _, _ := syscall.SyscallN(procNetReplImportDirUnlock.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_dirname)), uintptr(unlockforce))
 	return uint32(r1)
 }
 
 // NetReplSetInfo calls NETAPI32!NetReplSetInfo.
-func NetReplSetInfo(servername foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetReplSetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetReplSetInfo(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetReplSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetRequestOfflineDomainJoin calls NETAPI32!NetRequestOfflineDomainJoin.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netrequestofflinedomainjoin
 // Minimum OS: windows6.1.
-func NetRequestOfflineDomainJoin(pProvisionBinData *byte, cbProvisionBinDataSize uint32, dwOptions NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetRequestOfflineDomainJoin.Addr(), uintptr(unsafe.Pointer(pProvisionBinData)), uintptr(cbProvisionBinDataSize), uintptr(dwOptions), uintptr(unsafe.Pointer(lpWindowsPath)))
+func NetRequestOfflineDomainJoin(pProvisionBinData *byte, cbProvisionBinDataSize uint32, dwOptions NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath string) uint32 {
+	_lpWindowsPath := win32.UTF16Ptr(lpWindowsPath)
+	r1, _, _ := syscall.SyscallN(procNetRequestOfflineDomainJoin.Addr(), uintptr(unsafe.Pointer(pProvisionBinData)), uintptr(cbProvisionBinDataSize), uintptr(dwOptions), uintptr(unsafe.Pointer(_lpWindowsPath)))
 	return uint32(r1)
 }
 
 // NetRequestProvisioningPackageInstall calls NETAPI32!NetRequestProvisioningPackageInstall.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netrequestprovisioningpackageinstall
 // Minimum OS: windows8.0.
-func NetRequestProvisioningPackageInstall(pPackageBinData *byte, dwPackageBinDataSize uint32, dwProvisionOptions NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath foundation.PWSTR, pvReserved unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetRequestProvisioningPackageInstall.Addr(), uintptr(unsafe.Pointer(pPackageBinData)), uintptr(dwPackageBinDataSize), uintptr(dwProvisionOptions), uintptr(unsafe.Pointer(lpWindowsPath)), uintptr(unsafe.Pointer(pvReserved)))
+func NetRequestProvisioningPackageInstall(pPackageBinData *byte, dwPackageBinDataSize uint32, dwProvisionOptions NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath string) uint32 {
+	_lpWindowsPath := win32.UTF16Ptr(lpWindowsPath)
+	r1, _, _ := syscall.SyscallN(procNetRequestProvisioningPackageInstall.Addr(), uintptr(unsafe.Pointer(pPackageBinData)), uintptr(dwPackageBinDataSize), uintptr(dwProvisionOptions), uintptr(unsafe.Pointer(_lpWindowsPath)), 0)
 	return uint32(r1)
 }
 
 // NetScheduleJobAdd calls NETAPI32!NetScheduleJobAdd.
 // https://learn.microsoft.com/windows/win32/api/lmat/nf-lmat-netschedulejobadd
 // Minimum OS: windows5.0.
-func NetScheduleJobAdd(Servername foundation.PWSTR, Buffer *byte, JobId *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetScheduleJobAdd.Addr(), uintptr(unsafe.Pointer(Servername)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(JobId)))
+func NetScheduleJobAdd(Servername string, Buffer *byte, JobId *uint32) uint32 {
+	_Servername := win32.UTF16Ptr(Servername)
+	r1, _, _ := syscall.SyscallN(procNetScheduleJobAdd.Addr(), uintptr(unsafe.Pointer(_Servername)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(JobId)))
 	return uint32(r1)
 }
 
 // NetScheduleJobDel calls NETAPI32!NetScheduleJobDel.
 // https://learn.microsoft.com/windows/win32/api/lmat/nf-lmat-netschedulejobdel
 // Minimum OS: windows5.0.
-func NetScheduleJobDel(Servername foundation.PWSTR, MinJobId uint32, MaxJobId uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetScheduleJobDel.Addr(), uintptr(unsafe.Pointer(Servername)), uintptr(MinJobId), uintptr(MaxJobId))
+func NetScheduleJobDel(Servername string, MinJobId uint32, MaxJobId uint32) uint32 {
+	_Servername := win32.UTF16Ptr(Servername)
+	r1, _, _ := syscall.SyscallN(procNetScheduleJobDel.Addr(), uintptr(unsafe.Pointer(_Servername)), uintptr(MinJobId), uintptr(MaxJobId))
 	return uint32(r1)
 }
 
 // NetScheduleJobEnum calls NETAPI32!NetScheduleJobEnum.
 // https://learn.microsoft.com/windows/win32/api/lmat/nf-lmat-netschedulejobenum
 // Minimum OS: windows5.0.
-func NetScheduleJobEnum(Servername foundation.PWSTR, PointerToBuffer **byte, PrefferedMaximumLength uint32, EntriesRead *uint32, TotalEntries *uint32, ResumeHandle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetScheduleJobEnum.Addr(), uintptr(unsafe.Pointer(Servername)), uintptr(unsafe.Pointer(PointerToBuffer)), uintptr(PrefferedMaximumLength), uintptr(unsafe.Pointer(EntriesRead)), uintptr(unsafe.Pointer(TotalEntries)), uintptr(unsafe.Pointer(ResumeHandle)))
+func NetScheduleJobEnum(Servername string, PointerToBuffer **byte, PrefferedMaximumLength uint32, EntriesRead *uint32, TotalEntries *uint32, ResumeHandle *uint32) uint32 {
+	_Servername := win32.UTF16Ptr(Servername)
+	r1, _, _ := syscall.SyscallN(procNetScheduleJobEnum.Addr(), uintptr(unsafe.Pointer(_Servername)), uintptr(unsafe.Pointer(PointerToBuffer)), uintptr(PrefferedMaximumLength), uintptr(unsafe.Pointer(EntriesRead)), uintptr(unsafe.Pointer(TotalEntries)), uintptr(unsafe.Pointer(ResumeHandle)))
 	return uint32(r1)
 }
 
 // NetScheduleJobGetInfo calls NETAPI32!NetScheduleJobGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmat/nf-lmat-netschedulejobgetinfo
 // Minimum OS: windows5.0.
-func NetScheduleJobGetInfo(Servername foundation.PWSTR, JobId uint32, PointerToBuffer **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetScheduleJobGetInfo.Addr(), uintptr(unsafe.Pointer(Servername)), uintptr(JobId), uintptr(unsafe.Pointer(PointerToBuffer)))
+func NetScheduleJobGetInfo(Servername string, JobId uint32, PointerToBuffer **byte) uint32 {
+	_Servername := win32.UTF16Ptr(Servername)
+	r1, _, _ := syscall.SyscallN(procNetScheduleJobGetInfo.Addr(), uintptr(unsafe.Pointer(_Servername)), uintptr(JobId), uintptr(unsafe.Pointer(PointerToBuffer)))
 	return uint32(r1)
 }
 
 // NetServerComputerNameAdd calls NETAPI32!NetServerComputerNameAdd.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservercomputernameadd
 // Minimum OS: windows5.0.
-func NetServerComputerNameAdd(ServerName foundation.PWSTR, EmulatedDomainName foundation.PWSTR, EmulatedServerName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerComputerNameAdd.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(EmulatedDomainName)), uintptr(unsafe.Pointer(EmulatedServerName)))
+func NetServerComputerNameAdd(ServerName string, EmulatedDomainName string, EmulatedServerName string) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_EmulatedDomainName := win32.UTF16Ptr(EmulatedDomainName)
+	_EmulatedServerName := win32.UTF16Ptr(EmulatedServerName)
+	r1, _, _ := syscall.SyscallN(procNetServerComputerNameAdd.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_EmulatedDomainName)), uintptr(unsafe.Pointer(_EmulatedServerName)))
 	return uint32(r1)
 }
 
 // NetServerComputerNameDel calls NETAPI32!NetServerComputerNameDel.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservercomputernamedel
 // Minimum OS: windows5.0.
-func NetServerComputerNameDel(ServerName foundation.PWSTR, EmulatedServerName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerComputerNameDel.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(EmulatedServerName)))
+func NetServerComputerNameDel(ServerName string, EmulatedServerName string) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_EmulatedServerName := win32.UTF16Ptr(EmulatedServerName)
+	r1, _, _ := syscall.SyscallN(procNetServerComputerNameDel.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_EmulatedServerName)))
 	return uint32(r1)
 }
 
 // NetServerDiskEnum calls NETAPI32!NetServerDiskEnum.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netserverdiskenum
 // Minimum OS: windows5.0.
-func NetServerDiskEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerDiskEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetServerDiskEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerDiskEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetServerEnum calls NETAPI32!NetServerEnum.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netserverenum
 // Minimum OS: windows5.0.
-func NetServerEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, servertype NET_SERVER_TYPE, domain foundation.PWSTR, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(servertype), uintptr(unsafe.Pointer(domain)), uintptr(unsafe.Pointer(resume_handle)))
+func NetServerEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, servertype NET_SERVER_TYPE, domain string, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_domain := win32.UTF16Ptr(domain)
+	r1, _, _ := syscall.SyscallN(procNetServerEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(servertype), uintptr(unsafe.Pointer(_domain)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetServerGetInfo calls NETAPI32!NetServerGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservergetinfo
 // Minimum OS: windows5.0.
-func NetServerGetInfo(servername foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetServerGetInfo(servername string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetServerSetInfo calls NETAPI32!NetServerSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netserversetinfo
 // Minimum OS: windows5.0.
-func NetServerSetInfo(servername foundation.PWSTR, level uint32, buf *byte, ParmError *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerSetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(ParmError)))
+func NetServerSetInfo(servername string, level uint32, buf *byte, ParmError *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(ParmError)))
 	return uint32(r1)
 }
 
 // NetServerTransportAdd calls NETAPI32!NetServerTransportAdd.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservertransportadd
 // Minimum OS: windows5.0.
-func NetServerTransportAdd(servername foundation.PWSTR, level uint32, bufptr *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerTransportAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetServerTransportAdd(servername string, level uint32, bufptr *byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerTransportAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetServerTransportAddEx calls NETAPI32!NetServerTransportAddEx.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservertransportaddex
 // Minimum OS: windows5.0.
-func NetServerTransportAddEx(servername foundation.PWSTR, level uint32, bufptr *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerTransportAddEx.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetServerTransportAddEx(servername string, level uint32, bufptr *byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerTransportAddEx.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetServerTransportDel calls NETAPI32!NetServerTransportDel.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservertransportdel
 // Minimum OS: windows5.0.
-func NetServerTransportDel(servername foundation.PWSTR, level uint32, bufptr *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerTransportDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetServerTransportDel(servername string, level uint32, bufptr *byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerTransportDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetServerTransportEnum calls NETAPI32!NetServerTransportEnum.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservertransportenum
 // Minimum OS: windows5.0.
-func NetServerTransportEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerTransportEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetServerTransportEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerTransportEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetServiceControl calls NETAPI32!NetServiceControl.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netservicecontrol
-func NetServiceControl(servername foundation.PWSTR, service foundation.PWSTR, opcode uint32, arg uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServiceControl.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(service)), uintptr(opcode), uintptr(arg), uintptr(unsafe.Pointer(bufptr)))
+func NetServiceControl(servername string, service string, opcode uint32, arg uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_service := win32.UTF16Ptr(service)
+	r1, _, _ := syscall.SyscallN(procNetServiceControl.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_service)), uintptr(opcode), uintptr(arg), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetServiceEnum calls NETAPI32!NetServiceEnum.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netserviceenum
-func NetServiceEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServiceEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetServiceEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServiceEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetServiceGetInfo calls NETAPI32!NetServiceGetInfo.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netservicegetinfo
-func NetServiceGetInfo(servername foundation.PWSTR, service foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServiceGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(service)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetServiceGetInfo(servername string, service string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_service := win32.UTF16Ptr(service)
+	r1, _, _ := syscall.SyscallN(procNetServiceGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_service)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetServiceInstall calls NETAPI32!NetServiceInstall.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netserviceinstall
-func NetServiceInstall(servername foundation.PWSTR, service foundation.PWSTR, argc uint32, argv *foundation.PWSTR, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServiceInstall.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(service)), uintptr(argc), uintptr(unsafe.Pointer(argv)), uintptr(unsafe.Pointer(bufptr)))
+func NetServiceInstall(servername string, service string, argv []foundation.PWSTR, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_service := win32.UTF16Ptr(service)
+	var _argv *foundation.PWSTR
+	if len(argv) > 0 {
+		_argv = &argv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procNetServiceInstall.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_service)), uintptr(len(argv)), uintptr(unsafe.Pointer(_argv)), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetSetPrimaryComputerName calls NETAPI32!NetSetPrimaryComputerName.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netsetprimarycomputername
 // Minimum OS: windows5.1.2600.
-func NetSetPrimaryComputerName(Server foundation.PWSTR, PrimaryName foundation.PWSTR, DomainAccount foundation.PWSTR, DomainAccountPassword foundation.PWSTR, Reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetSetPrimaryComputerName.Addr(), uintptr(unsafe.Pointer(Server)), uintptr(unsafe.Pointer(PrimaryName)), uintptr(unsafe.Pointer(DomainAccount)), uintptr(unsafe.Pointer(DomainAccountPassword)), uintptr(Reserved))
+func NetSetPrimaryComputerName(Server string, PrimaryName string, DomainAccount string, DomainAccountPassword string, Reserved uint32) uint32 {
+	_Server := win32.UTF16Ptr(Server)
+	_PrimaryName := win32.UTF16Ptr(PrimaryName)
+	_DomainAccount := win32.UTF16Ptr(DomainAccount)
+	_DomainAccountPassword := win32.UTF16Ptr(DomainAccountPassword)
+	r1, _, _ := syscall.SyscallN(procNetSetPrimaryComputerName.Addr(), uintptr(unsafe.Pointer(_Server)), uintptr(unsafe.Pointer(_PrimaryName)), uintptr(unsafe.Pointer(_DomainAccount)), uintptr(unsafe.Pointer(_DomainAccountPassword)), uintptr(Reserved))
 	return uint32(r1)
 }
 
 // NetUnjoinDomain calls NETAPI32!NetUnjoinDomain.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netunjoindomain
 // Minimum OS: windows5.0.
-func NetUnjoinDomain(lpServer foundation.PWSTR, lpAccount foundation.PWSTR, lpPassword foundation.PWSTR, fUnjoinOptions uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUnjoinDomain.Addr(), uintptr(unsafe.Pointer(lpServer)), uintptr(unsafe.Pointer(lpAccount)), uintptr(unsafe.Pointer(lpPassword)), uintptr(fUnjoinOptions))
+func NetUnjoinDomain(lpServer string, lpAccount string, lpPassword string, fUnjoinOptions uint32) uint32 {
+	_lpServer := win32.UTF16Ptr(lpServer)
+	_lpAccount := win32.UTF16Ptr(lpAccount)
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	r1, _, _ := syscall.SyscallN(procNetUnjoinDomain.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(fUnjoinOptions))
 	return uint32(r1)
 }
 
@@ -1056,40 +1267,50 @@ func NetUseAdd(servername *int8, LevelFlags uint32, buf *byte, parm_err *uint32)
 // NetUseDel calls NETAPI32!NetUseDel.
 // https://learn.microsoft.com/windows/win32/api/lmuse/nf-lmuse-netusedel
 // Minimum OS: windows5.0.
-func NetUseDel(UncServerName foundation.PWSTR, UseName foundation.PWSTR, ForceLevelFlags FORCE_LEVEL_FLAGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUseDel.Addr(), uintptr(unsafe.Pointer(UncServerName)), uintptr(unsafe.Pointer(UseName)), uintptr(ForceLevelFlags))
+func NetUseDel(UncServerName string, UseName string, ForceLevelFlags FORCE_LEVEL_FLAGS) uint32 {
+	_UncServerName := win32.UTF16Ptr(UncServerName)
+	_UseName := win32.UTF16Ptr(UseName)
+	r1, _, _ := syscall.SyscallN(procNetUseDel.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(_UseName)), uintptr(ForceLevelFlags))
 	return uint32(r1)
 }
 
 // NetUseEnum calls NETAPI32!NetUseEnum.
 // https://learn.microsoft.com/windows/win32/api/lmuse/nf-lmuse-netuseenum
 // Minimum OS: windows5.0.
-func NetUseEnum(UncServerName foundation.PWSTR, LevelFlags uint32, BufPtr **byte, PreferedMaximumSize uint32, EntriesRead *uint32, TotalEntries *uint32, ResumeHandle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUseEnum.Addr(), uintptr(unsafe.Pointer(UncServerName)), uintptr(LevelFlags), uintptr(unsafe.Pointer(BufPtr)), uintptr(PreferedMaximumSize), uintptr(unsafe.Pointer(EntriesRead)), uintptr(unsafe.Pointer(TotalEntries)), uintptr(unsafe.Pointer(ResumeHandle)))
+func NetUseEnum(UncServerName string, LevelFlags uint32, BufPtr **byte, PreferedMaximumSize uint32, EntriesRead *uint32, TotalEntries *uint32, ResumeHandle *uint32) uint32 {
+	_UncServerName := win32.UTF16Ptr(UncServerName)
+	r1, _, _ := syscall.SyscallN(procNetUseEnum.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(LevelFlags), uintptr(unsafe.Pointer(BufPtr)), uintptr(PreferedMaximumSize), uintptr(unsafe.Pointer(EntriesRead)), uintptr(unsafe.Pointer(TotalEntries)), uintptr(unsafe.Pointer(ResumeHandle)))
 	return uint32(r1)
 }
 
 // NetUseGetInfo calls NETAPI32!NetUseGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmuse/nf-lmuse-netusegetinfo
 // Minimum OS: windows5.0.
-func NetUseGetInfo(UncServerName foundation.PWSTR, UseName foundation.PWSTR, LevelFlags uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUseGetInfo.Addr(), uintptr(unsafe.Pointer(UncServerName)), uintptr(unsafe.Pointer(UseName)), uintptr(LevelFlags), uintptr(unsafe.Pointer(bufptr)))
+func NetUseGetInfo(UncServerName string, UseName string, LevelFlags uint32, bufptr **byte) uint32 {
+	_UncServerName := win32.UTF16Ptr(UncServerName)
+	_UseName := win32.UTF16Ptr(UseName)
+	r1, _, _ := syscall.SyscallN(procNetUseGetInfo.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(_UseName)), uintptr(LevelFlags), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetUserAdd calls NETAPI32!NetUserAdd.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netuseradd
 // Minimum OS: windows5.0.
-func NetUserAdd(servername foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetUserAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetUserAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetUserChangePassword calls NETAPI32!NetUserChangePassword.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netuserchangepassword
 // Minimum OS: windows5.0.
-func NetUserChangePassword(domainname foundation.PWSTR, username foundation.PWSTR, oldpassword foundation.PWSTR, newpassword foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procNetUserChangePassword.Addr(), uintptr(unsafe.Pointer(domainname)), uintptr(unsafe.Pointer(username)), uintptr(unsafe.Pointer(oldpassword)), uintptr(unsafe.Pointer(newpassword)))
+func NetUserChangePassword(domainname string, username string, oldpassword string, newpassword string) (uint32, error) {
+	_domainname := win32.UTF16Ptr(domainname)
+	_username := win32.UTF16Ptr(username)
+	_oldpassword := win32.UTF16Ptr(oldpassword)
+	_newpassword := win32.UTF16Ptr(newpassword)
+	r1, _, e1 := syscall.SyscallN(procNetUserChangePassword.Addr(), uintptr(unsafe.Pointer(_domainname)), uintptr(unsafe.Pointer(_username)), uintptr(unsafe.Pointer(_oldpassword)), uintptr(unsafe.Pointer(_newpassword)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1099,88 +1320,108 @@ func NetUserChangePassword(domainname foundation.PWSTR, username foundation.PWST
 // NetUserDel calls NETAPI32!NetUserDel.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netuserdel
 // Minimum OS: windows5.0.
-func NetUserDel(servername foundation.PWSTR, username foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(username)))
+func NetUserDel(servername string, username string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetUserDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)))
 	return uint32(r1)
 }
 
 // NetUserEnum calls NETAPI32!NetUserEnum.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netuserenum
 // Minimum OS: windows5.0.
-func NetUserEnum(servername foundation.PWSTR, level uint32, filter NET_USER_ENUM_FILTER_FLAGS, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(filter), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetUserEnum(servername string, level uint32, filter NET_USER_ENUM_FILTER_FLAGS, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetUserEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(filter), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetUserGetGroups calls NETAPI32!NetUserGetGroups.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusergetgroups
 // Minimum OS: windows5.0.
-func NetUserGetGroups(servername foundation.PWSTR, username foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserGetGroups.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)))
+func NetUserGetGroups(servername string, username string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetUserGetGroups.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)))
 	return uint32(r1)
 }
 
 // NetUserGetInfo calls NETAPI32!NetUserGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusergetinfo
 // Minimum OS: windows5.1.2600.
-func NetUserGetInfo(servername foundation.PWSTR, username foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetUserGetInfo(servername string, username string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetUserGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetUserGetLocalGroups calls NETAPI32!NetUserGetLocalGroups.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusergetlocalgroups
 // Minimum OS: windows5.0.
-func NetUserGetLocalGroups(servername foundation.PWSTR, username foundation.PWSTR, level uint32, flags uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserGetLocalGroups.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(username)), uintptr(level), uintptr(flags), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)))
+func NetUserGetLocalGroups(servername string, username string, level uint32, flags uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetUserGetLocalGroups.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(flags), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)))
 	return uint32(r1)
 }
 
 // NetUserModalsGet calls NETAPI32!NetUserModalsGet.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusermodalsget
 // Minimum OS: windows5.0.
-func NetUserModalsGet(servername foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserModalsGet.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetUserModalsGet(servername string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetUserModalsGet.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetUserModalsSet calls NETAPI32!NetUserModalsSet.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusermodalsset
 // Minimum OS: windows5.0.
-func NetUserModalsSet(servername foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserModalsSet.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetUserModalsSet(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetUserModalsSet.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetUserSetGroups calls NETAPI32!NetUserSetGroups.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusersetgroups
 // Minimum OS: windows5.0.
-func NetUserSetGroups(servername foundation.PWSTR, username foundation.PWSTR, level uint32, buf *byte, num_entries uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserSetGroups.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(username)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(num_entries))
+func NetUserSetGroups(servername string, username string, level uint32, buf *byte, num_entries uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetUserSetGroups.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(num_entries))
 	return uint32(r1)
 }
 
 // NetUserSetInfo calls NETAPI32!NetUserSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusersetinfo
 // Minimum OS: windows5.0.
-func NetUserSetInfo(servername foundation.PWSTR, username foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetUserSetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(username)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetUserSetInfo(servername string, username string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetUserSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetValidateName calls NETAPI32!NetValidateName.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netvalidatename
 // Minimum OS: windows5.0.
-func NetValidateName(lpServer foundation.PWSTR, lpName foundation.PWSTR, lpAccount foundation.PWSTR, lpPassword foundation.PWSTR, NameType NETSETUP_NAME_TYPE) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetValidateName.Addr(), uintptr(unsafe.Pointer(lpServer)), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpAccount)), uintptr(unsafe.Pointer(lpPassword)), uintptr(NameType))
+func NetValidateName(lpServer string, lpName string, lpAccount string, lpPassword string, NameType NETSETUP_NAME_TYPE) uint32 {
+	_lpServer := win32.UTF16Ptr(lpServer)
+	_lpName := win32.UTF16Ptr(lpName)
+	_lpAccount := win32.UTF16Ptr(lpAccount)
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	r1, _, _ := syscall.SyscallN(procNetValidateName.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(NameType))
 	return uint32(r1)
 }
 
 // NetValidatePasswordPolicy calls NETAPI32!NetValidatePasswordPolicy.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netvalidatepasswordpolicy
 // Minimum OS: windowsserver2003.
-func NetValidatePasswordPolicy(ServerName foundation.PWSTR, Qualifier unsafe.Pointer, ValidationType NET_VALIDATE_PASSWORD_TYPE, InputArg unsafe.Pointer, OutputArg *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetValidatePasswordPolicy.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(Qualifier)), uintptr(ValidationType), uintptr(unsafe.Pointer(InputArg)), uintptr(unsafe.Pointer(OutputArg)))
+func NetValidatePasswordPolicy(ServerName string, Qualifier unsafe.Pointer, ValidationType NET_VALIDATE_PASSWORD_TYPE, InputArg unsafe.Pointer, OutputArg *unsafe.Pointer) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	r1, _, _ := syscall.SyscallN(procNetValidatePasswordPolicy.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(Qualifier)), uintptr(ValidationType), uintptr(unsafe.Pointer(InputArg)), uintptr(unsafe.Pointer(OutputArg)))
 	return uint32(r1)
 }
 
@@ -1195,16 +1436,18 @@ func NetValidatePasswordPolicyFree(OutputArg *unsafe.Pointer) uint32 {
 // NetWkstaGetInfo calls NETAPI32!NetWkstaGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstagetinfo
 // Minimum OS: windows5.0.
-func NetWkstaGetInfo(servername foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetWkstaGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetWkstaGetInfo(servername string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetWkstaGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetWkstaSetInfo calls NETAPI32!NetWkstaSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstasetinfo
 // Minimum OS: windows5.0.
-func NetWkstaSetInfo(servername foundation.PWSTR, level uint32, buffer *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetWkstaSetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(parm_err)))
+func NetWkstaSetInfo(servername string, level uint32, buffer *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetWkstaSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
@@ -1217,8 +1460,10 @@ func NetWkstaTransportAdd(servername *int8, level uint32, buf *byte, parm_err *u
 
 // NetWkstaTransportDel calls NETAPI32!NetWkstaTransportDel.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstatransportdel
-func NetWkstaTransportDel(servername foundation.PWSTR, transportname foundation.PWSTR, ucond FORCE_LEVEL_FLAGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetWkstaTransportDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(transportname)), uintptr(ucond))
+func NetWkstaTransportDel(servername string, transportname string, ucond FORCE_LEVEL_FLAGS) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_transportname := win32.UTF16Ptr(transportname)
+	r1, _, _ := syscall.SyscallN(procNetWkstaTransportDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_transportname)), uintptr(ucond))
 	return uint32(r1)
 }
 
@@ -1233,24 +1478,27 @@ func NetWkstaTransportEnum(servername *int8, level uint32, bufptr **byte, prefma
 // NetWkstaUserEnum calls NETAPI32!NetWkstaUserEnum.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstauserenum
 // Minimum OS: windows5.0.
-func NetWkstaUserEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetWkstaUserEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
+func NetWkstaUserEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetWkstaUserEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
 }
 
 // NetWkstaUserGetInfo calls NETAPI32!NetWkstaUserGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstausergetinfo
 // Minimum OS: windows5.0.
-func NetWkstaUserGetInfo(reserved foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetWkstaUserGetInfo.Addr(), uintptr(unsafe.Pointer(reserved)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetWkstaUserGetInfo(reserved string, level uint32, bufptr **byte) uint32 {
+	_reserved := win32.UTF16Ptr(reserved)
+	r1, _, _ := syscall.SyscallN(procNetWkstaUserGetInfo.Addr(), uintptr(unsafe.Pointer(_reserved)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetWkstaUserSetInfo calls NETAPI32!NetWkstaUserSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstausersetinfo
 // Minimum OS: windows5.0.
-func NetWkstaUserSetInfo(reserved foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetWkstaUserSetInfo.Addr(), uintptr(unsafe.Pointer(reserved)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetWkstaUserSetInfo(reserved string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_reserved := win32.UTF16Ptr(reserved)
+	r1, _, _ := syscall.SyscallN(procNetWkstaUserSetInfo.Addr(), uintptr(unsafe.Pointer(_reserved)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
@@ -1259,16 +1507,21 @@ func RouterAssert(pszFailedAssertion foundation.PSTR, pszFileName foundation.PST
 	syscall.SyscallN(procRouterAssert.Addr(), uintptr(unsafe.Pointer(pszFailedAssertion)), uintptr(unsafe.Pointer(pszFileName)), uintptr(dwLineNumber), uintptr(unsafe.Pointer(pszMessage)))
 }
 
+// RouterGetErrorString calls rtutils!RouterGetErrorStringW.
+func RouterGetErrorString(dwErrorCode uint32, lplpwszErrorString *foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procRouterGetErrorString.Addr(), uintptr(dwErrorCode), uintptr(unsafe.Pointer(lplpwszErrorString)))
+	return uint32(r1)
+}
+
 // RouterGetErrorStringA calls rtutils!RouterGetErrorStringA.
 func RouterGetErrorStringA(dwErrorCode uint32, lplpszErrorString *foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procRouterGetErrorStringA.Addr(), uintptr(dwErrorCode), uintptr(unsafe.Pointer(lplpszErrorString)))
 	return uint32(r1)
 }
 
-// RouterGetErrorStringW calls rtutils!RouterGetErrorStringW.
-func RouterGetErrorStringW(dwErrorCode uint32, lplpwszErrorString *foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procRouterGetErrorStringW.Addr(), uintptr(dwErrorCode), uintptr(unsafe.Pointer(lplpwszErrorString)))
-	return uint32(r1)
+// RouterLogDeregister calls rtutils!RouterLogDeregisterW.
+func RouterLogDeregister(hLogHandle foundation.HANDLE) {
+	syscall.SyscallN(procRouterLogDeregister.Addr(), uintptr(hLogHandle))
 }
 
 // RouterLogDeregisterA calls rtutils!RouterLogDeregisterA.
@@ -1276,24 +1529,46 @@ func RouterLogDeregisterA(hLogHandle foundation.HANDLE) {
 	syscall.SyscallN(procRouterLogDeregisterA.Addr(), uintptr(hLogHandle))
 }
 
-// RouterLogDeregisterW calls rtutils!RouterLogDeregisterW.
-func RouterLogDeregisterW(hLogHandle foundation.HANDLE) {
-	syscall.SyscallN(procRouterLogDeregisterW.Addr(), uintptr(hLogHandle))
+// RouterLogEvent calls rtutils!RouterLogEventW.
+func RouterLogEvent(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PWSTR, dwErrorCode uint32) {
+	var _plpszSubStringArray *foundation.PWSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	syscall.SyscallN(procRouterLogEvent.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(len(plpszSubStringArray)), uintptr(unsafe.Pointer(_plpszSubStringArray)), uintptr(dwErrorCode))
 }
 
 // RouterLogEventA calls rtutils!RouterLogEventA.
-func RouterLogEventA(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, dwSubStringCount uint32, plpszSubStringArray *foundation.PSTR, dwErrorCode uint32) {
-	syscall.SyscallN(procRouterLogEventA.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(dwSubStringCount), uintptr(unsafe.Pointer(plpszSubStringArray)), uintptr(dwErrorCode))
+func RouterLogEventA(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PSTR, dwErrorCode uint32) {
+	var _plpszSubStringArray *foundation.PSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	syscall.SyscallN(procRouterLogEventA.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(len(plpszSubStringArray)), uintptr(unsafe.Pointer(_plpszSubStringArray)), uintptr(dwErrorCode))
+}
+
+// RouterLogEventData calls rtutils!RouterLogEventDataW.
+func RouterLogEventData(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PWSTR, dwDataBytes uint32, lpDataBytes *byte) {
+	var _plpszSubStringArray *foundation.PWSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	syscall.SyscallN(procRouterLogEventData.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(len(plpszSubStringArray)), uintptr(unsafe.Pointer(_plpszSubStringArray)), uintptr(dwDataBytes), uintptr(unsafe.Pointer(lpDataBytes)))
 }
 
 // RouterLogEventDataA calls rtutils!RouterLogEventDataA.
-func RouterLogEventDataA(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, dwSubStringCount uint32, plpszSubStringArray *foundation.PSTR, dwDataBytes uint32, lpDataBytes *byte) {
-	syscall.SyscallN(procRouterLogEventDataA.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(dwSubStringCount), uintptr(unsafe.Pointer(plpszSubStringArray)), uintptr(dwDataBytes), uintptr(unsafe.Pointer(lpDataBytes)))
+func RouterLogEventDataA(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PSTR, dwDataBytes uint32, lpDataBytes *byte) {
+	var _plpszSubStringArray *foundation.PSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	syscall.SyscallN(procRouterLogEventDataA.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(len(plpszSubStringArray)), uintptr(unsafe.Pointer(_plpszSubStringArray)), uintptr(dwDataBytes), uintptr(unsafe.Pointer(lpDataBytes)))
 }
 
-// RouterLogEventDataW calls rtutils!RouterLogEventDataW.
-func RouterLogEventDataW(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, dwSubStringCount uint32, plpszSubStringArray *foundation.PWSTR, dwDataBytes uint32, lpDataBytes *byte) {
-	syscall.SyscallN(procRouterLogEventDataW.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(dwSubStringCount), uintptr(unsafe.Pointer(plpszSubStringArray)), uintptr(dwDataBytes), uintptr(unsafe.Pointer(lpDataBytes)))
+// RouterLogEventEx calls rtutils!RouterLogEventExW.
+func RouterLogEventEx(hLogHandle foundation.HANDLE, dwEventType uint32, dwErrorCode uint32, dwMessageId uint32, ptszFormat string) {
+	_ptszFormat := win32.UTF16Ptr(ptszFormat)
+	syscall.SyscallN(procRouterLogEventEx.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwErrorCode), uintptr(dwMessageId), uintptr(unsafe.Pointer(_ptszFormat)))
 }
 
 // RouterLogEventExA calls rtutils!RouterLogEventExA.
@@ -1301,19 +1576,28 @@ func RouterLogEventExA(hLogHandle foundation.HANDLE, dwEventType uint32, dwError
 	syscall.SyscallN(procRouterLogEventExA.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwErrorCode), uintptr(dwMessageId), uintptr(unsafe.Pointer(ptszFormat)))
 }
 
-// RouterLogEventExW calls rtutils!RouterLogEventExW.
-func RouterLogEventExW(hLogHandle foundation.HANDLE, dwEventType uint32, dwErrorCode uint32, dwMessageId uint32, ptszFormat foundation.PWSTR) {
-	syscall.SyscallN(procRouterLogEventExW.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwErrorCode), uintptr(dwMessageId), uintptr(unsafe.Pointer(ptszFormat)))
+// RouterLogEventString calls rtutils!RouterLogEventStringW.
+func RouterLogEventString(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PWSTR, dwErrorCode uint32, dwErrorIndex uint32) {
+	var _plpszSubStringArray *foundation.PWSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	syscall.SyscallN(procRouterLogEventString.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(len(plpszSubStringArray)), uintptr(unsafe.Pointer(_plpszSubStringArray)), uintptr(dwErrorCode), uintptr(dwErrorIndex))
 }
 
 // RouterLogEventStringA calls rtutils!RouterLogEventStringA.
-func RouterLogEventStringA(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, dwSubStringCount uint32, plpszSubStringArray *foundation.PSTR, dwErrorCode uint32, dwErrorIndex uint32) {
-	syscall.SyscallN(procRouterLogEventStringA.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(dwSubStringCount), uintptr(unsafe.Pointer(plpszSubStringArray)), uintptr(dwErrorCode), uintptr(dwErrorIndex))
+func RouterLogEventStringA(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, plpszSubStringArray []foundation.PSTR, dwErrorCode uint32, dwErrorIndex uint32) {
+	var _plpszSubStringArray *foundation.PSTR
+	if len(plpszSubStringArray) > 0 {
+		_plpszSubStringArray = &plpszSubStringArray[0]
+	}
+	syscall.SyscallN(procRouterLogEventStringA.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(len(plpszSubStringArray)), uintptr(unsafe.Pointer(_plpszSubStringArray)), uintptr(dwErrorCode), uintptr(dwErrorIndex))
 }
 
-// RouterLogEventStringW calls rtutils!RouterLogEventStringW.
-func RouterLogEventStringW(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, dwSubStringCount uint32, plpszSubStringArray *foundation.PWSTR, dwErrorCode uint32, dwErrorIndex uint32) {
-	syscall.SyscallN(procRouterLogEventStringW.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(dwSubStringCount), uintptr(unsafe.Pointer(plpszSubStringArray)), uintptr(dwErrorCode), uintptr(dwErrorIndex))
+// RouterLogEventValistEx calls rtutils!RouterLogEventValistExW.
+func RouterLogEventValistEx(hLogHandle foundation.HANDLE, dwEventType uint32, dwErrorCode uint32, dwMessageId uint32, ptszFormat string, arglist *int8) {
+	_ptszFormat := win32.UTF16Ptr(ptszFormat)
+	syscall.SyscallN(procRouterLogEventValistEx.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwErrorCode), uintptr(dwMessageId), uintptr(unsafe.Pointer(_ptszFormat)), uintptr(unsafe.Pointer(arglist)))
 }
 
 // RouterLogEventValistExA calls rtutils!RouterLogEventValistExA.
@@ -1321,14 +1605,11 @@ func RouterLogEventValistExA(hLogHandle foundation.HANDLE, dwEventType uint32, d
 	syscall.SyscallN(procRouterLogEventValistExA.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwErrorCode), uintptr(dwMessageId), uintptr(unsafe.Pointer(ptszFormat)), uintptr(unsafe.Pointer(arglist)))
 }
 
-// RouterLogEventValistExW calls rtutils!RouterLogEventValistExW.
-func RouterLogEventValistExW(hLogHandle foundation.HANDLE, dwEventType uint32, dwErrorCode uint32, dwMessageId uint32, ptszFormat foundation.PWSTR, arglist *int8) {
-	syscall.SyscallN(procRouterLogEventValistExW.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwErrorCode), uintptr(dwMessageId), uintptr(unsafe.Pointer(ptszFormat)), uintptr(unsafe.Pointer(arglist)))
-}
-
-// RouterLogEventW calls rtutils!RouterLogEventW.
-func RouterLogEventW(hLogHandle foundation.HANDLE, dwEventType uint32, dwMessageId uint32, dwSubStringCount uint32, plpszSubStringArray *foundation.PWSTR, dwErrorCode uint32) {
-	syscall.SyscallN(procRouterLogEventW.Addr(), uintptr(hLogHandle), uintptr(dwEventType), uintptr(dwMessageId), uintptr(dwSubStringCount), uintptr(unsafe.Pointer(plpszSubStringArray)), uintptr(dwErrorCode))
+// RouterLogRegister calls rtutils!RouterLogRegisterW.
+func RouterLogRegister(lpszSource string) foundation.HANDLE {
+	_lpszSource := win32.UTF16Ptr(lpszSource)
+	r1, _, _ := syscall.SyscallN(procRouterLogRegister.Addr(), uintptr(unsafe.Pointer(_lpszSource)))
+	return foundation.HANDLE(r1)
 }
 
 // RouterLogRegisterA calls rtutils!RouterLogRegisterA.
@@ -1337,23 +1618,32 @@ func RouterLogRegisterA(lpszSource foundation.PSTR) foundation.HANDLE {
 	return foundation.HANDLE(r1)
 }
 
-// RouterLogRegisterW calls rtutils!RouterLogRegisterW.
-func RouterLogRegisterW(lpszSource foundation.PWSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procRouterLogRegisterW.Addr(), uintptr(unsafe.Pointer(lpszSource)))
-	return foundation.HANDLE(r1)
-}
-
 // SetNetScheduleAccountInformation calls mstask!SetNetScheduleAccountInformation.
 // https://learn.microsoft.com/windows/win32/api/atacct/nf-atacct-setnetscheduleaccountinformation
 // Minimum OS: windows6.0.6000.
-func SetNetScheduleAccountInformation(pwszServerName foundation.PWSTR, pwszAccount foundation.PWSTR, pwszPassword foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetNetScheduleAccountInformation.Addr(), uintptr(unsafe.Pointer(pwszServerName)), uintptr(unsafe.Pointer(pwszAccount)), uintptr(unsafe.Pointer(pwszPassword)))
-	return foundation.HRESULT(r1)
+func SetNetScheduleAccountInformation(pwszServerName string, pwszAccount string, pwszPassword string) error {
+	_pwszServerName := win32.UTF16Ptr(pwszServerName)
+	_pwszAccount := win32.UTF16Ptr(pwszAccount)
+	_pwszPassword := win32.UTF16Ptr(pwszPassword)
+	r1, _, _ := syscall.SyscallN(procSetNetScheduleAccountInformation.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(unsafe.Pointer(_pwszAccount)), uintptr(unsafe.Pointer(_pwszPassword)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// TraceDeregister calls rtutils!TraceDeregisterW.
+func TraceDeregister(dwTraceID uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procTraceDeregister.Addr(), uintptr(dwTraceID))
+	return uint32(r1)
 }
 
 // TraceDeregisterA calls rtutils!TraceDeregisterA.
 func TraceDeregisterA(dwTraceID uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procTraceDeregisterA.Addr(), uintptr(dwTraceID))
+	return uint32(r1)
+}
+
+// TraceDeregisterEx calls rtutils!TraceDeregisterExW.
+func TraceDeregisterEx(dwTraceID uint32, dwFlags uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procTraceDeregisterEx.Addr(), uintptr(dwTraceID), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -1363,27 +1653,24 @@ func TraceDeregisterExA(dwTraceID uint32, dwFlags uint32) uint32 {
 	return uint32(r1)
 }
 
-// TraceDeregisterExW calls rtutils!TraceDeregisterExW.
-func TraceDeregisterExW(dwTraceID uint32, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTraceDeregisterExW.Addr(), uintptr(dwTraceID), uintptr(dwFlags))
-	return uint32(r1)
-}
-
-// TraceDeregisterW calls rtutils!TraceDeregisterW.
-func TraceDeregisterW(dwTraceID uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTraceDeregisterW.Addr(), uintptr(dwTraceID))
+// TraceDumpEx calls rtutils!TraceDumpExW.
+func TraceDumpEx(dwTraceID uint32, dwFlags uint32, lpbBytes *byte, dwByteCount uint32, dwGroupSize uint32, bAddressPrefix bool, lpszPrefix string) uint32 {
+	_bAddressPrefix := win32.Bool32(bAddressPrefix)
+	_lpszPrefix := win32.UTF16Ptr(lpszPrefix)
+	r1, _, _ := syscall.SyscallN(procTraceDumpEx.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpbBytes)), uintptr(dwByteCount), uintptr(dwGroupSize), uintptr(_bAddressPrefix), uintptr(unsafe.Pointer(_lpszPrefix)))
 	return uint32(r1)
 }
 
 // TraceDumpExA calls rtutils!TraceDumpExA.
-func TraceDumpExA(dwTraceID uint32, dwFlags uint32, lpbBytes *byte, dwByteCount uint32, dwGroupSize uint32, bAddressPrefix foundation.BOOL, lpszPrefix foundation.PSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procTraceDumpExA.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpbBytes)), uintptr(dwByteCount), uintptr(dwGroupSize), uintptr(bAddressPrefix), uintptr(unsafe.Pointer(lpszPrefix)))
+func TraceDumpExA(dwTraceID uint32, dwFlags uint32, lpbBytes *byte, dwByteCount uint32, dwGroupSize uint32, bAddressPrefix bool, lpszPrefix foundation.PSTR) uint32 {
+	_bAddressPrefix := win32.Bool32(bAddressPrefix)
+	r1, _, _ := syscall.SyscallN(procTraceDumpExA.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpbBytes)), uintptr(dwByteCount), uintptr(dwGroupSize), uintptr(_bAddressPrefix), uintptr(unsafe.Pointer(lpszPrefix)))
 	return uint32(r1)
 }
 
-// TraceDumpExW calls rtutils!TraceDumpExW.
-func TraceDumpExW(dwTraceID uint32, dwFlags uint32, lpbBytes *byte, dwByteCount uint32, dwGroupSize uint32, bAddressPrefix foundation.BOOL, lpszPrefix foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procTraceDumpExW.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpbBytes)), uintptr(dwByteCount), uintptr(dwGroupSize), uintptr(bAddressPrefix), uintptr(unsafe.Pointer(lpszPrefix)))
+// TraceGetConsole calls rtutils!TraceGetConsoleW.
+func TraceGetConsole(dwTraceID uint32, lphConsole *foundation.HANDLE) uint32 {
+	r1, _, _ := syscall.SyscallN(procTraceGetConsole.Addr(), uintptr(dwTraceID), uintptr(unsafe.Pointer(lphConsole)))
 	return uint32(r1)
 }
 
@@ -1393,9 +1680,10 @@ func TraceGetConsoleA(dwTraceID uint32, lphConsole *foundation.HANDLE) uint32 {
 	return uint32(r1)
 }
 
-// TraceGetConsoleW calls rtutils!TraceGetConsoleW.
-func TraceGetConsoleW(dwTraceID uint32, lphConsole *foundation.HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procTraceGetConsoleW.Addr(), uintptr(dwTraceID), uintptr(unsafe.Pointer(lphConsole)))
+// TracePrintf calls rtutils!TracePrintfW.
+func TracePrintf(dwTraceID uint32, lpszFormat string) uint32 {
+	_lpszFormat := win32.UTF16Ptr(lpszFormat)
+	r1, _, _ := syscall.SyscallN(procTracePrintf.Addr(), uintptr(dwTraceID), uintptr(unsafe.Pointer(_lpszFormat)))
 	return uint32(r1)
 }
 
@@ -1405,21 +1693,23 @@ func TracePrintfA(dwTraceID uint32, lpszFormat foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
+// TracePrintfEx calls rtutils!TracePrintfExW.
+func TracePrintfEx(dwTraceID uint32, dwFlags uint32, lpszFormat string) uint32 {
+	_lpszFormat := win32.UTF16Ptr(lpszFormat)
+	r1, _, _ := syscall.SyscallN(procTracePrintfEx.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszFormat)))
+	return uint32(r1)
+}
+
 // TracePrintfExA calls rtutils!TracePrintfExA.
 func TracePrintfExA(dwTraceID uint32, dwFlags uint32, lpszFormat foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procTracePrintfExA.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszFormat)))
 	return uint32(r1)
 }
 
-// TracePrintfExW calls rtutils!TracePrintfExW.
-func TracePrintfExW(dwTraceID uint32, dwFlags uint32, lpszFormat foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procTracePrintfExW.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszFormat)))
-	return uint32(r1)
-}
-
-// TracePrintfW calls rtutils!TracePrintfW.
-func TracePrintfW(dwTraceID uint32, lpszFormat foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procTracePrintfW.Addr(), uintptr(dwTraceID), uintptr(unsafe.Pointer(lpszFormat)))
+// TracePutsEx calls rtutils!TracePutsExW.
+func TracePutsEx(dwTraceID uint32, dwFlags uint32, lpszString string) uint32 {
+	_lpszString := win32.UTF16Ptr(lpszString)
+	r1, _, _ := syscall.SyscallN(procTracePutsEx.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszString)))
 	return uint32(r1)
 }
 
@@ -1429,9 +1719,10 @@ func TracePutsExA(dwTraceID uint32, dwFlags uint32, lpszString foundation.PSTR) 
 	return uint32(r1)
 }
 
-// TracePutsExW calls rtutils!TracePutsExW.
-func TracePutsExW(dwTraceID uint32, dwFlags uint32, lpszString foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procTracePutsExW.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszString)))
+// TraceRegisterEx calls rtutils!TraceRegisterExW.
+func TraceRegisterEx(lpszCallerName string, dwFlags uint32) uint32 {
+	_lpszCallerName := win32.UTF16Ptr(lpszCallerName)
+	r1, _, _ := syscall.SyscallN(procTraceRegisterEx.Addr(), uintptr(unsafe.Pointer(_lpszCallerName)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -1441,20 +1732,15 @@ func TraceRegisterExA(lpszCallerName foundation.PSTR, dwFlags uint32) uint32 {
 	return uint32(r1)
 }
 
-// TraceRegisterExW calls rtutils!TraceRegisterExW.
-func TraceRegisterExW(lpszCallerName foundation.PWSTR, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTraceRegisterExW.Addr(), uintptr(unsafe.Pointer(lpszCallerName)), uintptr(dwFlags))
+// TraceVprintfEx calls rtutils!TraceVprintfExW.
+func TraceVprintfEx(dwTraceID uint32, dwFlags uint32, lpszFormat string, arglist *int8) uint32 {
+	_lpszFormat := win32.UTF16Ptr(lpszFormat)
+	r1, _, _ := syscall.SyscallN(procTraceVprintfEx.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszFormat)), uintptr(unsafe.Pointer(arglist)))
 	return uint32(r1)
 }
 
 // TraceVprintfExA calls rtutils!TraceVprintfExA.
 func TraceVprintfExA(dwTraceID uint32, dwFlags uint32, lpszFormat foundation.PSTR, arglist *int8) uint32 {
 	r1, _, _ := syscall.SyscallN(procTraceVprintfExA.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszFormat)), uintptr(unsafe.Pointer(arglist)))
-	return uint32(r1)
-}
-
-// TraceVprintfExW calls rtutils!TraceVprintfExW.
-func TraceVprintfExW(dwTraceID uint32, dwFlags uint32, lpszFormat foundation.PWSTR, arglist *int8) uint32 {
-	r1, _, _ := syscall.SyscallN(procTraceVprintfExW.Addr(), uintptr(dwTraceID), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszFormat)), uintptr(unsafe.Pointer(arglist)))
 	return uint32(r1)
 }

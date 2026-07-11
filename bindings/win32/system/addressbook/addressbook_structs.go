@@ -132,8 +132,8 @@ type DTBLRADIOBUTTON struct {
 	LReturnValue int32
 }
 
-// DTCTL_ctl_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DTCTL_ctl_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DTCTL_ctl_e__Union struct {
 	Data [1]uint64
 }
@@ -149,8 +149,8 @@ type DTCTL struct {
 	Ctl        DTCTL_ctl_e__Union
 }
 
-// DTPAGE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DTPAGE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DTPAGE_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -219,8 +219,8 @@ type MAPIERROR struct {
 	UlContext       uint32
 }
 
-// MAPINAMEID_Kind_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MAPINAMEID_Kind_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MAPINAMEID_Kind_e__Union struct {
 	Data [1]uint64
 }
@@ -254,8 +254,8 @@ type NEWMAIL_NOTIFICATION struct {
 	UlMessageFlags   uint32
 }
 
-// NOTIFICATION_info_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NOTIFICATION_info_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NOTIFICATION_info_e__Union struct {
 	Data [10]uint64
 }
@@ -439,8 +439,8 @@ type SRealArray struct {
 	Lpflt   *float32
 }
 
-// SRestriction_res_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SRestriction_res_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SRestriction_res_e__Union struct {
 	Data [3]uint64
 }
@@ -552,8 +552,8 @@ type WAB_PARAM struct {
 	GuidPSExt  win32.GUID
 }
 
-// UPV is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// UPV is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type UPV struct {
 	Data [2]uint64
 }

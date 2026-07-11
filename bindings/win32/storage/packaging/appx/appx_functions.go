@@ -95,22 +95,24 @@ var (
 )
 
 // ActivatePackageVirtualizationContext calls KERNEL32!ActivatePackageVirtualizationContext.
-func ActivatePackageVirtualizationContext(context PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, cookie *uintptr) foundation.HRESULT {
+func ActivatePackageVirtualizationContext(context PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, cookie *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procActivatePackageVirtualizationContext.Addr(), uintptr(context), uintptr(unsafe.Pointer(cookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPackageDependency calls KERNELBASE!AddPackageDependency.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-addpackagedependency
-func AddPackageDependency(packageDependencyId foundation.PWSTR, rank int32, options AddPackageDependencyOptions, packageDependencyContext *PACKAGEDEPENDENCY_CONTEXT, packageFullName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAddPackageDependency.Addr(), uintptr(unsafe.Pointer(packageDependencyId)), uintptr(rank), uintptr(options), uintptr(unsafe.Pointer(packageDependencyContext)), uintptr(unsafe.Pointer(packageFullName)))
-	return foundation.HRESULT(r1)
+func AddPackageDependency(packageDependencyId string, rank int32, options AddPackageDependencyOptions, packageDependencyContext *PACKAGEDEPENDENCY_CONTEXT, packageFullName *foundation.PWSTR) error {
+	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
+	r1, _, _ := syscall.SyscallN(procAddPackageDependency.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(rank), uintptr(options), uintptr(unsafe.Pointer(packageDependencyContext)), uintptr(unsafe.Pointer(packageFullName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPackageDependency2 calls api-ms-win-appmodel-runtime-l1-1-7!AddPackageDependency2.
-func AddPackageDependency2(packageDependencyId foundation.PWSTR, rank int32, options AddPackageDependencyOptions2, packageDependencyContext *PACKAGEDEPENDENCY_CONTEXT, packageFullName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAddPackageDependency2.Addr(), uintptr(unsafe.Pointer(packageDependencyId)), uintptr(rank), uintptr(options), uintptr(unsafe.Pointer(packageDependencyContext)), uintptr(unsafe.Pointer(packageFullName)))
-	return foundation.HRESULT(r1)
+func AddPackageDependency2(packageDependencyId string, rank int32, options AddPackageDependencyOptions2, packageDependencyContext *PACKAGEDEPENDENCY_CONTEXT, packageFullName *foundation.PWSTR) error {
+	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
+	r1, _, _ := syscall.SyscallN(procAddPackageDependency2.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(rank), uintptr(options), uintptr(unsafe.Pointer(packageDependencyContext)), uintptr(unsafe.Pointer(packageFullName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AppPolicyGetClrCompat calls KERNEL32!AppPolicyGetClrCompat.
@@ -170,9 +172,10 @@ func AppPolicyGetWindowingModel(processToken foundation.HANDLE, policy *AppPolic
 }
 
 // CheckIsMSIXPackage calls KERNEL32!CheckIsMSIXPackage.
-func CheckIsMSIXPackage(packageFullName foundation.PWSTR, isMSIXPackage *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCheckIsMSIXPackage.Addr(), uintptr(unsafe.Pointer(packageFullName)), uintptr(unsafe.Pointer(isMSIXPackage)))
-	return foundation.HRESULT(r1)
+func CheckIsMSIXPackage(packageFullName string, isMSIXPackage *foundation.BOOL) error {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procCheckIsMSIXPackage.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(isMSIXPackage)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClosePackageInfo calls KERNEL32!ClosePackageInfo.
@@ -184,9 +187,10 @@ func ClosePackageInfo(packageInfoReference *PACKAGE_INFO_REFERENCE) foundation.W
 }
 
 // CreatePackageVirtualizationContext calls KERNEL32!CreatePackageVirtualizationContext.
-func CreatePackageVirtualizationContext(packageFamilyName foundation.PWSTR, context *PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreatePackageVirtualizationContext.Addr(), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+func CreatePackageVirtualizationContext(packageFamilyName string, context *PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) error {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	r1, _, _ := syscall.SyscallN(procCreatePackageVirtualizationContext.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(context)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeactivatePackageVirtualizationContext calls KERNEL32!DeactivatePackageVirtualizationContext.
@@ -196,36 +200,40 @@ func DeactivatePackageVirtualizationContext(cookie uintptr) {
 
 // DeletePackageDependency calls KERNELBASE!DeletePackageDependency.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-deletepackagedependency
-func DeletePackageDependency(packageDependencyId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDeletePackageDependency.Addr(), uintptr(unsafe.Pointer(packageDependencyId)))
-	return foundation.HRESULT(r1)
+func DeletePackageDependency(packageDependencyId string) error {
+	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
+	r1, _, _ := syscall.SyscallN(procDeletePackageDependency.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DuplicatePackageVirtualizationContext calls KERNEL32!DuplicatePackageVirtualizationContext.
-func DuplicatePackageVirtualizationContext(sourceContext PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, destContext *PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) foundation.HRESULT {
+func DuplicatePackageVirtualizationContext(sourceContext PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, destContext *PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procDuplicatePackageVirtualizationContext.Addr(), uintptr(sourceContext), uintptr(unsafe.Pointer(destContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindPackageDependency calls api-ms-win-appmodel-runtime-l1-1-7!FindPackageDependency.
-func FindPackageDependency(findPackageDependencyCriteria *FindPackageDependencyCriteria, packageDependencyIdsCount *uint32, packageDependencyIds **foundation.PWSTR) foundation.HRESULT {
+func FindPackageDependency(findPackageDependencyCriteria *FindPackageDependencyCriteria, packageDependencyIdsCount *uint32, packageDependencyIds **foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procFindPackageDependency.Addr(), uintptr(unsafe.Pointer(findPackageDependencyCriteria)), uintptr(unsafe.Pointer(packageDependencyIdsCount)), uintptr(unsafe.Pointer(packageDependencyIds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindPackagesByPackageFamily calls KERNEL32!FindPackagesByPackageFamily.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-findpackagesbypackagefamily
 // Minimum OS: windows8.1.
-func FindPackagesByPackageFamily(packageFamilyName foundation.PWSTR, packageFilters uint32, count *uint32, packageFullNames *foundation.PWSTR, bufferLength *uint32, buffer foundation.PWSTR, packageProperties *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procFindPackagesByPackageFamily.Addr(), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(packageFilters), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(packageFullNames)), uintptr(unsafe.Pointer(bufferLength)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(packageProperties)))
+func FindPackagesByPackageFamily(packageFamilyName string, packageFilters uint32, count *uint32, packageFullNames *foundation.PWSTR, bufferLength *uint32, buffer foundation.PWSTR, packageProperties *uint32) foundation.WIN32_ERROR {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	r1, _, _ := syscall.SyscallN(procFindPackagesByPackageFamily.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(packageFilters), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(packageFullNames)), uintptr(unsafe.Pointer(bufferLength)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(packageProperties)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // FormatApplicationUserModelId calls KERNEL32!FormatApplicationUserModelId.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-formatapplicationusermodelid
 // Minimum OS: windows8.1.
-func FormatApplicationUserModelId(packageFamilyName foundation.PWSTR, packageRelativeApplicationId foundation.PWSTR, applicationUserModelIdLength *uint32, applicationUserModelId foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procFormatApplicationUserModelId.Addr(), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(packageRelativeApplicationId)), uintptr(unsafe.Pointer(applicationUserModelIdLength)), uintptr(unsafe.Pointer(applicationUserModelId)))
+func FormatApplicationUserModelId(packageFamilyName string, packageRelativeApplicationId string, applicationUserModelIdLength *uint32, applicationUserModelId foundation.PWSTR) foundation.WIN32_ERROR {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	_packageRelativeApplicationId := win32.UTF16Ptr(packageRelativeApplicationId)
+	r1, _, _ := syscall.SyscallN(procFormatApplicationUserModelId.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(_packageRelativeApplicationId)), uintptr(unsafe.Pointer(applicationUserModelIdLength)), uintptr(unsafe.Pointer(applicationUserModelId)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -292,9 +300,9 @@ func GetCurrentPackageInfo2(flags uint32, packagePathType PackagePathType, buffe
 
 // GetCurrentPackageInfo3 calls KERNEL32!GetCurrentPackageInfo3.
 // https://learn.microsoft.com/windows/win32/appxpkg/appmodel/nf-appmodel-getcurrentpackageinfo3
-func GetCurrentPackageInfo3(flags uint32, packageInfoType PackageInfo3Type, bufferLength *uint32, buffer unsafe.Pointer, count *uint32) foundation.HRESULT {
+func GetCurrentPackageInfo3(flags uint32, packageInfoType PackageInfo3Type, bufferLength *uint32, buffer unsafe.Pointer, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetCurrentPackageInfo3.Addr(), uintptr(flags), uintptr(packageInfoType), uintptr(unsafe.Pointer(bufferLength)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPackagePath calls KERNEL32!GetCurrentPackagePath.
@@ -321,9 +329,9 @@ func GetCurrentPackageVirtualizationContext() PACKAGE_VIRTUALIZATION_CONTEXT_HAN
 
 // GetIdForPackageDependencyContext calls KERNELBASE!GetIdForPackageDependencyContext.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getidforpackagedependencycontext
-func GetIdForPackageDependencyContext(packageDependencyContext PACKAGEDEPENDENCY_CONTEXT, packageDependencyId *foundation.PWSTR) foundation.HRESULT {
+func GetIdForPackageDependencyContext(packageDependencyContext PACKAGEDEPENDENCY_CONTEXT, packageDependencyId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetIdForPackageDependencyContext.Addr(), uintptr(packageDependencyContext), uintptr(unsafe.Pointer(packageDependencyId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPackageApplicationIds calls KERNEL32!GetPackageApplicationIds.
@@ -335,9 +343,10 @@ func GetPackageApplicationIds(packageInfoReference *PACKAGE_INFO_REFERENCE, buff
 }
 
 // GetPackageDependencyInformation calls api-ms-win-appmodel-runtime-l1-1-7!GetPackageDependencyInformation.
-func GetPackageDependencyInformation(packageDependencyId foundation.PWSTR, user *security.PSID, packageFamilyName *foundation.PWSTR, minVersion *PACKAGE_VERSION, packageDependencyProcessorArchitectures *PackageDependencyProcessorArchitectures, lifetimeKind *PackageDependencyLifetimeKind, lifetimeArtifact *foundation.PWSTR, options *CreatePackageDependencyOptions, lifetimeExpiration *foundation.FILETIME) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetPackageDependencyInformation.Addr(), uintptr(unsafe.Pointer(packageDependencyId)), uintptr(unsafe.Pointer(user)), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(minVersion)), uintptr(unsafe.Pointer(packageDependencyProcessorArchitectures)), uintptr(unsafe.Pointer(lifetimeKind)), uintptr(unsafe.Pointer(lifetimeArtifact)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(lifetimeExpiration)))
-	return foundation.HRESULT(r1)
+func GetPackageDependencyInformation(packageDependencyId string, user *security.PSID, packageFamilyName *foundation.PWSTR, minVersion *PACKAGE_VERSION, packageDependencyProcessorArchitectures *PackageDependencyProcessorArchitectures, lifetimeKind *PackageDependencyLifetimeKind, lifetimeArtifact *foundation.PWSTR, options *CreatePackageDependencyOptions, lifetimeExpiration *foundation.FILETIME) error {
+	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
+	r1, _, _ := syscall.SyscallN(procGetPackageDependencyInformation.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(unsafe.Pointer(user)), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(minVersion)), uintptr(unsafe.Pointer(packageDependencyProcessorArchitectures)), uintptr(unsafe.Pointer(lifetimeKind)), uintptr(unsafe.Pointer(lifetimeArtifact)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(lifetimeExpiration)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPackageFamilyName calls KERNEL32!GetPackageFamilyName.
@@ -405,103 +414,117 @@ func GetPackageInfo2(packageInfoReference *PACKAGE_INFO_REFERENCE, flags uint32,
 // GetPackagePath calls KERNEL32!GetPackagePath.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackagepath
 // Minimum OS: windows8.0.
-func GetPackagePath(packageId unsafe.Pointer, reserved uint32, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetPackagePath.Addr(), uintptr(unsafe.Pointer(packageId)), uintptr(reserved), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
+func GetPackagePath(packageId unsafe.Pointer, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procGetPackagePath.Addr(), uintptr(unsafe.Pointer(packageId)), 0, uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // GetPackagePathByFullName calls KERNEL32!GetPackagePathByFullName.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackagepathbyfullname
 // Minimum OS: windows8.1.
-func GetPackagePathByFullName(packageFullName foundation.PWSTR, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetPackagePathByFullName.Addr(), uintptr(unsafe.Pointer(packageFullName)), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
+func GetPackagePathByFullName(packageFullName string, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procGetPackagePathByFullName.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // GetPackagePathByFullName2 calls api-ms-win-appmodel-runtime-l1-1-3!GetPackagePathByFullName2.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackagepathbyfullname2
 // Minimum OS: windows10.0.10240.
-func GetPackagePathByFullName2(packageFullName foundation.PWSTR, packagePathType PackagePathType, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetPackagePathByFullName2.Addr(), uintptr(unsafe.Pointer(packageFullName)), uintptr(packagePathType), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
+func GetPackagePathByFullName2(packageFullName string, packagePathType PackagePathType, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procGetPackagePathByFullName2.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(packagePathType), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // GetPackagesByPackageFamily calls KERNEL32!GetPackagesByPackageFamily.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackagesbypackagefamily
 // Minimum OS: windows8.0.
-func GetPackagesByPackageFamily(packageFamilyName foundation.PWSTR, count *uint32, packageFullNames *foundation.PWSTR, bufferLength *uint32, buffer foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetPackagesByPackageFamily.Addr(), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(packageFullNames)), uintptr(unsafe.Pointer(bufferLength)), uintptr(unsafe.Pointer(buffer)))
+func GetPackagesByPackageFamily(packageFamilyName string, count *uint32, packageFullNames *foundation.PWSTR, bufferLength *uint32, buffer foundation.PWSTR) foundation.WIN32_ERROR {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	r1, _, _ := syscall.SyscallN(procGetPackagesByPackageFamily.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(packageFullNames)), uintptr(unsafe.Pointer(bufferLength)), uintptr(unsafe.Pointer(buffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // GetProcessesInVirtualizationContext calls KERNEL32!GetProcessesInVirtualizationContext.
-func GetProcessesInVirtualizationContext(packageFamilyName foundation.PWSTR, count *uint32, processes **foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetProcessesInVirtualizationContext.Addr(), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(processes)))
-	return foundation.HRESULT(r1)
+func GetProcessesInVirtualizationContext(packageFamilyName string, count *uint32, processes **foundation.HANDLE) error {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	r1, _, _ := syscall.SyscallN(procGetProcessesInVirtualizationContext.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(processes)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProcessesUsingPackageDependency calls api-ms-win-appmodel-runtime-l1-1-7!GetProcessesUsingPackageDependency.
-func GetProcessesUsingPackageDependency(packageDependencyId foundation.PWSTR, user security.PSID, scopeIsSystem foundation.BOOL, processIdsCount *uint32, processIds **uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetProcessesUsingPackageDependency.Addr(), uintptr(unsafe.Pointer(packageDependencyId)), uintptr(user), uintptr(scopeIsSystem), uintptr(unsafe.Pointer(processIdsCount)), uintptr(unsafe.Pointer(processIds)))
-	return foundation.HRESULT(r1)
+func GetProcessesUsingPackageDependency(packageDependencyId string, user security.PSID, scopeIsSystem bool, processIdsCount *uint32, processIds **uint32) error {
+	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
+	_scopeIsSystem := win32.Bool32(scopeIsSystem)
+	r1, _, _ := syscall.SyscallN(procGetProcessesUsingPackageDependency.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(user), uintptr(_scopeIsSystem), uintptr(unsafe.Pointer(processIdsCount)), uintptr(unsafe.Pointer(processIds)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResolvedPackageFullNameForPackageDependency calls KERNELBASE!GetResolvedPackageFullNameForPackageDependency.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getresolvedpackagefullnameforpackagedependency
-func GetResolvedPackageFullNameForPackageDependency(packageDependencyId foundation.PWSTR, packageFullName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetResolvedPackageFullNameForPackageDependency.Addr(), uintptr(unsafe.Pointer(packageDependencyId)), uintptr(unsafe.Pointer(packageFullName)))
-	return foundation.HRESULT(r1)
+func GetResolvedPackageFullNameForPackageDependency(packageDependencyId string, packageFullName *foundation.PWSTR) error {
+	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
+	r1, _, _ := syscall.SyscallN(procGetResolvedPackageFullNameForPackageDependency.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(unsafe.Pointer(packageFullName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResolvedPackageFullNameForPackageDependency2 calls api-ms-win-appmodel-runtime-l1-1-7!GetResolvedPackageFullNameForPackageDependency2.
-func GetResolvedPackageFullNameForPackageDependency2(packageDependencyId foundation.PWSTR, packageFullName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetResolvedPackageFullNameForPackageDependency2.Addr(), uintptr(unsafe.Pointer(packageDependencyId)), uintptr(unsafe.Pointer(packageFullName)))
-	return foundation.HRESULT(r1)
+func GetResolvedPackageFullNameForPackageDependency2(packageDependencyId string, packageFullName *foundation.PWSTR) error {
+	_packageDependencyId := win32.UTF16Ptr(packageDependencyId)
+	r1, _, _ := syscall.SyscallN(procGetResolvedPackageFullNameForPackageDependency2.Addr(), uintptr(unsafe.Pointer(_packageDependencyId)), uintptr(unsafe.Pointer(packageFullName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStagedPackageOrigin calls api-ms-win-appmodel-runtime-l1-1-1!GetStagedPackageOrigin.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getstagedpackageorigin
 // Minimum OS: windows8.1.
-func GetStagedPackageOrigin(packageFullName foundation.PWSTR, origin *PackageOrigin) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetStagedPackageOrigin.Addr(), uintptr(unsafe.Pointer(packageFullName)), uintptr(unsafe.Pointer(origin)))
+func GetStagedPackageOrigin(packageFullName string, origin *PackageOrigin) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procGetStagedPackageOrigin.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(origin)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // GetStagedPackagePathByFullName calls KERNEL32!GetStagedPackagePathByFullName.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getstagedpackagepathbyfullname
 // Minimum OS: windows8.1.
-func GetStagedPackagePathByFullName(packageFullName foundation.PWSTR, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetStagedPackagePathByFullName.Addr(), uintptr(unsafe.Pointer(packageFullName)), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
+func GetStagedPackagePathByFullName(packageFullName string, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procGetStagedPackagePathByFullName.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // GetStagedPackagePathByFullName2 calls api-ms-win-appmodel-runtime-l1-1-3!GetStagedPackagePathByFullName2.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getstagedpackagepathbyfullname2
 // Minimum OS: windows10.0.10240.
-func GetStagedPackagePathByFullName2(packageFullName foundation.PWSTR, packagePathType PackagePathType, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetStagedPackagePathByFullName2.Addr(), uintptr(unsafe.Pointer(packageFullName)), uintptr(packagePathType), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
+func GetStagedPackagePathByFullName2(packageFullName string, packagePathType PackagePathType, pathLength *uint32, path foundation.PWSTR) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procGetStagedPackagePathByFullName2.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(packagePathType), uintptr(unsafe.Pointer(pathLength)), uintptr(unsafe.Pointer(path)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // OpenPackageInfoByFullName calls KERNEL32!OpenPackageInfoByFullName.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-openpackageinfobyfullname
 // Minimum OS: windows8.0.
-func OpenPackageInfoByFullName(packageFullName foundation.PWSTR, reserved uint32, packageInfoReference **PACKAGE_INFO_REFERENCE) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procOpenPackageInfoByFullName.Addr(), uintptr(unsafe.Pointer(packageFullName)), uintptr(reserved), uintptr(unsafe.Pointer(packageInfoReference)))
+func OpenPackageInfoByFullName(packageFullName string, packageInfoReference **PACKAGE_INFO_REFERENCE) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procOpenPackageInfoByFullName.Addr(), uintptr(unsafe.Pointer(_packageFullName)), 0, uintptr(unsafe.Pointer(packageInfoReference)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // OpenPackageInfoByFullNameForUser calls api-ms-win-appmodel-runtime-l1-1-1!OpenPackageInfoByFullNameForUser.
-func OpenPackageInfoByFullNameForUser(userSid security.PSID, packageFullName foundation.PWSTR, reserved uint32, packageInfoReference **PACKAGE_INFO_REFERENCE) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procOpenPackageInfoByFullNameForUser.Addr(), uintptr(userSid), uintptr(unsafe.Pointer(packageFullName)), uintptr(reserved), uintptr(unsafe.Pointer(packageInfoReference)))
+func OpenPackageInfoByFullNameForUser(userSid security.PSID, packageFullName string, packageInfoReference **PACKAGE_INFO_REFERENCE) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procOpenPackageInfoByFullNameForUser.Addr(), uintptr(userSid), uintptr(unsafe.Pointer(_packageFullName)), 0, uintptr(unsafe.Pointer(packageInfoReference)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // PackageFamilyNameFromFullName calls KERNEL32!PackageFamilyNameFromFullName.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-packagefamilynamefromfullname
 // Minimum OS: windows8.0.
-func PackageFamilyNameFromFullName(packageFullName foundation.PWSTR, packageFamilyNameLength *uint32, packageFamilyName foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPackageFamilyNameFromFullName.Addr(), uintptr(unsafe.Pointer(packageFullName)), uintptr(unsafe.Pointer(packageFamilyNameLength)), uintptr(unsafe.Pointer(packageFamilyName)))
+func PackageFamilyNameFromFullName(packageFullName string, packageFamilyNameLength *uint32, packageFamilyName foundation.PWSTR) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procPackageFamilyNameFromFullName.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(packageFamilyNameLength)), uintptr(unsafe.Pointer(packageFamilyName)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -524,24 +547,27 @@ func PackageFullNameFromId(packageId unsafe.Pointer, packageFullNameLength *uint
 // PackageIdFromFullName calls KERNEL32!PackageIdFromFullName.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-packageidfromfullname
 // Minimum OS: windows8.0.
-func PackageIdFromFullName(packageFullName foundation.PWSTR, flags uint32, bufferLength *uint32, buffer *byte) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPackageIdFromFullName.Addr(), uintptr(unsafe.Pointer(packageFullName)), uintptr(flags), uintptr(unsafe.Pointer(bufferLength)), uintptr(unsafe.Pointer(buffer)))
+func PackageIdFromFullName(packageFullName string, flags uint32, bufferLength *uint32, buffer *byte) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procPackageIdFromFullName.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(flags), uintptr(unsafe.Pointer(bufferLength)), uintptr(unsafe.Pointer(buffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // PackageNameAndPublisherIdFromFamilyName calls KERNEL32!PackageNameAndPublisherIdFromFamilyName.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-packagenameandpublisheridfromfamilyname
 // Minimum OS: windows8.0.
-func PackageNameAndPublisherIdFromFamilyName(packageFamilyName foundation.PWSTR, packageNameLength *uint32, packageName foundation.PWSTR, packagePublisherIdLength *uint32, packagePublisherId foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPackageNameAndPublisherIdFromFamilyName.Addr(), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(packageNameLength)), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(packagePublisherIdLength)), uintptr(unsafe.Pointer(packagePublisherId)))
+func PackageNameAndPublisherIdFromFamilyName(packageFamilyName string, packageNameLength *uint32, packageName foundation.PWSTR, packagePublisherIdLength *uint32, packagePublisherId foundation.PWSTR) foundation.WIN32_ERROR {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	r1, _, _ := syscall.SyscallN(procPackageNameAndPublisherIdFromFamilyName.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(packageNameLength)), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(packagePublisherIdLength)), uintptr(unsafe.Pointer(packagePublisherId)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // ParseApplicationUserModelId calls KERNEL32!ParseApplicationUserModelId.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-parseapplicationusermodelid
 // Minimum OS: windows8.1.
-func ParseApplicationUserModelId(applicationUserModelId foundation.PWSTR, packageFamilyNameLength *uint32, packageFamilyName foundation.PWSTR, packageRelativeApplicationIdLength *uint32, packageRelativeApplicationId foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procParseApplicationUserModelId.Addr(), uintptr(unsafe.Pointer(applicationUserModelId)), uintptr(unsafe.Pointer(packageFamilyNameLength)), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(packageRelativeApplicationIdLength)), uintptr(unsafe.Pointer(packageRelativeApplicationId)))
+func ParseApplicationUserModelId(applicationUserModelId string, packageFamilyNameLength *uint32, packageFamilyName foundation.PWSTR, packageRelativeApplicationIdLength *uint32, packageRelativeApplicationId foundation.PWSTR) foundation.WIN32_ERROR {
+	_applicationUserModelId := win32.UTF16Ptr(applicationUserModelId)
+	r1, _, _ := syscall.SyscallN(procParseApplicationUserModelId.Addr(), uintptr(unsafe.Pointer(_applicationUserModelId)), uintptr(unsafe.Pointer(packageFamilyNameLength)), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(packageRelativeApplicationIdLength)), uintptr(unsafe.Pointer(packageRelativeApplicationId)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -552,26 +578,29 @@ func ReleasePackageVirtualizationContext(context PACKAGE_VIRTUALIZATION_CONTEXT_
 
 // RemovePackageDependency calls KERNELBASE!RemovePackageDependency.
 // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-removepackagedependency
-func RemovePackageDependency(packageDependencyContext PACKAGEDEPENDENCY_CONTEXT) foundation.HRESULT {
+func RemovePackageDependency(packageDependencyContext PACKAGEDEPENDENCY_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procRemovePackageDependency.Addr(), uintptr(packageDependencyContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VerifyApplicationUserModelId calls api-ms-win-appmodel-runtime-l1-1-1!VerifyApplicationUserModelId.
-func VerifyApplicationUserModelId(applicationUserModelId foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procVerifyApplicationUserModelId.Addr(), uintptr(unsafe.Pointer(applicationUserModelId)))
+func VerifyApplicationUserModelId(applicationUserModelId string) foundation.WIN32_ERROR {
+	_applicationUserModelId := win32.UTF16Ptr(applicationUserModelId)
+	r1, _, _ := syscall.SyscallN(procVerifyApplicationUserModelId.Addr(), uintptr(unsafe.Pointer(_applicationUserModelId)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // VerifyPackageFamilyName calls api-ms-win-appmodel-runtime-l1-1-1!VerifyPackageFamilyName.
-func VerifyPackageFamilyName(packageFamilyName foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procVerifyPackageFamilyName.Addr(), uintptr(unsafe.Pointer(packageFamilyName)))
+func VerifyPackageFamilyName(packageFamilyName string) foundation.WIN32_ERROR {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	r1, _, _ := syscall.SyscallN(procVerifyPackageFamilyName.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // VerifyPackageFullName calls api-ms-win-appmodel-runtime-l1-1-1!VerifyPackageFullName.
-func VerifyPackageFullName(packageFullName foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procVerifyPackageFullName.Addr(), uintptr(unsafe.Pointer(packageFullName)))
+func VerifyPackageFullName(packageFullName string) foundation.WIN32_ERROR {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(procVerifyPackageFullName.Addr(), uintptr(unsafe.Pointer(_packageFullName)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -582,7 +611,8 @@ func VerifyPackageId(packageId unsafe.Pointer) foundation.WIN32_ERROR {
 }
 
 // VerifyPackageRelativeApplicationId calls api-ms-win-appmodel-runtime-l1-1-1!VerifyPackageRelativeApplicationId.
-func VerifyPackageRelativeApplicationId(packageRelativeApplicationId foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procVerifyPackageRelativeApplicationId.Addr(), uintptr(unsafe.Pointer(packageRelativeApplicationId)))
+func VerifyPackageRelativeApplicationId(packageRelativeApplicationId string) foundation.WIN32_ERROR {
+	_packageRelativeApplicationId := win32.UTF16Ptr(packageRelativeApplicationId)
+	r1, _, _ := syscall.SyscallN(procVerifyPackageRelativeApplicationId.Addr(), uintptr(unsafe.Pointer(_packageRelativeApplicationId)))
 	return foundation.WIN32_ERROR(r1)
 }

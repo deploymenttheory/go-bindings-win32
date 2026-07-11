@@ -182,24 +182,168 @@ var (
 	procBcp_done              = mododbcbcp.NewProc("bcp_done")
 	procBcp_exec              = mododbcbcp.NewProc("bcp_exec")
 	procBcp_getcolfmt         = mododbcbcp.NewProc("bcp_getcolfmt")
+	procBcp_init              = mododbcbcp.NewProc("bcp_initW")
 	procBcp_initA             = mododbcbcp.NewProc("bcp_initA")
-	procBcp_initW             = mododbcbcp.NewProc("bcp_initW")
 	procBcp_moretext          = mododbcbcp.NewProc("bcp_moretext")
+	procBcp_readfmt           = mododbcbcp.NewProc("bcp_readfmtW")
 	procBcp_readfmtA          = mododbcbcp.NewProc("bcp_readfmtA")
-	procBcp_readfmtW          = mododbcbcp.NewProc("bcp_readfmtW")
 	procBcp_sendrow           = mododbcbcp.NewProc("bcp_sendrow")
 	procBcp_setcolfmt         = mododbcbcp.NewProc("bcp_setcolfmt")
+	procBcp_writefmt          = mododbcbcp.NewProc("bcp_writefmtW")
 	procBcp_writefmtA         = mododbcbcp.NewProc("bcp_writefmtA")
-	procBcp_writefmtW         = mododbcbcp.NewProc("bcp_writefmtW")
+	procDbprtype              = mododbcbcp.NewProc("dbprtypeW")
 	procDbprtypeA             = mododbcbcp.NewProc("dbprtypeA")
-	procDbprtypeW             = mododbcbcp.NewProc("dbprtypeW")
 	procSQLCloseEnumServers   = mododbcbcp.NewProc("SQLCloseEnumServers")
 	procSQLGetNextEnumeration = mododbcbcp.NewProc("SQLGetNextEnumeration")
 	procSQLInitEnumServers    = mododbcbcp.NewProc("SQLInitEnumServers")
+	procSQLLinkedCatalogs     = mododbcbcp.NewProc("SQLLinkedCatalogsW")
 	procSQLLinkedCatalogsA    = mododbcbcp.NewProc("SQLLinkedCatalogsA")
-	procSQLLinkedCatalogsW    = mododbcbcp.NewProc("SQLLinkedCatalogsW")
 	procSQLLinkedServers      = mododbcbcp.NewProc("SQLLinkedServers")
 )
+
+// Bcp_batch calls odbcbcp!bcp_batch.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-batch
+func Bcp_batch(param0 unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procBcp_batch.Addr(), uintptr(unsafe.Pointer(param0)))
+	return int32(r1)
+}
+
+// Bcp_bind calls odbcbcp!bcp_bind.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-bind
+func Bcp_bind(param0 unsafe.Pointer, param1 *byte, param2 int32, param3 int32, param4 *byte, param5 int32, param6 int32, param7 int32) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_bind.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3), uintptr(unsafe.Pointer(param4)), uintptr(param5), uintptr(param6), uintptr(param7))
+	return int16(r1)
+}
+
+// Bcp_colfmt calls odbcbcp!bcp_colfmt.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-colfmt
+func Bcp_colfmt(param0 unsafe.Pointer, param1 int32, param2 byte, param3 int32, param4 int32, param5 *byte, param6 int32, param7 int32) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_colfmt.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(param4), uintptr(unsafe.Pointer(param5)), uintptr(param6), uintptr(param7))
+	return int16(r1)
+}
+
+// Bcp_collen calls odbcbcp!bcp_collen.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-collen
+func Bcp_collen(param0 unsafe.Pointer, param1 int32, param2 int32) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_collen.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
+	return int16(r1)
+}
+
+// Bcp_colptr calls odbcbcp!bcp_colptr.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-colptr
+func Bcp_colptr(param0 unsafe.Pointer, param1 *byte, param2 int32) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_colptr.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
+	return int16(r1)
+}
+
+// Bcp_columns calls odbcbcp!bcp_columns.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-columns
+func Bcp_columns(param0 unsafe.Pointer, param1 int32) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_columns.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1))
+	return int16(r1)
+}
+
+// Bcp_control calls odbcbcp!bcp_control.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-control
+func Bcp_control(param0 unsafe.Pointer, param1 int32, param2 unsafe.Pointer) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_control.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)))
+	return int16(r1)
+}
+
+// Bcp_done calls odbcbcp!bcp_done.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-done
+func Bcp_done(param0 unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procBcp_done.Addr(), uintptr(unsafe.Pointer(param0)))
+	return int32(r1)
+}
+
+// Bcp_exec calls odbcbcp!bcp_exec.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-exec
+func Bcp_exec(param0 unsafe.Pointer, param1 *int32) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_exec.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
+	return int16(r1)
+}
+
+// Bcp_getcolfmt calls odbcbcp!bcp_getcolfmt.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-getcolfmt
+func Bcp_getcolfmt(param0 unsafe.Pointer, param1 int32, param2 int32, param3 unsafe.Pointer, param4 int32, param5 *int32) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_getcolfmt.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(param4), uintptr(unsafe.Pointer(param5)))
+	return int16(r1)
+}
+
+// Bcp_init calls odbcbcp!bcp_initW.
+func Bcp_init(param0 unsafe.Pointer, param1 string, param2 string, param3 string, param4 int32) int16 {
+	_param1 := win32.UTF16Ptr(param1)
+	_param2 := win32.UTF16Ptr(param2)
+	_param3 := win32.UTF16Ptr(param3)
+	r1, _, _ := syscall.SyscallN(procBcp_init.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(_param2)), uintptr(unsafe.Pointer(_param3)), uintptr(param4))
+	return int16(r1)
+}
+
+// Bcp_initA calls odbcbcp!bcp_initA.
+func Bcp_initA(param0 unsafe.Pointer, param1 foundation.PSTR, param2 foundation.PSTR, param3 foundation.PSTR, param4 int32) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_initA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(param4))
+	return int16(r1)
+}
+
+// Bcp_moretext calls odbcbcp!bcp_moretext.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-moretext
+func Bcp_moretext(param0 unsafe.Pointer, param1 int32, param2 *byte) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_moretext.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)))
+	return int16(r1)
+}
+
+// Bcp_readfmt calls odbcbcp!bcp_readfmtW.
+func Bcp_readfmt(param0 unsafe.Pointer, param1 string) int16 {
+	_param1 := win32.UTF16Ptr(param1)
+	r1, _, _ := syscall.SyscallN(procBcp_readfmt.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)))
+	return int16(r1)
+}
+
+// Bcp_readfmtA calls odbcbcp!bcp_readfmtA.
+func Bcp_readfmtA(param0 unsafe.Pointer, param1 foundation.PSTR) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_readfmtA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
+	return int16(r1)
+}
+
+// Bcp_sendrow calls odbcbcp!bcp_sendrow.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-sendrow
+func Bcp_sendrow(param0 unsafe.Pointer) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_sendrow.Addr(), uintptr(unsafe.Pointer(param0)))
+	return int16(r1)
+}
+
+// Bcp_setcolfmt calls odbcbcp!bcp_setcolfmt.
+// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-setcolfmt
+func Bcp_setcolfmt(param0 unsafe.Pointer, param1 int32, param2 int32, param3 unsafe.Pointer, param4 int32) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_setcolfmt.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(param4))
+	return int16(r1)
+}
+
+// Bcp_writefmt calls odbcbcp!bcp_writefmtW.
+func Bcp_writefmt(param0 unsafe.Pointer, param1 string) int16 {
+	_param1 := win32.UTF16Ptr(param1)
+	r1, _, _ := syscall.SyscallN(procBcp_writefmt.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)))
+	return int16(r1)
+}
+
+// Bcp_writefmtA calls odbcbcp!bcp_writefmtA.
+func Bcp_writefmtA(param0 unsafe.Pointer, param1 foundation.PSTR) int16 {
+	r1, _, _ := syscall.SyscallN(procBcp_writefmtA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
+	return int16(r1)
+}
+
+// Dbprtype calls odbcbcp!dbprtypeW.
+func Dbprtype(param0 int32) foundation.PWSTR {
+	r1, _, _ := syscall.SyscallN(procDbprtype.Addr(), uintptr(param0))
+	return foundation.PWSTR(unsafe.Pointer(r1))
+}
+
+// DbprtypeA calls odbcbcp!dbprtypeA.
+func DbprtypeA(param0 int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procDbprtypeA.Addr(), uintptr(param0))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
 
 // ODBCGetTryWaitValue calls ODBC32!ODBCGetTryWaitValue.
 func ODBCGetTryWaitValue() uint32 {
@@ -208,9 +352,9 @@ func ODBCGetTryWaitValue() uint32 {
 }
 
 // ODBCSetTryWaitValue calls ODBC32!ODBCSetTryWaitValue.
-func ODBCSetTryWaitValue(dwValue uint32) foundation.BOOL {
+func ODBCSetTryWaitValue(dwValue uint32) bool {
 	r1, _, _ := syscall.SyscallN(procODBCSetTryWaitValue.Addr(), uintptr(dwValue))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SQLAllocConnect calls ODBC32!SQLAllocConnect.
@@ -269,20 +413,44 @@ func SQLBindParameter(hstmt unsafe.Pointer, ipar uint16, fParamType int16, fCTyp
 
 // SQLBrowseConnect calls ODBC32!SQLBrowseConnect.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlbrowseconnect-function
-func SQLBrowseConnect(hdbc unsafe.Pointer, szConnStrIn *byte, cchConnStrIn int16, szConnStrOut *byte, cchConnStrOutMax int16, pcchConnStrOut *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLBrowseConnect.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(szConnStrIn)), uintptr(cchConnStrIn), uintptr(unsafe.Pointer(szConnStrOut)), uintptr(cchConnStrOutMax), uintptr(unsafe.Pointer(pcchConnStrOut)))
+func SQLBrowseConnect(hdbc unsafe.Pointer, szConnStrIn []byte, szConnStrOut []byte, pcchConnStrOut *int16) int16 {
+	var _szConnStrIn *byte
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *byte
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLBrowseConnect.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(_szConnStrIn)), uintptr(len(szConnStrIn)), uintptr(unsafe.Pointer(_szConnStrOut)), uintptr(len(szConnStrOut)), uintptr(unsafe.Pointer(pcchConnStrOut)))
 	return int16(r1)
 }
 
 // SQLBrowseConnectA calls ODBC32!SQLBrowseConnectA.
-func SQLBrowseConnectA(hdbc unsafe.Pointer, szConnStrIn *byte, cbConnStrIn int16, szConnStrOut *byte, cbConnStrOutMax int16, pcbConnStrOut *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLBrowseConnectA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(szConnStrIn)), uintptr(cbConnStrIn), uintptr(unsafe.Pointer(szConnStrOut)), uintptr(cbConnStrOutMax), uintptr(unsafe.Pointer(pcbConnStrOut)))
+func SQLBrowseConnectA(hdbc unsafe.Pointer, szConnStrIn []byte, szConnStrOut []byte, pcbConnStrOut *int16) int16 {
+	var _szConnStrIn *byte
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *byte
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLBrowseConnectA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(_szConnStrIn)), uintptr(len(szConnStrIn)), uintptr(unsafe.Pointer(_szConnStrOut)), uintptr(len(szConnStrOut)), uintptr(unsafe.Pointer(pcbConnStrOut)))
 	return int16(r1)
 }
 
 // SQLBrowseConnectW calls ODBC32!SQLBrowseConnectW.
-func SQLBrowseConnectW(hdbc unsafe.Pointer, szConnStrIn *uint16, cchConnStrIn int16, szConnStrOut *uint16, cchConnStrOutMax int16, pcchConnStrOut *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLBrowseConnectW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(szConnStrIn)), uintptr(cchConnStrIn), uintptr(unsafe.Pointer(szConnStrOut)), uintptr(cchConnStrOutMax), uintptr(unsafe.Pointer(pcchConnStrOut)))
+func SQLBrowseConnectW(hdbc unsafe.Pointer, szConnStrIn []uint16, szConnStrOut []uint16, pcchConnStrOut *int16) int16 {
+	var _szConnStrIn *uint16
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *uint16
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLBrowseConnectW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(_szConnStrIn)), uintptr(len(szConnStrIn)), uintptr(unsafe.Pointer(_szConnStrOut)), uintptr(len(szConnStrOut)), uintptr(unsafe.Pointer(pcchConnStrOut)))
 	return int16(r1)
 }
 
@@ -360,39 +528,135 @@ func SQLColAttributesW(hstmt unsafe.Pointer, icol uint16, fDescType uint16, rgbD
 
 // SQLColumnPrivileges calls ODBC32!SQLColumnPrivileges.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlcolumnprivileges-function
-func SQLColumnPrivileges(hstmt unsafe.Pointer, szCatalogName *byte, cchCatalogName int16, szSchemaName *byte, cchSchemaName int16, szTableName *byte, cchTableName int16, szColumnName *byte, cchColumnName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColumnPrivileges.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName), uintptr(unsafe.Pointer(szColumnName)), uintptr(cchColumnName))
+func SQLColumnPrivileges(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColumnPrivileges.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(unsafe.Pointer(_szColumnName)), uintptr(len(szColumnName)))
 	return int16(r1)
 }
 
 // SQLColumnPrivilegesA calls ODBC32!SQLColumnPrivilegesA.
-func SQLColumnPrivilegesA(hstmt unsafe.Pointer, szCatalogName *byte, cbCatalogName int16, szSchemaName *byte, cbSchemaName int16, szTableName *byte, cbTableName int16, szColumnName *byte, cbColumnName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColumnPrivilegesA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cbCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cbSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cbTableName), uintptr(unsafe.Pointer(szColumnName)), uintptr(cbColumnName))
+func SQLColumnPrivilegesA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColumnPrivilegesA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(unsafe.Pointer(_szColumnName)), uintptr(len(szColumnName)))
 	return int16(r1)
 }
 
 // SQLColumnPrivilegesW calls ODBC32!SQLColumnPrivilegesW.
-func SQLColumnPrivilegesW(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, szColumnName *uint16, cchColumnName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColumnPrivilegesW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName), uintptr(unsafe.Pointer(szColumnName)), uintptr(cchColumnName))
+func SQLColumnPrivilegesW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, szColumnName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *uint16
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColumnPrivilegesW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(unsafe.Pointer(_szColumnName)), uintptr(len(szColumnName)))
 	return int16(r1)
 }
 
 // SQLColumns calls ODBC32!SQLColumns.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlcolumns-function
-func SQLColumns(StatementHandle unsafe.Pointer, CatalogName *byte, NameLength1 int16, SchemaName *byte, NameLength2 int16, TableName *byte, NameLength3 int16, ColumnName *byte, NameLength4 int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColumns.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(CatalogName)), uintptr(NameLength1), uintptr(unsafe.Pointer(SchemaName)), uintptr(NameLength2), uintptr(unsafe.Pointer(TableName)), uintptr(NameLength3), uintptr(unsafe.Pointer(ColumnName)), uintptr(NameLength4))
+func SQLColumns(StatementHandle unsafe.Pointer, CatalogName []byte, SchemaName []byte, TableName []byte, ColumnName []byte) int16 {
+	var _CatalogName *byte
+	if len(CatalogName) > 0 {
+		_CatalogName = &CatalogName[0]
+	}
+	var _SchemaName *byte
+	if len(SchemaName) > 0 {
+		_SchemaName = &SchemaName[0]
+	}
+	var _TableName *byte
+	if len(TableName) > 0 {
+		_TableName = &TableName[0]
+	}
+	var _ColumnName *byte
+	if len(ColumnName) > 0 {
+		_ColumnName = &ColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColumns.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(_CatalogName)), uintptr(len(CatalogName)), uintptr(unsafe.Pointer(_SchemaName)), uintptr(len(SchemaName)), uintptr(unsafe.Pointer(_TableName)), uintptr(len(TableName)), uintptr(unsafe.Pointer(_ColumnName)), uintptr(len(ColumnName)))
 	return int16(r1)
 }
 
 // SQLColumnsA calls ODBC32!SQLColumnsA.
-func SQLColumnsA(hstmt unsafe.Pointer, szCatalogName *byte, cbCatalogName int16, szSchemaName *byte, cbSchemaName int16, szTableName *byte, cbTableName int16, szColumnName *byte, cbColumnName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColumnsA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cbCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cbSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cbTableName), uintptr(unsafe.Pointer(szColumnName)), uintptr(cbColumnName))
+func SQLColumnsA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColumnsA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(unsafe.Pointer(_szColumnName)), uintptr(len(szColumnName)))
 	return int16(r1)
 }
 
 // SQLColumnsW calls ODBC32!SQLColumnsW.
-func SQLColumnsW(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, szColumnName *uint16, cchColumnName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColumnsW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName), uintptr(unsafe.Pointer(szColumnName)), uintptr(cchColumnName))
+func SQLColumnsW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, szColumnName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szColumnName *uint16
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColumnsW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(unsafe.Pointer(_szColumnName)), uintptr(len(szColumnName)))
 	return int16(r1)
 }
 
@@ -405,20 +669,56 @@ func SQLCompleteAsync(HandleType int16, Handle unsafe.Pointer, AsyncRetCodePtr *
 
 // SQLConnect calls ODBC32!SQLConnect.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlconnect-function
-func SQLConnect(ConnectionHandle unsafe.Pointer, ServerName *byte, NameLength1 int16, UserName *byte, NameLength2 int16, Authentication *byte, NameLength3 int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLConnect.Addr(), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(unsafe.Pointer(ServerName)), uintptr(NameLength1), uintptr(unsafe.Pointer(UserName)), uintptr(NameLength2), uintptr(unsafe.Pointer(Authentication)), uintptr(NameLength3))
+func SQLConnect(ConnectionHandle unsafe.Pointer, ServerName []byte, UserName []byte, Authentication []byte) int16 {
+	var _ServerName *byte
+	if len(ServerName) > 0 {
+		_ServerName = &ServerName[0]
+	}
+	var _UserName *byte
+	if len(UserName) > 0 {
+		_UserName = &UserName[0]
+	}
+	var _Authentication *byte
+	if len(Authentication) > 0 {
+		_Authentication = &Authentication[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLConnect.Addr(), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(unsafe.Pointer(_ServerName)), uintptr(len(ServerName)), uintptr(unsafe.Pointer(_UserName)), uintptr(len(UserName)), uintptr(unsafe.Pointer(_Authentication)), uintptr(len(Authentication)))
 	return int16(r1)
 }
 
 // SQLConnectA calls ODBC32!SQLConnectA.
-func SQLConnectA(hdbc unsafe.Pointer, szDSN *byte, cbDSN int16, szUID *byte, cbUID int16, szAuthStr *byte, cbAuthStr int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLConnectA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(szDSN)), uintptr(cbDSN), uintptr(unsafe.Pointer(szUID)), uintptr(cbUID), uintptr(unsafe.Pointer(szAuthStr)), uintptr(cbAuthStr))
+func SQLConnectA(hdbc unsafe.Pointer, szDSN []byte, szUID []byte, szAuthStr []byte) int16 {
+	var _szDSN *byte
+	if len(szDSN) > 0 {
+		_szDSN = &szDSN[0]
+	}
+	var _szUID *byte
+	if len(szUID) > 0 {
+		_szUID = &szUID[0]
+	}
+	var _szAuthStr *byte
+	if len(szAuthStr) > 0 {
+		_szAuthStr = &szAuthStr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLConnectA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(_szDSN)), uintptr(len(szDSN)), uintptr(unsafe.Pointer(_szUID)), uintptr(len(szUID)), uintptr(unsafe.Pointer(_szAuthStr)), uintptr(len(szAuthStr)))
 	return int16(r1)
 }
 
 // SQLConnectW calls ODBC32!SQLConnectW.
-func SQLConnectW(hdbc unsafe.Pointer, szDSN *uint16, cchDSN int16, szUID *uint16, cchUID int16, szAuthStr *uint16, cchAuthStr int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLConnectW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(szDSN)), uintptr(cchDSN), uintptr(unsafe.Pointer(szUID)), uintptr(cchUID), uintptr(unsafe.Pointer(szAuthStr)), uintptr(cchAuthStr))
+func SQLConnectW(hdbc unsafe.Pointer, szDSN []uint16, szUID []uint16, szAuthStr []uint16) int16 {
+	var _szDSN *uint16
+	if len(szDSN) > 0 {
+		_szDSN = &szDSN[0]
+	}
+	var _szUID *uint16
+	if len(szUID) > 0 {
+		_szUID = &szUID[0]
+	}
+	var _szAuthStr *uint16
+	if len(szAuthStr) > 0 {
+		_szAuthStr = &szAuthStr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLConnectW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(_szDSN)), uintptr(len(szDSN)), uintptr(unsafe.Pointer(_szUID)), uintptr(len(szUID)), uintptr(unsafe.Pointer(_szAuthStr)), uintptr(len(szAuthStr)))
 	return int16(r1)
 }
 
@@ -431,39 +731,75 @@ func SQLCopyDesc(SourceDescHandle unsafe.Pointer, TargetDescHandle unsafe.Pointe
 
 // SQLDataSources calls ODBC32!SQLDataSources.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqldatasources-function
-func SQLDataSources(EnvironmentHandle unsafe.Pointer, Direction uint16, ServerName *byte, BufferLength1 int16, NameLength1Ptr *int16, Description *byte, BufferLength2 int16, NameLength2Ptr *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDataSources.Addr(), uintptr(unsafe.Pointer(EnvironmentHandle)), uintptr(Direction), uintptr(unsafe.Pointer(ServerName)), uintptr(BufferLength1), uintptr(unsafe.Pointer(NameLength1Ptr)), uintptr(unsafe.Pointer(Description)), uintptr(BufferLength2), uintptr(unsafe.Pointer(NameLength2Ptr)))
+func SQLDataSources(EnvironmentHandle unsafe.Pointer, Direction uint16, ServerName []byte, NameLength1Ptr *int16, Description []byte, NameLength2Ptr *int16) int16 {
+	var _ServerName *byte
+	if len(ServerName) > 0 {
+		_ServerName = &ServerName[0]
+	}
+	var _Description *byte
+	if len(Description) > 0 {
+		_Description = &Description[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDataSources.Addr(), uintptr(unsafe.Pointer(EnvironmentHandle)), uintptr(Direction), uintptr(unsafe.Pointer(_ServerName)), uintptr(len(ServerName)), uintptr(unsafe.Pointer(NameLength1Ptr)), uintptr(unsafe.Pointer(_Description)), uintptr(len(Description)), uintptr(unsafe.Pointer(NameLength2Ptr)))
 	return int16(r1)
 }
 
 // SQLDataSourcesA calls ODBC32!SQLDataSourcesA.
-func SQLDataSourcesA(henv unsafe.Pointer, fDirection uint16, szDSN *byte, cbDSNMax int16, pcbDSN *int16, szDescription *byte, cbDescriptionMax int16, pcbDescription *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDataSourcesA.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(szDSN)), uintptr(cbDSNMax), uintptr(unsafe.Pointer(pcbDSN)), uintptr(unsafe.Pointer(szDescription)), uintptr(cbDescriptionMax), uintptr(unsafe.Pointer(pcbDescription)))
+func SQLDataSourcesA(henv unsafe.Pointer, fDirection uint16, szDSN []byte, pcbDSN *int16, szDescription []byte, pcbDescription *int16) int16 {
+	var _szDSN *byte
+	if len(szDSN) > 0 {
+		_szDSN = &szDSN[0]
+	}
+	var _szDescription *byte
+	if len(szDescription) > 0 {
+		_szDescription = &szDescription[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDataSourcesA.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(_szDSN)), uintptr(len(szDSN)), uintptr(unsafe.Pointer(pcbDSN)), uintptr(unsafe.Pointer(_szDescription)), uintptr(len(szDescription)), uintptr(unsafe.Pointer(pcbDescription)))
 	return int16(r1)
 }
 
 // SQLDataSourcesW calls ODBC32!SQLDataSourcesW.
-func SQLDataSourcesW(henv unsafe.Pointer, fDirection uint16, szDSN *uint16, cchDSNMax int16, pcchDSN *int16, wszDescription *uint16, cchDescriptionMax int16, pcchDescription *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDataSourcesW.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(szDSN)), uintptr(cchDSNMax), uintptr(unsafe.Pointer(pcchDSN)), uintptr(unsafe.Pointer(wszDescription)), uintptr(cchDescriptionMax), uintptr(unsafe.Pointer(pcchDescription)))
+func SQLDataSourcesW(henv unsafe.Pointer, fDirection uint16, szDSN []uint16, pcchDSN *int16, wszDescription []uint16, pcchDescription *int16) int16 {
+	var _szDSN *uint16
+	if len(szDSN) > 0 {
+		_szDSN = &szDSN[0]
+	}
+	var _wszDescription *uint16
+	if len(wszDescription) > 0 {
+		_wszDescription = &wszDescription[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDataSourcesW.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(_szDSN)), uintptr(len(szDSN)), uintptr(unsafe.Pointer(pcchDSN)), uintptr(unsafe.Pointer(_wszDescription)), uintptr(len(wszDescription)), uintptr(unsafe.Pointer(pcchDescription)))
 	return int16(r1)
 }
 
 // SQLDescribeCol calls ODBC32!SQLDescribeCol.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqldescribecol-function
-func SQLDescribeCol(StatementHandle unsafe.Pointer, ColumnNumber uint16, ColumnName *byte, BufferLength int16, NameLength *int16, DataType *int16, ColumnSize *uint64, DecimalDigits *int16, Nullable *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDescribeCol.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(ColumnNumber), uintptr(unsafe.Pointer(ColumnName)), uintptr(BufferLength), uintptr(unsafe.Pointer(NameLength)), uintptr(unsafe.Pointer(DataType)), uintptr(unsafe.Pointer(ColumnSize)), uintptr(unsafe.Pointer(DecimalDigits)), uintptr(unsafe.Pointer(Nullable)))
+func SQLDescribeCol(StatementHandle unsafe.Pointer, ColumnNumber uint16, ColumnName []byte, NameLength *int16, DataType *int16, ColumnSize *uint64, DecimalDigits *int16, Nullable *int16) int16 {
+	var _ColumnName *byte
+	if len(ColumnName) > 0 {
+		_ColumnName = &ColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDescribeCol.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(ColumnNumber), uintptr(unsafe.Pointer(_ColumnName)), uintptr(len(ColumnName)), uintptr(unsafe.Pointer(NameLength)), uintptr(unsafe.Pointer(DataType)), uintptr(unsafe.Pointer(ColumnSize)), uintptr(unsafe.Pointer(DecimalDigits)), uintptr(unsafe.Pointer(Nullable)))
 	return int16(r1)
 }
 
 // SQLDescribeColA calls ODBC32!SQLDescribeColA.
-func SQLDescribeColA(hstmt unsafe.Pointer, icol uint16, szColName *byte, cbColNameMax int16, pcbColName *int16, pfSqlType *int16, pcbColDef *uint64, pibScale *int16, pfNullable *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDescribeColA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(icol), uintptr(unsafe.Pointer(szColName)), uintptr(cbColNameMax), uintptr(unsafe.Pointer(pcbColName)), uintptr(unsafe.Pointer(pfSqlType)), uintptr(unsafe.Pointer(pcbColDef)), uintptr(unsafe.Pointer(pibScale)), uintptr(unsafe.Pointer(pfNullable)))
+func SQLDescribeColA(hstmt unsafe.Pointer, icol uint16, szColName []byte, pcbColName *int16, pfSqlType *int16, pcbColDef *uint64, pibScale *int16, pfNullable *int16) int16 {
+	var _szColName *byte
+	if len(szColName) > 0 {
+		_szColName = &szColName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDescribeColA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(icol), uintptr(unsafe.Pointer(_szColName)), uintptr(len(szColName)), uintptr(unsafe.Pointer(pcbColName)), uintptr(unsafe.Pointer(pfSqlType)), uintptr(unsafe.Pointer(pcbColDef)), uintptr(unsafe.Pointer(pibScale)), uintptr(unsafe.Pointer(pfNullable)))
 	return int16(r1)
 }
 
 // SQLDescribeColW calls ODBC32!SQLDescribeColW.
-func SQLDescribeColW(hstmt unsafe.Pointer, icol uint16, szColName *uint16, cchColNameMax int16, pcchColName *int16, pfSqlType *int16, pcbColDef *uint64, pibScale *int16, pfNullable *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDescribeColW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(icol), uintptr(unsafe.Pointer(szColName)), uintptr(cchColNameMax), uintptr(unsafe.Pointer(pcchColName)), uintptr(unsafe.Pointer(pfSqlType)), uintptr(unsafe.Pointer(pcbColDef)), uintptr(unsafe.Pointer(pibScale)), uintptr(unsafe.Pointer(pfNullable)))
+func SQLDescribeColW(hstmt unsafe.Pointer, icol uint16, szColName []uint16, pcchColName *int16, pfSqlType *int16, pcbColDef *uint64, pibScale *int16, pfNullable *int16) int16 {
+	var _szColName *uint16
+	if len(szColName) > 0 {
+		_szColName = &szColName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDescribeColW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(icol), uintptr(unsafe.Pointer(_szColName)), uintptr(len(szColName)), uintptr(unsafe.Pointer(pcchColName)), uintptr(unsafe.Pointer(pfSqlType)), uintptr(unsafe.Pointer(pcbColDef)), uintptr(unsafe.Pointer(pibScale)), uintptr(unsafe.Pointer(pfNullable)))
 	return int16(r1)
 }
 
@@ -483,39 +819,87 @@ func SQLDisconnect(ConnectionHandle unsafe.Pointer) int16 {
 
 // SQLDriverConnect calls ODBC32!SQLDriverConnect.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqldriverconnect-function
-func SQLDriverConnect(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn *byte, cchConnStrIn int16, szConnStrOut *byte, cchConnStrOutMax int16, pcchConnStrOut *int16, fDriverCompletion uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDriverConnect.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(hwnd), uintptr(unsafe.Pointer(szConnStrIn)), uintptr(cchConnStrIn), uintptr(unsafe.Pointer(szConnStrOut)), uintptr(cchConnStrOutMax), uintptr(unsafe.Pointer(pcchConnStrOut)), uintptr(fDriverCompletion))
+func SQLDriverConnect(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn []byte, szConnStrOut []byte, pcchConnStrOut *int16, fDriverCompletion uint16) int16 {
+	var _szConnStrIn *byte
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *byte
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDriverConnect.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(hwnd), uintptr(unsafe.Pointer(_szConnStrIn)), uintptr(len(szConnStrIn)), uintptr(unsafe.Pointer(_szConnStrOut)), uintptr(len(szConnStrOut)), uintptr(unsafe.Pointer(pcchConnStrOut)), uintptr(fDriverCompletion))
 	return int16(r1)
 }
 
 // SQLDriverConnectA calls ODBC32!SQLDriverConnectA.
-func SQLDriverConnectA(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn *byte, cbConnStrIn int16, szConnStrOut *byte, cbConnStrOutMax int16, pcbConnStrOut *int16, fDriverCompletion uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDriverConnectA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(hwnd), uintptr(unsafe.Pointer(szConnStrIn)), uintptr(cbConnStrIn), uintptr(unsafe.Pointer(szConnStrOut)), uintptr(cbConnStrOutMax), uintptr(unsafe.Pointer(pcbConnStrOut)), uintptr(fDriverCompletion))
+func SQLDriverConnectA(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn []byte, szConnStrOut []byte, pcbConnStrOut *int16, fDriverCompletion uint16) int16 {
+	var _szConnStrIn *byte
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *byte
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDriverConnectA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(hwnd), uintptr(unsafe.Pointer(_szConnStrIn)), uintptr(len(szConnStrIn)), uintptr(unsafe.Pointer(_szConnStrOut)), uintptr(len(szConnStrOut)), uintptr(unsafe.Pointer(pcbConnStrOut)), uintptr(fDriverCompletion))
 	return int16(r1)
 }
 
 // SQLDriverConnectW calls ODBC32!SQLDriverConnectW.
-func SQLDriverConnectW(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn *uint16, cchConnStrIn int16, szConnStrOut *uint16, cchConnStrOutMax int16, pcchConnStrOut *int16, fDriverCompletion uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDriverConnectW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(hwnd), uintptr(unsafe.Pointer(szConnStrIn)), uintptr(cchConnStrIn), uintptr(unsafe.Pointer(szConnStrOut)), uintptr(cchConnStrOutMax), uintptr(unsafe.Pointer(pcchConnStrOut)), uintptr(fDriverCompletion))
+func SQLDriverConnectW(hdbc unsafe.Pointer, hwnd uintptr, szConnStrIn []uint16, szConnStrOut []uint16, pcchConnStrOut *int16, fDriverCompletion uint16) int16 {
+	var _szConnStrIn *uint16
+	if len(szConnStrIn) > 0 {
+		_szConnStrIn = &szConnStrIn[0]
+	}
+	var _szConnStrOut *uint16
+	if len(szConnStrOut) > 0 {
+		_szConnStrOut = &szConnStrOut[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDriverConnectW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(hwnd), uintptr(unsafe.Pointer(_szConnStrIn)), uintptr(len(szConnStrIn)), uintptr(unsafe.Pointer(_szConnStrOut)), uintptr(len(szConnStrOut)), uintptr(unsafe.Pointer(pcchConnStrOut)), uintptr(fDriverCompletion))
 	return int16(r1)
 }
 
 // SQLDrivers calls ODBC32!SQLDrivers.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqldrivers-function
-func SQLDrivers(henv unsafe.Pointer, fDirection uint16, szDriverDesc *byte, cchDriverDescMax int16, pcchDriverDesc *int16, szDriverAttributes *byte, cchDrvrAttrMax int16, pcchDrvrAttr *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDrivers.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(szDriverDesc)), uintptr(cchDriverDescMax), uintptr(unsafe.Pointer(pcchDriverDesc)), uintptr(unsafe.Pointer(szDriverAttributes)), uintptr(cchDrvrAttrMax), uintptr(unsafe.Pointer(pcchDrvrAttr)))
+func SQLDrivers(henv unsafe.Pointer, fDirection uint16, szDriverDesc []byte, pcchDriverDesc *int16, szDriverAttributes []byte, pcchDrvrAttr *int16) int16 {
+	var _szDriverDesc *byte
+	if len(szDriverDesc) > 0 {
+		_szDriverDesc = &szDriverDesc[0]
+	}
+	var _szDriverAttributes *byte
+	if len(szDriverAttributes) > 0 {
+		_szDriverAttributes = &szDriverAttributes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDrivers.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(_szDriverDesc)), uintptr(len(szDriverDesc)), uintptr(unsafe.Pointer(pcchDriverDesc)), uintptr(unsafe.Pointer(_szDriverAttributes)), uintptr(len(szDriverAttributes)), uintptr(unsafe.Pointer(pcchDrvrAttr)))
 	return int16(r1)
 }
 
 // SQLDriversA calls ODBC32!SQLDriversA.
-func SQLDriversA(henv unsafe.Pointer, fDirection uint16, szDriverDesc *byte, cbDriverDescMax int16, pcbDriverDesc *int16, szDriverAttributes *byte, cbDrvrAttrMax int16, pcbDrvrAttr *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDriversA.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(szDriverDesc)), uintptr(cbDriverDescMax), uintptr(unsafe.Pointer(pcbDriverDesc)), uintptr(unsafe.Pointer(szDriverAttributes)), uintptr(cbDrvrAttrMax), uintptr(unsafe.Pointer(pcbDrvrAttr)))
+func SQLDriversA(henv unsafe.Pointer, fDirection uint16, szDriverDesc []byte, pcbDriverDesc *int16, szDriverAttributes []byte, pcbDrvrAttr *int16) int16 {
+	var _szDriverDesc *byte
+	if len(szDriverDesc) > 0 {
+		_szDriverDesc = &szDriverDesc[0]
+	}
+	var _szDriverAttributes *byte
+	if len(szDriverAttributes) > 0 {
+		_szDriverAttributes = &szDriverAttributes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDriversA.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(_szDriverDesc)), uintptr(len(szDriverDesc)), uintptr(unsafe.Pointer(pcbDriverDesc)), uintptr(unsafe.Pointer(_szDriverAttributes)), uintptr(len(szDriverAttributes)), uintptr(unsafe.Pointer(pcbDrvrAttr)))
 	return int16(r1)
 }
 
 // SQLDriversW calls ODBC32!SQLDriversW.
-func SQLDriversW(henv unsafe.Pointer, fDirection uint16, szDriverDesc *uint16, cchDriverDescMax int16, pcchDriverDesc *int16, szDriverAttributes *uint16, cchDrvrAttrMax int16, pcchDrvrAttr *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLDriversW.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(szDriverDesc)), uintptr(cchDriverDescMax), uintptr(unsafe.Pointer(pcchDriverDesc)), uintptr(unsafe.Pointer(szDriverAttributes)), uintptr(cchDrvrAttrMax), uintptr(unsafe.Pointer(pcchDrvrAttr)))
+func SQLDriversW(henv unsafe.Pointer, fDirection uint16, szDriverDesc []uint16, pcchDriverDesc *int16, szDriverAttributes []uint16, pcchDrvrAttr *int16) int16 {
+	var _szDriverDesc *uint16
+	if len(szDriverDesc) > 0 {
+		_szDriverDesc = &szDriverDesc[0]
+	}
+	var _szDriverAttributes *uint16
+	if len(szDriverAttributes) > 0 {
+		_szDriverAttributes = &szDriverAttributes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLDriversW.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(fDirection), uintptr(unsafe.Pointer(_szDriverDesc)), uintptr(len(szDriverDesc)), uintptr(unsafe.Pointer(pcchDriverDesc)), uintptr(unsafe.Pointer(_szDriverAttributes)), uintptr(len(szDriverAttributes)), uintptr(unsafe.Pointer(pcchDrvrAttr)))
 	return int16(r1)
 }
 
@@ -528,39 +912,63 @@ func SQLEndTran(HandleType int16, Handle unsafe.Pointer, CompletionType int16) i
 
 // SQLError calls ODBC32!SQLError.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlerror-function
-func SQLError(EnvironmentHandle unsafe.Pointer, ConnectionHandle unsafe.Pointer, StatementHandle unsafe.Pointer, Sqlstate *byte, NativeError *int32, MessageText *byte, BufferLength int16, TextLength *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLError.Addr(), uintptr(unsafe.Pointer(EnvironmentHandle)), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(Sqlstate)), uintptr(unsafe.Pointer(NativeError)), uintptr(unsafe.Pointer(MessageText)), uintptr(BufferLength), uintptr(unsafe.Pointer(TextLength)))
+func SQLError(EnvironmentHandle unsafe.Pointer, ConnectionHandle unsafe.Pointer, StatementHandle unsafe.Pointer, Sqlstate *byte, NativeError *int32, MessageText []byte, TextLength *int16) int16 {
+	var _MessageText *byte
+	if len(MessageText) > 0 {
+		_MessageText = &MessageText[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLError.Addr(), uintptr(unsafe.Pointer(EnvironmentHandle)), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(Sqlstate)), uintptr(unsafe.Pointer(NativeError)), uintptr(unsafe.Pointer(_MessageText)), uintptr(len(MessageText)), uintptr(unsafe.Pointer(TextLength)))
 	return int16(r1)
 }
 
 // SQLErrorA calls ODBC32!SQLErrorA.
-func SQLErrorA(henv unsafe.Pointer, hdbc unsafe.Pointer, hstmt unsafe.Pointer, szSqlState *byte, pfNativeError *int32, szErrorMsg *byte, cbErrorMsgMax int16, pcbErrorMsg *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLErrorA.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szSqlState)), uintptr(unsafe.Pointer(pfNativeError)), uintptr(unsafe.Pointer(szErrorMsg)), uintptr(cbErrorMsgMax), uintptr(unsafe.Pointer(pcbErrorMsg)))
+func SQLErrorA(henv unsafe.Pointer, hdbc unsafe.Pointer, hstmt unsafe.Pointer, szSqlState *byte, pfNativeError *int32, szErrorMsg []byte, pcbErrorMsg *int16) int16 {
+	var _szErrorMsg *byte
+	if len(szErrorMsg) > 0 {
+		_szErrorMsg = &szErrorMsg[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLErrorA.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szSqlState)), uintptr(unsafe.Pointer(pfNativeError)), uintptr(unsafe.Pointer(_szErrorMsg)), uintptr(len(szErrorMsg)), uintptr(unsafe.Pointer(pcbErrorMsg)))
 	return int16(r1)
 }
 
 // SQLErrorW calls ODBC32!SQLErrorW.
-func SQLErrorW(henv unsafe.Pointer, hdbc unsafe.Pointer, hstmt unsafe.Pointer, wszSqlState *uint16, pfNativeError *int32, wszErrorMsg *uint16, cchErrorMsgMax int16, pcchErrorMsg *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLErrorW.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(wszSqlState)), uintptr(unsafe.Pointer(pfNativeError)), uintptr(unsafe.Pointer(wszErrorMsg)), uintptr(cchErrorMsgMax), uintptr(unsafe.Pointer(pcchErrorMsg)))
+func SQLErrorW(henv unsafe.Pointer, hdbc unsafe.Pointer, hstmt unsafe.Pointer, wszSqlState *uint16, pfNativeError *int32, wszErrorMsg []uint16, pcchErrorMsg *int16) int16 {
+	var _wszErrorMsg *uint16
+	if len(wszErrorMsg) > 0 {
+		_wszErrorMsg = &wszErrorMsg[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLErrorW.Addr(), uintptr(unsafe.Pointer(henv)), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(wszSqlState)), uintptr(unsafe.Pointer(pfNativeError)), uintptr(unsafe.Pointer(_wszErrorMsg)), uintptr(len(wszErrorMsg)), uintptr(unsafe.Pointer(pcchErrorMsg)))
 	return int16(r1)
 }
 
 // SQLExecDirect calls ODBC32!SQLExecDirect.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlexecdirect-function
-func SQLExecDirect(StatementHandle unsafe.Pointer, StatementText *byte, TextLength int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLExecDirect.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(StatementText)), uintptr(TextLength))
+func SQLExecDirect(StatementHandle unsafe.Pointer, StatementText []byte) int16 {
+	var _StatementText *byte
+	if len(StatementText) > 0 {
+		_StatementText = &StatementText[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLExecDirect.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(_StatementText)), uintptr(len(StatementText)))
 	return int16(r1)
 }
 
 // SQLExecDirectA calls ODBC32!SQLExecDirectA.
-func SQLExecDirectA(hstmt unsafe.Pointer, szSqlStr *byte, cbSqlStr int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLExecDirectA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szSqlStr)), uintptr(cbSqlStr))
+func SQLExecDirectA(hstmt unsafe.Pointer, szSqlStr []byte) int16 {
+	var _szSqlStr *byte
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLExecDirectA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szSqlStr)), uintptr(len(szSqlStr)))
 	return int16(r1)
 }
 
 // SQLExecDirectW calls ODBC32!SQLExecDirectW.
-func SQLExecDirectW(hstmt unsafe.Pointer, szSqlStr *uint16, TextLength int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLExecDirectW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szSqlStr)), uintptr(TextLength))
+func SQLExecDirectW(hstmt unsafe.Pointer, szSqlStr []uint16) int16 {
+	var _szSqlStr *uint16
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLExecDirectW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szSqlStr)), uintptr(len(szSqlStr)))
 	return int16(r1)
 }
 
@@ -594,20 +1002,92 @@ func SQLFetchScroll(StatementHandle unsafe.Pointer, FetchOrientation int16, Fetc
 
 // SQLForeignKeys calls ODBC32!SQLForeignKeys.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlforeignkeys-function
-func SQLForeignKeys(hstmt unsafe.Pointer, szPkCatalogName *byte, cchPkCatalogName int16, szPkSchemaName *byte, cchPkSchemaName int16, szPkTableName *byte, cchPkTableName int16, szFkCatalogName *byte, cchFkCatalogName int16, szFkSchemaName *byte, cchFkSchemaName int16, szFkTableName *byte, cchFkTableName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLForeignKeys.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szPkCatalogName)), uintptr(cchPkCatalogName), uintptr(unsafe.Pointer(szPkSchemaName)), uintptr(cchPkSchemaName), uintptr(unsafe.Pointer(szPkTableName)), uintptr(cchPkTableName), uintptr(unsafe.Pointer(szFkCatalogName)), uintptr(cchFkCatalogName), uintptr(unsafe.Pointer(szFkSchemaName)), uintptr(cchFkSchemaName), uintptr(unsafe.Pointer(szFkTableName)), uintptr(cchFkTableName))
+func SQLForeignKeys(hstmt unsafe.Pointer, szPkCatalogName []byte, szPkSchemaName []byte, szPkTableName []byte, szFkCatalogName []byte, szFkSchemaName []byte, szFkTableName []byte) int16 {
+	var _szPkCatalogName *byte
+	if len(szPkCatalogName) > 0 {
+		_szPkCatalogName = &szPkCatalogName[0]
+	}
+	var _szPkSchemaName *byte
+	if len(szPkSchemaName) > 0 {
+		_szPkSchemaName = &szPkSchemaName[0]
+	}
+	var _szPkTableName *byte
+	if len(szPkTableName) > 0 {
+		_szPkTableName = &szPkTableName[0]
+	}
+	var _szFkCatalogName *byte
+	if len(szFkCatalogName) > 0 {
+		_szFkCatalogName = &szFkCatalogName[0]
+	}
+	var _szFkSchemaName *byte
+	if len(szFkSchemaName) > 0 {
+		_szFkSchemaName = &szFkSchemaName[0]
+	}
+	var _szFkTableName *byte
+	if len(szFkTableName) > 0 {
+		_szFkTableName = &szFkTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLForeignKeys.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szPkCatalogName)), uintptr(len(szPkCatalogName)), uintptr(unsafe.Pointer(_szPkSchemaName)), uintptr(len(szPkSchemaName)), uintptr(unsafe.Pointer(_szPkTableName)), uintptr(len(szPkTableName)), uintptr(unsafe.Pointer(_szFkCatalogName)), uintptr(len(szFkCatalogName)), uintptr(unsafe.Pointer(_szFkSchemaName)), uintptr(len(szFkSchemaName)), uintptr(unsafe.Pointer(_szFkTableName)), uintptr(len(szFkTableName)))
 	return int16(r1)
 }
 
 // SQLForeignKeysA calls ODBC32!SQLForeignKeysA.
-func SQLForeignKeysA(hstmt unsafe.Pointer, szPkCatalogName *byte, cbPkCatalogName int16, szPkSchemaName *byte, cbPkSchemaName int16, szPkTableName *byte, cbPkTableName int16, szFkCatalogName *byte, cbFkCatalogName int16, szFkSchemaName *byte, cbFkSchemaName int16, szFkTableName *byte, cbFkTableName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLForeignKeysA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szPkCatalogName)), uintptr(cbPkCatalogName), uintptr(unsafe.Pointer(szPkSchemaName)), uintptr(cbPkSchemaName), uintptr(unsafe.Pointer(szPkTableName)), uintptr(cbPkTableName), uintptr(unsafe.Pointer(szFkCatalogName)), uintptr(cbFkCatalogName), uintptr(unsafe.Pointer(szFkSchemaName)), uintptr(cbFkSchemaName), uintptr(unsafe.Pointer(szFkTableName)), uintptr(cbFkTableName))
+func SQLForeignKeysA(hstmt unsafe.Pointer, szPkCatalogName []byte, szPkSchemaName []byte, szPkTableName []byte, szFkCatalogName []byte, szFkSchemaName []byte, szFkTableName []byte) int16 {
+	var _szPkCatalogName *byte
+	if len(szPkCatalogName) > 0 {
+		_szPkCatalogName = &szPkCatalogName[0]
+	}
+	var _szPkSchemaName *byte
+	if len(szPkSchemaName) > 0 {
+		_szPkSchemaName = &szPkSchemaName[0]
+	}
+	var _szPkTableName *byte
+	if len(szPkTableName) > 0 {
+		_szPkTableName = &szPkTableName[0]
+	}
+	var _szFkCatalogName *byte
+	if len(szFkCatalogName) > 0 {
+		_szFkCatalogName = &szFkCatalogName[0]
+	}
+	var _szFkSchemaName *byte
+	if len(szFkSchemaName) > 0 {
+		_szFkSchemaName = &szFkSchemaName[0]
+	}
+	var _szFkTableName *byte
+	if len(szFkTableName) > 0 {
+		_szFkTableName = &szFkTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLForeignKeysA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szPkCatalogName)), uintptr(len(szPkCatalogName)), uintptr(unsafe.Pointer(_szPkSchemaName)), uintptr(len(szPkSchemaName)), uintptr(unsafe.Pointer(_szPkTableName)), uintptr(len(szPkTableName)), uintptr(unsafe.Pointer(_szFkCatalogName)), uintptr(len(szFkCatalogName)), uintptr(unsafe.Pointer(_szFkSchemaName)), uintptr(len(szFkSchemaName)), uintptr(unsafe.Pointer(_szFkTableName)), uintptr(len(szFkTableName)))
 	return int16(r1)
 }
 
 // SQLForeignKeysW calls ODBC32!SQLForeignKeysW.
-func SQLForeignKeysW(hstmt unsafe.Pointer, szPkCatalogName *uint16, cchPkCatalogName int16, szPkSchemaName *uint16, cchPkSchemaName int16, szPkTableName *uint16, cchPkTableName int16, szFkCatalogName *uint16, cchFkCatalogName int16, szFkSchemaName *uint16, cchFkSchemaName int16, szFkTableName *uint16, cchFkTableName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLForeignKeysW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szPkCatalogName)), uintptr(cchPkCatalogName), uintptr(unsafe.Pointer(szPkSchemaName)), uintptr(cchPkSchemaName), uintptr(unsafe.Pointer(szPkTableName)), uintptr(cchPkTableName), uintptr(unsafe.Pointer(szFkCatalogName)), uintptr(cchFkCatalogName), uintptr(unsafe.Pointer(szFkSchemaName)), uintptr(cchFkSchemaName), uintptr(unsafe.Pointer(szFkTableName)), uintptr(cchFkTableName))
+func SQLForeignKeysW(hstmt unsafe.Pointer, szPkCatalogName []uint16, szPkSchemaName []uint16, szPkTableName []uint16, szFkCatalogName []uint16, szFkSchemaName []uint16, szFkTableName []uint16) int16 {
+	var _szPkCatalogName *uint16
+	if len(szPkCatalogName) > 0 {
+		_szPkCatalogName = &szPkCatalogName[0]
+	}
+	var _szPkSchemaName *uint16
+	if len(szPkSchemaName) > 0 {
+		_szPkSchemaName = &szPkSchemaName[0]
+	}
+	var _szPkTableName *uint16
+	if len(szPkTableName) > 0 {
+		_szPkTableName = &szPkTableName[0]
+	}
+	var _szFkCatalogName *uint16
+	if len(szFkCatalogName) > 0 {
+		_szFkCatalogName = &szFkCatalogName[0]
+	}
+	var _szFkSchemaName *uint16
+	if len(szFkSchemaName) > 0 {
+		_szFkSchemaName = &szFkSchemaName[0]
+	}
+	var _szFkTableName *uint16
+	if len(szFkTableName) > 0 {
+		_szFkTableName = &szFkTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLForeignKeysW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szPkCatalogName)), uintptr(len(szPkCatalogName)), uintptr(unsafe.Pointer(_szPkSchemaName)), uintptr(len(szPkSchemaName)), uintptr(unsafe.Pointer(_szPkTableName)), uintptr(len(szPkTableName)), uintptr(unsafe.Pointer(_szFkCatalogName)), uintptr(len(szFkCatalogName)), uintptr(unsafe.Pointer(_szFkSchemaName)), uintptr(len(szFkSchemaName)), uintptr(unsafe.Pointer(_szFkTableName)), uintptr(len(szFkTableName)))
 	return int16(r1)
 }
 
@@ -679,20 +1159,32 @@ func SQLGetConnectOptionW(hdbc unsafe.Pointer, fOption uint16, pvParam unsafe.Po
 
 // SQLGetCursorName calls ODBC32!SQLGetCursorName.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlgetcursorname-function
-func SQLGetCursorName(StatementHandle unsafe.Pointer, CursorName *byte, BufferLength int16, NameLengthPtr *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetCursorName.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(CursorName)), uintptr(BufferLength), uintptr(unsafe.Pointer(NameLengthPtr)))
+func SQLGetCursorName(StatementHandle unsafe.Pointer, CursorName []byte, NameLengthPtr *int16) int16 {
+	var _CursorName *byte
+	if len(CursorName) > 0 {
+		_CursorName = &CursorName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetCursorName.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(_CursorName)), uintptr(len(CursorName)), uintptr(unsafe.Pointer(NameLengthPtr)))
 	return int16(r1)
 }
 
 // SQLGetCursorNameA calls ODBC32!SQLGetCursorNameA.
-func SQLGetCursorNameA(hstmt unsafe.Pointer, szCursor *byte, cbCursorMax int16, pcbCursor *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetCursorNameA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCursor)), uintptr(cbCursorMax), uintptr(unsafe.Pointer(pcbCursor)))
+func SQLGetCursorNameA(hstmt unsafe.Pointer, szCursor []byte, pcbCursor *int16) int16 {
+	var _szCursor *byte
+	if len(szCursor) > 0 {
+		_szCursor = &szCursor[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetCursorNameA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCursor)), uintptr(len(szCursor)), uintptr(unsafe.Pointer(pcbCursor)))
 	return int16(r1)
 }
 
 // SQLGetCursorNameW calls ODBC32!SQLGetCursorNameW.
-func SQLGetCursorNameW(hstmt unsafe.Pointer, szCursor *uint16, cchCursorMax int16, pcchCursor *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetCursorNameW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCursor)), uintptr(cchCursorMax), uintptr(unsafe.Pointer(pcchCursor)))
+func SQLGetCursorNameW(hstmt unsafe.Pointer, szCursor []uint16, pcchCursor *int16) int16 {
+	var _szCursor *uint16
+	if len(szCursor) > 0 {
+		_szCursor = &szCursor[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetCursorNameW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCursor)), uintptr(len(szCursor)), uintptr(unsafe.Pointer(pcchCursor)))
 	return int16(r1)
 }
 
@@ -724,20 +1216,32 @@ func SQLGetDescFieldW(hdesc unsafe.Pointer, iRecord int16, iField int16, rgbValu
 
 // SQLGetDescRec calls ODBC32!SQLGetDescRec.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlgetdescrec-function
-func SQLGetDescRec(DescriptorHandle unsafe.Pointer, RecNumber int16, Name *byte, BufferLength int16, StringLengthPtr *int16, TypePtr *int16, SubTypePtr *int16, LengthPtr *int64, PrecisionPtr *int16, ScalePtr *int16, NullablePtr *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetDescRec.Addr(), uintptr(unsafe.Pointer(DescriptorHandle)), uintptr(RecNumber), uintptr(unsafe.Pointer(Name)), uintptr(BufferLength), uintptr(unsafe.Pointer(StringLengthPtr)), uintptr(unsafe.Pointer(TypePtr)), uintptr(unsafe.Pointer(SubTypePtr)), uintptr(unsafe.Pointer(LengthPtr)), uintptr(unsafe.Pointer(PrecisionPtr)), uintptr(unsafe.Pointer(ScalePtr)), uintptr(unsafe.Pointer(NullablePtr)))
+func SQLGetDescRec(DescriptorHandle unsafe.Pointer, RecNumber int16, Name []byte, StringLengthPtr *int16, TypePtr *int16, SubTypePtr *int16, LengthPtr *int64, PrecisionPtr *int16, ScalePtr *int16, NullablePtr *int16) int16 {
+	var _Name *byte
+	if len(Name) > 0 {
+		_Name = &Name[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetDescRec.Addr(), uintptr(unsafe.Pointer(DescriptorHandle)), uintptr(RecNumber), uintptr(unsafe.Pointer(_Name)), uintptr(len(Name)), uintptr(unsafe.Pointer(StringLengthPtr)), uintptr(unsafe.Pointer(TypePtr)), uintptr(unsafe.Pointer(SubTypePtr)), uintptr(unsafe.Pointer(LengthPtr)), uintptr(unsafe.Pointer(PrecisionPtr)), uintptr(unsafe.Pointer(ScalePtr)), uintptr(unsafe.Pointer(NullablePtr)))
 	return int16(r1)
 }
 
 // SQLGetDescRecA calls ODBC32!SQLGetDescRecA.
-func SQLGetDescRecA(hdesc unsafe.Pointer, iRecord int16, szName *byte, cbNameMax int16, pcbName *int16, pfType *int16, pfSubType *int16, pLength *int64, pPrecision *int16, pScale *int16, pNullable *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetDescRecA.Addr(), uintptr(unsafe.Pointer(hdesc)), uintptr(iRecord), uintptr(unsafe.Pointer(szName)), uintptr(cbNameMax), uintptr(unsafe.Pointer(pcbName)), uintptr(unsafe.Pointer(pfType)), uintptr(unsafe.Pointer(pfSubType)), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(pPrecision)), uintptr(unsafe.Pointer(pScale)), uintptr(unsafe.Pointer(pNullable)))
+func SQLGetDescRecA(hdesc unsafe.Pointer, iRecord int16, szName []byte, pcbName *int16, pfType *int16, pfSubType *int16, pLength *int64, pPrecision *int16, pScale *int16, pNullable *int16) int16 {
+	var _szName *byte
+	if len(szName) > 0 {
+		_szName = &szName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetDescRecA.Addr(), uintptr(unsafe.Pointer(hdesc)), uintptr(iRecord), uintptr(unsafe.Pointer(_szName)), uintptr(len(szName)), uintptr(unsafe.Pointer(pcbName)), uintptr(unsafe.Pointer(pfType)), uintptr(unsafe.Pointer(pfSubType)), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(pPrecision)), uintptr(unsafe.Pointer(pScale)), uintptr(unsafe.Pointer(pNullable)))
 	return int16(r1)
 }
 
 // SQLGetDescRecW calls ODBC32!SQLGetDescRecW.
-func SQLGetDescRecW(hdesc unsafe.Pointer, iRecord int16, szName *uint16, cchNameMax int16, pcchName *int16, pfType *int16, pfSubType *int16, pLength *int64, pPrecision *int16, pScale *int16, pNullable *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetDescRecW.Addr(), uintptr(unsafe.Pointer(hdesc)), uintptr(iRecord), uintptr(unsafe.Pointer(szName)), uintptr(cchNameMax), uintptr(unsafe.Pointer(pcchName)), uintptr(unsafe.Pointer(pfType)), uintptr(unsafe.Pointer(pfSubType)), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(pPrecision)), uintptr(unsafe.Pointer(pScale)), uintptr(unsafe.Pointer(pNullable)))
+func SQLGetDescRecW(hdesc unsafe.Pointer, iRecord int16, szName []uint16, pcchName *int16, pfType *int16, pfSubType *int16, pLength *int64, pPrecision *int16, pScale *int16, pNullable *int16) int16 {
+	var _szName *uint16
+	if len(szName) > 0 {
+		_szName = &szName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetDescRecW.Addr(), uintptr(unsafe.Pointer(hdesc)), uintptr(iRecord), uintptr(unsafe.Pointer(_szName)), uintptr(len(szName)), uintptr(unsafe.Pointer(pcchName)), uintptr(unsafe.Pointer(pfType)), uintptr(unsafe.Pointer(pfSubType)), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(pPrecision)), uintptr(unsafe.Pointer(pScale)), uintptr(unsafe.Pointer(pNullable)))
 	return int16(r1)
 }
 
@@ -762,20 +1266,32 @@ func SQLGetDiagFieldW(fHandleType int16, handle unsafe.Pointer, iRecord int16, f
 
 // SQLGetDiagRec calls ODBC32!SQLGetDiagRec.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlgetdiagrec-function
-func SQLGetDiagRec(HandleType int16, Handle unsafe.Pointer, RecNumber int16, Sqlstate *byte, NativeError *int32, MessageText *byte, BufferLength int16, TextLength *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetDiagRec.Addr(), uintptr(HandleType), uintptr(unsafe.Pointer(Handle)), uintptr(RecNumber), uintptr(unsafe.Pointer(Sqlstate)), uintptr(unsafe.Pointer(NativeError)), uintptr(unsafe.Pointer(MessageText)), uintptr(BufferLength), uintptr(unsafe.Pointer(TextLength)))
+func SQLGetDiagRec(HandleType int16, Handle unsafe.Pointer, RecNumber int16, Sqlstate *byte, NativeError *int32, MessageText []byte, TextLength *int16) int16 {
+	var _MessageText *byte
+	if len(MessageText) > 0 {
+		_MessageText = &MessageText[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetDiagRec.Addr(), uintptr(HandleType), uintptr(unsafe.Pointer(Handle)), uintptr(RecNumber), uintptr(unsafe.Pointer(Sqlstate)), uintptr(unsafe.Pointer(NativeError)), uintptr(unsafe.Pointer(_MessageText)), uintptr(len(MessageText)), uintptr(unsafe.Pointer(TextLength)))
 	return int16(r1)
 }
 
 // SQLGetDiagRecA calls ODBC32!SQLGetDiagRecA.
-func SQLGetDiagRecA(fHandleType int16, handle unsafe.Pointer, iRecord int16, szSqlState *byte, pfNativeError *int32, szErrorMsg *byte, cbErrorMsgMax int16, pcbErrorMsg *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetDiagRecA.Addr(), uintptr(fHandleType), uintptr(unsafe.Pointer(handle)), uintptr(iRecord), uintptr(unsafe.Pointer(szSqlState)), uintptr(unsafe.Pointer(pfNativeError)), uintptr(unsafe.Pointer(szErrorMsg)), uintptr(cbErrorMsgMax), uintptr(unsafe.Pointer(pcbErrorMsg)))
+func SQLGetDiagRecA(fHandleType int16, handle unsafe.Pointer, iRecord int16, szSqlState *byte, pfNativeError *int32, szErrorMsg []byte, pcbErrorMsg *int16) int16 {
+	var _szErrorMsg *byte
+	if len(szErrorMsg) > 0 {
+		_szErrorMsg = &szErrorMsg[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetDiagRecA.Addr(), uintptr(fHandleType), uintptr(unsafe.Pointer(handle)), uintptr(iRecord), uintptr(unsafe.Pointer(szSqlState)), uintptr(unsafe.Pointer(pfNativeError)), uintptr(unsafe.Pointer(_szErrorMsg)), uintptr(len(szErrorMsg)), uintptr(unsafe.Pointer(pcbErrorMsg)))
 	return int16(r1)
 }
 
 // SQLGetDiagRecW calls ODBC32!SQLGetDiagRecW.
-func SQLGetDiagRecW(fHandleType int16, handle unsafe.Pointer, iRecord int16, szSqlState *uint16, pfNativeError *int32, szErrorMsg *uint16, cchErrorMsgMax int16, pcchErrorMsg *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetDiagRecW.Addr(), uintptr(fHandleType), uintptr(unsafe.Pointer(handle)), uintptr(iRecord), uintptr(unsafe.Pointer(szSqlState)), uintptr(unsafe.Pointer(pfNativeError)), uintptr(unsafe.Pointer(szErrorMsg)), uintptr(cchErrorMsgMax), uintptr(unsafe.Pointer(pcchErrorMsg)))
+func SQLGetDiagRecW(fHandleType int16, handle unsafe.Pointer, iRecord int16, szSqlState *uint16, pfNativeError *int32, szErrorMsg []uint16, pcchErrorMsg *int16) int16 {
+	var _szErrorMsg *uint16
+	if len(szErrorMsg) > 0 {
+		_szErrorMsg = &szErrorMsg[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetDiagRecW.Addr(), uintptr(fHandleType), uintptr(unsafe.Pointer(handle)), uintptr(iRecord), uintptr(unsafe.Pointer(szSqlState)), uintptr(unsafe.Pointer(pfNativeError)), uintptr(unsafe.Pointer(_szErrorMsg)), uintptr(len(szErrorMsg)), uintptr(unsafe.Pointer(pcchErrorMsg)))
 	return int16(r1)
 }
 
@@ -864,20 +1380,23 @@ func SQLGetTypeInfoW(StatementHandle unsafe.Pointer, DataType int16) int16 {
 }
 
 // SQLInitEnumServers calls odbcbcp!SQLInitEnumServers.
-func SQLInitEnumServers(pwchServerName foundation.PWSTR, pwchInstanceName foundation.PWSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procSQLInitEnumServers.Addr(), uintptr(unsafe.Pointer(pwchServerName)), uintptr(unsafe.Pointer(pwchInstanceName)))
+func SQLInitEnumServers(pwchServerName string, pwchInstanceName string) foundation.HANDLE {
+	_pwchServerName := win32.UTF16Ptr(pwchServerName)
+	_pwchInstanceName := win32.UTF16Ptr(pwchInstanceName)
+	r1, _, _ := syscall.SyscallN(procSQLInitEnumServers.Addr(), uintptr(unsafe.Pointer(_pwchServerName)), uintptr(unsafe.Pointer(_pwchInstanceName)))
 	return foundation.HANDLE(r1)
+}
+
+// SQLLinkedCatalogs calls odbcbcp!SQLLinkedCatalogsW.
+func SQLLinkedCatalogs(param0 unsafe.Pointer, param1 string, param2 int16) int16 {
+	_param1 := win32.UTF16Ptr(param1)
+	r1, _, _ := syscall.SyscallN(procSQLLinkedCatalogs.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(param2))
+	return int16(r1)
 }
 
 // SQLLinkedCatalogsA calls odbcbcp!SQLLinkedCatalogsA.
 func SQLLinkedCatalogsA(param0 unsafe.Pointer, param1 foundation.PSTR, param2 int16) int16 {
 	r1, _, _ := syscall.SyscallN(procSQLLinkedCatalogsA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return int16(r1)
-}
-
-// SQLLinkedCatalogsW calls odbcbcp!SQLLinkedCatalogsW.
-func SQLLinkedCatalogsW(param0 unsafe.Pointer, param1 foundation.PWSTR, param2 int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLLinkedCatalogsW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
 	return int16(r1)
 }
 
@@ -896,20 +1415,44 @@ func SQLMoreResults(hstmt unsafe.Pointer) int16 {
 
 // SQLNativeSql calls ODBC32!SQLNativeSql.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlnativesql-function
-func SQLNativeSql(hdbc unsafe.Pointer, szSqlStrIn *byte, cchSqlStrIn int32, szSqlStr *byte, cchSqlStrMax int32, pcbSqlStr *int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLNativeSql.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(szSqlStrIn)), uintptr(cchSqlStrIn), uintptr(unsafe.Pointer(szSqlStr)), uintptr(cchSqlStrMax), uintptr(unsafe.Pointer(pcbSqlStr)))
+func SQLNativeSql(hdbc unsafe.Pointer, szSqlStrIn []byte, szSqlStr []byte, pcbSqlStr *int32) int16 {
+	var _szSqlStrIn *byte
+	if len(szSqlStrIn) > 0 {
+		_szSqlStrIn = &szSqlStrIn[0]
+	}
+	var _szSqlStr *byte
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLNativeSql.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(_szSqlStrIn)), uintptr(len(szSqlStrIn)), uintptr(unsafe.Pointer(_szSqlStr)), uintptr(len(szSqlStr)), uintptr(unsafe.Pointer(pcbSqlStr)))
 	return int16(r1)
 }
 
 // SQLNativeSqlA calls ODBC32!SQLNativeSqlA.
-func SQLNativeSqlA(hdbc unsafe.Pointer, szSqlStrIn *byte, cbSqlStrIn int32, szSqlStr *byte, cbSqlStrMax int32, pcbSqlStr *int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLNativeSqlA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(szSqlStrIn)), uintptr(cbSqlStrIn), uintptr(unsafe.Pointer(szSqlStr)), uintptr(cbSqlStrMax), uintptr(unsafe.Pointer(pcbSqlStr)))
+func SQLNativeSqlA(hdbc unsafe.Pointer, szSqlStrIn []byte, szSqlStr []byte, pcbSqlStr *int32) int16 {
+	var _szSqlStrIn *byte
+	if len(szSqlStrIn) > 0 {
+		_szSqlStrIn = &szSqlStrIn[0]
+	}
+	var _szSqlStr *byte
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLNativeSqlA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(_szSqlStrIn)), uintptr(len(szSqlStrIn)), uintptr(unsafe.Pointer(_szSqlStr)), uintptr(len(szSqlStr)), uintptr(unsafe.Pointer(pcbSqlStr)))
 	return int16(r1)
 }
 
 // SQLNativeSqlW calls ODBC32!SQLNativeSqlW.
-func SQLNativeSqlW(hdbc unsafe.Pointer, szSqlStrIn *uint16, cchSqlStrIn int32, szSqlStr *uint16, cchSqlStrMax int32, pcchSqlStr *int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLNativeSqlW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(szSqlStrIn)), uintptr(cchSqlStrIn), uintptr(unsafe.Pointer(szSqlStr)), uintptr(cchSqlStrMax), uintptr(unsafe.Pointer(pcchSqlStr)))
+func SQLNativeSqlW(hdbc unsafe.Pointer, szSqlStrIn []uint16, szSqlStr []uint16, pcchSqlStr *int32) int16 {
+	var _szSqlStrIn *uint16
+	if len(szSqlStrIn) > 0 {
+		_szSqlStrIn = &szSqlStrIn[0]
+	}
+	var _szSqlStr *uint16
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLNativeSqlW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(unsafe.Pointer(_szSqlStrIn)), uintptr(len(szSqlStrIn)), uintptr(unsafe.Pointer(_szSqlStr)), uintptr(len(szSqlStr)), uintptr(unsafe.Pointer(pcchSqlStr)))
 	return int16(r1)
 }
 
@@ -943,77 +1486,209 @@ func SQLParamOptions(hstmt unsafe.Pointer, crow uint64, pirow *uint64) int16 {
 
 // SQLPrepare calls ODBC32!SQLPrepare.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlprepare-function
-func SQLPrepare(StatementHandle unsafe.Pointer, StatementText *byte, TextLength int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLPrepare.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(StatementText)), uintptr(TextLength))
+func SQLPrepare(StatementHandle unsafe.Pointer, StatementText []byte) int16 {
+	var _StatementText *byte
+	if len(StatementText) > 0 {
+		_StatementText = &StatementText[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLPrepare.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(_StatementText)), uintptr(len(StatementText)))
 	return int16(r1)
 }
 
 // SQLPrepareA calls ODBC32!SQLPrepareA.
-func SQLPrepareA(hstmt unsafe.Pointer, szSqlStr *byte, cbSqlStr int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLPrepareA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szSqlStr)), uintptr(cbSqlStr))
+func SQLPrepareA(hstmt unsafe.Pointer, szSqlStr []byte) int16 {
+	var _szSqlStr *byte
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLPrepareA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szSqlStr)), uintptr(len(szSqlStr)))
 	return int16(r1)
 }
 
 // SQLPrepareW calls ODBC32!SQLPrepareW.
-func SQLPrepareW(hstmt unsafe.Pointer, szSqlStr *uint16, cchSqlStr int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLPrepareW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szSqlStr)), uintptr(cchSqlStr))
+func SQLPrepareW(hstmt unsafe.Pointer, szSqlStr []uint16) int16 {
+	var _szSqlStr *uint16
+	if len(szSqlStr) > 0 {
+		_szSqlStr = &szSqlStr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLPrepareW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szSqlStr)), uintptr(len(szSqlStr)))
 	return int16(r1)
 }
 
 // SQLPrimaryKeys calls ODBC32!SQLPrimaryKeys.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlprimarykeys-function
-func SQLPrimaryKeys(hstmt unsafe.Pointer, szCatalogName *byte, cchCatalogName int16, szSchemaName *byte, cchSchemaName int16, szTableName *byte, cchTableName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLPrimaryKeys.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName))
+func SQLPrimaryKeys(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLPrimaryKeys.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)))
 	return int16(r1)
 }
 
 // SQLPrimaryKeysA calls ODBC32!SQLPrimaryKeysA.
-func SQLPrimaryKeysA(hstmt unsafe.Pointer, szCatalogName *byte, cbCatalogName int16, szSchemaName *byte, cbSchemaName int16, szTableName *byte, cbTableName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLPrimaryKeysA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cbCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cbSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cbTableName))
+func SQLPrimaryKeysA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLPrimaryKeysA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)))
 	return int16(r1)
 }
 
 // SQLPrimaryKeysW calls ODBC32!SQLPrimaryKeysW.
-func SQLPrimaryKeysW(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLPrimaryKeysW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName))
+func SQLPrimaryKeysW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLPrimaryKeysW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)))
 	return int16(r1)
 }
 
 // SQLProcedureColumns calls ODBC32!SQLProcedureColumns.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlprocedurecolumns-function
-func SQLProcedureColumns(hstmt unsafe.Pointer, szCatalogName *byte, cchCatalogName int16, szSchemaName *byte, cchSchemaName int16, szProcName *byte, cchProcName int16, szColumnName *byte, cchColumnName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLProcedureColumns.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szProcName)), uintptr(cchProcName), uintptr(unsafe.Pointer(szColumnName)), uintptr(cchColumnName))
+func SQLProcedureColumns(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szProcName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *byte
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLProcedureColumns.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szProcName)), uintptr(len(szProcName)), uintptr(unsafe.Pointer(_szColumnName)), uintptr(len(szColumnName)))
 	return int16(r1)
 }
 
 // SQLProcedureColumnsA calls ODBC32!SQLProcedureColumnsA.
-func SQLProcedureColumnsA(hstmt unsafe.Pointer, szCatalogName *byte, cbCatalogName int16, szSchemaName *byte, cbSchemaName int16, szProcName *byte, cbProcName int16, szColumnName *byte, cbColumnName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLProcedureColumnsA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cbCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cbSchemaName), uintptr(unsafe.Pointer(szProcName)), uintptr(cbProcName), uintptr(unsafe.Pointer(szColumnName)), uintptr(cbColumnName))
+func SQLProcedureColumnsA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szProcName []byte, szColumnName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *byte
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	var _szColumnName *byte
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLProcedureColumnsA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szProcName)), uintptr(len(szProcName)), uintptr(unsafe.Pointer(_szColumnName)), uintptr(len(szColumnName)))
 	return int16(r1)
 }
 
 // SQLProcedureColumnsW calls ODBC32!SQLProcedureColumnsW.
-func SQLProcedureColumnsW(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szProcName *uint16, cchProcName int16, szColumnName *uint16, cchColumnName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLProcedureColumnsW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szProcName)), uintptr(cchProcName), uintptr(unsafe.Pointer(szColumnName)), uintptr(cchColumnName))
+func SQLProcedureColumnsW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szProcName []uint16, szColumnName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *uint16
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	var _szColumnName *uint16
+	if len(szColumnName) > 0 {
+		_szColumnName = &szColumnName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLProcedureColumnsW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szProcName)), uintptr(len(szProcName)), uintptr(unsafe.Pointer(_szColumnName)), uintptr(len(szColumnName)))
 	return int16(r1)
 }
 
 // SQLProcedures calls ODBC32!SQLProcedures.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlprocedures-function
-func SQLProcedures(hstmt unsafe.Pointer, szCatalogName *byte, cchCatalogName int16, szSchemaName *byte, cchSchemaName int16, szProcName *byte, cchProcName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLProcedures.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szProcName)), uintptr(cchProcName))
+func SQLProcedures(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szProcName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *byte
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLProcedures.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szProcName)), uintptr(len(szProcName)))
 	return int16(r1)
 }
 
 // SQLProceduresA calls ODBC32!SQLProceduresA.
-func SQLProceduresA(hstmt unsafe.Pointer, szCatalogName *byte, cbCatalogName int16, szSchemaName *byte, cbSchemaName int16, szProcName *byte, cbProcName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLProceduresA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cbCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cbSchemaName), uintptr(unsafe.Pointer(szProcName)), uintptr(cbProcName))
+func SQLProceduresA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szProcName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *byte
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLProceduresA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szProcName)), uintptr(len(szProcName)))
 	return int16(r1)
 }
 
 // SQLProceduresW calls ODBC32!SQLProceduresW.
-func SQLProceduresW(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szProcName *uint16, cchProcName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLProceduresW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szProcName)), uintptr(cchProcName))
+func SQLProceduresW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szProcName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szProcName *uint16
+	if len(szProcName) > 0 {
+		_szProcName = &szProcName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLProceduresW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szProcName)), uintptr(len(szProcName)))
 	return int16(r1)
 }
 
@@ -1071,20 +1746,32 @@ func SQLSetConnectOptionW(hdbc unsafe.Pointer, fOption uint16, vParam uint64) in
 
 // SQLSetCursorName calls ODBC32!SQLSetCursorName.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlsetcursorname-function
-func SQLSetCursorName(StatementHandle unsafe.Pointer, CursorName *byte, NameLength int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSetCursorName.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(CursorName)), uintptr(NameLength))
+func SQLSetCursorName(StatementHandle unsafe.Pointer, CursorName []byte) int16 {
+	var _CursorName *byte
+	if len(CursorName) > 0 {
+		_CursorName = &CursorName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSetCursorName.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(_CursorName)), uintptr(len(CursorName)))
 	return int16(r1)
 }
 
 // SQLSetCursorNameA calls ODBC32!SQLSetCursorNameA.
-func SQLSetCursorNameA(hstmt unsafe.Pointer, szCursor *byte, cbCursor int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSetCursorNameA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCursor)), uintptr(cbCursor))
+func SQLSetCursorNameA(hstmt unsafe.Pointer, szCursor []byte) int16 {
+	var _szCursor *byte
+	if len(szCursor) > 0 {
+		_szCursor = &szCursor[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSetCursorNameA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCursor)), uintptr(len(szCursor)))
 	return int16(r1)
 }
 
 // SQLSetCursorNameW calls ODBC32!SQLSetCursorNameW.
-func SQLSetCursorNameW(hstmt unsafe.Pointer, szCursor *uint16, cchCursor int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSetCursorNameW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCursor)), uintptr(cchCursor))
+func SQLSetCursorNameW(hstmt unsafe.Pointer, szCursor []uint16) int16 {
+	var _szCursor *uint16
+	if len(szCursor) > 0 {
+		_szCursor = &szCursor[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSetCursorNameW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCursor)), uintptr(len(szCursor)))
 	return int16(r1)
 }
 
@@ -1158,77 +1845,233 @@ func SQLSetStmtOption(StatementHandle unsafe.Pointer, Option uint16, Value uint6
 
 // SQLSpecialColumns calls ODBC32!SQLSpecialColumns.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlspecialcolumns-function
-func SQLSpecialColumns(StatementHandle unsafe.Pointer, IdentifierType uint16, CatalogName *byte, NameLength1 int16, SchemaName *byte, NameLength2 int16, TableName *byte, NameLength3 int16, Scope uint16, Nullable uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSpecialColumns.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(IdentifierType), uintptr(unsafe.Pointer(CatalogName)), uintptr(NameLength1), uintptr(unsafe.Pointer(SchemaName)), uintptr(NameLength2), uintptr(unsafe.Pointer(TableName)), uintptr(NameLength3), uintptr(Scope), uintptr(Nullable))
+func SQLSpecialColumns(StatementHandle unsafe.Pointer, IdentifierType uint16, CatalogName []byte, SchemaName []byte, TableName []byte, Scope uint16, Nullable uint16) int16 {
+	var _CatalogName *byte
+	if len(CatalogName) > 0 {
+		_CatalogName = &CatalogName[0]
+	}
+	var _SchemaName *byte
+	if len(SchemaName) > 0 {
+		_SchemaName = &SchemaName[0]
+	}
+	var _TableName *byte
+	if len(TableName) > 0 {
+		_TableName = &TableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSpecialColumns.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(IdentifierType), uintptr(unsafe.Pointer(_CatalogName)), uintptr(len(CatalogName)), uintptr(unsafe.Pointer(_SchemaName)), uintptr(len(SchemaName)), uintptr(unsafe.Pointer(_TableName)), uintptr(len(TableName)), uintptr(Scope), uintptr(Nullable))
 	return int16(r1)
 }
 
 // SQLSpecialColumnsA calls ODBC32!SQLSpecialColumnsA.
-func SQLSpecialColumnsA(hstmt unsafe.Pointer, fColType uint16, szCatalogName *byte, cbCatalogName int16, szSchemaName *byte, cbSchemaName int16, szTableName *byte, cbTableName int16, fScope uint16, fNullable uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSpecialColumnsA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(fColType), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cbCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cbSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cbTableName), uintptr(fScope), uintptr(fNullable))
+func SQLSpecialColumnsA(hstmt unsafe.Pointer, fColType uint16, szCatalogName []byte, szSchemaName []byte, szTableName []byte, fScope uint16, fNullable uint16) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSpecialColumnsA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(fColType), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(fScope), uintptr(fNullable))
 	return int16(r1)
 }
 
 // SQLSpecialColumnsW calls ODBC32!SQLSpecialColumnsW.
-func SQLSpecialColumnsW(hstmt unsafe.Pointer, fColType uint16, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, fScope uint16, fNullable uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSpecialColumnsW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(fColType), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName), uintptr(fScope), uintptr(fNullable))
+func SQLSpecialColumnsW(hstmt unsafe.Pointer, fColType uint16, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, fScope uint16, fNullable uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSpecialColumnsW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(fColType), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(fScope), uintptr(fNullable))
 	return int16(r1)
 }
 
 // SQLStatistics calls ODBC32!SQLStatistics.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlstatistics-function
-func SQLStatistics(StatementHandle unsafe.Pointer, CatalogName *byte, NameLength1 int16, SchemaName *byte, NameLength2 int16, TableName *byte, NameLength3 int16, Unique uint16, Reserved uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLStatistics.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(CatalogName)), uintptr(NameLength1), uintptr(unsafe.Pointer(SchemaName)), uintptr(NameLength2), uintptr(unsafe.Pointer(TableName)), uintptr(NameLength3), uintptr(Unique), uintptr(Reserved))
+func SQLStatistics(StatementHandle unsafe.Pointer, CatalogName []byte, SchemaName []byte, TableName []byte, Unique uint16, Reserved uint16) int16 {
+	var _CatalogName *byte
+	if len(CatalogName) > 0 {
+		_CatalogName = &CatalogName[0]
+	}
+	var _SchemaName *byte
+	if len(SchemaName) > 0 {
+		_SchemaName = &SchemaName[0]
+	}
+	var _TableName *byte
+	if len(TableName) > 0 {
+		_TableName = &TableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLStatistics.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(_CatalogName)), uintptr(len(CatalogName)), uintptr(unsafe.Pointer(_SchemaName)), uintptr(len(SchemaName)), uintptr(unsafe.Pointer(_TableName)), uintptr(len(TableName)), uintptr(Unique), uintptr(Reserved))
 	return int16(r1)
 }
 
 // SQLStatisticsA calls ODBC32!SQLStatisticsA.
-func SQLStatisticsA(hstmt unsafe.Pointer, szCatalogName *byte, cbCatalogName int16, szSchemaName *byte, cbSchemaName int16, szTableName *byte, cbTableName int16, fUnique uint16, fAccuracy uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLStatisticsA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cbCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cbSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cbTableName), uintptr(fUnique), uintptr(fAccuracy))
+func SQLStatisticsA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, fUnique uint16, fAccuracy uint16) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLStatisticsA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(fUnique), uintptr(fAccuracy))
 	return int16(r1)
 }
 
 // SQLStatisticsW calls ODBC32!SQLStatisticsW.
-func SQLStatisticsW(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, fUnique uint16, fAccuracy uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLStatisticsW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName), uintptr(fUnique), uintptr(fAccuracy))
+func SQLStatisticsW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, fUnique uint16, fAccuracy uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLStatisticsW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(fUnique), uintptr(fAccuracy))
 	return int16(r1)
 }
 
 // SQLTablePrivileges calls ODBC32!SQLTablePrivileges.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqltableprivileges-function
-func SQLTablePrivileges(hstmt unsafe.Pointer, szCatalogName *byte, cchCatalogName int16, szSchemaName *byte, cchSchemaName int16, szTableName *byte, cchTableName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLTablePrivileges.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName))
+func SQLTablePrivileges(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLTablePrivileges.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)))
 	return int16(r1)
 }
 
 // SQLTablePrivilegesA calls ODBC32!SQLTablePrivilegesA.
-func SQLTablePrivilegesA(hstmt unsafe.Pointer, szCatalogName *byte, cbCatalogName int16, szSchemaName *byte, cbSchemaName int16, szTableName *byte, cbTableName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLTablePrivilegesA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cbCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cbSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cbTableName))
+func SQLTablePrivilegesA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLTablePrivilegesA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)))
 	return int16(r1)
 }
 
 // SQLTablePrivilegesW calls ODBC32!SQLTablePrivilegesW.
-func SQLTablePrivilegesW(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLTablePrivilegesW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName))
+func SQLTablePrivilegesW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLTablePrivilegesW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)))
 	return int16(r1)
 }
 
 // SQLTables calls ODBC32!SQLTables.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqltables-function
-func SQLTables(StatementHandle unsafe.Pointer, CatalogName *byte, NameLength1 int16, SchemaName *byte, NameLength2 int16, TableName *byte, NameLength3 int16, TableType *byte, NameLength4 int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLTables.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(CatalogName)), uintptr(NameLength1), uintptr(unsafe.Pointer(SchemaName)), uintptr(NameLength2), uintptr(unsafe.Pointer(TableName)), uintptr(NameLength3), uintptr(unsafe.Pointer(TableType)), uintptr(NameLength4))
+func SQLTables(StatementHandle unsafe.Pointer, CatalogName []byte, SchemaName []byte, TableName []byte, TableType []byte) int16 {
+	var _CatalogName *byte
+	if len(CatalogName) > 0 {
+		_CatalogName = &CatalogName[0]
+	}
+	var _SchemaName *byte
+	if len(SchemaName) > 0 {
+		_SchemaName = &SchemaName[0]
+	}
+	var _TableName *byte
+	if len(TableName) > 0 {
+		_TableName = &TableName[0]
+	}
+	var _TableType *byte
+	if len(TableType) > 0 {
+		_TableType = &TableType[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLTables.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(unsafe.Pointer(_CatalogName)), uintptr(len(CatalogName)), uintptr(unsafe.Pointer(_SchemaName)), uintptr(len(SchemaName)), uintptr(unsafe.Pointer(_TableName)), uintptr(len(TableName)), uintptr(unsafe.Pointer(_TableType)), uintptr(len(TableType)))
 	return int16(r1)
 }
 
 // SQLTablesA calls ODBC32!SQLTablesA.
-func SQLTablesA(hstmt unsafe.Pointer, szCatalogName *byte, cbCatalogName int16, szSchemaName *byte, cbSchemaName int16, szTableName *byte, cbTableName int16, szTableType *byte, cbTableType int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLTablesA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cbCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cbSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cbTableName), uintptr(unsafe.Pointer(szTableType)), uintptr(cbTableType))
+func SQLTablesA(hstmt unsafe.Pointer, szCatalogName []byte, szSchemaName []byte, szTableName []byte, szTableType []byte) int16 {
+	var _szCatalogName *byte
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *byte
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *byte
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szTableType *byte
+	if len(szTableType) > 0 {
+		_szTableType = &szTableType[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLTablesA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(unsafe.Pointer(_szTableType)), uintptr(len(szTableType)))
 	return int16(r1)
 }
 
 // SQLTablesW calls ODBC32!SQLTablesW.
-func SQLTablesW(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int16, szSchemaName *uint16, cchSchemaName int16, szTableName *uint16, cchTableName int16, szTableType *uint16, cchTableType int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLTablesW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(szCatalogName)), uintptr(cchCatalogName), uintptr(unsafe.Pointer(szSchemaName)), uintptr(cchSchemaName), uintptr(unsafe.Pointer(szTableName)), uintptr(cchTableName), uintptr(unsafe.Pointer(szTableType)), uintptr(cchTableType))
+func SQLTablesW(hstmt unsafe.Pointer, szCatalogName []uint16, szSchemaName []uint16, szTableName []uint16, szTableType []uint16) int16 {
+	var _szCatalogName *uint16
+	if len(szCatalogName) > 0 {
+		_szCatalogName = &szCatalogName[0]
+	}
+	var _szSchemaName *uint16
+	if len(szSchemaName) > 0 {
+		_szSchemaName = &szSchemaName[0]
+	}
+	var _szTableName *uint16
+	if len(szTableName) > 0 {
+		_szTableName = &szTableName[0]
+	}
+	var _szTableType *uint16
+	if len(szTableType) > 0 {
+		_szTableType = &szTableType[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLTablesW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(unsafe.Pointer(_szCatalogName)), uintptr(len(szCatalogName)), uintptr(unsafe.Pointer(_szSchemaName)), uintptr(len(szSchemaName)), uintptr(unsafe.Pointer(_szTableName)), uintptr(len(szTableName)), uintptr(unsafe.Pointer(_szTableType)), uintptr(len(szTableType)))
 	return int16(r1)
 }
 
@@ -1237,143 +2080,4 @@ func SQLTablesW(hstmt unsafe.Pointer, szCatalogName *uint16, cchCatalogName int1
 func SQLTransact(EnvironmentHandle unsafe.Pointer, ConnectionHandle unsafe.Pointer, CompletionType uint16) int16 {
 	r1, _, _ := syscall.SyscallN(procSQLTransact.Addr(), uintptr(unsafe.Pointer(EnvironmentHandle)), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(CompletionType))
 	return int16(r1)
-}
-
-// bcp_batch calls odbcbcp!bcp_batch.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-batch
-func Bcp_batch(param0 unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procBcp_batch.Addr(), uintptr(unsafe.Pointer(param0)))
-	return int32(r1)
-}
-
-// bcp_bind calls odbcbcp!bcp_bind.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-bind
-func Bcp_bind(param0 unsafe.Pointer, param1 *byte, param2 int32, param3 int32, param4 *byte, param5 int32, param6 int32, param7 int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_bind.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2), uintptr(param3), uintptr(unsafe.Pointer(param4)), uintptr(param5), uintptr(param6), uintptr(param7))
-	return int16(r1)
-}
-
-// bcp_colfmt calls odbcbcp!bcp_colfmt.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-colfmt
-func Bcp_colfmt(param0 unsafe.Pointer, param1 int32, param2 byte, param3 int32, param4 int32, param5 *byte, param6 int32, param7 int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_colfmt.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(param4), uintptr(unsafe.Pointer(param5)), uintptr(param6), uintptr(param7))
-	return int16(r1)
-}
-
-// bcp_collen calls odbcbcp!bcp_collen.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-collen
-func Bcp_collen(param0 unsafe.Pointer, param1 int32, param2 int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_collen.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2))
-	return int16(r1)
-}
-
-// bcp_colptr calls odbcbcp!bcp_colptr.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-colptr
-func Bcp_colptr(param0 unsafe.Pointer, param1 *byte, param2 int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_colptr.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(param2))
-	return int16(r1)
-}
-
-// bcp_columns calls odbcbcp!bcp_columns.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-columns
-func Bcp_columns(param0 unsafe.Pointer, param1 int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_columns.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1))
-	return int16(r1)
-}
-
-// bcp_control calls odbcbcp!bcp_control.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-control
-func Bcp_control(param0 unsafe.Pointer, param1 int32, param2 unsafe.Pointer) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_control.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return int16(r1)
-}
-
-// bcp_done calls odbcbcp!bcp_done.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-done
-func Bcp_done(param0 unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procBcp_done.Addr(), uintptr(unsafe.Pointer(param0)))
-	return int32(r1)
-}
-
-// bcp_exec calls odbcbcp!bcp_exec.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-exec
-func Bcp_exec(param0 unsafe.Pointer, param1 *int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_exec.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return int16(r1)
-}
-
-// bcp_getcolfmt calls odbcbcp!bcp_getcolfmt.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-getcolfmt
-func Bcp_getcolfmt(param0 unsafe.Pointer, param1 int32, param2 int32, param3 unsafe.Pointer, param4 int32, param5 *int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_getcolfmt.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(param4), uintptr(unsafe.Pointer(param5)))
-	return int16(r1)
-}
-
-// bcp_initA calls odbcbcp!bcp_initA.
-func Bcp_initA(param0 unsafe.Pointer, param1 foundation.PSTR, param2 foundation.PSTR, param3 foundation.PSTR, param4 int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_initA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return int16(r1)
-}
-
-// bcp_initW calls odbcbcp!bcp_initW.
-func Bcp_initW(param0 unsafe.Pointer, param1 foundation.PWSTR, param2 foundation.PWSTR, param3 foundation.PWSTR, param4 int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_initW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return int16(r1)
-}
-
-// bcp_moretext calls odbcbcp!bcp_moretext.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-moretext
-func Bcp_moretext(param0 unsafe.Pointer, param1 int32, param2 *byte) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_moretext.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)))
-	return int16(r1)
-}
-
-// bcp_readfmtA calls odbcbcp!bcp_readfmtA.
-func Bcp_readfmtA(param0 unsafe.Pointer, param1 foundation.PSTR) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_readfmtA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return int16(r1)
-}
-
-// bcp_readfmtW calls odbcbcp!bcp_readfmtW.
-func Bcp_readfmtW(param0 unsafe.Pointer, param1 foundation.PWSTR) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_readfmtW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return int16(r1)
-}
-
-// bcp_sendrow calls odbcbcp!bcp_sendrow.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-sendrow
-func Bcp_sendrow(param0 unsafe.Pointer) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_sendrow.Addr(), uintptr(unsafe.Pointer(param0)))
-	return int16(r1)
-}
-
-// bcp_setcolfmt calls odbcbcp!bcp_setcolfmt.
-// https://learn.microsoft.com/sql/relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-setcolfmt
-func Bcp_setcolfmt(param0 unsafe.Pointer, param1 int32, param2 int32, param3 unsafe.Pointer, param4 int32) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_setcolfmt.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(param4))
-	return int16(r1)
-}
-
-// bcp_writefmtA calls odbcbcp!bcp_writefmtA.
-func Bcp_writefmtA(param0 unsafe.Pointer, param1 foundation.PSTR) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_writefmtA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return int16(r1)
-}
-
-// bcp_writefmtW calls odbcbcp!bcp_writefmtW.
-func Bcp_writefmtW(param0 unsafe.Pointer, param1 foundation.PWSTR) int16 {
-	r1, _, _ := syscall.SyscallN(procBcp_writefmtW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
-	return int16(r1)
-}
-
-// dbprtypeA calls odbcbcp!dbprtypeA.
-func DbprtypeA(param0 int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procDbprtypeA.Addr(), uintptr(param0))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// dbprtypeW calls odbcbcp!dbprtypeW.
-func DbprtypeW(param0 int32) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procDbprtypeW.Addr(), uintptr(param0))
-	return foundation.PWSTR(unsafe.Pointer(r1))
 }

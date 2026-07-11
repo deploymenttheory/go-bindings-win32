@@ -84,8 +84,8 @@ type MEM_EXTENDED_PARAMETER_Anonymous1_e__Struct struct {
 	Bitfield uint64
 }
 
-// MEM_EXTENDED_PARAMETER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MEM_EXTENDED_PARAMETER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MEM_EXTENDED_PARAMETER_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -96,8 +96,8 @@ type MEM_EXTENDED_PARAMETER struct {
 	Anonymous2 MEM_EXTENDED_PARAMETER_Anonymous2_e__Union
 }
 
-// PROCESS_HEAP_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROCESS_HEAP_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROCESS_HEAP_ENTRY_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -156,8 +156,8 @@ type WIN32_MEMORY_RANGE_ENTRY struct {
 	NumberOfBytes  uintptr
 }
 
-// WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union struct {
 	Data [1]uint32
 }

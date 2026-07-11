@@ -20,63 +20,63 @@ var (
 )
 
 var (
+	procBuildExplicitAccessWithName                          = modADVAPI32.NewProc("BuildExplicitAccessWithNameW")
 	procBuildExplicitAccessWithNameA                         = modADVAPI32.NewProc("BuildExplicitAccessWithNameA")
-	procBuildExplicitAccessWithNameW                         = modADVAPI32.NewProc("BuildExplicitAccessWithNameW")
+	procBuildImpersonateExplicitAccessWithName               = modADVAPI32.NewProc("BuildImpersonateExplicitAccessWithNameW")
 	procBuildImpersonateExplicitAccessWithNameA              = modADVAPI32.NewProc("BuildImpersonateExplicitAccessWithNameA")
-	procBuildImpersonateExplicitAccessWithNameW              = modADVAPI32.NewProc("BuildImpersonateExplicitAccessWithNameW")
+	procBuildImpersonateTrustee                              = modADVAPI32.NewProc("BuildImpersonateTrusteeW")
 	procBuildImpersonateTrusteeA                             = modADVAPI32.NewProc("BuildImpersonateTrusteeA")
-	procBuildImpersonateTrusteeW                             = modADVAPI32.NewProc("BuildImpersonateTrusteeW")
+	procBuildSecurityDescriptor                              = modADVAPI32.NewProc("BuildSecurityDescriptorW")
 	procBuildSecurityDescriptorA                             = modADVAPI32.NewProc("BuildSecurityDescriptorA")
-	procBuildSecurityDescriptorW                             = modADVAPI32.NewProc("BuildSecurityDescriptorW")
+	procBuildTrusteeWithName                                 = modADVAPI32.NewProc("BuildTrusteeWithNameW")
 	procBuildTrusteeWithNameA                                = modADVAPI32.NewProc("BuildTrusteeWithNameA")
-	procBuildTrusteeWithNameW                                = modADVAPI32.NewProc("BuildTrusteeWithNameW")
+	procBuildTrusteeWithObjectsAndName                       = modADVAPI32.NewProc("BuildTrusteeWithObjectsAndNameW")
 	procBuildTrusteeWithObjectsAndNameA                      = modADVAPI32.NewProc("BuildTrusteeWithObjectsAndNameA")
-	procBuildTrusteeWithObjectsAndNameW                      = modADVAPI32.NewProc("BuildTrusteeWithObjectsAndNameW")
+	procBuildTrusteeWithObjectsAndSid                        = modADVAPI32.NewProc("BuildTrusteeWithObjectsAndSidW")
 	procBuildTrusteeWithObjectsAndSidA                       = modADVAPI32.NewProc("BuildTrusteeWithObjectsAndSidA")
-	procBuildTrusteeWithObjectsAndSidW                       = modADVAPI32.NewProc("BuildTrusteeWithObjectsAndSidW")
+	procBuildTrusteeWithSid                                  = modADVAPI32.NewProc("BuildTrusteeWithSidW")
 	procBuildTrusteeWithSidA                                 = modADVAPI32.NewProc("BuildTrusteeWithSidA")
-	procBuildTrusteeWithSidW                                 = modADVAPI32.NewProc("BuildTrusteeWithSidW")
+	procConvertSecurityDescriptorToStringSecurityDescriptor  = modADVAPI32.NewProc("ConvertSecurityDescriptorToStringSecurityDescriptorW")
 	procConvertSecurityDescriptorToStringSecurityDescriptorA = modADVAPI32.NewProc("ConvertSecurityDescriptorToStringSecurityDescriptorA")
-	procConvertSecurityDescriptorToStringSecurityDescriptorW = modADVAPI32.NewProc("ConvertSecurityDescriptorToStringSecurityDescriptorW")
+	procConvertSidToStringSid                                = modADVAPI32.NewProc("ConvertSidToStringSidW")
 	procConvertSidToStringSidA                               = modADVAPI32.NewProc("ConvertSidToStringSidA")
-	procConvertSidToStringSidW                               = modADVAPI32.NewProc("ConvertSidToStringSidW")
+	procConvertStringSecurityDescriptorToSecurityDescriptor  = modADVAPI32.NewProc("ConvertStringSecurityDescriptorToSecurityDescriptorW")
 	procConvertStringSecurityDescriptorToSecurityDescriptorA = modADVAPI32.NewProc("ConvertStringSecurityDescriptorToSecurityDescriptorA")
-	procConvertStringSecurityDescriptorToSecurityDescriptorW = modADVAPI32.NewProc("ConvertStringSecurityDescriptorToSecurityDescriptorW")
+	procConvertStringSidToSid                                = modADVAPI32.NewProc("ConvertStringSidToSidW")
 	procConvertStringSidToSidA                               = modADVAPI32.NewProc("ConvertStringSidToSidA")
-	procConvertStringSidToSidW                               = modADVAPI32.NewProc("ConvertStringSidToSidW")
 	procFreeInheritedFromArray                               = modADVAPI32.NewProc("FreeInheritedFromArray")
+	procGetAuditedPermissionsFromAcl                         = modADVAPI32.NewProc("GetAuditedPermissionsFromAclW")
 	procGetAuditedPermissionsFromAclA                        = modADVAPI32.NewProc("GetAuditedPermissionsFromAclA")
-	procGetAuditedPermissionsFromAclW                        = modADVAPI32.NewProc("GetAuditedPermissionsFromAclW")
+	procGetEffectiveRightsFromAcl                            = modADVAPI32.NewProc("GetEffectiveRightsFromAclW")
 	procGetEffectiveRightsFromAclA                           = modADVAPI32.NewProc("GetEffectiveRightsFromAclA")
-	procGetEffectiveRightsFromAclW                           = modADVAPI32.NewProc("GetEffectiveRightsFromAclW")
+	procGetExplicitEntriesFromAcl                            = modADVAPI32.NewProc("GetExplicitEntriesFromAclW")
 	procGetExplicitEntriesFromAclA                           = modADVAPI32.NewProc("GetExplicitEntriesFromAclA")
-	procGetExplicitEntriesFromAclW                           = modADVAPI32.NewProc("GetExplicitEntriesFromAclW")
+	procGetInheritanceSource                                 = modADVAPI32.NewProc("GetInheritanceSourceW")
 	procGetInheritanceSourceA                                = modADVAPI32.NewProc("GetInheritanceSourceA")
-	procGetInheritanceSourceW                                = modADVAPI32.NewProc("GetInheritanceSourceW")
+	procGetMultipleTrustee                                   = modADVAPI32.NewProc("GetMultipleTrusteeW")
 	procGetMultipleTrusteeA                                  = modADVAPI32.NewProc("GetMultipleTrusteeA")
+	procGetMultipleTrusteeOperation                          = modADVAPI32.NewProc("GetMultipleTrusteeOperationW")
 	procGetMultipleTrusteeOperationA                         = modADVAPI32.NewProc("GetMultipleTrusteeOperationA")
-	procGetMultipleTrusteeOperationW                         = modADVAPI32.NewProc("GetMultipleTrusteeOperationW")
-	procGetMultipleTrusteeW                                  = modADVAPI32.NewProc("GetMultipleTrusteeW")
+	procGetNamedSecurityInfo                                 = modADVAPI32.NewProc("GetNamedSecurityInfoW")
 	procGetNamedSecurityInfoA                                = modADVAPI32.NewProc("GetNamedSecurityInfoA")
-	procGetNamedSecurityInfoW                                = modADVAPI32.NewProc("GetNamedSecurityInfoW")
 	procGetSecurityInfo                                      = modADVAPI32.NewProc("GetSecurityInfo")
+	procGetTrusteeForm                                       = modADVAPI32.NewProc("GetTrusteeFormW")
 	procGetTrusteeFormA                                      = modADVAPI32.NewProc("GetTrusteeFormA")
-	procGetTrusteeFormW                                      = modADVAPI32.NewProc("GetTrusteeFormW")
+	procGetTrusteeName                                       = modADVAPI32.NewProc("GetTrusteeNameW")
 	procGetTrusteeNameA                                      = modADVAPI32.NewProc("GetTrusteeNameA")
-	procGetTrusteeNameW                                      = modADVAPI32.NewProc("GetTrusteeNameW")
+	procGetTrusteeType                                       = modADVAPI32.NewProc("GetTrusteeTypeW")
 	procGetTrusteeTypeA                                      = modADVAPI32.NewProc("GetTrusteeTypeA")
-	procGetTrusteeTypeW                                      = modADVAPI32.NewProc("GetTrusteeTypeW")
+	procLookupSecurityDescriptorParts                        = modADVAPI32.NewProc("LookupSecurityDescriptorPartsW")
 	procLookupSecurityDescriptorPartsA                       = modADVAPI32.NewProc("LookupSecurityDescriptorPartsA")
-	procLookupSecurityDescriptorPartsW                       = modADVAPI32.NewProc("LookupSecurityDescriptorPartsW")
+	procSetEntriesInAcl                                      = modADVAPI32.NewProc("SetEntriesInAclW")
 	procSetEntriesInAclA                                     = modADVAPI32.NewProc("SetEntriesInAclA")
-	procSetEntriesInAclW                                     = modADVAPI32.NewProc("SetEntriesInAclW")
+	procSetNamedSecurityInfo                                 = modADVAPI32.NewProc("SetNamedSecurityInfoW")
 	procSetNamedSecurityInfoA                                = modADVAPI32.NewProc("SetNamedSecurityInfoA")
-	procSetNamedSecurityInfoW                                = modADVAPI32.NewProc("SetNamedSecurityInfoW")
 	procSetSecurityInfo                                      = modADVAPI32.NewProc("SetSecurityInfo")
+	procTreeResetNamedSecurityInfo                           = modADVAPI32.NewProc("TreeResetNamedSecurityInfoW")
 	procTreeResetNamedSecurityInfoA                          = modADVAPI32.NewProc("TreeResetNamedSecurityInfoA")
-	procTreeResetNamedSecurityInfoW                          = modADVAPI32.NewProc("TreeResetNamedSecurityInfoW")
+	procTreeSetNamedSecurityInfo                             = modADVAPI32.NewProc("TreeSetNamedSecurityInfoW")
 	procTreeSetNamedSecurityInfoA                            = modADVAPI32.NewProc("TreeSetNamedSecurityInfoA")
-	procTreeSetNamedSecurityInfoW                            = modADVAPI32.NewProc("TreeSetNamedSecurityInfoW")
 	procAuthzAccessCheck                                     = modAUTHZ.NewProc("AuthzAccessCheck")
 	procAuthzAddSidsToContext                                = modAUTHZ.NewProc("AuthzAddSidsToContext")
 	procAuthzCachedAccessCheck                               = modAUTHZ.NewProc("AuthzCachedAccessCheck")
@@ -112,8 +112,12 @@ var (
 // AuthzAccessCheck calls AUTHZ!AuthzAccessCheck.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzaccesscheck
 // Minimum OS: windows5.1.2600.
-func AuthzAccessCheck(Flags AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *AUTHZ_ACCESS_REQUEST, hAuditEvent AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorArray *security.PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorCount uint32, pReply *AUTHZ_ACCESS_REPLY, phAccessCheckResults *AUTHZ_ACCESS_CHECK_RESULTS_HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procAuthzAccessCheck.Addr(), uintptr(Flags), uintptr(hAuthzClientContext), uintptr(unsafe.Pointer(pRequest)), uintptr(hAuditEvent), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(OptionalSecurityDescriptorArray)), uintptr(OptionalSecurityDescriptorCount), uintptr(unsafe.Pointer(pReply)), uintptr(unsafe.Pointer(phAccessCheckResults)))
+func AuthzAccessCheck(Flags AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *AUTHZ_ACCESS_REQUEST, hAuditEvent AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorArray []security.PSECURITY_DESCRIPTOR, pReply *AUTHZ_ACCESS_REPLY, phAccessCheckResults *AUTHZ_ACCESS_CHECK_RESULTS_HANDLE) error {
+	var _OptionalSecurityDescriptorArray *security.PSECURITY_DESCRIPTOR
+	if len(OptionalSecurityDescriptorArray) > 0 {
+		_OptionalSecurityDescriptorArray = &OptionalSecurityDescriptorArray[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procAuthzAccessCheck.Addr(), uintptr(Flags), uintptr(hAuthzClientContext), uintptr(unsafe.Pointer(pRequest)), uintptr(hAuditEvent), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(_OptionalSecurityDescriptorArray)), uintptr(len(OptionalSecurityDescriptorArray)), uintptr(unsafe.Pointer(pReply)), uintptr(unsafe.Pointer(phAccessCheckResults)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -154,9 +158,10 @@ func AuthzEnumerateSecurityEventSources(dwFlags uint32, Buffer *AUTHZ_SOURCE_SCH
 }
 
 // AuthzEvaluateSacl calls AUTHZ!AuthzEvaluateSacl.
-func AuthzEvaluateSacl(AuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *AUTHZ_ACCESS_REQUEST, Sacl *security.ACL, GrantedAccess uint32, AccessGranted foundation.BOOL, pbGenerateAudit *foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAuthzEvaluateSacl.Addr(), uintptr(AuthzClientContext), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(Sacl)), uintptr(GrantedAccess), uintptr(AccessGranted), uintptr(unsafe.Pointer(pbGenerateAudit)))
-	return foundation.BOOL(r1)
+func AuthzEvaluateSacl(AuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *AUTHZ_ACCESS_REQUEST, Sacl *security.ACL, GrantedAccess uint32, AccessGranted bool, pbGenerateAudit *foundation.BOOL) bool {
+	_AccessGranted := win32.Bool32(AccessGranted)
+	r1, _, _ := syscall.SyscallN(procAuthzEvaluateSacl.Addr(), uintptr(AuthzClientContext), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(Sacl)), uintptr(GrantedAccess), uintptr(_AccessGranted), uintptr(unsafe.Pointer(pbGenerateAudit)))
+	return r1 != 0
 }
 
 // AuthzFreeAuditEvent calls AUTHZ!AuthzFreeAuditEvent.
@@ -239,8 +244,12 @@ func AuthzInitializeCompoundContext(UserContext AUTHZ_CLIENT_CONTEXT_HANDLE, Dev
 // AuthzInitializeObjectAccessAuditEvent calls AUTHZ!AuthzInitializeObjectAccessAuditEvent.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzinitializeobjectaccessauditevent
 // Minimum OS: windows5.1.2600.
-func AuthzInitializeObjectAccessAuditEvent(Flags AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, hAuditEventType AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType foundation.PWSTR, szObjectType foundation.PWSTR, szObjectName foundation.PWSTR, szAdditionalInfo foundation.PWSTR, phAuditEvent *AUTHZ_AUDIT_EVENT_HANDLE, dwAdditionalParameterCount uint32) error {
-	r1, _, e1 := syscall.SyscallN(procAuthzInitializeObjectAccessAuditEvent.Addr(), uintptr(Flags), uintptr(hAuditEventType), uintptr(unsafe.Pointer(szOperationType)), uintptr(unsafe.Pointer(szObjectType)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(szAdditionalInfo)), uintptr(unsafe.Pointer(phAuditEvent)), uintptr(dwAdditionalParameterCount))
+func AuthzInitializeObjectAccessAuditEvent(Flags AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, hAuditEventType AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType string, szObjectType string, szObjectName string, szAdditionalInfo string, phAuditEvent *AUTHZ_AUDIT_EVENT_HANDLE, dwAdditionalParameterCount uint32) error {
+	_szOperationType := win32.UTF16Ptr(szOperationType)
+	_szObjectType := win32.UTF16Ptr(szObjectType)
+	_szObjectName := win32.UTF16Ptr(szObjectName)
+	_szAdditionalInfo := win32.UTF16Ptr(szAdditionalInfo)
+	r1, _, e1 := syscall.SyscallN(procAuthzInitializeObjectAccessAuditEvent.Addr(), uintptr(Flags), uintptr(hAuditEventType), uintptr(unsafe.Pointer(_szOperationType)), uintptr(unsafe.Pointer(_szObjectType)), uintptr(unsafe.Pointer(_szObjectName)), uintptr(unsafe.Pointer(_szAdditionalInfo)), uintptr(unsafe.Pointer(phAuditEvent)), uintptr(dwAdditionalParameterCount))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -250,8 +259,13 @@ func AuthzInitializeObjectAccessAuditEvent(Flags AUTHZ_INITIALIZE_OBJECT_ACCESS_
 // AuthzInitializeObjectAccessAuditEvent2 calls AUTHZ!AuthzInitializeObjectAccessAuditEvent2.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzinitializeobjectaccessauditevent2
 // Minimum OS: windowsserver2003.
-func AuthzInitializeObjectAccessAuditEvent2(Flags uint32, hAuditEventType AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType foundation.PWSTR, szObjectType foundation.PWSTR, szObjectName foundation.PWSTR, szAdditionalInfo foundation.PWSTR, szAdditionalInfo2 foundation.PWSTR, phAuditEvent *AUTHZ_AUDIT_EVENT_HANDLE, dwAdditionalParameterCount uint32) error {
-	r1, _, e1 := syscall.SyscallN(procAuthzInitializeObjectAccessAuditEvent2.Addr(), uintptr(Flags), uintptr(hAuditEventType), uintptr(unsafe.Pointer(szOperationType)), uintptr(unsafe.Pointer(szObjectType)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(szAdditionalInfo)), uintptr(unsafe.Pointer(szAdditionalInfo2)), uintptr(unsafe.Pointer(phAuditEvent)), uintptr(dwAdditionalParameterCount))
+func AuthzInitializeObjectAccessAuditEvent2(Flags uint32, hAuditEventType AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType string, szObjectType string, szObjectName string, szAdditionalInfo string, szAdditionalInfo2 string, phAuditEvent *AUTHZ_AUDIT_EVENT_HANDLE, dwAdditionalParameterCount uint32) error {
+	_szOperationType := win32.UTF16Ptr(szOperationType)
+	_szObjectType := win32.UTF16Ptr(szObjectType)
+	_szObjectName := win32.UTF16Ptr(szObjectName)
+	_szAdditionalInfo := win32.UTF16Ptr(szAdditionalInfo)
+	_szAdditionalInfo2 := win32.UTF16Ptr(szAdditionalInfo2)
+	r1, _, e1 := syscall.SyscallN(procAuthzInitializeObjectAccessAuditEvent2.Addr(), uintptr(Flags), uintptr(hAuditEventType), uintptr(unsafe.Pointer(_szOperationType)), uintptr(unsafe.Pointer(_szObjectType)), uintptr(unsafe.Pointer(_szObjectName)), uintptr(unsafe.Pointer(_szAdditionalInfo)), uintptr(unsafe.Pointer(_szAdditionalInfo2)), uintptr(unsafe.Pointer(phAuditEvent)), uintptr(dwAdditionalParameterCount))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -272,8 +286,9 @@ func AuthzInitializeRemoteResourceManager(pRpcInitInfo *AUTHZ_RPC_INIT_INFO_CLIE
 // AuthzInitializeResourceManager calls AUTHZ!AuthzInitializeResourceManager.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzinitializeresourcemanager
 // Minimum OS: windows5.1.2600.
-func AuthzInitializeResourceManager(Flags uint32, pfnDynamicAccessCheck PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName foundation.PWSTR, phAuthzResourceManager *AUTHZ_RESOURCE_MANAGER_HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procAuthzInitializeResourceManager.Addr(), uintptr(Flags), uintptr(pfnDynamicAccessCheck), uintptr(pfnComputeDynamicGroups), uintptr(pfnFreeDynamicGroups), uintptr(unsafe.Pointer(szResourceManagerName)), uintptr(unsafe.Pointer(phAuthzResourceManager)))
+func AuthzInitializeResourceManager(Flags uint32, pfnDynamicAccessCheck PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName string, phAuthzResourceManager *AUTHZ_RESOURCE_MANAGER_HANDLE) error {
+	_szResourceManagerName := win32.UTF16Ptr(szResourceManagerName)
+	r1, _, e1 := syscall.SyscallN(procAuthzInitializeResourceManager.Addr(), uintptr(Flags), uintptr(pfnDynamicAccessCheck), uintptr(pfnComputeDynamicGroups), uintptr(pfnFreeDynamicGroups), uintptr(unsafe.Pointer(_szResourceManagerName)), uintptr(unsafe.Pointer(phAuthzResourceManager)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -338,8 +353,12 @@ func AuthzModifySids(hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, SidClass A
 // AuthzOpenObjectAudit calls AUTHZ!AuthzOpenObjectAudit.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzopenobjectaudit
 // Minimum OS: windows5.1.2600.
-func AuthzOpenObjectAudit(Flags uint32, hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *AUTHZ_ACCESS_REQUEST, hAuditEvent AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorArray *security.PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorCount uint32, pReply *AUTHZ_ACCESS_REPLY) error {
-	r1, _, e1 := syscall.SyscallN(procAuthzOpenObjectAudit.Addr(), uintptr(Flags), uintptr(hAuthzClientContext), uintptr(unsafe.Pointer(pRequest)), uintptr(hAuditEvent), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(OptionalSecurityDescriptorArray)), uintptr(OptionalSecurityDescriptorCount), uintptr(unsafe.Pointer(pReply)))
+func AuthzOpenObjectAudit(Flags uint32, hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *AUTHZ_ACCESS_REQUEST, hAuditEvent AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, OptionalSecurityDescriptorArray []security.PSECURITY_DESCRIPTOR, pReply *AUTHZ_ACCESS_REPLY) error {
+	var _OptionalSecurityDescriptorArray *security.PSECURITY_DESCRIPTOR
+	if len(OptionalSecurityDescriptorArray) > 0 {
+		_OptionalSecurityDescriptorArray = &OptionalSecurityDescriptorArray[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procAuthzOpenObjectAudit.Addr(), uintptr(Flags), uintptr(hAuthzClientContext), uintptr(unsafe.Pointer(pRequest)), uintptr(hAuditEvent), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(_OptionalSecurityDescriptorArray)), uintptr(len(OptionalSecurityDescriptorArray)), uintptr(unsafe.Pointer(pReply)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -360,8 +379,9 @@ func AuthzRegisterCapChangeNotification(phCapChangeSubscription *AUTHZ_CAP_CHANG
 // AuthzRegisterSecurityEventSource calls AUTHZ!AuthzRegisterSecurityEventSource.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzregistersecurityeventsource
 // Minimum OS: windowsserver2003.
-func AuthzRegisterSecurityEventSource(dwFlags uint32, szEventSourceName foundation.PWSTR, phEventProvider *AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procAuthzRegisterSecurityEventSource.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(szEventSourceName)), uintptr(unsafe.Pointer(phEventProvider)))
+func AuthzRegisterSecurityEventSource(dwFlags uint32, szEventSourceName string, phEventProvider *AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE) error {
+	_szEventSourceName := win32.UTF16Ptr(szEventSourceName)
+	r1, _, e1 := syscall.SyscallN(procAuthzRegisterSecurityEventSource.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_szEventSourceName)), uintptr(unsafe.Pointer(phEventProvider)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -393,8 +413,12 @@ func AuthzReportSecurityEventFromParams(dwFlags uint32, hEventProvider AUTHZ_SEC
 // AuthzSetAppContainerInformation calls AUTHZ!AuthzSetAppContainerInformation.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzsetappcontainerinformation
 // Minimum OS: windows8.0.
-func AuthzSetAppContainerInformation(hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid security.PSID, CapabilityCount uint32, pCapabilitySids *security.SID_AND_ATTRIBUTES) error {
-	r1, _, e1 := syscall.SyscallN(procAuthzSetAppContainerInformation.Addr(), uintptr(hAuthzClientContext), uintptr(pAppContainerSid), uintptr(CapabilityCount), uintptr(unsafe.Pointer(pCapabilitySids)))
+func AuthzSetAppContainerInformation(hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid security.PSID, pCapabilitySids []security.SID_AND_ATTRIBUTES) error {
+	var _pCapabilitySids *security.SID_AND_ATTRIBUTES
+	if len(pCapabilitySids) > 0 {
+		_pCapabilitySids = &pCapabilitySids[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procAuthzSetAppContainerInformation.Addr(), uintptr(hAuthzClientContext), uintptr(pAppContainerSid), uintptr(len(pCapabilitySids)), uintptr(unsafe.Pointer(_pCapabilitySids)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -404,8 +428,9 @@ func AuthzSetAppContainerInformation(hAuthzClientContext AUTHZ_CLIENT_CONTEXT_HA
 // AuthzUninstallSecurityEventSource calls AUTHZ!AuthzUninstallSecurityEventSource.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzuninstallsecurityeventsource
 // Minimum OS: windowsserver2003.
-func AuthzUninstallSecurityEventSource(dwFlags uint32, szEventSourceName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procAuthzUninstallSecurityEventSource.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(szEventSourceName)))
+func AuthzUninstallSecurityEventSource(dwFlags uint32, szEventSourceName string) error {
+	_szEventSourceName := win32.UTF16Ptr(szEventSourceName)
+	r1, _, e1 := syscall.SyscallN(procAuthzUninstallSecurityEventSource.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_szEventSourceName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -434,6 +459,14 @@ func AuthzUnregisterSecurityEventSource(dwFlags uint32, phEventProvider *AUTHZ_S
 	return nil
 }
 
+// BuildExplicitAccessWithName calls ADVAPI32!BuildExplicitAccessWithNameW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildexplicitaccesswithnamew
+// Minimum OS: windows5.1.2600.
+func BuildExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName string, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance security.ACE_FLAGS) {
+	_pTrusteeName := win32.UTF16Ptr(pTrusteeName)
+	syscall.SyscallN(procBuildExplicitAccessWithName.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(_pTrusteeName)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
+}
+
 // BuildExplicitAccessWithNameA calls ADVAPI32!BuildExplicitAccessWithNameA.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildexplicitaccesswithnamea
 // Minimum OS: windows5.1.2600.
@@ -441,11 +474,10 @@ func BuildExplicitAccessWithNameA(pExplicitAccess *EXPLICIT_ACCESS_A, pTrusteeNa
 	syscall.SyscallN(procBuildExplicitAccessWithNameA.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(pTrusteeName)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
 }
 
-// BuildExplicitAccessWithNameW calls ADVAPI32!BuildExplicitAccessWithNameW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildexplicitaccesswithnamew
-// Minimum OS: windows5.1.2600.
-func BuildExplicitAccessWithNameW(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName foundation.PWSTR, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance security.ACE_FLAGS) {
-	syscall.SyscallN(procBuildExplicitAccessWithNameW.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(pTrusteeName)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
+// BuildImpersonateExplicitAccessWithName calls ADVAPI32!BuildImpersonateExplicitAccessWithNameW.
+func BuildImpersonateExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName string, pTrustee *TRUSTEE_W, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance uint32) {
+	_pTrusteeName := win32.UTF16Ptr(pTrusteeName)
+	syscall.SyscallN(procBuildImpersonateExplicitAccessWithName.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(_pTrusteeName)), uintptr(unsafe.Pointer(pTrustee)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
 }
 
 // BuildImpersonateExplicitAccessWithNameA calls ADVAPI32!BuildImpersonateExplicitAccessWithNameA.
@@ -453,9 +485,9 @@ func BuildImpersonateExplicitAccessWithNameA(pExplicitAccess *EXPLICIT_ACCESS_A,
 	syscall.SyscallN(procBuildImpersonateExplicitAccessWithNameA.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(pTrusteeName)), uintptr(unsafe.Pointer(pTrustee)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
 }
 
-// BuildImpersonateExplicitAccessWithNameW calls ADVAPI32!BuildImpersonateExplicitAccessWithNameW.
-func BuildImpersonateExplicitAccessWithNameW(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName foundation.PWSTR, pTrustee *TRUSTEE_W, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance uint32) {
-	syscall.SyscallN(procBuildImpersonateExplicitAccessWithNameW.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(pTrusteeName)), uintptr(unsafe.Pointer(pTrustee)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
+// BuildImpersonateTrustee calls ADVAPI32!BuildImpersonateTrusteeW.
+func BuildImpersonateTrustee(pTrustee *TRUSTEE_W, pImpersonateTrustee *TRUSTEE_W) {
+	syscall.SyscallN(procBuildImpersonateTrustee.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pImpersonateTrustee)))
 }
 
 // BuildImpersonateTrusteeA calls ADVAPI32!BuildImpersonateTrusteeA.
@@ -463,25 +495,44 @@ func BuildImpersonateTrusteeA(pTrustee *TRUSTEE_A, pImpersonateTrustee *TRUSTEE_
 	syscall.SyscallN(procBuildImpersonateTrusteeA.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pImpersonateTrustee)))
 }
 
-// BuildImpersonateTrusteeW calls ADVAPI32!BuildImpersonateTrusteeW.
-func BuildImpersonateTrusteeW(pTrustee *TRUSTEE_W, pImpersonateTrustee *TRUSTEE_W) {
-	syscall.SyscallN(procBuildImpersonateTrusteeW.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pImpersonateTrustee)))
+// BuildSecurityDescriptor calls ADVAPI32!BuildSecurityDescriptorW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildsecuritydescriptorw
+// Minimum OS: windows5.1.2600.
+func BuildSecurityDescriptor(pOwner *TRUSTEE_W, pGroup *TRUSTEE_W, pListOfAccessEntries []EXPLICIT_ACCESS_W, pListOfAuditEntries []EXPLICIT_ACCESS_W, pOldSD security.PSECURITY_DESCRIPTOR, pSizeNewSD *uint32, pNewSD *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
+	var _pListOfAccessEntries *EXPLICIT_ACCESS_W
+	if len(pListOfAccessEntries) > 0 {
+		_pListOfAccessEntries = &pListOfAccessEntries[0]
+	}
+	var _pListOfAuditEntries *EXPLICIT_ACCESS_W
+	if len(pListOfAuditEntries) > 0 {
+		_pListOfAuditEntries = &pListOfAuditEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBuildSecurityDescriptor.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(pGroup)), uintptr(len(pListOfAccessEntries)), uintptr(unsafe.Pointer(_pListOfAccessEntries)), uintptr(len(pListOfAuditEntries)), uintptr(unsafe.Pointer(_pListOfAuditEntries)), uintptr(pOldSD), uintptr(unsafe.Pointer(pSizeNewSD)), uintptr(unsafe.Pointer(pNewSD)))
+	return foundation.WIN32_ERROR(r1)
 }
 
 // BuildSecurityDescriptorA calls ADVAPI32!BuildSecurityDescriptorA.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildsecuritydescriptora
 // Minimum OS: windows5.1.2600.
-func BuildSecurityDescriptorA(pOwner *TRUSTEE_A, pGroup *TRUSTEE_A, cCountOfAccessEntries uint32, pListOfAccessEntries *EXPLICIT_ACCESS_A, cCountOfAuditEntries uint32, pListOfAuditEntries *EXPLICIT_ACCESS_A, pOldSD security.PSECURITY_DESCRIPTOR, pSizeNewSD *uint32, pNewSD *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procBuildSecurityDescriptorA.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(pGroup)), uintptr(cCountOfAccessEntries), uintptr(unsafe.Pointer(pListOfAccessEntries)), uintptr(cCountOfAuditEntries), uintptr(unsafe.Pointer(pListOfAuditEntries)), uintptr(pOldSD), uintptr(unsafe.Pointer(pSizeNewSD)), uintptr(unsafe.Pointer(pNewSD)))
+func BuildSecurityDescriptorA(pOwner *TRUSTEE_A, pGroup *TRUSTEE_A, pListOfAccessEntries []EXPLICIT_ACCESS_A, pListOfAuditEntries []EXPLICIT_ACCESS_A, pOldSD security.PSECURITY_DESCRIPTOR, pSizeNewSD *uint32, pNewSD *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
+	var _pListOfAccessEntries *EXPLICIT_ACCESS_A
+	if len(pListOfAccessEntries) > 0 {
+		_pListOfAccessEntries = &pListOfAccessEntries[0]
+	}
+	var _pListOfAuditEntries *EXPLICIT_ACCESS_A
+	if len(pListOfAuditEntries) > 0 {
+		_pListOfAuditEntries = &pListOfAuditEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBuildSecurityDescriptorA.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(pGroup)), uintptr(len(pListOfAccessEntries)), uintptr(unsafe.Pointer(_pListOfAccessEntries)), uintptr(len(pListOfAuditEntries)), uintptr(unsafe.Pointer(_pListOfAuditEntries)), uintptr(pOldSD), uintptr(unsafe.Pointer(pSizeNewSD)), uintptr(unsafe.Pointer(pNewSD)))
 	return foundation.WIN32_ERROR(r1)
 }
 
-// BuildSecurityDescriptorW calls ADVAPI32!BuildSecurityDescriptorW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildsecuritydescriptorw
+// BuildTrusteeWithName calls ADVAPI32!BuildTrusteeWithNameW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithnamew
 // Minimum OS: windows5.1.2600.
-func BuildSecurityDescriptorW(pOwner *TRUSTEE_W, pGroup *TRUSTEE_W, cCountOfAccessEntries uint32, pListOfAccessEntries *EXPLICIT_ACCESS_W, cCountOfAuditEntries uint32, pListOfAuditEntries *EXPLICIT_ACCESS_W, pOldSD security.PSECURITY_DESCRIPTOR, pSizeNewSD *uint32, pNewSD *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procBuildSecurityDescriptorW.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(pGroup)), uintptr(cCountOfAccessEntries), uintptr(unsafe.Pointer(pListOfAccessEntries)), uintptr(cCountOfAuditEntries), uintptr(unsafe.Pointer(pListOfAuditEntries)), uintptr(pOldSD), uintptr(unsafe.Pointer(pSizeNewSD)), uintptr(unsafe.Pointer(pNewSD)))
-	return foundation.WIN32_ERROR(r1)
+func BuildTrusteeWithName(pTrustee *TRUSTEE_W, pName string) {
+	_pName := win32.UTF16Ptr(pName)
+	syscall.SyscallN(procBuildTrusteeWithName.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(_pName)))
 }
 
 // BuildTrusteeWithNameA calls ADVAPI32!BuildTrusteeWithNameA.
@@ -491,11 +542,14 @@ func BuildTrusteeWithNameA(pTrustee *TRUSTEE_A, pName foundation.PSTR) {
 	syscall.SyscallN(procBuildTrusteeWithNameA.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pName)))
 }
 
-// BuildTrusteeWithNameW calls ADVAPI32!BuildTrusteeWithNameW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithnamew
+// BuildTrusteeWithObjectsAndName calls ADVAPI32!BuildTrusteeWithObjectsAndNameW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithobjectsandnamew
 // Minimum OS: windows5.1.2600.
-func BuildTrusteeWithNameW(pTrustee *TRUSTEE_W, pName foundation.PWSTR) {
-	syscall.SyscallN(procBuildTrusteeWithNameW.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pName)))
+func BuildTrusteeWithObjectsAndName(pTrustee *TRUSTEE_W, pObjName *OBJECTS_AND_NAME_W, ObjectType SE_OBJECT_TYPE, ObjectTypeName string, InheritedObjectTypeName string, Name string) {
+	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
+	_InheritedObjectTypeName := win32.UTF16Ptr(InheritedObjectTypeName)
+	_Name := win32.UTF16Ptr(Name)
+	syscall.SyscallN(procBuildTrusteeWithObjectsAndName.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pObjName)), uintptr(ObjectType), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_InheritedObjectTypeName)), uintptr(unsafe.Pointer(_Name)))
 }
 
 // BuildTrusteeWithObjectsAndNameA calls ADVAPI32!BuildTrusteeWithObjectsAndNameA.
@@ -505,11 +559,11 @@ func BuildTrusteeWithObjectsAndNameA(pTrustee *TRUSTEE_A, pObjName *OBJECTS_AND_
 	syscall.SyscallN(procBuildTrusteeWithObjectsAndNameA.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pObjName)), uintptr(ObjectType), uintptr(unsafe.Pointer(ObjectTypeName)), uintptr(unsafe.Pointer(InheritedObjectTypeName)), uintptr(unsafe.Pointer(Name)))
 }
 
-// BuildTrusteeWithObjectsAndNameW calls ADVAPI32!BuildTrusteeWithObjectsAndNameW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithobjectsandnamew
+// BuildTrusteeWithObjectsAndSid calls ADVAPI32!BuildTrusteeWithObjectsAndSidW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithobjectsandsidw
 // Minimum OS: windows5.1.2600.
-func BuildTrusteeWithObjectsAndNameW(pTrustee *TRUSTEE_W, pObjName *OBJECTS_AND_NAME_W, ObjectType SE_OBJECT_TYPE, ObjectTypeName foundation.PWSTR, InheritedObjectTypeName foundation.PWSTR, Name foundation.PWSTR) {
-	syscall.SyscallN(procBuildTrusteeWithObjectsAndNameW.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pObjName)), uintptr(ObjectType), uintptr(unsafe.Pointer(ObjectTypeName)), uintptr(unsafe.Pointer(InheritedObjectTypeName)), uintptr(unsafe.Pointer(Name)))
+func BuildTrusteeWithObjectsAndSid(pTrustee *TRUSTEE_W, pObjSid *OBJECTS_AND_SID, pObjectGuid *win32.GUID, pInheritedObjectGuid *win32.GUID, pSid security.PSID) {
+	syscall.SyscallN(procBuildTrusteeWithObjectsAndSid.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pObjSid)), uintptr(unsafe.Pointer(pObjectGuid)), uintptr(unsafe.Pointer(pInheritedObjectGuid)), uintptr(pSid))
 }
 
 // BuildTrusteeWithObjectsAndSidA calls ADVAPI32!BuildTrusteeWithObjectsAndSidA.
@@ -519,11 +573,11 @@ func BuildTrusteeWithObjectsAndSidA(pTrustee *TRUSTEE_A, pObjSid *OBJECTS_AND_SI
 	syscall.SyscallN(procBuildTrusteeWithObjectsAndSidA.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pObjSid)), uintptr(unsafe.Pointer(pObjectGuid)), uintptr(unsafe.Pointer(pInheritedObjectGuid)), uintptr(pSid))
 }
 
-// BuildTrusteeWithObjectsAndSidW calls ADVAPI32!BuildTrusteeWithObjectsAndSidW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithobjectsandsidw
+// BuildTrusteeWithSid calls ADVAPI32!BuildTrusteeWithSidW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithsidw
 // Minimum OS: windows5.1.2600.
-func BuildTrusteeWithObjectsAndSidW(pTrustee *TRUSTEE_W, pObjSid *OBJECTS_AND_SID, pObjectGuid *win32.GUID, pInheritedObjectGuid *win32.GUID, pSid security.PSID) {
-	syscall.SyscallN(procBuildTrusteeWithObjectsAndSidW.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pObjSid)), uintptr(unsafe.Pointer(pObjectGuid)), uintptr(unsafe.Pointer(pInheritedObjectGuid)), uintptr(pSid))
+func BuildTrusteeWithSid(pTrustee *TRUSTEE_W, pSid security.PSID) {
+	syscall.SyscallN(procBuildTrusteeWithSid.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(pSid))
 }
 
 // BuildTrusteeWithSidA calls ADVAPI32!BuildTrusteeWithSidA.
@@ -533,11 +587,15 @@ func BuildTrusteeWithSidA(pTrustee *TRUSTEE_A, pSid security.PSID) {
 	syscall.SyscallN(procBuildTrusteeWithSidA.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(pSid))
 }
 
-// BuildTrusteeWithSidW calls ADVAPI32!BuildTrusteeWithSidW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithsidw
+// ConvertSecurityDescriptorToStringSecurityDescriptor calls ADVAPI32!ConvertSecurityDescriptorToStringSecurityDescriptorW.
+// https://learn.microsoft.com/windows/win32/api/sddl/nf-sddl-convertsecuritydescriptortostringsecuritydescriptorw
 // Minimum OS: windows5.1.2600.
-func BuildTrusteeWithSidW(pTrustee *TRUSTEE_W, pSid security.PSID) {
-	syscall.SyscallN(procBuildTrusteeWithSidW.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(pSid))
+func ConvertSecurityDescriptorToStringSecurityDescriptor(SecurityDescriptor security.PSECURITY_DESCRIPTOR, RequestedStringSDRevision uint32, SecurityInformation security.OBJECT_SECURITY_INFORMATION, StringSecurityDescriptor *foundation.PWSTR, StringSecurityDescriptorLen *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procConvertSecurityDescriptorToStringSecurityDescriptor.Addr(), uintptr(SecurityDescriptor), uintptr(RequestedStringSDRevision), uintptr(SecurityInformation), uintptr(unsafe.Pointer(StringSecurityDescriptor)), uintptr(unsafe.Pointer(StringSecurityDescriptorLen)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // ConvertSecurityDescriptorToStringSecurityDescriptorA calls ADVAPI32!ConvertSecurityDescriptorToStringSecurityDescriptorA.
@@ -551,11 +609,11 @@ func ConvertSecurityDescriptorToStringSecurityDescriptorA(SecurityDescriptor sec
 	return nil
 }
 
-// ConvertSecurityDescriptorToStringSecurityDescriptorW calls ADVAPI32!ConvertSecurityDescriptorToStringSecurityDescriptorW.
-// https://learn.microsoft.com/windows/win32/api/sddl/nf-sddl-convertsecuritydescriptortostringsecuritydescriptorw
+// ConvertSidToStringSid calls ADVAPI32!ConvertSidToStringSidW.
+// https://learn.microsoft.com/windows/win32/api/sddl/nf-sddl-convertsidtostringsidw
 // Minimum OS: windows5.1.2600.
-func ConvertSecurityDescriptorToStringSecurityDescriptorW(SecurityDescriptor security.PSECURITY_DESCRIPTOR, RequestedStringSDRevision uint32, SecurityInformation security.OBJECT_SECURITY_INFORMATION, StringSecurityDescriptor *foundation.PWSTR, StringSecurityDescriptorLen *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procConvertSecurityDescriptorToStringSecurityDescriptorW.Addr(), uintptr(SecurityDescriptor), uintptr(RequestedStringSDRevision), uintptr(SecurityInformation), uintptr(unsafe.Pointer(StringSecurityDescriptor)), uintptr(unsafe.Pointer(StringSecurityDescriptorLen)))
+func ConvertSidToStringSid(Sid security.PSID, StringSid *foundation.PWSTR) error {
+	r1, _, e1 := syscall.SyscallN(procConvertSidToStringSid.Addr(), uintptr(Sid), uintptr(unsafe.Pointer(StringSid)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -573,11 +631,12 @@ func ConvertSidToStringSidA(Sid security.PSID, StringSid *foundation.PSTR) error
 	return nil
 }
 
-// ConvertSidToStringSidW calls ADVAPI32!ConvertSidToStringSidW.
-// https://learn.microsoft.com/windows/win32/api/sddl/nf-sddl-convertsidtostringsidw
+// ConvertStringSecurityDescriptorToSecurityDescriptor calls ADVAPI32!ConvertStringSecurityDescriptorToSecurityDescriptorW.
+// https://learn.microsoft.com/windows/win32/api/sddl/nf-sddl-convertstringsecuritydescriptortosecuritydescriptorw
 // Minimum OS: windows5.1.2600.
-func ConvertSidToStringSidW(Sid security.PSID, StringSid *foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procConvertSidToStringSidW.Addr(), uintptr(Sid), uintptr(unsafe.Pointer(StringSid)))
+func ConvertStringSecurityDescriptorToSecurityDescriptor(StringSecurityDescriptor string, StringSDRevision uint32, SecurityDescriptor *security.PSECURITY_DESCRIPTOR, SecurityDescriptorSize *uint32) error {
+	_StringSecurityDescriptor := win32.UTF16Ptr(StringSecurityDescriptor)
+	r1, _, e1 := syscall.SyscallN(procConvertStringSecurityDescriptorToSecurityDescriptor.Addr(), uintptr(unsafe.Pointer(_StringSecurityDescriptor)), uintptr(StringSDRevision), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(SecurityDescriptorSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -595,11 +654,12 @@ func ConvertStringSecurityDescriptorToSecurityDescriptorA(StringSecurityDescript
 	return nil
 }
 
-// ConvertStringSecurityDescriptorToSecurityDescriptorW calls ADVAPI32!ConvertStringSecurityDescriptorToSecurityDescriptorW.
-// https://learn.microsoft.com/windows/win32/api/sddl/nf-sddl-convertstringsecuritydescriptortosecuritydescriptorw
+// ConvertStringSidToSid calls ADVAPI32!ConvertStringSidToSidW.
+// https://learn.microsoft.com/windows/win32/api/sddl/nf-sddl-convertstringsidtosidw
 // Minimum OS: windows5.1.2600.
-func ConvertStringSecurityDescriptorToSecurityDescriptorW(StringSecurityDescriptor foundation.PWSTR, StringSDRevision uint32, SecurityDescriptor *security.PSECURITY_DESCRIPTOR, SecurityDescriptorSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procConvertStringSecurityDescriptorToSecurityDescriptorW.Addr(), uintptr(unsafe.Pointer(StringSecurityDescriptor)), uintptr(StringSDRevision), uintptr(unsafe.Pointer(SecurityDescriptor)), uintptr(unsafe.Pointer(SecurityDescriptorSize)))
+func ConvertStringSidToSid(StringSid string, Sid *security.PSID) error {
+	_StringSid := win32.UTF16Ptr(StringSid)
+	r1, _, e1 := syscall.SyscallN(procConvertStringSidToSid.Addr(), uintptr(unsafe.Pointer(_StringSid)), uintptr(unsafe.Pointer(Sid)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -617,22 +677,23 @@ func ConvertStringSidToSidA(StringSid foundation.PSTR, Sid *security.PSID) error
 	return nil
 }
 
-// ConvertStringSidToSidW calls ADVAPI32!ConvertStringSidToSidW.
-// https://learn.microsoft.com/windows/win32/api/sddl/nf-sddl-convertstringsidtosidw
-// Minimum OS: windows5.1.2600.
-func ConvertStringSidToSidW(StringSid foundation.PWSTR, Sid *security.PSID) error {
-	r1, _, e1 := syscall.SyscallN(procConvertStringSidToSidW.Addr(), uintptr(unsafe.Pointer(StringSid)), uintptr(unsafe.Pointer(Sid)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // FreeInheritedFromArray calls ADVAPI32!FreeInheritedFromArray.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-freeinheritedfromarray
 // Minimum OS: windows5.1.2600.
-func FreeInheritedFromArray(pInheritArray *INHERITED_FROMW, AceCnt uint16, pfnArray *FN_OBJECT_MGR_FUNCTS) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procFreeInheritedFromArray.Addr(), uintptr(unsafe.Pointer(pInheritArray)), uintptr(AceCnt), uintptr(unsafe.Pointer(pfnArray)))
+func FreeInheritedFromArray(pInheritArray []INHERITED_FROMW, pfnArray *FN_OBJECT_MGR_FUNCTS) foundation.WIN32_ERROR {
+	var _pInheritArray *INHERITED_FROMW
+	if len(pInheritArray) > 0 {
+		_pInheritArray = &pInheritArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procFreeInheritedFromArray.Addr(), uintptr(unsafe.Pointer(_pInheritArray)), uintptr(len(pInheritArray)), uintptr(unsafe.Pointer(pfnArray)))
+	return foundation.WIN32_ERROR(r1)
+}
+
+// GetAuditedPermissionsFromAcl calls ADVAPI32!GetAuditedPermissionsFromAclW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getauditedpermissionsfromaclw
+// Minimum OS: windows5.1.2600.
+func GetAuditedPermissionsFromAcl(pacl *security.ACL, pTrustee *TRUSTEE_W, pSuccessfulAuditedRights *uint32, pFailedAuditRights *uint32) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procGetAuditedPermissionsFromAcl.Addr(), uintptr(unsafe.Pointer(pacl)), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pSuccessfulAuditedRights)), uintptr(unsafe.Pointer(pFailedAuditRights)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -644,11 +705,11 @@ func GetAuditedPermissionsFromAclA(pacl *security.ACL, pTrustee *TRUSTEE_A, pSuc
 	return foundation.WIN32_ERROR(r1)
 }
 
-// GetAuditedPermissionsFromAclW calls ADVAPI32!GetAuditedPermissionsFromAclW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getauditedpermissionsfromaclw
+// GetEffectiveRightsFromAcl calls ADVAPI32!GetEffectiveRightsFromAclW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-geteffectiverightsfromaclw
 // Minimum OS: windows5.1.2600.
-func GetAuditedPermissionsFromAclW(pacl *security.ACL, pTrustee *TRUSTEE_W, pSuccessfulAuditedRights *uint32, pFailedAuditRights *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetAuditedPermissionsFromAclW.Addr(), uintptr(unsafe.Pointer(pacl)), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pSuccessfulAuditedRights)), uintptr(unsafe.Pointer(pFailedAuditRights)))
+func GetEffectiveRightsFromAcl(pacl *security.ACL, pTrustee *TRUSTEE_W, pAccessRights *uint32) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procGetEffectiveRightsFromAcl.Addr(), uintptr(unsafe.Pointer(pacl)), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pAccessRights)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -660,11 +721,11 @@ func GetEffectiveRightsFromAclA(pacl *security.ACL, pTrustee *TRUSTEE_A, pAccess
 	return foundation.WIN32_ERROR(r1)
 }
 
-// GetEffectiveRightsFromAclW calls ADVAPI32!GetEffectiveRightsFromAclW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-geteffectiverightsfromaclw
+// GetExplicitEntriesFromAcl calls ADVAPI32!GetExplicitEntriesFromAclW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getexplicitentriesfromaclw
 // Minimum OS: windows5.1.2600.
-func GetEffectiveRightsFromAclW(pacl *security.ACL, pTrustee *TRUSTEE_W, pAccessRights *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetEffectiveRightsFromAclW.Addr(), uintptr(unsafe.Pointer(pacl)), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pAccessRights)))
+func GetExplicitEntriesFromAcl(pacl *security.ACL, pcCountOfExplicitEntries *uint32, pListOfExplicitEntries **EXPLICIT_ACCESS_W) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procGetExplicitEntriesFromAcl.Addr(), uintptr(unsafe.Pointer(pacl)), uintptr(unsafe.Pointer(pcCountOfExplicitEntries)), uintptr(unsafe.Pointer(pListOfExplicitEntries)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -676,28 +737,37 @@ func GetExplicitEntriesFromAclA(pacl *security.ACL, pcCountOfExplicitEntries *ui
 	return foundation.WIN32_ERROR(r1)
 }
 
-// GetExplicitEntriesFromAclW calls ADVAPI32!GetExplicitEntriesFromAclW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getexplicitentriesfromaclw
+// GetInheritanceSource calls ADVAPI32!GetInheritanceSourceW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getinheritancesourcew
 // Minimum OS: windows5.1.2600.
-func GetExplicitEntriesFromAclW(pacl *security.ACL, pcCountOfExplicitEntries *uint32, pListOfExplicitEntries **EXPLICIT_ACCESS_W) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetExplicitEntriesFromAclW.Addr(), uintptr(unsafe.Pointer(pacl)), uintptr(unsafe.Pointer(pcCountOfExplicitEntries)), uintptr(unsafe.Pointer(pListOfExplicitEntries)))
+func GetInheritanceSource(pObjectName string, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, Container bool, pObjectClassGuids []*win32.GUID, pAcl *security.ACL, pfnArray *FN_OBJECT_MGR_FUNCTS, pGenericMapping *security.GENERIC_MAPPING, pInheritArray *INHERITED_FROMW) foundation.WIN32_ERROR {
+	_pObjectName := win32.UTF16Ptr(pObjectName)
+	_Container := win32.Bool32(Container)
+	var _pObjectClassGuids **win32.GUID
+	if len(pObjectClassGuids) > 0 {
+		_pObjectClassGuids = &pObjectClassGuids[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetInheritanceSource.Addr(), uintptr(unsafe.Pointer(_pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(_Container), uintptr(unsafe.Pointer(_pObjectClassGuids)), uintptr(len(pObjectClassGuids)), uintptr(unsafe.Pointer(pAcl)), uintptr(unsafe.Pointer(pfnArray)), uintptr(unsafe.Pointer(pGenericMapping)), uintptr(unsafe.Pointer(pInheritArray)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // GetInheritanceSourceA calls ADVAPI32!GetInheritanceSourceA.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getinheritancesourcea
 // Minimum OS: windows5.1.2600.
-func GetInheritanceSourceA(pObjectName foundation.PSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, Container foundation.BOOL, pObjectClassGuids **win32.GUID, GuidCount uint32, pAcl *security.ACL, pfnArray *FN_OBJECT_MGR_FUNCTS, pGenericMapping *security.GENERIC_MAPPING, pInheritArray *INHERITED_FROMA) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetInheritanceSourceA.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(Container), uintptr(unsafe.Pointer(pObjectClassGuids)), uintptr(GuidCount), uintptr(unsafe.Pointer(pAcl)), uintptr(unsafe.Pointer(pfnArray)), uintptr(unsafe.Pointer(pGenericMapping)), uintptr(unsafe.Pointer(pInheritArray)))
+func GetInheritanceSourceA(pObjectName foundation.PSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, Container bool, pObjectClassGuids []*win32.GUID, pAcl *security.ACL, pfnArray *FN_OBJECT_MGR_FUNCTS, pGenericMapping *security.GENERIC_MAPPING, pInheritArray *INHERITED_FROMA) foundation.WIN32_ERROR {
+	_Container := win32.Bool32(Container)
+	var _pObjectClassGuids **win32.GUID
+	if len(pObjectClassGuids) > 0 {
+		_pObjectClassGuids = &pObjectClassGuids[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetInheritanceSourceA.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(_Container), uintptr(unsafe.Pointer(_pObjectClassGuids)), uintptr(len(pObjectClassGuids)), uintptr(unsafe.Pointer(pAcl)), uintptr(unsafe.Pointer(pfnArray)), uintptr(unsafe.Pointer(pGenericMapping)), uintptr(unsafe.Pointer(pInheritArray)))
 	return foundation.WIN32_ERROR(r1)
 }
 
-// GetInheritanceSourceW calls ADVAPI32!GetInheritanceSourceW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getinheritancesourcew
-// Minimum OS: windows5.1.2600.
-func GetInheritanceSourceW(pObjectName foundation.PWSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, Container foundation.BOOL, pObjectClassGuids **win32.GUID, GuidCount uint32, pAcl *security.ACL, pfnArray *FN_OBJECT_MGR_FUNCTS, pGenericMapping *security.GENERIC_MAPPING, pInheritArray *INHERITED_FROMW) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetInheritanceSourceW.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(Container), uintptr(unsafe.Pointer(pObjectClassGuids)), uintptr(GuidCount), uintptr(unsafe.Pointer(pAcl)), uintptr(unsafe.Pointer(pfnArray)), uintptr(unsafe.Pointer(pGenericMapping)), uintptr(unsafe.Pointer(pInheritArray)))
-	return foundation.WIN32_ERROR(r1)
+// GetMultipleTrustee calls ADVAPI32!GetMultipleTrusteeW.
+func GetMultipleTrustee(pTrustee *TRUSTEE_W) *TRUSTEE_W {
+	r1, _, _ := syscall.SyscallN(procGetMultipleTrustee.Addr(), uintptr(unsafe.Pointer(pTrustee)))
+	return (*TRUSTEE_W)(unsafe.Pointer(r1))
 }
 
 // GetMultipleTrusteeA calls ADVAPI32!GetMultipleTrusteeA.
@@ -706,22 +776,25 @@ func GetMultipleTrusteeA(pTrustee *TRUSTEE_A) *TRUSTEE_A {
 	return (*TRUSTEE_A)(unsafe.Pointer(r1))
 }
 
+// GetMultipleTrusteeOperation calls ADVAPI32!GetMultipleTrusteeOperationW.
+func GetMultipleTrusteeOperation(pTrustee *TRUSTEE_W) MULTIPLE_TRUSTEE_OPERATION {
+	r1, _, _ := syscall.SyscallN(procGetMultipleTrusteeOperation.Addr(), uintptr(unsafe.Pointer(pTrustee)))
+	return MULTIPLE_TRUSTEE_OPERATION(r1)
+}
+
 // GetMultipleTrusteeOperationA calls ADVAPI32!GetMultipleTrusteeOperationA.
 func GetMultipleTrusteeOperationA(pTrustee *TRUSTEE_A) MULTIPLE_TRUSTEE_OPERATION {
 	r1, _, _ := syscall.SyscallN(procGetMultipleTrusteeOperationA.Addr(), uintptr(unsafe.Pointer(pTrustee)))
 	return MULTIPLE_TRUSTEE_OPERATION(r1)
 }
 
-// GetMultipleTrusteeOperationW calls ADVAPI32!GetMultipleTrusteeOperationW.
-func GetMultipleTrusteeOperationW(pTrustee *TRUSTEE_W) MULTIPLE_TRUSTEE_OPERATION {
-	r1, _, _ := syscall.SyscallN(procGetMultipleTrusteeOperationW.Addr(), uintptr(unsafe.Pointer(pTrustee)))
-	return MULTIPLE_TRUSTEE_OPERATION(r1)
-}
-
-// GetMultipleTrusteeW calls ADVAPI32!GetMultipleTrusteeW.
-func GetMultipleTrusteeW(pTrustee *TRUSTEE_W) *TRUSTEE_W {
-	r1, _, _ := syscall.SyscallN(procGetMultipleTrusteeW.Addr(), uintptr(unsafe.Pointer(pTrustee)))
-	return (*TRUSTEE_W)(unsafe.Pointer(r1))
+// GetNamedSecurityInfo calls ADVAPI32!GetNamedSecurityInfoW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getnamedsecurityinfow
+// Minimum OS: windows5.1.2600.
+func GetNamedSecurityInfo(pObjectName string, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, ppsidOwner *security.PSID, ppsidGroup *security.PSID, ppDacl **security.ACL, ppSacl **security.ACL, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
+	_pObjectName := win32.UTF16Ptr(pObjectName)
+	r1, _, _ := syscall.SyscallN(procGetNamedSecurityInfo.Addr(), uintptr(unsafe.Pointer(_pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(unsafe.Pointer(ppsidOwner)), uintptr(unsafe.Pointer(ppsidGroup)), uintptr(unsafe.Pointer(ppDacl)), uintptr(unsafe.Pointer(ppSacl)), uintptr(unsafe.Pointer(ppSecurityDescriptor)))
+	return foundation.WIN32_ERROR(r1)
 }
 
 // GetNamedSecurityInfoA calls ADVAPI32!GetNamedSecurityInfoA.
@@ -729,14 +802,6 @@ func GetMultipleTrusteeW(pTrustee *TRUSTEE_W) *TRUSTEE_W {
 // Minimum OS: windows5.1.2600.
 func GetNamedSecurityInfoA(pObjectName foundation.PSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, ppsidOwner *security.PSID, ppsidGroup *security.PSID, ppDacl **security.ACL, ppSacl **security.ACL, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procGetNamedSecurityInfoA.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(unsafe.Pointer(ppsidOwner)), uintptr(unsafe.Pointer(ppsidGroup)), uintptr(unsafe.Pointer(ppDacl)), uintptr(unsafe.Pointer(ppSacl)), uintptr(unsafe.Pointer(ppSecurityDescriptor)))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// GetNamedSecurityInfoW calls ADVAPI32!GetNamedSecurityInfoW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-getnamedsecurityinfow
-// Minimum OS: windows5.1.2600.
-func GetNamedSecurityInfoW(pObjectName foundation.PWSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, ppsidOwner *security.PSID, ppsidGroup *security.PSID, ppDacl **security.ACL, ppSacl **security.ACL, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procGetNamedSecurityInfoW.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(unsafe.Pointer(ppsidOwner)), uintptr(unsafe.Pointer(ppsidGroup)), uintptr(unsafe.Pointer(ppDacl)), uintptr(unsafe.Pointer(ppSacl)), uintptr(unsafe.Pointer(ppSecurityDescriptor)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -748,6 +813,14 @@ func GetSecurityInfo(handle foundation.HANDLE, ObjectType SE_OBJECT_TYPE, Securi
 	return foundation.WIN32_ERROR(r1)
 }
 
+// GetTrusteeForm calls ADVAPI32!GetTrusteeFormW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-gettrusteeformw
+// Minimum OS: windows5.1.2600.
+func GetTrusteeForm(pTrustee *TRUSTEE_W) TRUSTEE_FORM {
+	r1, _, _ := syscall.SyscallN(procGetTrusteeForm.Addr(), uintptr(unsafe.Pointer(pTrustee)))
+	return TRUSTEE_FORM(r1)
+}
+
 // GetTrusteeFormA calls ADVAPI32!GetTrusteeFormA.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-gettrusteeforma
 // Minimum OS: windows5.1.2600.
@@ -756,12 +829,12 @@ func GetTrusteeFormA(pTrustee *TRUSTEE_A) TRUSTEE_FORM {
 	return TRUSTEE_FORM(r1)
 }
 
-// GetTrusteeFormW calls ADVAPI32!GetTrusteeFormW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-gettrusteeformw
+// GetTrusteeName calls ADVAPI32!GetTrusteeNameW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-gettrusteenamew
 // Minimum OS: windows5.1.2600.
-func GetTrusteeFormW(pTrustee *TRUSTEE_W) TRUSTEE_FORM {
-	r1, _, _ := syscall.SyscallN(procGetTrusteeFormW.Addr(), uintptr(unsafe.Pointer(pTrustee)))
-	return TRUSTEE_FORM(r1)
+func GetTrusteeName(pTrustee *TRUSTEE_W) foundation.PWSTR {
+	r1, _, _ := syscall.SyscallN(procGetTrusteeName.Addr(), uintptr(unsafe.Pointer(pTrustee)))
+	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
 // GetTrusteeNameA calls ADVAPI32!GetTrusteeNameA.
@@ -772,12 +845,12 @@ func GetTrusteeNameA(pTrustee *TRUSTEE_A) foundation.PSTR {
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// GetTrusteeNameW calls ADVAPI32!GetTrusteeNameW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-gettrusteenamew
+// GetTrusteeType calls ADVAPI32!GetTrusteeTypeW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-gettrusteetypew
 // Minimum OS: windows5.1.2600.
-func GetTrusteeNameW(pTrustee *TRUSTEE_W) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procGetTrusteeNameW.Addr(), uintptr(unsafe.Pointer(pTrustee)))
-	return foundation.PWSTR(unsafe.Pointer(r1))
+func GetTrusteeType(pTrustee *TRUSTEE_W) TRUSTEE_TYPE {
+	r1, _, _ := syscall.SyscallN(procGetTrusteeType.Addr(), uintptr(unsafe.Pointer(pTrustee)))
+	return TRUSTEE_TYPE(r1)
 }
 
 // GetTrusteeTypeA calls ADVAPI32!GetTrusteeTypeA.
@@ -788,12 +861,12 @@ func GetTrusteeTypeA(pTrustee *TRUSTEE_A) TRUSTEE_TYPE {
 	return TRUSTEE_TYPE(r1)
 }
 
-// GetTrusteeTypeW calls ADVAPI32!GetTrusteeTypeW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-gettrusteetypew
+// LookupSecurityDescriptorParts calls ADVAPI32!LookupSecurityDescriptorPartsW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-lookupsecuritydescriptorpartsw
 // Minimum OS: windows5.1.2600.
-func GetTrusteeTypeW(pTrustee *TRUSTEE_W) TRUSTEE_TYPE {
-	r1, _, _ := syscall.SyscallN(procGetTrusteeTypeW.Addr(), uintptr(unsafe.Pointer(pTrustee)))
-	return TRUSTEE_TYPE(r1)
+func LookupSecurityDescriptorParts(ppOwner **TRUSTEE_W, ppGroup **TRUSTEE_W, pcCountOfAccessEntries *uint32, ppListOfAccessEntries **EXPLICIT_ACCESS_W, pcCountOfAuditEntries *uint32, ppListOfAuditEntries **EXPLICIT_ACCESS_W, pSD security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procLookupSecurityDescriptorParts.Addr(), uintptr(unsafe.Pointer(ppOwner)), uintptr(unsafe.Pointer(ppGroup)), uintptr(unsafe.Pointer(pcCountOfAccessEntries)), uintptr(unsafe.Pointer(ppListOfAccessEntries)), uintptr(unsafe.Pointer(pcCountOfAuditEntries)), uintptr(unsafe.Pointer(ppListOfAuditEntries)), uintptr(pSD))
+	return foundation.WIN32_ERROR(r1)
 }
 
 // LookupSecurityDescriptorPartsA calls ADVAPI32!LookupSecurityDescriptorPartsA.
@@ -804,27 +877,36 @@ func LookupSecurityDescriptorPartsA(ppOwner **TRUSTEE_A, ppGroup **TRUSTEE_A, pc
 	return foundation.WIN32_ERROR(r1)
 }
 
-// LookupSecurityDescriptorPartsW calls ADVAPI32!LookupSecurityDescriptorPartsW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-lookupsecuritydescriptorpartsw
+// SetEntriesInAcl calls ADVAPI32!SetEntriesInAclW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-setentriesinaclw
 // Minimum OS: windows5.1.2600.
-func LookupSecurityDescriptorPartsW(ppOwner **TRUSTEE_W, ppGroup **TRUSTEE_W, pcCountOfAccessEntries *uint32, ppListOfAccessEntries **EXPLICIT_ACCESS_W, pcCountOfAuditEntries *uint32, ppListOfAuditEntries **EXPLICIT_ACCESS_W, pSD security.PSECURITY_DESCRIPTOR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procLookupSecurityDescriptorPartsW.Addr(), uintptr(unsafe.Pointer(ppOwner)), uintptr(unsafe.Pointer(ppGroup)), uintptr(unsafe.Pointer(pcCountOfAccessEntries)), uintptr(unsafe.Pointer(ppListOfAccessEntries)), uintptr(unsafe.Pointer(pcCountOfAuditEntries)), uintptr(unsafe.Pointer(ppListOfAuditEntries)), uintptr(pSD))
+func SetEntriesInAcl(pListOfExplicitEntries []EXPLICIT_ACCESS_W, OldAcl *security.ACL, NewAcl **security.ACL) foundation.WIN32_ERROR {
+	var _pListOfExplicitEntries *EXPLICIT_ACCESS_W
+	if len(pListOfExplicitEntries) > 0 {
+		_pListOfExplicitEntries = &pListOfExplicitEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetEntriesInAcl.Addr(), uintptr(len(pListOfExplicitEntries)), uintptr(unsafe.Pointer(_pListOfExplicitEntries)), uintptr(unsafe.Pointer(OldAcl)), uintptr(unsafe.Pointer(NewAcl)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // SetEntriesInAclA calls ADVAPI32!SetEntriesInAclA.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-setentriesinacla
 // Minimum OS: windows5.1.2600.
-func SetEntriesInAclA(cCountOfExplicitEntries uint32, pListOfExplicitEntries *EXPLICIT_ACCESS_A, OldAcl *security.ACL, NewAcl **security.ACL) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procSetEntriesInAclA.Addr(), uintptr(cCountOfExplicitEntries), uintptr(unsafe.Pointer(pListOfExplicitEntries)), uintptr(unsafe.Pointer(OldAcl)), uintptr(unsafe.Pointer(NewAcl)))
+func SetEntriesInAclA(pListOfExplicitEntries []EXPLICIT_ACCESS_A, OldAcl *security.ACL, NewAcl **security.ACL) foundation.WIN32_ERROR {
+	var _pListOfExplicitEntries *EXPLICIT_ACCESS_A
+	if len(pListOfExplicitEntries) > 0 {
+		_pListOfExplicitEntries = &pListOfExplicitEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetEntriesInAclA.Addr(), uintptr(len(pListOfExplicitEntries)), uintptr(unsafe.Pointer(_pListOfExplicitEntries)), uintptr(unsafe.Pointer(OldAcl)), uintptr(unsafe.Pointer(NewAcl)))
 	return foundation.WIN32_ERROR(r1)
 }
 
-// SetEntriesInAclW calls ADVAPI32!SetEntriesInAclW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-setentriesinaclw
+// SetNamedSecurityInfo calls ADVAPI32!SetNamedSecurityInfoW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-setnamedsecurityinfow
 // Minimum OS: windows5.1.2600.
-func SetEntriesInAclW(cCountOfExplicitEntries uint32, pListOfExplicitEntries *EXPLICIT_ACCESS_W, OldAcl *security.ACL, NewAcl **security.ACL) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procSetEntriesInAclW.Addr(), uintptr(cCountOfExplicitEntries), uintptr(unsafe.Pointer(pListOfExplicitEntries)), uintptr(unsafe.Pointer(OldAcl)), uintptr(unsafe.Pointer(NewAcl)))
+func SetNamedSecurityInfo(pObjectName string, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, psidOwner security.PSID, psidGroup security.PSID, pDacl *security.ACL, pSacl *security.ACL) foundation.WIN32_ERROR {
+	_pObjectName := win32.UTF16Ptr(pObjectName)
+	r1, _, _ := syscall.SyscallN(procSetNamedSecurityInfo.Addr(), uintptr(unsafe.Pointer(_pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(psidOwner), uintptr(psidGroup), uintptr(unsafe.Pointer(pDacl)), uintptr(unsafe.Pointer(pSacl)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -836,14 +918,6 @@ func SetNamedSecurityInfoA(pObjectName foundation.PSTR, ObjectType SE_OBJECT_TYP
 	return foundation.WIN32_ERROR(r1)
 }
 
-// SetNamedSecurityInfoW calls ADVAPI32!SetNamedSecurityInfoW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-setnamedsecurityinfow
-// Minimum OS: windows5.1.2600.
-func SetNamedSecurityInfoW(pObjectName foundation.PWSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, psidOwner security.PSID, psidGroup security.PSID, pDacl *security.ACL, pSacl *security.ACL) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procSetNamedSecurityInfoW.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(psidOwner), uintptr(psidGroup), uintptr(unsafe.Pointer(pDacl)), uintptr(unsafe.Pointer(pSacl)))
-	return foundation.WIN32_ERROR(r1)
-}
-
 // SetSecurityInfo calls ADVAPI32!SetSecurityInfo.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-setsecurityinfo
 // Minimum OS: windows5.1.2600.
@@ -852,19 +926,31 @@ func SetSecurityInfo(handle foundation.HANDLE, ObjectType SE_OBJECT_TYPE, Securi
 	return foundation.WIN32_ERROR(r1)
 }
 
-// TreeResetNamedSecurityInfoA calls ADVAPI32!TreeResetNamedSecurityInfoA.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-treeresetnamedsecurityinfoa
+// TreeResetNamedSecurityInfo calls ADVAPI32!TreeResetNamedSecurityInfoW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-treeresetnamedsecurityinfow
 // Minimum OS: windows5.1.2600.
-func TreeResetNamedSecurityInfoA(pObjectName foundation.PSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, pOwner security.PSID, pGroup security.PSID, pDacl *security.ACL, pSacl *security.ACL, KeepExplicit foundation.BOOL, fnProgress FN_PROGRESS, ProgressInvokeSetting PROG_INVOKE_SETTING, Args unsafe.Pointer) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procTreeResetNamedSecurityInfoA.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(pOwner), uintptr(pGroup), uintptr(unsafe.Pointer(pDacl)), uintptr(unsafe.Pointer(pSacl)), uintptr(KeepExplicit), uintptr(fnProgress), uintptr(ProgressInvokeSetting), uintptr(unsafe.Pointer(Args)))
+func TreeResetNamedSecurityInfo(pObjectName string, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, pOwner security.PSID, pGroup security.PSID, pDacl *security.ACL, pSacl *security.ACL, KeepExplicit bool, fnProgress FN_PROGRESS, ProgressInvokeSetting PROG_INVOKE_SETTING, Args unsafe.Pointer) foundation.WIN32_ERROR {
+	_pObjectName := win32.UTF16Ptr(pObjectName)
+	_KeepExplicit := win32.Bool32(KeepExplicit)
+	r1, _, _ := syscall.SyscallN(procTreeResetNamedSecurityInfo.Addr(), uintptr(unsafe.Pointer(_pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(pOwner), uintptr(pGroup), uintptr(unsafe.Pointer(pDacl)), uintptr(unsafe.Pointer(pSacl)), uintptr(_KeepExplicit), uintptr(fnProgress), uintptr(ProgressInvokeSetting), uintptr(unsafe.Pointer(Args)))
 	return foundation.WIN32_ERROR(r1)
 }
 
-// TreeResetNamedSecurityInfoW calls ADVAPI32!TreeResetNamedSecurityInfoW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-treeresetnamedsecurityinfow
+// TreeResetNamedSecurityInfoA calls ADVAPI32!TreeResetNamedSecurityInfoA.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-treeresetnamedsecurityinfoa
 // Minimum OS: windows5.1.2600.
-func TreeResetNamedSecurityInfoW(pObjectName foundation.PWSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, pOwner security.PSID, pGroup security.PSID, pDacl *security.ACL, pSacl *security.ACL, KeepExplicit foundation.BOOL, fnProgress FN_PROGRESS, ProgressInvokeSetting PROG_INVOKE_SETTING, Args unsafe.Pointer) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procTreeResetNamedSecurityInfoW.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(pOwner), uintptr(pGroup), uintptr(unsafe.Pointer(pDacl)), uintptr(unsafe.Pointer(pSacl)), uintptr(KeepExplicit), uintptr(fnProgress), uintptr(ProgressInvokeSetting), uintptr(unsafe.Pointer(Args)))
+func TreeResetNamedSecurityInfoA(pObjectName foundation.PSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, pOwner security.PSID, pGroup security.PSID, pDacl *security.ACL, pSacl *security.ACL, KeepExplicit bool, fnProgress FN_PROGRESS, ProgressInvokeSetting PROG_INVOKE_SETTING, Args unsafe.Pointer) foundation.WIN32_ERROR {
+	_KeepExplicit := win32.Bool32(KeepExplicit)
+	r1, _, _ := syscall.SyscallN(procTreeResetNamedSecurityInfoA.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(pOwner), uintptr(pGroup), uintptr(unsafe.Pointer(pDacl)), uintptr(unsafe.Pointer(pSacl)), uintptr(_KeepExplicit), uintptr(fnProgress), uintptr(ProgressInvokeSetting), uintptr(unsafe.Pointer(Args)))
+	return foundation.WIN32_ERROR(r1)
+}
+
+// TreeSetNamedSecurityInfo calls ADVAPI32!TreeSetNamedSecurityInfoW.
+// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-treesetnamedsecurityinfow
+// Minimum OS: windows6.0.6000.
+func TreeSetNamedSecurityInfo(pObjectName string, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, pOwner security.PSID, pGroup security.PSID, pDacl *security.ACL, pSacl *security.ACL, dwAction TREE_SEC_INFO, fnProgress FN_PROGRESS, ProgressInvokeSetting PROG_INVOKE_SETTING, Args unsafe.Pointer) foundation.WIN32_ERROR {
+	_pObjectName := win32.UTF16Ptr(pObjectName)
+	r1, _, _ := syscall.SyscallN(procTreeSetNamedSecurityInfo.Addr(), uintptr(unsafe.Pointer(_pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(pOwner), uintptr(pGroup), uintptr(unsafe.Pointer(pDacl)), uintptr(unsafe.Pointer(pSacl)), uintptr(dwAction), uintptr(fnProgress), uintptr(ProgressInvokeSetting), uintptr(unsafe.Pointer(Args)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -873,13 +959,5 @@ func TreeResetNamedSecurityInfoW(pObjectName foundation.PWSTR, ObjectType SE_OBJ
 // Minimum OS: windows6.0.6000.
 func TreeSetNamedSecurityInfoA(pObjectName foundation.PSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, pOwner security.PSID, pGroup security.PSID, pDacl *security.ACL, pSacl *security.ACL, dwAction TREE_SEC_INFO, fnProgress FN_PROGRESS, ProgressInvokeSetting PROG_INVOKE_SETTING, Args unsafe.Pointer) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procTreeSetNamedSecurityInfoA.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(pOwner), uintptr(pGroup), uintptr(unsafe.Pointer(pDacl)), uintptr(unsafe.Pointer(pSacl)), uintptr(dwAction), uintptr(fnProgress), uintptr(ProgressInvokeSetting), uintptr(unsafe.Pointer(Args)))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// TreeSetNamedSecurityInfoW calls ADVAPI32!TreeSetNamedSecurityInfoW.
-// https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-treesetnamedsecurityinfow
-// Minimum OS: windows6.0.6000.
-func TreeSetNamedSecurityInfoW(pObjectName foundation.PWSTR, ObjectType SE_OBJECT_TYPE, SecurityInfo security.OBJECT_SECURITY_INFORMATION, pOwner security.PSID, pGroup security.PSID, pDacl *security.ACL, pSacl *security.ACL, dwAction TREE_SEC_INFO, fnProgress FN_PROGRESS, ProgressInvokeSetting PROG_INVOKE_SETTING, Args unsafe.Pointer) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procTreeSetNamedSecurityInfoW.Addr(), uintptr(unsafe.Pointer(pObjectName)), uintptr(ObjectType), uintptr(SecurityInfo), uintptr(pOwner), uintptr(pGroup), uintptr(unsafe.Pointer(pDacl)), uintptr(unsafe.Pointer(pSacl)), uintptr(dwAction), uintptr(fnProgress), uintptr(ProgressInvokeSetting), uintptr(unsafe.Pointer(Args)))
 	return foundation.WIN32_ERROR(r1)
 }

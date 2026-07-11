@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -22,21 +21,21 @@ type EXPERIMENTAL_IPluginAuthenticator struct {
 var IID_EXPERIMENTAL_IPluginAuthenticator = win32.GUID{Data1: 0xe6466e9a, Data2: 0xb2f3, Data3: 0x47c5, Data4: [8]byte{0xb8, 0x8d, 0x89, 0xbc, 0x14, 0xa8, 0xd9, 0x98}}
 
 // EXPERIMENTAL_PluginMakeCredential dispatches through EXPERIMENTAL_IPluginAuthenticator's vtable slot 3.
-func (self *EXPERIMENTAL_IPluginAuthenticator) EXPERIMENTAL_PluginMakeCredential(request *EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_REQUEST, response **EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_RESPONSE) foundation.HRESULT {
+func (self *EXPERIMENTAL_IPluginAuthenticator) EXPERIMENTAL_PluginMakeCredential(request *EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_REQUEST, response **EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_RESPONSE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(response)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EXPERIMENTAL_PluginGetAssertion dispatches through EXPERIMENTAL_IPluginAuthenticator's vtable slot 4.
-func (self *EXPERIMENTAL_IPluginAuthenticator) EXPERIMENTAL_PluginGetAssertion(request *EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_REQUEST, response **EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_RESPONSE) foundation.HRESULT {
+func (self *EXPERIMENTAL_IPluginAuthenticator) EXPERIMENTAL_PluginGetAssertion(request *EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_REQUEST, response **EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_RESPONSE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(response)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EXPERIMENTAL_PluginCancelOperation dispatches through EXPERIMENTAL_IPluginAuthenticator's vtable slot 5.
-func (self *EXPERIMENTAL_IPluginAuthenticator) EXPERIMENTAL_PluginCancelOperation(request *EXPERIMENTAL_WEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST) foundation.HRESULT {
+func (self *EXPERIMENTAL_IPluginAuthenticator) EXPERIMENTAL_PluginCancelOperation(request *EXPERIMENTAL_WEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d26bcf6f-b54c-43ff-9f06-d5bf148625f7
@@ -48,25 +47,28 @@ type IPluginAuthenticator struct {
 var IID_IPluginAuthenticator = win32.GUID{Data1: 0xd26bcf6f, Data2: 0xb54c, Data3: 0x43ff, Data4: [8]byte{0x9f, 0x06, 0xd5, 0xbf, 0x14, 0x86, 0x25, 0xf7}}
 
 // MakeCredential dispatches through IPluginAuthenticator's vtable slot 3.
-func (self *IPluginAuthenticator) MakeCredential(request *WEBAUTHN_PLUGIN_OPERATION_REQUEST, response *WEBAUTHN_PLUGIN_OPERATION_RESPONSE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(response)))
-	return foundation.HRESULT(r1)
+func (self *IPluginAuthenticator) MakeCredential(request *WEBAUTHN_PLUGIN_OPERATION_REQUEST) (WEBAUTHN_PLUGIN_OPERATION_RESPONSE, error) {
+	var _response WEBAUTHN_PLUGIN_OPERATION_RESPONSE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(&_response)))
+	return _response, win32.HRESULTError(int32(r1))
 }
 
 // GetAssertion dispatches through IPluginAuthenticator's vtable slot 4.
-func (self *IPluginAuthenticator) GetAssertion(request *WEBAUTHN_PLUGIN_OPERATION_REQUEST, response *WEBAUTHN_PLUGIN_OPERATION_RESPONSE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(response)))
-	return foundation.HRESULT(r1)
+func (self *IPluginAuthenticator) GetAssertion(request *WEBAUTHN_PLUGIN_OPERATION_REQUEST) (WEBAUTHN_PLUGIN_OPERATION_RESPONSE, error) {
+	var _response WEBAUTHN_PLUGIN_OPERATION_RESPONSE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(&_response)))
+	return _response, win32.HRESULTError(int32(r1))
 }
 
 // CancelOperation dispatches through IPluginAuthenticator's vtable slot 5.
-func (self *IPluginAuthenticator) CancelOperation(request *WEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST) foundation.HRESULT {
+func (self *IPluginAuthenticator) CancelOperation(request *WEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(request)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLockStatus dispatches through IPluginAuthenticator's vtable slot 6.
-func (self *IPluginAuthenticator) GetLockStatus(lockStatus *PLUGIN_LOCK_STATUS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lockStatus)))
-	return foundation.HRESULT(r1)
+func (self *IPluginAuthenticator) GetLockStatus() (PLUGIN_LOCK_STATUS, error) {
+	var _lockStatus PLUGIN_LOCK_STATUS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lockStatus)))
+	return _lockStatus, win32.HRESULTError(int32(r1))
 }

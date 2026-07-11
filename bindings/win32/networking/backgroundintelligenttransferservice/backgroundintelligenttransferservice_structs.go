@@ -16,8 +16,8 @@ type BG_AUTH_CREDENTIALS struct {
 }
 
 // BG_AUTH_CREDENTIALS_UNION: https://learn.microsoft.com/windows/win32/api/bits1_5/ns-bits1_5-bg_auth_credentials_union
-// BG_AUTH_CREDENTIALS_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BG_AUTH_CREDENTIALS_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BG_AUTH_CREDENTIALS_UNION struct {
 	Data [2]uint64
 }
@@ -72,15 +72,15 @@ type BITSExtensionSetupFactory struct {
 }
 
 // BITS_FILE_PROPERTY_VALUE: https://learn.microsoft.com/windows/win32/api/bits5_0/ns-bits5_0-bits_file_property_value
-// BITS_FILE_PROPERTY_VALUE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BITS_FILE_PROPERTY_VALUE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BITS_FILE_PROPERTY_VALUE struct {
 	Data [1]uint64
 }
 
 // BITS_JOB_PROPERTY_VALUE: https://learn.microsoft.com/windows/win32/api/bits5_0/ns-bits5_0-bits_job_property_value
-// BITS_JOB_PROPERTY_VALUE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BITS_JOB_PROPERTY_VALUE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BITS_JOB_PROPERTY_VALUE struct {
 	Data [2]uint64
 }

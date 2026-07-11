@@ -26,21 +26,22 @@ type IDXGIAdapter struct {
 var IID_IDXGIAdapter = win32.GUID{Data1: 0x2411e7e1, Data2: 0x12ac, Data3: 0x4ccf, Data4: [8]byte{0xbd, 0x14, 0x97, 0x98, 0xe8, 0x53, 0x4d, 0xc0}}
 
 // EnumOutputs dispatches through IDXGIAdapter's vtable slot 7.
-func (self *IDXGIAdapter) EnumOutputs(Output uint32, ppOutput **IDXGIOutput) foundation.HRESULT {
+func (self *IDXGIAdapter) EnumOutputs(Output uint32, ppOutput **IDXGIOutput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Output), uintptr(unsafe.Pointer(ppOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesc dispatches through IDXGIAdapter's vtable slot 8.
-func (self *IDXGIAdapter) GetDesc(pDesc *DXGI_ADAPTER_DESC) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGIAdapter) GetDesc() (DXGI_ADAPTER_DESC, error) {
+	var _pDesc DXGI_ADAPTER_DESC
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // CheckInterfaceSupport dispatches through IDXGIAdapter's vtable slot 9.
-func (self *IDXGIAdapter) CheckInterfaceSupport(InterfaceName *win32.GUID, pUMDVersion *int64) foundation.HRESULT {
+func (self *IDXGIAdapter) CheckInterfaceSupport(InterfaceName *win32.GUID, pUMDVersion *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InterfaceName)), uintptr(unsafe.Pointer(pUMDVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIAdapter1: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgiadapter1
@@ -53,9 +54,10 @@ type IDXGIAdapter1 struct {
 var IID_IDXGIAdapter1 = win32.GUID{Data1: 0x29038f61, Data2: 0x3839, Data3: 0x4626, Data4: [8]byte{0x91, 0xfd, 0x08, 0x68, 0x79, 0x01, 0x1a, 0x05}}
 
 // GetDesc1 dispatches through IDXGIAdapter1's vtable slot 10.
-func (self *IDXGIAdapter1) GetDesc1(pDesc *DXGI_ADAPTER_DESC1) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGIAdapter1) GetDesc1() (DXGI_ADAPTER_DESC1, error) {
+	var _pDesc DXGI_ADAPTER_DESC1
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // IDXGIAdapter2: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgiadapter2
@@ -68,9 +70,10 @@ type IDXGIAdapter2 struct {
 var IID_IDXGIAdapter2 = win32.GUID{Data1: 0x0aa1ae0a, Data2: 0xfa0e, Data3: 0x4b84, Data4: [8]byte{0x86, 0x44, 0xe0, 0x5f, 0xf8, 0xe5, 0xac, 0xb5}}
 
 // GetDesc2 dispatches through IDXGIAdapter2's vtable slot 11.
-func (self *IDXGIAdapter2) GetDesc2(pDesc *DXGI_ADAPTER_DESC2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGIAdapter2) GetDesc2() (DXGI_ADAPTER_DESC2, error) {
+	var _pDesc DXGI_ADAPTER_DESC2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // IDXGIAdapter3: https://learn.microsoft.com/windows/win32/api/dxgi1_4/nn-dxgi1_4-idxgiadapter3
@@ -83,9 +86,9 @@ type IDXGIAdapter3 struct {
 var IID_IDXGIAdapter3 = win32.GUID{Data1: 0x645967a4, Data2: 0x1392, Data3: 0x4310, Data4: [8]byte{0xa7, 0x98, 0x80, 0x53, 0xce, 0x3e, 0x93, 0xfd}}
 
 // RegisterHardwareContentProtectionTeardownStatusEvent dispatches through IDXGIAdapter3's vtable slot 12.
-func (self *IDXGIAdapter3) RegisterHardwareContentProtectionTeardownStatusEvent(hEvent foundation.HANDLE, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDXGIAdapter3) RegisterHardwareContentProtectionTeardownStatusEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterHardwareContentProtectionTeardownStatus dispatches through IDXGIAdapter3's vtable slot 13.
@@ -94,21 +97,21 @@ func (self *IDXGIAdapter3) UnregisterHardwareContentProtectionTeardownStatus(dwC
 }
 
 // QueryVideoMemoryInfo dispatches through IDXGIAdapter3's vtable slot 14.
-func (self *IDXGIAdapter3) QueryVideoMemoryInfo(NodeIndex uint32, MemorySegmentGroup DXGI_MEMORY_SEGMENT_GROUP, pVideoMemoryInfo *DXGI_QUERY_VIDEO_MEMORY_INFO) foundation.HRESULT {
+func (self *IDXGIAdapter3) QueryVideoMemoryInfo(NodeIndex uint32, MemorySegmentGroup DXGI_MEMORY_SEGMENT_GROUP, pVideoMemoryInfo *DXGI_QUERY_VIDEO_MEMORY_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(NodeIndex), uintptr(MemorySegmentGroup), uintptr(unsafe.Pointer(pVideoMemoryInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVideoMemoryReservation dispatches through IDXGIAdapter3's vtable slot 15.
-func (self *IDXGIAdapter3) SetVideoMemoryReservation(NodeIndex uint32, MemorySegmentGroup DXGI_MEMORY_SEGMENT_GROUP, Reservation uint64) foundation.HRESULT {
+func (self *IDXGIAdapter3) SetVideoMemoryReservation(NodeIndex uint32, MemorySegmentGroup DXGI_MEMORY_SEGMENT_GROUP, Reservation uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(NodeIndex), uintptr(MemorySegmentGroup), uintptr(Reservation))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterVideoMemoryBudgetChangeNotificationEvent dispatches through IDXGIAdapter3's vtable slot 16.
-func (self *IDXGIAdapter3) RegisterVideoMemoryBudgetChangeNotificationEvent(hEvent foundation.HANDLE, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDXGIAdapter3) RegisterVideoMemoryBudgetChangeNotificationEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterVideoMemoryBudgetChangeNotification dispatches through IDXGIAdapter3's vtable slot 17.
@@ -126,9 +129,10 @@ type IDXGIAdapter4 struct {
 var IID_IDXGIAdapter4 = win32.GUID{Data1: 0x3c8d99d1, Data2: 0x4fbf, Data3: 0x4181, Data4: [8]byte{0xa8, 0x2c, 0xaf, 0x66, 0xbf, 0x7b, 0xd2, 0x4e}}
 
 // GetDesc3 dispatches through IDXGIAdapter4's vtable slot 18.
-func (self *IDXGIAdapter4) GetDesc3(pDesc *DXGI_ADAPTER_DESC3) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGIAdapter4) GetDesc3() (DXGI_ADAPTER_DESC3, error) {
+	var _pDesc DXGI_ADAPTER_DESC3
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // IDXGIDebug: https://learn.microsoft.com/windows/win32/api/dxgidebug/nn-dxgidebug-idxgidebug
@@ -175,51 +179,51 @@ type IDXGIDecodeSwapChain struct {
 var IID_IDXGIDecodeSwapChain = win32.GUID{Data1: 0x2633066b, Data2: 0x4514, Data3: 0x4c7a, Data4: [8]byte{0x8f, 0xd8, 0x12, 0xea, 0x98, 0x05, 0x9d, 0x18}}
 
 // PresentBuffer dispatches through IDXGIDecodeSwapChain's vtable slot 3.
-func (self *IDXGIDecodeSwapChain) PresentBuffer(BufferToPresent uint32, SyncInterval uint32, Flags DXGI_PRESENT) foundation.HRESULT {
+func (self *IDXGIDecodeSwapChain) PresentBuffer(BufferToPresent uint32, SyncInterval uint32, Flags DXGI_PRESENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(BufferToPresent), uintptr(SyncInterval), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSourceRect dispatches through IDXGIDecodeSwapChain's vtable slot 4.
-func (self *IDXGIDecodeSwapChain) SetSourceRect(pRect *foundation.RECT) foundation.HRESULT {
+func (self *IDXGIDecodeSwapChain) SetSourceRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTargetRect dispatches through IDXGIDecodeSwapChain's vtable slot 5.
-func (self *IDXGIDecodeSwapChain) SetTargetRect(pRect *foundation.RECT) foundation.HRESULT {
+func (self *IDXGIDecodeSwapChain) SetTargetRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDestSize dispatches through IDXGIDecodeSwapChain's vtable slot 6.
-func (self *IDXGIDecodeSwapChain) SetDestSize(Width uint32, Height uint32) foundation.HRESULT {
+func (self *IDXGIDecodeSwapChain) SetDestSize(Width uint32, Height uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceRect dispatches through IDXGIDecodeSwapChain's vtable slot 7.
-func (self *IDXGIDecodeSwapChain) GetSourceRect(pRect *foundation.RECT) foundation.HRESULT {
+func (self *IDXGIDecodeSwapChain) GetSourceRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTargetRect dispatches through IDXGIDecodeSwapChain's vtable slot 8.
-func (self *IDXGIDecodeSwapChain) GetTargetRect(pRect *foundation.RECT) foundation.HRESULT {
+func (self *IDXGIDecodeSwapChain) GetTargetRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDestSize dispatches through IDXGIDecodeSwapChain's vtable slot 9.
-func (self *IDXGIDecodeSwapChain) GetDestSize(pWidth *uint32, pHeight *uint32) foundation.HRESULT {
+func (self *IDXGIDecodeSwapChain) GetDestSize(pWidth *uint32, pHeight *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorSpace dispatches through IDXGIDecodeSwapChain's vtable slot 10.
-func (self *IDXGIDecodeSwapChain) SetColorSpace(ColorSpace DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS) foundation.HRESULT {
+func (self *IDXGIDecodeSwapChain) SetColorSpace(ColorSpace DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ColorSpace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColorSpace dispatches through IDXGIDecodeSwapChain's vtable slot 11.
@@ -238,33 +242,33 @@ type IDXGIDevice struct {
 var IID_IDXGIDevice = win32.GUID{Data1: 0x54ec77fa, Data2: 0x1377, Data3: 0x44e6, Data4: [8]byte{0x8c, 0x32, 0x88, 0xfd, 0x5f, 0x44, 0xc8, 0x4c}}
 
 // GetAdapter dispatches through IDXGIDevice's vtable slot 7.
-func (self *IDXGIDevice) GetAdapter(pAdapter **IDXGIAdapter) foundation.HRESULT {
+func (self *IDXGIDevice) GetAdapter(pAdapter **IDXGIAdapter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdapter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSurface dispatches through IDXGIDevice's vtable slot 8.
-func (self *IDXGIDevice) CreateSurface(pDesc *DXGI_SURFACE_DESC, NumSurfaces uint32, Usage DXGI_USAGE, pSharedResource *DXGI_SHARED_RESOURCE, ppSurface **IDXGISurface) foundation.HRESULT {
+func (self *IDXGIDevice) CreateSurface(pDesc *DXGI_SURFACE_DESC, NumSurfaces uint32, Usage DXGI_USAGE, pSharedResource *DXGI_SHARED_RESOURCE, ppSurface **IDXGISurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(NumSurfaces), uintptr(Usage), uintptr(unsafe.Pointer(pSharedResource)), uintptr(unsafe.Pointer(ppSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryResourceResidency dispatches through IDXGIDevice's vtable slot 9.
-func (self *IDXGIDevice) QueryResourceResidency(ppResources **systemcom.IUnknown, pResidencyStatus *DXGI_RESIDENCY, NumResources uint32) foundation.HRESULT {
+func (self *IDXGIDevice) QueryResourceResidency(ppResources **systemcom.IUnknown, pResidencyStatus *DXGI_RESIDENCY, NumResources uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(unsafe.Pointer(pResidencyStatus)), uintptr(NumResources))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGPUThreadPriority dispatches through IDXGIDevice's vtable slot 10.
-func (self *IDXGIDevice) SetGPUThreadPriority(Priority int32) foundation.HRESULT {
+func (self *IDXGIDevice) SetGPUThreadPriority(Priority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Priority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGPUThreadPriority dispatches through IDXGIDevice's vtable slot 11.
-func (self *IDXGIDevice) GetGPUThreadPriority(pPriority *int32) foundation.HRESULT {
+func (self *IDXGIDevice) GetGPUThreadPriority(pPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIDevice1: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgidevice1
@@ -277,15 +281,15 @@ type IDXGIDevice1 struct {
 var IID_IDXGIDevice1 = win32.GUID{Data1: 0x77db970f, Data2: 0x6276, Data3: 0x48ba, Data4: [8]byte{0xba, 0x28, 0x07, 0x01, 0x43, 0xb4, 0x39, 0x2c}}
 
 // SetMaximumFrameLatency dispatches through IDXGIDevice1's vtable slot 12.
-func (self *IDXGIDevice1) SetMaximumFrameLatency(MaxLatency uint32) foundation.HRESULT {
+func (self *IDXGIDevice1) SetMaximumFrameLatency(MaxLatency uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(MaxLatency))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaximumFrameLatency dispatches through IDXGIDevice1's vtable slot 13.
-func (self *IDXGIDevice1) GetMaximumFrameLatency(pMaxLatency *uint32) foundation.HRESULT {
+func (self *IDXGIDevice1) GetMaximumFrameLatency(pMaxLatency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaxLatency)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIDevice2: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgidevice2
@@ -298,21 +302,21 @@ type IDXGIDevice2 struct {
 var IID_IDXGIDevice2 = win32.GUID{Data1: 0x05008617, Data2: 0xfbfd, Data3: 0x4051, Data4: [8]byte{0xa7, 0x90, 0x14, 0x48, 0x84, 0xb4, 0xf6, 0xa9}}
 
 // OfferResources dispatches through IDXGIDevice2's vtable slot 14.
-func (self *IDXGIDevice2) OfferResources(NumResources uint32, ppResources **IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY) foundation.HRESULT {
+func (self *IDXGIDevice2) OfferResources(NumResources uint32, ppResources **IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(Priority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReclaimResources dispatches through IDXGIDevice2's vtable slot 15.
-func (self *IDXGIDevice2) ReclaimResources(NumResources uint32, ppResources **IDXGIResource, pDiscarded *foundation.BOOL) foundation.HRESULT {
+func (self *IDXGIDevice2) ReclaimResources(NumResources uint32, ppResources **IDXGIResource, pDiscarded *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(unsafe.Pointer(pDiscarded)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnqueueSetEvent dispatches through IDXGIDevice2's vtable slot 16.
-func (self *IDXGIDevice2) EnqueueSetEvent(hEvent foundation.HANDLE) foundation.HRESULT {
+func (self *IDXGIDevice2) EnqueueSetEvent(hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hEvent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIDevice3: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgidevice3
@@ -339,15 +343,15 @@ type IDXGIDevice4 struct {
 var IID_IDXGIDevice4 = win32.GUID{Data1: 0x95b4f95f, Data2: 0xd8da, Data3: 0x4ca4, Data4: [8]byte{0x9e, 0xe6, 0x3b, 0x76, 0xd5, 0x96, 0x8a, 0x10}}
 
 // OfferResources1 dispatches through IDXGIDevice4's vtable slot 18.
-func (self *IDXGIDevice4) OfferResources1(NumResources uint32, ppResources **IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY, Flags uint32) foundation.HRESULT {
+func (self *IDXGIDevice4) OfferResources1(NumResources uint32, ppResources **IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(Priority), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReclaimResources1 dispatches through IDXGIDevice4's vtable slot 19.
-func (self *IDXGIDevice4) ReclaimResources1(NumResources uint32, ppResources **IDXGIResource, pResults *DXGI_RECLAIM_RESOURCE_RESULTS) foundation.HRESULT {
+func (self *IDXGIDevice4) ReclaimResources1(NumResources uint32, ppResources **IDXGIResource, pResults *DXGI_RECLAIM_RESOURCE_RESULTS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(unsafe.Pointer(pResults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIDeviceSubObject: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgidevicesubobject
@@ -360,9 +364,9 @@ type IDXGIDeviceSubObject struct {
 var IID_IDXGIDeviceSubObject = win32.GUID{Data1: 0x3d3e0379, Data2: 0xf9de, Data3: 0x4d58, Data4: [8]byte{0xbb, 0x6c, 0x18, 0xd6, 0x29, 0x92, 0xf1, 0xa6}}
 
 // GetDevice dispatches through IDXGIDeviceSubObject's vtable slot 7.
-func (self *IDXGIDeviceSubObject) GetDevice(riid *win32.GUID, ppDevice *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXGIDeviceSubObject) GetDevice(riid *win32.GUID, ppDevice *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIDisplayControl: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgidisplaycontrol
@@ -381,8 +385,9 @@ func (self *IDXGIDisplayControl) IsStereoEnabled() foundation.BOOL {
 }
 
 // SetStereoEnabled dispatches through IDXGIDisplayControl's vtable slot 4.
-func (self *IDXGIDisplayControl) SetStereoEnabled(enabled foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(enabled))
+func (self *IDXGIDisplayControl) SetStereoEnabled(enabled bool) {
+	_enabled := win32.Bool32(enabled)
+	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_enabled))
 }
 
 // IDXGIFactory: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgifactory
@@ -395,33 +400,33 @@ type IDXGIFactory struct {
 var IID_IDXGIFactory = win32.GUID{Data1: 0x7b7166ec, Data2: 0x21c7, Data3: 0x44ae, Data4: [8]byte{0xb2, 0x1a, 0xc9, 0xae, 0x32, 0x1a, 0xe3, 0x69}}
 
 // EnumAdapters dispatches through IDXGIFactory's vtable slot 7.
-func (self *IDXGIFactory) EnumAdapters(Adapter uint32, ppAdapter **IDXGIAdapter) foundation.HRESULT {
+func (self *IDXGIFactory) EnumAdapters(Adapter uint32, ppAdapter **IDXGIAdapter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(unsafe.Pointer(ppAdapter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MakeWindowAssociation dispatches through IDXGIFactory's vtable slot 8.
-func (self *IDXGIFactory) MakeWindowAssociation(WindowHandle foundation.HWND, Flags DXGI_MWA_FLAGS) foundation.HRESULT {
+func (self *IDXGIFactory) MakeWindowAssociation(WindowHandle foundation.HWND, Flags DXGI_MWA_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(WindowHandle), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWindowAssociation dispatches through IDXGIFactory's vtable slot 9.
-func (self *IDXGIFactory) GetWindowAssociation(pWindowHandle *foundation.HWND) foundation.HRESULT {
+func (self *IDXGIFactory) GetWindowAssociation(pWindowHandle *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWindowHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSwapChain dispatches through IDXGIFactory's vtable slot 10.
-func (self *IDXGIFactory) CreateSwapChain(pDevice *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC, ppSwapChain **IDXGISwapChain) foundation.HRESULT {
+func (self *IDXGIFactory) CreateSwapChain(pDevice *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC, ppSwapChain **IDXGISwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSoftwareAdapter dispatches through IDXGIFactory's vtable slot 11.
-func (self *IDXGIFactory) CreateSoftwareAdapter(Module foundation.HMODULE, ppAdapter **IDXGIAdapter) foundation.HRESULT {
+func (self *IDXGIFactory) CreateSoftwareAdapter(Module foundation.HMODULE, ppAdapter **IDXGIAdapter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Module), uintptr(unsafe.Pointer(ppAdapter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIFactory1: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgifactory1
@@ -434,9 +439,9 @@ type IDXGIFactory1 struct {
 var IID_IDXGIFactory1 = win32.GUID{Data1: 0x770aae78, Data2: 0xf26f, Data3: 0x4dba, Data4: [8]byte{0xa8, 0x29, 0x25, 0x3c, 0x83, 0xd1, 0xb3, 0x87}}
 
 // EnumAdapters1 dispatches through IDXGIFactory1's vtable slot 12.
-func (self *IDXGIFactory1) EnumAdapters1(Adapter uint32, ppAdapter **IDXGIAdapter1) foundation.HRESULT {
+func (self *IDXGIFactory1) EnumAdapters1(Adapter uint32, ppAdapter **IDXGIAdapter1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(unsafe.Pointer(ppAdapter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsCurrent dispatches through IDXGIFactory1's vtable slot 13.
@@ -461,33 +466,33 @@ func (self *IDXGIFactory2) IsWindowedStereoEnabled() foundation.BOOL {
 }
 
 // CreateSwapChainForHwnd dispatches through IDXGIFactory2's vtable slot 15.
-func (self *IDXGIFactory2) CreateSwapChainForHwnd(pDevice *systemcom.IUnknown, hWnd foundation.HWND, pDesc *DXGI_SWAP_CHAIN_DESC1, pFullscreenDesc *DXGI_SWAP_CHAIN_FULLSCREEN_DESC, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) foundation.HRESULT {
+func (self *IDXGIFactory2) CreateSwapChainForHwnd(pDevice *systemcom.IUnknown, hWnd foundation.HWND, pDesc *DXGI_SWAP_CHAIN_DESC1, pFullscreenDesc *DXGI_SWAP_CHAIN_FULLSCREEN_DESC, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(hWnd), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pFullscreenDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSwapChainForCoreWindow dispatches through IDXGIFactory2's vtable slot 16.
-func (self *IDXGIFactory2) CreateSwapChainForCoreWindow(pDevice *systemcom.IUnknown, pWindow *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) foundation.HRESULT {
+func (self *IDXGIFactory2) CreateSwapChainForCoreWindow(pDevice *systemcom.IUnknown, pWindow *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pWindow)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSharedResourceAdapterLuid dispatches through IDXGIFactory2's vtable slot 17.
-func (self *IDXGIFactory2) GetSharedResourceAdapterLuid(hResource foundation.HANDLE, pLuid *foundation.LUID) foundation.HRESULT {
+func (self *IDXGIFactory2) GetSharedResourceAdapterLuid(hResource foundation.HANDLE, pLuid *foundation.LUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hResource), uintptr(unsafe.Pointer(pLuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterStereoStatusWindow dispatches through IDXGIFactory2's vtable slot 18.
-func (self *IDXGIFactory2) RegisterStereoStatusWindow(WindowHandle foundation.HWND, wMsg uint32, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDXGIFactory2) RegisterStereoStatusWindow(WindowHandle foundation.HWND, wMsg uint32, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(WindowHandle), uintptr(wMsg), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterStereoStatusEvent dispatches through IDXGIFactory2's vtable slot 19.
-func (self *IDXGIFactory2) RegisterStereoStatusEvent(hEvent foundation.HANDLE, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDXGIFactory2) RegisterStereoStatusEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterStereoStatus dispatches through IDXGIFactory2's vtable slot 20.
@@ -496,15 +501,15 @@ func (self *IDXGIFactory2) UnregisterStereoStatus(dwCookie uint32) {
 }
 
 // RegisterOcclusionStatusWindow dispatches through IDXGIFactory2's vtable slot 21.
-func (self *IDXGIFactory2) RegisterOcclusionStatusWindow(WindowHandle foundation.HWND, wMsg uint32, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDXGIFactory2) RegisterOcclusionStatusWindow(WindowHandle foundation.HWND, wMsg uint32, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(WindowHandle), uintptr(wMsg), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterOcclusionStatusEvent dispatches through IDXGIFactory2's vtable slot 22.
-func (self *IDXGIFactory2) RegisterOcclusionStatusEvent(hEvent foundation.HANDLE, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDXGIFactory2) RegisterOcclusionStatusEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterOcclusionStatus dispatches through IDXGIFactory2's vtable slot 23.
@@ -513,9 +518,9 @@ func (self *IDXGIFactory2) UnregisterOcclusionStatus(dwCookie uint32) {
 }
 
 // CreateSwapChainForComposition dispatches through IDXGIFactory2's vtable slot 24.
-func (self *IDXGIFactory2) CreateSwapChainForComposition(pDevice *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) foundation.HRESULT {
+func (self *IDXGIFactory2) CreateSwapChainForComposition(pDevice *systemcom.IUnknown, pDesc *DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIFactory3: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgifactory3
@@ -543,9 +548,9 @@ type IDXGIFactory4 struct {
 var IID_IDXGIFactory4 = win32.GUID{Data1: 0x1bc6ea02, Data2: 0xef36, Data3: 0x464f, Data4: [8]byte{0xbf, 0x0c, 0x21, 0xca, 0x39, 0xe5, 0x16, 0x8a}}
 
 // EnumWarpAdapter dispatches through IDXGIFactory4's vtable slot 27.
-func (self *IDXGIFactory4) EnumWarpAdapter(riid *win32.GUID, ppvAdapter *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXGIFactory4) EnumWarpAdapter(riid *win32.GUID, ppvAdapter *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIFactory5: https://learn.microsoft.com/windows/win32/api/dxgi1_5/nn-dxgi1_5-idxgifactory5
@@ -558,9 +563,9 @@ type IDXGIFactory5 struct {
 var IID_IDXGIFactory5 = win32.GUID{Data1: 0x7632e1f5, Data2: 0xee65, Data3: 0x4dca, Data4: [8]byte{0x87, 0xfd, 0x84, 0xcd, 0x75, 0xf8, 0x83, 0x8d}}
 
 // CheckFeatureSupport dispatches through IDXGIFactory5's vtable slot 28.
-func (self *IDXGIFactory5) CheckFeatureSupport(Feature DXGI_FEATURE, pFeatureSupportData unsafe.Pointer, FeatureSupportDataSize uint32) foundation.HRESULT {
+func (self *IDXGIFactory5) CheckFeatureSupport(Feature DXGI_FEATURE, pFeatureSupportData unsafe.Pointer, FeatureSupportDataSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(pFeatureSupportData)), uintptr(FeatureSupportDataSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIFactory6: https://learn.microsoft.com/windows/win32/api/dxgi1_6/nn-dxgi1_6-idxgifactory6
@@ -573,9 +578,9 @@ type IDXGIFactory6 struct {
 var IID_IDXGIFactory6 = win32.GUID{Data1: 0xc1b6694f, Data2: 0xff09, Data3: 0x44a9, Data4: [8]byte{0xb0, 0x3c, 0x77, 0x90, 0x0a, 0x0a, 0x1d, 0x17}}
 
 // EnumAdapterByGpuPreference dispatches through IDXGIFactory6's vtable slot 29.
-func (self *IDXGIFactory6) EnumAdapterByGpuPreference(Adapter uint32, GpuPreference DXGI_GPU_PREFERENCE, riid *win32.GUID, ppvAdapter *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXGIFactory6) EnumAdapterByGpuPreference(Adapter uint32, GpuPreference DXGI_GPU_PREFERENCE, riid *win32.GUID, ppvAdapter *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(GpuPreference), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIFactory7: https://learn.microsoft.com/windows/win32/api/dxgi1_6/nn-dxgi1_6-idxgifactory7
@@ -588,15 +593,15 @@ type IDXGIFactory7 struct {
 var IID_IDXGIFactory7 = win32.GUID{Data1: 0xa4966eed, Data2: 0x76db, Data3: 0x44da, Data4: [8]byte{0x84, 0xc1, 0xee, 0x9a, 0x7a, 0xfb, 0x20, 0xa8}}
 
 // RegisterAdaptersChangedEvent dispatches through IDXGIFactory7's vtable slot 30.
-func (self *IDXGIFactory7) RegisterAdaptersChangedEvent(hEvent foundation.HANDLE, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDXGIFactory7) RegisterAdaptersChangedEvent(hEvent foundation.HANDLE, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterAdaptersChangedEvent dispatches through IDXGIFactory7's vtable slot 31.
-func (self *IDXGIFactory7) UnregisterAdaptersChangedEvent(dwCookie uint32) foundation.HRESULT {
+func (self *IDXGIFactory7) UnregisterAdaptersChangedEvent(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIFactoryMedia: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgifactorymedia
@@ -609,15 +614,15 @@ type IDXGIFactoryMedia struct {
 var IID_IDXGIFactoryMedia = win32.GUID{Data1: 0x41e7d1f2, Data2: 0xa591, Data3: 0x4f7b, Data4: [8]byte{0xa2, 0xe5, 0xfa, 0x9c, 0x84, 0x3e, 0x1c, 0x12}}
 
 // CreateSwapChainForCompositionSurfaceHandle dispatches through IDXGIFactoryMedia's vtable slot 3.
-func (self *IDXGIFactoryMedia) CreateSwapChainForCompositionSurfaceHandle(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) foundation.HRESULT {
+func (self *IDXGIFactoryMedia) CreateSwapChainForCompositionSurfaceHandle(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *DXGI_SWAP_CHAIN_DESC1, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGISwapChain1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(hSurface), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDecodeSwapChainForCompositionSurfaceHandle dispatches through IDXGIFactoryMedia's vtable slot 4.
-func (self *IDXGIFactoryMedia) CreateDecodeSwapChainForCompositionSurfaceHandle(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *DXGI_DECODE_SWAP_CHAIN_DESC, pYuvDecodeBuffers *IDXGIResource, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGIDecodeSwapChain) foundation.HRESULT {
+func (self *IDXGIFactoryMedia) CreateDecodeSwapChainForCompositionSurfaceHandle(pDevice *systemcom.IUnknown, hSurface foundation.HANDLE, pDesc *DXGI_DECODE_SWAP_CHAIN_DESC, pYuvDecodeBuffers *IDXGIResource, pRestrictToOutput *IDXGIOutput, ppSwapChain **IDXGIDecodeSwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(hSurface), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pYuvDecodeBuffers)), uintptr(unsafe.Pointer(pRestrictToOutput)), uintptr(unsafe.Pointer(ppSwapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIInfoQueue: https://learn.microsoft.com/windows/win32/api/dxgidebug/nn-dxgidebug-idxgiinfoqueue
@@ -630,9 +635,9 @@ type IDXGIInfoQueue struct {
 var IID_IDXGIInfoQueue = win32.GUID{Data1: 0xd67441c7, Data2: 0x672a, Data3: 0x476f, Data4: [8]byte{0x9e, 0x82, 0xcd, 0x55, 0xb4, 0x49, 0x49, 0xce}}
 
 // AddApplicationMessage dispatches through IDXGIInfoQueue's vtable slot 31.
-func (self *IDXGIInfoQueue) AddApplicationMessage(Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY, pDescription foundation.PSTR) foundation.HRESULT {
+func (self *IDXGIInfoQueue) AddApplicationMessage(Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY, pDescription foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Severity), uintptr(unsafe.Pointer(pDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIKeyedMutex: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgikeyedmutex
@@ -645,15 +650,15 @@ type IDXGIKeyedMutex struct {
 var IID_IDXGIKeyedMutex = win32.GUID{Data1: 0x9d8e1289, Data2: 0xd7b3, Data3: 0x465f, Data4: [8]byte{0x81, 0x26, 0x25, 0x0e, 0x34, 0x9a, 0xf8, 0x5d}}
 
 // AcquireSync dispatches through IDXGIKeyedMutex's vtable slot 8.
-func (self *IDXGIKeyedMutex) AcquireSync(Key uint64, dwMilliseconds uint32) foundation.HRESULT {
+func (self *IDXGIKeyedMutex) AcquireSync(Key uint64, dwMilliseconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Key), uintptr(dwMilliseconds))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseSync dispatches through IDXGIKeyedMutex's vtable slot 9.
-func (self *IDXGIKeyedMutex) ReleaseSync(Key uint64) foundation.HRESULT {
+func (self *IDXGIKeyedMutex) ReleaseSync(Key uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Key))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIObject: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgiobject
@@ -666,27 +671,27 @@ type IDXGIObject struct {
 var IID_IDXGIObject = win32.GUID{Data1: 0xaec22fb8, Data2: 0x76f3, Data3: 0x4639, Data4: [8]byte{0x9b, 0xe0, 0x28, 0xeb, 0x43, 0xa6, 0x7a, 0x2e}}
 
 // SetPrivateData dispatches through IDXGIObject's vtable slot 3.
-func (self *IDXGIObject) SetPrivateData(Name *win32.GUID, DataSize uint32, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IDXGIObject) SetPrivateData(Name *win32.GUID, DataSize uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPrivateDataInterface dispatches through IDXGIObject's vtable slot 4.
-func (self *IDXGIObject) SetPrivateDataInterface(Name *win32.GUID, pUnknown *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDXGIObject) SetPrivateDataInterface(Name *win32.GUID, pUnknown *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(pUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrivateData dispatches through IDXGIObject's vtable slot 5.
-func (self *IDXGIObject) GetPrivateData(Name *win32.GUID, pDataSize *uint32, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IDXGIObject) GetPrivateData(Name *win32.GUID, pDataSize *uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(pDataSize)), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParent dispatches through IDXGIObject's vtable slot 6.
-func (self *IDXGIObject) GetParent(riid *win32.GUID, ppParent *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXGIObject) GetParent(riid *win32.GUID, ppParent *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppParent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIOutput: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgioutput
@@ -699,33 +704,35 @@ type IDXGIOutput struct {
 var IID_IDXGIOutput = win32.GUID{Data1: 0xae02eedb, Data2: 0xc735, Data3: 0x4690, Data4: [8]byte{0x8d, 0x52, 0x5a, 0x8d, 0xc2, 0x02, 0x13, 0xaa}}
 
 // GetDesc dispatches through IDXGIOutput's vtable slot 7.
-func (self *IDXGIOutput) GetDesc(pDesc *DXGI_OUTPUT_DESC) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGIOutput) GetDesc() (DXGI_OUTPUT_DESC, error) {
+	var _pDesc DXGI_OUTPUT_DESC
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayModeList dispatches through IDXGIOutput's vtable slot 8.
-func (self *IDXGIOutput) GetDisplayModeList(EnumFormat graphicsdxgicommon.DXGI_FORMAT, Flags DXGI_ENUM_MODES, pNumModes *uint32, pDesc *graphicsdxgicommon.DXGI_MODE_DESC) foundation.HRESULT {
+func (self *IDXGIOutput) GetDisplayModeList(EnumFormat graphicsdxgicommon.DXGI_FORMAT, Flags DXGI_ENUM_MODES, pNumModes *uint32, pDesc *graphicsdxgicommon.DXGI_MODE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EnumFormat), uintptr(Flags), uintptr(unsafe.Pointer(pNumModes)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindClosestMatchingMode dispatches through IDXGIOutput's vtable slot 9.
-func (self *IDXGIOutput) FindClosestMatchingMode(pModeToMatch *graphicsdxgicommon.DXGI_MODE_DESC, pClosestMatch *graphicsdxgicommon.DXGI_MODE_DESC, pConcernedDevice *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDXGIOutput) FindClosestMatchingMode(pModeToMatch *graphicsdxgicommon.DXGI_MODE_DESC, pClosestMatch *graphicsdxgicommon.DXGI_MODE_DESC, pConcernedDevice *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pModeToMatch)), uintptr(unsafe.Pointer(pClosestMatch)), uintptr(unsafe.Pointer(pConcernedDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForVBlank dispatches through IDXGIOutput's vtable slot 10.
-func (self *IDXGIOutput) WaitForVBlank() foundation.HRESULT {
+func (self *IDXGIOutput) WaitForVBlank() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TakeOwnership dispatches through IDXGIOutput's vtable slot 11.
-func (self *IDXGIOutput) TakeOwnership(pDevice *systemcom.IUnknown, Exclusive foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(Exclusive))
-	return foundation.HRESULT(r1)
+func (self *IDXGIOutput) TakeOwnership(pDevice *systemcom.IUnknown, Exclusive bool) error {
+	_Exclusive := win32.Bool32(Exclusive)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(_Exclusive))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseOwnership dispatches through IDXGIOutput's vtable slot 12.
@@ -734,39 +741,39 @@ func (self *IDXGIOutput) ReleaseOwnership() {
 }
 
 // GetGammaControlCapabilities dispatches through IDXGIOutput's vtable slot 13.
-func (self *IDXGIOutput) GetGammaControlCapabilities(pGammaCaps *graphicsdxgicommon.DXGI_GAMMA_CONTROL_CAPABILITIES) foundation.HRESULT {
+func (self *IDXGIOutput) GetGammaControlCapabilities(pGammaCaps *graphicsdxgicommon.DXGI_GAMMA_CONTROL_CAPABILITIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGammaCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGammaControl dispatches through IDXGIOutput's vtable slot 14.
-func (self *IDXGIOutput) SetGammaControl(pArray *graphicsdxgicommon.DXGI_GAMMA_CONTROL) foundation.HRESULT {
+func (self *IDXGIOutput) SetGammaControl(pArray *graphicsdxgicommon.DXGI_GAMMA_CONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGammaControl dispatches through IDXGIOutput's vtable slot 15.
-func (self *IDXGIOutput) GetGammaControl(pArray *graphicsdxgicommon.DXGI_GAMMA_CONTROL) foundation.HRESULT {
+func (self *IDXGIOutput) GetGammaControl(pArray *graphicsdxgicommon.DXGI_GAMMA_CONTROL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisplaySurface dispatches through IDXGIOutput's vtable slot 16.
-func (self *IDXGIOutput) SetDisplaySurface(pScanoutSurface *IDXGISurface) foundation.HRESULT {
+func (self *IDXGIOutput) SetDisplaySurface(pScanoutSurface *IDXGISurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pScanoutSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplaySurfaceData dispatches through IDXGIOutput's vtable slot 17.
-func (self *IDXGIOutput) GetDisplaySurfaceData(pDestination *IDXGISurface) foundation.HRESULT {
+func (self *IDXGIOutput) GetDisplaySurfaceData(pDestination *IDXGISurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestination)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFrameStatistics dispatches through IDXGIOutput's vtable slot 18.
-func (self *IDXGIOutput) GetFrameStatistics(pStats *DXGI_FRAME_STATISTICS) foundation.HRESULT {
+func (self *IDXGIOutput) GetFrameStatistics(pStats *DXGI_FRAME_STATISTICS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIOutput1: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgioutput1
@@ -779,27 +786,27 @@ type IDXGIOutput1 struct {
 var IID_IDXGIOutput1 = win32.GUID{Data1: 0x00cddea8, Data2: 0x939b, Data3: 0x4b83, Data4: [8]byte{0xa3, 0x40, 0xa6, 0x85, 0x22, 0x66, 0x66, 0xcc}}
 
 // GetDisplayModeList1 dispatches through IDXGIOutput1's vtable slot 19.
-func (self *IDXGIOutput1) GetDisplayModeList1(EnumFormat graphicsdxgicommon.DXGI_FORMAT, Flags DXGI_ENUM_MODES, pNumModes *uint32, pDesc *DXGI_MODE_DESC1) foundation.HRESULT {
+func (self *IDXGIOutput1) GetDisplayModeList1(EnumFormat graphicsdxgicommon.DXGI_FORMAT, Flags DXGI_ENUM_MODES, pNumModes *uint32, pDesc *DXGI_MODE_DESC1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(EnumFormat), uintptr(Flags), uintptr(unsafe.Pointer(pNumModes)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindClosestMatchingMode1 dispatches through IDXGIOutput1's vtable slot 20.
-func (self *IDXGIOutput1) FindClosestMatchingMode1(pModeToMatch *DXGI_MODE_DESC1, pClosestMatch *DXGI_MODE_DESC1, pConcernedDevice *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDXGIOutput1) FindClosestMatchingMode1(pModeToMatch *DXGI_MODE_DESC1, pClosestMatch *DXGI_MODE_DESC1, pConcernedDevice *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pModeToMatch)), uintptr(unsafe.Pointer(pClosestMatch)), uintptr(unsafe.Pointer(pConcernedDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplaySurfaceData1 dispatches through IDXGIOutput1's vtable slot 21.
-func (self *IDXGIOutput1) GetDisplaySurfaceData1(pDestination *IDXGIResource) foundation.HRESULT {
+func (self *IDXGIOutput1) GetDisplaySurfaceData1(pDestination *IDXGIResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestination)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DuplicateOutput dispatches through IDXGIOutput1's vtable slot 22.
-func (self *IDXGIOutput1) DuplicateOutput(pDevice *systemcom.IUnknown, ppOutputDuplication **IDXGIOutputDuplication) foundation.HRESULT {
+func (self *IDXGIOutput1) DuplicateOutput(pDevice *systemcom.IUnknown, ppOutputDuplication **IDXGIOutputDuplication) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(ppOutputDuplication)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIOutput2: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgioutput2
@@ -827,9 +834,9 @@ type IDXGIOutput3 struct {
 var IID_IDXGIOutput3 = win32.GUID{Data1: 0x8a6bb301, Data2: 0x7e7e, Data3: 0x41f4, Data4: [8]byte{0xa8, 0xe0, 0x5b, 0x32, 0xf7, 0xf9, 0x9b, 0x18}}
 
 // CheckOverlaySupport dispatches through IDXGIOutput3's vtable slot 24.
-func (self *IDXGIOutput3) CheckOverlaySupport(EnumFormat graphicsdxgicommon.DXGI_FORMAT, pConcernedDevice *systemcom.IUnknown, pFlags *uint32) foundation.HRESULT {
+func (self *IDXGIOutput3) CheckOverlaySupport(EnumFormat graphicsdxgicommon.DXGI_FORMAT, pConcernedDevice *systemcom.IUnknown, pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(EnumFormat), uintptr(unsafe.Pointer(pConcernedDevice)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIOutput4: https://learn.microsoft.com/windows/win32/api/dxgi1_4/nn-dxgi1_4-idxgioutput4
@@ -842,9 +849,9 @@ type IDXGIOutput4 struct {
 var IID_IDXGIOutput4 = win32.GUID{Data1: 0xdc7dca35, Data2: 0x2196, Data3: 0x414d, Data4: [8]byte{0x9f, 0x53, 0x61, 0x78, 0x84, 0x03, 0x2a, 0x60}}
 
 // CheckOverlayColorSpaceSupport dispatches through IDXGIOutput4's vtable slot 25.
-func (self *IDXGIOutput4) CheckOverlayColorSpaceSupport(Format graphicsdxgicommon.DXGI_FORMAT, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pConcernedDevice *systemcom.IUnknown, pFlags *uint32) foundation.HRESULT {
+func (self *IDXGIOutput4) CheckOverlayColorSpaceSupport(Format graphicsdxgicommon.DXGI_FORMAT, ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pConcernedDevice *systemcom.IUnknown, pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Format), uintptr(ColorSpace), uintptr(unsafe.Pointer(pConcernedDevice)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIOutput5: https://learn.microsoft.com/windows/win32/api/dxgi1_5/nn-dxgi1_5-idxgioutput5
@@ -857,9 +864,9 @@ type IDXGIOutput5 struct {
 var IID_IDXGIOutput5 = win32.GUID{Data1: 0x80a07424, Data2: 0xab52, Data3: 0x42eb, Data4: [8]byte{0x83, 0x3c, 0x0c, 0x42, 0xfd, 0x28, 0x2d, 0x98}}
 
 // DuplicateOutput1 dispatches through IDXGIOutput5's vtable slot 26.
-func (self *IDXGIOutput5) DuplicateOutput1(pDevice *systemcom.IUnknown, Flags uint32, SupportedFormatsCount uint32, pSupportedFormats *graphicsdxgicommon.DXGI_FORMAT, ppOutputDuplication **IDXGIOutputDuplication) foundation.HRESULT {
+func (self *IDXGIOutput5) DuplicateOutput1(pDevice *systemcom.IUnknown, Flags uint32, SupportedFormatsCount uint32, pSupportedFormats *graphicsdxgicommon.DXGI_FORMAT, ppOutputDuplication **IDXGIOutputDuplication) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(Flags), uintptr(SupportedFormatsCount), uintptr(unsafe.Pointer(pSupportedFormats)), uintptr(unsafe.Pointer(ppOutputDuplication)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIOutput6: https://learn.microsoft.com/windows/win32/api/dxgi1_6/nn-dxgi1_6-idxgioutput6
@@ -872,15 +879,16 @@ type IDXGIOutput6 struct {
 var IID_IDXGIOutput6 = win32.GUID{Data1: 0x068346e8, Data2: 0xaaec, Data3: 0x4b84, Data4: [8]byte{0xad, 0xd7, 0x13, 0x7f, 0x51, 0x3f, 0x77, 0xa1}}
 
 // GetDesc1 dispatches through IDXGIOutput6's vtable slot 27.
-func (self *IDXGIOutput6) GetDesc1(pDesc *DXGI_OUTPUT_DESC1) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGIOutput6) GetDesc1() (DXGI_OUTPUT_DESC1, error) {
+	var _pDesc DXGI_OUTPUT_DESC1
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // CheckHardwareCompositionSupport dispatches through IDXGIOutput6's vtable slot 28.
-func (self *IDXGIOutput6) CheckHardwareCompositionSupport(pFlags *uint32) foundation.HRESULT {
+func (self *IDXGIOutput6) CheckHardwareCompositionSupport(pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIOutputDuplication: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgioutputduplication
@@ -898,45 +906,45 @@ func (self *IDXGIOutputDuplication) GetDesc(pDesc *DXGI_OUTDUPL_DESC) {
 }
 
 // AcquireNextFrame dispatches through IDXGIOutputDuplication's vtable slot 8.
-func (self *IDXGIOutputDuplication) AcquireNextFrame(TimeoutInMilliseconds uint32, pFrameInfo *DXGI_OUTDUPL_FRAME_INFO, ppDesktopResource **IDXGIResource) foundation.HRESULT {
+func (self *IDXGIOutputDuplication) AcquireNextFrame(TimeoutInMilliseconds uint32, pFrameInfo *DXGI_OUTDUPL_FRAME_INFO, ppDesktopResource **IDXGIResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(TimeoutInMilliseconds), uintptr(unsafe.Pointer(pFrameInfo)), uintptr(unsafe.Pointer(ppDesktopResource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFrameDirtyRects dispatches through IDXGIOutputDuplication's vtable slot 9.
-func (self *IDXGIOutputDuplication) GetFrameDirtyRects(DirtyRectsBufferSize uint32, pDirtyRectsBuffer *foundation.RECT, pDirtyRectsBufferSizeRequired *uint32) foundation.HRESULT {
+func (self *IDXGIOutputDuplication) GetFrameDirtyRects(DirtyRectsBufferSize uint32, pDirtyRectsBuffer *foundation.RECT, pDirtyRectsBufferSizeRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(DirtyRectsBufferSize), uintptr(unsafe.Pointer(pDirtyRectsBuffer)), uintptr(unsafe.Pointer(pDirtyRectsBufferSizeRequired)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFrameMoveRects dispatches through IDXGIOutputDuplication's vtable slot 10.
-func (self *IDXGIOutputDuplication) GetFrameMoveRects(MoveRectsBufferSize uint32, pMoveRectBuffer *DXGI_OUTDUPL_MOVE_RECT, pMoveRectsBufferSizeRequired *uint32) foundation.HRESULT {
+func (self *IDXGIOutputDuplication) GetFrameMoveRects(MoveRectsBufferSize uint32, pMoveRectBuffer *DXGI_OUTDUPL_MOVE_RECT, pMoveRectsBufferSizeRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(MoveRectsBufferSize), uintptr(unsafe.Pointer(pMoveRectBuffer)), uintptr(unsafe.Pointer(pMoveRectsBufferSizeRequired)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFramePointerShape dispatches through IDXGIOutputDuplication's vtable slot 11.
-func (self *IDXGIOutputDuplication) GetFramePointerShape(PointerShapeBufferSize uint32, pPointerShapeBuffer unsafe.Pointer, pPointerShapeBufferSizeRequired *uint32, pPointerShapeInfo *DXGI_OUTDUPL_POINTER_SHAPE_INFO) foundation.HRESULT {
+func (self *IDXGIOutputDuplication) GetFramePointerShape(PointerShapeBufferSize uint32, pPointerShapeBuffer unsafe.Pointer, pPointerShapeBufferSizeRequired *uint32, pPointerShapeInfo *DXGI_OUTDUPL_POINTER_SHAPE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(PointerShapeBufferSize), uintptr(unsafe.Pointer(pPointerShapeBuffer)), uintptr(unsafe.Pointer(pPointerShapeBufferSizeRequired)), uintptr(unsafe.Pointer(pPointerShapeInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MapDesktopSurface dispatches through IDXGIOutputDuplication's vtable slot 12.
-func (self *IDXGIOutputDuplication) MapDesktopSurface(pLockedRect *DXGI_MAPPED_RECT) foundation.HRESULT {
+func (self *IDXGIOutputDuplication) MapDesktopSurface(pLockedRect *DXGI_MAPPED_RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLockedRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnMapDesktopSurface dispatches through IDXGIOutputDuplication's vtable slot 13.
-func (self *IDXGIOutputDuplication) UnMapDesktopSurface() foundation.HRESULT {
+func (self *IDXGIOutputDuplication) UnMapDesktopSurface() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseFrame dispatches through IDXGIOutputDuplication's vtable slot 14.
-func (self *IDXGIOutputDuplication) ReleaseFrame() foundation.HRESULT {
+func (self *IDXGIOutputDuplication) ReleaseFrame() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIResource: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgiresource
@@ -949,27 +957,27 @@ type IDXGIResource struct {
 var IID_IDXGIResource = win32.GUID{Data1: 0x035f3ab4, Data2: 0x482e, Data3: 0x4e50, Data4: [8]byte{0xb4, 0x1f, 0x8a, 0x7f, 0x8b, 0xd8, 0x96, 0x0b}}
 
 // GetSharedHandle dispatches through IDXGIResource's vtable slot 8.
-func (self *IDXGIResource) GetSharedHandle(pSharedHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDXGIResource) GetSharedHandle(pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUsage dispatches through IDXGIResource's vtable slot 9.
-func (self *IDXGIResource) GetUsage(pUsage *DXGI_USAGE) foundation.HRESULT {
+func (self *IDXGIResource) GetUsage(pUsage *DXGI_USAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUsage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEvictionPriority dispatches through IDXGIResource's vtable slot 10.
-func (self *IDXGIResource) SetEvictionPriority(EvictionPriority DXGI_RESOURCE_PRIORITY) foundation.HRESULT {
+func (self *IDXGIResource) SetEvictionPriority(EvictionPriority DXGI_RESOURCE_PRIORITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(EvictionPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEvictionPriority dispatches through IDXGIResource's vtable slot 11.
-func (self *IDXGIResource) GetEvictionPriority(pEvictionPriority *DXGI_RESOURCE_PRIORITY) foundation.HRESULT {
+func (self *IDXGIResource) GetEvictionPriority(pEvictionPriority *DXGI_RESOURCE_PRIORITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvictionPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGIResource1: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgiresource1
@@ -982,15 +990,16 @@ type IDXGIResource1 struct {
 var IID_IDXGIResource1 = win32.GUID{Data1: 0x30961379, Data2: 0x4609, Data3: 0x4a41, Data4: [8]byte{0x99, 0x8e, 0x54, 0xfe, 0x56, 0x7e, 0xe0, 0xc1}}
 
 // CreateSubresourceSurface dispatches through IDXGIResource1's vtable slot 12.
-func (self *IDXGIResource1) CreateSubresourceSurface(index uint32, ppSurface **IDXGISurface2) foundation.HRESULT {
+func (self *IDXGIResource1) CreateSubresourceSurface(index uint32, ppSurface **IDXGISurface2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(ppSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSharedHandle dispatches through IDXGIResource1's vtable slot 13.
-func (self *IDXGIResource1) CreateSharedHandle(pAttributes *security.SECURITY_ATTRIBUTES, dwAccess uint32, lpName foundation.PWSTR, pHandle *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)), uintptr(dwAccess), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(pHandle)))
-	return foundation.HRESULT(r1)
+func (self *IDXGIResource1) CreateSharedHandle(pAttributes *security.SECURITY_ATTRIBUTES, dwAccess uint32, lpName string, pHandle *foundation.HANDLE) error {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)), uintptr(dwAccess), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(pHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGISurface: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgisurface
@@ -1003,21 +1012,22 @@ type IDXGISurface struct {
 var IID_IDXGISurface = win32.GUID{Data1: 0xcafcb56c, Data2: 0x6ac3, Data3: 0x4889, Data4: [8]byte{0xbf, 0x47, 0x9e, 0x23, 0xbb, 0xd2, 0x60, 0xec}}
 
 // GetDesc dispatches through IDXGISurface's vtable slot 8.
-func (self *IDXGISurface) GetDesc(pDesc *DXGI_SURFACE_DESC) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGISurface) GetDesc() (DXGI_SURFACE_DESC, error) {
+	var _pDesc DXGI_SURFACE_DESC
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // Map dispatches through IDXGISurface's vtable slot 9.
-func (self *IDXGISurface) Map(pLockedRect *DXGI_MAPPED_RECT, MapFlags DXGI_MAP_FLAGS) foundation.HRESULT {
+func (self *IDXGISurface) Map(pLockedRect *DXGI_MAPPED_RECT, MapFlags DXGI_MAP_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLockedRect)), uintptr(MapFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unmap dispatches through IDXGISurface's vtable slot 10.
-func (self *IDXGISurface) Unmap() foundation.HRESULT {
+func (self *IDXGISurface) Unmap() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGISurface1: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgisurface1
@@ -1030,15 +1040,16 @@ type IDXGISurface1 struct {
 var IID_IDXGISurface1 = win32.GUID{Data1: 0x4ae63092, Data2: 0x6327, Data3: 0x4c1b, Data4: [8]byte{0x80, 0xae, 0xbf, 0xe1, 0x2e, 0xa3, 0x2b, 0x86}}
 
 // GetDC dispatches through IDXGISurface1's vtable slot 11.
-func (self *IDXGISurface1) GetDC(Discard foundation.BOOL, phdc *graphicsgdi.HDC) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Discard), uintptr(unsafe.Pointer(phdc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGISurface1) GetDC(Discard bool, phdc *graphicsgdi.HDC) error {
+	_Discard := win32.Bool32(Discard)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_Discard), uintptr(unsafe.Pointer(phdc)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseDC dispatches through IDXGISurface1's vtable slot 12.
-func (self *IDXGISurface1) ReleaseDC(pDirtyRect *foundation.RECT) foundation.HRESULT {
+func (self *IDXGISurface1) ReleaseDC(pDirtyRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirtyRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGISurface2: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgisurface2
@@ -1051,9 +1062,9 @@ type IDXGISurface2 struct {
 var IID_IDXGISurface2 = win32.GUID{Data1: 0xaba496dd, Data2: 0xb617, Data3: 0x4cb8, Data4: [8]byte{0xa8, 0x66, 0xbc, 0x44, 0xd7, 0xeb, 0x1f, 0xa2}}
 
 // GetResource dispatches through IDXGISurface2's vtable slot 13.
-func (self *IDXGISurface2) GetResource(riid *win32.GUID, ppParentResource *unsafe.Pointer, pSubresourceIndex *uint32) foundation.HRESULT {
+func (self *IDXGISurface2) GetResource(riid *win32.GUID, ppParentResource *unsafe.Pointer, pSubresourceIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppParentResource)), uintptr(unsafe.Pointer(pSubresourceIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGISwapChain: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgiswapchain
@@ -1066,63 +1077,65 @@ type IDXGISwapChain struct {
 var IID_IDXGISwapChain = win32.GUID{Data1: 0x310d36a0, Data2: 0xd2e7, Data3: 0x4c0a, Data4: [8]byte{0xaa, 0x04, 0x6a, 0x9d, 0x23, 0xb8, 0x88, 0x6a}}
 
 // Present dispatches through IDXGISwapChain's vtable slot 8.
-func (self *IDXGISwapChain) Present(SyncInterval uint32, Flags DXGI_PRESENT) foundation.HRESULT {
+func (self *IDXGISwapChain) Present(SyncInterval uint32, Flags DXGI_PRESENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(SyncInterval), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBuffer dispatches through IDXGISwapChain's vtable slot 9.
-func (self *IDXGISwapChain) GetBuffer(Buffer uint32, riid *win32.GUID, ppSurface *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXGISwapChain) GetBuffer(Buffer uint32, riid *win32.GUID, ppSurface *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Buffer), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFullscreenState dispatches through IDXGISwapChain's vtable slot 10.
-func (self *IDXGISwapChain) SetFullscreenState(Fullscreen foundation.BOOL, pTarget *IDXGIOutput) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Fullscreen), uintptr(unsafe.Pointer(pTarget)))
-	return foundation.HRESULT(r1)
+func (self *IDXGISwapChain) SetFullscreenState(Fullscreen bool, pTarget *IDXGIOutput) error {
+	_Fullscreen := win32.Bool32(Fullscreen)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_Fullscreen), uintptr(unsafe.Pointer(pTarget)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFullscreenState dispatches through IDXGISwapChain's vtable slot 11.
-func (self *IDXGISwapChain) GetFullscreenState(pFullscreen *foundation.BOOL, ppTarget **IDXGIOutput) foundation.HRESULT {
+func (self *IDXGISwapChain) GetFullscreenState(pFullscreen *foundation.BOOL, ppTarget **IDXGIOutput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFullscreen)), uintptr(unsafe.Pointer(ppTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesc dispatches through IDXGISwapChain's vtable slot 12.
-func (self *IDXGISwapChain) GetDesc(pDesc *DXGI_SWAP_CHAIN_DESC) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGISwapChain) GetDesc() (DXGI_SWAP_CHAIN_DESC, error) {
+	var _pDesc DXGI_SWAP_CHAIN_DESC
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // ResizeBuffers dispatches through IDXGISwapChain's vtable slot 13.
-func (self *IDXGISwapChain) ResizeBuffers(BufferCount uint32, Width uint32, Height uint32, NewFormat graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags uint32) foundation.HRESULT {
+func (self *IDXGISwapChain) ResizeBuffers(BufferCount uint32, Width uint32, Height uint32, NewFormat graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(BufferCount), uintptr(Width), uintptr(Height), uintptr(NewFormat), uintptr(SwapChainFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResizeTarget dispatches through IDXGISwapChain's vtable slot 14.
-func (self *IDXGISwapChain) ResizeTarget(pNewTargetParameters *graphicsdxgicommon.DXGI_MODE_DESC) foundation.HRESULT {
+func (self *IDXGISwapChain) ResizeTarget(pNewTargetParameters *graphicsdxgicommon.DXGI_MODE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNewTargetParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContainingOutput dispatches through IDXGISwapChain's vtable slot 15.
-func (self *IDXGISwapChain) GetContainingOutput(ppOutput **IDXGIOutput) foundation.HRESULT {
+func (self *IDXGISwapChain) GetContainingOutput(ppOutput **IDXGIOutput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFrameStatistics dispatches through IDXGISwapChain's vtable slot 16.
-func (self *IDXGISwapChain) GetFrameStatistics(pStats *DXGI_FRAME_STATISTICS) foundation.HRESULT {
+func (self *IDXGISwapChain) GetFrameStatistics(pStats *DXGI_FRAME_STATISTICS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLastPresentCount dispatches through IDXGISwapChain's vtable slot 17.
-func (self *IDXGISwapChain) GetLastPresentCount(pLastPresentCount *uint32) foundation.HRESULT {
+func (self *IDXGISwapChain) GetLastPresentCount(pLastPresentCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLastPresentCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGISwapChain1: https://learn.microsoft.com/windows/win32/api/dxgi1_2/nn-dxgi1_2-idxgiswapchain1
@@ -1135,33 +1148,35 @@ type IDXGISwapChain1 struct {
 var IID_IDXGISwapChain1 = win32.GUID{Data1: 0x790a45f7, Data2: 0x0d42, Data3: 0x4876, Data4: [8]byte{0x98, 0x3a, 0x0a, 0x55, 0xcf, 0xe6, 0xf4, 0xaa}}
 
 // GetDesc1 dispatches through IDXGISwapChain1's vtable slot 18.
-func (self *IDXGISwapChain1) GetDesc1(pDesc *DXGI_SWAP_CHAIN_DESC1) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGISwapChain1) GetDesc1() (DXGI_SWAP_CHAIN_DESC1, error) {
+	var _pDesc DXGI_SWAP_CHAIN_DESC1
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // GetFullscreenDesc dispatches through IDXGISwapChain1's vtable slot 19.
-func (self *IDXGISwapChain1) GetFullscreenDesc(pDesc *DXGI_SWAP_CHAIN_FULLSCREEN_DESC) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+func (self *IDXGISwapChain1) GetFullscreenDesc() (DXGI_SWAP_CHAIN_FULLSCREEN_DESC, error) {
+	var _pDesc DXGI_SWAP_CHAIN_FULLSCREEN_DESC
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDesc)))
+	return _pDesc, win32.HRESULTError(int32(r1))
 }
 
 // GetHwnd dispatches through IDXGISwapChain1's vtable slot 20.
-func (self *IDXGISwapChain1) GetHwnd(pHwnd *foundation.HWND) foundation.HRESULT {
+func (self *IDXGISwapChain1) GetHwnd(pHwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCoreWindow dispatches through IDXGISwapChain1's vtable slot 21.
-func (self *IDXGISwapChain1) GetCoreWindow(refiid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXGISwapChain1) GetCoreWindow(refiid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refiid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Present1 dispatches through IDXGISwapChain1's vtable slot 22.
-func (self *IDXGISwapChain1) Present1(SyncInterval uint32, PresentFlags DXGI_PRESENT, pPresentParameters *DXGI_PRESENT_PARAMETERS) foundation.HRESULT {
+func (self *IDXGISwapChain1) Present1(SyncInterval uint32, PresentFlags DXGI_PRESENT, pPresentParameters *DXGI_PRESENT_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(SyncInterval), uintptr(PresentFlags), uintptr(unsafe.Pointer(pPresentParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsTemporaryMonoSupported dispatches through IDXGISwapChain1's vtable slot 23.
@@ -1171,33 +1186,33 @@ func (self *IDXGISwapChain1) IsTemporaryMonoSupported() foundation.BOOL {
 }
 
 // GetRestrictToOutput dispatches through IDXGISwapChain1's vtable slot 24.
-func (self *IDXGISwapChain1) GetRestrictToOutput(ppRestrictToOutput **IDXGIOutput) foundation.HRESULT {
+func (self *IDXGISwapChain1) GetRestrictToOutput(ppRestrictToOutput **IDXGIOutput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRestrictToOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBackgroundColor dispatches through IDXGISwapChain1's vtable slot 25.
-func (self *IDXGISwapChain1) SetBackgroundColor(pColor *DXGI_RGBA) foundation.HRESULT {
+func (self *IDXGISwapChain1) SetBackgroundColor(pColor *DXGI_RGBA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackgroundColor dispatches through IDXGISwapChain1's vtable slot 26.
-func (self *IDXGISwapChain1) GetBackgroundColor(pColor *DXGI_RGBA) foundation.HRESULT {
+func (self *IDXGISwapChain1) GetBackgroundColor(pColor *DXGI_RGBA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRotation dispatches through IDXGISwapChain1's vtable slot 27.
-func (self *IDXGISwapChain1) SetRotation(Rotation graphicsdxgicommon.DXGI_MODE_ROTATION) foundation.HRESULT {
+func (self *IDXGISwapChain1) SetRotation(Rotation graphicsdxgicommon.DXGI_MODE_ROTATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Rotation))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRotation dispatches through IDXGISwapChain1's vtable slot 28.
-func (self *IDXGISwapChain1) GetRotation(pRotation *graphicsdxgicommon.DXGI_MODE_ROTATION) foundation.HRESULT {
+func (self *IDXGISwapChain1) GetRotation(pRotation *graphicsdxgicommon.DXGI_MODE_ROTATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRotation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGISwapChain2: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgiswapchain2
@@ -1210,27 +1225,27 @@ type IDXGISwapChain2 struct {
 var IID_IDXGISwapChain2 = win32.GUID{Data1: 0xa8be2ac4, Data2: 0x199f, Data3: 0x4946, Data4: [8]byte{0xb3, 0x31, 0x79, 0x59, 0x9f, 0xb9, 0x8d, 0xe7}}
 
 // SetSourceSize dispatches through IDXGISwapChain2's vtable slot 29.
-func (self *IDXGISwapChain2) SetSourceSize(Width uint32, Height uint32) foundation.HRESULT {
+func (self *IDXGISwapChain2) SetSourceSize(Width uint32, Height uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceSize dispatches through IDXGISwapChain2's vtable slot 30.
-func (self *IDXGISwapChain2) GetSourceSize(pWidth *uint32, pHeight *uint32) foundation.HRESULT {
+func (self *IDXGISwapChain2) GetSourceSize(pWidth *uint32, pHeight *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaximumFrameLatency dispatches through IDXGISwapChain2's vtable slot 31.
-func (self *IDXGISwapChain2) SetMaximumFrameLatency(MaxLatency uint32) foundation.HRESULT {
+func (self *IDXGISwapChain2) SetMaximumFrameLatency(MaxLatency uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(MaxLatency))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaximumFrameLatency dispatches through IDXGISwapChain2's vtable slot 32.
-func (self *IDXGISwapChain2) GetMaximumFrameLatency(pMaxLatency *uint32) foundation.HRESULT {
+func (self *IDXGISwapChain2) GetMaximumFrameLatency(pMaxLatency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaxLatency)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFrameLatencyWaitableObject dispatches through IDXGISwapChain2's vtable slot 33.
@@ -1240,15 +1255,15 @@ func (self *IDXGISwapChain2) GetFrameLatencyWaitableObject() foundation.HANDLE {
 }
 
 // SetMatrixTransform dispatches through IDXGISwapChain2's vtable slot 34.
-func (self *IDXGISwapChain2) SetMatrixTransform(pMatrix *DXGI_MATRIX_3X2_F) foundation.HRESULT {
+func (self *IDXGISwapChain2) SetMatrixTransform(pMatrix *DXGI_MATRIX_3X2_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMatrix)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMatrixTransform dispatches through IDXGISwapChain2's vtable slot 35.
-func (self *IDXGISwapChain2) GetMatrixTransform(pMatrix *DXGI_MATRIX_3X2_F) foundation.HRESULT {
+func (self *IDXGISwapChain2) GetMatrixTransform(pMatrix *DXGI_MATRIX_3X2_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMatrix)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGISwapChain3: https://learn.microsoft.com/windows/win32/api/dxgi1_4/nn-dxgi1_4-idxgiswapchain3
@@ -1267,21 +1282,21 @@ func (self *IDXGISwapChain3) GetCurrentBackBufferIndex() uint32 {
 }
 
 // CheckColorSpaceSupport dispatches through IDXGISwapChain3's vtable slot 37.
-func (self *IDXGISwapChain3) CheckColorSpaceSupport(ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pColorSpaceSupport *uint32) foundation.HRESULT {
+func (self *IDXGISwapChain3) CheckColorSpaceSupport(ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pColorSpaceSupport *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(ColorSpace), uintptr(unsafe.Pointer(pColorSpaceSupport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorSpace1 dispatches through IDXGISwapChain3's vtable slot 38.
-func (self *IDXGISwapChain3) SetColorSpace1(ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) foundation.HRESULT {
+func (self *IDXGISwapChain3) SetColorSpace1(ColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(ColorSpace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResizeBuffers1 dispatches through IDXGISwapChain3's vtable slot 39.
-func (self *IDXGISwapChain3) ResizeBuffers1(BufferCount uint32, Width uint32, Height uint32, Format graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags uint32, pCreationNodeMask *uint32, ppPresentQueue **systemcom.IUnknown) foundation.HRESULT {
+func (self *IDXGISwapChain3) ResizeBuffers1(BufferCount uint32, Width uint32, Height uint32, Format graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags uint32, pCreationNodeMask *uint32, ppPresentQueue **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(BufferCount), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(SwapChainFlags), uintptr(unsafe.Pointer(pCreationNodeMask)), uintptr(unsafe.Pointer(ppPresentQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGISwapChain4: https://learn.microsoft.com/windows/win32/api/dxgi1_5/nn-dxgi1_5-idxgiswapchain4
@@ -1294,9 +1309,9 @@ type IDXGISwapChain4 struct {
 var IID_IDXGISwapChain4 = win32.GUID{Data1: 0x3d585d5a, Data2: 0xbd4a, Data3: 0x489e, Data4: [8]byte{0xb1, 0xf4, 0x3d, 0xbc, 0xb6, 0x45, 0x2f, 0xfb}}
 
 // SetHDRMetaData dispatches through IDXGISwapChain4's vtable slot 40.
-func (self *IDXGISwapChain4) SetHDRMetaData(Type DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) foundation.HRESULT {
+func (self *IDXGISwapChain4) SetHDRMetaData(Type DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Size), uintptr(unsafe.Pointer(pMetaData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXGISwapChainMedia: https://learn.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgiswapchainmedia
@@ -1309,21 +1324,21 @@ type IDXGISwapChainMedia struct {
 var IID_IDXGISwapChainMedia = win32.GUID{Data1: 0xdd95b90b, Data2: 0xf05f, Data3: 0x4f6a, Data4: [8]byte{0xbd, 0x65, 0x25, 0xbf, 0xb2, 0x64, 0xbd, 0x84}}
 
 // GetFrameStatisticsMedia dispatches through IDXGISwapChainMedia's vtable slot 3.
-func (self *IDXGISwapChainMedia) GetFrameStatisticsMedia(pStats *DXGI_FRAME_STATISTICS_MEDIA) foundation.HRESULT {
+func (self *IDXGISwapChainMedia) GetFrameStatisticsMedia(pStats *DXGI_FRAME_STATISTICS_MEDIA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPresentDuration dispatches through IDXGISwapChainMedia's vtable slot 4.
-func (self *IDXGISwapChainMedia) SetPresentDuration(Duration uint32) foundation.HRESULT {
+func (self *IDXGISwapChainMedia) SetPresentDuration(Duration uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Duration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckPresentDurationSupport dispatches through IDXGISwapChainMedia's vtable slot 5.
-func (self *IDXGISwapChainMedia) CheckPresentDurationSupport(DesiredPresentDuration uint32, pClosestSmallerPresentDuration *uint32, pClosestLargerPresentDuration *uint32) foundation.HRESULT {
+func (self *IDXGISwapChainMedia) CheckPresentDurationSupport(DesiredPresentDuration uint32, pClosestSmallerPresentDuration *uint32, pClosestLargerPresentDuration *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(DesiredPresentDuration), uintptr(unsafe.Pointer(pClosestSmallerPresentDuration)), uintptr(unsafe.Pointer(pClosestLargerPresentDuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9f251514-9d4d-4902-9d60-18988ab7d4b5

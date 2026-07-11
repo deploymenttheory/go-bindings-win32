@@ -72,8 +72,8 @@ type D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT struct {
 }
 
 // D3D11_AUTHENTICATED_PROTECTION_FLAGS: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_protection_flags
-// D3D11_AUTHENTICATED_PROTECTION_FLAGS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_AUTHENTICATED_PROTECTION_FLAGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_AUTHENTICATED_PROTECTION_FLAGS struct {
 	Data [1]uint32
 }
@@ -258,14 +258,14 @@ type D3D11_BUFFER_DESC struct {
 	StructureByteStride uint32
 }
 
-// D3D11_BUFFER_RTV_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_BUFFER_RTV_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_BUFFER_RTV_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// D3D11_BUFFER_RTV_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_BUFFER_RTV_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_BUFFER_RTV_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -276,14 +276,14 @@ type D3D11_BUFFER_RTV struct {
 	Anonymous2 D3D11_BUFFER_RTV_Anonymous2_e__Union
 }
 
-// D3D11_BUFFER_SRV_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_BUFFER_SRV_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_BUFFER_SRV_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// D3D11_BUFFER_SRV_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_BUFFER_SRV_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_BUFFER_SRV_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -353,8 +353,8 @@ type D3D11_DEPTH_STENCIL_DESC struct {
 	BackFace         D3D11_DEPTH_STENCILOP_DESC
 }
 
-// D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
 }
@@ -814,8 +814,8 @@ type D3D11_RENDER_TARGET_BLEND_DESC1 struct {
 	RenderTargetWriteMask byte
 }
 
-// D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
 }
@@ -827,8 +827,8 @@ type D3D11_RENDER_TARGET_VIEW_DESC struct {
 	Anonymous     D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
 }
 
-// D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -917,8 +917,8 @@ type D3D11_SHADER_INPUT_BIND_DESC struct {
 	NumSamples uint32
 }
 
-// D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -930,8 +930,8 @@ type D3D11_SHADER_RESOURCE_VIEW_DESC struct {
 	Anonymous     D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
 }
 
-// D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union struct {
 	Data [5]uint32
 }
@@ -943,8 +943,8 @@ type D3D11_SHADER_RESOURCE_VIEW_DESC1 struct {
 	Anonymous     D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union
 }
 
-// D3D11_SHADER_TRACE_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_SHADER_TRACE_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_SHADER_TRACE_DESC_Anonymous_e__Union struct {
 	Data [4]uint64
 }
@@ -1345,8 +1345,8 @@ type D3D11_TILE_SHAPE struct {
 	DepthInTexels  uint32
 }
 
-// D3D11_TRACE_REGISTER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_TRACE_REGISTER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_TRACE_REGISTER_Anonymous_e__Union struct {
 	Data [2]uint16
 }
@@ -1403,8 +1403,8 @@ type D3D11_TRACE_VALUE struct {
 	ValidMask byte
 }
 
-// D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
 }
@@ -1416,8 +1416,8 @@ type D3D11_UNORDERED_ACCESS_VIEW_DESC struct {
 	Anonymous     D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union
 }
 
-// D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -1434,8 +1434,8 @@ type D3D11_VERTEX_SHADER_TRACE_DESC struct {
 	Invocation uint64
 }
 
-// D3D11_VIDEO_COLOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_VIDEO_COLOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_VIDEO_COLOR_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -1560,8 +1560,8 @@ type D3D11_VIDEO_DECODER_EXTENSION struct {
 	PpResourceList        **ID3D11Resource
 }
 
-// D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1625,8 +1625,8 @@ type D3D11_VIDEO_PROCESSOR_FILTER_RANGE struct {
 	Multiplier float32
 }
 
-// D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union struct {
 	Data [2]uint32
 }
@@ -1638,8 +1638,8 @@ type D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC struct {
 	Anonymous     D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union
 }
 
-// D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
 }

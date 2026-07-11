@@ -29,8 +29,8 @@ type LINEREQMAKECALL struct {
 	SzComment     [80]foundation.CHAR
 }
 
-// MSP_EVENT_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MSP_EVENT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MSP_EVENT_INFO_Anonymous_e__Union struct {
 	Data [4]uint64
 }
@@ -46,8 +46,8 @@ type MSP_EVENT_INFO struct {
 type McastAddressAllocation struct {
 }
 
-// NSID_address_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NSID_address_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NSID_address_e__Union struct {
 	Data [18]uint32
 }

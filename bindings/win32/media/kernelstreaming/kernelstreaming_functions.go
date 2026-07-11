@@ -42,9 +42,9 @@ func KsCreateAllocator(ConnectionHandle foundation.HANDLE, AllocatorFraming *KSA
 }
 
 // KsCreateAllocator2 calls ksuser!KsCreateAllocator2.
-func KsCreateAllocator2(ConnectionHandle foundation.HANDLE, AllocatorFraming *KSALLOCATOR_FRAMING, AllocatorHandle *foundation.HANDLE) foundation.HRESULT {
+func KsCreateAllocator2(ConnectionHandle foundation.HANDLE, AllocatorFraming *KSALLOCATOR_FRAMING, AllocatorHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procKsCreateAllocator2.Addr(), uintptr(ConnectionHandle), uintptr(unsafe.Pointer(AllocatorFraming)), uintptr(unsafe.Pointer(AllocatorHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KsCreateClock calls ksuser!KsCreateClock.
@@ -54,9 +54,9 @@ func KsCreateClock(ConnectionHandle foundation.HANDLE, ClockCreate *KSCLOCK_CREA
 }
 
 // KsCreateClock2 calls ksuser!KsCreateClock2.
-func KsCreateClock2(ConnectionHandle foundation.HANDLE, ClockCreate *KSCLOCK_CREATE, ClockHandle *foundation.HANDLE) foundation.HRESULT {
+func KsCreateClock2(ConnectionHandle foundation.HANDLE, ClockCreate *KSCLOCK_CREATE, ClockHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procKsCreateClock2.Addr(), uintptr(ConnectionHandle), uintptr(unsafe.Pointer(ClockCreate)), uintptr(unsafe.Pointer(ClockHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KsCreatePin calls ksuser!KsCreatePin.
@@ -66,9 +66,9 @@ func KsCreatePin(FilterHandle foundation.HANDLE, Connect *KSPIN_CONNECT, Desired
 }
 
 // KsCreatePin2 calls ksuser!KsCreatePin2.
-func KsCreatePin2(FilterHandle foundation.HANDLE, Connect *KSPIN_CONNECT, DesiredAccess uint32, ConnectionHandle *foundation.HANDLE) foundation.HRESULT {
+func KsCreatePin2(FilterHandle foundation.HANDLE, Connect *KSPIN_CONNECT, DesiredAccess uint32, ConnectionHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procKsCreatePin2.Addr(), uintptr(FilterHandle), uintptr(unsafe.Pointer(Connect)), uintptr(DesiredAccess), uintptr(unsafe.Pointer(ConnectionHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KsCreateTopologyNode calls ksuser!KsCreateTopologyNode.
@@ -78,43 +78,43 @@ func KsCreateTopologyNode(ParentHandle foundation.HANDLE, NodeCreate *KSNODE_CRE
 }
 
 // KsCreateTopologyNode2 calls ksuser!KsCreateTopologyNode2.
-func KsCreateTopologyNode2(ParentHandle foundation.HANDLE, NodeCreate *KSNODE_CREATE, DesiredAccess uint32, NodeHandle *foundation.HANDLE) foundation.HRESULT {
+func KsCreateTopologyNode2(ParentHandle foundation.HANDLE, NodeCreate *KSNODE_CREATE, DesiredAccess uint32, NodeHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procKsCreateTopologyNode2.Addr(), uintptr(ParentHandle), uintptr(unsafe.Pointer(NodeCreate)), uintptr(DesiredAccess), uintptr(unsafe.Pointer(NodeHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KsGetMediaType calls ksproxy.ax!KsGetMediaType.
-func KsGetMediaType(Position int32, AmMediaType *mediamediafoundation.AM_MEDIA_TYPE, FilterHandle foundation.HANDLE, PinFactoryId uint32) foundation.HRESULT {
+func KsGetMediaType(Position int32, AmMediaType *mediamediafoundation.AM_MEDIA_TYPE, FilterHandle foundation.HANDLE, PinFactoryId uint32) error {
 	r1, _, _ := syscall.SyscallN(procKsGetMediaType.Addr(), uintptr(Position), uintptr(unsafe.Pointer(AmMediaType)), uintptr(FilterHandle), uintptr(PinFactoryId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KsGetMediaTypeCount calls ksproxy.ax!KsGetMediaTypeCount.
-func KsGetMediaTypeCount(FilterHandle foundation.HANDLE, PinFactoryId uint32, MediaTypeCount *uint32) foundation.HRESULT {
+func KsGetMediaTypeCount(FilterHandle foundation.HANDLE, PinFactoryId uint32, MediaTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procKsGetMediaTypeCount.Addr(), uintptr(FilterHandle), uintptr(PinFactoryId), uintptr(unsafe.Pointer(MediaTypeCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KsGetMultiplePinFactoryItems calls ksproxy.ax!KsGetMultiplePinFactoryItems.
-func KsGetMultiplePinFactoryItems(FilterHandle foundation.HANDLE, PinFactoryId uint32, PropertyId uint32, Items *unsafe.Pointer) foundation.HRESULT {
+func KsGetMultiplePinFactoryItems(FilterHandle foundation.HANDLE, PinFactoryId uint32, PropertyId uint32, Items *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procKsGetMultiplePinFactoryItems.Addr(), uintptr(FilterHandle), uintptr(PinFactoryId), uintptr(PropertyId), uintptr(unsafe.Pointer(Items)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KsOpenDefaultDevice calls ksproxy.ax!KsOpenDefaultDevice.
-func KsOpenDefaultDevice(Category *win32.GUID, Access uint32, DeviceHandle *foundation.HANDLE) foundation.HRESULT {
+func KsOpenDefaultDevice(Category *win32.GUID, Access uint32, DeviceHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procKsOpenDefaultDevice.Addr(), uintptr(unsafe.Pointer(Category)), uintptr(Access), uintptr(unsafe.Pointer(DeviceHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KsResolveRequiredAttributes calls ksproxy.ax!KsResolveRequiredAttributes.
-func KsResolveRequiredAttributes(DataRange *KSDATAFORMAT, Attributes *KSMULTIPLE_ITEM) foundation.HRESULT {
+func KsResolveRequiredAttributes(DataRange *KSDATAFORMAT, Attributes *KSMULTIPLE_ITEM) error {
 	r1, _, _ := syscall.SyscallN(procKsResolveRequiredAttributes.Addr(), uintptr(unsafe.Pointer(DataRange)), uintptr(unsafe.Pointer(Attributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KsSynchronousDeviceControl calls ksproxy.ax!KsSynchronousDeviceControl.
-func KsSynchronousDeviceControl(Handle foundation.HANDLE, IoControl uint32, InBuffer unsafe.Pointer, InLength uint32, OutBuffer unsafe.Pointer, OutLength uint32, BytesReturned *uint32) foundation.HRESULT {
+func KsSynchronousDeviceControl(Handle foundation.HANDLE, IoControl uint32, InBuffer unsafe.Pointer, InLength uint32, OutBuffer unsafe.Pointer, OutLength uint32, BytesReturned *uint32) error {
 	r1, _, _ := syscall.SyscallN(procKsSynchronousDeviceControl.Addr(), uintptr(Handle), uintptr(IoControl), uintptr(unsafe.Pointer(InBuffer)), uintptr(InLength), uintptr(unsafe.Pointer(OutBuffer)), uintptr(OutLength), uintptr(unsafe.Pointer(BytesReturned)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

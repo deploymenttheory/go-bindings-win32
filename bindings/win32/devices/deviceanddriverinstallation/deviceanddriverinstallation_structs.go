@@ -38,8 +38,8 @@ type CABINET_INFO_W struct {
 	CabinetNumber uint16
 }
 
-// CM_NOTIFY_EVENT_DATA_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CM_NOTIFY_EVENT_DATA_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CM_NOTIFY_EVENT_DATA_u_e__Union struct {
 	Data [7]uint32
 }
@@ -51,8 +51,8 @@ type CM_NOTIFY_EVENT_DATA struct {
 	U          CM_NOTIFY_EVENT_DATA_u_e__Union
 }
 
-// CM_NOTIFY_FILTER_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CM_NOTIFY_FILTER_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CM_NOTIFY_FILTER_u_e__Union struct {
 	Data [50]uint64
 }
@@ -249,8 +249,8 @@ type SP_ALTPLATFORM_INFO_V1 struct {
 	Reserved              uint16
 }
 
-// SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union struct {
 	Data [1]uint16
 }
@@ -267,8 +267,8 @@ type SP_ALTPLATFORM_INFO_V2 struct {
 	FirstValidatedMinorVersion uint32
 }
 
-// SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union struct {
 	Data [1]uint16
 }

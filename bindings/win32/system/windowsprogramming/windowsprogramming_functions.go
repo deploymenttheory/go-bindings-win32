@@ -36,61 +36,61 @@ var (
 )
 
 var (
+	procGetCurrentHwProfile                         = modADVAPI32.NewProc("GetCurrentHwProfileW")
 	procGetCurrentHwProfileA                        = modADVAPI32.NewProc("GetCurrentHwProfileA")
-	procGetCurrentHwProfileW                        = modADVAPI32.NewProc("GetCurrentHwProfileW")
+	procGetUserName                                 = modADVAPI32.NewProc("GetUserNameW")
 	procGetUserNameA                                = modADVAPI32.NewProc("GetUserNameA")
-	procGetUserNameW                                = modADVAPI32.NewProc("GetUserNameW")
 	procIsTokenUntrusted                            = modADVAPI32.NewProc("IsTokenUntrusted")
+	procAddDelBackupEntry                           = modADVPACK.NewProc("AddDelBackupEntryW")
 	procAddDelBackupEntryA                          = modADVPACK.NewProc("AddDelBackupEntryA")
-	procAddDelBackupEntryW                          = modADVPACK.NewProc("AddDelBackupEntryW")
+	procAdvInstallFile                              = modADVPACK.NewProc("AdvInstallFileW")
 	procAdvInstallFileA                             = modADVPACK.NewProc("AdvInstallFileA")
-	procAdvInstallFileW                             = modADVPACK.NewProc("AdvInstallFileW")
 	procCloseINFEngine                              = modADVPACK.NewProc("CloseINFEngine")
+	procDelNode                                     = modADVPACK.NewProc("DelNodeW")
 	procDelNodeA                                    = modADVPACK.NewProc("DelNodeA")
-	procDelNodeRunDLL32W                            = modADVPACK.NewProc("DelNodeRunDLL32W")
-	procDelNodeW                                    = modADVPACK.NewProc("DelNodeW")
+	procDelNodeRunDLL32                             = modADVPACK.NewProc("DelNodeRunDLL32W")
+	procExecuteCab                                  = modADVPACK.NewProc("ExecuteCabW")
 	procExecuteCabA                                 = modADVPACK.NewProc("ExecuteCabA")
-	procExecuteCabW                                 = modADVPACK.NewProc("ExecuteCabW")
+	procExtractFiles                                = modADVPACK.NewProc("ExtractFilesW")
 	procExtractFilesA                               = modADVPACK.NewProc("ExtractFilesA")
-	procExtractFilesW                               = modADVPACK.NewProc("ExtractFilesW")
+	procFileSaveMarkNotExist                        = modADVPACK.NewProc("FileSaveMarkNotExistW")
 	procFileSaveMarkNotExistA                       = modADVPACK.NewProc("FileSaveMarkNotExistA")
-	procFileSaveMarkNotExistW                       = modADVPACK.NewProc("FileSaveMarkNotExistW")
+	procFileSaveRestore                             = modADVPACK.NewProc("FileSaveRestoreW")
+	procFileSaveRestoreOnINF                        = modADVPACK.NewProc("FileSaveRestoreOnINFW")
 	procFileSaveRestoreOnINFA                       = modADVPACK.NewProc("FileSaveRestoreOnINFA")
-	procFileSaveRestoreOnINFW                       = modADVPACK.NewProc("FileSaveRestoreOnINFW")
-	procFileSaveRestoreW                            = modADVPACK.NewProc("FileSaveRestoreW")
+	procGetVersionFromFile                          = modADVPACK.NewProc("GetVersionFromFileW")
 	procGetVersionFromFileA                         = modADVPACK.NewProc("GetVersionFromFileA")
+	procGetVersionFromFileEx                        = modADVPACK.NewProc("GetVersionFromFileExW")
 	procGetVersionFromFileExA                       = modADVPACK.NewProc("GetVersionFromFileExA")
-	procGetVersionFromFileExW                       = modADVPACK.NewProc("GetVersionFromFileExW")
-	procGetVersionFromFileW                         = modADVPACK.NewProc("GetVersionFromFileW")
 	procIsNTAdmin                                   = modADVPACK.NewProc("IsNTAdmin")
-	procLaunchINFSectionExW                         = modADVPACK.NewProc("LaunchINFSectionExW")
-	procLaunchINFSectionW                           = modADVPACK.NewProc("LaunchINFSectionW")
+	procLaunchINFSection                            = modADVPACK.NewProc("LaunchINFSectionW")
+	procLaunchINFSectionEx                          = modADVPACK.NewProc("LaunchINFSectionExW")
 	procNeedReboot                                  = modADVPACK.NewProc("NeedReboot")
 	procNeedRebootInit                              = modADVPACK.NewProc("NeedRebootInit")
+	procOpenINFEngine                               = modADVPACK.NewProc("OpenINFEngineW")
 	procOpenINFEngineA                              = modADVPACK.NewProc("OpenINFEngineA")
-	procOpenINFEngineW                              = modADVPACK.NewProc("OpenINFEngineW")
+	procRebootCheckOnInstall                        = modADVPACK.NewProc("RebootCheckOnInstallW")
 	procRebootCheckOnInstallA                       = modADVPACK.NewProc("RebootCheckOnInstallA")
-	procRebootCheckOnInstallW                       = modADVPACK.NewProc("RebootCheckOnInstallW")
+	procRegInstall                                  = modADVPACK.NewProc("RegInstallW")
 	procRegInstallA                                 = modADVPACK.NewProc("RegInstallA")
-	procRegInstallW                                 = modADVPACK.NewProc("RegInstallW")
+	procRegRestoreAll                               = modADVPACK.NewProc("RegRestoreAllW")
 	procRegRestoreAllA                              = modADVPACK.NewProc("RegRestoreAllA")
-	procRegRestoreAllW                              = modADVPACK.NewProc("RegRestoreAllW")
+	procRegSaveRestore                              = modADVPACK.NewProc("RegSaveRestoreW")
 	procRegSaveRestoreA                             = modADVPACK.NewProc("RegSaveRestoreA")
+	procRegSaveRestoreOnINF                         = modADVPACK.NewProc("RegSaveRestoreOnINFW")
 	procRegSaveRestoreOnINFA                        = modADVPACK.NewProc("RegSaveRestoreOnINFA")
-	procRegSaveRestoreOnINFW                        = modADVPACK.NewProc("RegSaveRestoreOnINFW")
-	procRegSaveRestoreW                             = modADVPACK.NewProc("RegSaveRestoreW")
+	procRunSetupCommand                             = modADVPACK.NewProc("RunSetupCommandW")
 	procRunSetupCommandA                            = modADVPACK.NewProc("RunSetupCommandA")
-	procRunSetupCommandW                            = modADVPACK.NewProc("RunSetupCommandW")
+	procSetPerUserSecValues                         = modADVPACK.NewProc("SetPerUserSecValuesW")
 	procSetPerUserSecValuesA                        = modADVPACK.NewProc("SetPerUserSecValuesA")
-	procSetPerUserSecValuesW                        = modADVPACK.NewProc("SetPerUserSecValuesW")
+	procTranslateInfString                          = modADVPACK.NewProc("TranslateInfStringW")
 	procTranslateInfStringA                         = modADVPACK.NewProc("TranslateInfStringA")
+	procTranslateInfStringEx                        = modADVPACK.NewProc("TranslateInfStringExW")
 	procTranslateInfStringExA                       = modADVPACK.NewProc("TranslateInfStringExA")
-	procTranslateInfStringExW                       = modADVPACK.NewProc("TranslateInfStringExW")
-	procTranslateInfStringW                         = modADVPACK.NewProc("TranslateInfStringW")
+	procUserInstStubWrapper                         = modADVPACK.NewProc("UserInstStubWrapperW")
 	procUserInstStubWrapperA                        = modADVPACK.NewProc("UserInstStubWrapperA")
-	procUserInstStubWrapperW                        = modADVPACK.NewProc("UserInstStubWrapperW")
+	procUserUnInstStubWrapper                       = modADVPACK.NewProc("UserUnInstStubWrapperW")
 	procUserUnInstStubWrapperA                      = modADVPACK.NewProc("UserUnInstStubWrapperA")
-	procUserUnInstStubWrapperW                      = modADVPACK.NewProc("UserUnInstStubWrapperW")
 	procIsApiSetImplemented                         = modapi_ms_win_core_apiquery_l2_1_0.NewProc("IsApiSetImplemented")
 	procGetApiSetModuleBaseName                     = modapi_ms_win_core_apiquery_l2_1_1.NewProc("GetApiSetModuleBaseName")
 	procRaiseCustomSystemEventTrigger               = modapi_ms_win_core_backgroundtask_l1_1_0.NewProc("RaiseCustomSystemEventTrigger")
@@ -129,33 +129,33 @@ var (
 	procWinWatchNotify                              = modDCIMAN32.NewProc("WinWatchNotify")
 	procWinWatchOpen                                = modDCIMAN32.NewProc("WinWatchOpen")
 	procCancelDeviceWakeupRequest                   = modKERNEL32.NewProc("CancelDeviceWakeupRequest")
+	procDnsHostnameToComputerName                   = modKERNEL32.NewProc("DnsHostnameToComputerNameW")
 	procDnsHostnameToComputerNameA                  = modKERNEL32.NewProc("DnsHostnameToComputerNameA")
-	procDnsHostnameToComputerNameW                  = modKERNEL32.NewProc("DnsHostnameToComputerNameW")
 	procDosDateTimeToFileTime                       = modKERNEL32.NewProc("DosDateTimeToFileTime")
 	procEnableProcessOptionalXStateFeatures         = modKERNEL32.NewProc("EnableProcessOptionalXStateFeatures")
 	procFileTimeToDosDateTime                       = modKERNEL32.NewProc("FileTimeToDosDateTime")
+	procGetComputerName                             = modKERNEL32.NewProc("GetComputerNameW")
 	procGetComputerNameA                            = modKERNEL32.NewProc("GetComputerNameA")
-	procGetComputerNameW                            = modKERNEL32.NewProc("GetComputerNameW")
+	procGetFirmwareEnvironmentVariable              = modKERNEL32.NewProc("GetFirmwareEnvironmentVariableW")
 	procGetFirmwareEnvironmentVariableA             = modKERNEL32.NewProc("GetFirmwareEnvironmentVariableA")
+	procGetFirmwareEnvironmentVariableEx            = modKERNEL32.NewProc("GetFirmwareEnvironmentVariableExW")
 	procGetFirmwareEnvironmentVariableExA           = modKERNEL32.NewProc("GetFirmwareEnvironmentVariableExA")
-	procGetFirmwareEnvironmentVariableExW           = modKERNEL32.NewProc("GetFirmwareEnvironmentVariableExW")
-	procGetFirmwareEnvironmentVariableW             = modKERNEL32.NewProc("GetFirmwareEnvironmentVariableW")
+	procGetPrivateProfileInt                        = modKERNEL32.NewProc("GetPrivateProfileIntW")
 	procGetPrivateProfileIntA                       = modKERNEL32.NewProc("GetPrivateProfileIntA")
-	procGetPrivateProfileIntW                       = modKERNEL32.NewProc("GetPrivateProfileIntW")
+	procGetPrivateProfileSection                    = modKERNEL32.NewProc("GetPrivateProfileSectionW")
 	procGetPrivateProfileSectionA                   = modKERNEL32.NewProc("GetPrivateProfileSectionA")
+	procGetPrivateProfileSectionNames               = modKERNEL32.NewProc("GetPrivateProfileSectionNamesW")
 	procGetPrivateProfileSectionNamesA              = modKERNEL32.NewProc("GetPrivateProfileSectionNamesA")
-	procGetPrivateProfileSectionNamesW              = modKERNEL32.NewProc("GetPrivateProfileSectionNamesW")
-	procGetPrivateProfileSectionW                   = modKERNEL32.NewProc("GetPrivateProfileSectionW")
+	procGetPrivateProfileString                     = modKERNEL32.NewProc("GetPrivateProfileStringW")
 	procGetPrivateProfileStringA                    = modKERNEL32.NewProc("GetPrivateProfileStringA")
-	procGetPrivateProfileStringW                    = modKERNEL32.NewProc("GetPrivateProfileStringW")
+	procGetPrivateProfileStruct                     = modKERNEL32.NewProc("GetPrivateProfileStructW")
 	procGetPrivateProfileStructA                    = modKERNEL32.NewProc("GetPrivateProfileStructA")
-	procGetPrivateProfileStructW                    = modKERNEL32.NewProc("GetPrivateProfileStructW")
+	procGetProfileInt                               = modKERNEL32.NewProc("GetProfileIntW")
 	procGetProfileIntA                              = modKERNEL32.NewProc("GetProfileIntA")
-	procGetProfileIntW                              = modKERNEL32.NewProc("GetProfileIntW")
+	procGetProfileSection                           = modKERNEL32.NewProc("GetProfileSectionW")
 	procGetProfileSectionA                          = modKERNEL32.NewProc("GetProfileSectionA")
-	procGetProfileSectionW                          = modKERNEL32.NewProc("GetProfileSectionW")
+	procGetProfileString                            = modKERNEL32.NewProc("GetProfileStringW")
 	procGetProfileStringA                           = modKERNEL32.NewProc("GetProfileStringA")
-	procGetProfileStringW                           = modKERNEL32.NewProc("GetProfileStringW")
 	procGetSystemRegistryQuota                      = modKERNEL32.NewProc("GetSystemRegistryQuota")
 	procGetThreadEnabledXStateFeatures              = modKERNEL32.NewProc("GetThreadEnabledXStateFeatures")
 	procGlobalCompact                               = modKERNEL32.NewProc("GlobalCompact")
@@ -187,10 +187,10 @@ var (
 	procReplacePartitionUnit                        = modKERNEL32.NewProc("ReplacePartitionUnit")
 	procRequestDeviceWakeup                         = modKERNEL32.NewProc("RequestDeviceWakeup")
 	procSetEnvironmentStringsA                      = modKERNEL32.NewProc("SetEnvironmentStringsA")
+	procSetFirmwareEnvironmentVariable              = modKERNEL32.NewProc("SetFirmwareEnvironmentVariableW")
 	procSetFirmwareEnvironmentVariableA             = modKERNEL32.NewProc("SetFirmwareEnvironmentVariableA")
+	procSetFirmwareEnvironmentVariableEx            = modKERNEL32.NewProc("SetFirmwareEnvironmentVariableExW")
 	procSetFirmwareEnvironmentVariableExA           = modKERNEL32.NewProc("SetFirmwareEnvironmentVariableExA")
-	procSetFirmwareEnvironmentVariableExW           = modKERNEL32.NewProc("SetFirmwareEnvironmentVariableExW")
-	procSetFirmwareEnvironmentVariableW             = modKERNEL32.NewProc("SetFirmwareEnvironmentVariableW")
 	procSetHandleCount                              = modKERNEL32.NewProc("SetHandleCount")
 	procSetMessageWaitingIndicator                  = modKERNEL32.NewProc("SetMessageWaitingIndicator")
 	procUaw_lstrcmpW                                = modKERNEL32.NewProc("uaw_lstrcmpW")
@@ -201,16 +201,16 @@ var (
 	procUaw_wcsicmp                                 = modKERNEL32.NewProc("uaw_wcsicmp")
 	procUaw_wcslen                                  = modKERNEL32.NewProc("uaw_wcslen")
 	procUaw_wcsrchr                                 = modKERNEL32.NewProc("uaw_wcsrchr")
+	procWritePrivateProfileSection                  = modKERNEL32.NewProc("WritePrivateProfileSectionW")
 	procWritePrivateProfileSectionA                 = modKERNEL32.NewProc("WritePrivateProfileSectionA")
-	procWritePrivateProfileSectionW                 = modKERNEL32.NewProc("WritePrivateProfileSectionW")
+	procWritePrivateProfileString                   = modKERNEL32.NewProc("WritePrivateProfileStringW")
 	procWritePrivateProfileStringA                  = modKERNEL32.NewProc("WritePrivateProfileStringA")
-	procWritePrivateProfileStringW                  = modKERNEL32.NewProc("WritePrivateProfileStringW")
+	procWritePrivateProfileStruct                   = modKERNEL32.NewProc("WritePrivateProfileStructW")
 	procWritePrivateProfileStructA                  = modKERNEL32.NewProc("WritePrivateProfileStructA")
-	procWritePrivateProfileStructW                  = modKERNEL32.NewProc("WritePrivateProfileStructW")
+	procWriteProfileSection                         = modKERNEL32.NewProc("WriteProfileSectionW")
 	procWriteProfileSectionA                        = modKERNEL32.NewProc("WriteProfileSectionA")
-	procWriteProfileSectionW                        = modKERNEL32.NewProc("WriteProfileSectionW")
+	procWriteProfileString                          = modKERNEL32.NewProc("WriteProfileStringW")
 	procWriteProfileStringA                         = modKERNEL32.NewProc("WriteProfileStringA")
-	procWriteProfileStringW                         = modKERNEL32.NewProc("WriteProfileStringW")
 	procRtlAnsiStringToUnicodeString                = modntdll.NewProc("RtlAnsiStringToUnicodeString")
 	procRtlCharToInteger                            = modntdll.NewProc("RtlCharToInteger")
 	procRtlFreeAnsiString                           = modntdll.NewProc("RtlFreeAnsiString")
@@ -230,14 +230,14 @@ var (
 	procRtlUnicodeStringToOemString                 = modntdll.NewProc("RtlUnicodeStringToOemString")
 	procRtlUnicodeToMultiByteSize                   = modntdll.NewProc("RtlUnicodeToMultiByteSize")
 	procRtlUniform                                  = modntdll.NewProc("RtlUniform")
+	procIMPGetIME                                   = modUSER32.NewProc("IMPGetIMEW")
 	procIMPGetIMEA                                  = modUSER32.NewProc("IMPGetIMEA")
-	procIMPGetIMEW                                  = modUSER32.NewProc("IMPGetIMEW")
+	procIMPQueryIME                                 = modUSER32.NewProc("IMPQueryIMEW")
 	procIMPQueryIMEA                                = modUSER32.NewProc("IMPQueryIMEA")
-	procIMPQueryIMEW                                = modUSER32.NewProc("IMPQueryIMEW")
+	procIMPSetIME                                   = modUSER32.NewProc("IMPSetIMEW")
 	procIMPSetIMEA                                  = modUSER32.NewProc("IMPSetIMEA")
-	procIMPSetIMEW                                  = modUSER32.NewProc("IMPSetIMEW")
+	procSendIMEMessageEx                            = modUSER32.NewProc("SendIMEMessageExW")
 	procSendIMEMessageExA                           = modUSER32.NewProc("SendIMEMessageExA")
-	procSendIMEMessageExW                           = modUSER32.NewProc("SendIMEMessageExW")
 	procWINNLSEnableIME                             = modUSER32.NewProc("WINNLSEnableIME")
 	procWINNLSGetEnableStatus                       = modUSER32.NewProc("WINNLSGetEnableStatus")
 	procWINNLSGetIMEHotkey                          = modUSER32.NewProc("WINNLSGetIMEHotkey")
@@ -267,63 +267,71 @@ var (
 	procWldpSetWindowsLockdownRestriction           = modWldp.NewProc("WldpSetWindowsLockdownRestriction")
 )
 
-// AddDelBackupEntryA calls ADVPACK!AddDelBackupEntryA.
-func AddDelBackupEntryA(lpcszFileList foundation.PSTR, lpcszBackupDir foundation.PSTR, lpcszBaseName foundation.PSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAddDelBackupEntryA.Addr(), uintptr(unsafe.Pointer(lpcszFileList)), uintptr(unsafe.Pointer(lpcszBackupDir)), uintptr(unsafe.Pointer(lpcszBaseName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+// AddDelBackupEntry calls ADVPACK!AddDelBackupEntryW.
+func AddDelBackupEntry(lpcszFileList string, lpcszBackupDir string, lpcszBaseName string, dwFlags uint32) error {
+	_lpcszFileList := win32.UTF16Ptr(lpcszFileList)
+	_lpcszBackupDir := win32.UTF16Ptr(lpcszBackupDir)
+	_lpcszBaseName := win32.UTF16Ptr(lpcszBaseName)
+	r1, _, _ := syscall.SyscallN(procAddDelBackupEntry.Addr(), uintptr(unsafe.Pointer(_lpcszFileList)), uintptr(unsafe.Pointer(_lpcszBackupDir)), uintptr(unsafe.Pointer(_lpcszBaseName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
-// AddDelBackupEntryW calls ADVPACK!AddDelBackupEntryW.
-func AddDelBackupEntryW(lpcszFileList foundation.PWSTR, lpcszBackupDir foundation.PWSTR, lpcszBaseName foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAddDelBackupEntryW.Addr(), uintptr(unsafe.Pointer(lpcszFileList)), uintptr(unsafe.Pointer(lpcszBackupDir)), uintptr(unsafe.Pointer(lpcszBaseName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+// AddDelBackupEntryA calls ADVPACK!AddDelBackupEntryA.
+func AddDelBackupEntryA(lpcszFileList foundation.PSTR, lpcszBackupDir foundation.PSTR, lpcszBaseName foundation.PSTR, dwFlags uint32) error {
+	r1, _, _ := syscall.SyscallN(procAddDelBackupEntryA.Addr(), uintptr(unsafe.Pointer(lpcszFileList)), uintptr(unsafe.Pointer(lpcszBackupDir)), uintptr(unsafe.Pointer(lpcszBaseName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
+}
+
+// AdvInstallFile calls ADVPACK!AdvInstallFileW.
+func AdvInstallFile(hwnd foundation.HWND, lpszSourceDir string, lpszSourceFile string, lpszDestDir string, lpszDestFile string, dwFlags uint32, dwReserved uint32) error {
+	_lpszSourceDir := win32.UTF16Ptr(lpszSourceDir)
+	_lpszSourceFile := win32.UTF16Ptr(lpszSourceFile)
+	_lpszDestDir := win32.UTF16Ptr(lpszDestDir)
+	_lpszDestFile := win32.UTF16Ptr(lpszDestFile)
+	r1, _, _ := syscall.SyscallN(procAdvInstallFile.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_lpszSourceDir)), uintptr(unsafe.Pointer(_lpszSourceFile)), uintptr(unsafe.Pointer(_lpszDestDir)), uintptr(unsafe.Pointer(_lpszDestFile)), uintptr(dwFlags), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AdvInstallFileA calls ADVPACK!AdvInstallFileA.
-func AdvInstallFileA(hwnd foundation.HWND, lpszSourceDir foundation.PSTR, lpszSourceFile foundation.PSTR, lpszDestDir foundation.PSTR, lpszDestFile foundation.PSTR, dwFlags uint32, dwReserved uint32) foundation.HRESULT {
+func AdvInstallFileA(hwnd foundation.HWND, lpszSourceDir foundation.PSTR, lpszSourceFile foundation.PSTR, lpszDestDir foundation.PSTR, lpszDestFile foundation.PSTR, dwFlags uint32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(procAdvInstallFileA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(lpszSourceDir)), uintptr(unsafe.Pointer(lpszSourceFile)), uintptr(unsafe.Pointer(lpszDestDir)), uintptr(unsafe.Pointer(lpszDestFile)), uintptr(dwFlags), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
-}
-
-// AdvInstallFileW calls ADVPACK!AdvInstallFileW.
-func AdvInstallFileW(hwnd foundation.HWND, lpszSourceDir foundation.PWSTR, lpszSourceFile foundation.PWSTR, lpszDestDir foundation.PWSTR, lpszDestFile foundation.PWSTR, dwFlags uint32, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAdvInstallFileW.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(lpszSourceDir)), uintptr(unsafe.Pointer(lpszSourceFile)), uintptr(unsafe.Pointer(lpszDestDir)), uintptr(unsafe.Pointer(lpszDestFile)), uintptr(dwFlags), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ApphelpCheckShellObject calls APPHELP!ApphelpCheckShellObject.
 // https://learn.microsoft.com/windows/win32/api/appcompatapi/nf-appcompatapi-apphelpcheckshellobject
-func ApphelpCheckShellObject(ObjectCLSID *win32.GUID, bShimIfNecessary foundation.BOOL, pullFlags *uint64) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procApphelpCheckShellObject.Addr(), uintptr(unsafe.Pointer(ObjectCLSID)), uintptr(bShimIfNecessary), uintptr(unsafe.Pointer(pullFlags)))
-	return foundation.BOOL(r1)
+func ApphelpCheckShellObject(ObjectCLSID *win32.GUID, bShimIfNecessary bool, pullFlags *uint64) bool {
+	_bShimIfNecessary := win32.Bool32(bShimIfNecessary)
+	r1, _, _ := syscall.SyscallN(procApphelpCheckShellObject.Addr(), uintptr(unsafe.Pointer(ObjectCLSID)), uintptr(_bShimIfNecessary), uintptr(unsafe.Pointer(pullFlags)))
+	return r1 != 0
 }
 
 // CancelDeviceWakeupRequest calls KERNEL32!CancelDeviceWakeupRequest.
-func CancelDeviceWakeupRequest(hDevice foundation.HANDLE) foundation.BOOL {
+func CancelDeviceWakeupRequest(hDevice foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procCancelDeviceWakeupRequest.Addr(), uintptr(hDevice))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CloseINFEngine calls ADVPACK!CloseINFEngine.
-func CloseINFEngine(hInf unsafe.Pointer) foundation.HRESULT {
+func CloseINFEngine(hInf unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCloseINFEngine.Addr(), uintptr(unsafe.Pointer(hInf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertAuxiliaryCounterToPerformanceCounter calls api-ms-win-core-realtime-l1-1-2!ConvertAuxiliaryCounterToPerformanceCounter.
 // https://learn.microsoft.com/windows/win32/api/realtimeapiset/nf-realtimeapiset-convertauxiliarycountertoperformancecounter
 // Minimum OS: windows10.0.15063.
-func ConvertAuxiliaryCounterToPerformanceCounter(ullAuxiliaryCounterValue uint64, lpPerformanceCounterValue *uint64, lpConversionError *uint64) foundation.HRESULT {
+func ConvertAuxiliaryCounterToPerformanceCounter(ullAuxiliaryCounterValue uint64, lpPerformanceCounterValue *uint64, lpConversionError *uint64) error {
 	r1, _, _ := syscall.SyscallN(procConvertAuxiliaryCounterToPerformanceCounter.Addr(), uintptr(ullAuxiliaryCounterValue), uintptr(unsafe.Pointer(lpPerformanceCounterValue)), uintptr(unsafe.Pointer(lpConversionError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertPerformanceCounterToAuxiliaryCounter calls api-ms-win-core-realtime-l1-1-2!ConvertPerformanceCounterToAuxiliaryCounter.
 // https://learn.microsoft.com/windows/win32/api/realtimeapiset/nf-realtimeapiset-convertperformancecountertoauxiliarycounter
 // Minimum OS: windows10.0.15063.
-func ConvertPerformanceCounterToAuxiliaryCounter(ullPerformanceCounterValue uint64, lpAuxiliaryCounterValue *uint64, lpConversionError *uint64) foundation.HRESULT {
+func ConvertPerformanceCounterToAuxiliaryCounter(ullPerformanceCounterValue uint64, lpAuxiliaryCounterValue *uint64, lpConversionError *uint64) error {
 	r1, _, _ := syscall.SyscallN(procConvertPerformanceCounterToAuxiliaryCounter.Addr(), uintptr(ullPerformanceCounterValue), uintptr(unsafe.Pointer(lpAuxiliaryCounterValue)), uintptr(unsafe.Pointer(lpConversionError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCIBeginAccess calls DCIMAN32!DCIBeginAccess.
@@ -413,22 +421,35 @@ func DCISetSrcDestClip(pdci *DCIOFFSCREEN, srcrc *foundation.RECT, destrc *found
 	return int32(r1)
 }
 
+// DelNode calls ADVPACK!DelNodeW.
+func DelNode(pszFileOrDirName string, dwFlags uint32) error {
+	_pszFileOrDirName := win32.UTF16Ptr(pszFileOrDirName)
+	r1, _, _ := syscall.SyscallN(procDelNode.Addr(), uintptr(unsafe.Pointer(_pszFileOrDirName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
+}
+
 // DelNodeA calls ADVPACK!DelNodeA.
-func DelNodeA(pszFileOrDirName foundation.PSTR, dwFlags uint32) foundation.HRESULT {
+func DelNodeA(pszFileOrDirName foundation.PSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procDelNodeA.Addr(), uintptr(unsafe.Pointer(pszFileOrDirName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// DelNodeRunDLL32W calls ADVPACK!DelNodeRunDLL32W.
-func DelNodeRunDLL32W(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PWSTR, nShow int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDelNodeRunDLL32W.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
-	return foundation.HRESULT(r1)
+// DelNodeRunDLL32 calls ADVPACK!DelNodeRunDLL32W.
+func DelNodeRunDLL32(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PWSTR, nShow int32) error {
+	r1, _, _ := syscall.SyscallN(procDelNodeRunDLL32.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
+	return win32.HRESULTError(int32(r1))
 }
 
-// DelNodeW calls ADVPACK!DelNodeW.
-func DelNodeW(pszFileOrDirName foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDelNodeW.Addr(), uintptr(unsafe.Pointer(pszFileOrDirName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+// DnsHostnameToComputerName calls KERNEL32!DnsHostnameToComputerNameW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-dnshostnametocomputernamew
+// Minimum OS: windows5.0.
+func DnsHostnameToComputerName(Hostname string, ComputerName foundation.PWSTR, nSize *uint32) error {
+	_Hostname := win32.UTF16Ptr(Hostname)
+	r1, _, e1 := syscall.SyscallN(procDnsHostnameToComputerName.Addr(), uintptr(unsafe.Pointer(_Hostname)), uintptr(unsafe.Pointer(ComputerName)), uintptr(unsafe.Pointer(nSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // DnsHostnameToComputerNameA calls KERNEL32!DnsHostnameToComputerNameA.
@@ -436,17 +457,6 @@ func DelNodeW(pszFileOrDirName foundation.PWSTR, dwFlags uint32) foundation.HRES
 // Minimum OS: windows5.0.
 func DnsHostnameToComputerNameA(Hostname foundation.PSTR, ComputerName foundation.PSTR, nSize *uint32) error {
 	r1, _, e1 := syscall.SyscallN(procDnsHostnameToComputerNameA.Addr(), uintptr(unsafe.Pointer(Hostname)), uintptr(unsafe.Pointer(ComputerName)), uintptr(unsafe.Pointer(nSize)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// DnsHostnameToComputerNameW calls KERNEL32!DnsHostnameToComputerNameW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-dnshostnametocomputernamew
-// Minimum OS: windows5.0.
-func DnsHostnameToComputerNameW(Hostname foundation.PWSTR, ComputerName foundation.PWSTR, nSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procDnsHostnameToComputerNameW.Addr(), uintptr(unsafe.Pointer(Hostname)), uintptr(unsafe.Pointer(ComputerName)), uintptr(unsafe.Pointer(nSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -466,63 +476,77 @@ func DosDateTimeToFileTime(wFatDate uint16, wFatTime uint16, lpFileTime *foundat
 
 // EnableProcessOptionalXStateFeatures calls KERNEL32!EnableProcessOptionalXStateFeatures.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-enableprocessoptionalxstatefeatures
-func EnableProcessOptionalXStateFeatures(Features uint64) foundation.BOOL {
+func EnableProcessOptionalXStateFeatures(Features uint64) bool {
 	r1, _, _ := syscall.SyscallN(procEnableProcessOptionalXStateFeatures.Addr(), uintptr(Features))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ExecuteCab calls ADVPACK!ExecuteCabW.
+func ExecuteCab(hwnd foundation.HWND, pCab *CABINFOW, pReserved unsafe.Pointer) error {
+	r1, _, _ := syscall.SyscallN(procExecuteCab.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pCab)), uintptr(unsafe.Pointer(pReserved)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExecuteCabA calls ADVPACK!ExecuteCabA.
-func ExecuteCabA(hwnd foundation.HWND, pCab *CABINFOA, pReserved unsafe.Pointer) foundation.HRESULT {
+func ExecuteCabA(hwnd foundation.HWND, pCab *CABINFOA, pReserved unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procExecuteCabA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pCab)), uintptr(unsafe.Pointer(pReserved)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// ExecuteCabW calls ADVPACK!ExecuteCabW.
-func ExecuteCabW(hwnd foundation.HWND, pCab *CABINFOW, pReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procExecuteCabW.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pCab)), uintptr(unsafe.Pointer(pReserved)))
-	return foundation.HRESULT(r1)
+// ExtractFiles calls ADVPACK!ExtractFilesW.
+func ExtractFiles(pszCabName string, pszExpandDir string, dwFlags uint32, pszFileList string, lpReserved unsafe.Pointer, dwReserved uint32) error {
+	_pszCabName := win32.UTF16Ptr(pszCabName)
+	_pszExpandDir := win32.UTF16Ptr(pszExpandDir)
+	_pszFileList := win32.UTF16Ptr(pszFileList)
+	r1, _, _ := syscall.SyscallN(procExtractFiles.Addr(), uintptr(unsafe.Pointer(_pszCabName)), uintptr(unsafe.Pointer(_pszExpandDir)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszFileList)), uintptr(unsafe.Pointer(lpReserved)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExtractFilesA calls ADVPACK!ExtractFilesA.
-func ExtractFilesA(pszCabName foundation.PSTR, pszExpandDir foundation.PSTR, dwFlags uint32, pszFileList foundation.PSTR, lpReserved unsafe.Pointer, dwReserved uint32) foundation.HRESULT {
+func ExtractFilesA(pszCabName foundation.PSTR, pszExpandDir foundation.PSTR, dwFlags uint32, pszFileList foundation.PSTR, lpReserved unsafe.Pointer, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(procExtractFilesA.Addr(), uintptr(unsafe.Pointer(pszCabName)), uintptr(unsafe.Pointer(pszExpandDir)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszFileList)), uintptr(unsafe.Pointer(lpReserved)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// ExtractFilesW calls ADVPACK!ExtractFilesW.
-func ExtractFilesW(pszCabName foundation.PWSTR, pszExpandDir foundation.PWSTR, dwFlags uint32, pszFileList foundation.PWSTR, lpReserved unsafe.Pointer, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procExtractFilesW.Addr(), uintptr(unsafe.Pointer(pszCabName)), uintptr(unsafe.Pointer(pszExpandDir)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszFileList)), uintptr(unsafe.Pointer(lpReserved)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+// FileSaveMarkNotExist calls ADVPACK!FileSaveMarkNotExistW.
+func FileSaveMarkNotExist(lpFileList string, lpDir string, lpBaseName string) error {
+	_lpFileList := win32.UTF16Ptr(lpFileList)
+	_lpDir := win32.UTF16Ptr(lpDir)
+	_lpBaseName := win32.UTF16Ptr(lpBaseName)
+	r1, _, _ := syscall.SyscallN(procFileSaveMarkNotExist.Addr(), uintptr(unsafe.Pointer(_lpFileList)), uintptr(unsafe.Pointer(_lpDir)), uintptr(unsafe.Pointer(_lpBaseName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FileSaveMarkNotExistA calls ADVPACK!FileSaveMarkNotExistA.
-func FileSaveMarkNotExistA(lpFileList foundation.PSTR, lpDir foundation.PSTR, lpBaseName foundation.PSTR) foundation.HRESULT {
+func FileSaveMarkNotExistA(lpFileList foundation.PSTR, lpDir foundation.PSTR, lpBaseName foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procFileSaveMarkNotExistA.Addr(), uintptr(unsafe.Pointer(lpFileList)), uintptr(unsafe.Pointer(lpDir)), uintptr(unsafe.Pointer(lpBaseName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// FileSaveMarkNotExistW calls ADVPACK!FileSaveMarkNotExistW.
-func FileSaveMarkNotExistW(lpFileList foundation.PWSTR, lpDir foundation.PWSTR, lpBaseName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFileSaveMarkNotExistW.Addr(), uintptr(unsafe.Pointer(lpFileList)), uintptr(unsafe.Pointer(lpDir)), uintptr(unsafe.Pointer(lpBaseName)))
-	return foundation.HRESULT(r1)
+// FileSaveRestore calls ADVPACK!FileSaveRestoreW.
+func FileSaveRestore(hDlg foundation.HWND, lpFileList string, lpDir string, lpBaseName string, dwFlags uint32) error {
+	_lpFileList := win32.UTF16Ptr(lpFileList)
+	_lpDir := win32.UTF16Ptr(lpDir)
+	_lpBaseName := win32.UTF16Ptr(lpBaseName)
+	r1, _, _ := syscall.SyscallN(procFileSaveRestore.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_lpFileList)), uintptr(unsafe.Pointer(_lpDir)), uintptr(unsafe.Pointer(_lpBaseName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
+}
+
+// FileSaveRestoreOnINF calls ADVPACK!FileSaveRestoreOnINFW.
+func FileSaveRestoreOnINF(hWnd foundation.HWND, pszTitle string, pszINF string, pszSection string, pszBackupDir string, pszBaseBackupFile string, dwFlags uint32) error {
+	_pszTitle := win32.UTF16Ptr(pszTitle)
+	_pszINF := win32.UTF16Ptr(pszINF)
+	_pszSection := win32.UTF16Ptr(pszSection)
+	_pszBackupDir := win32.UTF16Ptr(pszBackupDir)
+	_pszBaseBackupFile := win32.UTF16Ptr(pszBaseBackupFile)
+	r1, _, _ := syscall.SyscallN(procFileSaveRestoreOnINF.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszINF)), uintptr(unsafe.Pointer(_pszSection)), uintptr(unsafe.Pointer(_pszBackupDir)), uintptr(unsafe.Pointer(_pszBaseBackupFile)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FileSaveRestoreOnINFA calls ADVPACK!FileSaveRestoreOnINFA.
-func FileSaveRestoreOnINFA(hWnd foundation.HWND, pszTitle foundation.PSTR, pszINF foundation.PSTR, pszSection foundation.PSTR, pszBackupDir foundation.PSTR, pszBaseBackupFile foundation.PSTR, dwFlags uint32) foundation.HRESULT {
+func FileSaveRestoreOnINFA(hWnd foundation.HWND, pszTitle foundation.PSTR, pszINF foundation.PSTR, pszSection foundation.PSTR, pszBackupDir foundation.PSTR, pszBaseBackupFile foundation.PSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procFileSaveRestoreOnINFA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSection)), uintptr(unsafe.Pointer(pszBackupDir)), uintptr(unsafe.Pointer(pszBaseBackupFile)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
-}
-
-// FileSaveRestoreOnINFW calls ADVPACK!FileSaveRestoreOnINFW.
-func FileSaveRestoreOnINFW(hWnd foundation.HWND, pszTitle foundation.PWSTR, pszINF foundation.PWSTR, pszSection foundation.PWSTR, pszBackupDir foundation.PWSTR, pszBaseBackupFile foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFileSaveRestoreOnINFW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSection)), uintptr(unsafe.Pointer(pszBackupDir)), uintptr(unsafe.Pointer(pszBaseBackupFile)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
-}
-
-// FileSaveRestoreW calls ADVPACK!FileSaveRestoreW.
-func FileSaveRestoreW(hDlg foundation.HWND, lpFileList foundation.PWSTR, lpDir foundation.PWSTR, lpBaseName foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFileSaveRestoreW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(lpFileList)), uintptr(unsafe.Pointer(lpDir)), uintptr(unsafe.Pointer(lpBaseName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FileTimeToDosDateTime calls KERNEL32!FileTimeToDosDateTime.
@@ -544,9 +568,20 @@ func GdiEntry13() uint32 {
 }
 
 // GetApiSetModuleBaseName calls api-ms-win-core-apiquery-l2-1-1!GetApiSetModuleBaseName.
-func GetApiSetModuleBaseName(contractName foundation.PSTR, bufferLength uint32, moduleBaseName foundation.PWSTR, actualNameLength *uint32) foundation.HRESULT {
+func GetApiSetModuleBaseName(contractName foundation.PSTR, bufferLength uint32, moduleBaseName foundation.PWSTR, actualNameLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetApiSetModuleBaseName.Addr(), uintptr(unsafe.Pointer(contractName)), uintptr(bufferLength), uintptr(unsafe.Pointer(moduleBaseName)), uintptr(unsafe.Pointer(actualNameLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// GetComputerName calls KERNEL32!GetComputerNameW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcomputernamew
+// Minimum OS: windows5.0.
+func GetComputerName(lpBuffer foundation.PWSTR, nSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetComputerName.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(nSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GetComputerNameA calls KERNEL32!GetComputerNameA.
@@ -560,11 +595,11 @@ func GetComputerNameA(lpBuffer foundation.PSTR, nSize *uint32) error {
 	return nil
 }
 
-// GetComputerNameW calls KERNEL32!GetComputerNameW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcomputernamew
+// GetCurrentHwProfile calls ADVAPI32!GetCurrentHwProfileW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcurrenthwprofilew
 // Minimum OS: windows5.0.
-func GetComputerNameW(lpBuffer foundation.PWSTR, nSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetComputerNameW.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(nSize)))
+func GetCurrentHwProfile(lpHwProfileInfo *HW_PROFILE_INFOW) error {
+	r1, _, e1 := syscall.SyscallN(procGetCurrentHwProfile.Addr(), uintptr(unsafe.Pointer(lpHwProfileInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -576,17 +611,6 @@ func GetComputerNameW(lpBuffer foundation.PWSTR, nSize *uint32) error {
 // Minimum OS: windows5.0.
 func GetCurrentHwProfileA(lpHwProfileInfo *HW_PROFILE_INFOA) error {
 	r1, _, e1 := syscall.SyscallN(procGetCurrentHwProfileA.Addr(), uintptr(unsafe.Pointer(lpHwProfileInfo)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetCurrentHwProfileW calls ADVAPI32!GetCurrentHwProfileW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcurrenthwprofilew
-// Minimum OS: windows5.0.
-func GetCurrentHwProfileW(lpHwProfileInfo *HW_PROFILE_INFOW) error {
-	r1, _, e1 := syscall.SyscallN(procGetCurrentHwProfileW.Addr(), uintptr(unsafe.Pointer(lpHwProfileInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -613,11 +637,37 @@ func GetFeatureVariant(featureId uint32, changeTime FEATURE_CHANGE_TIME, payload
 	return uint32(r1)
 }
 
+// GetFirmwareEnvironmentVariable calls KERNEL32!GetFirmwareEnvironmentVariableW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfirmwareenvironmentvariablew
+// Minimum OS: windows6.0.6000.
+func GetFirmwareEnvironmentVariable(lpName string, lpGuid string, pBuffer unsafe.Pointer, nSize uint32) (uint32, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	_lpGuid := win32.UTF16Ptr(lpGuid)
+	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(pBuffer)), uintptr(nSize))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // GetFirmwareEnvironmentVariableA calls KERNEL32!GetFirmwareEnvironmentVariableA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfirmwareenvironmentvariablea
 // Minimum OS: windows6.0.6000.
 func GetFirmwareEnvironmentVariableA(lpName foundation.PSTR, lpGuid foundation.PSTR, pBuffer unsafe.Pointer, nSize uint32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pBuffer)), uintptr(nSize))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
+// GetFirmwareEnvironmentVariableEx calls KERNEL32!GetFirmwareEnvironmentVariableExW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfirmwareenvironmentvariableexw
+// Minimum OS: windows8.0.
+func GetFirmwareEnvironmentVariableEx(lpName string, lpGuid string, pBuffer unsafe.Pointer, nSize uint32, pdwAttribubutes *uint32) (uint32, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	_lpGuid := win32.UTF16Ptr(lpGuid)
+	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableEx.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(pBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(pdwAttribubutes)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -635,26 +685,15 @@ func GetFirmwareEnvironmentVariableExA(lpName foundation.PSTR, lpGuid foundation
 	return uint32(r1), nil
 }
 
-// GetFirmwareEnvironmentVariableExW calls KERNEL32!GetFirmwareEnvironmentVariableExW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfirmwareenvironmentvariableexw
-// Minimum OS: windows8.0.
-func GetFirmwareEnvironmentVariableExW(lpName foundation.PWSTR, lpGuid foundation.PWSTR, pBuffer unsafe.Pointer, nSize uint32, pdwAttribubutes *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableExW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(pdwAttribubutes)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetFirmwareEnvironmentVariableW calls KERNEL32!GetFirmwareEnvironmentVariableW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfirmwareenvironmentvariablew
-// Minimum OS: windows6.0.6000.
-func GetFirmwareEnvironmentVariableW(lpName foundation.PWSTR, lpGuid foundation.PWSTR, pBuffer unsafe.Pointer, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pBuffer)), uintptr(nSize))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
+// GetPrivateProfileInt calls KERNEL32!GetPrivateProfileIntW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofileintw
+// Minimum OS: windows5.0.
+func GetPrivateProfileInt(lpAppName string, lpKeyName string, nDefault int32, lpFileName string) int32 {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	_lpKeyName := win32.UTF16Ptr(lpKeyName)
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procGetPrivateProfileInt.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(nDefault), uintptr(unsafe.Pointer(_lpFileName)))
+	return int32(r1)
 }
 
 // GetPrivateProfileIntA calls KERNEL32!GetPrivateProfileIntA.
@@ -665,12 +704,14 @@ func GetPrivateProfileIntA(lpAppName foundation.PSTR, lpKeyName foundation.PSTR,
 	return uint32(r1)
 }
 
-// GetPrivateProfileIntW calls KERNEL32!GetPrivateProfileIntW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofileintw
+// GetPrivateProfileSection calls KERNEL32!GetPrivateProfileSectionW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilesectionw
 // Minimum OS: windows5.0.
-func GetPrivateProfileIntW(lpAppName foundation.PWSTR, lpKeyName foundation.PWSTR, nDefault int32, lpFileName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procGetPrivateProfileIntW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpKeyName)), uintptr(nDefault), uintptr(unsafe.Pointer(lpFileName)))
-	return int32(r1)
+func GetPrivateProfileSection(lpAppName string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName string) uint32 {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procGetPrivateProfileSection.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize), uintptr(unsafe.Pointer(_lpFileName)))
+	return uint32(r1)
 }
 
 // GetPrivateProfileSectionA calls KERNEL32!GetPrivateProfileSectionA.
@@ -678,6 +719,15 @@ func GetPrivateProfileIntW(lpAppName foundation.PWSTR, lpKeyName foundation.PWST
 // Minimum OS: windows5.0.
 func GetPrivateProfileSectionA(lpAppName foundation.PSTR, lpReturnedString foundation.PSTR, nSize uint32, lpFileName foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileSectionA.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize), uintptr(unsafe.Pointer(lpFileName)))
+	return uint32(r1)
+}
+
+// GetPrivateProfileSectionNames calls KERNEL32!GetPrivateProfileSectionNamesW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilesectionnamesw
+// Minimum OS: windows5.0.
+func GetPrivateProfileSectionNames(lpszReturnBuffer foundation.PWSTR, nSize uint32, lpFileName string) uint32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procGetPrivateProfileSectionNames.Addr(), uintptr(unsafe.Pointer(lpszReturnBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(_lpFileName)))
 	return uint32(r1)
 }
 
@@ -689,20 +739,19 @@ func GetPrivateProfileSectionNamesA(lpszReturnBuffer foundation.PSTR, nSize uint
 	return uint32(r1)
 }
 
-// GetPrivateProfileSectionNamesW calls KERNEL32!GetPrivateProfileSectionNamesW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilesectionnamesw
+// GetPrivateProfileString calls KERNEL32!GetPrivateProfileStringW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestringw
 // Minimum OS: windows5.0.
-func GetPrivateProfileSectionNamesW(lpszReturnBuffer foundation.PWSTR, nSize uint32, lpFileName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetPrivateProfileSectionNamesW.Addr(), uintptr(unsafe.Pointer(lpszReturnBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(lpFileName)))
-	return uint32(r1)
-}
-
-// GetPrivateProfileSectionW calls KERNEL32!GetPrivateProfileSectionW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilesectionw
-// Minimum OS: windows5.0.
-func GetPrivateProfileSectionW(lpAppName foundation.PWSTR, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetPrivateProfileSectionW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize), uintptr(unsafe.Pointer(lpFileName)))
-	return uint32(r1)
+func GetPrivateProfileString(lpAppName string, lpKeyName string, lpDefault string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName string) (uint32, error) {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	_lpKeyName := win32.UTF16Ptr(lpKeyName)
+	_lpDefault := win32.UTF16Ptr(lpDefault)
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procGetPrivateProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpDefault)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize), uintptr(unsafe.Pointer(_lpFileName)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // GetPrivateProfileStringA calls KERNEL32!GetPrivateProfileStringA.
@@ -716,31 +765,33 @@ func GetPrivateProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.PS
 	return uint32(r1), nil
 }
 
-// GetPrivateProfileStringW calls KERNEL32!GetPrivateProfileStringW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestringw
+// GetPrivateProfileStruct calls KERNEL32!GetPrivateProfileStructW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestructw
 // Minimum OS: windows5.0.
-func GetPrivateProfileStringW(lpAppName foundation.PWSTR, lpKeyName foundation.PWSTR, lpDefault foundation.PWSTR, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetPrivateProfileStringW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpKeyName)), uintptr(unsafe.Pointer(lpDefault)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize), uintptr(unsafe.Pointer(lpFileName)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
+func GetPrivateProfileStruct(lpszSection string, lpszKey string, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile string) bool {
+	_lpszSection := win32.UTF16Ptr(lpszSection)
+	_lpszKey := win32.UTF16Ptr(lpszKey)
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procGetPrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(lpStruct)), uintptr(uSizeStruct), uintptr(unsafe.Pointer(_szFile)))
+	return r1 != 0
 }
 
 // GetPrivateProfileStructA calls KERNEL32!GetPrivateProfileStructA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestructa
 // Minimum OS: windows5.0.
-func GetPrivateProfileStructA(lpszSection foundation.PSTR, lpszKey foundation.PSTR, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile foundation.PSTR) foundation.BOOL {
+func GetPrivateProfileStructA(lpszSection foundation.PSTR, lpszKey foundation.PSTR, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileStructA.Addr(), uintptr(unsafe.Pointer(lpszSection)), uintptr(unsafe.Pointer(lpszKey)), uintptr(unsafe.Pointer(lpStruct)), uintptr(uSizeStruct), uintptr(unsafe.Pointer(szFile)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetPrivateProfileStructW calls KERNEL32!GetPrivateProfileStructW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestructw
+// GetProfileInt calls KERNEL32!GetProfileIntW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprofileintw
 // Minimum OS: windows5.0.
-func GetPrivateProfileStructW(lpszSection foundation.PWSTR, lpszKey foundation.PWSTR, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetPrivateProfileStructW.Addr(), uintptr(unsafe.Pointer(lpszSection)), uintptr(unsafe.Pointer(lpszKey)), uintptr(unsafe.Pointer(lpStruct)), uintptr(uSizeStruct), uintptr(unsafe.Pointer(szFile)))
-	return foundation.BOOL(r1)
+func GetProfileInt(lpAppName string, lpKeyName string, nDefault int32) uint32 {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	_lpKeyName := win32.UTF16Ptr(lpKeyName)
+	r1, _, _ := syscall.SyscallN(procGetProfileInt.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(nDefault))
+	return uint32(r1)
 }
 
 // GetProfileIntA calls KERNEL32!GetProfileIntA.
@@ -751,11 +802,12 @@ func GetProfileIntA(lpAppName foundation.PSTR, lpKeyName foundation.PSTR, nDefau
 	return uint32(r1)
 }
 
-// GetProfileIntW calls KERNEL32!GetProfileIntW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprofileintw
+// GetProfileSection calls KERNEL32!GetProfileSectionW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprofilesectionw
 // Minimum OS: windows5.0.
-func GetProfileIntW(lpAppName foundation.PWSTR, lpKeyName foundation.PWSTR, nDefault int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetProfileIntW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpKeyName)), uintptr(nDefault))
+func GetProfileSection(lpAppName string, lpReturnedString foundation.PWSTR, nSize uint32) uint32 {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	r1, _, _ := syscall.SyscallN(procGetProfileSection.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize))
 	return uint32(r1)
 }
 
@@ -767,11 +819,14 @@ func GetProfileSectionA(lpAppName foundation.PSTR, lpReturnedString foundation.P
 	return uint32(r1)
 }
 
-// GetProfileSectionW calls KERNEL32!GetProfileSectionW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprofilesectionw
+// GetProfileString calls KERNEL32!GetProfileStringW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprofilestringw
 // Minimum OS: windows5.0.
-func GetProfileSectionW(lpAppName foundation.PWSTR, lpReturnedString foundation.PWSTR, nSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetProfileSectionW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize))
+func GetProfileString(lpAppName string, lpKeyName string, lpDefault string, lpReturnedString foundation.PWSTR, nSize uint32) uint32 {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	_lpKeyName := win32.UTF16Ptr(lpKeyName)
+	_lpDefault := win32.UTF16Ptr(lpDefault)
+	r1, _, _ := syscall.SyscallN(procGetProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpDefault)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize))
 	return uint32(r1)
 }
 
@@ -780,14 +835,6 @@ func GetProfileSectionW(lpAppName foundation.PWSTR, lpReturnedString foundation.
 // Minimum OS: windows5.0.
 func GetProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.PSTR, lpDefault foundation.PSTR, lpReturnedString foundation.PSTR, nSize uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetProfileStringA.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpKeyName)), uintptr(unsafe.Pointer(lpDefault)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize))
-	return uint32(r1)
-}
-
-// GetProfileStringW calls KERNEL32!GetProfileStringW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprofilestringw
-// Minimum OS: windows5.0.
-func GetProfileStringW(lpAppName foundation.PWSTR, lpKeyName foundation.PWSTR, lpDefault foundation.PWSTR, lpReturnedString foundation.PWSTR, nSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetProfileStringW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpKeyName)), uintptr(unsafe.Pointer(lpDefault)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize))
 	return uint32(r1)
 }
 
@@ -809,6 +856,17 @@ func GetThreadEnabledXStateFeatures() uint64 {
 	return uint64(r1)
 }
 
+// GetUserName calls ADVAPI32!GetUserNameW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getusernamew
+// Minimum OS: windows5.0.
+func GetUserName(lpBuffer foundation.PWSTR, pcbBuffer *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetUserName.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(pcbBuffer)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetUserNameA calls ADVAPI32!GetUserNameA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getusernamea
 // Minimum OS: windows5.0.
@@ -820,39 +878,34 @@ func GetUserNameA(lpBuffer foundation.PSTR, pcbBuffer *uint32) error {
 	return nil
 }
 
-// GetUserNameW calls ADVAPI32!GetUserNameW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getusernamew
-// Minimum OS: windows5.0.
-func GetUserNameW(lpBuffer foundation.PWSTR, pcbBuffer *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetUserNameW.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(pcbBuffer)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// GetVersionFromFile calls ADVPACK!GetVersionFromFileW.
+func GetVersionFromFile(lpszFilename string, pdwMSVer *uint32, pdwLSVer *uint32, bVersion bool) error {
+	_lpszFilename := win32.UTF16Ptr(lpszFilename)
+	_bVersion := win32.Bool32(bVersion)
+	r1, _, _ := syscall.SyscallN(procGetVersionFromFile.Addr(), uintptr(unsafe.Pointer(_lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(_bVersion))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVersionFromFileA calls ADVPACK!GetVersionFromFileA.
-func GetVersionFromFileA(lpszFilename foundation.PSTR, pdwMSVer *uint32, pdwLSVer *uint32, bVersion foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetVersionFromFileA.Addr(), uintptr(unsafe.Pointer(lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(bVersion))
-	return foundation.HRESULT(r1)
+func GetVersionFromFileA(lpszFilename foundation.PSTR, pdwMSVer *uint32, pdwLSVer *uint32, bVersion bool) error {
+	_bVersion := win32.Bool32(bVersion)
+	r1, _, _ := syscall.SyscallN(procGetVersionFromFileA.Addr(), uintptr(unsafe.Pointer(lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(_bVersion))
+	return win32.HRESULTError(int32(r1))
+}
+
+// GetVersionFromFileEx calls ADVPACK!GetVersionFromFileExW.
+func GetVersionFromFileEx(lpszFilename string, pdwMSVer *uint32, pdwLSVer *uint32, bVersion bool) error {
+	_lpszFilename := win32.UTF16Ptr(lpszFilename)
+	_bVersion := win32.Bool32(bVersion)
+	r1, _, _ := syscall.SyscallN(procGetVersionFromFileEx.Addr(), uintptr(unsafe.Pointer(_lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(_bVersion))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVersionFromFileExA calls ADVPACK!GetVersionFromFileExA.
-func GetVersionFromFileExA(lpszFilename foundation.PSTR, pdwMSVer *uint32, pdwLSVer *uint32, bVersion foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetVersionFromFileExA.Addr(), uintptr(unsafe.Pointer(lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(bVersion))
-	return foundation.HRESULT(r1)
-}
-
-// GetVersionFromFileExW calls ADVPACK!GetVersionFromFileExW.
-func GetVersionFromFileExW(lpszFilename foundation.PWSTR, pdwMSVer *uint32, pdwLSVer *uint32, bVersion foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetVersionFromFileExW.Addr(), uintptr(unsafe.Pointer(lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(bVersion))
-	return foundation.HRESULT(r1)
-}
-
-// GetVersionFromFileW calls ADVPACK!GetVersionFromFileW.
-func GetVersionFromFileW(lpszFilename foundation.PWSTR, pdwMSVer *uint32, pdwLSVer *uint32, bVersion foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetVersionFromFileW.Addr(), uintptr(unsafe.Pointer(lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(bVersion))
-	return foundation.HRESULT(r1)
+func GetVersionFromFileExA(lpszFilename foundation.PSTR, pdwMSVer *uint32, pdwLSVer *uint32, bVersion bool) error {
+	_bVersion := win32.Bool32(bVersion)
+	r1, _, _ := syscall.SyscallN(procGetVersionFromFileExA.Addr(), uintptr(unsafe.Pointer(lpszFilename)), uintptr(unsafe.Pointer(pdwMSVer)), uintptr(unsafe.Pointer(pdwLSVer)), uintptr(_bVersion))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWindowRegionData calls DCIMAN32!GetWindowRegionData.
@@ -873,9 +926,9 @@ func GlobalFix(hMem foundation.HGLOBAL) {
 }
 
 // GlobalUnWire calls KERNEL32!GlobalUnWire.
-func GlobalUnWire(hMem foundation.HGLOBAL) foundation.BOOL {
+func GlobalUnWire(hMem foundation.HGLOBAL) bool {
 	r1, _, _ := syscall.SyscallN(procGlobalUnWire.Addr(), uintptr(hMem))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GlobalUnfix calls KERNEL32!GlobalUnfix.
@@ -889,65 +942,77 @@ func GlobalWire(hMem foundation.HGLOBAL) unsafe.Pointer {
 	return unsafe.Pointer(r1)
 }
 
-// IMPGetIMEA calls USER32!IMPGetIMEA.
-func IMPGetIMEA(param0 foundation.HWND, param1 *IMEPROA) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIMPGetIMEA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.BOOL(r1)
+// Hread calls KERNEL32!_hread.
+func Hread(hFile int32, lpBuffer unsafe.Pointer, lBytes int32) int32 {
+	r1, _, _ := syscall.SyscallN(procHread.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(lBytes))
+	return int32(r1)
 }
 
-// IMPGetIMEW calls USER32!IMPGetIMEW.
-func IMPGetIMEW(param0 foundation.HWND, param1 *IMEPROW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIMPGetIMEW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.BOOL(r1)
+// Hwrite calls KERNEL32!_hwrite.
+func Hwrite(hFile int32, lpBuffer foundation.PSTR, lBytes int32) int32 {
+	r1, _, _ := syscall.SyscallN(procHwrite.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(lBytes))
+	return int32(r1)
+}
+
+// IMPGetIME calls USER32!IMPGetIMEW.
+func IMPGetIME(param0 foundation.HWND, param1 *IMEPROW) bool {
+	r1, _, _ := syscall.SyscallN(procIMPGetIME.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
+	return r1 != 0
+}
+
+// IMPGetIMEA calls USER32!IMPGetIMEA.
+func IMPGetIMEA(param0 foundation.HWND, param1 *IMEPROA) bool {
+	r1, _, _ := syscall.SyscallN(procIMPGetIMEA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
+	return r1 != 0
+}
+
+// IMPQueryIME calls USER32!IMPQueryIMEW.
+func IMPQueryIME(param0 *IMEPROW) bool {
+	r1, _, _ := syscall.SyscallN(procIMPQueryIME.Addr(), uintptr(unsafe.Pointer(param0)))
+	return r1 != 0
 }
 
 // IMPQueryIMEA calls USER32!IMPQueryIMEA.
-func IMPQueryIMEA(param0 *IMEPROA) foundation.BOOL {
+func IMPQueryIMEA(param0 *IMEPROA) bool {
 	r1, _, _ := syscall.SyscallN(procIMPQueryIMEA.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// IMPQueryIMEW calls USER32!IMPQueryIMEW.
-func IMPQueryIMEW(param0 *IMEPROW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIMPQueryIMEW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+// IMPSetIME calls USER32!IMPSetIMEW.
+func IMPSetIME(param0 foundation.HWND, param1 *IMEPROW) bool {
+	r1, _, _ := syscall.SyscallN(procIMPSetIME.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
+	return r1 != 0
 }
 
 // IMPSetIMEA calls USER32!IMPSetIMEA.
-func IMPSetIMEA(param0 foundation.HWND, param1 *IMEPROA) foundation.BOOL {
+func IMPSetIMEA(param0 foundation.HWND, param1 *IMEPROA) bool {
 	r1, _, _ := syscall.SyscallN(procIMPSetIMEA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.BOOL(r1)
-}
-
-// IMPSetIMEW calls USER32!IMPSetIMEW.
-func IMPSetIMEW(param0 foundation.HWND, param1 *IMEPROW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIMPSetIMEW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsApiSetImplemented calls api-ms-win-core-apiquery-l2-1-0!IsApiSetImplemented.
 // https://learn.microsoft.com/windows/win32/api/apiquery2/nf-apiquery2-isapisetimplemented
-func IsApiSetImplemented(Contract foundation.PSTR) foundation.BOOL {
+func IsApiSetImplemented(Contract foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procIsApiSetImplemented.Addr(), uintptr(unsafe.Pointer(Contract)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsBadHugeReadPtr calls KERNEL32!IsBadHugeReadPtr.
-func IsBadHugeReadPtr(lp unsafe.Pointer, ucb uintptr) foundation.BOOL {
+func IsBadHugeReadPtr(lp unsafe.Pointer, ucb uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procIsBadHugeReadPtr.Addr(), uintptr(unsafe.Pointer(lp)), uintptr(ucb))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsBadHugeWritePtr calls KERNEL32!IsBadHugeWritePtr.
-func IsBadHugeWritePtr(lp unsafe.Pointer, ucb uintptr) foundation.BOOL {
+func IsBadHugeWritePtr(lp unsafe.Pointer, ucb uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procIsBadHugeWritePtr.Addr(), uintptr(unsafe.Pointer(lp)), uintptr(ucb))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsNTAdmin calls ADVPACK!IsNTAdmin.
-func IsNTAdmin(dwReserved uint32, lpdwReserved *uint32) foundation.BOOL {
+func IsNTAdmin(dwReserved uint32, lpdwReserved *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procIsNTAdmin.Addr(), uintptr(dwReserved), uintptr(unsafe.Pointer(lpdwReserved)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsNativeVhdBoot calls KERNEL32!IsNativeVhdBoot.
@@ -962,21 +1027,49 @@ func IsNativeVhdBoot(NativeVhdBoot *foundation.BOOL) error {
 }
 
 // IsTokenUntrusted calls ADVAPI32!IsTokenUntrusted.
-func IsTokenUntrusted(TokenHandle foundation.HANDLE) foundation.BOOL {
+func IsTokenUntrusted(TokenHandle foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procIsTokenUntrusted.Addr(), uintptr(TokenHandle))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// LaunchINFSectionExW calls ADVPACK!LaunchINFSectionExW.
-func LaunchINFSectionExW(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PWSTR, nShow int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLaunchINFSectionExW.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
-	return foundation.HRESULT(r1)
-}
-
-// LaunchINFSectionW calls ADVPACK!LaunchINFSectionW.
-func LaunchINFSectionW(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszParams foundation.PWSTR, nShow int32) int32 {
-	r1, _, _ := syscall.SyscallN(procLaunchINFSectionW.Addr(), uintptr(hwndOwner), uintptr(hInstance), uintptr(unsafe.Pointer(pszParams)), uintptr(nShow))
+// LaunchINFSection calls ADVPACK!LaunchINFSectionW.
+func LaunchINFSection(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszParams foundation.PWSTR, nShow int32) int32 {
+	r1, _, _ := syscall.SyscallN(procLaunchINFSection.Addr(), uintptr(hwndOwner), uintptr(hInstance), uintptr(unsafe.Pointer(pszParams)), uintptr(nShow))
 	return int32(r1)
+}
+
+// LaunchINFSectionEx calls ADVPACK!LaunchINFSectionExW.
+func LaunchINFSectionEx(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms string, nShow int32) error {
+	_pszParms := win32.UTF16Ptr(pszParms)
+	r1, _, _ := syscall.SyscallN(procLaunchINFSectionEx.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(_pszParms)), uintptr(nShow))
+	return win32.HRESULTError(int32(r1))
+}
+
+// Lclose calls KERNEL32!_lclose.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lclose
+func Lclose(hFile int32) int32 {
+	r1, _, _ := syscall.SyscallN(procLclose.Addr(), uintptr(hFile))
+	return int32(r1)
+}
+
+// Lcreat calls KERNEL32!_lcreat.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lcreat
+func Lcreat(lpPathName foundation.PSTR, iAttribute int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procLcreat.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(iAttribute))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Llseek calls KERNEL32!_llseek.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_llseek
+func Llseek(hFile int32, lOffset int32, iOrigin int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procLlseek.Addr(), uintptr(hFile), uintptr(lOffset), uintptr(iOrigin))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
 // LocalCompact calls KERNEL32!LocalCompact.
@@ -991,6 +1084,30 @@ func LocalShrink(hMem foundation.HLOCAL, cbNewSize uint32) uintptr {
 	return uintptr(r1)
 }
 
+// Lopen calls KERNEL32!_lopen.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lopen
+func Lopen(lpPathName foundation.PSTR, iReadWrite int32) int32 {
+	r1, _, _ := syscall.SyscallN(procLopen.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(iReadWrite))
+	return int32(r1)
+}
+
+// Lread calls KERNEL32!_lread.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lread
+func Lread(hFile int32, lpBuffer unsafe.Pointer, uBytes uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procLread.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uBytes))
+	return uint32(r1)
+}
+
+// Lwrite calls KERNEL32!_lwrite.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lwrite
+func Lwrite(hFile int32, lpBuffer foundation.PSTR, uBytes uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procLwrite.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uBytes))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // MulDiv calls KERNEL32!MulDiv.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-muldiv
 // Minimum OS: windows5.1.2600.
@@ -1000,9 +1117,9 @@ func MulDiv(nNumber int32, nNumerator int32, nDenominator int32) int32 {
 }
 
 // NeedReboot calls ADVPACK!NeedReboot.
-func NeedReboot(dwRebootCheck uint32) foundation.BOOL {
+func NeedReboot(dwRebootCheck uint32) bool {
 	r1, _, _ := syscall.SyscallN(procNeedReboot.Addr(), uintptr(dwRebootCheck))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // NeedRebootInit calls ADVPACK!NeedRebootInit.
@@ -1011,38 +1128,42 @@ func NeedRebootInit() uint32 {
 	return uint32(r1)
 }
 
-// OpenINFEngineA calls ADVPACK!OpenINFEngineA.
-func OpenINFEngineA(pszInfFilename foundation.PSTR, pszInstallSection foundation.PSTR, dwFlags uint32, phInf *unsafe.Pointer, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOpenINFEngineA.Addr(), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszInstallSection)), uintptr(dwFlags), uintptr(unsafe.Pointer(phInf)), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+// OpenINFEngine calls ADVPACK!OpenINFEngineW.
+func OpenINFEngine(pszInfFilename string, pszInstallSection string, dwFlags uint32, phInf *unsafe.Pointer, pvReserved unsafe.Pointer) error {
+	_pszInfFilename := win32.UTF16Ptr(pszInfFilename)
+	_pszInstallSection := win32.UTF16Ptr(pszInstallSection)
+	r1, _, _ := syscall.SyscallN(procOpenINFEngine.Addr(), uintptr(unsafe.Pointer(_pszInfFilename)), uintptr(unsafe.Pointer(_pszInstallSection)), uintptr(dwFlags), uintptr(unsafe.Pointer(phInf)), uintptr(unsafe.Pointer(pvReserved)))
+	return win32.HRESULTError(int32(r1))
 }
 
-// OpenINFEngineW calls ADVPACK!OpenINFEngineW.
-func OpenINFEngineW(pszInfFilename foundation.PWSTR, pszInstallSection foundation.PWSTR, dwFlags uint32, phInf *unsafe.Pointer, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOpenINFEngineW.Addr(), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszInstallSection)), uintptr(dwFlags), uintptr(unsafe.Pointer(phInf)), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+// OpenINFEngineA calls ADVPACK!OpenINFEngineA.
+func OpenINFEngineA(pszInfFilename foundation.PSTR, pszInstallSection foundation.PSTR, dwFlags uint32, phInf *unsafe.Pointer, pvReserved unsafe.Pointer) error {
+	r1, _, _ := syscall.SyscallN(procOpenINFEngineA.Addr(), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszInstallSection)), uintptr(dwFlags), uintptr(unsafe.Pointer(phInf)), uintptr(unsafe.Pointer(pvReserved)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenMutexA calls KERNEL32!OpenMutexA.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-openmutexw
-func OpenMutexA(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lpName foundation.PSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procOpenMutexA.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
+func OpenMutexA(dwDesiredAccess uint32, bInheritHandle bool, lpName foundation.PSTR) foundation.HANDLE {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, _ := syscall.SyscallN(procOpenMutexA.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(lpName)))
 	return foundation.HANDLE(r1)
 }
 
 // OpenSemaphoreA calls KERNEL32!OpenSemaphoreA.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-opensemaphorew
-func OpenSemaphoreA(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lpName foundation.PSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procOpenSemaphoreA.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
+func OpenSemaphoreA(dwDesiredAccess uint32, bInheritHandle bool, lpName foundation.PSTR) foundation.HANDLE {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, _ := syscall.SyscallN(procOpenSemaphoreA.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(lpName)))
 	return foundation.HANDLE(r1)
 }
 
 // QueryAuxiliaryCounterFrequency calls api-ms-win-core-realtime-l1-1-2!QueryAuxiliaryCounterFrequency.
 // https://learn.microsoft.com/windows/win32/api/realtimeapiset/nf-realtimeapiset-queryauxiliarycounterfrequency
 // Minimum OS: windows10.0.15063.
-func QueryAuxiliaryCounterFrequency(lpAuxiliaryCounterFrequency *uint64) foundation.HRESULT {
+func QueryAuxiliaryCounterFrequency(lpAuxiliaryCounterFrequency *uint64) error {
 	r1, _, _ := syscall.SyscallN(procQueryAuxiliaryCounterFrequency.Addr(), uintptr(unsafe.Pointer(lpAuxiliaryCounterFrequency)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryIdleProcessorCycleTime calls KERNEL32!QueryIdleProcessorCycleTime.
@@ -1059,9 +1180,9 @@ func QueryIdleProcessorCycleTime(BufferLength *uint32, ProcessorIdleCycleTime *u
 // QueryIdleProcessorCycleTimeEx calls KERNEL32!QueryIdleProcessorCycleTimeEx.
 // https://learn.microsoft.com/windows/win32/api/realtimeapiset/nf-realtimeapiset-queryidleprocessorcycletimeex
 // Minimum OS: windows6.1.
-func QueryIdleProcessorCycleTimeEx(Group uint16, BufferLength *uint32, ProcessorIdleCycleTime *uint64) foundation.BOOL {
+func QueryIdleProcessorCycleTimeEx(Group uint16, BufferLength *uint32, ProcessorIdleCycleTime *uint64) bool {
 	r1, _, _ := syscall.SyscallN(procQueryIdleProcessorCycleTimeEx.Addr(), uintptr(Group), uintptr(unsafe.Pointer(BufferLength)), uintptr(unsafe.Pointer(ProcessorIdleCycleTime)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QueryInterruptTime calls api-ms-win-core-realtime-l1-1-1!QueryInterruptTime.
@@ -1103,9 +1224,9 @@ func QueryThreadCycleTime(ThreadHandle foundation.HANDLE, CycleTime *uint64) err
 // QueryUnbiasedInterruptTime calls KERNEL32!QueryUnbiasedInterruptTime.
 // https://learn.microsoft.com/windows/win32/api/realtimeapiset/nf-realtimeapiset-queryunbiasedinterrupttime
 // Minimum OS: windows6.1.
-func QueryUnbiasedInterruptTime(UnbiasedTime *uint64) foundation.BOOL {
+func QueryUnbiasedInterruptTime(UnbiasedTime *uint64) bool {
 	r1, _, _ := syscall.SyscallN(procQueryUnbiasedInterruptTime.Addr(), uintptr(unsafe.Pointer(UnbiasedTime)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QueryUnbiasedInterruptTimePrecise calls api-ms-win-core-realtime-l1-1-1!QueryUnbiasedInterruptTimePrecise.
@@ -1121,16 +1242,18 @@ func RaiseCustomSystemEventTrigger(CustomSystemEventTriggerConfig *CUSTOM_SYSTEM
 	return uint32(r1)
 }
 
-// RebootCheckOnInstallA calls ADVPACK!RebootCheckOnInstallA.
-func RebootCheckOnInstallA(hwnd foundation.HWND, pszINF foundation.PSTR, pszSec foundation.PSTR, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRebootCheckOnInstallA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSec)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+// RebootCheckOnInstall calls ADVPACK!RebootCheckOnInstallW.
+func RebootCheckOnInstall(hwnd foundation.HWND, pszINF string, pszSec string, dwReserved uint32) error {
+	_pszINF := win32.UTF16Ptr(pszINF)
+	_pszSec := win32.UTF16Ptr(pszSec)
+	r1, _, _ := syscall.SyscallN(procRebootCheckOnInstall.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszINF)), uintptr(unsafe.Pointer(_pszSec)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
-// RebootCheckOnInstallW calls ADVPACK!RebootCheckOnInstallW.
-func RebootCheckOnInstallW(hwnd foundation.HWND, pszINF foundation.PWSTR, pszSec foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRebootCheckOnInstallW.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSec)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+// RebootCheckOnInstallA calls ADVPACK!RebootCheckOnInstallA.
+func RebootCheckOnInstallA(hwnd foundation.HWND, pszINF foundation.PSTR, pszSec foundation.PSTR, dwReserved uint32) error {
+	r1, _, _ := syscall.SyscallN(procRebootCheckOnInstallA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSec)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RecordFeatureError calls api-ms-win-core-featurestaging-l1-1-0!RecordFeatureError.
@@ -1145,68 +1268,79 @@ func RecordFeatureUsage(featureId uint32, kind uint32, addend uint32, originName
 	syscall.SyscallN(procRecordFeatureUsage.Addr(), uintptr(featureId), uintptr(kind), uintptr(addend), uintptr(unsafe.Pointer(originName)))
 }
 
+// RegInstall calls ADVPACK!RegInstallW.
+// https://learn.microsoft.com/windows/win32/api/advpub/nf-advpub-reginstallw
+// Minimum OS: windows10.0.10240.
+func RegInstall(hmod foundation.HMODULE, pszSection string, pstTable *STRTABLEW) error {
+	_pszSection := win32.UTF16Ptr(pszSection)
+	r1, _, _ := syscall.SyscallN(procRegInstall.Addr(), uintptr(hmod), uintptr(unsafe.Pointer(_pszSection)), uintptr(unsafe.Pointer(pstTable)))
+	return win32.HRESULTError(int32(r1))
+}
+
 // RegInstallA calls ADVPACK!RegInstallA.
 // https://learn.microsoft.com/windows/win32/api/advpub/nf-advpub-reginstalla
 // Minimum OS: windows10.0.10240.
-func RegInstallA(hmod foundation.HMODULE, pszSection foundation.PSTR, pstTable *STRTABLEA) foundation.HRESULT {
+func RegInstallA(hmod foundation.HMODULE, pszSection foundation.PSTR, pstTable *STRTABLEA) error {
 	r1, _, _ := syscall.SyscallN(procRegInstallA.Addr(), uintptr(hmod), uintptr(unsafe.Pointer(pszSection)), uintptr(unsafe.Pointer(pstTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// RegInstallW calls ADVPACK!RegInstallW.
-// https://learn.microsoft.com/windows/win32/api/advpub/nf-advpub-reginstallw
-// Minimum OS: windows10.0.10240.
-func RegInstallW(hmod foundation.HMODULE, pszSection foundation.PWSTR, pstTable *STRTABLEW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegInstallW.Addr(), uintptr(hmod), uintptr(unsafe.Pointer(pszSection)), uintptr(unsafe.Pointer(pstTable)))
-	return foundation.HRESULT(r1)
+// RegRestoreAll calls ADVPACK!RegRestoreAllW.
+func RegRestoreAll(hWnd foundation.HWND, pszTitleString string, hkBckupKey systemregistry.HKEY) error {
+	_pszTitleString := win32.UTF16Ptr(pszTitleString)
+	r1, _, _ := syscall.SyscallN(procRegRestoreAll.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitleString)), uintptr(hkBckupKey))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegRestoreAllA calls ADVPACK!RegRestoreAllA.
-func RegRestoreAllA(hWnd foundation.HWND, pszTitleString foundation.PSTR, hkBckupKey systemregistry.HKEY) foundation.HRESULT {
+func RegRestoreAllA(hWnd foundation.HWND, pszTitleString foundation.PSTR, hkBckupKey systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(procRegRestoreAllA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitleString)), uintptr(hkBckupKey))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// RegRestoreAllW calls ADVPACK!RegRestoreAllW.
-func RegRestoreAllW(hWnd foundation.HWND, pszTitleString foundation.PWSTR, hkBckupKey systemregistry.HKEY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegRestoreAllW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitleString)), uintptr(hkBckupKey))
-	return foundation.HRESULT(r1)
+// RegSaveRestore calls ADVPACK!RegSaveRestoreW.
+func RegSaveRestore(hWnd foundation.HWND, pszTitleString string, hkBckupKey systemregistry.HKEY, pcszRootKey string, pcszSubKey string, pcszValueName string, dwFlags uint32) error {
+	_pszTitleString := win32.UTF16Ptr(pszTitleString)
+	_pcszRootKey := win32.UTF16Ptr(pcszRootKey)
+	_pcszSubKey := win32.UTF16Ptr(pcszSubKey)
+	_pcszValueName := win32.UTF16Ptr(pcszValueName)
+	r1, _, _ := syscall.SyscallN(procRegSaveRestore.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitleString)), uintptr(hkBckupKey), uintptr(unsafe.Pointer(_pcszRootKey)), uintptr(unsafe.Pointer(_pcszSubKey)), uintptr(unsafe.Pointer(_pcszValueName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegSaveRestoreA calls ADVPACK!RegSaveRestoreA.
-func RegSaveRestoreA(hWnd foundation.HWND, pszTitleString foundation.PSTR, hkBckupKey systemregistry.HKEY, pcszRootKey foundation.PSTR, pcszSubKey foundation.PSTR, pcszValueName foundation.PSTR, dwFlags uint32) foundation.HRESULT {
+func RegSaveRestoreA(hWnd foundation.HWND, pszTitleString foundation.PSTR, hkBckupKey systemregistry.HKEY, pcszRootKey foundation.PSTR, pcszSubKey foundation.PSTR, pcszValueName foundation.PSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procRegSaveRestoreA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitleString)), uintptr(hkBckupKey), uintptr(unsafe.Pointer(pcszRootKey)), uintptr(unsafe.Pointer(pcszSubKey)), uintptr(unsafe.Pointer(pcszValueName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// RegSaveRestoreOnINF calls ADVPACK!RegSaveRestoreOnINFW.
+func RegSaveRestoreOnINF(hWnd foundation.HWND, pszTitle string, pszINF string, pszSection string, hHKLMBackKey systemregistry.HKEY, hHKCUBackKey systemregistry.HKEY, dwFlags uint32) error {
+	_pszTitle := win32.UTF16Ptr(pszTitle)
+	_pszINF := win32.UTF16Ptr(pszINF)
+	_pszSection := win32.UTF16Ptr(pszSection)
+	r1, _, _ := syscall.SyscallN(procRegSaveRestoreOnINF.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszINF)), uintptr(unsafe.Pointer(_pszSection)), uintptr(hHKLMBackKey), uintptr(hHKCUBackKey), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegSaveRestoreOnINFA calls ADVPACK!RegSaveRestoreOnINFA.
-func RegSaveRestoreOnINFA(hWnd foundation.HWND, pszTitle foundation.PSTR, pszINF foundation.PSTR, pszSection foundation.PSTR, hHKLMBackKey systemregistry.HKEY, hHKCUBackKey systemregistry.HKEY, dwFlags uint32) foundation.HRESULT {
+func RegSaveRestoreOnINFA(hWnd foundation.HWND, pszTitle foundation.PSTR, pszINF foundation.PSTR, pszSection foundation.PSTR, hHKLMBackKey systemregistry.HKEY, hHKCUBackKey systemregistry.HKEY, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procRegSaveRestoreOnINFA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSection)), uintptr(hHKLMBackKey), uintptr(hHKCUBackKey), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
-}
-
-// RegSaveRestoreOnINFW calls ADVPACK!RegSaveRestoreOnINFW.
-func RegSaveRestoreOnINFW(hWnd foundation.HWND, pszTitle foundation.PWSTR, pszINF foundation.PWSTR, pszSection foundation.PWSTR, hHKLMBackKey systemregistry.HKEY, hHKCUBackKey systemregistry.HKEY, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegSaveRestoreOnINFW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszINF)), uintptr(unsafe.Pointer(pszSection)), uintptr(hHKLMBackKey), uintptr(hHKCUBackKey), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
-}
-
-// RegSaveRestoreW calls ADVPACK!RegSaveRestoreW.
-func RegSaveRestoreW(hWnd foundation.HWND, pszTitleString foundation.PWSTR, hkBckupKey systemregistry.HKEY, pcszRootKey foundation.PWSTR, pcszSubKey foundation.PWSTR, pcszValueName foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegSaveRestoreW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszTitleString)), uintptr(hkBckupKey), uintptr(unsafe.Pointer(pcszRootKey)), uintptr(unsafe.Pointer(pcszSubKey)), uintptr(unsafe.Pointer(pcszValueName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReplacePartitionUnit calls KERNEL32!ReplacePartitionUnit.
-func ReplacePartitionUnit(TargetPartition foundation.PWSTR, SparePartition foundation.PWSTR, Flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procReplacePartitionUnit.Addr(), uintptr(unsafe.Pointer(TargetPartition)), uintptr(unsafe.Pointer(SparePartition)), uintptr(Flags))
-	return foundation.BOOL(r1)
+func ReplacePartitionUnit(TargetPartition string, SparePartition string, Flags uint32) bool {
+	_TargetPartition := win32.UTF16Ptr(TargetPartition)
+	_SparePartition := win32.UTF16Ptr(SparePartition)
+	r1, _, _ := syscall.SyscallN(procReplacePartitionUnit.Addr(), uintptr(unsafe.Pointer(_TargetPartition)), uintptr(unsafe.Pointer(_SparePartition)), uintptr(Flags))
+	return r1 != 0
 }
 
 // RequestDeviceWakeup calls KERNEL32!RequestDeviceWakeup.
-func RequestDeviceWakeup(hDevice foundation.HANDLE) foundation.BOOL {
+func RequestDeviceWakeup(hDevice foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procRequestDeviceWakeup.Addr(), uintptr(hDevice))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RtlAnsiStringToUnicodeString calls ntdll!RtlAnsiStringToUnicodeString.
@@ -1278,8 +1412,9 @@ func RtlInitStringEx(DestinationString *systemkernel.STRING, SourceString *int8)
 // RtlInitUnicodeString calls ntdll!RtlInitUnicodeString.
 // https://learn.microsoft.com/windows/win32/api/winternl/nf-winternl-rtlinitunicodestring
 // Minimum OS: windows5.0.
-func RtlInitUnicodeString(DestinationString *foundation.UNICODE_STRING, SourceString foundation.PWSTR) {
-	syscall.SyscallN(procRtlInitUnicodeString.Addr(), uintptr(unsafe.Pointer(DestinationString)), uintptr(unsafe.Pointer(SourceString)))
+func RtlInitUnicodeString(DestinationString *foundation.UNICODE_STRING, SourceString string) {
+	_SourceString := win32.UTF16Ptr(SourceString)
+	syscall.SyscallN(procRtlInitUnicodeString.Addr(), uintptr(unsafe.Pointer(DestinationString)), uintptr(unsafe.Pointer(_SourceString)))
 }
 
 // RtlIsNameLegalDOS8Dot3 calls ntdll!RtlIsNameLegalDOS8Dot3.
@@ -1328,8 +1463,9 @@ func RtlUnicodeStringToOemString(DestinationString *systemkernel.STRING, SourceS
 // RtlUnicodeToMultiByteSize calls ntdll!RtlUnicodeToMultiByteSize.
 // https://learn.microsoft.com/windows/win32/api/winternl/nf-winternl-rtlunicodetomultibytesize
 // Minimum OS: windows5.0.
-func RtlUnicodeToMultiByteSize(BytesInMultiByteString *uint32, UnicodeString foundation.PWSTR, BytesInUnicodeString uint32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procRtlUnicodeToMultiByteSize.Addr(), uintptr(unsafe.Pointer(BytesInMultiByteString)), uintptr(unsafe.Pointer(UnicodeString)), uintptr(BytesInUnicodeString))
+func RtlUnicodeToMultiByteSize(BytesInMultiByteString *uint32, UnicodeString string, BytesInUnicodeString uint32) foundation.NTSTATUS {
+	_UnicodeString := win32.UTF16Ptr(UnicodeString)
+	r1, _, _ := syscall.SyscallN(procRtlUnicodeToMultiByteSize.Addr(), uintptr(unsafe.Pointer(BytesInMultiByteString)), uintptr(unsafe.Pointer(_UnicodeString)), uintptr(BytesInUnicodeString))
 	return foundation.NTSTATUS(r1)
 }
 
@@ -1340,16 +1476,28 @@ func RtlUniform(Seed *uint32) uint32 {
 	return uint32(r1)
 }
 
-// RunSetupCommandA calls ADVPACK!RunSetupCommandA.
-func RunSetupCommandA(hWnd foundation.HWND, szCmdName foundation.PSTR, szInfSection foundation.PSTR, szDir foundation.PSTR, lpszTitle foundation.PSTR, phEXE *foundation.HANDLE, dwFlags uint32, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRunSetupCommandA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(szCmdName)), uintptr(unsafe.Pointer(szInfSection)), uintptr(unsafe.Pointer(szDir)), uintptr(unsafe.Pointer(lpszTitle)), uintptr(unsafe.Pointer(phEXE)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+// RunSetupCommand calls ADVPACK!RunSetupCommandW.
+func RunSetupCommand(hWnd foundation.HWND, szCmdName string, szInfSection string, szDir string, lpszTitle string, phEXE *foundation.HANDLE, dwFlags uint32, pvReserved unsafe.Pointer) error {
+	_szCmdName := win32.UTF16Ptr(szCmdName)
+	_szInfSection := win32.UTF16Ptr(szInfSection)
+	_szDir := win32.UTF16Ptr(szDir)
+	_lpszTitle := win32.UTF16Ptr(lpszTitle)
+	r1, _, _ := syscall.SyscallN(procRunSetupCommand.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_szCmdName)), uintptr(unsafe.Pointer(_szInfSection)), uintptr(unsafe.Pointer(_szDir)), uintptr(unsafe.Pointer(_lpszTitle)), uintptr(unsafe.Pointer(phEXE)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
+	return win32.HRESULTError(int32(r1))
 }
 
-// RunSetupCommandW calls ADVPACK!RunSetupCommandW.
-func RunSetupCommandW(hWnd foundation.HWND, szCmdName foundation.PWSTR, szInfSection foundation.PWSTR, szDir foundation.PWSTR, lpszTitle foundation.PWSTR, phEXE *foundation.HANDLE, dwFlags uint32, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRunSetupCommandW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(szCmdName)), uintptr(unsafe.Pointer(szInfSection)), uintptr(unsafe.Pointer(szDir)), uintptr(unsafe.Pointer(lpszTitle)), uintptr(unsafe.Pointer(phEXE)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+// RunSetupCommandA calls ADVPACK!RunSetupCommandA.
+func RunSetupCommandA(hWnd foundation.HWND, szCmdName foundation.PSTR, szInfSection foundation.PSTR, szDir foundation.PSTR, lpszTitle foundation.PSTR, phEXE *foundation.HANDLE, dwFlags uint32, pvReserved unsafe.Pointer) error {
+	r1, _, _ := syscall.SyscallN(procRunSetupCommandA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(szCmdName)), uintptr(unsafe.Pointer(szInfSection)), uintptr(unsafe.Pointer(szDir)), uintptr(unsafe.Pointer(lpszTitle)), uintptr(unsafe.Pointer(phEXE)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// SendIMEMessageEx calls USER32!SendIMEMessageExW.
+// https://learn.microsoft.com/windows/win32/api/ime/nf-ime-sendimemessageexw
+// Minimum OS: windows5.0.
+func SendIMEMessageEx(param0 foundation.HWND, param1 foundation.LPARAM) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procSendIMEMessageEx.Addr(), uintptr(param0), uintptr(param1))
+	return foundation.LRESULT(r1)
 }
 
 // SendIMEMessageExA calls USER32!SendIMEMessageExA.
@@ -1360,18 +1508,23 @@ func SendIMEMessageExA(param0 foundation.HWND, param1 foundation.LPARAM) foundat
 	return foundation.LRESULT(r1)
 }
 
-// SendIMEMessageExW calls USER32!SendIMEMessageExW.
-// https://learn.microsoft.com/windows/win32/api/ime/nf-ime-sendimemessageexw
-// Minimum OS: windows5.0.
-func SendIMEMessageExW(param0 foundation.HWND, param1 foundation.LPARAM) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procSendIMEMessageExW.Addr(), uintptr(param0), uintptr(param1))
-	return foundation.LRESULT(r1)
+// SetEnvironmentStringsA calls KERNEL32!SetEnvironmentStringsA.
+func SetEnvironmentStringsA(NewEnvironment foundation.PSTR) bool {
+	r1, _, _ := syscall.SyscallN(procSetEnvironmentStringsA.Addr(), uintptr(unsafe.Pointer(NewEnvironment)))
+	return r1 != 0
 }
 
-// SetEnvironmentStringsA calls KERNEL32!SetEnvironmentStringsA.
-func SetEnvironmentStringsA(NewEnvironment foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetEnvironmentStringsA.Addr(), uintptr(unsafe.Pointer(NewEnvironment)))
-	return foundation.BOOL(r1)
+// SetFirmwareEnvironmentVariable calls KERNEL32!SetFirmwareEnvironmentVariableW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariablew
+// Minimum OS: windows6.0.6000.
+func SetFirmwareEnvironmentVariable(lpName string, lpGuid string, pValue unsafe.Pointer, nSize uint32) error {
+	_lpName := win32.UTF16Ptr(lpName)
+	_lpGuid := win32.UTF16Ptr(lpGuid)
+	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(pValue)), uintptr(nSize))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetFirmwareEnvironmentVariableA calls KERNEL32!SetFirmwareEnvironmentVariableA.
@@ -1379,6 +1532,19 @@ func SetEnvironmentStringsA(NewEnvironment foundation.PSTR) foundation.BOOL {
 // Minimum OS: windows6.0.6000.
 func SetFirmwareEnvironmentVariableA(lpName foundation.PSTR, lpGuid foundation.PSTR, pValue unsafe.Pointer, nSize uint32) error {
 	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pValue)), uintptr(nSize))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetFirmwareEnvironmentVariableEx calls KERNEL32!SetFirmwareEnvironmentVariableExW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariableexw
+// Minimum OS: windows8.0.
+func SetFirmwareEnvironmentVariableEx(lpName string, lpGuid string, pValue unsafe.Pointer, nSize uint32, dwAttributes uint32) error {
+	_lpName := win32.UTF16Ptr(lpName)
+	_lpGuid := win32.UTF16Ptr(lpGuid)
+	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableEx.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(pValue)), uintptr(nSize), uintptr(dwAttributes))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1396,28 +1562,6 @@ func SetFirmwareEnvironmentVariableExA(lpName foundation.PSTR, lpGuid foundation
 	return nil
 }
 
-// SetFirmwareEnvironmentVariableExW calls KERNEL32!SetFirmwareEnvironmentVariableExW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariableexw
-// Minimum OS: windows8.0.
-func SetFirmwareEnvironmentVariableExW(lpName foundation.PWSTR, lpGuid foundation.PWSTR, pValue unsafe.Pointer, nSize uint32, dwAttributes uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableExW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pValue)), uintptr(nSize), uintptr(dwAttributes))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetFirmwareEnvironmentVariableW calls KERNEL32!SetFirmwareEnvironmentVariableW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariablew
-// Minimum OS: windows6.0.6000.
-func SetFirmwareEnvironmentVariableW(lpName foundation.PWSTR, lpGuid foundation.PWSTR, pValue unsafe.Pointer, nSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pValue)), uintptr(nSize))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetHandleCount calls KERNEL32!SetHandleCount.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-sethandlecount
 func SetHandleCount(uNumber uint32) uint32 {
@@ -1426,21 +1570,21 @@ func SetHandleCount(uNumber uint32) uint32 {
 }
 
 // SetMessageWaitingIndicator calls KERNEL32!SetMessageWaitingIndicator.
-func SetMessageWaitingIndicator(hMsgIndicator foundation.HANDLE, ulMsgCount uint32) foundation.BOOL {
+func SetMessageWaitingIndicator(hMsgIndicator foundation.HANDLE, ulMsgCount uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetMessageWaitingIndicator.Addr(), uintptr(hMsgIndicator), uintptr(ulMsgCount))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// SetPerUserSecValues calls ADVPACK!SetPerUserSecValuesW.
+func SetPerUserSecValues(pPerUser *PERUSERSECTIONW) error {
+	r1, _, _ := syscall.SyscallN(procSetPerUserSecValues.Addr(), uintptr(unsafe.Pointer(pPerUser)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPerUserSecValuesA calls ADVPACK!SetPerUserSecValuesA.
-func SetPerUserSecValuesA(pPerUser *PERUSERSECTIONA) foundation.HRESULT {
+func SetPerUserSecValuesA(pPerUser *PERUSERSECTIONA) error {
 	r1, _, _ := syscall.SyscallN(procSetPerUserSecValuesA.Addr(), uintptr(unsafe.Pointer(pPerUser)))
-	return foundation.HRESULT(r1)
-}
-
-// SetPerUserSecValuesW calls ADVPACK!SetPerUserSecValuesW.
-func SetPerUserSecValuesW(pPerUser *PERUSERSECTIONW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetPerUserSecValuesW.Addr(), uintptr(unsafe.Pointer(pPerUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SubscribeFeatureStateChangeNotification calls api-ms-win-core-featurestaging-l1-1-0!SubscribeFeatureStateChangeNotification.
@@ -1449,28 +1593,84 @@ func SubscribeFeatureStateChangeNotification(subscription *FEATURE_STATE_CHANGE_
 	syscall.SyscallN(procSubscribeFeatureStateChangeNotification.Addr(), uintptr(unsafe.Pointer(subscription)), uintptr(callback), uintptr(unsafe.Pointer(context)))
 }
 
+// TranslateInfString calls ADVPACK!TranslateInfStringW.
+func TranslateInfString(pszInfFilename string, pszInstallSection string, pszTranslateSection string, pszTranslateKey string, pszBuffer foundation.PWSTR, cchBuffer uint32, pdwRequiredSize *uint32) error {
+	_pszInfFilename := win32.UTF16Ptr(pszInfFilename)
+	_pszInstallSection := win32.UTF16Ptr(pszInstallSection)
+	_pszTranslateSection := win32.UTF16Ptr(pszTranslateSection)
+	_pszTranslateKey := win32.UTF16Ptr(pszTranslateKey)
+	r1, _, _ := syscall.SyscallN(procTranslateInfString.Addr(), uintptr(unsafe.Pointer(_pszInfFilename)), uintptr(unsafe.Pointer(_pszInstallSection)), uintptr(unsafe.Pointer(_pszTranslateSection)), uintptr(unsafe.Pointer(_pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(pdwRequiredSize)), 0)
+	return win32.HRESULTError(int32(r1))
+}
+
 // TranslateInfStringA calls ADVPACK!TranslateInfStringA.
-func TranslateInfStringA(pszInfFilename foundation.PSTR, pszInstallSection foundation.PSTR, pszTranslateSection foundation.PSTR, pszTranslateKey foundation.PSTR, pszBuffer foundation.PSTR, cchBuffer uint32, pdwRequiredSize *uint32, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procTranslateInfStringA.Addr(), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszInstallSection)), uintptr(unsafe.Pointer(pszTranslateSection)), uintptr(unsafe.Pointer(pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(pdwRequiredSize)), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+func TranslateInfStringA(pszInfFilename foundation.PSTR, pszInstallSection foundation.PSTR, pszTranslateSection foundation.PSTR, pszTranslateKey foundation.PSTR, pszBuffer foundation.PSTR, cchBuffer uint32, pdwRequiredSize *uint32) error {
+	r1, _, _ := syscall.SyscallN(procTranslateInfStringA.Addr(), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszInstallSection)), uintptr(unsafe.Pointer(pszTranslateSection)), uintptr(unsafe.Pointer(pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(pdwRequiredSize)), 0)
+	return win32.HRESULTError(int32(r1))
+}
+
+// TranslateInfStringEx calls ADVPACK!TranslateInfStringExW.
+func TranslateInfStringEx(hInf unsafe.Pointer, pszInfFilename string, pszTranslateSection string, pszTranslateKey string, pszBuffer foundation.PWSTR, dwBufferSize uint32, pdwRequiredSize *uint32) error {
+	_pszInfFilename := win32.UTF16Ptr(pszInfFilename)
+	_pszTranslateSection := win32.UTF16Ptr(pszTranslateSection)
+	_pszTranslateKey := win32.UTF16Ptr(pszTranslateKey)
+	r1, _, _ := syscall.SyscallN(procTranslateInfStringEx.Addr(), uintptr(unsafe.Pointer(hInf)), uintptr(unsafe.Pointer(_pszInfFilename)), uintptr(unsafe.Pointer(_pszTranslateSection)), uintptr(unsafe.Pointer(_pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(dwBufferSize), uintptr(unsafe.Pointer(pdwRequiredSize)), 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TranslateInfStringExA calls ADVPACK!TranslateInfStringExA.
-func TranslateInfStringExA(hInf unsafe.Pointer, pszInfFilename foundation.PSTR, pszTranslateSection foundation.PSTR, pszTranslateKey foundation.PSTR, pszBuffer foundation.PSTR, dwBufferSize uint32, pdwRequiredSize *uint32, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procTranslateInfStringExA.Addr(), uintptr(unsafe.Pointer(hInf)), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszTranslateSection)), uintptr(unsafe.Pointer(pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(dwBufferSize), uintptr(unsafe.Pointer(pdwRequiredSize)), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+func TranslateInfStringExA(hInf unsafe.Pointer, pszInfFilename foundation.PSTR, pszTranslateSection foundation.PSTR, pszTranslateKey foundation.PSTR, pszBuffer foundation.PSTR, dwBufferSize uint32, pdwRequiredSize *uint32) error {
+	r1, _, _ := syscall.SyscallN(procTranslateInfStringExA.Addr(), uintptr(unsafe.Pointer(hInf)), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszTranslateSection)), uintptr(unsafe.Pointer(pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(dwBufferSize), uintptr(unsafe.Pointer(pdwRequiredSize)), 0)
+	return win32.HRESULTError(int32(r1))
 }
 
-// TranslateInfStringExW calls ADVPACK!TranslateInfStringExW.
-func TranslateInfStringExW(hInf unsafe.Pointer, pszInfFilename foundation.PWSTR, pszTranslateSection foundation.PWSTR, pszTranslateKey foundation.PWSTR, pszBuffer foundation.PWSTR, dwBufferSize uint32, pdwRequiredSize *uint32, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procTranslateInfStringExW.Addr(), uintptr(unsafe.Pointer(hInf)), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszTranslateSection)), uintptr(unsafe.Pointer(pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(dwBufferSize), uintptr(unsafe.Pointer(pdwRequiredSize)), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+// Uaw_lstrcmpW calls KERNEL32!uaw_lstrcmpW.
+func Uaw_lstrcmpW(String1 *uint16, String2 *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procUaw_lstrcmpW.Addr(), uintptr(unsafe.Pointer(String1)), uintptr(unsafe.Pointer(String2)))
+	return int32(r1)
 }
 
-// TranslateInfStringW calls ADVPACK!TranslateInfStringW.
-func TranslateInfStringW(pszInfFilename foundation.PWSTR, pszInstallSection foundation.PWSTR, pszTranslateSection foundation.PWSTR, pszTranslateKey foundation.PWSTR, pszBuffer foundation.PWSTR, cchBuffer uint32, pdwRequiredSize *uint32, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procTranslateInfStringW.Addr(), uintptr(unsafe.Pointer(pszInfFilename)), uintptr(unsafe.Pointer(pszInstallSection)), uintptr(unsafe.Pointer(pszTranslateSection)), uintptr(unsafe.Pointer(pszTranslateKey)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(pdwRequiredSize)), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+// Uaw_lstrcmpiW calls KERNEL32!uaw_lstrcmpiW.
+func Uaw_lstrcmpiW(String1 *uint16, String2 *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procUaw_lstrcmpiW.Addr(), uintptr(unsafe.Pointer(String1)), uintptr(unsafe.Pointer(String2)))
+	return int32(r1)
+}
+
+// Uaw_lstrlenW calls KERNEL32!uaw_lstrlenW.
+func Uaw_lstrlenW(String *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procUaw_lstrlenW.Addr(), uintptr(unsafe.Pointer(String)))
+	return int32(r1)
+}
+
+// Uaw_wcschr calls KERNEL32!uaw_wcschr.
+func Uaw_wcschr(String *uint16, Character uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUaw_wcschr.Addr(), uintptr(unsafe.Pointer(String)), uintptr(Character))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Uaw_wcscpy calls KERNEL32!uaw_wcscpy.
+func Uaw_wcscpy(Destination *uint16, Source *uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUaw_wcscpy.Addr(), uintptr(unsafe.Pointer(Destination)), uintptr(unsafe.Pointer(Source)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Uaw_wcsicmp calls KERNEL32!uaw_wcsicmp.
+func Uaw_wcsicmp(String1 *uint16, String2 *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procUaw_wcsicmp.Addr(), uintptr(unsafe.Pointer(String1)), uintptr(unsafe.Pointer(String2)))
+	return int32(r1)
+}
+
+// Uaw_wcslen calls KERNEL32!uaw_wcslen.
+// https://learn.microsoft.com/windows/win32/api/stralign/nf-stralign-uaw_wcslen
+func Uaw_wcslen(String *uint16) uintptr {
+	r1, _, _ := syscall.SyscallN(procUaw_wcslen.Addr(), uintptr(unsafe.Pointer(String)))
+	return uintptr(r1)
+}
+
+// Uaw_wcsrchr calls KERNEL32!uaw_wcsrchr.
+func Uaw_wcsrchr(String *uint16, Character uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUaw_wcsrchr.Addr(), uintptr(unsafe.Pointer(String)), uintptr(Character))
+	return (*uint16)(unsafe.Pointer(r1))
 }
 
 // UnsubscribeFeatureStateChangeNotification calls api-ms-win-core-featurestaging-l1-1-0!UnsubscribeFeatureStateChangeNotification.
@@ -1479,42 +1679,45 @@ func UnsubscribeFeatureStateChangeNotification(subscription FEATURE_STATE_CHANGE
 	syscall.SyscallN(procUnsubscribeFeatureStateChangeNotification.Addr(), uintptr(subscription))
 }
 
-// UserInstStubWrapperA calls ADVPACK!UserInstStubWrapperA.
-func UserInstStubWrapperA(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PSTR, nShow int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUserInstStubWrapperA.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
-	return foundation.HRESULT(r1)
+// UserInstStubWrapper calls ADVPACK!UserInstStubWrapperW.
+func UserInstStubWrapper(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms string, nShow int32) error {
+	_pszParms := win32.UTF16Ptr(pszParms)
+	r1, _, _ := syscall.SyscallN(procUserInstStubWrapper.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(_pszParms)), uintptr(nShow))
+	return win32.HRESULTError(int32(r1))
 }
 
-// UserInstStubWrapperW calls ADVPACK!UserInstStubWrapperW.
-func UserInstStubWrapperW(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PWSTR, nShow int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUserInstStubWrapperW.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
-	return foundation.HRESULT(r1)
+// UserInstStubWrapperA calls ADVPACK!UserInstStubWrapperA.
+func UserInstStubWrapperA(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PSTR, nShow int32) error {
+	r1, _, _ := syscall.SyscallN(procUserInstStubWrapperA.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
+	return win32.HRESULTError(int32(r1))
+}
+
+// UserUnInstStubWrapper calls ADVPACK!UserUnInstStubWrapperW.
+func UserUnInstStubWrapper(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms string, nShow int32) error {
+	_pszParms := win32.UTF16Ptr(pszParms)
+	r1, _, _ := syscall.SyscallN(procUserUnInstStubWrapper.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(_pszParms)), uintptr(nShow))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UserUnInstStubWrapperA calls ADVPACK!UserUnInstStubWrapperA.
-func UserUnInstStubWrapperA(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PSTR, nShow int32) foundation.HRESULT {
+func UserUnInstStubWrapperA(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PSTR, nShow int32) error {
 	r1, _, _ := syscall.SyscallN(procUserUnInstStubWrapperA.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
-	return foundation.HRESULT(r1)
-}
-
-// UserUnInstStubWrapperW calls ADVPACK!UserUnInstStubWrapperW.
-func UserUnInstStubWrapperW(hwnd foundation.HWND, hInstance foundation.HINSTANCE, pszParms foundation.PWSTR, nShow int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUserUnInstStubWrapperW.Addr(), uintptr(hwnd), uintptr(hInstance), uintptr(unsafe.Pointer(pszParms)), uintptr(nShow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WINNLSEnableIME calls USER32!WINNLSEnableIME.
 // https://learn.microsoft.com/windows/win32/api/winnls32/nf-winnls32-winnlsenableime
 // Minimum OS: windows5.0.
-func WINNLSEnableIME(param0 foundation.HWND, param1 foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWINNLSEnableIME.Addr(), uintptr(param0), uintptr(param1))
-	return foundation.BOOL(r1)
+func WINNLSEnableIME(param0 foundation.HWND, param1 bool) bool {
+	_param1 := win32.Bool32(param1)
+	r1, _, _ := syscall.SyscallN(procWINNLSEnableIME.Addr(), uintptr(param0), uintptr(_param1))
+	return r1 != 0
 }
 
 // WINNLSGetEnableStatus calls USER32!WINNLSGetEnableStatus.
-func WINNLSGetEnableStatus(param0 foundation.HWND) foundation.BOOL {
+func WINNLSGetEnableStatus(param0 foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procWINNLSGetEnableStatus.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WINNLSGetIMEHotkey calls USER32!WINNLSGetIMEHotkey.
@@ -1529,9 +1732,9 @@ func WinWatchClose(hWW HWINWATCH) {
 }
 
 // WinWatchDidStatusChange calls DCIMAN32!WinWatchDidStatusChange.
-func WinWatchDidStatusChange(hWW HWINWATCH) foundation.BOOL {
+func WinWatchDidStatusChange(hWW HWINWATCH) bool {
 	r1, _, _ := syscall.SyscallN(procWinWatchDidStatusChange.Addr(), uintptr(hWW))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WinWatchGetClipList calls DCIMAN32!WinWatchGetClipList.
@@ -1541,9 +1744,9 @@ func WinWatchGetClipList(hWW HWINWATCH, prc *foundation.RECT, size uint32, prd *
 }
 
 // WinWatchNotify calls DCIMAN32!WinWatchNotify.
-func WinWatchNotify(hWW HWINWATCH, NotifyCallback WINWATCHNOTIFYPROC, NotifyParam foundation.LPARAM) foundation.BOOL {
+func WinWatchNotify(hWW HWINWATCH, NotifyCallback WINWATCHNOTIFYPROC, NotifyParam foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procWinWatchNotify.Addr(), uintptr(hWW), uintptr(NotifyCallback), uintptr(NotifyParam))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WinWatchOpen calls DCIMAN32!WinWatchOpen.
@@ -1554,155 +1757,189 @@ func WinWatchOpen(hwnd foundation.HWND) HWINWATCH {
 
 // WldpCanExecuteBuffer calls Wldp!WldpCanExecuteBuffer.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutebuffer
-func WldpCanExecuteBuffer(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, buffer *byte, bufferSize uint32, auditInfo foundation.PWSTR, result *WLDP_EXECUTION_POLICY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpCanExecuteBuffer.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSize), uintptr(unsafe.Pointer(auditInfo)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func WldpCanExecuteBuffer(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, buffer []byte, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	_auditInfo := win32.UTF16Ptr(auditInfo)
+	r1, _, _ := syscall.SyscallN(procWldpCanExecuteBuffer.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpCanExecuteFile calls Wldp!WldpCanExecuteFile.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutefile
-func WldpCanExecuteFile(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, fileHandle foundation.HANDLE, auditInfo foundation.PWSTR, result *WLDP_EXECUTION_POLICY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFile.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(fileHandle), uintptr(unsafe.Pointer(auditInfo)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func WldpCanExecuteFile(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, fileHandle foundation.HANDLE, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
+	_auditInfo := win32.UTF16Ptr(auditInfo)
+	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFile.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(fileHandle), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpCanExecuteFileFromDetachedSignature calls Wldp!WldpCanExecuteFileFromDetachedSignature.
-func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, contentFileHandle foundation.HANDLE, signatureFileHandle foundation.HANDLE, auditInfo foundation.PWSTR, result *WLDP_EXECUTION_POLICY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFileFromDetachedSignature.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(contentFileHandle), uintptr(signatureFileHandle), uintptr(unsafe.Pointer(auditInfo)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, contentFileHandle foundation.HANDLE, signatureFileHandle foundation.HANDLE, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
+	_auditInfo := win32.UTF16Ptr(auditInfo)
+	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFileFromDetachedSignature.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(contentFileHandle), uintptr(signatureFileHandle), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpCanExecuteStream calls Wldp!WldpCanExecuteStream.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutestream
-func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, stream *systemcom.IStream, auditInfo foundation.PWSTR, result *WLDP_EXECUTION_POLICY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpCanExecuteStream.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(auditInfo)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, stream *systemcom.IStream, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
+	_auditInfo := win32.UTF16Ptr(auditInfo)
+	r1, _, _ := syscall.SyscallN(procWldpCanExecuteStream.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpGetApplicationSettingBoolean calls Wldp!WldpGetApplicationSettingBoolean.
-func WldpGetApplicationSettingBoolean(id foundation.PWSTR, setting foundation.PWSTR, result *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingBoolean.Addr(), uintptr(unsafe.Pointer(id)), uintptr(unsafe.Pointer(setting)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func WldpGetApplicationSettingBoolean(id string, setting string, result *foundation.BOOL) error {
+	_id := win32.UTF16Ptr(id)
+	_setting := win32.UTF16Ptr(setting)
+	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingBoolean.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_setting)), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpGetApplicationSettingStringList calls Wldp!WldpGetApplicationSettingStringList.
-func WldpGetApplicationSettingStringList(id foundation.PWSTR, setting foundation.PWSTR, dataCount uintptr, requiredCount *uintptr, result foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingStringList.Addr(), uintptr(unsafe.Pointer(id)), uintptr(unsafe.Pointer(setting)), uintptr(dataCount), uintptr(unsafe.Pointer(requiredCount)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func WldpGetApplicationSettingStringList(id string, setting string, dataCount uintptr, requiredCount *uintptr, result foundation.PWSTR) error {
+	_id := win32.UTF16Ptr(id)
+	_setting := win32.UTF16Ptr(setting)
+	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingStringList.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_setting)), uintptr(dataCount), uintptr(unsafe.Pointer(requiredCount)), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpGetApplicationSettingStringSet calls Wldp!WldpGetApplicationSettingStringSet.
-func WldpGetApplicationSettingStringSet(id foundation.PWSTR, setting foundation.PWSTR, dataCount uintptr, requiredCount *uintptr, result foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingStringSet.Addr(), uintptr(unsafe.Pointer(id)), uintptr(unsafe.Pointer(setting)), uintptr(dataCount), uintptr(unsafe.Pointer(requiredCount)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func WldpGetApplicationSettingStringSet(id string, setting string, dataCount uintptr, requiredCount *uintptr, result foundation.PWSTR) error {
+	_id := win32.UTF16Ptr(id)
+	_setting := win32.UTF16Ptr(setting)
+	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingStringSet.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_setting)), uintptr(dataCount), uintptr(unsafe.Pointer(requiredCount)), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpGetLockdownPolicy calls Wldp!WldpGetLockdownPolicy.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpgetlockdownpolicy
-func WldpGetLockdownPolicy(hostInformation *WLDP_HOST_INFORMATION, lockdownState *uint32, lockdownFlags uint32) foundation.HRESULT {
+func WldpGetLockdownPolicy(hostInformation *WLDP_HOST_INFORMATION, lockdownState *uint32, lockdownFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procWldpGetLockdownPolicy.Addr(), uintptr(unsafe.Pointer(hostInformation)), uintptr(unsafe.Pointer(lockdownState)), uintptr(lockdownFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpIsAppApprovedByPolicy calls Wldp!WldpIsAppApprovedByPolicy.
-func WldpIsAppApprovedByPolicy(PackageFamilyName foundation.PWSTR, PackageVersion uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpIsAppApprovedByPolicy.Addr(), uintptr(unsafe.Pointer(PackageFamilyName)), uintptr(PackageVersion))
-	return foundation.HRESULT(r1)
+func WldpIsAppApprovedByPolicy(PackageFamilyName string, PackageVersion uint64) error {
+	_PackageFamilyName := win32.UTF16Ptr(PackageFamilyName)
+	r1, _, _ := syscall.SyscallN(procWldpIsAppApprovedByPolicy.Addr(), uintptr(unsafe.Pointer(_PackageFamilyName)), uintptr(PackageVersion))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpIsClassInApprovedList calls Wldp!WldpIsClassInApprovedList.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpisclassinapprovedlist
-func WldpIsClassInApprovedList(classID *win32.GUID, hostInformation *WLDP_HOST_INFORMATION, isApproved *foundation.BOOL, optionalFlags uint32) foundation.HRESULT {
+func WldpIsClassInApprovedList(classID *win32.GUID, hostInformation *WLDP_HOST_INFORMATION, isApproved *foundation.BOOL, optionalFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procWldpIsClassInApprovedList.Addr(), uintptr(unsafe.Pointer(classID)), uintptr(unsafe.Pointer(hostInformation)), uintptr(unsafe.Pointer(isApproved)), uintptr(optionalFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpIsDynamicCodePolicyEnabled calls Wldp!WldpIsDynamicCodePolicyEnabled.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpisdynamiccodepolicyenabled
-func WldpIsDynamicCodePolicyEnabled(isEnabled *foundation.BOOL) foundation.HRESULT {
+func WldpIsDynamicCodePolicyEnabled(isEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWldpIsDynamicCodePolicyEnabled.Addr(), uintptr(unsafe.Pointer(isEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpIsProductionConfiguration calls Wldp!WldpIsProductionConfiguration.
-func WldpIsProductionConfiguration(IsProductionConfiguration *foundation.BOOL) foundation.HRESULT {
+func WldpIsProductionConfiguration(IsProductionConfiguration *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWldpIsProductionConfiguration.Addr(), uintptr(unsafe.Pointer(IsProductionConfiguration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpIsWcosProductionConfiguration calls Wldp!WldpIsWcosProductionConfiguration.
-func WldpIsWcosProductionConfiguration(IsProductionConfiguration *foundation.BOOL) foundation.HRESULT {
+func WldpIsWcosProductionConfiguration(IsProductionConfiguration *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWldpIsWcosProductionConfiguration.Addr(), uintptr(unsafe.Pointer(IsProductionConfiguration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpQueryDeviceSecurityInformation calls Wldp!WldpQueryDeviceSecurityInformation.
-func WldpQueryDeviceSecurityInformation(information *WLDP_DEVICE_SECURITY_INFORMATION, informationLength uint32, returnLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpQueryDeviceSecurityInformation.Addr(), uintptr(unsafe.Pointer(information)), uintptr(informationLength), uintptr(unsafe.Pointer(returnLength)))
-	return foundation.HRESULT(r1)
+func WldpQueryDeviceSecurityInformation(information []WLDP_DEVICE_SECURITY_INFORMATION, returnLength *uint32) error {
+	var _information *WLDP_DEVICE_SECURITY_INFORMATION
+	if len(information) > 0 {
+		_information = &information[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWldpQueryDeviceSecurityInformation.Addr(), uintptr(unsafe.Pointer(_information)), uintptr(len(information)), uintptr(unsafe.Pointer(returnLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpQueryDynamicCodeTrust calls Wldp!WldpQueryDynamicCodeTrust.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpquerydynamiccodetrust
-func WldpQueryDynamicCodeTrust(fileHandle foundation.HANDLE, baseImage unsafe.Pointer, imageSize uint32) foundation.HRESULT {
+func WldpQueryDynamicCodeTrust(fileHandle foundation.HANDLE, baseImage unsafe.Pointer, imageSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procWldpQueryDynamicCodeTrust.Addr(), uintptr(fileHandle), uintptr(unsafe.Pointer(baseImage)), uintptr(imageSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpQueryPolicySettingEnabled calls Wldp!WldpQueryPolicySettingEnabled.
-func WldpQueryPolicySettingEnabled(Setting WLDP_POLICY_SETTING, Enabled *foundation.BOOL) foundation.HRESULT {
+func WldpQueryPolicySettingEnabled(Setting WLDP_POLICY_SETTING, Enabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWldpQueryPolicySettingEnabled.Addr(), uintptr(Setting), uintptr(unsafe.Pointer(Enabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpQueryPolicySettingEnabled2 calls Wldp!WldpQueryPolicySettingEnabled2.
-func WldpQueryPolicySettingEnabled2(SettingString foundation.PWSTR, Enabled *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWldpQueryPolicySettingEnabled2.Addr(), uintptr(unsafe.Pointer(SettingString)), uintptr(unsafe.Pointer(Enabled)))
-	return foundation.HRESULT(r1)
+func WldpQueryPolicySettingEnabled2(SettingString string, Enabled *foundation.BOOL) error {
+	_SettingString := win32.UTF16Ptr(SettingString)
+	r1, _, _ := syscall.SyscallN(procWldpQueryPolicySettingEnabled2.Addr(), uintptr(unsafe.Pointer(_SettingString)), uintptr(unsafe.Pointer(Enabled)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpQuerySecurityPolicy calls Wldp!WldpQuerySecurityPolicy.
-func WldpQuerySecurityPolicy(providerName *foundation.UNICODE_STRING, keyName *foundation.UNICODE_STRING, valueName *foundation.UNICODE_STRING, valueType *WLDP_SECURE_SETTING_VALUE_TYPE, valueAddress unsafe.Pointer, valueSize *uint32) foundation.HRESULT {
+func WldpQuerySecurityPolicy(providerName *foundation.UNICODE_STRING, keyName *foundation.UNICODE_STRING, valueName *foundation.UNICODE_STRING, valueType *WLDP_SECURE_SETTING_VALUE_TYPE, valueAddress unsafe.Pointer, valueSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWldpQuerySecurityPolicy.Addr(), uintptr(unsafe.Pointer(providerName)), uintptr(unsafe.Pointer(keyName)), uintptr(unsafe.Pointer(valueName)), uintptr(unsafe.Pointer(valueType)), uintptr(unsafe.Pointer(valueAddress)), uintptr(unsafe.Pointer(valueSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpQueryWindowsLockdownMode calls Wldp!WldpQueryWindowsLockdownMode.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpquerywindowslockdownmode
-func WldpQueryWindowsLockdownMode(lockdownMode *WLDP_WINDOWS_LOCKDOWN_MODE) foundation.HRESULT {
+func WldpQueryWindowsLockdownMode(lockdownMode *WLDP_WINDOWS_LOCKDOWN_MODE) error {
 	r1, _, _ := syscall.SyscallN(procWldpQueryWindowsLockdownMode.Addr(), uintptr(unsafe.Pointer(lockdownMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpQueryWindowsLockdownRestriction calls Wldp!WldpQueryWindowsLockdownRestriction.
-func WldpQueryWindowsLockdownRestriction(LockdownRestriction *WLDP_WINDOWS_LOCKDOWN_RESTRICTION) foundation.HRESULT {
+func WldpQueryWindowsLockdownRestriction(LockdownRestriction *WLDP_WINDOWS_LOCKDOWN_RESTRICTION) error {
 	r1, _, _ := syscall.SyscallN(procWldpQueryWindowsLockdownRestriction.Addr(), uintptr(unsafe.Pointer(LockdownRestriction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpResetProductionConfiguration calls Wldp!WldpResetProductionConfiguration.
-func WldpResetProductionConfiguration() foundation.HRESULT {
+func WldpResetProductionConfiguration() error {
 	r1, _, _ := syscall.SyscallN(procWldpResetProductionConfiguration.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpResetWcosProductionConfiguration calls Wldp!WldpResetWcosProductionConfiguration.
-func WldpResetWcosProductionConfiguration() foundation.HRESULT {
+func WldpResetWcosProductionConfiguration() error {
 	r1, _, _ := syscall.SyscallN(procWldpResetWcosProductionConfiguration.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpSetDynamicCodeTrust calls Wldp!WldpSetDynamicCodeTrust.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpsetdynamiccodetrust
-func WldpSetDynamicCodeTrust(fileHandle foundation.HANDLE) foundation.HRESULT {
+func WldpSetDynamicCodeTrust(fileHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWldpSetDynamicCodeTrust.Addr(), uintptr(fileHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WldpSetWindowsLockdownRestriction calls Wldp!WldpSetWindowsLockdownRestriction.
-func WldpSetWindowsLockdownRestriction(LockdownRestriction WLDP_WINDOWS_LOCKDOWN_RESTRICTION) foundation.HRESULT {
+func WldpSetWindowsLockdownRestriction(LockdownRestriction WLDP_WINDOWS_LOCKDOWN_RESTRICTION) error {
 	r1, _, _ := syscall.SyscallN(procWldpSetWindowsLockdownRestriction.Addr(), uintptr(LockdownRestriction))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// WritePrivateProfileSection calls KERNEL32!WritePrivateProfileSectionW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilesectionw
+// Minimum OS: windows5.0.
+func WritePrivateProfileSection(lpAppName string, lpString string, lpFileName string) error {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	_lpString := win32.UTF16Ptr(lpString)
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileSection.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpString)), uintptr(unsafe.Pointer(_lpFileName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // WritePrivateProfileSectionA calls KERNEL32!WritePrivateProfileSectionA.
@@ -1716,11 +1953,15 @@ func WritePrivateProfileSectionA(lpAppName foundation.PSTR, lpString foundation.
 	return nil
 }
 
-// WritePrivateProfileSectionW calls KERNEL32!WritePrivateProfileSectionW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilesectionw
+// WritePrivateProfileString calls KERNEL32!WritePrivateProfileStringW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestringw
 // Minimum OS: windows5.0.
-func WritePrivateProfileSectionW(lpAppName foundation.PWSTR, lpString foundation.PWSTR, lpFileName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileSectionW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpString)), uintptr(unsafe.Pointer(lpFileName)))
+func WritePrivateProfileString(lpAppName string, lpKeyName string, lpString string, lpFileName string) error {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	_lpKeyName := win32.UTF16Ptr(lpKeyName)
+	_lpString := win32.UTF16Ptr(lpString)
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpString)), uintptr(unsafe.Pointer(_lpFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1738,11 +1979,14 @@ func WritePrivateProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.
 	return nil
 }
 
-// WritePrivateProfileStringW calls KERNEL32!WritePrivateProfileStringW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestringw
+// WritePrivateProfileStruct calls KERNEL32!WritePrivateProfileStructW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestructw
 // Minimum OS: windows5.0.
-func WritePrivateProfileStringW(lpAppName foundation.PWSTR, lpKeyName foundation.PWSTR, lpString foundation.PWSTR, lpFileName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileStringW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpKeyName)), uintptr(unsafe.Pointer(lpString)), uintptr(unsafe.Pointer(lpFileName)))
+func WritePrivateProfileStruct(lpszSection string, lpszKey string, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile string) error {
+	_lpszSection := win32.UTF16Ptr(lpszSection)
+	_lpszKey := win32.UTF16Ptr(lpszKey)
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(lpStruct)), uintptr(uSizeStruct), uintptr(unsafe.Pointer(_szFile)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1760,11 +2004,13 @@ func WritePrivateProfileStructA(lpszSection foundation.PSTR, lpszKey foundation.
 	return nil
 }
 
-// WritePrivateProfileStructW calls KERNEL32!WritePrivateProfileStructW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestructw
+// WriteProfileSection calls KERNEL32!WriteProfileSectionW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprofilesectionw
 // Minimum OS: windows5.0.
-func WritePrivateProfileStructW(lpszSection foundation.PWSTR, lpszKey foundation.PWSTR, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileStructW.Addr(), uintptr(unsafe.Pointer(lpszSection)), uintptr(unsafe.Pointer(lpszKey)), uintptr(unsafe.Pointer(lpStruct)), uintptr(uSizeStruct), uintptr(unsafe.Pointer(szFile)))
+func WriteProfileSection(lpAppName string, lpString string) error {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procWriteProfileSection.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpString)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1782,11 +2028,14 @@ func WriteProfileSectionA(lpAppName foundation.PSTR, lpString foundation.PSTR) e
 	return nil
 }
 
-// WriteProfileSectionW calls KERNEL32!WriteProfileSectionW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprofilesectionw
+// WriteProfileString calls KERNEL32!WriteProfileStringW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprofilestringw
 // Minimum OS: windows5.0.
-func WriteProfileSectionW(lpAppName foundation.PWSTR, lpString foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procWriteProfileSectionW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpString)))
+func WriteProfileString(lpAppName string, lpKeyName string, lpString string) error {
+	_lpAppName := win32.UTF16Ptr(lpAppName)
+	_lpKeyName := win32.UTF16Ptr(lpKeyName)
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procWriteProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpString)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1802,127 +2051,4 @@ func WriteProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.PSTR, l
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// WriteProfileStringW calls KERNEL32!WriteProfileStringW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprofilestringw
-// Minimum OS: windows5.0.
-func WriteProfileStringW(lpAppName foundation.PWSTR, lpKeyName foundation.PWSTR, lpString foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procWriteProfileStringW.Addr(), uintptr(unsafe.Pointer(lpAppName)), uintptr(unsafe.Pointer(lpKeyName)), uintptr(unsafe.Pointer(lpString)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// _hread calls KERNEL32!_hread.
-func Hread(hFile int32, lpBuffer unsafe.Pointer, lBytes int32) int32 {
-	r1, _, _ := syscall.SyscallN(procHread.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(lBytes))
-	return int32(r1)
-}
-
-// _hwrite calls KERNEL32!_hwrite.
-func Hwrite(hFile int32, lpBuffer foundation.PSTR, lBytes int32) int32 {
-	r1, _, _ := syscall.SyscallN(procHwrite.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(lBytes))
-	return int32(r1)
-}
-
-// _lclose calls KERNEL32!_lclose.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lclose
-func Lclose(hFile int32) int32 {
-	r1, _, _ := syscall.SyscallN(procLclose.Addr(), uintptr(hFile))
-	return int32(r1)
-}
-
-// _lcreat calls KERNEL32!_lcreat.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lcreat
-func Lcreat(lpPathName foundation.PSTR, iAttribute int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procLcreat.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(iAttribute))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// _llseek calls KERNEL32!_llseek.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_llseek
-func Llseek(hFile int32, lOffset int32, iOrigin int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procLlseek.Addr(), uintptr(hFile), uintptr(lOffset), uintptr(iOrigin))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// _lopen calls KERNEL32!_lopen.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lopen
-func Lopen(lpPathName foundation.PSTR, iReadWrite int32) int32 {
-	r1, _, _ := syscall.SyscallN(procLopen.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(iReadWrite))
-	return int32(r1)
-}
-
-// _lread calls KERNEL32!_lread.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lread
-func Lread(hFile int32, lpBuffer unsafe.Pointer, uBytes uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procLread.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uBytes))
-	return uint32(r1)
-}
-
-// _lwrite calls KERNEL32!_lwrite.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lwrite
-func Lwrite(hFile int32, lpBuffer foundation.PSTR, uBytes uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procLwrite.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uBytes))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// uaw_lstrcmpW calls KERNEL32!uaw_lstrcmpW.
-func Uaw_lstrcmpW(String1 *uint16, String2 *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procUaw_lstrcmpW.Addr(), uintptr(unsafe.Pointer(String1)), uintptr(unsafe.Pointer(String2)))
-	return int32(r1)
-}
-
-// uaw_lstrcmpiW calls KERNEL32!uaw_lstrcmpiW.
-func Uaw_lstrcmpiW(String1 *uint16, String2 *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procUaw_lstrcmpiW.Addr(), uintptr(unsafe.Pointer(String1)), uintptr(unsafe.Pointer(String2)))
-	return int32(r1)
-}
-
-// uaw_lstrlenW calls KERNEL32!uaw_lstrlenW.
-func Uaw_lstrlenW(String *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procUaw_lstrlenW.Addr(), uintptr(unsafe.Pointer(String)))
-	return int32(r1)
-}
-
-// uaw_wcschr calls KERNEL32!uaw_wcschr.
-func Uaw_wcschr(String *uint16, Character uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUaw_wcschr.Addr(), uintptr(unsafe.Pointer(String)), uintptr(Character))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// uaw_wcscpy calls KERNEL32!uaw_wcscpy.
-func Uaw_wcscpy(Destination *uint16, Source *uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUaw_wcscpy.Addr(), uintptr(unsafe.Pointer(Destination)), uintptr(unsafe.Pointer(Source)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// uaw_wcsicmp calls KERNEL32!uaw_wcsicmp.
-func Uaw_wcsicmp(String1 *uint16, String2 *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procUaw_wcsicmp.Addr(), uintptr(unsafe.Pointer(String1)), uintptr(unsafe.Pointer(String2)))
-	return int32(r1)
-}
-
-// uaw_wcslen calls KERNEL32!uaw_wcslen.
-// https://learn.microsoft.com/windows/win32/api/stralign/nf-stralign-uaw_wcslen
-func Uaw_wcslen(String *uint16) uintptr {
-	r1, _, _ := syscall.SyscallN(procUaw_wcslen.Addr(), uintptr(unsafe.Pointer(String)))
-	return uintptr(r1)
-}
-
-// uaw_wcsrchr calls KERNEL32!uaw_wcsrchr.
-func Uaw_wcsrchr(String *uint16, Character uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUaw_wcsrchr.Addr(), uintptr(unsafe.Pointer(String)), uintptr(Character))
-	return (*uint16)(unsafe.Pointer(r1))
 }

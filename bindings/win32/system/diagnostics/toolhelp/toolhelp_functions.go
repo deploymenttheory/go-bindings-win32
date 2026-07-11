@@ -204,7 +204,7 @@ func Thread32Next(hSnapshot foundation.HANDLE, lpte *THREADENTRY32) error {
 // Toolhelp32ReadProcessMemory calls KERNEL32!Toolhelp32ReadProcessMemory.
 // https://learn.microsoft.com/windows/win32/api/tlhelp32/nf-tlhelp32-toolhelp32readprocessmemory
 // Minimum OS: windows5.1.2600.
-func Toolhelp32ReadProcessMemory(th32ProcessID uint32, lpBaseAddress unsafe.Pointer, lpBuffer unsafe.Pointer, cbRead uintptr, lpNumberOfBytesRead *uintptr) foundation.BOOL {
+func Toolhelp32ReadProcessMemory(th32ProcessID uint32, lpBaseAddress unsafe.Pointer, lpBuffer unsafe.Pointer, cbRead uintptr, lpNumberOfBytesRead *uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procToolhelp32ReadProcessMemory.Addr(), uintptr(th32ProcessID), uintptr(unsafe.Pointer(lpBaseAddress)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbRead), uintptr(unsafe.Pointer(lpNumberOfBytesRead)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

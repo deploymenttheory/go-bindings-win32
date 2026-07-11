@@ -17,8 +17,8 @@ type CPOINT struct {
 	DwLog uint32
 }
 
-// DIACTIONA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DIACTIONA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DIACTIONA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -67,8 +67,8 @@ type DIACTIONFORMATW struct {
 	TszActionMap  [260]uint16
 }
 
-// DIACTIONW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DIACTIONW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DIACTIONW_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -669,8 +669,8 @@ type HIDP_BUTTON_ARRAY_DATA struct {
 	On         foundation.BOOLEAN
 }
 
-// HIDP_BUTTON_CAPS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// HIDP_BUTTON_CAPS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type HIDP_BUTTON_CAPS_Anonymous_e__Union struct {
 	Data [8]uint16
 }
@@ -712,8 +712,8 @@ type HIDP_CAPS struct {
 	NumberFeatureDataIndices  uint16
 }
 
-// HIDP_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// HIDP_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type HIDP_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -724,8 +724,8 @@ type HIDP_DATA struct {
 	Anonymous HIDP_DATA_Anonymous_e__Union
 }
 
-// HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -740,8 +740,8 @@ type HIDP_UNKNOWN_TOKEN struct {
 	BitField uint32
 }
 
-// HIDP_VALUE_CAPS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// HIDP_VALUE_CAPS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type HIDP_VALUE_CAPS_Anonymous_e__Union struct {
 	Data [8]uint16
 }
@@ -927,8 +927,8 @@ type MOUSE_ATTRIBUTES struct {
 	InputDataQueueLength uint32
 }
 
-// MOUSE_INPUT_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MOUSE_INPUT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MOUSE_INPUT_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
 }

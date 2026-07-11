@@ -25,27 +25,31 @@ type IOpcCertificateEnumerator struct {
 var IID_IOpcCertificateEnumerator = win32.GUID{Data1: 0x85131937, Data2: 0x8f24, Data3: 0x421f, Data4: [8]byte{0xb4, 0x39, 0x59, 0xab, 0x24, 0xd1, 0x40, 0xb8}}
 
 // MoveNext dispatches through IOpcCertificateEnumerator's vtable slot 3.
-func (self *IOpcCertificateEnumerator) MoveNext(hasNext *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasNext)))
-	return foundation.HRESULT(r1)
+func (self *IOpcCertificateEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
+	return _hasNext, win32.HRESULTError(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcCertificateEnumerator's vtable slot 4.
-func (self *IOpcCertificateEnumerator) MovePrevious(hasPrevious *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasPrevious)))
-	return foundation.HRESULT(r1)
+func (self *IOpcCertificateEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
+	return _hasPrevious, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcCertificateEnumerator's vtable slot 5.
-func (self *IOpcCertificateEnumerator) GetCurrent(certificate **securitycryptography.CERT_CONTEXT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificate)))
-	return foundation.HRESULT(r1)
+func (self *IOpcCertificateEnumerator) GetCurrent() (*securitycryptography.CERT_CONTEXT, error) {
+	var _certificate *securitycryptography.CERT_CONTEXT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificate)))
+	return _certificate, win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IOpcCertificateEnumerator's vtable slot 6.
-func (self *IOpcCertificateEnumerator) Clone(copy_ **IOpcCertificateEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(copy_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcCertificateEnumerator) Clone() (*IOpcCertificateEnumerator, error) {
+	var _copy_ *IOpcCertificateEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
+	return _copy_, win32.HRESULTError(int32(r1))
 }
 
 // IOpcCertificateSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopccertificateset
@@ -58,21 +62,22 @@ type IOpcCertificateSet struct {
 var IID_IOpcCertificateSet = win32.GUID{Data1: 0x56ea4325, Data2: 0x8e2d, Data3: 0x4167, Data4: [8]byte{0xb1, 0xa4, 0xe4, 0x86, 0xd2, 0x4c, 0x8f, 0xa7}}
 
 // Add dispatches through IOpcCertificateSet's vtable slot 3.
-func (self *IOpcCertificateSet) Add(certificate *securitycryptography.CERT_CONTEXT) foundation.HRESULT {
+func (self *IOpcCertificateSet) Add(certificate *securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IOpcCertificateSet's vtable slot 4.
-func (self *IOpcCertificateSet) Remove(certificate *securitycryptography.CERT_CONTEXT) foundation.HRESULT {
+func (self *IOpcCertificateSet) Remove(certificate *securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcCertificateSet's vtable slot 5.
-func (self *IOpcCertificateSet) GetEnumerator(certificateEnumerator **IOpcCertificateEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificateEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcCertificateSet) GetEnumerator() (*IOpcCertificateEnumerator, error) {
+	var _certificateEnumerator *IOpcCertificateEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificateEnumerator)))
+	return _certificateEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // IOpcDigitalSignature: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcdigitalsignature
@@ -85,93 +90,102 @@ type IOpcDigitalSignature struct {
 var IID_IOpcDigitalSignature = win32.GUID{Data1: 0x52ab21dd, Data2: 0x1cd0, Data3: 0x4949, Data4: [8]byte{0xbc, 0x80, 0x0c, 0x12, 0x32, 0xd0, 0x0c, 0xb4}}
 
 // GetNamespaces dispatches through IOpcDigitalSignature's vtable slot 3.
-func (self *IOpcDigitalSignature) GetNamespaces(prefixes **foundation.PWSTR, namespaces **foundation.PWSTR, count *uint32) foundation.HRESULT {
+func (self *IOpcDigitalSignature) GetNamespaces(prefixes **foundation.PWSTR, namespaces **foundation.PWSTR, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prefixes)), uintptr(unsafe.Pointer(namespaces)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignatureId dispatches through IOpcDigitalSignature's vtable slot 4.
-func (self *IOpcDigitalSignature) GetSignatureId(signatureId *foundation.PWSTR) foundation.HRESULT {
+func (self *IOpcDigitalSignature) GetSignatureId(signatureId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignaturePartName dispatches through IOpcDigitalSignature's vtable slot 5.
-func (self *IOpcDigitalSignature) GetSignaturePartName(signaturePartName **IOpcPartUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignature) GetSignaturePartName() (*IOpcPartUri, error) {
+	var _signaturePartName *IOpcPartUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signaturePartName)))
+	return _signaturePartName, win32.HRESULTError(int32(r1))
 }
 
 // GetSignatureMethod dispatches through IOpcDigitalSignature's vtable slot 6.
-func (self *IOpcDigitalSignature) GetSignatureMethod(signatureMethod *foundation.PWSTR) foundation.HRESULT {
+func (self *IOpcDigitalSignature) GetSignatureMethod(signatureMethod *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureMethod)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCanonicalizationMethod dispatches through IOpcDigitalSignature's vtable slot 7.
-func (self *IOpcDigitalSignature) GetCanonicalizationMethod(canonicalizationMethod *OPC_CANONICALIZATION_METHOD) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(canonicalizationMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignature) GetCanonicalizationMethod() (OPC_CANONICALIZATION_METHOD, error) {
+	var _canonicalizationMethod OPC_CANONICALIZATION_METHOD
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_canonicalizationMethod)))
+	return _canonicalizationMethod, win32.HRESULTError(int32(r1))
 }
 
 // GetSignatureValue dispatches through IOpcDigitalSignature's vtable slot 8.
-func (self *IOpcDigitalSignature) GetSignatureValue(signatureValue **byte, count *uint32) foundation.HRESULT {
+func (self *IOpcDigitalSignature) GetSignatureValue(signatureValue **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureValue)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignaturePartReferenceEnumerator dispatches through IOpcDigitalSignature's vtable slot 9.
-func (self *IOpcDigitalSignature) GetSignaturePartReferenceEnumerator(partReferenceEnumerator **IOpcSignaturePartReferenceEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partReferenceEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignature) GetSignaturePartReferenceEnumerator() (*IOpcSignaturePartReferenceEnumerator, error) {
+	var _partReferenceEnumerator *IOpcSignaturePartReferenceEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partReferenceEnumerator)))
+	return _partReferenceEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // GetSignatureRelationshipReferenceEnumerator dispatches through IOpcDigitalSignature's vtable slot 10.
-func (self *IOpcDigitalSignature) GetSignatureRelationshipReferenceEnumerator(relationshipReferenceEnumerator **IOpcSignatureRelationshipReferenceEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipReferenceEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignature) GetSignatureRelationshipReferenceEnumerator() (*IOpcSignatureRelationshipReferenceEnumerator, error) {
+	var _relationshipReferenceEnumerator *IOpcSignatureRelationshipReferenceEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipReferenceEnumerator)))
+	return _relationshipReferenceEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // GetSigningTime dispatches through IOpcDigitalSignature's vtable slot 11.
-func (self *IOpcDigitalSignature) GetSigningTime(signingTime *foundation.PWSTR) foundation.HRESULT {
+func (self *IOpcDigitalSignature) GetSigningTime(signingTime *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signingTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimeFormat dispatches through IOpcDigitalSignature's vtable slot 12.
-func (self *IOpcDigitalSignature) GetTimeFormat(timeFormat *OPC_SIGNATURE_TIME_FORMAT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(timeFormat)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignature) GetTimeFormat() (OPC_SIGNATURE_TIME_FORMAT, error) {
+	var _timeFormat OPC_SIGNATURE_TIME_FORMAT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeFormat)))
+	return _timeFormat, win32.HRESULTError(int32(r1))
 }
 
 // GetPackageObjectReference dispatches through IOpcDigitalSignature's vtable slot 13.
-func (self *IOpcDigitalSignature) GetPackageObjectReference(packageObjectReference **IOpcSignatureReference) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packageObjectReference)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignature) GetPackageObjectReference() (*IOpcSignatureReference, error) {
+	var _packageObjectReference *IOpcSignatureReference
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_packageObjectReference)))
+	return _packageObjectReference, win32.HRESULTError(int32(r1))
 }
 
 // GetCertificateEnumerator dispatches through IOpcDigitalSignature's vtable slot 14.
-func (self *IOpcDigitalSignature) GetCertificateEnumerator(certificateEnumerator **IOpcCertificateEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificateEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignature) GetCertificateEnumerator() (*IOpcCertificateEnumerator, error) {
+	var _certificateEnumerator *IOpcCertificateEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificateEnumerator)))
+	return _certificateEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // GetCustomReferenceEnumerator dispatches through IOpcDigitalSignature's vtable slot 15.
-func (self *IOpcDigitalSignature) GetCustomReferenceEnumerator(customReferenceEnumerator **IOpcSignatureReferenceEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(customReferenceEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignature) GetCustomReferenceEnumerator() (*IOpcSignatureReferenceEnumerator, error) {
+	var _customReferenceEnumerator *IOpcSignatureReferenceEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customReferenceEnumerator)))
+	return _customReferenceEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // GetCustomObjectEnumerator dispatches through IOpcDigitalSignature's vtable slot 16.
-func (self *IOpcDigitalSignature) GetCustomObjectEnumerator(customObjectEnumerator **IOpcSignatureCustomObjectEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(customObjectEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignature) GetCustomObjectEnumerator() (*IOpcSignatureCustomObjectEnumerator, error) {
+	var _customObjectEnumerator *IOpcSignatureCustomObjectEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObjectEnumerator)))
+	return _customObjectEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // GetSignatureXml dispatches through IOpcDigitalSignature's vtable slot 17.
-func (self *IOpcDigitalSignature) GetSignatureXml(signatureXml **byte, count *uint32) foundation.HRESULT {
+func (self *IOpcDigitalSignature) GetSignatureXml(signatureXml **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureXml)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IOpcDigitalSignatureEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcdigitalsignatureenumerator
@@ -184,27 +198,31 @@ type IOpcDigitalSignatureEnumerator struct {
 var IID_IOpcDigitalSignatureEnumerator = win32.GUID{Data1: 0x967b6882, Data2: 0x0ba3, Data3: 0x4358, Data4: [8]byte{0xb9, 0xe7, 0xb6, 0x4c, 0x75, 0x06, 0x3c, 0x5e}}
 
 // MoveNext dispatches through IOpcDigitalSignatureEnumerator's vtable slot 3.
-func (self *IOpcDigitalSignatureEnumerator) MoveNext(hasNext *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasNext)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
+	return _hasNext, win32.HRESULTError(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcDigitalSignatureEnumerator's vtable slot 4.
-func (self *IOpcDigitalSignatureEnumerator) MovePrevious(hasPrevious *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasPrevious)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
+	return _hasPrevious, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcDigitalSignatureEnumerator's vtable slot 5.
-func (self *IOpcDigitalSignatureEnumerator) GetCurrent(digitalSignature **IOpcDigitalSignature) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digitalSignature)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureEnumerator) GetCurrent() (*IOpcDigitalSignature, error) {
+	var _digitalSignature *IOpcDigitalSignature
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digitalSignature)))
+	return _digitalSignature, win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IOpcDigitalSignatureEnumerator's vtable slot 6.
-func (self *IOpcDigitalSignatureEnumerator) Clone(copy_ **IOpcDigitalSignatureEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(copy_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureEnumerator) Clone() (*IOpcDigitalSignatureEnumerator, error) {
+	var _copy_ *IOpcDigitalSignatureEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
+	return _copy_, win32.HRESULTError(int32(r1))
 }
 
 // IOpcDigitalSignatureManager: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcdigitalsignaturemanager
@@ -217,51 +235,57 @@ type IOpcDigitalSignatureManager struct {
 var IID_IOpcDigitalSignatureManager = win32.GUID{Data1: 0xd5e62a0b, Data2: 0x696d, Data3: 0x462f, Data4: [8]byte{0x94, 0xdf, 0x72, 0xe3, 0x3c, 0xef, 0x26, 0x59}}
 
 // GetSignatureOriginPartName dispatches through IOpcDigitalSignatureManager's vtable slot 3.
-func (self *IOpcDigitalSignatureManager) GetSignatureOriginPartName(signatureOriginPartName **IOpcPartUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureOriginPartName)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureManager) GetSignatureOriginPartName() (*IOpcPartUri, error) {
+	var _signatureOriginPartName *IOpcPartUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureOriginPartName)))
+	return _signatureOriginPartName, win32.HRESULTError(int32(r1))
 }
 
 // SetSignatureOriginPartName dispatches through IOpcDigitalSignatureManager's vtable slot 4.
-func (self *IOpcDigitalSignatureManager) SetSignatureOriginPartName(signatureOriginPartName *IOpcPartUri) foundation.HRESULT {
+func (self *IOpcDigitalSignatureManager) SetSignatureOriginPartName(signatureOriginPartName *IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureOriginPartName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignatureEnumerator dispatches through IOpcDigitalSignatureManager's vtable slot 5.
-func (self *IOpcDigitalSignatureManager) GetSignatureEnumerator(signatureEnumerator **IOpcDigitalSignatureEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureManager) GetSignatureEnumerator() (*IOpcDigitalSignatureEnumerator, error) {
+	var _signatureEnumerator *IOpcDigitalSignatureEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureEnumerator)))
+	return _signatureEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // RemoveSignature dispatches through IOpcDigitalSignatureManager's vtable slot 6.
-func (self *IOpcDigitalSignatureManager) RemoveSignature(signaturePartName *IOpcPartUri) foundation.HRESULT {
+func (self *IOpcDigitalSignatureManager) RemoveSignature(signaturePartName *IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSigningOptions dispatches through IOpcDigitalSignatureManager's vtable slot 7.
-func (self *IOpcDigitalSignatureManager) CreateSigningOptions(signingOptions **IOpcSigningOptions) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signingOptions)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureManager) CreateSigningOptions() (*IOpcSigningOptions, error) {
+	var _signingOptions *IOpcSigningOptions
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signingOptions)))
+	return _signingOptions, win32.HRESULTError(int32(r1))
 }
 
 // Validate dispatches through IOpcDigitalSignatureManager's vtable slot 8.
-func (self *IOpcDigitalSignatureManager) Validate(signature *IOpcDigitalSignature, certificate *securitycryptography.CERT_CONTEXT, validationResult *OPC_SIGNATURE_VALIDATION_RESULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signature)), uintptr(unsafe.Pointer(certificate)), uintptr(unsafe.Pointer(validationResult)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureManager) Validate(signature *IOpcDigitalSignature, certificate *securitycryptography.CERT_CONTEXT) (OPC_SIGNATURE_VALIDATION_RESULT, error) {
+	var _validationResult OPC_SIGNATURE_VALIDATION_RESULT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signature)), uintptr(unsafe.Pointer(certificate)), uintptr(unsafe.Pointer(&_validationResult)))
+	return _validationResult, win32.HRESULTError(int32(r1))
 }
 
 // Sign dispatches through IOpcDigitalSignatureManager's vtable slot 9.
-func (self *IOpcDigitalSignatureManager) Sign(certificate *securitycryptography.CERT_CONTEXT, signingOptions *IOpcSigningOptions, digitalSignature **IOpcDigitalSignature) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificate)), uintptr(unsafe.Pointer(signingOptions)), uintptr(unsafe.Pointer(digitalSignature)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureManager) Sign(certificate *securitycryptography.CERT_CONTEXT, signingOptions *IOpcSigningOptions) (*IOpcDigitalSignature, error) {
+	var _digitalSignature *IOpcDigitalSignature
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificate)), uintptr(unsafe.Pointer(signingOptions)), uintptr(unsafe.Pointer(&_digitalSignature)))
+	return _digitalSignature, win32.HRESULTError(int32(r1))
 }
 
 // ReplaceSignatureXml dispatches through IOpcDigitalSignatureManager's vtable slot 10.
-func (self *IOpcDigitalSignatureManager) ReplaceSignatureXml(signaturePartName *IOpcPartUri, newSignatureXml *byte, count uint32, digitalSignature **IOpcDigitalSignature) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)), uintptr(unsafe.Pointer(newSignatureXml)), uintptr(count), uintptr(unsafe.Pointer(digitalSignature)))
-	return foundation.HRESULT(r1)
+func (self *IOpcDigitalSignatureManager) ReplaceSignatureXml(signaturePartName *IOpcPartUri, newSignatureXml *byte, count uint32) (*IOpcDigitalSignature, error) {
+	var _digitalSignature *IOpcDigitalSignature
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)), uintptr(unsafe.Pointer(newSignatureXml)), uintptr(count), uintptr(unsafe.Pointer(&_digitalSignature)))
+	return _digitalSignature, win32.HRESULTError(int32(r1))
 }
 
 // IOpcFactory: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcfactory
@@ -274,45 +298,53 @@ type IOpcFactory struct {
 var IID_IOpcFactory = win32.GUID{Data1: 0x6d0b4446, Data2: 0xcd73, Data3: 0x4ab3, Data4: [8]byte{0x94, 0xf4, 0x8c, 0xcd, 0xf6, 0x11, 0x61, 0x54}}
 
 // CreatePackageRootUri dispatches through IOpcFactory's vtable slot 3.
-func (self *IOpcFactory) CreatePackageRootUri(rootUri **IOpcUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rootUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcFactory) CreatePackageRootUri() (*IOpcUri, error) {
+	var _rootUri *IOpcUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_rootUri)))
+	return _rootUri, win32.HRESULTError(int32(r1))
 }
 
 // CreatePartUri dispatches through IOpcFactory's vtable slot 4.
-func (self *IOpcFactory) CreatePartUri(pwzUri foundation.PWSTR, partUri **IOpcPartUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwzUri)), uintptr(unsafe.Pointer(partUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcFactory) CreatePartUri(pwzUri string) (*IOpcPartUri, error) {
+	_pwzUri := win32.UTF16Ptr(pwzUri)
+	var _partUri *IOpcPartUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzUri)), uintptr(unsafe.Pointer(&_partUri)))
+	return _partUri, win32.HRESULTError(int32(r1))
 }
 
 // CreateStreamOnFile dispatches through IOpcFactory's vtable slot 5.
-func (self *IOpcFactory) CreateStreamOnFile(filename foundation.PWSTR, ioMode OPC_STREAM_IO_MODE, securityAttributes *security.SECURITY_ATTRIBUTES, dwFlagsAndAttributes uint32, stream **systemcom.IStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filename)), uintptr(ioMode), uintptr(unsafe.Pointer(securityAttributes)), uintptr(dwFlagsAndAttributes), uintptr(unsafe.Pointer(stream)))
-	return foundation.HRESULT(r1)
+func (self *IOpcFactory) CreateStreamOnFile(filename string, ioMode OPC_STREAM_IO_MODE, securityAttributes *security.SECURITY_ATTRIBUTES, dwFlagsAndAttributes uint32) (*systemcom.IStream, error) {
+	_filename := win32.UTF16Ptr(filename)
+	var _stream *systemcom.IStream
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_filename)), uintptr(ioMode), uintptr(unsafe.Pointer(securityAttributes)), uintptr(dwFlagsAndAttributes), uintptr(unsafe.Pointer(&_stream)))
+	return _stream, win32.HRESULTError(int32(r1))
 }
 
 // CreatePackage dispatches through IOpcFactory's vtable slot 6.
-func (self *IOpcFactory) CreatePackage(package_ **IOpcPackage) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(package_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcFactory) CreatePackage() (*IOpcPackage, error) {
+	var _package_ *IOpcPackage
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_package_)))
+	return _package_, win32.HRESULTError(int32(r1))
 }
 
 // ReadPackageFromStream dispatches through IOpcFactory's vtable slot 7.
-func (self *IOpcFactory) ReadPackageFromStream(stream *systemcom.IStream, flags OPC_READ_FLAGS, package_ **IOpcPackage) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(flags), uintptr(unsafe.Pointer(package_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcFactory) ReadPackageFromStream(stream *systemcom.IStream, flags OPC_READ_FLAGS) (*IOpcPackage, error) {
+	var _package_ *IOpcPackage
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)), uintptr(flags), uintptr(unsafe.Pointer(&_package_)))
+	return _package_, win32.HRESULTError(int32(r1))
 }
 
 // WritePackageToStream dispatches through IOpcFactory's vtable slot 8.
-func (self *IOpcFactory) WritePackageToStream(package_ *IOpcPackage, flags OPC_WRITE_FLAGS, stream *systemcom.IStream) foundation.HRESULT {
+func (self *IOpcFactory) WritePackageToStream(package_ *IOpcPackage, flags OPC_WRITE_FLAGS, stream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(package_)), uintptr(flags), uintptr(unsafe.Pointer(stream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDigitalSignatureManager dispatches through IOpcFactory's vtable slot 9.
-func (self *IOpcFactory) CreateDigitalSignatureManager(package_ *IOpcPackage, signatureManager **IOpcDigitalSignatureManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(package_)), uintptr(unsafe.Pointer(signatureManager)))
-	return foundation.HRESULT(r1)
+func (self *IOpcFactory) CreateDigitalSignatureManager(package_ *IOpcPackage) (*IOpcDigitalSignatureManager, error) {
+	var _signatureManager *IOpcDigitalSignatureManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(package_)), uintptr(unsafe.Pointer(&_signatureManager)))
+	return _signatureManager, win32.HRESULTError(int32(r1))
 }
 
 // IOpcPackage: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcpackage
@@ -325,15 +357,17 @@ type IOpcPackage struct {
 var IID_IOpcPackage = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, Data4: [8]byte{0x89, 0xc6, 0xfc, 0x7f, 0xb9, 0x79, 0xee, 0x70}}
 
 // GetPartSet dispatches through IOpcPackage's vtable slot 3.
-func (self *IOpcPackage) GetPartSet(partSet **IOpcPartSet) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partSet)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPackage) GetPartSet() (*IOpcPartSet, error) {
+	var _partSet *IOpcPartSet
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partSet)))
+	return _partSet, win32.HRESULTError(int32(r1))
 }
 
 // GetRelationshipSet dispatches through IOpcPackage's vtable slot 4.
-func (self *IOpcPackage) GetRelationshipSet(relationshipSet **IOpcRelationshipSet) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipSet)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPackage) GetRelationshipSet() (*IOpcRelationshipSet, error) {
+	var _relationshipSet *IOpcRelationshipSet
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSet)))
+	return _relationshipSet, win32.HRESULTError(int32(r1))
 }
 
 // IOpcPart: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcpart
@@ -346,33 +380,38 @@ type IOpcPart struct {
 var IID_IOpcPart = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, Data4: [8]byte{0x89, 0xc6, 0xfc, 0x7f, 0xb9, 0x79, 0xee, 0x71}}
 
 // GetRelationshipSet dispatches through IOpcPart's vtable slot 3.
-func (self *IOpcPart) GetRelationshipSet(relationshipSet **IOpcRelationshipSet) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipSet)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPart) GetRelationshipSet() (*IOpcRelationshipSet, error) {
+	var _relationshipSet *IOpcRelationshipSet
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSet)))
+	return _relationshipSet, win32.HRESULTError(int32(r1))
 }
 
 // GetContentStream dispatches through IOpcPart's vtable slot 4.
-func (self *IOpcPart) GetContentStream(stream **systemcom.IStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(stream)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPart) GetContentStream() (*systemcom.IStream, error) {
+	var _stream *systemcom.IStream
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_stream)))
+	return _stream, win32.HRESULTError(int32(r1))
 }
 
 // GetName dispatches through IOpcPart's vtable slot 5.
-func (self *IOpcPart) GetName(name **IOpcPartUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPart) GetName() (*IOpcPartUri, error) {
+	var _name *IOpcPartUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
+	return _name, win32.HRESULTError(int32(r1))
 }
 
 // GetContentType dispatches through IOpcPart's vtable slot 6.
-func (self *IOpcPart) GetContentType(contentType *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentType)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPart) GetContentType() (foundation.PWSTR, error) {
+	var _contentType foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentType)))
+	return _contentType, win32.HRESULTError(int32(r1))
 }
 
 // GetCompressionOptions dispatches through IOpcPart's vtable slot 7.
-func (self *IOpcPart) GetCompressionOptions(compressionOptions *OPC_COMPRESSION_OPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(compressionOptions)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPart) GetCompressionOptions() (OPC_COMPRESSION_OPTIONS, error) {
+	var _compressionOptions OPC_COMPRESSION_OPTIONS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_compressionOptions)))
+	return _compressionOptions, win32.HRESULTError(int32(r1))
 }
 
 // IOpcPartEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcpartenumerator
@@ -385,27 +424,31 @@ type IOpcPartEnumerator struct {
 var IID_IOpcPartEnumerator = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, Data4: [8]byte{0x89, 0xc6, 0xfc, 0x7f, 0xb9, 0x79, 0xee, 0x75}}
 
 // MoveNext dispatches through IOpcPartEnumerator's vtable slot 3.
-func (self *IOpcPartEnumerator) MoveNext(hasNext *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasNext)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
+	return _hasNext, win32.HRESULTError(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcPartEnumerator's vtable slot 4.
-func (self *IOpcPartEnumerator) MovePrevious(hasPrevious *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasPrevious)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
+	return _hasPrevious, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcPartEnumerator's vtable slot 5.
-func (self *IOpcPartEnumerator) GetCurrent(part **IOpcPart) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(part)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartEnumerator) GetCurrent() (*IOpcPart, error) {
+	var _part *IOpcPart
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_part)))
+	return _part, win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IOpcPartEnumerator's vtable slot 6.
-func (self *IOpcPartEnumerator) Clone(copy_ **IOpcPartEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(copy_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartEnumerator) Clone() (*IOpcPartEnumerator, error) {
+	var _copy_ *IOpcPartEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
+	return _copy_, win32.HRESULTError(int32(r1))
 }
 
 // IOpcPartSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcpartset
@@ -418,33 +461,38 @@ type IOpcPartSet struct {
 var IID_IOpcPartSet = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, Data4: [8]byte{0x89, 0xc6, 0xfc, 0x7f, 0xb9, 0x79, 0xee, 0x73}}
 
 // GetPart dispatches through IOpcPartSet's vtable slot 3.
-func (self *IOpcPartSet) GetPart(name *IOpcPartUri, part **IOpcPart) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(part)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartSet) GetPart(name *IOpcPartUri) (*IOpcPart, error) {
+	var _part *IOpcPart
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_part)))
+	return _part, win32.HRESULTError(int32(r1))
 }
 
 // CreatePart dispatches through IOpcPartSet's vtable slot 4.
-func (self *IOpcPartSet) CreatePart(name *IOpcPartUri, contentType foundation.PWSTR, compressionOptions OPC_COMPRESSION_OPTIONS, part **IOpcPart) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(contentType)), uintptr(compressionOptions), uintptr(unsafe.Pointer(part)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartSet) CreatePart(name *IOpcPartUri, contentType string, compressionOptions OPC_COMPRESSION_OPTIONS) (*IOpcPart, error) {
+	_contentType := win32.UTF16Ptr(contentType)
+	var _part *IOpcPart
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(_contentType)), uintptr(compressionOptions), uintptr(unsafe.Pointer(&_part)))
+	return _part, win32.HRESULTError(int32(r1))
 }
 
 // DeletePart dispatches through IOpcPartSet's vtable slot 5.
-func (self *IOpcPartSet) DeletePart(name *IOpcPartUri) foundation.HRESULT {
+func (self *IOpcPartSet) DeletePart(name *IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PartExists dispatches through IOpcPartSet's vtable slot 6.
-func (self *IOpcPartSet) PartExists(name *IOpcPartUri, partExists *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(partExists)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartSet) PartExists(name *IOpcPartUri) (foundation.BOOL, error) {
+	var _partExists foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_partExists)))
+	return _partExists, win32.HRESULTError(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcPartSet's vtable slot 7.
-func (self *IOpcPartSet) GetEnumerator(partEnumerator **IOpcPartEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartSet) GetEnumerator() (*IOpcPartEnumerator, error) {
+	var _partEnumerator *IOpcPartEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partEnumerator)))
+	return _partEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // IOpcPartUri: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcparturi
@@ -457,21 +505,24 @@ type IOpcPartUri struct {
 var IID_IOpcPartUri = win32.GUID{Data1: 0x7d3babe7, Data2: 0x88b2, Data3: 0x46ba, Data4: [8]byte{0x85, 0xcb, 0x42, 0x03, 0xcb, 0x01, 0x6c, 0x87}}
 
 // ComparePartUri dispatches through IOpcPartUri's vtable slot 31.
-func (self *IOpcPartUri) ComparePartUri(partUri *IOpcPartUri, comparisonResult *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(comparisonResult)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartUri) ComparePartUri(partUri *IOpcPartUri) (int32, error) {
+	var _comparisonResult int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(&_comparisonResult)))
+	return _comparisonResult, win32.HRESULTError(int32(r1))
 }
 
 // GetSourceUri dispatches through IOpcPartUri's vtable slot 32.
-func (self *IOpcPartUri) GetSourceUri(sourceUri **IOpcUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartUri) GetSourceUri() (*IOpcUri, error) {
+	var _sourceUri *IOpcUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sourceUri)))
+	return _sourceUri, win32.HRESULTError(int32(r1))
 }
 
 // IsRelationshipsPartUri dispatches through IOpcPartUri's vtable slot 33.
-func (self *IOpcPartUri) IsRelationshipsPartUri(isRelationshipUri *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isRelationshipUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcPartUri) IsRelationshipsPartUri() (foundation.BOOL, error) {
+	var _isRelationshipUri foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isRelationshipUri)))
+	return _isRelationshipUri, win32.HRESULTError(int32(r1))
 }
 
 // IOpcRelationship: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationship
@@ -484,33 +535,38 @@ type IOpcRelationship struct {
 var IID_IOpcRelationship = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, Data4: [8]byte{0x89, 0xc6, 0xfc, 0x7f, 0xb9, 0x79, 0xee, 0x72}}
 
 // GetId dispatches through IOpcRelationship's vtable slot 3.
-func (self *IOpcRelationship) GetId(relationshipIdentifier *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipIdentifier)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationship) GetId() (foundation.PWSTR, error) {
+	var _relationshipIdentifier foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipIdentifier)))
+	return _relationshipIdentifier, win32.HRESULTError(int32(r1))
 }
 
 // GetRelationshipType dispatches through IOpcRelationship's vtable slot 4.
-func (self *IOpcRelationship) GetRelationshipType(relationshipType *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipType)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationship) GetRelationshipType() (foundation.PWSTR, error) {
+	var _relationshipType foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipType)))
+	return _relationshipType, win32.HRESULTError(int32(r1))
 }
 
 // GetSourceUri dispatches through IOpcRelationship's vtable slot 5.
-func (self *IOpcRelationship) GetSourceUri(sourceUri **IOpcUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationship) GetSourceUri() (*IOpcUri, error) {
+	var _sourceUri *IOpcUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sourceUri)))
+	return _sourceUri, win32.HRESULTError(int32(r1))
 }
 
 // GetTargetUri dispatches through IOpcRelationship's vtable slot 6.
-func (self *IOpcRelationship) GetTargetUri(targetUri **systemcom.IUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(targetUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationship) GetTargetUri() (*systemcom.IUri, error) {
+	var _targetUri *systemcom.IUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_targetUri)))
+	return _targetUri, win32.HRESULTError(int32(r1))
 }
 
 // GetTargetMode dispatches through IOpcRelationship's vtable slot 7.
-func (self *IOpcRelationship) GetTargetMode(targetMode *OPC_URI_TARGET_MODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(targetMode)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationship) GetTargetMode() (OPC_URI_TARGET_MODE, error) {
+	var _targetMode OPC_URI_TARGET_MODE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_targetMode)))
+	return _targetMode, win32.HRESULTError(int32(r1))
 }
 
 // IOpcRelationshipEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipenumerator
@@ -523,27 +579,31 @@ type IOpcRelationshipEnumerator struct {
 var IID_IOpcRelationshipEnumerator = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, Data4: [8]byte{0x89, 0xc6, 0xfc, 0x7f, 0xb9, 0x79, 0xee, 0x76}}
 
 // MoveNext dispatches through IOpcRelationshipEnumerator's vtable slot 3.
-func (self *IOpcRelationshipEnumerator) MoveNext(hasNext *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasNext)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
+	return _hasNext, win32.HRESULTError(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcRelationshipEnumerator's vtable slot 4.
-func (self *IOpcRelationshipEnumerator) MovePrevious(hasPrevious *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasPrevious)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
+	return _hasPrevious, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcRelationshipEnumerator's vtable slot 5.
-func (self *IOpcRelationshipEnumerator) GetCurrent(relationship **IOpcRelationship) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationship)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipEnumerator) GetCurrent() (*IOpcRelationship, error) {
+	var _relationship *IOpcRelationship
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationship)))
+	return _relationship, win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IOpcRelationshipEnumerator's vtable slot 6.
-func (self *IOpcRelationshipEnumerator) Clone(copy_ **IOpcRelationshipEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(copy_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipEnumerator) Clone() (*IOpcRelationshipEnumerator, error) {
+	var _copy_ *IOpcRelationshipEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
+	return _copy_, win32.HRESULTError(int32(r1))
 }
 
 // IOpcRelationshipSelector: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipselector
@@ -556,15 +616,17 @@ type IOpcRelationshipSelector struct {
 var IID_IOpcRelationshipSelector = win32.GUID{Data1: 0xf8f26c7f, Data2: 0xb28f, Data3: 0x4899, Data4: [8]byte{0x84, 0xc8, 0x5d, 0x56, 0x39, 0xed, 0xe7, 0x5f}}
 
 // GetSelectorType dispatches through IOpcRelationshipSelector's vtable slot 3.
-func (self *IOpcRelationshipSelector) GetSelectorType(selector *OPC_RELATIONSHIP_SELECTOR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(selector)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSelector) GetSelectorType() (OPC_RELATIONSHIP_SELECTOR, error) {
+	var _selector OPC_RELATIONSHIP_SELECTOR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_selector)))
+	return _selector, win32.HRESULTError(int32(r1))
 }
 
 // GetSelectionCriterion dispatches through IOpcRelationshipSelector's vtable slot 4.
-func (self *IOpcRelationshipSelector) GetSelectionCriterion(selectionCriterion *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(selectionCriterion)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSelector) GetSelectionCriterion() (foundation.PWSTR, error) {
+	var _selectionCriterion foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_selectionCriterion)))
+	return _selectionCriterion, win32.HRESULTError(int32(r1))
 }
 
 // IOpcRelationshipSelectorEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipselectorenumerator
@@ -577,27 +639,31 @@ type IOpcRelationshipSelectorEnumerator struct {
 var IID_IOpcRelationshipSelectorEnumerator = win32.GUID{Data1: 0x5e50a181, Data2: 0xa91b, Data3: 0x48ac, Data4: [8]byte{0x88, 0xd2, 0xbc, 0xa3, 0xd8, 0xf8, 0xc0, 0xb1}}
 
 // MoveNext dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 3.
-func (self *IOpcRelationshipSelectorEnumerator) MoveNext(hasNext *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasNext)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSelectorEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
+	return _hasNext, win32.HRESULTError(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 4.
-func (self *IOpcRelationshipSelectorEnumerator) MovePrevious(hasPrevious *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasPrevious)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSelectorEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
+	return _hasPrevious, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 5.
-func (self *IOpcRelationshipSelectorEnumerator) GetCurrent(relationshipSelector **IOpcRelationshipSelector) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipSelector)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSelectorEnumerator) GetCurrent() (*IOpcRelationshipSelector, error) {
+	var _relationshipSelector *IOpcRelationshipSelector
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSelector)))
+	return _relationshipSelector, win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 6.
-func (self *IOpcRelationshipSelectorEnumerator) Clone(copy_ **IOpcRelationshipSelectorEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(copy_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSelectorEnumerator) Clone() (*IOpcRelationshipSelectorEnumerator, error) {
+	var _copy_ *IOpcRelationshipSelectorEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
+	return _copy_, win32.HRESULTError(int32(r1))
 }
 
 // IOpcRelationshipSelectorSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipselectorset
@@ -610,21 +676,24 @@ type IOpcRelationshipSelectorSet struct {
 var IID_IOpcRelationshipSelectorSet = win32.GUID{Data1: 0x6e34c269, Data2: 0xa4d3, Data3: 0x47c0, Data4: [8]byte{0xb5, 0xc4, 0x87, 0xff, 0x2b, 0x3b, 0x61, 0x36}}
 
 // Create dispatches through IOpcRelationshipSelectorSet's vtable slot 3.
-func (self *IOpcRelationshipSelectorSet) Create(selector OPC_RELATIONSHIP_SELECTOR, selectionCriterion foundation.PWSTR, relationshipSelector **IOpcRelationshipSelector) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(selector), uintptr(unsafe.Pointer(selectionCriterion)), uintptr(unsafe.Pointer(relationshipSelector)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSelectorSet) Create(selector OPC_RELATIONSHIP_SELECTOR, selectionCriterion string) (*IOpcRelationshipSelector, error) {
+	_selectionCriterion := win32.UTF16Ptr(selectionCriterion)
+	var _relationshipSelector *IOpcRelationshipSelector
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(selector), uintptr(unsafe.Pointer(_selectionCriterion)), uintptr(unsafe.Pointer(&_relationshipSelector)))
+	return _relationshipSelector, win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IOpcRelationshipSelectorSet's vtable slot 4.
-func (self *IOpcRelationshipSelectorSet) Delete(relationshipSelector *IOpcRelationshipSelector) foundation.HRESULT {
+func (self *IOpcRelationshipSelectorSet) Delete(relationshipSelector *IOpcRelationshipSelector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipSelector)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcRelationshipSelectorSet's vtable slot 5.
-func (self *IOpcRelationshipSelectorSet) GetEnumerator(relationshipSelectorEnumerator **IOpcRelationshipSelectorEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipSelectorEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSelectorSet) GetEnumerator() (*IOpcRelationshipSelectorEnumerator, error) {
+	var _relationshipSelectorEnumerator *IOpcRelationshipSelectorEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSelectorEnumerator)))
+	return _relationshipSelectorEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // IOpcRelationshipSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationshipset
@@ -637,45 +706,57 @@ type IOpcRelationshipSet struct {
 var IID_IOpcRelationshipSet = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, Data4: [8]byte{0x89, 0xc6, 0xfc, 0x7f, 0xb9, 0x79, 0xee, 0x74}}
 
 // GetRelationship dispatches through IOpcRelationshipSet's vtable slot 3.
-func (self *IOpcRelationshipSet) GetRelationship(relationshipIdentifier foundation.PWSTR, relationship **IOpcRelationship) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipIdentifier)), uintptr(unsafe.Pointer(relationship)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSet) GetRelationship(relationshipIdentifier string) (*IOpcRelationship, error) {
+	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
+	var _relationship *IOpcRelationship
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipIdentifier)), uintptr(unsafe.Pointer(&_relationship)))
+	return _relationship, win32.HRESULTError(int32(r1))
 }
 
 // CreateRelationship dispatches through IOpcRelationshipSet's vtable slot 4.
-func (self *IOpcRelationshipSet) CreateRelationship(relationshipIdentifier foundation.PWSTR, relationshipType foundation.PWSTR, targetUri *systemcom.IUri, targetMode OPC_URI_TARGET_MODE, relationship **IOpcRelationship) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipIdentifier)), uintptr(unsafe.Pointer(relationshipType)), uintptr(unsafe.Pointer(targetUri)), uintptr(targetMode), uintptr(unsafe.Pointer(relationship)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSet) CreateRelationship(relationshipIdentifier string, relationshipType string, targetUri *systemcom.IUri, targetMode OPC_URI_TARGET_MODE) (*IOpcRelationship, error) {
+	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
+	_relationshipType := win32.UTF16Ptr(relationshipType)
+	var _relationship *IOpcRelationship
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipIdentifier)), uintptr(unsafe.Pointer(_relationshipType)), uintptr(unsafe.Pointer(targetUri)), uintptr(targetMode), uintptr(unsafe.Pointer(&_relationship)))
+	return _relationship, win32.HRESULTError(int32(r1))
 }
 
 // DeleteRelationship dispatches through IOpcRelationshipSet's vtable slot 5.
-func (self *IOpcRelationshipSet) DeleteRelationship(relationshipIdentifier foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipIdentifier)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSet) DeleteRelationship(relationshipIdentifier string) error {
+	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipIdentifier)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RelationshipExists dispatches through IOpcRelationshipSet's vtable slot 6.
-func (self *IOpcRelationshipSet) RelationshipExists(relationshipIdentifier foundation.PWSTR, relationshipExists *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipIdentifier)), uintptr(unsafe.Pointer(relationshipExists)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSet) RelationshipExists(relationshipIdentifier string) (foundation.BOOL, error) {
+	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
+	var _relationshipExists foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipIdentifier)), uintptr(unsafe.Pointer(&_relationshipExists)))
+	return _relationshipExists, win32.HRESULTError(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcRelationshipSet's vtable slot 7.
-func (self *IOpcRelationshipSet) GetEnumerator(relationshipEnumerator **IOpcRelationshipEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSet) GetEnumerator() (*IOpcRelationshipEnumerator, error) {
+	var _relationshipEnumerator *IOpcRelationshipEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipEnumerator)))
+	return _relationshipEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // GetEnumeratorForType dispatches through IOpcRelationshipSet's vtable slot 8.
-func (self *IOpcRelationshipSet) GetEnumeratorForType(relationshipType foundation.PWSTR, relationshipEnumerator **IOpcRelationshipEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipType)), uintptr(unsafe.Pointer(relationshipEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSet) GetEnumeratorForType(relationshipType string) (*IOpcRelationshipEnumerator, error) {
+	_relationshipType := win32.UTF16Ptr(relationshipType)
+	var _relationshipEnumerator *IOpcRelationshipEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipType)), uintptr(unsafe.Pointer(&_relationshipEnumerator)))
+	return _relationshipEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // GetRelationshipsContentStream dispatches through IOpcRelationshipSet's vtable slot 9.
-func (self *IOpcRelationshipSet) GetRelationshipsContentStream(contents **systemcom.IStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contents)))
-	return foundation.HRESULT(r1)
+func (self *IOpcRelationshipSet) GetRelationshipsContentStream() (*systemcom.IStream, error) {
+	var _contents *systemcom.IStream
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contents)))
+	return _contents, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignatureCustomObject: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturecustomobject
@@ -688,9 +769,9 @@ type IOpcSignatureCustomObject struct {
 var IID_IOpcSignatureCustomObject = win32.GUID{Data1: 0x5d77a19e, Data2: 0x62c1, Data3: 0x44e7, Data4: [8]byte{0xbe, 0xcd, 0x45, 0xda, 0x5a, 0xe5, 0x1a, 0x56}}
 
 // GetXml dispatches through IOpcSignatureCustomObject's vtable slot 3.
-func (self *IOpcSignatureCustomObject) GetXml(xmlMarkup **byte, count *uint32) foundation.HRESULT {
+func (self *IOpcSignatureCustomObject) GetXml(xmlMarkup **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xmlMarkup)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignatureCustomObjectEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturecustomobjectenumerator
@@ -703,27 +784,31 @@ type IOpcSignatureCustomObjectEnumerator struct {
 var IID_IOpcSignatureCustomObjectEnumerator = win32.GUID{Data1: 0x5ee4fe1d, Data2: 0xe1b0, Data3: 0x4683, Data4: [8]byte{0x80, 0x79, 0x7e, 0xa0, 0xfc, 0xf8, 0x0b, 0x4c}}
 
 // MoveNext dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 3.
-func (self *IOpcSignatureCustomObjectEnumerator) MoveNext(hasNext *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasNext)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureCustomObjectEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
+	return _hasNext, win32.HRESULTError(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 4.
-func (self *IOpcSignatureCustomObjectEnumerator) MovePrevious(hasPrevious *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasPrevious)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureCustomObjectEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
+	return _hasPrevious, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 5.
-func (self *IOpcSignatureCustomObjectEnumerator) GetCurrent(customObject **IOpcSignatureCustomObject) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(customObject)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureCustomObjectEnumerator) GetCurrent() (*IOpcSignatureCustomObject, error) {
+	var _customObject *IOpcSignatureCustomObject
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObject)))
+	return _customObject, win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 6.
-func (self *IOpcSignatureCustomObjectEnumerator) Clone(copy_ **IOpcSignatureCustomObjectEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(copy_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureCustomObjectEnumerator) Clone() (*IOpcSignatureCustomObjectEnumerator, error) {
+	var _copy_ *IOpcSignatureCustomObjectEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
+	return _copy_, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignatureCustomObjectSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturecustomobjectset
@@ -736,21 +821,23 @@ type IOpcSignatureCustomObjectSet struct {
 var IID_IOpcSignatureCustomObjectSet = win32.GUID{Data1: 0x8f792ac5, Data2: 0x7947, Data3: 0x4e11, Data4: [8]byte{0xbc, 0x3d, 0x26, 0x59, 0xff, 0x04, 0x6a, 0xe1}}
 
 // Create dispatches through IOpcSignatureCustomObjectSet's vtable slot 3.
-func (self *IOpcSignatureCustomObjectSet) Create(xmlMarkup *byte, count uint32, customObject **IOpcSignatureCustomObject) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xmlMarkup)), uintptr(count), uintptr(unsafe.Pointer(customObject)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureCustomObjectSet) Create(xmlMarkup *byte, count uint32) (*IOpcSignatureCustomObject, error) {
+	var _customObject *IOpcSignatureCustomObject
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xmlMarkup)), uintptr(count), uintptr(unsafe.Pointer(&_customObject)))
+	return _customObject, win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IOpcSignatureCustomObjectSet's vtable slot 4.
-func (self *IOpcSignatureCustomObjectSet) Delete(customObject *IOpcSignatureCustomObject) foundation.HRESULT {
+func (self *IOpcSignatureCustomObjectSet) Delete(customObject *IOpcSignatureCustomObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(customObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcSignatureCustomObjectSet's vtable slot 5.
-func (self *IOpcSignatureCustomObjectSet) GetEnumerator(customObjectEnumerator **IOpcSignatureCustomObjectEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(customObjectEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureCustomObjectSet) GetEnumerator() (*IOpcSignatureCustomObjectEnumerator, error) {
+	var _customObjectEnumerator *IOpcSignatureCustomObjectEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObjectEnumerator)))
+	return _customObjectEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignaturePartReference: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturepartreference
@@ -763,33 +850,37 @@ type IOpcSignaturePartReference struct {
 var IID_IOpcSignaturePartReference = win32.GUID{Data1: 0xe24231ca, Data2: 0x59f4, Data3: 0x484e, Data4: [8]byte{0xb6, 0x4b, 0x36, 0xee, 0xda, 0x36, 0x07, 0x2c}}
 
 // GetPartName dispatches through IOpcSignaturePartReference's vtable slot 3.
-func (self *IOpcSignaturePartReference) GetPartName(partName **IOpcPartUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partName)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReference) GetPartName() (*IOpcPartUri, error) {
+	var _partName *IOpcPartUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partName)))
+	return _partName, win32.HRESULTError(int32(r1))
 }
 
 // GetContentType dispatches through IOpcSignaturePartReference's vtable slot 4.
-func (self *IOpcSignaturePartReference) GetContentType(contentType *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentType)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReference) GetContentType() (foundation.PWSTR, error) {
+	var _contentType foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_contentType)))
+	return _contentType, win32.HRESULTError(int32(r1))
 }
 
 // GetDigestMethod dispatches through IOpcSignaturePartReference's vtable slot 5.
-func (self *IOpcSignaturePartReference) GetDigestMethod(digestMethod *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReference) GetDigestMethod() (foundation.PWSTR, error) {
+	var _digestMethod foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digestMethod)))
+	return _digestMethod, win32.HRESULTError(int32(r1))
 }
 
 // GetDigestValue dispatches through IOpcSignaturePartReference's vtable slot 6.
-func (self *IOpcSignaturePartReference) GetDigestValue(digestValue **byte, count *uint32) foundation.HRESULT {
+func (self *IOpcSignaturePartReference) GetDigestValue(digestValue **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestValue)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransformMethod dispatches through IOpcSignaturePartReference's vtable slot 7.
-func (self *IOpcSignaturePartReference) GetTransformMethod(transformMethod *OPC_CANONICALIZATION_METHOD) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transformMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReference) GetTransformMethod() (OPC_CANONICALIZATION_METHOD, error) {
+	var _transformMethod OPC_CANONICALIZATION_METHOD
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transformMethod)))
+	return _transformMethod, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignaturePartReferenceEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturepartreferenceenumerator
@@ -802,27 +893,31 @@ type IOpcSignaturePartReferenceEnumerator struct {
 var IID_IOpcSignaturePartReferenceEnumerator = win32.GUID{Data1: 0x80eb1561, Data2: 0x8c77, Data3: 0x49cf, Data4: [8]byte{0x82, 0x66, 0x45, 0x9b, 0x35, 0x6e, 0xe9, 0x9a}}
 
 // MoveNext dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 3.
-func (self *IOpcSignaturePartReferenceEnumerator) MoveNext(hasNext *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasNext)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
+	return _hasNext, win32.HRESULTError(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 4.
-func (self *IOpcSignaturePartReferenceEnumerator) MovePrevious(hasPrevious *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasPrevious)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
+	return _hasPrevious, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 5.
-func (self *IOpcSignaturePartReferenceEnumerator) GetCurrent(partReference **IOpcSignaturePartReference) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partReference)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReferenceEnumerator) GetCurrent() (*IOpcSignaturePartReference, error) {
+	var _partReference *IOpcSignaturePartReference
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partReference)))
+	return _partReference, win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 6.
-func (self *IOpcSignaturePartReferenceEnumerator) Clone(copy_ **IOpcSignaturePartReferenceEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(copy_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReferenceEnumerator) Clone() (*IOpcSignaturePartReferenceEnumerator, error) {
+	var _copy_ *IOpcSignaturePartReferenceEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
+	return _copy_, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignaturePartReferenceSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturepartreferenceset
@@ -835,21 +930,24 @@ type IOpcSignaturePartReferenceSet struct {
 var IID_IOpcSignaturePartReferenceSet = win32.GUID{Data1: 0x6c9fe28c, Data2: 0xecd9, Data3: 0x4b22, Data4: [8]byte{0x9d, 0x36, 0x7f, 0xdd, 0xe6, 0x70, 0xfe, 0xc0}}
 
 // Create dispatches through IOpcSignaturePartReferenceSet's vtable slot 3.
-func (self *IOpcSignaturePartReferenceSet) Create(partUri *IOpcPartUri, digestMethod foundation.PWSTR, transformMethod OPC_CANONICALIZATION_METHOD, partReference **IOpcSignaturePartReference) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(digestMethod)), uintptr(transformMethod), uintptr(unsafe.Pointer(partReference)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReferenceSet) Create(partUri *IOpcPartUri, digestMethod string, transformMethod OPC_CANONICALIZATION_METHOD) (*IOpcSignaturePartReference, error) {
+	_digestMethod := win32.UTF16Ptr(digestMethod)
+	var _partReference *IOpcSignaturePartReference
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partUri)), uintptr(unsafe.Pointer(_digestMethod)), uintptr(transformMethod), uintptr(unsafe.Pointer(&_partReference)))
+	return _partReference, win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IOpcSignaturePartReferenceSet's vtable slot 4.
-func (self *IOpcSignaturePartReferenceSet) Delete(partReference *IOpcSignaturePartReference) foundation.HRESULT {
+func (self *IOpcSignaturePartReferenceSet) Delete(partReference *IOpcSignaturePartReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partReference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcSignaturePartReferenceSet's vtable slot 5.
-func (self *IOpcSignaturePartReferenceSet) GetEnumerator(partReferenceEnumerator **IOpcSignaturePartReferenceEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partReferenceEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignaturePartReferenceSet) GetEnumerator() (*IOpcSignaturePartReferenceEnumerator, error) {
+	var _partReferenceEnumerator *IOpcSignaturePartReferenceEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partReferenceEnumerator)))
+	return _partReferenceEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignatureReference: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturereference
@@ -862,39 +960,44 @@ type IOpcSignatureReference struct {
 var IID_IOpcSignatureReference = win32.GUID{Data1: 0x1b47005e, Data2: 0x3011, Data3: 0x4edc, Data4: [8]byte{0xbe, 0x6f, 0x0f, 0x65, 0xe5, 0xab, 0x03, 0x42}}
 
 // GetId dispatches through IOpcSignatureReference's vtable slot 3.
-func (self *IOpcSignatureReference) GetId(referenceId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceId)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReference) GetId() (foundation.PWSTR, error) {
+	var _referenceId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_referenceId)))
+	return _referenceId, win32.HRESULTError(int32(r1))
 }
 
 // GetUri dispatches through IOpcSignatureReference's vtable slot 4.
-func (self *IOpcSignatureReference) GetUri(referenceUri **systemcom.IUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReference) GetUri() (*systemcom.IUri, error) {
+	var _referenceUri *systemcom.IUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_referenceUri)))
+	return _referenceUri, win32.HRESULTError(int32(r1))
 }
 
 // GetType dispatches through IOpcSignatureReference's vtable slot 5.
-func (self *IOpcSignatureReference) GetType(type_ *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReference) GetType() (foundation.PWSTR, error) {
+	var _type_ foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
+	return _type_, win32.HRESULTError(int32(r1))
 }
 
 // GetTransformMethod dispatches through IOpcSignatureReference's vtable slot 6.
-func (self *IOpcSignatureReference) GetTransformMethod(transformMethod *OPC_CANONICALIZATION_METHOD) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transformMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReference) GetTransformMethod() (OPC_CANONICALIZATION_METHOD, error) {
+	var _transformMethod OPC_CANONICALIZATION_METHOD
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transformMethod)))
+	return _transformMethod, win32.HRESULTError(int32(r1))
 }
 
 // GetDigestMethod dispatches through IOpcSignatureReference's vtable slot 7.
-func (self *IOpcSignatureReference) GetDigestMethod(digestMethod *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReference) GetDigestMethod() (foundation.PWSTR, error) {
+	var _digestMethod foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digestMethod)))
+	return _digestMethod, win32.HRESULTError(int32(r1))
 }
 
 // GetDigestValue dispatches through IOpcSignatureReference's vtable slot 8.
-func (self *IOpcSignatureReference) GetDigestValue(digestValue **byte, count *uint32) foundation.HRESULT {
+func (self *IOpcSignatureReference) GetDigestValue(digestValue **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestValue)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignatureReferenceEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturereferenceenumerator
@@ -907,27 +1010,31 @@ type IOpcSignatureReferenceEnumerator struct {
 var IID_IOpcSignatureReferenceEnumerator = win32.GUID{Data1: 0xcfa59a45, Data2: 0x28b1, Data3: 0x4868, Data4: [8]byte{0x96, 0x9e, 0xfa, 0x80, 0x97, 0xfd, 0xc1, 0x2a}}
 
 // MoveNext dispatches through IOpcSignatureReferenceEnumerator's vtable slot 3.
-func (self *IOpcSignatureReferenceEnumerator) MoveNext(hasNext *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasNext)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
+	return _hasNext, win32.HRESULTError(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignatureReferenceEnumerator's vtable slot 4.
-func (self *IOpcSignatureReferenceEnumerator) MovePrevious(hasPrevious *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasPrevious)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
+	return _hasPrevious, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignatureReferenceEnumerator's vtable slot 5.
-func (self *IOpcSignatureReferenceEnumerator) GetCurrent(reference **IOpcSignatureReference) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reference)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReferenceEnumerator) GetCurrent() (*IOpcSignatureReference, error) {
+	var _reference *IOpcSignatureReference
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_reference)))
+	return _reference, win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IOpcSignatureReferenceEnumerator's vtable slot 6.
-func (self *IOpcSignatureReferenceEnumerator) Clone(copy_ **IOpcSignatureReferenceEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(copy_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReferenceEnumerator) Clone() (*IOpcSignatureReferenceEnumerator, error) {
+	var _copy_ *IOpcSignatureReferenceEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
+	return _copy_, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignatureReferenceSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturereferenceset
@@ -940,21 +1047,26 @@ type IOpcSignatureReferenceSet struct {
 var IID_IOpcSignatureReferenceSet = win32.GUID{Data1: 0xf3b02d31, Data2: 0xab12, Data3: 0x42dd, Data4: [8]byte{0x9e, 0x2f, 0x2b, 0x16, 0x76, 0x1c, 0x3c, 0x1e}}
 
 // Create dispatches through IOpcSignatureReferenceSet's vtable slot 3.
-func (self *IOpcSignatureReferenceSet) Create(referenceUri *systemcom.IUri, referenceId foundation.PWSTR, type_ foundation.PWSTR, digestMethod foundation.PWSTR, transformMethod OPC_CANONICALIZATION_METHOD, reference **IOpcSignatureReference) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceUri)), uintptr(unsafe.Pointer(referenceId)), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(digestMethod)), uintptr(transformMethod), uintptr(unsafe.Pointer(reference)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReferenceSet) Create(referenceUri *systemcom.IUri, referenceId string, type_ string, digestMethod string, transformMethod OPC_CANONICALIZATION_METHOD) (*IOpcSignatureReference, error) {
+	_referenceId := win32.UTF16Ptr(referenceId)
+	_type_ := win32.UTF16Ptr(type_)
+	_digestMethod := win32.UTF16Ptr(digestMethod)
+	var _reference *IOpcSignatureReference
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceUri)), uintptr(unsafe.Pointer(_referenceId)), uintptr(unsafe.Pointer(_type_)), uintptr(unsafe.Pointer(_digestMethod)), uintptr(transformMethod), uintptr(unsafe.Pointer(&_reference)))
+	return _reference, win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IOpcSignatureReferenceSet's vtable slot 4.
-func (self *IOpcSignatureReferenceSet) Delete(reference *IOpcSignatureReference) foundation.HRESULT {
+func (self *IOpcSignatureReferenceSet) Delete(reference *IOpcSignatureReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcSignatureReferenceSet's vtable slot 5.
-func (self *IOpcSignatureReferenceSet) GetEnumerator(referenceEnumerator **IOpcSignatureReferenceEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureReferenceSet) GetEnumerator() (*IOpcSignatureReferenceEnumerator, error) {
+	var _referenceEnumerator *IOpcSignatureReferenceEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_referenceEnumerator)))
+	return _referenceEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignatureRelationshipReference: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturerelationshipreference
@@ -967,39 +1079,44 @@ type IOpcSignatureRelationshipReference struct {
 var IID_IOpcSignatureRelationshipReference = win32.GUID{Data1: 0x57babac6, Data2: 0x9d4a, Data3: 0x4e50, Data4: [8]byte{0x8b, 0x86, 0xe5, 0xd4, 0x05, 0x1e, 0xae, 0x7c}}
 
 // GetSourceUri dispatches through IOpcSignatureRelationshipReference's vtable slot 3.
-func (self *IOpcSignatureRelationshipReference) GetSourceUri(sourceUri **IOpcUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReference) GetSourceUri() (*IOpcUri, error) {
+	var _sourceUri *IOpcUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sourceUri)))
+	return _sourceUri, win32.HRESULTError(int32(r1))
 }
 
 // GetDigestMethod dispatches through IOpcSignatureRelationshipReference's vtable slot 4.
-func (self *IOpcSignatureRelationshipReference) GetDigestMethod(digestMethod *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReference) GetDigestMethod() (foundation.PWSTR, error) {
+	var _digestMethod foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digestMethod)))
+	return _digestMethod, win32.HRESULTError(int32(r1))
 }
 
 // GetDigestValue dispatches through IOpcSignatureRelationshipReference's vtable slot 5.
-func (self *IOpcSignatureRelationshipReference) GetDigestValue(digestValue **byte, count *uint32) foundation.HRESULT {
+func (self *IOpcSignatureRelationshipReference) GetDigestValue(digestValue **byte, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestValue)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransformMethod dispatches through IOpcSignatureRelationshipReference's vtable slot 6.
-func (self *IOpcSignatureRelationshipReference) GetTransformMethod(transformMethod *OPC_CANONICALIZATION_METHOD) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transformMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReference) GetTransformMethod() (OPC_CANONICALIZATION_METHOD, error) {
+	var _transformMethod OPC_CANONICALIZATION_METHOD
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_transformMethod)))
+	return _transformMethod, win32.HRESULTError(int32(r1))
 }
 
 // GetRelationshipSigningOption dispatches through IOpcSignatureRelationshipReference's vtable slot 7.
-func (self *IOpcSignatureRelationshipReference) GetRelationshipSigningOption(relationshipSigningOption *OPC_RELATIONSHIPS_SIGNING_OPTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipSigningOption)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReference) GetRelationshipSigningOption() (OPC_RELATIONSHIPS_SIGNING_OPTION, error) {
+	var _relationshipSigningOption OPC_RELATIONSHIPS_SIGNING_OPTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipSigningOption)))
+	return _relationshipSigningOption, win32.HRESULTError(int32(r1))
 }
 
 // GetRelationshipSelectorEnumerator dispatches through IOpcSignatureRelationshipReference's vtable slot 8.
-func (self *IOpcSignatureRelationshipReference) GetRelationshipSelectorEnumerator(selectorEnumerator **IOpcRelationshipSelectorEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(selectorEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReference) GetRelationshipSelectorEnumerator() (*IOpcRelationshipSelectorEnumerator, error) {
+	var _selectorEnumerator *IOpcRelationshipSelectorEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_selectorEnumerator)))
+	return _selectorEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignatureRelationshipReferenceEnumerator: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturerelationshipreferenceenumerator
@@ -1012,27 +1129,31 @@ type IOpcSignatureRelationshipReferenceEnumerator struct {
 var IID_IOpcSignatureRelationshipReferenceEnumerator = win32.GUID{Data1: 0x773ba3e4, Data2: 0xf021, Data3: 0x48e4, Data4: [8]byte{0xaa, 0x04, 0x98, 0x16, 0xdb, 0x5d, 0x34, 0x95}}
 
 // MoveNext dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 3.
-func (self *IOpcSignatureRelationshipReferenceEnumerator) MoveNext(hasNext *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasNext)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
+	var _hasNext foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasNext)))
+	return _hasNext, win32.HRESULTError(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 4.
-func (self *IOpcSignatureRelationshipReferenceEnumerator) MovePrevious(hasPrevious *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasPrevious)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
+	var _hasPrevious foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hasPrevious)))
+	return _hasPrevious, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 5.
-func (self *IOpcSignatureRelationshipReferenceEnumerator) GetCurrent(relationshipReference **IOpcSignatureRelationshipReference) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipReference)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReferenceEnumerator) GetCurrent() (*IOpcSignatureRelationshipReference, error) {
+	var _relationshipReference *IOpcSignatureRelationshipReference
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipReference)))
+	return _relationshipReference, win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 6.
-func (self *IOpcSignatureRelationshipReferenceEnumerator) Clone(copy_ **IOpcSignatureRelationshipReferenceEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(copy_)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReferenceEnumerator) Clone() (*IOpcSignatureRelationshipReferenceEnumerator, error) {
+	var _copy_ *IOpcSignatureRelationshipReferenceEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_copy_)))
+	return _copy_, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSignatureRelationshipReferenceSet: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsignaturerelationshipreferenceset
@@ -1045,27 +1166,30 @@ type IOpcSignatureRelationshipReferenceSet struct {
 var IID_IOpcSignatureRelationshipReferenceSet = win32.GUID{Data1: 0x9f863ca5, Data2: 0x3631, Data3: 0x404c, Data4: [8]byte{0x82, 0x8d, 0x80, 0x7e, 0x07, 0x15, 0x06, 0x9b}}
 
 // Create dispatches through IOpcSignatureRelationshipReferenceSet's vtable slot 3.
-func (self *IOpcSignatureRelationshipReferenceSet) Create(sourceUri *IOpcUri, digestMethod foundation.PWSTR, relationshipSigningOption OPC_RELATIONSHIPS_SIGNING_OPTION, selectorSet *IOpcRelationshipSelectorSet, transformMethod OPC_CANONICALIZATION_METHOD, relationshipReference **IOpcSignatureRelationshipReference) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceUri)), uintptr(unsafe.Pointer(digestMethod)), uintptr(relationshipSigningOption), uintptr(unsafe.Pointer(selectorSet)), uintptr(transformMethod), uintptr(unsafe.Pointer(relationshipReference)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReferenceSet) Create(sourceUri *IOpcUri, digestMethod string, relationshipSigningOption OPC_RELATIONSHIPS_SIGNING_OPTION, selectorSet *IOpcRelationshipSelectorSet, transformMethod OPC_CANONICALIZATION_METHOD) (*IOpcSignatureRelationshipReference, error) {
+	_digestMethod := win32.UTF16Ptr(digestMethod)
+	var _relationshipReference *IOpcSignatureRelationshipReference
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceUri)), uintptr(unsafe.Pointer(_digestMethod)), uintptr(relationshipSigningOption), uintptr(unsafe.Pointer(selectorSet)), uintptr(transformMethod), uintptr(unsafe.Pointer(&_relationshipReference)))
+	return _relationshipReference, win32.HRESULTError(int32(r1))
 }
 
 // CreateRelationshipSelectorSet dispatches through IOpcSignatureRelationshipReferenceSet's vtable slot 4.
-func (self *IOpcSignatureRelationshipReferenceSet) CreateRelationshipSelectorSet(selectorSet **IOpcRelationshipSelectorSet) foundation.HRESULT {
+func (self *IOpcSignatureRelationshipReferenceSet) CreateRelationshipSelectorSet(selectorSet **IOpcRelationshipSelectorSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(selectorSet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IOpcSignatureRelationshipReferenceSet's vtable slot 5.
-func (self *IOpcSignatureRelationshipReferenceSet) Delete(relationshipReference *IOpcSignatureRelationshipReference) foundation.HRESULT {
+func (self *IOpcSignatureRelationshipReferenceSet) Delete(relationshipReference *IOpcSignatureRelationshipReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipReference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcSignatureRelationshipReferenceSet's vtable slot 6.
-func (self *IOpcSignatureRelationshipReferenceSet) GetEnumerator(relationshipReferenceEnumerator **IOpcSignatureRelationshipReferenceEnumerator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipReferenceEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSignatureRelationshipReferenceSet) GetEnumerator() (*IOpcSignatureRelationshipReferenceEnumerator, error) {
+	var _relationshipReferenceEnumerator *IOpcSignatureRelationshipReferenceEnumerator
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipReferenceEnumerator)))
+	return _relationshipReferenceEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // IOpcSigningOptions: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcsigningoptions
@@ -1078,105 +1202,119 @@ type IOpcSigningOptions struct {
 var IID_IOpcSigningOptions = win32.GUID{Data1: 0x50d2d6a5, Data2: 0x7aeb, Data3: 0x46c0, Data4: [8]byte{0xb2, 0x41, 0x43, 0xab, 0x0e, 0x9b, 0x40, 0x7e}}
 
 // GetSignatureId dispatches through IOpcSigningOptions's vtable slot 3.
-func (self *IOpcSigningOptions) GetSignatureId(signatureId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureId)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetSignatureId() (foundation.PWSTR, error) {
+	var _signatureId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureId)))
+	return _signatureId, win32.HRESULTError(int32(r1))
 }
 
 // SetSignatureId dispatches through IOpcSigningOptions's vtable slot 4.
-func (self *IOpcSigningOptions) SetSignatureId(signatureId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureId)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) SetSignatureId(signatureId string) error {
+	_signatureId := win32.UTF16Ptr(signatureId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignatureMethod dispatches through IOpcSigningOptions's vtable slot 5.
-func (self *IOpcSigningOptions) GetSignatureMethod(signatureMethod *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetSignatureMethod() (foundation.PWSTR, error) {
+	var _signatureMethod foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signatureMethod)))
+	return _signatureMethod, win32.HRESULTError(int32(r1))
 }
 
 // SetSignatureMethod dispatches through IOpcSigningOptions's vtable slot 6.
-func (self *IOpcSigningOptions) SetSignatureMethod(signatureMethod foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) SetSignatureMethod(signatureMethod string) error {
+	_signatureMethod := win32.UTF16Ptr(signatureMethod)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureMethod)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultDigestMethod dispatches through IOpcSigningOptions's vtable slot 7.
-func (self *IOpcSigningOptions) GetDefaultDigestMethod(digestMethod *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetDefaultDigestMethod() (foundation.PWSTR, error) {
+	var _digestMethod foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_digestMethod)))
+	return _digestMethod, win32.HRESULTError(int32(r1))
 }
 
 // SetDefaultDigestMethod dispatches through IOpcSigningOptions's vtable slot 8.
-func (self *IOpcSigningOptions) SetDefaultDigestMethod(digestMethod foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(digestMethod)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) SetDefaultDigestMethod(digestMethod string) error {
+	_digestMethod := win32.UTF16Ptr(digestMethod)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_digestMethod)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCertificateEmbeddingOption dispatches through IOpcSigningOptions's vtable slot 9.
-func (self *IOpcSigningOptions) GetCertificateEmbeddingOption(embeddingOption *OPC_CERTIFICATE_EMBEDDING_OPTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(embeddingOption)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetCertificateEmbeddingOption() (OPC_CERTIFICATE_EMBEDDING_OPTION, error) {
+	var _embeddingOption OPC_CERTIFICATE_EMBEDDING_OPTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_embeddingOption)))
+	return _embeddingOption, win32.HRESULTError(int32(r1))
 }
 
 // SetCertificateEmbeddingOption dispatches through IOpcSigningOptions's vtable slot 10.
-func (self *IOpcSigningOptions) SetCertificateEmbeddingOption(embeddingOption OPC_CERTIFICATE_EMBEDDING_OPTION) foundation.HRESULT {
+func (self *IOpcSigningOptions) SetCertificateEmbeddingOption(embeddingOption OPC_CERTIFICATE_EMBEDDING_OPTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(embeddingOption))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimeFormat dispatches through IOpcSigningOptions's vtable slot 11.
-func (self *IOpcSigningOptions) GetTimeFormat(timeFormat *OPC_SIGNATURE_TIME_FORMAT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(timeFormat)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetTimeFormat() (OPC_SIGNATURE_TIME_FORMAT, error) {
+	var _timeFormat OPC_SIGNATURE_TIME_FORMAT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeFormat)))
+	return _timeFormat, win32.HRESULTError(int32(r1))
 }
 
 // SetTimeFormat dispatches through IOpcSigningOptions's vtable slot 12.
-func (self *IOpcSigningOptions) SetTimeFormat(timeFormat OPC_SIGNATURE_TIME_FORMAT) foundation.HRESULT {
+func (self *IOpcSigningOptions) SetTimeFormat(timeFormat OPC_SIGNATURE_TIME_FORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(timeFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignaturePartReferenceSet dispatches through IOpcSigningOptions's vtable slot 13.
-func (self *IOpcSigningOptions) GetSignaturePartReferenceSet(partReferenceSet **IOpcSignaturePartReferenceSet) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(partReferenceSet)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetSignaturePartReferenceSet() (*IOpcSignaturePartReferenceSet, error) {
+	var _partReferenceSet *IOpcSignaturePartReferenceSet
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_partReferenceSet)))
+	return _partReferenceSet, win32.HRESULTError(int32(r1))
 }
 
 // GetSignatureRelationshipReferenceSet dispatches through IOpcSigningOptions's vtable slot 14.
-func (self *IOpcSigningOptions) GetSignatureRelationshipReferenceSet(relationshipReferenceSet **IOpcSignatureRelationshipReferenceSet) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipReferenceSet)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetSignatureRelationshipReferenceSet() (*IOpcSignatureRelationshipReferenceSet, error) {
+	var _relationshipReferenceSet *IOpcSignatureRelationshipReferenceSet
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipReferenceSet)))
+	return _relationshipReferenceSet, win32.HRESULTError(int32(r1))
 }
 
 // GetCustomObjectSet dispatches through IOpcSigningOptions's vtable slot 15.
-func (self *IOpcSigningOptions) GetCustomObjectSet(customObjectSet **IOpcSignatureCustomObjectSet) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(customObjectSet)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetCustomObjectSet() (*IOpcSignatureCustomObjectSet, error) {
+	var _customObjectSet *IOpcSignatureCustomObjectSet
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customObjectSet)))
+	return _customObjectSet, win32.HRESULTError(int32(r1))
 }
 
 // GetCustomReferenceSet dispatches through IOpcSigningOptions's vtable slot 16.
-func (self *IOpcSigningOptions) GetCustomReferenceSet(customReferenceSet **IOpcSignatureReferenceSet) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(customReferenceSet)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetCustomReferenceSet() (*IOpcSignatureReferenceSet, error) {
+	var _customReferenceSet *IOpcSignatureReferenceSet
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customReferenceSet)))
+	return _customReferenceSet, win32.HRESULTError(int32(r1))
 }
 
 // GetCertificateSet dispatches through IOpcSigningOptions's vtable slot 17.
-func (self *IOpcSigningOptions) GetCertificateSet(certificateSet **IOpcCertificateSet) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificateSet)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetCertificateSet() (*IOpcCertificateSet, error) {
+	var _certificateSet *IOpcCertificateSet
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_certificateSet)))
+	return _certificateSet, win32.HRESULTError(int32(r1))
 }
 
 // GetSignaturePartName dispatches through IOpcSigningOptions's vtable slot 18.
-func (self *IOpcSigningOptions) GetSignaturePartName(signaturePartName **IOpcPartUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)))
-	return foundation.HRESULT(r1)
+func (self *IOpcSigningOptions) GetSignaturePartName() (*IOpcPartUri, error) {
+	var _signaturePartName *IOpcPartUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signaturePartName)))
+	return _signaturePartName, win32.HRESULTError(int32(r1))
 }
 
 // SetSignaturePartName dispatches through IOpcSigningOptions's vtable slot 19.
-func (self *IOpcSigningOptions) SetSignaturePartName(signaturePartName *IOpcPartUri) foundation.HRESULT {
+func (self *IOpcSigningOptions) SetSignaturePartName(signaturePartName *IOpcPartUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IOpcUri: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcuri
@@ -1189,19 +1327,22 @@ type IOpcUri struct {
 var IID_IOpcUri = win32.GUID{Data1: 0xbc9c1b9b, Data2: 0xd62c, Data3: 0x49eb, Data4: [8]byte{0xae, 0xf0, 0x3b, 0x4e, 0x0b, 0x28, 0xeb, 0xed}}
 
 // GetRelationshipsPartUri dispatches through IOpcUri's vtable slot 28.
-func (self *IOpcUri) GetRelationshipsPartUri(relationshipPartUri **IOpcPartUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relationshipPartUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcUri) GetRelationshipsPartUri() (*IOpcPartUri, error) {
+	var _relationshipPartUri *IOpcPartUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_relationshipPartUri)))
+	return _relationshipPartUri, win32.HRESULTError(int32(r1))
 }
 
 // GetRelativeUri dispatches through IOpcUri's vtable slot 29.
-func (self *IOpcUri) GetRelativeUri(targetPartUri *IOpcPartUri, relativeUri **systemcom.IUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(targetPartUri)), uintptr(unsafe.Pointer(relativeUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcUri) GetRelativeUri(targetPartUri *IOpcPartUri) (*systemcom.IUri, error) {
+	var _relativeUri *systemcom.IUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(targetPartUri)), uintptr(unsafe.Pointer(&_relativeUri)))
+	return _relativeUri, win32.HRESULTError(int32(r1))
 }
 
 // CombinePartUri dispatches through IOpcUri's vtable slot 30.
-func (self *IOpcUri) CombinePartUri(relativeUri *systemcom.IUri, combinedUri **IOpcPartUri) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relativeUri)), uintptr(unsafe.Pointer(combinedUri)))
-	return foundation.HRESULT(r1)
+func (self *IOpcUri) CombinePartUri(relativeUri *systemcom.IUri) (*IOpcPartUri, error) {
+	var _combinedUri *IOpcPartUri
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(relativeUri)), uintptr(unsafe.Pointer(&_combinedUri)))
+	return _combinedUri, win32.HRESULTError(int32(r1))
 }

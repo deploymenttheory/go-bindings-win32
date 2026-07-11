@@ -24,39 +24,44 @@ type IRDPSRAPIApplication struct {
 var IID_IRDPSRAPIApplication = win32.GUID{Data1: 0x41e7a09d, Data2: 0xeb7a, Data3: 0x436e, Data4: [8]byte{0x93, 0x5d, 0x78, 0x0c, 0xa2, 0x62, 0x83, 0x24}}
 
 // Get_Windows dispatches through IRDPSRAPIApplication's vtable slot 7.
-func (self *IRDPSRAPIApplication) Get_Windows(pWindowList **IRDPSRAPIWindowList) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWindowList)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplication) Get_Windows() (*IRDPSRAPIWindowList, error) {
+	var _pWindowList *IRDPSRAPIWindowList
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pWindowList)))
+	return _pWindowList, win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IRDPSRAPIApplication's vtable slot 8.
-func (self *IRDPSRAPIApplication) Get_Id(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplication) Get_Id() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Shared dispatches through IRDPSRAPIApplication's vtable slot 9.
-func (self *IRDPSRAPIApplication) Get_Shared(pRetVal *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplication) Get_Shared() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_Shared dispatches through IRDPSRAPIApplication's vtable slot 10.
-func (self *IRDPSRAPIApplication) Put_Shared(NewVal foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRDPSRAPIApplication) Put_Shared(NewVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(NewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through IRDPSRAPIApplication's vtable slot 11.
-func (self *IRDPSRAPIApplication) Get_Name(pRetVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplication) Get_Name() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Flags dispatches through IRDPSRAPIApplication's vtable slot 12.
-func (self *IRDPSRAPIApplication) Get_Flags(pdwFlags *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplication) Get_Flags() (uint32, error) {
+	var _pdwFlags uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwFlags)))
+	return _pdwFlags, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIApplicationFilter: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiapplicationfilter
@@ -69,27 +74,30 @@ type IRDPSRAPIApplicationFilter struct {
 var IID_IRDPSRAPIApplicationFilter = win32.GUID{Data1: 0xd20f10ca, Data2: 0x6637, Data3: 0x4f06, Data4: [8]byte{0xb1, 0xd5, 0x27, 0x7e, 0xa7, 0xe5, 0x16, 0x0d}}
 
 // Get_Applications dispatches through IRDPSRAPIApplicationFilter's vtable slot 7.
-func (self *IRDPSRAPIApplicationFilter) Get_Applications(pApplications **IRDPSRAPIApplicationList) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pApplications)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplicationFilter) Get_Applications() (*IRDPSRAPIApplicationList, error) {
+	var _pApplications *IRDPSRAPIApplicationList
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pApplications)))
+	return _pApplications, win32.HRESULTError(int32(r1))
 }
 
 // Get_Windows dispatches through IRDPSRAPIApplicationFilter's vtable slot 8.
-func (self *IRDPSRAPIApplicationFilter) Get_Windows(pWindows **IRDPSRAPIWindowList) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWindows)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplicationFilter) Get_Windows() (*IRDPSRAPIWindowList, error) {
+	var _pWindows *IRDPSRAPIWindowList
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pWindows)))
+	return _pWindows, win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through IRDPSRAPIApplicationFilter's vtable slot 9.
-func (self *IRDPSRAPIApplicationFilter) Get_Enabled(pRetVal *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplicationFilter) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_Enabled dispatches through IRDPSRAPIApplicationFilter's vtable slot 10.
-func (self *IRDPSRAPIApplicationFilter) Put_Enabled(NewVal foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRDPSRAPIApplicationFilter) Put_Enabled(NewVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(NewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIApplicationList: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiapplicationlist
@@ -102,15 +110,17 @@ type IRDPSRAPIApplicationList struct {
 var IID_IRDPSRAPIApplicationList = win32.GUID{Data1: 0xd4b4aeb3, Data2: 0x22dc, Data3: 0x4837, Data4: [8]byte{0xb3, 0xb6, 0x42, 0xea, 0x25, 0x17, 0x84, 0x9a}}
 
 // Get__NewEnum dispatches through IRDPSRAPIApplicationList's vtable slot 7.
-func (self *IRDPSRAPIApplicationList) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplicationList) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through IRDPSRAPIApplicationList's vtable slot 8.
-func (self *IRDPSRAPIApplicationList) Get_Item(item int32, pApplication **IRDPSRAPIApplication) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(item), uintptr(unsafe.Pointer(pApplication)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIApplicationList) Get_Item(item int32) (*IRDPSRAPIApplication, error) {
+	var _pApplication *IRDPSRAPIApplication
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(item), uintptr(unsafe.Pointer(&_pApplication)))
+	return _pApplication, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIAttendee: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiattendee
@@ -123,51 +133,57 @@ type IRDPSRAPIAttendee struct {
 var IID_IRDPSRAPIAttendee = win32.GUID{Data1: 0xec0671b3, Data2: 0x1b78, Data3: 0x4b80, Data4: [8]byte{0xa4, 0x64, 0x91, 0x32, 0x24, 0x75, 0x43, 0xe3}}
 
 // Get_Id dispatches through IRDPSRAPIAttendee's vtable slot 7.
-func (self *IRDPSRAPIAttendee) Get_Id(pId *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pId)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendee) Get_Id() (int32, error) {
+	var _pId int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pId)))
+	return _pId, win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteName dispatches through IRDPSRAPIAttendee's vtable slot 8.
-func (self *IRDPSRAPIAttendee) Get_RemoteName(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendee) Get_RemoteName() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ControlLevel dispatches through IRDPSRAPIAttendee's vtable slot 9.
-func (self *IRDPSRAPIAttendee) Get_ControlLevel(pVal *CTRL_LEVEL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendee) Get_ControlLevel() (CTRL_LEVEL, error) {
+	var _pVal CTRL_LEVEL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_ControlLevel dispatches through IRDPSRAPIAttendee's vtable slot 10.
-func (self *IRDPSRAPIAttendee) Put_ControlLevel(pNewVal CTRL_LEVEL) foundation.HRESULT {
+func (self *IRDPSRAPIAttendee) Put_ControlLevel(pNewVal CTRL_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(pNewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Invitation dispatches through IRDPSRAPIAttendee's vtable slot 11.
-func (self *IRDPSRAPIAttendee) Get_Invitation(ppVal **IRDPSRAPIInvitation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendee) Get_Invitation() (*IRDPSRAPIInvitation, error) {
+	var _ppVal *IRDPSRAPIInvitation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // TerminateConnection dispatches through IRDPSRAPIAttendee's vtable slot 12.
-func (self *IRDPSRAPIAttendee) TerminateConnection() foundation.HRESULT {
+func (self *IRDPSRAPIAttendee) TerminateConnection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Flags dispatches through IRDPSRAPIAttendee's vtable slot 13.
-func (self *IRDPSRAPIAttendee) Get_Flags(plFlags *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFlags)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendee) Get_Flags() (int32, error) {
+	var _plFlags int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFlags)))
+	return _plFlags, win32.HRESULTError(int32(r1))
 }
 
 // Get_ConnectivityInfo dispatches through IRDPSRAPIAttendee's vtable slot 14.
-func (self *IRDPSRAPIAttendee) Get_ConnectivityInfo(ppVal **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendee) Get_ConnectivityInfo() (*systemcom.IUnknown, error) {
+	var _ppVal *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIAttendeeDisconnectInfo: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiattendeedisconnectinfo
@@ -180,21 +196,24 @@ type IRDPSRAPIAttendeeDisconnectInfo struct {
 var IID_IRDPSRAPIAttendeeDisconnectInfo = win32.GUID{Data1: 0xc187689f, Data2: 0x447c, Data3: 0x44a1, Data4: [8]byte{0x9c, 0x14, 0xff, 0xfb, 0xb3, 0xb7, 0xec, 0x17}}
 
 // Get_Attendee dispatches through IRDPSRAPIAttendeeDisconnectInfo's vtable slot 7.
-func (self *IRDPSRAPIAttendeeDisconnectInfo) Get_Attendee(retval **IRDPSRAPIAttendee) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendeeDisconnectInfo) Get_Attendee() (*IRDPSRAPIAttendee, error) {
+	var _retval *IRDPSRAPIAttendee
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Reason dispatches through IRDPSRAPIAttendeeDisconnectInfo's vtable slot 8.
-func (self *IRDPSRAPIAttendeeDisconnectInfo) Get_Reason(pReason *ATTENDEE_DISCONNECT_REASON) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReason)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendeeDisconnectInfo) Get_Reason() (ATTENDEE_DISCONNECT_REASON, error) {
+	var _pReason ATTENDEE_DISCONNECT_REASON
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pReason)))
+	return _pReason, win32.HRESULTError(int32(r1))
 }
 
 // Get_Code dispatches through IRDPSRAPIAttendeeDisconnectInfo's vtable slot 9.
-func (self *IRDPSRAPIAttendeeDisconnectInfo) Get_Code(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendeeDisconnectInfo) Get_Code() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIAttendeeManager: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiattendeemanager
@@ -207,15 +226,17 @@ type IRDPSRAPIAttendeeManager struct {
 var IID_IRDPSRAPIAttendeeManager = win32.GUID{Data1: 0xba3a37e8, Data2: 0x33da, Data3: 0x4749, Data4: [8]byte{0x8d, 0xa0, 0x07, 0xfa, 0x34, 0xda, 0x79, 0x44}}
 
 // Get__NewEnum dispatches through IRDPSRAPIAttendeeManager's vtable slot 7.
-func (self *IRDPSRAPIAttendeeManager) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendeeManager) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through IRDPSRAPIAttendeeManager's vtable slot 8.
-func (self *IRDPSRAPIAttendeeManager) Get_Item(id int32, ppItem **IRDPSRAPIAttendee) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(id), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIAttendeeManager) Get_Item(id int32) (*IRDPSRAPIAttendee, error) {
+	var _ppItem *IRDPSRAPIAttendee
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(id), uintptr(unsafe.Pointer(&_ppItem)))
+	return _ppItem, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIAudioStream: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiaudiostream
@@ -228,33 +249,33 @@ type IRDPSRAPIAudioStream struct {
 var IID_IRDPSRAPIAudioStream = win32.GUID{Data1: 0xe3e30ef9, Data2: 0x89c6, Data3: 0x4541, Data4: [8]byte{0xba, 0x3b, 0x19, 0x33, 0x6a, 0xc6, 0xd3, 0x1c}}
 
 // Initialize dispatches through IRDPSRAPIAudioStream's vtable slot 3.
-func (self *IRDPSRAPIAudioStream) Initialize(pnPeriodInHundredNsIntervals *int64) foundation.HRESULT {
+func (self *IRDPSRAPIAudioStream) Initialize(pnPeriodInHundredNsIntervals *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnPeriodInHundredNsIntervals)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IRDPSRAPIAudioStream's vtable slot 4.
-func (self *IRDPSRAPIAudioStream) Start() foundation.HRESULT {
+func (self *IRDPSRAPIAudioStream) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IRDPSRAPIAudioStream's vtable slot 5.
-func (self *IRDPSRAPIAudioStream) Stop() foundation.HRESULT {
+func (self *IRDPSRAPIAudioStream) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBuffer dispatches through IRDPSRAPIAudioStream's vtable slot 6.
-func (self *IRDPSRAPIAudioStream) GetBuffer(ppbData **byte, pcbData *uint32, pTimestamp *uint64) foundation.HRESULT {
+func (self *IRDPSRAPIAudioStream) GetBuffer(ppbData **byte, pcbData *uint32, pTimestamp *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppbData)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(pTimestamp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeBuffer dispatches through IRDPSRAPIAudioStream's vtable slot 7.
-func (self *IRDPSRAPIAudioStream) FreeBuffer() foundation.HRESULT {
+func (self *IRDPSRAPIAudioStream) FreeBuffer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIClipboardUseEvents: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiclipboarduseevents
@@ -267,9 +288,10 @@ type IRDPSRAPIClipboardUseEvents struct {
 var IID_IRDPSRAPIClipboardUseEvents = win32.GUID{Data1: 0xd559f59a, Data2: 0x7a27, Data3: 0x4138, Data4: [8]byte{0x87, 0x63, 0x24, 0x7c, 0xe5, 0xf6, 0x59, 0xa8}}
 
 // OnPasteFromClipboard dispatches through IRDPSRAPIClipboardUseEvents's vtable slot 3.
-func (self *IRDPSRAPIClipboardUseEvents) OnPasteFromClipboard(clipboardFormat uint32, pAttendee *systemcom.IDispatch, pRetVal *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(clipboardFormat), uintptr(unsafe.Pointer(pAttendee)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIClipboardUseEvents) OnPasteFromClipboard(clipboardFormat uint32, pAttendee *systemcom.IDispatch) (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(clipboardFormat), uintptr(unsafe.Pointer(pAttendee)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IID: aa1e42b5-496d-4ca4-a690-348dcb2ec4ad
@@ -281,15 +303,16 @@ type IRDPSRAPIDebug struct {
 var IID_IRDPSRAPIDebug = win32.GUID{Data1: 0xaa1e42b5, Data2: 0x496d, Data3: 0x4ca4, Data4: [8]byte{0xa6, 0x90, 0x34, 0x8d, 0xcb, 0x2e, 0xc4, 0xad}}
 
 // Put_CLXCmdLine dispatches through IRDPSRAPIDebug's vtable slot 3.
-func (self *IRDPSRAPIDebug) Put_CLXCmdLine(CLXCmdLine foundation.BSTR) foundation.HRESULT {
+func (self *IRDPSRAPIDebug) Put_CLXCmdLine(CLXCmdLine foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CLXCmdLine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CLXCmdLine dispatches through IRDPSRAPIDebug's vtable slot 4.
-func (self *IRDPSRAPIDebug) Get_CLXCmdLine(pCLXCmdLine *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCLXCmdLine)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIDebug) Get_CLXCmdLine() (foundation.BSTR, error) {
+	var _pCLXCmdLine foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCLXCmdLine)))
+	return _pCLXCmdLine, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIFrameBuffer: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiframebuffer
@@ -302,27 +325,31 @@ type IRDPSRAPIFrameBuffer struct {
 var IID_IRDPSRAPIFrameBuffer = win32.GUID{Data1: 0x3d67e7d2, Data2: 0xb27b, Data3: 0x448e, Data4: [8]byte{0x81, 0xb3, 0xc6, 0x11, 0x0e, 0xd8, 0xb4, 0xbe}}
 
 // Get_Width dispatches through IRDPSRAPIFrameBuffer's vtable slot 7.
-func (self *IRDPSRAPIFrameBuffer) Get_Width(plWidth *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plWidth)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIFrameBuffer) Get_Width() (int32, error) {
+	var _plWidth int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plWidth)))
+	return _plWidth, win32.HRESULTError(int32(r1))
 }
 
 // Get_Height dispatches through IRDPSRAPIFrameBuffer's vtable slot 8.
-func (self *IRDPSRAPIFrameBuffer) Get_Height(plHeight *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHeight)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIFrameBuffer) Get_Height() (int32, error) {
+	var _plHeight int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plHeight)))
+	return _plHeight, win32.HRESULTError(int32(r1))
 }
 
 // Get_Bpp dispatches through IRDPSRAPIFrameBuffer's vtable slot 9.
-func (self *IRDPSRAPIFrameBuffer) Get_Bpp(plBpp *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBpp)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIFrameBuffer) Get_Bpp() (int32, error) {
+	var _plBpp int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plBpp)))
+	return _plBpp, win32.HRESULTError(int32(r1))
 }
 
 // GetFrameBufferBits dispatches through IRDPSRAPIFrameBuffer's vtable slot 10.
-func (self *IRDPSRAPIFrameBuffer) GetFrameBufferBits(x int32, y int32, Width int32, Heigth int32, ppBits **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y), uintptr(Width), uintptr(Heigth), uintptr(unsafe.Pointer(ppBits)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIFrameBuffer) GetFrameBufferBits(x int32, y int32, Width int32, Heigth int32) (*systemcom.SAFEARRAY, error) {
+	var _ppBits *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y), uintptr(Width), uintptr(Heigth), uintptr(unsafe.Pointer(&_ppBits)))
+	return _ppBits, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIInvitation: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiinvitation
@@ -335,45 +362,50 @@ type IRDPSRAPIInvitation struct {
 var IID_IRDPSRAPIInvitation = win32.GUID{Data1: 0x4fac1d43, Data2: 0xfc51, Data3: 0x45bb, Data4: [8]byte{0xb1, 0xb4, 0x2b, 0x53, 0xaa, 0x56, 0x2f, 0xa3}}
 
 // Get_ConnectionString dispatches through IRDPSRAPIInvitation's vtable slot 7.
-func (self *IRDPSRAPIInvitation) Get_ConnectionString(pbstrVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIInvitation) Get_ConnectionString() (foundation.BSTR, error) {
+	var _pbstrVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrVal)))
+	return _pbstrVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_GroupName dispatches through IRDPSRAPIInvitation's vtable slot 8.
-func (self *IRDPSRAPIInvitation) Get_GroupName(pbstrVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIInvitation) Get_GroupName() (foundation.BSTR, error) {
+	var _pbstrVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrVal)))
+	return _pbstrVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Password dispatches through IRDPSRAPIInvitation's vtable slot 9.
-func (self *IRDPSRAPIInvitation) Get_Password(pbstrVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIInvitation) Get_Password() (foundation.BSTR, error) {
+	var _pbstrVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrVal)))
+	return _pbstrVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_AttendeeLimit dispatches through IRDPSRAPIInvitation's vtable slot 10.
-func (self *IRDPSRAPIInvitation) Get_AttendeeLimit(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIInvitation) Get_AttendeeLimit() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_AttendeeLimit dispatches through IRDPSRAPIInvitation's vtable slot 11.
-func (self *IRDPSRAPIInvitation) Put_AttendeeLimit(NewVal int32) foundation.HRESULT {
+func (self *IRDPSRAPIInvitation) Put_AttendeeLimit(NewVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(NewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Revoked dispatches through IRDPSRAPIInvitation's vtable slot 12.
-func (self *IRDPSRAPIInvitation) Get_Revoked(pRetVal *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIInvitation) Get_Revoked() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_Revoked dispatches through IRDPSRAPIInvitation's vtable slot 13.
-func (self *IRDPSRAPIInvitation) Put_Revoked(NewVal foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRDPSRAPIInvitation) Put_Revoked(NewVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(NewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIInvitationManager: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiinvitationmanager
@@ -386,21 +418,24 @@ type IRDPSRAPIInvitationManager struct {
 var IID_IRDPSRAPIInvitationManager = win32.GUID{Data1: 0x4722b049, Data2: 0x92c3, Data3: 0x4c2d, Data4: [8]byte{0x8a, 0x65, 0xf7, 0x34, 0x8f, 0x64, 0x4d, 0xcf}}
 
 // Get__NewEnum dispatches through IRDPSRAPIInvitationManager's vtable slot 7.
-func (self *IRDPSRAPIInvitationManager) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIInvitationManager) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IRDPSRAPIInvitationManager's vtable slot 9.
-func (self *IRDPSRAPIInvitationManager) Get_Count(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIInvitationManager) Get_Count() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // CreateInvitation dispatches through IRDPSRAPIInvitationManager's vtable slot 10.
-func (self *IRDPSRAPIInvitationManager) CreateInvitation(bstrAuthString foundation.BSTR, bstrGroupName foundation.BSTR, bstrPassword foundation.BSTR, AttendeeLimit int32, ppInvitation **IRDPSRAPIInvitation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAuthString)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(bstrPassword)), uintptr(AttendeeLimit), uintptr(unsafe.Pointer(ppInvitation)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIInvitationManager) CreateInvitation(bstrAuthString foundation.BSTR, bstrGroupName foundation.BSTR, bstrPassword foundation.BSTR, AttendeeLimit int32) (*IRDPSRAPIInvitation, error) {
+	var _ppInvitation *IRDPSRAPIInvitation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAuthString)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(bstrPassword)), uintptr(AttendeeLimit), uintptr(unsafe.Pointer(&_ppInvitation)))
+	return _ppInvitation, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIPerfCounterLogger: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiperfcounterlogger
@@ -413,9 +448,9 @@ type IRDPSRAPIPerfCounterLogger struct {
 var IID_IRDPSRAPIPerfCounterLogger = win32.GUID{Data1: 0x071c2533, Data2: 0x0fa4, Data3: 0x4e8f, Data4: [8]byte{0xae, 0x83, 0x9c, 0x10, 0xb4, 0x30, 0x5a, 0xb5}}
 
 // LogValue dispatches through IRDPSRAPIPerfCounterLogger's vtable slot 3.
-func (self *IRDPSRAPIPerfCounterLogger) LogValue(lValue int64) foundation.HRESULT {
+func (self *IRDPSRAPIPerfCounterLogger) LogValue(lValue int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIPerfCounterLoggingManager: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiperfcounterloggingmanager
@@ -428,9 +463,9 @@ type IRDPSRAPIPerfCounterLoggingManager struct {
 var IID_IRDPSRAPIPerfCounterLoggingManager = win32.GUID{Data1: 0x9a512c86, Data2: 0xac6e, Data3: 0x4a8e, Data4: [8]byte{0xb1, 0xa4, 0xfc, 0xef, 0x36, 0x3f, 0x6e, 0x64}}
 
 // CreateLogger dispatches through IRDPSRAPIPerfCounterLoggingManager's vtable slot 3.
-func (self *IRDPSRAPIPerfCounterLoggingManager) CreateLogger(bstrCounterName foundation.BSTR, ppLogger **IRDPSRAPIPerfCounterLogger) foundation.HRESULT {
+func (self *IRDPSRAPIPerfCounterLoggingManager) CreateLogger(bstrCounterName foundation.BSTR, ppLogger **IRDPSRAPIPerfCounterLogger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCounterName)), uintptr(unsafe.Pointer(ppLogger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPISessionProperties: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapisessionproperties
@@ -443,9 +478,10 @@ type IRDPSRAPISessionProperties struct {
 var IID_IRDPSRAPISessionProperties = win32.GUID{Data1: 0x339b24f2, Data2: 0x9bc0, Data3: 0x4f16, Data4: [8]byte{0x9a, 0xac, 0xf1, 0x65, 0x43, 0x3d, 0x13, 0xd4}}
 
 // Get_Property dispatches through IRDPSRAPISessionProperties's vtable slot 7.
-func (self *IRDPSRAPISessionProperties) Get_Property(PropertyName foundation.BSTR, pVal *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPISessionProperties) Get_Property(PropertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pVal systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPISharingSession: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapisharingsession
@@ -458,87 +494,93 @@ type IRDPSRAPISharingSession struct {
 var IID_IRDPSRAPISharingSession = win32.GUID{Data1: 0xeeb20886, Data2: 0xe470, Data3: 0x4cf6, Data4: [8]byte{0x84, 0x2b, 0x27, 0x39, 0xc0, 0xec, 0x5c, 0xfb}}
 
 // Open dispatches through IRDPSRAPISharingSession's vtable slot 7.
-func (self *IRDPSRAPISharingSession) Open() foundation.HRESULT {
+func (self *IRDPSRAPISharingSession) Open() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IRDPSRAPISharingSession's vtable slot 8.
-func (self *IRDPSRAPISharingSession) Close() foundation.HRESULT {
+func (self *IRDPSRAPISharingSession) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ColorDepth dispatches through IRDPSRAPISharingSession's vtable slot 9.
-func (self *IRDPSRAPISharingSession) Put_ColorDepth(colorDepth int32) foundation.HRESULT {
+func (self *IRDPSRAPISharingSession) Put_ColorDepth(colorDepth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(colorDepth))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ColorDepth dispatches through IRDPSRAPISharingSession's vtable slot 10.
-func (self *IRDPSRAPISharingSession) Get_ColorDepth(pColorDepth *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorDepth)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPISharingSession) Get_ColorDepth() (int32, error) {
+	var _pColorDepth int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pColorDepth)))
+	return _pColorDepth, win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IRDPSRAPISharingSession's vtable slot 11.
-func (self *IRDPSRAPISharingSession) Get_Properties(ppVal **IRDPSRAPISessionProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPISharingSession) Get_Properties() (*IRDPSRAPISessionProperties, error) {
+	var _ppVal *IRDPSRAPISessionProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Attendees dispatches through IRDPSRAPISharingSession's vtable slot 12.
-func (self *IRDPSRAPISharingSession) Get_Attendees(ppVal **IRDPSRAPIAttendeeManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPISharingSession) Get_Attendees() (*IRDPSRAPIAttendeeManager, error) {
+	var _ppVal *IRDPSRAPIAttendeeManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Invitations dispatches through IRDPSRAPISharingSession's vtable slot 13.
-func (self *IRDPSRAPISharingSession) Get_Invitations(ppVal **IRDPSRAPIInvitationManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPISharingSession) Get_Invitations() (*IRDPSRAPIInvitationManager, error) {
+	var _ppVal *IRDPSRAPIInvitationManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ApplicationFilter dispatches through IRDPSRAPISharingSession's vtable slot 14.
-func (self *IRDPSRAPISharingSession) Get_ApplicationFilter(ppVal **IRDPSRAPIApplicationFilter) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPISharingSession) Get_ApplicationFilter() (*IRDPSRAPIApplicationFilter, error) {
+	var _ppVal *IRDPSRAPIApplicationFilter
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_VirtualChannelManager dispatches through IRDPSRAPISharingSession's vtable slot 15.
-func (self *IRDPSRAPISharingSession) Get_VirtualChannelManager(ppVal **IRDPSRAPIVirtualChannelManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPISharingSession) Get_VirtualChannelManager() (*IRDPSRAPIVirtualChannelManager, error) {
+	var _ppVal *IRDPSRAPIVirtualChannelManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IRDPSRAPISharingSession's vtable slot 16.
-func (self *IRDPSRAPISharingSession) Pause() foundation.HRESULT {
+func (self *IRDPSRAPISharingSession) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through IRDPSRAPISharingSession's vtable slot 17.
-func (self *IRDPSRAPISharingSession) Resume() foundation.HRESULT {
+func (self *IRDPSRAPISharingSession) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConnectToClient dispatches through IRDPSRAPISharingSession's vtable slot 18.
-func (self *IRDPSRAPISharingSession) ConnectToClient(bstrConnectionString foundation.BSTR) foundation.HRESULT {
+func (self *IRDPSRAPISharingSession) ConnectToClient(bstrConnectionString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrConnectionString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDesktopSharedRect dispatches through IRDPSRAPISharingSession's vtable slot 19.
-func (self *IRDPSRAPISharingSession) SetDesktopSharedRect(left int32, top int32, right int32, bottom int32) foundation.HRESULT {
+func (self *IRDPSRAPISharingSession) SetDesktopSharedRect(left int32, top int32, right int32, bottom int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(left), uintptr(top), uintptr(right), uintptr(bottom))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesktopSharedRect dispatches through IRDPSRAPISharingSession's vtable slot 20.
-func (self *IRDPSRAPISharingSession) GetDesktopSharedRect(pleft *int32, ptop *int32, pright *int32, pbottom *int32) foundation.HRESULT {
+func (self *IRDPSRAPISharingSession) GetDesktopSharedRect(pleft *int32, ptop *int32, pright *int32, pbottom *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pleft)), uintptr(unsafe.Pointer(ptop)), uintptr(unsafe.Pointer(pright)), uintptr(unsafe.Pointer(pbottom)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPISharingSession2: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapisharingsession2
@@ -551,21 +593,22 @@ type IRDPSRAPISharingSession2 struct {
 var IID_IRDPSRAPISharingSession2 = win32.GUID{Data1: 0xfee4ee57, Data2: 0xe3e8, Data3: 0x4205, Data4: [8]byte{0x8f, 0xb0, 0x8f, 0xd1, 0xd0, 0x67, 0x5c, 0x21}}
 
 // ConnectUsingTransportStream dispatches through IRDPSRAPISharingSession2's vtable slot 21.
-func (self *IRDPSRAPISharingSession2) ConnectUsingTransportStream(pStream *IRDPSRAPITransportStream, bstrGroup foundation.BSTR, bstrAuthenticatedAttendeeName foundation.BSTR) foundation.HRESULT {
+func (self *IRDPSRAPISharingSession2) ConnectUsingTransportStream(pStream *IRDPSRAPITransportStream, bstrGroup foundation.BSTR, bstrAuthenticatedAttendeeName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(bstrGroup)), uintptr(unsafe.Pointer(bstrAuthenticatedAttendeeName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FrameBuffer dispatches through IRDPSRAPISharingSession2's vtable slot 22.
-func (self *IRDPSRAPISharingSession2) Get_FrameBuffer(ppVal **IRDPSRAPIFrameBuffer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPISharingSession2) Get_FrameBuffer() (*IRDPSRAPIFrameBuffer, error) {
+	var _ppVal *IRDPSRAPIFrameBuffer
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // SendControlLevelChangeResponse dispatches through IRDPSRAPISharingSession2's vtable slot 23.
-func (self *IRDPSRAPISharingSession2) SendControlLevelChangeResponse(pAttendee *IRDPSRAPIAttendee, RequestedLevel CTRL_LEVEL, ReasonCode int32) foundation.HRESULT {
+func (self *IRDPSRAPISharingSession2) SendControlLevelChangeResponse(pAttendee *IRDPSRAPIAttendee, RequestedLevel CTRL_LEVEL, ReasonCode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttendee)), uintptr(RequestedLevel), uintptr(ReasonCode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPITcpConnectionInfo: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapitcpconnectioninfo
@@ -578,33 +621,38 @@ type IRDPSRAPITcpConnectionInfo struct {
 var IID_IRDPSRAPITcpConnectionInfo = win32.GUID{Data1: 0xf74049a4, Data2: 0x3d06, Data3: 0x4028, Data4: [8]byte{0x81, 0x93, 0x0a, 0x8c, 0x29, 0xbc, 0x24, 0x52}}
 
 // Get_Protocol dispatches through IRDPSRAPITcpConnectionInfo's vtable slot 7.
-func (self *IRDPSRAPITcpConnectionInfo) Get_Protocol(plProtocol *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plProtocol)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITcpConnectionInfo) Get_Protocol() (int32, error) {
+	var _plProtocol int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plProtocol)))
+	return _plProtocol, win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalPort dispatches through IRDPSRAPITcpConnectionInfo's vtable slot 8.
-func (self *IRDPSRAPITcpConnectionInfo) Get_LocalPort(plPort *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPort)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITcpConnectionInfo) Get_LocalPort() (int32, error) {
+	var _plPort int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plPort)))
+	return _plPort, win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalIP dispatches through IRDPSRAPITcpConnectionInfo's vtable slot 9.
-func (self *IRDPSRAPITcpConnectionInfo) Get_LocalIP(pbsrLocalIP *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbsrLocalIP)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITcpConnectionInfo) Get_LocalIP() (foundation.BSTR, error) {
+	var _pbsrLocalIP foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbsrLocalIP)))
+	return _pbsrLocalIP, win32.HRESULTError(int32(r1))
 }
 
 // Get_PeerPort dispatches through IRDPSRAPITcpConnectionInfo's vtable slot 10.
-func (self *IRDPSRAPITcpConnectionInfo) Get_PeerPort(plPort *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPort)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITcpConnectionInfo) Get_PeerPort() (int32, error) {
+	var _plPort int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plPort)))
+	return _plPort, win32.HRESULTError(int32(r1))
 }
 
 // Get_PeerIP dispatches through IRDPSRAPITcpConnectionInfo's vtable slot 11.
-func (self *IRDPSRAPITcpConnectionInfo) Get_PeerIP(pbstrIP *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrIP)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITcpConnectionInfo) Get_PeerIP() (foundation.BSTR, error) {
+	var _pbstrIP foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrIP)))
+	return _pbstrIP, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPITransportStream: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapitransportstream
@@ -617,39 +665,40 @@ type IRDPSRAPITransportStream struct {
 var IID_IRDPSRAPITransportStream = win32.GUID{Data1: 0x36cfa065, Data2: 0x43bb, Data3: 0x4ef7, Data4: [8]byte{0xae, 0xd7, 0x9b, 0x88, 0xa5, 0x05, 0x30, 0x36}}
 
 // AllocBuffer dispatches through IRDPSRAPITransportStream's vtable slot 3.
-func (self *IRDPSRAPITransportStream) AllocBuffer(maxPayload int32, ppBuffer **IRDPSRAPITransportStreamBuffer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(maxPayload), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITransportStream) AllocBuffer(maxPayload int32) (*IRDPSRAPITransportStreamBuffer, error) {
+	var _ppBuffer *IRDPSRAPITransportStreamBuffer
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(maxPayload), uintptr(unsafe.Pointer(&_ppBuffer)))
+	return _ppBuffer, win32.HRESULTError(int32(r1))
 }
 
 // FreeBuffer dispatches through IRDPSRAPITransportStream's vtable slot 4.
-func (self *IRDPSRAPITransportStream) FreeBuffer(pBuffer *IRDPSRAPITransportStreamBuffer) foundation.HRESULT {
+func (self *IRDPSRAPITransportStream) FreeBuffer(pBuffer *IRDPSRAPITransportStreamBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteBuffer dispatches through IRDPSRAPITransportStream's vtable slot 5.
-func (self *IRDPSRAPITransportStream) WriteBuffer(pBuffer *IRDPSRAPITransportStreamBuffer) foundation.HRESULT {
+func (self *IRDPSRAPITransportStream) WriteBuffer(pBuffer *IRDPSRAPITransportStreamBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadBuffer dispatches through IRDPSRAPITransportStream's vtable slot 6.
-func (self *IRDPSRAPITransportStream) ReadBuffer(pBuffer *IRDPSRAPITransportStreamBuffer) foundation.HRESULT {
+func (self *IRDPSRAPITransportStream) ReadBuffer(pBuffer *IRDPSRAPITransportStreamBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Open dispatches through IRDPSRAPITransportStream's vtable slot 7.
-func (self *IRDPSRAPITransportStream) Open(pCallbacks *IRDPSRAPITransportStreamEvents) foundation.HRESULT {
+func (self *IRDPSRAPITransportStream) Open(pCallbacks *IRDPSRAPITransportStreamEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallbacks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IRDPSRAPITransportStream's vtable slot 8.
-func (self *IRDPSRAPITransportStream) Close() foundation.HRESULT {
+func (self *IRDPSRAPITransportStream) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPITransportStreamBuffer: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapitransportstreambuffer
@@ -662,63 +711,69 @@ type IRDPSRAPITransportStreamBuffer struct {
 var IID_IRDPSRAPITransportStreamBuffer = win32.GUID{Data1: 0x81c80290, Data2: 0x5085, Data3: 0x44b0, Data4: [8]byte{0xb4, 0x60, 0xf8, 0x65, 0xc3, 0x9c, 0xb4, 0xa9}}
 
 // Get_Storage dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 3.
-func (self *IRDPSRAPITransportStreamBuffer) Get_Storage(ppbStorage **byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppbStorage)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITransportStreamBuffer) Get_Storage() (*byte, error) {
+	var _ppbStorage *byte
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppbStorage)))
+	return _ppbStorage, win32.HRESULTError(int32(r1))
 }
 
 // Get_StorageSize dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 4.
-func (self *IRDPSRAPITransportStreamBuffer) Get_StorageSize(plMaxStore *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxStore)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITransportStreamBuffer) Get_StorageSize() (int32, error) {
+	var _plMaxStore int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMaxStore)))
+	return _plMaxStore, win32.HRESULTError(int32(r1))
 }
 
 // Get_PayloadSize dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 5.
-func (self *IRDPSRAPITransportStreamBuffer) Get_PayloadSize(plRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITransportStreamBuffer) Get_PayloadSize() (int32, error) {
+	var _plRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plRetVal)))
+	return _plRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_PayloadSize dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 6.
-func (self *IRDPSRAPITransportStreamBuffer) Put_PayloadSize(lVal int32) foundation.HRESULT {
+func (self *IRDPSRAPITransportStreamBuffer) Put_PayloadSize(lVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PayloadOffset dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 7.
-func (self *IRDPSRAPITransportStreamBuffer) Get_PayloadOffset(plRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITransportStreamBuffer) Get_PayloadOffset() (int32, error) {
+	var _plRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plRetVal)))
+	return _plRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_PayloadOffset dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 8.
-func (self *IRDPSRAPITransportStreamBuffer) Put_PayloadOffset(lRetVal int32) foundation.HRESULT {
+func (self *IRDPSRAPITransportStreamBuffer) Put_PayloadOffset(lRetVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lRetVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Flags dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 9.
-func (self *IRDPSRAPITransportStreamBuffer) Get_Flags(plFlags *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFlags)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITransportStreamBuffer) Get_Flags() (int32, error) {
+	var _plFlags int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFlags)))
+	return _plFlags, win32.HRESULTError(int32(r1))
 }
 
 // Put_Flags dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 10.
-func (self *IRDPSRAPITransportStreamBuffer) Put_Flags(lFlags int32) foundation.HRESULT {
+func (self *IRDPSRAPITransportStreamBuffer) Put_Flags(lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Context dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 11.
-func (self *IRDPSRAPITransportStreamBuffer) Get_Context(ppContext **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContext)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPITransportStreamBuffer) Get_Context() (*systemcom.IUnknown, error) {
+	var _ppContext *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppContext)))
+	return _ppContext, win32.HRESULTError(int32(r1))
 }
 
 // Put_Context dispatches through IRDPSRAPITransportStreamBuffer's vtable slot 12.
-func (self *IRDPSRAPITransportStreamBuffer) Put_Context(pContext *systemcom.IUnknown) foundation.HRESULT {
+func (self *IRDPSRAPITransportStreamBuffer) Put_Context(pContext *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPITransportStreamEvents: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapitransportstreamevents
@@ -755,87 +810,95 @@ type IRDPSRAPIViewer struct {
 var IID_IRDPSRAPIViewer = win32.GUID{Data1: 0xc6bfcd38, Data2: 0x8ce9, Data3: 0x404d, Data4: [8]byte{0x8a, 0xe8, 0xf3, 0x1d, 0x00, 0xc6, 0x5c, 0xb5}}
 
 // Connect dispatches through IRDPSRAPIViewer's vtable slot 7.
-func (self *IRDPSRAPIViewer) Connect(bstrConnectionString foundation.BSTR, bstrName foundation.BSTR, bstrPassword foundation.BSTR) foundation.HRESULT {
+func (self *IRDPSRAPIViewer) Connect(bstrConnectionString foundation.BSTR, bstrName foundation.BSTR, bstrPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrConnectionString)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrPassword)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through IRDPSRAPIViewer's vtable slot 8.
-func (self *IRDPSRAPIViewer) Disconnect() foundation.HRESULT {
+func (self *IRDPSRAPIViewer) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Attendees dispatches through IRDPSRAPIViewer's vtable slot 9.
-func (self *IRDPSRAPIViewer) Get_Attendees(ppVal **IRDPSRAPIAttendeeManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIViewer) Get_Attendees() (*IRDPSRAPIAttendeeManager, error) {
+	var _ppVal *IRDPSRAPIAttendeeManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Invitations dispatches through IRDPSRAPIViewer's vtable slot 10.
-func (self *IRDPSRAPIViewer) Get_Invitations(ppVal **IRDPSRAPIInvitationManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIViewer) Get_Invitations() (*IRDPSRAPIInvitationManager, error) {
+	var _ppVal *IRDPSRAPIInvitationManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ApplicationFilter dispatches through IRDPSRAPIViewer's vtable slot 11.
-func (self *IRDPSRAPIViewer) Get_ApplicationFilter(ppVal **IRDPSRAPIApplicationFilter) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIViewer) Get_ApplicationFilter() (*IRDPSRAPIApplicationFilter, error) {
+	var _ppVal *IRDPSRAPIApplicationFilter
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_VirtualChannelManager dispatches through IRDPSRAPIViewer's vtable slot 12.
-func (self *IRDPSRAPIViewer) Get_VirtualChannelManager(ppVal **IRDPSRAPIVirtualChannelManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIViewer) Get_VirtualChannelManager() (*IRDPSRAPIVirtualChannelManager, error) {
+	var _ppVal *IRDPSRAPIVirtualChannelManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_SmartSizing dispatches through IRDPSRAPIViewer's vtable slot 13.
-func (self *IRDPSRAPIViewer) Put_SmartSizing(vbSmartSizing foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRDPSRAPIViewer) Put_SmartSizing(vbSmartSizing foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(vbSmartSizing))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SmartSizing dispatches through IRDPSRAPIViewer's vtable slot 14.
-func (self *IRDPSRAPIViewer) Get_SmartSizing(pvbSmartSizing *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvbSmartSizing)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIViewer) Get_SmartSizing() (foundation.VARIANT_BOOL, error) {
+	var _pvbSmartSizing foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvbSmartSizing)))
+	return _pvbSmartSizing, win32.HRESULTError(int32(r1))
 }
 
 // RequestControl dispatches through IRDPSRAPIViewer's vtable slot 15.
-func (self *IRDPSRAPIViewer) RequestControl(CtrlLevel CTRL_LEVEL) foundation.HRESULT {
+func (self *IRDPSRAPIViewer) RequestControl(CtrlLevel CTRL_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(CtrlLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DisconnectedText dispatches through IRDPSRAPIViewer's vtable slot 16.
-func (self *IRDPSRAPIViewer) Put_DisconnectedText(bstrDisconnectedText foundation.BSTR) foundation.HRESULT {
+func (self *IRDPSRAPIViewer) Put_DisconnectedText(bstrDisconnectedText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDisconnectedText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DisconnectedText dispatches through IRDPSRAPIViewer's vtable slot 17.
-func (self *IRDPSRAPIViewer) Get_DisconnectedText(pbstrDisconnectedText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDisconnectedText)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIViewer) Get_DisconnectedText() (foundation.BSTR, error) {
+	var _pbstrDisconnectedText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDisconnectedText)))
+	return _pbstrDisconnectedText, win32.HRESULTError(int32(r1))
 }
 
 // RequestColorDepthChange dispatches through IRDPSRAPIViewer's vtable slot 18.
-func (self *IRDPSRAPIViewer) RequestColorDepthChange(Bpp int32) foundation.HRESULT {
+func (self *IRDPSRAPIViewer) RequestColorDepthChange(Bpp int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Bpp))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through IRDPSRAPIViewer's vtable slot 19.
-func (self *IRDPSRAPIViewer) Get_Properties(ppVal **IRDPSRAPISessionProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIViewer) Get_Properties() (*IRDPSRAPISessionProperties, error) {
+	var _ppVal *IRDPSRAPISessionProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppVal)))
+	return _ppVal, win32.HRESULTError(int32(r1))
 }
 
 // StartReverseConnectListener dispatches through IRDPSRAPIViewer's vtable slot 20.
-func (self *IRDPSRAPIViewer) StartReverseConnectListener(bstrConnectionString foundation.BSTR, bstrUserName foundation.BSTR, bstrPassword foundation.BSTR, pbstrReverseConnectString *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrConnectionString)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrPassword)), uintptr(unsafe.Pointer(pbstrReverseConnectString)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIViewer) StartReverseConnectListener(bstrConnectionString foundation.BSTR, bstrUserName foundation.BSTR, bstrPassword foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrReverseConnectString foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrConnectionString)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrPassword)), uintptr(unsafe.Pointer(&_pbstrReverseConnectString)))
+	return _pbstrReverseConnectString, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIVirtualChannel: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapivirtualchannel
@@ -848,33 +911,36 @@ type IRDPSRAPIVirtualChannel struct {
 var IID_IRDPSRAPIVirtualChannel = win32.GUID{Data1: 0x05e12f95, Data2: 0x28b3, Data3: 0x4c9a, Data4: [8]byte{0x87, 0x80, 0xd0, 0x24, 0x85, 0x74, 0xa1, 0xe0}}
 
 // SendData dispatches through IRDPSRAPIVirtualChannel's vtable slot 7.
-func (self *IRDPSRAPIVirtualChannel) SendData(bstrData foundation.BSTR, lAttendeeId int32, ChannelSendFlags uint32) foundation.HRESULT {
+func (self *IRDPSRAPIVirtualChannel) SendData(bstrData foundation.BSTR, lAttendeeId int32, ChannelSendFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)), uintptr(lAttendeeId), uintptr(ChannelSendFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAccess dispatches through IRDPSRAPIVirtualChannel's vtable slot 8.
-func (self *IRDPSRAPIVirtualChannel) SetAccess(lAttendeeId int32, AccessType CHANNEL_ACCESS_ENUM) foundation.HRESULT {
+func (self *IRDPSRAPIVirtualChannel) SetAccess(lAttendeeId int32, AccessType CHANNEL_ACCESS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lAttendeeId), uintptr(AccessType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through IRDPSRAPIVirtualChannel's vtable slot 9.
-func (self *IRDPSRAPIVirtualChannel) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIVirtualChannel) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_Flags dispatches through IRDPSRAPIVirtualChannel's vtable slot 10.
-func (self *IRDPSRAPIVirtualChannel) Get_Flags(plFlags *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFlags)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIVirtualChannel) Get_Flags() (int32, error) {
+	var _plFlags int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFlags)))
+	return _plFlags, win32.HRESULTError(int32(r1))
 }
 
 // Get_Priority dispatches through IRDPSRAPIVirtualChannel's vtable slot 11.
-func (self *IRDPSRAPIVirtualChannel) Get_Priority(pPriority *CHANNEL_PRIORITY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPriority)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIVirtualChannel) Get_Priority() (CHANNEL_PRIORITY, error) {
+	var _pPriority CHANNEL_PRIORITY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pPriority)))
+	return _pPriority, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIVirtualChannelManager: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapivirtualchannelmanager
@@ -887,15 +953,17 @@ type IRDPSRAPIVirtualChannelManager struct {
 var IID_IRDPSRAPIVirtualChannelManager = win32.GUID{Data1: 0x0d11c661, Data2: 0x5d0d, Data3: 0x4ee4, Data4: [8]byte{0x89, 0xdf, 0x21, 0x66, 0xae, 0x1f, 0xdf, 0xed}}
 
 // Get__NewEnum dispatches through IRDPSRAPIVirtualChannelManager's vtable slot 7.
-func (self *IRDPSRAPIVirtualChannelManager) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIVirtualChannelManager) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // CreateVirtualChannel dispatches through IRDPSRAPIVirtualChannelManager's vtable slot 9.
-func (self *IRDPSRAPIVirtualChannelManager) CreateVirtualChannel(bstrChannelName foundation.BSTR, Priority CHANNEL_PRIORITY, ChannelFlags uint32, ppChannel **IRDPSRAPIVirtualChannel) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrChannelName)), uintptr(Priority), uintptr(ChannelFlags), uintptr(unsafe.Pointer(ppChannel)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIVirtualChannelManager) CreateVirtualChannel(bstrChannelName foundation.BSTR, Priority CHANNEL_PRIORITY, ChannelFlags uint32) (*IRDPSRAPIVirtualChannel, error) {
+	var _ppChannel *IRDPSRAPIVirtualChannel
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrChannelName)), uintptr(Priority), uintptr(ChannelFlags), uintptr(unsafe.Pointer(&_ppChannel)))
+	return _ppChannel, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIWindow: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiwindow
@@ -908,45 +976,50 @@ type IRDPSRAPIWindow struct {
 var IID_IRDPSRAPIWindow = win32.GUID{Data1: 0xbeafe0f9, Data2: 0xc77b, Data3: 0x4933, Data4: [8]byte{0xba, 0x9f, 0xa2, 0x4c, 0xdd, 0xcc, 0x27, 0xcf}}
 
 // Get_Id dispatches through IRDPSRAPIWindow's vtable slot 7.
-func (self *IRDPSRAPIWindow) Get_Id(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIWindow) Get_Id() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Application dispatches through IRDPSRAPIWindow's vtable slot 8.
-func (self *IRDPSRAPIWindow) Get_Application(pApplication **IRDPSRAPIApplication) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pApplication)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIWindow) Get_Application() (*IRDPSRAPIApplication, error) {
+	var _pApplication *IRDPSRAPIApplication
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pApplication)))
+	return _pApplication, win32.HRESULTError(int32(r1))
 }
 
 // Get_Shared dispatches through IRDPSRAPIWindow's vtable slot 9.
-func (self *IRDPSRAPIWindow) Get_Shared(pRetVal *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIWindow) Get_Shared() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_Shared dispatches through IRDPSRAPIWindow's vtable slot 10.
-func (self *IRDPSRAPIWindow) Put_Shared(NewVal foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRDPSRAPIWindow) Put_Shared(NewVal foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(NewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through IRDPSRAPIWindow's vtable slot 11.
-func (self *IRDPSRAPIWindow) Get_Name(pRetVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIWindow) Get_Name() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Show dispatches through IRDPSRAPIWindow's vtable slot 12.
-func (self *IRDPSRAPIWindow) Show() foundation.HRESULT {
+func (self *IRDPSRAPIWindow) Show() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Flags dispatches through IRDPSRAPIWindow's vtable slot 13.
-func (self *IRDPSRAPIWindow) Get_Flags(pdwFlags *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIWindow) Get_Flags() (uint32, error) {
+	var _pdwFlags uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwFlags)))
+	return _pdwFlags, win32.HRESULTError(int32(r1))
 }
 
 // IRDPSRAPIWindowList: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapiwindowlist
@@ -959,15 +1032,17 @@ type IRDPSRAPIWindowList struct {
 var IID_IRDPSRAPIWindowList = win32.GUID{Data1: 0x8a05ce44, Data2: 0x715a, Data3: 0x4116, Data4: [8]byte{0xa1, 0x89, 0xa1, 0x18, 0xf3, 0x0a, 0x07, 0xbd}}
 
 // Get__NewEnum dispatches through IRDPSRAPIWindowList's vtable slot 7.
-func (self *IRDPSRAPIWindowList) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIWindowList) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through IRDPSRAPIWindowList's vtable slot 8.
-func (self *IRDPSRAPIWindowList) Get_Item(item int32, pWindow **IRDPSRAPIWindow) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(item), uintptr(unsafe.Pointer(pWindow)))
-	return foundation.HRESULT(r1)
+func (self *IRDPSRAPIWindowList) Get_Item(item int32) (*IRDPSRAPIWindow, error) {
+	var _pWindow *IRDPSRAPIWindow
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(item), uintptr(unsafe.Pointer(&_pWindow)))
+	return _pWindow, win32.HRESULTError(int32(r1))
 }
 
 // IRDPViewerInputSink: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpviewerinputsink
@@ -980,51 +1055,51 @@ type IRDPViewerInputSink struct {
 var IID_IRDPViewerInputSink = win32.GUID{Data1: 0xbb590853, Data2: 0xa6c5, Data3: 0x4a7b, Data4: [8]byte{0x8d, 0xd4, 0x76, 0xb6, 0x9e, 0xea, 0x12, 0xd5}}
 
 // SendMouseButtonEvent dispatches through IRDPViewerInputSink's vtable slot 3.
-func (self *IRDPViewerInputSink) SendMouseButtonEvent(buttonType RDPSRAPI_MOUSE_BUTTON_TYPE, vbButtonDown foundation.VARIANT_BOOL, xPos uint32, yPos uint32) foundation.HRESULT {
+func (self *IRDPViewerInputSink) SendMouseButtonEvent(buttonType RDPSRAPI_MOUSE_BUTTON_TYPE, vbButtonDown foundation.VARIANT_BOOL, xPos uint32, yPos uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(buttonType), uintptr(vbButtonDown), uintptr(xPos), uintptr(yPos))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendMouseMoveEvent dispatches through IRDPViewerInputSink's vtable slot 4.
-func (self *IRDPViewerInputSink) SendMouseMoveEvent(xPos uint32, yPos uint32) foundation.HRESULT {
+func (self *IRDPViewerInputSink) SendMouseMoveEvent(xPos uint32, yPos uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(xPos), uintptr(yPos))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendMouseWheelEvent dispatches through IRDPViewerInputSink's vtable slot 5.
-func (self *IRDPViewerInputSink) SendMouseWheelEvent(wheelRotation uint16) foundation.HRESULT {
+func (self *IRDPViewerInputSink) SendMouseWheelEvent(wheelRotation uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(wheelRotation))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendKeyboardEvent dispatches through IRDPViewerInputSink's vtable slot 6.
-func (self *IRDPViewerInputSink) SendKeyboardEvent(codeType RDPSRAPI_KBD_CODE_TYPE, keycode uint16, vbKeyUp foundation.VARIANT_BOOL, vbRepeat foundation.VARIANT_BOOL, vbExtended foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRDPViewerInputSink) SendKeyboardEvent(codeType RDPSRAPI_KBD_CODE_TYPE, keycode uint16, vbKeyUp foundation.VARIANT_BOOL, vbRepeat foundation.VARIANT_BOOL, vbExtended foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(codeType), uintptr(keycode), uintptr(vbKeyUp), uintptr(vbRepeat), uintptr(vbExtended))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendSyncEvent dispatches through IRDPViewerInputSink's vtable slot 7.
-func (self *IRDPViewerInputSink) SendSyncEvent(syncFlags uint32) foundation.HRESULT {
+func (self *IRDPViewerInputSink) SendSyncEvent(syncFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(syncFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginTouchFrame dispatches through IRDPViewerInputSink's vtable slot 8.
-func (self *IRDPViewerInputSink) BeginTouchFrame() foundation.HRESULT {
+func (self *IRDPViewerInputSink) BeginTouchFrame() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTouchInput dispatches through IRDPViewerInputSink's vtable slot 9.
-func (self *IRDPViewerInputSink) AddTouchInput(contactId uint32, event uint32, x int32, y int32) foundation.HRESULT {
+func (self *IRDPViewerInputSink) AddTouchInput(contactId uint32, event uint32, x int32, y int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(contactId), uintptr(event), uintptr(x), uintptr(y))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndTouchFrame dispatches through IRDPViewerInputSink's vtable slot 10.
-func (self *IRDPViewerInputSink) EndTouchFrame() foundation.HRESULT {
+func (self *IRDPViewerInputSink) EndTouchFrame() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRDPSessionEvents: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-_irdpsessionevents

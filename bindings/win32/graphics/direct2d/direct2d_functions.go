@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect2dcommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d/common"
 	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 )
@@ -30,25 +29,25 @@ var (
 // D2D1CreateDevice calls d2d1!D2D1CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1createdevice
 // Minimum OS: windows8.0.
-func D2D1CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, creationProperties *D2D1_CREATION_PROPERTIES, d2dDevice **ID2D1Device) foundation.HRESULT {
+func D2D1CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, creationProperties *D2D1_CREATION_PROPERTIES, d2dDevice **ID2D1Device) error {
 	r1, _, _ := syscall.SyscallN(procD2D1CreateDevice.Addr(), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(creationProperties)), uintptr(unsafe.Pointer(d2dDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D2D1CreateDeviceContext calls d2d1!D2D1CreateDeviceContext.
 // https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1createdevicecontext
 // Minimum OS: windows8.0.
-func D2D1CreateDeviceContext(dxgiSurface *graphicsdxgi.IDXGISurface, creationProperties *D2D1_CREATION_PROPERTIES, d2dDeviceContext **ID2D1DeviceContext) foundation.HRESULT {
+func D2D1CreateDeviceContext(dxgiSurface *graphicsdxgi.IDXGISurface, creationProperties *D2D1_CREATION_PROPERTIES, d2dDeviceContext **ID2D1DeviceContext) error {
 	r1, _, _ := syscall.SyscallN(procD2D1CreateDeviceContext.Addr(), uintptr(unsafe.Pointer(dxgiSurface)), uintptr(unsafe.Pointer(creationProperties)), uintptr(unsafe.Pointer(d2dDeviceContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D2D1CreateFactory calls d2d1!D2D1CreateFactory.
 // https://learn.microsoft.com/windows/win32/api/d2d1/nf-d2d1-d2d1createfactory
 // Minimum OS: windows6.1.
-func D2D1CreateFactory(factoryType D2D1_FACTORY_TYPE, riid *win32.GUID, pFactoryOptions *D2D1_FACTORY_OPTIONS, ppIFactory *unsafe.Pointer) foundation.HRESULT {
+func D2D1CreateFactory(factoryType D2D1_FACTORY_TYPE, riid *win32.GUID, pFactoryOptions *D2D1_FACTORY_OPTIONS, ppIFactory *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procD2D1CreateFactory.Addr(), uintptr(factoryType), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pFactoryOptions)), uintptr(unsafe.Pointer(ppIFactory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D2D1GetGradientMeshInteriorPointsFromCoonsPatch calls d2d1!D2D1GetGradientMeshInteriorPointsFromCoonsPatch.
@@ -61,15 +60,15 @@ func D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0 *graphicsdirect2dco
 // D2D1InvertMatrix calls d2d1!D2D1InvertMatrix.
 // https://learn.microsoft.com/windows/win32/api/d2d1/nf-d2d1-d2d1invertmatrix
 // Minimum OS: windows6.1.
-func D2D1InvertMatrix(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) foundation.BOOL {
+func D2D1InvertMatrix(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) bool {
 	r1, _, _ := syscall.SyscallN(procD2D1InvertMatrix.Addr(), uintptr(unsafe.Pointer(matrix)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // D2D1IsMatrixInvertible calls d2d1!D2D1IsMatrixInvertible.
 // https://learn.microsoft.com/windows/win32/api/d2d1/nf-d2d1-d2d1ismatrixinvertible
 // Minimum OS: windows6.1.
-func D2D1IsMatrixInvertible(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) foundation.BOOL {
+func D2D1IsMatrixInvertible(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) bool {
 	r1, _, _ := syscall.SyscallN(procD2D1IsMatrixInvertible.Addr(), uintptr(unsafe.Pointer(matrix)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

@@ -22,9 +22,9 @@ type IDxcAssembler struct {
 var IID_IDxcAssembler = win32.GUID{Data1: 0x091f7a26, Data2: 0x1c1f, Data3: 0x4948, Data4: [8]byte{0x90, 0x4b, 0xe6, 0xe3, 0xa8, 0xa7, 0x71, 0xd5}}
 
 // AssembleToContainer dispatches through IDxcAssembler's vtable slot 3.
-func (self *IDxcAssembler) AssembleToContainer(pShader *IDxcBlob, ppResult **IDxcOperationResult) foundation.HRESULT {
+func (self *IDxcAssembler) AssembleToContainer(pShader *IDxcBlob, ppResult **IDxcOperationResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8ba5fb08-5195-40e2-ac58-0d989c3a0102
@@ -56,9 +56,9 @@ type IDxcBlobEncoding struct {
 var IID_IDxcBlobEncoding = win32.GUID{Data1: 0x7241d424, Data2: 0x2646, Data3: 0x4191, Data4: [8]byte{0x97, 0xc0, 0x98, 0xe9, 0x6e, 0x42, 0xfc, 0x68}}
 
 // GetEncoding dispatches through IDxcBlobEncoding's vtable slot 5.
-func (self *IDxcBlobEncoding) GetEncoding(pKnown *foundation.BOOL, pCodePage *DXC_CP) foundation.HRESULT {
+func (self *IDxcBlobEncoding) GetEncoding(pKnown *foundation.BOOL, pCodePage *DXC_CP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnown)), uintptr(unsafe.Pointer(pCodePage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a3f84eab-0faa-497e-a39c-ee6ed60b2d84
@@ -110,21 +110,25 @@ type IDxcCompiler struct {
 var IID_IDxcCompiler = win32.GUID{Data1: 0x8c210bf3, Data2: 0x011f, Data3: 0x4422, Data4: [8]byte{0x8d, 0x70, 0x6f, 0x9a, 0xcb, 0x8d, 0xb6, 0x17}}
 
 // Compile dispatches through IDxcCompiler's vtable slot 3.
-func (self *IDxcCompiler) Compile(pSource *IDxcBlob, pSourceName foundation.PWSTR, pEntryPoint foundation.PWSTR, pTargetProfile foundation.PWSTR, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pSourceName)), uintptr(unsafe.Pointer(pEntryPoint)), uintptr(unsafe.Pointer(pTargetProfile)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+func (self *IDxcCompiler) Compile(pSource *IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
+	_pSourceName := win32.UTF16Ptr(pSourceName)
+	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
+	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Preprocess dispatches through IDxcCompiler's vtable slot 4.
-func (self *IDxcCompiler) Preprocess(pSource *IDxcBlob, pSourceName foundation.PWSTR, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pSourceName)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+func (self *IDxcCompiler) Preprocess(pSource *IDxcBlob, pSourceName string, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
+	_pSourceName := win32.UTF16Ptr(pSourceName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disassemble dispatches through IDxcCompiler's vtable slot 5.
-func (self *IDxcCompiler) Disassemble(pSource *IDxcBlob, ppDisassembly **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcCompiler) Disassemble(pSource *IDxcBlob, ppDisassembly **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(ppDisassembly)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a005a9d9-b8bb-4594-b5c9-0e633bec4d37
@@ -136,9 +140,12 @@ type IDxcCompiler2 struct {
 var IID_IDxcCompiler2 = win32.GUID{Data1: 0xa005a9d9, Data2: 0xb8bb, Data3: 0x4594, Data4: [8]byte{0xb5, 0xc9, 0x0e, 0x63, 0x3b, 0xec, 0x4d, 0x37}}
 
 // CompileWithDebug dispatches through IDxcCompiler2's vtable slot 6.
-func (self *IDxcCompiler2) CompileWithDebug(pSource *IDxcBlob, pSourceName foundation.PWSTR, pEntryPoint foundation.PWSTR, pTargetProfile foundation.PWSTR, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult, ppDebugBlobName *foundation.PWSTR, ppDebugBlob **IDxcBlob) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pSourceName)), uintptr(unsafe.Pointer(pEntryPoint)), uintptr(unsafe.Pointer(pTargetProfile)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(ppDebugBlobName)), uintptr(unsafe.Pointer(ppDebugBlob)))
-	return foundation.HRESULT(r1)
+func (self *IDxcCompiler2) CompileWithDebug(pSource *IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult, ppDebugBlobName *foundation.PWSTR, ppDebugBlob **IDxcBlob) error {
+	_pSourceName := win32.UTF16Ptr(pSourceName)
+	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
+	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(ppDebugBlobName)), uintptr(unsafe.Pointer(ppDebugBlob)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 228b4687-5a6a-4730-900c-9702b2203f54
@@ -150,15 +157,15 @@ type IDxcCompiler3 struct {
 var IID_IDxcCompiler3 = win32.GUID{Data1: 0x228b4687, Data2: 0x5a6a, Data3: 0x4730, Data4: [8]byte{0x90, 0x0c, 0x97, 0x02, 0xb2, 0x20, 0x3f, 0x54}}
 
 // Compile dispatches through IDxcCompiler3's vtable slot 3.
-func (self *IDxcCompiler3) Compile(pSource *DxcBuffer, pArguments *foundation.PWSTR, argCount uint32, pIncludeHandler *IDxcIncludeHandler, riid *win32.GUID, ppResult *unsafe.Pointer) foundation.HRESULT {
+func (self *IDxcCompiler3) Compile(pSource *DxcBuffer, pArguments *foundation.PWSTR, argCount uint32, pIncludeHandler *IDxcIncludeHandler, riid *win32.GUID, ppResult *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disassemble dispatches through IDxcCompiler3's vtable slot 4.
-func (self *IDxcCompiler3) Disassemble(pObject *DxcBuffer, riid *win32.GUID, ppResult *unsafe.Pointer) foundation.HRESULT {
+func (self *IDxcCompiler3) Disassemble(pObject *DxcBuffer, riid *win32.GUID, ppResult *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 73effe2a-70dc-45f8-9690-eff64c02429d
@@ -182,21 +189,21 @@ func (self *IDxcCompilerArgs) GetCount() uint32 {
 }
 
 // AddArguments dispatches through IDxcCompilerArgs's vtable slot 5.
-func (self *IDxcCompilerArgs) AddArguments(pArguments *foundation.PWSTR, argCount uint32) foundation.HRESULT {
+func (self *IDxcCompilerArgs) AddArguments(pArguments *foundation.PWSTR, argCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddArgumentsUTF8 dispatches through IDxcCompilerArgs's vtable slot 6.
-func (self *IDxcCompilerArgs) AddArgumentsUTF8(pArguments *foundation.PSTR, argCount uint32) foundation.HRESULT {
+func (self *IDxcCompilerArgs) AddArgumentsUTF8(pArguments *foundation.PSTR, argCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDefines dispatches through IDxcCompilerArgs's vtable slot 7.
-func (self *IDxcCompilerArgs) AddDefines(pDefines *DxcDefine, defineCount uint32) foundation.HRESULT {
+func (self *IDxcCompilerArgs) AddDefines(pDefines *DxcDefine, defineCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 334b1f50-2292-4b35-99a1-25588d8c17fe
@@ -208,27 +215,27 @@ type IDxcContainerBuilder struct {
 var IID_IDxcContainerBuilder = win32.GUID{Data1: 0x334b1f50, Data2: 0x2292, Data3: 0x4b35, Data4: [8]byte{0x99, 0xa1, 0x25, 0x58, 0x8d, 0x8c, 0x17, 0xfe}}
 
 // Load dispatches through IDxcContainerBuilder's vtable slot 3.
-func (self *IDxcContainerBuilder) Load(pDxilContainerHeader *IDxcBlob) foundation.HRESULT {
+func (self *IDxcContainerBuilder) Load(pDxilContainerHeader *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDxilContainerHeader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPart dispatches through IDxcContainerBuilder's vtable slot 4.
-func (self *IDxcContainerBuilder) AddPart(fourCC uint32, pSource *IDxcBlob) foundation.HRESULT {
+func (self *IDxcContainerBuilder) AddPart(fourCC uint32, pSource *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fourCC), uintptr(unsafe.Pointer(pSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemovePart dispatches through IDxcContainerBuilder's vtable slot 5.
-func (self *IDxcContainerBuilder) RemovePart(fourCC uint32) foundation.HRESULT {
+func (self *IDxcContainerBuilder) RemovePart(fourCC uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fourCC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SerializeContainer dispatches through IDxcContainerBuilder's vtable slot 6.
-func (self *IDxcContainerBuilder) SerializeContainer(ppResult **IDxcOperationResult) foundation.HRESULT {
+func (self *IDxcContainerBuilder) SerializeContainer(ppResult **IDxcOperationResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d2c21b26-8350-4bdc-976a-331ce6f4c54c
@@ -240,39 +247,39 @@ type IDxcContainerReflection struct {
 var IID_IDxcContainerReflection = win32.GUID{Data1: 0xd2c21b26, Data2: 0x8350, Data3: 0x4bdc, Data4: [8]byte{0x97, 0x6a, 0x33, 0x1c, 0xe6, 0xf4, 0xc5, 0x4c}}
 
 // Load dispatches through IDxcContainerReflection's vtable slot 3.
-func (self *IDxcContainerReflection) Load(pContainer *IDxcBlob) foundation.HRESULT {
+func (self *IDxcContainerReflection) Load(pContainer *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContainer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPartCount dispatches through IDxcContainerReflection's vtable slot 4.
-func (self *IDxcContainerReflection) GetPartCount(pResult *uint32) foundation.HRESULT {
+func (self *IDxcContainerReflection) GetPartCount(pResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPartKind dispatches through IDxcContainerReflection's vtable slot 5.
-func (self *IDxcContainerReflection) GetPartKind(idx uint32, pResult *uint32) foundation.HRESULT {
+func (self *IDxcContainerReflection) GetPartKind(idx uint32, pResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(idx), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPartContent dispatches through IDxcContainerReflection's vtable slot 6.
-func (self *IDxcContainerReflection) GetPartContent(idx uint32, ppResult **IDxcBlob) foundation.HRESULT {
+func (self *IDxcContainerReflection) GetPartContent(idx uint32, ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(idx), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindFirstPartKind dispatches through IDxcContainerReflection's vtable slot 7.
-func (self *IDxcContainerReflection) FindFirstPartKind(kind uint32, pResult *uint32) foundation.HRESULT {
+func (self *IDxcContainerReflection) FindFirstPartKind(kind uint32, pResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(kind), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPartReflection dispatches through IDxcContainerReflection's vtable slot 8.
-func (self *IDxcContainerReflection) GetPartReflection(idx uint32, iid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IDxcContainerReflection) GetPartReflection(idx uint32, iid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(idx), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 319b37a2-a5c2-494a-a5de-4801b2faf989
@@ -290,9 +297,9 @@ func (self *IDxcExtraOutputs) GetOutputCount() uint32 {
 }
 
 // GetOutput dispatches through IDxcExtraOutputs's vtable slot 4.
-func (self *IDxcExtraOutputs) GetOutput(uIndex uint32, iid *win32.GUID, ppvObject *unsafe.Pointer, ppOutputType **IDxcBlobUtf16, ppOutputName **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcExtraOutputs) GetOutput(uIndex uint32, iid *win32.GUID, ppvObject *unsafe.Pointer, ppOutputType **IDxcBlobUtf16, ppOutputName **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(ppOutputType)), uintptr(unsafe.Pointer(ppOutputName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7f61fc7d-950d-467f-b3e3-3c02fb49187c
@@ -304,9 +311,10 @@ type IDxcIncludeHandler struct {
 var IID_IDxcIncludeHandler = win32.GUID{Data1: 0x7f61fc7d, Data2: 0x950d, Data3: 0x467f, Data4: [8]byte{0xb3, 0xe3, 0x3c, 0x02, 0xfb, 0x49, 0x18, 0x7c}}
 
 // LoadSource dispatches through IDxcIncludeHandler's vtable slot 3.
-func (self *IDxcIncludeHandler) LoadSource(pFilename foundation.PWSTR, ppIncludeSource **IDxcBlob) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilename)), uintptr(unsafe.Pointer(ppIncludeSource)))
-	return foundation.HRESULT(r1)
+func (self *IDxcIncludeHandler) LoadSource(pFilename string, ppIncludeSource **IDxcBlob) error {
+	_pFilename := win32.UTF16Ptr(pFilename)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pFilename)), uintptr(unsafe.Pointer(ppIncludeSource)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e5204dc7-d18c-4c3c-bdfb-851673980fe7
@@ -318,63 +326,64 @@ type IDxcLibrary struct {
 var IID_IDxcLibrary = win32.GUID{Data1: 0xe5204dc7, Data2: 0xd18c, Data3: 0x4c3c, Data4: [8]byte{0xbd, 0xfb, 0x85, 0x16, 0x73, 0x98, 0x0f, 0xe7}}
 
 // SetMalloc dispatches through IDxcLibrary's vtable slot 3.
-func (self *IDxcLibrary) SetMalloc(pMalloc *systemcom.IMalloc) foundation.HRESULT {
+func (self *IDxcLibrary) SetMalloc(pMalloc *systemcom.IMalloc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMalloc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlobFromBlob dispatches through IDxcLibrary's vtable slot 4.
-func (self *IDxcLibrary) CreateBlobFromBlob(pBlob *IDxcBlob, offset uint32, length uint32, ppResult **IDxcBlob) foundation.HRESULT {
+func (self *IDxcLibrary) CreateBlobFromBlob(pBlob *IDxcBlob, offset uint32, length uint32, ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(offset), uintptr(length), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlobFromFile dispatches through IDxcLibrary's vtable slot 5.
-func (self *IDxcLibrary) CreateBlobFromFile(pFileName foundation.PWSTR, codePage *DXC_CP, pBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFileName)), uintptr(unsafe.Pointer(codePage)), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return foundation.HRESULT(r1)
+func (self *IDxcLibrary) CreateBlobFromFile(pFileName string, codePage *DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
+	_pFileName := win32.UTF16Ptr(pFileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pFileName)), uintptr(unsafe.Pointer(codePage)), uintptr(unsafe.Pointer(pBlobEncoding)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlobWithEncodingFromPinned dispatches through IDxcLibrary's vtable slot 6.
-func (self *IDxcLibrary) CreateBlobWithEncodingFromPinned(pText unsafe.Pointer, size uint32, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcLibrary) CreateBlobWithEncodingFromPinned(pText unsafe.Pointer, size uint32, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlobWithEncodingOnHeapCopy dispatches through IDxcLibrary's vtable slot 7.
-func (self *IDxcLibrary) CreateBlobWithEncodingOnHeapCopy(pText unsafe.Pointer, size uint32, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcLibrary) CreateBlobWithEncodingOnHeapCopy(pText unsafe.Pointer, size uint32, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlobWithEncodingOnMalloc dispatches through IDxcLibrary's vtable slot 8.
-func (self *IDxcLibrary) CreateBlobWithEncodingOnMalloc(pText unsafe.Pointer, pIMalloc *systemcom.IMalloc, size uint32, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcLibrary) CreateBlobWithEncodingOnMalloc(pText unsafe.Pointer, pIMalloc *systemcom.IMalloc, size uint32, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)), uintptr(unsafe.Pointer(pIMalloc)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateIncludeHandler dispatches through IDxcLibrary's vtable slot 9.
-func (self *IDxcLibrary) CreateIncludeHandler(ppResult **IDxcIncludeHandler) foundation.HRESULT {
+func (self *IDxcLibrary) CreateIncludeHandler(ppResult **IDxcIncludeHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStreamFromBlobReadOnly dispatches through IDxcLibrary's vtable slot 10.
-func (self *IDxcLibrary) CreateStreamFromBlobReadOnly(pBlob *IDxcBlob, ppStream **systemcom.IStream) foundation.HRESULT {
+func (self *IDxcLibrary) CreateStreamFromBlobReadOnly(pBlob *IDxcBlob, ppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBlobAsUtf8 dispatches through IDxcLibrary's vtable slot 11.
-func (self *IDxcLibrary) GetBlobAsUtf8(pBlob *IDxcBlob, pBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcLibrary) GetBlobAsUtf8(pBlob *IDxcBlob, pBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBlobAsWide dispatches through IDxcLibrary's vtable slot 12.
-func (self *IDxcLibrary) GetBlobAsWide(pBlob *IDxcBlob, pBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcLibrary) GetBlobAsWide(pBlob *IDxcBlob, pBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(pBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f1b5be2a-62dd-4327-a1c2-42ac1e1e78e6
@@ -386,15 +395,18 @@ type IDxcLinker struct {
 var IID_IDxcLinker = win32.GUID{Data1: 0xf1b5be2a, Data2: 0x62dd, Data3: 0x4327, Data4: [8]byte{0xa1, 0xc2, 0x42, 0xac, 0x1e, 0x1e, 0x78, 0xe6}}
 
 // RegisterLibrary dispatches through IDxcLinker's vtable slot 3.
-func (self *IDxcLinker) RegisterLibrary(pLibName foundation.PWSTR, pLib *IDxcBlob) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLibName)), uintptr(unsafe.Pointer(pLib)))
-	return foundation.HRESULT(r1)
+func (self *IDxcLinker) RegisterLibrary(pLibName string, pLib *IDxcBlob) error {
+	_pLibName := win32.UTF16Ptr(pLibName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pLibName)), uintptr(unsafe.Pointer(pLib)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Link dispatches through IDxcLinker's vtable slot 4.
-func (self *IDxcLinker) Link(pEntryName foundation.PWSTR, pTargetProfile foundation.PWSTR, pLibNames *foundation.PWSTR, libCount uint32, pArguments *foundation.PWSTR, argCount uint32, ppResult **IDxcOperationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEntryName)), uintptr(unsafe.Pointer(pTargetProfile)), uintptr(unsafe.Pointer(pLibNames)), uintptr(libCount), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+func (self *IDxcLinker) Link(pEntryName string, pTargetProfile string, pLibNames *foundation.PWSTR, libCount uint32, pArguments *foundation.PWSTR, argCount uint32, ppResult **IDxcOperationResult) error {
+	_pEntryName := win32.UTF16Ptr(pEntryName)
+	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pEntryName)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(pLibNames)), uintptr(libCount), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(ppResult)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: cedb484a-d4e9-445a-b991-ca21ca157dc2
@@ -406,21 +418,21 @@ type IDxcOperationResult struct {
 var IID_IDxcOperationResult = win32.GUID{Data1: 0xcedb484a, Data2: 0xd4e9, Data3: 0x445a, Data4: [8]byte{0xb9, 0x91, 0xca, 0x21, 0xca, 0x15, 0x7d, 0xc2}}
 
 // GetStatus dispatches through IDxcOperationResult's vtable slot 3.
-func (self *IDxcOperationResult) GetStatus(pStatus *foundation.HRESULT) foundation.HRESULT {
+func (self *IDxcOperationResult) GetStatus(pStatus *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResult dispatches through IDxcOperationResult's vtable slot 4.
-func (self *IDxcOperationResult) GetResult(ppResult **IDxcBlob) foundation.HRESULT {
+func (self *IDxcOperationResult) GetResult(ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorBuffer dispatches through IDxcOperationResult's vtable slot 5.
-func (self *IDxcOperationResult) GetErrorBuffer(ppErrors **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcOperationResult) GetErrorBuffer(ppErrors **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppErrors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 25740e2e-9cba-401b-9119-4fb42f39f270
@@ -432,21 +444,21 @@ type IDxcOptimizer struct {
 var IID_IDxcOptimizer = win32.GUID{Data1: 0x25740e2e, Data2: 0x9cba, Data3: 0x401b, Data4: [8]byte{0x91, 0x19, 0x4f, 0xb4, 0x2f, 0x39, 0xf2, 0x70}}
 
 // GetAvailablePassCount dispatches through IDxcOptimizer's vtable slot 3.
-func (self *IDxcOptimizer) GetAvailablePassCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcOptimizer) GetAvailablePassCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAvailablePass dispatches through IDxcOptimizer's vtable slot 4.
-func (self *IDxcOptimizer) GetAvailablePass(index uint32, ppResult **IDxcOptimizerPass) foundation.HRESULT {
+func (self *IDxcOptimizer) GetAvailablePass(index uint32, ppResult **IDxcOptimizerPass) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RunOptimizer dispatches through IDxcOptimizer's vtable slot 5.
-func (self *IDxcOptimizer) RunOptimizer(pBlob *IDxcBlob, ppOptions *foundation.PWSTR, optionCount uint32, pOutputModule **IDxcBlob, ppOutputText **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcOptimizer) RunOptimizer(pBlob *IDxcBlob, ppOptions *foundation.PWSTR, optionCount uint32, pOutputModule **IDxcBlob, ppOutputText **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppOptions)), uintptr(optionCount), uintptr(unsafe.Pointer(pOutputModule)), uintptr(unsafe.Pointer(ppOutputText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ae2cd79f-cc22-453f-9b6b-b124e7a5204c
@@ -458,33 +470,33 @@ type IDxcOptimizerPass struct {
 var IID_IDxcOptimizerPass = win32.GUID{Data1: 0xae2cd79f, Data2: 0xcc22, Data3: 0x453f, Data4: [8]byte{0x9b, 0x6b, 0xb1, 0x24, 0xe7, 0xa5, 0x20, 0x4c}}
 
 // GetOptionName dispatches through IDxcOptimizerPass's vtable slot 3.
-func (self *IDxcOptimizerPass) GetOptionName(ppResult *foundation.PWSTR) foundation.HRESULT {
+func (self *IDxcOptimizerPass) GetOptionName(ppResult *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescription dispatches through IDxcOptimizerPass's vtable slot 4.
-func (self *IDxcOptimizerPass) GetDescription(ppResult *foundation.PWSTR) foundation.HRESULT {
+func (self *IDxcOptimizerPass) GetDescription(ppResult *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOptionArgCount dispatches through IDxcOptimizerPass's vtable slot 5.
-func (self *IDxcOptimizerPass) GetOptionArgCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcOptimizerPass) GetOptionArgCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOptionArgName dispatches through IDxcOptimizerPass's vtable slot 6.
-func (self *IDxcOptimizerPass) GetOptionArgName(argIndex uint32, ppResult *foundation.PWSTR) foundation.HRESULT {
+func (self *IDxcOptimizerPass) GetOptionArgName(argIndex uint32, ppResult *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(argIndex), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOptionArgDescription dispatches through IDxcOptimizerPass's vtable slot 7.
-func (self *IDxcOptimizerPass) GetOptionArgDescription(argIndex uint32, ppResult *foundation.PWSTR) foundation.HRESULT {
+func (self *IDxcOptimizerPass) GetOptionArgDescription(argIndex uint32, ppResult *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(argIndex), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e6c9647e-9d6a-4c3b-b94c-524b5a6c343d
@@ -496,105 +508,105 @@ type IDxcPdbUtils struct {
 var IID_IDxcPdbUtils = win32.GUID{Data1: 0xe6c9647e, Data2: 0x9d6a, Data3: 0x4c3b, Data4: [8]byte{0xb9, 0x4c, 0x52, 0x4b, 0x5a, 0x6c, 0x34, 0x3d}}
 
 // Load dispatches through IDxcPdbUtils's vtable slot 3.
-func (self *IDxcPdbUtils) Load(pPdbOrDxil *IDxcBlob) foundation.HRESULT {
+func (self *IDxcPdbUtils) Load(pPdbOrDxil *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPdbOrDxil)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceCount dispatches through IDxcPdbUtils's vtable slot 4.
-func (self *IDxcPdbUtils) GetSourceCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetSourceCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSource dispatches through IDxcPdbUtils's vtable slot 5.
-func (self *IDxcPdbUtils) GetSource(uIndex uint32, ppResult **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetSource(uIndex uint32, ppResult **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceName dispatches through IDxcPdbUtils's vtable slot 6.
-func (self *IDxcPdbUtils) GetSourceName(uIndex uint32, pResult *foundation.BSTR) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetSourceName(uIndex uint32, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlagCount dispatches through IDxcPdbUtils's vtable slot 7.
-func (self *IDxcPdbUtils) GetFlagCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetFlagCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlag dispatches through IDxcPdbUtils's vtable slot 8.
-func (self *IDxcPdbUtils) GetFlag(uIndex uint32, pResult *foundation.BSTR) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetFlag(uIndex uint32, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetArgCount dispatches through IDxcPdbUtils's vtable slot 9.
-func (self *IDxcPdbUtils) GetArgCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetArgCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetArg dispatches through IDxcPdbUtils's vtable slot 10.
-func (self *IDxcPdbUtils) GetArg(uIndex uint32, pResult *foundation.BSTR) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetArg(uIndex uint32, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetArgPairCount dispatches through IDxcPdbUtils's vtable slot 11.
-func (self *IDxcPdbUtils) GetArgPairCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetArgPairCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetArgPair dispatches through IDxcPdbUtils's vtable slot 12.
-func (self *IDxcPdbUtils) GetArgPair(uIndex uint32, pName *foundation.BSTR, pValue *foundation.BSTR) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetArgPair(uIndex uint32, pName *foundation.BSTR, pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefineCount dispatches through IDxcPdbUtils's vtable slot 13.
-func (self *IDxcPdbUtils) GetDefineCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetDefineCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefine dispatches through IDxcPdbUtils's vtable slot 14.
-func (self *IDxcPdbUtils) GetDefine(uIndex uint32, pResult *foundation.BSTR) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetDefine(uIndex uint32, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTargetProfile dispatches through IDxcPdbUtils's vtable slot 15.
-func (self *IDxcPdbUtils) GetTargetProfile(pResult *foundation.BSTR) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetTargetProfile(pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEntryPoint dispatches through IDxcPdbUtils's vtable slot 16.
-func (self *IDxcPdbUtils) GetEntryPoint(pResult *foundation.BSTR) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetEntryPoint(pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMainFileName dispatches through IDxcPdbUtils's vtable slot 17.
-func (self *IDxcPdbUtils) GetMainFileName(pResult *foundation.BSTR) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetMainFileName(pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHash dispatches through IDxcPdbUtils's vtable slot 18.
-func (self *IDxcPdbUtils) GetHash(ppResult **IDxcBlob) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetHash(ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetName dispatches through IDxcPdbUtils's vtable slot 19.
-func (self *IDxcPdbUtils) GetName(pResult *foundation.BSTR) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetName(pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsFullPDB dispatches through IDxcPdbUtils's vtable slot 20.
@@ -604,39 +616,40 @@ func (self *IDxcPdbUtils) IsFullPDB() foundation.BOOL {
 }
 
 // GetFullPDB dispatches through IDxcPdbUtils's vtable slot 21.
-func (self *IDxcPdbUtils) GetFullPDB(ppFullPDB **IDxcBlob) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetFullPDB(ppFullPDB **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFullPDB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVersionInfo dispatches through IDxcPdbUtils's vtable slot 22.
-func (self *IDxcPdbUtils) GetVersionInfo(ppVersionInfo **IDxcVersionInfo) foundation.HRESULT {
+func (self *IDxcPdbUtils) GetVersionInfo(ppVersionInfo **IDxcVersionInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVersionInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompiler dispatches through IDxcPdbUtils's vtable slot 23.
-func (self *IDxcPdbUtils) SetCompiler(pCompiler *IDxcCompiler3) foundation.HRESULT {
+func (self *IDxcPdbUtils) SetCompiler(pCompiler *IDxcCompiler3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCompiler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CompileForFullPDB dispatches through IDxcPdbUtils's vtable slot 24.
-func (self *IDxcPdbUtils) CompileForFullPDB(ppResult **IDxcResult) foundation.HRESULT {
+func (self *IDxcPdbUtils) CompileForFullPDB(ppResult **IDxcResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OverrideArgs dispatches through IDxcPdbUtils's vtable slot 25.
-func (self *IDxcPdbUtils) OverrideArgs(pArgPairs *DxcArgPair, uNumArgPairs uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils) OverrideArgs(pArgPairs *DxcArgPair, uNumArgPairs uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArgPairs)), uintptr(uNumArgPairs))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OverrideRootSignature dispatches through IDxcPdbUtils's vtable slot 26.
-func (self *IDxcPdbUtils) OverrideRootSignature(pRootSignature foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRootSignature)))
-	return foundation.HRESULT(r1)
+func (self *IDxcPdbUtils) OverrideRootSignature(pRootSignature string) error {
+	_pRootSignature := win32.UTF16Ptr(pRootSignature)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pRootSignature)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4315d938-f369-4f93-95a2-252017cc3807
@@ -648,141 +661,141 @@ type IDxcPdbUtils2 struct {
 var IID_IDxcPdbUtils2 = win32.GUID{Data1: 0x4315d938, Data2: 0xf369, Data3: 0x4f93, Data4: [8]byte{0x95, 0xa2, 0x25, 0x20, 0x17, 0xcc, 0x38, 0x07}}
 
 // Load dispatches through IDxcPdbUtils2's vtable slot 3.
-func (self *IDxcPdbUtils2) Load(pPdbOrDxil *IDxcBlob) foundation.HRESULT {
+func (self *IDxcPdbUtils2) Load(pPdbOrDxil *IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPdbOrDxil)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceCount dispatches through IDxcPdbUtils2's vtable slot 4.
-func (self *IDxcPdbUtils2) GetSourceCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetSourceCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSource dispatches through IDxcPdbUtils2's vtable slot 5.
-func (self *IDxcPdbUtils2) GetSource(uIndex uint32, ppResult **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetSource(uIndex uint32, ppResult **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceName dispatches through IDxcPdbUtils2's vtable slot 6.
-func (self *IDxcPdbUtils2) GetSourceName(uIndex uint32, ppResult **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetSourceName(uIndex uint32, ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLibraryPDBCount dispatches through IDxcPdbUtils2's vtable slot 7.
-func (self *IDxcPdbUtils2) GetLibraryPDBCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetLibraryPDBCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLibraryPDB dispatches through IDxcPdbUtils2's vtable slot 8.
-func (self *IDxcPdbUtils2) GetLibraryPDB(uIndex uint32, ppOutPdbUtils **IDxcPdbUtils2, ppLibraryName **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetLibraryPDB(uIndex uint32, ppOutPdbUtils **IDxcPdbUtils2, ppLibraryName **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppOutPdbUtils)), uintptr(unsafe.Pointer(ppLibraryName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlagCount dispatches through IDxcPdbUtils2's vtable slot 9.
-func (self *IDxcPdbUtils2) GetFlagCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetFlagCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlag dispatches through IDxcPdbUtils2's vtable slot 10.
-func (self *IDxcPdbUtils2) GetFlag(uIndex uint32, ppResult **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetFlag(uIndex uint32, ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetArgCount dispatches through IDxcPdbUtils2's vtable slot 11.
-func (self *IDxcPdbUtils2) GetArgCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetArgCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetArg dispatches through IDxcPdbUtils2's vtable slot 12.
-func (self *IDxcPdbUtils2) GetArg(uIndex uint32, ppResult **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetArg(uIndex uint32, ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetArgPairCount dispatches through IDxcPdbUtils2's vtable slot 13.
-func (self *IDxcPdbUtils2) GetArgPairCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetArgPairCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetArgPair dispatches through IDxcPdbUtils2's vtable slot 14.
-func (self *IDxcPdbUtils2) GetArgPair(uIndex uint32, ppName **IDxcBlobUtf16, ppValue **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetArgPair(uIndex uint32, ppName **IDxcBlobUtf16, ppValue **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppName)), uintptr(unsafe.Pointer(ppValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefineCount dispatches through IDxcPdbUtils2's vtable slot 15.
-func (self *IDxcPdbUtils2) GetDefineCount(pCount *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetDefineCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefine dispatches through IDxcPdbUtils2's vtable slot 16.
-func (self *IDxcPdbUtils2) GetDefine(uIndex uint32, ppResult **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetDefine(uIndex uint32, ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(uIndex), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTargetProfile dispatches through IDxcPdbUtils2's vtable slot 17.
-func (self *IDxcPdbUtils2) GetTargetProfile(ppResult **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetTargetProfile(ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEntryPoint dispatches through IDxcPdbUtils2's vtable slot 18.
-func (self *IDxcPdbUtils2) GetEntryPoint(ppResult **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetEntryPoint(ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMainFileName dispatches through IDxcPdbUtils2's vtable slot 19.
-func (self *IDxcPdbUtils2) GetMainFileName(ppResult **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetMainFileName(ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHash dispatches through IDxcPdbUtils2's vtable slot 20.
-func (self *IDxcPdbUtils2) GetHash(ppResult **IDxcBlob) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetHash(ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetName dispatches through IDxcPdbUtils2's vtable slot 21.
-func (self *IDxcPdbUtils2) GetName(ppResult **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetName(ppResult **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVersionInfo dispatches through IDxcPdbUtils2's vtable slot 22.
-func (self *IDxcPdbUtils2) GetVersionInfo(ppVersionInfo **IDxcVersionInfo) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetVersionInfo(ppVersionInfo **IDxcVersionInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVersionInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCustomToolchainID dispatches through IDxcPdbUtils2's vtable slot 23.
-func (self *IDxcPdbUtils2) GetCustomToolchainID(pID *uint32) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetCustomToolchainID(pID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCustomToolchainData dispatches through IDxcPdbUtils2's vtable slot 24.
-func (self *IDxcPdbUtils2) GetCustomToolchainData(ppBlob **IDxcBlob) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetCustomToolchainData(ppBlob **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBlob)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWholeDxil dispatches through IDxcPdbUtils2's vtable slot 25.
-func (self *IDxcPdbUtils2) GetWholeDxil(ppResult **IDxcBlob) foundation.HRESULT {
+func (self *IDxcPdbUtils2) GetWholeDxil(ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsFullPDB dispatches through IDxcPdbUtils2's vtable slot 26.
@@ -812,9 +825,9 @@ func (self *IDxcResult) HasOutput(dxcOutKind DXC_OUT_KIND) foundation.BOOL {
 }
 
 // GetOutput dispatches through IDxcResult's vtable slot 7.
-func (self *IDxcResult) GetOutput(dxcOutKind DXC_OUT_KIND, iid *win32.GUID, ppvObject *unsafe.Pointer, ppOutputName **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcResult) GetOutput(dxcOutKind DXC_OUT_KIND, iid *win32.GUID, ppvObject *unsafe.Pointer, ppOutputName **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dxcOutKind), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(ppOutputName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNumOutputs dispatches through IDxcResult's vtable slot 8.
@@ -844,81 +857,85 @@ type IDxcUtils struct {
 var IID_IDxcUtils = win32.GUID{Data1: 0x4605c4cb, Data2: 0x2019, Data3: 0x492a, Data4: [8]byte{0xad, 0xa4, 0x65, 0xf2, 0x0b, 0xb7, 0xd6, 0x7f}}
 
 // CreateBlobFromBlob dispatches through IDxcUtils's vtable slot 3.
-func (self *IDxcUtils) CreateBlobFromBlob(pBlob *IDxcBlob, offset uint32, length uint32, ppResult **IDxcBlob) foundation.HRESULT {
+func (self *IDxcUtils) CreateBlobFromBlob(pBlob *IDxcBlob, offset uint32, length uint32, ppResult **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(offset), uintptr(length), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlobFromPinned dispatches through IDxcUtils's vtable slot 4.
-func (self *IDxcUtils) CreateBlobFromPinned(pData unsafe.Pointer, size uint32, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcUtils) CreateBlobFromPinned(pData unsafe.Pointer, size uint32, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveToBlob dispatches through IDxcUtils's vtable slot 5.
-func (self *IDxcUtils) MoveToBlob(pData unsafe.Pointer, pIMalloc *systemcom.IMalloc, size uint32, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcUtils) MoveToBlob(pData unsafe.Pointer, pIMalloc *systemcom.IMalloc, size uint32, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pIMalloc)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlob dispatches through IDxcUtils's vtable slot 6.
-func (self *IDxcUtils) CreateBlob(pData unsafe.Pointer, size uint32, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
+func (self *IDxcUtils) CreateBlob(pData unsafe.Pointer, size uint32, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadFile dispatches through IDxcUtils's vtable slot 7.
-func (self *IDxcUtils) LoadFile(pFileName foundation.PWSTR, pCodePage *DXC_CP, ppBlobEncoding **IDxcBlobEncoding) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFileName)), uintptr(unsafe.Pointer(pCodePage)), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return foundation.HRESULT(r1)
+func (self *IDxcUtils) LoadFile(pFileName string, pCodePage *DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
+	_pFileName := win32.UTF16Ptr(pFileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pFileName)), uintptr(unsafe.Pointer(pCodePage)), uintptr(unsafe.Pointer(ppBlobEncoding)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateReadOnlyStreamFromBlob dispatches through IDxcUtils's vtable slot 8.
-func (self *IDxcUtils) CreateReadOnlyStreamFromBlob(pBlob *IDxcBlob, ppStream **systemcom.IStream) foundation.HRESULT {
+func (self *IDxcUtils) CreateReadOnlyStreamFromBlob(pBlob *IDxcBlob, ppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDefaultIncludeHandler dispatches through IDxcUtils's vtable slot 9.
-func (self *IDxcUtils) CreateDefaultIncludeHandler(ppResult **IDxcIncludeHandler) foundation.HRESULT {
+func (self *IDxcUtils) CreateDefaultIncludeHandler(ppResult **IDxcIncludeHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBlobAsUtf8 dispatches through IDxcUtils's vtable slot 10.
-func (self *IDxcUtils) GetBlobAsUtf8(pBlob *IDxcBlob, ppBlobEncoding **IDxcBlobUtf8) foundation.HRESULT {
+func (self *IDxcUtils) GetBlobAsUtf8(pBlob *IDxcBlob, ppBlobEncoding **IDxcBlobUtf8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBlobAsWide dispatches through IDxcUtils's vtable slot 11.
-func (self *IDxcUtils) GetBlobAsWide(pBlob *IDxcBlob, ppBlobEncoding **IDxcBlobUtf16) foundation.HRESULT {
+func (self *IDxcUtils) GetBlobAsWide(pBlob *IDxcBlob, ppBlobEncoding **IDxcBlobUtf16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppBlobEncoding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDxilContainerPart dispatches through IDxcUtils's vtable slot 12.
-func (self *IDxcUtils) GetDxilContainerPart(pShader *DxcBuffer, DxcPart uint32, ppPartData *unsafe.Pointer, pPartSizeInBytes *uint32) foundation.HRESULT {
+func (self *IDxcUtils) GetDxilContainerPart(pShader *DxcBuffer, DxcPart uint32, ppPartData *unsafe.Pointer, pPartSizeInBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(DxcPart), uintptr(unsafe.Pointer(ppPartData)), uintptr(unsafe.Pointer(pPartSizeInBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateReflection dispatches through IDxcUtils's vtable slot 13.
-func (self *IDxcUtils) CreateReflection(pData *DxcBuffer, iid *win32.GUID, ppvReflection *unsafe.Pointer) foundation.HRESULT {
+func (self *IDxcUtils) CreateReflection(pData *DxcBuffer, iid *win32.GUID, ppvReflection *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppvReflection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BuildArguments dispatches through IDxcUtils's vtable slot 14.
-func (self *IDxcUtils) BuildArguments(pSourceName foundation.PWSTR, pEntryPoint foundation.PWSTR, pTargetProfile foundation.PWSTR, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, ppArgs **IDxcCompilerArgs) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceName)), uintptr(unsafe.Pointer(pEntryPoint)), uintptr(unsafe.Pointer(pTargetProfile)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(ppArgs)))
-	return foundation.HRESULT(r1)
+func (self *IDxcUtils) BuildArguments(pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, ppArgs **IDxcCompilerArgs) error {
+	_pSourceName := win32.UTF16Ptr(pSourceName)
+	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
+	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(ppArgs)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPDBContents dispatches through IDxcUtils's vtable slot 15.
-func (self *IDxcUtils) GetPDBContents(pPDBBlob *IDxcBlob, ppHash **IDxcBlob, ppContainer **IDxcBlob) foundation.HRESULT {
+func (self *IDxcUtils) GetPDBContents(pPDBBlob *IDxcBlob, ppHash **IDxcBlob, ppContainer **IDxcBlob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPDBBlob)), uintptr(unsafe.Pointer(ppHash)), uintptr(unsafe.Pointer(ppContainer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a6e82bd2-1fd7-4826-9811-2857e797f49a
@@ -930,9 +947,9 @@ type IDxcValidator struct {
 var IID_IDxcValidator = win32.GUID{Data1: 0xa6e82bd2, Data2: 0x1fd7, Data3: 0x4826, Data4: [8]byte{0x98, 0x11, 0x28, 0x57, 0xe7, 0x97, 0xf4, 0x9a}}
 
 // Validate dispatches through IDxcValidator's vtable slot 3.
-func (self *IDxcValidator) Validate(pShader *IDxcBlob, Flags uint32, ppResult **IDxcOperationResult) foundation.HRESULT {
+func (self *IDxcValidator) Validate(pShader *IDxcBlob, Flags uint32, ppResult **IDxcOperationResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(Flags), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 458e1fd1-b1b2-4750-a6e1-9c10f03bed92
@@ -944,9 +961,9 @@ type IDxcValidator2 struct {
 var IID_IDxcValidator2 = win32.GUID{Data1: 0x458e1fd1, Data2: 0xb1b2, Data3: 0x4750, Data4: [8]byte{0xa6, 0xe1, 0x9c, 0x10, 0xf0, 0x3b, 0xed, 0x92}}
 
 // ValidateWithDebug dispatches through IDxcValidator2's vtable slot 4.
-func (self *IDxcValidator2) ValidateWithDebug(pShader *IDxcBlob, Flags uint32, pOptDebugBitcode *DxcBuffer, ppResult **IDxcOperationResult) foundation.HRESULT {
+func (self *IDxcValidator2) ValidateWithDebug(pShader *IDxcBlob, Flags uint32, pOptDebugBitcode *DxcBuffer, ppResult **IDxcOperationResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(Flags), uintptr(unsafe.Pointer(pOptDebugBitcode)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b04f5b50-2059-4f12-a8ff-a1e0cde1cc7e
@@ -958,15 +975,15 @@ type IDxcVersionInfo struct {
 var IID_IDxcVersionInfo = win32.GUID{Data1: 0xb04f5b50, Data2: 0x2059, Data3: 0x4f12, Data4: [8]byte{0xa8, 0xff, 0xa1, 0xe0, 0xcd, 0xe1, 0xcc, 0x7e}}
 
 // GetVersion dispatches through IDxcVersionInfo's vtable slot 3.
-func (self *IDxcVersionInfo) GetVersion(pMajor *uint32, pMinor *uint32) foundation.HRESULT {
+func (self *IDxcVersionInfo) GetVersion(pMajor *uint32, pMinor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMajor)), uintptr(unsafe.Pointer(pMinor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IDxcVersionInfo's vtable slot 4.
-func (self *IDxcVersionInfo) GetFlags(pFlags *uint32) foundation.HRESULT {
+func (self *IDxcVersionInfo) GetFlags(pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: fb6904c4-42f0-4b62-9c46-983af7da7c83
@@ -978,9 +995,9 @@ type IDxcVersionInfo2 struct {
 var IID_IDxcVersionInfo2 = win32.GUID{Data1: 0xfb6904c4, Data2: 0x42f0, Data3: 0x4b62, Data4: [8]byte{0x9c, 0x46, 0x98, 0x3a, 0xf7, 0xda, 0x7c, 0x83}}
 
 // GetCommitInfo dispatches through IDxcVersionInfo2's vtable slot 5.
-func (self *IDxcVersionInfo2) GetCommitInfo(pCommitCount *uint32, pCommitHash **int8) foundation.HRESULT {
+func (self *IDxcVersionInfo2) GetCommitInfo(pCommitCount *uint32, pCommitHash **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCommitCount)), uintptr(unsafe.Pointer(pCommitHash)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5e13e843-9d25-473c-9ad2-03b2d0b44b1e
@@ -992,7 +1009,7 @@ type IDxcVersionInfo3 struct {
 var IID_IDxcVersionInfo3 = win32.GUID{Data1: 0x5e13e843, Data2: 0x9d25, Data3: 0x473c, Data4: [8]byte{0x9a, 0xd2, 0x03, 0xb2, 0xd0, 0xb4, 0x4b, 0x1e}}
 
 // GetCustomVersionString dispatches through IDxcVersionInfo3's vtable slot 3.
-func (self *IDxcVersionInfo3) GetCustomVersionString(pVersionString **int8) foundation.HRESULT {
+func (self *IDxcVersionInfo3) GetCustomVersionString(pVersionString **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVersionString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -29,8 +29,8 @@ var (
 )
 
 var (
+	procCreateProcessAsUser                          = modADVAPI32.NewProc("CreateProcessAsUserW")
 	procCreateProcessAsUserA                         = modADVAPI32.NewProc("CreateProcessAsUserA")
-	procCreateProcessAsUserW                         = modADVAPI32.NewProc("CreateProcessAsUserW")
 	procCreateProcessWithLogonW                      = modADVAPI32.NewProc("CreateProcessWithLogonW")
 	procCreateProcessWithTokenW                      = modADVAPI32.NewProc("CreateProcessWithTokenW")
 	procOpenProcessToken                             = modADVAPI32.NewProc("OpenProcessToken")
@@ -43,16 +43,16 @@ var (
 	procAvQuerySystemResponsiveness                  = modAVRT.NewProc("AvQuerySystemResponsiveness")
 	procAvRevertMmThreadCharacteristics              = modAVRT.NewProc("AvRevertMmThreadCharacteristics")
 	procAvRtCreateThreadOrderingGroup                = modAVRT.NewProc("AvRtCreateThreadOrderingGroup")
+	procAvRtCreateThreadOrderingGroupEx              = modAVRT.NewProc("AvRtCreateThreadOrderingGroupExW")
 	procAvRtCreateThreadOrderingGroupExA             = modAVRT.NewProc("AvRtCreateThreadOrderingGroupExA")
-	procAvRtCreateThreadOrderingGroupExW             = modAVRT.NewProc("AvRtCreateThreadOrderingGroupExW")
 	procAvRtDeleteThreadOrderingGroup                = modAVRT.NewProc("AvRtDeleteThreadOrderingGroup")
 	procAvRtJoinThreadOrderingGroup                  = modAVRT.NewProc("AvRtJoinThreadOrderingGroup")
 	procAvRtLeaveThreadOrderingGroup                 = modAVRT.NewProc("AvRtLeaveThreadOrderingGroup")
 	procAvRtWaitOnThreadOrderingGroup                = modAVRT.NewProc("AvRtWaitOnThreadOrderingGroup")
+	procAvSetMmMaxThreadCharacteristics              = modAVRT.NewProc("AvSetMmMaxThreadCharacteristicsW")
 	procAvSetMmMaxThreadCharacteristicsA             = modAVRT.NewProc("AvSetMmMaxThreadCharacteristicsA")
-	procAvSetMmMaxThreadCharacteristicsW             = modAVRT.NewProc("AvSetMmMaxThreadCharacteristicsW")
+	procAvSetMmThreadCharacteristics                 = modAVRT.NewProc("AvSetMmThreadCharacteristicsW")
 	procAvSetMmThreadCharacteristicsA                = modAVRT.NewProc("AvSetMmThreadCharacteristicsA")
-	procAvSetMmThreadCharacteristicsW                = modAVRT.NewProc("AvSetMmThreadCharacteristicsW")
 	procAvSetMmThreadPriority                        = modAVRT.NewProc("AvSetMmThreadPriority")
 	procGetCurrentProcessToken                       = modFORCEINLINE.NewProc("GetCurrentProcessToken")
 	procGetCurrentThreadEffectiveToken               = modFORCEINLINE.NewProc("GetCurrentThreadEffectiveToken")
@@ -77,28 +77,28 @@ var (
 	procConvertFiberToThread                         = modKERNEL32.NewProc("ConvertFiberToThread")
 	procConvertThreadToFiber                         = modKERNEL32.NewProc("ConvertThreadToFiber")
 	procConvertThreadToFiberEx                       = modKERNEL32.NewProc("ConvertThreadToFiberEx")
+	procCreateBoundaryDescriptor                     = modKERNEL32.NewProc("CreateBoundaryDescriptorW")
 	procCreateBoundaryDescriptorA                    = modKERNEL32.NewProc("CreateBoundaryDescriptorA")
-	procCreateBoundaryDescriptorW                    = modKERNEL32.NewProc("CreateBoundaryDescriptorW")
+	procCreateEvent                                  = modKERNEL32.NewProc("CreateEventW")
 	procCreateEventA                                 = modKERNEL32.NewProc("CreateEventA")
+	procCreateEventEx                                = modKERNEL32.NewProc("CreateEventExW")
 	procCreateEventExA                               = modKERNEL32.NewProc("CreateEventExA")
-	procCreateEventExW                               = modKERNEL32.NewProc("CreateEventExW")
-	procCreateEventW                                 = modKERNEL32.NewProc("CreateEventW")
 	procCreateFiber                                  = modKERNEL32.NewProc("CreateFiber")
 	procCreateFiberEx                                = modKERNEL32.NewProc("CreateFiberEx")
+	procCreateMutex                                  = modKERNEL32.NewProc("CreateMutexW")
 	procCreateMutexA                                 = modKERNEL32.NewProc("CreateMutexA")
+	procCreateMutexEx                                = modKERNEL32.NewProc("CreateMutexExW")
 	procCreateMutexExA                               = modKERNEL32.NewProc("CreateMutexExA")
-	procCreateMutexExW                               = modKERNEL32.NewProc("CreateMutexExW")
-	procCreateMutexW                                 = modKERNEL32.NewProc("CreateMutexW")
+	procCreatePrivateNamespace                       = modKERNEL32.NewProc("CreatePrivateNamespaceW")
 	procCreatePrivateNamespaceA                      = modKERNEL32.NewProc("CreatePrivateNamespaceA")
-	procCreatePrivateNamespaceW                      = modKERNEL32.NewProc("CreatePrivateNamespaceW")
+	procCreateProcess                                = modKERNEL32.NewProc("CreateProcessW")
 	procCreateProcessA                               = modKERNEL32.NewProc("CreateProcessA")
-	procCreateProcessW                               = modKERNEL32.NewProc("CreateProcessW")
 	procCreateRemoteThread                           = modKERNEL32.NewProc("CreateRemoteThread")
 	procCreateRemoteThreadEx                         = modKERNEL32.NewProc("CreateRemoteThreadEx")
+	procCreateSemaphore                              = modKERNEL32.NewProc("CreateSemaphoreW")
 	procCreateSemaphoreA                             = modKERNEL32.NewProc("CreateSemaphoreA")
+	procCreateSemaphoreEx                            = modKERNEL32.NewProc("CreateSemaphoreExW")
 	procCreateSemaphoreExA                           = modKERNEL32.NewProc("CreateSemaphoreExA")
-	procCreateSemaphoreExW                           = modKERNEL32.NewProc("CreateSemaphoreExW")
-	procCreateSemaphoreW                             = modKERNEL32.NewProc("CreateSemaphoreW")
 	procCreateThread                                 = modKERNEL32.NewProc("CreateThread")
 	procCreateThreadpool                             = modKERNEL32.NewProc("CreateThreadpool")
 	procCreateThreadpoolCleanupGroup                 = modKERNEL32.NewProc("CreateThreadpoolCleanupGroup")
@@ -110,10 +110,10 @@ var (
 	procCreateTimerQueueTimer                        = modKERNEL32.NewProc("CreateTimerQueueTimer")
 	procCreateUmsCompletionList                      = modKERNEL32.NewProc("CreateUmsCompletionList")
 	procCreateUmsThreadContext                       = modKERNEL32.NewProc("CreateUmsThreadContext")
+	procCreateWaitableTimer                          = modKERNEL32.NewProc("CreateWaitableTimerW")
 	procCreateWaitableTimerA                         = modKERNEL32.NewProc("CreateWaitableTimerA")
+	procCreateWaitableTimerEx                        = modKERNEL32.NewProc("CreateWaitableTimerExW")
 	procCreateWaitableTimerExA                       = modKERNEL32.NewProc("CreateWaitableTimerExA")
-	procCreateWaitableTimerExW                       = modKERNEL32.NewProc("CreateWaitableTimerExW")
-	procCreateWaitableTimerW                         = modKERNEL32.NewProc("CreateWaitableTimerW")
 	procDeleteBoundaryDescriptor                     = modKERNEL32.NewProc("DeleteBoundaryDescriptor")
 	procDeleteCriticalSection                        = modKERNEL32.NewProc("DeleteCriticalSection")
 	procDeleteFiber                                  = modKERNEL32.NewProc("DeleteFiber")
@@ -183,8 +183,8 @@ var (
 	procGetProcessTimes                              = modKERNEL32.NewProc("GetProcessTimes")
 	procGetProcessVersion                            = modKERNEL32.NewProc("GetProcessVersion")
 	procGetProcessWorkingSetSize                     = modKERNEL32.NewProc("GetProcessWorkingSetSize")
+	procGetStartupInfo                               = modKERNEL32.NewProc("GetStartupInfoW")
 	procGetStartupInfoA                              = modKERNEL32.NewProc("GetStartupInfoA")
-	procGetStartupInfoW                              = modKERNEL32.NewProc("GetStartupInfoW")
 	procGetSystemTimes                               = modKERNEL32.NewProc("GetSystemTimes")
 	procGetThreadDescription                         = modKERNEL32.NewProc("GetThreadDescription")
 	procGetThreadGroupAffinity                       = modKERNEL32.NewProc("GetThreadGroupAffinity")
@@ -223,20 +223,20 @@ var (
 	procIsWow64Process2                              = modKERNEL32.NewProc("IsWow64Process2")
 	procLeaveCriticalSection                         = modKERNEL32.NewProc("LeaveCriticalSection")
 	procLeaveCriticalSectionWhenCallbackReturns      = modKERNEL32.NewProc("LeaveCriticalSectionWhenCallbackReturns")
+	procOpenEvent                                    = modKERNEL32.NewProc("OpenEventW")
 	procOpenEventA                                   = modKERNEL32.NewProc("OpenEventA")
-	procOpenEventW                                   = modKERNEL32.NewProc("OpenEventW")
-	procOpenMutexW                                   = modKERNEL32.NewProc("OpenMutexW")
+	procOpenMutex                                    = modKERNEL32.NewProc("OpenMutexW")
+	procOpenPrivateNamespace                         = modKERNEL32.NewProc("OpenPrivateNamespaceW")
 	procOpenPrivateNamespaceA                        = modKERNEL32.NewProc("OpenPrivateNamespaceA")
-	procOpenPrivateNamespaceW                        = modKERNEL32.NewProc("OpenPrivateNamespaceW")
 	procOpenProcess                                  = modKERNEL32.NewProc("OpenProcess")
-	procOpenSemaphoreW                               = modKERNEL32.NewProc("OpenSemaphoreW")
+	procOpenSemaphore                                = modKERNEL32.NewProc("OpenSemaphoreW")
 	procOpenThread                                   = modKERNEL32.NewProc("OpenThread")
+	procOpenWaitableTimer                            = modKERNEL32.NewProc("OpenWaitableTimerW")
 	procOpenWaitableTimerA                           = modKERNEL32.NewProc("OpenWaitableTimerA")
-	procOpenWaitableTimerW                           = modKERNEL32.NewProc("OpenWaitableTimerW")
 	procPulseEvent                                   = modKERNEL32.NewProc("PulseEvent")
 	procQueryDepthSList                              = modKERNEL32.NewProc("QueryDepthSList")
+	procQueryFullProcessImageName                    = modKERNEL32.NewProc("QueryFullProcessImageNameW")
 	procQueryFullProcessImageNameA                   = modKERNEL32.NewProc("QueryFullProcessImageNameA")
-	procQueryFullProcessImageNameW                   = modKERNEL32.NewProc("QueryFullProcessImageNameW")
 	procQueryProcessAffinityUpdateMode               = modKERNEL32.NewProc("QueryProcessAffinityUpdateMode")
 	procQueryProtectedPolicy                         = modKERNEL32.NewProc("QueryProtectedPolicy")
 	procQueryThreadpoolStackInformation              = modKERNEL32.NewProc("QueryThreadpoolStackInformation")
@@ -409,9 +409,10 @@ func AddSIDToBoundaryDescriptor(BoundaryDescriptor *foundation.HANDLE, RequiredS
 // AttachThreadInput calls USER32!AttachThreadInput.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-attachthreadinput
 // Minimum OS: windows5.1.2600.
-func AttachThreadInput(idAttach uint32, idAttachTo uint32, fAttach foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAttachThreadInput.Addr(), uintptr(idAttach), uintptr(idAttachTo), uintptr(fAttach))
-	return foundation.BOOL(r1)
+func AttachThreadInput(idAttach uint32, idAttachTo uint32, fAttach bool) bool {
+	_fAttach := win32.Bool32(fAttach)
+	r1, _, _ := syscall.SyscallN(procAttachThreadInput.Addr(), uintptr(idAttach), uintptr(idAttachTo), uintptr(_fAttach))
+	return r1 != 0
 }
 
 // AvQuerySystemResponsiveness calls AVRT!AvQuerySystemResponsiveness.
@@ -447,22 +448,23 @@ func AvRtCreateThreadOrderingGroup(Context *AVRT_THREAD_ORDERING_GROUP_HANDLE, P
 	return nil
 }
 
-// AvRtCreateThreadOrderingGroupExA calls AVRT!AvRtCreateThreadOrderingGroupExA.
-// https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avrtcreatethreadorderinggroupexa
+// AvRtCreateThreadOrderingGroupEx calls AVRT!AvRtCreateThreadOrderingGroupExW.
+// https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avrtcreatethreadorderinggroupexw
 // Minimum OS: windows6.0.6000.
-func AvRtCreateThreadOrderingGroupExA(Context *AVRT_THREAD_ORDERING_GROUP_HANDLE, Period *int64, ThreadOrderingGuid *win32.GUID, Timeout *int64, TaskName foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procAvRtCreateThreadOrderingGroupExA.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(Period)), uintptr(unsafe.Pointer(ThreadOrderingGuid)), uintptr(unsafe.Pointer(Timeout)), uintptr(unsafe.Pointer(TaskName)))
+func AvRtCreateThreadOrderingGroupEx(Context *AVRT_THREAD_ORDERING_GROUP_HANDLE, Period *int64, ThreadOrderingGuid *win32.GUID, Timeout *int64, TaskName string) error {
+	_TaskName := win32.UTF16Ptr(TaskName)
+	r1, _, e1 := syscall.SyscallN(procAvRtCreateThreadOrderingGroupEx.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(Period)), uintptr(unsafe.Pointer(ThreadOrderingGuid)), uintptr(unsafe.Pointer(Timeout)), uintptr(unsafe.Pointer(_TaskName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// AvRtCreateThreadOrderingGroupExW calls AVRT!AvRtCreateThreadOrderingGroupExW.
-// https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avrtcreatethreadorderinggroupexw
+// AvRtCreateThreadOrderingGroupExA calls AVRT!AvRtCreateThreadOrderingGroupExA.
+// https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avrtcreatethreadorderinggroupexa
 // Minimum OS: windows6.0.6000.
-func AvRtCreateThreadOrderingGroupExW(Context *AVRT_THREAD_ORDERING_GROUP_HANDLE, Period *int64, ThreadOrderingGuid *win32.GUID, Timeout *int64, TaskName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procAvRtCreateThreadOrderingGroupExW.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(Period)), uintptr(unsafe.Pointer(ThreadOrderingGuid)), uintptr(unsafe.Pointer(Timeout)), uintptr(unsafe.Pointer(TaskName)))
+func AvRtCreateThreadOrderingGroupExA(Context *AVRT_THREAD_ORDERING_GROUP_HANDLE, Period *int64, ThreadOrderingGuid *win32.GUID, Timeout *int64, TaskName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procAvRtCreateThreadOrderingGroupExA.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(Period)), uintptr(unsafe.Pointer(ThreadOrderingGuid)), uintptr(unsafe.Pointer(Timeout)), uintptr(unsafe.Pointer(TaskName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -483,8 +485,9 @@ func AvRtDeleteThreadOrderingGroup(Context AVRT_THREAD_ORDERING_GROUP_HANDLE) er
 // AvRtJoinThreadOrderingGroup calls AVRT!AvRtJoinThreadOrderingGroup.
 // https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avrtjointhreadorderinggroup
 // Minimum OS: windows6.0.6000.
-func AvRtJoinThreadOrderingGroup(Context *AVRT_THREAD_ORDERING_GROUP_HANDLE, ThreadOrderingGuid *win32.GUID, Before foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procAvRtJoinThreadOrderingGroup.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(ThreadOrderingGuid)), uintptr(Before))
+func AvRtJoinThreadOrderingGroup(Context *AVRT_THREAD_ORDERING_GROUP_HANDLE, ThreadOrderingGuid *win32.GUID, Before bool) error {
+	_Before := win32.Bool32(Before)
+	r1, _, e1 := syscall.SyscallN(procAvRtJoinThreadOrderingGroup.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(ThreadOrderingGuid)), uintptr(_Before))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -513,6 +516,20 @@ func AvRtWaitOnThreadOrderingGroup(Context AVRT_THREAD_ORDERING_GROUP_HANDLE) er
 	return nil
 }
 
+// AvSetMmMaxThreadCharacteristics calls AVRT!AvSetMmMaxThreadCharacteristicsW.
+// https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avsetmmmaxthreadcharacteristicsw
+// Minimum OS: windows6.0.6000.
+func AvSetMmMaxThreadCharacteristics(FirstTask string, SecondTask string, TaskIndex *uint32) (AVRT_TASK_HANDLE, error) {
+	_FirstTask := win32.UTF16Ptr(FirstTask)
+	_SecondTask := win32.UTF16Ptr(SecondTask)
+	r1, _, e1 := syscall.SyscallN(procAvSetMmMaxThreadCharacteristics.Addr(), uintptr(unsafe.Pointer(_FirstTask)), uintptr(unsafe.Pointer(_SecondTask)), uintptr(unsafe.Pointer(TaskIndex)))
+	ret := AVRT_TASK_HANDLE(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // AvSetMmMaxThreadCharacteristicsA calls AVRT!AvSetMmMaxThreadCharacteristicsA.
 // https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avsetmmmaxthreadcharacteristicsa
 // Minimum OS: windows6.0.6000.
@@ -525,11 +542,12 @@ func AvSetMmMaxThreadCharacteristicsA(FirstTask foundation.PSTR, SecondTask foun
 	return ret, nil
 }
 
-// AvSetMmMaxThreadCharacteristicsW calls AVRT!AvSetMmMaxThreadCharacteristicsW.
-// https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avsetmmmaxthreadcharacteristicsw
+// AvSetMmThreadCharacteristics calls AVRT!AvSetMmThreadCharacteristicsW.
+// https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avsetmmthreadcharacteristicsw
 // Minimum OS: windows6.0.6000.
-func AvSetMmMaxThreadCharacteristicsW(FirstTask foundation.PWSTR, SecondTask foundation.PWSTR, TaskIndex *uint32) (AVRT_TASK_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procAvSetMmMaxThreadCharacteristicsW.Addr(), uintptr(unsafe.Pointer(FirstTask)), uintptr(unsafe.Pointer(SecondTask)), uintptr(unsafe.Pointer(TaskIndex)))
+func AvSetMmThreadCharacteristics(TaskName string, TaskIndex *uint32) (AVRT_TASK_HANDLE, error) {
+	_TaskName := win32.UTF16Ptr(TaskName)
+	r1, _, e1 := syscall.SyscallN(procAvSetMmThreadCharacteristics.Addr(), uintptr(unsafe.Pointer(_TaskName)), uintptr(unsafe.Pointer(TaskIndex)))
 	ret := AVRT_TASK_HANDLE(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -542,18 +560,6 @@ func AvSetMmMaxThreadCharacteristicsW(FirstTask foundation.PWSTR, SecondTask fou
 // Minimum OS: windows6.0.6000.
 func AvSetMmThreadCharacteristicsA(TaskName foundation.PSTR, TaskIndex *uint32) (AVRT_TASK_HANDLE, error) {
 	r1, _, e1 := syscall.SyscallN(procAvSetMmThreadCharacteristicsA.Addr(), uintptr(unsafe.Pointer(TaskName)), uintptr(unsafe.Pointer(TaskIndex)))
-	ret := AVRT_TASK_HANDLE(r1)
-	if ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// AvSetMmThreadCharacteristicsW calls AVRT!AvSetMmThreadCharacteristicsW.
-// https://learn.microsoft.com/windows/win32/api/avrt/nf-avrt-avsetmmthreadcharacteristicsw
-// Minimum OS: windows6.0.6000.
-func AvSetMmThreadCharacteristicsW(TaskName foundation.PWSTR, TaskIndex *uint32) (AVRT_TASK_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procAvSetMmThreadCharacteristicsW.Addr(), uintptr(unsafe.Pointer(TaskName)), uintptr(unsafe.Pointer(TaskIndex)))
 	ret := AVRT_TASK_HANDLE(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -575,9 +581,9 @@ func AvSetMmThreadPriority(AvrtHandle AVRT_TASK_HANDLE, Priority AVRT_PRIORITY) 
 // CallbackMayRunLong calls KERNEL32!CallbackMayRunLong.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-callbackmayrunlong
 // Minimum OS: windows6.0.6000.
-func CallbackMayRunLong(pci PTP_CALLBACK_INSTANCE) foundation.BOOL {
+func CallbackMayRunLong(pci PTP_CALLBACK_INSTANCE) bool {
 	r1, _, _ := syscall.SyscallN(procCallbackMayRunLong.Addr(), uintptr(pci))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CancelThreadpoolIo calls KERNEL32!CancelThreadpoolIo.
@@ -588,9 +594,9 @@ func CancelThreadpoolIo(pio PTP_IO) {
 }
 
 // CancelTimerQueueTimer calls KERNEL32!CancelTimerQueueTimer.
-func CancelTimerQueueTimer(TimerQueue foundation.HANDLE, Timer foundation.HANDLE) foundation.BOOL {
+func CancelTimerQueueTimer(TimerQueue foundation.HANDLE, Timer foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procCancelTimerQueueTimer.Addr(), uintptr(TimerQueue), uintptr(Timer))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CancelWaitableTimer calls KERNEL32!CancelWaitableTimer.
@@ -643,8 +649,9 @@ func CloseThreadpoolCleanupGroup(ptpcg PTP_CLEANUP_GROUP) {
 // CloseThreadpoolCleanupGroupMembers calls KERNEL32!CloseThreadpoolCleanupGroupMembers.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-closethreadpoolcleanupgroupmembers
 // Minimum OS: windows6.0.6000.
-func CloseThreadpoolCleanupGroupMembers(ptpcg PTP_CLEANUP_GROUP, fCancelPendingCallbacks foundation.BOOL, pvCleanupContext unsafe.Pointer) {
-	syscall.SyscallN(procCloseThreadpoolCleanupGroupMembers.Addr(), uintptr(ptpcg), uintptr(fCancelPendingCallbacks), uintptr(unsafe.Pointer(pvCleanupContext)))
+func CloseThreadpoolCleanupGroupMembers(ptpcg PTP_CLEANUP_GROUP, fCancelPendingCallbacks bool, pvCleanupContext unsafe.Pointer) {
+	_fCancelPendingCallbacks := win32.Bool32(fCancelPendingCallbacks)
+	syscall.SyscallN(procCloseThreadpoolCleanupGroupMembers.Addr(), uintptr(ptpcg), uintptr(_fCancelPendingCallbacks), uintptr(unsafe.Pointer(pvCleanupContext)))
 }
 
 // CloseThreadpoolIo calls KERNEL32!CloseThreadpoolIo.
@@ -710,6 +717,14 @@ func ConvertThreadToFiberEx(lpParameter unsafe.Pointer, dwFlags uint32) (unsafe.
 	return ret, nil
 }
 
+// CreateBoundaryDescriptor calls KERNEL32!CreateBoundaryDescriptorW.
+// https://learn.microsoft.com/windows/win32/api/namespaceapi/nf-namespaceapi-createboundarydescriptorw
+func CreateBoundaryDescriptor(Name string, Flags uint32) foundation.HANDLE {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, _ := syscall.SyscallN(procCreateBoundaryDescriptor.Addr(), uintptr(unsafe.Pointer(_Name)), uintptr(Flags))
+	return foundation.HANDLE(r1)
+}
+
 // CreateBoundaryDescriptorA calls KERNEL32!CreateBoundaryDescriptorA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createboundarydescriptora
 // Minimum OS: windows6.0.6000.
@@ -722,18 +737,41 @@ func CreateBoundaryDescriptorA(Name foundation.PSTR, Flags uint32) (foundation.H
 	return ret, nil
 }
 
-// CreateBoundaryDescriptorW calls KERNEL32!CreateBoundaryDescriptorW.
-// https://learn.microsoft.com/windows/win32/api/namespaceapi/nf-namespaceapi-createboundarydescriptorw
-func CreateBoundaryDescriptorW(Name foundation.PWSTR, Flags uint32) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procCreateBoundaryDescriptorW.Addr(), uintptr(unsafe.Pointer(Name)), uintptr(Flags))
-	return foundation.HANDLE(r1)
+// CreateEvent calls KERNEL32!CreateEventW.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventw
+// Minimum OS: windows5.1.2600.
+func CreateEvent(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, bInitialState bool, lpName string) (foundation.HANDLE, error) {
+	_bManualReset := win32.Bool32(bManualReset)
+	_bInitialState := win32.Bool32(bInitialState)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateEvent.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(_bManualReset), uintptr(_bInitialState), uintptr(unsafe.Pointer(_lpName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // CreateEventA calls KERNEL32!CreateEventA.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventa
 // Minimum OS: windows5.1.2600.
-func CreateEventA(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset foundation.BOOL, bInitialState foundation.BOOL, lpName foundation.PSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateEventA.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(bManualReset), uintptr(bInitialState), uintptr(unsafe.Pointer(lpName)))
+func CreateEventA(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, bInitialState bool, lpName foundation.PSTR) (foundation.HANDLE, error) {
+	_bManualReset := win32.Bool32(bManualReset)
+	_bInitialState := win32.Bool32(bInitialState)
+	r1, _, e1 := syscall.SyscallN(procCreateEventA.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(_bManualReset), uintptr(_bInitialState), uintptr(unsafe.Pointer(lpName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// CreateEventEx calls KERNEL32!CreateEventExW.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventexw
+// Minimum OS: windows6.0.6000.
+func CreateEventEx(lpEventAttributes *security.SECURITY_ATTRIBUTES, lpName string, dwFlags CREATE_EVENT, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateEventEx.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(unsafe.Pointer(_lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -746,30 +784,6 @@ func CreateEventA(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset 
 // Minimum OS: windows6.0.6000.
 func CreateEventExA(lpEventAttributes *security.SECURITY_ATTRIBUTES, lpName foundation.PSTR, dwFlags CREATE_EVENT, dwDesiredAccess uint32) (foundation.HANDLE, error) {
 	r1, _, e1 := syscall.SyscallN(procCreateEventExA.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(unsafe.Pointer(lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateEventExW calls KERNEL32!CreateEventExW.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventexw
-// Minimum OS: windows6.0.6000.
-func CreateEventExW(lpEventAttributes *security.SECURITY_ATTRIBUTES, lpName foundation.PWSTR, dwFlags CREATE_EVENT, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateEventExW.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(unsafe.Pointer(lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateEventW calls KERNEL32!CreateEventW.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventw
-// Minimum OS: windows5.1.2600.
-func CreateEventW(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset foundation.BOOL, bInitialState foundation.BOOL, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateEventW.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(bManualReset), uintptr(bInitialState), uintptr(unsafe.Pointer(lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -801,11 +815,39 @@ func CreateFiberEx(dwStackCommitSize uintptr, dwStackReserveSize uintptr, dwFlag
 	return ret, nil
 }
 
+// CreateMutex calls KERNEL32!CreateMutexW.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createmutexw
+// Minimum OS: windows5.1.2600.
+func CreateMutex(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner bool, lpName string) (foundation.HANDLE, error) {
+	_bInitialOwner := win32.Bool32(bInitialOwner)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateMutex.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(_bInitialOwner), uintptr(unsafe.Pointer(_lpName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CreateMutexA calls KERNEL32!CreateMutexA.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createmutexa
 // Minimum OS: windows5.1.2600.
-func CreateMutexA(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner foundation.BOOL, lpName foundation.PSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateMutexA.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(bInitialOwner), uintptr(unsafe.Pointer(lpName)))
+func CreateMutexA(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner bool, lpName foundation.PSTR) (foundation.HANDLE, error) {
+	_bInitialOwner := win32.Bool32(bInitialOwner)
+	r1, _, e1 := syscall.SyscallN(procCreateMutexA.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(_bInitialOwner), uintptr(unsafe.Pointer(lpName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// CreateMutexEx calls KERNEL32!CreateMutexExW.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createmutexexw
+// Minimum OS: windows6.0.6000.
+func CreateMutexEx(lpMutexAttributes *security.SECURITY_ATTRIBUTES, lpName string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateMutexEx.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(unsafe.Pointer(_lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -825,28 +867,12 @@ func CreateMutexExA(lpMutexAttributes *security.SECURITY_ATTRIBUTES, lpName foun
 	return ret, nil
 }
 
-// CreateMutexExW calls KERNEL32!CreateMutexExW.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createmutexexw
-// Minimum OS: windows6.0.6000.
-func CreateMutexExW(lpMutexAttributes *security.SECURITY_ATTRIBUTES, lpName foundation.PWSTR, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateMutexExW.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(unsafe.Pointer(lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateMutexW calls KERNEL32!CreateMutexW.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createmutexw
-// Minimum OS: windows5.1.2600.
-func CreateMutexW(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner foundation.BOOL, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateMutexW.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(bInitialOwner), uintptr(unsafe.Pointer(lpName)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
+// CreatePrivateNamespace calls KERNEL32!CreatePrivateNamespaceW.
+// https://learn.microsoft.com/windows/win32/api/namespaceapi/nf-namespaceapi-createprivatenamespacew
+func CreatePrivateNamespace(lpPrivateNamespaceAttributes *security.SECURITY_ATTRIBUTES, lpBoundaryDescriptor unsafe.Pointer, lpAliasPrefix string) foundation.HANDLE {
+	_lpAliasPrefix := win32.UTF16Ptr(lpAliasPrefix)
+	r1, _, _ := syscall.SyscallN(procCreatePrivateNamespace.Addr(), uintptr(unsafe.Pointer(lpPrivateNamespaceAttributes)), uintptr(unsafe.Pointer(lpBoundaryDescriptor)), uintptr(unsafe.Pointer(_lpAliasPrefix)))
+	return foundation.HANDLE(r1)
 }
 
 // CreatePrivateNamespaceA calls KERNEL32!CreatePrivateNamespaceA.
@@ -861,18 +887,40 @@ func CreatePrivateNamespaceA(lpPrivateNamespaceAttributes *security.SECURITY_ATT
 	return ret, nil
 }
 
-// CreatePrivateNamespaceW calls KERNEL32!CreatePrivateNamespaceW.
-// https://learn.microsoft.com/windows/win32/api/namespaceapi/nf-namespaceapi-createprivatenamespacew
-func CreatePrivateNamespaceW(lpPrivateNamespaceAttributes *security.SECURITY_ATTRIBUTES, lpBoundaryDescriptor unsafe.Pointer, lpAliasPrefix foundation.PWSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procCreatePrivateNamespaceW.Addr(), uintptr(unsafe.Pointer(lpPrivateNamespaceAttributes)), uintptr(unsafe.Pointer(lpBoundaryDescriptor)), uintptr(unsafe.Pointer(lpAliasPrefix)))
-	return foundation.HANDLE(r1)
+// CreateProcess calls KERNEL32!CreateProcessW.
+// https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw
+// Minimum OS: windows5.1.2600.
+func CreateProcess(lpApplicationName string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
+	_bInheritHandles := win32.Bool32(bInheritHandles)
+	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	r1, _, e1 := syscall.SyscallN(procCreateProcess.Addr(), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(_bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // CreateProcessA calls KERNEL32!CreateProcessA.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessa
 // Minimum OS: windows5.1.2600.
-func CreateProcessA(lpApplicationName foundation.PSTR, lpCommandLine foundation.PSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles foundation.BOOL, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory foundation.PSTR, lpStartupInfo *STARTUPINFOA, lpProcessInformation *PROCESS_INFORMATION) error {
-	r1, _, e1 := syscall.SyscallN(procCreateProcessA.Addr(), uintptr(unsafe.Pointer(lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
+func CreateProcessA(lpApplicationName foundation.PSTR, lpCommandLine foundation.PSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory foundation.PSTR, lpStartupInfo *STARTUPINFOA, lpProcessInformation *PROCESS_INFORMATION) error {
+	_bInheritHandles := win32.Bool32(bInheritHandles)
+	r1, _, e1 := syscall.SyscallN(procCreateProcessA.Addr(), uintptr(unsafe.Pointer(lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(_bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CreateProcessAsUser calls ADVAPI32!CreateProcessAsUserW.
+// https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessasuserw
+// Minimum OS: windows5.1.2600.
+func CreateProcessAsUser(hToken foundation.HANDLE, lpApplicationName string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
+	_bInheritHandles := win32.Bool32(bInheritHandles)
+	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	r1, _, e1 := syscall.SyscallN(procCreateProcessAsUser.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(_bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -882,30 +930,9 @@ func CreateProcessA(lpApplicationName foundation.PSTR, lpCommandLine foundation.
 // CreateProcessAsUserA calls ADVAPI32!CreateProcessAsUserA.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessasusera
 // Minimum OS: windows5.1.2600.
-func CreateProcessAsUserA(hToken foundation.HANDLE, lpApplicationName foundation.PSTR, lpCommandLine foundation.PSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles foundation.BOOL, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory foundation.PSTR, lpStartupInfo *STARTUPINFOA, lpProcessInformation *PROCESS_INFORMATION) error {
-	r1, _, e1 := syscall.SyscallN(procCreateProcessAsUserA.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CreateProcessAsUserW calls ADVAPI32!CreateProcessAsUserW.
-// https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessasuserw
-// Minimum OS: windows5.1.2600.
-func CreateProcessAsUserW(hToken foundation.HANDLE, lpApplicationName foundation.PWSTR, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles foundation.BOOL, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory foundation.PWSTR, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	r1, _, e1 := syscall.SyscallN(procCreateProcessAsUserW.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CreateProcessW calls KERNEL32!CreateProcessW.
-// https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw
-// Minimum OS: windows5.1.2600.
-func CreateProcessW(lpApplicationName foundation.PWSTR, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles foundation.BOOL, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory foundation.PWSTR, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	r1, _, e1 := syscall.SyscallN(procCreateProcessW.Addr(), uintptr(unsafe.Pointer(lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
+func CreateProcessAsUserA(hToken foundation.HANDLE, lpApplicationName foundation.PSTR, lpCommandLine foundation.PSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory foundation.PSTR, lpStartupInfo *STARTUPINFOA, lpProcessInformation *PROCESS_INFORMATION) error {
+	_bInheritHandles := win32.Bool32(bInheritHandles)
+	r1, _, e1 := syscall.SyscallN(procCreateProcessAsUserA.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(_bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -915,8 +942,13 @@ func CreateProcessW(lpApplicationName foundation.PWSTR, lpCommandLine foundation
 // CreateProcessWithLogonW calls ADVAPI32!CreateProcessWithLogonW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createprocesswithlogonw
 // Minimum OS: windows5.1.2600.
-func CreateProcessWithLogonW(lpUsername foundation.PWSTR, lpDomain foundation.PWSTR, lpPassword foundation.PWSTR, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName foundation.PWSTR, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory foundation.PWSTR, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	r1, _, e1 := syscall.SyscallN(procCreateProcessWithLogonW.Addr(), uintptr(unsafe.Pointer(lpUsername)), uintptr(unsafe.Pointer(lpDomain)), uintptr(unsafe.Pointer(lpPassword)), uintptr(dwLogonFlags), uintptr(unsafe.Pointer(lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
+func CreateProcessWithLogonW(lpUsername string, lpDomain string, lpPassword string, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpUsername := win32.UTF16Ptr(lpUsername)
+	_lpDomain := win32.UTF16Ptr(lpDomain)
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
+	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	r1, _, e1 := syscall.SyscallN(procCreateProcessWithLogonW.Addr(), uintptr(unsafe.Pointer(_lpUsername)), uintptr(unsafe.Pointer(_lpDomain)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(dwLogonFlags), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -926,8 +958,10 @@ func CreateProcessWithLogonW(lpUsername foundation.PWSTR, lpDomain foundation.PW
 // CreateProcessWithTokenW calls ADVAPI32!CreateProcessWithTokenW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createprocesswithtokenw
 // Minimum OS: windows6.0.6000.
-func CreateProcessWithTokenW(hToken foundation.HANDLE, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName foundation.PWSTR, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory foundation.PWSTR, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	r1, _, e1 := syscall.SyscallN(procCreateProcessWithTokenW.Addr(), uintptr(hToken), uintptr(dwLogonFlags), uintptr(unsafe.Pointer(lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
+func CreateProcessWithTokenW(hToken foundation.HANDLE, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
+	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	r1, _, e1 := syscall.SyscallN(procCreateProcessWithTokenW.Addr(), uintptr(hToken), uintptr(dwLogonFlags), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -958,6 +992,19 @@ func CreateRemoteThreadEx(hProcess foundation.HANDLE, lpThreadAttributes *securi
 	return ret, nil
 }
 
+// CreateSemaphore calls KERNEL32!CreateSemaphoreW.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createsemaphorew
+// Minimum OS: windows5.1.2600.
+func CreateSemaphore(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName string) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateSemaphore.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(_lpName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CreateSemaphoreA calls KERNEL32!CreateSemaphoreA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createsemaphorea
 // Minimum OS: windows5.1.2600.
@@ -970,35 +1017,24 @@ func CreateSemaphoreA(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInit
 	return ret, nil
 }
 
+// CreateSemaphoreEx calls KERNEL32!CreateSemaphoreExW.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createsemaphoreexw
+// Minimum OS: windows6.0.6000.
+func CreateSemaphoreEx(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName string, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateSemaphoreEx.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(_lpName)), 0, uintptr(dwDesiredAccess))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CreateSemaphoreExA calls KERNEL32!CreateSemaphoreExA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createsemaphoreexa
 // Minimum OS: windows6.0.6000.
-func CreateSemaphoreExA(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName foundation.PSTR, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateSemaphoreExA.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateSemaphoreExW calls KERNEL32!CreateSemaphoreExW.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createsemaphoreexw
-// Minimum OS: windows6.0.6000.
-func CreateSemaphoreExW(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName foundation.PWSTR, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateSemaphoreExW.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateSemaphoreW calls KERNEL32!CreateSemaphoreW.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createsemaphorew
-// Minimum OS: windows5.1.2600.
-func CreateSemaphoreW(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateSemaphoreW.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(lpName)))
+func CreateSemaphoreExA(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName foundation.PSTR, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateSemaphoreExA.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(lpName)), 0, uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1021,8 +1057,8 @@ func CreateThread(lpThreadAttributes *security.SECURITY_ATTRIBUTES, dwStackSize 
 // CreateThreadpool calls KERNEL32!CreateThreadpool.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-createthreadpool
 // Minimum OS: windows6.0.6000.
-func CreateThreadpool(reserved unsafe.Pointer) (PTP_POOL, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateThreadpool.Addr(), uintptr(unsafe.Pointer(reserved)))
+func CreateThreadpool() (PTP_POOL, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateThreadpool.Addr(), 0)
 	if e1 != 0 {
 		return PTP_POOL(r1), e1
 	}
@@ -1129,11 +1165,39 @@ func CreateUmsThreadContext(lpUmsThread *unsafe.Pointer) error {
 	return nil
 }
 
+// CreateWaitableTimer calls KERNEL32!CreateWaitableTimerW.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createwaitabletimerw
+// Minimum OS: windows5.1.2600.
+func CreateWaitableTimer(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, lpTimerName string) (foundation.HANDLE, error) {
+	_bManualReset := win32.Bool32(bManualReset)
+	_lpTimerName := win32.UTF16Ptr(lpTimerName)
+	r1, _, e1 := syscall.SyscallN(procCreateWaitableTimer.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(_bManualReset), uintptr(unsafe.Pointer(_lpTimerName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CreateWaitableTimerA calls KERNEL32!CreateWaitableTimerA.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createwaitabletimerw
-func CreateWaitableTimerA(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManualReset foundation.BOOL, lpTimerName foundation.PSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procCreateWaitableTimerA.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(bManualReset), uintptr(unsafe.Pointer(lpTimerName)))
+func CreateWaitableTimerA(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, lpTimerName foundation.PSTR) foundation.HANDLE {
+	_bManualReset := win32.Bool32(bManualReset)
+	r1, _, _ := syscall.SyscallN(procCreateWaitableTimerA.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(_bManualReset), uintptr(unsafe.Pointer(lpTimerName)))
 	return foundation.HANDLE(r1)
+}
+
+// CreateWaitableTimerEx calls KERNEL32!CreateWaitableTimerExW.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createwaitabletimerexw
+// Minimum OS: windows6.0.6000.
+func CreateWaitableTimerEx(lpTimerAttributes *security.SECURITY_ATTRIBUTES, lpTimerName string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpTimerName := win32.UTF16Ptr(lpTimerName)
+	r1, _, e1 := syscall.SyscallN(procCreateWaitableTimerEx.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(unsafe.Pointer(_lpTimerName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // CreateWaitableTimerExA calls KERNEL32!CreateWaitableTimerExA.
@@ -1141,30 +1205,6 @@ func CreateWaitableTimerA(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManu
 func CreateWaitableTimerExA(lpTimerAttributes *security.SECURITY_ATTRIBUTES, lpTimerName foundation.PSTR, dwFlags uint32, dwDesiredAccess uint32) foundation.HANDLE {
 	r1, _, _ := syscall.SyscallN(procCreateWaitableTimerExA.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(unsafe.Pointer(lpTimerName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
 	return foundation.HANDLE(r1)
-}
-
-// CreateWaitableTimerExW calls KERNEL32!CreateWaitableTimerExW.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createwaitabletimerexw
-// Minimum OS: windows6.0.6000.
-func CreateWaitableTimerExW(lpTimerAttributes *security.SECURITY_ATTRIBUTES, lpTimerName foundation.PWSTR, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateWaitableTimerExW.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(unsafe.Pointer(lpTimerName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateWaitableTimerW calls KERNEL32!CreateWaitableTimerW.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createwaitabletimerw
-// Minimum OS: windows5.1.2600.
-func CreateWaitableTimerW(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManualReset foundation.BOOL, lpTimerName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateWaitableTimerW.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(bManualReset), uintptr(unsafe.Pointer(lpTimerName)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
 }
 
 // DeleteBoundaryDescriptor calls KERNEL32!DeleteBoundaryDescriptor.
@@ -1198,9 +1238,9 @@ func DeleteProcThreadAttributeList(lpAttributeList LPPROC_THREAD_ATTRIBUTE_LIST)
 // DeleteSynchronizationBarrier calls KERNEL32!DeleteSynchronizationBarrier.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-deletesynchronizationbarrier
 // Minimum OS: windows8.0.
-func DeleteSynchronizationBarrier(lpBarrier *SYNCHRONIZATION_BARRIER) foundation.BOOL {
+func DeleteSynchronizationBarrier(lpBarrier *SYNCHRONIZATION_BARRIER) bool {
 	r1, _, _ := syscall.SyscallN(procDeleteSynchronizationBarrier.Addr(), uintptr(unsafe.Pointer(lpBarrier)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DeleteTimerQueue calls KERNEL32!DeleteTimerQueue.
@@ -1286,9 +1326,9 @@ func EnterCriticalSection(lpCriticalSection *CRITICAL_SECTION) {
 // EnterSynchronizationBarrier calls KERNEL32!EnterSynchronizationBarrier.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-entersynchronizationbarrier
 // Minimum OS: windows8.0.
-func EnterSynchronizationBarrier(lpBarrier *SYNCHRONIZATION_BARRIER, dwFlags uint32) foundation.BOOL {
+func EnterSynchronizationBarrier(lpBarrier *SYNCHRONIZATION_BARRIER, dwFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEnterSynchronizationBarrier.Addr(), uintptr(unsafe.Pointer(lpBarrier)), uintptr(dwFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EnterUmsSchedulingMode calls KERNEL32!EnterUmsSchedulingMode.
@@ -1533,9 +1573,9 @@ func GetGuiResources(hProcess foundation.HANDLE, uiFlags GET_GUI_RESOURCES_FLAGS
 
 // GetMachineTypeAttributes calls KERNEL32!GetMachineTypeAttributes.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getmachinetypeattributes
-func GetMachineTypeAttributes(Machine uint16, MachineTypeAttributes *MACHINE_ATTRIBUTES) foundation.HRESULT {
+func GetMachineTypeAttributes(Machine uint16, MachineTypeAttributes *MACHINE_ATTRIBUTES) error {
 	r1, _, _ := syscall.SyscallN(procGetMachineTypeAttributes.Addr(), uintptr(Machine), uintptr(unsafe.Pointer(MachineTypeAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaximumProcessorCount calls KERNEL32!GetMaximumProcessorCount.
@@ -1626,17 +1666,21 @@ func GetNumaNodeProcessorMask(Node byte, ProcessorMask *uint64) error {
 
 // GetNumaNodeProcessorMask2 calls KERNEL32!GetNumaNodeProcessorMask2.
 // https://learn.microsoft.com/windows/win32/api/systemtopologyapi/nf-systemtopologyapi-getnumanodeprocessormask2
-func GetNumaNodeProcessorMask2(NodeNumber uint16, ProcessorMasks *systemsysteminformation.GROUP_AFFINITY, ProcessorMaskCount uint16, RequiredMaskCount *uint16) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetNumaNodeProcessorMask2.Addr(), uintptr(NodeNumber), uintptr(unsafe.Pointer(ProcessorMasks)), uintptr(ProcessorMaskCount), uintptr(unsafe.Pointer(RequiredMaskCount)))
-	return foundation.BOOL(r1)
+func GetNumaNodeProcessorMask2(NodeNumber uint16, ProcessorMasks []systemsysteminformation.GROUP_AFFINITY, RequiredMaskCount *uint16) bool {
+	var _ProcessorMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(ProcessorMasks) > 0 {
+		_ProcessorMasks = &ProcessorMasks[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetNumaNodeProcessorMask2.Addr(), uintptr(NodeNumber), uintptr(unsafe.Pointer(_ProcessorMasks)), uintptr(len(ProcessorMasks)), uintptr(unsafe.Pointer(RequiredMaskCount)))
+	return r1 != 0
 }
 
 // GetNumaNodeProcessorMaskEx calls KERNEL32!GetNumaNodeProcessorMaskEx.
 // https://learn.microsoft.com/windows/win32/api/systemtopologyapi/nf-systemtopologyapi-getnumanodeprocessormaskex
 // Minimum OS: windows6.1.
-func GetNumaNodeProcessorMaskEx(Node uint16, ProcessorMask *systemsysteminformation.GROUP_AFFINITY) foundation.BOOL {
+func GetNumaNodeProcessorMaskEx(Node uint16, ProcessorMask *systemsysteminformation.GROUP_AFFINITY) bool {
 	r1, _, _ := syscall.SyscallN(procGetNumaNodeProcessorMaskEx.Addr(), uintptr(Node), uintptr(unsafe.Pointer(ProcessorMask)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetNumaProcessorNode calls KERNEL32!GetNumaProcessorNode.
@@ -1675,9 +1719,9 @@ func GetNumaProximityNode(ProximityId uint32, NodeNumber *byte) error {
 // GetNumaProximityNodeEx calls KERNEL32!GetNumaProximityNodeEx.
 // https://learn.microsoft.com/windows/win32/api/systemtopologyapi/nf-systemtopologyapi-getnumaproximitynodeex
 // Minimum OS: windows6.1.
-func GetNumaProximityNodeEx(ProximityId uint32, NodeNumber *uint16) foundation.BOOL {
+func GetNumaProximityNodeEx(ProximityId uint32, NodeNumber *uint16) bool {
 	r1, _, _ := syscall.SyscallN(procGetNumaProximityNodeEx.Addr(), uintptr(ProximityId), uintptr(unsafe.Pointer(NodeNumber)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetPriorityClass calls KERNEL32!GetPriorityClass.
@@ -1715,24 +1759,32 @@ func GetProcessDEPPolicy(hProcess foundation.HANDLE, lpFlags *uint32, lpPermanen
 
 // GetProcessDefaultCpuSetMasks calls KERNEL32!GetProcessDefaultCpuSetMasks.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessdefaultcpusetmasks
-func GetProcessDefaultCpuSetMasks(Process foundation.HANDLE, CpuSetMasks *systemsysteminformation.GROUP_AFFINITY, CpuSetMaskCount uint16, RequiredMaskCount *uint16) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetProcessDefaultCpuSetMasks.Addr(), uintptr(Process), uintptr(unsafe.Pointer(CpuSetMasks)), uintptr(CpuSetMaskCount), uintptr(unsafe.Pointer(RequiredMaskCount)))
-	return foundation.BOOL(r1)
+func GetProcessDefaultCpuSetMasks(Process foundation.HANDLE, CpuSetMasks []systemsysteminformation.GROUP_AFFINITY, RequiredMaskCount *uint16) bool {
+	var _CpuSetMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(CpuSetMasks) > 0 {
+		_CpuSetMasks = &CpuSetMasks[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetProcessDefaultCpuSetMasks.Addr(), uintptr(Process), uintptr(unsafe.Pointer(_CpuSetMasks)), uintptr(len(CpuSetMasks)), uintptr(unsafe.Pointer(RequiredMaskCount)))
+	return r1 != 0
 }
 
 // GetProcessDefaultCpuSets calls KERNEL32!GetProcessDefaultCpuSets.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessdefaultcpusets
-func GetProcessDefaultCpuSets(Process foundation.HANDLE, CpuSetIds *uint32, CpuSetIdCount uint32, RequiredIdCount *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetProcessDefaultCpuSets.Addr(), uintptr(Process), uintptr(unsafe.Pointer(CpuSetIds)), uintptr(CpuSetIdCount), uintptr(unsafe.Pointer(RequiredIdCount)))
-	return foundation.BOOL(r1)
+func GetProcessDefaultCpuSets(Process foundation.HANDLE, CpuSetIds []uint32, RequiredIdCount *uint32) bool {
+	var _CpuSetIds *uint32
+	if len(CpuSetIds) > 0 {
+		_CpuSetIds = &CpuSetIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetProcessDefaultCpuSets.Addr(), uintptr(Process), uintptr(unsafe.Pointer(_CpuSetIds)), uintptr(len(CpuSetIds)), uintptr(unsafe.Pointer(RequiredIdCount)))
+	return r1 != 0
 }
 
 // GetProcessGroupAffinity calls KERNEL32!GetProcessGroupAffinity.
 // https://learn.microsoft.com/windows/win32/api/processtopologyapi/nf-processtopologyapi-getprocessgroupaffinity
 // Minimum OS: windows6.1.
-func GetProcessGroupAffinity(hProcess foundation.HANDLE, GroupCount *uint16, GroupArray *uint16) foundation.BOOL {
+func GetProcessGroupAffinity(hProcess foundation.HANDLE, GroupCount *uint16, GroupArray *uint16) bool {
 	r1, _, _ := syscall.SyscallN(procGetProcessGroupAffinity.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(GroupCount)), uintptr(unsafe.Pointer(GroupArray)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetProcessHandleCount calls KERNEL32!GetProcessHandleCount.
@@ -1863,17 +1915,17 @@ func GetProcessWorkingSetSize(hProcess foundation.HANDLE, lpMinimumWorkingSetSiz
 	return nil
 }
 
+// GetStartupInfo calls KERNEL32!GetStartupInfoW.
+// https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getstartupinfow
+// Minimum OS: windows5.1.2600.
+func GetStartupInfo(lpStartupInfo *STARTUPINFOW) {
+	syscall.SyscallN(procGetStartupInfo.Addr(), uintptr(unsafe.Pointer(lpStartupInfo)))
+}
+
 // GetStartupInfoA calls KERNEL32!GetStartupInfoA.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getstartupinfow
 func GetStartupInfoA(lpStartupInfo *STARTUPINFOA) {
 	syscall.SyscallN(procGetStartupInfoA.Addr(), uintptr(unsafe.Pointer(lpStartupInfo)))
-}
-
-// GetStartupInfoW calls KERNEL32!GetStartupInfoW.
-// https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getstartupinfow
-// Minimum OS: windows5.1.2600.
-func GetStartupInfoW(lpStartupInfo *STARTUPINFOW) {
-	syscall.SyscallN(procGetStartupInfoW.Addr(), uintptr(unsafe.Pointer(lpStartupInfo)))
 }
 
 // GetSystemTimes calls KERNEL32!GetSystemTimes.
@@ -1890,17 +1942,17 @@ func GetSystemTimes(lpIdleTime *foundation.FILETIME, lpKernelTime *foundation.FI
 // GetThreadDescription calls KERNEL32!GetThreadDescription.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreaddescription
 // Minimum OS: windows10.0.14393.
-func GetThreadDescription(hThread foundation.HANDLE, ppszThreadDescription *foundation.PWSTR) foundation.HRESULT {
+func GetThreadDescription(hThread foundation.HANDLE, ppszThreadDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetThreadDescription.Addr(), uintptr(hThread), uintptr(unsafe.Pointer(ppszThreadDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThreadGroupAffinity calls KERNEL32!GetThreadGroupAffinity.
 // https://learn.microsoft.com/windows/win32/api/processtopologyapi/nf-processtopologyapi-getthreadgroupaffinity
 // Minimum OS: windows6.1.
-func GetThreadGroupAffinity(hThread foundation.HANDLE, GroupAffinity *systemsysteminformation.GROUP_AFFINITY) foundation.BOOL {
+func GetThreadGroupAffinity(hThread foundation.HANDLE, GroupAffinity *systemsysteminformation.GROUP_AFFINITY) bool {
 	r1, _, _ := syscall.SyscallN(procGetThreadGroupAffinity.Addr(), uintptr(hThread), uintptr(unsafe.Pointer(GroupAffinity)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetThreadIOPendingFlag calls KERNEL32!GetThreadIOPendingFlag.
@@ -1971,16 +2023,24 @@ func GetThreadPriorityBoost(hThread foundation.HANDLE, pDisablePriorityBoost *fo
 
 // GetThreadSelectedCpuSetMasks calls KERNEL32!GetThreadSelectedCpuSetMasks.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadselectedcpusetmasks
-func GetThreadSelectedCpuSetMasks(Thread foundation.HANDLE, CpuSetMasks *systemsysteminformation.GROUP_AFFINITY, CpuSetMaskCount uint16, RequiredMaskCount *uint16) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetThreadSelectedCpuSetMasks.Addr(), uintptr(Thread), uintptr(unsafe.Pointer(CpuSetMasks)), uintptr(CpuSetMaskCount), uintptr(unsafe.Pointer(RequiredMaskCount)))
-	return foundation.BOOL(r1)
+func GetThreadSelectedCpuSetMasks(Thread foundation.HANDLE, CpuSetMasks []systemsysteminformation.GROUP_AFFINITY, RequiredMaskCount *uint16) bool {
+	var _CpuSetMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(CpuSetMasks) > 0 {
+		_CpuSetMasks = &CpuSetMasks[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetThreadSelectedCpuSetMasks.Addr(), uintptr(Thread), uintptr(unsafe.Pointer(_CpuSetMasks)), uintptr(len(CpuSetMasks)), uintptr(unsafe.Pointer(RequiredMaskCount)))
+	return r1 != 0
 }
 
 // GetThreadSelectedCpuSets calls KERNEL32!GetThreadSelectedCpuSets.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadselectedcpusets
-func GetThreadSelectedCpuSets(Thread foundation.HANDLE, CpuSetIds *uint32, CpuSetIdCount uint32, RequiredIdCount *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetThreadSelectedCpuSets.Addr(), uintptr(Thread), uintptr(unsafe.Pointer(CpuSetIds)), uintptr(CpuSetIdCount), uintptr(unsafe.Pointer(RequiredIdCount)))
-	return foundation.BOOL(r1)
+func GetThreadSelectedCpuSets(Thread foundation.HANDLE, CpuSetIds []uint32, RequiredIdCount *uint32) bool {
+	var _CpuSetIds *uint32
+	if len(CpuSetIds) > 0 {
+		_CpuSetIds = &CpuSetIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetThreadSelectedCpuSets.Addr(), uintptr(Thread), uintptr(unsafe.Pointer(_CpuSetIds)), uintptr(len(CpuSetIds)), uintptr(unsafe.Pointer(RequiredIdCount)))
+	return r1 != 0
 }
 
 // GetThreadTimes calls KERNEL32!GetThreadTimes.
@@ -2008,9 +2068,9 @@ func GetUmsCompletionListEvent(UmsCompletionList unsafe.Pointer, UmsCompletionEv
 // GetUmsSystemThreadInformation calls KERNEL32!GetUmsSystemThreadInformation.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getumssystemthreadinformation
 // Minimum OS: windows6.1.
-func GetUmsSystemThreadInformation(ThreadHandle foundation.HANDLE, SystemThreadInfo *UMS_SYSTEM_THREAD_INFORMATION) foundation.BOOL {
+func GetUmsSystemThreadInformation(ThreadHandle foundation.HANDLE, SystemThreadInfo *UMS_SYSTEM_THREAD_INFORMATION) bool {
 	r1, _, _ := syscall.SyscallN(procGetUmsSystemThreadInformation.Addr(), uintptr(ThreadHandle), uintptr(unsafe.Pointer(SystemThreadInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InitOnceBeginInitialize calls KERNEL32!InitOnceBeginInitialize.
@@ -2092,8 +2152,8 @@ func InitializeCriticalSectionEx(lpCriticalSection *CRITICAL_SECTION, dwSpinCoun
 // InitializeProcThreadAttributeList calls KERNEL32!InitializeProcThreadAttributeList.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-initializeprocthreadattributelist
 // Minimum OS: windows6.0.6000.
-func InitializeProcThreadAttributeList(lpAttributeList LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount uint32, dwFlags uint32, lpSize *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procInitializeProcThreadAttributeList.Addr(), uintptr(lpAttributeList), uintptr(dwAttributeCount), uintptr(dwFlags), uintptr(unsafe.Pointer(lpSize)))
+func InitializeProcThreadAttributeList(lpAttributeList LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount uint32, lpSize *uintptr) error {
+	r1, _, e1 := syscall.SyscallN(procInitializeProcThreadAttributeList.Addr(), uintptr(lpAttributeList), uintptr(dwAttributeCount), 0, uintptr(unsafe.Pointer(lpSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2182,25 +2242,25 @@ func IsProcessCritical(hProcess foundation.HANDLE, Critical *foundation.BOOL) er
 // IsProcessorFeaturePresent calls KERNEL32!IsProcessorFeaturePresent.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-isprocessorfeaturepresent
 // Minimum OS: windows5.0.
-func IsProcessorFeaturePresent(ProcessorFeature PROCESSOR_FEATURE_ID) foundation.BOOL {
+func IsProcessorFeaturePresent(ProcessorFeature PROCESSOR_FEATURE_ID) bool {
 	r1, _, _ := syscall.SyscallN(procIsProcessorFeaturePresent.Addr(), uintptr(ProcessorFeature))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsThreadAFiber calls KERNEL32!IsThreadAFiber.
 // https://learn.microsoft.com/windows/win32/api/fibersapi/nf-fibersapi-isthreadafiber
 // Minimum OS: windows6.0.6000.
-func IsThreadAFiber() foundation.BOOL {
+func IsThreadAFiber() bool {
 	r1, _, _ := syscall.SyscallN(procIsThreadAFiber.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsThreadpoolTimerSet calls KERNEL32!IsThreadpoolTimerSet.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-isthreadpooltimerset
 // Minimum OS: windows6.0.6000.
-func IsThreadpoolTimerSet(pti PTP_TIMER) foundation.BOOL {
+func IsThreadpoolTimerSet(pti PTP_TIMER) bool {
 	r1, _, _ := syscall.SyscallN(procIsThreadpoolTimerSet.Addr(), uintptr(pti))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsWow64Process calls KERNEL32!IsWow64Process.
@@ -2239,11 +2299,26 @@ func LeaveCriticalSectionWhenCallbackReturns(pci PTP_CALLBACK_INSTANCE, pcs *CRI
 	syscall.SyscallN(procLeaveCriticalSectionWhenCallbackReturns.Addr(), uintptr(pci), uintptr(unsafe.Pointer(pcs)))
 }
 
+// OpenEvent calls KERNEL32!OpenEventW.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-openeventw
+// Minimum OS: windows5.1.2600.
+func OpenEvent(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle bool, lpName string) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procOpenEvent.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(_lpName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // OpenEventA calls KERNEL32!OpenEventA.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-openeventa
 // Minimum OS: windows5.1.2600.
-func OpenEventA(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle foundation.BOOL, lpName foundation.PSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenEventA.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
+func OpenEventA(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle bool, lpName foundation.PSTR) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, e1 := syscall.SyscallN(procOpenEventA.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2251,28 +2326,26 @@ func OpenEventA(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle fo
 	return ret, nil
 }
 
-// OpenEventW calls KERNEL32!OpenEventW.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-openeventw
-// Minimum OS: windows5.1.2600.
-func OpenEventW(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle foundation.BOOL, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenEventW.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// OpenMutexW calls KERNEL32!OpenMutexW.
+// OpenMutex calls KERNEL32!OpenMutexW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-openmutexw
 // Minimum OS: windows5.1.2600.
-func OpenMutexW(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle foundation.BOOL, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenMutexW.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
+func OpenMutex(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle bool, lpName string) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procOpenMutex.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
+}
+
+// OpenPrivateNamespace calls KERNEL32!OpenPrivateNamespaceW.
+// https://learn.microsoft.com/windows/win32/api/namespaceapi/nf-namespaceapi-openprivatenamespacew
+func OpenPrivateNamespace(lpBoundaryDescriptor unsafe.Pointer, lpAliasPrefix string) foundation.HANDLE {
+	_lpAliasPrefix := win32.UTF16Ptr(lpAliasPrefix)
+	r1, _, _ := syscall.SyscallN(procOpenPrivateNamespace.Addr(), uintptr(unsafe.Pointer(lpBoundaryDescriptor)), uintptr(unsafe.Pointer(_lpAliasPrefix)))
+	return foundation.HANDLE(r1)
 }
 
 // OpenPrivateNamespaceA calls KERNEL32!OpenPrivateNamespaceA.
@@ -2283,18 +2356,12 @@ func OpenPrivateNamespaceA(lpBoundaryDescriptor unsafe.Pointer, lpAliasPrefix fo
 	return foundation.HANDLE(r1)
 }
 
-// OpenPrivateNamespaceW calls KERNEL32!OpenPrivateNamespaceW.
-// https://learn.microsoft.com/windows/win32/api/namespaceapi/nf-namespaceapi-openprivatenamespacew
-func OpenPrivateNamespaceW(lpBoundaryDescriptor unsafe.Pointer, lpAliasPrefix foundation.PWSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procOpenPrivateNamespaceW.Addr(), uintptr(unsafe.Pointer(lpBoundaryDescriptor)), uintptr(unsafe.Pointer(lpAliasPrefix)))
-	return foundation.HANDLE(r1)
-}
-
 // OpenProcess calls KERNEL32!OpenProcess.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-openprocess
 // Minimum OS: windows5.1.2600.
-func OpenProcess(dwDesiredAccess PROCESS_ACCESS_RIGHTS, bInheritHandle foundation.BOOL, dwProcessId uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenProcess.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(dwProcessId))
+func OpenProcess(dwDesiredAccess PROCESS_ACCESS_RIGHTS, bInheritHandle bool, dwProcessId uint32) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, e1 := syscall.SyscallN(procOpenProcess.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(dwProcessId))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2313,11 +2380,13 @@ func OpenProcessToken(ProcessHandle foundation.HANDLE, DesiredAccess security.TO
 	return nil
 }
 
-// OpenSemaphoreW calls KERNEL32!OpenSemaphoreW.
+// OpenSemaphore calls KERNEL32!OpenSemaphoreW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-opensemaphorew
 // Minimum OS: windows5.1.2600.
-func OpenSemaphoreW(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle foundation.BOOL, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenSemaphoreW.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
+func OpenSemaphore(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle bool, lpName string) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procOpenSemaphore.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2328,8 +2397,9 @@ func OpenSemaphoreW(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandl
 // OpenThread calls KERNEL32!OpenThread.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-openthread
 // Minimum OS: windows5.1.2600.
-func OpenThread(dwDesiredAccess THREAD_ACCESS_RIGHTS, bInheritHandle foundation.BOOL, dwThreadId uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenThread.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(dwThreadId))
+func OpenThread(dwDesiredAccess THREAD_ACCESS_RIGHTS, bInheritHandle bool, dwThreadId uint32) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, e1 := syscall.SyscallN(procOpenThread.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(dwThreadId))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2340,31 +2410,35 @@ func OpenThread(dwDesiredAccess THREAD_ACCESS_RIGHTS, bInheritHandle foundation.
 // OpenThreadToken calls ADVAPI32!OpenThreadToken.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-openthreadtoken
 // Minimum OS: windows5.1.2600.
-func OpenThreadToken(ThreadHandle foundation.HANDLE, DesiredAccess security.TOKEN_ACCESS_MASK, OpenAsSelf foundation.BOOL, TokenHandle *foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procOpenThreadToken.Addr(), uintptr(ThreadHandle), uintptr(DesiredAccess), uintptr(OpenAsSelf), uintptr(unsafe.Pointer(TokenHandle)))
+func OpenThreadToken(ThreadHandle foundation.HANDLE, DesiredAccess security.TOKEN_ACCESS_MASK, OpenAsSelf bool, TokenHandle *foundation.HANDLE) error {
+	_OpenAsSelf := win32.Bool32(OpenAsSelf)
+	r1, _, e1 := syscall.SyscallN(procOpenThreadToken.Addr(), uintptr(ThreadHandle), uintptr(DesiredAccess), uintptr(_OpenAsSelf), uintptr(unsafe.Pointer(TokenHandle)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// OpenWaitableTimerA calls KERNEL32!OpenWaitableTimerA.
-// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-openwaitabletimerw
-func OpenWaitableTimerA(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lpTimerName foundation.PSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procOpenWaitableTimerA.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpTimerName)))
-	return foundation.HANDLE(r1)
-}
-
-// OpenWaitableTimerW calls KERNEL32!OpenWaitableTimerW.
+// OpenWaitableTimer calls KERNEL32!OpenWaitableTimerW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-openwaitabletimerw
 // Minimum OS: windows5.1.2600.
-func OpenWaitableTimerW(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle foundation.BOOL, lpTimerName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenWaitableTimerW.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpTimerName)))
+func OpenWaitableTimer(dwDesiredAccess SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle bool, lpTimerName string) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	_lpTimerName := win32.UTF16Ptr(lpTimerName)
+	r1, _, e1 := syscall.SyscallN(procOpenWaitableTimer.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(_lpTimerName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
+}
+
+// OpenWaitableTimerA calls KERNEL32!OpenWaitableTimerA.
+// https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-openwaitabletimerw
+func OpenWaitableTimerA(dwDesiredAccess uint32, bInheritHandle bool, lpTimerName foundation.PSTR) foundation.HANDLE {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, _ := syscall.SyscallN(procOpenWaitableTimerA.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(lpTimerName)))
+	return foundation.HANDLE(r1)
 }
 
 // PulseEvent calls KERNEL32!PulseEvent.
@@ -2386,22 +2460,22 @@ func QueryDepthSList(ListHead *systemkernel.SLIST_HEADER) uint16 {
 	return uint16(r1)
 }
 
-// QueryFullProcessImageNameA calls KERNEL32!QueryFullProcessImageNameA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-queryfullprocessimagenamea
+// QueryFullProcessImageName calls KERNEL32!QueryFullProcessImageNameW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-queryfullprocessimagenamew
 // Minimum OS: windows6.0.6000.
-func QueryFullProcessImageNameA(hProcess foundation.HANDLE, dwFlags PROCESS_NAME_FORMAT, lpExeName foundation.PSTR, lpdwSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryFullProcessImageNameA.Addr(), uintptr(hProcess), uintptr(dwFlags), uintptr(unsafe.Pointer(lpExeName)), uintptr(unsafe.Pointer(lpdwSize)))
+func QueryFullProcessImageName(hProcess foundation.HANDLE, dwFlags PROCESS_NAME_FORMAT, lpExeName foundation.PWSTR, lpdwSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procQueryFullProcessImageName.Addr(), uintptr(hProcess), uintptr(dwFlags), uintptr(unsafe.Pointer(lpExeName)), uintptr(unsafe.Pointer(lpdwSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// QueryFullProcessImageNameW calls KERNEL32!QueryFullProcessImageNameW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-queryfullprocessimagenamew
+// QueryFullProcessImageNameA calls KERNEL32!QueryFullProcessImageNameA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-queryfullprocessimagenamea
 // Minimum OS: windows6.0.6000.
-func QueryFullProcessImageNameW(hProcess foundation.HANDLE, dwFlags PROCESS_NAME_FORMAT, lpExeName foundation.PWSTR, lpdwSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryFullProcessImageNameW.Addr(), uintptr(hProcess), uintptr(dwFlags), uintptr(unsafe.Pointer(lpExeName)), uintptr(unsafe.Pointer(lpdwSize)))
+func QueryFullProcessImageNameA(hProcess foundation.HANDLE, dwFlags PROCESS_NAME_FORMAT, lpExeName foundation.PSTR, lpdwSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procQueryFullProcessImageNameA.Addr(), uintptr(hProcess), uintptr(dwFlags), uintptr(unsafe.Pointer(lpExeName)), uintptr(unsafe.Pointer(lpdwSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2422,9 +2496,9 @@ func QueryProcessAffinityUpdateMode(hProcess foundation.HANDLE, lpdwFlags *PROCE
 // QueryProtectedPolicy calls KERNEL32!QueryProtectedPolicy.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-queryprotectedpolicy
 // Minimum OS: windows8.1.
-func QueryProtectedPolicy(PolicyGuid *win32.GUID, PolicyValue *uintptr) foundation.BOOL {
+func QueryProtectedPolicy(PolicyGuid *win32.GUID, PolicyValue *uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procQueryProtectedPolicy.Addr(), uintptr(unsafe.Pointer(PolicyGuid)), uintptr(unsafe.Pointer(PolicyValue)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QueryThreadpoolStackInformation calls KERNEL32!QueryThreadpoolStackInformation.
@@ -2462,9 +2536,9 @@ func QueueUserAPC(pfnAPC foundation.PAPCFUNC, hThread foundation.HANDLE, dwData 
 
 // QueueUserAPC2 calls KERNEL32!QueueUserAPC2.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-queueuserapc2
-func QueueUserAPC2(ApcRoutine foundation.PAPCFUNC, Thread foundation.HANDLE, Data uintptr, Flags QUEUE_USER_APC_FLAGS) foundation.BOOL {
+func QueueUserAPC2(ApcRoutine foundation.PAPCFUNC, Thread foundation.HANDLE, Data uintptr, Flags QUEUE_USER_APC_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procQueueUserAPC2.Addr(), uintptr(ApcRoutine), uintptr(Thread), uintptr(Data), uintptr(Flags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QueueUserWorkItem calls KERNEL32!QueueUserWorkItem.
@@ -2564,264 +2638,268 @@ func ResumeThread(hThread foundation.HANDLE) (uint32, error) {
 // RtwqAddPeriodicCallback calls RTWorkQ!RtwqAddPeriodicCallback.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqaddperiodiccallback
 // Minimum OS: windows8.1.
-func RtwqAddPeriodicCallback(Callback RTWQPERIODICCALLBACK, context *systemcom.IUnknown, key *uint32) foundation.HRESULT {
+func RtwqAddPeriodicCallback(Callback RTWQPERIODICCALLBACK, context *systemcom.IUnknown, key *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqAddPeriodicCallback.Addr(), uintptr(Callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(key)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqAllocateSerialWorkQueue calls RTWorkQ!RtwqAllocateSerialWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqallocateserialworkqueue
 // Minimum OS: windows8.1.
-func RtwqAllocateSerialWorkQueue(workQueueIdIn uint32, workQueueIdOut *uint32) foundation.HRESULT {
+func RtwqAllocateSerialWorkQueue(workQueueIdIn uint32, workQueueIdOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqAllocateSerialWorkQueue.Addr(), uintptr(workQueueIdIn), uintptr(unsafe.Pointer(workQueueIdOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqAllocateWorkQueue calls RTWorkQ!RtwqAllocateWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqallocateworkqueue
 // Minimum OS: windows8.1.
-func RtwqAllocateWorkQueue(WorkQueueType RTWQ_WORKQUEUE_TYPE, workQueueId *uint32) foundation.HRESULT {
+func RtwqAllocateWorkQueue(WorkQueueType RTWQ_WORKQUEUE_TYPE, workQueueId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqAllocateWorkQueue.Addr(), uintptr(WorkQueueType), uintptr(unsafe.Pointer(workQueueId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqBeginRegisterWorkQueueWithMMCSS calls RTWorkQ!RtwqBeginRegisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqbeginregisterworkqueuewithmmcss
 // Minimum OS: windows8.1.
-func RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId uint32, usageClass foundation.PWSTR, dwTaskId uint32, lPriority int32, doneCallback *IRtwqAsyncCallback, doneState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqBeginRegisterWorkQueueWithMMCSS.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(usageClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(unsafe.Pointer(doneCallback)), uintptr(unsafe.Pointer(doneState)))
-	return foundation.HRESULT(r1)
+func RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId uint32, usageClass string, dwTaskId uint32, lPriority int32, doneCallback *IRtwqAsyncCallback, doneState *systemcom.IUnknown) error {
+	_usageClass := win32.UTF16Ptr(usageClass)
+	r1, _, _ := syscall.SyscallN(procRtwqBeginRegisterWorkQueueWithMMCSS.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(_usageClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(unsafe.Pointer(doneCallback)), uintptr(unsafe.Pointer(doneState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqBeginUnregisterWorkQueueWithMMCSS calls RTWorkQ!RtwqBeginUnregisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqbeginunregisterworkqueuewithmmcss
 // Minimum OS: windows8.1.
-func RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId uint32, doneCallback *IRtwqAsyncCallback, doneState *systemcom.IUnknown) foundation.HRESULT {
+func RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId uint32, doneCallback *IRtwqAsyncCallback, doneState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procRtwqBeginUnregisterWorkQueueWithMMCSS.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(doneCallback)), uintptr(unsafe.Pointer(doneState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqCancelDeadline calls RTWorkQ!RtwqCancelDeadline.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqcanceldeadline
-func RtwqCancelDeadline(pRequest foundation.HANDLE) foundation.HRESULT {
+func RtwqCancelDeadline(pRequest foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqCancelDeadline.Addr(), uintptr(pRequest))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqCancelWorkItem calls RTWorkQ!RtwqCancelWorkItem.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqcancelworkitem
 // Minimum OS: windows8.1.
-func RtwqCancelWorkItem(Key uint64) foundation.HRESULT {
+func RtwqCancelWorkItem(Key uint64) error {
 	r1, _, _ := syscall.SyscallN(procRtwqCancelWorkItem.Addr(), uintptr(Key))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqCreateAsyncResult calls RTWorkQ!RtwqCreateAsyncResult.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqcreateasyncresult
 // Minimum OS: windows8.1.
-func RtwqCreateAsyncResult(appObject *systemcom.IUnknown, callback *IRtwqAsyncCallback, appState *systemcom.IUnknown, asyncResult **IRtwqAsyncResult) foundation.HRESULT {
+func RtwqCreateAsyncResult(appObject *systemcom.IUnknown, callback *IRtwqAsyncCallback, appState *systemcom.IUnknown, asyncResult **IRtwqAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procRtwqCreateAsyncResult.Addr(), uintptr(unsafe.Pointer(appObject)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(appState)), uintptr(unsafe.Pointer(asyncResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqEndRegisterWorkQueueWithMMCSS calls RTWorkQ!RtwqEndRegisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqendregisterworkqueuewithmmcss
 // Minimum OS: windows8.1.
-func RtwqEndRegisterWorkQueueWithMMCSS(result *IRtwqAsyncResult, taskId *uint32) foundation.HRESULT {
+func RtwqEndRegisterWorkQueueWithMMCSS(result *IRtwqAsyncResult, taskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqEndRegisterWorkQueueWithMMCSS.Addr(), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(taskId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqGetWorkQueueMMCSSClass calls RTWorkQ!RtwqGetWorkQueueMMCSSClass.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqgetworkqueuemmcssclass
 // Minimum OS: windows8.1.
-func RtwqGetWorkQueueMMCSSClass(workQueueId uint32, usageClass foundation.PWSTR, usageClassLength *uint32) foundation.HRESULT {
+func RtwqGetWorkQueueMMCSSClass(workQueueId uint32, usageClass foundation.PWSTR, usageClassLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqGetWorkQueueMMCSSClass.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(usageClass)), uintptr(unsafe.Pointer(usageClassLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqGetWorkQueueMMCSSPriority calls RTWorkQ!RtwqGetWorkQueueMMCSSPriority.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqgetworkqueuemmcsspriority
 // Minimum OS: windows8.1.
-func RtwqGetWorkQueueMMCSSPriority(workQueueId uint32, priority *int32) foundation.HRESULT {
+func RtwqGetWorkQueueMMCSSPriority(workQueueId uint32, priority *int32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqGetWorkQueueMMCSSPriority.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(priority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqGetWorkQueueMMCSSTaskId calls RTWorkQ!RtwqGetWorkQueueMMCSSTaskId.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqgetworkqueuemmcsstaskid
 // Minimum OS: windows8.1.
-func RtwqGetWorkQueueMMCSSTaskId(workQueueId uint32, taskId *uint32) foundation.HRESULT {
+func RtwqGetWorkQueueMMCSSTaskId(workQueueId uint32, taskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqGetWorkQueueMMCSSTaskId.Addr(), uintptr(workQueueId), uintptr(unsafe.Pointer(taskId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqInvokeCallback calls RTWorkQ!RtwqInvokeCallback.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqinvokecallback
 // Minimum OS: windows8.1.
-func RtwqInvokeCallback(result *IRtwqAsyncResult) foundation.HRESULT {
+func RtwqInvokeCallback(result *IRtwqAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procRtwqInvokeCallback.Addr(), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqJoinWorkQueue calls RTWorkQ!RtwqJoinWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqjoinworkqueue
 // Minimum OS: windows8.1.
-func RtwqJoinWorkQueue(workQueueId uint32, hFile foundation.HANDLE, out *foundation.HANDLE) foundation.HRESULT {
+func RtwqJoinWorkQueue(workQueueId uint32, hFile foundation.HANDLE, out *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqJoinWorkQueue.Addr(), uintptr(workQueueId), uintptr(hFile), uintptr(unsafe.Pointer(out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqLockPlatform calls RTWorkQ!RtwqLockPlatform.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqlockplatform
 // Minimum OS: windows8.1.
-func RtwqLockPlatform() foundation.HRESULT {
+func RtwqLockPlatform() error {
 	r1, _, _ := syscall.SyscallN(procRtwqLockPlatform.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqLockSharedWorkQueue calls RTWorkQ!RtwqLockSharedWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqlocksharedworkqueue
 // Minimum OS: windows8.1.
-func RtwqLockSharedWorkQueue(usageClass foundation.PWSTR, basePriority int32, taskId *uint32, id *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqLockSharedWorkQueue.Addr(), uintptr(unsafe.Pointer(usageClass)), uintptr(basePriority), uintptr(unsafe.Pointer(taskId)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+func RtwqLockSharedWorkQueue(usageClass string, basePriority int32, taskId *uint32, id *uint32) error {
+	_usageClass := win32.UTF16Ptr(usageClass)
+	r1, _, _ := syscall.SyscallN(procRtwqLockSharedWorkQueue.Addr(), uintptr(unsafe.Pointer(_usageClass)), uintptr(basePriority), uintptr(unsafe.Pointer(taskId)), uintptr(unsafe.Pointer(id)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqLockWorkQueue calls RTWorkQ!RtwqLockWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqlockworkqueue
 // Minimum OS: windows8.1.
-func RtwqLockWorkQueue(workQueueId uint32) foundation.HRESULT {
+func RtwqLockWorkQueue(workQueueId uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqLockWorkQueue.Addr(), uintptr(workQueueId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqPutWaitingWorkItem calls RTWorkQ!RtwqPutWaitingWorkItem.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqputwaitingworkitem
 // Minimum OS: windows8.1.
-func RtwqPutWaitingWorkItem(hEvent foundation.HANDLE, lPriority int32, result *IRtwqAsyncResult, key *uint64) foundation.HRESULT {
+func RtwqPutWaitingWorkItem(hEvent foundation.HANDLE, lPriority int32, result *IRtwqAsyncResult, key *uint64) error {
 	r1, _, _ := syscall.SyscallN(procRtwqPutWaitingWorkItem.Addr(), uintptr(hEvent), uintptr(lPriority), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(key)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqPutWorkItem calls RTWorkQ!RtwqPutWorkItem.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqputworkitem
 // Minimum OS: windows8.1.
-func RtwqPutWorkItem(dwQueue uint32, lPriority int32, result *IRtwqAsyncResult) foundation.HRESULT {
+func RtwqPutWorkItem(dwQueue uint32, lPriority int32, result *IRtwqAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procRtwqPutWorkItem.Addr(), uintptr(dwQueue), uintptr(lPriority), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqRegisterPlatformEvents calls RTWorkQ!RtwqRegisterPlatformEvents.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqregisterplatformevents
 // Minimum OS: windows8.1.
-func RtwqRegisterPlatformEvents(platformEvents *IRtwqPlatformEvents) foundation.HRESULT {
+func RtwqRegisterPlatformEvents(platformEvents *IRtwqPlatformEvents) error {
 	r1, _, _ := syscall.SyscallN(procRtwqRegisterPlatformEvents.Addr(), uintptr(unsafe.Pointer(platformEvents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqRegisterPlatformWithMMCSS calls RTWorkQ!RtwqRegisterPlatformWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqregisterplatformwithmmcss
 // Minimum OS: windows8.1.
-func RtwqRegisterPlatformWithMMCSS(usageClass foundation.PWSTR, taskId *uint32, lPriority int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqRegisterPlatformWithMMCSS.Addr(), uintptr(unsafe.Pointer(usageClass)), uintptr(unsafe.Pointer(taskId)), uintptr(lPriority))
-	return foundation.HRESULT(r1)
+func RtwqRegisterPlatformWithMMCSS(usageClass string, taskId *uint32, lPriority int32) error {
+	_usageClass := win32.UTF16Ptr(usageClass)
+	r1, _, _ := syscall.SyscallN(procRtwqRegisterPlatformWithMMCSS.Addr(), uintptr(unsafe.Pointer(_usageClass)), uintptr(unsafe.Pointer(taskId)), uintptr(lPriority))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqRemovePeriodicCallback calls RTWorkQ!RtwqRemovePeriodicCallback.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqremoveperiodiccallback
 // Minimum OS: windows8.1.
-func RtwqRemovePeriodicCallback(dwKey uint32) foundation.HRESULT {
+func RtwqRemovePeriodicCallback(dwKey uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqRemovePeriodicCallback.Addr(), uintptr(dwKey))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqScheduleWorkItem calls RTWorkQ!RtwqScheduleWorkItem.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqscheduleworkitem
 // Minimum OS: windows8.1.
-func RtwqScheduleWorkItem(result *IRtwqAsyncResult, Timeout int64, key *uint64) foundation.HRESULT {
+func RtwqScheduleWorkItem(result *IRtwqAsyncResult, Timeout int64, key *uint64) error {
 	r1, _, _ := syscall.SyscallN(procRtwqScheduleWorkItem.Addr(), uintptr(unsafe.Pointer(result)), uintptr(Timeout), uintptr(unsafe.Pointer(key)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqSetDeadline calls RTWorkQ!RtwqSetDeadline.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqsetdeadline
 // Minimum OS: windows10.0.10240.
-func RtwqSetDeadline(workQueueId uint32, deadlineInHNS int64, pRequest *foundation.HANDLE) foundation.HRESULT {
+func RtwqSetDeadline(workQueueId uint32, deadlineInHNS int64, pRequest *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqSetDeadline.Addr(), uintptr(workQueueId), uintptr(deadlineInHNS), uintptr(unsafe.Pointer(pRequest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqSetDeadline2 calls RTWorkQ!RtwqSetDeadline2.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqsetdeadline2
 // Minimum OS: windows10.0.10240.
-func RtwqSetDeadline2(workQueueId uint32, deadlineInHNS int64, preDeadlineInHNS int64, pRequest *foundation.HANDLE) foundation.HRESULT {
+func RtwqSetDeadline2(workQueueId uint32, deadlineInHNS int64, preDeadlineInHNS int64, pRequest *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqSetDeadline2.Addr(), uintptr(workQueueId), uintptr(deadlineInHNS), uintptr(preDeadlineInHNS), uintptr(unsafe.Pointer(pRequest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqSetLongRunning calls RTWorkQ!RtwqSetLongRunning.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqsetlongrunning
 // Minimum OS: windows8.1.
-func RtwqSetLongRunning(workQueueId uint32, enable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRtwqSetLongRunning.Addr(), uintptr(workQueueId), uintptr(enable))
-	return foundation.HRESULT(r1)
+func RtwqSetLongRunning(workQueueId uint32, enable bool) error {
+	_enable := win32.Bool32(enable)
+	r1, _, _ := syscall.SyscallN(procRtwqSetLongRunning.Addr(), uintptr(workQueueId), uintptr(_enable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqShutdown calls RTWorkQ!RtwqShutdown.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqshutdown
 // Minimum OS: windows8.1.
-func RtwqShutdown() foundation.HRESULT {
+func RtwqShutdown() error {
 	r1, _, _ := syscall.SyscallN(procRtwqShutdown.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqStartup calls RTWorkQ!RtwqStartup.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqstartup
 // Minimum OS: windows8.1.
-func RtwqStartup() foundation.HRESULT {
+func RtwqStartup() error {
 	r1, _, _ := syscall.SyscallN(procRtwqStartup.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqUnjoinWorkQueue calls RTWorkQ!RtwqUnjoinWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqunjoinworkqueue
 // Minimum OS: windows8.1.
-func RtwqUnjoinWorkQueue(workQueueId uint32, hFile foundation.HANDLE) foundation.HRESULT {
+func RtwqUnjoinWorkQueue(workQueueId uint32, hFile foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnjoinWorkQueue.Addr(), uintptr(workQueueId), uintptr(hFile))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqUnlockPlatform calls RTWorkQ!RtwqUnlockPlatform.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqunlockplatform
 // Minimum OS: windows8.1.
-func RtwqUnlockPlatform() foundation.HRESULT {
+func RtwqUnlockPlatform() error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnlockPlatform.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqUnlockWorkQueue calls RTWorkQ!RtwqUnlockWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqunlockworkqueue
 // Minimum OS: windows8.1.
-func RtwqUnlockWorkQueue(workQueueId uint32) foundation.HRESULT {
+func RtwqUnlockWorkQueue(workQueueId uint32) error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnlockWorkQueue.Addr(), uintptr(workQueueId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqUnregisterPlatformEvents calls RTWorkQ!RtwqUnregisterPlatformEvents.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqunregisterplatformevents
 // Minimum OS: windows8.1.
-func RtwqUnregisterPlatformEvents(platformEvents *IRtwqPlatformEvents) foundation.HRESULT {
+func RtwqUnregisterPlatformEvents(platformEvents *IRtwqPlatformEvents) error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnregisterPlatformEvents.Addr(), uintptr(unsafe.Pointer(platformEvents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtwqUnregisterPlatformFromMMCSS calls RTWorkQ!RtwqUnregisterPlatformFromMMCSS.
 // https://learn.microsoft.com/windows/win32/api/rtworkq/nf-rtworkq-rtwqunregisterplatformfrommmcss
 // Minimum OS: windows8.1.
-func RtwqUnregisterPlatformFromMMCSS() foundation.HRESULT {
+func RtwqUnregisterPlatformFromMMCSS() error {
 	r1, _, _ := syscall.SyscallN(procRtwqUnregisterPlatformFromMMCSS.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCriticalSectionSpinCount calls KERNEL32!SetCriticalSectionSpinCount.
@@ -2896,22 +2974,34 @@ func SetProcessDEPPolicy(dwFlags PROCESS_DEP_FLAGS) error {
 
 // SetProcessDefaultCpuSetMasks calls KERNEL32!SetProcessDefaultCpuSetMasks.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessdefaultcpusetmasks
-func SetProcessDefaultCpuSetMasks(Process foundation.HANDLE, CpuSetMasks *systemsysteminformation.GROUP_AFFINITY, CpuSetMaskCount uint16) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetProcessDefaultCpuSetMasks.Addr(), uintptr(Process), uintptr(unsafe.Pointer(CpuSetMasks)), uintptr(CpuSetMaskCount))
-	return foundation.BOOL(r1)
+func SetProcessDefaultCpuSetMasks(Process foundation.HANDLE, CpuSetMasks []systemsysteminformation.GROUP_AFFINITY) bool {
+	var _CpuSetMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(CpuSetMasks) > 0 {
+		_CpuSetMasks = &CpuSetMasks[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetProcessDefaultCpuSetMasks.Addr(), uintptr(Process), uintptr(unsafe.Pointer(_CpuSetMasks)), uintptr(len(CpuSetMasks)))
+	return r1 != 0
 }
 
 // SetProcessDefaultCpuSets calls KERNEL32!SetProcessDefaultCpuSets.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessdefaultcpusets
-func SetProcessDefaultCpuSets(Process foundation.HANDLE, CpuSetIds *uint32, CpuSetIdCount uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetProcessDefaultCpuSets.Addr(), uintptr(Process), uintptr(unsafe.Pointer(CpuSetIds)), uintptr(CpuSetIdCount))
-	return foundation.BOOL(r1)
+func SetProcessDefaultCpuSets(Process foundation.HANDLE, CpuSetIds []uint32) bool {
+	var _CpuSetIds *uint32
+	if len(CpuSetIds) > 0 {
+		_CpuSetIds = &CpuSetIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetProcessDefaultCpuSets.Addr(), uintptr(Process), uintptr(unsafe.Pointer(_CpuSetIds)), uintptr(len(CpuSetIds)))
+	return r1 != 0
 }
 
 // SetProcessDynamicEHContinuationTargets calls KERNEL32!SetProcessDynamicEHContinuationTargets.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessdynamicehcontinuationtargets
-func SetProcessDynamicEHContinuationTargets(Process foundation.HANDLE, NumberOfTargets uint16, Targets *PROCESS_DYNAMIC_EH_CONTINUATION_TARGET) error {
-	r1, _, e1 := syscall.SyscallN(procSetProcessDynamicEHContinuationTargets.Addr(), uintptr(Process), uintptr(NumberOfTargets), uintptr(unsafe.Pointer(Targets)))
+func SetProcessDynamicEHContinuationTargets(Process foundation.HANDLE, Targets []PROCESS_DYNAMIC_EH_CONTINUATION_TARGET) error {
+	var _Targets *PROCESS_DYNAMIC_EH_CONTINUATION_TARGET
+	if len(Targets) > 0 {
+		_Targets = &Targets[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetProcessDynamicEHContinuationTargets.Addr(), uintptr(Process), uintptr(len(Targets)), uintptr(unsafe.Pointer(_Targets)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2920,9 +3010,13 @@ func SetProcessDynamicEHContinuationTargets(Process foundation.HANDLE, NumberOfT
 
 // SetProcessDynamicEnforcedCetCompatibleRanges calls KERNEL32!SetProcessDynamicEnforcedCetCompatibleRanges.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessdynamicenforcedcetcompatibleranges
-func SetProcessDynamicEnforcedCetCompatibleRanges(Process foundation.HANDLE, NumberOfRanges uint16, Ranges *PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetProcessDynamicEnforcedCetCompatibleRanges.Addr(), uintptr(Process), uintptr(NumberOfRanges), uintptr(unsafe.Pointer(Ranges)))
-	return foundation.BOOL(r1)
+func SetProcessDynamicEnforcedCetCompatibleRanges(Process foundation.HANDLE, Ranges []PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE) bool {
+	var _Ranges *PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE
+	if len(Ranges) > 0 {
+		_Ranges = &Ranges[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetProcessDynamicEnforcedCetCompatibleRanges.Addr(), uintptr(Process), uintptr(len(Ranges)), uintptr(unsafe.Pointer(_Ranges)))
+	return r1 != 0
 }
 
 // SetProcessInformation calls KERNEL32!SetProcessInformation.
@@ -2950,8 +3044,9 @@ func SetProcessMitigationPolicy(MitigationPolicy PROCESS_MITIGATION_POLICY, lpBu
 // SetProcessPriorityBoost calls KERNEL32!SetProcessPriorityBoost.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocesspriorityboost
 // Minimum OS: windows5.1.2600.
-func SetProcessPriorityBoost(hProcess foundation.HANDLE, bDisablePriorityBoost foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetProcessPriorityBoost.Addr(), uintptr(hProcess), uintptr(bDisablePriorityBoost))
+func SetProcessPriorityBoost(hProcess foundation.HANDLE, bDisablePriorityBoost bool) error {
+	_bDisablePriorityBoost := win32.Bool32(bDisablePriorityBoost)
+	r1, _, e1 := syscall.SyscallN(procSetProcessPriorityBoost.Addr(), uintptr(hProcess), uintptr(_bDisablePriorityBoost))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2961,8 +3056,9 @@ func SetProcessPriorityBoost(hProcess foundation.HANDLE, bDisablePriorityBoost f
 // SetProcessRestrictionExemption calls USER32!SetProcessRestrictionExemption.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setprocessrestrictionexemption
 // Minimum OS: windows8.0.
-func SetProcessRestrictionExemption(fEnableExemption foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetProcessRestrictionExemption.Addr(), uintptr(fEnableExemption))
+func SetProcessRestrictionExemption(fEnableExemption bool) error {
+	_fEnableExemption := win32.Bool32(fEnableExemption)
+	r1, _, e1 := syscall.SyscallN(procSetProcessRestrictionExemption.Addr(), uintptr(_fEnableExemption))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3016,17 +3112,18 @@ func SetThreadAffinityMask(hThread foundation.HANDLE, dwThreadAffinityMask uintp
 // SetThreadDescription calls KERNEL32!SetThreadDescription.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setthreaddescription
 // Minimum OS: windows10.0.14393.
-func SetThreadDescription(hThread foundation.HANDLE, lpThreadDescription foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetThreadDescription.Addr(), uintptr(hThread), uintptr(unsafe.Pointer(lpThreadDescription)))
-	return foundation.HRESULT(r1)
+func SetThreadDescription(hThread foundation.HANDLE, lpThreadDescription string) error {
+	_lpThreadDescription := win32.UTF16Ptr(lpThreadDescription)
+	r1, _, _ := syscall.SyscallN(procSetThreadDescription.Addr(), uintptr(hThread), uintptr(unsafe.Pointer(_lpThreadDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetThreadGroupAffinity calls KERNEL32!SetThreadGroupAffinity.
 // https://learn.microsoft.com/windows/win32/api/processtopologyapi/nf-processtopologyapi-setthreadgroupaffinity
 // Minimum OS: windows6.1.
-func SetThreadGroupAffinity(hThread foundation.HANDLE, GroupAffinity *systemsysteminformation.GROUP_AFFINITY, PreviousGroupAffinity *systemsysteminformation.GROUP_AFFINITY) foundation.BOOL {
+func SetThreadGroupAffinity(hThread foundation.HANDLE, GroupAffinity *systemsysteminformation.GROUP_AFFINITY, PreviousGroupAffinity *systemsysteminformation.GROUP_AFFINITY) bool {
 	r1, _, _ := syscall.SyscallN(procSetThreadGroupAffinity.Addr(), uintptr(hThread), uintptr(unsafe.Pointer(GroupAffinity)), uintptr(unsafe.Pointer(PreviousGroupAffinity)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetThreadIdealProcessor calls KERNEL32!SetThreadIdealProcessor.
@@ -3076,8 +3173,9 @@ func SetThreadPriority(hThread foundation.HANDLE, nPriority THREAD_PRIORITY) err
 // SetThreadPriorityBoost calls KERNEL32!SetThreadPriorityBoost.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setthreadpriorityboost
 // Minimum OS: windows5.1.2600.
-func SetThreadPriorityBoost(hThread foundation.HANDLE, bDisablePriorityBoost foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetThreadPriorityBoost.Addr(), uintptr(hThread), uintptr(bDisablePriorityBoost))
+func SetThreadPriorityBoost(hThread foundation.HANDLE, bDisablePriorityBoost bool) error {
+	_bDisablePriorityBoost := win32.Bool32(bDisablePriorityBoost)
+	r1, _, e1 := syscall.SyscallN(procSetThreadPriorityBoost.Addr(), uintptr(hThread), uintptr(_bDisablePriorityBoost))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3086,16 +3184,24 @@ func SetThreadPriorityBoost(hThread foundation.HANDLE, bDisablePriorityBoost fou
 
 // SetThreadSelectedCpuSetMasks calls KERNEL32!SetThreadSelectedCpuSetMasks.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setthreadselectedcpusetmasks
-func SetThreadSelectedCpuSetMasks(Thread foundation.HANDLE, CpuSetMasks *systemsysteminformation.GROUP_AFFINITY, CpuSetMaskCount uint16) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetThreadSelectedCpuSetMasks.Addr(), uintptr(Thread), uintptr(unsafe.Pointer(CpuSetMasks)), uintptr(CpuSetMaskCount))
-	return foundation.BOOL(r1)
+func SetThreadSelectedCpuSetMasks(Thread foundation.HANDLE, CpuSetMasks []systemsysteminformation.GROUP_AFFINITY) bool {
+	var _CpuSetMasks *systemsysteminformation.GROUP_AFFINITY
+	if len(CpuSetMasks) > 0 {
+		_CpuSetMasks = &CpuSetMasks[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetThreadSelectedCpuSetMasks.Addr(), uintptr(Thread), uintptr(unsafe.Pointer(_CpuSetMasks)), uintptr(len(CpuSetMasks)))
+	return r1 != 0
 }
 
 // SetThreadSelectedCpuSets calls KERNEL32!SetThreadSelectedCpuSets.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setthreadselectedcpusets
-func SetThreadSelectedCpuSets(Thread foundation.HANDLE, CpuSetIds *uint32, CpuSetIdCount uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetThreadSelectedCpuSets.Addr(), uintptr(Thread), uintptr(unsafe.Pointer(CpuSetIds)), uintptr(CpuSetIdCount))
-	return foundation.BOOL(r1)
+func SetThreadSelectedCpuSets(Thread foundation.HANDLE, CpuSetIds []uint32) bool {
+	var _CpuSetIds *uint32
+	if len(CpuSetIds) > 0 {
+		_CpuSetIds = &CpuSetIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetThreadSelectedCpuSets.Addr(), uintptr(Thread), uintptr(unsafe.Pointer(_CpuSetIds)), uintptr(len(CpuSetIds)))
+	return r1 != 0
 }
 
 // SetThreadStackGuarantee calls KERNEL32!SetThreadStackGuarantee.
@@ -3159,9 +3265,9 @@ func SetThreadpoolTimer(pti PTP_TIMER, pftDueTime *foundation.FILETIME, msPeriod
 // SetThreadpoolTimerEx calls KERNEL32!SetThreadpoolTimerEx.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpooltimerex
 // Minimum OS: windows8.0.
-func SetThreadpoolTimerEx(pti PTP_TIMER, pftDueTime *foundation.FILETIME, msPeriod uint32, msWindowLength uint32) foundation.BOOL {
+func SetThreadpoolTimerEx(pti PTP_TIMER, pftDueTime *foundation.FILETIME, msPeriod uint32, msWindowLength uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetThreadpoolTimerEx.Addr(), uintptr(pti), uintptr(unsafe.Pointer(pftDueTime)), uintptr(msPeriod), uintptr(msWindowLength))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetThreadpoolWait calls KERNEL32!SetThreadpoolWait.
@@ -3174,14 +3280,15 @@ func SetThreadpoolWait(pwa PTP_WAIT, h foundation.HANDLE, pftTimeout *foundation
 // SetThreadpoolWaitEx calls KERNEL32!SetThreadpoolWaitEx.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpoolwaitex
 // Minimum OS: windows8.0.
-func SetThreadpoolWaitEx(pwa PTP_WAIT, h foundation.HANDLE, pftTimeout *foundation.FILETIME, Reserved unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetThreadpoolWaitEx.Addr(), uintptr(pwa), uintptr(h), uintptr(unsafe.Pointer(pftTimeout)), uintptr(unsafe.Pointer(Reserved)))
-	return foundation.BOOL(r1)
+func SetThreadpoolWaitEx(pwa PTP_WAIT, h foundation.HANDLE, pftTimeout *foundation.FILETIME) bool {
+	r1, _, _ := syscall.SyscallN(procSetThreadpoolWaitEx.Addr(), uintptr(pwa), uintptr(h), uintptr(unsafe.Pointer(pftTimeout)), 0)
+	return r1 != 0
 }
 
 // SetTimerQueueTimer calls KERNEL32!SetTimerQueueTimer.
-func SetTimerQueueTimer(TimerQueue foundation.HANDLE, Callback WAITORTIMERCALLBACK, Parameter unsafe.Pointer, DueTime uint32, Period uint32, PreferIo foundation.BOOL) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procSetTimerQueueTimer.Addr(), uintptr(TimerQueue), uintptr(Callback), uintptr(unsafe.Pointer(Parameter)), uintptr(DueTime), uintptr(Period), uintptr(PreferIo))
+func SetTimerQueueTimer(TimerQueue foundation.HANDLE, Callback WAITORTIMERCALLBACK, Parameter unsafe.Pointer, DueTime uint32, Period uint32, PreferIo bool) foundation.HANDLE {
+	_PreferIo := win32.Bool32(PreferIo)
+	r1, _, _ := syscall.SyscallN(procSetTimerQueueTimer.Addr(), uintptr(TimerQueue), uintptr(Callback), uintptr(unsafe.Pointer(Parameter)), uintptr(DueTime), uintptr(Period), uintptr(_PreferIo))
 	return foundation.HANDLE(r1)
 }
 
@@ -3199,8 +3306,9 @@ func SetUmsThreadInformation(UmsThread unsafe.Pointer, UmsThreadInfoClass UMS_TH
 // SetWaitableTimer calls KERNEL32!SetWaitableTimer.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-setwaitabletimer
 // Minimum OS: windows5.1.2600.
-func SetWaitableTimer(hTimer foundation.HANDLE, lpDueTime *int64, lPeriod int32, pfnCompletionRoutine PTIMERAPCROUTINE, lpArgToCompletionRoutine unsafe.Pointer, fResume foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetWaitableTimer.Addr(), uintptr(hTimer), uintptr(unsafe.Pointer(lpDueTime)), uintptr(lPeriod), uintptr(pfnCompletionRoutine), uintptr(unsafe.Pointer(lpArgToCompletionRoutine)), uintptr(fResume))
+func SetWaitableTimer(hTimer foundation.HANDLE, lpDueTime *int64, lPeriod int32, pfnCompletionRoutine PTIMERAPCROUTINE, lpArgToCompletionRoutine unsafe.Pointer, fResume bool) error {
+	_fResume := win32.Bool32(fResume)
+	r1, _, e1 := syscall.SyscallN(procSetWaitableTimer.Addr(), uintptr(hTimer), uintptr(unsafe.Pointer(lpDueTime)), uintptr(lPeriod), uintptr(pfnCompletionRoutine), uintptr(unsafe.Pointer(lpArgToCompletionRoutine)), uintptr(_fResume))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3221,8 +3329,9 @@ func SetWaitableTimerEx(hTimer foundation.HANDLE, lpDueTime *int64, lPeriod int3
 // SignalObjectAndWait calls KERNEL32!SignalObjectAndWait.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-signalobjectandwait
 // Minimum OS: windows5.1.2600.
-func SignalObjectAndWait(hObjectToSignal foundation.HANDLE, hObjectToWaitOn foundation.HANDLE, dwMilliseconds uint32, bAlertable foundation.BOOL) (foundation.WAIT_EVENT, error) {
-	r1, _, e1 := syscall.SyscallN(procSignalObjectAndWait.Addr(), uintptr(hObjectToSignal), uintptr(hObjectToWaitOn), uintptr(dwMilliseconds), uintptr(bAlertable))
+func SignalObjectAndWait(hObjectToSignal foundation.HANDLE, hObjectToWaitOn foundation.HANDLE, dwMilliseconds uint32, bAlertable bool) (foundation.WAIT_EVENT, error) {
+	_bAlertable := win32.Bool32(bAlertable)
+	r1, _, e1 := syscall.SyscallN(procSignalObjectAndWait.Addr(), uintptr(hObjectToSignal), uintptr(hObjectToWaitOn), uintptr(dwMilliseconds), uintptr(_bAlertable))
 	if e1 != 0 {
 		return foundation.WAIT_EVENT(r1), e1
 	}
@@ -3261,8 +3370,9 @@ func SleepConditionVariableSRW(ConditionVariable *CONDITION_VARIABLE, SRWLock *S
 // SleepEx calls KERNEL32!SleepEx.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-sleepex
 // Minimum OS: windows5.1.2600.
-func SleepEx(dwMilliseconds uint32, bAlertable foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procSleepEx.Addr(), uintptr(dwMilliseconds), uintptr(bAlertable))
+func SleepEx(dwMilliseconds uint32, bAlertable bool) uint32 {
+	_bAlertable := win32.Bool32(bAlertable)
+	r1, _, _ := syscall.SyscallN(procSleepEx.Addr(), uintptr(dwMilliseconds), uintptr(_bAlertable))
 	return uint32(r1)
 }
 
@@ -3301,9 +3411,9 @@ func SwitchToFiber(lpFiber unsafe.Pointer) {
 // SwitchToThread calls KERNEL32!SwitchToThread.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-switchtothread
 // Minimum OS: windows5.1.2600.
-func SwitchToThread() foundation.BOOL {
+func SwitchToThread() bool {
 	r1, _, _ := syscall.SyscallN(procSwitchToThread.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TerminateProcess calls KERNEL32!TerminateProcess.
@@ -3398,9 +3508,9 @@ func TryAcquireSRWLockShared(SRWLock *SRWLOCK) foundation.BOOLEAN {
 // TryEnterCriticalSection calls KERNEL32!TryEnterCriticalSection.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-tryentercriticalsection
 // Minimum OS: windows5.1.2600.
-func TryEnterCriticalSection(lpCriticalSection *CRITICAL_SECTION) foundation.BOOL {
+func TryEnterCriticalSection(lpCriticalSection *CRITICAL_SECTION) bool {
 	r1, _, _ := syscall.SyscallN(procTryEnterCriticalSection.Addr(), uintptr(unsafe.Pointer(lpCriticalSection)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TrySubmitThreadpoolCallback calls KERNEL32!TrySubmitThreadpoolCallback.
@@ -3469,8 +3579,13 @@ func WaitForInputIdle(hProcess foundation.HANDLE, dwMilliseconds uint32) uint32 
 // WaitForMultipleObjects calls KERNEL32!WaitForMultipleObjects.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-waitformultipleobjects
 // Minimum OS: windows5.1.2600.
-func WaitForMultipleObjects(nCount uint32, lpHandles *foundation.HANDLE, bWaitAll foundation.BOOL, dwMilliseconds uint32) (foundation.WAIT_EVENT, error) {
-	r1, _, e1 := syscall.SyscallN(procWaitForMultipleObjects.Addr(), uintptr(nCount), uintptr(unsafe.Pointer(lpHandles)), uintptr(bWaitAll), uintptr(dwMilliseconds))
+func WaitForMultipleObjects(lpHandles []foundation.HANDLE, bWaitAll bool, dwMilliseconds uint32) (foundation.WAIT_EVENT, error) {
+	var _lpHandles *foundation.HANDLE
+	if len(lpHandles) > 0 {
+		_lpHandles = &lpHandles[0]
+	}
+	_bWaitAll := win32.Bool32(bWaitAll)
+	r1, _, e1 := syscall.SyscallN(procWaitForMultipleObjects.Addr(), uintptr(len(lpHandles)), uintptr(unsafe.Pointer(_lpHandles)), uintptr(_bWaitAll), uintptr(dwMilliseconds))
 	if e1 != 0 {
 		return foundation.WAIT_EVENT(r1), e1
 	}
@@ -3480,8 +3595,14 @@ func WaitForMultipleObjects(nCount uint32, lpHandles *foundation.HANDLE, bWaitAl
 // WaitForMultipleObjectsEx calls KERNEL32!WaitForMultipleObjectsEx.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-waitformultipleobjectsex
 // Minimum OS: windows5.1.2600.
-func WaitForMultipleObjectsEx(nCount uint32, lpHandles *foundation.HANDLE, bWaitAll foundation.BOOL, dwMilliseconds uint32, bAlertable foundation.BOOL) (foundation.WAIT_EVENT, error) {
-	r1, _, e1 := syscall.SyscallN(procWaitForMultipleObjectsEx.Addr(), uintptr(nCount), uintptr(unsafe.Pointer(lpHandles)), uintptr(bWaitAll), uintptr(dwMilliseconds), uintptr(bAlertable))
+func WaitForMultipleObjectsEx(lpHandles []foundation.HANDLE, bWaitAll bool, dwMilliseconds uint32, bAlertable bool) (foundation.WAIT_EVENT, error) {
+	var _lpHandles *foundation.HANDLE
+	if len(lpHandles) > 0 {
+		_lpHandles = &lpHandles[0]
+	}
+	_bWaitAll := win32.Bool32(bWaitAll)
+	_bAlertable := win32.Bool32(bAlertable)
+	r1, _, e1 := syscall.SyscallN(procWaitForMultipleObjectsEx.Addr(), uintptr(len(lpHandles)), uintptr(unsafe.Pointer(_lpHandles)), uintptr(_bWaitAll), uintptr(dwMilliseconds), uintptr(_bAlertable))
 	if e1 != 0 {
 		return foundation.WAIT_EVENT(r1), e1
 	}
@@ -3502,8 +3623,9 @@ func WaitForSingleObject(hHandle foundation.HANDLE, dwMilliseconds uint32) (foun
 // WaitForSingleObjectEx calls KERNEL32!WaitForSingleObjectEx.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-waitforsingleobjectex
 // Minimum OS: windows5.1.2600.
-func WaitForSingleObjectEx(hHandle foundation.HANDLE, dwMilliseconds uint32, bAlertable foundation.BOOL) (foundation.WAIT_EVENT, error) {
-	r1, _, e1 := syscall.SyscallN(procWaitForSingleObjectEx.Addr(), uintptr(hHandle), uintptr(dwMilliseconds), uintptr(bAlertable))
+func WaitForSingleObjectEx(hHandle foundation.HANDLE, dwMilliseconds uint32, bAlertable bool) (foundation.WAIT_EVENT, error) {
+	_bAlertable := win32.Bool32(bAlertable)
+	r1, _, e1 := syscall.SyscallN(procWaitForSingleObjectEx.Addr(), uintptr(hHandle), uintptr(dwMilliseconds), uintptr(_bAlertable))
 	if e1 != 0 {
 		return foundation.WAIT_EVENT(r1), e1
 	}
@@ -3513,29 +3635,33 @@ func WaitForSingleObjectEx(hHandle foundation.HANDLE, dwMilliseconds uint32, bAl
 // WaitForThreadpoolIoCallbacks calls KERNEL32!WaitForThreadpoolIoCallbacks.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-waitforthreadpooliocallbacks
 // Minimum OS: windows6.0.6000.
-func WaitForThreadpoolIoCallbacks(pio PTP_IO, fCancelPendingCallbacks foundation.BOOL) {
-	syscall.SyscallN(procWaitForThreadpoolIoCallbacks.Addr(), uintptr(pio), uintptr(fCancelPendingCallbacks))
+func WaitForThreadpoolIoCallbacks(pio PTP_IO, fCancelPendingCallbacks bool) {
+	_fCancelPendingCallbacks := win32.Bool32(fCancelPendingCallbacks)
+	syscall.SyscallN(procWaitForThreadpoolIoCallbacks.Addr(), uintptr(pio), uintptr(_fCancelPendingCallbacks))
 }
 
 // WaitForThreadpoolTimerCallbacks calls KERNEL32!WaitForThreadpoolTimerCallbacks.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-waitforthreadpooltimercallbacks
 // Minimum OS: windows6.0.6000.
-func WaitForThreadpoolTimerCallbacks(pti PTP_TIMER, fCancelPendingCallbacks foundation.BOOL) {
-	syscall.SyscallN(procWaitForThreadpoolTimerCallbacks.Addr(), uintptr(pti), uintptr(fCancelPendingCallbacks))
+func WaitForThreadpoolTimerCallbacks(pti PTP_TIMER, fCancelPendingCallbacks bool) {
+	_fCancelPendingCallbacks := win32.Bool32(fCancelPendingCallbacks)
+	syscall.SyscallN(procWaitForThreadpoolTimerCallbacks.Addr(), uintptr(pti), uintptr(_fCancelPendingCallbacks))
 }
 
 // WaitForThreadpoolWaitCallbacks calls KERNEL32!WaitForThreadpoolWaitCallbacks.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-waitforthreadpoolwaitcallbacks
 // Minimum OS: windows6.0.6000.
-func WaitForThreadpoolWaitCallbacks(pwa PTP_WAIT, fCancelPendingCallbacks foundation.BOOL) {
-	syscall.SyscallN(procWaitForThreadpoolWaitCallbacks.Addr(), uintptr(pwa), uintptr(fCancelPendingCallbacks))
+func WaitForThreadpoolWaitCallbacks(pwa PTP_WAIT, fCancelPendingCallbacks bool) {
+	_fCancelPendingCallbacks := win32.Bool32(fCancelPendingCallbacks)
+	syscall.SyscallN(procWaitForThreadpoolWaitCallbacks.Addr(), uintptr(pwa), uintptr(_fCancelPendingCallbacks))
 }
 
 // WaitForThreadpoolWorkCallbacks calls KERNEL32!WaitForThreadpoolWorkCallbacks.
 // https://learn.microsoft.com/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-waitforthreadpoolworkcallbacks
 // Minimum OS: windows6.0.6000.
-func WaitForThreadpoolWorkCallbacks(pwk PTP_WORK, fCancelPendingCallbacks foundation.BOOL) {
-	syscall.SyscallN(procWaitForThreadpoolWorkCallbacks.Addr(), uintptr(pwk), uintptr(fCancelPendingCallbacks))
+func WaitForThreadpoolWorkCallbacks(pwk PTP_WORK, fCancelPendingCallbacks bool) {
+	_fCancelPendingCallbacks := win32.Bool32(fCancelPendingCallbacks)
+	syscall.SyscallN(procWaitForThreadpoolWorkCallbacks.Addr(), uintptr(pwk), uintptr(_fCancelPendingCallbacks))
 }
 
 // WaitOnAddress calls api-ms-win-core-synch-l1-2-0!WaitOnAddress.

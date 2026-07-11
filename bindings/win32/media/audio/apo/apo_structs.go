@@ -76,8 +76,8 @@ type APO_CONNECTION_PROPERTY_V2 struct {
 	U64QPCTime uint64
 }
 
-// APO_NOTIFICATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// APO_NOTIFICATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type APO_NOTIFICATION_Anonymous_e__Union struct {
 	Data [8]uint64
 }
@@ -88,8 +88,8 @@ type APO_NOTIFICATION struct {
 	Anonymous APO_NOTIFICATION_Anonymous_e__Union
 }
 
-// APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [3]uint64
 }

@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
@@ -25,9 +24,9 @@ type IDummyHICONIncluder struct {
 var IID_IDummyHICONIncluder = win32.GUID{Data1: 0x947990de, Data2: 0xcc28, Data3: 0x11d2, Data4: [8]byte{0xa0, 0xf7, 0x00, 0x80, 0x5f, 0x85, 0x8f, 0xb1}}
 
 // Dummy dispatches through IDummyHICONIncluder's vtable slot 3.
-func (self *IDummyHICONIncluder) Dummy(h1 uiwindowsandmessaging.HICON, h2 graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDummyHICONIncluder) Dummy(h1 uiwindowsandmessaging.HICON, h2 graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(h1), uintptr(h2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 969dc708-5c76-11d1-8d86-0000f804b057
@@ -39,13 +38,13 @@ type IThumbnailExtractor struct {
 var IID_IThumbnailExtractor = win32.GUID{Data1: 0x969dc708, Data2: 0x5c76, Data3: 0x11d1, Data4: [8]byte{0x8d, 0x86, 0x00, 0x00, 0xf8, 0x04, 0xb0, 0x57}}
 
 // ExtractThumbnail dispatches through IThumbnailExtractor's vtable slot 3.
-func (self *IThumbnailExtractor) ExtractThumbnail(pStg *systemcomstructuredstorage.IStorage, ulLength uint32, ulHeight uint32, pulOutputLength *uint32, pulOutputHeight *uint32, phOutputBitmap *graphicsgdi.HBITMAP) foundation.HRESULT {
+func (self *IThumbnailExtractor) ExtractThumbnail(pStg *systemcomstructuredstorage.IStorage, ulLength uint32, ulHeight uint32, pulOutputLength *uint32, pulOutputHeight *uint32, phOutputBitmap *graphicsgdi.HBITMAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStg)), uintptr(ulLength), uintptr(ulHeight), uintptr(unsafe.Pointer(pulOutputLength)), uintptr(unsafe.Pointer(pulOutputHeight)), uintptr(unsafe.Pointer(phOutputBitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnFileUpdated dispatches through IThumbnailExtractor's vtable slot 4.
-func (self *IThumbnailExtractor) OnFileUpdated(pStg *systemcomstructuredstorage.IStorage) foundation.HRESULT {
+func (self *IThumbnailExtractor) OnFileUpdated(pStg *systemcomstructuredstorage.IStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -26,31 +26,32 @@ var (
 )
 
 // CreateDataModelManager calls dbgmodel!CreateDataModelManager.
-func CreateDataModelManager(debugHost *IDebugHost, manager **IDataModelManager) foundation.HRESULT {
+func CreateDataModelManager(debugHost *IDebugHost, manager **IDataModelManager) error {
 	r1, _, _ := syscall.SyscallN(procCreateDataModelManager.Addr(), uintptr(unsafe.Pointer(debugHost)), uintptr(unsafe.Pointer(manager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DebugConnect calls dbgeng!DebugConnect.
-func DebugConnect(RemoteOptions foundation.PSTR, InterfaceId *win32.GUID, Interface *unsafe.Pointer) foundation.HRESULT {
+func DebugConnect(RemoteOptions foundation.PSTR, InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDebugConnect.Addr(), uintptr(unsafe.Pointer(RemoteOptions)), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(Interface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DebugConnectWide calls dbgeng!DebugConnectWide.
-func DebugConnectWide(RemoteOptions foundation.PWSTR, InterfaceId *win32.GUID, Interface *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDebugConnectWide.Addr(), uintptr(unsafe.Pointer(RemoteOptions)), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(Interface)))
-	return foundation.HRESULT(r1)
+func DebugConnectWide(RemoteOptions string, InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
+	_RemoteOptions := win32.UTF16Ptr(RemoteOptions)
+	r1, _, _ := syscall.SyscallN(procDebugConnectWide.Addr(), uintptr(unsafe.Pointer(_RemoteOptions)), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(Interface)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DebugCreate calls dbgeng!DebugCreate.
-func DebugCreate(InterfaceId *win32.GUID, Interface *unsafe.Pointer) foundation.HRESULT {
+func DebugCreate(InterfaceId *win32.GUID, Interface *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDebugCreate.Addr(), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(Interface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DebugCreateEx calls dbgeng!DebugCreateEx.
-func DebugCreateEx(InterfaceId *win32.GUID, DbgEngOptions uint32, Interface *unsafe.Pointer) foundation.HRESULT {
+func DebugCreateEx(InterfaceId *win32.GUID, DbgEngOptions uint32, Interface *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDebugCreateEx.Addr(), uintptr(unsafe.Pointer(InterfaceId)), uintptr(DbgEngOptions), uintptr(unsafe.Pointer(Interface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

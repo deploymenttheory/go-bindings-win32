@@ -44,8 +44,8 @@ type TASK_TRIGGER struct {
 }
 
 // TRIGGER_TYPE_UNION: https://learn.microsoft.com/windows/win32/api/mstask/ns-mstask-trigger_type_union
-// TRIGGER_TYPE_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRIGGER_TYPE_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRIGGER_TYPE_UNION struct {
 	Data [2]uint32
 }

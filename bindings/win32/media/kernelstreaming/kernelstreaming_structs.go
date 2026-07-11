@@ -178,20 +178,20 @@ type DEVCAPS struct {
 	SimulatedHardware int32
 }
 
-// DS3DVECTOR_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DS3DVECTOR_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DS3DVECTOR_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// DS3DVECTOR_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DS3DVECTOR_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DS3DVECTOR_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// DS3DVECTOR_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DS3DVECTOR_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DS3DVECTOR_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
@@ -266,14 +266,14 @@ type KSALGORITHMINSTANCE_SYSTEM_MICROPHONE_ARRAY_PROCESSOR struct {
 type KSALGORITHMINSTANCE_SYSTEM_NOISE_SUPPRESS struct {
 }
 
-// KSALLOCATOR_FRAMING_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSALLOCATOR_FRAMING_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSALLOCATOR_FRAMING_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// KSALLOCATOR_FRAMING_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSALLOCATOR_FRAMING_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSALLOCATOR_FRAMING_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -504,8 +504,8 @@ type KSAUDIOMODULE_DESCRIPTOR struct {
 	Name         [128]uint16
 }
 
-// KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union struct {
 	Data [5]uint64
 }
@@ -567,8 +567,8 @@ type KSAUDIO_MIXLEVEL struct {
 	Level int32
 }
 
-// KSAUDIO_MIX_CAPS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSAUDIO_MIX_CAPS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSAUDIO_MIX_CAPS_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -798,8 +798,8 @@ type KSCAMERA_EXTENDEDPROP_ROI_WHITEBALANCE struct {
 	Reserved uint64
 }
 
-// KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union struct {
 	Data [1]uint64
 }
@@ -948,8 +948,8 @@ type KSCAMERA_PROFILE_MEDIAINFO struct {
 	Data3        uint32
 }
 
-// KSCAMERA_PROFILE_PININFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSCAMERA_PROFILE_PININFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSCAMERA_PROFILE_PININFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1093,8 +1093,8 @@ type KSCORRELATED_TIME struct {
 	SystemTime int64
 }
 
-// KSDATAFORMAT is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSDATAFORMAT is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSDATAFORMAT struct {
 	Data [8]uint64
 }
@@ -1494,8 +1494,8 @@ type KSDATARANGE_MUSIC struct {
 type KSDEGRADESETID_Standard struct {
 }
 
-// KSDEVICE_PROFILE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSDEVICE_PROFILE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSDEVICE_PROFILE_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -1593,8 +1593,8 @@ type KSERROR struct {
 	Status  uint32
 }
 
-// KSEVENTDATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSEVENTDATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSEVENTDATA_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -1703,8 +1703,8 @@ type KSGOP_USERDATA struct {
 	L21Data   [3]foundation.CHAR
 }
 
-// KSIDENTIFIER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSIDENTIFIER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSIDENTIFIER_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -2304,14 +2304,14 @@ type KSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE_S struct {
 	CY uint32
 }
 
-// KSPROPERTY_BOUNDS_LONG is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSPROPERTY_BOUNDS_LONG is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSPROPERTY_BOUNDS_LONG struct {
 	Data [2]uint32
 }
 
-// KSPROPERTY_BOUNDS_LONGLONG is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSPROPERTY_BOUNDS_LONGLONG is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSPROPERTY_BOUNDS_LONGLONG struct {
 	Data [2]uint64
 }
@@ -2355,8 +2355,8 @@ type KSPROPERTY_CAMERACONTROL_NODE_S2 struct {
 	Value2       int32
 }
 
-// KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -2440,8 +2440,8 @@ type KSPROPERTY_DROPPEDFRAMES_CURRENT_S struct {
 	AverageFrameSize uint32
 }
 
-// KSPROPERTY_EXTDEVICE_S_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSPROPERTY_EXTDEVICE_S_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSPROPERTY_EXTDEVICE_S_u_e__Union struct {
 	Data [130]uint32
 }
@@ -2451,8 +2451,8 @@ type KSPROPERTY_EXTDEVICE_S struct {
 	U        KSPROPERTY_EXTDEVICE_S_u_e__Union
 }
 
-// KSPROPERTY_EXTXPORT_NODE_S_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSPROPERTY_EXTXPORT_NODE_S_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSPROPERTY_EXTXPORT_NODE_S_u_e__Union struct {
 	Data [129]uint32
 }
@@ -2462,8 +2462,8 @@ type KSPROPERTY_EXTXPORT_NODE_S struct {
 	U            KSPROPERTY_EXTXPORT_NODE_S_u_e__Union
 }
 
-// KSPROPERTY_EXTXPORT_S_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSPROPERTY_EXTXPORT_S_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSPROPERTY_EXTXPORT_S_u_e__Union struct {
 	Data [129]uint32
 }
@@ -2992,8 +2992,8 @@ type KSP_NODE struct {
 	Reserved uint32
 }
 
-// KSP_PIN_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSP_PIN_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSP_PIN_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -3041,8 +3041,8 @@ type KSRATE_CAPABILITY struct {
 	Rate     KSRATE
 }
 
-// KSRELATIVEEVENT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSRELATIVEEVENT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSRELATIVEEVENT_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -3215,8 +3215,8 @@ type KSSTREAM_UVC_METADATA struct {
 	EndOfFrameTimestamp   KSSTREAM_UVC_METADATATYPE_TIMESTAMP
 }
 
-// KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union struct {
 	Data [1]uint16
 }
@@ -3607,14 +3607,14 @@ type KS_DVD_YUV struct {
 	U        byte
 }
 
-// KS_FRAME_INFO_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KS_FRAME_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KS_FRAME_INFO_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// KS_FRAME_INFO_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KS_FRAME_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KS_FRAME_INFO_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -3632,8 +3632,8 @@ type KS_FRAME_INFO struct {
 	Anonymous2         KS_FRAME_INFO_Anonymous2_e__Union
 }
 
-// KS_FRAMING_ITEM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KS_FRAMING_ITEM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KS_FRAMING_ITEM_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -3774,8 +3774,8 @@ type KS_VBI_FRAME_INFO struct {
 	VBIInfoHeader       KS_VBIINFOHEADER
 }
 
-// KS_VIDEOINFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KS_VIDEOINFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KS_VIDEOINFO_Anonymous_e__Union struct {
 	Data [259]uint32
 }
@@ -3799,8 +3799,8 @@ type KS_VIDEOINFOHEADER struct {
 	BmiHeader       KS_BITMAPINFOHEADER
 }
 
-// KS_VIDEOINFOHEADER2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KS_VIDEOINFOHEADER2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KS_VIDEOINFOHEADER2_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -3855,8 +3855,8 @@ type MEDIUM_INFO struct {
 	RecordInhibit foundation.BOOL
 }
 
-// MF_MDL_SHARED_PAYLOAD_KEY is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MF_MDL_SHARED_PAYLOAD_KEY is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MF_MDL_SHARED_PAYLOAD_KEY struct {
 	Data [2]uint64
 }

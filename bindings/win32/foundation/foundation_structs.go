@@ -12,14 +12,14 @@ type APP_LOCAL_DEVICE_ID struct {
 	Value [32]byte
 }
 
-// DECIMAL_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DECIMAL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DECIMAL_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
-// DECIMAL_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DECIMAL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DECIMAL_Anonymous2_e__Union struct {
 	Data [1]uint64
 }

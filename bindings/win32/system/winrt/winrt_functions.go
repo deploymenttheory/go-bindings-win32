@@ -97,55 +97,56 @@ var (
 
 // CoDecodeProxy calls OLE32!CoDecodeProxy.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-codecodeproxy
-func CoDecodeProxy(dwClientPid uint32, ui64ProxyAddress uint64, pServerInformation *ServerInformation) foundation.HRESULT {
+func CoDecodeProxy(dwClientPid uint32, ui64ProxyAddress uint64, pServerInformation *ServerInformation) error {
 	r1, _, _ := syscall.SyscallN(procCoDecodeProxy.Addr(), uintptr(dwClientPid), uintptr(ui64ProxyAddress), uintptr(unsafe.Pointer(pServerInformation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateControlInput calls Windows.UI!CreateControlInput.
 // https://learn.microsoft.com/windows/win32/api/corewindow/nf-corewindow-createcontrolinput
-func CreateControlInput(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func CreateControlInput(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreateControlInput.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateControlInputEx calls Windows.UI!CreateControlInputEx.
 // https://learn.microsoft.com/windows/win32/api/corewindow/nf-corewindow-createcontrolinputex
-func CreateControlInputEx(pCoreWindow *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func CreateControlInputEx(pCoreWindow *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreateControlInputEx.Addr(), uintptr(unsafe.Pointer(pCoreWindow)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRandomAccessStreamOnFile calls api-ms-win-shcore-stream-winrt-l1-1-0!CreateRandomAccessStreamOnFile.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createrandomaccessstreamonfile
 // Minimum OS: windows8.0.
-func CreateRandomAccessStreamOnFile(filePath foundation.PWSTR, accessMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateRandomAccessStreamOnFile.Addr(), uintptr(unsafe.Pointer(filePath)), uintptr(accessMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func CreateRandomAccessStreamOnFile(filePath string, accessMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_filePath := win32.UTF16Ptr(filePath)
+	r1, _, _ := syscall.SyscallN(procCreateRandomAccessStreamOnFile.Addr(), uintptr(unsafe.Pointer(_filePath)), uintptr(accessMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRandomAccessStreamOverStream calls api-ms-win-shcore-stream-winrt-l1-1-0!CreateRandomAccessStreamOverStream.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createrandomaccessstreamoverstream
 // Minimum OS: windows8.0.
-func CreateRandomAccessStreamOverStream(stream *systemcom.IStream, options BSOS_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func CreateRandomAccessStreamOverStream(stream *systemcom.IStream, options BSOS_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreateRandomAccessStreamOverStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(options), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStreamOverRandomAccessStream calls api-ms-win-shcore-stream-winrt-l1-1-0!CreateStreamOverRandomAccessStream.
 // https://learn.microsoft.com/windows/win32/api/shcore/nf-shcore-createstreamoverrandomaccessstream
 // Minimum OS: windows8.0.
-func CreateStreamOverRandomAccessStream(randomAccessStream *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func CreateStreamOverRandomAccessStream(randomAccessStream *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreateStreamOverRandomAccessStream.Addr(), uintptr(unsafe.Pointer(randomAccessStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestrictedErrorInfo calls api-ms-win-core-winrt-error-l1-1-0!GetRestrictedErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-getrestrictederrorinfo
 // Minimum OS: windows8.0.
-func GetRestrictedErrorInfo(ppRestrictedErrorInfo **IRestrictedErrorInfo) foundation.HRESULT {
+func GetRestrictedErrorInfo(ppRestrictedErrorInfo **IRestrictedErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(procGetRestrictedErrorInfo.Addr(), uintptr(unsafe.Pointer(ppRestrictedErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HSTRING_UserFree calls api-ms-win-core-winrt-string-l1-1-0!HSTRING_UserFree.
@@ -213,25 +214,25 @@ func HSTRING_UserUnmarshal64(param0 *uint32, param1 *byte, param2 *HSTRING) *byt
 // IsErrorPropagationEnabled calls api-ms-win-core-winrt-error-l1-1-1!IsErrorPropagationEnabled.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-iserrorpropagationenabled
 // Minimum OS: windows8.0.
-func IsErrorPropagationEnabled() foundation.BOOL {
+func IsErrorPropagationEnabled() bool {
 	r1, _, _ := syscall.SyscallN(procIsErrorPropagationEnabled.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RoActivateInstance calls api-ms-win-core-winrt-l1-1-0!RoActivateInstance.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-roactivateinstance
 // Minimum OS: windows8.0.
-func RoActivateInstance(activatableClassId HSTRING, instance **IInspectable) foundation.HRESULT {
+func RoActivateInstance(activatableClassId HSTRING, instance **IInspectable) error {
 	r1, _, _ := syscall.SyscallN(procRoActivateInstance.Addr(), uintptr(activatableClassId), uintptr(unsafe.Pointer(instance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoCaptureErrorContext calls api-ms-win-core-winrt-error-l1-1-0!RoCaptureErrorContext.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rocaptureerrorcontext
 // Minimum OS: windows8.0.
-func RoCaptureErrorContext(hr foundation.HRESULT) foundation.HRESULT {
+func RoCaptureErrorContext(hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(procRoCaptureErrorContext.Addr(), uintptr(hr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoClearError calls api-ms-win-core-winrt-error-l1-1-1!RoClearError.
@@ -251,142 +252,144 @@ func RoFailFastWithErrorContext(hrError foundation.HRESULT) {
 // RoGetActivationFactory calls api-ms-win-core-winrt-l1-1-0!RoGetActivationFactory.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-rogetactivationfactory
 // Minimum OS: windows8.0.
-func RoGetActivationFactory(activatableClassId HSTRING, iid *win32.GUID, factory *unsafe.Pointer) foundation.HRESULT {
+func RoGetActivationFactory(activatableClassId HSTRING, iid *win32.GUID, factory *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRoGetActivationFactory.Addr(), uintptr(activatableClassId), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(factory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoGetAgileReference calls OLE32!RoGetAgileReference.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-rogetagilereference
 // Minimum OS: windows8.1.
-func RoGetAgileReference(options AgileReferenceOptions, riid *win32.GUID, pUnk *systemcom.IUnknown, ppAgileReference **IAgileReference) foundation.HRESULT {
+func RoGetAgileReference(options AgileReferenceOptions, riid *win32.GUID, pUnk *systemcom.IUnknown, ppAgileReference **IAgileReference) error {
 	r1, _, _ := syscall.SyscallN(procRoGetAgileReference.Addr(), uintptr(options), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(ppAgileReference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoGetApartmentIdentifier calls api-ms-win-core-winrt-l1-1-0!RoGetApartmentIdentifier.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-rogetapartmentidentifier
 // Minimum OS: windows8.0.
-func RoGetApartmentIdentifier(apartmentIdentifier *uint64) foundation.HRESULT {
+func RoGetApartmentIdentifier(apartmentIdentifier *uint64) error {
 	r1, _, _ := syscall.SyscallN(procRoGetApartmentIdentifier.Addr(), uintptr(unsafe.Pointer(apartmentIdentifier)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoGetBufferMarshaler calls api-ms-win-core-winrt-robuffer-l1-1-0!RoGetBufferMarshaler.
 // https://learn.microsoft.com/windows/win32/api/robuffer/nf-robuffer-rogetbuffermarshaler
 // Minimum OS: windows8.0.
-func RoGetBufferMarshaler(bufferMarshaler **systemcommarshal.IMarshal) foundation.HRESULT {
+func RoGetBufferMarshaler(bufferMarshaler **systemcommarshal.IMarshal) error {
 	r1, _, _ := syscall.SyscallN(procRoGetBufferMarshaler.Addr(), uintptr(unsafe.Pointer(bufferMarshaler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoGetErrorReportingFlags calls api-ms-win-core-winrt-error-l1-1-0!RoGetErrorReportingFlags.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rogeterrorreportingflags
 // Minimum OS: windows8.0.
-func RoGetErrorReportingFlags(pflags *uint32) foundation.HRESULT {
+func RoGetErrorReportingFlags(pflags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRoGetErrorReportingFlags.Addr(), uintptr(unsafe.Pointer(pflags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoGetMatchingRestrictedErrorInfo calls api-ms-win-core-winrt-error-l1-1-1!RoGetMatchingRestrictedErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rogetmatchingrestrictederrorinfo
-func RoGetMatchingRestrictedErrorInfo(hrIn foundation.HRESULT, ppRestrictedErrorInfo **IRestrictedErrorInfo) foundation.HRESULT {
+func RoGetMatchingRestrictedErrorInfo(hrIn foundation.HRESULT, ppRestrictedErrorInfo **IRestrictedErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(procRoGetMatchingRestrictedErrorInfo.Addr(), uintptr(hrIn), uintptr(unsafe.Pointer(ppRestrictedErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoGetServerActivatableClasses calls api-ms-win-core-winrt-registration-l1-1-0!RoGetServerActivatableClasses.
 // https://learn.microsoft.com/windows/win32/api/roregistrationapi/nf-roregistrationapi-rogetserveractivatableclasses
 // Minimum OS: windows8.0.
-func RoGetServerActivatableClasses(serverName HSTRING, activatableClassIds **HSTRING, count *uint32) foundation.HRESULT {
+func RoGetServerActivatableClasses(serverName HSTRING, activatableClassIds **HSTRING, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRoGetServerActivatableClasses.Addr(), uintptr(serverName), uintptr(unsafe.Pointer(activatableClassIds)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoInitialize calls api-ms-win-core-winrt-l1-1-0!RoInitialize.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-roinitialize
 // Minimum OS: windows8.0.
-func RoInitialize(initType RO_INIT_TYPE) foundation.HRESULT {
+func RoInitialize(initType RO_INIT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procRoInitialize.Addr(), uintptr(initType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoInspectCapturedStackBackTrace calls api-ms-win-core-winrt-error-l1-1-1!RoInspectCapturedStackBackTrace.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roinspectcapturedstackbacktrace
 // Minimum OS: windows8.1.
-func RoInspectCapturedStackBackTrace(targetErrorInfoAddress uintptr, machine uint16, readMemoryCallback PINSPECT_MEMORY_CALLBACK, context unsafe.Pointer, frameCount *uint32, targetBackTraceAddress *uintptr) foundation.HRESULT {
+func RoInspectCapturedStackBackTrace(targetErrorInfoAddress uintptr, machine uint16, readMemoryCallback PINSPECT_MEMORY_CALLBACK, context unsafe.Pointer, frameCount *uint32, targetBackTraceAddress *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procRoInspectCapturedStackBackTrace.Addr(), uintptr(targetErrorInfoAddress), uintptr(machine), uintptr(readMemoryCallback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(frameCount)), uintptr(unsafe.Pointer(targetBackTraceAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoInspectThreadErrorInfo calls api-ms-win-core-winrt-error-l1-1-1!RoInspectThreadErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roinspectthreaderrorinfo
 // Minimum OS: windows8.1.
-func RoInspectThreadErrorInfo(targetTebAddress uintptr, machine uint16, readMemoryCallback PINSPECT_MEMORY_CALLBACK, context unsafe.Pointer, targetErrorInfoAddress *uintptr) foundation.HRESULT {
+func RoInspectThreadErrorInfo(targetTebAddress uintptr, machine uint16, readMemoryCallback PINSPECT_MEMORY_CALLBACK, context unsafe.Pointer, targetErrorInfoAddress *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procRoInspectThreadErrorInfo.Addr(), uintptr(targetTebAddress), uintptr(machine), uintptr(readMemoryCallback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(targetErrorInfoAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoOriginateError calls api-ms-win-core-winrt-error-l1-1-0!RoOriginateError.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rooriginateerror
 // Minimum OS: windows8.0.
-func RoOriginateError(error_ foundation.HRESULT, message HSTRING) foundation.BOOL {
+func RoOriginateError(error_ foundation.HRESULT, message HSTRING) bool {
 	r1, _, _ := syscall.SyscallN(procRoOriginateError.Addr(), uintptr(error_), uintptr(message))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RoOriginateErrorW calls api-ms-win-core-winrt-error-l1-1-0!RoOriginateErrorW.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rooriginateerrorw
 // Minimum OS: windows8.0.
-func RoOriginateErrorW(error_ foundation.HRESULT, cchMax uint32, message foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRoOriginateErrorW.Addr(), uintptr(error_), uintptr(cchMax), uintptr(unsafe.Pointer(message)))
-	return foundation.BOOL(r1)
+func RoOriginateErrorW(error_ foundation.HRESULT, cchMax uint32, message string) bool {
+	_message := win32.UTF16Ptr(message)
+	r1, _, _ := syscall.SyscallN(procRoOriginateErrorW.Addr(), uintptr(error_), uintptr(cchMax), uintptr(unsafe.Pointer(_message)))
+	return r1 != 0
 }
 
 // RoOriginateLanguageException calls api-ms-win-core-winrt-error-l1-1-1!RoOriginateLanguageException.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rooriginatelanguageexception
 // Minimum OS: windows8.1.
-func RoOriginateLanguageException(error_ foundation.HRESULT, message HSTRING, languageException *systemcom.IUnknown) foundation.BOOL {
+func RoOriginateLanguageException(error_ foundation.HRESULT, message HSTRING, languageException *systemcom.IUnknown) bool {
 	r1, _, _ := syscall.SyscallN(procRoOriginateLanguageException.Addr(), uintptr(error_), uintptr(message), uintptr(unsafe.Pointer(languageException)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RoRegisterActivationFactories calls api-ms-win-core-winrt-l1-1-0!RoRegisterActivationFactories.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-roregisteractivationfactories
 // Minimum OS: windows8.0.
-func RoRegisterActivationFactories(activatableClassIds *HSTRING, activationFactoryCallbacks *PFNGETACTIVATIONFACTORY, count uint32, cookie *RO_REGISTRATION_COOKIE) foundation.HRESULT {
+func RoRegisterActivationFactories(activatableClassIds *HSTRING, activationFactoryCallbacks *PFNGETACTIVATIONFACTORY, count uint32, cookie *RO_REGISTRATION_COOKIE) error {
 	r1, _, _ := syscall.SyscallN(procRoRegisterActivationFactories.Addr(), uintptr(unsafe.Pointer(activatableClassIds)), uintptr(unsafe.Pointer(activationFactoryCallbacks)), uintptr(count), uintptr(unsafe.Pointer(cookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoRegisterForApartmentShutdown calls api-ms-win-core-winrt-l1-1-0!RoRegisterForApartmentShutdown.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-roregisterforapartmentshutdown
 // Minimum OS: windows8.0.
-func RoRegisterForApartmentShutdown(callbackObject *IApartmentShutdown, apartmentIdentifier *uint64, regCookie *APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) foundation.HRESULT {
+func RoRegisterForApartmentShutdown(callbackObject *IApartmentShutdown, apartmentIdentifier *uint64, regCookie *APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) error {
 	r1, _, _ := syscall.SyscallN(procRoRegisterForApartmentShutdown.Addr(), uintptr(unsafe.Pointer(callbackObject)), uintptr(unsafe.Pointer(apartmentIdentifier)), uintptr(unsafe.Pointer(regCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoReportFailedDelegate calls api-ms-win-core-winrt-error-l1-1-1!RoReportFailedDelegate.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roreportfaileddelegate
-func RoReportFailedDelegate(punkDelegate *systemcom.IUnknown, pRestrictedErrorInfo *IRestrictedErrorInfo) foundation.HRESULT {
+func RoReportFailedDelegate(punkDelegate *systemcom.IUnknown, pRestrictedErrorInfo *IRestrictedErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(procRoReportFailedDelegate.Addr(), uintptr(unsafe.Pointer(punkDelegate)), uintptr(unsafe.Pointer(pRestrictedErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoReportUnhandledError calls api-ms-win-core-winrt-error-l1-1-1!RoReportUnhandledError.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roreportunhandlederror
-func RoReportUnhandledError(pRestrictedErrorInfo *IRestrictedErrorInfo) foundation.HRESULT {
+func RoReportUnhandledError(pRestrictedErrorInfo *IRestrictedErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(procRoReportUnhandledError.Addr(), uintptr(unsafe.Pointer(pRestrictedErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoResolveRestrictedErrorInfoReference calls api-ms-win-core-winrt-error-l1-1-0!RoResolveRestrictedErrorInfoReference.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roresolverestrictederrorinforeference
 // Minimum OS: windows8.0.
-func RoResolveRestrictedErrorInfoReference(reference foundation.PWSTR, ppRestrictedErrorInfo **IRestrictedErrorInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoResolveRestrictedErrorInfoReference.Addr(), uintptr(unsafe.Pointer(reference)), uintptr(unsafe.Pointer(ppRestrictedErrorInfo)))
-	return foundation.HRESULT(r1)
+func RoResolveRestrictedErrorInfoReference(reference string, ppRestrictedErrorInfo **IRestrictedErrorInfo) error {
+	_reference := win32.UTF16Ptr(reference)
+	r1, _, _ := syscall.SyscallN(procRoResolveRestrictedErrorInfoReference.Addr(), uintptr(unsafe.Pointer(_reference)), uintptr(unsafe.Pointer(ppRestrictedErrorInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoRevokeActivationFactories calls api-ms-win-core-winrt-l1-1-0!RoRevokeActivationFactories.
@@ -399,25 +402,26 @@ func RoRevokeActivationFactories(cookie RO_REGISTRATION_COOKIE) {
 // RoSetErrorReportingFlags calls api-ms-win-core-winrt-error-l1-1-0!RoSetErrorReportingFlags.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-roseterrorreportingflags
 // Minimum OS: windows8.0.
-func RoSetErrorReportingFlags(flags uint32) foundation.HRESULT {
+func RoSetErrorReportingFlags(flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procRoSetErrorReportingFlags.Addr(), uintptr(flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoTransformError calls api-ms-win-core-winrt-error-l1-1-0!RoTransformError.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rotransformerror
 // Minimum OS: windows8.0.
-func RoTransformError(oldError foundation.HRESULT, newError foundation.HRESULT, message HSTRING) foundation.BOOL {
+func RoTransformError(oldError foundation.HRESULT, newError foundation.HRESULT, message HSTRING) bool {
 	r1, _, _ := syscall.SyscallN(procRoTransformError.Addr(), uintptr(oldError), uintptr(newError), uintptr(message))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RoTransformErrorW calls api-ms-win-core-winrt-error-l1-1-0!RoTransformErrorW.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rotransformerrorw
 // Minimum OS: windows8.0.
-func RoTransformErrorW(oldError foundation.HRESULT, newError foundation.HRESULT, cchMax uint32, message foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRoTransformErrorW.Addr(), uintptr(oldError), uintptr(newError), uintptr(cchMax), uintptr(unsafe.Pointer(message)))
-	return foundation.BOOL(r1)
+func RoTransformErrorW(oldError foundation.HRESULT, newError foundation.HRESULT, cchMax uint32, message string) bool {
+	_message := win32.UTF16Ptr(message)
+	r1, _, _ := syscall.SyscallN(procRoTransformErrorW.Addr(), uintptr(oldError), uintptr(newError), uintptr(cchMax), uintptr(unsafe.Pointer(_message)))
+	return r1 != 0
 }
 
 // RoUninitialize calls api-ms-win-core-winrt-l1-1-0!RoUninitialize.
@@ -430,73 +434,75 @@ func RoUninitialize() {
 // RoUnregisterForApartmentShutdown calls api-ms-win-core-winrt-l1-1-0!RoUnregisterForApartmentShutdown.
 // https://learn.microsoft.com/windows/win32/api/roapi/nf-roapi-rounregisterforapartmentshutdown
 // Minimum OS: windows8.0.
-func RoUnregisterForApartmentShutdown(regCookie APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) foundation.HRESULT {
+func RoUnregisterForApartmentShutdown(regCookie APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) error {
 	r1, _, _ := syscall.SyscallN(procRoUnregisterForApartmentShutdown.Addr(), uintptr(regCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRestrictedErrorInfo calls api-ms-win-core-winrt-error-l1-1-0!SetRestrictedErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-setrestrictederrorinfo
 // Minimum OS: windows8.0.
-func SetRestrictedErrorInfo(pRestrictedErrorInfo *IRestrictedErrorInfo) foundation.HRESULT {
+func SetRestrictedErrorInfo(pRestrictedErrorInfo *IRestrictedErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(procSetRestrictedErrorInfo.Addr(), uintptr(unsafe.Pointer(pRestrictedErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsCompareStringOrdinal calls api-ms-win-core-winrt-string-l1-1-0!WindowsCompareStringOrdinal.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowscomparestringordinal
 // Minimum OS: windows8.0.
-func WindowsCompareStringOrdinal(string1 HSTRING, string2 HSTRING, result *int32) foundation.HRESULT {
+func WindowsCompareStringOrdinal(string1 HSTRING, string2 HSTRING, result *int32) error {
 	r1, _, _ := syscall.SyscallN(procWindowsCompareStringOrdinal.Addr(), uintptr(string1), uintptr(string2), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsConcatString calls api-ms-win-core-winrt-string-l1-1-0!WindowsConcatString.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsconcatstring
 // Minimum OS: windows8.0.
-func WindowsConcatString(string1 HSTRING, string2 HSTRING, newString *HSTRING) foundation.HRESULT {
+func WindowsConcatString(string1 HSTRING, string2 HSTRING, newString *HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procWindowsConcatString.Addr(), uintptr(string1), uintptr(string2), uintptr(unsafe.Pointer(newString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsCreateString calls api-ms-win-core-winrt-string-l1-1-0!WindowsCreateString.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowscreatestring
 // Minimum OS: windows8.0.
-func WindowsCreateString(sourceString foundation.PWSTR, length uint32, string_ *HSTRING) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWindowsCreateString.Addr(), uintptr(unsafe.Pointer(sourceString)), uintptr(length), uintptr(unsafe.Pointer(string_)))
-	return foundation.HRESULT(r1)
+func WindowsCreateString(sourceString string, length uint32, string_ *HSTRING) error {
+	_sourceString := win32.UTF16Ptr(sourceString)
+	r1, _, _ := syscall.SyscallN(procWindowsCreateString.Addr(), uintptr(unsafe.Pointer(_sourceString)), uintptr(length), uintptr(unsafe.Pointer(string_)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsCreateStringReference calls api-ms-win-core-winrt-string-l1-1-0!WindowsCreateStringReference.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowscreatestringreference
 // Minimum OS: windows8.0.
-func WindowsCreateStringReference(sourceString foundation.PWSTR, length uint32, hstringHeader *HSTRING_HEADER, string_ *HSTRING) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWindowsCreateStringReference.Addr(), uintptr(unsafe.Pointer(sourceString)), uintptr(length), uintptr(unsafe.Pointer(hstringHeader)), uintptr(unsafe.Pointer(string_)))
-	return foundation.HRESULT(r1)
+func WindowsCreateStringReference(sourceString string, length uint32, hstringHeader *HSTRING_HEADER, string_ *HSTRING) error {
+	_sourceString := win32.UTF16Ptr(sourceString)
+	r1, _, _ := syscall.SyscallN(procWindowsCreateStringReference.Addr(), uintptr(unsafe.Pointer(_sourceString)), uintptr(length), uintptr(unsafe.Pointer(hstringHeader)), uintptr(unsafe.Pointer(string_)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsDeleteString calls api-ms-win-core-winrt-string-l1-1-0!WindowsDeleteString.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsdeletestring
 // Minimum OS: windows8.0.
-func WindowsDeleteString(string_ HSTRING) foundation.HRESULT {
+func WindowsDeleteString(string_ HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procWindowsDeleteString.Addr(), uintptr(string_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsDeleteStringBuffer calls api-ms-win-core-winrt-string-l1-1-0!WindowsDeleteStringBuffer.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsdeletestringbuffer
 // Minimum OS: windows8.0.
-func WindowsDeleteStringBuffer(bufferHandle HSTRING_BUFFER) foundation.HRESULT {
+func WindowsDeleteStringBuffer(bufferHandle HSTRING_BUFFER) error {
 	r1, _, _ := syscall.SyscallN(procWindowsDeleteStringBuffer.Addr(), uintptr(bufferHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsDuplicateString calls api-ms-win-core-winrt-string-l1-1-0!WindowsDuplicateString.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsduplicatestring
 // Minimum OS: windows8.0.
-func WindowsDuplicateString(string_ HSTRING, newString *HSTRING) foundation.HRESULT {
+func WindowsDuplicateString(string_ HSTRING, newString *HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procWindowsDuplicateString.Addr(), uintptr(string_), uintptr(unsafe.Pointer(newString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsGetStringLen calls api-ms-win-core-winrt-string-l1-1-0!WindowsGetStringLen.
@@ -518,87 +524,87 @@ func WindowsGetStringRawBuffer(string_ HSTRING, length *uint32) foundation.PWSTR
 // WindowsInspectString calls api-ms-win-core-winrt-string-l1-1-0!WindowsInspectString.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsinspectstring
 // Minimum OS: windows8.0.
-func WindowsInspectString(targetHString uintptr, machine uint16, callback PINSPECT_HSTRING_CALLBACK, context unsafe.Pointer, length *uint32, targetStringAddress *uintptr) foundation.HRESULT {
+func WindowsInspectString(targetHString uintptr, machine uint16, callback PINSPECT_HSTRING_CALLBACK, context unsafe.Pointer, length *uint32, targetStringAddress *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWindowsInspectString.Addr(), uintptr(targetHString), uintptr(machine), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(targetStringAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsInspectString2 calls api-ms-win-core-winrt-string-l1-1-1!WindowsInspectString2.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsinspectstring2
 // Minimum OS: windows8.0.
-func WindowsInspectString2(targetHString uint64, machine uint16, callback PINSPECT_HSTRING_CALLBACK2, context unsafe.Pointer, length *uint32, targetStringAddress *uint64) foundation.HRESULT {
+func WindowsInspectString2(targetHString uint64, machine uint16, callback PINSPECT_HSTRING_CALLBACK2, context unsafe.Pointer, length *uint32, targetStringAddress *uint64) error {
 	r1, _, _ := syscall.SyscallN(procWindowsInspectString2.Addr(), uintptr(targetHString), uintptr(machine), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(targetStringAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsIsStringEmpty calls api-ms-win-core-winrt-string-l1-1-0!WindowsIsStringEmpty.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsisstringempty
 // Minimum OS: windows8.0.
-func WindowsIsStringEmpty(string_ HSTRING) foundation.BOOL {
+func WindowsIsStringEmpty(string_ HSTRING) bool {
 	r1, _, _ := syscall.SyscallN(procWindowsIsStringEmpty.Addr(), uintptr(string_))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WindowsPreallocateStringBuffer calls api-ms-win-core-winrt-string-l1-1-0!WindowsPreallocateStringBuffer.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowspreallocatestringbuffer
 // Minimum OS: windows8.0.
-func WindowsPreallocateStringBuffer(length uint32, charBuffer **uint16, bufferHandle *HSTRING_BUFFER) foundation.HRESULT {
+func WindowsPreallocateStringBuffer(length uint32, charBuffer **uint16, bufferHandle *HSTRING_BUFFER) error {
 	r1, _, _ := syscall.SyscallN(procWindowsPreallocateStringBuffer.Addr(), uintptr(length), uintptr(unsafe.Pointer(charBuffer)), uintptr(unsafe.Pointer(bufferHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsPromoteStringBuffer calls api-ms-win-core-winrt-string-l1-1-0!WindowsPromoteStringBuffer.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowspromotestringbuffer
 // Minimum OS: windows8.0.
-func WindowsPromoteStringBuffer(bufferHandle HSTRING_BUFFER, string_ *HSTRING) foundation.HRESULT {
+func WindowsPromoteStringBuffer(bufferHandle HSTRING_BUFFER, string_ *HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procWindowsPromoteStringBuffer.Addr(), uintptr(bufferHandle), uintptr(unsafe.Pointer(string_)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsReplaceString calls api-ms-win-core-winrt-string-l1-1-0!WindowsReplaceString.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsreplacestring
 // Minimum OS: windows8.0.
-func WindowsReplaceString(string_ HSTRING, stringReplaced HSTRING, stringReplaceWith HSTRING, newString *HSTRING) foundation.HRESULT {
+func WindowsReplaceString(string_ HSTRING, stringReplaced HSTRING, stringReplaceWith HSTRING, newString *HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procWindowsReplaceString.Addr(), uintptr(string_), uintptr(stringReplaced), uintptr(stringReplaceWith), uintptr(unsafe.Pointer(newString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsStringHasEmbeddedNull calls api-ms-win-core-winrt-string-l1-1-0!WindowsStringHasEmbeddedNull.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsstringhasembeddednull
 // Minimum OS: windows8.0.
-func WindowsStringHasEmbeddedNull(string_ HSTRING, hasEmbedNull *foundation.BOOL) foundation.HRESULT {
+func WindowsStringHasEmbeddedNull(string_ HSTRING, hasEmbedNull *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWindowsStringHasEmbeddedNull.Addr(), uintptr(string_), uintptr(unsafe.Pointer(hasEmbedNull)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsSubstring calls api-ms-win-core-winrt-string-l1-1-0!WindowsSubstring.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowssubstring
 // Minimum OS: windows8.0.
-func WindowsSubstring(string_ HSTRING, startIndex uint32, newString *HSTRING) foundation.HRESULT {
+func WindowsSubstring(string_ HSTRING, startIndex uint32, newString *HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procWindowsSubstring.Addr(), uintptr(string_), uintptr(startIndex), uintptr(unsafe.Pointer(newString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsSubstringWithSpecifiedLength calls api-ms-win-core-winrt-string-l1-1-0!WindowsSubstringWithSpecifiedLength.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowssubstringwithspecifiedlength
 // Minimum OS: windows8.0.
-func WindowsSubstringWithSpecifiedLength(string_ HSTRING, startIndex uint32, length uint32, newString *HSTRING) foundation.HRESULT {
+func WindowsSubstringWithSpecifiedLength(string_ HSTRING, startIndex uint32, length uint32, newString *HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procWindowsSubstringWithSpecifiedLength.Addr(), uintptr(string_), uintptr(startIndex), uintptr(length), uintptr(unsafe.Pointer(newString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsTrimStringEnd calls api-ms-win-core-winrt-string-l1-1-0!WindowsTrimStringEnd.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowstrimstringend
 // Minimum OS: windows8.0.
-func WindowsTrimStringEnd(string_ HSTRING, trimString HSTRING, newString *HSTRING) foundation.HRESULT {
+func WindowsTrimStringEnd(string_ HSTRING, trimString HSTRING, newString *HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procWindowsTrimStringEnd.Addr(), uintptr(string_), uintptr(trimString), uintptr(unsafe.Pointer(newString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowsTrimStringStart calls api-ms-win-core-winrt-string-l1-1-0!WindowsTrimStringStart.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowstrimstringstart
 // Minimum OS: windows8.0.
-func WindowsTrimStringStart(string_ HSTRING, trimString HSTRING, newString *HSTRING) foundation.HRESULT {
+func WindowsTrimStringStart(string_ HSTRING, trimString HSTRING, newString *HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procWindowsTrimStringStart.Addr(), uintptr(string_), uintptr(trimString), uintptr(unsafe.Pointer(newString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

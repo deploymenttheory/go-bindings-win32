@@ -21,8 +21,8 @@ type RAWHID struct {
 	BRawData  [1]byte
 }
 
-// RAWINPUT_data_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RAWINPUT_data_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RAWINPUT_data_e__Union struct {
 	Data [6]uint32
 }
@@ -65,8 +65,8 @@ type RAWKEYBOARD struct {
 	ExtraInformation uint32
 }
 
-// RAWMOUSE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RAWMOUSE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RAWMOUSE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -81,8 +81,8 @@ type RAWMOUSE struct {
 	UlExtraInformation uint32
 }
 
-// RID_DEVICE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RID_DEVICE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RID_DEVICE_INFO_Anonymous_e__Union struct {
 	Data [6]uint32
 }

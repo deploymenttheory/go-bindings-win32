@@ -30,41 +30,41 @@ var (
 	procWSASetSocketPeerTargetName       = modfwpuclnt.NewProc("WSASetSocketPeerTargetName")
 	procWSASetSocketSecurity             = modfwpuclnt.NewProc("WSASetSocketSecurity")
 	procAcceptEx                         = modMSWSOCK.NewProc("AcceptEx")
+	procEnumProtocols                    = modMSWSOCK.NewProc("EnumProtocolsW")
 	procEnumProtocolsA                   = modMSWSOCK.NewProc("EnumProtocolsA")
-	procEnumProtocolsW                   = modMSWSOCK.NewProc("EnumProtocolsW")
 	procGetAcceptExSockaddrs             = modMSWSOCK.NewProc("GetAcceptExSockaddrs")
+	procGetAddressByName                 = modMSWSOCK.NewProc("GetAddressByNameW")
 	procGetAddressByNameA                = modMSWSOCK.NewProc("GetAddressByNameA")
-	procGetAddressByNameW                = modMSWSOCK.NewProc("GetAddressByNameW")
+	procGetNameByType                    = modMSWSOCK.NewProc("GetNameByTypeW")
 	procGetNameByTypeA                   = modMSWSOCK.NewProc("GetNameByTypeA")
-	procGetNameByTypeW                   = modMSWSOCK.NewProc("GetNameByTypeW")
+	procGetService                       = modMSWSOCK.NewProc("GetServiceW")
 	procGetServiceA                      = modMSWSOCK.NewProc("GetServiceA")
-	procGetServiceW                      = modMSWSOCK.NewProc("GetServiceW")
+	procGetTypeByName                    = modMSWSOCK.NewProc("GetTypeByNameW")
 	procGetTypeByNameA                   = modMSWSOCK.NewProc("GetTypeByNameA")
-	procGetTypeByNameW                   = modMSWSOCK.NewProc("GetTypeByNameW")
+	procSetService                       = modMSWSOCK.NewProc("SetServiceW")
 	procSetServiceA                      = modMSWSOCK.NewProc("SetServiceA")
-	procSetServiceW                      = modMSWSOCK.NewProc("SetServiceW")
 	procTransmitFile                     = modMSWSOCK.NewProc("TransmitFile")
 	procWSARecvEx                        = modMSWSOCK.NewProc("WSARecvEx")
+	procRtlEthernetAddressToString       = modntdll.NewProc("RtlEthernetAddressToStringW")
 	procRtlEthernetAddressToStringA      = modntdll.NewProc("RtlEthernetAddressToStringA")
-	procRtlEthernetAddressToStringW      = modntdll.NewProc("RtlEthernetAddressToStringW")
+	procRtlEthernetStringToAddress       = modntdll.NewProc("RtlEthernetStringToAddressW")
 	procRtlEthernetStringToAddressA      = modntdll.NewProc("RtlEthernetStringToAddressA")
-	procRtlEthernetStringToAddressW      = modntdll.NewProc("RtlEthernetStringToAddressW")
+	procRtlIpv4AddressToString           = modntdll.NewProc("RtlIpv4AddressToStringW")
 	procRtlIpv4AddressToStringA          = modntdll.NewProc("RtlIpv4AddressToStringA")
+	procRtlIpv4AddressToStringEx         = modntdll.NewProc("RtlIpv4AddressToStringExW")
 	procRtlIpv4AddressToStringExA        = modntdll.NewProc("RtlIpv4AddressToStringExA")
-	procRtlIpv4AddressToStringExW        = modntdll.NewProc("RtlIpv4AddressToStringExW")
-	procRtlIpv4AddressToStringW          = modntdll.NewProc("RtlIpv4AddressToStringW")
+	procRtlIpv4StringToAddress           = modntdll.NewProc("RtlIpv4StringToAddressW")
 	procRtlIpv4StringToAddressA          = modntdll.NewProc("RtlIpv4StringToAddressA")
+	procRtlIpv4StringToAddressEx         = modntdll.NewProc("RtlIpv4StringToAddressExW")
 	procRtlIpv4StringToAddressExA        = modntdll.NewProc("RtlIpv4StringToAddressExA")
-	procRtlIpv4StringToAddressExW        = modntdll.NewProc("RtlIpv4StringToAddressExW")
-	procRtlIpv4StringToAddressW          = modntdll.NewProc("RtlIpv4StringToAddressW")
+	procRtlIpv6AddressToString           = modntdll.NewProc("RtlIpv6AddressToStringW")
 	procRtlIpv6AddressToStringA          = modntdll.NewProc("RtlIpv6AddressToStringA")
+	procRtlIpv6AddressToStringEx         = modntdll.NewProc("RtlIpv6AddressToStringExW")
 	procRtlIpv6AddressToStringExA        = modntdll.NewProc("RtlIpv6AddressToStringExA")
-	procRtlIpv6AddressToStringExW        = modntdll.NewProc("RtlIpv6AddressToStringExW")
-	procRtlIpv6AddressToStringW          = modntdll.NewProc("RtlIpv6AddressToStringW")
+	procRtlIpv6StringToAddress           = modntdll.NewProc("RtlIpv6StringToAddressW")
 	procRtlIpv6StringToAddressA          = modntdll.NewProc("RtlIpv6StringToAddressA")
+	procRtlIpv6StringToAddressEx         = modntdll.NewProc("RtlIpv6StringToAddressExW")
 	procRtlIpv6StringToAddressExA        = modntdll.NewProc("RtlIpv6StringToAddressExA")
-	procRtlIpv6StringToAddressExW        = modntdll.NewProc("RtlIpv6StringToAddressExW")
-	procRtlIpv6StringToAddressW          = modntdll.NewProc("RtlIpv6StringToAddressW")
 	procSetSocketMediaStreamingMode      = modWindows_Networking.NewProc("SetSocketMediaStreamingMode")
 	procAccept                           = modWS2_32.NewProc("accept")
 	procBind                             = modWS2_32.NewProc("bind")
@@ -74,10 +74,10 @@ var (
 	procFreeAddrInfoExW                  = modWS2_32.NewProc("FreeAddrInfoExW")
 	procFreeAddrInfoW                    = modWS2_32.NewProc("FreeAddrInfoW")
 	procFreeaddrinfo                     = modWS2_32.NewProc("freeaddrinfo")
+	procGetAddrInfoEx                    = modWS2_32.NewProc("GetAddrInfoExW")
 	procGetAddrInfoExA                   = modWS2_32.NewProc("GetAddrInfoExA")
 	procGetAddrInfoExCancel              = modWS2_32.NewProc("GetAddrInfoExCancel")
 	procGetAddrInfoExOverlappedResult    = modWS2_32.NewProc("GetAddrInfoExOverlappedResult")
-	procGetAddrInfoExW                   = modWS2_32.NewProc("GetAddrInfoExW")
 	procGetAddrInfoW                     = modWS2_32.NewProc("GetAddrInfoW")
 	procGetHostNameW                     = modWS2_32.NewProc("GetHostNameW")
 	procGetNameInfoW                     = modWS2_32.NewProc("GetNameInfoW")
@@ -110,15 +110,15 @@ var (
 	procSelect                           = modWS2_32.NewProc("select")
 	procSend                             = modWS2_32.NewProc("send")
 	procSendto                           = modWS2_32.NewProc("sendto")
+	procSetAddrInfoEx                    = modWS2_32.NewProc("SetAddrInfoExW")
 	procSetAddrInfoExA                   = modWS2_32.NewProc("SetAddrInfoExA")
-	procSetAddrInfoExW                   = modWS2_32.NewProc("SetAddrInfoExW")
 	procSetsockopt                       = modWS2_32.NewProc("setsockopt")
 	procShutdown                         = modWS2_32.NewProc("shutdown")
 	procSocket                           = modWS2_32.NewProc("socket")
 	procWPUCompleteOverlappedRequest     = modWS2_32.NewProc("WPUCompleteOverlappedRequest")
 	procWSAAccept                        = modWS2_32.NewProc("WSAAccept")
+	procWSAAddressToString               = modWS2_32.NewProc("WSAAddressToStringW")
 	procWSAAddressToStringA              = modWS2_32.NewProc("WSAAddressToStringA")
-	procWSAAddressToStringW              = modWS2_32.NewProc("WSAAddressToStringW")
 	procWSAAdvertiseProvider             = modWS2_32.NewProc("WSAAdvertiseProvider")
 	procWSAAsyncGetHostByAddr            = modWS2_32.NewProc("WSAAsyncGetHostByAddr")
 	procWSAAsyncGetHostByName            = modWS2_32.NewProc("WSAAsyncGetHostByName")
@@ -133,39 +133,39 @@ var (
 	procWSACloseEvent                    = modWS2_32.NewProc("WSACloseEvent")
 	procWSAConnect                       = modWS2_32.NewProc("WSAConnect")
 	procWSAConnectByList                 = modWS2_32.NewProc("WSAConnectByList")
+	procWSAConnectByName                 = modWS2_32.NewProc("WSAConnectByNameW")
 	procWSAConnectByNameA                = modWS2_32.NewProc("WSAConnectByNameA")
-	procWSAConnectByNameW                = modWS2_32.NewProc("WSAConnectByNameW")
 	procWSACreateEvent                   = modWS2_32.NewProc("WSACreateEvent")
+	procWSADuplicateSocket               = modWS2_32.NewProc("WSADuplicateSocketW")
 	procWSADuplicateSocketA              = modWS2_32.NewProc("WSADuplicateSocketA")
-	procWSADuplicateSocketW              = modWS2_32.NewProc("WSADuplicateSocketW")
+	procWSAEnumNameSpaceProviders        = modWS2_32.NewProc("WSAEnumNameSpaceProvidersW")
 	procWSAEnumNameSpaceProvidersA       = modWS2_32.NewProc("WSAEnumNameSpaceProvidersA")
+	procWSAEnumNameSpaceProvidersEx      = modWS2_32.NewProc("WSAEnumNameSpaceProvidersExW")
 	procWSAEnumNameSpaceProvidersExA     = modWS2_32.NewProc("WSAEnumNameSpaceProvidersExA")
-	procWSAEnumNameSpaceProvidersExW     = modWS2_32.NewProc("WSAEnumNameSpaceProvidersExW")
-	procWSAEnumNameSpaceProvidersW       = modWS2_32.NewProc("WSAEnumNameSpaceProvidersW")
 	procWSAEnumNetworkEvents             = modWS2_32.NewProc("WSAEnumNetworkEvents")
+	procWSAEnumProtocols                 = modWS2_32.NewProc("WSAEnumProtocolsW")
 	procWSAEnumProtocolsA                = modWS2_32.NewProc("WSAEnumProtocolsA")
-	procWSAEnumProtocolsW                = modWS2_32.NewProc("WSAEnumProtocolsW")
 	procWSAEventSelect                   = modWS2_32.NewProc("WSAEventSelect")
 	procWSAFDIsSet                       = modWS2_32.NewProc("__WSAFDIsSet")
 	procWSAGetLastError                  = modWS2_32.NewProc("WSAGetLastError")
 	procWSAGetOverlappedResult           = modWS2_32.NewProc("WSAGetOverlappedResult")
 	procWSAGetQOSByName                  = modWS2_32.NewProc("WSAGetQOSByName")
+	procWSAGetServiceClassInfo           = modWS2_32.NewProc("WSAGetServiceClassInfoW")
 	procWSAGetServiceClassInfoA          = modWS2_32.NewProc("WSAGetServiceClassInfoA")
-	procWSAGetServiceClassInfoW          = modWS2_32.NewProc("WSAGetServiceClassInfoW")
+	procWSAGetServiceClassNameByClassId  = modWS2_32.NewProc("WSAGetServiceClassNameByClassIdW")
 	procWSAGetServiceClassNameByClassIdA = modWS2_32.NewProc("WSAGetServiceClassNameByClassIdA")
-	procWSAGetServiceClassNameByClassIdW = modWS2_32.NewProc("WSAGetServiceClassNameByClassIdW")
 	procWSAHtonl                         = modWS2_32.NewProc("WSAHtonl")
 	procWSAHtons                         = modWS2_32.NewProc("WSAHtons")
+	procWSAInstallServiceClass           = modWS2_32.NewProc("WSAInstallServiceClassW")
 	procWSAInstallServiceClassA          = modWS2_32.NewProc("WSAInstallServiceClassA")
-	procWSAInstallServiceClassW          = modWS2_32.NewProc("WSAInstallServiceClassW")
 	procWSAIoctl                         = modWS2_32.NewProc("WSAIoctl")
 	procWSAIsBlocking                    = modWS2_32.NewProc("WSAIsBlocking")
 	procWSAJoinLeaf                      = modWS2_32.NewProc("WSAJoinLeaf")
+	procWSALookupServiceBegin            = modWS2_32.NewProc("WSALookupServiceBeginW")
 	procWSALookupServiceBeginA           = modWS2_32.NewProc("WSALookupServiceBeginA")
-	procWSALookupServiceBeginW           = modWS2_32.NewProc("WSALookupServiceBeginW")
 	procWSALookupServiceEnd              = modWS2_32.NewProc("WSALookupServiceEnd")
+	procWSALookupServiceNext             = modWS2_32.NewProc("WSALookupServiceNextW")
 	procWSALookupServiceNextA            = modWS2_32.NewProc("WSALookupServiceNextA")
-	procWSALookupServiceNextW            = modWS2_32.NewProc("WSALookupServiceNextW")
 	procWSANSPIoctl                      = modWS2_32.NewProc("WSANSPIoctl")
 	procWSANtohl                         = modWS2_32.NewProc("WSANtohl")
 	procWSANtohs                         = modWS2_32.NewProc("WSANtohs")
@@ -184,13 +184,13 @@ var (
 	procWSASetBlockingHook               = modWS2_32.NewProc("WSASetBlockingHook")
 	procWSASetEvent                      = modWS2_32.NewProc("WSASetEvent")
 	procWSASetLastError                  = modWS2_32.NewProc("WSASetLastError")
+	procWSASetService                    = modWS2_32.NewProc("WSASetServiceW")
 	procWSASetServiceA                   = modWS2_32.NewProc("WSASetServiceA")
-	procWSASetServiceW                   = modWS2_32.NewProc("WSASetServiceW")
+	procWSASocket                        = modWS2_32.NewProc("WSASocketW")
 	procWSASocketA                       = modWS2_32.NewProc("WSASocketA")
-	procWSASocketW                       = modWS2_32.NewProc("WSASocketW")
 	procWSAStartup                       = modWS2_32.NewProc("WSAStartup")
+	procWSAStringToAddress               = modWS2_32.NewProc("WSAStringToAddressW")
 	procWSAStringToAddressA              = modWS2_32.NewProc("WSAStringToAddressA")
-	procWSAStringToAddressW              = modWS2_32.NewProc("WSAStringToAddressW")
 	procWSAUnadvertiseProvider           = modWS2_32.NewProc("WSAUnadvertiseProvider")
 	procWSAUnhookBlockingHook            = modWS2_32.NewProc("WSAUnhookBlockingHook")
 	procWSAWaitForMultipleEvents         = modWS2_32.NewProc("WSAWaitForMultipleEvents")
@@ -227,12 +227,67 @@ var (
 	procWSCWriteProviderOrder32          = modWS2_32.NewProc("WSCWriteProviderOrder32")
 )
 
+// Accept calls WS2_32!accept.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-accept
+// Minimum OS: windows8.1.
+func Accept(s SOCKET, addr *SOCKADDR, addrlen *int32) (SOCKET, error) {
+	r1, _, e1 := syscall.SyscallN(procAccept.Addr(), uintptr(s), uintptr(unsafe.Pointer(addr)), uintptr(unsafe.Pointer(addrlen)))
+	if e1 != 0 {
+		return SOCKET(r1), e1
+	}
+	return SOCKET(r1), nil
+}
+
 // AcceptEx calls MSWSOCK!AcceptEx.
 // https://learn.microsoft.com/windows/win32/api/mswsock/nf-mswsock-acceptex
 // Minimum OS: windows8.1.
-func AcceptEx(sListenSocket SOCKET, sAcceptSocket SOCKET, lpOutputBuffer unsafe.Pointer, dwReceiveDataLength uint32, dwLocalAddressLength uint32, dwRemoteAddressLength uint32, lpdwBytesReceived *uint32, lpOverlapped *systemio.OVERLAPPED) foundation.BOOL {
+func AcceptEx(sListenSocket SOCKET, sAcceptSocket SOCKET, lpOutputBuffer unsafe.Pointer, dwReceiveDataLength uint32, dwLocalAddressLength uint32, dwRemoteAddressLength uint32, lpdwBytesReceived *uint32, lpOverlapped *systemio.OVERLAPPED) bool {
 	r1, _, _ := syscall.SyscallN(procAcceptEx.Addr(), uintptr(sListenSocket), uintptr(sAcceptSocket), uintptr(unsafe.Pointer(lpOutputBuffer)), uintptr(dwReceiveDataLength), uintptr(dwLocalAddressLength), uintptr(dwRemoteAddressLength), uintptr(unsafe.Pointer(lpdwBytesReceived)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// Bind calls WS2_32!bind.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-bind
+// Minimum OS: windows8.1.
+func Bind(s SOCKET, name *SOCKADDR, namelen int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procBind.Addr(), uintptr(s), uintptr(unsafe.Pointer(name)), uintptr(namelen))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Closesocket calls WS2_32!closesocket.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-closesocket
+// Minimum OS: windows8.1.
+func Closesocket(s SOCKET) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procClosesocket.Addr(), uintptr(s))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Connect calls WS2_32!connect.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-connect
+// Minimum OS: windows6.0.6000.
+func Connect(s SOCKET, name *SOCKADDR, namelen int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procConnect.Addr(), uintptr(s), uintptr(unsafe.Pointer(name)), uintptr(namelen))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// EnumProtocols calls MSWSOCK!EnumProtocolsW.
+// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-enumprotocolsw
+// Minimum OS: windows5.0.
+func EnumProtocols(lpiProtocols *int32, lpProtocolBuffer unsafe.Pointer, lpdwBufferLength *uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procEnumProtocols.Addr(), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(unsafe.Pointer(lpProtocolBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
 // EnumProtocolsA calls MSWSOCK!EnumProtocolsA.
@@ -240,17 +295,6 @@ func AcceptEx(sListenSocket SOCKET, sAcceptSocket SOCKET, lpOutputBuffer unsafe.
 // Minimum OS: windows5.0.
 func EnumProtocolsA(lpiProtocols *int32, lpProtocolBuffer unsafe.Pointer, lpdwBufferLength *uint32) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procEnumProtocolsA.Addr(), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(unsafe.Pointer(lpProtocolBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// EnumProtocolsW calls MSWSOCK!EnumProtocolsW.
-// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-enumprotocolsw
-// Minimum OS: windows5.0.
-func EnumProtocolsW(lpiProtocols *int32, lpProtocolBuffer unsafe.Pointer, lpdwBufferLength *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procEnumProtocolsW.Addr(), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(unsafe.Pointer(lpProtocolBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -278,11 +322,28 @@ func FreeAddrInfoW(pAddrInfo *ADDRINFOW) {
 	syscall.SyscallN(procFreeAddrInfoW.Addr(), uintptr(unsafe.Pointer(pAddrInfo)))
 }
 
+// Freeaddrinfo calls WS2_32!freeaddrinfo.
+// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-freeaddrinfo
+// Minimum OS: windows8.1.
+func Freeaddrinfo(pAddrInfo *ADDRINFOA) {
+	syscall.SyscallN(procFreeaddrinfo.Addr(), uintptr(unsafe.Pointer(pAddrInfo)))
+}
+
 // GetAcceptExSockaddrs calls MSWSOCK!GetAcceptExSockaddrs.
 // https://learn.microsoft.com/windows/win32/api/mswsock/nf-mswsock-getacceptexsockaddrs
 // Minimum OS: windows8.1.
 func GetAcceptExSockaddrs(lpOutputBuffer unsafe.Pointer, dwReceiveDataLength uint32, dwLocalAddressLength uint32, dwRemoteAddressLength uint32, LocalSockaddr **SOCKADDR, LocalSockaddrLength *int32, RemoteSockaddr **SOCKADDR, RemoteSockaddrLength *int32) {
 	syscall.SyscallN(procGetAcceptExSockaddrs.Addr(), uintptr(unsafe.Pointer(lpOutputBuffer)), uintptr(dwReceiveDataLength), uintptr(dwLocalAddressLength), uintptr(dwRemoteAddressLength), uintptr(unsafe.Pointer(LocalSockaddr)), uintptr(unsafe.Pointer(LocalSockaddrLength)), uintptr(unsafe.Pointer(RemoteSockaddr)), uintptr(unsafe.Pointer(RemoteSockaddrLength)))
+}
+
+// GetAddrInfoEx calls WS2_32!GetAddrInfoExW.
+// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexw
+// Minimum OS: windows6.0.6000.
+func GetAddrInfoEx(pName string, pServiceName string, dwNameSpace uint32, lpNspId *win32.GUID, hints *ADDRINFOEXW, ppResult **ADDRINFOEXW, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle *foundation.HANDLE) int32 {
+	_pName := win32.UTF16Ptr(pName)
+	_pServiceName := win32.UTF16Ptr(pServiceName)
+	r1, _, _ := syscall.SyscallN(procGetAddrInfoEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pServiceName)), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpNspId)), uintptr(unsafe.Pointer(hints)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(unsafe.Pointer(lpHandle)))
+	return int32(r1)
 }
 
 // GetAddrInfoExA calls WS2_32!GetAddrInfoExA.
@@ -309,20 +370,26 @@ func GetAddrInfoExOverlappedResult(lpOverlapped *systemio.OVERLAPPED) int32 {
 	return int32(r1)
 }
 
-// GetAddrInfoExW calls WS2_32!GetAddrInfoExW.
-// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexw
-// Minimum OS: windows6.0.6000.
-func GetAddrInfoExW(pName foundation.PWSTR, pServiceName foundation.PWSTR, dwNameSpace uint32, lpNspId *win32.GUID, hints *ADDRINFOEXW, ppResult **ADDRINFOEXW, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle *foundation.HANDLE) int32 {
-	r1, _, _ := syscall.SyscallN(procGetAddrInfoExW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pServiceName)), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpNspId)), uintptr(unsafe.Pointer(hints)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(unsafe.Pointer(lpHandle)))
-	return int32(r1)
-}
-
 // GetAddrInfoW calls WS2_32!GetAddrInfoW.
 // https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfow
 // Minimum OS: windows8.1.
-func GetAddrInfoW(pNodeName foundation.PWSTR, pServiceName foundation.PWSTR, pHints *ADDRINFOW, ppResult **ADDRINFOW) int32 {
-	r1, _, _ := syscall.SyscallN(procGetAddrInfoW.Addr(), uintptr(unsafe.Pointer(pNodeName)), uintptr(unsafe.Pointer(pServiceName)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppResult)))
+func GetAddrInfoW(pNodeName string, pServiceName string, pHints *ADDRINFOW, ppResult **ADDRINFOW) int32 {
+	_pNodeName := win32.UTF16Ptr(pNodeName)
+	_pServiceName := win32.UTF16Ptr(pServiceName)
+	r1, _, _ := syscall.SyscallN(procGetAddrInfoW.Addr(), uintptr(unsafe.Pointer(_pNodeName)), uintptr(unsafe.Pointer(_pServiceName)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppResult)))
 	return int32(r1)
+}
+
+// GetAddressByName calls MSWSOCK!GetAddressByNameW.
+// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getaddressbynamew
+// Minimum OS: windows5.0.
+func GetAddressByName(dwNameSpace uint32, lpServiceType *win32.GUID, lpServiceName string, lpiProtocols *int32, dwResolution uint32, lpServiceAsyncInfo *SERVICE_ASYNC_INFO, lpCsaddrBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpAliasBuffer foundation.PWSTR, lpdwAliasBufferLength *uint32) (int32, error) {
+	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+	r1, _, e1 := syscall.SyscallN(procGetAddressByName.Addr(), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpServiceType)), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(dwResolution), uintptr(unsafe.Pointer(lpServiceAsyncInfo)), uintptr(unsafe.Pointer(lpCsaddrBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpAliasBuffer)), uintptr(unsafe.Pointer(lpdwAliasBufferLength)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
 // GetAddressByNameA calls MSWSOCK!GetAddressByNameA.
@@ -330,17 +397,6 @@ func GetAddrInfoW(pNodeName foundation.PWSTR, pServiceName foundation.PWSTR, pHi
 // Minimum OS: windows5.0.
 func GetAddressByNameA(dwNameSpace uint32, lpServiceType *win32.GUID, lpServiceName foundation.PSTR, lpiProtocols *int32, dwResolution uint32, lpServiceAsyncInfo *SERVICE_ASYNC_INFO, lpCsaddrBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpAliasBuffer foundation.PSTR, lpdwAliasBufferLength *uint32) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetAddressByNameA.Addr(), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpServiceType)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(dwResolution), uintptr(unsafe.Pointer(lpServiceAsyncInfo)), uintptr(unsafe.Pointer(lpCsaddrBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpAliasBuffer)), uintptr(unsafe.Pointer(lpdwAliasBufferLength)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// GetAddressByNameW calls MSWSOCK!GetAddressByNameW.
-// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getaddressbynamew
-// Minimum OS: windows5.0.
-func GetAddressByNameW(dwNameSpace uint32, lpServiceType *win32.GUID, lpServiceName foundation.PWSTR, lpiProtocols *int32, dwResolution uint32, lpServiceAsyncInfo *SERVICE_ASYNC_INFO, lpCsaddrBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpAliasBuffer foundation.PWSTR, lpdwAliasBufferLength *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetAddressByNameW.Addr(), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpServiceType)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(dwResolution), uintptr(unsafe.Pointer(lpServiceAsyncInfo)), uintptr(unsafe.Pointer(lpCsaddrBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpAliasBuffer)), uintptr(unsafe.Pointer(lpdwAliasBufferLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -358,22 +414,22 @@ func GetHostNameW(name foundation.PWSTR, namelen int32) (int32, error) {
 	return int32(r1), nil
 }
 
-// GetNameByTypeA calls MSWSOCK!GetNameByTypeA.
-// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getnamebytypea
+// GetNameByType calls MSWSOCK!GetNameByTypeW.
+// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getnamebytypew
 // Minimum OS: windows5.0.
-func GetNameByTypeA(lpServiceType *win32.GUID, lpServiceName foundation.PSTR, dwNameLength uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetNameByTypeA.Addr(), uintptr(unsafe.Pointer(lpServiceType)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(dwNameLength))
+func GetNameByType(lpServiceType *win32.GUID, lpServiceName foundation.PWSTR, dwNameLength uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetNameByType.Addr(), uintptr(unsafe.Pointer(lpServiceType)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(dwNameLength))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// GetNameByTypeW calls MSWSOCK!GetNameByTypeW.
-// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getnamebytypew
+// GetNameByTypeA calls MSWSOCK!GetNameByTypeA.
+// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getnamebytypea
 // Minimum OS: windows5.0.
-func GetNameByTypeW(lpServiceType *win32.GUID, lpServiceName foundation.PWSTR, dwNameLength uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetNameByTypeW.Addr(), uintptr(unsafe.Pointer(lpServiceType)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(dwNameLength))
+func GetNameByTypeA(lpServiceType *win32.GUID, lpServiceName foundation.PSTR, dwNameLength uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetNameByTypeA.Addr(), uintptr(unsafe.Pointer(lpServiceType)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(dwNameLength))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -388,6 +444,18 @@ func GetNameInfoW(pSockaddr *SOCKADDR, SockaddrLength Socklen_t, pNodeBuffer fou
 	return int32(r1)
 }
 
+// GetService calls MSWSOCK!GetServiceW.
+// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getservicew
+// Minimum OS: windows5.0.
+func GetService(dwNameSpace uint32, lpGuid *win32.GUID, lpServiceName string, dwProperties uint32, lpBuffer unsafe.Pointer, lpdwBufferSize *uint32, lpServiceAsyncInfo *SERVICE_ASYNC_INFO) (int32, error) {
+	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+	r1, _, e1 := syscall.SyscallN(procGetService.Addr(), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(dwProperties), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwBufferSize)), uintptr(unsafe.Pointer(lpServiceAsyncInfo)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // GetServiceA calls MSWSOCK!GetServiceA.
 // https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getservicea
 // Minimum OS: windows5.0.
@@ -399,11 +467,12 @@ func GetServiceA(dwNameSpace uint32, lpGuid *win32.GUID, lpServiceName foundatio
 	return int32(r1), nil
 }
 
-// GetServiceW calls MSWSOCK!GetServiceW.
-// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getservicew
+// GetTypeByName calls MSWSOCK!GetTypeByNameW.
+// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-gettypebynamew
 // Minimum OS: windows5.0.
-func GetServiceW(dwNameSpace uint32, lpGuid *win32.GUID, lpServiceName foundation.PWSTR, dwProperties uint32, lpBuffer unsafe.Pointer, lpdwBufferSize *uint32, lpServiceAsyncInfo *SERVICE_ASYNC_INFO) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetServiceW.Addr(), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(dwProperties), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwBufferSize)), uintptr(unsafe.Pointer(lpServiceAsyncInfo)))
+func GetTypeByName(lpServiceName string, lpServiceType *win32.GUID) (int32, error) {
+	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+	r1, _, e1 := syscall.SyscallN(procGetTypeByName.Addr(), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(unsafe.Pointer(lpServiceType)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -421,15 +490,164 @@ func GetTypeByNameA(lpServiceName foundation.PSTR, lpServiceType *win32.GUID) (i
 	return int32(r1), nil
 }
 
-// GetTypeByNameW calls MSWSOCK!GetTypeByNameW.
-// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-gettypebynamew
-// Minimum OS: windows5.0.
-func GetTypeByNameW(lpServiceName foundation.PWSTR, lpServiceType *win32.GUID) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetTypeByNameW.Addr(), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpServiceType)))
+// Getaddrinfo calls WS2_32!getaddrinfo.
+// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo
+// Minimum OS: windows8.1.
+func Getaddrinfo(pNodeName foundation.PSTR, pServiceName foundation.PSTR, pHints *ADDRINFOA, ppResult **ADDRINFOA) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetaddrinfo.Addr(), uintptr(unsafe.Pointer(pNodeName)), uintptr(unsafe.Pointer(pServiceName)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppResult)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
+}
+
+// Gethostbyaddr calls WS2_32!gethostbyaddr.
+// https://learn.microsoft.com/windows/win32/api/wsipv6ok/nf-wsipv6ok-gethostbyaddr
+// Minimum OS: windows8.1.
+func Gethostbyaddr(addr foundation.PSTR, len_ int32, type_ int32) (*HOSTENT, error) {
+	r1, _, e1 := syscall.SyscallN(procGethostbyaddr.Addr(), uintptr(unsafe.Pointer(addr)), uintptr(len_), uintptr(type_))
+	ret := (*HOSTENT)(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// Gethostbyname calls WS2_32!gethostbyname.
+// https://learn.microsoft.com/windows/win32/api/wsipv6ok/nf-wsipv6ok-gethostbyname
+// Minimum OS: windows8.1.
+func Gethostbyname(name foundation.PSTR) (*HOSTENT, error) {
+	r1, _, e1 := syscall.SyscallN(procGethostbyname.Addr(), uintptr(unsafe.Pointer(name)))
+	ret := (*HOSTENT)(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// Gethostname calls WS2_32!gethostname.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-gethostname
+// Minimum OS: windows8.1.
+func Gethostname(name foundation.PSTR, namelen int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGethostname.Addr(), uintptr(unsafe.Pointer(name)), uintptr(namelen))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Getnameinfo calls WS2_32!getnameinfo.
+// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getnameinfo
+// Minimum OS: windows8.1.
+func Getnameinfo(pSockaddr *SOCKADDR, SockaddrLength Socklen_t, pNodeBuffer foundation.PSTR, NodeBufferSize uint32, pServiceBuffer foundation.PSTR, ServiceBufferSize uint32, Flags int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetnameinfo.Addr(), uintptr(unsafe.Pointer(pSockaddr)), uintptr(SockaddrLength), uintptr(unsafe.Pointer(pNodeBuffer)), uintptr(NodeBufferSize), uintptr(unsafe.Pointer(pServiceBuffer)), uintptr(ServiceBufferSize), uintptr(Flags))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Getpeername calls WS2_32!getpeername.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getpeername
+// Minimum OS: windows8.1.
+func Getpeername(s SOCKET, name *SOCKADDR, namelen *int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetpeername.Addr(), uintptr(s), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(namelen)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Getprotobyname calls WS2_32!getprotobyname.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getprotobyname
+// Minimum OS: windows8.1.
+func Getprotobyname(name foundation.PSTR) (*PROTOENT, error) {
+	r1, _, e1 := syscall.SyscallN(procGetprotobyname.Addr(), uintptr(unsafe.Pointer(name)))
+	ret := (*PROTOENT)(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// Getprotobynumber calls WS2_32!getprotobynumber.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getprotobynumber
+// Minimum OS: windows8.1.
+func Getprotobynumber(number int32) (*PROTOENT, error) {
+	r1, _, e1 := syscall.SyscallN(procGetprotobynumber.Addr(), uintptr(number))
+	ret := (*PROTOENT)(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// Getservbyname calls WS2_32!getservbyname.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getservbyname
+// Minimum OS: windows8.1.
+func Getservbyname(name foundation.PSTR, proto foundation.PSTR) (*SERVENT, error) {
+	r1, _, e1 := syscall.SyscallN(procGetservbyname.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(proto)))
+	ret := (*SERVENT)(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// Getservbyport calls WS2_32!getservbyport.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getservbyport
+// Minimum OS: windows8.1.
+func Getservbyport(port int32, proto foundation.PSTR) (*SERVENT, error) {
+	r1, _, e1 := syscall.SyscallN(procGetservbyport.Addr(), uintptr(port), uintptr(unsafe.Pointer(proto)))
+	ret := (*SERVENT)(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// Getsockname calls WS2_32!getsockname.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getsockname
+// Minimum OS: windows8.1.
+func Getsockname(s SOCKET, name *SOCKADDR, namelen *int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetsockname.Addr(), uintptr(s), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(namelen)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Getsockopt calls WS2_32!getsockopt.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getsockopt
+// Minimum OS: windows8.1.
+func Getsockopt(s SOCKET, level int32, optname int32, optval foundation.PSTR, optlen *int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetsockopt.Addr(), uintptr(s), uintptr(level), uintptr(optname), uintptr(unsafe.Pointer(optval)), uintptr(unsafe.Pointer(optlen)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Htonl calls WS2_32!htonl.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-htonl
+// Minimum OS: windows8.1.
+func Htonl(hostlong uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procHtonl.Addr(), uintptr(hostlong))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
+// Htons calls WS2_32!htons.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-htons
+// Minimum OS: windows8.1.
+func Htons(hostshort uint16) (uint16, error) {
+	r1, _, e1 := syscall.SyscallN(procHtons.Addr(), uintptr(hostshort))
+	if e1 != 0 {
+		return uint16(r1), e1
+	}
+	return uint16(r1), nil
 }
 
 // InetNtopW calls WS2_32!InetNtopW.
@@ -443,16 +661,133 @@ func InetNtopW(Family int32, pAddr unsafe.Pointer, pStringBuf foundation.PWSTR, 
 // InetPtonW calls WS2_32!InetPtonW.
 // https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-inetptonw
 // Minimum OS: windows8.1.
-func InetPtonW(Family int32, pszAddrString foundation.PWSTR, pAddrBuf unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procInetPtonW.Addr(), uintptr(Family), uintptr(unsafe.Pointer(pszAddrString)), uintptr(unsafe.Pointer(pAddrBuf)))
+func InetPtonW(Family int32, pszAddrString string, pAddrBuf unsafe.Pointer) int32 {
+	_pszAddrString := win32.UTF16Ptr(pszAddrString)
+	r1, _, _ := syscall.SyscallN(procInetPtonW.Addr(), uintptr(Family), uintptr(unsafe.Pointer(_pszAddrString)), uintptr(unsafe.Pointer(pAddrBuf)))
 	return int32(r1)
+}
+
+// Inet_addr calls WS2_32!inet_addr.
+// https://learn.microsoft.com/windows/win32/api/wsipv6ok/nf-wsipv6ok-inet_addr
+// Minimum OS: windows8.1.
+func Inet_addr(cp foundation.PSTR) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procInet_addr.Addr(), uintptr(unsafe.Pointer(cp)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
+// Inet_ntop calls WS2_32!inet_ntop.
+// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-inet_ntop
+// Minimum OS: windows8.1.
+func Inet_ntop(Family int32, pAddr unsafe.Pointer, pStringBuf foundation.PSTR, StringBufSize uintptr) (foundation.PSTR, error) {
+	r1, _, e1 := syscall.SyscallN(procInet_ntop.Addr(), uintptr(Family), uintptr(unsafe.Pointer(pAddr)), uintptr(unsafe.Pointer(pStringBuf)), uintptr(StringBufSize))
+	ret := foundation.PSTR(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// Inet_pton calls WS2_32!inet_pton.
+// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-inet_pton
+// Minimum OS: windows8.1.
+func Inet_pton(Family int32, pszAddrString foundation.PSTR, pAddrBuf unsafe.Pointer) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procInet_pton.Addr(), uintptr(Family), uintptr(unsafe.Pointer(pszAddrString)), uintptr(unsafe.Pointer(pAddrBuf)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Ioctlsocket calls WS2_32!ioctlsocket.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-ioctlsocket
+// Minimum OS: windows8.1.
+func Ioctlsocket(s SOCKET, cmd int32, argp *uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procIoctlsocket.Addr(), uintptr(s), uintptr(cmd), uintptr(unsafe.Pointer(argp)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Listen calls WS2_32!listen.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-listen
+// Minimum OS: windows8.1.
+func Listen(s SOCKET, backlog int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procListen.Addr(), uintptr(s), uintptr(backlog))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Ntohl calls WS2_32!ntohl.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-ntohl
+// Minimum OS: windows8.1.
+func Ntohl(netlong uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procNtohl.Addr(), uintptr(netlong))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
+// Ntohs calls WS2_32!ntohs.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-ntohs
+// Minimum OS: windows8.1.
+func Ntohs(netshort uint16) (uint16, error) {
+	r1, _, e1 := syscall.SyscallN(procNtohs.Addr(), uintptr(netshort))
+	if e1 != 0 {
+		return uint16(r1), e1
+	}
+	return uint16(r1), nil
 }
 
 // ProcessSocketNotifications calls WS2_32!ProcessSocketNotifications.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-processsocketnotifications
-func ProcessSocketNotifications(completionPort foundation.HANDLE, registrationCount uint32, registrationInfos *SOCK_NOTIFY_REGISTRATION, timeoutMs uint32, completionCount uint32, completionPortEntries *systemio.OVERLAPPED_ENTRY, receivedEntryCount *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procProcessSocketNotifications.Addr(), uintptr(completionPort), uintptr(registrationCount), uintptr(unsafe.Pointer(registrationInfos)), uintptr(timeoutMs), uintptr(completionCount), uintptr(unsafe.Pointer(completionPortEntries)), uintptr(unsafe.Pointer(receivedEntryCount)))
+func ProcessSocketNotifications(completionPort foundation.HANDLE, registrationInfos []SOCK_NOTIFY_REGISTRATION, timeoutMs uint32, completionPortEntries []systemio.OVERLAPPED_ENTRY, receivedEntryCount *uint32) uint32 {
+	var _registrationInfos *SOCK_NOTIFY_REGISTRATION
+	if len(registrationInfos) > 0 {
+		_registrationInfos = &registrationInfos[0]
+	}
+	var _completionPortEntries *systemio.OVERLAPPED_ENTRY
+	if len(completionPortEntries) > 0 {
+		_completionPortEntries = &completionPortEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procProcessSocketNotifications.Addr(), uintptr(completionPort), uintptr(len(registrationInfos)), uintptr(unsafe.Pointer(_registrationInfos)), uintptr(timeoutMs), uintptr(len(completionPortEntries)), uintptr(unsafe.Pointer(_completionPortEntries)), uintptr(unsafe.Pointer(receivedEntryCount)))
 	return uint32(r1)
+}
+
+// Recv calls WS2_32!recv.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-recv
+// Minimum OS: windows8.1.
+func Recv(s SOCKET, buf foundation.PSTR, len_ int32, flags SEND_RECV_FLAGS) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procRecv.Addr(), uintptr(s), uintptr(unsafe.Pointer(buf)), uintptr(len_), uintptr(flags))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Recvfrom calls WS2_32!recvfrom.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-recvfrom
+// Minimum OS: windows8.1.
+func Recvfrom(s SOCKET, buf foundation.PSTR, len_ int32, flags int32, from *SOCKADDR, fromlen *int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procRecvfrom.Addr(), uintptr(s), uintptr(unsafe.Pointer(buf)), uintptr(len_), uintptr(flags), uintptr(unsafe.Pointer(from)), uintptr(unsafe.Pointer(fromlen)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// RtlEthernetAddressToString calls ntdll!RtlEthernetAddressToStringW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlethernetaddresstostringw
+// Minimum OS: windows6.1.
+func RtlEthernetAddressToString(Addr *DL_EUI48, S foundation.PWSTR) foundation.PWSTR {
+	r1, _, _ := syscall.SyscallN(procRtlEthernetAddressToString.Addr(), uintptr(unsafe.Pointer(Addr)), uintptr(unsafe.Pointer(S)))
+	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
 // RtlEthernetAddressToStringA calls ntdll!RtlEthernetAddressToStringA.
@@ -463,12 +798,13 @@ func RtlEthernetAddressToStringA(Addr *DL_EUI48, S foundation.PSTR) foundation.P
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// RtlEthernetAddressToStringW calls ntdll!RtlEthernetAddressToStringW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlethernetaddresstostringw
+// RtlEthernetStringToAddress calls ntdll!RtlEthernetStringToAddressW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlethernetstringtoaddressw
 // Minimum OS: windows6.1.
-func RtlEthernetAddressToStringW(Addr *DL_EUI48, S foundation.PWSTR) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procRtlEthernetAddressToStringW.Addr(), uintptr(unsafe.Pointer(Addr)), uintptr(unsafe.Pointer(S)))
-	return foundation.PWSTR(unsafe.Pointer(r1))
+func RtlEthernetStringToAddress(S string, Terminator *foundation.PWSTR, Addr *DL_EUI48) int32 {
+	_S := win32.UTF16Ptr(S)
+	r1, _, _ := syscall.SyscallN(procRtlEthernetStringToAddress.Addr(), uintptr(unsafe.Pointer(_S)), uintptr(unsafe.Pointer(Terminator)), uintptr(unsafe.Pointer(Addr)))
+	return int32(r1)
 }
 
 // RtlEthernetStringToAddressA calls ntdll!RtlEthernetStringToAddressA.
@@ -479,12 +815,12 @@ func RtlEthernetStringToAddressA(S foundation.PSTR, Terminator *foundation.PSTR,
 	return int32(r1)
 }
 
-// RtlEthernetStringToAddressW calls ntdll!RtlEthernetStringToAddressW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlethernetstringtoaddressw
-// Minimum OS: windows6.1.
-func RtlEthernetStringToAddressW(S foundation.PWSTR, Terminator *foundation.PWSTR, Addr *DL_EUI48) int32 {
-	r1, _, _ := syscall.SyscallN(procRtlEthernetStringToAddressW.Addr(), uintptr(unsafe.Pointer(S)), uintptr(unsafe.Pointer(Terminator)), uintptr(unsafe.Pointer(Addr)))
-	return int32(r1)
+// RtlIpv4AddressToString calls ntdll!RtlIpv4AddressToStringW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4addresstostringw
+// Minimum OS: windows6.0.6000.
+func RtlIpv4AddressToString(Addr *IN_ADDR, S foundation.PWSTR) foundation.PWSTR {
+	r1, _, _ := syscall.SyscallN(procRtlIpv4AddressToString.Addr(), uintptr(unsafe.Pointer(Addr)), uintptr(unsafe.Pointer(S)))
+	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
 // RtlIpv4AddressToStringA calls ntdll!RtlIpv4AddressToStringA.
@@ -495,6 +831,14 @@ func RtlIpv4AddressToStringA(Addr *IN_ADDR, S foundation.PSTR) foundation.PSTR {
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
+// RtlIpv4AddressToStringEx calls ntdll!RtlIpv4AddressToStringExW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4addresstostringexw
+// Minimum OS: windows6.0.6000.
+func RtlIpv4AddressToStringEx(Address *IN_ADDR, Port uint16, AddressString foundation.PWSTR, AddressStringLength *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procRtlIpv4AddressToStringEx.Addr(), uintptr(unsafe.Pointer(Address)), uintptr(Port), uintptr(unsafe.Pointer(AddressString)), uintptr(unsafe.Pointer(AddressStringLength)))
+	return int32(r1)
+}
+
 // RtlIpv4AddressToStringExA calls ntdll!RtlIpv4AddressToStringExA.
 // https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4addresstostringexa
 func RtlIpv4AddressToStringExA(Address *IN_ADDR, Port uint16, AddressString foundation.PSTR, AddressStringLength *uint32) int32 {
@@ -502,20 +846,13 @@ func RtlIpv4AddressToStringExA(Address *IN_ADDR, Port uint16, AddressString foun
 	return int32(r1)
 }
 
-// RtlIpv4AddressToStringExW calls ntdll!RtlIpv4AddressToStringExW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4addresstostringexw
+// RtlIpv4StringToAddress calls ntdll!RtlIpv4StringToAddressW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4stringtoaddressw
 // Minimum OS: windows6.0.6000.
-func RtlIpv4AddressToStringExW(Address *IN_ADDR, Port uint16, AddressString foundation.PWSTR, AddressStringLength *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procRtlIpv4AddressToStringExW.Addr(), uintptr(unsafe.Pointer(Address)), uintptr(Port), uintptr(unsafe.Pointer(AddressString)), uintptr(unsafe.Pointer(AddressStringLength)))
+func RtlIpv4StringToAddress(S string, Strict foundation.BOOLEAN, Terminator *foundation.PWSTR, Addr *IN_ADDR) int32 {
+	_S := win32.UTF16Ptr(S)
+	r1, _, _ := syscall.SyscallN(procRtlIpv4StringToAddress.Addr(), uintptr(unsafe.Pointer(_S)), uintptr(Strict), uintptr(unsafe.Pointer(Terminator)), uintptr(unsafe.Pointer(Addr)))
 	return int32(r1)
-}
-
-// RtlIpv4AddressToStringW calls ntdll!RtlIpv4AddressToStringW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4addresstostringw
-// Minimum OS: windows6.0.6000.
-func RtlIpv4AddressToStringW(Addr *IN_ADDR, S foundation.PWSTR) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procRtlIpv4AddressToStringW.Addr(), uintptr(unsafe.Pointer(Addr)), uintptr(unsafe.Pointer(S)))
-	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
 // RtlIpv4StringToAddressA calls ntdll!RtlIpv4StringToAddressA.
@@ -526,6 +863,15 @@ func RtlIpv4StringToAddressA(S foundation.PSTR, Strict foundation.BOOLEAN, Termi
 	return int32(r1)
 }
 
+// RtlIpv4StringToAddressEx calls ntdll!RtlIpv4StringToAddressExW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4stringtoaddressexw
+// Minimum OS: windows6.0.6000.
+func RtlIpv4StringToAddressEx(AddressString string, Strict foundation.BOOLEAN, Address *IN_ADDR, Port *uint16) int32 {
+	_AddressString := win32.UTF16Ptr(AddressString)
+	r1, _, _ := syscall.SyscallN(procRtlIpv4StringToAddressEx.Addr(), uintptr(unsafe.Pointer(_AddressString)), uintptr(Strict), uintptr(unsafe.Pointer(Address)), uintptr(unsafe.Pointer(Port)))
+	return int32(r1)
+}
+
 // RtlIpv4StringToAddressExA calls ntdll!RtlIpv4StringToAddressExA.
 // https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4stringtoaddressexa
 func RtlIpv4StringToAddressExA(AddressString foundation.PSTR, Strict foundation.BOOLEAN, Address *IN_ADDR, Port *uint16) int32 {
@@ -533,20 +879,12 @@ func RtlIpv4StringToAddressExA(AddressString foundation.PSTR, Strict foundation.
 	return int32(r1)
 }
 
-// RtlIpv4StringToAddressExW calls ntdll!RtlIpv4StringToAddressExW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4stringtoaddressexw
+// RtlIpv6AddressToString calls ntdll!RtlIpv6AddressToStringW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6addresstostringw
 // Minimum OS: windows6.0.6000.
-func RtlIpv4StringToAddressExW(AddressString foundation.PWSTR, Strict foundation.BOOLEAN, Address *IN_ADDR, Port *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procRtlIpv4StringToAddressExW.Addr(), uintptr(unsafe.Pointer(AddressString)), uintptr(Strict), uintptr(unsafe.Pointer(Address)), uintptr(unsafe.Pointer(Port)))
-	return int32(r1)
-}
-
-// RtlIpv4StringToAddressW calls ntdll!RtlIpv4StringToAddressW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv4stringtoaddressw
-// Minimum OS: windows6.0.6000.
-func RtlIpv4StringToAddressW(S foundation.PWSTR, Strict foundation.BOOLEAN, Terminator *foundation.PWSTR, Addr *IN_ADDR) int32 {
-	r1, _, _ := syscall.SyscallN(procRtlIpv4StringToAddressW.Addr(), uintptr(unsafe.Pointer(S)), uintptr(Strict), uintptr(unsafe.Pointer(Terminator)), uintptr(unsafe.Pointer(Addr)))
-	return int32(r1)
+func RtlIpv6AddressToString(Addr *IN6_ADDR, S foundation.PWSTR) foundation.PWSTR {
+	r1, _, _ := syscall.SyscallN(procRtlIpv6AddressToString.Addr(), uintptr(unsafe.Pointer(Addr)), uintptr(unsafe.Pointer(S)))
+	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
 // RtlIpv6AddressToStringA calls ntdll!RtlIpv6AddressToStringA.
@@ -557,6 +895,14 @@ func RtlIpv6AddressToStringA(Addr *IN6_ADDR, S foundation.PSTR) foundation.PSTR 
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
+// RtlIpv6AddressToStringEx calls ntdll!RtlIpv6AddressToStringExW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6addresstostringexw
+// Minimum OS: windows6.0.6000.
+func RtlIpv6AddressToStringEx(Address *IN6_ADDR, ScopeId uint32, Port uint16, AddressString foundation.PWSTR, AddressStringLength *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procRtlIpv6AddressToStringEx.Addr(), uintptr(unsafe.Pointer(Address)), uintptr(ScopeId), uintptr(Port), uintptr(unsafe.Pointer(AddressString)), uintptr(unsafe.Pointer(AddressStringLength)))
+	return int32(r1)
+}
+
 // RtlIpv6AddressToStringExA calls ntdll!RtlIpv6AddressToStringExA.
 // https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6addresstostringexa
 func RtlIpv6AddressToStringExA(Address *IN6_ADDR, ScopeId uint32, Port uint16, AddressString foundation.PSTR, AddressStringLength *uint32) int32 {
@@ -564,20 +910,13 @@ func RtlIpv6AddressToStringExA(Address *IN6_ADDR, ScopeId uint32, Port uint16, A
 	return int32(r1)
 }
 
-// RtlIpv6AddressToStringExW calls ntdll!RtlIpv6AddressToStringExW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6addresstostringexw
+// RtlIpv6StringToAddress calls ntdll!RtlIpv6StringToAddressW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6stringtoaddressw
 // Minimum OS: windows6.0.6000.
-func RtlIpv6AddressToStringExW(Address *IN6_ADDR, ScopeId uint32, Port uint16, AddressString foundation.PWSTR, AddressStringLength *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procRtlIpv6AddressToStringExW.Addr(), uintptr(unsafe.Pointer(Address)), uintptr(ScopeId), uintptr(Port), uintptr(unsafe.Pointer(AddressString)), uintptr(unsafe.Pointer(AddressStringLength)))
+func RtlIpv6StringToAddress(S string, Terminator *foundation.PWSTR, Addr *IN6_ADDR) int32 {
+	_S := win32.UTF16Ptr(S)
+	r1, _, _ := syscall.SyscallN(procRtlIpv6StringToAddress.Addr(), uintptr(unsafe.Pointer(_S)), uintptr(unsafe.Pointer(Terminator)), uintptr(unsafe.Pointer(Addr)))
 	return int32(r1)
-}
-
-// RtlIpv6AddressToStringW calls ntdll!RtlIpv6AddressToStringW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6addresstostringw
-// Minimum OS: windows6.0.6000.
-func RtlIpv6AddressToStringW(Addr *IN6_ADDR, S foundation.PWSTR) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procRtlIpv6AddressToStringW.Addr(), uintptr(unsafe.Pointer(Addr)), uintptr(unsafe.Pointer(S)))
-	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
 // RtlIpv6StringToAddressA calls ntdll!RtlIpv6StringToAddressA.
@@ -588,6 +927,15 @@ func RtlIpv6StringToAddressA(S foundation.PSTR, Terminator *foundation.PSTR, Add
 	return int32(r1)
 }
 
+// RtlIpv6StringToAddressEx calls ntdll!RtlIpv6StringToAddressExW.
+// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6stringtoaddressexw
+// Minimum OS: windows6.0.6000.
+func RtlIpv6StringToAddressEx(AddressString string, Address *IN6_ADDR, ScopeId *uint32, Port *uint16) int32 {
+	_AddressString := win32.UTF16Ptr(AddressString)
+	r1, _, _ := syscall.SyscallN(procRtlIpv6StringToAddressEx.Addr(), uintptr(unsafe.Pointer(_AddressString)), uintptr(unsafe.Pointer(Address)), uintptr(unsafe.Pointer(ScopeId)), uintptr(unsafe.Pointer(Port)))
+	return int32(r1)
+}
+
 // RtlIpv6StringToAddressExA calls ntdll!RtlIpv6StringToAddressExA.
 // https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6stringtoaddressexa
 func RtlIpv6StringToAddressExA(AddressString foundation.PSTR, Address *IN6_ADDR, ScopeId *uint32, Port *uint16) int32 {
@@ -595,19 +943,46 @@ func RtlIpv6StringToAddressExA(AddressString foundation.PSTR, Address *IN6_ADDR,
 	return int32(r1)
 }
 
-// RtlIpv6StringToAddressExW calls ntdll!RtlIpv6StringToAddressExW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6stringtoaddressexw
-// Minimum OS: windows6.0.6000.
-func RtlIpv6StringToAddressExW(AddressString foundation.PWSTR, Address *IN6_ADDR, ScopeId *uint32, Port *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procRtlIpv6StringToAddressExW.Addr(), uintptr(unsafe.Pointer(AddressString)), uintptr(unsafe.Pointer(Address)), uintptr(unsafe.Pointer(ScopeId)), uintptr(unsafe.Pointer(Port)))
-	return int32(r1)
+// Select calls WS2_32!select.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-select
+// Minimum OS: windows8.1.
+func Select(nfds int32, readfds *FD_SET, writefds *FD_SET, exceptfds *FD_SET, timeout *TIMEVAL) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procSelect.Addr(), uintptr(nfds), uintptr(unsafe.Pointer(readfds)), uintptr(unsafe.Pointer(writefds)), uintptr(unsafe.Pointer(exceptfds)), uintptr(unsafe.Pointer(timeout)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
-// RtlIpv6StringToAddressW calls ntdll!RtlIpv6StringToAddressW.
-// https://learn.microsoft.com/windows/win32/api/ip2string/nf-ip2string-rtlipv6stringtoaddressw
-// Minimum OS: windows6.0.6000.
-func RtlIpv6StringToAddressW(S foundation.PWSTR, Terminator *foundation.PWSTR, Addr *IN6_ADDR) int32 {
-	r1, _, _ := syscall.SyscallN(procRtlIpv6StringToAddressW.Addr(), uintptr(unsafe.Pointer(S)), uintptr(unsafe.Pointer(Terminator)), uintptr(unsafe.Pointer(Addr)))
+// Send calls WS2_32!send.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-send
+// Minimum OS: windows8.1.
+func Send(s SOCKET, buf foundation.PSTR, len_ int32, flags SEND_RECV_FLAGS) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procSend.Addr(), uintptr(s), uintptr(unsafe.Pointer(buf)), uintptr(len_), uintptr(flags))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Sendto calls WS2_32!sendto.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-sendto
+// Minimum OS: windows8.1.
+func Sendto(s SOCKET, buf foundation.PSTR, len_ int32, flags int32, to *SOCKADDR, tolen int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procSendto.Addr(), uintptr(s), uintptr(unsafe.Pointer(buf)), uintptr(len_), uintptr(flags), uintptr(unsafe.Pointer(to)), uintptr(tolen))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// SetAddrInfoEx calls WS2_32!SetAddrInfoExW.
+// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-setaddrinfoexw
+// Minimum OS: windows8.1.
+func SetAddrInfoEx(pName string, pServiceName string, pAddresses *SOCKET_ADDRESS, dwAddressCount uint32, lpBlob *systemcom.BLOB, dwFlags uint32, dwNameSpace uint32, lpNspId *win32.GUID, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle *foundation.HANDLE) int32 {
+	_pName := win32.UTF16Ptr(pName)
+	_pServiceName := win32.UTF16Ptr(pServiceName)
+	r1, _, _ := syscall.SyscallN(procSetAddrInfoEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pServiceName)), uintptr(unsafe.Pointer(pAddresses)), uintptr(dwAddressCount), uintptr(unsafe.Pointer(lpBlob)), uintptr(dwFlags), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpNspId)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(unsafe.Pointer(lpNameHandle)))
 	return int32(r1)
 }
 
@@ -619,12 +994,15 @@ func SetAddrInfoExA(pName foundation.PSTR, pServiceName foundation.PSTR, pAddres
 	return int32(r1)
 }
 
-// SetAddrInfoExW calls WS2_32!SetAddrInfoExW.
-// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-setaddrinfoexw
-// Minimum OS: windows8.1.
-func SetAddrInfoExW(pName foundation.PWSTR, pServiceName foundation.PWSTR, pAddresses *SOCKET_ADDRESS, dwAddressCount uint32, lpBlob *systemcom.BLOB, dwFlags uint32, dwNameSpace uint32, lpNspId *win32.GUID, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle *foundation.HANDLE) int32 {
-	r1, _, _ := syscall.SyscallN(procSetAddrInfoExW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pServiceName)), uintptr(unsafe.Pointer(pAddresses)), uintptr(dwAddressCount), uintptr(unsafe.Pointer(lpBlob)), uintptr(dwFlags), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpNspId)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(unsafe.Pointer(lpNameHandle)))
-	return int32(r1)
+// SetService calls MSWSOCK!SetServiceW.
+// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-setservicew
+// Minimum OS: windows5.0.
+func SetService(dwNameSpace uint32, dwOperation SET_SERVICE_OPERATION, dwFlags uint32, lpServiceInfo *SERVICE_INFOW, lpServiceAsyncInfo *SERVICE_ASYNC_INFO, lpdwStatusFlags *uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procSetService.Addr(), uintptr(dwNameSpace), uintptr(dwOperation), uintptr(dwFlags), uintptr(unsafe.Pointer(lpServiceInfo)), uintptr(unsafe.Pointer(lpServiceAsyncInfo)), uintptr(unsafe.Pointer(lpdwStatusFlags)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
 // SetServiceA calls MSWSOCK!SetServiceA.
@@ -638,31 +1016,54 @@ func SetServiceA(dwNameSpace uint32, dwOperation SET_SERVICE_OPERATION, dwFlags 
 	return int32(r1), nil
 }
 
-// SetServiceW calls MSWSOCK!SetServiceW.
-// https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-setservicew
-// Minimum OS: windows5.0.
-func SetServiceW(dwNameSpace uint32, dwOperation SET_SERVICE_OPERATION, dwFlags uint32, lpServiceInfo *SERVICE_INFOW, lpServiceAsyncInfo *SERVICE_ASYNC_INFO, lpdwStatusFlags *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetServiceW.Addr(), uintptr(dwNameSpace), uintptr(dwOperation), uintptr(dwFlags), uintptr(unsafe.Pointer(lpServiceInfo)), uintptr(unsafe.Pointer(lpServiceAsyncInfo)), uintptr(unsafe.Pointer(lpdwStatusFlags)))
+// SetSocketMediaStreamingMode calls Windows.Networking!SetSocketMediaStreamingMode.
+// https://learn.microsoft.com/windows/win32/api/socketapi/nf-socketapi-setsocketmediastreamingmode
+// Minimum OS: windows8.0.
+func SetSocketMediaStreamingMode(value bool) error {
+	_value := win32.Bool32(value)
+	r1, _, _ := syscall.SyscallN(procSetSocketMediaStreamingMode.Addr(), uintptr(_value))
+	return win32.HRESULTError(int32(r1))
+}
+
+// Setsockopt calls WS2_32!setsockopt.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-setsockopt
+// Minimum OS: windows8.1.
+func Setsockopt(s SOCKET, level int32, optname int32, optval foundation.PSTR, optlen int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procSetsockopt.Addr(), uintptr(s), uintptr(level), uintptr(optname), uintptr(unsafe.Pointer(optval)), uintptr(optlen))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// SetSocketMediaStreamingMode calls Windows.Networking!SetSocketMediaStreamingMode.
-// https://learn.microsoft.com/windows/win32/api/socketapi/nf-socketapi-setsocketmediastreamingmode
-// Minimum OS: windows8.0.
-func SetSocketMediaStreamingMode(value foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetSocketMediaStreamingMode.Addr(), uintptr(value))
-	return foundation.HRESULT(r1)
+// Shutdown calls WS2_32!shutdown.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-shutdown
+// Minimum OS: windows8.1.
+func Shutdown(s SOCKET, how WINSOCK_SHUTDOWN_HOW) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procShutdown.Addr(), uintptr(s), uintptr(how))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// Socket calls WS2_32!socket.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-socket
+// Minimum OS: windows8.1.
+func Socket(af int32, type_ WINSOCK_SOCKET_TYPE, protocol int32) (SOCKET, error) {
+	r1, _, e1 := syscall.SyscallN(procSocket.Addr(), uintptr(af), uintptr(type_), uintptr(protocol))
+	if e1 != 0 {
+		return SOCKET(r1), e1
+	}
+	return SOCKET(r1), nil
 }
 
 // TransmitFile calls MSWSOCK!TransmitFile.
 // https://learn.microsoft.com/windows/win32/api/mswsock/nf-mswsock-transmitfile
 // Minimum OS: windows8.1.
-func TransmitFile(hSocket SOCKET, hFile foundation.HANDLE, nNumberOfBytesToWrite uint32, nNumberOfBytesPerSend uint32, lpOverlapped *systemio.OVERLAPPED, lpTransmitBuffers *TRANSMIT_FILE_BUFFERS, dwReserved uint32) foundation.BOOL {
+func TransmitFile(hSocket SOCKET, hFile foundation.HANDLE, nNumberOfBytesToWrite uint32, nNumberOfBytesPerSend uint32, lpOverlapped *systemio.OVERLAPPED, lpTransmitBuffers *TRANSMIT_FILE_BUFFERS, dwReserved uint32) bool {
 	r1, _, _ := syscall.SyscallN(procTransmitFile.Addr(), uintptr(hSocket), uintptr(hFile), uintptr(nNumberOfBytesToWrite), uintptr(nNumberOfBytesPerSend), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpTransmitBuffers)), uintptr(dwReserved))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WPUCompleteOverlappedRequest calls WS2_32!WPUCompleteOverlappedRequest.
@@ -684,22 +1085,22 @@ func WSAAccept(s SOCKET, addr *SOCKADDR, addrlen *int32, lpfnCondition LPCONDITI
 	return SOCKET(r1), nil
 }
 
-// WSAAddressToStringA calls WS2_32!WSAAddressToStringA.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaaddresstostringa
+// WSAAddressToString calls WS2_32!WSAAddressToStringW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaaddresstostringw
 // Minimum OS: windows8.1.
-func WSAAddressToStringA(lpsaAddress *SOCKADDR, dwAddressLength uint32, lpProtocolInfo *WSAPROTOCOL_INFOA, lpszAddressString foundation.PSTR, lpdwAddressStringLength *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAAddressToStringA.Addr(), uintptr(unsafe.Pointer(lpsaAddress)), uintptr(dwAddressLength), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(unsafe.Pointer(lpszAddressString)), uintptr(unsafe.Pointer(lpdwAddressStringLength)))
+func WSAAddressToString(lpsaAddress *SOCKADDR, dwAddressLength uint32, lpProtocolInfo *WSAPROTOCOL_INFOW, lpszAddressString foundation.PWSTR, lpdwAddressStringLength *uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAAddressToString.Addr(), uintptr(unsafe.Pointer(lpsaAddress)), uintptr(dwAddressLength), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(unsafe.Pointer(lpszAddressString)), uintptr(unsafe.Pointer(lpdwAddressStringLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// WSAAddressToStringW calls WS2_32!WSAAddressToStringW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaaddresstostringw
+// WSAAddressToStringA calls WS2_32!WSAAddressToStringA.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaaddresstostringa
 // Minimum OS: windows8.1.
-func WSAAddressToStringW(lpsaAddress *SOCKADDR, dwAddressLength uint32, lpProtocolInfo *WSAPROTOCOL_INFOW, lpszAddressString foundation.PWSTR, lpdwAddressStringLength *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAAddressToStringW.Addr(), uintptr(unsafe.Pointer(lpsaAddress)), uintptr(dwAddressLength), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(unsafe.Pointer(lpszAddressString)), uintptr(unsafe.Pointer(lpdwAddressStringLength)))
+func WSAAddressToStringA(lpsaAddress *SOCKADDR, dwAddressLength uint32, lpProtocolInfo *WSAPROTOCOL_INFOA, lpszAddressString foundation.PSTR, lpdwAddressStringLength *uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAAddressToStringA.Addr(), uintptr(unsafe.Pointer(lpsaAddress)), uintptr(dwAddressLength), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(unsafe.Pointer(lpszAddressString)), uintptr(unsafe.Pointer(lpdwAddressStringLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -857,8 +1258,21 @@ func WSAConnect(s SOCKET, name *SOCKADDR, namelen int32, lpCallerData *WSABUF, l
 // WSAConnectByList calls WS2_32!WSAConnectByList.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaconnectbylist
 // Minimum OS: windows8.1.
-func WSAConnectByList(s SOCKET, SocketAddress *SOCKET_ADDRESS_LIST, LocalAddressLength *uint32, LocalAddress *SOCKADDR, RemoteAddressLength *uint32, RemoteAddress *SOCKADDR, timeout *TIMEVAL, Reserved *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWSAConnectByList.Addr(), uintptr(s), uintptr(unsafe.Pointer(SocketAddress)), uintptr(unsafe.Pointer(LocalAddressLength)), uintptr(unsafe.Pointer(LocalAddress)), uintptr(unsafe.Pointer(RemoteAddressLength)), uintptr(unsafe.Pointer(RemoteAddress)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(Reserved)))
+func WSAConnectByList(s SOCKET, SocketAddress *SOCKET_ADDRESS_LIST, LocalAddressLength *uint32, LocalAddress *SOCKADDR, RemoteAddressLength *uint32, RemoteAddress *SOCKADDR, timeout *TIMEVAL) error {
+	r1, _, e1 := syscall.SyscallN(procWSAConnectByList.Addr(), uintptr(s), uintptr(unsafe.Pointer(SocketAddress)), uintptr(unsafe.Pointer(LocalAddressLength)), uintptr(unsafe.Pointer(LocalAddress)), uintptr(unsafe.Pointer(RemoteAddressLength)), uintptr(unsafe.Pointer(RemoteAddress)), uintptr(unsafe.Pointer(timeout)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// WSAConnectByName calls WS2_32!WSAConnectByNameW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaconnectbynamew
+// Minimum OS: windows8.1.
+func WSAConnectByName(s SOCKET, nodename string, servicename string, LocalAddressLength *uint32, LocalAddress *SOCKADDR, RemoteAddressLength *uint32, RemoteAddress *SOCKADDR, timeout *TIMEVAL) error {
+	_nodename := win32.UTF16Ptr(nodename)
+	_servicename := win32.UTF16Ptr(servicename)
+	r1, _, e1 := syscall.SyscallN(procWSAConnectByName.Addr(), uintptr(s), uintptr(unsafe.Pointer(_nodename)), uintptr(unsafe.Pointer(_servicename)), uintptr(unsafe.Pointer(LocalAddressLength)), uintptr(unsafe.Pointer(LocalAddress)), uintptr(unsafe.Pointer(RemoteAddressLength)), uintptr(unsafe.Pointer(RemoteAddress)), uintptr(unsafe.Pointer(timeout)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -868,19 +1282,8 @@ func WSAConnectByList(s SOCKET, SocketAddress *SOCKET_ADDRESS_LIST, LocalAddress
 // WSAConnectByNameA calls WS2_32!WSAConnectByNameA.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaconnectbynamea
 // Minimum OS: windows8.1.
-func WSAConnectByNameA(s SOCKET, nodename foundation.PSTR, servicename foundation.PSTR, LocalAddressLength *uint32, LocalAddress *SOCKADDR, RemoteAddressLength *uint32, RemoteAddress *SOCKADDR, timeout *TIMEVAL, Reserved *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWSAConnectByNameA.Addr(), uintptr(s), uintptr(unsafe.Pointer(nodename)), uintptr(unsafe.Pointer(servicename)), uintptr(unsafe.Pointer(LocalAddressLength)), uintptr(unsafe.Pointer(LocalAddress)), uintptr(unsafe.Pointer(RemoteAddressLength)), uintptr(unsafe.Pointer(RemoteAddress)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(Reserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// WSAConnectByNameW calls WS2_32!WSAConnectByNameW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaconnectbynamew
-// Minimum OS: windows8.1.
-func WSAConnectByNameW(s SOCKET, nodename foundation.PWSTR, servicename foundation.PWSTR, LocalAddressLength *uint32, LocalAddress *SOCKADDR, RemoteAddressLength *uint32, RemoteAddress *SOCKADDR, timeout *TIMEVAL, Reserved *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWSAConnectByNameW.Addr(), uintptr(s), uintptr(unsafe.Pointer(nodename)), uintptr(unsafe.Pointer(servicename)), uintptr(unsafe.Pointer(LocalAddressLength)), uintptr(unsafe.Pointer(LocalAddress)), uintptr(unsafe.Pointer(RemoteAddressLength)), uintptr(unsafe.Pointer(RemoteAddress)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(Reserved)))
+func WSAConnectByNameA(s SOCKET, nodename foundation.PSTR, servicename foundation.PSTR, LocalAddressLength *uint32, LocalAddress *SOCKADDR, RemoteAddressLength *uint32, RemoteAddress *SOCKADDR, timeout *TIMEVAL) error {
+	r1, _, e1 := syscall.SyscallN(procWSAConnectByNameA.Addr(), uintptr(s), uintptr(unsafe.Pointer(nodename)), uintptr(unsafe.Pointer(servicename)), uintptr(unsafe.Pointer(LocalAddressLength)), uintptr(unsafe.Pointer(LocalAddress)), uintptr(unsafe.Pointer(RemoteAddressLength)), uintptr(unsafe.Pointer(RemoteAddress)), uintptr(unsafe.Pointer(timeout)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -909,6 +1312,17 @@ func WSADeleteSocketPeerTargetName(Socket SOCKET, PeerAddr *SOCKADDR, PeerAddrLe
 	return int32(r1), nil
 }
 
+// WSADuplicateSocket calls WS2_32!WSADuplicateSocketW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaduplicatesocketw
+// Minimum OS: windows8.1.
+func WSADuplicateSocket(s SOCKET, dwProcessId uint32, lpProtocolInfo *WSAPROTOCOL_INFOW) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSADuplicateSocket.Addr(), uintptr(s), uintptr(dwProcessId), uintptr(unsafe.Pointer(lpProtocolInfo)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // WSADuplicateSocketA calls WS2_32!WSADuplicateSocketA.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaduplicatesocketa
 // Minimum OS: windows8.1.
@@ -920,11 +1334,11 @@ func WSADuplicateSocketA(s SOCKET, dwProcessId uint32, lpProtocolInfo *WSAPROTOC
 	return int32(r1), nil
 }
 
-// WSADuplicateSocketW calls WS2_32!WSADuplicateSocketW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaduplicatesocketw
+// WSAEnumNameSpaceProviders calls WS2_32!WSAEnumNameSpaceProvidersW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersw
 // Minimum OS: windows8.1.
-func WSADuplicateSocketW(s SOCKET, dwProcessId uint32, lpProtocolInfo *WSAPROTOCOL_INFOW) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSADuplicateSocketW.Addr(), uintptr(s), uintptr(dwProcessId), uintptr(unsafe.Pointer(lpProtocolInfo)))
+func WSAEnumNameSpaceProviders(lpdwBufferLength *uint32, lpnspBuffer *WSANAMESPACE_INFOW) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAEnumNameSpaceProviders.Addr(), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpnspBuffer)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -942,33 +1356,22 @@ func WSAEnumNameSpaceProvidersA(lpdwBufferLength *uint32, lpnspBuffer *WSANAMESP
 	return int32(r1), nil
 }
 
+// WSAEnumNameSpaceProvidersEx calls WS2_32!WSAEnumNameSpaceProvidersExW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersexw
+// Minimum OS: windows8.1.
+func WSAEnumNameSpaceProvidersEx(lpdwBufferLength *uint32, lpnspBuffer *WSANAMESPACE_INFOEXW) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAEnumNameSpaceProvidersEx.Addr(), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpnspBuffer)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // WSAEnumNameSpaceProvidersExA calls WS2_32!WSAEnumNameSpaceProvidersExA.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersexa
 // Minimum OS: windows8.1.
 func WSAEnumNameSpaceProvidersExA(lpdwBufferLength *uint32, lpnspBuffer *WSANAMESPACE_INFOEXA) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procWSAEnumNameSpaceProvidersExA.Addr(), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpnspBuffer)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// WSAEnumNameSpaceProvidersExW calls WS2_32!WSAEnumNameSpaceProvidersExW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersexw
-// Minimum OS: windows8.1.
-func WSAEnumNameSpaceProvidersExW(lpdwBufferLength *uint32, lpnspBuffer *WSANAMESPACE_INFOEXW) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAEnumNameSpaceProvidersExW.Addr(), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpnspBuffer)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// WSAEnumNameSpaceProvidersW calls WS2_32!WSAEnumNameSpaceProvidersW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersw
-// Minimum OS: windows8.1.
-func WSAEnumNameSpaceProvidersW(lpdwBufferLength *uint32, lpnspBuffer *WSANAMESPACE_INFOW) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAEnumNameSpaceProvidersW.Addr(), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpnspBuffer)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -986,22 +1389,22 @@ func WSAEnumNetworkEvents(s SOCKET, hEventObject WSAEVENT, lpNetworkEvents *WSAN
 	return int32(r1), nil
 }
 
-// WSAEnumProtocolsA calls WS2_32!WSAEnumProtocolsA.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumprotocolsa
+// WSAEnumProtocols calls WS2_32!WSAEnumProtocolsW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumprotocolsw
 // Minimum OS: windows8.1.
-func WSAEnumProtocolsA(lpiProtocols *int32, lpProtocolBuffer *WSAPROTOCOL_INFOA, lpdwBufferLength *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAEnumProtocolsA.Addr(), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(unsafe.Pointer(lpProtocolBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
+func WSAEnumProtocols(lpiProtocols *int32, lpProtocolBuffer *WSAPROTOCOL_INFOW, lpdwBufferLength *uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAEnumProtocols.Addr(), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(unsafe.Pointer(lpProtocolBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// WSAEnumProtocolsW calls WS2_32!WSAEnumProtocolsW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumprotocolsw
+// WSAEnumProtocolsA calls WS2_32!WSAEnumProtocolsA.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumprotocolsa
 // Minimum OS: windows8.1.
-func WSAEnumProtocolsW(lpiProtocols *int32, lpProtocolBuffer *WSAPROTOCOL_INFOW, lpdwBufferLength *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAEnumProtocolsW.Addr(), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(unsafe.Pointer(lpProtocolBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
+func WSAEnumProtocolsA(lpiProtocols *int32, lpProtocolBuffer *WSAPROTOCOL_INFOA, lpdwBufferLength *uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAEnumProtocolsA.Addr(), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(unsafe.Pointer(lpProtocolBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1019,6 +1422,14 @@ func WSAEventSelect(s SOCKET, hEventObject WSAEVENT, lNetworkEvents int32) (int3
 	return int32(r1), nil
 }
 
+// WSAFDIsSet calls WS2_32!__WSAFDIsSet.
+// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-__wsafdisset
+// Minimum OS: windows8.1.
+func WSAFDIsSet(fd SOCKET, param1 *FD_SET) int32 {
+	r1, _, _ := syscall.SyscallN(procWSAFDIsSet.Addr(), uintptr(fd), uintptr(unsafe.Pointer(param1)))
+	return int32(r1)
+}
+
 // WSAGetLastError calls WS2_32!WSAGetLastError.
 // https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-wsagetlasterror
 // Minimum OS: windows8.1.
@@ -1033,8 +1444,9 @@ func WSAGetLastError() (WSA_ERROR, error) {
 // WSAGetOverlappedResult calls WS2_32!WSAGetOverlappedResult.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetoverlappedresult
 // Minimum OS: windows8.1.
-func WSAGetOverlappedResult(s SOCKET, lpOverlapped *systemio.OVERLAPPED, lpcbTransfer *uint32, fWait foundation.BOOL, lpdwFlags *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWSAGetOverlappedResult.Addr(), uintptr(s), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpcbTransfer)), uintptr(fWait), uintptr(unsafe.Pointer(lpdwFlags)))
+func WSAGetOverlappedResult(s SOCKET, lpOverlapped *systemio.OVERLAPPED, lpcbTransfer *uint32, fWait bool, lpdwFlags *uint32) error {
+	_fWait := win32.Bool32(fWait)
+	r1, _, e1 := syscall.SyscallN(procWSAGetOverlappedResult.Addr(), uintptr(s), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpcbTransfer)), uintptr(_fWait), uintptr(unsafe.Pointer(lpdwFlags)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1052,6 +1464,17 @@ func WSAGetQOSByName(s SOCKET, lpQOSName *WSABUF, lpQOS *QOS) error {
 	return nil
 }
 
+// WSAGetServiceClassInfo calls WS2_32!WSAGetServiceClassInfoW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetserviceclassinfow
+// Minimum OS: windows5.0.
+func WSAGetServiceClassInfo(lpProviderId *win32.GUID, lpServiceClassId *win32.GUID, lpdwBufSize *uint32, lpServiceClassInfo *WSASERVICECLASSINFOW) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAGetServiceClassInfo.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpServiceClassId)), uintptr(unsafe.Pointer(lpdwBufSize)), uintptr(unsafe.Pointer(lpServiceClassInfo)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // WSAGetServiceClassInfoA calls WS2_32!WSAGetServiceClassInfoA.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetserviceclassinfoa
 // Minimum OS: windows5.0.
@@ -1063,11 +1486,11 @@ func WSAGetServiceClassInfoA(lpProviderId *win32.GUID, lpServiceClassId *win32.G
 	return int32(r1), nil
 }
 
-// WSAGetServiceClassInfoW calls WS2_32!WSAGetServiceClassInfoW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetserviceclassinfow
+// WSAGetServiceClassNameByClassId calls WS2_32!WSAGetServiceClassNameByClassIdW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetserviceclassnamebyclassidw
 // Minimum OS: windows5.0.
-func WSAGetServiceClassInfoW(lpProviderId *win32.GUID, lpServiceClassId *win32.GUID, lpdwBufSize *uint32, lpServiceClassInfo *WSASERVICECLASSINFOW) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAGetServiceClassInfoW.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpServiceClassId)), uintptr(unsafe.Pointer(lpdwBufSize)), uintptr(unsafe.Pointer(lpServiceClassInfo)))
+func WSAGetServiceClassNameByClassId(lpServiceClassId *win32.GUID, lpszServiceClassName foundation.PWSTR, lpdwBufferLength *uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAGetServiceClassNameByClassId.Addr(), uintptr(unsafe.Pointer(lpServiceClassId)), uintptr(unsafe.Pointer(lpszServiceClassName)), uintptr(unsafe.Pointer(lpdwBufferLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1079,17 +1502,6 @@ func WSAGetServiceClassInfoW(lpProviderId *win32.GUID, lpServiceClassId *win32.G
 // Minimum OS: windows5.0.
 func WSAGetServiceClassNameByClassIdA(lpServiceClassId *win32.GUID, lpszServiceClassName foundation.PSTR, lpdwBufferLength *uint32) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procWSAGetServiceClassNameByClassIdA.Addr(), uintptr(unsafe.Pointer(lpServiceClassId)), uintptr(unsafe.Pointer(lpszServiceClassName)), uintptr(unsafe.Pointer(lpdwBufferLength)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// WSAGetServiceClassNameByClassIdW calls WS2_32!WSAGetServiceClassNameByClassIdW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetserviceclassnamebyclassidw
-// Minimum OS: windows5.0.
-func WSAGetServiceClassNameByClassIdW(lpServiceClassId *win32.GUID, lpszServiceClassName foundation.PWSTR, lpdwBufferLength *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAGetServiceClassNameByClassIdW.Addr(), uintptr(unsafe.Pointer(lpServiceClassId)), uintptr(unsafe.Pointer(lpszServiceClassName)), uintptr(unsafe.Pointer(lpdwBufferLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1129,22 +1541,22 @@ func WSAImpersonateSocketPeer(Socket SOCKET, PeerAddr *SOCKADDR, PeerAddrLen uin
 	return int32(r1), nil
 }
 
-// WSAInstallServiceClassA calls WS2_32!WSAInstallServiceClassA.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsainstallserviceclassa
+// WSAInstallServiceClass calls WS2_32!WSAInstallServiceClassW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsainstallserviceclassw
 // Minimum OS: windows5.0.
-func WSAInstallServiceClassA(lpServiceClassInfo *WSASERVICECLASSINFOA) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAInstallServiceClassA.Addr(), uintptr(unsafe.Pointer(lpServiceClassInfo)))
+func WSAInstallServiceClass(lpServiceClassInfo *WSASERVICECLASSINFOW) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAInstallServiceClass.Addr(), uintptr(unsafe.Pointer(lpServiceClassInfo)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// WSAInstallServiceClassW calls WS2_32!WSAInstallServiceClassW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsainstallserviceclassw
+// WSAInstallServiceClassA calls WS2_32!WSAInstallServiceClassA.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsainstallserviceclassa
 // Minimum OS: windows5.0.
-func WSAInstallServiceClassW(lpServiceClassInfo *WSASERVICECLASSINFOW) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAInstallServiceClassW.Addr(), uintptr(unsafe.Pointer(lpServiceClassInfo)))
+func WSAInstallServiceClassA(lpServiceClassInfo *WSASERVICECLASSINFOA) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAInstallServiceClassA.Addr(), uintptr(unsafe.Pointer(lpServiceClassInfo)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1183,22 +1595,22 @@ func WSAJoinLeaf(s SOCKET, name *SOCKADDR, namelen int32, lpCallerData *WSABUF, 
 	return SOCKET(r1), nil
 }
 
-// WSALookupServiceBeginA calls WS2_32!WSALookupServiceBeginA.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicebegina
+// WSALookupServiceBegin calls WS2_32!WSALookupServiceBeginW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicebeginw
 // Minimum OS: windows8.1.
-func WSALookupServiceBeginA(lpqsRestrictions *WSAQUERYSETA, dwControlFlags uint32, lphLookup *foundation.HANDLE) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSALookupServiceBeginA.Addr(), uintptr(unsafe.Pointer(lpqsRestrictions)), uintptr(dwControlFlags), uintptr(unsafe.Pointer(lphLookup)))
+func WSALookupServiceBegin(lpqsRestrictions *WSAQUERYSETW, dwControlFlags uint32, lphLookup *foundation.HANDLE) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSALookupServiceBegin.Addr(), uintptr(unsafe.Pointer(lpqsRestrictions)), uintptr(dwControlFlags), uintptr(unsafe.Pointer(lphLookup)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// WSALookupServiceBeginW calls WS2_32!WSALookupServiceBeginW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicebeginw
+// WSALookupServiceBeginA calls WS2_32!WSALookupServiceBeginA.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicebegina
 // Minimum OS: windows8.1.
-func WSALookupServiceBeginW(lpqsRestrictions *WSAQUERYSETW, dwControlFlags uint32, lphLookup *foundation.HANDLE) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSALookupServiceBeginW.Addr(), uintptr(unsafe.Pointer(lpqsRestrictions)), uintptr(dwControlFlags), uintptr(unsafe.Pointer(lphLookup)))
+func WSALookupServiceBeginA(lpqsRestrictions *WSAQUERYSETA, dwControlFlags uint32, lphLookup *foundation.HANDLE) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSALookupServiceBeginA.Addr(), uintptr(unsafe.Pointer(lpqsRestrictions)), uintptr(dwControlFlags), uintptr(unsafe.Pointer(lphLookup)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1216,22 +1628,22 @@ func WSALookupServiceEnd(hLookup foundation.HANDLE) (int32, error) {
 	return int32(r1), nil
 }
 
-// WSALookupServiceNextA calls WS2_32!WSALookupServiceNextA.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenexta
+// WSALookupServiceNext calls WS2_32!WSALookupServiceNextW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenextw
 // Minimum OS: windows8.1.
-func WSALookupServiceNextA(hLookup foundation.HANDLE, dwControlFlags uint32, lpdwBufferLength *uint32, lpqsResults *WSAQUERYSETA) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSALookupServiceNextA.Addr(), uintptr(hLookup), uintptr(dwControlFlags), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpqsResults)))
+func WSALookupServiceNext(hLookup foundation.HANDLE, dwControlFlags uint32, lpdwBufferLength *uint32, lpqsResults *WSAQUERYSETW) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSALookupServiceNext.Addr(), uintptr(hLookup), uintptr(dwControlFlags), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpqsResults)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// WSALookupServiceNextW calls WS2_32!WSALookupServiceNextW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenextw
+// WSALookupServiceNextA calls WS2_32!WSALookupServiceNextA.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenexta
 // Minimum OS: windows8.1.
-func WSALookupServiceNextW(hLookup foundation.HANDLE, dwControlFlags uint32, lpdwBufferLength *uint32, lpqsResults *WSAQUERYSETW) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSALookupServiceNextW.Addr(), uintptr(hLookup), uintptr(dwControlFlags), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpqsResults)))
+func WSALookupServiceNextA(hLookup foundation.HANDLE, dwControlFlags uint32, lpdwBufferLength *uint32, lpqsResults *WSAQUERYSETA) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSALookupServiceNextA.Addr(), uintptr(hLookup), uintptr(dwControlFlags), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpqsResults)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1318,8 +1730,12 @@ func WSAQuerySocketSecurity(Socket SOCKET, SecurityQueryTemplate *SOCKET_SECURIT
 // WSARecv calls WS2_32!WSARecv.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsarecv
 // Minimum OS: windows8.1.
-func WSARecv(s SOCKET, lpBuffers *WSABUF, dwBufferCount uint32, lpNumberOfBytesRecvd *uint32, lpFlags *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSARecv.Addr(), uintptr(s), uintptr(unsafe.Pointer(lpBuffers)), uintptr(dwBufferCount), uintptr(unsafe.Pointer(lpNumberOfBytesRecvd)), uintptr(unsafe.Pointer(lpFlags)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
+func WSARecv(s SOCKET, lpBuffers []WSABUF, lpNumberOfBytesRecvd *uint32, lpFlags *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
+	var _lpBuffers *WSABUF
+	if len(lpBuffers) > 0 {
+		_lpBuffers = &lpBuffers[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWSARecv.Addr(), uintptr(s), uintptr(unsafe.Pointer(_lpBuffers)), uintptr(len(lpBuffers)), uintptr(unsafe.Pointer(lpNumberOfBytesRecvd)), uintptr(unsafe.Pointer(lpFlags)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1351,8 +1767,12 @@ func WSARecvEx(s SOCKET, buf foundation.PSTR, len_ int32, flags *int32) (int32, 
 // WSARecvFrom calls WS2_32!WSARecvFrom.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsarecvfrom
 // Minimum OS: windows8.1.
-func WSARecvFrom(s SOCKET, lpBuffers *WSABUF, dwBufferCount uint32, lpNumberOfBytesRecvd *uint32, lpFlags *uint32, lpFrom *SOCKADDR, lpFromlen *int32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSARecvFrom.Addr(), uintptr(s), uintptr(unsafe.Pointer(lpBuffers)), uintptr(dwBufferCount), uintptr(unsafe.Pointer(lpNumberOfBytesRecvd)), uintptr(unsafe.Pointer(lpFlags)), uintptr(unsafe.Pointer(lpFrom)), uintptr(unsafe.Pointer(lpFromlen)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
+func WSARecvFrom(s SOCKET, lpBuffers []WSABUF, lpNumberOfBytesRecvd *uint32, lpFlags *uint32, lpFrom *SOCKADDR, lpFromlen *int32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
+	var _lpBuffers *WSABUF
+	if len(lpBuffers) > 0 {
+		_lpBuffers = &lpBuffers[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWSARecvFrom.Addr(), uintptr(s), uintptr(unsafe.Pointer(_lpBuffers)), uintptr(len(lpBuffers)), uintptr(unsafe.Pointer(lpNumberOfBytesRecvd)), uintptr(unsafe.Pointer(lpFlags)), uintptr(unsafe.Pointer(lpFrom)), uintptr(unsafe.Pointer(lpFromlen)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1395,8 +1815,12 @@ func WSARevertImpersonation() (int32, error) {
 // WSASend calls WS2_32!WSASend.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasend
 // Minimum OS: windows8.1.
-func WSASend(s SOCKET, lpBuffers *WSABUF, dwBufferCount uint32, lpNumberOfBytesSent *uint32, dwFlags uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSASend.Addr(), uintptr(s), uintptr(unsafe.Pointer(lpBuffers)), uintptr(dwBufferCount), uintptr(unsafe.Pointer(lpNumberOfBytesSent)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
+func WSASend(s SOCKET, lpBuffers []WSABUF, lpNumberOfBytesSent *uint32, dwFlags uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
+	var _lpBuffers *WSABUF
+	if len(lpBuffers) > 0 {
+		_lpBuffers = &lpBuffers[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWSASend.Addr(), uintptr(s), uintptr(unsafe.Pointer(_lpBuffers)), uintptr(len(lpBuffers)), uintptr(unsafe.Pointer(lpNumberOfBytesSent)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1428,8 +1852,12 @@ func WSASendMsg(Handle SOCKET, lpMsg *WSAMSG, dwFlags uint32, lpNumberOfBytesSen
 // WSASendTo calls WS2_32!WSASendTo.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasendto
 // Minimum OS: windows8.1.
-func WSASendTo(s SOCKET, lpBuffers *WSABUF, dwBufferCount uint32, lpNumberOfBytesSent *uint32, dwFlags uint32, lpTo *SOCKADDR, iTolen int32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSASendTo.Addr(), uintptr(s), uintptr(unsafe.Pointer(lpBuffers)), uintptr(dwBufferCount), uintptr(unsafe.Pointer(lpNumberOfBytesSent)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTo)), uintptr(iTolen), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
+func WSASendTo(s SOCKET, lpBuffers []WSABUF, lpNumberOfBytesSent *uint32, dwFlags uint32, lpTo *SOCKADDR, iTolen int32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
+	var _lpBuffers *WSABUF
+	if len(lpBuffers) > 0 {
+		_lpBuffers = &lpBuffers[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWSASendTo.Addr(), uintptr(s), uintptr(unsafe.Pointer(_lpBuffers)), uintptr(len(lpBuffers)), uintptr(unsafe.Pointer(lpNumberOfBytesSent)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTo)), uintptr(iTolen), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1464,22 +1892,22 @@ func WSASetLastError(iError int32) {
 	syscall.SyscallN(procWSASetLastError.Addr(), uintptr(iError))
 }
 
-// WSASetServiceA calls WS2_32!WSASetServiceA.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasetservicea
+// WSASetService calls WS2_32!WSASetServiceW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasetservicew
 // Minimum OS: windows8.1.
-func WSASetServiceA(lpqsRegInfo *WSAQUERYSETA, essoperation WSAESETSERVICEOP, dwControlFlags uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSASetServiceA.Addr(), uintptr(unsafe.Pointer(lpqsRegInfo)), uintptr(essoperation), uintptr(dwControlFlags))
+func WSASetService(lpqsRegInfo *WSAQUERYSETW, essoperation WSAESETSERVICEOP, dwControlFlags uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSASetService.Addr(), uintptr(unsafe.Pointer(lpqsRegInfo)), uintptr(essoperation), uintptr(dwControlFlags))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// WSASetServiceW calls WS2_32!WSASetServiceW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasetservicew
+// WSASetServiceA calls WS2_32!WSASetServiceA.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasetservicea
 // Minimum OS: windows8.1.
-func WSASetServiceW(lpqsRegInfo *WSAQUERYSETW, essoperation WSAESETSERVICEOP, dwControlFlags uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSASetServiceW.Addr(), uintptr(unsafe.Pointer(lpqsRegInfo)), uintptr(essoperation), uintptr(dwControlFlags))
+func WSASetServiceA(lpqsRegInfo *WSAQUERYSETA, essoperation WSAESETSERVICEOP, dwControlFlags uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSASetServiceA.Addr(), uintptr(unsafe.Pointer(lpqsRegInfo)), uintptr(essoperation), uintptr(dwControlFlags))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1508,22 +1936,22 @@ func WSASetSocketSecurity(Socket SOCKET, SecuritySettings *SOCKET_SECURITY_SETTI
 	return int32(r1), nil
 }
 
-// WSASocketA calls WS2_32!WSASocketA.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasocketa
+// WSASocket calls WS2_32!WSASocketW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasocketw
 // Minimum OS: windows8.1.
-func WSASocketA(af int32, type_ int32, protocol int32, lpProtocolInfo *WSAPROTOCOL_INFOA, g uint32, dwFlags uint32) (SOCKET, error) {
-	r1, _, e1 := syscall.SyscallN(procWSASocketA.Addr(), uintptr(af), uintptr(type_), uintptr(protocol), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(g), uintptr(dwFlags))
+func WSASocket(af int32, type_ int32, protocol int32, lpProtocolInfo *WSAPROTOCOL_INFOW, g uint32, dwFlags uint32) (SOCKET, error) {
+	r1, _, e1 := syscall.SyscallN(procWSASocket.Addr(), uintptr(af), uintptr(type_), uintptr(protocol), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(g), uintptr(dwFlags))
 	if e1 != 0 {
 		return SOCKET(r1), e1
 	}
 	return SOCKET(r1), nil
 }
 
-// WSASocketW calls WS2_32!WSASocketW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasocketw
+// WSASocketA calls WS2_32!WSASocketA.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasocketa
 // Minimum OS: windows8.1.
-func WSASocketW(af int32, type_ int32, protocol int32, lpProtocolInfo *WSAPROTOCOL_INFOW, g uint32, dwFlags uint32) (SOCKET, error) {
-	r1, _, e1 := syscall.SyscallN(procWSASocketW.Addr(), uintptr(af), uintptr(type_), uintptr(protocol), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(g), uintptr(dwFlags))
+func WSASocketA(af int32, type_ int32, protocol int32, lpProtocolInfo *WSAPROTOCOL_INFOA, g uint32, dwFlags uint32) (SOCKET, error) {
+	r1, _, e1 := syscall.SyscallN(procWSASocketA.Addr(), uintptr(af), uintptr(type_), uintptr(protocol), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(g), uintptr(dwFlags))
 	if e1 != 0 {
 		return SOCKET(r1), e1
 	}
@@ -1541,22 +1969,23 @@ func WSAStartup(wVersionRequested uint16, lpWSAData *WSADATA) (int32, error) {
 	return int32(r1), nil
 }
 
-// WSAStringToAddressA calls WS2_32!WSAStringToAddressA.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsastringtoaddressa
+// WSAStringToAddress calls WS2_32!WSAStringToAddressW.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsastringtoaddressw
 // Minimum OS: windows8.1.
-func WSAStringToAddressA(AddressString foundation.PSTR, AddressFamily int32, lpProtocolInfo *WSAPROTOCOL_INFOA, lpAddress *SOCKADDR, lpAddressLength *int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAStringToAddressA.Addr(), uintptr(unsafe.Pointer(AddressString)), uintptr(AddressFamily), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(unsafe.Pointer(lpAddress)), uintptr(unsafe.Pointer(lpAddressLength)))
+func WSAStringToAddress(AddressString string, AddressFamily int32, lpProtocolInfo *WSAPROTOCOL_INFOW, lpAddress *SOCKADDR, lpAddressLength *int32) (int32, error) {
+	_AddressString := win32.UTF16Ptr(AddressString)
+	r1, _, e1 := syscall.SyscallN(procWSAStringToAddress.Addr(), uintptr(unsafe.Pointer(_AddressString)), uintptr(AddressFamily), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(unsafe.Pointer(lpAddress)), uintptr(unsafe.Pointer(lpAddressLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// WSAStringToAddressW calls WS2_32!WSAStringToAddressW.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsastringtoaddressw
+// WSAStringToAddressA calls WS2_32!WSAStringToAddressA.
+// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsastringtoaddressa
 // Minimum OS: windows8.1.
-func WSAStringToAddressW(AddressString foundation.PWSTR, AddressFamily int32, lpProtocolInfo *WSAPROTOCOL_INFOW, lpAddress *SOCKADDR, lpAddressLength *int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAStringToAddressW.Addr(), uintptr(unsafe.Pointer(AddressString)), uintptr(AddressFamily), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(unsafe.Pointer(lpAddress)), uintptr(unsafe.Pointer(lpAddressLength)))
+func WSAStringToAddressA(AddressString foundation.PSTR, AddressFamily int32, lpProtocolInfo *WSAPROTOCOL_INFOA, lpAddress *SOCKADDR, lpAddressLength *int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procWSAStringToAddressA.Addr(), uintptr(unsafe.Pointer(AddressString)), uintptr(AddressFamily), uintptr(unsafe.Pointer(lpProtocolInfo)), uintptr(unsafe.Pointer(lpAddress)), uintptr(unsafe.Pointer(lpAddressLength)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1587,8 +2016,14 @@ func WSAUnhookBlockingHook() (int32, error) {
 // WSAWaitForMultipleEvents calls WS2_32!WSAWaitForMultipleEvents.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
 // Minimum OS: windows8.1.
-func WSAWaitForMultipleEvents(cEvents uint32, lphEvents *foundation.HANDLE, fWaitAll foundation.BOOL, dwTimeout uint32, fAlertable foundation.BOOL) (foundation.WAIT_EVENT, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAWaitForMultipleEvents.Addr(), uintptr(cEvents), uintptr(unsafe.Pointer(lphEvents)), uintptr(fWaitAll), uintptr(dwTimeout), uintptr(fAlertable))
+func WSAWaitForMultipleEvents(lphEvents []foundation.HANDLE, fWaitAll bool, dwTimeout uint32, fAlertable bool) (foundation.WAIT_EVENT, error) {
+	var _lphEvents *foundation.HANDLE
+	if len(lphEvents) > 0 {
+		_lphEvents = &lphEvents[0]
+	}
+	_fWaitAll := win32.Bool32(fWaitAll)
+	_fAlertable := win32.Bool32(fAlertable)
+	r1, _, e1 := syscall.SyscallN(procWSAWaitForMultipleEvents.Addr(), uintptr(len(lphEvents)), uintptr(unsafe.Pointer(_lphEvents)), uintptr(_fWaitAll), uintptr(dwTimeout), uintptr(_fAlertable))
 	if e1 != 0 {
 		return foundation.WAIT_EVENT(r1), e1
 	}
@@ -1614,16 +2049,18 @@ func WSCDeinstallProvider32(lpProviderId *win32.GUID, lpErrno *int32) int32 {
 // WSCEnableNSProvider calls WS2_32!WSCEnableNSProvider.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenablensprovider
 // Minimum OS: windows5.0.
-func WSCEnableNSProvider(lpProviderId *win32.GUID, fEnable foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCEnableNSProvider.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(fEnable))
+func WSCEnableNSProvider(lpProviderId *win32.GUID, fEnable bool) int32 {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(procWSCEnableNSProvider.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(_fEnable))
 	return int32(r1)
 }
 
 // WSCEnableNSProvider32 calls WS2_32!WSCEnableNSProvider32.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenablensprovider32
 // Minimum OS: windows6.0.6000.
-func WSCEnableNSProvider32(lpProviderId *win32.GUID, fEnable foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCEnableNSProvider32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(fEnable))
+func WSCEnableNSProvider32(lpProviderId *win32.GUID, fEnable bool) int32 {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(procWSCEnableNSProvider32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(_fEnable))
 	return int32(r1)
 }
 
@@ -1662,8 +2099,10 @@ func WSCEnumProtocols32(lpiProtocols *int32, lpProtocolBuffer *WSAPROTOCOL_INFOW
 // WSCGetApplicationCategory calls WS2_32!WSCGetApplicationCategory.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscgetapplicationcategory
 // Minimum OS: windows6.0.6000.
-func WSCGetApplicationCategory(Path foundation.PWSTR, PathLength uint32, Extra foundation.PWSTR, ExtraLength uint32, pPermittedLspCategories *uint32, lpErrno *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCGetApplicationCategory.Addr(), uintptr(unsafe.Pointer(Path)), uintptr(PathLength), uintptr(unsafe.Pointer(Extra)), uintptr(ExtraLength), uintptr(unsafe.Pointer(pPermittedLspCategories)), uintptr(unsafe.Pointer(lpErrno)))
+func WSCGetApplicationCategory(Path string, PathLength uint32, Extra string, ExtraLength uint32, pPermittedLspCategories *uint32, lpErrno *int32) int32 {
+	_Path := win32.UTF16Ptr(Path)
+	_Extra := win32.UTF16Ptr(Extra)
+	r1, _, _ := syscall.SyscallN(procWSCGetApplicationCategory.Addr(), uintptr(unsafe.Pointer(_Path)), uintptr(PathLength), uintptr(unsafe.Pointer(_Extra)), uintptr(ExtraLength), uintptr(unsafe.Pointer(pPermittedLspCategories)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
 
@@ -1702,64 +2141,91 @@ func WSCGetProviderPath32(lpProviderId *win32.GUID, lpszProviderDllPath foundati
 // WSCInstallNameSpace calls WS2_32!WSCInstallNameSpace.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallnamespace
 // Minimum OS: windows5.0.
-func WSCInstallNameSpace(lpszIdentifier foundation.PWSTR, lpszPathName foundation.PWSTR, dwNameSpace uint32, dwVersion uint32, lpProviderId *win32.GUID) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCInstallNameSpace.Addr(), uintptr(unsafe.Pointer(lpszIdentifier)), uintptr(unsafe.Pointer(lpszPathName)), uintptr(dwNameSpace), uintptr(dwVersion), uintptr(unsafe.Pointer(lpProviderId)))
+func WSCInstallNameSpace(lpszIdentifier string, lpszPathName string, dwNameSpace uint32, dwVersion uint32, lpProviderId *win32.GUID) int32 {
+	_lpszIdentifier := win32.UTF16Ptr(lpszIdentifier)
+	_lpszPathName := win32.UTF16Ptr(lpszPathName)
+	r1, _, _ := syscall.SyscallN(procWSCInstallNameSpace.Addr(), uintptr(unsafe.Pointer(_lpszIdentifier)), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(dwNameSpace), uintptr(dwVersion), uintptr(unsafe.Pointer(lpProviderId)))
 	return int32(r1)
 }
 
 // WSCInstallNameSpace32 calls WS2_32!WSCInstallNameSpace32.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallnamespace32
 // Minimum OS: windows6.0.6000.
-func WSCInstallNameSpace32(lpszIdentifier foundation.PWSTR, lpszPathName foundation.PWSTR, dwNameSpace uint32, dwVersion uint32, lpProviderId *win32.GUID) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCInstallNameSpace32.Addr(), uintptr(unsafe.Pointer(lpszIdentifier)), uintptr(unsafe.Pointer(lpszPathName)), uintptr(dwNameSpace), uintptr(dwVersion), uintptr(unsafe.Pointer(lpProviderId)))
+func WSCInstallNameSpace32(lpszIdentifier string, lpszPathName string, dwNameSpace uint32, dwVersion uint32, lpProviderId *win32.GUID) int32 {
+	_lpszIdentifier := win32.UTF16Ptr(lpszIdentifier)
+	_lpszPathName := win32.UTF16Ptr(lpszPathName)
+	r1, _, _ := syscall.SyscallN(procWSCInstallNameSpace32.Addr(), uintptr(unsafe.Pointer(_lpszIdentifier)), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(dwNameSpace), uintptr(dwVersion), uintptr(unsafe.Pointer(lpProviderId)))
 	return int32(r1)
 }
 
 // WSCInstallNameSpaceEx calls WS2_32!WSCInstallNameSpaceEx.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallnamespaceex
 // Minimum OS: windows6.0.6000.
-func WSCInstallNameSpaceEx(lpszIdentifier foundation.PWSTR, lpszPathName foundation.PWSTR, dwNameSpace uint32, dwVersion uint32, lpProviderId *win32.GUID, lpProviderSpecific *systemcom.BLOB) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCInstallNameSpaceEx.Addr(), uintptr(unsafe.Pointer(lpszIdentifier)), uintptr(unsafe.Pointer(lpszPathName)), uintptr(dwNameSpace), uintptr(dwVersion), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpProviderSpecific)))
+func WSCInstallNameSpaceEx(lpszIdentifier string, lpszPathName string, dwNameSpace uint32, dwVersion uint32, lpProviderId *win32.GUID, lpProviderSpecific *systemcom.BLOB) int32 {
+	_lpszIdentifier := win32.UTF16Ptr(lpszIdentifier)
+	_lpszPathName := win32.UTF16Ptr(lpszPathName)
+	r1, _, _ := syscall.SyscallN(procWSCInstallNameSpaceEx.Addr(), uintptr(unsafe.Pointer(_lpszIdentifier)), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(dwNameSpace), uintptr(dwVersion), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpProviderSpecific)))
 	return int32(r1)
 }
 
 // WSCInstallNameSpaceEx32 calls WS2_32!WSCInstallNameSpaceEx32.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallnamespaceex32
 // Minimum OS: windows6.0.6000.
-func WSCInstallNameSpaceEx32(lpszIdentifier foundation.PWSTR, lpszPathName foundation.PWSTR, dwNameSpace uint32, dwVersion uint32, lpProviderId *win32.GUID, lpProviderSpecific *systemcom.BLOB) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCInstallNameSpaceEx32.Addr(), uintptr(unsafe.Pointer(lpszIdentifier)), uintptr(unsafe.Pointer(lpszPathName)), uintptr(dwNameSpace), uintptr(dwVersion), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpProviderSpecific)))
+func WSCInstallNameSpaceEx32(lpszIdentifier string, lpszPathName string, dwNameSpace uint32, dwVersion uint32, lpProviderId *win32.GUID, lpProviderSpecific *systemcom.BLOB) int32 {
+	_lpszIdentifier := win32.UTF16Ptr(lpszIdentifier)
+	_lpszPathName := win32.UTF16Ptr(lpszPathName)
+	r1, _, _ := syscall.SyscallN(procWSCInstallNameSpaceEx32.Addr(), uintptr(unsafe.Pointer(_lpszIdentifier)), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(dwNameSpace), uintptr(dwVersion), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpProviderSpecific)))
 	return int32(r1)
 }
 
 // WSCInstallProvider calls WS2_32!WSCInstallProvider.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallprovider
 // Minimum OS: windows5.0.
-func WSCInstallProvider(lpProviderId *win32.GUID, lpszProviderDllPath foundation.PWSTR, lpProtocolInfoList *WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpErrno *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCInstallProvider.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpszProviderDllPath)), uintptr(unsafe.Pointer(lpProtocolInfoList)), uintptr(dwNumberOfEntries), uintptr(unsafe.Pointer(lpErrno)))
+func WSCInstallProvider(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList []WSAPROTOCOL_INFOW, lpErrno *int32) int32 {
+	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
+	var _lpProtocolInfoList *WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSCInstallProvider.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(_lpszProviderDllPath)), uintptr(unsafe.Pointer(_lpProtocolInfoList)), uintptr(len(lpProtocolInfoList)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
 
 // WSCInstallProvider64_32 calls WS2_32!WSCInstallProvider64_32.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallprovider64_32
 // Minimum OS: windows5.1.2600.
-func WSCInstallProvider64_32(lpProviderId *win32.GUID, lpszProviderDllPath foundation.PWSTR, lpProtocolInfoList *WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpErrno *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCInstallProvider64_32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpszProviderDllPath)), uintptr(unsafe.Pointer(lpProtocolInfoList)), uintptr(dwNumberOfEntries), uintptr(unsafe.Pointer(lpErrno)))
+func WSCInstallProvider64_32(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList []WSAPROTOCOL_INFOW, lpErrno *int32) int32 {
+	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
+	var _lpProtocolInfoList *WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSCInstallProvider64_32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(_lpszProviderDllPath)), uintptr(unsafe.Pointer(_lpProtocolInfoList)), uintptr(len(lpProtocolInfoList)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
 
 // WSCInstallProviderAndChains64_32 calls WS2_32!WSCInstallProviderAndChains64_32.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscinstallproviderandchains64_32
 // Minimum OS: windows6.0.6000.
-func WSCInstallProviderAndChains64_32(lpProviderId *win32.GUID, lpszProviderDllPath foundation.PWSTR, lpszProviderDllPath32 foundation.PWSTR, lpszLspName foundation.PWSTR, dwServiceFlags uint32, lpProtocolInfoList *WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpdwCatalogEntryId *uint32, lpErrno *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCInstallProviderAndChains64_32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpszProviderDllPath)), uintptr(unsafe.Pointer(lpszProviderDllPath32)), uintptr(unsafe.Pointer(lpszLspName)), uintptr(dwServiceFlags), uintptr(unsafe.Pointer(lpProtocolInfoList)), uintptr(dwNumberOfEntries), uintptr(unsafe.Pointer(lpdwCatalogEntryId)), uintptr(unsafe.Pointer(lpErrno)))
+func WSCInstallProviderAndChains64_32(lpProviderId *win32.GUID, lpszProviderDllPath string, lpszProviderDllPath32 string, lpszLspName string, dwServiceFlags uint32, lpProtocolInfoList []WSAPROTOCOL_INFOW, lpdwCatalogEntryId *uint32, lpErrno *int32) int32 {
+	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
+	_lpszProviderDllPath32 := win32.UTF16Ptr(lpszProviderDllPath32)
+	_lpszLspName := win32.UTF16Ptr(lpszLspName)
+	var _lpProtocolInfoList *WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSCInstallProviderAndChains64_32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(_lpszProviderDllPath)), uintptr(unsafe.Pointer(_lpszProviderDllPath32)), uintptr(unsafe.Pointer(_lpszLspName)), uintptr(dwServiceFlags), uintptr(unsafe.Pointer(_lpProtocolInfoList)), uintptr(len(lpProtocolInfoList)), uintptr(unsafe.Pointer(lpdwCatalogEntryId)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
 
 // WSCSetApplicationCategory calls WS2_32!WSCSetApplicationCategory.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscsetapplicationcategory
 // Minimum OS: windows6.0.6000.
-func WSCSetApplicationCategory(Path foundation.PWSTR, PathLength uint32, Extra foundation.PWSTR, ExtraLength uint32, PermittedLspCategories uint32, pPrevPermLspCat *uint32, lpErrno *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCSetApplicationCategory.Addr(), uintptr(unsafe.Pointer(Path)), uintptr(PathLength), uintptr(unsafe.Pointer(Extra)), uintptr(ExtraLength), uintptr(PermittedLspCategories), uintptr(unsafe.Pointer(pPrevPermLspCat)), uintptr(unsafe.Pointer(lpErrno)))
+func WSCSetApplicationCategory(Path string, PathLength uint32, Extra string, ExtraLength uint32, PermittedLspCategories uint32, pPrevPermLspCat *uint32, lpErrno *int32) int32 {
+	_Path := win32.UTF16Ptr(Path)
+	_Extra := win32.UTF16Ptr(Extra)
+	r1, _, _ := syscall.SyscallN(procWSCSetApplicationCategory.Addr(), uintptr(unsafe.Pointer(_Path)), uintptr(PathLength), uintptr(unsafe.Pointer(_Extra)), uintptr(ExtraLength), uintptr(PermittedLspCategories), uintptr(unsafe.Pointer(pPrevPermLspCat)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
 
@@ -1798,16 +2264,26 @@ func WSCUnInstallNameSpace32(lpProviderId *win32.GUID) int32 {
 // WSCUpdateProvider calls WS2_32!WSCUpdateProvider.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscupdateprovider
 // Minimum OS: windows5.1.2600.
-func WSCUpdateProvider(lpProviderId *win32.GUID, lpszProviderDllPath foundation.PWSTR, lpProtocolInfoList *WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpErrno *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCUpdateProvider.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpszProviderDllPath)), uintptr(unsafe.Pointer(lpProtocolInfoList)), uintptr(dwNumberOfEntries), uintptr(unsafe.Pointer(lpErrno)))
+func WSCUpdateProvider(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList []WSAPROTOCOL_INFOW, lpErrno *int32) int32 {
+	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
+	var _lpProtocolInfoList *WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSCUpdateProvider.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(_lpszProviderDllPath)), uintptr(unsafe.Pointer(_lpProtocolInfoList)), uintptr(len(lpProtocolInfoList)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
 
 // WSCUpdateProvider32 calls WS2_32!WSCUpdateProvider32.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscupdateprovider32
 // Minimum OS: windows6.0.6000.
-func WSCUpdateProvider32(lpProviderId *win32.GUID, lpszProviderDllPath foundation.PWSTR, lpProtocolInfoList *WSAPROTOCOL_INFOW, dwNumberOfEntries uint32, lpErrno *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCUpdateProvider32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(lpszProviderDllPath)), uintptr(unsafe.Pointer(lpProtocolInfoList)), uintptr(dwNumberOfEntries), uintptr(unsafe.Pointer(lpErrno)))
+func WSCUpdateProvider32(lpProviderId *win32.GUID, lpszProviderDllPath string, lpProtocolInfoList []WSAPROTOCOL_INFOW, lpErrno *int32) int32 {
+	_lpszProviderDllPath := win32.UTF16Ptr(lpszProviderDllPath)
+	var _lpProtocolInfoList *WSAPROTOCOL_INFOW
+	if len(lpProtocolInfoList) > 0 {
+		_lpProtocolInfoList = &lpProtocolInfoList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSCUpdateProvider32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(unsafe.Pointer(_lpszProviderDllPath)), uintptr(unsafe.Pointer(_lpProtocolInfoList)), uintptr(len(lpProtocolInfoList)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
 
@@ -1841,389 +2317,4 @@ func WSCWriteProviderOrder(lpwdCatalogEntryId *uint32, dwNumberOfEntries uint32)
 func WSCWriteProviderOrder32(lpwdCatalogEntryId *uint32, dwNumberOfEntries uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procWSCWriteProviderOrder32.Addr(), uintptr(unsafe.Pointer(lpwdCatalogEntryId)), uintptr(dwNumberOfEntries))
 	return int32(r1)
-}
-
-// __WSAFDIsSet calls WS2_32!__WSAFDIsSet.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-__wsafdisset
-// Minimum OS: windows8.1.
-func WSAFDIsSet(fd SOCKET, param1 *FD_SET) int32 {
-	r1, _, _ := syscall.SyscallN(procWSAFDIsSet.Addr(), uintptr(fd), uintptr(unsafe.Pointer(param1)))
-	return int32(r1)
-}
-
-// accept calls WS2_32!accept.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-accept
-// Minimum OS: windows8.1.
-func Accept(s SOCKET, addr *SOCKADDR, addrlen *int32) (SOCKET, error) {
-	r1, _, e1 := syscall.SyscallN(procAccept.Addr(), uintptr(s), uintptr(unsafe.Pointer(addr)), uintptr(unsafe.Pointer(addrlen)))
-	if e1 != 0 {
-		return SOCKET(r1), e1
-	}
-	return SOCKET(r1), nil
-}
-
-// bind calls WS2_32!bind.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-bind
-// Minimum OS: windows8.1.
-func Bind(s SOCKET, name *SOCKADDR, namelen int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procBind.Addr(), uintptr(s), uintptr(unsafe.Pointer(name)), uintptr(namelen))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// closesocket calls WS2_32!closesocket.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-closesocket
-// Minimum OS: windows8.1.
-func Closesocket(s SOCKET) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procClosesocket.Addr(), uintptr(s))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// connect calls WS2_32!connect.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-connect
-// Minimum OS: windows6.0.6000.
-func Connect(s SOCKET, name *SOCKADDR, namelen int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procConnect.Addr(), uintptr(s), uintptr(unsafe.Pointer(name)), uintptr(namelen))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// freeaddrinfo calls WS2_32!freeaddrinfo.
-// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-freeaddrinfo
-// Minimum OS: windows8.1.
-func Freeaddrinfo(pAddrInfo *ADDRINFOA) {
-	syscall.SyscallN(procFreeaddrinfo.Addr(), uintptr(unsafe.Pointer(pAddrInfo)))
-}
-
-// getaddrinfo calls WS2_32!getaddrinfo.
-// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo
-// Minimum OS: windows8.1.
-func Getaddrinfo(pNodeName foundation.PSTR, pServiceName foundation.PSTR, pHints *ADDRINFOA, ppResult **ADDRINFOA) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetaddrinfo.Addr(), uintptr(unsafe.Pointer(pNodeName)), uintptr(unsafe.Pointer(pServiceName)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppResult)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// gethostbyaddr calls WS2_32!gethostbyaddr.
-// https://learn.microsoft.com/windows/win32/api/wsipv6ok/nf-wsipv6ok-gethostbyaddr
-// Minimum OS: windows8.1.
-func Gethostbyaddr(addr foundation.PSTR, len_ int32, type_ int32) (*HOSTENT, error) {
-	r1, _, e1 := syscall.SyscallN(procGethostbyaddr.Addr(), uintptr(unsafe.Pointer(addr)), uintptr(len_), uintptr(type_))
-	ret := (*HOSTENT)(unsafe.Pointer(r1))
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// gethostbyname calls WS2_32!gethostbyname.
-// https://learn.microsoft.com/windows/win32/api/wsipv6ok/nf-wsipv6ok-gethostbyname
-// Minimum OS: windows8.1.
-func Gethostbyname(name foundation.PSTR) (*HOSTENT, error) {
-	r1, _, e1 := syscall.SyscallN(procGethostbyname.Addr(), uintptr(unsafe.Pointer(name)))
-	ret := (*HOSTENT)(unsafe.Pointer(r1))
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// gethostname calls WS2_32!gethostname.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-gethostname
-// Minimum OS: windows8.1.
-func Gethostname(name foundation.PSTR, namelen int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGethostname.Addr(), uintptr(unsafe.Pointer(name)), uintptr(namelen))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// getnameinfo calls WS2_32!getnameinfo.
-// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getnameinfo
-// Minimum OS: windows8.1.
-func Getnameinfo(pSockaddr *SOCKADDR, SockaddrLength Socklen_t, pNodeBuffer foundation.PSTR, NodeBufferSize uint32, pServiceBuffer foundation.PSTR, ServiceBufferSize uint32, Flags int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetnameinfo.Addr(), uintptr(unsafe.Pointer(pSockaddr)), uintptr(SockaddrLength), uintptr(unsafe.Pointer(pNodeBuffer)), uintptr(NodeBufferSize), uintptr(unsafe.Pointer(pServiceBuffer)), uintptr(ServiceBufferSize), uintptr(Flags))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// getpeername calls WS2_32!getpeername.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getpeername
-// Minimum OS: windows8.1.
-func Getpeername(s SOCKET, name *SOCKADDR, namelen *int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetpeername.Addr(), uintptr(s), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(namelen)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// getprotobyname calls WS2_32!getprotobyname.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getprotobyname
-// Minimum OS: windows8.1.
-func Getprotobyname(name foundation.PSTR) (*PROTOENT, error) {
-	r1, _, e1 := syscall.SyscallN(procGetprotobyname.Addr(), uintptr(unsafe.Pointer(name)))
-	ret := (*PROTOENT)(unsafe.Pointer(r1))
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// getprotobynumber calls WS2_32!getprotobynumber.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getprotobynumber
-// Minimum OS: windows8.1.
-func Getprotobynumber(number int32) (*PROTOENT, error) {
-	r1, _, e1 := syscall.SyscallN(procGetprotobynumber.Addr(), uintptr(number))
-	ret := (*PROTOENT)(unsafe.Pointer(r1))
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// getservbyname calls WS2_32!getservbyname.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getservbyname
-// Minimum OS: windows8.1.
-func Getservbyname(name foundation.PSTR, proto foundation.PSTR) (*SERVENT, error) {
-	r1, _, e1 := syscall.SyscallN(procGetservbyname.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(proto)))
-	ret := (*SERVENT)(unsafe.Pointer(r1))
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// getservbyport calls WS2_32!getservbyport.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getservbyport
-// Minimum OS: windows8.1.
-func Getservbyport(port int32, proto foundation.PSTR) (*SERVENT, error) {
-	r1, _, e1 := syscall.SyscallN(procGetservbyport.Addr(), uintptr(port), uintptr(unsafe.Pointer(proto)))
-	ret := (*SERVENT)(unsafe.Pointer(r1))
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// getsockname calls WS2_32!getsockname.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getsockname
-// Minimum OS: windows8.1.
-func Getsockname(s SOCKET, name *SOCKADDR, namelen *int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetsockname.Addr(), uintptr(s), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(namelen)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// getsockopt calls WS2_32!getsockopt.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-getsockopt
-// Minimum OS: windows8.1.
-func Getsockopt(s SOCKET, level int32, optname int32, optval foundation.PSTR, optlen *int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetsockopt.Addr(), uintptr(s), uintptr(level), uintptr(optname), uintptr(unsafe.Pointer(optval)), uintptr(unsafe.Pointer(optlen)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// htonl calls WS2_32!htonl.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-htonl
-// Minimum OS: windows8.1.
-func Htonl(hostlong uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procHtonl.Addr(), uintptr(hostlong))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// htons calls WS2_32!htons.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-htons
-// Minimum OS: windows8.1.
-func Htons(hostshort uint16) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procHtons.Addr(), uintptr(hostshort))
-	if e1 != 0 {
-		return uint16(r1), e1
-	}
-	return uint16(r1), nil
-}
-
-// inet_addr calls WS2_32!inet_addr.
-// https://learn.microsoft.com/windows/win32/api/wsipv6ok/nf-wsipv6ok-inet_addr
-// Minimum OS: windows8.1.
-func Inet_addr(cp foundation.PSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procInet_addr.Addr(), uintptr(unsafe.Pointer(cp)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// inet_ntop calls WS2_32!inet_ntop.
-// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-inet_ntop
-// Minimum OS: windows8.1.
-func Inet_ntop(Family int32, pAddr unsafe.Pointer, pStringBuf foundation.PSTR, StringBufSize uintptr) (foundation.PSTR, error) {
-	r1, _, e1 := syscall.SyscallN(procInet_ntop.Addr(), uintptr(Family), uintptr(unsafe.Pointer(pAddr)), uintptr(unsafe.Pointer(pStringBuf)), uintptr(StringBufSize))
-	ret := foundation.PSTR(unsafe.Pointer(r1))
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// inet_pton calls WS2_32!inet_pton.
-// https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-inet_pton
-// Minimum OS: windows8.1.
-func Inet_pton(Family int32, pszAddrString foundation.PSTR, pAddrBuf unsafe.Pointer) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procInet_pton.Addr(), uintptr(Family), uintptr(unsafe.Pointer(pszAddrString)), uintptr(unsafe.Pointer(pAddrBuf)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// ioctlsocket calls WS2_32!ioctlsocket.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-ioctlsocket
-// Minimum OS: windows8.1.
-func Ioctlsocket(s SOCKET, cmd int32, argp *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procIoctlsocket.Addr(), uintptr(s), uintptr(cmd), uintptr(unsafe.Pointer(argp)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// listen calls WS2_32!listen.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-listen
-// Minimum OS: windows8.1.
-func Listen(s SOCKET, backlog int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procListen.Addr(), uintptr(s), uintptr(backlog))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// ntohl calls WS2_32!ntohl.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-ntohl
-// Minimum OS: windows8.1.
-func Ntohl(netlong uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procNtohl.Addr(), uintptr(netlong))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// ntohs calls WS2_32!ntohs.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-ntohs
-// Minimum OS: windows8.1.
-func Ntohs(netshort uint16) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procNtohs.Addr(), uintptr(netshort))
-	if e1 != 0 {
-		return uint16(r1), e1
-	}
-	return uint16(r1), nil
-}
-
-// recv calls WS2_32!recv.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-recv
-// Minimum OS: windows8.1.
-func Recv(s SOCKET, buf foundation.PSTR, len_ int32, flags SEND_RECV_FLAGS) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procRecv.Addr(), uintptr(s), uintptr(unsafe.Pointer(buf)), uintptr(len_), uintptr(flags))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// recvfrom calls WS2_32!recvfrom.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-recvfrom
-// Minimum OS: windows8.1.
-func Recvfrom(s SOCKET, buf foundation.PSTR, len_ int32, flags int32, from *SOCKADDR, fromlen *int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procRecvfrom.Addr(), uintptr(s), uintptr(unsafe.Pointer(buf)), uintptr(len_), uintptr(flags), uintptr(unsafe.Pointer(from)), uintptr(unsafe.Pointer(fromlen)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// select calls WS2_32!select.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-select
-// Minimum OS: windows8.1.
-func Select(nfds int32, readfds *FD_SET, writefds *FD_SET, exceptfds *FD_SET, timeout *TIMEVAL) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procSelect.Addr(), uintptr(nfds), uintptr(unsafe.Pointer(readfds)), uintptr(unsafe.Pointer(writefds)), uintptr(unsafe.Pointer(exceptfds)), uintptr(unsafe.Pointer(timeout)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// send calls WS2_32!send.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-send
-// Minimum OS: windows8.1.
-func Send(s SOCKET, buf foundation.PSTR, len_ int32, flags SEND_RECV_FLAGS) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procSend.Addr(), uintptr(s), uintptr(unsafe.Pointer(buf)), uintptr(len_), uintptr(flags))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// sendto calls WS2_32!sendto.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-sendto
-// Minimum OS: windows8.1.
-func Sendto(s SOCKET, buf foundation.PSTR, len_ int32, flags int32, to *SOCKADDR, tolen int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procSendto.Addr(), uintptr(s), uintptr(unsafe.Pointer(buf)), uintptr(len_), uintptr(flags), uintptr(unsafe.Pointer(to)), uintptr(tolen))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// setsockopt calls WS2_32!setsockopt.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-setsockopt
-// Minimum OS: windows8.1.
-func Setsockopt(s SOCKET, level int32, optname int32, optval foundation.PSTR, optlen int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetsockopt.Addr(), uintptr(s), uintptr(level), uintptr(optname), uintptr(unsafe.Pointer(optval)), uintptr(optlen))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// shutdown calls WS2_32!shutdown.
-// https://learn.microsoft.com/windows/win32/api/winsock/nf-winsock-shutdown
-// Minimum OS: windows8.1.
-func Shutdown(s SOCKET, how WINSOCK_SHUTDOWN_HOW) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procShutdown.Addr(), uintptr(s), uintptr(how))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// socket calls WS2_32!socket.
-// https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-socket
-// Minimum OS: windows8.1.
-func Socket(af int32, type_ WINSOCK_SOCKET_TYPE, protocol int32) (SOCKET, error) {
-	r1, _, e1 := syscall.SyscallN(procSocket.Addr(), uintptr(af), uintptr(type_), uintptr(protocol))
-	if e1 != 0 {
-		return SOCKET(r1), e1
-	}
-	return SOCKET(r1), nil
 }

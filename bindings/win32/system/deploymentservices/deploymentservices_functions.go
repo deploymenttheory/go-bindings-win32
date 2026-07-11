@@ -169,8 +169,9 @@ func PxeDhcpInitialize(pRecvPacket unsafe.Pointer, uRecvPacketLen uint32, pReply
 // PxeDhcpIsValid calls WDSPXE!PxeDhcpIsValid.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpisvalid
 // Minimum OS: windowsserver2008.
-func PxeDhcpIsValid(pPacket unsafe.Pointer, uPacketLen uint32, bRequestPacket foundation.BOOL, pbPxeOptionPresent *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpIsValid.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
+func PxeDhcpIsValid(pPacket unsafe.Pointer, uPacketLen uint32, bRequestPacket bool, pbPxeOptionPresent *foundation.BOOL) uint32 {
+	_bRequestPacket := win32.Bool32(bRequestPacket)
+	r1, _, _ := syscall.SyscallN(procPxeDhcpIsValid.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(_bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
 	return uint32(r1)
 }
 
@@ -193,8 +194,12 @@ func PxeDhcpv6AppendOptionRaw(pReply unsafe.Pointer, cbReply uint32, pcbReplyUse
 // PxeDhcpv6CreateRelayRepl calls WDSPXE!PxeDhcpv6CreateRelayRepl.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6createrelayrepl
 // Minimum OS: windows8.0.
-func PxeDhcpv6CreateRelayRepl(pRelayMessages *PXE_DHCPV6_NESTED_RELAY_MESSAGE, nRelayMessages uint32, pInnerPacket *byte, cbInnerPacket uint32, pReplyBuffer unsafe.Pointer, cbReplyBuffer uint32, pcbReplyBuffer *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6CreateRelayRepl.Addr(), uintptr(unsafe.Pointer(pRelayMessages)), uintptr(nRelayMessages), uintptr(unsafe.Pointer(pInnerPacket)), uintptr(cbInnerPacket), uintptr(unsafe.Pointer(pReplyBuffer)), uintptr(cbReplyBuffer), uintptr(unsafe.Pointer(pcbReplyBuffer)))
+func PxeDhcpv6CreateRelayRepl(pRelayMessages []PXE_DHCPV6_NESTED_RELAY_MESSAGE, pInnerPacket *byte, cbInnerPacket uint32, pReplyBuffer unsafe.Pointer, cbReplyBuffer uint32, pcbReplyBuffer *uint32) uint32 {
+	var _pRelayMessages *PXE_DHCPV6_NESTED_RELAY_MESSAGE
+	if len(pRelayMessages) > 0 {
+		_pRelayMessages = &pRelayMessages[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6CreateRelayRepl.Addr(), uintptr(unsafe.Pointer(_pRelayMessages)), uintptr(len(pRelayMessages)), uintptr(unsafe.Pointer(pInnerPacket)), uintptr(cbInnerPacket), uintptr(unsafe.Pointer(pReplyBuffer)), uintptr(cbReplyBuffer), uintptr(unsafe.Pointer(pcbReplyBuffer)))
 	return uint32(r1)
 }
 
@@ -225,16 +230,21 @@ func PxeDhcpv6Initialize(pRequest unsafe.Pointer, cbRequest uint32, pReply unsaf
 // PxeDhcpv6IsValid calls WDSPXE!PxeDhcpv6IsValid.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6isvalid
 // Minimum OS: windows8.0.
-func PxeDhcpv6IsValid(pPacket unsafe.Pointer, uPacketLen uint32, bRequestPacket foundation.BOOL, pbPxeOptionPresent *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6IsValid.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
+func PxeDhcpv6IsValid(pPacket unsafe.Pointer, uPacketLen uint32, bRequestPacket bool, pbPxeOptionPresent *foundation.BOOL) uint32 {
+	_bRequestPacket := win32.Bool32(bRequestPacket)
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6IsValid.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(_bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
 	return uint32(r1)
 }
 
 // PxeDhcpv6ParseRelayForw calls WDSPXE!PxeDhcpv6ParseRelayForw.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6parserelayforw
 // Minimum OS: windows8.0.
-func PxeDhcpv6ParseRelayForw(pRelayForwPacket unsafe.Pointer, uRelayForwPacketLen uint32, pRelayMessages *PXE_DHCPV6_NESTED_RELAY_MESSAGE, nRelayMessages uint32, pnRelayMessages *uint32, ppInnerPacket **byte, pcbInnerPacket *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6ParseRelayForw.Addr(), uintptr(unsafe.Pointer(pRelayForwPacket)), uintptr(uRelayForwPacketLen), uintptr(unsafe.Pointer(pRelayMessages)), uintptr(nRelayMessages), uintptr(unsafe.Pointer(pnRelayMessages)), uintptr(unsafe.Pointer(ppInnerPacket)), uintptr(unsafe.Pointer(pcbInnerPacket)))
+func PxeDhcpv6ParseRelayForw(pRelayForwPacket unsafe.Pointer, uRelayForwPacketLen uint32, pRelayMessages []PXE_DHCPV6_NESTED_RELAY_MESSAGE, pnRelayMessages *uint32, ppInnerPacket **byte, pcbInnerPacket *uint32) uint32 {
+	var _pRelayMessages *PXE_DHCPV6_NESTED_RELAY_MESSAGE
+	if len(pRelayMessages) > 0 {
+		_pRelayMessages = &pRelayMessages[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6ParseRelayForw.Addr(), uintptr(unsafe.Pointer(pRelayForwPacket)), uintptr(uRelayForwPacketLen), uintptr(unsafe.Pointer(_pRelayMessages)), uintptr(len(pRelayMessages)), uintptr(unsafe.Pointer(pnRelayMessages)), uintptr(unsafe.Pointer(ppInnerPacket)), uintptr(unsafe.Pointer(pcbInnerPacket)))
 	return uint32(r1)
 }
 
@@ -309,16 +319,20 @@ func PxeProviderFreeInfo(pProvider *PXE_PROVIDER) uint32 {
 // PxeProviderQueryIndex calls WDSPXE!PxeProviderQueryIndex.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxeproviderqueryindex
 // Minimum OS: windowsserver2008.
-func PxeProviderQueryIndex(pszProviderName foundation.PWSTR, puIndex *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeProviderQueryIndex.Addr(), uintptr(unsafe.Pointer(pszProviderName)), uintptr(unsafe.Pointer(puIndex)))
+func PxeProviderQueryIndex(pszProviderName string, puIndex *uint32) uint32 {
+	_pszProviderName := win32.UTF16Ptr(pszProviderName)
+	r1, _, _ := syscall.SyscallN(procPxeProviderQueryIndex.Addr(), uintptr(unsafe.Pointer(_pszProviderName)), uintptr(unsafe.Pointer(puIndex)))
 	return uint32(r1)
 }
 
 // PxeProviderRegister calls WDSPXE!PxeProviderRegister.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxeproviderregister
 // Minimum OS: windowsserver2008.
-func PxeProviderRegister(pszProviderName foundation.PWSTR, pszModulePath foundation.PWSTR, Index uint32, bIsCritical foundation.BOOL, phProviderKey *systemregistry.HKEY) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeProviderRegister.Addr(), uintptr(unsafe.Pointer(pszProviderName)), uintptr(unsafe.Pointer(pszModulePath)), uintptr(Index), uintptr(bIsCritical), uintptr(unsafe.Pointer(phProviderKey)))
+func PxeProviderRegister(pszProviderName string, pszModulePath string, Index uint32, bIsCritical bool, phProviderKey *systemregistry.HKEY) uint32 {
+	_pszProviderName := win32.UTF16Ptr(pszProviderName)
+	_pszModulePath := win32.UTF16Ptr(pszModulePath)
+	_bIsCritical := win32.Bool32(bIsCritical)
+	r1, _, _ := syscall.SyscallN(procPxeProviderRegister.Addr(), uintptr(unsafe.Pointer(_pszProviderName)), uintptr(unsafe.Pointer(_pszModulePath)), uintptr(Index), uintptr(_bIsCritical), uintptr(unsafe.Pointer(phProviderKey)))
 	return uint32(r1)
 }
 
@@ -333,8 +347,9 @@ func PxeProviderSetAttribute(hProvider foundation.HANDLE, Attribute uint32, pPar
 // PxeProviderUnRegister calls WDSPXE!PxeProviderUnRegister.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxeproviderunregister
 // Minimum OS: windowsserver2008.
-func PxeProviderUnRegister(pszProviderName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeProviderUnRegister.Addr(), uintptr(unsafe.Pointer(pszProviderName)))
+func PxeProviderUnRegister(pszProviderName string) uint32 {
+	_pszProviderName := win32.UTF16Ptr(pszProviderName)
+	r1, _, _ := syscall.SyscallN(procPxeProviderUnRegister.Addr(), uintptr(unsafe.Pointer(_pszProviderName)))
 	return uint32(r1)
 }
 
@@ -357,14 +372,16 @@ func PxeSendReply(hClientRequest foundation.HANDLE, pPacket unsafe.Pointer, uPac
 // PxeTrace calls WDSPXE!PxeTrace.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxetrace
 // Minimum OS: windowsserver2008.
-func PxeTrace(hProvider foundation.HANDLE, Severity uint32, pszFormat foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeTrace.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(pszFormat)))
+func PxeTrace(hProvider foundation.HANDLE, Severity uint32, pszFormat string) uint32 {
+	_pszFormat := win32.UTF16Ptr(pszFormat)
+	r1, _, _ := syscall.SyscallN(procPxeTrace.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(_pszFormat)))
 	return uint32(r1)
 }
 
 // PxeTraceV calls WDSPXE!PxeTraceV.
-func PxeTraceV(hProvider foundation.HANDLE, Severity uint32, pszFormat foundation.PWSTR, Params *int8) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeTraceV.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(pszFormat)), uintptr(unsafe.Pointer(Params)))
+func PxeTraceV(hProvider foundation.HANDLE, Severity uint32, pszFormat string, Params *int8) uint32 {
+	_pszFormat := win32.UTF16Ptr(pszFormat)
+	r1, _, _ := syscall.SyscallN(procPxeTraceV.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(_pszFormat)), uintptr(unsafe.Pointer(Params)))
 	return uint32(r1)
 }
 
@@ -427,262 +444,268 @@ func WdsBpQueryOption(hHandle foundation.HANDLE, uOption uint32, uValueLen uint3
 // WdsCliAuthorizeSession calls WDSCLIENTAPI!WdsCliAuthorizeSession.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscliauthorizesession
 // Minimum OS: windows6.0.6000.
-func WdsCliAuthorizeSession(hSession foundation.HANDLE, pCred *WDS_CLI_CRED) foundation.HRESULT {
+func WdsCliAuthorizeSession(hSession foundation.HANDLE, pCred *WDS_CLI_CRED) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliAuthorizeSession.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(pCred)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliCancelTransfer calls WDSCLIENTAPI!WdsCliCancelTransfer.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdsclicanceltransfer
 // Minimum OS: windows6.0.6000.
-func WdsCliCancelTransfer(hTransfer foundation.HANDLE) foundation.HRESULT {
+func WdsCliCancelTransfer(hTransfer foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliCancelTransfer.Addr(), uintptr(hTransfer))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliClose calls WDSCLIENTAPI!WdsCliClose.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscliclose
 // Minimum OS: windows6.0.6000.
-func WdsCliClose(Handle foundation.HANDLE) foundation.HRESULT {
+func WdsCliClose(Handle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliClose.Addr(), uintptr(Handle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliCreateSession calls WDSCLIENTAPI!WdsCliCreateSession.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdsclicreatesession
 // Minimum OS: windows6.0.6000.
-func WdsCliCreateSession(pwszServer foundation.PWSTR, pCred *WDS_CLI_CRED, phSession *foundation.HANDLE) (foundation.HRESULT, error) {
-	r1, _, e1 := syscall.SyscallN(procWdsCliCreateSession.Addr(), uintptr(unsafe.Pointer(pwszServer)), uintptr(unsafe.Pointer(pCred)), uintptr(unsafe.Pointer(phSession)))
-	if e1 != 0 {
-		return foundation.HRESULT(r1), e1
-	}
-	return foundation.HRESULT(r1), nil
+func WdsCliCreateSession(pwszServer string, pCred *WDS_CLI_CRED, phSession *foundation.HANDLE) error {
+	_pwszServer := win32.UTF16Ptr(pwszServer)
+	r1, _, _ := syscall.SyscallN(procWdsCliCreateSession.Addr(), uintptr(unsafe.Pointer(_pwszServer)), uintptr(unsafe.Pointer(pCred)), uintptr(unsafe.Pointer(phSession)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliFindFirstImage calls WDSCLIENTAPI!WdsCliFindFirstImage.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdsclifindfirstimage
 // Minimum OS: windows6.0.6000.
-func WdsCliFindFirstImage(hSession foundation.HANDLE, phFindHandle *foundation.HANDLE) foundation.HRESULT {
+func WdsCliFindFirstImage(hSession foundation.HANDLE, phFindHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliFindFirstImage.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(phFindHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliFindNextImage calls WDSCLIENTAPI!WdsCliFindNextImage.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdsclifindnextimage
 // Minimum OS: windows6.0.6000.
-func WdsCliFindNextImage(Handle foundation.HANDLE) foundation.HRESULT {
+func WdsCliFindNextImage(Handle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliFindNextImage.Addr(), uintptr(Handle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliFreeStringArray calls WDSCLIENTAPI!WdsCliFreeStringArray.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdsclifreestringarray
 // Minimum OS: windows6.1.
-func WdsCliFreeStringArray(ppwszArray *foundation.PWSTR, ulCount uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWdsCliFreeStringArray.Addr(), uintptr(unsafe.Pointer(ppwszArray)), uintptr(ulCount))
-	return foundation.HRESULT(r1)
+func WdsCliFreeStringArray(ppwszArray []foundation.PWSTR) error {
+	var _ppwszArray *foundation.PWSTR
+	if len(ppwszArray) > 0 {
+		_ppwszArray = &ppwszArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWdsCliFreeStringArray.Addr(), uintptr(unsafe.Pointer(_ppwszArray)), uintptr(len(ppwszArray)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetDriverQueryXml calls WDSCLIENTAPI!WdsCliGetDriverQueryXml.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetdriverqueryxml
 // Minimum OS: windows8.0.
-func WdsCliGetDriverQueryXml(pwszWinDirPath foundation.PWSTR, ppwszDriverQuery *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWdsCliGetDriverQueryXml.Addr(), uintptr(unsafe.Pointer(pwszWinDirPath)), uintptr(unsafe.Pointer(ppwszDriverQuery)))
-	return foundation.HRESULT(r1)
+func WdsCliGetDriverQueryXml(pwszWinDirPath string, ppwszDriverQuery *foundation.PWSTR) error {
+	_pwszWinDirPath := win32.UTF16Ptr(pwszWinDirPath)
+	r1, _, _ := syscall.SyscallN(procWdsCliGetDriverQueryXml.Addr(), uintptr(unsafe.Pointer(_pwszWinDirPath)), uintptr(unsafe.Pointer(ppwszDriverQuery)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetEnumerationFlags calls WDSCLIENTAPI!WdsCliGetEnumerationFlags.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetenumerationflags
 // Minimum OS: windows6.0.6000.
-func WdsCliGetEnumerationFlags(Handle foundation.HANDLE, pdwFlags *uint32) foundation.HRESULT {
+func WdsCliGetEnumerationFlags(Handle foundation.HANDLE, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetEnumerationFlags.Addr(), uintptr(Handle), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageArchitecture calls WDSCLIENTAPI!WdsCliGetImageArchitecture.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagearchitecture
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageArchitecture(hIfh foundation.HANDLE, pdwValue *CPU_ARCHITECTURE) foundation.HRESULT {
+func WdsCliGetImageArchitecture(hIfh foundation.HANDLE, pdwValue *CPU_ARCHITECTURE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageArchitecture.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pdwValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageDescription calls WDSCLIENTAPI!WdsCliGetImageDescription.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagedescription
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageDescription(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) foundation.HRESULT {
+func WdsCliGetImageDescription(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageDescription.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageFiles calls WDSCLIENTAPI!WdsCliGetImageFiles.
-func WdsCliGetImageFiles(hIfh foundation.HANDLE, pppwszFiles **foundation.PWSTR, pdwCount *uint32) foundation.HRESULT {
+func WdsCliGetImageFiles(hIfh foundation.HANDLE, pppwszFiles **foundation.PWSTR, pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageFiles.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pppwszFiles)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageGroup calls WDSCLIENTAPI!WdsCliGetImageGroup.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagegroup
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageGroup(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) foundation.HRESULT {
+func WdsCliGetImageGroup(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageGroup.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageHalName calls WDSCLIENTAPI!WdsCliGetImageHalName.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagehalname
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageHalName(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) foundation.HRESULT {
+func WdsCliGetImageHalName(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageHalName.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageHandleFromFindHandle calls WDSCLIENTAPI!WdsCliGetImageHandleFromFindHandle.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagehandlefromfindhandle
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageHandleFromFindHandle(FindHandle foundation.HANDLE, phImageHandle *foundation.HANDLE) foundation.HRESULT {
+func WdsCliGetImageHandleFromFindHandle(FindHandle foundation.HANDLE, phImageHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageHandleFromFindHandle.Addr(), uintptr(FindHandle), uintptr(unsafe.Pointer(phImageHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageHandleFromTransferHandle calls WDSCLIENTAPI!WdsCliGetImageHandleFromTransferHandle.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagehandlefromtransferhandle
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageHandleFromTransferHandle(hTransfer foundation.HANDLE, phImageHandle *foundation.HANDLE) foundation.HRESULT {
+func WdsCliGetImageHandleFromTransferHandle(hTransfer foundation.HANDLE, phImageHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageHandleFromTransferHandle.Addr(), uintptr(hTransfer), uintptr(unsafe.Pointer(phImageHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageIndex calls WDSCLIENTAPI!WdsCliGetImageIndex.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimageindex
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageIndex(hIfh foundation.HANDLE, pdwValue *uint32) foundation.HRESULT {
+func WdsCliGetImageIndex(hIfh foundation.HANDLE, pdwValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageIndex.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pdwValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageLanguage calls WDSCLIENTAPI!WdsCliGetImageLanguage.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagelanguage
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageLanguage(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) foundation.HRESULT {
+func WdsCliGetImageLanguage(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageLanguage.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageLanguages calls WDSCLIENTAPI!WdsCliGetImageLanguages.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagelanguages
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageLanguages(hIfh foundation.HANDLE, pppszValues ***int8, pdwNumValues *uint32) foundation.HRESULT {
+func WdsCliGetImageLanguages(hIfh foundation.HANDLE, pppszValues ***int8, pdwNumValues *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageLanguages.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pppszValues)), uintptr(unsafe.Pointer(pdwNumValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageLastModifiedTime calls WDSCLIENTAPI!WdsCliGetImageLastModifiedTime.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagelastmodifiedtime
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageLastModifiedTime(hIfh foundation.HANDLE, ppSysTimeValue **foundation.SYSTEMTIME) foundation.HRESULT {
+func WdsCliGetImageLastModifiedTime(hIfh foundation.HANDLE, ppSysTimeValue **foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageLastModifiedTime.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppSysTimeValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageName calls WDSCLIENTAPI!WdsCliGetImageName.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagename
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageName(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) foundation.HRESULT {
+func WdsCliGetImageName(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageName.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageNamespace calls WDSCLIENTAPI!WdsCliGetImageNamespace.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagenamespace
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageNamespace(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) foundation.HRESULT {
+func WdsCliGetImageNamespace(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageNamespace.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageParameter calls WDSCLIENTAPI!WdsCliGetImageParameter.
-func WdsCliGetImageParameter(hIfh foundation.HANDLE, ParamType WDS_CLI_IMAGE_PARAM_TYPE, pResponse unsafe.Pointer, uResponseLen uint32) foundation.HRESULT {
+func WdsCliGetImageParameter(hIfh foundation.HANDLE, ParamType WDS_CLI_IMAGE_PARAM_TYPE, pResponse unsafe.Pointer, uResponseLen uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageParameter.Addr(), uintptr(hIfh), uintptr(ParamType), uintptr(unsafe.Pointer(pResponse)), uintptr(uResponseLen))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImagePath calls WDSCLIENTAPI!WdsCliGetImagePath.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagepath
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImagePath(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) foundation.HRESULT {
+func WdsCliGetImagePath(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImagePath.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageSize calls WDSCLIENTAPI!WdsCliGetImageSize.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimagesize
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageSize(hIfh foundation.HANDLE, pullValue *uint64) foundation.HRESULT {
+func WdsCliGetImageSize(hIfh foundation.HANDLE, pullValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageSize.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pullValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageType calls WDSCLIENTAPI!WdsCliGetImageType.
-func WdsCliGetImageType(hIfh foundation.HANDLE, pImageType *WDS_CLI_IMAGE_TYPE) foundation.HRESULT {
+func WdsCliGetImageType(hIfh foundation.HANDLE, pImageType *WDS_CLI_IMAGE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageType.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pImageType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetImageVersion calls WDSCLIENTAPI!WdsCliGetImageVersion.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetimageversion
 // Minimum OS: windows6.0.6000.
-func WdsCliGetImageVersion(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) foundation.HRESULT {
+func WdsCliGetImageVersion(hIfh foundation.HANDLE, ppwszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetImageVersion.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(ppwszValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliGetTransferSize calls WDSCLIENTAPI!WdsCliGetTransferSize.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligettransfersize
 // Minimum OS: windows6.0.6000.
-func WdsCliGetTransferSize(hIfh foundation.HANDLE, pullValue *uint64) foundation.HRESULT {
+func WdsCliGetTransferSize(hIfh foundation.HANDLE, pullValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliGetTransferSize.Addr(), uintptr(hIfh), uintptr(unsafe.Pointer(pullValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliInitializeLog calls WDSCLIENTAPI!WdsCliInitializeLog.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscliinitializelog
 // Minimum OS: windows6.0.6000.
-func WdsCliInitializeLog(hSession foundation.HANDLE, ulClientArchitecture CPU_ARCHITECTURE, pwszClientId foundation.PWSTR, pwszClientAddress foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWdsCliInitializeLog.Addr(), uintptr(hSession), uintptr(ulClientArchitecture), uintptr(unsafe.Pointer(pwszClientId)), uintptr(unsafe.Pointer(pwszClientAddress)))
-	return foundation.HRESULT(r1)
+func WdsCliInitializeLog(hSession foundation.HANDLE, ulClientArchitecture CPU_ARCHITECTURE, pwszClientId string, pwszClientAddress string) error {
+	_pwszClientId := win32.UTF16Ptr(pwszClientId)
+	_pwszClientAddress := win32.UTF16Ptr(pwszClientAddress)
+	r1, _, _ := syscall.SyscallN(procWdsCliInitializeLog.Addr(), uintptr(hSession), uintptr(ulClientArchitecture), uintptr(unsafe.Pointer(_pwszClientId)), uintptr(unsafe.Pointer(_pwszClientAddress)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliLog calls WDSCLIENTAPI!WdsCliLog.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdsclilog
 // Minimum OS: windows6.0.6000.
-func WdsCliLog(hSession foundation.HANDLE, ulLogLevel uint32, ulMessageCode uint32) foundation.HRESULT {
+func WdsCliLog(hSession foundation.HANDLE, ulLogLevel uint32, ulMessageCode uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliLog.Addr(), uintptr(hSession), uintptr(ulLogLevel), uintptr(ulMessageCode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliObtainDriverPackages calls WDSCLIENTAPI!WdsCliObtainDriverPackages.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscliobtaindriverpackages
 // Minimum OS: windows6.1.
-func WdsCliObtainDriverPackages(hImage foundation.HANDLE, ppwszServerName *foundation.PWSTR, pppwszDriverPackages **foundation.PWSTR, pulCount *uint32) foundation.HRESULT {
+func WdsCliObtainDriverPackages(hImage foundation.HANDLE, ppwszServerName *foundation.PWSTR, pppwszDriverPackages **foundation.PWSTR, pulCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliObtainDriverPackages.Addr(), uintptr(hImage), uintptr(unsafe.Pointer(ppwszServerName)), uintptr(unsafe.Pointer(pppwszDriverPackages)), uintptr(unsafe.Pointer(pulCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliObtainDriverPackagesEx calls WDSCLIENTAPI!WdsCliObtainDriverPackagesEx.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscliobtaindriverpackagesex
 // Minimum OS: windows8.0.
-func WdsCliObtainDriverPackagesEx(hSession foundation.HANDLE, pwszMachineInfo foundation.PWSTR, ppwszServerName *foundation.PWSTR, pppwszDriverPackages **foundation.PWSTR, pulCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWdsCliObtainDriverPackagesEx.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(pwszMachineInfo)), uintptr(unsafe.Pointer(ppwszServerName)), uintptr(unsafe.Pointer(pppwszDriverPackages)), uintptr(unsafe.Pointer(pulCount)))
-	return foundation.HRESULT(r1)
+func WdsCliObtainDriverPackagesEx(hSession foundation.HANDLE, pwszMachineInfo string, ppwszServerName *foundation.PWSTR, pppwszDriverPackages **foundation.PWSTR, pulCount *uint32) error {
+	_pwszMachineInfo := win32.UTF16Ptr(pwszMachineInfo)
+	r1, _, _ := syscall.SyscallN(procWdsCliObtainDriverPackagesEx.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_pwszMachineInfo)), uintptr(unsafe.Pointer(ppwszServerName)), uintptr(unsafe.Pointer(pppwszDriverPackages)), uintptr(unsafe.Pointer(pulCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliRegisterTrace calls WDSCLIENTAPI!WdsCliRegisterTrace.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscliregistertrace
 // Minimum OS: windows6.0.6000.
-func WdsCliRegisterTrace(pfn PFN_WdsCliTraceFunction) foundation.HRESULT {
+func WdsCliRegisterTrace(pfn PFN_WdsCliTraceFunction) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliRegisterTrace.Addr(), uintptr(pfn))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliSetTransferBufferSize calls WDSCLIENTAPI!WdsCliSetTransferBufferSize.
@@ -693,25 +716,30 @@ func WdsCliSetTransferBufferSize(ulSizeInBytes uint32) {
 // WdsCliTransferFile calls WDSCLIENTAPI!WdsCliTransferFile.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdsclitransferfile
 // Minimum OS: windows6.0.6000.
-func WdsCliTransferFile(pwszServer foundation.PWSTR, pwszNamespace foundation.PWSTR, pwszRemoteFilePath foundation.PWSTR, pwszLocalFilePath foundation.PWSTR, dwFlags uint32, dwReserved uint32, pfnWdsCliCallback PFN_WdsCliCallback, pvUserData unsafe.Pointer, phTransfer *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWdsCliTransferFile.Addr(), uintptr(unsafe.Pointer(pwszServer)), uintptr(unsafe.Pointer(pwszNamespace)), uintptr(unsafe.Pointer(pwszRemoteFilePath)), uintptr(unsafe.Pointer(pwszLocalFilePath)), uintptr(dwFlags), uintptr(dwReserved), uintptr(pfnWdsCliCallback), uintptr(unsafe.Pointer(pvUserData)), uintptr(unsafe.Pointer(phTransfer)))
-	return foundation.HRESULT(r1)
+func WdsCliTransferFile(pwszServer string, pwszNamespace string, pwszRemoteFilePath string, pwszLocalFilePath string, dwFlags uint32, dwReserved uint32, pfnWdsCliCallback PFN_WdsCliCallback, pvUserData unsafe.Pointer, phTransfer *foundation.HANDLE) error {
+	_pwszServer := win32.UTF16Ptr(pwszServer)
+	_pwszNamespace := win32.UTF16Ptr(pwszNamespace)
+	_pwszRemoteFilePath := win32.UTF16Ptr(pwszRemoteFilePath)
+	_pwszLocalFilePath := win32.UTF16Ptr(pwszLocalFilePath)
+	r1, _, _ := syscall.SyscallN(procWdsCliTransferFile.Addr(), uintptr(unsafe.Pointer(_pwszServer)), uintptr(unsafe.Pointer(_pwszNamespace)), uintptr(unsafe.Pointer(_pwszRemoteFilePath)), uintptr(unsafe.Pointer(_pwszLocalFilePath)), uintptr(dwFlags), uintptr(dwReserved), uintptr(pfnWdsCliCallback), uintptr(unsafe.Pointer(pvUserData)), uintptr(unsafe.Pointer(phTransfer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliTransferImage calls WDSCLIENTAPI!WdsCliTransferImage.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdsclitransferimage
 // Minimum OS: windows6.0.6000.
-func WdsCliTransferImage(hImage foundation.HANDLE, pwszLocalPath foundation.PWSTR, dwFlags uint32, dwReserved uint32, pfnWdsCliCallback PFN_WdsCliCallback, pvUserData unsafe.Pointer, phTransfer *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWdsCliTransferImage.Addr(), uintptr(hImage), uintptr(unsafe.Pointer(pwszLocalPath)), uintptr(dwFlags), uintptr(dwReserved), uintptr(pfnWdsCliCallback), uintptr(unsafe.Pointer(pvUserData)), uintptr(unsafe.Pointer(phTransfer)))
-	return foundation.HRESULT(r1)
+func WdsCliTransferImage(hImage foundation.HANDLE, pwszLocalPath string, dwFlags uint32, dwReserved uint32, pfnWdsCliCallback PFN_WdsCliCallback, pvUserData unsafe.Pointer, phTransfer *foundation.HANDLE) error {
+	_pwszLocalPath := win32.UTF16Ptr(pwszLocalPath)
+	r1, _, _ := syscall.SyscallN(procWdsCliTransferImage.Addr(), uintptr(hImage), uintptr(unsafe.Pointer(_pwszLocalPath)), uintptr(dwFlags), uintptr(dwReserved), uintptr(pfnWdsCliCallback), uintptr(unsafe.Pointer(pvUserData)), uintptr(unsafe.Pointer(phTransfer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsCliWaitForTransfer calls WDSCLIENTAPI!WdsCliWaitForTransfer.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscliwaitfortransfer
 // Minimum OS: windows6.0.6000.
-func WdsCliWaitForTransfer(hTransfer foundation.HANDLE) foundation.HRESULT {
+func WdsCliWaitForTransfer(hTransfer foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWdsCliWaitForTransfer.Addr(), uintptr(hTransfer))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsTransportClientAddRefBuffer calls WDSTPTC!WdsTransportClientAddRefBuffer.
@@ -827,39 +855,41 @@ func WdsTransportServerAllocateBuffer(hProvider foundation.HANDLE, ulBufferSize 
 // WdsTransportServerCompleteRead calls WDSMC!WdsTransportServerCompleteRead.
 // https://learn.microsoft.com/windows/win32/api/wdstpdi/nf-wdstpdi-wdstransportservercompleteread
 // Minimum OS: windowsserver2008.
-func WdsTransportServerCompleteRead(hProvider foundation.HANDLE, ulBytesRead uint32, pvUserData unsafe.Pointer, hReadResult foundation.HRESULT) foundation.HRESULT {
+func WdsTransportServerCompleteRead(hProvider foundation.HANDLE, ulBytesRead uint32, pvUserData unsafe.Pointer, hReadResult foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(procWdsTransportServerCompleteRead.Addr(), uintptr(hProvider), uintptr(ulBytesRead), uintptr(unsafe.Pointer(pvUserData)), uintptr(hReadResult))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsTransportServerFreeBuffer calls WDSMC!WdsTransportServerFreeBuffer.
 // https://learn.microsoft.com/windows/win32/api/wdstpdi/nf-wdstpdi-wdstransportserverfreebuffer
 // Minimum OS: windowsserver2008.
-func WdsTransportServerFreeBuffer(hProvider foundation.HANDLE, pvBuffer unsafe.Pointer) foundation.HRESULT {
+func WdsTransportServerFreeBuffer(hProvider foundation.HANDLE, pvBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWdsTransportServerFreeBuffer.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pvBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsTransportServerRegisterCallback calls WDSMC!WdsTransportServerRegisterCallback.
 // https://learn.microsoft.com/windows/win32/api/wdstpdi/nf-wdstpdi-wdstransportserverregistercallback
 // Minimum OS: windowsserver2008.
-func WdsTransportServerRegisterCallback(hProvider foundation.HANDLE, CallbackId TRANSPORTPROVIDER_CALLBACK_ID, pfnCallback unsafe.Pointer) foundation.HRESULT {
+func WdsTransportServerRegisterCallback(hProvider foundation.HANDLE, CallbackId TRANSPORTPROVIDER_CALLBACK_ID, pfnCallback unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWdsTransportServerRegisterCallback.Addr(), uintptr(hProvider), uintptr(CallbackId), uintptr(unsafe.Pointer(pfnCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsTransportServerTrace calls WDSMC!WdsTransportServerTrace.
 // https://learn.microsoft.com/windows/win32/api/wdstpdi/nf-wdstpdi-wdstransportservertrace
 // Minimum OS: windowsserver2008.
-func WdsTransportServerTrace(hProvider foundation.HANDLE, Severity uint32, pwszFormat foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWdsTransportServerTrace.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(pwszFormat)))
-	return foundation.HRESULT(r1)
+func WdsTransportServerTrace(hProvider foundation.HANDLE, Severity uint32, pwszFormat string) error {
+	_pwszFormat := win32.UTF16Ptr(pwszFormat)
+	r1, _, _ := syscall.SyscallN(procWdsTransportServerTrace.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(_pwszFormat)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WdsTransportServerTraceV calls WDSMC!WdsTransportServerTraceV.
 // https://learn.microsoft.com/windows/win32/api/wdstpdi/nf-wdstpdi-wdstransportservertracev
 // Minimum OS: windowsserver2008.
-func WdsTransportServerTraceV(hProvider foundation.HANDLE, Severity uint32, pwszFormat foundation.PWSTR, Params *int8) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWdsTransportServerTraceV.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(pwszFormat)), uintptr(unsafe.Pointer(Params)))
-	return foundation.HRESULT(r1)
+func WdsTransportServerTraceV(hProvider foundation.HANDLE, Severity uint32, pwszFormat string, Params *int8) error {
+	_pwszFormat := win32.UTF16Ptr(pwszFormat)
+	r1, _, _ := syscall.SyscallN(procWdsTransportServerTraceV.Addr(), uintptr(hProvider), uintptr(Severity), uintptr(unsafe.Pointer(_pwszFormat)), uintptr(unsafe.Pointer(Params)))
+	return win32.HRESULTError(int32(r1))
 }

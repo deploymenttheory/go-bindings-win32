@@ -26,27 +26,27 @@ type IADesktopP2 struct {
 var IID_IADesktopP2 = win32.GUID{Data1: 0xb22754e2, Data2: 0x4574, Data3: 0x11d1, Data4: [8]byte{0x98, 0x88, 0x00, 0x60, 0x97, 0xde, 0xac, 0xf9}}
 
 // ReReadWallpaper dispatches through IADesktopP2's vtable slot 3.
-func (self *IADesktopP2) ReReadWallpaper() foundation.HRESULT {
+func (self *IADesktopP2) ReReadWallpaper() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetADObjectFlags dispatches through IADesktopP2's vtable slot 4.
-func (self *IADesktopP2) GetADObjectFlags(pdwFlags *uint32, dwMask uint32) foundation.HRESULT {
+func (self *IADesktopP2) GetADObjectFlags(pdwFlags *uint32, dwMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(dwMask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateAllDesktopSubscriptions dispatches through IADesktopP2's vtable slot 5.
-func (self *IADesktopP2) UpdateAllDesktopSubscriptions() foundation.HRESULT {
+func (self *IADesktopP2) UpdateAllDesktopSubscriptions() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MakeDynamicChanges dispatches through IADesktopP2's vtable slot 6.
-func (self *IADesktopP2) MakeDynamicChanges(pOleObj *systemole.IOleObject) foundation.HRESULT {
+func (self *IADesktopP2) MakeDynamicChanges(pOleObj *systemole.IOleObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOleObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IActiveDesktopP: https://learn.microsoft.com/windows/win32/api/shlobj/nn-shlobj-iactivedesktopp
@@ -59,27 +59,28 @@ type IActiveDesktopP struct {
 var IID_IActiveDesktopP = win32.GUID{Data1: 0x52502ee0, Data2: 0xec80, Data3: 0x11d0, Data4: [8]byte{0x89, 0xab, 0x00, 0xc0, 0x4f, 0xc2, 0x97, 0x2d}}
 
 // SetSafeMode dispatches through IActiveDesktopP's vtable slot 3.
-func (self *IActiveDesktopP) SetSafeMode(dwFlags uint32) foundation.HRESULT {
+func (self *IActiveDesktopP) SetSafeMode(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnsureUpdateHTML dispatches through IActiveDesktopP's vtable slot 4.
-func (self *IActiveDesktopP) EnsureUpdateHTML() foundation.HRESULT {
+func (self *IActiveDesktopP) EnsureUpdateHTML() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetScheme dispatches through IActiveDesktopP's vtable slot 5.
-func (self *IActiveDesktopP) SetScheme(pwszSchemeName foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSchemeName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func (self *IActiveDesktopP) SetScheme(pwszSchemeName string, dwFlags uint32) error {
+	_pwszSchemeName := win32.UTF16Ptr(pwszSchemeName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszSchemeName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScheme dispatches through IActiveDesktopP's vtable slot 6.
-func (self *IActiveDesktopP) GetScheme(pwszSchemeName foundation.PWSTR, pdwcchBuffer *uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IActiveDesktopP) GetScheme(pwszSchemeName foundation.PWSTR, pdwcchBuffer *uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSchemeName)), uintptr(unsafe.Pointer(pdwcchBuffer)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 99180164-da16-101a-935c-444553540000
@@ -91,9 +92,9 @@ type IBriefcaseInitiator struct {
 var IID_IBriefcaseInitiator = win32.GUID{Data1: 0x99180164, Data2: 0xda16, Data3: 0x101a, Data4: [8]byte{0x93, 0x5c, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00}}
 
 // IsMonikerInBriefcase dispatches through IBriefcaseInitiator's vtable slot 3.
-func (self *IBriefcaseInitiator) IsMonikerInBriefcase(pmk *systemcom.IMoniker) foundation.HRESULT {
+func (self *IBriefcaseInitiator) IsMonikerInBriefcase(pmk *systemcom.IMoniker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEmptyVolumeCache: https://learn.microsoft.com/windows/win32/api/emptyvc/nn-emptyvc-iemptyvolumecache
@@ -106,33 +107,34 @@ type IEmptyVolumeCache struct {
 var IID_IEmptyVolumeCache = win32.GUID{Data1: 0x8fce5227, Data2: 0x04da, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x04, 0x00, 0x80, 0x5f, 0x8a, 0xbe, 0x06}}
 
 // Initialize dispatches through IEmptyVolumeCache's vtable slot 3.
-func (self *IEmptyVolumeCache) Initialize(hkRegKey systemregistry.HKEY, pcwszVolume foundation.PWSTR, ppwszDisplayName *foundation.PWSTR, ppwszDescription *foundation.PWSTR, pdwFlags *EMPTY_VOLUME_CACHE_FLAGS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hkRegKey), uintptr(unsafe.Pointer(pcwszVolume)), uintptr(unsafe.Pointer(ppwszDisplayName)), uintptr(unsafe.Pointer(ppwszDescription)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+func (self *IEmptyVolumeCache) Initialize(hkRegKey systemregistry.HKEY, pcwszVolume string, ppwszDisplayName *foundation.PWSTR, ppwszDescription *foundation.PWSTR, pdwFlags *EMPTY_VOLUME_CACHE_FLAGS) error {
+	_pcwszVolume := win32.UTF16Ptr(pcwszVolume)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hkRegKey), uintptr(unsafe.Pointer(_pcwszVolume)), uintptr(unsafe.Pointer(ppwszDisplayName)), uintptr(unsafe.Pointer(ppwszDescription)), uintptr(unsafe.Pointer(pdwFlags)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpaceUsed dispatches through IEmptyVolumeCache's vtable slot 4.
-func (self *IEmptyVolumeCache) GetSpaceUsed(pdwlSpaceUsed *uint64, picb *IEmptyVolumeCacheCallBack) foundation.HRESULT {
+func (self *IEmptyVolumeCache) GetSpaceUsed(pdwlSpaceUsed *uint64, picb *IEmptyVolumeCacheCallBack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwlSpaceUsed)), uintptr(unsafe.Pointer(picb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Purge dispatches through IEmptyVolumeCache's vtable slot 5.
-func (self *IEmptyVolumeCache) Purge(dwlSpaceToFree uint64, picb *IEmptyVolumeCacheCallBack) foundation.HRESULT {
+func (self *IEmptyVolumeCache) Purge(dwlSpaceToFree uint64, picb *IEmptyVolumeCacheCallBack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwlSpaceToFree), uintptr(unsafe.Pointer(picb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowProperties dispatches through IEmptyVolumeCache's vtable slot 6.
-func (self *IEmptyVolumeCache) ShowProperties(hwnd foundation.HWND) foundation.HRESULT {
+func (self *IEmptyVolumeCache) ShowProperties(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Deactivate dispatches through IEmptyVolumeCache's vtable slot 7.
-func (self *IEmptyVolumeCache) Deactivate(pdwFlags *EMPTY_VOLUME_CACHE_FLAGS) foundation.HRESULT {
+func (self *IEmptyVolumeCache) Deactivate(pdwFlags *EMPTY_VOLUME_CACHE_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEmptyVolumeCache2: https://learn.microsoft.com/windows/win32/api/emptyvc/nn-emptyvc-iemptyvolumecache2
@@ -145,9 +147,11 @@ type IEmptyVolumeCache2 struct {
 var IID_IEmptyVolumeCache2 = win32.GUID{Data1: 0x02b7e3ba, Data2: 0x4db3, Data3: 0x11d2, Data4: [8]byte{0xb2, 0xd9, 0x00, 0xc0, 0x4f, 0x8e, 0xec, 0x8c}}
 
 // InitializeEx dispatches through IEmptyVolumeCache2's vtable slot 8.
-func (self *IEmptyVolumeCache2) InitializeEx(hkRegKey systemregistry.HKEY, pcwszVolume foundation.PWSTR, pcwszKeyName foundation.PWSTR, ppwszDisplayName *foundation.PWSTR, ppwszDescription *foundation.PWSTR, ppwszBtnText *foundation.PWSTR, pdwFlags *EMPTY_VOLUME_CACHE_FLAGS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hkRegKey), uintptr(unsafe.Pointer(pcwszVolume)), uintptr(unsafe.Pointer(pcwszKeyName)), uintptr(unsafe.Pointer(ppwszDisplayName)), uintptr(unsafe.Pointer(ppwszDescription)), uintptr(unsafe.Pointer(ppwszBtnText)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+func (self *IEmptyVolumeCache2) InitializeEx(hkRegKey systemregistry.HKEY, pcwszVolume string, pcwszKeyName string, ppwszDisplayName *foundation.PWSTR, ppwszDescription *foundation.PWSTR, ppwszBtnText *foundation.PWSTR, pdwFlags *EMPTY_VOLUME_CACHE_FLAGS) error {
+	_pcwszVolume := win32.UTF16Ptr(pcwszVolume)
+	_pcwszKeyName := win32.UTF16Ptr(pcwszKeyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hkRegKey), uintptr(unsafe.Pointer(_pcwszVolume)), uintptr(unsafe.Pointer(_pcwszKeyName)), uintptr(unsafe.Pointer(ppwszDisplayName)), uintptr(unsafe.Pointer(ppwszDescription)), uintptr(unsafe.Pointer(ppwszBtnText)), uintptr(unsafe.Pointer(pdwFlags)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEmptyVolumeCacheCallBack: https://learn.microsoft.com/windows/win32/api/emptyvc/nn-emptyvc-iemptyvolumecachecallback
@@ -160,15 +164,17 @@ type IEmptyVolumeCacheCallBack struct {
 var IID_IEmptyVolumeCacheCallBack = win32.GUID{Data1: 0x6e793361, Data2: 0x73c6, Data3: 0x11d0, Data4: [8]byte{0x84, 0x69, 0x00, 0xaa, 0x00, 0x44, 0x29, 0x01}}
 
 // ScanProgress dispatches through IEmptyVolumeCacheCallBack's vtable slot 3.
-func (self *IEmptyVolumeCacheCallBack) ScanProgress(dwlSpaceUsed uint64, dwFlags uint32, pcwszStatus foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwlSpaceUsed), uintptr(dwFlags), uintptr(unsafe.Pointer(pcwszStatus)))
-	return foundation.HRESULT(r1)
+func (self *IEmptyVolumeCacheCallBack) ScanProgress(dwlSpaceUsed uint64, dwFlags uint32, pcwszStatus string) error {
+	_pcwszStatus := win32.UTF16Ptr(pcwszStatus)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwlSpaceUsed), uintptr(dwFlags), uintptr(unsafe.Pointer(_pcwszStatus)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PurgeProgress dispatches through IEmptyVolumeCacheCallBack's vtable slot 4.
-func (self *IEmptyVolumeCacheCallBack) PurgeProgress(dwlSpaceFreed uint64, dwlSpaceToFree uint64, dwFlags uint32, pcwszStatus foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwlSpaceFreed), uintptr(dwlSpaceToFree), uintptr(dwFlags), uintptr(unsafe.Pointer(pcwszStatus)))
-	return foundation.HRESULT(r1)
+func (self *IEmptyVolumeCacheCallBack) PurgeProgress(dwlSpaceFreed uint64, dwlSpaceToFree uint64, dwFlags uint32, pcwszStatus string) error {
+	_pcwszStatus := win32.UTF16Ptr(pcwszStatus)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwlSpaceFreed), uintptr(dwlSpaceToFree), uintptr(dwFlags), uintptr(unsafe.Pointer(_pcwszStatus)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IReconcilableObject: https://learn.microsoft.com/windows/win32/api/reconcil/nn-reconcil-ireconcilableobject
@@ -181,15 +187,15 @@ type IReconcilableObject struct {
 var IID_IReconcilableObject = win32.GUID{Data1: 0x99180162, Data2: 0xda16, Data3: 0x101a, Data4: [8]byte{0x93, 0x5c, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00}}
 
 // Reconcile dispatches through IReconcilableObject's vtable slot 3.
-func (self *IReconcilableObject) Reconcile(pInitiator *IReconcileInitiator, dwFlags uint32, hwndOwner foundation.HWND, hwndProgressFeedback foundation.HWND, ulcInput uint32, rgpmkOtherInput **systemcom.IMoniker, plOutIndex *int32, pstgNewResidues *systemcomstructuredstorage.IStorage, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiator)), uintptr(dwFlags), uintptr(hwndOwner), uintptr(hwndProgressFeedback), uintptr(ulcInput), uintptr(unsafe.Pointer(rgpmkOtherInput)), uintptr(unsafe.Pointer(plOutIndex)), uintptr(unsafe.Pointer(pstgNewResidues)), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+func (self *IReconcilableObject) Reconcile(pInitiator *IReconcileInitiator, dwFlags uint32, hwndOwner foundation.HWND, hwndProgressFeedback foundation.HWND, ulcInput uint32, rgpmkOtherInput **systemcom.IMoniker, plOutIndex *int32, pstgNewResidues *systemcomstructuredstorage.IStorage) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiator)), uintptr(dwFlags), uintptr(hwndOwner), uintptr(hwndProgressFeedback), uintptr(ulcInput), uintptr(unsafe.Pointer(rgpmkOtherInput)), uintptr(unsafe.Pointer(plOutIndex)), uintptr(unsafe.Pointer(pstgNewResidues)), 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProgressFeedbackMaxEstimate dispatches through IReconcilableObject's vtable slot 4.
-func (self *IReconcilableObject) GetProgressFeedbackMaxEstimate(pulProgressMax *uint32) foundation.HRESULT {
+func (self *IReconcilableObject) GetProgressFeedbackMaxEstimate(pulProgressMax *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulProgressMax)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IReconcileInitiator: https://learn.microsoft.com/windows/win32/lwef/ireconcileinitiator
@@ -202,13 +208,13 @@ type IReconcileInitiator struct {
 var IID_IReconcileInitiator = win32.GUID{Data1: 0x99180161, Data2: 0xda16, Data3: 0x101a, Data4: [8]byte{0x93, 0x5c, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00}}
 
 // SetAbortCallback dispatches through IReconcileInitiator's vtable slot 3.
-func (self *IReconcileInitiator) SetAbortCallback(punkForAbort *systemcom.IUnknown) foundation.HRESULT {
+func (self *IReconcileInitiator) SetAbortCallback(punkForAbort *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkForAbort)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProgressFeedback dispatches through IReconcileInitiator's vtable slot 4.
-func (self *IReconcileInitiator) SetProgressFeedback(ulProgress uint32, ulProgressMax uint32) foundation.HRESULT {
+func (self *IReconcileInitiator) SetProgressFeedback(ulProgress uint32, ulProgressMax uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulProgress), uintptr(ulProgressMax))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

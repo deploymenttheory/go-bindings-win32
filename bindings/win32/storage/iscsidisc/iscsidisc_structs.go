@@ -211,8 +211,8 @@ type IDE_IO_CONTROL struct {
 	DataLength   uint32
 }
 
-// IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union struct {
 	Data [5]uint64
 }
@@ -594,8 +594,8 @@ type NV_FEATURE_PARAMETER struct {
 	DeviceSpinUpTime   uint32
 }
 
-// NV_SEP_CACHE_PARAMETER_Flags_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NV_SEP_CACHE_PARAMETER_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NV_SEP_CACHE_PARAMETER_Flags_e__Union struct {
 	Data [1]byte
 }
@@ -898,8 +898,8 @@ type STORAGE_FIRMWARE_INFO_V2 struct {
 	Slot                  [1]STORAGE_FIRMWARE_SLOT_INFO_V2
 }
 
-// STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union struct {
 	Data [1]uint64
 }

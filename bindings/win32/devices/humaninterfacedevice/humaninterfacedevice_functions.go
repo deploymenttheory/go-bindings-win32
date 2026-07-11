@@ -70,9 +70,9 @@ var (
 )
 
 // DirectInput8Create calls DINPUT8!DirectInput8Create.
-func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut *unsafe.Pointer, punkOuter *systemcom.IUnknown) foundation.HRESULT {
+func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut *unsafe.Pointer, punkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectInput8Create.Addr(), uintptr(hinst), uintptr(dwVersion), uintptr(unsafe.Pointer(riidltf)), uintptr(unsafe.Pointer(ppvOut)), uintptr(unsafe.Pointer(punkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HidD_FlushQueue calls HID!HidD_FlushQueue.
@@ -291,8 +291,12 @@ func HidP_MaxUsageListLength(ReportType HIDP_REPORT_TYPE, UsagePage uint16, Prep
 }
 
 // HidP_SetButtonArray calls HID!HidP_SetButtonArray.
-func HidP_SetButtonArray(ReportType HIDP_REPORT_TYPE, UsagePage uint16, LinkCollection uint16, Usage uint16, ButtonData *HIDP_BUTTON_ARRAY_DATA, ButtonDataLength uint16, PreparsedData PHIDP_PREPARSED_DATA, Report foundation.PSTR, ReportLength uint32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procHidP_SetButtonArray.Addr(), uintptr(ReportType), uintptr(UsagePage), uintptr(LinkCollection), uintptr(Usage), uintptr(unsafe.Pointer(ButtonData)), uintptr(ButtonDataLength), uintptr(PreparsedData), uintptr(unsafe.Pointer(Report)), uintptr(ReportLength))
+func HidP_SetButtonArray(ReportType HIDP_REPORT_TYPE, UsagePage uint16, LinkCollection uint16, Usage uint16, ButtonData []HIDP_BUTTON_ARRAY_DATA, PreparsedData PHIDP_PREPARSED_DATA, Report foundation.PSTR, ReportLength uint32) foundation.NTSTATUS {
+	var _ButtonData *HIDP_BUTTON_ARRAY_DATA
+	if len(ButtonData) > 0 {
+		_ButtonData = &ButtonData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidP_SetButtonArray.Addr(), uintptr(ReportType), uintptr(UsagePage), uintptr(LinkCollection), uintptr(Usage), uintptr(unsafe.Pointer(_ButtonData)), uintptr(len(ButtonData)), uintptr(PreparsedData), uintptr(unsafe.Pointer(Report)), uintptr(ReportLength))
 	return foundation.NTSTATUS(r1)
 }
 
@@ -327,8 +331,12 @@ func HidP_SetUsages(ReportType HIDP_REPORT_TYPE, UsagePage uint16, LinkCollectio
 }
 
 // HidP_TranslateUsagesToI8042ScanCodes calls HID!HidP_TranslateUsagesToI8042ScanCodes.
-func HidP_TranslateUsagesToI8042ScanCodes(ChangedUsageList *uint16, UsageListLength uint32, KeyAction HIDP_KEYBOARD_DIRECTION, ModifierState *HIDP_KEYBOARD_MODIFIER_STATE, InsertCodesProcedure PHIDP_INSERT_SCANCODES, InsertCodesContext unsafe.Pointer) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procHidP_TranslateUsagesToI8042ScanCodes.Addr(), uintptr(unsafe.Pointer(ChangedUsageList)), uintptr(UsageListLength), uintptr(KeyAction), uintptr(unsafe.Pointer(ModifierState)), uintptr(InsertCodesProcedure), uintptr(unsafe.Pointer(InsertCodesContext)))
+func HidP_TranslateUsagesToI8042ScanCodes(ChangedUsageList []uint16, KeyAction HIDP_KEYBOARD_DIRECTION, ModifierState *HIDP_KEYBOARD_MODIFIER_STATE, InsertCodesProcedure PHIDP_INSERT_SCANCODES, InsertCodesContext unsafe.Pointer) foundation.NTSTATUS {
+	var _ChangedUsageList *uint16
+	if len(ChangedUsageList) > 0 {
+		_ChangedUsageList = &ChangedUsageList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidP_TranslateUsagesToI8042ScanCodes.Addr(), uintptr(unsafe.Pointer(_ChangedUsageList)), uintptr(len(ChangedUsageList)), uintptr(KeyAction), uintptr(unsafe.Pointer(ModifierState)), uintptr(InsertCodesProcedure), uintptr(unsafe.Pointer(InsertCodesContext)))
 	return foundation.NTSTATUS(r1)
 }
 
@@ -344,7 +352,7 @@ func HidP_UsageListDifference(PreviousUsageList *uint16, CurrentUsageList *uint1
 	return foundation.NTSTATUS(r1)
 }
 
-// joyConfigChanged calls WINMM!joyConfigChanged.
+// JoyConfigChanged calls WINMM!joyConfigChanged.
 // https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joyconfigchanged
 // Minimum OS: windows5.0.
 func JoyConfigChanged(dwFlags uint32) uint32 {

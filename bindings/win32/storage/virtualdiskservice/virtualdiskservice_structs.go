@@ -10,8 +10,8 @@ import (
 	storagevhd "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/vhd"
 )
 
-// CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -22,8 +22,8 @@ type CHANGE_ATTRIBUTES_PARAMETERS struct {
 	Anonymous CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union
 }
 
-// CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -34,8 +34,8 @@ type CHANGE_PARTITION_TYPE_PARAMETERS struct {
 	Anonymous CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union
 }
 
-// CREATE_PARTITION_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CREATE_PARTITION_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CREATE_PARTITION_PARAMETERS_Anonymous_e__Union struct {
 	Data [14]uint64
 }
@@ -46,8 +46,8 @@ type CREATE_PARTITION_PARAMETERS struct {
 	Anonymous CREATE_PARTITION_PARAMETERS_Anonymous_e__Union
 }
 
-// VDS_ADVANCEDDISK_PROP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_ADVANCEDDISK_PROP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_ADVANCEDDISK_PROP_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -78,8 +78,8 @@ type VDS_ADVANCEDDISK_PROP struct {
 	DwDeviceType         uint32
 }
 
-// VDS_ASYNC_OUTPUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_ASYNC_OUTPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_ASYNC_OUTPUT_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -140,8 +140,8 @@ type VDS_DISK_NOTIFICATION struct {
 	DiskId  win32.GUID
 }
 
-// VDS_DISK_PROP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_DISK_PROP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_DISK_PROP_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -169,8 +169,8 @@ type VDS_DISK_PROP struct {
 	PwszDevicePath      foundation.PWSTR
 }
 
-// VDS_DISK_PROP2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_DISK_PROP2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_DISK_PROP2_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -494,8 +494,8 @@ type VDS_MOUNT_POINT_NOTIFICATION struct {
 	VolumeId win32.GUID
 }
 
-// VDS_NOTIFICATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_NOTIFICATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_NOTIFICATION_Anonymous_e__Union struct {
 	Data [5]uint64
 }
@@ -520,8 +520,8 @@ type VDS_PACK_PROP struct {
 	UlFlags  uint32
 }
 
-// VDS_PARTITION_INFORMATION_EX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_PARTITION_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_PARTITION_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [14]uint64
 }
@@ -559,8 +559,8 @@ type VDS_PARTITION_NOTIFICATION struct {
 	UllOffset uint64
 }
 
-// VDS_PARTITION_PROP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_PARTITION_PROP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_PARTITION_PROP_Anonymous_e__Union struct {
 	Data [14]uint64
 }
@@ -581,20 +581,20 @@ type VDS_PATH_ID struct {
 	UllPathId   uint64
 }
 
-// VDS_PATH_INFO_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_PATH_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_PATH_INFO_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// VDS_PATH_INFO_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_PATH_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_PATH_INFO_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
-// VDS_PATH_INFO_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VDS_PATH_INFO_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VDS_PATH_INFO_Anonymous3_e__Union struct {
 	Data [1]uint64
 }

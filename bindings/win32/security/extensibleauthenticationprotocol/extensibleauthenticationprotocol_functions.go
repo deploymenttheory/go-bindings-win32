@@ -64,8 +64,12 @@ func EapHostPeerConfigXml2Blob(dwFlags uint32, pConfigDoc *dataxmlmsxml.IXMLDOMN
 // EapHostPeerCredentialsXml2Blob calls eappcfg!EapHostPeerCredentialsXml2Blob.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeercredentialsxml2blob
 // Minimum OS: windows6.0.6000.
-func EapHostPeerCredentialsXml2Blob(dwFlags uint32, pCredentialsDoc *dataxmlmsxml.IXMLDOMNode, dwSizeOfConfigIn uint32, pConfigIn *byte, pdwSizeOfCredentialsOut *uint32, ppCredentialsOut **byte, pEapMethodType *EAP_METHOD_TYPE, ppEapError **EAP_ERROR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerCredentialsXml2Blob.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pCredentialsDoc)), uintptr(dwSizeOfConfigIn), uintptr(unsafe.Pointer(pConfigIn)), uintptr(unsafe.Pointer(pdwSizeOfCredentialsOut)), uintptr(unsafe.Pointer(ppCredentialsOut)), uintptr(unsafe.Pointer(pEapMethodType)), uintptr(unsafe.Pointer(ppEapError)))
+func EapHostPeerCredentialsXml2Blob(dwFlags uint32, pCredentialsDoc *dataxmlmsxml.IXMLDOMNode, pConfigIn []byte, pdwSizeOfCredentialsOut *uint32, ppCredentialsOut **byte, pEapMethodType *EAP_METHOD_TYPE, ppEapError **EAP_ERROR) uint32 {
+	var _pConfigIn *byte
+	if len(pConfigIn) > 0 {
+		_pConfigIn = &pConfigIn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEapHostPeerCredentialsXml2Blob.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pCredentialsDoc)), uintptr(len(pConfigIn)), uintptr(unsafe.Pointer(_pConfigIn)), uintptr(unsafe.Pointer(pdwSizeOfCredentialsOut)), uintptr(unsafe.Pointer(ppCredentialsOut)), uintptr(unsafe.Pointer(pEapMethodType)), uintptr(unsafe.Pointer(ppEapError)))
 	return uint32(r1)
 }
 
@@ -122,8 +126,9 @@ func EapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds *win
 }
 
 // EapHostPeerGetEncryptedPassword calls eappprxy!EapHostPeerGetEncryptedPassword.
-func EapHostPeerGetEncryptedPassword(dwSizeofPassword uint32, szPassword foundation.PWSTR, ppszEncPassword *foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerGetEncryptedPassword.Addr(), uintptr(dwSizeofPassword), uintptr(unsafe.Pointer(szPassword)), uintptr(unsafe.Pointer(ppszEncPassword)))
+func EapHostPeerGetEncryptedPassword(dwSizeofPassword uint32, szPassword string, ppszEncPassword *foundation.PWSTR) uint32 {
+	_szPassword := win32.UTF16Ptr(szPassword)
+	r1, _, _ := syscall.SyscallN(procEapHostPeerGetEncryptedPassword.Addr(), uintptr(dwSizeofPassword), uintptr(unsafe.Pointer(_szPassword)), uintptr(unsafe.Pointer(ppszEncPassword)))
 	return uint32(r1)
 }
 
@@ -178,32 +183,48 @@ func EapHostPeerInitialize() uint32 {
 // EapHostPeerInvokeInteractiveUI calls eappcfg!EapHostPeerInvokeInteractiveUI.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerinvokeinteractiveui
 // Minimum OS: windows6.0.6000.
-func EapHostPeerInvokeInteractiveUI(hwndParent foundation.HWND, dwSizeofUIContextData uint32, pUIContextData *byte, pdwSizeOfDataFromInteractiveUI *uint32, ppDataFromInteractiveUI **byte, ppEapError **EAP_ERROR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerInvokeInteractiveUI.Addr(), uintptr(hwndParent), uintptr(dwSizeofUIContextData), uintptr(unsafe.Pointer(pUIContextData)), uintptr(unsafe.Pointer(pdwSizeOfDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppEapError)))
+func EapHostPeerInvokeInteractiveUI(hwndParent foundation.HWND, pUIContextData []byte, pdwSizeOfDataFromInteractiveUI *uint32, ppDataFromInteractiveUI **byte, ppEapError **EAP_ERROR) uint32 {
+	var _pUIContextData *byte
+	if len(pUIContextData) > 0 {
+		_pUIContextData = &pUIContextData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEapHostPeerInvokeInteractiveUI.Addr(), uintptr(hwndParent), uintptr(len(pUIContextData)), uintptr(unsafe.Pointer(_pUIContextData)), uintptr(unsafe.Pointer(pdwSizeOfDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppEapError)))
 	return uint32(r1)
 }
 
 // EapHostPeerProcessReceivedPacket calls eappprxy!EapHostPeerProcessReceivedPacket.
 // https://learn.microsoft.com/windows/win32/api/eappapis/nf-eappapis-eaphostpeerprocessreceivedpacket
 // Minimum OS: windows6.0.6000.
-func EapHostPeerProcessReceivedPacket(sessionHandle uint32, cbReceivePacket uint32, pReceivePacket *byte, pEapOutput *EapHostPeerResponseAction, ppEapError **EAP_ERROR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerProcessReceivedPacket.Addr(), uintptr(sessionHandle), uintptr(cbReceivePacket), uintptr(unsafe.Pointer(pReceivePacket)), uintptr(unsafe.Pointer(pEapOutput)), uintptr(unsafe.Pointer(ppEapError)))
+func EapHostPeerProcessReceivedPacket(sessionHandle uint32, pReceivePacket []byte, pEapOutput *EapHostPeerResponseAction, ppEapError **EAP_ERROR) uint32 {
+	var _pReceivePacket *byte
+	if len(pReceivePacket) > 0 {
+		_pReceivePacket = &pReceivePacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEapHostPeerProcessReceivedPacket.Addr(), uintptr(sessionHandle), uintptr(len(pReceivePacket)), uintptr(unsafe.Pointer(_pReceivePacket)), uintptr(unsafe.Pointer(pEapOutput)), uintptr(unsafe.Pointer(ppEapError)))
 	return uint32(r1)
 }
 
 // EapHostPeerQueryInteractiveUIInputFields calls eappcfg!EapHostPeerQueryInteractiveUIInputFields.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerqueryinteractiveuiinputfields
 // Minimum OS: windows6.0.6000.
-func EapHostPeerQueryInteractiveUIInputFields(dwVersion uint32, dwFlags uint32, dwSizeofUIContextData uint32, pUIContextData *byte, pEapInteractiveUIData *EAP_INTERACTIVE_UI_DATA, ppEapError **EAP_ERROR, ppvReserved *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerQueryInteractiveUIInputFields.Addr(), uintptr(dwVersion), uintptr(dwFlags), uintptr(dwSizeofUIContextData), uintptr(unsafe.Pointer(pUIContextData)), uintptr(unsafe.Pointer(pEapInteractiveUIData)), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(ppvReserved)))
+func EapHostPeerQueryInteractiveUIInputFields(dwVersion uint32, dwFlags uint32, pUIContextData []byte, pEapInteractiveUIData *EAP_INTERACTIVE_UI_DATA, ppEapError **EAP_ERROR, ppvReserved *unsafe.Pointer) uint32 {
+	var _pUIContextData *byte
+	if len(pUIContextData) > 0 {
+		_pUIContextData = &pUIContextData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEapHostPeerQueryInteractiveUIInputFields.Addr(), uintptr(dwVersion), uintptr(dwFlags), uintptr(len(pUIContextData)), uintptr(unsafe.Pointer(_pUIContextData)), uintptr(unsafe.Pointer(pEapInteractiveUIData)), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(ppvReserved)))
 	return uint32(r1)
 }
 
 // EapHostPeerQueryUIBlobFromInteractiveUIInputFields calls eappcfg!EapHostPeerQueryUIBlobFromInteractiveUIInputFields.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerqueryuiblobfrominteractiveuiinputfields
 // Minimum OS: windows6.0.6000.
-func EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion uint32, dwFlags uint32, dwSizeofUIContextData uint32, pUIContextData *byte, pEapInteractiveUIData *EAP_INTERACTIVE_UI_DATA, pdwSizeOfDataFromInteractiveUI *uint32, ppDataFromInteractiveUI **byte, ppEapError **EAP_ERROR, ppvReserved *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerQueryUIBlobFromInteractiveUIInputFields.Addr(), uintptr(dwVersion), uintptr(dwFlags), uintptr(dwSizeofUIContextData), uintptr(unsafe.Pointer(pUIContextData)), uintptr(unsafe.Pointer(pEapInteractiveUIData)), uintptr(unsafe.Pointer(pdwSizeOfDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(ppvReserved)))
+func EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion uint32, dwFlags uint32, pUIContextData []byte, pEapInteractiveUIData *EAP_INTERACTIVE_UI_DATA, pdwSizeOfDataFromInteractiveUI *uint32, ppDataFromInteractiveUI **byte, ppEapError **EAP_ERROR, ppvReserved *unsafe.Pointer) uint32 {
+	var _pUIContextData *byte
+	if len(pUIContextData) > 0 {
+		_pUIContextData = &pUIContextData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEapHostPeerQueryUIBlobFromInteractiveUIInputFields.Addr(), uintptr(dwVersion), uintptr(dwFlags), uintptr(len(pUIContextData)), uintptr(unsafe.Pointer(_pUIContextData)), uintptr(unsafe.Pointer(pEapInteractiveUIData)), uintptr(unsafe.Pointer(pdwSizeOfDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(ppvReserved)))
 	return uint32(r1)
 }
 
@@ -218,8 +239,12 @@ func EapHostPeerSetResponseAttributes(sessionHandle uint32, pAttribs *EAP_ATTRIB
 // EapHostPeerSetUIContext calls eappprxy!EapHostPeerSetUIContext.
 // https://learn.microsoft.com/windows/win32/api/eappapis/nf-eappapis-eaphostpeersetuicontext
 // Minimum OS: windows6.0.6000.
-func EapHostPeerSetUIContext(sessionHandle uint32, dwSizeOfUIContextData uint32, pUIContextData *byte, pEapOutput *EapHostPeerResponseAction, ppEapError **EAP_ERROR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerSetUIContext.Addr(), uintptr(sessionHandle), uintptr(dwSizeOfUIContextData), uintptr(unsafe.Pointer(pUIContextData)), uintptr(unsafe.Pointer(pEapOutput)), uintptr(unsafe.Pointer(ppEapError)))
+func EapHostPeerSetUIContext(sessionHandle uint32, pUIContextData []byte, pEapOutput *EapHostPeerResponseAction, ppEapError **EAP_ERROR) uint32 {
+	var _pUIContextData *byte
+	if len(pUIContextData) > 0 {
+		_pUIContextData = &pUIContextData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEapHostPeerSetUIContext.Addr(), uintptr(sessionHandle), uintptr(len(pUIContextData)), uintptr(unsafe.Pointer(_pUIContextData)), uintptr(unsafe.Pointer(pEapOutput)), uintptr(unsafe.Pointer(ppEapError)))
 	return uint32(r1)
 }
 

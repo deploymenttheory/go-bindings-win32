@@ -14,8 +14,8 @@ type {{.TypeName}} {{.BaseType}}
 {{define "struct"}}
 {{- if .DocURL}}// {{.TypeName}}: {{.DocURL}}
 {{end -}}
-{{- if .IsUnionBlob}}// {{.TypeName}} is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+{{- if .IsUnionBlob}}// {{.TypeName}} is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 {{end -}}
 type {{.TypeName}} struct {
 {{- range .Fields}}

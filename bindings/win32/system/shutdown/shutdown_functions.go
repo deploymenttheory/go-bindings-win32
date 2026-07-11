@@ -18,15 +18,15 @@ var (
 )
 
 var (
+	procAbortSystemShutdown        = modADVAPI32.NewProc("AbortSystemShutdownW")
 	procAbortSystemShutdownA       = modADVAPI32.NewProc("AbortSystemShutdownA")
-	procAbortSystemShutdownW       = modADVAPI32.NewProc("AbortSystemShutdownW")
 	procCheckForHiberboot          = modADVAPI32.NewProc("CheckForHiberboot")
+	procInitiateShutdown           = modADVAPI32.NewProc("InitiateShutdownW")
 	procInitiateShutdownA          = modADVAPI32.NewProc("InitiateShutdownA")
-	procInitiateShutdownW          = modADVAPI32.NewProc("InitiateShutdownW")
+	procInitiateSystemShutdown     = modADVAPI32.NewProc("InitiateSystemShutdownW")
 	procInitiateSystemShutdownA    = modADVAPI32.NewProc("InitiateSystemShutdownA")
+	procInitiateSystemShutdownEx   = modADVAPI32.NewProc("InitiateSystemShutdownExW")
 	procInitiateSystemShutdownExA  = modADVAPI32.NewProc("InitiateSystemShutdownExA")
-	procInitiateSystemShutdownExW  = modADVAPI32.NewProc("InitiateSystemShutdownExW")
-	procInitiateSystemShutdownW    = modADVAPI32.NewProc("InitiateSystemShutdownW")
 	procExitWindowsEx              = modUSER32.NewProc("ExitWindowsEx")
 	procLockWorkStation            = modUSER32.NewProc("LockWorkStation")
 	procShutdownBlockReasonCreate  = modUSER32.NewProc("ShutdownBlockReasonCreate")
@@ -34,22 +34,23 @@ var (
 	procShutdownBlockReasonQuery   = modUSER32.NewProc("ShutdownBlockReasonQuery")
 )
 
-// AbortSystemShutdownA calls ADVAPI32!AbortSystemShutdownA.
-// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-abortsystemshutdowna
+// AbortSystemShutdown calls ADVAPI32!AbortSystemShutdownW.
+// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-abortsystemshutdownw
 // Minimum OS: windows5.1.2600.
-func AbortSystemShutdownA(lpMachineName foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procAbortSystemShutdownA.Addr(), uintptr(unsafe.Pointer(lpMachineName)))
+func AbortSystemShutdown(lpMachineName string) error {
+	_lpMachineName := win32.UTF16Ptr(lpMachineName)
+	r1, _, e1 := syscall.SyscallN(procAbortSystemShutdown.Addr(), uintptr(unsafe.Pointer(_lpMachineName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// AbortSystemShutdownW calls ADVAPI32!AbortSystemShutdownW.
-// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-abortsystemshutdownw
+// AbortSystemShutdownA calls ADVAPI32!AbortSystemShutdownA.
+// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-abortsystemshutdowna
 // Minimum OS: windows5.1.2600.
-func AbortSystemShutdownW(lpMachineName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procAbortSystemShutdownW.Addr(), uintptr(unsafe.Pointer(lpMachineName)))
+func AbortSystemShutdownA(lpMachineName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procAbortSystemShutdownA.Addr(), uintptr(unsafe.Pointer(lpMachineName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -73,6 +74,16 @@ func ExitWindowsEx(uFlags EXIT_WINDOWS_FLAGS, dwReason SHUTDOWN_REASON) error {
 	return nil
 }
 
+// InitiateShutdown calls ADVAPI32!InitiateShutdownW.
+// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiateshutdownw
+// Minimum OS: windows6.0.6000.
+func InitiateShutdown(lpMachineName string, lpMessage string, dwGracePeriod uint32, dwShutdownFlags SHUTDOWN_FLAGS, dwReason SHUTDOWN_REASON) uint32 {
+	_lpMachineName := win32.UTF16Ptr(lpMachineName)
+	_lpMessage := win32.UTF16Ptr(lpMessage)
+	r1, _, _ := syscall.SyscallN(procInitiateShutdown.Addr(), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpMessage)), uintptr(dwGracePeriod), uintptr(dwShutdownFlags), uintptr(dwReason))
+	return uint32(r1)
+}
+
 // InitiateShutdownA calls ADVAPI32!InitiateShutdownA.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiateshutdowna
 // Minimum OS: windows6.0.6000.
@@ -81,19 +92,43 @@ func InitiateShutdownA(lpMachineName foundation.PSTR, lpMessage foundation.PSTR,
 	return uint32(r1)
 }
 
-// InitiateShutdownW calls ADVAPI32!InitiateShutdownW.
-// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiateshutdownw
-// Minimum OS: windows6.0.6000.
-func InitiateShutdownW(lpMachineName foundation.PWSTR, lpMessage foundation.PWSTR, dwGracePeriod uint32, dwShutdownFlags SHUTDOWN_FLAGS, dwReason SHUTDOWN_REASON) uint32 {
-	r1, _, _ := syscall.SyscallN(procInitiateShutdownW.Addr(), uintptr(unsafe.Pointer(lpMachineName)), uintptr(unsafe.Pointer(lpMessage)), uintptr(dwGracePeriod), uintptr(dwShutdownFlags), uintptr(dwReason))
-	return uint32(r1)
+// InitiateSystemShutdown calls ADVAPI32!InitiateSystemShutdownW.
+// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiatesystemshutdownw
+// Minimum OS: windows5.1.2600.
+func InitiateSystemShutdown(lpMachineName string, lpMessage string, dwTimeout uint32, bForceAppsClosed bool, bRebootAfterShutdown bool) error {
+	_lpMachineName := win32.UTF16Ptr(lpMachineName)
+	_lpMessage := win32.UTF16Ptr(lpMessage)
+	_bForceAppsClosed := win32.Bool32(bForceAppsClosed)
+	_bRebootAfterShutdown := win32.Bool32(bRebootAfterShutdown)
+	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdown.Addr(), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpMessage)), uintptr(dwTimeout), uintptr(_bForceAppsClosed), uintptr(_bRebootAfterShutdown))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // InitiateSystemShutdownA calls ADVAPI32!InitiateSystemShutdownA.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiatesystemshutdowna
 // Minimum OS: windows5.1.2600.
-func InitiateSystemShutdownA(lpMachineName foundation.PSTR, lpMessage foundation.PSTR, dwTimeout uint32, bForceAppsClosed foundation.BOOL, bRebootAfterShutdown foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdownA.Addr(), uintptr(unsafe.Pointer(lpMachineName)), uintptr(unsafe.Pointer(lpMessage)), uintptr(dwTimeout), uintptr(bForceAppsClosed), uintptr(bRebootAfterShutdown))
+func InitiateSystemShutdownA(lpMachineName foundation.PSTR, lpMessage foundation.PSTR, dwTimeout uint32, bForceAppsClosed bool, bRebootAfterShutdown bool) error {
+	_bForceAppsClosed := win32.Bool32(bForceAppsClosed)
+	_bRebootAfterShutdown := win32.Bool32(bRebootAfterShutdown)
+	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdownA.Addr(), uintptr(unsafe.Pointer(lpMachineName)), uintptr(unsafe.Pointer(lpMessage)), uintptr(dwTimeout), uintptr(_bForceAppsClosed), uintptr(_bRebootAfterShutdown))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// InitiateSystemShutdownEx calls ADVAPI32!InitiateSystemShutdownExW.
+// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiatesystemshutdownexw
+// Minimum OS: windows5.1.2600.
+func InitiateSystemShutdownEx(lpMachineName string, lpMessage string, dwTimeout uint32, bForceAppsClosed bool, bRebootAfterShutdown bool, dwReason SHUTDOWN_REASON) error {
+	_lpMachineName := win32.UTF16Ptr(lpMachineName)
+	_lpMessage := win32.UTF16Ptr(lpMessage)
+	_bForceAppsClosed := win32.Bool32(bForceAppsClosed)
+	_bRebootAfterShutdown := win32.Bool32(bRebootAfterShutdown)
+	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdownEx.Addr(), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpMessage)), uintptr(dwTimeout), uintptr(_bForceAppsClosed), uintptr(_bRebootAfterShutdown), uintptr(dwReason))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -103,30 +138,10 @@ func InitiateSystemShutdownA(lpMachineName foundation.PSTR, lpMessage foundation
 // InitiateSystemShutdownExA calls ADVAPI32!InitiateSystemShutdownExA.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiatesystemshutdownexa
 // Minimum OS: windows5.1.2600.
-func InitiateSystemShutdownExA(lpMachineName foundation.PSTR, lpMessage foundation.PSTR, dwTimeout uint32, bForceAppsClosed foundation.BOOL, bRebootAfterShutdown foundation.BOOL, dwReason SHUTDOWN_REASON) error {
-	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdownExA.Addr(), uintptr(unsafe.Pointer(lpMachineName)), uintptr(unsafe.Pointer(lpMessage)), uintptr(dwTimeout), uintptr(bForceAppsClosed), uintptr(bRebootAfterShutdown), uintptr(dwReason))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// InitiateSystemShutdownExW calls ADVAPI32!InitiateSystemShutdownExW.
-// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiatesystemshutdownexw
-// Minimum OS: windows5.1.2600.
-func InitiateSystemShutdownExW(lpMachineName foundation.PWSTR, lpMessage foundation.PWSTR, dwTimeout uint32, bForceAppsClosed foundation.BOOL, bRebootAfterShutdown foundation.BOOL, dwReason SHUTDOWN_REASON) error {
-	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdownExW.Addr(), uintptr(unsafe.Pointer(lpMachineName)), uintptr(unsafe.Pointer(lpMessage)), uintptr(dwTimeout), uintptr(bForceAppsClosed), uintptr(bRebootAfterShutdown), uintptr(dwReason))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// InitiateSystemShutdownW calls ADVAPI32!InitiateSystemShutdownW.
-// https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiatesystemshutdownw
-// Minimum OS: windows5.1.2600.
-func InitiateSystemShutdownW(lpMachineName foundation.PWSTR, lpMessage foundation.PWSTR, dwTimeout uint32, bForceAppsClosed foundation.BOOL, bRebootAfterShutdown foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdownW.Addr(), uintptr(unsafe.Pointer(lpMachineName)), uintptr(unsafe.Pointer(lpMessage)), uintptr(dwTimeout), uintptr(bForceAppsClosed), uintptr(bRebootAfterShutdown))
+func InitiateSystemShutdownExA(lpMachineName foundation.PSTR, lpMessage foundation.PSTR, dwTimeout uint32, bForceAppsClosed bool, bRebootAfterShutdown bool, dwReason SHUTDOWN_REASON) error {
+	_bForceAppsClosed := win32.Bool32(bForceAppsClosed)
+	_bRebootAfterShutdown := win32.Bool32(bRebootAfterShutdown)
+	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdownExA.Addr(), uintptr(unsafe.Pointer(lpMachineName)), uintptr(unsafe.Pointer(lpMessage)), uintptr(dwTimeout), uintptr(_bForceAppsClosed), uintptr(_bRebootAfterShutdown), uintptr(dwReason))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -147,8 +162,9 @@ func LockWorkStation() error {
 // ShutdownBlockReasonCreate calls USER32!ShutdownBlockReasonCreate.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-shutdownblockreasoncreate
 // Minimum OS: windows6.0.6000.
-func ShutdownBlockReasonCreate(hWnd foundation.HWND, pwszReason foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procShutdownBlockReasonCreate.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pwszReason)))
+func ShutdownBlockReasonCreate(hWnd foundation.HWND, pwszReason string) error {
+	_pwszReason := win32.UTF16Ptr(pwszReason)
+	r1, _, e1 := syscall.SyscallN(procShutdownBlockReasonCreate.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pwszReason)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

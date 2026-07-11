@@ -23,8 +23,8 @@ var (
 )
 
 var (
+	procCommonPropertySheetUI                        = modCOMPSTUI.NewProc("CommonPropertySheetUIW")
 	procCommonPropertySheetUIA                       = modCOMPSTUI.NewProc("CommonPropertySheetUIA")
-	procCommonPropertySheetUIW                       = modCOMPSTUI.NewProc("CommonPropertySheetUIW")
 	procGetCPSUIUserData                             = modCOMPSTUI.NewProc("GetCPSUIUserData")
 	procSetCPSUIUserData                             = modCOMPSTUI.NewProc("SetCPSUIUserData")
 	procGdiDeleteSpoolFileHandle                     = modGDI32.NewProc("GdiDeleteSpoolFileHandle")
@@ -71,94 +71,94 @@ var (
 	procSpoolerRefreshPrinterChangeNotification      = modSPOOLSS.NewProc("SpoolerRefreshPrinterChangeNotification")
 	procUpdatePrintDeviceObject                      = modSPOOLSS.NewProc("UpdatePrintDeviceObject")
 	procAbortPrinter                                 = modwinspool_drv.NewProc("AbortPrinter")
+	procAddForm                                      = modwinspool_drv.NewProc("AddFormW")
 	procAddFormA                                     = modwinspool_drv.NewProc("AddFormA")
-	procAddFormW                                     = modwinspool_drv.NewProc("AddFormW")
+	procAddJob                                       = modwinspool_drv.NewProc("AddJobW")
 	procAddJobA                                      = modwinspool_drv.NewProc("AddJobA")
-	procAddJobW                                      = modwinspool_drv.NewProc("AddJobW")
+	procAddMonitor                                   = modwinspool_drv.NewProc("AddMonitorW")
 	procAddMonitorA                                  = modwinspool_drv.NewProc("AddMonitorA")
-	procAddMonitorW                                  = modwinspool_drv.NewProc("AddMonitorW")
+	procAddPort                                      = modwinspool_drv.NewProc("AddPortW")
 	procAddPortA                                     = modwinspool_drv.NewProc("AddPortA")
-	procAddPortW                                     = modwinspool_drv.NewProc("AddPortW")
+	procAddPrintProcessor                            = modwinspool_drv.NewProc("AddPrintProcessorW")
 	procAddPrintProcessorA                           = modwinspool_drv.NewProc("AddPrintProcessorA")
-	procAddPrintProcessorW                           = modwinspool_drv.NewProc("AddPrintProcessorW")
+	procAddPrintProvidor                             = modwinspool_drv.NewProc("AddPrintProvidorW")
 	procAddPrintProvidorA                            = modwinspool_drv.NewProc("AddPrintProvidorA")
-	procAddPrintProvidorW                            = modwinspool_drv.NewProc("AddPrintProvidorW")
+	procAddPrinter                                   = modwinspool_drv.NewProc("AddPrinterW")
 	procAddPrinterA                                  = modwinspool_drv.NewProc("AddPrinterA")
+	procAddPrinterConnection                         = modwinspool_drv.NewProc("AddPrinterConnectionW")
+	procAddPrinterConnection2                        = modwinspool_drv.NewProc("AddPrinterConnection2W")
 	procAddPrinterConnection2A                       = modwinspool_drv.NewProc("AddPrinterConnection2A")
-	procAddPrinterConnection2W                       = modwinspool_drv.NewProc("AddPrinterConnection2W")
 	procAddPrinterConnectionA                        = modwinspool_drv.NewProc("AddPrinterConnectionA")
-	procAddPrinterConnectionW                        = modwinspool_drv.NewProc("AddPrinterConnectionW")
+	procAddPrinterDriver                             = modwinspool_drv.NewProc("AddPrinterDriverW")
 	procAddPrinterDriverA                            = modwinspool_drv.NewProc("AddPrinterDriverA")
+	procAddPrinterDriverEx                           = modwinspool_drv.NewProc("AddPrinterDriverExW")
 	procAddPrinterDriverExA                          = modwinspool_drv.NewProc("AddPrinterDriverExA")
-	procAddPrinterDriverExW                          = modwinspool_drv.NewProc("AddPrinterDriverExW")
-	procAddPrinterDriverW                            = modwinspool_drv.NewProc("AddPrinterDriverW")
-	procAddPrinterW                                  = modwinspool_drv.NewProc("AddPrinterW")
+	procAdvancedDocumentProperties                   = modwinspool_drv.NewProc("AdvancedDocumentPropertiesW")
 	procAdvancedDocumentPropertiesA                  = modwinspool_drv.NewProc("AdvancedDocumentPropertiesA")
-	procAdvancedDocumentPropertiesW                  = modwinspool_drv.NewProc("AdvancedDocumentPropertiesW")
 	procClosePrinter                                 = modwinspool_drv.NewProc("ClosePrinter")
 	procCloseSpoolFileHandle                         = modwinspool_drv.NewProc("CloseSpoolFileHandle")
 	procCommitSpoolData                              = modwinspool_drv.NewProc("CommitSpoolData")
+	procConfigurePort                                = modwinspool_drv.NewProc("ConfigurePortW")
 	procConfigurePortA                               = modwinspool_drv.NewProc("ConfigurePortA")
-	procConfigurePortW                               = modwinspool_drv.NewProc("ConfigurePortW")
 	procConnectToPrinterDlg                          = modwinspool_drv.NewProc("ConnectToPrinterDlg")
 	procCreatePrintAsyncNotifyChannel                = modwinspool_drv.NewProc("CreatePrintAsyncNotifyChannel")
 	procCreatePrinterIC                              = modwinspool_drv.NewProc("CreatePrinterIC")
+	procDeleteForm                                   = modwinspool_drv.NewProc("DeleteFormW")
 	procDeleteFormA                                  = modwinspool_drv.NewProc("DeleteFormA")
-	procDeleteFormW                                  = modwinspool_drv.NewProc("DeleteFormW")
 	procDeleteJobNamedProperty                       = modwinspool_drv.NewProc("DeleteJobNamedProperty")
+	procDeleteMonitor                                = modwinspool_drv.NewProc("DeleteMonitorW")
 	procDeleteMonitorA                               = modwinspool_drv.NewProc("DeleteMonitorA")
-	procDeleteMonitorW                               = modwinspool_drv.NewProc("DeleteMonitorW")
+	procDeletePort                                   = modwinspool_drv.NewProc("DeletePortW")
 	procDeletePortA                                  = modwinspool_drv.NewProc("DeletePortA")
-	procDeletePortW                                  = modwinspool_drv.NewProc("DeletePortW")
+	procDeletePrintProcessor                         = modwinspool_drv.NewProc("DeletePrintProcessorW")
 	procDeletePrintProcessorA                        = modwinspool_drv.NewProc("DeletePrintProcessorA")
-	procDeletePrintProcessorW                        = modwinspool_drv.NewProc("DeletePrintProcessorW")
+	procDeletePrintProvidor                          = modwinspool_drv.NewProc("DeletePrintProvidorW")
 	procDeletePrintProvidorA                         = modwinspool_drv.NewProc("DeletePrintProvidorA")
-	procDeletePrintProvidorW                         = modwinspool_drv.NewProc("DeletePrintProvidorW")
 	procDeletePrinter                                = modwinspool_drv.NewProc("DeletePrinter")
+	procDeletePrinterConnection                      = modwinspool_drv.NewProc("DeletePrinterConnectionW")
 	procDeletePrinterConnectionA                     = modwinspool_drv.NewProc("DeletePrinterConnectionA")
-	procDeletePrinterConnectionW                     = modwinspool_drv.NewProc("DeletePrinterConnectionW")
+	procDeletePrinterData                            = modwinspool_drv.NewProc("DeletePrinterDataW")
 	procDeletePrinterDataA                           = modwinspool_drv.NewProc("DeletePrinterDataA")
+	procDeletePrinterDataEx                          = modwinspool_drv.NewProc("DeletePrinterDataExW")
 	procDeletePrinterDataExA                         = modwinspool_drv.NewProc("DeletePrinterDataExA")
-	procDeletePrinterDataExW                         = modwinspool_drv.NewProc("DeletePrinterDataExW")
-	procDeletePrinterDataW                           = modwinspool_drv.NewProc("DeletePrinterDataW")
+	procDeletePrinterDriver                          = modwinspool_drv.NewProc("DeletePrinterDriverW")
 	procDeletePrinterDriverA                         = modwinspool_drv.NewProc("DeletePrinterDriverA")
+	procDeletePrinterDriverEx                        = modwinspool_drv.NewProc("DeletePrinterDriverExW")
 	procDeletePrinterDriverExA                       = modwinspool_drv.NewProc("DeletePrinterDriverExA")
-	procDeletePrinterDriverExW                       = modwinspool_drv.NewProc("DeletePrinterDriverExW")
+	procDeletePrinterDriverPackage                   = modwinspool_drv.NewProc("DeletePrinterDriverPackageW")
 	procDeletePrinterDriverPackageA                  = modwinspool_drv.NewProc("DeletePrinterDriverPackageA")
-	procDeletePrinterDriverPackageW                  = modwinspool_drv.NewProc("DeletePrinterDriverPackageW")
-	procDeletePrinterDriverW                         = modwinspool_drv.NewProc("DeletePrinterDriverW")
 	procDeletePrinterIC                              = modwinspool_drv.NewProc("DeletePrinterIC")
+	procDeletePrinterKey                             = modwinspool_drv.NewProc("DeletePrinterKeyW")
 	procDeletePrinterKeyA                            = modwinspool_drv.NewProc("DeletePrinterKeyA")
-	procDeletePrinterKeyW                            = modwinspool_drv.NewProc("DeletePrinterKeyW")
 	procDevQueryPrint                                = modwinspool_drv.NewProc("DevQueryPrint")
 	procDevQueryPrintEx                              = modwinspool_drv.NewProc("DevQueryPrintEx")
+	procDocumentProperties                           = modwinspool_drv.NewProc("DocumentPropertiesW")
 	procDocumentPropertiesA                          = modwinspool_drv.NewProc("DocumentPropertiesA")
-	procDocumentPropertiesW                          = modwinspool_drv.NewProc("DocumentPropertiesW")
 	procEndDocPrinter                                = modwinspool_drv.NewProc("EndDocPrinter")
 	procEndPagePrinter                               = modwinspool_drv.NewProc("EndPagePrinter")
+	procEnumForms                                    = modwinspool_drv.NewProc("EnumFormsW")
 	procEnumFormsA                                   = modwinspool_drv.NewProc("EnumFormsA")
-	procEnumFormsW                                   = modwinspool_drv.NewProc("EnumFormsW")
 	procEnumJobNamedProperties                       = modwinspool_drv.NewProc("EnumJobNamedProperties")
+	procEnumJobs                                     = modwinspool_drv.NewProc("EnumJobsW")
 	procEnumJobsA                                    = modwinspool_drv.NewProc("EnumJobsA")
-	procEnumJobsW                                    = modwinspool_drv.NewProc("EnumJobsW")
+	procEnumMonitors                                 = modwinspool_drv.NewProc("EnumMonitorsW")
 	procEnumMonitorsA                                = modwinspool_drv.NewProc("EnumMonitorsA")
-	procEnumMonitorsW                                = modwinspool_drv.NewProc("EnumMonitorsW")
+	procEnumPorts                                    = modwinspool_drv.NewProc("EnumPortsW")
 	procEnumPortsA                                   = modwinspool_drv.NewProc("EnumPortsA")
-	procEnumPortsW                                   = modwinspool_drv.NewProc("EnumPortsW")
+	procEnumPrintProcessorDatatypes                  = modwinspool_drv.NewProc("EnumPrintProcessorDatatypesW")
 	procEnumPrintProcessorDatatypesA                 = modwinspool_drv.NewProc("EnumPrintProcessorDatatypesA")
-	procEnumPrintProcessorDatatypesW                 = modwinspool_drv.NewProc("EnumPrintProcessorDatatypesW")
+	procEnumPrintProcessors                          = modwinspool_drv.NewProc("EnumPrintProcessorsW")
 	procEnumPrintProcessorsA                         = modwinspool_drv.NewProc("EnumPrintProcessorsA")
-	procEnumPrintProcessorsW                         = modwinspool_drv.NewProc("EnumPrintProcessorsW")
+	procEnumPrinterData                              = modwinspool_drv.NewProc("EnumPrinterDataW")
 	procEnumPrinterDataA                             = modwinspool_drv.NewProc("EnumPrinterDataA")
+	procEnumPrinterDataEx                            = modwinspool_drv.NewProc("EnumPrinterDataExW")
 	procEnumPrinterDataExA                           = modwinspool_drv.NewProc("EnumPrinterDataExA")
-	procEnumPrinterDataExW                           = modwinspool_drv.NewProc("EnumPrinterDataExW")
-	procEnumPrinterDataW                             = modwinspool_drv.NewProc("EnumPrinterDataW")
+	procEnumPrinterDrivers                           = modwinspool_drv.NewProc("EnumPrinterDriversW")
 	procEnumPrinterDriversA                          = modwinspool_drv.NewProc("EnumPrinterDriversA")
-	procEnumPrinterDriversW                          = modwinspool_drv.NewProc("EnumPrinterDriversW")
+	procEnumPrinterKey                               = modwinspool_drv.NewProc("EnumPrinterKeyW")
 	procEnumPrinterKeyA                              = modwinspool_drv.NewProc("EnumPrinterKeyA")
-	procEnumPrinterKeyW                              = modwinspool_drv.NewProc("EnumPrinterKeyW")
+	procEnumPrinters                                 = modwinspool_drv.NewProc("EnumPrintersW")
 	procEnumPrintersA                                = modwinspool_drv.NewProc("EnumPrintersA")
-	procEnumPrintersW                                = modwinspool_drv.NewProc("EnumPrintersW")
 	procExtDeviceMode                                = modwinspool_drv.NewProc("ExtDeviceMode")
 	procFindClosePrinterChangeNotification           = modwinspool_drv.NewProc("FindClosePrinterChangeNotification")
 	procFindFirstPrinterChangeNotification           = modwinspool_drv.NewProc("FindFirstPrinterChangeNotification")
@@ -167,74 +167,74 @@ var (
 	procFreePrintNamedPropertyArray                  = modwinspool_drv.NewProc("FreePrintNamedPropertyArray")
 	procFreePrintPropertyValue                       = modwinspool_drv.NewProc("FreePrintPropertyValue")
 	procFreePrinterNotifyInfo                        = modwinspool_drv.NewProc("FreePrinterNotifyInfo")
+	procGetCorePrinterDrivers                        = modwinspool_drv.NewProc("GetCorePrinterDriversW")
 	procGetCorePrinterDriversA                       = modwinspool_drv.NewProc("GetCorePrinterDriversA")
-	procGetCorePrinterDriversW                       = modwinspool_drv.NewProc("GetCorePrinterDriversW")
+	procGetDefaultPrinter                            = modwinspool_drv.NewProc("GetDefaultPrinterW")
 	procGetDefaultPrinterA                           = modwinspool_drv.NewProc("GetDefaultPrinterA")
-	procGetDefaultPrinterW                           = modwinspool_drv.NewProc("GetDefaultPrinterW")
+	procGetForm                                      = modwinspool_drv.NewProc("GetFormW")
 	procGetFormA                                     = modwinspool_drv.NewProc("GetFormA")
-	procGetFormW                                     = modwinspool_drv.NewProc("GetFormW")
+	procGetJob                                       = modwinspool_drv.NewProc("GetJobW")
 	procGetJobA                                      = modwinspool_drv.NewProc("GetJobA")
 	procGetJobNamedPropertyValue                     = modwinspool_drv.NewProc("GetJobNamedPropertyValue")
-	procGetJobW                                      = modwinspool_drv.NewProc("GetJobW")
 	procGetPrintExecutionData                        = modwinspool_drv.NewProc("GetPrintExecutionData")
 	procGetPrintOutputInfo                           = modwinspool_drv.NewProc("GetPrintOutputInfo")
+	procGetPrintProcessorDirectory                   = modwinspool_drv.NewProc("GetPrintProcessorDirectoryW")
 	procGetPrintProcessorDirectoryA                  = modwinspool_drv.NewProc("GetPrintProcessorDirectoryA")
-	procGetPrintProcessorDirectoryW                  = modwinspool_drv.NewProc("GetPrintProcessorDirectoryW")
+	procGetPrinter                                   = modwinspool_drv.NewProc("GetPrinterW")
 	procGetPrinterA                                  = modwinspool_drv.NewProc("GetPrinterA")
+	procGetPrinterData                               = modwinspool_drv.NewProc("GetPrinterDataW")
 	procGetPrinterDataA                              = modwinspool_drv.NewProc("GetPrinterDataA")
+	procGetPrinterDataEx                             = modwinspool_drv.NewProc("GetPrinterDataExW")
 	procGetPrinterDataExA                            = modwinspool_drv.NewProc("GetPrinterDataExA")
-	procGetPrinterDataExW                            = modwinspool_drv.NewProc("GetPrinterDataExW")
-	procGetPrinterDataW                              = modwinspool_drv.NewProc("GetPrinterDataW")
+	procGetPrinterDriver                             = modwinspool_drv.NewProc("GetPrinterDriverW")
+	procGetPrinterDriver2                            = modwinspool_drv.NewProc("GetPrinterDriver2W")
 	procGetPrinterDriver2A                           = modwinspool_drv.NewProc("GetPrinterDriver2A")
-	procGetPrinterDriver2W                           = modwinspool_drv.NewProc("GetPrinterDriver2W")
 	procGetPrinterDriverA                            = modwinspool_drv.NewProc("GetPrinterDriverA")
+	procGetPrinterDriverDirectory                    = modwinspool_drv.NewProc("GetPrinterDriverDirectoryW")
 	procGetPrinterDriverDirectoryA                   = modwinspool_drv.NewProc("GetPrinterDriverDirectoryA")
-	procGetPrinterDriverDirectoryW                   = modwinspool_drv.NewProc("GetPrinterDriverDirectoryW")
+	procGetPrinterDriverPackagePath                  = modwinspool_drv.NewProc("GetPrinterDriverPackagePathW")
 	procGetPrinterDriverPackagePathA                 = modwinspool_drv.NewProc("GetPrinterDriverPackagePathA")
-	procGetPrinterDriverPackagePathW                 = modwinspool_drv.NewProc("GetPrinterDriverPackagePathW")
-	procGetPrinterDriverW                            = modwinspool_drv.NewProc("GetPrinterDriverW")
-	procGetPrinterW                                  = modwinspool_drv.NewProc("GetPrinterW")
 	procGetSpoolFileHandle                           = modwinspool_drv.NewProc("GetSpoolFileHandle")
+	procInstallPrinterDriverFromPackage              = modwinspool_drv.NewProc("InstallPrinterDriverFromPackageW")
 	procInstallPrinterDriverFromPackageA             = modwinspool_drv.NewProc("InstallPrinterDriverFromPackageA")
-	procInstallPrinterDriverFromPackageW             = modwinspool_drv.NewProc("InstallPrinterDriverFromPackageW")
+	procIsValidDevmode                               = modwinspool_drv.NewProc("IsValidDevmodeW")
 	procIsValidDevmodeA                              = modwinspool_drv.NewProc("IsValidDevmodeA")
-	procIsValidDevmodeW                              = modwinspool_drv.NewProc("IsValidDevmodeW")
+	procOpenPrinter                                  = modwinspool_drv.NewProc("OpenPrinterW")
+	procOpenPrinter2                                 = modwinspool_drv.NewProc("OpenPrinter2W")
 	procOpenPrinter2A                                = modwinspool_drv.NewProc("OpenPrinter2A")
-	procOpenPrinter2W                                = modwinspool_drv.NewProc("OpenPrinter2W")
 	procOpenPrinterA                                 = modwinspool_drv.NewProc("OpenPrinterA")
-	procOpenPrinterW                                 = modwinspool_drv.NewProc("OpenPrinterW")
 	procPlayGdiScriptOnPrinterIC                     = modwinspool_drv.NewProc("PlayGdiScriptOnPrinterIC")
+	procPrinterMessageBox                            = modwinspool_drv.NewProc("PrinterMessageBoxW")
 	procPrinterMessageBoxA                           = modwinspool_drv.NewProc("PrinterMessageBoxA")
-	procPrinterMessageBoxW                           = modwinspool_drv.NewProc("PrinterMessageBoxW")
 	procPrinterProperties                            = modwinspool_drv.NewProc("PrinterProperties")
 	procReadPrinter                                  = modwinspool_drv.NewProc("ReadPrinter")
 	procRegisterForPrintAsyncNotifications           = modwinspool_drv.NewProc("RegisterForPrintAsyncNotifications")
 	procReportJobProcessingProgress                  = modwinspool_drv.NewProc("ReportJobProcessingProgress")
+	procResetPrinter                                 = modwinspool_drv.NewProc("ResetPrinterW")
 	procResetPrinterA                                = modwinspool_drv.NewProc("ResetPrinterA")
-	procResetPrinterW                                = modwinspool_drv.NewProc("ResetPrinterW")
 	procRouterFreeBidiResponseContainer              = modwinspool_drv.NewProc("RouterFreeBidiResponseContainer")
 	procScheduleJob                                  = modwinspool_drv.NewProc("ScheduleJob")
+	procSetDefaultPrinter                            = modwinspool_drv.NewProc("SetDefaultPrinterW")
 	procSetDefaultPrinterA                           = modwinspool_drv.NewProc("SetDefaultPrinterA")
-	procSetDefaultPrinterW                           = modwinspool_drv.NewProc("SetDefaultPrinterW")
+	procSetForm                                      = modwinspool_drv.NewProc("SetFormW")
 	procSetFormA                                     = modwinspool_drv.NewProc("SetFormA")
-	procSetFormW                                     = modwinspool_drv.NewProc("SetFormW")
+	procSetJob                                       = modwinspool_drv.NewProc("SetJobW")
 	procSetJobA                                      = modwinspool_drv.NewProc("SetJobA")
 	procSetJobNamedProperty                          = modwinspool_drv.NewProc("SetJobNamedProperty")
-	procSetJobW                                      = modwinspool_drv.NewProc("SetJobW")
+	procSetPort                                      = modwinspool_drv.NewProc("SetPortW")
 	procSetPortA                                     = modwinspool_drv.NewProc("SetPortA")
-	procSetPortW                                     = modwinspool_drv.NewProc("SetPortW")
+	procSetPrinter                                   = modwinspool_drv.NewProc("SetPrinterW")
 	procSetPrinterA                                  = modwinspool_drv.NewProc("SetPrinterA")
+	procSetPrinterData                               = modwinspool_drv.NewProc("SetPrinterDataW")
 	procSetPrinterDataA                              = modwinspool_drv.NewProc("SetPrinterDataA")
+	procSetPrinterDataEx                             = modwinspool_drv.NewProc("SetPrinterDataExW")
 	procSetPrinterDataExA                            = modwinspool_drv.NewProc("SetPrinterDataExA")
-	procSetPrinterDataExW                            = modwinspool_drv.NewProc("SetPrinterDataExW")
-	procSetPrinterDataW                              = modwinspool_drv.NewProc("SetPrinterDataW")
-	procSetPrinterW                                  = modwinspool_drv.NewProc("SetPrinterW")
+	procStartDocPrinter                              = modwinspool_drv.NewProc("StartDocPrinterW")
 	procStartDocPrinterA                             = modwinspool_drv.NewProc("StartDocPrinterA")
-	procStartDocPrinterW                             = modwinspool_drv.NewProc("StartDocPrinterW")
 	procStartPagePrinter                             = modwinspool_drv.NewProc("StartPagePrinter")
 	procUnRegisterForPrintAsyncNotifications         = modwinspool_drv.NewProc("UnRegisterForPrintAsyncNotifications")
+	procUploadPrinterDriverPackage                   = modwinspool_drv.NewProc("UploadPrinterDriverPackageW")
 	procUploadPrinterDriverPackageA                  = modwinspool_drv.NewProc("UploadPrinterDriverPackageA")
-	procUploadPrinterDriverPackageW                  = modwinspool_drv.NewProc("UploadPrinterDriverPackageW")
 	procWaitForPrinterChange                         = modwinspool_drv.NewProc("WaitForPrinterChange")
 	procWritePrinter                                 = modwinspool_drv.NewProc("WritePrinter")
 	procXcvDataW                                     = modwinspool_drv.NewProc("XcvDataW")
@@ -242,35 +242,46 @@ var (
 
 // AbortPrinter calls winspool.drv!AbortPrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/abortprinter
-func AbortPrinter(hPrinter PRINTER_HANDLE) foundation.BOOL {
+func AbortPrinter(hPrinter PRINTER_HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procAbortPrinter.Addr(), uintptr(hPrinter))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// AddForm calls winspool.drv!AddFormW.
+func AddForm(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte) bool {
+	r1, _, _ := syscall.SyscallN(procAddForm.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pForm)))
+	return r1 != 0
 }
 
 // AddFormA calls winspool.drv!AddFormA.
-func AddFormA(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte) foundation.BOOL {
+func AddFormA(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte) bool {
 	r1, _, _ := syscall.SyscallN(procAddFormA.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pForm)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// AddFormW calls winspool.drv!AddFormW.
-func AddFormW(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAddFormW.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pForm)))
-	return foundation.BOOL(r1)
+// AddJob calls winspool.drv!AddJobW.
+// https://learn.microsoft.com/windows/win32/printdocs/addjob
+func AddJob(hPrinter PRINTER_HANDLE, Level uint32, pData *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procAddJob.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pData)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	return r1 != 0
 }
 
 // AddJobA calls winspool.drv!AddJobA.
 // https://learn.microsoft.com/windows/win32/printdocs/addjob
-func AddJobA(hPrinter PRINTER_HANDLE, Level uint32, pData *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
+func AddJobA(hPrinter PRINTER_HANDLE, Level uint32, pData *byte, cbBuf uint32, pcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procAddJobA.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pData)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// AddJobW calls winspool.drv!AddJobW.
-// https://learn.microsoft.com/windows/win32/printdocs/addjob
-func AddJobW(hPrinter PRINTER_HANDLE, Level uint32, pData *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAddJobW.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pData)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+// AddMonitor calls winspool.drv!AddMonitorW.
+// https://learn.microsoft.com/windows/win32/printdocs/addmonitor
+func AddMonitor(pName string, Level uint32, pMonitors *byte) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, e1 := syscall.SyscallN(procAddMonitor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pMonitors)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // AddMonitorA calls winspool.drv!AddMonitorA.
@@ -283,10 +294,12 @@ func AddMonitorA(pName foundation.PSTR, Level uint32, pMonitors *byte) error {
 	return nil
 }
 
-// AddMonitorW calls winspool.drv!AddMonitorW.
-// https://learn.microsoft.com/windows/win32/printdocs/addmonitor
-func AddMonitorW(pName foundation.PWSTR, Level uint32, pMonitors *byte) error {
-	r1, _, e1 := syscall.SyscallN(procAddMonitorW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pMonitors)))
+// AddPort calls winspool.drv!AddPortW.
+// https://learn.microsoft.com/windows/win32/printdocs/addport
+func AddPort(pName string, hWnd foundation.HWND, pMonitorName string) error {
+	_pName := win32.UTF16Ptr(pName)
+	_pMonitorName := win32.UTF16Ptr(pMonitorName)
+	r1, _, e1 := syscall.SyscallN(procAddPort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(hWnd), uintptr(unsafe.Pointer(_pMonitorName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -303,48 +316,55 @@ func AddPortA(pName foundation.PSTR, hWnd foundation.HWND, pMonitorName foundati
 	return nil
 }
 
-// AddPortW calls winspool.drv!AddPortW.
-// https://learn.microsoft.com/windows/win32/printdocs/addport
-func AddPortW(pName foundation.PWSTR, hWnd foundation.HWND, pMonitorName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procAddPortW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(hWnd), uintptr(unsafe.Pointer(pMonitorName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// AddPrintDeviceObject calls SPOOLSS!AddPrintDeviceObject.
+func AddPrintDeviceObject(hPrinter PRINTER_HANDLE, phDeviceObject *foundation.HANDLE) error {
+	r1, _, _ := syscall.SyscallN(procAddPrintDeviceObject.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(phDeviceObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
-// AddPrintDeviceObject calls SPOOLSS!AddPrintDeviceObject.
-func AddPrintDeviceObject(hPrinter PRINTER_HANDLE, phDeviceObject *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAddPrintDeviceObject.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(phDeviceObject)))
-	return foundation.HRESULT(r1)
+// AddPrintProcessor calls winspool.drv!AddPrintProcessorW.
+// https://learn.microsoft.com/windows/win32/printdocs/addprintprocessor
+func AddPrintProcessor(pName string, pEnvironment string, pPathName string, pPrintProcessorName string) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	_pPathName := win32.UTF16Ptr(pPathName)
+	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
+	r1, _, _ := syscall.SyscallN(procAddPrintProcessor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pPathName)), uintptr(unsafe.Pointer(_pPrintProcessorName)))
+	return r1 != 0
 }
 
 // AddPrintProcessorA calls winspool.drv!AddPrintProcessorA.
 // https://learn.microsoft.com/windows/win32/printdocs/addprintprocessor
-func AddPrintProcessorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pPathName foundation.PSTR, pPrintProcessorName foundation.PSTR) foundation.BOOL {
+func AddPrintProcessorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pPathName foundation.PSTR, pPrintProcessorName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procAddPrintProcessorA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pPathName)), uintptr(unsafe.Pointer(pPrintProcessorName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// AddPrintProcessorW calls winspool.drv!AddPrintProcessorW.
-// https://learn.microsoft.com/windows/win32/printdocs/addprintprocessor
-func AddPrintProcessorW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, pPathName foundation.PWSTR, pPrintProcessorName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAddPrintProcessorW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pPathName)), uintptr(unsafe.Pointer(pPrintProcessorName)))
-	return foundation.BOOL(r1)
+// AddPrintProvidor calls winspool.drv!AddPrintProvidorW.
+// https://learn.microsoft.com/windows/win32/printdocs/addprintprovidor
+func AddPrintProvidor(pName string, Level uint32, pProvidorInfo *byte) bool {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(procAddPrintProvidor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pProvidorInfo)))
+	return r1 != 0
 }
 
 // AddPrintProvidorA calls winspool.drv!AddPrintProvidorA.
 // https://learn.microsoft.com/windows/win32/printdocs/addprintprovidor
-func AddPrintProvidorA(pName foundation.PSTR, Level uint32, pProvidorInfo *byte) foundation.BOOL {
+func AddPrintProvidorA(pName foundation.PSTR, Level uint32, pProvidorInfo *byte) bool {
 	r1, _, _ := syscall.SyscallN(procAddPrintProvidorA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pProvidorInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// AddPrintProvidorW calls winspool.drv!AddPrintProvidorW.
-// https://learn.microsoft.com/windows/win32/printdocs/addprintprovidor
-func AddPrintProvidorW(pName foundation.PWSTR, Level uint32, pProvidorInfo *byte) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAddPrintProvidorW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pProvidorInfo)))
-	return foundation.BOOL(r1)
+// AddPrinter calls winspool.drv!AddPrinterW.
+// https://learn.microsoft.com/windows/win32/printdocs/addprinter
+func AddPrinter(pName string, Level uint32, pPrinter *byte) (PRINTER_HANDLE, error) {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, e1 := syscall.SyscallN(procAddPrinter.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)))
+	ret := PRINTER_HANDLE(r1)
+	if ret == ^PRINTER_HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // AddPrinterA calls winspool.drv!AddPrinterA.
@@ -358,31 +378,44 @@ func AddPrinterA(pName foundation.PSTR, Level uint32, pPrinter *byte) (PRINTER_H
 	return ret, nil
 }
 
-// AddPrinterConnection2A calls winspool.drv!AddPrinterConnection2A.
-func AddPrinterConnection2A(hWnd foundation.HWND, pszName foundation.PSTR, dwLevel uint32, pConnectionInfo unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAddPrinterConnection2A.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszName)), uintptr(dwLevel), uintptr(unsafe.Pointer(pConnectionInfo)))
-	return foundation.BOOL(r1)
+// AddPrinterConnection calls winspool.drv!AddPrinterConnectionW.
+// https://learn.microsoft.com/windows/win32/printdocs/addprinterconnection
+func AddPrinterConnection(pName string) bool {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(procAddPrinterConnection.Addr(), uintptr(unsafe.Pointer(_pName)))
+	return r1 != 0
 }
 
-// AddPrinterConnection2W calls winspool.drv!AddPrinterConnection2W.
+// AddPrinterConnection2 calls winspool.drv!AddPrinterConnection2W.
 // https://learn.microsoft.com/windows/win32/printdocs/addprinterconnection2
-func AddPrinterConnection2W(hWnd foundation.HWND, pszName foundation.PWSTR, dwLevel uint32, pConnectionInfo unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAddPrinterConnection2W.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszName)), uintptr(dwLevel), uintptr(unsafe.Pointer(pConnectionInfo)))
-	return foundation.BOOL(r1)
+func AddPrinterConnection2(hWnd foundation.HWND, pszName string, dwLevel uint32, pConnectionInfo unsafe.Pointer) bool {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procAddPrinterConnection2.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszName)), uintptr(dwLevel), uintptr(unsafe.Pointer(pConnectionInfo)))
+	return r1 != 0
+}
+
+// AddPrinterConnection2A calls winspool.drv!AddPrinterConnection2A.
+func AddPrinterConnection2A(hWnd foundation.HWND, pszName foundation.PSTR, dwLevel uint32, pConnectionInfo unsafe.Pointer) bool {
+	r1, _, _ := syscall.SyscallN(procAddPrinterConnection2A.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszName)), uintptr(dwLevel), uintptr(unsafe.Pointer(pConnectionInfo)))
+	return r1 != 0
 }
 
 // AddPrinterConnectionA calls winspool.drv!AddPrinterConnectionA.
 // https://learn.microsoft.com/windows/win32/printdocs/addprinterconnection
-func AddPrinterConnectionA(pName foundation.PSTR) foundation.BOOL {
+func AddPrinterConnectionA(pName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procAddPrinterConnectionA.Addr(), uintptr(unsafe.Pointer(pName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// AddPrinterConnectionW calls winspool.drv!AddPrinterConnectionW.
-// https://learn.microsoft.com/windows/win32/printdocs/addprinterconnection
-func AddPrinterConnectionW(pName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAddPrinterConnectionW.Addr(), uintptr(unsafe.Pointer(pName)))
-	return foundation.BOOL(r1)
+// AddPrinterDriver calls winspool.drv!AddPrinterDriverW.
+// https://learn.microsoft.com/windows/win32/printdocs/addprinterdriver
+func AddPrinterDriver(pName string, Level uint32, pDriverInfo *byte) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, e1 := syscall.SyscallN(procAddPrinterDriver.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // AddPrinterDriverA calls winspool.drv!AddPrinterDriverA.
@@ -395,39 +428,27 @@ func AddPrinterDriverA(pName foundation.PSTR, Level uint32, pDriverInfo *byte) e
 	return nil
 }
 
+// AddPrinterDriverEx calls winspool.drv!AddPrinterDriverExW.
+// https://learn.microsoft.com/windows/win32/printdocs/addprinterdriverex
+func AddPrinterDriverEx(pName string, Level uint32, lpbDriverInfo *byte, dwFileCopyFlags uint32) bool {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(procAddPrinterDriverEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(lpbDriverInfo)), uintptr(dwFileCopyFlags))
+	return r1 != 0
+}
+
 // AddPrinterDriverExA calls winspool.drv!AddPrinterDriverExA.
 // https://learn.microsoft.com/windows/win32/printdocs/addprinterdriverex
-func AddPrinterDriverExA(pName foundation.PSTR, Level uint32, lpbDriverInfo *byte, dwFileCopyFlags uint32) foundation.BOOL {
+func AddPrinterDriverExA(pName foundation.PSTR, Level uint32, lpbDriverInfo *byte, dwFileCopyFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procAddPrinterDriverExA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(lpbDriverInfo)), uintptr(dwFileCopyFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// AddPrinterDriverExW calls winspool.drv!AddPrinterDriverExW.
-// https://learn.microsoft.com/windows/win32/printdocs/addprinterdriverex
-func AddPrinterDriverExW(pName foundation.PWSTR, Level uint32, lpbDriverInfo *byte, dwFileCopyFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAddPrinterDriverExW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(lpbDriverInfo)), uintptr(dwFileCopyFlags))
-	return foundation.BOOL(r1)
-}
-
-// AddPrinterDriverW calls winspool.drv!AddPrinterDriverW.
-// https://learn.microsoft.com/windows/win32/printdocs/addprinterdriver
-func AddPrinterDriverW(pName foundation.PWSTR, Level uint32, pDriverInfo *byte) error {
-	r1, _, e1 := syscall.SyscallN(procAddPrinterDriverW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// AddPrinterW calls winspool.drv!AddPrinterW.
-// https://learn.microsoft.com/windows/win32/printdocs/addprinter
-func AddPrinterW(pName foundation.PWSTR, Level uint32, pPrinter *byte) (PRINTER_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procAddPrinterW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)))
-	ret := PRINTER_HANDLE(r1)
-	if ret == ^PRINTER_HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
+// AdvancedDocumentProperties calls winspool.drv!AdvancedDocumentPropertiesW.
+// https://learn.microsoft.com/windows/win32/printdocs/advanceddocumentproperties
+func AdvancedDocumentProperties(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pDeviceName string, pDevModeOutput *graphicsgdi.DEVMODEW, pDevModeInput *graphicsgdi.DEVMODEW) int32 {
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	r1, _, _ := syscall.SyscallN(procAdvancedDocumentProperties.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(unsafe.Pointer(pDevModeOutput)), uintptr(unsafe.Pointer(pDevModeInput)))
+	return int32(r1)
 }
 
 // AdvancedDocumentPropertiesA calls winspool.drv!AdvancedDocumentPropertiesA.
@@ -437,17 +458,10 @@ func AdvancedDocumentPropertiesA(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, 
 	return int32(r1)
 }
 
-// AdvancedDocumentPropertiesW calls winspool.drv!AdvancedDocumentPropertiesW.
-// https://learn.microsoft.com/windows/win32/printdocs/advanceddocumentproperties
-func AdvancedDocumentPropertiesW(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pDeviceName foundation.PWSTR, pDevModeOutput *graphicsgdi.DEVMODEW, pDevModeInput *graphicsgdi.DEVMODEW) int32 {
-	r1, _, _ := syscall.SyscallN(procAdvancedDocumentPropertiesW.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(pDeviceName)), uintptr(unsafe.Pointer(pDevModeOutput)), uintptr(unsafe.Pointer(pDevModeInput)))
-	return int32(r1)
-}
-
 // AppendPrinterNotifyInfoData calls SPOOLSS!AppendPrinterNotifyInfoData.
-func AppendPrinterNotifyInfoData(pInfoDest *PRINTER_NOTIFY_INFO, pDataSrc *PRINTER_NOTIFY_INFO_DATA, fdwFlags uint32) foundation.BOOL {
+func AppendPrinterNotifyInfoData(pInfoDest *PRINTER_NOTIFY_INFO, pDataSrc *PRINTER_NOTIFY_INFO_DATA, fdwFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procAppendPrinterNotifyInfoData.Addr(), uintptr(unsafe.Pointer(pInfoDest)), uintptr(unsafe.Pointer(pDataSrc)), uintptr(fdwFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CallRouterFindFirstPrinterChangeNotification calls SPOOLSS!CallRouterFindFirstPrinterChangeNotification.
@@ -468,9 +482,9 @@ func ClosePrinter(hPrinter PRINTER_HANDLE) error {
 
 // CloseSpoolFileHandle calls winspool.drv!CloseSpoolFileHandle.
 // https://learn.microsoft.com/windows/win32/printdocs/closespoolfilehandle
-func CloseSpoolFileHandle(hPrinter PRINTER_HANDLE, hSpoolFile foundation.HANDLE) foundation.BOOL {
+func CloseSpoolFileHandle(hPrinter PRINTER_HANDLE, hSpoolFile foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procCloseSpoolFileHandle.Addr(), uintptr(hPrinter), uintptr(hSpoolFile))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CommitSpoolData calls winspool.drv!CommitSpoolData.
@@ -480,30 +494,32 @@ func CommitSpoolData(hPrinter PRINTER_HANDLE, hSpoolFile foundation.HANDLE, cbCo
 	return foundation.HANDLE(r1)
 }
 
+// CommonPropertySheetUI calls COMPSTUI!CommonPropertySheetUIW.
+func CommonPropertySheetUI(hWndOwner foundation.HWND, pfnPropSheetUI PFNPROPSHEETUI, lParam foundation.LPARAM, pResult *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procCommonPropertySheetUI.Addr(), uintptr(hWndOwner), uintptr(pfnPropSheetUI), uintptr(lParam), uintptr(unsafe.Pointer(pResult)))
+	return int32(r1)
+}
+
 // CommonPropertySheetUIA calls COMPSTUI!CommonPropertySheetUIA.
 func CommonPropertySheetUIA(hWndOwner foundation.HWND, pfnPropSheetUI PFNPROPSHEETUI, lParam foundation.LPARAM, pResult *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procCommonPropertySheetUIA.Addr(), uintptr(hWndOwner), uintptr(pfnPropSheetUI), uintptr(lParam), uintptr(unsafe.Pointer(pResult)))
 	return int32(r1)
 }
 
-// CommonPropertySheetUIW calls COMPSTUI!CommonPropertySheetUIW.
-func CommonPropertySheetUIW(hWndOwner foundation.HWND, pfnPropSheetUI PFNPROPSHEETUI, lParam foundation.LPARAM, pResult *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procCommonPropertySheetUIW.Addr(), uintptr(hWndOwner), uintptr(pfnPropSheetUI), uintptr(lParam), uintptr(unsafe.Pointer(pResult)))
-	return int32(r1)
+// ConfigurePort calls winspool.drv!ConfigurePortW.
+// https://learn.microsoft.com/windows/win32/printdocs/configureport
+func ConfigurePort(pName string, hWnd foundation.HWND, pPortName string) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pPortName := win32.UTF16Ptr(pPortName)
+	r1, _, _ := syscall.SyscallN(procConfigurePort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(hWnd), uintptr(unsafe.Pointer(_pPortName)))
+	return r1 != 0
 }
 
 // ConfigurePortA calls winspool.drv!ConfigurePortA.
 // https://learn.microsoft.com/windows/win32/printdocs/configureport
-func ConfigurePortA(pName foundation.PSTR, hWnd foundation.HWND, pPortName foundation.PSTR) foundation.BOOL {
+func ConfigurePortA(pName foundation.PSTR, hWnd foundation.HWND, pPortName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procConfigurePortA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(hWnd), uintptr(unsafe.Pointer(pPortName)))
-	return foundation.BOOL(r1)
-}
-
-// ConfigurePortW calls winspool.drv!ConfigurePortW.
-// https://learn.microsoft.com/windows/win32/printdocs/configureport
-func ConfigurePortW(pName foundation.PWSTR, hWnd foundation.HWND, pPortName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procConfigurePortW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(hWnd), uintptr(unsafe.Pointer(pPortName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ConnectToPrinterDlg calls winspool.drv!ConnectToPrinterDlg.
@@ -516,9 +532,10 @@ func ConnectToPrinterDlg(hwnd foundation.HWND, Flags uint32) foundation.HANDLE {
 // CreatePrintAsyncNotifyChannel calls winspool.drv!CreatePrintAsyncNotifyChannel.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-createprintasyncnotifychannel
 // Minimum OS: windows6.0.6000.
-func CreatePrintAsyncNotifyChannel(pszName foundation.PWSTR, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreatePrintAsyncNotifyChannel.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
-	return foundation.HRESULT(r1)
+func CreatePrintAsyncNotifyChannel(pszName string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procCreatePrintAsyncNotifyChannel.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePrinterIC calls winspool.drv!CreatePrinterIC.
@@ -527,24 +544,39 @@ func CreatePrinterIC(hPrinter PRINTER_HANDLE, pDevMode *graphicsgdi.DEVMODEW) fo
 	return foundation.HANDLE(r1)
 }
 
-// DeleteFormA calls winspool.drv!DeleteFormA.
+// DeleteForm calls winspool.drv!DeleteFormW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteform
-func DeleteFormA(hPrinter PRINTER_HANDLE, pFormName foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeleteFormA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pFormName)))
-	return foundation.BOOL(r1)
+func DeleteForm(hPrinter PRINTER_HANDLE, pFormName string) bool {
+	_pFormName := win32.UTF16Ptr(pFormName)
+	r1, _, _ := syscall.SyscallN(procDeleteForm.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pFormName)))
+	return r1 != 0
 }
 
-// DeleteFormW calls winspool.drv!DeleteFormW.
+// DeleteFormA calls winspool.drv!DeleteFormA.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteform
-func DeleteFormW(hPrinter PRINTER_HANDLE, pFormName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeleteFormW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pFormName)))
-	return foundation.BOOL(r1)
+func DeleteFormA(hPrinter PRINTER_HANDLE, pFormName foundation.PSTR) bool {
+	r1, _, _ := syscall.SyscallN(procDeleteFormA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pFormName)))
+	return r1 != 0
 }
 
 // DeleteJobNamedProperty calls winspool.drv!DeleteJobNamedProperty.
-func DeleteJobNamedProperty(hPrinter PRINTER_HANDLE, JobId uint32, pszName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procDeleteJobNamedProperty.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(unsafe.Pointer(pszName)))
+func DeleteJobNamedProperty(hPrinter PRINTER_HANDLE, JobId uint32, pszName string) uint32 {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procDeleteJobNamedProperty.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(unsafe.Pointer(_pszName)))
 	return uint32(r1)
+}
+
+// DeleteMonitor calls winspool.drv!DeleteMonitorW.
+// https://learn.microsoft.com/windows/win32/printdocs/deletemonitor
+func DeleteMonitor(pName string, pEnvironment string, pMonitorName string) error {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	_pMonitorName := win32.UTF16Ptr(pMonitorName)
+	r1, _, e1 := syscall.SyscallN(procDeleteMonitor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pMonitorName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // DeleteMonitorA calls winspool.drv!DeleteMonitorA.
@@ -557,10 +589,12 @@ func DeleteMonitorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pMonito
 	return nil
 }
 
-// DeleteMonitorW calls winspool.drv!DeleteMonitorW.
-// https://learn.microsoft.com/windows/win32/printdocs/deletemonitor
-func DeleteMonitorW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, pMonitorName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteMonitorW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pMonitorName)))
+// DeletePort calls winspool.drv!DeletePortW.
+// https://learn.microsoft.com/windows/win32/printdocs/deleteport
+func DeletePort(pName string, hWnd foundation.HWND, pPortName string) error {
+	_pName := win32.UTF16Ptr(pName)
+	_pPortName := win32.UTF16Ptr(pPortName)
+	r1, _, e1 := syscall.SyscallN(procDeletePort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(hWnd), uintptr(unsafe.Pointer(_pPortName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -577,42 +611,38 @@ func DeletePortA(pName foundation.PSTR, hWnd foundation.HWND, pPortName foundati
 	return nil
 }
 
-// DeletePortW calls winspool.drv!DeletePortW.
-// https://learn.microsoft.com/windows/win32/printdocs/deleteport
-func DeletePortW(pName foundation.PWSTR, hWnd foundation.HWND, pPortName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procDeletePortW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(hWnd), uintptr(unsafe.Pointer(pPortName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// DeletePrintProcessor calls winspool.drv!DeletePrintProcessorW.
+// https://learn.microsoft.com/windows/win32/printdocs/deleteprintprocessor
+func DeletePrintProcessor(pName string, pEnvironment string, pPrintProcessorName string) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
+	r1, _, _ := syscall.SyscallN(procDeletePrintProcessor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pPrintProcessorName)))
+	return r1 != 0
 }
 
 // DeletePrintProcessorA calls winspool.drv!DeletePrintProcessorA.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprintprocessor
-func DeletePrintProcessorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pPrintProcessorName foundation.PSTR) foundation.BOOL {
+func DeletePrintProcessorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pPrintProcessorName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procDeletePrintProcessorA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pPrintProcessorName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// DeletePrintProcessorW calls winspool.drv!DeletePrintProcessorW.
-// https://learn.microsoft.com/windows/win32/printdocs/deleteprintprocessor
-func DeletePrintProcessorW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, pPrintProcessorName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeletePrintProcessorW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pPrintProcessorName)))
-	return foundation.BOOL(r1)
+// DeletePrintProvidor calls winspool.drv!DeletePrintProvidorW.
+// https://learn.microsoft.com/windows/win32/printdocs/deleteprintprovidor
+func DeletePrintProvidor(pName string, pEnvironment string, pPrintProvidorName string) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	_pPrintProvidorName := win32.UTF16Ptr(pPrintProvidorName)
+	r1, _, _ := syscall.SyscallN(procDeletePrintProvidor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pPrintProvidorName)))
+	return r1 != 0
 }
 
 // DeletePrintProvidorA calls winspool.drv!DeletePrintProvidorA.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprintprovidor
-func DeletePrintProvidorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pPrintProvidorName foundation.PSTR) foundation.BOOL {
+func DeletePrintProvidorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pPrintProvidorName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procDeletePrintProvidorA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pPrintProvidorName)))
-	return foundation.BOOL(r1)
-}
-
-// DeletePrintProvidorW calls winspool.drv!DeletePrintProvidorW.
-// https://learn.microsoft.com/windows/win32/printdocs/deleteprintprovidor
-func DeletePrintProvidorW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, pPrintProvidorName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeletePrintProvidorW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pPrintProvidorName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DeletePrinter calls winspool.drv!DeletePrinter.
@@ -625,24 +655,42 @@ func DeletePrinter(hPrinter PRINTER_HANDLE) error {
 	return nil
 }
 
-// DeletePrinterConnectionA calls winspool.drv!DeletePrinterConnectionA.
+// DeletePrinterConnection calls winspool.drv!DeletePrinterConnectionW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterconnection
-func DeletePrinterConnectionA(pName foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeletePrinterConnectionA.Addr(), uintptr(unsafe.Pointer(pName)))
-	return foundation.BOOL(r1)
+func DeletePrinterConnection(pName string) bool {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(procDeletePrinterConnection.Addr(), uintptr(unsafe.Pointer(_pName)))
+	return r1 != 0
 }
 
-// DeletePrinterConnectionW calls winspool.drv!DeletePrinterConnectionW.
+// DeletePrinterConnectionA calls winspool.drv!DeletePrinterConnectionA.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterconnection
-func DeletePrinterConnectionW(pName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeletePrinterConnectionW.Addr(), uintptr(unsafe.Pointer(pName)))
-	return foundation.BOOL(r1)
+func DeletePrinterConnectionA(pName foundation.PSTR) bool {
+	r1, _, _ := syscall.SyscallN(procDeletePrinterConnectionA.Addr(), uintptr(unsafe.Pointer(pName)))
+	return r1 != 0
+}
+
+// DeletePrinterData calls winspool.drv!DeletePrinterDataW.
+// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdata
+func DeletePrinterData(hPrinter PRINTER_HANDLE, pValueName string) uint32 {
+	_pValueName := win32.UTF16Ptr(pValueName)
+	r1, _, _ := syscall.SyscallN(procDeletePrinterData.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pValueName)))
+	return uint32(r1)
 }
 
 // DeletePrinterDataA calls winspool.drv!DeletePrinterDataA.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdata
 func DeletePrinterDataA(hPrinter PRINTER_HANDLE, pValueName foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDataA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)))
+	return uint32(r1)
+}
+
+// DeletePrinterDataEx calls winspool.drv!DeletePrinterDataExW.
+// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdataex
+func DeletePrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pValueName string) uint32 {
+	_pKeyName := win32.UTF16Ptr(pKeyName)
+	_pValueName := win32.UTF16Ptr(pValueName)
+	r1, _, _ := syscall.SyscallN(procDeletePrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(_pValueName)))
 	return uint32(r1)
 }
 
@@ -653,66 +701,69 @@ func DeletePrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pVa
 	return uint32(r1)
 }
 
-// DeletePrinterDataExW calls winspool.drv!DeletePrinterDataExW.
-// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdataex
-func DeletePrinterDataExW(hPrinter PRINTER_HANDLE, pKeyName foundation.PWSTR, pValueName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procDeletePrinterDataExW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pValueName)))
-	return uint32(r1)
-}
-
-// DeletePrinterDataW calls winspool.drv!DeletePrinterDataW.
-// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdata
-func DeletePrinterDataW(hPrinter PRINTER_HANDLE, pValueName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procDeletePrinterDataW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)))
-	return uint32(r1)
+// DeletePrinterDriver calls winspool.drv!DeletePrinterDriverW.
+// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriver
+func DeletePrinterDriver(pName string, pEnvironment string, pDriverName string) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	_pDriverName := win32.UTF16Ptr(pDriverName)
+	r1, _, _ := syscall.SyscallN(procDeletePrinterDriver.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pDriverName)))
+	return r1 != 0
 }
 
 // DeletePrinterDriverA calls winspool.drv!DeletePrinterDriverA.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriver
-func DeletePrinterDriverA(pName foundation.PSTR, pEnvironment foundation.PSTR, pDriverName foundation.PSTR) foundation.BOOL {
+func DeletePrinterDriverA(pName foundation.PSTR, pEnvironment foundation.PSTR, pDriverName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pDriverName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// DeletePrinterDriverEx calls winspool.drv!DeletePrinterDriverExW.
+// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverex
+func DeletePrinterDriverEx(pName string, pEnvironment string, pDriverName string, dwDeleteFlag uint32, dwVersionFlag uint32) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	_pDriverName := win32.UTF16Ptr(pDriverName)
+	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pDriverName)), uintptr(dwDeleteFlag), uintptr(dwVersionFlag))
+	return r1 != 0
 }
 
 // DeletePrinterDriverExA calls winspool.drv!DeletePrinterDriverExA.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverex
-func DeletePrinterDriverExA(pName foundation.PSTR, pEnvironment foundation.PSTR, pDriverName foundation.PSTR, dwDeleteFlag uint32, dwVersionFlag uint32) foundation.BOOL {
+func DeletePrinterDriverExA(pName foundation.PSTR, pEnvironment foundation.PSTR, pDriverName foundation.PSTR, dwDeleteFlag uint32, dwVersionFlag uint32) bool {
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverExA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pDriverName)), uintptr(dwDeleteFlag), uintptr(dwVersionFlag))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// DeletePrinterDriverExW calls winspool.drv!DeletePrinterDriverExW.
-// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverex
-func DeletePrinterDriverExW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, pDriverName foundation.PWSTR, dwDeleteFlag uint32, dwVersionFlag uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverExW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pDriverName)), uintptr(dwDeleteFlag), uintptr(dwVersionFlag))
-	return foundation.BOOL(r1)
+// DeletePrinterDriverPackage calls winspool.drv!DeletePrinterDriverPackageW.
+// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverpackage
+func DeletePrinterDriverPackage(pszServer string, pszInfPath string, pszEnvironment string) error {
+	_pszServer := win32.UTF16Ptr(pszServer)
+	_pszInfPath := win32.UTF16Ptr(pszInfPath)
+	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszEnvironment)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeletePrinterDriverPackageA calls winspool.drv!DeletePrinterDriverPackageA.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverpackage
-func DeletePrinterDriverPackageA(pszServer foundation.PSTR, pszInfPath foundation.PSTR, pszEnvironment foundation.PSTR) foundation.HRESULT {
+func DeletePrinterDriverPackageA(pszServer foundation.PSTR, pszInfPath foundation.PSTR, pszEnvironment foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverPackageA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszInfPath)), uintptr(unsafe.Pointer(pszEnvironment)))
-	return foundation.HRESULT(r1)
-}
-
-// DeletePrinterDriverPackageW calls winspool.drv!DeletePrinterDriverPackageW.
-// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverpackage
-func DeletePrinterDriverPackageW(pszServer foundation.PWSTR, pszInfPath foundation.PWSTR, pszEnvironment foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverPackageW.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszInfPath)), uintptr(unsafe.Pointer(pszEnvironment)))
-	return foundation.HRESULT(r1)
-}
-
-// DeletePrinterDriverW calls winspool.drv!DeletePrinterDriverW.
-// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriver
-func DeletePrinterDriverW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, pDriverName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(unsafe.Pointer(pDriverName)))
-	return foundation.BOOL(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeletePrinterIC calls winspool.drv!DeletePrinterIC.
-func DeletePrinterIC(hPrinterIC foundation.HANDLE) foundation.BOOL {
+func DeletePrinterIC(hPrinterIC foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procDeletePrinterIC.Addr(), uintptr(hPrinterIC))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// DeletePrinterKey calls winspool.drv!DeletePrinterKeyW.
+// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterkey
+func DeletePrinterKey(hPrinter PRINTER_HANDLE, pKeyName string) uint32 {
+	_pKeyName := win32.UTF16Ptr(pKeyName)
+	r1, _, _ := syscall.SyscallN(procDeletePrinterKey.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)))
+	return uint32(r1)
 }
 
 // DeletePrinterKeyA calls winspool.drv!DeletePrinterKeyA.
@@ -722,23 +773,24 @@ func DeletePrinterKeyA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR) uint32
 	return uint32(r1)
 }
 
-// DeletePrinterKeyW calls winspool.drv!DeletePrinterKeyW.
-// https://learn.microsoft.com/windows/win32/printdocs/deleteprinterkey
-func DeletePrinterKeyW(hPrinter PRINTER_HANDLE, pKeyName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procDeletePrinterKeyW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)))
-	return uint32(r1)
-}
-
 // DevQueryPrint calls winspool.drv!DevQueryPrint.
-func DevQueryPrint(hPrinter PRINTER_HANDLE, pDevMode *graphicsgdi.DEVMODEA, pResID *uint32) foundation.BOOL {
+func DevQueryPrint(hPrinter PRINTER_HANDLE, pDevMode *graphicsgdi.DEVMODEA, pResID *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procDevQueryPrint.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pDevMode)), uintptr(unsafe.Pointer(pResID)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DevQueryPrintEx calls winspool.drv!DevQueryPrintEx.
-func DevQueryPrintEx(pDQPInfo *DEVQUERYPRINT_INFO) foundation.BOOL {
+func DevQueryPrintEx(pDQPInfo *DEVQUERYPRINT_INFO) bool {
 	r1, _, _ := syscall.SyscallN(procDevQueryPrintEx.Addr(), uintptr(unsafe.Pointer(pDQPInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// DocumentProperties calls winspool.drv!DocumentPropertiesW.
+// https://learn.microsoft.com/windows/win32/printdocs/documentproperties
+func DocumentProperties(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pDeviceName string, pDevModeOutput *graphicsgdi.DEVMODEW, pDevModeInput *graphicsgdi.DEVMODEW, fMode uint32) int32 {
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	r1, _, _ := syscall.SyscallN(procDocumentProperties.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(unsafe.Pointer(pDevModeOutput)), uintptr(unsafe.Pointer(pDevModeInput)), uintptr(fMode))
+	return int32(r1)
 }
 
 // DocumentPropertiesA calls winspool.drv!DocumentPropertiesA.
@@ -748,45 +800,48 @@ func DocumentPropertiesA(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pDeviceN
 	return int32(r1)
 }
 
-// DocumentPropertiesW calls winspool.drv!DocumentPropertiesW.
-// https://learn.microsoft.com/windows/win32/printdocs/documentproperties
-func DocumentPropertiesW(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pDeviceName foundation.PWSTR, pDevModeOutput *graphicsgdi.DEVMODEW, pDevModeInput *graphicsgdi.DEVMODEW, fMode uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procDocumentPropertiesW.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(pDeviceName)), uintptr(unsafe.Pointer(pDevModeOutput)), uintptr(unsafe.Pointer(pDevModeInput)), uintptr(fMode))
-	return int32(r1)
-}
-
 // EndDocPrinter calls winspool.drv!EndDocPrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/enddocprinter
-func EndDocPrinter(hPrinter PRINTER_HANDLE) foundation.BOOL {
+func EndDocPrinter(hPrinter PRINTER_HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procEndDocPrinter.Addr(), uintptr(hPrinter))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EndPagePrinter calls winspool.drv!EndPagePrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/endpageprinter
-func EndPagePrinter(hPrinter PRINTER_HANDLE) foundation.BOOL {
+func EndPagePrinter(hPrinter PRINTER_HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procEndPagePrinter.Addr(), uintptr(hPrinter))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// EnumForms calls winspool.drv!EnumFormsW.
+// https://learn.microsoft.com/windows/win32/printdocs/enumforms
+func EnumForms(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procEnumForms.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	return r1 != 0
 }
 
 // EnumFormsA calls winspool.drv!EnumFormsA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumforms
-func EnumFormsA(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
+func EnumFormsA(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEnumFormsA.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
-}
-
-// EnumFormsW calls winspool.drv!EnumFormsW.
-// https://learn.microsoft.com/windows/win32/printdocs/enumforms
-func EnumFormsW(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumFormsW.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EnumJobNamedProperties calls winspool.drv!EnumJobNamedProperties.
 func EnumJobNamedProperties(hPrinter PRINTER_HANDLE, JobId uint32, pcProperties *uint32, ppProperties **PrintNamedProperty) uint32 {
 	r1, _, _ := syscall.SyscallN(procEnumJobNamedProperties.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(unsafe.Pointer(pcProperties)), uintptr(unsafe.Pointer(ppProperties)))
 	return uint32(r1)
+}
+
+// EnumJobs calls winspool.drv!EnumJobsW.
+// https://learn.microsoft.com/windows/win32/printdocs/enumjobs
+func EnumJobs(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEnumJobs.Addr(), uintptr(hPrinter), uintptr(FirstJob), uintptr(NoJobs), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // EnumJobsA calls winspool.drv!EnumJobsA.
@@ -799,76 +854,95 @@ func EnumJobsA(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level ui
 	return nil
 }
 
-// EnumJobsW calls winspool.drv!EnumJobsW.
-// https://learn.microsoft.com/windows/win32/printdocs/enumjobs
-func EnumJobsW(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumJobsW.Addr(), uintptr(hPrinter), uintptr(FirstJob), uintptr(NoJobs), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// EnumMonitors calls winspool.drv!EnumMonitorsW.
+// https://learn.microsoft.com/windows/win32/printdocs/enummonitors
+func EnumMonitors(pName string, Level uint32, pMonitor *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(procEnumMonitors.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pMonitor)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	return r1 != 0
 }
 
 // EnumMonitorsA calls winspool.drv!EnumMonitorsA.
 // https://learn.microsoft.com/windows/win32/printdocs/enummonitors
-func EnumMonitorsA(pName foundation.PSTR, Level uint32, pMonitor *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
+func EnumMonitorsA(pName foundation.PSTR, Level uint32, pMonitor *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEnumMonitorsA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pMonitor)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// EnumMonitorsW calls winspool.drv!EnumMonitorsW.
-// https://learn.microsoft.com/windows/win32/printdocs/enummonitors
-func EnumMonitorsW(pName foundation.PWSTR, Level uint32, pMonitor *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumMonitorsW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pMonitor)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
+// EnumPorts calls winspool.drv!EnumPortsW.
+// https://learn.microsoft.com/windows/win32/printdocs/enumports
+func EnumPorts(pName string, Level uint32, pPort *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(procEnumPorts.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pPort)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	return r1 != 0
 }
 
 // EnumPortsA calls winspool.drv!EnumPortsA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumports
-func EnumPortsA(pName foundation.PSTR, Level uint32, pPort *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
+func EnumPortsA(pName foundation.PSTR, Level uint32, pPort *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEnumPortsA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pPort)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// EnumPortsW calls winspool.drv!EnumPortsW.
-// https://learn.microsoft.com/windows/win32/printdocs/enumports
-func EnumPortsW(pName foundation.PWSTR, Level uint32, pPort *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumPortsW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pPort)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
+// EnumPrintProcessorDatatypes calls winspool.drv!EnumPrintProcessorDatatypesW.
+// https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes
+func EnumPrintProcessorDatatypes(pName string, pPrintProcessorName string, Level uint32, pDatatypes *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
+	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorDatatypes.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pPrintProcessorName)), uintptr(Level), uintptr(unsafe.Pointer(pDatatypes)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	return r1 != 0
 }
 
 // EnumPrintProcessorDatatypesA calls winspool.drv!EnumPrintProcessorDatatypesA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes
-func EnumPrintProcessorDatatypesA(pName foundation.PSTR, pPrintProcessorName foundation.PSTR, Level uint32, pDatatypes *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
+func EnumPrintProcessorDatatypesA(pName foundation.PSTR, pPrintProcessorName foundation.PSTR, Level uint32, pDatatypes *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorDatatypesA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pPrintProcessorName)), uintptr(Level), uintptr(unsafe.Pointer(pDatatypes)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// EnumPrintProcessorDatatypesW calls winspool.drv!EnumPrintProcessorDatatypesW.
-// https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes
-func EnumPrintProcessorDatatypesW(pName foundation.PWSTR, pPrintProcessorName foundation.PWSTR, Level uint32, pDatatypes *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorDatatypesW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pPrintProcessorName)), uintptr(Level), uintptr(unsafe.Pointer(pDatatypes)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
+// EnumPrintProcessors calls winspool.drv!EnumPrintProcessorsW.
+// https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors
+func EnumPrintProcessors(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	r1, _, _ := syscall.SyscallN(procEnumPrintProcessors.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	return r1 != 0
 }
 
 // EnumPrintProcessorsA calls winspool.drv!EnumPrintProcessorsA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors
-func EnumPrintProcessorsA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
+func EnumPrintProcessorsA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorsA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// EnumPrintProcessorsW calls winspool.drv!EnumPrintProcessorsW.
-// https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors
-func EnumPrintProcessorsW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorsW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	return foundation.BOOL(r1)
+// EnumPrinterData calls winspool.drv!EnumPrinterDataW.
+// https://learn.microsoft.com/windows/win32/printdocs/enumprinterdata
+func EnumPrinterData(hPrinter PRINTER_HANDLE, dwIndex uint32, pValueName foundation.PWSTR, cbValueName uint32, pcbValueName *uint32, pType *uint32, pData []byte, pcbData *uint32) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPrinterData.Addr(), uintptr(hPrinter), uintptr(dwIndex), uintptr(unsafe.Pointer(pValueName)), uintptr(cbValueName), uintptr(unsafe.Pointer(pcbValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pcbData)))
+	return uint32(r1)
 }
 
 // EnumPrinterDataA calls winspool.drv!EnumPrinterDataA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinterdata
-func EnumPrinterDataA(hPrinter PRINTER_HANDLE, dwIndex uint32, pValueName foundation.PSTR, cbValueName uint32, pcbValueName *uint32, pType *uint32, pData *byte, cbData uint32, pcbData *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procEnumPrinterDataA.Addr(), uintptr(hPrinter), uintptr(dwIndex), uintptr(unsafe.Pointer(pValueName)), uintptr(cbValueName), uintptr(unsafe.Pointer(pcbValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(cbData), uintptr(unsafe.Pointer(pcbData)))
+func EnumPrinterDataA(hPrinter PRINTER_HANDLE, dwIndex uint32, pValueName foundation.PSTR, cbValueName uint32, pcbValueName *uint32, pType *uint32, pData []byte, pcbData *uint32) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPrinterDataA.Addr(), uintptr(hPrinter), uintptr(dwIndex), uintptr(unsafe.Pointer(pValueName)), uintptr(cbValueName), uintptr(unsafe.Pointer(pcbValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pcbData)))
+	return uint32(r1)
+}
+
+// EnumPrinterDataEx calls winspool.drv!EnumPrinterDataExW.
+// https://learn.microsoft.com/windows/win32/printdocs/enumprinterdataex
+func EnumPrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pEnumValues *byte, cbEnumValues uint32, pcbEnumValues *uint32, pnEnumValues *uint32) uint32 {
+	_pKeyName := win32.UTF16Ptr(pKeyName)
+	r1, _, _ := syscall.SyscallN(procEnumPrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(pEnumValues)), uintptr(cbEnumValues), uintptr(unsafe.Pointer(pcbEnumValues)), uintptr(unsafe.Pointer(pnEnumValues)))
 	return uint32(r1)
 }
 
@@ -879,18 +953,16 @@ func EnumPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pEnum
 	return uint32(r1)
 }
 
-// EnumPrinterDataExW calls winspool.drv!EnumPrinterDataExW.
-// https://learn.microsoft.com/windows/win32/printdocs/enumprinterdataex
-func EnumPrinterDataExW(hPrinter PRINTER_HANDLE, pKeyName foundation.PWSTR, pEnumValues *byte, cbEnumValues uint32, pcbEnumValues *uint32, pnEnumValues *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procEnumPrinterDataExW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pEnumValues)), uintptr(cbEnumValues), uintptr(unsafe.Pointer(pcbEnumValues)), uintptr(unsafe.Pointer(pnEnumValues)))
-	return uint32(r1)
-}
-
-// EnumPrinterDataW calls winspool.drv!EnumPrinterDataW.
-// https://learn.microsoft.com/windows/win32/printdocs/enumprinterdata
-func EnumPrinterDataW(hPrinter PRINTER_HANDLE, dwIndex uint32, pValueName foundation.PWSTR, cbValueName uint32, pcbValueName *uint32, pType *uint32, pData *byte, cbData uint32, pcbData *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procEnumPrinterDataW.Addr(), uintptr(hPrinter), uintptr(dwIndex), uintptr(unsafe.Pointer(pValueName)), uintptr(cbValueName), uintptr(unsafe.Pointer(pcbValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(cbData), uintptr(unsafe.Pointer(pcbData)))
-	return uint32(r1)
+// EnumPrinterDrivers calls winspool.drv!EnumPrinterDriversW.
+// https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers
+func EnumPrinterDrivers(pName string, pEnvironment string, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	r1, _, e1 := syscall.SyscallN(procEnumPrinterDrivers.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // EnumPrinterDriversA calls winspool.drv!EnumPrinterDriversA.
@@ -903,14 +975,12 @@ func EnumPrinterDriversA(pName foundation.PSTR, pEnvironment foundation.PSTR, Le
 	return nil
 }
 
-// EnumPrinterDriversW calls winspool.drv!EnumPrinterDriversW.
-// https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers
-func EnumPrinterDriversW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumPrinterDriversW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// EnumPrinterKey calls winspool.drv!EnumPrinterKeyW.
+// https://learn.microsoft.com/windows/win32/printdocs/enumprinterkey
+func EnumPrinterKey(hPrinter PRINTER_HANDLE, pKeyName string, pSubkey foundation.PWSTR, cbSubkey uint32, pcbSubkey *uint32) uint32 {
+	_pKeyName := win32.UTF16Ptr(pKeyName)
+	r1, _, _ := syscall.SyscallN(procEnumPrinterKey.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(pSubkey)), uintptr(cbSubkey), uintptr(unsafe.Pointer(pcbSubkey)))
+	return uint32(r1)
 }
 
 // EnumPrinterKeyA calls winspool.drv!EnumPrinterKeyA.
@@ -920,27 +990,21 @@ func EnumPrinterKeyA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pSubkey 
 	return uint32(r1)
 }
 
-// EnumPrinterKeyW calls winspool.drv!EnumPrinterKeyW.
-// https://learn.microsoft.com/windows/win32/printdocs/enumprinterkey
-func EnumPrinterKeyW(hPrinter PRINTER_HANDLE, pKeyName foundation.PWSTR, pSubkey foundation.PWSTR, cbSubkey uint32, pcbSubkey *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procEnumPrinterKeyW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pSubkey)), uintptr(cbSubkey), uintptr(unsafe.Pointer(pcbSubkey)))
-	return uint32(r1)
-}
-
-// EnumPrintersA calls winspool.drv!EnumPrintersA.
+// EnumPrinters calls winspool.drv!EnumPrintersW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinters
-func EnumPrintersA(Flags uint32, Name foundation.PSTR, Level uint32, pPrinterEnum *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumPrintersA.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(Name)), uintptr(Level), uintptr(unsafe.Pointer(pPrinterEnum)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumPrinters(Flags uint32, Name string, Level uint32, pPrinterEnum *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procEnumPrinters.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_Name)), uintptr(Level), uintptr(unsafe.Pointer(pPrinterEnum)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// EnumPrintersW calls winspool.drv!EnumPrintersW.
+// EnumPrintersA calls winspool.drv!EnumPrintersA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinters
-func EnumPrintersW(Flags uint32, Name foundation.PWSTR, Level uint32, pPrinterEnum *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumPrintersW.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(Name)), uintptr(Level), uintptr(unsafe.Pointer(pPrinterEnum)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumPrintersA(Flags uint32, Name foundation.PSTR, Level uint32, pPrinterEnum *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEnumPrintersA.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(Name)), uintptr(Level), uintptr(unsafe.Pointer(pPrinterEnum)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -955,9 +1019,9 @@ func ExtDeviceMode(hWnd foundation.HWND, hInst foundation.HANDLE, pDevModeOutput
 
 // FindClosePrinterChangeNotification calls winspool.drv!FindClosePrinterChangeNotification.
 // https://learn.microsoft.com/windows/win32/printdocs/findcloseprinterchangenotification
-func FindClosePrinterChangeNotification(hChange FINDPRINTERCHANGENOTIFICATION_HANDLE) foundation.BOOL {
+func FindClosePrinterChangeNotification(hChange FINDPRINTERCHANGENOTIFICATION_HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procFindClosePrinterChangeNotification.Addr(), uintptr(hChange))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FindFirstPrinterChangeNotification calls winspool.drv!FindFirstPrinterChangeNotification.
@@ -969,21 +1033,25 @@ func FindFirstPrinterChangeNotification(hPrinter PRINTER_HANDLE, fdwFilter uint3
 
 // FindNextPrinterChangeNotification calls winspool.drv!FindNextPrinterChangeNotification.
 // https://learn.microsoft.com/windows/win32/printdocs/findnextprinterchangenotification
-func FindNextPrinterChangeNotification(hChange FINDPRINTERCHANGENOTIFICATION_HANDLE, pdwChange *uint32, pvReserved unsafe.Pointer, ppPrinterNotifyInfo *unsafe.Pointer) foundation.BOOL {
+func FindNextPrinterChangeNotification(hChange FINDPRINTERCHANGENOTIFICATION_HANDLE, pdwChange *uint32, pvReserved unsafe.Pointer, ppPrinterNotifyInfo *unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procFindNextPrinterChangeNotification.Addr(), uintptr(hChange), uintptr(unsafe.Pointer(pdwChange)), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(ppPrinterNotifyInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FlushPrinter calls winspool.drv!FlushPrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/flushprinter
-func FlushPrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pcWritten *uint32, cSleep uint32) foundation.BOOL {
+func FlushPrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pcWritten *uint32, cSleep uint32) bool {
 	r1, _, _ := syscall.SyscallN(procFlushPrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcWritten)), uintptr(cSleep))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FreePrintNamedPropertyArray calls winspool.drv!FreePrintNamedPropertyArray.
-func FreePrintNamedPropertyArray(cProperties uint32, ppProperties **PrintNamedProperty) {
-	syscall.SyscallN(procFreePrintNamedPropertyArray.Addr(), uintptr(cProperties), uintptr(unsafe.Pointer(ppProperties)))
+func FreePrintNamedPropertyArray(ppProperties []*PrintNamedProperty) {
+	var _ppProperties **PrintNamedProperty
+	if len(ppProperties) > 0 {
+		_ppProperties = &ppProperties[0]
+	}
+	syscall.SyscallN(procFreePrintNamedPropertyArray.Addr(), uintptr(len(ppProperties)), uintptr(unsafe.Pointer(_ppProperties)))
 }
 
 // FreePrintPropertyValue calls winspool.drv!FreePrintPropertyValue.
@@ -993,27 +1061,27 @@ func FreePrintPropertyValue(pValue *PrintPropertyValue) {
 
 // FreePrinterNotifyInfo calls winspool.drv!FreePrinterNotifyInfo.
 // https://learn.microsoft.com/windows/win32/printdocs/freeprinternotifyinfo
-func FreePrinterNotifyInfo(pPrinterNotifyInfo *PRINTER_NOTIFY_INFO) foundation.BOOL {
+func FreePrinterNotifyInfo(pPrinterNotifyInfo *PRINTER_NOTIFY_INFO) bool {
 	r1, _, _ := syscall.SyscallN(procFreePrinterNotifyInfo.Addr(), uintptr(unsafe.Pointer(pPrinterNotifyInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiDeleteSpoolFileHandle calls GDI32!GdiDeleteSpoolFileHandle.
-func GdiDeleteSpoolFileHandle(SpoolFileHandle foundation.HANDLE) foundation.BOOL {
+func GdiDeleteSpoolFileHandle(SpoolFileHandle foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procGdiDeleteSpoolFileHandle.Addr(), uintptr(SpoolFileHandle))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiEndDocEMF calls GDI32!GdiEndDocEMF.
-func GdiEndDocEMF(SpoolFileHandle foundation.HANDLE) foundation.BOOL {
+func GdiEndDocEMF(SpoolFileHandle foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procGdiEndDocEMF.Addr(), uintptr(SpoolFileHandle))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiEndPageEMF calls GDI32!GdiEndPageEMF.
-func GdiEndPageEMF(SpoolFileHandle foundation.HANDLE, dwOptimization uint32) foundation.BOOL {
+func GdiEndPageEMF(SpoolFileHandle foundation.HANDLE, dwOptimization uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGdiEndPageEMF.Addr(), uintptr(SpoolFileHandle), uintptr(dwOptimization))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiGetDC calls GDI32!GdiGetDC.
@@ -1023,9 +1091,9 @@ func GdiGetDC(SpoolFileHandle foundation.HANDLE) graphicsgdi.HDC {
 }
 
 // GdiGetDevmodeForPage calls GDI32!GdiGetDevmodeForPage.
-func GdiGetDevmodeForPage(SpoolFileHandle foundation.HANDLE, dwPageNumber uint32, pCurrDM **graphicsgdi.DEVMODEW, pLastDM **graphicsgdi.DEVMODEW) foundation.BOOL {
+func GdiGetDevmodeForPage(SpoolFileHandle foundation.HANDLE, dwPageNumber uint32, pCurrDM **graphicsgdi.DEVMODEW, pLastDM **graphicsgdi.DEVMODEW) bool {
 	r1, _, _ := syscall.SyscallN(procGdiGetDevmodeForPage.Addr(), uintptr(SpoolFileHandle), uintptr(dwPageNumber), uintptr(unsafe.Pointer(pCurrDM)), uintptr(unsafe.Pointer(pLastDM)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiGetPageCount calls GDI32!GdiGetPageCount.
@@ -1041,38 +1109,42 @@ func GdiGetPageHandle(SpoolFileHandle foundation.HANDLE, Page uint32, pdwPageTyp
 }
 
 // GdiGetSpoolFileHandle calls GDI32!GdiGetSpoolFileHandle.
-func GdiGetSpoolFileHandle(pwszPrinterName foundation.PWSTR, pDevmode *graphicsgdi.DEVMODEW, pwszDocName foundation.PWSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procGdiGetSpoolFileHandle.Addr(), uintptr(unsafe.Pointer(pwszPrinterName)), uintptr(unsafe.Pointer(pDevmode)), uintptr(unsafe.Pointer(pwszDocName)))
+func GdiGetSpoolFileHandle(pwszPrinterName string, pDevmode *graphicsgdi.DEVMODEW, pwszDocName string) foundation.HANDLE {
+	_pwszPrinterName := win32.UTF16Ptr(pwszPrinterName)
+	_pwszDocName := win32.UTF16Ptr(pwszDocName)
+	r1, _, _ := syscall.SyscallN(procGdiGetSpoolFileHandle.Addr(), uintptr(unsafe.Pointer(_pwszPrinterName)), uintptr(unsafe.Pointer(pDevmode)), uintptr(unsafe.Pointer(_pwszDocName)))
 	return foundation.HANDLE(r1)
 }
 
 // GdiPlayPageEMF calls GDI32!GdiPlayPageEMF.
-func GdiPlayPageEMF(SpoolFileHandle foundation.HANDLE, hemf foundation.HANDLE, prectDocument *foundation.RECT, prectBorder *foundation.RECT, prectClip *foundation.RECT) foundation.BOOL {
+func GdiPlayPageEMF(SpoolFileHandle foundation.HANDLE, hemf foundation.HANDLE, prectDocument *foundation.RECT, prectBorder *foundation.RECT, prectClip *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procGdiPlayPageEMF.Addr(), uintptr(SpoolFileHandle), uintptr(hemf), uintptr(unsafe.Pointer(prectDocument)), uintptr(unsafe.Pointer(prectBorder)), uintptr(unsafe.Pointer(prectClip)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiResetDCEMF calls GDI32!GdiResetDCEMF.
-func GdiResetDCEMF(SpoolFileHandle foundation.HANDLE, pCurrDM *graphicsgdi.DEVMODEW) foundation.BOOL {
+func GdiResetDCEMF(SpoolFileHandle foundation.HANDLE, pCurrDM *graphicsgdi.DEVMODEW) bool {
 	r1, _, _ := syscall.SyscallN(procGdiResetDCEMF.Addr(), uintptr(SpoolFileHandle), uintptr(unsafe.Pointer(pCurrDM)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiStartDocEMF calls GDI32!GdiStartDocEMF.
-func GdiStartDocEMF(SpoolFileHandle foundation.HANDLE, pDocInfo *storagexps.DOCINFOW) foundation.BOOL {
+func GdiStartDocEMF(SpoolFileHandle foundation.HANDLE, pDocInfo *storagexps.DOCINFOW) bool {
 	r1, _, _ := syscall.SyscallN(procGdiStartDocEMF.Addr(), uintptr(SpoolFileHandle), uintptr(unsafe.Pointer(pDocInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiStartPageEMF calls GDI32!GdiStartPageEMF.
-func GdiStartPageEMF(SpoolFileHandle foundation.HANDLE) foundation.BOOL {
+func GdiStartPageEMF(SpoolFileHandle foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procGdiStartPageEMF.Addr(), uintptr(SpoolFileHandle))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GenerateCopyFilePaths calls mscms!GenerateCopyFilePaths.
-func GenerateCopyFilePaths(pszPrinterName foundation.PWSTR, pszDirectory foundation.PWSTR, pSplClientInfo *byte, dwLevel uint32, pszSourceDir foundation.PWSTR, pcchSourceDirSize *uint32, pszTargetDir foundation.PWSTR, pcchTargetDirSize *uint32, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGenerateCopyFilePaths.Addr(), uintptr(unsafe.Pointer(pszPrinterName)), uintptr(unsafe.Pointer(pszDirectory)), uintptr(unsafe.Pointer(pSplClientInfo)), uintptr(dwLevel), uintptr(unsafe.Pointer(pszSourceDir)), uintptr(unsafe.Pointer(pcchSourceDirSize)), uintptr(unsafe.Pointer(pszTargetDir)), uintptr(unsafe.Pointer(pcchTargetDirSize)), uintptr(dwFlags))
+func GenerateCopyFilePaths(pszPrinterName string, pszDirectory string, pSplClientInfo *byte, dwLevel uint32, pszSourceDir foundation.PWSTR, pcchSourceDirSize *uint32, pszTargetDir foundation.PWSTR, pcchTargetDirSize *uint32, dwFlags uint32) uint32 {
+	_pszPrinterName := win32.UTF16Ptr(pszPrinterName)
+	_pszDirectory := win32.UTF16Ptr(pszDirectory)
+	r1, _, _ := syscall.SyscallN(procGenerateCopyFilePaths.Addr(), uintptr(unsafe.Pointer(_pszPrinterName)), uintptr(unsafe.Pointer(_pszDirectory)), uintptr(unsafe.Pointer(pSplClientInfo)), uintptr(dwLevel), uintptr(unsafe.Pointer(pszSourceDir)), uintptr(unsafe.Pointer(pcchSourceDirSize)), uintptr(unsafe.Pointer(pszTargetDir)), uintptr(unsafe.Pointer(pcchTargetDirSize)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -1082,105 +1154,133 @@ func GetCPSUIUserData(hDlg foundation.HWND) uintptr {
 	return uintptr(r1)
 }
 
-// GetCorePrinterDriversA calls winspool.drv!GetCorePrinterDriversA.
+// GetCorePrinterDrivers calls winspool.drv!GetCorePrinterDriversW.
 // https://learn.microsoft.com/windows/win32/printdocs/getcoreprinterdrivers
-func GetCorePrinterDriversA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, pszzCoreDriverDependencies foundation.PSTR, cCorePrinterDrivers uint32, pCorePrinterDrivers *CORE_PRINTER_DRIVERA) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetCorePrinterDriversA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(pszzCoreDriverDependencies)), uintptr(cCorePrinterDrivers), uintptr(unsafe.Pointer(pCorePrinterDrivers)))
-	return foundation.HRESULT(r1)
+func GetCorePrinterDrivers(pszServer string, pszEnvironment string, pszzCoreDriverDependencies string, pCorePrinterDrivers []CORE_PRINTER_DRIVERW) error {
+	_pszServer := win32.UTF16Ptr(pszServer)
+	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	_pszzCoreDriverDependencies := win32.UTF16Ptr(pszzCoreDriverDependencies)
+	var _pCorePrinterDrivers *CORE_PRINTER_DRIVERW
+	if len(pCorePrinterDrivers) > 0 {
+		_pCorePrinterDrivers = &pCorePrinterDrivers[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetCorePrinterDrivers.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(_pszzCoreDriverDependencies)), uintptr(len(pCorePrinterDrivers)), uintptr(unsafe.Pointer(_pCorePrinterDrivers)))
+	return win32.HRESULTError(int32(r1))
 }
 
-// GetCorePrinterDriversW calls winspool.drv!GetCorePrinterDriversW.
+// GetCorePrinterDriversA calls winspool.drv!GetCorePrinterDriversA.
 // https://learn.microsoft.com/windows/win32/printdocs/getcoreprinterdrivers
-func GetCorePrinterDriversW(pszServer foundation.PWSTR, pszEnvironment foundation.PWSTR, pszzCoreDriverDependencies foundation.PWSTR, cCorePrinterDrivers uint32, pCorePrinterDrivers *CORE_PRINTER_DRIVERW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetCorePrinterDriversW.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(pszzCoreDriverDependencies)), uintptr(cCorePrinterDrivers), uintptr(unsafe.Pointer(pCorePrinterDrivers)))
-	return foundation.HRESULT(r1)
+func GetCorePrinterDriversA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, pszzCoreDriverDependencies foundation.PSTR, pCorePrinterDrivers []CORE_PRINTER_DRIVERA) error {
+	var _pCorePrinterDrivers *CORE_PRINTER_DRIVERA
+	if len(pCorePrinterDrivers) > 0 {
+		_pCorePrinterDrivers = &pCorePrinterDrivers[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetCorePrinterDriversA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(pszzCoreDriverDependencies)), uintptr(len(pCorePrinterDrivers)), uintptr(unsafe.Pointer(_pCorePrinterDrivers)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// GetDefaultPrinter calls winspool.drv!GetDefaultPrinterW.
+// https://learn.microsoft.com/windows/win32/printdocs/getdefaultprinter
+func GetDefaultPrinter(pszBuffer foundation.PWSTR, pcchBuffer *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procGetDefaultPrinter.Addr(), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pcchBuffer)))
+	return r1 != 0
 }
 
 // GetDefaultPrinterA calls winspool.drv!GetDefaultPrinterA.
 // https://learn.microsoft.com/windows/win32/printdocs/getdefaultprinter
-func GetDefaultPrinterA(pszBuffer foundation.PSTR, pcchBuffer *uint32) foundation.BOOL {
+func GetDefaultPrinterA(pszBuffer foundation.PSTR, pcchBuffer *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetDefaultPrinterA.Addr(), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pcchBuffer)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetDefaultPrinterW calls winspool.drv!GetDefaultPrinterW.
-// https://learn.microsoft.com/windows/win32/printdocs/getdefaultprinter
-func GetDefaultPrinterW(pszBuffer foundation.PWSTR, pcchBuffer *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetDefaultPrinterW.Addr(), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pcchBuffer)))
-	return foundation.BOOL(r1)
+// GetForm calls winspool.drv!GetFormW.
+// https://learn.microsoft.com/windows/win32/printdocs/getform
+func GetForm(hPrinter PRINTER_HANDLE, pFormName string, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+	_pFormName := win32.UTF16Ptr(pFormName)
+	r1, _, _ := syscall.SyscallN(procGetForm.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pFormName)), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	return r1 != 0
 }
 
 // GetFormA calls winspool.drv!GetFormA.
 // https://learn.microsoft.com/windows/win32/printdocs/getform
-func GetFormA(hPrinter PRINTER_HANDLE, pFormName foundation.PSTR, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
+func GetFormA(hPrinter PRINTER_HANDLE, pFormName foundation.PSTR, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetFormA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pFormName)), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetFormW calls winspool.drv!GetFormW.
-// https://learn.microsoft.com/windows/win32/printdocs/getform
-func GetFormW(hPrinter PRINTER_HANDLE, pFormName foundation.PWSTR, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetFormW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pFormName)), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+// GetJob calls winspool.drv!GetJobW.
+// https://learn.microsoft.com/windows/win32/printdocs/getjob
+func GetJob(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procGetJob.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	return r1 != 0
 }
 
 // GetJobA calls winspool.drv!GetJobA.
 // https://learn.microsoft.com/windows/win32/printdocs/getjob
-func GetJobA(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
+func GetJobA(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetJobA.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetJobAttributes calls SPOOLSS!GetJobAttributes.
-func GetJobAttributes(pPrinterName foundation.PWSTR, pDevmode *graphicsgdi.DEVMODEW, pAttributeInfo *ATTRIBUTE_INFO_3) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetJobAttributes.Addr(), uintptr(unsafe.Pointer(pPrinterName)), uintptr(unsafe.Pointer(pDevmode)), uintptr(unsafe.Pointer(pAttributeInfo)))
-	return foundation.BOOL(r1)
+func GetJobAttributes(pPrinterName string, pDevmode *graphicsgdi.DEVMODEW, pAttributeInfo *ATTRIBUTE_INFO_3) bool {
+	_pPrinterName := win32.UTF16Ptr(pPrinterName)
+	r1, _, _ := syscall.SyscallN(procGetJobAttributes.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(pDevmode)), uintptr(unsafe.Pointer(pAttributeInfo)))
+	return r1 != 0
 }
 
 // GetJobAttributesEx calls SPOOLSS!GetJobAttributesEx.
-func GetJobAttributesEx(pPrinterName foundation.PWSTR, pDevmode *graphicsgdi.DEVMODEW, dwLevel uint32, pAttributeInfo *byte, nSize uint32, dwFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetJobAttributesEx.Addr(), uintptr(unsafe.Pointer(pPrinterName)), uintptr(unsafe.Pointer(pDevmode)), uintptr(dwLevel), uintptr(unsafe.Pointer(pAttributeInfo)), uintptr(nSize), uintptr(dwFlags))
-	return foundation.BOOL(r1)
+func GetJobAttributesEx(pPrinterName string, pDevmode *graphicsgdi.DEVMODEW, dwLevel uint32, pAttributeInfo *byte, nSize uint32, dwFlags uint32) bool {
+	_pPrinterName := win32.UTF16Ptr(pPrinterName)
+	r1, _, _ := syscall.SyscallN(procGetJobAttributesEx.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(pDevmode)), uintptr(dwLevel), uintptr(unsafe.Pointer(pAttributeInfo)), uintptr(nSize), uintptr(dwFlags))
+	return r1 != 0
 }
 
 // GetJobNamedPropertyValue calls winspool.drv!GetJobNamedPropertyValue.
-func GetJobNamedPropertyValue(hPrinter PRINTER_HANDLE, JobId uint32, pszName foundation.PWSTR, pValue *PrintPropertyValue) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetJobNamedPropertyValue.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pValue)))
+func GetJobNamedPropertyValue(hPrinter PRINTER_HANDLE, JobId uint32, pszName string, pValue *PrintPropertyValue) uint32 {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procGetJobNamedPropertyValue.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pValue)))
 	return uint32(r1)
-}
-
-// GetJobW calls winspool.drv!GetJobW.
-// https://learn.microsoft.com/windows/win32/printdocs/getjob
-func GetJobW(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetJobW.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
 }
 
 // GetPrintExecutionData calls winspool.drv!GetPrintExecutionData.
 // https://learn.microsoft.com/windows/win32/printdocs/getprintexecutiondata
-func GetPrintExecutionData(pData *PRINT_EXECUTION_DATA) foundation.BOOL {
+func GetPrintExecutionData(pData *PRINT_EXECUTION_DATA) bool {
 	r1, _, _ := syscall.SyscallN(procGetPrintExecutionData.Addr(), uintptr(unsafe.Pointer(pData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetPrintOutputInfo calls winspool.drv!GetPrintOutputInfo.
-func GetPrintOutputInfo(hWnd foundation.HWND, pszPrinter foundation.PWSTR, phFile *foundation.HANDLE, ppszOutputFile *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetPrintOutputInfo.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pszPrinter)), uintptr(unsafe.Pointer(phFile)), uintptr(unsafe.Pointer(ppszOutputFile)))
-	return foundation.HRESULT(r1)
+func GetPrintOutputInfo(hWnd foundation.HWND, pszPrinter string, phFile *foundation.HANDLE, ppszOutputFile *foundation.PWSTR) error {
+	_pszPrinter := win32.UTF16Ptr(pszPrinter)
+	r1, _, _ := syscall.SyscallN(procGetPrintOutputInfo.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszPrinter)), uintptr(unsafe.Pointer(phFile)), uintptr(unsafe.Pointer(ppszOutputFile)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// GetPrintProcessorDirectory calls winspool.drv!GetPrintProcessorDirectoryW.
+// https://learn.microsoft.com/windows/win32/printdocs/getprintprocessordirectory
+func GetPrintProcessorDirectory(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	r1, _, _ := syscall.SyscallN(procGetPrintProcessorDirectory.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	return r1 != 0
 }
 
 // GetPrintProcessorDirectoryA calls winspool.drv!GetPrintProcessorDirectoryA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprintprocessordirectory
-func GetPrintProcessorDirectoryA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
+func GetPrintProcessorDirectoryA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetPrintProcessorDirectoryA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetPrintProcessorDirectoryW calls winspool.drv!GetPrintProcessorDirectoryW.
-// https://learn.microsoft.com/windows/win32/printdocs/getprintprocessordirectory
-func GetPrintProcessorDirectoryW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetPrintProcessorDirectoryW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+// GetPrinter calls winspool.drv!GetPrinterW.
+// https://learn.microsoft.com/windows/win32/printdocs/getprinter
+func GetPrinter(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, cbBuf uint32, pcbNeeded *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetPrinter.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GetPrinterA calls winspool.drv!GetPrinterA.
@@ -1193,10 +1293,27 @@ func GetPrinterA(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, cbBuf ui
 	return nil
 }
 
+// GetPrinterData calls winspool.drv!GetPrinterDataW.
+// https://learn.microsoft.com/windows/win32/printdocs/getprinterdata
+func GetPrinterData(hPrinter PRINTER_HANDLE, pValueName string, pType *uint32, pData *byte, nSize uint32, pcbNeeded *uint32) uint32 {
+	_pValueName := win32.UTF16Ptr(pValueName)
+	r1, _, _ := syscall.SyscallN(procGetPrinterData.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(nSize), uintptr(unsafe.Pointer(pcbNeeded)))
+	return uint32(r1)
+}
+
 // GetPrinterDataA calls winspool.drv!GetPrinterDataA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdata
 func GetPrinterDataA(hPrinter PRINTER_HANDLE, pValueName foundation.PSTR, pType *uint32, pData *byte, nSize uint32, pcbNeeded *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetPrinterDataA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(nSize), uintptr(unsafe.Pointer(pcbNeeded)))
+	return uint32(r1)
+}
+
+// GetPrinterDataEx calls winspool.drv!GetPrinterDataExW.
+// https://learn.microsoft.com/windows/win32/printdocs/getprinterdataex
+func GetPrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pValueName string, pType *uint32, pData *byte, nSize uint32, pcbNeeded *uint32) uint32 {
+	_pKeyName := win32.UTF16Ptr(pKeyName)
+	_pValueName := win32.UTF16Ptr(pValueName)
+	r1, _, _ := syscall.SyscallN(procGetPrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(nSize), uintptr(unsafe.Pointer(pcbNeeded)))
 	return uint32(r1)
 }
 
@@ -1207,83 +1324,67 @@ func GetPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pValue
 	return uint32(r1)
 }
 
-// GetPrinterDataExW calls winspool.drv!GetPrinterDataExW.
-// https://learn.microsoft.com/windows/win32/printdocs/getprinterdataex
-func GetPrinterDataExW(hPrinter PRINTER_HANDLE, pKeyName foundation.PWSTR, pValueName foundation.PWSTR, pType *uint32, pData *byte, nSize uint32, pcbNeeded *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDataExW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(nSize), uintptr(unsafe.Pointer(pcbNeeded)))
-	return uint32(r1)
+// GetPrinterDriver calls winspool.drv!GetPrinterDriverW.
+// https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver
+func GetPrinterDriver(hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriver.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	return r1 != 0
 }
 
-// GetPrinterDataW calls winspool.drv!GetPrinterDataW.
-// https://learn.microsoft.com/windows/win32/printdocs/getprinterdata
-func GetPrinterDataW(hPrinter PRINTER_HANDLE, pValueName foundation.PWSTR, pType *uint32, pData *byte, nSize uint32, pcbNeeded *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDataW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(nSize), uintptr(unsafe.Pointer(pcbNeeded)))
-	return uint32(r1)
+// GetPrinterDriver2 calls winspool.drv!GetPrinterDriver2W.
+// https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver2
+func GetPrinterDriver2(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriver2.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	return r1 != 0
 }
 
 // GetPrinterDriver2A calls winspool.drv!GetPrinterDriver2A.
-func GetPrinterDriver2A(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
+func GetPrinterDriver2A(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetPrinterDriver2A.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
-}
-
-// GetPrinterDriver2W calls winspool.drv!GetPrinterDriver2W.
-// https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver2
-func GetPrinterDriver2W(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment foundation.PWSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriver2W.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetPrinterDriverA calls winspool.drv!GetPrinterDriverA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver
-func GetPrinterDriverA(hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
+func GetPrinterDriverA(hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetPrinterDriverA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetPrinterDriverDirectory calls winspool.drv!GetPrinterDriverDirectoryW.
+// https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverdirectory
+func GetPrinterDriverDirectory(pName string, pEnvironment string, Level uint32, pDriverDirectory *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+	_pName := win32.UTF16Ptr(pName)
+	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriverDirectory.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverDirectory)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	return r1 != 0
 }
 
 // GetPrinterDriverDirectoryA calls winspool.drv!GetPrinterDriverDirectoryA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverdirectory
-func GetPrinterDriverDirectoryA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pDriverDirectory *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
+func GetPrinterDriverDirectoryA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pDriverDirectory *byte, cbBuf uint32, pcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetPrinterDriverDirectoryA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverDirectory)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetPrinterDriverDirectoryW calls winspool.drv!GetPrinterDriverDirectoryW.
-// https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverdirectory
-func GetPrinterDriverDirectoryW(pName foundation.PWSTR, pEnvironment foundation.PWSTR, Level uint32, pDriverDirectory *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriverDirectoryW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverDirectory)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
+// GetPrinterDriverPackagePath calls winspool.drv!GetPrinterDriverPackagePathW.
+// https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverpackagepath
+func GetPrinterDriverPackagePath(pszServer string, pszEnvironment string, pszLanguage string, pszPackageID string, pszDriverPackageCab foundation.PWSTR, cchDriverPackageCab uint32, pcchRequiredSize *uint32) error {
+	_pszServer := win32.UTF16Ptr(pszServer)
+	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	_pszLanguage := win32.UTF16Ptr(pszLanguage)
+	_pszPackageID := win32.UTF16Ptr(pszPackageID)
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriverPackagePath.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(_pszLanguage)), uintptr(unsafe.Pointer(_pszPackageID)), uintptr(unsafe.Pointer(pszDriverPackageCab)), uintptr(cchDriverPackageCab), uintptr(unsafe.Pointer(pcchRequiredSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrinterDriverPackagePathA calls winspool.drv!GetPrinterDriverPackagePathA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverpackagepath
-func GetPrinterDriverPackagePathA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, pszLanguage foundation.PSTR, pszPackageID foundation.PSTR, pszDriverPackageCab foundation.PSTR, cchDriverPackageCab uint32, pcchRequiredSize *uint32) foundation.HRESULT {
+func GetPrinterDriverPackagePathA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, pszLanguage foundation.PSTR, pszPackageID foundation.PSTR, pszDriverPackageCab foundation.PSTR, cchDriverPackageCab uint32, pcchRequiredSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetPrinterDriverPackagePathA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(pszLanguage)), uintptr(unsafe.Pointer(pszPackageID)), uintptr(unsafe.Pointer(pszDriverPackageCab)), uintptr(cchDriverPackageCab), uintptr(unsafe.Pointer(pcchRequiredSize)))
-	return foundation.HRESULT(r1)
-}
-
-// GetPrinterDriverPackagePathW calls winspool.drv!GetPrinterDriverPackagePathW.
-// https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverpackagepath
-func GetPrinterDriverPackagePathW(pszServer foundation.PWSTR, pszEnvironment foundation.PWSTR, pszLanguage foundation.PWSTR, pszPackageID foundation.PWSTR, pszDriverPackageCab foundation.PWSTR, cchDriverPackageCab uint32, pcchRequiredSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriverPackagePathW.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(pszLanguage)), uintptr(unsafe.Pointer(pszPackageID)), uintptr(unsafe.Pointer(pszDriverPackageCab)), uintptr(cchDriverPackageCab), uintptr(unsafe.Pointer(pcchRequiredSize)))
-	return foundation.HRESULT(r1)
-}
-
-// GetPrinterDriverW calls winspool.drv!GetPrinterDriverW.
-// https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver
-func GetPrinterDriverW(hPrinter PRINTER_HANDLE, pEnvironment foundation.PWSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriverW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	return foundation.BOOL(r1)
-}
-
-// GetPrinterW calls winspool.drv!GetPrinterW.
-// https://learn.microsoft.com/windows/win32/printdocs/getprinter
-func GetPrinterW(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, cbBuf uint32, pcbNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetPrinterW.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpoolFileHandle calls winspool.drv!GetSpoolFileHandle.
@@ -1298,53 +1399,69 @@ func GetSpoolFileHandle(hPrinter PRINTER_HANDLE) (foundation.HANDLE, error) {
 }
 
 // ImpersonatePrinterClient calls SPOOLSS!ImpersonatePrinterClient.
-func ImpersonatePrinterClient(hToken foundation.HANDLE) foundation.BOOL {
+func ImpersonatePrinterClient(hToken foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procImpersonatePrinterClient.Addr(), uintptr(hToken))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// InstallPrinterDriverFromPackage calls winspool.drv!InstallPrinterDriverFromPackageW.
+// https://learn.microsoft.com/windows/win32/printdocs/installprinterdriverfrompackage
+func InstallPrinterDriverFromPackage(pszServer string, pszInfPath string, pszDriverName string, pszEnvironment string, dwFlags uint32) error {
+	_pszServer := win32.UTF16Ptr(pszServer)
+	_pszInfPath := win32.UTF16Ptr(pszInfPath)
+	_pszDriverName := win32.UTF16Ptr(pszDriverName)
+	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	r1, _, _ := syscall.SyscallN(procInstallPrinterDriverFromPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszDriverName)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstallPrinterDriverFromPackageA calls winspool.drv!InstallPrinterDriverFromPackageA.
 // https://learn.microsoft.com/windows/win32/printdocs/installprinterdriverfrompackage
-func InstallPrinterDriverFromPackageA(pszServer foundation.PSTR, pszInfPath foundation.PSTR, pszDriverName foundation.PSTR, pszEnvironment foundation.PSTR, dwFlags uint32) foundation.HRESULT {
+func InstallPrinterDriverFromPackageA(pszServer foundation.PSTR, pszInfPath foundation.PSTR, pszDriverName foundation.PSTR, pszEnvironment foundation.PSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procInstallPrinterDriverFromPackageA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszInfPath)), uintptr(unsafe.Pointer(pszDriverName)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// InstallPrinterDriverFromPackageW calls winspool.drv!InstallPrinterDriverFromPackageW.
-// https://learn.microsoft.com/windows/win32/printdocs/installprinterdriverfrompackage
-func InstallPrinterDriverFromPackageW(pszServer foundation.PWSTR, pszInfPath foundation.PWSTR, pszDriverName foundation.PWSTR, pszEnvironment foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInstallPrinterDriverFromPackageW.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszInfPath)), uintptr(unsafe.Pointer(pszDriverName)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+// IsValidDevmode calls winspool.drv!IsValidDevmodeW.
+// https://learn.microsoft.com/windows/win32/printdocs/isvaliddevmode
+func IsValidDevmode(pDevmode *graphicsgdi.DEVMODEW, DevmodeSize uintptr) bool {
+	r1, _, _ := syscall.SyscallN(procIsValidDevmode.Addr(), uintptr(unsafe.Pointer(pDevmode)), uintptr(DevmodeSize))
+	return r1 != 0
 }
 
 // IsValidDevmodeA calls winspool.drv!IsValidDevmodeA.
 // https://learn.microsoft.com/windows/win32/printdocs/isvaliddevmode
-func IsValidDevmodeA(pDevmode *graphicsgdi.DEVMODEA, DevmodeSize uintptr) foundation.BOOL {
+func IsValidDevmodeA(pDevmode *graphicsgdi.DEVMODEA, DevmodeSize uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procIsValidDevmodeA.Addr(), uintptr(unsafe.Pointer(pDevmode)), uintptr(DevmodeSize))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// IsValidDevmodeW calls winspool.drv!IsValidDevmodeW.
-// https://learn.microsoft.com/windows/win32/printdocs/isvaliddevmode
-func IsValidDevmodeW(pDevmode *graphicsgdi.DEVMODEW, DevmodeSize uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIsValidDevmodeW.Addr(), uintptr(unsafe.Pointer(pDevmode)), uintptr(DevmodeSize))
-	return foundation.BOOL(r1)
-}
-
-// OpenPrinter2A calls winspool.drv!OpenPrinter2A.
-// https://learn.microsoft.com/windows/win32/printdocs/openprinter2
-func OpenPrinter2A(pPrinterName foundation.PSTR, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSA, pOptions *PRINTER_OPTIONSA) error {
-	r1, _, e1 := syscall.SyscallN(procOpenPrinter2A.Addr(), uintptr(unsafe.Pointer(pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pOptions)))
+// OpenPrinter calls winspool.drv!OpenPrinterW.
+// https://learn.microsoft.com/windows/win32/printdocs/openprinter
+func OpenPrinter(pPrinterName string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW) error {
+	_pPrinterName := win32.UTF16Ptr(pPrinterName)
+	r1, _, e1 := syscall.SyscallN(procOpenPrinter.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// OpenPrinter2W calls winspool.drv!OpenPrinter2W.
+// OpenPrinter2 calls winspool.drv!OpenPrinter2W.
 // https://learn.microsoft.com/windows/win32/printdocs/openprinter2
-func OpenPrinter2W(pPrinterName foundation.PWSTR, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW, pOptions *PRINTER_OPTIONSW) error {
-	r1, _, e1 := syscall.SyscallN(procOpenPrinter2W.Addr(), uintptr(unsafe.Pointer(pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pOptions)))
+func OpenPrinter2(pPrinterName string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW, pOptions *PRINTER_OPTIONSW) error {
+	_pPrinterName := win32.UTF16Ptr(pPrinterName)
+	r1, _, e1 := syscall.SyscallN(procOpenPrinter2.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pOptions)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// OpenPrinter2A calls winspool.drv!OpenPrinter2A.
+// https://learn.microsoft.com/windows/win32/printdocs/openprinter2
+func OpenPrinter2A(pPrinterName foundation.PSTR, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSA, pOptions *PRINTER_OPTIONSA) error {
+	r1, _, e1 := syscall.SyscallN(procOpenPrinter2A.Addr(), uintptr(unsafe.Pointer(pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pOptions)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1361,26 +1478,24 @@ func OpenPrinterA(pPrinterName foundation.PSTR, phPrinter *PRINTER_HANDLE, pDefa
 	return nil
 }
 
-// OpenPrinterW calls winspool.drv!OpenPrinterW.
-// https://learn.microsoft.com/windows/win32/printdocs/openprinter
-func OpenPrinterW(pPrinterName foundation.PWSTR, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW) error {
-	r1, _, e1 := syscall.SyscallN(procOpenPrinterW.Addr(), uintptr(unsafe.Pointer(pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // PartialReplyPrinterChangeNotification calls SPOOLSS!PartialReplyPrinterChangeNotification.
-func PartialReplyPrinterChangeNotification(hPrinter PRINTER_HANDLE, pDataSrc *PRINTER_NOTIFY_INFO_DATA) foundation.BOOL {
+func PartialReplyPrinterChangeNotification(hPrinter PRINTER_HANDLE, pDataSrc *PRINTER_NOTIFY_INFO_DATA) bool {
 	r1, _, _ := syscall.SyscallN(procPartialReplyPrinterChangeNotification.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pDataSrc)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PlayGdiScriptOnPrinterIC calls winspool.drv!PlayGdiScriptOnPrinterIC.
-func PlayGdiScriptOnPrinterIC(hPrinterIC foundation.HANDLE, pIn *byte, cIn uint32, pOut *byte, cOut uint32, ul uint32) foundation.BOOL {
+func PlayGdiScriptOnPrinterIC(hPrinterIC foundation.HANDLE, pIn *byte, cIn uint32, pOut *byte, cOut uint32, ul uint32) bool {
 	r1, _, _ := syscall.SyscallN(procPlayGdiScriptOnPrinterIC.Addr(), uintptr(hPrinterIC), uintptr(unsafe.Pointer(pIn)), uintptr(cIn), uintptr(unsafe.Pointer(pOut)), uintptr(cOut), uintptr(ul))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// PrinterMessageBox calls winspool.drv!PrinterMessageBoxW.
+func PrinterMessageBox(hPrinter PRINTER_HANDLE, Error uint32, hWnd foundation.HWND, pText string, pCaption string, dwType uint32) uint32 {
+	_pText := win32.UTF16Ptr(pText)
+	_pCaption := win32.UTF16Ptr(pCaption)
+	r1, _, _ := syscall.SyscallN(procPrinterMessageBox.Addr(), uintptr(hPrinter), uintptr(Error), uintptr(hWnd), uintptr(unsafe.Pointer(_pText)), uintptr(unsafe.Pointer(_pCaption)), uintptr(dwType))
+	return uint32(r1)
 }
 
 // PrinterMessageBoxA calls winspool.drv!PrinterMessageBoxA.
@@ -1389,83 +1504,78 @@ func PrinterMessageBoxA(hPrinter PRINTER_HANDLE, Error uint32, hWnd foundation.H
 	return uint32(r1)
 }
 
-// PrinterMessageBoxW calls winspool.drv!PrinterMessageBoxW.
-func PrinterMessageBoxW(hPrinter PRINTER_HANDLE, Error uint32, hWnd foundation.HWND, pText foundation.PWSTR, pCaption foundation.PWSTR, dwType uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPrinterMessageBoxW.Addr(), uintptr(hPrinter), uintptr(Error), uintptr(hWnd), uintptr(unsafe.Pointer(pText)), uintptr(unsafe.Pointer(pCaption)), uintptr(dwType))
-	return uint32(r1)
-}
-
 // PrinterProperties calls winspool.drv!PrinterProperties.
 // https://learn.microsoft.com/windows/win32/printdocs/printerproperties
-func PrinterProperties(hWnd foundation.HWND, hPrinter PRINTER_HANDLE) foundation.BOOL {
+func PrinterProperties(hWnd foundation.HWND, hPrinter PRINTER_HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procPrinterProperties.Addr(), uintptr(hWnd), uintptr(hPrinter))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ProvidorFindClosePrinterChangeNotification calls SPOOLSS!ProvidorFindClosePrinterChangeNotification.
-func ProvidorFindClosePrinterChangeNotification(hPrinter PRINTER_HANDLE) foundation.BOOL {
+func ProvidorFindClosePrinterChangeNotification(hPrinter PRINTER_HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procProvidorFindClosePrinterChangeNotification.Addr(), uintptr(hPrinter))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ProvidorFindFirstPrinterChangeNotification calls SPOOLSS!ProvidorFindFirstPrinterChangeNotification.
-func ProvidorFindFirstPrinterChangeNotification(hPrinter PRINTER_HANDLE, fdwFlags uint32, fdwOptions uint32, hNotify foundation.HANDLE, pPrinterNotifyOptions unsafe.Pointer, pvReserved1 unsafe.Pointer) foundation.BOOL {
+func ProvidorFindFirstPrinterChangeNotification(hPrinter PRINTER_HANDLE, fdwFlags uint32, fdwOptions uint32, hNotify foundation.HANDLE, pPrinterNotifyOptions unsafe.Pointer, pvReserved1 unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procProvidorFindFirstPrinterChangeNotification.Addr(), uintptr(hPrinter), uintptr(fdwFlags), uintptr(fdwOptions), uintptr(hNotify), uintptr(unsafe.Pointer(pPrinterNotifyOptions)), uintptr(unsafe.Pointer(pvReserved1)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ReadPrinter calls winspool.drv!ReadPrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/readprinter
-func ReadPrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pNoBytesRead *uint32) foundation.BOOL {
+func ReadPrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pNoBytesRead *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procReadPrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBuf), uintptr(unsafe.Pointer(pNoBytesRead)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RegisterForPrintAsyncNotifications calls winspool.drv!RegisterForPrintAsyncNotifications.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-registerforprintasyncnotifications
 // Minimum OS: windows6.0.6000.
-func RegisterForPrintAsyncNotifications(pszName foundation.PWSTR, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterForPrintAsyncNotifications.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(phNotify)))
-	return foundation.HRESULT(r1)
+func RegisterForPrintAsyncNotifications(pszName string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procRegisterForPrintAsyncNotifications.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(phNotify)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemovePrintDeviceObject calls SPOOLSS!RemovePrintDeviceObject.
-func RemovePrintDeviceObject(hDeviceObject foundation.HANDLE) foundation.HRESULT {
+func RemovePrintDeviceObject(hDeviceObject foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRemovePrintDeviceObject.Addr(), uintptr(hDeviceObject))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReplyPrinterChangeNotification calls SPOOLSS!ReplyPrinterChangeNotification.
-func ReplyPrinterChangeNotification(hPrinter PRINTER_HANDLE, fdwChangeFlags uint32, pdwResult *uint32, pPrinterNotifyInfo unsafe.Pointer) foundation.BOOL {
+func ReplyPrinterChangeNotification(hPrinter PRINTER_HANDLE, fdwChangeFlags uint32, pdwResult *uint32, pPrinterNotifyInfo unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procReplyPrinterChangeNotification.Addr(), uintptr(hPrinter), uintptr(fdwChangeFlags), uintptr(unsafe.Pointer(pdwResult)), uintptr(unsafe.Pointer(pPrinterNotifyInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ReplyPrinterChangeNotificationEx calls SPOOLSS!ReplyPrinterChangeNotificationEx.
-func ReplyPrinterChangeNotificationEx(hNotify foundation.HANDLE, dwColor uint32, fdwFlags uint32, pdwResult *uint32, pPrinterNotifyInfo unsafe.Pointer) foundation.BOOL {
+func ReplyPrinterChangeNotificationEx(hNotify foundation.HANDLE, dwColor uint32, fdwFlags uint32, pdwResult *uint32, pPrinterNotifyInfo unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procReplyPrinterChangeNotificationEx.Addr(), uintptr(hNotify), uintptr(dwColor), uintptr(fdwFlags), uintptr(unsafe.Pointer(pdwResult)), uintptr(unsafe.Pointer(pPrinterNotifyInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ReportJobProcessingProgress calls winspool.drv!ReportJobProcessingProgress.
 // https://learn.microsoft.com/windows/win32/printdocs/reportjobprocessingprogress
-func ReportJobProcessingProgress(printerHandle foundation.HANDLE, jobId uint32, jobOperation EPrintXPSJobOperation, jobProgress EPrintXPSJobProgress) foundation.HRESULT {
+func ReportJobProcessingProgress(printerHandle foundation.HANDLE, jobId uint32, jobOperation EPrintXPSJobOperation, jobProgress EPrintXPSJobProgress) error {
 	r1, _, _ := syscall.SyscallN(procReportJobProcessingProgress.Addr(), uintptr(printerHandle), uintptr(jobId), uintptr(jobOperation), uintptr(jobProgress))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// ResetPrinter calls winspool.drv!ResetPrinterW.
+// https://learn.microsoft.com/windows/win32/printdocs/resetprinter
+func ResetPrinter(hPrinter PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW) bool {
+	r1, _, _ := syscall.SyscallN(procResetPrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pDefault)))
+	return r1 != 0
 }
 
 // ResetPrinterA calls winspool.drv!ResetPrinterA.
 // https://learn.microsoft.com/windows/win32/printdocs/resetprinter
-func ResetPrinterA(hPrinter PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSA) foundation.BOOL {
+func ResetPrinterA(hPrinter PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSA) bool {
 	r1, _, _ := syscall.SyscallN(procResetPrinterA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pDefault)))
-	return foundation.BOOL(r1)
-}
-
-// ResetPrinterW calls winspool.drv!ResetPrinterW.
-// https://learn.microsoft.com/windows/win32/printdocs/resetprinter
-func ResetPrinterW(hPrinter PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procResetPrinterW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pDefault)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RevertToPrinterSelf calls SPOOLSS!RevertToPrinterSelf.
@@ -1493,9 +1603,10 @@ func RouterAllocPrinterNotifyInfo(cPrinterNotifyInfoData uint32) *PRINTER_NOTIFY
 }
 
 // RouterCreatePrintAsyncNotificationChannel calls SPOOLSS!RouterCreatePrintAsyncNotificationChannel.
-func RouterCreatePrintAsyncNotificationChannel(pName foundation.PWSTR, pNotificationType *win32.GUID, eNotifyFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRouterCreatePrintAsyncNotificationChannel.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eNotifyFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
-	return foundation.HRESULT(r1)
+func RouterCreatePrintAsyncNotificationChannel(pName string, pNotificationType *win32.GUID, eNotifyFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(procRouterCreatePrintAsyncNotificationChannel.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eNotifyFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RouterFreeBidiMem calls SPOOLSS!RouterFreeBidiMem.
@@ -1510,69 +1621,79 @@ func RouterFreeBidiResponseContainer(pData *BIDI_RESPONSE_CONTAINER) uint32 {
 }
 
 // RouterFreePrinterNotifyInfo calls SPOOLSS!RouterFreePrinterNotifyInfo.
-func RouterFreePrinterNotifyInfo(pInfo *PRINTER_NOTIFY_INFO) foundation.BOOL {
+func RouterFreePrinterNotifyInfo(pInfo *PRINTER_NOTIFY_INFO) bool {
 	r1, _, _ := syscall.SyscallN(procRouterFreePrinterNotifyInfo.Addr(), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RouterGetPrintClassObject calls SPOOLSS!RouterGetPrintClassObject.
-func RouterGetPrintClassObject(pPrinter foundation.PWSTR, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRouterGetPrintClassObject.Addr(), uintptr(unsafe.Pointer(pPrinter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func RouterGetPrintClassObject(pPrinter string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pPrinter := win32.UTF16Ptr(pPrinter)
+	r1, _, _ := syscall.SyscallN(procRouterGetPrintClassObject.Addr(), uintptr(unsafe.Pointer(_pPrinter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RouterUnregisterForPrintAsyncNotifications calls SPOOLSS!RouterUnregisterForPrintAsyncNotifications.
-func RouterUnregisterForPrintAsyncNotifications(hNotify foundation.HANDLE) foundation.HRESULT {
+func RouterUnregisterForPrintAsyncNotifications(hNotify foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRouterUnregisterForPrintAsyncNotifications.Addr(), uintptr(hNotify))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScheduleJob calls winspool.drv!ScheduleJob.
 // https://learn.microsoft.com/windows/win32/printdocs/schedulejob
-func ScheduleJob(hPrinter PRINTER_HANDLE, JobId uint32) foundation.BOOL {
+func ScheduleJob(hPrinter PRINTER_HANDLE, JobId uint32) bool {
 	r1, _, _ := syscall.SyscallN(procScheduleJob.Addr(), uintptr(hPrinter), uintptr(JobId))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetCPSUIUserData calls COMPSTUI!SetCPSUIUserData.
-func SetCPSUIUserData(hDlg foundation.HWND, CPSUIUserData uintptr) foundation.BOOL {
+func SetCPSUIUserData(hDlg foundation.HWND, CPSUIUserData uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procSetCPSUIUserData.Addr(), uintptr(hDlg), uintptr(CPSUIUserData))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// SetDefaultPrinter calls winspool.drv!SetDefaultPrinterW.
+// https://learn.microsoft.com/windows/win32/printdocs/setdefaultprinter
+func SetDefaultPrinter(pszPrinter string) bool {
+	_pszPrinter := win32.UTF16Ptr(pszPrinter)
+	r1, _, _ := syscall.SyscallN(procSetDefaultPrinter.Addr(), uintptr(unsafe.Pointer(_pszPrinter)))
+	return r1 != 0
 }
 
 // SetDefaultPrinterA calls winspool.drv!SetDefaultPrinterA.
 // https://learn.microsoft.com/windows/win32/printdocs/setdefaultprinter
-func SetDefaultPrinterA(pszPrinter foundation.PSTR) foundation.BOOL {
+func SetDefaultPrinterA(pszPrinter foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procSetDefaultPrinterA.Addr(), uintptr(unsafe.Pointer(pszPrinter)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// SetDefaultPrinterW calls winspool.drv!SetDefaultPrinterW.
-// https://learn.microsoft.com/windows/win32/printdocs/setdefaultprinter
-func SetDefaultPrinterW(pszPrinter foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetDefaultPrinterW.Addr(), uintptr(unsafe.Pointer(pszPrinter)))
-	return foundation.BOOL(r1)
+// SetForm calls winspool.drv!SetFormW.
+// https://learn.microsoft.com/windows/win32/printdocs/setform
+func SetForm(hPrinter PRINTER_HANDLE, pFormName string, Level uint32, pForm *byte) bool {
+	_pFormName := win32.UTF16Ptr(pFormName)
+	r1, _, _ := syscall.SyscallN(procSetForm.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pFormName)), uintptr(Level), uintptr(unsafe.Pointer(pForm)))
+	return r1 != 0
 }
 
 // SetFormA calls winspool.drv!SetFormA.
 // https://learn.microsoft.com/windows/win32/printdocs/setform
-func SetFormA(hPrinter PRINTER_HANDLE, pFormName foundation.PSTR, Level uint32, pForm *byte) foundation.BOOL {
+func SetFormA(hPrinter PRINTER_HANDLE, pFormName foundation.PSTR, Level uint32, pForm *byte) bool {
 	r1, _, _ := syscall.SyscallN(procSetFormA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pFormName)), uintptr(Level), uintptr(unsafe.Pointer(pForm)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// SetFormW calls winspool.drv!SetFormW.
-// https://learn.microsoft.com/windows/win32/printdocs/setform
-func SetFormW(hPrinter PRINTER_HANDLE, pFormName foundation.PWSTR, Level uint32, pForm *byte) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetFormW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pFormName)), uintptr(Level), uintptr(unsafe.Pointer(pForm)))
-	return foundation.BOOL(r1)
+// SetJob calls winspool.drv!SetJobW.
+// https://learn.microsoft.com/windows/win32/printdocs/setjob
+func SetJob(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, Command uint32) bool {
+	r1, _, _ := syscall.SyscallN(procSetJob.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), 0, uintptr(Command))
+	return r1 != 0
 }
 
 // SetJobA calls winspool.drv!SetJobA.
 // https://learn.microsoft.com/windows/win32/printdocs/setjob
-func SetJobA(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob *byte, Command uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetJobA.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(Command))
-	return foundation.BOOL(r1)
+func SetJobA(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, Command uint32) bool {
+	r1, _, _ := syscall.SyscallN(procSetJobA.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), 0, uintptr(Command))
+	return r1 != 0
 }
 
 // SetJobNamedProperty calls winspool.drv!SetJobNamedProperty.
@@ -1581,11 +1702,16 @@ func SetJobNamedProperty(hPrinter PRINTER_HANDLE, JobId uint32, pProperty *Print
 	return uint32(r1)
 }
 
-// SetJobW calls winspool.drv!SetJobW.
-// https://learn.microsoft.com/windows/win32/printdocs/setjob
-func SetJobW(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob *byte, Command uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetJobW.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(Command))
-	return foundation.BOOL(r1)
+// SetPort calls winspool.drv!SetPortW.
+// https://learn.microsoft.com/windows/win32/printdocs/setport
+func SetPort(pName string, pPortName string, dwLevel uint32, pPortInfo *byte) error {
+	_pName := win32.UTF16Ptr(pName)
+	_pPortName := win32.UTF16Ptr(pPortName)
+	r1, _, e1 := syscall.SyscallN(procSetPort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pPortName)), uintptr(dwLevel), uintptr(unsafe.Pointer(pPortInfo)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetPortA calls winspool.drv!SetPortA.
@@ -1598,10 +1724,10 @@ func SetPortA(pName foundation.PSTR, pPortName foundation.PSTR, dwLevel uint32, 
 	return nil
 }
 
-// SetPortW calls winspool.drv!SetPortW.
-// https://learn.microsoft.com/windows/win32/printdocs/setport
-func SetPortW(pName foundation.PWSTR, pPortName foundation.PWSTR, dwLevel uint32, pPortInfo *byte) error {
-	r1, _, e1 := syscall.SyscallN(procSetPortW.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pPortName)), uintptr(dwLevel), uintptr(unsafe.Pointer(pPortInfo)))
+// SetPrinter calls winspool.drv!SetPrinterW.
+// https://learn.microsoft.com/windows/win32/printdocs/setprinter
+func SetPrinter(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, Command uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetPrinter.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)), uintptr(Command))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1618,10 +1744,27 @@ func SetPrinterA(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, Command 
 	return nil
 }
 
+// SetPrinterData calls winspool.drv!SetPrinterDataW.
+// https://learn.microsoft.com/windows/win32/printdocs/setprinterdata
+func SetPrinterData(hPrinter PRINTER_HANDLE, pValueName string, Type uint32, pData *byte, cbData uint32) uint32 {
+	_pValueName := win32.UTF16Ptr(pValueName)
+	r1, _, _ := syscall.SyscallN(procSetPrinterData.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+	return uint32(r1)
+}
+
 // SetPrinterDataA calls winspool.drv!SetPrinterDataA.
 // https://learn.microsoft.com/windows/win32/printdocs/setprinterdata
 func SetPrinterDataA(hPrinter PRINTER_HANDLE, pValueName foundation.PSTR, Type uint32, pData *byte, cbData uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procSetPrinterDataA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+	return uint32(r1)
+}
+
+// SetPrinterDataEx calls winspool.drv!SetPrinterDataExW.
+// https://learn.microsoft.com/windows/win32/printdocs/setprinterdataex
+func SetPrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pValueName string, Type uint32, pData *byte, cbData uint32) uint32 {
+	_pKeyName := win32.UTF16Ptr(pKeyName)
+	_pValueName := win32.UTF16Ptr(pValueName)
+	r1, _, _ := syscall.SyscallN(procSetPrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
 	return uint32(r1)
 }
 
@@ -1632,30 +1775,6 @@ func SetPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pValue
 	return uint32(r1)
 }
 
-// SetPrinterDataExW calls winspool.drv!SetPrinterDataExW.
-// https://learn.microsoft.com/windows/win32/printdocs/setprinterdataex
-func SetPrinterDataExW(hPrinter PRINTER_HANDLE, pKeyName foundation.PWSTR, pValueName foundation.PWSTR, Type uint32, pData *byte, cbData uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetPrinterDataExW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
-	return uint32(r1)
-}
-
-// SetPrinterDataW calls winspool.drv!SetPrinterDataW.
-// https://learn.microsoft.com/windows/win32/printdocs/setprinterdata
-func SetPrinterDataW(hPrinter PRINTER_HANDLE, pValueName foundation.PWSTR, Type uint32, pData *byte, cbData uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetPrinterDataW.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
-	return uint32(r1)
-}
-
-// SetPrinterW calls winspool.drv!SetPrinterW.
-// https://learn.microsoft.com/windows/win32/printdocs/setprinter
-func SetPrinterW(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, Command uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetPrinterW.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)), uintptr(Command))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SplIsSessionZero calls SPOOLSS!SplIsSessionZero.
 func SplIsSessionZero(hPrinter PRINTER_HANDLE, JobId uint32, pIsSessionZero *foundation.BOOL) uint32 {
 	r1, _, _ := syscall.SyscallN(procSplIsSessionZero.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(unsafe.Pointer(pIsSessionZero)))
@@ -1663,33 +1782,35 @@ func SplIsSessionZero(hPrinter PRINTER_HANDLE, JobId uint32, pIsSessionZero *fou
 }
 
 // SplPromptUIInUsersSession calls SPOOLSS!SplPromptUIInUsersSession.
-func SplPromptUIInUsersSession(hPrinter PRINTER_HANDLE, JobId uint32, pUIParams *SHOWUIPARAMS, pResponse *uint32) foundation.BOOL {
+func SplPromptUIInUsersSession(hPrinter PRINTER_HANDLE, JobId uint32, pUIParams *SHOWUIPARAMS, pResponse *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSplPromptUIInUsersSession.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(unsafe.Pointer(pUIParams)), uintptr(unsafe.Pointer(pResponse)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SpoolerCopyFileEvent calls mscms!SpoolerCopyFileEvent.
-func SpoolerCopyFileEvent(pszPrinterName foundation.PWSTR, pszKey foundation.PWSTR, dwCopyFileEvent uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSpoolerCopyFileEvent.Addr(), uintptr(unsafe.Pointer(pszPrinterName)), uintptr(unsafe.Pointer(pszKey)), uintptr(dwCopyFileEvent))
-	return foundation.BOOL(r1)
+func SpoolerCopyFileEvent(pszPrinterName string, pszKey string, dwCopyFileEvent uint32) bool {
+	_pszPrinterName := win32.UTF16Ptr(pszPrinterName)
+	_pszKey := win32.UTF16Ptr(pszKey)
+	r1, _, _ := syscall.SyscallN(procSpoolerCopyFileEvent.Addr(), uintptr(unsafe.Pointer(_pszPrinterName)), uintptr(unsafe.Pointer(_pszKey)), uintptr(dwCopyFileEvent))
+	return r1 != 0
 }
 
 // SpoolerFindClosePrinterChangeNotification calls SPOOLSS!SpoolerFindClosePrinterChangeNotification.
-func SpoolerFindClosePrinterChangeNotification(hPrinter PRINTER_HANDLE) foundation.BOOL {
+func SpoolerFindClosePrinterChangeNotification(hPrinter PRINTER_HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procSpoolerFindClosePrinterChangeNotification.Addr(), uintptr(hPrinter))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SpoolerFindFirstPrinterChangeNotification calls SPOOLSS!SpoolerFindFirstPrinterChangeNotification.
-func SpoolerFindFirstPrinterChangeNotification(hPrinter PRINTER_HANDLE, fdwFilterFlags uint32, fdwOptions uint32, pPrinterNotifyOptions unsafe.Pointer, pvReserved unsafe.Pointer, pNotificationConfig unsafe.Pointer, phNotify *foundation.HANDLE, phEvent *foundation.HANDLE) foundation.BOOL {
+func SpoolerFindFirstPrinterChangeNotification(hPrinter PRINTER_HANDLE, fdwFilterFlags uint32, fdwOptions uint32, pPrinterNotifyOptions unsafe.Pointer, pvReserved unsafe.Pointer, pNotificationConfig unsafe.Pointer, phNotify *foundation.HANDLE, phEvent *foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procSpoolerFindFirstPrinterChangeNotification.Addr(), uintptr(hPrinter), uintptr(fdwFilterFlags), uintptr(fdwOptions), uintptr(unsafe.Pointer(pPrinterNotifyOptions)), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(pNotificationConfig)), uintptr(unsafe.Pointer(phNotify)), uintptr(unsafe.Pointer(phEvent)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SpoolerFindNextPrinterChangeNotification calls SPOOLSS!SpoolerFindNextPrinterChangeNotification.
-func SpoolerFindNextPrinterChangeNotification(hPrinter PRINTER_HANDLE, pfdwChange *uint32, pPrinterNotifyOptions unsafe.Pointer, ppPrinterNotifyInfo *unsafe.Pointer) foundation.BOOL {
+func SpoolerFindNextPrinterChangeNotification(hPrinter PRINTER_HANDLE, pfdwChange *uint32, pPrinterNotifyOptions unsafe.Pointer, ppPrinterNotifyInfo *unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSpoolerFindNextPrinterChangeNotification.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pfdwChange)), uintptr(unsafe.Pointer(pPrinterNotifyOptions)), uintptr(unsafe.Pointer(ppPrinterNotifyInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SpoolerFreePrinterNotifyInfo calls SPOOLSS!SpoolerFreePrinterNotifyInfo.
@@ -1698,9 +1819,16 @@ func SpoolerFreePrinterNotifyInfo(pInfo *PRINTER_NOTIFY_INFO) {
 }
 
 // SpoolerRefreshPrinterChangeNotification calls SPOOLSS!SpoolerRefreshPrinterChangeNotification.
-func SpoolerRefreshPrinterChangeNotification(hPrinter PRINTER_HANDLE, dwColor uint32, pOptions *PRINTER_NOTIFY_OPTIONS, ppInfo **PRINTER_NOTIFY_INFO) foundation.BOOL {
+func SpoolerRefreshPrinterChangeNotification(hPrinter PRINTER_HANDLE, dwColor uint32, pOptions *PRINTER_NOTIFY_OPTIONS, ppInfo **PRINTER_NOTIFY_INFO) bool {
 	r1, _, _ := syscall.SyscallN(procSpoolerRefreshPrinterChangeNotification.Addr(), uintptr(hPrinter), uintptr(dwColor), uintptr(unsafe.Pointer(pOptions)), uintptr(unsafe.Pointer(ppInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// StartDocPrinter calls winspool.drv!StartDocPrinterW.
+// https://learn.microsoft.com/windows/win32/printdocs/startdocprinter
+func StartDocPrinter(hPrinter PRINTER_HANDLE, Level uint32, pDocInfo *DOC_INFO_1W) uint32 {
+	r1, _, _ := syscall.SyscallN(procStartDocPrinter.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pDocInfo)))
+	return uint32(r1)
 }
 
 // StartDocPrinterA calls winspool.drv!StartDocPrinterA.
@@ -1710,46 +1838,42 @@ func StartDocPrinterA(hPrinter PRINTER_HANDLE, Level uint32, pDocInfo *DOC_INFO_
 	return uint32(r1)
 }
 
-// StartDocPrinterW calls winspool.drv!StartDocPrinterW.
-// https://learn.microsoft.com/windows/win32/printdocs/startdocprinter
-func StartDocPrinterW(hPrinter PRINTER_HANDLE, Level uint32, pDocInfo *DOC_INFO_1W) uint32 {
-	r1, _, _ := syscall.SyscallN(procStartDocPrinterW.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pDocInfo)))
-	return uint32(r1)
-}
-
 // StartPagePrinter calls winspool.drv!StartPagePrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/startpageprinter
-func StartPagePrinter(hPrinter PRINTER_HANDLE) foundation.BOOL {
+func StartPagePrinter(hPrinter PRINTER_HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procStartPagePrinter.Addr(), uintptr(hPrinter))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UnRegisterForPrintAsyncNotifications calls winspool.drv!UnRegisterForPrintAsyncNotifications.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-unregisterforprintasyncnotifications
 // Minimum OS: windows6.0.6000.
-func UnRegisterForPrintAsyncNotifications(param0 foundation.HANDLE) foundation.HRESULT {
+func UnRegisterForPrintAsyncNotifications(param0 foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procUnRegisterForPrintAsyncNotifications.Addr(), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdatePrintDeviceObject calls SPOOLSS!UpdatePrintDeviceObject.
-func UpdatePrintDeviceObject(hPrinter PRINTER_HANDLE, hDeviceObject foundation.HANDLE) foundation.HRESULT {
+func UpdatePrintDeviceObject(hPrinter PRINTER_HANDLE, hDeviceObject foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procUpdatePrintDeviceObject.Addr(), uintptr(hPrinter), uintptr(hDeviceObject))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// UploadPrinterDriverPackage calls winspool.drv!UploadPrinterDriverPackageW.
+// https://learn.microsoft.com/windows/win32/printdocs/uploadprinterdriverpackage
+func UploadPrinterDriverPackage(pszServer string, pszInfPath string, pszEnvironment string, dwFlags uint32, hwnd foundation.HWND, pszDestInfPath foundation.PWSTR, pcchDestInfPath *uint32) error {
+	_pszServer := win32.UTF16Ptr(pszServer)
+	_pszInfPath := win32.UTF16Ptr(pszInfPath)
+	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	r1, _, _ := syscall.SyscallN(procUploadPrinterDriverPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(dwFlags), uintptr(hwnd), uintptr(unsafe.Pointer(pszDestInfPath)), uintptr(unsafe.Pointer(pcchDestInfPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UploadPrinterDriverPackageA calls winspool.drv!UploadPrinterDriverPackageA.
 // https://learn.microsoft.com/windows/win32/printdocs/uploadprinterdriverpackage
-func UploadPrinterDriverPackageA(pszServer foundation.PSTR, pszInfPath foundation.PSTR, pszEnvironment foundation.PSTR, dwFlags uint32, hwnd foundation.HWND, pszDestInfPath foundation.PSTR, pcchDestInfPath *uint32) foundation.HRESULT {
+func UploadPrinterDriverPackageA(pszServer foundation.PSTR, pszInfPath foundation.PSTR, pszEnvironment foundation.PSTR, dwFlags uint32, hwnd foundation.HWND, pszDestInfPath foundation.PSTR, pcchDestInfPath *uint32) error {
 	r1, _, _ := syscall.SyscallN(procUploadPrinterDriverPackageA.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszInfPath)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(dwFlags), uintptr(hwnd), uintptr(unsafe.Pointer(pszDestInfPath)), uintptr(unsafe.Pointer(pcchDestInfPath)))
-	return foundation.HRESULT(r1)
-}
-
-// UploadPrinterDriverPackageW calls winspool.drv!UploadPrinterDriverPackageW.
-// https://learn.microsoft.com/windows/win32/printdocs/uploadprinterdriverpackage
-func UploadPrinterDriverPackageW(pszServer foundation.PWSTR, pszInfPath foundation.PWSTR, pszEnvironment foundation.PWSTR, dwFlags uint32, hwnd foundation.HWND, pszDestInfPath foundation.PWSTR, pcchDestInfPath *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUploadPrinterDriverPackageW.Addr(), uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszInfPath)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(dwFlags), uintptr(hwnd), uintptr(unsafe.Pointer(pszDestInfPath)), uintptr(unsafe.Pointer(pcchDestInfPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForPrinterChange calls winspool.drv!WaitForPrinterChange.
@@ -1760,13 +1884,14 @@ func WaitForPrinterChange(hPrinter PRINTER_HANDLE, Flags uint32) uint32 {
 
 // WritePrinter calls winspool.drv!WritePrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/writeprinter
-func WritePrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pcWritten *uint32) foundation.BOOL {
+func WritePrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pcWritten *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procWritePrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcWritten)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // XcvDataW calls winspool.drv!XcvDataW.
-func XcvDataW(hXcv foundation.HANDLE, pszDataName foundation.PWSTR, pInputData *byte, cbInputData uint32, pOutputData *byte, cbOutputData uint32, pcbOutputNeeded *uint32, pdwStatus *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procXcvDataW.Addr(), uintptr(hXcv), uintptr(unsafe.Pointer(pszDataName)), uintptr(unsafe.Pointer(pInputData)), uintptr(cbInputData), uintptr(unsafe.Pointer(pOutputData)), uintptr(cbOutputData), uintptr(unsafe.Pointer(pcbOutputNeeded)), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.BOOL(r1)
+func XcvDataW(hXcv foundation.HANDLE, pszDataName string, pInputData *byte, cbInputData uint32, pOutputData *byte, cbOutputData uint32, pcbOutputNeeded *uint32, pdwStatus *uint32) bool {
+	_pszDataName := win32.UTF16Ptr(pszDataName)
+	r1, _, _ := syscall.SyscallN(procXcvDataW.Addr(), uintptr(hXcv), uintptr(unsafe.Pointer(_pszDataName)), uintptr(unsafe.Pointer(pInputData)), uintptr(cbInputData), uintptr(unsafe.Pointer(pOutputData)), uintptr(cbOutputData), uintptr(unsafe.Pointer(pcbOutputNeeded)), uintptr(unsafe.Pointer(pdwStatus)))
+	return r1 != 0
 }

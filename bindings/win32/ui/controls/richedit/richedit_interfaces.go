@@ -31,9 +31,9 @@ type IRichEditOle struct {
 var IID_IRichEditOle = win32.GUID{Data1: 0x00020d00, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // GetClientSite dispatches through IRichEditOle's vtable slot 3.
-func (self *IRichEditOle) GetClientSite(lplpolesite **systemole.IOleClientSite) foundation.HRESULT {
+func (self *IRichEditOle) GetClientSite(lplpolesite **systemole.IOleClientSite) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lplpolesite)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjectCount dispatches through IRichEditOle's vtable slot 4.
@@ -49,81 +49,83 @@ func (self *IRichEditOle) GetLinkCount() int32 {
 }
 
 // GetObject dispatches through IRichEditOle's vtable slot 6.
-func (self *IRichEditOle) GetObject(iob int32, lpreobject *REOBJECT, dwFlags RICH_EDIT_GET_OBJECT_FLAGS) foundation.HRESULT {
+func (self *IRichEditOle) GetObject(iob int32, lpreobject *REOBJECT, dwFlags RICH_EDIT_GET_OBJECT_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iob), uintptr(unsafe.Pointer(lpreobject)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertObject dispatches through IRichEditOle's vtable slot 7.
-func (self *IRichEditOle) InsertObject(lpreobject *REOBJECT) foundation.HRESULT {
+func (self *IRichEditOle) InsertObject(lpreobject *REOBJECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpreobject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertObject dispatches through IRichEditOle's vtable slot 8.
-func (self *IRichEditOle) ConvertObject(iob int32, rclsidNew *win32.GUID, lpstrUserTypeNew foundation.PSTR) foundation.HRESULT {
+func (self *IRichEditOle) ConvertObject(iob int32, rclsidNew *win32.GUID, lpstrUserTypeNew foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iob), uintptr(unsafe.Pointer(rclsidNew)), uintptr(unsafe.Pointer(lpstrUserTypeNew)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ActivateAs dispatches through IRichEditOle's vtable slot 9.
-func (self *IRichEditOle) ActivateAs(rclsid *win32.GUID, rclsidAs *win32.GUID) foundation.HRESULT {
+func (self *IRichEditOle) ActivateAs(rclsid *win32.GUID, rclsidAs *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(rclsidAs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHostNames dispatches through IRichEditOle's vtable slot 10.
-func (self *IRichEditOle) SetHostNames(lpstrContainerApp foundation.PSTR, lpstrContainerObj foundation.PSTR) foundation.HRESULT {
+func (self *IRichEditOle) SetHostNames(lpstrContainerApp foundation.PSTR, lpstrContainerObj foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpstrContainerApp)), uintptr(unsafe.Pointer(lpstrContainerObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLinkAvailable dispatches through IRichEditOle's vtable slot 11.
-func (self *IRichEditOle) SetLinkAvailable(iob int32, fAvailable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(iob), uintptr(fAvailable))
-	return foundation.HRESULT(r1)
+func (self *IRichEditOle) SetLinkAvailable(iob int32, fAvailable bool) error {
+	_fAvailable := win32.Bool32(fAvailable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(iob), uintptr(_fAvailable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDvaspect dispatches through IRichEditOle's vtable slot 12.
-func (self *IRichEditOle) SetDvaspect(iob int32, dvaspect uint32) foundation.HRESULT {
+func (self *IRichEditOle) SetDvaspect(iob int32, dvaspect uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(iob), uintptr(dvaspect))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HandsOffStorage dispatches through IRichEditOle's vtable slot 13.
-func (self *IRichEditOle) HandsOffStorage(iob int32) foundation.HRESULT {
+func (self *IRichEditOle) HandsOffStorage(iob int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(iob))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveCompleted dispatches through IRichEditOle's vtable slot 14.
-func (self *IRichEditOle) SaveCompleted(iob int32, lpstg *systemcomstructuredstorage.IStorage) foundation.HRESULT {
+func (self *IRichEditOle) SaveCompleted(iob int32, lpstg *systemcomstructuredstorage.IStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(iob), uintptr(unsafe.Pointer(lpstg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InPlaceDeactivate dispatches through IRichEditOle's vtable slot 15.
-func (self *IRichEditOle) InPlaceDeactivate() foundation.HRESULT {
+func (self *IRichEditOle) InPlaceDeactivate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ContextSensitiveHelp dispatches through IRichEditOle's vtable slot 16.
-func (self *IRichEditOle) ContextSensitiveHelp(fEnterMode foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(fEnterMode))
-	return foundation.HRESULT(r1)
+func (self *IRichEditOle) ContextSensitiveHelp(fEnterMode bool) error {
+	_fEnterMode := win32.Bool32(fEnterMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(_fEnterMode))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipboardData dispatches through IRichEditOle's vtable slot 17.
-func (self *IRichEditOle) GetClipboardData(lpchrg *CHARRANGE, reco uint32, lplpdataobj **systemcom.IDataObject) foundation.HRESULT {
+func (self *IRichEditOle) GetClipboardData(lpchrg *CHARRANGE, reco uint32, lplpdataobj **systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpchrg)), uintptr(reco), uintptr(unsafe.Pointer(lplpdataobj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ImportDataObject dispatches through IRichEditOle's vtable slot 18.
-func (self *IRichEditOle) ImportDataObject(lpdataobj *systemcom.IDataObject, cf uint16, hMetaPict foundation.HGLOBAL) foundation.HRESULT {
+func (self *IRichEditOle) ImportDataObject(lpdataobj *systemcom.IDataObject, cf uint16, hMetaPict foundation.HGLOBAL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdataobj)), uintptr(cf), uintptr(hMetaPict))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRichEditOleCallback: https://learn.microsoft.com/windows/win32/api/richole/nn-richole-iricheditolecallback
@@ -136,63 +138,67 @@ type IRichEditOleCallback struct {
 var IID_IRichEditOleCallback = win32.GUID{Data1: 0x00020d03, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // GetNewStorage dispatches through IRichEditOleCallback's vtable slot 3.
-func (self *IRichEditOleCallback) GetNewStorage(lplpstg **systemcomstructuredstorage.IStorage) foundation.HRESULT {
+func (self *IRichEditOleCallback) GetNewStorage(lplpstg **systemcomstructuredstorage.IStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lplpstg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInPlaceContext dispatches through IRichEditOleCallback's vtable slot 4.
-func (self *IRichEditOleCallback) GetInPlaceContext(lplpFrame **systemole.IOleInPlaceFrame, lplpDoc **systemole.IOleInPlaceUIWindow, lpFrameInfo *systemole.OLEINPLACEFRAMEINFO) foundation.HRESULT {
+func (self *IRichEditOleCallback) GetInPlaceContext(lplpFrame **systemole.IOleInPlaceFrame, lplpDoc **systemole.IOleInPlaceUIWindow, lpFrameInfo *systemole.OLEINPLACEFRAMEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lplpFrame)), uintptr(unsafe.Pointer(lplpDoc)), uintptr(unsafe.Pointer(lpFrameInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowContainerUI dispatches through IRichEditOleCallback's vtable slot 5.
-func (self *IRichEditOleCallback) ShowContainerUI(fShow foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fShow))
-	return foundation.HRESULT(r1)
+func (self *IRichEditOleCallback) ShowContainerUI(fShow bool) error {
+	_fShow := win32.Bool32(fShow)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_fShow))
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryInsertObject dispatches through IRichEditOleCallback's vtable slot 6.
-func (self *IRichEditOleCallback) QueryInsertObject(lpclsid *win32.GUID, lpstg *systemcomstructuredstorage.IStorage, cp int32) foundation.HRESULT {
+func (self *IRichEditOleCallback) QueryInsertObject(lpclsid *win32.GUID, lpstg *systemcomstructuredstorage.IStorage, cp int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpclsid)), uintptr(unsafe.Pointer(lpstg)), uintptr(cp))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteObject dispatches through IRichEditOleCallback's vtable slot 7.
-func (self *IRichEditOleCallback) DeleteObject(lpoleobj *systemole.IOleObject) foundation.HRESULT {
+func (self *IRichEditOleCallback) DeleteObject(lpoleobj *systemole.IOleObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpoleobj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryAcceptData dispatches through IRichEditOleCallback's vtable slot 8.
-func (self *IRichEditOleCallback) QueryAcceptData(lpdataobj *systemcom.IDataObject, lpcfFormat *uint16, reco systemsystemservices.RECO_FLAGS, fReally foundation.BOOL, hMetaPict foundation.HGLOBAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdataobj)), uintptr(unsafe.Pointer(lpcfFormat)), uintptr(reco), uintptr(fReally), uintptr(hMetaPict))
-	return foundation.HRESULT(r1)
+func (self *IRichEditOleCallback) QueryAcceptData(lpdataobj *systemcom.IDataObject, lpcfFormat *uint16, reco systemsystemservices.RECO_FLAGS, fReally bool, hMetaPict foundation.HGLOBAL) error {
+	_fReally := win32.Bool32(fReally)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdataobj)), uintptr(unsafe.Pointer(lpcfFormat)), uintptr(reco), uintptr(_fReally), uintptr(hMetaPict))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ContextSensitiveHelp dispatches through IRichEditOleCallback's vtable slot 9.
-func (self *IRichEditOleCallback) ContextSensitiveHelp(fEnterMode foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fEnterMode))
-	return foundation.HRESULT(r1)
+func (self *IRichEditOleCallback) ContextSensitiveHelp(fEnterMode bool) error {
+	_fEnterMode := win32.Bool32(fEnterMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(_fEnterMode))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipboardData dispatches through IRichEditOleCallback's vtable slot 10.
-func (self *IRichEditOleCallback) GetClipboardData(lpchrg *CHARRANGE, reco uint32, lplpdataobj **systemcom.IDataObject) foundation.HRESULT {
+func (self *IRichEditOleCallback) GetClipboardData(lpchrg *CHARRANGE, reco uint32, lplpdataobj **systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpchrg)), uintptr(reco), uintptr(unsafe.Pointer(lplpdataobj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDragDropEffect dispatches through IRichEditOleCallback's vtable slot 11.
-func (self *IRichEditOleCallback) GetDragDropEffect(fDrag foundation.BOOL, grfKeyState systemsystemservices.MODIFIERKEYS_FLAGS, pdwEffect *systemole.DROPEFFECT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(fDrag), uintptr(grfKeyState), uintptr(unsafe.Pointer(pdwEffect)))
-	return foundation.HRESULT(r1)
+func (self *IRichEditOleCallback) GetDragDropEffect(fDrag bool, grfKeyState systemsystemservices.MODIFIERKEYS_FLAGS, pdwEffect *systemole.DROPEFFECT) error {
+	_fDrag := win32.Bool32(fDrag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_fDrag), uintptr(grfKeyState), uintptr(unsafe.Pointer(pdwEffect)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextMenu dispatches through IRichEditOleCallback's vtable slot 12.
-func (self *IRichEditOleCallback) GetContextMenu(seltype RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE, lpoleobj *systemole.IOleObject, lpchrg *CHARRANGE, lphmenu *uiwindowsandmessaging.HMENU) foundation.HRESULT {
+func (self *IRichEditOleCallback) GetContextMenu(seltype RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE, lpoleobj *systemole.IOleObject, lpchrg *CHARRANGE, lphmenu *uiwindowsandmessaging.HMENU) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(seltype), uintptr(unsafe.Pointer(lpoleobj)), uintptr(unsafe.Pointer(lpchrg)), uintptr(unsafe.Pointer(lphmenu)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRicheditUiaOverrides: https://learn.microsoft.com/windows/win32/api/textserv/nn-textserv-irichedituiaoverrides
@@ -201,9 +207,9 @@ type IRicheditUiaOverrides struct {
 }
 
 // GetPropertyOverrideValue dispatches through IRicheditUiaOverrides's vtable slot 3.
-func (self *IRicheditUiaOverrides) GetPropertyOverrideValue(propertyId int32, pRetValue *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IRicheditUiaOverrides) GetPropertyOverrideValue(propertyId int32, pRetValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(pRetValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextDisplays: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextdisplays
@@ -225,111 +231,111 @@ type ITextDocument struct {
 var IID_ITextDocument = win32.GUID{Data1: 0x8cc497c0, Data2: 0xa1df, Data3: 0x11ce, Data4: [8]byte{0x80, 0x98, 0x00, 0xaa, 0x00, 0x47, 0xbe, 0x5d}}
 
 // GetName dispatches through ITextDocument's vtable slot 7.
-func (self *ITextDocument) GetName(pName *foundation.BSTR) foundation.HRESULT {
+func (self *ITextDocument) GetName(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSelection dispatches through ITextDocument's vtable slot 8.
-func (self *ITextDocument) GetSelection(ppSel **ITextSelection) foundation.HRESULT {
+func (self *ITextDocument) GetSelection(ppSel **ITextSelection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoryCount dispatches through ITextDocument's vtable slot 9.
-func (self *ITextDocument) GetStoryCount(pCount *int32) foundation.HRESULT {
+func (self *ITextDocument) GetStoryCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoryRanges dispatches through ITextDocument's vtable slot 10.
-func (self *ITextDocument) GetStoryRanges(ppStories **ITextStoryRanges) foundation.HRESULT {
+func (self *ITextDocument) GetStoryRanges(ppStories **ITextStoryRanges) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStories)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSaved dispatches through ITextDocument's vtable slot 11.
-func (self *ITextDocument) GetSaved(pValue *int32) foundation.HRESULT {
+func (self *ITextDocument) GetSaved(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSaved dispatches through ITextDocument's vtable slot 12.
-func (self *ITextDocument) SetSaved(Value TomConstants) foundation.HRESULT {
+func (self *ITextDocument) SetSaved(Value TomConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultTabStop dispatches through ITextDocument's vtable slot 13.
-func (self *ITextDocument) GetDefaultTabStop(pValue *float32) foundation.HRESULT {
+func (self *ITextDocument) GetDefaultTabStop(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // New dispatches through ITextDocument's vtable slot 15.
-func (self *ITextDocument) New() foundation.HRESULT {
+func (self *ITextDocument) New() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Open dispatches through ITextDocument's vtable slot 16.
-func (self *ITextDocument) Open(pVar *systemvariant.VARIANT, Flags TomConstants, CodePage int32) foundation.HRESULT {
+func (self *ITextDocument) Open(pVar *systemvariant.VARIANT, Flags TomConstants, CodePage int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVar)), uintptr(Flags), uintptr(CodePage))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Save dispatches through ITextDocument's vtable slot 17.
-func (self *ITextDocument) Save(pVar *systemvariant.VARIANT, Flags TomConstants, CodePage int32) foundation.HRESULT {
+func (self *ITextDocument) Save(pVar *systemvariant.VARIANT, Flags TomConstants, CodePage int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVar)), uintptr(Flags), uintptr(CodePage))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Freeze dispatches through ITextDocument's vtable slot 18.
-func (self *ITextDocument) Freeze(pCount *int32) foundation.HRESULT {
+func (self *ITextDocument) Freeze(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unfreeze dispatches through ITextDocument's vtable slot 19.
-func (self *ITextDocument) Unfreeze(pCount *int32) foundation.HRESULT {
+func (self *ITextDocument) Unfreeze(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginEditCollection dispatches through ITextDocument's vtable slot 20.
-func (self *ITextDocument) BeginEditCollection() foundation.HRESULT {
+func (self *ITextDocument) BeginEditCollection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndEditCollection dispatches through ITextDocument's vtable slot 21.
-func (self *ITextDocument) EndEditCollection() foundation.HRESULT {
+func (self *ITextDocument) EndEditCollection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Undo dispatches through ITextDocument's vtable slot 22.
-func (self *ITextDocument) Undo(Count int32, pCount *int32) foundation.HRESULT {
+func (self *ITextDocument) Undo(Count int32, pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Redo dispatches through ITextDocument's vtable slot 23.
-func (self *ITextDocument) Redo(Count int32, pCount *int32) foundation.HRESULT {
+func (self *ITextDocument) Redo(Count int32, pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Range dispatches through ITextDocument's vtable slot 24.
-func (self *ITextDocument) Range(cpActive int32, cpAnchor int32, ppRange **ITextRange) foundation.HRESULT {
+func (self *ITextDocument) Range(cpActive int32, cpAnchor int32, ppRange **ITextRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(cpActive), uintptr(cpAnchor), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RangeFromPoint dispatches through ITextDocument's vtable slot 25.
-func (self *ITextDocument) RangeFromPoint(x int32, y int32, ppRange **ITextRange) foundation.HRESULT {
+func (self *ITextDocument) RangeFromPoint(x int32, y int32, ppRange **ITextRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextDocument2: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextdocument2
@@ -342,267 +348,267 @@ type ITextDocument2 struct {
 var IID_ITextDocument2 = win32.GUID{Data1: 0xc241f5e0, Data2: 0x7206, Data3: 0x11d8, Data4: [8]byte{0xa2, 0xc7, 0x00, 0xa0, 0xd1, 0xd6, 0xc6, 0xb3}}
 
 // GetCaretType dispatches through ITextDocument2's vtable slot 26.
-func (self *ITextDocument2) GetCaretType(pValue *int32) foundation.HRESULT {
+func (self *ITextDocument2) GetCaretType(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCaretType dispatches through ITextDocument2's vtable slot 27.
-func (self *ITextDocument2) SetCaretType(Value int32) foundation.HRESULT {
+func (self *ITextDocument2) SetCaretType(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplays dispatches through ITextDocument2's vtable slot 28.
-func (self *ITextDocument2) GetDisplays(ppDisplays **ITextDisplays) foundation.HRESULT {
+func (self *ITextDocument2) GetDisplays(ppDisplays **ITextDisplays) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDisplays)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocumentFont dispatches through ITextDocument2's vtable slot 29.
-func (self *ITextDocument2) GetDocumentFont(ppFont **ITextFont2) foundation.HRESULT {
+func (self *ITextDocument2) GetDocumentFont(ppFont **ITextFont2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDocumentFont dispatches through ITextDocument2's vtable slot 30.
-func (self *ITextDocument2) SetDocumentFont(pFont *ITextFont2) foundation.HRESULT {
+func (self *ITextDocument2) SetDocumentFont(pFont *ITextFont2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocumentPara dispatches through ITextDocument2's vtable slot 31.
-func (self *ITextDocument2) GetDocumentPara(ppPara **ITextPara2) foundation.HRESULT {
+func (self *ITextDocument2) GetDocumentPara(ppPara **ITextPara2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDocumentPara dispatches through ITextDocument2's vtable slot 32.
-func (self *ITextDocument2) SetDocumentPara(pPara *ITextPara2) foundation.HRESULT {
+func (self *ITextDocument2) SetDocumentPara(pPara *ITextPara2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEastAsianFlags dispatches through ITextDocument2's vtable slot 33.
-func (self *ITextDocument2) GetEastAsianFlags(pFlags *TomConstants) foundation.HRESULT {
+func (self *ITextDocument2) GetEastAsianFlags(pFlags *TomConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGenerator dispatches through ITextDocument2's vtable slot 34.
-func (self *ITextDocument2) GetGenerator(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *ITextDocument2) GetGenerator(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIMEInProgress dispatches through ITextDocument2's vtable slot 35.
-func (self *ITextDocument2) SetIMEInProgress(Value int32) foundation.HRESULT {
+func (self *ITextDocument2) SetIMEInProgress(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNotificationMode dispatches through ITextDocument2's vtable slot 36.
-func (self *ITextDocument2) GetNotificationMode(pValue *int32) foundation.HRESULT {
+func (self *ITextDocument2) GetNotificationMode(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNotificationMode dispatches through ITextDocument2's vtable slot 37.
-func (self *ITextDocument2) SetNotificationMode(Value int32) foundation.HRESULT {
+func (self *ITextDocument2) SetNotificationMode(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSelection2 dispatches through ITextDocument2's vtable slot 38.
-func (self *ITextDocument2) GetSelection2(ppSel **ITextSelection2) foundation.HRESULT {
+func (self *ITextDocument2) GetSelection2(ppSel **ITextSelection2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoryRanges2 dispatches through ITextDocument2's vtable slot 39.
-func (self *ITextDocument2) GetStoryRanges2(ppStories **ITextStoryRanges2) foundation.HRESULT {
+func (self *ITextDocument2) GetStoryRanges2(ppStories **ITextStoryRanges2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStories)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTypographyOptions dispatches through ITextDocument2's vtable slot 40.
-func (self *ITextDocument2) GetTypographyOptions(pOptions *int32) foundation.HRESULT {
+func (self *ITextDocument2) GetTypographyOptions(pOptions *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVersion dispatches through ITextDocument2's vtable slot 41.
-func (self *ITextDocument2) GetVersion(pValue *int32) foundation.HRESULT {
+func (self *ITextDocument2) GetVersion(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWindow dispatches through ITextDocument2's vtable slot 42.
-func (self *ITextDocument2) GetWindow(pHwnd *int64) foundation.HRESULT {
+func (self *ITextDocument2) GetWindow(pHwnd *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AttachMsgFilter dispatches through ITextDocument2's vtable slot 43.
-func (self *ITextDocument2) AttachMsgFilter(pFilter *systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextDocument2) AttachMsgFilter(pFilter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckTextLimit dispatches through ITextDocument2's vtable slot 44.
-func (self *ITextDocument2) CheckTextLimit(cch int32, pcch *int32) foundation.HRESULT {
+func (self *ITextDocument2) CheckTextLimit(cch int32, pcch *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(cch), uintptr(unsafe.Pointer(pcch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCallManager dispatches through ITextDocument2's vtable slot 45.
-func (self *ITextDocument2) GetCallManager(ppVoid **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextDocument2) GetCallManager(ppVoid **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVoid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClientRect dispatches through ITextDocument2's vtable slot 46.
-func (self *ITextDocument2) GetClientRect(Type TomConstants, pLeft *int32, pTop *int32, pRight *int32, pBottom *int32) foundation.HRESULT {
+func (self *ITextDocument2) GetClientRect(Type TomConstants, pLeft *int32, pTop *int32, pRight *int32, pBottom *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pLeft)), uintptr(unsafe.Pointer(pTop)), uintptr(unsafe.Pointer(pRight)), uintptr(unsafe.Pointer(pBottom)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffectColor dispatches through ITextDocument2's vtable slot 47.
-func (self *ITextDocument2) GetEffectColor(Index int32, pValue *int32) foundation.HRESULT {
+func (self *ITextDocument2) GetEffectColor(Index int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImmContext dispatches through ITextDocument2's vtable slot 48.
-func (self *ITextDocument2) GetImmContext(pContext *int64) foundation.HRESULT {
+func (self *ITextDocument2) GetImmContext(pContext *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreferredFont dispatches through ITextDocument2's vtable slot 49.
-func (self *ITextDocument2) GetPreferredFont(cp int32, CharRep int32, Options int32, curCharRep int32, curFontSize int32, pbstr *foundation.BSTR, pPitchAndFamily *int32, pNewFontSize *int32) foundation.HRESULT {
+func (self *ITextDocument2) GetPreferredFont(cp int32, CharRep int32, Options int32, curCharRep int32, curFontSize int32, pbstr *foundation.BSTR, pPitchAndFamily *int32, pNewFontSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(cp), uintptr(CharRep), uintptr(Options), uintptr(curCharRep), uintptr(curFontSize), uintptr(unsafe.Pointer(pbstr)), uintptr(unsafe.Pointer(pPitchAndFamily)), uintptr(unsafe.Pointer(pNewFontSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through ITextDocument2's vtable slot 50.
-func (self *ITextDocument2) GetProperty(Type int32, pValue *int32) foundation.HRESULT {
+func (self *ITextDocument2) GetProperty(Type int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStrings dispatches through ITextDocument2's vtable slot 51.
-func (self *ITextDocument2) GetStrings(ppStrs **ITextStrings) foundation.HRESULT {
+func (self *ITextDocument2) GetStrings(ppStrs **ITextStrings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Notify dispatches through ITextDocument2's vtable slot 52.
-func (self *ITextDocument2) Notify(Notify int32) foundation.HRESULT {
+func (self *ITextDocument2) Notify(Notify int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Notify))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Range2 dispatches through ITextDocument2's vtable slot 53.
-func (self *ITextDocument2) Range2(cpActive int32, cpAnchor int32, ppRange **ITextRange2) foundation.HRESULT {
+func (self *ITextDocument2) Range2(cpActive int32, cpAnchor int32, ppRange **ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(cpActive), uintptr(cpAnchor), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RangeFromPoint2 dispatches through ITextDocument2's vtable slot 54.
-func (self *ITextDocument2) RangeFromPoint2(x int32, y int32, Type int32, ppRange **ITextRange2) foundation.HRESULT {
+func (self *ITextDocument2) RangeFromPoint2(x int32, y int32, Type int32, ppRange **ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y), uintptr(Type), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseCallManager dispatches through ITextDocument2's vtable slot 55.
-func (self *ITextDocument2) ReleaseCallManager(pVoid *systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextDocument2) ReleaseCallManager(pVoid *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVoid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseImmContext dispatches through ITextDocument2's vtable slot 56.
-func (self *ITextDocument2) ReleaseImmContext(Context int64) foundation.HRESULT {
+func (self *ITextDocument2) ReleaseImmContext(Context int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(Context))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEffectColor dispatches through ITextDocument2's vtable slot 57.
-func (self *ITextDocument2) SetEffectColor(Index int32, Value int32) foundation.HRESULT {
+func (self *ITextDocument2) SetEffectColor(Index int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through ITextDocument2's vtable slot 58.
-func (self *ITextDocument2) SetProperty(Type int32, Value int32) foundation.HRESULT {
+func (self *ITextDocument2) SetProperty(Type int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTypographyOptions dispatches through ITextDocument2's vtable slot 59.
-func (self *ITextDocument2) SetTypographyOptions(Options int32, Mask int32) foundation.HRESULT {
+func (self *ITextDocument2) SetTypographyOptions(Options int32, Mask int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(Mask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SysBeep dispatches through ITextDocument2's vtable slot 60.
-func (self *ITextDocument2) SysBeep() foundation.HRESULT {
+func (self *ITextDocument2) SysBeep() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through ITextDocument2's vtable slot 61.
-func (self *ITextDocument2) Update(Value int32) foundation.HRESULT {
+func (self *ITextDocument2) Update(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateWindow dispatches through ITextDocument2's vtable slot 62.
-func (self *ITextDocument2) UpdateWindow() foundation.HRESULT {
+func (self *ITextDocument2) UpdateWindow() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMathProperties dispatches through ITextDocument2's vtable slot 63.
-func (self *ITextDocument2) GetMathProperties(pOptions *int32) foundation.HRESULT {
+func (self *ITextDocument2) GetMathProperties(pOptions *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMathProperties dispatches through ITextDocument2's vtable slot 64.
-func (self *ITextDocument2) SetMathProperties(Options int32, Mask int32) foundation.HRESULT {
+func (self *ITextDocument2) SetMathProperties(Options int32, Mask int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(Mask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetActiveStory dispatches through ITextDocument2's vtable slot 65.
-func (self *ITextDocument2) GetActiveStory(ppStory **ITextStory) foundation.HRESULT {
+func (self *ITextDocument2) GetActiveStory(ppStory **ITextStory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetActiveStory dispatches through ITextDocument2's vtable slot 66.
-func (self *ITextDocument2) SetActiveStory(pStory *ITextStory) foundation.HRESULT {
+func (self *ITextDocument2) SetActiveStory(pStory *ITextStory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMainStory dispatches through ITextDocument2's vtable slot 67.
-func (self *ITextDocument2) GetMainStory(ppStory **ITextStory) foundation.HRESULT {
+func (self *ITextDocument2) GetMainStory(ppStory **ITextStory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNewStory dispatches through ITextDocument2's vtable slot 68.
-func (self *ITextDocument2) GetNewStory(ppStory **ITextStory) foundation.HRESULT {
+func (self *ITextDocument2) GetNewStory(ppStory **ITextStory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStory dispatches through ITextDocument2's vtable slot 69.
-func (self *ITextDocument2) GetStory(Index int32, ppStory **ITextStory) foundation.HRESULT {
+func (self *ITextDocument2) GetStory(Index int32, ppStory **ITextStory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppStory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 01c25500-4268-11d1-883a-3c8b00c10000
@@ -614,147 +620,147 @@ type ITextDocument2Old struct {
 var IID_ITextDocument2Old = win32.GUID{Data1: 0x01c25500, Data2: 0x4268, Data3: 0x11d1, Data4: [8]byte{0x88, 0x3a, 0x3c, 0x8b, 0x00, 0xc1, 0x00, 0x00}}
 
 // AttachMsgFilter dispatches through ITextDocument2Old's vtable slot 26.
-func (self *ITextDocument2Old) AttachMsgFilter(pFilter *systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextDocument2Old) AttachMsgFilter(pFilter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEffectColor dispatches through ITextDocument2Old's vtable slot 27.
-func (self *ITextDocument2Old) SetEffectColor(Index int32, cr foundation.COLORREF) foundation.HRESULT {
+func (self *ITextDocument2Old) SetEffectColor(Index int32, cr foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(cr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffectColor dispatches through ITextDocument2Old's vtable slot 28.
-func (self *ITextDocument2Old) GetEffectColor(Index int32, pcr *foundation.COLORREF) foundation.HRESULT {
+func (self *ITextDocument2Old) GetEffectColor(Index int32, pcr *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pcr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaretType dispatches through ITextDocument2Old's vtable slot 29.
-func (self *ITextDocument2Old) GetCaretType(pCaretType *int32) foundation.HRESULT {
+func (self *ITextDocument2Old) GetCaretType(pCaretType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCaretType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCaretType dispatches through ITextDocument2Old's vtable slot 30.
-func (self *ITextDocument2Old) SetCaretType(CaretType int32) foundation.HRESULT {
+func (self *ITextDocument2Old) SetCaretType(CaretType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(CaretType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImmContext dispatches through ITextDocument2Old's vtable slot 31.
-func (self *ITextDocument2Old) GetImmContext(pContext *int64) foundation.HRESULT {
+func (self *ITextDocument2Old) GetImmContext(pContext *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseImmContext dispatches through ITextDocument2Old's vtable slot 32.
-func (self *ITextDocument2Old) ReleaseImmContext(Context int64) foundation.HRESULT {
+func (self *ITextDocument2Old) ReleaseImmContext(Context int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(Context))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreferredFont dispatches through ITextDocument2Old's vtable slot 33.
-func (self *ITextDocument2Old) GetPreferredFont(cp int32, CharRep int32, Option int32, CharRepCur int32, curFontSize int32, pbstr *foundation.BSTR, pPitchAndFamily *int32, pNewFontSize *int32) foundation.HRESULT {
+func (self *ITextDocument2Old) GetPreferredFont(cp int32, CharRep int32, Option int32, CharRepCur int32, curFontSize int32, pbstr *foundation.BSTR, pPitchAndFamily *int32, pNewFontSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(cp), uintptr(CharRep), uintptr(Option), uintptr(CharRepCur), uintptr(curFontSize), uintptr(unsafe.Pointer(pbstr)), uintptr(unsafe.Pointer(pPitchAndFamily)), uintptr(unsafe.Pointer(pNewFontSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNotificationMode dispatches through ITextDocument2Old's vtable slot 34.
-func (self *ITextDocument2Old) GetNotificationMode(pMode *int32) foundation.HRESULT {
+func (self *ITextDocument2Old) GetNotificationMode(pMode *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNotificationMode dispatches through ITextDocument2Old's vtable slot 35.
-func (self *ITextDocument2Old) SetNotificationMode(Mode int32) foundation.HRESULT {
+func (self *ITextDocument2Old) SetNotificationMode(Mode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClientRect dispatches through ITextDocument2Old's vtable slot 36.
-func (self *ITextDocument2Old) GetClientRect(Type int32, pLeft *int32, pTop *int32, pRight *int32, pBottom *int32) foundation.HRESULT {
+func (self *ITextDocument2Old) GetClientRect(Type int32, pLeft *int32, pTop *int32, pRight *int32, pBottom *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pLeft)), uintptr(unsafe.Pointer(pTop)), uintptr(unsafe.Pointer(pRight)), uintptr(unsafe.Pointer(pBottom)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSelection2 dispatches through ITextDocument2Old's vtable slot 37.
-func (self *ITextDocument2Old) GetSelection2(ppSel **ITextSelection) foundation.HRESULT {
+func (self *ITextDocument2Old) GetSelection2(ppSel **ITextSelection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWindow dispatches through ITextDocument2Old's vtable slot 38.
-func (self *ITextDocument2Old) GetWindow(phWnd *int32) foundation.HRESULT {
+func (self *ITextDocument2Old) GetWindow(phWnd *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phWnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFEFlags dispatches through ITextDocument2Old's vtable slot 39.
-func (self *ITextDocument2Old) GetFEFlags(pFlags *int32) foundation.HRESULT {
+func (self *ITextDocument2Old) GetFEFlags(pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateWindow dispatches through ITextDocument2Old's vtable slot 40.
-func (self *ITextDocument2Old) UpdateWindow() foundation.HRESULT {
+func (self *ITextDocument2Old) UpdateWindow() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckTextLimit dispatches through ITextDocument2Old's vtable slot 41.
-func (self *ITextDocument2Old) CheckTextLimit(cch int32, pcch *int32) foundation.HRESULT {
+func (self *ITextDocument2Old) CheckTextLimit(cch int32, pcch *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(cch), uintptr(unsafe.Pointer(pcch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMEInProgress dispatches through ITextDocument2Old's vtable slot 42.
-func (self *ITextDocument2Old) IMEInProgress(Value int32) foundation.HRESULT {
+func (self *ITextDocument2Old) IMEInProgress(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SysBeep dispatches through ITextDocument2Old's vtable slot 43.
-func (self *ITextDocument2Old) SysBeep() foundation.HRESULT {
+func (self *ITextDocument2Old) SysBeep() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through ITextDocument2Old's vtable slot 44.
-func (self *ITextDocument2Old) Update(Mode int32) foundation.HRESULT {
+func (self *ITextDocument2Old) Update(Mode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(Mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Notify dispatches through ITextDocument2Old's vtable slot 45.
-func (self *ITextDocument2Old) Notify(Notify int32) foundation.HRESULT {
+func (self *ITextDocument2Old) Notify(Notify int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Notify))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocumentFont dispatches through ITextDocument2Old's vtable slot 46.
-func (self *ITextDocument2Old) GetDocumentFont(ppITextFont **ITextFont) foundation.HRESULT {
+func (self *ITextDocument2Old) GetDocumentFont(ppITextFont **ITextFont) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppITextFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocumentPara dispatches through ITextDocument2Old's vtable slot 47.
-func (self *ITextDocument2Old) GetDocumentPara(ppITextPara **ITextPara) foundation.HRESULT {
+func (self *ITextDocument2Old) GetDocumentPara(ppITextPara **ITextPara) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppITextPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCallManager dispatches through ITextDocument2Old's vtable slot 48.
-func (self *ITextDocument2Old) GetCallManager(ppVoid **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextDocument2Old) GetCallManager(ppVoid **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVoid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseCallManager dispatches through ITextDocument2Old's vtable slot 49.
-func (self *ITextDocument2Old) ReleaseCallManager(pVoid *systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextDocument2Old) ReleaseCallManager(pVoid *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVoid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextFont: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextfont
@@ -767,309 +773,309 @@ type ITextFont struct {
 var IID_ITextFont = win32.GUID{Data1: 0x8cc497c3, Data2: 0xa1df, Data3: 0x11ce, Data4: [8]byte{0x80, 0x98, 0x00, 0xaa, 0x00, 0x47, 0xbe, 0x5d}}
 
 // GetDuplicate dispatches through ITextFont's vtable slot 7.
-func (self *ITextFont) GetDuplicate(ppFont **ITextFont) foundation.HRESULT {
+func (self *ITextFont) GetDuplicate(ppFont **ITextFont) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDuplicate dispatches through ITextFont's vtable slot 8.
-func (self *ITextFont) SetDuplicate(pFont *ITextFont) foundation.HRESULT {
+func (self *ITextFont) SetDuplicate(pFont *ITextFont) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanChange dispatches through ITextFont's vtable slot 9.
-func (self *ITextFont) CanChange(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) CanChange(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEqual dispatches through ITextFont's vtable slot 10.
-func (self *ITextFont) IsEqual(pFont *ITextFont, pValue *int32) foundation.HRESULT {
+func (self *ITextFont) IsEqual(pFont *ITextFont, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFont)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ITextFont's vtable slot 11.
-func (self *ITextFont) Reset(Value TomConstants) foundation.HRESULT {
+func (self *ITextFont) Reset(Value TomConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStyle dispatches through ITextFont's vtable slot 12.
-func (self *ITextFont) GetStyle(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetStyle(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStyle dispatches through ITextFont's vtable slot 13.
-func (self *ITextFont) SetStyle(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetStyle(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllCaps dispatches through ITextFont's vtable slot 14.
-func (self *ITextFont) GetAllCaps(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetAllCaps(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllCaps dispatches through ITextFont's vtable slot 15.
-func (self *ITextFont) SetAllCaps(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetAllCaps(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAnimation dispatches through ITextFont's vtable slot 16.
-func (self *ITextFont) GetAnimation(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetAnimation(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAnimation dispatches through ITextFont's vtable slot 17.
-func (self *ITextFont) SetAnimation(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetAnimation(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackColor dispatches through ITextFont's vtable slot 18.
-func (self *ITextFont) GetBackColor(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetBackColor(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBackColor dispatches through ITextFont's vtable slot 19.
-func (self *ITextFont) SetBackColor(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetBackColor(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBold dispatches through ITextFont's vtable slot 20.
-func (self *ITextFont) GetBold(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetBold(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBold dispatches through ITextFont's vtable slot 21.
-func (self *ITextFont) SetBold(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetBold(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEmboss dispatches through ITextFont's vtable slot 22.
-func (self *ITextFont) GetEmboss(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetEmboss(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEmboss dispatches through ITextFont's vtable slot 23.
-func (self *ITextFont) SetEmboss(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetEmboss(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetForeColor dispatches through ITextFont's vtable slot 24.
-func (self *ITextFont) GetForeColor(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetForeColor(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetForeColor dispatches through ITextFont's vtable slot 25.
-func (self *ITextFont) SetForeColor(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetForeColor(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHidden dispatches through ITextFont's vtable slot 26.
-func (self *ITextFont) GetHidden(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetHidden(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHidden dispatches through ITextFont's vtable slot 27.
-func (self *ITextFont) SetHidden(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetHidden(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEngrave dispatches through ITextFont's vtable slot 28.
-func (self *ITextFont) GetEngrave(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetEngrave(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEngrave dispatches through ITextFont's vtable slot 29.
-func (self *ITextFont) SetEngrave(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetEngrave(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItalic dispatches through ITextFont's vtable slot 30.
-func (self *ITextFont) GetItalic(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetItalic(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetItalic dispatches through ITextFont's vtable slot 31.
-func (self *ITextFont) SetItalic(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetItalic(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKerning dispatches through ITextFont's vtable slot 32.
-func (self *ITextFont) GetKerning(pValue *float32) foundation.HRESULT {
+func (self *ITextFont) GetKerning(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLanguageID dispatches through ITextFont's vtable slot 34.
-func (self *ITextFont) GetLanguageID(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetLanguageID(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLanguageID dispatches through ITextFont's vtable slot 35.
-func (self *ITextFont) SetLanguageID(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetLanguageID(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetName dispatches through ITextFont's vtable slot 36.
-func (self *ITextFont) GetName(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *ITextFont) GetName(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetName dispatches through ITextFont's vtable slot 37.
-func (self *ITextFont) SetName(bstr foundation.BSTR) foundation.HRESULT {
+func (self *ITextFont) SetName(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutline dispatches through ITextFont's vtable slot 38.
-func (self *ITextFont) GetOutline(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetOutline(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutline dispatches through ITextFont's vtable slot 39.
-func (self *ITextFont) SetOutline(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetOutline(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPosition dispatches through ITextFont's vtable slot 40.
-func (self *ITextFont) GetPosition(pValue *float32) foundation.HRESULT {
+func (self *ITextFont) GetPosition(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProtected dispatches through ITextFont's vtable slot 42.
-func (self *ITextFont) GetProtected(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetProtected(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProtected dispatches through ITextFont's vtable slot 43.
-func (self *ITextFont) SetProtected(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetProtected(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetShadow dispatches through ITextFont's vtable slot 44.
-func (self *ITextFont) GetShadow(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetShadow(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetShadow dispatches through ITextFont's vtable slot 45.
-func (self *ITextFont) SetShadow(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetShadow(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSize dispatches through ITextFont's vtable slot 46.
-func (self *ITextFont) GetSize(pValue *float32) foundation.HRESULT {
+func (self *ITextFont) GetSize(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSmallCaps dispatches through ITextFont's vtable slot 48.
-func (self *ITextFont) GetSmallCaps(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetSmallCaps(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSmallCaps dispatches through ITextFont's vtable slot 49.
-func (self *ITextFont) SetSmallCaps(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetSmallCaps(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpacing dispatches through ITextFont's vtable slot 50.
-func (self *ITextFont) GetSpacing(pValue *float32) foundation.HRESULT {
+func (self *ITextFont) GetSpacing(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStrikeThrough dispatches through ITextFont's vtable slot 52.
-func (self *ITextFont) GetStrikeThrough(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetStrikeThrough(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStrikeThrough dispatches through ITextFont's vtable slot 53.
-func (self *ITextFont) SetStrikeThrough(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetStrikeThrough(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubscript dispatches through ITextFont's vtable slot 54.
-func (self *ITextFont) GetSubscript(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetSubscript(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSubscript dispatches through ITextFont's vtable slot 55.
-func (self *ITextFont) SetSubscript(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetSubscript(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSuperscript dispatches through ITextFont's vtable slot 56.
-func (self *ITextFont) GetSuperscript(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetSuperscript(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSuperscript dispatches through ITextFont's vtable slot 57.
-func (self *ITextFont) SetSuperscript(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetSuperscript(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUnderline dispatches through ITextFont's vtable slot 58.
-func (self *ITextFont) GetUnderline(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetUnderline(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUnderline dispatches through ITextFont's vtable slot 59.
-func (self *ITextFont) SetUnderline(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetUnderline(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWeight dispatches through ITextFont's vtable slot 60.
-func (self *ITextFont) GetWeight(pValue *int32) foundation.HRESULT {
+func (self *ITextFont) GetWeight(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWeight dispatches through ITextFont's vtable slot 61.
-func (self *ITextFont) SetWeight(Value int32) foundation.HRESULT {
+func (self *ITextFont) SetWeight(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextFont2: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextfont2
@@ -1082,273 +1088,273 @@ type ITextFont2 struct {
 var IID_ITextFont2 = win32.GUID{Data1: 0xc241f5e3, Data2: 0x7206, Data3: 0x11d8, Data4: [8]byte{0xa2, 0xc7, 0x00, 0xa0, 0xd1, 0xd6, 0xc6, 0xb3}}
 
 // GetCount dispatches through ITextFont2's vtable slot 62.
-func (self *ITextFont2) GetCount(pCount *int32) foundation.HRESULT {
+func (self *ITextFont2) GetCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAutoLigatures dispatches through ITextFont2's vtable slot 63.
-func (self *ITextFont2) GetAutoLigatures(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetAutoLigatures(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAutoLigatures dispatches through ITextFont2's vtable slot 64.
-func (self *ITextFont2) SetAutoLigatures(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetAutoLigatures(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAutospaceAlpha dispatches through ITextFont2's vtable slot 65.
-func (self *ITextFont2) GetAutospaceAlpha(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetAutospaceAlpha(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAutospaceAlpha dispatches through ITextFont2's vtable slot 66.
-func (self *ITextFont2) SetAutospaceAlpha(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetAutospaceAlpha(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAutospaceNumeric dispatches through ITextFont2's vtable slot 67.
-func (self *ITextFont2) GetAutospaceNumeric(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetAutospaceNumeric(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAutospaceNumeric dispatches through ITextFont2's vtable slot 68.
-func (self *ITextFont2) SetAutospaceNumeric(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetAutospaceNumeric(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAutospaceParens dispatches through ITextFont2's vtable slot 69.
-func (self *ITextFont2) GetAutospaceParens(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetAutospaceParens(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAutospaceParens dispatches through ITextFont2's vtable slot 70.
-func (self *ITextFont2) SetAutospaceParens(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetAutospaceParens(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCharRep dispatches through ITextFont2's vtable slot 71.
-func (self *ITextFont2) GetCharRep(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetCharRep(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCharRep dispatches through ITextFont2's vtable slot 72.
-func (self *ITextFont2) SetCharRep(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetCharRep(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompressionMode dispatches through ITextFont2's vtable slot 73.
-func (self *ITextFont2) GetCompressionMode(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetCompressionMode(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompressionMode dispatches through ITextFont2's vtable slot 74.
-func (self *ITextFont2) SetCompressionMode(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetCompressionMode(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCookie dispatches through ITextFont2's vtable slot 75.
-func (self *ITextFont2) GetCookie(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetCookie(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCookie dispatches through ITextFont2's vtable slot 76.
-func (self *ITextFont2) SetCookie(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetCookie(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDoubleStrike dispatches through ITextFont2's vtable slot 77.
-func (self *ITextFont2) GetDoubleStrike(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetDoubleStrike(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDoubleStrike dispatches through ITextFont2's vtable slot 78.
-func (self *ITextFont2) SetDoubleStrike(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetDoubleStrike(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDuplicate2 dispatches through ITextFont2's vtable slot 79.
-func (self *ITextFont2) GetDuplicate2(ppFont **ITextFont2) foundation.HRESULT {
+func (self *ITextFont2) GetDuplicate2(ppFont **ITextFont2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDuplicate2 dispatches through ITextFont2's vtable slot 80.
-func (self *ITextFont2) SetDuplicate2(pFont *ITextFont2) foundation.HRESULT {
+func (self *ITextFont2) SetDuplicate2(pFont *ITextFont2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLinkType dispatches through ITextFont2's vtable slot 81.
-func (self *ITextFont2) GetLinkType(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetLinkType(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMathZone dispatches through ITextFont2's vtable slot 82.
-func (self *ITextFont2) GetMathZone(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetMathZone(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMathZone dispatches through ITextFont2's vtable slot 83.
-func (self *ITextFont2) SetMathZone(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetMathZone(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetModWidthPairs dispatches through ITextFont2's vtable slot 84.
-func (self *ITextFont2) GetModWidthPairs(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetModWidthPairs(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetModWidthPairs dispatches through ITextFont2's vtable slot 85.
-func (self *ITextFont2) SetModWidthPairs(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetModWidthPairs(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetModWidthSpace dispatches through ITextFont2's vtable slot 86.
-func (self *ITextFont2) GetModWidthSpace(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetModWidthSpace(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetModWidthSpace dispatches through ITextFont2's vtable slot 87.
-func (self *ITextFont2) SetModWidthSpace(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetModWidthSpace(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOldNumbers dispatches through ITextFont2's vtable slot 88.
-func (self *ITextFont2) GetOldNumbers(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetOldNumbers(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOldNumbers dispatches through ITextFont2's vtable slot 89.
-func (self *ITextFont2) SetOldNumbers(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetOldNumbers(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOverlapping dispatches through ITextFont2's vtable slot 90.
-func (self *ITextFont2) GetOverlapping(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetOverlapping(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOverlapping dispatches through ITextFont2's vtable slot 91.
-func (self *ITextFont2) SetOverlapping(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetOverlapping(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPositionSubSuper dispatches through ITextFont2's vtable slot 92.
-func (self *ITextFont2) GetPositionSubSuper(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetPositionSubSuper(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPositionSubSuper dispatches through ITextFont2's vtable slot 93.
-func (self *ITextFont2) SetPositionSubSuper(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetPositionSubSuper(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScaling dispatches through ITextFont2's vtable slot 94.
-func (self *ITextFont2) GetScaling(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetScaling(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetScaling dispatches through ITextFont2's vtable slot 95.
-func (self *ITextFont2) SetScaling(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetScaling(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpaceExtension dispatches through ITextFont2's vtable slot 96.
-func (self *ITextFont2) GetSpaceExtension(pValue *float32) foundation.HRESULT {
+func (self *ITextFont2) GetSpaceExtension(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUnderlinePositionMode dispatches through ITextFont2's vtable slot 98.
-func (self *ITextFont2) GetUnderlinePositionMode(pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetUnderlinePositionMode(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUnderlinePositionMode dispatches through ITextFont2's vtable slot 99.
-func (self *ITextFont2) SetUnderlinePositionMode(Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetUnderlinePositionMode(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffects dispatches through ITextFont2's vtable slot 100.
-func (self *ITextFont2) GetEffects(pValue *int32, pMask *int32) foundation.HRESULT {
+func (self *ITextFont2) GetEffects(pValue *int32, pMask *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffects2 dispatches through ITextFont2's vtable slot 101.
-func (self *ITextFont2) GetEffects2(pValue *int32, pMask *int32) foundation.HRESULT {
+func (self *ITextFont2) GetEffects2(pValue *int32, pMask *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through ITextFont2's vtable slot 102.
-func (self *ITextFont2) GetProperty(Type int32, pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetProperty(Type int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyInfo dispatches through ITextFont2's vtable slot 103.
-func (self *ITextFont2) GetPropertyInfo(Index int32, pType *int32, pValue *int32) foundation.HRESULT {
+func (self *ITextFont2) GetPropertyInfo(Index int32, pType *int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEqual2 dispatches through ITextFont2's vtable slot 104.
-func (self *ITextFont2) IsEqual2(pFont *ITextFont2, pB *int32) foundation.HRESULT {
+func (self *ITextFont2) IsEqual2(pFont *ITextFont2, pB *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFont)), uintptr(unsafe.Pointer(pB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEffects dispatches through ITextFont2's vtable slot 105.
-func (self *ITextFont2) SetEffects(Value int32, Mask int32) foundation.HRESULT {
+func (self *ITextFont2) SetEffects(Value int32, Mask int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Mask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEffects2 dispatches through ITextFont2's vtable slot 106.
-func (self *ITextFont2) SetEffects2(Value int32, Mask int32) foundation.HRESULT {
+func (self *ITextFont2) SetEffects2(Value int32, Mask int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Mask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through ITextFont2's vtable slot 107.
-func (self *ITextFont2) SetProperty(Type int32, Value int32) foundation.HRESULT {
+func (self *ITextFont2) SetProperty(Type int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextHost: https://learn.microsoft.com/windows/win32/api/textserv/nl-textserv-itexthost
@@ -1369,8 +1375,9 @@ func (self *ITextHost) TxReleaseDC(hdc graphicsgdi.HDC) int32 {
 }
 
 // TxShowScrollBar dispatches through ITextHost's vtable slot 5.
-func (self *ITextHost) TxShowScrollBar(fnBar int32, fShow foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fnBar), uintptr(fShow))
+func (self *ITextHost) TxShowScrollBar(fnBar int32, fShow bool) foundation.BOOL {
+	_fShow := win32.Bool32(fShow)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fnBar), uintptr(_fShow))
 	return foundation.BOOL(r1)
 }
 
@@ -1381,25 +1388,29 @@ func (self *ITextHost) TxEnableScrollBar(fuSBFlags uiwindowsandmessaging.SCROLLB
 }
 
 // TxSetScrollRange dispatches through ITextHost's vtable slot 7.
-func (self *ITextHost) TxSetScrollRange(fnBar int32, nMinPos int32, nMaxPos int32, fRedraw foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fnBar), uintptr(nMinPos), uintptr(nMaxPos), uintptr(fRedraw))
+func (self *ITextHost) TxSetScrollRange(fnBar int32, nMinPos int32, nMaxPos int32, fRedraw bool) foundation.BOOL {
+	_fRedraw := win32.Bool32(fRedraw)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fnBar), uintptr(nMinPos), uintptr(nMaxPos), uintptr(_fRedraw))
 	return foundation.BOOL(r1)
 }
 
 // TxSetScrollPos dispatches through ITextHost's vtable slot 8.
-func (self *ITextHost) TxSetScrollPos(fnBar int32, nPos int32, fRedraw foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fnBar), uintptr(nPos), uintptr(fRedraw))
+func (self *ITextHost) TxSetScrollPos(fnBar int32, nPos int32, fRedraw bool) foundation.BOOL {
+	_fRedraw := win32.Bool32(fRedraw)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fnBar), uintptr(nPos), uintptr(_fRedraw))
 	return foundation.BOOL(r1)
 }
 
 // TxInvalidateRect dispatches through ITextHost's vtable slot 9.
-func (self *ITextHost) TxInvalidateRect(prc *foundation.RECT, fMode foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)), uintptr(fMode))
+func (self *ITextHost) TxInvalidateRect(prc *foundation.RECT, fMode bool) {
+	_fMode := win32.Bool32(fMode)
+	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)), uintptr(_fMode))
 }
 
 // TxViewChange dispatches through ITextHost's vtable slot 10.
-func (self *ITextHost) TxViewChange(fUpdate foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fUpdate))
+func (self *ITextHost) TxViewChange(fUpdate bool) {
+	_fUpdate := win32.Bool32(fUpdate)
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_fUpdate))
 }
 
 // TxCreateCaret dispatches through ITextHost's vtable slot 11.
@@ -1409,8 +1420,9 @@ func (self *ITextHost) TxCreateCaret(hbmp graphicsgdi.HBITMAP, xWidth int32, yHe
 }
 
 // TxShowCaret dispatches through ITextHost's vtable slot 12.
-func (self *ITextHost) TxShowCaret(fShow foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(fShow))
+func (self *ITextHost) TxShowCaret(fShow bool) foundation.BOOL {
+	_fShow := win32.Bool32(fShow)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_fShow))
 	return foundation.BOOL(r1)
 }
 
@@ -1437,8 +1449,9 @@ func (self *ITextHost) TxScrollWindowEx(dx int32, dy int32, lprcScroll *foundati
 }
 
 // TxSetCapture dispatches through ITextHost's vtable slot 17.
-func (self *ITextHost) TxSetCapture(fCapture foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(fCapture))
+func (self *ITextHost) TxSetCapture(fCapture bool) {
+	_fCapture := win32.Bool32(fCapture)
+	syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(_fCapture))
 }
 
 // TxSetFocus dispatches through ITextHost's vtable slot 18.
@@ -1447,8 +1460,9 @@ func (self *ITextHost) TxSetFocus() {
 }
 
 // TxSetCursor dispatches through ITextHost's vtable slot 19.
-func (self *ITextHost) TxSetCursor(hcur uiwindowsandmessaging.HCURSOR, fText foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hcur), uintptr(fText))
+func (self *ITextHost) TxSetCursor(hcur uiwindowsandmessaging.HCURSOR, fText bool) {
+	_fText := win32.Bool32(fText)
+	syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hcur), uintptr(_fText))
 }
 
 // TxScreenToClient dispatches through ITextHost's vtable slot 20.
@@ -1464,39 +1478,39 @@ func (self *ITextHost) TxClientToScreen(lppt *foundation.POINT) foundation.BOOL 
 }
 
 // TxActivate dispatches through ITextHost's vtable slot 22.
-func (self *ITextHost) TxActivate(plOldState *int32) foundation.HRESULT {
+func (self *ITextHost) TxActivate(plOldState *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plOldState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxDeactivate dispatches through ITextHost's vtable slot 23.
-func (self *ITextHost) TxDeactivate(lNewState int32) foundation.HRESULT {
+func (self *ITextHost) TxDeactivate(lNewState int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(lNewState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetClientRect dispatches through ITextHost's vtable slot 24.
-func (self *ITextHost) TxGetClientRect(prc *foundation.RECT) foundation.HRESULT {
+func (self *ITextHost) TxGetClientRect(prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetViewInset dispatches through ITextHost's vtable slot 25.
-func (self *ITextHost) TxGetViewInset(prc *foundation.RECT) foundation.HRESULT {
+func (self *ITextHost) TxGetViewInset(prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetCharFormat dispatches through ITextHost's vtable slot 26.
-func (self *ITextHost) TxGetCharFormat(ppCF **CHARFORMATW) foundation.HRESULT {
+func (self *ITextHost) TxGetCharFormat(ppCF **CHARFORMATW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCF)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetParaFormat dispatches through ITextHost's vtable slot 27.
-func (self *ITextHost) TxGetParaFormat(ppPF **PARAFORMAT) foundation.HRESULT {
+func (self *ITextHost) TxGetParaFormat(ppPF **PARAFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPF)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetSysColor dispatches through ITextHost's vtable slot 28.
@@ -1506,63 +1520,63 @@ func (self *ITextHost) TxGetSysColor(nIndex graphicsgdi.SYS_COLOR_INDEX) foundat
 }
 
 // TxGetBackStyle dispatches through ITextHost's vtable slot 29.
-func (self *ITextHost) TxGetBackStyle(pstyle *TXTBACKSTYLE) foundation.HRESULT {
+func (self *ITextHost) TxGetBackStyle(pstyle *TXTBACKSTYLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstyle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetMaxLength dispatches through ITextHost's vtable slot 30.
-func (self *ITextHost) TxGetMaxLength(plength *uint32) foundation.HRESULT {
+func (self *ITextHost) TxGetMaxLength(plength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetScrollBars dispatches through ITextHost's vtable slot 31.
-func (self *ITextHost) TxGetScrollBars(pdwScrollBar *uint32) foundation.HRESULT {
+func (self *ITextHost) TxGetScrollBars(pdwScrollBar *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwScrollBar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetPasswordChar dispatches through ITextHost's vtable slot 32.
-func (self *ITextHost) TxGetPasswordChar(pch *int8) foundation.HRESULT {
+func (self *ITextHost) TxGetPasswordChar(pch *int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetAcceleratorPos dispatches through ITextHost's vtable slot 33.
-func (self *ITextHost) TxGetAcceleratorPos(pcp *int32) foundation.HRESULT {
+func (self *ITextHost) TxGetAcceleratorPos(pcp *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetExtent dispatches through ITextHost's vtable slot 34.
-func (self *ITextHost) TxGetExtent(lpExtent *foundation.SIZE) foundation.HRESULT {
+func (self *ITextHost) TxGetExtent(lpExtent *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpExtent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnTxCharFormatChange dispatches through ITextHost's vtable slot 35.
-func (self *ITextHost) OnTxCharFormatChange(pCF *CHARFORMATW) foundation.HRESULT {
+func (self *ITextHost) OnTxCharFormatChange(pCF *CHARFORMATW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCF)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnTxParaFormatChange dispatches through ITextHost's vtable slot 36.
-func (self *ITextHost) OnTxParaFormatChange(pPF *PARAFORMAT) foundation.HRESULT {
+func (self *ITextHost) OnTxParaFormatChange(pPF *PARAFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPF)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetPropertyBits dispatches through ITextHost's vtable slot 37.
-func (self *ITextHost) TxGetPropertyBits(dwMask uint32, pdwBits *uint32) foundation.HRESULT {
+func (self *ITextHost) TxGetPropertyBits(dwMask uint32, pdwBits *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(dwMask), uintptr(unsafe.Pointer(pdwBits)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxNotify dispatches through ITextHost's vtable slot 38.
-func (self *ITextHost) TxNotify(iNotify uint32, pv unsafe.Pointer) foundation.HRESULT {
+func (self *ITextHost) TxNotify(iNotify uint32, pv unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(iNotify), uintptr(unsafe.Pointer(pv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxImmGetContext dispatches through ITextHost's vtable slot 39.
@@ -1577,9 +1591,9 @@ func (self *ITextHost) TxImmReleaseContext(himc uiinputime.HIMC) {
 }
 
 // TxGetSelectionBarWidth dispatches through ITextHost's vtable slot 41.
-func (self *ITextHost) TxGetSelectionBarWidth(lSelBarWidth *int32) foundation.HRESULT {
+func (self *ITextHost) TxGetSelectionBarWidth(lSelBarWidth *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lSelBarWidth)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextHost2: https://learn.microsoft.com/windows/win32/api/textserv/nl-textserv-itexthost2
@@ -1594,15 +1608,15 @@ func (self *ITextHost2) TxIsDoubleClickPending() foundation.BOOL {
 }
 
 // TxGetWindow dispatches through ITextHost2's vtable slot 43.
-func (self *ITextHost2) TxGetWindow(phwnd *foundation.HWND) foundation.HRESULT {
+func (self *ITextHost2) TxGetWindow(phwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxSetForegroundWindow dispatches through ITextHost2's vtable slot 44.
-func (self *ITextHost2) TxSetForegroundWindow() foundation.HRESULT {
+func (self *ITextHost2) TxSetForegroundWindow() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetPalette dispatches through ITextHost2's vtable slot 45.
@@ -1612,14 +1626,15 @@ func (self *ITextHost2) TxGetPalette() graphicsgdi.HPALETTE {
 }
 
 // TxGetEastAsianFlags dispatches through ITextHost2's vtable slot 46.
-func (self *ITextHost2) TxGetEastAsianFlags(pFlags *int32) foundation.HRESULT {
+func (self *ITextHost2) TxGetEastAsianFlags(pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxSetCursor2 dispatches through ITextHost2's vtable slot 47.
-func (self *ITextHost2) TxSetCursor2(hcur uiwindowsandmessaging.HCURSOR, bText foundation.BOOL) uiwindowsandmessaging.HCURSOR {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(hcur), uintptr(bText))
+func (self *ITextHost2) TxSetCursor2(hcur uiwindowsandmessaging.HCURSOR, bText bool) uiwindowsandmessaging.HCURSOR {
+	_bText := win32.Bool32(bText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(hcur), uintptr(_bText))
 	return uiwindowsandmessaging.HCURSOR(r1)
 }
 
@@ -1629,33 +1644,34 @@ func (self *ITextHost2) TxFreeTextServicesNotification() {
 }
 
 // TxGetEditStyle dispatches through ITextHost2's vtable slot 49.
-func (self *ITextHost2) TxGetEditStyle(dwItem uint32, pdwData *uint32) foundation.HRESULT {
+func (self *ITextHost2) TxGetEditStyle(dwItem uint32, pdwData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(dwItem), uintptr(unsafe.Pointer(pdwData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetWindowStyles dispatches through ITextHost2's vtable slot 50.
-func (self *ITextHost2) TxGetWindowStyles(pdwStyle *uint32, pdwExStyle *uint32) foundation.HRESULT {
+func (self *ITextHost2) TxGetWindowStyles(pdwStyle *uint32, pdwExStyle *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStyle)), uintptr(unsafe.Pointer(pdwExStyle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxShowDropCaret dispatches through ITextHost2's vtable slot 51.
-func (self *ITextHost2) TxShowDropCaret(fShow foundation.BOOL, hdc graphicsgdi.HDC, prc *foundation.RECT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(fShow), uintptr(hdc), uintptr(unsafe.Pointer(prc)))
-	return foundation.HRESULT(r1)
+func (self *ITextHost2) TxShowDropCaret(fShow bool, hdc graphicsgdi.HDC, prc *foundation.RECT) error {
+	_fShow := win32.Bool32(fShow)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(_fShow), uintptr(hdc), uintptr(unsafe.Pointer(prc)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxDestroyCaret dispatches through ITextHost2's vtable slot 52.
-func (self *ITextHost2) TxDestroyCaret() foundation.HRESULT {
+func (self *ITextHost2) TxDestroyCaret() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetHorzExtent dispatches through ITextHost2's vtable slot 53.
-func (self *ITextHost2) TxGetHorzExtent(plHorzExtent *int32) foundation.HRESULT {
+func (self *ITextHost2) TxGetHorzExtent(plHorzExtent *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHorzExtent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextPara: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextpara
@@ -1668,243 +1684,243 @@ type ITextPara struct {
 var IID_ITextPara = win32.GUID{Data1: 0x8cc497c4, Data2: 0xa1df, Data3: 0x11ce, Data4: [8]byte{0x80, 0x98, 0x00, 0xaa, 0x00, 0x47, 0xbe, 0x5d}}
 
 // GetDuplicate dispatches through ITextPara's vtable slot 7.
-func (self *ITextPara) GetDuplicate(ppPara **ITextPara) foundation.HRESULT {
+func (self *ITextPara) GetDuplicate(ppPara **ITextPara) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDuplicate dispatches through ITextPara's vtable slot 8.
-func (self *ITextPara) SetDuplicate(pPara *ITextPara) foundation.HRESULT {
+func (self *ITextPara) SetDuplicate(pPara *ITextPara) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanChange dispatches through ITextPara's vtable slot 9.
-func (self *ITextPara) CanChange(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) CanChange(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEqual dispatches through ITextPara's vtable slot 10.
-func (self *ITextPara) IsEqual(pPara *ITextPara, pValue *int32) foundation.HRESULT {
+func (self *ITextPara) IsEqual(pPara *ITextPara, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPara)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ITextPara's vtable slot 11.
-func (self *ITextPara) Reset(Value int32) foundation.HRESULT {
+func (self *ITextPara) Reset(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStyle dispatches through ITextPara's vtable slot 12.
-func (self *ITextPara) GetStyle(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetStyle(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStyle dispatches through ITextPara's vtable slot 13.
-func (self *ITextPara) SetStyle(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetStyle(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAlignment dispatches through ITextPara's vtable slot 14.
-func (self *ITextPara) GetAlignment(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetAlignment(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAlignment dispatches through ITextPara's vtable slot 15.
-func (self *ITextPara) SetAlignment(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetAlignment(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHyphenation dispatches through ITextPara's vtable slot 16.
-func (self *ITextPara) GetHyphenation(pValue *TomConstants) foundation.HRESULT {
+func (self *ITextPara) GetHyphenation(pValue *TomConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHyphenation dispatches through ITextPara's vtable slot 17.
-func (self *ITextPara) SetHyphenation(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetHyphenation(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFirstLineIndent dispatches through ITextPara's vtable slot 18.
-func (self *ITextPara) GetFirstLineIndent(pValue *float32) foundation.HRESULT {
+func (self *ITextPara) GetFirstLineIndent(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKeepTogether dispatches through ITextPara's vtable slot 19.
-func (self *ITextPara) GetKeepTogether(pValue *TomConstants) foundation.HRESULT {
+func (self *ITextPara) GetKeepTogether(pValue *TomConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetKeepTogether dispatches through ITextPara's vtable slot 20.
-func (self *ITextPara) SetKeepTogether(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetKeepTogether(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKeepWithNext dispatches through ITextPara's vtable slot 21.
-func (self *ITextPara) GetKeepWithNext(pValue *TomConstants) foundation.HRESULT {
+func (self *ITextPara) GetKeepWithNext(pValue *TomConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetKeepWithNext dispatches through ITextPara's vtable slot 22.
-func (self *ITextPara) SetKeepWithNext(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetKeepWithNext(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLeftIndent dispatches through ITextPara's vtable slot 23.
-func (self *ITextPara) GetLeftIndent(pValue *float32) foundation.HRESULT {
+func (self *ITextPara) GetLeftIndent(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLineSpacing dispatches through ITextPara's vtable slot 24.
-func (self *ITextPara) GetLineSpacing(pValue *float32) foundation.HRESULT {
+func (self *ITextPara) GetLineSpacing(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLineSpacingRule dispatches through ITextPara's vtable slot 25.
-func (self *ITextPara) GetLineSpacingRule(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetLineSpacingRule(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetListAlignment dispatches through ITextPara's vtable slot 26.
-func (self *ITextPara) GetListAlignment(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetListAlignment(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetListAlignment dispatches through ITextPara's vtable slot 27.
-func (self *ITextPara) SetListAlignment(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetListAlignment(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetListLevelIndex dispatches through ITextPara's vtable slot 28.
-func (self *ITextPara) GetListLevelIndex(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetListLevelIndex(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetListLevelIndex dispatches through ITextPara's vtable slot 29.
-func (self *ITextPara) SetListLevelIndex(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetListLevelIndex(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetListStart dispatches through ITextPara's vtable slot 30.
-func (self *ITextPara) GetListStart(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetListStart(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetListStart dispatches through ITextPara's vtable slot 31.
-func (self *ITextPara) SetListStart(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetListStart(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetListTab dispatches through ITextPara's vtable slot 32.
-func (self *ITextPara) GetListTab(pValue *float32) foundation.HRESULT {
+func (self *ITextPara) GetListTab(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetListType dispatches through ITextPara's vtable slot 34.
-func (self *ITextPara) GetListType(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetListType(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetListType dispatches through ITextPara's vtable slot 35.
-func (self *ITextPara) SetListType(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetListType(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNoLineNumber dispatches through ITextPara's vtable slot 36.
-func (self *ITextPara) GetNoLineNumber(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetNoLineNumber(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNoLineNumber dispatches through ITextPara's vtable slot 37.
-func (self *ITextPara) SetNoLineNumber(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetNoLineNumber(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPageBreakBefore dispatches through ITextPara's vtable slot 38.
-func (self *ITextPara) GetPageBreakBefore(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetPageBreakBefore(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPageBreakBefore dispatches through ITextPara's vtable slot 39.
-func (self *ITextPara) SetPageBreakBefore(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetPageBreakBefore(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRightIndent dispatches through ITextPara's vtable slot 40.
-func (self *ITextPara) GetRightIndent(pValue *float32) foundation.HRESULT {
+func (self *ITextPara) GetRightIndent(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpaceAfter dispatches through ITextPara's vtable slot 44.
-func (self *ITextPara) GetSpaceAfter(pValue *float32) foundation.HRESULT {
+func (self *ITextPara) GetSpaceAfter(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpaceBefore dispatches through ITextPara's vtable slot 46.
-func (self *ITextPara) GetSpaceBefore(pValue *float32) foundation.HRESULT {
+func (self *ITextPara) GetSpaceBefore(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWidowControl dispatches through ITextPara's vtable slot 48.
-func (self *ITextPara) GetWidowControl(pValue *int32) foundation.HRESULT {
+func (self *ITextPara) GetWidowControl(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWidowControl dispatches through ITextPara's vtable slot 49.
-func (self *ITextPara) SetWidowControl(Value int32) foundation.HRESULT {
+func (self *ITextPara) SetWidowControl(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTabCount dispatches through ITextPara's vtable slot 50.
-func (self *ITextPara) GetTabCount(pCount *int32) foundation.HRESULT {
+func (self *ITextPara) GetTabCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearAllTabs dispatches through ITextPara's vtable slot 52.
-func (self *ITextPara) ClearAllTabs() foundation.HRESULT {
+func (self *ITextPara) ClearAllTabs() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTab dispatches through ITextPara's vtable slot 54.
-func (self *ITextPara) GetTab(iTab int32, ptbPos *float32, ptbAlign *int32, ptbLeader *int32) foundation.HRESULT {
+func (self *ITextPara) GetTab(iTab int32, ptbPos *float32, ptbAlign *int32, ptbLeader *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(iTab), uintptr(unsafe.Pointer(ptbPos)), uintptr(unsafe.Pointer(ptbAlign)), uintptr(unsafe.Pointer(ptbLeader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextPara2: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextpara2
@@ -1917,99 +1933,99 @@ type ITextPara2 struct {
 var IID_ITextPara2 = win32.GUID{Data1: 0xc241f5e4, Data2: 0x7206, Data3: 0x11d8, Data4: [8]byte{0xa2, 0xc7, 0x00, 0xa0, 0xd1, 0xd6, 0xc6, 0xb3}}
 
 // GetBorders dispatches through ITextPara2's vtable slot 55.
-func (self *ITextPara2) GetBorders(ppBorders **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextPara2) GetBorders(ppBorders **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBorders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDuplicate2 dispatches through ITextPara2's vtable slot 56.
-func (self *ITextPara2) GetDuplicate2(ppPara **ITextPara2) foundation.HRESULT {
+func (self *ITextPara2) GetDuplicate2(ppPara **ITextPara2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDuplicate2 dispatches through ITextPara2's vtable slot 57.
-func (self *ITextPara2) SetDuplicate2(pPara *ITextPara2) foundation.HRESULT {
+func (self *ITextPara2) SetDuplicate2(pPara *ITextPara2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFontAlignment dispatches through ITextPara2's vtable slot 58.
-func (self *ITextPara2) GetFontAlignment(pValue *int32) foundation.HRESULT {
+func (self *ITextPara2) GetFontAlignment(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFontAlignment dispatches through ITextPara2's vtable slot 59.
-func (self *ITextPara2) SetFontAlignment(Value int32) foundation.HRESULT {
+func (self *ITextPara2) SetFontAlignment(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHangingPunctuation dispatches through ITextPara2's vtable slot 60.
-func (self *ITextPara2) GetHangingPunctuation(pValue *int32) foundation.HRESULT {
+func (self *ITextPara2) GetHangingPunctuation(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHangingPunctuation dispatches through ITextPara2's vtable slot 61.
-func (self *ITextPara2) SetHangingPunctuation(Value int32) foundation.HRESULT {
+func (self *ITextPara2) SetHangingPunctuation(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSnapToGrid dispatches through ITextPara2's vtable slot 62.
-func (self *ITextPara2) GetSnapToGrid(pValue *int32) foundation.HRESULT {
+func (self *ITextPara2) GetSnapToGrid(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSnapToGrid dispatches through ITextPara2's vtable slot 63.
-func (self *ITextPara2) SetSnapToGrid(Value int32) foundation.HRESULT {
+func (self *ITextPara2) SetSnapToGrid(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTrimPunctuationAtStart dispatches through ITextPara2's vtable slot 64.
-func (self *ITextPara2) GetTrimPunctuationAtStart(pValue *int32) foundation.HRESULT {
+func (self *ITextPara2) GetTrimPunctuationAtStart(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTrimPunctuationAtStart dispatches through ITextPara2's vtable slot 65.
-func (self *ITextPara2) SetTrimPunctuationAtStart(Value int32) foundation.HRESULT {
+func (self *ITextPara2) SetTrimPunctuationAtStart(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffects dispatches through ITextPara2's vtable slot 66.
-func (self *ITextPara2) GetEffects(pValue *int32, pMask *int32) foundation.HRESULT {
+func (self *ITextPara2) GetEffects(pValue *int32, pMask *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through ITextPara2's vtable slot 67.
-func (self *ITextPara2) GetProperty(Type int32, pValue *int32) foundation.HRESULT {
+func (self *ITextPara2) GetProperty(Type int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEqual2 dispatches through ITextPara2's vtable slot 68.
-func (self *ITextPara2) IsEqual2(pPara *ITextPara2, pB *int32) foundation.HRESULT {
+func (self *ITextPara2) IsEqual2(pPara *ITextPara2, pB *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPara)), uintptr(unsafe.Pointer(pB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEffects dispatches through ITextPara2's vtable slot 69.
-func (self *ITextPara2) SetEffects(Value int32, Mask int32) foundation.HRESULT {
+func (self *ITextPara2) SetEffects(Value int32, Mask int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(Value), uintptr(Mask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through ITextPara2's vtable slot 70.
-func (self *ITextPara2) SetProperty(Type int32, Value int32) foundation.HRESULT {
+func (self *ITextPara2) SetProperty(Type int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextRange: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextrange
@@ -2022,309 +2038,309 @@ type ITextRange struct {
 var IID_ITextRange = win32.GUID{Data1: 0x8cc497c2, Data2: 0xa1df, Data3: 0x11ce, Data4: [8]byte{0x80, 0x98, 0x00, 0xaa, 0x00, 0x47, 0xbe, 0x5d}}
 
 // GetText dispatches through ITextRange's vtable slot 7.
-func (self *ITextRange) GetText(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *ITextRange) GetText(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetText dispatches through ITextRange's vtable slot 8.
-func (self *ITextRange) SetText(bstr foundation.BSTR) foundation.HRESULT {
+func (self *ITextRange) SetText(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChar dispatches through ITextRange's vtable slot 9.
-func (self *ITextRange) GetChar(pChar *int32) foundation.HRESULT {
+func (self *ITextRange) GetChar(pChar *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetChar dispatches through ITextRange's vtable slot 10.
-func (self *ITextRange) SetChar(Char int32) foundation.HRESULT {
+func (self *ITextRange) SetChar(Char int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Char))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDuplicate dispatches through ITextRange's vtable slot 11.
-func (self *ITextRange) GetDuplicate(ppRange **ITextRange) foundation.HRESULT {
+func (self *ITextRange) GetDuplicate(ppRange **ITextRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormattedText dispatches through ITextRange's vtable slot 12.
-func (self *ITextRange) GetFormattedText(ppRange **ITextRange) foundation.HRESULT {
+func (self *ITextRange) GetFormattedText(ppRange **ITextRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormattedText dispatches through ITextRange's vtable slot 13.
-func (self *ITextRange) SetFormattedText(pRange *ITextRange) foundation.HRESULT {
+func (self *ITextRange) SetFormattedText(pRange *ITextRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStart dispatches through ITextRange's vtable slot 14.
-func (self *ITextRange) GetStart(pcpFirst *int32) foundation.HRESULT {
+func (self *ITextRange) GetStart(pcpFirst *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcpFirst)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStart dispatches through ITextRange's vtable slot 15.
-func (self *ITextRange) SetStart(cpFirst int32) foundation.HRESULT {
+func (self *ITextRange) SetStart(cpFirst int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(cpFirst))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnd dispatches through ITextRange's vtable slot 16.
-func (self *ITextRange) GetEnd(pcpLim *int32) foundation.HRESULT {
+func (self *ITextRange) GetEnd(pcpLim *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcpLim)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEnd dispatches through ITextRange's vtable slot 17.
-func (self *ITextRange) SetEnd(cpLim int32) foundation.HRESULT {
+func (self *ITextRange) SetEnd(cpLim int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(cpLim))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFont dispatches through ITextRange's vtable slot 18.
-func (self *ITextRange) GetFont(ppFont **ITextFont) foundation.HRESULT {
+func (self *ITextRange) GetFont(ppFont **ITextFont) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFont dispatches through ITextRange's vtable slot 19.
-func (self *ITextRange) SetFont(pFont *ITextFont) foundation.HRESULT {
+func (self *ITextRange) SetFont(pFont *ITextFont) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPara dispatches through ITextRange's vtable slot 20.
-func (self *ITextRange) GetPara(ppPara **ITextPara) foundation.HRESULT {
+func (self *ITextRange) GetPara(ppPara **ITextPara) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPara dispatches through ITextRange's vtable slot 21.
-func (self *ITextRange) SetPara(pPara *ITextPara) foundation.HRESULT {
+func (self *ITextRange) SetPara(pPara *ITextPara) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoryLength dispatches through ITextRange's vtable slot 22.
-func (self *ITextRange) GetStoryLength(pCount *int32) foundation.HRESULT {
+func (self *ITextRange) GetStoryLength(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoryType dispatches through ITextRange's vtable slot 23.
-func (self *ITextRange) GetStoryType(pValue *int32) foundation.HRESULT {
+func (self *ITextRange) GetStoryType(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Collapse dispatches through ITextRange's vtable slot 24.
-func (self *ITextRange) Collapse(bStart int32) foundation.HRESULT {
+func (self *ITextRange) Collapse(bStart int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(bStart))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Expand dispatches through ITextRange's vtable slot 25.
-func (self *ITextRange) Expand(Unit int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) Expand(Unit int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndex dispatches through ITextRange's vtable slot 26.
-func (self *ITextRange) GetIndex(Unit int32, pIndex *int32) foundation.HRESULT {
+func (self *ITextRange) GetIndex(Unit int32, pIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(unsafe.Pointer(pIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIndex dispatches through ITextRange's vtable slot 27.
-func (self *ITextRange) SetIndex(Unit int32, Index int32, Extend int32) foundation.HRESULT {
+func (self *ITextRange) SetIndex(Unit int32, Index int32, Extend int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Index), uintptr(Extend))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRange dispatches through ITextRange's vtable slot 28.
-func (self *ITextRange) SetRange(cpAnchor int32, cpActive int32) foundation.HRESULT {
+func (self *ITextRange) SetRange(cpAnchor int32, cpActive int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(cpAnchor), uintptr(cpActive))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InRange dispatches through ITextRange's vtable slot 29.
-func (self *ITextRange) InRange(pRange *ITextRange, pValue *int32) foundation.HRESULT {
+func (self *ITextRange) InRange(pRange *ITextRange, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InStory dispatches through ITextRange's vtable slot 30.
-func (self *ITextRange) InStory(pRange *ITextRange, pValue *int32) foundation.HRESULT {
+func (self *ITextRange) InStory(pRange *ITextRange, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEqual dispatches through ITextRange's vtable slot 31.
-func (self *ITextRange) IsEqual(pRange *ITextRange, pValue *int32) foundation.HRESULT {
+func (self *ITextRange) IsEqual(pRange *ITextRange, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Select dispatches through ITextRange's vtable slot 32.
-func (self *ITextRange) Select() foundation.HRESULT {
+func (self *ITextRange) Select() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartOf dispatches through ITextRange's vtable slot 33.
-func (self *ITextRange) StartOf(Unit int32, Extend int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) StartOf(Unit int32, Extend int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Extend), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndOf dispatches through ITextRange's vtable slot 34.
-func (self *ITextRange) EndOf(Unit int32, Extend int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) EndOf(Unit int32, Extend int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Extend), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Move dispatches through ITextRange's vtable slot 35.
-func (self *ITextRange) Move(Unit int32, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) Move(Unit int32, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveStart dispatches through ITextRange's vtable slot 36.
-func (self *ITextRange) MoveStart(Unit int32, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) MoveStart(Unit int32, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveEnd dispatches through ITextRange's vtable slot 37.
-func (self *ITextRange) MoveEnd(Unit int32, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) MoveEnd(Unit int32, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveWhile dispatches through ITextRange's vtable slot 38.
-func (self *ITextRange) MoveWhile(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) MoveWhile(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cset)), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveStartWhile dispatches through ITextRange's vtable slot 39.
-func (self *ITextRange) MoveStartWhile(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) MoveStartWhile(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cset)), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveEndWhile dispatches through ITextRange's vtable slot 40.
-func (self *ITextRange) MoveEndWhile(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) MoveEndWhile(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cset)), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveUntil dispatches through ITextRange's vtable slot 41.
-func (self *ITextRange) MoveUntil(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) MoveUntil(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cset)), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveStartUntil dispatches through ITextRange's vtable slot 42.
-func (self *ITextRange) MoveStartUntil(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) MoveStartUntil(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cset)), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveEndUntil dispatches through ITextRange's vtable slot 43.
-func (self *ITextRange) MoveEndUntil(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) MoveEndUntil(Cset *systemvariant.VARIANT, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cset)), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindText dispatches through ITextRange's vtable slot 44.
-func (self *ITextRange) FindText(bstr foundation.BSTR, Count int32, Flags TomConstants, pLength *int32) foundation.HRESULT {
+func (self *ITextRange) FindText(bstr foundation.BSTR, Count int32, Flags TomConstants, pLength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)), uintptr(Count), uintptr(Flags), uintptr(unsafe.Pointer(pLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindTextStart dispatches through ITextRange's vtable slot 45.
-func (self *ITextRange) FindTextStart(bstr foundation.BSTR, Count int32, Flags TomConstants, pLength *int32) foundation.HRESULT {
+func (self *ITextRange) FindTextStart(bstr foundation.BSTR, Count int32, Flags TomConstants, pLength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)), uintptr(Count), uintptr(Flags), uintptr(unsafe.Pointer(pLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindTextEnd dispatches through ITextRange's vtable slot 46.
-func (self *ITextRange) FindTextEnd(bstr foundation.BSTR, Count int32, Flags TomConstants, pLength *int32) foundation.HRESULT {
+func (self *ITextRange) FindTextEnd(bstr foundation.BSTR, Count int32, Flags TomConstants, pLength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)), uintptr(Count), uintptr(Flags), uintptr(unsafe.Pointer(pLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through ITextRange's vtable slot 47.
-func (self *ITextRange) Delete(Unit int32, Count int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange) Delete(Unit int32, Count int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Count), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cut dispatches through ITextRange's vtable slot 48.
-func (self *ITextRange) Cut(pVar *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ITextRange) Cut(pVar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Copy dispatches through ITextRange's vtable slot 49.
-func (self *ITextRange) Copy(pVar *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ITextRange) Copy(pVar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Paste dispatches through ITextRange's vtable slot 50.
-func (self *ITextRange) Paste(pVar *systemvariant.VARIANT, Format int32) foundation.HRESULT {
+func (self *ITextRange) Paste(pVar *systemvariant.VARIANT, Format int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVar)), uintptr(Format))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanPaste dispatches through ITextRange's vtable slot 51.
-func (self *ITextRange) CanPaste(pVar *systemvariant.VARIANT, Format int32, pValue *int32) foundation.HRESULT {
+func (self *ITextRange) CanPaste(pVar *systemvariant.VARIANT, Format int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVar)), uintptr(Format), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanEdit dispatches through ITextRange's vtable slot 52.
-func (self *ITextRange) CanEdit(pValue *int32) foundation.HRESULT {
+func (self *ITextRange) CanEdit(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeCase dispatches through ITextRange's vtable slot 53.
-func (self *ITextRange) ChangeCase(Type TomConstants) foundation.HRESULT {
+func (self *ITextRange) ChangeCase(Type TomConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(Type))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPoint dispatches through ITextRange's vtable slot 54.
-func (self *ITextRange) GetPoint(Type TomConstants, px *int32, py *int32) foundation.HRESULT {
+func (self *ITextRange) GetPoint(Type TomConstants, px *int32, py *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(px)), uintptr(unsafe.Pointer(py)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPoint dispatches through ITextRange's vtable slot 55.
-func (self *ITextRange) SetPoint(x int32, y int32, Type TomConstants, Extend int32) foundation.HRESULT {
+func (self *ITextRange) SetPoint(x int32, y int32, Type TomConstants, Extend int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y), uintptr(Type), uintptr(Extend))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScrollIntoView dispatches through ITextRange's vtable slot 56.
-func (self *ITextRange) ScrollIntoView(Value int32) foundation.HRESULT {
+func (self *ITextRange) ScrollIntoView(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEmbeddedObject dispatches through ITextRange's vtable slot 57.
-func (self *ITextRange) GetEmbeddedObject(ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextRange) GetEmbeddedObject(ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextRange2: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextrange2
@@ -2337,243 +2353,243 @@ type ITextRange2 struct {
 var IID_ITextRange2 = win32.GUID{Data1: 0xc241f5e2, Data2: 0x7206, Data3: 0x11d8, Data4: [8]byte{0xa2, 0xc7, 0x00, 0xa0, 0xd1, 0xd6, 0xc6, 0xb3}}
 
 // GetCch dispatches through ITextRange2's vtable slot 68.
-func (self *ITextRange2) GetCch(pcch *int32) foundation.HRESULT {
+func (self *ITextRange2) GetCch(pcch *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCells dispatches through ITextRange2's vtable slot 69.
-func (self *ITextRange2) GetCells(ppCells **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextRange2) GetCells(ppCells **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCells)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColumn dispatches through ITextRange2's vtable slot 70.
-func (self *ITextRange2) GetColumn(ppColumn **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextRange2) GetColumn(ppColumn **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppColumn)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through ITextRange2's vtable slot 71.
-func (self *ITextRange2) GetCount(pCount *int32) foundation.HRESULT {
+func (self *ITextRange2) GetCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDuplicate2 dispatches through ITextRange2's vtable slot 72.
-func (self *ITextRange2) GetDuplicate2(ppRange **ITextRange2) foundation.HRESULT {
+func (self *ITextRange2) GetDuplicate2(ppRange **ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFont2 dispatches through ITextRange2's vtable slot 73.
-func (self *ITextRange2) GetFont2(ppFont **ITextFont2) foundation.HRESULT {
+func (self *ITextRange2) GetFont2(ppFont **ITextFont2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFont2 dispatches through ITextRange2's vtable slot 74.
-func (self *ITextRange2) SetFont2(pFont *ITextFont2) foundation.HRESULT {
+func (self *ITextRange2) SetFont2(pFont *ITextFont2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormattedText2 dispatches through ITextRange2's vtable slot 75.
-func (self *ITextRange2) GetFormattedText2(ppRange **ITextRange2) foundation.HRESULT {
+func (self *ITextRange2) GetFormattedText2(ppRange **ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormattedText2 dispatches through ITextRange2's vtable slot 76.
-func (self *ITextRange2) SetFormattedText2(pRange *ITextRange2) foundation.HRESULT {
+func (self *ITextRange2) SetFormattedText2(pRange *ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGravity dispatches through ITextRange2's vtable slot 77.
-func (self *ITextRange2) GetGravity(pValue *int32) foundation.HRESULT {
+func (self *ITextRange2) GetGravity(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGravity dispatches through ITextRange2's vtable slot 78.
-func (self *ITextRange2) SetGravity(Value int32) foundation.HRESULT {
+func (self *ITextRange2) SetGravity(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPara2 dispatches through ITextRange2's vtable slot 79.
-func (self *ITextRange2) GetPara2(ppPara **ITextPara2) foundation.HRESULT {
+func (self *ITextRange2) GetPara2(ppPara **ITextPara2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPara2 dispatches through ITextRange2's vtable slot 80.
-func (self *ITextRange2) SetPara2(pPara *ITextPara2) foundation.HRESULT {
+func (self *ITextRange2) SetPara2(pPara *ITextPara2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPara)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRow dispatches through ITextRange2's vtable slot 81.
-func (self *ITextRange2) GetRow(ppRow **ITextRow) foundation.HRESULT {
+func (self *ITextRange2) GetRow(ppRow **ITextRow) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStartPara dispatches through ITextRange2's vtable slot 82.
-func (self *ITextRange2) GetStartPara(pValue *int32) foundation.HRESULT {
+func (self *ITextRange2) GetStartPara(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTable dispatches through ITextRange2's vtable slot 83.
-func (self *ITextRange2) GetTable(ppTable **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextRange2) GetTable(ppTable **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetURL dispatches through ITextRange2's vtable slot 84.
-func (self *ITextRange2) GetURL(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *ITextRange2) GetURL(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetURL dispatches through ITextRange2's vtable slot 85.
-func (self *ITextRange2) SetURL(bstr foundation.BSTR) foundation.HRESULT {
+func (self *ITextRange2) SetURL(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddSubrange dispatches through ITextRange2's vtable slot 86.
-func (self *ITextRange2) AddSubrange(cp1 int32, cp2 int32, Activate int32) foundation.HRESULT {
+func (self *ITextRange2) AddSubrange(cp1 int32, cp2 int32, Activate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(cp1), uintptr(cp2), uintptr(Activate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BuildUpMath dispatches through ITextRange2's vtable slot 87.
-func (self *ITextRange2) BuildUpMath(Flags int32) foundation.HRESULT {
+func (self *ITextRange2) BuildUpMath(Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteSubrange dispatches through ITextRange2's vtable slot 88.
-func (self *ITextRange2) DeleteSubrange(cpFirst int32, cpLim int32) foundation.HRESULT {
+func (self *ITextRange2) DeleteSubrange(cpFirst int32, cpLim int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(cpFirst), uintptr(cpLim))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Find dispatches through ITextRange2's vtable slot 89.
-func (self *ITextRange2) Find(pRange *ITextRange2, Count int32, Flags int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextRange2) Find(pRange *ITextRange2, Count int32, Flags int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)), uintptr(Count), uintptr(Flags), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChar2 dispatches through ITextRange2's vtable slot 90.
-func (self *ITextRange2) GetChar2(pChar *int32, Offset int32) foundation.HRESULT {
+func (self *ITextRange2) GetChar2(pChar *int32, Offset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChar)), uintptr(Offset))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDropCap dispatches through ITextRange2's vtable slot 91.
-func (self *ITextRange2) GetDropCap(pcLine *int32, pPosition *int32) foundation.HRESULT {
+func (self *ITextRange2) GetDropCap(pcLine *int32, pPosition *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcLine)), uintptr(unsafe.Pointer(pPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInlineObject dispatches through ITextRange2's vtable slot 92.
-func (self *ITextRange2) GetInlineObject(pType *int32, pAlign *int32, pChar *int32, pChar1 *int32, pChar2 *int32, pCount *int32, pTeXStyle *int32, pcCol *int32, pLevel *int32) foundation.HRESULT {
+func (self *ITextRange2) GetInlineObject(pType *int32, pAlign *int32, pChar *int32, pChar1 *int32, pChar2 *int32, pCount *int32, pTeXStyle *int32, pcCol *int32, pLevel *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pAlign)), uintptr(unsafe.Pointer(pChar)), uintptr(unsafe.Pointer(pChar1)), uintptr(unsafe.Pointer(pChar2)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pTeXStyle)), uintptr(unsafe.Pointer(pcCol)), uintptr(unsafe.Pointer(pLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through ITextRange2's vtable slot 93.
-func (self *ITextRange2) GetProperty(Type int32, pValue *int32) foundation.HRESULT {
+func (self *ITextRange2) GetProperty(Type int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRect dispatches through ITextRange2's vtable slot 94.
-func (self *ITextRange2) GetRect(Type int32, pLeft *int32, pTop *int32, pRight *int32, pBottom *int32, pHit *int32) foundation.HRESULT {
+func (self *ITextRange2) GetRect(Type int32, pLeft *int32, pTop *int32, pRight *int32, pBottom *int32, pHit *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pLeft)), uintptr(unsafe.Pointer(pTop)), uintptr(unsafe.Pointer(pRight)), uintptr(unsafe.Pointer(pBottom)), uintptr(unsafe.Pointer(pHit)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubrange dispatches through ITextRange2's vtable slot 95.
-func (self *ITextRange2) GetSubrange(iSubrange int32, pcpFirst *int32, pcpLim *int32) foundation.HRESULT {
+func (self *ITextRange2) GetSubrange(iSubrange int32, pcpFirst *int32, pcpLim *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(iSubrange), uintptr(unsafe.Pointer(pcpFirst)), uintptr(unsafe.Pointer(pcpLim)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetText2 dispatches through ITextRange2's vtable slot 96.
-func (self *ITextRange2) GetText2(Flags int32, pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *ITextRange2) GetText2(Flags int32, pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HexToUnicode dispatches through ITextRange2's vtable slot 97.
-func (self *ITextRange2) HexToUnicode() foundation.HRESULT {
+func (self *ITextRange2) HexToUnicode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertTable dispatches through ITextRange2's vtable slot 98.
-func (self *ITextRange2) InsertTable(cCol int32, cRow int32, AutoFit int32) foundation.HRESULT {
+func (self *ITextRange2) InsertTable(cCol int32, cRow int32, AutoFit int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(cCol), uintptr(cRow), uintptr(AutoFit))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Linearize dispatches through ITextRange2's vtable slot 99.
-func (self *ITextRange2) Linearize(Flags int32) foundation.HRESULT {
+func (self *ITextRange2) Linearize(Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetActiveSubrange dispatches through ITextRange2's vtable slot 100.
-func (self *ITextRange2) SetActiveSubrange(cpAnchor int32, cpActive int32) foundation.HRESULT {
+func (self *ITextRange2) SetActiveSubrange(cpAnchor int32, cpActive int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(cpAnchor), uintptr(cpActive))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDropCap dispatches through ITextRange2's vtable slot 101.
-func (self *ITextRange2) SetDropCap(cLine int32, Position int32) foundation.HRESULT {
+func (self *ITextRange2) SetDropCap(cLine int32, Position int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(cLine), uintptr(Position))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through ITextRange2's vtable slot 102.
-func (self *ITextRange2) SetProperty(Type int32, Value int32) foundation.HRESULT {
+func (self *ITextRange2) SetProperty(Type int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetText2 dispatches through ITextRange2's vtable slot 103.
-func (self *ITextRange2) SetText2(Flags int32, bstr foundation.BSTR) foundation.HRESULT {
+func (self *ITextRange2) SetText2(Flags int32, bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(bstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnicodeToHex dispatches through ITextRange2's vtable slot 104.
-func (self *ITextRange2) UnicodeToHex() foundation.HRESULT {
+func (self *ITextRange2) UnicodeToHex() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInlineObject dispatches through ITextRange2's vtable slot 105.
-func (self *ITextRange2) SetInlineObject(Type int32, Align int32, Char int32, Char1 int32, Char2 int32, Count int32, TeXStyle int32, cCol int32) foundation.HRESULT {
+func (self *ITextRange2) SetInlineObject(Type int32, Align int32, Char int32, Char1 int32, Char2 int32, Count int32, TeXStyle int32, cCol int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Align), uintptr(Char), uintptr(Char1), uintptr(Char2), uintptr(Count), uintptr(TeXStyle), uintptr(cCol))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMathFunctionType dispatches through ITextRange2's vtable slot 106.
-func (self *ITextRange2) GetMathFunctionType(bstr foundation.BSTR, pValue *int32) foundation.HRESULT {
+func (self *ITextRange2) GetMathFunctionType(bstr foundation.BSTR, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertImage dispatches through ITextRange2's vtable slot 107.
-func (self *ITextRange2) InsertImage(width int32, height int32, ascent int32, Type int32, bstrAltText foundation.BSTR, pStream *systemcom.IStream) foundation.HRESULT {
+func (self *ITextRange2) InsertImage(width int32, height int32, ascent int32, Type int32, bstrAltText foundation.BSTR, pStream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(width), uintptr(height), uintptr(ascent), uintptr(Type), uintptr(unsafe.Pointer(bstrAltText)), uintptr(unsafe.Pointer(pStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextRow: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextrow
@@ -2586,279 +2602,279 @@ type ITextRow struct {
 var IID_ITextRow = win32.GUID{Data1: 0xc241f5ef, Data2: 0x7206, Data3: 0x11d8, Data4: [8]byte{0xa2, 0xc7, 0x00, 0xa0, 0xd1, 0xd6, 0xc6, 0xb3}}
 
 // GetAlignment dispatches through ITextRow's vtable slot 7.
-func (self *ITextRow) GetAlignment(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetAlignment(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAlignment dispatches through ITextRow's vtable slot 8.
-func (self *ITextRow) SetAlignment(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetAlignment(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellCount dispatches through ITextRow's vtable slot 9.
-func (self *ITextRow) GetCellCount(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellCount(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellCount dispatches through ITextRow's vtable slot 10.
-func (self *ITextRow) SetCellCount(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellCount(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellCountCache dispatches through ITextRow's vtable slot 11.
-func (self *ITextRow) GetCellCountCache(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellCountCache(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellCountCache dispatches through ITextRow's vtable slot 12.
-func (self *ITextRow) SetCellCountCache(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellCountCache(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellIndex dispatches through ITextRow's vtable slot 13.
-func (self *ITextRow) GetCellIndex(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellIndex(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellIndex dispatches through ITextRow's vtable slot 14.
-func (self *ITextRow) SetCellIndex(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellIndex(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellMargin dispatches through ITextRow's vtable slot 15.
-func (self *ITextRow) GetCellMargin(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellMargin(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellMargin dispatches through ITextRow's vtable slot 16.
-func (self *ITextRow) SetCellMargin(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellMargin(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHeight dispatches through ITextRow's vtable slot 17.
-func (self *ITextRow) GetHeight(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetHeight(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHeight dispatches through ITextRow's vtable slot 18.
-func (self *ITextRow) SetHeight(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetHeight(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndent dispatches through ITextRow's vtable slot 19.
-func (self *ITextRow) GetIndent(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetIndent(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIndent dispatches through ITextRow's vtable slot 20.
-func (self *ITextRow) SetIndent(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetIndent(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKeepTogether dispatches through ITextRow's vtable slot 21.
-func (self *ITextRow) GetKeepTogether(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetKeepTogether(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetKeepTogether dispatches through ITextRow's vtable slot 22.
-func (self *ITextRow) SetKeepTogether(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetKeepTogether(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKeepWithNext dispatches through ITextRow's vtable slot 23.
-func (self *ITextRow) GetKeepWithNext(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetKeepWithNext(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetKeepWithNext dispatches through ITextRow's vtable slot 24.
-func (self *ITextRow) SetKeepWithNext(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetKeepWithNext(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNestLevel dispatches through ITextRow's vtable slot 25.
-func (self *ITextRow) GetNestLevel(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetNestLevel(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRTL dispatches through ITextRow's vtable slot 26.
-func (self *ITextRow) GetRTL(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetRTL(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRTL dispatches through ITextRow's vtable slot 27.
-func (self *ITextRow) SetRTL(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetRTL(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellAlignment dispatches through ITextRow's vtable slot 28.
-func (self *ITextRow) GetCellAlignment(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellAlignment(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellAlignment dispatches through ITextRow's vtable slot 29.
-func (self *ITextRow) SetCellAlignment(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellAlignment(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellColorBack dispatches through ITextRow's vtable slot 30.
-func (self *ITextRow) GetCellColorBack(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellColorBack(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellColorBack dispatches through ITextRow's vtable slot 31.
-func (self *ITextRow) SetCellColorBack(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellColorBack(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellColorFore dispatches through ITextRow's vtable slot 32.
-func (self *ITextRow) GetCellColorFore(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellColorFore(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellColorFore dispatches through ITextRow's vtable slot 33.
-func (self *ITextRow) SetCellColorFore(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellColorFore(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellMergeFlags dispatches through ITextRow's vtable slot 34.
-func (self *ITextRow) GetCellMergeFlags(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellMergeFlags(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellMergeFlags dispatches through ITextRow's vtable slot 35.
-func (self *ITextRow) SetCellMergeFlags(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellMergeFlags(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellShading dispatches through ITextRow's vtable slot 36.
-func (self *ITextRow) GetCellShading(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellShading(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellShading dispatches through ITextRow's vtable slot 37.
-func (self *ITextRow) SetCellShading(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellShading(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellVerticalText dispatches through ITextRow's vtable slot 38.
-func (self *ITextRow) GetCellVerticalText(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellVerticalText(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellVerticalText dispatches through ITextRow's vtable slot 39.
-func (self *ITextRow) SetCellVerticalText(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellVerticalText(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellWidth dispatches through ITextRow's vtable slot 40.
-func (self *ITextRow) GetCellWidth(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellWidth(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellWidth dispatches through ITextRow's vtable slot 41.
-func (self *ITextRow) SetCellWidth(Value int32) foundation.HRESULT {
+func (self *ITextRow) SetCellWidth(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellBorderColors dispatches through ITextRow's vtable slot 42.
-func (self *ITextRow) GetCellBorderColors(pcrLeft *int32, pcrTop *int32, pcrRight *int32, pcrBottom *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellBorderColors(pcrLeft *int32, pcrTop *int32, pcrRight *int32, pcrBottom *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcrLeft)), uintptr(unsafe.Pointer(pcrTop)), uintptr(unsafe.Pointer(pcrRight)), uintptr(unsafe.Pointer(pcrBottom)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellBorderWidths dispatches through ITextRow's vtable slot 43.
-func (self *ITextRow) GetCellBorderWidths(pduLeft *int32, pduTop *int32, pduRight *int32, pduBottom *int32) foundation.HRESULT {
+func (self *ITextRow) GetCellBorderWidths(pduLeft *int32, pduTop *int32, pduRight *int32, pduBottom *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pduLeft)), uintptr(unsafe.Pointer(pduTop)), uintptr(unsafe.Pointer(pduRight)), uintptr(unsafe.Pointer(pduBottom)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellBorderColors dispatches through ITextRow's vtable slot 44.
-func (self *ITextRow) SetCellBorderColors(crLeft int32, crTop int32, crRight int32, crBottom int32) foundation.HRESULT {
+func (self *ITextRow) SetCellBorderColors(crLeft int32, crTop int32, crRight int32, crBottom int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(crLeft), uintptr(crTop), uintptr(crRight), uintptr(crBottom))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCellBorderWidths dispatches through ITextRow's vtable slot 45.
-func (self *ITextRow) SetCellBorderWidths(duLeft int32, duTop int32, duRight int32, duBottom int32) foundation.HRESULT {
+func (self *ITextRow) SetCellBorderWidths(duLeft int32, duTop int32, duRight int32, duBottom int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(duLeft), uintptr(duTop), uintptr(duRight), uintptr(duBottom))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Apply dispatches through ITextRow's vtable slot 46.
-func (self *ITextRow) Apply(cRow int32, Flags TomConstants) foundation.HRESULT {
+func (self *ITextRow) Apply(cRow int32, Flags TomConstants) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(cRow), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanChange dispatches through ITextRow's vtable slot 47.
-func (self *ITextRow) CanChange(pValue *int32) foundation.HRESULT {
+func (self *ITextRow) CanChange(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through ITextRow's vtable slot 48.
-func (self *ITextRow) GetProperty(Type int32, pValue *int32) foundation.HRESULT {
+func (self *ITextRow) GetProperty(Type int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Insert dispatches through ITextRow's vtable slot 49.
-func (self *ITextRow) Insert(cRow int32) foundation.HRESULT {
+func (self *ITextRow) Insert(cRow int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(cRow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEqual dispatches through ITextRow's vtable slot 50.
-func (self *ITextRow) IsEqual(pRow *ITextRow, pB *int32) foundation.HRESULT {
+func (self *ITextRow) IsEqual(pRow *ITextRow, pB *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRow)), uintptr(unsafe.Pointer(pB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ITextRow's vtable slot 51.
-func (self *ITextRow) Reset(Value int32) foundation.HRESULT {
+func (self *ITextRow) Reset(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through ITextRow's vtable slot 52.
-func (self *ITextRow) SetProperty(Type int32, Value int32) foundation.HRESULT {
+func (self *ITextRow) SetProperty(Type int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextSelection: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextselection
@@ -2871,63 +2887,63 @@ type ITextSelection struct {
 var IID_ITextSelection = win32.GUID{Data1: 0x8cc497c1, Data2: 0xa1df, Data3: 0x11ce, Data4: [8]byte{0x80, 0x98, 0x00, 0xaa, 0x00, 0x47, 0xbe, 0x5d}}
 
 // GetFlags dispatches through ITextSelection's vtable slot 58.
-func (self *ITextSelection) GetFlags(pFlags *int32) foundation.HRESULT {
+func (self *ITextSelection) GetFlags(pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFlags dispatches through ITextSelection's vtable slot 59.
-func (self *ITextSelection) SetFlags(Flags int32) foundation.HRESULT {
+func (self *ITextSelection) SetFlags(Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetType dispatches through ITextSelection's vtable slot 60.
-func (self *ITextSelection) GetType(pType *int32) foundation.HRESULT {
+func (self *ITextSelection) GetType(pType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveLeft dispatches through ITextSelection's vtable slot 61.
-func (self *ITextSelection) MoveLeft(Unit int32, Count int32, Extend int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextSelection) MoveLeft(Unit int32, Count int32, Extend int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Count), uintptr(Extend), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveRight dispatches through ITextSelection's vtable slot 62.
-func (self *ITextSelection) MoveRight(Unit int32, Count int32, Extend int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextSelection) MoveRight(Unit int32, Count int32, Extend int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Count), uintptr(Extend), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveUp dispatches through ITextSelection's vtable slot 63.
-func (self *ITextSelection) MoveUp(Unit int32, Count int32, Extend int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextSelection) MoveUp(Unit int32, Count int32, Extend int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Count), uintptr(Extend), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveDown dispatches through ITextSelection's vtable slot 64.
-func (self *ITextSelection) MoveDown(Unit int32, Count int32, Extend int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextSelection) MoveDown(Unit int32, Count int32, Extend int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Count), uintptr(Extend), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HomeKey dispatches through ITextSelection's vtable slot 65.
-func (self *ITextSelection) HomeKey(Unit TomConstants, Extend int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextSelection) HomeKey(Unit TomConstants, Extend int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Extend), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndKey dispatches through ITextSelection's vtable slot 66.
-func (self *ITextSelection) EndKey(Unit int32, Extend int32, pDelta *int32) foundation.HRESULT {
+func (self *ITextSelection) EndKey(Unit int32, Extend int32, pDelta *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Unit), uintptr(Extend), uintptr(unsafe.Pointer(pDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TypeText dispatches through ITextSelection's vtable slot 67.
-func (self *ITextSelection) TypeText(bstr foundation.BSTR) foundation.HRESULT {
+func (self *ITextSelection) TypeText(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextSelection2: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextselection2
@@ -2945,111 +2961,112 @@ type ITextServices struct {
 }
 
 // TxSendMessage dispatches through ITextServices's vtable slot 3.
-func (self *ITextServices) TxSendMessage(msg uint32, wparam foundation.WPARAM, lparam foundation.LPARAM, plresult *foundation.LRESULT) foundation.HRESULT {
+func (self *ITextServices) TxSendMessage(msg uint32, wparam foundation.WPARAM, lparam foundation.LPARAM, plresult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(msg), uintptr(wparam), uintptr(lparam), uintptr(unsafe.Pointer(plresult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxDraw dispatches through ITextServices's vtable slot 4.
-func (self *ITextServices) TxDraw(dwDrawAspect systemcom.DVASPECT, lindex int32, pvAspect unsafe.Pointer, ptd *systemcom.DVTARGETDEVICE, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, lprcBounds *foundation.RECTL, lprcWBounds *foundation.RECTL, lprcUpdate *foundation.RECT, pfnContinue uintptr, dwContinue uint32, lViewId int32) foundation.HRESULT {
+func (self *ITextServices) TxDraw(dwDrawAspect systemcom.DVASPECT, lindex int32, pvAspect unsafe.Pointer, ptd *systemcom.DVTARGETDEVICE, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, lprcBounds *foundation.RECTL, lprcWBounds *foundation.RECTL, lprcUpdate *foundation.RECT, pfnContinue uintptr, dwContinue uint32, lViewId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwDrawAspect), uintptr(lindex), uintptr(unsafe.Pointer(pvAspect)), uintptr(unsafe.Pointer(ptd)), uintptr(hdcDraw), uintptr(hicTargetDev), uintptr(unsafe.Pointer(lprcBounds)), uintptr(unsafe.Pointer(lprcWBounds)), uintptr(unsafe.Pointer(lprcUpdate)), uintptr(pfnContinue), uintptr(dwContinue), uintptr(lViewId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetHScroll dispatches through ITextServices's vtable slot 5.
-func (self *ITextServices) TxGetHScroll(plMin *int32, plMax *int32, plPos *int32, plPage *int32, pfEnabled *foundation.BOOL) foundation.HRESULT {
+func (self *ITextServices) TxGetHScroll(plMin *int32, plMax *int32, plPos *int32, plPage *int32, pfEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMin)), uintptr(unsafe.Pointer(plMax)), uintptr(unsafe.Pointer(plPos)), uintptr(unsafe.Pointer(plPage)), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetVScroll dispatches through ITextServices's vtable slot 6.
-func (self *ITextServices) TxGetVScroll(plMin *int32, plMax *int32, plPos *int32, plPage *int32, pfEnabled *foundation.BOOL) foundation.HRESULT {
+func (self *ITextServices) TxGetVScroll(plMin *int32, plMax *int32, plPos *int32, plPage *int32, pfEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMin)), uintptr(unsafe.Pointer(plMax)), uintptr(unsafe.Pointer(plPos)), uintptr(unsafe.Pointer(plPage)), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnTxSetCursor dispatches through ITextServices's vtable slot 7.
-func (self *ITextServices) OnTxSetCursor(dwDrawAspect systemcom.DVASPECT, lindex int32, pvAspect unsafe.Pointer, ptd *systemcom.DVTARGETDEVICE, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, lprcClient *foundation.RECT, x int32, y int32) foundation.HRESULT {
+func (self *ITextServices) OnTxSetCursor(dwDrawAspect systemcom.DVASPECT, lindex int32, pvAspect unsafe.Pointer, ptd *systemcom.DVTARGETDEVICE, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, lprcClient *foundation.RECT, x int32, y int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwDrawAspect), uintptr(lindex), uintptr(unsafe.Pointer(pvAspect)), uintptr(unsafe.Pointer(ptd)), uintptr(hdcDraw), uintptr(hicTargetDev), uintptr(unsafe.Pointer(lprcClient)), uintptr(x), uintptr(y))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxQueryHitPoint dispatches through ITextServices's vtable slot 8.
-func (self *ITextServices) TxQueryHitPoint(dwDrawAspect systemcom.DVASPECT, lindex int32, pvAspect unsafe.Pointer, ptd *systemcom.DVTARGETDEVICE, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, lprcClient *foundation.RECT, x int32, y int32, pHitResult *uint32) foundation.HRESULT {
+func (self *ITextServices) TxQueryHitPoint(dwDrawAspect systemcom.DVASPECT, lindex int32, pvAspect unsafe.Pointer, ptd *systemcom.DVTARGETDEVICE, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, lprcClient *foundation.RECT, x int32, y int32, pHitResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwDrawAspect), uintptr(lindex), uintptr(unsafe.Pointer(pvAspect)), uintptr(unsafe.Pointer(ptd)), uintptr(hdcDraw), uintptr(hicTargetDev), uintptr(unsafe.Pointer(lprcClient)), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(pHitResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnTxInPlaceActivate dispatches through ITextServices's vtable slot 9.
-func (self *ITextServices) OnTxInPlaceActivate(prcClient *foundation.RECT) foundation.HRESULT {
+func (self *ITextServices) OnTxInPlaceActivate(prcClient *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcClient)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnTxInPlaceDeactivate dispatches through ITextServices's vtable slot 10.
-func (self *ITextServices) OnTxInPlaceDeactivate() foundation.HRESULT {
+func (self *ITextServices) OnTxInPlaceDeactivate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnTxUIActivate dispatches through ITextServices's vtable slot 11.
-func (self *ITextServices) OnTxUIActivate() foundation.HRESULT {
+func (self *ITextServices) OnTxUIActivate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnTxUIDeactivate dispatches through ITextServices's vtable slot 12.
-func (self *ITextServices) OnTxUIDeactivate() foundation.HRESULT {
+func (self *ITextServices) OnTxUIDeactivate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetText dispatches through ITextServices's vtable slot 13.
-func (self *ITextServices) TxGetText(pbstrText *foundation.BSTR) foundation.HRESULT {
+func (self *ITextServices) TxGetText(pbstrText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxSetText dispatches through ITextServices's vtable slot 14.
-func (self *ITextServices) TxSetText(pszText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszText)))
-	return foundation.HRESULT(r1)
+func (self *ITextServices) TxSetText(pszText string) error {
+	_pszText := win32.UTF16Ptr(pszText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetCurTargetX dispatches through ITextServices's vtable slot 15.
-func (self *ITextServices) TxGetCurTargetX(param0 *int32) foundation.HRESULT {
+func (self *ITextServices) TxGetCurTargetX(param0 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetBaseLinePos dispatches through ITextServices's vtable slot 16.
-func (self *ITextServices) TxGetBaseLinePos(param0 *int32) foundation.HRESULT {
+func (self *ITextServices) TxGetBaseLinePos(param0 *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetNaturalSize dispatches through ITextServices's vtable slot 17.
-func (self *ITextServices) TxGetNaturalSize(dwAspect uint32, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, ptd *systemcom.DVTARGETDEVICE, dwMode uint32, psizelExtent *foundation.SIZE, pwidth *int32, pheight *int32) foundation.HRESULT {
+func (self *ITextServices) TxGetNaturalSize(dwAspect uint32, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, ptd *systemcom.DVTARGETDEVICE, dwMode uint32, psizelExtent *foundation.SIZE, pwidth *int32, pheight *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwAspect), uintptr(hdcDraw), uintptr(hicTargetDev), uintptr(unsafe.Pointer(ptd)), uintptr(dwMode), uintptr(unsafe.Pointer(psizelExtent)), uintptr(unsafe.Pointer(pwidth)), uintptr(unsafe.Pointer(pheight)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetDropTarget dispatches through ITextServices's vtable slot 18.
-func (self *ITextServices) TxGetDropTarget(ppDropTarget **systemole.IDropTarget) foundation.HRESULT {
+func (self *ITextServices) TxGetDropTarget(ppDropTarget **systemole.IDropTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDropTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnTxPropertyBitsChange dispatches through ITextServices's vtable slot 19.
-func (self *ITextServices) OnTxPropertyBitsChange(dwMask uint32, dwBits uint32) foundation.HRESULT {
+func (self *ITextServices) OnTxPropertyBitsChange(dwMask uint32, dwBits uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(dwMask), uintptr(dwBits))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxGetCachedSize dispatches through ITextServices's vtable slot 20.
-func (self *ITextServices) TxGetCachedSize(pdwWidth *uint32, pdwHeight *uint32) foundation.HRESULT {
+func (self *ITextServices) TxGetCachedSize(pdwWidth *uint32, pdwHeight *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwWidth)), uintptr(unsafe.Pointer(pdwHeight)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextServices2: https://learn.microsoft.com/windows/win32/api/textserv/nl-textserv-itextservices2
@@ -3058,15 +3075,15 @@ type ITextServices2 struct {
 }
 
 // TxGetNaturalSize2 dispatches through ITextServices2's vtable slot 21.
-func (self *ITextServices2) TxGetNaturalSize2(dwAspect uint32, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, ptd *systemcom.DVTARGETDEVICE, dwMode uint32, psizelExtent *foundation.SIZE, pwidth *int32, pheight *int32, pascent *int32) foundation.HRESULT {
+func (self *ITextServices2) TxGetNaturalSize2(dwAspect uint32, hdcDraw graphicsgdi.HDC, hicTargetDev graphicsgdi.HDC, ptd *systemcom.DVTARGETDEVICE, dwMode uint32, psizelExtent *foundation.SIZE, pwidth *int32, pheight *int32, pascent *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwAspect), uintptr(hdcDraw), uintptr(hicTargetDev), uintptr(unsafe.Pointer(ptd)), uintptr(dwMode), uintptr(unsafe.Pointer(psizelExtent)), uintptr(unsafe.Pointer(pwidth)), uintptr(unsafe.Pointer(pheight)), uintptr(unsafe.Pointer(pascent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TxDrawD2D dispatches through ITextServices2's vtable slot 22.
-func (self *ITextServices2) TxDrawD2D(pRenderTarget *graphicsdirect2d.ID2D1RenderTarget, lprcBounds *foundation.RECTL, lprcUpdate *foundation.RECT, lViewId int32) foundation.HRESULT {
+func (self *ITextServices2) TxDrawD2D(pRenderTarget *graphicsdirect2d.ID2D1RenderTarget, lprcBounds *foundation.RECTL, lprcUpdate *foundation.RECT, lViewId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRenderTarget)), uintptr(unsafe.Pointer(lprcBounds)), uintptr(unsafe.Pointer(lprcUpdate)), uintptr(lViewId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextStory: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextstory
@@ -3079,75 +3096,75 @@ type ITextStory struct {
 var IID_ITextStory = win32.GUID{Data1: 0xc241f5f3, Data2: 0x7206, Data3: 0x11d8, Data4: [8]byte{0xa2, 0xc7, 0x00, 0xa0, 0xd1, 0xd6, 0xc6, 0xb3}}
 
 // GetActive dispatches through ITextStory's vtable slot 3.
-func (self *ITextStory) GetActive(pValue *int32) foundation.HRESULT {
+func (self *ITextStory) GetActive(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetActive dispatches through ITextStory's vtable slot 4.
-func (self *ITextStory) SetActive(Value int32) foundation.HRESULT {
+func (self *ITextStory) SetActive(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplay dispatches through ITextStory's vtable slot 5.
-func (self *ITextStory) GetDisplay(ppDisplay **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextStory) GetDisplay(ppDisplay **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDisplay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndex dispatches through ITextStory's vtable slot 6.
-func (self *ITextStory) GetIndex(pValue *int32) foundation.HRESULT {
+func (self *ITextStory) GetIndex(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetType dispatches through ITextStory's vtable slot 7.
-func (self *ITextStory) GetType(pValue *int32) foundation.HRESULT {
+func (self *ITextStory) GetType(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetType dispatches through ITextStory's vtable slot 8.
-func (self *ITextStory) SetType(Value int32) foundation.HRESULT {
+func (self *ITextStory) SetType(Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through ITextStory's vtable slot 9.
-func (self *ITextStory) GetProperty(Type int32, pValue *int32) foundation.HRESULT {
+func (self *ITextStory) GetProperty(Type int32, pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRange dispatches through ITextStory's vtable slot 10.
-func (self *ITextStory) GetRange(cpActive int32, cpAnchor int32, ppRange **ITextRange2) foundation.HRESULT {
+func (self *ITextStory) GetRange(cpActive int32, cpAnchor int32, ppRange **ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(cpActive), uintptr(cpAnchor), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetText dispatches through ITextStory's vtable slot 11.
-func (self *ITextStory) GetText(Flags int32, pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *ITextStory) GetText(Flags int32, pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormattedText dispatches through ITextStory's vtable slot 12.
-func (self *ITextStory) SetFormattedText(pUnk *systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextStory) SetFormattedText(pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through ITextStory's vtable slot 13.
-func (self *ITextStory) SetProperty(Type int32, Value int32) foundation.HRESULT {
+func (self *ITextStory) SetProperty(Type int32, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetText dispatches through ITextStory's vtable slot 14.
-func (self *ITextStory) SetText(Flags int32, bstr foundation.BSTR) foundation.HRESULT {
+func (self *ITextStory) SetText(Flags int32, bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(bstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextStoryRanges: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextstoryranges
@@ -3160,21 +3177,21 @@ type ITextStoryRanges struct {
 var IID_ITextStoryRanges = win32.GUID{Data1: 0x8cc497c5, Data2: 0xa1df, Data3: 0x11ce, Data4: [8]byte{0x80, 0x98, 0x00, 0xaa, 0x00, 0x47, 0xbe, 0x5d}}
 
 // NewEnum dispatches through ITextStoryRanges's vtable slot 7.
-func (self *ITextStoryRanges) NewEnum(ppunkEnum **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITextStoryRanges) NewEnum(ppunkEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppunkEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ITextStoryRanges's vtable slot 8.
-func (self *ITextStoryRanges) Item(Index int32, ppRange **ITextRange) foundation.HRESULT {
+func (self *ITextStoryRanges) Item(Index int32, ppRange **ITextRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through ITextStoryRanges's vtable slot 9.
-func (self *ITextStoryRanges) GetCount(pCount *int32) foundation.HRESULT {
+func (self *ITextStoryRanges) GetCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextStoryRanges2: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextstoryranges2
@@ -3187,9 +3204,9 @@ type ITextStoryRanges2 struct {
 var IID_ITextStoryRanges2 = win32.GUID{Data1: 0xc241f5e5, Data2: 0x7206, Data3: 0x11d8, Data4: [8]byte{0xa2, 0xc7, 0x00, 0xa0, 0xd1, 0xd6, 0xc6, 0xb3}}
 
 // Item2 dispatches through ITextStoryRanges2's vtable slot 10.
-func (self *ITextStoryRanges2) Item2(Index int32, ppRange **ITextRange2) foundation.HRESULT {
+func (self *ITextStoryRanges2) Item2(Index int32, ppRange **ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITextStrings: https://learn.microsoft.com/windows/win32/api/tom/nn-tom-itextstrings
@@ -3202,103 +3219,103 @@ type ITextStrings struct {
 var IID_ITextStrings = win32.GUID{Data1: 0xc241f5e7, Data2: 0x7206, Data3: 0x11d8, Data4: [8]byte{0xa2, 0xc7, 0x00, 0xa0, 0xd1, 0xd6, 0xc6, 0xb3}}
 
 // Item dispatches through ITextStrings's vtable slot 7.
-func (self *ITextStrings) Item(Index int32, ppRange **ITextRange2) foundation.HRESULT {
+func (self *ITextStrings) Item(Index int32, ppRange **ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through ITextStrings's vtable slot 8.
-func (self *ITextStrings) GetCount(pCount *int32) foundation.HRESULT {
+func (self *ITextStrings) GetCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through ITextStrings's vtable slot 9.
-func (self *ITextStrings) Add(bstr foundation.BSTR) foundation.HRESULT {
+func (self *ITextStrings) Add(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Append dispatches through ITextStrings's vtable slot 10.
-func (self *ITextStrings) Append(pRange *ITextRange2, iString int32) foundation.HRESULT {
+func (self *ITextStrings) Append(pRange *ITextRange2, iString int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)), uintptr(iString))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cat2 dispatches through ITextStrings's vtable slot 11.
-func (self *ITextStrings) Cat2(iString int32) foundation.HRESULT {
+func (self *ITextStrings) Cat2(iString int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(iString))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CatTop2 dispatches through ITextStrings's vtable slot 12.
-func (self *ITextStrings) CatTop2(bstr foundation.BSTR) foundation.HRESULT {
+func (self *ITextStrings) CatTop2(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteRange dispatches through ITextStrings's vtable slot 13.
-func (self *ITextStrings) DeleteRange(pRange *ITextRange2) foundation.HRESULT {
+func (self *ITextStrings) DeleteRange(pRange *ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EncodeFunction dispatches through ITextStrings's vtable slot 14.
-func (self *ITextStrings) EncodeFunction(Type int32, Align int32, Char int32, Char1 int32, Char2 int32, Count int32, TeXStyle int32, cCol int32, pRange *ITextRange2) foundation.HRESULT {
+func (self *ITextStrings) EncodeFunction(Type int32, Align int32, Char int32, Char1 int32, Char2 int32, Count int32, TeXStyle int32, cCol int32, pRange *ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(Align), uintptr(Char), uintptr(Char1), uintptr(Char2), uintptr(Count), uintptr(TeXStyle), uintptr(cCol), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCch dispatches through ITextStrings's vtable slot 15.
-func (self *ITextStrings) GetCch(iString int32, pcch *int32) foundation.HRESULT {
+func (self *ITextStrings) GetCch(iString int32, pcch *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(iString), uintptr(unsafe.Pointer(pcch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertNullStr dispatches through ITextStrings's vtable slot 16.
-func (self *ITextStrings) InsertNullStr(iString int32) foundation.HRESULT {
+func (self *ITextStrings) InsertNullStr(iString int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(iString))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveBoundary dispatches through ITextStrings's vtable slot 17.
-func (self *ITextStrings) MoveBoundary(iString int32, cch int32) foundation.HRESULT {
+func (self *ITextStrings) MoveBoundary(iString int32, cch int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(iString), uintptr(cch))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrefixTop dispatches through ITextStrings's vtable slot 18.
-func (self *ITextStrings) PrefixTop(bstr foundation.BSTR) foundation.HRESULT {
+func (self *ITextStrings) PrefixTop(bstr foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through ITextStrings's vtable slot 19.
-func (self *ITextStrings) Remove(iString int32, cString int32) foundation.HRESULT {
+func (self *ITextStrings) Remove(iString int32, cString int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(iString), uintptr(cString))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormattedText dispatches through ITextStrings's vtable slot 20.
-func (self *ITextStrings) SetFormattedText(pRangeD *ITextRange2, pRangeS *ITextRange2) foundation.HRESULT {
+func (self *ITextStrings) SetFormattedText(pRangeD *ITextRange2, pRangeS *ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRangeD)), uintptr(unsafe.Pointer(pRangeS)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOpCp dispatches through ITextStrings's vtable slot 21.
-func (self *ITextStrings) SetOpCp(iString int32, cp int32) foundation.HRESULT {
+func (self *ITextStrings) SetOpCp(iString int32, cp int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(iString), uintptr(cp))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SuffixTop dispatches through ITextStrings's vtable slot 22.
-func (self *ITextStrings) SuffixTop(bstr foundation.BSTR, pRange *ITextRange2) foundation.HRESULT {
+func (self *ITextStrings) SuffixTop(bstr foundation.BSTR, pRange *ITextRange2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstr)), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Swap dispatches through ITextStrings's vtable slot 23.
-func (self *ITextStrings) Swap() foundation.HRESULT {
+func (self *ITextStrings) Swap() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

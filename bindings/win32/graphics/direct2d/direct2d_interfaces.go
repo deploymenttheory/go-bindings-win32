@@ -31,9 +31,9 @@ type ID2D1AnalysisTransform struct {
 var IID_ID2D1AnalysisTransform = win32.GUID{Data1: 0x0359dc30, Data2: 0x95e6, Data3: 0x4568, Data4: [8]byte{0x90, 0x55, 0x27, 0x72, 0x0d, 0x13, 0x0e, 0x93}}
 
 // ProcessAnalysisResults dispatches through ID2D1AnalysisTransform's vtable slot 3.
-func (self *ID2D1AnalysisTransform) ProcessAnalysisResults(analysisData *byte, analysisDataCount uint32) foundation.HRESULT {
+func (self *ID2D1AnalysisTransform) ProcessAnalysisResults(analysisData *byte, analysisDataCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(analysisData)), uintptr(analysisDataCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Bitmap: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1bitmap
@@ -51,21 +51,21 @@ func (self *ID2D1Bitmap) GetDpi(dpiX *float32, dpiY *float32) {
 }
 
 // CopyFromBitmap dispatches through ID2D1Bitmap's vtable slot 8.
-func (self *ID2D1Bitmap) CopyFromBitmap(destPoint *graphicsdirect2dcommon.D2D_POINT_2U, bitmap *ID2D1Bitmap, srcRect *graphicsdirect2dcommon.D2D_RECT_U) foundation.HRESULT {
+func (self *ID2D1Bitmap) CopyFromBitmap(destPoint *graphicsdirect2dcommon.D2D_POINT_2U, bitmap *ID2D1Bitmap, srcRect *graphicsdirect2dcommon.D2D_RECT_U) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(destPoint)), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(srcRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyFromRenderTarget dispatches through ID2D1Bitmap's vtable slot 9.
-func (self *ID2D1Bitmap) CopyFromRenderTarget(destPoint *graphicsdirect2dcommon.D2D_POINT_2U, renderTarget *ID2D1RenderTarget, srcRect *graphicsdirect2dcommon.D2D_RECT_U) foundation.HRESULT {
+func (self *ID2D1Bitmap) CopyFromRenderTarget(destPoint *graphicsdirect2dcommon.D2D_POINT_2U, renderTarget *ID2D1RenderTarget, srcRect *graphicsdirect2dcommon.D2D_RECT_U) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(destPoint)), uintptr(unsafe.Pointer(renderTarget)), uintptr(unsafe.Pointer(srcRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyFromMemory dispatches through ID2D1Bitmap's vtable slot 10.
-func (self *ID2D1Bitmap) CopyFromMemory(dstRect *graphicsdirect2dcommon.D2D_RECT_U, srcData unsafe.Pointer, pitch uint32) foundation.HRESULT {
+func (self *ID2D1Bitmap) CopyFromMemory(dstRect *graphicsdirect2dcommon.D2D_RECT_U, srcData unsafe.Pointer, pitch uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dstRect)), uintptr(unsafe.Pointer(srcData)), uintptr(pitch))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Bitmap1: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1bitmap1
@@ -89,21 +89,21 @@ func (self *ID2D1Bitmap1) GetOptions() D2D1_BITMAP_OPTIONS {
 }
 
 // GetSurface dispatches through ID2D1Bitmap1's vtable slot 13.
-func (self *ID2D1Bitmap1) GetSurface(dxgiSurface **graphicsdxgi.IDXGISurface) foundation.HRESULT {
+func (self *ID2D1Bitmap1) GetSurface(dxgiSurface **graphicsdxgi.IDXGISurface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Map dispatches through ID2D1Bitmap1's vtable slot 14.
-func (self *ID2D1Bitmap1) Map(options D2D1_MAP_OPTIONS, mappedRect *D2D1_MAPPED_RECT) foundation.HRESULT {
+func (self *ID2D1Bitmap1) Map(options D2D1_MAP_OPTIONS, mappedRect *D2D1_MAPPED_RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(mappedRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unmap dispatches through ID2D1Bitmap1's vtable slot 15.
-func (self *ID2D1Bitmap1) Unmap() foundation.HRESULT {
+func (self *ID2D1Bitmap1) Unmap() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1BitmapBrush: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1bitmapbrush
@@ -188,9 +188,9 @@ type ID2D1BitmapRenderTarget struct {
 var IID_ID2D1BitmapRenderTarget = win32.GUID{Data1: 0x2cd90695, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
 // GetBitmap dispatches through ID2D1BitmapRenderTarget's vtable slot 57.
-func (self *ID2D1BitmapRenderTarget) GetBitmap(bitmap **ID2D1Bitmap) foundation.HRESULT {
+func (self *ID2D1BitmapRenderTarget) GetBitmap(bitmap **ID2D1Bitmap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1BlendTransform: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1blendtransform
@@ -303,9 +303,9 @@ func (self *ID2D1ColorContext) GetProfileSize() uint32 {
 }
 
 // GetProfile dispatches through ID2D1ColorContext's vtable slot 6.
-func (self *ID2D1ColorContext) GetProfile(profile *byte, profileSize uint32) foundation.HRESULT {
+func (self *ID2D1ColorContext) GetProfile(profile *byte, profileSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(profile)), uintptr(profileSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1ColorContext1: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1colorcontext1
@@ -330,9 +330,9 @@ func (self *ID2D1ColorContext1) GetDXGIColorSpace() graphicsdxgicommon.DXGI_COLO
 }
 
 // GetSimpleColorProfile dispatches through ID2D1ColorContext1's vtable slot 9.
-func (self *ID2D1ColorContext1) GetSimpleColorProfile(simpleProfile *D2D1_SIMPLE_COLOR_PROFILE) foundation.HRESULT {
+func (self *ID2D1ColorContext1) GetSimpleColorProfile(simpleProfile *D2D1_SIMPLE_COLOR_PROFILE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(simpleProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1CommandList: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1commandlist
@@ -345,15 +345,15 @@ type ID2D1CommandList struct {
 var IID_ID2D1CommandList = win32.GUID{Data1: 0xb4f34a19, Data2: 0x2383, Data3: 0x4d76, Data4: [8]byte{0x94, 0xf6, 0xec, 0x34, 0x36, 0x57, 0xc3, 0xdc}}
 
 // Stream dispatches through ID2D1CommandList's vtable slot 4.
-func (self *ID2D1CommandList) Stream(sink *ID2D1CommandSink) foundation.HRESULT {
+func (self *ID2D1CommandList) Stream(sink *ID2D1CommandSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through ID2D1CommandList's vtable slot 5.
-func (self *ID2D1CommandList) Close() foundation.HRESULT {
+func (self *ID2D1CommandList) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1CommandSink: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1commandsink
@@ -366,123 +366,123 @@ type ID2D1CommandSink struct {
 var IID_ID2D1CommandSink = win32.GUID{Data1: 0x54d7898a, Data2: 0xa061, Data3: 0x40a7, Data4: [8]byte{0xbe, 0xc7, 0xe4, 0x65, 0xbc, 0xba, 0x2c, 0x4f}}
 
 // BeginDraw dispatches through ID2D1CommandSink's vtable slot 3.
-func (self *ID2D1CommandSink) BeginDraw() foundation.HRESULT {
+func (self *ID2D1CommandSink) BeginDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndDraw dispatches through ID2D1CommandSink's vtable slot 4.
-func (self *ID2D1CommandSink) EndDraw() foundation.HRESULT {
+func (self *ID2D1CommandSink) EndDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAntialiasMode dispatches through ID2D1CommandSink's vtable slot 5.
-func (self *ID2D1CommandSink) SetAntialiasMode(antialiasMode D2D1_ANTIALIAS_MODE) foundation.HRESULT {
+func (self *ID2D1CommandSink) SetAntialiasMode(antialiasMode D2D1_ANTIALIAS_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(antialiasMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTags dispatches through ID2D1CommandSink's vtable slot 6.
-func (self *ID2D1CommandSink) SetTags(tag1 uint64, tag2 uint64) foundation.HRESULT {
+func (self *ID2D1CommandSink) SetTags(tag1 uint64, tag2 uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(tag1), uintptr(tag2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextAntialiasMode dispatches through ID2D1CommandSink's vtable slot 7.
-func (self *ID2D1CommandSink) SetTextAntialiasMode(textAntialiasMode D2D1_TEXT_ANTIALIAS_MODE) foundation.HRESULT {
+func (self *ID2D1CommandSink) SetTextAntialiasMode(textAntialiasMode D2D1_TEXT_ANTIALIAS_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(textAntialiasMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextRenderingParams dispatches through ID2D1CommandSink's vtable slot 8.
-func (self *ID2D1CommandSink) SetTextRenderingParams(textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams) foundation.HRESULT {
+func (self *ID2D1CommandSink) SetTextRenderingParams(textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(textRenderingParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTransform dispatches through ID2D1CommandSink's vtable slot 9.
-func (self *ID2D1CommandSink) SetTransform(transform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) foundation.HRESULT {
+func (self *ID2D1CommandSink) SetTransform(transform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPrimitiveBlend dispatches through ID2D1CommandSink's vtable slot 10.
-func (self *ID2D1CommandSink) SetPrimitiveBlend(primitiveBlend D2D1_PRIMITIVE_BLEND) foundation.HRESULT {
+func (self *ID2D1CommandSink) SetPrimitiveBlend(primitiveBlend D2D1_PRIMITIVE_BLEND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(primitiveBlend))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUnitMode dispatches through ID2D1CommandSink's vtable slot 11.
-func (self *ID2D1CommandSink) SetUnitMode(unitMode D2D1_UNIT_MODE) foundation.HRESULT {
+func (self *ID2D1CommandSink) SetUnitMode(unitMode D2D1_UNIT_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unitMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through ID2D1CommandSink's vtable slot 12.
-func (self *ID2D1CommandSink) Clear(color *graphicsdirect2dcommon.D2D1_COLOR_F) foundation.HRESULT {
+func (self *ID2D1CommandSink) Clear(color *graphicsdirect2dcommon.D2D1_COLOR_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawImage dispatches through ID2D1CommandSink's vtable slot 18.
-func (self *ID2D1CommandSink) DrawImage(image *ID2D1Image, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode D2D1_INTERPOLATION_MODE, compositeMode graphicsdirect2dcommon.D2D1_COMPOSITE_MODE) foundation.HRESULT {
+func (self *ID2D1CommandSink) DrawImage(image *ID2D1Image, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode D2D1_INTERPOLATION_MODE, compositeMode graphicsdirect2dcommon.D2D1_COMPOSITE_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(targetOffset)), uintptr(unsafe.Pointer(imageRectangle)), uintptr(interpolationMode), uintptr(compositeMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawGdiMetafile dispatches through ID2D1CommandSink's vtable slot 19.
-func (self *ID2D1CommandSink) DrawGdiMetafile(gdiMetafile *ID2D1GdiMetafile, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F) foundation.HRESULT {
+func (self *ID2D1CommandSink) DrawGdiMetafile(gdiMetafile *ID2D1GdiMetafile, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gdiMetafile)), uintptr(unsafe.Pointer(targetOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FillMesh dispatches through ID2D1CommandSink's vtable slot 20.
-func (self *ID2D1CommandSink) FillMesh(mesh *ID2D1Mesh, brush *ID2D1Brush) foundation.HRESULT {
+func (self *ID2D1CommandSink) FillMesh(mesh *ID2D1Mesh, brush *ID2D1Brush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mesh)), uintptr(unsafe.Pointer(brush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FillOpacityMask dispatches through ID2D1CommandSink's vtable slot 21.
-func (self *ID2D1CommandSink) FillOpacityMask(opacityMask *ID2D1Bitmap, brush *ID2D1Brush, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1CommandSink) FillOpacityMask(opacityMask *ID2D1Bitmap, brush *ID2D1Brush, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(opacityMask)), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(destinationRectangle)), uintptr(unsafe.Pointer(sourceRectangle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FillGeometry dispatches through ID2D1CommandSink's vtable slot 22.
-func (self *ID2D1CommandSink) FillGeometry(geometry *ID2D1Geometry, brush *ID2D1Brush, opacityBrush *ID2D1Brush) foundation.HRESULT {
+func (self *ID2D1CommandSink) FillGeometry(geometry *ID2D1Geometry, brush *ID2D1Brush, opacityBrush *ID2D1Brush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(geometry)), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(opacityBrush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FillRectangle dispatches through ID2D1CommandSink's vtable slot 23.
-func (self *ID2D1CommandSink) FillRectangle(rect *graphicsdirect2dcommon.D2D_RECT_F, brush *ID2D1Brush) foundation.HRESULT {
+func (self *ID2D1CommandSink) FillRectangle(rect *graphicsdirect2dcommon.D2D_RECT_F, brush *ID2D1Brush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rect)), uintptr(unsafe.Pointer(brush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PushAxisAlignedClip dispatches through ID2D1CommandSink's vtable slot 24.
-func (self *ID2D1CommandSink) PushAxisAlignedClip(clipRect *graphicsdirect2dcommon.D2D_RECT_F, antialiasMode D2D1_ANTIALIAS_MODE) foundation.HRESULT {
+func (self *ID2D1CommandSink) PushAxisAlignedClip(clipRect *graphicsdirect2dcommon.D2D_RECT_F, antialiasMode D2D1_ANTIALIAS_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clipRect)), uintptr(antialiasMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PushLayer dispatches through ID2D1CommandSink's vtable slot 25.
-func (self *ID2D1CommandSink) PushLayer(layerParameters1 *D2D1_LAYER_PARAMETERS1, layer *ID2D1Layer) foundation.HRESULT {
+func (self *ID2D1CommandSink) PushLayer(layerParameters1 *D2D1_LAYER_PARAMETERS1, layer *ID2D1Layer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(layerParameters1)), uintptr(unsafe.Pointer(layer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PopAxisAlignedClip dispatches through ID2D1CommandSink's vtable slot 26.
-func (self *ID2D1CommandSink) PopAxisAlignedClip() foundation.HRESULT {
+func (self *ID2D1CommandSink) PopAxisAlignedClip() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PopLayer dispatches through ID2D1CommandSink's vtable slot 27.
-func (self *ID2D1CommandSink) PopLayer() foundation.HRESULT {
+func (self *ID2D1CommandSink) PopLayer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1CommandSink1: https://learn.microsoft.com/windows/win32/api/d2d1_2/nn-d2d1_2-id2d1commandsink1
@@ -495,9 +495,9 @@ type ID2D1CommandSink1 struct {
 var IID_ID2D1CommandSink1 = win32.GUID{Data1: 0x9eb767fd, Data2: 0x4269, Data3: 0x4467, Data4: [8]byte{0xb8, 0xc2, 0xeb, 0x30, 0xcb, 0x30, 0x57, 0x43}}
 
 // SetPrimitiveBlend1 dispatches through ID2D1CommandSink1's vtable slot 28.
-func (self *ID2D1CommandSink1) SetPrimitiveBlend1(primitiveBlend D2D1_PRIMITIVE_BLEND) foundation.HRESULT {
+func (self *ID2D1CommandSink1) SetPrimitiveBlend1(primitiveBlend D2D1_PRIMITIVE_BLEND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(primitiveBlend))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1CommandSink2: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1commandsink2
@@ -510,21 +510,21 @@ type ID2D1CommandSink2 struct {
 var IID_ID2D1CommandSink2 = win32.GUID{Data1: 0x3bab440e, Data2: 0x417e, Data3: 0x47df, Data4: [8]byte{0xa2, 0xe2, 0xbc, 0x0b, 0xe6, 0xa0, 0x09, 0x16}}
 
 // DrawInk dispatches through ID2D1CommandSink2's vtable slot 29.
-func (self *ID2D1CommandSink2) DrawInk(ink *ID2D1Ink, brush *ID2D1Brush, inkStyle *ID2D1InkStyle) foundation.HRESULT {
+func (self *ID2D1CommandSink2) DrawInk(ink *ID2D1Ink, brush *ID2D1Brush, inkStyle *ID2D1InkStyle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ink)), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(inkStyle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawGradientMesh dispatches through ID2D1CommandSink2's vtable slot 30.
-func (self *ID2D1CommandSink2) DrawGradientMesh(gradientMesh *ID2D1GradientMesh) foundation.HRESULT {
+func (self *ID2D1CommandSink2) DrawGradientMesh(gradientMesh *ID2D1GradientMesh) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gradientMesh)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawGdiMetafile dispatches through ID2D1CommandSink2's vtable slot 31.
-func (self *ID2D1CommandSink2) DrawGdiMetafile(gdiMetafile *ID2D1GdiMetafile, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1CommandSink2) DrawGdiMetafile(gdiMetafile *ID2D1GdiMetafile, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gdiMetafile)), uintptr(unsafe.Pointer(destinationRectangle)), uintptr(unsafe.Pointer(sourceRectangle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1CommandSink3: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1commandsink3
@@ -537,9 +537,9 @@ type ID2D1CommandSink3 struct {
 var IID_ID2D1CommandSink3 = win32.GUID{Data1: 0x18079135, Data2: 0x4cf3, Data3: 0x4868, Data4: [8]byte{0xbc, 0x8e, 0x06, 0x06, 0x7e, 0x6d, 0x24, 0x2d}}
 
 // DrawSpriteBatch dispatches through ID2D1CommandSink3's vtable slot 32.
-func (self *ID2D1CommandSink3) DrawSpriteBatch(spriteBatch *ID2D1SpriteBatch, startIndex uint32, spriteCount uint32, bitmap *ID2D1Bitmap, interpolationMode D2D1_BITMAP_INTERPOLATION_MODE, spriteOptions D2D1_SPRITE_OPTIONS) foundation.HRESULT {
+func (self *ID2D1CommandSink3) DrawSpriteBatch(spriteBatch *ID2D1SpriteBatch, startIndex uint32, spriteCount uint32, bitmap *ID2D1Bitmap, interpolationMode D2D1_BITMAP_INTERPOLATION_MODE, spriteOptions D2D1_SPRITE_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(spriteBatch)), uintptr(startIndex), uintptr(spriteCount), uintptr(unsafe.Pointer(bitmap)), uintptr(interpolationMode), uintptr(spriteOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1CommandSink4: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1commandsink4
@@ -552,9 +552,9 @@ type ID2D1CommandSink4 struct {
 var IID_ID2D1CommandSink4 = win32.GUID{Data1: 0xc78a6519, Data2: 0x40d6, Data3: 0x4218, Data4: [8]byte{0xb2, 0xde, 0xbe, 0xee, 0xb7, 0x44, 0xbb, 0x3e}}
 
 // SetPrimitiveBlend2 dispatches through ID2D1CommandSink4's vtable slot 33.
-func (self *ID2D1CommandSink4) SetPrimitiveBlend2(primitiveBlend D2D1_PRIMITIVE_BLEND) foundation.HRESULT {
+func (self *ID2D1CommandSink4) SetPrimitiveBlend2(primitiveBlend D2D1_PRIMITIVE_BLEND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(primitiveBlend))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1CommandSink5: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1commandsink5
@@ -567,9 +567,9 @@ type ID2D1CommandSink5 struct {
 var IID_ID2D1CommandSink5 = win32.GUID{Data1: 0x7047dd26, Data2: 0xb1e7, Data3: 0x44a7, Data4: [8]byte{0x95, 0x9a, 0x83, 0x49, 0xe2, 0x14, 0x4f, 0xa8}}
 
 // BlendImage dispatches through ID2D1CommandSink5's vtable slot 34.
-func (self *ID2D1CommandSink5) BlendImage(image *ID2D1Image, blendMode graphicsdirect2dcommon.D2D1_BLEND_MODE, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode D2D1_INTERPOLATION_MODE) foundation.HRESULT {
+func (self *ID2D1CommandSink5) BlendImage(image *ID2D1Image, blendMode graphicsdirect2dcommon.D2D1_BLEND_MODE, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F, imageRectangle *graphicsdirect2dcommon.D2D_RECT_F, interpolationMode D2D1_INTERPOLATION_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(image)), uintptr(blendMode), uintptr(unsafe.Pointer(targetOffset)), uintptr(unsafe.Pointer(imageRectangle)), uintptr(interpolationMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1ComputeInfo: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1computeinfo
@@ -582,21 +582,21 @@ type ID2D1ComputeInfo struct {
 var IID_ID2D1ComputeInfo = win32.GUID{Data1: 0x5598b14b, Data2: 0x9fd7, Data3: 0x48b7, Data4: [8]byte{0x9b, 0xdb, 0x8f, 0x09, 0x64, 0xeb, 0x38, 0xbc}}
 
 // SetComputeShaderConstantBuffer dispatches through ID2D1ComputeInfo's vtable slot 7.
-func (self *ID2D1ComputeInfo) SetComputeShaderConstantBuffer(buffer *byte, bufferCount uint32) foundation.HRESULT {
+func (self *ID2D1ComputeInfo) SetComputeShaderConstantBuffer(buffer *byte, bufferCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetComputeShader dispatches through ID2D1ComputeInfo's vtable slot 8.
-func (self *ID2D1ComputeInfo) SetComputeShader(shaderId *win32.GUID) foundation.HRESULT {
+func (self *ID2D1ComputeInfo) SetComputeShader(shaderId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(shaderId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetResourceTexture dispatches through ID2D1ComputeInfo's vtable slot 9.
-func (self *ID2D1ComputeInfo) SetResourceTexture(textureIndex uint32, resourceTexture *ID2D1ResourceTexture) foundation.HRESULT {
+func (self *ID2D1ComputeInfo) SetResourceTexture(textureIndex uint32, resourceTexture *ID2D1ResourceTexture) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(textureIndex), uintptr(unsafe.Pointer(resourceTexture)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1ComputeTransform: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1computetransform
@@ -609,15 +609,15 @@ type ID2D1ComputeTransform struct {
 var IID_ID2D1ComputeTransform = win32.GUID{Data1: 0x0d85573c, Data2: 0x01e3, Data3: 0x4f7d, Data4: [8]byte{0xbf, 0xd9, 0x0d, 0x60, 0x60, 0x8b, 0xf3, 0xc3}}
 
 // SetComputeInfo dispatches through ID2D1ComputeTransform's vtable slot 7.
-func (self *ID2D1ComputeTransform) SetComputeInfo(computeInfo *ID2D1ComputeInfo) foundation.HRESULT {
+func (self *ID2D1ComputeTransform) SetComputeInfo(computeInfo *ID2D1ComputeInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(computeInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CalculateThreadgroups dispatches through ID2D1ComputeTransform's vtable slot 8.
-func (self *ID2D1ComputeTransform) CalculateThreadgroups(outputRect *foundation.RECT, dimensionX *uint32, dimensionY *uint32, dimensionZ *uint32) foundation.HRESULT {
+func (self *ID2D1ComputeTransform) CalculateThreadgroups(outputRect *foundation.RECT, dimensionX *uint32, dimensionY *uint32, dimensionZ *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputRect)), uintptr(unsafe.Pointer(dimensionX)), uintptr(unsafe.Pointer(dimensionY)), uintptr(unsafe.Pointer(dimensionZ)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1ConcreteTransform: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1concretetransform
@@ -630,14 +630,15 @@ type ID2D1ConcreteTransform struct {
 var IID_ID2D1ConcreteTransform = win32.GUID{Data1: 0x1a799d8a, Data2: 0x69f7, Data3: 0x4e4c, Data4: [8]byte{0x9f, 0xed, 0x43, 0x7c, 0xcc, 0x66, 0x84, 0xcc}}
 
 // SetOutputBuffer dispatches through ID2D1ConcreteTransform's vtable slot 4.
-func (self *ID2D1ConcreteTransform) SetOutputBuffer(bufferPrecision D2D1_BUFFER_PRECISION, channelDepth D2D1_CHANNEL_DEPTH) foundation.HRESULT {
+func (self *ID2D1ConcreteTransform) SetOutputBuffer(bufferPrecision D2D1_BUFFER_PRECISION, channelDepth D2D1_CHANNEL_DEPTH) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(bufferPrecision), uintptr(channelDepth))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCached dispatches through ID2D1ConcreteTransform's vtable slot 5.
-func (self *ID2D1ConcreteTransform) SetCached(isCached foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(isCached))
+func (self *ID2D1ConcreteTransform) SetCached(isCached bool) {
+	_isCached := win32.Bool32(isCached)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_isCached))
 }
 
 // ID2D1DCRenderTarget: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1dcrendertarget
@@ -650,9 +651,9 @@ type ID2D1DCRenderTarget struct {
 var IID_ID2D1DCRenderTarget = win32.GUID{Data1: 0x1c51bc64, Data2: 0xde61, Data3: 0x46fd, Data4: [8]byte{0x98, 0x99, 0x63, 0xa5, 0xd8, 0xf0, 0x39, 0x50}}
 
 // BindDC dispatches through ID2D1DCRenderTarget's vtable slot 57.
-func (self *ID2D1DCRenderTarget) BindDC(hDC graphicsgdi.HDC, pSubRect *foundation.RECT) foundation.HRESULT {
+func (self *ID2D1DCRenderTarget) BindDC(hDC graphicsgdi.HDC, pSubRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(hDC), uintptr(unsafe.Pointer(pSubRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Device: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1device
@@ -665,15 +666,15 @@ type ID2D1Device struct {
 var IID_ID2D1Device = win32.GUID{Data1: 0x47dd575d, Data2: 0xac05, Data3: 0x4cdd, Data4: [8]byte{0x80, 0x49, 0x9b, 0x02, 0xcd, 0x16, 0xf4, 0x4c}}
 
 // CreateDeviceContext dispatches through ID2D1Device's vtable slot 4.
-func (self *ID2D1Device) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext **ID2D1DeviceContext) foundation.HRESULT {
+func (self *ID2D1Device) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext **ID2D1DeviceContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(deviceContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePrintControl dispatches through ID2D1Device's vtable slot 5.
-func (self *ID2D1Device) CreatePrintControl(wicFactory *graphicsimaging.IWICImagingFactory, documentTarget *storagexpsprinting.IPrintDocumentPackageTarget, printControlProperties *D2D1_PRINT_CONTROL_PROPERTIES, printControl **ID2D1PrintControl) foundation.HRESULT {
+func (self *ID2D1Device) CreatePrintControl(wicFactory *graphicsimaging.IWICImagingFactory, documentTarget *storagexpsprinting.IPrintDocumentPackageTarget, printControlProperties *D2D1_PRINT_CONTROL_PROPERTIES, printControl **ID2D1PrintControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wicFactory)), uintptr(unsafe.Pointer(documentTarget)), uintptr(unsafe.Pointer(printControlProperties)), uintptr(unsafe.Pointer(printControl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaximumTextureMemory dispatches through ID2D1Device's vtable slot 6.
@@ -713,9 +714,9 @@ func (self *ID2D1Device1) SetRenderingPriority(renderingPriority D2D1_RENDERING_
 }
 
 // CreateDeviceContext dispatches through ID2D1Device1's vtable slot 11.
-func (self *ID2D1Device1) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext1 **ID2D1DeviceContext1) foundation.HRESULT {
+func (self *ID2D1Device1) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext1 **ID2D1DeviceContext1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(deviceContext1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Device2: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1device2
@@ -728,9 +729,9 @@ type ID2D1Device2 struct {
 var IID_ID2D1Device2 = win32.GUID{Data1: 0xa44472e1, Data2: 0x8dfb, Data3: 0x4e60, Data4: [8]byte{0x84, 0x92, 0x6e, 0x28, 0x61, 0xc9, 0xca, 0x8b}}
 
 // CreateDeviceContext dispatches through ID2D1Device2's vtable slot 12.
-func (self *ID2D1Device2) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext2 **ID2D1DeviceContext2) foundation.HRESULT {
+func (self *ID2D1Device2) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext2 **ID2D1DeviceContext2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(deviceContext2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FlushDeviceContexts dispatches through ID2D1Device2's vtable slot 13.
@@ -739,9 +740,9 @@ func (self *ID2D1Device2) FlushDeviceContexts(bitmap *ID2D1Bitmap) {
 }
 
 // GetDxgiDevice dispatches through ID2D1Device2's vtable slot 14.
-func (self *ID2D1Device2) GetDxgiDevice(dxgiDevice **graphicsdxgi.IDXGIDevice) foundation.HRESULT {
+func (self *ID2D1Device2) GetDxgiDevice(dxgiDevice **graphicsdxgi.IDXGIDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Device3: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1device3
@@ -754,9 +755,9 @@ type ID2D1Device3 struct {
 var IID_ID2D1Device3 = win32.GUID{Data1: 0x852f2087, Data2: 0x802c, Data3: 0x4037, Data4: [8]byte{0xab, 0x60, 0xff, 0x2e, 0x7e, 0xe6, 0xfc, 0x01}}
 
 // CreateDeviceContext dispatches through ID2D1Device3's vtable slot 15.
-func (self *ID2D1Device3) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext3 **ID2D1DeviceContext3) foundation.HRESULT {
+func (self *ID2D1Device3) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext3 **ID2D1DeviceContext3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(deviceContext3)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Device4: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1device4
@@ -769,9 +770,9 @@ type ID2D1Device4 struct {
 var IID_ID2D1Device4 = win32.GUID{Data1: 0xd7bdb159, Data2: 0x5683, Data3: 0x4a46, Data4: [8]byte{0xbc, 0x9c, 0x72, 0xdc, 0x72, 0x0b, 0x85, 0x8b}}
 
 // CreateDeviceContext dispatches through ID2D1Device4's vtable slot 16.
-func (self *ID2D1Device4) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext4 **ID2D1DeviceContext4) foundation.HRESULT {
+func (self *ID2D1Device4) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext4 **ID2D1DeviceContext4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(deviceContext4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaximumColorGlyphCacheMemory dispatches through ID2D1Device4's vtable slot 17.
@@ -795,9 +796,9 @@ type ID2D1Device5 struct {
 var IID_ID2D1Device5 = win32.GUID{Data1: 0xd55ba0a4, Data2: 0x6405, Data3: 0x4694, Data4: [8]byte{0xae, 0xf5, 0x08, 0xee, 0x1a, 0x43, 0x58, 0xb4}}
 
 // CreateDeviceContext dispatches through ID2D1Device5's vtable slot 19.
-func (self *ID2D1Device5) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext5 **ID2D1DeviceContext5) foundation.HRESULT {
+func (self *ID2D1Device5) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext5 **ID2D1DeviceContext5) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(deviceContext5)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Device6: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1device6
@@ -810,9 +811,9 @@ type ID2D1Device6 struct {
 var IID_ID2D1Device6 = win32.GUID{Data1: 0x7bfef914, Data2: 0x2d75, Data3: 0x4bad, Data4: [8]byte{0xbe, 0x87, 0xe1, 0x8d, 0xdb, 0x07, 0x7b, 0x6d}}
 
 // CreateDeviceContext dispatches through ID2D1Device6's vtable slot 20.
-func (self *ID2D1Device6) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext6 **ID2D1DeviceContext6) foundation.HRESULT {
+func (self *ID2D1Device6) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext6 **ID2D1DeviceContext6) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(deviceContext6)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f07c8968-dd4e-4ba6-9cbd-eb6d3752dcbb
@@ -824,9 +825,9 @@ type ID2D1Device7 struct {
 var IID_ID2D1Device7 = win32.GUID{Data1: 0xf07c8968, Data2: 0xdd4e, Data3: 0x4ba6, Data4: [8]byte{0x9c, 0xbd, 0xeb, 0x6d, 0x37, 0x52, 0xdc, 0xbb}}
 
 // CreateDeviceContext dispatches through ID2D1Device7's vtable slot 21.
-func (self *ID2D1Device7) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext **ID2D1DeviceContext7) foundation.HRESULT {
+func (self *ID2D1Device7) CreateDeviceContext(options D2D1_DEVICE_CONTEXT_OPTIONS, deviceContext **ID2D1DeviceContext7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(deviceContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1DeviceContext: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1devicecontext
@@ -839,63 +840,64 @@ type ID2D1DeviceContext struct {
 var IID_ID2D1DeviceContext = win32.GUID{Data1: 0xe8f7fe7a, Data2: 0x191c, Data3: 0x466d, Data4: [8]byte{0xad, 0x95, 0x97, 0x56, 0x78, 0xbd, 0xa9, 0x98}}
 
 // CreateBitmapFromWicBitmap dispatches through ID2D1DeviceContext's vtable slot 58.
-func (self *ID2D1DeviceContext) CreateBitmapFromWicBitmap(wicBitmapSource *graphicsimaging.IWICBitmapSource, bitmapProperties *D2D1_BITMAP_PROPERTIES1, bitmap **ID2D1Bitmap1) foundation.HRESULT {
+func (self *ID2D1DeviceContext) CreateBitmapFromWicBitmap(wicBitmapSource *graphicsimaging.IWICBitmapSource, bitmapProperties *D2D1_BITMAP_PROPERTIES1, bitmap **ID2D1Bitmap1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wicBitmapSource)), uintptr(unsafe.Pointer(bitmapProperties)), uintptr(unsafe.Pointer(bitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateColorContext dispatches through ID2D1DeviceContext's vtable slot 59.
-func (self *ID2D1DeviceContext) CreateColorContext(space D2D1_COLOR_SPACE, profile *byte, profileSize uint32, colorContext **ID2D1ColorContext) foundation.HRESULT {
+func (self *ID2D1DeviceContext) CreateColorContext(space D2D1_COLOR_SPACE, profile *byte, profileSize uint32, colorContext **ID2D1ColorContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(space), uintptr(unsafe.Pointer(profile)), uintptr(profileSize), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateColorContextFromFilename dispatches through ID2D1DeviceContext's vtable slot 60.
-func (self *ID2D1DeviceContext) CreateColorContextFromFilename(filename foundation.PWSTR, colorContext **ID2D1ColorContext) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1DeviceContext) CreateColorContextFromFilename(filename string, colorContext **ID2D1ColorContext) error {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(colorContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateColorContextFromWicColorContext dispatches through ID2D1DeviceContext's vtable slot 61.
-func (self *ID2D1DeviceContext) CreateColorContextFromWicColorContext(wicColorContext *graphicsimaging.IWICColorContext, colorContext **ID2D1ColorContext) foundation.HRESULT {
+func (self *ID2D1DeviceContext) CreateColorContextFromWicColorContext(wicColorContext *graphicsimaging.IWICColorContext, colorContext **ID2D1ColorContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wicColorContext)), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBitmapFromDxgiSurface dispatches through ID2D1DeviceContext's vtable slot 62.
-func (self *ID2D1DeviceContext) CreateBitmapFromDxgiSurface(surface *graphicsdxgi.IDXGISurface, bitmapProperties *D2D1_BITMAP_PROPERTIES1, bitmap **ID2D1Bitmap1) foundation.HRESULT {
+func (self *ID2D1DeviceContext) CreateBitmapFromDxgiSurface(surface *graphicsdxgi.IDXGISurface, bitmapProperties *D2D1_BITMAP_PROPERTIES1, bitmap **ID2D1Bitmap1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(surface)), uintptr(unsafe.Pointer(bitmapProperties)), uintptr(unsafe.Pointer(bitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateEffect dispatches through ID2D1DeviceContext's vtable slot 63.
-func (self *ID2D1DeviceContext) CreateEffect(effectId *win32.GUID, effect **ID2D1Effect) foundation.HRESULT {
+func (self *ID2D1DeviceContext) CreateEffect(effectId *win32.GUID, effect **ID2D1Effect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effectId)), uintptr(unsafe.Pointer(effect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateGradientStopCollection dispatches through ID2D1DeviceContext's vtable slot 64.
-func (self *ID2D1DeviceContext) CreateGradientStopCollection(straightAlphaGradientStops *graphicsdirect2dcommon.D2D1_GRADIENT_STOP, straightAlphaGradientStopsCount uint32, preInterpolationSpace D2D1_COLOR_SPACE, postInterpolationSpace D2D1_COLOR_SPACE, bufferPrecision D2D1_BUFFER_PRECISION, extendMode D2D1_EXTEND_MODE, colorInterpolationMode D2D1_COLOR_INTERPOLATION_MODE, gradientStopCollection1 **ID2D1GradientStopCollection1) foundation.HRESULT {
+func (self *ID2D1DeviceContext) CreateGradientStopCollection(straightAlphaGradientStops *graphicsdirect2dcommon.D2D1_GRADIENT_STOP, straightAlphaGradientStopsCount uint32, preInterpolationSpace D2D1_COLOR_SPACE, postInterpolationSpace D2D1_COLOR_SPACE, bufferPrecision D2D1_BUFFER_PRECISION, extendMode D2D1_EXTEND_MODE, colorInterpolationMode D2D1_COLOR_INTERPOLATION_MODE, gradientStopCollection1 **ID2D1GradientStopCollection1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(straightAlphaGradientStops)), uintptr(straightAlphaGradientStopsCount), uintptr(preInterpolationSpace), uintptr(postInterpolationSpace), uintptr(bufferPrecision), uintptr(extendMode), uintptr(colorInterpolationMode), uintptr(unsafe.Pointer(gradientStopCollection1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateImageBrush dispatches through ID2D1DeviceContext's vtable slot 65.
-func (self *ID2D1DeviceContext) CreateImageBrush(image *ID2D1Image, imageBrushProperties *D2D1_IMAGE_BRUSH_PROPERTIES, brushProperties *D2D1_BRUSH_PROPERTIES, imageBrush **ID2D1ImageBrush) foundation.HRESULT {
+func (self *ID2D1DeviceContext) CreateImageBrush(image *ID2D1Image, imageBrushProperties *D2D1_IMAGE_BRUSH_PROPERTIES, brushProperties *D2D1_BRUSH_PROPERTIES, imageBrush **ID2D1ImageBrush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(imageBrushProperties)), uintptr(unsafe.Pointer(brushProperties)), uintptr(unsafe.Pointer(imageBrush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBitmapBrush dispatches through ID2D1DeviceContext's vtable slot 66.
-func (self *ID2D1DeviceContext) CreateBitmapBrush(bitmap *ID2D1Bitmap, bitmapBrushProperties *D2D1_BITMAP_BRUSH_PROPERTIES1, brushProperties *D2D1_BRUSH_PROPERTIES, bitmapBrush **ID2D1BitmapBrush1) foundation.HRESULT {
+func (self *ID2D1DeviceContext) CreateBitmapBrush(bitmap *ID2D1Bitmap, bitmapBrushProperties *D2D1_BITMAP_BRUSH_PROPERTIES1, brushProperties *D2D1_BRUSH_PROPERTIES, bitmapBrush **ID2D1BitmapBrush1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(bitmapBrushProperties)), uintptr(unsafe.Pointer(brushProperties)), uintptr(unsafe.Pointer(bitmapBrush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCommandList dispatches through ID2D1DeviceContext's vtable slot 67.
-func (self *ID2D1DeviceContext) CreateCommandList(commandList **ID2D1CommandList) foundation.HRESULT {
+func (self *ID2D1DeviceContext) CreateCommandList(commandList **ID2D1CommandList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commandList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDxgiFormatSupported dispatches through ID2D1DeviceContext's vtable slot 68.
@@ -911,15 +913,15 @@ func (self *ID2D1DeviceContext) IsBufferPrecisionSupported(bufferPrecision D2D1_
 }
 
 // GetImageLocalBounds dispatches through ID2D1DeviceContext's vtable slot 70.
-func (self *ID2D1DeviceContext) GetImageLocalBounds(image *ID2D1Image, localBounds *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1DeviceContext) GetImageLocalBounds(image *ID2D1Image, localBounds *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(localBounds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImageWorldBounds dispatches through ID2D1DeviceContext's vtable slot 71.
-func (self *ID2D1DeviceContext) GetImageWorldBounds(image *ID2D1Image, worldBounds *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1DeviceContext) GetImageWorldBounds(image *ID2D1Image, worldBounds *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(worldBounds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDevice dispatches through ID2D1DeviceContext's vtable slot 73.
@@ -985,27 +987,27 @@ func (self *ID2D1DeviceContext) PushLayer(layerParameters *D2D1_LAYER_PARAMETERS
 }
 
 // InvalidateEffectInputRectangle dispatches through ID2D1DeviceContext's vtable slot 87.
-func (self *ID2D1DeviceContext) InvalidateEffectInputRectangle(effect *ID2D1Effect, input uint32, inputRectangle *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1DeviceContext) InvalidateEffectInputRectangle(effect *ID2D1Effect, input uint32, inputRectangle *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effect)), uintptr(input), uintptr(unsafe.Pointer(inputRectangle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffectInvalidRectangleCount dispatches through ID2D1DeviceContext's vtable slot 88.
-func (self *ID2D1DeviceContext) GetEffectInvalidRectangleCount(effect *ID2D1Effect, rectangleCount *uint32) foundation.HRESULT {
+func (self *ID2D1DeviceContext) GetEffectInvalidRectangleCount(effect *ID2D1Effect, rectangleCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effect)), uintptr(unsafe.Pointer(rectangleCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffectInvalidRectangles dispatches through ID2D1DeviceContext's vtable slot 89.
-func (self *ID2D1DeviceContext) GetEffectInvalidRectangles(effect *ID2D1Effect, rectangles *graphicsdirect2dcommon.D2D_RECT_F, rectanglesCount uint32) foundation.HRESULT {
+func (self *ID2D1DeviceContext) GetEffectInvalidRectangles(effect *ID2D1Effect, rectangles *graphicsdirect2dcommon.D2D_RECT_F, rectanglesCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effect)), uintptr(unsafe.Pointer(rectangles)), uintptr(rectanglesCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffectRequiredInputRectangles dispatches through ID2D1DeviceContext's vtable slot 90.
-func (self *ID2D1DeviceContext) GetEffectRequiredInputRectangles(renderEffect *ID2D1Effect, renderImageRectangle *graphicsdirect2dcommon.D2D_RECT_F, inputDescriptions *D2D1_EFFECT_INPUT_DESCRIPTION, requiredInputRects *graphicsdirect2dcommon.D2D_RECT_F, inputCount uint32) foundation.HRESULT {
+func (self *ID2D1DeviceContext) GetEffectRequiredInputRectangles(renderEffect *ID2D1Effect, renderImageRectangle *graphicsdirect2dcommon.D2D_RECT_F, inputDescriptions *D2D1_EFFECT_INPUT_DESCRIPTION, requiredInputRects *graphicsdirect2dcommon.D2D_RECT_F, inputCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderEffect)), uintptr(unsafe.Pointer(renderImageRectangle)), uintptr(unsafe.Pointer(inputDescriptions)), uintptr(unsafe.Pointer(requiredInputRects)), uintptr(inputCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FillOpacityMask dispatches through ID2D1DeviceContext's vtable slot 91.
@@ -1037,45 +1039,45 @@ type ID2D1DeviceContext2 struct {
 var IID_ID2D1DeviceContext2 = win32.GUID{Data1: 0x394ea6a3, Data2: 0x0c34, Data3: 0x4321, Data4: [8]byte{0x95, 0x0b, 0x6c, 0xa2, 0x0f, 0x0b, 0xe6, 0xc7}}
 
 // CreateInk dispatches through ID2D1DeviceContext2's vtable slot 95.
-func (self *ID2D1DeviceContext2) CreateInk(startPoint *D2D1_INK_POINT, ink **ID2D1Ink) foundation.HRESULT {
+func (self *ID2D1DeviceContext2) CreateInk(startPoint *D2D1_INK_POINT, ink **ID2D1Ink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(startPoint)), uintptr(unsafe.Pointer(ink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateInkStyle dispatches through ID2D1DeviceContext2's vtable slot 96.
-func (self *ID2D1DeviceContext2) CreateInkStyle(inkStyleProperties *D2D1_INK_STYLE_PROPERTIES, inkStyle **ID2D1InkStyle) foundation.HRESULT {
+func (self *ID2D1DeviceContext2) CreateInkStyle(inkStyleProperties *D2D1_INK_STYLE_PROPERTIES, inkStyle **ID2D1InkStyle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inkStyleProperties)), uintptr(unsafe.Pointer(inkStyle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateGradientMesh dispatches through ID2D1DeviceContext2's vtable slot 97.
-func (self *ID2D1DeviceContext2) CreateGradientMesh(patches *D2D1_GRADIENT_MESH_PATCH, patchesCount uint32, gradientMesh **ID2D1GradientMesh) foundation.HRESULT {
+func (self *ID2D1DeviceContext2) CreateGradientMesh(patches *D2D1_GRADIENT_MESH_PATCH, patchesCount uint32, gradientMesh **ID2D1GradientMesh) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(patches)), uintptr(patchesCount), uintptr(unsafe.Pointer(gradientMesh)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateImageSourceFromWic dispatches through ID2D1DeviceContext2's vtable slot 98.
-func (self *ID2D1DeviceContext2) CreateImageSourceFromWic(wicBitmapSource *graphicsimaging.IWICBitmapSource, loadingOptions D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphaMode graphicsdirect2dcommon.D2D1_ALPHA_MODE, imageSource **ID2D1ImageSourceFromWic) foundation.HRESULT {
+func (self *ID2D1DeviceContext2) CreateImageSourceFromWic(wicBitmapSource *graphicsimaging.IWICBitmapSource, loadingOptions D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphaMode graphicsdirect2dcommon.D2D1_ALPHA_MODE, imageSource **ID2D1ImageSourceFromWic) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wicBitmapSource)), uintptr(loadingOptions), uintptr(alphaMode), uintptr(unsafe.Pointer(imageSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateLookupTable3D dispatches through ID2D1DeviceContext2's vtable slot 99.
-func (self *ID2D1DeviceContext2) CreateLookupTable3D(precision D2D1_BUFFER_PRECISION, extents *uint32, data *byte, dataCount uint32, strides *uint32, lookupTable **ID2D1LookupTable3D) foundation.HRESULT {
+func (self *ID2D1DeviceContext2) CreateLookupTable3D(precision D2D1_BUFFER_PRECISION, extents *uint32, data *byte, dataCount uint32, strides *uint32, lookupTable **ID2D1LookupTable3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(precision), uintptr(unsafe.Pointer(extents)), uintptr(unsafe.Pointer(data)), uintptr(dataCount), uintptr(unsafe.Pointer(strides)), uintptr(unsafe.Pointer(lookupTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateImageSourceFromDxgi dispatches through ID2D1DeviceContext2's vtable slot 100.
-func (self *ID2D1DeviceContext2) CreateImageSourceFromDxgi(surfaces **graphicsdxgi.IDXGISurface, surfaceCount uint32, colorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, options D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imageSource **ID2D1ImageSource) foundation.HRESULT {
+func (self *ID2D1DeviceContext2) CreateImageSourceFromDxgi(surfaces **graphicsdxgi.IDXGISurface, surfaceCount uint32, colorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, options D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imageSource **ID2D1ImageSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(surfaces)), uintptr(surfaceCount), uintptr(colorSpace), uintptr(options), uintptr(unsafe.Pointer(imageSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGradientMeshWorldBounds dispatches through ID2D1DeviceContext2's vtable slot 101.
-func (self *ID2D1DeviceContext2) GetGradientMeshWorldBounds(gradientMesh *ID2D1GradientMesh, pBounds *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1DeviceContext2) GetGradientMeshWorldBounds(gradientMesh *ID2D1GradientMesh, pBounds *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gradientMesh)), uintptr(unsafe.Pointer(pBounds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawInk dispatches through ID2D1DeviceContext2's vtable slot 102.
@@ -1094,9 +1096,9 @@ func (self *ID2D1DeviceContext2) DrawGdiMetafile(gdiMetafile *ID2D1GdiMetafile, 
 }
 
 // CreateTransformedImageSource dispatches through ID2D1DeviceContext2's vtable slot 105.
-func (self *ID2D1DeviceContext2) CreateTransformedImageSource(imageSource *ID2D1ImageSource, properties *D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES, transformedImageSource **ID2D1TransformedImageSource) foundation.HRESULT {
+func (self *ID2D1DeviceContext2) CreateTransformedImageSource(imageSource *ID2D1ImageSource, properties *D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES, transformedImageSource **ID2D1TransformedImageSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageSource)), uintptr(unsafe.Pointer(properties)), uintptr(unsafe.Pointer(transformedImageSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1DeviceContext3: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1devicecontext3
@@ -1109,9 +1111,9 @@ type ID2D1DeviceContext3 struct {
 var IID_ID2D1DeviceContext3 = win32.GUID{Data1: 0x235a7496, Data2: 0x8351, Data3: 0x414c, Data4: [8]byte{0xbc, 0xd4, 0x66, 0x72, 0xab, 0x2d, 0x8e, 0x00}}
 
 // CreateSpriteBatch dispatches through ID2D1DeviceContext3's vtable slot 106.
-func (self *ID2D1DeviceContext3) CreateSpriteBatch(spriteBatch **ID2D1SpriteBatch) foundation.HRESULT {
+func (self *ID2D1DeviceContext3) CreateSpriteBatch(spriteBatch **ID2D1SpriteBatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(spriteBatch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawSpriteBatch dispatches through ID2D1DeviceContext3's vtable slot 107.
@@ -1129,14 +1131,15 @@ type ID2D1DeviceContext4 struct {
 var IID_ID2D1DeviceContext4 = win32.GUID{Data1: 0x8c427831, Data2: 0x3d90, Data3: 0x4476, Data4: [8]byte{0xb6, 0x47, 0xc4, 0xfa, 0xe3, 0x49, 0xe4, 0xdb}}
 
 // CreateSvgGlyphStyle dispatches through ID2D1DeviceContext4's vtable slot 108.
-func (self *ID2D1DeviceContext4) CreateSvgGlyphStyle(svgGlyphStyle **ID2D1SvgGlyphStyle) foundation.HRESULT {
+func (self *ID2D1DeviceContext4) CreateSvgGlyphStyle(svgGlyphStyle **ID2D1SvgGlyphStyle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(svgGlyphStyle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawText dispatches through ID2D1DeviceContext4's vtable slot 109.
-func (self *ID2D1DeviceContext4) DrawText(string_ foundation.PWSTR, stringLength uint32, textFormat *graphicsdirectwrite.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush *ID2D1Brush, svgGlyphStyle *ID2D1SvgGlyphStyle, colorPaletteIndex uint32, options D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
-	syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(options), uintptr(measuringMode))
+func (self *ID2D1DeviceContext4) DrawText(string_ string, stringLength uint32, textFormat *graphicsdirectwrite.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush *ID2D1Brush, svgGlyphStyle *ID2D1SvgGlyphStyle, colorPaletteIndex uint32, options D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
+	_string_ := win32.UTF16Ptr(string_)
+	syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(options), uintptr(measuringMode))
 }
 
 // ID2D1DeviceContext5: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1devicecontext5
@@ -1154,15 +1157,15 @@ func (self *ID2D1DeviceContext5) DrawSvgDocument(svgDocument *ID2D1SvgDocument) 
 }
 
 // CreateColorContextFromDxgiColorSpace dispatches through ID2D1DeviceContext5's vtable slot 117.
-func (self *ID2D1DeviceContext5) CreateColorContextFromDxgiColorSpace(colorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, colorContext **ID2D1ColorContext1) foundation.HRESULT {
+func (self *ID2D1DeviceContext5) CreateColorContextFromDxgiColorSpace(colorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, colorContext **ID2D1ColorContext1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(colorSpace), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateColorContextFromSimpleColorProfile dispatches through ID2D1DeviceContext5's vtable slot 118.
-func (self *ID2D1DeviceContext5) CreateColorContextFromSimpleColorProfile(simpleProfile *D2D1_SIMPLE_COLOR_PROFILE, colorContext **ID2D1ColorContext1) foundation.HRESULT {
+func (self *ID2D1DeviceContext5) CreateColorContextFromSimpleColorProfile(simpleProfile *D2D1_SIMPLE_COLOR_PROFILE, colorContext **ID2D1ColorContext1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[118], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(simpleProfile)), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1DeviceContext6: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1devicecontext6
@@ -1203,33 +1206,33 @@ type ID2D1DrawInfo struct {
 var IID_ID2D1DrawInfo = win32.GUID{Data1: 0x693ce632, Data2: 0x7f2f, Data3: 0x45de, Data4: [8]byte{0x93, 0xfe, 0x18, 0xd8, 0x8b, 0x37, 0xaa, 0x21}}
 
 // SetPixelShaderConstantBuffer dispatches through ID2D1DrawInfo's vtable slot 7.
-func (self *ID2D1DrawInfo) SetPixelShaderConstantBuffer(buffer *byte, bufferCount uint32) foundation.HRESULT {
+func (self *ID2D1DrawInfo) SetPixelShaderConstantBuffer(buffer *byte, bufferCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetResourceTexture dispatches through ID2D1DrawInfo's vtable slot 8.
-func (self *ID2D1DrawInfo) SetResourceTexture(textureIndex uint32, resourceTexture *ID2D1ResourceTexture) foundation.HRESULT {
+func (self *ID2D1DrawInfo) SetResourceTexture(textureIndex uint32, resourceTexture *ID2D1ResourceTexture) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(textureIndex), uintptr(unsafe.Pointer(resourceTexture)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVertexShaderConstantBuffer dispatches through ID2D1DrawInfo's vtable slot 9.
-func (self *ID2D1DrawInfo) SetVertexShaderConstantBuffer(buffer *byte, bufferCount uint32) foundation.HRESULT {
+func (self *ID2D1DrawInfo) SetVertexShaderConstantBuffer(buffer *byte, bufferCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPixelShader dispatches through ID2D1DrawInfo's vtable slot 10.
-func (self *ID2D1DrawInfo) SetPixelShader(shaderId *win32.GUID, pixelOptions D2D1_PIXEL_OPTIONS) foundation.HRESULT {
+func (self *ID2D1DrawInfo) SetPixelShader(shaderId *win32.GUID, pixelOptions D2D1_PIXEL_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(shaderId)), uintptr(pixelOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVertexProcessing dispatches through ID2D1DrawInfo's vtable slot 11.
-func (self *ID2D1DrawInfo) SetVertexProcessing(vertexBuffer *ID2D1VertexBuffer, vertexOptions D2D1_VERTEX_OPTIONS, blendDescription *D2D1_BLEND_DESCRIPTION, vertexRange *D2D1_VERTEX_RANGE, vertexShader *win32.GUID) foundation.HRESULT {
+func (self *ID2D1DrawInfo) SetVertexProcessing(vertexBuffer *ID2D1VertexBuffer, vertexOptions D2D1_VERTEX_OPTIONS, blendDescription *D2D1_BLEND_DESCRIPTION, vertexRange *D2D1_VERTEX_RANGE, vertexShader *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(vertexBuffer)), uintptr(vertexOptions), uintptr(unsafe.Pointer(blendDescription)), uintptr(unsafe.Pointer(vertexRange)), uintptr(unsafe.Pointer(vertexShader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1DrawTransform: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1drawtransform
@@ -1242,9 +1245,9 @@ type ID2D1DrawTransform struct {
 var IID_ID2D1DrawTransform = win32.GUID{Data1: 0x36bfdcb6, Data2: 0x9739, Data3: 0x435d, Data4: [8]byte{0xa3, 0x0d, 0xa6, 0x53, 0xbe, 0xff, 0x6a, 0x6f}}
 
 // SetDrawInfo dispatches through ID2D1DrawTransform's vtable slot 7.
-func (self *ID2D1DrawTransform) SetDrawInfo(drawInfo *ID2D1DrawInfo) foundation.HRESULT {
+func (self *ID2D1DrawTransform) SetDrawInfo(drawInfo *ID2D1DrawInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(drawInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1DrawingStateBlock: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1drawingstateblock
@@ -1305,14 +1308,15 @@ type ID2D1Effect struct {
 var IID_ID2D1Effect = win32.GUID{Data1: 0x28211a43, Data2: 0x7d89, Data3: 0x476f, Data4: [8]byte{0x81, 0x81, 0x2d, 0x61, 0x59, 0xb2, 0x20, 0xad}}
 
 // SetInput dispatches through ID2D1Effect's vtable slot 14.
-func (self *ID2D1Effect) SetInput(index uint32, input *ID2D1Image, invalidate foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(input)), uintptr(invalidate))
+func (self *ID2D1Effect) SetInput(index uint32, input *ID2D1Image, invalidate bool) {
+	_invalidate := win32.Bool32(invalidate)
+	syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(input)), uintptr(_invalidate))
 }
 
 // SetInputCount dispatches through ID2D1Effect's vtable slot 15.
-func (self *ID2D1Effect) SetInputCount(inputCount uint32) foundation.HRESULT {
+func (self *ID2D1Effect) SetInputCount(inputCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(inputCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInput dispatches through ID2D1Effect's vtable slot 16.
@@ -1346,57 +1350,57 @@ func (self *ID2D1EffectContext) GetDpi(dpiX *float32, dpiY *float32) {
 }
 
 // CreateEffect dispatches through ID2D1EffectContext's vtable slot 4.
-func (self *ID2D1EffectContext) CreateEffect(effectId *win32.GUID, effect **ID2D1Effect) foundation.HRESULT {
+func (self *ID2D1EffectContext) CreateEffect(effectId *win32.GUID, effect **ID2D1Effect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effectId)), uintptr(unsafe.Pointer(effect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaximumSupportedFeatureLevel dispatches through ID2D1EffectContext's vtable slot 5.
-func (self *ID2D1EffectContext) GetMaximumSupportedFeatureLevel(featureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, featureLevelsCount uint32, maximumSupportedFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL) foundation.HRESULT {
+func (self *ID2D1EffectContext) GetMaximumSupportedFeatureLevel(featureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, featureLevelsCount uint32, maximumSupportedFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(featureLevels)), uintptr(featureLevelsCount), uintptr(unsafe.Pointer(maximumSupportedFeatureLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateTransformNodeFromEffect dispatches through ID2D1EffectContext's vtable slot 6.
-func (self *ID2D1EffectContext) CreateTransformNodeFromEffect(effect *ID2D1Effect, transformNode **ID2D1TransformNode) foundation.HRESULT {
+func (self *ID2D1EffectContext) CreateTransformNodeFromEffect(effect *ID2D1Effect, transformNode **ID2D1TransformNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effect)), uintptr(unsafe.Pointer(transformNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlendTransform dispatches through ID2D1EffectContext's vtable slot 7.
-func (self *ID2D1EffectContext) CreateBlendTransform(numInputs uint32, blendDescription *D2D1_BLEND_DESCRIPTION, transform **ID2D1BlendTransform) foundation.HRESULT {
+func (self *ID2D1EffectContext) CreateBlendTransform(numInputs uint32, blendDescription *D2D1_BLEND_DESCRIPTION, transform **ID2D1BlendTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(numInputs), uintptr(unsafe.Pointer(blendDescription)), uintptr(unsafe.Pointer(transform)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBorderTransform dispatches through ID2D1EffectContext's vtable slot 8.
-func (self *ID2D1EffectContext) CreateBorderTransform(extendModeX D2D1_EXTEND_MODE, extendModeY D2D1_EXTEND_MODE, transform **ID2D1BorderTransform) foundation.HRESULT {
+func (self *ID2D1EffectContext) CreateBorderTransform(extendModeX D2D1_EXTEND_MODE, extendModeY D2D1_EXTEND_MODE, transform **ID2D1BorderTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(extendModeX), uintptr(extendModeY), uintptr(unsafe.Pointer(transform)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBoundsAdjustmentTransform dispatches through ID2D1EffectContext's vtable slot 10.
-func (self *ID2D1EffectContext) CreateBoundsAdjustmentTransform(outputRectangle *foundation.RECT, transform **ID2D1BoundsAdjustmentTransform) foundation.HRESULT {
+func (self *ID2D1EffectContext) CreateBoundsAdjustmentTransform(outputRectangle *foundation.RECT, transform **ID2D1BoundsAdjustmentTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputRectangle)), uintptr(unsafe.Pointer(transform)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadPixelShader dispatches through ID2D1EffectContext's vtable slot 11.
-func (self *ID2D1EffectContext) LoadPixelShader(shaderId *win32.GUID, shaderBuffer *byte, shaderBufferCount uint32) foundation.HRESULT {
+func (self *ID2D1EffectContext) LoadPixelShader(shaderId *win32.GUID, shaderBuffer *byte, shaderBufferCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(shaderId)), uintptr(unsafe.Pointer(shaderBuffer)), uintptr(shaderBufferCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadVertexShader dispatches through ID2D1EffectContext's vtable slot 12.
-func (self *ID2D1EffectContext) LoadVertexShader(resourceId *win32.GUID, shaderBuffer *byte, shaderBufferCount uint32) foundation.HRESULT {
+func (self *ID2D1EffectContext) LoadVertexShader(resourceId *win32.GUID, shaderBuffer *byte, shaderBufferCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourceId)), uintptr(unsafe.Pointer(shaderBuffer)), uintptr(shaderBufferCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadComputeShader dispatches through ID2D1EffectContext's vtable slot 13.
-func (self *ID2D1EffectContext) LoadComputeShader(resourceId *win32.GUID, shaderBuffer *byte, shaderBufferCount uint32) foundation.HRESULT {
+func (self *ID2D1EffectContext) LoadComputeShader(resourceId *win32.GUID, shaderBuffer *byte, shaderBufferCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourceId)), uintptr(unsafe.Pointer(shaderBuffer)), uintptr(shaderBufferCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsShaderLoaded dispatches through ID2D1EffectContext's vtable slot 14.
@@ -1406,51 +1410,52 @@ func (self *ID2D1EffectContext) IsShaderLoaded(shaderId *win32.GUID) foundation.
 }
 
 // CreateResourceTexture dispatches through ID2D1EffectContext's vtable slot 15.
-func (self *ID2D1EffectContext) CreateResourceTexture(resourceId *win32.GUID, resourceTextureProperties *D2D1_RESOURCE_TEXTURE_PROPERTIES, data *byte, strides *uint32, dataSize uint32, resourceTexture **ID2D1ResourceTexture) foundation.HRESULT {
+func (self *ID2D1EffectContext) CreateResourceTexture(resourceId *win32.GUID, resourceTextureProperties *D2D1_RESOURCE_TEXTURE_PROPERTIES, data *byte, strides *uint32, dataSize uint32, resourceTexture **ID2D1ResourceTexture) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourceId)), uintptr(unsafe.Pointer(resourceTextureProperties)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(strides)), uintptr(dataSize), uintptr(unsafe.Pointer(resourceTexture)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindResourceTexture dispatches through ID2D1EffectContext's vtable slot 16.
-func (self *ID2D1EffectContext) FindResourceTexture(resourceId *win32.GUID, resourceTexture **ID2D1ResourceTexture) foundation.HRESULT {
+func (self *ID2D1EffectContext) FindResourceTexture(resourceId *win32.GUID, resourceTexture **ID2D1ResourceTexture) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourceId)), uintptr(unsafe.Pointer(resourceTexture)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVertexBuffer dispatches through ID2D1EffectContext's vtable slot 17.
-func (self *ID2D1EffectContext) CreateVertexBuffer(vertexBufferProperties *D2D1_VERTEX_BUFFER_PROPERTIES, resourceId *win32.GUID, customVertexBufferProperties *D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES, buffer **ID2D1VertexBuffer) foundation.HRESULT {
+func (self *ID2D1EffectContext) CreateVertexBuffer(vertexBufferProperties *D2D1_VERTEX_BUFFER_PROPERTIES, resourceId *win32.GUID, customVertexBufferProperties *D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES, buffer **ID2D1VertexBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(vertexBufferProperties)), uintptr(unsafe.Pointer(resourceId)), uintptr(unsafe.Pointer(customVertexBufferProperties)), uintptr(unsafe.Pointer(buffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindVertexBuffer dispatches through ID2D1EffectContext's vtable slot 18.
-func (self *ID2D1EffectContext) FindVertexBuffer(resourceId *win32.GUID, buffer **ID2D1VertexBuffer) foundation.HRESULT {
+func (self *ID2D1EffectContext) FindVertexBuffer(resourceId *win32.GUID, buffer **ID2D1VertexBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourceId)), uintptr(unsafe.Pointer(buffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateColorContext dispatches through ID2D1EffectContext's vtable slot 19.
-func (self *ID2D1EffectContext) CreateColorContext(space D2D1_COLOR_SPACE, profile *byte, profileSize uint32, colorContext **ID2D1ColorContext) foundation.HRESULT {
+func (self *ID2D1EffectContext) CreateColorContext(space D2D1_COLOR_SPACE, profile *byte, profileSize uint32, colorContext **ID2D1ColorContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(space), uintptr(unsafe.Pointer(profile)), uintptr(profileSize), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateColorContextFromFilename dispatches through ID2D1EffectContext's vtable slot 20.
-func (self *ID2D1EffectContext) CreateColorContextFromFilename(filename foundation.PWSTR, colorContext **ID2D1ColorContext) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1EffectContext) CreateColorContextFromFilename(filename string, colorContext **ID2D1ColorContext) error {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(colorContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateColorContextFromWicColorContext dispatches through ID2D1EffectContext's vtable slot 21.
-func (self *ID2D1EffectContext) CreateColorContextFromWicColorContext(wicColorContext *graphicsimaging.IWICColorContext, colorContext **ID2D1ColorContext) foundation.HRESULT {
+func (self *ID2D1EffectContext) CreateColorContextFromWicColorContext(wicColorContext *graphicsimaging.IWICColorContext, colorContext **ID2D1ColorContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wicColorContext)), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckFeatureSupport dispatches through ID2D1EffectContext's vtable slot 22.
-func (self *ID2D1EffectContext) CheckFeatureSupport(feature D2D1_FEATURE, featureSupportData unsafe.Pointer, featureSupportDataSize uint32) foundation.HRESULT {
+func (self *ID2D1EffectContext) CheckFeatureSupport(feature D2D1_FEATURE, featureSupportData unsafe.Pointer, featureSupportDataSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(feature), uintptr(unsafe.Pointer(featureSupportData)), uintptr(featureSupportDataSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsBufferPrecisionSupported dispatches through ID2D1EffectContext's vtable slot 23.
@@ -1469,9 +1474,9 @@ type ID2D1EffectContext1 struct {
 var IID_ID2D1EffectContext1 = win32.GUID{Data1: 0x84ab595a, Data2: 0xfc81, Data3: 0x4546, Data4: [8]byte{0xba, 0xcd, 0xe8, 0xef, 0x4d, 0x8a, 0xbe, 0x7a}}
 
 // CreateLookupTable3D dispatches through ID2D1EffectContext1's vtable slot 24.
-func (self *ID2D1EffectContext1) CreateLookupTable3D(precision D2D1_BUFFER_PRECISION, extents *uint32, data *byte, dataCount uint32, strides *uint32, lookupTable **ID2D1LookupTable3D) foundation.HRESULT {
+func (self *ID2D1EffectContext1) CreateLookupTable3D(precision D2D1_BUFFER_PRECISION, extents *uint32, data *byte, dataCount uint32, strides *uint32, lookupTable **ID2D1LookupTable3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(precision), uintptr(unsafe.Pointer(extents)), uintptr(unsafe.Pointer(data)), uintptr(dataCount), uintptr(unsafe.Pointer(strides)), uintptr(unsafe.Pointer(lookupTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 577ad2a0-9fc7-4dda-8b18-dab810140052
@@ -1483,15 +1488,15 @@ type ID2D1EffectContext2 struct {
 var IID_ID2D1EffectContext2 = win32.GUID{Data1: 0x577ad2a0, Data2: 0x9fc7, Data3: 0x4dda, Data4: [8]byte{0x8b, 0x18, 0xda, 0xb8, 0x10, 0x14, 0x00, 0x52}}
 
 // CreateColorContextFromDxgiColorSpace dispatches through ID2D1EffectContext2's vtable slot 25.
-func (self *ID2D1EffectContext2) CreateColorContextFromDxgiColorSpace(colorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, colorContext **ID2D1ColorContext1) foundation.HRESULT {
+func (self *ID2D1EffectContext2) CreateColorContextFromDxgiColorSpace(colorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, colorContext **ID2D1ColorContext1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(colorSpace), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateColorContextFromSimpleColorProfile dispatches through ID2D1EffectContext2's vtable slot 26.
-func (self *ID2D1EffectContext2) CreateColorContextFromSimpleColorProfile(simpleProfile *D2D1_SIMPLE_COLOR_PROFILE, colorContext **ID2D1ColorContext1) foundation.HRESULT {
+func (self *ID2D1EffectContext2) CreateColorContextFromSimpleColorProfile(simpleProfile *D2D1_SIMPLE_COLOR_PROFILE, colorContext **ID2D1ColorContext1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(simpleProfile)), uintptr(unsafe.Pointer(colorContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1EffectImpl: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1effectimpl
@@ -1504,21 +1509,21 @@ type ID2D1EffectImpl struct {
 var IID_ID2D1EffectImpl = win32.GUID{Data1: 0xa248fd3f, Data2: 0x3e6c, Data3: 0x4e63, Data4: [8]byte{0x9f, 0x03, 0x7f, 0x68, 0xec, 0xc9, 0x1d, 0xb9}}
 
 // Initialize dispatches through ID2D1EffectImpl's vtable slot 3.
-func (self *ID2D1EffectImpl) Initialize(effectContext *ID2D1EffectContext, transformGraph *ID2D1TransformGraph) foundation.HRESULT {
+func (self *ID2D1EffectImpl) Initialize(effectContext *ID2D1EffectContext, transformGraph *ID2D1TransformGraph) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effectContext)), uintptr(unsafe.Pointer(transformGraph)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrepareForRender dispatches through ID2D1EffectImpl's vtable slot 4.
-func (self *ID2D1EffectImpl) PrepareForRender(changeType D2D1_CHANGE_TYPE) foundation.HRESULT {
+func (self *ID2D1EffectImpl) PrepareForRender(changeType D2D1_CHANGE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(changeType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGraph dispatches through ID2D1EffectImpl's vtable slot 5.
-func (self *ID2D1EffectImpl) SetGraph(transformGraph *ID2D1TransformGraph) foundation.HRESULT {
+func (self *ID2D1EffectImpl) SetGraph(transformGraph *ID2D1TransformGraph) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transformGraph)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1EllipseGeometry: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1ellipsegeometry
@@ -1545,9 +1550,9 @@ type ID2D1Factory struct {
 var IID_ID2D1Factory = win32.GUID{Data1: 0x06152247, Data2: 0x6f50, Data3: 0x465a, Data4: [8]byte{0x92, 0x45, 0x11, 0x8b, 0xfd, 0x3b, 0x60, 0x07}}
 
 // ReloadSystemMetrics dispatches through ID2D1Factory's vtable slot 3.
-func (self *ID2D1Factory) ReloadSystemMetrics() foundation.HRESULT {
+func (self *ID2D1Factory) ReloadSystemMetrics() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesktopDpi dispatches through ID2D1Factory's vtable slot 4.
@@ -1556,75 +1561,75 @@ func (self *ID2D1Factory) GetDesktopDpi(dpiX *float32, dpiY *float32) {
 }
 
 // CreateRectangleGeometry dispatches through ID2D1Factory's vtable slot 5.
-func (self *ID2D1Factory) CreateRectangleGeometry(rectangle *graphicsdirect2dcommon.D2D_RECT_F, rectangleGeometry **ID2D1RectangleGeometry) foundation.HRESULT {
+func (self *ID2D1Factory) CreateRectangleGeometry(rectangle *graphicsdirect2dcommon.D2D_RECT_F, rectangleGeometry **ID2D1RectangleGeometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rectangle)), uintptr(unsafe.Pointer(rectangleGeometry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRoundedRectangleGeometry dispatches through ID2D1Factory's vtable slot 6.
-func (self *ID2D1Factory) CreateRoundedRectangleGeometry(roundedRectangle *D2D1_ROUNDED_RECT, roundedRectangleGeometry **ID2D1RoundedRectangleGeometry) foundation.HRESULT {
+func (self *ID2D1Factory) CreateRoundedRectangleGeometry(roundedRectangle *D2D1_ROUNDED_RECT, roundedRectangleGeometry **ID2D1RoundedRectangleGeometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(roundedRectangle)), uintptr(unsafe.Pointer(roundedRectangleGeometry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateEllipseGeometry dispatches through ID2D1Factory's vtable slot 7.
-func (self *ID2D1Factory) CreateEllipseGeometry(ellipse *D2D1_ELLIPSE, ellipseGeometry **ID2D1EllipseGeometry) foundation.HRESULT {
+func (self *ID2D1Factory) CreateEllipseGeometry(ellipse *D2D1_ELLIPSE, ellipseGeometry **ID2D1EllipseGeometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ellipse)), uintptr(unsafe.Pointer(ellipseGeometry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateGeometryGroup dispatches through ID2D1Factory's vtable slot 8.
-func (self *ID2D1Factory) CreateGeometryGroup(fillMode graphicsdirect2dcommon.D2D1_FILL_MODE, geometries **ID2D1Geometry, geometriesCount uint32, geometryGroup **ID2D1GeometryGroup) foundation.HRESULT {
+func (self *ID2D1Factory) CreateGeometryGroup(fillMode graphicsdirect2dcommon.D2D1_FILL_MODE, geometries **ID2D1Geometry, geometriesCount uint32, geometryGroup **ID2D1GeometryGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fillMode), uintptr(unsafe.Pointer(geometries)), uintptr(geometriesCount), uintptr(unsafe.Pointer(geometryGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateTransformedGeometry dispatches through ID2D1Factory's vtable slot 9.
-func (self *ID2D1Factory) CreateTransformedGeometry(sourceGeometry *ID2D1Geometry, transform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, transformedGeometry **ID2D1TransformedGeometry) foundation.HRESULT {
+func (self *ID2D1Factory) CreateTransformedGeometry(sourceGeometry *ID2D1Geometry, transform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, transformedGeometry **ID2D1TransformedGeometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceGeometry)), uintptr(unsafe.Pointer(transform)), uintptr(unsafe.Pointer(transformedGeometry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePathGeometry dispatches through ID2D1Factory's vtable slot 10.
-func (self *ID2D1Factory) CreatePathGeometry(pathGeometry **ID2D1PathGeometry) foundation.HRESULT {
+func (self *ID2D1Factory) CreatePathGeometry(pathGeometry **ID2D1PathGeometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pathGeometry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStrokeStyle dispatches through ID2D1Factory's vtable slot 11.
-func (self *ID2D1Factory) CreateStrokeStyle(strokeStyleProperties *D2D1_STROKE_STYLE_PROPERTIES, dashes *float32, dashesCount uint32, strokeStyle **ID2D1StrokeStyle) foundation.HRESULT {
+func (self *ID2D1Factory) CreateStrokeStyle(strokeStyleProperties *D2D1_STROKE_STYLE_PROPERTIES, dashes *float32, dashesCount uint32, strokeStyle **ID2D1StrokeStyle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strokeStyleProperties)), uintptr(unsafe.Pointer(dashes)), uintptr(dashesCount), uintptr(unsafe.Pointer(strokeStyle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDrawingStateBlock dispatches through ID2D1Factory's vtable slot 12.
-func (self *ID2D1Factory) CreateDrawingStateBlock(drawingStateDescription *D2D1_DRAWING_STATE_DESCRIPTION, textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams, drawingStateBlock **ID2D1DrawingStateBlock) foundation.HRESULT {
+func (self *ID2D1Factory) CreateDrawingStateBlock(drawingStateDescription *D2D1_DRAWING_STATE_DESCRIPTION, textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams, drawingStateBlock **ID2D1DrawingStateBlock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(drawingStateDescription)), uintptr(unsafe.Pointer(textRenderingParams)), uintptr(unsafe.Pointer(drawingStateBlock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateWicBitmapRenderTarget dispatches through ID2D1Factory's vtable slot 13.
-func (self *ID2D1Factory) CreateWicBitmapRenderTarget(target *graphicsimaging.IWICBitmap, renderTargetProperties *D2D1_RENDER_TARGET_PROPERTIES, renderTarget **ID2D1RenderTarget) foundation.HRESULT {
+func (self *ID2D1Factory) CreateWicBitmapRenderTarget(target *graphicsimaging.IWICBitmap, renderTargetProperties *D2D1_RENDER_TARGET_PROPERTIES, renderTarget **ID2D1RenderTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(target)), uintptr(unsafe.Pointer(renderTargetProperties)), uintptr(unsafe.Pointer(renderTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateHwndRenderTarget dispatches through ID2D1Factory's vtable slot 14.
-func (self *ID2D1Factory) CreateHwndRenderTarget(renderTargetProperties *D2D1_RENDER_TARGET_PROPERTIES, hwndRenderTargetProperties *D2D1_HWND_RENDER_TARGET_PROPERTIES, hwndRenderTarget **ID2D1HwndRenderTarget) foundation.HRESULT {
+func (self *ID2D1Factory) CreateHwndRenderTarget(renderTargetProperties *D2D1_RENDER_TARGET_PROPERTIES, hwndRenderTargetProperties *D2D1_HWND_RENDER_TARGET_PROPERTIES, hwndRenderTarget **ID2D1HwndRenderTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderTargetProperties)), uintptr(unsafe.Pointer(hwndRenderTargetProperties)), uintptr(unsafe.Pointer(hwndRenderTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDxgiSurfaceRenderTarget dispatches through ID2D1Factory's vtable slot 15.
-func (self *ID2D1Factory) CreateDxgiSurfaceRenderTarget(dxgiSurface *graphicsdxgi.IDXGISurface, renderTargetProperties *D2D1_RENDER_TARGET_PROPERTIES, renderTarget **ID2D1RenderTarget) foundation.HRESULT {
+func (self *ID2D1Factory) CreateDxgiSurfaceRenderTarget(dxgiSurface *graphicsdxgi.IDXGISurface, renderTargetProperties *D2D1_RENDER_TARGET_PROPERTIES, renderTarget **ID2D1RenderTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiSurface)), uintptr(unsafe.Pointer(renderTargetProperties)), uintptr(unsafe.Pointer(renderTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDCRenderTarget dispatches through ID2D1Factory's vtable slot 16.
-func (self *ID2D1Factory) CreateDCRenderTarget(renderTargetProperties *D2D1_RENDER_TARGET_PROPERTIES, dcRenderTarget **ID2D1DCRenderTarget) foundation.HRESULT {
+func (self *ID2D1Factory) CreateDCRenderTarget(renderTargetProperties *D2D1_RENDER_TARGET_PROPERTIES, dcRenderTarget **ID2D1DCRenderTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderTargetProperties)), uintptr(unsafe.Pointer(dcRenderTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Factory1: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1factory1
@@ -1637,63 +1642,64 @@ type ID2D1Factory1 struct {
 var IID_ID2D1Factory1 = win32.GUID{Data1: 0xbb12d362, Data2: 0xdaee, Data3: 0x4b9a, Data4: [8]byte{0xaa, 0x1d, 0x14, 0xba, 0x40, 0x1c, 0xfa, 0x1f}}
 
 // CreateDevice dispatches through ID2D1Factory1's vtable slot 17.
-func (self *ID2D1Factory1) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice **ID2D1Device) foundation.HRESULT {
+func (self *ID2D1Factory1) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice **ID2D1Device) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(d2dDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStrokeStyle dispatches through ID2D1Factory1's vtable slot 18.
-func (self *ID2D1Factory1) CreateStrokeStyle(strokeStyleProperties *D2D1_STROKE_STYLE_PROPERTIES1, dashes *float32, dashesCount uint32, strokeStyle **ID2D1StrokeStyle1) foundation.HRESULT {
+func (self *ID2D1Factory1) CreateStrokeStyle(strokeStyleProperties *D2D1_STROKE_STYLE_PROPERTIES1, dashes *float32, dashesCount uint32, strokeStyle **ID2D1StrokeStyle1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strokeStyleProperties)), uintptr(unsafe.Pointer(dashes)), uintptr(dashesCount), uintptr(unsafe.Pointer(strokeStyle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePathGeometry dispatches through ID2D1Factory1's vtable slot 19.
-func (self *ID2D1Factory1) CreatePathGeometry(pathGeometry **ID2D1PathGeometry1) foundation.HRESULT {
+func (self *ID2D1Factory1) CreatePathGeometry(pathGeometry **ID2D1PathGeometry1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pathGeometry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDrawingStateBlock dispatches through ID2D1Factory1's vtable slot 20.
-func (self *ID2D1Factory1) CreateDrawingStateBlock(drawingStateDescription *D2D1_DRAWING_STATE_DESCRIPTION1, textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams, drawingStateBlock **ID2D1DrawingStateBlock1) foundation.HRESULT {
+func (self *ID2D1Factory1) CreateDrawingStateBlock(drawingStateDescription *D2D1_DRAWING_STATE_DESCRIPTION1, textRenderingParams *graphicsdirectwrite.IDWriteRenderingParams, drawingStateBlock **ID2D1DrawingStateBlock1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(drawingStateDescription)), uintptr(unsafe.Pointer(textRenderingParams)), uintptr(unsafe.Pointer(drawingStateBlock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateGdiMetafile dispatches through ID2D1Factory1's vtable slot 21.
-func (self *ID2D1Factory1) CreateGdiMetafile(metafileStream *systemcom.IStream, metafile **ID2D1GdiMetafile) foundation.HRESULT {
+func (self *ID2D1Factory1) CreateGdiMetafile(metafileStream *systemcom.IStream, metafile **ID2D1GdiMetafile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(metafileStream)), uintptr(unsafe.Pointer(metafile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterEffectFromStream dispatches through ID2D1Factory1's vtable slot 22.
-func (self *ID2D1Factory1) RegisterEffectFromStream(classId *win32.GUID, propertyXml *systemcom.IStream, bindings *D2D1_PROPERTY_BINDING, bindingsCount uint32, effectFactory PD2D1_EFFECT_FACTORY) foundation.HRESULT {
+func (self *ID2D1Factory1) RegisterEffectFromStream(classId *win32.GUID, propertyXml *systemcom.IStream, bindings *D2D1_PROPERTY_BINDING, bindingsCount uint32, effectFactory PD2D1_EFFECT_FACTORY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(classId)), uintptr(unsafe.Pointer(propertyXml)), uintptr(unsafe.Pointer(bindings)), uintptr(bindingsCount), uintptr(effectFactory))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterEffectFromString dispatches through ID2D1Factory1's vtable slot 23.
-func (self *ID2D1Factory1) RegisterEffectFromString(classId *win32.GUID, propertyXml foundation.PWSTR, bindings *D2D1_PROPERTY_BINDING, bindingsCount uint32, effectFactory PD2D1_EFFECT_FACTORY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(classId)), uintptr(unsafe.Pointer(propertyXml)), uintptr(unsafe.Pointer(bindings)), uintptr(bindingsCount), uintptr(effectFactory))
-	return foundation.HRESULT(r1)
+func (self *ID2D1Factory1) RegisterEffectFromString(classId *win32.GUID, propertyXml string, bindings *D2D1_PROPERTY_BINDING, bindingsCount uint32, effectFactory PD2D1_EFFECT_FACTORY) error {
+	_propertyXml := win32.UTF16Ptr(propertyXml)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(classId)), uintptr(unsafe.Pointer(_propertyXml)), uintptr(unsafe.Pointer(bindings)), uintptr(bindingsCount), uintptr(effectFactory))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterEffect dispatches through ID2D1Factory1's vtable slot 24.
-func (self *ID2D1Factory1) UnregisterEffect(classId *win32.GUID) foundation.HRESULT {
+func (self *ID2D1Factory1) UnregisterEffect(classId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(classId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegisteredEffects dispatches through ID2D1Factory1's vtable slot 25.
-func (self *ID2D1Factory1) GetRegisteredEffects(effects *win32.GUID, effectsCount uint32, effectsReturned *uint32, effectsRegistered *uint32) foundation.HRESULT {
+func (self *ID2D1Factory1) GetRegisteredEffects(effects *win32.GUID, effectsCount uint32, effectsReturned *uint32, effectsRegistered *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effects)), uintptr(effectsCount), uintptr(unsafe.Pointer(effectsReturned)), uintptr(unsafe.Pointer(effectsRegistered)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffectProperties dispatches through ID2D1Factory1's vtable slot 26.
-func (self *ID2D1Factory1) GetEffectProperties(effectId *win32.GUID, properties **ID2D1Properties) foundation.HRESULT {
+func (self *ID2D1Factory1) GetEffectProperties(effectId *win32.GUID, properties **ID2D1Properties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effectId)), uintptr(unsafe.Pointer(properties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Factory2: https://learn.microsoft.com/windows/win32/api/d2d1_2/nn-d2d1_2-id2d1factory2
@@ -1706,9 +1712,9 @@ type ID2D1Factory2 struct {
 var IID_ID2D1Factory2 = win32.GUID{Data1: 0x94f81a73, Data2: 0x9212, Data3: 0x4376, Data4: [8]byte{0x9c, 0x58, 0xb1, 0x6a, 0x3a, 0x0d, 0x39, 0x92}}
 
 // CreateDevice dispatches through ID2D1Factory2's vtable slot 27.
-func (self *ID2D1Factory2) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice1 **ID2D1Device1) foundation.HRESULT {
+func (self *ID2D1Factory2) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice1 **ID2D1Device1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(d2dDevice1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Factory3: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1factory3
@@ -1721,9 +1727,9 @@ type ID2D1Factory3 struct {
 var IID_ID2D1Factory3 = win32.GUID{Data1: 0x0869759f, Data2: 0x4f00, Data3: 0x413f, Data4: [8]byte{0xb0, 0x3e, 0x2b, 0xda, 0x45, 0x40, 0x4d, 0x0f}}
 
 // CreateDevice dispatches through ID2D1Factory3's vtable slot 28.
-func (self *ID2D1Factory3) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice2 **ID2D1Device2) foundation.HRESULT {
+func (self *ID2D1Factory3) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice2 **ID2D1Device2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(d2dDevice2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Factory4: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1factory4
@@ -1736,9 +1742,9 @@ type ID2D1Factory4 struct {
 var IID_ID2D1Factory4 = win32.GUID{Data1: 0xbd4ec2d2, Data2: 0x0662, Data3: 0x4bee, Data4: [8]byte{0xba, 0x8e, 0x6f, 0x29, 0xf0, 0x32, 0xe0, 0x96}}
 
 // CreateDevice dispatches through ID2D1Factory4's vtable slot 29.
-func (self *ID2D1Factory4) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice3 **ID2D1Device3) foundation.HRESULT {
+func (self *ID2D1Factory4) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice3 **ID2D1Device3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(d2dDevice3)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Factory5: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1factory5
@@ -1751,9 +1757,9 @@ type ID2D1Factory5 struct {
 var IID_ID2D1Factory5 = win32.GUID{Data1: 0xc4349994, Data2: 0x838e, Data3: 0x4b0f, Data4: [8]byte{0x8c, 0xab, 0x44, 0x99, 0x7d, 0x9e, 0xea, 0xcc}}
 
 // CreateDevice dispatches through ID2D1Factory5's vtable slot 30.
-func (self *ID2D1Factory5) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice4 **ID2D1Device4) foundation.HRESULT {
+func (self *ID2D1Factory5) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice4 **ID2D1Device4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(d2dDevice4)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Factory6: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1factory6
@@ -1766,9 +1772,9 @@ type ID2D1Factory6 struct {
 var IID_ID2D1Factory6 = win32.GUID{Data1: 0xf9976f46, Data2: 0xf642, Data3: 0x44c1, Data4: [8]byte{0x97, 0xca, 0xda, 0x32, 0xea, 0x2a, 0x26, 0x35}}
 
 // CreateDevice dispatches through ID2D1Factory6's vtable slot 31.
-func (self *ID2D1Factory6) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice5 **ID2D1Device5) foundation.HRESULT {
+func (self *ID2D1Factory6) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice5 **ID2D1Device5) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(d2dDevice5)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Factory7: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1factory7
@@ -1781,9 +1787,9 @@ type ID2D1Factory7 struct {
 var IID_ID2D1Factory7 = win32.GUID{Data1: 0xbdc2bdd3, Data2: 0xb96c, Data3: 0x4de6, Data4: [8]byte{0xbd, 0xf7, 0x99, 0xd4, 0x74, 0x54, 0x54, 0xde}}
 
 // CreateDevice dispatches through ID2D1Factory7's vtable slot 32.
-func (self *ID2D1Factory7) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice6 **ID2D1Device6) foundation.HRESULT {
+func (self *ID2D1Factory7) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice6 **ID2D1Device6) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(d2dDevice6)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 677c9311-f36d-4b1f-ae86-86d1223ffd3a
@@ -1795,9 +1801,9 @@ type ID2D1Factory8 struct {
 var IID_ID2D1Factory8 = win32.GUID{Data1: 0x677c9311, Data2: 0xf36d, Data3: 0x4b1f, Data4: [8]byte{0xae, 0x86, 0x86, 0xd1, 0x22, 0x3f, 0xfd, 0x3a}}
 
 // CreateDevice dispatches through ID2D1Factory8's vtable slot 33.
-func (self *ID2D1Factory8) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice6 **ID2D1Device7) foundation.HRESULT {
+func (self *ID2D1Factory8) CreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, d2dDevice6 **ID2D1Device7) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(d2dDevice6)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1GdiInteropRenderTarget: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1gdiinteroprendertarget
@@ -1810,15 +1816,15 @@ type ID2D1GdiInteropRenderTarget struct {
 var IID_ID2D1GdiInteropRenderTarget = win32.GUID{Data1: 0xe0db51c3, Data2: 0x6f77, Data3: 0x4bae, Data4: [8]byte{0xb3, 0xd5, 0xe4, 0x75, 0x09, 0xb3, 0x58, 0x38}}
 
 // GetDC dispatches through ID2D1GdiInteropRenderTarget's vtable slot 3.
-func (self *ID2D1GdiInteropRenderTarget) GetDC(mode D2D1_DC_INITIALIZE_MODE, hdc *graphicsgdi.HDC) foundation.HRESULT {
+func (self *ID2D1GdiInteropRenderTarget) GetDC(mode D2D1_DC_INITIALIZE_MODE, hdc *graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(mode), uintptr(unsafe.Pointer(hdc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseDC dispatches through ID2D1GdiInteropRenderTarget's vtable slot 4.
-func (self *ID2D1GdiInteropRenderTarget) ReleaseDC(update *foundation.RECT) foundation.HRESULT {
+func (self *ID2D1GdiInteropRenderTarget) ReleaseDC(update *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(update)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1GdiMetafile: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1gdimetafile
@@ -1831,15 +1837,15 @@ type ID2D1GdiMetafile struct {
 var IID_ID2D1GdiMetafile = win32.GUID{Data1: 0x2f543dc3, Data2: 0xcfc1, Data3: 0x4211, Data4: [8]byte{0x86, 0x4f, 0xcf, 0xd9, 0x1c, 0x6f, 0x33, 0x95}}
 
 // Stream dispatches through ID2D1GdiMetafile's vtable slot 4.
-func (self *ID2D1GdiMetafile) Stream(sink *ID2D1GdiMetafileSink) foundation.HRESULT {
+func (self *ID2D1GdiMetafile) Stream(sink *ID2D1GdiMetafileSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBounds dispatches through ID2D1GdiMetafile's vtable slot 5.
-func (self *ID2D1GdiMetafile) GetBounds(bounds *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1GdiMetafile) GetBounds(bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bounds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1GdiMetafile1: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1gdimetafile1
@@ -1852,15 +1858,15 @@ type ID2D1GdiMetafile1 struct {
 var IID_ID2D1GdiMetafile1 = win32.GUID{Data1: 0x2e69f9e8, Data2: 0xdd3f, Data3: 0x4bf9, Data4: [8]byte{0x95, 0xba, 0xc0, 0x4f, 0x49, 0xd7, 0x88, 0xdf}}
 
 // GetDpi dispatches through ID2D1GdiMetafile1's vtable slot 6.
-func (self *ID2D1GdiMetafile1) GetDpi(dpiX *float32, dpiY *float32) foundation.HRESULT {
+func (self *ID2D1GdiMetafile1) GetDpi(dpiX *float32, dpiY *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dpiX)), uintptr(unsafe.Pointer(dpiY)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceBounds dispatches through ID2D1GdiMetafile1's vtable slot 7.
-func (self *ID2D1GdiMetafile1) GetSourceBounds(bounds *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1GdiMetafile1) GetSourceBounds(bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bounds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1GdiMetafileSink: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1gdimetafilesink
@@ -1873,9 +1879,9 @@ type ID2D1GdiMetafileSink struct {
 var IID_ID2D1GdiMetafileSink = win32.GUID{Data1: 0x82237326, Data2: 0x8111, Data3: 0x4f7c, Data4: [8]byte{0xbc, 0xf4, 0xb5, 0xc1, 0x17, 0x55, 0x64, 0xfe}}
 
 // ProcessRecord dispatches through ID2D1GdiMetafileSink's vtable slot 3.
-func (self *ID2D1GdiMetafileSink) ProcessRecord(recordType uint32, recordData unsafe.Pointer, recordDataSize uint32) foundation.HRESULT {
+func (self *ID2D1GdiMetafileSink) ProcessRecord(recordType uint32, recordData unsafe.Pointer, recordDataSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(recordType), uintptr(unsafe.Pointer(recordData)), uintptr(recordDataSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1GdiMetafileSink1: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1gdimetafilesink1
@@ -1888,9 +1894,9 @@ type ID2D1GdiMetafileSink1 struct {
 var IID_ID2D1GdiMetafileSink1 = win32.GUID{Data1: 0xfd0ecb6b, Data2: 0x91e6, Data3: 0x411e, Data4: [8]byte{0x86, 0x55, 0x39, 0x5e, 0x76, 0x0f, 0x91, 0xb4}}
 
 // ProcessRecord dispatches through ID2D1GdiMetafileSink1's vtable slot 4.
-func (self *ID2D1GdiMetafileSink1) ProcessRecord(recordType uint32, recordData unsafe.Pointer, recordDataSize uint32, flags uint32) foundation.HRESULT {
+func (self *ID2D1GdiMetafileSink1) ProcessRecord(recordType uint32, recordData unsafe.Pointer, recordDataSize uint32, flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(recordType), uintptr(unsafe.Pointer(recordData)), uintptr(recordDataSize), uintptr(flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Geometry: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1geometry
@@ -1903,9 +1909,9 @@ type ID2D1Geometry struct {
 var IID_ID2D1Geometry = win32.GUID{Data1: 0x2cd906a1, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
 // GetBounds dispatches through ID2D1Geometry's vtable slot 4.
-func (self *ID2D1Geometry) GetBounds(worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, bounds *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1Geometry) GetBounds(worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(worldTransform)), uintptr(unsafe.Pointer(bounds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1GeometryGroup: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1geometrygroup
@@ -1988,9 +1994,9 @@ func (self *ID2D1GradientMesh) GetPatchCount() uint32 {
 }
 
 // GetPatches dispatches through ID2D1GradientMesh's vtable slot 5.
-func (self *ID2D1GradientMesh) GetPatches(startIndex uint32, patches *D2D1_GRADIENT_MESH_PATCH, patchesCount uint32) foundation.HRESULT {
+func (self *ID2D1GradientMesh) GetPatches(startIndex uint32, patches *D2D1_GRADIENT_MESH_PATCH, patchesCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(startIndex), uintptr(unsafe.Pointer(patches)), uintptr(patchesCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1GradientStopCollection: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1gradientstopcollection
@@ -2079,9 +2085,9 @@ func (self *ID2D1HwndRenderTarget) CheckWindowState() D2D1_WINDOW_STATE {
 }
 
 // Resize dispatches through ID2D1HwndRenderTarget's vtable slot 58.
-func (self *ID2D1HwndRenderTarget) Resize(pixelSize *graphicsdirect2dcommon.D2D_SIZE_U) foundation.HRESULT {
+func (self *ID2D1HwndRenderTarget) Resize(pixelSize *graphicsdirect2dcommon.D2D_SIZE_U) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pixelSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHwnd dispatches through ID2D1HwndRenderTarget's vtable slot 59.
@@ -2171,15 +2177,15 @@ type ID2D1ImageSource struct {
 var IID_ID2D1ImageSource = win32.GUID{Data1: 0xc9b664e5, Data2: 0x74a1, Data3: 0x4378, Data4: [8]byte{0x9a, 0xc2, 0xee, 0xfc, 0x37, 0xa3, 0xf4, 0xd8}}
 
 // OfferResources dispatches through ID2D1ImageSource's vtable slot 4.
-func (self *ID2D1ImageSource) OfferResources() foundation.HRESULT {
+func (self *ID2D1ImageSource) OfferResources() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TryReclaimResources dispatches through ID2D1ImageSource's vtable slot 5.
-func (self *ID2D1ImageSource) TryReclaimResources(resourcesDiscarded *foundation.BOOL) foundation.HRESULT {
+func (self *ID2D1ImageSource) TryReclaimResources(resourcesDiscarded *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourcesDiscarded)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1ImageSourceFromWic: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1imagesourcefromwic
@@ -2192,15 +2198,15 @@ type ID2D1ImageSourceFromWic struct {
 var IID_ID2D1ImageSourceFromWic = win32.GUID{Data1: 0x77395441, Data2: 0x1c8f, Data3: 0x4555, Data4: [8]byte{0x86, 0x83, 0xf5, 0x0d, 0xab, 0x0f, 0xe7, 0x92}}
 
 // EnsureCached dispatches through ID2D1ImageSourceFromWic's vtable slot 6.
-func (self *ID2D1ImageSourceFromWic) EnsureCached(rectangleToFill *graphicsdirect2dcommon.D2D_RECT_U) foundation.HRESULT {
+func (self *ID2D1ImageSourceFromWic) EnsureCached(rectangleToFill *graphicsdirect2dcommon.D2D_RECT_U) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rectangleToFill)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TrimCache dispatches through ID2D1ImageSourceFromWic's vtable slot 7.
-func (self *ID2D1ImageSourceFromWic) TrimCache(rectangleToPreserve *graphicsdirect2dcommon.D2D_RECT_U) foundation.HRESULT {
+func (self *ID2D1ImageSourceFromWic) TrimCache(rectangleToPreserve *graphicsdirect2dcommon.D2D_RECT_U) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rectangleToPreserve)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSource dispatches through ID2D1ImageSourceFromWic's vtable slot 8.
@@ -2223,27 +2229,27 @@ func (self *ID2D1Ink) SetStartPoint(startPoint *D2D1_INK_POINT) {
 }
 
 // AddSegments dispatches through ID2D1Ink's vtable slot 6.
-func (self *ID2D1Ink) AddSegments(segments *D2D1_INK_BEZIER_SEGMENT, segmentsCount uint32) foundation.HRESULT {
+func (self *ID2D1Ink) AddSegments(segments *D2D1_INK_BEZIER_SEGMENT, segmentsCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(segments)), uintptr(segmentsCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveSegmentsAtEnd dispatches through ID2D1Ink's vtable slot 7.
-func (self *ID2D1Ink) RemoveSegmentsAtEnd(segmentsCount uint32) foundation.HRESULT {
+func (self *ID2D1Ink) RemoveSegmentsAtEnd(segmentsCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(segmentsCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSegments dispatches through ID2D1Ink's vtable slot 8.
-func (self *ID2D1Ink) SetSegments(startSegment uint32, segments *D2D1_INK_BEZIER_SEGMENT, segmentsCount uint32) foundation.HRESULT {
+func (self *ID2D1Ink) SetSegments(startSegment uint32, segments *D2D1_INK_BEZIER_SEGMENT, segmentsCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(startSegment), uintptr(unsafe.Pointer(segments)), uintptr(segmentsCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSegmentAtEnd dispatches through ID2D1Ink's vtable slot 9.
-func (self *ID2D1Ink) SetSegmentAtEnd(segment *D2D1_INK_BEZIER_SEGMENT) foundation.HRESULT {
+func (self *ID2D1Ink) SetSegmentAtEnd(segment *D2D1_INK_BEZIER_SEGMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(segment)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSegmentCount dispatches through ID2D1Ink's vtable slot 10.
@@ -2253,15 +2259,15 @@ func (self *ID2D1Ink) GetSegmentCount() uint32 {
 }
 
 // GetSegments dispatches through ID2D1Ink's vtable slot 11.
-func (self *ID2D1Ink) GetSegments(startSegment uint32, segments *D2D1_INK_BEZIER_SEGMENT, segmentsCount uint32) foundation.HRESULT {
+func (self *ID2D1Ink) GetSegments(startSegment uint32, segments *D2D1_INK_BEZIER_SEGMENT, segmentsCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(startSegment), uintptr(unsafe.Pointer(segments)), uintptr(segmentsCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBounds dispatches through ID2D1Ink's vtable slot 13.
-func (self *ID2D1Ink) GetBounds(inkStyle *ID2D1InkStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, bounds *graphicsdirect2dcommon.D2D_RECT_F) foundation.HRESULT {
+func (self *ID2D1Ink) GetBounds(inkStyle *ID2D1InkStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inkStyle)), uintptr(unsafe.Pointer(worldTransform)), uintptr(unsafe.Pointer(bounds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1InkStyle: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1inkstyle
@@ -2336,9 +2342,9 @@ type ID2D1Mesh struct {
 var IID_ID2D1Mesh = win32.GUID{Data1: 0x2cd906c2, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
 // Open dispatches through ID2D1Mesh's vtable slot 4.
-func (self *ID2D1Mesh) Open(tessellationSink **ID2D1TessellationSink) foundation.HRESULT {
+func (self *ID2D1Mesh) Open(tessellationSink **ID2D1TessellationSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tessellationSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Multithread: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1multithread
@@ -2385,27 +2391,27 @@ type ID2D1PathGeometry struct {
 var IID_ID2D1PathGeometry = win32.GUID{Data1: 0x2cd906a5, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
 // Open dispatches through ID2D1PathGeometry's vtable slot 17.
-func (self *ID2D1PathGeometry) Open(geometrySink **ID2D1GeometrySink) foundation.HRESULT {
+func (self *ID2D1PathGeometry) Open(geometrySink **ID2D1GeometrySink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(geometrySink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stream dispatches through ID2D1PathGeometry's vtable slot 18.
-func (self *ID2D1PathGeometry) Stream(geometrySink *ID2D1GeometrySink) foundation.HRESULT {
+func (self *ID2D1PathGeometry) Stream(geometrySink *ID2D1GeometrySink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(geometrySink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSegmentCount dispatches through ID2D1PathGeometry's vtable slot 19.
-func (self *ID2D1PathGeometry) GetSegmentCount(count *uint32) foundation.HRESULT {
+func (self *ID2D1PathGeometry) GetSegmentCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFigureCount dispatches through ID2D1PathGeometry's vtable slot 20.
-func (self *ID2D1PathGeometry) GetFigureCount(count *uint32) foundation.HRESULT {
+func (self *ID2D1PathGeometry) GetFigureCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1PathGeometry1: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1pathgeometry1
@@ -2427,9 +2433,9 @@ type ID2D1PrintControl struct {
 var IID_ID2D1PrintControl = win32.GUID{Data1: 0x2c1d867d, Data2: 0xc290, Data3: 0x41c8, Data4: [8]byte{0xae, 0x7e, 0x34, 0xa9, 0x87, 0x02, 0xe9, 0xa5}}
 
 // Close dispatches through ID2D1PrintControl's vtable slot 4.
-func (self *ID2D1PrintControl) Close() foundation.HRESULT {
+func (self *ID2D1PrintControl) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Properties: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1properties
@@ -2448,9 +2454,9 @@ func (self *ID2D1Properties) GetPropertyCount() uint32 {
 }
 
 // GetPropertyName dispatches through ID2D1Properties's vtable slot 4.
-func (self *ID2D1Properties) GetPropertyName(index uint32, name foundation.PWSTR, nameCount uint32) foundation.HRESULT {
+func (self *ID2D1Properties) GetPropertyName(index uint32, name foundation.PWSTR, nameCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(nameCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyNameLength dispatches through ID2D1Properties's vtable slot 5.
@@ -2466,33 +2472,36 @@ func (self *ID2D1Properties) GetType(index uint32) D2D1_PROPERTY_TYPE {
 }
 
 // GetPropertyIndex dispatches through ID2D1Properties's vtable slot 7.
-func (self *ID2D1Properties) GetPropertyIndex(name foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
+func (self *ID2D1Properties) GetPropertyIndex(name string) uint32 {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)))
 	return uint32(r1)
 }
 
 // SetValueByName dispatches through ID2D1Properties's vtable slot 8.
-func (self *ID2D1Properties) SetValueByName(name foundation.PWSTR, type_ D2D1_PROPERTY_TYPE, data *byte, dataSize uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(unsafe.Pointer(data)), uintptr(dataSize))
-	return foundation.HRESULT(r1)
+func (self *ID2D1Properties) SetValueByName(name string, type_ D2D1_PROPERTY_TYPE, data *byte, dataSize uint32) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(type_), uintptr(unsafe.Pointer(data)), uintptr(dataSize))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValue dispatches through ID2D1Properties's vtable slot 9.
-func (self *ID2D1Properties) SetValue(index uint32, type_ D2D1_PROPERTY_TYPE, data *byte, dataSize uint32) foundation.HRESULT {
+func (self *ID2D1Properties) SetValue(index uint32, type_ D2D1_PROPERTY_TYPE, data *byte, dataSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(type_), uintptr(unsafe.Pointer(data)), uintptr(dataSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValueByName dispatches through ID2D1Properties's vtable slot 10.
-func (self *ID2D1Properties) GetValueByName(name foundation.PWSTR, type_ D2D1_PROPERTY_TYPE, data *byte, dataSize uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(unsafe.Pointer(data)), uintptr(dataSize))
-	return foundation.HRESULT(r1)
+func (self *ID2D1Properties) GetValueByName(name string, type_ D2D1_PROPERTY_TYPE, data *byte, dataSize uint32) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(type_), uintptr(unsafe.Pointer(data)), uintptr(dataSize))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValue dispatches through ID2D1Properties's vtable slot 11.
-func (self *ID2D1Properties) GetValue(index uint32, type_ D2D1_PROPERTY_TYPE, data *byte, dataSize uint32) foundation.HRESULT {
+func (self *ID2D1Properties) GetValue(index uint32, type_ D2D1_PROPERTY_TYPE, data *byte, dataSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(type_), uintptr(unsafe.Pointer(data)), uintptr(dataSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValueSize dispatches through ID2D1Properties's vtable slot 12.
@@ -2502,9 +2511,9 @@ func (self *ID2D1Properties) GetValueSize(index uint32) uint32 {
 }
 
 // GetSubProperties dispatches through ID2D1Properties's vtable slot 13.
-func (self *ID2D1Properties) GetSubProperties(index uint32, subProperties **ID2D1Properties) foundation.HRESULT {
+func (self *ID2D1Properties) GetSubProperties(index uint32, subProperties **ID2D1Properties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(subProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1RadialGradientBrush: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1radialgradientbrush
@@ -2545,14 +2554,15 @@ type ID2D1RenderInfo struct {
 var IID_ID2D1RenderInfo = win32.GUID{Data1: 0x519ae1bd, Data2: 0xd19a, Data3: 0x420d, Data4: [8]byte{0xb8, 0x49, 0x36, 0x4f, 0x59, 0x47, 0x76, 0xb7}}
 
 // SetOutputBuffer dispatches through ID2D1RenderInfo's vtable slot 4.
-func (self *ID2D1RenderInfo) SetOutputBuffer(bufferPrecision D2D1_BUFFER_PRECISION, channelDepth D2D1_CHANNEL_DEPTH) foundation.HRESULT {
+func (self *ID2D1RenderInfo) SetOutputBuffer(bufferPrecision D2D1_BUFFER_PRECISION, channelDepth D2D1_CHANNEL_DEPTH) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(bufferPrecision), uintptr(channelDepth))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCached dispatches through ID2D1RenderInfo's vtable slot 5.
-func (self *ID2D1RenderInfo) SetCached(isCached foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(isCached))
+func (self *ID2D1RenderInfo) SetCached(isCached bool) {
+	_isCached := win32.Bool32(isCached)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_isCached))
 }
 
 // SetInstructionCountHint dispatches through ID2D1RenderInfo's vtable slot 6.
@@ -2570,63 +2580,63 @@ type ID2D1RenderTarget struct {
 var IID_ID2D1RenderTarget = win32.GUID{Data1: 0x2cd90694, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
 // CreateBitmapFromWicBitmap dispatches through ID2D1RenderTarget's vtable slot 5.
-func (self *ID2D1RenderTarget) CreateBitmapFromWicBitmap(wicBitmapSource *graphicsimaging.IWICBitmapSource, bitmapProperties *D2D1_BITMAP_PROPERTIES, bitmap **ID2D1Bitmap) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateBitmapFromWicBitmap(wicBitmapSource *graphicsimaging.IWICBitmapSource, bitmapProperties *D2D1_BITMAP_PROPERTIES, bitmap **ID2D1Bitmap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wicBitmapSource)), uintptr(unsafe.Pointer(bitmapProperties)), uintptr(unsafe.Pointer(bitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSharedBitmap dispatches through ID2D1RenderTarget's vtable slot 6.
-func (self *ID2D1RenderTarget) CreateSharedBitmap(riid *win32.GUID, data unsafe.Pointer, bitmapProperties *D2D1_BITMAP_PROPERTIES, bitmap **ID2D1Bitmap) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateSharedBitmap(riid *win32.GUID, data unsafe.Pointer, bitmapProperties *D2D1_BITMAP_PROPERTIES, bitmap **ID2D1Bitmap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(bitmapProperties)), uintptr(unsafe.Pointer(bitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBitmapBrush dispatches through ID2D1RenderTarget's vtable slot 7.
-func (self *ID2D1RenderTarget) CreateBitmapBrush(bitmap *ID2D1Bitmap, bitmapBrushProperties *D2D1_BITMAP_BRUSH_PROPERTIES, brushProperties *D2D1_BRUSH_PROPERTIES, bitmapBrush **ID2D1BitmapBrush) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateBitmapBrush(bitmap *ID2D1Bitmap, bitmapBrushProperties *D2D1_BITMAP_BRUSH_PROPERTIES, brushProperties *D2D1_BRUSH_PROPERTIES, bitmapBrush **ID2D1BitmapBrush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(bitmapBrushProperties)), uintptr(unsafe.Pointer(brushProperties)), uintptr(unsafe.Pointer(bitmapBrush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSolidColorBrush dispatches through ID2D1RenderTarget's vtable slot 8.
-func (self *ID2D1RenderTarget) CreateSolidColorBrush(color *graphicsdirect2dcommon.D2D1_COLOR_F, brushProperties *D2D1_BRUSH_PROPERTIES, solidColorBrush **ID2D1SolidColorBrush) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateSolidColorBrush(color *graphicsdirect2dcommon.D2D1_COLOR_F, brushProperties *D2D1_BRUSH_PROPERTIES, solidColorBrush **ID2D1SolidColorBrush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(brushProperties)), uintptr(unsafe.Pointer(solidColorBrush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateGradientStopCollection dispatches through ID2D1RenderTarget's vtable slot 9.
-func (self *ID2D1RenderTarget) CreateGradientStopCollection(gradientStops *graphicsdirect2dcommon.D2D1_GRADIENT_STOP, gradientStopsCount uint32, colorInterpolationGamma D2D1_GAMMA, extendMode D2D1_EXTEND_MODE, gradientStopCollection **ID2D1GradientStopCollection) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateGradientStopCollection(gradientStops *graphicsdirect2dcommon.D2D1_GRADIENT_STOP, gradientStopsCount uint32, colorInterpolationGamma D2D1_GAMMA, extendMode D2D1_EXTEND_MODE, gradientStopCollection **ID2D1GradientStopCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gradientStops)), uintptr(gradientStopsCount), uintptr(colorInterpolationGamma), uintptr(extendMode), uintptr(unsafe.Pointer(gradientStopCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateLinearGradientBrush dispatches through ID2D1RenderTarget's vtable slot 10.
-func (self *ID2D1RenderTarget) CreateLinearGradientBrush(linearGradientBrushProperties *D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES, brushProperties *D2D1_BRUSH_PROPERTIES, gradientStopCollection *ID2D1GradientStopCollection, linearGradientBrush **ID2D1LinearGradientBrush) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateLinearGradientBrush(linearGradientBrushProperties *D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES, brushProperties *D2D1_BRUSH_PROPERTIES, gradientStopCollection *ID2D1GradientStopCollection, linearGradientBrush **ID2D1LinearGradientBrush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(linearGradientBrushProperties)), uintptr(unsafe.Pointer(brushProperties)), uintptr(unsafe.Pointer(gradientStopCollection)), uintptr(unsafe.Pointer(linearGradientBrush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRadialGradientBrush dispatches through ID2D1RenderTarget's vtable slot 11.
-func (self *ID2D1RenderTarget) CreateRadialGradientBrush(radialGradientBrushProperties *D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES, brushProperties *D2D1_BRUSH_PROPERTIES, gradientStopCollection *ID2D1GradientStopCollection, radialGradientBrush **ID2D1RadialGradientBrush) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateRadialGradientBrush(radialGradientBrushProperties *D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES, brushProperties *D2D1_BRUSH_PROPERTIES, gradientStopCollection *ID2D1GradientStopCollection, radialGradientBrush **ID2D1RadialGradientBrush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(radialGradientBrushProperties)), uintptr(unsafe.Pointer(brushProperties)), uintptr(unsafe.Pointer(gradientStopCollection)), uintptr(unsafe.Pointer(radialGradientBrush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCompatibleRenderTarget dispatches through ID2D1RenderTarget's vtable slot 12.
-func (self *ID2D1RenderTarget) CreateCompatibleRenderTarget(desiredSize *graphicsdirect2dcommon.D2D_SIZE_F, desiredPixelSize *graphicsdirect2dcommon.D2D_SIZE_U, desiredFormat *graphicsdirect2dcommon.D2D1_PIXEL_FORMAT, options D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmapRenderTarget **ID2D1BitmapRenderTarget) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateCompatibleRenderTarget(desiredSize *graphicsdirect2dcommon.D2D_SIZE_F, desiredPixelSize *graphicsdirect2dcommon.D2D_SIZE_U, desiredFormat *graphicsdirect2dcommon.D2D1_PIXEL_FORMAT, options D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmapRenderTarget **ID2D1BitmapRenderTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desiredSize)), uintptr(unsafe.Pointer(desiredPixelSize)), uintptr(unsafe.Pointer(desiredFormat)), uintptr(options), uintptr(unsafe.Pointer(bitmapRenderTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateLayer dispatches through ID2D1RenderTarget's vtable slot 13.
-func (self *ID2D1RenderTarget) CreateLayer(size *graphicsdirect2dcommon.D2D_SIZE_F, layer **ID2D1Layer) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateLayer(size *graphicsdirect2dcommon.D2D_SIZE_F, layer **ID2D1Layer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(size)), uintptr(unsafe.Pointer(layer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMesh dispatches through ID2D1RenderTarget's vtable slot 14.
-func (self *ID2D1RenderTarget) CreateMesh(mesh **ID2D1Mesh) foundation.HRESULT {
+func (self *ID2D1RenderTarget) CreateMesh(mesh **ID2D1Mesh) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mesh)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FillRectangle dispatches through ID2D1RenderTarget's vtable slot 17.
@@ -2660,8 +2670,9 @@ func (self *ID2D1RenderTarget) FillOpacityMask(opacityMask *ID2D1Bitmap, brush *
 }
 
 // DrawText dispatches through ID2D1RenderTarget's vtable slot 27.
-func (self *ID2D1RenderTarget) DrawText(string_ foundation.PWSTR, stringLength uint32, textFormat *graphicsdirectwrite.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush *ID2D1Brush, options D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
-	syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(options), uintptr(measuringMode))
+func (self *ID2D1RenderTarget) DrawText(string_ string, stringLength uint32, textFormat *graphicsdirectwrite.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush *ID2D1Brush, options D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
+	_string_ := win32.UTF16Ptr(string_)
+	syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(options), uintptr(measuringMode))
 }
 
 // SetTransform dispatches through ID2D1RenderTarget's vtable slot 30.
@@ -2727,9 +2738,9 @@ func (self *ID2D1RenderTarget) PopLayer() {
 }
 
 // Flush dispatches through ID2D1RenderTarget's vtable slot 42.
-func (self *ID2D1RenderTarget) Flush(tag1 *uint64, tag2 *uint64) foundation.HRESULT {
+func (self *ID2D1RenderTarget) Flush(tag1 *uint64, tag2 *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tag1)), uintptr(unsafe.Pointer(tag2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveDrawingState dispatches through ID2D1RenderTarget's vtable slot 43.
@@ -2763,9 +2774,9 @@ func (self *ID2D1RenderTarget) BeginDraw() {
 }
 
 // EndDraw dispatches through ID2D1RenderTarget's vtable slot 49.
-func (self *ID2D1RenderTarget) EndDraw(tag1 *uint64, tag2 *uint64) foundation.HRESULT {
+func (self *ID2D1RenderTarget) EndDraw(tag1 *uint64, tag2 *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tag1)), uintptr(unsafe.Pointer(tag2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDpi dispatches through ID2D1RenderTarget's vtable slot 52.
@@ -2809,9 +2820,9 @@ type ID2D1ResourceTexture struct {
 var IID_ID2D1ResourceTexture = win32.GUID{Data1: 0x688d15c3, Data2: 0x02b0, Data3: 0x438d, Data4: [8]byte{0xb1, 0x3a, 0xd1, 0xb4, 0x4c, 0x32, 0xc3, 0x9a}}
 
 // Update dispatches through ID2D1ResourceTexture's vtable slot 3.
-func (self *ID2D1ResourceTexture) Update(minimumExtents *uint32, maximimumExtents *uint32, strides *uint32, dimensions uint32, data *byte, dataCount uint32) foundation.HRESULT {
+func (self *ID2D1ResourceTexture) Update(minimumExtents *uint32, maximimumExtents *uint32, strides *uint32, dimensions uint32, data *byte, dataCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(minimumExtents)), uintptr(unsafe.Pointer(maximimumExtents)), uintptr(unsafe.Pointer(strides)), uintptr(dimensions), uintptr(unsafe.Pointer(data)), uintptr(dataCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1RoundedRectangleGeometry: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1roundedrectanglegeometry
@@ -2852,9 +2863,9 @@ type ID2D1SourceTransform struct {
 var IID_ID2D1SourceTransform = win32.GUID{Data1: 0xdb1800dd, Data2: 0x0c34, Data3: 0x4cf9, Data4: [8]byte{0xbe, 0x90, 0x31, 0xcc, 0x0a, 0x56, 0x53, 0xe1}}
 
 // SetRenderInfo dispatches through ID2D1SourceTransform's vtable slot 7.
-func (self *ID2D1SourceTransform) SetRenderInfo(renderInfo *ID2D1RenderInfo) foundation.HRESULT {
+func (self *ID2D1SourceTransform) SetRenderInfo(renderInfo *ID2D1RenderInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1SpriteBatch: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1spritebatch
@@ -2867,21 +2878,21 @@ type ID2D1SpriteBatch struct {
 var IID_ID2D1SpriteBatch = win32.GUID{Data1: 0x4dc583bf, Data2: 0x3a10, Data3: 0x438a, Data4: [8]byte{0x87, 0x22, 0xe9, 0x76, 0x52, 0x24, 0xf1, 0xf1}}
 
 // AddSprites dispatches through ID2D1SpriteBatch's vtable slot 4.
-func (self *ID2D1SpriteBatch) AddSprites(spriteCount uint32, destinationRectangles *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangles *graphicsdirect2dcommon.D2D_RECT_U, colors *graphicsdirect2dcommon.D2D1_COLOR_F, transforms *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, destinationRectanglesStride uint32, sourceRectanglesStride uint32, colorsStride uint32, transformsStride uint32) foundation.HRESULT {
+func (self *ID2D1SpriteBatch) AddSprites(spriteCount uint32, destinationRectangles *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangles *graphicsdirect2dcommon.D2D_RECT_U, colors *graphicsdirect2dcommon.D2D1_COLOR_F, transforms *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, destinationRectanglesStride uint32, sourceRectanglesStride uint32, colorsStride uint32, transformsStride uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(spriteCount), uintptr(unsafe.Pointer(destinationRectangles)), uintptr(unsafe.Pointer(sourceRectangles)), uintptr(unsafe.Pointer(colors)), uintptr(unsafe.Pointer(transforms)), uintptr(destinationRectanglesStride), uintptr(sourceRectanglesStride), uintptr(colorsStride), uintptr(transformsStride))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSprites dispatches through ID2D1SpriteBatch's vtable slot 5.
-func (self *ID2D1SpriteBatch) SetSprites(startIndex uint32, spriteCount uint32, destinationRectangles *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangles *graphicsdirect2dcommon.D2D_RECT_U, colors *graphicsdirect2dcommon.D2D1_COLOR_F, transforms *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, destinationRectanglesStride uint32, sourceRectanglesStride uint32, colorsStride uint32, transformsStride uint32) foundation.HRESULT {
+func (self *ID2D1SpriteBatch) SetSprites(startIndex uint32, spriteCount uint32, destinationRectangles *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangles *graphicsdirect2dcommon.D2D_RECT_U, colors *graphicsdirect2dcommon.D2D1_COLOR_F, transforms *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, destinationRectanglesStride uint32, sourceRectanglesStride uint32, colorsStride uint32, transformsStride uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(startIndex), uintptr(spriteCount), uintptr(unsafe.Pointer(destinationRectangles)), uintptr(unsafe.Pointer(sourceRectangles)), uintptr(unsafe.Pointer(colors)), uintptr(unsafe.Pointer(transforms)), uintptr(destinationRectanglesStride), uintptr(sourceRectanglesStride), uintptr(colorsStride), uintptr(transformsStride))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSprites dispatches through ID2D1SpriteBatch's vtable slot 6.
-func (self *ID2D1SpriteBatch) GetSprites(startIndex uint32, spriteCount uint32, destinationRectangles *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangles *graphicsdirect2dcommon.D2D_RECT_U, colors *graphicsdirect2dcommon.D2D1_COLOR_F, transforms *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) foundation.HRESULT {
+func (self *ID2D1SpriteBatch) GetSprites(startIndex uint32, spriteCount uint32, destinationRectangles *graphicsdirect2dcommon.D2D_RECT_F, sourceRectangles *graphicsdirect2dcommon.D2D_RECT_U, colors *graphicsdirect2dcommon.D2D1_COLOR_F, transforms *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(startIndex), uintptr(spriteCount), uintptr(unsafe.Pointer(destinationRectangles)), uintptr(unsafe.Pointer(sourceRectangles)), uintptr(unsafe.Pointer(colors)), uintptr(unsafe.Pointer(transforms)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpriteCount dispatches through ID2D1SpriteBatch's vtable slot 7.
@@ -2975,9 +2986,9 @@ func (self *ID2D1SvgAttribute) GetElement(element **ID2D1SvgElement) {
 }
 
 // Clone dispatches through ID2D1SvgAttribute's vtable slot 5.
-func (self *ID2D1SvgAttribute) Clone(attribute **ID2D1SvgAttribute) foundation.HRESULT {
+func (self *ID2D1SvgAttribute) Clone(attribute **ID2D1SvgAttribute) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(attribute)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1SvgDocument: https://learn.microsoft.com/windows/win32/api/d2d1svg/nn-d2d1svg-id2d1svgdocument
@@ -2990,9 +3001,9 @@ type ID2D1SvgDocument struct {
 var IID_ID2D1SvgDocument = win32.GUID{Data1: 0x86b88e4d, Data2: 0xafa4, Data3: 0x4d7b, Data4: [8]byte{0x88, 0xe4, 0x68, 0xa5, 0x1c, 0x4a, 0x0a, 0xec}}
 
 // SetRoot dispatches through ID2D1SvgDocument's vtable slot 6.
-func (self *ID2D1SvgDocument) SetRoot(root *ID2D1SvgElement) foundation.HRESULT {
+func (self *ID2D1SvgDocument) SetRoot(root *ID2D1SvgElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(root)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRoot dispatches through ID2D1SvgDocument's vtable slot 7.
@@ -3001,45 +3012,47 @@ func (self *ID2D1SvgDocument) GetRoot(root **ID2D1SvgElement) {
 }
 
 // FindElementById dispatches through ID2D1SvgDocument's vtable slot 8.
-func (self *ID2D1SvgDocument) FindElementById(id foundation.PWSTR, svgElement **ID2D1SvgElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)), uintptr(unsafe.Pointer(svgElement)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgDocument) FindElementById(id string, svgElement **ID2D1SvgElement) error {
+	_id := win32.UTF16Ptr(id)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(svgElement)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Serialize dispatches through ID2D1SvgDocument's vtable slot 9.
-func (self *ID2D1SvgDocument) Serialize(outputXmlStream *systemcom.IStream, subtree *ID2D1SvgElement) foundation.HRESULT {
+func (self *ID2D1SvgDocument) Serialize(outputXmlStream *systemcom.IStream, subtree *ID2D1SvgElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputXmlStream)), uintptr(unsafe.Pointer(subtree)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Deserialize dispatches through ID2D1SvgDocument's vtable slot 10.
-func (self *ID2D1SvgDocument) Deserialize(inputXmlStream *systemcom.IStream, subtree **ID2D1SvgElement) foundation.HRESULT {
+func (self *ID2D1SvgDocument) Deserialize(inputXmlStream *systemcom.IStream, subtree **ID2D1SvgElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputXmlStream)), uintptr(unsafe.Pointer(subtree)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePaint dispatches through ID2D1SvgDocument's vtable slot 11.
-func (self *ID2D1SvgDocument) CreatePaint(paintType D2D1_SVG_PAINT_TYPE, color *graphicsdirect2dcommon.D2D1_COLOR_F, id foundation.PWSTR, paint **ID2D1SvgPaint) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(paintType), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(id)), uintptr(unsafe.Pointer(paint)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgDocument) CreatePaint(paintType D2D1_SVG_PAINT_TYPE, color *graphicsdirect2dcommon.D2D1_COLOR_F, id string, paint **ID2D1SvgPaint) error {
+	_id := win32.UTF16Ptr(id)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(paintType), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(paint)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStrokeDashArray dispatches through ID2D1SvgDocument's vtable slot 12.
-func (self *ID2D1SvgDocument) CreateStrokeDashArray(dashes *D2D1_SVG_LENGTH, dashesCount uint32, strokeDashArray **ID2D1SvgStrokeDashArray) foundation.HRESULT {
+func (self *ID2D1SvgDocument) CreateStrokeDashArray(dashes *D2D1_SVG_LENGTH, dashesCount uint32, strokeDashArray **ID2D1SvgStrokeDashArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dashes)), uintptr(dashesCount), uintptr(unsafe.Pointer(strokeDashArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePointCollection dispatches through ID2D1SvgDocument's vtable slot 13.
-func (self *ID2D1SvgDocument) CreatePointCollection(points *graphicsdirect2dcommon.D2D_POINT_2F, pointsCount uint32, pointCollection **ID2D1SvgPointCollection) foundation.HRESULT {
+func (self *ID2D1SvgDocument) CreatePointCollection(points *graphicsdirect2dcommon.D2D_POINT_2F, pointsCount uint32, pointCollection **ID2D1SvgPointCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(points)), uintptr(pointsCount), uintptr(unsafe.Pointer(pointCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePathData dispatches through ID2D1SvgDocument's vtable slot 14.
-func (self *ID2D1SvgDocument) CreatePathData(segmentData *float32, segmentDataCount uint32, commands *D2D1_SVG_PATH_COMMAND, commandsCount uint32, pathData **ID2D1SvgPathData) foundation.HRESULT {
+func (self *ID2D1SvgDocument) CreatePathData(segmentData *float32, segmentDataCount uint32, commands *D2D1_SVG_PATH_COMMAND, commandsCount uint32, pathData **ID2D1SvgPathData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(segmentData)), uintptr(segmentDataCount), uintptr(unsafe.Pointer(commands)), uintptr(commandsCount), uintptr(unsafe.Pointer(pathData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1SvgElement: https://learn.microsoft.com/windows/win32/api/d2d1svg/nn-d2d1svg-id2d1svgelement
@@ -3057,9 +3070,9 @@ func (self *ID2D1SvgElement) GetDocument(document **ID2D1SvgDocument) {
 }
 
 // GetTagName dispatches through ID2D1SvgElement's vtable slot 5.
-func (self *ID2D1SvgElement) GetTagName(name foundation.PWSTR, nameCount uint32) foundation.HRESULT {
+func (self *ID2D1SvgElement) GetTagName(name foundation.PWSTR, nameCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(nameCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTagNameLength dispatches through ID2D1SvgElement's vtable slot 6.
@@ -3096,50 +3109,52 @@ func (self *ID2D1SvgElement) GetLastChild(child **ID2D1SvgElement) {
 }
 
 // GetPreviousChild dispatches through ID2D1SvgElement's vtable slot 12.
-func (self *ID2D1SvgElement) GetPreviousChild(referenceChild *ID2D1SvgElement, previousChild **ID2D1SvgElement) foundation.HRESULT {
+func (self *ID2D1SvgElement) GetPreviousChild(referenceChild *ID2D1SvgElement, previousChild **ID2D1SvgElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceChild)), uintptr(unsafe.Pointer(previousChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextChild dispatches through ID2D1SvgElement's vtable slot 13.
-func (self *ID2D1SvgElement) GetNextChild(referenceChild *ID2D1SvgElement, nextChild **ID2D1SvgElement) foundation.HRESULT {
+func (self *ID2D1SvgElement) GetNextChild(referenceChild *ID2D1SvgElement, nextChild **ID2D1SvgElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceChild)), uintptr(unsafe.Pointer(nextChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertChildBefore dispatches through ID2D1SvgElement's vtable slot 14.
-func (self *ID2D1SvgElement) InsertChildBefore(newChild *ID2D1SvgElement, referenceChild *ID2D1SvgElement) foundation.HRESULT {
+func (self *ID2D1SvgElement) InsertChildBefore(newChild *ID2D1SvgElement, referenceChild *ID2D1SvgElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newChild)), uintptr(unsafe.Pointer(referenceChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AppendChild dispatches through ID2D1SvgElement's vtable slot 15.
-func (self *ID2D1SvgElement) AppendChild(newChild *ID2D1SvgElement) foundation.HRESULT {
+func (self *ID2D1SvgElement) AppendChild(newChild *ID2D1SvgElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReplaceChild dispatches through ID2D1SvgElement's vtable slot 16.
-func (self *ID2D1SvgElement) ReplaceChild(newChild *ID2D1SvgElement, oldChild *ID2D1SvgElement) foundation.HRESULT {
+func (self *ID2D1SvgElement) ReplaceChild(newChild *ID2D1SvgElement, oldChild *ID2D1SvgElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newChild)), uintptr(unsafe.Pointer(oldChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveChild dispatches through ID2D1SvgElement's vtable slot 17.
-func (self *ID2D1SvgElement) RemoveChild(oldChild *ID2D1SvgElement) foundation.HRESULT {
+func (self *ID2D1SvgElement) RemoveChild(oldChild *ID2D1SvgElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oldChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateChild dispatches through ID2D1SvgElement's vtable slot 18.
-func (self *ID2D1SvgElement) CreateChild(tagName foundation.PWSTR, newChild **ID2D1SvgElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tagName)), uintptr(unsafe.Pointer(newChild)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) CreateChild(tagName string, newChild **ID2D1SvgElement) error {
+	_tagName := win32.UTF16Ptr(tagName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_tagName)), uintptr(unsafe.Pointer(newChild)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsAttributeSpecified dispatches through ID2D1SvgElement's vtable slot 19.
-func (self *ID2D1SvgElement) IsAttributeSpecified(name foundation.PWSTR, inherited *foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(inherited)))
+func (self *ID2D1SvgElement) IsAttributeSpecified(name string, inherited *foundation.BOOL) foundation.BOOL {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(inherited)))
 	return foundation.BOOL(r1)
 }
 
@@ -3150,33 +3165,35 @@ func (self *ID2D1SvgElement) GetSpecifiedAttributeCount() uint32 {
 }
 
 // GetSpecifiedAttributeName dispatches through ID2D1SvgElement's vtable slot 21.
-func (self *ID2D1SvgElement) GetSpecifiedAttributeName(index uint32, name foundation.PWSTR, nameCount uint32, inherited *foundation.BOOL) foundation.HRESULT {
+func (self *ID2D1SvgElement) GetSpecifiedAttributeName(index uint32, name foundation.PWSTR, nameCount uint32, inherited *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(nameCount), uintptr(unsafe.Pointer(inherited)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpecifiedAttributeNameLength dispatches through ID2D1SvgElement's vtable slot 22.
-func (self *ID2D1SvgElement) GetSpecifiedAttributeNameLength(index uint32, nameLength *uint32, inherited *foundation.BOOL) foundation.HRESULT {
+func (self *ID2D1SvgElement) GetSpecifiedAttributeNameLength(index uint32, nameLength *uint32, inherited *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(nameLength)), uintptr(unsafe.Pointer(inherited)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAttribute dispatches through ID2D1SvgElement's vtable slot 23.
-func (self *ID2D1SvgElement) RemoveAttribute(name foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) RemoveAttribute(name string) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextValue dispatches through ID2D1SvgElement's vtable slot 24.
-func (self *ID2D1SvgElement) SetTextValue(name foundation.PWSTR, nameCount uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(nameCount))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) SetTextValue(name string, nameCount uint32) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(nameCount))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTextValue dispatches through ID2D1SvgElement's vtable slot 25.
-func (self *ID2D1SvgElement) GetTextValue(name foundation.PWSTR, nameCount uint32) foundation.HRESULT {
+func (self *ID2D1SvgElement) GetTextValue(name foundation.PWSTR, nameCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(nameCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTextValueLength dispatches through ID2D1SvgElement's vtable slot 26.
@@ -3186,45 +3203,53 @@ func (self *ID2D1SvgElement) GetTextValueLength() uint32 {
 }
 
 // SetAttributeValue dispatches through ID2D1SvgElement's vtable slot 27.
-func (self *ID2D1SvgElement) SetAttributeValue(name foundation.PWSTR, value *ID2D1SvgAttribute) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) SetAttributeValue(name string, value *ID2D1SvgAttribute) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAttributeValue dispatches through ID2D1SvgElement's vtable slot 28.
-func (self *ID2D1SvgElement) SetAttributeValue_(name foundation.PWSTR, type_ D2D1_SVG_ATTRIBUTE_POD_TYPE, value unsafe.Pointer, valueSizeInBytes uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(unsafe.Pointer(value)), uintptr(valueSizeInBytes))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) SetAttributeValue_(name string, type_ D2D1_SVG_ATTRIBUTE_POD_TYPE, value unsafe.Pointer, valueSizeInBytes uint32) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(type_), uintptr(unsafe.Pointer(value)), uintptr(valueSizeInBytes))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAttributeValue dispatches through ID2D1SvgElement's vtable slot 29.
-func (self *ID2D1SvgElement) SetAttributeValue__(name foundation.PWSTR, type_ D2D1_SVG_ATTRIBUTE_STRING_TYPE, value foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) SetAttributeValue__(name string, type_ D2D1_SVG_ATTRIBUTE_STRING_TYPE, value string) error {
+	_name := win32.UTF16Ptr(name)
+	_value := win32.UTF16Ptr(value)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(type_), uintptr(unsafe.Pointer(_value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttributeValue dispatches through ID2D1SvgElement's vtable slot 30.
-func (self *ID2D1SvgElement) GetAttributeValue(name foundation.PWSTR, riid *win32.GUID, value *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) GetAttributeValue(name string, riid *win32.GUID, value *unsafe.Pointer) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttributeValue dispatches through ID2D1SvgElement's vtable slot 31.
-func (self *ID2D1SvgElement) GetAttributeValue_(name foundation.PWSTR, type_ D2D1_SVG_ATTRIBUTE_POD_TYPE, value unsafe.Pointer, valueSizeInBytes uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(unsafe.Pointer(value)), uintptr(valueSizeInBytes))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) GetAttributeValue_(name string, type_ D2D1_SVG_ATTRIBUTE_POD_TYPE, value unsafe.Pointer, valueSizeInBytes uint32) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(type_), uintptr(unsafe.Pointer(value)), uintptr(valueSizeInBytes))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttributeValue dispatches through ID2D1SvgElement's vtable slot 32.
-func (self *ID2D1SvgElement) GetAttributeValue__(name foundation.PWSTR, type_ D2D1_SVG_ATTRIBUTE_STRING_TYPE, value foundation.PWSTR, valueCount uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(unsafe.Pointer(value)), uintptr(valueCount))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) GetAttributeValue__(name string, type_ D2D1_SVG_ATTRIBUTE_STRING_TYPE, value foundation.PWSTR, valueCount uint32) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(type_), uintptr(unsafe.Pointer(value)), uintptr(valueCount))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttributeValueLength dispatches through ID2D1SvgElement's vtable slot 33.
-func (self *ID2D1SvgElement) GetAttributeValueLength(name foundation.PWSTR, type_ D2D1_SVG_ATTRIBUTE_STRING_TYPE, valueLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(unsafe.Pointer(valueLength)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgElement) GetAttributeValueLength(name string, type_ D2D1_SVG_ATTRIBUTE_STRING_TYPE, valueLength *uint32) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(type_), uintptr(unsafe.Pointer(valueLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1SvgGlyphStyle: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1svgglyphstyle
@@ -3237,9 +3262,9 @@ type ID2D1SvgGlyphStyle struct {
 var IID_ID2D1SvgGlyphStyle = win32.GUID{Data1: 0xaf671749, Data2: 0xd241, Data3: 0x4db8, Data4: [8]byte{0x8e, 0x41, 0xdc, 0xc2, 0xe5, 0xc1, 0xa4, 0x38}}
 
 // SetFill dispatches through ID2D1SvgGlyphStyle's vtable slot 4.
-func (self *ID2D1SvgGlyphStyle) SetFill(brush *ID2D1Brush) foundation.HRESULT {
+func (self *ID2D1SvgGlyphStyle) SetFill(brush *ID2D1Brush) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(brush)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFill dispatches through ID2D1SvgGlyphStyle's vtable slot 5.
@@ -3268,9 +3293,9 @@ type ID2D1SvgPaint struct {
 var IID_ID2D1SvgPaint = win32.GUID{Data1: 0xd59bab0a, Data2: 0x68a2, Data3: 0x455b, Data4: [8]byte{0xa5, 0xdc, 0x9e, 0xb2, 0x85, 0x4e, 0x24, 0x90}}
 
 // SetPaintType dispatches through ID2D1SvgPaint's vtable slot 6.
-func (self *ID2D1SvgPaint) SetPaintType(paintType D2D1_SVG_PAINT_TYPE) foundation.HRESULT {
+func (self *ID2D1SvgPaint) SetPaintType(paintType D2D1_SVG_PAINT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(paintType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPaintType dispatches through ID2D1SvgPaint's vtable slot 7.
@@ -3280,9 +3305,9 @@ func (self *ID2D1SvgPaint) GetPaintType() D2D1_SVG_PAINT_TYPE {
 }
 
 // SetColor dispatches through ID2D1SvgPaint's vtable slot 8.
-func (self *ID2D1SvgPaint) SetColor(color *graphicsdirect2dcommon.D2D1_COLOR_F) foundation.HRESULT {
+func (self *ID2D1SvgPaint) SetColor(color *graphicsdirect2dcommon.D2D1_COLOR_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColor dispatches through ID2D1SvgPaint's vtable slot 9.
@@ -3291,15 +3316,16 @@ func (self *ID2D1SvgPaint) GetColor(color *graphicsdirect2dcommon.D2D1_COLOR_F) 
 }
 
 // SetId dispatches through ID2D1SvgPaint's vtable slot 10.
-func (self *ID2D1SvgPaint) SetId(id foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+func (self *ID2D1SvgPaint) SetId(id string) error {
+	_id := win32.UTF16Ptr(id)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_id)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetId dispatches through ID2D1SvgPaint's vtable slot 11.
-func (self *ID2D1SvgPaint) GetId(id foundation.PWSTR, idCount uint32) foundation.HRESULT {
+func (self *ID2D1SvgPaint) GetId(id foundation.PWSTR, idCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)), uintptr(idCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIdLength dispatches through ID2D1SvgPaint's vtable slot 12.
@@ -3318,21 +3344,21 @@ type ID2D1SvgPathData struct {
 var IID_ID2D1SvgPathData = win32.GUID{Data1: 0xc095e4f4, Data2: 0xbb98, Data3: 0x43d6, Data4: [8]byte{0x97, 0x45, 0x4d, 0x1b, 0x84, 0xec, 0x98, 0x88}}
 
 // RemoveSegmentDataAtEnd dispatches through ID2D1SvgPathData's vtable slot 6.
-func (self *ID2D1SvgPathData) RemoveSegmentDataAtEnd(dataCount uint32) foundation.HRESULT {
+func (self *ID2D1SvgPathData) RemoveSegmentDataAtEnd(dataCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dataCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateSegmentData dispatches through ID2D1SvgPathData's vtable slot 7.
-func (self *ID2D1SvgPathData) UpdateSegmentData(data *float32, dataCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgPathData) UpdateSegmentData(data *float32, dataCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(dataCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSegmentData dispatches through ID2D1SvgPathData's vtable slot 8.
-func (self *ID2D1SvgPathData) GetSegmentData(data *float32, dataCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgPathData) GetSegmentData(data *float32, dataCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(dataCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSegmentDataCount dispatches through ID2D1SvgPathData's vtable slot 9.
@@ -3342,21 +3368,21 @@ func (self *ID2D1SvgPathData) GetSegmentDataCount() uint32 {
 }
 
 // RemoveCommandsAtEnd dispatches through ID2D1SvgPathData's vtable slot 10.
-func (self *ID2D1SvgPathData) RemoveCommandsAtEnd(commandsCount uint32) foundation.HRESULT {
+func (self *ID2D1SvgPathData) RemoveCommandsAtEnd(commandsCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(commandsCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateCommands dispatches through ID2D1SvgPathData's vtable slot 11.
-func (self *ID2D1SvgPathData) UpdateCommands(commands *D2D1_SVG_PATH_COMMAND, commandsCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgPathData) UpdateCommands(commands *D2D1_SVG_PATH_COMMAND, commandsCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commands)), uintptr(commandsCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCommands dispatches through ID2D1SvgPathData's vtable slot 12.
-func (self *ID2D1SvgPathData) GetCommands(commands *D2D1_SVG_PATH_COMMAND, commandsCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgPathData) GetCommands(commands *D2D1_SVG_PATH_COMMAND, commandsCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commands)), uintptr(commandsCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCommandsCount dispatches through ID2D1SvgPathData's vtable slot 13.
@@ -3366,9 +3392,9 @@ func (self *ID2D1SvgPathData) GetCommandsCount() uint32 {
 }
 
 // CreatePathGeometry dispatches through ID2D1SvgPathData's vtable slot 14.
-func (self *ID2D1SvgPathData) CreatePathGeometry(fillMode graphicsdirect2dcommon.D2D1_FILL_MODE, pathGeometry **ID2D1PathGeometry1) foundation.HRESULT {
+func (self *ID2D1SvgPathData) CreatePathGeometry(fillMode graphicsdirect2dcommon.D2D1_FILL_MODE, pathGeometry **ID2D1PathGeometry1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(fillMode), uintptr(unsafe.Pointer(pathGeometry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1SvgPointCollection: https://learn.microsoft.com/windows/win32/api/d2d1svg/nn-d2d1svg-id2d1svgpointcollection
@@ -3381,21 +3407,21 @@ type ID2D1SvgPointCollection struct {
 var IID_ID2D1SvgPointCollection = win32.GUID{Data1: 0x9dbe4c0d, Data2: 0x3572, Data3: 0x4dd9, Data4: [8]byte{0x98, 0x25, 0x55, 0x30, 0x81, 0x3b, 0xb7, 0x12}}
 
 // RemovePointsAtEnd dispatches through ID2D1SvgPointCollection's vtable slot 6.
-func (self *ID2D1SvgPointCollection) RemovePointsAtEnd(pointsCount uint32) foundation.HRESULT {
+func (self *ID2D1SvgPointCollection) RemovePointsAtEnd(pointsCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(pointsCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdatePoints dispatches through ID2D1SvgPointCollection's vtable slot 7.
-func (self *ID2D1SvgPointCollection) UpdatePoints(points *graphicsdirect2dcommon.D2D_POINT_2F, pointsCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgPointCollection) UpdatePoints(points *graphicsdirect2dcommon.D2D_POINT_2F, pointsCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(points)), uintptr(pointsCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPoints dispatches through ID2D1SvgPointCollection's vtable slot 8.
-func (self *ID2D1SvgPointCollection) GetPoints(points *graphicsdirect2dcommon.D2D_POINT_2F, pointsCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgPointCollection) GetPoints(points *graphicsdirect2dcommon.D2D_POINT_2F, pointsCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(points)), uintptr(pointsCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPointsCount dispatches through ID2D1SvgPointCollection's vtable slot 9.
@@ -3414,33 +3440,33 @@ type ID2D1SvgStrokeDashArray struct {
 var IID_ID2D1SvgStrokeDashArray = win32.GUID{Data1: 0xf1c0ca52, Data2: 0x92a3, Data3: 0x4f00, Data4: [8]byte{0xb4, 0xce, 0xf3, 0x56, 0x91, 0xef, 0xd9, 0xd9}}
 
 // RemoveDashesAtEnd dispatches through ID2D1SvgStrokeDashArray's vtable slot 6.
-func (self *ID2D1SvgStrokeDashArray) RemoveDashesAtEnd(dashesCount uint32) foundation.HRESULT {
+func (self *ID2D1SvgStrokeDashArray) RemoveDashesAtEnd(dashesCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dashesCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateDashes dispatches through ID2D1SvgStrokeDashArray's vtable slot 7.
-func (self *ID2D1SvgStrokeDashArray) UpdateDashes(dashes *D2D1_SVG_LENGTH, dashesCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgStrokeDashArray) UpdateDashes(dashes *D2D1_SVG_LENGTH, dashesCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dashes)), uintptr(dashesCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateDashes dispatches through ID2D1SvgStrokeDashArray's vtable slot 8.
-func (self *ID2D1SvgStrokeDashArray) UpdateDashes_(dashes *float32, dashesCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgStrokeDashArray) UpdateDashes_(dashes *float32, dashesCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dashes)), uintptr(dashesCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDashes dispatches through ID2D1SvgStrokeDashArray's vtable slot 9.
-func (self *ID2D1SvgStrokeDashArray) GetDashes(dashes *D2D1_SVG_LENGTH, dashesCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgStrokeDashArray) GetDashes(dashes *D2D1_SVG_LENGTH, dashesCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dashes)), uintptr(dashesCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDashes dispatches through ID2D1SvgStrokeDashArray's vtable slot 10.
-func (self *ID2D1SvgStrokeDashArray) GetDashes_(dashes *float32, dashesCount uint32, startIndex uint32) foundation.HRESULT {
+func (self *ID2D1SvgStrokeDashArray) GetDashes_(dashes *float32, dashesCount uint32, startIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dashes)), uintptr(dashesCount), uintptr(startIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDashesCount dispatches through ID2D1SvgStrokeDashArray's vtable slot 11.
@@ -3464,9 +3490,9 @@ func (self *ID2D1TessellationSink) AddTriangles(triangles *D2D1_TRIANGLE, triang
 }
 
 // Close dispatches through ID2D1TessellationSink's vtable slot 4.
-func (self *ID2D1TessellationSink) Close() foundation.HRESULT {
+func (self *ID2D1TessellationSink) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1Transform: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1transform
@@ -3479,15 +3505,15 @@ type ID2D1Transform struct {
 var IID_ID2D1Transform = win32.GUID{Data1: 0xef1a287d, Data2: 0x342a, Data3: 0x4f76, Data4: [8]byte{0x8f, 0xdb, 0xda, 0x0d, 0x6e, 0xa9, 0xf9, 0x2b}}
 
 // MapOutputRectToInputRects dispatches through ID2D1Transform's vtable slot 4.
-func (self *ID2D1Transform) MapOutputRectToInputRects(outputRect *foundation.RECT, inputRects *foundation.RECT, inputRectsCount uint32) foundation.HRESULT {
+func (self *ID2D1Transform) MapOutputRectToInputRects(outputRect *foundation.RECT, inputRects *foundation.RECT, inputRectsCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputRect)), uintptr(unsafe.Pointer(inputRects)), uintptr(inputRectsCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MapInputRectsToOutputRect dispatches through ID2D1Transform's vtable slot 5.
-func (self *ID2D1Transform) MapInputRectsToOutputRect(inputRects *foundation.RECT, inputOpaqueSubRects *foundation.RECT, inputRectCount uint32, outputRect *foundation.RECT, outputOpaqueSubRect *foundation.RECT) foundation.HRESULT {
+func (self *ID2D1Transform) MapInputRectsToOutputRect(inputRects *foundation.RECT, inputOpaqueSubRects *foundation.RECT, inputRectCount uint32, outputRect *foundation.RECT, outputOpaqueSubRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputRects)), uintptr(unsafe.Pointer(inputOpaqueSubRects)), uintptr(inputRectCount), uintptr(unsafe.Pointer(outputRect)), uintptr(unsafe.Pointer(outputOpaqueSubRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1TransformGraph: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1transformgraph
@@ -3506,39 +3532,39 @@ func (self *ID2D1TransformGraph) GetInputCount() uint32 {
 }
 
 // SetSingleTransformNode dispatches through ID2D1TransformGraph's vtable slot 4.
-func (self *ID2D1TransformGraph) SetSingleTransformNode(node *ID2D1TransformNode) foundation.HRESULT {
+func (self *ID2D1TransformGraph) SetSingleTransformNode(node *ID2D1TransformNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(node)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddNode dispatches through ID2D1TransformGraph's vtable slot 5.
-func (self *ID2D1TransformGraph) AddNode(node *ID2D1TransformNode) foundation.HRESULT {
+func (self *ID2D1TransformGraph) AddNode(node *ID2D1TransformNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(node)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveNode dispatches through ID2D1TransformGraph's vtable slot 6.
-func (self *ID2D1TransformGraph) RemoveNode(node *ID2D1TransformNode) foundation.HRESULT {
+func (self *ID2D1TransformGraph) RemoveNode(node *ID2D1TransformNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(node)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputNode dispatches through ID2D1TransformGraph's vtable slot 7.
-func (self *ID2D1TransformGraph) SetOutputNode(node *ID2D1TransformNode) foundation.HRESULT {
+func (self *ID2D1TransformGraph) SetOutputNode(node *ID2D1TransformNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(node)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConnectNode dispatches through ID2D1TransformGraph's vtable slot 8.
-func (self *ID2D1TransformGraph) ConnectNode(fromNode *ID2D1TransformNode, toNode *ID2D1TransformNode, toNodeInputIndex uint32) foundation.HRESULT {
+func (self *ID2D1TransformGraph) ConnectNode(fromNode *ID2D1TransformNode, toNode *ID2D1TransformNode, toNodeInputIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fromNode)), uintptr(unsafe.Pointer(toNode)), uintptr(toNodeInputIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConnectToEffectInput dispatches through ID2D1TransformGraph's vtable slot 9.
-func (self *ID2D1TransformGraph) ConnectToEffectInput(toEffectInputIndex uint32, node *ID2D1TransformNode, toNodeInputIndex uint32) foundation.HRESULT {
+func (self *ID2D1TransformGraph) ConnectToEffectInput(toEffectInputIndex uint32, node *ID2D1TransformNode, toNodeInputIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(toEffectInputIndex), uintptr(unsafe.Pointer(node)), uintptr(toNodeInputIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through ID2D1TransformGraph's vtable slot 10.
@@ -3547,9 +3573,9 @@ func (self *ID2D1TransformGraph) Clear() {
 }
 
 // SetPassthroughGraph dispatches through ID2D1TransformGraph's vtable slot 11.
-func (self *ID2D1TransformGraph) SetPassthroughGraph(effectInputIndex uint32) foundation.HRESULT {
+func (self *ID2D1TransformGraph) SetPassthroughGraph(effectInputIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(effectInputIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID2D1TransformNode: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1transformnode
@@ -3615,13 +3641,13 @@ type ID2D1VertexBuffer struct {
 var IID_ID2D1VertexBuffer = win32.GUID{Data1: 0x9b8b1336, Data2: 0x00a5, Data3: 0x4668, Data4: [8]byte{0x92, 0xb7, 0xce, 0xd5, 0xd8, 0xbf, 0x9b, 0x7b}}
 
 // Map dispatches through ID2D1VertexBuffer's vtable slot 3.
-func (self *ID2D1VertexBuffer) Map(data **byte, bufferSize uint32) foundation.HRESULT {
+func (self *ID2D1VertexBuffer) Map(data **byte, bufferSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(bufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unmap dispatches through ID2D1VertexBuffer's vtable slot 4.
-func (self *ID2D1VertexBuffer) Unmap() foundation.HRESULT {
+func (self *ID2D1VertexBuffer) Unmap() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

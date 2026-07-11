@@ -39,57 +39,80 @@ func SwDeviceClose(hSwDevice HSWDEVICE) {
 // SwDeviceCreate calls CFGMGR32!SwDeviceCreate.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdevicecreate
 // Minimum OS: windows8.0.
-func SwDeviceCreate(pszEnumeratorName foundation.PWSTR, pszParentDeviceInstance foundation.PWSTR, pCreateInfo *SW_DEVICE_CREATE_INFO, cPropertyCount uint32, pProperties *devicesproperties.DEVPROPERTY, pCallback SW_DEVICE_CREATE_CALLBACK, pContext unsafe.Pointer, phSwDevice *HSWDEVICE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSwDeviceCreate.Addr(), uintptr(unsafe.Pointer(pszEnumeratorName)), uintptr(unsafe.Pointer(pszParentDeviceInstance)), uintptr(unsafe.Pointer(pCreateInfo)), uintptr(cPropertyCount), uintptr(unsafe.Pointer(pProperties)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phSwDevice)))
-	return foundation.HRESULT(r1)
+func SwDeviceCreate(pszEnumeratorName string, pszParentDeviceInstance string, pCreateInfo *SW_DEVICE_CREATE_INFO, pProperties []devicesproperties.DEVPROPERTY, pCallback SW_DEVICE_CREATE_CALLBACK, pContext unsafe.Pointer, phSwDevice *HSWDEVICE) error {
+	_pszEnumeratorName := win32.UTF16Ptr(pszEnumeratorName)
+	_pszParentDeviceInstance := win32.UTF16Ptr(pszParentDeviceInstance)
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSwDeviceCreate.Addr(), uintptr(unsafe.Pointer(_pszEnumeratorName)), uintptr(unsafe.Pointer(_pszParentDeviceInstance)), uintptr(unsafe.Pointer(pCreateInfo)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phSwDevice)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwDeviceGetLifetime calls CFGMGR32!SwDeviceGetLifetime.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdevicegetlifetime
 // Minimum OS: windows8.1.
-func SwDeviceGetLifetime(hSwDevice HSWDEVICE, pLifetime *SW_DEVICE_LIFETIME) foundation.HRESULT {
+func SwDeviceGetLifetime(hSwDevice HSWDEVICE, pLifetime *SW_DEVICE_LIFETIME) error {
 	r1, _, _ := syscall.SyscallN(procSwDeviceGetLifetime.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(pLifetime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwDeviceInterfacePropertySet calls CFGMGR32!SwDeviceInterfacePropertySet.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdeviceinterfacepropertyset
 // Minimum OS: windows8.0.
-func SwDeviceInterfacePropertySet(hSwDevice HSWDEVICE, pszDeviceInterfaceId foundation.PWSTR, cPropertyCount uint32, pProperties *devicesproperties.DEVPROPERTY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSwDeviceInterfacePropertySet.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(pszDeviceInterfaceId)), uintptr(cPropertyCount), uintptr(unsafe.Pointer(pProperties)))
-	return foundation.HRESULT(r1)
+func SwDeviceInterfacePropertySet(hSwDevice HSWDEVICE, pszDeviceInterfaceId string, pProperties []devicesproperties.DEVPROPERTY) error {
+	_pszDeviceInterfaceId := win32.UTF16Ptr(pszDeviceInterfaceId)
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSwDeviceInterfacePropertySet.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(_pszDeviceInterfaceId)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwDeviceInterfaceRegister calls CFGMGR32!SwDeviceInterfaceRegister.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdeviceinterfaceregister
 // Minimum OS: windows8.0.
-func SwDeviceInterfaceRegister(hSwDevice HSWDEVICE, pInterfaceClassGuid *win32.GUID, pszReferenceString foundation.PWSTR, cPropertyCount uint32, pProperties *devicesproperties.DEVPROPERTY, fEnabled foundation.BOOL, ppszDeviceInterfaceId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSwDeviceInterfaceRegister.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(pInterfaceClassGuid)), uintptr(unsafe.Pointer(pszReferenceString)), uintptr(cPropertyCount), uintptr(unsafe.Pointer(pProperties)), uintptr(fEnabled), uintptr(unsafe.Pointer(ppszDeviceInterfaceId)))
-	return foundation.HRESULT(r1)
+func SwDeviceInterfaceRegister(hSwDevice HSWDEVICE, pInterfaceClassGuid *win32.GUID, pszReferenceString string, pProperties []devicesproperties.DEVPROPERTY, fEnabled bool, ppszDeviceInterfaceId *foundation.PWSTR) error {
+	_pszReferenceString := win32.UTF16Ptr(pszReferenceString)
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	_fEnabled := win32.Bool32(fEnabled)
+	r1, _, _ := syscall.SyscallN(procSwDeviceInterfaceRegister.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(pInterfaceClassGuid)), uintptr(unsafe.Pointer(_pszReferenceString)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)), uintptr(_fEnabled), uintptr(unsafe.Pointer(ppszDeviceInterfaceId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwDeviceInterfaceSetState calls CFGMGR32!SwDeviceInterfaceSetState.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdeviceinterfacesetstate
 // Minimum OS: windows8.0.
-func SwDeviceInterfaceSetState(hSwDevice HSWDEVICE, pszDeviceInterfaceId foundation.PWSTR, fEnabled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSwDeviceInterfaceSetState.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(pszDeviceInterfaceId)), uintptr(fEnabled))
-	return foundation.HRESULT(r1)
+func SwDeviceInterfaceSetState(hSwDevice HSWDEVICE, pszDeviceInterfaceId string, fEnabled bool) error {
+	_pszDeviceInterfaceId := win32.UTF16Ptr(pszDeviceInterfaceId)
+	_fEnabled := win32.Bool32(fEnabled)
+	r1, _, _ := syscall.SyscallN(procSwDeviceInterfaceSetState.Addr(), uintptr(hSwDevice), uintptr(unsafe.Pointer(_pszDeviceInterfaceId)), uintptr(_fEnabled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwDevicePropertySet calls CFGMGR32!SwDevicePropertySet.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdevicepropertyset
 // Minimum OS: windows8.0.
-func SwDevicePropertySet(hSwDevice HSWDEVICE, cPropertyCount uint32, pProperties *devicesproperties.DEVPROPERTY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSwDevicePropertySet.Addr(), uintptr(hSwDevice), uintptr(cPropertyCount), uintptr(unsafe.Pointer(pProperties)))
-	return foundation.HRESULT(r1)
+func SwDevicePropertySet(hSwDevice HSWDEVICE, pProperties []devicesproperties.DEVPROPERTY) error {
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSwDevicePropertySet.Addr(), uintptr(hSwDevice), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwDeviceSetLifetime calls CFGMGR32!SwDeviceSetLifetime.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdevicesetlifetime
 // Minimum OS: windows8.1.
-func SwDeviceSetLifetime(hSwDevice HSWDEVICE, Lifetime SW_DEVICE_LIFETIME) foundation.HRESULT {
+func SwDeviceSetLifetime(hSwDevice HSWDEVICE, Lifetime SW_DEVICE_LIFETIME) error {
 	r1, _, _ := syscall.SyscallN(procSwDeviceSetLifetime.Addr(), uintptr(hSwDevice), uintptr(Lifetime))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwMemFree calls CFGMGR32!SwMemFree.

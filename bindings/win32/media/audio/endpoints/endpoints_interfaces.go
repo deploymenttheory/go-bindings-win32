@@ -26,9 +26,9 @@ type IAudioEndpointFormatControl struct {
 var IID_IAudioEndpointFormatControl = win32.GUID{Data1: 0x784cfd40, Data2: 0x9f89, Data3: 0x456e, Data4: [8]byte{0xa1, 0xa6, 0x87, 0x3b, 0x00, 0x6a, 0x66, 0x4e}}
 
 // ResetToDefault dispatches through IAudioEndpointFormatControl's vtable slot 3.
-func (self *IAudioEndpointFormatControl) ResetToDefault(ResetFlags uint32) foundation.HRESULT {
+func (self *IAudioEndpointFormatControl) ResetToDefault(ResetFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ResetFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioEndpointLastBufferControl: https://learn.microsoft.com/windows/win32/api/audioengineendpoint/nn-audioengineendpoint-iaudioendpointlastbuffercontrol
@@ -61,15 +61,15 @@ type IAudioEndpointOffloadStreamMeter struct {
 var IID_IAudioEndpointOffloadStreamMeter = win32.GUID{Data1: 0xe1546dce, Data2: 0x9dd1, Data3: 0x418b, Data4: [8]byte{0x9a, 0xb2, 0x34, 0x8c, 0xed, 0x16, 0x1c, 0x86}}
 
 // GetMeterChannelCount dispatches through IAudioEndpointOffloadStreamMeter's vtable slot 3.
-func (self *IAudioEndpointOffloadStreamMeter) GetMeterChannelCount(pu32ChannelCount *uint32) foundation.HRESULT {
+func (self *IAudioEndpointOffloadStreamMeter) GetMeterChannelCount(pu32ChannelCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pu32ChannelCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMeteringData dispatches through IAudioEndpointOffloadStreamMeter's vtable slot 4.
-func (self *IAudioEndpointOffloadStreamMeter) GetMeteringData(u32ChannelCount uint32, pf32PeakValues *float32) foundation.HRESULT {
+func (self *IAudioEndpointOffloadStreamMeter) GetMeteringData(u32ChannelCount uint32, pf32PeakValues *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(u32ChannelCount), uintptr(unsafe.Pointer(pf32PeakValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioEndpointOffloadStreamMute: https://learn.microsoft.com/windows/win32/api/audioengineendpoint/nn-audioengineendpoint-iaudioendpointoffloadstreammute
@@ -82,15 +82,15 @@ type IAudioEndpointOffloadStreamMute struct {
 var IID_IAudioEndpointOffloadStreamMute = win32.GUID{Data1: 0xdfe21355, Data2: 0x5ec2, Data3: 0x40e0, Data4: [8]byte{0x8d, 0x6b, 0x71, 0x0a, 0xc3, 0xc0, 0x02, 0x49}}
 
 // SetMute dispatches through IAudioEndpointOffloadStreamMute's vtable slot 3.
-func (self *IAudioEndpointOffloadStreamMute) SetMute(bMuted byte) foundation.HRESULT {
+func (self *IAudioEndpointOffloadStreamMute) SetMute(bMuted byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(bMuted))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMute dispatches through IAudioEndpointOffloadStreamMute's vtable slot 4.
-func (self *IAudioEndpointOffloadStreamMute) GetMute(pbMuted *byte) foundation.HRESULT {
+func (self *IAudioEndpointOffloadStreamMute) GetMute(pbMuted *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMuted)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioEndpointOffloadStreamVolume: https://learn.microsoft.com/windows/win32/api/audioengineendpoint/nn-audioengineendpoint-iaudioendpointoffloadstreamvolume
@@ -103,21 +103,21 @@ type IAudioEndpointOffloadStreamVolume struct {
 var IID_IAudioEndpointOffloadStreamVolume = win32.GUID{Data1: 0x64f1dd49, Data2: 0x71ca, Data3: 0x4281, Data4: [8]byte{0x86, 0x72, 0x3a, 0x9e, 0xdd, 0xd1, 0xd0, 0xb6}}
 
 // GetVolumeChannelCount dispatches through IAudioEndpointOffloadStreamVolume's vtable slot 3.
-func (self *IAudioEndpointOffloadStreamVolume) GetVolumeChannelCount(pu32ChannelCount *uint32) foundation.HRESULT {
+func (self *IAudioEndpointOffloadStreamVolume) GetVolumeChannelCount(pu32ChannelCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pu32ChannelCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetChannelVolumes dispatches through IAudioEndpointOffloadStreamVolume's vtable slot 4.
-func (self *IAudioEndpointOffloadStreamVolume) SetChannelVolumes(u32ChannelCount uint32, pf32Volumes *float32, u32CurveType mediakernelstreaming.AUDIO_CURVE_TYPE, pCurveDuration *int64) foundation.HRESULT {
+func (self *IAudioEndpointOffloadStreamVolume) SetChannelVolumes(u32ChannelCount uint32, pf32Volumes *float32, u32CurveType mediakernelstreaming.AUDIO_CURVE_TYPE, pCurveDuration *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(u32ChannelCount), uintptr(unsafe.Pointer(pf32Volumes)), uintptr(u32CurveType), uintptr(unsafe.Pointer(pCurveDuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChannelVolumes dispatches through IAudioEndpointOffloadStreamVolume's vtable slot 5.
-func (self *IAudioEndpointOffloadStreamVolume) GetChannelVolumes(u32ChannelCount uint32, pf32Volumes *float32) foundation.HRESULT {
+func (self *IAudioEndpointOffloadStreamVolume) GetChannelVolumes(u32ChannelCount uint32, pf32Volumes *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(u32ChannelCount), uintptr(unsafe.Pointer(pf32Volumes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioEndpointVolume: https://learn.microsoft.com/windows/win32/api/endpointvolume/nn-endpointvolume-iaudioendpointvolume
@@ -130,87 +130,88 @@ type IAudioEndpointVolume struct {
 var IID_IAudioEndpointVolume = win32.GUID{Data1: 0x5cdf2c82, Data2: 0x841e, Data3: 0x4546, Data4: [8]byte{0x97, 0x22, 0x0c, 0xf7, 0x40, 0x78, 0x22, 0x9a}}
 
 // RegisterControlChangeNotify dispatches through IAudioEndpointVolume's vtable slot 3.
-func (self *IAudioEndpointVolume) RegisterControlChangeNotify(pNotify *IAudioEndpointVolumeCallback) foundation.HRESULT {
+func (self *IAudioEndpointVolume) RegisterControlChangeNotify(pNotify *IAudioEndpointVolumeCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterControlChangeNotify dispatches through IAudioEndpointVolume's vtable slot 4.
-func (self *IAudioEndpointVolume) UnregisterControlChangeNotify(pNotify *IAudioEndpointVolumeCallback) foundation.HRESULT {
+func (self *IAudioEndpointVolume) UnregisterControlChangeNotify(pNotify *IAudioEndpointVolumeCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChannelCount dispatches through IAudioEndpointVolume's vtable slot 5.
-func (self *IAudioEndpointVolume) GetChannelCount(pnChannelCount *uint32) foundation.HRESULT {
+func (self *IAudioEndpointVolume) GetChannelCount(pnChannelCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnChannelCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMasterVolumeLevel dispatches through IAudioEndpointVolume's vtable slot 8.
-func (self *IAudioEndpointVolume) GetMasterVolumeLevel(pfLevelDB *float32) foundation.HRESULT {
+func (self *IAudioEndpointVolume) GetMasterVolumeLevel(pfLevelDB *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLevelDB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMasterVolumeLevelScalar dispatches through IAudioEndpointVolume's vtable slot 9.
-func (self *IAudioEndpointVolume) GetMasterVolumeLevelScalar(pfLevel *float32) foundation.HRESULT {
+func (self *IAudioEndpointVolume) GetMasterVolumeLevelScalar(pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChannelVolumeLevel dispatches through IAudioEndpointVolume's vtable slot 12.
-func (self *IAudioEndpointVolume) GetChannelVolumeLevel(nChannel uint32, pfLevelDB *float32) foundation.HRESULT {
+func (self *IAudioEndpointVolume) GetChannelVolumeLevel(nChannel uint32, pfLevelDB *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(nChannel), uintptr(unsafe.Pointer(pfLevelDB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChannelVolumeLevelScalar dispatches through IAudioEndpointVolume's vtable slot 13.
-func (self *IAudioEndpointVolume) GetChannelVolumeLevelScalar(nChannel uint32, pfLevel *float32) foundation.HRESULT {
+func (self *IAudioEndpointVolume) GetChannelVolumeLevelScalar(nChannel uint32, pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(nChannel), uintptr(unsafe.Pointer(pfLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMute dispatches through IAudioEndpointVolume's vtable slot 14.
-func (self *IAudioEndpointVolume) SetMute(bMute foundation.BOOL, pguidEventContext *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(bMute), uintptr(unsafe.Pointer(pguidEventContext)))
-	return foundation.HRESULT(r1)
+func (self *IAudioEndpointVolume) SetMute(bMute bool, pguidEventContext *win32.GUID) error {
+	_bMute := win32.Bool32(bMute)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(_bMute), uintptr(unsafe.Pointer(pguidEventContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMute dispatches through IAudioEndpointVolume's vtable slot 15.
-func (self *IAudioEndpointVolume) GetMute(pbMute *foundation.BOOL) foundation.HRESULT {
+func (self *IAudioEndpointVolume) GetMute(pbMute *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMute)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolumeStepInfo dispatches through IAudioEndpointVolume's vtable slot 16.
-func (self *IAudioEndpointVolume) GetVolumeStepInfo(pnStep *uint32, pnStepCount *uint32) foundation.HRESULT {
+func (self *IAudioEndpointVolume) GetVolumeStepInfo(pnStep *uint32, pnStepCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnStep)), uintptr(unsafe.Pointer(pnStepCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VolumeStepUp dispatches through IAudioEndpointVolume's vtable slot 17.
-func (self *IAudioEndpointVolume) VolumeStepUp(pguidEventContext *win32.GUID) foundation.HRESULT {
+func (self *IAudioEndpointVolume) VolumeStepUp(pguidEventContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidEventContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VolumeStepDown dispatches through IAudioEndpointVolume's vtable slot 18.
-func (self *IAudioEndpointVolume) VolumeStepDown(pguidEventContext *win32.GUID) foundation.HRESULT {
+func (self *IAudioEndpointVolume) VolumeStepDown(pguidEventContext *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidEventContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryHardwareSupport dispatches through IAudioEndpointVolume's vtable slot 19.
-func (self *IAudioEndpointVolume) QueryHardwareSupport(pdwHardwareSupportMask *uint32) foundation.HRESULT {
+func (self *IAudioEndpointVolume) QueryHardwareSupport(pdwHardwareSupportMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwHardwareSupportMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolumeRange dispatches through IAudioEndpointVolume's vtable slot 20.
-func (self *IAudioEndpointVolume) GetVolumeRange(pflVolumeMindB *float32, pflVolumeMaxdB *float32, pflVolumeIncrementdB *float32) foundation.HRESULT {
+func (self *IAudioEndpointVolume) GetVolumeRange(pflVolumeMindB *float32, pflVolumeMaxdB *float32, pflVolumeIncrementdB *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflVolumeMindB)), uintptr(unsafe.Pointer(pflVolumeMaxdB)), uintptr(unsafe.Pointer(pflVolumeIncrementdB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioEndpointVolumeCallback: https://learn.microsoft.com/windows/win32/api/endpointvolume/nn-endpointvolume-iaudioendpointvolumecallback
@@ -223,9 +224,9 @@ type IAudioEndpointVolumeCallback struct {
 var IID_IAudioEndpointVolumeCallback = win32.GUID{Data1: 0x657804fa, Data2: 0xd6ad, Data3: 0x4496, Data4: [8]byte{0x8a, 0x60, 0x35, 0x27, 0x52, 0xaf, 0x4f, 0x89}}
 
 // OnNotify dispatches through IAudioEndpointVolumeCallback's vtable slot 3.
-func (self *IAudioEndpointVolumeCallback) OnNotify(pNotify *mediaaudio.AUDIO_VOLUME_NOTIFICATION_DATA) foundation.HRESULT {
+func (self *IAudioEndpointVolumeCallback) OnNotify(pNotify *mediaaudio.AUDIO_VOLUME_NOTIFICATION_DATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioEndpointVolumeEx: https://learn.microsoft.com/windows/win32/api/endpointvolume/nn-endpointvolume-iaudioendpointvolumeex
@@ -238,9 +239,9 @@ type IAudioEndpointVolumeEx struct {
 var IID_IAudioEndpointVolumeEx = win32.GUID{Data1: 0x66e11784, Data2: 0xf695, Data3: 0x4f28, Data4: [8]byte{0xa5, 0x05, 0xa7, 0x08, 0x00, 0x81, 0xa7, 0x8f}}
 
 // GetVolumeRangeChannel dispatches through IAudioEndpointVolumeEx's vtable slot 21.
-func (self *IAudioEndpointVolumeEx) GetVolumeRangeChannel(iChannel uint32, pflVolumeMindB *float32, pflVolumeMaxdB *float32, pflVolumeIncrementdB *float32) foundation.HRESULT {
+func (self *IAudioEndpointVolumeEx) GetVolumeRangeChannel(iChannel uint32, pflVolumeMindB *float32, pflVolumeMaxdB *float32, pflVolumeIncrementdB *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(iChannel), uintptr(unsafe.Pointer(pflVolumeMindB)), uintptr(unsafe.Pointer(pflVolumeMaxdB)), uintptr(unsafe.Pointer(pflVolumeIncrementdB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioLfxControl: https://learn.microsoft.com/windows/win32/api/audioengineendpoint/nn-audioengineendpoint-iaudiolfxcontrol
@@ -253,15 +254,16 @@ type IAudioLfxControl struct {
 var IID_IAudioLfxControl = win32.GUID{Data1: 0x076a6922, Data2: 0xd802, Data3: 0x4f83, Data4: [8]byte{0xba, 0xf6, 0x40, 0x9d, 0x9c, 0xa1, 0x1b, 0xfe}}
 
 // SetLocalEffectsState dispatches through IAudioLfxControl's vtable slot 3.
-func (self *IAudioLfxControl) SetLocalEffectsState(bEnabled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
-	return foundation.HRESULT(r1)
+func (self *IAudioLfxControl) SetLocalEffectsState(bEnabled bool) error {
+	_bEnabled := win32.Bool32(bEnabled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_bEnabled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLocalEffectsState dispatches through IAudioLfxControl's vtable slot 4.
-func (self *IAudioLfxControl) GetLocalEffectsState(pbEnabled *foundation.BOOL) foundation.HRESULT {
+func (self *IAudioLfxControl) GetLocalEffectsState(pbEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioMeterInformation: https://learn.microsoft.com/windows/win32/api/endpointvolume/nn-endpointvolume-iaudiometerinformation
@@ -274,27 +276,27 @@ type IAudioMeterInformation struct {
 var IID_IAudioMeterInformation = win32.GUID{Data1: 0xc02216f6, Data2: 0x8c67, Data3: 0x4b5b, Data4: [8]byte{0x9d, 0x00, 0xd0, 0x08, 0xe7, 0x3e, 0x00, 0x64}}
 
 // GetPeakValue dispatches through IAudioMeterInformation's vtable slot 3.
-func (self *IAudioMeterInformation) GetPeakValue(pfPeak *float32) foundation.HRESULT {
+func (self *IAudioMeterInformation) GetPeakValue(pfPeak *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfPeak)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMeteringChannelCount dispatches through IAudioMeterInformation's vtable slot 4.
-func (self *IAudioMeterInformation) GetMeteringChannelCount(pnChannelCount *uint32) foundation.HRESULT {
+func (self *IAudioMeterInformation) GetMeteringChannelCount(pnChannelCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnChannelCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChannelsPeakValues dispatches through IAudioMeterInformation's vtable slot 5.
-func (self *IAudioMeterInformation) GetChannelsPeakValues(u32ChannelCount uint32, afPeakValues *float32) foundation.HRESULT {
+func (self *IAudioMeterInformation) GetChannelsPeakValues(u32ChannelCount uint32, afPeakValues *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(u32ChannelCount), uintptr(unsafe.Pointer(afPeakValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryHardwareSupport dispatches through IAudioMeterInformation's vtable slot 6.
-func (self *IAudioMeterInformation) QueryHardwareSupport(pdwHardwareSupportMask *uint32) foundation.HRESULT {
+func (self *IAudioMeterInformation) QueryHardwareSupport(pdwHardwareSupportMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwHardwareSupportMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IHardwareAudioEngineBase: https://learn.microsoft.com/windows/win32/api/audioengineendpoint/nn-audioengineendpoint-ihardwareaudioenginebase
@@ -307,31 +309,34 @@ type IHardwareAudioEngineBase struct {
 var IID_IHardwareAudioEngineBase = win32.GUID{Data1: 0xeddce3e4, Data2: 0xf3c1, Data3: 0x453a, Data4: [8]byte{0xb4, 0x61, 0x22, 0x35, 0x63, 0xcb, 0xd8, 0x86}}
 
 // GetAvailableOffloadConnectorCount dispatches through IHardwareAudioEngineBase's vtable slot 3.
-func (self *IHardwareAudioEngineBase) GetAvailableOffloadConnectorCount(_pwstrDeviceId foundation.PWSTR, _uConnectorId uint32, _pAvailableConnectorInstanceCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwstrDeviceId)), uintptr(_uConnectorId), uintptr(unsafe.Pointer(_pAvailableConnectorInstanceCount)))
-	return foundation.HRESULT(r1)
+func (self *IHardwareAudioEngineBase) GetAvailableOffloadConnectorCount(_pwstrDeviceId string, _uConnectorId uint32, _pAvailableConnectorInstanceCount *uint32) error {
+	__pwstrDeviceId := win32.UTF16Ptr(_pwstrDeviceId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__pwstrDeviceId)), uintptr(_uConnectorId), uintptr(unsafe.Pointer(_pAvailableConnectorInstanceCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEngineFormat dispatches through IHardwareAudioEngineBase's vtable slot 4.
-func (self *IHardwareAudioEngineBase) GetEngineFormat(pDevice *mediaaudio.IMMDevice, _bRequestDeviceFormat foundation.BOOL, _ppwfxFormat *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(_bRequestDeviceFormat), uintptr(unsafe.Pointer(_ppwfxFormat)))
-	return foundation.HRESULT(r1)
+func (self *IHardwareAudioEngineBase) GetEngineFormat(pDevice *mediaaudio.IMMDevice, _bRequestDeviceFormat bool, _ppwfxFormat *unsafe.Pointer) error {
+	__bRequestDeviceFormat := win32.Bool32(_bRequestDeviceFormat)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(__bRequestDeviceFormat), uintptr(unsafe.Pointer(_ppwfxFormat)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEngineDeviceFormat dispatches through IHardwareAudioEngineBase's vtable slot 5.
-func (self *IHardwareAudioEngineBase) SetEngineDeviceFormat(pDevice *mediaaudio.IMMDevice, _pwfxFormat unsafe.Pointer) foundation.HRESULT {
+func (self *IHardwareAudioEngineBase) SetEngineDeviceFormat(pDevice *mediaaudio.IMMDevice, _pwfxFormat unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(_pwfxFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGfxState dispatches through IHardwareAudioEngineBase's vtable slot 6.
-func (self *IHardwareAudioEngineBase) SetGfxState(pDevice *mediaaudio.IMMDevice, _bEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(_bEnable))
-	return foundation.HRESULT(r1)
+func (self *IHardwareAudioEngineBase) SetGfxState(pDevice *mediaaudio.IMMDevice, _bEnable bool) error {
+	__bEnable := win32.Bool32(_bEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(__bEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGfxState dispatches through IHardwareAudioEngineBase's vtable slot 7.
-func (self *IHardwareAudioEngineBase) GetGfxState(pDevice *mediaaudio.IMMDevice, _pbEnable *foundation.BOOL) foundation.HRESULT {
+func (self *IHardwareAudioEngineBase) GetGfxState(pDevice *mediaaudio.IMMDevice, _pbEnable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(_pbEnable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

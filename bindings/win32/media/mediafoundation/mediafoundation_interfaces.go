@@ -34,9 +34,9 @@ type IAdvancedMediaCapture struct {
 var IID_IAdvancedMediaCapture = win32.GUID{Data1: 0xd0751585, Data2: 0xd216, Data3: 0x4344, Data4: [8]byte{0xb5, 0xbf, 0x46, 0x3b, 0x68, 0xf9, 0x77, 0xbb}}
 
 // GetAdvancedMediaCaptureSettings dispatches through IAdvancedMediaCapture's vtable slot 3.
-func (self *IAdvancedMediaCapture) GetAdvancedMediaCaptureSettings(value **IAdvancedMediaCaptureSettings) foundation.HRESULT {
+func (self *IAdvancedMediaCapture) GetAdvancedMediaCaptureSettings(value **IAdvancedMediaCaptureSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAdvancedMediaCaptureInitializationSettings: https://learn.microsoft.com/windows/win32/api/mfmediacapture/nn-mfmediacapture-iadvancedmediacaptureinitializationsettings
@@ -49,9 +49,9 @@ type IAdvancedMediaCaptureInitializationSettings struct {
 var IID_IAdvancedMediaCaptureInitializationSettings = win32.GUID{Data1: 0x3de21209, Data2: 0x8ba6, Data3: 0x4f2a, Data4: [8]byte{0xa5, 0x77, 0x28, 0x19, 0xb5, 0x6f, 0xf1, 0x4d}}
 
 // SetDirectxDeviceManager dispatches through IAdvancedMediaCaptureInitializationSettings's vtable slot 3.
-func (self *IAdvancedMediaCaptureInitializationSettings) SetDirectxDeviceManager(value *IMFDXGIDeviceManager) foundation.HRESULT {
+func (self *IAdvancedMediaCaptureInitializationSettings) SetDirectxDeviceManager(value *IMFDXGIDeviceManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAdvancedMediaCaptureSettings: https://learn.microsoft.com/windows/win32/api/mfmediacapture/nn-mfmediacapture-iadvancedmediacapturesettings
@@ -64,9 +64,9 @@ type IAdvancedMediaCaptureSettings struct {
 var IID_IAdvancedMediaCaptureSettings = win32.GUID{Data1: 0x24e0485f, Data2: 0xa33e, Data3: 0x4aa1, Data4: [8]byte{0xb5, 0x64, 0x60, 0x19, 0xb1, 0xd1, 0x4f, 0x65}}
 
 // GetDirectxDeviceManager dispatches through IAdvancedMediaCaptureSettings's vtable slot 3.
-func (self *IAdvancedMediaCaptureSettings) GetDirectxDeviceManager(value **IMFDXGIDeviceManager) foundation.HRESULT {
+func (self *IAdvancedMediaCaptureSettings) GetDirectxDeviceManager(value **IMFDXGIDeviceManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ebbaf249-afc2-4582-91c6-b60df2e84954
@@ -78,9 +78,9 @@ type IAudioSourceProvider struct {
 var IID_IAudioSourceProvider = win32.GUID{Data1: 0xebbaf249, Data2: 0xafc2, Data3: 0x4582, Data4: [8]byte{0x91, 0xc6, 0xb6, 0x0d, 0xf2, 0xe8, 0x49, 0x54}}
 
 // ProvideInput dispatches through IAudioSourceProvider's vtable slot 3.
-func (self *IAudioSourceProvider) ProvideInput(dwSampleCount uint32, pdwChannelCount *uint32, pInterleavedAudioData *float32) foundation.HRESULT {
+func (self *IAudioSourceProvider) ProvideInput(dwSampleCount uint32, pdwChannelCount *uint32, pInterleavedAudioData *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSampleCount), uintptr(unsafe.Pointer(pdwChannelCount)), uintptr(unsafe.Pointer(pInterleavedAudioData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3f07f7b7-c680-41d9-9423-915107ec9ff9
@@ -92,9 +92,9 @@ type IClusterDetector struct {
 var IID_IClusterDetector = win32.GUID{Data1: 0x3f07f7b7, Data2: 0xc680, Data3: 0x41d9, Data4: [8]byte{0x94, 0x23, 0x91, 0x51, 0x07, 0xec, 0x9f, 0xf9}}
 
 // Initialize dispatches through IClusterDetector's vtable slot 3.
-func (self *IClusterDetector) Initialize(wBaseEntryLevel uint16, wClusterEntryLevel uint16) foundation.HRESULT {
+func (self *IClusterDetector) Initialize(wBaseEntryLevel uint16, wClusterEntryLevel uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(wBaseEntryLevel), uintptr(wClusterEntryLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICodecAPI: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-icodecapi
@@ -107,93 +107,93 @@ type ICodecAPI struct {
 var IID_ICodecAPI = win32.GUID{Data1: 0x901db4c7, Data2: 0x31ce, Data3: 0x41a2, Data4: [8]byte{0x85, 0xdc, 0x8f, 0xa0, 0xbf, 0x41, 0xb8, 0xda}}
 
 // IsSupported dispatches through ICodecAPI's vtable slot 3.
-func (self *ICodecAPI) IsSupported(Api *win32.GUID) foundation.HRESULT {
+func (self *ICodecAPI) IsSupported(Api *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsModifiable dispatches through ICodecAPI's vtable slot 4.
-func (self *ICodecAPI) IsModifiable(Api *win32.GUID) foundation.HRESULT {
+func (self *ICodecAPI) IsModifiable(Api *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParameterRange dispatches through ICodecAPI's vtable slot 5.
-func (self *ICodecAPI) GetParameterRange(Api *win32.GUID, ValueMin *systemvariant.VARIANT, ValueMax *systemvariant.VARIANT, SteppingDelta *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ICodecAPI) GetParameterRange(Api *win32.GUID, ValueMin *systemvariant.VARIANT, ValueMax *systemvariant.VARIANT, SteppingDelta *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(ValueMin)), uintptr(unsafe.Pointer(ValueMax)), uintptr(unsafe.Pointer(SteppingDelta)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParameterValues dispatches through ICodecAPI's vtable slot 6.
-func (self *ICodecAPI) GetParameterValues(Api *win32.GUID, Values **systemvariant.VARIANT, ValuesCount *uint32) foundation.HRESULT {
+func (self *ICodecAPI) GetParameterValues(Api *win32.GUID, Values **systemvariant.VARIANT, ValuesCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(Values)), uintptr(unsafe.Pointer(ValuesCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultValue dispatches through ICodecAPI's vtable slot 7.
-func (self *ICodecAPI) GetDefaultValue(Api *win32.GUID, Value *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ICodecAPI) GetDefaultValue(Api *win32.GUID, Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValue dispatches through ICodecAPI's vtable slot 8.
-func (self *ICodecAPI) GetValue(Api *win32.GUID, Value *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ICodecAPI) GetValue(Api *win32.GUID, Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValue dispatches through ICodecAPI's vtable slot 9.
-func (self *ICodecAPI) SetValue(Api *win32.GUID, Value *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ICodecAPI) SetValue(Api *win32.GUID, Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterForEvent dispatches through ICodecAPI's vtable slot 10.
-func (self *ICodecAPI) RegisterForEvent(Api *win32.GUID, userData uintptr) foundation.HRESULT {
+func (self *ICodecAPI) RegisterForEvent(Api *win32.GUID, userData uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(userData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterForEvent dispatches through ICodecAPI's vtable slot 11.
-func (self *ICodecAPI) UnregisterForEvent(Api *win32.GUID) foundation.HRESULT {
+func (self *ICodecAPI) UnregisterForEvent(Api *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllDefaults dispatches through ICodecAPI's vtable slot 12.
-func (self *ICodecAPI) SetAllDefaults() foundation.HRESULT {
+func (self *ICodecAPI) SetAllDefaults() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValueWithNotify dispatches through ICodecAPI's vtable slot 13.
-func (self *ICodecAPI) SetValueWithNotify(Api *win32.GUID, Value *systemvariant.VARIANT, ChangedParam **win32.GUID, ChangedParamCount *uint32) foundation.HRESULT {
+func (self *ICodecAPI) SetValueWithNotify(Api *win32.GUID, Value *systemvariant.VARIANT, ChangedParam **win32.GUID, ChangedParamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Api)), uintptr(unsafe.Pointer(Value)), uintptr(unsafe.Pointer(ChangedParam)), uintptr(unsafe.Pointer(ChangedParamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllDefaultsWithNotify dispatches through ICodecAPI's vtable slot 14.
-func (self *ICodecAPI) SetAllDefaultsWithNotify(ChangedParam **win32.GUID, ChangedParamCount *uint32) foundation.HRESULT {
+func (self *ICodecAPI) SetAllDefaultsWithNotify(ChangedParam **win32.GUID, ChangedParamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ChangedParam)), uintptr(unsafe.Pointer(ChangedParamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllSettings dispatches through ICodecAPI's vtable slot 15.
-func (self *ICodecAPI) GetAllSettings(__MIDL__ICodecAPI0000 *systemcom.IStream) foundation.HRESULT {
+func (self *ICodecAPI) GetAllSettings(__MIDL__ICodecAPI0000 *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__ICodecAPI0000)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllSettings dispatches through ICodecAPI's vtable slot 16.
-func (self *ICodecAPI) SetAllSettings(__MIDL__ICodecAPI0001 *systemcom.IStream) foundation.HRESULT {
+func (self *ICodecAPI) SetAllSettings(__MIDL__ICodecAPI0001 *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__ICodecAPI0001)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllSettingsWithNotify dispatches through ICodecAPI's vtable slot 17.
-func (self *ICodecAPI) SetAllSettingsWithNotify(__MIDL__ICodecAPI0002 *systemcom.IStream, ChangedParam **win32.GUID, ChangedParamCount *uint32) foundation.HRESULT {
+func (self *ICodecAPI) SetAllSettingsWithNotify(__MIDL__ICodecAPI0002 *systemcom.IStream, ChangedParam **win32.GUID, ChangedParamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__ICodecAPI0002)), uintptr(unsafe.Pointer(ChangedParam)), uintptr(unsafe.Pointer(ChangedParamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoDecodeCommandList: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videodecodecommandlist
@@ -206,15 +206,15 @@ type ID3D12VideoDecodeCommandList struct {
 var IID_ID3D12VideoDecodeCommandList = win32.GUID{Data1: 0x3b60536e, Data2: 0xad29, Data3: 0x4e64, Data4: [8]byte{0xa2, 0x69, 0xf8, 0x53, 0x83, 0x7e, 0x5e, 0x53}}
 
 // Close dispatches through ID3D12VideoDecodeCommandList's vtable slot 9.
-func (self *ID3D12VideoDecodeCommandList) Close() foundation.HRESULT {
+func (self *ID3D12VideoDecodeCommandList) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ID3D12VideoDecodeCommandList's vtable slot 10.
-func (self *ID3D12VideoDecodeCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator) foundation.HRESULT {
+func (self *ID3D12VideoDecodeCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllocator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearState dispatches through ID3D12VideoDecodeCommandList's vtable slot 11.
@@ -348,9 +348,9 @@ type ID3D12VideoDecoder1 struct {
 var IID_ID3D12VideoDecoder1 = win32.GUID{Data1: 0x79a2e5fb, Data2: 0xccd2, Data3: 0x469a, Data4: [8]byte{0x9f, 0xde, 0x19, 0x5d, 0x10, 0x95, 0x1f, 0x7e}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoDecoder1's vtable slot 9.
-func (self *ID3D12VideoDecoder1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDecoder1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoDecoderHeap: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videodecoderheap
@@ -372,9 +372,9 @@ type ID3D12VideoDecoderHeap1 struct {
 var IID_ID3D12VideoDecoderHeap1 = win32.GUID{Data1: 0xda1d98c5, Data2: 0x539f, Data3: 0x41b2, Data4: [8]byte{0xbf, 0x6b, 0x11, 0x98, 0xa0, 0x3b, 0x6d, 0x26}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoDecoderHeap1's vtable slot 9.
-func (self *ID3D12VideoDecoderHeap1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDecoderHeap1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoDevice: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videodevice
@@ -387,27 +387,27 @@ type ID3D12VideoDevice struct {
 var IID_ID3D12VideoDevice = win32.GUID{Data1: 0x1f052807, Data2: 0x0b46, Data3: 0x4acc, Data4: [8]byte{0x8a, 0x89, 0x36, 0x4f, 0x79, 0x37, 0x18, 0xa4}}
 
 // CheckFeatureSupport dispatches through ID3D12VideoDevice's vtable slot 3.
-func (self *ID3D12VideoDevice) CheckFeatureSupport(FeatureVideo D3D12_FEATURE_VIDEO, pFeatureSupportData unsafe.Pointer, FeatureSupportDataSize uint32) foundation.HRESULT {
+func (self *ID3D12VideoDevice) CheckFeatureSupport(FeatureVideo D3D12_FEATURE_VIDEO, pFeatureSupportData unsafe.Pointer, FeatureSupportDataSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(FeatureVideo), uintptr(unsafe.Pointer(pFeatureSupportData)), uintptr(FeatureSupportDataSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoDecoder dispatches through ID3D12VideoDevice's vtable slot 4.
-func (self *ID3D12VideoDevice) CreateVideoDecoder(pDesc *D3D12_VIDEO_DECODER_DESC, riid *win32.GUID, ppVideoDecoder *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice) CreateVideoDecoder(pDesc *D3D12_VIDEO_DECODER_DESC, riid *win32.GUID, ppVideoDecoder *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoDecoder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoDecoderHeap dispatches through ID3D12VideoDevice's vtable slot 5.
-func (self *ID3D12VideoDevice) CreateVideoDecoderHeap(pVideoDecoderHeapDesc *D3D12_VIDEO_DECODER_HEAP_DESC, riid *win32.GUID, ppVideoDecoderHeap *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice) CreateVideoDecoderHeap(pVideoDecoderHeapDesc *D3D12_VIDEO_DECODER_HEAP_DESC, riid *win32.GUID, ppVideoDecoderHeap *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoDecoderHeapDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoDecoderHeap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoProcessor dispatches through ID3D12VideoDevice's vtable slot 6.
-func (self *ID3D12VideoDevice) CreateVideoProcessor(NodeMask uint32, pOutputStreamDesc *D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, NumInputStreamDescs uint32, pInputStreamDescs *D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, riid *win32.GUID, ppVideoProcessor *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice) CreateVideoProcessor(NodeMask uint32, pOutputStreamDesc *D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, NumInputStreamDescs uint32, pInputStreamDescs *D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, riid *win32.GUID, ppVideoProcessor *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(NodeMask), uintptr(unsafe.Pointer(pOutputStreamDesc)), uintptr(NumInputStreamDescs), uintptr(unsafe.Pointer(pInputStreamDescs)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoProcessor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoDevice1: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videodevice1
@@ -420,15 +420,15 @@ type ID3D12VideoDevice1 struct {
 var IID_ID3D12VideoDevice1 = win32.GUID{Data1: 0x981611ad, Data2: 0xa144, Data3: 0x4c83, Data4: [8]byte{0x98, 0x90, 0xf3, 0x0e, 0x26, 0xd6, 0x58, 0xab}}
 
 // CreateVideoMotionEstimator dispatches through ID3D12VideoDevice1's vtable slot 7.
-func (self *ID3D12VideoDevice1) CreateVideoMotionEstimator(pDesc *D3D12_VIDEO_MOTION_ESTIMATOR_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionEstimator *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice1) CreateVideoMotionEstimator(pDesc *D3D12_VIDEO_MOTION_ESTIMATOR_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionEstimator *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoMotionEstimator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoMotionVectorHeap dispatches through ID3D12VideoDevice1's vtable slot 8.
-func (self *ID3D12VideoDevice1) CreateVideoMotionVectorHeap(pDesc *D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionVectorHeap *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice1) CreateVideoMotionVectorHeap(pDesc *D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoMotionVectorHeap *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoMotionVectorHeap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoDevice2: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videodevice2
@@ -441,33 +441,33 @@ type ID3D12VideoDevice2 struct {
 var IID_ID3D12VideoDevice2 = win32.GUID{Data1: 0xf019ac49, Data2: 0xf838, Data3: 0x4a95, Data4: [8]byte{0x9b, 0x17, 0x57, 0x94, 0x37, 0xc8, 0xf5, 0x13}}
 
 // CreateVideoDecoder1 dispatches through ID3D12VideoDevice2's vtable slot 9.
-func (self *ID3D12VideoDevice2) CreateVideoDecoder1(pDesc *D3D12_VIDEO_DECODER_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoder *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice2) CreateVideoDecoder1(pDesc *D3D12_VIDEO_DECODER_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoder *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoDecoder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoDecoderHeap1 dispatches through ID3D12VideoDevice2's vtable slot 10.
-func (self *ID3D12VideoDevice2) CreateVideoDecoderHeap1(pVideoDecoderHeapDesc *D3D12_VIDEO_DECODER_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoderHeap *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice2) CreateVideoDecoderHeap1(pVideoDecoderHeapDesc *D3D12_VIDEO_DECODER_HEAP_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoDecoderHeap *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoDecoderHeapDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoDecoderHeap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoProcessor1 dispatches through ID3D12VideoDevice2's vtable slot 11.
-func (self *ID3D12VideoDevice2) CreateVideoProcessor1(NodeMask uint32, pOutputStreamDesc *D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, NumInputStreamDescs uint32, pInputStreamDescs *D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoProcessor *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice2) CreateVideoProcessor1(NodeMask uint32, pOutputStreamDesc *D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC, NumInputStreamDescs uint32, pInputStreamDescs *D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoProcessor *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(NodeMask), uintptr(unsafe.Pointer(pOutputStreamDesc)), uintptr(NumInputStreamDescs), uintptr(unsafe.Pointer(pInputStreamDescs)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoProcessor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoExtensionCommand dispatches through ID3D12VideoDevice2's vtable slot 12.
-func (self *ID3D12VideoDevice2) CreateVideoExtensionCommand(pDesc *D3D12_VIDEO_EXTENSION_COMMAND_DESC, pCreationParameters unsafe.Pointer, CreationParametersDataSizeInBytes uintptr, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoExtensionCommand *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice2) CreateVideoExtensionCommand(pDesc *D3D12_VIDEO_EXTENSION_COMMAND_DESC, pCreationParameters unsafe.Pointer, CreationParametersDataSizeInBytes uintptr, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, riid *win32.GUID, ppVideoExtensionCommand *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(pCreationParameters)), uintptr(CreationParametersDataSizeInBytes), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoExtensionCommand)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExecuteExtensionCommand dispatches through ID3D12VideoDevice2's vtable slot 13.
-func (self *ID3D12VideoDevice2) ExecuteExtensionCommand(pExtensionCommand *ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr, pOutputData unsafe.Pointer, OutputDataSizeInBytes uintptr) foundation.HRESULT {
+func (self *ID3D12VideoDevice2) ExecuteExtensionCommand(pExtensionCommand *ID3D12VideoExtensionCommand, pExecutionParameters unsafe.Pointer, ExecutionParametersSizeInBytes uintptr, pOutputData unsafe.Pointer, OutputDataSizeInBytes uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExtensionCommand)), uintptr(unsafe.Pointer(pExecutionParameters)), uintptr(ExecutionParametersSizeInBytes), uintptr(unsafe.Pointer(pOutputData)), uintptr(OutputDataSizeInBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoDevice3: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videodevice3
@@ -480,15 +480,15 @@ type ID3D12VideoDevice3 struct {
 var IID_ID3D12VideoDevice3 = win32.GUID{Data1: 0x4243adb4, Data2: 0x3a32, Data3: 0x4666, Data4: [8]byte{0x97, 0x3c, 0x0c, 0xcc, 0x56, 0x25, 0xdc, 0x44}}
 
 // CreateVideoEncoder dispatches through ID3D12VideoDevice3's vtable slot 14.
-func (self *ID3D12VideoDevice3) CreateVideoEncoder(pDesc *D3D12_VIDEO_ENCODER_DESC, riid *win32.GUID, ppVideoEncoder *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice3) CreateVideoEncoder(pDesc *D3D12_VIDEO_ENCODER_DESC, riid *win32.GUID, ppVideoEncoder *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoEncoder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoEncoderHeap dispatches through ID3D12VideoDevice3's vtable slot 15.
-func (self *ID3D12VideoDevice3) CreateVideoEncoderHeap(pDesc *D3D12_VIDEO_ENCODER_HEAP_DESC, riid *win32.GUID, ppVideoEncoderHeap *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice3) CreateVideoEncoderHeap(pDesc *D3D12_VIDEO_ENCODER_HEAP_DESC, riid *win32.GUID, ppVideoEncoderHeap *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoEncoderHeap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e59ad09e-f1ae-42bb-8983-9f6e5586c4eb
@@ -500,9 +500,9 @@ type ID3D12VideoDevice4 struct {
 var IID_ID3D12VideoDevice4 = win32.GUID{Data1: 0xe59ad09e, Data2: 0xf1ae, Data3: 0x42bb, Data4: [8]byte{0x89, 0x83, 0x9f, 0x6e, 0x55, 0x86, 0xc4, 0xeb}}
 
 // CreateVideoEncoderHeap1 dispatches through ID3D12VideoDevice4's vtable slot 16.
-func (self *ID3D12VideoDevice4) CreateVideoEncoderHeap1(pDesc *D3D12_VIDEO_ENCODER_HEAP_DESC1, riid *win32.GUID, ppVideoEncoderHeap *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoDevice4) CreateVideoEncoderHeap1(pDesc *D3D12_VIDEO_ENCODER_HEAP_DESC1, riid *win32.GUID, ppVideoEncoderHeap *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoEncoderHeap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoEncodeCommandList: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videoencodecommandlist
@@ -515,15 +515,15 @@ type ID3D12VideoEncodeCommandList struct {
 var IID_ID3D12VideoEncodeCommandList = win32.GUID{Data1: 0x8455293a, Data2: 0x0cbd, Data3: 0x4831, Data4: [8]byte{0x9b, 0x39, 0xfb, 0xdb, 0xab, 0x72, 0x47, 0x23}}
 
 // Close dispatches through ID3D12VideoEncodeCommandList's vtable slot 9.
-func (self *ID3D12VideoEncodeCommandList) Close() foundation.HRESULT {
+func (self *ID3D12VideoEncodeCommandList) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ID3D12VideoEncodeCommandList's vtable slot 10.
-func (self *ID3D12VideoEncodeCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator) foundation.HRESULT {
+func (self *ID3D12VideoEncodeCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllocator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearState dispatches through ID3D12VideoEncodeCommandList's vtable slot 11.
@@ -744,9 +744,9 @@ func (self *ID3D12VideoEncoderHeap) GetResolutionListCount() uint32 {
 }
 
 // GetResolutionList dispatches through ID3D12VideoEncoderHeap's vtable slot 14.
-func (self *ID3D12VideoEncoderHeap) GetResolutionList(ResolutionsListCount uint32, pResolutionList *D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC) foundation.HRESULT {
+func (self *ID3D12VideoEncoderHeap) GetResolutionList(ResolutionsListCount uint32, pResolutionList *D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ResolutionsListCount), uintptr(unsafe.Pointer(pResolutionList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ea8f1968-4aa0-43a4-9d30-ba86ec84d4f9
@@ -773,9 +773,9 @@ type ID3D12VideoExtensionCommand struct {
 var IID_ID3D12VideoExtensionCommand = win32.GUID{Data1: 0x554e41e8, Data2: 0xae8e, Data3: 0x4a8c, Data4: [8]byte{0xb7, 0xd2, 0x5b, 0x4f, 0x27, 0x4a, 0x30, 0xe4}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoExtensionCommand's vtable slot 9.
-func (self *ID3D12VideoExtensionCommand) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoExtensionCommand) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoMotionEstimator: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videomotionestimator
@@ -788,9 +788,9 @@ type ID3D12VideoMotionEstimator struct {
 var IID_ID3D12VideoMotionEstimator = win32.GUID{Data1: 0x33fdae0e, Data2: 0x098b, Data3: 0x428f, Data4: [8]byte{0x87, 0xbb, 0x34, 0xb6, 0x95, 0xde, 0x08, 0xf8}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoMotionEstimator's vtable slot 9.
-func (self *ID3D12VideoMotionEstimator) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoMotionEstimator) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoMotionVectorHeap: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videomotionvectorheap
@@ -803,9 +803,9 @@ type ID3D12VideoMotionVectorHeap struct {
 var IID_ID3D12VideoMotionVectorHeap = win32.GUID{Data1: 0x5be17987, Data2: 0x743a, Data3: 0x4061, Data4: [8]byte{0x83, 0x4b, 0x23, 0xd2, 0x2d, 0xae, 0xa5, 0x05}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoMotionVectorHeap's vtable slot 9.
-func (self *ID3D12VideoMotionVectorHeap) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoMotionVectorHeap) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoProcessCommandList: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videoprocesscommandlist
@@ -818,15 +818,15 @@ type ID3D12VideoProcessCommandList struct {
 var IID_ID3D12VideoProcessCommandList = win32.GUID{Data1: 0xaeb2543a, Data2: 0x167f, Data3: 0x4682, Data4: [8]byte{0xac, 0xc8, 0xd1, 0x59, 0xed, 0x4a, 0x62, 0x09}}
 
 // Close dispatches through ID3D12VideoProcessCommandList's vtable slot 9.
-func (self *ID3D12VideoProcessCommandList) Close() foundation.HRESULT {
+func (self *ID3D12VideoProcessCommandList) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ID3D12VideoProcessCommandList's vtable slot 10.
-func (self *ID3D12VideoProcessCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator) foundation.HRESULT {
+func (self *ID3D12VideoProcessCommandList) Reset(pAllocator *graphicsdirect3d12.ID3D12CommandAllocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllocator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearState dispatches through ID3D12VideoProcessCommandList's vtable slot 11.
@@ -963,9 +963,9 @@ func (self *ID3D12VideoProcessor) GetNumInputStreamDescs() uint32 {
 }
 
 // GetInputStreamDescs dispatches through ID3D12VideoProcessor's vtable slot 10.
-func (self *ID3D12VideoProcessor) GetInputStreamDescs(NumInputStreamDescs uint32, pInputStreamDescs *D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC) foundation.HRESULT {
+func (self *ID3D12VideoProcessor) GetInputStreamDescs(NumInputStreamDescs uint32, pInputStreamDescs *D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(NumInputStreamDescs), uintptr(unsafe.Pointer(pInputStreamDescs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D12VideoProcessor1: https://learn.microsoft.com/windows/win32/api/d3d12video/nn-d3d12video-id3d12videoprocessor1
@@ -978,9 +978,9 @@ type ID3D12VideoProcessor1 struct {
 var IID_ID3D12VideoProcessor1 = win32.GUID{Data1: 0xf3cfe615, Data2: 0x553f, Data3: 0x425c, Data4: [8]byte{0x86, 0xd8, 0xee, 0x8c, 0x1b, 0x1f, 0xb0, 0x1c}}
 
 // GetProtectedResourceSession dispatches through ID3D12VideoProcessor1's vtable slot 12.
-func (self *ID3D12VideoProcessor1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D12VideoProcessor1) GetProtectedResourceSession(riid *win32.GUID, ppProtectedSession *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppProtectedSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXVAHD_Device: https://learn.microsoft.com/windows/win32/api/dxvahd/nn-dxvahd-idxvahd_device
@@ -993,51 +993,51 @@ type IDXVAHD_Device struct {
 var IID_IDXVAHD_Device = win32.GUID{Data1: 0x95f12dfd, Data2: 0xd77e, Data3: 0x49be, Data4: [8]byte{0x81, 0x5f, 0x57, 0xd5, 0x79, 0x63, 0x4d, 0x6d}}
 
 // CreateVideoSurface dispatches through IDXVAHD_Device's vtable slot 3.
-func (self *IDXVAHD_Device) CreateVideoSurface(Width uint32, Height uint32, Format graphicsdirect3d9.D3DFORMAT, Pool graphicsdirect3d9.D3DPOOL, Usage uint32, Type DXVAHD_SURFACE_TYPE, NumSurfaces uint32, ppSurfaces **graphicsdirect3d9.IDirect3DSurface9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDXVAHD_Device) CreateVideoSurface(Width uint32, Height uint32, Format graphicsdirect3d9.D3DFORMAT, Pool graphicsdirect3d9.D3DPOOL, Usage uint32, Type DXVAHD_SURFACE_TYPE, NumSurfaces uint32, ppSurfaces **graphicsdirect3d9.IDirect3DSurface9, pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(Pool), uintptr(Usage), uintptr(Type), uintptr(NumSurfaces), uintptr(unsafe.Pointer(ppSurfaces)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorDeviceCaps dispatches through IDXVAHD_Device's vtable slot 4.
-func (self *IDXVAHD_Device) GetVideoProcessorDeviceCaps(pCaps *DXVAHD_VPDEVCAPS) foundation.HRESULT {
+func (self *IDXVAHD_Device) GetVideoProcessorDeviceCaps(pCaps *DXVAHD_VPDEVCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorOutputFormats dispatches through IDXVAHD_Device's vtable slot 5.
-func (self *IDXVAHD_Device) GetVideoProcessorOutputFormats(Count uint32, pFormats *graphicsdirect3d9.D3DFORMAT) foundation.HRESULT {
+func (self *IDXVAHD_Device) GetVideoProcessorOutputFormats(Count uint32, pFormats *graphicsdirect3d9.D3DFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(pFormats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorInputFormats dispatches through IDXVAHD_Device's vtable slot 6.
-func (self *IDXVAHD_Device) GetVideoProcessorInputFormats(Count uint32, pFormats *graphicsdirect3d9.D3DFORMAT) foundation.HRESULT {
+func (self *IDXVAHD_Device) GetVideoProcessorInputFormats(Count uint32, pFormats *graphicsdirect3d9.D3DFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(pFormats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorCaps dispatches through IDXVAHD_Device's vtable slot 7.
-func (self *IDXVAHD_Device) GetVideoProcessorCaps(Count uint32, pCaps *DXVAHD_VPCAPS) foundation.HRESULT {
+func (self *IDXVAHD_Device) GetVideoProcessorCaps(Count uint32, pCaps *DXVAHD_VPCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(pCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorCustomRates dispatches through IDXVAHD_Device's vtable slot 8.
-func (self *IDXVAHD_Device) GetVideoProcessorCustomRates(pVPGuid *win32.GUID, Count uint32, pRates *DXVAHD_CUSTOM_RATE_DATA) foundation.HRESULT {
+func (self *IDXVAHD_Device) GetVideoProcessorCustomRates(pVPGuid *win32.GUID, Count uint32, pRates *DXVAHD_CUSTOM_RATE_DATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVPGuid)), uintptr(Count), uintptr(unsafe.Pointer(pRates)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorFilterRange dispatches through IDXVAHD_Device's vtable slot 9.
-func (self *IDXVAHD_Device) GetVideoProcessorFilterRange(Filter DXVAHD_FILTER, pRange *DXVAHD_FILTER_RANGE_DATA) foundation.HRESULT {
+func (self *IDXVAHD_Device) GetVideoProcessorFilterRange(Filter DXVAHD_FILTER, pRange *DXVAHD_FILTER_RANGE_DATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Filter), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoProcessor dispatches through IDXVAHD_Device's vtable slot 10.
-func (self *IDXVAHD_Device) CreateVideoProcessor(pVPGuid *win32.GUID, ppVideoProcessor **IDXVAHD_VideoProcessor) foundation.HRESULT {
+func (self *IDXVAHD_Device) CreateVideoProcessor(pVPGuid *win32.GUID, ppVideoProcessor **IDXVAHD_VideoProcessor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVPGuid)), uintptr(unsafe.Pointer(ppVideoProcessor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXVAHD_VideoProcessor: https://learn.microsoft.com/windows/win32/api/dxvahd/nn-dxvahd-idxvahd_videoprocessor
@@ -1050,33 +1050,33 @@ type IDXVAHD_VideoProcessor struct {
 var IID_IDXVAHD_VideoProcessor = win32.GUID{Data1: 0x95f4edf4, Data2: 0x6e03, Data3: 0x4cd7, Data4: [8]byte{0xbe, 0x1b, 0x30, 0x75, 0xd6, 0x65, 0xaa, 0x52}}
 
 // SetVideoProcessBltState dispatches through IDXVAHD_VideoProcessor's vtable slot 3.
-func (self *IDXVAHD_VideoProcessor) SetVideoProcessBltState(State DXVAHD_BLT_STATE, DataSize uint32, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IDXVAHD_VideoProcessor) SetVideoProcessBltState(State DXVAHD_BLT_STATE, DataSize uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(State), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessBltState dispatches through IDXVAHD_VideoProcessor's vtable slot 4.
-func (self *IDXVAHD_VideoProcessor) GetVideoProcessBltState(State DXVAHD_BLT_STATE, DataSize uint32, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IDXVAHD_VideoProcessor) GetVideoProcessBltState(State DXVAHD_BLT_STATE, DataSize uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(State), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVideoProcessStreamState dispatches through IDXVAHD_VideoProcessor's vtable slot 5.
-func (self *IDXVAHD_VideoProcessor) SetVideoProcessStreamState(StreamNumber uint32, State DXVAHD_STREAM_STATE, DataSize uint32, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IDXVAHD_VideoProcessor) SetVideoProcessStreamState(StreamNumber uint32, State DXVAHD_STREAM_STATE, DataSize uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(StreamNumber), uintptr(State), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessStreamState dispatches through IDXVAHD_VideoProcessor's vtable slot 6.
-func (self *IDXVAHD_VideoProcessor) GetVideoProcessStreamState(StreamNumber uint32, State DXVAHD_STREAM_STATE, DataSize uint32, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IDXVAHD_VideoProcessor) GetVideoProcessStreamState(StreamNumber uint32, State DXVAHD_STREAM_STATE, DataSize uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(StreamNumber), uintptr(State), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VideoProcessBltHD dispatches through IDXVAHD_VideoProcessor's vtable slot 7.
-func (self *IDXVAHD_VideoProcessor) VideoProcessBltHD(pOutputSurface *graphicsdirect3d9.IDirect3DSurface9, OutputFrame uint32, StreamCount uint32, pStreams *DXVAHD_STREAM_DATA) foundation.HRESULT {
+func (self *IDXVAHD_VideoProcessor) VideoProcessBltHD(pOutputSurface *graphicsdirect3d9.IDirect3DSurface9, OutputFrame uint32, StreamCount uint32, pStreams *DXVAHD_STREAM_DATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOutputSurface)), uintptr(OutputFrame), uintptr(StreamCount), uintptr(unsafe.Pointer(pStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3D9ExOverlayExtension: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3d9exoverlayextension
@@ -1089,9 +1089,9 @@ type IDirect3D9ExOverlayExtension struct {
 var IID_IDirect3D9ExOverlayExtension = win32.GUID{Data1: 0x187aeb13, Data2: 0xaaf5, Data3: 0x4c59, Data4: [8]byte{0x87, 0x6d, 0xe0, 0x59, 0x08, 0x8c, 0x0d, 0xf8}}
 
 // CheckDeviceOverlayType dispatches through IDirect3D9ExOverlayExtension's vtable slot 3.
-func (self *IDirect3D9ExOverlayExtension) CheckDeviceOverlayType(Adapter uint32, DevType graphicsdirect3d9.D3DDEVTYPE, OverlayWidth uint32, OverlayHeight uint32, OverlayFormat graphicsdirect3d9.D3DFORMAT, pDisplayMode *graphicsdirect3d9.D3DDISPLAYMODEEX, DisplayRotation graphicsdirect3d9.D3DDISPLAYROTATION, pOverlayCaps *D3DOVERLAYCAPS) foundation.HRESULT {
+func (self *IDirect3D9ExOverlayExtension) CheckDeviceOverlayType(Adapter uint32, DevType graphicsdirect3d9.D3DDEVTYPE, OverlayWidth uint32, OverlayHeight uint32, OverlayFormat graphicsdirect3d9.D3DFORMAT, pDisplayMode *graphicsdirect3d9.D3DDISPLAYMODEEX, DisplayRotation graphicsdirect3d9.D3DDISPLAYROTATION, pOverlayCaps *D3DOVERLAYCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DevType), uintptr(OverlayWidth), uintptr(OverlayHeight), uintptr(OverlayFormat), uintptr(unsafe.Pointer(pDisplayMode)), uintptr(DisplayRotation), uintptr(unsafe.Pointer(pOverlayCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DAuthenticatedChannel9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dauthenticatedchannel9
@@ -1104,33 +1104,33 @@ type IDirect3DAuthenticatedChannel9 struct {
 var IID_IDirect3DAuthenticatedChannel9 = win32.GUID{Data1: 0xff24beee, Data2: 0xda21, Data3: 0x4beb, Data4: [8]byte{0x98, 0xb5, 0xd2, 0xf8, 0x99, 0xf9, 0x8a, 0xf9}}
 
 // GetCertificateSize dispatches through IDirect3DAuthenticatedChannel9's vtable slot 3.
-func (self *IDirect3DAuthenticatedChannel9) GetCertificateSize(pCertificateSize *uint32) foundation.HRESULT {
+func (self *IDirect3DAuthenticatedChannel9) GetCertificateSize(pCertificateSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCertificateSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCertificate dispatches through IDirect3DAuthenticatedChannel9's vtable slot 4.
-func (self *IDirect3DAuthenticatedChannel9) GetCertificate(CertifacteSize uint32, ppCertificate *byte) foundation.HRESULT {
+func (self *IDirect3DAuthenticatedChannel9) GetCertificate(CertifacteSize uint32, ppCertificate *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(CertifacteSize), uintptr(unsafe.Pointer(ppCertificate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NegotiateKeyExchange dispatches through IDirect3DAuthenticatedChannel9's vtable slot 5.
-func (self *IDirect3DAuthenticatedChannel9) NegotiateKeyExchange(DataSize uint32, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DAuthenticatedChannel9) NegotiateKeyExchange(DataSize uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Query dispatches through IDirect3DAuthenticatedChannel9's vtable slot 6.
-func (self *IDirect3DAuthenticatedChannel9) Query(InputSize uint32, pInput unsafe.Pointer, OutputSize uint32, pOutput unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DAuthenticatedChannel9) Query(InputSize uint32, pInput unsafe.Pointer, OutputSize uint32, pOutput unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(InputSize), uintptr(unsafe.Pointer(pInput)), uintptr(OutputSize), uintptr(unsafe.Pointer(pOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Configure dispatches through IDirect3DAuthenticatedChannel9's vtable slot 7.
-func (self *IDirect3DAuthenticatedChannel9) Configure(InputSize uint32, pInput unsafe.Pointer, pOutput *graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT) foundation.HRESULT {
+func (self *IDirect3DAuthenticatedChannel9) Configure(InputSize uint32, pInput unsafe.Pointer, pOutput *graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(InputSize), uintptr(unsafe.Pointer(pInput)), uintptr(unsafe.Pointer(pOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DCryptoSession9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dcryptosession9
@@ -1143,57 +1143,57 @@ type IDirect3DCryptoSession9 struct {
 var IID_IDirect3DCryptoSession9 = win32.GUID{Data1: 0xfa0ab799, Data2: 0x7a9c, Data3: 0x48ca, Data4: [8]byte{0x8c, 0x5b, 0x23, 0x7e, 0x71, 0xa5, 0x44, 0x34}}
 
 // GetCertificateSize dispatches through IDirect3DCryptoSession9's vtable slot 3.
-func (self *IDirect3DCryptoSession9) GetCertificateSize(pCertificateSize *uint32) foundation.HRESULT {
+func (self *IDirect3DCryptoSession9) GetCertificateSize(pCertificateSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCertificateSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCertificate dispatches through IDirect3DCryptoSession9's vtable slot 4.
-func (self *IDirect3DCryptoSession9) GetCertificate(CertifacteSize uint32, ppCertificate *byte) foundation.HRESULT {
+func (self *IDirect3DCryptoSession9) GetCertificate(CertifacteSize uint32, ppCertificate *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(CertifacteSize), uintptr(unsafe.Pointer(ppCertificate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NegotiateKeyExchange dispatches through IDirect3DCryptoSession9's vtable slot 5.
-func (self *IDirect3DCryptoSession9) NegotiateKeyExchange(DataSize uint32, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DCryptoSession9) NegotiateKeyExchange(DataSize uint32, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EncryptionBlt dispatches through IDirect3DCryptoSession9's vtable slot 6.
-func (self *IDirect3DCryptoSession9) EncryptionBlt(pSrcSurface *graphicsdirect3d9.IDirect3DSurface9, pDstSurface *graphicsdirect3d9.IDirect3DSurface9, DstSurfaceSize uint32, pIV unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DCryptoSession9) EncryptionBlt(pSrcSurface *graphicsdirect3d9.IDirect3DSurface9, pDstSurface *graphicsdirect3d9.IDirect3DSurface9, DstSurfaceSize uint32, pIV unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrcSurface)), uintptr(unsafe.Pointer(pDstSurface)), uintptr(DstSurfaceSize), uintptr(unsafe.Pointer(pIV)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DecryptionBlt dispatches through IDirect3DCryptoSession9's vtable slot 7.
-func (self *IDirect3DCryptoSession9) DecryptionBlt(pSrcSurface *graphicsdirect3d9.IDirect3DSurface9, pDstSurface *graphicsdirect3d9.IDirect3DSurface9, SrcSurfaceSize uint32, pEncryptedBlockInfo *graphicsdirect3d9.D3DENCRYPTED_BLOCK_INFO, pContentKey unsafe.Pointer, pIV unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DCryptoSession9) DecryptionBlt(pSrcSurface *graphicsdirect3d9.IDirect3DSurface9, pDstSurface *graphicsdirect3d9.IDirect3DSurface9, SrcSurfaceSize uint32, pEncryptedBlockInfo *graphicsdirect3d9.D3DENCRYPTED_BLOCK_INFO, pContentKey unsafe.Pointer, pIV unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrcSurface)), uintptr(unsafe.Pointer(pDstSurface)), uintptr(SrcSurfaceSize), uintptr(unsafe.Pointer(pEncryptedBlockInfo)), uintptr(unsafe.Pointer(pContentKey)), uintptr(unsafe.Pointer(pIV)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSurfacePitch dispatches through IDirect3DCryptoSession9's vtable slot 8.
-func (self *IDirect3DCryptoSession9) GetSurfacePitch(pSrcSurface *graphicsdirect3d9.IDirect3DSurface9, pSurfacePitch *uint32) foundation.HRESULT {
+func (self *IDirect3DCryptoSession9) GetSurfacePitch(pSrcSurface *graphicsdirect3d9.IDirect3DSurface9, pSurfacePitch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrcSurface)), uintptr(unsafe.Pointer(pSurfacePitch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartSessionKeyRefresh dispatches through IDirect3DCryptoSession9's vtable slot 9.
-func (self *IDirect3DCryptoSession9) StartSessionKeyRefresh(pRandomNumber unsafe.Pointer, RandomNumberSize uint32) foundation.HRESULT {
+func (self *IDirect3DCryptoSession9) StartSessionKeyRefresh(pRandomNumber unsafe.Pointer, RandomNumberSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRandomNumber)), uintptr(RandomNumberSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FinishSessionKeyRefresh dispatches through IDirect3DCryptoSession9's vtable slot 10.
-func (self *IDirect3DCryptoSession9) FinishSessionKeyRefresh() foundation.HRESULT {
+func (self *IDirect3DCryptoSession9) FinishSessionKeyRefresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEncryptionBltKey dispatches through IDirect3DCryptoSession9's vtable slot 11.
-func (self *IDirect3DCryptoSession9) GetEncryptionBltKey(pReadbackKey unsafe.Pointer, KeySize uint32) foundation.HRESULT {
+func (self *IDirect3DCryptoSession9) GetEncryptionBltKey(pReadbackKey unsafe.Pointer, KeySize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReadbackKey)), uintptr(KeySize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DDevice9Video: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9video
@@ -1206,21 +1206,21 @@ type IDirect3DDevice9Video struct {
 var IID_IDirect3DDevice9Video = win32.GUID{Data1: 0x26dc4561, Data2: 0xa1ee, Data3: 0x4ae7, Data4: [8]byte{0x96, 0xda, 0x11, 0x8a, 0x36, 0xc0, 0xec, 0x95}}
 
 // GetContentProtectionCaps dispatches through IDirect3DDevice9Video's vtable slot 3.
-func (self *IDirect3DDevice9Video) GetContentProtectionCaps(pCryptoType *win32.GUID, pDecodeProfile *win32.GUID, pCaps *D3DCONTENTPROTECTIONCAPS) foundation.HRESULT {
+func (self *IDirect3DDevice9Video) GetContentProtectionCaps(pCryptoType *win32.GUID, pDecodeProfile *win32.GUID, pCaps *D3DCONTENTPROTECTIONCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoType)), uintptr(unsafe.Pointer(pDecodeProfile)), uintptr(unsafe.Pointer(pCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAuthenticatedChannel dispatches through IDirect3DDevice9Video's vtable slot 4.
-func (self *IDirect3DDevice9Video) CreateAuthenticatedChannel(ChannelType graphicsdirect3d9.D3DAUTHENTICATEDCHANNELTYPE, ppAuthenticatedChannel **IDirect3DAuthenticatedChannel9, pChannelHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDevice9Video) CreateAuthenticatedChannel(ChannelType graphicsdirect3d9.D3DAUTHENTICATEDCHANNELTYPE, ppAuthenticatedChannel **IDirect3DAuthenticatedChannel9, pChannelHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ChannelType), uintptr(unsafe.Pointer(ppAuthenticatedChannel)), uintptr(unsafe.Pointer(pChannelHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCryptoSession dispatches through IDirect3DDevice9Video's vtable slot 5.
-func (self *IDirect3DDevice9Video) CreateCryptoSession(pCryptoType *win32.GUID, pDecodeProfile *win32.GUID, ppCryptoSession **IDirect3DCryptoSession9, pCryptoHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDevice9Video) CreateCryptoSession(pCryptoType *win32.GUID, pDecodeProfile *win32.GUID, ppCryptoSession **IDirect3DCryptoSession9, pCryptoHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoType)), uintptr(unsafe.Pointer(pDecodeProfile)), uintptr(unsafe.Pointer(ppCryptoSession)), uintptr(unsafe.Pointer(pCryptoHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DDeviceManager9: https://learn.microsoft.com/windows/win32/api/dxva2api/nn-dxva2api-idirect3ddevicemanager9
@@ -1233,45 +1233,47 @@ type IDirect3DDeviceManager9 struct {
 var IID_IDirect3DDeviceManager9 = win32.GUID{Data1: 0xa0cade0f, Data2: 0x06d5, Data3: 0x4cf4, Data4: [8]byte{0xa1, 0xc7, 0xf3, 0xcd, 0xd7, 0x25, 0xaa, 0x75}}
 
 // ResetDevice dispatches through IDirect3DDeviceManager9's vtable slot 3.
-func (self *IDirect3DDeviceManager9) ResetDevice(pDevice *graphicsdirect3d9.IDirect3DDevice9, resetToken uint32) foundation.HRESULT {
+func (self *IDirect3DDeviceManager9) ResetDevice(pDevice *graphicsdirect3d9.IDirect3DDevice9, resetToken uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(resetToken))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenDeviceHandle dispatches through IDirect3DDeviceManager9's vtable slot 4.
-func (self *IDirect3DDeviceManager9) OpenDeviceHandle(phDevice *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDeviceManager9) OpenDeviceHandle(phDevice *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloseDeviceHandle dispatches through IDirect3DDeviceManager9's vtable slot 5.
-func (self *IDirect3DDeviceManager9) CloseDeviceHandle(hDevice foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDeviceManager9) CloseDeviceHandle(hDevice foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hDevice))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TestDevice dispatches through IDirect3DDeviceManager9's vtable slot 6.
-func (self *IDirect3DDeviceManager9) TestDevice(hDevice foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDeviceManager9) TestDevice(hDevice foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hDevice))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockDevice dispatches through IDirect3DDeviceManager9's vtable slot 7.
-func (self *IDirect3DDeviceManager9) LockDevice(hDevice foundation.HANDLE, ppDevice **graphicsdirect3d9.IDirect3DDevice9, fBlock foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(unsafe.Pointer(ppDevice)), uintptr(fBlock))
-	return foundation.HRESULT(r1)
+func (self *IDirect3DDeviceManager9) LockDevice(hDevice foundation.HANDLE, ppDevice **graphicsdirect3d9.IDirect3DDevice9, fBlock bool) error {
+	_fBlock := win32.Bool32(fBlock)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(unsafe.Pointer(ppDevice)), uintptr(_fBlock))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockDevice dispatches through IDirect3DDeviceManager9's vtable slot 8.
-func (self *IDirect3DDeviceManager9) UnlockDevice(hDevice foundation.HANDLE, fSaveState foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(fSaveState))
-	return foundation.HRESULT(r1)
+func (self *IDirect3DDeviceManager9) UnlockDevice(hDevice foundation.HANDLE, fSaveState bool) error {
+	_fSaveState := win32.Bool32(fSaveState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(_fSaveState))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoService dispatches through IDirect3DDeviceManager9's vtable slot 9.
-func (self *IDirect3DDeviceManager9) GetVideoService(hDevice foundation.HANDLE, riid *win32.GUID, ppService *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DDeviceManager9) GetVideoService(hDevice foundation.HANDLE, riid *win32.GUID, ppService *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppService)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectXVideoAccelerationService: https://learn.microsoft.com/windows/win32/api/dxva2api/nn-dxva2api-idirectxvideoaccelerationservice
@@ -1284,9 +1286,9 @@ type IDirectXVideoAccelerationService struct {
 var IID_IDirectXVideoAccelerationService = win32.GUID{Data1: 0xfc51a550, Data2: 0xd5e7, Data3: 0x11d9, Data4: [8]byte{0xaf, 0x55, 0x00, 0x05, 0x4e, 0x43, 0xff, 0x02}}
 
 // CreateSurface dispatches through IDirectXVideoAccelerationService's vtable slot 3.
-func (self *IDirectXVideoAccelerationService) CreateSurface(Width uint32, Height uint32, BackBuffers uint32, Format graphicsdirect3d9.D3DFORMAT, Pool graphicsdirect3d9.D3DPOOL, Usage uint32, DxvaType uint32, ppSurface **graphicsdirect3d9.IDirect3DSurface9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectXVideoAccelerationService) CreateSurface(Width uint32, Height uint32, BackBuffers uint32, Format graphicsdirect3d9.D3DFORMAT, Pool graphicsdirect3d9.D3DPOOL, Usage uint32, DxvaType uint32, ppSurface **graphicsdirect3d9.IDirect3DSurface9, pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(BackBuffers), uintptr(Format), uintptr(Pool), uintptr(Usage), uintptr(DxvaType), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectXVideoDecoder: https://learn.microsoft.com/windows/win32/api/dxva2api/nn-dxva2api-idirectxvideodecoder
@@ -1299,45 +1301,45 @@ type IDirectXVideoDecoder struct {
 var IID_IDirectXVideoDecoder = win32.GUID{Data1: 0xf2b0810a, Data2: 0xfd00, Data3: 0x43c9, Data4: [8]byte{0x91, 0x8c, 0xdf, 0x94, 0xe2, 0xd8, 0xef, 0x7d}}
 
 // GetVideoDecoderService dispatches through IDirectXVideoDecoder's vtable slot 3.
-func (self *IDirectXVideoDecoder) GetVideoDecoderService(ppService **IDirectXVideoDecoderService) foundation.HRESULT {
+func (self *IDirectXVideoDecoder) GetVideoDecoderService(ppService **IDirectXVideoDecoderService) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppService)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCreationParameters dispatches through IDirectXVideoDecoder's vtable slot 4.
-func (self *IDirectXVideoDecoder) GetCreationParameters(pDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pConfig *DXVA2_ConfigPictureDecode, pDecoderRenderTargets ***graphicsdirect3d9.IDirect3DSurface9, pNumSurfaces *uint32) foundation.HRESULT {
+func (self *IDirectXVideoDecoder) GetCreationParameters(pDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pConfig *DXVA2_ConfigPictureDecode, pDecoderRenderTargets ***graphicsdirect3d9.IDirect3DSurface9, pNumSurfaces *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceGuid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(unsafe.Pointer(pConfig)), uintptr(unsafe.Pointer(pDecoderRenderTargets)), uintptr(unsafe.Pointer(pNumSurfaces)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBuffer dispatches through IDirectXVideoDecoder's vtable slot 5.
-func (self *IDirectXVideoDecoder) GetBuffer(BufferType uint32, ppBuffer *unsafe.Pointer, pBufferSize *uint32) foundation.HRESULT {
+func (self *IDirectXVideoDecoder) GetBuffer(BufferType uint32, ppBuffer *unsafe.Pointer, pBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(BufferType), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pBufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseBuffer dispatches through IDirectXVideoDecoder's vtable slot 6.
-func (self *IDirectXVideoDecoder) ReleaseBuffer(BufferType uint32) foundation.HRESULT {
+func (self *IDirectXVideoDecoder) ReleaseBuffer(BufferType uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(BufferType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginFrame dispatches through IDirectXVideoDecoder's vtable slot 7.
-func (self *IDirectXVideoDecoder) BeginFrame(pRenderTarget *graphicsdirect3d9.IDirect3DSurface9, pvPVPData unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectXVideoDecoder) BeginFrame(pRenderTarget *graphicsdirect3d9.IDirect3DSurface9, pvPVPData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRenderTarget)), uintptr(unsafe.Pointer(pvPVPData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndFrame dispatches through IDirectXVideoDecoder's vtable slot 8.
-func (self *IDirectXVideoDecoder) EndFrame(pHandleComplete *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectXVideoDecoder) EndFrame(pHandleComplete *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHandleComplete)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Execute dispatches through IDirectXVideoDecoder's vtable slot 9.
-func (self *IDirectXVideoDecoder) Execute(pExecuteParams *DXVA2_DecodeExecuteParams) foundation.HRESULT {
+func (self *IDirectXVideoDecoder) Execute(pExecuteParams *DXVA2_DecodeExecuteParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExecuteParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectXVideoDecoderService: https://learn.microsoft.com/windows/win32/api/dxva2api/nn-dxva2api-idirectxvideodecoderservice
@@ -1350,27 +1352,27 @@ type IDirectXVideoDecoderService struct {
 var IID_IDirectXVideoDecoderService = win32.GUID{Data1: 0xfc51a551, Data2: 0xd5e7, Data3: 0x11d9, Data4: [8]byte{0xaf, 0x55, 0x00, 0x05, 0x4e, 0x43, 0xff, 0x02}}
 
 // GetDecoderDeviceGuids dispatches through IDirectXVideoDecoderService's vtable slot 4.
-func (self *IDirectXVideoDecoderService) GetDecoderDeviceGuids(pCount *uint32, pGuids **win32.GUID) foundation.HRESULT {
+func (self *IDirectXVideoDecoderService) GetDecoderDeviceGuids(pCount *uint32, pGuids **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pGuids)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDecoderRenderTargets dispatches through IDirectXVideoDecoderService's vtable slot 5.
-func (self *IDirectXVideoDecoderService) GetDecoderRenderTargets(Guid *win32.GUID, pCount *uint32, pFormats **graphicsdirect3d9.D3DFORMAT) foundation.HRESULT {
+func (self *IDirectXVideoDecoderService) GetDecoderRenderTargets(Guid *win32.GUID, pCount *uint32, pFormats **graphicsdirect3d9.D3DFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Guid)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pFormats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDecoderConfigurations dispatches through IDirectXVideoDecoderService's vtable slot 6.
-func (self *IDirectXVideoDecoderService) GetDecoderConfigurations(Guid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pReserved unsafe.Pointer, pCount *uint32, ppConfigs **DXVA2_ConfigPictureDecode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Guid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(ppConfigs)))
-	return foundation.HRESULT(r1)
+func (self *IDirectXVideoDecoderService) GetDecoderConfigurations(Guid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pCount *uint32, ppConfigs **DXVA2_ConfigPictureDecode) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Guid)), uintptr(unsafe.Pointer(pVideoDesc)), 0, uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(ppConfigs)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoDecoder dispatches through IDirectXVideoDecoderService's vtable slot 7.
-func (self *IDirectXVideoDecoderService) CreateVideoDecoder(Guid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pConfig *DXVA2_ConfigPictureDecode, ppDecoderRenderTargets **graphicsdirect3d9.IDirect3DSurface9, NumRenderTargets uint32, ppDecode **IDirectXVideoDecoder) foundation.HRESULT {
+func (self *IDirectXVideoDecoderService) CreateVideoDecoder(Guid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pConfig *DXVA2_ConfigPictureDecode, ppDecoderRenderTargets **graphicsdirect3d9.IDirect3DSurface9, NumRenderTargets uint32, ppDecode **IDirectXVideoDecoder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Guid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(unsafe.Pointer(pConfig)), uintptr(unsafe.Pointer(ppDecoderRenderTargets)), uintptr(NumRenderTargets), uintptr(unsafe.Pointer(ppDecode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectXVideoMemoryConfiguration: https://learn.microsoft.com/windows/win32/api/dxva2api/nn-dxva2api-idirectxvideomemoryconfiguration
@@ -1383,15 +1385,15 @@ type IDirectXVideoMemoryConfiguration struct {
 var IID_IDirectXVideoMemoryConfiguration = win32.GUID{Data1: 0xb7f916dd, Data2: 0xdb3b, Data3: 0x49c1, Data4: [8]byte{0x84, 0xd7, 0xe4, 0x5e, 0xf9, 0x9e, 0xc7, 0x26}}
 
 // GetAvailableSurfaceTypeByIndex dispatches through IDirectXVideoMemoryConfiguration's vtable slot 3.
-func (self *IDirectXVideoMemoryConfiguration) GetAvailableSurfaceTypeByIndex(dwTypeIndex uint32, pdwType *DXVA2_SurfaceType) foundation.HRESULT {
+func (self *IDirectXVideoMemoryConfiguration) GetAvailableSurfaceTypeByIndex(dwTypeIndex uint32, pdwType *DXVA2_SurfaceType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwTypeIndex), uintptr(unsafe.Pointer(pdwType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSurfaceType dispatches through IDirectXVideoMemoryConfiguration's vtable slot 4.
-func (self *IDirectXVideoMemoryConfiguration) SetSurfaceType(dwType DXVA2_SurfaceType) foundation.HRESULT {
+func (self *IDirectXVideoMemoryConfiguration) SetSurfaceType(dwType DXVA2_SurfaceType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectXVideoProcessor: https://learn.microsoft.com/windows/win32/api/dxva2api/nn-dxva2api-idirectxvideoprocessor
@@ -1404,39 +1406,39 @@ type IDirectXVideoProcessor struct {
 var IID_IDirectXVideoProcessor = win32.GUID{Data1: 0x8c3a39f0, Data2: 0x916e, Data3: 0x4690, Data4: [8]byte{0x80, 0x4f, 0x4c, 0x80, 0x01, 0x35, 0x5d, 0x25}}
 
 // GetVideoProcessorService dispatches through IDirectXVideoProcessor's vtable slot 3.
-func (self *IDirectXVideoProcessor) GetVideoProcessorService(ppService **IDirectXVideoProcessorService) foundation.HRESULT {
+func (self *IDirectXVideoProcessor) GetVideoProcessorService(ppService **IDirectXVideoProcessorService) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppService)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCreationParameters dispatches through IDirectXVideoProcessor's vtable slot 4.
-func (self *IDirectXVideoProcessor) GetCreationParameters(pDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pRenderTargetFormat *graphicsdirect3d9.D3DFORMAT, pMaxNumSubStreams *uint32) foundation.HRESULT {
+func (self *IDirectXVideoProcessor) GetCreationParameters(pDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pRenderTargetFormat *graphicsdirect3d9.D3DFORMAT, pMaxNumSubStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceGuid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(unsafe.Pointer(pRenderTargetFormat)), uintptr(unsafe.Pointer(pMaxNumSubStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorCaps dispatches through IDirectXVideoProcessor's vtable slot 5.
-func (self *IDirectXVideoProcessor) GetVideoProcessorCaps(pCaps *DXVA2_VideoProcessorCaps) foundation.HRESULT {
+func (self *IDirectXVideoProcessor) GetVideoProcessorCaps(pCaps *DXVA2_VideoProcessorCaps) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProcAmpRange dispatches through IDirectXVideoProcessor's vtable slot 6.
-func (self *IDirectXVideoProcessor) GetProcAmpRange(ProcAmpCap uint32, pRange *DXVA2_ValueRange) foundation.HRESULT {
+func (self *IDirectXVideoProcessor) GetProcAmpRange(ProcAmpCap uint32, pRange *DXVA2_ValueRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ProcAmpCap), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilterPropertyRange dispatches through IDirectXVideoProcessor's vtable slot 7.
-func (self *IDirectXVideoProcessor) GetFilterPropertyRange(FilterSetting uint32, pRange *DXVA2_ValueRange) foundation.HRESULT {
+func (self *IDirectXVideoProcessor) GetFilterPropertyRange(FilterSetting uint32, pRange *DXVA2_ValueRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(FilterSetting), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VideoProcessBlt dispatches through IDirectXVideoProcessor's vtable slot 8.
-func (self *IDirectXVideoProcessor) VideoProcessBlt(pRenderTarget *graphicsdirect3d9.IDirect3DSurface9, pBltParams *DXVA2_VideoProcessBltParams, pSamples *DXVA2_VideoSample, NumSamples uint32, pHandleComplete *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectXVideoProcessor) VideoProcessBlt(pRenderTarget *graphicsdirect3d9.IDirect3DSurface9, pBltParams *DXVA2_VideoProcessBltParams, pSamples *DXVA2_VideoSample, NumSamples uint32, pHandleComplete *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRenderTarget)), uintptr(unsafe.Pointer(pBltParams)), uintptr(unsafe.Pointer(pSamples)), uintptr(NumSamples), uintptr(unsafe.Pointer(pHandleComplete)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectXVideoProcessorService: https://learn.microsoft.com/windows/win32/api/dxva2api/nn-dxva2api-idirectxvideoprocessorservice
@@ -1449,51 +1451,51 @@ type IDirectXVideoProcessorService struct {
 var IID_IDirectXVideoProcessorService = win32.GUID{Data1: 0xfc51a552, Data2: 0xd5e7, Data3: 0x11d9, Data4: [8]byte{0xaf, 0x55, 0x00, 0x05, 0x4e, 0x43, 0xff, 0x02}}
 
 // RegisterVideoProcessorSoftwareDevice dispatches through IDirectXVideoProcessorService's vtable slot 4.
-func (self *IDirectXVideoProcessorService) RegisterVideoProcessorSoftwareDevice(pCallbacks unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectXVideoProcessorService) RegisterVideoProcessorSoftwareDevice(pCallbacks unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallbacks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorDeviceGuids dispatches through IDirectXVideoProcessorService's vtable slot 5.
-func (self *IDirectXVideoProcessorService) GetVideoProcessorDeviceGuids(pVideoDesc *DXVA2_VideoDesc, pCount *uint32, pGuids **win32.GUID) foundation.HRESULT {
+func (self *IDirectXVideoProcessorService) GetVideoProcessorDeviceGuids(pVideoDesc *DXVA2_VideoDesc, pCount *uint32, pGuids **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pGuids)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorRenderTargets dispatches through IDirectXVideoProcessorService's vtable slot 6.
-func (self *IDirectXVideoProcessorService) GetVideoProcessorRenderTargets(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pCount *uint32, pFormats **graphicsdirect3d9.D3DFORMAT) foundation.HRESULT {
+func (self *IDirectXVideoProcessorService) GetVideoProcessorRenderTargets(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, pCount *uint32, pFormats **graphicsdirect3d9.D3DFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VideoProcDeviceGuid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pFormats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorSubStreamFormats dispatches through IDirectXVideoProcessorService's vtable slot 7.
-func (self *IDirectXVideoProcessorService) GetVideoProcessorSubStreamFormats(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, pCount *uint32, pFormats **graphicsdirect3d9.D3DFORMAT) foundation.HRESULT {
+func (self *IDirectXVideoProcessorService) GetVideoProcessorSubStreamFormats(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, pCount *uint32, pFormats **graphicsdirect3d9.D3DFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VideoProcDeviceGuid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(RenderTargetFormat), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pFormats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorCaps dispatches through IDirectXVideoProcessorService's vtable slot 8.
-func (self *IDirectXVideoProcessorService) GetVideoProcessorCaps(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, pCaps *DXVA2_VideoProcessorCaps) foundation.HRESULT {
+func (self *IDirectXVideoProcessorService) GetVideoProcessorCaps(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, pCaps *DXVA2_VideoProcessorCaps) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VideoProcDeviceGuid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(RenderTargetFormat), uintptr(unsafe.Pointer(pCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProcAmpRange dispatches through IDirectXVideoProcessorService's vtable slot 9.
-func (self *IDirectXVideoProcessorService) GetProcAmpRange(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, ProcAmpCap uint32, pRange *DXVA2_ValueRange) foundation.HRESULT {
+func (self *IDirectXVideoProcessorService) GetProcAmpRange(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, ProcAmpCap uint32, pRange *DXVA2_ValueRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VideoProcDeviceGuid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(RenderTargetFormat), uintptr(ProcAmpCap), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilterPropertyRange dispatches through IDirectXVideoProcessorService's vtable slot 10.
-func (self *IDirectXVideoProcessorService) GetFilterPropertyRange(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, FilterSetting uint32, pRange *DXVA2_ValueRange) foundation.HRESULT {
+func (self *IDirectXVideoProcessorService) GetFilterPropertyRange(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, FilterSetting uint32, pRange *DXVA2_ValueRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VideoProcDeviceGuid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(RenderTargetFormat), uintptr(FilterSetting), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVideoProcessor dispatches through IDirectXVideoProcessorService's vtable slot 11.
-func (self *IDirectXVideoProcessorService) CreateVideoProcessor(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, MaxNumSubStreams uint32, ppVidProcess **IDirectXVideoProcessor) foundation.HRESULT {
+func (self *IDirectXVideoProcessorService) CreateVideoProcessor(VideoProcDeviceGuid *win32.GUID, pVideoDesc *DXVA2_VideoDesc, RenderTargetFormat graphicsdirect3d9.D3DFORMAT, MaxNumSubStreams uint32, ppVidProcess **IDirectXVideoProcessor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VideoProcDeviceGuid)), uintptr(unsafe.Pointer(pVideoDesc)), uintptr(RenderTargetFormat), uintptr(MaxNumSubStreams), uintptr(unsafe.Pointer(ppVidProcess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEVRFilterConfig: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-ievrfilterconfig
@@ -1506,15 +1508,15 @@ type IEVRFilterConfig struct {
 var IID_IEVRFilterConfig = win32.GUID{Data1: 0x83e91e85, Data2: 0x82c1, Data3: 0x4ea7, Data4: [8]byte{0x80, 0x1d, 0x85, 0xdc, 0x50, 0xb7, 0x50, 0x86}}
 
 // SetNumberOfStreams dispatches through IEVRFilterConfig's vtable slot 3.
-func (self *IEVRFilterConfig) SetNumberOfStreams(dwMaxStreams uint32) foundation.HRESULT {
+func (self *IEVRFilterConfig) SetNumberOfStreams(dwMaxStreams uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMaxStreams))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNumberOfStreams dispatches through IEVRFilterConfig's vtable slot 4.
-func (self *IEVRFilterConfig) GetNumberOfStreams(pdwMaxStreams *uint32) foundation.HRESULT {
+func (self *IEVRFilterConfig) GetNumberOfStreams(pdwMaxStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMaxStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEVRFilterConfigEx: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-ievrfilterconfigex
@@ -1527,15 +1529,15 @@ type IEVRFilterConfigEx struct {
 var IID_IEVRFilterConfigEx = win32.GUID{Data1: 0xaea36028, Data2: 0x796d, Data3: 0x454f, Data4: [8]byte{0xbe, 0xee, 0xb4, 0x80, 0x71, 0xe2, 0x43, 0x04}}
 
 // SetConfigPrefs dispatches through IEVRFilterConfigEx's vtable slot 5.
-func (self *IEVRFilterConfigEx) SetConfigPrefs(dwConfigFlags uint32) foundation.HRESULT {
+func (self *IEVRFilterConfigEx) SetConfigPrefs(dwConfigFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwConfigFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConfigPrefs dispatches through IEVRFilterConfigEx's vtable slot 6.
-func (self *IEVRFilterConfigEx) GetConfigPrefs(pdwConfigFlags *uint32) foundation.HRESULT {
+func (self *IEVRFilterConfigEx) GetConfigPrefs(pdwConfigFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwConfigFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEVRTrustedVideoPlugin: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-ievrtrustedvideoplugin
@@ -1548,27 +1550,28 @@ type IEVRTrustedVideoPlugin struct {
 var IID_IEVRTrustedVideoPlugin = win32.GUID{Data1: 0x83a4ce40, Data2: 0x7710, Data3: 0x494b, Data4: [8]byte{0xa8, 0x93, 0xa4, 0x72, 0x04, 0x9a, 0xf6, 0x30}}
 
 // IsInTrustedVideoMode dispatches through IEVRTrustedVideoPlugin's vtable slot 3.
-func (self *IEVRTrustedVideoPlugin) IsInTrustedVideoMode(pYes *foundation.BOOL) foundation.HRESULT {
+func (self *IEVRTrustedVideoPlugin) IsInTrustedVideoMode(pYes *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pYes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanConstrict dispatches through IEVRTrustedVideoPlugin's vtable slot 4.
-func (self *IEVRTrustedVideoPlugin) CanConstrict(pYes *foundation.BOOL) foundation.HRESULT {
+func (self *IEVRTrustedVideoPlugin) CanConstrict(pYes *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pYes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConstriction dispatches through IEVRTrustedVideoPlugin's vtable slot 5.
-func (self *IEVRTrustedVideoPlugin) SetConstriction(dwKPix uint32) foundation.HRESULT {
+func (self *IEVRTrustedVideoPlugin) SetConstriction(dwKPix uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwKPix))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisableImageExport dispatches through IEVRTrustedVideoPlugin's vtable slot 6.
-func (self *IEVRTrustedVideoPlugin) DisableImageExport(bDisable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(bDisable))
-	return foundation.HRESULT(r1)
+func (self *IEVRTrustedVideoPlugin) DisableImageExport(bDisable bool) error {
+	_bDisable := win32.Bool32(bDisable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(_bDisable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEVRVideoStreamControl: https://learn.microsoft.com/windows/win32/api/evr9/nn-evr9-ievrvideostreamcontrol
@@ -1581,15 +1584,16 @@ type IEVRVideoStreamControl struct {
 var IID_IEVRVideoStreamControl = win32.GUID{Data1: 0xd0cfe38b, Data2: 0x93e7, Data3: 0x4772, Data4: [8]byte{0x89, 0x57, 0x04, 0x00, 0xc4, 0x9a, 0x44, 0x85}}
 
 // SetStreamActiveState dispatches through IEVRVideoStreamControl's vtable slot 3.
-func (self *IEVRVideoStreamControl) SetStreamActiveState(fActive foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fActive))
-	return foundation.HRESULT(r1)
+func (self *IEVRVideoStreamControl) SetStreamActiveState(fActive bool) error {
+	_fActive := win32.Bool32(fActive)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fActive))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamActiveState dispatches through IEVRVideoStreamControl's vtable slot 4.
-func (self *IEVRVideoStreamControl) GetStreamActiveState(lpfActive *foundation.BOOL) foundation.HRESULT {
+func (self *IEVRVideoStreamControl) GetStreamActiveState(lpfActive *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpfActive)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bfccd196-1244-4840-ab44-480975c4ffe4
@@ -1601,21 +1605,21 @@ type IFileClient struct {
 var IID_IFileClient = win32.GUID{Data1: 0xbfccd196, Data2: 0x1244, Data3: 0x4840, Data4: [8]byte{0xab, 0x44, 0x48, 0x09, 0x75, 0xc4, 0xff, 0xe4}}
 
 // GetObjectDiskSize dispatches through IFileClient's vtable slot 3.
-func (self *IFileClient) GetObjectDiskSize(pqwSize *uint64) foundation.HRESULT {
+func (self *IFileClient) GetObjectDiskSize(pqwSize *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Write dispatches through IFileClient's vtable slot 4.
-func (self *IFileClient) Write(pFio *IFileIo) foundation.HRESULT {
+func (self *IFileClient) Write(pFio *IFileIo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFio)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Read dispatches through IFileClient's vtable slot 5.
-func (self *IFileClient) Read(pFio *IFileIo) foundation.HRESULT {
+func (self *IFileClient) Read(pFio *IFileIo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFio)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 11993196-1244-4840-ab44-480975c4ffe4
@@ -1627,63 +1631,64 @@ type IFileIo struct {
 var IID_IFileIo = win32.GUID{Data1: 0x11993196, Data2: 0x1244, Data3: 0x4840, Data4: [8]byte{0xab, 0x44, 0x48, 0x09, 0x75, 0xc4, 0xff, 0xe4}}
 
 // Initialize dispatches through IFileIo's vtable slot 3.
-func (self *IFileIo) Initialize(eAccessMode FILE_ACCESSMODE, eOpenMode FILE_OPENMODE, pwszFileName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eAccessMode), uintptr(eOpenMode), uintptr(unsafe.Pointer(pwszFileName)))
-	return foundation.HRESULT(r1)
+func (self *IFileIo) Initialize(eAccessMode FILE_ACCESSMODE, eOpenMode FILE_OPENMODE, pwszFileName string) error {
+	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eAccessMode), uintptr(eOpenMode), uintptr(unsafe.Pointer(_pwszFileName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLength dispatches through IFileIo's vtable slot 4.
-func (self *IFileIo) GetLength(pqwLength *uint64) foundation.HRESULT {
+func (self *IFileIo) GetLength(pqwLength *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLength dispatches through IFileIo's vtable slot 5.
-func (self *IFileIo) SetLength(qwLength uint64) foundation.HRESULT {
+func (self *IFileIo) SetLength(qwLength uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(qwLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPosition dispatches through IFileIo's vtable slot 6.
-func (self *IFileIo) GetCurrentPosition(pqwPosition *uint64) foundation.HRESULT {
+func (self *IFileIo) GetCurrentPosition(pqwPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentPosition dispatches through IFileIo's vtable slot 7.
-func (self *IFileIo) SetCurrentPosition(qwPosition uint64) foundation.HRESULT {
+func (self *IFileIo) SetCurrentPosition(qwPosition uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(qwPosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEndOfStream dispatches through IFileIo's vtable slot 8.
-func (self *IFileIo) IsEndOfStream(pbEndOfStream *foundation.BOOL) foundation.HRESULT {
+func (self *IFileIo) IsEndOfStream(pbEndOfStream *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEndOfStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Read dispatches through IFileIo's vtable slot 9.
-func (self *IFileIo) Read(pbt *byte, ul uint32, pulRead *uint32) foundation.HRESULT {
+func (self *IFileIo) Read(pbt *byte, ul uint32, pulRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbt)), uintptr(ul), uintptr(unsafe.Pointer(pulRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Write dispatches through IFileIo's vtable slot 10.
-func (self *IFileIo) Write(pbt *byte, ul uint32, pulWritten *uint32) foundation.HRESULT {
+func (self *IFileIo) Write(pbt *byte, ul uint32, pulWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbt)), uintptr(ul), uintptr(unsafe.Pointer(pulWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Seek dispatches through IFileIo's vtable slot 11.
-func (self *IFileIo) Seek(eSeekOrigin SEEK_ORIGIN, qwSeekOffset uint64, dwSeekFlags uint32, pqwCurrentPosition *uint64) foundation.HRESULT {
+func (self *IFileIo) Seek(eSeekOrigin SEEK_ORIGIN, qwSeekOffset uint64, dwSeekFlags uint32, pqwCurrentPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(eSeekOrigin), uintptr(qwSeekOffset), uintptr(dwSeekFlags), uintptr(unsafe.Pointer(pqwCurrentPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IFileIo's vtable slot 12.
-func (self *IFileIo) Close() foundation.HRESULT {
+func (self *IFileIo) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMF2DBuffer: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imf2dbuffer
@@ -1696,45 +1701,45 @@ type IMF2DBuffer struct {
 var IID_IMF2DBuffer = win32.GUID{Data1: 0x7dc9d5f9, Data2: 0x9ed9, Data3: 0x44ec, Data4: [8]byte{0x9b, 0xbf, 0x06, 0x00, 0xbb, 0x58, 0x9f, 0xbb}}
 
 // Lock2D dispatches through IMF2DBuffer's vtable slot 3.
-func (self *IMF2DBuffer) Lock2D(ppbScanline0 **byte, plPitch *int32) foundation.HRESULT {
+func (self *IMF2DBuffer) Lock2D(ppbScanline0 **byte, plPitch *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppbScanline0)), uintptr(unsafe.Pointer(plPitch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock2D dispatches through IMF2DBuffer's vtable slot 4.
-func (self *IMF2DBuffer) Unlock2D() foundation.HRESULT {
+func (self *IMF2DBuffer) Unlock2D() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScanline0AndPitch dispatches through IMF2DBuffer's vtable slot 5.
-func (self *IMF2DBuffer) GetScanline0AndPitch(pbScanline0 **byte, plPitch *int32) foundation.HRESULT {
+func (self *IMF2DBuffer) GetScanline0AndPitch(pbScanline0 **byte, plPitch *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbScanline0)), uintptr(unsafe.Pointer(plPitch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsContiguousFormat dispatches through IMF2DBuffer's vtable slot 6.
-func (self *IMF2DBuffer) IsContiguousFormat(pfIsContiguous *foundation.BOOL) foundation.HRESULT {
+func (self *IMF2DBuffer) IsContiguousFormat(pfIsContiguous *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsContiguous)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContiguousLength dispatches through IMF2DBuffer's vtable slot 7.
-func (self *IMF2DBuffer) GetContiguousLength(pcbLength *uint32) foundation.HRESULT {
+func (self *IMF2DBuffer) GetContiguousLength(pcbLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ContiguousCopyTo dispatches through IMF2DBuffer's vtable slot 8.
-func (self *IMF2DBuffer) ContiguousCopyTo(pbDestBuffer *byte, cbDestBuffer uint32) foundation.HRESULT {
+func (self *IMF2DBuffer) ContiguousCopyTo(pbDestBuffer *byte, cbDestBuffer uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDestBuffer)), uintptr(cbDestBuffer))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ContiguousCopyFrom dispatches through IMF2DBuffer's vtable slot 9.
-func (self *IMF2DBuffer) ContiguousCopyFrom(pbSrcBuffer *byte, cbSrcBuffer uint32) foundation.HRESULT {
+func (self *IMF2DBuffer) ContiguousCopyFrom(pbSrcBuffer *byte, cbSrcBuffer uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSrcBuffer)), uintptr(cbSrcBuffer))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMF2DBuffer2: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imf2dbuffer2
@@ -1747,15 +1752,15 @@ type IMF2DBuffer2 struct {
 var IID_IMF2DBuffer2 = win32.GUID{Data1: 0x33ae5ea6, Data2: 0x4316, Data3: 0x436f, Data4: [8]byte{0x8d, 0xdd, 0xd7, 0x3d, 0x22, 0xf8, 0x29, 0xec}}
 
 // Lock2DSize dispatches through IMF2DBuffer2's vtable slot 10.
-func (self *IMF2DBuffer2) Lock2DSize(lockFlags MF2DBuffer_LockFlags, ppbScanline0 **byte, plPitch *int32, ppbBufferStart **byte, pcbBufferLength *uint32) foundation.HRESULT {
+func (self *IMF2DBuffer2) Lock2DSize(lockFlags MF2DBuffer_LockFlags, ppbScanline0 **byte, plPitch *int32, ppbBufferStart **byte, pcbBufferLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lockFlags), uintptr(unsafe.Pointer(ppbScanline0)), uintptr(unsafe.Pointer(plPitch)), uintptr(unsafe.Pointer(ppbBufferStart)), uintptr(unsafe.Pointer(pcbBufferLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Copy2DTo dispatches through IMF2DBuffer2's vtable slot 11.
-func (self *IMF2DBuffer2) Copy2DTo(pDestBuffer *IMF2DBuffer2) foundation.HRESULT {
+func (self *IMF2DBuffer2) Copy2DTo(pDestBuffer *IMF2DBuffer2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFASFContentInfo: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfasfcontentinfo
@@ -1768,45 +1773,45 @@ type IMFASFContentInfo struct {
 var IID_IMFASFContentInfo = win32.GUID{Data1: 0xb1dca5cd, Data2: 0xd5da, Data3: 0x4451, Data4: [8]byte{0x8e, 0x9e, 0xdb, 0x5c, 0x59, 0x91, 0x4e, 0xad}}
 
 // GetHeaderSize dispatches through IMFASFContentInfo's vtable slot 3.
-func (self *IMFASFContentInfo) GetHeaderSize(pIStartOfContent *IMFMediaBuffer, cbHeaderSize *uint64) foundation.HRESULT {
+func (self *IMFASFContentInfo) GetHeaderSize(pIStartOfContent *IMFMediaBuffer, cbHeaderSize *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStartOfContent)), uintptr(unsafe.Pointer(cbHeaderSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ParseHeader dispatches through IMFASFContentInfo's vtable slot 4.
-func (self *IMFASFContentInfo) ParseHeader(pIHeaderBuffer *IMFMediaBuffer, cbOffsetWithinHeader uint64) foundation.HRESULT {
+func (self *IMFASFContentInfo) ParseHeader(pIHeaderBuffer *IMFMediaBuffer, cbOffsetWithinHeader uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIHeaderBuffer)), uintptr(cbOffsetWithinHeader))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateHeader dispatches through IMFASFContentInfo's vtable slot 5.
-func (self *IMFASFContentInfo) GenerateHeader(pIHeader *IMFMediaBuffer, pcbHeader *uint32) foundation.HRESULT {
+func (self *IMFASFContentInfo) GenerateHeader(pIHeader *IMFMediaBuffer, pcbHeader *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIHeader)), uintptr(unsafe.Pointer(pcbHeader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProfile dispatches through IMFASFContentInfo's vtable slot 6.
-func (self *IMFASFContentInfo) GetProfile(ppIProfile **IMFASFProfile) foundation.HRESULT {
+func (self *IMFASFContentInfo) GetProfile(ppIProfile **IMFASFProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProfile dispatches through IMFASFContentInfo's vtable slot 7.
-func (self *IMFASFContentInfo) SetProfile(pIProfile *IMFASFProfile) foundation.HRESULT {
+func (self *IMFASFContentInfo) SetProfile(pIProfile *IMFASFProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GeneratePresentationDescriptor dispatches through IMFASFContentInfo's vtable slot 8.
-func (self *IMFASFContentInfo) GeneratePresentationDescriptor(ppIPresentationDescriptor **IMFPresentationDescriptor) foundation.HRESULT {
+func (self *IMFASFContentInfo) GeneratePresentationDescriptor(ppIPresentationDescriptor **IMFPresentationDescriptor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIPresentationDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEncodingConfigurationPropertyStore dispatches through IMFASFContentInfo's vtable slot 9.
-func (self *IMFASFContentInfo) GetEncodingConfigurationPropertyStore(wStreamNumber uint16, ppIStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IMFASFContentInfo) GetEncodingConfigurationPropertyStore(wStreamNumber uint16, ppIStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(wStreamNumber), uintptr(unsafe.Pointer(ppIStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFASFIndexer: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfasfindexer
@@ -1819,81 +1824,82 @@ type IMFASFIndexer struct {
 var IID_IMFASFIndexer = win32.GUID{Data1: 0x53590f48, Data2: 0xdc3b, Data3: 0x4297, Data4: [8]byte{0x81, 0x3f, 0x78, 0x77, 0x61, 0xad, 0x7b, 0x3e}}
 
 // SetFlags dispatches through IMFASFIndexer's vtable slot 3.
-func (self *IMFASFIndexer) SetFlags(dwFlags uint32) foundation.HRESULT {
+func (self *IMFASFIndexer) SetFlags(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IMFASFIndexer's vtable slot 4.
-func (self *IMFASFIndexer) GetFlags(pdwFlags *uint32) foundation.HRESULT {
+func (self *IMFASFIndexer) GetFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IMFASFIndexer's vtable slot 5.
-func (self *IMFASFIndexer) Initialize(pIContentInfo *IMFASFContentInfo) foundation.HRESULT {
+func (self *IMFASFIndexer) Initialize(pIContentInfo *IMFASFContentInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIContentInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndexPosition dispatches through IMFASFIndexer's vtable slot 6.
-func (self *IMFASFIndexer) GetIndexPosition(pIContentInfo *IMFASFContentInfo, pcbIndexOffset *uint64) foundation.HRESULT {
+func (self *IMFASFIndexer) GetIndexPosition(pIContentInfo *IMFASFContentInfo, pcbIndexOffset *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIContentInfo)), uintptr(unsafe.Pointer(pcbIndexOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIndexByteStreams dispatches through IMFASFIndexer's vtable slot 7.
-func (self *IMFASFIndexer) SetIndexByteStreams(ppIByteStreams **IMFByteStream, cByteStreams uint32) foundation.HRESULT {
+func (self *IMFASFIndexer) SetIndexByteStreams(ppIByteStreams **IMFByteStream, cByteStreams uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIByteStreams)), uintptr(cByteStreams))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndexByteStreamCount dispatches through IMFASFIndexer's vtable slot 8.
-func (self *IMFASFIndexer) GetIndexByteStreamCount(pcByteStreams *uint32) foundation.HRESULT {
+func (self *IMFASFIndexer) GetIndexByteStreamCount(pcByteStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcByteStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndexStatus dispatches through IMFASFIndexer's vtable slot 9.
-func (self *IMFASFIndexer) GetIndexStatus(pIndexIdentifier *ASF_INDEX_IDENTIFIER, pfIsIndexed *foundation.BOOL, pbIndexDescriptor *byte, pcbIndexDescriptor *uint32) foundation.HRESULT {
+func (self *IMFASFIndexer) GetIndexStatus(pIndexIdentifier *ASF_INDEX_IDENTIFIER, pfIsIndexed *foundation.BOOL, pbIndexDescriptor *byte, pcbIndexDescriptor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndexIdentifier)), uintptr(unsafe.Pointer(pfIsIndexed)), uintptr(unsafe.Pointer(pbIndexDescriptor)), uintptr(unsafe.Pointer(pcbIndexDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIndexStatus dispatches through IMFASFIndexer's vtable slot 10.
-func (self *IMFASFIndexer) SetIndexStatus(pbIndexDescriptor *byte, cbIndexDescriptor uint32, fGenerateIndex foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIndexDescriptor)), uintptr(cbIndexDescriptor), uintptr(fGenerateIndex))
-	return foundation.HRESULT(r1)
+func (self *IMFASFIndexer) SetIndexStatus(pbIndexDescriptor *byte, cbIndexDescriptor uint32, fGenerateIndex bool) error {
+	_fGenerateIndex := win32.Bool32(fGenerateIndex)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIndexDescriptor)), uintptr(cbIndexDescriptor), uintptr(_fGenerateIndex))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSeekPositionForValue dispatches through IMFASFIndexer's vtable slot 11.
-func (self *IMFASFIndexer) GetSeekPositionForValue(pvarValue *systemcomstructuredstorage.PROPVARIANT, pIndexIdentifier *ASF_INDEX_IDENTIFIER, pcbOffsetWithinData *uint64, phnsApproxTime *int64, pdwPayloadNumberOfStreamWithinPacket *uint32) foundation.HRESULT {
+func (self *IMFASFIndexer) GetSeekPositionForValue(pvarValue *systemcomstructuredstorage.PROPVARIANT, pIndexIdentifier *ASF_INDEX_IDENTIFIER, pcbOffsetWithinData *uint64, phnsApproxTime *int64, pdwPayloadNumberOfStreamWithinPacket *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarValue)), uintptr(unsafe.Pointer(pIndexIdentifier)), uintptr(unsafe.Pointer(pcbOffsetWithinData)), uintptr(unsafe.Pointer(phnsApproxTime)), uintptr(unsafe.Pointer(pdwPayloadNumberOfStreamWithinPacket)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateIndexEntries dispatches through IMFASFIndexer's vtable slot 12.
-func (self *IMFASFIndexer) GenerateIndexEntries(pIASFPacketSample *IMFSample) foundation.HRESULT {
+func (self *IMFASFIndexer) GenerateIndexEntries(pIASFPacketSample *IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIASFPacketSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitIndex dispatches through IMFASFIndexer's vtable slot 13.
-func (self *IMFASFIndexer) CommitIndex(pIContentInfo *IMFASFContentInfo) foundation.HRESULT {
+func (self *IMFASFIndexer) CommitIndex(pIContentInfo *IMFASFContentInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIContentInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndexWriteSpace dispatches through IMFASFIndexer's vtable slot 14.
-func (self *IMFASFIndexer) GetIndexWriteSpace(pcbIndexWriteSpace *uint64) foundation.HRESULT {
+func (self *IMFASFIndexer) GetIndexWriteSpace(pcbIndexWriteSpace *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbIndexWriteSpace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompletedIndex dispatches through IMFASFIndexer's vtable slot 15.
-func (self *IMFASFIndexer) GetCompletedIndex(pIIndexBuffer *IMFMediaBuffer, cbOffsetWithinIndex uint64) foundation.HRESULT {
+func (self *IMFASFIndexer) GetCompletedIndex(pIIndexBuffer *IMFMediaBuffer, cbOffsetWithinIndex uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIIndexBuffer)), uintptr(cbOffsetWithinIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFASFMultiplexer: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfasfmultiplexer
@@ -1906,57 +1912,57 @@ type IMFASFMultiplexer struct {
 var IID_IMFASFMultiplexer = win32.GUID{Data1: 0x57bdd80a, Data2: 0x9b38, Data3: 0x4838, Data4: [8]byte{0xb7, 0x37, 0xc5, 0x8f, 0x67, 0x0d, 0x7d, 0x4f}}
 
 // Initialize dispatches through IMFASFMultiplexer's vtable slot 3.
-func (self *IMFASFMultiplexer) Initialize(pIContentInfo *IMFASFContentInfo) foundation.HRESULT {
+func (self *IMFASFMultiplexer) Initialize(pIContentInfo *IMFASFContentInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIContentInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFlags dispatches through IMFASFMultiplexer's vtable slot 4.
-func (self *IMFASFMultiplexer) SetFlags(dwFlags uint32) foundation.HRESULT {
+func (self *IMFASFMultiplexer) SetFlags(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IMFASFMultiplexer's vtable slot 5.
-func (self *IMFASFMultiplexer) GetFlags(pdwFlags *uint32) foundation.HRESULT {
+func (self *IMFASFMultiplexer) GetFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessSample dispatches through IMFASFMultiplexer's vtable slot 6.
-func (self *IMFASFMultiplexer) ProcessSample(wStreamNumber uint16, pISample *IMFSample, hnsTimestampAdjust int64) foundation.HRESULT {
+func (self *IMFASFMultiplexer) ProcessSample(wStreamNumber uint16, pISample *IMFSample, hnsTimestampAdjust int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(wStreamNumber), uintptr(unsafe.Pointer(pISample)), uintptr(hnsTimestampAdjust))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextPacket dispatches through IMFASFMultiplexer's vtable slot 7.
-func (self *IMFASFMultiplexer) GetNextPacket(pdwStatusFlags *uint32, ppIPacket **IMFSample) foundation.HRESULT {
+func (self *IMFASFMultiplexer) GetNextPacket(pdwStatusFlags *uint32, ppIPacket **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatusFlags)), uintptr(unsafe.Pointer(ppIPacket)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flush dispatches through IMFASFMultiplexer's vtable slot 8.
-func (self *IMFASFMultiplexer) Flush() foundation.HRESULT {
+func (self *IMFASFMultiplexer) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // End dispatches through IMFASFMultiplexer's vtable slot 9.
-func (self *IMFASFMultiplexer) End(pIContentInfo *IMFASFContentInfo) foundation.HRESULT {
+func (self *IMFASFMultiplexer) End(pIContentInfo *IMFASFContentInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIContentInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatistics dispatches through IMFASFMultiplexer's vtable slot 10.
-func (self *IMFASFMultiplexer) GetStatistics(wStreamNumber uint16, pMuxStats *ASF_MUX_STATISTICS) foundation.HRESULT {
+func (self *IMFASFMultiplexer) GetStatistics(wStreamNumber uint16, pMuxStats *ASF_MUX_STATISTICS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(wStreamNumber), uintptr(unsafe.Pointer(pMuxStats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSyncTolerance dispatches through IMFASFMultiplexer's vtable slot 11.
-func (self *IMFASFMultiplexer) SetSyncTolerance(msSyncTolerance uint32) foundation.HRESULT {
+func (self *IMFASFMultiplexer) SetSyncTolerance(msSyncTolerance uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(msSyncTolerance))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFASFMutualExclusion: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfasfmutualexclusion
@@ -1969,57 +1975,57 @@ type IMFASFMutualExclusion struct {
 var IID_IMFASFMutualExclusion = win32.GUID{Data1: 0x12558291, Data2: 0xe399, Data3: 0x11d5, Data4: [8]byte{0xbc, 0x2a, 0x00, 0xb0, 0xd0, 0xf3, 0xf4, 0xab}}
 
 // GetType dispatches through IMFASFMutualExclusion's vtable slot 3.
-func (self *IMFASFMutualExclusion) GetType(pguidType *win32.GUID) foundation.HRESULT {
+func (self *IMFASFMutualExclusion) GetType(pguidType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetType dispatches through IMFASFMutualExclusion's vtable slot 4.
-func (self *IMFASFMutualExclusion) SetType(guidType *win32.GUID) foundation.HRESULT {
+func (self *IMFASFMutualExclusion) SetType(guidType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecordCount dispatches through IMFASFMutualExclusion's vtable slot 5.
-func (self *IMFASFMutualExclusion) GetRecordCount(pdwRecordCount *uint32) foundation.HRESULT {
+func (self *IMFASFMutualExclusion) GetRecordCount(pdwRecordCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRecordCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamsForRecord dispatches through IMFASFMutualExclusion's vtable slot 6.
-func (self *IMFASFMutualExclusion) GetStreamsForRecord(dwRecordNumber uint32, pwStreamNumArray *uint16, pcStreams *uint32) foundation.HRESULT {
+func (self *IMFASFMutualExclusion) GetStreamsForRecord(dwRecordNumber uint32, pwStreamNumArray *uint16, pcStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwRecordNumber), uintptr(unsafe.Pointer(pwStreamNumArray)), uintptr(unsafe.Pointer(pcStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStreamForRecord dispatches through IMFASFMutualExclusion's vtable slot 7.
-func (self *IMFASFMutualExclusion) AddStreamForRecord(dwRecordNumber uint32, wStreamNumber uint16) foundation.HRESULT {
+func (self *IMFASFMutualExclusion) AddStreamForRecord(dwRecordNumber uint32, wStreamNumber uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwRecordNumber), uintptr(wStreamNumber))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStreamFromRecord dispatches through IMFASFMutualExclusion's vtable slot 8.
-func (self *IMFASFMutualExclusion) RemoveStreamFromRecord(dwRecordNumber uint32, wStreamNumber uint16) foundation.HRESULT {
+func (self *IMFASFMutualExclusion) RemoveStreamFromRecord(dwRecordNumber uint32, wStreamNumber uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwRecordNumber), uintptr(wStreamNumber))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveRecord dispatches through IMFASFMutualExclusion's vtable slot 9.
-func (self *IMFASFMutualExclusion) RemoveRecord(dwRecordNumber uint32) foundation.HRESULT {
+func (self *IMFASFMutualExclusion) RemoveRecord(dwRecordNumber uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwRecordNumber))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddRecord dispatches through IMFASFMutualExclusion's vtable slot 10.
-func (self *IMFASFMutualExclusion) AddRecord(pdwRecordNumber *uint32) foundation.HRESULT {
+func (self *IMFASFMutualExclusion) AddRecord(pdwRecordNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRecordNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IMFASFMutualExclusion's vtable slot 11.
-func (self *IMFASFMutualExclusion) Clone(ppIMutex **IMFASFMutualExclusion) foundation.HRESULT {
+func (self *IMFASFMutualExclusion) Clone(ppIMutex **IMFASFMutualExclusion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIMutex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFASFProfile: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfasfprofile
@@ -2032,99 +2038,99 @@ type IMFASFProfile struct {
 var IID_IMFASFProfile = win32.GUID{Data1: 0xd267bf6a, Data2: 0x028b, Data3: 0x4e0d, Data4: [8]byte{0x90, 0x3d, 0x43, 0xf0, 0xef, 0x82, 0xd0, 0xd4}}
 
 // GetStreamCount dispatches through IMFASFProfile's vtable slot 33.
-func (self *IMFASFProfile) GetStreamCount(pcStreams *uint32) foundation.HRESULT {
+func (self *IMFASFProfile) GetStreamCount(pcStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStream dispatches through IMFASFProfile's vtable slot 34.
-func (self *IMFASFProfile) GetStream(dwStreamIndex uint32, pwStreamNumber *uint16, ppIStream **IMFASFStreamConfig) foundation.HRESULT {
+func (self *IMFASFProfile) GetStream(dwStreamIndex uint32, pwStreamNumber *uint16, ppIStream **IMFASFStreamConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pwStreamNumber)), uintptr(unsafe.Pointer(ppIStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamByNumber dispatches through IMFASFProfile's vtable slot 35.
-func (self *IMFASFProfile) GetStreamByNumber(wStreamNumber uint16, ppIStream **IMFASFStreamConfig) foundation.HRESULT {
+func (self *IMFASFProfile) GetStreamByNumber(wStreamNumber uint16, ppIStream **IMFASFStreamConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(wStreamNumber), uintptr(unsafe.Pointer(ppIStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStream dispatches through IMFASFProfile's vtable slot 36.
-func (self *IMFASFProfile) SetStream(pIStream *IMFASFStreamConfig) foundation.HRESULT {
+func (self *IMFASFProfile) SetStream(pIStream *IMFASFStreamConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStream dispatches through IMFASFProfile's vtable slot 37.
-func (self *IMFASFProfile) RemoveStream(wStreamNumber uint16) foundation.HRESULT {
+func (self *IMFASFProfile) RemoveStream(wStreamNumber uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(wStreamNumber))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStream dispatches through IMFASFProfile's vtable slot 38.
-func (self *IMFASFProfile) CreateStream(pIMediaType *IMFMediaType, ppIStream **IMFASFStreamConfig) foundation.HRESULT {
+func (self *IMFASFProfile) CreateStream(pIMediaType *IMFMediaType, ppIStream **IMFASFStreamConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIMediaType)), uintptr(unsafe.Pointer(ppIStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMutualExclusionCount dispatches through IMFASFProfile's vtable slot 39.
-func (self *IMFASFProfile) GetMutualExclusionCount(pcMutexs *uint32) foundation.HRESULT {
+func (self *IMFASFProfile) GetMutualExclusionCount(pcMutexs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcMutexs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMutualExclusion dispatches through IMFASFProfile's vtable slot 40.
-func (self *IMFASFProfile) GetMutualExclusion(dwMutexIndex uint32, ppIMutex **IMFASFMutualExclusion) foundation.HRESULT {
+func (self *IMFASFProfile) GetMutualExclusion(dwMutexIndex uint32, ppIMutex **IMFASFMutualExclusion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(dwMutexIndex), uintptr(unsafe.Pointer(ppIMutex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddMutualExclusion dispatches through IMFASFProfile's vtable slot 41.
-func (self *IMFASFProfile) AddMutualExclusion(pIMutex *IMFASFMutualExclusion) foundation.HRESULT {
+func (self *IMFASFProfile) AddMutualExclusion(pIMutex *IMFASFMutualExclusion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIMutex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveMutualExclusion dispatches through IMFASFProfile's vtable slot 42.
-func (self *IMFASFProfile) RemoveMutualExclusion(dwMutexIndex uint32) foundation.HRESULT {
+func (self *IMFASFProfile) RemoveMutualExclusion(dwMutexIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(dwMutexIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMutualExclusion dispatches through IMFASFProfile's vtable slot 43.
-func (self *IMFASFProfile) CreateMutualExclusion(ppIMutex **IMFASFMutualExclusion) foundation.HRESULT {
+func (self *IMFASFProfile) CreateMutualExclusion(ppIMutex **IMFASFMutualExclusion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIMutex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamPrioritization dispatches through IMFASFProfile's vtable slot 44.
-func (self *IMFASFProfile) GetStreamPrioritization(ppIStreamPrioritization **IMFASFStreamPrioritization) foundation.HRESULT {
+func (self *IMFASFProfile) GetStreamPrioritization(ppIStreamPrioritization **IMFASFStreamPrioritization) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIStreamPrioritization)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStreamPrioritization dispatches through IMFASFProfile's vtable slot 45.
-func (self *IMFASFProfile) AddStreamPrioritization(pIStreamPrioritization *IMFASFStreamPrioritization) foundation.HRESULT {
+func (self *IMFASFProfile) AddStreamPrioritization(pIStreamPrioritization *IMFASFStreamPrioritization) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStreamPrioritization)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStreamPrioritization dispatches through IMFASFProfile's vtable slot 46.
-func (self *IMFASFProfile) RemoveStreamPrioritization() foundation.HRESULT {
+func (self *IMFASFProfile) RemoveStreamPrioritization() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStreamPrioritization dispatches through IMFASFProfile's vtable slot 47.
-func (self *IMFASFProfile) CreateStreamPrioritization(ppIStreamPrioritization **IMFASFStreamPrioritization) foundation.HRESULT {
+func (self *IMFASFProfile) CreateStreamPrioritization(ppIStreamPrioritization **IMFASFStreamPrioritization) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIStreamPrioritization)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IMFASFProfile's vtable slot 48.
-func (self *IMFASFProfile) Clone(ppIProfile **IMFASFProfile) foundation.HRESULT {
+func (self *IMFASFProfile) Clone(ppIProfile **IMFASFProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFASFSplitter: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfasfsplitter
@@ -2137,57 +2143,57 @@ type IMFASFSplitter struct {
 var IID_IMFASFSplitter = win32.GUID{Data1: 0x12558295, Data2: 0xe399, Data3: 0x11d5, Data4: [8]byte{0xbc, 0x2a, 0x00, 0xb0, 0xd0, 0xf3, 0xf4, 0xab}}
 
 // Initialize dispatches through IMFASFSplitter's vtable slot 3.
-func (self *IMFASFSplitter) Initialize(pIContentInfo *IMFASFContentInfo) foundation.HRESULT {
+func (self *IMFASFSplitter) Initialize(pIContentInfo *IMFASFContentInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIContentInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFlags dispatches through IMFASFSplitter's vtable slot 4.
-func (self *IMFASFSplitter) SetFlags(dwFlags uint32) foundation.HRESULT {
+func (self *IMFASFSplitter) SetFlags(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IMFASFSplitter's vtable slot 5.
-func (self *IMFASFSplitter) GetFlags(pdwFlags *uint32) foundation.HRESULT {
+func (self *IMFASFSplitter) GetFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SelectStreams dispatches through IMFASFSplitter's vtable slot 6.
-func (self *IMFASFSplitter) SelectStreams(pwStreamNumbers *uint16, wNumStreams uint16) foundation.HRESULT {
+func (self *IMFASFSplitter) SelectStreams(pwStreamNumbers *uint16, wNumStreams uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwStreamNumbers)), uintptr(wNumStreams))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSelectedStreams dispatches through IMFASFSplitter's vtable slot 7.
-func (self *IMFASFSplitter) GetSelectedStreams(pwStreamNumbers *uint16, pwNumStreams *uint16) foundation.HRESULT {
+func (self *IMFASFSplitter) GetSelectedStreams(pwStreamNumbers *uint16, pwNumStreams *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwStreamNumbers)), uintptr(unsafe.Pointer(pwNumStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ParseData dispatches through IMFASFSplitter's vtable slot 8.
-func (self *IMFASFSplitter) ParseData(pIBuffer *IMFMediaBuffer, cbBufferOffset uint32, cbLength uint32) foundation.HRESULT {
+func (self *IMFASFSplitter) ParseData(pIBuffer *IMFMediaBuffer, cbBufferOffset uint32, cbLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIBuffer)), uintptr(cbBufferOffset), uintptr(cbLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextSample dispatches through IMFASFSplitter's vtable slot 9.
-func (self *IMFASFSplitter) GetNextSample(pdwStatusFlags *ASF_STATUSFLAGS, pwStreamNumber *uint16, ppISample **IMFSample) foundation.HRESULT {
+func (self *IMFASFSplitter) GetNextSample(pdwStatusFlags *ASF_STATUSFLAGS, pwStreamNumber *uint16, ppISample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatusFlags)), uintptr(unsafe.Pointer(pwStreamNumber)), uintptr(unsafe.Pointer(ppISample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flush dispatches through IMFASFSplitter's vtable slot 10.
-func (self *IMFASFSplitter) Flush() foundation.HRESULT {
+func (self *IMFASFSplitter) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLastSendTime dispatches through IMFASFSplitter's vtable slot 11.
-func (self *IMFASFSplitter) GetLastSendTime(pdwLastSendTime *uint32) foundation.HRESULT {
+func (self *IMFASFSplitter) GetLastSendTime(pdwLastSendTime *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwLastSendTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFASFStreamConfig: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfasfstreamconfig
@@ -2200,9 +2206,9 @@ type IMFASFStreamConfig struct {
 var IID_IMFASFStreamConfig = win32.GUID{Data1: 0x9e8ae8d2, Data2: 0xdbbd, Data3: 0x4200, Data4: [8]byte{0x9a, 0xca, 0x06, 0xe6, 0xdf, 0x48, 0x49, 0x13}}
 
 // GetStreamType dispatches through IMFASFStreamConfig's vtable slot 33.
-func (self *IMFASFStreamConfig) GetStreamType(pguidStreamType *win32.GUID) foundation.HRESULT {
+func (self *IMFASFStreamConfig) GetStreamType(pguidStreamType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidStreamType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamNumber dispatches through IMFASFStreamConfig's vtable slot 34.
@@ -2212,45 +2218,45 @@ func (self *IMFASFStreamConfig) GetStreamNumber() uint16 {
 }
 
 // SetStreamNumber dispatches through IMFASFStreamConfig's vtable slot 35.
-func (self *IMFASFStreamConfig) SetStreamNumber(wStreamNum uint16) foundation.HRESULT {
+func (self *IMFASFStreamConfig) SetStreamNumber(wStreamNum uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMediaType dispatches through IMFASFStreamConfig's vtable slot 36.
-func (self *IMFASFStreamConfig) GetMediaType(ppIMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFASFStreamConfig) GetMediaType(ppIMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMediaType dispatches through IMFASFStreamConfig's vtable slot 37.
-func (self *IMFASFStreamConfig) SetMediaType(pIMediaType *IMFMediaType) foundation.HRESULT {
+func (self *IMFASFStreamConfig) SetMediaType(pIMediaType *IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPayloadExtensionCount dispatches through IMFASFStreamConfig's vtable slot 38.
-func (self *IMFASFStreamConfig) GetPayloadExtensionCount(pcPayloadExtensions *uint16) foundation.HRESULT {
+func (self *IMFASFStreamConfig) GetPayloadExtensionCount(pcPayloadExtensions *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcPayloadExtensions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPayloadExtension dispatches through IMFASFStreamConfig's vtable slot 39.
-func (self *IMFASFStreamConfig) GetPayloadExtension(wPayloadExtensionNumber uint16, pguidExtensionSystemID *win32.GUID, pcbExtensionDataSize *uint16, pbExtensionSystemInfo *byte, pcbExtensionSystemInfo *uint32) foundation.HRESULT {
+func (self *IMFASFStreamConfig) GetPayloadExtension(wPayloadExtensionNumber uint16, pguidExtensionSystemID *win32.GUID, pcbExtensionDataSize *uint16, pbExtensionSystemInfo *byte, pcbExtensionSystemInfo *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(wPayloadExtensionNumber), uintptr(unsafe.Pointer(pguidExtensionSystemID)), uintptr(unsafe.Pointer(pcbExtensionDataSize)), uintptr(unsafe.Pointer(pbExtensionSystemInfo)), uintptr(unsafe.Pointer(pcbExtensionSystemInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllPayloadExtensions dispatches through IMFASFStreamConfig's vtable slot 41.
-func (self *IMFASFStreamConfig) RemoveAllPayloadExtensions() foundation.HRESULT {
+func (self *IMFASFStreamConfig) RemoveAllPayloadExtensions() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IMFASFStreamConfig's vtable slot 42.
-func (self *IMFASFStreamConfig) Clone(ppIStreamConfig **IMFASFStreamConfig) foundation.HRESULT {
+func (self *IMFASFStreamConfig) Clone(ppIStreamConfig **IMFASFStreamConfig) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIStreamConfig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFASFStreamPrioritization: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfasfstreamprioritization
@@ -2263,33 +2269,33 @@ type IMFASFStreamPrioritization struct {
 var IID_IMFASFStreamPrioritization = win32.GUID{Data1: 0x699bdc27, Data2: 0xbbaf, Data3: 0x49ff, Data4: [8]byte{0x8e, 0x38, 0x9c, 0x39, 0xc9, 0xb5, 0xe0, 0x88}}
 
 // GetStreamCount dispatches through IMFASFStreamPrioritization's vtable slot 3.
-func (self *IMFASFStreamPrioritization) GetStreamCount(pdwStreamCount *uint32) foundation.HRESULT {
+func (self *IMFASFStreamPrioritization) GetStreamCount(pdwStreamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStreamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStream dispatches through IMFASFStreamPrioritization's vtable slot 4.
-func (self *IMFASFStreamPrioritization) GetStream(dwStreamIndex uint32, pwStreamNumber *uint16, pwStreamFlags *uint16) foundation.HRESULT {
+func (self *IMFASFStreamPrioritization) GetStream(dwStreamIndex uint32, pwStreamNumber *uint16, pwStreamFlags *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pwStreamNumber)), uintptr(unsafe.Pointer(pwStreamFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStream dispatches through IMFASFStreamPrioritization's vtable slot 5.
-func (self *IMFASFStreamPrioritization) AddStream(wStreamNumber uint16, wStreamFlags uint16) foundation.HRESULT {
+func (self *IMFASFStreamPrioritization) AddStream(wStreamNumber uint16, wStreamFlags uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(wStreamNumber), uintptr(wStreamFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStream dispatches through IMFASFStreamPrioritization's vtable slot 6.
-func (self *IMFASFStreamPrioritization) RemoveStream(dwStreamIndex uint32) foundation.HRESULT {
+func (self *IMFASFStreamPrioritization) RemoveStream(dwStreamIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IMFASFStreamPrioritization's vtable slot 7.
-func (self *IMFASFStreamPrioritization) Clone(ppIStreamPrioritization **IMFASFStreamPrioritization) foundation.HRESULT {
+func (self *IMFASFStreamPrioritization) Clone(ppIStreamPrioritization **IMFASFStreamPrioritization) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIStreamPrioritization)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFASFStreamSelector: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfasfstreamselector
@@ -2302,87 +2308,87 @@ type IMFASFStreamSelector struct {
 var IID_IMFASFStreamSelector = win32.GUID{Data1: 0xd01bad4a, Data2: 0x4fa0, Data3: 0x4a60, Data4: [8]byte{0x93, 0x49, 0xc2, 0x7e, 0x62, 0xda, 0x9d, 0x41}}
 
 // GetStreamCount dispatches through IMFASFStreamSelector's vtable slot 3.
-func (self *IMFASFStreamSelector) GetStreamCount(pcStreams *uint32) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetStreamCount(pcStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputCount dispatches through IMFASFStreamSelector's vtable slot 4.
-func (self *IMFASFStreamSelector) GetOutputCount(pcOutputs *uint32) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetOutputCount(pcOutputs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcOutputs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputStreamCount dispatches through IMFASFStreamSelector's vtable slot 5.
-func (self *IMFASFStreamSelector) GetOutputStreamCount(dwOutputNum uint32, pcStreams *uint32) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetOutputStreamCount(dwOutputNum uint32, pcStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(pcStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputStreamNumbers dispatches through IMFASFStreamSelector's vtable slot 6.
-func (self *IMFASFStreamSelector) GetOutputStreamNumbers(dwOutputNum uint32, rgwStreamNumbers *uint16) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetOutputStreamNumbers(dwOutputNum uint32, rgwStreamNumbers *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(rgwStreamNumbers)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputFromStream dispatches through IMFASFStreamSelector's vtable slot 7.
-func (self *IMFASFStreamSelector) GetOutputFromStream(wStreamNum uint16, pdwOutput *uint32) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetOutputFromStream(wStreamNum uint16, pdwOutput *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(pdwOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputOverride dispatches through IMFASFStreamSelector's vtable slot 8.
-func (self *IMFASFStreamSelector) GetOutputOverride(dwOutputNum uint32, pSelection *ASF_SELECTION_STATUS) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetOutputOverride(dwOutputNum uint32, pSelection *ASF_SELECTION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(pSelection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputOverride dispatches through IMFASFStreamSelector's vtable slot 9.
-func (self *IMFASFStreamSelector) SetOutputOverride(dwOutputNum uint32, Selection ASF_SELECTION_STATUS) foundation.HRESULT {
+func (self *IMFASFStreamSelector) SetOutputOverride(dwOutputNum uint32, Selection ASF_SELECTION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(Selection))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputMutexCount dispatches through IMFASFStreamSelector's vtable slot 10.
-func (self *IMFASFStreamSelector) GetOutputMutexCount(dwOutputNum uint32, pcMutexes *uint32) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetOutputMutexCount(dwOutputNum uint32, pcMutexes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(pcMutexes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputMutex dispatches through IMFASFStreamSelector's vtable slot 11.
-func (self *IMFASFStreamSelector) GetOutputMutex(dwOutputNum uint32, dwMutexNum uint32, ppMutex **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetOutputMutex(dwOutputNum uint32, dwMutexNum uint32, ppMutex **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(dwMutexNum), uintptr(unsafe.Pointer(ppMutex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputMutexSelection dispatches through IMFASFStreamSelector's vtable slot 12.
-func (self *IMFASFStreamSelector) SetOutputMutexSelection(dwOutputNum uint32, dwMutexNum uint32, wSelectedRecord uint16) foundation.HRESULT {
+func (self *IMFASFStreamSelector) SetOutputMutexSelection(dwOutputNum uint32, dwMutexNum uint32, wSelectedRecord uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(dwMutexNum), uintptr(wSelectedRecord))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBandwidthStepCount dispatches through IMFASFStreamSelector's vtable slot 13.
-func (self *IMFASFStreamSelector) GetBandwidthStepCount(pcStepCount *uint32) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetBandwidthStepCount(pcStepCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcStepCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBandwidthStep dispatches through IMFASFStreamSelector's vtable slot 14.
-func (self *IMFASFStreamSelector) GetBandwidthStep(dwStepNum uint32, pdwBitrate *uint32, rgwStreamNumbers *uint16, rgSelections *ASF_SELECTION_STATUS) foundation.HRESULT {
+func (self *IMFASFStreamSelector) GetBandwidthStep(dwStepNum uint32, pdwBitrate *uint32, rgwStreamNumbers *uint16, rgSelections *ASF_SELECTION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwStepNum), uintptr(unsafe.Pointer(pdwBitrate)), uintptr(unsafe.Pointer(rgwStreamNumbers)), uintptr(unsafe.Pointer(rgSelections)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BitrateToStepNumber dispatches through IMFASFStreamSelector's vtable slot 15.
-func (self *IMFASFStreamSelector) BitrateToStepNumber(dwBitrate uint32, pdwStepNum *uint32) foundation.HRESULT {
+func (self *IMFASFStreamSelector) BitrateToStepNumber(dwBitrate uint32, pdwStepNum *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwBitrate), uintptr(unsafe.Pointer(pdwStepNum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStreamSelectorFlags dispatches through IMFASFStreamSelector's vtable slot 16.
-func (self *IMFASFStreamSelector) SetStreamSelectorFlags(dwStreamSelectorFlags uint32) foundation.HRESULT {
+func (self *IMFASFStreamSelector) SetStreamSelectorFlags(dwStreamSelectorFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwStreamSelectorFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFActivate: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfactivate
@@ -2395,21 +2401,21 @@ type IMFActivate struct {
 var IID_IMFActivate = win32.GUID{Data1: 0x7fee9e9a, Data2: 0x4a89, Data3: 0x47a6, Data4: [8]byte{0x89, 0x9c, 0xb6, 0xa5, 0x3a, 0x70, 0xfb, 0x67}}
 
 // ActivateObject dispatches through IMFActivate's vtable slot 33.
-func (self *IMFActivate) ActivateObject(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFActivate) ActivateObject(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShutdownObject dispatches through IMFActivate's vtable slot 34.
-func (self *IMFActivate) ShutdownObject() foundation.HRESULT {
+func (self *IMFActivate) ShutdownObject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DetachObject dispatches through IMFActivate's vtable slot 35.
-func (self *IMFActivate) DetachObject() foundation.HRESULT {
+func (self *IMFActivate) DetachObject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFAsyncCallback: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfasynccallback
@@ -2422,15 +2428,15 @@ type IMFAsyncCallback struct {
 var IID_IMFAsyncCallback = win32.GUID{Data1: 0xa27003cf, Data2: 0x2354, Data3: 0x4f2a, Data4: [8]byte{0x8d, 0x6a, 0xab, 0x7c, 0xff, 0x15, 0x43, 0x7e}}
 
 // GetParameters dispatches through IMFAsyncCallback's vtable slot 3.
-func (self *IMFAsyncCallback) GetParameters(pdwFlags *uint32, pdwQueue *uint32) foundation.HRESULT {
+func (self *IMFAsyncCallback) GetParameters(pdwFlags *uint32, pdwQueue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(unsafe.Pointer(pdwQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Invoke dispatches through IMFAsyncCallback's vtable slot 4.
-func (self *IMFAsyncCallback) Invoke(pAsyncResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFAsyncCallback) Invoke(pAsyncResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsyncResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFAsyncCallbackLogging: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfasynccallbacklogging
@@ -2464,27 +2470,27 @@ type IMFAsyncResult struct {
 var IID_IMFAsyncResult = win32.GUID{Data1: 0xac6b7889, Data2: 0x0740, Data3: 0x4d51, Data4: [8]byte{0x86, 0x19, 0x90, 0x59, 0x94, 0xa5, 0x5c, 0xc6}}
 
 // GetState dispatches through IMFAsyncResult's vtable slot 3.
-func (self *IMFAsyncResult) GetState(ppunkState **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFAsyncResult) GetState(ppunkState **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppunkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IMFAsyncResult's vtable slot 4.
-func (self *IMFAsyncResult) GetStatus() foundation.HRESULT {
+func (self *IMFAsyncResult) GetStatus() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStatus dispatches through IMFAsyncResult's vtable slot 5.
-func (self *IMFAsyncResult) SetStatus(hrStatus foundation.HRESULT) foundation.HRESULT {
+func (self *IMFAsyncResult) SetStatus(hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hrStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObject dispatches through IMFAsyncResult's vtable slot 6.
-func (self *IMFAsyncResult) GetObject(ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFAsyncResult) GetObject(ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStateNoAddRef dispatches through IMFAsyncResult's vtable slot 7.
@@ -2503,177 +2509,178 @@ type IMFAttributes struct {
 var IID_IMFAttributes = win32.GUID{Data1: 0x2cd2d921, Data2: 0xc447, Data3: 0x44a7, Data4: [8]byte{0xa1, 0x3c, 0x4a, 0xda, 0xbf, 0xc2, 0x47, 0xe3}}
 
 // GetItem dispatches through IMFAttributes's vtable slot 3.
-func (self *IMFAttributes) GetItem(guidKey *win32.GUID, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFAttributes) GetItem(guidKey *win32.GUID, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemType dispatches through IMFAttributes's vtable slot 4.
-func (self *IMFAttributes) GetItemType(guidKey *win32.GUID, pType *MF_ATTRIBUTE_TYPE) foundation.HRESULT {
+func (self *IMFAttributes) GetItemType(guidKey *win32.GUID, pType *MF_ATTRIBUTE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CompareItem dispatches through IMFAttributes's vtable slot 5.
-func (self *IMFAttributes) CompareItem(guidKey *win32.GUID, Value *systemcomstructuredstorage.PROPVARIANT, pbResult *foundation.BOOL) foundation.HRESULT {
+func (self *IMFAttributes) CompareItem(guidKey *win32.GUID, Value *systemcomstructuredstorage.PROPVARIANT, pbResult *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(Value)), uintptr(unsafe.Pointer(pbResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Compare dispatches through IMFAttributes's vtable slot 6.
-func (self *IMFAttributes) Compare(pTheirs *IMFAttributes, MatchType MF_ATTRIBUTES_MATCH_TYPE, pbResult *foundation.BOOL) foundation.HRESULT {
+func (self *IMFAttributes) Compare(pTheirs *IMFAttributes, MatchType MF_ATTRIBUTES_MATCH_TYPE, pbResult *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTheirs)), uintptr(MatchType), uintptr(unsafe.Pointer(pbResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUINT32 dispatches through IMFAttributes's vtable slot 7.
-func (self *IMFAttributes) GetUINT32(guidKey *win32.GUID, punValue *uint32) foundation.HRESULT {
+func (self *IMFAttributes) GetUINT32(guidKey *win32.GUID, punValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(punValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUINT64 dispatches through IMFAttributes's vtable slot 8.
-func (self *IMFAttributes) GetUINT64(guidKey *win32.GUID, punValue *uint64) foundation.HRESULT {
+func (self *IMFAttributes) GetUINT64(guidKey *win32.GUID, punValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(punValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDouble dispatches through IMFAttributes's vtable slot 9.
-func (self *IMFAttributes) GetDouble(guidKey *win32.GUID, pfValue *float64) foundation.HRESULT {
+func (self *IMFAttributes) GetDouble(guidKey *win32.GUID, pfValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pfValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGUID dispatches through IMFAttributes's vtable slot 10.
-func (self *IMFAttributes) GetGUID(guidKey *win32.GUID, pguidValue *win32.GUID) foundation.HRESULT {
+func (self *IMFAttributes) GetGUID(guidKey *win32.GUID, pguidValue *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pguidValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStringLength dispatches through IMFAttributes's vtable slot 11.
-func (self *IMFAttributes) GetStringLength(guidKey *win32.GUID, pcchLength *uint32) foundation.HRESULT {
+func (self *IMFAttributes) GetStringLength(guidKey *win32.GUID, pcchLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pcchLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetString dispatches through IMFAttributes's vtable slot 12.
-func (self *IMFAttributes) GetString(guidKey *win32.GUID, pwszValue foundation.PWSTR, cchBufSize uint32, pcchLength *uint32) foundation.HRESULT {
+func (self *IMFAttributes) GetString(guidKey *win32.GUID, pwszValue foundation.PWSTR, cchBufSize uint32, pcchLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pwszValue)), uintptr(cchBufSize), uintptr(unsafe.Pointer(pcchLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllocatedString dispatches through IMFAttributes's vtable slot 13.
-func (self *IMFAttributes) GetAllocatedString(guidKey *win32.GUID, ppwszValue *foundation.PWSTR, pcchLength *uint32) foundation.HRESULT {
+func (self *IMFAttributes) GetAllocatedString(guidKey *win32.GUID, ppwszValue *foundation.PWSTR, pcchLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(ppwszValue)), uintptr(unsafe.Pointer(pcchLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBlobSize dispatches through IMFAttributes's vtable slot 14.
-func (self *IMFAttributes) GetBlobSize(guidKey *win32.GUID, pcbBlobSize *uint32) foundation.HRESULT {
+func (self *IMFAttributes) GetBlobSize(guidKey *win32.GUID, pcbBlobSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pcbBlobSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBlob dispatches through IMFAttributes's vtable slot 15.
-func (self *IMFAttributes) GetBlob(guidKey *win32.GUID, pBuf *byte, cbBufSize uint32, pcbBlobSize *uint32) foundation.HRESULT {
+func (self *IMFAttributes) GetBlob(guidKey *win32.GUID, pBuf *byte, cbBufSize uint32, pcbBlobSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBlobSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllocatedBlob dispatches through IMFAttributes's vtable slot 16.
-func (self *IMFAttributes) GetAllocatedBlob(guidKey *win32.GUID, ppBuf **byte, pcbSize *uint32) foundation.HRESULT {
+func (self *IMFAttributes) GetAllocatedBlob(guidKey *win32.GUID, ppBuf **byte, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(ppBuf)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUnknown dispatches through IMFAttributes's vtable slot 17.
-func (self *IMFAttributes) GetUnknown(guidKey *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFAttributes) GetUnknown(guidKey *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetItem dispatches through IMFAttributes's vtable slot 18.
-func (self *IMFAttributes) SetItem(guidKey *win32.GUID, Value *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFAttributes) SetItem(guidKey *win32.GUID, Value *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteItem dispatches through IMFAttributes's vtable slot 19.
-func (self *IMFAttributes) DeleteItem(guidKey *win32.GUID) foundation.HRESULT {
+func (self *IMFAttributes) DeleteItem(guidKey *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAllItems dispatches through IMFAttributes's vtable slot 20.
-func (self *IMFAttributes) DeleteAllItems() foundation.HRESULT {
+func (self *IMFAttributes) DeleteAllItems() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUINT32 dispatches through IMFAttributes's vtable slot 21.
-func (self *IMFAttributes) SetUINT32(guidKey *win32.GUID, unValue uint32) foundation.HRESULT {
+func (self *IMFAttributes) SetUINT32(guidKey *win32.GUID, unValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUINT64 dispatches through IMFAttributes's vtable slot 22.
-func (self *IMFAttributes) SetUINT64(guidKey *win32.GUID, unValue uint64) foundation.HRESULT {
+func (self *IMFAttributes) SetUINT64(guidKey *win32.GUID, unValue uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGUID dispatches through IMFAttributes's vtable slot 24.
-func (self *IMFAttributes) SetGUID(guidKey *win32.GUID, guidValue *win32.GUID) foundation.HRESULT {
+func (self *IMFAttributes) SetGUID(guidKey *win32.GUID, guidValue *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(guidValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetString dispatches through IMFAttributes's vtable slot 25.
-func (self *IMFAttributes) SetString(guidKey *win32.GUID, wszValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(wszValue)))
-	return foundation.HRESULT(r1)
+func (self *IMFAttributes) SetString(guidKey *win32.GUID, wszValue string) error {
+	_wszValue := win32.UTF16Ptr(wszValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(_wszValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBlob dispatches through IMFAttributes's vtable slot 26.
-func (self *IMFAttributes) SetBlob(guidKey *win32.GUID, pBuf *byte, cbBufSize uint32) foundation.HRESULT {
+func (self *IMFAttributes) SetBlob(guidKey *win32.GUID, pBuf *byte, cbBufSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBufSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUnknown dispatches through IMFAttributes's vtable slot 27.
-func (self *IMFAttributes) SetUnknown(guidKey *win32.GUID, pUnknown *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFAttributes) SetUnknown(guidKey *win32.GUID, pUnknown *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockStore dispatches through IMFAttributes's vtable slot 28.
-func (self *IMFAttributes) LockStore() foundation.HRESULT {
+func (self *IMFAttributes) LockStore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockStore dispatches through IMFAttributes's vtable slot 29.
-func (self *IMFAttributes) UnlockStore() foundation.HRESULT {
+func (self *IMFAttributes) UnlockStore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IMFAttributes's vtable slot 30.
-func (self *IMFAttributes) GetCount(pcItems *uint32) foundation.HRESULT {
+func (self *IMFAttributes) GetCount(pcItems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcItems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemByIndex dispatches through IMFAttributes's vtable slot 31.
-func (self *IMFAttributes) GetItemByIndex(unIndex uint32, pguidKey *win32.GUID, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFAttributes) GetItemByIndex(unIndex uint32, pguidKey *win32.GUID, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unIndex), uintptr(unsafe.Pointer(pguidKey)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyAllItems dispatches through IMFAttributes's vtable slot 32.
-func (self *IMFAttributes) CopyAllItems(pDest *IMFAttributes) foundation.HRESULT {
+func (self *IMFAttributes) CopyAllItems(pDest *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFAudioMediaType: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfaudiomediatype
@@ -2701,39 +2708,41 @@ type IMFAudioPolicy struct {
 var IID_IMFAudioPolicy = win32.GUID{Data1: 0xa0638c2b, Data2: 0x6465, Data3: 0x4395, Data4: [8]byte{0x9a, 0xe7, 0xa3, 0x21, 0xa9, 0xfd, 0x28, 0x56}}
 
 // SetGroupingParam dispatches through IMFAudioPolicy's vtable slot 3.
-func (self *IMFAudioPolicy) SetGroupingParam(rguidClass *win32.GUID) foundation.HRESULT {
+func (self *IMFAudioPolicy) SetGroupingParam(rguidClass *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGroupingParam dispatches through IMFAudioPolicy's vtable slot 4.
-func (self *IMFAudioPolicy) GetGroupingParam(pguidClass *win32.GUID) foundation.HRESULT {
+func (self *IMFAudioPolicy) GetGroupingParam(pguidClass *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisplayName dispatches through IMFAudioPolicy's vtable slot 5.
-func (self *IMFAudioPolicy) SetDisplayName(pszName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)))
-	return foundation.HRESULT(r1)
+func (self *IMFAudioPolicy) SetDisplayName(pszName string) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayName dispatches through IMFAudioPolicy's vtable slot 6.
-func (self *IMFAudioPolicy) GetDisplayName(pszName *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFAudioPolicy) GetDisplayName(pszName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIconPath dispatches through IMFAudioPolicy's vtable slot 7.
-func (self *IMFAudioPolicy) SetIconPath(pszPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPath)))
-	return foundation.HRESULT(r1)
+func (self *IMFAudioPolicy) SetIconPath(pszPath string) error {
+	_pszPath := win32.UTF16Ptr(pszPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIconPath dispatches through IMFAudioPolicy's vtable slot 8.
-func (self *IMFAudioPolicy) GetIconPath(pszPath *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFAudioPolicy) GetIconPath(pszPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFAudioStreamVolume: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfaudiostreamvolume
@@ -2746,27 +2755,27 @@ type IMFAudioStreamVolume struct {
 var IID_IMFAudioStreamVolume = win32.GUID{Data1: 0x76b1bbdb, Data2: 0x4ec8, Data3: 0x4f36, Data4: [8]byte{0xb1, 0x06, 0x70, 0xa9, 0x31, 0x6d, 0xf5, 0x93}}
 
 // GetChannelCount dispatches through IMFAudioStreamVolume's vtable slot 3.
-func (self *IMFAudioStreamVolume) GetChannelCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IMFAudioStreamVolume) GetChannelCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChannelVolume dispatches through IMFAudioStreamVolume's vtable slot 5.
-func (self *IMFAudioStreamVolume) GetChannelVolume(dwIndex uint32, pfLevel *float32) foundation.HRESULT {
+func (self *IMFAudioStreamVolume) GetChannelVolume(dwIndex uint32, pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pfLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllVolumes dispatches through IMFAudioStreamVolume's vtable slot 6.
-func (self *IMFAudioStreamVolume) SetAllVolumes(dwCount uint32, pfVolumes *float32) foundation.HRESULT {
+func (self *IMFAudioStreamVolume) SetAllVolumes(dwCount uint32, pfVolumes *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwCount), uintptr(unsafe.Pointer(pfVolumes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllVolumes dispatches through IMFAudioStreamVolume's vtable slot 7.
-func (self *IMFAudioStreamVolume) GetAllVolumes(dwCount uint32, pfVolumes *float32) foundation.HRESULT {
+func (self *IMFAudioStreamVolume) GetAllVolumes(dwCount uint32, pfVolumes *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwCount), uintptr(unsafe.Pointer(pfVolumes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFBufferListNotify: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfbufferlistnotify
@@ -2798,93 +2807,93 @@ type IMFByteStream struct {
 var IID_IMFByteStream = win32.GUID{Data1: 0xad4c1b00, Data2: 0x4bf7, Data3: 0x422f, Data4: [8]byte{0x91, 0x75, 0x75, 0x66, 0x93, 0xd9, 0x13, 0x0d}}
 
 // GetCapabilities dispatches through IMFByteStream's vtable slot 3.
-func (self *IMFByteStream) GetCapabilities(pdwCapabilities *uint32) foundation.HRESULT {
+func (self *IMFByteStream) GetCapabilities(pdwCapabilities *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCapabilities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLength dispatches through IMFByteStream's vtable slot 4.
-func (self *IMFByteStream) GetLength(pqwLength *uint64) foundation.HRESULT {
+func (self *IMFByteStream) GetLength(pqwLength *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLength dispatches through IMFByteStream's vtable slot 5.
-func (self *IMFByteStream) SetLength(qwLength uint64) foundation.HRESULT {
+func (self *IMFByteStream) SetLength(qwLength uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(qwLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPosition dispatches through IMFByteStream's vtable slot 6.
-func (self *IMFByteStream) GetCurrentPosition(pqwPosition *uint64) foundation.HRESULT {
+func (self *IMFByteStream) GetCurrentPosition(pqwPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentPosition dispatches through IMFByteStream's vtable slot 7.
-func (self *IMFByteStream) SetCurrentPosition(qwPosition uint64) foundation.HRESULT {
+func (self *IMFByteStream) SetCurrentPosition(qwPosition uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(qwPosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEndOfStream dispatches through IMFByteStream's vtable slot 8.
-func (self *IMFByteStream) IsEndOfStream(pfEndOfStream *foundation.BOOL) foundation.HRESULT {
+func (self *IMFByteStream) IsEndOfStream(pfEndOfStream *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEndOfStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Read dispatches through IMFByteStream's vtable slot 9.
-func (self *IMFByteStream) Read(pb *byte, cb uint32, pcbRead *uint32) foundation.HRESULT {
+func (self *IMFByteStream) Read(pb *byte, cb uint32, pcbRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pb)), uintptr(cb), uintptr(unsafe.Pointer(pcbRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginRead dispatches through IMFByteStream's vtable slot 10.
-func (self *IMFByteStream) BeginRead(pb *byte, cb uint32, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFByteStream) BeginRead(pb *byte, cb uint32, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pb)), uintptr(cb), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndRead dispatches through IMFByteStream's vtable slot 11.
-func (self *IMFByteStream) EndRead(pResult *IMFAsyncResult, pcbRead *uint32) foundation.HRESULT {
+func (self *IMFByteStream) EndRead(pResult *IMFAsyncResult, pcbRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pcbRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Write dispatches through IMFByteStream's vtable slot 12.
-func (self *IMFByteStream) Write(pb *byte, cb uint32, pcbWritten *uint32) foundation.HRESULT {
+func (self *IMFByteStream) Write(pb *byte, cb uint32, pcbWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pb)), uintptr(cb), uintptr(unsafe.Pointer(pcbWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginWrite dispatches through IMFByteStream's vtable slot 13.
-func (self *IMFByteStream) BeginWrite(pb *byte, cb uint32, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFByteStream) BeginWrite(pb *byte, cb uint32, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pb)), uintptr(cb), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndWrite dispatches through IMFByteStream's vtable slot 14.
-func (self *IMFByteStream) EndWrite(pResult *IMFAsyncResult, pcbWritten *uint32) foundation.HRESULT {
+func (self *IMFByteStream) EndWrite(pResult *IMFAsyncResult, pcbWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pcbWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Seek dispatches through IMFByteStream's vtable slot 15.
-func (self *IMFByteStream) Seek(SeekOrigin MFBYTESTREAM_SEEK_ORIGIN, llSeekOffset int64, dwSeekFlags uint32, pqwCurrentPosition *uint64) foundation.HRESULT {
+func (self *IMFByteStream) Seek(SeekOrigin MFBYTESTREAM_SEEK_ORIGIN, llSeekOffset int64, dwSeekFlags uint32, pqwCurrentPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(SeekOrigin), uintptr(llSeekOffset), uintptr(dwSeekFlags), uintptr(unsafe.Pointer(pqwCurrentPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flush dispatches through IMFByteStream's vtable slot 16.
-func (self *IMFByteStream) Flush() foundation.HRESULT {
+func (self *IMFByteStream) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMFByteStream's vtable slot 17.
-func (self *IMFByteStream) Close() foundation.HRESULT {
+func (self *IMFByteStream) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFByteStreamBuffering: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfbytestreambuffering
@@ -2897,21 +2906,22 @@ type IMFByteStreamBuffering struct {
 var IID_IMFByteStreamBuffering = win32.GUID{Data1: 0x6d66d782, Data2: 0x1d4f, Data3: 0x4db7, Data4: [8]byte{0x8c, 0x63, 0xcb, 0x8c, 0x77, 0xf1, 0xef, 0x5e}}
 
 // SetBufferingParams dispatches through IMFByteStreamBuffering's vtable slot 3.
-func (self *IMFByteStreamBuffering) SetBufferingParams(pParams *MFBYTESTREAM_BUFFERING_PARAMS) foundation.HRESULT {
+func (self *IMFByteStreamBuffering) SetBufferingParams(pParams *MFBYTESTREAM_BUFFERING_PARAMS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableBuffering dispatches through IMFByteStreamBuffering's vtable slot 4.
-func (self *IMFByteStreamBuffering) EnableBuffering(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *IMFByteStreamBuffering) EnableBuffering(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopBuffering dispatches through IMFByteStreamBuffering's vtable slot 5.
-func (self *IMFByteStreamBuffering) StopBuffering() foundation.HRESULT {
+func (self *IMFByteStreamBuffering) StopBuffering() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFByteStreamCacheControl: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfbytestreamcachecontrol
@@ -2924,9 +2934,9 @@ type IMFByteStreamCacheControl struct {
 var IID_IMFByteStreamCacheControl = win32.GUID{Data1: 0xf5042ea4, Data2: 0x7a96, Data3: 0x4a75, Data4: [8]byte{0xaa, 0x7b, 0x2b, 0xe1, 0xef, 0x7f, 0x88, 0xd5}}
 
 // StopBackgroundTransfer dispatches through IMFByteStreamCacheControl's vtable slot 3.
-func (self *IMFByteStreamCacheControl) StopBackgroundTransfer() foundation.HRESULT {
+func (self *IMFByteStreamCacheControl) StopBackgroundTransfer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFByteStreamCacheControl2: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfbytestreamcachecontrol2
@@ -2939,21 +2949,21 @@ type IMFByteStreamCacheControl2 struct {
 var IID_IMFByteStreamCacheControl2 = win32.GUID{Data1: 0x71ce469c, Data2: 0xf34b, Data3: 0x49ea, Data4: [8]byte{0xa5, 0x6b, 0x2d, 0x2a, 0x10, 0xe5, 0x11, 0x49}}
 
 // GetByteRanges dispatches through IMFByteStreamCacheControl2's vtable slot 4.
-func (self *IMFByteStreamCacheControl2) GetByteRanges(pcRanges *uint32, ppRanges **MF_BYTE_STREAM_CACHE_RANGE) foundation.HRESULT {
+func (self *IMFByteStreamCacheControl2) GetByteRanges(pcRanges *uint32, ppRanges **MF_BYTE_STREAM_CACHE_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcRanges)), uintptr(unsafe.Pointer(ppRanges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCacheLimit dispatches through IMFByteStreamCacheControl2's vtable slot 5.
-func (self *IMFByteStreamCacheControl2) SetCacheLimit(qwBytes uint64) foundation.HRESULT {
+func (self *IMFByteStreamCacheControl2) SetCacheLimit(qwBytes uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(qwBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsBackgroundTransferActive dispatches through IMFByteStreamCacheControl2's vtable slot 6.
-func (self *IMFByteStreamCacheControl2) IsBackgroundTransferActive(pfActive *foundation.BOOL) foundation.HRESULT {
+func (self *IMFByteStreamCacheControl2) IsBackgroundTransferActive(pfActive *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfActive)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFByteStreamHandler: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfbytestreamhandler
@@ -2966,27 +2976,28 @@ type IMFByteStreamHandler struct {
 var IID_IMFByteStreamHandler = win32.GUID{Data1: 0xbb420aa4, Data2: 0x765b, Data3: 0x4a1f, Data4: [8]byte{0x91, 0xfe, 0xd6, 0xa8, 0xa1, 0x43, 0x92, 0x4c}}
 
 // BeginCreateObject dispatches through IMFByteStreamHandler's vtable slot 3.
-func (self *IMFByteStreamHandler) BeginCreateObject(pByteStream *IMFByteStream, pwszURL foundation.PWSTR, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(ppIUnknownCancelCookie)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+func (self *IMFByteStreamHandler) BeginCreateObject(pByteStream *IMFByteStream, pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(ppIUnknownCancelCookie)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndCreateObject dispatches through IMFByteStreamHandler's vtable slot 4.
-func (self *IMFByteStreamHandler) EndCreateObject(pResult *IMFAsyncResult, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFByteStreamHandler) EndCreateObject(pResult *IMFAsyncResult, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pObjectType)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelObjectCreation dispatches through IMFByteStreamHandler's vtable slot 5.
-func (self *IMFByteStreamHandler) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFByteStreamHandler) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIUnknownCancelCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxNumberOfBytesRequiredForResolution dispatches through IMFByteStreamHandler's vtable slot 6.
-func (self *IMFByteStreamHandler) GetMaxNumberOfBytesRequiredForResolution(pqwBytes *uint64) foundation.HRESULT {
+func (self *IMFByteStreamHandler) GetMaxNumberOfBytesRequiredForResolution(pqwBytes *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFByteStreamProxyClassFactory: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfbytestreamproxyclassfactory
@@ -2999,9 +3010,9 @@ type IMFByteStreamProxyClassFactory struct {
 var IID_IMFByteStreamProxyClassFactory = win32.GUID{Data1: 0xa6b43f84, Data2: 0x5c0a, Data3: 0x42e8, Data4: [8]byte{0xa4, 0x4d, 0xb1, 0x85, 0x7a, 0x76, 0x99, 0x2f}}
 
 // CreateByteStreamProxy dispatches through IMFByteStreamProxyClassFactory's vtable slot 3.
-func (self *IMFByteStreamProxyClassFactory) CreateByteStreamProxy(pByteStream *IMFByteStream, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFByteStreamProxyClassFactory) CreateByteStreamProxy(pByteStream *IMFByteStream, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFByteStreamTimeSeek: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfbytestreamtimeseek
@@ -3014,21 +3025,21 @@ type IMFByteStreamTimeSeek struct {
 var IID_IMFByteStreamTimeSeek = win32.GUID{Data1: 0x64976bfa, Data2: 0xfb61, Data3: 0x4041, Data4: [8]byte{0x90, 0x69, 0x8c, 0x9a, 0x5f, 0x65, 0x9b, 0xeb}}
 
 // IsTimeSeekSupported dispatches through IMFByteStreamTimeSeek's vtable slot 3.
-func (self *IMFByteStreamTimeSeek) IsTimeSeekSupported(pfTimeSeekIsSupported *foundation.BOOL) foundation.HRESULT {
+func (self *IMFByteStreamTimeSeek) IsTimeSeekSupported(pfTimeSeekIsSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfTimeSeekIsSupported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TimeSeek dispatches through IMFByteStreamTimeSeek's vtable slot 4.
-func (self *IMFByteStreamTimeSeek) TimeSeek(qwTimePosition uint64) foundation.HRESULT {
+func (self *IMFByteStreamTimeSeek) TimeSeek(qwTimePosition uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(qwTimePosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimeSeekResult dispatches through IMFByteStreamTimeSeek's vtable slot 5.
-func (self *IMFByteStreamTimeSeek) GetTimeSeekResult(pqwStartTime *uint64, pqwStopTime *uint64, pqwDuration *uint64) foundation.HRESULT {
+func (self *IMFByteStreamTimeSeek) GetTimeSeekResult(pqwStartTime *uint64, pqwStopTime *uint64, pqwDuration *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwStartTime)), uintptr(unsafe.Pointer(pqwStopTime)), uintptr(unsafe.Pointer(pqwDuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCameraConfigurationManager: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfcameraconfigurationmanager
@@ -3041,15 +3052,15 @@ type IMFCameraConfigurationManager struct {
 var IID_IMFCameraConfigurationManager = win32.GUID{Data1: 0xa624f617, Data2: 0x4704, Data3: 0x4206, Data4: [8]byte{0x8a, 0x6d, 0xeb, 0xda, 0x4a, 0x09, 0x39, 0x85}}
 
 // LoadDefaults dispatches through IMFCameraConfigurationManager's vtable slot 3.
-func (self *IMFCameraConfigurationManager) LoadDefaults(cameraAttributes *IMFAttributes, configurations **IMFCameraControlDefaultsCollection) foundation.HRESULT {
+func (self *IMFCameraConfigurationManager) LoadDefaults(cameraAttributes *IMFAttributes, configurations **IMFCameraControlDefaultsCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cameraAttributes)), uintptr(unsafe.Pointer(configurations)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveDefaults dispatches through IMFCameraConfigurationManager's vtable slot 4.
-func (self *IMFCameraConfigurationManager) SaveDefaults(configurations *IMFCameraControlDefaultsCollection) foundation.HRESULT {
+func (self *IMFCameraConfigurationManager) SaveDefaults(configurations *IMFCameraControlDefaultsCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(configurations)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFCameraConfigurationManager's vtable slot 5.
@@ -3073,21 +3084,21 @@ func (self *IMFCameraControlDefaults) GetType() MF_CAMERA_CONTROL_CONFIGURATION_
 }
 
 // GetRangeInfo dispatches through IMFCameraControlDefaults's vtable slot 4.
-func (self *IMFCameraControlDefaults) GetRangeInfo(rangeInfo *MF_CAMERA_CONTROL_RANGE_INFO) foundation.HRESULT {
+func (self *IMFCameraControlDefaults) GetRangeInfo(rangeInfo *MF_CAMERA_CONTROL_RANGE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rangeInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockControlData dispatches through IMFCameraControlDefaults's vtable slot 5.
-func (self *IMFCameraControlDefaults) LockControlData(control *unsafe.Pointer, controlSize *uint32, data *unsafe.Pointer, dataSize *uint32) foundation.HRESULT {
+func (self *IMFCameraControlDefaults) LockControlData(control *unsafe.Pointer, controlSize *uint32, data *unsafe.Pointer, dataSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(control)), uintptr(unsafe.Pointer(controlSize)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(dataSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockControlData dispatches through IMFCameraControlDefaults's vtable slot 6.
-func (self *IMFCameraControlDefaults) UnlockControlData() foundation.HRESULT {
+func (self *IMFCameraControlDefaults) UnlockControlData() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCameraControlDefaultsCollection: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfcameracontroldefaultscollection
@@ -3106,33 +3117,33 @@ func (self *IMFCameraControlDefaultsCollection) GetControlCount() uint32 {
 }
 
 // GetControl dispatches through IMFCameraControlDefaultsCollection's vtable slot 34.
-func (self *IMFCameraControlDefaultsCollection) GetControl(index uint32, configuration **IMFCameraControlDefaults) foundation.HRESULT {
+func (self *IMFCameraControlDefaultsCollection) GetControl(index uint32, configuration **IMFCameraControlDefaults) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(configuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOrAddExtendedControl dispatches through IMFCameraControlDefaultsCollection's vtable slot 35.
-func (self *IMFCameraControlDefaultsCollection) GetOrAddExtendedControl(configType MF_CAMERA_CONTROL_CONFIGURATION_TYPE, constrolId uint32, streamId uint32, dataSize uint32, defaults **IMFCameraControlDefaults) foundation.HRESULT {
+func (self *IMFCameraControlDefaultsCollection) GetOrAddExtendedControl(configType MF_CAMERA_CONTROL_CONFIGURATION_TYPE, constrolId uint32, streamId uint32, dataSize uint32, defaults **IMFCameraControlDefaults) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(configType), uintptr(constrolId), uintptr(streamId), uintptr(dataSize), uintptr(unsafe.Pointer(defaults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOrAddControl dispatches through IMFCameraControlDefaultsCollection's vtable slot 36.
-func (self *IMFCameraControlDefaultsCollection) GetOrAddControl(configType MF_CAMERA_CONTROL_CONFIGURATION_TYPE, controlSet *win32.GUID, constrolId uint32, controlSize uint32, dataSize uint32, defaults **IMFCameraControlDefaults) foundation.HRESULT {
+func (self *IMFCameraControlDefaultsCollection) GetOrAddControl(configType MF_CAMERA_CONTROL_CONFIGURATION_TYPE, controlSet *win32.GUID, constrolId uint32, controlSize uint32, dataSize uint32, defaults **IMFCameraControlDefaults) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(configType), uintptr(unsafe.Pointer(controlSet)), uintptr(constrolId), uintptr(controlSize), uintptr(dataSize), uintptr(unsafe.Pointer(defaults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveControl dispatches through IMFCameraControlDefaultsCollection's vtable slot 37.
-func (self *IMFCameraControlDefaultsCollection) RemoveControl(controlSet *win32.GUID, constrolId uint32) foundation.HRESULT {
+func (self *IMFCameraControlDefaultsCollection) RemoveControl(controlSet *win32.GUID, constrolId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(controlSet)), uintptr(constrolId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllControls dispatches through IMFCameraControlDefaultsCollection's vtable slot 38.
-func (self *IMFCameraControlDefaultsCollection) RemoveAllControls() foundation.HRESULT {
+func (self *IMFCameraControlDefaultsCollection) RemoveAllControls() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCameraControlMonitor: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfcameracontrolmonitor
@@ -3145,15 +3156,15 @@ type IMFCameraControlMonitor struct {
 var IID_IMFCameraControlMonitor = win32.GUID{Data1: 0x4d46f2c9, Data2: 0x28ba, Data3: 0x4970, Data4: [8]byte{0x8c, 0x7b, 0x1f, 0x0c, 0x9d, 0x80, 0xaf, 0x69}}
 
 // Start dispatches through IMFCameraControlMonitor's vtable slot 3.
-func (self *IMFCameraControlMonitor) Start() foundation.HRESULT {
+func (self *IMFCameraControlMonitor) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IMFCameraControlMonitor's vtable slot 4.
-func (self *IMFCameraControlMonitor) Stop() foundation.HRESULT {
+func (self *IMFCameraControlMonitor) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFCameraControlMonitor's vtable slot 7.
@@ -3190,15 +3201,15 @@ type IMFCameraOcclusionStateMonitor struct {
 var IID_IMFCameraOcclusionStateMonitor = win32.GUID{Data1: 0xcc692f46, Data2: 0xc697, Data3: 0x47e2, Data4: [8]byte{0xa7, 0x2d, 0x7b, 0x06, 0x46, 0x17, 0x74, 0x9b}}
 
 // Start dispatches through IMFCameraOcclusionStateMonitor's vtable slot 3.
-func (self *IMFCameraOcclusionStateMonitor) Start() foundation.HRESULT {
+func (self *IMFCameraOcclusionStateMonitor) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IMFCameraOcclusionStateMonitor's vtable slot 4.
-func (self *IMFCameraOcclusionStateMonitor) Stop() foundation.HRESULT {
+func (self *IMFCameraOcclusionStateMonitor) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedStates dispatches through IMFCameraOcclusionStateMonitor's vtable slot 5.
@@ -3217,9 +3228,9 @@ type IMFCameraOcclusionStateReport struct {
 var IID_IMFCameraOcclusionStateReport = win32.GUID{Data1: 0x1640b2cf, Data2: 0x74da, Data3: 0x4462, Data4: [8]byte{0xa4, 0x3b, 0xb7, 0x6d, 0x3b, 0xdc, 0x14, 0x34}}
 
 // GetOcclusionState dispatches through IMFCameraOcclusionStateReport's vtable slot 3.
-func (self *IMFCameraOcclusionStateReport) GetOcclusionState(occlusionState *uint32) foundation.HRESULT {
+func (self *IMFCameraOcclusionStateReport) GetOcclusionState(occlusionState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(occlusionState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCameraOcclusionStateReportCallback: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfcameraocclusionstatereportcallback
@@ -3232,9 +3243,9 @@ type IMFCameraOcclusionStateReportCallback struct {
 var IID_IMFCameraOcclusionStateReportCallback = win32.GUID{Data1: 0x6e5841c7, Data2: 0x3889, Data3: 0x4019, Data4: [8]byte{0x90, 0x35, 0x78, 0x3f, 0xb1, 0x9b, 0x59, 0x48}}
 
 // OnOcclusionStateReport dispatches through IMFCameraOcclusionStateReportCallback's vtable slot 3.
-func (self *IMFCameraOcclusionStateReportCallback) OnOcclusionStateReport(occlusionStateReport *IMFCameraOcclusionStateReport) foundation.HRESULT {
+func (self *IMFCameraOcclusionStateReportCallback) OnOcclusionStateReport(occlusionStateReport *IMFCameraOcclusionStateReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(occlusionStateReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCameraSyncObject: https://learn.microsoft.com/windows/win32/api/mfvirtualcamera/nn-mfvirtualcamera-imfcamerasyncobject
@@ -3247,9 +3258,9 @@ type IMFCameraSyncObject struct {
 var IID_IMFCameraSyncObject = win32.GUID{Data1: 0x6338b23a, Data2: 0x3042, Data3: 0x49d2, Data4: [8]byte{0xa3, 0xea, 0xec, 0x0f, 0xed, 0x81, 0x54, 0x07}}
 
 // WaitOnSignal dispatches through IMFCameraSyncObject's vtable slot 3.
-func (self *IMFCameraSyncObject) WaitOnSignal(timeOutInMs uint32) foundation.HRESULT {
+func (self *IMFCameraSyncObject) WaitOnSignal(timeOutInMs uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(timeOutInMs))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFCameraSyncObject's vtable slot 4.
@@ -3267,51 +3278,53 @@ type IMFCaptureEngine struct {
 var IID_IMFCaptureEngine = win32.GUID{Data1: 0xa6bba433, Data2: 0x176b, Data3: 0x48b2, Data4: [8]byte{0xb3, 0x75, 0x53, 0xaa, 0x03, 0x47, 0x32, 0x07}}
 
 // Initialize dispatches through IMFCaptureEngine's vtable slot 3.
-func (self *IMFCaptureEngine) Initialize(pEventCallback *IMFCaptureEngineOnEventCallback, pAttributes *IMFAttributes, pAudioSource *systemcom.IUnknown, pVideoSource *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCaptureEngine) Initialize(pEventCallback *IMFCaptureEngineOnEventCallback, pAttributes *IMFAttributes, pAudioSource *systemcom.IUnknown, pVideoSource *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventCallback)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pAudioSource)), uintptr(unsafe.Pointer(pVideoSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartPreview dispatches through IMFCaptureEngine's vtable slot 4.
-func (self *IMFCaptureEngine) StartPreview() foundation.HRESULT {
+func (self *IMFCaptureEngine) StartPreview() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopPreview dispatches through IMFCaptureEngine's vtable slot 5.
-func (self *IMFCaptureEngine) StopPreview() foundation.HRESULT {
+func (self *IMFCaptureEngine) StopPreview() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartRecord dispatches through IMFCaptureEngine's vtable slot 6.
-func (self *IMFCaptureEngine) StartRecord() foundation.HRESULT {
+func (self *IMFCaptureEngine) StartRecord() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopRecord dispatches through IMFCaptureEngine's vtable slot 7.
-func (self *IMFCaptureEngine) StopRecord(bFinalize foundation.BOOL, bFlushUnprocessedSamples foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(bFinalize), uintptr(bFlushUnprocessedSamples))
-	return foundation.HRESULT(r1)
+func (self *IMFCaptureEngine) StopRecord(bFinalize bool, bFlushUnprocessedSamples bool) error {
+	_bFinalize := win32.Bool32(bFinalize)
+	_bFlushUnprocessedSamples := win32.Bool32(bFlushUnprocessedSamples)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_bFinalize), uintptr(_bFlushUnprocessedSamples))
+	return win32.HRESULTError(int32(r1))
 }
 
 // TakePhoto dispatches through IMFCaptureEngine's vtable slot 8.
-func (self *IMFCaptureEngine) TakePhoto() foundation.HRESULT {
+func (self *IMFCaptureEngine) TakePhoto() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSink dispatches through IMFCaptureEngine's vtable slot 9.
-func (self *IMFCaptureEngine) GetSink(mfCaptureEngineSinkType MF_CAPTURE_ENGINE_SINK_TYPE, ppSink **IMFCaptureSink) foundation.HRESULT {
+func (self *IMFCaptureEngine) GetSink(mfCaptureEngineSinkType MF_CAPTURE_ENGINE_SINK_TYPE, ppSink **IMFCaptureSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(mfCaptureEngineSinkType), uintptr(unsafe.Pointer(ppSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSource dispatches through IMFCaptureEngine's vtable slot 10.
-func (self *IMFCaptureEngine) GetSource(ppSource **IMFCaptureSource) foundation.HRESULT {
+func (self *IMFCaptureEngine) GetSource(ppSource **IMFCaptureSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCaptureEngineClassFactory: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcaptureengineclassfactory
@@ -3324,9 +3337,9 @@ type IMFCaptureEngineClassFactory struct {
 var IID_IMFCaptureEngineClassFactory = win32.GUID{Data1: 0x8f02d140, Data2: 0x56fc, Data3: 0x4302, Data4: [8]byte{0xa7, 0x05, 0x3a, 0x97, 0xc7, 0x8b, 0xe7, 0x79}}
 
 // CreateInstance dispatches through IMFCaptureEngineClassFactory's vtable slot 3.
-func (self *IMFCaptureEngineClassFactory) CreateInstance(clsid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFCaptureEngineClassFactory) CreateInstance(clsid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCaptureEngineOnEventCallback: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcaptureengineoneventcallback
@@ -3339,9 +3352,9 @@ type IMFCaptureEngineOnEventCallback struct {
 var IID_IMFCaptureEngineOnEventCallback = win32.GUID{Data1: 0xaeda51c0, Data2: 0x9025, Data3: 0x4983, Data4: [8]byte{0x90, 0x12, 0xde, 0x59, 0x7b, 0x88, 0xb0, 0x89}}
 
 // OnEvent dispatches through IMFCaptureEngineOnEventCallback's vtable slot 3.
-func (self *IMFCaptureEngineOnEventCallback) OnEvent(pEvent *IMFMediaEvent) foundation.HRESULT {
+func (self *IMFCaptureEngineOnEventCallback) OnEvent(pEvent *IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCaptureEngineOnSampleCallback: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcaptureengineonsamplecallback
@@ -3354,9 +3367,9 @@ type IMFCaptureEngineOnSampleCallback struct {
 var IID_IMFCaptureEngineOnSampleCallback = win32.GUID{Data1: 0x52150b82, Data2: 0xab39, Data3: 0x4467, Data4: [8]byte{0x98, 0x0f, 0xe4, 0x8b, 0xf0, 0x82, 0x2e, 0xcd}}
 
 // OnSample dispatches through IMFCaptureEngineOnSampleCallback's vtable slot 3.
-func (self *IMFCaptureEngineOnSampleCallback) OnSample(pSample *IMFSample) foundation.HRESULT {
+func (self *IMFCaptureEngineOnSampleCallback) OnSample(pSample *IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCaptureEngineOnSampleCallback2: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcaptureengineonsamplecallback2
@@ -3369,9 +3382,9 @@ type IMFCaptureEngineOnSampleCallback2 struct {
 var IID_IMFCaptureEngineOnSampleCallback2 = win32.GUID{Data1: 0xe37ceed7, Data2: 0x340f, Data3: 0x4514, Data4: [8]byte{0x9f, 0x4d, 0x9c, 0x2a, 0xe0, 0x26, 0x10, 0x0b}}
 
 // OnSynchronizedEvent dispatches through IMFCaptureEngineOnSampleCallback2's vtable slot 4.
-func (self *IMFCaptureEngineOnSampleCallback2) OnSynchronizedEvent(pEvent *IMFMediaEvent) foundation.HRESULT {
+func (self *IMFCaptureEngineOnSampleCallback2) OnSynchronizedEvent(pEvent *IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 19f68549-ca8a-4706-a4ef-481dbc95e12c
@@ -3383,15 +3396,15 @@ type IMFCapturePhotoConfirmation struct {
 var IID_IMFCapturePhotoConfirmation = win32.GUID{Data1: 0x19f68549, Data2: 0xca8a, Data3: 0x4706, Data4: [8]byte{0xa4, 0xef, 0x48, 0x1d, 0xbc, 0x95, 0xe1, 0x2c}}
 
 // SetPhotoConfirmationCallback dispatches through IMFCapturePhotoConfirmation's vtable slot 3.
-func (self *IMFCapturePhotoConfirmation) SetPhotoConfirmationCallback(pNotificationCallback *IMFAsyncCallback) foundation.HRESULT {
+func (self *IMFCapturePhotoConfirmation) SetPhotoConfirmationCallback(pNotificationCallback *IMFAsyncCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotificationCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelFormat dispatches through IMFCapturePhotoConfirmation's vtable slot 5.
-func (self *IMFCapturePhotoConfirmation) GetPixelFormat(subtype *win32.GUID) foundation.HRESULT {
+func (self *IMFCapturePhotoConfirmation) GetPixelFormat(subtype *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subtype)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCapturePhotoSink: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcapturephotosink
@@ -3404,21 +3417,22 @@ type IMFCapturePhotoSink struct {
 var IID_IMFCapturePhotoSink = win32.GUID{Data1: 0xd2d43cc8, Data2: 0x48bb, Data3: 0x4aa7, Data4: [8]byte{0x95, 0xdb, 0x10, 0xc0, 0x69, 0x77, 0xe7, 0x77}}
 
 // SetOutputFileName dispatches through IMFCapturePhotoSink's vtable slot 8.
-func (self *IMFCapturePhotoSink) SetOutputFileName(fileName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileName)))
-	return foundation.HRESULT(r1)
+func (self *IMFCapturePhotoSink) SetOutputFileName(fileName string) error {
+	_fileName := win32.UTF16Ptr(fileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSampleCallback dispatches through IMFCapturePhotoSink's vtable slot 9.
-func (self *IMFCapturePhotoSink) SetSampleCallback(pCallback *IMFCaptureEngineOnSampleCallback) foundation.HRESULT {
+func (self *IMFCapturePhotoSink) SetSampleCallback(pCallback *IMFCaptureEngineOnSampleCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputByteStream dispatches through IMFCapturePhotoSink's vtable slot 10.
-func (self *IMFCapturePhotoSink) SetOutputByteStream(pByteStream *IMFByteStream) foundation.HRESULT {
+func (self *IMFCapturePhotoSink) SetOutputByteStream(pByteStream *IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCapturePreviewSink: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcapturepreviewsink
@@ -3431,57 +3445,58 @@ type IMFCapturePreviewSink struct {
 var IID_IMFCapturePreviewSink = win32.GUID{Data1: 0x77346cfd, Data2: 0x5b49, Data3: 0x4d73, Data4: [8]byte{0xac, 0xe0, 0x5b, 0x52, 0xa8, 0x59, 0xf2, 0xe0}}
 
 // SetRenderHandle dispatches through IMFCapturePreviewSink's vtable slot 8.
-func (self *IMFCapturePreviewSink) SetRenderHandle(handle foundation.HANDLE) foundation.HRESULT {
+func (self *IMFCapturePreviewSink) SetRenderHandle(handle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(handle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRenderSurface dispatches through IMFCapturePreviewSink's vtable slot 9.
-func (self *IMFCapturePreviewSink) SetRenderSurface(pSurface *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCapturePreviewSink) SetRenderSurface(pSurface *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateVideo dispatches through IMFCapturePreviewSink's vtable slot 10.
-func (self *IMFCapturePreviewSink) UpdateVideo(pSrc *MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *foundation.COLORREF) foundation.HRESULT {
+func (self *IMFCapturePreviewSink) UpdateVideo(pSrc *MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(pBorderClr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSampleCallback dispatches through IMFCapturePreviewSink's vtable slot 11.
-func (self *IMFCapturePreviewSink) SetSampleCallback(dwStreamSinkIndex uint32, pCallback *IMFCaptureEngineOnSampleCallback) foundation.HRESULT {
+func (self *IMFCapturePreviewSink) SetSampleCallback(dwStreamSinkIndex uint32, pCallback *IMFCaptureEngineOnSampleCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwStreamSinkIndex), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMirrorState dispatches through IMFCapturePreviewSink's vtable slot 12.
-func (self *IMFCapturePreviewSink) GetMirrorState(pfMirrorState *foundation.BOOL) foundation.HRESULT {
+func (self *IMFCapturePreviewSink) GetMirrorState(pfMirrorState *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfMirrorState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMirrorState dispatches through IMFCapturePreviewSink's vtable slot 13.
-func (self *IMFCapturePreviewSink) SetMirrorState(fMirrorState foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(fMirrorState))
-	return foundation.HRESULT(r1)
+func (self *IMFCapturePreviewSink) SetMirrorState(fMirrorState bool) error {
+	_fMirrorState := win32.Bool32(fMirrorState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_fMirrorState))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRotation dispatches through IMFCapturePreviewSink's vtable slot 14.
-func (self *IMFCapturePreviewSink) GetRotation(dwStreamIndex uint32, pdwRotationValue *uint32) foundation.HRESULT {
+func (self *IMFCapturePreviewSink) GetRotation(dwStreamIndex uint32, pdwRotationValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pdwRotationValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRotation dispatches through IMFCapturePreviewSink's vtable slot 15.
-func (self *IMFCapturePreviewSink) SetRotation(dwStreamIndex uint32, dwRotationValue uint32) foundation.HRESULT {
+func (self *IMFCapturePreviewSink) SetRotation(dwStreamIndex uint32, dwRotationValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(dwRotationValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCustomSink dispatches through IMFCapturePreviewSink's vtable slot 16.
-func (self *IMFCapturePreviewSink) SetCustomSink(pMediaSink *IMFMediaSink) foundation.HRESULT {
+func (self *IMFCapturePreviewSink) SetCustomSink(pMediaSink *IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCaptureRecordSink: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcapturerecordsink
@@ -3494,39 +3509,40 @@ type IMFCaptureRecordSink struct {
 var IID_IMFCaptureRecordSink = win32.GUID{Data1: 0x3323b55a, Data2: 0xf92a, Data3: 0x4fe2, Data4: [8]byte{0x8e, 0xdc, 0xe9, 0xbf, 0xc0, 0x63, 0x4d, 0x77}}
 
 // SetOutputByteStream dispatches through IMFCaptureRecordSink's vtable slot 8.
-func (self *IMFCaptureRecordSink) SetOutputByteStream(pByteStream *IMFByteStream, guidContainerType *win32.GUID) foundation.HRESULT {
+func (self *IMFCaptureRecordSink) SetOutputByteStream(pByteStream *IMFByteStream, guidContainerType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(guidContainerType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputFileName dispatches through IMFCaptureRecordSink's vtable slot 9.
-func (self *IMFCaptureRecordSink) SetOutputFileName(fileName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileName)))
-	return foundation.HRESULT(r1)
+func (self *IMFCaptureRecordSink) SetOutputFileName(fileName string) error {
+	_fileName := win32.UTF16Ptr(fileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSampleCallback dispatches through IMFCaptureRecordSink's vtable slot 10.
-func (self *IMFCaptureRecordSink) SetSampleCallback(dwStreamSinkIndex uint32, pCallback *IMFCaptureEngineOnSampleCallback) foundation.HRESULT {
+func (self *IMFCaptureRecordSink) SetSampleCallback(dwStreamSinkIndex uint32, pCallback *IMFCaptureEngineOnSampleCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwStreamSinkIndex), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCustomSink dispatches through IMFCaptureRecordSink's vtable slot 11.
-func (self *IMFCaptureRecordSink) SetCustomSink(pMediaSink *IMFMediaSink) foundation.HRESULT {
+func (self *IMFCaptureRecordSink) SetCustomSink(pMediaSink *IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRotation dispatches through IMFCaptureRecordSink's vtable slot 12.
-func (self *IMFCaptureRecordSink) GetRotation(dwStreamIndex uint32, pdwRotationValue *uint32) foundation.HRESULT {
+func (self *IMFCaptureRecordSink) GetRotation(dwStreamIndex uint32, pdwRotationValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pdwRotationValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRotation dispatches through IMFCaptureRecordSink's vtable slot 13.
-func (self *IMFCaptureRecordSink) SetRotation(dwStreamIndex uint32, dwRotationValue uint32) foundation.HRESULT {
+func (self *IMFCaptureRecordSink) SetRotation(dwStreamIndex uint32, dwRotationValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(dwRotationValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCaptureSink: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcapturesink
@@ -3539,33 +3555,33 @@ type IMFCaptureSink struct {
 var IID_IMFCaptureSink = win32.GUID{Data1: 0x72d6135b, Data2: 0x35e9, Data3: 0x412c, Data4: [8]byte{0xb9, 0x26, 0xfd, 0x52, 0x65, 0xf2, 0xa8, 0x85}}
 
 // GetOutputMediaType dispatches through IMFCaptureSink's vtable slot 3.
-func (self *IMFCaptureSink) GetOutputMediaType(dwSinkStreamIndex uint32, ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFCaptureSink) GetOutputMediaType(dwSinkStreamIndex uint32, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSinkStreamIndex), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetService dispatches through IMFCaptureSink's vtable slot 4.
-func (self *IMFCaptureSink) GetService(dwSinkStreamIndex uint32, rguidService *win32.GUID, riid *win32.GUID, ppUnknown **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCaptureSink) GetService(dwSinkStreamIndex uint32, rguidService *win32.GUID, riid *win32.GUID, ppUnknown **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwSinkStreamIndex), uintptr(unsafe.Pointer(rguidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStream dispatches through IMFCaptureSink's vtable slot 5.
-func (self *IMFCaptureSink) AddStream(dwSourceStreamIndex uint32, pMediaType *IMFMediaType, pAttributes *IMFAttributes, pdwSinkStreamIndex *uint32) foundation.HRESULT {
+func (self *IMFCaptureSink) AddStream(dwSourceStreamIndex uint32, pMediaType *IMFMediaType, pAttributes *IMFAttributes, pdwSinkStreamIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwSourceStreamIndex), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pdwSinkStreamIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Prepare dispatches through IMFCaptureSink's vtable slot 6.
-func (self *IMFCaptureSink) Prepare() foundation.HRESULT {
+func (self *IMFCaptureSink) Prepare() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllStreams dispatches through IMFCaptureSink's vtable slot 7.
-func (self *IMFCaptureSink) RemoveAllStreams() foundation.HRESULT {
+func (self *IMFCaptureSink) RemoveAllStreams() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCaptureSink2: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcapturesink2
@@ -3578,9 +3594,9 @@ type IMFCaptureSink2 struct {
 var IID_IMFCaptureSink2 = win32.GUID{Data1: 0xf9e4219e, Data2: 0x6197, Data3: 0x4b5e, Data4: [8]byte{0xb8, 0x88, 0xbe, 0xe3, 0x10, 0xab, 0x2c, 0x59}}
 
 // SetOutputMediaType dispatches through IMFCaptureSink2's vtable slot 8.
-func (self *IMFCaptureSink2) SetOutputMediaType(dwStreamIndex uint32, pMediaType *IMFMediaType, pEncodingAttributes *IMFAttributes) foundation.HRESULT {
+func (self *IMFCaptureSink2) SetOutputMediaType(dwStreamIndex uint32, pMediaType *IMFMediaType, pEncodingAttributes *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(pEncodingAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCaptureSource: https://learn.microsoft.com/windows/win32/api/mfcaptureengine/nn-mfcaptureengine-imfcapturesource
@@ -3593,87 +3609,88 @@ type IMFCaptureSource struct {
 var IID_IMFCaptureSource = win32.GUID{Data1: 0x439a42a8, Data2: 0x0d2c, Data3: 0x4505, Data4: [8]byte{0xbe, 0x83, 0xf7, 0x9b, 0x2a, 0x05, 0xd5, 0xc4}}
 
 // GetCaptureDeviceSource dispatches through IMFCaptureSource's vtable slot 3.
-func (self *IMFCaptureSource) GetCaptureDeviceSource(mfCaptureEngineDeviceType MF_CAPTURE_ENGINE_DEVICE_TYPE, ppMediaSource **IMFMediaSource) foundation.HRESULT {
+func (self *IMFCaptureSource) GetCaptureDeviceSource(mfCaptureEngineDeviceType MF_CAPTURE_ENGINE_DEVICE_TYPE, ppMediaSource **IMFMediaSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(mfCaptureEngineDeviceType), uintptr(unsafe.Pointer(ppMediaSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaptureDeviceActivate dispatches through IMFCaptureSource's vtable slot 4.
-func (self *IMFCaptureSource) GetCaptureDeviceActivate(mfCaptureEngineDeviceType MF_CAPTURE_ENGINE_DEVICE_TYPE, ppActivate **IMFActivate) foundation.HRESULT {
+func (self *IMFCaptureSource) GetCaptureDeviceActivate(mfCaptureEngineDeviceType MF_CAPTURE_ENGINE_DEVICE_TYPE, ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(mfCaptureEngineDeviceType), uintptr(unsafe.Pointer(ppActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetService dispatches through IMFCaptureSource's vtable slot 5.
-func (self *IMFCaptureSource) GetService(rguidService *win32.GUID, riid *win32.GUID, ppUnknown **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCaptureSource) GetService(rguidService *win32.GUID, riid *win32.GUID, ppUnknown **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEffect dispatches through IMFCaptureSource's vtable slot 6.
-func (self *IMFCaptureSource) AddEffect(dwSourceStreamIndex uint32, pUnknown *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCaptureSource) AddEffect(dwSourceStreamIndex uint32, pUnknown *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwSourceStreamIndex), uintptr(unsafe.Pointer(pUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveEffect dispatches through IMFCaptureSource's vtable slot 7.
-func (self *IMFCaptureSource) RemoveEffect(dwSourceStreamIndex uint32, pUnknown *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCaptureSource) RemoveEffect(dwSourceStreamIndex uint32, pUnknown *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwSourceStreamIndex), uintptr(unsafe.Pointer(pUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllEffects dispatches through IMFCaptureSource's vtable slot 8.
-func (self *IMFCaptureSource) RemoveAllEffects(dwSourceStreamIndex uint32) foundation.HRESULT {
+func (self *IMFCaptureSource) RemoveAllEffects(dwSourceStreamIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwSourceStreamIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAvailableDeviceMediaType dispatches through IMFCaptureSource's vtable slot 9.
-func (self *IMFCaptureSource) GetAvailableDeviceMediaType(dwSourceStreamIndex uint32, dwMediaTypeIndex uint32, ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFCaptureSource) GetAvailableDeviceMediaType(dwSourceStreamIndex uint32, dwMediaTypeIndex uint32, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwSourceStreamIndex), uintptr(dwMediaTypeIndex), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentDeviceMediaType dispatches through IMFCaptureSource's vtable slot 10.
-func (self *IMFCaptureSource) SetCurrentDeviceMediaType(dwSourceStreamIndex uint32, pMediaType *IMFMediaType) foundation.HRESULT {
+func (self *IMFCaptureSource) SetCurrentDeviceMediaType(dwSourceStreamIndex uint32, pMediaType *IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwSourceStreamIndex), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentDeviceMediaType dispatches through IMFCaptureSource's vtable slot 11.
-func (self *IMFCaptureSource) GetCurrentDeviceMediaType(dwSourceStreamIndex uint32, ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFCaptureSource) GetCurrentDeviceMediaType(dwSourceStreamIndex uint32, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwSourceStreamIndex), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceStreamCount dispatches through IMFCaptureSource's vtable slot 12.
-func (self *IMFCaptureSource) GetDeviceStreamCount(pdwStreamCount *uint32) foundation.HRESULT {
+func (self *IMFCaptureSource) GetDeviceStreamCount(pdwStreamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStreamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceStreamCategory dispatches through IMFCaptureSource's vtable slot 13.
-func (self *IMFCaptureSource) GetDeviceStreamCategory(dwSourceStreamIndex uint32, pStreamCategory *MF_CAPTURE_ENGINE_STREAM_CATEGORY) foundation.HRESULT {
+func (self *IMFCaptureSource) GetDeviceStreamCategory(dwSourceStreamIndex uint32, pStreamCategory *MF_CAPTURE_ENGINE_STREAM_CATEGORY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwSourceStreamIndex), uintptr(unsafe.Pointer(pStreamCategory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMirrorState dispatches through IMFCaptureSource's vtable slot 14.
-func (self *IMFCaptureSource) GetMirrorState(dwStreamIndex uint32, pfMirrorState *foundation.BOOL) foundation.HRESULT {
+func (self *IMFCaptureSource) GetMirrorState(dwStreamIndex uint32, pfMirrorState *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pfMirrorState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMirrorState dispatches through IMFCaptureSource's vtable slot 15.
-func (self *IMFCaptureSource) SetMirrorState(dwStreamIndex uint32, fMirrorState foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(fMirrorState))
-	return foundation.HRESULT(r1)
+func (self *IMFCaptureSource) SetMirrorState(dwStreamIndex uint32, fMirrorState bool) error {
+	_fMirrorState := win32.Bool32(fMirrorState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(_fMirrorState))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamIndexFromFriendlyName dispatches through IMFCaptureSource's vtable slot 16.
-func (self *IMFCaptureSource) GetStreamIndexFromFriendlyName(uifriendlyName uint32, pdwActualStreamIndex *uint32) foundation.HRESULT {
+func (self *IMFCaptureSource) GetStreamIndexFromFriendlyName(uifriendlyName uint32, pdwActualStreamIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(uifriendlyName), uintptr(unsafe.Pointer(pdwActualStreamIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCdmSuspendNotify: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfcdmsuspendnotify
@@ -3686,15 +3703,15 @@ type IMFCdmSuspendNotify struct {
 var IID_IMFCdmSuspendNotify = win32.GUID{Data1: 0x7a5645d2, Data2: 0x43bd, Data3: 0x47fd, Data4: [8]byte{0x87, 0xb7, 0xdc, 0xd2, 0x4c, 0xc7, 0xd6, 0x92}}
 
 // Begin dispatches through IMFCdmSuspendNotify's vtable slot 3.
-func (self *IMFCdmSuspendNotify) Begin() foundation.HRESULT {
+func (self *IMFCdmSuspendNotify) Begin() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // End dispatches through IMFCdmSuspendNotify's vtable slot 4.
-func (self *IMFCdmSuspendNotify) End() foundation.HRESULT {
+func (self *IMFCdmSuspendNotify) End() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFClock: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfclock
@@ -3707,33 +3724,33 @@ type IMFClock struct {
 var IID_IMFClock = win32.GUID{Data1: 0x2eb1e945, Data2: 0x18b8, Data3: 0x4139, Data4: [8]byte{0x9b, 0x1a, 0xd5, 0xd5, 0x84, 0x81, 0x85, 0x30}}
 
 // GetClockCharacteristics dispatches through IMFClock's vtable slot 3.
-func (self *IMFClock) GetClockCharacteristics(pdwCharacteristics *uint32) foundation.HRESULT {
+func (self *IMFClock) GetClockCharacteristics(pdwCharacteristics *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCharacteristics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCorrelatedTime dispatches through IMFClock's vtable slot 4.
-func (self *IMFClock) GetCorrelatedTime(dwReserved uint32, pllClockTime *int64, phnsSystemTime *int64) foundation.HRESULT {
+func (self *IMFClock) GetCorrelatedTime(dwReserved uint32, pllClockTime *int64, phnsSystemTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwReserved), uintptr(unsafe.Pointer(pllClockTime)), uintptr(unsafe.Pointer(phnsSystemTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContinuityKey dispatches through IMFClock's vtable slot 5.
-func (self *IMFClock) GetContinuityKey(pdwContinuityKey *uint32) foundation.HRESULT {
+func (self *IMFClock) GetContinuityKey(pdwContinuityKey *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwContinuityKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetState dispatches through IMFClock's vtable slot 6.
-func (self *IMFClock) GetState(dwReserved uint32, peClockState *MFCLOCK_STATE) foundation.HRESULT {
+func (self *IMFClock) GetState(dwReserved uint32, peClockState *MFCLOCK_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwReserved), uintptr(unsafe.Pointer(peClockState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperties dispatches through IMFClock's vtable slot 7.
-func (self *IMFClock) GetProperties(pClockProperties *MFCLOCK_PROPERTIES) foundation.HRESULT {
+func (self *IMFClock) GetProperties(pClockProperties *MFCLOCK_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClockProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFClockConsumer: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfclockconsumer
@@ -3746,15 +3763,15 @@ type IMFClockConsumer struct {
 var IID_IMFClockConsumer = win32.GUID{Data1: 0x6ef2a662, Data2: 0x47c0, Data3: 0x4666, Data4: [8]byte{0xb1, 0x3d, 0xcb, 0xb7, 0x17, 0xf2, 0xfa, 0x2c}}
 
 // SetPresentationClock dispatches through IMFClockConsumer's vtable slot 3.
-func (self *IMFClockConsumer) SetPresentationClock(pPresentationClock *IMFPresentationClock) foundation.HRESULT {
+func (self *IMFClockConsumer) SetPresentationClock(pPresentationClock *IMFPresentationClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresentationClock dispatches through IMFClockConsumer's vtable slot 4.
-func (self *IMFClockConsumer) GetPresentationClock(ppPresentationClock **IMFPresentationClock) foundation.HRESULT {
+func (self *IMFClockConsumer) GetPresentationClock(ppPresentationClock **IMFPresentationClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPresentationClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFClockStateSink: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfclockstatesink
@@ -3767,27 +3784,27 @@ type IMFClockStateSink struct {
 var IID_IMFClockStateSink = win32.GUID{Data1: 0xf6696e82, Data2: 0x74f7, Data3: 0x4f3d, Data4: [8]byte{0xa1, 0x78, 0x8a, 0x5e, 0x09, 0xc3, 0x65, 0x9f}}
 
 // OnClockStart dispatches through IMFClockStateSink's vtable slot 3.
-func (self *IMFClockStateSink) OnClockStart(hnsSystemTime int64, llClockStartOffset int64) foundation.HRESULT {
+func (self *IMFClockStateSink) OnClockStart(hnsSystemTime int64, llClockStartOffset int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hnsSystemTime), uintptr(llClockStartOffset))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnClockStop dispatches through IMFClockStateSink's vtable slot 4.
-func (self *IMFClockStateSink) OnClockStop(hnsSystemTime int64) foundation.HRESULT {
+func (self *IMFClockStateSink) OnClockStop(hnsSystemTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hnsSystemTime))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnClockPause dispatches through IMFClockStateSink's vtable slot 5.
-func (self *IMFClockStateSink) OnClockPause(hnsSystemTime int64) foundation.HRESULT {
+func (self *IMFClockStateSink) OnClockPause(hnsSystemTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hnsSystemTime))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnClockRestart dispatches through IMFClockStateSink's vtable slot 6.
-func (self *IMFClockStateSink) OnClockRestart(hnsSystemTime int64) foundation.HRESULT {
+func (self *IMFClockStateSink) OnClockRestart(hnsSystemTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hnsSystemTime))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFCollection: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfcollection
@@ -3800,39 +3817,39 @@ type IMFCollection struct {
 var IID_IMFCollection = win32.GUID{Data1: 0x5bc8a76b, Data2: 0x869a, Data3: 0x46a3, Data4: [8]byte{0x9b, 0x03, 0xfa, 0x21, 0x8a, 0x66, 0xae, 0xbe}}
 
 // GetElementCount dispatches through IMFCollection's vtable slot 3.
-func (self *IMFCollection) GetElementCount(pcElements *uint32) foundation.HRESULT {
+func (self *IMFCollection) GetElementCount(pcElements *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetElement dispatches through IMFCollection's vtable slot 4.
-func (self *IMFCollection) GetElement(dwElementIndex uint32, ppUnkElement **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCollection) GetElement(dwElementIndex uint32, ppUnkElement **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwElementIndex), uintptr(unsafe.Pointer(ppUnkElement)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddElement dispatches through IMFCollection's vtable slot 5.
-func (self *IMFCollection) AddElement(pUnkElement *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCollection) AddElement(pUnkElement *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkElement)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveElement dispatches through IMFCollection's vtable slot 6.
-func (self *IMFCollection) RemoveElement(dwElementIndex uint32, ppUnkElement **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCollection) RemoveElement(dwElementIndex uint32, ppUnkElement **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwElementIndex), uintptr(unsafe.Pointer(ppUnkElement)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertElementAt dispatches through IMFCollection's vtable slot 7.
-func (self *IMFCollection) InsertElementAt(dwIndex uint32, pUnknown *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFCollection) InsertElementAt(dwIndex uint32, pUnknown *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllElements dispatches through IMFCollection's vtable slot 8.
-func (self *IMFCollection) RemoveAllElements() foundation.HRESULT {
+func (self *IMFCollection) RemoveAllElements() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFContentDecryptionModule: https://learn.microsoft.com/windows/win32/api/mfcontentdecryptionmodule/nn-mfcontentdecryptionmodule-imfcontentdecryptionmodule
@@ -3845,45 +3862,45 @@ type IMFContentDecryptionModule struct {
 var IID_IMFContentDecryptionModule = win32.GUID{Data1: 0x87be986c, Data2: 0x10be, Data3: 0x4943, Data4: [8]byte{0xbf, 0x48, 0x4b, 0x54, 0xce, 0x19, 0x83, 0xa2}}
 
 // SetContentEnabler dispatches through IMFContentDecryptionModule's vtable slot 3.
-func (self *IMFContentDecryptionModule) SetContentEnabler(contentEnabler *IMFContentEnabler, result *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFContentDecryptionModule) SetContentEnabler(contentEnabler *IMFContentEnabler, result *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentEnabler)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSuspendNotify dispatches through IMFContentDecryptionModule's vtable slot 4.
-func (self *IMFContentDecryptionModule) GetSuspendNotify(notify **IMFCdmSuspendNotify) foundation.HRESULT {
+func (self *IMFContentDecryptionModule) GetSuspendNotify(notify **IMFCdmSuspendNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(notify)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPMPHostApp dispatches through IMFContentDecryptionModule's vtable slot 5.
-func (self *IMFContentDecryptionModule) SetPMPHostApp(pmpHostApp *IMFPMPHostApp) foundation.HRESULT {
+func (self *IMFContentDecryptionModule) SetPMPHostApp(pmpHostApp *IMFPMPHostApp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmpHostApp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSession dispatches through IMFContentDecryptionModule's vtable slot 6.
-func (self *IMFContentDecryptionModule) CreateSession(sessionType MF_MEDIAKEYSESSION_TYPE, callbacks *IMFContentDecryptionModuleSessionCallbacks, session **IMFContentDecryptionModuleSession) foundation.HRESULT {
+func (self *IMFContentDecryptionModule) CreateSession(sessionType MF_MEDIAKEYSESSION_TYPE, callbacks *IMFContentDecryptionModuleSessionCallbacks, session **IMFContentDecryptionModuleSession) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(sessionType), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(session)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetServerCertificate dispatches through IMFContentDecryptionModule's vtable slot 7.
-func (self *IMFContentDecryptionModule) SetServerCertificate(certificate *byte, certificateSize uint32) foundation.HRESULT {
+func (self *IMFContentDecryptionModule) SetServerCertificate(certificate *byte, certificateSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certificate)), uintptr(certificateSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateTrustedInput dispatches through IMFContentDecryptionModule's vtable slot 8.
-func (self *IMFContentDecryptionModule) CreateTrustedInput(contentInitData *byte, contentInitDataSize uint32, trustedInput **IMFTrustedInput) foundation.HRESULT {
+func (self *IMFContentDecryptionModule) CreateTrustedInput(contentInitData *byte, contentInitDataSize uint32, trustedInput **IMFTrustedInput) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentInitData)), uintptr(contentInitDataSize), uintptr(unsafe.Pointer(trustedInput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProtectionSystemIds dispatches through IMFContentDecryptionModule's vtable slot 9.
-func (self *IMFContentDecryptionModule) GetProtectionSystemIds(systemIds **win32.GUID, count *uint32) foundation.HRESULT {
+func (self *IMFContentDecryptionModule) GetProtectionSystemIds(systemIds **win32.GUID, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(systemIds)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFContentDecryptionModuleAccess: https://learn.microsoft.com/windows/win32/api/mfcontentdecryptionmodule/nn-mfcontentdecryptionmodule-imfcontentdecryptionmoduleaccess
@@ -3896,21 +3913,21 @@ type IMFContentDecryptionModuleAccess struct {
 var IID_IMFContentDecryptionModuleAccess = win32.GUID{Data1: 0xa853d1f4, Data2: 0xe2a0, Data3: 0x4303, Data4: [8]byte{0x9e, 0xdc, 0xf1, 0xa6, 0x8e, 0xe4, 0x31, 0x36}}
 
 // CreateContentDecryptionModule dispatches through IMFContentDecryptionModuleAccess's vtable slot 3.
-func (self *IMFContentDecryptionModuleAccess) CreateContentDecryptionModule(contentDecryptionModuleProperties *uishellpropertiessystem.IPropertyStore, contentDecryptionModule **IMFContentDecryptionModule) foundation.HRESULT {
+func (self *IMFContentDecryptionModuleAccess) CreateContentDecryptionModule(contentDecryptionModuleProperties *uishellpropertiessystem.IPropertyStore, contentDecryptionModule **IMFContentDecryptionModule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentDecryptionModuleProperties)), uintptr(unsafe.Pointer(contentDecryptionModule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConfiguration dispatches through IMFContentDecryptionModuleAccess's vtable slot 4.
-func (self *IMFContentDecryptionModuleAccess) GetConfiguration(configuration **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IMFContentDecryptionModuleAccess) GetConfiguration(configuration **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(configuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKeySystem dispatches through IMFContentDecryptionModuleAccess's vtable slot 5.
-func (self *IMFContentDecryptionModuleAccess) GetKeySystem(keySystem *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFContentDecryptionModuleAccess) GetKeySystem(keySystem *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keySystem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFContentDecryptionModuleFactory: https://learn.microsoft.com/windows/win32/api/mfcontentdecryptionmodule/nn-mfcontentdecryptionmodule-imfcontentdecryptionmodulefactory
@@ -3923,15 +3940,18 @@ type IMFContentDecryptionModuleFactory struct {
 var IID_IMFContentDecryptionModuleFactory = win32.GUID{Data1: 0x7d5abf16, Data2: 0x4cbb, Data3: 0x4e08, Data4: [8]byte{0xb9, 0x77, 0x9b, 0xa5, 0x90, 0x49, 0x94, 0x3e}}
 
 // IsTypeSupported dispatches through IMFContentDecryptionModuleFactory's vtable slot 3.
-func (self *IMFContentDecryptionModuleFactory) IsTypeSupported(keySystem foundation.PWSTR, contentType foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keySystem)), uintptr(unsafe.Pointer(contentType)))
+func (self *IMFContentDecryptionModuleFactory) IsTypeSupported(keySystem string, contentType string) foundation.BOOL {
+	_keySystem := win32.UTF16Ptr(keySystem)
+	_contentType := win32.UTF16Ptr(contentType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_keySystem)), uintptr(unsafe.Pointer(_contentType)))
 	return foundation.BOOL(r1)
 }
 
 // CreateContentDecryptionModuleAccess dispatches through IMFContentDecryptionModuleFactory's vtable slot 4.
-func (self *IMFContentDecryptionModuleFactory) CreateContentDecryptionModuleAccess(keySystem foundation.PWSTR, configurations **uishellpropertiessystem.IPropertyStore, numConfigurations uint32, contentDecryptionModuleAccess **IMFContentDecryptionModuleAccess) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keySystem)), uintptr(unsafe.Pointer(configurations)), uintptr(numConfigurations), uintptr(unsafe.Pointer(contentDecryptionModuleAccess)))
-	return foundation.HRESULT(r1)
+func (self *IMFContentDecryptionModuleFactory) CreateContentDecryptionModuleAccess(keySystem string, configurations **uishellpropertiessystem.IPropertyStore, numConfigurations uint32, contentDecryptionModuleAccess **IMFContentDecryptionModuleAccess) error {
+	_keySystem := win32.UTF16Ptr(keySystem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_keySystem)), uintptr(unsafe.Pointer(configurations)), uintptr(numConfigurations), uintptr(unsafe.Pointer(contentDecryptionModuleAccess)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFContentDecryptionModuleSession: https://learn.microsoft.com/windows/win32/api/mfcontentdecryptionmodule/nn-mfcontentdecryptionmodule-imfcontentdecryptionmodulesession
@@ -3944,51 +3964,53 @@ type IMFContentDecryptionModuleSession struct {
 var IID_IMFContentDecryptionModuleSession = win32.GUID{Data1: 0x4e233efd, Data2: 0x1dd2, Data3: 0x49e8, Data4: [8]byte{0xb5, 0x77, 0xd6, 0x3e, 0xee, 0x4c, 0x0d, 0x33}}
 
 // GetSessionId dispatches through IMFContentDecryptionModuleSession's vtable slot 3.
-func (self *IMFContentDecryptionModuleSession) GetSessionId(sessionId *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFContentDecryptionModuleSession) GetSessionId(sessionId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sessionId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExpiration dispatches through IMFContentDecryptionModuleSession's vtable slot 4.
-func (self *IMFContentDecryptionModuleSession) GetExpiration(expiration *float64) foundation.HRESULT {
+func (self *IMFContentDecryptionModuleSession) GetExpiration(expiration *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(expiration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKeyStatuses dispatches through IMFContentDecryptionModuleSession's vtable slot 5.
-func (self *IMFContentDecryptionModuleSession) GetKeyStatuses(keyStatuses **MFMediaKeyStatus, numKeyStatuses *uint32) foundation.HRESULT {
+func (self *IMFContentDecryptionModuleSession) GetKeyStatuses(keyStatuses **MFMediaKeyStatus, numKeyStatuses *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keyStatuses)), uintptr(unsafe.Pointer(numKeyStatuses)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Load dispatches through IMFContentDecryptionModuleSession's vtable slot 6.
-func (self *IMFContentDecryptionModuleSession) Load(sessionId foundation.PWSTR, loaded *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sessionId)), uintptr(unsafe.Pointer(loaded)))
-	return foundation.HRESULT(r1)
+func (self *IMFContentDecryptionModuleSession) Load(sessionId string, loaded *foundation.BOOL) error {
+	_sessionId := win32.UTF16Ptr(sessionId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_sessionId)), uintptr(unsafe.Pointer(loaded)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateRequest dispatches through IMFContentDecryptionModuleSession's vtable slot 7.
-func (self *IMFContentDecryptionModuleSession) GenerateRequest(initDataType foundation.PWSTR, initData *byte, initDataSize uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(initDataType)), uintptr(unsafe.Pointer(initData)), uintptr(initDataSize))
-	return foundation.HRESULT(r1)
+func (self *IMFContentDecryptionModuleSession) GenerateRequest(initDataType string, initData *byte, initDataSize uint32) error {
+	_initDataType := win32.UTF16Ptr(initDataType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_initDataType)), uintptr(unsafe.Pointer(initData)), uintptr(initDataSize))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through IMFContentDecryptionModuleSession's vtable slot 8.
-func (self *IMFContentDecryptionModuleSession) Update(response *byte, responseSize uint32) foundation.HRESULT {
+func (self *IMFContentDecryptionModuleSession) Update(response *byte, responseSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(response)), uintptr(responseSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMFContentDecryptionModuleSession's vtable slot 9.
-func (self *IMFContentDecryptionModuleSession) Close() foundation.HRESULT {
+func (self *IMFContentDecryptionModuleSession) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IMFContentDecryptionModuleSession's vtable slot 10.
-func (self *IMFContentDecryptionModuleSession) Remove() foundation.HRESULT {
+func (self *IMFContentDecryptionModuleSession) Remove() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFContentDecryptionModuleSessionCallbacks: https://learn.microsoft.com/windows/win32/api/mfcontentdecryptionmodule/nn-mfcontentdecryptionmodule-imfcontentdecryptionmodulesessioncallbacks
@@ -4001,15 +4023,16 @@ type IMFContentDecryptionModuleSessionCallbacks struct {
 var IID_IMFContentDecryptionModuleSessionCallbacks = win32.GUID{Data1: 0x3f96ee40, Data2: 0xad81, Data3: 0x4096, Data4: [8]byte{0x84, 0x70, 0x59, 0xa4, 0xb7, 0x70, 0xf8, 0x9a}}
 
 // KeyMessage dispatches through IMFContentDecryptionModuleSessionCallbacks's vtable slot 3.
-func (self *IMFContentDecryptionModuleSessionCallbacks) KeyMessage(messageType MF_MEDIAKEYSESSION_MESSAGETYPE, message *byte, messageSize uint32, destinationURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(messageType), uintptr(unsafe.Pointer(message)), uintptr(messageSize), uintptr(unsafe.Pointer(destinationURL)))
-	return foundation.HRESULT(r1)
+func (self *IMFContentDecryptionModuleSessionCallbacks) KeyMessage(messageType MF_MEDIAKEYSESSION_MESSAGETYPE, message *byte, messageSize uint32, destinationURL string) error {
+	_destinationURL := win32.UTF16Ptr(destinationURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(messageType), uintptr(unsafe.Pointer(message)), uintptr(messageSize), uintptr(unsafe.Pointer(_destinationURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // KeyStatusChanged dispatches through IMFContentDecryptionModuleSessionCallbacks's vtable slot 4.
-func (self *IMFContentDecryptionModuleSessionCallbacks) KeyStatusChanged() foundation.HRESULT {
+func (self *IMFContentDecryptionModuleSessionCallbacks) KeyStatusChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFContentDecryptorContext: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfcontentdecryptorcontext
@@ -4022,9 +4045,9 @@ type IMFContentDecryptorContext struct {
 var IID_IMFContentDecryptorContext = win32.GUID{Data1: 0x7ec4b1bd, Data2: 0x43fb, Data3: 0x4763, Data4: [8]byte{0x85, 0xd2, 0x64, 0xfc, 0xb5, 0xc5, 0xf4, 0xcb}}
 
 // InitializeHardwareKey dispatches through IMFContentDecryptorContext's vtable slot 3.
-func (self *IMFContentDecryptorContext) InitializeHardwareKey(InputPrivateDataByteCount uint32, InputPrivateData unsafe.Pointer, OutputPrivateData *uint64) foundation.HRESULT {
+func (self *IMFContentDecryptorContext) InitializeHardwareKey(InputPrivateDataByteCount uint32, InputPrivateData unsafe.Pointer, OutputPrivateData *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(InputPrivateDataByteCount), uintptr(unsafe.Pointer(InputPrivateData)), uintptr(unsafe.Pointer(OutputPrivateData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFContentEnabler: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfcontentenabler
@@ -4037,45 +4060,45 @@ type IMFContentEnabler struct {
 var IID_IMFContentEnabler = win32.GUID{Data1: 0xd3c4ef59, Data2: 0x49ce, Data3: 0x4381, Data4: [8]byte{0x90, 0x71, 0xd5, 0xbc, 0xd0, 0x44, 0xc7, 0x70}}
 
 // GetEnableType dispatches through IMFContentEnabler's vtable slot 3.
-func (self *IMFContentEnabler) GetEnableType(pType *win32.GUID) foundation.HRESULT {
+func (self *IMFContentEnabler) GetEnableType(pType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnableURL dispatches through IMFContentEnabler's vtable slot 4.
-func (self *IMFContentEnabler) GetEnableURL(ppwszURL *foundation.PWSTR, pcchURL *uint32, pTrustStatus *MF_URL_TRUST_STATUS) foundation.HRESULT {
+func (self *IMFContentEnabler) GetEnableURL(ppwszURL *foundation.PWSTR, pcchURL *uint32, pTrustStatus *MF_URL_TRUST_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszURL)), uintptr(unsafe.Pointer(pcchURL)), uintptr(unsafe.Pointer(pTrustStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnableData dispatches through IMFContentEnabler's vtable slot 5.
-func (self *IMFContentEnabler) GetEnableData(ppbData **byte, pcbData *uint32) foundation.HRESULT {
+func (self *IMFContentEnabler) GetEnableData(ppbData **byte, pcbData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppbData)), uintptr(unsafe.Pointer(pcbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsAutomaticSupported dispatches through IMFContentEnabler's vtable slot 6.
-func (self *IMFContentEnabler) IsAutomaticSupported(pfAutomatic *foundation.BOOL) foundation.HRESULT {
+func (self *IMFContentEnabler) IsAutomaticSupported(pfAutomatic *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAutomatic)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AutomaticEnable dispatches through IMFContentEnabler's vtable slot 7.
-func (self *IMFContentEnabler) AutomaticEnable() foundation.HRESULT {
+func (self *IMFContentEnabler) AutomaticEnable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MonitorEnable dispatches through IMFContentEnabler's vtable slot 8.
-func (self *IMFContentEnabler) MonitorEnable() foundation.HRESULT {
+func (self *IMFContentEnabler) MonitorEnable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IMFContentEnabler's vtable slot 9.
-func (self *IMFContentEnabler) Cancel() foundation.HRESULT {
+func (self *IMFContentEnabler) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFContentProtectionDevice: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfcontentprotectiondevice
@@ -4088,15 +4111,15 @@ type IMFContentProtectionDevice struct {
 var IID_IMFContentProtectionDevice = win32.GUID{Data1: 0xe6257174, Data2: 0xa060, Data3: 0x4c9a, Data4: [8]byte{0xa0, 0x88, 0x3b, 0x1b, 0x47, 0x1c, 0xad, 0x28}}
 
 // InvokeFunction dispatches through IMFContentProtectionDevice's vtable slot 3.
-func (self *IMFContentProtectionDevice) InvokeFunction(FunctionId uint32, InputBufferByteCount uint32, InputBuffer *byte, OutputBufferByteCount *uint32, OutputBuffer *byte) foundation.HRESULT {
+func (self *IMFContentProtectionDevice) InvokeFunction(FunctionId uint32, InputBufferByteCount uint32, InputBuffer *byte, OutputBufferByteCount *uint32, OutputBuffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(FunctionId), uintptr(InputBufferByteCount), uintptr(unsafe.Pointer(InputBuffer)), uintptr(unsafe.Pointer(OutputBufferByteCount)), uintptr(unsafe.Pointer(OutputBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrivateDataByteCount dispatches through IMFContentProtectionDevice's vtable slot 4.
-func (self *IMFContentProtectionDevice) GetPrivateDataByteCount(PrivateInputByteCount *uint32, PrivateOutputByteCount *uint32) foundation.HRESULT {
+func (self *IMFContentProtectionDevice) GetPrivateDataByteCount(PrivateInputByteCount *uint32, PrivateOutputByteCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PrivateInputByteCount)), uintptr(unsafe.Pointer(PrivateOutputByteCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFContentProtectionManager: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfcontentprotectionmanager
@@ -4109,15 +4132,15 @@ type IMFContentProtectionManager struct {
 var IID_IMFContentProtectionManager = win32.GUID{Data1: 0xacf92459, Data2: 0x6a61, Data3: 0x42bd, Data4: [8]byte{0xb5, 0x7c, 0xb4, 0x3e, 0x51, 0x20, 0x3c, 0xb0}}
 
 // BeginEnableContent dispatches through IMFContentProtectionManager's vtable slot 3.
-func (self *IMFContentProtectionManager) BeginEnableContent(pEnablerActivate *IMFActivate, pTopo *IMFTopology, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFContentProtectionManager) BeginEnableContent(pEnablerActivate *IMFActivate, pTopo *IMFTopology, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnablerActivate)), uintptr(unsafe.Pointer(pTopo)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndEnableContent dispatches through IMFContentProtectionManager's vtable slot 4.
-func (self *IMFContentProtectionManager) EndEnableContent(pResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFContentProtectionManager) EndEnableContent(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFD3D12SynchronizationObject: https://learn.microsoft.com/windows/win32/api/mfd3d12/nn-mfd3d12-imfd3d12synchronizationobject
@@ -4130,15 +4153,15 @@ type IMFD3D12SynchronizationObject struct {
 var IID_IMFD3D12SynchronizationObject = win32.GUID{Data1: 0x802302b0, Data2: 0x82de, Data3: 0x45e1, Data4: [8]byte{0xb4, 0x21, 0xf1, 0x9e, 0xe5, 0xbd, 0xaf, 0x23}}
 
 // SignalEventOnFinalResourceRelease dispatches through IMFD3D12SynchronizationObject's vtable slot 3.
-func (self *IMFD3D12SynchronizationObject) SignalEventOnFinalResourceRelease(hEvent foundation.HANDLE) foundation.HRESULT {
+func (self *IMFD3D12SynchronizationObject) SignalEventOnFinalResourceRelease(hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hEvent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IMFD3D12SynchronizationObject's vtable slot 4.
-func (self *IMFD3D12SynchronizationObject) Reset() foundation.HRESULT {
+func (self *IMFD3D12SynchronizationObject) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFD3D12SynchronizationObjectCommands: https://learn.microsoft.com/windows/win32/api/mfd3d12/nn-mfd3d12-imfd3d12synchronizationobjectcommands
@@ -4151,27 +4174,27 @@ type IMFD3D12SynchronizationObjectCommands struct {
 var IID_IMFD3D12SynchronizationObjectCommands = win32.GUID{Data1: 0x09d0f835, Data2: 0x92ff, Data3: 0x4e53, Data4: [8]byte{0x8e, 0xfa, 0x40, 0xfa, 0xa5, 0x51, 0xf2, 0x33}}
 
 // EnqueueResourceReady dispatches through IMFD3D12SynchronizationObjectCommands's vtable slot 3.
-func (self *IMFD3D12SynchronizationObjectCommands) EnqueueResourceReady(pProducerCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) foundation.HRESULT {
+func (self *IMFD3D12SynchronizationObjectCommands) EnqueueResourceReady(pProducerCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProducerCommandQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnqueueResourceReadyWait dispatches through IMFD3D12SynchronizationObjectCommands's vtable slot 4.
-func (self *IMFD3D12SynchronizationObjectCommands) EnqueueResourceReadyWait(pConsumerCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) foundation.HRESULT {
+func (self *IMFD3D12SynchronizationObjectCommands) EnqueueResourceReadyWait(pConsumerCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConsumerCommandQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SignalEventOnResourceReady dispatches through IMFD3D12SynchronizationObjectCommands's vtable slot 5.
-func (self *IMFD3D12SynchronizationObjectCommands) SignalEventOnResourceReady(hEvent foundation.HANDLE) foundation.HRESULT {
+func (self *IMFD3D12SynchronizationObjectCommands) SignalEventOnResourceReady(hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hEvent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnqueueResourceRelease dispatches through IMFD3D12SynchronizationObjectCommands's vtable slot 6.
-func (self *IMFD3D12SynchronizationObjectCommands) EnqueueResourceRelease(pConsumerCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) foundation.HRESULT {
+func (self *IMFD3D12SynchronizationObjectCommands) EnqueueResourceRelease(pConsumerCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConsumerCommandQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFDLNASinkInit: https://learn.microsoft.com/windows/win32/api/mfmp2dlna/nn-mfmp2dlna-imfdlnasinkinit
@@ -4184,9 +4207,10 @@ type IMFDLNASinkInit struct {
 var IID_IMFDLNASinkInit = win32.GUID{Data1: 0x0c012799, Data2: 0x1b61, Data3: 0x4c10, Data4: [8]byte{0xbd, 0xa9, 0x04, 0x44, 0x5b, 0xe5, 0xf5, 0x61}}
 
 // Initialize dispatches through IMFDLNASinkInit's vtable slot 3.
-func (self *IMFDLNASinkInit) Initialize(pByteStream *IMFByteStream, fPal foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(fPal))
-	return foundation.HRESULT(r1)
+func (self *IMFDLNASinkInit) Initialize(pByteStream *IMFByteStream, fPal bool) error {
+	_fPal := win32.Bool32(fPal)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(_fPal))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFDRMNetHelper: https://learn.microsoft.com/windows/win32/api/wmcontainer/nn-wmcontainer-imfdrmnethelper
@@ -4199,15 +4223,15 @@ type IMFDRMNetHelper struct {
 var IID_IMFDRMNetHelper = win32.GUID{Data1: 0x3d1ff0ea, Data2: 0x679a, Data3: 0x4190, Data4: [8]byte{0x8d, 0x46, 0x7f, 0xa6, 0x9e, 0x8c, 0x7e, 0x15}}
 
 // ProcessLicenseRequest dispatches through IMFDRMNetHelper's vtable slot 3.
-func (self *IMFDRMNetHelper) ProcessLicenseRequest(pLicenseRequest *byte, cbLicenseRequest uint32, ppLicenseResponse **byte, pcbLicenseResponse *uint32, pbstrKID *foundation.BSTR) foundation.HRESULT {
+func (self *IMFDRMNetHelper) ProcessLicenseRequest(pLicenseRequest *byte, cbLicenseRequest uint32, ppLicenseResponse **byte, pcbLicenseResponse *uint32, pbstrKID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLicenseRequest)), uintptr(cbLicenseRequest), uintptr(unsafe.Pointer(ppLicenseResponse)), uintptr(unsafe.Pointer(pcbLicenseResponse)), uintptr(unsafe.Pointer(pbstrKID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChainedLicenseResponse dispatches through IMFDRMNetHelper's vtable slot 4.
-func (self *IMFDRMNetHelper) GetChainedLicenseResponse(ppLicenseResponse **byte, pcbLicenseResponse *uint32) foundation.HRESULT {
+func (self *IMFDRMNetHelper) GetChainedLicenseResponse(ppLicenseResponse **byte, pcbLicenseResponse *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLicenseResponse)), uintptr(unsafe.Pointer(pcbLicenseResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFDXGIBuffer: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfdxgibuffer
@@ -4220,27 +4244,27 @@ type IMFDXGIBuffer struct {
 var IID_IMFDXGIBuffer = win32.GUID{Data1: 0xe7174cfa, Data2: 0x1c9e, Data3: 0x48b1, Data4: [8]byte{0x88, 0x66, 0x62, 0x62, 0x26, 0xbf, 0xc2, 0x58}}
 
 // GetResource dispatches through IMFDXGIBuffer's vtable slot 3.
-func (self *IMFDXGIBuffer) GetResource(riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFDXGIBuffer) GetResource(riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubresourceIndex dispatches through IMFDXGIBuffer's vtable slot 4.
-func (self *IMFDXGIBuffer) GetSubresourceIndex(puSubresource *uint32) foundation.HRESULT {
+func (self *IMFDXGIBuffer) GetSubresourceIndex(puSubresource *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puSubresource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUnknown dispatches through IMFDXGIBuffer's vtable slot 5.
-func (self *IMFDXGIBuffer) GetUnknown(guid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFDXGIBuffer) GetUnknown(guid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUnknown dispatches through IMFDXGIBuffer's vtable slot 6.
-func (self *IMFDXGIBuffer) SetUnknown(guid *win32.GUID, pUnkData *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFDXGIBuffer) SetUnknown(guid *win32.GUID, pUnkData *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(pUnkData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b25d03fb-d148-45ef-bfed-f778b7566c07
@@ -4252,27 +4276,27 @@ type IMFDXGICrossAdapterBuffer struct {
 var IID_IMFDXGICrossAdapterBuffer = win32.GUID{Data1: 0xb25d03fb, Data2: 0xd148, Data3: 0x45ef, Data4: [8]byte{0xbf, 0xed, 0xf7, 0x78, 0xb7, 0x56, 0x6c, 0x07}}
 
 // GetResourceForDevice dispatches through IMFDXGICrossAdapterBuffer's vtable slot 3.
-func (self *IMFDXGICrossAdapterBuffer) GetResourceForDevice(pUnkDevice *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFDXGICrossAdapterBuffer) GetResourceForDevice(pUnkDevice *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubresourceIndexForDevice dispatches through IMFDXGICrossAdapterBuffer's vtable slot 4.
-func (self *IMFDXGICrossAdapterBuffer) GetSubresourceIndexForDevice(pUnkDevice *systemcom.IUnknown, puSubresource *uint32) foundation.HRESULT {
+func (self *IMFDXGICrossAdapterBuffer) GetSubresourceIndexForDevice(pUnkDevice *systemcom.IUnknown, puSubresource *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDevice)), uintptr(unsafe.Pointer(puSubresource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUnknownForDevice dispatches through IMFDXGICrossAdapterBuffer's vtable slot 5.
-func (self *IMFDXGICrossAdapterBuffer) GetUnknownForDevice(pUnkDevice *systemcom.IUnknown, guid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFDXGICrossAdapterBuffer) GetUnknownForDevice(pUnkDevice *systemcom.IUnknown, guid *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDevice)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUnknownForDevice dispatches through IMFDXGICrossAdapterBuffer's vtable slot 6.
-func (self *IMFDXGICrossAdapterBuffer) SetUnknownForDevice(pUnkDevice *systemcom.IUnknown, guid *win32.GUID, pUnkData *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFDXGICrossAdapterBuffer) SetUnknownForDevice(pUnkDevice *systemcom.IUnknown, guid *win32.GUID, pUnkData *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDevice)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(pUnkData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFDXGIDeviceManager: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfdxgidevicemanager
@@ -4285,45 +4309,47 @@ type IMFDXGIDeviceManager struct {
 var IID_IMFDXGIDeviceManager = win32.GUID{Data1: 0xeb533d5d, Data2: 0x2db6, Data3: 0x40f8, Data4: [8]byte{0x97, 0xa9, 0x49, 0x46, 0x92, 0x01, 0x4f, 0x07}}
 
 // CloseDeviceHandle dispatches through IMFDXGIDeviceManager's vtable slot 3.
-func (self *IMFDXGIDeviceManager) CloseDeviceHandle(hDevice foundation.HANDLE) foundation.HRESULT {
+func (self *IMFDXGIDeviceManager) CloseDeviceHandle(hDevice foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hDevice))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoService dispatches through IMFDXGIDeviceManager's vtable slot 4.
-func (self *IMFDXGIDeviceManager) GetVideoService(hDevice foundation.HANDLE, riid *win32.GUID, ppService *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFDXGIDeviceManager) GetVideoService(hDevice foundation.HANDLE, riid *win32.GUID, ppService *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppService)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockDevice dispatches through IMFDXGIDeviceManager's vtable slot 5.
-func (self *IMFDXGIDeviceManager) LockDevice(hDevice foundation.HANDLE, riid *win32.GUID, ppUnkDevice *unsafe.Pointer, fBlock foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnkDevice)), uintptr(fBlock))
-	return foundation.HRESULT(r1)
+func (self *IMFDXGIDeviceManager) LockDevice(hDevice foundation.HANDLE, riid *win32.GUID, ppUnkDevice *unsafe.Pointer, fBlock bool) error {
+	_fBlock := win32.Bool32(fBlock)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnkDevice)), uintptr(_fBlock))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenDeviceHandle dispatches through IMFDXGIDeviceManager's vtable slot 6.
-func (self *IMFDXGIDeviceManager) OpenDeviceHandle(phDevice *foundation.HANDLE) foundation.HRESULT {
+func (self *IMFDXGIDeviceManager) OpenDeviceHandle(phDevice *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetDevice dispatches through IMFDXGIDeviceManager's vtable slot 7.
-func (self *IMFDXGIDeviceManager) ResetDevice(pUnkDevice *systemcom.IUnknown, resetToken uint32) foundation.HRESULT {
+func (self *IMFDXGIDeviceManager) ResetDevice(pUnkDevice *systemcom.IUnknown, resetToken uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDevice)), uintptr(resetToken))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TestDevice dispatches through IMFDXGIDeviceManager's vtable slot 8.
-func (self *IMFDXGIDeviceManager) TestDevice(hDevice foundation.HANDLE) foundation.HRESULT {
+func (self *IMFDXGIDeviceManager) TestDevice(hDevice foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hDevice))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockDevice dispatches through IMFDXGIDeviceManager's vtable slot 9.
-func (self *IMFDXGIDeviceManager) UnlockDevice(hDevice foundation.HANDLE, fSaveState foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(fSaveState))
-	return foundation.HRESULT(r1)
+func (self *IMFDXGIDeviceManager) UnlockDevice(hDevice foundation.HANDLE, fSaveState bool) error {
+	_fSaveState := win32.Bool32(fSaveState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hDevice), uintptr(_fSaveState))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFDXGIDeviceManagerSource: https://learn.microsoft.com/windows/win32/medfound/imfdxgidevicemanagersource
@@ -4336,9 +4362,9 @@ type IMFDXGIDeviceManagerSource struct {
 var IID_IMFDXGIDeviceManagerSource = win32.GUID{Data1: 0x20bc074b, Data2: 0x7a8d, Data3: 0x4609, Data4: [8]byte{0x8c, 0x3b, 0x64, 0xa0, 0xa3, 0xb5, 0xd7, 0xce}}
 
 // GetManager dispatches through IMFDXGIDeviceManagerSource's vtable slot 3.
-func (self *IMFDXGIDeviceManagerSource) GetManager(ppManager **IMFDXGIDeviceManager) foundation.HRESULT {
+func (self *IMFDXGIDeviceManagerSource) GetManager(ppManager **IMFDXGIDeviceManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFDesiredSample: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imfdesiredsample
@@ -4351,9 +4377,9 @@ type IMFDesiredSample struct {
 var IID_IMFDesiredSample = win32.GUID{Data1: 0x56c294d0, Data2: 0x753e, Data3: 0x4260, Data4: [8]byte{0x8d, 0x61, 0xa3, 0xd8, 0x82, 0x0b, 0x1d, 0x54}}
 
 // GetDesiredSampleTimeAndDuration dispatches through IMFDesiredSample's vtable slot 3.
-func (self *IMFDesiredSample) GetDesiredSampleTimeAndDuration(phnsSampleTime *int64, phnsSampleDuration *int64) foundation.HRESULT {
+func (self *IMFDesiredSample) GetDesiredSampleTimeAndDuration(phnsSampleTime *int64, phnsSampleDuration *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phnsSampleTime)), uintptr(unsafe.Pointer(phnsSampleDuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDesiredSampleTimeAndDuration dispatches through IMFDesiredSample's vtable slot 4.
@@ -4376,123 +4402,123 @@ type IMFDeviceTransform struct {
 var IID_IMFDeviceTransform = win32.GUID{Data1: 0xd818fbd8, Data2: 0xfc46, Data3: 0x42f2, Data4: [8]byte{0x87, 0xac, 0x1e, 0xa2, 0xd1, 0xf9, 0xbf, 0x32}}
 
 // InitializeTransform dispatches through IMFDeviceTransform's vtable slot 3.
-func (self *IMFDeviceTransform) InitializeTransform(pAttributes *IMFAttributes) foundation.HRESULT {
+func (self *IMFDeviceTransform) InitializeTransform(pAttributes *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputAvailableType dispatches through IMFDeviceTransform's vtable slot 4.
-func (self *IMFDeviceTransform) GetInputAvailableType(dwInputStreamID uint32, dwTypeIndex uint32, pMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetInputAvailableType(dwInputStreamID uint32, dwTypeIndex uint32, pMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(dwTypeIndex), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputCurrentType dispatches through IMFDeviceTransform's vtable slot 5.
-func (self *IMFDeviceTransform) GetInputCurrentType(dwInputStreamID uint32, pMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetInputCurrentType(dwInputStreamID uint32, pMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputStreamAttributes dispatches through IMFDeviceTransform's vtable slot 6.
-func (self *IMFDeviceTransform) GetInputStreamAttributes(dwInputStreamID uint32, ppAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetInputStreamAttributes(dwInputStreamID uint32, ppAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputAvailableType dispatches through IMFDeviceTransform's vtable slot 7.
-func (self *IMFDeviceTransform) GetOutputAvailableType(dwOutputStreamID uint32, dwTypeIndex uint32, pMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetOutputAvailableType(dwOutputStreamID uint32, dwTypeIndex uint32, pMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(dwTypeIndex), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputCurrentType dispatches through IMFDeviceTransform's vtable slot 8.
-func (self *IMFDeviceTransform) GetOutputCurrentType(dwOutputStreamID uint32, pMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetOutputCurrentType(dwOutputStreamID uint32, pMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputStreamAttributes dispatches through IMFDeviceTransform's vtable slot 9.
-func (self *IMFDeviceTransform) GetOutputStreamAttributes(dwOutputStreamID uint32, ppAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetOutputStreamAttributes(dwOutputStreamID uint32, ppAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamCount dispatches through IMFDeviceTransform's vtable slot 10.
-func (self *IMFDeviceTransform) GetStreamCount(pcInputStreams *uint32, pcOutputStreams *uint32) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetStreamCount(pcInputStreams *uint32, pcOutputStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcInputStreams)), uintptr(unsafe.Pointer(pcOutputStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamIDs dispatches through IMFDeviceTransform's vtable slot 11.
-func (self *IMFDeviceTransform) GetStreamIDs(dwInputIDArraySize uint32, pdwInputStreamIds *uint32, dwOutputIDArraySize uint32, pdwOutputStreamIds *uint32) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetStreamIDs(dwInputIDArraySize uint32, pdwInputStreamIds *uint32, dwOutputIDArraySize uint32, pdwOutputStreamIds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwInputIDArraySize), uintptr(unsafe.Pointer(pdwInputStreamIds)), uintptr(dwOutputIDArraySize), uintptr(unsafe.Pointer(pdwOutputStreamIds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessEvent dispatches through IMFDeviceTransform's vtable slot 12.
-func (self *IMFDeviceTransform) ProcessEvent(dwInputStreamID uint32, pEvent *IMFMediaEvent) foundation.HRESULT {
+func (self *IMFDeviceTransform) ProcessEvent(dwInputStreamID uint32, pEvent *IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessInput dispatches through IMFDeviceTransform's vtable slot 13.
-func (self *IMFDeviceTransform) ProcessInput(dwInputStreamID uint32, pSample *IMFSample, dwFlags uint32) foundation.HRESULT {
+func (self *IMFDeviceTransform) ProcessInput(dwInputStreamID uint32, pSample *IMFSample, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(pSample)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessMessage dispatches through IMFDeviceTransform's vtable slot 14.
-func (self *IMFDeviceTransform) ProcessMessage(eMessage MFT_MESSAGE_TYPE, ulParam uintptr) foundation.HRESULT {
+func (self *IMFDeviceTransform) ProcessMessage(eMessage MFT_MESSAGE_TYPE, ulParam uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(eMessage), uintptr(ulParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessOutput dispatches through IMFDeviceTransform's vtable slot 15.
-func (self *IMFDeviceTransform) ProcessOutput(dwFlags uint32, cOutputBufferCount uint32, pOutputSample *MFT_OUTPUT_DATA_BUFFER, pdwStatus *uint32) foundation.HRESULT {
+func (self *IMFDeviceTransform) ProcessOutput(dwFlags uint32, cOutputBufferCount uint32, pOutputSample *MFT_OUTPUT_DATA_BUFFER, pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(cOutputBufferCount), uintptr(unsafe.Pointer(pOutputSample)), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInputStreamState dispatches through IMFDeviceTransform's vtable slot 16.
-func (self *IMFDeviceTransform) SetInputStreamState(dwStreamID uint32, pMediaType *IMFMediaType, value DeviceStreamState, dwFlags uint32) foundation.HRESULT {
+func (self *IMFDeviceTransform) SetInputStreamState(dwStreamID uint32, pMediaType *IMFMediaType, value DeviceStreamState, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pMediaType)), uintptr(value), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputStreamState dispatches through IMFDeviceTransform's vtable slot 17.
-func (self *IMFDeviceTransform) GetInputStreamState(dwStreamID uint32, value *DeviceStreamState) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetInputStreamState(dwStreamID uint32, value *DeviceStreamState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputStreamState dispatches through IMFDeviceTransform's vtable slot 18.
-func (self *IMFDeviceTransform) SetOutputStreamState(dwStreamID uint32, pMediaType *IMFMediaType, value DeviceStreamState, dwFlags uint32) foundation.HRESULT {
+func (self *IMFDeviceTransform) SetOutputStreamState(dwStreamID uint32, pMediaType *IMFMediaType, value DeviceStreamState, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pMediaType)), uintptr(value), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputStreamState dispatches through IMFDeviceTransform's vtable slot 19.
-func (self *IMFDeviceTransform) GetOutputStreamState(dwStreamID uint32, value *DeviceStreamState) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetOutputStreamState(dwStreamID uint32, value *DeviceStreamState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputStreamPreferredState dispatches through IMFDeviceTransform's vtable slot 20.
-func (self *IMFDeviceTransform) GetInputStreamPreferredState(dwStreamID uint32, value *DeviceStreamState, ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFDeviceTransform) GetInputStreamPreferredState(dwStreamID uint32, value *DeviceStreamState, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FlushInputStream dispatches through IMFDeviceTransform's vtable slot 21.
-func (self *IMFDeviceTransform) FlushInputStream(dwStreamIndex uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IMFDeviceTransform) FlushInputStream(dwStreamIndex uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FlushOutputStream dispatches through IMFDeviceTransform's vtable slot 22.
-func (self *IMFDeviceTransform) FlushOutputStream(dwStreamIndex uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IMFDeviceTransform) FlushOutputStream(dwStreamIndex uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f5980fed-b521-488f-909f-1a5fcecedb14
@@ -4504,9 +4530,9 @@ type IMFDeviceTransform2 struct {
 var IID_IMFDeviceTransform2 = win32.GUID{Data1: 0xf5980fed, Data2: 0xb521, Data3: 0x488f, Data4: [8]byte{0x90, 0x9f, 0x1a, 0x5f, 0xce, 0xce, 0xdb, 0x14}}
 
 // GetTransformAttributes dispatches through IMFDeviceTransform2's vtable slot 23.
-func (self *IMFDeviceTransform2) GetTransformAttributes(ppAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFDeviceTransform2) GetTransformAttributes(ppAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFDeviceTransformCallback: https://learn.microsoft.com/windows/win32/api/mftransform/nn-mftransform-imfdevicetransformcallback
@@ -4519,9 +4545,9 @@ type IMFDeviceTransformCallback struct {
 var IID_IMFDeviceTransformCallback = win32.GUID{Data1: 0x6d5cb646, Data2: 0x29ec, Data3: 0x41fb, Data4: [8]byte{0x81, 0x79, 0x8c, 0x4c, 0x6d, 0x75, 0x08, 0x11}}
 
 // OnBufferSent dispatches through IMFDeviceTransformCallback's vtable slot 3.
-func (self *IMFDeviceTransformCallback) OnBufferSent(pCallbackAttributes *IMFAttributes, pinId uint32) foundation.HRESULT {
+func (self *IMFDeviceTransformCallback) OnBufferSent(pCallbackAttributes *IMFAttributes, pinId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallbackAttributes)), uintptr(pinId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFExtendedCameraControl: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfextendedcameracontrol
@@ -4540,9 +4566,9 @@ func (self *IMFExtendedCameraControl) GetCapabilities() uint64 {
 }
 
 // SetFlags dispatches through IMFExtendedCameraControl's vtable slot 4.
-func (self *IMFExtendedCameraControl) SetFlags(ulFlags uint64) foundation.HRESULT {
+func (self *IMFExtendedCameraControl) SetFlags(ulFlags uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IMFExtendedCameraControl's vtable slot 5.
@@ -4552,21 +4578,21 @@ func (self *IMFExtendedCameraControl) GetFlags() uint64 {
 }
 
 // LockPayload dispatches through IMFExtendedCameraControl's vtable slot 6.
-func (self *IMFExtendedCameraControl) LockPayload(ppPayload **byte, pulPayload *uint32) foundation.HRESULT {
+func (self *IMFExtendedCameraControl) LockPayload(ppPayload **byte, pulPayload *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPayload)), uintptr(unsafe.Pointer(pulPayload)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockPayload dispatches through IMFExtendedCameraControl's vtable slot 7.
-func (self *IMFExtendedCameraControl) UnlockPayload() foundation.HRESULT {
+func (self *IMFExtendedCameraControl) UnlockPayload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitSettings dispatches through IMFExtendedCameraControl's vtable slot 8.
-func (self *IMFExtendedCameraControl) CommitSettings() foundation.HRESULT {
+func (self *IMFExtendedCameraControl) CommitSettings() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFExtendedCameraController: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfextendedcameracontroller
@@ -4579,9 +4605,9 @@ type IMFExtendedCameraController struct {
 var IID_IMFExtendedCameraController = win32.GUID{Data1: 0xb91ebfee, Data2: 0xca03, Data3: 0x4af4, Data4: [8]byte{0x8a, 0x82, 0xa3, 0x17, 0x52, 0xf4, 0xa0, 0xfc}}
 
 // GetExtendedCameraControl dispatches through IMFExtendedCameraController's vtable slot 3.
-func (self *IMFExtendedCameraController) GetExtendedCameraControl(dwStreamIndex uint32, ulPropertyId uint32, ppControl **IMFExtendedCameraControl) foundation.HRESULT {
+func (self *IMFExtendedCameraController) GetExtendedCameraControl(dwStreamIndex uint32, ulPropertyId uint32, ppControl **IMFExtendedCameraControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(ulPropertyId), uintptr(unsafe.Pointer(ppControl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5c595e64-4630-4231-855a-12842f733245
@@ -4593,21 +4619,21 @@ type IMFExtendedCameraIntrinsicModel struct {
 var IID_IMFExtendedCameraIntrinsicModel = win32.GUID{Data1: 0x5c595e64, Data2: 0x4630, Data3: 0x4231, Data4: [8]byte{0x85, 0x5a, 0x12, 0x84, 0x2f, 0x73, 0x32, 0x45}}
 
 // GetModel dispatches through IMFExtendedCameraIntrinsicModel's vtable slot 3.
-func (self *IMFExtendedCameraIntrinsicModel) GetModel(pIntrinsicModel *MFExtendedCameraIntrinsic_IntrinsicModel) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsicModel) GetModel(pIntrinsicModel *MFExtendedCameraIntrinsic_IntrinsicModel) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIntrinsicModel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetModel dispatches through IMFExtendedCameraIntrinsicModel's vtable slot 4.
-func (self *IMFExtendedCameraIntrinsicModel) SetModel(pIntrinsicModel *MFExtendedCameraIntrinsic_IntrinsicModel) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsicModel) SetModel(pIntrinsicModel *MFExtendedCameraIntrinsic_IntrinsicModel) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIntrinsicModel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDistortionModelType dispatches through IMFExtendedCameraIntrinsicModel's vtable slot 5.
-func (self *IMFExtendedCameraIntrinsicModel) GetDistortionModelType(pDistortionModelType *MFCameraIntrinsic_DistortionModelType) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsicModel) GetDistortionModelType(pDistortionModelType *MFCameraIntrinsic_DistortionModelType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDistortionModelType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 687f6dac-6987-4750-a16a-734d1e7a10fe
@@ -4619,39 +4645,39 @@ type IMFExtendedCameraIntrinsics struct {
 var IID_IMFExtendedCameraIntrinsics = win32.GUID{Data1: 0x687f6dac, Data2: 0x6987, Data3: 0x4750, Data4: [8]byte{0xa1, 0x6a, 0x73, 0x4d, 0x1e, 0x7a, 0x10, 0xfe}}
 
 // InitializeFromBuffer dispatches through IMFExtendedCameraIntrinsics's vtable slot 3.
-func (self *IMFExtendedCameraIntrinsics) InitializeFromBuffer(pbBuffer *byte, dwBufferSize uint32) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsics) InitializeFromBuffer(pbBuffer *byte, dwBufferSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBuffer)), uintptr(dwBufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferSize dispatches through IMFExtendedCameraIntrinsics's vtable slot 4.
-func (self *IMFExtendedCameraIntrinsics) GetBufferSize(pdwBufferSize *uint32) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsics) GetBufferSize(pdwBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwBufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SerializeToBuffer dispatches through IMFExtendedCameraIntrinsics's vtable slot 5.
-func (self *IMFExtendedCameraIntrinsics) SerializeToBuffer(pbBuffer *byte, pdwBufferSize *uint32) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsics) SerializeToBuffer(pbBuffer *byte, pdwBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBuffer)), uintptr(unsafe.Pointer(pdwBufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIntrinsicModelCount dispatches through IMFExtendedCameraIntrinsics's vtable slot 6.
-func (self *IMFExtendedCameraIntrinsics) GetIntrinsicModelCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsics) GetIntrinsicModelCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIntrinsicModelByIndex dispatches through IMFExtendedCameraIntrinsics's vtable slot 7.
-func (self *IMFExtendedCameraIntrinsics) GetIntrinsicModelByIndex(dwIndex uint32, ppIntrinsicModel **IMFExtendedCameraIntrinsicModel) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsics) GetIntrinsicModelByIndex(dwIndex uint32, ppIntrinsicModel **IMFExtendedCameraIntrinsicModel) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppIntrinsicModel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddIntrinsicModel dispatches through IMFExtendedCameraIntrinsics's vtable slot 8.
-func (self *IMFExtendedCameraIntrinsics) AddIntrinsicModel(pIntrinsicModel *IMFExtendedCameraIntrinsicModel) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsics) AddIntrinsicModel(pIntrinsicModel *IMFExtendedCameraIntrinsicModel) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIntrinsicModel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 74c2653b-5f55-4eb1-9f0f-18b8f68b7d3d
@@ -4663,15 +4689,15 @@ type IMFExtendedCameraIntrinsicsDistortionModel6KT struct {
 var IID_IMFExtendedCameraIntrinsicsDistortionModel6KT = win32.GUID{Data1: 0x74c2653b, Data2: 0x5f55, Data3: 0x4eb1, Data4: [8]byte{0x9f, 0x0f, 0x18, 0xb8, 0xf6, 0x8b, 0x7d, 0x3d}}
 
 // GetDistortionModel dispatches through IMFExtendedCameraIntrinsicsDistortionModel6KT's vtable slot 3.
-func (self *IMFExtendedCameraIntrinsicsDistortionModel6KT) GetDistortionModel(pDistortionModel *MFCameraIntrinsic_DistortionModel6KT) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsicsDistortionModel6KT) GetDistortionModel(pDistortionModel *MFCameraIntrinsic_DistortionModel6KT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDistortionModel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDistortionModel dispatches through IMFExtendedCameraIntrinsicsDistortionModel6KT's vtable slot 4.
-func (self *IMFExtendedCameraIntrinsicsDistortionModel6KT) SetDistortionModel(pDistortionModel *MFCameraIntrinsic_DistortionModel6KT) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsicsDistortionModel6KT) SetDistortionModel(pDistortionModel *MFCameraIntrinsic_DistortionModel6KT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDistortionModel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 812d5f95-b572-45dc-bafc-ae24199ddda8
@@ -4683,15 +4709,15 @@ type IMFExtendedCameraIntrinsicsDistortionModelArcTan struct {
 var IID_IMFExtendedCameraIntrinsicsDistortionModelArcTan = win32.GUID{Data1: 0x812d5f95, Data2: 0xb572, Data3: 0x45dc, Data4: [8]byte{0xba, 0xfc, 0xae, 0x24, 0x19, 0x9d, 0xdd, 0xa8}}
 
 // GetDistortionModel dispatches through IMFExtendedCameraIntrinsicsDistortionModelArcTan's vtable slot 3.
-func (self *IMFExtendedCameraIntrinsicsDistortionModelArcTan) GetDistortionModel(pDistortionModel *MFCameraIntrinsic_DistortionModelArcTan) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsicsDistortionModelArcTan) GetDistortionModel(pDistortionModel *MFCameraIntrinsic_DistortionModelArcTan) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDistortionModel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDistortionModel dispatches through IMFExtendedCameraIntrinsicsDistortionModelArcTan's vtable slot 4.
-func (self *IMFExtendedCameraIntrinsicsDistortionModelArcTan) SetDistortionModel(pDistortionModel *MFCameraIntrinsic_DistortionModelArcTan) foundation.HRESULT {
+func (self *IMFExtendedCameraIntrinsicsDistortionModelArcTan) SetDistortionModel(pDistortionModel *MFCameraIntrinsic_DistortionModelArcTan) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDistortionModel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFExtendedDRMTypeSupport: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfextendeddrmtypesupport
@@ -4704,9 +4730,9 @@ type IMFExtendedDRMTypeSupport struct {
 var IID_IMFExtendedDRMTypeSupport = win32.GUID{Data1: 0x332ec562, Data2: 0x3758, Data3: 0x468d, Data4: [8]byte{0xa7, 0x84, 0xe3, 0x8f, 0x23, 0x55, 0x21, 0x28}}
 
 // IsTypeSupportedEx dispatches through IMFExtendedDRMTypeSupport's vtable slot 3.
-func (self *IMFExtendedDRMTypeSupport) IsTypeSupportedEx(type_ foundation.BSTR, keySystem foundation.BSTR, pAnswer *MF_MEDIA_ENGINE_CANPLAY) foundation.HRESULT {
+func (self *IMFExtendedDRMTypeSupport) IsTypeSupportedEx(type_ foundation.BSTR, keySystem foundation.BSTR, pAnswer *MF_MEDIA_ENGINE_CANPLAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(keySystem)), uintptr(unsafe.Pointer(pAnswer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ddd59578-d0e7-46e2-be8c-1ce76ad147c0
@@ -4718,15 +4744,15 @@ type IMFFaceDetectionTransform struct {
 var IID_IMFFaceDetectionTransform = win32.GUID{Data1: 0xddd59578, Data2: 0xd0e7, Data3: 0x46e2, Data4: [8]byte{0xbe, 0x8c, 0x1c, 0xe7, 0x6a, 0xd1, 0x47, 0xc0}}
 
 // SetDetectionCallback dispatches through IMFFaceDetectionTransform's vtable slot 3.
-func (self *IMFFaceDetectionTransform) SetDetectionCallback(callback *IMFFaceDetectionTransformCallback, callbackToken *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFFaceDetectionTransform) SetDetectionCallback(callback *IMFFaceDetectionTransformCallback, callbackToken *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(callbackToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearDetectionCallback dispatches through IMFFaceDetectionTransform's vtable slot 4.
-func (self *IMFFaceDetectionTransform) ClearDetectionCallback(callbackToken unsafe.Pointer) foundation.HRESULT {
+func (self *IMFFaceDetectionTransform) ClearDetectionCallback(callbackToken unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(callbackToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0bfd1ade-0421-4909-acb7-7a7125416881
@@ -4752,9 +4778,9 @@ type IMFFieldOfUseMFTUnlock struct {
 var IID_IMFFieldOfUseMFTUnlock = win32.GUID{Data1: 0x508e71d3, Data2: 0xec66, Data3: 0x4fc3, Data4: [8]byte{0x87, 0x75, 0xb4, 0xb9, 0xed, 0x6b, 0xa8, 0x47}}
 
 // Unlock dispatches through IMFFieldOfUseMFTUnlock's vtable slot 3.
-func (self *IMFFieldOfUseMFTUnlock) Unlock(pUnkMFT *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFFieldOfUseMFTUnlock) Unlock(pUnkMFT *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkMFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFFinalizableMediaSink: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imffinalizablemediasink
@@ -4767,15 +4793,15 @@ type IMFFinalizableMediaSink struct {
 var IID_IMFFinalizableMediaSink = win32.GUID{Data1: 0xeaecb74a, Data2: 0x9a50, Data3: 0x42ce, Data4: [8]byte{0x95, 0x41, 0x6a, 0x7f, 0x57, 0xaa, 0x4a, 0xd7}}
 
 // BeginFinalize dispatches through IMFFinalizableMediaSink's vtable slot 12.
-func (self *IMFFinalizableMediaSink) BeginFinalize(pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFFinalizableMediaSink) BeginFinalize(pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndFinalize dispatches through IMFFinalizableMediaSink's vtable slot 13.
-func (self *IMFFinalizableMediaSink) EndFinalize(pResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFFinalizableMediaSink) EndFinalize(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFGetService: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfgetservice
@@ -4788,9 +4814,9 @@ type IMFGetService struct {
 var IID_IMFGetService = win32.GUID{Data1: 0xfa993888, Data2: 0x4383, Data3: 0x415a, Data4: [8]byte{0xa9, 0x30, 0xdd, 0x47, 0x2a, 0x8c, 0xf6, 0xf7}}
 
 // GetService dispatches through IMFGetService's vtable slot 3.
-func (self *IMFGetService) GetService(guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFGetService) GetService(guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: de400f54-5bf1-40cf-8964-0bea136b1e3d
@@ -4802,15 +4828,15 @@ type IMFHDCPStatus struct {
 var IID_IMFHDCPStatus = win32.GUID{Data1: 0xde400f54, Data2: 0x5bf1, Data3: 0x40cf, Data4: [8]byte{0x89, 0x64, 0x0b, 0xea, 0x13, 0x6b, 0x1e, 0x3d}}
 
 // Query dispatches through IMFHDCPStatus's vtable slot 3.
-func (self *IMFHDCPStatus) Query(pStatus *MF_HDCP_STATUS, pfStatus *foundation.BOOL) foundation.HRESULT {
+func (self *IMFHDCPStatus) Query(pStatus *MF_HDCP_STATUS, pfStatus *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)), uintptr(unsafe.Pointer(pfStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Set dispatches through IMFHDCPStatus's vtable slot 4.
-func (self *IMFHDCPStatus) Set(status MF_HDCP_STATUS) foundation.HRESULT {
+func (self *IMFHDCPStatus) Set(status MF_HDCP_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFHttpDownloadRequest: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfhttpdownloadrequest
@@ -4823,99 +4849,101 @@ type IMFHttpDownloadRequest struct {
 var IID_IMFHttpDownloadRequest = win32.GUID{Data1: 0xf779fddf, Data2: 0x26e7, Data3: 0x4270, Data4: [8]byte{0x8a, 0x8b, 0xb9, 0x83, 0xd1, 0x85, 0x9d, 0xe0}}
 
 // AddHeader dispatches through IMFHttpDownloadRequest's vtable slot 3.
-func (self *IMFHttpDownloadRequest) AddHeader(szHeader foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szHeader)))
-	return foundation.HRESULT(r1)
+func (self *IMFHttpDownloadRequest) AddHeader(szHeader string) error {
+	_szHeader := win32.UTF16Ptr(szHeader)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szHeader)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginSendRequest dispatches through IMFHttpDownloadRequest's vtable slot 4.
-func (self *IMFHttpDownloadRequest) BeginSendRequest(pbPayload *byte, cbPayload uint32, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) BeginSendRequest(pbPayload *byte, cbPayload uint32, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPayload)), uintptr(cbPayload), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndSendRequest dispatches through IMFHttpDownloadRequest's vtable slot 5.
-func (self *IMFHttpDownloadRequest) EndSendRequest(pResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) EndSendRequest(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginReceiveResponse dispatches through IMFHttpDownloadRequest's vtable slot 6.
-func (self *IMFHttpDownloadRequest) BeginReceiveResponse(pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) BeginReceiveResponse(pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndReceiveResponse dispatches through IMFHttpDownloadRequest's vtable slot 7.
-func (self *IMFHttpDownloadRequest) EndReceiveResponse(pResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) EndReceiveResponse(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginReadPayload dispatches through IMFHttpDownloadRequest's vtable slot 8.
-func (self *IMFHttpDownloadRequest) BeginReadPayload(pb *byte, cb uint32, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) BeginReadPayload(pb *byte, cb uint32, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pb)), uintptr(cb), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndReadPayload dispatches through IMFHttpDownloadRequest's vtable slot 9.
-func (self *IMFHttpDownloadRequest) EndReadPayload(pResult *IMFAsyncResult, pqwOffset *uint64, pcbRead *uint32) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) EndReadPayload(pResult *IMFAsyncResult, pqwOffset *uint64, pcbRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pqwOffset)), uintptr(unsafe.Pointer(pcbRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryHeader dispatches through IMFHttpDownloadRequest's vtable slot 10.
-func (self *IMFHttpDownloadRequest) QueryHeader(szHeaderName foundation.PWSTR, dwIndex uint32, ppszHeaderValue *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szHeaderName)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppszHeaderValue)))
-	return foundation.HRESULT(r1)
+func (self *IMFHttpDownloadRequest) QueryHeader(szHeaderName string, dwIndex uint32, ppszHeaderValue *foundation.PWSTR) error {
+	_szHeaderName := win32.UTF16Ptr(szHeaderName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szHeaderName)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppszHeaderValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetURL dispatches through IMFHttpDownloadRequest's vtable slot 11.
-func (self *IMFHttpDownloadRequest) GetURL(ppszURL *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) GetURL(ppszURL *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszURL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HasNullSourceOrigin dispatches through IMFHttpDownloadRequest's vtable slot 12.
-func (self *IMFHttpDownloadRequest) HasNullSourceOrigin(pfNullSourceOrigin *foundation.BOOL) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) HasNullSourceOrigin(pfNullSourceOrigin *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfNullSourceOrigin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimeSeekResult dispatches through IMFHttpDownloadRequest's vtable slot 13.
-func (self *IMFHttpDownloadRequest) GetTimeSeekResult(pqwStartTime *uint64, pqwStopTime *uint64, pqwDuration *uint64) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) GetTimeSeekResult(pqwStartTime *uint64, pqwStopTime *uint64, pqwDuration *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwStartTime)), uintptr(unsafe.Pointer(pqwStopTime)), uintptr(unsafe.Pointer(pqwDuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHttpStatus dispatches through IMFHttpDownloadRequest's vtable slot 14.
-func (self *IMFHttpDownloadRequest) GetHttpStatus(pdwHttpStatus *uint32) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) GetHttpStatus(pdwHttpStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwHttpStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAtEndOfPayload dispatches through IMFHttpDownloadRequest's vtable slot 15.
-func (self *IMFHttpDownloadRequest) GetAtEndOfPayload(pfAtEndOfPayload *foundation.BOOL) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) GetAtEndOfPayload(pfAtEndOfPayload *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAtEndOfPayload)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTotalLength dispatches through IMFHttpDownloadRequest's vtable slot 16.
-func (self *IMFHttpDownloadRequest) GetTotalLength(pqwTotalLength *uint64) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) GetTotalLength(pqwTotalLength *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwTotalLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRangeEndOffset dispatches through IMFHttpDownloadRequest's vtable slot 17.
-func (self *IMFHttpDownloadRequest) GetRangeEndOffset(pqwRangeEnd *uint64) foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) GetRangeEndOffset(pqwRangeEnd *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pqwRangeEnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMFHttpDownloadRequest's vtable slot 18.
-func (self *IMFHttpDownloadRequest) Close() foundation.HRESULT {
+func (self *IMFHttpDownloadRequest) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFHttpDownloadSession: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfhttpdownloadsession
@@ -4928,21 +4956,27 @@ type IMFHttpDownloadSession struct {
 var IID_IMFHttpDownloadSession = win32.GUID{Data1: 0x71fa9a2c, Data2: 0x53ce, Data3: 0x4662, Data4: [8]byte{0xa1, 0x32, 0x1a, 0x7e, 0x8c, 0xbf, 0x62, 0xdb}}
 
 // SetServer dispatches through IMFHttpDownloadSession's vtable slot 3.
-func (self *IMFHttpDownloadSession) SetServer(szServerName foundation.PWSTR, nPort uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szServerName)), uintptr(nPort))
-	return foundation.HRESULT(r1)
+func (self *IMFHttpDownloadSession) SetServer(szServerName string, nPort uint32) error {
+	_szServerName := win32.UTF16Ptr(szServerName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szServerName)), uintptr(nPort))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRequest dispatches through IMFHttpDownloadSession's vtable slot 4.
-func (self *IMFHttpDownloadSession) CreateRequest(szObjectName foundation.PWSTR, fBypassProxyCache foundation.BOOL, fSecure foundation.BOOL, szVerb foundation.PWSTR, szReferrer foundation.PWSTR, ppRequest **IMFHttpDownloadRequest) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szObjectName)), uintptr(fBypassProxyCache), uintptr(fSecure), uintptr(unsafe.Pointer(szVerb)), uintptr(unsafe.Pointer(szReferrer)), uintptr(unsafe.Pointer(ppRequest)))
-	return foundation.HRESULT(r1)
+func (self *IMFHttpDownloadSession) CreateRequest(szObjectName string, fBypassProxyCache bool, fSecure bool, szVerb string, szReferrer string, ppRequest **IMFHttpDownloadRequest) error {
+	_szObjectName := win32.UTF16Ptr(szObjectName)
+	_fBypassProxyCache := win32.Bool32(fBypassProxyCache)
+	_fSecure := win32.Bool32(fSecure)
+	_szVerb := win32.UTF16Ptr(szVerb)
+	_szReferrer := win32.UTF16Ptr(szReferrer)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szObjectName)), uintptr(_fBypassProxyCache), uintptr(_fSecure), uintptr(unsafe.Pointer(_szVerb)), uintptr(unsafe.Pointer(_szReferrer)), uintptr(unsafe.Pointer(ppRequest)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMFHttpDownloadSession's vtable slot 5.
-func (self *IMFHttpDownloadSession) Close() foundation.HRESULT {
+func (self *IMFHttpDownloadSession) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFHttpDownloadSessionProvider: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfhttpdownloadsessionprovider
@@ -4955,9 +4989,10 @@ type IMFHttpDownloadSessionProvider struct {
 var IID_IMFHttpDownloadSessionProvider = win32.GUID{Data1: 0x1b4cf4b9, Data2: 0x3a16, Data3: 0x4115, Data4: [8]byte{0x83, 0x9d, 0x03, 0xcc, 0x5c, 0x99, 0xdf, 0x01}}
 
 // CreateHttpDownloadSession dispatches through IMFHttpDownloadSessionProvider's vtable slot 3.
-func (self *IMFHttpDownloadSessionProvider) CreateHttpDownloadSession(wszScheme foundation.PWSTR, ppDownloadSession **IMFHttpDownloadSession) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszScheme)), uintptr(unsafe.Pointer(ppDownloadSession)))
-	return foundation.HRESULT(r1)
+func (self *IMFHttpDownloadSessionProvider) CreateHttpDownloadSession(wszScheme string, ppDownloadSession **IMFHttpDownloadSession) error {
+	_wszScheme := win32.UTF16Ptr(wszScheme)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszScheme)), uintptr(unsafe.Pointer(ppDownloadSession)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFImageSharingEngine: https://learn.microsoft.com/windows/win32/api/mfsharingengine/nn-mfsharingengine-imfimagesharingengine
@@ -4970,21 +5005,21 @@ type IMFImageSharingEngine struct {
 var IID_IMFImageSharingEngine = win32.GUID{Data1: 0xcfa0ae8e, Data2: 0x7e1c, Data3: 0x44d2, Data4: [8]byte{0xae, 0x68, 0xfc, 0x4c, 0x14, 0x8a, 0x63, 0x54}}
 
 // SetSource dispatches through IMFImageSharingEngine's vtable slot 3.
-func (self *IMFImageSharingEngine) SetSource(pStream *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFImageSharingEngine) SetSource(pStream *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDevice dispatches through IMFImageSharingEngine's vtable slot 4.
-func (self *IMFImageSharingEngine) GetDevice(pDevice *DEVICE_INFO) foundation.HRESULT {
+func (self *IMFImageSharingEngine) GetDevice(pDevice *DEVICE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFImageSharingEngine's vtable slot 5.
-func (self *IMFImageSharingEngine) Shutdown() foundation.HRESULT {
+func (self *IMFImageSharingEngine) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFImageSharingEngineClassFactory: https://learn.microsoft.com/windows/win32/api/mfsharingengine/nn-mfsharingengine-imfimagesharingengineclassfactory
@@ -4997,9 +5032,9 @@ type IMFImageSharingEngineClassFactory struct {
 var IID_IMFImageSharingEngineClassFactory = win32.GUID{Data1: 0x1fc55727, Data2: 0xa7fb, Data3: 0x4fc8, Data4: [8]byte{0x83, 0xae, 0x8a, 0xf0, 0x24, 0x99, 0x0a, 0xf1}}
 
 // CreateInstanceFromUDN dispatches through IMFImageSharingEngineClassFactory's vtable slot 3.
-func (self *IMFImageSharingEngineClassFactory) CreateInstanceFromUDN(pUniqueDeviceName foundation.BSTR, ppEngine **IMFImageSharingEngine) foundation.HRESULT {
+func (self *IMFImageSharingEngineClassFactory) CreateInstanceFromUDN(pUniqueDeviceName foundation.BSTR, ppEngine **IMFImageSharingEngine) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUniqueDeviceName)), uintptr(unsafe.Pointer(ppEngine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFInputTrustAuthority: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfinputtrustauthority
@@ -5012,39 +5047,39 @@ type IMFInputTrustAuthority struct {
 var IID_IMFInputTrustAuthority = win32.GUID{Data1: 0xd19f8e98, Data2: 0xb126, Data3: 0x4446, Data4: [8]byte{0x89, 0x0c, 0x5d, 0xcb, 0x7a, 0xd7, 0x14, 0x53}}
 
 // GetDecrypter dispatches through IMFInputTrustAuthority's vtable slot 3.
-func (self *IMFInputTrustAuthority) GetDecrypter(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFInputTrustAuthority) GetDecrypter(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestAccess dispatches through IMFInputTrustAuthority's vtable slot 4.
-func (self *IMFInputTrustAuthority) RequestAccess(Action MFPOLICYMANAGER_ACTION, ppContentEnablerActivate **IMFActivate) foundation.HRESULT {
+func (self *IMFInputTrustAuthority) RequestAccess(Action MFPOLICYMANAGER_ACTION, ppContentEnablerActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Action), uintptr(unsafe.Pointer(ppContentEnablerActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPolicy dispatches through IMFInputTrustAuthority's vtable slot 5.
-func (self *IMFInputTrustAuthority) GetPolicy(Action MFPOLICYMANAGER_ACTION, ppPolicy **IMFOutputPolicy) foundation.HRESULT {
+func (self *IMFInputTrustAuthority) GetPolicy(Action MFPOLICYMANAGER_ACTION, ppPolicy **IMFOutputPolicy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Action), uintptr(unsafe.Pointer(ppPolicy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BindAccess dispatches through IMFInputTrustAuthority's vtable slot 6.
-func (self *IMFInputTrustAuthority) BindAccess(pParam *MFINPUTTRUSTAUTHORITY_ACCESS_PARAMS) foundation.HRESULT {
+func (self *IMFInputTrustAuthority) BindAccess(pParam *MFINPUTTRUSTAUTHORITY_ACCESS_PARAMS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateAccess dispatches through IMFInputTrustAuthority's vtable slot 7.
-func (self *IMFInputTrustAuthority) UpdateAccess(pParam *MFINPUTTRUSTAUTHORITY_ACCESS_PARAMS) foundation.HRESULT {
+func (self *IMFInputTrustAuthority) UpdateAccess(pParam *MFINPUTTRUSTAUTHORITY_ACCESS_PARAMS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IMFInputTrustAuthority's vtable slot 8.
-func (self *IMFInputTrustAuthority) Reset() foundation.HRESULT {
+func (self *IMFInputTrustAuthority) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFLocalMFTRegistration: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imflocalmftregistration
@@ -5057,9 +5092,9 @@ type IMFLocalMFTRegistration struct {
 var IID_IMFLocalMFTRegistration = win32.GUID{Data1: 0x149c4d73, Data2: 0xb4be, Data3: 0x4f8d, Data4: [8]byte{0x8b, 0x87, 0x07, 0x9e, 0x92, 0x6b, 0x6a, 0xdd}}
 
 // RegisterMFTs dispatches through IMFLocalMFTRegistration's vtable slot 3.
-func (self *IMFLocalMFTRegistration) RegisterMFTs(pMFTs *MFT_REGISTRATION_INFO, cMFTs uint32) foundation.HRESULT {
+func (self *IMFLocalMFTRegistration) RegisterMFTs(pMFTs *MFT_REGISTRATION_INFO, cMFTs uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMFTs)), uintptr(cMFTs))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaBuffer: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfmediabuffer
@@ -5072,33 +5107,33 @@ type IMFMediaBuffer struct {
 var IID_IMFMediaBuffer = win32.GUID{Data1: 0x045fa593, Data2: 0x8799, Data3: 0x42b8, Data4: [8]byte{0xbc, 0x8d, 0x89, 0x68, 0xc6, 0x45, 0x35, 0x07}}
 
 // Lock dispatches through IMFMediaBuffer's vtable slot 3.
-func (self *IMFMediaBuffer) Lock(ppbBuffer **byte, pcbMaxLength *uint32, pcbCurrentLength *uint32) foundation.HRESULT {
+func (self *IMFMediaBuffer) Lock(ppbBuffer **byte, pcbMaxLength *uint32, pcbCurrentLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppbBuffer)), uintptr(unsafe.Pointer(pcbMaxLength)), uintptr(unsafe.Pointer(pcbCurrentLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IMFMediaBuffer's vtable slot 4.
-func (self *IMFMediaBuffer) Unlock() foundation.HRESULT {
+func (self *IMFMediaBuffer) Unlock() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentLength dispatches through IMFMediaBuffer's vtable slot 5.
-func (self *IMFMediaBuffer) GetCurrentLength(pcbCurrentLength *uint32) foundation.HRESULT {
+func (self *IMFMediaBuffer) GetCurrentLength(pcbCurrentLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbCurrentLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentLength dispatches through IMFMediaBuffer's vtable slot 6.
-func (self *IMFMediaBuffer) SetCurrentLength(cbCurrentLength uint32) foundation.HRESULT {
+func (self *IMFMediaBuffer) SetCurrentLength(cbCurrentLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cbCurrentLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxLength dispatches through IMFMediaBuffer's vtable slot 7.
-func (self *IMFMediaBuffer) GetMaxLength(pcbMaxLength *uint32) foundation.HRESULT {
+func (self *IMFMediaBuffer) GetMaxLength(pcbMaxLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbMaxLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngine: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengine
@@ -5111,33 +5146,33 @@ type IMFMediaEngine struct {
 var IID_IMFMediaEngine = win32.GUID{Data1: 0x98a1b0bb, Data2: 0x03eb, Data3: 0x4935, Data4: [8]byte{0xae, 0x7c, 0x93, 0xc1, 0xfa, 0x0e, 0x1c, 0x93}}
 
 // GetError dispatches through IMFMediaEngine's vtable slot 3.
-func (self *IMFMediaEngine) GetError(ppError **IMFMediaError) foundation.HRESULT {
+func (self *IMFMediaEngine) GetError(ppError **IMFMediaError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetErrorCode dispatches through IMFMediaEngine's vtable slot 4.
-func (self *IMFMediaEngine) SetErrorCode(error_ MF_MEDIA_ENGINE_ERR) foundation.HRESULT {
+func (self *IMFMediaEngine) SetErrorCode(error_ MF_MEDIA_ENGINE_ERR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(error_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSourceElements dispatches through IMFMediaEngine's vtable slot 5.
-func (self *IMFMediaEngine) SetSourceElements(pSrcElements *IMFMediaEngineSrcElements) foundation.HRESULT {
+func (self *IMFMediaEngine) SetSourceElements(pSrcElements *IMFMediaEngineSrcElements) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrcElements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSource dispatches through IMFMediaEngine's vtable slot 6.
-func (self *IMFMediaEngine) SetSource(pUrl foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaEngine) SetSource(pUrl foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUrl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentSource dispatches through IMFMediaEngine's vtable slot 7.
-func (self *IMFMediaEngine) GetCurrentSource(ppUrl *foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaEngine) GetCurrentSource(ppUrl *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUrl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNetworkState dispatches through IMFMediaEngine's vtable slot 8.
@@ -5153,27 +5188,27 @@ func (self *IMFMediaEngine) GetPreload() MF_MEDIA_ENGINE_PRELOAD {
 }
 
 // SetPreload dispatches through IMFMediaEngine's vtable slot 10.
-func (self *IMFMediaEngine) SetPreload(Preload MF_MEDIA_ENGINE_PRELOAD) foundation.HRESULT {
+func (self *IMFMediaEngine) SetPreload(Preload MF_MEDIA_ENGINE_PRELOAD) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Preload))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBuffered dispatches through IMFMediaEngine's vtable slot 11.
-func (self *IMFMediaEngine) GetBuffered(ppBuffered **IMFMediaTimeRange) foundation.HRESULT {
+func (self *IMFMediaEngine) GetBuffered(ppBuffered **IMFMediaTimeRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuffered)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Load dispatches through IMFMediaEngine's vtable slot 12.
-func (self *IMFMediaEngine) Load() foundation.HRESULT {
+func (self *IMFMediaEngine) Load() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanPlayType dispatches through IMFMediaEngine's vtable slot 13.
-func (self *IMFMediaEngine) CanPlayType(type_ foundation.BSTR, pAnswer *MF_MEDIA_ENGINE_CANPLAY) foundation.HRESULT {
+func (self *IMFMediaEngine) CanPlayType(type_ foundation.BSTR, pAnswer *MF_MEDIA_ENGINE_CANPLAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(pAnswer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReadyState dispatches through IMFMediaEngine's vtable slot 14.
@@ -5195,15 +5230,15 @@ func (self *IMFMediaEngine) IsPaused() foundation.BOOL {
 }
 
 // GetPlayed dispatches through IMFMediaEngine's vtable slot 25.
-func (self *IMFMediaEngine) GetPlayed(ppPlayed **IMFMediaTimeRange) foundation.HRESULT {
+func (self *IMFMediaEngine) GetPlayed(ppPlayed **IMFMediaTimeRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPlayed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSeekable dispatches through IMFMediaEngine's vtable slot 26.
-func (self *IMFMediaEngine) GetSeekable(ppSeekable **IMFMediaTimeRange) foundation.HRESULT {
+func (self *IMFMediaEngine) GetSeekable(ppSeekable **IMFMediaTimeRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSeekable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEnded dispatches through IMFMediaEngine's vtable slot 27.
@@ -5219,9 +5254,10 @@ func (self *IMFMediaEngine) GetAutoPlay() foundation.BOOL {
 }
 
 // SetAutoPlay dispatches through IMFMediaEngine's vtable slot 29.
-func (self *IMFMediaEngine) SetAutoPlay(AutoPlay foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(AutoPlay))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngine) SetAutoPlay(AutoPlay bool) error {
+	_AutoPlay := win32.Bool32(AutoPlay)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(_AutoPlay))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLoop dispatches through IMFMediaEngine's vtable slot 30.
@@ -5231,21 +5267,22 @@ func (self *IMFMediaEngine) GetLoop() foundation.BOOL {
 }
 
 // SetLoop dispatches through IMFMediaEngine's vtable slot 31.
-func (self *IMFMediaEngine) SetLoop(Loop foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Loop))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngine) SetLoop(Loop bool) error {
+	_Loop := win32.Bool32(Loop)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(_Loop))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Play dispatches through IMFMediaEngine's vtable slot 32.
-func (self *IMFMediaEngine) Play() foundation.HRESULT {
+func (self *IMFMediaEngine) Play() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IMFMediaEngine's vtable slot 33.
-func (self *IMFMediaEngine) Pause() foundation.HRESULT {
+func (self *IMFMediaEngine) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMuted dispatches through IMFMediaEngine's vtable slot 34.
@@ -5255,9 +5292,10 @@ func (self *IMFMediaEngine) GetMuted() foundation.BOOL {
 }
 
 // SetMuted dispatches through IMFMediaEngine's vtable slot 35.
-func (self *IMFMediaEngine) SetMuted(Muted foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(Muted))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngine) SetMuted(Muted bool) error {
+	_Muted := win32.Bool32(Muted)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(_Muted))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HasVideo dispatches through IMFMediaEngine's vtable slot 38.
@@ -5273,33 +5311,33 @@ func (self *IMFMediaEngine) HasAudio() foundation.BOOL {
 }
 
 // GetNativeVideoSize dispatches through IMFMediaEngine's vtable slot 40.
-func (self *IMFMediaEngine) GetNativeVideoSize(cx *uint32, cy *uint32) foundation.HRESULT {
+func (self *IMFMediaEngine) GetNativeVideoSize(cx *uint32, cy *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cx)), uintptr(unsafe.Pointer(cy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoAspectRatio dispatches through IMFMediaEngine's vtable slot 41.
-func (self *IMFMediaEngine) GetVideoAspectRatio(cx *uint32, cy *uint32) foundation.HRESULT {
+func (self *IMFMediaEngine) GetVideoAspectRatio(cx *uint32, cy *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cx)), uintptr(unsafe.Pointer(cy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFMediaEngine's vtable slot 42.
-func (self *IMFMediaEngine) Shutdown() foundation.HRESULT {
+func (self *IMFMediaEngine) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TransferVideoFrame dispatches through IMFMediaEngine's vtable slot 43.
-func (self *IMFMediaEngine) TransferVideoFrame(pDstSurf *systemcom.IUnknown, pSrc *MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *MFARGB) foundation.HRESULT {
+func (self *IMFMediaEngine) TransferVideoFrame(pDstSurf *systemcom.IUnknown, pSrc *MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *MFARGB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDstSurf)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(pBorderClr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnVideoStreamTick dispatches through IMFMediaEngine's vtable slot 44.
-func (self *IMFMediaEngine) OnVideoStreamTick(pPts *int64) foundation.HRESULT {
+func (self *IMFMediaEngine) OnVideoStreamTick(pPts *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPts)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7a3bac98-0e76-49fb-8c20-8a86fd98eaf2
@@ -5311,15 +5349,16 @@ type IMFMediaEngineAudioEndpointId struct {
 var IID_IMFMediaEngineAudioEndpointId = win32.GUID{Data1: 0x7a3bac98, Data2: 0x0e76, Data3: 0x49fb, Data4: [8]byte{0x8c, 0x20, 0x8a, 0x86, 0xfd, 0x98, 0xea, 0xf2}}
 
 // SetAudioEndpointId dispatches through IMFMediaEngineAudioEndpointId's vtable slot 3.
-func (self *IMFMediaEngineAudioEndpointId) SetAudioEndpointId(pszEndpointId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszEndpointId)))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineAudioEndpointId) SetAudioEndpointId(pszEndpointId string) error {
+	_pszEndpointId := win32.UTF16Ptr(pszEndpointId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszEndpointId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudioEndpointId dispatches through IMFMediaEngineAudioEndpointId's vtable slot 4.
-func (self *IMFMediaEngineAudioEndpointId) GetAudioEndpointId(ppszEndpointId *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFMediaEngineAudioEndpointId) GetAudioEndpointId(ppszEndpointId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszEndpointId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineClassFactory: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengineclassfactory
@@ -5332,21 +5371,21 @@ type IMFMediaEngineClassFactory struct {
 var IID_IMFMediaEngineClassFactory = win32.GUID{Data1: 0x4d645ace, Data2: 0x26aa, Data3: 0x4688, Data4: [8]byte{0x9b, 0xe1, 0xdf, 0x35, 0x16, 0x99, 0x0b, 0x93}}
 
 // CreateInstance dispatches through IMFMediaEngineClassFactory's vtable slot 3.
-func (self *IMFMediaEngineClassFactory) CreateInstance(dwFlags uint32, pAttr *IMFAttributes, ppPlayer **IMFMediaEngine) foundation.HRESULT {
+func (self *IMFMediaEngineClassFactory) CreateInstance(dwFlags uint32, pAttr *IMFAttributes, ppPlayer **IMFMediaEngine) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pAttr)), uintptr(unsafe.Pointer(ppPlayer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateTimeRange dispatches through IMFMediaEngineClassFactory's vtable slot 4.
-func (self *IMFMediaEngineClassFactory) CreateTimeRange(ppTimeRange **IMFMediaTimeRange) foundation.HRESULT {
+func (self *IMFMediaEngineClassFactory) CreateTimeRange(ppTimeRange **IMFMediaTimeRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTimeRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateError dispatches through IMFMediaEngineClassFactory's vtable slot 5.
-func (self *IMFMediaEngineClassFactory) CreateError(ppError **IMFMediaError) foundation.HRESULT {
+func (self *IMFMediaEngineClassFactory) CreateError(ppError **IMFMediaError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineClassFactory2: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengineclassfactory2
@@ -5359,9 +5398,9 @@ type IMFMediaEngineClassFactory2 struct {
 var IID_IMFMediaEngineClassFactory2 = win32.GUID{Data1: 0x09083cef, Data2: 0x867f, Data3: 0x4bf6, Data4: [8]byte{0x87, 0x76, 0xde, 0xe3, 0xa7, 0xb4, 0x2f, 0xca}}
 
 // CreateMediaKeys2 dispatches through IMFMediaEngineClassFactory2's vtable slot 3.
-func (self *IMFMediaEngineClassFactory2) CreateMediaKeys2(keySystem foundation.BSTR, defaultCdmStorePath foundation.BSTR, inprivateCdmStorePath foundation.BSTR, ppKeys **IMFMediaKeys) foundation.HRESULT {
+func (self *IMFMediaEngineClassFactory2) CreateMediaKeys2(keySystem foundation.BSTR, defaultCdmStorePath foundation.BSTR, inprivateCdmStorePath foundation.BSTR, ppKeys **IMFMediaKeys) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keySystem)), uintptr(unsafe.Pointer(defaultCdmStorePath)), uintptr(unsafe.Pointer(inprivateCdmStorePath)), uintptr(unsafe.Pointer(ppKeys)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3787614f-65f7-4003-b673-ead8293a0e60
@@ -5373,9 +5412,9 @@ type IMFMediaEngineClassFactory3 struct {
 var IID_IMFMediaEngineClassFactory3 = win32.GUID{Data1: 0x3787614f, Data2: 0x65f7, Data3: 0x4003, Data4: [8]byte{0xb6, 0x73, 0xea, 0xd8, 0x29, 0x3a, 0x0e, 0x60}}
 
 // CreateMediaKeySystemAccess dispatches through IMFMediaEngineClassFactory3's vtable slot 3.
-func (self *IMFMediaEngineClassFactory3) CreateMediaKeySystemAccess(keySystem foundation.BSTR, ppSupportedConfigurationsArray **uishellpropertiessystem.IPropertyStore, uSize uint32, ppKeyAccess **IMFMediaKeySystemAccess) foundation.HRESULT {
+func (self *IMFMediaEngineClassFactory3) CreateMediaKeySystemAccess(keySystem foundation.BSTR, ppSupportedConfigurationsArray **uishellpropertiessystem.IPropertyStore, uSize uint32, ppKeyAccess **IMFMediaKeySystemAccess) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keySystem)), uintptr(unsafe.Pointer(ppSupportedConfigurationsArray)), uintptr(uSize), uintptr(unsafe.Pointer(ppKeyAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineClassFactory4: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengineclassfactory4
@@ -5388,9 +5427,10 @@ type IMFMediaEngineClassFactory4 struct {
 var IID_IMFMediaEngineClassFactory4 = win32.GUID{Data1: 0xfbe256c1, Data2: 0x43cf, Data3: 0x4a9b, Data4: [8]byte{0x8c, 0xb8, 0xce, 0x86, 0x32, 0xa3, 0x41, 0x86}}
 
 // CreateContentDecryptionModuleFactory dispatches through IMFMediaEngineClassFactory4's vtable slot 3.
-func (self *IMFMediaEngineClassFactory4) CreateContentDecryptionModuleFactory(keySystem foundation.PWSTR, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keySystem)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineClassFactory4) CreateContentDecryptionModuleFactory(keySystem string, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	_keySystem := win32.UTF16Ptr(keySystem)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_keySystem)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineClassFactoryEx: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengineclassfactoryex
@@ -5403,21 +5443,21 @@ type IMFMediaEngineClassFactoryEx struct {
 var IID_IMFMediaEngineClassFactoryEx = win32.GUID{Data1: 0xc56156c6, Data2: 0xea5b, Data3: 0x48a5, Data4: [8]byte{0x9d, 0xf8, 0xfb, 0xe0, 0x35, 0xd0, 0x92, 0x9e}}
 
 // CreateMediaSourceExtension dispatches through IMFMediaEngineClassFactoryEx's vtable slot 6.
-func (self *IMFMediaEngineClassFactoryEx) CreateMediaSourceExtension(dwFlags uint32, pAttr *IMFAttributes, ppMSE **IMFMediaSourceExtension) foundation.HRESULT {
+func (self *IMFMediaEngineClassFactoryEx) CreateMediaSourceExtension(dwFlags uint32, pAttr *IMFAttributes, ppMSE **IMFMediaSourceExtension) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pAttr)), uintptr(unsafe.Pointer(ppMSE)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMediaKeys dispatches through IMFMediaEngineClassFactoryEx's vtable slot 7.
-func (self *IMFMediaEngineClassFactoryEx) CreateMediaKeys(keySystem foundation.BSTR, cdmStorePath foundation.BSTR, ppKeys **IMFMediaKeys) foundation.HRESULT {
+func (self *IMFMediaEngineClassFactoryEx) CreateMediaKeys(keySystem foundation.BSTR, cdmStorePath foundation.BSTR, ppKeys **IMFMediaKeys) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keySystem)), uintptr(unsafe.Pointer(cdmStorePath)), uintptr(unsafe.Pointer(ppKeys)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsTypeSupported dispatches through IMFMediaEngineClassFactoryEx's vtable slot 8.
-func (self *IMFMediaEngineClassFactoryEx) IsTypeSupported(type_ foundation.BSTR, keySystem foundation.BSTR, isSupported *foundation.BOOL) foundation.HRESULT {
+func (self *IMFMediaEngineClassFactoryEx) IsTypeSupported(type_ foundation.BSTR, keySystem foundation.BSTR, isSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(keySystem)), uintptr(unsafe.Pointer(isSupported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineEME: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengineeme
@@ -5430,15 +5470,15 @@ type IMFMediaEngineEME struct {
 var IID_IMFMediaEngineEME = win32.GUID{Data1: 0x50dc93e4, Data2: 0xba4f, Data3: 0x4275, Data4: [8]byte{0xae, 0x66, 0x83, 0xe8, 0x36, 0xe5, 0x74, 0x69}}
 
 // Get_Keys dispatches through IMFMediaEngineEME's vtable slot 3.
-func (self *IMFMediaEngineEME) Get_Keys(keys **IMFMediaKeys) foundation.HRESULT {
+func (self *IMFMediaEngineEME) Get_Keys(keys **IMFMediaKeys) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keys)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMediaKeys dispatches through IMFMediaEngineEME's vtable slot 4.
-func (self *IMFMediaEngineEME) SetMediaKeys(keys *IMFMediaKeys) foundation.HRESULT {
+func (self *IMFMediaEngineEME) SetMediaKeys(keys *IMFMediaKeys) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keys)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9e184d15-cdb7-4f86-b49e-566689f4a601
@@ -5469,105 +5509,109 @@ type IMFMediaEngineEx struct {
 var IID_IMFMediaEngineEx = win32.GUID{Data1: 0x83015ead, Data2: 0xb1e6, Data3: 0x40d0, Data4: [8]byte{0xa9, 0x8a, 0x37, 0x14, 0x5f, 0xfe, 0x1a, 0xd1}}
 
 // SetSourceFromByteStream dispatches through IMFMediaEngineEx's vtable slot 45.
-func (self *IMFMediaEngineEx) SetSourceFromByteStream(pByteStream *IMFByteStream, pURL foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaEngineEx) SetSourceFromByteStream(pByteStream *IMFByteStream, pURL foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pURL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatistics dispatches through IMFMediaEngineEx's vtable slot 46.
-func (self *IMFMediaEngineEx) GetStatistics(StatisticID MF_MEDIA_ENGINE_STATISTIC, pStatistic *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetStatistics(StatisticID MF_MEDIA_ENGINE_STATISTIC, pStatistic *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(StatisticID), uintptr(unsafe.Pointer(pStatistic)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateVideoStream dispatches through IMFMediaEngineEx's vtable slot 47.
-func (self *IMFMediaEngineEx) UpdateVideoStream(pSrc *MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *MFARGB) foundation.HRESULT {
+func (self *IMFMediaEngineEx) UpdateVideoStream(pSrc *MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *MFARGB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(pBorderClr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FrameStep dispatches through IMFMediaEngineEx's vtable slot 51.
-func (self *IMFMediaEngineEx) FrameStep(Forward foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(Forward))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineEx) FrameStep(Forward bool) error {
+	_Forward := win32.Bool32(Forward)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(_Forward))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResourceCharacteristics dispatches through IMFMediaEngineEx's vtable slot 52.
-func (self *IMFMediaEngineEx) GetResourceCharacteristics(pCharacteristics *uint32) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetResourceCharacteristics(pCharacteristics *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCharacteristics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresentationAttribute dispatches through IMFMediaEngineEx's vtable slot 53.
-func (self *IMFMediaEngineEx) GetPresentationAttribute(guidMFAttribute *win32.GUID, pvValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetPresentationAttribute(guidMFAttribute *win32.GUID, pvValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidMFAttribute)), uintptr(unsafe.Pointer(pvValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNumberOfStreams dispatches through IMFMediaEngineEx's vtable slot 54.
-func (self *IMFMediaEngineEx) GetNumberOfStreams(pdwStreamCount *uint32) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetNumberOfStreams(pdwStreamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStreamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamAttribute dispatches through IMFMediaEngineEx's vtable slot 55.
-func (self *IMFMediaEngineEx) GetStreamAttribute(dwStreamIndex uint32, guidMFAttribute *win32.GUID, pvValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetStreamAttribute(dwStreamIndex uint32, guidMFAttribute *win32.GUID, pvValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(guidMFAttribute)), uintptr(unsafe.Pointer(pvValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamSelection dispatches through IMFMediaEngineEx's vtable slot 56.
-func (self *IMFMediaEngineEx) GetStreamSelection(dwStreamIndex uint32, pEnabled *foundation.BOOL) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetStreamSelection(dwStreamIndex uint32, pEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStreamSelection dispatches through IMFMediaEngineEx's vtable slot 57.
-func (self *IMFMediaEngineEx) SetStreamSelection(dwStreamIndex uint32, Enabled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(Enabled))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineEx) SetStreamSelection(dwStreamIndex uint32, Enabled bool) error {
+	_Enabled := win32.Bool32(Enabled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(_Enabled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ApplyStreamSelections dispatches through IMFMediaEngineEx's vtable slot 58.
-func (self *IMFMediaEngineEx) ApplyStreamSelections() foundation.HRESULT {
+func (self *IMFMediaEngineEx) ApplyStreamSelections() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsProtected dispatches through IMFMediaEngineEx's vtable slot 59.
-func (self *IMFMediaEngineEx) IsProtected(pProtected *foundation.BOOL) foundation.HRESULT {
+func (self *IMFMediaEngineEx) IsProtected(pProtected *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProtected)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertVideoEffect dispatches through IMFMediaEngineEx's vtable slot 60.
-func (self *IMFMediaEngineEx) InsertVideoEffect(pEffect *systemcom.IUnknown, fOptional foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEffect)), uintptr(fOptional))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineEx) InsertVideoEffect(pEffect *systemcom.IUnknown, fOptional bool) error {
+	_fOptional := win32.Bool32(fOptional)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEffect)), uintptr(_fOptional))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertAudioEffect dispatches through IMFMediaEngineEx's vtable slot 61.
-func (self *IMFMediaEngineEx) InsertAudioEffect(pEffect *systemcom.IUnknown, fOptional foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEffect)), uintptr(fOptional))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineEx) InsertAudioEffect(pEffect *systemcom.IUnknown, fOptional bool) error {
+	_fOptional := win32.Bool32(fOptional)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEffect)), uintptr(_fOptional))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllEffects dispatches through IMFMediaEngineEx's vtable slot 62.
-func (self *IMFMediaEngineEx) RemoveAllEffects() foundation.HRESULT {
+func (self *IMFMediaEngineEx) RemoveAllEffects() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimelineMarkerTimer dispatches through IMFMediaEngineEx's vtable slot 64.
-func (self *IMFMediaEngineEx) GetTimelineMarkerTimer(pTimeToFire *float64) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetTimelineMarkerTimer(pTimeToFire *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeToFire)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelTimelineMarkerTimer dispatches through IMFMediaEngineEx's vtable slot 65.
-func (self *IMFMediaEngineEx) CancelTimelineMarkerTimer() foundation.HRESULT {
+func (self *IMFMediaEngineEx) CancelTimelineMarkerTimer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsStereo3D dispatches through IMFMediaEngineEx's vtable slot 66.
@@ -5577,87 +5621,91 @@ func (self *IMFMediaEngineEx) IsStereo3D() foundation.BOOL {
 }
 
 // GetStereo3DFramePackingMode dispatches through IMFMediaEngineEx's vtable slot 67.
-func (self *IMFMediaEngineEx) GetStereo3DFramePackingMode(packMode *MF_MEDIA_ENGINE_S3D_PACKING_MODE) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetStereo3DFramePackingMode(packMode *MF_MEDIA_ENGINE_S3D_PACKING_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStereo3DFramePackingMode dispatches through IMFMediaEngineEx's vtable slot 68.
-func (self *IMFMediaEngineEx) SetStereo3DFramePackingMode(packMode MF_MEDIA_ENGINE_S3D_PACKING_MODE) foundation.HRESULT {
+func (self *IMFMediaEngineEx) SetStereo3DFramePackingMode(packMode MF_MEDIA_ENGINE_S3D_PACKING_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(packMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStereo3DRenderMode dispatches through IMFMediaEngineEx's vtable slot 69.
-func (self *IMFMediaEngineEx) GetStereo3DRenderMode(outputType *MF3DVideoOutputType) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetStereo3DRenderMode(outputType *MF3DVideoOutputType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStereo3DRenderMode dispatches through IMFMediaEngineEx's vtable slot 70.
-func (self *IMFMediaEngineEx) SetStereo3DRenderMode(outputType MF3DVideoOutputType) foundation.HRESULT {
+func (self *IMFMediaEngineEx) SetStereo3DRenderMode(outputType MF3DVideoOutputType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(outputType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableWindowlessSwapchainMode dispatches through IMFMediaEngineEx's vtable slot 71.
-func (self *IMFMediaEngineEx) EnableWindowlessSwapchainMode(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineEx) EnableWindowlessSwapchainMode(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoSwapchainHandle dispatches through IMFMediaEngineEx's vtable slot 72.
-func (self *IMFMediaEngineEx) GetVideoSwapchainHandle(phSwapchain *foundation.HANDLE) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetVideoSwapchainHandle(phSwapchain *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phSwapchain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableHorizontalMirrorMode dispatches through IMFMediaEngineEx's vtable slot 73.
-func (self *IMFMediaEngineEx) EnableHorizontalMirrorMode(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineEx) EnableHorizontalMirrorMode(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudioStreamCategory dispatches through IMFMediaEngineEx's vtable slot 74.
-func (self *IMFMediaEngineEx) GetAudioStreamCategory(pCategory *uint32) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetAudioStreamCategory(pCategory *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAudioStreamCategory dispatches through IMFMediaEngineEx's vtable slot 75.
-func (self *IMFMediaEngineEx) SetAudioStreamCategory(category uint32) foundation.HRESULT {
+func (self *IMFMediaEngineEx) SetAudioStreamCategory(category uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(category))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudioEndpointRole dispatches through IMFMediaEngineEx's vtable slot 76.
-func (self *IMFMediaEngineEx) GetAudioEndpointRole(pRole *uint32) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetAudioEndpointRole(pRole *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRole)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAudioEndpointRole dispatches through IMFMediaEngineEx's vtable slot 77.
-func (self *IMFMediaEngineEx) SetAudioEndpointRole(role uint32) foundation.HRESULT {
+func (self *IMFMediaEngineEx) SetAudioEndpointRole(role uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(role))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRealTimeMode dispatches through IMFMediaEngineEx's vtable slot 78.
-func (self *IMFMediaEngineEx) GetRealTimeMode(pfEnabled *foundation.BOOL) foundation.HRESULT {
+func (self *IMFMediaEngineEx) GetRealTimeMode(pfEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRealTimeMode dispatches through IMFMediaEngineEx's vtable slot 79.
-func (self *IMFMediaEngineEx) SetRealTimeMode(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineEx) SetRealTimeMode(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableTimeUpdateTimer dispatches through IMFMediaEngineEx's vtable slot 81.
-func (self *IMFMediaEngineEx) EnableTimeUpdateTimer(fEnableTimer foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(fEnableTimer))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineEx) EnableTimeUpdateTimer(fEnableTimer bool) error {
+	_fEnableTimer := win32.Bool32(fEnableTimer)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(_fEnableTimer))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineExtension: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengineextension
@@ -5670,27 +5718,28 @@ type IMFMediaEngineExtension struct {
 var IID_IMFMediaEngineExtension = win32.GUID{Data1: 0x2f69d622, Data2: 0x20b5, Data3: 0x41e9, Data4: [8]byte{0xaf, 0xdf, 0x89, 0xce, 0xd1, 0xdd, 0xa0, 0x4e}}
 
 // CanPlayType dispatches through IMFMediaEngineExtension's vtable slot 3.
-func (self *IMFMediaEngineExtension) CanPlayType(AudioOnly foundation.BOOL, MimeType foundation.BSTR, pAnswer *MF_MEDIA_ENGINE_CANPLAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(AudioOnly), uintptr(unsafe.Pointer(MimeType)), uintptr(unsafe.Pointer(pAnswer)))
-	return foundation.HRESULT(r1)
+func (self *IMFMediaEngineExtension) CanPlayType(AudioOnly bool, MimeType foundation.BSTR, pAnswer *MF_MEDIA_ENGINE_CANPLAY) error {
+	_AudioOnly := win32.Bool32(AudioOnly)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_AudioOnly), uintptr(unsafe.Pointer(MimeType)), uintptr(unsafe.Pointer(pAnswer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginCreateObject dispatches through IMFMediaEngineExtension's vtable slot 4.
-func (self *IMFMediaEngineExtension) BeginCreateObject(bstrURL foundation.BSTR, pByteStream *IMFByteStream, type_ MF_OBJECT_TYPE, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFMediaEngineExtension) BeginCreateObject(bstrURL foundation.BSTR, pByteStream *IMFByteStream, type_ MF_OBJECT_TYPE, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrURL)), uintptr(unsafe.Pointer(pByteStream)), uintptr(type_), uintptr(unsafe.Pointer(ppIUnknownCancelCookie)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelObjectCreation dispatches through IMFMediaEngineExtension's vtable slot 5.
-func (self *IMFMediaEngineExtension) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFMediaEngineExtension) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIUnknownCancelCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndCreateObject dispatches through IMFMediaEngineExtension's vtable slot 6.
-func (self *IMFMediaEngineExtension) EndCreateObject(pResult *IMFAsyncResult, ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFMediaEngineExtension) EndCreateObject(pResult *IMFAsyncResult, ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineNeedKeyNotify: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengineneedkeynotify
@@ -5717,9 +5766,9 @@ type IMFMediaEngineNotify struct {
 var IID_IMFMediaEngineNotify = win32.GUID{Data1: 0xfee7c112, Data2: 0xe776, Data3: 0x42b5, Data4: [8]byte{0x9b, 0xbf, 0x00, 0x48, 0x52, 0x4e, 0x2b, 0xd5}}
 
 // EventNotify dispatches through IMFMediaEngineNotify's vtable slot 3.
-func (self *IMFMediaEngineNotify) EventNotify(event uint32, param1 uintptr, param2 uint32) foundation.HRESULT {
+func (self *IMFMediaEngineNotify) EventNotify(event uint32, param1 uintptr, param2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(event), uintptr(param1), uintptr(param2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineOPMInfo: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengineopminfo
@@ -5732,9 +5781,9 @@ type IMFMediaEngineOPMInfo struct {
 var IID_IMFMediaEngineOPMInfo = win32.GUID{Data1: 0x765763e6, Data2: 0x6c01, Data3: 0x4b01, Data4: [8]byte{0xbb, 0x0f, 0xb8, 0x29, 0xf6, 0x0e, 0xd2, 0x8c}}
 
 // GetOPMInfo dispatches through IMFMediaEngineOPMInfo's vtable slot 3.
-func (self *IMFMediaEngineOPMInfo) GetOPMInfo(pStatus *MF_MEDIA_ENGINE_OPM_STATUS, pConstricted *foundation.BOOL) foundation.HRESULT {
+func (self *IMFMediaEngineOPMInfo) GetOPMInfo(pStatus *MF_MEDIA_ENGINE_OPM_STATUS, pConstricted *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)), uintptr(unsafe.Pointer(pConstricted)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineProtectedContent: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaengineprotectedcontent
@@ -5747,39 +5796,39 @@ type IMFMediaEngineProtectedContent struct {
 var IID_IMFMediaEngineProtectedContent = win32.GUID{Data1: 0x9f8021e8, Data2: 0x9c8c, Data3: 0x487e, Data4: [8]byte{0xbb, 0x5c, 0x79, 0xaa, 0x47, 0x79, 0x93, 0x8c}}
 
 // ShareResources dispatches through IMFMediaEngineProtectedContent's vtable slot 3.
-func (self *IMFMediaEngineProtectedContent) ShareResources(pUnkDeviceContext *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFMediaEngineProtectedContent) ShareResources(pUnkDeviceContext *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDeviceContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRequiredProtections dispatches through IMFMediaEngineProtectedContent's vtable slot 4.
-func (self *IMFMediaEngineProtectedContent) GetRequiredProtections(pFrameProtectionFlags *uint32) foundation.HRESULT {
+func (self *IMFMediaEngineProtectedContent) GetRequiredProtections(pFrameProtectionFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFrameProtectionFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOPMWindow dispatches through IMFMediaEngineProtectedContent's vtable slot 5.
-func (self *IMFMediaEngineProtectedContent) SetOPMWindow(hwnd foundation.HWND) foundation.HRESULT {
+func (self *IMFMediaEngineProtectedContent) SetOPMWindow(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TransferVideoFrame dispatches through IMFMediaEngineProtectedContent's vtable slot 6.
-func (self *IMFMediaEngineProtectedContent) TransferVideoFrame(pDstSurf *systemcom.IUnknown, pSrc *MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *MFARGB, pFrameProtectionFlags *uint32) foundation.HRESULT {
+func (self *IMFMediaEngineProtectedContent) TransferVideoFrame(pDstSurf *systemcom.IUnknown, pSrc *MFVideoNormalizedRect, pDst *foundation.RECT, pBorderClr *MFARGB, pFrameProtectionFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDstSurf)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(pBorderClr)), uintptr(unsafe.Pointer(pFrameProtectionFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContentProtectionManager dispatches through IMFMediaEngineProtectedContent's vtable slot 7.
-func (self *IMFMediaEngineProtectedContent) SetContentProtectionManager(pCPM *IMFContentProtectionManager) foundation.HRESULT {
+func (self *IMFMediaEngineProtectedContent) SetContentProtectionManager(pCPM *IMFContentProtectionManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCPM)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetApplicationCertificate dispatches through IMFMediaEngineProtectedContent's vtable slot 8.
-func (self *IMFMediaEngineProtectedContent) SetApplicationCertificate(pbBlob *byte, cbBlob uint32) foundation.HRESULT {
+func (self *IMFMediaEngineProtectedContent) SetApplicationCertificate(pbBlob *byte, cbBlob uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBlob)), uintptr(cbBlob))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineSrcElements: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaenginesrcelements
@@ -5798,33 +5847,33 @@ func (self *IMFMediaEngineSrcElements) GetLength() uint32 {
 }
 
 // GetURL dispatches through IMFMediaEngineSrcElements's vtable slot 4.
-func (self *IMFMediaEngineSrcElements) GetURL(index uint32, pURL *foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaEngineSrcElements) GetURL(index uint32, pURL *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pURL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetType dispatches through IMFMediaEngineSrcElements's vtable slot 5.
-func (self *IMFMediaEngineSrcElements) GetType(index uint32, pType *foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaEngineSrcElements) GetType(index uint32, pType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMedia dispatches through IMFMediaEngineSrcElements's vtable slot 6.
-func (self *IMFMediaEngineSrcElements) GetMedia(index uint32, pMedia *foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaEngineSrcElements) GetMedia(index uint32, pMedia *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pMedia)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddElement dispatches through IMFMediaEngineSrcElements's vtable slot 7.
-func (self *IMFMediaEngineSrcElements) AddElement(pURL foundation.BSTR, pType foundation.BSTR, pMedia foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaEngineSrcElements) AddElement(pURL foundation.BSTR, pType foundation.BSTR, pMedia foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pURL)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pMedia)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllElements dispatches through IMFMediaEngineSrcElements's vtable slot 8.
-func (self *IMFMediaEngineSrcElements) RemoveAllElements() foundation.HRESULT {
+func (self *IMFMediaEngineSrcElements) RemoveAllElements() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineSrcElementsEx: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaenginesrcelementsex
@@ -5837,15 +5886,15 @@ type IMFMediaEngineSrcElementsEx struct {
 var IID_IMFMediaEngineSrcElementsEx = win32.GUID{Data1: 0x654a6bb3, Data2: 0xe1a3, Data3: 0x424a, Data4: [8]byte{0x99, 0x08, 0x53, 0xa4, 0x3a, 0x0d, 0xfd, 0xa0}}
 
 // AddElementEx dispatches through IMFMediaEngineSrcElementsEx's vtable slot 9.
-func (self *IMFMediaEngineSrcElementsEx) AddElementEx(pURL foundation.BSTR, pType foundation.BSTR, pMedia foundation.BSTR, keySystem foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaEngineSrcElementsEx) AddElementEx(pURL foundation.BSTR, pType foundation.BSTR, pMedia foundation.BSTR, keySystem foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pURL)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pMedia)), uintptr(unsafe.Pointer(keySystem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKeySystem dispatches through IMFMediaEngineSrcElementsEx's vtable slot 10.
-func (self *IMFMediaEngineSrcElementsEx) GetKeySystem(index uint32, pType *foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaEngineSrcElementsEx) GetKeySystem(index uint32, pType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineSupportsSourceTransfer: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaenginesupportssourcetransfer
@@ -5858,21 +5907,21 @@ type IMFMediaEngineSupportsSourceTransfer struct {
 var IID_IMFMediaEngineSupportsSourceTransfer = win32.GUID{Data1: 0xa724b056, Data2: 0x1b2e, Data3: 0x4642, Data4: [8]byte{0xa6, 0xf3, 0xdb, 0x94, 0x20, 0xc5, 0x29, 0x08}}
 
 // ShouldTransferSource dispatches through IMFMediaEngineSupportsSourceTransfer's vtable slot 3.
-func (self *IMFMediaEngineSupportsSourceTransfer) ShouldTransferSource(pfShouldTransfer *foundation.BOOL) foundation.HRESULT {
+func (self *IMFMediaEngineSupportsSourceTransfer) ShouldTransferSource(pfShouldTransfer *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfShouldTransfer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DetachMediaSource dispatches through IMFMediaEngineSupportsSourceTransfer's vtable slot 4.
-func (self *IMFMediaEngineSupportsSourceTransfer) DetachMediaSource(ppByteStream **IMFByteStream, ppMediaSource **IMFMediaSource, ppMSE **IMFMediaSourceExtension) foundation.HRESULT {
+func (self *IMFMediaEngineSupportsSourceTransfer) DetachMediaSource(ppByteStream **IMFByteStream, ppMediaSource **IMFMediaSource, ppMSE **IMFMediaSourceExtension) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppByteStream)), uintptr(unsafe.Pointer(ppMediaSource)), uintptr(unsafe.Pointer(ppMSE)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AttachMediaSource dispatches through IMFMediaEngineSupportsSourceTransfer's vtable slot 5.
-func (self *IMFMediaEngineSupportsSourceTransfer) AttachMediaSource(pByteStream *IMFByteStream, pMediaSource *IMFMediaSource, pMSE *IMFMediaSourceExtension) foundation.HRESULT {
+func (self *IMFMediaEngineSupportsSourceTransfer) AttachMediaSource(pByteStream *IMFByteStream, pMediaSource *IMFMediaSource, pMSE *IMFMediaSourceExtension) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pMediaSource)), uintptr(unsafe.Pointer(pMSE)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 24230452-fe54-40cc-94f3-fcc394c340d6
@@ -5884,9 +5933,9 @@ type IMFMediaEngineTransferSource struct {
 var IID_IMFMediaEngineTransferSource = win32.GUID{Data1: 0x24230452, Data2: 0xfe54, Data3: 0x40cc, Data4: [8]byte{0x94, 0xf3, 0xfc, 0xc3, 0x94, 0xc3, 0x40, 0xd6}}
 
 // TransferSourceToMediaEngine dispatches through IMFMediaEngineTransferSource's vtable slot 3.
-func (self *IMFMediaEngineTransferSource) TransferSourceToMediaEngine(destination *IMFMediaEngine) foundation.HRESULT {
+func (self *IMFMediaEngineTransferSource) TransferSourceToMediaEngine(destination *IMFMediaEngine) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(destination)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEngineWebSupport: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaenginewebsupport
@@ -5905,15 +5954,15 @@ func (self *IMFMediaEngineWebSupport) ShouldDelayTheLoadEvent() foundation.BOOL 
 }
 
 // ConnectWebAudio dispatches through IMFMediaEngineWebSupport's vtable slot 4.
-func (self *IMFMediaEngineWebSupport) ConnectWebAudio(dwSampleRate uint32, ppSourceProvider **IAudioSourceProvider) foundation.HRESULT {
+func (self *IMFMediaEngineWebSupport) ConnectWebAudio(dwSampleRate uint32, ppSourceProvider **IAudioSourceProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwSampleRate), uintptr(unsafe.Pointer(ppSourceProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisconnectWebAudio dispatches through IMFMediaEngineWebSupport's vtable slot 5.
-func (self *IMFMediaEngineWebSupport) DisconnectWebAudio() foundation.HRESULT {
+func (self *IMFMediaEngineWebSupport) DisconnectWebAudio() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaError: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediaerror
@@ -5932,21 +5981,21 @@ func (self *IMFMediaError) GetErrorCode() uint16 {
 }
 
 // GetExtendedErrorCode dispatches through IMFMediaError's vtable slot 4.
-func (self *IMFMediaError) GetExtendedErrorCode() foundation.HRESULT {
+func (self *IMFMediaError) GetExtendedErrorCode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetErrorCode dispatches through IMFMediaError's vtable slot 5.
-func (self *IMFMediaError) SetErrorCode(error_ MF_MEDIA_ENGINE_ERR) foundation.HRESULT {
+func (self *IMFMediaError) SetErrorCode(error_ MF_MEDIA_ENGINE_ERR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(error_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetExtendedErrorCode dispatches through IMFMediaError's vtable slot 6.
-func (self *IMFMediaError) SetExtendedErrorCode(error_ foundation.HRESULT) foundation.HRESULT {
+func (self *IMFMediaError) SetExtendedErrorCode(error_ foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(error_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEvent: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfmediaevent
@@ -5959,27 +6008,27 @@ type IMFMediaEvent struct {
 var IID_IMFMediaEvent = win32.GUID{Data1: 0xdf598932, Data2: 0xf10c, Data3: 0x4e39, Data4: [8]byte{0xbb, 0xa2, 0xc3, 0x08, 0xf1, 0x01, 0xda, 0xa3}}
 
 // GetType dispatches through IMFMediaEvent's vtable slot 33.
-func (self *IMFMediaEvent) GetType(pmet *uint32) foundation.HRESULT {
+func (self *IMFMediaEvent) GetType(pmet *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExtendedType dispatches through IMFMediaEvent's vtable slot 34.
-func (self *IMFMediaEvent) GetExtendedType(pguidExtendedType *win32.GUID) foundation.HRESULT {
+func (self *IMFMediaEvent) GetExtendedType(pguidExtendedType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidExtendedType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IMFMediaEvent's vtable slot 35.
-func (self *IMFMediaEvent) GetStatus(phrStatus *foundation.HRESULT) foundation.HRESULT {
+func (self *IMFMediaEvent) GetStatus(phrStatus *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValue dispatches through IMFMediaEvent's vtable slot 36.
-func (self *IMFMediaEvent) GetValue(pvValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMediaEvent) GetValue(pvValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEventGenerator: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfmediaeventgenerator
@@ -5992,27 +6041,27 @@ type IMFMediaEventGenerator struct {
 var IID_IMFMediaEventGenerator = win32.GUID{Data1: 0x2cd0bd52, Data2: 0xbcd5, Data3: 0x4b89, Data4: [8]byte{0xb6, 0x2c, 0xea, 0xdc, 0x0c, 0x03, 0x1e, 0x7d}}
 
 // GetEvent dispatches through IMFMediaEventGenerator's vtable slot 3.
-func (self *IMFMediaEventGenerator) GetEvent(dwFlags MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppEvent **IMFMediaEvent) foundation.HRESULT {
+func (self *IMFMediaEventGenerator) GetEvent(dwFlags MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS, ppEvent **IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginGetEvent dispatches through IMFMediaEventGenerator's vtable slot 4.
-func (self *IMFMediaEventGenerator) BeginGetEvent(pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFMediaEventGenerator) BeginGetEvent(pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndGetEvent dispatches through IMFMediaEventGenerator's vtable slot 5.
-func (self *IMFMediaEventGenerator) EndGetEvent(pResult *IMFAsyncResult, ppEvent **IMFMediaEvent) foundation.HRESULT {
+func (self *IMFMediaEventGenerator) EndGetEvent(pResult *IMFAsyncResult, ppEvent **IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueueEvent dispatches through IMFMediaEventGenerator's vtable slot 6.
-func (self *IMFMediaEventGenerator) QueueEvent(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pvValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMediaEventGenerator) QueueEvent(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pvValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(met), uintptr(unsafe.Pointer(guidExtendedType)), uintptr(hrStatus), uintptr(unsafe.Pointer(pvValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaEventQueue: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfmediaeventqueue
@@ -6025,45 +6074,45 @@ type IMFMediaEventQueue struct {
 var IID_IMFMediaEventQueue = win32.GUID{Data1: 0x36f846fc, Data2: 0x2256, Data3: 0x48b6, Data4: [8]byte{0xb5, 0x8e, 0xe2, 0xb6, 0x38, 0x31, 0x65, 0x81}}
 
 // GetEvent dispatches through IMFMediaEventQueue's vtable slot 3.
-func (self *IMFMediaEventQueue) GetEvent(dwFlags uint32, ppEvent **IMFMediaEvent) foundation.HRESULT {
+func (self *IMFMediaEventQueue) GetEvent(dwFlags uint32, ppEvent **IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginGetEvent dispatches through IMFMediaEventQueue's vtable slot 4.
-func (self *IMFMediaEventQueue) BeginGetEvent(pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFMediaEventQueue) BeginGetEvent(pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndGetEvent dispatches through IMFMediaEventQueue's vtable slot 5.
-func (self *IMFMediaEventQueue) EndGetEvent(pResult *IMFAsyncResult, ppEvent **IMFMediaEvent) foundation.HRESULT {
+func (self *IMFMediaEventQueue) EndGetEvent(pResult *IMFAsyncResult, ppEvent **IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueueEvent dispatches through IMFMediaEventQueue's vtable slot 6.
-func (self *IMFMediaEventQueue) QueueEvent(pEvent *IMFMediaEvent) foundation.HRESULT {
+func (self *IMFMediaEventQueue) QueueEvent(pEvent *IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueueEventParamVar dispatches through IMFMediaEventQueue's vtable slot 7.
-func (self *IMFMediaEventQueue) QueueEventParamVar(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pvValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMediaEventQueue) QueueEventParamVar(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pvValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(met), uintptr(unsafe.Pointer(guidExtendedType)), uintptr(hrStatus), uintptr(unsafe.Pointer(pvValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueueEventParamUnk dispatches through IMFMediaEventQueue's vtable slot 8.
-func (self *IMFMediaEventQueue) QueueEventParamUnk(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pUnk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFMediaEventQueue) QueueEventParamUnk(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(met), uintptr(unsafe.Pointer(guidExtendedType)), uintptr(hrStatus), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFMediaEventQueue's vtable slot 9.
-func (self *IMFMediaEventQueue) Shutdown() foundation.HRESULT {
+func (self *IMFMediaEventQueue) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaKeySession: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediakeysession
@@ -6076,33 +6125,33 @@ type IMFMediaKeySession struct {
 var IID_IMFMediaKeySession = win32.GUID{Data1: 0x24fa67d5, Data2: 0xd1d0, Data3: 0x4dc5, Data4: [8]byte{0x99, 0x5c, 0xc0, 0xef, 0xdc, 0x19, 0x1f, 0xb5}}
 
 // GetError dispatches through IMFMediaKeySession's vtable slot 3.
-func (self *IMFMediaKeySession) GetError(code *uint16, systemCode *uint32) foundation.HRESULT {
+func (self *IMFMediaKeySession) GetError(code *uint16, systemCode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(code)), uintptr(unsafe.Pointer(systemCode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_KeySystem dispatches through IMFMediaKeySession's vtable slot 4.
-func (self *IMFMediaKeySession) Get_KeySystem(keySystem *foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaKeySession) Get_KeySystem(keySystem *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keySystem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SessionId dispatches through IMFMediaKeySession's vtable slot 5.
-func (self *IMFMediaKeySession) Get_SessionId(sessionId *foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaKeySession) Get_SessionId(sessionId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sessionId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through IMFMediaKeySession's vtable slot 6.
-func (self *IMFMediaKeySession) Update(key *byte, cb uint32) foundation.HRESULT {
+func (self *IMFMediaKeySession) Update(key *byte, cb uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(cb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMFMediaKeySession's vtable slot 7.
-func (self *IMFMediaKeySession) Close() foundation.HRESULT {
+func (self *IMFMediaKeySession) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e9707e05-6d55-4636-b185-3de21210bd75
@@ -6114,39 +6163,39 @@ type IMFMediaKeySession2 struct {
 var IID_IMFMediaKeySession2 = win32.GUID{Data1: 0xe9707e05, Data2: 0x6d55, Data3: 0x4636, Data4: [8]byte{0xb1, 0x85, 0x3d, 0xe2, 0x12, 0x10, 0xbd, 0x75}}
 
 // Get_KeyStatuses dispatches through IMFMediaKeySession2's vtable slot 8.
-func (self *IMFMediaKeySession2) Get_KeyStatuses(pKeyStatusesArray **MFMediaKeyStatus, puSize *uint32) foundation.HRESULT {
+func (self *IMFMediaKeySession2) Get_KeyStatuses(pKeyStatusesArray **MFMediaKeyStatus, puSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKeyStatusesArray)), uintptr(unsafe.Pointer(puSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Load dispatches through IMFMediaKeySession2's vtable slot 9.
-func (self *IMFMediaKeySession2) Load(bstrSessionId foundation.BSTR, pfLoaded *foundation.BOOL) foundation.HRESULT {
+func (self *IMFMediaKeySession2) Load(bstrSessionId foundation.BSTR, pfLoaded *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSessionId)), uintptr(unsafe.Pointer(pfLoaded)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateRequest dispatches through IMFMediaKeySession2's vtable slot 10.
-func (self *IMFMediaKeySession2) GenerateRequest(initDataType foundation.BSTR, pbInitData *byte, cb uint32) foundation.HRESULT {
+func (self *IMFMediaKeySession2) GenerateRequest(initDataType foundation.BSTR, pbInitData *byte, cb uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(initDataType)), uintptr(unsafe.Pointer(pbInitData)), uintptr(cb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Expiration dispatches through IMFMediaKeySession2's vtable slot 11.
-func (self *IMFMediaKeySession2) Get_Expiration(dblExpiration *float64) foundation.HRESULT {
+func (self *IMFMediaKeySession2) Get_Expiration(dblExpiration *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dblExpiration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IMFMediaKeySession2's vtable slot 12.
-func (self *IMFMediaKeySession2) Remove() foundation.HRESULT {
+func (self *IMFMediaKeySession2) Remove() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFMediaKeySession2's vtable slot 13.
-func (self *IMFMediaKeySession2) Shutdown() foundation.HRESULT {
+func (self *IMFMediaKeySession2) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaKeySessionNotify: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediakeysessionnotify
@@ -6200,21 +6249,21 @@ type IMFMediaKeySystemAccess struct {
 var IID_IMFMediaKeySystemAccess = win32.GUID{Data1: 0xaec63fda, Data2: 0x7a97, Data3: 0x4944, Data4: [8]byte{0xb3, 0x5c, 0x6c, 0x6d, 0xf8, 0x08, 0x5c, 0xc3}}
 
 // CreateMediaKeys dispatches through IMFMediaKeySystemAccess's vtable slot 3.
-func (self *IMFMediaKeySystemAccess) CreateMediaKeys(pCdmCustomConfig *uishellpropertiessystem.IPropertyStore, ppKeys **IMFMediaKeys2) foundation.HRESULT {
+func (self *IMFMediaKeySystemAccess) CreateMediaKeys(pCdmCustomConfig *uishellpropertiessystem.IPropertyStore, ppKeys **IMFMediaKeys2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCdmCustomConfig)), uintptr(unsafe.Pointer(ppKeys)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SupportedConfiguration dispatches through IMFMediaKeySystemAccess's vtable slot 4.
-func (self *IMFMediaKeySystemAccess) Get_SupportedConfiguration(ppSupportedConfiguration **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IMFMediaKeySystemAccess) Get_SupportedConfiguration(ppSupportedConfiguration **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSupportedConfiguration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_KeySystem dispatches through IMFMediaKeySystemAccess's vtable slot 5.
-func (self *IMFMediaKeySystemAccess) Get_KeySystem(pKeySystem *foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaKeySystemAccess) Get_KeySystem(pKeySystem *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKeySystem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaKeys: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediakeys
@@ -6227,27 +6276,27 @@ type IMFMediaKeys struct {
 var IID_IMFMediaKeys = win32.GUID{Data1: 0x5cb31c05, Data2: 0x61ff, Data3: 0x418f, Data4: [8]byte{0xaf, 0xda, 0xca, 0xaf, 0x41, 0x42, 0x1a, 0x38}}
 
 // CreateSession dispatches through IMFMediaKeys's vtable slot 3.
-func (self *IMFMediaKeys) CreateSession(mimeType foundation.BSTR, initData *byte, cb uint32, customData *byte, cbCustomData uint32, notify *IMFMediaKeySessionNotify, ppSession **IMFMediaKeySession) foundation.HRESULT {
+func (self *IMFMediaKeys) CreateSession(mimeType foundation.BSTR, initData *byte, cb uint32, customData *byte, cbCustomData uint32, notify *IMFMediaKeySessionNotify, ppSession **IMFMediaKeySession) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mimeType)), uintptr(unsafe.Pointer(initData)), uintptr(cb), uintptr(unsafe.Pointer(customData)), uintptr(cbCustomData), uintptr(unsafe.Pointer(notify)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_KeySystem dispatches through IMFMediaKeys's vtable slot 4.
-func (self *IMFMediaKeys) Get_KeySystem(keySystem *foundation.BSTR) foundation.HRESULT {
+func (self *IMFMediaKeys) Get_KeySystem(keySystem *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(keySystem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFMediaKeys's vtable slot 5.
-func (self *IMFMediaKeys) Shutdown() foundation.HRESULT {
+func (self *IMFMediaKeys) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSuspendNotify dispatches through IMFMediaKeys's vtable slot 6.
-func (self *IMFMediaKeys) GetSuspendNotify(notify **IMFCdmSuspendNotify) foundation.HRESULT {
+func (self *IMFMediaKeys) GetSuspendNotify(notify **IMFCdmSuspendNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(notify)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 45892507-ad66-4de2-83a2-acbb13cd8d43
@@ -6259,21 +6308,21 @@ type IMFMediaKeys2 struct {
 var IID_IMFMediaKeys2 = win32.GUID{Data1: 0x45892507, Data2: 0xad66, Data3: 0x4de2, Data4: [8]byte{0x83, 0xa2, 0xac, 0xbb, 0x13, 0xcd, 0x8d, 0x43}}
 
 // CreateSession2 dispatches through IMFMediaKeys2's vtable slot 7.
-func (self *IMFMediaKeys2) CreateSession2(eSessionType MF_MEDIAKEYSESSION_TYPE, pMFMediaKeySessionNotify2 *IMFMediaKeySessionNotify2, ppSession **IMFMediaKeySession2) foundation.HRESULT {
+func (self *IMFMediaKeys2) CreateSession2(eSessionType MF_MEDIAKEYSESSION_TYPE, pMFMediaKeySessionNotify2 *IMFMediaKeySessionNotify2, ppSession **IMFMediaKeySession2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(eSessionType), uintptr(unsafe.Pointer(pMFMediaKeySessionNotify2)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetServerCertificate dispatches through IMFMediaKeys2's vtable slot 8.
-func (self *IMFMediaKeys2) SetServerCertificate(pbServerCertificate *byte, cb uint32) foundation.HRESULT {
+func (self *IMFMediaKeys2) SetServerCertificate(pbServerCertificate *byte, cb uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbServerCertificate)), uintptr(cb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDOMException dispatches through IMFMediaKeys2's vtable slot 9.
-func (self *IMFMediaKeys2) GetDOMException(systemCode foundation.HRESULT, code *foundation.HRESULT) foundation.HRESULT {
+func (self *IMFMediaKeys2) GetDOMException(systemCode foundation.HRESULT, code *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(systemCode), uintptr(unsafe.Pointer(code)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSession: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmediasession
@@ -6286,63 +6335,63 @@ type IMFMediaSession struct {
 var IID_IMFMediaSession = win32.GUID{Data1: 0x90377834, Data2: 0x21d0, Data3: 0x4dee, Data4: [8]byte{0x82, 0x14, 0xba, 0x2e, 0x3e, 0x6c, 0x11, 0x27}}
 
 // SetTopology dispatches through IMFMediaSession's vtable slot 7.
-func (self *IMFMediaSession) SetTopology(dwSetTopologyFlags uint32, pTopology *IMFTopology) foundation.HRESULT {
+func (self *IMFMediaSession) SetTopology(dwSetTopologyFlags uint32, pTopology *IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwSetTopologyFlags), uintptr(unsafe.Pointer(pTopology)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearTopologies dispatches through IMFMediaSession's vtable slot 8.
-func (self *IMFMediaSession) ClearTopologies() foundation.HRESULT {
+func (self *IMFMediaSession) ClearTopologies() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IMFMediaSession's vtable slot 9.
-func (self *IMFMediaSession) Start(pguidTimeFormat *win32.GUID, pvarStartPosition *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMediaSession) Start(pguidTimeFormat *win32.GUID, pvarStartPosition *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidTimeFormat)), uintptr(unsafe.Pointer(pvarStartPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IMFMediaSession's vtable slot 10.
-func (self *IMFMediaSession) Pause() foundation.HRESULT {
+func (self *IMFMediaSession) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IMFMediaSession's vtable slot 11.
-func (self *IMFMediaSession) Stop() foundation.HRESULT {
+func (self *IMFMediaSession) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMFMediaSession's vtable slot 12.
-func (self *IMFMediaSession) Close() foundation.HRESULT {
+func (self *IMFMediaSession) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFMediaSession's vtable slot 13.
-func (self *IMFMediaSession) Shutdown() foundation.HRESULT {
+func (self *IMFMediaSession) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClock dispatches through IMFMediaSession's vtable slot 14.
-func (self *IMFMediaSession) GetClock(ppClock **IMFClock) foundation.HRESULT {
+func (self *IMFMediaSession) GetClock(ppClock **IMFClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSessionCapabilities dispatches through IMFMediaSession's vtable slot 15.
-func (self *IMFMediaSession) GetSessionCapabilities(pdwCaps *uint32) foundation.HRESULT {
+func (self *IMFMediaSession) GetSessionCapabilities(pdwCaps *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFullTopology dispatches through IMFMediaSession's vtable slot 16.
-func (self *IMFMediaSession) GetFullTopology(dwGetFullTopologyFlags uint32, TopoId uint64, ppFullTopology **IMFTopology) foundation.HRESULT {
+func (self *IMFMediaSession) GetFullTopology(dwGetFullTopologyFlags uint32, TopoId uint64, ppFullTopology **IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwGetFullTopologyFlags), uintptr(TopoId), uintptr(unsafe.Pointer(ppFullTopology)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSharingEngine: https://learn.microsoft.com/windows/win32/api/mfsharingengine/nn-mfsharingengine-imfmediasharingengine
@@ -6355,9 +6404,9 @@ type IMFMediaSharingEngine struct {
 var IID_IMFMediaSharingEngine = win32.GUID{Data1: 0x8d3ce1bf, Data2: 0x2367, Data3: 0x40e0, Data4: [8]byte{0x9e, 0xee, 0x40, 0xd3, 0x77, 0xcc, 0x1b, 0x46}}
 
 // GetDevice dispatches through IMFMediaSharingEngine's vtable slot 45.
-func (self *IMFMediaSharingEngine) GetDevice(pDevice *DEVICE_INFO) foundation.HRESULT {
+func (self *IMFMediaSharingEngine) GetDevice(pDevice *DEVICE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSharingEngineClassFactory: https://learn.microsoft.com/windows/win32/api/mfsharingengine/nn-mfsharingengine-imfmediasharingengineclassfactory
@@ -6370,9 +6419,9 @@ type IMFMediaSharingEngineClassFactory struct {
 var IID_IMFMediaSharingEngineClassFactory = win32.GUID{Data1: 0x524d2bc4, Data2: 0xb2b1, Data3: 0x4fe5, Data4: [8]byte{0x8f, 0xac, 0xfa, 0x4e, 0x45, 0x12, 0xb4, 0xe0}}
 
 // CreateInstance dispatches through IMFMediaSharingEngineClassFactory's vtable slot 3.
-func (self *IMFMediaSharingEngineClassFactory) CreateInstance(dwFlags uint32, pAttr *IMFAttributes, ppEngine **IMFMediaSharingEngine) foundation.HRESULT {
+func (self *IMFMediaSharingEngineClassFactory) CreateInstance(dwFlags uint32, pAttr *IMFAttributes, ppEngine **IMFMediaSharingEngine) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pAttr)), uintptr(unsafe.Pointer(ppEngine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSink: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmediasink
@@ -6385,57 +6434,57 @@ type IMFMediaSink struct {
 var IID_IMFMediaSink = win32.GUID{Data1: 0x6ef2a660, Data2: 0x47c0, Data3: 0x4666, Data4: [8]byte{0xb1, 0x3d, 0xcb, 0xb7, 0x17, 0xf2, 0xfa, 0x2c}}
 
 // GetCharacteristics dispatches through IMFMediaSink's vtable slot 3.
-func (self *IMFMediaSink) GetCharacteristics(pdwCharacteristics *uint32) foundation.HRESULT {
+func (self *IMFMediaSink) GetCharacteristics(pdwCharacteristics *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCharacteristics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStreamSink dispatches through IMFMediaSink's vtable slot 4.
-func (self *IMFMediaSink) AddStreamSink(dwStreamSinkIdentifier uint32, pMediaType *IMFMediaType, ppStreamSink **IMFStreamSink) foundation.HRESULT {
+func (self *IMFMediaSink) AddStreamSink(dwStreamSinkIdentifier uint32, pMediaType *IMFMediaType, ppStreamSink **IMFStreamSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamSinkIdentifier), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(ppStreamSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStreamSink dispatches through IMFMediaSink's vtable slot 5.
-func (self *IMFMediaSink) RemoveStreamSink(dwStreamSinkIdentifier uint32) foundation.HRESULT {
+func (self *IMFMediaSink) RemoveStreamSink(dwStreamSinkIdentifier uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStreamSinkIdentifier))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamSinkCount dispatches through IMFMediaSink's vtable slot 6.
-func (self *IMFMediaSink) GetStreamSinkCount(pcStreamSinkCount *uint32) foundation.HRESULT {
+func (self *IMFMediaSink) GetStreamSinkCount(pcStreamSinkCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcStreamSinkCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamSinkByIndex dispatches through IMFMediaSink's vtable slot 7.
-func (self *IMFMediaSink) GetStreamSinkByIndex(dwIndex uint32, ppStreamSink **IMFStreamSink) foundation.HRESULT {
+func (self *IMFMediaSink) GetStreamSinkByIndex(dwIndex uint32, ppStreamSink **IMFStreamSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppStreamSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamSinkById dispatches through IMFMediaSink's vtable slot 8.
-func (self *IMFMediaSink) GetStreamSinkById(dwStreamSinkIdentifier uint32, ppStreamSink **IMFStreamSink) foundation.HRESULT {
+func (self *IMFMediaSink) GetStreamSinkById(dwStreamSinkIdentifier uint32, ppStreamSink **IMFStreamSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwStreamSinkIdentifier), uintptr(unsafe.Pointer(ppStreamSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPresentationClock dispatches through IMFMediaSink's vtable slot 9.
-func (self *IMFMediaSink) SetPresentationClock(pPresentationClock *IMFPresentationClock) foundation.HRESULT {
+func (self *IMFMediaSink) SetPresentationClock(pPresentationClock *IMFPresentationClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresentationClock dispatches through IMFMediaSink's vtable slot 10.
-func (self *IMFMediaSink) GetPresentationClock(ppPresentationClock **IMFPresentationClock) foundation.HRESULT {
+func (self *IMFMediaSink) GetPresentationClock(ppPresentationClock **IMFPresentationClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPresentationClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFMediaSink's vtable slot 11.
-func (self *IMFMediaSink) Shutdown() foundation.HRESULT {
+func (self *IMFMediaSink) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSinkPreroll: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmediasinkpreroll
@@ -6448,9 +6497,9 @@ type IMFMediaSinkPreroll struct {
 var IID_IMFMediaSinkPreroll = win32.GUID{Data1: 0x5dfd4b2a, Data2: 0x7674, Data3: 0x4110, Data4: [8]byte{0xa4, 0xe6, 0x8a, 0x68, 0xfd, 0x5f, 0x36, 0x88}}
 
 // NotifyPreroll dispatches through IMFMediaSinkPreroll's vtable slot 3.
-func (self *IMFMediaSinkPreroll) NotifyPreroll(hnsUpcomingStartTime int64) foundation.HRESULT {
+func (self *IMFMediaSinkPreroll) NotifyPreroll(hnsUpcomingStartTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hnsUpcomingStartTime))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSource: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmediasource
@@ -6463,39 +6512,39 @@ type IMFMediaSource struct {
 var IID_IMFMediaSource = win32.GUID{Data1: 0x279a808d, Data2: 0xaec7, Data3: 0x40c8, Data4: [8]byte{0x9c, 0x6b, 0xa6, 0xb4, 0x92, 0xc7, 0x8a, 0x66}}
 
 // GetCharacteristics dispatches through IMFMediaSource's vtable slot 7.
-func (self *IMFMediaSource) GetCharacteristics(pdwCharacteristics *uint32) foundation.HRESULT {
+func (self *IMFMediaSource) GetCharacteristics(pdwCharacteristics *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCharacteristics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePresentationDescriptor dispatches through IMFMediaSource's vtable slot 8.
-func (self *IMFMediaSource) CreatePresentationDescriptor(ppPresentationDescriptor **IMFPresentationDescriptor) foundation.HRESULT {
+func (self *IMFMediaSource) CreatePresentationDescriptor(ppPresentationDescriptor **IMFPresentationDescriptor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPresentationDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IMFMediaSource's vtable slot 9.
-func (self *IMFMediaSource) Start(pPresentationDescriptor *IMFPresentationDescriptor, pguidTimeFormat *win32.GUID, pvarStartPosition *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMediaSource) Start(pPresentationDescriptor *IMFPresentationDescriptor, pguidTimeFormat *win32.GUID, pvarStartPosition *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationDescriptor)), uintptr(unsafe.Pointer(pguidTimeFormat)), uintptr(unsafe.Pointer(pvarStartPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IMFMediaSource's vtable slot 10.
-func (self *IMFMediaSource) Stop() foundation.HRESULT {
+func (self *IMFMediaSource) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IMFMediaSource's vtable slot 11.
-func (self *IMFMediaSource) Pause() foundation.HRESULT {
+func (self *IMFMediaSource) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFMediaSource's vtable slot 12.
-func (self *IMFMediaSource) Shutdown() foundation.HRESULT {
+func (self *IMFMediaSource) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: fbb03414-d13b-4786-8319-5ac51fc0a136
@@ -6507,9 +6556,9 @@ type IMFMediaSource2 struct {
 var IID_IMFMediaSource2 = win32.GUID{Data1: 0xfbb03414, Data2: 0xd13b, Data3: 0x4786, Data4: [8]byte{0x83, 0x19, 0x5a, 0xc5, 0x1f, 0xc0, 0xa1, 0x36}}
 
 // SetMediaType dispatches through IMFMediaSource2's vtable slot 16.
-func (self *IMFMediaSource2) SetMediaType(dwStreamID uint32, pMediaType *IMFMediaType) foundation.HRESULT {
+func (self *IMFMediaSource2) SetMediaType(dwStreamID uint32, pMediaType *IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSourceEx: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmediasourceex
@@ -6522,21 +6571,21 @@ type IMFMediaSourceEx struct {
 var IID_IMFMediaSourceEx = win32.GUID{Data1: 0x3c9b2eb9, Data2: 0x86d5, Data3: 0x4514, Data4: [8]byte{0xa3, 0x94, 0xf5, 0x66, 0x64, 0xf9, 0xf0, 0xd8}}
 
 // GetSourceAttributes dispatches through IMFMediaSourceEx's vtable slot 13.
-func (self *IMFMediaSourceEx) GetSourceAttributes(ppAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFMediaSourceEx) GetSourceAttributes(ppAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamAttributes dispatches through IMFMediaSourceEx's vtable slot 14.
-func (self *IMFMediaSourceEx) GetStreamAttributes(dwStreamIdentifier uint32, ppAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFMediaSourceEx) GetStreamAttributes(dwStreamIdentifier uint32, ppAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIdentifier), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetD3DManager dispatches through IMFMediaSourceEx's vtable slot 15.
-func (self *IMFMediaSourceEx) SetD3DManager(pManager *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFMediaSourceEx) SetD3DManager(pManager *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSourceExtension: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediasourceextension
@@ -6567,21 +6616,21 @@ func (self *IMFMediaSourceExtension) GetReadyState() MF_MSE_READY {
 }
 
 // AddSourceBuffer dispatches through IMFMediaSourceExtension's vtable slot 8.
-func (self *IMFMediaSourceExtension) AddSourceBuffer(type_ foundation.BSTR, pNotify *IMFSourceBufferNotify, ppSourceBuffer **IMFSourceBuffer) foundation.HRESULT {
+func (self *IMFMediaSourceExtension) AddSourceBuffer(type_ foundation.BSTR, pNotify *IMFSourceBufferNotify, ppSourceBuffer **IMFSourceBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(pNotify)), uintptr(unsafe.Pointer(ppSourceBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveSourceBuffer dispatches through IMFMediaSourceExtension's vtable slot 9.
-func (self *IMFMediaSourceExtension) RemoveSourceBuffer(pSourceBuffer *IMFSourceBuffer) foundation.HRESULT {
+func (self *IMFMediaSourceExtension) RemoveSourceBuffer(pSourceBuffer *IMFSourceBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEndOfStream dispatches through IMFMediaSourceExtension's vtable slot 10.
-func (self *IMFMediaSourceExtension) SetEndOfStream(error_ MF_MSE_ERROR) foundation.HRESULT {
+func (self *IMFMediaSourceExtension) SetEndOfStream(error_ MF_MSE_ERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(error_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsTypeSupported dispatches through IMFMediaSourceExtension's vtable slot 11.
@@ -6605,9 +6654,9 @@ type IMFMediaSourceExtensionLiveSeekableRange struct {
 var IID_IMFMediaSourceExtensionLiveSeekableRange = win32.GUID{Data1: 0x5d1abfd6, Data2: 0x450a, Data3: 0x4d92, Data4: [8]byte{0x9e, 0xfc, 0xd6, 0xb6, 0xcb, 0xc1, 0xf4, 0xda}}
 
 // ClearLiveSeekableRange dispatches through IMFMediaSourceExtensionLiveSeekableRange's vtable slot 4.
-func (self *IMFMediaSourceExtensionLiveSeekableRange) ClearLiveSeekableRange() foundation.HRESULT {
+func (self *IMFMediaSourceExtensionLiveSeekableRange) ClearLiveSeekableRange() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSourceExtensionNotify: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediasourceextensionnotify
@@ -6644,9 +6693,9 @@ type IMFMediaSourcePresentationProvider struct {
 var IID_IMFMediaSourcePresentationProvider = win32.GUID{Data1: 0x0e1d600a, Data2: 0xc9f3, Data3: 0x442d, Data4: [8]byte{0x8c, 0x51, 0xa4, 0x2d, 0x2d, 0x49, 0x45, 0x2f}}
 
 // ForceEndOfPresentation dispatches through IMFMediaSourcePresentationProvider's vtable slot 3.
-func (self *IMFMediaSourcePresentationProvider) ForceEndOfPresentation(pPresentationDescriptor *IMFPresentationDescriptor) foundation.HRESULT {
+func (self *IMFMediaSourcePresentationProvider) ForceEndOfPresentation(pPresentationDescriptor *IMFPresentationDescriptor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaSourceTopologyProvider: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmediasourcetopologyprovider
@@ -6659,9 +6708,9 @@ type IMFMediaSourceTopologyProvider struct {
 var IID_IMFMediaSourceTopologyProvider = win32.GUID{Data1: 0x0e1d6009, Data2: 0xc9f3, Data3: 0x442d, Data4: [8]byte{0x8c, 0x51, 0xa4, 0x2d, 0x2d, 0x49, 0x45, 0x2f}}
 
 // GetMediaSourceTopology dispatches through IMFMediaSourceTopologyProvider's vtable slot 3.
-func (self *IMFMediaSourceTopologyProvider) GetMediaSourceTopology(pPresentationDescriptor *IMFPresentationDescriptor, ppTopology **IMFTopology) foundation.HRESULT {
+func (self *IMFMediaSourceTopologyProvider) GetMediaSourceTopology(pPresentationDescriptor *IMFPresentationDescriptor, ppTopology **IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationDescriptor)), uintptr(unsafe.Pointer(ppTopology)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaStream: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmediastream
@@ -6674,21 +6723,21 @@ type IMFMediaStream struct {
 var IID_IMFMediaStream = win32.GUID{Data1: 0xd182108f, Data2: 0x4ec6, Data3: 0x443f, Data4: [8]byte{0xaa, 0x42, 0xa7, 0x11, 0x06, 0xec, 0x82, 0x5f}}
 
 // GetMediaSource dispatches through IMFMediaStream's vtable slot 7.
-func (self *IMFMediaStream) GetMediaSource(ppMediaSource **IMFMediaSource) foundation.HRESULT {
+func (self *IMFMediaStream) GetMediaSource(ppMediaSource **IMFMediaSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamDescriptor dispatches through IMFMediaStream's vtable slot 8.
-func (self *IMFMediaStream) GetStreamDescriptor(ppStreamDescriptor **IMFStreamDescriptor) foundation.HRESULT {
+func (self *IMFMediaStream) GetStreamDescriptor(ppStreamDescriptor **IMFStreamDescriptor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStreamDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestSample dispatches through IMFMediaStream's vtable slot 9.
-func (self *IMFMediaStream) RequestSample(pToken *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFMediaStream) RequestSample(pToken *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c5bc37d6-75c7-46a1-a132-81b5f723c20f
@@ -6700,15 +6749,15 @@ type IMFMediaStream2 struct {
 var IID_IMFMediaStream2 = win32.GUID{Data1: 0xc5bc37d6, Data2: 0x75c7, Data3: 0x46a1, Data4: [8]byte{0xa1, 0x32, 0x81, 0xb5, 0xf7, 0x23, 0xc2, 0x0f}}
 
 // SetStreamState dispatches through IMFMediaStream2's vtable slot 10.
-func (self *IMFMediaStream2) SetStreamState(value MF_STREAM_STATE) foundation.HRESULT {
+func (self *IMFMediaStream2) SetStreamState(value MF_STREAM_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamState dispatches through IMFMediaStream2's vtable slot 11.
-func (self *IMFMediaStream2) GetStreamState(value *MF_STREAM_STATE) foundation.HRESULT {
+func (self *IMFMediaStream2) GetStreamState(value *MF_STREAM_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaStreamSourceSampleRequest: https://learn.microsoft.com/windows/win32/medfound/imfmediastreamsourcesamplerequest
@@ -6721,9 +6770,9 @@ type IMFMediaStreamSourceSampleRequest struct {
 var IID_IMFMediaStreamSourceSampleRequest = win32.GUID{Data1: 0x380b9af9, Data2: 0xa85b, Data3: 0x4e78, Data4: [8]byte{0xa2, 0xaf, 0xea, 0x5c, 0xe6, 0x45, 0xc6, 0xb4}}
 
 // SetSample dispatches through IMFMediaStreamSourceSampleRequest's vtable slot 3.
-func (self *IMFMediaStreamSourceSampleRequest) SetSample(value *IMFSample) foundation.HRESULT {
+func (self *IMFMediaStreamSourceSampleRequest) SetSample(value *IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaTimeRange: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfmediatimerange
@@ -6742,21 +6791,21 @@ func (self *IMFMediaTimeRange) GetLength() uint32 {
 }
 
 // GetStart dispatches through IMFMediaTimeRange's vtable slot 4.
-func (self *IMFMediaTimeRange) GetStart(index uint32, pStart *float64) foundation.HRESULT {
+func (self *IMFMediaTimeRange) GetStart(index uint32, pStart *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pStart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnd dispatches through IMFMediaTimeRange's vtable slot 5.
-func (self *IMFMediaTimeRange) GetEnd(index uint32, pEnd *float64) foundation.HRESULT {
+func (self *IMFMediaTimeRange) GetEnd(index uint32, pEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pEnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IMFMediaTimeRange's vtable slot 8.
-func (self *IMFMediaTimeRange) Clear() foundation.HRESULT {
+func (self *IMFMediaTimeRange) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaType: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfmediatype
@@ -6769,21 +6818,21 @@ type IMFMediaType struct {
 var IID_IMFMediaType = win32.GUID{Data1: 0x44ae0fa8, Data2: 0xea31, Data3: 0x4109, Data4: [8]byte{0x8d, 0x2e, 0x4c, 0xae, 0x49, 0x97, 0xc5, 0x55}}
 
 // GetMajorType dispatches through IMFMediaType's vtable slot 33.
-func (self *IMFMediaType) GetMajorType(pguidMajorType *win32.GUID) foundation.HRESULT {
+func (self *IMFMediaType) GetMajorType(pguidMajorType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidMajorType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsCompressedFormat dispatches through IMFMediaType's vtable slot 34.
-func (self *IMFMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) foundation.HRESULT {
+func (self *IMFMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCompressed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEqual dispatches through IMFMediaType's vtable slot 35.
-func (self *IMFMediaType) IsEqual(pIMediaType *IMFMediaType, pdwFlags *uint32) foundation.HRESULT {
+func (self *IMFMediaType) IsEqual(pIMediaType *IMFMediaType, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIMediaType)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMediaTypeHandler: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmediatypehandler
@@ -6796,39 +6845,39 @@ type IMFMediaTypeHandler struct {
 var IID_IMFMediaTypeHandler = win32.GUID{Data1: 0xe93dcf6c, Data2: 0x4b07, Data3: 0x4e1e, Data4: [8]byte{0x81, 0x23, 0xaa, 0x16, 0xed, 0x6e, 0xad, 0xf5}}
 
 // IsMediaTypeSupported dispatches through IMFMediaTypeHandler's vtable slot 3.
-func (self *IMFMediaTypeHandler) IsMediaTypeSupported(pMediaType *IMFMediaType, ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFMediaTypeHandler) IsMediaTypeSupported(pMediaType *IMFMediaType, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMediaTypeCount dispatches through IMFMediaTypeHandler's vtable slot 4.
-func (self *IMFMediaTypeHandler) GetMediaTypeCount(pdwTypeCount *uint32) foundation.HRESULT {
+func (self *IMFMediaTypeHandler) GetMediaTypeCount(pdwTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwTypeCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMediaTypeByIndex dispatches through IMFMediaTypeHandler's vtable slot 5.
-func (self *IMFMediaTypeHandler) GetMediaTypeByIndex(dwIndex uint32, ppType **IMFMediaType) foundation.HRESULT {
+func (self *IMFMediaTypeHandler) GetMediaTypeByIndex(dwIndex uint32, ppType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentMediaType dispatches through IMFMediaTypeHandler's vtable slot 6.
-func (self *IMFMediaTypeHandler) SetCurrentMediaType(pMediaType *IMFMediaType) foundation.HRESULT {
+func (self *IMFMediaTypeHandler) SetCurrentMediaType(pMediaType *IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentMediaType dispatches through IMFMediaTypeHandler's vtable slot 7.
-func (self *IMFMediaTypeHandler) GetCurrentMediaType(ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFMediaTypeHandler) GetCurrentMediaType(ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMajorType dispatches through IMFMediaTypeHandler's vtable slot 8.
-func (self *IMFMediaTypeHandler) GetMajorType(pguidMajorType *win32.GUID) foundation.HRESULT {
+func (self *IMFMediaTypeHandler) GetMajorType(pguidMajorType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidMajorType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMetadata: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmetadata
@@ -6841,45 +6890,49 @@ type IMFMetadata struct {
 var IID_IMFMetadata = win32.GUID{Data1: 0xf88cfb8c, Data2: 0xef16, Data3: 0x4991, Data4: [8]byte{0xb4, 0x50, 0xcb, 0x8c, 0x69, 0xe5, 0x17, 0x04}}
 
 // SetLanguage dispatches through IMFMetadata's vtable slot 3.
-func (self *IMFMetadata) SetLanguage(pwszRFC1766 foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszRFC1766)))
-	return foundation.HRESULT(r1)
+func (self *IMFMetadata) SetLanguage(pwszRFC1766 string) error {
+	_pwszRFC1766 := win32.UTF16Ptr(pwszRFC1766)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszRFC1766)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLanguage dispatches through IMFMetadata's vtable slot 4.
-func (self *IMFMetadata) GetLanguage(ppwszRFC1766 *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFMetadata) GetLanguage(ppwszRFC1766 *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszRFC1766)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllLanguages dispatches through IMFMetadata's vtable slot 5.
-func (self *IMFMetadata) GetAllLanguages(ppvLanguages *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMetadata) GetAllLanguages(ppvLanguages *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppvLanguages)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through IMFMetadata's vtable slot 6.
-func (self *IMFMetadata) SetProperty(pwszName foundation.PWSTR, ppvValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(unsafe.Pointer(ppvValue)))
-	return foundation.HRESULT(r1)
+func (self *IMFMetadata) SetProperty(pwszName string, ppvValue *systemcomstructuredstorage.PROPVARIANT) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(ppvValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through IMFMetadata's vtable slot 7.
-func (self *IMFMetadata) GetProperty(pwszName foundation.PWSTR, ppvValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(unsafe.Pointer(ppvValue)))
-	return foundation.HRESULT(r1)
+func (self *IMFMetadata) GetProperty(pwszName string, ppvValue *systemcomstructuredstorage.PROPVARIANT) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(ppvValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteProperty dispatches through IMFMetadata's vtable slot 8.
-func (self *IMFMetadata) DeleteProperty(pwszName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)))
-	return foundation.HRESULT(r1)
+func (self *IMFMetadata) DeleteProperty(pwszName string) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllPropertyNames dispatches through IMFMetadata's vtable slot 9.
-func (self *IMFMetadata) GetAllPropertyNames(ppvNames *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFMetadata) GetAllPropertyNames(ppvNames *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppvNames)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMetadataProvider: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfmetadataprovider
@@ -6892,9 +6945,9 @@ type IMFMetadataProvider struct {
 var IID_IMFMetadataProvider = win32.GUID{Data1: 0x56181d2d, Data2: 0xe221, Data3: 0x4adb, Data4: [8]byte{0xb1, 0xc8, 0x3c, 0xee, 0x6a, 0x53, 0xf7, 0x6f}}
 
 // GetMFMetadata dispatches through IMFMetadataProvider's vtable slot 3.
-func (self *IMFMetadataProvider) GetMFMetadata(pPresentationDescriptor *IMFPresentationDescriptor, dwStreamIdentifier uint32, dwFlags uint32, ppMFMetadata **IMFMetadata) foundation.HRESULT {
+func (self *IMFMetadataProvider) GetMFMetadata(pPresentationDescriptor *IMFPresentationDescriptor, dwStreamIdentifier uint32, dwFlags uint32, ppMFMetadata **IMFMetadata) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationDescriptor)), uintptr(dwStreamIdentifier), uintptr(dwFlags), uintptr(unsafe.Pointer(ppMFMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMuxStreamAttributesManager: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfmuxstreamattributesmanager
@@ -6907,15 +6960,15 @@ type IMFMuxStreamAttributesManager struct {
 var IID_IMFMuxStreamAttributesManager = win32.GUID{Data1: 0xce8bd576, Data2: 0xe440, Data3: 0x43b3, Data4: [8]byte{0xbe, 0x34, 0x1e, 0x53, 0xf5, 0x65, 0xf7, 0xe8}}
 
 // GetStreamCount dispatches through IMFMuxStreamAttributesManager's vtable slot 3.
-func (self *IMFMuxStreamAttributesManager) GetStreamCount(pdwMuxStreamCount *uint32) foundation.HRESULT {
+func (self *IMFMuxStreamAttributesManager) GetStreamCount(pdwMuxStreamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMuxStreamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttributes dispatches through IMFMuxStreamAttributesManager's vtable slot 4.
-func (self *IMFMuxStreamAttributesManager) GetAttributes(dwMuxStreamIndex uint32, ppStreamAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFMuxStreamAttributesManager) GetAttributes(dwMuxStreamIndex uint32, ppStreamAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwMuxStreamIndex), uintptr(unsafe.Pointer(ppStreamAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMuxStreamMediaTypeManager: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfmuxstreammediatypemanager
@@ -6928,39 +6981,39 @@ type IMFMuxStreamMediaTypeManager struct {
 var IID_IMFMuxStreamMediaTypeManager = win32.GUID{Data1: 0x505a2c72, Data2: 0x42f7, Data3: 0x4690, Data4: [8]byte{0xae, 0xab, 0x8f, 0x51, 0x3d, 0x0f, 0xfd, 0xb8}}
 
 // GetStreamCount dispatches through IMFMuxStreamMediaTypeManager's vtable slot 3.
-func (self *IMFMuxStreamMediaTypeManager) GetStreamCount(pdwMuxStreamCount *uint32) foundation.HRESULT {
+func (self *IMFMuxStreamMediaTypeManager) GetStreamCount(pdwMuxStreamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMuxStreamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMediaType dispatches through IMFMuxStreamMediaTypeManager's vtable slot 4.
-func (self *IMFMuxStreamMediaTypeManager) GetMediaType(dwMuxStreamIndex uint32, ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFMuxStreamMediaTypeManager) GetMediaType(dwMuxStreamIndex uint32, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwMuxStreamIndex), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamConfigurationCount dispatches through IMFMuxStreamMediaTypeManager's vtable slot 5.
-func (self *IMFMuxStreamMediaTypeManager) GetStreamConfigurationCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IMFMuxStreamMediaTypeManager) GetStreamConfigurationCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStreamConfiguration dispatches through IMFMuxStreamMediaTypeManager's vtable slot 6.
-func (self *IMFMuxStreamMediaTypeManager) AddStreamConfiguration(ullStreamMask uint64) foundation.HRESULT {
+func (self *IMFMuxStreamMediaTypeManager) AddStreamConfiguration(ullStreamMask uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ullStreamMask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStreamConfiguration dispatches through IMFMuxStreamMediaTypeManager's vtable slot 7.
-func (self *IMFMuxStreamMediaTypeManager) RemoveStreamConfiguration(ullStreamMask uint64) foundation.HRESULT {
+func (self *IMFMuxStreamMediaTypeManager) RemoveStreamConfiguration(ullStreamMask uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ullStreamMask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamConfiguration dispatches through IMFMuxStreamMediaTypeManager's vtable slot 8.
-func (self *IMFMuxStreamMediaTypeManager) GetStreamConfiguration(ulIndex uint32, pullStreamMask *uint64) foundation.HRESULT {
+func (self *IMFMuxStreamMediaTypeManager) GetStreamConfiguration(ulIndex uint32, pullStreamMask *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(pullStreamMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFMuxStreamSampleManager: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfmuxstreamsamplemanager
@@ -6973,15 +7026,15 @@ type IMFMuxStreamSampleManager struct {
 var IID_IMFMuxStreamSampleManager = win32.GUID{Data1: 0x74abbc19, Data2: 0xb1cc, Data3: 0x4e41, Data4: [8]byte{0xbb, 0x8b, 0x9d, 0x9b, 0x86, 0xa8, 0xf6, 0xca}}
 
 // GetStreamCount dispatches through IMFMuxStreamSampleManager's vtable slot 3.
-func (self *IMFMuxStreamSampleManager) GetStreamCount(pdwMuxStreamCount *uint32) foundation.HRESULT {
+func (self *IMFMuxStreamSampleManager) GetStreamCount(pdwMuxStreamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMuxStreamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSample dispatches through IMFMuxStreamSampleManager's vtable slot 4.
-func (self *IMFMuxStreamSampleManager) GetSample(dwMuxStreamIndex uint32, ppSample **IMFSample) foundation.HRESULT {
+func (self *IMFMuxStreamSampleManager) GetSample(dwMuxStreamIndex uint32, ppSample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwMuxStreamIndex), uintptr(unsafe.Pointer(ppSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamConfiguration dispatches through IMFMuxStreamSampleManager's vtable slot 5.
@@ -7000,33 +7053,37 @@ type IMFNetCredential struct {
 var IID_IMFNetCredential = win32.GUID{Data1: 0x5b87ef6a, Data2: 0x7ed8, Data3: 0x434f, Data4: [8]byte{0xba, 0x0e, 0x18, 0x4f, 0xac, 0x16, 0x28, 0xd1}}
 
 // SetUser dispatches through IMFNetCredential's vtable slot 3.
-func (self *IMFNetCredential) SetUser(pbData *byte, cbData uint32, fDataIsEncrypted foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(cbData), uintptr(fDataIsEncrypted))
-	return foundation.HRESULT(r1)
+func (self *IMFNetCredential) SetUser(pbData *byte, cbData uint32, fDataIsEncrypted bool) error {
+	_fDataIsEncrypted := win32.Bool32(fDataIsEncrypted)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(cbData), uintptr(_fDataIsEncrypted))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPassword dispatches through IMFNetCredential's vtable slot 4.
-func (self *IMFNetCredential) SetPassword(pbData *byte, cbData uint32, fDataIsEncrypted foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(cbData), uintptr(fDataIsEncrypted))
-	return foundation.HRESULT(r1)
+func (self *IMFNetCredential) SetPassword(pbData *byte, cbData uint32, fDataIsEncrypted bool) error {
+	_fDataIsEncrypted := win32.Bool32(fDataIsEncrypted)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(cbData), uintptr(_fDataIsEncrypted))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUser dispatches through IMFNetCredential's vtable slot 5.
-func (self *IMFNetCredential) GetUser(pbData *byte, pcbData *uint32, fEncryptData foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(unsafe.Pointer(pcbData)), uintptr(fEncryptData))
-	return foundation.HRESULT(r1)
+func (self *IMFNetCredential) GetUser(pbData *byte, pcbData *uint32, fEncryptData bool) error {
+	_fEncryptData := win32.Bool32(fEncryptData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fEncryptData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPassword dispatches through IMFNetCredential's vtable slot 6.
-func (self *IMFNetCredential) GetPassword(pbData *byte, pcbData *uint32, fEncryptData foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(unsafe.Pointer(pcbData)), uintptr(fEncryptData))
-	return foundation.HRESULT(r1)
+func (self *IMFNetCredential) GetPassword(pbData *byte, pcbData *uint32, fEncryptData bool) error {
+	_fEncryptData := win32.Bool32(fEncryptData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fEncryptData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoggedOnUser dispatches through IMFNetCredential's vtable slot 7.
-func (self *IMFNetCredential) LoggedOnUser(pfLoggedOnUser *foundation.BOOL) foundation.HRESULT {
+func (self *IMFNetCredential) LoggedOnUser(pfLoggedOnUser *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLoggedOnUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFNetCredentialCache: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfnetcredentialcache
@@ -7039,21 +7096,24 @@ type IMFNetCredentialCache struct {
 var IID_IMFNetCredentialCache = win32.GUID{Data1: 0x5b87ef6c, Data2: 0x7ed8, Data3: 0x434f, Data4: [8]byte{0xba, 0x0e, 0x18, 0x4f, 0xac, 0x16, 0x28, 0xd1}}
 
 // GetCredential dispatches through IMFNetCredentialCache's vtable slot 3.
-func (self *IMFNetCredentialCache) GetCredential(pszUrl foundation.PWSTR, pszRealm foundation.PWSTR, dwAuthenticationFlags uint32, ppCred **IMFNetCredential, pdwRequirementsFlags *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUrl)), uintptr(unsafe.Pointer(pszRealm)), uintptr(dwAuthenticationFlags), uintptr(unsafe.Pointer(ppCred)), uintptr(unsafe.Pointer(pdwRequirementsFlags)))
-	return foundation.HRESULT(r1)
+func (self *IMFNetCredentialCache) GetCredential(pszUrl string, pszRealm string, dwAuthenticationFlags uint32, ppCred **IMFNetCredential, pdwRequirementsFlags *uint32) error {
+	_pszUrl := win32.UTF16Ptr(pszUrl)
+	_pszRealm := win32.UTF16Ptr(pszRealm)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(_pszRealm)), uintptr(dwAuthenticationFlags), uintptr(unsafe.Pointer(ppCred)), uintptr(unsafe.Pointer(pdwRequirementsFlags)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGood dispatches through IMFNetCredentialCache's vtable slot 4.
-func (self *IMFNetCredentialCache) SetGood(pCred *IMFNetCredential, fGood foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCred)), uintptr(fGood))
-	return foundation.HRESULT(r1)
+func (self *IMFNetCredentialCache) SetGood(pCred *IMFNetCredential, fGood bool) error {
+	_fGood := win32.Bool32(fGood)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCred)), uintptr(_fGood))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUserOptions dispatches through IMFNetCredentialCache's vtable slot 5.
-func (self *IMFNetCredentialCache) SetUserOptions(pCred *IMFNetCredential, dwOptionsFlags uint32) foundation.HRESULT {
+func (self *IMFNetCredentialCache) SetUserOptions(pCred *IMFNetCredential, dwOptionsFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCred)), uintptr(dwOptionsFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFNetCredentialManager: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfnetcredentialmanager
@@ -7066,21 +7126,22 @@ type IMFNetCredentialManager struct {
 var IID_IMFNetCredentialManager = win32.GUID{Data1: 0x5b87ef6b, Data2: 0x7ed8, Data3: 0x434f, Data4: [8]byte{0xba, 0x0e, 0x18, 0x4f, 0xac, 0x16, 0x28, 0xd1}}
 
 // BeginGetCredentials dispatches through IMFNetCredentialManager's vtable slot 3.
-func (self *IMFNetCredentialManager) BeginGetCredentials(pParam *MFNetCredentialManagerGetParam, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFNetCredentialManager) BeginGetCredentials(pParam *MFNetCredentialManagerGetParam, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndGetCredentials dispatches through IMFNetCredentialManager's vtable slot 4.
-func (self *IMFNetCredentialManager) EndGetCredentials(pResult *IMFAsyncResult, ppCred **IMFNetCredential) foundation.HRESULT {
+func (self *IMFNetCredentialManager) EndGetCredentials(pResult *IMFAsyncResult, ppCred **IMFNetCredential) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppCred)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGood dispatches through IMFNetCredentialManager's vtable slot 5.
-func (self *IMFNetCredentialManager) SetGood(pCred *IMFNetCredential, fGood foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCred)), uintptr(fGood))
-	return foundation.HRESULT(r1)
+func (self *IMFNetCredentialManager) SetGood(pCred *IMFNetCredential, fGood bool) error {
+	_fGood := win32.Bool32(fGood)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCred)), uintptr(_fGood))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFNetCrossOriginSupport: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfnetcrossoriginsupport
@@ -7093,21 +7154,22 @@ type IMFNetCrossOriginSupport struct {
 var IID_IMFNetCrossOriginSupport = win32.GUID{Data1: 0xbc2b7d44, Data2: 0xa72d, Data3: 0x49d5, Data4: [8]byte{0x83, 0x76, 0x14, 0x80, 0xde, 0xe5, 0x8b, 0x22}}
 
 // GetCrossOriginPolicy dispatches through IMFNetCrossOriginSupport's vtable slot 3.
-func (self *IMFNetCrossOriginSupport) GetCrossOriginPolicy(pPolicy *MF_CROSS_ORIGIN_POLICY) foundation.HRESULT {
+func (self *IMFNetCrossOriginSupport) GetCrossOriginPolicy(pPolicy *MF_CROSS_ORIGIN_POLICY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPolicy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceOrigin dispatches through IMFNetCrossOriginSupport's vtable slot 4.
-func (self *IMFNetCrossOriginSupport) GetSourceOrigin(wszSourceOrigin *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFNetCrossOriginSupport) GetSourceOrigin(wszSourceOrigin *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszSourceOrigin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsSameOrigin dispatches through IMFNetCrossOriginSupport's vtable slot 5.
-func (self *IMFNetCrossOriginSupport) IsSameOrigin(wszURL foundation.PWSTR, pfIsSameOrigin *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszURL)), uintptr(unsafe.Pointer(pfIsSameOrigin)))
-	return foundation.HRESULT(r1)
+func (self *IMFNetCrossOriginSupport) IsSameOrigin(wszURL string, pfIsSameOrigin *foundation.BOOL) error {
+	_wszURL := win32.UTF16Ptr(wszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszURL)), uintptr(unsafe.Pointer(pfIsSameOrigin)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFNetProxyLocator: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfnetproxylocator
@@ -7120,33 +7182,36 @@ type IMFNetProxyLocator struct {
 var IID_IMFNetProxyLocator = win32.GUID{Data1: 0xe9cd0383, Data2: 0xa268, Data3: 0x4bb4, Data4: [8]byte{0x82, 0xde, 0x65, 0x8d, 0x53, 0x57, 0x4d, 0x41}}
 
 // FindFirstProxy dispatches through IMFNetProxyLocator's vtable slot 3.
-func (self *IMFNetProxyLocator) FindFirstProxy(pszHost foundation.PWSTR, pszUrl foundation.PWSTR, fReserved foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszHost)), uintptr(unsafe.Pointer(pszUrl)), uintptr(fReserved))
-	return foundation.HRESULT(r1)
+func (self *IMFNetProxyLocator) FindFirstProxy(pszHost string, pszUrl string, fReserved bool) error {
+	_pszHost := win32.UTF16Ptr(pszHost)
+	_pszUrl := win32.UTF16Ptr(pszUrl)
+	_fReserved := win32.Bool32(fReserved)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszHost)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(_fReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindNextProxy dispatches through IMFNetProxyLocator's vtable slot 4.
-func (self *IMFNetProxyLocator) FindNextProxy() foundation.HRESULT {
+func (self *IMFNetProxyLocator) FindNextProxy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterProxyResult dispatches through IMFNetProxyLocator's vtable slot 5.
-func (self *IMFNetProxyLocator) RegisterProxyResult(hrOp foundation.HRESULT) foundation.HRESULT {
+func (self *IMFNetProxyLocator) RegisterProxyResult(hrOp foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hrOp))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentProxy dispatches through IMFNetProxyLocator's vtable slot 6.
-func (self *IMFNetProxyLocator) GetCurrentProxy(pszStr foundation.PWSTR, pcchStr *uint32) foundation.HRESULT {
+func (self *IMFNetProxyLocator) GetCurrentProxy(pszStr foundation.PWSTR, pcchStr *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszStr)), uintptr(unsafe.Pointer(pcchStr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IMFNetProxyLocator's vtable slot 7.
-func (self *IMFNetProxyLocator) Clone(ppProxyLocator **IMFNetProxyLocator) foundation.HRESULT {
+func (self *IMFNetProxyLocator) Clone(ppProxyLocator **IMFNetProxyLocator) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProxyLocator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFNetProxyLocatorFactory: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfnetproxylocatorfactory
@@ -7159,9 +7224,10 @@ type IMFNetProxyLocatorFactory struct {
 var IID_IMFNetProxyLocatorFactory = win32.GUID{Data1: 0xe9cd0384, Data2: 0xa268, Data3: 0x4bb4, Data4: [8]byte{0x82, 0xde, 0x65, 0x8d, 0x53, 0x57, 0x4d, 0x41}}
 
 // CreateProxyLocator dispatches through IMFNetProxyLocatorFactory's vtable slot 3.
-func (self *IMFNetProxyLocatorFactory) CreateProxyLocator(pszProtocol foundation.PWSTR, ppProxyLocator **IMFNetProxyLocator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszProtocol)), uintptr(unsafe.Pointer(ppProxyLocator)))
-	return foundation.HRESULT(r1)
+func (self *IMFNetProxyLocatorFactory) CreateProxyLocator(pszProtocol string, ppProxyLocator **IMFNetProxyLocator) error {
+	_pszProtocol := win32.UTF16Ptr(pszProtocol)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszProtocol)), uintptr(unsafe.Pointer(ppProxyLocator)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFNetResourceFilter: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfnetresourcefilter
@@ -7174,15 +7240,17 @@ type IMFNetResourceFilter struct {
 var IID_IMFNetResourceFilter = win32.GUID{Data1: 0x091878a3, Data2: 0xbf11, Data3: 0x4a5c, Data4: [8]byte{0xbc, 0x9f, 0x33, 0x99, 0x5b, 0x06, 0xef, 0x2d}}
 
 // OnRedirect dispatches through IMFNetResourceFilter's vtable slot 3.
-func (self *IMFNetResourceFilter) OnRedirect(pszUrl foundation.PWSTR, pvbCancel *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUrl)), uintptr(unsafe.Pointer(pvbCancel)))
-	return foundation.HRESULT(r1)
+func (self *IMFNetResourceFilter) OnRedirect(pszUrl string, pvbCancel *foundation.VARIANT_BOOL) error {
+	_pszUrl := win32.UTF16Ptr(pszUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(pvbCancel)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSendingRequest dispatches through IMFNetResourceFilter's vtable slot 4.
-func (self *IMFNetResourceFilter) OnSendingRequest(pszUrl foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUrl)))
-	return foundation.HRESULT(r1)
+func (self *IMFNetResourceFilter) OnSendingRequest(pszUrl string) error {
+	_pszUrl := win32.UTF16Ptr(pszUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUrl)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFNetSchemeHandlerConfig: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfnetschemehandlerconfig
@@ -7195,21 +7263,21 @@ type IMFNetSchemeHandlerConfig struct {
 var IID_IMFNetSchemeHandlerConfig = win32.GUID{Data1: 0x7be19e73, Data2: 0xc9bf, Data3: 0x468a, Data4: [8]byte{0xac, 0x5a, 0xa5, 0xe8, 0x65, 0x3b, 0xec, 0x87}}
 
 // GetNumberOfSupportedProtocols dispatches through IMFNetSchemeHandlerConfig's vtable slot 3.
-func (self *IMFNetSchemeHandlerConfig) GetNumberOfSupportedProtocols(pcProtocols *uint32) foundation.HRESULT {
+func (self *IMFNetSchemeHandlerConfig) GetNumberOfSupportedProtocols(pcProtocols *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcProtocols)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedProtocolType dispatches through IMFNetSchemeHandlerConfig's vtable slot 4.
-func (self *IMFNetSchemeHandlerConfig) GetSupportedProtocolType(nProtocolIndex uint32, pnProtocolType *MFNETSOURCE_PROTOCOL_TYPE) foundation.HRESULT {
+func (self *IMFNetSchemeHandlerConfig) GetSupportedProtocolType(nProtocolIndex uint32, pnProtocolType *MFNETSOURCE_PROTOCOL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nProtocolIndex), uintptr(unsafe.Pointer(pnProtocolType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetProtocolRolloverSettings dispatches through IMFNetSchemeHandlerConfig's vtable slot 5.
-func (self *IMFNetSchemeHandlerConfig) ResetProtocolRolloverSettings() foundation.HRESULT {
+func (self *IMFNetSchemeHandlerConfig) ResetProtocolRolloverSettings() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFObjectReferenceStream: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfobjectreferencestream
@@ -7222,15 +7290,15 @@ type IMFObjectReferenceStream struct {
 var IID_IMFObjectReferenceStream = win32.GUID{Data1: 0x09ef5be3, Data2: 0xc8a7, Data3: 0x469e, Data4: [8]byte{0x8b, 0x70, 0x73, 0xbf, 0x25, 0xbb, 0x19, 0x3f}}
 
 // SaveReference dispatches through IMFObjectReferenceStream's vtable slot 3.
-func (self *IMFObjectReferenceStream) SaveReference(riid *win32.GUID, pUnk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFObjectReferenceStream) SaveReference(riid *win32.GUID, pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadReference dispatches through IMFObjectReferenceStream's vtable slot 4.
-func (self *IMFObjectReferenceStream) LoadReference(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFObjectReferenceStream) LoadReference(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFOutputPolicy: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfoutputpolicy
@@ -7243,15 +7311,15 @@ type IMFOutputPolicy struct {
 var IID_IMFOutputPolicy = win32.GUID{Data1: 0x7f00f10a, Data2: 0xdaed, Data3: 0x41af, Data4: [8]byte{0xab, 0x26, 0x5f, 0xdf, 0xa4, 0xdf, 0xba, 0x3c}}
 
 // GetOriginatorID dispatches through IMFOutputPolicy's vtable slot 34.
-func (self *IMFOutputPolicy) GetOriginatorID(pguidOriginatorID *win32.GUID) foundation.HRESULT {
+func (self *IMFOutputPolicy) GetOriginatorID(pguidOriginatorID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidOriginatorID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMinimumGRLVersion dispatches through IMFOutputPolicy's vtable slot 35.
-func (self *IMFOutputPolicy) GetMinimumGRLVersion(pdwMinimumGRLVersion *uint32) foundation.HRESULT {
+func (self *IMFOutputPolicy) GetMinimumGRLVersion(pdwMinimumGRLVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMinimumGRLVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFOutputSchema: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfoutputschema
@@ -7264,21 +7332,21 @@ type IMFOutputSchema struct {
 var IID_IMFOutputSchema = win32.GUID{Data1: 0x7be0fc5b, Data2: 0xabd9, Data3: 0x44fb, Data4: [8]byte{0xa5, 0xc8, 0xf5, 0x01, 0x36, 0xe7, 0x15, 0x99}}
 
 // GetSchemaType dispatches through IMFOutputSchema's vtable slot 33.
-func (self *IMFOutputSchema) GetSchemaType(pguidSchemaType *win32.GUID) foundation.HRESULT {
+func (self *IMFOutputSchema) GetSchemaType(pguidSchemaType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidSchemaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConfigurationData dispatches through IMFOutputSchema's vtable slot 34.
-func (self *IMFOutputSchema) GetConfigurationData(pdwVal *uint32) foundation.HRESULT {
+func (self *IMFOutputSchema) GetConfigurationData(pdwVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOriginatorID dispatches through IMFOutputSchema's vtable slot 35.
-func (self *IMFOutputSchema) GetOriginatorID(pguidOriginatorID *win32.GUID) foundation.HRESULT {
+func (self *IMFOutputSchema) GetOriginatorID(pguidOriginatorID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidOriginatorID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFOutputTrustAuthority: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfoutputtrustauthority
@@ -7291,15 +7359,15 @@ type IMFOutputTrustAuthority struct {
 var IID_IMFOutputTrustAuthority = win32.GUID{Data1: 0xd19f8e94, Data2: 0xb126, Data3: 0x4446, Data4: [8]byte{0x89, 0x0c, 0x5d, 0xcb, 0x7a, 0xd7, 0x14, 0x53}}
 
 // GetAction dispatches through IMFOutputTrustAuthority's vtable slot 3.
-func (self *IMFOutputTrustAuthority) GetAction(pAction *MFPOLICYMANAGER_ACTION) foundation.HRESULT {
+func (self *IMFOutputTrustAuthority) GetAction(pAction *MFPOLICYMANAGER_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPolicy dispatches through IMFOutputTrustAuthority's vtable slot 4.
-func (self *IMFOutputTrustAuthority) SetPolicy(ppPolicy **IMFOutputPolicy, nPolicy uint32, ppbTicket **byte, pcbTicket *uint32) foundation.HRESULT {
+func (self *IMFOutputTrustAuthority) SetPolicy(ppPolicy **IMFOutputPolicy, nPolicy uint32, ppbTicket **byte, pcbTicket *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPolicy)), uintptr(nPolicy), uintptr(unsafe.Pointer(ppbTicket)), uintptr(unsafe.Pointer(pcbTicket)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPMPClient: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfpmpclient
@@ -7312,9 +7380,9 @@ type IMFPMPClient struct {
 var IID_IMFPMPClient = win32.GUID{Data1: 0x6c4e655d, Data2: 0xead8, Data3: 0x4421, Data4: [8]byte{0xb6, 0xb9, 0x54, 0xdc, 0xdb, 0xbd, 0xf8, 0x20}}
 
 // SetPMPHost dispatches through IMFPMPClient's vtable slot 3.
-func (self *IMFPMPClient) SetPMPHost(pPMPHost *IMFPMPHost) foundation.HRESULT {
+func (self *IMFPMPClient) SetPMPHost(pPMPHost *IMFPMPHost) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPMPHost)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPMPClientApp: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfpmpclientapp
@@ -7327,9 +7395,9 @@ type IMFPMPClientApp struct {
 var IID_IMFPMPClientApp = win32.GUID{Data1: 0xc004f646, Data2: 0xbe2c, Data3: 0x48f3, Data4: [8]byte{0x93, 0xa2, 0xa0, 0x98, 0x3e, 0xba, 0x11, 0x08}}
 
 // SetPMPHost dispatches through IMFPMPClientApp's vtable slot 3.
-func (self *IMFPMPClientApp) SetPMPHost(pPMPHost *IMFPMPHostApp) foundation.HRESULT {
+func (self *IMFPMPClientApp) SetPMPHost(pPMPHost *IMFPMPHostApp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPMPHost)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPMPHost: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfpmphost
@@ -7342,21 +7410,21 @@ type IMFPMPHost struct {
 var IID_IMFPMPHost = win32.GUID{Data1: 0xf70ca1a9, Data2: 0xfdc7, Data3: 0x4782, Data4: [8]byte{0xb9, 0x94, 0xad, 0xff, 0xb1, 0xc9, 0x86, 0x06}}
 
 // LockProcess dispatches through IMFPMPHost's vtable slot 3.
-func (self *IMFPMPHost) LockProcess() foundation.HRESULT {
+func (self *IMFPMPHost) LockProcess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockProcess dispatches through IMFPMPHost's vtable slot 4.
-func (self *IMFPMPHost) UnlockProcess() foundation.HRESULT {
+func (self *IMFPMPHost) UnlockProcess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateObjectByCLSID dispatches through IMFPMPHost's vtable slot 5.
-func (self *IMFPMPHost) CreateObjectByCLSID(clsid *win32.GUID, pStream *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFPMPHost) CreateObjectByCLSID(clsid *win32.GUID, pStream *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPMPHostApp: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfpmphostapp
@@ -7369,21 +7437,22 @@ type IMFPMPHostApp struct {
 var IID_IMFPMPHostApp = win32.GUID{Data1: 0x84d2054a, Data2: 0x3aa1, Data3: 0x4728, Data4: [8]byte{0xa3, 0xb0, 0x44, 0x0a, 0x41, 0x8c, 0xf4, 0x9c}}
 
 // LockProcess dispatches through IMFPMPHostApp's vtable slot 3.
-func (self *IMFPMPHostApp) LockProcess() foundation.HRESULT {
+func (self *IMFPMPHostApp) LockProcess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockProcess dispatches through IMFPMPHostApp's vtable slot 4.
-func (self *IMFPMPHostApp) UnlockProcess() foundation.HRESULT {
+func (self *IMFPMPHostApp) UnlockProcess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ActivateClassById dispatches through IMFPMPHostApp's vtable slot 5.
-func (self *IMFPMPHostApp) ActivateClassById(id foundation.PWSTR, pStream *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func (self *IMFPMPHostApp) ActivateClassById(id string, pStream *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_id := win32.UTF16Ptr(id)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPMPServer: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfpmpserver
@@ -7396,21 +7465,21 @@ type IMFPMPServer struct {
 var IID_IMFPMPServer = win32.GUID{Data1: 0x994e23af, Data2: 0x1cc2, Data3: 0x493c, Data4: [8]byte{0xb9, 0xfa, 0x46, 0xf1, 0xcb, 0x04, 0x0f, 0xa4}}
 
 // LockProcess dispatches through IMFPMPServer's vtable slot 3.
-func (self *IMFPMPServer) LockProcess() foundation.HRESULT {
+func (self *IMFPMPServer) LockProcess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockProcess dispatches through IMFPMPServer's vtable slot 4.
-func (self *IMFPMPServer) UnlockProcess() foundation.HRESULT {
+func (self *IMFPMPServer) UnlockProcess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateObjectByCLSID dispatches through IMFPMPServer's vtable slot 5.
-func (self *IMFPMPServer) CreateObjectByCLSID(clsid *win32.GUID, riid *win32.GUID, ppObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFPMPServer) CreateObjectByCLSID(clsid *win32.GUID, riid *win32.GUID, ppObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPMediaItem: https://learn.microsoft.com/windows/win32/api/mfplay/nn-mfplay-imfpmediaitem
@@ -7423,117 +7492,118 @@ type IMFPMediaItem struct {
 var IID_IMFPMediaItem = win32.GUID{Data1: 0x90eb3e6b, Data2: 0xecbf, Data3: 0x45cc, Data4: [8]byte{0xb1, 0xda, 0xc6, 0xfe, 0x3e, 0xa7, 0x0d, 0x57}}
 
 // GetMediaPlayer dispatches through IMFPMediaItem's vtable slot 3.
-func (self *IMFPMediaItem) GetMediaPlayer(ppMediaPlayer **IMFPMediaPlayer) foundation.HRESULT {
+func (self *IMFPMediaItem) GetMediaPlayer(ppMediaPlayer **IMFPMediaPlayer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaPlayer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetURL dispatches through IMFPMediaItem's vtable slot 4.
-func (self *IMFPMediaItem) GetURL(ppwszURL *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFPMediaItem) GetURL(ppwszURL *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszURL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObject dispatches through IMFPMediaItem's vtable slot 5.
-func (self *IMFPMediaItem) GetObject(ppIUnknown **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFPMediaItem) GetObject(ppIUnknown **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUserData dispatches through IMFPMediaItem's vtable slot 6.
-func (self *IMFPMediaItem) GetUserData(pdwUserData *uintptr) foundation.HRESULT {
+func (self *IMFPMediaItem) GetUserData(pdwUserData *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwUserData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUserData dispatches through IMFPMediaItem's vtable slot 7.
-func (self *IMFPMediaItem) SetUserData(dwUserData uintptr) foundation.HRESULT {
+func (self *IMFPMediaItem) SetUserData(dwUserData uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwUserData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStartStopPosition dispatches through IMFPMediaItem's vtable slot 8.
-func (self *IMFPMediaItem) GetStartStopPosition(pguidStartPositionType *win32.GUID, pvStartValue *systemcomstructuredstorage.PROPVARIANT, pguidStopPositionType *win32.GUID, pvStopValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFPMediaItem) GetStartStopPosition(pguidStartPositionType *win32.GUID, pvStartValue *systemcomstructuredstorage.PROPVARIANT, pguidStopPositionType *win32.GUID, pvStopValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidStartPositionType)), uintptr(unsafe.Pointer(pvStartValue)), uintptr(unsafe.Pointer(pguidStopPositionType)), uintptr(unsafe.Pointer(pvStopValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStartStopPosition dispatches through IMFPMediaItem's vtable slot 9.
-func (self *IMFPMediaItem) SetStartStopPosition(pguidStartPositionType *win32.GUID, pvStartValue *systemcomstructuredstorage.PROPVARIANT, pguidStopPositionType *win32.GUID, pvStopValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFPMediaItem) SetStartStopPosition(pguidStartPositionType *win32.GUID, pvStartValue *systemcomstructuredstorage.PROPVARIANT, pguidStopPositionType *win32.GUID, pvStopValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidStartPositionType)), uintptr(unsafe.Pointer(pvStartValue)), uintptr(unsafe.Pointer(pguidStopPositionType)), uintptr(unsafe.Pointer(pvStopValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HasVideo dispatches through IMFPMediaItem's vtable slot 10.
-func (self *IMFPMediaItem) HasVideo(pfHasVideo *foundation.BOOL, pfSelected *foundation.BOOL) foundation.HRESULT {
+func (self *IMFPMediaItem) HasVideo(pfHasVideo *foundation.BOOL, pfSelected *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfHasVideo)), uintptr(unsafe.Pointer(pfSelected)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HasAudio dispatches through IMFPMediaItem's vtable slot 11.
-func (self *IMFPMediaItem) HasAudio(pfHasAudio *foundation.BOOL, pfSelected *foundation.BOOL) foundation.HRESULT {
+func (self *IMFPMediaItem) HasAudio(pfHasAudio *foundation.BOOL, pfSelected *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfHasAudio)), uintptr(unsafe.Pointer(pfSelected)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsProtected dispatches through IMFPMediaItem's vtable slot 12.
-func (self *IMFPMediaItem) IsProtected(pfProtected *foundation.BOOL) foundation.HRESULT {
+func (self *IMFPMediaItem) IsProtected(pfProtected *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProtected)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDuration dispatches through IMFPMediaItem's vtable slot 13.
-func (self *IMFPMediaItem) GetDuration(guidPositionType *win32.GUID, pvDurationValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFPMediaItem) GetDuration(guidPositionType *win32.GUID, pvDurationValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPositionType)), uintptr(unsafe.Pointer(pvDurationValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNumberOfStreams dispatches through IMFPMediaItem's vtable slot 14.
-func (self *IMFPMediaItem) GetNumberOfStreams(pdwStreamCount *uint32) foundation.HRESULT {
+func (self *IMFPMediaItem) GetNumberOfStreams(pdwStreamCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStreamCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamSelection dispatches through IMFPMediaItem's vtable slot 15.
-func (self *IMFPMediaItem) GetStreamSelection(dwStreamIndex uint32, pfEnabled *foundation.BOOL) foundation.HRESULT {
+func (self *IMFPMediaItem) GetStreamSelection(dwStreamIndex uint32, pfEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStreamSelection dispatches through IMFPMediaItem's vtable slot 16.
-func (self *IMFPMediaItem) SetStreamSelection(dwStreamIndex uint32, fEnabled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(fEnabled))
-	return foundation.HRESULT(r1)
+func (self *IMFPMediaItem) SetStreamSelection(dwStreamIndex uint32, fEnabled bool) error {
+	_fEnabled := win32.Bool32(fEnabled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(_fEnabled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamAttribute dispatches through IMFPMediaItem's vtable slot 17.
-func (self *IMFPMediaItem) GetStreamAttribute(dwStreamIndex uint32, guidMFAttribute *win32.GUID, pvValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFPMediaItem) GetStreamAttribute(dwStreamIndex uint32, guidMFAttribute *win32.GUID, pvValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(guidMFAttribute)), uintptr(unsafe.Pointer(pvValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresentationAttribute dispatches through IMFPMediaItem's vtable slot 18.
-func (self *IMFPMediaItem) GetPresentationAttribute(guidMFAttribute *win32.GUID, pvValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFPMediaItem) GetPresentationAttribute(guidMFAttribute *win32.GUID, pvValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidMFAttribute)), uintptr(unsafe.Pointer(pvValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCharacteristics dispatches through IMFPMediaItem's vtable slot 19.
-func (self *IMFPMediaItem) GetCharacteristics(pCharacteristics *uint32) foundation.HRESULT {
+func (self *IMFPMediaItem) GetCharacteristics(pCharacteristics *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCharacteristics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStreamSink dispatches through IMFPMediaItem's vtable slot 20.
-func (self *IMFPMediaItem) SetStreamSink(dwStreamIndex uint32, pMediaSink *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFPMediaItem) SetStreamSink(dwStreamIndex uint32, pMediaSink *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMetadata dispatches through IMFPMediaItem's vtable slot 21.
-func (self *IMFPMediaItem) GetMetadata(ppMetadataStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IMFPMediaItem) GetMetadata(ppMetadataStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMetadataStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPMediaPlayer: https://learn.microsoft.com/windows/win32/api/mfplay/nn-mfplay-imfpmediaplayer
@@ -7546,201 +7616,207 @@ type IMFPMediaPlayer struct {
 var IID_IMFPMediaPlayer = win32.GUID{Data1: 0xa714590a, Data2: 0x58af, Data3: 0x430a, Data4: [8]byte{0x85, 0xbf, 0x44, 0xf5, 0xec, 0x83, 0x8d, 0x85}}
 
 // Play dispatches through IMFPMediaPlayer's vtable slot 3.
-func (self *IMFPMediaPlayer) Play() foundation.HRESULT {
+func (self *IMFPMediaPlayer) Play() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IMFPMediaPlayer's vtable slot 4.
-func (self *IMFPMediaPlayer) Pause() foundation.HRESULT {
+func (self *IMFPMediaPlayer) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IMFPMediaPlayer's vtable slot 5.
-func (self *IMFPMediaPlayer) Stop() foundation.HRESULT {
+func (self *IMFPMediaPlayer) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FrameStep dispatches through IMFPMediaPlayer's vtable slot 6.
-func (self *IMFPMediaPlayer) FrameStep() foundation.HRESULT {
+func (self *IMFPMediaPlayer) FrameStep() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPosition dispatches through IMFPMediaPlayer's vtable slot 7.
-func (self *IMFPMediaPlayer) SetPosition(guidPositionType *win32.GUID, pvPositionValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFPMediaPlayer) SetPosition(guidPositionType *win32.GUID, pvPositionValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPositionType)), uintptr(unsafe.Pointer(pvPositionValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPosition dispatches through IMFPMediaPlayer's vtable slot 8.
-func (self *IMFPMediaPlayer) GetPosition(guidPositionType *win32.GUID, pvPositionValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetPosition(guidPositionType *win32.GUID, pvPositionValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPositionType)), uintptr(unsafe.Pointer(pvPositionValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDuration dispatches through IMFPMediaPlayer's vtable slot 9.
-func (self *IMFPMediaPlayer) GetDuration(guidPositionType *win32.GUID, pvDurationValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetDuration(guidPositionType *win32.GUID, pvDurationValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPositionType)), uintptr(unsafe.Pointer(pvDurationValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRate dispatches through IMFPMediaPlayer's vtable slot 11.
-func (self *IMFPMediaPlayer) GetRate(pflRate *float32) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetRate(pflRate *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflRate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedRates dispatches through IMFPMediaPlayer's vtable slot 12.
-func (self *IMFPMediaPlayer) GetSupportedRates(fForwardDirection foundation.BOOL, pflSlowestRate *float32, pflFastestRate *float32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(fForwardDirection), uintptr(unsafe.Pointer(pflSlowestRate)), uintptr(unsafe.Pointer(pflFastestRate)))
-	return foundation.HRESULT(r1)
+func (self *IMFPMediaPlayer) GetSupportedRates(fForwardDirection bool, pflSlowestRate *float32, pflFastestRate *float32) error {
+	_fForwardDirection := win32.Bool32(fForwardDirection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_fForwardDirection), uintptr(unsafe.Pointer(pflSlowestRate)), uintptr(unsafe.Pointer(pflFastestRate)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetState dispatches through IMFPMediaPlayer's vtable slot 13.
-func (self *IMFPMediaPlayer) GetState(peState *MFP_MEDIAPLAYER_STATE) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetState(peState *MFP_MEDIAPLAYER_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMediaItemFromURL dispatches through IMFPMediaPlayer's vtable slot 14.
-func (self *IMFPMediaPlayer) CreateMediaItemFromURL(pwszURL foundation.PWSTR, fSync foundation.BOOL, dwUserData uintptr, ppMediaItem **IMFPMediaItem) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(fSync), uintptr(dwUserData), uintptr(unsafe.Pointer(ppMediaItem)))
-	return foundation.HRESULT(r1)
+func (self *IMFPMediaPlayer) CreateMediaItemFromURL(pwszURL string, fSync bool, dwUserData uintptr, ppMediaItem **IMFPMediaItem) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	_fSync := win32.Bool32(fSync)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(_fSync), uintptr(dwUserData), uintptr(unsafe.Pointer(ppMediaItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMediaItemFromObject dispatches through IMFPMediaPlayer's vtable slot 15.
-func (self *IMFPMediaPlayer) CreateMediaItemFromObject(pIUnknownObj *systemcom.IUnknown, fSync foundation.BOOL, dwUserData uintptr, ppMediaItem **IMFPMediaItem) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIUnknownObj)), uintptr(fSync), uintptr(dwUserData), uintptr(unsafe.Pointer(ppMediaItem)))
-	return foundation.HRESULT(r1)
+func (self *IMFPMediaPlayer) CreateMediaItemFromObject(pIUnknownObj *systemcom.IUnknown, fSync bool, dwUserData uintptr, ppMediaItem **IMFPMediaItem) error {
+	_fSync := win32.Bool32(fSync)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIUnknownObj)), uintptr(_fSync), uintptr(dwUserData), uintptr(unsafe.Pointer(ppMediaItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMediaItem dispatches through IMFPMediaPlayer's vtable slot 16.
-func (self *IMFPMediaPlayer) SetMediaItem(pIMFPMediaItem *IMFPMediaItem) foundation.HRESULT {
+func (self *IMFPMediaPlayer) SetMediaItem(pIMFPMediaItem *IMFPMediaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIMFPMediaItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearMediaItem dispatches through IMFPMediaPlayer's vtable slot 17.
-func (self *IMFPMediaPlayer) ClearMediaItem() foundation.HRESULT {
+func (self *IMFPMediaPlayer) ClearMediaItem() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMediaItem dispatches through IMFPMediaPlayer's vtable slot 18.
-func (self *IMFPMediaPlayer) GetMediaItem(ppIMFPMediaItem **IMFPMediaItem) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetMediaItem(ppIMFPMediaItem **IMFPMediaItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIMFPMediaItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolume dispatches through IMFPMediaPlayer's vtable slot 19.
-func (self *IMFPMediaPlayer) GetVolume(pflVolume *float32) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetVolume(pflVolume *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflVolume)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBalance dispatches through IMFPMediaPlayer's vtable slot 21.
-func (self *IMFPMediaPlayer) GetBalance(pflBalance *float32) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetBalance(pflBalance *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflBalance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMute dispatches through IMFPMediaPlayer's vtable slot 23.
-func (self *IMFPMediaPlayer) GetMute(pfMute *foundation.BOOL) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetMute(pfMute *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfMute)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMute dispatches through IMFPMediaPlayer's vtable slot 24.
-func (self *IMFPMediaPlayer) SetMute(fMute foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(fMute))
-	return foundation.HRESULT(r1)
+func (self *IMFPMediaPlayer) SetMute(fMute bool) error {
+	_fMute := win32.Bool32(fMute)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(_fMute))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNativeVideoSize dispatches through IMFPMediaPlayer's vtable slot 25.
-func (self *IMFPMediaPlayer) GetNativeVideoSize(pszVideo *foundation.SIZE, pszARVideo *foundation.SIZE) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetNativeVideoSize(pszVideo *foundation.SIZE, pszARVideo *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszVideo)), uintptr(unsafe.Pointer(pszARVideo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIdealVideoSize dispatches through IMFPMediaPlayer's vtable slot 26.
-func (self *IMFPMediaPlayer) GetIdealVideoSize(pszMin *foundation.SIZE, pszMax *foundation.SIZE) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetIdealVideoSize(pszMin *foundation.SIZE, pszMax *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMin)), uintptr(unsafe.Pointer(pszMax)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVideoSourceRect dispatches through IMFPMediaPlayer's vtable slot 27.
-func (self *IMFPMediaPlayer) SetVideoSourceRect(pnrcSource *MFVideoNormalizedRect) foundation.HRESULT {
+func (self *IMFPMediaPlayer) SetVideoSourceRect(pnrcSource *MFVideoNormalizedRect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnrcSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoSourceRect dispatches through IMFPMediaPlayer's vtable slot 28.
-func (self *IMFPMediaPlayer) GetVideoSourceRect(pnrcSource *MFVideoNormalizedRect) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetVideoSourceRect(pnrcSource *MFVideoNormalizedRect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnrcSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAspectRatioMode dispatches through IMFPMediaPlayer's vtable slot 29.
-func (self *IMFPMediaPlayer) SetAspectRatioMode(dwAspectRatioMode uint32) foundation.HRESULT {
+func (self *IMFPMediaPlayer) SetAspectRatioMode(dwAspectRatioMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(dwAspectRatioMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAspectRatioMode dispatches through IMFPMediaPlayer's vtable slot 30.
-func (self *IMFPMediaPlayer) GetAspectRatioMode(pdwAspectRatioMode *uint32) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetAspectRatioMode(pdwAspectRatioMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAspectRatioMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoWindow dispatches through IMFPMediaPlayer's vtable slot 31.
-func (self *IMFPMediaPlayer) GetVideoWindow(phwndVideo *foundation.HWND) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetVideoWindow(phwndVideo *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwndVideo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateVideo dispatches through IMFPMediaPlayer's vtable slot 32.
-func (self *IMFPMediaPlayer) UpdateVideo() foundation.HRESULT {
+func (self *IMFPMediaPlayer) UpdateVideo() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBorderColor dispatches through IMFPMediaPlayer's vtable slot 33.
-func (self *IMFPMediaPlayer) SetBorderColor(Clr foundation.COLORREF) foundation.HRESULT {
+func (self *IMFPMediaPlayer) SetBorderColor(Clr foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(Clr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBorderColor dispatches through IMFPMediaPlayer's vtable slot 34.
-func (self *IMFPMediaPlayer) GetBorderColor(pClr *foundation.COLORREF) foundation.HRESULT {
+func (self *IMFPMediaPlayer) GetBorderColor(pClr *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertEffect dispatches through IMFPMediaPlayer's vtable slot 35.
-func (self *IMFPMediaPlayer) InsertEffect(pEffect *systemcom.IUnknown, fOptional foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEffect)), uintptr(fOptional))
-	return foundation.HRESULT(r1)
+func (self *IMFPMediaPlayer) InsertEffect(pEffect *systemcom.IUnknown, fOptional bool) error {
+	_fOptional := win32.Bool32(fOptional)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEffect)), uintptr(_fOptional))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveEffect dispatches through IMFPMediaPlayer's vtable slot 36.
-func (self *IMFPMediaPlayer) RemoveEffect(pEffect *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFPMediaPlayer) RemoveEffect(pEffect *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEffect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllEffects dispatches through IMFPMediaPlayer's vtable slot 37.
-func (self *IMFPMediaPlayer) RemoveAllEffects() foundation.HRESULT {
+func (self *IMFPMediaPlayer) RemoveAllEffects() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFPMediaPlayer's vtable slot 38.
-func (self *IMFPMediaPlayer) Shutdown() foundation.HRESULT {
+func (self *IMFPMediaPlayer) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPMediaPlayerCallback: https://learn.microsoft.com/windows/win32/api/mfplay/nn-mfplay-imfpmediaplayercallback
@@ -7767,39 +7843,42 @@ type IMFPluginControl struct {
 var IID_IMFPluginControl = win32.GUID{Data1: 0x5c6c44bf, Data2: 0x1db6, Data3: 0x435b, Data4: [8]byte{0x92, 0x49, 0xe8, 0xcd, 0x10, 0xfd, 0xec, 0x96}}
 
 // GetPreferredClsid dispatches through IMFPluginControl's vtable slot 3.
-func (self *IMFPluginControl) GetPreferredClsid(pluginType uint32, selector foundation.PWSTR, clsid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(pluginType), uintptr(unsafe.Pointer(selector)), uintptr(unsafe.Pointer(clsid)))
-	return foundation.HRESULT(r1)
+func (self *IMFPluginControl) GetPreferredClsid(pluginType uint32, selector string, clsid *win32.GUID) error {
+	_selector := win32.UTF16Ptr(selector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(pluginType), uintptr(unsafe.Pointer(_selector)), uintptr(unsafe.Pointer(clsid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreferredClsidByIndex dispatches through IMFPluginControl's vtable slot 4.
-func (self *IMFPluginControl) GetPreferredClsidByIndex(pluginType uint32, index uint32, selector *foundation.PWSTR, clsid *win32.GUID) foundation.HRESULT {
+func (self *IMFPluginControl) GetPreferredClsidByIndex(pluginType uint32, index uint32, selector *foundation.PWSTR, clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(pluginType), uintptr(index), uintptr(unsafe.Pointer(selector)), uintptr(unsafe.Pointer(clsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPreferredClsid dispatches through IMFPluginControl's vtable slot 5.
-func (self *IMFPluginControl) SetPreferredClsid(pluginType uint32, selector foundation.PWSTR, clsid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(pluginType), uintptr(unsafe.Pointer(selector)), uintptr(unsafe.Pointer(clsid)))
-	return foundation.HRESULT(r1)
+func (self *IMFPluginControl) SetPreferredClsid(pluginType uint32, selector string, clsid *win32.GUID) error {
+	_selector := win32.UTF16Ptr(selector)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(pluginType), uintptr(unsafe.Pointer(_selector)), uintptr(unsafe.Pointer(clsid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDisabled dispatches through IMFPluginControl's vtable slot 6.
-func (self *IMFPluginControl) IsDisabled(pluginType uint32, clsid *win32.GUID) foundation.HRESULT {
+func (self *IMFPluginControl) IsDisabled(pluginType uint32, clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(pluginType), uintptr(unsafe.Pointer(clsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisabledByIndex dispatches through IMFPluginControl's vtable slot 7.
-func (self *IMFPluginControl) GetDisabledByIndex(pluginType uint32, index uint32, clsid *win32.GUID) foundation.HRESULT {
+func (self *IMFPluginControl) GetDisabledByIndex(pluginType uint32, index uint32, clsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(pluginType), uintptr(index), uintptr(unsafe.Pointer(clsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisabled dispatches through IMFPluginControl's vtable slot 8.
-func (self *IMFPluginControl) SetDisabled(pluginType uint32, clsid *win32.GUID, disabled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(pluginType), uintptr(unsafe.Pointer(clsid)), uintptr(disabled))
-	return foundation.HRESULT(r1)
+func (self *IMFPluginControl) SetDisabled(pluginType uint32, clsid *win32.GUID, disabled bool) error {
+	_disabled := win32.Bool32(disabled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(pluginType), uintptr(unsafe.Pointer(clsid)), uintptr(_disabled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPluginControl2: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfplugincontrol2
@@ -7812,9 +7891,9 @@ type IMFPluginControl2 struct {
 var IID_IMFPluginControl2 = win32.GUID{Data1: 0xc6982083, Data2: 0x3ddc, Data3: 0x45cb, Data4: [8]byte{0xaf, 0x5e, 0x0f, 0x7a, 0x8c, 0xe4, 0xde, 0x77}}
 
 // SetPolicy dispatches through IMFPluginControl2's vtable slot 9.
-func (self *IMFPluginControl2) SetPolicy(policy MF_PLUGIN_CONTROL_POLICY) foundation.HRESULT {
+func (self *IMFPluginControl2) SetPolicy(policy MF_PLUGIN_CONTROL_POLICY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(policy))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPresentationClock: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfpresentationclock
@@ -7827,51 +7906,51 @@ type IMFPresentationClock struct {
 var IID_IMFPresentationClock = win32.GUID{Data1: 0x868ce85c, Data2: 0x8ea9, Data3: 0x4f55, Data4: [8]byte{0xab, 0x82, 0xb0, 0x09, 0xa9, 0x10, 0xa8, 0x05}}
 
 // SetTimeSource dispatches through IMFPresentationClock's vtable slot 8.
-func (self *IMFPresentationClock) SetTimeSource(pTimeSource *IMFPresentationTimeSource) foundation.HRESULT {
+func (self *IMFPresentationClock) SetTimeSource(pTimeSource *IMFPresentationTimeSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimeSource dispatches through IMFPresentationClock's vtable slot 9.
-func (self *IMFPresentationClock) GetTimeSource(ppTimeSource **IMFPresentationTimeSource) foundation.HRESULT {
+func (self *IMFPresentationClock) GetTimeSource(ppTimeSource **IMFPresentationTimeSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTimeSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTime dispatches through IMFPresentationClock's vtable slot 10.
-func (self *IMFPresentationClock) GetTime(phnsClockTime *int64) foundation.HRESULT {
+func (self *IMFPresentationClock) GetTime(phnsClockTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phnsClockTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddClockStateSink dispatches through IMFPresentationClock's vtable slot 11.
-func (self *IMFPresentationClock) AddClockStateSink(pStateSink *IMFClockStateSink) foundation.HRESULT {
+func (self *IMFPresentationClock) AddClockStateSink(pStateSink *IMFClockStateSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStateSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveClockStateSink dispatches through IMFPresentationClock's vtable slot 12.
-func (self *IMFPresentationClock) RemoveClockStateSink(pStateSink *IMFClockStateSink) foundation.HRESULT {
+func (self *IMFPresentationClock) RemoveClockStateSink(pStateSink *IMFClockStateSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStateSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IMFPresentationClock's vtable slot 13.
-func (self *IMFPresentationClock) Start(llClockStartOffset int64) foundation.HRESULT {
+func (self *IMFPresentationClock) Start(llClockStartOffset int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(llClockStartOffset))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IMFPresentationClock's vtable slot 14.
-func (self *IMFPresentationClock) Stop() foundation.HRESULT {
+func (self *IMFPresentationClock) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IMFPresentationClock's vtable slot 15.
-func (self *IMFPresentationClock) Pause() foundation.HRESULT {
+func (self *IMFPresentationClock) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPresentationDescriptor: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfpresentationdescriptor
@@ -7884,33 +7963,33 @@ type IMFPresentationDescriptor struct {
 var IID_IMFPresentationDescriptor = win32.GUID{Data1: 0x03cb2711, Data2: 0x24d7, Data3: 0x4db6, Data4: [8]byte{0xa1, 0x7f, 0xf3, 0xa7, 0xa4, 0x79, 0xa5, 0x36}}
 
 // GetStreamDescriptorCount dispatches through IMFPresentationDescriptor's vtable slot 33.
-func (self *IMFPresentationDescriptor) GetStreamDescriptorCount(pdwDescriptorCount *uint32) foundation.HRESULT {
+func (self *IMFPresentationDescriptor) GetStreamDescriptorCount(pdwDescriptorCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwDescriptorCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamDescriptorByIndex dispatches through IMFPresentationDescriptor's vtable slot 34.
-func (self *IMFPresentationDescriptor) GetStreamDescriptorByIndex(dwIndex uint32, pfSelected *foundation.BOOL, ppDescriptor **IMFStreamDescriptor) foundation.HRESULT {
+func (self *IMFPresentationDescriptor) GetStreamDescriptorByIndex(dwIndex uint32, pfSelected *foundation.BOOL, ppDescriptor **IMFStreamDescriptor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pfSelected)), uintptr(unsafe.Pointer(ppDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SelectStream dispatches through IMFPresentationDescriptor's vtable slot 35.
-func (self *IMFPresentationDescriptor) SelectStream(dwDescriptorIndex uint32) foundation.HRESULT {
+func (self *IMFPresentationDescriptor) SelectStream(dwDescriptorIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(dwDescriptorIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeselectStream dispatches through IMFPresentationDescriptor's vtable slot 36.
-func (self *IMFPresentationDescriptor) DeselectStream(dwDescriptorIndex uint32) foundation.HRESULT {
+func (self *IMFPresentationDescriptor) DeselectStream(dwDescriptorIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(dwDescriptorIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IMFPresentationDescriptor's vtable slot 37.
-func (self *IMFPresentationDescriptor) Clone(ppPresentationDescriptor **IMFPresentationDescriptor) foundation.HRESULT {
+func (self *IMFPresentationDescriptor) Clone(ppPresentationDescriptor **IMFPresentationDescriptor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPresentationDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFPresentationTimeSource: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfpresentationtimesource
@@ -7923,9 +8002,9 @@ type IMFPresentationTimeSource struct {
 var IID_IMFPresentationTimeSource = win32.GUID{Data1: 0x7ff12cce, Data2: 0xf76f, Data3: 0x41c2, Data4: [8]byte{0x86, 0x3b, 0x16, 0x66, 0xc8, 0xe5, 0xe1, 0x39}}
 
 // GetUnderlyingClock dispatches through IMFPresentationTimeSource's vtable slot 8.
-func (self *IMFPresentationTimeSource) GetUnderlyingClock(ppClock **IMFClock) foundation.HRESULT {
+func (self *IMFPresentationTimeSource) GetUnderlyingClock(ppClock **IMFClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFProtectedEnvironmentAccess: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfprotectedenvironmentaccess
@@ -7938,15 +8017,15 @@ type IMFProtectedEnvironmentAccess struct {
 var IID_IMFProtectedEnvironmentAccess = win32.GUID{Data1: 0xef5dc845, Data2: 0xf0d9, Data3: 0x4ec9, Data4: [8]byte{0xb0, 0x0c, 0xcb, 0x51, 0x83, 0xd3, 0x84, 0x34}}
 
 // Call dispatches through IMFProtectedEnvironmentAccess's vtable slot 3.
-func (self *IMFProtectedEnvironmentAccess) Call(inputLength uint32, input *byte, outputLength uint32, output *byte) foundation.HRESULT {
+func (self *IMFProtectedEnvironmentAccess) Call(inputLength uint32, input *byte, outputLength uint32, output *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(inputLength), uintptr(unsafe.Pointer(input)), uintptr(outputLength), uintptr(unsafe.Pointer(output)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadGRL dispatches through IMFProtectedEnvironmentAccess's vtable slot 4.
-func (self *IMFProtectedEnvironmentAccess) ReadGRL(outputLength *uint32, output **byte) foundation.HRESULT {
+func (self *IMFProtectedEnvironmentAccess) ReadGRL(outputLength *uint32, output **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputLength)), uintptr(unsafe.Pointer(output)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFQualityAdvise: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfqualityadvise
@@ -7959,33 +8038,33 @@ type IMFQualityAdvise struct {
 var IID_IMFQualityAdvise = win32.GUID{Data1: 0xec15e2e9, Data2: 0xe36b, Data3: 0x4f7c, Data4: [8]byte{0x87, 0x58, 0x77, 0xd4, 0x52, 0xef, 0x4c, 0xe7}}
 
 // SetDropMode dispatches through IMFQualityAdvise's vtable slot 3.
-func (self *IMFQualityAdvise) SetDropMode(eDropMode MF_QUALITY_DROP_MODE) foundation.HRESULT {
+func (self *IMFQualityAdvise) SetDropMode(eDropMode MF_QUALITY_DROP_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eDropMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetQualityLevel dispatches through IMFQualityAdvise's vtable slot 4.
-func (self *IMFQualityAdvise) SetQualityLevel(eQualityLevel MF_QUALITY_LEVEL) foundation.HRESULT {
+func (self *IMFQualityAdvise) SetQualityLevel(eQualityLevel MF_QUALITY_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(eQualityLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDropMode dispatches through IMFQualityAdvise's vtable slot 5.
-func (self *IMFQualityAdvise) GetDropMode(peDropMode *MF_QUALITY_DROP_MODE) foundation.HRESULT {
+func (self *IMFQualityAdvise) GetDropMode(peDropMode *MF_QUALITY_DROP_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peDropMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetQualityLevel dispatches through IMFQualityAdvise's vtable slot 6.
-func (self *IMFQualityAdvise) GetQualityLevel(peQualityLevel *MF_QUALITY_LEVEL) foundation.HRESULT {
+func (self *IMFQualityAdvise) GetQualityLevel(peQualityLevel *MF_QUALITY_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peQualityLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DropTime dispatches through IMFQualityAdvise's vtable slot 7.
-func (self *IMFQualityAdvise) DropTime(hnsAmountToDrop int64) foundation.HRESULT {
+func (self *IMFQualityAdvise) DropTime(hnsAmountToDrop int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hnsAmountToDrop))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFQualityAdvise2: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfqualityadvise2
@@ -7998,9 +8077,9 @@ type IMFQualityAdvise2 struct {
 var IID_IMFQualityAdvise2 = win32.GUID{Data1: 0xf3706f0d, Data2: 0x8ea2, Data3: 0x4886, Data4: [8]byte{0x80, 0x00, 0x71, 0x55, 0xe9, 0xec, 0x2e, 0xae}}
 
 // NotifyQualityEvent dispatches through IMFQualityAdvise2's vtable slot 8.
-func (self *IMFQualityAdvise2) NotifyQualityEvent(pEvent *IMFMediaEvent, pdwFlags *uint32) foundation.HRESULT {
+func (self *IMFQualityAdvise2) NotifyQualityEvent(pEvent *IMFMediaEvent, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFQualityAdviseLimits: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfqualityadviselimits
@@ -8013,15 +8092,15 @@ type IMFQualityAdviseLimits struct {
 var IID_IMFQualityAdviseLimits = win32.GUID{Data1: 0xdfcd8e4d, Data2: 0x30b5, Data3: 0x4567, Data4: [8]byte{0xac, 0xaa, 0x8e, 0xb5, 0xb7, 0x85, 0x3d, 0xc9}}
 
 // GetMaximumDropMode dispatches through IMFQualityAdviseLimits's vtable slot 3.
-func (self *IMFQualityAdviseLimits) GetMaximumDropMode(peDropMode *MF_QUALITY_DROP_MODE) foundation.HRESULT {
+func (self *IMFQualityAdviseLimits) GetMaximumDropMode(peDropMode *MF_QUALITY_DROP_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peDropMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMinimumQualityLevel dispatches through IMFQualityAdviseLimits's vtable slot 4.
-func (self *IMFQualityAdviseLimits) GetMinimumQualityLevel(peQualityLevel *MF_QUALITY_LEVEL) foundation.HRESULT {
+func (self *IMFQualityAdviseLimits) GetMinimumQualityLevel(peQualityLevel *MF_QUALITY_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peQualityLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFQualityManager: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfqualitymanager
@@ -8034,39 +8113,39 @@ type IMFQualityManager struct {
 var IID_IMFQualityManager = win32.GUID{Data1: 0x8d009d86, Data2: 0x5b9f, Data3: 0x4115, Data4: [8]byte{0xb1, 0xfc, 0x9f, 0x80, 0xd5, 0x2a, 0xb8, 0xab}}
 
 // NotifyTopology dispatches through IMFQualityManager's vtable slot 3.
-func (self *IMFQualityManager) NotifyTopology(pTopology *IMFTopology) foundation.HRESULT {
+func (self *IMFQualityManager) NotifyTopology(pTopology *IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTopology)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyPresentationClock dispatches through IMFQualityManager's vtable slot 4.
-func (self *IMFQualityManager) NotifyPresentationClock(pClock *IMFPresentationClock) foundation.HRESULT {
+func (self *IMFQualityManager) NotifyPresentationClock(pClock *IMFPresentationClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyProcessInput dispatches through IMFQualityManager's vtable slot 5.
-func (self *IMFQualityManager) NotifyProcessInput(pNode *IMFTopologyNode, lInputIndex int32, pSample *IMFSample) foundation.HRESULT {
+func (self *IMFQualityManager) NotifyProcessInput(pNode *IMFTopologyNode, lInputIndex int32, pSample *IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)), uintptr(lInputIndex), uintptr(unsafe.Pointer(pSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyProcessOutput dispatches through IMFQualityManager's vtable slot 6.
-func (self *IMFQualityManager) NotifyProcessOutput(pNode *IMFTopologyNode, lOutputIndex int32, pSample *IMFSample) foundation.HRESULT {
+func (self *IMFQualityManager) NotifyProcessOutput(pNode *IMFTopologyNode, lOutputIndex int32, pSample *IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)), uintptr(lOutputIndex), uintptr(unsafe.Pointer(pSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyQualityEvent dispatches through IMFQualityManager's vtable slot 7.
-func (self *IMFQualityManager) NotifyQualityEvent(pObject *systemcom.IUnknown, pEvent *IMFMediaEvent) foundation.HRESULT {
+func (self *IMFQualityManager) NotifyQualityEvent(pObject *systemcom.IUnknown, pEvent *IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFQualityManager's vtable slot 8.
-func (self *IMFQualityManager) Shutdown() foundation.HRESULT {
+func (self *IMFQualityManager) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFRateControl: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfratecontrol
@@ -8079,9 +8158,9 @@ type IMFRateControl struct {
 var IID_IMFRateControl = win32.GUID{Data1: 0x88ddcd21, Data2: 0x03c3, Data3: 0x4275, Data4: [8]byte{0x91, 0xed, 0x55, 0xee, 0x39, 0x29, 0x32, 0x8f}}
 
 // GetRate dispatches through IMFRateControl's vtable slot 4.
-func (self *IMFRateControl) GetRate(pfThin *foundation.BOOL, pflRate *float32) foundation.HRESULT {
+func (self *IMFRateControl) GetRate(pfThin *foundation.BOOL, pflRate *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfThin)), uintptr(unsafe.Pointer(pflRate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFRateSupport: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfratesupport
@@ -8094,15 +8173,17 @@ type IMFRateSupport struct {
 var IID_IMFRateSupport = win32.GUID{Data1: 0x0a9ccdbc, Data2: 0xd797, Data3: 0x4563, Data4: [8]byte{0x96, 0x67, 0x94, 0xec, 0x5d, 0x79, 0x29, 0x2d}}
 
 // GetSlowestRate dispatches through IMFRateSupport's vtable slot 3.
-func (self *IMFRateSupport) GetSlowestRate(eDirection MFRATE_DIRECTION, fThin foundation.BOOL, pflRate *float32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eDirection), uintptr(fThin), uintptr(unsafe.Pointer(pflRate)))
-	return foundation.HRESULT(r1)
+func (self *IMFRateSupport) GetSlowestRate(eDirection MFRATE_DIRECTION, fThin bool, pflRate *float32) error {
+	_fThin := win32.Bool32(fThin)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eDirection), uintptr(_fThin), uintptr(unsafe.Pointer(pflRate)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFastestRate dispatches through IMFRateSupport's vtable slot 4.
-func (self *IMFRateSupport) GetFastestRate(eDirection MFRATE_DIRECTION, fThin foundation.BOOL, pflRate *float32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(eDirection), uintptr(fThin), uintptr(unsafe.Pointer(pflRate)))
-	return foundation.HRESULT(r1)
+func (self *IMFRateSupport) GetFastestRate(eDirection MFRATE_DIRECTION, fThin bool, pflRate *float32) error {
+	_fThin := win32.Bool32(fThin)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(eDirection), uintptr(_fThin), uintptr(unsafe.Pointer(pflRate)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFReadWriteClassFactory: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfreadwriteclassfactory
@@ -8115,15 +8196,16 @@ type IMFReadWriteClassFactory struct {
 var IID_IMFReadWriteClassFactory = win32.GUID{Data1: 0xe7fe2e12, Data2: 0x661c, Data3: 0x40da, Data4: [8]byte{0x92, 0xf9, 0x4f, 0x00, 0x2a, 0xb6, 0x76, 0x27}}
 
 // CreateInstanceFromURL dispatches through IMFReadWriteClassFactory's vtable slot 3.
-func (self *IMFReadWriteClassFactory) CreateInstanceFromURL(clsid *win32.GUID, pwszURL foundation.PWSTR, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pwszURL)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+func (self *IMFReadWriteClassFactory) CreateInstanceFromURL(clsid *win32.GUID, pwszURL string, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateInstanceFromObject dispatches through IMFReadWriteClassFactory's vtable slot 4.
-func (self *IMFReadWriteClassFactory) CreateInstanceFromObject(clsid *win32.GUID, punkObject *systemcom.IUnknown, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFReadWriteClassFactory) CreateInstanceFromObject(clsid *win32.GUID, punkObject *systemcom.IUnknown, pAttributes *IMFAttributes, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFRealTimeClient: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfrealtimeclient
@@ -8136,21 +8218,22 @@ type IMFRealTimeClient struct {
 var IID_IMFRealTimeClient = win32.GUID{Data1: 0x2347d60b, Data2: 0x3fb5, Data3: 0x480c, Data4: [8]byte{0x88, 0x03, 0x8d, 0xf3, 0xad, 0xcd, 0x3e, 0xf0}}
 
 // RegisterThreads dispatches through IMFRealTimeClient's vtable slot 3.
-func (self *IMFRealTimeClient) RegisterThreads(dwTaskIndex uint32, wszClass foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwTaskIndex), uintptr(unsafe.Pointer(wszClass)))
-	return foundation.HRESULT(r1)
+func (self *IMFRealTimeClient) RegisterThreads(dwTaskIndex uint32, wszClass string) error {
+	_wszClass := win32.UTF16Ptr(wszClass)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwTaskIndex), uintptr(unsafe.Pointer(_wszClass)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterThreads dispatches through IMFRealTimeClient's vtable slot 4.
-func (self *IMFRealTimeClient) UnregisterThreads() foundation.HRESULT {
+func (self *IMFRealTimeClient) UnregisterThreads() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWorkQueue dispatches through IMFRealTimeClient's vtable slot 5.
-func (self *IMFRealTimeClient) SetWorkQueue(dwWorkQueueId uint32) foundation.HRESULT {
+func (self *IMFRealTimeClient) SetWorkQueue(dwWorkQueueId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwWorkQueueId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFRealTimeClientEx: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfrealtimeclientex
@@ -8163,21 +8246,22 @@ type IMFRealTimeClientEx struct {
 var IID_IMFRealTimeClientEx = win32.GUID{Data1: 0x03910848, Data2: 0xab16, Data3: 0x4611, Data4: [8]byte{0xb1, 0x00, 0x17, 0xb8, 0x8a, 0xe2, 0xf2, 0x48}}
 
 // RegisterThreadsEx dispatches through IMFRealTimeClientEx's vtable slot 3.
-func (self *IMFRealTimeClientEx) RegisterThreadsEx(pdwTaskIndex *uint32, wszClassName foundation.PWSTR, lBasePriority int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwTaskIndex)), uintptr(unsafe.Pointer(wszClassName)), uintptr(lBasePriority))
-	return foundation.HRESULT(r1)
+func (self *IMFRealTimeClientEx) RegisterThreadsEx(pdwTaskIndex *uint32, wszClassName string, lBasePriority int32) error {
+	_wszClassName := win32.UTF16Ptr(wszClassName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwTaskIndex)), uintptr(unsafe.Pointer(_wszClassName)), uintptr(lBasePriority))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterThreads dispatches through IMFRealTimeClientEx's vtable slot 4.
-func (self *IMFRealTimeClientEx) UnregisterThreads() foundation.HRESULT {
+func (self *IMFRealTimeClientEx) UnregisterThreads() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWorkQueueEx dispatches through IMFRealTimeClientEx's vtable slot 5.
-func (self *IMFRealTimeClientEx) SetWorkQueueEx(dwMultithreadedWorkQueueId uint32, lWorkItemBasePriority int32) foundation.HRESULT {
+func (self *IMFRealTimeClientEx) SetWorkQueueEx(dwMultithreadedWorkQueueId uint32, lWorkItemBasePriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwMultithreadedWorkQueueId), uintptr(lWorkItemBasePriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFRelativePanelReport: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfrelativepanelreport
@@ -8190,9 +8274,9 @@ type IMFRelativePanelReport struct {
 var IID_IMFRelativePanelReport = win32.GUID{Data1: 0xf25362ea, Data2: 0x2c0e, Data3: 0x447f, Data4: [8]byte{0x81, 0xe2, 0x75, 0x59, 0x14, 0xcd, 0xc0, 0xc3}}
 
 // GetRelativePanel dispatches through IMFRelativePanelReport's vtable slot 3.
-func (self *IMFRelativePanelReport) GetRelativePanel(panel *uint32) foundation.HRESULT {
+func (self *IMFRelativePanelReport) GetRelativePanel(panel *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(panel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFRelativePanelWatcher: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfrelativepanelwatcher
@@ -8205,21 +8289,21 @@ type IMFRelativePanelWatcher struct {
 var IID_IMFRelativePanelWatcher = win32.GUID{Data1: 0x421af7f6, Data2: 0x573e, Data3: 0x4ad0, Data4: [8]byte{0x8f, 0xda, 0x2e, 0x57, 0xce, 0xdb, 0x18, 0xc6}}
 
 // BeginGetReport dispatches through IMFRelativePanelWatcher's vtable slot 5.
-func (self *IMFRelativePanelWatcher) BeginGetReport(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFRelativePanelWatcher) BeginGetReport(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndGetReport dispatches through IMFRelativePanelWatcher's vtable slot 6.
-func (self *IMFRelativePanelWatcher) EndGetReport(pResult *IMFAsyncResult, ppRelativePanelReport **IMFRelativePanelReport) foundation.HRESULT {
+func (self *IMFRelativePanelWatcher) EndGetReport(pResult *IMFAsyncResult, ppRelativePanelReport **IMFRelativePanelReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppRelativePanelReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReport dispatches through IMFRelativePanelWatcher's vtable slot 7.
-func (self *IMFRelativePanelWatcher) GetReport(ppRelativePanelReport **IMFRelativePanelReport) foundation.HRESULT {
+func (self *IMFRelativePanelWatcher) GetReport(ppRelativePanelReport **IMFRelativePanelReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRelativePanelReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFRemoteAsyncCallback: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfremoteasynccallback
@@ -8232,9 +8316,9 @@ type IMFRemoteAsyncCallback struct {
 var IID_IMFRemoteAsyncCallback = win32.GUID{Data1: 0xa27003d0, Data2: 0x2354, Data3: 0x4f2a, Data4: [8]byte{0x8d, 0x6a, 0xab, 0x7c, 0xff, 0x15, 0x43, 0x7e}}
 
 // Invoke dispatches through IMFRemoteAsyncCallback's vtable slot 3.
-func (self *IMFRemoteAsyncCallback) Invoke(hr foundation.HRESULT, pRemoteResult *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFRemoteAsyncCallback) Invoke(hr foundation.HRESULT, pRemoteResult *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(unsafe.Pointer(pRemoteResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFRemoteDesktopPlugin: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfremotedesktopplugin
@@ -8247,9 +8331,9 @@ type IMFRemoteDesktopPlugin struct {
 var IID_IMFRemoteDesktopPlugin = win32.GUID{Data1: 0x1cde6309, Data2: 0xcae0, Data3: 0x4940, Data4: [8]byte{0x90, 0x7e, 0xc1, 0xec, 0x9c, 0x3d, 0x1d, 0x4a}}
 
 // UpdateTopology dispatches through IMFRemoteDesktopPlugin's vtable slot 3.
-func (self *IMFRemoteDesktopPlugin) UpdateTopology(pTopology *IMFTopology) foundation.HRESULT {
+func (self *IMFRemoteDesktopPlugin) UpdateTopology(pTopology *IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTopology)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFRemoteProxy: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfremoteproxy
@@ -8262,15 +8346,15 @@ type IMFRemoteProxy struct {
 var IID_IMFRemoteProxy = win32.GUID{Data1: 0x994e23ad, Data2: 0x1cc2, Data3: 0x493c, Data4: [8]byte{0xb9, 0xfa, 0x46, 0xf1, 0xcb, 0x04, 0x0f, 0xa4}}
 
 // GetRemoteObject dispatches through IMFRemoteProxy's vtable slot 3.
-func (self *IMFRemoteProxy) GetRemoteObject(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFRemoteProxy) GetRemoteObject(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRemoteHost dispatches through IMFRemoteProxy's vtable slot 4.
-func (self *IMFRemoteProxy) GetRemoteHost(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFRemoteProxy) GetRemoteHost(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSAMIStyle: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsamistyle
@@ -8283,27 +8367,28 @@ type IMFSAMIStyle struct {
 var IID_IMFSAMIStyle = win32.GUID{Data1: 0xa7e025dd, Data2: 0x5303, Data3: 0x4a62, Data4: [8]byte{0x89, 0xd6, 0xe7, 0x47, 0xe1, 0xef, 0xac, 0x73}}
 
 // GetStyleCount dispatches through IMFSAMIStyle's vtable slot 3.
-func (self *IMFSAMIStyle) GetStyleCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IMFSAMIStyle) GetStyleCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStyles dispatches through IMFSAMIStyle's vtable slot 4.
-func (self *IMFSAMIStyle) GetStyles(pPropVarStyleArray *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFSAMIStyle) GetStyles(pPropVarStyleArray *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropVarStyleArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSelectedStyle dispatches through IMFSAMIStyle's vtable slot 5.
-func (self *IMFSAMIStyle) SetSelectedStyle(pwszStyle foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszStyle)))
-	return foundation.HRESULT(r1)
+func (self *IMFSAMIStyle) SetSelectedStyle(pwszStyle string) error {
+	_pwszStyle := win32.UTF16Ptr(pwszStyle)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszStyle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSelectedStyle dispatches through IMFSAMIStyle's vtable slot 6.
-func (self *IMFSAMIStyle) GetSelectedStyle(ppwszStyle *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFSAMIStyle) GetSelectedStyle(ppwszStyle *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszStyle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSSLCertificateManager: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsslcertificatemanager
@@ -8316,33 +8401,37 @@ type IMFSSLCertificateManager struct {
 var IID_IMFSSLCertificateManager = win32.GUID{Data1: 0x61f7d887, Data2: 0x1230, Data3: 0x4a8b, Data4: [8]byte{0xae, 0xba, 0x8a, 0xd4, 0x34, 0xd1, 0xa6, 0x4d}}
 
 // GetClientCertificate dispatches through IMFSSLCertificateManager's vtable slot 3.
-func (self *IMFSSLCertificateManager) GetClientCertificate(pszURL foundation.PWSTR, ppbData **byte, pcbData *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(ppbData)), uintptr(unsafe.Pointer(pcbData)))
-	return foundation.HRESULT(r1)
+func (self *IMFSSLCertificateManager) GetClientCertificate(pszURL string, ppbData **byte, pcbData *uint32) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(ppbData)), uintptr(unsafe.Pointer(pcbData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginGetClientCertificate dispatches through IMFSSLCertificateManager's vtable slot 4.
-func (self *IMFSSLCertificateManager) BeginGetClientCertificate(pszURL foundation.PWSTR, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+func (self *IMFSSLCertificateManager) BeginGetClientCertificate(pszURL string, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndGetClientCertificate dispatches through IMFSSLCertificateManager's vtable slot 5.
-func (self *IMFSSLCertificateManager) EndGetClientCertificate(pResult *IMFAsyncResult, ppbData **byte, pcbData *uint32) foundation.HRESULT {
+func (self *IMFSSLCertificateManager) EndGetClientCertificate(pResult *IMFAsyncResult, ppbData **byte, pcbData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppbData)), uintptr(unsafe.Pointer(pcbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCertificatePolicy dispatches through IMFSSLCertificateManager's vtable slot 6.
-func (self *IMFSSLCertificateManager) GetCertificatePolicy(pszURL foundation.PWSTR, pfOverrideAutomaticCheck *foundation.BOOL, pfClientCertificateAvailable *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pfOverrideAutomaticCheck)), uintptr(unsafe.Pointer(pfClientCertificateAvailable)))
-	return foundation.HRESULT(r1)
+func (self *IMFSSLCertificateManager) GetCertificatePolicy(pszURL string, pfOverrideAutomaticCheck *foundation.BOOL, pfClientCertificateAvailable *foundation.BOOL) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(pfOverrideAutomaticCheck)), uintptr(unsafe.Pointer(pfClientCertificateAvailable)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnServerCertificate dispatches through IMFSSLCertificateManager's vtable slot 7.
-func (self *IMFSSLCertificateManager) OnServerCertificate(pszURL foundation.PWSTR, pbData *byte, cbData uint32, pfIsGood *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pbData)), uintptr(cbData), uintptr(unsafe.Pointer(pfIsGood)))
-	return foundation.HRESULT(r1)
+func (self *IMFSSLCertificateManager) OnServerCertificate(pszURL string, pbData *byte, cbData uint32, pfIsGood *foundation.BOOL) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(pbData)), uintptr(cbData), uintptr(unsafe.Pointer(pfIsGood)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSample: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfsample
@@ -8355,87 +8444,87 @@ type IMFSample struct {
 var IID_IMFSample = win32.GUID{Data1: 0xc40a00f2, Data2: 0xb93a, Data3: 0x4d80, Data4: [8]byte{0xae, 0x8c, 0x5a, 0x1c, 0x63, 0x4f, 0x58, 0xe4}}
 
 // GetSampleFlags dispatches through IMFSample's vtable slot 33.
-func (self *IMFSample) GetSampleFlags(pdwSampleFlags *uint32) foundation.HRESULT {
+func (self *IMFSample) GetSampleFlags(pdwSampleFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSampleFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSampleFlags dispatches through IMFSample's vtable slot 34.
-func (self *IMFSample) SetSampleFlags(dwSampleFlags uint32) foundation.HRESULT {
+func (self *IMFSample) SetSampleFlags(dwSampleFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(dwSampleFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSampleTime dispatches through IMFSample's vtable slot 35.
-func (self *IMFSample) GetSampleTime(phnsSampleTime *int64) foundation.HRESULT {
+func (self *IMFSample) GetSampleTime(phnsSampleTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phnsSampleTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSampleTime dispatches through IMFSample's vtable slot 36.
-func (self *IMFSample) SetSampleTime(hnsSampleTime int64) foundation.HRESULT {
+func (self *IMFSample) SetSampleTime(hnsSampleTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(hnsSampleTime))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSampleDuration dispatches through IMFSample's vtable slot 37.
-func (self *IMFSample) GetSampleDuration(phnsSampleDuration *int64) foundation.HRESULT {
+func (self *IMFSample) GetSampleDuration(phnsSampleDuration *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phnsSampleDuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSampleDuration dispatches through IMFSample's vtable slot 38.
-func (self *IMFSample) SetSampleDuration(hnsSampleDuration int64) foundation.HRESULT {
+func (self *IMFSample) SetSampleDuration(hnsSampleDuration int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(hnsSampleDuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferCount dispatches through IMFSample's vtable slot 39.
-func (self *IMFSample) GetBufferCount(pdwBufferCount *uint32) foundation.HRESULT {
+func (self *IMFSample) GetBufferCount(pdwBufferCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwBufferCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferByIndex dispatches through IMFSample's vtable slot 40.
-func (self *IMFSample) GetBufferByIndex(dwIndex uint32, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
+func (self *IMFSample) GetBufferByIndex(dwIndex uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertToContiguousBuffer dispatches through IMFSample's vtable slot 41.
-func (self *IMFSample) ConvertToContiguousBuffer(ppBuffer **IMFMediaBuffer) foundation.HRESULT {
+func (self *IMFSample) ConvertToContiguousBuffer(ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddBuffer dispatches through IMFSample's vtable slot 42.
-func (self *IMFSample) AddBuffer(pBuffer *IMFMediaBuffer) foundation.HRESULT {
+func (self *IMFSample) AddBuffer(pBuffer *IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveBufferByIndex dispatches through IMFSample's vtable slot 43.
-func (self *IMFSample) RemoveBufferByIndex(dwIndex uint32) foundation.HRESULT {
+func (self *IMFSample) RemoveBufferByIndex(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllBuffers dispatches through IMFSample's vtable slot 44.
-func (self *IMFSample) RemoveAllBuffers() foundation.HRESULT {
+func (self *IMFSample) RemoveAllBuffers() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTotalLength dispatches through IMFSample's vtable slot 45.
-func (self *IMFSample) GetTotalLength(pcbTotalLength *uint32) foundation.HRESULT {
+func (self *IMFSample) GetTotalLength(pcbTotalLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbTotalLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyToBuffer dispatches through IMFSample's vtable slot 46.
-func (self *IMFSample) CopyToBuffer(pBuffer *IMFMediaBuffer) foundation.HRESULT {
+func (self *IMFSample) CopyToBuffer(pBuffer *IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSampleAllocatorControl: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsampleallocatorcontrol
@@ -8448,15 +8537,15 @@ type IMFSampleAllocatorControl struct {
 var IID_IMFSampleAllocatorControl = win32.GUID{Data1: 0xda62b958, Data2: 0x3a38, Data3: 0x4a97, Data4: [8]byte{0xbd, 0x27, 0x14, 0x9c, 0x64, 0x0c, 0x07, 0x71}}
 
 // SetDefaultAllocator dispatches through IMFSampleAllocatorControl's vtable slot 3.
-func (self *IMFSampleAllocatorControl) SetDefaultAllocator(dwOutputStreamID uint32, pAllocator *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSampleAllocatorControl) SetDefaultAllocator(dwOutputStreamID uint32, pAllocator *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(unsafe.Pointer(pAllocator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllocatorUsage dispatches through IMFSampleAllocatorControl's vtable slot 4.
-func (self *IMFSampleAllocatorControl) GetAllocatorUsage(dwOutputStreamID uint32, pdwInputStreamID *uint32, peUsage *MFSampleAllocatorUsage) foundation.HRESULT {
+func (self *IMFSampleAllocatorControl) GetAllocatorUsage(dwOutputStreamID uint32, pdwInputStreamID *uint32, peUsage *MFSampleAllocatorUsage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(unsafe.Pointer(pdwInputStreamID)), uintptr(unsafe.Pointer(peUsage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSampleGrabberSinkCallback: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsamplegrabbersinkcallback
@@ -8469,21 +8558,21 @@ type IMFSampleGrabberSinkCallback struct {
 var IID_IMFSampleGrabberSinkCallback = win32.GUID{Data1: 0x8c7b80bf, Data2: 0xee42, Data3: 0x4b59, Data4: [8]byte{0xb1, 0xdf, 0x55, 0x66, 0x8e, 0x1b, 0xdc, 0xa8}}
 
 // OnSetPresentationClock dispatches through IMFSampleGrabberSinkCallback's vtable slot 8.
-func (self *IMFSampleGrabberSinkCallback) OnSetPresentationClock(pPresentationClock *IMFPresentationClock) foundation.HRESULT {
+func (self *IMFSampleGrabberSinkCallback) OnSetPresentationClock(pPresentationClock *IMFPresentationClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnProcessSample dispatches through IMFSampleGrabberSinkCallback's vtable slot 9.
-func (self *IMFSampleGrabberSinkCallback) OnProcessSample(guidMajorMediaType *win32.GUID, dwSampleFlags uint32, llSampleTime int64, llSampleDuration int64, pSampleBuffer *byte, dwSampleSize uint32) foundation.HRESULT {
+func (self *IMFSampleGrabberSinkCallback) OnProcessSample(guidMajorMediaType *win32.GUID, dwSampleFlags uint32, llSampleTime int64, llSampleDuration int64, pSampleBuffer *byte, dwSampleSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidMajorMediaType)), uintptr(dwSampleFlags), uintptr(llSampleTime), uintptr(llSampleDuration), uintptr(unsafe.Pointer(pSampleBuffer)), uintptr(dwSampleSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnShutdown dispatches through IMFSampleGrabberSinkCallback's vtable slot 10.
-func (self *IMFSampleGrabberSinkCallback) OnShutdown() foundation.HRESULT {
+func (self *IMFSampleGrabberSinkCallback) OnShutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSampleGrabberSinkCallback2: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsamplegrabbersinkcallback2
@@ -8496,9 +8585,9 @@ type IMFSampleGrabberSinkCallback2 struct {
 var IID_IMFSampleGrabberSinkCallback2 = win32.GUID{Data1: 0xca86aa50, Data2: 0xc46e, Data3: 0x429e, Data4: [8]byte{0xab, 0x27, 0x16, 0xd6, 0xac, 0x68, 0x44, 0xcb}}
 
 // OnProcessSampleEx dispatches through IMFSampleGrabberSinkCallback2's vtable slot 11.
-func (self *IMFSampleGrabberSinkCallback2) OnProcessSampleEx(guidMajorMediaType *win32.GUID, dwSampleFlags uint32, llSampleTime int64, llSampleDuration int64, pSampleBuffer *byte, dwSampleSize uint32, pAttributes *IMFAttributes) foundation.HRESULT {
+func (self *IMFSampleGrabberSinkCallback2) OnProcessSampleEx(guidMajorMediaType *win32.GUID, dwSampleFlags uint32, llSampleTime int64, llSampleDuration int64, pSampleBuffer *byte, dwSampleSize uint32, pAttributes *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidMajorMediaType)), uintptr(dwSampleFlags), uintptr(llSampleTime), uintptr(llSampleDuration), uintptr(unsafe.Pointer(pSampleBuffer)), uintptr(dwSampleSize), uintptr(unsafe.Pointer(pAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSampleOutputStream: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfsampleoutputstream
@@ -8511,21 +8600,21 @@ type IMFSampleOutputStream struct {
 var IID_IMFSampleOutputStream = win32.GUID{Data1: 0x8feed468, Data2: 0x6f7e, Data3: 0x440d, Data4: [8]byte{0x86, 0x9a, 0x49, 0xbd, 0xd2, 0x83, 0xad, 0x0d}}
 
 // BeginWriteSample dispatches through IMFSampleOutputStream's vtable slot 3.
-func (self *IMFSampleOutputStream) BeginWriteSample(pSample *IMFSample, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSampleOutputStream) BeginWriteSample(pSample *IMFSample, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndWriteSample dispatches through IMFSampleOutputStream's vtable slot 4.
-func (self *IMFSampleOutputStream) EndWriteSample(pResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFSampleOutputStream) EndWriteSample(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IMFSampleOutputStream's vtable slot 5.
-func (self *IMFSampleOutputStream) Close() foundation.HRESULT {
+func (self *IMFSampleOutputStream) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSampleProtection: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsampleprotection
@@ -8538,33 +8627,33 @@ type IMFSampleProtection struct {
 var IID_IMFSampleProtection = win32.GUID{Data1: 0x8e36395f, Data2: 0xc7b9, Data3: 0x43c4, Data4: [8]byte{0xa5, 0x4d, 0x51, 0x2b, 0x4a, 0xf6, 0x3c, 0x95}}
 
 // GetInputProtectionVersion dispatches through IMFSampleProtection's vtable slot 3.
-func (self *IMFSampleProtection) GetInputProtectionVersion(pdwVersion *uint32) foundation.HRESULT {
+func (self *IMFSampleProtection) GetInputProtectionVersion(pdwVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputProtectionVersion dispatches through IMFSampleProtection's vtable slot 4.
-func (self *IMFSampleProtection) GetOutputProtectionVersion(pdwVersion *uint32) foundation.HRESULT {
+func (self *IMFSampleProtection) GetOutputProtectionVersion(pdwVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProtectionCertificate dispatches through IMFSampleProtection's vtable slot 5.
-func (self *IMFSampleProtection) GetProtectionCertificate(dwVersion uint32, ppCert **byte, pcbCert *uint32) foundation.HRESULT {
+func (self *IMFSampleProtection) GetProtectionCertificate(dwVersion uint32, ppCert **byte, pcbCert *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwVersion), uintptr(unsafe.Pointer(ppCert)), uintptr(unsafe.Pointer(pcbCert)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitOutputProtection dispatches through IMFSampleProtection's vtable slot 6.
-func (self *IMFSampleProtection) InitOutputProtection(dwVersion uint32, dwOutputId uint32, pbCert *byte, cbCert uint32, ppbSeed **byte, pcbSeed *uint32) foundation.HRESULT {
+func (self *IMFSampleProtection) InitOutputProtection(dwVersion uint32, dwOutputId uint32, pbCert *byte, cbCert uint32, ppbSeed **byte, pcbSeed *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwVersion), uintptr(dwOutputId), uintptr(unsafe.Pointer(pbCert)), uintptr(cbCert), uintptr(unsafe.Pointer(ppbSeed)), uintptr(unsafe.Pointer(pcbSeed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitInputProtection dispatches through IMFSampleProtection's vtable slot 7.
-func (self *IMFSampleProtection) InitInputProtection(dwVersion uint32, dwInputId uint32, pbSeed *byte, cbSeed uint32) foundation.HRESULT {
+func (self *IMFSampleProtection) InitInputProtection(dwVersion uint32, dwInputId uint32, pbSeed *byte, cbSeed uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwVersion), uintptr(dwInputId), uintptr(unsafe.Pointer(pbSeed)), uintptr(cbSeed))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSaveJob: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsavejob
@@ -8577,27 +8666,27 @@ type IMFSaveJob struct {
 var IID_IMFSaveJob = win32.GUID{Data1: 0xe9931663, Data2: 0x80bf, Data3: 0x4c6e, Data4: [8]byte{0x98, 0xaf, 0x5d, 0xcf, 0x58, 0x74, 0x7d, 0x1f}}
 
 // BeginSave dispatches through IMFSaveJob's vtable slot 3.
-func (self *IMFSaveJob) BeginSave(pStream *IMFByteStream, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSaveJob) BeginSave(pStream *IMFByteStream, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndSave dispatches through IMFSaveJob's vtable slot 4.
-func (self *IMFSaveJob) EndSave(pResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFSaveJob) EndSave(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelSave dispatches through IMFSaveJob's vtable slot 5.
-func (self *IMFSaveJob) CancelSave() foundation.HRESULT {
+func (self *IMFSaveJob) CancelSave() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProgress dispatches through IMFSaveJob's vtable slot 6.
-func (self *IMFSaveJob) GetProgress(pdwPercentComplete *uint32) foundation.HRESULT {
+func (self *IMFSaveJob) GetProgress(pdwPercentComplete *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPercentComplete)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSchemeHandler: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfschemehandler
@@ -8610,21 +8699,22 @@ type IMFSchemeHandler struct {
 var IID_IMFSchemeHandler = win32.GUID{Data1: 0x6d4c7b74, Data2: 0x52a0, Data3: 0x4bb7, Data4: [8]byte{0xb0, 0xdb, 0x55, 0xf2, 0x9f, 0x47, 0xa6, 0x68}}
 
 // BeginCreateObject dispatches through IMFSchemeHandler's vtable slot 3.
-func (self *IMFSchemeHandler) BeginCreateObject(pwszURL foundation.PWSTR, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(ppIUnknownCancelCookie)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+func (self *IMFSchemeHandler) BeginCreateObject(pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(ppIUnknownCancelCookie)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndCreateObject dispatches through IMFSchemeHandler's vtable slot 4.
-func (self *IMFSchemeHandler) EndCreateObject(pResult *IMFAsyncResult, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSchemeHandler) EndCreateObject(pResult *IMFAsyncResult, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pObjectType)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelObjectCreation dispatches through IMFSchemeHandler's vtable slot 5.
-func (self *IMFSchemeHandler) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSchemeHandler) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIUnknownCancelCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c1209904-e584-4752-a2d6-7f21693f8b21
@@ -8636,9 +8726,9 @@ type IMFSecureBuffer struct {
 var IID_IMFSecureBuffer = win32.GUID{Data1: 0xc1209904, Data2: 0xe584, Data3: 0x4752, Data4: [8]byte{0xa2, 0xd6, 0x7f, 0x21, 0x69, 0x3f, 0x8b, 0x21}}
 
 // GetIdentifier dispatches through IMFSecureBuffer's vtable slot 3.
-func (self *IMFSecureBuffer) GetIdentifier(pGuidIdentifier *win32.GUID) foundation.HRESULT {
+func (self *IMFSecureBuffer) GetIdentifier(pGuidIdentifier *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuidIdentifier)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSecureChannel: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsecurechannel
@@ -8651,15 +8741,15 @@ type IMFSecureChannel struct {
 var IID_IMFSecureChannel = win32.GUID{Data1: 0xd0ae555d, Data2: 0x3b12, Data3: 0x4d97, Data4: [8]byte{0xb0, 0x60, 0x09, 0x90, 0xbc, 0x5a, 0xeb, 0x67}}
 
 // GetCertificate dispatches through IMFSecureChannel's vtable slot 3.
-func (self *IMFSecureChannel) GetCertificate(ppCert **byte, pcbCert *uint32) foundation.HRESULT {
+func (self *IMFSecureChannel) GetCertificate(ppCert **byte, pcbCert *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCert)), uintptr(unsafe.Pointer(pcbCert)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetupSession dispatches through IMFSecureChannel's vtable slot 4.
-func (self *IMFSecureChannel) SetupSession(pbEncryptedSessionKey *byte, cbSessionKey uint32) foundation.HRESULT {
+func (self *IMFSecureChannel) SetupSession(pbEncryptedSessionKey *byte, cbSessionKey uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEncryptedSessionKey)), uintptr(cbSessionKey))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSeekInfo: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfseekinfo
@@ -8672,9 +8762,9 @@ type IMFSeekInfo struct {
 var IID_IMFSeekInfo = win32.GUID{Data1: 0x26afea53, Data2: 0xd9ed, Data3: 0x42b5, Data4: [8]byte{0xab, 0x80, 0xe6, 0x4f, 0x9e, 0xe3, 0x47, 0x79}}
 
 // GetNearestKeyFrames dispatches through IMFSeekInfo's vtable slot 3.
-func (self *IMFSeekInfo) GetNearestKeyFrames(pguidTimeFormat *win32.GUID, pvarStartPosition *systemcomstructuredstorage.PROPVARIANT, pvarPreviousKeyFrame *systemcomstructuredstorage.PROPVARIANT, pvarNextKeyFrame *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFSeekInfo) GetNearestKeyFrames(pguidTimeFormat *win32.GUID, pvarStartPosition *systemcomstructuredstorage.PROPVARIANT, pvarPreviousKeyFrame *systemcomstructuredstorage.PROPVARIANT, pvarNextKeyFrame *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidTimeFormat)), uintptr(unsafe.Pointer(pvarStartPosition)), uintptr(unsafe.Pointer(pvarPreviousKeyFrame)), uintptr(unsafe.Pointer(pvarNextKeyFrame)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorActivitiesReport: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensoractivitiesreport
@@ -8687,21 +8777,22 @@ type IMFSensorActivitiesReport struct {
 var IID_IMFSensorActivitiesReport = win32.GUID{Data1: 0x683f7a5e, Data2: 0x4a19, Data3: 0x43cd, Data4: [8]byte{0xb1, 0xa9, 0xdb, 0xf4, 0xab, 0x3f, 0x77, 0x77}}
 
 // GetCount dispatches through IMFSensorActivitiesReport's vtable slot 3.
-func (self *IMFSensorActivitiesReport) GetCount(pcCount *uint32) foundation.HRESULT {
+func (self *IMFSensorActivitiesReport) GetCount(pcCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetActivityReport dispatches through IMFSensorActivitiesReport's vtable slot 4.
-func (self *IMFSensorActivitiesReport) GetActivityReport(Index uint32, sensorActivityReport **IMFSensorActivityReport) foundation.HRESULT {
+func (self *IMFSensorActivitiesReport) GetActivityReport(Index uint32, sensorActivityReport **IMFSensorActivityReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(sensorActivityReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetActivityReportByDeviceName dispatches through IMFSensorActivitiesReport's vtable slot 5.
-func (self *IMFSensorActivitiesReport) GetActivityReportByDeviceName(SymbolicName foundation.PWSTR, sensorActivityReport **IMFSensorActivityReport) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SymbolicName)), uintptr(unsafe.Pointer(sensorActivityReport)))
-	return foundation.HRESULT(r1)
+func (self *IMFSensorActivitiesReport) GetActivityReportByDeviceName(SymbolicName string, sensorActivityReport **IMFSensorActivityReport) error {
+	_SymbolicName := win32.UTF16Ptr(SymbolicName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SymbolicName)), uintptr(unsafe.Pointer(sensorActivityReport)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorActivitiesReportCallback: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensoractivitiesreportcallback
@@ -8714,9 +8805,9 @@ type IMFSensorActivitiesReportCallback struct {
 var IID_IMFSensorActivitiesReportCallback = win32.GUID{Data1: 0xde5072ee, Data2: 0xdbe3, Data3: 0x46dc, Data4: [8]byte{0x8a, 0x87, 0xb6, 0xf6, 0x31, 0x19, 0x47, 0x51}}
 
 // OnActivitiesReport dispatches through IMFSensorActivitiesReportCallback's vtable slot 3.
-func (self *IMFSensorActivitiesReportCallback) OnActivitiesReport(sensorActivitiesReport *IMFSensorActivitiesReport) foundation.HRESULT {
+func (self *IMFSensorActivitiesReportCallback) OnActivitiesReport(sensorActivitiesReport *IMFSensorActivitiesReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sensorActivitiesReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorActivityMonitor: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensoractivitymonitor
@@ -8729,15 +8820,15 @@ type IMFSensorActivityMonitor struct {
 var IID_IMFSensorActivityMonitor = win32.GUID{Data1: 0xd0cef145, Data2: 0xb3f4, Data3: 0x4340, Data4: [8]byte{0xa2, 0xe5, 0x7a, 0x50, 0x80, 0xca, 0x05, 0xcb}}
 
 // Start dispatches through IMFSensorActivityMonitor's vtable slot 3.
-func (self *IMFSensorActivityMonitor) Start() foundation.HRESULT {
+func (self *IMFSensorActivityMonitor) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IMFSensorActivityMonitor's vtable slot 4.
-func (self *IMFSensorActivityMonitor) Stop() foundation.HRESULT {
+func (self *IMFSensorActivityMonitor) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorActivityReport: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensoractivityreport
@@ -8750,27 +8841,27 @@ type IMFSensorActivityReport struct {
 var IID_IMFSensorActivityReport = win32.GUID{Data1: 0x3e8c4be1, Data2: 0xa8c2, Data3: 0x4528, Data4: [8]byte{0x90, 0xde, 0x28, 0x51, 0xbd, 0xe5, 0xfe, 0xad}}
 
 // GetFriendlyName dispatches through IMFSensorActivityReport's vtable slot 3.
-func (self *IMFSensorActivityReport) GetFriendlyName(FriendlyName foundation.PWSTR, cchFriendlyName uint32, pcchWritten *uint32) foundation.HRESULT {
+func (self *IMFSensorActivityReport) GetFriendlyName(FriendlyName foundation.PWSTR, cchFriendlyName uint32, pcchWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FriendlyName)), uintptr(cchFriendlyName), uintptr(unsafe.Pointer(pcchWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolicLink dispatches through IMFSensorActivityReport's vtable slot 4.
-func (self *IMFSensorActivityReport) GetSymbolicLink(SymbolicLink foundation.PWSTR, cchSymbolicLink uint32, pcchWritten *uint32) foundation.HRESULT {
+func (self *IMFSensorActivityReport) GetSymbolicLink(SymbolicLink foundation.PWSTR, cchSymbolicLink uint32, pcchWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SymbolicLink)), uintptr(cchSymbolicLink), uintptr(unsafe.Pointer(pcchWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProcessCount dispatches through IMFSensorActivityReport's vtable slot 5.
-func (self *IMFSensorActivityReport) GetProcessCount(pcCount *uint32) foundation.HRESULT {
+func (self *IMFSensorActivityReport) GetProcessCount(pcCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProcessActivity dispatches through IMFSensorActivityReport's vtable slot 6.
-func (self *IMFSensorActivityReport) GetProcessActivity(Index uint32, ppProcessActivity **IMFSensorProcessActivity) foundation.HRESULT {
+func (self *IMFSensorActivityReport) GetProcessActivity(Index uint32, ppProcessActivity **IMFSensorProcessActivity) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppProcessActivity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorDevice: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensordevice
@@ -8783,57 +8874,57 @@ type IMFSensorDevice struct {
 var IID_IMFSensorDevice = win32.GUID{Data1: 0xfb9f48f2, Data2: 0x2a18, Data3: 0x4e28, Data4: [8]byte{0x97, 0x30, 0x78, 0x6f, 0x30, 0xf0, 0x4d, 0xc4}}
 
 // GetDeviceId dispatches through IMFSensorDevice's vtable slot 3.
-func (self *IMFSensorDevice) GetDeviceId(pDeviceId *uint64) foundation.HRESULT {
+func (self *IMFSensorDevice) GetDeviceId(pDeviceId *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceType dispatches through IMFSensorDevice's vtable slot 4.
-func (self *IMFSensorDevice) GetDeviceType(pType *MFSensorDeviceType) foundation.HRESULT {
+func (self *IMFSensorDevice) GetDeviceType(pType *MFSensorDeviceType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IMFSensorDevice's vtable slot 5.
-func (self *IMFSensorDevice) GetFlags(pFlags *uint64) foundation.HRESULT {
+func (self *IMFSensorDevice) GetFlags(pFlags *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolicLink dispatches through IMFSensorDevice's vtable slot 6.
-func (self *IMFSensorDevice) GetSymbolicLink(SymbolicLink foundation.PWSTR, cchSymbolicLink int32, pcchWritten *int32) foundation.HRESULT {
+func (self *IMFSensorDevice) GetSymbolicLink(SymbolicLink foundation.PWSTR, cchSymbolicLink int32, pcchWritten *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SymbolicLink)), uintptr(cchSymbolicLink), uintptr(unsafe.Pointer(pcchWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceAttributes dispatches through IMFSensorDevice's vtable slot 7.
-func (self *IMFSensorDevice) GetDeviceAttributes(ppAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFSensorDevice) GetDeviceAttributes(ppAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamAttributesCount dispatches through IMFSensorDevice's vtable slot 8.
-func (self *IMFSensorDevice) GetStreamAttributesCount(eType MFSensorStreamType, pdwCount *uint32) foundation.HRESULT {
+func (self *IMFSensorDevice) GetStreamAttributesCount(eType MFSensorStreamType, pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(eType), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamAttributes dispatches through IMFSensorDevice's vtable slot 9.
-func (self *IMFSensorDevice) GetStreamAttributes(eType MFSensorStreamType, dwIndex uint32, ppAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFSensorDevice) GetStreamAttributes(eType MFSensorStreamType, dwIndex uint32, ppAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(eType), uintptr(dwIndex), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSensorDeviceMode dispatches through IMFSensorDevice's vtable slot 10.
-func (self *IMFSensorDevice) SetSensorDeviceMode(eMode MFSensorDeviceMode) foundation.HRESULT {
+func (self *IMFSensorDevice) SetSensorDeviceMode(eMode MFSensorDeviceMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(eMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSensorDeviceMode dispatches through IMFSensorDevice's vtable slot 11.
-func (self *IMFSensorDevice) GetSensorDeviceMode(peMode *MFSensorDeviceMode) foundation.HRESULT {
+func (self *IMFSensorDevice) GetSensorDeviceMode(peMode *MFSensorDeviceMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorGroup: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensorgroup
@@ -8846,51 +8937,51 @@ type IMFSensorGroup struct {
 var IID_IMFSensorGroup = win32.GUID{Data1: 0x4110243a, Data2: 0x9757, Data3: 0x461f, Data4: [8]byte{0x89, 0xf1, 0xf2, 0x23, 0x45, 0xbc, 0xab, 0x4e}}
 
 // GetSymbolicLink dispatches through IMFSensorGroup's vtable slot 3.
-func (self *IMFSensorGroup) GetSymbolicLink(SymbolicLink foundation.PWSTR, cchSymbolicLink int32, pcchWritten *int32) foundation.HRESULT {
+func (self *IMFSensorGroup) GetSymbolicLink(SymbolicLink foundation.PWSTR, cchSymbolicLink int32, pcchWritten *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SymbolicLink)), uintptr(cchSymbolicLink), uintptr(unsafe.Pointer(pcchWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IMFSensorGroup's vtable slot 4.
-func (self *IMFSensorGroup) GetFlags(pFlags *uint64) foundation.HRESULT {
+func (self *IMFSensorGroup) GetFlags(pFlags *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSensorGroupAttributes dispatches through IMFSensorGroup's vtable slot 5.
-func (self *IMFSensorGroup) GetSensorGroupAttributes(ppAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFSensorGroup) GetSensorGroupAttributes(ppAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSensorDeviceCount dispatches through IMFSensorGroup's vtable slot 6.
-func (self *IMFSensorGroup) GetSensorDeviceCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IMFSensorGroup) GetSensorDeviceCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSensorDevice dispatches through IMFSensorGroup's vtable slot 7.
-func (self *IMFSensorGroup) GetSensorDevice(dwIndex uint32, ppDevice **IMFSensorDevice) foundation.HRESULT {
+func (self *IMFSensorGroup) GetSensorDevice(dwIndex uint32, ppDevice **IMFSensorDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDefaultSensorDeviceIndex dispatches through IMFSensorGroup's vtable slot 8.
-func (self *IMFSensorGroup) SetDefaultSensorDeviceIndex(dwIndex uint32) foundation.HRESULT {
+func (self *IMFSensorGroup) SetDefaultSensorDeviceIndex(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultSensorDeviceIndex dispatches through IMFSensorGroup's vtable slot 9.
-func (self *IMFSensorGroup) GetDefaultSensorDeviceIndex(pdwIndex *uint32) foundation.HRESULT {
+func (self *IMFSensorGroup) GetDefaultSensorDeviceIndex(pdwIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMediaSource dispatches through IMFSensorGroup's vtable slot 10.
-func (self *IMFSensorGroup) CreateMediaSource(ppSource **IMFMediaSource) foundation.HRESULT {
+func (self *IMFSensorGroup) CreateMediaSource(ppSource **IMFMediaSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorProcessActivity: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensorprocessactivity
@@ -8903,27 +8994,27 @@ type IMFSensorProcessActivity struct {
 var IID_IMFSensorProcessActivity = win32.GUID{Data1: 0x39dc7f4a, Data2: 0xb141, Data3: 0x4719, Data4: [8]byte{0x81, 0x3c, 0xa7, 0xf4, 0x61, 0x62, 0xa2, 0xb8}}
 
 // GetProcessId dispatches through IMFSensorProcessActivity's vtable slot 3.
-func (self *IMFSensorProcessActivity) GetProcessId(pPID *uint32) foundation.HRESULT {
+func (self *IMFSensorProcessActivity) GetProcessId(pPID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamingState dispatches through IMFSensorProcessActivity's vtable slot 4.
-func (self *IMFSensorProcessActivity) GetStreamingState(pfStreaming *foundation.BOOL) foundation.HRESULT {
+func (self *IMFSensorProcessActivity) GetStreamingState(pfStreaming *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfStreaming)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamingMode dispatches through IMFSensorProcessActivity's vtable slot 5.
-func (self *IMFSensorProcessActivity) GetStreamingMode(pMode *MFSensorDeviceMode) foundation.HRESULT {
+func (self *IMFSensorProcessActivity) GetStreamingMode(pMode *MFSensorDeviceMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReportTime dispatches through IMFSensorProcessActivity's vtable slot 6.
-func (self *IMFSensorProcessActivity) GetReportTime(pft *foundation.FILETIME) foundation.HRESULT {
+func (self *IMFSensorProcessActivity) GetReportTime(pft *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pft)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorProfile: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensorprofile
@@ -8936,27 +9027,29 @@ type IMFSensorProfile struct {
 var IID_IMFSensorProfile = win32.GUID{Data1: 0x22f765d1, Data2: 0x8dab, Data3: 0x4107, Data4: [8]byte{0x84, 0x6d, 0x56, 0xba, 0xf7, 0x22, 0x15, 0xe7}}
 
 // GetProfileId dispatches through IMFSensorProfile's vtable slot 3.
-func (self *IMFSensorProfile) GetProfileId(pId *SENSORPROFILEID) foundation.HRESULT {
+func (self *IMFSensorProfile) GetProfileId(pId *SENSORPROFILEID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddProfileFilter dispatches through IMFSensorProfile's vtable slot 4.
-func (self *IMFSensorProfile) AddProfileFilter(StreamId uint32, wzFilterSetString foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(StreamId), uintptr(unsafe.Pointer(wzFilterSetString)))
-	return foundation.HRESULT(r1)
+func (self *IMFSensorProfile) AddProfileFilter(StreamId uint32, wzFilterSetString string) error {
+	_wzFilterSetString := win32.UTF16Ptr(wzFilterSetString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(StreamId), uintptr(unsafe.Pointer(_wzFilterSetString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsMediaTypeSupported dispatches through IMFSensorProfile's vtable slot 5.
-func (self *IMFSensorProfile) IsMediaTypeSupported(StreamId uint32, pMediaType *IMFMediaType, pfSupported *foundation.BOOL) foundation.HRESULT {
+func (self *IMFSensorProfile) IsMediaTypeSupported(StreamId uint32, pMediaType *IMFMediaType, pfSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(StreamId), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(pfSupported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddBlockedControl dispatches through IMFSensorProfile's vtable slot 6.
-func (self *IMFSensorProfile) AddBlockedControl(wzBlockedControl foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wzBlockedControl)))
-	return foundation.HRESULT(r1)
+func (self *IMFSensorProfile) AddBlockedControl(wzBlockedControl string) error {
+	_wzBlockedControl := win32.UTF16Ptr(wzBlockedControl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wzBlockedControl)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorProfileCollection: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensorprofilecollection
@@ -8975,21 +9068,21 @@ func (self *IMFSensorProfileCollection) GetProfileCount() uint32 {
 }
 
 // GetProfile dispatches through IMFSensorProfileCollection's vtable slot 4.
-func (self *IMFSensorProfileCollection) GetProfile(Index uint32, ppProfile **IMFSensorProfile) foundation.HRESULT {
+func (self *IMFSensorProfileCollection) GetProfile(Index uint32, ppProfile **IMFSensorProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddProfile dispatches through IMFSensorProfileCollection's vtable slot 5.
-func (self *IMFSensorProfileCollection) AddProfile(pProfile *IMFSensorProfile) foundation.HRESULT {
+func (self *IMFSensorProfileCollection) AddProfile(pProfile *IMFSensorProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindProfile dispatches through IMFSensorProfileCollection's vtable slot 6.
-func (self *IMFSensorProfileCollection) FindProfile(ProfileId *SENSORPROFILEID, ppProfile **IMFSensorProfile) foundation.HRESULT {
+func (self *IMFSensorProfileCollection) FindProfile(ProfileId *SENSORPROFILEID, ppProfile **IMFSensorProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ProfileId)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveProfileByIndex dispatches through IMFSensorProfileCollection's vtable slot 7.
@@ -9012,21 +9105,21 @@ type IMFSensorStream struct {
 var IID_IMFSensorStream = win32.GUID{Data1: 0xe9a42171, Data2: 0xc56e, Data3: 0x498a, Data4: [8]byte{0x8b, 0x39, 0xed, 0xa5, 0xa0, 0x70, 0xb7, 0xfc}}
 
 // GetMediaTypeCount dispatches through IMFSensorStream's vtable slot 33.
-func (self *IMFSensorStream) GetMediaTypeCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IMFSensorStream) GetMediaTypeCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMediaType dispatches through IMFSensorStream's vtable slot 34.
-func (self *IMFSensorStream) GetMediaType(dwIndex uint32, ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFSensorStream) GetMediaType(dwIndex uint32, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloneSensorStream dispatches through IMFSensorStream's vtable slot 35.
-func (self *IMFSensorStream) CloneSensorStream(ppStream **IMFSensorStream) foundation.HRESULT {
+func (self *IMFSensorStream) CloneSensorStream(ppStream **IMFSensorStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSensorTransformFactory: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsensortransformfactory
@@ -9039,33 +9132,33 @@ type IMFSensorTransformFactory struct {
 var IID_IMFSensorTransformFactory = win32.GUID{Data1: 0xeed9c2ee, Data2: 0x66b4, Data3: 0x4f18, Data4: [8]byte{0xa6, 0x97, 0xac, 0x7d, 0x39, 0x60, 0x21, 0x5c}}
 
 // GetFactoryAttributes dispatches through IMFSensorTransformFactory's vtable slot 3.
-func (self *IMFSensorTransformFactory) GetFactoryAttributes(ppAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFSensorTransformFactory) GetFactoryAttributes(ppAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitializeFactory dispatches through IMFSensorTransformFactory's vtable slot 4.
-func (self *IMFSensorTransformFactory) InitializeFactory(dwMaxTransformCount uint32, pSensorDevices *IMFCollection, pAttributes *IMFAttributes) foundation.HRESULT {
+func (self *IMFSensorTransformFactory) InitializeFactory(dwMaxTransformCount uint32, pSensorDevices *IMFCollection, pAttributes *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwMaxTransformCount), uintptr(unsafe.Pointer(pSensorDevices)), uintptr(unsafe.Pointer(pAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransformCount dispatches through IMFSensorTransformFactory's vtable slot 5.
-func (self *IMFSensorTransformFactory) GetTransformCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IMFSensorTransformFactory) GetTransformCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransformInformation dispatches through IMFSensorTransformFactory's vtable slot 6.
-func (self *IMFSensorTransformFactory) GetTransformInformation(TransformIndex uint32, pguidTransformId *win32.GUID, ppAttributes **IMFAttributes, ppStreamInformation **IMFCollection) foundation.HRESULT {
+func (self *IMFSensorTransformFactory) GetTransformInformation(TransformIndex uint32, pguidTransformId *win32.GUID, ppAttributes **IMFAttributes, ppStreamInformation **IMFCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(TransformIndex), uintptr(unsafe.Pointer(pguidTransformId)), uintptr(unsafe.Pointer(ppAttributes)), uintptr(unsafe.Pointer(ppStreamInformation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateTransform dispatches through IMFSensorTransformFactory's vtable slot 7.
-func (self *IMFSensorTransformFactory) CreateTransform(guidSensorTransformID *win32.GUID, pAttributes *IMFAttributes, ppDeviceMFT **IMFDeviceTransform) foundation.HRESULT {
+func (self *IMFSensorTransformFactory) CreateTransform(guidSensorTransformID *win32.GUID, pAttributes *IMFAttributes, ppDeviceMFT **IMFDeviceTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidSensorTransformID)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppDeviceMFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSequencerSource: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsequencersource
@@ -9078,33 +9171,33 @@ type IMFSequencerSource struct {
 var IID_IMFSequencerSource = win32.GUID{Data1: 0x197cd219, Data2: 0x19cb, Data3: 0x4de1, Data4: [8]byte{0xa6, 0x4c, 0xac, 0xf2, 0xed, 0xcb, 0xe5, 0x9e}}
 
 // AppendTopology dispatches through IMFSequencerSource's vtable slot 3.
-func (self *IMFSequencerSource) AppendTopology(pTopology *IMFTopology, dwFlags uint32, pdwId *uint32) foundation.HRESULT {
+func (self *IMFSequencerSource) AppendTopology(pTopology *IMFTopology, dwFlags uint32, pdwId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTopology)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteTopology dispatches through IMFSequencerSource's vtable slot 4.
-func (self *IMFSequencerSource) DeleteTopology(dwId uint32) foundation.HRESULT {
+func (self *IMFSequencerSource) DeleteTopology(dwId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresentationContext dispatches through IMFSequencerSource's vtable slot 5.
-func (self *IMFSequencerSource) GetPresentationContext(pPD *IMFPresentationDescriptor, pId *uint32, ppTopology **IMFTopology) foundation.HRESULT {
+func (self *IMFSequencerSource) GetPresentationContext(pPD *IMFPresentationDescriptor, pId *uint32, ppTopology **IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPD)), uintptr(unsafe.Pointer(pId)), uintptr(unsafe.Pointer(ppTopology)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateTopology dispatches through IMFSequencerSource's vtable slot 6.
-func (self *IMFSequencerSource) UpdateTopology(dwId uint32, pTopology *IMFTopology) foundation.HRESULT {
+func (self *IMFSequencerSource) UpdateTopology(dwId uint32, pTopology *IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwId), uintptr(unsafe.Pointer(pTopology)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateTopologyFlags dispatches through IMFSequencerSource's vtable slot 7.
-func (self *IMFSequencerSource) UpdateTopologyFlags(dwId uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IMFSequencerSource) UpdateTopologyFlags(dwId uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwId), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSharingEngineClassFactory: https://learn.microsoft.com/windows/win32/api/mfsharingengine/nn-mfsharingengine-imfsharingengineclassfactory
@@ -9117,9 +9210,9 @@ type IMFSharingEngineClassFactory struct {
 var IID_IMFSharingEngineClassFactory = win32.GUID{Data1: 0x2ba61f92, Data2: 0x8305, Data3: 0x413b, Data4: [8]byte{0x97, 0x33, 0xfa, 0xf1, 0x5f, 0x25, 0x93, 0x84}}
 
 // CreateInstance dispatches through IMFSharingEngineClassFactory's vtable slot 3.
-func (self *IMFSharingEngineClassFactory) CreateInstance(dwFlags uint32, pAttr *IMFAttributes, ppEngine **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSharingEngineClassFactory) CreateInstance(dwFlags uint32, pAttr *IMFAttributes, ppEngine **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pAttr)), uintptr(unsafe.Pointer(ppEngine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFShutdown: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfshutdown
@@ -9132,15 +9225,15 @@ type IMFShutdown struct {
 var IID_IMFShutdown = win32.GUID{Data1: 0x97ec2ea4, Data2: 0x0e42, Data3: 0x4937, Data4: [8]byte{0x97, 0xac, 0x9d, 0x6d, 0x32, 0x88, 0x24, 0xe1}}
 
 // Shutdown dispatches through IMFShutdown's vtable slot 3.
-func (self *IMFShutdown) Shutdown() foundation.HRESULT {
+func (self *IMFShutdown) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetShutdownStatus dispatches through IMFShutdown's vtable slot 4.
-func (self *IMFShutdown) GetShutdownStatus(pStatus *MFSHUTDOWN_STATUS) foundation.HRESULT {
+func (self *IMFShutdown) GetShutdownStatus(pStatus *MFSHUTDOWN_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSignedLibrary: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsignedlibrary
@@ -9153,9 +9246,9 @@ type IMFSignedLibrary struct {
 var IID_IMFSignedLibrary = win32.GUID{Data1: 0x4a724bca, Data2: 0xff6a, Data3: 0x4c07, Data4: [8]byte{0x8e, 0x0d, 0x7a, 0x35, 0x84, 0x21, 0xcf, 0x06}}
 
 // GetProcedureAddress dispatches through IMFSignedLibrary's vtable slot 3.
-func (self *IMFSignedLibrary) GetProcedureAddress(name foundation.PSTR, address *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFSignedLibrary) GetProcedureAddress(name foundation.PSTR, address *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(address)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSimpleAudioVolume: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsimpleaudiovolume
@@ -9168,21 +9261,22 @@ type IMFSimpleAudioVolume struct {
 var IID_IMFSimpleAudioVolume = win32.GUID{Data1: 0x089edf13, Data2: 0xcf71, Data3: 0x4338, Data4: [8]byte{0x8d, 0x13, 0x9e, 0x56, 0x9d, 0xbd, 0xc3, 0x19}}
 
 // GetMasterVolume dispatches through IMFSimpleAudioVolume's vtable slot 4.
-func (self *IMFSimpleAudioVolume) GetMasterVolume(pfLevel *float32) foundation.HRESULT {
+func (self *IMFSimpleAudioVolume) GetMasterVolume(pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMute dispatches through IMFSimpleAudioVolume's vtable slot 5.
-func (self *IMFSimpleAudioVolume) SetMute(bMute foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(bMute))
-	return foundation.HRESULT(r1)
+func (self *IMFSimpleAudioVolume) SetMute(bMute bool) error {
+	_bMute := win32.Bool32(bMute)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_bMute))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMute dispatches through IMFSimpleAudioVolume's vtable slot 6.
-func (self *IMFSimpleAudioVolume) GetMute(pbMute *foundation.BOOL) foundation.HRESULT {
+func (self *IMFSimpleAudioVolume) GetMute(pbMute *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMute)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSinkWriter: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfsinkwriter
@@ -9195,69 +9289,69 @@ type IMFSinkWriter struct {
 var IID_IMFSinkWriter = win32.GUID{Data1: 0x3137f1cd, Data2: 0xfe5e, Data3: 0x4805, Data4: [8]byte{0xa5, 0xd8, 0xfb, 0x47, 0x74, 0x48, 0xcb, 0x3d}}
 
 // AddStream dispatches through IMFSinkWriter's vtable slot 3.
-func (self *IMFSinkWriter) AddStream(pTargetMediaType *IMFMediaType, pdwStreamIndex *uint32) foundation.HRESULT {
+func (self *IMFSinkWriter) AddStream(pTargetMediaType *IMFMediaType, pdwStreamIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTargetMediaType)), uintptr(unsafe.Pointer(pdwStreamIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInputMediaType dispatches through IMFSinkWriter's vtable slot 4.
-func (self *IMFSinkWriter) SetInputMediaType(dwStreamIndex uint32, pInputMediaType *IMFMediaType, pEncodingParameters *IMFAttributes) foundation.HRESULT {
+func (self *IMFSinkWriter) SetInputMediaType(dwStreamIndex uint32, pInputMediaType *IMFMediaType, pEncodingParameters *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pInputMediaType)), uintptr(unsafe.Pointer(pEncodingParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginWriting dispatches through IMFSinkWriter's vtable slot 5.
-func (self *IMFSinkWriter) BeginWriting() foundation.HRESULT {
+func (self *IMFSinkWriter) BeginWriting() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteSample dispatches through IMFSinkWriter's vtable slot 6.
-func (self *IMFSinkWriter) WriteSample(dwStreamIndex uint32, pSample *IMFSample) foundation.HRESULT {
+func (self *IMFSinkWriter) WriteSample(dwStreamIndex uint32, pSample *IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendStreamTick dispatches through IMFSinkWriter's vtable slot 7.
-func (self *IMFSinkWriter) SendStreamTick(dwStreamIndex uint32, llTimestamp int64) foundation.HRESULT {
+func (self *IMFSinkWriter) SendStreamTick(dwStreamIndex uint32, llTimestamp int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(llTimestamp))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PlaceMarker dispatches through IMFSinkWriter's vtable slot 8.
-func (self *IMFSinkWriter) PlaceMarker(dwStreamIndex uint32, pvContext unsafe.Pointer) foundation.HRESULT {
+func (self *IMFSinkWriter) PlaceMarker(dwStreamIndex uint32, pvContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pvContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyEndOfSegment dispatches through IMFSinkWriter's vtable slot 9.
-func (self *IMFSinkWriter) NotifyEndOfSegment(dwStreamIndex uint32) foundation.HRESULT {
+func (self *IMFSinkWriter) NotifyEndOfSegment(dwStreamIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flush dispatches through IMFSinkWriter's vtable slot 10.
-func (self *IMFSinkWriter) Flush(dwStreamIndex uint32) foundation.HRESULT {
+func (self *IMFSinkWriter) Flush(dwStreamIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finalize dispatches through IMFSinkWriter's vtable slot 11.
-func (self *IMFSinkWriter) Finalize() foundation.HRESULT {
+func (self *IMFSinkWriter) Finalize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetServiceForStream dispatches through IMFSinkWriter's vtable slot 12.
-func (self *IMFSinkWriter) GetServiceForStream(dwStreamIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFSinkWriter) GetServiceForStream(dwStreamIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatistics dispatches through IMFSinkWriter's vtable slot 13.
-func (self *IMFSinkWriter) GetStatistics(dwStreamIndex uint32, pStats *MF_SINK_WRITER_STATISTICS) foundation.HRESULT {
+func (self *IMFSinkWriter) GetStatistics(dwStreamIndex uint32, pStats *MF_SINK_WRITER_STATISTICS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pStats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSinkWriterCallback: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfsinkwritercallback
@@ -9270,15 +9364,15 @@ type IMFSinkWriterCallback struct {
 var IID_IMFSinkWriterCallback = win32.GUID{Data1: 0x666f76de, Data2: 0x33d2, Data3: 0x41b9, Data4: [8]byte{0xa4, 0x58, 0x29, 0xed, 0x0a, 0x97, 0x2c, 0x58}}
 
 // OnFinalize dispatches through IMFSinkWriterCallback's vtable slot 3.
-func (self *IMFSinkWriterCallback) OnFinalize(hrStatus foundation.HRESULT) foundation.HRESULT {
+func (self *IMFSinkWriterCallback) OnFinalize(hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnMarker dispatches through IMFSinkWriterCallback's vtable slot 4.
-func (self *IMFSinkWriterCallback) OnMarker(dwStreamIndex uint32, pvContext unsafe.Pointer) foundation.HRESULT {
+func (self *IMFSinkWriterCallback) OnMarker(dwStreamIndex uint32, pvContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pvContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSinkWriterCallback2: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfsinkwritercallback2
@@ -9291,15 +9385,15 @@ type IMFSinkWriterCallback2 struct {
 var IID_IMFSinkWriterCallback2 = win32.GUID{Data1: 0x2456bd58, Data2: 0xc067, Data3: 0x4513, Data4: [8]byte{0x84, 0xfe, 0x8d, 0x0c, 0x88, 0xff, 0xdc, 0x61}}
 
 // OnTransformChange dispatches through IMFSinkWriterCallback2's vtable slot 5.
-func (self *IMFSinkWriterCallback2) OnTransformChange() foundation.HRESULT {
+func (self *IMFSinkWriterCallback2) OnTransformChange() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnStreamError dispatches through IMFSinkWriterCallback2's vtable slot 6.
-func (self *IMFSinkWriterCallback2) OnStreamError(dwStreamIndex uint32, hrStatus foundation.HRESULT) foundation.HRESULT {
+func (self *IMFSinkWriterCallback2) OnStreamError(dwStreamIndex uint32, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(hrStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSinkWriterEncoderConfig: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfsinkwriterencoderconfig
@@ -9312,15 +9406,15 @@ type IMFSinkWriterEncoderConfig struct {
 var IID_IMFSinkWriterEncoderConfig = win32.GUID{Data1: 0x17c3779e, Data2: 0x3cde, Data3: 0x4ede, Data4: [8]byte{0x8c, 0x60, 0x38, 0x99, 0xf5, 0xf5, 0x3a, 0xd6}}
 
 // SetTargetMediaType dispatches through IMFSinkWriterEncoderConfig's vtable slot 3.
-func (self *IMFSinkWriterEncoderConfig) SetTargetMediaType(dwStreamIndex uint32, pTargetMediaType *IMFMediaType, pEncodingParameters *IMFAttributes) foundation.HRESULT {
+func (self *IMFSinkWriterEncoderConfig) SetTargetMediaType(dwStreamIndex uint32, pTargetMediaType *IMFMediaType, pEncodingParameters *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pTargetMediaType)), uintptr(unsafe.Pointer(pEncodingParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PlaceEncodingParameters dispatches through IMFSinkWriterEncoderConfig's vtable slot 4.
-func (self *IMFSinkWriterEncoderConfig) PlaceEncodingParameters(dwStreamIndex uint32, pEncodingParameters *IMFAttributes) foundation.HRESULT {
+func (self *IMFSinkWriterEncoderConfig) PlaceEncodingParameters(dwStreamIndex uint32, pEncodingParameters *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pEncodingParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSinkWriterEx: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfsinkwriterex
@@ -9333,9 +9427,9 @@ type IMFSinkWriterEx struct {
 var IID_IMFSinkWriterEx = win32.GUID{Data1: 0x588d72ab, Data2: 0x5bc1, Data3: 0x496a, Data4: [8]byte{0x87, 0x14, 0xb7, 0x06, 0x17, 0x14, 0x1b, 0x25}}
 
 // GetTransformForStream dispatches through IMFSinkWriterEx's vtable slot 14.
-func (self *IMFSinkWriterEx) GetTransformForStream(dwStreamIndex uint32, dwTransformIndex uint32, pGuidCategory *win32.GUID, ppTransform **IMFTransform) foundation.HRESULT {
+func (self *IMFSinkWriterEx) GetTransformForStream(dwStreamIndex uint32, dwTransformIndex uint32, pGuidCategory *win32.GUID, ppTransform **IMFTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(dwTransformIndex), uintptr(unsafe.Pointer(pGuidCategory)), uintptr(unsafe.Pointer(ppTransform)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSourceBuffer: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfsourcebuffer
@@ -9354,27 +9448,27 @@ func (self *IMFSourceBuffer) GetUpdating() foundation.BOOL {
 }
 
 // GetBuffered dispatches through IMFSourceBuffer's vtable slot 4.
-func (self *IMFSourceBuffer) GetBuffered(ppBuffered **IMFMediaTimeRange) foundation.HRESULT {
+func (self *IMFSourceBuffer) GetBuffered(ppBuffered **IMFMediaTimeRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuffered)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Append dispatches through IMFSourceBuffer's vtable slot 11.
-func (self *IMFSourceBuffer) Append(pData *byte, len_ uint32) foundation.HRESULT {
+func (self *IMFSourceBuffer) Append(pData *byte, len_ uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(len_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AppendByteStream dispatches through IMFSourceBuffer's vtable slot 12.
-func (self *IMFSourceBuffer) AppendByteStream(pStream *IMFByteStream, pMaxLen *uint64) foundation.HRESULT {
+func (self *IMFSourceBuffer) AppendByteStream(pStream *IMFByteStream, pMaxLen *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pMaxLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IMFSourceBuffer's vtable slot 13.
-func (self *IMFSourceBuffer) Abort() foundation.HRESULT {
+func (self *IMFSourceBuffer) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 19666fb4-babe-4c55-bc03-0a074da37e2a
@@ -9392,9 +9486,9 @@ func (self *IMFSourceBufferAppendMode) GetAppendMode() MF_MSE_APPEND_MODE {
 }
 
 // SetAppendMode dispatches through IMFSourceBufferAppendMode's vtable slot 4.
-func (self *IMFSourceBufferAppendMode) SetAppendMode(mode MF_MSE_APPEND_MODE) foundation.HRESULT {
+func (self *IMFSourceBufferAppendMode) SetAppendMode(mode MF_MSE_APPEND_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSourceBufferList: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imfsourcebufferlist
@@ -9462,9 +9556,9 @@ type IMFSourceOpenMonitor struct {
 var IID_IMFSourceOpenMonitor = win32.GUID{Data1: 0x059054b3, Data2: 0x027c, Data3: 0x494c, Data4: [8]byte{0xa2, 0x7d, 0x91, 0x13, 0x29, 0x1c, 0xf8, 0x7f}}
 
 // OnSourceEvent dispatches through IMFSourceOpenMonitor's vtable slot 3.
-func (self *IMFSourceOpenMonitor) OnSourceEvent(pEvent *IMFMediaEvent) foundation.HRESULT {
+func (self *IMFSourceOpenMonitor) OnSourceEvent(pEvent *IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSourceReader: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfsourcereader
@@ -9477,63 +9571,64 @@ type IMFSourceReader struct {
 var IID_IMFSourceReader = win32.GUID{Data1: 0x70ae66f2, Data2: 0xc809, Data3: 0x4e4f, Data4: [8]byte{0x89, 0x15, 0xbd, 0xcb, 0x40, 0x6b, 0x79, 0x93}}
 
 // GetStreamSelection dispatches through IMFSourceReader's vtable slot 3.
-func (self *IMFSourceReader) GetStreamSelection(dwStreamIndex uint32, pfSelected *foundation.BOOL) foundation.HRESULT {
+func (self *IMFSourceReader) GetStreamSelection(dwStreamIndex uint32, pfSelected *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pfSelected)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStreamSelection dispatches through IMFSourceReader's vtable slot 4.
-func (self *IMFSourceReader) SetStreamSelection(dwStreamIndex uint32, fSelected foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(fSelected))
-	return foundation.HRESULT(r1)
+func (self *IMFSourceReader) SetStreamSelection(dwStreamIndex uint32, fSelected bool) error {
+	_fSelected := win32.Bool32(fSelected)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(_fSelected))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNativeMediaType dispatches through IMFSourceReader's vtable slot 5.
-func (self *IMFSourceReader) GetNativeMediaType(dwStreamIndex uint32, dwMediaTypeIndex uint32, ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFSourceReader) GetNativeMediaType(dwStreamIndex uint32, dwMediaTypeIndex uint32, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(dwMediaTypeIndex), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentMediaType dispatches through IMFSourceReader's vtable slot 6.
-func (self *IMFSourceReader) GetCurrentMediaType(dwStreamIndex uint32, ppMediaType **IMFMediaType) foundation.HRESULT {
+func (self *IMFSourceReader) GetCurrentMediaType(dwStreamIndex uint32, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentMediaType dispatches through IMFSourceReader's vtable slot 7.
-func (self *IMFSourceReader) SetCurrentMediaType(dwStreamIndex uint32, pdwReserved *uint32, pMediaType *IMFMediaType) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pdwReserved)), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+func (self *IMFSourceReader) SetCurrentMediaType(dwStreamIndex uint32, pMediaType *IMFMediaType) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), 0, uintptr(unsafe.Pointer(pMediaType)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentPosition dispatches through IMFSourceReader's vtable slot 8.
-func (self *IMFSourceReader) SetCurrentPosition(guidTimeFormat *win32.GUID, varPosition *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFSourceReader) SetCurrentPosition(guidTimeFormat *win32.GUID, varPosition *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidTimeFormat)), uintptr(unsafe.Pointer(varPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadSample dispatches through IMFSourceReader's vtable slot 9.
-func (self *IMFSourceReader) ReadSample(dwStreamIndex uint32, dwControlFlags uint32, pdwActualStreamIndex *uint32, pdwStreamFlags *uint32, pllTimestamp *int64, ppSample **IMFSample) foundation.HRESULT {
+func (self *IMFSourceReader) ReadSample(dwStreamIndex uint32, dwControlFlags uint32, pdwActualStreamIndex *uint32, pdwStreamFlags *uint32, pllTimestamp *int64, ppSample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(dwControlFlags), uintptr(unsafe.Pointer(pdwActualStreamIndex)), uintptr(unsafe.Pointer(pdwStreamFlags)), uintptr(unsafe.Pointer(pllTimestamp)), uintptr(unsafe.Pointer(ppSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flush dispatches through IMFSourceReader's vtable slot 10.
-func (self *IMFSourceReader) Flush(dwStreamIndex uint32) foundation.HRESULT {
+func (self *IMFSourceReader) Flush(dwStreamIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetServiceForStream dispatches through IMFSourceReader's vtable slot 11.
-func (self *IMFSourceReader) GetServiceForStream(dwStreamIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IMFSourceReader) GetServiceForStream(dwStreamIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresentationAttribute dispatches through IMFSourceReader's vtable slot 12.
-func (self *IMFSourceReader) GetPresentationAttribute(dwStreamIndex uint32, guidAttribute *win32.GUID, pvarAttribute *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFSourceReader) GetPresentationAttribute(dwStreamIndex uint32, guidAttribute *win32.GUID, pvarAttribute *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(guidAttribute)), uintptr(unsafe.Pointer(pvarAttribute)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSourceReaderCallback: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfsourcereadercallback
@@ -9546,21 +9641,21 @@ type IMFSourceReaderCallback struct {
 var IID_IMFSourceReaderCallback = win32.GUID{Data1: 0xdeec8d99, Data2: 0xfa1d, Data3: 0x4d82, Data4: [8]byte{0x84, 0xc2, 0x2c, 0x89, 0x69, 0x94, 0x48, 0x67}}
 
 // OnReadSample dispatches through IMFSourceReaderCallback's vtable slot 3.
-func (self *IMFSourceReaderCallback) OnReadSample(hrStatus foundation.HRESULT, dwStreamIndex uint32, dwStreamFlags uint32, llTimestamp int64, pSample *IMFSample) foundation.HRESULT {
+func (self *IMFSourceReaderCallback) OnReadSample(hrStatus foundation.HRESULT, dwStreamIndex uint32, dwStreamFlags uint32, llTimestamp int64, pSample *IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrStatus), uintptr(dwStreamIndex), uintptr(dwStreamFlags), uintptr(llTimestamp), uintptr(unsafe.Pointer(pSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnFlush dispatches through IMFSourceReaderCallback's vtable slot 4.
-func (self *IMFSourceReaderCallback) OnFlush(dwStreamIndex uint32) foundation.HRESULT {
+func (self *IMFSourceReaderCallback) OnFlush(dwStreamIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEvent dispatches through IMFSourceReaderCallback's vtable slot 5.
-func (self *IMFSourceReaderCallback) OnEvent(dwStreamIndex uint32, pEvent *IMFMediaEvent) foundation.HRESULT {
+func (self *IMFSourceReaderCallback) OnEvent(dwStreamIndex uint32, pEvent *IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSourceReaderCallback2: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfsourcereadercallback2
@@ -9573,15 +9668,15 @@ type IMFSourceReaderCallback2 struct {
 var IID_IMFSourceReaderCallback2 = win32.GUID{Data1: 0xcf839fe6, Data2: 0x8c2a, Data3: 0x4dd2, Data4: [8]byte{0xb6, 0xea, 0xc2, 0x2d, 0x69, 0x61, 0xaf, 0x05}}
 
 // OnTransformChange dispatches through IMFSourceReaderCallback2's vtable slot 6.
-func (self *IMFSourceReaderCallback2) OnTransformChange() foundation.HRESULT {
+func (self *IMFSourceReaderCallback2) OnTransformChange() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnStreamError dispatches through IMFSourceReaderCallback2's vtable slot 7.
-func (self *IMFSourceReaderCallback2) OnStreamError(dwStreamIndex uint32, hrStatus foundation.HRESULT) foundation.HRESULT {
+func (self *IMFSourceReaderCallback2) OnStreamError(dwStreamIndex uint32, hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(hrStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSourceReaderEx: https://learn.microsoft.com/windows/win32/api/mfreadwrite/nn-mfreadwrite-imfsourcereaderex
@@ -9594,27 +9689,27 @@ type IMFSourceReaderEx struct {
 var IID_IMFSourceReaderEx = win32.GUID{Data1: 0x7b981cf0, Data2: 0x560e, Data3: 0x4116, Data4: [8]byte{0x98, 0x75, 0xb0, 0x99, 0x89, 0x5f, 0x23, 0xd7}}
 
 // SetNativeMediaType dispatches through IMFSourceReaderEx's vtable slot 13.
-func (self *IMFSourceReaderEx) SetNativeMediaType(dwStreamIndex uint32, pMediaType *IMFMediaType, pdwStreamFlags *uint32) foundation.HRESULT {
+func (self *IMFSourceReaderEx) SetNativeMediaType(dwStreamIndex uint32, pMediaType *IMFMediaType, pdwStreamFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(pdwStreamFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTransformForStream dispatches through IMFSourceReaderEx's vtable slot 14.
-func (self *IMFSourceReaderEx) AddTransformForStream(dwStreamIndex uint32, pTransformOrActivate *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSourceReaderEx) AddTransformForStream(dwStreamIndex uint32, pTransformOrActivate *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pTransformOrActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllTransformsForStream dispatches through IMFSourceReaderEx's vtable slot 15.
-func (self *IMFSourceReaderEx) RemoveAllTransformsForStream(dwStreamIndex uint32) foundation.HRESULT {
+func (self *IMFSourceReaderEx) RemoveAllTransformsForStream(dwStreamIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransformForStream dispatches through IMFSourceReaderEx's vtable slot 16.
-func (self *IMFSourceReaderEx) GetTransformForStream(dwStreamIndex uint32, dwTransformIndex uint32, pGuidCategory *win32.GUID, ppTransform **IMFTransform) foundation.HRESULT {
+func (self *IMFSourceReaderEx) GetTransformForStream(dwStreamIndex uint32, dwTransformIndex uint32, pGuidCategory *win32.GUID, ppTransform **IMFTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(dwTransformIndex), uintptr(unsafe.Pointer(pGuidCategory)), uintptr(unsafe.Pointer(ppTransform)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSourceResolver: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsourceresolver
@@ -9627,45 +9722,49 @@ type IMFSourceResolver struct {
 var IID_IMFSourceResolver = win32.GUID{Data1: 0xfbe5a32d, Data2: 0xa497, Data3: 0x4b61, Data4: [8]byte{0xbb, 0x85, 0x97, 0xb1, 0xa8, 0x48, 0xa6, 0xe3}}
 
 // CreateObjectFromURL dispatches through IMFSourceResolver's vtable slot 3.
-func (self *IMFSourceResolver) CreateObjectFromURL(pwszURL foundation.PWSTR, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(pObjectType)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+func (self *IMFSourceResolver) CreateObjectFromURL(pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(pObjectType)), uintptr(unsafe.Pointer(ppObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateObjectFromByteStream dispatches through IMFSourceResolver's vtable slot 4.
-func (self *IMFSourceResolver) CreateObjectFromByteStream(pByteStream *IMFByteStream, pwszURL foundation.PWSTR, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(pObjectType)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+func (self *IMFSourceResolver) CreateObjectFromByteStream(pByteStream *IMFByteStream, pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(pObjectType)), uintptr(unsafe.Pointer(ppObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginCreateObjectFromURL dispatches through IMFSourceResolver's vtable slot 5.
-func (self *IMFSourceResolver) BeginCreateObjectFromURL(pwszURL foundation.PWSTR, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(ppIUnknownCancelCookie)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+func (self *IMFSourceResolver) BeginCreateObjectFromURL(pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(ppIUnknownCancelCookie)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndCreateObjectFromURL dispatches through IMFSourceResolver's vtable slot 6.
-func (self *IMFSourceResolver) EndCreateObjectFromURL(pResult *IMFAsyncResult, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSourceResolver) EndCreateObjectFromURL(pResult *IMFAsyncResult, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pObjectType)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginCreateObjectFromByteStream dispatches through IMFSourceResolver's vtable slot 7.
-func (self *IMFSourceResolver) BeginCreateObjectFromByteStream(pByteStream *IMFByteStream, pwszURL foundation.PWSTR, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(ppIUnknownCancelCookie)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+func (self *IMFSourceResolver) BeginCreateObjectFromByteStream(pByteStream *IMFByteStream, pwszURL string, dwFlags uint32, pProps *uishellpropertiessystem.IPropertyStore, ppIUnknownCancelCookie **systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProps)), uintptr(unsafe.Pointer(ppIUnknownCancelCookie)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndCreateObjectFromByteStream dispatches through IMFSourceResolver's vtable slot 8.
-func (self *IMFSourceResolver) EndCreateObjectFromByteStream(pResult *IMFAsyncResult, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSourceResolver) EndCreateObjectFromByteStream(pResult *IMFAsyncResult, pObjectType *MF_OBJECT_TYPE, ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pObjectType)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelObjectCreation dispatches through IMFSourceResolver's vtable slot 9.
-func (self *IMFSourceResolver) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFSourceResolver) CancelObjectCreation(pIUnknownCancelCookie *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIUnknownCancelCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSpatialAudioObjectBuffer: https://learn.microsoft.com/windows/win32/api/mfspatialaudio/nn-mfspatialaudio-imfspatialaudioobjectbuffer
@@ -9678,33 +9777,33 @@ type IMFSpatialAudioObjectBuffer struct {
 var IID_IMFSpatialAudioObjectBuffer = win32.GUID{Data1: 0xd396ec8c, Data2: 0x605e, Data3: 0x4249, Data4: [8]byte{0x97, 0x8d, 0x72, 0xad, 0x1c, 0x31, 0x28, 0x72}}
 
 // SetID dispatches through IMFSpatialAudioObjectBuffer's vtable slot 8.
-func (self *IMFSpatialAudioObjectBuffer) SetID(u32ID uint32) foundation.HRESULT {
+func (self *IMFSpatialAudioObjectBuffer) SetID(u32ID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(u32ID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetID dispatches through IMFSpatialAudioObjectBuffer's vtable slot 9.
-func (self *IMFSpatialAudioObjectBuffer) GetID(pu32ID *uint32) foundation.HRESULT {
+func (self *IMFSpatialAudioObjectBuffer) GetID(pu32ID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pu32ID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetType dispatches through IMFSpatialAudioObjectBuffer's vtable slot 10.
-func (self *IMFSpatialAudioObjectBuffer) SetType(type_ mediaaudio.AudioObjectType) foundation.HRESULT {
+func (self *IMFSpatialAudioObjectBuffer) SetType(type_ mediaaudio.AudioObjectType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(type_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetType dispatches through IMFSpatialAudioObjectBuffer's vtable slot 11.
-func (self *IMFSpatialAudioObjectBuffer) GetType(pType *mediaaudio.AudioObjectType) foundation.HRESULT {
+func (self *IMFSpatialAudioObjectBuffer) GetType(pType *mediaaudio.AudioObjectType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMetadataItems dispatches through IMFSpatialAudioObjectBuffer's vtable slot 12.
-func (self *IMFSpatialAudioObjectBuffer) GetMetadataItems(ppMetadataItems **mediaaudio.ISpatialAudioMetadataItems) foundation.HRESULT {
+func (self *IMFSpatialAudioObjectBuffer) GetMetadataItems(ppMetadataItems **mediaaudio.ISpatialAudioMetadataItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMetadataItems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSpatialAudioSample: https://learn.microsoft.com/windows/win32/api/mfspatialaudio/nn-mfspatialaudio-imfspatialaudiosample
@@ -9717,21 +9816,21 @@ type IMFSpatialAudioSample struct {
 var IID_IMFSpatialAudioSample = win32.GUID{Data1: 0xabf28a9b, Data2: 0x3393, Data3: 0x4290, Data4: [8]byte{0xba, 0x79, 0x5f, 0xfc, 0x46, 0xd9, 0x86, 0xb2}}
 
 // GetObjectCount dispatches through IMFSpatialAudioSample's vtable slot 47.
-func (self *IMFSpatialAudioSample) GetObjectCount(pdwObjectCount *uint32) foundation.HRESULT {
+func (self *IMFSpatialAudioSample) GetObjectCount(pdwObjectCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwObjectCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddSpatialAudioObject dispatches through IMFSpatialAudioSample's vtable slot 48.
-func (self *IMFSpatialAudioSample) AddSpatialAudioObject(pAudioObjBuffer *IMFSpatialAudioObjectBuffer) foundation.HRESULT {
+func (self *IMFSpatialAudioSample) AddSpatialAudioObject(pAudioObjBuffer *IMFSpatialAudioObjectBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAudioObjBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpatialAudioObjectByIndex dispatches through IMFSpatialAudioSample's vtable slot 49.
-func (self *IMFSpatialAudioSample) GetSpatialAudioObjectByIndex(dwIndex uint32, ppAudioObjBuffer **IMFSpatialAudioObjectBuffer) foundation.HRESULT {
+func (self *IMFSpatialAudioSample) GetSpatialAudioObjectByIndex(dwIndex uint32, ppAudioObjBuffer **IMFSpatialAudioObjectBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppAudioObjBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFStreamDescriptor: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfstreamdescriptor
@@ -9744,15 +9843,15 @@ type IMFStreamDescriptor struct {
 var IID_IMFStreamDescriptor = win32.GUID{Data1: 0x56c03d9c, Data2: 0x9dbb, Data3: 0x45f5, Data4: [8]byte{0xab, 0x4b, 0xd8, 0x0f, 0x47, 0xc0, 0x59, 0x38}}
 
 // GetStreamIdentifier dispatches through IMFStreamDescriptor's vtable slot 33.
-func (self *IMFStreamDescriptor) GetStreamIdentifier(pdwStreamIdentifier *uint32) foundation.HRESULT {
+func (self *IMFStreamDescriptor) GetStreamIdentifier(pdwStreamIdentifier *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStreamIdentifier)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMediaTypeHandler dispatches through IMFStreamDescriptor's vtable slot 34.
-func (self *IMFStreamDescriptor) GetMediaTypeHandler(ppMediaTypeHandler **IMFMediaTypeHandler) foundation.HRESULT {
+func (self *IMFStreamDescriptor) GetMediaTypeHandler(ppMediaTypeHandler **IMFMediaTypeHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaTypeHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFStreamSink: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfstreamsink
@@ -9765,39 +9864,39 @@ type IMFStreamSink struct {
 var IID_IMFStreamSink = win32.GUID{Data1: 0x0a97b3cf, Data2: 0x8e7c, Data3: 0x4a3d, Data4: [8]byte{0x8f, 0x8c, 0x0c, 0x84, 0x3d, 0xc2, 0x47, 0xfb}}
 
 // GetMediaSink dispatches through IMFStreamSink's vtable slot 7.
-func (self *IMFStreamSink) GetMediaSink(ppMediaSink **IMFMediaSink) foundation.HRESULT {
+func (self *IMFStreamSink) GetMediaSink(ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIdentifier dispatches through IMFStreamSink's vtable slot 8.
-func (self *IMFStreamSink) GetIdentifier(pdwIdentifier *uint32) foundation.HRESULT {
+func (self *IMFStreamSink) GetIdentifier(pdwIdentifier *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwIdentifier)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMediaTypeHandler dispatches through IMFStreamSink's vtable slot 9.
-func (self *IMFStreamSink) GetMediaTypeHandler(ppHandler **IMFMediaTypeHandler) foundation.HRESULT {
+func (self *IMFStreamSink) GetMediaTypeHandler(ppHandler **IMFMediaTypeHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessSample dispatches through IMFStreamSink's vtable slot 10.
-func (self *IMFStreamSink) ProcessSample(pSample *IMFSample) foundation.HRESULT {
+func (self *IMFStreamSink) ProcessSample(pSample *IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PlaceMarker dispatches through IMFStreamSink's vtable slot 11.
-func (self *IMFStreamSink) PlaceMarker(eMarkerType MFSTREAMSINK_MARKER_TYPE, pvarMarkerValue *systemcomstructuredstorage.PROPVARIANT, pvarContextValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFStreamSink) PlaceMarker(eMarkerType MFSTREAMSINK_MARKER_TYPE, pvarMarkerValue *systemcomstructuredstorage.PROPVARIANT, pvarContextValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(eMarkerType), uintptr(unsafe.Pointer(pvarMarkerValue)), uintptr(unsafe.Pointer(pvarContextValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flush dispatches through IMFStreamSink's vtable slot 12.
-func (self *IMFStreamSink) Flush() foundation.HRESULT {
+func (self *IMFStreamSink) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFStreamingSinkConfig: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfstreamingsinkconfig
@@ -9810,9 +9909,10 @@ type IMFStreamingSinkConfig struct {
 var IID_IMFStreamingSinkConfig = win32.GUID{Data1: 0x9db7aa41, Data2: 0x3cc5, Data3: 0x40d4, Data4: [8]byte{0x85, 0x09, 0x55, 0x58, 0x04, 0xad, 0x34, 0xcc}}
 
 // StartStreaming dispatches through IMFStreamingSinkConfig's vtable slot 3.
-func (self *IMFStreamingSinkConfig) StartStreaming(fSeekOffsetIsByteOffset foundation.BOOL, qwSeekOffset uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fSeekOffsetIsByteOffset), uintptr(qwSeekOffset))
-	return foundation.HRESULT(r1)
+func (self *IMFStreamingSinkConfig) StartStreaming(fSeekOffsetIsByteOffset bool, qwSeekOffset uint64) error {
+	_fSeekOffsetIsByteOffset := win32.Bool32(fSeekOffsetIsByteOffset)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fSeekOffsetIsByteOffset), uintptr(qwSeekOffset))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFSystemId: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfsystemid
@@ -9825,15 +9925,15 @@ type IMFSystemId struct {
 var IID_IMFSystemId = win32.GUID{Data1: 0xfff4af3a, Data2: 0x1fc1, Data3: 0x4ef9, Data4: [8]byte{0xa2, 0x9b, 0xd2, 0x6c, 0x49, 0xe2, 0xf3, 0x1a}}
 
 // GetData dispatches through IMFSystemId's vtable slot 3.
-func (self *IMFSystemId) GetData(size *uint32, data **byte) foundation.HRESULT {
+func (self *IMFSystemId) GetData(size *uint32, data **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(size)), uintptr(unsafe.Pointer(data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Setup dispatches through IMFSystemId's vtable slot 4.
-func (self *IMFSystemId) Setup(stage uint32, cbIn uint32, pbIn *byte, pcbOut *uint32, ppbOut **byte) foundation.HRESULT {
+func (self *IMFSystemId) Setup(stage uint32, cbIn uint32, pbIn *byte, pcbOut *uint32, ppbOut **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(stage), uintptr(cbIn), uintptr(unsafe.Pointer(pbIn)), uintptr(unsafe.Pointer(pcbOut)), uintptr(unsafe.Pointer(ppbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTimecodeTranslate: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftimecodetranslate
@@ -9846,27 +9946,27 @@ type IMFTimecodeTranslate struct {
 var IID_IMFTimecodeTranslate = win32.GUID{Data1: 0xab9d8661, Data2: 0xf7e8, Data3: 0x4ef4, Data4: [8]byte{0x98, 0x61, 0x89, 0xf3, 0x34, 0xf9, 0x4e, 0x74}}
 
 // BeginConvertTimecodeToHNS dispatches through IMFTimecodeTranslate's vtable slot 3.
-func (self *IMFTimecodeTranslate) BeginConvertTimecodeToHNS(pPropVarTimecode *systemcomstructuredstorage.PROPVARIANT, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFTimecodeTranslate) BeginConvertTimecodeToHNS(pPropVarTimecode *systemcomstructuredstorage.PROPVARIANT, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropVarTimecode)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndConvertTimecodeToHNS dispatches through IMFTimecodeTranslate's vtable slot 4.
-func (self *IMFTimecodeTranslate) EndConvertTimecodeToHNS(pResult *IMFAsyncResult, phnsTime *int64) foundation.HRESULT {
+func (self *IMFTimecodeTranslate) EndConvertTimecodeToHNS(pResult *IMFAsyncResult, phnsTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(phnsTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginConvertHNSToTimecode dispatches through IMFTimecodeTranslate's vtable slot 5.
-func (self *IMFTimecodeTranslate) BeginConvertHNSToTimecode(hnsTime int64, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFTimecodeTranslate) BeginConvertHNSToTimecode(hnsTime int64, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hnsTime), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndConvertHNSToTimecode dispatches through IMFTimecodeTranslate's vtable slot 6.
-func (self *IMFTimecodeTranslate) EndConvertHNSToTimecode(pResult *IMFAsyncResult, pPropVarTimecode *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IMFTimecodeTranslate) EndConvertHNSToTimecode(pResult *IMFAsyncResult, pPropVarTimecode *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pPropVarTimecode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTimedText: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imftimedtext
@@ -9879,75 +9979,86 @@ type IMFTimedText struct {
 var IID_IMFTimedText = win32.GUID{Data1: 0x1f2a94c9, Data2: 0xa3df, Data3: 0x430d, Data4: [8]byte{0x9d, 0x0f, 0xac, 0xd8, 0x5d, 0xdc, 0x29, 0xaf}}
 
 // RegisterNotifications dispatches through IMFTimedText's vtable slot 3.
-func (self *IMFTimedText) RegisterNotifications(notify *IMFTimedTextNotify) foundation.HRESULT {
+func (self *IMFTimedText) RegisterNotifications(notify *IMFTimedTextNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(notify)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SelectTrack dispatches through IMFTimedText's vtable slot 4.
-func (self *IMFTimedText) SelectTrack(trackId uint32, selected foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(trackId), uintptr(selected))
-	return foundation.HRESULT(r1)
+func (self *IMFTimedText) SelectTrack(trackId uint32, selected bool) error {
+	_selected := win32.Bool32(selected)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(trackId), uintptr(_selected))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDataSource dispatches through IMFTimedText's vtable slot 5.
-func (self *IMFTimedText) AddDataSource(byteStream *IMFByteStream, label foundation.PWSTR, language foundation.PWSTR, kind MF_TIMED_TEXT_TRACK_KIND, isDefault foundation.BOOL, trackId *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(byteStream)), uintptr(unsafe.Pointer(label)), uintptr(unsafe.Pointer(language)), uintptr(kind), uintptr(isDefault), uintptr(unsafe.Pointer(trackId)))
-	return foundation.HRESULT(r1)
+func (self *IMFTimedText) AddDataSource(byteStream *IMFByteStream, label string, language string, kind MF_TIMED_TEXT_TRACK_KIND, isDefault bool, trackId *uint32) error {
+	_label := win32.UTF16Ptr(label)
+	_language := win32.UTF16Ptr(language)
+	_isDefault := win32.Bool32(isDefault)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(byteStream)), uintptr(unsafe.Pointer(_label)), uintptr(unsafe.Pointer(_language)), uintptr(kind), uintptr(_isDefault), uintptr(unsafe.Pointer(trackId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDataSourceFromUrl dispatches through IMFTimedText's vtable slot 6.
-func (self *IMFTimedText) AddDataSourceFromUrl(url foundation.PWSTR, label foundation.PWSTR, language foundation.PWSTR, kind MF_TIMED_TEXT_TRACK_KIND, isDefault foundation.BOOL, trackId *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(url)), uintptr(unsafe.Pointer(label)), uintptr(unsafe.Pointer(language)), uintptr(kind), uintptr(isDefault), uintptr(unsafe.Pointer(trackId)))
-	return foundation.HRESULT(r1)
+func (self *IMFTimedText) AddDataSourceFromUrl(url string, label string, language string, kind MF_TIMED_TEXT_TRACK_KIND, isDefault bool, trackId *uint32) error {
+	_url := win32.UTF16Ptr(url)
+	_label := win32.UTF16Ptr(label)
+	_language := win32.UTF16Ptr(language)
+	_isDefault := win32.Bool32(isDefault)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_url)), uintptr(unsafe.Pointer(_label)), uintptr(unsafe.Pointer(_language)), uintptr(kind), uintptr(_isDefault), uintptr(unsafe.Pointer(trackId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTrack dispatches through IMFTimedText's vtable slot 7.
-func (self *IMFTimedText) AddTrack(label foundation.PWSTR, language foundation.PWSTR, kind MF_TIMED_TEXT_TRACK_KIND, track **IMFTimedTextTrack) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(label)), uintptr(unsafe.Pointer(language)), uintptr(kind), uintptr(unsafe.Pointer(track)))
-	return foundation.HRESULT(r1)
+func (self *IMFTimedText) AddTrack(label string, language string, kind MF_TIMED_TEXT_TRACK_KIND, track **IMFTimedTextTrack) error {
+	_label := win32.UTF16Ptr(label)
+	_language := win32.UTF16Ptr(language)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_label)), uintptr(unsafe.Pointer(_language)), uintptr(kind), uintptr(unsafe.Pointer(track)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveTrack dispatches through IMFTimedText's vtable slot 8.
-func (self *IMFTimedText) RemoveTrack(track *IMFTimedTextTrack) foundation.HRESULT {
+func (self *IMFTimedText) RemoveTrack(track *IMFTimedTextTrack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(track)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCueTimeOffset dispatches through IMFTimedText's vtable slot 9.
-func (self *IMFTimedText) GetCueTimeOffset(offset *float64) foundation.HRESULT {
+func (self *IMFTimedText) GetCueTimeOffset(offset *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(offset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTracks dispatches through IMFTimedText's vtable slot 11.
-func (self *IMFTimedText) GetTracks(tracks **IMFTimedTextTrackList) foundation.HRESULT {
+func (self *IMFTimedText) GetTracks(tracks **IMFTimedTextTrackList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tracks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetActiveTracks dispatches through IMFTimedText's vtable slot 12.
-func (self *IMFTimedText) GetActiveTracks(activeTracks **IMFTimedTextTrackList) foundation.HRESULT {
+func (self *IMFTimedText) GetActiveTracks(activeTracks **IMFTimedTextTrackList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(activeTracks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTextTracks dispatches through IMFTimedText's vtable slot 13.
-func (self *IMFTimedText) GetTextTracks(textTracks **IMFTimedTextTrackList) foundation.HRESULT {
+func (self *IMFTimedText) GetTextTracks(textTracks **IMFTimedTextTrackList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(textTracks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMetadataTracks dispatches through IMFTimedText's vtable slot 14.
-func (self *IMFTimedText) GetMetadataTracks(metadataTracks **IMFTimedTextTrackList) foundation.HRESULT {
+func (self *IMFTimedText) GetMetadataTracks(metadataTracks **IMFTimedTextTrackList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(metadataTracks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInBandEnabled dispatches through IMFTimedText's vtable slot 15.
-func (self *IMFTimedText) SetInBandEnabled(enabled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+func (self *IMFTimedText) SetInBandEnabled(enabled bool) error {
+	_enabled := win32.Bool32(enabled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(_enabled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsInBandEnabled dispatches through IMFTimedText's vtable slot 16.
@@ -9966,9 +10077,9 @@ type IMFTimedTextBinary struct {
 var IID_IMFTimedTextBinary = win32.GUID{Data1: 0x4ae3a412, Data2: 0x0545, Data3: 0x43c4, Data4: [8]byte{0xbf, 0x6f, 0x6b, 0x97, 0xa5, 0xc6, 0xc4, 0x32}}
 
 // GetData dispatches through IMFTimedTextBinary's vtable slot 3.
-func (self *IMFTimedTextBinary) GetData(data **byte, length *uint32) foundation.HRESULT {
+func (self *IMFTimedTextBinary) GetData(data **byte, length *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(length)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3c5f3e8a-90c0-464e-8136-898d2975f847
@@ -9980,21 +10091,21 @@ type IMFTimedTextBouten struct {
 var IID_IMFTimedTextBouten = win32.GUID{Data1: 0x3c5f3e8a, Data2: 0x90c0, Data3: 0x464e, Data4: [8]byte{0x81, 0x36, 0x89, 0x8d, 0x29, 0x75, 0xf8, 0x47}}
 
 // GetBoutenType dispatches through IMFTimedTextBouten's vtable slot 3.
-func (self *IMFTimedTextBouten) GetBoutenType(value *MF_TIMED_TEXT_BOUTEN_TYPE) foundation.HRESULT {
+func (self *IMFTimedTextBouten) GetBoutenType(value *MF_TIMED_TEXT_BOUTEN_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBoutenColor dispatches through IMFTimedTextBouten's vtable slot 4.
-func (self *IMFTimedTextBouten) GetBoutenColor(value *MFARGB) foundation.HRESULT {
+func (self *IMFTimedTextBouten) GetBoutenColor(value *MFARGB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBoutenPosition dispatches through IMFTimedTextBouten's vtable slot 5.
-func (self *IMFTimedTextBouten) GetBoutenPosition(value *MF_TIMED_TEXT_BOUTEN_POSITION) foundation.HRESULT {
+func (self *IMFTimedTextBouten) GetBoutenPosition(value *MF_TIMED_TEXT_BOUTEN_POSITION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTimedTextCue: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imftimedtextcue
@@ -10013,9 +10124,9 @@ func (self *IMFTimedTextCue) GetId() uint32 {
 }
 
 // GetOriginalId dispatches through IMFTimedTextCue's vtable slot 4.
-func (self *IMFTimedTextCue) GetOriginalId(originalId *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFTimedTextCue) GetOriginalId(originalId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(originalId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCueKind dispatches through IMFTimedTextCue's vtable slot 5.
@@ -10031,21 +10142,21 @@ func (self *IMFTimedTextCue) GetTrackId() uint32 {
 }
 
 // GetData dispatches through IMFTimedTextCue's vtable slot 9.
-func (self *IMFTimedTextCue) GetData(data **IMFTimedTextBinary) foundation.HRESULT {
+func (self *IMFTimedTextCue) GetData(data **IMFTimedTextBinary) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegion dispatches through IMFTimedTextCue's vtable slot 10.
-func (self *IMFTimedTextCue) GetRegion(region **IMFTimedTextRegion) foundation.HRESULT {
+func (self *IMFTimedTextCue) GetRegion(region **IMFTimedTextRegion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(region)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStyle dispatches through IMFTimedTextCue's vtable slot 11.
-func (self *IMFTimedTextCue) GetStyle(style **IMFTimedTextStyle) foundation.HRESULT {
+func (self *IMFTimedTextCue) GetStyle(style **IMFTimedTextStyle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(style)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLineCount dispatches through IMFTimedTextCue's vtable slot 12.
@@ -10055,9 +10166,9 @@ func (self *IMFTimedTextCue) GetLineCount() uint32 {
 }
 
 // GetLine dispatches through IMFTimedTextCue's vtable slot 13.
-func (self *IMFTimedTextCue) GetLine(index uint32, line **IMFTimedTextFormattedText) foundation.HRESULT {
+func (self *IMFTimedTextCue) GetLine(index uint32, line **IMFTimedTextFormattedText) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(line)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ad128745-211b-40a0-9981-fe65f166d0fd
@@ -10075,27 +10186,28 @@ func (self *IMFTimedTextCueList) GetLength() uint32 {
 }
 
 // GetCueByIndex dispatches through IMFTimedTextCueList's vtable slot 4.
-func (self *IMFTimedTextCueList) GetCueByIndex(index uint32, cue **IMFTimedTextCue) foundation.HRESULT {
+func (self *IMFTimedTextCueList) GetCueByIndex(index uint32, cue **IMFTimedTextCue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(cue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCueById dispatches through IMFTimedTextCueList's vtable slot 5.
-func (self *IMFTimedTextCueList) GetCueById(id uint32, cue **IMFTimedTextCue) foundation.HRESULT {
+func (self *IMFTimedTextCueList) GetCueById(id uint32, cue **IMFTimedTextCue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(id), uintptr(unsafe.Pointer(cue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCueByOriginalId dispatches through IMFTimedTextCueList's vtable slot 6.
-func (self *IMFTimedTextCueList) GetCueByOriginalId(originalId foundation.PWSTR, cue **IMFTimedTextCue) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(originalId)), uintptr(unsafe.Pointer(cue)))
-	return foundation.HRESULT(r1)
+func (self *IMFTimedTextCueList) GetCueByOriginalId(originalId string, cue **IMFTimedTextCue) error {
+	_originalId := win32.UTF16Ptr(originalId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_originalId)), uintptr(unsafe.Pointer(cue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveCue dispatches through IMFTimedTextCueList's vtable slot 9.
-func (self *IMFTimedTextCueList) RemoveCue(cue *IMFTimedTextCue) foundation.HRESULT {
+func (self *IMFTimedTextCueList) RemoveCue(cue *IMFTimedTextCue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTimedTextFormattedText: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imftimedtextformattedtext
@@ -10108,9 +10220,9 @@ type IMFTimedTextFormattedText struct {
 var IID_IMFTimedTextFormattedText = win32.GUID{Data1: 0xe13af3c1, Data2: 0x4d47, Data3: 0x4354, Data4: [8]byte{0xb1, 0xf5, 0xe8, 0x3a, 0xe0, 0xec, 0xae, 0x60}}
 
 // GetText dispatches through IMFTimedTextFormattedText's vtable slot 3.
-func (self *IMFTimedTextFormattedText) GetText(text *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFTimedTextFormattedText) GetText(text *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubformattingCount dispatches through IMFTimedTextFormattedText's vtable slot 4.
@@ -10120,9 +10232,9 @@ func (self *IMFTimedTextFormattedText) GetSubformattingCount() uint32 {
 }
 
 // GetSubformatting dispatches through IMFTimedTextFormattedText's vtable slot 5.
-func (self *IMFTimedTextFormattedText) GetSubformatting(index uint32, firstChar *uint32, charLength *uint32, style **IMFTimedTextStyle) foundation.HRESULT {
+func (self *IMFTimedTextFormattedText) GetSubformatting(index uint32, firstChar *uint32, charLength *uint32, style **IMFTimedTextStyle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(firstChar)), uintptr(unsafe.Pointer(charLength)), uintptr(unsafe.Pointer(style)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTimedTextNotify: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imftimedtextnotify
@@ -10145,8 +10257,9 @@ func (self *IMFTimedTextNotify) TrackRemoved(trackId uint32) {
 }
 
 // TrackSelected dispatches through IMFTimedTextNotify's vtable slot 5.
-func (self *IMFTimedTextNotify) TrackSelected(trackId uint32, selected foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(trackId), uintptr(selected))
+func (self *IMFTimedTextNotify) TrackSelected(trackId uint32, selected bool) {
+	_selected := win32.Bool32(selected)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(trackId), uintptr(_selected))
 }
 
 // TrackReadyStateChanged dispatches through IMFTimedTextNotify's vtable slot 6.
@@ -10174,75 +10287,75 @@ type IMFTimedTextRegion struct {
 var IID_IMFTimedTextRegion = win32.GUID{Data1: 0xc8d22afc, Data2: 0xbc47, Data3: 0x4bdf, Data4: [8]byte{0x9b, 0x04, 0x78, 0x7e, 0x49, 0xce, 0x3f, 0x58}}
 
 // GetName dispatches through IMFTimedTextRegion's vtable slot 3.
-func (self *IMFTimedTextRegion) GetName(name *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetName(name *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPosition dispatches through IMFTimedTextRegion's vtable slot 4.
-func (self *IMFTimedTextRegion) GetPosition(pX *float64, pY *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetPosition(pX *float64, pY *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pX)), uintptr(unsafe.Pointer(pY)), uintptr(unsafe.Pointer(unitType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExtent dispatches through IMFTimedTextRegion's vtable slot 5.
-func (self *IMFTimedTextRegion) GetExtent(pWidth *float64, pHeight *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetExtent(pWidth *float64, pHeight *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWidth)), uintptr(unsafe.Pointer(pHeight)), uintptr(unsafe.Pointer(unitType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackgroundColor dispatches through IMFTimedTextRegion's vtable slot 6.
-func (self *IMFTimedTextRegion) GetBackgroundColor(bgColor *MFARGB) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetBackgroundColor(bgColor *MFARGB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bgColor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWritingMode dispatches through IMFTimedTextRegion's vtable slot 7.
-func (self *IMFTimedTextRegion) GetWritingMode(writingMode *MF_TIMED_TEXT_WRITING_MODE) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetWritingMode(writingMode *MF_TIMED_TEXT_WRITING_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(writingMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayAlignment dispatches through IMFTimedTextRegion's vtable slot 8.
-func (self *IMFTimedTextRegion) GetDisplayAlignment(displayAlign *MF_TIMED_TEXT_DISPLAY_ALIGNMENT) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetDisplayAlignment(displayAlign *MF_TIMED_TEXT_DISPLAY_ALIGNMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(displayAlign)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLineHeight dispatches through IMFTimedTextRegion's vtable slot 9.
-func (self *IMFTimedTextRegion) GetLineHeight(pLineHeight *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetLineHeight(pLineHeight *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLineHeight)), uintptr(unsafe.Pointer(unitType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipOverflow dispatches through IMFTimedTextRegion's vtable slot 10.
-func (self *IMFTimedTextRegion) GetClipOverflow(clipOverflow *foundation.BOOL) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetClipOverflow(clipOverflow *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clipOverflow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPadding dispatches through IMFTimedTextRegion's vtable slot 11.
-func (self *IMFTimedTextRegion) GetPadding(before *float64, start *float64, after *float64, end *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetPadding(before *float64, start *float64, after *float64, end *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(before)), uintptr(unsafe.Pointer(start)), uintptr(unsafe.Pointer(after)), uintptr(unsafe.Pointer(end)), uintptr(unsafe.Pointer(unitType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWrap dispatches through IMFTimedTextRegion's vtable slot 12.
-func (self *IMFTimedTextRegion) GetWrap(wrap *foundation.BOOL) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetWrap(wrap *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wrap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetZIndex dispatches through IMFTimedTextRegion's vtable slot 13.
-func (self *IMFTimedTextRegion) GetZIndex(zIndex *int32) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetZIndex(zIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(zIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScrollMode dispatches through IMFTimedTextRegion's vtable slot 14.
-func (self *IMFTimedTextRegion) GetScrollMode(scrollMode *MF_TIMED_TEXT_SCROLL_MODE) foundation.HRESULT {
+func (self *IMFTimedTextRegion) GetScrollMode(scrollMode *MF_TIMED_TEXT_SCROLL_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scrollMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 76c6a6f5-4955-4de5-b27b-14b734cc14b4
@@ -10254,27 +10367,27 @@ type IMFTimedTextRuby struct {
 var IID_IMFTimedTextRuby = win32.GUID{Data1: 0x76c6a6f5, Data2: 0x4955, Data3: 0x4de5, Data4: [8]byte{0xb2, 0x7b, 0x14, 0xb7, 0x34, 0xcc, 0x14, 0xb4}}
 
 // GetRubyText dispatches through IMFTimedTextRuby's vtable slot 3.
-func (self *IMFTimedTextRuby) GetRubyText(rubyText *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFTimedTextRuby) GetRubyText(rubyText *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rubyText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRubyPosition dispatches through IMFTimedTextRuby's vtable slot 4.
-func (self *IMFTimedTextRuby) GetRubyPosition(value *MF_TIMED_TEXT_RUBY_POSITION) foundation.HRESULT {
+func (self *IMFTimedTextRuby) GetRubyPosition(value *MF_TIMED_TEXT_RUBY_POSITION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRubyAlign dispatches through IMFTimedTextRuby's vtable slot 5.
-func (self *IMFTimedTextRuby) GetRubyAlign(value *MF_TIMED_TEXT_RUBY_ALIGN) foundation.HRESULT {
+func (self *IMFTimedTextRuby) GetRubyAlign(value *MF_TIMED_TEXT_RUBY_ALIGN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRubyReserve dispatches through IMFTimedTextRuby's vtable slot 6.
-func (self *IMFTimedTextRuby) GetRubyReserve(value *MF_TIMED_TEXT_RUBY_RESERVE) foundation.HRESULT {
+func (self *IMFTimedTextRuby) GetRubyReserve(value *MF_TIMED_TEXT_RUBY_RESERVE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTimedTextStyle: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imftimedtextstyle
@@ -10287,9 +10400,9 @@ type IMFTimedTextStyle struct {
 var IID_IMFTimedTextStyle = win32.GUID{Data1: 0x09b2455d, Data2: 0xb834, Data3: 0x4f01, Data4: [8]byte{0xa3, 0x47, 0x90, 0x52, 0xe2, 0x1c, 0x45, 0x0e}}
 
 // GetName dispatches through IMFTimedTextStyle's vtable slot 3.
-func (self *IMFTimedTextStyle) GetName(name *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetName(name *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsExternal dispatches through IMFTimedTextStyle's vtable slot 4.
@@ -10299,69 +10412,69 @@ func (self *IMFTimedTextStyle) IsExternal() foundation.BOOL {
 }
 
 // GetFontFamily dispatches through IMFTimedTextStyle's vtable slot 5.
-func (self *IMFTimedTextStyle) GetFontFamily(fontFamily *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetFontFamily(fontFamily *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFamily)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFontSize dispatches through IMFTimedTextStyle's vtable slot 6.
-func (self *IMFTimedTextStyle) GetFontSize(fontSize *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetFontSize(fontSize *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontSize)), uintptr(unsafe.Pointer(unitType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColor dispatches through IMFTimedTextStyle's vtable slot 7.
-func (self *IMFTimedTextStyle) GetColor(color *MFARGB) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetColor(color *MFARGB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackgroundColor dispatches through IMFTimedTextStyle's vtable slot 8.
-func (self *IMFTimedTextStyle) GetBackgroundColor(bgColor *MFARGB) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetBackgroundColor(bgColor *MFARGB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bgColor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetShowBackgroundAlways dispatches through IMFTimedTextStyle's vtable slot 9.
-func (self *IMFTimedTextStyle) GetShowBackgroundAlways(showBackgroundAlways *foundation.BOOL) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetShowBackgroundAlways(showBackgroundAlways *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(showBackgroundAlways)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFontStyle dispatches through IMFTimedTextStyle's vtable slot 10.
-func (self *IMFTimedTextStyle) GetFontStyle(fontStyle *MF_TIMED_TEXT_FONT_STYLE) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetFontStyle(fontStyle *MF_TIMED_TEXT_FONT_STYLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontStyle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBold dispatches through IMFTimedTextStyle's vtable slot 11.
-func (self *IMFTimedTextStyle) GetBold(bold *foundation.BOOL) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetBold(bold *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bold)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRightToLeft dispatches through IMFTimedTextStyle's vtable slot 12.
-func (self *IMFTimedTextStyle) GetRightToLeft(rightToLeft *foundation.BOOL) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetRightToLeft(rightToLeft *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rightToLeft)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTextAlignment dispatches through IMFTimedTextStyle's vtable slot 13.
-func (self *IMFTimedTextStyle) GetTextAlignment(textAlign *MF_TIMED_TEXT_ALIGNMENT) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetTextAlignment(textAlign *MF_TIMED_TEXT_ALIGNMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(textAlign)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTextDecoration dispatches through IMFTimedTextStyle's vtable slot 14.
-func (self *IMFTimedTextStyle) GetTextDecoration(textDecoration *uint32) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetTextDecoration(textDecoration *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(textDecoration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTextOutline dispatches through IMFTimedTextStyle's vtable slot 15.
-func (self *IMFTimedTextStyle) GetTextOutline(color *MFARGB, thickness *float64, blurRadius *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) foundation.HRESULT {
+func (self *IMFTimedTextStyle) GetTextOutline(color *MFARGB, thickness *float64, blurRadius *float64, unitType *MF_TIMED_TEXT_UNIT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(thickness)), uintptr(unsafe.Pointer(blurRadius)), uintptr(unsafe.Pointer(unitType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: db639199-c809-4c89-bfca-d0bbb9729d6e
@@ -10373,27 +10486,27 @@ type IMFTimedTextStyle2 struct {
 var IID_IMFTimedTextStyle2 = win32.GUID{Data1: 0xdb639199, Data2: 0xc809, Data3: 0x4c89, Data4: [8]byte{0xbf, 0xca, 0xd0, 0xbb, 0xb9, 0x72, 0x9d, 0x6e}}
 
 // GetRuby dispatches through IMFTimedTextStyle2's vtable slot 3.
-func (self *IMFTimedTextStyle2) GetRuby(ruby **IMFTimedTextRuby) foundation.HRESULT {
+func (self *IMFTimedTextStyle2) GetRuby(ruby **IMFTimedTextRuby) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ruby)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBouten dispatches through IMFTimedTextStyle2's vtable slot 4.
-func (self *IMFTimedTextStyle2) GetBouten(bouten **IMFTimedTextBouten) foundation.HRESULT {
+func (self *IMFTimedTextStyle2) GetBouten(bouten **IMFTimedTextBouten) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bouten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsTextCombined dispatches through IMFTimedTextStyle2's vtable slot 5.
-func (self *IMFTimedTextStyle2) IsTextCombined(value *foundation.BOOL) foundation.HRESULT {
+func (self *IMFTimedTextStyle2) IsTextCombined(value *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFontAngleInDegrees dispatches through IMFTimedTextStyle2's vtable slot 6.
-func (self *IMFTimedTextStyle2) GetFontAngleInDegrees(value *float64) foundation.HRESULT {
+func (self *IMFTimedTextStyle2) GetFontAngleInDegrees(value *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTimedTextTrack: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imftimedtexttrack
@@ -10412,21 +10525,22 @@ func (self *IMFTimedTextTrack) GetId() uint32 {
 }
 
 // GetLabel dispatches through IMFTimedTextTrack's vtable slot 4.
-func (self *IMFTimedTextTrack) GetLabel(label *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFTimedTextTrack) GetLabel(label *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(label)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLabel dispatches through IMFTimedTextTrack's vtable slot 5.
-func (self *IMFTimedTextTrack) SetLabel(label foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(label)))
-	return foundation.HRESULT(r1)
+func (self *IMFTimedTextTrack) SetLabel(label string) error {
+	_label := win32.UTF16Ptr(label)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_label)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLanguage dispatches through IMFTimedTextTrack's vtable slot 6.
-func (self *IMFTimedTextTrack) GetLanguage(language *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFTimedTextTrack) GetLanguage(language *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(language)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTrackKind dispatches through IMFTimedTextTrack's vtable slot 7.
@@ -10442,9 +10556,9 @@ func (self *IMFTimedTextTrack) IsInBand() foundation.BOOL {
 }
 
 // GetInBandMetadataTrackDispatchType dispatches through IMFTimedTextTrack's vtable slot 9.
-func (self *IMFTimedTextTrack) GetInBandMetadataTrackDispatchType(dispatchType *foundation.PWSTR) foundation.HRESULT {
+func (self *IMFTimedTextTrack) GetInBandMetadataTrackDispatchType(dispatchType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dispatchType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsActive dispatches through IMFTimedTextTrack's vtable slot 10.
@@ -10460,15 +10574,15 @@ func (self *IMFTimedTextTrack) GetErrorCode() MF_TIMED_TEXT_ERROR_CODE {
 }
 
 // GetExtendedErrorCode dispatches through IMFTimedTextTrack's vtable slot 12.
-func (self *IMFTimedTextTrack) GetExtendedErrorCode() foundation.HRESULT {
+func (self *IMFTimedTextTrack) GetExtendedErrorCode() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDataFormat dispatches through IMFTimedTextTrack's vtable slot 13.
-func (self *IMFTimedTextTrack) GetDataFormat(format *win32.GUID) foundation.HRESULT {
+func (self *IMFTimedTextTrack) GetDataFormat(format *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(format)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReadyState dispatches through IMFTimedTextTrack's vtable slot 14.
@@ -10478,9 +10592,9 @@ func (self *IMFTimedTextTrack) GetReadyState() MF_TIMED_TEXT_TRACK_READY_STATE {
 }
 
 // GetCueList dispatches through IMFTimedTextTrack's vtable slot 15.
-func (self *IMFTimedTextTrack) GetCueList(cues **IMFTimedTextCueList) foundation.HRESULT {
+func (self *IMFTimedTextTrack) GetCueList(cues **IMFTimedTextCueList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTimedTextTrackList: https://learn.microsoft.com/windows/win32/api/mfmediaengine/nn-mfmediaengine-imftimedtexttracklist
@@ -10499,15 +10613,15 @@ func (self *IMFTimedTextTrackList) GetLength() uint32 {
 }
 
 // GetTrack dispatches through IMFTimedTextTrackList's vtable slot 4.
-func (self *IMFTimedTextTrackList) GetTrack(index uint32, track **IMFTimedTextTrack) foundation.HRESULT {
+func (self *IMFTimedTextTrackList) GetTrack(index uint32, track **IMFTimedTextTrack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(track)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTrackById dispatches through IMFTimedTextTrackList's vtable slot 5.
-func (self *IMFTimedTextTrackList) GetTrackById(trackId uint32, track **IMFTimedTextTrack) foundation.HRESULT {
+func (self *IMFTimedTextTrackList) GetTrackById(trackId uint32, track **IMFTimedTextTrack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(trackId), uintptr(unsafe.Pointer(track)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTimer: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftimer
@@ -10520,15 +10634,15 @@ type IMFTimer struct {
 var IID_IMFTimer = win32.GUID{Data1: 0xe56e4cbd, Data2: 0x8f70, Data3: 0x49d8, Data4: [8]byte{0xa0, 0xf8, 0xed, 0xb3, 0xd6, 0xab, 0x9b, 0xf2}}
 
 // SetTimer dispatches through IMFTimer's vtable slot 3.
-func (self *IMFTimer) SetTimer(dwFlags uint32, llClockTime int64, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown, ppunkKey **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFTimer) SetTimer(dwFlags uint32, llClockTime int64, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown, ppunkKey **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(llClockTime), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)), uintptr(unsafe.Pointer(ppunkKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelTimer dispatches through IMFTimer's vtable slot 4.
-func (self *IMFTimer) CancelTimer(punkKey *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFTimer) CancelTimer(punkKey *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTopoLoader: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftopoloader
@@ -10541,9 +10655,9 @@ type IMFTopoLoader struct {
 var IID_IMFTopoLoader = win32.GUID{Data1: 0xde9a6157, Data2: 0xf660, Data3: 0x4643, Data4: [8]byte{0xb5, 0x6a, 0xdf, 0x9f, 0x79, 0x98, 0xc7, 0xcd}}
 
 // Load dispatches through IMFTopoLoader's vtable slot 3.
-func (self *IMFTopoLoader) Load(pInputTopo *IMFTopology, ppOutputTopo **IMFTopology, pCurrentTopo *IMFTopology) foundation.HRESULT {
+func (self *IMFTopoLoader) Load(pInputTopo *IMFTopology, ppOutputTopo **IMFTopology, pCurrentTopo *IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInputTopo)), uintptr(unsafe.Pointer(ppOutputTopo)), uintptr(unsafe.Pointer(pCurrentTopo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTopology: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftopology
@@ -10556,63 +10670,63 @@ type IMFTopology struct {
 var IID_IMFTopology = win32.GUID{Data1: 0x83cf873a, Data2: 0xf6da, Data3: 0x4bc8, Data4: [8]byte{0x82, 0x3f, 0xba, 0xcf, 0xd5, 0x5d, 0xc4, 0x33}}
 
 // GetTopologyID dispatches through IMFTopology's vtable slot 33.
-func (self *IMFTopology) GetTopologyID(pID *uint64) foundation.HRESULT {
+func (self *IMFTopology) GetTopologyID(pID *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddNode dispatches through IMFTopology's vtable slot 34.
-func (self *IMFTopology) AddNode(pNode *IMFTopologyNode) foundation.HRESULT {
+func (self *IMFTopology) AddNode(pNode *IMFTopologyNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveNode dispatches through IMFTopology's vtable slot 35.
-func (self *IMFTopology) RemoveNode(pNode *IMFTopologyNode) foundation.HRESULT {
+func (self *IMFTopology) RemoveNode(pNode *IMFTopologyNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNodeCount dispatches through IMFTopology's vtable slot 36.
-func (self *IMFTopology) GetNodeCount(pwNodes *uint16) foundation.HRESULT {
+func (self *IMFTopology) GetNodeCount(pwNodes *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwNodes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNode dispatches through IMFTopology's vtable slot 37.
-func (self *IMFTopology) GetNode(wIndex uint16, ppNode **IMFTopologyNode) foundation.HRESULT {
+func (self *IMFTopology) GetNode(wIndex uint16, ppNode **IMFTopologyNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(wIndex), uintptr(unsafe.Pointer(ppNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IMFTopology's vtable slot 38.
-func (self *IMFTopology) Clear() foundation.HRESULT {
+func (self *IMFTopology) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloneFrom dispatches through IMFTopology's vtable slot 39.
-func (self *IMFTopology) CloneFrom(pTopology *IMFTopology) foundation.HRESULT {
+func (self *IMFTopology) CloneFrom(pTopology *IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTopology)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNodeByID dispatches through IMFTopology's vtable slot 40.
-func (self *IMFTopology) GetNodeByID(qwTopoNodeID uint64, ppNode **IMFTopologyNode) foundation.HRESULT {
+func (self *IMFTopology) GetNodeByID(qwTopoNodeID uint64, ppNode **IMFTopologyNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(qwTopoNodeID), uintptr(unsafe.Pointer(ppNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceNodeCollection dispatches through IMFTopology's vtable slot 41.
-func (self *IMFTopology) GetSourceNodeCollection(ppCollection **IMFCollection) foundation.HRESULT {
+func (self *IMFTopology) GetSourceNodeCollection(ppCollection **IMFCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputNodeCollection dispatches through IMFTopology's vtable slot 42.
-func (self *IMFTopology) GetOutputNodeCollection(ppCollection **IMFCollection) foundation.HRESULT {
+func (self *IMFTopology) GetOutputNodeCollection(ppCollection **IMFCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTopologyNode: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftopologynode
@@ -10625,99 +10739,99 @@ type IMFTopologyNode struct {
 var IID_IMFTopologyNode = win32.GUID{Data1: 0x83cf873a, Data2: 0xf6da, Data3: 0x4bc8, Data4: [8]byte{0x82, 0x3f, 0xba, 0xcf, 0xd5, 0x5d, 0xc4, 0x30}}
 
 // SetObject dispatches through IMFTopologyNode's vtable slot 33.
-func (self *IMFTopologyNode) SetObject(pObject *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFTopologyNode) SetObject(pObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObject dispatches through IMFTopologyNode's vtable slot 34.
-func (self *IMFTopologyNode) GetObject(ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFTopologyNode) GetObject(ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNodeType dispatches through IMFTopologyNode's vtable slot 35.
-func (self *IMFTopologyNode) GetNodeType(pType *MF_TOPOLOGY_TYPE) foundation.HRESULT {
+func (self *IMFTopologyNode) GetNodeType(pType *MF_TOPOLOGY_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTopoNodeID dispatches through IMFTopologyNode's vtable slot 36.
-func (self *IMFTopologyNode) GetTopoNodeID(pID *uint64) foundation.HRESULT {
+func (self *IMFTopologyNode) GetTopoNodeID(pID *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTopoNodeID dispatches through IMFTopologyNode's vtable slot 37.
-func (self *IMFTopologyNode) SetTopoNodeID(ullTopoID uint64) foundation.HRESULT {
+func (self *IMFTopologyNode) SetTopoNodeID(ullTopoID uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(ullTopoID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputCount dispatches through IMFTopologyNode's vtable slot 38.
-func (self *IMFTopologyNode) GetInputCount(pcInputs *uint32) foundation.HRESULT {
+func (self *IMFTopologyNode) GetInputCount(pcInputs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcInputs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputCount dispatches through IMFTopologyNode's vtable slot 39.
-func (self *IMFTopologyNode) GetOutputCount(pcOutputs *uint32) foundation.HRESULT {
+func (self *IMFTopologyNode) GetOutputCount(pcOutputs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcOutputs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConnectOutput dispatches through IMFTopologyNode's vtable slot 40.
-func (self *IMFTopologyNode) ConnectOutput(dwOutputIndex uint32, pDownstreamNode *IMFTopologyNode, dwInputIndexOnDownstreamNode uint32) foundation.HRESULT {
+func (self *IMFTopologyNode) ConnectOutput(dwOutputIndex uint32, pDownstreamNode *IMFTopologyNode, dwInputIndexOnDownstreamNode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(dwOutputIndex), uintptr(unsafe.Pointer(pDownstreamNode)), uintptr(dwInputIndexOnDownstreamNode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisconnectOutput dispatches through IMFTopologyNode's vtable slot 41.
-func (self *IMFTopologyNode) DisconnectOutput(dwOutputIndex uint32) foundation.HRESULT {
+func (self *IMFTopologyNode) DisconnectOutput(dwOutputIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(dwOutputIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInput dispatches through IMFTopologyNode's vtable slot 42.
-func (self *IMFTopologyNode) GetInput(dwInputIndex uint32, ppUpstreamNode **IMFTopologyNode, pdwOutputIndexOnUpstreamNode *uint32) foundation.HRESULT {
+func (self *IMFTopologyNode) GetInput(dwInputIndex uint32, ppUpstreamNode **IMFTopologyNode, pdwOutputIndexOnUpstreamNode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(dwInputIndex), uintptr(unsafe.Pointer(ppUpstreamNode)), uintptr(unsafe.Pointer(pdwOutputIndexOnUpstreamNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutput dispatches through IMFTopologyNode's vtable slot 43.
-func (self *IMFTopologyNode) GetOutput(dwOutputIndex uint32, ppDownstreamNode **IMFTopologyNode, pdwInputIndexOnDownstreamNode *uint32) foundation.HRESULT {
+func (self *IMFTopologyNode) GetOutput(dwOutputIndex uint32, ppDownstreamNode **IMFTopologyNode, pdwInputIndexOnDownstreamNode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(dwOutputIndex), uintptr(unsafe.Pointer(ppDownstreamNode)), uintptr(unsafe.Pointer(pdwInputIndexOnDownstreamNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputPrefType dispatches through IMFTopologyNode's vtable slot 44.
-func (self *IMFTopologyNode) SetOutputPrefType(dwOutputIndex uint32, pType *IMFMediaType) foundation.HRESULT {
+func (self *IMFTopologyNode) SetOutputPrefType(dwOutputIndex uint32, pType *IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(dwOutputIndex), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputPrefType dispatches through IMFTopologyNode's vtable slot 45.
-func (self *IMFTopologyNode) GetOutputPrefType(dwOutputIndex uint32, ppType **IMFMediaType) foundation.HRESULT {
+func (self *IMFTopologyNode) GetOutputPrefType(dwOutputIndex uint32, ppType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(dwOutputIndex), uintptr(unsafe.Pointer(ppType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInputPrefType dispatches through IMFTopologyNode's vtable slot 46.
-func (self *IMFTopologyNode) SetInputPrefType(dwInputIndex uint32, pType *IMFMediaType) foundation.HRESULT {
+func (self *IMFTopologyNode) SetInputPrefType(dwInputIndex uint32, pType *IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(dwInputIndex), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputPrefType dispatches through IMFTopologyNode's vtable slot 47.
-func (self *IMFTopologyNode) GetInputPrefType(dwInputIndex uint32, ppType **IMFMediaType) foundation.HRESULT {
+func (self *IMFTopologyNode) GetInputPrefType(dwInputIndex uint32, ppType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(dwInputIndex), uintptr(unsafe.Pointer(ppType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloneFrom dispatches through IMFTopologyNode's vtable slot 48.
-func (self *IMFTopologyNode) CloneFrom(pNode *IMFTopologyNode) foundation.HRESULT {
+func (self *IMFTopologyNode) CloneFrom(pNode *IMFTopologyNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTopologyNodeAttributeEditor: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftopologynodeattributeeditor
@@ -10730,9 +10844,9 @@ type IMFTopologyNodeAttributeEditor struct {
 var IID_IMFTopologyNodeAttributeEditor = win32.GUID{Data1: 0x676aa6dd, Data2: 0x238a, Data3: 0x410d, Data4: [8]byte{0xbb, 0x99, 0x65, 0x66, 0x8d, 0x01, 0x60, 0x5a}}
 
 // UpdateNodeAttributes dispatches through IMFTopologyNodeAttributeEditor's vtable slot 3.
-func (self *IMFTopologyNodeAttributeEditor) UpdateNodeAttributes(TopoId uint64, cUpdates uint32, pUpdates *MFTOPONODE_ATTRIBUTE_UPDATE) foundation.HRESULT {
+func (self *IMFTopologyNodeAttributeEditor) UpdateNodeAttributes(TopoId uint64, cUpdates uint32, pUpdates *MFTOPONODE_ATTRIBUTE_UPDATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(TopoId), uintptr(cUpdates), uintptr(unsafe.Pointer(pUpdates)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTopologyServiceLookup: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imftopologyservicelookup
@@ -10745,9 +10859,9 @@ type IMFTopologyServiceLookup struct {
 var IID_IMFTopologyServiceLookup = win32.GUID{Data1: 0xfa993889, Data2: 0x4383, Data3: 0x415a, Data4: [8]byte{0xa9, 0x30, 0xdd, 0x47, 0x2a, 0x8c, 0xf6, 0xf7}}
 
 // LookupService dispatches through IMFTopologyServiceLookup's vtable slot 3.
-func (self *IMFTopologyServiceLookup) LookupService(Type MF_SERVICE_LOOKUP_TYPE, dwIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObjects *unsafe.Pointer, pnObjects *uint32) foundation.HRESULT {
+func (self *IMFTopologyServiceLookup) LookupService(Type MF_SERVICE_LOOKUP_TYPE, dwIndex uint32, guidService *win32.GUID, riid *win32.GUID, ppvObjects *unsafe.Pointer, pnObjects *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(dwIndex), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObjects)), uintptr(unsafe.Pointer(pnObjects)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTopologyServiceLookupClient: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imftopologyservicelookupclient
@@ -10760,15 +10874,15 @@ type IMFTopologyServiceLookupClient struct {
 var IID_IMFTopologyServiceLookupClient = win32.GUID{Data1: 0xfa99388a, Data2: 0x4383, Data3: 0x415a, Data4: [8]byte{0xa9, 0x30, 0xdd, 0x47, 0x2a, 0x8c, 0xf6, 0xf7}}
 
 // InitServicePointers dispatches through IMFTopologyServiceLookupClient's vtable slot 3.
-func (self *IMFTopologyServiceLookupClient) InitServicePointers(pLookup *IMFTopologyServiceLookup) foundation.HRESULT {
+func (self *IMFTopologyServiceLookupClient) InitServicePointers(pLookup *IMFTopologyServiceLookup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLookup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseServicePointers dispatches through IMFTopologyServiceLookupClient's vtable slot 4.
-func (self *IMFTopologyServiceLookupClient) ReleaseServicePointers() foundation.HRESULT {
+func (self *IMFTopologyServiceLookupClient) ReleaseServicePointers() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTrackedSample: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftrackedsample
@@ -10781,9 +10895,9 @@ type IMFTrackedSample struct {
 var IID_IMFTrackedSample = win32.GUID{Data1: 0x245bf8e9, Data2: 0x0755, Data3: 0x40f7, Data4: [8]byte{0x88, 0xa5, 0xae, 0x0f, 0x18, 0xd5, 0x5e, 0x17}}
 
 // SetAllocator dispatches through IMFTrackedSample's vtable slot 3.
-func (self *IMFTrackedSample) SetAllocator(pSampleAllocator *IMFAsyncCallback, pUnkState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFTrackedSample) SetAllocator(pSampleAllocator *IMFAsyncCallback, pUnkState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSampleAllocator)), uintptr(unsafe.Pointer(pUnkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTranscodeProfile: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftranscodeprofile
@@ -10796,39 +10910,39 @@ type IMFTranscodeProfile struct {
 var IID_IMFTranscodeProfile = win32.GUID{Data1: 0x4adfdba3, Data2: 0x7ab0, Data3: 0x4953, Data4: [8]byte{0xa6, 0x2b, 0x46, 0x1e, 0x7f, 0xf3, 0xda, 0x1e}}
 
 // SetAudioAttributes dispatches through IMFTranscodeProfile's vtable slot 3.
-func (self *IMFTranscodeProfile) SetAudioAttributes(pAttrs *IMFAttributes) foundation.HRESULT {
+func (self *IMFTranscodeProfile) SetAudioAttributes(pAttrs *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudioAttributes dispatches through IMFTranscodeProfile's vtable slot 4.
-func (self *IMFTranscodeProfile) GetAudioAttributes(ppAttrs **IMFAttributes) foundation.HRESULT {
+func (self *IMFTranscodeProfile) GetAudioAttributes(ppAttrs **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAttrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVideoAttributes dispatches through IMFTranscodeProfile's vtable slot 5.
-func (self *IMFTranscodeProfile) SetVideoAttributes(pAttrs *IMFAttributes) foundation.HRESULT {
+func (self *IMFTranscodeProfile) SetVideoAttributes(pAttrs *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoAttributes dispatches through IMFTranscodeProfile's vtable slot 6.
-func (self *IMFTranscodeProfile) GetVideoAttributes(ppAttrs **IMFAttributes) foundation.HRESULT {
+func (self *IMFTranscodeProfile) GetVideoAttributes(ppAttrs **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAttrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContainerAttributes dispatches through IMFTranscodeProfile's vtable slot 7.
-func (self *IMFTranscodeProfile) SetContainerAttributes(pAttrs *IMFAttributes) foundation.HRESULT {
+func (self *IMFTranscodeProfile) SetContainerAttributes(pAttrs *IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContainerAttributes dispatches through IMFTranscodeProfile's vtable slot 8.
-func (self *IMFTranscodeProfile) GetContainerAttributes(ppAttrs **IMFAttributes) foundation.HRESULT {
+func (self *IMFTranscodeProfile) GetContainerAttributes(ppAttrs **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAttrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTranscodeSinkInfoProvider: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftranscodesinkinfoprovider
@@ -10841,27 +10955,28 @@ type IMFTranscodeSinkInfoProvider struct {
 var IID_IMFTranscodeSinkInfoProvider = win32.GUID{Data1: 0x8cffcd2e, Data2: 0x5a03, Data3: 0x4a3a, Data4: [8]byte{0xaf, 0xf7, 0xed, 0xcd, 0x10, 0x7c, 0x62, 0x0e}}
 
 // SetOutputFile dispatches through IMFTranscodeSinkInfoProvider's vtable slot 3.
-func (self *IMFTranscodeSinkInfoProvider) SetOutputFile(pwszFileName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszFileName)))
-	return foundation.HRESULT(r1)
+func (self *IMFTranscodeSinkInfoProvider) SetOutputFile(pwszFileName string) error {
+	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFileName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputByteStream dispatches through IMFTranscodeSinkInfoProvider's vtable slot 4.
-func (self *IMFTranscodeSinkInfoProvider) SetOutputByteStream(pByteStreamActivate *IMFActivate) foundation.HRESULT {
+func (self *IMFTranscodeSinkInfoProvider) SetOutputByteStream(pByteStreamActivate *IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pByteStreamActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProfile dispatches through IMFTranscodeSinkInfoProvider's vtable slot 5.
-func (self *IMFTranscodeSinkInfoProvider) SetProfile(pProfile *IMFTranscodeProfile) foundation.HRESULT {
+func (self *IMFTranscodeSinkInfoProvider) SetProfile(pProfile *IMFTranscodeProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSinkInfo dispatches through IMFTranscodeSinkInfoProvider's vtable slot 6.
-func (self *IMFTranscodeSinkInfoProvider) GetSinkInfo(pSinkInfo *MF_TRANSCODE_SINK_INFO) foundation.HRESULT {
+func (self *IMFTranscodeSinkInfoProvider) GetSinkInfo(pSinkInfo *MF_TRANSCODE_SINK_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSinkInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTransform: https://learn.microsoft.com/windows/win32/api/mftransform/nn-mftransform-imftransform
@@ -10874,141 +10989,141 @@ type IMFTransform struct {
 var IID_IMFTransform = win32.GUID{Data1: 0xbf94c121, Data2: 0x5b05, Data3: 0x4e6f, Data4: [8]byte{0x80, 0x00, 0xba, 0x59, 0x89, 0x61, 0x41, 0x4d}}
 
 // GetStreamLimits dispatches through IMFTransform's vtable slot 3.
-func (self *IMFTransform) GetStreamLimits(pdwInputMinimum *uint32, pdwInputMaximum *uint32, pdwOutputMinimum *uint32, pdwOutputMaximum *uint32) foundation.HRESULT {
+func (self *IMFTransform) GetStreamLimits(pdwInputMinimum *uint32, pdwInputMaximum *uint32, pdwOutputMinimum *uint32, pdwOutputMaximum *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwInputMinimum)), uintptr(unsafe.Pointer(pdwInputMaximum)), uintptr(unsafe.Pointer(pdwOutputMinimum)), uintptr(unsafe.Pointer(pdwOutputMaximum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamCount dispatches through IMFTransform's vtable slot 4.
-func (self *IMFTransform) GetStreamCount(pcInputStreams *uint32, pcOutputStreams *uint32) foundation.HRESULT {
+func (self *IMFTransform) GetStreamCount(pcInputStreams *uint32, pcOutputStreams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcInputStreams)), uintptr(unsafe.Pointer(pcOutputStreams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamIDs dispatches through IMFTransform's vtable slot 5.
-func (self *IMFTransform) GetStreamIDs(dwInputIDArraySize uint32, pdwInputIDs *uint32, dwOutputIDArraySize uint32, pdwOutputIDs *uint32) foundation.HRESULT {
+func (self *IMFTransform) GetStreamIDs(dwInputIDArraySize uint32, pdwInputIDs *uint32, dwOutputIDArraySize uint32, pdwOutputIDs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwInputIDArraySize), uintptr(unsafe.Pointer(pdwInputIDs)), uintptr(dwOutputIDArraySize), uintptr(unsafe.Pointer(pdwOutputIDs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputStreamInfo dispatches through IMFTransform's vtable slot 6.
-func (self *IMFTransform) GetInputStreamInfo(dwInputStreamID uint32, pStreamInfo *MFT_INPUT_STREAM_INFO) foundation.HRESULT {
+func (self *IMFTransform) GetInputStreamInfo(dwInputStreamID uint32, pStreamInfo *MFT_INPUT_STREAM_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(pStreamInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputStreamInfo dispatches through IMFTransform's vtable slot 7.
-func (self *IMFTransform) GetOutputStreamInfo(dwOutputStreamID uint32, pStreamInfo *MFT_OUTPUT_STREAM_INFO) foundation.HRESULT {
+func (self *IMFTransform) GetOutputStreamInfo(dwOutputStreamID uint32, pStreamInfo *MFT_OUTPUT_STREAM_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(unsafe.Pointer(pStreamInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttributes dispatches through IMFTransform's vtable slot 8.
-func (self *IMFTransform) GetAttributes(pAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFTransform) GetAttributes(pAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputStreamAttributes dispatches through IMFTransform's vtable slot 9.
-func (self *IMFTransform) GetInputStreamAttributes(dwInputStreamID uint32, pAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFTransform) GetInputStreamAttributes(dwInputStreamID uint32, pAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(pAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputStreamAttributes dispatches through IMFTransform's vtable slot 10.
-func (self *IMFTransform) GetOutputStreamAttributes(dwOutputStreamID uint32, pAttributes **IMFAttributes) foundation.HRESULT {
+func (self *IMFTransform) GetOutputStreamAttributes(dwOutputStreamID uint32, pAttributes **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(unsafe.Pointer(pAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteInputStream dispatches through IMFTransform's vtable slot 11.
-func (self *IMFTransform) DeleteInputStream(dwStreamID uint32) foundation.HRESULT {
+func (self *IMFTransform) DeleteInputStream(dwStreamID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddInputStreams dispatches through IMFTransform's vtable slot 12.
-func (self *IMFTransform) AddInputStreams(cStreams uint32, adwStreamIDs *uint32) foundation.HRESULT {
+func (self *IMFTransform) AddInputStreams(cStreams uint32, adwStreamIDs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(cStreams), uintptr(unsafe.Pointer(adwStreamIDs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputAvailableType dispatches through IMFTransform's vtable slot 13.
-func (self *IMFTransform) GetInputAvailableType(dwInputStreamID uint32, dwTypeIndex uint32, ppType **IMFMediaType) foundation.HRESULT {
+func (self *IMFTransform) GetInputAvailableType(dwInputStreamID uint32, dwTypeIndex uint32, ppType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(dwTypeIndex), uintptr(unsafe.Pointer(ppType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputAvailableType dispatches through IMFTransform's vtable slot 14.
-func (self *IMFTransform) GetOutputAvailableType(dwOutputStreamID uint32, dwTypeIndex uint32, ppType **IMFMediaType) foundation.HRESULT {
+func (self *IMFTransform) GetOutputAvailableType(dwOutputStreamID uint32, dwTypeIndex uint32, ppType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(dwTypeIndex), uintptr(unsafe.Pointer(ppType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInputType dispatches through IMFTransform's vtable slot 15.
-func (self *IMFTransform) SetInputType(dwInputStreamID uint32, pType *IMFMediaType, dwFlags uint32) foundation.HRESULT {
+func (self *IMFTransform) SetInputType(dwInputStreamID uint32, pType *IMFMediaType, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(pType)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputType dispatches through IMFTransform's vtable slot 16.
-func (self *IMFTransform) SetOutputType(dwOutputStreamID uint32, pType *IMFMediaType, dwFlags uint32) foundation.HRESULT {
+func (self *IMFTransform) SetOutputType(dwOutputStreamID uint32, pType *IMFMediaType, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(unsafe.Pointer(pType)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputCurrentType dispatches through IMFTransform's vtable slot 17.
-func (self *IMFTransform) GetInputCurrentType(dwInputStreamID uint32, ppType **IMFMediaType) foundation.HRESULT {
+func (self *IMFTransform) GetInputCurrentType(dwInputStreamID uint32, ppType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(ppType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputCurrentType dispatches through IMFTransform's vtable slot 18.
-func (self *IMFTransform) GetOutputCurrentType(dwOutputStreamID uint32, ppType **IMFMediaType) foundation.HRESULT {
+func (self *IMFTransform) GetOutputCurrentType(dwOutputStreamID uint32, ppType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwOutputStreamID), uintptr(unsafe.Pointer(ppType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputStatus dispatches through IMFTransform's vtable slot 19.
-func (self *IMFTransform) GetInputStatus(dwInputStreamID uint32, pdwFlags *uint32) foundation.HRESULT {
+func (self *IMFTransform) GetInputStatus(dwInputStreamID uint32, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputStatus dispatches through IMFTransform's vtable slot 20.
-func (self *IMFTransform) GetOutputStatus(pdwFlags *uint32) foundation.HRESULT {
+func (self *IMFTransform) GetOutputStatus(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputBounds dispatches through IMFTransform's vtable slot 21.
-func (self *IMFTransform) SetOutputBounds(hnsLowerBound int64, hnsUpperBound int64) foundation.HRESULT {
+func (self *IMFTransform) SetOutputBounds(hnsLowerBound int64, hnsUpperBound int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(hnsLowerBound), uintptr(hnsUpperBound))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessEvent dispatches through IMFTransform's vtable slot 22.
-func (self *IMFTransform) ProcessEvent(dwInputStreamID uint32, pEvent *IMFMediaEvent) foundation.HRESULT {
+func (self *IMFTransform) ProcessEvent(dwInputStreamID uint32, pEvent *IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessMessage dispatches through IMFTransform's vtable slot 23.
-func (self *IMFTransform) ProcessMessage(eMessage MFT_MESSAGE_TYPE, ulParam uintptr) foundation.HRESULT {
+func (self *IMFTransform) ProcessMessage(eMessage MFT_MESSAGE_TYPE, ulParam uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(eMessage), uintptr(ulParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessInput dispatches through IMFTransform's vtable slot 24.
-func (self *IMFTransform) ProcessInput(dwInputStreamID uint32, pSample *IMFSample, dwFlags uint32) foundation.HRESULT {
+func (self *IMFTransform) ProcessInput(dwInputStreamID uint32, pSample *IMFSample, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(dwInputStreamID), uintptr(unsafe.Pointer(pSample)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessOutput dispatches through IMFTransform's vtable slot 25.
-func (self *IMFTransform) ProcessOutput(dwFlags uint32, cOutputBufferCount uint32, pOutputSamples *MFT_OUTPUT_DATA_BUFFER, pdwStatus *uint32) foundation.HRESULT {
+func (self *IMFTransform) ProcessOutput(dwFlags uint32, cOutputBufferCount uint32, pOutputSamples *MFT_OUTPUT_DATA_BUFFER, pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(cOutputBufferCount), uintptr(unsafe.Pointer(pOutputSamples)), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTrustedInput: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftrustedinput
@@ -11021,9 +11136,9 @@ type IMFTrustedInput struct {
 var IID_IMFTrustedInput = win32.GUID{Data1: 0x542612c4, Data2: 0xa1b8, Data3: 0x4632, Data4: [8]byte{0xb5, 0x21, 0xde, 0x11, 0xea, 0x64, 0xa0, 0xb0}}
 
 // GetInputTrustAuthority dispatches through IMFTrustedInput's vtable slot 3.
-func (self *IMFTrustedInput) GetInputTrustAuthority(dwStreamID uint32, riid *win32.GUID, ppunkObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFTrustedInput) GetInputTrustAuthority(dwStreamID uint32, riid *win32.GUID, ppunkObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppunkObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFTrustedOutput: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imftrustedoutput
@@ -11036,21 +11151,21 @@ type IMFTrustedOutput struct {
 var IID_IMFTrustedOutput = win32.GUID{Data1: 0xd19f8e95, Data2: 0xb126, Data3: 0x4446, Data4: [8]byte{0x89, 0x0c, 0x5d, 0xcb, 0x7a, 0xd7, 0x14, 0x53}}
 
 // GetOutputTrustAuthorityCount dispatches through IMFTrustedOutput's vtable slot 3.
-func (self *IMFTrustedOutput) GetOutputTrustAuthorityCount(pcOutputTrustAuthorities *uint32) foundation.HRESULT {
+func (self *IMFTrustedOutput) GetOutputTrustAuthorityCount(pcOutputTrustAuthorities *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcOutputTrustAuthorities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputTrustAuthorityByIndex dispatches through IMFTrustedOutput's vtable slot 4.
-func (self *IMFTrustedOutput) GetOutputTrustAuthorityByIndex(dwIndex uint32, ppauthority **IMFOutputTrustAuthority) foundation.HRESULT {
+func (self *IMFTrustedOutput) GetOutputTrustAuthorityByIndex(dwIndex uint32, ppauthority **IMFOutputTrustAuthority) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppauthority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsFinal dispatches through IMFTrustedOutput's vtable slot 5.
-func (self *IMFTrustedOutput) IsFinal(pfIsFinal *foundation.BOOL) foundation.HRESULT {
+func (self *IMFTrustedOutput) IsFinal(pfIsFinal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsFinal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoCaptureSampleAllocator: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfvideocapturesampleallocator
@@ -11063,9 +11178,9 @@ type IMFVideoCaptureSampleAllocator struct {
 var IID_IMFVideoCaptureSampleAllocator = win32.GUID{Data1: 0x725b77c7, Data2: 0xca9f, Data3: 0x4fe5, Data4: [8]byte{0x9d, 0x72, 0x99, 0x46, 0xbf, 0x9b, 0x3c, 0x70}}
 
 // InitializeCaptureSampleAllocator dispatches through IMFVideoCaptureSampleAllocator's vtable slot 7.
-func (self *IMFVideoCaptureSampleAllocator) InitializeCaptureSampleAllocator(cbSampleSize uint32, cbCaptureMetadataSize uint32, cbAlignment uint32, cMinimumSamples uint32, pAttributes *IMFAttributes, pMediaType *IMFMediaType) foundation.HRESULT {
+func (self *IMFVideoCaptureSampleAllocator) InitializeCaptureSampleAllocator(cbSampleSize uint32, cbCaptureMetadataSize uint32, cbAlignment uint32, cMinimumSamples uint32, pAttributes *IMFAttributes, pMediaType *IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cbSampleSize), uintptr(cbCaptureMetadataSize), uintptr(cbAlignment), uintptr(cMinimumSamples), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoDeviceID: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imfvideodeviceid
@@ -11078,9 +11193,9 @@ type IMFVideoDeviceID struct {
 var IID_IMFVideoDeviceID = win32.GUID{Data1: 0xa38d9567, Data2: 0x5a9c, Data3: 0x4f3c, Data4: [8]byte{0xb2, 0x93, 0x8e, 0xb4, 0x15, 0xb2, 0x79, 0xba}}
 
 // GetDeviceID dispatches through IMFVideoDeviceID's vtable slot 3.
-func (self *IMFVideoDeviceID) GetDeviceID(pDeviceID *win32.GUID) foundation.HRESULT {
+func (self *IMFVideoDeviceID) GetDeviceID(pDeviceID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoDisplayControl: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imfvideodisplaycontrol
@@ -11093,99 +11208,100 @@ type IMFVideoDisplayControl struct {
 var IID_IMFVideoDisplayControl = win32.GUID{Data1: 0xa490b1e4, Data2: 0xab84, Data3: 0x4d31, Data4: [8]byte{0xa1, 0xb2, 0x18, 0x1e, 0x03, 0xb1, 0x07, 0x7a}}
 
 // GetNativeVideoSize dispatches through IMFVideoDisplayControl's vtable slot 3.
-func (self *IMFVideoDisplayControl) GetNativeVideoSize(pszVideo *foundation.SIZE, pszARVideo *foundation.SIZE) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) GetNativeVideoSize(pszVideo *foundation.SIZE, pszARVideo *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszVideo)), uintptr(unsafe.Pointer(pszARVideo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIdealVideoSize dispatches through IMFVideoDisplayControl's vtable slot 4.
-func (self *IMFVideoDisplayControl) GetIdealVideoSize(pszMin *foundation.SIZE, pszMax *foundation.SIZE) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) GetIdealVideoSize(pszMin *foundation.SIZE, pszMax *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMin)), uintptr(unsafe.Pointer(pszMax)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVideoPosition dispatches through IMFVideoDisplayControl's vtable slot 5.
-func (self *IMFVideoDisplayControl) SetVideoPosition(pnrcSource *MFVideoNormalizedRect, prcDest *foundation.RECT) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) SetVideoPosition(pnrcSource *MFVideoNormalizedRect, prcDest *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnrcSource)), uintptr(unsafe.Pointer(prcDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoPosition dispatches through IMFVideoDisplayControl's vtable slot 6.
-func (self *IMFVideoDisplayControl) GetVideoPosition(pnrcSource *MFVideoNormalizedRect, prcDest *foundation.RECT) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) GetVideoPosition(pnrcSource *MFVideoNormalizedRect, prcDest *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnrcSource)), uintptr(unsafe.Pointer(prcDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAspectRatioMode dispatches through IMFVideoDisplayControl's vtable slot 7.
-func (self *IMFVideoDisplayControl) SetAspectRatioMode(dwAspectRatioMode uint32) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) SetAspectRatioMode(dwAspectRatioMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwAspectRatioMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAspectRatioMode dispatches through IMFVideoDisplayControl's vtable slot 8.
-func (self *IMFVideoDisplayControl) GetAspectRatioMode(pdwAspectRatioMode *uint32) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) GetAspectRatioMode(pdwAspectRatioMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAspectRatioMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVideoWindow dispatches through IMFVideoDisplayControl's vtable slot 9.
-func (self *IMFVideoDisplayControl) SetVideoWindow(hwndVideo foundation.HWND) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) SetVideoWindow(hwndVideo foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hwndVideo))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoWindow dispatches through IMFVideoDisplayControl's vtable slot 10.
-func (self *IMFVideoDisplayControl) GetVideoWindow(phwndVideo *foundation.HWND) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) GetVideoWindow(phwndVideo *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwndVideo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RepaintVideo dispatches through IMFVideoDisplayControl's vtable slot 11.
-func (self *IMFVideoDisplayControl) RepaintVideo() foundation.HRESULT {
+func (self *IMFVideoDisplayControl) RepaintVideo() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentImage dispatches through IMFVideoDisplayControl's vtable slot 12.
-func (self *IMFVideoDisplayControl) GetCurrentImage(pBih *graphicsgdi.BITMAPINFOHEADER, pDib **byte, pcbDib *uint32, pTimeStamp *int64) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) GetCurrentImage(pBih *graphicsgdi.BITMAPINFOHEADER, pDib **byte, pcbDib *uint32, pTimeStamp *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBih)), uintptr(unsafe.Pointer(pDib)), uintptr(unsafe.Pointer(pcbDib)), uintptr(unsafe.Pointer(pTimeStamp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBorderColor dispatches through IMFVideoDisplayControl's vtable slot 13.
-func (self *IMFVideoDisplayControl) SetBorderColor(Clr foundation.COLORREF) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) SetBorderColor(Clr foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Clr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBorderColor dispatches through IMFVideoDisplayControl's vtable slot 14.
-func (self *IMFVideoDisplayControl) GetBorderColor(pClr *foundation.COLORREF) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) GetBorderColor(pClr *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRenderingPrefs dispatches through IMFVideoDisplayControl's vtable slot 15.
-func (self *IMFVideoDisplayControl) SetRenderingPrefs(dwRenderFlags uint32) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) SetRenderingPrefs(dwRenderFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwRenderFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRenderingPrefs dispatches through IMFVideoDisplayControl's vtable slot 16.
-func (self *IMFVideoDisplayControl) GetRenderingPrefs(pdwRenderFlags *uint32) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) GetRenderingPrefs(pdwRenderFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRenderFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFullscreen dispatches through IMFVideoDisplayControl's vtable slot 17.
-func (self *IMFVideoDisplayControl) SetFullscreen(fFullscreen foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(fFullscreen))
-	return foundation.HRESULT(r1)
+func (self *IMFVideoDisplayControl) SetFullscreen(fFullscreen bool) error {
+	_fFullscreen := win32.Bool32(fFullscreen)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(_fFullscreen))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFullscreen dispatches through IMFVideoDisplayControl's vtable slot 18.
-func (self *IMFVideoDisplayControl) GetFullscreen(pfFullscreen *foundation.BOOL) foundation.HRESULT {
+func (self *IMFVideoDisplayControl) GetFullscreen(pfFullscreen *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfFullscreen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoMediaType: https://learn.microsoft.com/windows/win32/api/mfobjects/nn-mfobjects-imfvideomediatype
@@ -11213,27 +11329,27 @@ type IMFVideoMixerBitmap struct {
 var IID_IMFVideoMixerBitmap = win32.GUID{Data1: 0x814c7b20, Data2: 0x0fdb, Data3: 0x4eec, Data4: [8]byte{0xaf, 0x8f, 0xf9, 0x57, 0xc8, 0xf6, 0x9e, 0xdc}}
 
 // SetAlphaBitmap dispatches through IMFVideoMixerBitmap's vtable slot 3.
-func (self *IMFVideoMixerBitmap) SetAlphaBitmap(pBmpParms *MFVideoAlphaBitmap) foundation.HRESULT {
+func (self *IMFVideoMixerBitmap) SetAlphaBitmap(pBmpParms *MFVideoAlphaBitmap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBmpParms)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearAlphaBitmap dispatches through IMFVideoMixerBitmap's vtable slot 4.
-func (self *IMFVideoMixerBitmap) ClearAlphaBitmap() foundation.HRESULT {
+func (self *IMFVideoMixerBitmap) ClearAlphaBitmap() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateAlphaBitmapParameters dispatches through IMFVideoMixerBitmap's vtable slot 5.
-func (self *IMFVideoMixerBitmap) UpdateAlphaBitmapParameters(pBmpParms *MFVideoAlphaBitmapParams) foundation.HRESULT {
+func (self *IMFVideoMixerBitmap) UpdateAlphaBitmapParameters(pBmpParms *MFVideoAlphaBitmapParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBmpParms)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAlphaBitmapParameters dispatches through IMFVideoMixerBitmap's vtable slot 6.
-func (self *IMFVideoMixerBitmap) GetAlphaBitmapParameters(pBmpParms *MFVideoAlphaBitmapParams) foundation.HRESULT {
+func (self *IMFVideoMixerBitmap) GetAlphaBitmapParameters(pBmpParms *MFVideoAlphaBitmapParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBmpParms)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoMixerControl: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imfvideomixercontrol
@@ -11246,27 +11362,27 @@ type IMFVideoMixerControl struct {
 var IID_IMFVideoMixerControl = win32.GUID{Data1: 0xa5c6c53f, Data2: 0xc202, Data3: 0x4aa5, Data4: [8]byte{0x96, 0x95, 0x17, 0x5b, 0xa8, 0xc5, 0x08, 0xa5}}
 
 // SetStreamZOrder dispatches through IMFVideoMixerControl's vtable slot 3.
-func (self *IMFVideoMixerControl) SetStreamZOrder(dwStreamID uint32, dwZ uint32) foundation.HRESULT {
+func (self *IMFVideoMixerControl) SetStreamZOrder(dwStreamID uint32, dwZ uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(dwZ))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamZOrder dispatches through IMFVideoMixerControl's vtable slot 4.
-func (self *IMFVideoMixerControl) GetStreamZOrder(dwStreamID uint32, pdwZ *uint32) foundation.HRESULT {
+func (self *IMFVideoMixerControl) GetStreamZOrder(dwStreamID uint32, pdwZ *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pdwZ)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStreamOutputRect dispatches through IMFVideoMixerControl's vtable slot 5.
-func (self *IMFVideoMixerControl) SetStreamOutputRect(dwStreamID uint32, pnrcOutput *MFVideoNormalizedRect) foundation.HRESULT {
+func (self *IMFVideoMixerControl) SetStreamOutputRect(dwStreamID uint32, pnrcOutput *MFVideoNormalizedRect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pnrcOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamOutputRect dispatches through IMFVideoMixerControl's vtable slot 6.
-func (self *IMFVideoMixerControl) GetStreamOutputRect(dwStreamID uint32, pnrcOutput *MFVideoNormalizedRect) foundation.HRESULT {
+func (self *IMFVideoMixerControl) GetStreamOutputRect(dwStreamID uint32, pnrcOutput *MFVideoNormalizedRect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pnrcOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoMixerControl2: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imfvideomixercontrol2
@@ -11279,15 +11395,15 @@ type IMFVideoMixerControl2 struct {
 var IID_IMFVideoMixerControl2 = win32.GUID{Data1: 0x8459616d, Data2: 0x966e, Data3: 0x4930, Data4: [8]byte{0xb6, 0x58, 0x54, 0xfa, 0x7e, 0x5a, 0x16, 0xd3}}
 
 // SetMixingPrefs dispatches through IMFVideoMixerControl2's vtable slot 7.
-func (self *IMFVideoMixerControl2) SetMixingPrefs(dwMixFlags uint32) foundation.HRESULT {
+func (self *IMFVideoMixerControl2) SetMixingPrefs(dwMixFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwMixFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMixingPrefs dispatches through IMFVideoMixerControl2's vtable slot 8.
-func (self *IMFVideoMixerControl2) GetMixingPrefs(pdwMixFlags *uint32) foundation.HRESULT {
+func (self *IMFVideoMixerControl2) GetMixingPrefs(pdwMixFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMixFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoPositionMapper: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imfvideopositionmapper
@@ -11309,15 +11425,15 @@ type IMFVideoPresenter struct {
 var IID_IMFVideoPresenter = win32.GUID{Data1: 0x29aff080, Data2: 0x182a, Data3: 0x4a5d, Data4: [8]byte{0xaf, 0x3b, 0x44, 0x8f, 0x3a, 0x63, 0x46, 0xcb}}
 
 // ProcessMessage dispatches through IMFVideoPresenter's vtable slot 8.
-func (self *IMFVideoPresenter) ProcessMessage(eMessage MFVP_MESSAGE_TYPE, ulParam uintptr) foundation.HRESULT {
+func (self *IMFVideoPresenter) ProcessMessage(eMessage MFVP_MESSAGE_TYPE, ulParam uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(eMessage), uintptr(ulParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentMediaType dispatches through IMFVideoPresenter's vtable slot 9.
-func (self *IMFVideoPresenter) GetCurrentMediaType(ppMediaType **IMFVideoMediaType) foundation.HRESULT {
+func (self *IMFVideoPresenter) GetCurrentMediaType(ppMediaType **IMFVideoMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoProcessor: https://learn.microsoft.com/windows/win32/api/evr9/nn-evr9-imfvideoprocessor
@@ -11330,75 +11446,75 @@ type IMFVideoProcessor struct {
 var IID_IMFVideoProcessor = win32.GUID{Data1: 0x6ab0000c, Data2: 0xfece, Data3: 0x4d1f, Data4: [8]byte{0xa2, 0xac, 0xa9, 0x57, 0x35, 0x30, 0x65, 0x6e}}
 
 // GetAvailableVideoProcessorModes dispatches through IMFVideoProcessor's vtable slot 3.
-func (self *IMFVideoProcessor) GetAvailableVideoProcessorModes(lpdwNumProcessingModes *uint32, ppVideoProcessingModes **win32.GUID) foundation.HRESULT {
+func (self *IMFVideoProcessor) GetAvailableVideoProcessorModes(lpdwNumProcessingModes *uint32, ppVideoProcessingModes **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpdwNumProcessingModes)), uintptr(unsafe.Pointer(ppVideoProcessingModes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorCaps dispatches through IMFVideoProcessor's vtable slot 4.
-func (self *IMFVideoProcessor) GetVideoProcessorCaps(lpVideoProcessorMode *win32.GUID, lpVideoProcessorCaps *DXVA2_VideoProcessorCaps) foundation.HRESULT {
+func (self *IMFVideoProcessor) GetVideoProcessorCaps(lpVideoProcessorMode *win32.GUID, lpVideoProcessorCaps *DXVA2_VideoProcessorCaps) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpVideoProcessorMode)), uintptr(unsafe.Pointer(lpVideoProcessorCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVideoProcessorMode dispatches through IMFVideoProcessor's vtable slot 5.
-func (self *IMFVideoProcessor) GetVideoProcessorMode(lpMode *win32.GUID) foundation.HRESULT {
+func (self *IMFVideoProcessor) GetVideoProcessorMode(lpMode *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVideoProcessorMode dispatches through IMFVideoProcessor's vtable slot 6.
-func (self *IMFVideoProcessor) SetVideoProcessorMode(lpMode *win32.GUID) foundation.HRESULT {
+func (self *IMFVideoProcessor) SetVideoProcessorMode(lpMode *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProcAmpRange dispatches through IMFVideoProcessor's vtable slot 7.
-func (self *IMFVideoProcessor) GetProcAmpRange(dwProperty uint32, pPropRange *DXVA2_ValueRange) foundation.HRESULT {
+func (self *IMFVideoProcessor) GetProcAmpRange(dwProperty uint32, pPropRange *DXVA2_ValueRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwProperty), uintptr(unsafe.Pointer(pPropRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProcAmpValues dispatches through IMFVideoProcessor's vtable slot 8.
-func (self *IMFVideoProcessor) GetProcAmpValues(dwFlags uint32, Values *DXVA2_ProcAmpValues) foundation.HRESULT {
+func (self *IMFVideoProcessor) GetProcAmpValues(dwFlags uint32, Values *DXVA2_ProcAmpValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(Values)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProcAmpValues dispatches through IMFVideoProcessor's vtable slot 9.
-func (self *IMFVideoProcessor) SetProcAmpValues(dwFlags uint32, pValues *DXVA2_ProcAmpValues) foundation.HRESULT {
+func (self *IMFVideoProcessor) SetProcAmpValues(dwFlags uint32, pValues *DXVA2_ProcAmpValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteringRange dispatches through IMFVideoProcessor's vtable slot 10.
-func (self *IMFVideoProcessor) GetFilteringRange(dwProperty uint32, pPropRange *DXVA2_ValueRange) foundation.HRESULT {
+func (self *IMFVideoProcessor) GetFilteringRange(dwProperty uint32, pPropRange *DXVA2_ValueRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwProperty), uintptr(unsafe.Pointer(pPropRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteringValue dispatches through IMFVideoProcessor's vtable slot 11.
-func (self *IMFVideoProcessor) GetFilteringValue(dwProperty uint32, pValue *DXVA2_Fixed32) foundation.HRESULT {
+func (self *IMFVideoProcessor) GetFilteringValue(dwProperty uint32, pValue *DXVA2_Fixed32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwProperty), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFilteringValue dispatches through IMFVideoProcessor's vtable slot 12.
-func (self *IMFVideoProcessor) SetFilteringValue(dwProperty uint32, pValue *DXVA2_Fixed32) foundation.HRESULT {
+func (self *IMFVideoProcessor) SetFilteringValue(dwProperty uint32, pValue *DXVA2_Fixed32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwProperty), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackgroundColor dispatches through IMFVideoProcessor's vtable slot 13.
-func (self *IMFVideoProcessor) GetBackgroundColor(lpClrBkg *foundation.COLORREF) foundation.HRESULT {
+func (self *IMFVideoProcessor) GetBackgroundColor(lpClrBkg *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpClrBkg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBackgroundColor dispatches through IMFVideoProcessor's vtable slot 14.
-func (self *IMFVideoProcessor) SetBackgroundColor(ClrBkg foundation.COLORREF) foundation.HRESULT {
+func (self *IMFVideoProcessor) SetBackgroundColor(ClrBkg foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ClrBkg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoProcessorControl: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfvideoprocessorcontrol
@@ -11411,39 +11527,39 @@ type IMFVideoProcessorControl struct {
 var IID_IMFVideoProcessorControl = win32.GUID{Data1: 0xa3f675d5, Data2: 0x6119, Data3: 0x4f7f, Data4: [8]byte{0xa1, 0x00, 0x1d, 0x8b, 0x28, 0x0f, 0x0e, 0xfb}}
 
 // SetBorderColor dispatches through IMFVideoProcessorControl's vtable slot 3.
-func (self *IMFVideoProcessorControl) SetBorderColor(pBorderColor *MFARGB) foundation.HRESULT {
+func (self *IMFVideoProcessorControl) SetBorderColor(pBorderColor *MFARGB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBorderColor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSourceRectangle dispatches through IMFVideoProcessorControl's vtable slot 4.
-func (self *IMFVideoProcessorControl) SetSourceRectangle(pSrcRect *foundation.RECT) foundation.HRESULT {
+func (self *IMFVideoProcessorControl) SetSourceRectangle(pSrcRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrcRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDestinationRectangle dispatches through IMFVideoProcessorControl's vtable slot 5.
-func (self *IMFVideoProcessorControl) SetDestinationRectangle(pDstRect *foundation.RECT) foundation.HRESULT {
+func (self *IMFVideoProcessorControl) SetDestinationRectangle(pDstRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDstRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMirror dispatches through IMFVideoProcessorControl's vtable slot 6.
-func (self *IMFVideoProcessorControl) SetMirror(eMirror MF_VIDEO_PROCESSOR_MIRROR) foundation.HRESULT {
+func (self *IMFVideoProcessorControl) SetMirror(eMirror MF_VIDEO_PROCESSOR_MIRROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(eMirror))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRotation dispatches through IMFVideoProcessorControl's vtable slot 7.
-func (self *IMFVideoProcessorControl) SetRotation(eRotation MF_VIDEO_PROCESSOR_ROTATION) foundation.HRESULT {
+func (self *IMFVideoProcessorControl) SetRotation(eRotation MF_VIDEO_PROCESSOR_ROTATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(eRotation))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConstrictionSize dispatches through IMFVideoProcessorControl's vtable slot 8.
-func (self *IMFVideoProcessorControl) SetConstrictionSize(pConstrictionSize *foundation.SIZE) foundation.HRESULT {
+func (self *IMFVideoProcessorControl) SetConstrictionSize(pConstrictionSize *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConstrictionSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoProcessorControl2: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfvideoprocessorcontrol2
@@ -11456,21 +11572,22 @@ type IMFVideoProcessorControl2 struct {
 var IID_IMFVideoProcessorControl2 = win32.GUID{Data1: 0xbde633d3, Data2: 0xe1dc, Data3: 0x4a7f, Data4: [8]byte{0xa6, 0x93, 0xbb, 0xae, 0x39, 0x9c, 0x4a, 0x20}}
 
 // SetRotationOverride dispatches through IMFVideoProcessorControl2's vtable slot 9.
-func (self *IMFVideoProcessorControl2) SetRotationOverride(uiRotation uint32) foundation.HRESULT {
+func (self *IMFVideoProcessorControl2) SetRotationOverride(uiRotation uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(uiRotation))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableHardwareEffects dispatches through IMFVideoProcessorControl2's vtable slot 10.
-func (self *IMFVideoProcessorControl2) EnableHardwareEffects(fEnabled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fEnabled))
-	return foundation.HRESULT(r1)
+func (self *IMFVideoProcessorControl2) EnableHardwareEffects(fEnabled bool) error {
+	_fEnabled := win32.Bool32(fEnabled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_fEnabled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedHardwareEffects dispatches through IMFVideoProcessorControl2's vtable slot 11.
-func (self *IMFVideoProcessorControl2) GetSupportedHardwareEffects(puiSupport *uint32) foundation.HRESULT {
+func (self *IMFVideoProcessorControl2) GetSupportedHardwareEffects(puiSupport *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiSupport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2424b3f2-eb23-40f1-91aa-74bddeea0883
@@ -11482,21 +11599,22 @@ type IMFVideoProcessorControl3 struct {
 var IID_IMFVideoProcessorControl3 = win32.GUID{Data1: 0x2424b3f2, Data2: 0xeb23, Data3: 0x40f1, Data4: [8]byte{0x91, 0xaa, 0x74, 0xbd, 0xde, 0xea, 0x08, 0x83}}
 
 // GetNaturalOutputType dispatches through IMFVideoProcessorControl3's vtable slot 12.
-func (self *IMFVideoProcessorControl3) GetNaturalOutputType(ppType **IMFMediaType) foundation.HRESULT {
+func (self *IMFVideoProcessorControl3) GetNaturalOutputType(ppType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableSphericalVideoProcessing dispatches through IMFVideoProcessorControl3's vtable slot 13.
-func (self *IMFVideoProcessorControl3) EnableSphericalVideoProcessing(fEnable foundation.BOOL, eFormat MFVideoSphericalFormat, eProjectionMode MFVideoSphericalProjectionMode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(fEnable), uintptr(eFormat), uintptr(eProjectionMode))
-	return foundation.HRESULT(r1)
+func (self *IMFVideoProcessorControl3) EnableSphericalVideoProcessing(fEnable bool, eFormat MFVideoSphericalFormat, eProjectionMode MFVideoSphericalProjectionMode) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_fEnable), uintptr(eFormat), uintptr(eProjectionMode))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputDevice dispatches through IMFVideoProcessorControl3's vtable slot 15.
-func (self *IMFVideoProcessorControl3) SetOutputDevice(pOutputDevice *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFVideoProcessorControl3) SetOutputDevice(pOutputDevice *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOutputDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoRenderer: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imfvideorenderer
@@ -11509,9 +11627,9 @@ type IMFVideoRenderer struct {
 var IID_IMFVideoRenderer = win32.GUID{Data1: 0xdfdfd197, Data2: 0xa9ca, Data3: 0x43d8, Data4: [8]byte{0xb3, 0x41, 0x6a, 0xf3, 0x50, 0x37, 0x92, 0xcd}}
 
 // InitializeRenderer dispatches through IMFVideoRenderer's vtable slot 3.
-func (self *IMFVideoRenderer) InitializeRenderer(pVideoMixer *IMFTransform, pVideoPresenter *IMFVideoPresenter) foundation.HRESULT {
+func (self *IMFVideoRenderer) InitializeRenderer(pVideoMixer *IMFTransform, pVideoPresenter *IMFVideoPresenter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoMixer)), uintptr(unsafe.Pointer(pVideoPresenter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 604d33d7-cf23-41d5-8224-5bbbb1a87475
@@ -11523,9 +11641,9 @@ type IMFVideoRendererEffectControl struct {
 var IID_IMFVideoRendererEffectControl = win32.GUID{Data1: 0x604d33d7, Data2: 0xcf23, Data3: 0x41d5, Data4: [8]byte{0x82, 0x24, 0x5b, 0xbb, 0xb1, 0xa8, 0x74, 0x75}}
 
 // OnAppServiceConnectionEstablished dispatches through IMFVideoRendererEffectControl's vtable slot 3.
-func (self *IMFVideoRendererEffectControl) OnAppServiceConnectionEstablished(pAppServiceConnection *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFVideoRendererEffectControl) OnAppServiceConnectionEstablished(pAppServiceConnection *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAppServiceConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoSampleAllocator: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfvideosampleallocator
@@ -11538,27 +11656,27 @@ type IMFVideoSampleAllocator struct {
 var IID_IMFVideoSampleAllocator = win32.GUID{Data1: 0x86cbc910, Data2: 0xe533, Data3: 0x4751, Data4: [8]byte{0x8e, 0x3b, 0xf1, 0x9b, 0x5b, 0x80, 0x6a, 0x03}}
 
 // SetDirectXManager dispatches through IMFVideoSampleAllocator's vtable slot 3.
-func (self *IMFVideoSampleAllocator) SetDirectXManager(pManager *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFVideoSampleAllocator) SetDirectXManager(pManager *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UninitializeSampleAllocator dispatches through IMFVideoSampleAllocator's vtable slot 4.
-func (self *IMFVideoSampleAllocator) UninitializeSampleAllocator() foundation.HRESULT {
+func (self *IMFVideoSampleAllocator) UninitializeSampleAllocator() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitializeSampleAllocator dispatches through IMFVideoSampleAllocator's vtable slot 5.
-func (self *IMFVideoSampleAllocator) InitializeSampleAllocator(cRequestedFrames uint32, pMediaType *IMFMediaType) foundation.HRESULT {
+func (self *IMFVideoSampleAllocator) InitializeSampleAllocator(cRequestedFrames uint32, pMediaType *IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cRequestedFrames), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AllocateSample dispatches through IMFVideoSampleAllocator's vtable slot 6.
-func (self *IMFVideoSampleAllocator) AllocateSample(ppSample **IMFSample) foundation.HRESULT {
+func (self *IMFVideoSampleAllocator) AllocateSample(ppSample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoSampleAllocatorCallback: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfvideosampleallocatorcallback
@@ -11571,15 +11689,15 @@ type IMFVideoSampleAllocatorCallback struct {
 var IID_IMFVideoSampleAllocatorCallback = win32.GUID{Data1: 0x992388b4, Data2: 0x3372, Data3: 0x4f67, Data4: [8]byte{0x8b, 0x6f, 0xc8, 0x4c, 0x07, 0x1f, 0x47, 0x51}}
 
 // SetCallback dispatches through IMFVideoSampleAllocatorCallback's vtable slot 3.
-func (self *IMFVideoSampleAllocatorCallback) SetCallback(pNotify *IMFVideoSampleAllocatorNotify) foundation.HRESULT {
+func (self *IMFVideoSampleAllocatorCallback) SetCallback(pNotify *IMFVideoSampleAllocatorNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotify)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFreeSampleCount dispatches through IMFVideoSampleAllocatorCallback's vtable slot 4.
-func (self *IMFVideoSampleAllocatorCallback) GetFreeSampleCount(plSamples *int32) foundation.HRESULT {
+func (self *IMFVideoSampleAllocatorCallback) GetFreeSampleCount(plSamples *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSamples)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoSampleAllocatorEx: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfvideosampleallocatorex
@@ -11592,9 +11710,9 @@ type IMFVideoSampleAllocatorEx struct {
 var IID_IMFVideoSampleAllocatorEx = win32.GUID{Data1: 0x545b3a48, Data2: 0x3283, Data3: 0x4f62, Data4: [8]byte{0x86, 0x6f, 0xa6, 0x2d, 0x8f, 0x59, 0x8f, 0x9f}}
 
 // InitializeSampleAllocatorEx dispatches through IMFVideoSampleAllocatorEx's vtable slot 7.
-func (self *IMFVideoSampleAllocatorEx) InitializeSampleAllocatorEx(cInitialSamples uint32, cMaximumSamples uint32, pAttributes *IMFAttributes, pMediaType *IMFMediaType) foundation.HRESULT {
+func (self *IMFVideoSampleAllocatorEx) InitializeSampleAllocatorEx(cInitialSamples uint32, cMaximumSamples uint32, pAttributes *IMFAttributes, pMediaType *IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cInitialSamples), uintptr(cMaximumSamples), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoSampleAllocatorNotify: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfvideosampleallocatornotify
@@ -11607,9 +11725,9 @@ type IMFVideoSampleAllocatorNotify struct {
 var IID_IMFVideoSampleAllocatorNotify = win32.GUID{Data1: 0xa792cdbe, Data2: 0xc374, Data3: 0x4e89, Data4: [8]byte{0x83, 0x35, 0x27, 0x8e, 0x7b, 0x99, 0x56, 0xa4}}
 
 // NotifyRelease dispatches through IMFVideoSampleAllocatorNotify's vtable slot 3.
-func (self *IMFVideoSampleAllocatorNotify) NotifyRelease() foundation.HRESULT {
+func (self *IMFVideoSampleAllocatorNotify) NotifyRelease() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVideoSampleAllocatorNotifyEx: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfvideosampleallocatornotifyex
@@ -11622,9 +11740,9 @@ type IMFVideoSampleAllocatorNotifyEx struct {
 var IID_IMFVideoSampleAllocatorNotifyEx = win32.GUID{Data1: 0x3978aa1a, Data2: 0x6d5b, Data3: 0x4b7f, Data4: [8]byte{0xa3, 0x40, 0x90, 0x89, 0x91, 0x89, 0xae, 0x34}}
 
 // NotifyPrune dispatches through IMFVideoSampleAllocatorNotifyEx's vtable slot 4.
-func (self *IMFVideoSampleAllocatorNotifyEx) NotifyPrune(__MIDL__IMFVideoSampleAllocatorNotifyEx0000 *IMFSample) foundation.HRESULT {
+func (self *IMFVideoSampleAllocatorNotifyEx) NotifyPrune(__MIDL__IMFVideoSampleAllocatorNotifyEx0000 *IMFSample) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IMFVideoSampleAllocatorNotifyEx0000)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFVirtualCamera: https://learn.microsoft.com/windows/win32/api/mfvirtualcamera/nn-mfvirtualcamera-imfvirtualcamera
@@ -11637,69 +11755,72 @@ type IMFVirtualCamera struct {
 var IID_IMFVirtualCamera = win32.GUID{Data1: 0x1c08a864, Data2: 0xef6c, Data3: 0x4c75, Data4: [8]byte{0xaf, 0x59, 0x5f, 0x2d, 0x68, 0xda, 0x95, 0x63}}
 
 // AddDeviceSourceInfo dispatches through IMFVirtualCamera's vtable slot 33.
-func (self *IMFVirtualCamera) AddDeviceSourceInfo(DeviceSourceInfo foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DeviceSourceInfo)))
-	return foundation.HRESULT(r1)
+func (self *IMFVirtualCamera) AddDeviceSourceInfo(DeviceSourceInfo string) error {
+	_DeviceSourceInfo := win32.UTF16Ptr(DeviceSourceInfo)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_DeviceSourceInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddProperty dispatches through IMFVirtualCamera's vtable slot 34.
-func (self *IMFVirtualCamera) AddProperty(pKey *foundation.DEVPROPKEY, Type devicesproperties.DEVPROPTYPE, pbData *byte, cbData uint32) foundation.HRESULT {
+func (self *IMFVirtualCamera) AddProperty(pKey *foundation.DEVPROPKEY, Type devicesproperties.DEVPROPTYPE, pbData *byte, cbData uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKey)), uintptr(Type), uintptr(unsafe.Pointer(pbData)), uintptr(cbData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddRegistryEntry dispatches through IMFVirtualCamera's vtable slot 35.
-func (self *IMFVirtualCamera) AddRegistryEntry(EntryName foundation.PWSTR, SubkeyPath foundation.PWSTR, dwRegType uint32, pbData *byte, cbData uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EntryName)), uintptr(unsafe.Pointer(SubkeyPath)), uintptr(dwRegType), uintptr(unsafe.Pointer(pbData)), uintptr(cbData))
-	return foundation.HRESULT(r1)
+func (self *IMFVirtualCamera) AddRegistryEntry(EntryName string, SubkeyPath string, dwRegType uint32, pbData *byte, cbData uint32) error {
+	_EntryName := win32.UTF16Ptr(EntryName)
+	_SubkeyPath := win32.UTF16Ptr(SubkeyPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_EntryName)), uintptr(unsafe.Pointer(_SubkeyPath)), uintptr(dwRegType), uintptr(unsafe.Pointer(pbData)), uintptr(cbData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IMFVirtualCamera's vtable slot 36.
-func (self *IMFVirtualCamera) Start(pCallback *IMFAsyncCallback) foundation.HRESULT {
+func (self *IMFVirtualCamera) Start(pCallback *IMFAsyncCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IMFVirtualCamera's vtable slot 37.
-func (self *IMFVirtualCamera) Stop() foundation.HRESULT {
+func (self *IMFVirtualCamera) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IMFVirtualCamera's vtable slot 38.
-func (self *IMFVirtualCamera) Remove() foundation.HRESULT {
+func (self *IMFVirtualCamera) Remove() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMediaSource dispatches through IMFVirtualCamera's vtable slot 39.
-func (self *IMFVirtualCamera) GetMediaSource(ppMediaSource **IMFMediaSource) foundation.HRESULT {
+func (self *IMFVirtualCamera) GetMediaSource(ppMediaSource **IMFMediaSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMediaSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendCameraProperty dispatches through IMFVirtualCamera's vtable slot 40.
-func (self *IMFVirtualCamera) SendCameraProperty(propertySet *win32.GUID, propertyId uint32, propertyFlags uint32, propertyPayload unsafe.Pointer, propertyPayloadLength uint32, data unsafe.Pointer, dataLength uint32, dataWritten *uint32) foundation.HRESULT {
+func (self *IMFVirtualCamera) SendCameraProperty(propertySet *win32.GUID, propertyId uint32, propertyFlags uint32, propertyPayload unsafe.Pointer, propertyPayloadLength uint32, data unsafe.Pointer, dataLength uint32, dataWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertySet)), uintptr(propertyId), uintptr(propertyFlags), uintptr(unsafe.Pointer(propertyPayload)), uintptr(propertyPayloadLength), uintptr(unsafe.Pointer(data)), uintptr(dataLength), uintptr(unsafe.Pointer(dataWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSyncEvent dispatches through IMFVirtualCamera's vtable slot 41.
-func (self *IMFVirtualCamera) CreateSyncEvent(kseventSet *win32.GUID, kseventId uint32, kseventFlags uint32, eventHandle foundation.HANDLE, cameraSyncObject **IMFCameraSyncObject) foundation.HRESULT {
+func (self *IMFVirtualCamera) CreateSyncEvent(kseventSet *win32.GUID, kseventId uint32, kseventFlags uint32, eventHandle foundation.HANDLE, cameraSyncObject **IMFCameraSyncObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(kseventSet)), uintptr(kseventId), uintptr(kseventFlags), uintptr(eventHandle), uintptr(unsafe.Pointer(cameraSyncObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSyncSemaphore dispatches through IMFVirtualCamera's vtable slot 42.
-func (self *IMFVirtualCamera) CreateSyncSemaphore(kseventSet *win32.GUID, kseventId uint32, kseventFlags uint32, semaphoreHandle foundation.HANDLE, semaphoreAdjustment int32, cameraSyncObject **IMFCameraSyncObject) foundation.HRESULT {
+func (self *IMFVirtualCamera) CreateSyncSemaphore(kseventSet *win32.GUID, kseventId uint32, kseventFlags uint32, semaphoreHandle foundation.HANDLE, semaphoreAdjustment int32, cameraSyncObject **IMFCameraSyncObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(kseventSet)), uintptr(kseventId), uintptr(kseventFlags), uintptr(semaphoreHandle), uintptr(semaphoreAdjustment), uintptr(unsafe.Pointer(cameraSyncObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IMFVirtualCamera's vtable slot 43.
-func (self *IMFVirtualCamera) Shutdown() foundation.HRESULT {
+func (self *IMFVirtualCamera) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFWorkQueueServices: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfworkqueueservices
@@ -11712,75 +11833,76 @@ type IMFWorkQueueServices struct {
 var IID_IMFWorkQueueServices = win32.GUID{Data1: 0x35fe1bb8, Data2: 0xa3a9, Data3: 0x40fe, Data4: [8]byte{0xbb, 0xec, 0xeb, 0x56, 0x9c, 0x9c, 0xcc, 0xa3}}
 
 // BeginRegisterTopologyWorkQueuesWithMMCSS dispatches through IMFWorkQueueServices's vtable slot 3.
-func (self *IMFWorkQueueServices) BeginRegisterTopologyWorkQueuesWithMMCSS(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFWorkQueueServices) BeginRegisterTopologyWorkQueuesWithMMCSS(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndRegisterTopologyWorkQueuesWithMMCSS dispatches through IMFWorkQueueServices's vtable slot 4.
-func (self *IMFWorkQueueServices) EndRegisterTopologyWorkQueuesWithMMCSS(pResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFWorkQueueServices) EndRegisterTopologyWorkQueuesWithMMCSS(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginUnregisterTopologyWorkQueuesWithMMCSS dispatches through IMFWorkQueueServices's vtable slot 5.
-func (self *IMFWorkQueueServices) BeginUnregisterTopologyWorkQueuesWithMMCSS(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFWorkQueueServices) BeginUnregisterTopologyWorkQueuesWithMMCSS(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndUnregisterTopologyWorkQueuesWithMMCSS dispatches through IMFWorkQueueServices's vtable slot 6.
-func (self *IMFWorkQueueServices) EndUnregisterTopologyWorkQueuesWithMMCSS(pResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFWorkQueueServices) EndUnregisterTopologyWorkQueuesWithMMCSS(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTopologyWorkQueueMMCSSClass dispatches through IMFWorkQueueServices's vtable slot 7.
-func (self *IMFWorkQueueServices) GetTopologyWorkQueueMMCSSClass(dwTopologyWorkQueueId uint32, pwszClass foundation.PWSTR, pcchClass *uint32) foundation.HRESULT {
+func (self *IMFWorkQueueServices) GetTopologyWorkQueueMMCSSClass(dwTopologyWorkQueueId uint32, pwszClass foundation.PWSTR, pcchClass *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwTopologyWorkQueueId), uintptr(unsafe.Pointer(pwszClass)), uintptr(unsafe.Pointer(pcchClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTopologyWorkQueueMMCSSTaskId dispatches through IMFWorkQueueServices's vtable slot 8.
-func (self *IMFWorkQueueServices) GetTopologyWorkQueueMMCSSTaskId(dwTopologyWorkQueueId uint32, pdwTaskId *uint32) foundation.HRESULT {
+func (self *IMFWorkQueueServices) GetTopologyWorkQueueMMCSSTaskId(dwTopologyWorkQueueId uint32, pdwTaskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwTopologyWorkQueueId), uintptr(unsafe.Pointer(pdwTaskId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginRegisterPlatformWorkQueueWithMMCSS dispatches through IMFWorkQueueServices's vtable slot 9.
-func (self *IMFWorkQueueServices) BeginRegisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue uint32, wszClass foundation.PWSTR, dwTaskId uint32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwPlatformWorkQueue), uintptr(unsafe.Pointer(wszClass)), uintptr(dwTaskId), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+func (self *IMFWorkQueueServices) BeginRegisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue uint32, wszClass string, dwTaskId uint32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
+	_wszClass := win32.UTF16Ptr(wszClass)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwPlatformWorkQueue), uintptr(unsafe.Pointer(_wszClass)), uintptr(dwTaskId), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndRegisterPlatformWorkQueueWithMMCSS dispatches through IMFWorkQueueServices's vtable slot 10.
-func (self *IMFWorkQueueServices) EndRegisterPlatformWorkQueueWithMMCSS(pResult *IMFAsyncResult, pdwTaskId *uint32) foundation.HRESULT {
+func (self *IMFWorkQueueServices) EndRegisterPlatformWorkQueueWithMMCSS(pResult *IMFAsyncResult, pdwTaskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pdwTaskId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginUnregisterPlatformWorkQueueWithMMCSS dispatches through IMFWorkQueueServices's vtable slot 11.
-func (self *IMFWorkQueueServices) BeginUnregisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue uint32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMFWorkQueueServices) BeginUnregisterPlatformWorkQueueWithMMCSS(dwPlatformWorkQueue uint32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwPlatformWorkQueue), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndUnregisterPlatformWorkQueueWithMMCSS dispatches through IMFWorkQueueServices's vtable slot 12.
-func (self *IMFWorkQueueServices) EndUnregisterPlatformWorkQueueWithMMCSS(pResult *IMFAsyncResult) foundation.HRESULT {
+func (self *IMFWorkQueueServices) EndUnregisterPlatformWorkQueueWithMMCSS(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPlaftormWorkQueueMMCSSClass dispatches through IMFWorkQueueServices's vtable slot 13.
-func (self *IMFWorkQueueServices) GetPlaftormWorkQueueMMCSSClass(dwPlatformWorkQueueId uint32, pwszClass foundation.PWSTR, pcchClass *uint32) foundation.HRESULT {
+func (self *IMFWorkQueueServices) GetPlaftormWorkQueueMMCSSClass(dwPlatformWorkQueueId uint32, pwszClass foundation.PWSTR, pcchClass *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwPlatformWorkQueueId), uintptr(unsafe.Pointer(pwszClass)), uintptr(unsafe.Pointer(pcchClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPlatformWorkQueueMMCSSTaskId dispatches through IMFWorkQueueServices's vtable slot 14.
-func (self *IMFWorkQueueServices) GetPlatformWorkQueueMMCSSTaskId(dwPlatformWorkQueueId uint32, pdwTaskId *uint32) foundation.HRESULT {
+func (self *IMFWorkQueueServices) GetPlatformWorkQueueMMCSSTaskId(dwPlatformWorkQueueId uint32, pdwTaskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwPlatformWorkQueueId), uintptr(unsafe.Pointer(pdwTaskId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMFWorkQueueServicesEx: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfworkqueueservicesex
@@ -11793,21 +11915,22 @@ type IMFWorkQueueServicesEx struct {
 var IID_IMFWorkQueueServicesEx = win32.GUID{Data1: 0x96bf961b, Data2: 0x40fe, Data3: 0x42f1, Data4: [8]byte{0xba, 0x9d, 0x32, 0x02, 0x38, 0xb4, 0x97, 0x00}}
 
 // GetTopologyWorkQueueMMCSSPriority dispatches through IMFWorkQueueServicesEx's vtable slot 15.
-func (self *IMFWorkQueueServicesEx) GetTopologyWorkQueueMMCSSPriority(dwTopologyWorkQueueId uint32, plPriority *int32) foundation.HRESULT {
+func (self *IMFWorkQueueServicesEx) GetTopologyWorkQueueMMCSSPriority(dwTopologyWorkQueueId uint32, plPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwTopologyWorkQueueId), uintptr(unsafe.Pointer(plPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginRegisterPlatformWorkQueueWithMMCSSEx dispatches through IMFWorkQueueServicesEx's vtable slot 16.
-func (self *IMFWorkQueueServicesEx) BeginRegisterPlatformWorkQueueWithMMCSSEx(dwPlatformWorkQueue uint32, wszClass foundation.PWSTR, dwTaskId uint32, lPriority int32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwPlatformWorkQueue), uintptr(unsafe.Pointer(wszClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+func (self *IMFWorkQueueServicesEx) BeginRegisterPlatformWorkQueueWithMMCSSEx(dwPlatformWorkQueue uint32, wszClass string, dwTaskId uint32, lPriority int32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
+	_wszClass := win32.UTF16Ptr(wszClass)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwPlatformWorkQueue), uintptr(unsafe.Pointer(_wszClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPlatformWorkQueueMMCSSPriority dispatches through IMFWorkQueueServicesEx's vtable slot 17.
-func (self *IMFWorkQueueServicesEx) GetPlatformWorkQueueMMCSSPriority(dwPlatformWorkQueueId uint32, plPriority *int32) foundation.HRESULT {
+func (self *IMFWorkQueueServicesEx) GetPlatformWorkQueueMMCSSPriority(dwPlatformWorkQueueId uint32, plPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwPlatformWorkQueueId), uintptr(unsafe.Pointer(plPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IOPMVideoOutput: https://learn.microsoft.com/windows/win32/api/opmapi/nn-opmapi-iopmvideooutput
@@ -11820,33 +11943,33 @@ type IOPMVideoOutput struct {
 var IID_IOPMVideoOutput = win32.GUID{Data1: 0x0a15159d, Data2: 0x41c7, Data3: 0x4456, Data4: [8]byte{0x93, 0xe1, 0x28, 0x4c, 0xd6, 0x1d, 0x4e, 0x8d}}
 
 // StartInitialization dispatches through IOPMVideoOutput's vtable slot 3.
-func (self *IOPMVideoOutput) StartInitialization(prnRandomNumber *OPM_RANDOM_NUMBER, ppbCertificate **byte, pulCertificateLength *uint32) foundation.HRESULT {
+func (self *IOPMVideoOutput) StartInitialization(prnRandomNumber *OPM_RANDOM_NUMBER, ppbCertificate **byte, pulCertificateLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prnRandomNumber)), uintptr(unsafe.Pointer(ppbCertificate)), uintptr(unsafe.Pointer(pulCertificateLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FinishInitialization dispatches through IOPMVideoOutput's vtable slot 4.
-func (self *IOPMVideoOutput) FinishInitialization(pParameters *OPM_ENCRYPTED_INITIALIZATION_PARAMETERS) foundation.HRESULT {
+func (self *IOPMVideoOutput) FinishInitialization(pParameters *OPM_ENCRYPTED_INITIALIZATION_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInformation dispatches through IOPMVideoOutput's vtable slot 5.
-func (self *IOPMVideoOutput) GetInformation(pParameters unsafe.Pointer, pRequestedInformation unsafe.Pointer) foundation.HRESULT {
+func (self *IOPMVideoOutput) GetInformation(pParameters unsafe.Pointer, pRequestedInformation unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(pRequestedInformation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // COPPCompatibleGetInformation dispatches through IOPMVideoOutput's vtable slot 6.
-func (self *IOPMVideoOutput) COPPCompatibleGetInformation(pParameters unsafe.Pointer, pRequestedInformation unsafe.Pointer) foundation.HRESULT {
+func (self *IOPMVideoOutput) COPPCompatibleGetInformation(pParameters unsafe.Pointer, pRequestedInformation unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(pRequestedInformation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Configure dispatches through IOPMVideoOutput's vtable slot 7.
-func (self *IOPMVideoOutput) Configure(pParameters unsafe.Pointer, ulAdditionalParametersSize uint32, pbAdditionalParameters *byte) foundation.HRESULT {
+func (self *IOPMVideoOutput) Configure(pParameters unsafe.Pointer, ulAdditionalParametersSize uint32, pbAdditionalParameters *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)), uintptr(ulAdditionalParametersSize), uintptr(unsafe.Pointer(pbAdditionalParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPlayToControl: https://learn.microsoft.com/windows/win32/api/mfsharingengine/nn-mfsharingengine-iplaytocontrol
@@ -11859,15 +11982,15 @@ type IPlayToControl struct {
 var IID_IPlayToControl = win32.GUID{Data1: 0x607574eb, Data2: 0xf4b6, Data3: 0x45c1, Data4: [8]byte{0xb0, 0x8c, 0xcb, 0x71, 0x51, 0x22, 0x90, 0x1d}}
 
 // Connect dispatches through IPlayToControl's vtable slot 3.
-func (self *IPlayToControl) Connect(pFactory *IMFSharingEngineClassFactory) foundation.HRESULT {
+func (self *IPlayToControl) Connect(pFactory *IMFSharingEngineClassFactory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFactory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through IPlayToControl's vtable slot 4.
-func (self *IPlayToControl) Disconnect() foundation.HRESULT {
+func (self *IPlayToControl) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPlayToControlWithCapabilities: https://learn.microsoft.com/windows/win32/api/mfsharingengine/nn-mfsharingengine-iplaytocontrolwithcapabilities
@@ -11880,9 +12003,9 @@ type IPlayToControlWithCapabilities struct {
 var IID_IPlayToControlWithCapabilities = win32.GUID{Data1: 0xaa9dd80f, Data2: 0xc50a, Data3: 0x4220, Data4: [8]byte{0x91, 0xc1, 0x33, 0x22, 0x87, 0xf8, 0x2a, 0x34}}
 
 // GetCapabilities dispatches through IPlayToControlWithCapabilities's vtable slot 5.
-func (self *IPlayToControlWithCapabilities) GetCapabilities(pCapabilities *PLAYTO_SOURCE_CREATEFLAGS) foundation.HRESULT {
+func (self *IPlayToControlWithCapabilities) GetCapabilities(pCapabilities *PLAYTO_SOURCE_CREATEFLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCapabilities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPlayToSourceClassFactory: https://learn.microsoft.com/windows/win32/api/mfsharingengine/nn-mfsharingengine-iplaytosourceclassfactory
@@ -11895,9 +12018,9 @@ type IPlayToSourceClassFactory struct {
 var IID_IPlayToSourceClassFactory = win32.GUID{Data1: 0x842b32a3, Data2: 0x9b9b, Data3: 0x4d1c, Data4: [8]byte{0xb3, 0xf3, 0x49, 0x19, 0x32, 0x48, 0xa5, 0x54}}
 
 // CreateInstance dispatches through IPlayToSourceClassFactory's vtable slot 3.
-func (self *IPlayToSourceClassFactory) CreateInstance(dwFlags uint32, pControl *IPlayToControl, ppSource **systemwinrt.IInspectable) foundation.HRESULT {
+func (self *IPlayToSourceClassFactory) CreateInstance(dwFlags uint32, pControl *IPlayToControl, ppSource **systemwinrt.IInspectable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pControl)), uintptr(unsafe.Pointer(ppSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IToc: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-itoc
@@ -11910,69 +12033,70 @@ type IToc struct {
 var IID_IToc = win32.GUID{Data1: 0xd6f05441, Data2: 0xa919, Data3: 0x423b, Data4: [8]byte{0x91, 0xa0, 0x89, 0xd5, 0xb4, 0xa8, 0xab, 0x77}}
 
 // SetDescriptor dispatches through IToc's vtable slot 3.
-func (self *IToc) SetDescriptor(pDescriptor *TOC_DESCRIPTOR) foundation.HRESULT {
+func (self *IToc) SetDescriptor(pDescriptor *TOC_DESCRIPTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescriptor dispatches through IToc's vtable slot 4.
-func (self *IToc) GetDescriptor(pDescriptor *TOC_DESCRIPTOR) foundation.HRESULT {
+func (self *IToc) GetDescriptor(pDescriptor *TOC_DESCRIPTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDescription dispatches through IToc's vtable slot 5.
-func (self *IToc) SetDescription(pwszDescription foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszDescription)))
-	return foundation.HRESULT(r1)
+func (self *IToc) SetDescription(pwszDescription string) error {
+	_pwszDescription := win32.UTF16Ptr(pwszDescription)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescription dispatches through IToc's vtable slot 6.
-func (self *IToc) GetDescription(pwDescriptionSize *uint16, pwszDescription foundation.PWSTR) foundation.HRESULT {
+func (self *IToc) GetDescription(pwDescriptionSize *uint16, pwszDescription foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwDescriptionSize)), uintptr(unsafe.Pointer(pwszDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContext dispatches through IToc's vtable slot 7.
-func (self *IToc) SetContext(dwContextSize uint32, pbtContext *byte) foundation.HRESULT {
+func (self *IToc) SetContext(dwContextSize uint32, pbtContext *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwContextSize), uintptr(unsafe.Pointer(pbtContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContext dispatches through IToc's vtable slot 8.
-func (self *IToc) GetContext(pdwContextSize *uint32, pbtContext *byte) foundation.HRESULT {
+func (self *IToc) GetContext(pdwContextSize *uint32, pbtContext *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwContextSize)), uintptr(unsafe.Pointer(pbtContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEntryListCount dispatches through IToc's vtable slot 9.
-func (self *IToc) GetEntryListCount(pwCount *uint16) foundation.HRESULT {
+func (self *IToc) GetEntryListCount(pwCount *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEntryListByIndex dispatches through IToc's vtable slot 10.
-func (self *IToc) GetEntryListByIndex(wEntryListIndex uint16, ppEntryList **ITocEntryList) foundation.HRESULT {
+func (self *IToc) GetEntryListByIndex(wEntryListIndex uint16, ppEntryList **ITocEntryList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(wEntryListIndex), uintptr(unsafe.Pointer(ppEntryList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEntryList dispatches through IToc's vtable slot 11.
-func (self *IToc) AddEntryList(pEntryList *ITocEntryList, pwEntryListIndex *uint16) foundation.HRESULT {
+func (self *IToc) AddEntryList(pEntryList *ITocEntryList, pwEntryListIndex *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEntryList)), uintptr(unsafe.Pointer(pwEntryListIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEntryListByIndex dispatches through IToc's vtable slot 12.
-func (self *IToc) AddEntryListByIndex(wEntryListIndex uint16, pEntryList *ITocEntryList) foundation.HRESULT {
+func (self *IToc) AddEntryListByIndex(wEntryListIndex uint16, pEntryList *ITocEntryList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(wEntryListIndex), uintptr(unsafe.Pointer(pEntryList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveEntryListByIndex dispatches through IToc's vtable slot 13.
-func (self *IToc) RemoveEntryListByIndex(wEntryListIndex uint16) foundation.HRESULT {
+func (self *IToc) RemoveEntryListByIndex(wEntryListIndex uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(wEntryListIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITocCollection: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-itoccollection
@@ -11985,33 +12109,33 @@ type ITocCollection struct {
 var IID_ITocCollection = win32.GUID{Data1: 0x23fee831, Data2: 0xae96, Data3: 0x42df, Data4: [8]byte{0xb1, 0x70, 0x25, 0xa0, 0x48, 0x47, 0xa3, 0xca}}
 
 // GetEntryCount dispatches through ITocCollection's vtable slot 3.
-func (self *ITocCollection) GetEntryCount(pdwEntryCount *uint32) foundation.HRESULT {
+func (self *ITocCollection) GetEntryCount(pdwEntryCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwEntryCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEntryByIndex dispatches through ITocCollection's vtable slot 4.
-func (self *ITocCollection) GetEntryByIndex(dwEntryIndex uint32, ppToc **IToc) foundation.HRESULT {
+func (self *ITocCollection) GetEntryByIndex(dwEntryIndex uint32, ppToc **IToc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwEntryIndex), uintptr(unsafe.Pointer(ppToc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEntry dispatches through ITocCollection's vtable slot 5.
-func (self *ITocCollection) AddEntry(pToc *IToc, pdwEntryIndex *uint32) foundation.HRESULT {
+func (self *ITocCollection) AddEntry(pToc *IToc, pdwEntryIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pToc)), uintptr(unsafe.Pointer(pdwEntryIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEntryByIndex dispatches through ITocCollection's vtable slot 6.
-func (self *ITocCollection) AddEntryByIndex(dwEntryIndex uint32, pToc *IToc) foundation.HRESULT {
+func (self *ITocCollection) AddEntryByIndex(dwEntryIndex uint32, pToc *IToc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwEntryIndex), uintptr(unsafe.Pointer(pToc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveEntryByIndex dispatches through ITocCollection's vtable slot 7.
-func (self *ITocCollection) RemoveEntryByIndex(dwEntryIndex uint32) foundation.HRESULT {
+func (self *ITocCollection) RemoveEntryByIndex(dwEntryIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwEntryIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITocEntry: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-itocentry
@@ -12024,51 +12148,52 @@ type ITocEntry struct {
 var IID_ITocEntry = win32.GUID{Data1: 0xf22f5e06, Data2: 0x585c, Data3: 0x4def, Data4: [8]byte{0x85, 0x23, 0x65, 0x55, 0xcf, 0xbc, 0x0c, 0xb3}}
 
 // SetTitle dispatches through ITocEntry's vtable slot 3.
-func (self *ITocEntry) SetTitle(pwszTitle foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszTitle)))
-	return foundation.HRESULT(r1)
+func (self *ITocEntry) SetTitle(pwszTitle string) error {
+	_pwszTitle := win32.UTF16Ptr(pwszTitle)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszTitle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTitle dispatches through ITocEntry's vtable slot 4.
-func (self *ITocEntry) GetTitle(pwTitleSize *uint16, pwszTitle foundation.PWSTR) foundation.HRESULT {
+func (self *ITocEntry) GetTitle(pwTitleSize *uint16, pwszTitle foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwTitleSize)), uintptr(unsafe.Pointer(pwszTitle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDescriptor dispatches through ITocEntry's vtable slot 5.
-func (self *ITocEntry) SetDescriptor(pDescriptor *TOC_ENTRY_DESCRIPTOR) foundation.HRESULT {
+func (self *ITocEntry) SetDescriptor(pDescriptor *TOC_ENTRY_DESCRIPTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescriptor dispatches through ITocEntry's vtable slot 6.
-func (self *ITocEntry) GetDescriptor(pDescriptor *TOC_ENTRY_DESCRIPTOR) foundation.HRESULT {
+func (self *ITocEntry) GetDescriptor(pDescriptor *TOC_ENTRY_DESCRIPTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSubEntries dispatches through ITocEntry's vtable slot 7.
-func (self *ITocEntry) SetSubEntries(dwNumSubEntries uint32, pwSubEntryIndices *uint16) foundation.HRESULT {
+func (self *ITocEntry) SetSubEntries(dwNumSubEntries uint32, pwSubEntryIndices *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwNumSubEntries), uintptr(unsafe.Pointer(pwSubEntryIndices)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubEntries dispatches through ITocEntry's vtable slot 8.
-func (self *ITocEntry) GetSubEntries(pdwNumSubEntries *uint32, pwSubEntryIndices *uint16) foundation.HRESULT {
+func (self *ITocEntry) GetSubEntries(pdwNumSubEntries *uint32, pwSubEntryIndices *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwNumSubEntries)), uintptr(unsafe.Pointer(pwSubEntryIndices)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDescriptionData dispatches through ITocEntry's vtable slot 9.
-func (self *ITocEntry) SetDescriptionData(dwDescriptionDataSize uint32, pbtDescriptionData *byte, pguidType *win32.GUID) foundation.HRESULT {
+func (self *ITocEntry) SetDescriptionData(dwDescriptionDataSize uint32, pbtDescriptionData *byte, pguidType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwDescriptionDataSize), uintptr(unsafe.Pointer(pbtDescriptionData)), uintptr(unsafe.Pointer(pguidType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescriptionData dispatches through ITocEntry's vtable slot 10.
-func (self *ITocEntry) GetDescriptionData(pdwDescriptionDataSize *uint32, pbtDescriptionData *byte, pGuidType *win32.GUID) foundation.HRESULT {
+func (self *ITocEntry) GetDescriptionData(pdwDescriptionDataSize *uint32, pbtDescriptionData *byte, pGuidType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwDescriptionDataSize)), uintptr(unsafe.Pointer(pbtDescriptionData)), uintptr(unsafe.Pointer(pGuidType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITocEntryList: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-itocentrylist
@@ -12081,33 +12206,33 @@ type ITocEntryList struct {
 var IID_ITocEntryList = win32.GUID{Data1: 0x3a8cccbd, Data2: 0x0efd, Data3: 0x43a3, Data4: [8]byte{0xb8, 0x38, 0xf3, 0x8a, 0x55, 0x2b, 0xa2, 0x37}}
 
 // GetEntryCount dispatches through ITocEntryList's vtable slot 3.
-func (self *ITocEntryList) GetEntryCount(pdwEntryCount *uint32) foundation.HRESULT {
+func (self *ITocEntryList) GetEntryCount(pdwEntryCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwEntryCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEntryByIndex dispatches through ITocEntryList's vtable slot 4.
-func (self *ITocEntryList) GetEntryByIndex(dwEntryIndex uint32, ppEntry **ITocEntry) foundation.HRESULT {
+func (self *ITocEntryList) GetEntryByIndex(dwEntryIndex uint32, ppEntry **ITocEntry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwEntryIndex), uintptr(unsafe.Pointer(ppEntry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEntry dispatches through ITocEntryList's vtable slot 5.
-func (self *ITocEntryList) AddEntry(pEntry *ITocEntry, pdwEntryIndex *uint32) foundation.HRESULT {
+func (self *ITocEntryList) AddEntry(pEntry *ITocEntry, pdwEntryIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEntry)), uintptr(unsafe.Pointer(pdwEntryIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEntryByIndex dispatches through ITocEntryList's vtable slot 6.
-func (self *ITocEntryList) AddEntryByIndex(dwEntryIndex uint32, pEntry *ITocEntry) foundation.HRESULT {
+func (self *ITocEntryList) AddEntryByIndex(dwEntryIndex uint32, pEntry *ITocEntry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwEntryIndex), uintptr(unsafe.Pointer(pEntry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveEntryByIndex dispatches through ITocEntryList's vtable slot 7.
-func (self *ITocEntryList) RemoveEntryByIndex(dwEntryIndex uint32) foundation.HRESULT {
+func (self *ITocEntryList) RemoveEntryByIndex(dwEntryIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwEntryIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITocParser: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-itocparser
@@ -12120,39 +12245,40 @@ type ITocParser struct {
 var IID_ITocParser = win32.GUID{Data1: 0xecfb9a55, Data2: 0x9298, Data3: 0x4f49, Data4: [8]byte{0x88, 0x7f, 0x0b, 0x36, 0x20, 0x65, 0x99, 0xd2}}
 
 // Init dispatches through ITocParser's vtable slot 3.
-func (self *ITocParser) Init(pwszFileName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszFileName)))
-	return foundation.HRESULT(r1)
+func (self *ITocParser) Init(pwszFileName string) error {
+	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFileName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTocCount dispatches through ITocParser's vtable slot 4.
-func (self *ITocParser) GetTocCount(enumTocPosType TOC_POS_TYPE, pdwTocCount *uint32) foundation.HRESULT {
+func (self *ITocParser) GetTocCount(enumTocPosType TOC_POS_TYPE, pdwTocCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(enumTocPosType), uintptr(unsafe.Pointer(pdwTocCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTocByIndex dispatches through ITocParser's vtable slot 5.
-func (self *ITocParser) GetTocByIndex(enumTocPosType TOC_POS_TYPE, dwTocIndex uint32, ppToc **IToc) foundation.HRESULT {
+func (self *ITocParser) GetTocByIndex(enumTocPosType TOC_POS_TYPE, dwTocIndex uint32, ppToc **IToc) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(enumTocPosType), uintptr(dwTocIndex), uintptr(unsafe.Pointer(ppToc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddToc dispatches through ITocParser's vtable slot 7.
-func (self *ITocParser) AddToc(enumTocPosType TOC_POS_TYPE, pToc *IToc, pdwTocIndex *uint32) foundation.HRESULT {
+func (self *ITocParser) AddToc(enumTocPosType TOC_POS_TYPE, pToc *IToc, pdwTocIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enumTocPosType), uintptr(unsafe.Pointer(pToc)), uintptr(unsafe.Pointer(pdwTocIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveTocByIndex dispatches through ITocParser's vtable slot 8.
-func (self *ITocParser) RemoveTocByIndex(enumTocPosType TOC_POS_TYPE, dwTocIndex uint32) foundation.HRESULT {
+func (self *ITocParser) RemoveTocByIndex(enumTocPosType TOC_POS_TYPE, dwTocIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(enumTocPosType), uintptr(dwTocIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Commit dispatches through ITocParser's vtable slot 10.
-func (self *ITocParser) Commit() foundation.HRESULT {
+func (self *ITocParser) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 04a578b2-e778-422a-a805-b3ee54d90bd9
@@ -12173,27 +12299,27 @@ type IWMCodecLeakyBucket struct {
 var IID_IWMCodecLeakyBucket = win32.GUID{Data1: 0xa81ba647, Data2: 0x6227, Data3: 0x43b7, Data4: [8]byte{0xb2, 0x31, 0xc7, 0xb1, 0x51, 0x35, 0xdd, 0x7d}}
 
 // SetBufferSizeBits dispatches through IWMCodecLeakyBucket's vtable slot 3.
-func (self *IWMCodecLeakyBucket) SetBufferSizeBits(ulBufferSize uint32) foundation.HRESULT {
+func (self *IWMCodecLeakyBucket) SetBufferSizeBits(ulBufferSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulBufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferSizeBits dispatches through IWMCodecLeakyBucket's vtable slot 4.
-func (self *IWMCodecLeakyBucket) GetBufferSizeBits(pulBufferSize *uint32) foundation.HRESULT {
+func (self *IWMCodecLeakyBucket) GetBufferSizeBits(pulBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulBufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBufferFullnessBits dispatches through IWMCodecLeakyBucket's vtable slot 5.
-func (self *IWMCodecLeakyBucket) SetBufferFullnessBits(ulBufferFullness uint32) foundation.HRESULT {
+func (self *IWMCodecLeakyBucket) SetBufferFullnessBits(ulBufferFullness uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulBufferFullness))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferFullnessBits dispatches through IWMCodecLeakyBucket's vtable slot 6.
-func (self *IWMCodecLeakyBucket) GetBufferFullnessBits(pulBufferFullness *uint32) foundation.HRESULT {
+func (self *IWMCodecLeakyBucket) GetBufferFullnessBits(pulBufferFullness *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulBufferFullness)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMCodecOutputTimestamp: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmcodecoutputtimestamp
@@ -12206,9 +12332,9 @@ type IWMCodecOutputTimestamp struct {
 var IID_IWMCodecOutputTimestamp = win32.GUID{Data1: 0xb72adf95, Data2: 0x7adc, Data3: 0x4a72, Data4: [8]byte{0xbc, 0x05, 0x57, 0x7d, 0x8e, 0xa6, 0xbf, 0x68}}
 
 // GetNextOutputTime dispatches through IWMCodecOutputTimestamp's vtable slot 3.
-func (self *IWMCodecOutputTimestamp) GetNextOutputTime(prtTime *int64) foundation.HRESULT {
+func (self *IWMCodecOutputTimestamp) GetNextOutputTime(prtTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prtTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMCodecPrivateData: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmcodecprivatedata
@@ -12221,15 +12347,15 @@ type IWMCodecPrivateData struct {
 var IID_IWMCodecPrivateData = win32.GUID{Data1: 0x73f0be8e, Data2: 0x57f7, Data3: 0x4f01, Data4: [8]byte{0xaa, 0x66, 0x9f, 0x57, 0x34, 0x0c, 0xfe, 0x0e}}
 
 // SetPartialOutputType dispatches through IWMCodecPrivateData's vtable slot 3.
-func (self *IWMCodecPrivateData) SetPartialOutputType(pmt *mediadxmediaobjects.DMO_MEDIA_TYPE) foundation.HRESULT {
+func (self *IWMCodecPrivateData) SetPartialOutputType(pmt *mediadxmediaobjects.DMO_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrivateData dispatches through IWMCodecPrivateData's vtable slot 4.
-func (self *IWMCodecPrivateData) GetPrivateData(pbData *byte, pcbData *uint32) foundation.HRESULT {
+func (self *IWMCodecPrivateData) GetPrivateData(pbData *byte, pcbData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(unsafe.Pointer(pcbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMCodecProps: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmcodecprops
@@ -12242,15 +12368,17 @@ type IWMCodecProps struct {
 var IID_IWMCodecProps = win32.GUID{Data1: 0x2573e11a, Data2: 0xf01a, Data3: 0x4fdd, Data4: [8]byte{0xa9, 0x8d, 0x63, 0xb8, 0xe0, 0xba, 0x95, 0x89}}
 
 // GetFormatProp dispatches through IWMCodecProps's vtable slot 3.
-func (self *IWMCodecProps) GetFormatProp(pmt *mediadxmediaobjects.DMO_MEDIA_TYPE, pszName foundation.PWSTR, pType *WMT_PROP_DATATYPE, pValue *byte, pdwSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.HRESULT(r1)
+func (self *IWMCodecProps) GetFormatProp(pmt *mediadxmediaobjects.DMO_MEDIA_TYPE, pszName string, pType *WMT_PROP_DATATYPE, pValue *byte, pdwSize *uint32) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pdwSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCodecProp dispatches through IWMCodecProps's vtable slot 4.
-func (self *IWMCodecProps) GetCodecProp(dwFormat uint32, pszName foundation.PWSTR, pType *WMT_PROP_DATATYPE, pValue *byte, pdwSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFormat), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.HRESULT(r1)
+func (self *IWMCodecProps) GetCodecProp(dwFormat uint32, pszName string, pType *WMT_PROP_DATATYPE, pValue *byte, pdwSize *uint32) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFormat), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pdwSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMCodecStrings: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmcodecstrings
@@ -12263,15 +12391,15 @@ type IWMCodecStrings struct {
 var IID_IWMCodecStrings = win32.GUID{Data1: 0xa7b2504b, Data2: 0xe58a, Data3: 0x47fb, Data4: [8]byte{0x95, 0x8b, 0xca, 0xc7, 0x16, 0x5a, 0x05, 0x7d}}
 
 // GetName dispatches through IWMCodecStrings's vtable slot 3.
-func (self *IWMCodecStrings) GetName(pmt *mediadxmediaobjects.DMO_MEDIA_TYPE, cchLength uint32, szName foundation.PWSTR, pcchLength *uint32) foundation.HRESULT {
+func (self *IWMCodecStrings) GetName(pmt *mediadxmediaobjects.DMO_MEDIA_TYPE, cchLength uint32, szName foundation.PWSTR, pcchLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)), uintptr(cchLength), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pcchLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescription dispatches through IWMCodecStrings's vtable slot 4.
-func (self *IWMCodecStrings) GetDescription(pmt *mediadxmediaobjects.DMO_MEDIA_TYPE, cchLength uint32, szDescription foundation.PWSTR, pcchLength *uint32) foundation.HRESULT {
+func (self *IWMCodecStrings) GetDescription(pmt *mediadxmediaobjects.DMO_MEDIA_TYPE, cchLength uint32, szDescription foundation.PWSTR, pcchLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)), uintptr(cchLength), uintptr(unsafe.Pointer(szDescription)), uintptr(unsafe.Pointer(pcchLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMColorConvProps: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmcolorconvprops
@@ -12284,15 +12412,15 @@ type IWMColorConvProps struct {
 var IID_IWMColorConvProps = win32.GUID{Data1: 0xe6a49e22, Data2: 0xc099, Data3: 0x421d, Data4: [8]byte{0xaa, 0xd3, 0xc0, 0x61, 0xfb, 0x4a, 0xe8, 0x5b}}
 
 // SetMode dispatches through IWMColorConvProps's vtable slot 3.
-func (self *IWMColorConvProps) SetMode(lMode int32) foundation.HRESULT {
+func (self *IWMColorConvProps) SetMode(lMode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFullCroppingParam dispatches through IWMColorConvProps's vtable slot 4.
-func (self *IWMColorConvProps) SetFullCroppingParam(lSrcCropLeft int32, lSrcCropTop int32, lDstCropLeft int32, lDstCropTop int32, lCropWidth int32, lCropHeight int32) foundation.HRESULT {
+func (self *IWMColorConvProps) SetFullCroppingParam(lSrcCropLeft int32, lSrcCropTop int32, lDstCropLeft int32, lDstCropTop int32, lCropWidth int32, lCropHeight int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lSrcCropLeft), uintptr(lSrcCropTop), uintptr(lDstCropLeft), uintptr(lDstCropTop), uintptr(lCropWidth), uintptr(lCropHeight))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 776c93b3-b72d-4508-b6d0-208785f553e7
@@ -12304,9 +12432,9 @@ type IWMColorLegalizerProps struct {
 var IID_IWMColorLegalizerProps = win32.GUID{Data1: 0x776c93b3, Data2: 0xb72d, Data3: 0x4508, Data4: [8]byte{0xb6, 0xd0, 0x20, 0x87, 0x85, 0xf5, 0x53, 0xe7}}
 
 // SetColorLegalizerQuality dispatches through IWMColorLegalizerProps's vtable slot 3.
-func (self *IWMColorLegalizerProps) SetColorLegalizerQuality(lquality int32) foundation.HRESULT {
+func (self *IWMColorLegalizerProps) SetColorLegalizerQuality(lquality int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lquality))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4c06bb9b-626c-4614-8329-cc6a21b93fa0
@@ -12318,27 +12446,28 @@ type IWMFrameInterpProps struct {
 var IID_IWMFrameInterpProps = win32.GUID{Data1: 0x4c06bb9b, Data2: 0x626c, Data3: 0x4614, Data4: [8]byte{0x83, 0x29, 0xcc, 0x6a, 0x21, 0xb9, 0x3f, 0xa0}}
 
 // SetFrameRateIn dispatches through IWMFrameInterpProps's vtable slot 3.
-func (self *IWMFrameInterpProps) SetFrameRateIn(lFrameRate int32, lScale int32) foundation.HRESULT {
+func (self *IWMFrameInterpProps) SetFrameRateIn(lFrameRate int32, lScale int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lFrameRate), uintptr(lScale))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFrameRateOut dispatches through IWMFrameInterpProps's vtable slot 4.
-func (self *IWMFrameInterpProps) SetFrameRateOut(lFrameRate int32, lScale int32) foundation.HRESULT {
+func (self *IWMFrameInterpProps) SetFrameRateOut(lFrameRate int32, lScale int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFrameRate), uintptr(lScale))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFrameInterpEnabled dispatches through IWMFrameInterpProps's vtable slot 5.
-func (self *IWMFrameInterpProps) SetFrameInterpEnabled(bFIEnabled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(bFIEnabled))
-	return foundation.HRESULT(r1)
+func (self *IWMFrameInterpProps) SetFrameInterpEnabled(bFIEnabled bool) error {
+	_bFIEnabled := win32.Bool32(bFIEnabled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_bFIEnabled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetComplexityLevel dispatches through IWMFrameInterpProps's vtable slot 6.
-func (self *IWMFrameInterpProps) SetComplexityLevel(iComplexity int32) foundation.HRESULT {
+func (self *IWMFrameInterpProps) SetComplexityLevel(iComplexity int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iComplexity))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7b12e5d1-bd22-48ea-bc06-98e893221c89
@@ -12350,21 +12479,21 @@ type IWMInterlaceProps struct {
 var IID_IWMInterlaceProps = win32.GUID{Data1: 0x7b12e5d1, Data2: 0xbd22, Data3: 0x48ea, Data4: [8]byte{0xbc, 0x06, 0x98, 0xe8, 0x93, 0x22, 0x1c, 0x89}}
 
 // SetProcessType dispatches through IWMInterlaceProps's vtable slot 3.
-func (self *IWMInterlaceProps) SetProcessType(iProcessType int32) foundation.HRESULT {
+func (self *IWMInterlaceProps) SetProcessType(iProcessType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(iProcessType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInitInverseTeleCinePattern dispatches through IWMInterlaceProps's vtable slot 4.
-func (self *IWMInterlaceProps) SetInitInverseTeleCinePattern(iInitPattern int32) foundation.HRESULT {
+func (self *IWMInterlaceProps) SetInitInverseTeleCinePattern(iInitPattern int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iInitPattern))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLastFrame dispatches through IWMInterlaceProps's vtable slot 5.
-func (self *IWMInterlaceProps) SetLastFrame() foundation.HRESULT {
+func (self *IWMInterlaceProps) SetLastFrame() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMResamplerProps: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmresamplerprops
@@ -12377,15 +12506,15 @@ type IWMResamplerProps struct {
 var IID_IWMResamplerProps = win32.GUID{Data1: 0xe7e9984f, Data2: 0xf09f, Data3: 0x4da4, Data4: [8]byte{0x90, 0x3f, 0x6e, 0x2e, 0x0e, 0xfe, 0x56, 0xb5}}
 
 // SetHalfFilterLength dispatches through IWMResamplerProps's vtable slot 3.
-func (self *IWMResamplerProps) SetHalfFilterLength(lhalfFilterLen int32) foundation.HRESULT {
+func (self *IWMResamplerProps) SetHalfFilterLength(lhalfFilterLen int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lhalfFilterLen))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUserChannelMtx dispatches through IWMResamplerProps's vtable slot 4.
-func (self *IWMResamplerProps) SetUserChannelMtx(userChannelMtx *float32) foundation.HRESULT {
+func (self *IWMResamplerProps) SetUserChannelMtx(userChannelMtx *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(userChannelMtx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMResizerProps: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmresizerprops
@@ -12398,33 +12527,33 @@ type IWMResizerProps struct {
 var IID_IWMResizerProps = win32.GUID{Data1: 0x57665d4c, Data2: 0x0414, Data3: 0x4faa, Data4: [8]byte{0x90, 0x5b, 0x10, 0xe5, 0x46, 0xf8, 0x1c, 0x33}}
 
 // SetResizerQuality dispatches through IWMResizerProps's vtable slot 3.
-func (self *IWMResizerProps) SetResizerQuality(lquality int32) foundation.HRESULT {
+func (self *IWMResizerProps) SetResizerQuality(lquality int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lquality))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInterlaceMode dispatches through IWMResizerProps's vtable slot 4.
-func (self *IWMResizerProps) SetInterlaceMode(lmode int32) foundation.HRESULT {
+func (self *IWMResizerProps) SetInterlaceMode(lmode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lmode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClipRegion dispatches through IWMResizerProps's vtable slot 5.
-func (self *IWMResizerProps) SetClipRegion(lClipOriXSrc int32, lClipOriYSrc int32, lClipWidthSrc int32, lClipHeightSrc int32) foundation.HRESULT {
+func (self *IWMResizerProps) SetClipRegion(lClipOriXSrc int32, lClipOriYSrc int32, lClipWidthSrc int32, lClipHeightSrc int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lClipOriXSrc), uintptr(lClipOriYSrc), uintptr(lClipWidthSrc), uintptr(lClipHeightSrc))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFullCropRegion dispatches through IWMResizerProps's vtable slot 6.
-func (self *IWMResizerProps) SetFullCropRegion(lClipOriXSrc int32, lClipOriYSrc int32, lClipWidthSrc int32, lClipHeightSrc int32, lClipOriXDst int32, lClipOriYDst int32, lClipWidthDst int32, lClipHeightDst int32) foundation.HRESULT {
+func (self *IWMResizerProps) SetFullCropRegion(lClipOriXSrc int32, lClipOriYSrc int32, lClipWidthSrc int32, lClipHeightSrc int32, lClipOriXDst int32, lClipOriYDst int32, lClipWidthDst int32, lClipHeightDst int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lClipOriXSrc), uintptr(lClipOriYSrc), uintptr(lClipWidthSrc), uintptr(lClipHeightSrc), uintptr(lClipOriXDst), uintptr(lClipOriYDst), uintptr(lClipWidthDst), uintptr(lClipHeightDst))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFullCropRegion dispatches through IWMResizerProps's vtable slot 7.
-func (self *IWMResizerProps) GetFullCropRegion(lClipOriXSrc *int32, lClipOriYSrc *int32, lClipWidthSrc *int32, lClipHeightSrc *int32, lClipOriXDst *int32, lClipOriYDst *int32, lClipWidthDst *int32, lClipHeightDst *int32) foundation.HRESULT {
+func (self *IWMResizerProps) GetFullCropRegion(lClipOriXSrc *int32, lClipOriYSrc *int32, lClipWidthSrc *int32, lClipHeightSrc *int32, lClipOriXDst *int32, lClipOriYDst *int32, lClipWidthDst *int32, lClipHeightDst *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lClipOriXSrc)), uintptr(unsafe.Pointer(lClipOriYSrc)), uintptr(unsafe.Pointer(lClipWidthSrc)), uintptr(unsafe.Pointer(lClipHeightSrc)), uintptr(unsafe.Pointer(lClipOriXDst)), uintptr(unsafe.Pointer(lClipOriYDst)), uintptr(unsafe.Pointer(lClipWidthDst)), uintptr(unsafe.Pointer(lClipHeightDst)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMSampleExtensionSupport: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmsampleextensionsupport
@@ -12437,9 +12566,10 @@ type IWMSampleExtensionSupport struct {
 var IID_IWMSampleExtensionSupport = win32.GUID{Data1: 0x9bca9884, Data2: 0x0604, Data3: 0x4c2a, Data4: [8]byte{0x87, 0xda, 0x79, 0x3f, 0xf4, 0xd5, 0x86, 0xc3}}
 
 // SetUseSampleExtensions dispatches through IWMSampleExtensionSupport's vtable slot 3.
-func (self *IWMSampleExtensionSupport) SetUseSampleExtensions(fUseExtensions foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fUseExtensions))
-	return foundation.HRESULT(r1)
+func (self *IWMSampleExtensionSupport) SetUseSampleExtensions(fUseExtensions bool) error {
+	_fUseExtensions := win32.Bool32(fUseExtensions)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fUseExtensions))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: cee3def2-3808-414d-be66-fafd472210bc
@@ -12460,15 +12590,15 @@ type IWMVideoDecoderHurryup struct {
 var IID_IWMVideoDecoderHurryup = win32.GUID{Data1: 0x352bb3bd, Data2: 0x2d4d, Data3: 0x4323, Data4: [8]byte{0x9e, 0x71, 0xdc, 0xdc, 0xfb, 0xd5, 0x3c, 0xa6}}
 
 // SetHurryup dispatches through IWMVideoDecoderHurryup's vtable slot 3.
-func (self *IWMVideoDecoderHurryup) SetHurryup(lHurryup int32) foundation.HRESULT {
+func (self *IWMVideoDecoderHurryup) SetHurryup(lHurryup int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lHurryup))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHurryup dispatches through IWMVideoDecoderHurryup's vtable slot 4.
-func (self *IWMVideoDecoderHurryup) GetHurryup(plHurryup *int32) foundation.HRESULT {
+func (self *IWMVideoDecoderHurryup) GetHurryup(plHurryup *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plHurryup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMVideoDecoderReconBuffer: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmvideodecoderreconbuffer
@@ -12481,21 +12611,21 @@ type IWMVideoDecoderReconBuffer struct {
 var IID_IWMVideoDecoderReconBuffer = win32.GUID{Data1: 0x45bda2ac, Data2: 0x88e2, Data3: 0x4923, Data4: [8]byte{0x98, 0xba, 0x39, 0x49, 0x08, 0x07, 0x11, 0xa3}}
 
 // GetReconstructedVideoFrameSize dispatches through IWMVideoDecoderReconBuffer's vtable slot 3.
-func (self *IWMVideoDecoderReconBuffer) GetReconstructedVideoFrameSize(pdwSize *uint32) foundation.HRESULT {
+func (self *IWMVideoDecoderReconBuffer) GetReconstructedVideoFrameSize(pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReconstructedVideoFrame dispatches through IWMVideoDecoderReconBuffer's vtable slot 4.
-func (self *IWMVideoDecoderReconBuffer) GetReconstructedVideoFrame(pBuf *mediadxmediaobjects.IMediaBuffer) foundation.HRESULT {
+func (self *IWMVideoDecoderReconBuffer) GetReconstructedVideoFrame(pBuf *mediadxmediaobjects.IMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetReconstructedVideoFrame dispatches through IWMVideoDecoderReconBuffer's vtable slot 5.
-func (self *IWMVideoDecoderReconBuffer) SetReconstructedVideoFrame(pBuf *mediadxmediaobjects.IMediaBuffer) foundation.HRESULT {
+func (self *IWMVideoDecoderReconBuffer) SetReconstructedVideoFrame(pBuf *mediadxmediaobjects.IMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWMVideoForceKeyFrame: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmvideoforcekeyframe
@@ -12508,9 +12638,9 @@ type IWMVideoForceKeyFrame struct {
 var IID_IWMVideoForceKeyFrame = win32.GUID{Data1: 0x9f8496be, Data2: 0x5b9a, Data3: 0x41b9, Data4: [8]byte{0xa9, 0xe8, 0xf2, 0x1c, 0xd8, 0x05, 0x96, 0xc2}}
 
 // SetKeyFrame dispatches through IWMVideoForceKeyFrame's vtable slot 3.
-func (self *IWMVideoForceKeyFrame) SetKeyFrame() foundation.HRESULT {
+func (self *IWMVideoForceKeyFrame) SetKeyFrame() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFASYNCRESULT: https://learn.microsoft.com/windows/win32/api/mfapi/ns-mfapi-mfasyncresult

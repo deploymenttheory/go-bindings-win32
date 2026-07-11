@@ -24,24 +24,24 @@ var (
 
 var (
 	procSndOpenSound                 = modapi_ms_win_mm_misc_l1_1_1.NewProc("sndOpenSound")
+	procCapCreateCaptureWindow       = modAVICAP32.NewProc("capCreateCaptureWindowW")
 	procCapCreateCaptureWindowA      = modAVICAP32.NewProc("capCreateCaptureWindowA")
-	procCapCreateCaptureWindowW      = modAVICAP32.NewProc("capCreateCaptureWindowW")
+	procCapGetDriverDescription      = modAVICAP32.NewProc("capGetDriverDescriptionW")
 	procCapGetDriverDescriptionA     = modAVICAP32.NewProc("capGetDriverDescriptionA")
-	procCapGetDriverDescriptionW     = modAVICAP32.NewProc("capGetDriverDescriptionW")
+	procAVIBuildFilter               = modAVIFIL32.NewProc("AVIBuildFilterW")
 	procAVIBuildFilterA              = modAVIFIL32.NewProc("AVIBuildFilterA")
-	procAVIBuildFilterW              = modAVIFIL32.NewProc("AVIBuildFilterW")
 	procAVIClearClipboard            = modAVIFIL32.NewProc("AVIClearClipboard")
 	procAVIFileAddRef                = modAVIFIL32.NewProc("AVIFileAddRef")
+	procAVIFileCreateStream          = modAVIFIL32.NewProc("AVIFileCreateStreamW")
 	procAVIFileCreateStreamA         = modAVIFIL32.NewProc("AVIFileCreateStreamA")
-	procAVIFileCreateStreamW         = modAVIFIL32.NewProc("AVIFileCreateStreamW")
 	procAVIFileEndRecord             = modAVIFIL32.NewProc("AVIFileEndRecord")
 	procAVIFileExit                  = modAVIFIL32.NewProc("AVIFileExit")
 	procAVIFileGetStream             = modAVIFIL32.NewProc("AVIFileGetStream")
+	procAVIFileInfo                  = modAVIFIL32.NewProc("AVIFileInfoW")
 	procAVIFileInfoA                 = modAVIFIL32.NewProc("AVIFileInfoA")
-	procAVIFileInfoW                 = modAVIFIL32.NewProc("AVIFileInfoW")
 	procAVIFileInit                  = modAVIFIL32.NewProc("AVIFileInit")
+	procAVIFileOpen                  = modAVIFIL32.NewProc("AVIFileOpenW")
 	procAVIFileOpenA                 = modAVIFIL32.NewProc("AVIFileOpenA")
-	procAVIFileOpenW                 = modAVIFIL32.NewProc("AVIFileOpenW")
 	procAVIFileReadData              = modAVIFIL32.NewProc("AVIFileReadData")
 	procAVIFileRelease               = modAVIFIL32.NewProc("AVIFileRelease")
 	procAVIFileWriteData             = modAVIFIL32.NewProc("AVIFileWriteData")
@@ -50,12 +50,12 @@ var (
 	procAVIMakeFileFromStreams       = modAVIFIL32.NewProc("AVIMakeFileFromStreams")
 	procAVIMakeStreamFromClipboard   = modAVIFIL32.NewProc("AVIMakeStreamFromClipboard")
 	procAVIPutFileOnClipboard        = modAVIFIL32.NewProc("AVIPutFileOnClipboard")
+	procAVISave                      = modAVIFIL32.NewProc("AVISaveW")
 	procAVISaveA                     = modAVIFIL32.NewProc("AVISaveA")
 	procAVISaveOptions               = modAVIFIL32.NewProc("AVISaveOptions")
 	procAVISaveOptionsFree           = modAVIFIL32.NewProc("AVISaveOptionsFree")
+	procAVISaveV                     = modAVIFIL32.NewProc("AVISaveVW")
 	procAVISaveVA                    = modAVIFIL32.NewProc("AVISaveVA")
-	procAVISaveVW                    = modAVIFIL32.NewProc("AVISaveVW")
-	procAVISaveW                     = modAVIFIL32.NewProc("AVISaveW")
 	procAVIStreamAddRef              = modAVIFIL32.NewProc("AVIStreamAddRef")
 	procAVIStreamBeginStreaming      = modAVIFIL32.NewProc("AVIStreamBeginStreaming")
 	procAVIStreamCreate              = modAVIFIL32.NewProc("AVIStreamCreate")
@@ -64,11 +64,11 @@ var (
 	procAVIStreamGetFrame            = modAVIFIL32.NewProc("AVIStreamGetFrame")
 	procAVIStreamGetFrameClose       = modAVIFIL32.NewProc("AVIStreamGetFrameClose")
 	procAVIStreamGetFrameOpen        = modAVIFIL32.NewProc("AVIStreamGetFrameOpen")
+	procAVIStreamInfo                = modAVIFIL32.NewProc("AVIStreamInfoW")
 	procAVIStreamInfoA               = modAVIFIL32.NewProc("AVIStreamInfoA")
-	procAVIStreamInfoW               = modAVIFIL32.NewProc("AVIStreamInfoW")
 	procAVIStreamLength              = modAVIFIL32.NewProc("AVIStreamLength")
+	procAVIStreamOpenFromFile        = modAVIFIL32.NewProc("AVIStreamOpenFromFileW")
 	procAVIStreamOpenFromFileA       = modAVIFIL32.NewProc("AVIStreamOpenFromFileA")
-	procAVIStreamOpenFromFileW       = modAVIFIL32.NewProc("AVIStreamOpenFromFileW")
 	procAVIStreamRead                = modAVIFIL32.NewProc("AVIStreamRead")
 	procAVIStreamReadData            = modAVIFIL32.NewProc("AVIStreamReadData")
 	procAVIStreamReadFormat          = modAVIFIL32.NewProc("AVIStreamReadFormat")
@@ -84,10 +84,10 @@ var (
 	procEditStreamCopy               = modAVIFIL32.NewProc("EditStreamCopy")
 	procEditStreamCut                = modAVIFIL32.NewProc("EditStreamCut")
 	procEditStreamPaste              = modAVIFIL32.NewProc("EditStreamPaste")
+	procEditStreamSetInfo            = modAVIFIL32.NewProc("EditStreamSetInfoW")
 	procEditStreamSetInfoA           = modAVIFIL32.NewProc("EditStreamSetInfoA")
-	procEditStreamSetInfoW           = modAVIFIL32.NewProc("EditStreamSetInfoW")
+	procEditStreamSetName            = modAVIFIL32.NewProc("EditStreamSetNameW")
 	procEditStreamSetNameA           = modAVIFIL32.NewProc("EditStreamSetNameA")
-	procEditStreamSetNameW           = modAVIFIL32.NewProc("EditStreamSetNameW")
 	procDrawDibBegin                 = modMSVFW32.NewProc("DrawDibBegin")
 	procDrawDibChangePalette         = modMSVFW32.NewProc("DrawDibChangePalette")
 	procDrawDibClose                 = modMSVFW32.NewProc("DrawDibClose")
@@ -102,10 +102,10 @@ var (
 	procDrawDibStart                 = modMSVFW32.NewProc("DrawDibStart")
 	procDrawDibStop                  = modMSVFW32.NewProc("DrawDibStop")
 	procDrawDibTime                  = modMSVFW32.NewProc("DrawDibTime")
+	procGetOpenFileNamePreview       = modMSVFW32.NewProc("GetOpenFileNamePreviewW")
 	procGetOpenFileNamePreviewA      = modMSVFW32.NewProc("GetOpenFileNamePreviewA")
-	procGetOpenFileNamePreviewW      = modMSVFW32.NewProc("GetOpenFileNamePreviewW")
+	procGetSaveFileNamePreview       = modMSVFW32.NewProc("GetSaveFileNamePreviewW")
 	procGetSaveFileNamePreviewA      = modMSVFW32.NewProc("GetSaveFileNamePreviewA")
-	procGetSaveFileNamePreviewW      = modMSVFW32.NewProc("GetSaveFileNamePreviewW")
 	procICClose                      = modMSVFW32.NewProc("ICClose")
 	procICCompress                   = modMSVFW32.NewProc("ICCompress")
 	procICCompressorChoose           = modMSVFW32.NewProc("ICCompressorChoose")
@@ -127,8 +127,8 @@ var (
 	procICSeqCompressFrame           = modMSVFW32.NewProc("ICSeqCompressFrame")
 	procICSeqCompressFrameEnd        = modMSVFW32.NewProc("ICSeqCompressFrameEnd")
 	procICSeqCompressFrameStart      = modMSVFW32.NewProc("ICSeqCompressFrameStart")
+	procMCIWndCreate                 = modMSVFW32.NewProc("MCIWndCreateW")
 	procMCIWndCreateA                = modMSVFW32.NewProc("MCIWndCreateA")
-	procMCIWndCreateW                = modMSVFW32.NewProc("MCIWndCreateW")
 	procMCIWndRegisterClass          = modMSVFW32.NewProc("MCIWndRegisterClass")
 	procVideoForWindowsVersion       = modMSVFW32.NewProc("VideoForWindowsVersion")
 	procCloseDriver                  = modWINMM.NewProc("CloseDriver")
@@ -136,8 +136,8 @@ var (
 	procDriverCallback               = modWINMM.NewProc("DriverCallback")
 	procDrvGetModuleHandle           = modWINMM.NewProc("DrvGetModuleHandle")
 	procGetDriverModuleHandle        = modWINMM.NewProc("GetDriverModuleHandle")
+	procJoyGetDevCaps                = modWINMM.NewProc("joyGetDevCapsW")
 	procJoyGetDevCapsA               = modWINMM.NewProc("joyGetDevCapsA")
-	procJoyGetDevCapsW               = modWINMM.NewProc("joyGetDevCapsW")
 	procJoyGetNumDevs                = modWINMM.NewProc("joyGetNumDevs")
 	procJoyGetPos                    = modWINMM.NewProc("joyGetPos")
 	procJoyGetPosEx                  = modWINMM.NewProc("joyGetPosEx")
@@ -149,19 +149,19 @@ var (
 	procMciDriverYield               = modWINMM.NewProc("mciDriverYield")
 	procMciFreeCommandResource       = modWINMM.NewProc("mciFreeCommandResource")
 	procMciGetCreatorTask            = modWINMM.NewProc("mciGetCreatorTask")
+	procMciGetDeviceID               = modWINMM.NewProc("mciGetDeviceIDW")
 	procMciGetDeviceIDA              = modWINMM.NewProc("mciGetDeviceIDA")
+	procMciGetDeviceIDFromElementID  = modWINMM.NewProc("mciGetDeviceIDFromElementIDW")
 	procMciGetDeviceIDFromElementIDA = modWINMM.NewProc("mciGetDeviceIDFromElementIDA")
-	procMciGetDeviceIDFromElementIDW = modWINMM.NewProc("mciGetDeviceIDFromElementIDW")
-	procMciGetDeviceIDW              = modWINMM.NewProc("mciGetDeviceIDW")
 	procMciGetDriverData             = modWINMM.NewProc("mciGetDriverData")
+	procMciGetErrorString            = modWINMM.NewProc("mciGetErrorStringW")
 	procMciGetErrorStringA           = modWINMM.NewProc("mciGetErrorStringA")
-	procMciGetErrorStringW           = modWINMM.NewProc("mciGetErrorStringW")
 	procMciGetYieldProc              = modWINMM.NewProc("mciGetYieldProc")
 	procMciLoadCommandResource       = modWINMM.NewProc("mciLoadCommandResource")
+	procMciSendCommand               = modWINMM.NewProc("mciSendCommandW")
 	procMciSendCommandA              = modWINMM.NewProc("mciSendCommandA")
-	procMciSendCommandW              = modWINMM.NewProc("mciSendCommandW")
+	procMciSendString                = modWINMM.NewProc("mciSendStringW")
 	procMciSendStringA               = modWINMM.NewProc("mciSendStringA")
-	procMciSendStringW               = modWINMM.NewProc("mciSendStringW")
 	procMciSetDriverData             = modWINMM.NewProc("mciSetDriverData")
 	procMciSetYieldProc              = modWINMM.NewProc("mciSetYieldProc")
 	procMmDrvInstall                 = modWINMM.NewProc("mmDrvInstall")
@@ -177,46 +177,48 @@ var (
 	procMmioDescend                  = modWINMM.NewProc("mmioDescend")
 	procMmioFlush                    = modWINMM.NewProc("mmioFlush")
 	procMmioGetInfo                  = modWINMM.NewProc("mmioGetInfo")
+	procMmioInstallIOProc            = modWINMM.NewProc("mmioInstallIOProcW")
 	procMmioInstallIOProcA           = modWINMM.NewProc("mmioInstallIOProcA")
-	procMmioInstallIOProcW           = modWINMM.NewProc("mmioInstallIOProcW")
+	procMmioOpen                     = modWINMM.NewProc("mmioOpenW")
 	procMmioOpenA                    = modWINMM.NewProc("mmioOpenA")
-	procMmioOpenW                    = modWINMM.NewProc("mmioOpenW")
 	procMmioRead                     = modWINMM.NewProc("mmioRead")
+	procMmioRename                   = modWINMM.NewProc("mmioRenameW")
 	procMmioRenameA                  = modWINMM.NewProc("mmioRenameA")
-	procMmioRenameW                  = modWINMM.NewProc("mmioRenameW")
 	procMmioSeek                     = modWINMM.NewProc("mmioSeek")
 	procMmioSendMessage              = modWINMM.NewProc("mmioSendMessage")
 	procMmioSetBuffer                = modWINMM.NewProc("mmioSetBuffer")
 	procMmioSetInfo                  = modWINMM.NewProc("mmioSetInfo")
+	procMmioStringToFOURCC           = modWINMM.NewProc("mmioStringToFOURCCW")
 	procMmioStringToFOURCCA          = modWINMM.NewProc("mmioStringToFOURCCA")
-	procMmioStringToFOURCCW          = modWINMM.NewProc("mmioStringToFOURCCW")
 	procMmioWrite                    = modWINMM.NewProc("mmioWrite")
 	procOpenDriver                   = modWINMM.NewProc("OpenDriver")
 	procSendDriverMessage            = modWINMM.NewProc("SendDriverMessage")
 )
 
+// AVIBuildFilter calls AVIFIL32!AVIBuildFilterW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avibuildfilterw
+// Minimum OS: windows5.0.
+func AVIBuildFilter(lpszFilter foundation.PWSTR, cbFilter int32, fSaving bool) error {
+	_fSaving := win32.Bool32(fSaving)
+	r1, _, _ := syscall.SyscallN(procAVIBuildFilter.Addr(), uintptr(unsafe.Pointer(lpszFilter)), uintptr(cbFilter), uintptr(_fSaving))
+	return win32.HRESULTError(int32(r1))
+}
+
 // AVIBuildFilterA calls AVIFIL32!AVIBuildFilterA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avibuildfiltera
 // Minimum OS: windows5.0.
-func AVIBuildFilterA(lpszFilter foundation.PSTR, cbFilter int32, fSaving foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIBuildFilterA.Addr(), uintptr(unsafe.Pointer(lpszFilter)), uintptr(cbFilter), uintptr(fSaving))
-	return foundation.HRESULT(r1)
-}
-
-// AVIBuildFilterW calls AVIFIL32!AVIBuildFilterW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avibuildfilterw
-// Minimum OS: windows5.0.
-func AVIBuildFilterW(lpszFilter foundation.PWSTR, cbFilter int32, fSaving foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIBuildFilterW.Addr(), uintptr(unsafe.Pointer(lpszFilter)), uintptr(cbFilter), uintptr(fSaving))
-	return foundation.HRESULT(r1)
+func AVIBuildFilterA(lpszFilter foundation.PSTR, cbFilter int32, fSaving bool) error {
+	_fSaving := win32.Bool32(fSaving)
+	r1, _, _ := syscall.SyscallN(procAVIBuildFilterA.Addr(), uintptr(unsafe.Pointer(lpszFilter)), uintptr(cbFilter), uintptr(_fSaving))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIClearClipboard calls AVIFIL32!AVIClearClipboard.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-aviclearclipboard
 // Minimum OS: windows5.0.
-func AVIClearClipboard() foundation.HRESULT {
+func AVIClearClipboard() error {
 	r1, _, _ := syscall.SyscallN(procAVIClearClipboard.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIFileAddRef calls AVIFIL32!AVIFileAddRef.
@@ -227,28 +229,28 @@ func AVIFileAddRef(pfile *IAVIFile) uint32 {
 	return uint32(r1)
 }
 
+// AVIFileCreateStream calls AVIFIL32!AVIFileCreateStreamW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilecreatestreamw
+// Minimum OS: windows5.0.
+func AVIFileCreateStream(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINFOW) error {
+	r1, _, _ := syscall.SyscallN(procAVIFileCreateStream.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(psi)))
+	return win32.HRESULTError(int32(r1))
+}
+
 // AVIFileCreateStreamA calls AVIFIL32!AVIFileCreateStreamA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilecreatestreama
 // Minimum OS: windows5.0.
-func AVIFileCreateStreamA(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINFOA) foundation.HRESULT {
+func AVIFileCreateStreamA(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINFOA) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileCreateStreamA.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(psi)))
-	return foundation.HRESULT(r1)
-}
-
-// AVIFileCreateStreamW calls AVIFIL32!AVIFileCreateStreamW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilecreatestreamw
-// Minimum OS: windows5.0.
-func AVIFileCreateStreamW(pfile *IAVIFile, ppavi **IAVIStream, psi *AVISTREAMINFOW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileCreateStreamW.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(psi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIFileEndRecord calls AVIFIL32!AVIFileEndRecord.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileendrecord
 // Minimum OS: windows5.0.
-func AVIFileEndRecord(pfile *IAVIFile) foundation.HRESULT {
+func AVIFileEndRecord(pfile *IAVIFile) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileEndRecord.Addr(), uintptr(unsafe.Pointer(pfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIFileExit calls AVIFIL32!AVIFileExit.
@@ -261,25 +263,25 @@ func AVIFileExit() {
 // AVIFileGetStream calls AVIFIL32!AVIFileGetStream.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilegetstream
 // Minimum OS: windows5.0.
-func AVIFileGetStream(pfile *IAVIFile, ppavi **IAVIStream, fccType uint32, lParam int32) foundation.HRESULT {
+func AVIFileGetStream(pfile *IAVIFile, ppavi **IAVIStream, fccType uint32, lParam int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileGetStream.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(ppavi)), uintptr(fccType), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// AVIFileInfo calls AVIFIL32!AVIFileInfoW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileinfow
+// Minimum OS: windows5.0.
+func AVIFileInfo(pfile *IAVIFile, pfi *AVIFILEINFOW, lSize int32) error {
+	r1, _, _ := syscall.SyscallN(procAVIFileInfo.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIFileInfoA calls AVIFIL32!AVIFileInfoA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileinfoa
 // Minimum OS: windows5.0.
-func AVIFileInfoA(pfile *IAVIFile, pfi *AVIFILEINFOA, lSize int32) foundation.HRESULT {
+func AVIFileInfoA(pfile *IAVIFile, pfi *AVIFILEINFOA, lSize int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileInfoA.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
-	return foundation.HRESULT(r1)
-}
-
-// AVIFileInfoW calls AVIFIL32!AVIFileInfoW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileinfow
-// Minimum OS: windows5.0.
-func AVIFileInfoW(pfile *IAVIFile, pfi *AVIFILEINFOW, lSize int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileInfoW.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIFileInit calls AVIFIL32!AVIFileInit.
@@ -289,28 +291,29 @@ func AVIFileInit() {
 	syscall.SyscallN(procAVIFileInit.Addr())
 }
 
+// AVIFileOpen calls AVIFIL32!AVIFileOpenW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileopenw
+// Minimum OS: windows5.0.
+func AVIFileOpen(ppfile **IAVIFile, szFile string, uMode uint32, lpHandler *win32.GUID) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procAVIFileOpen.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(unsafe.Pointer(_szFile)), uintptr(uMode), uintptr(unsafe.Pointer(lpHandler)))
+	return win32.HRESULTError(int32(r1))
+}
+
 // AVIFileOpenA calls AVIFIL32!AVIFileOpenA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileopena
 // Minimum OS: windows5.0.
-func AVIFileOpenA(ppfile **IAVIFile, szFile foundation.PSTR, uMode uint32, lpHandler *win32.GUID) foundation.HRESULT {
+func AVIFileOpenA(ppfile **IAVIFile, szFile foundation.PSTR, uMode uint32, lpHandler *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileOpenA.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(unsafe.Pointer(szFile)), uintptr(uMode), uintptr(unsafe.Pointer(lpHandler)))
-	return foundation.HRESULT(r1)
-}
-
-// AVIFileOpenW calls AVIFIL32!AVIFileOpenW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifileopenw
-// Minimum OS: windows5.0.
-func AVIFileOpenW(ppfile **IAVIFile, szFile foundation.PWSTR, uMode uint32, lpHandler *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIFileOpenW.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(unsafe.Pointer(szFile)), uintptr(uMode), uintptr(unsafe.Pointer(lpHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIFileReadData calls AVIFIL32!AVIFileReadData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilereaddata
 // Minimum OS: windows5.0.
-func AVIFileReadData(pfile *IAVIFile, ckid uint32, lpData unsafe.Pointer, lpcbData *int32) foundation.HRESULT {
+func AVIFileReadData(pfile *IAVIFile, ckid uint32, lpData unsafe.Pointer, lpcbData *int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileReadData.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(lpcbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIFileRelease calls AVIFIL32!AVIFileRelease.
@@ -324,57 +327,70 @@ func AVIFileRelease(pfile *IAVIFile) uint32 {
 // AVIFileWriteData calls AVIFIL32!AVIFileWriteData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilewritedata
 // Minimum OS: windows5.0.
-func AVIFileWriteData(pfile *IAVIFile, ckid uint32, lpData unsafe.Pointer, cbData int32) foundation.HRESULT {
+func AVIFileWriteData(pfile *IAVIFile, ckid uint32, lpData unsafe.Pointer, cbData int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIFileWriteData.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIGetFromClipboard calls AVIFIL32!AVIGetFromClipboard.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avigetfromclipboard
 // Minimum OS: windows5.0.
-func AVIGetFromClipboard(lppf **IAVIFile) foundation.HRESULT {
+func AVIGetFromClipboard(lppf **IAVIFile) error {
 	r1, _, _ := syscall.SyscallN(procAVIGetFromClipboard.Addr(), uintptr(unsafe.Pointer(lppf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIMakeCompressedStream calls AVIFIL32!AVIMakeCompressedStream.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avimakecompressedstream
 // Minimum OS: windows5.0.
-func AVIMakeCompressedStream(ppsCompressed **IAVIStream, ppsSource *IAVIStream, lpOptions *AVICOMPRESSOPTIONS, pclsidHandler *win32.GUID) foundation.HRESULT {
+func AVIMakeCompressedStream(ppsCompressed **IAVIStream, ppsSource *IAVIStream, lpOptions *AVICOMPRESSOPTIONS, pclsidHandler *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procAVIMakeCompressedStream.Addr(), uintptr(unsafe.Pointer(ppsCompressed)), uintptr(unsafe.Pointer(ppsSource)), uintptr(unsafe.Pointer(lpOptions)), uintptr(unsafe.Pointer(pclsidHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIMakeFileFromStreams calls AVIFIL32!AVIMakeFileFromStreams.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avimakefilefromstreams
 // Minimum OS: windows5.0.
-func AVIMakeFileFromStreams(ppfile **IAVIFile, nStreams int32, papStreams **IAVIStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIMakeFileFromStreams.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(nStreams), uintptr(unsafe.Pointer(papStreams)))
-	return foundation.HRESULT(r1)
+func AVIMakeFileFromStreams(ppfile **IAVIFile, papStreams []*IAVIStream) error {
+	var _papStreams **IAVIStream
+	if len(papStreams) > 0 {
+		_papStreams = &papStreams[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAVIMakeFileFromStreams.Addr(), uintptr(unsafe.Pointer(ppfile)), uintptr(len(papStreams)), uintptr(unsafe.Pointer(_papStreams)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIMakeStreamFromClipboard calls AVIFIL32!AVIMakeStreamFromClipboard.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avimakestreamfromclipboard
 // Minimum OS: windows5.0.
-func AVIMakeStreamFromClipboard(cfFormat uint32, hGlobal foundation.HANDLE, ppstream **IAVIStream) foundation.HRESULT {
+func AVIMakeStreamFromClipboard(cfFormat uint32, hGlobal foundation.HANDLE, ppstream **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procAVIMakeStreamFromClipboard.Addr(), uintptr(cfFormat), uintptr(hGlobal), uintptr(unsafe.Pointer(ppstream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIPutFileOnClipboard calls AVIFIL32!AVIPutFileOnClipboard.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-aviputfileonclipboard
 // Minimum OS: windows5.0.
-func AVIPutFileOnClipboard(pf *IAVIFile) foundation.HRESULT {
+func AVIPutFileOnClipboard(pf *IAVIFile) error {
 	r1, _, _ := syscall.SyscallN(procAVIPutFileOnClipboard.Addr(), uintptr(unsafe.Pointer(pf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// AVISave calls AVIFIL32!AVISaveW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavew
+// Minimum OS: windows5.0.
+func AVISave(szFile string, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile *IAVIStream, lpOptions *AVICOMPRESSOPTIONS) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procAVISave.Addr(), uintptr(unsafe.Pointer(_szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(lpOptions)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVISaveA calls AVIFIL32!AVISaveA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavea
 // Minimum OS: windows5.0.
-func AVISaveA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile *IAVIStream, lpOptions *AVICOMPRESSOPTIONS) foundation.HRESULT {
+func AVISaveA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile *IAVIStream, lpOptions *AVICOMPRESSOPTIONS) error {
 	r1, _, _ := syscall.SyscallN(procAVISaveA.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(lpOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVISaveOptions calls AVIFIL32!AVISaveOptions.
@@ -388,33 +404,30 @@ func AVISaveOptions(hwnd foundation.HWND, uiFlags uint32, nStreams int32, ppavi 
 // AVISaveOptionsFree calls AVIFIL32!AVISaveOptionsFree.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisaveoptionsfree
 // Minimum OS: windows5.0.
-func AVISaveOptionsFree(nStreams int32, plpOptions **AVICOMPRESSOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVISaveOptionsFree.Addr(), uintptr(nStreams), uintptr(unsafe.Pointer(plpOptions)))
-	return foundation.HRESULT(r1)
+func AVISaveOptionsFree(plpOptions []*AVICOMPRESSOPTIONS) error {
+	var _plpOptions **AVICOMPRESSOPTIONS
+	if len(plpOptions) > 0 {
+		_plpOptions = &plpOptions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAVISaveOptionsFree.Addr(), uintptr(len(plpOptions)), uintptr(unsafe.Pointer(_plpOptions)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// AVISaveV calls AVIFIL32!AVISaveVW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavevw
+// Minimum OS: windows5.0.
+func AVISaveV(szFile string, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi **IAVIStream, plpOptions **AVICOMPRESSOPTIONS) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procAVISaveV.Addr(), uintptr(unsafe.Pointer(_szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(plpOptions)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVISaveVA calls AVIFIL32!AVISaveVA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisaveva
 // Minimum OS: windows5.0.
-func AVISaveVA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi **IAVIStream, plpOptions **AVICOMPRESSOPTIONS) foundation.HRESULT {
+func AVISaveVA(szFile foundation.PSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi **IAVIStream, plpOptions **AVICOMPRESSOPTIONS) error {
 	r1, _, _ := syscall.SyscallN(procAVISaveVA.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(plpOptions)))
-	return foundation.HRESULT(r1)
-}
-
-// AVISaveVW calls AVIFIL32!AVISaveVW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavevw
-// Minimum OS: windows5.0.
-func AVISaveVW(szFile foundation.PWSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, ppavi **IAVIStream, plpOptions **AVICOMPRESSOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVISaveVW.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(plpOptions)))
-	return foundation.HRESULT(r1)
-}
-
-// AVISaveW calls AVIFIL32!AVISaveW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avisavew
-// Minimum OS: windows5.0.
-func AVISaveW(szFile foundation.PWSTR, pclsidHandler *win32.GUID, lpfnCallback AVISAVECALLBACK, nStreams int32, pfile *IAVIStream, lpOptions *AVICOMPRESSOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVISaveW.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pclsidHandler)), uintptr(lpfnCallback), uintptr(nStreams), uintptr(unsafe.Pointer(pfile)), uintptr(unsafe.Pointer(lpOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamAddRef calls AVIFIL32!AVIStreamAddRef.
@@ -428,25 +441,25 @@ func AVIStreamAddRef(pavi *IAVIStream) uint32 {
 // AVIStreamBeginStreaming calls AVIFIL32!AVIStreamBeginStreaming.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreambeginstreaming
 // Minimum OS: windows5.0.
-func AVIStreamBeginStreaming(pavi *IAVIStream, lStart int32, lEnd int32, lRate int32) foundation.HRESULT {
+func AVIStreamBeginStreaming(pavi *IAVIStream, lStart int32, lEnd int32, lRate int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamBeginStreaming.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lEnd), uintptr(lRate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamCreate calls AVIFIL32!AVIStreamCreate.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamcreate
 // Minimum OS: windows5.0.
-func AVIStreamCreate(ppavi **IAVIStream, lParam1 int32, lParam2 int32, pclsidHandler *win32.GUID) foundation.HRESULT {
+func AVIStreamCreate(ppavi **IAVIStream, lParam1 int32, lParam2 int32, pclsidHandler *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamCreate.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(lParam1), uintptr(lParam2), uintptr(unsafe.Pointer(pclsidHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamEndStreaming calls AVIFIL32!AVIStreamEndStreaming.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamendstreaming
 // Minimum OS: windows5.0.
-func AVIStreamEndStreaming(pavi *IAVIStream) foundation.HRESULT {
+func AVIStreamEndStreaming(pavi *IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamEndStreaming.Addr(), uintptr(unsafe.Pointer(pavi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamFindSample calls AVIFIL32!AVIStreamFindSample.
@@ -468,9 +481,9 @@ func AVIStreamGetFrame(pg *IGetFrame, lPos int32) unsafe.Pointer {
 // AVIStreamGetFrameClose calls AVIFIL32!AVIStreamGetFrameClose.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamgetframeclose
 // Minimum OS: windows5.0.
-func AVIStreamGetFrameClose(pg *IGetFrame) foundation.HRESULT {
+func AVIStreamGetFrameClose(pg *IGetFrame) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamGetFrameClose.Addr(), uintptr(unsafe.Pointer(pg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamGetFrameOpen calls AVIFIL32!AVIStreamGetFrameOpen.
@@ -481,20 +494,20 @@ func AVIStreamGetFrameOpen(pavi *IAVIStream, lpbiWanted *graphicsgdi.BITMAPINFOH
 	return (*IGetFrame)(unsafe.Pointer(r1))
 }
 
+// AVIStreamInfo calls AVIFIL32!AVIStreamInfoW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreaminfow
+// Minimum OS: windows5.0.
+func AVIStreamInfo(pavi *IAVIStream, psi *AVISTREAMINFOW, lSize int32) error {
+	r1, _, _ := syscall.SyscallN(procAVIStreamInfo.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
+	return win32.HRESULTError(int32(r1))
+}
+
 // AVIStreamInfoA calls AVIFIL32!AVIStreamInfoA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreaminfoa
 // Minimum OS: windows5.0.
-func AVIStreamInfoA(pavi *IAVIStream, psi *AVISTREAMINFOA, lSize int32) foundation.HRESULT {
+func AVIStreamInfoA(pavi *IAVIStream, psi *AVISTREAMINFOA, lSize int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamInfoA.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
-	return foundation.HRESULT(r1)
-}
-
-// AVIStreamInfoW calls AVIFIL32!AVIStreamInfoW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreaminfow
-// Minimum OS: windows5.0.
-func AVIStreamInfoW(pavi *IAVIStream, psi *AVISTREAMINFOW, lSize int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamInfoW.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamLength calls AVIFIL32!AVIStreamLength.
@@ -505,44 +518,45 @@ func AVIStreamLength(pavi *IAVIStream) int32 {
 	return int32(r1)
 }
 
+// AVIStreamOpenFromFile calls AVIFIL32!AVIStreamOpenFromFileW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamopenfromfilew
+// Minimum OS: windows5.0.
+func AVIStreamOpenFromFile(ppavi **IAVIStream, szFile string, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procAVIStreamOpenFromFile.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(_szFile)), uintptr(fccType), uintptr(lParam), uintptr(mode), uintptr(unsafe.Pointer(pclsidHandler)))
+	return win32.HRESULTError(int32(r1))
+}
+
 // AVIStreamOpenFromFileA calls AVIFIL32!AVIStreamOpenFromFileA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamopenfromfilea
 // Minimum OS: windows5.0.
-func AVIStreamOpenFromFileA(ppavi **IAVIStream, szFile foundation.PSTR, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) foundation.HRESULT {
+func AVIStreamOpenFromFileA(ppavi **IAVIStream, szFile foundation.PSTR, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamOpenFromFileA.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(szFile)), uintptr(fccType), uintptr(lParam), uintptr(mode), uintptr(unsafe.Pointer(pclsidHandler)))
-	return foundation.HRESULT(r1)
-}
-
-// AVIStreamOpenFromFileW calls AVIFIL32!AVIStreamOpenFromFileW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamopenfromfilew
-// Minimum OS: windows5.0.
-func AVIStreamOpenFromFileW(ppavi **IAVIStream, szFile foundation.PWSTR, fccType uint32, lParam int32, mode uint32, pclsidHandler *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAVIStreamOpenFromFileW.Addr(), uintptr(unsafe.Pointer(ppavi)), uintptr(unsafe.Pointer(szFile)), uintptr(fccType), uintptr(lParam), uintptr(mode), uintptr(unsafe.Pointer(pclsidHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamRead calls AVIFIL32!AVIStreamRead.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamread
 // Minimum OS: windows5.0.
-func AVIStreamRead(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) foundation.HRESULT {
+func AVIStreamRead(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamRead.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(plBytes)), uintptr(unsafe.Pointer(plSamples)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamReadData calls AVIFIL32!AVIStreamReadData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamreaddata
 // Minimum OS: windows5.0.
-func AVIStreamReadData(pavi *IAVIStream, fcc uint32, lp unsafe.Pointer, lpcb *int32) foundation.HRESULT {
+func AVIStreamReadData(pavi *IAVIStream, fcc uint32, lp unsafe.Pointer, lpcb *int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamReadData.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(unsafe.Pointer(lpcb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamReadFormat calls AVIFIL32!AVIStreamReadFormat.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamreadformat
 // Minimum OS: windows5.0.
-func AVIStreamReadFormat(pavi *IAVIStream, lPos int32, lpFormat unsafe.Pointer, lpcbFormat *int32) foundation.HRESULT {
+func AVIStreamReadFormat(pavi *IAVIStream, lPos int32, lpFormat unsafe.Pointer, lpcbFormat *int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamReadFormat.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpcbFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamRelease calls AVIFIL32!AVIStreamRelease.
@@ -564,9 +578,9 @@ func AVIStreamSampleToTime(pavi *IAVIStream, lSample int32) int32 {
 // AVIStreamSetFormat calls AVIFIL32!AVIStreamSetFormat.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamsetformat
 // Minimum OS: windows5.0.
-func AVIStreamSetFormat(pavi *IAVIStream, lPos int32, lpFormat unsafe.Pointer, cbFormat int32) foundation.HRESULT {
+func AVIStreamSetFormat(pavi *IAVIStream, lPos int32, lpFormat unsafe.Pointer, cbFormat int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamSetFormat.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(cbFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamStart calls AVIFIL32!AVIStreamStart.
@@ -588,17 +602,50 @@ func AVIStreamTimeToSample(pavi *IAVIStream, lTime int32) int32 {
 // AVIStreamWrite calls AVIFIL32!AVIStreamWrite.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamwrite
 // Minimum OS: windows5.0.
-func AVIStreamWrite(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) foundation.HRESULT {
+func AVIStreamWrite(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamWrite.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(plSampWritten)), uintptr(unsafe.Pointer(plBytesWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamWriteData calls AVIFIL32!AVIStreamWriteData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamwritedata
 // Minimum OS: windows5.0.
-func AVIStreamWriteData(pavi *IAVIStream, fcc uint32, lp unsafe.Pointer, cb int32) foundation.HRESULT {
+func AVIStreamWriteData(pavi *IAVIStream, fcc uint32, lp unsafe.Pointer, cb int32) error {
 	r1, _, _ := syscall.SyscallN(procAVIStreamWriteData.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(cb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// CapCreateCaptureWindow calls AVICAP32!capCreateCaptureWindowW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-capcreatecapturewindoww
+// Minimum OS: windows5.0.
+func CapCreateCaptureWindow(lpszWindowName string, dwStyle uint32, x int32, y int32, nWidth int32, nHeight int32, hwndParent foundation.HWND, nID int32) foundation.HWND {
+	_lpszWindowName := win32.UTF16Ptr(lpszWindowName)
+	r1, _, _ := syscall.SyscallN(procCapCreateCaptureWindow.Addr(), uintptr(unsafe.Pointer(_lpszWindowName)), uintptr(dwStyle), uintptr(x), uintptr(y), uintptr(nWidth), uintptr(nHeight), uintptr(hwndParent), uintptr(nID))
+	return foundation.HWND(r1)
+}
+
+// CapCreateCaptureWindowA calls AVICAP32!capCreateCaptureWindowA.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-capcreatecapturewindowa
+// Minimum OS: windows5.0.
+func CapCreateCaptureWindowA(lpszWindowName foundation.PSTR, dwStyle uint32, x int32, y int32, nWidth int32, nHeight int32, hwndParent foundation.HWND, nID int32) foundation.HWND {
+	r1, _, _ := syscall.SyscallN(procCapCreateCaptureWindowA.Addr(), uintptr(unsafe.Pointer(lpszWindowName)), uintptr(dwStyle), uintptr(x), uintptr(y), uintptr(nWidth), uintptr(nHeight), uintptr(hwndParent), uintptr(nID))
+	return foundation.HWND(r1)
+}
+
+// CapGetDriverDescription calls AVICAP32!capGetDriverDescriptionW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-capgetdriverdescriptionw
+// Minimum OS: windows5.0.
+func CapGetDriverDescription(wDriverIndex uint32, lpszName foundation.PWSTR, cbName int32, lpszVer foundation.PWSTR, cbVer int32) bool {
+	r1, _, _ := syscall.SyscallN(procCapGetDriverDescription.Addr(), uintptr(wDriverIndex), uintptr(unsafe.Pointer(lpszName)), uintptr(cbName), uintptr(unsafe.Pointer(lpszVer)), uintptr(cbVer))
+	return r1 != 0
+}
+
+// CapGetDriverDescriptionA calls AVICAP32!capGetDriverDescriptionA.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-capgetdriverdescriptiona
+// Minimum OS: windows5.0.
+func CapGetDriverDescriptionA(wDriverIndex uint32, lpszName foundation.PSTR, cbName int32, lpszVer foundation.PSTR, cbVer int32) bool {
+	r1, _, _ := syscall.SyscallN(procCapGetDriverDescriptionA.Addr(), uintptr(wDriverIndex), uintptr(unsafe.Pointer(lpszName)), uintptr(cbName), uintptr(unsafe.Pointer(lpszVer)), uintptr(cbVer))
+	return r1 != 0
 }
 
 // CloseDriver calls WINMM!CloseDriver.
@@ -612,9 +659,9 @@ func CloseDriver(hDriver HDRVR, lParam1 foundation.LPARAM, lParam2 foundation.LP
 // CreateEditableStream calls AVIFIL32!CreateEditableStream.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-createeditablestream
 // Minimum OS: windows5.0.
-func CreateEditableStream(ppsEditable **IAVIStream, psSource *IAVIStream) foundation.HRESULT {
+func CreateEditableStream(ppsEditable **IAVIStream, psSource *IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procCreateEditableStream.Addr(), uintptr(unsafe.Pointer(ppsEditable)), uintptr(unsafe.Pointer(psSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefDriverProc calls WINMM!DefDriverProc.
@@ -628,41 +675,45 @@ func DefDriverProc(dwDriverIdentifier uintptr, hdrvr HDRVR, uMsg uint32, lParam1
 // DrawDibBegin calls MSVFW32!DrawDibBegin.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibbegin
 // Minimum OS: windows5.0.
-func DrawDibBegin(hdd uintptr, hdc graphicsgdi.HDC, dxDst int32, dyDst int32, lpbi *graphicsgdi.BITMAPINFOHEADER, dxSrc int32, dySrc int32, wFlags uint32) foundation.BOOL {
+func DrawDibBegin(hdd uintptr, hdc graphicsgdi.HDC, dxDst int32, dyDst int32, lpbi *graphicsgdi.BITMAPINFOHEADER, dxSrc int32, dySrc int32, wFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procDrawDibBegin.Addr(), uintptr(hdd), uintptr(hdc), uintptr(dxDst), uintptr(dyDst), uintptr(unsafe.Pointer(lpbi)), uintptr(dxSrc), uintptr(dySrc), uintptr(wFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawDibChangePalette calls MSVFW32!DrawDibChangePalette.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibchangepalette
 // Minimum OS: windows5.0.
-func DrawDibChangePalette(hdd uintptr, iStart int32, iLen int32, lppe *graphicsgdi.PALETTEENTRY) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDrawDibChangePalette.Addr(), uintptr(hdd), uintptr(iStart), uintptr(iLen), uintptr(unsafe.Pointer(lppe)))
-	return foundation.BOOL(r1)
+func DrawDibChangePalette(hdd uintptr, iStart int32, lppe []graphicsgdi.PALETTEENTRY) bool {
+	var _lppe *graphicsgdi.PALETTEENTRY
+	if len(lppe) > 0 {
+		_lppe = &lppe[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDrawDibChangePalette.Addr(), uintptr(hdd), uintptr(iStart), uintptr(len(lppe)), uintptr(unsafe.Pointer(_lppe)))
+	return r1 != 0
 }
 
 // DrawDibClose calls MSVFW32!DrawDibClose.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibclose
 // Minimum OS: windows5.0.
-func DrawDibClose(hdd uintptr) foundation.BOOL {
+func DrawDibClose(hdd uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procDrawDibClose.Addr(), uintptr(hdd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawDibDraw calls MSVFW32!DrawDibDraw.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibdraw
 // Minimum OS: windows5.0.
-func DrawDibDraw(hdd uintptr, hdc graphicsgdi.HDC, xDst int32, yDst int32, dxDst int32, dyDst int32, lpbi *graphicsgdi.BITMAPINFOHEADER, lpBits unsafe.Pointer, xSrc int32, ySrc int32, dxSrc int32, dySrc int32, wFlags uint32) foundation.BOOL {
+func DrawDibDraw(hdd uintptr, hdc graphicsgdi.HDC, xDst int32, yDst int32, dxDst int32, dyDst int32, lpbi *graphicsgdi.BITMAPINFOHEADER, lpBits unsafe.Pointer, xSrc int32, ySrc int32, dxSrc int32, dySrc int32, wFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procDrawDibDraw.Addr(), uintptr(hdd), uintptr(hdc), uintptr(xDst), uintptr(yDst), uintptr(dxDst), uintptr(dyDst), uintptr(unsafe.Pointer(lpbi)), uintptr(unsafe.Pointer(lpBits)), uintptr(xSrc), uintptr(ySrc), uintptr(dxSrc), uintptr(dySrc), uintptr(wFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawDibEnd calls MSVFW32!DrawDibEnd.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibend
 // Minimum OS: windows5.0.
-func DrawDibEnd(hdd uintptr) foundation.BOOL {
+func DrawDibEnd(hdd uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procDrawDibEnd.Addr(), uintptr(hdd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawDibGetBuffer calls MSVFW32!DrawDibGetBuffer.
@@ -700,49 +751,50 @@ func DrawDibProfileDisplay(lpbi *graphicsgdi.BITMAPINFOHEADER) foundation.LRESUL
 // DrawDibRealize calls MSVFW32!DrawDibRealize.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibrealize
 // Minimum OS: windows5.0.
-func DrawDibRealize(hdd uintptr, hdc graphicsgdi.HDC, fBackground foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procDrawDibRealize.Addr(), uintptr(hdd), uintptr(hdc), uintptr(fBackground))
+func DrawDibRealize(hdd uintptr, hdc graphicsgdi.HDC, fBackground bool) uint32 {
+	_fBackground := win32.Bool32(fBackground)
+	r1, _, _ := syscall.SyscallN(procDrawDibRealize.Addr(), uintptr(hdd), uintptr(hdc), uintptr(_fBackground))
 	return uint32(r1)
 }
 
 // DrawDibSetPalette calls MSVFW32!DrawDibSetPalette.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibsetpalette
 // Minimum OS: windows5.0.
-func DrawDibSetPalette(hdd uintptr, hpal graphicsgdi.HPALETTE) foundation.BOOL {
+func DrawDibSetPalette(hdd uintptr, hpal graphicsgdi.HPALETTE) bool {
 	r1, _, _ := syscall.SyscallN(procDrawDibSetPalette.Addr(), uintptr(hdd), uintptr(hpal))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawDibStart calls MSVFW32!DrawDibStart.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibstart
 // Minimum OS: windows5.0.
-func DrawDibStart(hdd uintptr, rate uint32) foundation.BOOL {
+func DrawDibStart(hdd uintptr, rate uint32) bool {
 	r1, _, _ := syscall.SyscallN(procDrawDibStart.Addr(), uintptr(hdd), uintptr(rate))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawDibStop calls MSVFW32!DrawDibStop.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibstop
 // Minimum OS: windows5.0.
-func DrawDibStop(hdd uintptr) foundation.BOOL {
+func DrawDibStop(hdd uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procDrawDibStop.Addr(), uintptr(hdd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawDibTime calls MSVFW32!DrawDibTime.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-drawdibtime
 // Minimum OS: windows5.0.
-func DrawDibTime(hdd uintptr, lpddtime *DRAWDIBTIME) foundation.BOOL {
+func DrawDibTime(hdd uintptr, lpddtime *DRAWDIBTIME) bool {
 	r1, _, _ := syscall.SyscallN(procDrawDibTime.Addr(), uintptr(hdd), uintptr(unsafe.Pointer(lpddtime)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DriverCallback calls WINMM!DriverCallback.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-drivercallback
 // Minimum OS: windows5.0.
-func DriverCallback(dwCallback uintptr, dwFlags uint32, hDevice HDRVR, dwMsg uint32, dwUser uintptr, dwParam1 uintptr, dwParam2 uintptr) foundation.BOOL {
+func DriverCallback(dwCallback uintptr, dwFlags uint32, hDevice HDRVR, dwMsg uint32, dwUser uintptr, dwParam1 uintptr, dwParam2 uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procDriverCallback.Addr(), uintptr(dwCallback), uintptr(dwFlags), uintptr(hDevice), uintptr(dwMsg), uintptr(dwUser), uintptr(dwParam1), uintptr(dwParam2))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrvGetModuleHandle calls WINMM!DrvGetModuleHandle.
@@ -756,65 +808,66 @@ func DrvGetModuleHandle(hDriver HDRVR) foundation.HMODULE {
 // EditStreamClone calls AVIFIL32!EditStreamClone.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamclone
 // Minimum OS: windows5.0.
-func EditStreamClone(pavi *IAVIStream, ppResult **IAVIStream) foundation.HRESULT {
+func EditStreamClone(pavi *IAVIStream, ppResult **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamClone.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditStreamCopy calls AVIFIL32!EditStreamCopy.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamcopy
 // Minimum OS: windows5.0.
-func EditStreamCopy(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult **IAVIStream) foundation.HRESULT {
+func EditStreamCopy(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamCopy.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditStreamCut calls AVIFIL32!EditStreamCut.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamcut
 // Minimum OS: windows5.0.
-func EditStreamCut(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult **IAVIStream) foundation.HRESULT {
+func EditStreamCut(pavi *IAVIStream, plStart *int32, plLength *int32, ppResult **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamCut.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditStreamPaste calls AVIFIL32!EditStreamPaste.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreampaste
 // Minimum OS: windows5.0.
-func EditStreamPaste(pavi *IAVIStream, plPos *int32, plLength *int32, pstream *IAVIStream, lStart int32, lEnd int32) foundation.HRESULT {
+func EditStreamPaste(pavi *IAVIStream, plPos *int32, plLength *int32, pstream *IAVIStream, lStart int32, lEnd int32) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamPaste.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(plPos)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(pstream)), uintptr(lStart), uintptr(lEnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// EditStreamSetInfo calls AVIFIL32!EditStreamSetInfoW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetinfow
+// Minimum OS: windows5.0.
+func EditStreamSetInfo(pavi *IAVIStream, lpInfo *AVISTREAMINFOW, cbInfo int32) error {
+	r1, _, _ := syscall.SyscallN(procEditStreamSetInfo.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditStreamSetInfoA calls AVIFIL32!EditStreamSetInfoA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetinfoa
 // Minimum OS: windows5.0.
-func EditStreamSetInfoA(pavi *IAVIStream, lpInfo *AVISTREAMINFOA, cbInfo int32) foundation.HRESULT {
+func EditStreamSetInfoA(pavi *IAVIStream, lpInfo *AVISTREAMINFOA, cbInfo int32) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamSetInfoA.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// EditStreamSetInfoW calls AVIFIL32!EditStreamSetInfoW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetinfow
+// EditStreamSetName calls AVIFIL32!EditStreamSetNameW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetnamew
 // Minimum OS: windows5.0.
-func EditStreamSetInfoW(pavi *IAVIStream, lpInfo *AVISTREAMINFOW, cbInfo int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamSetInfoW.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
-	return foundation.HRESULT(r1)
+func EditStreamSetName(pavi *IAVIStream, lpszName string) error {
+	_lpszName := win32.UTF16Ptr(lpszName)
+	r1, _, _ := syscall.SyscallN(procEditStreamSetName.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(_lpszName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditStreamSetNameA calls AVIFIL32!EditStreamSetNameA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetnamea
 // Minimum OS: windows5.0.
-func EditStreamSetNameA(pavi *IAVIStream, lpszName foundation.PSTR) foundation.HRESULT {
+func EditStreamSetNameA(pavi *IAVIStream, lpszName foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procEditStreamSetNameA.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpszName)))
-	return foundation.HRESULT(r1)
-}
-
-// EditStreamSetNameW calls AVIFIL32!EditStreamSetNameW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-editstreamsetnamew
-// Minimum OS: windows5.0.
-func EditStreamSetNameW(pavi *IAVIStream, lpszName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEditStreamSetNameW.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(unsafe.Pointer(lpszName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDriverModuleHandle calls WINMM!GetDriverModuleHandle.
@@ -825,36 +878,36 @@ func GetDriverModuleHandle(hDriver HDRVR) foundation.HMODULE {
 	return foundation.HMODULE(r1)
 }
 
+// GetOpenFileNamePreview calls MSVFW32!GetOpenFileNamePreviewW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-getopenfilenameprevieww
+// Minimum OS: windows5.0.
+func GetOpenFileNamePreview(lpofn *uicontrolsdialogs.OPENFILENAMEW) bool {
+	r1, _, _ := syscall.SyscallN(procGetOpenFileNamePreview.Addr(), uintptr(unsafe.Pointer(lpofn)))
+	return r1 != 0
+}
+
 // GetOpenFileNamePreviewA calls MSVFW32!GetOpenFileNamePreviewA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-getopenfilenamepreviewa
 // Minimum OS: windows5.0.
-func GetOpenFileNamePreviewA(lpofn *uicontrolsdialogs.OPENFILENAMEA) foundation.BOOL {
+func GetOpenFileNamePreviewA(lpofn *uicontrolsdialogs.OPENFILENAMEA) bool {
 	r1, _, _ := syscall.SyscallN(procGetOpenFileNamePreviewA.Addr(), uintptr(unsafe.Pointer(lpofn)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetOpenFileNamePreviewW calls MSVFW32!GetOpenFileNamePreviewW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-getopenfilenameprevieww
+// GetSaveFileNamePreview calls MSVFW32!GetSaveFileNamePreviewW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-getsavefilenameprevieww
 // Minimum OS: windows5.0.
-func GetOpenFileNamePreviewW(lpofn *uicontrolsdialogs.OPENFILENAMEW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetOpenFileNamePreviewW.Addr(), uintptr(unsafe.Pointer(lpofn)))
-	return foundation.BOOL(r1)
+func GetSaveFileNamePreview(lpofn *uicontrolsdialogs.OPENFILENAMEW) bool {
+	r1, _, _ := syscall.SyscallN(procGetSaveFileNamePreview.Addr(), uintptr(unsafe.Pointer(lpofn)))
+	return r1 != 0
 }
 
 // GetSaveFileNamePreviewA calls MSVFW32!GetSaveFileNamePreviewA.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-getsavefilenamepreviewa
 // Minimum OS: windows5.0.
-func GetSaveFileNamePreviewA(lpofn *uicontrolsdialogs.OPENFILENAMEA) foundation.BOOL {
+func GetSaveFileNamePreviewA(lpofn *uicontrolsdialogs.OPENFILENAMEA) bool {
 	r1, _, _ := syscall.SyscallN(procGetSaveFileNamePreviewA.Addr(), uintptr(unsafe.Pointer(lpofn)))
-	return foundation.BOOL(r1)
-}
-
-// GetSaveFileNamePreviewW calls MSVFW32!GetSaveFileNamePreviewW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-getsavefilenameprevieww
-// Minimum OS: windows5.0.
-func GetSaveFileNamePreviewW(lpofn *uicontrolsdialogs.OPENFILENAMEW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetSaveFileNamePreviewW.Addr(), uintptr(unsafe.Pointer(lpofn)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ICClose calls MSVFW32!ICClose.
@@ -876,9 +929,9 @@ func ICCompress(hic HIC, dwFlags uint32, lpbiOutput *graphicsgdi.BITMAPINFOHEADE
 // ICCompressorChoose calls MSVFW32!ICCompressorChoose.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-iccompressorchoose
 // Minimum OS: windows5.0.
-func ICCompressorChoose(hwnd foundation.HWND, uiFlags uint32, pvIn unsafe.Pointer, lpData unsafe.Pointer, pc *COMPVARS, lpszTitle foundation.PSTR) foundation.BOOL {
+func ICCompressorChoose(hwnd foundation.HWND, uiFlags uint32, pvIn unsafe.Pointer, lpData unsafe.Pointer, pc *COMPVARS, lpszTitle foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procICCompressorChoose.Addr(), uintptr(hwnd), uintptr(uiFlags), uintptr(unsafe.Pointer(pvIn)), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(pc)), uintptr(unsafe.Pointer(lpszTitle)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ICCompressorFree calls MSVFW32!ICCompressorFree.
@@ -947,17 +1000,17 @@ func ICImageDecompress(hic HIC, uiFlags uint32, lpbiIn *graphicsgdi.BITMAPINFO, 
 // ICInfo calls MSVFW32!ICInfo.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-icinfo
 // Minimum OS: windows5.0.
-func ICInfo(fccType uint32, fccHandler uint32, lpicinfo *ICINFO) foundation.BOOL {
+func ICInfo(fccType uint32, fccHandler uint32, lpicinfo *ICINFO) bool {
 	r1, _, _ := syscall.SyscallN(procICInfo.Addr(), uintptr(fccType), uintptr(fccHandler), uintptr(unsafe.Pointer(lpicinfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ICInstall calls MSVFW32!ICInstall.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-icinstall
 // Minimum OS: windows5.0.
-func ICInstall(fccType uint32, fccHandler uint32, lParam foundation.LPARAM, szDesc foundation.PSTR, wFlags uint32) foundation.BOOL {
+func ICInstall(fccType uint32, fccHandler uint32, lParam foundation.LPARAM, szDesc foundation.PSTR, wFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procICInstall.Addr(), uintptr(fccType), uintptr(fccHandler), uintptr(lParam), uintptr(unsafe.Pointer(szDesc)), uintptr(wFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ICLocate calls MSVFW32!ICLocate.
@@ -987,9 +1040,9 @@ func ICOpenFunction(fccType uint32, fccHandler uint32, wMode uint32, lpfnHandler
 // ICRemove calls MSVFW32!ICRemove.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-icremove
 // Minimum OS: windows5.0.
-func ICRemove(fccType uint32, fccHandler uint32, wFlags uint32) foundation.BOOL {
+func ICRemove(fccType uint32, fccHandler uint32, wFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procICRemove.Addr(), uintptr(fccType), uintptr(fccHandler), uintptr(wFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ICSendMessage calls MSVFW32!ICSendMessage.
@@ -1003,8 +1056,8 @@ func ICSendMessage(hic HIC, msg uint32, dw1 uintptr, dw2 uintptr) foundation.LRE
 // ICSeqCompressFrame calls MSVFW32!ICSeqCompressFrame.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-icseqcompressframe
 // Minimum OS: windows5.0.
-func ICSeqCompressFrame(pc *COMPVARS, uiFlags uint32, lpBits unsafe.Pointer, pfKey *foundation.BOOL, plSize *int32) unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procICSeqCompressFrame.Addr(), uintptr(unsafe.Pointer(pc)), uintptr(uiFlags), uintptr(unsafe.Pointer(lpBits)), uintptr(unsafe.Pointer(pfKey)), uintptr(unsafe.Pointer(plSize)))
+func ICSeqCompressFrame(pc *COMPVARS, lpBits unsafe.Pointer, pfKey *foundation.BOOL, plSize *int32) unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procICSeqCompressFrame.Addr(), uintptr(unsafe.Pointer(pc)), 0, uintptr(unsafe.Pointer(lpBits)), uintptr(unsafe.Pointer(pfKey)), uintptr(unsafe.Pointer(plSize)))
 	return unsafe.Pointer(r1)
 }
 
@@ -1018,9 +1071,90 @@ func ICSeqCompressFrameEnd(pc *COMPVARS) {
 // ICSeqCompressFrameStart calls MSVFW32!ICSeqCompressFrameStart.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-icseqcompressframestart
 // Minimum OS: windows5.0.
-func ICSeqCompressFrameStart(pc *COMPVARS, lpbiIn *graphicsgdi.BITMAPINFO) foundation.BOOL {
+func ICSeqCompressFrameStart(pc *COMPVARS, lpbiIn *graphicsgdi.BITMAPINFO) bool {
 	r1, _, _ := syscall.SyscallN(procICSeqCompressFrameStart.Addr(), uintptr(unsafe.Pointer(pc)), uintptr(unsafe.Pointer(lpbiIn)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// JoyGetDevCaps calls WINMM!joyGetDevCapsW.
+// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetdevcapsw
+// Minimum OS: windows5.0.
+func JoyGetDevCaps(uJoyID uintptr, pjc unsafe.Pointer, cbjc uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procJoyGetDevCaps.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pjc)), uintptr(cbjc))
+	return uint32(r1)
+}
+
+// JoyGetDevCapsA calls WINMM!joyGetDevCapsA.
+// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetdevcapsa
+func JoyGetDevCapsA(uJoyID uintptr, pjc unsafe.Pointer, cbjc uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procJoyGetDevCapsA.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pjc)), uintptr(cbjc))
+	return uint32(r1)
+}
+
+// JoyGetNumDevs calls WINMM!joyGetNumDevs.
+// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetnumdevs
+// Minimum OS: windows5.0.
+func JoyGetNumDevs() uint32 {
+	r1, _, _ := syscall.SyscallN(procJoyGetNumDevs.Addr())
+	return uint32(r1)
+}
+
+// JoyGetPos calls WINMM!joyGetPos.
+// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetpos
+// Minimum OS: windows5.0.
+func JoyGetPos(uJoyID uint32, pji unsafe.Pointer) uint32 {
+	r1, _, _ := syscall.SyscallN(procJoyGetPos.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pji)))
+	return uint32(r1)
+}
+
+// JoyGetPosEx calls WINMM!joyGetPosEx.
+// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetposex
+// Minimum OS: windows5.0.
+func JoyGetPosEx(uJoyID uint32, pji unsafe.Pointer) uint32 {
+	r1, _, _ := syscall.SyscallN(procJoyGetPosEx.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pji)))
+	return uint32(r1)
+}
+
+// JoyGetThreshold calls WINMM!joyGetThreshold.
+// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetthreshold
+// Minimum OS: windows5.0.
+func JoyGetThreshold(uJoyID uint32, puThreshold *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procJoyGetThreshold.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(puThreshold)))
+	return uint32(r1)
+}
+
+// JoyReleaseCapture calls WINMM!joyReleaseCapture.
+// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joyreleasecapture
+// Minimum OS: windows5.0.
+func JoyReleaseCapture(uJoyID uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procJoyReleaseCapture.Addr(), uintptr(uJoyID))
+	return uint32(r1)
+}
+
+// JoySetCapture calls WINMM!joySetCapture.
+// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joysetcapture
+// Minimum OS: windows5.0.
+func JoySetCapture(hwnd foundation.HWND, uJoyID uint32, uPeriod uint32, fChanged bool) uint32 {
+	_fChanged := win32.Bool32(fChanged)
+	r1, _, _ := syscall.SyscallN(procJoySetCapture.Addr(), uintptr(hwnd), uintptr(uJoyID), uintptr(uPeriod), uintptr(_fChanged))
+	return uint32(r1)
+}
+
+// JoySetThreshold calls WINMM!joySetThreshold.
+// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joysetthreshold
+// Minimum OS: windows5.0.
+func JoySetThreshold(uJoyID uint32, uThreshold uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procJoySetThreshold.Addr(), uintptr(uJoyID), uintptr(uThreshold))
+	return uint32(r1)
+}
+
+// MCIWndCreate calls MSVFW32!MCIWndCreateW.
+// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-mciwndcreatew
+// Minimum OS: windows5.0.
+func MCIWndCreate(hwndParent foundation.HWND, hInstance foundation.HINSTANCE, dwStyle uint32, szFile string) foundation.HWND {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procMCIWndCreate.Addr(), uintptr(hwndParent), uintptr(hInstance), uintptr(dwStyle), uintptr(unsafe.Pointer(_szFile)))
+	return foundation.HWND(r1)
 }
 
 // MCIWndCreateA calls MSVFW32!MCIWndCreateA.
@@ -1031,27 +1165,350 @@ func MCIWndCreateA(hwndParent foundation.HWND, hInstance foundation.HINSTANCE, d
 	return foundation.HWND(r1)
 }
 
-// MCIWndCreateW calls MSVFW32!MCIWndCreateW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-mciwndcreatew
-// Minimum OS: windows5.0.
-func MCIWndCreateW(hwndParent foundation.HWND, hInstance foundation.HINSTANCE, dwStyle uint32, szFile foundation.PWSTR) foundation.HWND {
-	r1, _, _ := syscall.SyscallN(procMCIWndCreateW.Addr(), uintptr(hwndParent), uintptr(hInstance), uintptr(dwStyle), uintptr(unsafe.Pointer(szFile)))
-	return foundation.HWND(r1)
-}
-
 // MCIWndRegisterClass calls MSVFW32!MCIWndRegisterClass.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-mciwndregisterclass
 // Minimum OS: windows5.0.
-func MCIWndRegisterClass() foundation.BOOL {
+func MCIWndRegisterClass() bool {
 	r1, _, _ := syscall.SyscallN(procMCIWndRegisterClass.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// MciDriverNotify calls WINMM!mciDriverNotify.
+func MciDriverNotify(hwndCallback foundation.HANDLE, wDeviceID uint32, uStatus uint32) bool {
+	r1, _, _ := syscall.SyscallN(procMciDriverNotify.Addr(), uintptr(hwndCallback), uintptr(wDeviceID), uintptr(uStatus))
+	return r1 != 0
+}
+
+// MciDriverYield calls WINMM!mciDriverYield.
+func MciDriverYield(wDeviceID uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMciDriverYield.Addr(), uintptr(wDeviceID))
+	return uint32(r1)
+}
+
+// MciFreeCommandResource calls WINMM!mciFreeCommandResource.
+func MciFreeCommandResource(wTable uint32) bool {
+	r1, _, _ := syscall.SyscallN(procMciFreeCommandResource.Addr(), uintptr(wTable))
+	return r1 != 0
+}
+
+// MciGetCreatorTask calls WINMM!mciGetCreatorTask.
+func MciGetCreatorTask(mciId uint32) foundation.HTASK {
+	r1, _, _ := syscall.SyscallN(procMciGetCreatorTask.Addr(), uintptr(mciId))
+	return foundation.HTASK(r1)
+}
+
+// MciGetDeviceID calls WINMM!mciGetDeviceIDW.
+func MciGetDeviceID(pszDevice string) uint32 {
+	_pszDevice := win32.UTF16Ptr(pszDevice)
+	r1, _, _ := syscall.SyscallN(procMciGetDeviceID.Addr(), uintptr(unsafe.Pointer(_pszDevice)))
+	return uint32(r1)
+}
+
+// MciGetDeviceIDA calls WINMM!mciGetDeviceIDA.
+func MciGetDeviceIDA(pszDevice foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procMciGetDeviceIDA.Addr(), uintptr(unsafe.Pointer(pszDevice)))
+	return uint32(r1)
+}
+
+// MciGetDeviceIDFromElementID calls WINMM!mciGetDeviceIDFromElementIDW.
+func MciGetDeviceIDFromElementID(dwElementID uint32, lpstrType string) uint32 {
+	_lpstrType := win32.UTF16Ptr(lpstrType)
+	r1, _, _ := syscall.SyscallN(procMciGetDeviceIDFromElementID.Addr(), uintptr(dwElementID), uintptr(unsafe.Pointer(_lpstrType)))
+	return uint32(r1)
+}
+
+// MciGetDeviceIDFromElementIDA calls WINMM!mciGetDeviceIDFromElementIDA.
+func MciGetDeviceIDFromElementIDA(dwElementID uint32, lpstrType foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procMciGetDeviceIDFromElementIDA.Addr(), uintptr(dwElementID), uintptr(unsafe.Pointer(lpstrType)))
+	return uint32(r1)
+}
+
+// MciGetDriverData calls WINMM!mciGetDriverData.
+func MciGetDriverData(wDeviceID uint32) uintptr {
+	r1, _, _ := syscall.SyscallN(procMciGetDriverData.Addr(), uintptr(wDeviceID))
+	return uintptr(r1)
+}
+
+// MciGetErrorString calls WINMM!mciGetErrorStringW.
+func MciGetErrorString(mcierr uint32, pszText foundation.PWSTR, cchText uint32) bool {
+	r1, _, _ := syscall.SyscallN(procMciGetErrorString.Addr(), uintptr(mcierr), uintptr(unsafe.Pointer(pszText)), uintptr(cchText))
+	return r1 != 0
+}
+
+// MciGetErrorStringA calls WINMM!mciGetErrorStringA.
+func MciGetErrorStringA(mcierr uint32, pszText foundation.PSTR, cchText uint32) bool {
+	r1, _, _ := syscall.SyscallN(procMciGetErrorStringA.Addr(), uintptr(mcierr), uintptr(unsafe.Pointer(pszText)), uintptr(cchText))
+	return r1 != 0
+}
+
+// MciGetYieldProc calls WINMM!mciGetYieldProc.
+func MciGetYieldProc(mciId uint32, pdwYieldData *uint32) YIELDPROC {
+	r1, _, _ := syscall.SyscallN(procMciGetYieldProc.Addr(), uintptr(mciId), uintptr(unsafe.Pointer(pdwYieldData)))
+	return YIELDPROC(r1)
+}
+
+// MciLoadCommandResource calls WINMM!mciLoadCommandResource.
+func MciLoadCommandResource(hInstance foundation.HANDLE, lpResName string, wType uint32) uint32 {
+	_lpResName := win32.UTF16Ptr(lpResName)
+	r1, _, _ := syscall.SyscallN(procMciLoadCommandResource.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpResName)), uintptr(wType))
+	return uint32(r1)
+}
+
+// MciSendCommand calls WINMM!mciSendCommandW.
+func MciSendCommand(mciId uint32, uMsg uint32, dwParam1 uintptr, dwParam2 uintptr) uint32 {
+	r1, _, _ := syscall.SyscallN(procMciSendCommand.Addr(), uintptr(mciId), uintptr(uMsg), uintptr(dwParam1), uintptr(dwParam2))
+	return uint32(r1)
+}
+
+// MciSendCommandA calls WINMM!mciSendCommandA.
+func MciSendCommandA(mciId uint32, uMsg uint32, dwParam1 uintptr, dwParam2 uintptr) uint32 {
+	r1, _, _ := syscall.SyscallN(procMciSendCommandA.Addr(), uintptr(mciId), uintptr(uMsg), uintptr(dwParam1), uintptr(dwParam2))
+	return uint32(r1)
+}
+
+// MciSendString calls WINMM!mciSendStringW.
+func MciSendString(lpstrCommand string, lpstrReturnString foundation.PWSTR, uReturnLength uint32, hwndCallback foundation.HWND) uint32 {
+	_lpstrCommand := win32.UTF16Ptr(lpstrCommand)
+	r1, _, _ := syscall.SyscallN(procMciSendString.Addr(), uintptr(unsafe.Pointer(_lpstrCommand)), uintptr(unsafe.Pointer(lpstrReturnString)), uintptr(uReturnLength), uintptr(hwndCallback))
+	return uint32(r1)
+}
+
+// MciSendStringA calls WINMM!mciSendStringA.
+func MciSendStringA(lpstrCommand foundation.PSTR, lpstrReturnString foundation.PSTR, uReturnLength uint32, hwndCallback foundation.HWND) uint32 {
+	r1, _, _ := syscall.SyscallN(procMciSendStringA.Addr(), uintptr(unsafe.Pointer(lpstrCommand)), uintptr(unsafe.Pointer(lpstrReturnString)), uintptr(uReturnLength), uintptr(hwndCallback))
+	return uint32(r1)
+}
+
+// MciSetDriverData calls WINMM!mciSetDriverData.
+func MciSetDriverData(wDeviceID uint32, dwData uintptr) bool {
+	r1, _, _ := syscall.SyscallN(procMciSetDriverData.Addr(), uintptr(wDeviceID), uintptr(dwData))
+	return r1 != 0
+}
+
+// MciSetYieldProc calls WINMM!mciSetYieldProc.
+func MciSetYieldProc(mciId uint32, fpYieldProc YIELDPROC, dwYieldData uint32) bool {
+	r1, _, _ := syscall.SyscallN(procMciSetYieldProc.Addr(), uintptr(mciId), uintptr(fpYieldProc), uintptr(dwYieldData))
+	return r1 != 0
+}
+
+// MmDrvInstall calls WINMM!mmDrvInstall.
+func MmDrvInstall(hDriver HDRVR, wszDrvEntry string, drvMessage DRIVERMSGPROC, wFlags uint32) uint32 {
+	_wszDrvEntry := win32.UTF16Ptr(wszDrvEntry)
+	r1, _, _ := syscall.SyscallN(procMmDrvInstall.Addr(), uintptr(hDriver), uintptr(unsafe.Pointer(_wszDrvEntry)), uintptr(drvMessage), uintptr(wFlags))
+	return uint32(r1)
+}
+
+// MmGetCurrentTask calls WINMM!mmGetCurrentTask.
+// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmgetcurrenttask
+func MmGetCurrentTask() uint32 {
+	r1, _, _ := syscall.SyscallN(procMmGetCurrentTask.Addr())
+	return uint32(r1)
+}
+
+// MmTaskBlock calls WINMM!mmTaskBlock.
+// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmtaskblock
+func MmTaskBlock(h uint32) {
+	syscall.SyscallN(procMmTaskBlock.Addr(), uintptr(h))
+}
+
+// MmTaskCreate calls WINMM!mmTaskCreate.
+// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmtaskcreate
+func MmTaskCreate(lpfn LPTASKCALLBACK, lph *foundation.HANDLE, dwInst uintptr) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmTaskCreate.Addr(), uintptr(lpfn), uintptr(unsafe.Pointer(lph)), uintptr(dwInst))
+	return uint32(r1)
+}
+
+// MmTaskSignal calls WINMM!mmTaskSignal.
+// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmtasksignal
+func MmTaskSignal(h uint32) bool {
+	r1, _, _ := syscall.SyscallN(procMmTaskSignal.Addr(), uintptr(h))
+	return r1 != 0
+}
+
+// MmTaskYield calls WINMM!mmTaskYield.
+// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmtaskyield
+func MmTaskYield() {
+	syscall.SyscallN(procMmTaskYield.Addr())
+}
+
+// MmioAdvance calls WINMM!mmioAdvance.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioadvance
+// Minimum OS: windows5.0.
+func MmioAdvance(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuAdvance uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioAdvance.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fuAdvance))
+	return uint32(r1)
+}
+
+// MmioAscend calls WINMM!mmioAscend.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioascend
+// Minimum OS: windows5.0.
+func MmioAscend(hmmio HMMIO, pmmcki unsafe.Pointer, fuAscend uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioAscend.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmcki)), uintptr(fuAscend))
+	return uint32(r1)
+}
+
+// MmioClose calls WINMM!mmioClose.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioclose
+// Minimum OS: windows5.0.
+func MmioClose(hmmio HMMIO, fuClose uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioClose.Addr(), uintptr(hmmio), uintptr(fuClose))
+	return uint32(r1)
+}
+
+// MmioCreateChunk calls WINMM!mmioCreateChunk.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiocreatechunk
+// Minimum OS: windows5.0.
+func MmioCreateChunk(hmmio HMMIO, pmmcki unsafe.Pointer, fuCreate uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioCreateChunk.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmcki)), uintptr(fuCreate))
+	return uint32(r1)
+}
+
+// MmioDescend calls WINMM!mmioDescend.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiodescend
+// Minimum OS: windows5.0.
+func MmioDescend(hmmio HMMIO, pmmcki unsafe.Pointer, pmmckiParent unsafe.Pointer, fuDescend uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioDescend.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmcki)), uintptr(unsafe.Pointer(pmmckiParent)), uintptr(fuDescend))
+	return uint32(r1)
+}
+
+// MmioFlush calls WINMM!mmioFlush.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioflush
+// Minimum OS: windows5.0.
+func MmioFlush(hmmio HMMIO, fuFlush uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioFlush.Addr(), uintptr(hmmio), uintptr(fuFlush))
+	return uint32(r1)
+}
+
+// MmioGetInfo calls WINMM!mmioGetInfo.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiogetinfo
+// Minimum OS: windows5.0.
+func MmioGetInfo(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuInfo uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioGetInfo.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fuInfo))
+	return uint32(r1)
+}
+
+// MmioInstallIOProc calls WINMM!mmioInstallIOProcW.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioinstallioprocw
+// Minimum OS: windows5.0.
+func MmioInstallIOProc(fccIOProc uint32, pIOProc LPMMIOPROC, dwFlags uint32) LPMMIOPROC {
+	r1, _, _ := syscall.SyscallN(procMmioInstallIOProc.Addr(), uintptr(fccIOProc), uintptr(pIOProc), uintptr(dwFlags))
+	return LPMMIOPROC(r1)
+}
+
+// MmioInstallIOProcA calls WINMM!mmioInstallIOProcA.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioinstallioproca
+// Minimum OS: windows5.0.
+func MmioInstallIOProcA(fccIOProc uint32, pIOProc LPMMIOPROC, dwFlags uint32) LPMMIOPROC {
+	r1, _, _ := syscall.SyscallN(procMmioInstallIOProcA.Addr(), uintptr(fccIOProc), uintptr(pIOProc), uintptr(dwFlags))
+	return LPMMIOPROC(r1)
+}
+
+// MmioOpen calls WINMM!mmioOpenW.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioopenw
+// Minimum OS: windows5.0.
+func MmioOpen(pszFileName foundation.PWSTR, pmmioinfo unsafe.Pointer, fdwOpen uint32) HMMIO {
+	r1, _, _ := syscall.SyscallN(procMmioOpen.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwOpen))
+	return HMMIO(r1)
+}
+
+// MmioOpenA calls WINMM!mmioOpenA.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioopena
+// Minimum OS: windows5.0.
+func MmioOpenA(pszFileName foundation.PSTR, pmmioinfo unsafe.Pointer, fdwOpen uint32) HMMIO {
+	r1, _, _ := syscall.SyscallN(procMmioOpenA.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwOpen))
+	return HMMIO(r1)
+}
+
+// MmioRead calls WINMM!mmioRead.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioread
+// Minimum OS: windows5.0.
+func MmioRead(hmmio HMMIO, pch *int8, cch int32) int32 {
+	r1, _, _ := syscall.SyscallN(procMmioRead.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pch)), uintptr(cch))
+	return int32(r1)
+}
+
+// MmioRename calls WINMM!mmioRenameW.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiorenamew
+// Minimum OS: windows5.0.
+func MmioRename(pszFileName string, pszNewFileName string, pmmioinfo unsafe.Pointer, fdwRename uint32) uint32 {
+	_pszFileName := win32.UTF16Ptr(pszFileName)
+	_pszNewFileName := win32.UTF16Ptr(pszNewFileName)
+	r1, _, _ := syscall.SyscallN(procMmioRename.Addr(), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszNewFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwRename))
+	return uint32(r1)
+}
+
+// MmioRenameA calls WINMM!mmioRenameA.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiorenamea
+// Minimum OS: windows5.0.
+func MmioRenameA(pszFileName foundation.PSTR, pszNewFileName foundation.PSTR, pmmioinfo unsafe.Pointer, fdwRename uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioRenameA.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pszNewFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwRename))
+	return uint32(r1)
+}
+
+// MmioSeek calls WINMM!mmioSeek.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioseek
+// Minimum OS: windows5.0.
+func MmioSeek(hmmio HMMIO, lOffset int32, iOrigin int32) int32 {
+	r1, _, _ := syscall.SyscallN(procMmioSeek.Addr(), uintptr(hmmio), uintptr(lOffset), uintptr(iOrigin))
+	return int32(r1)
+}
+
+// MmioSendMessage calls WINMM!mmioSendMessage.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiosendmessage
+// Minimum OS: windows5.0.
+func MmioSendMessage(hmmio HMMIO, uMsg uint32, lParam1 foundation.LPARAM, lParam2 foundation.LPARAM) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procMmioSendMessage.Addr(), uintptr(hmmio), uintptr(uMsg), uintptr(lParam1), uintptr(lParam2))
+	return foundation.LRESULT(r1)
+}
+
+// MmioSetBuffer calls WINMM!mmioSetBuffer.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiosetbuffer
+// Minimum OS: windows5.0.
+func MmioSetBuffer(hmmio HMMIO, pchBuffer foundation.PSTR, cchBuffer int32, fuBuffer uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioSetBuffer.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pchBuffer)), uintptr(cchBuffer), uintptr(fuBuffer))
+	return uint32(r1)
+}
+
+// MmioSetInfo calls WINMM!mmioSetInfo.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiosetinfo
+// Minimum OS: windows5.0.
+func MmioSetInfo(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuInfo uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioSetInfo.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fuInfo))
+	return uint32(r1)
+}
+
+// MmioStringToFOURCC calls WINMM!mmioStringToFOURCCW.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiostringtofourccw
+// Minimum OS: windows5.0.
+func MmioStringToFOURCC(sz string, uFlags uint32) uint32 {
+	_sz := win32.UTF16Ptr(sz)
+	r1, _, _ := syscall.SyscallN(procMmioStringToFOURCC.Addr(), uintptr(unsafe.Pointer(_sz)), uintptr(uFlags))
+	return uint32(r1)
+}
+
+// MmioStringToFOURCCA calls WINMM!mmioStringToFOURCCA.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiostringtofourcca
+// Minimum OS: windows5.0.
+func MmioStringToFOURCCA(sz foundation.PSTR, uFlags uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procMmioStringToFOURCCA.Addr(), uintptr(unsafe.Pointer(sz)), uintptr(uFlags))
+	return uint32(r1)
+}
+
+// MmioWrite calls WINMM!mmioWrite.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiowrite
+// Minimum OS: windows5.0.
+func MmioWrite(hmmio HMMIO, pch foundation.PSTR, cch int32) int32 {
+	r1, _, _ := syscall.SyscallN(procMmioWrite.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pch)), uintptr(cch))
+	return int32(r1)
 }
 
 // OpenDriver calls WINMM!OpenDriver.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-opendriver
 // Minimum OS: windows5.0.
-func OpenDriver(szDriverName foundation.PWSTR, szSectionName foundation.PWSTR, lParam2 foundation.LPARAM) HDRVR {
-	r1, _, _ := syscall.SyscallN(procOpenDriver.Addr(), uintptr(unsafe.Pointer(szDriverName)), uintptr(unsafe.Pointer(szSectionName)), uintptr(lParam2))
+func OpenDriver(szDriverName string, szSectionName string, lParam2 foundation.LPARAM) HDRVR {
+	_szDriverName := win32.UTF16Ptr(szDriverName)
+	_szSectionName := win32.UTF16Ptr(szSectionName)
+	r1, _, _ := syscall.SyscallN(procOpenDriver.Addr(), uintptr(unsafe.Pointer(_szDriverName)), uintptr(unsafe.Pointer(_szSectionName)), uintptr(lParam2))
 	return HDRVR(r1)
 }
 
@@ -1063,440 +1520,18 @@ func SendDriverMessage(hDriver HDRVR, message uint32, lParam1 foundation.LPARAM,
 	return foundation.LRESULT(r1)
 }
 
+// SndOpenSound calls api-ms-win-mm-misc-l1-1-1!sndOpenSound.
+// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-sndopensound
+// Minimum OS: windows8.1.
+func SndOpenSound(EventName string, AppName string, Flags int32, FileHandle *foundation.HANDLE) int32 {
+	_EventName := win32.UTF16Ptr(EventName)
+	_AppName := win32.UTF16Ptr(AppName)
+	r1, _, _ := syscall.SyscallN(procSndOpenSound.Addr(), uintptr(unsafe.Pointer(_EventName)), uintptr(unsafe.Pointer(_AppName)), uintptr(Flags), uintptr(unsafe.Pointer(FileHandle)))
+	return int32(r1)
+}
+
 // VideoForWindowsVersion calls MSVFW32!VideoForWindowsVersion.
 func VideoForWindowsVersion() uint32 {
 	r1, _, _ := syscall.SyscallN(procVideoForWindowsVersion.Addr())
 	return uint32(r1)
-}
-
-// capCreateCaptureWindowA calls AVICAP32!capCreateCaptureWindowA.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-capcreatecapturewindowa
-// Minimum OS: windows5.0.
-func CapCreateCaptureWindowA(lpszWindowName foundation.PSTR, dwStyle uint32, x int32, y int32, nWidth int32, nHeight int32, hwndParent foundation.HWND, nID int32) foundation.HWND {
-	r1, _, _ := syscall.SyscallN(procCapCreateCaptureWindowA.Addr(), uintptr(unsafe.Pointer(lpszWindowName)), uintptr(dwStyle), uintptr(x), uintptr(y), uintptr(nWidth), uintptr(nHeight), uintptr(hwndParent), uintptr(nID))
-	return foundation.HWND(r1)
-}
-
-// capCreateCaptureWindowW calls AVICAP32!capCreateCaptureWindowW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-capcreatecapturewindoww
-// Minimum OS: windows5.0.
-func CapCreateCaptureWindowW(lpszWindowName foundation.PWSTR, dwStyle uint32, x int32, y int32, nWidth int32, nHeight int32, hwndParent foundation.HWND, nID int32) foundation.HWND {
-	r1, _, _ := syscall.SyscallN(procCapCreateCaptureWindowW.Addr(), uintptr(unsafe.Pointer(lpszWindowName)), uintptr(dwStyle), uintptr(x), uintptr(y), uintptr(nWidth), uintptr(nHeight), uintptr(hwndParent), uintptr(nID))
-	return foundation.HWND(r1)
-}
-
-// capGetDriverDescriptionA calls AVICAP32!capGetDriverDescriptionA.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-capgetdriverdescriptiona
-// Minimum OS: windows5.0.
-func CapGetDriverDescriptionA(wDriverIndex uint32, lpszName foundation.PSTR, cbName int32, lpszVer foundation.PSTR, cbVer int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCapGetDriverDescriptionA.Addr(), uintptr(wDriverIndex), uintptr(unsafe.Pointer(lpszName)), uintptr(cbName), uintptr(unsafe.Pointer(lpszVer)), uintptr(cbVer))
-	return foundation.BOOL(r1)
-}
-
-// capGetDriverDescriptionW calls AVICAP32!capGetDriverDescriptionW.
-// https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-capgetdriverdescriptionw
-// Minimum OS: windows5.0.
-func CapGetDriverDescriptionW(wDriverIndex uint32, lpszName foundation.PWSTR, cbName int32, lpszVer foundation.PWSTR, cbVer int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCapGetDriverDescriptionW.Addr(), uintptr(wDriverIndex), uintptr(unsafe.Pointer(lpszName)), uintptr(cbName), uintptr(unsafe.Pointer(lpszVer)), uintptr(cbVer))
-	return foundation.BOOL(r1)
-}
-
-// joyGetDevCapsA calls WINMM!joyGetDevCapsA.
-// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetdevcapsa
-func JoyGetDevCapsA(uJoyID uintptr, pjc unsafe.Pointer, cbjc uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procJoyGetDevCapsA.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pjc)), uintptr(cbjc))
-	return uint32(r1)
-}
-
-// joyGetDevCapsW calls WINMM!joyGetDevCapsW.
-// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetdevcapsw
-// Minimum OS: windows5.0.
-func JoyGetDevCapsW(uJoyID uintptr, pjc unsafe.Pointer, cbjc uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procJoyGetDevCapsW.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pjc)), uintptr(cbjc))
-	return uint32(r1)
-}
-
-// joyGetNumDevs calls WINMM!joyGetNumDevs.
-// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetnumdevs
-// Minimum OS: windows5.0.
-func JoyGetNumDevs() uint32 {
-	r1, _, _ := syscall.SyscallN(procJoyGetNumDevs.Addr())
-	return uint32(r1)
-}
-
-// joyGetPos calls WINMM!joyGetPos.
-// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetpos
-// Minimum OS: windows5.0.
-func JoyGetPos(uJoyID uint32, pji unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procJoyGetPos.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pji)))
-	return uint32(r1)
-}
-
-// joyGetPosEx calls WINMM!joyGetPosEx.
-// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetposex
-// Minimum OS: windows5.0.
-func JoyGetPosEx(uJoyID uint32, pji unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procJoyGetPosEx.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pji)))
-	return uint32(r1)
-}
-
-// joyGetThreshold calls WINMM!joyGetThreshold.
-// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetthreshold
-// Minimum OS: windows5.0.
-func JoyGetThreshold(uJoyID uint32, puThreshold *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procJoyGetThreshold.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(puThreshold)))
-	return uint32(r1)
-}
-
-// joyReleaseCapture calls WINMM!joyReleaseCapture.
-// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joyreleasecapture
-// Minimum OS: windows5.0.
-func JoyReleaseCapture(uJoyID uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procJoyReleaseCapture.Addr(), uintptr(uJoyID))
-	return uint32(r1)
-}
-
-// joySetCapture calls WINMM!joySetCapture.
-// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joysetcapture
-// Minimum OS: windows5.0.
-func JoySetCapture(hwnd foundation.HWND, uJoyID uint32, uPeriod uint32, fChanged foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procJoySetCapture.Addr(), uintptr(hwnd), uintptr(uJoyID), uintptr(uPeriod), uintptr(fChanged))
-	return uint32(r1)
-}
-
-// joySetThreshold calls WINMM!joySetThreshold.
-// https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joysetthreshold
-// Minimum OS: windows5.0.
-func JoySetThreshold(uJoyID uint32, uThreshold uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procJoySetThreshold.Addr(), uintptr(uJoyID), uintptr(uThreshold))
-	return uint32(r1)
-}
-
-// mciDriverNotify calls WINMM!mciDriverNotify.
-func MciDriverNotify(hwndCallback foundation.HANDLE, wDeviceID uint32, uStatus uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMciDriverNotify.Addr(), uintptr(hwndCallback), uintptr(wDeviceID), uintptr(uStatus))
-	return foundation.BOOL(r1)
-}
-
-// mciDriverYield calls WINMM!mciDriverYield.
-func MciDriverYield(wDeviceID uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciDriverYield.Addr(), uintptr(wDeviceID))
-	return uint32(r1)
-}
-
-// mciFreeCommandResource calls WINMM!mciFreeCommandResource.
-func MciFreeCommandResource(wTable uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMciFreeCommandResource.Addr(), uintptr(wTable))
-	return foundation.BOOL(r1)
-}
-
-// mciGetCreatorTask calls WINMM!mciGetCreatorTask.
-func MciGetCreatorTask(mciId uint32) foundation.HTASK {
-	r1, _, _ := syscall.SyscallN(procMciGetCreatorTask.Addr(), uintptr(mciId))
-	return foundation.HTASK(r1)
-}
-
-// mciGetDeviceIDA calls WINMM!mciGetDeviceIDA.
-func MciGetDeviceIDA(pszDevice foundation.PSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciGetDeviceIDA.Addr(), uintptr(unsafe.Pointer(pszDevice)))
-	return uint32(r1)
-}
-
-// mciGetDeviceIDFromElementIDA calls WINMM!mciGetDeviceIDFromElementIDA.
-func MciGetDeviceIDFromElementIDA(dwElementID uint32, lpstrType foundation.PSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciGetDeviceIDFromElementIDA.Addr(), uintptr(dwElementID), uintptr(unsafe.Pointer(lpstrType)))
-	return uint32(r1)
-}
-
-// mciGetDeviceIDFromElementIDW calls WINMM!mciGetDeviceIDFromElementIDW.
-func MciGetDeviceIDFromElementIDW(dwElementID uint32, lpstrType foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciGetDeviceIDFromElementIDW.Addr(), uintptr(dwElementID), uintptr(unsafe.Pointer(lpstrType)))
-	return uint32(r1)
-}
-
-// mciGetDeviceIDW calls WINMM!mciGetDeviceIDW.
-func MciGetDeviceIDW(pszDevice foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciGetDeviceIDW.Addr(), uintptr(unsafe.Pointer(pszDevice)))
-	return uint32(r1)
-}
-
-// mciGetDriverData calls WINMM!mciGetDriverData.
-func MciGetDriverData(wDeviceID uint32) uintptr {
-	r1, _, _ := syscall.SyscallN(procMciGetDriverData.Addr(), uintptr(wDeviceID))
-	return uintptr(r1)
-}
-
-// mciGetErrorStringA calls WINMM!mciGetErrorStringA.
-func MciGetErrorStringA(mcierr uint32, pszText foundation.PSTR, cchText uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMciGetErrorStringA.Addr(), uintptr(mcierr), uintptr(unsafe.Pointer(pszText)), uintptr(cchText))
-	return foundation.BOOL(r1)
-}
-
-// mciGetErrorStringW calls WINMM!mciGetErrorStringW.
-func MciGetErrorStringW(mcierr uint32, pszText foundation.PWSTR, cchText uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMciGetErrorStringW.Addr(), uintptr(mcierr), uintptr(unsafe.Pointer(pszText)), uintptr(cchText))
-	return foundation.BOOL(r1)
-}
-
-// mciGetYieldProc calls WINMM!mciGetYieldProc.
-func MciGetYieldProc(mciId uint32, pdwYieldData *uint32) YIELDPROC {
-	r1, _, _ := syscall.SyscallN(procMciGetYieldProc.Addr(), uintptr(mciId), uintptr(unsafe.Pointer(pdwYieldData)))
-	return YIELDPROC(r1)
-}
-
-// mciLoadCommandResource calls WINMM!mciLoadCommandResource.
-func MciLoadCommandResource(hInstance foundation.HANDLE, lpResName foundation.PWSTR, wType uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciLoadCommandResource.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpResName)), uintptr(wType))
-	return uint32(r1)
-}
-
-// mciSendCommandA calls WINMM!mciSendCommandA.
-func MciSendCommandA(mciId uint32, uMsg uint32, dwParam1 uintptr, dwParam2 uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciSendCommandA.Addr(), uintptr(mciId), uintptr(uMsg), uintptr(dwParam1), uintptr(dwParam2))
-	return uint32(r1)
-}
-
-// mciSendCommandW calls WINMM!mciSendCommandW.
-func MciSendCommandW(mciId uint32, uMsg uint32, dwParam1 uintptr, dwParam2 uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciSendCommandW.Addr(), uintptr(mciId), uintptr(uMsg), uintptr(dwParam1), uintptr(dwParam2))
-	return uint32(r1)
-}
-
-// mciSendStringA calls WINMM!mciSendStringA.
-func MciSendStringA(lpstrCommand foundation.PSTR, lpstrReturnString foundation.PSTR, uReturnLength uint32, hwndCallback foundation.HWND) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciSendStringA.Addr(), uintptr(unsafe.Pointer(lpstrCommand)), uintptr(unsafe.Pointer(lpstrReturnString)), uintptr(uReturnLength), uintptr(hwndCallback))
-	return uint32(r1)
-}
-
-// mciSendStringW calls WINMM!mciSendStringW.
-func MciSendStringW(lpstrCommand foundation.PWSTR, lpstrReturnString foundation.PWSTR, uReturnLength uint32, hwndCallback foundation.HWND) uint32 {
-	r1, _, _ := syscall.SyscallN(procMciSendStringW.Addr(), uintptr(unsafe.Pointer(lpstrCommand)), uintptr(unsafe.Pointer(lpstrReturnString)), uintptr(uReturnLength), uintptr(hwndCallback))
-	return uint32(r1)
-}
-
-// mciSetDriverData calls WINMM!mciSetDriverData.
-func MciSetDriverData(wDeviceID uint32, dwData uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMciSetDriverData.Addr(), uintptr(wDeviceID), uintptr(dwData))
-	return foundation.BOOL(r1)
-}
-
-// mciSetYieldProc calls WINMM!mciSetYieldProc.
-func MciSetYieldProc(mciId uint32, fpYieldProc YIELDPROC, dwYieldData uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMciSetYieldProc.Addr(), uintptr(mciId), uintptr(fpYieldProc), uintptr(dwYieldData))
-	return foundation.BOOL(r1)
-}
-
-// mmDrvInstall calls WINMM!mmDrvInstall.
-func MmDrvInstall(hDriver HDRVR, wszDrvEntry foundation.PWSTR, drvMessage DRIVERMSGPROC, wFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmDrvInstall.Addr(), uintptr(hDriver), uintptr(unsafe.Pointer(wszDrvEntry)), uintptr(drvMessage), uintptr(wFlags))
-	return uint32(r1)
-}
-
-// mmGetCurrentTask calls WINMM!mmGetCurrentTask.
-// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmgetcurrenttask
-func MmGetCurrentTask() uint32 {
-	r1, _, _ := syscall.SyscallN(procMmGetCurrentTask.Addr())
-	return uint32(r1)
-}
-
-// mmTaskBlock calls WINMM!mmTaskBlock.
-// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmtaskblock
-func MmTaskBlock(h uint32) {
-	syscall.SyscallN(procMmTaskBlock.Addr(), uintptr(h))
-}
-
-// mmTaskCreate calls WINMM!mmTaskCreate.
-// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmtaskcreate
-func MmTaskCreate(lpfn LPTASKCALLBACK, lph *foundation.HANDLE, dwInst uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmTaskCreate.Addr(), uintptr(lpfn), uintptr(unsafe.Pointer(lph)), uintptr(dwInst))
-	return uint32(r1)
-}
-
-// mmTaskSignal calls WINMM!mmTaskSignal.
-// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmtasksignal
-func MmTaskSignal(h uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMmTaskSignal.Addr(), uintptr(h))
-	return foundation.BOOL(r1)
-}
-
-// mmTaskYield calls WINMM!mmTaskYield.
-// https://learn.microsoft.com/windows/win32/api/mmddk/nf-mmddk-mmtaskyield
-func MmTaskYield() {
-	syscall.SyscallN(procMmTaskYield.Addr())
-}
-
-// mmioAdvance calls WINMM!mmioAdvance.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioadvance
-// Minimum OS: windows5.0.
-func MmioAdvance(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuAdvance uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioAdvance.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fuAdvance))
-	return uint32(r1)
-}
-
-// mmioAscend calls WINMM!mmioAscend.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioascend
-// Minimum OS: windows5.0.
-func MmioAscend(hmmio HMMIO, pmmcki unsafe.Pointer, fuAscend uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioAscend.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmcki)), uintptr(fuAscend))
-	return uint32(r1)
-}
-
-// mmioClose calls WINMM!mmioClose.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioclose
-// Minimum OS: windows5.0.
-func MmioClose(hmmio HMMIO, fuClose uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioClose.Addr(), uintptr(hmmio), uintptr(fuClose))
-	return uint32(r1)
-}
-
-// mmioCreateChunk calls WINMM!mmioCreateChunk.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiocreatechunk
-// Minimum OS: windows5.0.
-func MmioCreateChunk(hmmio HMMIO, pmmcki unsafe.Pointer, fuCreate uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioCreateChunk.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmcki)), uintptr(fuCreate))
-	return uint32(r1)
-}
-
-// mmioDescend calls WINMM!mmioDescend.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiodescend
-// Minimum OS: windows5.0.
-func MmioDescend(hmmio HMMIO, pmmcki unsafe.Pointer, pmmckiParent unsafe.Pointer, fuDescend uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioDescend.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmcki)), uintptr(unsafe.Pointer(pmmckiParent)), uintptr(fuDescend))
-	return uint32(r1)
-}
-
-// mmioFlush calls WINMM!mmioFlush.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioflush
-// Minimum OS: windows5.0.
-func MmioFlush(hmmio HMMIO, fuFlush uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioFlush.Addr(), uintptr(hmmio), uintptr(fuFlush))
-	return uint32(r1)
-}
-
-// mmioGetInfo calls WINMM!mmioGetInfo.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiogetinfo
-// Minimum OS: windows5.0.
-func MmioGetInfo(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuInfo uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioGetInfo.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fuInfo))
-	return uint32(r1)
-}
-
-// mmioInstallIOProcA calls WINMM!mmioInstallIOProcA.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioinstallioproca
-// Minimum OS: windows5.0.
-func MmioInstallIOProcA(fccIOProc uint32, pIOProc LPMMIOPROC, dwFlags uint32) LPMMIOPROC {
-	r1, _, _ := syscall.SyscallN(procMmioInstallIOProcA.Addr(), uintptr(fccIOProc), uintptr(pIOProc), uintptr(dwFlags))
-	return LPMMIOPROC(r1)
-}
-
-// mmioInstallIOProcW calls WINMM!mmioInstallIOProcW.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioinstallioprocw
-// Minimum OS: windows5.0.
-func MmioInstallIOProcW(fccIOProc uint32, pIOProc LPMMIOPROC, dwFlags uint32) LPMMIOPROC {
-	r1, _, _ := syscall.SyscallN(procMmioInstallIOProcW.Addr(), uintptr(fccIOProc), uintptr(pIOProc), uintptr(dwFlags))
-	return LPMMIOPROC(r1)
-}
-
-// mmioOpenA calls WINMM!mmioOpenA.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioopena
-// Minimum OS: windows5.0.
-func MmioOpenA(pszFileName foundation.PSTR, pmmioinfo unsafe.Pointer, fdwOpen uint32) HMMIO {
-	r1, _, _ := syscall.SyscallN(procMmioOpenA.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwOpen))
-	return HMMIO(r1)
-}
-
-// mmioOpenW calls WINMM!mmioOpenW.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioopenw
-// Minimum OS: windows5.0.
-func MmioOpenW(pszFileName foundation.PWSTR, pmmioinfo unsafe.Pointer, fdwOpen uint32) HMMIO {
-	r1, _, _ := syscall.SyscallN(procMmioOpenW.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwOpen))
-	return HMMIO(r1)
-}
-
-// mmioRead calls WINMM!mmioRead.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioread
-// Minimum OS: windows5.0.
-func MmioRead(hmmio HMMIO, pch *int8, cch int32) int32 {
-	r1, _, _ := syscall.SyscallN(procMmioRead.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pch)), uintptr(cch))
-	return int32(r1)
-}
-
-// mmioRenameA calls WINMM!mmioRenameA.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiorenamea
-// Minimum OS: windows5.0.
-func MmioRenameA(pszFileName foundation.PSTR, pszNewFileName foundation.PSTR, pmmioinfo unsafe.Pointer, fdwRename uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioRenameA.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pszNewFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwRename))
-	return uint32(r1)
-}
-
-// mmioRenameW calls WINMM!mmioRenameW.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiorenamew
-// Minimum OS: windows5.0.
-func MmioRenameW(pszFileName foundation.PWSTR, pszNewFileName foundation.PWSTR, pmmioinfo unsafe.Pointer, fdwRename uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioRenameW.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pszNewFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwRename))
-	return uint32(r1)
-}
-
-// mmioSeek calls WINMM!mmioSeek.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioseek
-// Minimum OS: windows5.0.
-func MmioSeek(hmmio HMMIO, lOffset int32, iOrigin int32) int32 {
-	r1, _, _ := syscall.SyscallN(procMmioSeek.Addr(), uintptr(hmmio), uintptr(lOffset), uintptr(iOrigin))
-	return int32(r1)
-}
-
-// mmioSendMessage calls WINMM!mmioSendMessage.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiosendmessage
-// Minimum OS: windows5.0.
-func MmioSendMessage(hmmio HMMIO, uMsg uint32, lParam1 foundation.LPARAM, lParam2 foundation.LPARAM) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procMmioSendMessage.Addr(), uintptr(hmmio), uintptr(uMsg), uintptr(lParam1), uintptr(lParam2))
-	return foundation.LRESULT(r1)
-}
-
-// mmioSetBuffer calls WINMM!mmioSetBuffer.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiosetbuffer
-// Minimum OS: windows5.0.
-func MmioSetBuffer(hmmio HMMIO, pchBuffer foundation.PSTR, cchBuffer int32, fuBuffer uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioSetBuffer.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pchBuffer)), uintptr(cchBuffer), uintptr(fuBuffer))
-	return uint32(r1)
-}
-
-// mmioSetInfo calls WINMM!mmioSetInfo.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiosetinfo
-// Minimum OS: windows5.0.
-func MmioSetInfo(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuInfo uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioSetInfo.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fuInfo))
-	return uint32(r1)
-}
-
-// mmioStringToFOURCCA calls WINMM!mmioStringToFOURCCA.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiostringtofourcca
-// Minimum OS: windows5.0.
-func MmioStringToFOURCCA(sz foundation.PSTR, uFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioStringToFOURCCA.Addr(), uintptr(unsafe.Pointer(sz)), uintptr(uFlags))
-	return uint32(r1)
-}
-
-// mmioStringToFOURCCW calls WINMM!mmioStringToFOURCCW.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiostringtofourccw
-// Minimum OS: windows5.0.
-func MmioStringToFOURCCW(sz foundation.PWSTR, uFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMmioStringToFOURCCW.Addr(), uintptr(unsafe.Pointer(sz)), uintptr(uFlags))
-	return uint32(r1)
-}
-
-// mmioWrite calls WINMM!mmioWrite.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiowrite
-// Minimum OS: windows5.0.
-func MmioWrite(hmmio HMMIO, pch foundation.PSTR, cch int32) int32 {
-	r1, _, _ := syscall.SyscallN(procMmioWrite.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pch)), uintptr(cch))
-	return int32(r1)
-}
-
-// sndOpenSound calls api-ms-win-mm-misc-l1-1-1!sndOpenSound.
-// https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-sndopensound
-// Minimum OS: windows8.1.
-func SndOpenSound(EventName foundation.PWSTR, AppName foundation.PWSTR, Flags int32, FileHandle *foundation.HANDLE) int32 {
-	r1, _, _ := syscall.SyscallN(procSndOpenSound.Addr(), uintptr(unsafe.Pointer(EventName)), uintptr(unsafe.Pointer(AppName)), uintptr(Flags), uintptr(unsafe.Pointer(FileHandle)))
-	return int32(r1)
 }

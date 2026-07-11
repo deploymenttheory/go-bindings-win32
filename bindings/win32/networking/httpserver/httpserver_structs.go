@@ -94,8 +94,8 @@ type HTTP_CREATE_REQUEST_QUEUE_PROPERTY_INFO struct {
 	PropertyInfo       unsafe.Pointer
 }
 
-// HTTP_DATA_CHUNK_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// HTTP_DATA_CHUNK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type HTTP_DATA_CHUNK_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -565,8 +565,8 @@ type HTTP_SERVICE_CONFIG_SSL_PARAM struct {
 	DefaultFlags                         uint32
 }
 
-// HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union struct {
 	Data [2]uint64
 }

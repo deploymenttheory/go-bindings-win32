@@ -58,15 +58,19 @@ func CryptSIPCreateIndirectData(pSubjectInfo *SIP_SUBJECTINFO, pcbIndirectData *
 // CryptSIPGetCaps calls WINTRUST!CryptSIPGetCaps.
 // https://learn.microsoft.com/windows/win32/api/mssip/nf-mssip-cryptsipgetcaps
 // Minimum OS: windows8.0.
-func CryptSIPGetCaps(pSubjInfo *SIP_SUBJECTINFO, pCaps *SIP_CAP_SET_V3) foundation.BOOL {
+func CryptSIPGetCaps(pSubjInfo *SIP_SUBJECTINFO, pCaps *SIP_CAP_SET_V3) bool {
 	r1, _, _ := syscall.SyscallN(procCryptSIPGetCaps.Addr(), uintptr(unsafe.Pointer(pSubjInfo)), uintptr(unsafe.Pointer(pCaps)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CryptSIPGetSealedDigest calls WINTRUST!CryptSIPGetSealedDigest.
-func CryptSIPGetSealedDigest(pSubjectInfo *SIP_SUBJECTINFO, pSig *byte, dwSig uint32, pbDigest *byte, pcbDigest *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCryptSIPGetSealedDigest.Addr(), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSig)), uintptr(dwSig), uintptr(unsafe.Pointer(pbDigest)), uintptr(unsafe.Pointer(pcbDigest)))
-	return foundation.BOOL(r1)
+func CryptSIPGetSealedDigest(pSubjectInfo *SIP_SUBJECTINFO, pSig []byte, pbDigest *byte, pcbDigest *uint32) bool {
+	var _pSig *byte
+	if len(pSig) > 0 {
+		_pSig = &pSig[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCryptSIPGetSealedDigest.Addr(), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(_pSig)), uintptr(len(pSig)), uintptr(unsafe.Pointer(pbDigest)), uintptr(unsafe.Pointer(pcbDigest)))
+	return r1 != 0
 }
 
 // CryptSIPGetSignedDataMsg calls WINTRUST!CryptSIPGetSignedDataMsg.
@@ -127,8 +131,9 @@ func CryptSIPRemoveSignedDataMsg(pSubjectInfo *SIP_SUBJECTINFO, dwIndex uint32) 
 // CryptSIPRetrieveSubjectGuid calls CRYPT32!CryptSIPRetrieveSubjectGuid.
 // https://learn.microsoft.com/windows/win32/api/mssip/nf-mssip-cryptsipretrievesubjectguid
 // Minimum OS: windows5.1.2600.
-func CryptSIPRetrieveSubjectGuid(FileName foundation.PWSTR, hFileIn foundation.HANDLE, pgSubject *win32.GUID) error {
-	r1, _, e1 := syscall.SyscallN(procCryptSIPRetrieveSubjectGuid.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(hFileIn), uintptr(unsafe.Pointer(pgSubject)))
+func CryptSIPRetrieveSubjectGuid(FileName string, hFileIn foundation.HANDLE, pgSubject *win32.GUID) error {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procCryptSIPRetrieveSubjectGuid.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(hFileIn), uintptr(unsafe.Pointer(pgSubject)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -138,8 +143,9 @@ func CryptSIPRetrieveSubjectGuid(FileName foundation.PWSTR, hFileIn foundation.H
 // CryptSIPRetrieveSubjectGuidForCatalogFile calls CRYPT32!CryptSIPRetrieveSubjectGuidForCatalogFile.
 // https://learn.microsoft.com/windows/win32/api/mssip/nf-mssip-cryptsipretrievesubjectguidforcatalogfile
 // Minimum OS: windows5.1.2600.
-func CryptSIPRetrieveSubjectGuidForCatalogFile(FileName foundation.PWSTR, hFileIn foundation.HANDLE, pgSubject *win32.GUID) error {
-	r1, _, e1 := syscall.SyscallN(procCryptSIPRetrieveSubjectGuidForCatalogFile.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(hFileIn), uintptr(unsafe.Pointer(pgSubject)))
+func CryptSIPRetrieveSubjectGuidForCatalogFile(FileName string, hFileIn foundation.HANDLE, pgSubject *win32.GUID) error {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procCryptSIPRetrieveSubjectGuidForCatalogFile.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(hFileIn), uintptr(unsafe.Pointer(pgSubject)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

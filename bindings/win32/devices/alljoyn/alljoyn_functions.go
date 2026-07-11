@@ -566,8 +566,9 @@ func AllJoynCloseBusHandle(busHandle foundation.HANDLE) error {
 // AllJoynConnectToBus calls MSAJApi!AllJoynConnectToBus.
 // https://learn.microsoft.com/windows/win32/api/msajtransport/nf-msajtransport-alljoynconnecttobus
 // Minimum OS: windows10.0.10240.
-func AllJoynConnectToBus(connectionSpec foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procAllJoynConnectToBus.Addr(), uintptr(unsafe.Pointer(connectionSpec)))
+func AllJoynConnectToBus(connectionSpec string) (foundation.HANDLE, error) {
+	_connectionSpec := win32.UTF16Ptr(connectionSpec)
+	r1, _, e1 := syscall.SyscallN(procAllJoynConnectToBus.Addr(), uintptr(unsafe.Pointer(_connectionSpec)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -625,3022 +626,3022 @@ func AllJoynSendToBus(connectedBusHandle foundation.HANDLE, buffer unsafe.Pointe
 	return nil
 }
 
-// QCC_StatusText calls MSAJApi!QCC_StatusText.
-func QCC_StatusText(status QStatus) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procQCC_StatusText.Addr(), uintptr(status))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// alljoyn_aboutdata_create calls MSAJApi!alljoyn_aboutdata_create.
+// Alljoyn_aboutdata_create calls MSAJApi!alljoyn_aboutdata_create.
 func Alljoyn_aboutdata_create(defaultLanguage foundation.PSTR) Alljoyn_aboutdata {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_create.Addr(), uintptr(unsafe.Pointer(defaultLanguage)))
 	return Alljoyn_aboutdata(r1)
 }
 
-// alljoyn_aboutdata_create_empty calls MSAJApi!alljoyn_aboutdata_create_empty.
+// Alljoyn_aboutdata_create_empty calls MSAJApi!alljoyn_aboutdata_create_empty.
 func Alljoyn_aboutdata_create_empty() Alljoyn_aboutdata {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_create_empty.Addr())
 	return Alljoyn_aboutdata(r1)
 }
 
-// alljoyn_aboutdata_create_full calls MSAJApi!alljoyn_aboutdata_create_full.
+// Alljoyn_aboutdata_create_full calls MSAJApi!alljoyn_aboutdata_create_full.
 func Alljoyn_aboutdata_create_full(arg Alljoyn_msgarg, language foundation.PSTR) Alljoyn_aboutdata {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_create_full.Addr(), uintptr(arg), uintptr(unsafe.Pointer(language)))
 	return Alljoyn_aboutdata(r1)
 }
 
-// alljoyn_aboutdata_createfrommsgarg calls MSAJApi!alljoyn_aboutdata_createfrommsgarg.
+// Alljoyn_aboutdata_createfrommsgarg calls MSAJApi!alljoyn_aboutdata_createfrommsgarg.
 func Alljoyn_aboutdata_createfrommsgarg(data Alljoyn_aboutdata, arg Alljoyn_msgarg, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_createfrommsgarg.Addr(), uintptr(data), uintptr(arg), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_createfromxml calls MSAJApi!alljoyn_aboutdata_createfromxml.
+// Alljoyn_aboutdata_createfromxml calls MSAJApi!alljoyn_aboutdata_createfromxml.
 func Alljoyn_aboutdata_createfromxml(data Alljoyn_aboutdata, aboutDataXml foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_createfromxml.Addr(), uintptr(data), uintptr(unsafe.Pointer(aboutDataXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_destroy calls MSAJApi!alljoyn_aboutdata_destroy.
+// Alljoyn_aboutdata_destroy calls MSAJApi!alljoyn_aboutdata_destroy.
 func Alljoyn_aboutdata_destroy(data Alljoyn_aboutdata) {
 	syscall.SyscallN(procAlljoyn_aboutdata_destroy.Addr(), uintptr(data))
 }
 
-// alljoyn_aboutdata_getaboutdata calls MSAJApi!alljoyn_aboutdata_getaboutdata.
+// Alljoyn_aboutdata_getaboutdata calls MSAJApi!alljoyn_aboutdata_getaboutdata.
 func Alljoyn_aboutdata_getaboutdata(data Alljoyn_aboutdata, msgArg Alljoyn_msgarg, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getaboutdata.Addr(), uintptr(data), uintptr(msgArg), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getajsoftwareversion calls MSAJApi!alljoyn_aboutdata_getajsoftwareversion.
+// Alljoyn_aboutdata_getajsoftwareversion calls MSAJApi!alljoyn_aboutdata_getajsoftwareversion.
 func Alljoyn_aboutdata_getajsoftwareversion(data Alljoyn_aboutdata, ajSoftwareVersion **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getajsoftwareversion.Addr(), uintptr(data), uintptr(unsafe.Pointer(ajSoftwareVersion)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getannouncedaboutdata calls MSAJApi!alljoyn_aboutdata_getannouncedaboutdata.
+// Alljoyn_aboutdata_getannouncedaboutdata calls MSAJApi!alljoyn_aboutdata_getannouncedaboutdata.
 func Alljoyn_aboutdata_getannouncedaboutdata(data Alljoyn_aboutdata, msgArg Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getannouncedaboutdata.Addr(), uintptr(data), uintptr(msgArg))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getappid calls MSAJApi!alljoyn_aboutdata_getappid.
+// Alljoyn_aboutdata_getappid calls MSAJApi!alljoyn_aboutdata_getappid.
 func Alljoyn_aboutdata_getappid(data Alljoyn_aboutdata, appId **byte, num *uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getappid.Addr(), uintptr(data), uintptr(unsafe.Pointer(appId)), uintptr(unsafe.Pointer(num)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getappname calls MSAJApi!alljoyn_aboutdata_getappname.
+// Alljoyn_aboutdata_getappname calls MSAJApi!alljoyn_aboutdata_getappname.
 func Alljoyn_aboutdata_getappname(data Alljoyn_aboutdata, appName **int8, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getappname.Addr(), uintptr(data), uintptr(unsafe.Pointer(appName)), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getdateofmanufacture calls MSAJApi!alljoyn_aboutdata_getdateofmanufacture.
+// Alljoyn_aboutdata_getdateofmanufacture calls MSAJApi!alljoyn_aboutdata_getdateofmanufacture.
 func Alljoyn_aboutdata_getdateofmanufacture(data Alljoyn_aboutdata, dateOfManufacture **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getdateofmanufacture.Addr(), uintptr(data), uintptr(unsafe.Pointer(dateOfManufacture)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getdefaultlanguage calls MSAJApi!alljoyn_aboutdata_getdefaultlanguage.
+// Alljoyn_aboutdata_getdefaultlanguage calls MSAJApi!alljoyn_aboutdata_getdefaultlanguage.
 func Alljoyn_aboutdata_getdefaultlanguage(data Alljoyn_aboutdata, defaultLanguage **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getdefaultlanguage.Addr(), uintptr(data), uintptr(unsafe.Pointer(defaultLanguage)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getdescription calls MSAJApi!alljoyn_aboutdata_getdescription.
+// Alljoyn_aboutdata_getdescription calls MSAJApi!alljoyn_aboutdata_getdescription.
 func Alljoyn_aboutdata_getdescription(data Alljoyn_aboutdata, description **int8, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getdescription.Addr(), uintptr(data), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getdeviceid calls MSAJApi!alljoyn_aboutdata_getdeviceid.
+// Alljoyn_aboutdata_getdeviceid calls MSAJApi!alljoyn_aboutdata_getdeviceid.
 func Alljoyn_aboutdata_getdeviceid(data Alljoyn_aboutdata, deviceId **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getdeviceid.Addr(), uintptr(data), uintptr(unsafe.Pointer(deviceId)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getdevicename calls MSAJApi!alljoyn_aboutdata_getdevicename.
+// Alljoyn_aboutdata_getdevicename calls MSAJApi!alljoyn_aboutdata_getdevicename.
 func Alljoyn_aboutdata_getdevicename(data Alljoyn_aboutdata, deviceName **int8, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getdevicename.Addr(), uintptr(data), uintptr(unsafe.Pointer(deviceName)), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getfield calls MSAJApi!alljoyn_aboutdata_getfield.
+// Alljoyn_aboutdata_getfield calls MSAJApi!alljoyn_aboutdata_getfield.
 func Alljoyn_aboutdata_getfield(data Alljoyn_aboutdata, name foundation.PSTR, value *Alljoyn_msgarg, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getfield.Addr(), uintptr(data), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getfields calls MSAJApi!alljoyn_aboutdata_getfields.
+// Alljoyn_aboutdata_getfields calls MSAJApi!alljoyn_aboutdata_getfields.
 func Alljoyn_aboutdata_getfields(data Alljoyn_aboutdata, fields **int8, num_fields uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getfields.Addr(), uintptr(data), uintptr(unsafe.Pointer(fields)), uintptr(num_fields))
 	return uintptr(r1)
 }
 
-// alljoyn_aboutdata_getfieldsignature calls MSAJApi!alljoyn_aboutdata_getfieldsignature.
+// Alljoyn_aboutdata_getfieldsignature calls MSAJApi!alljoyn_aboutdata_getfieldsignature.
 func Alljoyn_aboutdata_getfieldsignature(data Alljoyn_aboutdata, fieldName foundation.PSTR) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getfieldsignature.Addr(), uintptr(data), uintptr(unsafe.Pointer(fieldName)))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_aboutdata_gethardwareversion calls MSAJApi!alljoyn_aboutdata_gethardwareversion.
+// Alljoyn_aboutdata_gethardwareversion calls MSAJApi!alljoyn_aboutdata_gethardwareversion.
 func Alljoyn_aboutdata_gethardwareversion(data Alljoyn_aboutdata, hardwareVersion **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_gethardwareversion.Addr(), uintptr(data), uintptr(unsafe.Pointer(hardwareVersion)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getmanufacturer calls MSAJApi!alljoyn_aboutdata_getmanufacturer.
+// Alljoyn_aboutdata_getmanufacturer calls MSAJApi!alljoyn_aboutdata_getmanufacturer.
 func Alljoyn_aboutdata_getmanufacturer(data Alljoyn_aboutdata, manufacturer **int8, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getmanufacturer.Addr(), uintptr(data), uintptr(unsafe.Pointer(manufacturer)), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getmodelnumber calls MSAJApi!alljoyn_aboutdata_getmodelnumber.
+// Alljoyn_aboutdata_getmodelnumber calls MSAJApi!alljoyn_aboutdata_getmodelnumber.
 func Alljoyn_aboutdata_getmodelnumber(data Alljoyn_aboutdata, modelNumber **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getmodelnumber.Addr(), uintptr(data), uintptr(unsafe.Pointer(modelNumber)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getsoftwareversion calls MSAJApi!alljoyn_aboutdata_getsoftwareversion.
+// Alljoyn_aboutdata_getsoftwareversion calls MSAJApi!alljoyn_aboutdata_getsoftwareversion.
 func Alljoyn_aboutdata_getsoftwareversion(data Alljoyn_aboutdata, softwareVersion **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getsoftwareversion.Addr(), uintptr(data), uintptr(unsafe.Pointer(softwareVersion)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_getsupportedlanguages calls MSAJApi!alljoyn_aboutdata_getsupportedlanguages.
+// Alljoyn_aboutdata_getsupportedlanguages calls MSAJApi!alljoyn_aboutdata_getsupportedlanguages.
 func Alljoyn_aboutdata_getsupportedlanguages(data Alljoyn_aboutdata, languageTags **int8, num uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getsupportedlanguages.Addr(), uintptr(data), uintptr(unsafe.Pointer(languageTags)), uintptr(num))
 	return uintptr(r1)
 }
 
-// alljoyn_aboutdata_getsupporturl calls MSAJApi!alljoyn_aboutdata_getsupporturl.
+// Alljoyn_aboutdata_getsupporturl calls MSAJApi!alljoyn_aboutdata_getsupporturl.
 func Alljoyn_aboutdata_getsupporturl(data Alljoyn_aboutdata, supportUrl **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_getsupporturl.Addr(), uintptr(data), uintptr(unsafe.Pointer(supportUrl)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_isfieldannounced calls MSAJApi!alljoyn_aboutdata_isfieldannounced.
+// Alljoyn_aboutdata_isfieldannounced calls MSAJApi!alljoyn_aboutdata_isfieldannounced.
 func Alljoyn_aboutdata_isfieldannounced(data Alljoyn_aboutdata, fieldName foundation.PSTR) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_isfieldannounced.Addr(), uintptr(data), uintptr(unsafe.Pointer(fieldName)))
 	return byte(r1)
 }
 
-// alljoyn_aboutdata_isfieldlocalized calls MSAJApi!alljoyn_aboutdata_isfieldlocalized.
+// Alljoyn_aboutdata_isfieldlocalized calls MSAJApi!alljoyn_aboutdata_isfieldlocalized.
 func Alljoyn_aboutdata_isfieldlocalized(data Alljoyn_aboutdata, fieldName foundation.PSTR) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_isfieldlocalized.Addr(), uintptr(data), uintptr(unsafe.Pointer(fieldName)))
 	return byte(r1)
 }
 
-// alljoyn_aboutdata_isfieldrequired calls MSAJApi!alljoyn_aboutdata_isfieldrequired.
+// Alljoyn_aboutdata_isfieldrequired calls MSAJApi!alljoyn_aboutdata_isfieldrequired.
 func Alljoyn_aboutdata_isfieldrequired(data Alljoyn_aboutdata, fieldName foundation.PSTR) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_isfieldrequired.Addr(), uintptr(data), uintptr(unsafe.Pointer(fieldName)))
 	return byte(r1)
 }
 
-// alljoyn_aboutdata_isvalid calls MSAJApi!alljoyn_aboutdata_isvalid.
+// Alljoyn_aboutdata_isvalid calls MSAJApi!alljoyn_aboutdata_isvalid.
 func Alljoyn_aboutdata_isvalid(data Alljoyn_aboutdata, language foundation.PSTR) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_isvalid.Addr(), uintptr(data), uintptr(unsafe.Pointer(language)))
 	return byte(r1)
 }
 
-// alljoyn_aboutdata_setappid calls MSAJApi!alljoyn_aboutdata_setappid.
+// Alljoyn_aboutdata_setappid calls MSAJApi!alljoyn_aboutdata_setappid.
 func Alljoyn_aboutdata_setappid(data Alljoyn_aboutdata, appId *byte, num uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setappid.Addr(), uintptr(data), uintptr(unsafe.Pointer(appId)), uintptr(num))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setappid_fromstring calls MSAJApi!alljoyn_aboutdata_setappid_fromstring.
+// Alljoyn_aboutdata_setappid_fromstring calls MSAJApi!alljoyn_aboutdata_setappid_fromstring.
 func Alljoyn_aboutdata_setappid_fromstring(data Alljoyn_aboutdata, appId foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setappid_fromstring.Addr(), uintptr(data), uintptr(unsafe.Pointer(appId)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setappname calls MSAJApi!alljoyn_aboutdata_setappname.
+// Alljoyn_aboutdata_setappname calls MSAJApi!alljoyn_aboutdata_setappname.
 func Alljoyn_aboutdata_setappname(data Alljoyn_aboutdata, appName foundation.PSTR, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setappname.Addr(), uintptr(data), uintptr(unsafe.Pointer(appName)), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setdateofmanufacture calls MSAJApi!alljoyn_aboutdata_setdateofmanufacture.
+// Alljoyn_aboutdata_setdateofmanufacture calls MSAJApi!alljoyn_aboutdata_setdateofmanufacture.
 func Alljoyn_aboutdata_setdateofmanufacture(data Alljoyn_aboutdata, dateOfManufacture foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setdateofmanufacture.Addr(), uintptr(data), uintptr(unsafe.Pointer(dateOfManufacture)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setdefaultlanguage calls MSAJApi!alljoyn_aboutdata_setdefaultlanguage.
+// Alljoyn_aboutdata_setdefaultlanguage calls MSAJApi!alljoyn_aboutdata_setdefaultlanguage.
 func Alljoyn_aboutdata_setdefaultlanguage(data Alljoyn_aboutdata, defaultLanguage foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setdefaultlanguage.Addr(), uintptr(data), uintptr(unsafe.Pointer(defaultLanguage)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setdescription calls MSAJApi!alljoyn_aboutdata_setdescription.
+// Alljoyn_aboutdata_setdescription calls MSAJApi!alljoyn_aboutdata_setdescription.
 func Alljoyn_aboutdata_setdescription(data Alljoyn_aboutdata, description foundation.PSTR, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setdescription.Addr(), uintptr(data), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setdeviceid calls MSAJApi!alljoyn_aboutdata_setdeviceid.
+// Alljoyn_aboutdata_setdeviceid calls MSAJApi!alljoyn_aboutdata_setdeviceid.
 func Alljoyn_aboutdata_setdeviceid(data Alljoyn_aboutdata, deviceId foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setdeviceid.Addr(), uintptr(data), uintptr(unsafe.Pointer(deviceId)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setdevicename calls MSAJApi!alljoyn_aboutdata_setdevicename.
+// Alljoyn_aboutdata_setdevicename calls MSAJApi!alljoyn_aboutdata_setdevicename.
 func Alljoyn_aboutdata_setdevicename(data Alljoyn_aboutdata, deviceName foundation.PSTR, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setdevicename.Addr(), uintptr(data), uintptr(unsafe.Pointer(deviceName)), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setfield calls MSAJApi!alljoyn_aboutdata_setfield.
+// Alljoyn_aboutdata_setfield calls MSAJApi!alljoyn_aboutdata_setfield.
 func Alljoyn_aboutdata_setfield(data Alljoyn_aboutdata, name foundation.PSTR, value Alljoyn_msgarg, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setfield.Addr(), uintptr(data), uintptr(unsafe.Pointer(name)), uintptr(value), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_sethardwareversion calls MSAJApi!alljoyn_aboutdata_sethardwareversion.
+// Alljoyn_aboutdata_sethardwareversion calls MSAJApi!alljoyn_aboutdata_sethardwareversion.
 func Alljoyn_aboutdata_sethardwareversion(data Alljoyn_aboutdata, hardwareVersion foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_sethardwareversion.Addr(), uintptr(data), uintptr(unsafe.Pointer(hardwareVersion)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setmanufacturer calls MSAJApi!alljoyn_aboutdata_setmanufacturer.
+// Alljoyn_aboutdata_setmanufacturer calls MSAJApi!alljoyn_aboutdata_setmanufacturer.
 func Alljoyn_aboutdata_setmanufacturer(data Alljoyn_aboutdata, manufacturer foundation.PSTR, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setmanufacturer.Addr(), uintptr(data), uintptr(unsafe.Pointer(manufacturer)), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setmodelnumber calls MSAJApi!alljoyn_aboutdata_setmodelnumber.
+// Alljoyn_aboutdata_setmodelnumber calls MSAJApi!alljoyn_aboutdata_setmodelnumber.
 func Alljoyn_aboutdata_setmodelnumber(data Alljoyn_aboutdata, modelNumber foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setmodelnumber.Addr(), uintptr(data), uintptr(unsafe.Pointer(modelNumber)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setsoftwareversion calls MSAJApi!alljoyn_aboutdata_setsoftwareversion.
+// Alljoyn_aboutdata_setsoftwareversion calls MSAJApi!alljoyn_aboutdata_setsoftwareversion.
 func Alljoyn_aboutdata_setsoftwareversion(data Alljoyn_aboutdata, softwareVersion foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setsoftwareversion.Addr(), uintptr(data), uintptr(unsafe.Pointer(softwareVersion)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setsupportedlanguage calls MSAJApi!alljoyn_aboutdata_setsupportedlanguage.
+// Alljoyn_aboutdata_setsupportedlanguage calls MSAJApi!alljoyn_aboutdata_setsupportedlanguage.
 func Alljoyn_aboutdata_setsupportedlanguage(data Alljoyn_aboutdata, language foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setsupportedlanguage.Addr(), uintptr(data), uintptr(unsafe.Pointer(language)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdata_setsupporturl calls MSAJApi!alljoyn_aboutdata_setsupporturl.
+// Alljoyn_aboutdata_setsupporturl calls MSAJApi!alljoyn_aboutdata_setsupporturl.
 func Alljoyn_aboutdata_setsupporturl(data Alljoyn_aboutdata, supportUrl foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdata_setsupporturl.Addr(), uintptr(data), uintptr(unsafe.Pointer(supportUrl)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutdatalistener_create calls MSAJApi!alljoyn_aboutdatalistener_create.
+// Alljoyn_aboutdatalistener_create calls MSAJApi!alljoyn_aboutdatalistener_create.
 func Alljoyn_aboutdatalistener_create(callbacks *Alljoyn_aboutdatalistener_callbacks, context unsafe.Pointer) Alljoyn_aboutdatalistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutdatalistener_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_aboutdatalistener(r1)
 }
 
-// alljoyn_aboutdatalistener_destroy calls MSAJApi!alljoyn_aboutdatalistener_destroy.
+// Alljoyn_aboutdatalistener_destroy calls MSAJApi!alljoyn_aboutdatalistener_destroy.
 func Alljoyn_aboutdatalistener_destroy(listener Alljoyn_aboutdatalistener) {
 	syscall.SyscallN(procAlljoyn_aboutdatalistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_abouticon_clear calls MSAJApi!alljoyn_abouticon_clear.
+// Alljoyn_abouticon_clear calls MSAJApi!alljoyn_abouticon_clear.
 func Alljoyn_abouticon_clear(icon Alljoyn_abouticon) {
 	syscall.SyscallN(procAlljoyn_abouticon_clear.Addr(), uintptr(icon))
 }
 
-// alljoyn_abouticon_create calls MSAJApi!alljoyn_abouticon_create.
+// Alljoyn_abouticon_create calls MSAJApi!alljoyn_abouticon_create.
 func Alljoyn_abouticon_create() Alljoyn_abouticon {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_abouticon_create.Addr())
 	return Alljoyn_abouticon(r1)
 }
 
-// alljoyn_abouticon_destroy calls MSAJApi!alljoyn_abouticon_destroy.
+// Alljoyn_abouticon_destroy calls MSAJApi!alljoyn_abouticon_destroy.
 func Alljoyn_abouticon_destroy(icon Alljoyn_abouticon) {
 	syscall.SyscallN(procAlljoyn_abouticon_destroy.Addr(), uintptr(icon))
 }
 
-// alljoyn_abouticon_getcontent calls MSAJApi!alljoyn_abouticon_getcontent.
+// Alljoyn_abouticon_getcontent calls MSAJApi!alljoyn_abouticon_getcontent.
 func Alljoyn_abouticon_getcontent(icon Alljoyn_abouticon, data **byte, size *uintptr) {
 	syscall.SyscallN(procAlljoyn_abouticon_getcontent.Addr(), uintptr(icon), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(size)))
 }
 
-// alljoyn_abouticon_geturl calls MSAJApi!alljoyn_abouticon_geturl.
+// Alljoyn_abouticon_geturl calls MSAJApi!alljoyn_abouticon_geturl.
 func Alljoyn_abouticon_geturl(icon Alljoyn_abouticon, type_ **int8, url **int8) {
 	syscall.SyscallN(procAlljoyn_abouticon_geturl.Addr(), uintptr(icon), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(url)))
 }
 
-// alljoyn_abouticon_setcontent calls MSAJApi!alljoyn_abouticon_setcontent.
+// Alljoyn_abouticon_setcontent calls MSAJApi!alljoyn_abouticon_setcontent.
 func Alljoyn_abouticon_setcontent(icon Alljoyn_abouticon, type_ foundation.PSTR, data *byte, csize uintptr, ownsData byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_abouticon_setcontent.Addr(), uintptr(icon), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(data)), uintptr(csize), uintptr(ownsData))
 	return QStatus(r1)
 }
 
-// alljoyn_abouticon_setcontent_frommsgarg calls MSAJApi!alljoyn_abouticon_setcontent_frommsgarg.
+// Alljoyn_abouticon_setcontent_frommsgarg calls MSAJApi!alljoyn_abouticon_setcontent_frommsgarg.
 func Alljoyn_abouticon_setcontent_frommsgarg(icon Alljoyn_abouticon, arg Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_abouticon_setcontent_frommsgarg.Addr(), uintptr(icon), uintptr(arg))
 	return QStatus(r1)
 }
 
-// alljoyn_abouticon_seturl calls MSAJApi!alljoyn_abouticon_seturl.
+// Alljoyn_abouticon_seturl calls MSAJApi!alljoyn_abouticon_seturl.
 func Alljoyn_abouticon_seturl(icon Alljoyn_abouticon, type_ foundation.PSTR, url foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_abouticon_seturl.Addr(), uintptr(icon), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(url)))
 	return QStatus(r1)
 }
 
-// alljoyn_abouticonobj_create calls MSAJApi!alljoyn_abouticonobj_create.
+// Alljoyn_abouticonobj_create calls MSAJApi!alljoyn_abouticonobj_create.
 func Alljoyn_abouticonobj_create(bus Alljoyn_busattachment, icon Alljoyn_abouticon) Alljoyn_abouticonobj {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_abouticonobj_create.Addr(), uintptr(bus), uintptr(icon))
 	return Alljoyn_abouticonobj(r1)
 }
 
-// alljoyn_abouticonobj_destroy calls MSAJApi!alljoyn_abouticonobj_destroy.
+// Alljoyn_abouticonobj_destroy calls MSAJApi!alljoyn_abouticonobj_destroy.
 func Alljoyn_abouticonobj_destroy(icon Alljoyn_abouticonobj) {
 	syscall.SyscallN(procAlljoyn_abouticonobj_destroy.Addr(), uintptr(icon))
 }
 
-// alljoyn_abouticonproxy_create calls MSAJApi!alljoyn_abouticonproxy_create.
+// Alljoyn_abouticonproxy_create calls MSAJApi!alljoyn_abouticonproxy_create.
 func Alljoyn_abouticonproxy_create(bus Alljoyn_busattachment, busName foundation.PSTR, sessionId uint32) Alljoyn_abouticonproxy {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_abouticonproxy_create.Addr(), uintptr(bus), uintptr(unsafe.Pointer(busName)), uintptr(sessionId))
 	return Alljoyn_abouticonproxy(r1)
 }
 
-// alljoyn_abouticonproxy_destroy calls MSAJApi!alljoyn_abouticonproxy_destroy.
+// Alljoyn_abouticonproxy_destroy calls MSAJApi!alljoyn_abouticonproxy_destroy.
 func Alljoyn_abouticonproxy_destroy(proxy Alljoyn_abouticonproxy) {
 	syscall.SyscallN(procAlljoyn_abouticonproxy_destroy.Addr(), uintptr(proxy))
 }
 
-// alljoyn_abouticonproxy_geticon calls MSAJApi!alljoyn_abouticonproxy_geticon.
+// Alljoyn_abouticonproxy_geticon calls MSAJApi!alljoyn_abouticonproxy_geticon.
 func Alljoyn_abouticonproxy_geticon(proxy Alljoyn_abouticonproxy, icon Alljoyn_abouticon) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_abouticonproxy_geticon.Addr(), uintptr(proxy), uintptr(icon))
 	return QStatus(r1)
 }
 
-// alljoyn_abouticonproxy_getversion calls MSAJApi!alljoyn_abouticonproxy_getversion.
+// Alljoyn_abouticonproxy_getversion calls MSAJApi!alljoyn_abouticonproxy_getversion.
 func Alljoyn_abouticonproxy_getversion(proxy Alljoyn_abouticonproxy, version *uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_abouticonproxy_getversion.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(version)))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutlistener_create calls MSAJApi!alljoyn_aboutlistener_create.
+// Alljoyn_aboutlistener_create calls MSAJApi!alljoyn_aboutlistener_create.
 func Alljoyn_aboutlistener_create(callback *Alljoyn_aboutlistener_callback, context unsafe.Pointer) Alljoyn_aboutlistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutlistener_create.Addr(), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_aboutlistener(r1)
 }
 
-// alljoyn_aboutlistener_destroy calls MSAJApi!alljoyn_aboutlistener_destroy.
+// Alljoyn_aboutlistener_destroy calls MSAJApi!alljoyn_aboutlistener_destroy.
 func Alljoyn_aboutlistener_destroy(listener Alljoyn_aboutlistener) {
 	syscall.SyscallN(procAlljoyn_aboutlistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_aboutobj_announce calls MSAJApi!alljoyn_aboutobj_announce.
+// Alljoyn_aboutobj_announce calls MSAJApi!alljoyn_aboutobj_announce.
 func Alljoyn_aboutobj_announce(obj Alljoyn_aboutobj, sessionPort uint16, aboutData Alljoyn_aboutdata) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobj_announce.Addr(), uintptr(obj), uintptr(sessionPort), uintptr(aboutData))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutobj_announce_using_datalistener calls MSAJApi!alljoyn_aboutobj_announce_using_datalistener.
+// Alljoyn_aboutobj_announce_using_datalistener calls MSAJApi!alljoyn_aboutobj_announce_using_datalistener.
 func Alljoyn_aboutobj_announce_using_datalistener(obj Alljoyn_aboutobj, sessionPort uint16, aboutListener Alljoyn_aboutdatalistener) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobj_announce_using_datalistener.Addr(), uintptr(obj), uintptr(sessionPort), uintptr(aboutListener))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutobj_create calls MSAJApi!alljoyn_aboutobj_create.
+// Alljoyn_aboutobj_create calls MSAJApi!alljoyn_aboutobj_create.
 func Alljoyn_aboutobj_create(bus Alljoyn_busattachment, isAnnounced Alljoyn_about_announceflag) Alljoyn_aboutobj {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobj_create.Addr(), uintptr(bus), uintptr(isAnnounced))
 	return Alljoyn_aboutobj(r1)
 }
 
-// alljoyn_aboutobj_destroy calls MSAJApi!alljoyn_aboutobj_destroy.
+// Alljoyn_aboutobj_destroy calls MSAJApi!alljoyn_aboutobj_destroy.
 func Alljoyn_aboutobj_destroy(obj Alljoyn_aboutobj) {
 	syscall.SyscallN(procAlljoyn_aboutobj_destroy.Addr(), uintptr(obj))
 }
 
-// alljoyn_aboutobj_unannounce calls MSAJApi!alljoyn_aboutobj_unannounce.
+// Alljoyn_aboutobj_unannounce calls MSAJApi!alljoyn_aboutobj_unannounce.
 func Alljoyn_aboutobj_unannounce(obj Alljoyn_aboutobj) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobj_unannounce.Addr(), uintptr(obj))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutobjectdescription_clear calls MSAJApi!alljoyn_aboutobjectdescription_clear.
+// Alljoyn_aboutobjectdescription_clear calls MSAJApi!alljoyn_aboutobjectdescription_clear.
 func Alljoyn_aboutobjectdescription_clear(description Alljoyn_aboutobjectdescription) {
 	syscall.SyscallN(procAlljoyn_aboutobjectdescription_clear.Addr(), uintptr(description))
 }
 
-// alljoyn_aboutobjectdescription_create calls MSAJApi!alljoyn_aboutobjectdescription_create.
+// Alljoyn_aboutobjectdescription_create calls MSAJApi!alljoyn_aboutobjectdescription_create.
 func Alljoyn_aboutobjectdescription_create() Alljoyn_aboutobjectdescription {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_create.Addr())
 	return Alljoyn_aboutobjectdescription(r1)
 }
 
-// alljoyn_aboutobjectdescription_create_full calls MSAJApi!alljoyn_aboutobjectdescription_create_full.
+// Alljoyn_aboutobjectdescription_create_full calls MSAJApi!alljoyn_aboutobjectdescription_create_full.
 func Alljoyn_aboutobjectdescription_create_full(arg Alljoyn_msgarg) Alljoyn_aboutobjectdescription {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_create_full.Addr(), uintptr(arg))
 	return Alljoyn_aboutobjectdescription(r1)
 }
 
-// alljoyn_aboutobjectdescription_createfrommsgarg calls MSAJApi!alljoyn_aboutobjectdescription_createfrommsgarg.
+// Alljoyn_aboutobjectdescription_createfrommsgarg calls MSAJApi!alljoyn_aboutobjectdescription_createfrommsgarg.
 func Alljoyn_aboutobjectdescription_createfrommsgarg(description Alljoyn_aboutobjectdescription, arg Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_createfrommsgarg.Addr(), uintptr(description), uintptr(arg))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutobjectdescription_destroy calls MSAJApi!alljoyn_aboutobjectdescription_destroy.
+// Alljoyn_aboutobjectdescription_destroy calls MSAJApi!alljoyn_aboutobjectdescription_destroy.
 func Alljoyn_aboutobjectdescription_destroy(description Alljoyn_aboutobjectdescription) {
 	syscall.SyscallN(procAlljoyn_aboutobjectdescription_destroy.Addr(), uintptr(description))
 }
 
-// alljoyn_aboutobjectdescription_getinterfacepaths calls MSAJApi!alljoyn_aboutobjectdescription_getinterfacepaths.
+// Alljoyn_aboutobjectdescription_getinterfacepaths calls MSAJApi!alljoyn_aboutobjectdescription_getinterfacepaths.
 func Alljoyn_aboutobjectdescription_getinterfacepaths(description Alljoyn_aboutobjectdescription, interfaceName foundation.PSTR, paths **int8, numPaths uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_getinterfacepaths.Addr(), uintptr(description), uintptr(unsafe.Pointer(interfaceName)), uintptr(unsafe.Pointer(paths)), uintptr(numPaths))
 	return uintptr(r1)
 }
 
-// alljoyn_aboutobjectdescription_getinterfaces calls MSAJApi!alljoyn_aboutobjectdescription_getinterfaces.
+// Alljoyn_aboutobjectdescription_getinterfaces calls MSAJApi!alljoyn_aboutobjectdescription_getinterfaces.
 func Alljoyn_aboutobjectdescription_getinterfaces(description Alljoyn_aboutobjectdescription, path foundation.PSTR, interfaces **int8, numInterfaces uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_getinterfaces.Addr(), uintptr(description), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(interfaces)), uintptr(numInterfaces))
 	return uintptr(r1)
 }
 
-// alljoyn_aboutobjectdescription_getmsgarg calls MSAJApi!alljoyn_aboutobjectdescription_getmsgarg.
+// Alljoyn_aboutobjectdescription_getmsgarg calls MSAJApi!alljoyn_aboutobjectdescription_getmsgarg.
 func Alljoyn_aboutobjectdescription_getmsgarg(description Alljoyn_aboutobjectdescription, msgArg Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_getmsgarg.Addr(), uintptr(description), uintptr(msgArg))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutobjectdescription_getpaths calls MSAJApi!alljoyn_aboutobjectdescription_getpaths.
+// Alljoyn_aboutobjectdescription_getpaths calls MSAJApi!alljoyn_aboutobjectdescription_getpaths.
 func Alljoyn_aboutobjectdescription_getpaths(description Alljoyn_aboutobjectdescription, paths **int8, numPaths uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_getpaths.Addr(), uintptr(description), uintptr(unsafe.Pointer(paths)), uintptr(numPaths))
 	return uintptr(r1)
 }
 
-// alljoyn_aboutobjectdescription_hasinterface calls MSAJApi!alljoyn_aboutobjectdescription_hasinterface.
+// Alljoyn_aboutobjectdescription_hasinterface calls MSAJApi!alljoyn_aboutobjectdescription_hasinterface.
 func Alljoyn_aboutobjectdescription_hasinterface(description Alljoyn_aboutobjectdescription, interfaceName foundation.PSTR) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_hasinterface.Addr(), uintptr(description), uintptr(unsafe.Pointer(interfaceName)))
 	return byte(r1)
 }
 
-// alljoyn_aboutobjectdescription_hasinterfaceatpath calls MSAJApi!alljoyn_aboutobjectdescription_hasinterfaceatpath.
+// Alljoyn_aboutobjectdescription_hasinterfaceatpath calls MSAJApi!alljoyn_aboutobjectdescription_hasinterfaceatpath.
 func Alljoyn_aboutobjectdescription_hasinterfaceatpath(description Alljoyn_aboutobjectdescription, path foundation.PSTR, interfaceName foundation.PSTR) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_hasinterfaceatpath.Addr(), uintptr(description), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(interfaceName)))
 	return byte(r1)
 }
 
-// alljoyn_aboutobjectdescription_haspath calls MSAJApi!alljoyn_aboutobjectdescription_haspath.
+// Alljoyn_aboutobjectdescription_haspath calls MSAJApi!alljoyn_aboutobjectdescription_haspath.
 func Alljoyn_aboutobjectdescription_haspath(description Alljoyn_aboutobjectdescription, path foundation.PSTR) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutobjectdescription_haspath.Addr(), uintptr(description), uintptr(unsafe.Pointer(path)))
 	return byte(r1)
 }
 
-// alljoyn_aboutproxy_create calls MSAJApi!alljoyn_aboutproxy_create.
+// Alljoyn_aboutproxy_create calls MSAJApi!alljoyn_aboutproxy_create.
 func Alljoyn_aboutproxy_create(bus Alljoyn_busattachment, busName foundation.PSTR, sessionId uint32) Alljoyn_aboutproxy {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutproxy_create.Addr(), uintptr(bus), uintptr(unsafe.Pointer(busName)), uintptr(sessionId))
 	return Alljoyn_aboutproxy(r1)
 }
 
-// alljoyn_aboutproxy_destroy calls MSAJApi!alljoyn_aboutproxy_destroy.
+// Alljoyn_aboutproxy_destroy calls MSAJApi!alljoyn_aboutproxy_destroy.
 func Alljoyn_aboutproxy_destroy(proxy Alljoyn_aboutproxy) {
 	syscall.SyscallN(procAlljoyn_aboutproxy_destroy.Addr(), uintptr(proxy))
 }
 
-// alljoyn_aboutproxy_getaboutdata calls MSAJApi!alljoyn_aboutproxy_getaboutdata.
+// Alljoyn_aboutproxy_getaboutdata calls MSAJApi!alljoyn_aboutproxy_getaboutdata.
 func Alljoyn_aboutproxy_getaboutdata(proxy Alljoyn_aboutproxy, language foundation.PSTR, data Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutproxy_getaboutdata.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(language)), uintptr(data))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutproxy_getobjectdescription calls MSAJApi!alljoyn_aboutproxy_getobjectdescription.
+// Alljoyn_aboutproxy_getobjectdescription calls MSAJApi!alljoyn_aboutproxy_getobjectdescription.
 func Alljoyn_aboutproxy_getobjectdescription(proxy Alljoyn_aboutproxy, objectDesc Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutproxy_getobjectdescription.Addr(), uintptr(proxy), uintptr(objectDesc))
 	return QStatus(r1)
 }
 
-// alljoyn_aboutproxy_getversion calls MSAJApi!alljoyn_aboutproxy_getversion.
+// Alljoyn_aboutproxy_getversion calls MSAJApi!alljoyn_aboutproxy_getversion.
 func Alljoyn_aboutproxy_getversion(proxy Alljoyn_aboutproxy, version *uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_aboutproxy_getversion.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(version)))
 	return QStatus(r1)
 }
 
-// alljoyn_applicationstatelistener_create calls MSAJApi!alljoyn_applicationstatelistener_create.
+// Alljoyn_applicationstatelistener_create calls MSAJApi!alljoyn_applicationstatelistener_create.
 func Alljoyn_applicationstatelistener_create(callbacks *Alljoyn_applicationstatelistener_callbacks, context unsafe.Pointer) Alljoyn_applicationstatelistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_applicationstatelistener_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_applicationstatelistener(r1)
 }
 
-// alljoyn_applicationstatelistener_destroy calls MSAJApi!alljoyn_applicationstatelistener_destroy.
+// Alljoyn_applicationstatelistener_destroy calls MSAJApi!alljoyn_applicationstatelistener_destroy.
 func Alljoyn_applicationstatelistener_destroy(listener Alljoyn_applicationstatelistener) {
 	syscall.SyscallN(procAlljoyn_applicationstatelistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_authlistener_create calls MSAJApi!alljoyn_authlistener_create.
+// Alljoyn_authlistener_create calls MSAJApi!alljoyn_authlistener_create.
 func Alljoyn_authlistener_create(callbacks *Alljoyn_authlistener_callbacks, context unsafe.Pointer) Alljoyn_authlistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_authlistener_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_authlistener(r1)
 }
 
-// alljoyn_authlistener_destroy calls MSAJApi!alljoyn_authlistener_destroy.
+// Alljoyn_authlistener_destroy calls MSAJApi!alljoyn_authlistener_destroy.
 func Alljoyn_authlistener_destroy(listener Alljoyn_authlistener) {
 	syscall.SyscallN(procAlljoyn_authlistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_authlistener_requestcredentialsresponse calls MSAJApi!alljoyn_authlistener_requestcredentialsresponse.
+// Alljoyn_authlistener_requestcredentialsresponse calls MSAJApi!alljoyn_authlistener_requestcredentialsresponse.
 func Alljoyn_authlistener_requestcredentialsresponse(listener Alljoyn_authlistener, authContext unsafe.Pointer, accept int32, credentials Alljoyn_credentials) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_authlistener_requestcredentialsresponse.Addr(), uintptr(listener), uintptr(unsafe.Pointer(authContext)), uintptr(accept), uintptr(credentials))
 	return QStatus(r1)
 }
 
-// alljoyn_authlistener_setsharedsecret calls MSAJApi!alljoyn_authlistener_setsharedsecret.
+// Alljoyn_authlistener_setsharedsecret calls MSAJApi!alljoyn_authlistener_setsharedsecret.
 func Alljoyn_authlistener_setsharedsecret(listener Alljoyn_authlistener, sharedSecret *byte, sharedSecretSize uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_authlistener_setsharedsecret.Addr(), uintptr(listener), uintptr(unsafe.Pointer(sharedSecret)), uintptr(sharedSecretSize))
 	return QStatus(r1)
 }
 
-// alljoyn_authlistener_verifycredentialsresponse calls MSAJApi!alljoyn_authlistener_verifycredentialsresponse.
+// Alljoyn_authlistener_verifycredentialsresponse calls MSAJApi!alljoyn_authlistener_verifycredentialsresponse.
 func Alljoyn_authlistener_verifycredentialsresponse(listener Alljoyn_authlistener, authContext unsafe.Pointer, accept int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_authlistener_verifycredentialsresponse.Addr(), uintptr(listener), uintptr(unsafe.Pointer(authContext)), uintptr(accept))
 	return QStatus(r1)
 }
 
-// alljoyn_authlistenerasync_create calls MSAJApi!alljoyn_authlistenerasync_create.
+// Alljoyn_authlistenerasync_create calls MSAJApi!alljoyn_authlistenerasync_create.
 func Alljoyn_authlistenerasync_create(callbacks *Alljoyn_authlistenerasync_callbacks, context unsafe.Pointer) Alljoyn_authlistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_authlistenerasync_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_authlistener(r1)
 }
 
-// alljoyn_authlistenerasync_destroy calls MSAJApi!alljoyn_authlistenerasync_destroy.
+// Alljoyn_authlistenerasync_destroy calls MSAJApi!alljoyn_authlistenerasync_destroy.
 func Alljoyn_authlistenerasync_destroy(listener Alljoyn_authlistener) {
 	syscall.SyscallN(procAlljoyn_authlistenerasync_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_autopinger_adddestination calls MSAJApi!alljoyn_autopinger_adddestination.
+// Alljoyn_autopinger_adddestination calls MSAJApi!alljoyn_autopinger_adddestination.
 func Alljoyn_autopinger_adddestination(autopinger Alljoyn_autopinger, group foundation.PSTR, destination foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_autopinger_adddestination.Addr(), uintptr(autopinger), uintptr(unsafe.Pointer(group)), uintptr(unsafe.Pointer(destination)))
 	return QStatus(r1)
 }
 
-// alljoyn_autopinger_addpinggroup calls MSAJApi!alljoyn_autopinger_addpinggroup.
+// Alljoyn_autopinger_addpinggroup calls MSAJApi!alljoyn_autopinger_addpinggroup.
 func Alljoyn_autopinger_addpinggroup(autopinger Alljoyn_autopinger, group foundation.PSTR, listener Alljoyn_pinglistener, pinginterval uint32) {
 	syscall.SyscallN(procAlljoyn_autopinger_addpinggroup.Addr(), uintptr(autopinger), uintptr(unsafe.Pointer(group)), uintptr(listener), uintptr(pinginterval))
 }
 
-// alljoyn_autopinger_create calls MSAJApi!alljoyn_autopinger_create.
+// Alljoyn_autopinger_create calls MSAJApi!alljoyn_autopinger_create.
 func Alljoyn_autopinger_create(bus Alljoyn_busattachment) Alljoyn_autopinger {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_autopinger_create.Addr(), uintptr(bus))
 	return Alljoyn_autopinger(r1)
 }
 
-// alljoyn_autopinger_destroy calls MSAJApi!alljoyn_autopinger_destroy.
+// Alljoyn_autopinger_destroy calls MSAJApi!alljoyn_autopinger_destroy.
 func Alljoyn_autopinger_destroy(autopinger Alljoyn_autopinger) {
 	syscall.SyscallN(procAlljoyn_autopinger_destroy.Addr(), uintptr(autopinger))
 }
 
-// alljoyn_autopinger_pause calls MSAJApi!alljoyn_autopinger_pause.
+// Alljoyn_autopinger_pause calls MSAJApi!alljoyn_autopinger_pause.
 func Alljoyn_autopinger_pause(autopinger Alljoyn_autopinger) {
 	syscall.SyscallN(procAlljoyn_autopinger_pause.Addr(), uintptr(autopinger))
 }
 
-// alljoyn_autopinger_removedestination calls MSAJApi!alljoyn_autopinger_removedestination.
+// Alljoyn_autopinger_removedestination calls MSAJApi!alljoyn_autopinger_removedestination.
 func Alljoyn_autopinger_removedestination(autopinger Alljoyn_autopinger, group foundation.PSTR, destination foundation.PSTR, removeall int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_autopinger_removedestination.Addr(), uintptr(autopinger), uintptr(unsafe.Pointer(group)), uintptr(unsafe.Pointer(destination)), uintptr(removeall))
 	return QStatus(r1)
 }
 
-// alljoyn_autopinger_removepinggroup calls MSAJApi!alljoyn_autopinger_removepinggroup.
+// Alljoyn_autopinger_removepinggroup calls MSAJApi!alljoyn_autopinger_removepinggroup.
 func Alljoyn_autopinger_removepinggroup(autopinger Alljoyn_autopinger, group foundation.PSTR) {
 	syscall.SyscallN(procAlljoyn_autopinger_removepinggroup.Addr(), uintptr(autopinger), uintptr(unsafe.Pointer(group)))
 }
 
-// alljoyn_autopinger_resume calls MSAJApi!alljoyn_autopinger_resume.
+// Alljoyn_autopinger_resume calls MSAJApi!alljoyn_autopinger_resume.
 func Alljoyn_autopinger_resume(autopinger Alljoyn_autopinger) {
 	syscall.SyscallN(procAlljoyn_autopinger_resume.Addr(), uintptr(autopinger))
 }
 
-// alljoyn_autopinger_setpinginterval calls MSAJApi!alljoyn_autopinger_setpinginterval.
+// Alljoyn_autopinger_setpinginterval calls MSAJApi!alljoyn_autopinger_setpinginterval.
 func Alljoyn_autopinger_setpinginterval(autopinger Alljoyn_autopinger, group foundation.PSTR, pinginterval uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_autopinger_setpinginterval.Addr(), uintptr(autopinger), uintptr(unsafe.Pointer(group)), uintptr(pinginterval))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_addlogonentry calls MSAJApi!alljoyn_busattachment_addlogonentry.
+// Alljoyn_busattachment_addlogonentry calls MSAJApi!alljoyn_busattachment_addlogonentry.
 func Alljoyn_busattachment_addlogonentry(bus Alljoyn_busattachment, authMechanism foundation.PSTR, userName foundation.PSTR, password foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_addlogonentry.Addr(), uintptr(bus), uintptr(unsafe.Pointer(authMechanism)), uintptr(unsafe.Pointer(userName)), uintptr(unsafe.Pointer(password)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_addmatch calls MSAJApi!alljoyn_busattachment_addmatch.
+// Alljoyn_busattachment_addmatch calls MSAJApi!alljoyn_busattachment_addmatch.
 func Alljoyn_busattachment_addmatch(bus Alljoyn_busattachment, rule foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_addmatch.Addr(), uintptr(bus), uintptr(unsafe.Pointer(rule)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_advertisename calls MSAJApi!alljoyn_busattachment_advertisename.
+// Alljoyn_busattachment_advertisename calls MSAJApi!alljoyn_busattachment_advertisename.
 func Alljoyn_busattachment_advertisename(bus Alljoyn_busattachment, name foundation.PSTR, transports uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_advertisename.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)), uintptr(transports))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_bindsessionport calls MSAJApi!alljoyn_busattachment_bindsessionport.
+// Alljoyn_busattachment_bindsessionport calls MSAJApi!alljoyn_busattachment_bindsessionport.
 func Alljoyn_busattachment_bindsessionport(bus Alljoyn_busattachment, sessionPort *uint16, opts Alljoyn_sessionopts, listener Alljoyn_sessionportlistener) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_bindsessionport.Addr(), uintptr(bus), uintptr(unsafe.Pointer(sessionPort)), uintptr(opts), uintptr(listener))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_canceladvertisename calls MSAJApi!alljoyn_busattachment_canceladvertisename.
+// Alljoyn_busattachment_canceladvertisename calls MSAJApi!alljoyn_busattachment_canceladvertisename.
 func Alljoyn_busattachment_canceladvertisename(bus Alljoyn_busattachment, name foundation.PSTR, transports uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_canceladvertisename.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)), uintptr(transports))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_cancelfindadvertisedname calls MSAJApi!alljoyn_busattachment_cancelfindadvertisedname.
+// Alljoyn_busattachment_cancelfindadvertisedname calls MSAJApi!alljoyn_busattachment_cancelfindadvertisedname.
 func Alljoyn_busattachment_cancelfindadvertisedname(bus Alljoyn_busattachment, namePrefix foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_cancelfindadvertisedname.Addr(), uintptr(bus), uintptr(unsafe.Pointer(namePrefix)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_cancelfindadvertisednamebytransport calls MSAJApi!alljoyn_busattachment_cancelfindadvertisednamebytransport.
+// Alljoyn_busattachment_cancelfindadvertisednamebytransport calls MSAJApi!alljoyn_busattachment_cancelfindadvertisednamebytransport.
 func Alljoyn_busattachment_cancelfindadvertisednamebytransport(bus Alljoyn_busattachment, namePrefix foundation.PSTR, transports uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_cancelfindadvertisednamebytransport.Addr(), uintptr(bus), uintptr(unsafe.Pointer(namePrefix)), uintptr(transports))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_cancelwhoimplements_interface calls MSAJApi!alljoyn_busattachment_cancelwhoimplements_interface.
+// Alljoyn_busattachment_cancelwhoimplements_interface calls MSAJApi!alljoyn_busattachment_cancelwhoimplements_interface.
 func Alljoyn_busattachment_cancelwhoimplements_interface(bus Alljoyn_busattachment, implementsInterface foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_cancelwhoimplements_interface.Addr(), uintptr(bus), uintptr(unsafe.Pointer(implementsInterface)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_cancelwhoimplements_interfaces calls MSAJApi!alljoyn_busattachment_cancelwhoimplements_interfaces.
+// Alljoyn_busattachment_cancelwhoimplements_interfaces calls MSAJApi!alljoyn_busattachment_cancelwhoimplements_interfaces.
 func Alljoyn_busattachment_cancelwhoimplements_interfaces(bus Alljoyn_busattachment, implementsInterfaces **int8, numberInterfaces uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_cancelwhoimplements_interfaces.Addr(), uintptr(bus), uintptr(unsafe.Pointer(implementsInterfaces)), uintptr(numberInterfaces))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_clearkeys calls MSAJApi!alljoyn_busattachment_clearkeys.
+// Alljoyn_busattachment_clearkeys calls MSAJApi!alljoyn_busattachment_clearkeys.
 func Alljoyn_busattachment_clearkeys(bus Alljoyn_busattachment, guid foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_clearkeys.Addr(), uintptr(bus), uintptr(unsafe.Pointer(guid)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_clearkeystore calls MSAJApi!alljoyn_busattachment_clearkeystore.
+// Alljoyn_busattachment_clearkeystore calls MSAJApi!alljoyn_busattachment_clearkeystore.
 func Alljoyn_busattachment_clearkeystore(bus Alljoyn_busattachment) {
 	syscall.SyscallN(procAlljoyn_busattachment_clearkeystore.Addr(), uintptr(bus))
 }
 
-// alljoyn_busattachment_connect calls MSAJApi!alljoyn_busattachment_connect.
+// Alljoyn_busattachment_connect calls MSAJApi!alljoyn_busattachment_connect.
 func Alljoyn_busattachment_connect(bus Alljoyn_busattachment, connectSpec foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_connect.Addr(), uintptr(bus), uintptr(unsafe.Pointer(connectSpec)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_create calls MSAJApi!alljoyn_busattachment_create.
+// Alljoyn_busattachment_create calls MSAJApi!alljoyn_busattachment_create.
 func Alljoyn_busattachment_create(applicationName foundation.PSTR, allowRemoteMessages int32) Alljoyn_busattachment {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_create.Addr(), uintptr(unsafe.Pointer(applicationName)), uintptr(allowRemoteMessages))
 	return Alljoyn_busattachment(r1)
 }
 
-// alljoyn_busattachment_create_concurrency calls MSAJApi!alljoyn_busattachment_create_concurrency.
+// Alljoyn_busattachment_create_concurrency calls MSAJApi!alljoyn_busattachment_create_concurrency.
 func Alljoyn_busattachment_create_concurrency(applicationName foundation.PSTR, allowRemoteMessages int32, concurrency uint32) Alljoyn_busattachment {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_create_concurrency.Addr(), uintptr(unsafe.Pointer(applicationName)), uintptr(allowRemoteMessages), uintptr(concurrency))
 	return Alljoyn_busattachment(r1)
 }
 
-// alljoyn_busattachment_createinterface calls MSAJApi!alljoyn_busattachment_createinterface.
+// Alljoyn_busattachment_createinterface calls MSAJApi!alljoyn_busattachment_createinterface.
 func Alljoyn_busattachment_createinterface(bus Alljoyn_busattachment, name foundation.PSTR, iface *Alljoyn_interfacedescription) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_createinterface.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(iface)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_createinterface_secure calls MSAJApi!alljoyn_busattachment_createinterface_secure.
+// Alljoyn_busattachment_createinterface_secure calls MSAJApi!alljoyn_busattachment_createinterface_secure.
 func Alljoyn_busattachment_createinterface_secure(bus Alljoyn_busattachment, name foundation.PSTR, iface *Alljoyn_interfacedescription, secPolicy Alljoyn_interfacedescription_securitypolicy) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_createinterface_secure.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(iface)), uintptr(secPolicy))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_createinterfacesfromxml calls MSAJApi!alljoyn_busattachment_createinterfacesfromxml.
+// Alljoyn_busattachment_createinterfacesfromxml calls MSAJApi!alljoyn_busattachment_createinterfacesfromxml.
 func Alljoyn_busattachment_createinterfacesfromxml(bus Alljoyn_busattachment, xml foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_createinterfacesfromxml.Addr(), uintptr(bus), uintptr(unsafe.Pointer(xml)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_deletedefaultkeystore calls MSAJApi!alljoyn_busattachment_deletedefaultkeystore.
+// Alljoyn_busattachment_deletedefaultkeystore calls MSAJApi!alljoyn_busattachment_deletedefaultkeystore.
 func Alljoyn_busattachment_deletedefaultkeystore(applicationName foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_deletedefaultkeystore.Addr(), uintptr(unsafe.Pointer(applicationName)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_deleteinterface calls MSAJApi!alljoyn_busattachment_deleteinterface.
+// Alljoyn_busattachment_deleteinterface calls MSAJApi!alljoyn_busattachment_deleteinterface.
 func Alljoyn_busattachment_deleteinterface(bus Alljoyn_busattachment, iface Alljoyn_interfacedescription) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_deleteinterface.Addr(), uintptr(bus), uintptr(iface))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_destroy calls MSAJApi!alljoyn_busattachment_destroy.
+// Alljoyn_busattachment_destroy calls MSAJApi!alljoyn_busattachment_destroy.
 func Alljoyn_busattachment_destroy(bus Alljoyn_busattachment) {
 	syscall.SyscallN(procAlljoyn_busattachment_destroy.Addr(), uintptr(bus))
 }
 
-// alljoyn_busattachment_disconnect calls MSAJApi!alljoyn_busattachment_disconnect.
+// Alljoyn_busattachment_disconnect calls MSAJApi!alljoyn_busattachment_disconnect.
 func Alljoyn_busattachment_disconnect(bus Alljoyn_busattachment, unused foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_disconnect.Addr(), uintptr(bus), uintptr(unsafe.Pointer(unused)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_enableconcurrentcallbacks calls MSAJApi!alljoyn_busattachment_enableconcurrentcallbacks.
+// Alljoyn_busattachment_enableconcurrentcallbacks calls MSAJApi!alljoyn_busattachment_enableconcurrentcallbacks.
 func Alljoyn_busattachment_enableconcurrentcallbacks(bus Alljoyn_busattachment) {
 	syscall.SyscallN(procAlljoyn_busattachment_enableconcurrentcallbacks.Addr(), uintptr(bus))
 }
 
-// alljoyn_busattachment_enablepeersecurity calls MSAJApi!alljoyn_busattachment_enablepeersecurity.
+// Alljoyn_busattachment_enablepeersecurity calls MSAJApi!alljoyn_busattachment_enablepeersecurity.
 func Alljoyn_busattachment_enablepeersecurity(bus Alljoyn_busattachment, authMechanisms foundation.PSTR, listener Alljoyn_authlistener, keyStoreFileName foundation.PSTR, isShared int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_enablepeersecurity.Addr(), uintptr(bus), uintptr(unsafe.Pointer(authMechanisms)), uintptr(listener), uintptr(unsafe.Pointer(keyStoreFileName)), uintptr(isShared))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener calls MSAJApi!alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener.
+// Alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener calls MSAJApi!alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener.
 func Alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener(bus Alljoyn_busattachment, authMechanisms foundation.PSTR, authListener Alljoyn_authlistener, keyStoreFileName foundation.PSTR, isShared int32, permissionConfigurationListener Alljoyn_permissionconfigurationlistener) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener.Addr(), uintptr(bus), uintptr(unsafe.Pointer(authMechanisms)), uintptr(authListener), uintptr(unsafe.Pointer(keyStoreFileName)), uintptr(isShared), uintptr(permissionConfigurationListener))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_findadvertisedname calls MSAJApi!alljoyn_busattachment_findadvertisedname.
+// Alljoyn_busattachment_findadvertisedname calls MSAJApi!alljoyn_busattachment_findadvertisedname.
 func Alljoyn_busattachment_findadvertisedname(bus Alljoyn_busattachment, namePrefix foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_findadvertisedname.Addr(), uintptr(bus), uintptr(unsafe.Pointer(namePrefix)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_findadvertisednamebytransport calls MSAJApi!alljoyn_busattachment_findadvertisednamebytransport.
+// Alljoyn_busattachment_findadvertisednamebytransport calls MSAJApi!alljoyn_busattachment_findadvertisednamebytransport.
 func Alljoyn_busattachment_findadvertisednamebytransport(bus Alljoyn_busattachment, namePrefix foundation.PSTR, transports uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_findadvertisednamebytransport.Addr(), uintptr(bus), uintptr(unsafe.Pointer(namePrefix)), uintptr(transports))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_getalljoyndebugobj calls MSAJApi!alljoyn_busattachment_getalljoyndebugobj.
+// Alljoyn_busattachment_getalljoyndebugobj calls MSAJApi!alljoyn_busattachment_getalljoyndebugobj.
 func Alljoyn_busattachment_getalljoyndebugobj(bus Alljoyn_busattachment) Alljoyn_proxybusobject {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getalljoyndebugobj.Addr(), uintptr(bus))
 	return Alljoyn_proxybusobject(r1)
 }
 
-// alljoyn_busattachment_getalljoynproxyobj calls MSAJApi!alljoyn_busattachment_getalljoynproxyobj.
+// Alljoyn_busattachment_getalljoynproxyobj calls MSAJApi!alljoyn_busattachment_getalljoynproxyobj.
 func Alljoyn_busattachment_getalljoynproxyobj(bus Alljoyn_busattachment) Alljoyn_proxybusobject {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getalljoynproxyobj.Addr(), uintptr(bus))
 	return Alljoyn_proxybusobject(r1)
 }
 
-// alljoyn_busattachment_getconcurrency calls MSAJApi!alljoyn_busattachment_getconcurrency.
+// Alljoyn_busattachment_getconcurrency calls MSAJApi!alljoyn_busattachment_getconcurrency.
 func Alljoyn_busattachment_getconcurrency(bus Alljoyn_busattachment) uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getconcurrency.Addr(), uintptr(bus))
 	return uint32(r1)
 }
 
-// alljoyn_busattachment_getconnectspec calls MSAJApi!alljoyn_busattachment_getconnectspec.
+// Alljoyn_busattachment_getconnectspec calls MSAJApi!alljoyn_busattachment_getconnectspec.
 func Alljoyn_busattachment_getconnectspec(bus Alljoyn_busattachment) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getconnectspec.Addr(), uintptr(bus))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_busattachment_getdbusproxyobj calls MSAJApi!alljoyn_busattachment_getdbusproxyobj.
+// Alljoyn_busattachment_getdbusproxyobj calls MSAJApi!alljoyn_busattachment_getdbusproxyobj.
 func Alljoyn_busattachment_getdbusproxyobj(bus Alljoyn_busattachment) Alljoyn_proxybusobject {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getdbusproxyobj.Addr(), uintptr(bus))
 	return Alljoyn_proxybusobject(r1)
 }
 
-// alljoyn_busattachment_getglobalguidstring calls MSAJApi!alljoyn_busattachment_getglobalguidstring.
+// Alljoyn_busattachment_getglobalguidstring calls MSAJApi!alljoyn_busattachment_getglobalguidstring.
 func Alljoyn_busattachment_getglobalguidstring(bus Alljoyn_busattachment) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getglobalguidstring.Addr(), uintptr(bus))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_busattachment_getinterface calls MSAJApi!alljoyn_busattachment_getinterface.
+// Alljoyn_busattachment_getinterface calls MSAJApi!alljoyn_busattachment_getinterface.
 func Alljoyn_busattachment_getinterface(bus Alljoyn_busattachment, name foundation.PSTR) Alljoyn_interfacedescription {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getinterface.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)))
 	return Alljoyn_interfacedescription(r1)
 }
 
-// alljoyn_busattachment_getinterfaces calls MSAJApi!alljoyn_busattachment_getinterfaces.
+// Alljoyn_busattachment_getinterfaces calls MSAJApi!alljoyn_busattachment_getinterfaces.
 func Alljoyn_busattachment_getinterfaces(bus Alljoyn_busattachment, ifaces *Alljoyn_interfacedescription, numIfaces uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getinterfaces.Addr(), uintptr(bus), uintptr(unsafe.Pointer(ifaces)), uintptr(numIfaces))
 	return uintptr(r1)
 }
 
-// alljoyn_busattachment_getkeyexpiration calls MSAJApi!alljoyn_busattachment_getkeyexpiration.
+// Alljoyn_busattachment_getkeyexpiration calls MSAJApi!alljoyn_busattachment_getkeyexpiration.
 func Alljoyn_busattachment_getkeyexpiration(bus Alljoyn_busattachment, guid foundation.PSTR, timeout *uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getkeyexpiration.Addr(), uintptr(bus), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(timeout)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_getpeerguid calls MSAJApi!alljoyn_busattachment_getpeerguid.
+// Alljoyn_busattachment_getpeerguid calls MSAJApi!alljoyn_busattachment_getpeerguid.
 func Alljoyn_busattachment_getpeerguid(bus Alljoyn_busattachment, name foundation.PSTR, guid foundation.PSTR, guidSz *uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getpeerguid.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(guidSz)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_getpermissionconfigurator calls MSAJApi!alljoyn_busattachment_getpermissionconfigurator.
+// Alljoyn_busattachment_getpermissionconfigurator calls MSAJApi!alljoyn_busattachment_getpermissionconfigurator.
 func Alljoyn_busattachment_getpermissionconfigurator(bus Alljoyn_busattachment) Alljoyn_permissionconfigurator {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getpermissionconfigurator.Addr(), uintptr(bus))
 	return Alljoyn_permissionconfigurator(r1)
 }
 
-// alljoyn_busattachment_gettimestamp calls MSAJApi!alljoyn_busattachment_gettimestamp.
+// Alljoyn_busattachment_gettimestamp calls MSAJApi!alljoyn_busattachment_gettimestamp.
 func Alljoyn_busattachment_gettimestamp() uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_gettimestamp.Addr())
 	return uint32(r1)
 }
 
-// alljoyn_busattachment_getuniquename calls MSAJApi!alljoyn_busattachment_getuniquename.
+// Alljoyn_busattachment_getuniquename calls MSAJApi!alljoyn_busattachment_getuniquename.
 func Alljoyn_busattachment_getuniquename(bus Alljoyn_busattachment) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_getuniquename.Addr(), uintptr(bus))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_busattachment_isconnected calls MSAJApi!alljoyn_busattachment_isconnected.
+// Alljoyn_busattachment_isconnected calls MSAJApi!alljoyn_busattachment_isconnected.
 func Alljoyn_busattachment_isconnected(bus Alljoyn_busattachment) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_isconnected.Addr(), uintptr(bus))
 	return int32(r1)
 }
 
-// alljoyn_busattachment_ispeersecurityenabled calls MSAJApi!alljoyn_busattachment_ispeersecurityenabled.
+// Alljoyn_busattachment_ispeersecurityenabled calls MSAJApi!alljoyn_busattachment_ispeersecurityenabled.
 func Alljoyn_busattachment_ispeersecurityenabled(bus Alljoyn_busattachment) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_ispeersecurityenabled.Addr(), uintptr(bus))
 	return int32(r1)
 }
 
-// alljoyn_busattachment_isstarted calls MSAJApi!alljoyn_busattachment_isstarted.
+// Alljoyn_busattachment_isstarted calls MSAJApi!alljoyn_busattachment_isstarted.
 func Alljoyn_busattachment_isstarted(bus Alljoyn_busattachment) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_isstarted.Addr(), uintptr(bus))
 	return int32(r1)
 }
 
-// alljoyn_busattachment_isstopping calls MSAJApi!alljoyn_busattachment_isstopping.
+// Alljoyn_busattachment_isstopping calls MSAJApi!alljoyn_busattachment_isstopping.
 func Alljoyn_busattachment_isstopping(bus Alljoyn_busattachment) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_isstopping.Addr(), uintptr(bus))
 	return int32(r1)
 }
 
-// alljoyn_busattachment_join calls MSAJApi!alljoyn_busattachment_join.
+// Alljoyn_busattachment_join calls MSAJApi!alljoyn_busattachment_join.
 func Alljoyn_busattachment_join(bus Alljoyn_busattachment) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_join.Addr(), uintptr(bus))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_joinsession calls MSAJApi!alljoyn_busattachment_joinsession.
+// Alljoyn_busattachment_joinsession calls MSAJApi!alljoyn_busattachment_joinsession.
 func Alljoyn_busattachment_joinsession(bus Alljoyn_busattachment, sessionHost foundation.PSTR, sessionPort uint16, listener Alljoyn_sessionlistener, sessionId *uint32, opts Alljoyn_sessionopts) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_joinsession.Addr(), uintptr(bus), uintptr(unsafe.Pointer(sessionHost)), uintptr(sessionPort), uintptr(listener), uintptr(unsafe.Pointer(sessionId)), uintptr(opts))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_joinsessionasync calls MSAJApi!alljoyn_busattachment_joinsessionasync.
+// Alljoyn_busattachment_joinsessionasync calls MSAJApi!alljoyn_busattachment_joinsessionasync.
 func Alljoyn_busattachment_joinsessionasync(bus Alljoyn_busattachment, sessionHost foundation.PSTR, sessionPort uint16, listener Alljoyn_sessionlistener, opts Alljoyn_sessionopts, callback Alljoyn_busattachment_joinsessioncb_ptr, context unsafe.Pointer) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_joinsessionasync.Addr(), uintptr(bus), uintptr(unsafe.Pointer(sessionHost)), uintptr(sessionPort), uintptr(listener), uintptr(opts), uintptr(callback), uintptr(unsafe.Pointer(context)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_leavesession calls MSAJApi!alljoyn_busattachment_leavesession.
+// Alljoyn_busattachment_leavesession calls MSAJApi!alljoyn_busattachment_leavesession.
 func Alljoyn_busattachment_leavesession(bus Alljoyn_busattachment, sessionId uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_leavesession.Addr(), uintptr(bus), uintptr(sessionId))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_namehasowner calls MSAJApi!alljoyn_busattachment_namehasowner.
+// Alljoyn_busattachment_namehasowner calls MSAJApi!alljoyn_busattachment_namehasowner.
 func Alljoyn_busattachment_namehasowner(bus Alljoyn_busattachment, name foundation.PSTR, hasOwner *int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_namehasowner.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(hasOwner)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_ping calls MSAJApi!alljoyn_busattachment_ping.
+// Alljoyn_busattachment_ping calls MSAJApi!alljoyn_busattachment_ping.
 func Alljoyn_busattachment_ping(bus Alljoyn_busattachment, name foundation.PSTR, timeout uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_ping.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)), uintptr(timeout))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_registeraboutlistener calls MSAJApi!alljoyn_busattachment_registeraboutlistener.
+// Alljoyn_busattachment_registeraboutlistener calls MSAJApi!alljoyn_busattachment_registeraboutlistener.
 func Alljoyn_busattachment_registeraboutlistener(bus Alljoyn_busattachment, aboutListener Alljoyn_aboutlistener) {
 	syscall.SyscallN(procAlljoyn_busattachment_registeraboutlistener.Addr(), uintptr(bus), uintptr(aboutListener))
 }
 
-// alljoyn_busattachment_registerapplicationstatelistener calls MSAJApi!alljoyn_busattachment_registerapplicationstatelistener.
+// Alljoyn_busattachment_registerapplicationstatelistener calls MSAJApi!alljoyn_busattachment_registerapplicationstatelistener.
 func Alljoyn_busattachment_registerapplicationstatelistener(bus Alljoyn_busattachment, listener Alljoyn_applicationstatelistener) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_registerapplicationstatelistener.Addr(), uintptr(bus), uintptr(listener))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_registerbuslistener calls MSAJApi!alljoyn_busattachment_registerbuslistener.
+// Alljoyn_busattachment_registerbuslistener calls MSAJApi!alljoyn_busattachment_registerbuslistener.
 func Alljoyn_busattachment_registerbuslistener(bus Alljoyn_busattachment, listener Alljoyn_buslistener) {
 	syscall.SyscallN(procAlljoyn_busattachment_registerbuslistener.Addr(), uintptr(bus), uintptr(listener))
 }
 
-// alljoyn_busattachment_registerbusobject calls MSAJApi!alljoyn_busattachment_registerbusobject.
+// Alljoyn_busattachment_registerbusobject calls MSAJApi!alljoyn_busattachment_registerbusobject.
 func Alljoyn_busattachment_registerbusobject(bus Alljoyn_busattachment, obj Alljoyn_busobject) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_registerbusobject.Addr(), uintptr(bus), uintptr(obj))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_registerbusobject_secure calls MSAJApi!alljoyn_busattachment_registerbusobject_secure.
+// Alljoyn_busattachment_registerbusobject_secure calls MSAJApi!alljoyn_busattachment_registerbusobject_secure.
 func Alljoyn_busattachment_registerbusobject_secure(bus Alljoyn_busattachment, obj Alljoyn_busobject) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_registerbusobject_secure.Addr(), uintptr(bus), uintptr(obj))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_registerkeystorelistener calls MSAJApi!alljoyn_busattachment_registerkeystorelistener.
+// Alljoyn_busattachment_registerkeystorelistener calls MSAJApi!alljoyn_busattachment_registerkeystorelistener.
 func Alljoyn_busattachment_registerkeystorelistener(bus Alljoyn_busattachment, listener Alljoyn_keystorelistener) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_registerkeystorelistener.Addr(), uintptr(bus), uintptr(listener))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_releasename calls MSAJApi!alljoyn_busattachment_releasename.
+// Alljoyn_busattachment_releasename calls MSAJApi!alljoyn_busattachment_releasename.
 func Alljoyn_busattachment_releasename(bus Alljoyn_busattachment, name foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_releasename.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_reloadkeystore calls MSAJApi!alljoyn_busattachment_reloadkeystore.
+// Alljoyn_busattachment_reloadkeystore calls MSAJApi!alljoyn_busattachment_reloadkeystore.
 func Alljoyn_busattachment_reloadkeystore(bus Alljoyn_busattachment) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_reloadkeystore.Addr(), uintptr(bus))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_removematch calls MSAJApi!alljoyn_busattachment_removematch.
+// Alljoyn_busattachment_removematch calls MSAJApi!alljoyn_busattachment_removematch.
 func Alljoyn_busattachment_removematch(bus Alljoyn_busattachment, rule foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_removematch.Addr(), uintptr(bus), uintptr(unsafe.Pointer(rule)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_removesessionmember calls MSAJApi!alljoyn_busattachment_removesessionmember.
+// Alljoyn_busattachment_removesessionmember calls MSAJApi!alljoyn_busattachment_removesessionmember.
 func Alljoyn_busattachment_removesessionmember(bus Alljoyn_busattachment, sessionId uint32, memberName foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_removesessionmember.Addr(), uintptr(bus), uintptr(sessionId), uintptr(unsafe.Pointer(memberName)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_requestname calls MSAJApi!alljoyn_busattachment_requestname.
+// Alljoyn_busattachment_requestname calls MSAJApi!alljoyn_busattachment_requestname.
 func Alljoyn_busattachment_requestname(bus Alljoyn_busattachment, requestedName foundation.PSTR, flags uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_requestname.Addr(), uintptr(bus), uintptr(unsafe.Pointer(requestedName)), uintptr(flags))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_secureconnection calls MSAJApi!alljoyn_busattachment_secureconnection.
+// Alljoyn_busattachment_secureconnection calls MSAJApi!alljoyn_busattachment_secureconnection.
 func Alljoyn_busattachment_secureconnection(bus Alljoyn_busattachment, name foundation.PSTR, forceAuth int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_secureconnection.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)), uintptr(forceAuth))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_secureconnectionasync calls MSAJApi!alljoyn_busattachment_secureconnectionasync.
+// Alljoyn_busattachment_secureconnectionasync calls MSAJApi!alljoyn_busattachment_secureconnectionasync.
 func Alljoyn_busattachment_secureconnectionasync(bus Alljoyn_busattachment, name foundation.PSTR, forceAuth int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_secureconnectionasync.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)), uintptr(forceAuth))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_setdaemondebug calls MSAJApi!alljoyn_busattachment_setdaemondebug.
+// Alljoyn_busattachment_setdaemondebug calls MSAJApi!alljoyn_busattachment_setdaemondebug.
 func Alljoyn_busattachment_setdaemondebug(bus Alljoyn_busattachment, module foundation.PSTR, level uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_setdaemondebug.Addr(), uintptr(bus), uintptr(unsafe.Pointer(module)), uintptr(level))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_setkeyexpiration calls MSAJApi!alljoyn_busattachment_setkeyexpiration.
+// Alljoyn_busattachment_setkeyexpiration calls MSAJApi!alljoyn_busattachment_setkeyexpiration.
 func Alljoyn_busattachment_setkeyexpiration(bus Alljoyn_busattachment, guid foundation.PSTR, timeout uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_setkeyexpiration.Addr(), uintptr(bus), uintptr(unsafe.Pointer(guid)), uintptr(timeout))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_setlinktimeout calls MSAJApi!alljoyn_busattachment_setlinktimeout.
+// Alljoyn_busattachment_setlinktimeout calls MSAJApi!alljoyn_busattachment_setlinktimeout.
 func Alljoyn_busattachment_setlinktimeout(bus Alljoyn_busattachment, sessionid uint32, linkTimeout *uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_setlinktimeout.Addr(), uintptr(bus), uintptr(sessionid), uintptr(unsafe.Pointer(linkTimeout)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_setlinktimeoutasync calls MSAJApi!alljoyn_busattachment_setlinktimeoutasync.
+// Alljoyn_busattachment_setlinktimeoutasync calls MSAJApi!alljoyn_busattachment_setlinktimeoutasync.
 func Alljoyn_busattachment_setlinktimeoutasync(bus Alljoyn_busattachment, sessionid uint32, linkTimeout uint32, callback Alljoyn_busattachment_setlinktimeoutcb_ptr, context unsafe.Pointer) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_setlinktimeoutasync.Addr(), uintptr(bus), uintptr(sessionid), uintptr(linkTimeout), uintptr(callback), uintptr(unsafe.Pointer(context)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_setsessionlistener calls MSAJApi!alljoyn_busattachment_setsessionlistener.
+// Alljoyn_busattachment_setsessionlistener calls MSAJApi!alljoyn_busattachment_setsessionlistener.
 func Alljoyn_busattachment_setsessionlistener(bus Alljoyn_busattachment, sessionId uint32, listener Alljoyn_sessionlistener) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_setsessionlistener.Addr(), uintptr(bus), uintptr(sessionId), uintptr(listener))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_start calls MSAJApi!alljoyn_busattachment_start.
+// Alljoyn_busattachment_start calls MSAJApi!alljoyn_busattachment_start.
 func Alljoyn_busattachment_start(bus Alljoyn_busattachment) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_start.Addr(), uintptr(bus))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_stop calls MSAJApi!alljoyn_busattachment_stop.
+// Alljoyn_busattachment_stop calls MSAJApi!alljoyn_busattachment_stop.
 func Alljoyn_busattachment_stop(bus Alljoyn_busattachment) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_stop.Addr(), uintptr(bus))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_unbindsessionport calls MSAJApi!alljoyn_busattachment_unbindsessionport.
+// Alljoyn_busattachment_unbindsessionport calls MSAJApi!alljoyn_busattachment_unbindsessionport.
 func Alljoyn_busattachment_unbindsessionport(bus Alljoyn_busattachment, sessionPort uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_unbindsessionport.Addr(), uintptr(bus), uintptr(sessionPort))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_unregisteraboutlistener calls MSAJApi!alljoyn_busattachment_unregisteraboutlistener.
+// Alljoyn_busattachment_unregisteraboutlistener calls MSAJApi!alljoyn_busattachment_unregisteraboutlistener.
 func Alljoyn_busattachment_unregisteraboutlistener(bus Alljoyn_busattachment, aboutListener Alljoyn_aboutlistener) {
 	syscall.SyscallN(procAlljoyn_busattachment_unregisteraboutlistener.Addr(), uintptr(bus), uintptr(aboutListener))
 }
 
-// alljoyn_busattachment_unregisterallaboutlisteners calls MSAJApi!alljoyn_busattachment_unregisterallaboutlisteners.
+// Alljoyn_busattachment_unregisterallaboutlisteners calls MSAJApi!alljoyn_busattachment_unregisterallaboutlisteners.
 func Alljoyn_busattachment_unregisterallaboutlisteners(bus Alljoyn_busattachment) {
 	syscall.SyscallN(procAlljoyn_busattachment_unregisterallaboutlisteners.Addr(), uintptr(bus))
 }
 
-// alljoyn_busattachment_unregisterallhandlers calls MSAJApi!alljoyn_busattachment_unregisterallhandlers.
+// Alljoyn_busattachment_unregisterallhandlers calls MSAJApi!alljoyn_busattachment_unregisterallhandlers.
 func Alljoyn_busattachment_unregisterallhandlers(bus Alljoyn_busattachment) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_unregisterallhandlers.Addr(), uintptr(bus))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_unregisterapplicationstatelistener calls MSAJApi!alljoyn_busattachment_unregisterapplicationstatelistener.
+// Alljoyn_busattachment_unregisterapplicationstatelistener calls MSAJApi!alljoyn_busattachment_unregisterapplicationstatelistener.
 func Alljoyn_busattachment_unregisterapplicationstatelistener(bus Alljoyn_busattachment, listener Alljoyn_applicationstatelistener) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_unregisterapplicationstatelistener.Addr(), uintptr(bus), uintptr(listener))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_unregisterbuslistener calls MSAJApi!alljoyn_busattachment_unregisterbuslistener.
+// Alljoyn_busattachment_unregisterbuslistener calls MSAJApi!alljoyn_busattachment_unregisterbuslistener.
 func Alljoyn_busattachment_unregisterbuslistener(bus Alljoyn_busattachment, listener Alljoyn_buslistener) {
 	syscall.SyscallN(procAlljoyn_busattachment_unregisterbuslistener.Addr(), uintptr(bus), uintptr(listener))
 }
 
-// alljoyn_busattachment_unregisterbusobject calls MSAJApi!alljoyn_busattachment_unregisterbusobject.
+// Alljoyn_busattachment_unregisterbusobject calls MSAJApi!alljoyn_busattachment_unregisterbusobject.
 func Alljoyn_busattachment_unregisterbusobject(bus Alljoyn_busattachment, object Alljoyn_busobject) {
 	syscall.SyscallN(procAlljoyn_busattachment_unregisterbusobject.Addr(), uintptr(bus), uintptr(object))
 }
 
-// alljoyn_busattachment_whoimplements_interface calls MSAJApi!alljoyn_busattachment_whoimplements_interface.
+// Alljoyn_busattachment_whoimplements_interface calls MSAJApi!alljoyn_busattachment_whoimplements_interface.
 func Alljoyn_busattachment_whoimplements_interface(bus Alljoyn_busattachment, implementsInterface foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_whoimplements_interface.Addr(), uintptr(bus), uintptr(unsafe.Pointer(implementsInterface)))
 	return QStatus(r1)
 }
 
-// alljoyn_busattachment_whoimplements_interfaces calls MSAJApi!alljoyn_busattachment_whoimplements_interfaces.
+// Alljoyn_busattachment_whoimplements_interfaces calls MSAJApi!alljoyn_busattachment_whoimplements_interfaces.
 func Alljoyn_busattachment_whoimplements_interfaces(bus Alljoyn_busattachment, implementsInterfaces **int8, numberInterfaces uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_whoimplements_interfaces.Addr(), uintptr(bus), uintptr(unsafe.Pointer(implementsInterfaces)), uintptr(numberInterfaces))
 	return QStatus(r1)
 }
 
-// alljoyn_buslistener_create calls MSAJApi!alljoyn_buslistener_create.
+// Alljoyn_buslistener_create calls MSAJApi!alljoyn_buslistener_create.
 func Alljoyn_buslistener_create(callbacks *Alljoyn_buslistener_callbacks, context unsafe.Pointer) Alljoyn_buslistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_buslistener_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_buslistener(r1)
 }
 
-// alljoyn_buslistener_destroy calls MSAJApi!alljoyn_buslistener_destroy.
+// Alljoyn_buslistener_destroy calls MSAJApi!alljoyn_buslistener_destroy.
 func Alljoyn_buslistener_destroy(listener Alljoyn_buslistener) {
 	syscall.SyscallN(procAlljoyn_buslistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_busobject_addinterface calls MSAJApi!alljoyn_busobject_addinterface.
+// Alljoyn_busobject_addinterface calls MSAJApi!alljoyn_busobject_addinterface.
 func Alljoyn_busobject_addinterface(bus Alljoyn_busobject, iface Alljoyn_interfacedescription) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_addinterface.Addr(), uintptr(bus), uintptr(iface))
 	return QStatus(r1)
 }
 
-// alljoyn_busobject_addinterface_announced calls MSAJApi!alljoyn_busobject_addinterface_announced.
+// Alljoyn_busobject_addinterface_announced calls MSAJApi!alljoyn_busobject_addinterface_announced.
 func Alljoyn_busobject_addinterface_announced(bus Alljoyn_busobject, iface Alljoyn_interfacedescription) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_addinterface_announced.Addr(), uintptr(bus), uintptr(iface))
 	return QStatus(r1)
 }
 
-// alljoyn_busobject_addmethodhandlers calls MSAJApi!alljoyn_busobject_addmethodhandlers.
+// Alljoyn_busobject_addmethodhandlers calls MSAJApi!alljoyn_busobject_addmethodhandlers.
 func Alljoyn_busobject_addmethodhandlers(bus Alljoyn_busobject, entries *Alljoyn_busobject_methodentry, numEntries uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_addmethodhandlers.Addr(), uintptr(bus), uintptr(unsafe.Pointer(entries)), uintptr(numEntries))
 	return QStatus(r1)
 }
 
-// alljoyn_busobject_cancelsessionlessmessage calls MSAJApi!alljoyn_busobject_cancelsessionlessmessage.
+// Alljoyn_busobject_cancelsessionlessmessage calls MSAJApi!alljoyn_busobject_cancelsessionlessmessage.
 func Alljoyn_busobject_cancelsessionlessmessage(bus Alljoyn_busobject, msg Alljoyn_message) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_cancelsessionlessmessage.Addr(), uintptr(bus), uintptr(msg))
 	return QStatus(r1)
 }
 
-// alljoyn_busobject_cancelsessionlessmessage_serial calls MSAJApi!alljoyn_busobject_cancelsessionlessmessage_serial.
+// Alljoyn_busobject_cancelsessionlessmessage_serial calls MSAJApi!alljoyn_busobject_cancelsessionlessmessage_serial.
 func Alljoyn_busobject_cancelsessionlessmessage_serial(bus Alljoyn_busobject, serialNumber uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_cancelsessionlessmessage_serial.Addr(), uintptr(bus), uintptr(serialNumber))
 	return QStatus(r1)
 }
 
-// alljoyn_busobject_create calls MSAJApi!alljoyn_busobject_create.
+// Alljoyn_busobject_create calls MSAJApi!alljoyn_busobject_create.
 func Alljoyn_busobject_create(path foundation.PSTR, isPlaceholder int32, callbacks_in *Alljoyn_busobject_callbacks, context_in unsafe.Pointer) Alljoyn_busobject {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_create.Addr(), uintptr(unsafe.Pointer(path)), uintptr(isPlaceholder), uintptr(unsafe.Pointer(callbacks_in)), uintptr(unsafe.Pointer(context_in)))
 	return Alljoyn_busobject(r1)
 }
 
-// alljoyn_busobject_destroy calls MSAJApi!alljoyn_busobject_destroy.
+// Alljoyn_busobject_destroy calls MSAJApi!alljoyn_busobject_destroy.
 func Alljoyn_busobject_destroy(bus Alljoyn_busobject) {
 	syscall.SyscallN(procAlljoyn_busobject_destroy.Addr(), uintptr(bus))
 }
 
-// alljoyn_busobject_emitpropertieschanged calls MSAJApi!alljoyn_busobject_emitpropertieschanged.
+// Alljoyn_busobject_emitpropertieschanged calls MSAJApi!alljoyn_busobject_emitpropertieschanged.
 func Alljoyn_busobject_emitpropertieschanged(bus Alljoyn_busobject, ifcName foundation.PSTR, propNames **int8, numProps uintptr, id uint32) {
 	syscall.SyscallN(procAlljoyn_busobject_emitpropertieschanged.Addr(), uintptr(bus), uintptr(unsafe.Pointer(ifcName)), uintptr(unsafe.Pointer(propNames)), uintptr(numProps), uintptr(id))
 }
 
-// alljoyn_busobject_emitpropertychanged calls MSAJApi!alljoyn_busobject_emitpropertychanged.
+// Alljoyn_busobject_emitpropertychanged calls MSAJApi!alljoyn_busobject_emitpropertychanged.
 func Alljoyn_busobject_emitpropertychanged(bus Alljoyn_busobject, ifcName foundation.PSTR, propName foundation.PSTR, val Alljoyn_msgarg, id uint32) {
 	syscall.SyscallN(procAlljoyn_busobject_emitpropertychanged.Addr(), uintptr(bus), uintptr(unsafe.Pointer(ifcName)), uintptr(unsafe.Pointer(propName)), uintptr(val), uintptr(id))
 }
 
-// alljoyn_busobject_getannouncedinterfacenames calls MSAJApi!alljoyn_busobject_getannouncedinterfacenames.
+// Alljoyn_busobject_getannouncedinterfacenames calls MSAJApi!alljoyn_busobject_getannouncedinterfacenames.
 func Alljoyn_busobject_getannouncedinterfacenames(bus Alljoyn_busobject, interfaces **int8, numInterfaces uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_getannouncedinterfacenames.Addr(), uintptr(bus), uintptr(unsafe.Pointer(interfaces)), uintptr(numInterfaces))
 	return uintptr(r1)
 }
 
-// alljoyn_busobject_getbusattachment calls MSAJApi!alljoyn_busobject_getbusattachment.
+// Alljoyn_busobject_getbusattachment calls MSAJApi!alljoyn_busobject_getbusattachment.
 func Alljoyn_busobject_getbusattachment(bus Alljoyn_busobject) Alljoyn_busattachment {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_getbusattachment.Addr(), uintptr(bus))
 	return Alljoyn_busattachment(r1)
 }
 
-// alljoyn_busobject_getname calls MSAJApi!alljoyn_busobject_getname.
+// Alljoyn_busobject_getname calls MSAJApi!alljoyn_busobject_getname.
 func Alljoyn_busobject_getname(bus Alljoyn_busobject, buffer foundation.PSTR, bufferSz uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_getname.Addr(), uintptr(bus), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSz))
 	return uintptr(r1)
 }
 
-// alljoyn_busobject_getpath calls MSAJApi!alljoyn_busobject_getpath.
+// Alljoyn_busobject_getpath calls MSAJApi!alljoyn_busobject_getpath.
 func Alljoyn_busobject_getpath(bus Alljoyn_busobject) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_getpath.Addr(), uintptr(bus))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_busobject_issecure calls MSAJApi!alljoyn_busobject_issecure.
+// Alljoyn_busobject_issecure calls MSAJApi!alljoyn_busobject_issecure.
 func Alljoyn_busobject_issecure(bus Alljoyn_busobject) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_issecure.Addr(), uintptr(bus))
 	return int32(r1)
 }
 
-// alljoyn_busobject_methodreply_args calls MSAJApi!alljoyn_busobject_methodreply_args.
+// Alljoyn_busobject_methodreply_args calls MSAJApi!alljoyn_busobject_methodreply_args.
 func Alljoyn_busobject_methodreply_args(bus Alljoyn_busobject, msg Alljoyn_message, args Alljoyn_msgarg, numArgs uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_methodreply_args.Addr(), uintptr(bus), uintptr(msg), uintptr(args), uintptr(numArgs))
 	return QStatus(r1)
 }
 
-// alljoyn_busobject_methodreply_err calls MSAJApi!alljoyn_busobject_methodreply_err.
+// Alljoyn_busobject_methodreply_err calls MSAJApi!alljoyn_busobject_methodreply_err.
 func Alljoyn_busobject_methodreply_err(bus Alljoyn_busobject, msg Alljoyn_message, error_ foundation.PSTR, errorMessage foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_methodreply_err.Addr(), uintptr(bus), uintptr(msg), uintptr(unsafe.Pointer(error_)), uintptr(unsafe.Pointer(errorMessage)))
 	return QStatus(r1)
 }
 
-// alljoyn_busobject_methodreply_status calls MSAJApi!alljoyn_busobject_methodreply_status.
+// Alljoyn_busobject_methodreply_status calls MSAJApi!alljoyn_busobject_methodreply_status.
 func Alljoyn_busobject_methodreply_status(bus Alljoyn_busobject, msg Alljoyn_message, status QStatus) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_methodreply_status.Addr(), uintptr(bus), uintptr(msg), uintptr(status))
 	return QStatus(r1)
 }
 
-// alljoyn_busobject_setannounceflag calls MSAJApi!alljoyn_busobject_setannounceflag.
+// Alljoyn_busobject_setannounceflag calls MSAJApi!alljoyn_busobject_setannounceflag.
 func Alljoyn_busobject_setannounceflag(bus Alljoyn_busobject, iface Alljoyn_interfacedescription, isAnnounced Alljoyn_about_announceflag) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_setannounceflag.Addr(), uintptr(bus), uintptr(iface), uintptr(isAnnounced))
 	return QStatus(r1)
 }
 
-// alljoyn_credentials_clear calls MSAJApi!alljoyn_credentials_clear.
+// Alljoyn_credentials_clear calls MSAJApi!alljoyn_credentials_clear.
 func Alljoyn_credentials_clear(cred Alljoyn_credentials) {
 	syscall.SyscallN(procAlljoyn_credentials_clear.Addr(), uintptr(cred))
 }
 
-// alljoyn_credentials_create calls MSAJApi!alljoyn_credentials_create.
+// Alljoyn_credentials_create calls MSAJApi!alljoyn_credentials_create.
 func Alljoyn_credentials_create() Alljoyn_credentials {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_credentials_create.Addr())
 	return Alljoyn_credentials(r1)
 }
 
-// alljoyn_credentials_destroy calls MSAJApi!alljoyn_credentials_destroy.
+// Alljoyn_credentials_destroy calls MSAJApi!alljoyn_credentials_destroy.
 func Alljoyn_credentials_destroy(cred Alljoyn_credentials) {
 	syscall.SyscallN(procAlljoyn_credentials_destroy.Addr(), uintptr(cred))
 }
 
-// alljoyn_credentials_getcertchain calls MSAJApi!alljoyn_credentials_getcertchain.
+// Alljoyn_credentials_getcertchain calls MSAJApi!alljoyn_credentials_getcertchain.
 func Alljoyn_credentials_getcertchain(cred Alljoyn_credentials) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_credentials_getcertchain.Addr(), uintptr(cred))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_credentials_getexpiration calls MSAJApi!alljoyn_credentials_getexpiration.
+// Alljoyn_credentials_getexpiration calls MSAJApi!alljoyn_credentials_getexpiration.
 func Alljoyn_credentials_getexpiration(cred Alljoyn_credentials) uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_credentials_getexpiration.Addr(), uintptr(cred))
 	return uint32(r1)
 }
 
-// alljoyn_credentials_getlogonentry calls MSAJApi!alljoyn_credentials_getlogonentry.
+// Alljoyn_credentials_getlogonentry calls MSAJApi!alljoyn_credentials_getlogonentry.
 func Alljoyn_credentials_getlogonentry(cred Alljoyn_credentials) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_credentials_getlogonentry.Addr(), uintptr(cred))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_credentials_getpassword calls MSAJApi!alljoyn_credentials_getpassword.
+// Alljoyn_credentials_getpassword calls MSAJApi!alljoyn_credentials_getpassword.
 func Alljoyn_credentials_getpassword(cred Alljoyn_credentials) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_credentials_getpassword.Addr(), uintptr(cred))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_credentials_getprivateKey calls MSAJApi!alljoyn_credentials_getprivateKey.
+// Alljoyn_credentials_getprivateKey calls MSAJApi!alljoyn_credentials_getprivateKey.
 func Alljoyn_credentials_getprivateKey(cred Alljoyn_credentials) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_credentials_getprivateKey.Addr(), uintptr(cred))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_credentials_getusername calls MSAJApi!alljoyn_credentials_getusername.
+// Alljoyn_credentials_getusername calls MSAJApi!alljoyn_credentials_getusername.
 func Alljoyn_credentials_getusername(cred Alljoyn_credentials) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_credentials_getusername.Addr(), uintptr(cred))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_credentials_isset calls MSAJApi!alljoyn_credentials_isset.
+// Alljoyn_credentials_isset calls MSAJApi!alljoyn_credentials_isset.
 func Alljoyn_credentials_isset(cred Alljoyn_credentials, creds uint16) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_credentials_isset.Addr(), uintptr(cred), uintptr(creds))
 	return int32(r1)
 }
 
-// alljoyn_credentials_setcertchain calls MSAJApi!alljoyn_credentials_setcertchain.
+// Alljoyn_credentials_setcertchain calls MSAJApi!alljoyn_credentials_setcertchain.
 func Alljoyn_credentials_setcertchain(cred Alljoyn_credentials, certChain foundation.PSTR) {
 	syscall.SyscallN(procAlljoyn_credentials_setcertchain.Addr(), uintptr(cred), uintptr(unsafe.Pointer(certChain)))
 }
 
-// alljoyn_credentials_setexpiration calls MSAJApi!alljoyn_credentials_setexpiration.
+// Alljoyn_credentials_setexpiration calls MSAJApi!alljoyn_credentials_setexpiration.
 func Alljoyn_credentials_setexpiration(cred Alljoyn_credentials, expiration uint32) {
 	syscall.SyscallN(procAlljoyn_credentials_setexpiration.Addr(), uintptr(cred), uintptr(expiration))
 }
 
-// alljoyn_credentials_setlogonentry calls MSAJApi!alljoyn_credentials_setlogonentry.
+// Alljoyn_credentials_setlogonentry calls MSAJApi!alljoyn_credentials_setlogonentry.
 func Alljoyn_credentials_setlogonentry(cred Alljoyn_credentials, logonEntry foundation.PSTR) {
 	syscall.SyscallN(procAlljoyn_credentials_setlogonentry.Addr(), uintptr(cred), uintptr(unsafe.Pointer(logonEntry)))
 }
 
-// alljoyn_credentials_setpassword calls MSAJApi!alljoyn_credentials_setpassword.
+// Alljoyn_credentials_setpassword calls MSAJApi!alljoyn_credentials_setpassword.
 func Alljoyn_credentials_setpassword(cred Alljoyn_credentials, pwd foundation.PSTR) {
 	syscall.SyscallN(procAlljoyn_credentials_setpassword.Addr(), uintptr(cred), uintptr(unsafe.Pointer(pwd)))
 }
 
-// alljoyn_credentials_setprivatekey calls MSAJApi!alljoyn_credentials_setprivatekey.
+// Alljoyn_credentials_setprivatekey calls MSAJApi!alljoyn_credentials_setprivatekey.
 func Alljoyn_credentials_setprivatekey(cred Alljoyn_credentials, pk foundation.PSTR) {
 	syscall.SyscallN(procAlljoyn_credentials_setprivatekey.Addr(), uintptr(cred), uintptr(unsafe.Pointer(pk)))
 }
 
-// alljoyn_credentials_setusername calls MSAJApi!alljoyn_credentials_setusername.
+// Alljoyn_credentials_setusername calls MSAJApi!alljoyn_credentials_setusername.
 func Alljoyn_credentials_setusername(cred Alljoyn_credentials, userName foundation.PSTR) {
 	syscall.SyscallN(procAlljoyn_credentials_setusername.Addr(), uintptr(cred), uintptr(unsafe.Pointer(userName)))
 }
 
-// alljoyn_getbuildinfo calls MSAJApi!alljoyn_getbuildinfo.
+// Alljoyn_getbuildinfo calls MSAJApi!alljoyn_getbuildinfo.
 func Alljoyn_getbuildinfo() foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_getbuildinfo.Addr())
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_getnumericversion calls MSAJApi!alljoyn_getnumericversion.
+// Alljoyn_getnumericversion calls MSAJApi!alljoyn_getnumericversion.
 func Alljoyn_getnumericversion() uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_getnumericversion.Addr())
 	return uint32(r1)
 }
 
-// alljoyn_getversion calls MSAJApi!alljoyn_getversion.
+// Alljoyn_getversion calls MSAJApi!alljoyn_getversion.
 func Alljoyn_getversion() foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_getversion.Addr())
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_init calls MSAJApi!alljoyn_init.
+// Alljoyn_init calls MSAJApi!alljoyn_init.
 func Alljoyn_init() QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_init.Addr())
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_activate calls MSAJApi!alljoyn_interfacedescription_activate.
+// Alljoyn_interfacedescription_activate calls MSAJApi!alljoyn_interfacedescription_activate.
 func Alljoyn_interfacedescription_activate(iface Alljoyn_interfacedescription) {
 	syscall.SyscallN(procAlljoyn_interfacedescription_activate.Addr(), uintptr(iface))
 }
 
-// alljoyn_interfacedescription_addannotation calls MSAJApi!alljoyn_interfacedescription_addannotation.
+// Alljoyn_interfacedescription_addannotation calls MSAJApi!alljoyn_interfacedescription_addannotation.
 func Alljoyn_interfacedescription_addannotation(iface Alljoyn_interfacedescription, name foundation.PSTR, value foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_addannotation.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_addargannotation calls MSAJApi!alljoyn_interfacedescription_addargannotation.
+// Alljoyn_interfacedescription_addargannotation calls MSAJApi!alljoyn_interfacedescription_addargannotation.
 func Alljoyn_interfacedescription_addargannotation(iface Alljoyn_interfacedescription, member foundation.PSTR, argName foundation.PSTR, name foundation.PSTR, value foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_addargannotation.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(argName)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_addmember calls MSAJApi!alljoyn_interfacedescription_addmember.
+// Alljoyn_interfacedescription_addmember calls MSAJApi!alljoyn_interfacedescription_addmember.
 func Alljoyn_interfacedescription_addmember(iface Alljoyn_interfacedescription, type_ Alljoyn_messagetype, name foundation.PSTR, inputSig foundation.PSTR, outSig foundation.PSTR, argNames foundation.PSTR, annotation byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_addmember.Addr(), uintptr(iface), uintptr(type_), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(inputSig)), uintptr(unsafe.Pointer(outSig)), uintptr(unsafe.Pointer(argNames)), uintptr(annotation))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_addmemberannotation calls MSAJApi!alljoyn_interfacedescription_addmemberannotation.
+// Alljoyn_interfacedescription_addmemberannotation calls MSAJApi!alljoyn_interfacedescription_addmemberannotation.
 func Alljoyn_interfacedescription_addmemberannotation(iface Alljoyn_interfacedescription, member foundation.PSTR, name foundation.PSTR, value foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_addmemberannotation.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_addmethod calls MSAJApi!alljoyn_interfacedescription_addmethod.
+// Alljoyn_interfacedescription_addmethod calls MSAJApi!alljoyn_interfacedescription_addmethod.
 func Alljoyn_interfacedescription_addmethod(iface Alljoyn_interfacedescription, name foundation.PSTR, inputSig foundation.PSTR, outSig foundation.PSTR, argNames foundation.PSTR, annotation byte, accessPerms foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_addmethod.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(inputSig)), uintptr(unsafe.Pointer(outSig)), uintptr(unsafe.Pointer(argNames)), uintptr(annotation), uintptr(unsafe.Pointer(accessPerms)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_addproperty calls MSAJApi!alljoyn_interfacedescription_addproperty.
+// Alljoyn_interfacedescription_addproperty calls MSAJApi!alljoyn_interfacedescription_addproperty.
 func Alljoyn_interfacedescription_addproperty(iface Alljoyn_interfacedescription, name foundation.PSTR, signature foundation.PSTR, access byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_addproperty.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(signature)), uintptr(access))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_addpropertyannotation calls MSAJApi!alljoyn_interfacedescription_addpropertyannotation.
+// Alljoyn_interfacedescription_addpropertyannotation calls MSAJApi!alljoyn_interfacedescription_addpropertyannotation.
 func Alljoyn_interfacedescription_addpropertyannotation(iface Alljoyn_interfacedescription, property foundation.PSTR, name foundation.PSTR, value foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_addpropertyannotation.Addr(), uintptr(iface), uintptr(unsafe.Pointer(property)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_addsignal calls MSAJApi!alljoyn_interfacedescription_addsignal.
+// Alljoyn_interfacedescription_addsignal calls MSAJApi!alljoyn_interfacedescription_addsignal.
 func Alljoyn_interfacedescription_addsignal(iface Alljoyn_interfacedescription, name foundation.PSTR, sig foundation.PSTR, argNames foundation.PSTR, annotation byte, accessPerms foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_addsignal.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(sig)), uintptr(unsafe.Pointer(argNames)), uintptr(annotation), uintptr(unsafe.Pointer(accessPerms)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_eql calls MSAJApi!alljoyn_interfacedescription_eql.
+// Alljoyn_interfacedescription_eql calls MSAJApi!alljoyn_interfacedescription_eql.
 func Alljoyn_interfacedescription_eql(one Alljoyn_interfacedescription, other Alljoyn_interfacedescription) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_eql.Addr(), uintptr(one), uintptr(other))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_getannotation calls MSAJApi!alljoyn_interfacedescription_getannotation.
+// Alljoyn_interfacedescription_getannotation calls MSAJApi!alljoyn_interfacedescription_getannotation.
 func Alljoyn_interfacedescription_getannotation(iface Alljoyn_interfacedescription, name foundation.PSTR, value foundation.PSTR, value_size *uintptr) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getannotation.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_getannotationatindex calls MSAJApi!alljoyn_interfacedescription_getannotationatindex.
+// Alljoyn_interfacedescription_getannotationatindex calls MSAJApi!alljoyn_interfacedescription_getannotationatindex.
 func Alljoyn_interfacedescription_getannotationatindex(iface Alljoyn_interfacedescription, index uintptr, name foundation.PSTR, name_size *uintptr, value foundation.PSTR, value_size *uintptr) {
 	syscall.SyscallN(procAlljoyn_interfacedescription_getannotationatindex.Addr(), uintptr(iface), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(name_size)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size)))
 }
 
-// alljoyn_interfacedescription_getannotationscount calls MSAJApi!alljoyn_interfacedescription_getannotationscount.
+// Alljoyn_interfacedescription_getannotationscount calls MSAJApi!alljoyn_interfacedescription_getannotationscount.
 func Alljoyn_interfacedescription_getannotationscount(iface Alljoyn_interfacedescription) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getannotationscount.Addr(), uintptr(iface))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_getargdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_getargdescriptionforlanguage.
+// Alljoyn_interfacedescription_getargdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_getargdescriptionforlanguage.
 func Alljoyn_interfacedescription_getargdescriptionforlanguage(iface Alljoyn_interfacedescription, member foundation.PSTR, arg foundation.PSTR, description foundation.PSTR, maxLanguageLength uintptr, languageTag foundation.PSTR) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getargdescriptionforlanguage.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(arg)), uintptr(unsafe.Pointer(description)), uintptr(maxLanguageLength), uintptr(unsafe.Pointer(languageTag)))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_getdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_getdescriptionforlanguage.
+// Alljoyn_interfacedescription_getdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_getdescriptionforlanguage.
 func Alljoyn_interfacedescription_getdescriptionforlanguage(iface Alljoyn_interfacedescription, description foundation.PSTR, maxLanguageLength uintptr, languageTag foundation.PSTR) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getdescriptionforlanguage.Addr(), uintptr(iface), uintptr(unsafe.Pointer(description)), uintptr(maxLanguageLength), uintptr(unsafe.Pointer(languageTag)))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_getdescriptionlanguages calls MSAJApi!alljoyn_interfacedescription_getdescriptionlanguages.
+// Alljoyn_interfacedescription_getdescriptionlanguages calls MSAJApi!alljoyn_interfacedescription_getdescriptionlanguages.
 func Alljoyn_interfacedescription_getdescriptionlanguages(iface Alljoyn_interfacedescription, languages **int8, size uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getdescriptionlanguages.Addr(), uintptr(iface), uintptr(unsafe.Pointer(languages)), uintptr(size))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_getdescriptionlanguages2 calls MSAJApi!alljoyn_interfacedescription_getdescriptionlanguages2.
+// Alljoyn_interfacedescription_getdescriptionlanguages2 calls MSAJApi!alljoyn_interfacedescription_getdescriptionlanguages2.
 func Alljoyn_interfacedescription_getdescriptionlanguages2(iface Alljoyn_interfacedescription, languages foundation.PSTR, languagesSize uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getdescriptionlanguages2.Addr(), uintptr(iface), uintptr(unsafe.Pointer(languages)), uintptr(languagesSize))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_getdescriptiontranslationcallback calls MSAJApi!alljoyn_interfacedescription_getdescriptiontranslationcallback.
+// Alljoyn_interfacedescription_getdescriptiontranslationcallback calls MSAJApi!alljoyn_interfacedescription_getdescriptiontranslationcallback.
 func Alljoyn_interfacedescription_getdescriptiontranslationcallback(iface Alljoyn_interfacedescription) Alljoyn_interfacedescription_translation_callback_ptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getdescriptiontranslationcallback.Addr(), uintptr(iface))
 	return Alljoyn_interfacedescription_translation_callback_ptr(r1)
 }
 
-// alljoyn_interfacedescription_getmember calls MSAJApi!alljoyn_interfacedescription_getmember.
+// Alljoyn_interfacedescription_getmember calls MSAJApi!alljoyn_interfacedescription_getmember.
 func Alljoyn_interfacedescription_getmember(iface Alljoyn_interfacedescription, name foundation.PSTR, member *Alljoyn_interfacedescription_member) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getmember.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(member)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_getmemberannotation calls MSAJApi!alljoyn_interfacedescription_getmemberannotation.
+// Alljoyn_interfacedescription_getmemberannotation calls MSAJApi!alljoyn_interfacedescription_getmemberannotation.
 func Alljoyn_interfacedescription_getmemberannotation(iface Alljoyn_interfacedescription, member foundation.PSTR, name foundation.PSTR, value foundation.PSTR, value_size *uintptr) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getmemberannotation.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_getmemberargannotation calls MSAJApi!alljoyn_interfacedescription_getmemberargannotation.
+// Alljoyn_interfacedescription_getmemberargannotation calls MSAJApi!alljoyn_interfacedescription_getmemberargannotation.
 func Alljoyn_interfacedescription_getmemberargannotation(iface Alljoyn_interfacedescription, member foundation.PSTR, argName foundation.PSTR, name foundation.PSTR, value foundation.PSTR, value_size *uintptr) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getmemberargannotation.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(argName)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_getmemberdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_getmemberdescriptionforlanguage.
+// Alljoyn_interfacedescription_getmemberdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_getmemberdescriptionforlanguage.
 func Alljoyn_interfacedescription_getmemberdescriptionforlanguage(iface Alljoyn_interfacedescription, member foundation.PSTR, description foundation.PSTR, maxLanguageLength uintptr, languageTag foundation.PSTR) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getmemberdescriptionforlanguage.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(description)), uintptr(maxLanguageLength), uintptr(unsafe.Pointer(languageTag)))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_getmembers calls MSAJApi!alljoyn_interfacedescription_getmembers.
+// Alljoyn_interfacedescription_getmembers calls MSAJApi!alljoyn_interfacedescription_getmembers.
 func Alljoyn_interfacedescription_getmembers(iface Alljoyn_interfacedescription, members *Alljoyn_interfacedescription_member, numMembers uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getmembers.Addr(), uintptr(iface), uintptr(unsafe.Pointer(members)), uintptr(numMembers))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_getmethod calls MSAJApi!alljoyn_interfacedescription_getmethod.
+// Alljoyn_interfacedescription_getmethod calls MSAJApi!alljoyn_interfacedescription_getmethod.
 func Alljoyn_interfacedescription_getmethod(iface Alljoyn_interfacedescription, name foundation.PSTR, member *Alljoyn_interfacedescription_member) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getmethod.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(member)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_getname calls MSAJApi!alljoyn_interfacedescription_getname.
+// Alljoyn_interfacedescription_getname calls MSAJApi!alljoyn_interfacedescription_getname.
 func Alljoyn_interfacedescription_getname(iface Alljoyn_interfacedescription) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getname.Addr(), uintptr(iface))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_interfacedescription_getproperties calls MSAJApi!alljoyn_interfacedescription_getproperties.
+// Alljoyn_interfacedescription_getproperties calls MSAJApi!alljoyn_interfacedescription_getproperties.
 func Alljoyn_interfacedescription_getproperties(iface Alljoyn_interfacedescription, props *Alljoyn_interfacedescription_property, numProps uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getproperties.Addr(), uintptr(iface), uintptr(unsafe.Pointer(props)), uintptr(numProps))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_getproperty calls MSAJApi!alljoyn_interfacedescription_getproperty.
+// Alljoyn_interfacedescription_getproperty calls MSAJApi!alljoyn_interfacedescription_getproperty.
 func Alljoyn_interfacedescription_getproperty(iface Alljoyn_interfacedescription, name foundation.PSTR, property *Alljoyn_interfacedescription_property) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getproperty.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(property)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_getpropertyannotation calls MSAJApi!alljoyn_interfacedescription_getpropertyannotation.
+// Alljoyn_interfacedescription_getpropertyannotation calls MSAJApi!alljoyn_interfacedescription_getpropertyannotation.
 func Alljoyn_interfacedescription_getpropertyannotation(iface Alljoyn_interfacedescription, property foundation.PSTR, name foundation.PSTR, value foundation.PSTR, str_size *uintptr) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getpropertyannotation.Addr(), uintptr(iface), uintptr(unsafe.Pointer(property)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(str_size)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_getpropertydescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_getpropertydescriptionforlanguage.
+// Alljoyn_interfacedescription_getpropertydescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_getpropertydescriptionforlanguage.
 func Alljoyn_interfacedescription_getpropertydescriptionforlanguage(iface Alljoyn_interfacedescription, property foundation.PSTR, description foundation.PSTR, maxLanguageLength uintptr, languageTag foundation.PSTR) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getpropertydescriptionforlanguage.Addr(), uintptr(iface), uintptr(unsafe.Pointer(property)), uintptr(unsafe.Pointer(description)), uintptr(maxLanguageLength), uintptr(unsafe.Pointer(languageTag)))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_getsecuritypolicy calls MSAJApi!alljoyn_interfacedescription_getsecuritypolicy.
+// Alljoyn_interfacedescription_getsecuritypolicy calls MSAJApi!alljoyn_interfacedescription_getsecuritypolicy.
 func Alljoyn_interfacedescription_getsecuritypolicy(iface Alljoyn_interfacedescription) Alljoyn_interfacedescription_securitypolicy {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getsecuritypolicy.Addr(), uintptr(iface))
 	return Alljoyn_interfacedescription_securitypolicy(r1)
 }
 
-// alljoyn_interfacedescription_getsignal calls MSAJApi!alljoyn_interfacedescription_getsignal.
+// Alljoyn_interfacedescription_getsignal calls MSAJApi!alljoyn_interfacedescription_getsignal.
 func Alljoyn_interfacedescription_getsignal(iface Alljoyn_interfacedescription, name foundation.PSTR, member *Alljoyn_interfacedescription_member) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_getsignal.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(member)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_hasdescription calls MSAJApi!alljoyn_interfacedescription_hasdescription.
+// Alljoyn_interfacedescription_hasdescription calls MSAJApi!alljoyn_interfacedescription_hasdescription.
 func Alljoyn_interfacedescription_hasdescription(iface Alljoyn_interfacedescription) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_hasdescription.Addr(), uintptr(iface))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_hasmember calls MSAJApi!alljoyn_interfacedescription_hasmember.
+// Alljoyn_interfacedescription_hasmember calls MSAJApi!alljoyn_interfacedescription_hasmember.
 func Alljoyn_interfacedescription_hasmember(iface Alljoyn_interfacedescription, name foundation.PSTR, inSig foundation.PSTR, outSig foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_hasmember.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(inSig)), uintptr(unsafe.Pointer(outSig)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_hasproperties calls MSAJApi!alljoyn_interfacedescription_hasproperties.
+// Alljoyn_interfacedescription_hasproperties calls MSAJApi!alljoyn_interfacedescription_hasproperties.
 func Alljoyn_interfacedescription_hasproperties(iface Alljoyn_interfacedescription) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_hasproperties.Addr(), uintptr(iface))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_hasproperty calls MSAJApi!alljoyn_interfacedescription_hasproperty.
+// Alljoyn_interfacedescription_hasproperty calls MSAJApi!alljoyn_interfacedescription_hasproperty.
 func Alljoyn_interfacedescription_hasproperty(iface Alljoyn_interfacedescription, name foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_hasproperty.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_introspect calls MSAJApi!alljoyn_interfacedescription_introspect.
+// Alljoyn_interfacedescription_introspect calls MSAJApi!alljoyn_interfacedescription_introspect.
 func Alljoyn_interfacedescription_introspect(iface Alljoyn_interfacedescription, str foundation.PSTR, buf uintptr, indent uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_introspect.Addr(), uintptr(iface), uintptr(unsafe.Pointer(str)), uintptr(buf), uintptr(indent))
 	return uintptr(r1)
 }
 
-// alljoyn_interfacedescription_issecure calls MSAJApi!alljoyn_interfacedescription_issecure.
+// Alljoyn_interfacedescription_issecure calls MSAJApi!alljoyn_interfacedescription_issecure.
 func Alljoyn_interfacedescription_issecure(iface Alljoyn_interfacedescription) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_issecure.Addr(), uintptr(iface))
 	return int32(r1)
 }
 
-// alljoyn_interfacedescription_setargdescription calls MSAJApi!alljoyn_interfacedescription_setargdescription.
+// Alljoyn_interfacedescription_setargdescription calls MSAJApi!alljoyn_interfacedescription_setargdescription.
 func Alljoyn_interfacedescription_setargdescription(iface Alljoyn_interfacedescription, member foundation.PSTR, argName foundation.PSTR, description foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_setargdescription.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(argName)), uintptr(unsafe.Pointer(description)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_setargdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_setargdescriptionforlanguage.
+// Alljoyn_interfacedescription_setargdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_setargdescriptionforlanguage.
 func Alljoyn_interfacedescription_setargdescriptionforlanguage(iface Alljoyn_interfacedescription, member foundation.PSTR, arg foundation.PSTR, description foundation.PSTR, languageTag foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_setargdescriptionforlanguage.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(arg)), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(languageTag)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_setdescription calls MSAJApi!alljoyn_interfacedescription_setdescription.
+// Alljoyn_interfacedescription_setdescription calls MSAJApi!alljoyn_interfacedescription_setdescription.
 func Alljoyn_interfacedescription_setdescription(iface Alljoyn_interfacedescription, description foundation.PSTR) {
 	syscall.SyscallN(procAlljoyn_interfacedescription_setdescription.Addr(), uintptr(iface), uintptr(unsafe.Pointer(description)))
 }
 
-// alljoyn_interfacedescription_setdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_setdescriptionforlanguage.
+// Alljoyn_interfacedescription_setdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_setdescriptionforlanguage.
 func Alljoyn_interfacedescription_setdescriptionforlanguage(iface Alljoyn_interfacedescription, description foundation.PSTR, languageTag foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_setdescriptionforlanguage.Addr(), uintptr(iface), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(languageTag)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_setdescriptionlanguage calls MSAJApi!alljoyn_interfacedescription_setdescriptionlanguage.
+// Alljoyn_interfacedescription_setdescriptionlanguage calls MSAJApi!alljoyn_interfacedescription_setdescriptionlanguage.
 func Alljoyn_interfacedescription_setdescriptionlanguage(iface Alljoyn_interfacedescription, language foundation.PSTR) {
 	syscall.SyscallN(procAlljoyn_interfacedescription_setdescriptionlanguage.Addr(), uintptr(iface), uintptr(unsafe.Pointer(language)))
 }
 
-// alljoyn_interfacedescription_setdescriptiontranslationcallback calls MSAJApi!alljoyn_interfacedescription_setdescriptiontranslationcallback.
+// Alljoyn_interfacedescription_setdescriptiontranslationcallback calls MSAJApi!alljoyn_interfacedescription_setdescriptiontranslationcallback.
 func Alljoyn_interfacedescription_setdescriptiontranslationcallback(iface Alljoyn_interfacedescription, translationCallback Alljoyn_interfacedescription_translation_callback_ptr) {
 	syscall.SyscallN(procAlljoyn_interfacedescription_setdescriptiontranslationcallback.Addr(), uintptr(iface), uintptr(translationCallback))
 }
 
-// alljoyn_interfacedescription_setmemberdescription calls MSAJApi!alljoyn_interfacedescription_setmemberdescription.
+// Alljoyn_interfacedescription_setmemberdescription calls MSAJApi!alljoyn_interfacedescription_setmemberdescription.
 func Alljoyn_interfacedescription_setmemberdescription(iface Alljoyn_interfacedescription, member foundation.PSTR, description foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_setmemberdescription.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(description)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_setmemberdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_setmemberdescriptionforlanguage.
+// Alljoyn_interfacedescription_setmemberdescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_setmemberdescriptionforlanguage.
 func Alljoyn_interfacedescription_setmemberdescriptionforlanguage(iface Alljoyn_interfacedescription, member foundation.PSTR, description foundation.PSTR, languageTag foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_setmemberdescriptionforlanguage.Addr(), uintptr(iface), uintptr(unsafe.Pointer(member)), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(languageTag)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_setpropertydescription calls MSAJApi!alljoyn_interfacedescription_setpropertydescription.
+// Alljoyn_interfacedescription_setpropertydescription calls MSAJApi!alljoyn_interfacedescription_setpropertydescription.
 func Alljoyn_interfacedescription_setpropertydescription(iface Alljoyn_interfacedescription, name foundation.PSTR, description foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_setpropertydescription.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(description)))
 	return QStatus(r1)
 }
 
-// alljoyn_interfacedescription_setpropertydescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_setpropertydescriptionforlanguage.
+// Alljoyn_interfacedescription_setpropertydescriptionforlanguage calls MSAJApi!alljoyn_interfacedescription_setpropertydescriptionforlanguage.
 func Alljoyn_interfacedescription_setpropertydescriptionforlanguage(iface Alljoyn_interfacedescription, name foundation.PSTR, description foundation.PSTR, languageTag foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_setpropertydescriptionforlanguage.Addr(), uintptr(iface), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(languageTag)))
 	return QStatus(r1)
 }
 
-// alljoyn_keystorelistener_create calls MSAJApi!alljoyn_keystorelistener_create.
+// Alljoyn_keystorelistener_create calls MSAJApi!alljoyn_keystorelistener_create.
 func Alljoyn_keystorelistener_create(callbacks *Alljoyn_keystorelistener_callbacks, context unsafe.Pointer) Alljoyn_keystorelistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_keystorelistener_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_keystorelistener(r1)
 }
 
-// alljoyn_keystorelistener_destroy calls MSAJApi!alljoyn_keystorelistener_destroy.
+// Alljoyn_keystorelistener_destroy calls MSAJApi!alljoyn_keystorelistener_destroy.
 func Alljoyn_keystorelistener_destroy(listener Alljoyn_keystorelistener) {
 	syscall.SyscallN(procAlljoyn_keystorelistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_keystorelistener_getkeys calls MSAJApi!alljoyn_keystorelistener_getkeys.
+// Alljoyn_keystorelistener_getkeys calls MSAJApi!alljoyn_keystorelistener_getkeys.
 func Alljoyn_keystorelistener_getkeys(listener Alljoyn_keystorelistener, keyStore Alljoyn_keystore, sink foundation.PSTR, sink_sz *uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_keystorelistener_getkeys.Addr(), uintptr(listener), uintptr(keyStore), uintptr(unsafe.Pointer(sink)), uintptr(unsafe.Pointer(sink_sz)))
 	return QStatus(r1)
 }
 
-// alljoyn_keystorelistener_putkeys calls MSAJApi!alljoyn_keystorelistener_putkeys.
+// Alljoyn_keystorelistener_putkeys calls MSAJApi!alljoyn_keystorelistener_putkeys.
 func Alljoyn_keystorelistener_putkeys(listener Alljoyn_keystorelistener, keyStore Alljoyn_keystore, source foundation.PSTR, password foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_keystorelistener_putkeys.Addr(), uintptr(listener), uintptr(keyStore), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(password)))
 	return QStatus(r1)
 }
 
-// alljoyn_keystorelistener_with_synchronization_create calls MSAJApi!alljoyn_keystorelistener_with_synchronization_create.
+// Alljoyn_keystorelistener_with_synchronization_create calls MSAJApi!alljoyn_keystorelistener_with_synchronization_create.
 func Alljoyn_keystorelistener_with_synchronization_create(callbacks *Alljoyn_keystorelistener_with_synchronization_callbacks, context unsafe.Pointer) Alljoyn_keystorelistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_keystorelistener_with_synchronization_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_keystorelistener(r1)
 }
 
-// alljoyn_message_create calls MSAJApi!alljoyn_message_create.
+// Alljoyn_message_create calls MSAJApi!alljoyn_message_create.
 func Alljoyn_message_create(bus Alljoyn_busattachment) Alljoyn_message {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_create.Addr(), uintptr(bus))
 	return Alljoyn_message(r1)
 }
 
-// alljoyn_message_description calls MSAJApi!alljoyn_message_description.
+// Alljoyn_message_description calls MSAJApi!alljoyn_message_description.
 func Alljoyn_message_description(msg Alljoyn_message, str foundation.PSTR, buf uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_description.Addr(), uintptr(msg), uintptr(unsafe.Pointer(str)), uintptr(buf))
 	return uintptr(r1)
 }
 
-// alljoyn_message_destroy calls MSAJApi!alljoyn_message_destroy.
+// Alljoyn_message_destroy calls MSAJApi!alljoyn_message_destroy.
 func Alljoyn_message_destroy(msg Alljoyn_message) {
 	syscall.SyscallN(procAlljoyn_message_destroy.Addr(), uintptr(msg))
 }
 
-// alljoyn_message_eql calls MSAJApi!alljoyn_message_eql.
+// Alljoyn_message_eql calls MSAJApi!alljoyn_message_eql.
 func Alljoyn_message_eql(one Alljoyn_message, other Alljoyn_message) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_eql.Addr(), uintptr(one), uintptr(other))
 	return int32(r1)
 }
 
-// alljoyn_message_getarg calls MSAJApi!alljoyn_message_getarg.
+// Alljoyn_message_getarg calls MSAJApi!alljoyn_message_getarg.
 func Alljoyn_message_getarg(msg Alljoyn_message, argN uintptr) Alljoyn_msgarg {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getarg.Addr(), uintptr(msg), uintptr(argN))
 	return Alljoyn_msgarg(r1)
 }
 
-// alljoyn_message_getargs calls MSAJApi!alljoyn_message_getargs.
+// Alljoyn_message_getargs calls MSAJApi!alljoyn_message_getargs.
 func Alljoyn_message_getargs(msg Alljoyn_message, numArgs *uintptr, args *Alljoyn_msgarg) {
 	syscall.SyscallN(procAlljoyn_message_getargs.Addr(), uintptr(msg), uintptr(unsafe.Pointer(numArgs)), uintptr(unsafe.Pointer(args)))
 }
 
-// alljoyn_message_getauthmechanism calls MSAJApi!alljoyn_message_getauthmechanism.
+// Alljoyn_message_getauthmechanism calls MSAJApi!alljoyn_message_getauthmechanism.
 func Alljoyn_message_getauthmechanism(msg Alljoyn_message) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getauthmechanism.Addr(), uintptr(msg))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_message_getcallserial calls MSAJApi!alljoyn_message_getcallserial.
+// Alljoyn_message_getcallserial calls MSAJApi!alljoyn_message_getcallserial.
 func Alljoyn_message_getcallserial(msg Alljoyn_message) uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getcallserial.Addr(), uintptr(msg))
 	return uint32(r1)
 }
 
-// alljoyn_message_getcompressiontoken calls MSAJApi!alljoyn_message_getcompressiontoken.
+// Alljoyn_message_getcompressiontoken calls MSAJApi!alljoyn_message_getcompressiontoken.
 func Alljoyn_message_getcompressiontoken(msg Alljoyn_message) uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getcompressiontoken.Addr(), uintptr(msg))
 	return uint32(r1)
 }
 
-// alljoyn_message_getdestination calls MSAJApi!alljoyn_message_getdestination.
+// Alljoyn_message_getdestination calls MSAJApi!alljoyn_message_getdestination.
 func Alljoyn_message_getdestination(msg Alljoyn_message) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getdestination.Addr(), uintptr(msg))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_message_geterrorname calls MSAJApi!alljoyn_message_geterrorname.
+// Alljoyn_message_geterrorname calls MSAJApi!alljoyn_message_geterrorname.
 func Alljoyn_message_geterrorname(msg Alljoyn_message, errorMessage foundation.PSTR, errorMessage_size *uintptr) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_geterrorname.Addr(), uintptr(msg), uintptr(unsafe.Pointer(errorMessage)), uintptr(unsafe.Pointer(errorMessage_size)))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_message_getflags calls MSAJApi!alljoyn_message_getflags.
+// Alljoyn_message_getflags calls MSAJApi!alljoyn_message_getflags.
 func Alljoyn_message_getflags(msg Alljoyn_message) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getflags.Addr(), uintptr(msg))
 	return byte(r1)
 }
 
-// alljoyn_message_getinterface calls MSAJApi!alljoyn_message_getinterface.
+// Alljoyn_message_getinterface calls MSAJApi!alljoyn_message_getinterface.
 func Alljoyn_message_getinterface(msg Alljoyn_message) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getinterface.Addr(), uintptr(msg))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_message_getmembername calls MSAJApi!alljoyn_message_getmembername.
+// Alljoyn_message_getmembername calls MSAJApi!alljoyn_message_getmembername.
 func Alljoyn_message_getmembername(msg Alljoyn_message) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getmembername.Addr(), uintptr(msg))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_message_getobjectpath calls MSAJApi!alljoyn_message_getobjectpath.
+// Alljoyn_message_getobjectpath calls MSAJApi!alljoyn_message_getobjectpath.
 func Alljoyn_message_getobjectpath(msg Alljoyn_message) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getobjectpath.Addr(), uintptr(msg))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_message_getreceiveendpointname calls MSAJApi!alljoyn_message_getreceiveendpointname.
+// Alljoyn_message_getreceiveendpointname calls MSAJApi!alljoyn_message_getreceiveendpointname.
 func Alljoyn_message_getreceiveendpointname(msg Alljoyn_message) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getreceiveendpointname.Addr(), uintptr(msg))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_message_getreplyserial calls MSAJApi!alljoyn_message_getreplyserial.
+// Alljoyn_message_getreplyserial calls MSAJApi!alljoyn_message_getreplyserial.
 func Alljoyn_message_getreplyserial(msg Alljoyn_message) uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getreplyserial.Addr(), uintptr(msg))
 	return uint32(r1)
 }
 
-// alljoyn_message_getsender calls MSAJApi!alljoyn_message_getsender.
+// Alljoyn_message_getsender calls MSAJApi!alljoyn_message_getsender.
 func Alljoyn_message_getsender(msg Alljoyn_message) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getsender.Addr(), uintptr(msg))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_message_getsessionid calls MSAJApi!alljoyn_message_getsessionid.
+// Alljoyn_message_getsessionid calls MSAJApi!alljoyn_message_getsessionid.
 func Alljoyn_message_getsessionid(msg Alljoyn_message) uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getsessionid.Addr(), uintptr(msg))
 	return uint32(r1)
 }
 
-// alljoyn_message_getsignature calls MSAJApi!alljoyn_message_getsignature.
+// Alljoyn_message_getsignature calls MSAJApi!alljoyn_message_getsignature.
 func Alljoyn_message_getsignature(msg Alljoyn_message) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_getsignature.Addr(), uintptr(msg))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_message_gettimestamp calls MSAJApi!alljoyn_message_gettimestamp.
+// Alljoyn_message_gettimestamp calls MSAJApi!alljoyn_message_gettimestamp.
 func Alljoyn_message_gettimestamp(msg Alljoyn_message) uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_gettimestamp.Addr(), uintptr(msg))
 	return uint32(r1)
 }
 
-// alljoyn_message_gettype calls MSAJApi!alljoyn_message_gettype.
+// Alljoyn_message_gettype calls MSAJApi!alljoyn_message_gettype.
 func Alljoyn_message_gettype(msg Alljoyn_message) Alljoyn_messagetype {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_gettype.Addr(), uintptr(msg))
 	return Alljoyn_messagetype(r1)
 }
 
-// alljoyn_message_isbroadcastsignal calls MSAJApi!alljoyn_message_isbroadcastsignal.
+// Alljoyn_message_isbroadcastsignal calls MSAJApi!alljoyn_message_isbroadcastsignal.
 func Alljoyn_message_isbroadcastsignal(msg Alljoyn_message) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_isbroadcastsignal.Addr(), uintptr(msg))
 	return int32(r1)
 }
 
-// alljoyn_message_isencrypted calls MSAJApi!alljoyn_message_isencrypted.
+// Alljoyn_message_isencrypted calls MSAJApi!alljoyn_message_isencrypted.
 func Alljoyn_message_isencrypted(msg Alljoyn_message) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_isencrypted.Addr(), uintptr(msg))
 	return int32(r1)
 }
 
-// alljoyn_message_isexpired calls MSAJApi!alljoyn_message_isexpired.
+// Alljoyn_message_isexpired calls MSAJApi!alljoyn_message_isexpired.
 func Alljoyn_message_isexpired(msg Alljoyn_message, tillExpireMS *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_isexpired.Addr(), uintptr(msg), uintptr(unsafe.Pointer(tillExpireMS)))
 	return int32(r1)
 }
 
-// alljoyn_message_isglobalbroadcast calls MSAJApi!alljoyn_message_isglobalbroadcast.
+// Alljoyn_message_isglobalbroadcast calls MSAJApi!alljoyn_message_isglobalbroadcast.
 func Alljoyn_message_isglobalbroadcast(msg Alljoyn_message) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_isglobalbroadcast.Addr(), uintptr(msg))
 	return int32(r1)
 }
 
-// alljoyn_message_issessionless calls MSAJApi!alljoyn_message_issessionless.
+// Alljoyn_message_issessionless calls MSAJApi!alljoyn_message_issessionless.
 func Alljoyn_message_issessionless(msg Alljoyn_message) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_issessionless.Addr(), uintptr(msg))
 	return int32(r1)
 }
 
-// alljoyn_message_isunreliable calls MSAJApi!alljoyn_message_isunreliable.
+// Alljoyn_message_isunreliable calls MSAJApi!alljoyn_message_isunreliable.
 func Alljoyn_message_isunreliable(msg Alljoyn_message) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_isunreliable.Addr(), uintptr(msg))
 	return int32(r1)
 }
 
-// alljoyn_message_parseargs calls MSAJApi!alljoyn_message_parseargs.
+// Alljoyn_message_parseargs calls MSAJApi!alljoyn_message_parseargs.
 func Alljoyn_message_parseargs(msg Alljoyn_message, signature foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_parseargs.Addr(), uintptr(msg), uintptr(unsafe.Pointer(signature)))
 	return QStatus(r1)
 }
 
-// alljoyn_message_setendianess calls MSAJApi!alljoyn_message_setendianess.
+// Alljoyn_message_setendianess calls MSAJApi!alljoyn_message_setendianess.
 func Alljoyn_message_setendianess(endian int8) {
 	syscall.SyscallN(procAlljoyn_message_setendianess.Addr(), uintptr(endian))
 }
 
-// alljoyn_message_tostring calls MSAJApi!alljoyn_message_tostring.
+// Alljoyn_message_tostring calls MSAJApi!alljoyn_message_tostring.
 func Alljoyn_message_tostring(msg Alljoyn_message, str foundation.PSTR, buf uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_message_tostring.Addr(), uintptr(msg), uintptr(unsafe.Pointer(str)), uintptr(buf))
 	return uintptr(r1)
 }
 
-// alljoyn_msgarg_array_create calls MSAJApi!alljoyn_msgarg_array_create.
+// Alljoyn_msgarg_array_create calls MSAJApi!alljoyn_msgarg_array_create.
 func Alljoyn_msgarg_array_create(size uintptr) Alljoyn_msgarg {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_array_create.Addr(), uintptr(size))
 	return Alljoyn_msgarg(r1)
 }
 
-// alljoyn_msgarg_array_element calls MSAJApi!alljoyn_msgarg_array_element.
+// Alljoyn_msgarg_array_element calls MSAJApi!alljoyn_msgarg_array_element.
 func Alljoyn_msgarg_array_element(arg Alljoyn_msgarg, index uintptr) Alljoyn_msgarg {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_array_element.Addr(), uintptr(arg), uintptr(index))
 	return Alljoyn_msgarg(r1)
 }
 
-// alljoyn_msgarg_array_get calls MSAJApi!alljoyn_msgarg_array_get.
+// Alljoyn_msgarg_array_get calls MSAJApi!alljoyn_msgarg_array_get.
 func Alljoyn_msgarg_array_get(args Alljoyn_msgarg, numArgs uintptr, signature foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_array_get.Addr(), uintptr(args), uintptr(numArgs), uintptr(unsafe.Pointer(signature)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_array_set calls MSAJApi!alljoyn_msgarg_array_set.
+// Alljoyn_msgarg_array_set calls MSAJApi!alljoyn_msgarg_array_set.
 func Alljoyn_msgarg_array_set(args Alljoyn_msgarg, numArgs *uintptr, signature foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_array_set.Addr(), uintptr(args), uintptr(unsafe.Pointer(numArgs)), uintptr(unsafe.Pointer(signature)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_array_set_offset calls MSAJApi!alljoyn_msgarg_array_set_offset.
+// Alljoyn_msgarg_array_set_offset calls MSAJApi!alljoyn_msgarg_array_set_offset.
 func Alljoyn_msgarg_array_set_offset(args Alljoyn_msgarg, argOffset uintptr, numArgs *uintptr, signature foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_array_set_offset.Addr(), uintptr(args), uintptr(argOffset), uintptr(unsafe.Pointer(numArgs)), uintptr(unsafe.Pointer(signature)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_array_signature calls MSAJApi!alljoyn_msgarg_array_signature.
+// Alljoyn_msgarg_array_signature calls MSAJApi!alljoyn_msgarg_array_signature.
 func Alljoyn_msgarg_array_signature(values Alljoyn_msgarg, numValues uintptr, str foundation.PSTR, buf uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_array_signature.Addr(), uintptr(values), uintptr(numValues), uintptr(unsafe.Pointer(str)), uintptr(buf))
 	return uintptr(r1)
 }
 
-// alljoyn_msgarg_array_tostring calls MSAJApi!alljoyn_msgarg_array_tostring.
+// Alljoyn_msgarg_array_tostring calls MSAJApi!alljoyn_msgarg_array_tostring.
 func Alljoyn_msgarg_array_tostring(args Alljoyn_msgarg, numArgs uintptr, str foundation.PSTR, buf uintptr, indent uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_array_tostring.Addr(), uintptr(args), uintptr(numArgs), uintptr(unsafe.Pointer(str)), uintptr(buf), uintptr(indent))
 	return uintptr(r1)
 }
 
-// alljoyn_msgarg_clear calls MSAJApi!alljoyn_msgarg_clear.
+// Alljoyn_msgarg_clear calls MSAJApi!alljoyn_msgarg_clear.
 func Alljoyn_msgarg_clear(arg Alljoyn_msgarg) {
 	syscall.SyscallN(procAlljoyn_msgarg_clear.Addr(), uintptr(arg))
 }
 
-// alljoyn_msgarg_clone calls MSAJApi!alljoyn_msgarg_clone.
+// Alljoyn_msgarg_clone calls MSAJApi!alljoyn_msgarg_clone.
 func Alljoyn_msgarg_clone(destination Alljoyn_msgarg, source Alljoyn_msgarg) {
 	syscall.SyscallN(procAlljoyn_msgarg_clone.Addr(), uintptr(destination), uintptr(source))
 }
 
-// alljoyn_msgarg_copy calls MSAJApi!alljoyn_msgarg_copy.
+// Alljoyn_msgarg_copy calls MSAJApi!alljoyn_msgarg_copy.
 func Alljoyn_msgarg_copy(source Alljoyn_msgarg) Alljoyn_msgarg {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_copy.Addr(), uintptr(source))
 	return Alljoyn_msgarg(r1)
 }
 
-// alljoyn_msgarg_create calls MSAJApi!alljoyn_msgarg_create.
+// Alljoyn_msgarg_create calls MSAJApi!alljoyn_msgarg_create.
 func Alljoyn_msgarg_create() Alljoyn_msgarg {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_create.Addr())
 	return Alljoyn_msgarg(r1)
 }
 
-// alljoyn_msgarg_create_and_set calls MSAJApi!alljoyn_msgarg_create_and_set.
+// Alljoyn_msgarg_create_and_set calls MSAJApi!alljoyn_msgarg_create_and_set.
 func Alljoyn_msgarg_create_and_set(signature foundation.PSTR) Alljoyn_msgarg {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_create_and_set.Addr(), uintptr(unsafe.Pointer(signature)))
 	return Alljoyn_msgarg(r1)
 }
 
-// alljoyn_msgarg_destroy calls MSAJApi!alljoyn_msgarg_destroy.
+// Alljoyn_msgarg_destroy calls MSAJApi!alljoyn_msgarg_destroy.
 func Alljoyn_msgarg_destroy(arg Alljoyn_msgarg) {
 	syscall.SyscallN(procAlljoyn_msgarg_destroy.Addr(), uintptr(arg))
 }
 
-// alljoyn_msgarg_equal calls MSAJApi!alljoyn_msgarg_equal.
+// Alljoyn_msgarg_equal calls MSAJApi!alljoyn_msgarg_equal.
 func Alljoyn_msgarg_equal(lhv Alljoyn_msgarg, rhv Alljoyn_msgarg) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_equal.Addr(), uintptr(lhv), uintptr(rhv))
 	return int32(r1)
 }
 
-// alljoyn_msgarg_get calls MSAJApi!alljoyn_msgarg_get.
+// Alljoyn_msgarg_get calls MSAJApi!alljoyn_msgarg_get.
 func Alljoyn_msgarg_get(arg Alljoyn_msgarg, signature foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get.Addr(), uintptr(arg), uintptr(unsafe.Pointer(signature)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_array_element calls MSAJApi!alljoyn_msgarg_get_array_element.
+// Alljoyn_msgarg_get_array_element calls MSAJApi!alljoyn_msgarg_get_array_element.
 func Alljoyn_msgarg_get_array_element(arg Alljoyn_msgarg, index uintptr, element *Alljoyn_msgarg) {
 	syscall.SyscallN(procAlljoyn_msgarg_get_array_element.Addr(), uintptr(arg), uintptr(index), uintptr(unsafe.Pointer(element)))
 }
 
-// alljoyn_msgarg_get_array_elementsignature calls MSAJApi!alljoyn_msgarg_get_array_elementsignature.
+// Alljoyn_msgarg_get_array_elementsignature calls MSAJApi!alljoyn_msgarg_get_array_elementsignature.
 func Alljoyn_msgarg_get_array_elementsignature(arg Alljoyn_msgarg, index uintptr) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_array_elementsignature.Addr(), uintptr(arg), uintptr(index))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_msgarg_get_array_numberofelements calls MSAJApi!alljoyn_msgarg_get_array_numberofelements.
+// Alljoyn_msgarg_get_array_numberofelements calls MSAJApi!alljoyn_msgarg_get_array_numberofelements.
 func Alljoyn_msgarg_get_array_numberofelements(arg Alljoyn_msgarg) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_array_numberofelements.Addr(), uintptr(arg))
 	return uintptr(r1)
 }
 
-// alljoyn_msgarg_get_bool calls MSAJApi!alljoyn_msgarg_get_bool.
+// Alljoyn_msgarg_get_bool calls MSAJApi!alljoyn_msgarg_get_bool.
 func Alljoyn_msgarg_get_bool(arg Alljoyn_msgarg, b *int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_bool.Addr(), uintptr(arg), uintptr(unsafe.Pointer(b)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_bool_array calls MSAJApi!alljoyn_msgarg_get_bool_array.
+// Alljoyn_msgarg_get_bool_array calls MSAJApi!alljoyn_msgarg_get_bool_array.
 func Alljoyn_msgarg_get_bool_array(arg Alljoyn_msgarg, length *uintptr, ab *int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_bool_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(ab)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_double calls MSAJApi!alljoyn_msgarg_get_double.
+// Alljoyn_msgarg_get_double calls MSAJApi!alljoyn_msgarg_get_double.
 func Alljoyn_msgarg_get_double(arg Alljoyn_msgarg, d *float64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_double.Addr(), uintptr(arg), uintptr(unsafe.Pointer(d)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_double_array calls MSAJApi!alljoyn_msgarg_get_double_array.
+// Alljoyn_msgarg_get_double_array calls MSAJApi!alljoyn_msgarg_get_double_array.
 func Alljoyn_msgarg_get_double_array(arg Alljoyn_msgarg, length *uintptr, ad *float64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_double_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(ad)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_int16 calls MSAJApi!alljoyn_msgarg_get_int16.
+// Alljoyn_msgarg_get_int16 calls MSAJApi!alljoyn_msgarg_get_int16.
 func Alljoyn_msgarg_get_int16(arg Alljoyn_msgarg, n *int16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_int16.Addr(), uintptr(arg), uintptr(unsafe.Pointer(n)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_int16_array calls MSAJApi!alljoyn_msgarg_get_int16_array.
+// Alljoyn_msgarg_get_int16_array calls MSAJApi!alljoyn_msgarg_get_int16_array.
 func Alljoyn_msgarg_get_int16_array(arg Alljoyn_msgarg, length *uintptr, an *int16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_int16_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(an)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_int32 calls MSAJApi!alljoyn_msgarg_get_int32.
+// Alljoyn_msgarg_get_int32 calls MSAJApi!alljoyn_msgarg_get_int32.
 func Alljoyn_msgarg_get_int32(arg Alljoyn_msgarg, i *int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_int32.Addr(), uintptr(arg), uintptr(unsafe.Pointer(i)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_int32_array calls MSAJApi!alljoyn_msgarg_get_int32_array.
+// Alljoyn_msgarg_get_int32_array calls MSAJApi!alljoyn_msgarg_get_int32_array.
 func Alljoyn_msgarg_get_int32_array(arg Alljoyn_msgarg, length *uintptr, ai *int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_int32_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(ai)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_int64 calls MSAJApi!alljoyn_msgarg_get_int64.
+// Alljoyn_msgarg_get_int64 calls MSAJApi!alljoyn_msgarg_get_int64.
 func Alljoyn_msgarg_get_int64(arg Alljoyn_msgarg, x *int64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_int64.Addr(), uintptr(arg), uintptr(unsafe.Pointer(x)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_int64_array calls MSAJApi!alljoyn_msgarg_get_int64_array.
+// Alljoyn_msgarg_get_int64_array calls MSAJApi!alljoyn_msgarg_get_int64_array.
 func Alljoyn_msgarg_get_int64_array(arg Alljoyn_msgarg, length *uintptr, ax *int64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_int64_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(ax)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_objectpath calls MSAJApi!alljoyn_msgarg_get_objectpath.
+// Alljoyn_msgarg_get_objectpath calls MSAJApi!alljoyn_msgarg_get_objectpath.
 func Alljoyn_msgarg_get_objectpath(arg Alljoyn_msgarg, o **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_objectpath.Addr(), uintptr(arg), uintptr(unsafe.Pointer(o)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_signature calls MSAJApi!alljoyn_msgarg_get_signature.
+// Alljoyn_msgarg_get_signature calls MSAJApi!alljoyn_msgarg_get_signature.
 func Alljoyn_msgarg_get_signature(arg Alljoyn_msgarg, g **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_signature.Addr(), uintptr(arg), uintptr(unsafe.Pointer(g)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_string calls MSAJApi!alljoyn_msgarg_get_string.
+// Alljoyn_msgarg_get_string calls MSAJApi!alljoyn_msgarg_get_string.
 func Alljoyn_msgarg_get_string(arg Alljoyn_msgarg, s **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_string.Addr(), uintptr(arg), uintptr(unsafe.Pointer(s)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_uint16 calls MSAJApi!alljoyn_msgarg_get_uint16.
+// Alljoyn_msgarg_get_uint16 calls MSAJApi!alljoyn_msgarg_get_uint16.
 func Alljoyn_msgarg_get_uint16(arg Alljoyn_msgarg, q *uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_uint16.Addr(), uintptr(arg), uintptr(unsafe.Pointer(q)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_uint16_array calls MSAJApi!alljoyn_msgarg_get_uint16_array.
+// Alljoyn_msgarg_get_uint16_array calls MSAJApi!alljoyn_msgarg_get_uint16_array.
 func Alljoyn_msgarg_get_uint16_array(arg Alljoyn_msgarg, length *uintptr, aq *uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_uint16_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(aq)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_uint32 calls MSAJApi!alljoyn_msgarg_get_uint32.
+// Alljoyn_msgarg_get_uint32 calls MSAJApi!alljoyn_msgarg_get_uint32.
 func Alljoyn_msgarg_get_uint32(arg Alljoyn_msgarg, u *uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_uint32.Addr(), uintptr(arg), uintptr(unsafe.Pointer(u)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_uint32_array calls MSAJApi!alljoyn_msgarg_get_uint32_array.
+// Alljoyn_msgarg_get_uint32_array calls MSAJApi!alljoyn_msgarg_get_uint32_array.
 func Alljoyn_msgarg_get_uint32_array(arg Alljoyn_msgarg, length *uintptr, au *uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_uint32_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(au)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_uint64 calls MSAJApi!alljoyn_msgarg_get_uint64.
+// Alljoyn_msgarg_get_uint64 calls MSAJApi!alljoyn_msgarg_get_uint64.
 func Alljoyn_msgarg_get_uint64(arg Alljoyn_msgarg, t *uint64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_uint64.Addr(), uintptr(arg), uintptr(unsafe.Pointer(t)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_uint64_array calls MSAJApi!alljoyn_msgarg_get_uint64_array.
+// Alljoyn_msgarg_get_uint64_array calls MSAJApi!alljoyn_msgarg_get_uint64_array.
 func Alljoyn_msgarg_get_uint64_array(arg Alljoyn_msgarg, length *uintptr, at *uint64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_uint64_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(at)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_uint8 calls MSAJApi!alljoyn_msgarg_get_uint8.
+// Alljoyn_msgarg_get_uint8 calls MSAJApi!alljoyn_msgarg_get_uint8.
 func Alljoyn_msgarg_get_uint8(arg Alljoyn_msgarg, y *byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_uint8.Addr(), uintptr(arg), uintptr(unsafe.Pointer(y)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_uint8_array calls MSAJApi!alljoyn_msgarg_get_uint8_array.
+// Alljoyn_msgarg_get_uint8_array calls MSAJApi!alljoyn_msgarg_get_uint8_array.
 func Alljoyn_msgarg_get_uint8_array(arg Alljoyn_msgarg, length *uintptr, ay *byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_uint8_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(ay)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_variant calls MSAJApi!alljoyn_msgarg_get_variant.
+// Alljoyn_msgarg_get_variant calls MSAJApi!alljoyn_msgarg_get_variant.
 func Alljoyn_msgarg_get_variant(arg Alljoyn_msgarg, v Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_variant.Addr(), uintptr(arg), uintptr(v))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_get_variant_array calls MSAJApi!alljoyn_msgarg_get_variant_array.
+// Alljoyn_msgarg_get_variant_array calls MSAJApi!alljoyn_msgarg_get_variant_array.
 func Alljoyn_msgarg_get_variant_array(arg Alljoyn_msgarg, signature foundation.PSTR, length *uintptr, av *Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_get_variant_array.Addr(), uintptr(arg), uintptr(unsafe.Pointer(signature)), uintptr(unsafe.Pointer(length)), uintptr(unsafe.Pointer(av)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_getdictelement calls MSAJApi!alljoyn_msgarg_getdictelement.
+// Alljoyn_msgarg_getdictelement calls MSAJApi!alljoyn_msgarg_getdictelement.
 func Alljoyn_msgarg_getdictelement(arg Alljoyn_msgarg, elemSig foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_getdictelement.Addr(), uintptr(arg), uintptr(unsafe.Pointer(elemSig)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_getkey calls MSAJApi!alljoyn_msgarg_getkey.
+// Alljoyn_msgarg_getkey calls MSAJApi!alljoyn_msgarg_getkey.
 func Alljoyn_msgarg_getkey(arg Alljoyn_msgarg) Alljoyn_msgarg {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_getkey.Addr(), uintptr(arg))
 	return Alljoyn_msgarg(r1)
 }
 
-// alljoyn_msgarg_getmember calls MSAJApi!alljoyn_msgarg_getmember.
+// Alljoyn_msgarg_getmember calls MSAJApi!alljoyn_msgarg_getmember.
 func Alljoyn_msgarg_getmember(arg Alljoyn_msgarg, index uintptr) Alljoyn_msgarg {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_getmember.Addr(), uintptr(arg), uintptr(index))
 	return Alljoyn_msgarg(r1)
 }
 
-// alljoyn_msgarg_getnummembers calls MSAJApi!alljoyn_msgarg_getnummembers.
+// Alljoyn_msgarg_getnummembers calls MSAJApi!alljoyn_msgarg_getnummembers.
 func Alljoyn_msgarg_getnummembers(arg Alljoyn_msgarg) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_getnummembers.Addr(), uintptr(arg))
 	return uintptr(r1)
 }
 
-// alljoyn_msgarg_gettype calls MSAJApi!alljoyn_msgarg_gettype.
+// Alljoyn_msgarg_gettype calls MSAJApi!alljoyn_msgarg_gettype.
 func Alljoyn_msgarg_gettype(arg Alljoyn_msgarg) Alljoyn_typeid {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_gettype.Addr(), uintptr(arg))
 	return Alljoyn_typeid(r1)
 }
 
-// alljoyn_msgarg_getvalue calls MSAJApi!alljoyn_msgarg_getvalue.
+// Alljoyn_msgarg_getvalue calls MSAJApi!alljoyn_msgarg_getvalue.
 func Alljoyn_msgarg_getvalue(arg Alljoyn_msgarg) Alljoyn_msgarg {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_getvalue.Addr(), uintptr(arg))
 	return Alljoyn_msgarg(r1)
 }
 
-// alljoyn_msgarg_hassignature calls MSAJApi!alljoyn_msgarg_hassignature.
+// Alljoyn_msgarg_hassignature calls MSAJApi!alljoyn_msgarg_hassignature.
 func Alljoyn_msgarg_hassignature(arg Alljoyn_msgarg, signature foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_hassignature.Addr(), uintptr(arg), uintptr(unsafe.Pointer(signature)))
 	return int32(r1)
 }
 
-// alljoyn_msgarg_set calls MSAJApi!alljoyn_msgarg_set.
+// Alljoyn_msgarg_set calls MSAJApi!alljoyn_msgarg_set.
 func Alljoyn_msgarg_set(arg Alljoyn_msgarg, signature foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set.Addr(), uintptr(arg), uintptr(unsafe.Pointer(signature)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_and_stabilize calls MSAJApi!alljoyn_msgarg_set_and_stabilize.
+// Alljoyn_msgarg_set_and_stabilize calls MSAJApi!alljoyn_msgarg_set_and_stabilize.
 func Alljoyn_msgarg_set_and_stabilize(arg Alljoyn_msgarg, signature foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_and_stabilize.Addr(), uintptr(arg), uintptr(unsafe.Pointer(signature)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_bool calls MSAJApi!alljoyn_msgarg_set_bool.
+// Alljoyn_msgarg_set_bool calls MSAJApi!alljoyn_msgarg_set_bool.
 func Alljoyn_msgarg_set_bool(arg Alljoyn_msgarg, b int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_bool.Addr(), uintptr(arg), uintptr(b))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_bool_array calls MSAJApi!alljoyn_msgarg_set_bool_array.
+// Alljoyn_msgarg_set_bool_array calls MSAJApi!alljoyn_msgarg_set_bool_array.
 func Alljoyn_msgarg_set_bool_array(arg Alljoyn_msgarg, length uintptr, ab *int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_bool_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(ab)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_double_array calls MSAJApi!alljoyn_msgarg_set_double_array.
+// Alljoyn_msgarg_set_double_array calls MSAJApi!alljoyn_msgarg_set_double_array.
 func Alljoyn_msgarg_set_double_array(arg Alljoyn_msgarg, length uintptr, ad *float64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_double_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(ad)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_int16 calls MSAJApi!alljoyn_msgarg_set_int16.
+// Alljoyn_msgarg_set_int16 calls MSAJApi!alljoyn_msgarg_set_int16.
 func Alljoyn_msgarg_set_int16(arg Alljoyn_msgarg, n int16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_int16.Addr(), uintptr(arg), uintptr(n))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_int16_array calls MSAJApi!alljoyn_msgarg_set_int16_array.
+// Alljoyn_msgarg_set_int16_array calls MSAJApi!alljoyn_msgarg_set_int16_array.
 func Alljoyn_msgarg_set_int16_array(arg Alljoyn_msgarg, length uintptr, an *int16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_int16_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(an)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_int32 calls MSAJApi!alljoyn_msgarg_set_int32.
+// Alljoyn_msgarg_set_int32 calls MSAJApi!alljoyn_msgarg_set_int32.
 func Alljoyn_msgarg_set_int32(arg Alljoyn_msgarg, i int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_int32.Addr(), uintptr(arg), uintptr(i))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_int32_array calls MSAJApi!alljoyn_msgarg_set_int32_array.
+// Alljoyn_msgarg_set_int32_array calls MSAJApi!alljoyn_msgarg_set_int32_array.
 func Alljoyn_msgarg_set_int32_array(arg Alljoyn_msgarg, length uintptr, ai *int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_int32_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(ai)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_int64 calls MSAJApi!alljoyn_msgarg_set_int64.
+// Alljoyn_msgarg_set_int64 calls MSAJApi!alljoyn_msgarg_set_int64.
 func Alljoyn_msgarg_set_int64(arg Alljoyn_msgarg, x int64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_int64.Addr(), uintptr(arg), uintptr(x))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_int64_array calls MSAJApi!alljoyn_msgarg_set_int64_array.
+// Alljoyn_msgarg_set_int64_array calls MSAJApi!alljoyn_msgarg_set_int64_array.
 func Alljoyn_msgarg_set_int64_array(arg Alljoyn_msgarg, length uintptr, ax *int64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_int64_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(ax)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_objectpath calls MSAJApi!alljoyn_msgarg_set_objectpath.
+// Alljoyn_msgarg_set_objectpath calls MSAJApi!alljoyn_msgarg_set_objectpath.
 func Alljoyn_msgarg_set_objectpath(arg Alljoyn_msgarg, o foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_objectpath.Addr(), uintptr(arg), uintptr(unsafe.Pointer(o)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_objectpath_array calls MSAJApi!alljoyn_msgarg_set_objectpath_array.
+// Alljoyn_msgarg_set_objectpath_array calls MSAJApi!alljoyn_msgarg_set_objectpath_array.
 func Alljoyn_msgarg_set_objectpath_array(arg Alljoyn_msgarg, length uintptr, ao **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_objectpath_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(ao)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_signature calls MSAJApi!alljoyn_msgarg_set_signature.
+// Alljoyn_msgarg_set_signature calls MSAJApi!alljoyn_msgarg_set_signature.
 func Alljoyn_msgarg_set_signature(arg Alljoyn_msgarg, g foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_signature.Addr(), uintptr(arg), uintptr(unsafe.Pointer(g)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_signature_array calls MSAJApi!alljoyn_msgarg_set_signature_array.
+// Alljoyn_msgarg_set_signature_array calls MSAJApi!alljoyn_msgarg_set_signature_array.
 func Alljoyn_msgarg_set_signature_array(arg Alljoyn_msgarg, length uintptr, ag **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_signature_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(ag)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_string calls MSAJApi!alljoyn_msgarg_set_string.
+// Alljoyn_msgarg_set_string calls MSAJApi!alljoyn_msgarg_set_string.
 func Alljoyn_msgarg_set_string(arg Alljoyn_msgarg, s foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_string.Addr(), uintptr(arg), uintptr(unsafe.Pointer(s)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_string_array calls MSAJApi!alljoyn_msgarg_set_string_array.
+// Alljoyn_msgarg_set_string_array calls MSAJApi!alljoyn_msgarg_set_string_array.
 func Alljoyn_msgarg_set_string_array(arg Alljoyn_msgarg, length uintptr, as **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_string_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(as)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_uint16 calls MSAJApi!alljoyn_msgarg_set_uint16.
+// Alljoyn_msgarg_set_uint16 calls MSAJApi!alljoyn_msgarg_set_uint16.
 func Alljoyn_msgarg_set_uint16(arg Alljoyn_msgarg, q uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_uint16.Addr(), uintptr(arg), uintptr(q))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_uint16_array calls MSAJApi!alljoyn_msgarg_set_uint16_array.
+// Alljoyn_msgarg_set_uint16_array calls MSAJApi!alljoyn_msgarg_set_uint16_array.
 func Alljoyn_msgarg_set_uint16_array(arg Alljoyn_msgarg, length uintptr, aq *uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_uint16_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(aq)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_uint32 calls MSAJApi!alljoyn_msgarg_set_uint32.
+// Alljoyn_msgarg_set_uint32 calls MSAJApi!alljoyn_msgarg_set_uint32.
 func Alljoyn_msgarg_set_uint32(arg Alljoyn_msgarg, u uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_uint32.Addr(), uintptr(arg), uintptr(u))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_uint32_array calls MSAJApi!alljoyn_msgarg_set_uint32_array.
+// Alljoyn_msgarg_set_uint32_array calls MSAJApi!alljoyn_msgarg_set_uint32_array.
 func Alljoyn_msgarg_set_uint32_array(arg Alljoyn_msgarg, length uintptr, au *uint32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_uint32_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(au)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_uint64 calls MSAJApi!alljoyn_msgarg_set_uint64.
+// Alljoyn_msgarg_set_uint64 calls MSAJApi!alljoyn_msgarg_set_uint64.
 func Alljoyn_msgarg_set_uint64(arg Alljoyn_msgarg, t uint64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_uint64.Addr(), uintptr(arg), uintptr(t))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_uint64_array calls MSAJApi!alljoyn_msgarg_set_uint64_array.
+// Alljoyn_msgarg_set_uint64_array calls MSAJApi!alljoyn_msgarg_set_uint64_array.
 func Alljoyn_msgarg_set_uint64_array(arg Alljoyn_msgarg, length uintptr, at *uint64) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_uint64_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(at)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_uint8 calls MSAJApi!alljoyn_msgarg_set_uint8.
+// Alljoyn_msgarg_set_uint8 calls MSAJApi!alljoyn_msgarg_set_uint8.
 func Alljoyn_msgarg_set_uint8(arg Alljoyn_msgarg, y byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_uint8.Addr(), uintptr(arg), uintptr(y))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_set_uint8_array calls MSAJApi!alljoyn_msgarg_set_uint8_array.
+// Alljoyn_msgarg_set_uint8_array calls MSAJApi!alljoyn_msgarg_set_uint8_array.
 func Alljoyn_msgarg_set_uint8_array(arg Alljoyn_msgarg, length uintptr, ay *byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_uint8_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(ay)))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_setdictentry calls MSAJApi!alljoyn_msgarg_setdictentry.
+// Alljoyn_msgarg_setdictentry calls MSAJApi!alljoyn_msgarg_setdictentry.
 func Alljoyn_msgarg_setdictentry(arg Alljoyn_msgarg, key Alljoyn_msgarg, value Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_setdictentry.Addr(), uintptr(arg), uintptr(key), uintptr(value))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_setstruct calls MSAJApi!alljoyn_msgarg_setstruct.
+// Alljoyn_msgarg_setstruct calls MSAJApi!alljoyn_msgarg_setstruct.
 func Alljoyn_msgarg_setstruct(arg Alljoyn_msgarg, struct_members Alljoyn_msgarg, num_members uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_setstruct.Addr(), uintptr(arg), uintptr(struct_members), uintptr(num_members))
 	return QStatus(r1)
 }
 
-// alljoyn_msgarg_signature calls MSAJApi!alljoyn_msgarg_signature.
+// Alljoyn_msgarg_signature calls MSAJApi!alljoyn_msgarg_signature.
 func Alljoyn_msgarg_signature(arg Alljoyn_msgarg, str foundation.PSTR, buf uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_signature.Addr(), uintptr(arg), uintptr(unsafe.Pointer(str)), uintptr(buf))
 	return uintptr(r1)
 }
 
-// alljoyn_msgarg_stabilize calls MSAJApi!alljoyn_msgarg_stabilize.
+// Alljoyn_msgarg_stabilize calls MSAJApi!alljoyn_msgarg_stabilize.
 func Alljoyn_msgarg_stabilize(arg Alljoyn_msgarg) {
 	syscall.SyscallN(procAlljoyn_msgarg_stabilize.Addr(), uintptr(arg))
 }
 
-// alljoyn_msgarg_tostring calls MSAJApi!alljoyn_msgarg_tostring.
+// Alljoyn_msgarg_tostring calls MSAJApi!alljoyn_msgarg_tostring.
 func Alljoyn_msgarg_tostring(arg Alljoyn_msgarg, str foundation.PSTR, buf uintptr, indent uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_tostring.Addr(), uintptr(arg), uintptr(unsafe.Pointer(str)), uintptr(buf), uintptr(indent))
 	return uintptr(r1)
 }
 
-// alljoyn_observer_create calls MSAJApi!alljoyn_observer_create.
+// Alljoyn_observer_create calls MSAJApi!alljoyn_observer_create.
 func Alljoyn_observer_create(bus Alljoyn_busattachment, mandatoryInterfaces **int8, numMandatoryInterfaces uintptr) Alljoyn_observer {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_observer_create.Addr(), uintptr(bus), uintptr(unsafe.Pointer(mandatoryInterfaces)), uintptr(numMandatoryInterfaces))
 	return Alljoyn_observer(r1)
 }
 
-// alljoyn_observer_destroy calls MSAJApi!alljoyn_observer_destroy.
+// Alljoyn_observer_destroy calls MSAJApi!alljoyn_observer_destroy.
 func Alljoyn_observer_destroy(observer Alljoyn_observer) {
 	syscall.SyscallN(procAlljoyn_observer_destroy.Addr(), uintptr(observer))
 }
 
-// alljoyn_observer_get calls MSAJApi!alljoyn_observer_get.
+// Alljoyn_observer_get calls MSAJApi!alljoyn_observer_get.
 func Alljoyn_observer_get(observer Alljoyn_observer, uniqueBusName foundation.PSTR, objectPath foundation.PSTR) Alljoyn_proxybusobject_ref {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_observer_get.Addr(), uintptr(observer), uintptr(unsafe.Pointer(uniqueBusName)), uintptr(unsafe.Pointer(objectPath)))
 	return Alljoyn_proxybusobject_ref(r1)
 }
 
-// alljoyn_observer_getfirst calls MSAJApi!alljoyn_observer_getfirst.
+// Alljoyn_observer_getfirst calls MSAJApi!alljoyn_observer_getfirst.
 func Alljoyn_observer_getfirst(observer Alljoyn_observer) Alljoyn_proxybusobject_ref {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_observer_getfirst.Addr(), uintptr(observer))
 	return Alljoyn_proxybusobject_ref(r1)
 }
 
-// alljoyn_observer_getnext calls MSAJApi!alljoyn_observer_getnext.
+// Alljoyn_observer_getnext calls MSAJApi!alljoyn_observer_getnext.
 func Alljoyn_observer_getnext(observer Alljoyn_observer, proxyref Alljoyn_proxybusobject_ref) Alljoyn_proxybusobject_ref {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_observer_getnext.Addr(), uintptr(observer), uintptr(proxyref))
 	return Alljoyn_proxybusobject_ref(r1)
 }
 
-// alljoyn_observer_registerlistener calls MSAJApi!alljoyn_observer_registerlistener.
+// Alljoyn_observer_registerlistener calls MSAJApi!alljoyn_observer_registerlistener.
 func Alljoyn_observer_registerlistener(observer Alljoyn_observer, listener Alljoyn_observerlistener, triggerOnExisting int32) {
 	syscall.SyscallN(procAlljoyn_observer_registerlistener.Addr(), uintptr(observer), uintptr(listener), uintptr(triggerOnExisting))
 }
 
-// alljoyn_observer_unregisteralllisteners calls MSAJApi!alljoyn_observer_unregisteralllisteners.
+// Alljoyn_observer_unregisteralllisteners calls MSAJApi!alljoyn_observer_unregisteralllisteners.
 func Alljoyn_observer_unregisteralllisteners(observer Alljoyn_observer) {
 	syscall.SyscallN(procAlljoyn_observer_unregisteralllisteners.Addr(), uintptr(observer))
 }
 
-// alljoyn_observer_unregisterlistener calls MSAJApi!alljoyn_observer_unregisterlistener.
+// Alljoyn_observer_unregisterlistener calls MSAJApi!alljoyn_observer_unregisterlistener.
 func Alljoyn_observer_unregisterlistener(observer Alljoyn_observer, listener Alljoyn_observerlistener) {
 	syscall.SyscallN(procAlljoyn_observer_unregisterlistener.Addr(), uintptr(observer), uintptr(listener))
 }
 
-// alljoyn_observerlistener_create calls MSAJApi!alljoyn_observerlistener_create.
+// Alljoyn_observerlistener_create calls MSAJApi!alljoyn_observerlistener_create.
 func Alljoyn_observerlistener_create(callback *Alljoyn_observerlistener_callback, context unsafe.Pointer) Alljoyn_observerlistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_observerlistener_create.Addr(), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_observerlistener(r1)
 }
 
-// alljoyn_observerlistener_destroy calls MSAJApi!alljoyn_observerlistener_destroy.
+// Alljoyn_observerlistener_destroy calls MSAJApi!alljoyn_observerlistener_destroy.
 func Alljoyn_observerlistener_destroy(listener Alljoyn_observerlistener) {
 	syscall.SyscallN(procAlljoyn_observerlistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_passwordmanager_setcredentials calls MSAJApi!alljoyn_passwordmanager_setcredentials.
+// Alljoyn_passwordmanager_setcredentials calls MSAJApi!alljoyn_passwordmanager_setcredentials.
 func Alljoyn_passwordmanager_setcredentials(authMechanism foundation.PSTR, password foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_passwordmanager_setcredentials.Addr(), uintptr(unsafe.Pointer(authMechanism)), uintptr(unsafe.Pointer(password)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurationlistener_create calls MSAJApi!alljoyn_permissionconfigurationlistener_create.
+// Alljoyn_permissionconfigurationlistener_create calls MSAJApi!alljoyn_permissionconfigurationlistener_create.
 func Alljoyn_permissionconfigurationlistener_create(callbacks *Alljoyn_permissionconfigurationlistener_callbacks, context unsafe.Pointer) Alljoyn_permissionconfigurationlistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurationlistener_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_permissionconfigurationlistener(r1)
 }
 
-// alljoyn_permissionconfigurationlistener_destroy calls MSAJApi!alljoyn_permissionconfigurationlistener_destroy.
+// Alljoyn_permissionconfigurationlistener_destroy calls MSAJApi!alljoyn_permissionconfigurationlistener_destroy.
 func Alljoyn_permissionconfigurationlistener_destroy(listener Alljoyn_permissionconfigurationlistener) {
 	syscall.SyscallN(procAlljoyn_permissionconfigurationlistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_permissionconfigurator_certificatechain_destroy calls MSAJApi!alljoyn_permissionconfigurator_certificatechain_destroy.
+// Alljoyn_permissionconfigurator_certificatechain_destroy calls MSAJApi!alljoyn_permissionconfigurator_certificatechain_destroy.
 func Alljoyn_permissionconfigurator_certificatechain_destroy(certificateChain *int8) {
 	syscall.SyscallN(procAlljoyn_permissionconfigurator_certificatechain_destroy.Addr(), uintptr(unsafe.Pointer(certificateChain)))
 }
 
-// alljoyn_permissionconfigurator_certificateid_cleanup calls MSAJApi!alljoyn_permissionconfigurator_certificateid_cleanup.
+// Alljoyn_permissionconfigurator_certificateid_cleanup calls MSAJApi!alljoyn_permissionconfigurator_certificateid_cleanup.
 func Alljoyn_permissionconfigurator_certificateid_cleanup(certificateId *Alljoyn_certificateid) {
 	syscall.SyscallN(procAlljoyn_permissionconfigurator_certificateid_cleanup.Addr(), uintptr(unsafe.Pointer(certificateId)))
 }
 
-// alljoyn_permissionconfigurator_certificateidarray_cleanup calls MSAJApi!alljoyn_permissionconfigurator_certificateidarray_cleanup.
+// Alljoyn_permissionconfigurator_certificateidarray_cleanup calls MSAJApi!alljoyn_permissionconfigurator_certificateidarray_cleanup.
 func Alljoyn_permissionconfigurator_certificateidarray_cleanup(certificateIdArray *Alljoyn_certificateidarray) {
 	syscall.SyscallN(procAlljoyn_permissionconfigurator_certificateidarray_cleanup.Addr(), uintptr(unsafe.Pointer(certificateIdArray)))
 }
 
-// alljoyn_permissionconfigurator_claim calls MSAJApi!alljoyn_permissionconfigurator_claim.
+// Alljoyn_permissionconfigurator_claim calls MSAJApi!alljoyn_permissionconfigurator_claim.
 func Alljoyn_permissionconfigurator_claim(configurator Alljoyn_permissionconfigurator, caKey *int8, identityCertificateChain *int8, groupId *byte, groupSize uintptr, groupAuthority *int8, manifestsXmls **int8, manifestsCount uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_claim.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(caKey)), uintptr(unsafe.Pointer(identityCertificateChain)), uintptr(unsafe.Pointer(groupId)), uintptr(groupSize), uintptr(unsafe.Pointer(groupAuthority)), uintptr(unsafe.Pointer(manifestsXmls)), uintptr(manifestsCount))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_endmanagement calls MSAJApi!alljoyn_permissionconfigurator_endmanagement.
+// Alljoyn_permissionconfigurator_endmanagement calls MSAJApi!alljoyn_permissionconfigurator_endmanagement.
 func Alljoyn_permissionconfigurator_endmanagement(configurator Alljoyn_permissionconfigurator) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_endmanagement.Addr(), uintptr(configurator))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getapplicationstate calls MSAJApi!alljoyn_permissionconfigurator_getapplicationstate.
+// Alljoyn_permissionconfigurator_getapplicationstate calls MSAJApi!alljoyn_permissionconfigurator_getapplicationstate.
 func Alljoyn_permissionconfigurator_getapplicationstate(configurator Alljoyn_permissionconfigurator, state *Alljoyn_applicationstate) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getapplicationstate.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(state)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getclaimcapabilities calls MSAJApi!alljoyn_permissionconfigurator_getclaimcapabilities.
+// Alljoyn_permissionconfigurator_getclaimcapabilities calls MSAJApi!alljoyn_permissionconfigurator_getclaimcapabilities.
 func Alljoyn_permissionconfigurator_getclaimcapabilities(configurator Alljoyn_permissionconfigurator, claimCapabilities *uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getclaimcapabilities.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(claimCapabilities)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo calls MSAJApi!alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo.
+// Alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo calls MSAJApi!alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo.
 func Alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(configurator Alljoyn_permissionconfigurator, additionalInfo *uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(additionalInfo)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getdefaultclaimcapabilities calls MSAJApi!alljoyn_permissionconfigurator_getdefaultclaimcapabilities.
+// Alljoyn_permissionconfigurator_getdefaultclaimcapabilities calls MSAJApi!alljoyn_permissionconfigurator_getdefaultclaimcapabilities.
 func Alljoyn_permissionconfigurator_getdefaultclaimcapabilities() uint16 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getdefaultclaimcapabilities.Addr())
 	return uint16(r1)
 }
 
-// alljoyn_permissionconfigurator_getdefaultpolicy calls MSAJApi!alljoyn_permissionconfigurator_getdefaultpolicy.
+// Alljoyn_permissionconfigurator_getdefaultpolicy calls MSAJApi!alljoyn_permissionconfigurator_getdefaultpolicy.
 func Alljoyn_permissionconfigurator_getdefaultpolicy(configurator Alljoyn_permissionconfigurator, policyXml **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getdefaultpolicy.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(policyXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getidentity calls MSAJApi!alljoyn_permissionconfigurator_getidentity.
+// Alljoyn_permissionconfigurator_getidentity calls MSAJApi!alljoyn_permissionconfigurator_getidentity.
 func Alljoyn_permissionconfigurator_getidentity(configurator Alljoyn_permissionconfigurator, identityCertificateChain **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getidentity.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(identityCertificateChain)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getidentitycertificateid calls MSAJApi!alljoyn_permissionconfigurator_getidentitycertificateid.
+// Alljoyn_permissionconfigurator_getidentitycertificateid calls MSAJApi!alljoyn_permissionconfigurator_getidentitycertificateid.
 func Alljoyn_permissionconfigurator_getidentitycertificateid(configurator Alljoyn_permissionconfigurator, certificateId *Alljoyn_certificateid) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getidentitycertificateid.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(certificateId)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getmanifests calls MSAJApi!alljoyn_permissionconfigurator_getmanifests.
+// Alljoyn_permissionconfigurator_getmanifests calls MSAJApi!alljoyn_permissionconfigurator_getmanifests.
 func Alljoyn_permissionconfigurator_getmanifests(configurator Alljoyn_permissionconfigurator, manifestArray *Alljoyn_manifestarray) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getmanifests.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(manifestArray)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getmanifesttemplate calls MSAJApi!alljoyn_permissionconfigurator_getmanifesttemplate.
+// Alljoyn_permissionconfigurator_getmanifesttemplate calls MSAJApi!alljoyn_permissionconfigurator_getmanifesttemplate.
 func Alljoyn_permissionconfigurator_getmanifesttemplate(configurator Alljoyn_permissionconfigurator, manifestTemplateXml **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getmanifesttemplate.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(manifestTemplateXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getmembershipsummaries calls MSAJApi!alljoyn_permissionconfigurator_getmembershipsummaries.
+// Alljoyn_permissionconfigurator_getmembershipsummaries calls MSAJApi!alljoyn_permissionconfigurator_getmembershipsummaries.
 func Alljoyn_permissionconfigurator_getmembershipsummaries(configurator Alljoyn_permissionconfigurator, certificateIds *Alljoyn_certificateidarray) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getmembershipsummaries.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(certificateIds)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getpolicy calls MSAJApi!alljoyn_permissionconfigurator_getpolicy.
+// Alljoyn_permissionconfigurator_getpolicy calls MSAJApi!alljoyn_permissionconfigurator_getpolicy.
 func Alljoyn_permissionconfigurator_getpolicy(configurator Alljoyn_permissionconfigurator, policyXml **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getpolicy.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(policyXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_getpublickey calls MSAJApi!alljoyn_permissionconfigurator_getpublickey.
+// Alljoyn_permissionconfigurator_getpublickey calls MSAJApi!alljoyn_permissionconfigurator_getpublickey.
 func Alljoyn_permissionconfigurator_getpublickey(configurator Alljoyn_permissionconfigurator, publicKey **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_getpublickey.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(publicKey)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_installmanifests calls MSAJApi!alljoyn_permissionconfigurator_installmanifests.
+// Alljoyn_permissionconfigurator_installmanifests calls MSAJApi!alljoyn_permissionconfigurator_installmanifests.
 func Alljoyn_permissionconfigurator_installmanifests(configurator Alljoyn_permissionconfigurator, manifestsXmls **int8, manifestsCount uintptr, append_ int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_installmanifests.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(manifestsXmls)), uintptr(manifestsCount), uintptr(append_))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_installmembership calls MSAJApi!alljoyn_permissionconfigurator_installmembership.
+// Alljoyn_permissionconfigurator_installmembership calls MSAJApi!alljoyn_permissionconfigurator_installmembership.
 func Alljoyn_permissionconfigurator_installmembership(configurator Alljoyn_permissionconfigurator, membershipCertificateChain *int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_installmembership.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(membershipCertificateChain)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_manifestarray_cleanup calls MSAJApi!alljoyn_permissionconfigurator_manifestarray_cleanup.
+// Alljoyn_permissionconfigurator_manifestarray_cleanup calls MSAJApi!alljoyn_permissionconfigurator_manifestarray_cleanup.
 func Alljoyn_permissionconfigurator_manifestarray_cleanup(manifestArray *Alljoyn_manifestarray) {
 	syscall.SyscallN(procAlljoyn_permissionconfigurator_manifestarray_cleanup.Addr(), uintptr(unsafe.Pointer(manifestArray)))
 }
 
-// alljoyn_permissionconfigurator_manifesttemplate_destroy calls MSAJApi!alljoyn_permissionconfigurator_manifesttemplate_destroy.
+// Alljoyn_permissionconfigurator_manifesttemplate_destroy calls MSAJApi!alljoyn_permissionconfigurator_manifesttemplate_destroy.
 func Alljoyn_permissionconfigurator_manifesttemplate_destroy(manifestTemplateXml *int8) {
 	syscall.SyscallN(procAlljoyn_permissionconfigurator_manifesttemplate_destroy.Addr(), uintptr(unsafe.Pointer(manifestTemplateXml)))
 }
 
-// alljoyn_permissionconfigurator_policy_destroy calls MSAJApi!alljoyn_permissionconfigurator_policy_destroy.
+// Alljoyn_permissionconfigurator_policy_destroy calls MSAJApi!alljoyn_permissionconfigurator_policy_destroy.
 func Alljoyn_permissionconfigurator_policy_destroy(policyXml *int8) {
 	syscall.SyscallN(procAlljoyn_permissionconfigurator_policy_destroy.Addr(), uintptr(unsafe.Pointer(policyXml)))
 }
 
-// alljoyn_permissionconfigurator_publickey_destroy calls MSAJApi!alljoyn_permissionconfigurator_publickey_destroy.
+// Alljoyn_permissionconfigurator_publickey_destroy calls MSAJApi!alljoyn_permissionconfigurator_publickey_destroy.
 func Alljoyn_permissionconfigurator_publickey_destroy(publicKey *int8) {
 	syscall.SyscallN(procAlljoyn_permissionconfigurator_publickey_destroy.Addr(), uintptr(unsafe.Pointer(publicKey)))
 }
 
-// alljoyn_permissionconfigurator_removemembership calls MSAJApi!alljoyn_permissionconfigurator_removemembership.
+// Alljoyn_permissionconfigurator_removemembership calls MSAJApi!alljoyn_permissionconfigurator_removemembership.
 func Alljoyn_permissionconfigurator_removemembership(configurator Alljoyn_permissionconfigurator, serial *byte, serialLen uintptr, issuerPublicKey *int8, issuerAki *byte, issuerAkiLen uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_removemembership.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(serial)), uintptr(serialLen), uintptr(unsafe.Pointer(issuerPublicKey)), uintptr(unsafe.Pointer(issuerAki)), uintptr(issuerAkiLen))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_reset calls MSAJApi!alljoyn_permissionconfigurator_reset.
+// Alljoyn_permissionconfigurator_reset calls MSAJApi!alljoyn_permissionconfigurator_reset.
 func Alljoyn_permissionconfigurator_reset(configurator Alljoyn_permissionconfigurator) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_reset.Addr(), uintptr(configurator))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_resetpolicy calls MSAJApi!alljoyn_permissionconfigurator_resetpolicy.
+// Alljoyn_permissionconfigurator_resetpolicy calls MSAJApi!alljoyn_permissionconfigurator_resetpolicy.
 func Alljoyn_permissionconfigurator_resetpolicy(configurator Alljoyn_permissionconfigurator) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_resetpolicy.Addr(), uintptr(configurator))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_setapplicationstate calls MSAJApi!alljoyn_permissionconfigurator_setapplicationstate.
+// Alljoyn_permissionconfigurator_setapplicationstate calls MSAJApi!alljoyn_permissionconfigurator_setapplicationstate.
 func Alljoyn_permissionconfigurator_setapplicationstate(configurator Alljoyn_permissionconfigurator, state Alljoyn_applicationstate) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_setapplicationstate.Addr(), uintptr(configurator), uintptr(state))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_setclaimcapabilities calls MSAJApi!alljoyn_permissionconfigurator_setclaimcapabilities.
+// Alljoyn_permissionconfigurator_setclaimcapabilities calls MSAJApi!alljoyn_permissionconfigurator_setclaimcapabilities.
 func Alljoyn_permissionconfigurator_setclaimcapabilities(configurator Alljoyn_permissionconfigurator, claimCapabilities uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_setclaimcapabilities.Addr(), uintptr(configurator), uintptr(claimCapabilities))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo calls MSAJApi!alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo.
+// Alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo calls MSAJApi!alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo.
 func Alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(configurator Alljoyn_permissionconfigurator, additionalInfo uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo.Addr(), uintptr(configurator), uintptr(additionalInfo))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_setmanifesttemplatefromxml calls MSAJApi!alljoyn_permissionconfigurator_setmanifesttemplatefromxml.
+// Alljoyn_permissionconfigurator_setmanifesttemplatefromxml calls MSAJApi!alljoyn_permissionconfigurator_setmanifesttemplatefromxml.
 func Alljoyn_permissionconfigurator_setmanifesttemplatefromxml(configurator Alljoyn_permissionconfigurator, manifestTemplateXml *int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_setmanifesttemplatefromxml.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(manifestTemplateXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_startmanagement calls MSAJApi!alljoyn_permissionconfigurator_startmanagement.
+// Alljoyn_permissionconfigurator_startmanagement calls MSAJApi!alljoyn_permissionconfigurator_startmanagement.
 func Alljoyn_permissionconfigurator_startmanagement(configurator Alljoyn_permissionconfigurator) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_startmanagement.Addr(), uintptr(configurator))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_updateidentity calls MSAJApi!alljoyn_permissionconfigurator_updateidentity.
+// Alljoyn_permissionconfigurator_updateidentity calls MSAJApi!alljoyn_permissionconfigurator_updateidentity.
 func Alljoyn_permissionconfigurator_updateidentity(configurator Alljoyn_permissionconfigurator, identityCertificateChain *int8, manifestsXmls **int8, manifestsCount uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_updateidentity.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(identityCertificateChain)), uintptr(unsafe.Pointer(manifestsXmls)), uintptr(manifestsCount))
 	return QStatus(r1)
 }
 
-// alljoyn_permissionconfigurator_updatepolicy calls MSAJApi!alljoyn_permissionconfigurator_updatepolicy.
+// Alljoyn_permissionconfigurator_updatepolicy calls MSAJApi!alljoyn_permissionconfigurator_updatepolicy.
 func Alljoyn_permissionconfigurator_updatepolicy(configurator Alljoyn_permissionconfigurator, policyXml *int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_permissionconfigurator_updatepolicy.Addr(), uintptr(configurator), uintptr(unsafe.Pointer(policyXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_pinglistener_create calls MSAJApi!alljoyn_pinglistener_create.
+// Alljoyn_pinglistener_create calls MSAJApi!alljoyn_pinglistener_create.
 func Alljoyn_pinglistener_create(callback *Alljoyn_pinglistener_callback, context unsafe.Pointer) Alljoyn_pinglistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_pinglistener_create.Addr(), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_pinglistener(r1)
 }
 
-// alljoyn_pinglistener_destroy calls MSAJApi!alljoyn_pinglistener_destroy.
+// Alljoyn_pinglistener_destroy calls MSAJApi!alljoyn_pinglistener_destroy.
 func Alljoyn_pinglistener_destroy(listener Alljoyn_pinglistener) {
 	syscall.SyscallN(procAlljoyn_pinglistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_proxybusobject_addchild calls MSAJApi!alljoyn_proxybusobject_addchild.
+// Alljoyn_proxybusobject_addchild calls MSAJApi!alljoyn_proxybusobject_addchild.
 func Alljoyn_proxybusobject_addchild(proxyObj Alljoyn_proxybusobject, child Alljoyn_proxybusobject) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_addchild.Addr(), uintptr(proxyObj), uintptr(child))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_addinterface calls MSAJApi!alljoyn_proxybusobject_addinterface.
+// Alljoyn_proxybusobject_addinterface calls MSAJApi!alljoyn_proxybusobject_addinterface.
 func Alljoyn_proxybusobject_addinterface(proxyObj Alljoyn_proxybusobject, iface Alljoyn_interfacedescription) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_addinterface.Addr(), uintptr(proxyObj), uintptr(iface))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_addinterface_by_name calls MSAJApi!alljoyn_proxybusobject_addinterface_by_name.
+// Alljoyn_proxybusobject_addinterface_by_name calls MSAJApi!alljoyn_proxybusobject_addinterface_by_name.
 func Alljoyn_proxybusobject_addinterface_by_name(proxyObj Alljoyn_proxybusobject, name foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_addinterface_by_name.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(name)))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_copy calls MSAJApi!alljoyn_proxybusobject_copy.
+// Alljoyn_proxybusobject_copy calls MSAJApi!alljoyn_proxybusobject_copy.
 func Alljoyn_proxybusobject_copy(source Alljoyn_proxybusobject) Alljoyn_proxybusobject {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_copy.Addr(), uintptr(source))
 	return Alljoyn_proxybusobject(r1)
 }
 
-// alljoyn_proxybusobject_create calls MSAJApi!alljoyn_proxybusobject_create.
+// Alljoyn_proxybusobject_create calls MSAJApi!alljoyn_proxybusobject_create.
 func Alljoyn_proxybusobject_create(bus Alljoyn_busattachment, service foundation.PSTR, path foundation.PSTR, sessionId uint32) Alljoyn_proxybusobject {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_create.Addr(), uintptr(bus), uintptr(unsafe.Pointer(service)), uintptr(unsafe.Pointer(path)), uintptr(sessionId))
 	return Alljoyn_proxybusobject(r1)
 }
 
-// alljoyn_proxybusobject_create_secure calls MSAJApi!alljoyn_proxybusobject_create_secure.
+// Alljoyn_proxybusobject_create_secure calls MSAJApi!alljoyn_proxybusobject_create_secure.
 func Alljoyn_proxybusobject_create_secure(bus Alljoyn_busattachment, service foundation.PSTR, path foundation.PSTR, sessionId uint32) Alljoyn_proxybusobject {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_create_secure.Addr(), uintptr(bus), uintptr(unsafe.Pointer(service)), uintptr(unsafe.Pointer(path)), uintptr(sessionId))
 	return Alljoyn_proxybusobject(r1)
 }
 
-// alljoyn_proxybusobject_destroy calls MSAJApi!alljoyn_proxybusobject_destroy.
+// Alljoyn_proxybusobject_destroy calls MSAJApi!alljoyn_proxybusobject_destroy.
 func Alljoyn_proxybusobject_destroy(proxyObj Alljoyn_proxybusobject) {
 	syscall.SyscallN(procAlljoyn_proxybusobject_destroy.Addr(), uintptr(proxyObj))
 }
 
-// alljoyn_proxybusobject_enablepropertycaching calls MSAJApi!alljoyn_proxybusobject_enablepropertycaching.
+// Alljoyn_proxybusobject_enablepropertycaching calls MSAJApi!alljoyn_proxybusobject_enablepropertycaching.
 func Alljoyn_proxybusobject_enablepropertycaching(proxyObj Alljoyn_proxybusobject) {
 	syscall.SyscallN(procAlljoyn_proxybusobject_enablepropertycaching.Addr(), uintptr(proxyObj))
 }
 
-// alljoyn_proxybusobject_getallproperties calls MSAJApi!alljoyn_proxybusobject_getallproperties.
+// Alljoyn_proxybusobject_getallproperties calls MSAJApi!alljoyn_proxybusobject_getallproperties.
 func Alljoyn_proxybusobject_getallproperties(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR, values Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getallproperties.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)), uintptr(values))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_getallpropertiesasync calls MSAJApi!alljoyn_proxybusobject_getallpropertiesasync.
+// Alljoyn_proxybusobject_getallpropertiesasync calls MSAJApi!alljoyn_proxybusobject_getallpropertiesasync.
 func Alljoyn_proxybusobject_getallpropertiesasync(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR, callback Alljoyn_proxybusobject_listener_getallpropertiescb_ptr, timeout uint32, context unsafe.Pointer) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getallpropertiesasync.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)), uintptr(callback), uintptr(timeout), uintptr(unsafe.Pointer(context)))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_getchild calls MSAJApi!alljoyn_proxybusobject_getchild.
+// Alljoyn_proxybusobject_getchild calls MSAJApi!alljoyn_proxybusobject_getchild.
 func Alljoyn_proxybusobject_getchild(proxyObj Alljoyn_proxybusobject, path foundation.PSTR) Alljoyn_proxybusobject {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getchild.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(path)))
 	return Alljoyn_proxybusobject(r1)
 }
 
-// alljoyn_proxybusobject_getchildren calls MSAJApi!alljoyn_proxybusobject_getchildren.
+// Alljoyn_proxybusobject_getchildren calls MSAJApi!alljoyn_proxybusobject_getchildren.
 func Alljoyn_proxybusobject_getchildren(proxyObj Alljoyn_proxybusobject, children *Alljoyn_proxybusobject, numChildren uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getchildren.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(children)), uintptr(numChildren))
 	return uintptr(r1)
 }
 
-// alljoyn_proxybusobject_getinterface calls MSAJApi!alljoyn_proxybusobject_getinterface.
+// Alljoyn_proxybusobject_getinterface calls MSAJApi!alljoyn_proxybusobject_getinterface.
 func Alljoyn_proxybusobject_getinterface(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR) Alljoyn_interfacedescription {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getinterface.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)))
 	return Alljoyn_interfacedescription(r1)
 }
 
-// alljoyn_proxybusobject_getinterfaces calls MSAJApi!alljoyn_proxybusobject_getinterfaces.
+// Alljoyn_proxybusobject_getinterfaces calls MSAJApi!alljoyn_proxybusobject_getinterfaces.
 func Alljoyn_proxybusobject_getinterfaces(proxyObj Alljoyn_proxybusobject, ifaces *Alljoyn_interfacedescription, numIfaces uintptr) uintptr {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getinterfaces.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(ifaces)), uintptr(numIfaces))
 	return uintptr(r1)
 }
 
-// alljoyn_proxybusobject_getpath calls MSAJApi!alljoyn_proxybusobject_getpath.
+// Alljoyn_proxybusobject_getpath calls MSAJApi!alljoyn_proxybusobject_getpath.
 func Alljoyn_proxybusobject_getpath(proxyObj Alljoyn_proxybusobject) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getpath.Addr(), uintptr(proxyObj))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_proxybusobject_getproperty calls MSAJApi!alljoyn_proxybusobject_getproperty.
+// Alljoyn_proxybusobject_getproperty calls MSAJApi!alljoyn_proxybusobject_getproperty.
 func Alljoyn_proxybusobject_getproperty(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR, property foundation.PSTR, value Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getproperty.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)), uintptr(unsafe.Pointer(property)), uintptr(value))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_getpropertyasync calls MSAJApi!alljoyn_proxybusobject_getpropertyasync.
+// Alljoyn_proxybusobject_getpropertyasync calls MSAJApi!alljoyn_proxybusobject_getpropertyasync.
 func Alljoyn_proxybusobject_getpropertyasync(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR, property foundation.PSTR, callback Alljoyn_proxybusobject_listener_getpropertycb_ptr, timeout uint32, context unsafe.Pointer) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getpropertyasync.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)), uintptr(unsafe.Pointer(property)), uintptr(callback), uintptr(timeout), uintptr(unsafe.Pointer(context)))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_getservicename calls MSAJApi!alljoyn_proxybusobject_getservicename.
+// Alljoyn_proxybusobject_getservicename calls MSAJApi!alljoyn_proxybusobject_getservicename.
 func Alljoyn_proxybusobject_getservicename(proxyObj Alljoyn_proxybusobject) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getservicename.Addr(), uintptr(proxyObj))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_proxybusobject_getsessionid calls MSAJApi!alljoyn_proxybusobject_getsessionid.
+// Alljoyn_proxybusobject_getsessionid calls MSAJApi!alljoyn_proxybusobject_getsessionid.
 func Alljoyn_proxybusobject_getsessionid(proxyObj Alljoyn_proxybusobject) uint32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getsessionid.Addr(), uintptr(proxyObj))
 	return uint32(r1)
 }
 
-// alljoyn_proxybusobject_getuniquename calls MSAJApi!alljoyn_proxybusobject_getuniquename.
+// Alljoyn_proxybusobject_getuniquename calls MSAJApi!alljoyn_proxybusobject_getuniquename.
 func Alljoyn_proxybusobject_getuniquename(proxyObj Alljoyn_proxybusobject) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_getuniquename.Addr(), uintptr(proxyObj))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// alljoyn_proxybusobject_implementsinterface calls MSAJApi!alljoyn_proxybusobject_implementsinterface.
+// Alljoyn_proxybusobject_implementsinterface calls MSAJApi!alljoyn_proxybusobject_implementsinterface.
 func Alljoyn_proxybusobject_implementsinterface(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_implementsinterface.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)))
 	return int32(r1)
 }
 
-// alljoyn_proxybusobject_introspectremoteobject calls MSAJApi!alljoyn_proxybusobject_introspectremoteobject.
+// Alljoyn_proxybusobject_introspectremoteobject calls MSAJApi!alljoyn_proxybusobject_introspectremoteobject.
 func Alljoyn_proxybusobject_introspectremoteobject(proxyObj Alljoyn_proxybusobject) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_introspectremoteobject.Addr(), uintptr(proxyObj))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_introspectremoteobjectasync calls MSAJApi!alljoyn_proxybusobject_introspectremoteobjectasync.
+// Alljoyn_proxybusobject_introspectremoteobjectasync calls MSAJApi!alljoyn_proxybusobject_introspectremoteobjectasync.
 func Alljoyn_proxybusobject_introspectremoteobjectasync(proxyObj Alljoyn_proxybusobject, callback Alljoyn_proxybusobject_listener_introspectcb_ptr, context unsafe.Pointer) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_introspectremoteobjectasync.Addr(), uintptr(proxyObj), uintptr(callback), uintptr(unsafe.Pointer(context)))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_issecure calls MSAJApi!alljoyn_proxybusobject_issecure.
+// Alljoyn_proxybusobject_issecure calls MSAJApi!alljoyn_proxybusobject_issecure.
 func Alljoyn_proxybusobject_issecure(proxyObj Alljoyn_proxybusobject) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_issecure.Addr(), uintptr(proxyObj))
 	return int32(r1)
 }
 
-// alljoyn_proxybusobject_isvalid calls MSAJApi!alljoyn_proxybusobject_isvalid.
+// Alljoyn_proxybusobject_isvalid calls MSAJApi!alljoyn_proxybusobject_isvalid.
 func Alljoyn_proxybusobject_isvalid(proxyObj Alljoyn_proxybusobject) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_isvalid.Addr(), uintptr(proxyObj))
 	return int32(r1)
 }
 
-// alljoyn_proxybusobject_methodcall calls MSAJApi!alljoyn_proxybusobject_methodcall.
+// Alljoyn_proxybusobject_methodcall calls MSAJApi!alljoyn_proxybusobject_methodcall.
 func Alljoyn_proxybusobject_methodcall(proxyObj Alljoyn_proxybusobject, ifaceName foundation.PSTR, methodName foundation.PSTR, args Alljoyn_msgarg, numArgs uintptr, replyMsg Alljoyn_message, timeout uint32, flags byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_methodcall.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(ifaceName)), uintptr(unsafe.Pointer(methodName)), uintptr(args), uintptr(numArgs), uintptr(replyMsg), uintptr(timeout), uintptr(flags))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_methodcall_noreply calls MSAJApi!alljoyn_proxybusobject_methodcall_noreply.
+// Alljoyn_proxybusobject_methodcall_noreply calls MSAJApi!alljoyn_proxybusobject_methodcall_noreply.
 func Alljoyn_proxybusobject_methodcall_noreply(proxyObj Alljoyn_proxybusobject, ifaceName foundation.PSTR, methodName foundation.PSTR, args Alljoyn_msgarg, numArgs uintptr, flags byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_methodcall_noreply.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(ifaceName)), uintptr(unsafe.Pointer(methodName)), uintptr(args), uintptr(numArgs), uintptr(flags))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_methodcallasync calls MSAJApi!alljoyn_proxybusobject_methodcallasync.
+// Alljoyn_proxybusobject_methodcallasync calls MSAJApi!alljoyn_proxybusobject_methodcallasync.
 func Alljoyn_proxybusobject_methodcallasync(proxyObj Alljoyn_proxybusobject, ifaceName foundation.PSTR, methodName foundation.PSTR, replyFunc Alljoyn_messagereceiver_replyhandler_ptr, args Alljoyn_msgarg, numArgs uintptr, context unsafe.Pointer, timeout uint32, flags byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_methodcallasync.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(ifaceName)), uintptr(unsafe.Pointer(methodName)), uintptr(replyFunc), uintptr(args), uintptr(numArgs), uintptr(unsafe.Pointer(context)), uintptr(timeout), uintptr(flags))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_parsexml calls MSAJApi!alljoyn_proxybusobject_parsexml.
+// Alljoyn_proxybusobject_parsexml calls MSAJApi!alljoyn_proxybusobject_parsexml.
 func Alljoyn_proxybusobject_parsexml(proxyObj Alljoyn_proxybusobject, xml foundation.PSTR, identifier foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_parsexml.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(xml)), uintptr(unsafe.Pointer(identifier)))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_ref_create calls MSAJApi!alljoyn_proxybusobject_ref_create.
+// Alljoyn_proxybusobject_ref_create calls MSAJApi!alljoyn_proxybusobject_ref_create.
 func Alljoyn_proxybusobject_ref_create(proxy Alljoyn_proxybusobject) Alljoyn_proxybusobject_ref {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_ref_create.Addr(), uintptr(proxy))
 	return Alljoyn_proxybusobject_ref(r1)
 }
 
-// alljoyn_proxybusobject_ref_decref calls MSAJApi!alljoyn_proxybusobject_ref_decref.
+// Alljoyn_proxybusobject_ref_decref calls MSAJApi!alljoyn_proxybusobject_ref_decref.
 func Alljoyn_proxybusobject_ref_decref(ref Alljoyn_proxybusobject_ref) {
 	syscall.SyscallN(procAlljoyn_proxybusobject_ref_decref.Addr(), uintptr(ref))
 }
 
-// alljoyn_proxybusobject_ref_get calls MSAJApi!alljoyn_proxybusobject_ref_get.
+// Alljoyn_proxybusobject_ref_get calls MSAJApi!alljoyn_proxybusobject_ref_get.
 func Alljoyn_proxybusobject_ref_get(ref Alljoyn_proxybusobject_ref) Alljoyn_proxybusobject {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_ref_get.Addr(), uintptr(ref))
 	return Alljoyn_proxybusobject(r1)
 }
 
-// alljoyn_proxybusobject_ref_incref calls MSAJApi!alljoyn_proxybusobject_ref_incref.
+// Alljoyn_proxybusobject_ref_incref calls MSAJApi!alljoyn_proxybusobject_ref_incref.
 func Alljoyn_proxybusobject_ref_incref(ref Alljoyn_proxybusobject_ref) {
 	syscall.SyscallN(procAlljoyn_proxybusobject_ref_incref.Addr(), uintptr(ref))
 }
 
-// alljoyn_proxybusobject_registerpropertieschangedlistener calls MSAJApi!alljoyn_proxybusobject_registerpropertieschangedlistener.
+// Alljoyn_proxybusobject_registerpropertieschangedlistener calls MSAJApi!alljoyn_proxybusobject_registerpropertieschangedlistener.
 func Alljoyn_proxybusobject_registerpropertieschangedlistener(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR, properties **int8, numProperties uintptr, callback Alljoyn_proxybusobject_listener_propertieschanged_ptr, context unsafe.Pointer) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_registerpropertieschangedlistener.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)), uintptr(unsafe.Pointer(properties)), uintptr(numProperties), uintptr(callback), uintptr(unsafe.Pointer(context)))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_removechild calls MSAJApi!alljoyn_proxybusobject_removechild.
+// Alljoyn_proxybusobject_removechild calls MSAJApi!alljoyn_proxybusobject_removechild.
 func Alljoyn_proxybusobject_removechild(proxyObj Alljoyn_proxybusobject, path foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_removechild.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(path)))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_secureconnection calls MSAJApi!alljoyn_proxybusobject_secureconnection.
+// Alljoyn_proxybusobject_secureconnection calls MSAJApi!alljoyn_proxybusobject_secureconnection.
 func Alljoyn_proxybusobject_secureconnection(proxyObj Alljoyn_proxybusobject, forceAuth int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_secureconnection.Addr(), uintptr(proxyObj), uintptr(forceAuth))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_secureconnectionasync calls MSAJApi!alljoyn_proxybusobject_secureconnectionasync.
+// Alljoyn_proxybusobject_secureconnectionasync calls MSAJApi!alljoyn_proxybusobject_secureconnectionasync.
 func Alljoyn_proxybusobject_secureconnectionasync(proxyObj Alljoyn_proxybusobject, forceAuth int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_secureconnectionasync.Addr(), uintptr(proxyObj), uintptr(forceAuth))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_setproperty calls MSAJApi!alljoyn_proxybusobject_setproperty.
+// Alljoyn_proxybusobject_setproperty calls MSAJApi!alljoyn_proxybusobject_setproperty.
 func Alljoyn_proxybusobject_setproperty(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR, property foundation.PSTR, value Alljoyn_msgarg) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_setproperty.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)), uintptr(unsafe.Pointer(property)), uintptr(value))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_setpropertyasync calls MSAJApi!alljoyn_proxybusobject_setpropertyasync.
+// Alljoyn_proxybusobject_setpropertyasync calls MSAJApi!alljoyn_proxybusobject_setpropertyasync.
 func Alljoyn_proxybusobject_setpropertyasync(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR, property foundation.PSTR, value Alljoyn_msgarg, callback Alljoyn_proxybusobject_listener_setpropertycb_ptr, timeout uint32, context unsafe.Pointer) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_setpropertyasync.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)), uintptr(unsafe.Pointer(property)), uintptr(value), uintptr(callback), uintptr(timeout), uintptr(unsafe.Pointer(context)))
 	return QStatus(r1)
 }
 
-// alljoyn_proxybusobject_unregisterpropertieschangedlistener calls MSAJApi!alljoyn_proxybusobject_unregisterpropertieschangedlistener.
+// Alljoyn_proxybusobject_unregisterpropertieschangedlistener calls MSAJApi!alljoyn_proxybusobject_unregisterpropertieschangedlistener.
 func Alljoyn_proxybusobject_unregisterpropertieschangedlistener(proxyObj Alljoyn_proxybusobject, iface foundation.PSTR, callback Alljoyn_proxybusobject_listener_propertieschanged_ptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_unregisterpropertieschangedlistener.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(iface)), uintptr(callback))
 	return QStatus(r1)
 }
 
-// alljoyn_routerinit calls MSAJApi!alljoyn_routerinit.
+// Alljoyn_routerinit calls MSAJApi!alljoyn_routerinit.
 func Alljoyn_routerinit() QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_routerinit.Addr())
 	return QStatus(r1)
 }
 
-// alljoyn_routerinitwithconfig calls MSAJApi!alljoyn_routerinitwithconfig.
+// Alljoyn_routerinitwithconfig calls MSAJApi!alljoyn_routerinitwithconfig.
 func Alljoyn_routerinitwithconfig(configXml *int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_routerinitwithconfig.Addr(), uintptr(unsafe.Pointer(configXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_routershutdown calls MSAJApi!alljoyn_routershutdown.
+// Alljoyn_routershutdown calls MSAJApi!alljoyn_routershutdown.
 func Alljoyn_routershutdown() QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_routershutdown.Addr())
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_claim calls MSAJApi!alljoyn_securityapplicationproxy_claim.
+// Alljoyn_securityapplicationproxy_claim calls MSAJApi!alljoyn_securityapplicationproxy_claim.
 func Alljoyn_securityapplicationproxy_claim(proxy Alljoyn_securityapplicationproxy, caKey *int8, identityCertificateChain *int8, groupId *byte, groupSize uintptr, groupAuthority *int8, manifestsXmls **int8, manifestsCount uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_claim.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(caKey)), uintptr(unsafe.Pointer(identityCertificateChain)), uintptr(unsafe.Pointer(groupId)), uintptr(groupSize), uintptr(unsafe.Pointer(groupAuthority)), uintptr(unsafe.Pointer(manifestsXmls)), uintptr(manifestsCount))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_computemanifestdigest calls MSAJApi!alljoyn_securityapplicationproxy_computemanifestdigest.
+// Alljoyn_securityapplicationproxy_computemanifestdigest calls MSAJApi!alljoyn_securityapplicationproxy_computemanifestdigest.
 func Alljoyn_securityapplicationproxy_computemanifestdigest(unsignedManifestXml *int8, identityCertificatePem *int8, digest **byte, digestSize *uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_computemanifestdigest.Addr(), uintptr(unsafe.Pointer(unsignedManifestXml)), uintptr(unsafe.Pointer(identityCertificatePem)), uintptr(unsafe.Pointer(digest)), uintptr(unsafe.Pointer(digestSize)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_create calls MSAJApi!alljoyn_securityapplicationproxy_create.
+// Alljoyn_securityapplicationproxy_create calls MSAJApi!alljoyn_securityapplicationproxy_create.
 func Alljoyn_securityapplicationproxy_create(bus Alljoyn_busattachment, appBusName *int8, sessionId uint32) Alljoyn_securityapplicationproxy {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_create.Addr(), uintptr(bus), uintptr(unsafe.Pointer(appBusName)), uintptr(sessionId))
 	return Alljoyn_securityapplicationproxy(r1)
 }
 
-// alljoyn_securityapplicationproxy_destroy calls MSAJApi!alljoyn_securityapplicationproxy_destroy.
+// Alljoyn_securityapplicationproxy_destroy calls MSAJApi!alljoyn_securityapplicationproxy_destroy.
 func Alljoyn_securityapplicationproxy_destroy(proxy Alljoyn_securityapplicationproxy) {
 	syscall.SyscallN(procAlljoyn_securityapplicationproxy_destroy.Addr(), uintptr(proxy))
 }
 
-// alljoyn_securityapplicationproxy_digest_destroy calls MSAJApi!alljoyn_securityapplicationproxy_digest_destroy.
+// Alljoyn_securityapplicationproxy_digest_destroy calls MSAJApi!alljoyn_securityapplicationproxy_digest_destroy.
 func Alljoyn_securityapplicationproxy_digest_destroy(digest *byte) {
 	syscall.SyscallN(procAlljoyn_securityapplicationproxy_digest_destroy.Addr(), uintptr(unsafe.Pointer(digest)))
 }
 
-// alljoyn_securityapplicationproxy_eccpublickey_destroy calls MSAJApi!alljoyn_securityapplicationproxy_eccpublickey_destroy.
+// Alljoyn_securityapplicationproxy_eccpublickey_destroy calls MSAJApi!alljoyn_securityapplicationproxy_eccpublickey_destroy.
 func Alljoyn_securityapplicationproxy_eccpublickey_destroy(eccPublicKey *int8) {
 	syscall.SyscallN(procAlljoyn_securityapplicationproxy_eccpublickey_destroy.Addr(), uintptr(unsafe.Pointer(eccPublicKey)))
 }
 
-// alljoyn_securityapplicationproxy_endmanagement calls MSAJApi!alljoyn_securityapplicationproxy_endmanagement.
+// Alljoyn_securityapplicationproxy_endmanagement calls MSAJApi!alljoyn_securityapplicationproxy_endmanagement.
 func Alljoyn_securityapplicationproxy_endmanagement(proxy Alljoyn_securityapplicationproxy) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_endmanagement.Addr(), uintptr(proxy))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_getapplicationstate calls MSAJApi!alljoyn_securityapplicationproxy_getapplicationstate.
+// Alljoyn_securityapplicationproxy_getapplicationstate calls MSAJApi!alljoyn_securityapplicationproxy_getapplicationstate.
 func Alljoyn_securityapplicationproxy_getapplicationstate(proxy Alljoyn_securityapplicationproxy, applicationState *Alljoyn_applicationstate) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_getapplicationstate.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(applicationState)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_getclaimcapabilities calls MSAJApi!alljoyn_securityapplicationproxy_getclaimcapabilities.
+// Alljoyn_securityapplicationproxy_getclaimcapabilities calls MSAJApi!alljoyn_securityapplicationproxy_getclaimcapabilities.
 func Alljoyn_securityapplicationproxy_getclaimcapabilities(proxy Alljoyn_securityapplicationproxy, capabilities *uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_getclaimcapabilities.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(capabilities)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo calls MSAJApi!alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo.
+// Alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo calls MSAJApi!alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo.
 func Alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(proxy Alljoyn_securityapplicationproxy, additionalInfo *uint16) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(additionalInfo)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_getdefaultpolicy calls MSAJApi!alljoyn_securityapplicationproxy_getdefaultpolicy.
+// Alljoyn_securityapplicationproxy_getdefaultpolicy calls MSAJApi!alljoyn_securityapplicationproxy_getdefaultpolicy.
 func Alljoyn_securityapplicationproxy_getdefaultpolicy(proxy Alljoyn_securityapplicationproxy, policyXml **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_getdefaultpolicy.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(policyXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_geteccpublickey calls MSAJApi!alljoyn_securityapplicationproxy_geteccpublickey.
+// Alljoyn_securityapplicationproxy_geteccpublickey calls MSAJApi!alljoyn_securityapplicationproxy_geteccpublickey.
 func Alljoyn_securityapplicationproxy_geteccpublickey(proxy Alljoyn_securityapplicationproxy, eccPublicKey **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_geteccpublickey.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(eccPublicKey)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_getmanifesttemplate calls MSAJApi!alljoyn_securityapplicationproxy_getmanifesttemplate.
+// Alljoyn_securityapplicationproxy_getmanifesttemplate calls MSAJApi!alljoyn_securityapplicationproxy_getmanifesttemplate.
 func Alljoyn_securityapplicationproxy_getmanifesttemplate(proxy Alljoyn_securityapplicationproxy, manifestTemplateXml **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_getmanifesttemplate.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(manifestTemplateXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_getpermissionmanagementsessionport calls MSAJApi!alljoyn_securityapplicationproxy_getpermissionmanagementsessionport.
+// Alljoyn_securityapplicationproxy_getpermissionmanagementsessionport calls MSAJApi!alljoyn_securityapplicationproxy_getpermissionmanagementsessionport.
 func Alljoyn_securityapplicationproxy_getpermissionmanagementsessionport() uint16 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_getpermissionmanagementsessionport.Addr())
 	return uint16(r1)
 }
 
-// alljoyn_securityapplicationproxy_getpolicy calls MSAJApi!alljoyn_securityapplicationproxy_getpolicy.
+// Alljoyn_securityapplicationproxy_getpolicy calls MSAJApi!alljoyn_securityapplicationproxy_getpolicy.
 func Alljoyn_securityapplicationproxy_getpolicy(proxy Alljoyn_securityapplicationproxy, policyXml **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_getpolicy.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(policyXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_installmembership calls MSAJApi!alljoyn_securityapplicationproxy_installmembership.
+// Alljoyn_securityapplicationproxy_installmembership calls MSAJApi!alljoyn_securityapplicationproxy_installmembership.
 func Alljoyn_securityapplicationproxy_installmembership(proxy Alljoyn_securityapplicationproxy, membershipCertificateChain *int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_installmembership.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(membershipCertificateChain)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_manifest_destroy calls MSAJApi!alljoyn_securityapplicationproxy_manifest_destroy.
+// Alljoyn_securityapplicationproxy_manifest_destroy calls MSAJApi!alljoyn_securityapplicationproxy_manifest_destroy.
 func Alljoyn_securityapplicationproxy_manifest_destroy(signedManifestXml *int8) {
 	syscall.SyscallN(procAlljoyn_securityapplicationproxy_manifest_destroy.Addr(), uintptr(unsafe.Pointer(signedManifestXml)))
 }
 
-// alljoyn_securityapplicationproxy_manifesttemplate_destroy calls MSAJApi!alljoyn_securityapplicationproxy_manifesttemplate_destroy.
+// Alljoyn_securityapplicationproxy_manifesttemplate_destroy calls MSAJApi!alljoyn_securityapplicationproxy_manifesttemplate_destroy.
 func Alljoyn_securityapplicationproxy_manifesttemplate_destroy(manifestTemplateXml *int8) {
 	syscall.SyscallN(procAlljoyn_securityapplicationproxy_manifesttemplate_destroy.Addr(), uintptr(unsafe.Pointer(manifestTemplateXml)))
 }
 
-// alljoyn_securityapplicationproxy_policy_destroy calls MSAJApi!alljoyn_securityapplicationproxy_policy_destroy.
+// Alljoyn_securityapplicationproxy_policy_destroy calls MSAJApi!alljoyn_securityapplicationproxy_policy_destroy.
 func Alljoyn_securityapplicationproxy_policy_destroy(policyXml *int8) {
 	syscall.SyscallN(procAlljoyn_securityapplicationproxy_policy_destroy.Addr(), uintptr(unsafe.Pointer(policyXml)))
 }
 
-// alljoyn_securityapplicationproxy_reset calls MSAJApi!alljoyn_securityapplicationproxy_reset.
+// Alljoyn_securityapplicationproxy_reset calls MSAJApi!alljoyn_securityapplicationproxy_reset.
 func Alljoyn_securityapplicationproxy_reset(proxy Alljoyn_securityapplicationproxy) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_reset.Addr(), uintptr(proxy))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_resetpolicy calls MSAJApi!alljoyn_securityapplicationproxy_resetpolicy.
+// Alljoyn_securityapplicationproxy_resetpolicy calls MSAJApi!alljoyn_securityapplicationproxy_resetpolicy.
 func Alljoyn_securityapplicationproxy_resetpolicy(proxy Alljoyn_securityapplicationproxy) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_resetpolicy.Addr(), uintptr(proxy))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_setmanifestsignature calls MSAJApi!alljoyn_securityapplicationproxy_setmanifestsignature.
+// Alljoyn_securityapplicationproxy_setmanifestsignature calls MSAJApi!alljoyn_securityapplicationproxy_setmanifestsignature.
 func Alljoyn_securityapplicationproxy_setmanifestsignature(unsignedManifestXml *int8, identityCertificatePem *int8, signature *byte, signatureSize uintptr, signedManifestXml **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_setmanifestsignature.Addr(), uintptr(unsafe.Pointer(unsignedManifestXml)), uintptr(unsafe.Pointer(identityCertificatePem)), uintptr(unsafe.Pointer(signature)), uintptr(signatureSize), uintptr(unsafe.Pointer(signedManifestXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_signmanifest calls MSAJApi!alljoyn_securityapplicationproxy_signmanifest.
+// Alljoyn_securityapplicationproxy_signmanifest calls MSAJApi!alljoyn_securityapplicationproxy_signmanifest.
 func Alljoyn_securityapplicationproxy_signmanifest(unsignedManifestXml *int8, identityCertificatePem *int8, signingPrivateKeyPem *int8, signedManifestXml **int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_signmanifest.Addr(), uintptr(unsafe.Pointer(unsignedManifestXml)), uintptr(unsafe.Pointer(identityCertificatePem)), uintptr(unsafe.Pointer(signingPrivateKeyPem)), uintptr(unsafe.Pointer(signedManifestXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_startmanagement calls MSAJApi!alljoyn_securityapplicationproxy_startmanagement.
+// Alljoyn_securityapplicationproxy_startmanagement calls MSAJApi!alljoyn_securityapplicationproxy_startmanagement.
 func Alljoyn_securityapplicationproxy_startmanagement(proxy Alljoyn_securityapplicationproxy) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_startmanagement.Addr(), uintptr(proxy))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_updateidentity calls MSAJApi!alljoyn_securityapplicationproxy_updateidentity.
+// Alljoyn_securityapplicationproxy_updateidentity calls MSAJApi!alljoyn_securityapplicationproxy_updateidentity.
 func Alljoyn_securityapplicationproxy_updateidentity(proxy Alljoyn_securityapplicationproxy, identityCertificateChain *int8, manifestsXmls **int8, manifestsCount uintptr) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_updateidentity.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(identityCertificateChain)), uintptr(unsafe.Pointer(manifestsXmls)), uintptr(manifestsCount))
 	return QStatus(r1)
 }
 
-// alljoyn_securityapplicationproxy_updatepolicy calls MSAJApi!alljoyn_securityapplicationproxy_updatepolicy.
+// Alljoyn_securityapplicationproxy_updatepolicy calls MSAJApi!alljoyn_securityapplicationproxy_updatepolicy.
 func Alljoyn_securityapplicationproxy_updatepolicy(proxy Alljoyn_securityapplicationproxy, policyXml *int8) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_securityapplicationproxy_updatepolicy.Addr(), uintptr(proxy), uintptr(unsafe.Pointer(policyXml)))
 	return QStatus(r1)
 }
 
-// alljoyn_sessionlistener_create calls MSAJApi!alljoyn_sessionlistener_create.
+// Alljoyn_sessionlistener_create calls MSAJApi!alljoyn_sessionlistener_create.
 func Alljoyn_sessionlistener_create(callbacks *Alljoyn_sessionlistener_callbacks, context unsafe.Pointer) Alljoyn_sessionlistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_sessionlistener_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_sessionlistener(r1)
 }
 
-// alljoyn_sessionlistener_destroy calls MSAJApi!alljoyn_sessionlistener_destroy.
+// Alljoyn_sessionlistener_destroy calls MSAJApi!alljoyn_sessionlistener_destroy.
 func Alljoyn_sessionlistener_destroy(listener Alljoyn_sessionlistener) {
 	syscall.SyscallN(procAlljoyn_sessionlistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_sessionopts_cmp calls MSAJApi!alljoyn_sessionopts_cmp.
+// Alljoyn_sessionopts_cmp calls MSAJApi!alljoyn_sessionopts_cmp.
 func Alljoyn_sessionopts_cmp(one Alljoyn_sessionopts, other Alljoyn_sessionopts) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_sessionopts_cmp.Addr(), uintptr(one), uintptr(other))
 	return int32(r1)
 }
 
-// alljoyn_sessionopts_create calls MSAJApi!alljoyn_sessionopts_create.
+// Alljoyn_sessionopts_create calls MSAJApi!alljoyn_sessionopts_create.
 func Alljoyn_sessionopts_create(traffic byte, isMultipoint int32, proximity byte, transports uint16) Alljoyn_sessionopts {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_sessionopts_create.Addr(), uintptr(traffic), uintptr(isMultipoint), uintptr(proximity), uintptr(transports))
 	return Alljoyn_sessionopts(r1)
 }
 
-// alljoyn_sessionopts_destroy calls MSAJApi!alljoyn_sessionopts_destroy.
+// Alljoyn_sessionopts_destroy calls MSAJApi!alljoyn_sessionopts_destroy.
 func Alljoyn_sessionopts_destroy(opts Alljoyn_sessionopts) {
 	syscall.SyscallN(procAlljoyn_sessionopts_destroy.Addr(), uintptr(opts))
 }
 
-// alljoyn_sessionopts_get_multipoint calls MSAJApi!alljoyn_sessionopts_get_multipoint.
+// Alljoyn_sessionopts_get_multipoint calls MSAJApi!alljoyn_sessionopts_get_multipoint.
 func Alljoyn_sessionopts_get_multipoint(opts Alljoyn_sessionopts) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_sessionopts_get_multipoint.Addr(), uintptr(opts))
 	return int32(r1)
 }
 
-// alljoyn_sessionopts_get_proximity calls MSAJApi!alljoyn_sessionopts_get_proximity.
+// Alljoyn_sessionopts_get_proximity calls MSAJApi!alljoyn_sessionopts_get_proximity.
 func Alljoyn_sessionopts_get_proximity(opts Alljoyn_sessionopts) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_sessionopts_get_proximity.Addr(), uintptr(opts))
 	return byte(r1)
 }
 
-// alljoyn_sessionopts_get_traffic calls MSAJApi!alljoyn_sessionopts_get_traffic.
+// Alljoyn_sessionopts_get_traffic calls MSAJApi!alljoyn_sessionopts_get_traffic.
 func Alljoyn_sessionopts_get_traffic(opts Alljoyn_sessionopts) byte {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_sessionopts_get_traffic.Addr(), uintptr(opts))
 	return byte(r1)
 }
 
-// alljoyn_sessionopts_get_transports calls MSAJApi!alljoyn_sessionopts_get_transports.
+// Alljoyn_sessionopts_get_transports calls MSAJApi!alljoyn_sessionopts_get_transports.
 func Alljoyn_sessionopts_get_transports(opts Alljoyn_sessionopts) uint16 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_sessionopts_get_transports.Addr(), uintptr(opts))
 	return uint16(r1)
 }
 
-// alljoyn_sessionopts_iscompatible calls MSAJApi!alljoyn_sessionopts_iscompatible.
+// Alljoyn_sessionopts_iscompatible calls MSAJApi!alljoyn_sessionopts_iscompatible.
 func Alljoyn_sessionopts_iscompatible(one Alljoyn_sessionopts, other Alljoyn_sessionopts) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_sessionopts_iscompatible.Addr(), uintptr(one), uintptr(other))
 	return int32(r1)
 }
 
-// alljoyn_sessionopts_set_multipoint calls MSAJApi!alljoyn_sessionopts_set_multipoint.
+// Alljoyn_sessionopts_set_multipoint calls MSAJApi!alljoyn_sessionopts_set_multipoint.
 func Alljoyn_sessionopts_set_multipoint(opts Alljoyn_sessionopts, isMultipoint int32) {
 	syscall.SyscallN(procAlljoyn_sessionopts_set_multipoint.Addr(), uintptr(opts), uintptr(isMultipoint))
 }
 
-// alljoyn_sessionopts_set_proximity calls MSAJApi!alljoyn_sessionopts_set_proximity.
+// Alljoyn_sessionopts_set_proximity calls MSAJApi!alljoyn_sessionopts_set_proximity.
 func Alljoyn_sessionopts_set_proximity(opts Alljoyn_sessionopts, proximity byte) {
 	syscall.SyscallN(procAlljoyn_sessionopts_set_proximity.Addr(), uintptr(opts), uintptr(proximity))
 }
 
-// alljoyn_sessionopts_set_traffic calls MSAJApi!alljoyn_sessionopts_set_traffic.
+// Alljoyn_sessionopts_set_traffic calls MSAJApi!alljoyn_sessionopts_set_traffic.
 func Alljoyn_sessionopts_set_traffic(opts Alljoyn_sessionopts, traffic byte) {
 	syscall.SyscallN(procAlljoyn_sessionopts_set_traffic.Addr(), uintptr(opts), uintptr(traffic))
 }
 
-// alljoyn_sessionopts_set_transports calls MSAJApi!alljoyn_sessionopts_set_transports.
+// Alljoyn_sessionopts_set_transports calls MSAJApi!alljoyn_sessionopts_set_transports.
 func Alljoyn_sessionopts_set_transports(opts Alljoyn_sessionopts, transports uint16) {
 	syscall.SyscallN(procAlljoyn_sessionopts_set_transports.Addr(), uintptr(opts), uintptr(transports))
 }
 
-// alljoyn_sessionportlistener_create calls MSAJApi!alljoyn_sessionportlistener_create.
+// Alljoyn_sessionportlistener_create calls MSAJApi!alljoyn_sessionportlistener_create.
 func Alljoyn_sessionportlistener_create(callbacks *Alljoyn_sessionportlistener_callbacks, context unsafe.Pointer) Alljoyn_sessionportlistener {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_sessionportlistener_create.Addr(), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(context)))
 	return Alljoyn_sessionportlistener(r1)
 }
 
-// alljoyn_sessionportlistener_destroy calls MSAJApi!alljoyn_sessionportlistener_destroy.
+// Alljoyn_sessionportlistener_destroy calls MSAJApi!alljoyn_sessionportlistener_destroy.
 func Alljoyn_sessionportlistener_destroy(listener Alljoyn_sessionportlistener) {
 	syscall.SyscallN(procAlljoyn_sessionportlistener_destroy.Addr(), uintptr(listener))
 }
 
-// alljoyn_shutdown calls MSAJApi!alljoyn_shutdown.
+// Alljoyn_shutdown calls MSAJApi!alljoyn_shutdown.
 func Alljoyn_shutdown() QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_shutdown.Addr())
 	return QStatus(r1)
 }
 
-// alljoyn_unity_deferred_callbacks_process calls MSAJApi!alljoyn_unity_deferred_callbacks_process.
+// Alljoyn_unity_deferred_callbacks_process calls MSAJApi!alljoyn_unity_deferred_callbacks_process.
 func Alljoyn_unity_deferred_callbacks_process() int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_unity_deferred_callbacks_process.Addr())
 	return int32(r1)
 }
 
-// alljoyn_unity_set_deferred_callback_mainthread_only calls MSAJApi!alljoyn_unity_set_deferred_callback_mainthread_only.
+// Alljoyn_unity_set_deferred_callback_mainthread_only calls MSAJApi!alljoyn_unity_set_deferred_callback_mainthread_only.
 func Alljoyn_unity_set_deferred_callback_mainthread_only(mainthread_only int32) {
 	syscall.SyscallN(procAlljoyn_unity_set_deferred_callback_mainthread_only.Addr(), uintptr(mainthread_only))
+}
+
+// QCC_StatusText calls MSAJApi!QCC_StatusText.
+func QCC_StatusText(status QStatus) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procQCC_StatusText.Addr(), uintptr(status))
+	return foundation.PSTR(unsafe.Pointer(r1))
 }

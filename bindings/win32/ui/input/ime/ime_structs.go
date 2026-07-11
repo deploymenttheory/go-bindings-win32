@@ -224,8 +224,8 @@ type IMESTRINGINFO struct {
 	Lpwstr      foundation.PWSTR
 }
 
-// INPUTCONTEXT_lfFont_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INPUTCONTEXT_lfFont_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INPUTCONTEXT_lfFont_e__Union struct {
 	Data [23]uint32
 }

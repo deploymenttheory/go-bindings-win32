@@ -100,8 +100,8 @@ type DNS_SERVER_PROPERTY struct {
 }
 
 // DNS_SERVER_PROPERTY_TYPES: https://learn.microsoft.com/windows/win32/api/netioapi/ns-netioapi-dns_server_property_types
-// DNS_SERVER_PROPERTY_TYPES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_SERVER_PROPERTY_TYPES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_SERVER_PROPERTY_TYPES struct {
 	Data [1]uint64
 }
@@ -202,14 +202,14 @@ type INTERFACE_TIMESTAMP_CAPABILITIES struct {
 	SoftwareCapabilities     INTERFACE_SOFTWARE_TIMESTAMP_CAPABILITIES
 }
 
-// IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -254,8 +254,8 @@ type IP_ADAPTER_ADDRESSES_LH struct {
 	FirstDnsSuffix         *IP_ADAPTER_DNS_SUFFIX
 }
 
-// IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -283,8 +283,8 @@ type IP_ADAPTER_ADDRESSES_XP struct {
 	FirstPrefix           *IP_ADAPTER_PREFIX_XP
 }
 
-// IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -296,8 +296,8 @@ type IP_ADAPTER_ANYCAST_ADDRESS_XP struct {
 	Address   networkingwinsock.SOCKET_ADDRESS
 }
 
-// IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -315,8 +315,8 @@ type IP_ADAPTER_DNS_SUFFIX struct {
 	String [256]uint16
 }
 
-// IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -356,8 +356,8 @@ type IP_ADAPTER_INFO struct {
 	LeaseExpires        int64
 }
 
-// IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -375,8 +375,8 @@ type IP_ADAPTER_ORDER_MAP struct {
 	AdapterOrder [1]uint32
 }
 
-// IP_ADAPTER_PREFIX_XP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_PREFIX_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_PREFIX_XP_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -389,8 +389,8 @@ type IP_ADAPTER_PREFIX_XP struct {
 	PrefixLength uint32
 }
 
-// IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -409,8 +409,8 @@ type IP_ADAPTER_UNICAST_ADDRESS_LH struct {
 	OnLinkPrefixLength byte
 }
 
-// IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -428,8 +428,8 @@ type IP_ADAPTER_UNICAST_ADDRESS_XP struct {
 	LeaseLifetime     uint32
 }
 
-// IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -788,14 +788,14 @@ type MIB_IPFORWARDNUMBER struct {
 	DwValue uint32
 }
 
-// MIB_IPFORWARDROW_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_IPFORWARDROW_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_IPFORWARDROW_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// MIB_IPFORWARDROW_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_IPFORWARDROW_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_IPFORWARDROW_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -1042,8 +1042,8 @@ type MIB_IPMCAST_SCOPE struct {
 	DwStatus       uint32
 }
 
-// MIB_IPNETROW_LH_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_IPNETROW_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_IPNETROW_LH_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1072,14 +1072,14 @@ type MIB_IPNETTABLE struct {
 	Table        [1]MIB_IPNETROW_LH
 }
 
-// MIB_IPNET_ROW2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_IPNET_ROW2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_IPNET_ROW2_Anonymous_e__Union struct {
 	Data [1]byte
 }
 
-// MIB_IPNET_ROW2_ReachabilityTime_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_IPNET_ROW2_ReachabilityTime_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_IPNET_ROW2_ReachabilityTime_e__Union struct {
 	Data [1]uint32
 }
@@ -1102,8 +1102,8 @@ type MIB_IPNET_TABLE2 struct {
 	Table      [1]MIB_IPNET_ROW2
 }
 
-// MIB_IPPATH_ROW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_IPPATH_ROW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_IPPATH_ROW_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1130,8 +1130,8 @@ type MIB_IPPATH_TABLE struct {
 	Table      [1]MIB_IPPATH_ROW
 }
 
-// MIB_IPSTATS_LH_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_IPSTATS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_IPSTATS_LH_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1234,8 +1234,8 @@ type MIB_MULTICASTIPADDRESS_TABLE struct {
 	Table      [1]MIB_MULTICASTIPADDRESS_ROW
 }
 
-// MIB_OPAQUE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_OPAQUE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_OPAQUE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1348,8 +1348,8 @@ type MIB_TCPROW2 struct {
 	DwOffloadState TCP_CONNECTION_OFFLOAD_STATE
 }
 
-// MIB_TCPROW_LH_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_TCPROW_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_TCPROW_LH_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1413,8 +1413,8 @@ type MIB_TCPSTATS2 struct {
 	DwNumConns     uint32
 }
 
-// MIB_TCPSTATS_LH_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_TCPSTATS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_TCPSTATS_LH_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1488,8 +1488,8 @@ type MIB_UDP6ROW struct {
 	DwLocalPort    uint32
 }
 
-// MIB_UDP6ROW2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_UDP6ROW2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_UDP6ROW2_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1507,8 +1507,8 @@ type MIB_UDP6ROW2 struct {
 	DwRemotePort      uint32
 }
 
-// MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1561,8 +1561,8 @@ type MIB_UDPROW struct {
 	DwLocalPort uint32
 }
 
-// MIB_UDPROW2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_UDPROW2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_UDPROW2_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1578,8 +1578,8 @@ type MIB_UDPROW2 struct {
 	DwRemotePort      uint32
 }
 
-// MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1664,8 +1664,8 @@ type MIB_UNICASTIPADDRESS_TABLE struct {
 	Table      [1]MIB_UNICASTIPADDRESS_ROW
 }
 
-// NET_ADDRESS_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NET_ADDRESS_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NET_ADDRESS_INFO_Anonymous_e__Union struct {
 	Data [131]uint32
 }

@@ -31,19 +31,19 @@ var (
 var (
 	procAddUsersToEncryptedFile             = modADVAPI32.NewProc("AddUsersToEncryptedFile")
 	procCloseEncryptedFileRaw               = modADVAPI32.NewProc("CloseEncryptedFileRaw")
+	procDecryptFile                         = modADVAPI32.NewProc("DecryptFileW")
 	procDecryptFileA                        = modADVAPI32.NewProc("DecryptFileA")
-	procDecryptFileW                        = modADVAPI32.NewProc("DecryptFileW")
 	procDuplicateEncryptionInfoFile         = modADVAPI32.NewProc("DuplicateEncryptionInfoFile")
+	procEncryptFile                         = modADVAPI32.NewProc("EncryptFileW")
 	procEncryptFileA                        = modADVAPI32.NewProc("EncryptFileA")
-	procEncryptFileW                        = modADVAPI32.NewProc("EncryptFileW")
 	procEncryptionDisable                   = modADVAPI32.NewProc("EncryptionDisable")
+	procFileEncryptionStatus                = modADVAPI32.NewProc("FileEncryptionStatusW")
 	procFileEncryptionStatusA               = modADVAPI32.NewProc("FileEncryptionStatusA")
-	procFileEncryptionStatusW               = modADVAPI32.NewProc("FileEncryptionStatusW")
 	procFreeEncryptedFileMetadata           = modADVAPI32.NewProc("FreeEncryptedFileMetadata")
 	procFreeEncryptionCertificateHashList   = modADVAPI32.NewProc("FreeEncryptionCertificateHashList")
 	procGetEncryptedFileMetadata            = modADVAPI32.NewProc("GetEncryptedFileMetadata")
+	procOpenEncryptedFileRaw                = modADVAPI32.NewProc("OpenEncryptedFileRawW")
 	procOpenEncryptedFileRawA               = modADVAPI32.NewProc("OpenEncryptedFileRawA")
-	procOpenEncryptedFileRawW               = modADVAPI32.NewProc("OpenEncryptedFileRawW")
 	procQueryRecoveryAgentsOnEncryptedFile  = modADVAPI32.NewProc("QueryRecoveryAgentsOnEncryptedFile")
 	procQueryUsersOnEncryptedFile           = modADVAPI32.NewProc("QueryUsersOnEncryptedFile")
 	procReadEncryptedFileRaw                = modADVAPI32.NewProc("ReadEncryptedFileRaw")
@@ -136,104 +136,104 @@ var (
 	procBackupRead                          = modKERNEL32.NewProc("BackupRead")
 	procBackupSeek                          = modKERNEL32.NewProc("BackupSeek")
 	procBackupWrite                         = modKERNEL32.NewProc("BackupWrite")
+	procCheckNameLegalDOS8Dot3              = modKERNEL32.NewProc("CheckNameLegalDOS8Dot3W")
 	procCheckNameLegalDOS8Dot3A             = modKERNEL32.NewProc("CheckNameLegalDOS8Dot3A")
-	procCheckNameLegalDOS8Dot3W             = modKERNEL32.NewProc("CheckNameLegalDOS8Dot3W")
 	procCompareFileTime                     = modKERNEL32.NewProc("CompareFileTime")
+	procCopyFile                            = modKERNEL32.NewProc("CopyFileW")
 	procCopyFile2                           = modKERNEL32.NewProc("CopyFile2")
 	procCopyFileA                           = modKERNEL32.NewProc("CopyFileA")
+	procCopyFileEx                          = modKERNEL32.NewProc("CopyFileExW")
 	procCopyFileExA                         = modKERNEL32.NewProc("CopyFileExA")
-	procCopyFileExW                         = modKERNEL32.NewProc("CopyFileExW")
+	procCopyFileTransacted                  = modKERNEL32.NewProc("CopyFileTransactedW")
 	procCopyFileTransactedA                 = modKERNEL32.NewProc("CopyFileTransactedA")
-	procCopyFileTransactedW                 = modKERNEL32.NewProc("CopyFileTransactedW")
-	procCopyFileW                           = modKERNEL32.NewProc("CopyFileW")
 	procCopyLZFile                          = modKERNEL32.NewProc("CopyLZFile")
+	procCreateDirectory                     = modKERNEL32.NewProc("CreateDirectoryW")
+	procCreateDirectory2                    = modKERNEL32.NewProc("CreateDirectory2W")
 	procCreateDirectory2A                   = modKERNEL32.NewProc("CreateDirectory2A")
-	procCreateDirectory2W                   = modKERNEL32.NewProc("CreateDirectory2W")
 	procCreateDirectoryA                    = modKERNEL32.NewProc("CreateDirectoryA")
+	procCreateDirectoryEx                   = modKERNEL32.NewProc("CreateDirectoryExW")
 	procCreateDirectoryExA                  = modKERNEL32.NewProc("CreateDirectoryExA")
-	procCreateDirectoryExW                  = modKERNEL32.NewProc("CreateDirectoryExW")
+	procCreateDirectoryTransacted           = modKERNEL32.NewProc("CreateDirectoryTransactedW")
 	procCreateDirectoryTransactedA          = modKERNEL32.NewProc("CreateDirectoryTransactedA")
-	procCreateDirectoryTransactedW          = modKERNEL32.NewProc("CreateDirectoryTransactedW")
-	procCreateDirectoryW                    = modKERNEL32.NewProc("CreateDirectoryW")
+	procCreateFile                          = modKERNEL32.NewProc("CreateFileW")
 	procCreateFile2                         = modKERNEL32.NewProc("CreateFile2")
 	procCreateFile3                         = modKERNEL32.NewProc("CreateFile3")
 	procCreateFileA                         = modKERNEL32.NewProc("CreateFileA")
+	procCreateFileTransacted                = modKERNEL32.NewProc("CreateFileTransactedW")
 	procCreateFileTransactedA               = modKERNEL32.NewProc("CreateFileTransactedA")
-	procCreateFileTransactedW               = modKERNEL32.NewProc("CreateFileTransactedW")
-	procCreateFileW                         = modKERNEL32.NewProc("CreateFileW")
+	procCreateHardLink                      = modKERNEL32.NewProc("CreateHardLinkW")
 	procCreateHardLinkA                     = modKERNEL32.NewProc("CreateHardLinkA")
+	procCreateHardLinkTransacted            = modKERNEL32.NewProc("CreateHardLinkTransactedW")
 	procCreateHardLinkTransactedA           = modKERNEL32.NewProc("CreateHardLinkTransactedA")
-	procCreateHardLinkTransactedW           = modKERNEL32.NewProc("CreateHardLinkTransactedW")
-	procCreateHardLinkW                     = modKERNEL32.NewProc("CreateHardLinkW")
+	procCreateSymbolicLink                  = modKERNEL32.NewProc("CreateSymbolicLinkW")
 	procCreateSymbolicLinkA                 = modKERNEL32.NewProc("CreateSymbolicLinkA")
+	procCreateSymbolicLinkTransacted        = modKERNEL32.NewProc("CreateSymbolicLinkTransactedW")
 	procCreateSymbolicLinkTransactedA       = modKERNEL32.NewProc("CreateSymbolicLinkTransactedA")
-	procCreateSymbolicLinkTransactedW       = modKERNEL32.NewProc("CreateSymbolicLinkTransactedW")
-	procCreateSymbolicLinkW                 = modKERNEL32.NewProc("CreateSymbolicLinkW")
 	procCreateTapePartition                 = modKERNEL32.NewProc("CreateTapePartition")
+	procDefineDosDevice                     = modKERNEL32.NewProc("DefineDosDeviceW")
 	procDefineDosDeviceA                    = modKERNEL32.NewProc("DefineDosDeviceA")
-	procDefineDosDeviceW                    = modKERNEL32.NewProc("DefineDosDeviceW")
+	procDeleteFile                          = modKERNEL32.NewProc("DeleteFileW")
+	procDeleteFile2                         = modKERNEL32.NewProc("DeleteFile2W")
 	procDeleteFile2A                        = modKERNEL32.NewProc("DeleteFile2A")
-	procDeleteFile2W                        = modKERNEL32.NewProc("DeleteFile2W")
 	procDeleteFileA                         = modKERNEL32.NewProc("DeleteFileA")
+	procDeleteFileTransacted                = modKERNEL32.NewProc("DeleteFileTransactedW")
 	procDeleteFileTransactedA               = modKERNEL32.NewProc("DeleteFileTransactedA")
-	procDeleteFileTransactedW               = modKERNEL32.NewProc("DeleteFileTransactedW")
-	procDeleteFileW                         = modKERNEL32.NewProc("DeleteFileW")
+	procDeleteVolumeMountPoint              = modKERNEL32.NewProc("DeleteVolumeMountPointW")
 	procDeleteVolumeMountPointA             = modKERNEL32.NewProc("DeleteVolumeMountPointA")
-	procDeleteVolumeMountPointW             = modKERNEL32.NewProc("DeleteVolumeMountPointW")
 	procEraseTape                           = modKERNEL32.NewProc("EraseTape")
 	procFileTimeToLocalFileTime             = modKERNEL32.NewProc("FileTimeToLocalFileTime")
 	procFindClose                           = modKERNEL32.NewProc("FindClose")
 	procFindCloseChangeNotification         = modKERNEL32.NewProc("FindCloseChangeNotification")
+	procFindFirstChangeNotification         = modKERNEL32.NewProc("FindFirstChangeNotificationW")
 	procFindFirstChangeNotificationA        = modKERNEL32.NewProc("FindFirstChangeNotificationA")
-	procFindFirstChangeNotificationW        = modKERNEL32.NewProc("FindFirstChangeNotificationW")
+	procFindFirstFile                       = modKERNEL32.NewProc("FindFirstFileW")
 	procFindFirstFileA                      = modKERNEL32.NewProc("FindFirstFileA")
+	procFindFirstFileEx                     = modKERNEL32.NewProc("FindFirstFileExW")
 	procFindFirstFileExA                    = modKERNEL32.NewProc("FindFirstFileExA")
-	procFindFirstFileExW                    = modKERNEL32.NewProc("FindFirstFileExW")
 	procFindFirstFileNameTransactedW        = modKERNEL32.NewProc("FindFirstFileNameTransactedW")
 	procFindFirstFileNameW                  = modKERNEL32.NewProc("FindFirstFileNameW")
+	procFindFirstFileTransacted             = modKERNEL32.NewProc("FindFirstFileTransactedW")
 	procFindFirstFileTransactedA            = modKERNEL32.NewProc("FindFirstFileTransactedA")
-	procFindFirstFileTransactedW            = modKERNEL32.NewProc("FindFirstFileTransactedW")
-	procFindFirstFileW                      = modKERNEL32.NewProc("FindFirstFileW")
 	procFindFirstStreamTransactedW          = modKERNEL32.NewProc("FindFirstStreamTransactedW")
 	procFindFirstStreamW                    = modKERNEL32.NewProc("FindFirstStreamW")
+	procFindFirstVolume                     = modKERNEL32.NewProc("FindFirstVolumeW")
 	procFindFirstVolumeA                    = modKERNEL32.NewProc("FindFirstVolumeA")
+	procFindFirstVolumeMountPoint           = modKERNEL32.NewProc("FindFirstVolumeMountPointW")
 	procFindFirstVolumeMountPointA          = modKERNEL32.NewProc("FindFirstVolumeMountPointA")
-	procFindFirstVolumeMountPointW          = modKERNEL32.NewProc("FindFirstVolumeMountPointW")
-	procFindFirstVolumeW                    = modKERNEL32.NewProc("FindFirstVolumeW")
 	procFindNextChangeNotification          = modKERNEL32.NewProc("FindNextChangeNotification")
+	procFindNextFile                        = modKERNEL32.NewProc("FindNextFileW")
 	procFindNextFileA                       = modKERNEL32.NewProc("FindNextFileA")
 	procFindNextFileNameW                   = modKERNEL32.NewProc("FindNextFileNameW")
-	procFindNextFileW                       = modKERNEL32.NewProc("FindNextFileW")
 	procFindNextStreamW                     = modKERNEL32.NewProc("FindNextStreamW")
+	procFindNextVolume                      = modKERNEL32.NewProc("FindNextVolumeW")
 	procFindNextVolumeA                     = modKERNEL32.NewProc("FindNextVolumeA")
+	procFindNextVolumeMountPoint            = modKERNEL32.NewProc("FindNextVolumeMountPointW")
 	procFindNextVolumeMountPointA           = modKERNEL32.NewProc("FindNextVolumeMountPointA")
-	procFindNextVolumeMountPointW           = modKERNEL32.NewProc("FindNextVolumeMountPointW")
-	procFindNextVolumeW                     = modKERNEL32.NewProc("FindNextVolumeW")
 	procFindVolumeClose                     = modKERNEL32.NewProc("FindVolumeClose")
 	procFindVolumeMountPointClose           = modKERNEL32.NewProc("FindVolumeMountPointClose")
 	procFlushFileBuffers                    = modKERNEL32.NewProc("FlushFileBuffers")
+	procGetBinaryType                       = modKERNEL32.NewProc("GetBinaryTypeW")
 	procGetBinaryTypeA                      = modKERNEL32.NewProc("GetBinaryTypeA")
-	procGetBinaryTypeW                      = modKERNEL32.NewProc("GetBinaryTypeW")
+	procGetCompressedFileSize               = modKERNEL32.NewProc("GetCompressedFileSizeW")
 	procGetCompressedFileSizeA              = modKERNEL32.NewProc("GetCompressedFileSizeA")
+	procGetCompressedFileSizeTransacted     = modKERNEL32.NewProc("GetCompressedFileSizeTransactedW")
 	procGetCompressedFileSizeTransactedA    = modKERNEL32.NewProc("GetCompressedFileSizeTransactedA")
-	procGetCompressedFileSizeTransactedW    = modKERNEL32.NewProc("GetCompressedFileSizeTransactedW")
-	procGetCompressedFileSizeW              = modKERNEL32.NewProc("GetCompressedFileSizeW")
+	procGetDiskFreeSpace                    = modKERNEL32.NewProc("GetDiskFreeSpaceW")
 	procGetDiskFreeSpaceA                   = modKERNEL32.NewProc("GetDiskFreeSpaceA")
+	procGetDiskFreeSpaceEx                  = modKERNEL32.NewProc("GetDiskFreeSpaceExW")
 	procGetDiskFreeSpaceExA                 = modKERNEL32.NewProc("GetDiskFreeSpaceExA")
-	procGetDiskFreeSpaceExW                 = modKERNEL32.NewProc("GetDiskFreeSpaceExW")
-	procGetDiskFreeSpaceW                   = modKERNEL32.NewProc("GetDiskFreeSpaceW")
+	procGetDiskSpaceInformation             = modKERNEL32.NewProc("GetDiskSpaceInformationW")
 	procGetDiskSpaceInformationA            = modKERNEL32.NewProc("GetDiskSpaceInformationA")
-	procGetDiskSpaceInformationW            = modKERNEL32.NewProc("GetDiskSpaceInformationW")
+	procGetDriveType                        = modKERNEL32.NewProc("GetDriveTypeW")
 	procGetDriveTypeA                       = modKERNEL32.NewProc("GetDriveTypeA")
-	procGetDriveTypeW                       = modKERNEL32.NewProc("GetDriveTypeW")
+	procGetExpandedName                     = modKERNEL32.NewProc("GetExpandedNameW")
 	procGetExpandedNameA                    = modKERNEL32.NewProc("GetExpandedNameA")
-	procGetExpandedNameW                    = modKERNEL32.NewProc("GetExpandedNameW")
+	procGetFileAttributes                   = modKERNEL32.NewProc("GetFileAttributesW")
 	procGetFileAttributesA                  = modKERNEL32.NewProc("GetFileAttributesA")
+	procGetFileAttributesEx                 = modKERNEL32.NewProc("GetFileAttributesExW")
 	procGetFileAttributesExA                = modKERNEL32.NewProc("GetFileAttributesExA")
-	procGetFileAttributesExW                = modKERNEL32.NewProc("GetFileAttributesExW")
+	procGetFileAttributesTransacted         = modKERNEL32.NewProc("GetFileAttributesTransactedW")
 	procGetFileAttributesTransactedA        = modKERNEL32.NewProc("GetFileAttributesTransactedA")
-	procGetFileAttributesTransactedW        = modKERNEL32.NewProc("GetFileAttributesTransactedW")
-	procGetFileAttributesW                  = modKERNEL32.NewProc("GetFileAttributesW")
 	procGetFileBandwidthReservation         = modKERNEL32.NewProc("GetFileBandwidthReservation")
 	procGetFileInformationByHandle          = modKERNEL32.NewProc("GetFileInformationByHandle")
 	procGetFileInformationByHandleEx        = modKERNEL32.NewProc("GetFileInformationByHandleEx")
@@ -242,108 +242,108 @@ var (
 	procGetFileSizeEx                       = modKERNEL32.NewProc("GetFileSizeEx")
 	procGetFileTime                         = modKERNEL32.NewProc("GetFileTime")
 	procGetFileType                         = modKERNEL32.NewProc("GetFileType")
+	procGetFinalPathNameByHandle            = modKERNEL32.NewProc("GetFinalPathNameByHandleW")
 	procGetFinalPathNameByHandleA           = modKERNEL32.NewProc("GetFinalPathNameByHandleA")
-	procGetFinalPathNameByHandleW           = modKERNEL32.NewProc("GetFinalPathNameByHandleW")
+	procGetFullPathName                     = modKERNEL32.NewProc("GetFullPathNameW")
 	procGetFullPathNameA                    = modKERNEL32.NewProc("GetFullPathNameA")
+	procGetFullPathNameTransacted           = modKERNEL32.NewProc("GetFullPathNameTransactedW")
 	procGetFullPathNameTransactedA          = modKERNEL32.NewProc("GetFullPathNameTransactedA")
-	procGetFullPathNameTransactedW          = modKERNEL32.NewProc("GetFullPathNameTransactedW")
-	procGetFullPathNameW                    = modKERNEL32.NewProc("GetFullPathNameW")
+	procGetLogicalDriveStrings              = modKERNEL32.NewProc("GetLogicalDriveStringsW")
 	procGetLogicalDriveStringsA             = modKERNEL32.NewProc("GetLogicalDriveStringsA")
-	procGetLogicalDriveStringsW             = modKERNEL32.NewProc("GetLogicalDriveStringsW")
 	procGetLogicalDrives                    = modKERNEL32.NewProc("GetLogicalDrives")
+	procGetLongPathName                     = modKERNEL32.NewProc("GetLongPathNameW")
 	procGetLongPathNameA                    = modKERNEL32.NewProc("GetLongPathNameA")
+	procGetLongPathNameTransacted           = modKERNEL32.NewProc("GetLongPathNameTransactedW")
 	procGetLongPathNameTransactedA          = modKERNEL32.NewProc("GetLongPathNameTransactedA")
-	procGetLongPathNameTransactedW          = modKERNEL32.NewProc("GetLongPathNameTransactedW")
-	procGetLongPathNameW                    = modKERNEL32.NewProc("GetLongPathNameW")
+	procGetShortPathName                    = modKERNEL32.NewProc("GetShortPathNameW")
 	procGetShortPathNameA                   = modKERNEL32.NewProc("GetShortPathNameA")
-	procGetShortPathNameW                   = modKERNEL32.NewProc("GetShortPathNameW")
 	procGetTapeParameters                   = modKERNEL32.NewProc("GetTapeParameters")
 	procGetTapePosition                     = modKERNEL32.NewProc("GetTapePosition")
 	procGetTapeStatus                       = modKERNEL32.NewProc("GetTapeStatus")
+	procGetTempFileName                     = modKERNEL32.NewProc("GetTempFileNameW")
 	procGetTempFileNameA                    = modKERNEL32.NewProc("GetTempFileNameA")
-	procGetTempFileNameW                    = modKERNEL32.NewProc("GetTempFileNameW")
+	procGetTempPath                         = modKERNEL32.NewProc("GetTempPathW")
+	procGetTempPath2                        = modKERNEL32.NewProc("GetTempPath2W")
 	procGetTempPath2A                       = modKERNEL32.NewProc("GetTempPath2A")
-	procGetTempPath2W                       = modKERNEL32.NewProc("GetTempPath2W")
 	procGetTempPathA                        = modKERNEL32.NewProc("GetTempPathA")
-	procGetTempPathW                        = modKERNEL32.NewProc("GetTempPathW")
+	procGetVolumeInformation                = modKERNEL32.NewProc("GetVolumeInformationW")
 	procGetVolumeInformationA               = modKERNEL32.NewProc("GetVolumeInformationA")
 	procGetVolumeInformationByHandleW       = modKERNEL32.NewProc("GetVolumeInformationByHandleW")
-	procGetVolumeInformationW               = modKERNEL32.NewProc("GetVolumeInformationW")
+	procGetVolumeNameForVolumeMountPoint    = modKERNEL32.NewProc("GetVolumeNameForVolumeMountPointW")
 	procGetVolumeNameForVolumeMountPointA   = modKERNEL32.NewProc("GetVolumeNameForVolumeMountPointA")
-	procGetVolumeNameForVolumeMountPointW   = modKERNEL32.NewProc("GetVolumeNameForVolumeMountPointW")
+	procGetVolumePathName                   = modKERNEL32.NewProc("GetVolumePathNameW")
 	procGetVolumePathNameA                  = modKERNEL32.NewProc("GetVolumePathNameA")
-	procGetVolumePathNameW                  = modKERNEL32.NewProc("GetVolumePathNameW")
+	procGetVolumePathNamesForVolumeName     = modKERNEL32.NewProc("GetVolumePathNamesForVolumeNameW")
 	procGetVolumePathNamesForVolumeNameA    = modKERNEL32.NewProc("GetVolumePathNamesForVolumeNameA")
-	procGetVolumePathNamesForVolumeNameW    = modKERNEL32.NewProc("GetVolumePathNamesForVolumeNameW")
 	procLZClose                             = modKERNEL32.NewProc("LZClose")
 	procLZCopy                              = modKERNEL32.NewProc("LZCopy")
 	procLZDone                              = modKERNEL32.NewProc("LZDone")
 	procLZInit                              = modKERNEL32.NewProc("LZInit")
+	procLZOpenFile                          = modKERNEL32.NewProc("LZOpenFileW")
 	procLZOpenFileA                         = modKERNEL32.NewProc("LZOpenFileA")
-	procLZOpenFileW                         = modKERNEL32.NewProc("LZOpenFileW")
 	procLZRead                              = modKERNEL32.NewProc("LZRead")
 	procLZSeek                              = modKERNEL32.NewProc("LZSeek")
 	procLZStart                             = modKERNEL32.NewProc("LZStart")
 	procLocalFileTimeToFileTime             = modKERNEL32.NewProc("LocalFileTimeToFileTime")
 	procLockFile                            = modKERNEL32.NewProc("LockFile")
 	procLockFileEx                          = modKERNEL32.NewProc("LockFileEx")
+	procMoveFile                            = modKERNEL32.NewProc("MoveFileW")
 	procMoveFileA                           = modKERNEL32.NewProc("MoveFileA")
+	procMoveFileEx                          = modKERNEL32.NewProc("MoveFileExW")
 	procMoveFileExA                         = modKERNEL32.NewProc("MoveFileExA")
-	procMoveFileExW                         = modKERNEL32.NewProc("MoveFileExW")
+	procMoveFileTransacted                  = modKERNEL32.NewProc("MoveFileTransactedW")
 	procMoveFileTransactedA                 = modKERNEL32.NewProc("MoveFileTransactedA")
-	procMoveFileTransactedW                 = modKERNEL32.NewProc("MoveFileTransactedW")
-	procMoveFileW                           = modKERNEL32.NewProc("MoveFileW")
+	procMoveFileWithProgress                = modKERNEL32.NewProc("MoveFileWithProgressW")
 	procMoveFileWithProgressA               = modKERNEL32.NewProc("MoveFileWithProgressA")
-	procMoveFileWithProgressW               = modKERNEL32.NewProc("MoveFileWithProgressW")
 	procOpenFile                            = modKERNEL32.NewProc("OpenFile")
 	procOpenFileById                        = modKERNEL32.NewProc("OpenFileById")
 	procPrepareTape                         = modKERNEL32.NewProc("PrepareTape")
+	procQueryDosDevice                      = modKERNEL32.NewProc("QueryDosDeviceW")
 	procQueryDosDeviceA                     = modKERNEL32.NewProc("QueryDosDeviceA")
-	procQueryDosDeviceW                     = modKERNEL32.NewProc("QueryDosDeviceW")
 	procReOpenFile                          = modKERNEL32.NewProc("ReOpenFile")
 	procReadDirectoryChangesExW             = modKERNEL32.NewProc("ReadDirectoryChangesExW")
 	procReadDirectoryChangesW               = modKERNEL32.NewProc("ReadDirectoryChangesW")
 	procReadFile                            = modKERNEL32.NewProc("ReadFile")
 	procReadFileEx                          = modKERNEL32.NewProc("ReadFileEx")
 	procReadFileScatter                     = modKERNEL32.NewProc("ReadFileScatter")
+	procRemoveDirectory                     = modKERNEL32.NewProc("RemoveDirectoryW")
+	procRemoveDirectory2                    = modKERNEL32.NewProc("RemoveDirectory2W")
 	procRemoveDirectory2A                   = modKERNEL32.NewProc("RemoveDirectory2A")
-	procRemoveDirectory2W                   = modKERNEL32.NewProc("RemoveDirectory2W")
 	procRemoveDirectoryA                    = modKERNEL32.NewProc("RemoveDirectoryA")
+	procRemoveDirectoryTransacted           = modKERNEL32.NewProc("RemoveDirectoryTransactedW")
 	procRemoveDirectoryTransactedA          = modKERNEL32.NewProc("RemoveDirectoryTransactedA")
-	procRemoveDirectoryTransactedW          = modKERNEL32.NewProc("RemoveDirectoryTransactedW")
-	procRemoveDirectoryW                    = modKERNEL32.NewProc("RemoveDirectoryW")
+	procReplaceFile                         = modKERNEL32.NewProc("ReplaceFileW")
 	procReplaceFileA                        = modKERNEL32.NewProc("ReplaceFileA")
-	procReplaceFileW                        = modKERNEL32.NewProc("ReplaceFileW")
+	procSearchPath                          = modKERNEL32.NewProc("SearchPathW")
 	procSearchPathA                         = modKERNEL32.NewProc("SearchPathA")
-	procSearchPathW                         = modKERNEL32.NewProc("SearchPathW")
 	procSetEndOfFile                        = modKERNEL32.NewProc("SetEndOfFile")
 	procSetFileApisToANSI                   = modKERNEL32.NewProc("SetFileApisToANSI")
 	procSetFileApisToOEM                    = modKERNEL32.NewProc("SetFileApisToOEM")
+	procSetFileAttributes                   = modKERNEL32.NewProc("SetFileAttributesW")
 	procSetFileAttributesA                  = modKERNEL32.NewProc("SetFileAttributesA")
+	procSetFileAttributesTransacted         = modKERNEL32.NewProc("SetFileAttributesTransactedW")
 	procSetFileAttributesTransactedA        = modKERNEL32.NewProc("SetFileAttributesTransactedA")
-	procSetFileAttributesTransactedW        = modKERNEL32.NewProc("SetFileAttributesTransactedW")
-	procSetFileAttributesW                  = modKERNEL32.NewProc("SetFileAttributesW")
 	procSetFileBandwidthReservation         = modKERNEL32.NewProc("SetFileBandwidthReservation")
 	procSetFileCompletionNotificationModes  = modKERNEL32.NewProc("SetFileCompletionNotificationModes")
 	procSetFileInformationByHandle          = modKERNEL32.NewProc("SetFileInformationByHandle")
 	procSetFileIoOverlappedRange            = modKERNEL32.NewProc("SetFileIoOverlappedRange")
 	procSetFilePointer                      = modKERNEL32.NewProc("SetFilePointer")
 	procSetFilePointerEx                    = modKERNEL32.NewProc("SetFilePointerEx")
+	procSetFileShortName                    = modKERNEL32.NewProc("SetFileShortNameW")
 	procSetFileShortNameA                   = modKERNEL32.NewProc("SetFileShortNameA")
-	procSetFileShortNameW                   = modKERNEL32.NewProc("SetFileShortNameW")
 	procSetFileTime                         = modKERNEL32.NewProc("SetFileTime")
 	procSetFileValidData                    = modKERNEL32.NewProc("SetFileValidData")
 	procSetSearchPathMode                   = modKERNEL32.NewProc("SetSearchPathMode")
 	procSetTapeParameters                   = modKERNEL32.NewProc("SetTapeParameters")
 	procSetTapePosition                     = modKERNEL32.NewProc("SetTapePosition")
+	procSetVolumeLabel                      = modKERNEL32.NewProc("SetVolumeLabelW")
 	procSetVolumeLabelA                     = modKERNEL32.NewProc("SetVolumeLabelA")
-	procSetVolumeLabelW                     = modKERNEL32.NewProc("SetVolumeLabelW")
+	procSetVolumeMountPoint                 = modKERNEL32.NewProc("SetVolumeMountPointW")
 	procSetVolumeMountPointA                = modKERNEL32.NewProc("SetVolumeMountPointA")
-	procSetVolumeMountPointW                = modKERNEL32.NewProc("SetVolumeMountPointW")
 	procUnlockFile                          = modKERNEL32.NewProc("UnlockFile")
 	procUnlockFileEx                        = modKERNEL32.NewProc("UnlockFileEx")
+	procVerLanguageName                     = modKERNEL32.NewProc("VerLanguageNameW")
 	procVerLanguageNameA                    = modKERNEL32.NewProc("VerLanguageNameA")
-	procVerLanguageNameW                    = modKERNEL32.NewProc("VerLanguageNameW")
 	procWow64DisableWow64FsRedirection      = modKERNEL32.NewProc("Wow64DisableWow64FsRedirection")
 	procWow64EnableWow64FsRedirection       = modKERNEL32.NewProc("Wow64EnableWow64FsRedirection")
 	procWow64RevertWow64FsRedirection       = modKERNEL32.NewProc("Wow64RevertWow64FsRedirection")
@@ -417,20 +417,20 @@ var (
 	procTxfLogRecordGetGenericType          = modtxfw32.NewProc("TxfLogRecordGetGenericType")
 	procTxfReadMetadataInfo                 = modtxfw32.NewProc("TxfReadMetadataInfo")
 	procTxfSetThreadMiniVersionForCreate    = modtxfw32.NewProc("TxfSetThreadMiniVersionForCreate")
+	procGetFileVersionInfo                  = modVERSION.NewProc("GetFileVersionInfoW")
 	procGetFileVersionInfoA                 = modVERSION.NewProc("GetFileVersionInfoA")
+	procGetFileVersionInfoEx                = modVERSION.NewProc("GetFileVersionInfoExW")
 	procGetFileVersionInfoExA               = modVERSION.NewProc("GetFileVersionInfoExA")
-	procGetFileVersionInfoExW               = modVERSION.NewProc("GetFileVersionInfoExW")
+	procGetFileVersionInfoSize              = modVERSION.NewProc("GetFileVersionInfoSizeW")
 	procGetFileVersionInfoSizeA             = modVERSION.NewProc("GetFileVersionInfoSizeA")
+	procGetFileVersionInfoSizeEx            = modVERSION.NewProc("GetFileVersionInfoSizeExW")
 	procGetFileVersionInfoSizeExA           = modVERSION.NewProc("GetFileVersionInfoSizeExA")
-	procGetFileVersionInfoSizeExW           = modVERSION.NewProc("GetFileVersionInfoSizeExW")
-	procGetFileVersionInfoSizeW             = modVERSION.NewProc("GetFileVersionInfoSizeW")
-	procGetFileVersionInfoW                 = modVERSION.NewProc("GetFileVersionInfoW")
+	procVerFindFile                         = modVERSION.NewProc("VerFindFileW")
 	procVerFindFileA                        = modVERSION.NewProc("VerFindFileA")
-	procVerFindFileW                        = modVERSION.NewProc("VerFindFileW")
+	procVerInstallFile                      = modVERSION.NewProc("VerInstallFileW")
 	procVerInstallFileA                     = modVERSION.NewProc("VerInstallFileA")
-	procVerInstallFileW                     = modVERSION.NewProc("VerInstallFileW")
+	procVerQueryValue                       = modVERSION.NewProc("VerQueryValueW")
 	procVerQueryValueA                      = modVERSION.NewProc("VerQueryValueA")
-	procVerQueryValueW                      = modVERSION.NewProc("VerQueryValueW")
 	procWofEnumEntries                      = modWOFUTIL.NewProc("WofEnumEntries")
 	procWofFileEnumFiles                    = modWOFUTIL.NewProc("WofFileEnumFiles")
 	procWofGetDriverVersion                 = modWOFUTIL.NewProc("WofGetDriverVersion")
@@ -447,8 +447,9 @@ var (
 // AddLogContainer calls clfsw32!AddLogContainer.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-addlogcontainer
 // Minimum OS: windows6.0.6000.
-func AddLogContainer(hLog foundation.HANDLE, pcbContainer *uint64, pwszContainerPath foundation.PWSTR, pReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procAddLogContainer.Addr(), uintptr(hLog), uintptr(unsafe.Pointer(pcbContainer)), uintptr(unsafe.Pointer(pwszContainerPath)), uintptr(unsafe.Pointer(pReserved)))
+func AddLogContainer(hLog foundation.HANDLE, pcbContainer *uint64, pwszContainerPath string, pReserved unsafe.Pointer) error {
+	_pwszContainerPath := win32.UTF16Ptr(pwszContainerPath)
+	r1, _, e1 := syscall.SyscallN(procAddLogContainer.Addr(), uintptr(hLog), uintptr(unsafe.Pointer(pcbContainer)), uintptr(unsafe.Pointer(_pwszContainerPath)), uintptr(unsafe.Pointer(pReserved)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -458,8 +459,12 @@ func AddLogContainer(hLog foundation.HANDLE, pcbContainer *uint64, pwszContainer
 // AddLogContainerSet calls clfsw32!AddLogContainerSet.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-addlogcontainerset
 // Minimum OS: windows6.0.6000.
-func AddLogContainerSet(hLog foundation.HANDLE, cContainer uint16, pcbContainer *uint64, rgwszContainerPath *foundation.PWSTR, pReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procAddLogContainerSet.Addr(), uintptr(hLog), uintptr(cContainer), uintptr(unsafe.Pointer(pcbContainer)), uintptr(unsafe.Pointer(rgwszContainerPath)), uintptr(unsafe.Pointer(pReserved)))
+func AddLogContainerSet(hLog foundation.HANDLE, pcbContainer *uint64, rgwszContainerPath []foundation.PWSTR, pReserved unsafe.Pointer) error {
+	var _rgwszContainerPath *foundation.PWSTR
+	if len(rgwszContainerPath) > 0 {
+		_rgwszContainerPath = &rgwszContainerPath[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procAddLogContainerSet.Addr(), uintptr(hLog), uintptr(len(rgwszContainerPath)), uintptr(unsafe.Pointer(pcbContainer)), uintptr(unsafe.Pointer(_rgwszContainerPath)), uintptr(unsafe.Pointer(pReserved)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -469,8 +474,9 @@ func AddLogContainerSet(hLog foundation.HANDLE, cContainer uint16, pcbContainer 
 // AddUsersToEncryptedFile calls ADVAPI32!AddUsersToEncryptedFile.
 // https://learn.microsoft.com/windows/win32/api/winefs/nf-winefs-adduserstoencryptedfile
 // Minimum OS: windows5.1.2600.
-func AddUsersToEncryptedFile(lpFileName foundation.PWSTR, pEncryptionCertificates *ENCRYPTION_CERTIFICATE_LIST) uint32 {
-	r1, _, _ := syscall.SyscallN(procAddUsersToEncryptedFile.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(pEncryptionCertificates)))
+func AddUsersToEncryptedFile(lpFileName string, pEncryptionCertificates *ENCRYPTION_CERTIFICATE_LIST) uint32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procAddUsersToEncryptedFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(pEncryptionCertificates)))
 	return uint32(r1)
 }
 
@@ -510,23 +516,25 @@ func AllocReservedLog(pvMarshal unsafe.Pointer, cReservedRecords uint32, pcbAdju
 // AreFileApisANSI calls KERNEL32!AreFileApisANSI.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-arefileapisansi
 // Minimum OS: windows5.1.2600.
-func AreFileApisANSI() foundation.BOOL {
+func AreFileApisANSI() bool {
 	r1, _, _ := syscall.SyscallN(procAreFileApisANSI.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // AreShortNamesEnabled calls KERNEL32!AreShortNamesEnabled.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-areshortnamesenabled
-func AreShortNamesEnabled(Handle foundation.HANDLE, Enabled *foundation.BOOL) foundation.BOOL {
+func AreShortNamesEnabled(Handle foundation.HANDLE, Enabled *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procAreShortNamesEnabled.Addr(), uintptr(Handle), uintptr(unsafe.Pointer(Enabled)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // BackupRead calls KERNEL32!BackupRead.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-backupread
 // Minimum OS: windows5.1.2600.
-func BackupRead(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToRead uint32, lpNumberOfBytesRead *uint32, bAbort foundation.BOOL, bProcessSecurity foundation.BOOL, lpContext *unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procBackupRead.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(lpNumberOfBytesRead)), uintptr(bAbort), uintptr(bProcessSecurity), uintptr(unsafe.Pointer(lpContext)))
+func BackupRead(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToRead uint32, lpNumberOfBytesRead *uint32, bAbort bool, bProcessSecurity bool, lpContext *unsafe.Pointer) error {
+	_bAbort := win32.Bool32(bAbort)
+	_bProcessSecurity := win32.Bool32(bProcessSecurity)
+	r1, _, e1 := syscall.SyscallN(procBackupRead.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(lpNumberOfBytesRead)), uintptr(_bAbort), uintptr(_bProcessSecurity), uintptr(unsafe.Pointer(lpContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -547,8 +555,10 @@ func BackupSeek(hFile foundation.HANDLE, dwLowBytesToSeek uint32, dwHighBytesToS
 // BackupWrite calls KERNEL32!BackupWrite.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-backupwrite
 // Minimum OS: windows5.1.2600.
-func BackupWrite(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToWrite uint32, lpNumberOfBytesWritten *uint32, bAbort foundation.BOOL, bProcessSecurity foundation.BOOL, lpContext *unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procBackupWrite.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToWrite), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)), uintptr(bAbort), uintptr(bProcessSecurity), uintptr(unsafe.Pointer(lpContext)))
+func BackupWrite(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToWrite uint32, lpNumberOfBytesWritten *uint32, bAbort bool, bProcessSecurity bool, lpContext *unsafe.Pointer) error {
+	_bAbort := win32.Bool32(bAbort)
+	_bProcessSecurity := win32.Bool32(bProcessSecurity)
+	r1, _, e1 := syscall.SyscallN(procBackupWrite.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToWrite), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)), uintptr(_bAbort), uintptr(_bProcessSecurity), uintptr(unsafe.Pointer(lpContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -557,16 +567,36 @@ func BackupWrite(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToWrite 
 
 // BuildIoRingRegisterBuffers calls api-ms-win-core-ioring-l1-1-0!BuildIoRingRegisterBuffers.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringregisterbuffers
-func BuildIoRingRegisterBuffers(ioRing HIORING, count uint32, buffers *IORING_BUFFER_INFO, userData uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procBuildIoRingRegisterBuffers.Addr(), uintptr(ioRing), uintptr(count), uintptr(unsafe.Pointer(buffers)), uintptr(userData))
-	return foundation.HRESULT(r1)
+func BuildIoRingRegisterBuffers(ioRing HIORING, buffers []IORING_BUFFER_INFO, userData uintptr) error {
+	var _buffers *IORING_BUFFER_INFO
+	if len(buffers) > 0 {
+		_buffers = &buffers[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBuildIoRingRegisterBuffers.Addr(), uintptr(ioRing), uintptr(len(buffers)), uintptr(unsafe.Pointer(_buffers)), uintptr(userData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BuildIoRingRegisterFileHandles calls api-ms-win-core-ioring-l1-1-0!BuildIoRingRegisterFileHandles.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringregisterfilehandles
-func BuildIoRingRegisterFileHandles(ioRing HIORING, count uint32, handles *foundation.HANDLE, userData uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procBuildIoRingRegisterFileHandles.Addr(), uintptr(ioRing), uintptr(count), uintptr(unsafe.Pointer(handles)), uintptr(userData))
-	return foundation.HRESULT(r1)
+func BuildIoRingRegisterFileHandles(ioRing HIORING, handles []foundation.HANDLE, userData uintptr) error {
+	var _handles *foundation.HANDLE
+	if len(handles) > 0 {
+		_handles = &handles[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBuildIoRingRegisterFileHandles.Addr(), uintptr(ioRing), uintptr(len(handles)), uintptr(unsafe.Pointer(_handles)), uintptr(userData))
+	return win32.HRESULTError(int32(r1))
+}
+
+// CheckNameLegalDOS8Dot3 calls KERNEL32!CheckNameLegalDOS8Dot3W.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-checknamelegaldos8dot3w
+// Minimum OS: windows6.0.6000.
+func CheckNameLegalDOS8Dot3(lpName string, lpOemName foundation.PSTR, OemNameSize uint32, pbNameContainsSpaces *foundation.BOOL, pbNameLegal *foundation.BOOL) error {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCheckNameLegalDOS8Dot3.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpOemName)), uintptr(OemNameSize), uintptr(unsafe.Pointer(pbNameContainsSpaces)), uintptr(unsafe.Pointer(pbNameLegal)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // CheckNameLegalDOS8Dot3A calls KERNEL32!CheckNameLegalDOS8Dot3A.
@@ -574,17 +604,6 @@ func BuildIoRingRegisterFileHandles(ioRing HIORING, count uint32, handles *found
 // Minimum OS: windows6.0.6000.
 func CheckNameLegalDOS8Dot3A(lpName foundation.PSTR, lpOemName foundation.PSTR, OemNameSize uint32, pbNameContainsSpaces *foundation.BOOL, pbNameLegal *foundation.BOOL) error {
 	r1, _, e1 := syscall.SyscallN(procCheckNameLegalDOS8Dot3A.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpOemName)), uintptr(OemNameSize), uintptr(unsafe.Pointer(pbNameContainsSpaces)), uintptr(unsafe.Pointer(pbNameLegal)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CheckNameLegalDOS8Dot3W calls KERNEL32!CheckNameLegalDOS8Dot3W.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-checknamelegaldos8dot3w
-// Minimum OS: windows6.0.6000.
-func CheckNameLegalDOS8Dot3W(lpName foundation.PWSTR, lpOemName foundation.PSTR, OemNameSize uint32, pbNameContainsSpaces *foundation.BOOL, pbNameLegal *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCheckNameLegalDOS8Dot3W.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpOemName)), uintptr(OemNameSize), uintptr(unsafe.Pointer(pbNameContainsSpaces)), uintptr(unsafe.Pointer(pbNameLegal)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -611,9 +630,9 @@ func CloseEncryptedFileRaw(pvContext unsafe.Pointer) {
 
 // CloseIoRing calls api-ms-win-core-ioring-l1-1-0!CloseIoRing.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-closeioring
-func CloseIoRing(ioRing HIORING) foundation.HRESULT {
+func CloseIoRing(ioRing HIORING) error {
 	r1, _, _ := syscall.SyscallN(procCloseIoRing.Addr(), uintptr(ioRing))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitComplete calls ktmw32!CommitComplete.
@@ -668,19 +687,49 @@ func CompareFileTime(lpFileTime1 *foundation.FILETIME, lpFileTime2 *foundation.F
 	return int32(r1)
 }
 
+// CopyFile calls KERNEL32!CopyFileW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfilew
+// Minimum OS: windows5.1.2600.
+func CopyFile(lpExistingFileName string, lpNewFileName string, bFailIfExists bool) error {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	_bFailIfExists := win32.Bool32(bFailIfExists)
+	r1, _, e1 := syscall.SyscallN(procCopyFile.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(_bFailIfExists))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // CopyFile2 calls KERNEL32!CopyFile2.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfile2
 // Minimum OS: windows8.0.
-func CopyFile2(pwszExistingFileName foundation.PWSTR, pwszNewFileName foundation.PWSTR, pExtendedParameters *COPYFILE2_EXTENDED_PARAMETERS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCopyFile2.Addr(), uintptr(unsafe.Pointer(pwszExistingFileName)), uintptr(unsafe.Pointer(pwszNewFileName)), uintptr(unsafe.Pointer(pExtendedParameters)))
-	return foundation.HRESULT(r1)
+func CopyFile2(pwszExistingFileName string, pwszNewFileName string, pExtendedParameters *COPYFILE2_EXTENDED_PARAMETERS) error {
+	_pwszExistingFileName := win32.UTF16Ptr(pwszExistingFileName)
+	_pwszNewFileName := win32.UTF16Ptr(pwszNewFileName)
+	r1, _, _ := syscall.SyscallN(procCopyFile2.Addr(), uintptr(unsafe.Pointer(_pwszExistingFileName)), uintptr(unsafe.Pointer(_pwszNewFileName)), uintptr(unsafe.Pointer(pExtendedParameters)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyFileA calls KERNEL32!CopyFileA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfilea
 // Minimum OS: windows5.1.2600.
-func CopyFileA(lpExistingFileName foundation.PSTR, lpNewFileName foundation.PSTR, bFailIfExists foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCopyFileA.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(bFailIfExists))
+func CopyFileA(lpExistingFileName foundation.PSTR, lpNewFileName foundation.PSTR, bFailIfExists bool) error {
+	_bFailIfExists := win32.Bool32(bFailIfExists)
+	r1, _, e1 := syscall.SyscallN(procCopyFileA.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(_bFailIfExists))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CopyFileEx calls KERNEL32!CopyFileExW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfileexw
+// Minimum OS: windows5.1.2600.
+func CopyFileEx(lpExistingFileName string, lpNewFileName string, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, pbCancel *foundation.BOOL, dwCopyFlags COPYFILE_FLAGS) error {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	r1, _, e1 := syscall.SyscallN(procCopyFileEx.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(pbCancel)), uintptr(dwCopyFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -698,22 +747,27 @@ func CopyFileExA(lpExistingFileName foundation.PSTR, lpNewFileName foundation.PS
 	return nil
 }
 
-// CopyFileExW calls KERNEL32!CopyFileExW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfileexw
-// Minimum OS: windows5.1.2600.
-func CopyFileExW(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, pbCancel *foundation.BOOL, dwCopyFlags COPYFILE_FLAGS) error {
-	r1, _, e1 := syscall.SyscallN(procCopyFileExW.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(pbCancel)), uintptr(dwCopyFlags))
+// CopyFileFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!CopyFileFromAppW.
+// https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-copyfilefromappw
+func CopyFileFromAppW(lpExistingFileName string, lpNewFileName string, bFailIfExists bool) bool {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	_bFailIfExists := win32.Bool32(bFailIfExists)
+	r1, _, _ := syscall.SyscallN(procCopyFileFromAppW.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(_bFailIfExists))
+	return r1 != 0
+}
+
+// CopyFileTransacted calls KERNEL32!CopyFileTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfiletransactedw
+// Minimum OS: windows6.0.6000.
+func CopyFileTransacted(lpExistingFileName string, lpNewFileName string, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, pbCancel *foundation.BOOL, dwCopyFlags uint32, hTransaction foundation.HANDLE) error {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	r1, _, e1 := syscall.SyscallN(procCopyFileTransacted.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(pbCancel)), uintptr(dwCopyFlags), uintptr(hTransaction))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// CopyFileFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!CopyFileFromAppW.
-// https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-copyfilefromappw
-func CopyFileFromAppW(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR, bFailIfExists foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCopyFileFromAppW.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(bFailIfExists))
-	return foundation.BOOL(r1)
 }
 
 // CopyFileTransactedA calls KERNEL32!CopyFileTransactedA.
@@ -727,28 +781,6 @@ func CopyFileTransactedA(lpExistingFileName foundation.PSTR, lpNewFileName found
 	return nil
 }
 
-// CopyFileTransactedW calls KERNEL32!CopyFileTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfiletransactedw
-// Minimum OS: windows6.0.6000.
-func CopyFileTransactedW(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, pbCancel *foundation.BOOL, dwCopyFlags uint32, hTransaction foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procCopyFileTransactedW.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(pbCancel)), uintptr(dwCopyFlags), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CopyFileW calls KERNEL32!CopyFileW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-copyfilew
-// Minimum OS: windows5.1.2600.
-func CopyFileW(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR, bFailIfExists foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCopyFileW.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(bFailIfExists))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // CopyLZFile calls KERNEL32!CopyLZFile.
 func CopyLZFile(hfSource int32, hfDest int32) int32 {
 	r1, _, _ := syscall.SyscallN(procCopyLZFile.Addr(), uintptr(hfSource), uintptr(hfDest))
@@ -756,9 +788,34 @@ func CopyLZFile(hfSource int32, hfDest int32) int32 {
 }
 
 // CreateBindLink calls BINDFLTAPI!CreateBindLink.
-func CreateBindLink(virtualPath foundation.PWSTR, backingPath foundation.PWSTR, createBindLinkFlags CREATE_BIND_LINK_FLAGS, exceptionCount uint32, exceptionPaths *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateBindLink.Addr(), uintptr(unsafe.Pointer(virtualPath)), uintptr(unsafe.Pointer(backingPath)), uintptr(createBindLinkFlags), uintptr(exceptionCount), uintptr(unsafe.Pointer(exceptionPaths)))
-	return foundation.HRESULT(r1)
+func CreateBindLink(virtualPath string, backingPath string, createBindLinkFlags CREATE_BIND_LINK_FLAGS, exceptionPaths []foundation.PWSTR) error {
+	_virtualPath := win32.UTF16Ptr(virtualPath)
+	_backingPath := win32.UTF16Ptr(backingPath)
+	var _exceptionPaths *foundation.PWSTR
+	if len(exceptionPaths) > 0 {
+		_exceptionPaths = &exceptionPaths[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCreateBindLink.Addr(), uintptr(unsafe.Pointer(_virtualPath)), uintptr(unsafe.Pointer(_backingPath)), uintptr(createBindLinkFlags), uintptr(len(exceptionPaths)), uintptr(unsafe.Pointer(_exceptionPaths)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// CreateDirectory calls KERNEL32!CreateDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createdirectoryw
+// Minimum OS: windows5.1.2600.
+func CreateDirectory(lpPathName string, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) error {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, e1 := syscall.SyscallN(procCreateDirectory.Addr(), uintptr(unsafe.Pointer(_lpPathName)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CreateDirectory2 calls KERNEL32!CreateDirectory2W.
+func CreateDirectory2(lpPathName string, dwDesiredAccess uint32, dwShareMode uint32, DirectoryFlags DIRECTORY_FLAGS, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) foundation.HANDLE {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, _ := syscall.SyscallN(procCreateDirectory2.Addr(), uintptr(unsafe.Pointer(_lpPathName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(DirectoryFlags), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+	return foundation.HANDLE(r1)
 }
 
 // CreateDirectory2A calls KERNEL32!CreateDirectory2A.
@@ -767,17 +824,24 @@ func CreateDirectory2A(lpPathName foundation.PSTR, dwDesiredAccess uint32, dwSha
 	return foundation.HANDLE(r1)
 }
 
-// CreateDirectory2W calls KERNEL32!CreateDirectory2W.
-func CreateDirectory2W(lpPathName foundation.PWSTR, dwDesiredAccess uint32, dwShareMode uint32, DirectoryFlags DIRECTORY_FLAGS, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procCreateDirectory2W.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(DirectoryFlags), uintptr(unsafe.Pointer(lpSecurityAttributes)))
-	return foundation.HANDLE(r1)
-}
-
 // CreateDirectoryA calls KERNEL32!CreateDirectoryA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createdirectorya
 // Minimum OS: windows5.1.2600.
 func CreateDirectoryA(lpPathName foundation.PSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) error {
 	r1, _, e1 := syscall.SyscallN(procCreateDirectoryA.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CreateDirectoryEx calls KERNEL32!CreateDirectoryExW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createdirectoryexw
+// Minimum OS: windows5.1.2600.
+func CreateDirectoryEx(lpTemplateDirectory string, lpNewDirectory string, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) error {
+	_lpTemplateDirectory := win32.UTF16Ptr(lpTemplateDirectory)
+	_lpNewDirectory := win32.UTF16Ptr(lpNewDirectory)
+	r1, _, e1 := syscall.SyscallN(procCreateDirectoryEx.Addr(), uintptr(unsafe.Pointer(_lpTemplateDirectory)), uintptr(unsafe.Pointer(_lpNewDirectory)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -795,22 +859,25 @@ func CreateDirectoryExA(lpTemplateDirectory foundation.PSTR, lpNewDirectory foun
 	return nil
 }
 
-// CreateDirectoryExW calls KERNEL32!CreateDirectoryExW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createdirectoryexw
-// Minimum OS: windows5.1.2600.
-func CreateDirectoryExW(lpTemplateDirectory foundation.PWSTR, lpNewDirectory foundation.PWSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) error {
-	r1, _, e1 := syscall.SyscallN(procCreateDirectoryExW.Addr(), uintptr(unsafe.Pointer(lpTemplateDirectory)), uintptr(unsafe.Pointer(lpNewDirectory)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+// CreateDirectoryFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!CreateDirectoryFromAppW.
+// https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-createdirectoryfromappw
+func CreateDirectoryFromAppW(lpPathName string, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) bool {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, _ := syscall.SyscallN(procCreateDirectoryFromAppW.Addr(), uintptr(unsafe.Pointer(_lpPathName)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+	return r1 != 0
+}
+
+// CreateDirectoryTransacted calls KERNEL32!CreateDirectoryTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createdirectorytransactedw
+// Minimum OS: windows6.0.6000.
+func CreateDirectoryTransacted(lpTemplateDirectory string, lpNewDirectory string, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, hTransaction foundation.HANDLE) error {
+	_lpTemplateDirectory := win32.UTF16Ptr(lpTemplateDirectory)
+	_lpNewDirectory := win32.UTF16Ptr(lpNewDirectory)
+	r1, _, e1 := syscall.SyscallN(procCreateDirectoryTransacted.Addr(), uintptr(unsafe.Pointer(_lpTemplateDirectory)), uintptr(unsafe.Pointer(_lpNewDirectory)), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(hTransaction))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// CreateDirectoryFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!CreateDirectoryFromAppW.
-// https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-createdirectoryfromappw
-func CreateDirectoryFromAppW(lpPathName foundation.PWSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreateDirectoryFromAppW.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
-	return foundation.BOOL(r1)
 }
 
 // CreateDirectoryTransactedA calls KERNEL32!CreateDirectoryTransactedA.
@@ -818,28 +885,6 @@ func CreateDirectoryFromAppW(lpPathName foundation.PWSTR, lpSecurityAttributes *
 // Minimum OS: windows6.0.6000.
 func CreateDirectoryTransactedA(lpTemplateDirectory foundation.PSTR, lpNewDirectory foundation.PSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, hTransaction foundation.HANDLE) error {
 	r1, _, e1 := syscall.SyscallN(procCreateDirectoryTransactedA.Addr(), uintptr(unsafe.Pointer(lpTemplateDirectory)), uintptr(unsafe.Pointer(lpNewDirectory)), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CreateDirectoryTransactedW calls KERNEL32!CreateDirectoryTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createdirectorytransactedw
-// Minimum OS: windows6.0.6000.
-func CreateDirectoryTransactedW(lpTemplateDirectory foundation.PWSTR, lpNewDirectory foundation.PWSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, hTransaction foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procCreateDirectoryTransactedW.Addr(), uintptr(unsafe.Pointer(lpTemplateDirectory)), uintptr(unsafe.Pointer(lpNewDirectory)), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CreateDirectoryW calls KERNEL32!CreateDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createdirectoryw
-// Minimum OS: windows5.1.2600.
-func CreateDirectoryW(lpPathName foundation.PWSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) error {
-	r1, _, e1 := syscall.SyscallN(procCreateDirectoryW.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -858,11 +903,25 @@ func CreateEnlistment(lpEnlistmentAttributes *security.SECURITY_ATTRIBUTES, Reso
 	return ret, nil
 }
 
+// CreateFile calls KERNEL32!CreateFileW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createfilew
+// Minimum OS: windows5.1.2600.
+func CreateFile(lpFileName string, dwDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition FILE_CREATION_DISPOSITION, dwFlagsAndAttributes FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile foundation.HANDLE) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procCreateFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CreateFile2 calls KERNEL32!CreateFile2.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createfile2
 // Minimum OS: windows8.0.
-func CreateFile2(lpFileName foundation.PWSTR, dwDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, dwCreationDisposition FILE_CREATION_DISPOSITION, pCreateExParams *CREATEFILE2_EXTENDED_PARAMETERS) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateFile2.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(dwCreationDisposition), uintptr(unsafe.Pointer(pCreateExParams)))
+func CreateFile2(lpFileName string, dwDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, dwCreationDisposition FILE_CREATION_DISPOSITION, pCreateExParams *CREATEFILE2_EXTENDED_PARAMETERS) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procCreateFile2.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(dwCreationDisposition), uintptr(unsafe.Pointer(pCreateExParams)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -872,14 +931,16 @@ func CreateFile2(lpFileName foundation.PWSTR, dwDesiredAccess uint32, dwShareMod
 
 // CreateFile2FromAppW calls api-ms-win-core-file-fromapp-l1-1-0!CreateFile2FromAppW.
 // https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-createfile2fromappw
-func CreateFile2FromAppW(lpFileName foundation.PWSTR, dwDesiredAccess uint32, dwShareMode uint32, dwCreationDisposition uint32, pCreateExParams *CREATEFILE2_EXTENDED_PARAMETERS) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procCreateFile2FromAppW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(dwCreationDisposition), uintptr(unsafe.Pointer(pCreateExParams)))
+func CreateFile2FromAppW(lpFileName string, dwDesiredAccess uint32, dwShareMode uint32, dwCreationDisposition uint32, pCreateExParams *CREATEFILE2_EXTENDED_PARAMETERS) foundation.HANDLE {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procCreateFile2FromAppW.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(dwCreationDisposition), uintptr(unsafe.Pointer(pCreateExParams)))
 	return foundation.HANDLE(r1)
 }
 
 // CreateFile3 calls KERNEL32!CreateFile3.
-func CreateFile3(lpFileName foundation.PWSTR, dwDesiredAccess uint32, dwShareMode uint32, dwCreationDisposition uint32, pCreateExParams *CREATEFILE3_EXTENDED_PARAMETERS) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procCreateFile3.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(dwCreationDisposition), uintptr(unsafe.Pointer(pCreateExParams)))
+func CreateFile3(lpFileName string, dwDesiredAccess uint32, dwShareMode uint32, dwCreationDisposition uint32, pCreateExParams *CREATEFILE3_EXTENDED_PARAMETERS) foundation.HANDLE {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procCreateFile3.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(dwCreationDisposition), uintptr(unsafe.Pointer(pCreateExParams)))
 	return foundation.HANDLE(r1)
 }
 
@@ -897,16 +958,30 @@ func CreateFileA(lpFileName foundation.PSTR, dwDesiredAccess uint32, dwShareMode
 
 // CreateFileFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!CreateFileFromAppW.
 // https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-createfilefromappw
-func CreateFileFromAppW(lpFileName foundation.PWSTR, dwDesiredAccess uint32, dwShareMode uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition uint32, dwFlagsAndAttributes uint32, hTemplateFile foundation.HANDLE) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procCreateFileFromAppW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile))
+func CreateFileFromAppW(lpFileName string, dwDesiredAccess uint32, dwShareMode uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition uint32, dwFlagsAndAttributes uint32, hTemplateFile foundation.HANDLE) foundation.HANDLE {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procCreateFileFromAppW.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile))
 	return foundation.HANDLE(r1)
+}
+
+// CreateFileTransacted calls KERNEL32!CreateFileTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createfiletransactedw
+// Minimum OS: windows6.0.6000.
+func CreateFileTransacted(lpFileName string, dwDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition FILE_CREATION_DISPOSITION, dwFlagsAndAttributes FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile foundation.HANDLE, hTransaction foundation.HANDLE, pusMiniVersion *TXFS_MINIVERSION) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procCreateFileTransacted.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile), uintptr(hTransaction), uintptr(unsafe.Pointer(pusMiniVersion)), 0)
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // CreateFileTransactedA calls KERNEL32!CreateFileTransactedA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createfiletransacteda
 // Minimum OS: windows6.0.6000.
-func CreateFileTransactedA(lpFileName foundation.PSTR, dwDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition FILE_CREATION_DISPOSITION, dwFlagsAndAttributes FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile foundation.HANDLE, hTransaction foundation.HANDLE, pusMiniVersion *TXFS_MINIVERSION, lpExtendedParameter unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateFileTransactedA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile), uintptr(hTransaction), uintptr(unsafe.Pointer(pusMiniVersion)), uintptr(unsafe.Pointer(lpExtendedParameter)))
+func CreateFileTransactedA(lpFileName foundation.PSTR, dwDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition FILE_CREATION_DISPOSITION, dwFlagsAndAttributes FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile foundation.HANDLE, hTransaction foundation.HANDLE, pusMiniVersion *TXFS_MINIVERSION) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateFileTransactedA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile), uintptr(hTransaction), uintptr(unsafe.Pointer(pusMiniVersion)), 0)
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -914,35 +989,37 @@ func CreateFileTransactedA(lpFileName foundation.PSTR, dwDesiredAccess uint32, d
 	return ret, nil
 }
 
-// CreateFileTransactedW calls KERNEL32!CreateFileTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createfiletransactedw
-// Minimum OS: windows6.0.6000.
-func CreateFileTransactedW(lpFileName foundation.PWSTR, dwDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition FILE_CREATION_DISPOSITION, dwFlagsAndAttributes FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile foundation.HANDLE, hTransaction foundation.HANDLE, pusMiniVersion *TXFS_MINIVERSION, lpExtendedParameter unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateFileTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile), uintptr(hTransaction), uintptr(unsafe.Pointer(pusMiniVersion)), uintptr(unsafe.Pointer(lpExtendedParameter)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateFileW calls KERNEL32!CreateFileW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createfilew
+// CreateHardLink calls KERNEL32!CreateHardLinkW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createhardlinkw
 // Minimum OS: windows5.1.2600.
-func CreateFileW(lpFileName foundation.PWSTR, dwDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition FILE_CREATION_DISPOSITION, dwFlagsAndAttributes FILE_FLAGS_AND_ATTRIBUTES, hTemplateFile foundation.HANDLE) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateFileW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
+func CreateHardLink(lpFileName string, lpExistingFileName string) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	r1, _, e1 := syscall.SyscallN(procCreateHardLink.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(_lpExistingFileName)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return ret, nil
+	return nil
 }
 
 // CreateHardLinkA calls KERNEL32!CreateHardLinkA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createhardlinka
 // Minimum OS: windows5.1.2600.
-func CreateHardLinkA(lpFileName foundation.PSTR, lpExistingFileName foundation.PSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) error {
-	r1, _, e1 := syscall.SyscallN(procCreateHardLinkA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+func CreateHardLinkA(lpFileName foundation.PSTR, lpExistingFileName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procCreateHardLinkA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpExistingFileName)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CreateHardLinkTransacted calls KERNEL32!CreateHardLinkTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createhardlinktransactedw
+// Minimum OS: windows6.0.6000.
+func CreateHardLinkTransacted(lpFileName string, lpExistingFileName string, hTransaction foundation.HANDLE) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	r1, _, e1 := syscall.SyscallN(procCreateHardLinkTransacted.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(_lpExistingFileName)), 0, uintptr(hTransaction))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -952,30 +1029,8 @@ func CreateHardLinkA(lpFileName foundation.PSTR, lpExistingFileName foundation.P
 // CreateHardLinkTransactedA calls KERNEL32!CreateHardLinkTransactedA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createhardlinktransacteda
 // Minimum OS: windows6.0.6000.
-func CreateHardLinkTransactedA(lpFileName foundation.PSTR, lpExistingFileName foundation.PSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, hTransaction foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procCreateHardLinkTransactedA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CreateHardLinkTransactedW calls KERNEL32!CreateHardLinkTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createhardlinktransactedw
-// Minimum OS: windows6.0.6000.
-func CreateHardLinkTransactedW(lpFileName foundation.PWSTR, lpExistingFileName foundation.PWSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, hTransaction foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procCreateHardLinkTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CreateHardLinkW calls KERNEL32!CreateHardLinkW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createhardlinkw
-// Minimum OS: windows5.1.2600.
-func CreateHardLinkW(lpFileName foundation.PWSTR, lpExistingFileName foundation.PWSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) error {
-	r1, _, e1 := syscall.SyscallN(procCreateHardLinkW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+func CreateHardLinkTransactedA(lpFileName foundation.PSTR, lpExistingFileName foundation.PSTR, hTransaction foundation.HANDLE) error {
+	r1, _, e1 := syscall.SyscallN(procCreateHardLinkTransactedA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpExistingFileName)), 0, uintptr(hTransaction))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -996,8 +1051,9 @@ func CreateLogContainerScanContext(hLog foundation.HANDLE, cFromContainer uint32
 // CreateLogFile calls clfsw32!CreateLogFile.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-createlogfile
 // Minimum OS: windows6.0.6000.
-func CreateLogFile(pszLogFileName foundation.PWSTR, fDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, psaLogFile *security.SECURITY_ATTRIBUTES, fCreateDisposition FILE_CREATION_DISPOSITION, fFlagsAndAttributes FILE_FLAGS_AND_ATTRIBUTES) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateLogFile.Addr(), uintptr(unsafe.Pointer(pszLogFileName)), uintptr(fDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(psaLogFile)), uintptr(fCreateDisposition), uintptr(fFlagsAndAttributes))
+func CreateLogFile(pszLogFileName string, fDesiredAccess uint32, dwShareMode FILE_SHARE_MODE, psaLogFile *security.SECURITY_ATTRIBUTES, fCreateDisposition FILE_CREATION_DISPOSITION, fFlagsAndAttributes FILE_FLAGS_AND_ATTRIBUTES) (foundation.HANDLE, error) {
+	_pszLogFileName := win32.UTF16Ptr(pszLogFileName)
+	r1, _, e1 := syscall.SyscallN(procCreateLogFile.Addr(), uintptr(unsafe.Pointer(_pszLogFileName)), uintptr(fDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(psaLogFile)), uintptr(fCreateDisposition), uintptr(fFlagsAndAttributes))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1019,8 +1075,9 @@ func CreateLogMarshallingArea(hLog foundation.HANDLE, pfnAllocBuffer CLFS_BLOCK_
 // CreateResourceManager calls ktmw32!CreateResourceManager.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-createresourcemanager
 // Minimum OS: windows6.0.6000.
-func CreateResourceManager(lpResourceManagerAttributes *security.SECURITY_ATTRIBUTES, ResourceManagerId *win32.GUID, CreateOptions uint32, TmHandle foundation.HANDLE, Description foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateResourceManager.Addr(), uintptr(unsafe.Pointer(lpResourceManagerAttributes)), uintptr(unsafe.Pointer(ResourceManagerId)), uintptr(CreateOptions), uintptr(TmHandle), uintptr(unsafe.Pointer(Description)))
+func CreateResourceManager(lpResourceManagerAttributes *security.SECURITY_ATTRIBUTES, ResourceManagerId *win32.GUID, CreateOptions uint32, TmHandle foundation.HANDLE, Description string) (foundation.HANDLE, error) {
+	_Description := win32.UTF16Ptr(Description)
+	r1, _, e1 := syscall.SyscallN(procCreateResourceManager.Addr(), uintptr(unsafe.Pointer(lpResourceManagerAttributes)), uintptr(unsafe.Pointer(ResourceManagerId)), uintptr(CreateOptions), uintptr(TmHandle), uintptr(unsafe.Pointer(_Description)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1028,11 +1085,37 @@ func CreateResourceManager(lpResourceManagerAttributes *security.SECURITY_ATTRIB
 	return ret, nil
 }
 
+// CreateSymbolicLink calls KERNEL32!CreateSymbolicLinkW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createsymboliclinkw
+// Minimum OS: windows6.0.6000.
+func CreateSymbolicLink(lpSymlinkFileName string, lpTargetFileName string, dwFlags SYMBOLIC_LINK_FLAGS) (foundation.BOOLEAN, error) {
+	_lpSymlinkFileName := win32.UTF16Ptr(lpSymlinkFileName)
+	_lpTargetFileName := win32.UTF16Ptr(lpTargetFileName)
+	r1, _, e1 := syscall.SyscallN(procCreateSymbolicLink.Addr(), uintptr(unsafe.Pointer(_lpSymlinkFileName)), uintptr(unsafe.Pointer(_lpTargetFileName)), uintptr(dwFlags))
+	if e1 != 0 {
+		return foundation.BOOLEAN(r1), e1
+	}
+	return foundation.BOOLEAN(r1), nil
+}
+
 // CreateSymbolicLinkA calls KERNEL32!CreateSymbolicLinkA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createsymboliclinka
 // Minimum OS: windows6.0.6000.
 func CreateSymbolicLinkA(lpSymlinkFileName foundation.PSTR, lpTargetFileName foundation.PSTR, dwFlags SYMBOLIC_LINK_FLAGS) (foundation.BOOLEAN, error) {
 	r1, _, e1 := syscall.SyscallN(procCreateSymbolicLinkA.Addr(), uintptr(unsafe.Pointer(lpSymlinkFileName)), uintptr(unsafe.Pointer(lpTargetFileName)), uintptr(dwFlags))
+	if e1 != 0 {
+		return foundation.BOOLEAN(r1), e1
+	}
+	return foundation.BOOLEAN(r1), nil
+}
+
+// CreateSymbolicLinkTransacted calls KERNEL32!CreateSymbolicLinkTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createsymboliclinktransactedw
+// Minimum OS: windows6.0.6000.
+func CreateSymbolicLinkTransacted(lpSymlinkFileName string, lpTargetFileName string, dwFlags SYMBOLIC_LINK_FLAGS, hTransaction foundation.HANDLE) (foundation.BOOLEAN, error) {
+	_lpSymlinkFileName := win32.UTF16Ptr(lpSymlinkFileName)
+	_lpTargetFileName := win32.UTF16Ptr(lpTargetFileName)
+	r1, _, e1 := syscall.SyscallN(procCreateSymbolicLinkTransacted.Addr(), uintptr(unsafe.Pointer(_lpSymlinkFileName)), uintptr(unsafe.Pointer(_lpTargetFileName)), uintptr(dwFlags), uintptr(hTransaction))
 	if e1 != 0 {
 		return foundation.BOOLEAN(r1), e1
 	}
@@ -1050,28 +1133,6 @@ func CreateSymbolicLinkTransactedA(lpSymlinkFileName foundation.PSTR, lpTargetFi
 	return foundation.BOOLEAN(r1), nil
 }
 
-// CreateSymbolicLinkTransactedW calls KERNEL32!CreateSymbolicLinkTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createsymboliclinktransactedw
-// Minimum OS: windows6.0.6000.
-func CreateSymbolicLinkTransactedW(lpSymlinkFileName foundation.PWSTR, lpTargetFileName foundation.PWSTR, dwFlags SYMBOLIC_LINK_FLAGS, hTransaction foundation.HANDLE) (foundation.BOOLEAN, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateSymbolicLinkTransactedW.Addr(), uintptr(unsafe.Pointer(lpSymlinkFileName)), uintptr(unsafe.Pointer(lpTargetFileName)), uintptr(dwFlags), uintptr(hTransaction))
-	if e1 != 0 {
-		return foundation.BOOLEAN(r1), e1
-	}
-	return foundation.BOOLEAN(r1), nil
-}
-
-// CreateSymbolicLinkW calls KERNEL32!CreateSymbolicLinkW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createsymboliclinkw
-// Minimum OS: windows6.0.6000.
-func CreateSymbolicLinkW(lpSymlinkFileName foundation.PWSTR, lpTargetFileName foundation.PWSTR, dwFlags SYMBOLIC_LINK_FLAGS) (foundation.BOOLEAN, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateSymbolicLinkW.Addr(), uintptr(unsafe.Pointer(lpSymlinkFileName)), uintptr(unsafe.Pointer(lpTargetFileName)), uintptr(dwFlags))
-	if e1 != 0 {
-		return foundation.BOOLEAN(r1), e1
-	}
-	return foundation.BOOLEAN(r1), nil
-}
-
 // CreateTapePartition calls KERNEL32!CreateTapePartition.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createtapepartition
 // Minimum OS: windows5.1.2600.
@@ -1083,8 +1144,9 @@ func CreateTapePartition(hDevice foundation.HANDLE, dwPartitionMethod CREATE_TAP
 // CreateTransaction calls ktmw32!CreateTransaction.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-createtransaction
 // Minimum OS: windows6.0.6000.
-func CreateTransaction(lpTransactionAttributes *security.SECURITY_ATTRIBUTES, UOW *win32.GUID, CreateOptions uint32, IsolationLevel uint32, IsolationFlags uint32, Timeout uint32, Description foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateTransaction.Addr(), uintptr(unsafe.Pointer(lpTransactionAttributes)), uintptr(unsafe.Pointer(UOW)), uintptr(CreateOptions), uintptr(IsolationLevel), uintptr(IsolationFlags), uintptr(Timeout), uintptr(unsafe.Pointer(Description)))
+func CreateTransaction(lpTransactionAttributes *security.SECURITY_ATTRIBUTES, UOW *win32.GUID, CreateOptions uint32, IsolationLevel uint32, IsolationFlags uint32, Timeout uint32, Description string) (foundation.HANDLE, error) {
+	_Description := win32.UTF16Ptr(Description)
+	r1, _, e1 := syscall.SyscallN(procCreateTransaction.Addr(), uintptr(unsafe.Pointer(lpTransactionAttributes)), uintptr(unsafe.Pointer(UOW)), uintptr(CreateOptions), uintptr(IsolationLevel), uintptr(IsolationFlags), uintptr(Timeout), uintptr(unsafe.Pointer(_Description)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1095,8 +1157,9 @@ func CreateTransaction(lpTransactionAttributes *security.SECURITY_ATTRIBUTES, UO
 // CreateTransactionManager calls ktmw32!CreateTransactionManager.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-createtransactionmanager
 // Minimum OS: windows6.0.6000.
-func CreateTransactionManager(lpTransactionAttributes *security.SECURITY_ATTRIBUTES, LogFileName foundation.PWSTR, CreateOptions uint32, CommitStrength uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateTransactionManager.Addr(), uintptr(unsafe.Pointer(lpTransactionAttributes)), uintptr(unsafe.Pointer(LogFileName)), uintptr(CreateOptions), uintptr(CommitStrength))
+func CreateTransactionManager(lpTransactionAttributes *security.SECURITY_ATTRIBUTES, LogFileName string, CreateOptions uint32, CommitStrength uint32) (foundation.HANDLE, error) {
+	_LogFileName := win32.UTF16Ptr(LogFileName)
+	r1, _, e1 := syscall.SyscallN(procCreateTransactionManager.Addr(), uintptr(unsafe.Pointer(lpTransactionAttributes)), uintptr(unsafe.Pointer(_LogFileName)), uintptr(CreateOptions), uintptr(CommitStrength))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1104,22 +1167,36 @@ func CreateTransactionManager(lpTransactionAttributes *security.SECURITY_ATTRIBU
 	return ret, nil
 }
 
-// DecryptFileA calls ADVAPI32!DecryptFileA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-decryptfilea
+// DecryptFile calls ADVAPI32!DecryptFileW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-decryptfilew
 // Minimum OS: windows5.1.2600.
-func DecryptFileA(lpFileName foundation.PSTR, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procDecryptFileA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwReserved))
+func DecryptFile(lpFileName string) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procDecryptFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// DecryptFileW calls ADVAPI32!DecryptFileW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-decryptfilew
+// DecryptFileA calls ADVAPI32!DecryptFileA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-decryptfilea
 // Minimum OS: windows5.1.2600.
-func DecryptFileW(lpFileName foundation.PWSTR, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procDecryptFileW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwReserved))
+func DecryptFileA(lpFileName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procDecryptFileA.Addr(), uintptr(unsafe.Pointer(lpFileName)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// DefineDosDevice calls KERNEL32!DefineDosDeviceW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-definedosdevicew
+// Minimum OS: windows5.1.2600.
+func DefineDosDevice(dwFlags DEFINE_DOS_DEVICE_FLAGS, lpDeviceName string, lpTargetPath string) error {
+	_lpDeviceName := win32.UTF16Ptr(lpDeviceName)
+	_lpTargetPath := win32.UTF16Ptr(lpTargetPath)
+	r1, _, e1 := syscall.SyscallN(procDefineDosDevice.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpDeviceName)), uintptr(unsafe.Pointer(_lpTargetPath)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1137,27 +1214,29 @@ func DefineDosDeviceA(dwFlags DEFINE_DOS_DEVICE_FLAGS, lpDeviceName foundation.P
 	return nil
 }
 
-// DefineDosDeviceW calls KERNEL32!DefineDosDeviceW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-definedosdevicew
+// DeleteFile calls KERNEL32!DeleteFileW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-deletefilew
 // Minimum OS: windows5.1.2600.
-func DefineDosDeviceW(dwFlags DEFINE_DOS_DEVICE_FLAGS, lpDeviceName foundation.PWSTR, lpTargetPath foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procDefineDosDeviceW.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDeviceName)), uintptr(unsafe.Pointer(lpTargetPath)))
+func DeleteFile(lpFileName string) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procDeleteFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// DeleteFile2A calls KERNEL32!DeleteFile2A.
-func DeleteFile2A(lpFileName foundation.PSTR, Flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeleteFile2A.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(Flags))
-	return foundation.BOOL(r1)
+// DeleteFile2 calls KERNEL32!DeleteFile2W.
+func DeleteFile2(lpFileName string, Flags uint32) bool {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procDeleteFile2.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(Flags))
+	return r1 != 0
 }
 
-// DeleteFile2W calls KERNEL32!DeleteFile2W.
-func DeleteFile2W(lpFileName foundation.PWSTR, Flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeleteFile2W.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(Flags))
-	return foundation.BOOL(r1)
+// DeleteFile2A calls KERNEL32!DeleteFile2A.
+func DeleteFile2A(lpFileName foundation.PSTR, Flags uint32) bool {
+	r1, _, _ := syscall.SyscallN(procDeleteFile2A.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(Flags))
+	return r1 != 0
 }
 
 // DeleteFileA calls KERNEL32!DeleteFileA.
@@ -1173,9 +1252,22 @@ func DeleteFileA(lpFileName foundation.PSTR) error {
 
 // DeleteFileFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!DeleteFileFromAppW.
 // https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-deletefilefromappw
-func DeleteFileFromAppW(lpFileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDeleteFileFromAppW.Addr(), uintptr(unsafe.Pointer(lpFileName)))
-	return foundation.BOOL(r1)
+func DeleteFileFromAppW(lpFileName string) bool {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procDeleteFileFromAppW.Addr(), uintptr(unsafe.Pointer(_lpFileName)))
+	return r1 != 0
+}
+
+// DeleteFileTransacted calls KERNEL32!DeleteFileTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-deletefiletransactedw
+// Minimum OS: windows6.0.6000.
+func DeleteFileTransacted(lpFileName string, hTransaction foundation.HANDLE) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procDeleteFileTransacted.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(hTransaction))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // DeleteFileTransactedA calls KERNEL32!DeleteFileTransactedA.
@@ -1183,28 +1275,6 @@ func DeleteFileFromAppW(lpFileName foundation.PWSTR) foundation.BOOL {
 // Minimum OS: windows6.0.6000.
 func DeleteFileTransactedA(lpFileName foundation.PSTR, hTransaction foundation.HANDLE) error {
 	r1, _, e1 := syscall.SyscallN(procDeleteFileTransactedA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// DeleteFileTransactedW calls KERNEL32!DeleteFileTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-deletefiletransactedw
-// Minimum OS: windows6.0.6000.
-func DeleteFileTransactedW(lpFileName foundation.PWSTR, hTransaction foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteFileTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// DeleteFileW calls KERNEL32!DeleteFileW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-deletefilew
-// Minimum OS: windows5.1.2600.
-func DeleteFileW(lpFileName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteFileW.Addr(), uintptr(unsafe.Pointer(lpFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1225,8 +1295,9 @@ func DeleteLogByHandle(hLog foundation.HANDLE) error {
 // DeleteLogFile calls clfsw32!DeleteLogFile.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-deletelogfile
 // Minimum OS: windows6.0.6000.
-func DeleteLogFile(pszLogFileName foundation.PWSTR, pvReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteLogFile.Addr(), uintptr(unsafe.Pointer(pszLogFileName)), uintptr(unsafe.Pointer(pvReserved)))
+func DeleteLogFile(pszLogFileName string, pvReserved unsafe.Pointer) error {
+	_pszLogFileName := win32.UTF16Ptr(pszLogFileName)
+	r1, _, e1 := syscall.SyscallN(procDeleteLogFile.Addr(), uintptr(unsafe.Pointer(_pszLogFileName)), uintptr(unsafe.Pointer(pvReserved)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1244,22 +1315,23 @@ func DeleteLogMarshallingArea(pvMarshal unsafe.Pointer) error {
 	return nil
 }
 
-// DeleteVolumeMountPointA calls KERNEL32!DeleteVolumeMountPointA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-deletevolumemountpointa
+// DeleteVolumeMountPoint calls KERNEL32!DeleteVolumeMountPointW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-deletevolumemountpointw
 // Minimum OS: windows5.1.2600.
-func DeleteVolumeMountPointA(lpszVolumeMountPoint foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteVolumeMountPointA.Addr(), uintptr(unsafe.Pointer(lpszVolumeMountPoint)))
+func DeleteVolumeMountPoint(lpszVolumeMountPoint string) error {
+	_lpszVolumeMountPoint := win32.UTF16Ptr(lpszVolumeMountPoint)
+	r1, _, e1 := syscall.SyscallN(procDeleteVolumeMountPoint.Addr(), uintptr(unsafe.Pointer(_lpszVolumeMountPoint)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// DeleteVolumeMountPointW calls KERNEL32!DeleteVolumeMountPointW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-deletevolumemountpointw
+// DeleteVolumeMountPointA calls KERNEL32!DeleteVolumeMountPointA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-deletevolumemountpointa
 // Minimum OS: windows5.1.2600.
-func DeleteVolumeMountPointW(lpszVolumeMountPoint foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteVolumeMountPointW.Addr(), uintptr(unsafe.Pointer(lpszVolumeMountPoint)))
+func DeleteVolumeMountPointA(lpszVolumeMountPoint foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procDeleteVolumeMountPointA.Addr(), uintptr(unsafe.Pointer(lpszVolumeMountPoint)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1280,9 +1352,23 @@ func DeregisterManageableLogClient(hLog foundation.HANDLE) error {
 // DuplicateEncryptionInfoFile calls ADVAPI32!DuplicateEncryptionInfoFile.
 // https://learn.microsoft.com/windows/win32/api/winefs/nf-winefs-duplicateencryptioninfofile
 // Minimum OS: windows5.1.2600.
-func DuplicateEncryptionInfoFile(SrcFileName foundation.PWSTR, DstFileName foundation.PWSTR, dwCreationDistribution uint32, dwAttributes uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) uint32 {
-	r1, _, _ := syscall.SyscallN(procDuplicateEncryptionInfoFile.Addr(), uintptr(unsafe.Pointer(SrcFileName)), uintptr(unsafe.Pointer(DstFileName)), uintptr(dwCreationDistribution), uintptr(dwAttributes), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+func DuplicateEncryptionInfoFile(SrcFileName string, DstFileName string, dwCreationDistribution uint32, dwAttributes uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) uint32 {
+	_SrcFileName := win32.UTF16Ptr(SrcFileName)
+	_DstFileName := win32.UTF16Ptr(DstFileName)
+	r1, _, _ := syscall.SyscallN(procDuplicateEncryptionInfoFile.Addr(), uintptr(unsafe.Pointer(_SrcFileName)), uintptr(unsafe.Pointer(_DstFileName)), uintptr(dwCreationDistribution), uintptr(dwAttributes), uintptr(unsafe.Pointer(lpSecurityAttributes)))
 	return uint32(r1)
+}
+
+// EncryptFile calls ADVAPI32!EncryptFileW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-encryptfilew
+// Minimum OS: windows5.1.2600.
+func EncryptFile(lpFileName string) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procEncryptFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // EncryptFileA calls ADVAPI32!EncryptFileA.
@@ -1296,22 +1382,13 @@ func EncryptFileA(lpFileName foundation.PSTR) error {
 	return nil
 }
 
-// EncryptFileW calls ADVAPI32!EncryptFileW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-encryptfilew
-// Minimum OS: windows5.1.2600.
-func EncryptFileW(lpFileName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procEncryptFileW.Addr(), uintptr(unsafe.Pointer(lpFileName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // EncryptionDisable calls ADVAPI32!EncryptionDisable.
 // https://learn.microsoft.com/windows/win32/api/winefs/nf-winefs-encryptiondisable
 // Minimum OS: windows5.1.2600.
-func EncryptionDisable(DirPath foundation.PWSTR, Disable foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procEncryptionDisable.Addr(), uintptr(unsafe.Pointer(DirPath)), uintptr(Disable))
+func EncryptionDisable(DirPath string, Disable bool) error {
+	_DirPath := win32.UTF16Ptr(DirPath)
+	_Disable := win32.Bool32(Disable)
+	r1, _, e1 := syscall.SyscallN(procEncryptionDisable.Addr(), uintptr(unsafe.Pointer(_DirPath)), uintptr(_Disable))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1321,9 +1398,22 @@ func EncryptionDisable(DirPath foundation.PWSTR, Disable foundation.BOOL) error 
 // EraseTape calls KERNEL32!EraseTape.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-erasetape
 // Minimum OS: windows5.1.2600.
-func EraseTape(hDevice foundation.HANDLE, dwEraseType ERASE_TAPE_TYPE, bImmediate foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procEraseTape.Addr(), uintptr(hDevice), uintptr(dwEraseType), uintptr(bImmediate))
+func EraseTape(hDevice foundation.HANDLE, dwEraseType ERASE_TAPE_TYPE, bImmediate bool) uint32 {
+	_bImmediate := win32.Bool32(bImmediate)
+	r1, _, _ := syscall.SyscallN(procEraseTape.Addr(), uintptr(hDevice), uintptr(dwEraseType), uintptr(_bImmediate))
 	return uint32(r1)
+}
+
+// FileEncryptionStatus calls ADVAPI32!FileEncryptionStatusW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-fileencryptionstatusw
+// Minimum OS: windows5.1.2600.
+func FileEncryptionStatus(lpFileName string, lpStatus *uint32) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procFileEncryptionStatus.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(lpStatus)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // FileEncryptionStatusA calls ADVAPI32!FileEncryptionStatusA.
@@ -1331,17 +1421,6 @@ func EraseTape(hDevice foundation.HANDLE, dwEraseType ERASE_TAPE_TYPE, bImmediat
 // Minimum OS: windows5.1.2600.
 func FileEncryptionStatusA(lpFileName foundation.PSTR, lpStatus *uint32) error {
 	r1, _, e1 := syscall.SyscallN(procFileEncryptionStatusA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpStatus)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// FileEncryptionStatusW calls ADVAPI32!FileEncryptionStatusW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-fileencryptionstatusw
-// Minimum OS: windows5.1.2600.
-func FileEncryptionStatusW(lpFileName foundation.PWSTR, lpStatus *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFileEncryptionStatusW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpStatus)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1381,11 +1460,13 @@ func FindCloseChangeNotification(hChangeHandle foundation.HANDLE) error {
 	return nil
 }
 
-// FindFirstChangeNotificationA calls KERNEL32!FindFirstChangeNotificationA.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstchangenotificationa
+// FindFirstChangeNotification calls KERNEL32!FindFirstChangeNotificationW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstchangenotificationw
 // Minimum OS: windows5.1.2600.
-func FindFirstChangeNotificationA(lpPathName foundation.PSTR, bWatchSubtree foundation.BOOL, dwNotifyFilter FILE_NOTIFY_CHANGE) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstChangeNotificationA.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(bWatchSubtree), uintptr(dwNotifyFilter))
+func FindFirstChangeNotification(lpPathName string, bWatchSubtree bool, dwNotifyFilter FILE_NOTIFY_CHANGE) (foundation.HANDLE, error) {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	_bWatchSubtree := win32.Bool32(bWatchSubtree)
+	r1, _, e1 := syscall.SyscallN(procFindFirstChangeNotification.Addr(), uintptr(unsafe.Pointer(_lpPathName)), uintptr(_bWatchSubtree), uintptr(dwNotifyFilter))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1393,11 +1474,25 @@ func FindFirstChangeNotificationA(lpPathName foundation.PSTR, bWatchSubtree foun
 	return ret, nil
 }
 
-// FindFirstChangeNotificationW calls KERNEL32!FindFirstChangeNotificationW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstchangenotificationw
+// FindFirstChangeNotificationA calls KERNEL32!FindFirstChangeNotificationA.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstchangenotificationa
 // Minimum OS: windows5.1.2600.
-func FindFirstChangeNotificationW(lpPathName foundation.PWSTR, bWatchSubtree foundation.BOOL, dwNotifyFilter FILE_NOTIFY_CHANGE) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstChangeNotificationW.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(bWatchSubtree), uintptr(dwNotifyFilter))
+func FindFirstChangeNotificationA(lpPathName foundation.PSTR, bWatchSubtree bool, dwNotifyFilter FILE_NOTIFY_CHANGE) (foundation.HANDLE, error) {
+	_bWatchSubtree := win32.Bool32(bWatchSubtree)
+	r1, _, e1 := syscall.SyscallN(procFindFirstChangeNotificationA.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(_bWatchSubtree), uintptr(dwNotifyFilter))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// FindFirstFile calls KERNEL32!FindFirstFileW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstfilew
+// Minimum OS: windows5.1.2600.
+func FindFirstFile(lpFileName string, lpFindFileData *WIN32_FIND_DATAW) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procFindFirstFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(lpFindFileData)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1417,11 +1512,24 @@ func FindFirstFileA(lpFileName foundation.PSTR, lpFindFileData *WIN32_FIND_DATAA
 	return ret, nil
 }
 
+// FindFirstFileEx calls KERNEL32!FindFirstFileExW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstfileexw
+// Minimum OS: windows5.1.2600.
+func FindFirstFileEx(lpFileName string, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, dwAdditionalFlags FIND_FIRST_EX_FLAGS) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procFindFirstFileEx.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), 0, uintptr(dwAdditionalFlags))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // FindFirstFileExA calls KERNEL32!FindFirstFileExA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstfileexa
 // Minimum OS: windows5.1.2600.
-func FindFirstFileExA(lpFileName foundation.PSTR, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, lpSearchFilter unsafe.Pointer, dwAdditionalFlags FIND_FIRST_EX_FLAGS) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstFileExA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), uintptr(unsafe.Pointer(lpSearchFilter)), uintptr(dwAdditionalFlags))
+func FindFirstFileExA(lpFileName foundation.PSTR, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, dwAdditionalFlags FIND_FIRST_EX_FLAGS) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procFindFirstFileExA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), 0, uintptr(dwAdditionalFlags))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1431,28 +1539,18 @@ func FindFirstFileExA(lpFileName foundation.PSTR, fInfoLevelId FINDEX_INFO_LEVEL
 
 // FindFirstFileExFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!FindFirstFileExFromAppW.
 // https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-findfirstfileexfromappw
-func FindFirstFileExFromAppW(lpFileName foundation.PWSTR, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, lpSearchFilter unsafe.Pointer, dwAdditionalFlags uint32) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procFindFirstFileExFromAppW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), uintptr(unsafe.Pointer(lpSearchFilter)), uintptr(dwAdditionalFlags))
+func FindFirstFileExFromAppW(lpFileName string, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, dwAdditionalFlags uint32) foundation.HANDLE {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procFindFirstFileExFromAppW.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), 0, uintptr(dwAdditionalFlags))
 	return foundation.HANDLE(r1)
-}
-
-// FindFirstFileExW calls KERNEL32!FindFirstFileExW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstfileexw
-// Minimum OS: windows5.1.2600.
-func FindFirstFileExW(lpFileName foundation.PWSTR, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, lpSearchFilter unsafe.Pointer, dwAdditionalFlags FIND_FIRST_EX_FLAGS) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstFileExW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), uintptr(unsafe.Pointer(lpSearchFilter)), uintptr(dwAdditionalFlags))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
 }
 
 // FindFirstFileNameTransactedW calls KERNEL32!FindFirstFileNameTransactedW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findfirstfilenametransactedw
 // Minimum OS: windows6.0.6000.
-func FindFirstFileNameTransactedW(lpFileName foundation.PWSTR, dwFlags uint32, StringLength *uint32, LinkName foundation.PWSTR, hTransaction foundation.HANDLE) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstFileNameTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwFlags), uintptr(unsafe.Pointer(StringLength)), uintptr(unsafe.Pointer(LinkName)), uintptr(hTransaction))
+func FindFirstFileNameTransactedW(lpFileName string, dwFlags uint32, StringLength *uint32, LinkName foundation.PWSTR, hTransaction foundation.HANDLE) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procFindFirstFileNameTransactedW.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwFlags), uintptr(unsafe.Pointer(StringLength)), uintptr(unsafe.Pointer(LinkName)), uintptr(hTransaction))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1463,8 +1561,22 @@ func FindFirstFileNameTransactedW(lpFileName foundation.PWSTR, dwFlags uint32, S
 // FindFirstFileNameW calls KERNEL32!FindFirstFileNameW.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstfilenamew
 // Minimum OS: windows6.0.6000.
-func FindFirstFileNameW(lpFileName foundation.PWSTR, dwFlags uint32, StringLength *uint32, LinkName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstFileNameW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwFlags), uintptr(unsafe.Pointer(StringLength)), uintptr(unsafe.Pointer(LinkName)))
+func FindFirstFileNameW(lpFileName string, dwFlags uint32, StringLength *uint32, LinkName foundation.PWSTR) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procFindFirstFileNameW.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwFlags), uintptr(unsafe.Pointer(StringLength)), uintptr(unsafe.Pointer(LinkName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// FindFirstFileTransacted calls KERNEL32!FindFirstFileTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findfirstfiletransactedw
+// Minimum OS: windows6.0.6000.
+func FindFirstFileTransacted(lpFileName string, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, dwAdditionalFlags uint32, hTransaction foundation.HANDLE) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procFindFirstFileTransacted.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), 0, uintptr(dwAdditionalFlags), uintptr(hTransaction))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1475,32 +1587,8 @@ func FindFirstFileNameW(lpFileName foundation.PWSTR, dwFlags uint32, StringLengt
 // FindFirstFileTransactedA calls KERNEL32!FindFirstFileTransactedA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findfirstfiletransacteda
 // Minimum OS: windows6.0.6000.
-func FindFirstFileTransactedA(lpFileName foundation.PSTR, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, lpSearchFilter unsafe.Pointer, dwAdditionalFlags uint32, hTransaction foundation.HANDLE) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstFileTransactedA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), uintptr(unsafe.Pointer(lpSearchFilter)), uintptr(dwAdditionalFlags), uintptr(hTransaction))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// FindFirstFileTransactedW calls KERNEL32!FindFirstFileTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findfirstfiletransactedw
-// Minimum OS: windows6.0.6000.
-func FindFirstFileTransactedW(lpFileName foundation.PWSTR, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, lpSearchFilter unsafe.Pointer, dwAdditionalFlags uint32, hTransaction foundation.HANDLE) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstFileTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), uintptr(unsafe.Pointer(lpSearchFilter)), uintptr(dwAdditionalFlags), uintptr(hTransaction))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// FindFirstFileW calls KERNEL32!FindFirstFileW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstfilew
-// Minimum OS: windows5.1.2600.
-func FindFirstFileW(lpFileName foundation.PWSTR, lpFindFileData *WIN32_FIND_DATAW) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstFileW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpFindFileData)))
+func FindFirstFileTransactedA(lpFileName foundation.PSTR, fInfoLevelId FINDEX_INFO_LEVELS, lpFindFileData unsafe.Pointer, fSearchOp FINDEX_SEARCH_OPS, dwAdditionalFlags uint32, hTransaction foundation.HANDLE) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procFindFirstFileTransactedA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(fSearchOp), 0, uintptr(dwAdditionalFlags), uintptr(hTransaction))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1511,8 +1599,9 @@ func FindFirstFileW(lpFileName foundation.PWSTR, lpFindFileData *WIN32_FIND_DATA
 // FindFirstStreamTransactedW calls KERNEL32!FindFirstStreamTransactedW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findfirststreamtransactedw
 // Minimum OS: windows6.0.6000.
-func FindFirstStreamTransactedW(lpFileName foundation.PWSTR, InfoLevel STREAM_INFO_LEVELS, lpFindStreamData unsafe.Pointer, dwFlags uint32, hTransaction foundation.HANDLE) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstStreamTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(InfoLevel), uintptr(unsafe.Pointer(lpFindStreamData)), uintptr(dwFlags), uintptr(hTransaction))
+func FindFirstStreamTransactedW(lpFileName string, InfoLevel STREAM_INFO_LEVELS, lpFindStreamData unsafe.Pointer, hTransaction foundation.HANDLE) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procFindFirstStreamTransactedW.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(InfoLevel), uintptr(unsafe.Pointer(lpFindStreamData)), 0, uintptr(hTransaction))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1523,8 +1612,21 @@ func FindFirstStreamTransactedW(lpFileName foundation.PWSTR, InfoLevel STREAM_IN
 // FindFirstStreamW calls KERNEL32!FindFirstStreamW.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirststreamw
 // Minimum OS: windows6.0.6000.
-func FindFirstStreamW(lpFileName foundation.PWSTR, InfoLevel STREAM_INFO_LEVELS, lpFindStreamData unsafe.Pointer, dwFlags uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstStreamW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(InfoLevel), uintptr(unsafe.Pointer(lpFindStreamData)), uintptr(dwFlags))
+func FindFirstStreamW(lpFileName string, InfoLevel STREAM_INFO_LEVELS, lpFindStreamData unsafe.Pointer) (foundation.HANDLE, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procFindFirstStreamW.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(InfoLevel), uintptr(unsafe.Pointer(lpFindStreamData)), 0)
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// FindFirstVolume calls KERNEL32!FindFirstVolumeW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstvolumew
+// Minimum OS: windows5.1.2600.
+func FindFirstVolume(lpszVolumeName foundation.PWSTR, cchBufferLength uint32) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procFindFirstVolume.Addr(), uintptr(unsafe.Pointer(lpszVolumeName)), uintptr(cchBufferLength))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1544,6 +1646,19 @@ func FindFirstVolumeA(lpszVolumeName foundation.PSTR, cchBufferLength uint32) (f
 	return ret, nil
 }
 
+// FindFirstVolumeMountPoint calls KERNEL32!FindFirstVolumeMountPointW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findfirstvolumemountpointw
+// Minimum OS: windows5.1.2600.
+func FindFirstVolumeMountPoint(lpszRootPathName string, lpszVolumeMountPoint foundation.PWSTR, cchBufferLength uint32) (foundation.HANDLE, error) {
+	_lpszRootPathName := win32.UTF16Ptr(lpszRootPathName)
+	r1, _, e1 := syscall.SyscallN(procFindFirstVolumeMountPoint.Addr(), uintptr(unsafe.Pointer(_lpszRootPathName)), uintptr(unsafe.Pointer(lpszVolumeMountPoint)), uintptr(cchBufferLength))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // FindFirstVolumeMountPointA calls KERNEL32!FindFirstVolumeMountPointA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findfirstvolumemountpointa
 // Minimum OS: windows5.1.2600.
@@ -1556,35 +1671,22 @@ func FindFirstVolumeMountPointA(lpszRootPathName foundation.PSTR, lpszVolumeMoun
 	return ret, nil
 }
 
-// FindFirstVolumeMountPointW calls KERNEL32!FindFirstVolumeMountPointW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findfirstvolumemountpointw
-// Minimum OS: windows5.1.2600.
-func FindFirstVolumeMountPointW(lpszRootPathName foundation.PWSTR, lpszVolumeMountPoint foundation.PWSTR, cchBufferLength uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstVolumeMountPointW.Addr(), uintptr(unsafe.Pointer(lpszRootPathName)), uintptr(unsafe.Pointer(lpszVolumeMountPoint)), uintptr(cchBufferLength))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// FindFirstVolumeW calls KERNEL32!FindFirstVolumeW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findfirstvolumew
-// Minimum OS: windows5.1.2600.
-func FindFirstVolumeW(lpszVolumeName foundation.PWSTR, cchBufferLength uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstVolumeW.Addr(), uintptr(unsafe.Pointer(lpszVolumeName)), uintptr(cchBufferLength))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
 // FindNextChangeNotification calls KERNEL32!FindNextChangeNotification.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextchangenotification
 // Minimum OS: windows5.1.2600.
 func FindNextChangeNotification(hChangeHandle foundation.HANDLE) error {
 	r1, _, e1 := syscall.SyscallN(procFindNextChangeNotification.Addr(), uintptr(hChangeHandle))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// FindNextFile calls KERNEL32!FindNextFileW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextfilew
+// Minimum OS: windows5.1.2600.
+func FindNextFile(hFindFile foundation.HANDLE, lpFindFileData *WIN32_FIND_DATAW) error {
+	r1, _, e1 := syscall.SyscallN(procFindNextFile.Addr(), uintptr(hFindFile), uintptr(unsafe.Pointer(lpFindFileData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1613,22 +1715,22 @@ func FindNextFileNameW(hFindStream foundation.HANDLE, StringLength *uint32, Link
 	return nil
 }
 
-// FindNextFileW calls KERNEL32!FindNextFileW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextfilew
-// Minimum OS: windows5.1.2600.
-func FindNextFileW(hFindFile foundation.HANDLE, lpFindFileData *WIN32_FIND_DATAW) error {
-	r1, _, e1 := syscall.SyscallN(procFindNextFileW.Addr(), uintptr(hFindFile), uintptr(unsafe.Pointer(lpFindFileData)))
+// FindNextStreamW calls KERNEL32!FindNextStreamW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextstreamw
+// Minimum OS: windows6.0.6000.
+func FindNextStreamW(hFindStream foundation.HANDLE, lpFindStreamData unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procFindNextStreamW.Addr(), uintptr(hFindStream), uintptr(unsafe.Pointer(lpFindStreamData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// FindNextStreamW calls KERNEL32!FindNextStreamW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextstreamw
-// Minimum OS: windows6.0.6000.
-func FindNextStreamW(hFindStream foundation.HANDLE, lpFindStreamData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procFindNextStreamW.Addr(), uintptr(hFindStream), uintptr(unsafe.Pointer(lpFindStreamData)))
+// FindNextVolume calls KERNEL32!FindNextVolumeW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextvolumew
+// Minimum OS: windows5.1.2600.
+func FindNextVolume(hFindVolume foundation.HANDLE, lpszVolumeName foundation.PWSTR, cchBufferLength uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFindNextVolume.Addr(), uintptr(hFindVolume), uintptr(unsafe.Pointer(lpszVolumeName)), uintptr(cchBufferLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1646,33 +1748,22 @@ func FindNextVolumeA(hFindVolume foundation.HANDLE, lpszVolumeName foundation.PS
 	return nil
 }
 
+// FindNextVolumeMountPoint calls KERNEL32!FindNextVolumeMountPointW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findnextvolumemountpointw
+// Minimum OS: windows5.1.2600.
+func FindNextVolumeMountPoint(hFindVolumeMountPoint foundation.HANDLE, lpszVolumeMountPoint foundation.PWSTR, cchBufferLength uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFindNextVolumeMountPoint.Addr(), uintptr(hFindVolumeMountPoint), uintptr(unsafe.Pointer(lpszVolumeMountPoint)), uintptr(cchBufferLength))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // FindNextVolumeMountPointA calls KERNEL32!FindNextVolumeMountPointA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findnextvolumemountpointa
 // Minimum OS: windows5.1.2600.
 func FindNextVolumeMountPointA(hFindVolumeMountPoint foundation.HANDLE, lpszVolumeMountPoint foundation.PSTR, cchBufferLength uint32) error {
 	r1, _, e1 := syscall.SyscallN(procFindNextVolumeMountPointA.Addr(), uintptr(hFindVolumeMountPoint), uintptr(unsafe.Pointer(lpszVolumeMountPoint)), uintptr(cchBufferLength))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// FindNextVolumeMountPointW calls KERNEL32!FindNextVolumeMountPointW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findnextvolumemountpointw
-// Minimum OS: windows5.1.2600.
-func FindNextVolumeMountPointW(hFindVolumeMountPoint foundation.HANDLE, lpszVolumeMountPoint foundation.PWSTR, cchBufferLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFindNextVolumeMountPointW.Addr(), uintptr(hFindVolumeMountPoint), uintptr(unsafe.Pointer(lpszVolumeMountPoint)), uintptr(cchBufferLength))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// FindNextVolumeW calls KERNEL32!FindNextVolumeW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-findnextvolumew
-// Minimum OS: windows5.1.2600.
-func FindNextVolumeW(hFindVolume foundation.HANDLE, lpszVolumeName foundation.PWSTR, cchBufferLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFindNextVolumeW.Addr(), uintptr(hFindVolume), uintptr(unsafe.Pointer(lpszVolumeName)), uintptr(cchBufferLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1757,6 +1848,18 @@ func FreeReservedLog(pvMarshal unsafe.Pointer, cReservedRecords uint32, pcbAdjus
 	return nil
 }
 
+// GetBinaryType calls KERNEL32!GetBinaryTypeW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getbinarytypew
+// Minimum OS: windows5.1.2600.
+func GetBinaryType(lpApplicationName string, lpBinaryType *uint32) error {
+	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
+	r1, _, e1 := syscall.SyscallN(procGetBinaryType.Addr(), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpBinaryType)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetBinaryTypeA calls KERNEL32!GetBinaryTypeA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getbinarytypea
 // Minimum OS: windows5.1.2600.
@@ -1768,15 +1871,16 @@ func GetBinaryTypeA(lpApplicationName foundation.PSTR, lpBinaryType *uint32) err
 	return nil
 }
 
-// GetBinaryTypeW calls KERNEL32!GetBinaryTypeW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getbinarytypew
+// GetCompressedFileSize calls KERNEL32!GetCompressedFileSizeW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getcompressedfilesizew
 // Minimum OS: windows5.1.2600.
-func GetBinaryTypeW(lpApplicationName foundation.PWSTR, lpBinaryType *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetBinaryTypeW.Addr(), uintptr(unsafe.Pointer(lpApplicationName)), uintptr(unsafe.Pointer(lpBinaryType)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func GetCompressedFileSize(lpFileName string, lpFileSizeHigh *uint32) (uint32, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procGetCompressedFileSize.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(lpFileSizeHigh)))
+	if e1 != 0 {
+		return uint32(r1), e1
 	}
-	return nil
+	return uint32(r1), nil
 }
 
 // GetCompressedFileSizeA calls KERNEL32!GetCompressedFileSizeA.
@@ -1784,6 +1888,18 @@ func GetBinaryTypeW(lpApplicationName foundation.PWSTR, lpBinaryType *uint32) er
 // Minimum OS: windows5.1.2600.
 func GetCompressedFileSizeA(lpFileName foundation.PSTR, lpFileSizeHigh *uint32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetCompressedFileSizeA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpFileSizeHigh)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
+// GetCompressedFileSizeTransacted calls KERNEL32!GetCompressedFileSizeTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcompressedfilesizetransactedw
+// Minimum OS: windows6.0.6000.
+func GetCompressedFileSizeTransacted(lpFileName string, lpFileSizeHigh *uint32, hTransaction foundation.HANDLE) (uint32, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procGetCompressedFileSizeTransacted.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(lpFileSizeHigh)), uintptr(hTransaction))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1801,33 +1917,23 @@ func GetCompressedFileSizeTransactedA(lpFileName foundation.PSTR, lpFileSizeHigh
 	return uint32(r1), nil
 }
 
-// GetCompressedFileSizeTransactedW calls KERNEL32!GetCompressedFileSizeTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcompressedfilesizetransactedw
-// Minimum OS: windows6.0.6000.
-func GetCompressedFileSizeTransactedW(lpFileName foundation.PWSTR, lpFileSizeHigh *uint32, hTransaction foundation.HANDLE) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetCompressedFileSizeTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpFileSizeHigh)), uintptr(hTransaction))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetCompressedFileSizeW calls KERNEL32!GetCompressedFileSizeW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getcompressedfilesizew
-// Minimum OS: windows5.1.2600.
-func GetCompressedFileSizeW(lpFileName foundation.PWSTR, lpFileSizeHigh *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetCompressedFileSizeW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpFileSizeHigh)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
 // GetCurrentClockTransactionManager calls ktmw32!GetCurrentClockTransactionManager.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-getcurrentclocktransactionmanager
 // Minimum OS: windows6.0.6000.
 func GetCurrentClockTransactionManager(TransactionManagerHandle foundation.HANDLE, TmVirtualClock *int64) error {
 	r1, _, e1 := syscall.SyscallN(procGetCurrentClockTransactionManager.Addr(), uintptr(TransactionManagerHandle), uintptr(unsafe.Pointer(TmVirtualClock)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// GetDiskFreeSpace calls KERNEL32!GetDiskFreeSpaceW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskfreespacew
+// Minimum OS: windows5.1.2600.
+func GetDiskFreeSpace(lpRootPathName string, lpSectorsPerCluster *uint32, lpBytesPerSector *uint32, lpNumberOfFreeClusters *uint32, lpTotalNumberOfClusters *uint32) error {
+	_lpRootPathName := win32.UTF16Ptr(lpRootPathName)
+	r1, _, e1 := syscall.SyscallN(procGetDiskFreeSpace.Addr(), uintptr(unsafe.Pointer(_lpRootPathName)), uintptr(unsafe.Pointer(lpSectorsPerCluster)), uintptr(unsafe.Pointer(lpBytesPerSector)), uintptr(unsafe.Pointer(lpNumberOfFreeClusters)), uintptr(unsafe.Pointer(lpTotalNumberOfClusters)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1845,6 +1951,18 @@ func GetDiskFreeSpaceA(lpRootPathName foundation.PSTR, lpSectorsPerCluster *uint
 	return nil
 }
 
+// GetDiskFreeSpaceEx calls KERNEL32!GetDiskFreeSpaceExW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskfreespaceexw
+// Minimum OS: windows5.1.2600.
+func GetDiskFreeSpaceEx(lpDirectoryName string, lpFreeBytesAvailableToCaller *uint64, lpTotalNumberOfBytes *uint64, lpTotalNumberOfFreeBytes *uint64) error {
+	_lpDirectoryName := win32.UTF16Ptr(lpDirectoryName)
+	r1, _, e1 := syscall.SyscallN(procGetDiskFreeSpaceEx.Addr(), uintptr(unsafe.Pointer(_lpDirectoryName)), uintptr(unsafe.Pointer(lpFreeBytesAvailableToCaller)), uintptr(unsafe.Pointer(lpTotalNumberOfBytes)), uintptr(unsafe.Pointer(lpTotalNumberOfFreeBytes)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetDiskFreeSpaceExA calls KERNEL32!GetDiskFreeSpaceExA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskfreespaceexa
 // Minimum OS: windows5.1.2600.
@@ -1856,40 +1974,28 @@ func GetDiskFreeSpaceExA(lpDirectoryName foundation.PSTR, lpFreeBytesAvailableTo
 	return nil
 }
 
-// GetDiskFreeSpaceExW calls KERNEL32!GetDiskFreeSpaceExW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskfreespaceexw
-// Minimum OS: windows5.1.2600.
-func GetDiskFreeSpaceExW(lpDirectoryName foundation.PWSTR, lpFreeBytesAvailableToCaller *uint64, lpTotalNumberOfBytes *uint64, lpTotalNumberOfFreeBytes *uint64) error {
-	r1, _, e1 := syscall.SyscallN(procGetDiskFreeSpaceExW.Addr(), uintptr(unsafe.Pointer(lpDirectoryName)), uintptr(unsafe.Pointer(lpFreeBytesAvailableToCaller)), uintptr(unsafe.Pointer(lpTotalNumberOfBytes)), uintptr(unsafe.Pointer(lpTotalNumberOfFreeBytes)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetDiskFreeSpaceW calls KERNEL32!GetDiskFreeSpaceW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskfreespacew
-// Minimum OS: windows5.1.2600.
-func GetDiskFreeSpaceW(lpRootPathName foundation.PWSTR, lpSectorsPerCluster *uint32, lpBytesPerSector *uint32, lpNumberOfFreeClusters *uint32, lpTotalNumberOfClusters *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetDiskFreeSpaceW.Addr(), uintptr(unsafe.Pointer(lpRootPathName)), uintptr(unsafe.Pointer(lpSectorsPerCluster)), uintptr(unsafe.Pointer(lpBytesPerSector)), uintptr(unsafe.Pointer(lpNumberOfFreeClusters)), uintptr(unsafe.Pointer(lpTotalNumberOfClusters)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// GetDiskSpaceInformation calls KERNEL32!GetDiskSpaceInformationW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskspaceinformationw
+func GetDiskSpaceInformation(rootPath string, diskSpaceInfo *DISK_SPACE_INFORMATION) error {
+	_rootPath := win32.UTF16Ptr(rootPath)
+	r1, _, _ := syscall.SyscallN(procGetDiskSpaceInformation.Addr(), uintptr(unsafe.Pointer(_rootPath)), uintptr(unsafe.Pointer(diskSpaceInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDiskSpaceInformationA calls KERNEL32!GetDiskSpaceInformationA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskspaceinformationa
-func GetDiskSpaceInformationA(rootPath foundation.PSTR, diskSpaceInfo *DISK_SPACE_INFORMATION) foundation.HRESULT {
+func GetDiskSpaceInformationA(rootPath foundation.PSTR, diskSpaceInfo *DISK_SPACE_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(procGetDiskSpaceInformationA.Addr(), uintptr(unsafe.Pointer(rootPath)), uintptr(unsafe.Pointer(diskSpaceInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// GetDiskSpaceInformationW calls KERNEL32!GetDiskSpaceInformationW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskspaceinformationw
-func GetDiskSpaceInformationW(rootPath foundation.PWSTR, diskSpaceInfo *DISK_SPACE_INFORMATION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetDiskSpaceInformationW.Addr(), uintptr(unsafe.Pointer(rootPath)), uintptr(unsafe.Pointer(diskSpaceInfo)))
-	return foundation.HRESULT(r1)
+// GetDriveType calls KERNEL32!GetDriveTypeW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdrivetypew
+// Minimum OS: windows5.1.2600.
+func GetDriveType(lpRootPathName string) uint32 {
+	_lpRootPathName := win32.UTF16Ptr(lpRootPathName)
+	r1, _, _ := syscall.SyscallN(procGetDriveType.Addr(), uintptr(unsafe.Pointer(_lpRootPathName)))
+	return uint32(r1)
 }
 
 // GetDriveTypeA calls KERNEL32!GetDriveTypeA.
@@ -1900,17 +2006,10 @@ func GetDriveTypeA(lpRootPathName foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// GetDriveTypeW calls KERNEL32!GetDriveTypeW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdrivetypew
-// Minimum OS: windows5.1.2600.
-func GetDriveTypeW(lpRootPathName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetDriveTypeW.Addr(), uintptr(unsafe.Pointer(lpRootPathName)))
-	return uint32(r1)
-}
-
 // GetEncryptedFileMetadata calls ADVAPI32!GetEncryptedFileMetadata.
-func GetEncryptedFileMetadata(lpFileName foundation.PWSTR, pcbMetadata *uint32, ppbMetadata **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetEncryptedFileMetadata.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(pcbMetadata)), uintptr(unsafe.Pointer(ppbMetadata)))
+func GetEncryptedFileMetadata(lpFileName string, pcbMetadata *uint32, ppbMetadata **byte) uint32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procGetEncryptedFileMetadata.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(pcbMetadata)), uintptr(unsafe.Pointer(ppbMetadata)))
 	return uint32(r1)
 }
 
@@ -1936,6 +2035,18 @@ func GetEnlistmentRecoveryInformation(EnlistmentHandle foundation.HANDLE, Buffer
 	return nil
 }
 
+// GetExpandedName calls KERNEL32!GetExpandedNameW.
+// https://learn.microsoft.com/windows/win32/api/lzexpand/nf-lzexpand-getexpandednamew
+// Minimum OS: windows5.1.2600.
+func GetExpandedName(lpszSource string, lpszBuffer foundation.PWSTR) (int32, error) {
+	_lpszSource := win32.UTF16Ptr(lpszSource)
+	r1, _, e1 := syscall.SyscallN(procGetExpandedName.Addr(), uintptr(unsafe.Pointer(_lpszSource)), uintptr(unsafe.Pointer(lpszBuffer)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // GetExpandedNameA calls KERNEL32!GetExpandedNameA.
 // https://learn.microsoft.com/windows/win32/api/lzexpand/nf-lzexpand-getexpandednamea
 // Minimum OS: windows5.1.2600.
@@ -1947,15 +2058,16 @@ func GetExpandedNameA(lpszSource foundation.PSTR, lpszBuffer foundation.PSTR) (i
 	return int32(r1), nil
 }
 
-// GetExpandedNameW calls KERNEL32!GetExpandedNameW.
-// https://learn.microsoft.com/windows/win32/api/lzexpand/nf-lzexpand-getexpandednamew
+// GetFileAttributes calls KERNEL32!GetFileAttributesW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesw
 // Minimum OS: windows5.1.2600.
-func GetExpandedNameW(lpszSource foundation.PWSTR, lpszBuffer foundation.PWSTR) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetExpandedNameW.Addr(), uintptr(unsafe.Pointer(lpszSource)), uintptr(unsafe.Pointer(lpszBuffer)))
+func GetFileAttributes(lpFileName string) (uint32, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procGetFileAttributes.Addr(), uintptr(unsafe.Pointer(_lpFileName)))
 	if e1 != 0 {
-		return int32(r1), e1
+		return uint32(r1), e1
 	}
-	return int32(r1), nil
+	return uint32(r1), nil
 }
 
 // GetFileAttributesA calls KERNEL32!GetFileAttributesA.
@@ -1967,6 +2079,18 @@ func GetFileAttributesA(lpFileName foundation.PSTR) (uint32, error) {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
+}
+
+// GetFileAttributesEx calls KERNEL32!GetFileAttributesExW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesexw
+// Minimum OS: windows5.1.2600.
+func GetFileAttributesEx(lpFileName string, fInfoLevelId GET_FILEEX_INFO_LEVELS, lpFileInformation unsafe.Pointer) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procGetFileAttributesEx.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFileInformation)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GetFileAttributesExA calls KERNEL32!GetFileAttributesExA.
@@ -1982,16 +2106,18 @@ func GetFileAttributesExA(lpFileName foundation.PSTR, fInfoLevelId GET_FILEEX_IN
 
 // GetFileAttributesExFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!GetFileAttributesExFromAppW.
 // https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-getfileattributesexfromappw
-func GetFileAttributesExFromAppW(lpFileName foundation.PWSTR, fInfoLevelId GET_FILEEX_INFO_LEVELS, lpFileInformation unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetFileAttributesExFromAppW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFileInformation)))
-	return foundation.BOOL(r1)
+func GetFileAttributesExFromAppW(lpFileName string, fInfoLevelId GET_FILEEX_INFO_LEVELS, lpFileInformation unsafe.Pointer) bool {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procGetFileAttributesExFromAppW.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFileInformation)))
+	return r1 != 0
 }
 
-// GetFileAttributesExW calls KERNEL32!GetFileAttributesExW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesexw
-// Minimum OS: windows5.1.2600.
-func GetFileAttributesExW(lpFileName foundation.PWSTR, fInfoLevelId GET_FILEEX_INFO_LEVELS, lpFileInformation unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileAttributesExW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFileInformation)))
+// GetFileAttributesTransacted calls KERNEL32!GetFileAttributesTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfileattributestransactedw
+// Minimum OS: windows6.0.6000.
+func GetFileAttributesTransacted(lpFileName string, fInfoLevelId GET_FILEEX_INFO_LEVELS, lpFileInformation unsafe.Pointer, hTransaction foundation.HANDLE) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procGetFileAttributesTransacted.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFileInformation)), uintptr(hTransaction))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2007,28 +2133,6 @@ func GetFileAttributesTransactedA(lpFileName foundation.PSTR, fInfoLevelId GET_F
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// GetFileAttributesTransactedW calls KERNEL32!GetFileAttributesTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfileattributestransactedw
-// Minimum OS: windows6.0.6000.
-func GetFileAttributesTransactedW(lpFileName foundation.PWSTR, fInfoLevelId GET_FILEEX_INFO_LEVELS, lpFileInformation unsafe.Pointer, hTransaction foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileAttributesTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFileInformation)), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetFileAttributesW calls KERNEL32!GetFileAttributesW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesw
-// Minimum OS: windows5.1.2600.
-func GetFileAttributesW(lpFileName foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFileAttributesW.Addr(), uintptr(unsafe.Pointer(lpFileName)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
 }
 
 // GetFileBandwidthReservation calls KERNEL32!GetFileBandwidthReservation.
@@ -2065,9 +2169,10 @@ func GetFileInformationByHandleEx(hFile foundation.HANDLE, FileInformationClass 
 }
 
 // GetFileInformationByName calls KERNEL32!GetFileInformationByName.
-func GetFileInformationByName(FileName foundation.PWSTR, FileInformationClass FILE_INFO_BY_NAME_CLASS, FileInfoBuffer unsafe.Pointer, FileInfoBufferSize uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetFileInformationByName.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(FileInformationClass), uintptr(unsafe.Pointer(FileInfoBuffer)), uintptr(FileInfoBufferSize))
-	return foundation.BOOL(r1)
+func GetFileInformationByName(FileName string, FileInformationClass FILE_INFO_BY_NAME_CLASS, FileInfoBuffer unsafe.Pointer, FileInfoBufferSize uint32) bool {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, _ := syscall.SyscallN(procGetFileInformationByName.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(FileInformationClass), uintptr(unsafe.Pointer(FileInfoBuffer)), uintptr(FileInfoBufferSize))
+	return r1 != 0
 }
 
 // GetFileSize calls KERNEL32!GetFileSize.
@@ -2114,11 +2219,35 @@ func GetFileType(hFile foundation.HANDLE) (FILE_TYPE, error) {
 	return FILE_TYPE(r1), nil
 }
 
+// GetFileVersionInfo calls VERSION!GetFileVersionInfoW.
+// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfow
+// Minimum OS: windows5.0.
+func GetFileVersionInfo(lptstrFilename string, dwLen uint32, lpData unsafe.Pointer) error {
+	_lptstrFilename := win32.UTF16Ptr(lptstrFilename)
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfo.Addr(), uintptr(unsafe.Pointer(_lptstrFilename)), 0, uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetFileVersionInfoA calls VERSION!GetFileVersionInfoA.
 // https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfoa
 // Minimum OS: windows5.0.
-func GetFileVersionInfoA(lptstrFilename foundation.PSTR, dwHandle uint32, dwLen uint32, lpData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoA.Addr(), uintptr(unsafe.Pointer(lptstrFilename)), uintptr(dwHandle), uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
+func GetFileVersionInfoA(lptstrFilename foundation.PSTR, dwLen uint32, lpData unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoA.Addr(), uintptr(unsafe.Pointer(lptstrFilename)), 0, uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// GetFileVersionInfoEx calls VERSION!GetFileVersionInfoExW.
+// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfoexw
+// Minimum OS: windows6.0.6000.
+func GetFileVersionInfoEx(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename string, dwLen uint32, lpData unsafe.Pointer) error {
+	_lpwstrFilename := win32.UTF16Ptr(lpwstrFilename)
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpwstrFilename)), 0, uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2128,23 +2257,24 @@ func GetFileVersionInfoA(lptstrFilename foundation.PSTR, dwHandle uint32, dwLen 
 // GetFileVersionInfoExA calls VERSION!GetFileVersionInfoExA.
 // https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfoexa
 // Minimum OS: windows6.0.6000.
-func GetFileVersionInfoExA(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename foundation.PSTR, dwHandle uint32, dwLen uint32, lpData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoExA.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpwstrFilename)), uintptr(dwHandle), uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
+func GetFileVersionInfoExA(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename foundation.PSTR, dwLen uint32, lpData unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoExA.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpwstrFilename)), 0, uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// GetFileVersionInfoExW calls VERSION!GetFileVersionInfoExW.
-// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfoexw
-// Minimum OS: windows6.0.6000.
-func GetFileVersionInfoExW(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename foundation.PWSTR, dwHandle uint32, dwLen uint32, lpData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoExW.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpwstrFilename)), uintptr(dwHandle), uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+// GetFileVersionInfoSize calls VERSION!GetFileVersionInfoSizeW.
+// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfosizew
+// Minimum OS: windows5.0.
+func GetFileVersionInfoSize(lptstrFilename string, lpdwHandle *uint32) (uint32, error) {
+	_lptstrFilename := win32.UTF16Ptr(lptstrFilename)
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoSize.Addr(), uintptr(unsafe.Pointer(_lptstrFilename)), uintptr(unsafe.Pointer(lpdwHandle)))
+	if e1 != 0 {
+		return uint32(r1), e1
 	}
-	return nil
+	return uint32(r1), nil
 }
 
 // GetFileVersionInfoSizeA calls VERSION!GetFileVersionInfoSizeA.
@@ -2152,6 +2282,18 @@ func GetFileVersionInfoExW(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename f
 // Minimum OS: windows5.0.
 func GetFileVersionInfoSizeA(lptstrFilename foundation.PSTR, lpdwHandle *uint32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoSizeA.Addr(), uintptr(unsafe.Pointer(lptstrFilename)), uintptr(unsafe.Pointer(lpdwHandle)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
+// GetFileVersionInfoSizeEx calls VERSION!GetFileVersionInfoSizeExW.
+// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfosizeexw
+// Minimum OS: windows6.0.6000.
+func GetFileVersionInfoSizeEx(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename string, lpdwHandle *uint32) (uint32, error) {
+	_lpwstrFilename := win32.UTF16Ptr(lpwstrFilename)
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoSizeEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpwstrFilename)), uintptr(unsafe.Pointer(lpdwHandle)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2169,37 +2311,15 @@ func GetFileVersionInfoSizeExA(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilena
 	return uint32(r1), nil
 }
 
-// GetFileVersionInfoSizeExW calls VERSION!GetFileVersionInfoSizeExW.
-// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfosizeexw
+// GetFinalPathNameByHandle calls KERNEL32!GetFinalPathNameByHandleW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfinalpathnamebyhandlew
 // Minimum OS: windows6.0.6000.
-func GetFileVersionInfoSizeExW(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename foundation.PWSTR, lpdwHandle *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoSizeExW.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpwstrFilename)), uintptr(unsafe.Pointer(lpdwHandle)))
+func GetFinalPathNameByHandle(hFile foundation.HANDLE, lpszFilePath foundation.PWSTR, cchFilePath uint32, dwFlags GETFINALPATHNAMEBYHANDLE_FLAGS) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetFinalPathNameByHandle.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpszFilePath)), uintptr(cchFilePath), uintptr(dwFlags))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
-}
-
-// GetFileVersionInfoSizeW calls VERSION!GetFileVersionInfoSizeW.
-// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfosizew
-// Minimum OS: windows5.0.
-func GetFileVersionInfoSizeW(lptstrFilename foundation.PWSTR, lpdwHandle *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoSizeW.Addr(), uintptr(unsafe.Pointer(lptstrFilename)), uintptr(unsafe.Pointer(lpdwHandle)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetFileVersionInfoW calls VERSION!GetFileVersionInfoW.
-// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfow
-// Minimum OS: windows5.0.
-func GetFileVersionInfoW(lptstrFilename foundation.PWSTR, dwHandle uint32, dwLen uint32, lpData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoW.Addr(), uintptr(unsafe.Pointer(lptstrFilename)), uintptr(dwHandle), uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
 }
 
 // GetFinalPathNameByHandleA calls KERNEL32!GetFinalPathNameByHandleA.
@@ -2213,11 +2333,12 @@ func GetFinalPathNameByHandleA(hFile foundation.HANDLE, lpszFilePath foundation.
 	return uint32(r1), nil
 }
 
-// GetFinalPathNameByHandleW calls KERNEL32!GetFinalPathNameByHandleW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfinalpathnamebyhandlew
-// Minimum OS: windows6.0.6000.
-func GetFinalPathNameByHandleW(hFile foundation.HANDLE, lpszFilePath foundation.PWSTR, cchFilePath uint32, dwFlags GETFINALPATHNAMEBYHANDLE_FLAGS) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFinalPathNameByHandleW.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpszFilePath)), uintptr(cchFilePath), uintptr(dwFlags))
+// GetFullPathName calls KERNEL32!GetFullPathNameW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfullpathnamew
+// Minimum OS: windows5.1.2600.
+func GetFullPathName(lpFileName string, nBufferLength uint32, lpBuffer foundation.PWSTR, lpFilePart *foundation.PWSTR) (uint32, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procGetFullPathName.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpFilePart)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2235,6 +2356,18 @@ func GetFullPathNameA(lpFileName foundation.PSTR, nBufferLength uint32, lpBuffer
 	return uint32(r1), nil
 }
 
+// GetFullPathNameTransacted calls KERNEL32!GetFullPathNameTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfullpathnametransactedw
+// Minimum OS: windows6.0.6000.
+func GetFullPathNameTransacted(lpFileName string, nBufferLength uint32, lpBuffer foundation.PWSTR, lpFilePart *foundation.PWSTR, hTransaction foundation.HANDLE) (uint32, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procGetFullPathNameTransacted.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpFilePart)), uintptr(hTransaction))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // GetFullPathNameTransactedA calls KERNEL32!GetFullPathNameTransactedA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfullpathnametransacteda
 // Minimum OS: windows6.0.6000.
@@ -2246,40 +2379,19 @@ func GetFullPathNameTransactedA(lpFileName foundation.PSTR, nBufferLength uint32
 	return uint32(r1), nil
 }
 
-// GetFullPathNameTransactedW calls KERNEL32!GetFullPathNameTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfullpathnametransactedw
-// Minimum OS: windows6.0.6000.
-func GetFullPathNameTransactedW(lpFileName foundation.PWSTR, nBufferLength uint32, lpBuffer foundation.PWSTR, lpFilePart *foundation.PWSTR, hTransaction foundation.HANDLE) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFullPathNameTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpFilePart)), uintptr(hTransaction))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetFullPathNameW calls KERNEL32!GetFullPathNameW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfullpathnamew
-// Minimum OS: windows5.1.2600.
-func GetFullPathNameW(lpFileName foundation.PWSTR, nBufferLength uint32, lpBuffer foundation.PWSTR, lpFilePart *foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFullPathNameW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpFilePart)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
 // GetIoRingInfo calls api-ms-win-core-ioring-l1-1-0!GetIoRingInfo.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-getioringinfo
-func GetIoRingInfo(ioRing HIORING, info *IORING_INFO) foundation.HRESULT {
+func GetIoRingInfo(ioRing HIORING, info *IORING_INFO) error {
 	r1, _, _ := syscall.SyscallN(procGetIoRingInfo.Addr(), uintptr(ioRing), uintptr(unsafe.Pointer(info)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLogContainerName calls clfsw32!GetLogContainerName.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-getlogcontainername
 // Minimum OS: windows6.0.6000.
-func GetLogContainerName(hLog foundation.HANDLE, cidLogicalContainer uint32, pwstrContainerName foundation.PWSTR, cLenContainerName uint32, pcActualLenContainerName *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetLogContainerName.Addr(), uintptr(hLog), uintptr(cidLogicalContainer), uintptr(unsafe.Pointer(pwstrContainerName)), uintptr(cLenContainerName), uintptr(unsafe.Pointer(pcActualLenContainerName)))
+func GetLogContainerName(hLog foundation.HANDLE, cidLogicalContainer uint32, pwstrContainerName string, cLenContainerName uint32, pcActualLenContainerName *uint32) error {
+	_pwstrContainerName := win32.UTF16Ptr(pwstrContainerName)
+	r1, _, e1 := syscall.SyscallN(procGetLogContainerName.Addr(), uintptr(hLog), uintptr(cidLogicalContainer), uintptr(unsafe.Pointer(_pwstrContainerName)), uintptr(cLenContainerName), uintptr(unsafe.Pointer(pcActualLenContainerName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2309,9 +2421,20 @@ func GetLogIoStatistics(hLog foundation.HANDLE, pvStatsBuffer unsafe.Pointer, cb
 }
 
 // GetLogReservationInfo calls clfsw32!GetLogReservationInfo.
-func GetLogReservationInfo(pvMarshal unsafe.Pointer, pcbRecordNumber *uint32, pcbUserReservation *int64, pcbCommitReservation *int64) foundation.BOOL {
+func GetLogReservationInfo(pvMarshal unsafe.Pointer, pcbRecordNumber *uint32, pcbUserReservation *int64, pcbCommitReservation *int64) bool {
 	r1, _, _ := syscall.SyscallN(procGetLogReservationInfo.Addr(), uintptr(unsafe.Pointer(pvMarshal)), uintptr(unsafe.Pointer(pcbRecordNumber)), uintptr(unsafe.Pointer(pcbUserReservation)), uintptr(unsafe.Pointer(pcbCommitReservation)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetLogicalDriveStrings calls KERNEL32!GetLogicalDriveStringsW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getlogicaldrivestringsw
+// Minimum OS: windows5.1.2600.
+func GetLogicalDriveStrings(nBufferLength uint32, lpBuffer foundation.PWSTR) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetLogicalDriveStrings.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // GetLogicalDriveStringsA calls KERNEL32!GetLogicalDriveStringsA.
@@ -2319,17 +2442,6 @@ func GetLogReservationInfo(pvMarshal unsafe.Pointer, pcbRecordNumber *uint32, pc
 // Minimum OS: windows5.1.2600.
 func GetLogicalDriveStringsA(nBufferLength uint32, lpBuffer foundation.PSTR) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetLogicalDriveStringsA.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetLogicalDriveStringsW calls KERNEL32!GetLogicalDriveStringsW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getlogicaldrivestringsw
-// Minimum OS: windows5.1.2600.
-func GetLogicalDriveStringsW(nBufferLength uint32, lpBuffer foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetLogicalDriveStringsW.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2347,6 +2459,18 @@ func GetLogicalDrives() (uint32, error) {
 	return uint32(r1), nil
 }
 
+// GetLongPathName calls KERNEL32!GetLongPathNameW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getlongpathnamew
+// Minimum OS: windows5.1.2600.
+func GetLongPathName(lpszShortPath string, lpszLongPath foundation.PWSTR, cchBuffer uint32) (uint32, error) {
+	_lpszShortPath := win32.UTF16Ptr(lpszShortPath)
+	r1, _, e1 := syscall.SyscallN(procGetLongPathName.Addr(), uintptr(unsafe.Pointer(_lpszShortPath)), uintptr(unsafe.Pointer(lpszLongPath)), uintptr(cchBuffer))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // GetLongPathNameA calls KERNEL32!GetLongPathNameA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getlongpathnamea
 // Minimum OS: windows5.1.2600.
@@ -2358,33 +2482,23 @@ func GetLongPathNameA(lpszShortPath foundation.PSTR, lpszLongPath foundation.PST
 	return uint32(r1), nil
 }
 
+// GetLongPathNameTransacted calls KERNEL32!GetLongPathNameTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getlongpathnametransactedw
+// Minimum OS: windows6.0.6000.
+func GetLongPathNameTransacted(lpszShortPath string, lpszLongPath foundation.PWSTR, cchBuffer uint32, hTransaction foundation.HANDLE) (uint32, error) {
+	_lpszShortPath := win32.UTF16Ptr(lpszShortPath)
+	r1, _, e1 := syscall.SyscallN(procGetLongPathNameTransacted.Addr(), uintptr(unsafe.Pointer(_lpszShortPath)), uintptr(unsafe.Pointer(lpszLongPath)), uintptr(cchBuffer), uintptr(hTransaction))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // GetLongPathNameTransactedA calls KERNEL32!GetLongPathNameTransactedA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getlongpathnametransacteda
 // Minimum OS: windows6.0.6000.
 func GetLongPathNameTransactedA(lpszShortPath foundation.PSTR, lpszLongPath foundation.PSTR, cchBuffer uint32, hTransaction foundation.HANDLE) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetLongPathNameTransactedA.Addr(), uintptr(unsafe.Pointer(lpszShortPath)), uintptr(unsafe.Pointer(lpszLongPath)), uintptr(cchBuffer), uintptr(hTransaction))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetLongPathNameTransactedW calls KERNEL32!GetLongPathNameTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getlongpathnametransactedw
-// Minimum OS: windows6.0.6000.
-func GetLongPathNameTransactedW(lpszShortPath foundation.PWSTR, lpszLongPath foundation.PWSTR, cchBuffer uint32, hTransaction foundation.HANDLE) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetLongPathNameTransactedW.Addr(), uintptr(unsafe.Pointer(lpszShortPath)), uintptr(unsafe.Pointer(lpszLongPath)), uintptr(cchBuffer), uintptr(hTransaction))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetLongPathNameW calls KERNEL32!GetLongPathNameW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getlongpathnamew
-// Minimum OS: windows5.1.2600.
-func GetLongPathNameW(lpszShortPath foundation.PWSTR, lpszLongPath foundation.PWSTR, cchBuffer uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetLongPathNameW.Addr(), uintptr(unsafe.Pointer(lpszShortPath)), uintptr(unsafe.Pointer(lpszLongPath)), uintptr(cchBuffer))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2424,22 +2538,23 @@ func GetNotificationResourceManagerAsync(ResourceManagerHandle foundation.HANDLE
 	return nil
 }
 
-// GetShortPathNameA calls KERNEL32!GetShortPathNameA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getshortpathnamea
+// GetShortPathName calls KERNEL32!GetShortPathNameW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getshortpathnamew
 // Minimum OS: windows5.1.2600.
-func GetShortPathNameA(lpszLongPath foundation.PSTR, lpszShortPath foundation.PSTR, cchBuffer uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetShortPathNameA.Addr(), uintptr(unsafe.Pointer(lpszLongPath)), uintptr(unsafe.Pointer(lpszShortPath)), uintptr(cchBuffer))
+func GetShortPathName(lpszLongPath string, lpszShortPath foundation.PWSTR, cchBuffer uint32) (uint32, error) {
+	_lpszLongPath := win32.UTF16Ptr(lpszLongPath)
+	r1, _, e1 := syscall.SyscallN(procGetShortPathName.Addr(), uintptr(unsafe.Pointer(_lpszLongPath)), uintptr(unsafe.Pointer(lpszShortPath)), uintptr(cchBuffer))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
-// GetShortPathNameW calls KERNEL32!GetShortPathNameW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getshortpathnamew
+// GetShortPathNameA calls KERNEL32!GetShortPathNameA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getshortpathnamea
 // Minimum OS: windows5.1.2600.
-func GetShortPathNameW(lpszLongPath foundation.PWSTR, lpszShortPath foundation.PWSTR, cchBuffer uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetShortPathNameW.Addr(), uintptr(unsafe.Pointer(lpszLongPath)), uintptr(unsafe.Pointer(lpszShortPath)), uintptr(cchBuffer))
+func GetShortPathNameA(lpszLongPath foundation.PSTR, lpszShortPath foundation.PSTR, cchBuffer uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetShortPathNameA.Addr(), uintptr(unsafe.Pointer(lpszLongPath)), uintptr(unsafe.Pointer(lpszShortPath)), uintptr(cchBuffer))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2470,6 +2585,19 @@ func GetTapeStatus(hDevice foundation.HANDLE) uint32 {
 	return uint32(r1)
 }
 
+// GetTempFileName calls KERNEL32!GetTempFileNameW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettempfilenamew
+// Minimum OS: windows5.1.2600.
+func GetTempFileName(lpPathName string, lpPrefixString string, uUnique uint32, lpTempFileName foundation.PWSTR) (uint32, error) {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	_lpPrefixString := win32.UTF16Ptr(lpPrefixString)
+	r1, _, e1 := syscall.SyscallN(procGetTempFileName.Addr(), uintptr(unsafe.Pointer(_lpPathName)), uintptr(unsafe.Pointer(_lpPrefixString)), uintptr(uUnique), uintptr(unsafe.Pointer(lpTempFileName)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // GetTempFileNameA calls KERNEL32!GetTempFileNameA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettempfilenamea
 // Minimum OS: windows5.1.2600.
@@ -2481,15 +2609,22 @@ func GetTempFileNameA(lpPathName foundation.PSTR, lpPrefixString foundation.PSTR
 	return uint32(r1), nil
 }
 
-// GetTempFileNameW calls KERNEL32!GetTempFileNameW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettempfilenamew
+// GetTempPath calls KERNEL32!GetTempPathW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettemppathw
 // Minimum OS: windows5.1.2600.
-func GetTempFileNameW(lpPathName foundation.PWSTR, lpPrefixString foundation.PWSTR, uUnique uint32, lpTempFileName foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetTempFileNameW.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(unsafe.Pointer(lpPrefixString)), uintptr(uUnique), uintptr(unsafe.Pointer(lpTempFileName)))
+func GetTempPath(nBufferLength uint32, lpBuffer foundation.PWSTR) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetTempPath.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
+}
+
+// GetTempPath2 calls KERNEL32!GetTempPath2W.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettemppath2w
+func GetTempPath2(BufferLength uint32, Buffer foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetTempPath2.Addr(), uintptr(BufferLength), uintptr(unsafe.Pointer(Buffer)))
+	return uint32(r1)
 }
 
 // GetTempPath2A calls KERNEL32!GetTempPath2A.
@@ -2499,29 +2634,11 @@ func GetTempPath2A(BufferLength uint32, Buffer foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// GetTempPath2W calls KERNEL32!GetTempPath2W.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettemppath2w
-func GetTempPath2W(BufferLength uint32, Buffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetTempPath2W.Addr(), uintptr(BufferLength), uintptr(unsafe.Pointer(Buffer)))
-	return uint32(r1)
-}
-
 // GetTempPathA calls KERNEL32!GetTempPathA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettemppatha
 // Minimum OS: windows5.1.2600.
 func GetTempPathA(nBufferLength uint32, lpBuffer foundation.PSTR) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetTempPathA.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetTempPathW calls KERNEL32!GetTempPathW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettemppathw
-// Minimum OS: windows5.1.2600.
-func GetTempPathW(nBufferLength uint32, lpBuffer foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetTempPathW.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2561,6 +2678,18 @@ func GetTransactionManagerId(TransactionManagerHandle foundation.HANDLE, Transac
 	return nil
 }
 
+// GetVolumeInformation calls KERNEL32!GetVolumeInformationW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumeinformationw
+// Minimum OS: windows5.1.2600.
+func GetVolumeInformation(lpRootPathName string, lpVolumeNameBuffer foundation.PWSTR, nVolumeNameSize uint32, lpVolumeSerialNumber *uint32, lpMaximumComponentLength *uint32, lpFileSystemFlags *uint32, lpFileSystemNameBuffer foundation.PWSTR, nFileSystemNameSize uint32) error {
+	_lpRootPathName := win32.UTF16Ptr(lpRootPathName)
+	r1, _, e1 := syscall.SyscallN(procGetVolumeInformation.Addr(), uintptr(unsafe.Pointer(_lpRootPathName)), uintptr(unsafe.Pointer(lpVolumeNameBuffer)), uintptr(nVolumeNameSize), uintptr(unsafe.Pointer(lpVolumeSerialNumber)), uintptr(unsafe.Pointer(lpMaximumComponentLength)), uintptr(unsafe.Pointer(lpFileSystemFlags)), uintptr(unsafe.Pointer(lpFileSystemNameBuffer)), uintptr(nFileSystemNameSize))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetVolumeInformationA calls KERNEL32!GetVolumeInformationA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumeinformationa
 // Minimum OS: windows5.1.2600.
@@ -2583,11 +2712,12 @@ func GetVolumeInformationByHandleW(hFile foundation.HANDLE, lpVolumeNameBuffer f
 	return nil
 }
 
-// GetVolumeInformationW calls KERNEL32!GetVolumeInformationW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumeinformationw
+// GetVolumeNameForVolumeMountPoint calls KERNEL32!GetVolumeNameForVolumeMountPointW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumenameforvolumemountpointw
 // Minimum OS: windows5.1.2600.
-func GetVolumeInformationW(lpRootPathName foundation.PWSTR, lpVolumeNameBuffer foundation.PWSTR, nVolumeNameSize uint32, lpVolumeSerialNumber *uint32, lpMaximumComponentLength *uint32, lpFileSystemFlags *uint32, lpFileSystemNameBuffer foundation.PWSTR, nFileSystemNameSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetVolumeInformationW.Addr(), uintptr(unsafe.Pointer(lpRootPathName)), uintptr(unsafe.Pointer(lpVolumeNameBuffer)), uintptr(nVolumeNameSize), uintptr(unsafe.Pointer(lpVolumeSerialNumber)), uintptr(unsafe.Pointer(lpMaximumComponentLength)), uintptr(unsafe.Pointer(lpFileSystemFlags)), uintptr(unsafe.Pointer(lpFileSystemNameBuffer)), uintptr(nFileSystemNameSize))
+func GetVolumeNameForVolumeMountPoint(lpszVolumeMountPoint string, lpszVolumeName foundation.PWSTR, cchBufferLength uint32) error {
+	_lpszVolumeMountPoint := win32.UTF16Ptr(lpszVolumeMountPoint)
+	r1, _, e1 := syscall.SyscallN(procGetVolumeNameForVolumeMountPoint.Addr(), uintptr(unsafe.Pointer(_lpszVolumeMountPoint)), uintptr(unsafe.Pointer(lpszVolumeName)), uintptr(cchBufferLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2605,11 +2735,12 @@ func GetVolumeNameForVolumeMountPointA(lpszVolumeMountPoint foundation.PSTR, lps
 	return nil
 }
 
-// GetVolumeNameForVolumeMountPointW calls KERNEL32!GetVolumeNameForVolumeMountPointW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumenameforvolumemountpointw
+// GetVolumePathName calls KERNEL32!GetVolumePathNameW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumepathnamew
 // Minimum OS: windows5.1.2600.
-func GetVolumeNameForVolumeMountPointW(lpszVolumeMountPoint foundation.PWSTR, lpszVolumeName foundation.PWSTR, cchBufferLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetVolumeNameForVolumeMountPointW.Addr(), uintptr(unsafe.Pointer(lpszVolumeMountPoint)), uintptr(unsafe.Pointer(lpszVolumeName)), uintptr(cchBufferLength))
+func GetVolumePathName(lpszFileName string, lpszVolumePathName foundation.PWSTR, cchBufferLength uint32) error {
+	_lpszFileName := win32.UTF16Ptr(lpszFileName)
+	r1, _, e1 := syscall.SyscallN(procGetVolumePathName.Addr(), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(unsafe.Pointer(lpszVolumePathName)), uintptr(cchBufferLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2627,11 +2758,12 @@ func GetVolumePathNameA(lpszFileName foundation.PSTR, lpszVolumePathName foundat
 	return nil
 }
 
-// GetVolumePathNameW calls KERNEL32!GetVolumePathNameW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumepathnamew
+// GetVolumePathNamesForVolumeName calls KERNEL32!GetVolumePathNamesForVolumeNameW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumepathnamesforvolumenamew
 // Minimum OS: windows5.1.2600.
-func GetVolumePathNameW(lpszFileName foundation.PWSTR, lpszVolumePathName foundation.PWSTR, cchBufferLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetVolumePathNameW.Addr(), uintptr(unsafe.Pointer(lpszFileName)), uintptr(unsafe.Pointer(lpszVolumePathName)), uintptr(cchBufferLength))
+func GetVolumePathNamesForVolumeName(lpszVolumeName string, lpszVolumePathNames foundation.PWSTR, cchBufferLength uint32, lpcchReturnLength *uint32) error {
+	_lpszVolumeName := win32.UTF16Ptr(lpszVolumeName)
+	r1, _, e1 := syscall.SyscallN(procGetVolumePathNamesForVolumeName.Addr(), uintptr(unsafe.Pointer(_lpszVolumeName)), uintptr(unsafe.Pointer(lpszVolumePathNames)), uintptr(cchBufferLength), uintptr(unsafe.Pointer(lpcchReturnLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2643,17 +2775,6 @@ func GetVolumePathNameW(lpszFileName foundation.PWSTR, lpszVolumePathName founda
 // Minimum OS: windows5.1.2600.
 func GetVolumePathNamesForVolumeNameA(lpszVolumeName foundation.PSTR, lpszVolumePathNames foundation.PSTR, cchBufferLength uint32, lpcchReturnLength *uint32) error {
 	r1, _, e1 := syscall.SyscallN(procGetVolumePathNamesForVolumeNameA.Addr(), uintptr(unsafe.Pointer(lpszVolumeName)), uintptr(unsafe.Pointer(lpszVolumePathNames)), uintptr(cchBufferLength), uintptr(unsafe.Pointer(lpcchReturnLength)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetVolumePathNamesForVolumeNameW calls KERNEL32!GetVolumePathNamesForVolumeNameW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumepathnamesforvolumenamew
-// Minimum OS: windows5.1.2600.
-func GetVolumePathNamesForVolumeNameW(lpszVolumeName foundation.PWSTR, lpszVolumePathNames foundation.PWSTR, cchBufferLength uint32, lpcchReturnLength *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetVolumePathNamesForVolumeNameW.Addr(), uintptr(unsafe.Pointer(lpszVolumeName)), uintptr(unsafe.Pointer(lpszVolumePathNames)), uintptr(cchBufferLength), uintptr(unsafe.Pointer(lpcchReturnLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2684,9 +2805,9 @@ func InstallLogPolicy(hLog foundation.HANDLE, pPolicy *CLFS_MGMT_POLICY) error {
 
 // IsIoRingOpSupported calls api-ms-win-core-ioring-l1-1-0!IsIoRingOpSupported.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-isioringopsupported
-func IsIoRingOpSupported(ioRing HIORING, op IORING_OP_CODE) foundation.BOOL {
+func IsIoRingOpSupported(ioRing HIORING, op IORING_OP_CODE) bool {
 	r1, _, _ := syscall.SyscallN(procIsIoRingOpSupported.Addr(), uintptr(ioRing), uintptr(op))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LZClose calls KERNEL32!LZClose.
@@ -2717,19 +2838,20 @@ func LZInit(hfSource int32) int32 {
 	return int32(r1)
 }
 
+// LZOpenFile calls KERNEL32!LZOpenFileW.
+// https://learn.microsoft.com/windows/win32/api/lzexpand/nf-lzexpand-lzopenfilew
+// Minimum OS: windows5.1.2600.
+func LZOpenFile(lpFileName string, lpReOpenBuf *OFSTRUCT, wStyle LZOPENFILE_STYLE) int32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procLZOpenFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(lpReOpenBuf)), uintptr(wStyle))
+	return int32(r1)
+}
+
 // LZOpenFileA calls KERNEL32!LZOpenFileA.
 // https://learn.microsoft.com/windows/win32/api/lzexpand/nf-lzexpand-lzopenfilea
 // Minimum OS: windows5.1.2600.
 func LZOpenFileA(lpFileName foundation.PSTR, lpReOpenBuf *OFSTRUCT, wStyle LZOPENFILE_STYLE) int32 {
 	r1, _, _ := syscall.SyscallN(procLZOpenFileA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpReOpenBuf)), uintptr(wStyle))
-	return int32(r1)
-}
-
-// LZOpenFileW calls KERNEL32!LZOpenFileW.
-// https://learn.microsoft.com/windows/win32/api/lzexpand/nf-lzexpand-lzopenfilew
-// Minimum OS: windows5.1.2600.
-func LZOpenFileW(lpFileName foundation.PWSTR, lpReOpenBuf *OFSTRUCT, wStyle LZOPENFILE_STYLE) int32 {
-	r1, _, _ := syscall.SyscallN(procLZOpenFileW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpReOpenBuf)), uintptr(wStyle))
 	return int32(r1)
 }
 
@@ -2780,8 +2902,8 @@ func LockFile(hFile foundation.HANDLE, dwFileOffsetLow uint32, dwFileOffsetHigh 
 // LockFileEx calls KERNEL32!LockFileEx.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-lockfileex
 // Minimum OS: windows5.1.2600.
-func LockFileEx(hFile foundation.HANDLE, dwFlags LOCK_FILE_FLAGS, dwReserved uint32, nNumberOfBytesToLockLow uint32, nNumberOfBytesToLockHigh uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procLockFileEx.Addr(), uintptr(hFile), uintptr(dwFlags), uintptr(dwReserved), uintptr(nNumberOfBytesToLockLow), uintptr(nNumberOfBytesToLockHigh), uintptr(unsafe.Pointer(lpOverlapped)))
+func LockFileEx(hFile foundation.HANDLE, dwFlags LOCK_FILE_FLAGS, nNumberOfBytesToLockLow uint32, nNumberOfBytesToLockHigh uint32, lpOverlapped *systemio.OVERLAPPED) error {
+	r1, _, e1 := syscall.SyscallN(procLockFileEx.Addr(), uintptr(hFile), uintptr(dwFlags), 0, uintptr(nNumberOfBytesToLockLow), uintptr(nNumberOfBytesToLockHigh), uintptr(unsafe.Pointer(lpOverlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2853,11 +2975,37 @@ func LsnRecordSequence(plsn *CLS_LSN) uint32 {
 	return uint32(r1)
 }
 
+// MoveFile calls KERNEL32!MoveFileW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefilew
+// Minimum OS: windows5.1.2600.
+func MoveFile(lpExistingFileName string, lpNewFileName string) error {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	r1, _, e1 := syscall.SyscallN(procMoveFile.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // MoveFileA calls KERNEL32!MoveFileA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefilea
 // Minimum OS: windows5.1.2600.
 func MoveFileA(lpExistingFileName foundation.PSTR, lpNewFileName foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procMoveFileA.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// MoveFileEx calls KERNEL32!MoveFileExW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefileexw
+// Minimum OS: windows5.1.2600.
+func MoveFileEx(lpExistingFileName string, lpNewFileName string, dwFlags MOVE_FILE_FLAGS) error {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	r1, _, e1 := syscall.SyscallN(procMoveFileEx.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2875,22 +3023,26 @@ func MoveFileExA(lpExistingFileName foundation.PSTR, lpNewFileName foundation.PS
 	return nil
 }
 
-// MoveFileExW calls KERNEL32!MoveFileExW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefileexw
-// Minimum OS: windows5.1.2600.
-func MoveFileExW(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR, dwFlags MOVE_FILE_FLAGS) error {
-	r1, _, e1 := syscall.SyscallN(procMoveFileExW.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(dwFlags))
+// MoveFileFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!MoveFileFromAppW.
+// https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-movefilefromappw
+func MoveFileFromAppW(lpExistingFileName string, lpNewFileName string) bool {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	r1, _, _ := syscall.SyscallN(procMoveFileFromAppW.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)))
+	return r1 != 0
+}
+
+// MoveFileTransacted calls KERNEL32!MoveFileTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefiletransactedw
+// Minimum OS: windows6.0.6000.
+func MoveFileTransacted(lpExistingFileName string, lpNewFileName string, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, dwFlags MOVE_FILE_FLAGS, hTransaction foundation.HANDLE) error {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	r1, _, e1 := syscall.SyscallN(procMoveFileTransacted.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(dwFlags), uintptr(hTransaction))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// MoveFileFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!MoveFileFromAppW.
-// https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-movefilefromappw
-func MoveFileFromAppW(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMoveFileFromAppW.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)))
-	return foundation.BOOL(r1)
 }
 
 // MoveFileTransactedA calls KERNEL32!MoveFileTransactedA.
@@ -2904,22 +3056,13 @@ func MoveFileTransactedA(lpExistingFileName foundation.PSTR, lpNewFileName found
 	return nil
 }
 
-// MoveFileTransactedW calls KERNEL32!MoveFileTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefiletransactedw
-// Minimum OS: windows6.0.6000.
-func MoveFileTransactedW(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, dwFlags MOVE_FILE_FLAGS, hTransaction foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procMoveFileTransactedW.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(dwFlags), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// MoveFileW calls KERNEL32!MoveFileW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefilew
+// MoveFileWithProgress calls KERNEL32!MoveFileWithProgressW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefilewithprogressw
 // Minimum OS: windows5.1.2600.
-func MoveFileW(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procMoveFileW.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)))
+func MoveFileWithProgress(lpExistingFileName string, lpNewFileName string, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, dwFlags MOVE_FILE_FLAGS) error {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	r1, _, e1 := syscall.SyscallN(procMoveFileWithProgress.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2937,156 +3080,178 @@ func MoveFileWithProgressA(lpExistingFileName foundation.PSTR, lpNewFileName fou
 	return nil
 }
 
-// MoveFileWithProgressW calls KERNEL32!MoveFileWithProgressW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefilewithprogressw
-// Minimum OS: windows5.1.2600.
-func MoveFileWithProgressW(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, dwFlags MOVE_FILE_FLAGS) error {
-	r1, _, e1 := syscall.SyscallN(procMoveFileWithProgressW.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(dwFlags))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // NetConnectionEnum calls NETAPI32!NetConnectionEnum.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netconnectionenum
 // Minimum OS: windows5.1.2600.
-func NetConnectionEnum(servername foundation.PWSTR, qualifier foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetConnectionEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(qualifier)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetConnectionEnum(servername string, qualifier string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_qualifier := win32.UTF16Ptr(qualifier)
+	r1, _, _ := syscall.SyscallN(procNetConnectionEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_qualifier)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetFileClose calls NETAPI32!NetFileClose.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netfileclose
 // Minimum OS: windows5.1.2600.
-func NetFileClose(servername foundation.PWSTR, fileid uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetFileClose.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(fileid))
+func NetFileClose(servername string, fileid uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetFileClose.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(fileid))
 	return uint32(r1)
 }
 
 // NetFileEnum calls NETAPI32!NetFileEnum.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netfileenum
 // Minimum OS: windows5.1.2600.
-func NetFileEnum(servername foundation.PWSTR, basepath foundation.PWSTR, username foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetFileEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(basepath)), uintptr(unsafe.Pointer(username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetFileEnum(servername string, basepath string, username string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uintptr) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_basepath := win32.UTF16Ptr(basepath)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetFileEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_basepath)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetFileGetInfo calls NETAPI32!NetFileGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netfilegetinfo
 // Minimum OS: windows5.1.2600.
-func NetFileGetInfo(servername foundation.PWSTR, fileid uint32, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetFileGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(fileid), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetFileGetInfo(servername string, fileid uint32, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetFileGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(fileid), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetServerAliasAdd calls NETAPI32!NetServerAliasAdd.
-func NetServerAliasAdd(servername foundation.PWSTR, level uint32, buf *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerAliasAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)))
+func NetServerAliasAdd(servername string, level uint32, buf *byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerAliasAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)))
 	return uint32(r1)
 }
 
 // NetServerAliasDel calls NETAPI32!NetServerAliasDel.
-func NetServerAliasDel(servername foundation.PWSTR, level uint32, buf *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerAliasDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)))
+func NetServerAliasDel(servername string, level uint32, buf *byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerAliasDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)))
 	return uint32(r1)
 }
 
 // NetServerAliasEnum calls NETAPI32!NetServerAliasEnum.
-func NetServerAliasEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetServerAliasEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
+func NetServerAliasEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetServerAliasEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
 }
 
 // NetSessionDel calls NETAPI32!NetSessionDel.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsessiondel
 // Minimum OS: windows5.1.2600.
-func NetSessionDel(servername foundation.PWSTR, UncClientName foundation.PWSTR, username foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetSessionDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(UncClientName)), uintptr(unsafe.Pointer(username)))
+func NetSessionDel(servername string, UncClientName string, username string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_UncClientName := win32.UTF16Ptr(UncClientName)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetSessionDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_UncClientName)), uintptr(unsafe.Pointer(_username)))
 	return uint32(r1)
 }
 
 // NetSessionEnum calls NETAPI32!NetSessionEnum.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsessionenum
 // Minimum OS: windows5.1.2600.
-func NetSessionEnum(servername foundation.PWSTR, UncClientName foundation.PWSTR, username foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetSessionEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(UncClientName)), uintptr(unsafe.Pointer(username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetSessionEnum(servername string, UncClientName string, username string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_UncClientName := win32.UTF16Ptr(UncClientName)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetSessionEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_UncClientName)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetSessionGetInfo calls NETAPI32!NetSessionGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsessiongetinfo
 // Minimum OS: windows5.1.2600.
-func NetSessionGetInfo(servername foundation.PWSTR, UncClientName foundation.PWSTR, username foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetSessionGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(UncClientName)), uintptr(unsafe.Pointer(username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetSessionGetInfo(servername string, UncClientName string, username string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_UncClientName := win32.UTF16Ptr(UncClientName)
+	_username := win32.UTF16Ptr(username)
+	r1, _, _ := syscall.SyscallN(procNetSessionGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_UncClientName)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetShareAdd calls NETAPI32!NetShareAdd.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netshareadd
 // Minimum OS: windows5.1.2600.
-func NetShareAdd(servername foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetShareAdd.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetShareAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetShareAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetShareCheck calls NETAPI32!NetShareCheck.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharecheck
 // Minimum OS: windows5.1.2600.
-func NetShareCheck(servername foundation.PWSTR, device foundation.PWSTR, type_ *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetShareCheck.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(type_)))
+func NetShareCheck(servername string, device string, type_ *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_device := win32.UTF16Ptr(device)
+	r1, _, _ := syscall.SyscallN(procNetShareCheck.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_device)), uintptr(unsafe.Pointer(type_)))
 	return uint32(r1)
 }
 
 // NetShareDel calls NETAPI32!NetShareDel.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharedel
 // Minimum OS: windows5.1.2600.
-func NetShareDel(servername foundation.PWSTR, netname foundation.PWSTR, reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetShareDel.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(netname)), uintptr(reserved))
+func NetShareDel(servername string, netname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_netname := win32.UTF16Ptr(netname)
+	r1, _, _ := syscall.SyscallN(procNetShareDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_netname)), 0)
 	return uint32(r1)
 }
 
 // NetShareDelEx calls NETAPI32!NetShareDelEx.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharedelex
 // Minimum OS: windows5.1.2600.
-func NetShareDelEx(servername foundation.PWSTR, level uint32, buf *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetShareDelEx.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(buf)))
+func NetShareDelEx(servername string, level uint32, buf *byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetShareDelEx.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)))
 	return uint32(r1)
 }
 
 // NetShareDelSticky calls NETAPI32!NetShareDelSticky.
-func NetShareDelSticky(servername foundation.PWSTR, netname foundation.PWSTR, reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetShareDelSticky.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(netname)), uintptr(reserved))
+func NetShareDelSticky(servername string, netname string) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_netname := win32.UTF16Ptr(netname)
+	r1, _, _ := syscall.SyscallN(procNetShareDelSticky.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_netname)), 0)
 	return uint32(r1)
 }
 
 // NetShareEnum calls NETAPI32!NetShareEnum.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netshareenum
 // Minimum OS: windows5.1.2600.
-func NetShareEnum(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetShareEnum.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetShareEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetShareEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetShareEnumSticky calls NETAPI32!NetShareEnumSticky.
-func NetShareEnumSticky(servername foundation.PWSTR, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetShareEnumSticky.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
+func NetShareEnumSticky(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	r1, _, _ := syscall.SyscallN(procNetShareEnumSticky.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetShareGetInfo calls NETAPI32!NetShareGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharegetinfo
 // Minimum OS: windows5.1.2600.
-func NetShareGetInfo(servername foundation.PWSTR, netname foundation.PWSTR, level uint32, bufptr **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetShareGetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(netname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
+func NetShareGetInfo(servername string, netname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_netname := win32.UTF16Ptr(netname)
+	r1, _, _ := syscall.SyscallN(procNetShareGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_netname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetShareSetInfo calls NETAPI32!NetShareSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharesetinfo
 // Minimum OS: windows5.1.2600.
-func NetShareSetInfo(servername foundation.PWSTR, netname foundation.PWSTR, level uint32, buf *byte, parm_err *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetShareSetInfo.Addr(), uintptr(unsafe.Pointer(servername)), uintptr(unsafe.Pointer(netname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
+func NetShareSetInfo(servername string, netname string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16Ptr(servername)
+	_netname := win32.UTF16Ptr(netname)
+	r1, _, _ := syscall.SyscallN(procNetShareSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_netname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
@@ -3098,19 +3263,20 @@ func NetStatisticsGet(ServerName *int8, Service *int8, Level uint32, Options uin
 	return uint32(r1)
 }
 
+// OpenEncryptedFileRaw calls ADVAPI32!OpenEncryptedFileRawW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openencryptedfileraww
+// Minimum OS: windows5.1.2600.
+func OpenEncryptedFileRaw(lpFileName string, ulFlags uint32, pvContext *unsafe.Pointer) uint32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procOpenEncryptedFileRaw.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(ulFlags), uintptr(unsafe.Pointer(pvContext)))
+	return uint32(r1)
+}
+
 // OpenEncryptedFileRawA calls ADVAPI32!OpenEncryptedFileRawA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openencryptedfilerawa
 // Minimum OS: windows5.1.2600.
 func OpenEncryptedFileRawA(lpFileName foundation.PSTR, ulFlags uint32, pvContext *unsafe.Pointer) uint32 {
 	r1, _, _ := syscall.SyscallN(procOpenEncryptedFileRawA.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(ulFlags), uintptr(unsafe.Pointer(pvContext)))
-	return uint32(r1)
-}
-
-// OpenEncryptedFileRawW calls ADVAPI32!OpenEncryptedFileRawW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openencryptedfileraww
-// Minimum OS: windows5.1.2600.
-func OpenEncryptedFileRawW(lpFileName foundation.PWSTR, ulFlags uint32, pvContext *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procOpenEncryptedFileRawW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(ulFlags), uintptr(unsafe.Pointer(pvContext)))
 	return uint32(r1)
 }
 
@@ -3176,8 +3342,9 @@ func OpenTransaction(dwDesiredAccess uint32, TransactionId *win32.GUID) (foundat
 // OpenTransactionManager calls ktmw32!OpenTransactionManager.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-opentransactionmanager
 // Minimum OS: windows6.0.6000.
-func OpenTransactionManager(LogFileName foundation.PWSTR, DesiredAccess uint32, OpenOptions uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenTransactionManager.Addr(), uintptr(unsafe.Pointer(LogFileName)), uintptr(DesiredAccess), uintptr(OpenOptions))
+func OpenTransactionManager(LogFileName string, DesiredAccess uint32, OpenOptions uint32) (foundation.HANDLE, error) {
+	_LogFileName := win32.UTF16Ptr(LogFileName)
+	r1, _, e1 := syscall.SyscallN(procOpenTransactionManager.Addr(), uintptr(unsafe.Pointer(_LogFileName)), uintptr(DesiredAccess), uintptr(OpenOptions))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -3199,9 +3366,9 @@ func OpenTransactionManagerById(TransactionManagerId *win32.GUID, DesiredAccess 
 
 // PopIoRingCompletion calls api-ms-win-core-ioring-l1-1-0!PopIoRingCompletion.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-popioringcompletion
-func PopIoRingCompletion(ioRing HIORING, cqe *IORING_CQE) foundation.HRESULT {
+func PopIoRingCompletion(ioRing HIORING, cqe *IORING_CQE) error {
 	r1, _, _ := syscall.SyscallN(procPopIoRingCompletion.Addr(), uintptr(ioRing), uintptr(unsafe.Pointer(cqe)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrePrepareComplete calls ktmw32!PrePrepareComplete.
@@ -3262,9 +3429,22 @@ func PrepareLogArchive(hLog foundation.HANDLE, pszBaseLogFileName foundation.PWS
 // PrepareTape calls KERNEL32!PrepareTape.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-preparetape
 // Minimum OS: windows5.1.2600.
-func PrepareTape(hDevice foundation.HANDLE, dwOperation PREPARE_TAPE_OPERATION, bImmediate foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPrepareTape.Addr(), uintptr(hDevice), uintptr(dwOperation), uintptr(bImmediate))
+func PrepareTape(hDevice foundation.HANDLE, dwOperation PREPARE_TAPE_OPERATION, bImmediate bool) uint32 {
+	_bImmediate := win32.Bool32(bImmediate)
+	r1, _, _ := syscall.SyscallN(procPrepareTape.Addr(), uintptr(hDevice), uintptr(dwOperation), uintptr(_bImmediate))
 	return uint32(r1)
+}
+
+// QueryDosDevice calls KERNEL32!QueryDosDeviceW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-querydosdevicew
+// Minimum OS: windows5.1.2600.
+func QueryDosDevice(lpDeviceName string, lpTargetPath foundation.PWSTR, ucchMax uint32) (uint32, error) {
+	_lpDeviceName := win32.UTF16Ptr(lpDeviceName)
+	r1, _, e1 := syscall.SyscallN(procQueryDosDevice.Addr(), uintptr(unsafe.Pointer(_lpDeviceName)), uintptr(unsafe.Pointer(lpTargetPath)), uintptr(ucchMax))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // QueryDosDeviceA calls KERNEL32!QueryDosDeviceA.
@@ -3278,22 +3458,11 @@ func QueryDosDeviceA(lpDeviceName foundation.PSTR, lpTargetPath foundation.PSTR,
 	return uint32(r1), nil
 }
 
-// QueryDosDeviceW calls KERNEL32!QueryDosDeviceW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-querydosdevicew
-// Minimum OS: windows5.1.2600.
-func QueryDosDeviceW(lpDeviceName foundation.PWSTR, lpTargetPath foundation.PWSTR, ucchMax uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procQueryDosDeviceW.Addr(), uintptr(unsafe.Pointer(lpDeviceName)), uintptr(unsafe.Pointer(lpTargetPath)), uintptr(ucchMax))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
 // QueryIoRingCapabilities calls api-ms-win-core-ioring-l1-1-0!QueryIoRingCapabilities.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-queryioringcapabilities
-func QueryIoRingCapabilities(capabilities *IORING_CAPABILITIES) foundation.HRESULT {
+func QueryIoRingCapabilities(capabilities *IORING_CAPABILITIES) error {
 	r1, _, _ := syscall.SyscallN(procQueryIoRingCapabilities.Addr(), uintptr(unsafe.Pointer(capabilities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryLogPolicy calls clfsw32!QueryLogPolicy.
@@ -3310,16 +3479,18 @@ func QueryLogPolicy(hLog foundation.HANDLE, ePolicyType CLFS_MGMT_POLICY_TYPE, p
 // QueryRecoveryAgentsOnEncryptedFile calls ADVAPI32!QueryRecoveryAgentsOnEncryptedFile.
 // https://learn.microsoft.com/windows/win32/api/winefs/nf-winefs-queryrecoveryagentsonencryptedfile
 // Minimum OS: windows5.1.2600.
-func QueryRecoveryAgentsOnEncryptedFile(lpFileName foundation.PWSTR, pRecoveryAgents **ENCRYPTION_CERTIFICATE_HASH_LIST) uint32 {
-	r1, _, _ := syscall.SyscallN(procQueryRecoveryAgentsOnEncryptedFile.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(pRecoveryAgents)))
+func QueryRecoveryAgentsOnEncryptedFile(lpFileName string, pRecoveryAgents **ENCRYPTION_CERTIFICATE_HASH_LIST) uint32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procQueryRecoveryAgentsOnEncryptedFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(pRecoveryAgents)))
 	return uint32(r1)
 }
 
 // QueryUsersOnEncryptedFile calls ADVAPI32!QueryUsersOnEncryptedFile.
 // https://learn.microsoft.com/windows/win32/api/winefs/nf-winefs-queryusersonencryptedfile
 // Minimum OS: windows5.1.2600.
-func QueryUsersOnEncryptedFile(lpFileName foundation.PWSTR, pUsers **ENCRYPTION_CERTIFICATE_HASH_LIST) uint32 {
-	r1, _, _ := syscall.SyscallN(procQueryUsersOnEncryptedFile.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(pUsers)))
+func QueryUsersOnEncryptedFile(lpFileName string, pUsers **ENCRYPTION_CERTIFICATE_HASH_LIST) uint32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procQueryUsersOnEncryptedFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(pUsers)))
 	return uint32(r1)
 }
 
@@ -3338,8 +3509,9 @@ func ReOpenFile(hOriginalFile foundation.HANDLE, dwDesiredAccess uint32, dwShare
 // ReadDirectoryChangesExW calls KERNEL32!ReadDirectoryChangesExW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-readdirectorychangesexw
 // Minimum OS: windows10.0.16299.
-func ReadDirectoryChangesExW(hDirectory foundation.HANDLE, lpBuffer unsafe.Pointer, nBufferLength uint32, bWatchSubtree foundation.BOOL, dwNotifyFilter FILE_NOTIFY_CHANGE, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE, ReadDirectoryNotifyInformationClass READ_DIRECTORY_NOTIFY_INFORMATION_CLASS) error {
-	r1, _, e1 := syscall.SyscallN(procReadDirectoryChangesExW.Addr(), uintptr(hDirectory), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nBufferLength), uintptr(bWatchSubtree), uintptr(dwNotifyFilter), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(ReadDirectoryNotifyInformationClass))
+func ReadDirectoryChangesExW(hDirectory foundation.HANDLE, lpBuffer unsafe.Pointer, nBufferLength uint32, bWatchSubtree bool, dwNotifyFilter FILE_NOTIFY_CHANGE, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE, ReadDirectoryNotifyInformationClass READ_DIRECTORY_NOTIFY_INFORMATION_CLASS) error {
+	_bWatchSubtree := win32.Bool32(bWatchSubtree)
+	r1, _, e1 := syscall.SyscallN(procReadDirectoryChangesExW.Addr(), uintptr(hDirectory), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nBufferLength), uintptr(_bWatchSubtree), uintptr(dwNotifyFilter), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(ReadDirectoryNotifyInformationClass))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3349,8 +3521,9 @@ func ReadDirectoryChangesExW(hDirectory foundation.HANDLE, lpBuffer unsafe.Point
 // ReadDirectoryChangesW calls KERNEL32!ReadDirectoryChangesW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-readdirectorychangesw
 // Minimum OS: windows5.1.2600.
-func ReadDirectoryChangesW(hDirectory foundation.HANDLE, lpBuffer unsafe.Pointer, nBufferLength uint32, bWatchSubtree foundation.BOOL, dwNotifyFilter FILE_NOTIFY_CHANGE, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE) error {
-	r1, _, e1 := syscall.SyscallN(procReadDirectoryChangesW.Addr(), uintptr(hDirectory), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nBufferLength), uintptr(bWatchSubtree), uintptr(dwNotifyFilter), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
+func ReadDirectoryChangesW(hDirectory foundation.HANDLE, lpBuffer unsafe.Pointer, nBufferLength uint32, bWatchSubtree bool, dwNotifyFilter FILE_NOTIFY_CHANGE, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE) error {
+	_bWatchSubtree := win32.Bool32(bWatchSubtree)
+	r1, _, e1 := syscall.SyscallN(procReadDirectoryChangesW.Addr(), uintptr(hDirectory), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nBufferLength), uintptr(_bWatchSubtree), uintptr(dwNotifyFilter), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3390,8 +3563,8 @@ func ReadFileEx(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToRead ui
 // ReadFileScatter calls KERNEL32!ReadFileScatter.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-readfilescatter
 // Minimum OS: windows5.1.2600.
-func ReadFileScatter(hFile foundation.HANDLE, aSegmentArray *FILE_SEGMENT_ELEMENT, nNumberOfBytesToRead uint32, lpReserved *uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procReadFileScatter.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(aSegmentArray)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(lpReserved)), uintptr(unsafe.Pointer(lpOverlapped)))
+func ReadFileScatter(hFile foundation.HANDLE, aSegmentArray *FILE_SEGMENT_ELEMENT, nNumberOfBytesToRead uint32, lpOverlapped *systemio.OVERLAPPED) error {
+	r1, _, e1 := syscall.SyscallN(procReadFileScatter.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(aSegmentArray)), uintptr(nNumberOfBytesToRead), 0, uintptr(unsafe.Pointer(lpOverlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3511,8 +3684,9 @@ func RecoverTransactionManager(TransactionManagerHandle foundation.HANDLE) error
 // RegisterForLogWriteNotification calls clfsw32!RegisterForLogWriteNotification.
 // https://learn.microsoft.com/windows/win32/api/clfsmgmtw32/nf-clfsmgmtw32-registerforlogwritenotification
 // Minimum OS: windows6.0.6000.
-func RegisterForLogWriteNotification(hLog foundation.HANDLE, cbThreshold uint32, fEnable foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procRegisterForLogWriteNotification.Addr(), uintptr(hLog), uintptr(cbThreshold), uintptr(fEnable))
+func RegisterForLogWriteNotification(hLog foundation.HANDLE, cbThreshold uint32, fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, e1 := syscall.SyscallN(procRegisterForLogWriteNotification.Addr(), uintptr(hLog), uintptr(cbThreshold), uintptr(_fEnable))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3531,21 +3705,35 @@ func RegisterManageableLogClient(hLog foundation.HANDLE, pCallbacks *LOG_MANAGEM
 }
 
 // RemoveBindLink calls BINDFLTAPI!RemoveBindLink.
-func RemoveBindLink(virtualPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRemoveBindLink.Addr(), uintptr(unsafe.Pointer(virtualPath)))
-	return foundation.HRESULT(r1)
+func RemoveBindLink(virtualPath string) error {
+	_virtualPath := win32.UTF16Ptr(virtualPath)
+	r1, _, _ := syscall.SyscallN(procRemoveBindLink.Addr(), uintptr(unsafe.Pointer(_virtualPath)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// RemoveDirectory calls KERNEL32!RemoveDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-removedirectoryw
+// Minimum OS: windows5.1.2600.
+func RemoveDirectory(lpPathName string) error {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, e1 := syscall.SyscallN(procRemoveDirectory.Addr(), uintptr(unsafe.Pointer(_lpPathName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// RemoveDirectory2 calls KERNEL32!RemoveDirectory2W.
+func RemoveDirectory2(lpPathName string, DirectoryFlags DIRECTORY_FLAGS) bool {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, _ := syscall.SyscallN(procRemoveDirectory2.Addr(), uintptr(unsafe.Pointer(_lpPathName)), uintptr(DirectoryFlags))
+	return r1 != 0
 }
 
 // RemoveDirectory2A calls KERNEL32!RemoveDirectory2A.
-func RemoveDirectory2A(lpPathName foundation.PSTR, DirectoryFlags DIRECTORY_FLAGS) foundation.BOOL {
+func RemoveDirectory2A(lpPathName foundation.PSTR, DirectoryFlags DIRECTORY_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procRemoveDirectory2A.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(DirectoryFlags))
-	return foundation.BOOL(r1)
-}
-
-// RemoveDirectory2W calls KERNEL32!RemoveDirectory2W.
-func RemoveDirectory2W(lpPathName foundation.PWSTR, DirectoryFlags DIRECTORY_FLAGS) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRemoveDirectory2W.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(DirectoryFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RemoveDirectoryA calls KERNEL32!RemoveDirectoryA.
@@ -3561,9 +3749,22 @@ func RemoveDirectoryA(lpPathName foundation.PSTR) error {
 
 // RemoveDirectoryFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!RemoveDirectoryFromAppW.
 // https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-removedirectoryfromappw
-func RemoveDirectoryFromAppW(lpPathName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRemoveDirectoryFromAppW.Addr(), uintptr(unsafe.Pointer(lpPathName)))
-	return foundation.BOOL(r1)
+func RemoveDirectoryFromAppW(lpPathName string) bool {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, _ := syscall.SyscallN(procRemoveDirectoryFromAppW.Addr(), uintptr(unsafe.Pointer(_lpPathName)))
+	return r1 != 0
+}
+
+// RemoveDirectoryTransacted calls KERNEL32!RemoveDirectoryTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-removedirectorytransactedw
+// Minimum OS: windows6.0.6000.
+func RemoveDirectoryTransacted(lpPathName string, hTransaction foundation.HANDLE) error {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, e1 := syscall.SyscallN(procRemoveDirectoryTransacted.Addr(), uintptr(unsafe.Pointer(_lpPathName)), uintptr(hTransaction))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // RemoveDirectoryTransactedA calls KERNEL32!RemoveDirectoryTransactedA.
@@ -3577,33 +3778,13 @@ func RemoveDirectoryTransactedA(lpPathName foundation.PSTR, hTransaction foundat
 	return nil
 }
 
-// RemoveDirectoryTransactedW calls KERNEL32!RemoveDirectoryTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-removedirectorytransactedw
-// Minimum OS: windows6.0.6000.
-func RemoveDirectoryTransactedW(lpPathName foundation.PWSTR, hTransaction foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procRemoveDirectoryTransactedW.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// RemoveDirectoryW calls KERNEL32!RemoveDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-removedirectoryw
-// Minimum OS: windows5.1.2600.
-func RemoveDirectoryW(lpPathName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procRemoveDirectoryW.Addr(), uintptr(unsafe.Pointer(lpPathName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // RemoveLogContainer calls clfsw32!RemoveLogContainer.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-removelogcontainer
 // Minimum OS: windows6.0.6000.
-func RemoveLogContainer(hLog foundation.HANDLE, pwszContainerPath foundation.PWSTR, fForce foundation.BOOL, pReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procRemoveLogContainer.Addr(), uintptr(hLog), uintptr(unsafe.Pointer(pwszContainerPath)), uintptr(fForce), uintptr(unsafe.Pointer(pReserved)))
+func RemoveLogContainer(hLog foundation.HANDLE, pwszContainerPath string, fForce bool, pReserved unsafe.Pointer) error {
+	_pwszContainerPath := win32.UTF16Ptr(pwszContainerPath)
+	_fForce := win32.Bool32(fForce)
+	r1, _, e1 := syscall.SyscallN(procRemoveLogContainer.Addr(), uintptr(hLog), uintptr(unsafe.Pointer(_pwszContainerPath)), uintptr(_fForce), uintptr(unsafe.Pointer(pReserved)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3613,8 +3794,13 @@ func RemoveLogContainer(hLog foundation.HANDLE, pwszContainerPath foundation.PWS
 // RemoveLogContainerSet calls clfsw32!RemoveLogContainerSet.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-removelogcontainerset
 // Minimum OS: windows6.0.6000.
-func RemoveLogContainerSet(hLog foundation.HANDLE, cContainer uint16, rgwszContainerPath *foundation.PWSTR, fForce foundation.BOOL, pReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procRemoveLogContainerSet.Addr(), uintptr(hLog), uintptr(cContainer), uintptr(unsafe.Pointer(rgwszContainerPath)), uintptr(fForce), uintptr(unsafe.Pointer(pReserved)))
+func RemoveLogContainerSet(hLog foundation.HANDLE, rgwszContainerPath []foundation.PWSTR, fForce bool, pReserved unsafe.Pointer) error {
+	var _rgwszContainerPath *foundation.PWSTR
+	if len(rgwszContainerPath) > 0 {
+		_rgwszContainerPath = &rgwszContainerPath[0]
+	}
+	_fForce := win32.Bool32(fForce)
+	r1, _, e1 := syscall.SyscallN(procRemoveLogContainerSet.Addr(), uintptr(hLog), uintptr(len(rgwszContainerPath)), uintptr(unsafe.Pointer(_rgwszContainerPath)), uintptr(_fForce), uintptr(unsafe.Pointer(pReserved)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3635,16 +3821,32 @@ func RemoveLogPolicy(hLog foundation.HANDLE, ePolicyType CLFS_MGMT_POLICY_TYPE) 
 // RemoveUsersFromEncryptedFile calls ADVAPI32!RemoveUsersFromEncryptedFile.
 // https://learn.microsoft.com/windows/win32/api/winefs/nf-winefs-removeusersfromencryptedfile
 // Minimum OS: windows5.1.2600.
-func RemoveUsersFromEncryptedFile(lpFileName foundation.PWSTR, pHashes *ENCRYPTION_CERTIFICATE_HASH_LIST) uint32 {
-	r1, _, _ := syscall.SyscallN(procRemoveUsersFromEncryptedFile.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(pHashes)))
+func RemoveUsersFromEncryptedFile(lpFileName string, pHashes *ENCRYPTION_CERTIFICATE_HASH_LIST) uint32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procRemoveUsersFromEncryptedFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(pHashes)))
 	return uint32(r1)
 }
 
 // RenameTransactionManager calls ktmw32!RenameTransactionManager.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-renametransactionmanager
 // Minimum OS: windows6.0.6000.
-func RenameTransactionManager(LogFileName foundation.PWSTR, ExistingTransactionManagerGuid *win32.GUID) error {
-	r1, _, e1 := syscall.SyscallN(procRenameTransactionManager.Addr(), uintptr(unsafe.Pointer(LogFileName)), uintptr(unsafe.Pointer(ExistingTransactionManagerGuid)))
+func RenameTransactionManager(LogFileName string, ExistingTransactionManagerGuid *win32.GUID) error {
+	_LogFileName := win32.UTF16Ptr(LogFileName)
+	r1, _, e1 := syscall.SyscallN(procRenameTransactionManager.Addr(), uintptr(unsafe.Pointer(_LogFileName)), uintptr(unsafe.Pointer(ExistingTransactionManagerGuid)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// ReplaceFile calls KERNEL32!ReplaceFileW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-replacefilew
+// Minimum OS: windows5.1.2600.
+func ReplaceFile(lpReplacedFileName string, lpReplacementFileName string, lpBackupFileName string, dwReplaceFlags REPLACE_FILE_FLAGS) error {
+	_lpReplacedFileName := win32.UTF16Ptr(lpReplacedFileName)
+	_lpReplacementFileName := win32.UTF16Ptr(lpReplacementFileName)
+	_lpBackupFileName := win32.UTF16Ptr(lpBackupFileName)
+	r1, _, e1 := syscall.SyscallN(procReplaceFile.Addr(), uintptr(unsafe.Pointer(_lpReplacedFileName)), uintptr(unsafe.Pointer(_lpReplacementFileName)), uintptr(unsafe.Pointer(_lpBackupFileName)), uintptr(dwReplaceFlags), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3654,8 +3856,8 @@ func RenameTransactionManager(LogFileName foundation.PWSTR, ExistingTransactionM
 // ReplaceFileA calls KERNEL32!ReplaceFileA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-replacefilea
 // Minimum OS: windows5.1.2600.
-func ReplaceFileA(lpReplacedFileName foundation.PSTR, lpReplacementFileName foundation.PSTR, lpBackupFileName foundation.PSTR, dwReplaceFlags REPLACE_FILE_FLAGS, lpExclude unsafe.Pointer, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procReplaceFileA.Addr(), uintptr(unsafe.Pointer(lpReplacedFileName)), uintptr(unsafe.Pointer(lpReplacementFileName)), uintptr(unsafe.Pointer(lpBackupFileName)), uintptr(dwReplaceFlags), uintptr(unsafe.Pointer(lpExclude)), uintptr(unsafe.Pointer(lpReserved)))
+func ReplaceFileA(lpReplacedFileName foundation.PSTR, lpReplacementFileName foundation.PSTR, lpBackupFileName foundation.PSTR, dwReplaceFlags REPLACE_FILE_FLAGS) error {
+	r1, _, e1 := syscall.SyscallN(procReplaceFileA.Addr(), uintptr(unsafe.Pointer(lpReplacedFileName)), uintptr(unsafe.Pointer(lpReplacementFileName)), uintptr(unsafe.Pointer(lpBackupFileName)), uintptr(dwReplaceFlags), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3664,20 +3866,12 @@ func ReplaceFileA(lpReplacedFileName foundation.PSTR, lpReplacementFileName foun
 
 // ReplaceFileFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!ReplaceFileFromAppW.
 // https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-replacefilefromappw
-func ReplaceFileFromAppW(lpReplacedFileName foundation.PWSTR, lpReplacementFileName foundation.PWSTR, lpBackupFileName foundation.PWSTR, dwReplaceFlags uint32, lpExclude unsafe.Pointer, lpReserved unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procReplaceFileFromAppW.Addr(), uintptr(unsafe.Pointer(lpReplacedFileName)), uintptr(unsafe.Pointer(lpReplacementFileName)), uintptr(unsafe.Pointer(lpBackupFileName)), uintptr(dwReplaceFlags), uintptr(unsafe.Pointer(lpExclude)), uintptr(unsafe.Pointer(lpReserved)))
-	return foundation.BOOL(r1)
-}
-
-// ReplaceFileW calls KERNEL32!ReplaceFileW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-replacefilew
-// Minimum OS: windows5.1.2600.
-func ReplaceFileW(lpReplacedFileName foundation.PWSTR, lpReplacementFileName foundation.PWSTR, lpBackupFileName foundation.PWSTR, dwReplaceFlags REPLACE_FILE_FLAGS, lpExclude unsafe.Pointer, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procReplaceFileW.Addr(), uintptr(unsafe.Pointer(lpReplacedFileName)), uintptr(unsafe.Pointer(lpReplacementFileName)), uintptr(unsafe.Pointer(lpBackupFileName)), uintptr(dwReplaceFlags), uintptr(unsafe.Pointer(lpExclude)), uintptr(unsafe.Pointer(lpReserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+func ReplaceFileFromAppW(lpReplacedFileName string, lpReplacementFileName string, lpBackupFileName string, dwReplaceFlags uint32) bool {
+	_lpReplacedFileName := win32.UTF16Ptr(lpReplacedFileName)
+	_lpReplacementFileName := win32.UTF16Ptr(lpReplacementFileName)
+	_lpBackupFileName := win32.UTF16Ptr(lpBackupFileName)
+	r1, _, _ := syscall.SyscallN(procReplaceFileFromAppW.Addr(), uintptr(unsafe.Pointer(_lpReplacedFileName)), uintptr(unsafe.Pointer(_lpReplacementFileName)), uintptr(unsafe.Pointer(_lpBackupFileName)), uintptr(dwReplaceFlags), 0, 0)
+	return r1 != 0
 }
 
 // ReserveAndAppendLog calls clfsw32!ReserveAndAppendLog.
@@ -3768,6 +3962,20 @@ func ScanLogContainers(pcxScan *CLS_SCAN_CONTEXT, eScanMode byte, pReserved unsa
 	return nil
 }
 
+// SearchPath calls KERNEL32!SearchPathW.
+// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-searchpathw
+// Minimum OS: windows5.1.2600.
+func SearchPath(lpPath string, lpFileName string, lpExtension string, nBufferLength uint32, lpBuffer foundation.PWSTR, lpFilePart *foundation.PWSTR) (uint32, error) {
+	_lpPath := win32.UTF16Ptr(lpPath)
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	_lpExtension := win32.UTF16Ptr(lpExtension)
+	r1, _, e1 := syscall.SyscallN(procSearchPath.Addr(), uintptr(unsafe.Pointer(_lpPath)), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(_lpExtension)), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpFilePart)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // SearchPathA calls KERNEL32!SearchPathA.
 // https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-searchpatha
 // Minimum OS: windows5.1.2600.
@@ -3779,20 +3987,10 @@ func SearchPathA(lpPath foundation.PSTR, lpFileName foundation.PSTR, lpExtension
 	return uint32(r1), nil
 }
 
-// SearchPathW calls KERNEL32!SearchPathW.
-// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-searchpathw
-// Minimum OS: windows5.1.2600.
-func SearchPathW(lpPath foundation.PWSTR, lpFileName foundation.PWSTR, lpExtension foundation.PWSTR, nBufferLength uint32, lpBuffer foundation.PWSTR, lpFilePart *foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSearchPathW.Addr(), uintptr(unsafe.Pointer(lpPath)), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpExtension)), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpFilePart)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
 // SetEncryptedFileMetadata calls ADVAPI32!SetEncryptedFileMetadata.
-func SetEncryptedFileMetadata(lpFileName foundation.PWSTR, pbOldMetadata *byte, pbNewMetadata *byte, pOwnerHash *ENCRYPTION_CERTIFICATE_HASH, dwOperation uint32, pCertificatesAdded *ENCRYPTION_CERTIFICATE_HASH_LIST) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetEncryptedFileMetadata.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(pbOldMetadata)), uintptr(unsafe.Pointer(pbNewMetadata)), uintptr(unsafe.Pointer(pOwnerHash)), uintptr(dwOperation), uintptr(unsafe.Pointer(pCertificatesAdded)))
+func SetEncryptedFileMetadata(lpFileName string, pbOldMetadata *byte, pbNewMetadata *byte, pOwnerHash *ENCRYPTION_CERTIFICATE_HASH, dwOperation uint32, pCertificatesAdded *ENCRYPTION_CERTIFICATE_HASH_LIST) uint32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procSetEncryptedFileMetadata.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(pbOldMetadata)), uintptr(unsafe.Pointer(pbNewMetadata)), uintptr(unsafe.Pointer(pOwnerHash)), uintptr(dwOperation), uintptr(unsafe.Pointer(pCertificatesAdded)))
 	return uint32(r1)
 }
 
@@ -3843,6 +4041,18 @@ func SetFileApisToOEM() {
 	syscall.SyscallN(procSetFileApisToOEM.Addr())
 }
 
+// SetFileAttributes calls KERNEL32!SetFileAttributesW.
+// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfileattributesw
+// Minimum OS: windows5.1.2600.
+func SetFileAttributes(lpFileName string, dwFileAttributes FILE_FLAGS_AND_ATTRIBUTES) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procSetFileAttributes.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwFileAttributes))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetFileAttributesA calls KERNEL32!SetFileAttributesA.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfileattributesa
 // Minimum OS: windows5.1.2600.
@@ -3856,9 +4066,22 @@ func SetFileAttributesA(lpFileName foundation.PSTR, dwFileAttributes FILE_FLAGS_
 
 // SetFileAttributesFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!SetFileAttributesFromAppW.
 // https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-setfileattributesfromappw
-func SetFileAttributesFromAppW(lpFileName foundation.PWSTR, dwFileAttributes uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetFileAttributesFromAppW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwFileAttributes))
-	return foundation.BOOL(r1)
+func SetFileAttributesFromAppW(lpFileName string, dwFileAttributes uint32) bool {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procSetFileAttributesFromAppW.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwFileAttributes))
+	return r1 != 0
+}
+
+// SetFileAttributesTransacted calls KERNEL32!SetFileAttributesTransactedW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfileattributestransactedw
+// Minimum OS: windows6.0.6000.
+func SetFileAttributesTransacted(lpFileName string, dwFileAttributes uint32, hTransaction foundation.HANDLE) error {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procSetFileAttributesTransacted.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwFileAttributes), uintptr(hTransaction))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetFileAttributesTransactedA calls KERNEL32!SetFileAttributesTransactedA.
@@ -3872,33 +4095,12 @@ func SetFileAttributesTransactedA(lpFileName foundation.PSTR, dwFileAttributes u
 	return nil
 }
 
-// SetFileAttributesTransactedW calls KERNEL32!SetFileAttributesTransactedW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfileattributestransactedw
-// Minimum OS: windows6.0.6000.
-func SetFileAttributesTransactedW(lpFileName foundation.PWSTR, dwFileAttributes uint32, hTransaction foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procSetFileAttributesTransactedW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwFileAttributes), uintptr(hTransaction))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetFileAttributesW calls KERNEL32!SetFileAttributesW.
-// https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfileattributesw
-// Minimum OS: windows5.1.2600.
-func SetFileAttributesW(lpFileName foundation.PWSTR, dwFileAttributes FILE_FLAGS_AND_ATTRIBUTES) error {
-	r1, _, e1 := syscall.SyscallN(procSetFileAttributesW.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwFileAttributes))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetFileBandwidthReservation calls KERNEL32!SetFileBandwidthReservation.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfilebandwidthreservation
 // Minimum OS: windows6.0.6000.
-func SetFileBandwidthReservation(hFile foundation.HANDLE, nPeriodMilliseconds uint32, nBytesPerPeriod uint32, bDiscardable foundation.BOOL, lpTransferSize *uint32, lpNumOutstandingRequests *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetFileBandwidthReservation.Addr(), uintptr(hFile), uintptr(nPeriodMilliseconds), uintptr(nBytesPerPeriod), uintptr(bDiscardable), uintptr(unsafe.Pointer(lpTransferSize)), uintptr(unsafe.Pointer(lpNumOutstandingRequests)))
+func SetFileBandwidthReservation(hFile foundation.HANDLE, nPeriodMilliseconds uint32, nBytesPerPeriod uint32, bDiscardable bool, lpTransferSize *uint32, lpNumOutstandingRequests *uint32) error {
+	_bDiscardable := win32.Bool32(bDiscardable)
+	r1, _, e1 := syscall.SyscallN(procSetFileBandwidthReservation.Addr(), uintptr(hFile), uintptr(nPeriodMilliseconds), uintptr(nBytesPerPeriod), uintptr(_bDiscardable), uintptr(unsafe.Pointer(lpTransferSize)), uintptr(unsafe.Pointer(lpNumOutstandingRequests)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3960,22 +4162,23 @@ func SetFilePointerEx(hFile foundation.HANDLE, liDistanceToMove int64, lpNewFile
 	return nil
 }
 
-// SetFileShortNameA calls KERNEL32!SetFileShortNameA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfileshortnamea
+// SetFileShortName calls KERNEL32!SetFileShortNameW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfileshortnamew
 // Minimum OS: windows5.1.2600.
-func SetFileShortNameA(hFile foundation.HANDLE, lpShortName foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetFileShortNameA.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpShortName)))
+func SetFileShortName(hFile foundation.HANDLE, lpShortName string) error {
+	_lpShortName := win32.UTF16Ptr(lpShortName)
+	r1, _, e1 := syscall.SyscallN(procSetFileShortName.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_lpShortName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetFileShortNameW calls KERNEL32!SetFileShortNameW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfileshortnamew
+// SetFileShortNameA calls KERNEL32!SetFileShortNameA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfileshortnamea
 // Minimum OS: windows5.1.2600.
-func SetFileShortNameW(hFile foundation.HANDLE, lpShortName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetFileShortNameW.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpShortName)))
+func SetFileShortNameA(hFile foundation.HANDLE, lpShortName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetFileShortNameA.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpShortName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4006,9 +4209,9 @@ func SetFileValidData(hFile foundation.HANDLE, ValidDataLength int64) error {
 
 // SetIoRingCompletionEvent calls api-ms-win-core-ioring-l1-1-0!SetIoRingCompletionEvent.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-setioringcompletionevent
-func SetIoRingCompletionEvent(ioRing HIORING, hEvent foundation.HANDLE) foundation.HRESULT {
+func SetIoRingCompletionEvent(ioRing HIORING, hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procSetIoRingCompletionEvent.Addr(), uintptr(ioRing), uintptr(hEvent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLogArchiveMode calls clfsw32!SetLogArchiveMode.
@@ -4077,16 +4280,18 @@ func SetTapeParameters(hDevice foundation.HANDLE, dwOperation TAPE_INFORMATION_T
 // SetTapePosition calls KERNEL32!SetTapePosition.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-settapeposition
 // Minimum OS: windows5.1.2600.
-func SetTapePosition(hDevice foundation.HANDLE, dwPositionMethod TAPE_POSITION_METHOD, dwPartition uint32, dwOffsetLow uint32, dwOffsetHigh uint32, bImmediate foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetTapePosition.Addr(), uintptr(hDevice), uintptr(dwPositionMethod), uintptr(dwPartition), uintptr(dwOffsetLow), uintptr(dwOffsetHigh), uintptr(bImmediate))
+func SetTapePosition(hDevice foundation.HANDLE, dwPositionMethod TAPE_POSITION_METHOD, dwPartition uint32, dwOffsetLow uint32, dwOffsetHigh uint32, bImmediate bool) uint32 {
+	_bImmediate := win32.Bool32(bImmediate)
+	r1, _, _ := syscall.SyscallN(procSetTapePosition.Addr(), uintptr(hDevice), uintptr(dwPositionMethod), uintptr(dwPartition), uintptr(dwOffsetLow), uintptr(dwOffsetHigh), uintptr(_bImmediate))
 	return uint32(r1)
 }
 
 // SetTransactionInformation calls ktmw32!SetTransactionInformation.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-settransactioninformation
 // Minimum OS: windows6.0.6000.
-func SetTransactionInformation(TransactionHandle foundation.HANDLE, IsolationLevel uint32, IsolationFlags uint32, Timeout uint32, Description foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetTransactionInformation.Addr(), uintptr(TransactionHandle), uintptr(IsolationLevel), uintptr(IsolationFlags), uintptr(Timeout), uintptr(unsafe.Pointer(Description)))
+func SetTransactionInformation(TransactionHandle foundation.HANDLE, IsolationLevel uint32, IsolationFlags uint32, Timeout uint32, Description string) error {
+	_Description := win32.UTF16Ptr(Description)
+	r1, _, e1 := syscall.SyscallN(procSetTransactionInformation.Addr(), uintptr(TransactionHandle), uintptr(IsolationLevel), uintptr(IsolationFlags), uintptr(Timeout), uintptr(unsafe.Pointer(_Description)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4102,9 +4307,22 @@ func SetUserFileEncryptionKey(pEncryptionCertificate *ENCRYPTION_CERTIFICATE) ui
 }
 
 // SetUserFileEncryptionKeyEx calls ADVAPI32!SetUserFileEncryptionKeyEx.
-func SetUserFileEncryptionKeyEx(pEncryptionCertificate *ENCRYPTION_CERTIFICATE, dwCapabilities uint32, dwFlags uint32, pvReserved unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetUserFileEncryptionKeyEx.Addr(), uintptr(unsafe.Pointer(pEncryptionCertificate)), uintptr(dwCapabilities), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
+func SetUserFileEncryptionKeyEx(pEncryptionCertificate *ENCRYPTION_CERTIFICATE, dwCapabilities uint32, dwFlags uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procSetUserFileEncryptionKeyEx.Addr(), uintptr(unsafe.Pointer(pEncryptionCertificate)), uintptr(dwCapabilities), uintptr(dwFlags), 0)
 	return uint32(r1)
+}
+
+// SetVolumeLabel calls KERNEL32!SetVolumeLabelW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setvolumelabelw
+// Minimum OS: windows5.1.2600.
+func SetVolumeLabel(lpRootPathName string, lpVolumeName string) error {
+	_lpRootPathName := win32.UTF16Ptr(lpRootPathName)
+	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
+	r1, _, e1 := syscall.SyscallN(procSetVolumeLabel.Addr(), uintptr(unsafe.Pointer(_lpRootPathName)), uintptr(unsafe.Pointer(_lpVolumeName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetVolumeLabelA calls KERNEL32!SetVolumeLabelA.
@@ -4118,11 +4336,13 @@ func SetVolumeLabelA(lpRootPathName foundation.PSTR, lpVolumeName foundation.PST
 	return nil
 }
 
-// SetVolumeLabelW calls KERNEL32!SetVolumeLabelW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setvolumelabelw
+// SetVolumeMountPoint calls KERNEL32!SetVolumeMountPointW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setvolumemountpointw
 // Minimum OS: windows5.1.2600.
-func SetVolumeLabelW(lpRootPathName foundation.PWSTR, lpVolumeName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetVolumeLabelW.Addr(), uintptr(unsafe.Pointer(lpRootPathName)), uintptr(unsafe.Pointer(lpVolumeName)))
+func SetVolumeMountPoint(lpszVolumeMountPoint string, lpszVolumeName string) error {
+	_lpszVolumeMountPoint := win32.UTF16Ptr(lpszVolumeMountPoint)
+	_lpszVolumeName := win32.UTF16Ptr(lpszVolumeName)
+	r1, _, e1 := syscall.SyscallN(procSetVolumeMountPoint.Addr(), uintptr(unsafe.Pointer(_lpszVolumeMountPoint)), uintptr(unsafe.Pointer(_lpszVolumeName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4134,17 +4354,6 @@ func SetVolumeLabelW(lpRootPathName foundation.PWSTR, lpVolumeName foundation.PW
 // Minimum OS: windows5.1.2600.
 func SetVolumeMountPointA(lpszVolumeMountPoint foundation.PSTR, lpszVolumeName foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procSetVolumeMountPointA.Addr(), uintptr(unsafe.Pointer(lpszVolumeMountPoint)), uintptr(unsafe.Pointer(lpszVolumeName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetVolumeMountPointW calls KERNEL32!SetVolumeMountPointW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setvolumemountpointw
-// Minimum OS: windows5.1.2600.
-func SetVolumeMountPointW(lpszVolumeMountPoint foundation.PWSTR, lpszVolumeName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetVolumeMountPointW.Addr(), uintptr(unsafe.Pointer(lpszVolumeMountPoint)), uintptr(unsafe.Pointer(lpszVolumeName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4164,9 +4373,9 @@ func SinglePhaseReject(EnlistmentHandle foundation.HANDLE, TmVirtualClock *int64
 
 // SubmitIoRing calls api-ms-win-core-ioring-l1-1-0!SubmitIoRing.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-submitioring
-func SubmitIoRing(ioRing HIORING, waitOperations uint32, milliseconds uint32, submittedEntries *uint32) foundation.HRESULT {
+func SubmitIoRing(ioRing HIORING, waitOperations uint32, milliseconds uint32, submittedEntries *uint32) error {
 	r1, _, _ := syscall.SyscallN(procSubmitIoRing.Addr(), uintptr(ioRing), uintptr(waitOperations), uintptr(milliseconds), uintptr(unsafe.Pointer(submittedEntries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TerminateLogArchive calls clfsw32!TerminateLogArchive.
@@ -4231,21 +4440,21 @@ func TxfLogReadRecords(TxfLogContext unsafe.Pointer, BufferLength uint32, Buffer
 }
 
 // TxfLogRecordGetFileName calls txfw32!TxfLogRecordGetFileName.
-func TxfLogRecordGetFileName(RecordBuffer unsafe.Pointer, RecordBufferLengthInBytes uint32, NameBuffer foundation.PWSTR, NameBufferLengthInBytes *uint32, TxfId unsafe.Pointer) foundation.BOOL {
+func TxfLogRecordGetFileName(RecordBuffer unsafe.Pointer, RecordBufferLengthInBytes uint32, NameBuffer foundation.PWSTR, NameBufferLengthInBytes *uint32, TxfId unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procTxfLogRecordGetFileName.Addr(), uintptr(unsafe.Pointer(RecordBuffer)), uintptr(RecordBufferLengthInBytes), uintptr(unsafe.Pointer(NameBuffer)), uintptr(unsafe.Pointer(NameBufferLengthInBytes)), uintptr(unsafe.Pointer(TxfId)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TxfLogRecordGetGenericType calls txfw32!TxfLogRecordGetGenericType.
-func TxfLogRecordGetGenericType(RecordBuffer unsafe.Pointer, RecordBufferLengthInBytes uint32, GenericType *uint32, VirtualClock *int64) foundation.BOOL {
+func TxfLogRecordGetGenericType(RecordBuffer unsafe.Pointer, RecordBufferLengthInBytes uint32, GenericType *uint32, VirtualClock *int64) bool {
 	r1, _, _ := syscall.SyscallN(procTxfLogRecordGetGenericType.Addr(), uintptr(unsafe.Pointer(RecordBuffer)), uintptr(RecordBufferLengthInBytes), uintptr(unsafe.Pointer(GenericType)), uintptr(unsafe.Pointer(VirtualClock)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TxfReadMetadataInfo calls txfw32!TxfReadMetadataInfo.
-func TxfReadMetadataInfo(FileHandle foundation.HANDLE, TxfFileId unsafe.Pointer, LastLsn *CLS_LSN, TransactionState *uint32, LockingTransaction *win32.GUID) foundation.BOOL {
+func TxfReadMetadataInfo(FileHandle foundation.HANDLE, TxfFileId unsafe.Pointer, LastLsn *CLS_LSN, TransactionState *uint32, LockingTransaction *win32.GUID) bool {
 	r1, _, _ := syscall.SyscallN(procTxfReadMetadataInfo.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(TxfFileId)), uintptr(unsafe.Pointer(LastLsn)), uintptr(unsafe.Pointer(TransactionState)), uintptr(unsafe.Pointer(LockingTransaction)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TxfSetThreadMiniVersionForCreate calls txfw32!TxfSetThreadMiniVersionForCreate.
@@ -4268,8 +4477,8 @@ func UnlockFile(hFile foundation.HANDLE, dwFileOffsetLow uint32, dwFileOffsetHig
 // UnlockFileEx calls KERNEL32!UnlockFileEx.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-unlockfileex
 // Minimum OS: windows5.1.2600.
-func UnlockFileEx(hFile foundation.HANDLE, dwReserved uint32, nNumberOfBytesToUnlockLow uint32, nNumberOfBytesToUnlockHigh uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procUnlockFileEx.Addr(), uintptr(hFile), uintptr(dwReserved), uintptr(nNumberOfBytesToUnlockLow), uintptr(nNumberOfBytesToUnlockHigh), uintptr(unsafe.Pointer(lpOverlapped)))
+func UnlockFileEx(hFile foundation.HANDLE, nNumberOfBytesToUnlockLow uint32, nNumberOfBytesToUnlockHigh uint32, lpOverlapped *systemio.OVERLAPPED) error {
+	r1, _, e1 := syscall.SyscallN(procUnlockFileEx.Addr(), uintptr(hFile), 0, uintptr(nNumberOfBytesToUnlockLow), uintptr(nNumberOfBytesToUnlockHigh), uintptr(unsafe.Pointer(lpOverlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4279,12 +4488,24 @@ func UnlockFileEx(hFile foundation.HANDLE, dwReserved uint32, nNumberOfBytesToUn
 // ValidateLog calls clfsw32!ValidateLog.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-validatelog
 // Minimum OS: windows6.0.6000.
-func ValidateLog(pszLogFileName foundation.PWSTR, psaLogFile *security.SECURITY_ATTRIBUTES, pinfoBuffer *CLS_INFORMATION, pcbBuffer *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procValidateLog.Addr(), uintptr(unsafe.Pointer(pszLogFileName)), uintptr(unsafe.Pointer(psaLogFile)), uintptr(unsafe.Pointer(pinfoBuffer)), uintptr(unsafe.Pointer(pcbBuffer)))
+func ValidateLog(pszLogFileName string, psaLogFile *security.SECURITY_ATTRIBUTES, pinfoBuffer *CLS_INFORMATION, pcbBuffer *uint32) error {
+	_pszLogFileName := win32.UTF16Ptr(pszLogFileName)
+	r1, _, e1 := syscall.SyscallN(procValidateLog.Addr(), uintptr(unsafe.Pointer(_pszLogFileName)), uintptr(unsafe.Pointer(psaLogFile)), uintptr(unsafe.Pointer(pinfoBuffer)), uintptr(unsafe.Pointer(pcbBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// VerFindFile calls VERSION!VerFindFileW.
+// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verfindfilew
+// Minimum OS: windows5.0.
+func VerFindFile(uFlags VER_FIND_FILE_FLAGS, szFileName string, szWinDir string, szAppDir string, szCurDir foundation.PWSTR, puCurDirLen *uint32, szDestDir foundation.PWSTR, puDestDirLen *uint32) VER_FIND_FILE_STATUS {
+	_szFileName := win32.UTF16Ptr(szFileName)
+	_szWinDir := win32.UTF16Ptr(szWinDir)
+	_szAppDir := win32.UTF16Ptr(szAppDir)
+	r1, _, _ := syscall.SyscallN(procVerFindFile.Addr(), uintptr(uFlags), uintptr(unsafe.Pointer(_szFileName)), uintptr(unsafe.Pointer(_szWinDir)), uintptr(unsafe.Pointer(_szAppDir)), uintptr(unsafe.Pointer(szCurDir)), uintptr(unsafe.Pointer(puCurDirLen)), uintptr(unsafe.Pointer(szDestDir)), uintptr(unsafe.Pointer(puDestDirLen)))
+	return VER_FIND_FILE_STATUS(r1)
 }
 
 // VerFindFileA calls VERSION!VerFindFileA.
@@ -4295,12 +4516,17 @@ func VerFindFileA(uFlags VER_FIND_FILE_FLAGS, szFileName foundation.PSTR, szWinD
 	return VER_FIND_FILE_STATUS(r1)
 }
 
-// VerFindFileW calls VERSION!VerFindFileW.
-// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verfindfilew
+// VerInstallFile calls VERSION!VerInstallFileW.
+// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verinstallfilew
 // Minimum OS: windows5.0.
-func VerFindFileW(uFlags VER_FIND_FILE_FLAGS, szFileName foundation.PWSTR, szWinDir foundation.PWSTR, szAppDir foundation.PWSTR, szCurDir foundation.PWSTR, puCurDirLen *uint32, szDestDir foundation.PWSTR, puDestDirLen *uint32) VER_FIND_FILE_STATUS {
-	r1, _, _ := syscall.SyscallN(procVerFindFileW.Addr(), uintptr(uFlags), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(szWinDir)), uintptr(unsafe.Pointer(szAppDir)), uintptr(unsafe.Pointer(szCurDir)), uintptr(unsafe.Pointer(puCurDirLen)), uintptr(unsafe.Pointer(szDestDir)), uintptr(unsafe.Pointer(puDestDirLen)))
-	return VER_FIND_FILE_STATUS(r1)
+func VerInstallFile(uFlags VER_INSTALL_FILE_FLAGS, szSrcFileName string, szDestFileName string, szSrcDir string, szDestDir string, szCurDir string, szTmpFile foundation.PWSTR, puTmpFileLen *uint32) VER_INSTALL_FILE_STATUS {
+	_szSrcFileName := win32.UTF16Ptr(szSrcFileName)
+	_szDestFileName := win32.UTF16Ptr(szDestFileName)
+	_szSrcDir := win32.UTF16Ptr(szSrcDir)
+	_szDestDir := win32.UTF16Ptr(szDestDir)
+	_szCurDir := win32.UTF16Ptr(szCurDir)
+	r1, _, _ := syscall.SyscallN(procVerInstallFile.Addr(), uintptr(uFlags), uintptr(unsafe.Pointer(_szSrcFileName)), uintptr(unsafe.Pointer(_szDestFileName)), uintptr(unsafe.Pointer(_szSrcDir)), uintptr(unsafe.Pointer(_szDestDir)), uintptr(unsafe.Pointer(_szCurDir)), uintptr(unsafe.Pointer(szTmpFile)), uintptr(unsafe.Pointer(puTmpFileLen)))
+	return VER_INSTALL_FILE_STATUS(r1)
 }
 
 // VerInstallFileA calls VERSION!VerInstallFileA.
@@ -4311,12 +4537,12 @@ func VerInstallFileA(uFlags VER_INSTALL_FILE_FLAGS, szSrcFileName foundation.PST
 	return VER_INSTALL_FILE_STATUS(r1)
 }
 
-// VerInstallFileW calls VERSION!VerInstallFileW.
-// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verinstallfilew
+// VerLanguageName calls KERNEL32!VerLanguageNameW.
+// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verlanguagenamew
 // Minimum OS: windows5.0.
-func VerInstallFileW(uFlags VER_INSTALL_FILE_FLAGS, szSrcFileName foundation.PWSTR, szDestFileName foundation.PWSTR, szSrcDir foundation.PWSTR, szDestDir foundation.PWSTR, szCurDir foundation.PWSTR, szTmpFile foundation.PWSTR, puTmpFileLen *uint32) VER_INSTALL_FILE_STATUS {
-	r1, _, _ := syscall.SyscallN(procVerInstallFileW.Addr(), uintptr(uFlags), uintptr(unsafe.Pointer(szSrcFileName)), uintptr(unsafe.Pointer(szDestFileName)), uintptr(unsafe.Pointer(szSrcDir)), uintptr(unsafe.Pointer(szDestDir)), uintptr(unsafe.Pointer(szCurDir)), uintptr(unsafe.Pointer(szTmpFile)), uintptr(unsafe.Pointer(puTmpFileLen)))
-	return VER_INSTALL_FILE_STATUS(r1)
+func VerLanguageName(wLang uint32, szLang foundation.PWSTR, cchLang uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procVerLanguageName.Addr(), uintptr(wLang), uintptr(unsafe.Pointer(szLang)), uintptr(cchLang))
+	return uint32(r1)
 }
 
 // VerLanguageNameA calls KERNEL32!VerLanguageNameA.
@@ -4327,105 +4553,109 @@ func VerLanguageNameA(wLang uint32, szLang foundation.PSTR, cchLang uint32) uint
 	return uint32(r1)
 }
 
-// VerLanguageNameW calls KERNEL32!VerLanguageNameW.
-// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verlanguagenamew
+// VerQueryValue calls VERSION!VerQueryValueW.
+// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verqueryvaluew
 // Minimum OS: windows5.0.
-func VerLanguageNameW(wLang uint32, szLang foundation.PWSTR, cchLang uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procVerLanguageNameW.Addr(), uintptr(wLang), uintptr(unsafe.Pointer(szLang)), uintptr(cchLang))
-	return uint32(r1)
+func VerQueryValue(pBlock unsafe.Pointer, lpSubBlock string, lplpBuffer *unsafe.Pointer, puLen *uint32) bool {
+	_lpSubBlock := win32.UTF16Ptr(lpSubBlock)
+	r1, _, _ := syscall.SyscallN(procVerQueryValue.Addr(), uintptr(unsafe.Pointer(pBlock)), uintptr(unsafe.Pointer(_lpSubBlock)), uintptr(unsafe.Pointer(lplpBuffer)), uintptr(unsafe.Pointer(puLen)))
+	return r1 != 0
 }
 
 // VerQueryValueA calls VERSION!VerQueryValueA.
 // https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verqueryvaluea
 // Minimum OS: windows5.0.
-func VerQueryValueA(pBlock unsafe.Pointer, lpSubBlock foundation.PSTR, lplpBuffer *unsafe.Pointer, puLen *uint32) foundation.BOOL {
+func VerQueryValueA(pBlock unsafe.Pointer, lpSubBlock foundation.PSTR, lplpBuffer *unsafe.Pointer, puLen *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procVerQueryValueA.Addr(), uintptr(unsafe.Pointer(pBlock)), uintptr(unsafe.Pointer(lpSubBlock)), uintptr(unsafe.Pointer(lplpBuffer)), uintptr(unsafe.Pointer(puLen)))
-	return foundation.BOOL(r1)
-}
-
-// VerQueryValueW calls VERSION!VerQueryValueW.
-// https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verqueryvaluew
-// Minimum OS: windows5.0.
-func VerQueryValueW(pBlock unsafe.Pointer, lpSubBlock foundation.PWSTR, lplpBuffer *unsafe.Pointer, puLen *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procVerQueryValueW.Addr(), uintptr(unsafe.Pointer(pBlock)), uintptr(unsafe.Pointer(lpSubBlock)), uintptr(unsafe.Pointer(lplpBuffer)), uintptr(unsafe.Pointer(puLen)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WofEnumEntries calls WOFUTIL!WofEnumEntries.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofenumentries
-func WofEnumEntries(VolumeName foundation.PWSTR, Provider uint32, EnumProc WofEnumEntryProc, UserData unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWofEnumEntries.Addr(), uintptr(unsafe.Pointer(VolumeName)), uintptr(Provider), uintptr(EnumProc), uintptr(unsafe.Pointer(UserData)))
-	return foundation.HRESULT(r1)
+func WofEnumEntries(VolumeName string, Provider uint32, EnumProc WofEnumEntryProc, UserData unsafe.Pointer) error {
+	_VolumeName := win32.UTF16Ptr(VolumeName)
+	r1, _, _ := syscall.SyscallN(procWofEnumEntries.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(Provider), uintptr(EnumProc), uintptr(unsafe.Pointer(UserData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WofFileEnumFiles calls WOFUTIL!WofFileEnumFiles.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-woffileenumfiles
-func WofFileEnumFiles(VolumeName foundation.PWSTR, Algorithm uint32, EnumProc WofEnumFilesProc, UserData unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWofFileEnumFiles.Addr(), uintptr(unsafe.Pointer(VolumeName)), uintptr(Algorithm), uintptr(EnumProc), uintptr(unsafe.Pointer(UserData)))
-	return foundation.HRESULT(r1)
+func WofFileEnumFiles(VolumeName string, Algorithm uint32, EnumProc WofEnumFilesProc, UserData unsafe.Pointer) error {
+	_VolumeName := win32.UTF16Ptr(VolumeName)
+	r1, _, _ := syscall.SyscallN(procWofFileEnumFiles.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(Algorithm), uintptr(EnumProc), uintptr(unsafe.Pointer(UserData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WofGetDriverVersion calls WOFUTIL!WofGetDriverVersion.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofgetdriverversion
-func WofGetDriverVersion(FileOrVolumeHandle foundation.HANDLE, Provider uint32, WofVersion *uint32) foundation.HRESULT {
+func WofGetDriverVersion(FileOrVolumeHandle foundation.HANDLE, Provider uint32, WofVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWofGetDriverVersion.Addr(), uintptr(FileOrVolumeHandle), uintptr(Provider), uintptr(unsafe.Pointer(WofVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WofIsExternalFile calls WOFUTIL!WofIsExternalFile.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofisexternalfile
-func WofIsExternalFile(FilePath foundation.PWSTR, IsExternalFile *foundation.BOOL, Provider *uint32, ExternalFileInfo unsafe.Pointer, BufferLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWofIsExternalFile.Addr(), uintptr(unsafe.Pointer(FilePath)), uintptr(unsafe.Pointer(IsExternalFile)), uintptr(unsafe.Pointer(Provider)), uintptr(unsafe.Pointer(ExternalFileInfo)), uintptr(unsafe.Pointer(BufferLength)))
-	return foundation.HRESULT(r1)
+func WofIsExternalFile(FilePath string, IsExternalFile *foundation.BOOL, Provider *uint32, ExternalFileInfo unsafe.Pointer, BufferLength *uint32) error {
+	_FilePath := win32.UTF16Ptr(FilePath)
+	r1, _, _ := syscall.SyscallN(procWofIsExternalFile.Addr(), uintptr(unsafe.Pointer(_FilePath)), uintptr(unsafe.Pointer(IsExternalFile)), uintptr(unsafe.Pointer(Provider)), uintptr(unsafe.Pointer(ExternalFileInfo)), uintptr(unsafe.Pointer(BufferLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WofSetFileDataLocation calls WOFUTIL!WofSetFileDataLocation.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofsetfiledatalocation
-func WofSetFileDataLocation(FileHandle foundation.HANDLE, Provider uint32, ExternalFileInfo unsafe.Pointer, Length uint32) foundation.HRESULT {
+func WofSetFileDataLocation(FileHandle foundation.HANDLE, Provider uint32, ExternalFileInfo unsafe.Pointer, Length uint32) error {
 	r1, _, _ := syscall.SyscallN(procWofSetFileDataLocation.Addr(), uintptr(FileHandle), uintptr(Provider), uintptr(unsafe.Pointer(ExternalFileInfo)), uintptr(Length))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WofShouldCompressBinaries calls WOFUTIL!WofShouldCompressBinaries.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofshouldcompressbinaries
-func WofShouldCompressBinaries(Volume foundation.PWSTR, Algorithm *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWofShouldCompressBinaries.Addr(), uintptr(unsafe.Pointer(Volume)), uintptr(unsafe.Pointer(Algorithm)))
-	return foundation.BOOL(r1)
+func WofShouldCompressBinaries(Volume string, Algorithm *uint32) bool {
+	_Volume := win32.UTF16Ptr(Volume)
+	r1, _, _ := syscall.SyscallN(procWofShouldCompressBinaries.Addr(), uintptr(unsafe.Pointer(_Volume)), uintptr(unsafe.Pointer(Algorithm)))
+	return r1 != 0
 }
 
 // WofWimAddEntry calls WOFUTIL!WofWimAddEntry.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofwimaddentry
-func WofWimAddEntry(VolumeName foundation.PWSTR, WimPath foundation.PWSTR, WimType uint32, WimIndex uint32, DataSourceId *int64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWofWimAddEntry.Addr(), uintptr(unsafe.Pointer(VolumeName)), uintptr(unsafe.Pointer(WimPath)), uintptr(WimType), uintptr(WimIndex), uintptr(unsafe.Pointer(DataSourceId)))
-	return foundation.HRESULT(r1)
+func WofWimAddEntry(VolumeName string, WimPath string, WimType uint32, WimIndex uint32, DataSourceId *int64) error {
+	_VolumeName := win32.UTF16Ptr(VolumeName)
+	_WimPath := win32.UTF16Ptr(WimPath)
+	r1, _, _ := syscall.SyscallN(procWofWimAddEntry.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(unsafe.Pointer(_WimPath)), uintptr(WimType), uintptr(WimIndex), uintptr(unsafe.Pointer(DataSourceId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WofWimEnumFiles calls WOFUTIL!WofWimEnumFiles.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofwimenumfiles
-func WofWimEnumFiles(VolumeName foundation.PWSTR, DataSourceId int64, EnumProc WofEnumFilesProc, UserData unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWofWimEnumFiles.Addr(), uintptr(unsafe.Pointer(VolumeName)), uintptr(DataSourceId), uintptr(EnumProc), uintptr(unsafe.Pointer(UserData)))
-	return foundation.HRESULT(r1)
+func WofWimEnumFiles(VolumeName string, DataSourceId int64, EnumProc WofEnumFilesProc, UserData unsafe.Pointer) error {
+	_VolumeName := win32.UTF16Ptr(VolumeName)
+	r1, _, _ := syscall.SyscallN(procWofWimEnumFiles.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(DataSourceId), uintptr(EnumProc), uintptr(unsafe.Pointer(UserData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WofWimRemoveEntry calls WOFUTIL!WofWimRemoveEntry.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofwimremoveentry
-func WofWimRemoveEntry(VolumeName foundation.PWSTR, DataSourceId int64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWofWimRemoveEntry.Addr(), uintptr(unsafe.Pointer(VolumeName)), uintptr(DataSourceId))
-	return foundation.HRESULT(r1)
+func WofWimRemoveEntry(VolumeName string, DataSourceId int64) error {
+	_VolumeName := win32.UTF16Ptr(VolumeName)
+	r1, _, _ := syscall.SyscallN(procWofWimRemoveEntry.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(DataSourceId))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WofWimSuspendEntry calls WOFUTIL!WofWimSuspendEntry.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofwimsuspendentry
-func WofWimSuspendEntry(VolumeName foundation.PWSTR, DataSourceId int64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWofWimSuspendEntry.Addr(), uintptr(unsafe.Pointer(VolumeName)), uintptr(DataSourceId))
-	return foundation.HRESULT(r1)
+func WofWimSuspendEntry(VolumeName string, DataSourceId int64) error {
+	_VolumeName := win32.UTF16Ptr(VolumeName)
+	r1, _, _ := syscall.SyscallN(procWofWimSuspendEntry.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(DataSourceId))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WofWimUpdateEntry calls WOFUTIL!WofWimUpdateEntry.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofwimupdateentry
-func WofWimUpdateEntry(VolumeName foundation.PWSTR, DataSourceId int64, NewWimPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWofWimUpdateEntry.Addr(), uintptr(unsafe.Pointer(VolumeName)), uintptr(DataSourceId), uintptr(unsafe.Pointer(NewWimPath)))
-	return foundation.HRESULT(r1)
+func WofWimUpdateEntry(VolumeName string, DataSourceId int64, NewWimPath string) error {
+	_VolumeName := win32.UTF16Ptr(VolumeName)
+	_NewWimPath := win32.UTF16Ptr(NewWimPath)
+	r1, _, _ := syscall.SyscallN(procWofWimUpdateEntry.Addr(), uintptr(unsafe.Pointer(_VolumeName)), uintptr(DataSourceId), uintptr(unsafe.Pointer(_NewWimPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Wow64DisableWow64FsRedirection calls KERNEL32!Wow64DisableWow64FsRedirection.
@@ -4491,8 +4721,8 @@ func WriteFileEx(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToWrite 
 // WriteFileGather calls KERNEL32!WriteFileGather.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-writefilegather
 // Minimum OS: windows5.1.2600.
-func WriteFileGather(hFile foundation.HANDLE, aSegmentArray *FILE_SEGMENT_ELEMENT, nNumberOfBytesToWrite uint32, lpReserved *uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWriteFileGather.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(aSegmentArray)), uintptr(nNumberOfBytesToWrite), uintptr(unsafe.Pointer(lpReserved)), uintptr(unsafe.Pointer(lpOverlapped)))
+func WriteFileGather(hFile foundation.HANDLE, aSegmentArray *FILE_SEGMENT_ELEMENT, nNumberOfBytesToWrite uint32, lpOverlapped *systemio.OVERLAPPED) error {
+	r1, _, e1 := syscall.SyscallN(procWriteFileGather.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(aSegmentArray)), uintptr(nNumberOfBytesToWrite), 0, uintptr(unsafe.Pointer(lpOverlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4513,7 +4743,8 @@ func WriteLogRestartArea(pvMarshal unsafe.Pointer, pvRestartBuffer unsafe.Pointe
 // WriteTapemark calls KERNEL32!WriteTapemark.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writetapemark
 // Minimum OS: windows5.1.2600.
-func WriteTapemark(hDevice foundation.HANDLE, dwTapemarkType TAPEMARK_TYPE, dwTapemarkCount uint32, bImmediate foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procWriteTapemark.Addr(), uintptr(hDevice), uintptr(dwTapemarkType), uintptr(dwTapemarkCount), uintptr(bImmediate))
+func WriteTapemark(hDevice foundation.HANDLE, dwTapemarkType TAPEMARK_TYPE, dwTapemarkCount uint32, bImmediate bool) uint32 {
+	_bImmediate := win32.Bool32(bImmediate)
+	r1, _, _ := syscall.SyscallN(procWriteTapemark.Addr(), uintptr(hDevice), uintptr(dwTapemarkType), uintptr(dwTapemarkCount), uintptr(_bImmediate))
 	return uint32(r1)
 }

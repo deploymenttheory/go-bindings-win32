@@ -27,13 +27,13 @@ var (
 	procAccessibleObjectFromEvent                = modOLEACC.NewProc("AccessibleObjectFromEvent")
 	procAccessibleObjectFromWindow               = modOLEACC.NewProc("AccessibleObjectFromWindow")
 	procCreateStdAccessibleObject                = modOLEACC.NewProc("CreateStdAccessibleObject")
+	procCreateStdAccessibleProxy                 = modOLEACC.NewProc("CreateStdAccessibleProxyW")
 	procCreateStdAccessibleProxyA                = modOLEACC.NewProc("CreateStdAccessibleProxyA")
-	procCreateStdAccessibleProxyW                = modOLEACC.NewProc("CreateStdAccessibleProxyW")
 	procGetOleaccVersionInfo                     = modOLEACC.NewProc("GetOleaccVersionInfo")
+	procGetRoleText                              = modOLEACC.NewProc("GetRoleTextW")
 	procGetRoleTextA                             = modOLEACC.NewProc("GetRoleTextA")
-	procGetRoleTextW                             = modOLEACC.NewProc("GetRoleTextW")
+	procGetStateText                             = modOLEACC.NewProc("GetStateTextW")
 	procGetStateTextA                            = modOLEACC.NewProc("GetStateTextA")
-	procGetStateTextW                            = modOLEACC.NewProc("GetStateTextW")
 	procLresultFromObject                        = modOLEACC.NewProc("LresultFromObject")
 	procObjectFromLresult                        = modOLEACC.NewProc("ObjectFromLresult")
 	procWindowFromAccessibleObject               = modOLEACC.NewProc("WindowFromAccessibleObject")
@@ -137,81 +137,86 @@ var (
 // AccSetRunningUtilityState calls OLEACC!AccSetRunningUtilityState.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accsetrunningutilitystate
 // Minimum OS: windows8.0.
-func AccSetRunningUtilityState(hwndApp foundation.HWND, dwUtilityStateMask uint32, dwUtilityState ACC_UTILITY_STATE_FLAGS) foundation.HRESULT {
+func AccSetRunningUtilityState(hwndApp foundation.HWND, dwUtilityStateMask uint32, dwUtilityState ACC_UTILITY_STATE_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(procAccSetRunningUtilityState.Addr(), uintptr(hwndApp), uintptr(dwUtilityStateMask), uintptr(dwUtilityState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AccessibleChildren calls OLEACC!AccessibleChildren.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accessiblechildren
 // Minimum OS: windows5.0.
-func AccessibleChildren(paccContainer *IAccessible, iChildStart int32, cChildren int32, rgvarChildren *systemvariant.VARIANT, pcObtained *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAccessibleChildren.Addr(), uintptr(unsafe.Pointer(paccContainer)), uintptr(iChildStart), uintptr(cChildren), uintptr(unsafe.Pointer(rgvarChildren)), uintptr(unsafe.Pointer(pcObtained)))
-	return foundation.HRESULT(r1)
+func AccessibleChildren(paccContainer *IAccessible, iChildStart int32, rgvarChildren []systemvariant.VARIANT, pcObtained *int32) error {
+	var _rgvarChildren *systemvariant.VARIANT
+	if len(rgvarChildren) > 0 {
+		_rgvarChildren = &rgvarChildren[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAccessibleChildren.Addr(), uintptr(unsafe.Pointer(paccContainer)), uintptr(iChildStart), uintptr(len(rgvarChildren)), uintptr(unsafe.Pointer(_rgvarChildren)), uintptr(unsafe.Pointer(pcObtained)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AccessibleObjectFromEvent calls OLEACC!AccessibleObjectFromEvent.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accessibleobjectfromevent
 // Minimum OS: windows5.0.
-func AccessibleObjectFromEvent(hwnd foundation.HWND, dwId uint32, dwChildId uint32, ppacc **IAccessible, pvarChild *systemvariant.VARIANT) foundation.HRESULT {
+func AccessibleObjectFromEvent(hwnd foundation.HWND, dwId uint32, dwChildId uint32, ppacc **IAccessible, pvarChild *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procAccessibleObjectFromEvent.Addr(), uintptr(hwnd), uintptr(dwId), uintptr(dwChildId), uintptr(unsafe.Pointer(ppacc)), uintptr(unsafe.Pointer(pvarChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AccessibleObjectFromWindow calls OLEACC!AccessibleObjectFromWindow.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accessibleobjectfromwindow
 // Minimum OS: windows5.0.
-func AccessibleObjectFromWindow(hwnd foundation.HWND, dwId uint32, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func AccessibleObjectFromWindow(hwnd foundation.HWND, dwId uint32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procAccessibleObjectFromWindow.Addr(), uintptr(hwnd), uintptr(dwId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStdAccessibleObject calls OLEACC!CreateStdAccessibleObject.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-createstdaccessibleobject
 // Minimum OS: windows5.0.
-func CreateStdAccessibleObject(hwnd foundation.HWND, idObject int32, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func CreateStdAccessibleObject(hwnd foundation.HWND, idObject int32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleObject.Addr(), uintptr(hwnd), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// CreateStdAccessibleProxy calls OLEACC!CreateStdAccessibleProxyW.
+// https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-createstdaccessibleproxyw
+// Minimum OS: windows5.0.
+func CreateStdAccessibleProxy(hwnd foundation.HWND, pClassName string, idObject int32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	_pClassName := win32.UTF16Ptr(pClassName)
+	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleProxy.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pClassName)), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStdAccessibleProxyA calls OLEACC!CreateStdAccessibleProxyA.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-createstdaccessibleproxya
 // Minimum OS: windows5.0.
-func CreateStdAccessibleProxyA(hwnd foundation.HWND, pClassName foundation.PSTR, idObject int32, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func CreateStdAccessibleProxyA(hwnd foundation.HWND, pClassName foundation.PSTR, idObject int32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleProxyA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pClassName)), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
-}
-
-// CreateStdAccessibleProxyW calls OLEACC!CreateStdAccessibleProxyW.
-// https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-createstdaccessibleproxyw
-// Minimum OS: windows5.0.
-func CreateStdAccessibleProxyW(hwnd foundation.HWND, pClassName foundation.PWSTR, idObject int32, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateStdAccessibleProxyW.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pClassName)), uintptr(idObject), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DockPattern_SetDockPosition calls UIAutomationCore!DockPattern_SetDockPosition.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-dockpattern_setdockposition
 // Minimum OS: windows5.1.2600.
-func DockPattern_SetDockPosition(hobj HUIAPATTERNOBJECT, dockPosition DockPosition) foundation.HRESULT {
+func DockPattern_SetDockPosition(hobj HUIAPATTERNOBJECT, dockPosition DockPosition) error {
 	r1, _, _ := syscall.SyscallN(procDockPattern_SetDockPosition.Addr(), uintptr(hobj), uintptr(dockPosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExpandCollapsePattern_Collapse calls UIAutomationCore!ExpandCollapsePattern_Collapse.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-expandcollapsepattern_collapse
 // Minimum OS: windows5.1.2600.
-func ExpandCollapsePattern_Collapse(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func ExpandCollapsePattern_Collapse(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procExpandCollapsePattern_Collapse.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExpandCollapsePattern_Expand calls UIAutomationCore!ExpandCollapsePattern_Expand.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-expandcollapsepattern_expand
 // Minimum OS: windows5.1.2600.
-func ExpandCollapsePattern_Expand(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func ExpandCollapsePattern_Expand(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procExpandCollapsePattern_Expand.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOleaccVersionInfo calls OLEACC!GetOleaccVersionInfo.
@@ -219,6 +224,17 @@ func ExpandCollapsePattern_Expand(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
 // Minimum OS: windows5.0.
 func GetOleaccVersionInfo(pVer *uint32, pBuild *uint32) {
 	syscall.SyscallN(procGetOleaccVersionInfo.Addr(), uintptr(unsafe.Pointer(pVer)), uintptr(unsafe.Pointer(pBuild)))
+}
+
+// GetRoleText calls OLEACC!GetRoleTextW.
+// https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-getroletextw
+// Minimum OS: windows5.0.
+func GetRoleText(lRole uint32, lpszRole foundation.PWSTR, cchRoleMax uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetRoleText.Addr(), uintptr(lRole), uintptr(unsafe.Pointer(lpszRole)), uintptr(cchRoleMax))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // GetRoleTextA calls OLEACC!GetRoleTextA.
@@ -232,11 +248,11 @@ func GetRoleTextA(lRole uint32, lpszRole foundation.PSTR, cchRoleMax uint32) (ui
 	return uint32(r1), nil
 }
 
-// GetRoleTextW calls OLEACC!GetRoleTextW.
-// https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-getroletextw
+// GetStateText calls OLEACC!GetStateTextW.
+// https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-getstatetextw
 // Minimum OS: windows5.0.
-func GetRoleTextW(lRole uint32, lpszRole foundation.PWSTR, cchRoleMax uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetRoleTextW.Addr(), uintptr(lRole), uintptr(unsafe.Pointer(lpszRole)), uintptr(cchRoleMax))
+func GetStateText(lStateBit uint32, lpszState foundation.PWSTR, cchState uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetStateText.Addr(), uintptr(lStateBit), uintptr(unsafe.Pointer(lpszState)), uintptr(cchState))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -254,71 +270,61 @@ func GetStateTextA(lStateBit uint32, lpszState foundation.PSTR, cchState uint32)
 	return uint32(r1), nil
 }
 
-// GetStateTextW calls OLEACC!GetStateTextW.
-// https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-getstatetextw
-// Minimum OS: windows5.0.
-func GetStateTextW(lStateBit uint32, lpszState foundation.PWSTR, cchState uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetStateTextW.Addr(), uintptr(lStateBit), uintptr(unsafe.Pointer(lpszState)), uintptr(cchState))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
 // GridPattern_GetItem calls UIAutomationCore!GridPattern_GetItem.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-gridpattern_getitem
 // Minimum OS: windows5.1.2600.
-func GridPattern_GetItem(hobj HUIAPATTERNOBJECT, row int32, column int32, pResult *HUIANODE) foundation.HRESULT {
+func GridPattern_GetItem(hobj HUIAPATTERNOBJECT, row int32, column int32, pResult *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procGridPattern_GetItem.Addr(), uintptr(hobj), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InvokePattern_Invoke calls UIAutomationCore!InvokePattern_Invoke.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-invokepattern_invoke
 // Minimum OS: windows5.1.2600.
-func InvokePattern_Invoke(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func InvokePattern_Invoke(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procInvokePattern_Invoke.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsWinEventHookInstalled calls USER32!IsWinEventHookInstalled.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-iswineventhookinstalled
 // Minimum OS: windows5.1.2600.
-func IsWinEventHookInstalled(event uint32) foundation.BOOL {
+func IsWinEventHookInstalled(event uint32) bool {
 	r1, _, _ := syscall.SyscallN(procIsWinEventHookInstalled.Addr(), uintptr(event))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LegacyIAccessiblePattern_DoDefaultAction calls UIAutomationCore!LegacyIAccessiblePattern_DoDefaultAction.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-legacyiaccessiblepattern_dodefaultaction
 // Minimum OS: windows6.1.
-func LegacyIAccessiblePattern_DoDefaultAction(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func LegacyIAccessiblePattern_DoDefaultAction(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_DoDefaultAction.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LegacyIAccessiblePattern_GetIAccessible calls UIAutomationCore!LegacyIAccessiblePattern_GetIAccessible.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-legacyiaccessiblepattern_getiaccessible
 // Minimum OS: windows6.1.
-func LegacyIAccessiblePattern_GetIAccessible(hobj HUIAPATTERNOBJECT, pAccessible **IAccessible) foundation.HRESULT {
+func LegacyIAccessiblePattern_GetIAccessible(hobj HUIAPATTERNOBJECT, pAccessible **IAccessible) error {
 	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_GetIAccessible.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pAccessible)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LegacyIAccessiblePattern_Select calls UIAutomationCore!LegacyIAccessiblePattern_Select.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-legacyiaccessiblepattern_select
 // Minimum OS: windows6.1.
-func LegacyIAccessiblePattern_Select(hobj HUIAPATTERNOBJECT, flagsSelect int32) foundation.HRESULT {
+func LegacyIAccessiblePattern_Select(hobj HUIAPATTERNOBJECT, flagsSelect int32) error {
 	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_Select.Addr(), uintptr(hobj), uintptr(flagsSelect))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LegacyIAccessiblePattern_SetValue calls UIAutomationCore!LegacyIAccessiblePattern_SetValue.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-legacyiaccessiblepattern_setvalue
 // Minimum OS: windows6.1.
-func LegacyIAccessiblePattern_SetValue(hobj HUIAPATTERNOBJECT, szValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_SetValue.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(szValue)))
-	return foundation.HRESULT(r1)
+func LegacyIAccessiblePattern_SetValue(hobj HUIAPATTERNOBJECT, szValue string) error {
+	_szValue := win32.UTF16Ptr(szValue)
+	r1, _, _ := syscall.SyscallN(procLegacyIAccessiblePattern_SetValue.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(_szValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LresultFromObject calls OLEACC!LresultFromObject.
@@ -332,17 +338,17 @@ func LresultFromObject(riid *win32.GUID, wParam foundation.WPARAM, punk *systemc
 // MultipleViewPattern_GetViewName calls UIAutomationCore!MultipleViewPattern_GetViewName.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-multipleviewpattern_getviewname
 // Minimum OS: windows5.1.2600.
-func MultipleViewPattern_GetViewName(hobj HUIAPATTERNOBJECT, viewId int32, ppStr *foundation.BSTR) foundation.HRESULT {
+func MultipleViewPattern_GetViewName(hobj HUIAPATTERNOBJECT, viewId int32, ppStr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procMultipleViewPattern_GetViewName.Addr(), uintptr(hobj), uintptr(viewId), uintptr(unsafe.Pointer(ppStr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MultipleViewPattern_SetCurrentView calls UIAutomationCore!MultipleViewPattern_SetCurrentView.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-multipleviewpattern_setcurrentview
 // Minimum OS: windows5.1.2600.
-func MultipleViewPattern_SetCurrentView(hobj HUIAPATTERNOBJECT, viewId int32) foundation.HRESULT {
+func MultipleViewPattern_SetCurrentView(hobj HUIAPATTERNOBJECT, viewId int32) error {
 	r1, _, _ := syscall.SyscallN(procMultipleViewPattern_SetCurrentView.Addr(), uintptr(hobj), uintptr(viewId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyWinEvent calls USER32!NotifyWinEvent.
@@ -355,9 +361,9 @@ func NotifyWinEvent(event uint32, hwnd foundation.HWND, idObject int32, idChild 
 // ObjectFromLresult calls OLEACC!ObjectFromLresult.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-objectfromlresult
 // Minimum OS: windows5.1.2600.
-func ObjectFromLresult(lResult foundation.LRESULT, riid *win32.GUID, wParam foundation.WPARAM, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func ObjectFromLresult(lResult foundation.LRESULT, riid *win32.GUID, wParam foundation.WPARAM, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procObjectFromLresult.Addr(), uintptr(lResult), uintptr(unsafe.Pointer(riid)), uintptr(wParam), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterPointerInputTarget calls USER32!RegisterPointerInputTarget.
@@ -374,49 +380,50 @@ func RegisterPointerInputTarget(hwnd foundation.HWND, pointerType uiwindowsandme
 // RegisterPointerInputTargetEx calls USER32!RegisterPointerInputTargetEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerpointerinputtargetex
 // Minimum OS: windows10.0.10240.
-func RegisterPointerInputTargetEx(hwnd foundation.HWND, pointerType uiwindowsandmessaging.POINTER_INPUT_TYPE, fObserve foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRegisterPointerInputTargetEx.Addr(), uintptr(hwnd), uintptr(pointerType), uintptr(fObserve))
-	return foundation.BOOL(r1)
+func RegisterPointerInputTargetEx(hwnd foundation.HWND, pointerType uiwindowsandmessaging.POINTER_INPUT_TYPE, fObserve bool) bool {
+	_fObserve := win32.Bool32(fObserve)
+	r1, _, _ := syscall.SyscallN(procRegisterPointerInputTargetEx.Addr(), uintptr(hwnd), uintptr(pointerType), uintptr(_fObserve))
+	return r1 != 0
 }
 
 // ScrollItemPattern_ScrollIntoView calls UIAutomationCore!ScrollItemPattern_ScrollIntoView.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-scrollitempattern_scrollintoview
 // Minimum OS: windows5.1.2600.
-func ScrollItemPattern_ScrollIntoView(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func ScrollItemPattern_ScrollIntoView(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procScrollItemPattern_ScrollIntoView.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScrollPattern_Scroll calls UIAutomationCore!ScrollPattern_Scroll.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-scrollpattern_scroll
 // Minimum OS: windows5.1.2600.
-func ScrollPattern_Scroll(hobj HUIAPATTERNOBJECT, horizontalAmount ScrollAmount, verticalAmount ScrollAmount) foundation.HRESULT {
+func ScrollPattern_Scroll(hobj HUIAPATTERNOBJECT, horizontalAmount ScrollAmount, verticalAmount ScrollAmount) error {
 	r1, _, _ := syscall.SyscallN(procScrollPattern_Scroll.Addr(), uintptr(hobj), uintptr(horizontalAmount), uintptr(verticalAmount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SelectionItemPattern_AddToSelection calls UIAutomationCore!SelectionItemPattern_AddToSelection.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-selectionitempattern_addtoselection
 // Minimum OS: windows5.1.2600.
-func SelectionItemPattern_AddToSelection(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func SelectionItemPattern_AddToSelection(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procSelectionItemPattern_AddToSelection.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SelectionItemPattern_RemoveFromSelection calls UIAutomationCore!SelectionItemPattern_RemoveFromSelection.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-selectionitempattern_removefromselection
 // Minimum OS: windows5.1.2600.
-func SelectionItemPattern_RemoveFromSelection(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func SelectionItemPattern_RemoveFromSelection(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procSelectionItemPattern_RemoveFromSelection.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SelectionItemPattern_Select calls UIAutomationCore!SelectionItemPattern_Select.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-selectionitempattern_select
 // Minimum OS: windows5.1.2600.
-func SelectionItemPattern_Select(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func SelectionItemPattern_Select(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procSelectionItemPattern_Select.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWinEventHook calls USER32!SetWinEventHook.
@@ -430,369 +437,372 @@ func SetWinEventHook(eventMin uint32, eventMax uint32, hmodWinEventProc foundati
 // SynchronizedInputPattern_Cancel calls UIAutomationCore!SynchronizedInputPattern_Cancel.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-synchronizedinputpattern_cancel
 // Minimum OS: windows6.1.
-func SynchronizedInputPattern_Cancel(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func SynchronizedInputPattern_Cancel(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procSynchronizedInputPattern_Cancel.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SynchronizedInputPattern_StartListening calls UIAutomationCore!SynchronizedInputPattern_StartListening.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-synchronizedinputpattern_startlistening
 // Minimum OS: windows6.1.
-func SynchronizedInputPattern_StartListening(hobj HUIAPATTERNOBJECT, inputType SynchronizedInputType) foundation.HRESULT {
+func SynchronizedInputPattern_StartListening(hobj HUIAPATTERNOBJECT, inputType SynchronizedInputType) error {
 	r1, _, _ := syscall.SyscallN(procSynchronizedInputPattern_StartListening.Addr(), uintptr(hobj), uintptr(inputType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextPattern_GetSelection calls UIAutomationCore!TextPattern_GetSelection.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textpattern_getselection
 // Minimum OS: windows5.1.2600.
-func TextPattern_GetSelection(hobj HUIAPATTERNOBJECT, pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
+func TextPattern_GetSelection(hobj HUIAPATTERNOBJECT, pRetVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_GetSelection.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextPattern_GetVisibleRanges calls UIAutomationCore!TextPattern_GetVisibleRanges.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textpattern_getvisibleranges
 // Minimum OS: windows5.1.2600.
-func TextPattern_GetVisibleRanges(hobj HUIAPATTERNOBJECT, pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
+func TextPattern_GetVisibleRanges(hobj HUIAPATTERNOBJECT, pRetVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_GetVisibleRanges.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextPattern_RangeFromChild calls UIAutomationCore!TextPattern_RangeFromChild.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textpattern_rangefromchild
 // Minimum OS: windows5.1.2600.
-func TextPattern_RangeFromChild(hobj HUIAPATTERNOBJECT, hnodeChild HUIANODE, pRetVal *HUIATEXTRANGE) foundation.HRESULT {
+func TextPattern_RangeFromChild(hobj HUIAPATTERNOBJECT, hnodeChild HUIANODE, pRetVal *HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_RangeFromChild.Addr(), uintptr(hobj), uintptr(hnodeChild), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextPattern_get_DocumentRange calls UIAutomationCore!TextPattern_get_DocumentRange.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textpattern_get_documentrange
 // Minimum OS: windows5.1.2600.
-func TextPattern_get_DocumentRange(hobj HUIAPATTERNOBJECT, pRetVal *HUIATEXTRANGE) foundation.HRESULT {
+func TextPattern_get_DocumentRange(hobj HUIAPATTERNOBJECT, pRetVal *HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_get_DocumentRange.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextPattern_get_SupportedTextSelection calls UIAutomationCore!TextPattern_get_SupportedTextSelection.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textpattern_get_supportedtextselection
 // Minimum OS: windows5.1.2600.
-func TextPattern_get_SupportedTextSelection(hobj HUIAPATTERNOBJECT, pRetVal *SupportedTextSelection) foundation.HRESULT {
+func TextPattern_get_SupportedTextSelection(hobj HUIAPATTERNOBJECT, pRetVal *SupportedTextSelection) error {
 	r1, _, _ := syscall.SyscallN(procTextPattern_get_SupportedTextSelection.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_AddToSelection calls UIAutomationCore!TextRange_AddToSelection.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_addtoselection
 // Minimum OS: windows5.1.2600.
-func TextRange_AddToSelection(hobj HUIATEXTRANGE) foundation.HRESULT {
+func TextRange_AddToSelection(hobj HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_AddToSelection.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_Clone calls UIAutomationCore!TextRange_Clone.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_clone
 // Minimum OS: windows5.1.2600.
-func TextRange_Clone(hobj HUIATEXTRANGE, pRetVal *HUIATEXTRANGE) foundation.HRESULT {
+func TextRange_Clone(hobj HUIATEXTRANGE, pRetVal *HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_Clone.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_Compare calls UIAutomationCore!TextRange_Compare.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_compare
 // Minimum OS: windows5.1.2600.
-func TextRange_Compare(hobj HUIATEXTRANGE, range_ HUIATEXTRANGE, pRetVal *foundation.BOOL) foundation.HRESULT {
+func TextRange_Compare(hobj HUIATEXTRANGE, range_ HUIATEXTRANGE, pRetVal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_Compare.Addr(), uintptr(hobj), uintptr(range_), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_CompareEndpoints calls UIAutomationCore!TextRange_CompareEndpoints.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_compareendpoints
 // Minimum OS: windows5.1.2600.
-func TextRange_CompareEndpoints(hobj HUIATEXTRANGE, endpoint TextPatternRangeEndpoint, targetRange HUIATEXTRANGE, targetEndpoint TextPatternRangeEndpoint, pRetVal *int32) foundation.HRESULT {
+func TextRange_CompareEndpoints(hobj HUIATEXTRANGE, endpoint TextPatternRangeEndpoint, targetRange HUIATEXTRANGE, targetEndpoint TextPatternRangeEndpoint, pRetVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_CompareEndpoints.Addr(), uintptr(hobj), uintptr(endpoint), uintptr(targetRange), uintptr(targetEndpoint), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_ExpandToEnclosingUnit calls UIAutomationCore!TextRange_ExpandToEnclosingUnit.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_expandtoenclosingunit
 // Minimum OS: windows5.1.2600.
-func TextRange_ExpandToEnclosingUnit(hobj HUIATEXTRANGE, unit TextUnit) foundation.HRESULT {
+func TextRange_ExpandToEnclosingUnit(hobj HUIATEXTRANGE, unit TextUnit) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_ExpandToEnclosingUnit.Addr(), uintptr(hobj), uintptr(unit))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_FindText calls UIAutomationCore!TextRange_FindText.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_findtext
 // Minimum OS: windows5.1.2600.
-func TextRange_FindText(hobj HUIATEXTRANGE, text foundation.BSTR, backward foundation.BOOL, ignoreCase foundation.BOOL, pRetVal *HUIATEXTRANGE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procTextRange_FindText.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(text)), uintptr(backward), uintptr(ignoreCase), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func TextRange_FindText(hobj HUIATEXTRANGE, text foundation.BSTR, backward bool, ignoreCase bool, pRetVal *HUIATEXTRANGE) error {
+	_backward := win32.Bool32(backward)
+	_ignoreCase := win32.Bool32(ignoreCase)
+	r1, _, _ := syscall.SyscallN(procTextRange_FindText.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(text)), uintptr(_backward), uintptr(_ignoreCase), uintptr(unsafe.Pointer(pRetVal)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_GetAttributeValue calls UIAutomationCore!TextRange_GetAttributeValue.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_getattributevalue
 // Minimum OS: windows5.1.2600.
-func TextRange_GetAttributeValue(hobj HUIATEXTRANGE, attributeId int32, pRetVal *systemvariant.VARIANT) foundation.HRESULT {
+func TextRange_GetAttributeValue(hobj HUIATEXTRANGE, attributeId int32, pRetVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetAttributeValue.Addr(), uintptr(hobj), uintptr(attributeId), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_GetBoundingRectangles calls UIAutomationCore!TextRange_GetBoundingRectangles.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_getboundingrectangles
 // Minimum OS: windows5.1.2600.
-func TextRange_GetBoundingRectangles(hobj HUIATEXTRANGE, pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
+func TextRange_GetBoundingRectangles(hobj HUIATEXTRANGE, pRetVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetBoundingRectangles.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_GetChildren calls UIAutomationCore!TextRange_GetChildren.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_getchildren
 // Minimum OS: windows5.1.2600.
-func TextRange_GetChildren(hobj HUIATEXTRANGE, pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
+func TextRange_GetChildren(hobj HUIATEXTRANGE, pRetVal **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetChildren.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_GetEnclosingElement calls UIAutomationCore!TextRange_GetEnclosingElement.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_getenclosingelement
 // Minimum OS: windows5.1.2600.
-func TextRange_GetEnclosingElement(hobj HUIATEXTRANGE, pRetVal *HUIANODE) foundation.HRESULT {
+func TextRange_GetEnclosingElement(hobj HUIATEXTRANGE, pRetVal *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetEnclosingElement.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_GetText calls UIAutomationCore!TextRange_GetText.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_gettext
 // Minimum OS: windows5.1.2600.
-func TextRange_GetText(hobj HUIATEXTRANGE, maxLength int32, pRetVal *foundation.BSTR) foundation.HRESULT {
+func TextRange_GetText(hobj HUIATEXTRANGE, maxLength int32, pRetVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_GetText.Addr(), uintptr(hobj), uintptr(maxLength), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_Move calls UIAutomationCore!TextRange_Move.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_move
 // Minimum OS: windows5.1.2600.
-func TextRange_Move(hobj HUIATEXTRANGE, unit TextUnit, count int32, pRetVal *int32) foundation.HRESULT {
+func TextRange_Move(hobj HUIATEXTRANGE, unit TextUnit, count int32, pRetVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_Move.Addr(), uintptr(hobj), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_MoveEndpointByRange calls UIAutomationCore!TextRange_MoveEndpointByRange.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_moveendpointbyrange
 // Minimum OS: windows5.1.2600.
-func TextRange_MoveEndpointByRange(hobj HUIATEXTRANGE, endpoint TextPatternRangeEndpoint, targetRange HUIATEXTRANGE, targetEndpoint TextPatternRangeEndpoint) foundation.HRESULT {
+func TextRange_MoveEndpointByRange(hobj HUIATEXTRANGE, endpoint TextPatternRangeEndpoint, targetRange HUIATEXTRANGE, targetEndpoint TextPatternRangeEndpoint) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_MoveEndpointByRange.Addr(), uintptr(hobj), uintptr(endpoint), uintptr(targetRange), uintptr(targetEndpoint))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_MoveEndpointByUnit calls UIAutomationCore!TextRange_MoveEndpointByUnit.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_moveendpointbyunit
 // Minimum OS: windows5.1.2600.
-func TextRange_MoveEndpointByUnit(hobj HUIATEXTRANGE, endpoint TextPatternRangeEndpoint, unit TextUnit, count int32, pRetVal *int32) foundation.HRESULT {
+func TextRange_MoveEndpointByUnit(hobj HUIATEXTRANGE, endpoint TextPatternRangeEndpoint, unit TextUnit, count int32, pRetVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_MoveEndpointByUnit.Addr(), uintptr(hobj), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_RemoveFromSelection calls UIAutomationCore!TextRange_RemoveFromSelection.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_removefromselection
 // Minimum OS: windows5.1.2600.
-func TextRange_RemoveFromSelection(hobj HUIATEXTRANGE) foundation.HRESULT {
+func TextRange_RemoveFromSelection(hobj HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_RemoveFromSelection.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_ScrollIntoView calls UIAutomationCore!TextRange_ScrollIntoView.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_scrollintoview
 // Minimum OS: windows5.1.2600.
-func TextRange_ScrollIntoView(hobj HUIATEXTRANGE, alignToTop foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procTextRange_ScrollIntoView.Addr(), uintptr(hobj), uintptr(alignToTop))
-	return foundation.HRESULT(r1)
+func TextRange_ScrollIntoView(hobj HUIATEXTRANGE, alignToTop bool) error {
+	_alignToTop := win32.Bool32(alignToTop)
+	r1, _, _ := syscall.SyscallN(procTextRange_ScrollIntoView.Addr(), uintptr(hobj), uintptr(_alignToTop))
+	return win32.HRESULTError(int32(r1))
 }
 
 // TextRange_Select calls UIAutomationCore!TextRange_Select.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_select
 // Minimum OS: windows5.1.2600.
-func TextRange_Select(hobj HUIATEXTRANGE) foundation.HRESULT {
+func TextRange_Select(hobj HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_Select.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TogglePattern_Toggle calls UIAutomationCore!TogglePattern_Toggle.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-togglepattern_toggle
 // Minimum OS: windows5.1.2600.
-func TogglePattern_Toggle(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func TogglePattern_Toggle(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procTogglePattern_Toggle.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaAddEvent calls UIAutomationCore!UiaAddEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaaddevent
 // Minimum OS: windows5.1.2600.
-func UiaAddEvent(hnode HUIANODE, eventId int32, pCallback *UiaEventCallback, scope TreeScope, pProperties *int32, cProperties int32, pRequest *UiaCacheRequest, phEvent *HUIAEVENT) foundation.HRESULT {
+func UiaAddEvent(hnode HUIANODE, eventId int32, pCallback *UiaEventCallback, scope TreeScope, pProperties *int32, cProperties int32, pRequest *UiaCacheRequest, phEvent *HUIAEVENT) error {
 	r1, _, _ := syscall.SyscallN(procUiaAddEvent.Addr(), uintptr(hnode), uintptr(eventId), uintptr(unsafe.Pointer(pCallback)), uintptr(scope), uintptr(unsafe.Pointer(pProperties)), uintptr(cProperties), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(phEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaClientsAreListening calls UIAutomationCore!UiaClientsAreListening.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaclientsarelistening
 // Minimum OS: windows5.1.2600.
-func UiaClientsAreListening() foundation.BOOL {
+func UiaClientsAreListening() bool {
 	r1, _, _ := syscall.SyscallN(procUiaClientsAreListening.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UiaDisconnectAllProviders calls UIAutomationCore!UiaDisconnectAllProviders.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiadisconnectallproviders
 // Minimum OS: windows8.0.
-func UiaDisconnectAllProviders() foundation.HRESULT {
+func UiaDisconnectAllProviders() error {
 	r1, _, _ := syscall.SyscallN(procUiaDisconnectAllProviders.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaDisconnectProvider calls UIAutomationCore!UiaDisconnectProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiadisconnectprovider
 // Minimum OS: windows8.0.
-func UiaDisconnectProvider(pProvider *IRawElementProviderSimple) foundation.HRESULT {
+func UiaDisconnectProvider(pProvider *IRawElementProviderSimple) error {
 	r1, _, _ := syscall.SyscallN(procUiaDisconnectProvider.Addr(), uintptr(unsafe.Pointer(pProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaEventAddWindow calls UIAutomationCore!UiaEventAddWindow.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaeventaddwindow
 // Minimum OS: windows5.1.2600.
-func UiaEventAddWindow(hEvent HUIAEVENT, hwnd foundation.HWND) foundation.HRESULT {
+func UiaEventAddWindow(hEvent HUIAEVENT, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procUiaEventAddWindow.Addr(), uintptr(hEvent), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaEventRemoveWindow calls UIAutomationCore!UiaEventRemoveWindow.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaeventremovewindow
 // Minimum OS: windows5.1.2600.
-func UiaEventRemoveWindow(hEvent HUIAEVENT, hwnd foundation.HWND) foundation.HRESULT {
+func UiaEventRemoveWindow(hEvent HUIAEVENT, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procUiaEventRemoveWindow.Addr(), uintptr(hEvent), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaFind calls UIAutomationCore!UiaFind.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiafind
 // Minimum OS: windows5.1.2600.
-func UiaFind(hnode HUIANODE, pParams *UiaFindParams, pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppOffsets **systemcom.SAFEARRAY, ppTreeStructures **systemcom.SAFEARRAY) foundation.HRESULT {
+func UiaFind(hnode HUIANODE, pParams *UiaFindParams, pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppOffsets **systemcom.SAFEARRAY, ppTreeStructures **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procUiaFind.Addr(), uintptr(hnode), uintptr(unsafe.Pointer(pParams)), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(ppRequestedData)), uintptr(unsafe.Pointer(ppOffsets)), uintptr(unsafe.Pointer(ppTreeStructures)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaGetErrorDescription calls UIAutomationCore!UiaGetErrorDescription.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiageterrordescription
 // Minimum OS: windows5.1.2600.
-func UiaGetErrorDescription(pDescription *foundation.BSTR) foundation.BOOL {
+func UiaGetErrorDescription(pDescription *foundation.BSTR) bool {
 	r1, _, _ := syscall.SyscallN(procUiaGetErrorDescription.Addr(), uintptr(unsafe.Pointer(pDescription)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UiaGetPatternProvider calls UIAutomationCore!UiaGetPatternProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiagetpatternprovider
 // Minimum OS: windows5.1.2600.
-func UiaGetPatternProvider(hnode HUIANODE, patternId int32, phobj *HUIAPATTERNOBJECT) foundation.HRESULT {
+func UiaGetPatternProvider(hnode HUIANODE, patternId int32, phobj *HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetPatternProvider.Addr(), uintptr(hnode), uintptr(patternId), uintptr(unsafe.Pointer(phobj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaGetPropertyValue calls UIAutomationCore!UiaGetPropertyValue.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiagetpropertyvalue
 // Minimum OS: windows5.1.2600.
-func UiaGetPropertyValue(hnode HUIANODE, propertyId int32, pValue *systemvariant.VARIANT) foundation.HRESULT {
+func UiaGetPropertyValue(hnode HUIANODE, propertyId int32, pValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetPropertyValue.Addr(), uintptr(hnode), uintptr(propertyId), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaGetReservedMixedAttributeValue calls UIAutomationCore!UiaGetReservedMixedAttributeValue.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiagetreservedmixedattributevalue
 // Minimum OS: windows5.1.2600.
-func UiaGetReservedMixedAttributeValue(punkMixedAttributeValue **systemcom.IUnknown) foundation.HRESULT {
+func UiaGetReservedMixedAttributeValue(punkMixedAttributeValue **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetReservedMixedAttributeValue.Addr(), uintptr(unsafe.Pointer(punkMixedAttributeValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaGetReservedNotSupportedValue calls UIAutomationCore!UiaGetReservedNotSupportedValue.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiagetreservednotsupportedvalue
 // Minimum OS: windows5.1.2600.
-func UiaGetReservedNotSupportedValue(punkNotSupportedValue **systemcom.IUnknown) foundation.HRESULT {
+func UiaGetReservedNotSupportedValue(punkNotSupportedValue **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetReservedNotSupportedValue.Addr(), uintptr(unsafe.Pointer(punkNotSupportedValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaGetRootNode calls UIAutomationCore!UiaGetRootNode.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiagetrootnode
 // Minimum OS: windows5.1.2600.
-func UiaGetRootNode(phnode *HUIANODE) foundation.HRESULT {
+func UiaGetRootNode(phnode *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetRootNode.Addr(), uintptr(unsafe.Pointer(phnode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaGetRuntimeId calls UIAutomationCore!UiaGetRuntimeId.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiagetruntimeid
 // Minimum OS: windows5.1.2600.
-func UiaGetRuntimeId(hnode HUIANODE, pruntimeId **systemcom.SAFEARRAY) foundation.HRESULT {
+func UiaGetRuntimeId(hnode HUIANODE, pruntimeId **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetRuntimeId.Addr(), uintptr(hnode), uintptr(unsafe.Pointer(pruntimeId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaGetUpdatedCache calls UIAutomationCore!UiaGetUpdatedCache.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiagetupdatedcache
 // Minimum OS: windows5.1.2600.
-func UiaGetUpdatedCache(hnode HUIANODE, pRequest *UiaCacheRequest, normalizeState NormalizeState, pNormalizeCondition *UiaCondition, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) foundation.HRESULT {
+func UiaGetUpdatedCache(hnode HUIANODE, pRequest *UiaCacheRequest, normalizeState NormalizeState, pNormalizeCondition *UiaCondition, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procUiaGetUpdatedCache.Addr(), uintptr(hnode), uintptr(unsafe.Pointer(pRequest)), uintptr(normalizeState), uintptr(unsafe.Pointer(pNormalizeCondition)), uintptr(unsafe.Pointer(ppRequestedData)), uintptr(unsafe.Pointer(ppTreeStructure)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaHPatternObjectFromVariant calls UIAutomationCore!UiaHPatternObjectFromVariant.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiahpatternobjectfromvariant
 // Minimum OS: windows5.1.2600.
-func UiaHPatternObjectFromVariant(pvar *systemvariant.VARIANT, phobj *HUIAPATTERNOBJECT) foundation.HRESULT {
+func UiaHPatternObjectFromVariant(pvar *systemvariant.VARIANT, phobj *HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procUiaHPatternObjectFromVariant.Addr(), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(phobj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaHTextRangeFromVariant calls UIAutomationCore!UiaHTextRangeFromVariant.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiahtextrangefromvariant
 // Minimum OS: windows5.1.2600.
-func UiaHTextRangeFromVariant(pvar *systemvariant.VARIANT, phtextrange *HUIATEXTRANGE) foundation.HRESULT {
+func UiaHTextRangeFromVariant(pvar *systemvariant.VARIANT, phtextrange *HUIATEXTRANGE) error {
 	r1, _, _ := syscall.SyscallN(procUiaHTextRangeFromVariant.Addr(), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(phtextrange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaHUiaNodeFromVariant calls UIAutomationCore!UiaHUiaNodeFromVariant.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiahuianodefromvariant
 // Minimum OS: windows5.1.2600.
-func UiaHUiaNodeFromVariant(pvar *systemvariant.VARIANT, phnode *HUIANODE) foundation.HRESULT {
+func UiaHUiaNodeFromVariant(pvar *systemvariant.VARIANT, phnode *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaHUiaNodeFromVariant.Addr(), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(phnode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaHasServerSideProvider calls UIAutomationCore!UiaHasServerSideProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiahasserversideprovider
 // Minimum OS: windows5.1.2600.
-func UiaHasServerSideProvider(hwnd foundation.HWND) foundation.BOOL {
+func UiaHasServerSideProvider(hwnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procUiaHasServerSideProvider.Addr(), uintptr(hwnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UiaHostProviderFromHwnd calls UIAutomationCore!UiaHostProviderFromHwnd.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiahostproviderfromhwnd
 // Minimum OS: windows5.1.2600.
-func UiaHostProviderFromHwnd(hwnd foundation.HWND, ppProvider **IRawElementProviderSimple) foundation.HRESULT {
+func UiaHostProviderFromHwnd(hwnd foundation.HWND, ppProvider **IRawElementProviderSimple) error {
 	r1, _, _ := syscall.SyscallN(procUiaHostProviderFromHwnd.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(ppProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaIAccessibleFromProvider calls UIAutomationCore!UiaIAccessibleFromProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaiaccessiblefromprovider
 // Minimum OS: windows8.0.
-func UiaIAccessibleFromProvider(pProvider *IRawElementProviderSimple, dwFlags uint32, ppAccessible **IAccessible, pvarChild *systemvariant.VARIANT) foundation.HRESULT {
+func UiaIAccessibleFromProvider(pProvider *IRawElementProviderSimple, dwFlags uint32, ppAccessible **IAccessible, pvarChild *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procUiaIAccessibleFromProvider.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAccessible)), uintptr(unsafe.Pointer(pvarChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaLookupId calls UIAutomationCore!UiaLookupId.
@@ -806,113 +816,113 @@ func UiaLookupId(type_ AutomationIdentifierType, pGuid *win32.GUID) int32 {
 // UiaNavigate calls UIAutomationCore!UiaNavigate.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uianavigate
 // Minimum OS: windows5.1.2600.
-func UiaNavigate(hnode HUIANODE, direction NavigateDirection, pCondition *UiaCondition, pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) foundation.HRESULT {
+func UiaNavigate(hnode HUIANODE, direction NavigateDirection, pCondition *UiaCondition, pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procUiaNavigate.Addr(), uintptr(hnode), uintptr(direction), uintptr(unsafe.Pointer(pCondition)), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(ppRequestedData)), uintptr(unsafe.Pointer(ppTreeStructure)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaNodeFromFocus calls UIAutomationCore!UiaNodeFromFocus.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uianodefromfocus
 // Minimum OS: windows5.1.2600.
-func UiaNodeFromFocus(pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) foundation.HRESULT {
+func UiaNodeFromFocus(pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procUiaNodeFromFocus.Addr(), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(ppRequestedData)), uintptr(unsafe.Pointer(ppTreeStructure)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaNodeFromHandle calls UIAutomationCore!UiaNodeFromHandle.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uianodefromhandle
 // Minimum OS: windows5.1.2600.
-func UiaNodeFromHandle(hwnd foundation.HWND, phnode *HUIANODE) foundation.HRESULT {
+func UiaNodeFromHandle(hwnd foundation.HWND, phnode *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaNodeFromHandle.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(phnode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaNodeFromProvider calls UIAutomationCore!UiaNodeFromProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uianodefromprovider
 // Minimum OS: windows5.1.2600.
-func UiaNodeFromProvider(pProvider *IRawElementProviderSimple, phnode *HUIANODE) foundation.HRESULT {
+func UiaNodeFromProvider(pProvider *IRawElementProviderSimple, phnode *HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaNodeFromProvider.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(unsafe.Pointer(phnode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaNodeRelease calls UIAutomationCore!UiaNodeRelease.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uianoderelease
 // Minimum OS: windows5.1.2600.
-func UiaNodeRelease(hnode HUIANODE) foundation.BOOL {
+func UiaNodeRelease(hnode HUIANODE) bool {
 	r1, _, _ := syscall.SyscallN(procUiaNodeRelease.Addr(), uintptr(hnode))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UiaPatternRelease calls UIAutomationCore!UiaPatternRelease.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiapatternrelease
 // Minimum OS: windows5.1.2600.
-func UiaPatternRelease(hobj HUIAPATTERNOBJECT) foundation.BOOL {
+func UiaPatternRelease(hobj HUIAPATTERNOBJECT) bool {
 	r1, _, _ := syscall.SyscallN(procUiaPatternRelease.Addr(), uintptr(hobj))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UiaProviderForNonClient calls UIAutomationCore!UiaProviderForNonClient.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaproviderfornonclient
 // Minimum OS: windows8.0.
-func UiaProviderForNonClient(hwnd foundation.HWND, idObject int32, idChild int32, ppProvider **IRawElementProviderSimple) foundation.HRESULT {
+func UiaProviderForNonClient(hwnd foundation.HWND, idObject int32, idChild int32, ppProvider **IRawElementProviderSimple) error {
 	r1, _, _ := syscall.SyscallN(procUiaProviderForNonClient.Addr(), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(ppProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaProviderFromIAccessible calls UIAutomationCore!UiaProviderFromIAccessible.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaproviderfromiaccessible
 // Minimum OS: windows8.0.
-func UiaProviderFromIAccessible(pAccessible *IAccessible, idChild int32, dwFlags uint32, ppProvider **IRawElementProviderSimple) foundation.HRESULT {
+func UiaProviderFromIAccessible(pAccessible *IAccessible, idChild int32, dwFlags uint32, ppProvider **IRawElementProviderSimple) error {
 	r1, _, _ := syscall.SyscallN(procUiaProviderFromIAccessible.Addr(), uintptr(unsafe.Pointer(pAccessible)), uintptr(idChild), uintptr(dwFlags), uintptr(unsafe.Pointer(ppProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaRaiseActiveTextPositionChangedEvent calls UIAutomationCore!UiaRaiseActiveTextPositionChangedEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraiseactivetextpositionchangedevent
 // Minimum OS: windows8.1.
-func UiaRaiseActiveTextPositionChangedEvent(provider *IRawElementProviderSimple, textRange *ITextRangeProvider) foundation.HRESULT {
+func UiaRaiseActiveTextPositionChangedEvent(provider *IRawElementProviderSimple, textRange *ITextRangeProvider) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseActiveTextPositionChangedEvent.Addr(), uintptr(unsafe.Pointer(provider)), uintptr(unsafe.Pointer(textRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaRaiseAutomationEvent calls UIAutomationCore!UiaRaiseAutomationEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraiseautomationevent
 // Minimum OS: windows5.1.2600.
-func UiaRaiseAutomationEvent(pProvider *IRawElementProviderSimple, id UIA_EVENT_ID) foundation.HRESULT {
+func UiaRaiseAutomationEvent(pProvider *IRawElementProviderSimple, id UIA_EVENT_ID) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseAutomationEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaRaiseChangesEvent calls UIAutomationCore!UiaRaiseChangesEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisechangesevent
 // Minimum OS: windows10.0.10240.
-func UiaRaiseChangesEvent(pProvider *IRawElementProviderSimple, eventIdCount int32, pUiaChanges *UiaChangeInfo) foundation.HRESULT {
+func UiaRaiseChangesEvent(pProvider *IRawElementProviderSimple, eventIdCount int32, pUiaChanges *UiaChangeInfo) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseChangesEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(eventIdCount), uintptr(unsafe.Pointer(pUiaChanges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaRaiseNotificationEvent calls UIAutomationCore!UiaRaiseNotificationEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisenotificationevent
 // Minimum OS: windows10.0.16299.
-func UiaRaiseNotificationEvent(provider *IRawElementProviderSimple, notificationKind NotificationKind, notificationProcessing NotificationProcessing, displayString foundation.BSTR, activityId foundation.BSTR) foundation.HRESULT {
+func UiaRaiseNotificationEvent(provider *IRawElementProviderSimple, notificationKind NotificationKind, notificationProcessing NotificationProcessing, displayString foundation.BSTR, activityId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseNotificationEvent.Addr(), uintptr(unsafe.Pointer(provider)), uintptr(notificationKind), uintptr(notificationProcessing), uintptr(unsafe.Pointer(displayString)), uintptr(unsafe.Pointer(activityId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaRaiseStructureChangedEvent calls UIAutomationCore!UiaRaiseStructureChangedEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisestructurechangedevent
 // Minimum OS: windows5.1.2600.
-func UiaRaiseStructureChangedEvent(pProvider *IRawElementProviderSimple, structureChangeType StructureChangeType, pRuntimeId *int32, cRuntimeIdLen int32) foundation.HRESULT {
+func UiaRaiseStructureChangedEvent(pProvider *IRawElementProviderSimple, structureChangeType StructureChangeType, pRuntimeId *int32, cRuntimeIdLen int32) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseStructureChangedEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(structureChangeType), uintptr(unsafe.Pointer(pRuntimeId)), uintptr(cRuntimeIdLen))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaRaiseTextEditTextChangedEvent calls UIAutomationCore!UiaRaiseTextEditTextChangedEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraisetextedittextchangedevent
 // Minimum OS: windows8.1.
-func UiaRaiseTextEditTextChangedEvent(pProvider *IRawElementProviderSimple, textEditChangeType TextEditChangeType, pChangedData *systemcom.SAFEARRAY) foundation.HRESULT {
+func UiaRaiseTextEditTextChangedEvent(pProvider *IRawElementProviderSimple, textEditChangeType TextEditChangeType, pChangedData *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseTextEditTextChangedEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(textEditChangeType), uintptr(unsafe.Pointer(pChangedData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaRegisterProviderCallback calls UIAutomationCore!UiaRegisterProviderCallback.
@@ -925,9 +935,9 @@ func UiaRegisterProviderCallback(pCallback *UiaProviderCallback) {
 // UiaRemoveEvent calls UIAutomationCore!UiaRemoveEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaremoveevent
 // Minimum OS: windows5.1.2600.
-func UiaRemoveEvent(hEvent HUIAEVENT) foundation.HRESULT {
+func UiaRemoveEvent(hEvent HUIAEVENT) error {
 	r1, _, _ := syscall.SyscallN(procUiaRemoveEvent.Addr(), uintptr(hEvent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaReturnRawElementProvider calls UIAutomationCore!UiaReturnRawElementProvider.
@@ -941,25 +951,25 @@ func UiaReturnRawElementProvider(hwnd foundation.HWND, wParam foundation.WPARAM,
 // UiaSetFocus calls UIAutomationCore!UiaSetFocus.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiasetfocus
 // Minimum OS: windows5.1.2600.
-func UiaSetFocus(hnode HUIANODE) foundation.HRESULT {
+func UiaSetFocus(hnode HUIANODE) error {
 	r1, _, _ := syscall.SyscallN(procUiaSetFocus.Addr(), uintptr(hnode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UiaTextRangeRelease calls UIAutomationCore!UiaTextRangeRelease.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiatextrangerelease
 // Minimum OS: windows5.1.2600.
-func UiaTextRangeRelease(hobj HUIATEXTRANGE) foundation.BOOL {
+func UiaTextRangeRelease(hobj HUIATEXTRANGE) bool {
 	r1, _, _ := syscall.SyscallN(procUiaTextRangeRelease.Addr(), uintptr(hobj))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UnhookWinEvent calls USER32!UnhookWinEvent.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-unhookwinevent
 // Minimum OS: windows5.0.
-func UnhookWinEvent(hWinEventHook HWINEVENTHOOK) foundation.BOOL {
+func UnhookWinEvent(hWinEventHook HWINEVENTHOOK) bool {
 	r1, _, _ := syscall.SyscallN(procUnhookWinEvent.Addr(), uintptr(hWinEventHook))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UnregisterPointerInputTarget calls USER32!UnregisterPointerInputTarget.
@@ -976,55 +986,56 @@ func UnregisterPointerInputTarget(hwnd foundation.HWND, pointerType uiwindowsand
 // UnregisterPointerInputTargetEx calls USER32!UnregisterPointerInputTargetEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-unregisterpointerinputtargetex
 // Minimum OS: windows10.0.10240.
-func UnregisterPointerInputTargetEx(hwnd foundation.HWND, pointerType uiwindowsandmessaging.POINTER_INPUT_TYPE) foundation.BOOL {
+func UnregisterPointerInputTargetEx(hwnd foundation.HWND, pointerType uiwindowsandmessaging.POINTER_INPUT_TYPE) bool {
 	r1, _, _ := syscall.SyscallN(procUnregisterPointerInputTargetEx.Addr(), uintptr(hwnd), uintptr(pointerType))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ValuePattern_SetValue calls UIAutomationCore!ValuePattern_SetValue.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-valuepattern_setvalue
 // Minimum OS: windows5.1.2600.
-func ValuePattern_SetValue(hobj HUIAPATTERNOBJECT, pVal foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procValuePattern_SetValue.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func ValuePattern_SetValue(hobj HUIAPATTERNOBJECT, pVal string) error {
+	_pVal := win32.UTF16Ptr(pVal)
+	r1, _, _ := syscall.SyscallN(procValuePattern_SetValue.Addr(), uintptr(hobj), uintptr(unsafe.Pointer(_pVal)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VirtualizedItemPattern_Realize calls UIAutomationCore!VirtualizedItemPattern_Realize.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-virtualizeditempattern_realize
 // Minimum OS: windows6.1.
-func VirtualizedItemPattern_Realize(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func VirtualizedItemPattern_Realize(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procVirtualizedItemPattern_Realize.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowFromAccessibleObject calls OLEACC!WindowFromAccessibleObject.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-windowfromaccessibleobject
 // Minimum OS: windows5.0.
-func WindowFromAccessibleObject(param0 *IAccessible, phwnd *foundation.HWND) foundation.HRESULT {
+func WindowFromAccessibleObject(param0 *IAccessible, phwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procWindowFromAccessibleObject.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(phwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowPattern_Close calls UIAutomationCore!WindowPattern_Close.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-windowpattern_close
 // Minimum OS: windows5.1.2600.
-func WindowPattern_Close(hobj HUIAPATTERNOBJECT) foundation.HRESULT {
+func WindowPattern_Close(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procWindowPattern_Close.Addr(), uintptr(hobj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowPattern_SetWindowVisualState calls UIAutomationCore!WindowPattern_SetWindowVisualState.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-windowpattern_setwindowvisualstate
 // Minimum OS: windows5.1.2600.
-func WindowPattern_SetWindowVisualState(hobj HUIAPATTERNOBJECT, state WindowVisualState) foundation.HRESULT {
+func WindowPattern_SetWindowVisualState(hobj HUIAPATTERNOBJECT, state WindowVisualState) error {
 	r1, _, _ := syscall.SyscallN(procWindowPattern_SetWindowVisualState.Addr(), uintptr(hobj), uintptr(state))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowPattern_WaitForInputIdle calls UIAutomationCore!WindowPattern_WaitForInputIdle.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-windowpattern_waitforinputidle
 // Minimum OS: windows5.1.2600.
-func WindowPattern_WaitForInputIdle(hobj HUIAPATTERNOBJECT, milliseconds int32, pResult *foundation.BOOL) foundation.HRESULT {
+func WindowPattern_WaitForInputIdle(hobj HUIAPATTERNOBJECT, milliseconds int32, pResult *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procWindowPattern_WaitForInputIdle.Addr(), uintptr(hobj), uintptr(milliseconds), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

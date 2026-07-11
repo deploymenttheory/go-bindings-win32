@@ -26,101 +26,113 @@ var (
 	procFaxAbort                      = modWINFAX.NewProc("FaxAbort")
 	procFaxAccessCheck                = modWINFAX.NewProc("FaxAccessCheck")
 	procFaxClose                      = modWINFAX.NewProc("FaxClose")
+	procFaxCompleteJobParams          = modWINFAX.NewProc("FaxCompleteJobParamsW")
 	procFaxCompleteJobParamsA         = modWINFAX.NewProc("FaxCompleteJobParamsA")
-	procFaxCompleteJobParamsW         = modWINFAX.NewProc("FaxCompleteJobParamsW")
+	procFaxConnectFaxServer           = modWINFAX.NewProc("FaxConnectFaxServerW")
 	procFaxConnectFaxServerA          = modWINFAX.NewProc("FaxConnectFaxServerA")
-	procFaxConnectFaxServerW          = modWINFAX.NewProc("FaxConnectFaxServerW")
+	procFaxEnableRoutingMethod        = modWINFAX.NewProc("FaxEnableRoutingMethodW")
 	procFaxEnableRoutingMethodA       = modWINFAX.NewProc("FaxEnableRoutingMethodA")
-	procFaxEnableRoutingMethodW       = modWINFAX.NewProc("FaxEnableRoutingMethodW")
+	procFaxEnumGlobalRoutingInfo      = modWINFAX.NewProc("FaxEnumGlobalRoutingInfoW")
 	procFaxEnumGlobalRoutingInfoA     = modWINFAX.NewProc("FaxEnumGlobalRoutingInfoA")
-	procFaxEnumGlobalRoutingInfoW     = modWINFAX.NewProc("FaxEnumGlobalRoutingInfoW")
+	procFaxEnumJobs                   = modWINFAX.NewProc("FaxEnumJobsW")
 	procFaxEnumJobsA                  = modWINFAX.NewProc("FaxEnumJobsA")
-	procFaxEnumJobsW                  = modWINFAX.NewProc("FaxEnumJobsW")
+	procFaxEnumPorts                  = modWINFAX.NewProc("FaxEnumPortsW")
 	procFaxEnumPortsA                 = modWINFAX.NewProc("FaxEnumPortsA")
-	procFaxEnumPortsW                 = modWINFAX.NewProc("FaxEnumPortsW")
+	procFaxEnumRoutingMethods         = modWINFAX.NewProc("FaxEnumRoutingMethodsW")
 	procFaxEnumRoutingMethodsA        = modWINFAX.NewProc("FaxEnumRoutingMethodsA")
-	procFaxEnumRoutingMethodsW        = modWINFAX.NewProc("FaxEnumRoutingMethodsW")
 	procFaxFreeBuffer                 = modWINFAX.NewProc("FaxFreeBuffer")
+	procFaxGetConfiguration           = modWINFAX.NewProc("FaxGetConfigurationW")
 	procFaxGetConfigurationA          = modWINFAX.NewProc("FaxGetConfigurationA")
-	procFaxGetConfigurationW          = modWINFAX.NewProc("FaxGetConfigurationW")
+	procFaxGetDeviceStatus            = modWINFAX.NewProc("FaxGetDeviceStatusW")
 	procFaxGetDeviceStatusA           = modWINFAX.NewProc("FaxGetDeviceStatusA")
-	procFaxGetDeviceStatusW           = modWINFAX.NewProc("FaxGetDeviceStatusW")
+	procFaxGetJob                     = modWINFAX.NewProc("FaxGetJobW")
 	procFaxGetJobA                    = modWINFAX.NewProc("FaxGetJobA")
-	procFaxGetJobW                    = modWINFAX.NewProc("FaxGetJobW")
+	procFaxGetLoggingCategories       = modWINFAX.NewProc("FaxGetLoggingCategoriesW")
 	procFaxGetLoggingCategoriesA      = modWINFAX.NewProc("FaxGetLoggingCategoriesA")
-	procFaxGetLoggingCategoriesW      = modWINFAX.NewProc("FaxGetLoggingCategoriesW")
 	procFaxGetPageData                = modWINFAX.NewProc("FaxGetPageData")
+	procFaxGetPort                    = modWINFAX.NewProc("FaxGetPortW")
 	procFaxGetPortA                   = modWINFAX.NewProc("FaxGetPortA")
-	procFaxGetPortW                   = modWINFAX.NewProc("FaxGetPortW")
+	procFaxGetRoutingInfo             = modWINFAX.NewProc("FaxGetRoutingInfoW")
 	procFaxGetRoutingInfoA            = modWINFAX.NewProc("FaxGetRoutingInfoA")
-	procFaxGetRoutingInfoW            = modWINFAX.NewProc("FaxGetRoutingInfoW")
 	procFaxInitializeEventQueue       = modWINFAX.NewProc("FaxInitializeEventQueue")
 	procFaxOpenPort                   = modWINFAX.NewProc("FaxOpenPort")
+	procFaxPrintCoverPage             = modWINFAX.NewProc("FaxPrintCoverPageW")
 	procFaxPrintCoverPageA            = modWINFAX.NewProc("FaxPrintCoverPageA")
-	procFaxPrintCoverPageW            = modWINFAX.NewProc("FaxPrintCoverPageW")
 	procFaxRegisterRoutingExtensionW  = modWINFAX.NewProc("FaxRegisterRoutingExtensionW")
 	procFaxRegisterServiceProviderW   = modWINFAX.NewProc("FaxRegisterServiceProviderW")
+	procFaxSendDocument               = modWINFAX.NewProc("FaxSendDocumentW")
 	procFaxSendDocumentA              = modWINFAX.NewProc("FaxSendDocumentA")
+	procFaxSendDocumentForBroadcast   = modWINFAX.NewProc("FaxSendDocumentForBroadcastW")
 	procFaxSendDocumentForBroadcastA  = modWINFAX.NewProc("FaxSendDocumentForBroadcastA")
-	procFaxSendDocumentForBroadcastW  = modWINFAX.NewProc("FaxSendDocumentForBroadcastW")
-	procFaxSendDocumentW              = modWINFAX.NewProc("FaxSendDocumentW")
+	procFaxSetConfiguration           = modWINFAX.NewProc("FaxSetConfigurationW")
 	procFaxSetConfigurationA          = modWINFAX.NewProc("FaxSetConfigurationA")
-	procFaxSetConfigurationW          = modWINFAX.NewProc("FaxSetConfigurationW")
+	procFaxSetGlobalRoutingInfo       = modWINFAX.NewProc("FaxSetGlobalRoutingInfoW")
 	procFaxSetGlobalRoutingInfoA      = modWINFAX.NewProc("FaxSetGlobalRoutingInfoA")
-	procFaxSetGlobalRoutingInfoW      = modWINFAX.NewProc("FaxSetGlobalRoutingInfoW")
+	procFaxSetJob                     = modWINFAX.NewProc("FaxSetJobW")
 	procFaxSetJobA                    = modWINFAX.NewProc("FaxSetJobA")
-	procFaxSetJobW                    = modWINFAX.NewProc("FaxSetJobW")
+	procFaxSetLoggingCategories       = modWINFAX.NewProc("FaxSetLoggingCategoriesW")
 	procFaxSetLoggingCategoriesA      = modWINFAX.NewProc("FaxSetLoggingCategoriesA")
-	procFaxSetLoggingCategoriesW      = modWINFAX.NewProc("FaxSetLoggingCategoriesW")
+	procFaxSetPort                    = modWINFAX.NewProc("FaxSetPortW")
 	procFaxSetPortA                   = modWINFAX.NewProc("FaxSetPortA")
-	procFaxSetPortW                   = modWINFAX.NewProc("FaxSetPortW")
+	procFaxSetRoutingInfo             = modWINFAX.NewProc("FaxSetRoutingInfoW")
 	procFaxSetRoutingInfoA            = modWINFAX.NewProc("FaxSetRoutingInfoA")
-	procFaxSetRoutingInfoW            = modWINFAX.NewProc("FaxSetRoutingInfoW")
+	procFaxStartPrintJob              = modWINFAX.NewProc("FaxStartPrintJobW")
 	procFaxStartPrintJobA             = modWINFAX.NewProc("FaxStartPrintJobA")
-	procFaxStartPrintJobW             = modWINFAX.NewProc("FaxStartPrintJobW")
 	procFaxUnregisterServiceProviderW = modWINFAX.NewProc("FaxUnregisterServiceProviderW")
 )
 
 // CanSendToFaxRecipient calls fxsutility!CanSendToFaxRecipient.
 // https://learn.microsoft.com/windows/win32/api/fxsutility/nf-fxsutility-cansendtofaxrecipient
 // Minimum OS: windows6.0.6000.
-func CanSendToFaxRecipient() foundation.BOOL {
+func CanSendToFaxRecipient() bool {
 	r1, _, _ := syscall.SyscallN(procCanSendToFaxRecipient.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FaxAbort calls WINFAX!FaxAbort.
-func FaxAbort(FaxHandle foundation.HANDLE, JobId uint32) foundation.BOOL {
+func FaxAbort(FaxHandle foundation.HANDLE, JobId uint32) bool {
 	r1, _, _ := syscall.SyscallN(procFaxAbort.Addr(), uintptr(FaxHandle), uintptr(JobId))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FaxAccessCheck calls WINFAX!FaxAccessCheck.
-func FaxAccessCheck(FaxHandle foundation.HANDLE, AccessMask uint32) foundation.BOOL {
+func FaxAccessCheck(FaxHandle foundation.HANDLE, AccessMask uint32) bool {
 	r1, _, _ := syscall.SyscallN(procFaxAccessCheck.Addr(), uintptr(FaxHandle), uintptr(AccessMask))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FaxClose calls WINFAX!FaxClose.
-func FaxClose(FaxHandle foundation.HANDLE) foundation.BOOL {
+func FaxClose(FaxHandle foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procFaxClose.Addr(), uintptr(FaxHandle))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// FaxCompleteJobParams calls WINFAX!FaxCompleteJobParamsW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxcompletejobparamsw
+// Minimum OS: windows5.0.
+func FaxCompleteJobParams(JobParams **FAX_JOB_PARAMW, CoverpageInfo **FAX_COVERPAGE_INFOW) bool {
+	r1, _, _ := syscall.SyscallN(procFaxCompleteJobParams.Addr(), uintptr(unsafe.Pointer(JobParams)), uintptr(unsafe.Pointer(CoverpageInfo)))
+	return r1 != 0
 }
 
 // FaxCompleteJobParamsA calls WINFAX!FaxCompleteJobParamsA.
 // https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxcompletejobparamsa
 // Minimum OS: windows5.0.
-func FaxCompleteJobParamsA(JobParams **FAX_JOB_PARAMA, CoverpageInfo **FAX_COVERPAGE_INFOA) foundation.BOOL {
+func FaxCompleteJobParamsA(JobParams **FAX_JOB_PARAMA, CoverpageInfo **FAX_COVERPAGE_INFOA) bool {
 	r1, _, _ := syscall.SyscallN(procFaxCompleteJobParamsA.Addr(), uintptr(unsafe.Pointer(JobParams)), uintptr(unsafe.Pointer(CoverpageInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// FaxCompleteJobParamsW calls WINFAX!FaxCompleteJobParamsW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxcompletejobparamsw
+// FaxConnectFaxServer calls WINFAX!FaxConnectFaxServerW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxconnectfaxserverw
 // Minimum OS: windows5.0.
-func FaxCompleteJobParamsW(JobParams **FAX_JOB_PARAMW, CoverpageInfo **FAX_COVERPAGE_INFOW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFaxCompleteJobParamsW.Addr(), uintptr(unsafe.Pointer(JobParams)), uintptr(unsafe.Pointer(CoverpageInfo)))
-	return foundation.BOOL(r1)
+func FaxConnectFaxServer(MachineName string, FaxHandle *foundation.HANDLE) error {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procFaxConnectFaxServer.Addr(), uintptr(unsafe.Pointer(_MachineName)), uintptr(unsafe.Pointer(FaxHandle)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // FaxConnectFaxServerA calls WINFAX!FaxConnectFaxServerA.
@@ -134,11 +146,13 @@ func FaxConnectFaxServerA(MachineName foundation.PSTR, FaxHandle *foundation.HAN
 	return nil
 }
 
-// FaxConnectFaxServerW calls WINFAX!FaxConnectFaxServerW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxconnectfaxserverw
+// FaxEnableRoutingMethod calls WINFAX!FaxEnableRoutingMethodW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenableroutingmethodw
 // Minimum OS: windows5.0.
-func FaxConnectFaxServerW(MachineName foundation.PWSTR, FaxHandle *foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procFaxConnectFaxServerW.Addr(), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(FaxHandle)))
+func FaxEnableRoutingMethod(FaxPortHandle foundation.HANDLE, RoutingGuid string, Enabled bool) error {
+	_RoutingGuid := win32.UTF16Ptr(RoutingGuid)
+	_Enabled := win32.Bool32(Enabled)
+	r1, _, e1 := syscall.SyscallN(procFaxEnableRoutingMethod.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(_RoutingGuid)), uintptr(_Enabled))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -148,19 +162,20 @@ func FaxConnectFaxServerW(MachineName foundation.PWSTR, FaxHandle *foundation.HA
 // FaxEnableRoutingMethodA calls WINFAX!FaxEnableRoutingMethodA.
 // https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenableroutingmethoda
 // Minimum OS: windows5.0.
-func FaxEnableRoutingMethodA(FaxPortHandle foundation.HANDLE, RoutingGuid foundation.PSTR, Enabled foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procFaxEnableRoutingMethodA.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(RoutingGuid)), uintptr(Enabled))
+func FaxEnableRoutingMethodA(FaxPortHandle foundation.HANDLE, RoutingGuid foundation.PSTR, Enabled bool) error {
+	_Enabled := win32.Bool32(Enabled)
+	r1, _, e1 := syscall.SyscallN(procFaxEnableRoutingMethodA.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(RoutingGuid)), uintptr(_Enabled))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// FaxEnableRoutingMethodW calls WINFAX!FaxEnableRoutingMethodW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenableroutingmethodw
+// FaxEnumGlobalRoutingInfo calls WINFAX!FaxEnumGlobalRoutingInfoW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenumglobalroutinginfow
 // Minimum OS: windows5.0.
-func FaxEnableRoutingMethodW(FaxPortHandle foundation.HANDLE, RoutingGuid foundation.PWSTR, Enabled foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procFaxEnableRoutingMethodW.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(RoutingGuid)), uintptr(Enabled))
+func FaxEnumGlobalRoutingInfo(FaxHandle foundation.HANDLE, RoutingInfo **FAX_GLOBAL_ROUTING_INFOW, MethodsReturned *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFaxEnumGlobalRoutingInfo.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(RoutingInfo)), uintptr(unsafe.Pointer(MethodsReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -178,11 +193,11 @@ func FaxEnumGlobalRoutingInfoA(FaxHandle foundation.HANDLE, RoutingInfo **FAX_GL
 	return nil
 }
 
-// FaxEnumGlobalRoutingInfoW calls WINFAX!FaxEnumGlobalRoutingInfoW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenumglobalroutinginfow
+// FaxEnumJobs calls WINFAX!FaxEnumJobsW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenumjobsw
 // Minimum OS: windows5.0.
-func FaxEnumGlobalRoutingInfoW(FaxHandle foundation.HANDLE, RoutingInfo **FAX_GLOBAL_ROUTING_INFOW, MethodsReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFaxEnumGlobalRoutingInfoW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(RoutingInfo)), uintptr(unsafe.Pointer(MethodsReturned)))
+func FaxEnumJobs(FaxHandle foundation.HANDLE, JobEntry **FAX_JOB_ENTRYW, JobsReturned *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFaxEnumJobs.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(JobEntry)), uintptr(unsafe.Pointer(JobsReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -200,11 +215,11 @@ func FaxEnumJobsA(FaxHandle foundation.HANDLE, JobEntry **FAX_JOB_ENTRYA, JobsRe
 	return nil
 }
 
-// FaxEnumJobsW calls WINFAX!FaxEnumJobsW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenumjobsw
+// FaxEnumPorts calls WINFAX!FaxEnumPortsW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenumportsw
 // Minimum OS: windows5.0.
-func FaxEnumJobsW(FaxHandle foundation.HANDLE, JobEntry **FAX_JOB_ENTRYW, JobsReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFaxEnumJobsW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(JobEntry)), uintptr(unsafe.Pointer(JobsReturned)))
+func FaxEnumPorts(FaxHandle foundation.HANDLE, PortInfo **FAX_PORT_INFOW, PortsReturned *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFaxEnumPorts.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(PortInfo)), uintptr(unsafe.Pointer(PortsReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -222,11 +237,11 @@ func FaxEnumPortsA(FaxHandle foundation.HANDLE, PortInfo **FAX_PORT_INFOA, Ports
 	return nil
 }
 
-// FaxEnumPortsW calls WINFAX!FaxEnumPortsW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenumportsw
+// FaxEnumRoutingMethods calls WINFAX!FaxEnumRoutingMethodsW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenumroutingmethodsw
 // Minimum OS: windows5.0.
-func FaxEnumPortsW(FaxHandle foundation.HANDLE, PortInfo **FAX_PORT_INFOW, PortsReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFaxEnumPortsW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(PortInfo)), uintptr(unsafe.Pointer(PortsReturned)))
+func FaxEnumRoutingMethods(FaxPortHandle foundation.HANDLE, RoutingMethod **FAX_ROUTING_METHODW, MethodsReturned *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFaxEnumRoutingMethods.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(RoutingMethod)), uintptr(unsafe.Pointer(MethodsReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -244,20 +259,20 @@ func FaxEnumRoutingMethodsA(FaxPortHandle foundation.HANDLE, RoutingMethod **FAX
 	return nil
 }
 
-// FaxEnumRoutingMethodsW calls WINFAX!FaxEnumRoutingMethodsW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxenumroutingmethodsw
+// FaxFreeBuffer calls WINFAX!FaxFreeBuffer.
+func FaxFreeBuffer(Buffer unsafe.Pointer) {
+	syscall.SyscallN(procFaxFreeBuffer.Addr(), uintptr(unsafe.Pointer(Buffer)))
+}
+
+// FaxGetConfiguration calls WINFAX!FaxGetConfigurationW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetconfigurationw
 // Minimum OS: windows5.0.
-func FaxEnumRoutingMethodsW(FaxPortHandle foundation.HANDLE, RoutingMethod **FAX_ROUTING_METHODW, MethodsReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFaxEnumRoutingMethodsW.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(RoutingMethod)), uintptr(unsafe.Pointer(MethodsReturned)))
+func FaxGetConfiguration(FaxHandle foundation.HANDLE, FaxConfig **FAX_CONFIGURATIONW) error {
+	r1, _, e1 := syscall.SyscallN(procFaxGetConfiguration.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(FaxConfig)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// FaxFreeBuffer calls WINFAX!FaxFreeBuffer.
-func FaxFreeBuffer(Buffer unsafe.Pointer) {
-	syscall.SyscallN(procFaxFreeBuffer.Addr(), uintptr(unsafe.Pointer(Buffer)))
 }
 
 // FaxGetConfigurationA calls WINFAX!FaxGetConfigurationA.
@@ -271,11 +286,11 @@ func FaxGetConfigurationA(FaxHandle foundation.HANDLE, FaxConfig **FAX_CONFIGURA
 	return nil
 }
 
-// FaxGetConfigurationW calls WINFAX!FaxGetConfigurationW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetconfigurationw
+// FaxGetDeviceStatus calls WINFAX!FaxGetDeviceStatusW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetdevicestatusw
 // Minimum OS: windows5.0.
-func FaxGetConfigurationW(FaxHandle foundation.HANDLE, FaxConfig **FAX_CONFIGURATIONW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxGetConfigurationW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(FaxConfig)))
+func FaxGetDeviceStatus(FaxPortHandle foundation.HANDLE, DeviceStatus **FAX_DEVICE_STATUSW) error {
+	r1, _, e1 := syscall.SyscallN(procFaxGetDeviceStatus.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(DeviceStatus)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -293,11 +308,11 @@ func FaxGetDeviceStatusA(FaxPortHandle foundation.HANDLE, DeviceStatus **FAX_DEV
 	return nil
 }
 
-// FaxGetDeviceStatusW calls WINFAX!FaxGetDeviceStatusW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetdevicestatusw
+// FaxGetJob calls WINFAX!FaxGetJobW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetjobw
 // Minimum OS: windows5.0.
-func FaxGetDeviceStatusW(FaxPortHandle foundation.HANDLE, DeviceStatus **FAX_DEVICE_STATUSW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxGetDeviceStatusW.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(DeviceStatus)))
+func FaxGetJob(FaxHandle foundation.HANDLE, JobId uint32, JobEntry **FAX_JOB_ENTRYW) error {
+	r1, _, e1 := syscall.SyscallN(procFaxGetJob.Addr(), uintptr(FaxHandle), uintptr(JobId), uintptr(unsafe.Pointer(JobEntry)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -315,11 +330,11 @@ func FaxGetJobA(FaxHandle foundation.HANDLE, JobId uint32, JobEntry **FAX_JOB_EN
 	return nil
 }
 
-// FaxGetJobW calls WINFAX!FaxGetJobW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetjobw
+// FaxGetLoggingCategories calls WINFAX!FaxGetLoggingCategoriesW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetloggingcategoriesw
 // Minimum OS: windows5.0.
-func FaxGetJobW(FaxHandle foundation.HANDLE, JobId uint32, JobEntry **FAX_JOB_ENTRYW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxGetJobW.Addr(), uintptr(FaxHandle), uintptr(JobId), uintptr(unsafe.Pointer(JobEntry)))
+func FaxGetLoggingCategories(FaxHandle foundation.HANDLE, Categories **FAX_LOG_CATEGORYW, NumberCategories *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFaxGetLoggingCategories.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(Categories)), uintptr(unsafe.Pointer(NumberCategories)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -337,21 +352,21 @@ func FaxGetLoggingCategoriesA(FaxHandle foundation.HANDLE, Categories **FAX_LOG_
 	return nil
 }
 
-// FaxGetLoggingCategoriesW calls WINFAX!FaxGetLoggingCategoriesW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetloggingcategoriesw
+// FaxGetPageData calls WINFAX!FaxGetPageData.
+func FaxGetPageData(FaxHandle foundation.HANDLE, JobId uint32, Buffer **byte, BufferSize *uint32, ImageWidth *uint32, ImageHeight *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procFaxGetPageData.Addr(), uintptr(FaxHandle), uintptr(JobId), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(ImageWidth)), uintptr(unsafe.Pointer(ImageHeight)))
+	return r1 != 0
+}
+
+// FaxGetPort calls WINFAX!FaxGetPortW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetportw
 // Minimum OS: windows5.0.
-func FaxGetLoggingCategoriesW(FaxHandle foundation.HANDLE, Categories **FAX_LOG_CATEGORYW, NumberCategories *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFaxGetLoggingCategoriesW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(Categories)), uintptr(unsafe.Pointer(NumberCategories)))
+func FaxGetPort(FaxPortHandle foundation.HANDLE, PortInfo **FAX_PORT_INFOW) error {
+	r1, _, e1 := syscall.SyscallN(procFaxGetPort.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(PortInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// FaxGetPageData calls WINFAX!FaxGetPageData.
-func FaxGetPageData(FaxHandle foundation.HANDLE, JobId uint32, Buffer **byte, BufferSize *uint32, ImageWidth *uint32, ImageHeight *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFaxGetPageData.Addr(), uintptr(FaxHandle), uintptr(JobId), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(ImageWidth)), uintptr(unsafe.Pointer(ImageHeight)))
-	return foundation.BOOL(r1)
 }
 
 // FaxGetPortA calls WINFAX!FaxGetPortA.
@@ -365,11 +380,12 @@ func FaxGetPortA(FaxPortHandle foundation.HANDLE, PortInfo **FAX_PORT_INFOA) err
 	return nil
 }
 
-// FaxGetPortW calls WINFAX!FaxGetPortW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetportw
+// FaxGetRoutingInfo calls WINFAX!FaxGetRoutingInfoW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetroutinginfow
 // Minimum OS: windows5.0.
-func FaxGetPortW(FaxPortHandle foundation.HANDLE, PortInfo **FAX_PORT_INFOW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxGetPortW.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(PortInfo)))
+func FaxGetRoutingInfo(FaxPortHandle foundation.HANDLE, RoutingGuid string, RoutingInfoBuffer **byte, RoutingInfoBufferSize *uint32) error {
+	_RoutingGuid := win32.UTF16Ptr(RoutingGuid)
+	r1, _, e1 := syscall.SyscallN(procFaxGetRoutingInfo.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(_RoutingGuid)), uintptr(unsafe.Pointer(RoutingInfoBuffer)), uintptr(unsafe.Pointer(RoutingInfoBufferSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -387,27 +403,27 @@ func FaxGetRoutingInfoA(FaxPortHandle foundation.HANDLE, RoutingGuid foundation.
 	return nil
 }
 
-// FaxGetRoutingInfoW calls WINFAX!FaxGetRoutingInfoW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxgetroutinginfow
+// FaxInitializeEventQueue calls WINFAX!FaxInitializeEventQueue.
+func FaxInitializeEventQueue(FaxHandle foundation.HANDLE, CompletionPort foundation.HANDLE, CompletionKey uintptr, hWnd foundation.HWND, MessageStart uint32) bool {
+	r1, _, _ := syscall.SyscallN(procFaxInitializeEventQueue.Addr(), uintptr(FaxHandle), uintptr(CompletionPort), uintptr(CompletionKey), uintptr(hWnd), uintptr(MessageStart))
+	return r1 != 0
+}
+
+// FaxOpenPort calls WINFAX!FaxOpenPort.
+func FaxOpenPort(FaxHandle foundation.HANDLE, DeviceId uint32, Flags uint32, FaxPortHandle *foundation.HANDLE) bool {
+	r1, _, _ := syscall.SyscallN(procFaxOpenPort.Addr(), uintptr(FaxHandle), uintptr(DeviceId), uintptr(Flags), uintptr(unsafe.Pointer(FaxPortHandle)))
+	return r1 != 0
+}
+
+// FaxPrintCoverPage calls WINFAX!FaxPrintCoverPageW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxprintcoverpagew
 // Minimum OS: windows5.0.
-func FaxGetRoutingInfoW(FaxPortHandle foundation.HANDLE, RoutingGuid foundation.PWSTR, RoutingInfoBuffer **byte, RoutingInfoBufferSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFaxGetRoutingInfoW.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(RoutingGuid)), uintptr(unsafe.Pointer(RoutingInfoBuffer)), uintptr(unsafe.Pointer(RoutingInfoBufferSize)))
+func FaxPrintCoverPage(FaxContextInfo *FAX_CONTEXT_INFOW, CoverPageInfo *FAX_COVERPAGE_INFOW) error {
+	r1, _, e1 := syscall.SyscallN(procFaxPrintCoverPage.Addr(), uintptr(unsafe.Pointer(FaxContextInfo)), uintptr(unsafe.Pointer(CoverPageInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// FaxInitializeEventQueue calls WINFAX!FaxInitializeEventQueue.
-func FaxInitializeEventQueue(FaxHandle foundation.HANDLE, CompletionPort foundation.HANDLE, CompletionKey uintptr, hWnd foundation.HWND, MessageStart uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFaxInitializeEventQueue.Addr(), uintptr(FaxHandle), uintptr(CompletionPort), uintptr(CompletionKey), uintptr(hWnd), uintptr(MessageStart))
-	return foundation.BOOL(r1)
-}
-
-// FaxOpenPort calls WINFAX!FaxOpenPort.
-func FaxOpenPort(FaxHandle foundation.HANDLE, DeviceId uint32, Flags uint32, FaxPortHandle *foundation.HANDLE) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFaxOpenPort.Addr(), uintptr(FaxHandle), uintptr(DeviceId), uintptr(Flags), uintptr(unsafe.Pointer(FaxPortHandle)))
-	return foundation.BOOL(r1)
 }
 
 // FaxPrintCoverPageA calls WINFAX!FaxPrintCoverPageA.
@@ -421,22 +437,14 @@ func FaxPrintCoverPageA(FaxContextInfo *FAX_CONTEXT_INFOA, CoverPageInfo *FAX_CO
 	return nil
 }
 
-// FaxPrintCoverPageW calls WINFAX!FaxPrintCoverPageW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxprintcoverpagew
-// Minimum OS: windows5.0.
-func FaxPrintCoverPageW(FaxContextInfo *FAX_CONTEXT_INFOW, CoverPageInfo *FAX_COVERPAGE_INFOW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxPrintCoverPageW.Addr(), uintptr(unsafe.Pointer(FaxContextInfo)), uintptr(unsafe.Pointer(CoverPageInfo)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // FaxRegisterRoutingExtensionW calls WINFAX!FaxRegisterRoutingExtensionW.
 // https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxregisterroutingextensionw
 // Minimum OS: windows5.0.
-func FaxRegisterRoutingExtensionW(FaxHandle foundation.HANDLE, ExtensionName foundation.PWSTR, FriendlyName foundation.PWSTR, ImageName foundation.PWSTR, CallBack PFAX_ROUTING_INSTALLATION_CALLBACKW, Context unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procFaxRegisterRoutingExtensionW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(ExtensionName)), uintptr(unsafe.Pointer(FriendlyName)), uintptr(unsafe.Pointer(ImageName)), uintptr(CallBack), uintptr(unsafe.Pointer(Context)))
+func FaxRegisterRoutingExtensionW(FaxHandle foundation.HANDLE, ExtensionName string, FriendlyName string, ImageName string, CallBack PFAX_ROUTING_INSTALLATION_CALLBACKW, Context unsafe.Pointer) error {
+	_ExtensionName := win32.UTF16Ptr(ExtensionName)
+	_FriendlyName := win32.UTF16Ptr(FriendlyName)
+	_ImageName := win32.UTF16Ptr(ImageName)
+	r1, _, e1 := syscall.SyscallN(procFaxRegisterRoutingExtensionW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(_ExtensionName)), uintptr(unsafe.Pointer(_FriendlyName)), uintptr(unsafe.Pointer(_ImageName)), uintptr(CallBack), uintptr(unsafe.Pointer(Context)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -446,8 +454,24 @@ func FaxRegisterRoutingExtensionW(FaxHandle foundation.HANDLE, ExtensionName fou
 // FaxRegisterServiceProviderW calls WINFAX!FaxRegisterServiceProviderW.
 // https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxregisterserviceproviderw
 // Minimum OS: windows5.0.
-func FaxRegisterServiceProviderW(DeviceProvider foundation.PWSTR, FriendlyName foundation.PWSTR, ImageName foundation.PWSTR, TspName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procFaxRegisterServiceProviderW.Addr(), uintptr(unsafe.Pointer(DeviceProvider)), uintptr(unsafe.Pointer(FriendlyName)), uintptr(unsafe.Pointer(ImageName)), uintptr(unsafe.Pointer(TspName)))
+func FaxRegisterServiceProviderW(DeviceProvider string, FriendlyName string, ImageName string, TspName string) error {
+	_DeviceProvider := win32.UTF16Ptr(DeviceProvider)
+	_FriendlyName := win32.UTF16Ptr(FriendlyName)
+	_ImageName := win32.UTF16Ptr(ImageName)
+	_TspName := win32.UTF16Ptr(TspName)
+	r1, _, e1 := syscall.SyscallN(procFaxRegisterServiceProviderW.Addr(), uintptr(unsafe.Pointer(_DeviceProvider)), uintptr(unsafe.Pointer(_FriendlyName)), uintptr(unsafe.Pointer(_ImageName)), uintptr(unsafe.Pointer(_TspName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// FaxSendDocument calls WINFAX!FaxSendDocumentW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsenddocumentw
+// Minimum OS: windows5.0.
+func FaxSendDocument(FaxHandle foundation.HANDLE, FileName string, JobParams *FAX_JOB_PARAMW, CoverpageInfo *FAX_COVERPAGE_INFOW, FaxJobId *uint32) error {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procFaxSendDocument.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(JobParams)), uintptr(unsafe.Pointer(CoverpageInfo)), uintptr(unsafe.Pointer(FaxJobId)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -465,6 +489,18 @@ func FaxSendDocumentA(FaxHandle foundation.HANDLE, FileName foundation.PSTR, Job
 	return nil
 }
 
+// FaxSendDocumentForBroadcast calls WINFAX!FaxSendDocumentForBroadcastW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsenddocumentforbroadcastw
+// Minimum OS: windows5.0.
+func FaxSendDocumentForBroadcast(FaxHandle foundation.HANDLE, FileName string, FaxJobId *uint32, FaxRecipientCallback PFAX_RECIPIENT_CALLBACKW, Context unsafe.Pointer) error {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procFaxSendDocumentForBroadcast.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(FaxJobId)), uintptr(FaxRecipientCallback), uintptr(unsafe.Pointer(Context)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // FaxSendDocumentForBroadcastA calls WINFAX!FaxSendDocumentForBroadcastA.
 // https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsenddocumentforbroadcasta
 // Minimum OS: windows5.0.
@@ -476,22 +512,11 @@ func FaxSendDocumentForBroadcastA(FaxHandle foundation.HANDLE, FileName foundati
 	return nil
 }
 
-// FaxSendDocumentForBroadcastW calls WINFAX!FaxSendDocumentForBroadcastW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsenddocumentforbroadcastw
+// FaxSetConfiguration calls WINFAX!FaxSetConfigurationW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetconfigurationw
 // Minimum OS: windows5.0.
-func FaxSendDocumentForBroadcastW(FaxHandle foundation.HANDLE, FileName foundation.PWSTR, FaxJobId *uint32, FaxRecipientCallback PFAX_RECIPIENT_CALLBACKW, Context unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procFaxSendDocumentForBroadcastW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(FaxJobId)), uintptr(FaxRecipientCallback), uintptr(unsafe.Pointer(Context)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// FaxSendDocumentW calls WINFAX!FaxSendDocumentW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsenddocumentw
-// Minimum OS: windows5.0.
-func FaxSendDocumentW(FaxHandle foundation.HANDLE, FileName foundation.PWSTR, JobParams *FAX_JOB_PARAMW, CoverpageInfo *FAX_COVERPAGE_INFOW, FaxJobId *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFaxSendDocumentW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(JobParams)), uintptr(unsafe.Pointer(CoverpageInfo)), uintptr(unsafe.Pointer(FaxJobId)))
+func FaxSetConfiguration(FaxHandle foundation.HANDLE, FaxConfig *FAX_CONFIGURATIONW) error {
+	r1, _, e1 := syscall.SyscallN(procFaxSetConfiguration.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(FaxConfig)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -509,11 +534,11 @@ func FaxSetConfigurationA(FaxHandle foundation.HANDLE, FaxConfig *FAX_CONFIGURAT
 	return nil
 }
 
-// FaxSetConfigurationW calls WINFAX!FaxSetConfigurationW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetconfigurationw
+// FaxSetGlobalRoutingInfo calls WINFAX!FaxSetGlobalRoutingInfoW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetglobalroutinginfow
 // Minimum OS: windows5.0.
-func FaxSetConfigurationW(FaxHandle foundation.HANDLE, FaxConfig *FAX_CONFIGURATIONW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxSetConfigurationW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(FaxConfig)))
+func FaxSetGlobalRoutingInfo(FaxHandle foundation.HANDLE, RoutingInfo *FAX_GLOBAL_ROUTING_INFOW) error {
+	r1, _, e1 := syscall.SyscallN(procFaxSetGlobalRoutingInfo.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(RoutingInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -531,11 +556,11 @@ func FaxSetGlobalRoutingInfoA(FaxHandle foundation.HANDLE, RoutingInfo *FAX_GLOB
 	return nil
 }
 
-// FaxSetGlobalRoutingInfoW calls WINFAX!FaxSetGlobalRoutingInfoW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetglobalroutinginfow
+// FaxSetJob calls WINFAX!FaxSetJobW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetjobw
 // Minimum OS: windows5.0.
-func FaxSetGlobalRoutingInfoW(FaxHandle foundation.HANDLE, RoutingInfo *FAX_GLOBAL_ROUTING_INFOW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxSetGlobalRoutingInfoW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(RoutingInfo)))
+func FaxSetJob(FaxHandle foundation.HANDLE, JobId uint32, Command uint32, JobEntry *FAX_JOB_ENTRYW) error {
+	r1, _, e1 := syscall.SyscallN(procFaxSetJob.Addr(), uintptr(FaxHandle), uintptr(JobId), uintptr(Command), uintptr(unsafe.Pointer(JobEntry)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -553,11 +578,11 @@ func FaxSetJobA(FaxHandle foundation.HANDLE, JobId uint32, Command uint32, JobEn
 	return nil
 }
 
-// FaxSetJobW calls WINFAX!FaxSetJobW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetjobw
+// FaxSetLoggingCategories calls WINFAX!FaxSetLoggingCategoriesW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetloggingcategoriesw
 // Minimum OS: windows5.0.
-func FaxSetJobW(FaxHandle foundation.HANDLE, JobId uint32, Command uint32, JobEntry *FAX_JOB_ENTRYW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxSetJobW.Addr(), uintptr(FaxHandle), uintptr(JobId), uintptr(Command), uintptr(unsafe.Pointer(JobEntry)))
+func FaxSetLoggingCategories(FaxHandle foundation.HANDLE, Categories *FAX_LOG_CATEGORYW, NumberCategories uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFaxSetLoggingCategories.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(Categories)), uintptr(NumberCategories))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -575,11 +600,11 @@ func FaxSetLoggingCategoriesA(FaxHandle foundation.HANDLE, Categories *FAX_LOG_C
 	return nil
 }
 
-// FaxSetLoggingCategoriesW calls WINFAX!FaxSetLoggingCategoriesW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetloggingcategoriesw
+// FaxSetPort calls WINFAX!FaxSetPortW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetportw
 // Minimum OS: windows5.0.
-func FaxSetLoggingCategoriesW(FaxHandle foundation.HANDLE, Categories *FAX_LOG_CATEGORYW, NumberCategories uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFaxSetLoggingCategoriesW.Addr(), uintptr(FaxHandle), uintptr(unsafe.Pointer(Categories)), uintptr(NumberCategories))
+func FaxSetPort(FaxPortHandle foundation.HANDLE, PortInfo *FAX_PORT_INFOW) error {
+	r1, _, e1 := syscall.SyscallN(procFaxSetPort.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(PortInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -597,11 +622,12 @@ func FaxSetPortA(FaxPortHandle foundation.HANDLE, PortInfo *FAX_PORT_INFOA) erro
 	return nil
 }
 
-// FaxSetPortW calls WINFAX!FaxSetPortW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetportw
+// FaxSetRoutingInfo calls WINFAX!FaxSetRoutingInfoW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetroutinginfow
 // Minimum OS: windows5.0.
-func FaxSetPortW(FaxPortHandle foundation.HANDLE, PortInfo *FAX_PORT_INFOW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxSetPortW.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(PortInfo)))
+func FaxSetRoutingInfo(FaxPortHandle foundation.HANDLE, RoutingGuid string, RoutingInfoBuffer *byte, RoutingInfoBufferSize uint32) error {
+	_RoutingGuid := win32.UTF16Ptr(RoutingGuid)
+	r1, _, e1 := syscall.SyscallN(procFaxSetRoutingInfo.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(_RoutingGuid)), uintptr(unsafe.Pointer(RoutingInfoBuffer)), uintptr(RoutingInfoBufferSize))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -619,11 +645,12 @@ func FaxSetRoutingInfoA(FaxPortHandle foundation.HANDLE, RoutingGuid foundation.
 	return nil
 }
 
-// FaxSetRoutingInfoW calls WINFAX!FaxSetRoutingInfoW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxsetroutinginfow
+// FaxStartPrintJob calls WINFAX!FaxStartPrintJobW.
+// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxstartprintjobw
 // Minimum OS: windows5.0.
-func FaxSetRoutingInfoW(FaxPortHandle foundation.HANDLE, RoutingGuid foundation.PWSTR, RoutingInfoBuffer *byte, RoutingInfoBufferSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFaxSetRoutingInfoW.Addr(), uintptr(FaxPortHandle), uintptr(unsafe.Pointer(RoutingGuid)), uintptr(unsafe.Pointer(RoutingInfoBuffer)), uintptr(RoutingInfoBufferSize))
+func FaxStartPrintJob(PrinterName string, PrintInfo *FAX_PRINT_INFOW, FaxJobId *uint32, FaxContextInfo *FAX_CONTEXT_INFOW) error {
+	_PrinterName := win32.UTF16Ptr(PrinterName)
+	r1, _, e1 := syscall.SyscallN(procFaxStartPrintJob.Addr(), uintptr(unsafe.Pointer(_PrinterName)), uintptr(unsafe.Pointer(PrintInfo)), uintptr(unsafe.Pointer(FaxJobId)), uintptr(unsafe.Pointer(FaxContextInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -641,33 +668,24 @@ func FaxStartPrintJobA(PrinterName foundation.PSTR, PrintInfo *FAX_PRINT_INFOA, 
 	return nil
 }
 
-// FaxStartPrintJobW calls WINFAX!FaxStartPrintJobW.
-// https://learn.microsoft.com/windows/win32/api/winfax/nf-winfax-faxstartprintjobw
-// Minimum OS: windows5.0.
-func FaxStartPrintJobW(PrinterName foundation.PWSTR, PrintInfo *FAX_PRINT_INFOW, FaxJobId *uint32, FaxContextInfo *FAX_CONTEXT_INFOW) error {
-	r1, _, e1 := syscall.SyscallN(procFaxStartPrintJobW.Addr(), uintptr(unsafe.Pointer(PrinterName)), uintptr(unsafe.Pointer(PrintInfo)), uintptr(unsafe.Pointer(FaxJobId)), uintptr(unsafe.Pointer(FaxContextInfo)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // FaxUnregisterServiceProviderW calls WINFAX!FaxUnregisterServiceProviderW.
-func FaxUnregisterServiceProviderW(DeviceProvider foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFaxUnregisterServiceProviderW.Addr(), uintptr(unsafe.Pointer(DeviceProvider)))
-	return foundation.BOOL(r1)
+func FaxUnregisterServiceProviderW(DeviceProvider string) bool {
+	_DeviceProvider := win32.UTF16Ptr(DeviceProvider)
+	r1, _, _ := syscall.SyscallN(procFaxUnregisterServiceProviderW.Addr(), uintptr(unsafe.Pointer(_DeviceProvider)))
+	return r1 != 0
 }
 
 // SendToFaxRecipient calls fxsutility!SendToFaxRecipient.
 // https://learn.microsoft.com/windows/win32/api/fxsutility/nf-fxsutility-sendtofaxrecipient
 // Minimum OS: windows6.0.6000.
-func SendToFaxRecipient(sndMode SendToMode, lpFileName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procSendToFaxRecipient.Addr(), uintptr(sndMode), uintptr(unsafe.Pointer(lpFileName)))
+func SendToFaxRecipient(sndMode SendToMode, lpFileName string) uint32 {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procSendToFaxRecipient.Addr(), uintptr(sndMode), uintptr(unsafe.Pointer(_lpFileName)))
 	return uint32(r1)
 }
 
 // StiCreateInstanceW calls STI!StiCreateInstanceW.
-func StiCreateInstanceW(hinst foundation.HINSTANCE, dwVer uint32, ppSti **IStillImageW, punkOuter *systemcom.IUnknown) foundation.HRESULT {
+func StiCreateInstanceW(hinst foundation.HINSTANCE, dwVer uint32, ppSti **IStillImageW, punkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procStiCreateInstanceW.Addr(), uintptr(hinst), uintptr(dwVer), uintptr(unsafe.Pointer(ppSti)), uintptr(unsafe.Pointer(punkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

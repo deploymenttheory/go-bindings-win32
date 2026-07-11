@@ -83,14 +83,22 @@ type ProcModel struct {
 	ExportName string
 }
 
-// Return-shape discriminants for FunctionModel.ReturnKind. The template
-// branches on these and nothing else.
+// Return-shape discriminants for FunctionModel.ReturnKind and
+// ComMethodModel.ReturnKind. The templates branch on these and nothing else.
 const (
 	RetVoid    = 0 // no return value
 	RetBoolErr = 1 // BOOL + SetLastError → error only
 	RetValErr  = 2 // value + SetLastError, known failure sentinels → (T, error)
 	RetVal     = 3 // plain value → T
 	RetValLast = 4 // value + SetLastError, unknown sentinel → (T, error); err advisory
+	// Idiomatic shapes added by the merged tier:
+	RetHResultErr = 5 // HRESULT → error
+	RetBoolValue  = 6 // plain BOOL (no SetLastError) → bool
+	// [out,retval] elevation: the elevated locals (ReturnValues) lead the
+	// return, then the status:
+	RetRetValHResult = 7 // HRESULT + elevated outs → (outs…, error)
+	RetRetValBoolErr = 8 // BOOL+SetLastError + elevated outs → (outs…, error)
+	RetRetValVoid    = 9 // void + elevated outs → (outs…)
 )
 
 // InterfaceModel is one COM interface: a pointer-sized struct dispatching
@@ -119,23 +127,33 @@ type ComMethodModel struct {
 	ParamStr     string
 	ReturnSig    string
 	// Slot is the absolute vtable index (base chain included).
-	Slot     int
+	Slot int
+	// Preamble holds statements that convert idiomatic params into raw
+	// syscall words (UTF-16, bool→BOOL, [out,retval] locals) before dispatch.
+	Preamble []string
 	ArgExprs []string
-	// ReturnKind reuses the Ret* constants (RetVoid / RetVal only: COM
-	// methods carry status in their HRESULT return, not GetLastError).
+	// ReturnKind selects the body shape (Ret* constants). COM methods use
+	// RetVoid, RetHResultErr, the RetRetVal* elevation shapes, or RetVal.
 	ReturnKind int
 	RetExpr    string
+	// ReturnValues are the elevated [out,retval] locals returned before the
+	// status (RetRetVal* shapes only).
+	ReturnValues []string
 }
 
 // FunctionModel is one flat DLL function, fully resolved for rendering.
 type FunctionModel struct {
 	CommentLines []string
 	GoName       string
-	// ParamStr is the complete parameter list ("a *foo.Bar, b uint32").
+	// ParamStr is the complete idiomatic parameter list ("name string, ...").
 	ParamStr string
 	// ReturnSig is the complete return signature ("(foundation.HANDLE, error)",
-	// "error", or "" for void).
+	// "error", "bool", or "" for void).
 	ReturnSig string
+	// Preamble holds statements that convert idiomatic params into raw
+	// syscall words (UTF-16, bool→BOOL, slice address-of, [out,retval]
+	// locals) before dispatch.
+	Preamble []string
 	// ProcVar is the proc variable dispatched through.
 	ProcVar string
 	// ArgExprs are the rendered SyscallN argument words.
@@ -147,4 +165,7 @@ type FunctionModel struct {
 	// FailureChecks are boolean expressions over `ret` that indicate
 	// failure ("ret == 0"); used by RetValErr.
 	FailureChecks []string
+	// ReturnValues are the elevated [out,retval] locals returned before the
+	// status (RetRetVal* shapes only).
+	ReturnValues []string
 }

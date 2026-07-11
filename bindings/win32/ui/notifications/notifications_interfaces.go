@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -23,7 +22,9 @@ type INotificationActivationCallback struct {
 var IID_INotificationActivationCallback = win32.GUID{Data1: 0x53e31837, Data2: 0x6600, Data3: 0x4a81, Data4: [8]byte{0x93, 0x95, 0x75, 0xcf, 0xfe, 0x74, 0x6f, 0x94}}
 
 // Activate dispatches through INotificationActivationCallback's vtable slot 3.
-func (self *INotificationActivationCallback) Activate(appUserModelId foundation.PWSTR, invokedArgs foundation.PWSTR, data *NOTIFICATION_USER_INPUT_DATA, count uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(appUserModelId)), uintptr(unsafe.Pointer(invokedArgs)), uintptr(unsafe.Pointer(data)), uintptr(count))
-	return foundation.HRESULT(r1)
+func (self *INotificationActivationCallback) Activate(appUserModelId string, invokedArgs string, data *NOTIFICATION_USER_INPUT_DATA, count uint32) error {
+	_appUserModelId := win32.UTF16Ptr(appUserModelId)
+	_invokedArgs := win32.UTF16Ptr(invokedArgs)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appUserModelId)), uintptr(unsafe.Pointer(_invokedArgs)), uintptr(unsafe.Pointer(data)), uintptr(count))
+	return win32.HRESULTError(int32(r1))
 }

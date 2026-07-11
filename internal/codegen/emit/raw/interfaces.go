@@ -12,7 +12,9 @@ import (
 )
 
 // buildInterfaceModels converts a namespace's COM interfaces into vtable
-// dispatch wrappers.
+// dispatch structs with idiomatic methods (HRESULT → error, [out,retval]
+// lifted to return values). The interface struct IS the COM object — obtain
+// one by casting a factory out-param; there is no wrapper.
 func (g *Generator) buildInterfaceModels(meta *win32meta.NamespaceMeta, imports typemap.ImportSet) []view.InterfaceModel {
 	names := make([]string, 0, len(meta.Interfaces))
 	for name := range meta.Interfaces {
@@ -43,9 +45,6 @@ func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName s
 		g.diag("interface %s: unresolvable base chain, skipped", name)
 		return view.InterfaceModel{}, false
 	}
-	// Record the interface as emitted (even with zero un-skipped methods) so
-	// the idiomatic tier can embed it as a base.
-	g.markInterfaceEmitted(meta.Namespace, goName)
 	model := view.InterfaceModel{
 		TypeName: goName,
 		DocURL:   comInterface.Availability.DocURL,
@@ -69,8 +68,8 @@ func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName s
 		}
 	}
 
-	// Base embedding: a severed or dangling base demotes the wrapper to a
-	// rootless vtable (slots stay correct; inherited methods unpromoted).
+	// Base embedding promotes the base's methods; a severed or dangling base
+	// demotes to a rootless vtable (slots stay correct, methods unpromoted).
 	if comInterface.BaseInterface != "" {
 		baseApi := comInterface.BaseInterfaceApi
 		blocked := baseApi != meta.Namespace && g.mapper.Blocked[meta.Namespace][baseApi]
@@ -103,66 +102,90 @@ func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName s
 		}
 		methodNames[methodModel.GoName] = true
 		model.Methods = append(model.Methods, methodModel)
-		g.recordComMethod(meta.Namespace, goName, i, methodModel.GoName)
 	}
 	return model, true
 }
 
-// markInterfaceEmitted records that an interface was emitted, initializing
-// its (possibly empty) method map.
-func (g *Generator) markInterfaceEmitted(namespace, interfaceName string) {
-	if g.emittedComMethods == nil {
-		g.emittedComMethods = map[string]map[int]string{}
-	}
-	key := namespace + "\x00" + interfaceName
-	if g.emittedComMethods[key] == nil {
-		g.emittedComMethods[key] = map[int]string{}
-	}
-}
-
-// recordComMethod stores the emitted Go name of interface method index i so
-// the idiomatic tier can call it by its exact (deduped) name.
-func (g *Generator) recordComMethod(namespace, interfaceName string, metaIndex int, goName string) {
-	g.markInterfaceEmitted(namespace, interfaceName)
-	g.emittedComMethods[namespace+"\x00"+interfaceName][metaIndex] = goName
-}
-
+// buildComMethod resolves one vtable method into an idiomatic render model:
+// Go-string/bool params, HRESULT → error, [out,retval] lifted to returns,
+// dispatched through the vtable slot.
 func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName string, method *win32meta.ComMethod, slot int, imports typemap.ImportSet) (view.ComMethodModel, bool) {
 	context := typemap.Context{Namespace: meta.Namespace}
-	trialImports := typemap.ImportSet{}
+	scratch := typemap.ImportSet{}
 
-	var paramDecls, argExprs []string
+	resolvedParams := make([]typemap.Resolved, len(method.Params))
+	for i := range method.Params {
+		resolvedParams[i] = g.mapper.GoType(&method.Params[i].Type, context, scratch)
+	}
+	returnContext := context
+	returnContext.IsReturn = true
+	returnResolved := g.mapper.GoType(&method.Return, returnContext, scratch)
+	// Elevation is viable when the status travels in the HRESULT return.
+	elevate := isHRESULT(returnResolved)
+
+	// Parameter names enter scope for the result types, so rename any that
+	// would shadow a type identifier used anywhere in the signature.
+	reserved := map[string]bool{}
+	for _, ident := range splitIdents(returnResolved.GoType) {
+		reserved[ident] = true
+	}
+	for i := range resolvedParams {
+		for _, ident := range splitIdents(resolvedParams[i].GoType) {
+			reserved[ident] = true
+		}
+	}
+	paramNames := make([]string, len(method.Params))
+	for i := range method.Params {
+		paramNames[i] = avoidCollision(naming.ParamName(method.Params[i].Name), reserved)
+	}
+
+	var decls, preamble, argWords, returnValues, returnTypes []string
 	for i := range method.Params {
 		param := &method.Params[i]
-		resolved := g.mapper.GoType(&param.Type, context, trialImports)
-		argClass := typemap.ArgClassOf(resolved, resolved.GoType)
-		if argClass == typemap.ArgUnsupported || resolved.Kind == typemap.KindVoid {
+		resolved := resolvedParams[i]
+
+		if elevate {
+			if element, ok := retValElement(param, resolved); ok {
+				local := "_" + paramNames[i]
+				preamble = append(preamble, "var "+local+" "+element)
+				argWords = append(argWords, "uintptr(unsafe.Pointer(&"+local+"))")
+				returnValues = append(returnValues, local)
+				returnTypes = append(returnTypes, element)
+				continue
+			}
+		}
+		decl, pre, word, _, ok := shapeParam(paramNames[i], param, resolved)
+		if !ok {
 			g.diag("interface %s: method %s param %s not marshalable (%s), method skipped",
 				interfaceName, method.Name, param.Name, resolved.GoType)
 			return view.ComMethodModel{}, false
 		}
-		paramName := naming.ParamName(param.Name)
-		paramDecls = append(paramDecls, paramName+" "+resolved.GoType)
-		if argClass == typemap.ArgPointer {
-			argExprs = append(argExprs, "uintptr(unsafe.Pointer("+paramName+"))")
-		} else {
-			argExprs = append(argExprs, "uintptr("+paramName+")")
+		if decl != "" {
+			decls = append(decls, decl)
 		}
+		preamble = append(preamble, pre...)
+		argWords = append(argWords, word)
 	}
 
-	returnContext := context
-	returnContext.IsReturn = true
-	returnResolved := g.mapper.GoType(&method.Return, returnContext, trialImports)
 	model := view.ComMethodModel{
 		GoName:   naming.Export(method.Name),
-		ParamStr: strings.Join(paramDecls, ", "),
+		ParamStr: strings.Join(decls, ", "),
 		Slot:     slot,
-		ArgExprs: argExprs,
+		Preamble: preamble,
+		ArgExprs: argWords,
 	}
-	switch returnResolved.Kind {
-	case typemap.KindVoid:
+	switch {
+	case isHRESULT(returnResolved) && len(returnValues) > 0:
+		model.ReturnKind = view.RetRetValHResult
+		model.ReturnValues = returnValues
+		model.ReturnSig = "(" + strings.Join(append(returnTypes, "error"), ", ") + ")"
+	case isHRESULT(returnResolved):
+		model.ReturnKind = view.RetHResultErr
+		model.ReturnSig = "error"
+	case returnResolved.Kind == typemap.KindVoid:
 		model.ReturnKind = view.RetVoid
-	case typemap.KindStruct, typemap.KindUnion, typemap.KindArray, typemap.KindGUID:
+	case returnResolved.Kind == typemap.KindStruct, returnResolved.Kind == typemap.KindUnion,
+		returnResolved.Kind == typemap.KindArray, returnResolved.Kind == typemap.KindGUID:
 		g.diag("interface %s: method %s by-value %s return not marshalable, method skipped",
 			interfaceName, method.Name, returnResolved.GoType)
 		return view.ComMethodModel{}, false
@@ -177,7 +200,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		model.RetExpr = returnConversion(returnResolved)
 	}
 
-	for alias, path := range trialImports {
+	for alias, path := range scratch {
 		imports[alias] = path
 	}
 	model.CommentLines = []string{fmt.Sprintf("%s dispatches through %s's vtable slot %d.", model.GoName, interfaceName, slot)}

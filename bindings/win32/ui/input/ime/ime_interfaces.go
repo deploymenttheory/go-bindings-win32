@@ -25,105 +25,114 @@ type IActiveIME struct {
 var IID_IActiveIME = win32.GUID{Data1: 0x6fe20962, Data2: 0xd077, Data3: 0x11d0, Data4: [8]byte{0x8f, 0xe7, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59}}
 
 // Inquire dispatches through IActiveIME's vtable slot 3.
-func (self *IActiveIME) Inquire(dwSystemInfoFlags uint32, pIMEInfo *IMEINFO, szWndClass foundation.PWSTR, pdwPrivate *uint32) foundation.HRESULT {
+func (self *IActiveIME) Inquire(dwSystemInfoFlags uint32, pIMEInfo *IMEINFO, szWndClass foundation.PWSTR, pdwPrivate *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSystemInfoFlags), uintptr(unsafe.Pointer(pIMEInfo)), uintptr(unsafe.Pointer(szWndClass)), uintptr(unsafe.Pointer(pdwPrivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConversionList dispatches through IActiveIME's vtable slot 4.
-func (self *IActiveIME) ConversionList(hIMC HIMC, szSource foundation.PWSTR, uFlag uint32, uBufLen uint32, pDest *CANDIDATELIST, puCopied *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(szSource)), uintptr(uFlag), uintptr(uBufLen), uintptr(unsafe.Pointer(pDest)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIME) ConversionList(hIMC HIMC, szSource string, uFlag uint32, uBufLen uint32, pDest *CANDIDATELIST, puCopied *uint32) error {
+	_szSource := win32.UTF16Ptr(szSource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(_szSource)), uintptr(uFlag), uintptr(uBufLen), uintptr(unsafe.Pointer(pDest)), uintptr(unsafe.Pointer(puCopied)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Configure dispatches through IActiveIME's vtable slot 5.
-func (self *IActiveIME) Configure(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pRegisterWord *REGISTERWORDW) foundation.HRESULT {
+func (self *IActiveIME) Configure(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pRegisterWord *REGISTERWORDW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hWnd), uintptr(dwMode), uintptr(unsafe.Pointer(pRegisterWord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Destroy dispatches through IActiveIME's vtable slot 6.
-func (self *IActiveIME) Destroy(uReserved uint32) foundation.HRESULT {
+func (self *IActiveIME) Destroy(uReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Escape dispatches through IActiveIME's vtable slot 7.
-func (self *IActiveIME) Escape(hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIME) Escape(hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(uEscape), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetActiveContext dispatches through IActiveIME's vtable slot 8.
-func (self *IActiveIME) SetActiveContext(hIMC HIMC, fFlag foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(fFlag))
-	return foundation.HRESULT(r1)
+func (self *IActiveIME) SetActiveContext(hIMC HIMC, fFlag bool) error {
+	_fFlag := win32.Bool32(fFlag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(_fFlag))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessKey dispatches through IActiveIME's vtable slot 9.
-func (self *IActiveIME) ProcessKey(hIMC HIMC, uVirKey uint32, lParam uint32, pbKeyState *byte) foundation.HRESULT {
+func (self *IActiveIME) ProcessKey(hIMC HIMC, uVirKey uint32, lParam uint32, pbKeyState *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(uVirKey), uintptr(lParam), uintptr(unsafe.Pointer(pbKeyState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Notify dispatches through IActiveIME's vtable slot 10.
-func (self *IActiveIME) Notify(hIMC HIMC, dwAction uint32, dwIndex uint32, dwValue uint32) foundation.HRESULT {
+func (self *IActiveIME) Notify(hIMC HIMC, dwAction uint32, dwIndex uint32, dwValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwAction), uintptr(dwIndex), uintptr(dwValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Select dispatches through IActiveIME's vtable slot 11.
-func (self *IActiveIME) Select(hIMC HIMC, fSelect foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(fSelect))
-	return foundation.HRESULT(r1)
+func (self *IActiveIME) Select(hIMC HIMC, fSelect bool) error {
+	_fSelect := win32.Bool32(fSelect)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(_fSelect))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionString dispatches through IActiveIME's vtable slot 12.
-func (self *IActiveIME) SetCompositionString(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) foundation.HRESULT {
+func (self *IActiveIME) SetCompositionString(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(unsafe.Pointer(pComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(pRead)), uintptr(dwReadLen))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ToAsciiEx dispatches through IActiveIME's vtable slot 13.
-func (self *IActiveIME) ToAsciiEx(uVirKey uint32, uScanCode uint32, pbKeyState *byte, fuState uint32, hIMC HIMC, pdwTransBuf *uint32, puSize *uint32) foundation.HRESULT {
+func (self *IActiveIME) ToAsciiEx(uVirKey uint32, uScanCode uint32, pbKeyState *byte, fuState uint32, hIMC HIMC, pdwTransBuf *uint32, puSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(uVirKey), uintptr(uScanCode), uintptr(unsafe.Pointer(pbKeyState)), uintptr(fuState), uintptr(hIMC), uintptr(unsafe.Pointer(pdwTransBuf)), uintptr(unsafe.Pointer(puSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterWord dispatches through IActiveIME's vtable slot 14.
-func (self *IActiveIME) RegisterWord(szReading foundation.PWSTR, dwStyle uint32, szString foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szString)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIME) RegisterWord(szReading string, dwStyle uint32, szString string) error {
+	_szReading := win32.UTF16Ptr(szReading)
+	_szString := win32.UTF16Ptr(szString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(_szString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterWord dispatches through IActiveIME's vtable slot 15.
-func (self *IActiveIME) UnregisterWord(szReading foundation.PWSTR, dwStyle uint32, szString foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szString)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIME) UnregisterWord(szReading string, dwStyle uint32, szString string) error {
+	_szReading := win32.UTF16Ptr(szReading)
+	_szString := win32.UTF16Ptr(szString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(_szString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegisterWordStyle dispatches through IActiveIME's vtable slot 16.
-func (self *IActiveIME) GetRegisterWordStyle(nItem uint32, pStyleBuf *STYLEBUFW, puBufSize *uint32) foundation.HRESULT {
+func (self *IActiveIME) GetRegisterWordStyle(nItem uint32, pStyleBuf *STYLEBUFW, puBufSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(nItem), uintptr(unsafe.Pointer(pStyleBuf)), uintptr(unsafe.Pointer(puBufSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumRegisterWord dispatches through IActiveIME's vtable slot 17.
-func (self *IActiveIME) EnumRegisterWord(szReading foundation.PWSTR, dwStyle uint32, szRegister foundation.PWSTR, pData unsafe.Pointer, ppEnum **IEnumRegisterWordW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szRegister)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIME) EnumRegisterWord(szReading string, dwStyle uint32, szRegister string, pData unsafe.Pointer, ppEnum **IEnumRegisterWordW) error {
+	_szReading := win32.UTF16Ptr(szReading)
+	_szRegister := win32.UTF16Ptr(szRegister)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(_szRegister)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(ppEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCodePageA dispatches through IActiveIME's vtable slot 18.
-func (self *IActiveIME) GetCodePageA(uCodePage *uint32) foundation.HRESULT {
+func (self *IActiveIME) GetCodePageA(uCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(uCodePage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLangId dispatches through IActiveIME's vtable slot 19.
-func (self *IActiveIME) GetLangId(plid *uint16) foundation.HRESULT {
+func (self *IActiveIME) GetLangId(plid *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e1c4bf0e-2d53-11d2-93e1-0060b067b86e
@@ -135,15 +144,16 @@ type IActiveIME2 struct {
 var IID_IActiveIME2 = win32.GUID{Data1: 0xe1c4bf0e, Data2: 0x2d53, Data3: 0x11d2, Data4: [8]byte{0x93, 0xe1, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e}}
 
 // Sleep dispatches through IActiveIME2's vtable slot 20.
-func (self *IActiveIME2) Sleep() foundation.HRESULT {
+func (self *IActiveIME2) Sleep() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unsleep dispatches through IActiveIME2's vtable slot 21.
-func (self *IActiveIME2) Unsleep(fDead foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(fDead))
-	return foundation.HRESULT(r1)
+func (self *IActiveIME2) Unsleep(fDead bool) error {
+	_fDead := win32.Bool32(fDead)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(_fDead))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 08c0e040-62d1-11d1-9326-0060b067b86e
@@ -155,411 +165,422 @@ type IActiveIMMApp struct {
 var IID_IActiveIMMApp = win32.GUID{Data1: 0x08c0e040, Data2: 0x62d1, Data3: 0x11d1, Data4: [8]byte{0x93, 0x26, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e}}
 
 // AssociateContext dispatches through IActiveIMMApp's vtable slot 3.
-func (self *IActiveIMMApp) AssociateContext(hWnd foundation.HWND, hIME HIMC, phPrev *HIMC) foundation.HRESULT {
+func (self *IActiveIMMApp) AssociateContext(hWnd foundation.HWND, hIME HIMC, phPrev *HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(hIME), uintptr(unsafe.Pointer(phPrev)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConfigureIMEA dispatches through IActiveIMMApp's vtable slot 4.
-func (self *IActiveIMMApp) ConfigureIMEA(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pData *REGISTERWORDA) foundation.HRESULT {
+func (self *IActiveIMMApp) ConfigureIMEA(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pData *REGISTERWORDA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hWnd), uintptr(dwMode), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConfigureIMEW dispatches through IActiveIMMApp's vtable slot 5.
-func (self *IActiveIMMApp) ConfigureIMEW(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pData *REGISTERWORDW) foundation.HRESULT {
+func (self *IActiveIMMApp) ConfigureIMEW(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pData *REGISTERWORDW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hWnd), uintptr(dwMode), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateContext dispatches through IActiveIMMApp's vtable slot 6.
-func (self *IActiveIMMApp) CreateContext(phIMC *HIMC) foundation.HRESULT {
+func (self *IActiveIMMApp) CreateContext(phIMC *HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phIMC)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroyContext dispatches through IActiveIMMApp's vtable slot 7.
-func (self *IActiveIMMApp) DestroyContext(hIME HIMC) foundation.HRESULT {
+func (self *IActiveIMMApp) DestroyContext(hIME HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hIME))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumRegisterWordA dispatches through IActiveIMMApp's vtable slot 8.
-func (self *IActiveIMMApp) EnumRegisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szRegister foundation.PSTR, pData unsafe.Pointer, pEnum **IEnumRegisterWordA) foundation.HRESULT {
+func (self *IActiveIMMApp) EnumRegisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szRegister foundation.PSTR, pData unsafe.Pointer, pEnum **IEnumRegisterWordA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szRegister)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumRegisterWordW dispatches through IActiveIMMApp's vtable slot 9.
-func (self *IActiveIMMApp) EnumRegisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PWSTR, dwStyle uint32, szRegister foundation.PWSTR, pData unsafe.Pointer, pEnum **IEnumRegisterWordW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szRegister)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pEnum)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMApp) EnumRegisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading string, dwStyle uint32, szRegister string, pData unsafe.Pointer, pEnum **IEnumRegisterWordW) error {
+	_szReading := win32.UTF16Ptr(szReading)
+	_szRegister := win32.UTF16Ptr(szRegister)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(_szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(_szRegister)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EscapeA dispatches through IActiveIMMApp's vtable slot 10.
-func (self *IActiveIMMApp) EscapeA(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIMMApp) EscapeA(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(uEscape), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EscapeW dispatches through IActiveIMMApp's vtable slot 11.
-func (self *IActiveIMMApp) EscapeW(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIMMApp) EscapeW(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(uEscape), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateListA dispatches through IActiveIMMApp's vtable slot 12.
-func (self *IActiveIMMApp) GetCandidateListA(hIMC HIMC, dwIndex uint32, uBufLen uint32, pCandList *CANDIDATELIST, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCandidateListA(hIMC HIMC, dwIndex uint32, uBufLen uint32, pCandList *CANDIDATELIST, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(uBufLen), uintptr(unsafe.Pointer(pCandList)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateListW dispatches through IActiveIMMApp's vtable slot 13.
-func (self *IActiveIMMApp) GetCandidateListW(hIMC HIMC, dwIndex uint32, uBufLen uint32, pCandList *CANDIDATELIST, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCandidateListW(hIMC HIMC, dwIndex uint32, uBufLen uint32, pCandList *CANDIDATELIST, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(uBufLen), uintptr(unsafe.Pointer(pCandList)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateListCountA dispatches through IActiveIMMApp's vtable slot 14.
-func (self *IActiveIMMApp) GetCandidateListCountA(hIMC HIMC, pdwListSize *uint32, pdwBufLen *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCandidateListCountA(hIMC HIMC, pdwListSize *uint32, pdwBufLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pdwListSize)), uintptr(unsafe.Pointer(pdwBufLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateListCountW dispatches through IActiveIMMApp's vtable slot 15.
-func (self *IActiveIMMApp) GetCandidateListCountW(hIMC HIMC, pdwListSize *uint32, pdwBufLen *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCandidateListCountW(hIMC HIMC, pdwListSize *uint32, pdwBufLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pdwListSize)), uintptr(unsafe.Pointer(pdwBufLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateWindow dispatches through IActiveIMMApp's vtable slot 16.
-func (self *IActiveIMMApp) GetCandidateWindow(hIMC HIMC, dwIndex uint32, pCandidate *CANDIDATEFORM) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCandidateWindow(hIMC HIMC, dwIndex uint32, pCandidate *CANDIDATEFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(unsafe.Pointer(pCandidate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionFontA dispatches through IActiveIMMApp's vtable slot 17.
-func (self *IActiveIMMApp) GetCompositionFontA(hIMC HIMC, plf *graphicsgdi.LOGFONTA) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCompositionFontA(hIMC HIMC, plf *graphicsgdi.LOGFONTA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(plf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionFontW dispatches through IActiveIMMApp's vtable slot 18.
-func (self *IActiveIMMApp) GetCompositionFontW(hIMC HIMC, plf *graphicsgdi.LOGFONTW) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCompositionFontW(hIMC HIMC, plf *graphicsgdi.LOGFONTW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(plf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionStringA dispatches through IActiveIMMApp's vtable slot 19.
-func (self *IActiveIMMApp) GetCompositionStringA(hIMC HIMC, dwIndex uint32, dwBufLen uint32, plCopied *int32, pBuf unsafe.Pointer) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCompositionStringA(hIMC HIMC, dwIndex uint32, dwBufLen uint32, plCopied *int32, pBuf unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(dwBufLen), uintptr(unsafe.Pointer(plCopied)), uintptr(unsafe.Pointer(pBuf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionStringW dispatches through IActiveIMMApp's vtable slot 20.
-func (self *IActiveIMMApp) GetCompositionStringW(hIMC HIMC, dwIndex uint32, dwBufLen uint32, plCopied *int32, pBuf unsafe.Pointer) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCompositionStringW(hIMC HIMC, dwIndex uint32, dwBufLen uint32, plCopied *int32, pBuf unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(dwBufLen), uintptr(unsafe.Pointer(plCopied)), uintptr(unsafe.Pointer(pBuf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionWindow dispatches through IActiveIMMApp's vtable slot 21.
-func (self *IActiveIMMApp) GetCompositionWindow(hIMC HIMC, pCompForm *COMPOSITIONFORM) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCompositionWindow(hIMC HIMC, pCompForm *COMPOSITIONFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pCompForm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContext dispatches through IActiveIMMApp's vtable slot 22.
-func (self *IActiveIMMApp) GetContext(hWnd foundation.HWND, phIMC *HIMC) foundation.HRESULT {
+func (self *IActiveIMMApp) GetContext(hWnd foundation.HWND, phIMC *HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(phIMC)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConversionListA dispatches through IActiveIMMApp's vtable slot 23.
-func (self *IActiveIMMApp) GetConversionListA(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, pSrc foundation.PSTR, uBufLen uint32, uFlag uint32, pDst *CANDIDATELIST, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetConversionListA(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, pSrc foundation.PSTR, uBufLen uint32, uFlag uint32, pDst *CANDIDATELIST, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(unsafe.Pointer(pSrc)), uintptr(uBufLen), uintptr(uFlag), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConversionListW dispatches through IActiveIMMApp's vtable slot 24.
-func (self *IActiveIMMApp) GetConversionListW(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, pSrc foundation.PWSTR, uBufLen uint32, uFlag uint32, pDst *CANDIDATELIST, puCopied *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(unsafe.Pointer(pSrc)), uintptr(uBufLen), uintptr(uFlag), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMApp) GetConversionListW(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, pSrc string, uBufLen uint32, uFlag uint32, pDst *CANDIDATELIST, puCopied *uint32) error {
+	_pSrc := win32.UTF16Ptr(pSrc)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(unsafe.Pointer(_pSrc)), uintptr(uBufLen), uintptr(uFlag), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(puCopied)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConversionStatus dispatches through IActiveIMMApp's vtable slot 25.
-func (self *IActiveIMMApp) GetConversionStatus(hIMC HIMC, pfdwConversion *uint32, pfdwSentence *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetConversionStatus(hIMC HIMC, pfdwConversion *uint32, pfdwSentence *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pfdwConversion)), uintptr(unsafe.Pointer(pfdwSentence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultIMEWnd dispatches through IActiveIMMApp's vtable slot 26.
-func (self *IActiveIMMApp) GetDefaultIMEWnd(hWnd foundation.HWND, phDefWnd *foundation.HWND) foundation.HRESULT {
+func (self *IActiveIMMApp) GetDefaultIMEWnd(hWnd foundation.HWND, phDefWnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(phDefWnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescriptionA dispatches through IActiveIMMApp's vtable slot 27.
-func (self *IActiveIMMApp) GetDescriptionA(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szDescription foundation.PSTR, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetDescriptionA(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szDescription foundation.PSTR, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(uBufLen), uintptr(unsafe.Pointer(szDescription)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescriptionW dispatches through IActiveIMMApp's vtable slot 28.
-func (self *IActiveIMMApp) GetDescriptionW(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szDescription foundation.PWSTR, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetDescriptionW(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szDescription foundation.PWSTR, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(uBufLen), uintptr(unsafe.Pointer(szDescription)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuideLineA dispatches through IActiveIMMApp's vtable slot 29.
-func (self *IActiveIMMApp) GetGuideLineA(hIMC HIMC, dwIndex uint32, dwBufLen uint32, pBuf foundation.PSTR, pdwResult *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetGuideLineA(hIMC HIMC, dwIndex uint32, dwBufLen uint32, pBuf foundation.PSTR, pdwResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(dwBufLen), uintptr(unsafe.Pointer(pBuf)), uintptr(unsafe.Pointer(pdwResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuideLineW dispatches through IActiveIMMApp's vtable slot 30.
-func (self *IActiveIMMApp) GetGuideLineW(hIMC HIMC, dwIndex uint32, dwBufLen uint32, pBuf foundation.PWSTR, pdwResult *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetGuideLineW(hIMC HIMC, dwIndex uint32, dwBufLen uint32, pBuf foundation.PWSTR, pdwResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(dwBufLen), uintptr(unsafe.Pointer(pBuf)), uintptr(unsafe.Pointer(pdwResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIMEFileNameA dispatches through IActiveIMMApp's vtable slot 31.
-func (self *IActiveIMMApp) GetIMEFileNameA(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szFileName foundation.PSTR, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetIMEFileNameA(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szFileName foundation.PSTR, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(uBufLen), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIMEFileNameW dispatches through IActiveIMMApp's vtable slot 32.
-func (self *IActiveIMMApp) GetIMEFileNameW(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szFileName foundation.PWSTR, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetIMEFileNameW(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szFileName foundation.PWSTR, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(uBufLen), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOpenStatus dispatches through IActiveIMMApp's vtable slot 33.
-func (self *IActiveIMMApp) GetOpenStatus(hIMC HIMC) foundation.HRESULT {
+func (self *IActiveIMMApp) GetOpenStatus(hIMC HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(hIMC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through IActiveIMMApp's vtable slot 34.
-func (self *IActiveIMMApp) GetProperty(hKL uiinputkeyboardandmouse.HKL, fdwIndex uint32, pdwProperty *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetProperty(hKL uiinputkeyboardandmouse.HKL, fdwIndex uint32, pdwProperty *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(fdwIndex), uintptr(unsafe.Pointer(pdwProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegisterWordStyleA dispatches through IActiveIMMApp's vtable slot 35.
-func (self *IActiveIMMApp) GetRegisterWordStyleA(hKL uiinputkeyboardandmouse.HKL, nItem uint32, pStyleBuf *STYLEBUFA, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetRegisterWordStyleA(hKL uiinputkeyboardandmouse.HKL, nItem uint32, pStyleBuf *STYLEBUFA, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(nItem), uintptr(unsafe.Pointer(pStyleBuf)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegisterWordStyleW dispatches through IActiveIMMApp's vtable slot 36.
-func (self *IActiveIMMApp) GetRegisterWordStyleW(hKL uiinputkeyboardandmouse.HKL, nItem uint32, pStyleBuf *STYLEBUFW, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetRegisterWordStyleW(hKL uiinputkeyboardandmouse.HKL, nItem uint32, pStyleBuf *STYLEBUFW, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(nItem), uintptr(unsafe.Pointer(pStyleBuf)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatusWindowPos dispatches through IActiveIMMApp's vtable slot 37.
-func (self *IActiveIMMApp) GetStatusWindowPos(hIMC HIMC, pptPos *foundation.POINT) foundation.HRESULT {
+func (self *IActiveIMMApp) GetStatusWindowPos(hIMC HIMC, pptPos *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pptPos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVirtualKey dispatches through IActiveIMMApp's vtable slot 38.
-func (self *IActiveIMMApp) GetVirtualKey(hWnd foundation.HWND, puVirtualKey *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetVirtualKey(hWnd foundation.HWND, puVirtualKey *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(puVirtualKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstallIMEA dispatches through IActiveIMMApp's vtable slot 39.
-func (self *IActiveIMMApp) InstallIMEA(szIMEFileName foundation.PSTR, szLayoutText foundation.PSTR, phKL *uiinputkeyboardandmouse.HKL) foundation.HRESULT {
+func (self *IActiveIMMApp) InstallIMEA(szIMEFileName foundation.PSTR, szLayoutText foundation.PSTR, phKL *uiinputkeyboardandmouse.HKL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szIMEFileName)), uintptr(unsafe.Pointer(szLayoutText)), uintptr(unsafe.Pointer(phKL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstallIMEW dispatches through IActiveIMMApp's vtable slot 40.
-func (self *IActiveIMMApp) InstallIMEW(szIMEFileName foundation.PWSTR, szLayoutText foundation.PWSTR, phKL *uiinputkeyboardandmouse.HKL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szIMEFileName)), uintptr(unsafe.Pointer(szLayoutText)), uintptr(unsafe.Pointer(phKL)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMApp) InstallIMEW(szIMEFileName string, szLayoutText string, phKL *uiinputkeyboardandmouse.HKL) error {
+	_szIMEFileName := win32.UTF16Ptr(szIMEFileName)
+	_szLayoutText := win32.UTF16Ptr(szLayoutText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szIMEFileName)), uintptr(unsafe.Pointer(_szLayoutText)), uintptr(unsafe.Pointer(phKL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsIME dispatches through IActiveIMMApp's vtable slot 41.
-func (self *IActiveIMMApp) IsIME(hKL uiinputkeyboardandmouse.HKL) foundation.HRESULT {
+func (self *IActiveIMMApp) IsIME(hKL uiinputkeyboardandmouse.HKL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(hKL))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsUIMessageA dispatches through IActiveIMMApp's vtable slot 42.
-func (self *IActiveIMMApp) IsUIMessageA(hWndIME foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *IActiveIMMApp) IsUIMessageA(hWndIME foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(hWndIME), uintptr(msg), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsUIMessageW dispatches through IActiveIMMApp's vtable slot 43.
-func (self *IActiveIMMApp) IsUIMessageW(hWndIME foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *IActiveIMMApp) IsUIMessageW(hWndIME foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(hWndIME), uintptr(msg), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyIME dispatches through IActiveIMMApp's vtable slot 44.
-func (self *IActiveIMMApp) NotifyIME(hIMC HIMC, dwAction uint32, dwIndex uint32, dwValue uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) NotifyIME(hIMC HIMC, dwAction uint32, dwIndex uint32, dwValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwAction), uintptr(dwIndex), uintptr(dwValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterWordA dispatches through IActiveIMMApp's vtable slot 45.
-func (self *IActiveIMMApp) RegisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szRegister foundation.PSTR) foundation.HRESULT {
+func (self *IActiveIMMApp) RegisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szRegister foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szRegister)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterWordW dispatches through IActiveIMMApp's vtable slot 46.
-func (self *IActiveIMMApp) RegisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PWSTR, dwStyle uint32, szRegister foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szRegister)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMApp) RegisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading string, dwStyle uint32, szRegister string) error {
+	_szReading := win32.UTF16Ptr(szReading)
+	_szRegister := win32.UTF16Ptr(szRegister)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(_szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(_szRegister)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseContext dispatches through IActiveIMMApp's vtable slot 47.
-func (self *IActiveIMMApp) ReleaseContext(hWnd foundation.HWND, hIMC HIMC) foundation.HRESULT {
+func (self *IActiveIMMApp) ReleaseContext(hWnd foundation.HWND, hIMC HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(hIMC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCandidateWindow dispatches through IActiveIMMApp's vtable slot 48.
-func (self *IActiveIMMApp) SetCandidateWindow(hIMC HIMC, pCandidate *CANDIDATEFORM) foundation.HRESULT {
+func (self *IActiveIMMApp) SetCandidateWindow(hIMC HIMC, pCandidate *CANDIDATEFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pCandidate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionFontA dispatches through IActiveIMMApp's vtable slot 49.
-func (self *IActiveIMMApp) SetCompositionFontA(hIMC HIMC, plf *graphicsgdi.LOGFONTA) foundation.HRESULT {
+func (self *IActiveIMMApp) SetCompositionFontA(hIMC HIMC, plf *graphicsgdi.LOGFONTA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(plf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionFontW dispatches through IActiveIMMApp's vtable slot 50.
-func (self *IActiveIMMApp) SetCompositionFontW(hIMC HIMC, plf *graphicsgdi.LOGFONTW) foundation.HRESULT {
+func (self *IActiveIMMApp) SetCompositionFontW(hIMC HIMC, plf *graphicsgdi.LOGFONTW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(plf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionStringA dispatches through IActiveIMMApp's vtable slot 51.
-func (self *IActiveIMMApp) SetCompositionStringA(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) SetCompositionStringA(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(unsafe.Pointer(pComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(pRead)), uintptr(dwReadLen))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionStringW dispatches through IActiveIMMApp's vtable slot 52.
-func (self *IActiveIMMApp) SetCompositionStringW(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) SetCompositionStringW(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(unsafe.Pointer(pComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(pRead)), uintptr(dwReadLen))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionWindow dispatches through IActiveIMMApp's vtable slot 53.
-func (self *IActiveIMMApp) SetCompositionWindow(hIMC HIMC, pCompForm *COMPOSITIONFORM) foundation.HRESULT {
+func (self *IActiveIMMApp) SetCompositionWindow(hIMC HIMC, pCompForm *COMPOSITIONFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pCompForm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConversionStatus dispatches through IActiveIMMApp's vtable slot 54.
-func (self *IActiveIMMApp) SetConversionStatus(hIMC HIMC, fdwConversion uint32, fdwSentence uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) SetConversionStatus(hIMC HIMC, fdwConversion uint32, fdwSentence uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(fdwConversion), uintptr(fdwSentence))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOpenStatus dispatches through IActiveIMMApp's vtable slot 55.
-func (self *IActiveIMMApp) SetOpenStatus(hIMC HIMC, fOpen foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(fOpen))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMApp) SetOpenStatus(hIMC HIMC, fOpen bool) error {
+	_fOpen := win32.Bool32(fOpen)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(_fOpen))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStatusWindowPos dispatches through IActiveIMMApp's vtable slot 56.
-func (self *IActiveIMMApp) SetStatusWindowPos(hIMC HIMC, pptPos *foundation.POINT) foundation.HRESULT {
+func (self *IActiveIMMApp) SetStatusWindowPos(hIMC HIMC, pptPos *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pptPos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SimulateHotKey dispatches through IActiveIMMApp's vtable slot 57.
-func (self *IActiveIMMApp) SimulateHotKey(hWnd foundation.HWND, dwHotKeyID uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) SimulateHotKey(hWnd foundation.HWND, dwHotKeyID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(dwHotKeyID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterWordA dispatches through IActiveIMMApp's vtable slot 58.
-func (self *IActiveIMMApp) UnregisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szUnregister foundation.PSTR) foundation.HRESULT {
+func (self *IActiveIMMApp) UnregisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szUnregister foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szUnregister)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterWordW dispatches through IActiveIMMApp's vtable slot 59.
-func (self *IActiveIMMApp) UnregisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PWSTR, dwStyle uint32, szUnregister foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szUnregister)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMApp) UnregisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading string, dwStyle uint32, szUnregister string) error {
+	_szReading := win32.UTF16Ptr(szReading)
+	_szUnregister := win32.UTF16Ptr(szUnregister)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(_szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(_szUnregister)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Activate dispatches through IActiveIMMApp's vtable slot 60.
-func (self *IActiveIMMApp) Activate(fRestoreLayout foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(fRestoreLayout))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMApp) Activate(fRestoreLayout bool) error {
+	_fRestoreLayout := win32.Bool32(fRestoreLayout)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(_fRestoreLayout))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Deactivate dispatches through IActiveIMMApp's vtable slot 61.
-func (self *IActiveIMMApp) Deactivate() foundation.HRESULT {
+func (self *IActiveIMMApp) Deactivate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDefWindowProc dispatches through IActiveIMMApp's vtable slot 62.
-func (self *IActiveIMMApp) OnDefWindowProc(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIMMApp) OnDefWindowProc(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FilterClientWindows dispatches through IActiveIMMApp's vtable slot 63.
-func (self *IActiveIMMApp) FilterClientWindows(aaClassList *uint16, uSize uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) FilterClientWindows(aaClassList *uint16, uSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(aaClassList)), uintptr(uSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCodePageA dispatches through IActiveIMMApp's vtable slot 64.
-func (self *IActiveIMMApp) GetCodePageA(hKL uiinputkeyboardandmouse.HKL, uCodePage *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetCodePageA(hKL uiinputkeyboardandmouse.HKL, uCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(uCodePage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLangId dispatches through IActiveIMMApp's vtable slot 65.
-func (self *IActiveIMMApp) GetLangId(hKL uiinputkeyboardandmouse.HKL, plid *uint16) foundation.HRESULT {
+func (self *IActiveIMMApp) GetLangId(hKL uiinputkeyboardandmouse.HKL, plid *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(plid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AssociateContextEx dispatches through IActiveIMMApp's vtable slot 66.
-func (self *IActiveIMMApp) AssociateContextEx(hWnd foundation.HWND, hIMC HIMC, dwFlags uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) AssociateContextEx(hWnd foundation.HWND, hIMC HIMC, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(hIMC), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisableIME dispatches through IActiveIMMApp's vtable slot 67.
-func (self *IActiveIMMApp) DisableIME(idThread uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) DisableIME(idThread uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(idThread))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImeMenuItemsA dispatches through IActiveIMMApp's vtable slot 68.
-func (self *IActiveIMMApp) GetImeMenuItemsA(hIMC HIMC, dwFlags uint32, dwType uint32, pImeParentMenu *IMEMENUITEMINFOA, pImeMenu *IMEMENUITEMINFOA, dwSize uint32, pdwResult *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetImeMenuItemsA(hIMC HIMC, dwFlags uint32, dwType uint32, pImeParentMenu *IMEMENUITEMINFOA, pImeMenu *IMEMENUITEMINFOA, dwSize uint32, pdwResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwFlags), uintptr(dwType), uintptr(unsafe.Pointer(pImeParentMenu)), uintptr(unsafe.Pointer(pImeMenu)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImeMenuItemsW dispatches through IActiveIMMApp's vtable slot 69.
-func (self *IActiveIMMApp) GetImeMenuItemsW(hIMC HIMC, dwFlags uint32, dwType uint32, pImeParentMenu *IMEMENUITEMINFOW, pImeMenu *IMEMENUITEMINFOW, dwSize uint32, pdwResult *uint32) foundation.HRESULT {
+func (self *IActiveIMMApp) GetImeMenuItemsW(hIMC HIMC, dwFlags uint32, dwType uint32, pImeParentMenu *IMEMENUITEMINFOW, pImeMenu *IMEMENUITEMINFOW, dwSize uint32, pdwResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwFlags), uintptr(dwType), uintptr(unsafe.Pointer(pImeParentMenu)), uintptr(unsafe.Pointer(pImeMenu)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumInputContext dispatches through IActiveIMMApp's vtable slot 70.
-func (self *IActiveIMMApp) EnumInputContext(idThread uint32, ppEnum **IEnumInputContext) foundation.HRESULT {
+func (self *IActiveIMMApp) EnumInputContext(idThread uint32, ppEnum **IEnumInputContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(idThread), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 08c03411-f96b-11d0-a475-00aa006bcc59
@@ -571,531 +592,541 @@ type IActiveIMMIME struct {
 var IID_IActiveIMMIME = win32.GUID{Data1: 0x08c03411, Data2: 0xf96b, Data3: 0x11d0, Data4: [8]byte{0xa4, 0x75, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59}}
 
 // AssociateContext dispatches through IActiveIMMIME's vtable slot 3.
-func (self *IActiveIMMIME) AssociateContext(hWnd foundation.HWND, hIME HIMC, phPrev *HIMC) foundation.HRESULT {
+func (self *IActiveIMMIME) AssociateContext(hWnd foundation.HWND, hIME HIMC, phPrev *HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(hIME), uintptr(unsafe.Pointer(phPrev)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConfigureIMEA dispatches through IActiveIMMIME's vtable slot 4.
-func (self *IActiveIMMIME) ConfigureIMEA(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pData *REGISTERWORDA) foundation.HRESULT {
+func (self *IActiveIMMIME) ConfigureIMEA(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pData *REGISTERWORDA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hWnd), uintptr(dwMode), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConfigureIMEW dispatches through IActiveIMMIME's vtable slot 5.
-func (self *IActiveIMMIME) ConfigureIMEW(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pData *REGISTERWORDW) foundation.HRESULT {
+func (self *IActiveIMMIME) ConfigureIMEW(hKL uiinputkeyboardandmouse.HKL, hWnd foundation.HWND, dwMode uint32, pData *REGISTERWORDW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hWnd), uintptr(dwMode), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateContext dispatches through IActiveIMMIME's vtable slot 6.
-func (self *IActiveIMMIME) CreateContext(phIMC *HIMC) foundation.HRESULT {
+func (self *IActiveIMMIME) CreateContext(phIMC *HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phIMC)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroyContext dispatches through IActiveIMMIME's vtable slot 7.
-func (self *IActiveIMMIME) DestroyContext(hIME HIMC) foundation.HRESULT {
+func (self *IActiveIMMIME) DestroyContext(hIME HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hIME))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumRegisterWordA dispatches through IActiveIMMIME's vtable slot 8.
-func (self *IActiveIMMIME) EnumRegisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szRegister foundation.PSTR, pData unsafe.Pointer, pEnum **IEnumRegisterWordA) foundation.HRESULT {
+func (self *IActiveIMMIME) EnumRegisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szRegister foundation.PSTR, pData unsafe.Pointer, pEnum **IEnumRegisterWordA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szRegister)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumRegisterWordW dispatches through IActiveIMMIME's vtable slot 9.
-func (self *IActiveIMMIME) EnumRegisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PWSTR, dwStyle uint32, szRegister foundation.PWSTR, pData unsafe.Pointer, pEnum **IEnumRegisterWordW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szRegister)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pEnum)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMIME) EnumRegisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading string, dwStyle uint32, szRegister string, pData unsafe.Pointer, pEnum **IEnumRegisterWordW) error {
+	_szReading := win32.UTF16Ptr(szReading)
+	_szRegister := win32.UTF16Ptr(szRegister)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(_szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(_szRegister)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EscapeA dispatches through IActiveIMMIME's vtable slot 10.
-func (self *IActiveIMMIME) EscapeA(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIMMIME) EscapeA(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(uEscape), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EscapeW dispatches through IActiveIMMIME's vtable slot 11.
-func (self *IActiveIMMIME) EscapeW(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIMMIME) EscapeW(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, uEscape uint32, pData unsafe.Pointer, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(uEscape), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateListA dispatches through IActiveIMMIME's vtable slot 12.
-func (self *IActiveIMMIME) GetCandidateListA(hIMC HIMC, dwIndex uint32, uBufLen uint32, pCandList *CANDIDATELIST, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCandidateListA(hIMC HIMC, dwIndex uint32, uBufLen uint32, pCandList *CANDIDATELIST, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(uBufLen), uintptr(unsafe.Pointer(pCandList)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateListW dispatches through IActiveIMMIME's vtable slot 13.
-func (self *IActiveIMMIME) GetCandidateListW(hIMC HIMC, dwIndex uint32, uBufLen uint32, pCandList *CANDIDATELIST, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCandidateListW(hIMC HIMC, dwIndex uint32, uBufLen uint32, pCandList *CANDIDATELIST, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(uBufLen), uintptr(unsafe.Pointer(pCandList)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateListCountA dispatches through IActiveIMMIME's vtable slot 14.
-func (self *IActiveIMMIME) GetCandidateListCountA(hIMC HIMC, pdwListSize *uint32, pdwBufLen *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCandidateListCountA(hIMC HIMC, pdwListSize *uint32, pdwBufLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pdwListSize)), uintptr(unsafe.Pointer(pdwBufLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateListCountW dispatches through IActiveIMMIME's vtable slot 15.
-func (self *IActiveIMMIME) GetCandidateListCountW(hIMC HIMC, pdwListSize *uint32, pdwBufLen *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCandidateListCountW(hIMC HIMC, pdwListSize *uint32, pdwBufLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pdwListSize)), uintptr(unsafe.Pointer(pdwBufLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCandidateWindow dispatches through IActiveIMMIME's vtable slot 16.
-func (self *IActiveIMMIME) GetCandidateWindow(hIMC HIMC, dwIndex uint32, pCandidate *CANDIDATEFORM) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCandidateWindow(hIMC HIMC, dwIndex uint32, pCandidate *CANDIDATEFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(unsafe.Pointer(pCandidate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionFontA dispatches through IActiveIMMIME's vtable slot 17.
-func (self *IActiveIMMIME) GetCompositionFontA(hIMC HIMC, plf *graphicsgdi.LOGFONTA) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCompositionFontA(hIMC HIMC, plf *graphicsgdi.LOGFONTA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(plf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionFontW dispatches through IActiveIMMIME's vtable slot 18.
-func (self *IActiveIMMIME) GetCompositionFontW(hIMC HIMC, plf *graphicsgdi.LOGFONTW) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCompositionFontW(hIMC HIMC, plf *graphicsgdi.LOGFONTW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(plf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionStringA dispatches through IActiveIMMIME's vtable slot 19.
-func (self *IActiveIMMIME) GetCompositionStringA(hIMC HIMC, dwIndex uint32, dwBufLen uint32, plCopied *int32, pBuf unsafe.Pointer) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCompositionStringA(hIMC HIMC, dwIndex uint32, dwBufLen uint32, plCopied *int32, pBuf unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(dwBufLen), uintptr(unsafe.Pointer(plCopied)), uintptr(unsafe.Pointer(pBuf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionStringW dispatches through IActiveIMMIME's vtable slot 20.
-func (self *IActiveIMMIME) GetCompositionStringW(hIMC HIMC, dwIndex uint32, dwBufLen uint32, plCopied *int32, pBuf unsafe.Pointer) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCompositionStringW(hIMC HIMC, dwIndex uint32, dwBufLen uint32, plCopied *int32, pBuf unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(dwBufLen), uintptr(unsafe.Pointer(plCopied)), uintptr(unsafe.Pointer(pBuf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCompositionWindow dispatches through IActiveIMMIME's vtable slot 21.
-func (self *IActiveIMMIME) GetCompositionWindow(hIMC HIMC, pCompForm *COMPOSITIONFORM) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCompositionWindow(hIMC HIMC, pCompForm *COMPOSITIONFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pCompForm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContext dispatches through IActiveIMMIME's vtable slot 22.
-func (self *IActiveIMMIME) GetContext(hWnd foundation.HWND, phIMC *HIMC) foundation.HRESULT {
+func (self *IActiveIMMIME) GetContext(hWnd foundation.HWND, phIMC *HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(phIMC)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConversionListA dispatches through IActiveIMMIME's vtable slot 23.
-func (self *IActiveIMMIME) GetConversionListA(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, pSrc foundation.PSTR, uBufLen uint32, uFlag uint32, pDst *CANDIDATELIST, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetConversionListA(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, pSrc foundation.PSTR, uBufLen uint32, uFlag uint32, pDst *CANDIDATELIST, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(unsafe.Pointer(pSrc)), uintptr(uBufLen), uintptr(uFlag), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConversionListW dispatches through IActiveIMMIME's vtable slot 24.
-func (self *IActiveIMMIME) GetConversionListW(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, pSrc foundation.PWSTR, uBufLen uint32, uFlag uint32, pDst *CANDIDATELIST, puCopied *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(unsafe.Pointer(pSrc)), uintptr(uBufLen), uintptr(uFlag), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMIME) GetConversionListW(hKL uiinputkeyboardandmouse.HKL, hIMC HIMC, pSrc string, uBufLen uint32, uFlag uint32, pDst *CANDIDATELIST, puCopied *uint32) error {
+	_pSrc := win32.UTF16Ptr(pSrc)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(hIMC), uintptr(unsafe.Pointer(_pSrc)), uintptr(uBufLen), uintptr(uFlag), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(puCopied)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConversionStatus dispatches through IActiveIMMIME's vtable slot 25.
-func (self *IActiveIMMIME) GetConversionStatus(hIMC HIMC, pfdwConversion *uint32, pfdwSentence *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetConversionStatus(hIMC HIMC, pfdwConversion *uint32, pfdwSentence *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pfdwConversion)), uintptr(unsafe.Pointer(pfdwSentence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultIMEWnd dispatches through IActiveIMMIME's vtable slot 26.
-func (self *IActiveIMMIME) GetDefaultIMEWnd(hWnd foundation.HWND, phDefWnd *foundation.HWND) foundation.HRESULT {
+func (self *IActiveIMMIME) GetDefaultIMEWnd(hWnd foundation.HWND, phDefWnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(phDefWnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescriptionA dispatches through IActiveIMMIME's vtable slot 27.
-func (self *IActiveIMMIME) GetDescriptionA(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szDescription foundation.PSTR, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetDescriptionA(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szDescription foundation.PSTR, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(uBufLen), uintptr(unsafe.Pointer(szDescription)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescriptionW dispatches through IActiveIMMIME's vtable slot 28.
-func (self *IActiveIMMIME) GetDescriptionW(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szDescription foundation.PWSTR, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetDescriptionW(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szDescription foundation.PWSTR, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(uBufLen), uintptr(unsafe.Pointer(szDescription)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuideLineA dispatches through IActiveIMMIME's vtable slot 29.
-func (self *IActiveIMMIME) GetGuideLineA(hIMC HIMC, dwIndex uint32, dwBufLen uint32, pBuf foundation.PSTR, pdwResult *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetGuideLineA(hIMC HIMC, dwIndex uint32, dwBufLen uint32, pBuf foundation.PSTR, pdwResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(dwBufLen), uintptr(unsafe.Pointer(pBuf)), uintptr(unsafe.Pointer(pdwResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuideLineW dispatches through IActiveIMMIME's vtable slot 30.
-func (self *IActiveIMMIME) GetGuideLineW(hIMC HIMC, dwIndex uint32, dwBufLen uint32, pBuf foundation.PWSTR, pdwResult *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetGuideLineW(hIMC HIMC, dwIndex uint32, dwBufLen uint32, pBuf foundation.PWSTR, pdwResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(dwBufLen), uintptr(unsafe.Pointer(pBuf)), uintptr(unsafe.Pointer(pdwResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIMEFileNameA dispatches through IActiveIMMIME's vtable slot 31.
-func (self *IActiveIMMIME) GetIMEFileNameA(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szFileName foundation.PSTR, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetIMEFileNameA(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szFileName foundation.PSTR, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(uBufLen), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIMEFileNameW dispatches through IActiveIMMIME's vtable slot 32.
-func (self *IActiveIMMIME) GetIMEFileNameW(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szFileName foundation.PWSTR, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetIMEFileNameW(hKL uiinputkeyboardandmouse.HKL, uBufLen uint32, szFileName foundation.PWSTR, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(uBufLen), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOpenStatus dispatches through IActiveIMMIME's vtable slot 33.
-func (self *IActiveIMMIME) GetOpenStatus(hIMC HIMC) foundation.HRESULT {
+func (self *IActiveIMMIME) GetOpenStatus(hIMC HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(hIMC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through IActiveIMMIME's vtable slot 34.
-func (self *IActiveIMMIME) GetProperty(hKL uiinputkeyboardandmouse.HKL, fdwIndex uint32, pdwProperty *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetProperty(hKL uiinputkeyboardandmouse.HKL, fdwIndex uint32, pdwProperty *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(fdwIndex), uintptr(unsafe.Pointer(pdwProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegisterWordStyleA dispatches through IActiveIMMIME's vtable slot 35.
-func (self *IActiveIMMIME) GetRegisterWordStyleA(hKL uiinputkeyboardandmouse.HKL, nItem uint32, pStyleBuf *STYLEBUFA, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetRegisterWordStyleA(hKL uiinputkeyboardandmouse.HKL, nItem uint32, pStyleBuf *STYLEBUFA, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(nItem), uintptr(unsafe.Pointer(pStyleBuf)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegisterWordStyleW dispatches through IActiveIMMIME's vtable slot 36.
-func (self *IActiveIMMIME) GetRegisterWordStyleW(hKL uiinputkeyboardandmouse.HKL, nItem uint32, pStyleBuf *STYLEBUFW, puCopied *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetRegisterWordStyleW(hKL uiinputkeyboardandmouse.HKL, nItem uint32, pStyleBuf *STYLEBUFW, puCopied *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(nItem), uintptr(unsafe.Pointer(pStyleBuf)), uintptr(unsafe.Pointer(puCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatusWindowPos dispatches through IActiveIMMIME's vtable slot 37.
-func (self *IActiveIMMIME) GetStatusWindowPos(hIMC HIMC, pptPos *foundation.POINT) foundation.HRESULT {
+func (self *IActiveIMMIME) GetStatusWindowPos(hIMC HIMC, pptPos *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pptPos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVirtualKey dispatches through IActiveIMMIME's vtable slot 38.
-func (self *IActiveIMMIME) GetVirtualKey(hWnd foundation.HWND, puVirtualKey *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetVirtualKey(hWnd foundation.HWND, puVirtualKey *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(puVirtualKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstallIMEA dispatches through IActiveIMMIME's vtable slot 39.
-func (self *IActiveIMMIME) InstallIMEA(szIMEFileName foundation.PSTR, szLayoutText foundation.PSTR, phKL *uiinputkeyboardandmouse.HKL) foundation.HRESULT {
+func (self *IActiveIMMIME) InstallIMEA(szIMEFileName foundation.PSTR, szLayoutText foundation.PSTR, phKL *uiinputkeyboardandmouse.HKL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szIMEFileName)), uintptr(unsafe.Pointer(szLayoutText)), uintptr(unsafe.Pointer(phKL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstallIMEW dispatches through IActiveIMMIME's vtable slot 40.
-func (self *IActiveIMMIME) InstallIMEW(szIMEFileName foundation.PWSTR, szLayoutText foundation.PWSTR, phKL *uiinputkeyboardandmouse.HKL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szIMEFileName)), uintptr(unsafe.Pointer(szLayoutText)), uintptr(unsafe.Pointer(phKL)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMIME) InstallIMEW(szIMEFileName string, szLayoutText string, phKL *uiinputkeyboardandmouse.HKL) error {
+	_szIMEFileName := win32.UTF16Ptr(szIMEFileName)
+	_szLayoutText := win32.UTF16Ptr(szLayoutText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szIMEFileName)), uintptr(unsafe.Pointer(_szLayoutText)), uintptr(unsafe.Pointer(phKL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsIME dispatches through IActiveIMMIME's vtable slot 41.
-func (self *IActiveIMMIME) IsIME(hKL uiinputkeyboardandmouse.HKL) foundation.HRESULT {
+func (self *IActiveIMMIME) IsIME(hKL uiinputkeyboardandmouse.HKL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(hKL))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsUIMessageA dispatches through IActiveIMMIME's vtable slot 42.
-func (self *IActiveIMMIME) IsUIMessageA(hWndIME foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *IActiveIMMIME) IsUIMessageA(hWndIME foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(hWndIME), uintptr(msg), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsUIMessageW dispatches through IActiveIMMIME's vtable slot 43.
-func (self *IActiveIMMIME) IsUIMessageW(hWndIME foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *IActiveIMMIME) IsUIMessageW(hWndIME foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(hWndIME), uintptr(msg), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyIME dispatches through IActiveIMMIME's vtable slot 44.
-func (self *IActiveIMMIME) NotifyIME(hIMC HIMC, dwAction uint32, dwIndex uint32, dwValue uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) NotifyIME(hIMC HIMC, dwAction uint32, dwIndex uint32, dwValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwAction), uintptr(dwIndex), uintptr(dwValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterWordA dispatches through IActiveIMMIME's vtable slot 45.
-func (self *IActiveIMMIME) RegisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szRegister foundation.PSTR) foundation.HRESULT {
+func (self *IActiveIMMIME) RegisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szRegister foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szRegister)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterWordW dispatches through IActiveIMMIME's vtable slot 46.
-func (self *IActiveIMMIME) RegisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PWSTR, dwStyle uint32, szRegister foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szRegister)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMIME) RegisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading string, dwStyle uint32, szRegister string) error {
+	_szReading := win32.UTF16Ptr(szReading)
+	_szRegister := win32.UTF16Ptr(szRegister)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(_szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(_szRegister)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseContext dispatches through IActiveIMMIME's vtable slot 47.
-func (self *IActiveIMMIME) ReleaseContext(hWnd foundation.HWND, hIMC HIMC) foundation.HRESULT {
+func (self *IActiveIMMIME) ReleaseContext(hWnd foundation.HWND, hIMC HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(hIMC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCandidateWindow dispatches through IActiveIMMIME's vtable slot 48.
-func (self *IActiveIMMIME) SetCandidateWindow(hIMC HIMC, pCandidate *CANDIDATEFORM) foundation.HRESULT {
+func (self *IActiveIMMIME) SetCandidateWindow(hIMC HIMC, pCandidate *CANDIDATEFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pCandidate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionFontA dispatches through IActiveIMMIME's vtable slot 49.
-func (self *IActiveIMMIME) SetCompositionFontA(hIMC HIMC, plf *graphicsgdi.LOGFONTA) foundation.HRESULT {
+func (self *IActiveIMMIME) SetCompositionFontA(hIMC HIMC, plf *graphicsgdi.LOGFONTA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(plf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionFontW dispatches through IActiveIMMIME's vtable slot 50.
-func (self *IActiveIMMIME) SetCompositionFontW(hIMC HIMC, plf *graphicsgdi.LOGFONTW) foundation.HRESULT {
+func (self *IActiveIMMIME) SetCompositionFontW(hIMC HIMC, plf *graphicsgdi.LOGFONTW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(plf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionStringA dispatches through IActiveIMMIME's vtable slot 51.
-func (self *IActiveIMMIME) SetCompositionStringA(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) SetCompositionStringA(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(unsafe.Pointer(pComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(pRead)), uintptr(dwReadLen))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionStringW dispatches through IActiveIMMIME's vtable slot 52.
-func (self *IActiveIMMIME) SetCompositionStringW(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) SetCompositionStringW(hIMC HIMC, dwIndex uint32, pComp unsafe.Pointer, dwCompLen uint32, pRead unsafe.Pointer, dwReadLen uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwIndex), uintptr(unsafe.Pointer(pComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(pRead)), uintptr(dwReadLen))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompositionWindow dispatches through IActiveIMMIME's vtable slot 53.
-func (self *IActiveIMMIME) SetCompositionWindow(hIMC HIMC, pCompForm *COMPOSITIONFORM) foundation.HRESULT {
+func (self *IActiveIMMIME) SetCompositionWindow(hIMC HIMC, pCompForm *COMPOSITIONFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pCompForm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConversionStatus dispatches through IActiveIMMIME's vtable slot 54.
-func (self *IActiveIMMIME) SetConversionStatus(hIMC HIMC, fdwConversion uint32, fdwSentence uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) SetConversionStatus(hIMC HIMC, fdwConversion uint32, fdwSentence uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(fdwConversion), uintptr(fdwSentence))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOpenStatus dispatches through IActiveIMMIME's vtable slot 55.
-func (self *IActiveIMMIME) SetOpenStatus(hIMC HIMC, fOpen foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(fOpen))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMIME) SetOpenStatus(hIMC HIMC, fOpen bool) error {
+	_fOpen := win32.Bool32(fOpen)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(_fOpen))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStatusWindowPos dispatches through IActiveIMMIME's vtable slot 56.
-func (self *IActiveIMMIME) SetStatusWindowPos(hIMC HIMC, pptPos *foundation.POINT) foundation.HRESULT {
+func (self *IActiveIMMIME) SetStatusWindowPos(hIMC HIMC, pptPos *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pptPos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SimulateHotKey dispatches through IActiveIMMIME's vtable slot 57.
-func (self *IActiveIMMIME) SimulateHotKey(hWnd foundation.HWND, dwHotKeyID uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) SimulateHotKey(hWnd foundation.HWND, dwHotKeyID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(dwHotKeyID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterWordA dispatches through IActiveIMMIME's vtable slot 58.
-func (self *IActiveIMMIME) UnregisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szUnregister foundation.PSTR) foundation.HRESULT {
+func (self *IActiveIMMIME) UnregisterWordA(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PSTR, dwStyle uint32, szUnregister foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szUnregister)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterWordW dispatches through IActiveIMMIME's vtable slot 59.
-func (self *IActiveIMMIME) UnregisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading foundation.PWSTR, dwStyle uint32, szUnregister foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(szUnregister)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMIME) UnregisterWordW(hKL uiinputkeyboardandmouse.HKL, szReading string, dwStyle uint32, szUnregister string) error {
+	_szReading := win32.UTF16Ptr(szReading)
+	_szUnregister := win32.UTF16Ptr(szUnregister)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(_szReading)), uintptr(dwStyle), uintptr(unsafe.Pointer(_szUnregister)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateMessage dispatches through IActiveIMMIME's vtable slot 60.
-func (self *IActiveIMMIME) GenerateMessage(hIMC HIMC) foundation.HRESULT {
+func (self *IActiveIMMIME) GenerateMessage(hIMC HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(hIMC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockIMC dispatches through IActiveIMMIME's vtable slot 61.
-func (self *IActiveIMMIME) LockIMC(hIMC HIMC, ppIMC **INPUTCONTEXT) foundation.HRESULT {
+func (self *IActiveIMMIME) LockIMC(hIMC HIMC, ppIMC **INPUTCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(ppIMC)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockIMC dispatches through IActiveIMMIME's vtable slot 62.
-func (self *IActiveIMMIME) UnlockIMC(hIMC HIMC) foundation.HRESULT {
+func (self *IActiveIMMIME) UnlockIMC(hIMC HIMC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(hIMC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIMCLockCount dispatches through IActiveIMMIME's vtable slot 63.
-func (self *IActiveIMMIME) GetIMCLockCount(hIMC HIMC, pdwLockCount *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetIMCLockCount(hIMC HIMC, pdwLockCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(unsafe.Pointer(pdwLockCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateIMCC dispatches through IActiveIMMIME's vtable slot 64.
-func (self *IActiveIMMIME) CreateIMCC(dwSize uint32, phIMCC *HIMCC) foundation.HRESULT {
+func (self *IActiveIMMIME) CreateIMCC(dwSize uint32, phIMCC *HIMCC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(dwSize), uintptr(unsafe.Pointer(phIMCC)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroyIMCC dispatches through IActiveIMMIME's vtable slot 65.
-func (self *IActiveIMMIME) DestroyIMCC(hIMCC HIMCC) foundation.HRESULT {
+func (self *IActiveIMMIME) DestroyIMCC(hIMCC HIMCC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(hIMCC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockIMCC dispatches through IActiveIMMIME's vtable slot 66.
-func (self *IActiveIMMIME) LockIMCC(hIMCC HIMCC, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IActiveIMMIME) LockIMCC(hIMCC HIMCC, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(hIMCC), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockIMCC dispatches through IActiveIMMIME's vtable slot 67.
-func (self *IActiveIMMIME) UnlockIMCC(hIMCC HIMCC) foundation.HRESULT {
+func (self *IActiveIMMIME) UnlockIMCC(hIMCC HIMCC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(hIMCC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReSizeIMCC dispatches through IActiveIMMIME's vtable slot 68.
-func (self *IActiveIMMIME) ReSizeIMCC(hIMCC HIMCC, dwSize uint32, phIMCC *HIMCC) foundation.HRESULT {
+func (self *IActiveIMMIME) ReSizeIMCC(hIMCC HIMCC, dwSize uint32, phIMCC *HIMCC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(hIMCC), uintptr(dwSize), uintptr(unsafe.Pointer(phIMCC)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIMCCSize dispatches through IActiveIMMIME's vtable slot 69.
-func (self *IActiveIMMIME) GetIMCCSize(hIMCC HIMCC, pdwSize *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetIMCCSize(hIMCC HIMCC, pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(hIMCC), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIMCCLockCount dispatches through IActiveIMMIME's vtable slot 70.
-func (self *IActiveIMMIME) GetIMCCLockCount(hIMCC HIMCC, pdwLockCount *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetIMCCLockCount(hIMCC HIMCC, pdwLockCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(hIMCC), uintptr(unsafe.Pointer(pdwLockCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHotKey dispatches through IActiveIMMIME's vtable slot 71.
-func (self *IActiveIMMIME) GetHotKey(dwHotKeyID uint32, puModifiers *uint32, puVKey *uint32, phKL *uiinputkeyboardandmouse.HKL) foundation.HRESULT {
+func (self *IActiveIMMIME) GetHotKey(dwHotKeyID uint32, puModifiers *uint32, puVKey *uint32, phKL *uiinputkeyboardandmouse.HKL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(dwHotKeyID), uintptr(unsafe.Pointer(puModifiers)), uintptr(unsafe.Pointer(puVKey)), uintptr(unsafe.Pointer(phKL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHotKey dispatches through IActiveIMMIME's vtable slot 72.
-func (self *IActiveIMMIME) SetHotKey(dwHotKeyID uint32, uModifiers uint32, uVKey uint32, hKL uiinputkeyboardandmouse.HKL) foundation.HRESULT {
+func (self *IActiveIMMIME) SetHotKey(dwHotKeyID uint32, uModifiers uint32, uVKey uint32, hKL uiinputkeyboardandmouse.HKL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(dwHotKeyID), uintptr(uModifiers), uintptr(uVKey), uintptr(hKL))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSoftKeyboard dispatches through IActiveIMMIME's vtable slot 73.
-func (self *IActiveIMMIME) CreateSoftKeyboard(uType uint32, hOwner foundation.HWND, x int32, y int32, phSoftKbdWnd *foundation.HWND) foundation.HRESULT {
+func (self *IActiveIMMIME) CreateSoftKeyboard(uType uint32, hOwner foundation.HWND, x int32, y int32, phSoftKbdWnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(uType), uintptr(hOwner), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(phSoftKbdWnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroySoftKeyboard dispatches through IActiveIMMIME's vtable slot 74.
-func (self *IActiveIMMIME) DestroySoftKeyboard(hSoftKbdWnd foundation.HWND) foundation.HRESULT {
+func (self *IActiveIMMIME) DestroySoftKeyboard(hSoftKbdWnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(hSoftKbdWnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowSoftKeyboard dispatches through IActiveIMMIME's vtable slot 75.
-func (self *IActiveIMMIME) ShowSoftKeyboard(hSoftKbdWnd foundation.HWND, nCmdShow int32) foundation.HRESULT {
+func (self *IActiveIMMIME) ShowSoftKeyboard(hSoftKbdWnd foundation.HWND, nCmdShow int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(hSoftKbdWnd), uintptr(nCmdShow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCodePageA dispatches through IActiveIMMIME's vtable slot 76.
-func (self *IActiveIMMIME) GetCodePageA(hKL uiinputkeyboardandmouse.HKL, uCodePage *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetCodePageA(hKL uiinputkeyboardandmouse.HKL, uCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(uCodePage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLangId dispatches through IActiveIMMIME's vtable slot 77.
-func (self *IActiveIMMIME) GetLangId(hKL uiinputkeyboardandmouse.HKL, plid *uint16) foundation.HRESULT {
+func (self *IActiveIMMIME) GetLangId(hKL uiinputkeyboardandmouse.HKL, plid *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(hKL), uintptr(unsafe.Pointer(plid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KeybdEvent dispatches through IActiveIMMIME's vtable slot 78.
-func (self *IActiveIMMIME) KeybdEvent(lgidIME uint16, bVk byte, bScan byte, dwFlags uint32, dwExtraInfo uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) KeybdEvent(lgidIME uint16, bVk byte, bScan byte, dwFlags uint32, dwExtraInfo uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(lgidIME), uintptr(bVk), uintptr(bScan), uintptr(dwFlags), uintptr(dwExtraInfo))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockModal dispatches through IActiveIMMIME's vtable slot 79.
-func (self *IActiveIMMIME) LockModal() foundation.HRESULT {
+func (self *IActiveIMMIME) LockModal() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockModal dispatches through IActiveIMMIME's vtable slot 80.
-func (self *IActiveIMMIME) UnlockModal() foundation.HRESULT {
+func (self *IActiveIMMIME) UnlockModal() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AssociateContextEx dispatches through IActiveIMMIME's vtable slot 81.
-func (self *IActiveIMMIME) AssociateContextEx(hWnd foundation.HWND, hIMC HIMC, dwFlags uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) AssociateContextEx(hWnd foundation.HWND, hIMC HIMC, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(hIMC), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisableIME dispatches through IActiveIMMIME's vtable slot 82.
-func (self *IActiveIMMIME) DisableIME(idThread uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) DisableIME(idThread uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(idThread))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImeMenuItemsA dispatches through IActiveIMMIME's vtable slot 83.
-func (self *IActiveIMMIME) GetImeMenuItemsA(hIMC HIMC, dwFlags uint32, dwType uint32, pImeParentMenu *IMEMENUITEMINFOA, pImeMenu *IMEMENUITEMINFOA, dwSize uint32, pdwResult *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetImeMenuItemsA(hIMC HIMC, dwFlags uint32, dwType uint32, pImeParentMenu *IMEMENUITEMINFOA, pImeMenu *IMEMENUITEMINFOA, dwSize uint32, pdwResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwFlags), uintptr(dwType), uintptr(unsafe.Pointer(pImeParentMenu)), uintptr(unsafe.Pointer(pImeMenu)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImeMenuItemsW dispatches through IActiveIMMIME's vtable slot 84.
-func (self *IActiveIMMIME) GetImeMenuItemsW(hIMC HIMC, dwFlags uint32, dwType uint32, pImeParentMenu *IMEMENUITEMINFOW, pImeMenu *IMEMENUITEMINFOW, dwSize uint32, pdwResult *uint32) foundation.HRESULT {
+func (self *IActiveIMMIME) GetImeMenuItemsW(hIMC HIMC, dwFlags uint32, dwType uint32, pImeParentMenu *IMEMENUITEMINFOW, pImeMenu *IMEMENUITEMINFOW, dwSize uint32, pdwResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(dwFlags), uintptr(dwType), uintptr(unsafe.Pointer(pImeParentMenu)), uintptr(unsafe.Pointer(pImeMenu)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumInputContext dispatches through IActiveIMMIME's vtable slot 85.
-func (self *IActiveIMMIME) EnumInputContext(idThread uint32, ppEnum **IEnumInputContext) foundation.HRESULT {
+func (self *IActiveIMMIME) EnumInputContext(idThread uint32, ppEnum **IEnumInputContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(idThread), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestMessageA dispatches through IActiveIMMIME's vtable slot 86.
-func (self *IActiveIMMIME) RequestMessageA(hIMC HIMC, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIMMIME) RequestMessageA(hIMC HIMC, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestMessageW dispatches through IActiveIMMIME's vtable slot 87.
-func (self *IActiveIMMIME) RequestMessageW(hIMC HIMC, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIMMIME) RequestMessageW(hIMC HIMC, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(hIMC), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendIMCA dispatches through IActiveIMMIME's vtable slot 88.
-func (self *IActiveIMMIME) SendIMCA(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIMMIME) SendIMCA(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(uMsg), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendIMCW dispatches through IActiveIMMIME's vtable slot 89.
-func (self *IActiveIMMIME) SendIMCW(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) foundation.HRESULT {
+func (self *IActiveIMMIME) SendIMCW(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(uMsg), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(plResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsSleeping dispatches through IActiveIMMIME's vtable slot 90.
-func (self *IActiveIMMIME) IsSleeping() foundation.HRESULT {
+func (self *IActiveIMMIME) IsSleeping() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b5cf2cfa-8aeb-11d1-9364-0060b067b86e
@@ -1107,33 +1138,33 @@ type IActiveIMMMessagePumpOwner struct {
 var IID_IActiveIMMMessagePumpOwner = win32.GUID{Data1: 0xb5cf2cfa, Data2: 0x8aeb, Data3: 0x11d1, Data4: [8]byte{0x93, 0x64, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e}}
 
 // Start dispatches through IActiveIMMMessagePumpOwner's vtable slot 3.
-func (self *IActiveIMMMessagePumpOwner) Start() foundation.HRESULT {
+func (self *IActiveIMMMessagePumpOwner) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // End dispatches through IActiveIMMMessagePumpOwner's vtable slot 4.
-func (self *IActiveIMMMessagePumpOwner) End() foundation.HRESULT {
+func (self *IActiveIMMMessagePumpOwner) End() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnTranslateMessage dispatches through IActiveIMMMessagePumpOwner's vtable slot 5.
-func (self *IActiveIMMMessagePumpOwner) OnTranslateMessage(pMsg *uiwindowsandmessaging.MSG) foundation.HRESULT {
+func (self *IActiveIMMMessagePumpOwner) OnTranslateMessage(pMsg *uiwindowsandmessaging.MSG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IActiveIMMMessagePumpOwner's vtable slot 6.
-func (self *IActiveIMMMessagePumpOwner) Pause(pdwCookie *uint32) foundation.HRESULT {
+func (self *IActiveIMMMessagePumpOwner) Pause(pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through IActiveIMMMessagePumpOwner's vtable slot 7.
-func (self *IActiveIMMMessagePumpOwner) Resume(dwCookie uint32) foundation.HRESULT {
+func (self *IActiveIMMMessagePumpOwner) Resume(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b3458082-bd00-11d1-939b-0060b067b86e
@@ -1145,15 +1176,17 @@ type IActiveIMMRegistrar struct {
 var IID_IActiveIMMRegistrar = win32.GUID{Data1: 0xb3458082, Data2: 0xbd00, Data3: 0x11d1, Data4: [8]byte{0x93, 0x9b, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e}}
 
 // RegisterIME dispatches through IActiveIMMRegistrar's vtable slot 3.
-func (self *IActiveIMMRegistrar) RegisterIME(rclsid *win32.GUID, lgid uint16, pszIconFile foundation.PWSTR, pszDesc foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(lgid), uintptr(unsafe.Pointer(pszIconFile)), uintptr(unsafe.Pointer(pszDesc)))
-	return foundation.HRESULT(r1)
+func (self *IActiveIMMRegistrar) RegisterIME(rclsid *win32.GUID, lgid uint16, pszIconFile string, pszDesc string) error {
+	_pszIconFile := win32.UTF16Ptr(pszIconFile)
+	_pszDesc := win32.UTF16Ptr(pszDesc)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(lgid), uintptr(unsafe.Pointer(_pszIconFile)), uintptr(unsafe.Pointer(_pszDesc)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterIME dispatches through IActiveIMMRegistrar's vtable slot 4.
-func (self *IActiveIMMRegistrar) UnregisterIME(rclsid *win32.GUID) foundation.HRESULT {
+func (self *IActiveIMMRegistrar) UnregisterIME(rclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 09b5eab0-f997-11d1-93d4-0060b067b86e
@@ -1165,27 +1198,27 @@ type IEnumInputContext struct {
 var IID_IEnumInputContext = win32.GUID{Data1: 0x09b5eab0, Data2: 0xf997, Data3: 0x11d1, Data4: [8]byte{0x93, 0xd4, 0x00, 0x60, 0xb0, 0x67, 0xb8, 0x6e}}
 
 // Clone dispatches through IEnumInputContext's vtable slot 3.
-func (self *IEnumInputContext) Clone(ppEnum **IEnumInputContext) foundation.HRESULT {
+func (self *IEnumInputContext) Clone(ppEnum **IEnumInputContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IEnumInputContext's vtable slot 4.
-func (self *IEnumInputContext) Next(ulCount uint32, rgInputContext *HIMC, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumInputContext) Next(ulCount uint32, rgInputContext *HIMC, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgInputContext)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumInputContext's vtable slot 5.
-func (self *IEnumInputContext) Reset() foundation.HRESULT {
+func (self *IEnumInputContext) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumInputContext's vtable slot 6.
-func (self *IEnumInputContext) Skip(ulCount uint32) foundation.HRESULT {
+func (self *IEnumInputContext) Skip(ulCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 08c03412-f96b-11d0-a475-00aa006bcc59
@@ -1197,27 +1230,27 @@ type IEnumRegisterWordA struct {
 var IID_IEnumRegisterWordA = win32.GUID{Data1: 0x08c03412, Data2: 0xf96b, Data3: 0x11d0, Data4: [8]byte{0xa4, 0x75, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59}}
 
 // Clone dispatches through IEnumRegisterWordA's vtable slot 3.
-func (self *IEnumRegisterWordA) Clone(ppEnum **IEnumRegisterWordA) foundation.HRESULT {
+func (self *IEnumRegisterWordA) Clone(ppEnum **IEnumRegisterWordA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IEnumRegisterWordA's vtable slot 4.
-func (self *IEnumRegisterWordA) Next(ulCount uint32, rgRegisterWord *REGISTERWORDA, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumRegisterWordA) Next(ulCount uint32, rgRegisterWord *REGISTERWORDA, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgRegisterWord)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumRegisterWordA's vtable slot 5.
-func (self *IEnumRegisterWordA) Reset() foundation.HRESULT {
+func (self *IEnumRegisterWordA) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumRegisterWordA's vtable slot 6.
-func (self *IEnumRegisterWordA) Skip(ulCount uint32) foundation.HRESULT {
+func (self *IEnumRegisterWordA) Skip(ulCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4955dd31-b159-11d0-8fcf-00aa006bcc59
@@ -1229,27 +1262,27 @@ type IEnumRegisterWordW struct {
 var IID_IEnumRegisterWordW = win32.GUID{Data1: 0x4955dd31, Data2: 0xb159, Data3: 0x11d0, Data4: [8]byte{0x8f, 0xcf, 0x00, 0xaa, 0x00, 0x6b, 0xcc, 0x59}}
 
 // Clone dispatches through IEnumRegisterWordW's vtable slot 3.
-func (self *IEnumRegisterWordW) Clone(ppEnum **IEnumRegisterWordW) foundation.HRESULT {
+func (self *IEnumRegisterWordW) Clone(ppEnum **IEnumRegisterWordW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IEnumRegisterWordW's vtable slot 4.
-func (self *IEnumRegisterWordW) Next(ulCount uint32, rgRegisterWord *REGISTERWORDW, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumRegisterWordW) Next(ulCount uint32, rgRegisterWord *REGISTERWORDW, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgRegisterWord)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumRegisterWordW's vtable slot 5.
-func (self *IEnumRegisterWordW) Reset() foundation.HRESULT {
+func (self *IEnumRegisterWordW) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumRegisterWordW's vtable slot 6.
-func (self *IEnumRegisterWordW) Skip(ulCount uint32) foundation.HRESULT {
+func (self *IEnumRegisterWordW) Skip(ulCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 type IFEClassFactory struct {
@@ -1266,27 +1299,27 @@ type IFECommon struct {
 var IID_IFECommon = win32.GUID{Data1: 0x019f7151, Data2: 0xe6db, Data3: 0x11d0, Data4: [8]byte{0x83, 0xc3, 0x00, 0xc0, 0x4f, 0xdd, 0xb8, 0x2e}}
 
 // IsDefaultIME dispatches through IFECommon's vtable slot 3.
-func (self *IFECommon) IsDefaultIME(szName foundation.PSTR, cszName int32) foundation.HRESULT {
+func (self *IFECommon) IsDefaultIME(szName foundation.PSTR, cszName int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(cszName))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDefaultIME dispatches through IFECommon's vtable slot 4.
-func (self *IFECommon) SetDefaultIME() foundation.HRESULT {
+func (self *IFECommon) SetDefaultIME() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InvokeWordRegDialog dispatches through IFECommon's vtable slot 5.
-func (self *IFECommon) InvokeWordRegDialog(pimedlg unsafe.Pointer) foundation.HRESULT {
+func (self *IFECommon) InvokeWordRegDialog(pimedlg unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pimedlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InvokeDictToolDialog dispatches through IFECommon's vtable slot 6.
-func (self *IFECommon) InvokeDictToolDialog(pimedlg unsafe.Pointer) foundation.HRESULT {
+func (self *IFECommon) InvokeDictToolDialog(pimedlg unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pimedlg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFEDictionary: https://learn.microsoft.com/windows/win32/api/msime/nn-msime-ifedictionary
@@ -1299,105 +1332,112 @@ type IFEDictionary struct {
 var IID_IFEDictionary = win32.GUID{Data1: 0x019f7153, Data2: 0xe6db, Data3: 0x11d0, Data4: [8]byte{0x83, 0xc3, 0x00, 0xc0, 0x4f, 0xdd, 0xb8, 0x2e}}
 
 // Open dispatches through IFEDictionary's vtable slot 3.
-func (self *IFEDictionary) Open(pchDictPath foundation.PSTR, pshf unsafe.Pointer) foundation.HRESULT {
+func (self *IFEDictionary) Open(pchDictPath foundation.PSTR, pshf unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchDictPath)), uintptr(unsafe.Pointer(pshf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IFEDictionary's vtable slot 4.
-func (self *IFEDictionary) Close() foundation.HRESULT {
+func (self *IFEDictionary) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHeader dispatches through IFEDictionary's vtable slot 5.
-func (self *IFEDictionary) GetHeader(pchDictPath foundation.PSTR, pshf unsafe.Pointer, pjfmt *IMEFMT, pulType *uint32) foundation.HRESULT {
+func (self *IFEDictionary) GetHeader(pchDictPath foundation.PSTR, pshf unsafe.Pointer, pjfmt *IMEFMT, pulType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchDictPath)), uintptr(unsafe.Pointer(pshf)), uintptr(unsafe.Pointer(pjfmt)), uintptr(unsafe.Pointer(pulType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisplayProperty dispatches through IFEDictionary's vtable slot 6.
-func (self *IFEDictionary) DisplayProperty(hwnd foundation.HWND) foundation.HRESULT {
+func (self *IFEDictionary) DisplayProperty(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPosTable dispatches through IFEDictionary's vtable slot 7.
-func (self *IFEDictionary) GetPosTable(prgPosTbl *unsafe.Pointer, pcPosTbl *int32) foundation.HRESULT {
+func (self *IFEDictionary) GetPosTable(prgPosTbl *unsafe.Pointer, pcPosTbl *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prgPosTbl)), uintptr(unsafe.Pointer(pcPosTbl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWords dispatches through IFEDictionary's vtable slot 8.
-func (self *IFEDictionary) GetWords(pwchFirst foundation.PWSTR, pwchLast foundation.PWSTR, pwchDisplay foundation.PWSTR, ulPos uint32, ulSelect uint32, ulWordSrc uint32, pchBuffer *byte, cbBuffer uint32, pcWrd *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwchFirst)), uintptr(unsafe.Pointer(pwchLast)), uintptr(unsafe.Pointer(pwchDisplay)), uintptr(ulPos), uintptr(ulSelect), uintptr(ulWordSrc), uintptr(unsafe.Pointer(pchBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcWrd)))
-	return foundation.HRESULT(r1)
+func (self *IFEDictionary) GetWords(pwchFirst string, pwchLast string, pwchDisplay string, ulPos uint32, ulSelect uint32, ulWordSrc uint32, pchBuffer *byte, cbBuffer uint32, pcWrd *uint32) error {
+	_pwchFirst := win32.UTF16Ptr(pwchFirst)
+	_pwchLast := win32.UTF16Ptr(pwchLast)
+	_pwchDisplay := win32.UTF16Ptr(pwchDisplay)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchFirst)), uintptr(unsafe.Pointer(_pwchLast)), uintptr(unsafe.Pointer(_pwchDisplay)), uintptr(ulPos), uintptr(ulSelect), uintptr(ulWordSrc), uintptr(unsafe.Pointer(pchBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcWrd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NextWords dispatches through IFEDictionary's vtable slot 9.
-func (self *IFEDictionary) NextWords(pchBuffer *byte, cbBuffer uint32, pcWrd *uint32) foundation.HRESULT {
+func (self *IFEDictionary) NextWords(pchBuffer *byte, cbBuffer uint32, pcWrd *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcWrd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through IFEDictionary's vtable slot 10.
-func (self *IFEDictionary) Create(pchDictPath foundation.PSTR, pshf unsafe.Pointer) foundation.HRESULT {
+func (self *IFEDictionary) Create(pchDictPath foundation.PSTR, pshf unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchDictPath)), uintptr(unsafe.Pointer(pshf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHeader dispatches through IFEDictionary's vtable slot 11.
-func (self *IFEDictionary) SetHeader(pshf unsafe.Pointer) foundation.HRESULT {
+func (self *IFEDictionary) SetHeader(pshf unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pshf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExistWord dispatches through IFEDictionary's vtable slot 12.
-func (self *IFEDictionary) ExistWord(pwrd unsafe.Pointer) foundation.HRESULT {
+func (self *IFEDictionary) ExistWord(pwrd unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwrd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExistDependency dispatches through IFEDictionary's vtable slot 13.
-func (self *IFEDictionary) ExistDependency(pdp unsafe.Pointer) foundation.HRESULT {
+func (self *IFEDictionary) ExistDependency(pdp unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterWord dispatches through IFEDictionary's vtable slot 14.
-func (self *IFEDictionary) RegisterWord(reg IMEREG, pwrd unsafe.Pointer) foundation.HRESULT {
+func (self *IFEDictionary) RegisterWord(reg IMEREG, pwrd unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(reg), uintptr(unsafe.Pointer(pwrd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterDependency dispatches through IFEDictionary's vtable slot 15.
-func (self *IFEDictionary) RegisterDependency(reg IMEREG, pdp unsafe.Pointer) foundation.HRESULT {
+func (self *IFEDictionary) RegisterDependency(reg IMEREG, pdp unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(reg), uintptr(unsafe.Pointer(pdp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDependencies dispatches through IFEDictionary's vtable slot 16.
-func (self *IFEDictionary) GetDependencies(pwchKakariReading foundation.PWSTR, pwchKakariDisplay foundation.PWSTR, ulKakariPos uint32, pwchUkeReading foundation.PWSTR, pwchUkeDisplay foundation.PWSTR, ulUkePos uint32, jrel IMEREL, ulWordSrc uint32, pchBuffer *byte, cbBuffer uint32, pcdp *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwchKakariReading)), uintptr(unsafe.Pointer(pwchKakariDisplay)), uintptr(ulKakariPos), uintptr(unsafe.Pointer(pwchUkeReading)), uintptr(unsafe.Pointer(pwchUkeDisplay)), uintptr(ulUkePos), uintptr(jrel), uintptr(ulWordSrc), uintptr(unsafe.Pointer(pchBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcdp)))
-	return foundation.HRESULT(r1)
+func (self *IFEDictionary) GetDependencies(pwchKakariReading string, pwchKakariDisplay string, ulKakariPos uint32, pwchUkeReading string, pwchUkeDisplay string, ulUkePos uint32, jrel IMEREL, ulWordSrc uint32, pchBuffer *byte, cbBuffer uint32, pcdp *uint32) error {
+	_pwchKakariReading := win32.UTF16Ptr(pwchKakariReading)
+	_pwchKakariDisplay := win32.UTF16Ptr(pwchKakariDisplay)
+	_pwchUkeReading := win32.UTF16Ptr(pwchUkeReading)
+	_pwchUkeDisplay := win32.UTF16Ptr(pwchUkeDisplay)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwchKakariReading)), uintptr(unsafe.Pointer(_pwchKakariDisplay)), uintptr(ulKakariPos), uintptr(unsafe.Pointer(_pwchUkeReading)), uintptr(unsafe.Pointer(_pwchUkeDisplay)), uintptr(ulUkePos), uintptr(jrel), uintptr(ulWordSrc), uintptr(unsafe.Pointer(pchBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcdp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NextDependencies dispatches through IFEDictionary's vtable slot 17.
-func (self *IFEDictionary) NextDependencies(pchBuffer *byte, cbBuffer uint32, pcDp *uint32) foundation.HRESULT {
+func (self *IFEDictionary) NextDependencies(pchBuffer *byte, cbBuffer uint32, pcDp *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcDp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertFromOldMSIME dispatches through IFEDictionary's vtable slot 18.
-func (self *IFEDictionary) ConvertFromOldMSIME(pchDic foundation.PSTR, pfnLog PFNLOG, reg IMEREG) foundation.HRESULT {
+func (self *IFEDictionary) ConvertFromOldMSIME(pchDic foundation.PSTR, pfnLog PFNLOG, reg IMEREG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchDic)), uintptr(pfnLog), uintptr(reg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertFromUserToSys dispatches through IFEDictionary's vtable slot 19.
-func (self *IFEDictionary) ConvertFromUserToSys() foundation.HRESULT {
+func (self *IFEDictionary) ConvertFromUserToSys() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFELanguage: https://learn.microsoft.com/windows/win32/api/msime/nn-msime-ifelanguage
@@ -1410,39 +1450,40 @@ type IFELanguage struct {
 var IID_IFELanguage = win32.GUID{Data1: 0x019f7152, Data2: 0xe6db, Data3: 0x11d0, Data4: [8]byte{0x83, 0xc3, 0x00, 0xc0, 0x4f, 0xdd, 0xb8, 0x2e}}
 
 // Open dispatches through IFELanguage's vtable slot 3.
-func (self *IFELanguage) Open() foundation.HRESULT {
+func (self *IFELanguage) Open() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IFELanguage's vtable slot 4.
-func (self *IFELanguage) Close() foundation.HRESULT {
+func (self *IFELanguage) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetJMorphResult dispatches through IFELanguage's vtable slot 5.
-func (self *IFELanguage) GetJMorphResult(dwRequest uint32, dwCMode uint32, cwchInput int32, pwchInput foundation.PWSTR, pfCInfo *uint32, ppResult *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwRequest), uintptr(dwCMode), uintptr(cwchInput), uintptr(unsafe.Pointer(pwchInput)), uintptr(unsafe.Pointer(pfCInfo)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+func (self *IFELanguage) GetJMorphResult(dwRequest uint32, dwCMode uint32, cwchInput int32, pwchInput string, pfCInfo *uint32, ppResult *unsafe.Pointer) error {
+	_pwchInput := win32.UTF16Ptr(pwchInput)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwRequest), uintptr(dwCMode), uintptr(cwchInput), uintptr(unsafe.Pointer(_pwchInput)), uintptr(unsafe.Pointer(pfCInfo)), uintptr(unsafe.Pointer(ppResult)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConversionModeCaps dispatches through IFELanguage's vtable slot 6.
-func (self *IFELanguage) GetConversionModeCaps(pdwCaps *uint32) foundation.HRESULT {
+func (self *IFELanguage) GetConversionModeCaps(pdwCaps *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPhonetic dispatches through IFELanguage's vtable slot 7.
-func (self *IFELanguage) GetPhonetic(string_ foundation.BSTR, start int32, length int32, phonetic *foundation.BSTR) foundation.HRESULT {
+func (self *IFELanguage) GetPhonetic(string_ foundation.BSTR, start int32, length int32, phonetic *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(string_)), uintptr(start), uintptr(length), uintptr(unsafe.Pointer(phonetic)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConversion dispatches through IFELanguage's vtable slot 8.
-func (self *IFELanguage) GetConversion(string_ foundation.BSTR, start int32, length int32, result *foundation.BSTR) foundation.HRESULT {
+func (self *IFELanguage) GetConversion(string_ foundation.BSTR, start int32, length int32, result *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(string_)), uintptr(start), uintptr(length), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IImePad: https://learn.microsoft.com/windows/win32/api/imepad/nn-imepad-iimepad
@@ -1455,9 +1496,9 @@ type IImePad struct {
 var IID_IImePad = win32.GUID{Data1: 0x5d8e643a, Data2: 0xc3a9, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xef, 0x00, 0x80, 0x5f, 0x0c, 0x8b, 0x6d}}
 
 // Request dispatches through IImePad's vtable slot 3.
-func (self *IImePad) Request(pIImePadApplet *IImePadApplet, reqId int32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *IImePad) Request(pIImePadApplet *IImePadApplet, reqId int32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIImePadApplet)), uintptr(reqId), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IImePadApplet: https://learn.microsoft.com/windows/win32/api/imepad/nn-imepad-iimepadapplet
@@ -1470,33 +1511,33 @@ type IImePadApplet struct {
 var IID_IImePadApplet = win32.GUID{Data1: 0x5d8e643b, Data2: 0xc3a9, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xef, 0x00, 0x80, 0x5f, 0x0c, 0x8b, 0x6d}}
 
 // Initialize dispatches through IImePadApplet's vtable slot 3.
-func (self *IImePadApplet) Initialize(lpIImePad *systemcom.IUnknown) foundation.HRESULT {
+func (self *IImePadApplet) Initialize(lpIImePad *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIImePad)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Terminate dispatches through IImePadApplet's vtable slot 4.
-func (self *IImePadApplet) Terminate() foundation.HRESULT {
+func (self *IImePadApplet) Terminate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAppletConfig dispatches through IImePadApplet's vtable slot 5.
-func (self *IImePadApplet) GetAppletConfig(lpAppletCfg *IMEAPPLETCFG) foundation.HRESULT {
+func (self *IImePadApplet) GetAppletConfig(lpAppletCfg *IMEAPPLETCFG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpAppletCfg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateUI dispatches through IImePadApplet's vtable slot 6.
-func (self *IImePadApplet) CreateUI(hwndParent foundation.HWND, lpImeAppletUI *IMEAPPLETUI) foundation.HRESULT {
+func (self *IImePadApplet) CreateUI(hwndParent foundation.HWND, lpImeAppletUI *IMEAPPLETUI) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(lpImeAppletUI)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Notify dispatches through IImePadApplet's vtable slot 7.
-func (self *IImePadApplet) Notify(lpImePad *systemcom.IUnknown, notify int32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *IImePadApplet) Notify(lpImePad *systemcom.IUnknown, notify int32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpImePad)), uintptr(notify), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IImePlugInDictDictionaryList: https://learn.microsoft.com/windows/win32/api/msimeapi/nn-msimeapi-iimeplugindictdictionarylist
@@ -1509,15 +1550,15 @@ type IImePlugInDictDictionaryList struct {
 var IID_IImePlugInDictDictionaryList = win32.GUID{Data1: 0x98752974, Data2: 0xb0a6, Data3: 0x489b, Data4: [8]byte{0x8f, 0x6f, 0xbf, 0xf3, 0x76, 0x9c, 0x8e, 0xeb}}
 
 // GetDictionariesInUse dispatches through IImePlugInDictDictionaryList's vtable slot 3.
-func (self *IImePlugInDictDictionaryList) GetDictionariesInUse(prgDictionaryGUID **systemcom.SAFEARRAY, prgDateCreated **systemcom.SAFEARRAY, prgfEncrypted **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IImePlugInDictDictionaryList) GetDictionariesInUse(prgDictionaryGUID **systemcom.SAFEARRAY, prgDateCreated **systemcom.SAFEARRAY, prgfEncrypted **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prgDictionaryGUID)), uintptr(unsafe.Pointer(prgDateCreated)), uintptr(unsafe.Pointer(prgfEncrypted)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteDictionary dispatches through IImePlugInDictDictionaryList's vtable slot 4.
-func (self *IImePlugInDictDictionaryList) DeleteDictionary(bstrDictionaryGUID foundation.BSTR) foundation.HRESULT {
+func (self *IImePlugInDictDictionaryList) DeleteDictionary(bstrDictionaryGUID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDictionaryGUID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IImeSpecifyApplets: https://learn.microsoft.com/windows/win32/api/imepad/nn-imepad-iimespecifyapplets
@@ -1530,7 +1571,7 @@ type IImeSpecifyApplets struct {
 var IID_IImeSpecifyApplets = win32.GUID{Data1: 0x5d8e643c, Data2: 0xc3a9, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xef, 0x00, 0x80, 0x5f, 0x0c, 0x8b, 0x6d}}
 
 // GetAppletIIDList dispatches through IImeSpecifyApplets's vtable slot 3.
-func (self *IImeSpecifyApplets) GetAppletIIDList(refiid *win32.GUID, lpIIDList *APPLETIDLIST) foundation.HRESULT {
+func (self *IImeSpecifyApplets) GetAppletIIDList(refiid *win32.GUID, lpIIDList *APPLETIDLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refiid)), uintptr(unsafe.Pointer(lpIIDList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

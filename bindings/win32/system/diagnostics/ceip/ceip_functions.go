@@ -8,7 +8,6 @@ import (
 	"syscall"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -22,7 +21,7 @@ var (
 // CeipIsOptedIn calls KERNEL32!CeipIsOptedIn.
 // https://learn.microsoft.com/windows/win32/api/windowsceip/nf-windowsceip-ceipisoptedin
 // Minimum OS: windows8.1.
-func CeipIsOptedIn() foundation.BOOL {
+func CeipIsOptedIn() bool {
 	r1, _, _ := syscall.SyscallN(procCeipIsOptedIn.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

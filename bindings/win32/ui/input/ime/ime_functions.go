@@ -21,8 +21,8 @@ var (
 var (
 	procImmAssociateContext        = modIMM32.NewProc("ImmAssociateContext")
 	procImmAssociateContextEx      = modIMM32.NewProc("ImmAssociateContextEx")
+	procImmConfigureIME            = modIMM32.NewProc("ImmConfigureIMEW")
 	procImmConfigureIMEA           = modIMM32.NewProc("ImmConfigureIMEA")
-	procImmConfigureIMEW           = modIMM32.NewProc("ImmConfigureIMEW")
 	procImmCreateContext           = modIMM32.NewProc("ImmCreateContext")
 	procImmCreateIMCC              = modIMM32.NewProc("ImmCreateIMCC")
 	procImmCreateSoftKeyboard      = modIMM32.NewProc("ImmCreateSoftKeyboard")
@@ -33,63 +33,63 @@ var (
 	procImmDisableLegacyIME        = modIMM32.NewProc("ImmDisableLegacyIME")
 	procImmDisableTextFrameService = modIMM32.NewProc("ImmDisableTextFrameService")
 	procImmEnumInputContext        = modIMM32.NewProc("ImmEnumInputContext")
+	procImmEnumRegisterWord        = modIMM32.NewProc("ImmEnumRegisterWordW")
 	procImmEnumRegisterWordA       = modIMM32.NewProc("ImmEnumRegisterWordA")
-	procImmEnumRegisterWordW       = modIMM32.NewProc("ImmEnumRegisterWordW")
+	procImmEscape                  = modIMM32.NewProc("ImmEscapeW")
 	procImmEscapeA                 = modIMM32.NewProc("ImmEscapeA")
-	procImmEscapeW                 = modIMM32.NewProc("ImmEscapeW")
 	procImmGenerateMessage         = modIMM32.NewProc("ImmGenerateMessage")
+	procImmGetCandidateList        = modIMM32.NewProc("ImmGetCandidateListW")
 	procImmGetCandidateListA       = modIMM32.NewProc("ImmGetCandidateListA")
+	procImmGetCandidateListCount   = modIMM32.NewProc("ImmGetCandidateListCountW")
 	procImmGetCandidateListCountA  = modIMM32.NewProc("ImmGetCandidateListCountA")
-	procImmGetCandidateListCountW  = modIMM32.NewProc("ImmGetCandidateListCountW")
-	procImmGetCandidateListW       = modIMM32.NewProc("ImmGetCandidateListW")
 	procImmGetCandidateWindow      = modIMM32.NewProc("ImmGetCandidateWindow")
+	procImmGetCompositionFont      = modIMM32.NewProc("ImmGetCompositionFontW")
 	procImmGetCompositionFontA     = modIMM32.NewProc("ImmGetCompositionFontA")
-	procImmGetCompositionFontW     = modIMM32.NewProc("ImmGetCompositionFontW")
+	procImmGetCompositionString    = modIMM32.NewProc("ImmGetCompositionStringW")
 	procImmGetCompositionStringA   = modIMM32.NewProc("ImmGetCompositionStringA")
-	procImmGetCompositionStringW   = modIMM32.NewProc("ImmGetCompositionStringW")
 	procImmGetCompositionWindow    = modIMM32.NewProc("ImmGetCompositionWindow")
 	procImmGetContext              = modIMM32.NewProc("ImmGetContext")
+	procImmGetConversionList       = modIMM32.NewProc("ImmGetConversionListW")
 	procImmGetConversionListA      = modIMM32.NewProc("ImmGetConversionListA")
-	procImmGetConversionListW      = modIMM32.NewProc("ImmGetConversionListW")
 	procImmGetConversionStatus     = modIMM32.NewProc("ImmGetConversionStatus")
 	procImmGetDefaultIMEWnd        = modIMM32.NewProc("ImmGetDefaultIMEWnd")
+	procImmGetDescription          = modIMM32.NewProc("ImmGetDescriptionW")
 	procImmGetDescriptionA         = modIMM32.NewProc("ImmGetDescriptionA")
-	procImmGetDescriptionW         = modIMM32.NewProc("ImmGetDescriptionW")
+	procImmGetGuideLine            = modIMM32.NewProc("ImmGetGuideLineW")
 	procImmGetGuideLineA           = modIMM32.NewProc("ImmGetGuideLineA")
-	procImmGetGuideLineW           = modIMM32.NewProc("ImmGetGuideLineW")
 	procImmGetHotKey               = modIMM32.NewProc("ImmGetHotKey")
 	procImmGetIMCCLockCount        = modIMM32.NewProc("ImmGetIMCCLockCount")
 	procImmGetIMCCSize             = modIMM32.NewProc("ImmGetIMCCSize")
 	procImmGetIMCLockCount         = modIMM32.NewProc("ImmGetIMCLockCount")
+	procImmGetIMEFileName          = modIMM32.NewProc("ImmGetIMEFileNameW")
 	procImmGetIMEFileNameA         = modIMM32.NewProc("ImmGetIMEFileNameA")
-	procImmGetIMEFileNameW         = modIMM32.NewProc("ImmGetIMEFileNameW")
+	procImmGetImeMenuItems         = modIMM32.NewProc("ImmGetImeMenuItemsW")
 	procImmGetImeMenuItemsA        = modIMM32.NewProc("ImmGetImeMenuItemsA")
-	procImmGetImeMenuItemsW        = modIMM32.NewProc("ImmGetImeMenuItemsW")
 	procImmGetOpenStatus           = modIMM32.NewProc("ImmGetOpenStatus")
 	procImmGetProperty             = modIMM32.NewProc("ImmGetProperty")
+	procImmGetRegisterWordStyle    = modIMM32.NewProc("ImmGetRegisterWordStyleW")
 	procImmGetRegisterWordStyleA   = modIMM32.NewProc("ImmGetRegisterWordStyleA")
-	procImmGetRegisterWordStyleW   = modIMM32.NewProc("ImmGetRegisterWordStyleW")
 	procImmGetStatusWindowPos      = modIMM32.NewProc("ImmGetStatusWindowPos")
 	procImmGetVirtualKey           = modIMM32.NewProc("ImmGetVirtualKey")
+	procImmInstallIME              = modIMM32.NewProc("ImmInstallIMEW")
 	procImmInstallIMEA             = modIMM32.NewProc("ImmInstallIMEA")
-	procImmInstallIMEW             = modIMM32.NewProc("ImmInstallIMEW")
 	procImmIsIME                   = modIMM32.NewProc("ImmIsIME")
+	procImmIsUIMessage             = modIMM32.NewProc("ImmIsUIMessageW")
 	procImmIsUIMessageA            = modIMM32.NewProc("ImmIsUIMessageA")
-	procImmIsUIMessageW            = modIMM32.NewProc("ImmIsUIMessageW")
 	procImmLockIMC                 = modIMM32.NewProc("ImmLockIMC")
 	procImmLockIMCC                = modIMM32.NewProc("ImmLockIMCC")
 	procImmNotifyIME               = modIMM32.NewProc("ImmNotifyIME")
 	procImmReSizeIMCC              = modIMM32.NewProc("ImmReSizeIMCC")
+	procImmRegisterWord            = modIMM32.NewProc("ImmRegisterWordW")
 	procImmRegisterWordA           = modIMM32.NewProc("ImmRegisterWordA")
-	procImmRegisterWordW           = modIMM32.NewProc("ImmRegisterWordW")
 	procImmReleaseContext          = modIMM32.NewProc("ImmReleaseContext")
+	procImmRequestMessage          = modIMM32.NewProc("ImmRequestMessageW")
 	procImmRequestMessageA         = modIMM32.NewProc("ImmRequestMessageA")
-	procImmRequestMessageW         = modIMM32.NewProc("ImmRequestMessageW")
 	procImmSetCandidateWindow      = modIMM32.NewProc("ImmSetCandidateWindow")
+	procImmSetCompositionFont      = modIMM32.NewProc("ImmSetCompositionFontW")
 	procImmSetCompositionFontA     = modIMM32.NewProc("ImmSetCompositionFontA")
-	procImmSetCompositionFontW     = modIMM32.NewProc("ImmSetCompositionFontW")
+	procImmSetCompositionString    = modIMM32.NewProc("ImmSetCompositionStringW")
 	procImmSetCompositionStringA   = modIMM32.NewProc("ImmSetCompositionStringA")
-	procImmSetCompositionStringW   = modIMM32.NewProc("ImmSetCompositionStringW")
 	procImmSetCompositionWindow    = modIMM32.NewProc("ImmSetCompositionWindow")
 	procImmSetConversionStatus     = modIMM32.NewProc("ImmSetConversionStatus")
 	procImmSetHotKey               = modIMM32.NewProc("ImmSetHotKey")
@@ -99,8 +99,8 @@ var (
 	procImmSimulateHotKey          = modIMM32.NewProc("ImmSimulateHotKey")
 	procImmUnlockIMC               = modIMM32.NewProc("ImmUnlockIMC")
 	procImmUnlockIMCC              = modIMM32.NewProc("ImmUnlockIMCC")
+	procImmUnregisterWord          = modIMM32.NewProc("ImmUnregisterWordW")
 	procImmUnregisterWordA         = modIMM32.NewProc("ImmUnregisterWordA")
-	procImmUnregisterWordW         = modIMM32.NewProc("ImmUnregisterWordW")
 )
 
 // ImmAssociateContext calls IMM32!ImmAssociateContext.
@@ -114,25 +114,25 @@ func ImmAssociateContext(param0 foundation.HWND, param1 HIMC) HIMC {
 // ImmAssociateContextEx calls IMM32!ImmAssociateContextEx.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immassociatecontextex
 // Minimum OS: windows5.1.2600.
-func ImmAssociateContextEx(param0 foundation.HWND, param1 HIMC, param2 uint32) foundation.BOOL {
+func ImmAssociateContextEx(param0 foundation.HWND, param1 HIMC, param2 uint32) bool {
 	r1, _, _ := syscall.SyscallN(procImmAssociateContextEx.Addr(), uintptr(param0), uintptr(param1), uintptr(param2))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ImmConfigureIME calls IMM32!ImmConfigureIMEW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immconfigureimew
+// Minimum OS: windows5.1.2600.
+func ImmConfigureIME(param0 uiinputkeyboardandmouse.HKL, param1 foundation.HWND, param2 uint32, param3 unsafe.Pointer) bool {
+	r1, _, _ := syscall.SyscallN(procImmConfigureIME.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)))
+	return r1 != 0
 }
 
 // ImmConfigureIMEA calls IMM32!ImmConfigureIMEA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immconfigureimea
 // Minimum OS: windows5.1.2600.
-func ImmConfigureIMEA(param0 uiinputkeyboardandmouse.HKL, param1 foundation.HWND, param2 uint32, param3 unsafe.Pointer) foundation.BOOL {
+func ImmConfigureIMEA(param0 uiinputkeyboardandmouse.HKL, param1 foundation.HWND, param2 uint32, param3 unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procImmConfigureIMEA.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)))
-	return foundation.BOOL(r1)
-}
-
-// ImmConfigureIMEW calls IMM32!ImmConfigureIMEW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immconfigureimew
-// Minimum OS: windows5.1.2600.
-func ImmConfigureIMEW(param0 uiinputkeyboardandmouse.HKL, param1 foundation.HWND, param2 uint32, param3 unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImmConfigureIMEW.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmCreateContext calls IMM32!ImmCreateContext.
@@ -158,9 +158,9 @@ func ImmCreateSoftKeyboard(param0 uint32, param1 foundation.HWND, param2 int32, 
 // ImmDestroyContext calls IMM32!ImmDestroyContext.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immdestroycontext
 // Minimum OS: windows5.1.2600.
-func ImmDestroyContext(param0 HIMC) foundation.BOOL {
+func ImmDestroyContext(param0 HIMC) bool {
 	r1, _, _ := syscall.SyscallN(procImmDestroyContext.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmDestroyIMCC calls IMM32!ImmDestroyIMCC.
@@ -170,41 +170,51 @@ func ImmDestroyIMCC(param0 HIMCC) HIMCC {
 }
 
 // ImmDestroySoftKeyboard calls IMM32!ImmDestroySoftKeyboard.
-func ImmDestroySoftKeyboard(param0 foundation.HWND) foundation.BOOL {
+func ImmDestroySoftKeyboard(param0 foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procImmDestroySoftKeyboard.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmDisableIME calls IMM32!ImmDisableIME.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immdisableime
 // Minimum OS: windows5.1.2600.
-func ImmDisableIME(param0 uint32) foundation.BOOL {
+func ImmDisableIME(param0 uint32) bool {
 	r1, _, _ := syscall.SyscallN(procImmDisableIME.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmDisableLegacyIME calls IMM32!ImmDisableLegacyIME.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immdisablelegacyime
 // Minimum OS: windows8.0.
-func ImmDisableLegacyIME() foundation.BOOL {
+func ImmDisableLegacyIME() bool {
 	r1, _, _ := syscall.SyscallN(procImmDisableLegacyIME.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmDisableTextFrameService calls IMM32!ImmDisableTextFrameService.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immdisabletextframeservice
 // Minimum OS: windows5.1.2600.
-func ImmDisableTextFrameService(idThread uint32) foundation.BOOL {
+func ImmDisableTextFrameService(idThread uint32) bool {
 	r1, _, _ := syscall.SyscallN(procImmDisableTextFrameService.Addr(), uintptr(idThread))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmEnumInputContext calls IMM32!ImmEnumInputContext.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immenuminputcontext
 // Minimum OS: windows5.1.2600.
-func ImmEnumInputContext(idThread uint32, lpfn IMCENUMPROC, lParam foundation.LPARAM) foundation.BOOL {
+func ImmEnumInputContext(idThread uint32, lpfn IMCENUMPROC, lParam foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procImmEnumInputContext.Addr(), uintptr(idThread), uintptr(lpfn), uintptr(lParam))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ImmEnumRegisterWord calls IMM32!ImmEnumRegisterWordW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immenumregisterwordw
+// Minimum OS: windows5.1.2600.
+func ImmEnumRegisterWord(param0 uiinputkeyboardandmouse.HKL, param1 REGISTERWORDENUMPROCW, lpszReading string, param3 uint32, lpszRegister string, param5 unsafe.Pointer) uint32 {
+	_lpszReading := win32.UTF16Ptr(lpszReading)
+	_lpszRegister := win32.UTF16Ptr(lpszRegister)
+	r1, _, _ := syscall.SyscallN(procImmEnumRegisterWord.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(_lpszReading)), uintptr(param3), uintptr(unsafe.Pointer(_lpszRegister)), uintptr(unsafe.Pointer(param5)))
+	return uint32(r1)
 }
 
 // ImmEnumRegisterWordA calls IMM32!ImmEnumRegisterWordA.
@@ -215,12 +225,12 @@ func ImmEnumRegisterWordA(param0 uiinputkeyboardandmouse.HKL, param1 REGISTERWOR
 	return uint32(r1)
 }
 
-// ImmEnumRegisterWordW calls IMM32!ImmEnumRegisterWordW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immenumregisterwordw
+// ImmEscape calls IMM32!ImmEscapeW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immescapew
 // Minimum OS: windows5.1.2600.
-func ImmEnumRegisterWordW(param0 uiinputkeyboardandmouse.HKL, param1 REGISTERWORDENUMPROCW, lpszReading foundation.PWSTR, param3 uint32, lpszRegister foundation.PWSTR, param5 unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmEnumRegisterWordW.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(lpszReading)), uintptr(param3), uintptr(unsafe.Pointer(lpszRegister)), uintptr(unsafe.Pointer(param5)))
-	return uint32(r1)
+func ImmEscape(param0 uiinputkeyboardandmouse.HKL, param1 HIMC, param2 IME_ESCAPE, param3 unsafe.Pointer) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procImmEscape.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)))
+	return foundation.LRESULT(r1)
 }
 
 // ImmEscapeA calls IMM32!ImmEscapeA.
@@ -231,18 +241,18 @@ func ImmEscapeA(param0 uiinputkeyboardandmouse.HKL, param1 HIMC, param2 IME_ESCA
 	return foundation.LRESULT(r1)
 }
 
-// ImmEscapeW calls IMM32!ImmEscapeW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immescapew
-// Minimum OS: windows5.1.2600.
-func ImmEscapeW(param0 uiinputkeyboardandmouse.HKL, param1 HIMC, param2 IME_ESCAPE, param3 unsafe.Pointer) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procImmEscapeW.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(param3)))
-	return foundation.LRESULT(r1)
+// ImmGenerateMessage calls IMM32!ImmGenerateMessage.
+func ImmGenerateMessage(param0 HIMC) bool {
+	r1, _, _ := syscall.SyscallN(procImmGenerateMessage.Addr(), uintptr(param0))
+	return r1 != 0
 }
 
-// ImmGenerateMessage calls IMM32!ImmGenerateMessage.
-func ImmGenerateMessage(param0 HIMC) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImmGenerateMessage.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+// ImmGetCandidateList calls IMM32!ImmGetCandidateListW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcandidatelistw
+// Minimum OS: windows5.1.2600.
+func ImmGetCandidateList(param0 HIMC, deIndex uint32, lpCandList *CANDIDATELIST, dwBufLen uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procImmGetCandidateList.Addr(), uintptr(param0), uintptr(deIndex), uintptr(unsafe.Pointer(lpCandList)), uintptr(dwBufLen))
+	return uint32(r1)
 }
 
 // ImmGetCandidateListA calls IMM32!ImmGetCandidateListA.
@@ -250,6 +260,14 @@ func ImmGenerateMessage(param0 HIMC) foundation.BOOL {
 // Minimum OS: windows5.1.2600.
 func ImmGetCandidateListA(param0 HIMC, deIndex uint32, lpCandList *CANDIDATELIST, dwBufLen uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procImmGetCandidateListA.Addr(), uintptr(param0), uintptr(deIndex), uintptr(unsafe.Pointer(lpCandList)), uintptr(dwBufLen))
+	return uint32(r1)
+}
+
+// ImmGetCandidateListCount calls IMM32!ImmGetCandidateListCountW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcandidatelistcountw
+// Minimum OS: windows5.1.2600.
+func ImmGetCandidateListCount(param0 HIMC, lpdwListCount *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procImmGetCandidateListCount.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpdwListCount)))
 	return uint32(r1)
 }
 
@@ -261,44 +279,36 @@ func ImmGetCandidateListCountA(param0 HIMC, lpdwListCount *uint32) uint32 {
 	return uint32(r1)
 }
 
-// ImmGetCandidateListCountW calls IMM32!ImmGetCandidateListCountW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcandidatelistcountw
-// Minimum OS: windows5.1.2600.
-func ImmGetCandidateListCountW(param0 HIMC, lpdwListCount *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmGetCandidateListCountW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpdwListCount)))
-	return uint32(r1)
-}
-
-// ImmGetCandidateListW calls IMM32!ImmGetCandidateListW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcandidatelistw
-// Minimum OS: windows5.1.2600.
-func ImmGetCandidateListW(param0 HIMC, deIndex uint32, lpCandList *CANDIDATELIST, dwBufLen uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmGetCandidateListW.Addr(), uintptr(param0), uintptr(deIndex), uintptr(unsafe.Pointer(lpCandList)), uintptr(dwBufLen))
-	return uint32(r1)
-}
-
 // ImmGetCandidateWindow calls IMM32!ImmGetCandidateWindow.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcandidatewindow
 // Minimum OS: windows5.1.2600.
-func ImmGetCandidateWindow(param0 HIMC, param1 uint32, lpCandidate *CANDIDATEFORM) foundation.BOOL {
+func ImmGetCandidateWindow(param0 HIMC, param1 uint32, lpCandidate *CANDIDATEFORM) bool {
 	r1, _, _ := syscall.SyscallN(procImmGetCandidateWindow.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(lpCandidate)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ImmGetCompositionFont calls IMM32!ImmGetCompositionFontW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcompositionfontw
+// Minimum OS: windows5.1.2600.
+func ImmGetCompositionFont(param0 HIMC, lplf *graphicsgdi.LOGFONTW) bool {
+	r1, _, _ := syscall.SyscallN(procImmGetCompositionFont.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lplf)))
+	return r1 != 0
 }
 
 // ImmGetCompositionFontA calls IMM32!ImmGetCompositionFontA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcompositionfonta
 // Minimum OS: windows5.1.2600.
-func ImmGetCompositionFontA(param0 HIMC, lplf *graphicsgdi.LOGFONTA) foundation.BOOL {
+func ImmGetCompositionFontA(param0 HIMC, lplf *graphicsgdi.LOGFONTA) bool {
 	r1, _, _ := syscall.SyscallN(procImmGetCompositionFontA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lplf)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// ImmGetCompositionFontW calls IMM32!ImmGetCompositionFontW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcompositionfontw
+// ImmGetCompositionString calls IMM32!ImmGetCompositionStringW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcompositionstringw
 // Minimum OS: windows5.1.2600.
-func ImmGetCompositionFontW(param0 HIMC, lplf *graphicsgdi.LOGFONTW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImmGetCompositionFontW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lplf)))
-	return foundation.BOOL(r1)
+func ImmGetCompositionString(param0 HIMC, param1 IME_COMPOSITION_STRING, lpBuf unsafe.Pointer, dwBufLen uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procImmGetCompositionString.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(lpBuf)), uintptr(dwBufLen))
+	return int32(r1)
 }
 
 // ImmGetCompositionStringA calls IMM32!ImmGetCompositionStringA.
@@ -309,20 +319,12 @@ func ImmGetCompositionStringA(param0 HIMC, param1 IME_COMPOSITION_STRING, lpBuf 
 	return int32(r1)
 }
 
-// ImmGetCompositionStringW calls IMM32!ImmGetCompositionStringW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcompositionstringw
-// Minimum OS: windows5.1.2600.
-func ImmGetCompositionStringW(param0 HIMC, param1 IME_COMPOSITION_STRING, lpBuf unsafe.Pointer, dwBufLen uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procImmGetCompositionStringW.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(lpBuf)), uintptr(dwBufLen))
-	return int32(r1)
-}
-
 // ImmGetCompositionWindow calls IMM32!ImmGetCompositionWindow.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcompositionwindow
 // Minimum OS: windows5.1.2600.
-func ImmGetCompositionWindow(param0 HIMC, lpCompForm *COMPOSITIONFORM) foundation.BOOL {
+func ImmGetCompositionWindow(param0 HIMC, lpCompForm *COMPOSITIONFORM) bool {
 	r1, _, _ := syscall.SyscallN(procImmGetCompositionWindow.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpCompForm)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmGetContext calls IMM32!ImmGetContext.
@@ -333,6 +335,15 @@ func ImmGetContext(param0 foundation.HWND) HIMC {
 	return HIMC(r1)
 }
 
+// ImmGetConversionList calls IMM32!ImmGetConversionListW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetconversionlistw
+// Minimum OS: windows5.1.2600.
+func ImmGetConversionList(param0 uiinputkeyboardandmouse.HKL, param1 HIMC, lpSrc string, lpDst *CANDIDATELIST, dwBufLen uint32, uFlag GET_CONVERSION_LIST_FLAG) uint32 {
+	_lpSrc := win32.UTF16Ptr(lpSrc)
+	r1, _, _ := syscall.SyscallN(procImmGetConversionList.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(_lpSrc)), uintptr(unsafe.Pointer(lpDst)), uintptr(dwBufLen), uintptr(uFlag))
+	return uint32(r1)
+}
+
 // ImmGetConversionListA calls IMM32!ImmGetConversionListA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetconversionlista
 // Minimum OS: windows5.1.2600.
@@ -341,20 +352,12 @@ func ImmGetConversionListA(param0 uiinputkeyboardandmouse.HKL, param1 HIMC, lpSr
 	return uint32(r1)
 }
 
-// ImmGetConversionListW calls IMM32!ImmGetConversionListW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetconversionlistw
-// Minimum OS: windows5.1.2600.
-func ImmGetConversionListW(param0 uiinputkeyboardandmouse.HKL, param1 HIMC, lpSrc foundation.PWSTR, lpDst *CANDIDATELIST, dwBufLen uint32, uFlag GET_CONVERSION_LIST_FLAG) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmGetConversionListW.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(lpSrc)), uintptr(unsafe.Pointer(lpDst)), uintptr(dwBufLen), uintptr(uFlag))
-	return uint32(r1)
-}
-
 // ImmGetConversionStatus calls IMM32!ImmGetConversionStatus.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetconversionstatus
 // Minimum OS: windows5.1.2600.
-func ImmGetConversionStatus(param0 HIMC, lpfdwConversion *IME_CONVERSION_MODE, lpfdwSentence *IME_SENTENCE_MODE) foundation.BOOL {
+func ImmGetConversionStatus(param0 HIMC, lpfdwConversion *IME_CONVERSION_MODE, lpfdwSentence *IME_SENTENCE_MODE) bool {
 	r1, _, _ := syscall.SyscallN(procImmGetConversionStatus.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpfdwConversion)), uintptr(unsafe.Pointer(lpfdwSentence)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmGetDefaultIMEWnd calls IMM32!ImmGetDefaultIMEWnd.
@@ -365,6 +368,14 @@ func ImmGetDefaultIMEWnd(param0 foundation.HWND) foundation.HWND {
 	return foundation.HWND(r1)
 }
 
+// ImmGetDescription calls IMM32!ImmGetDescriptionW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetdescriptionw
+// Minimum OS: windows5.1.2600.
+func ImmGetDescription(param0 uiinputkeyboardandmouse.HKL, lpszDescription foundation.PWSTR, uBufLen uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procImmGetDescription.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpszDescription)), uintptr(uBufLen))
+	return uint32(r1)
+}
+
 // ImmGetDescriptionA calls IMM32!ImmGetDescriptionA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetdescriptiona
 // Minimum OS: windows5.1.2600.
@@ -373,11 +384,11 @@ func ImmGetDescriptionA(param0 uiinputkeyboardandmouse.HKL, lpszDescription foun
 	return uint32(r1)
 }
 
-// ImmGetDescriptionW calls IMM32!ImmGetDescriptionW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetdescriptionw
+// ImmGetGuideLine calls IMM32!ImmGetGuideLineW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetguidelinew
 // Minimum OS: windows5.1.2600.
-func ImmGetDescriptionW(param0 uiinputkeyboardandmouse.HKL, lpszDescription foundation.PWSTR, uBufLen uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmGetDescriptionW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpszDescription)), uintptr(uBufLen))
+func ImmGetGuideLine(param0 HIMC, dwIndex GET_GUIDE_LINE_TYPE, lpBuf foundation.PWSTR, dwBufLen uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procImmGetGuideLine.Addr(), uintptr(param0), uintptr(dwIndex), uintptr(unsafe.Pointer(lpBuf)), uintptr(dwBufLen))
 	return uint32(r1)
 }
 
@@ -389,18 +400,10 @@ func ImmGetGuideLineA(param0 HIMC, dwIndex GET_GUIDE_LINE_TYPE, lpBuf foundation
 	return uint32(r1)
 }
 
-// ImmGetGuideLineW calls IMM32!ImmGetGuideLineW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetguidelinew
-// Minimum OS: windows5.1.2600.
-func ImmGetGuideLineW(param0 HIMC, dwIndex GET_GUIDE_LINE_TYPE, lpBuf foundation.PWSTR, dwBufLen uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmGetGuideLineW.Addr(), uintptr(param0), uintptr(dwIndex), uintptr(unsafe.Pointer(lpBuf)), uintptr(dwBufLen))
-	return uint32(r1)
-}
-
 // ImmGetHotKey calls IMM32!ImmGetHotKey.
-func ImmGetHotKey(param0 uint32, lpuModifiers *uint32, lpuVKey *uint32, phKL *uiinputkeyboardandmouse.HKL) foundation.BOOL {
+func ImmGetHotKey(param0 uint32, lpuModifiers *uint32, lpuVKey *uint32, phKL *uiinputkeyboardandmouse.HKL) bool {
 	r1, _, _ := syscall.SyscallN(procImmGetHotKey.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpuModifiers)), uintptr(unsafe.Pointer(lpuVKey)), uintptr(unsafe.Pointer(phKL)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmGetIMCCLockCount calls IMM32!ImmGetIMCCLockCount.
@@ -421,6 +424,14 @@ func ImmGetIMCLockCount(param0 HIMC) uint32 {
 	return uint32(r1)
 }
 
+// ImmGetIMEFileName calls IMM32!ImmGetIMEFileNameW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetimefilenamew
+// Minimum OS: windows5.1.2600.
+func ImmGetIMEFileName(param0 uiinputkeyboardandmouse.HKL, lpszFileName foundation.PWSTR, uBufLen uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procImmGetIMEFileName.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpszFileName)), uintptr(uBufLen))
+	return uint32(r1)
+}
+
 // ImmGetIMEFileNameA calls IMM32!ImmGetIMEFileNameA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetimefilenamea
 // Minimum OS: windows5.1.2600.
@@ -429,11 +440,11 @@ func ImmGetIMEFileNameA(param0 uiinputkeyboardandmouse.HKL, lpszFileName foundat
 	return uint32(r1)
 }
 
-// ImmGetIMEFileNameW calls IMM32!ImmGetIMEFileNameW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetimefilenamew
+// ImmGetImeMenuItems calls IMM32!ImmGetImeMenuItemsW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetimemenuitemsw
 // Minimum OS: windows5.1.2600.
-func ImmGetIMEFileNameW(param0 uiinputkeyboardandmouse.HKL, lpszFileName foundation.PWSTR, uBufLen uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmGetIMEFileNameW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpszFileName)), uintptr(uBufLen))
+func ImmGetImeMenuItems(param0 HIMC, param1 uint32, param2 uint32, lpImeParentMenu *IMEMENUITEMINFOW, lpImeMenu *IMEMENUITEMINFOW, dwSize uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procImmGetImeMenuItems.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(lpImeParentMenu)), uintptr(unsafe.Pointer(lpImeMenu)), uintptr(dwSize))
 	return uint32(r1)
 }
 
@@ -445,20 +456,12 @@ func ImmGetImeMenuItemsA(param0 HIMC, param1 uint32, param2 uint32, lpImeParentM
 	return uint32(r1)
 }
 
-// ImmGetImeMenuItemsW calls IMM32!ImmGetImeMenuItemsW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetimemenuitemsw
-// Minimum OS: windows5.1.2600.
-func ImmGetImeMenuItemsW(param0 HIMC, param1 uint32, param2 uint32, lpImeParentMenu *IMEMENUITEMINFOW, lpImeMenu *IMEMENUITEMINFOW, dwSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmGetImeMenuItemsW.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(unsafe.Pointer(lpImeParentMenu)), uintptr(unsafe.Pointer(lpImeMenu)), uintptr(dwSize))
-	return uint32(r1)
-}
-
 // ImmGetOpenStatus calls IMM32!ImmGetOpenStatus.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetopenstatus
 // Minimum OS: windows5.1.2600.
-func ImmGetOpenStatus(param0 HIMC) foundation.BOOL {
+func ImmGetOpenStatus(param0 HIMC) bool {
 	r1, _, _ := syscall.SyscallN(procImmGetOpenStatus.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmGetProperty calls IMM32!ImmGetProperty.
@@ -469,28 +472,36 @@ func ImmGetProperty(param0 uiinputkeyboardandmouse.HKL, param1 uint32) uint32 {
 	return uint32(r1)
 }
 
-// ImmGetRegisterWordStyleA calls IMM32!ImmGetRegisterWordStyleA.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetregisterwordstylea
+// ImmGetRegisterWordStyle calls IMM32!ImmGetRegisterWordStyleW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetregisterwordstylew
 // Minimum OS: windows5.1.2600.
-func ImmGetRegisterWordStyleA(param0 uiinputkeyboardandmouse.HKL, nItem uint32, lpStyleBuf *STYLEBUFA) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmGetRegisterWordStyleA.Addr(), uintptr(param0), uintptr(nItem), uintptr(unsafe.Pointer(lpStyleBuf)))
+func ImmGetRegisterWordStyle(param0 uiinputkeyboardandmouse.HKL, lpStyleBuf []STYLEBUFW) uint32 {
+	var _lpStyleBuf *STYLEBUFW
+	if len(lpStyleBuf) > 0 {
+		_lpStyleBuf = &lpStyleBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procImmGetRegisterWordStyle.Addr(), uintptr(param0), uintptr(len(lpStyleBuf)), uintptr(unsafe.Pointer(_lpStyleBuf)))
 	return uint32(r1)
 }
 
-// ImmGetRegisterWordStyleW calls IMM32!ImmGetRegisterWordStyleW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetregisterwordstylew
+// ImmGetRegisterWordStyleA calls IMM32!ImmGetRegisterWordStyleA.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetregisterwordstylea
 // Minimum OS: windows5.1.2600.
-func ImmGetRegisterWordStyleW(param0 uiinputkeyboardandmouse.HKL, nItem uint32, lpStyleBuf *STYLEBUFW) uint32 {
-	r1, _, _ := syscall.SyscallN(procImmGetRegisterWordStyleW.Addr(), uintptr(param0), uintptr(nItem), uintptr(unsafe.Pointer(lpStyleBuf)))
+func ImmGetRegisterWordStyleA(param0 uiinputkeyboardandmouse.HKL, lpStyleBuf []STYLEBUFA) uint32 {
+	var _lpStyleBuf *STYLEBUFA
+	if len(lpStyleBuf) > 0 {
+		_lpStyleBuf = &lpStyleBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procImmGetRegisterWordStyleA.Addr(), uintptr(param0), uintptr(len(lpStyleBuf)), uintptr(unsafe.Pointer(_lpStyleBuf)))
 	return uint32(r1)
 }
 
 // ImmGetStatusWindowPos calls IMM32!ImmGetStatusWindowPos.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetstatuswindowpos
 // Minimum OS: windows5.1.2600.
-func ImmGetStatusWindowPos(param0 HIMC, lpptPos *foundation.POINT) foundation.BOOL {
+func ImmGetStatusWindowPos(param0 HIMC, lpptPos *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procImmGetStatusWindowPos.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpptPos)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmGetVirtualKey calls IMM32!ImmGetVirtualKey.
@@ -501,6 +512,16 @@ func ImmGetVirtualKey(param0 foundation.HWND) uint32 {
 	return uint32(r1)
 }
 
+// ImmInstallIME calls IMM32!ImmInstallIMEW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-imminstallimew
+// Minimum OS: windows5.1.2600.
+func ImmInstallIME(lpszIMEFileName string, lpszLayoutText string) uiinputkeyboardandmouse.HKL {
+	_lpszIMEFileName := win32.UTF16Ptr(lpszIMEFileName)
+	_lpszLayoutText := win32.UTF16Ptr(lpszLayoutText)
+	r1, _, _ := syscall.SyscallN(procImmInstallIME.Addr(), uintptr(unsafe.Pointer(_lpszIMEFileName)), uintptr(unsafe.Pointer(_lpszLayoutText)))
+	return uiinputkeyboardandmouse.HKL(r1)
+}
+
 // ImmInstallIMEA calls IMM32!ImmInstallIMEA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-imminstallimea
 // Minimum OS: windows5.1.2600.
@@ -509,36 +530,28 @@ func ImmInstallIMEA(lpszIMEFileName foundation.PSTR, lpszLayoutText foundation.P
 	return uiinputkeyboardandmouse.HKL(r1)
 }
 
-// ImmInstallIMEW calls IMM32!ImmInstallIMEW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-imminstallimew
-// Minimum OS: windows5.1.2600.
-func ImmInstallIMEW(lpszIMEFileName foundation.PWSTR, lpszLayoutText foundation.PWSTR) uiinputkeyboardandmouse.HKL {
-	r1, _, _ := syscall.SyscallN(procImmInstallIMEW.Addr(), uintptr(unsafe.Pointer(lpszIMEFileName)), uintptr(unsafe.Pointer(lpszLayoutText)))
-	return uiinputkeyboardandmouse.HKL(r1)
-}
-
 // ImmIsIME calls IMM32!ImmIsIME.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immisime
 // Minimum OS: windows5.1.2600.
-func ImmIsIME(param0 uiinputkeyboardandmouse.HKL) foundation.BOOL {
+func ImmIsIME(param0 uiinputkeyboardandmouse.HKL) bool {
 	r1, _, _ := syscall.SyscallN(procImmIsIME.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ImmIsUIMessage calls IMM32!ImmIsUIMessageW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immisuimessagew
+// Minimum OS: windows5.1.2600.
+func ImmIsUIMessage(param0 foundation.HWND, param1 uint32, param2 foundation.WPARAM, param3 foundation.LPARAM) bool {
+	r1, _, _ := syscall.SyscallN(procImmIsUIMessage.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
+	return r1 != 0
 }
 
 // ImmIsUIMessageA calls IMM32!ImmIsUIMessageA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immisuimessagea
 // Minimum OS: windows5.1.2600.
-func ImmIsUIMessageA(param0 foundation.HWND, param1 uint32, param2 foundation.WPARAM, param3 foundation.LPARAM) foundation.BOOL {
+func ImmIsUIMessageA(param0 foundation.HWND, param1 uint32, param2 foundation.WPARAM, param3 foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procImmIsUIMessageA.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
-	return foundation.BOOL(r1)
-}
-
-// ImmIsUIMessageW calls IMM32!ImmIsUIMessageW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immisuimessagew
-// Minimum OS: windows5.1.2600.
-func ImmIsUIMessageW(param0 foundation.HWND, param1 uint32, param2 foundation.WPARAM, param3 foundation.LPARAM) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImmIsUIMessageW.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmLockIMC calls IMM32!ImmLockIMC.
@@ -556,9 +569,9 @@ func ImmLockIMCC(param0 HIMCC) unsafe.Pointer {
 // ImmNotifyIME calls IMM32!ImmNotifyIME.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immnotifyime
 // Minimum OS: windows5.1.2600.
-func ImmNotifyIME(param0 HIMC, dwAction NOTIFY_IME_ACTION, dwIndex NOTIFY_IME_INDEX, dwValue uint32) foundation.BOOL {
+func ImmNotifyIME(param0 HIMC, dwAction NOTIFY_IME_ACTION, dwIndex NOTIFY_IME_INDEX, dwValue uint32) bool {
 	r1, _, _ := syscall.SyscallN(procImmNotifyIME.Addr(), uintptr(param0), uintptr(dwAction), uintptr(dwIndex), uintptr(dwValue))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmReSizeIMCC calls IMM32!ImmReSizeIMCC.
@@ -567,28 +580,38 @@ func ImmReSizeIMCC(param0 HIMCC, param1 uint32) HIMCC {
 	return HIMCC(r1)
 }
 
+// ImmRegisterWord calls IMM32!ImmRegisterWordW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immregisterwordw
+// Minimum OS: windows5.1.2600.
+func ImmRegisterWord(param0 uiinputkeyboardandmouse.HKL, lpszReading string, param2 uint32, lpszRegister string) bool {
+	_lpszReading := win32.UTF16Ptr(lpszReading)
+	_lpszRegister := win32.UTF16Ptr(lpszRegister)
+	r1, _, _ := syscall.SyscallN(procImmRegisterWord.Addr(), uintptr(param0), uintptr(unsafe.Pointer(_lpszReading)), uintptr(param2), uintptr(unsafe.Pointer(_lpszRegister)))
+	return r1 != 0
+}
+
 // ImmRegisterWordA calls IMM32!ImmRegisterWordA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immregisterworda
 // Minimum OS: windows5.1.2600.
-func ImmRegisterWordA(param0 uiinputkeyboardandmouse.HKL, lpszReading foundation.PSTR, param2 uint32, lpszRegister foundation.PSTR) foundation.BOOL {
+func ImmRegisterWordA(param0 uiinputkeyboardandmouse.HKL, lpszReading foundation.PSTR, param2 uint32, lpszRegister foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procImmRegisterWordA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpszReading)), uintptr(param2), uintptr(unsafe.Pointer(lpszRegister)))
-	return foundation.BOOL(r1)
-}
-
-// ImmRegisterWordW calls IMM32!ImmRegisterWordW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immregisterwordw
-// Minimum OS: windows5.1.2600.
-func ImmRegisterWordW(param0 uiinputkeyboardandmouse.HKL, lpszReading foundation.PWSTR, param2 uint32, lpszRegister foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImmRegisterWordW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpszReading)), uintptr(param2), uintptr(unsafe.Pointer(lpszRegister)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmReleaseContext calls IMM32!ImmReleaseContext.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immreleasecontext
 // Minimum OS: windows5.1.2600.
-func ImmReleaseContext(param0 foundation.HWND, param1 HIMC) foundation.BOOL {
+func ImmReleaseContext(param0 foundation.HWND, param1 HIMC) bool {
 	r1, _, _ := syscall.SyscallN(procImmReleaseContext.Addr(), uintptr(param0), uintptr(param1))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ImmRequestMessage calls IMM32!ImmRequestMessageW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immrequestmessagew
+// Minimum OS: windows5.1.2600.
+func ImmRequestMessage(param0 HIMC, param1 foundation.WPARAM, param2 foundation.LPARAM) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procImmRequestMessage.Addr(), uintptr(param0), uintptr(param1), uintptr(param2))
+	return foundation.LRESULT(r1)
 }
 
 // ImmRequestMessageA calls IMM32!ImmRequestMessageA.
@@ -599,130 +622,125 @@ func ImmRequestMessageA(param0 HIMC, param1 foundation.WPARAM, param2 foundation
 	return foundation.LRESULT(r1)
 }
 
-// ImmRequestMessageW calls IMM32!ImmRequestMessageW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immrequestmessagew
-// Minimum OS: windows5.1.2600.
-func ImmRequestMessageW(param0 HIMC, param1 foundation.WPARAM, param2 foundation.LPARAM) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procImmRequestMessageW.Addr(), uintptr(param0), uintptr(param1), uintptr(param2))
-	return foundation.LRESULT(r1)
-}
-
 // ImmSetCandidateWindow calls IMM32!ImmSetCandidateWindow.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcandidatewindow
 // Minimum OS: windows5.1.2600.
-func ImmSetCandidateWindow(param0 HIMC, lpCandidate *CANDIDATEFORM) foundation.BOOL {
+func ImmSetCandidateWindow(param0 HIMC, lpCandidate *CANDIDATEFORM) bool {
 	r1, _, _ := syscall.SyscallN(procImmSetCandidateWindow.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpCandidate)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ImmSetCompositionFont calls IMM32!ImmSetCompositionFontW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcompositionfontw
+// Minimum OS: windows5.1.2600.
+func ImmSetCompositionFont(param0 HIMC, lplf *graphicsgdi.LOGFONTW) bool {
+	r1, _, _ := syscall.SyscallN(procImmSetCompositionFont.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lplf)))
+	return r1 != 0
 }
 
 // ImmSetCompositionFontA calls IMM32!ImmSetCompositionFontA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcompositionfonta
 // Minimum OS: windows5.1.2600.
-func ImmSetCompositionFontA(param0 HIMC, lplf *graphicsgdi.LOGFONTA) foundation.BOOL {
+func ImmSetCompositionFontA(param0 HIMC, lplf *graphicsgdi.LOGFONTA) bool {
 	r1, _, _ := syscall.SyscallN(procImmSetCompositionFontA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lplf)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// ImmSetCompositionFontW calls IMM32!ImmSetCompositionFontW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcompositionfontw
+// ImmSetCompositionString calls IMM32!ImmSetCompositionStringW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcompositionstringw
 // Minimum OS: windows5.1.2600.
-func ImmSetCompositionFontW(param0 HIMC, lplf *graphicsgdi.LOGFONTW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImmSetCompositionFontW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lplf)))
-	return foundation.BOOL(r1)
+func ImmSetCompositionString(param0 HIMC, dwIndex SET_COMPOSITION_STRING_TYPE, lpComp unsafe.Pointer, dwCompLen uint32, lpRead unsafe.Pointer, dwReadLen uint32) bool {
+	r1, _, _ := syscall.SyscallN(procImmSetCompositionString.Addr(), uintptr(param0), uintptr(dwIndex), uintptr(unsafe.Pointer(lpComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(lpRead)), uintptr(dwReadLen))
+	return r1 != 0
 }
 
 // ImmSetCompositionStringA calls IMM32!ImmSetCompositionStringA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcompositionstringa
 // Minimum OS: windows5.1.2600.
-func ImmSetCompositionStringA(param0 HIMC, dwIndex SET_COMPOSITION_STRING_TYPE, lpComp unsafe.Pointer, dwCompLen uint32, lpRead unsafe.Pointer, dwReadLen uint32) foundation.BOOL {
+func ImmSetCompositionStringA(param0 HIMC, dwIndex SET_COMPOSITION_STRING_TYPE, lpComp unsafe.Pointer, dwCompLen uint32, lpRead unsafe.Pointer, dwReadLen uint32) bool {
 	r1, _, _ := syscall.SyscallN(procImmSetCompositionStringA.Addr(), uintptr(param0), uintptr(dwIndex), uintptr(unsafe.Pointer(lpComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(lpRead)), uintptr(dwReadLen))
-	return foundation.BOOL(r1)
-}
-
-// ImmSetCompositionStringW calls IMM32!ImmSetCompositionStringW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcompositionstringw
-// Minimum OS: windows5.1.2600.
-func ImmSetCompositionStringW(param0 HIMC, dwIndex SET_COMPOSITION_STRING_TYPE, lpComp unsafe.Pointer, dwCompLen uint32, lpRead unsafe.Pointer, dwReadLen uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImmSetCompositionStringW.Addr(), uintptr(param0), uintptr(dwIndex), uintptr(unsafe.Pointer(lpComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(lpRead)), uintptr(dwReadLen))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmSetCompositionWindow calls IMM32!ImmSetCompositionWindow.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcompositionwindow
 // Minimum OS: windows5.1.2600.
-func ImmSetCompositionWindow(param0 HIMC, lpCompForm *COMPOSITIONFORM) foundation.BOOL {
+func ImmSetCompositionWindow(param0 HIMC, lpCompForm *COMPOSITIONFORM) bool {
 	r1, _, _ := syscall.SyscallN(procImmSetCompositionWindow.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpCompForm)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmSetConversionStatus calls IMM32!ImmSetConversionStatus.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetconversionstatus
 // Minimum OS: windows5.1.2600.
-func ImmSetConversionStatus(param0 HIMC, param1 IME_CONVERSION_MODE, param2 IME_SENTENCE_MODE) foundation.BOOL {
+func ImmSetConversionStatus(param0 HIMC, param1 IME_CONVERSION_MODE, param2 IME_SENTENCE_MODE) bool {
 	r1, _, _ := syscall.SyscallN(procImmSetConversionStatus.Addr(), uintptr(param0), uintptr(param1), uintptr(param2))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmSetHotKey calls IMM32!ImmSetHotKey.
-func ImmSetHotKey(param0 uint32, param1 uint32, param2 uint32, param3 uiinputkeyboardandmouse.HKL) foundation.BOOL {
+func ImmSetHotKey(param0 uint32, param1 uint32, param2 uint32, param3 uiinputkeyboardandmouse.HKL) bool {
 	r1, _, _ := syscall.SyscallN(procImmSetHotKey.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmSetOpenStatus calls IMM32!ImmSetOpenStatus.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetopenstatus
 // Minimum OS: windows5.1.2600.
-func ImmSetOpenStatus(param0 HIMC, param1 foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImmSetOpenStatus.Addr(), uintptr(param0), uintptr(param1))
-	return foundation.BOOL(r1)
+func ImmSetOpenStatus(param0 HIMC, param1 bool) bool {
+	_param1 := win32.Bool32(param1)
+	r1, _, _ := syscall.SyscallN(procImmSetOpenStatus.Addr(), uintptr(param0), uintptr(_param1))
+	return r1 != 0
 }
 
 // ImmSetStatusWindowPos calls IMM32!ImmSetStatusWindowPos.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetstatuswindowpos
 // Minimum OS: windows5.1.2600.
-func ImmSetStatusWindowPos(param0 HIMC, lpptPos *foundation.POINT) foundation.BOOL {
+func ImmSetStatusWindowPos(param0 HIMC, lpptPos *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procImmSetStatusWindowPos.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpptPos)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmShowSoftKeyboard calls IMM32!ImmShowSoftKeyboard.
-func ImmShowSoftKeyboard(param0 foundation.HWND, param1 int32) foundation.BOOL {
+func ImmShowSoftKeyboard(param0 foundation.HWND, param1 int32) bool {
 	r1, _, _ := syscall.SyscallN(procImmShowSoftKeyboard.Addr(), uintptr(param0), uintptr(param1))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmSimulateHotKey calls IMM32!ImmSimulateHotKey.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsimulatehotkey
 // Minimum OS: windows5.1.2600.
-func ImmSimulateHotKey(param0 foundation.HWND, param1 IME_HOTKEY_IDENTIFIER) foundation.BOOL {
+func ImmSimulateHotKey(param0 foundation.HWND, param1 IME_HOTKEY_IDENTIFIER) bool {
 	r1, _, _ := syscall.SyscallN(procImmSimulateHotKey.Addr(), uintptr(param0), uintptr(param1))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmUnlockIMC calls IMM32!ImmUnlockIMC.
-func ImmUnlockIMC(param0 HIMC) foundation.BOOL {
+func ImmUnlockIMC(param0 HIMC) bool {
 	r1, _, _ := syscall.SyscallN(procImmUnlockIMC.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImmUnlockIMCC calls IMM32!ImmUnlockIMCC.
-func ImmUnlockIMCC(param0 HIMCC) foundation.BOOL {
+func ImmUnlockIMCC(param0 HIMCC) bool {
 	r1, _, _ := syscall.SyscallN(procImmUnlockIMCC.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ImmUnregisterWord calls IMM32!ImmUnregisterWordW.
+// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immunregisterwordw
+// Minimum OS: windows5.1.2600.
+func ImmUnregisterWord(param0 uiinputkeyboardandmouse.HKL, lpszReading string, param2 uint32, lpszUnregister string) bool {
+	_lpszReading := win32.UTF16Ptr(lpszReading)
+	_lpszUnregister := win32.UTF16Ptr(lpszUnregister)
+	r1, _, _ := syscall.SyscallN(procImmUnregisterWord.Addr(), uintptr(param0), uintptr(unsafe.Pointer(_lpszReading)), uintptr(param2), uintptr(unsafe.Pointer(_lpszUnregister)))
+	return r1 != 0
 }
 
 // ImmUnregisterWordA calls IMM32!ImmUnregisterWordA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immunregisterworda
 // Minimum OS: windows5.1.2600.
-func ImmUnregisterWordA(param0 uiinputkeyboardandmouse.HKL, lpszReading foundation.PSTR, param2 uint32, lpszUnregister foundation.PSTR) foundation.BOOL {
+func ImmUnregisterWordA(param0 uiinputkeyboardandmouse.HKL, lpszReading foundation.PSTR, param2 uint32, lpszUnregister foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procImmUnregisterWordA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpszReading)), uintptr(param2), uintptr(unsafe.Pointer(lpszUnregister)))
-	return foundation.BOOL(r1)
-}
-
-// ImmUnregisterWordW calls IMM32!ImmUnregisterWordW.
-// https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immunregisterwordw
-// Minimum OS: windows5.1.2600.
-func ImmUnregisterWordW(param0 uiinputkeyboardandmouse.HKL, lpszReading foundation.PWSTR, param2 uint32, lpszUnregister foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImmUnregisterWordW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(lpszReading)), uintptr(param2), uintptr(unsafe.Pointer(lpszUnregister)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

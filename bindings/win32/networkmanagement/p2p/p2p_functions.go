@@ -236,57 +236,62 @@ func DrtClose(hDrt unsafe.Pointer) {
 // DrtContinueSearch calls drt!DrtContinueSearch.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtcontinuesearch
 // Minimum OS: windows6.1.
-func DrtContinueSearch(hSearchContext unsafe.Pointer) foundation.HRESULT {
+func DrtContinueSearch(hSearchContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtContinueSearch.Addr(), uintptr(unsafe.Pointer(hSearchContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtCreateDerivedKey calls drtprov!DrtCreateDerivedKey.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtcreatederivedkey
 // Minimum OS: windows6.1.
-func DrtCreateDerivedKey(pLocalCert *securitycryptography.CERT_CONTEXT, pKey *DRT_DATA) foundation.HRESULT {
+func DrtCreateDerivedKey(pLocalCert *securitycryptography.CERT_CONTEXT, pKey *DRT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procDrtCreateDerivedKey.Addr(), uintptr(unsafe.Pointer(pLocalCert)), uintptr(unsafe.Pointer(pKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtCreateDerivedKeySecurityProvider calls drtprov!DrtCreateDerivedKeySecurityProvider.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtcreatederivedkeysecurityprovider
 // Minimum OS: windows6.1.
-func DrtCreateDerivedKeySecurityProvider(pRootCert *securitycryptography.CERT_CONTEXT, pLocalCert *securitycryptography.CERT_CONTEXT, ppSecurityProvider **DRT_SECURITY_PROVIDER) foundation.HRESULT {
+func DrtCreateDerivedKeySecurityProvider(pRootCert *securitycryptography.CERT_CONTEXT, pLocalCert *securitycryptography.CERT_CONTEXT, ppSecurityProvider **DRT_SECURITY_PROVIDER) error {
 	r1, _, _ := syscall.SyscallN(procDrtCreateDerivedKeySecurityProvider.Addr(), uintptr(unsafe.Pointer(pRootCert)), uintptr(unsafe.Pointer(pLocalCert)), uintptr(unsafe.Pointer(ppSecurityProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtCreateDnsBootstrapResolver calls drtprov!DrtCreateDnsBootstrapResolver.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtcreatednsbootstrapresolver
 // Minimum OS: windows6.1.
-func DrtCreateDnsBootstrapResolver(port uint16, pwszAddress foundation.PWSTR, ppModule **DRT_BOOTSTRAP_PROVIDER) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDrtCreateDnsBootstrapResolver.Addr(), uintptr(port), uintptr(unsafe.Pointer(pwszAddress)), uintptr(unsafe.Pointer(ppModule)))
-	return foundation.HRESULT(r1)
+func DrtCreateDnsBootstrapResolver(port uint16, pwszAddress string, ppModule **DRT_BOOTSTRAP_PROVIDER) error {
+	_pwszAddress := win32.UTF16Ptr(pwszAddress)
+	r1, _, _ := syscall.SyscallN(procDrtCreateDnsBootstrapResolver.Addr(), uintptr(port), uintptr(unsafe.Pointer(_pwszAddress)), uintptr(unsafe.Pointer(ppModule)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtCreateIpv6UdpTransport calls drttransport!DrtCreateIpv6UdpTransport.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtcreateipv6udptransport
 // Minimum OS: windows6.1.
-func DrtCreateIpv6UdpTransport(scope DRT_SCOPE, dwScopeId uint32, dwLocalityThreshold uint32, pwPort *uint16, phTransport *unsafe.Pointer) foundation.HRESULT {
+func DrtCreateIpv6UdpTransport(scope DRT_SCOPE, dwScopeId uint32, dwLocalityThreshold uint32, pwPort *uint16, phTransport *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtCreateIpv6UdpTransport.Addr(), uintptr(scope), uintptr(dwScopeId), uintptr(dwLocalityThreshold), uintptr(unsafe.Pointer(pwPort)), uintptr(unsafe.Pointer(phTransport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtCreateNullSecurityProvider calls drtprov!DrtCreateNullSecurityProvider.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtcreatenullsecurityprovider
 // Minimum OS: windows6.1.
-func DrtCreateNullSecurityProvider(ppSecurityProvider **DRT_SECURITY_PROVIDER) foundation.HRESULT {
+func DrtCreateNullSecurityProvider(ppSecurityProvider **DRT_SECURITY_PROVIDER) error {
 	r1, _, _ := syscall.SyscallN(procDrtCreateNullSecurityProvider.Addr(), uintptr(unsafe.Pointer(ppSecurityProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtCreatePnrpBootstrapResolver calls drtprov!DrtCreatePnrpBootstrapResolver.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtcreatepnrpbootstrapresolver
 // Minimum OS: windows6.1.
-func DrtCreatePnrpBootstrapResolver(fPublish foundation.BOOL, pwzPeerName foundation.PWSTR, pwzCloudName foundation.PWSTR, pwzPublishingIdentity foundation.PWSTR, ppResolver **DRT_BOOTSTRAP_PROVIDER) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDrtCreatePnrpBootstrapResolver.Addr(), uintptr(fPublish), uintptr(unsafe.Pointer(pwzPeerName)), uintptr(unsafe.Pointer(pwzCloudName)), uintptr(unsafe.Pointer(pwzPublishingIdentity)), uintptr(unsafe.Pointer(ppResolver)))
-	return foundation.HRESULT(r1)
+func DrtCreatePnrpBootstrapResolver(fPublish bool, pwzPeerName string, pwzCloudName string, pwzPublishingIdentity string, ppResolver **DRT_BOOTSTRAP_PROVIDER) error {
+	_fPublish := win32.Bool32(fPublish)
+	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
+	_pwzCloudName := win32.UTF16Ptr(pwzCloudName)
+	_pwzPublishingIdentity := win32.UTF16Ptr(pwzPublishingIdentity)
+	r1, _, _ := syscall.SyscallN(procDrtCreatePnrpBootstrapResolver.Addr(), uintptr(_fPublish), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(_pwzCloudName)), uintptr(unsafe.Pointer(_pwzPublishingIdentity)), uintptr(unsafe.Pointer(ppResolver)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtDeleteDerivedKeySecurityProvider calls drtprov!DrtDeleteDerivedKeySecurityProvider.
@@ -306,9 +311,9 @@ func DrtDeleteDnsBootstrapResolver(pResolver *DRT_BOOTSTRAP_PROVIDER) {
 // DrtDeleteIpv6UdpTransport calls drttransport!DrtDeleteIpv6UdpTransport.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtdeleteipv6udptransport
 // Minimum OS: windows6.1.
-func DrtDeleteIpv6UdpTransport(hTransport unsafe.Pointer) foundation.HRESULT {
+func DrtDeleteIpv6UdpTransport(hTransport unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtDeleteIpv6UdpTransport.Addr(), uintptr(unsafe.Pointer(hTransport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtDeleteNullSecurityProvider calls drtprov!DrtDeleteNullSecurityProvider.
@@ -328,97 +333,97 @@ func DrtDeletePnrpBootstrapResolver(pResolver *DRT_BOOTSTRAP_PROVIDER) {
 // DrtEndSearch calls drt!DrtEndSearch.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtendsearch
 // Minimum OS: windows6.1.
-func DrtEndSearch(hSearchContext unsafe.Pointer) foundation.HRESULT {
+func DrtEndSearch(hSearchContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtEndSearch.Addr(), uintptr(unsafe.Pointer(hSearchContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtGetEventData calls drt!DrtGetEventData.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtgeteventdata
 // Minimum OS: windows6.1.
-func DrtGetEventData(hDrt unsafe.Pointer, ulEventDataLen uint32, pEventData *DRT_EVENT_DATA) foundation.HRESULT {
+func DrtGetEventData(hDrt unsafe.Pointer, ulEventDataLen uint32, pEventData *DRT_EVENT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetEventData.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(ulEventDataLen), uintptr(unsafe.Pointer(pEventData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtGetEventDataSize calls drt!DrtGetEventDataSize.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtgeteventdatasize
 // Minimum OS: windows6.1.
-func DrtGetEventDataSize(hDrt unsafe.Pointer, pulEventDataLen *uint32) foundation.HRESULT {
+func DrtGetEventDataSize(hDrt unsafe.Pointer, pulEventDataLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetEventDataSize.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(unsafe.Pointer(pulEventDataLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtGetInstanceName calls drt!DrtGetInstanceName.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtgetinstancename
 // Minimum OS: windows6.1.
-func DrtGetInstanceName(hDrt unsafe.Pointer, ulcbInstanceNameSize uint32, pwzDrtInstanceName foundation.PWSTR) foundation.HRESULT {
+func DrtGetInstanceName(hDrt unsafe.Pointer, ulcbInstanceNameSize uint32, pwzDrtInstanceName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetInstanceName.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(ulcbInstanceNameSize), uintptr(unsafe.Pointer(pwzDrtInstanceName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtGetInstanceNameSize calls drt!DrtGetInstanceNameSize.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtgetinstancenamesize
 // Minimum OS: windows6.1.
-func DrtGetInstanceNameSize(hDrt unsafe.Pointer, pulcbInstanceNameSize *uint32) foundation.HRESULT {
+func DrtGetInstanceNameSize(hDrt unsafe.Pointer, pulcbInstanceNameSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetInstanceNameSize.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(unsafe.Pointer(pulcbInstanceNameSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtGetSearchPath calls drt!DrtGetSearchPath.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtgetsearchpath
 // Minimum OS: windows6.1.
-func DrtGetSearchPath(hSearchContext unsafe.Pointer, ulSearchPathSize uint32, pSearchPath *DRT_ADDRESS_LIST) foundation.HRESULT {
+func DrtGetSearchPath(hSearchContext unsafe.Pointer, ulSearchPathSize uint32, pSearchPath *DRT_ADDRESS_LIST) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetSearchPath.Addr(), uintptr(unsafe.Pointer(hSearchContext)), uintptr(ulSearchPathSize), uintptr(unsafe.Pointer(pSearchPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtGetSearchPathSize calls drt!DrtGetSearchPathSize.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtgetsearchpathsize
 // Minimum OS: windows6.1.
-func DrtGetSearchPathSize(hSearchContext unsafe.Pointer, pulSearchPathSize *uint32) foundation.HRESULT {
+func DrtGetSearchPathSize(hSearchContext unsafe.Pointer, pulSearchPathSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetSearchPathSize.Addr(), uintptr(unsafe.Pointer(hSearchContext)), uintptr(unsafe.Pointer(pulSearchPathSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtGetSearchResult calls drt!DrtGetSearchResult.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtgetsearchresult
 // Minimum OS: windows6.1.
-func DrtGetSearchResult(hSearchContext unsafe.Pointer, ulSearchResultSize uint32, pSearchResult *DRT_SEARCH_RESULT) foundation.HRESULT {
+func DrtGetSearchResult(hSearchContext unsafe.Pointer, ulSearchResultSize uint32, pSearchResult *DRT_SEARCH_RESULT) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetSearchResult.Addr(), uintptr(unsafe.Pointer(hSearchContext)), uintptr(ulSearchResultSize), uintptr(unsafe.Pointer(pSearchResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtGetSearchResultSize calls drt!DrtGetSearchResultSize.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtgetsearchresultsize
 // Minimum OS: windows6.1.
-func DrtGetSearchResultSize(hSearchContext unsafe.Pointer, pulSearchResultSize *uint32) foundation.HRESULT {
+func DrtGetSearchResultSize(hSearchContext unsafe.Pointer, pulSearchResultSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDrtGetSearchResultSize.Addr(), uintptr(unsafe.Pointer(hSearchContext)), uintptr(unsafe.Pointer(pulSearchResultSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtOpen calls drt!DrtOpen.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtopen
 // Minimum OS: windows6.1.
-func DrtOpen(pSettings *DRT_SETTINGS, hEvent foundation.HANDLE, pvContext unsafe.Pointer, phDrt *unsafe.Pointer) foundation.HRESULT {
+func DrtOpen(pSettings *DRT_SETTINGS, hEvent foundation.HANDLE, pvContext unsafe.Pointer, phDrt *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtOpen.Addr(), uintptr(unsafe.Pointer(pSettings)), uintptr(hEvent), uintptr(unsafe.Pointer(pvContext)), uintptr(unsafe.Pointer(phDrt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtRegisterKey calls drt!DrtRegisterKey.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtregisterkey
 // Minimum OS: windows6.1.
-func DrtRegisterKey(hDrt unsafe.Pointer, pRegistration *DRT_REGISTRATION, pvKeyContext unsafe.Pointer, phKeyRegistration *unsafe.Pointer) foundation.HRESULT {
+func DrtRegisterKey(hDrt unsafe.Pointer, pRegistration *DRT_REGISTRATION, pvKeyContext unsafe.Pointer, phKeyRegistration *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtRegisterKey.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(unsafe.Pointer(pRegistration)), uintptr(unsafe.Pointer(pvKeyContext)), uintptr(unsafe.Pointer(phKeyRegistration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtStartSearch calls drt!DrtStartSearch.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtstartsearch
 // Minimum OS: windows6.1.
-func DrtStartSearch(hDrt unsafe.Pointer, pKey *DRT_DATA, pInfo *DRT_SEARCH_INFO, timeout uint32, hEvent foundation.HANDLE, pvContext unsafe.Pointer, hSearchContext *unsafe.Pointer) foundation.HRESULT {
+func DrtStartSearch(hDrt unsafe.Pointer, pKey *DRT_DATA, pInfo *DRT_SEARCH_INFO, timeout uint32, hEvent foundation.HANDLE, pvContext unsafe.Pointer, hSearchContext *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDrtStartSearch.Addr(), uintptr(unsafe.Pointer(hDrt)), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pInfo)), uintptr(timeout), uintptr(hEvent), uintptr(unsafe.Pointer(pvContext)), uintptr(unsafe.Pointer(hSearchContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrtUnregisterKey calls drt!DrtUnregisterKey.
@@ -431,353 +436,365 @@ func DrtUnregisterKey(hKeyRegistration unsafe.Pointer) {
 // DrtUpdateKey calls drt!DrtUpdateKey.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtupdatekey
 // Minimum OS: windows6.1.
-func DrtUpdateKey(hKeyRegistration unsafe.Pointer, pAppData *DRT_DATA) foundation.HRESULT {
+func DrtUpdateKey(hKeyRegistration unsafe.Pointer, pAppData *DRT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procDrtUpdateKey.Addr(), uintptr(unsafe.Pointer(hKeyRegistration)), uintptr(unsafe.Pointer(pAppData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabAddContact calls P2P!PeerCollabAddContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabaddcontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabAddContact(pwzContactData foundation.PWSTR, ppContact **PEER_CONTACT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerCollabAddContact.Addr(), uintptr(unsafe.Pointer(pwzContactData)), uintptr(unsafe.Pointer(ppContact)))
-	return foundation.HRESULT(r1)
+func PeerCollabAddContact(pwzContactData string, ppContact **PEER_CONTACT) error {
+	_pwzContactData := win32.UTF16Ptr(pwzContactData)
+	r1, _, _ := syscall.SyscallN(procPeerCollabAddContact.Addr(), uintptr(unsafe.Pointer(_pwzContactData)), uintptr(unsafe.Pointer(ppContact)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabAsyncInviteContact calls P2P!PeerCollabAsyncInviteContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabasyncinvitecontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabAsyncInviteContact(pcContact *PEER_CONTACT, pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, hEvent foundation.HANDLE, phInvitation *foundation.HANDLE) foundation.HRESULT {
+func PeerCollabAsyncInviteContact(pcContact *PEER_CONTACT, pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, hEvent foundation.HANDLE, phInvitation *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabAsyncInviteContact.Addr(), uintptr(unsafe.Pointer(pcContact)), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pcInvitation)), uintptr(hEvent), uintptr(unsafe.Pointer(phInvitation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabAsyncInviteEndpoint calls P2P!PeerCollabAsyncInviteEndpoint.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabasyncinviteendpoint
 // Minimum OS: windows6.0.6000.
-func PeerCollabAsyncInviteEndpoint(pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, hEvent foundation.HANDLE, phInvitation *foundation.HANDLE) foundation.HRESULT {
+func PeerCollabAsyncInviteEndpoint(pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, hEvent foundation.HANDLE, phInvitation *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabAsyncInviteEndpoint.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pcInvitation)), uintptr(hEvent), uintptr(unsafe.Pointer(phInvitation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabCancelInvitation calls P2P!PeerCollabCancelInvitation.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabcancelinvitation
 // Minimum OS: windows6.0.6000.
-func PeerCollabCancelInvitation(hInvitation foundation.HANDLE) foundation.HRESULT {
+func PeerCollabCancelInvitation(hInvitation foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabCancelInvitation.Addr(), uintptr(hInvitation))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabCloseHandle calls P2P!PeerCollabCloseHandle.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabclosehandle
 // Minimum OS: windows6.0.6000.
-func PeerCollabCloseHandle(hInvitation foundation.HANDLE) foundation.HRESULT {
+func PeerCollabCloseHandle(hInvitation foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabCloseHandle.Addr(), uintptr(hInvitation))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabDeleteContact calls P2P!PeerCollabDeleteContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabdeletecontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabDeleteContact(pwzPeerName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerCollabDeleteContact.Addr(), uintptr(unsafe.Pointer(pwzPeerName)))
-	return foundation.HRESULT(r1)
+func PeerCollabDeleteContact(pwzPeerName string) error {
+	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
+	r1, _, _ := syscall.SyscallN(procPeerCollabDeleteContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabDeleteEndpointData calls P2P!PeerCollabDeleteEndpointData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabdeleteendpointdata
 // Minimum OS: windows6.0.6000.
-func PeerCollabDeleteEndpointData(pcEndpoint *PEER_ENDPOINT) foundation.HRESULT {
+func PeerCollabDeleteEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabDeleteEndpointData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabDeleteObject calls P2P!PeerCollabDeleteObject.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabdeleteobject
 // Minimum OS: windows6.0.6000.
-func PeerCollabDeleteObject(pObjectId *win32.GUID) foundation.HRESULT {
+func PeerCollabDeleteObject(pObjectId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabDeleteObject.Addr(), uintptr(unsafe.Pointer(pObjectId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabEnumApplicationRegistrationInfo calls P2P!PeerCollabEnumApplicationRegistrationInfo.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabenumapplicationregistrationinfo
 // Minimum OS: windows6.0.6000.
-func PeerCollabEnumApplicationRegistrationInfo(registrationType PEER_APPLICATION_REGISTRATION_TYPE, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerCollabEnumApplicationRegistrationInfo(registrationType PEER_APPLICATION_REGISTRATION_TYPE, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumApplicationRegistrationInfo.Addr(), uintptr(registrationType), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabEnumApplications calls P2P!PeerCollabEnumApplications.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabenumapplications
 // Minimum OS: windows6.0.6000.
-func PeerCollabEnumApplications(pcEndpoint *PEER_ENDPOINT, pApplicationId *win32.GUID, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerCollabEnumApplications(pcEndpoint *PEER_ENDPOINT, pApplicationId *win32.GUID, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumApplications.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pApplicationId)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabEnumContacts calls P2P!PeerCollabEnumContacts.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabenumcontacts
 // Minimum OS: windows6.0.6000.
-func PeerCollabEnumContacts(phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerCollabEnumContacts(phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumContacts.Addr(), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabEnumEndpoints calls P2P!PeerCollabEnumEndpoints.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabenumendpoints
 // Minimum OS: windows6.0.6000.
-func PeerCollabEnumEndpoints(pcContact *PEER_CONTACT, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerCollabEnumEndpoints(pcContact *PEER_CONTACT, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumEndpoints.Addr(), uintptr(unsafe.Pointer(pcContact)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabEnumObjects calls P2P!PeerCollabEnumObjects.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabenumobjects
 // Minimum OS: windows6.0.6000.
-func PeerCollabEnumObjects(pcEndpoint *PEER_ENDPOINT, pObjectId *win32.GUID, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerCollabEnumObjects(pcEndpoint *PEER_ENDPOINT, pObjectId *win32.GUID, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumObjects.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pObjectId)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabEnumPeopleNearMe calls P2P!PeerCollabEnumPeopleNearMe.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabenumpeoplenearme
 // Minimum OS: windows6.0.6000.
-func PeerCollabEnumPeopleNearMe(phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerCollabEnumPeopleNearMe(phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabEnumPeopleNearMe.Addr(), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabExportContact calls P2P!PeerCollabExportContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabexportcontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabExportContact(pwzPeerName foundation.PWSTR, ppwzContactData *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerCollabExportContact.Addr(), uintptr(unsafe.Pointer(pwzPeerName)), uintptr(unsafe.Pointer(ppwzContactData)))
-	return foundation.HRESULT(r1)
+func PeerCollabExportContact(pwzPeerName string, ppwzContactData *foundation.PWSTR) error {
+	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
+	r1, _, _ := syscall.SyscallN(procPeerCollabExportContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppwzContactData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabGetAppLaunchInfo calls P2P!PeerCollabGetAppLaunchInfo.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgetapplaunchinfo
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetAppLaunchInfo(ppLaunchInfo **PEER_APP_LAUNCH_INFO) foundation.HRESULT {
+func PeerCollabGetAppLaunchInfo(ppLaunchInfo **PEER_APP_LAUNCH_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetAppLaunchInfo.Addr(), uintptr(unsafe.Pointer(ppLaunchInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabGetApplicationRegistrationInfo calls P2P!PeerCollabGetApplicationRegistrationInfo.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgetapplicationregistrationinfo
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetApplicationRegistrationInfo(pApplicationId *win32.GUID, registrationType PEER_APPLICATION_REGISTRATION_TYPE, ppApplication **PEER_APPLICATION_REGISTRATION_INFO) foundation.HRESULT {
+func PeerCollabGetApplicationRegistrationInfo(pApplicationId *win32.GUID, registrationType PEER_APPLICATION_REGISTRATION_TYPE, ppApplication **PEER_APPLICATION_REGISTRATION_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetApplicationRegistrationInfo.Addr(), uintptr(unsafe.Pointer(pApplicationId)), uintptr(registrationType), uintptr(unsafe.Pointer(ppApplication)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabGetContact calls P2P!PeerCollabGetContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgetcontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetContact(pwzPeerName foundation.PWSTR, ppContact **PEER_CONTACT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerCollabGetContact.Addr(), uintptr(unsafe.Pointer(pwzPeerName)), uintptr(unsafe.Pointer(ppContact)))
-	return foundation.HRESULT(r1)
+func PeerCollabGetContact(pwzPeerName string, ppContact **PEER_CONTACT) error {
+	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
+	r1, _, _ := syscall.SyscallN(procPeerCollabGetContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppContact)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabGetEndpointName calls P2P!PeerCollabGetEndpointName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgetendpointname
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetEndpointName(ppwzEndpointName *foundation.PWSTR) foundation.HRESULT {
+func PeerCollabGetEndpointName(ppwzEndpointName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetEndpointName.Addr(), uintptr(unsafe.Pointer(ppwzEndpointName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabGetEventData calls P2P!PeerCollabGetEventData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgeteventdata
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_COLLAB_EVENT_DATA) foundation.HRESULT {
+func PeerCollabGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_COLLAB_EVENT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetEventData.Addr(), uintptr(unsafe.Pointer(hPeerEvent)), uintptr(unsafe.Pointer(ppEventData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabGetInvitationResponse calls P2P!PeerCollabGetInvitationResponse.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgetinvitationresponse
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetInvitationResponse(hInvitation foundation.HANDLE, ppInvitationResponse **PEER_INVITATION_RESPONSE) foundation.HRESULT {
+func PeerCollabGetInvitationResponse(hInvitation foundation.HANDLE, ppInvitationResponse **PEER_INVITATION_RESPONSE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetInvitationResponse.Addr(), uintptr(hInvitation), uintptr(unsafe.Pointer(ppInvitationResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabGetPresenceInfo calls P2P!PeerCollabGetPresenceInfo.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgetpresenceinfo
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetPresenceInfo(pcEndpoint *PEER_ENDPOINT, ppPresenceInfo **PEER_PRESENCE_INFO) foundation.HRESULT {
+func PeerCollabGetPresenceInfo(pcEndpoint *PEER_ENDPOINT, ppPresenceInfo **PEER_PRESENCE_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetPresenceInfo.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(ppPresenceInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabGetSigninOptions calls P2P!PeerCollabGetSigninOptions.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgetsigninoptions
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetSigninOptions(pdwSigninOptions *uint32) foundation.HRESULT {
+func PeerCollabGetSigninOptions(pdwSigninOptions *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetSigninOptions.Addr(), uintptr(unsafe.Pointer(pdwSigninOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabInviteContact calls P2P!PeerCollabInviteContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabinvitecontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabInviteContact(pcContact *PEER_CONTACT, pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, ppResponse **PEER_INVITATION_RESPONSE) foundation.HRESULT {
+func PeerCollabInviteContact(pcContact *PEER_CONTACT, pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, ppResponse **PEER_INVITATION_RESPONSE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabInviteContact.Addr(), uintptr(unsafe.Pointer(pcContact)), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pcInvitation)), uintptr(unsafe.Pointer(ppResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabInviteEndpoint calls P2P!PeerCollabInviteEndpoint.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabinviteendpoint
 // Minimum OS: windows6.0.6000.
-func PeerCollabInviteEndpoint(pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, ppResponse **PEER_INVITATION_RESPONSE) foundation.HRESULT {
+func PeerCollabInviteEndpoint(pcEndpoint *PEER_ENDPOINT, pcInvitation *PEER_INVITATION, ppResponse **PEER_INVITATION_RESPONSE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabInviteEndpoint.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(pcInvitation)), uintptr(unsafe.Pointer(ppResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabParseContact calls P2P!PeerCollabParseContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabparsecontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabParseContact(pwzContactData foundation.PWSTR, ppContact **PEER_CONTACT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerCollabParseContact.Addr(), uintptr(unsafe.Pointer(pwzContactData)), uintptr(unsafe.Pointer(ppContact)))
-	return foundation.HRESULT(r1)
+func PeerCollabParseContact(pwzContactData string, ppContact **PEER_CONTACT) error {
+	_pwzContactData := win32.UTF16Ptr(pwzContactData)
+	r1, _, _ := syscall.SyscallN(procPeerCollabParseContact.Addr(), uintptr(unsafe.Pointer(_pwzContactData)), uintptr(unsafe.Pointer(ppContact)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabQueryContactData calls P2P!PeerCollabQueryContactData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabquerycontactdata
 // Minimum OS: windows6.0.6000.
-func PeerCollabQueryContactData(pcEndpoint *PEER_ENDPOINT, ppwzContactData *foundation.PWSTR) foundation.HRESULT {
+func PeerCollabQueryContactData(pcEndpoint *PEER_ENDPOINT, ppwzContactData *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabQueryContactData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)), uintptr(unsafe.Pointer(ppwzContactData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabRefreshEndpointData calls P2P!PeerCollabRefreshEndpointData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabrefreshendpointdata
 // Minimum OS: windows6.0.6000.
-func PeerCollabRefreshEndpointData(pcEndpoint *PEER_ENDPOINT) foundation.HRESULT {
+func PeerCollabRefreshEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabRefreshEndpointData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabRegisterApplication calls P2P!PeerCollabRegisterApplication.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabregisterapplication
 // Minimum OS: windows6.0.6000.
-func PeerCollabRegisterApplication(pcApplication *PEER_APPLICATION_REGISTRATION_INFO, registrationType PEER_APPLICATION_REGISTRATION_TYPE) foundation.HRESULT {
+func PeerCollabRegisterApplication(pcApplication *PEER_APPLICATION_REGISTRATION_INFO, registrationType PEER_APPLICATION_REGISTRATION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabRegisterApplication.Addr(), uintptr(unsafe.Pointer(pcApplication)), uintptr(registrationType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabRegisterEvent calls P2P!PeerCollabRegisterEvent.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabregisterevent
 // Minimum OS: windows6.0.6000.
-func PeerCollabRegisterEvent(hEvent foundation.HANDLE, cEventRegistration uint32, pEventRegistrations *PEER_COLLAB_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerCollabRegisterEvent.Addr(), uintptr(hEvent), uintptr(cEventRegistration), uintptr(unsafe.Pointer(pEventRegistrations)), uintptr(unsafe.Pointer(phPeerEvent)))
-	return foundation.HRESULT(r1)
+func PeerCollabRegisterEvent(hEvent foundation.HANDLE, pEventRegistrations []PEER_COLLAB_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) error {
+	var _pEventRegistrations *PEER_COLLAB_EVENT_REGISTRATION
+	if len(pEventRegistrations) > 0 {
+		_pEventRegistrations = &pEventRegistrations[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerCollabRegisterEvent.Addr(), uintptr(hEvent), uintptr(len(pEventRegistrations)), uintptr(unsafe.Pointer(_pEventRegistrations)), uintptr(unsafe.Pointer(phPeerEvent)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabSetEndpointName calls P2P!PeerCollabSetEndpointName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabsetendpointname
 // Minimum OS: windows6.0.6000.
-func PeerCollabSetEndpointName(pwzEndpointName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerCollabSetEndpointName.Addr(), uintptr(unsafe.Pointer(pwzEndpointName)))
-	return foundation.HRESULT(r1)
+func PeerCollabSetEndpointName(pwzEndpointName string) error {
+	_pwzEndpointName := win32.UTF16Ptr(pwzEndpointName)
+	r1, _, _ := syscall.SyscallN(procPeerCollabSetEndpointName.Addr(), uintptr(unsafe.Pointer(_pwzEndpointName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabSetObject calls P2P!PeerCollabSetObject.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabsetobject
 // Minimum OS: windows6.0.6000.
-func PeerCollabSetObject(pcObject *PEER_OBJECT) foundation.HRESULT {
+func PeerCollabSetObject(pcObject *PEER_OBJECT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSetObject.Addr(), uintptr(unsafe.Pointer(pcObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabSetPresenceInfo calls P2P!PeerCollabSetPresenceInfo.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabsetpresenceinfo
 // Minimum OS: windows6.0.6000.
-func PeerCollabSetPresenceInfo(pcPresenceInfo *PEER_PRESENCE_INFO) foundation.HRESULT {
+func PeerCollabSetPresenceInfo(pcPresenceInfo *PEER_PRESENCE_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSetPresenceInfo.Addr(), uintptr(unsafe.Pointer(pcPresenceInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabShutdown calls P2P!PeerCollabShutdown.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabshutdown
 // Minimum OS: windows6.0.6000.
-func PeerCollabShutdown() foundation.HRESULT {
+func PeerCollabShutdown() error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabShutdown.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabSignin calls P2P!PeerCollabSignin.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabsignin
 // Minimum OS: windows6.0.6000.
-func PeerCollabSignin(hwndParent foundation.HWND, dwSigninOptions uint32) foundation.HRESULT {
+func PeerCollabSignin(hwndParent foundation.HWND, dwSigninOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSignin.Addr(), uintptr(hwndParent), uintptr(dwSigninOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabSignout calls P2P!PeerCollabSignout.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabsignout
 // Minimum OS: windows6.0.6000.
-func PeerCollabSignout(dwSigninOptions uint32) foundation.HRESULT {
+func PeerCollabSignout(dwSigninOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSignout.Addr(), uintptr(dwSigninOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabStartup calls P2P!PeerCollabStartup.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabstartup
 // Minimum OS: windows6.0.6000.
-func PeerCollabStartup(wVersionRequested uint16) foundation.HRESULT {
+func PeerCollabStartup(wVersionRequested uint16) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabStartup.Addr(), uintptr(wVersionRequested))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabSubscribeEndpointData calls P2P!PeerCollabSubscribeEndpointData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabsubscribeendpointdata
 // Minimum OS: windows6.0.6000.
-func PeerCollabSubscribeEndpointData(pcEndpoint *PEER_ENDPOINT) foundation.HRESULT {
+func PeerCollabSubscribeEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabSubscribeEndpointData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabUnregisterApplication calls P2P!PeerCollabUnregisterApplication.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabunregisterapplication
 // Minimum OS: windows6.0.6000.
-func PeerCollabUnregisterApplication(pApplicationId *win32.GUID, registrationType PEER_APPLICATION_REGISTRATION_TYPE) foundation.HRESULT {
+func PeerCollabUnregisterApplication(pApplicationId *win32.GUID, registrationType PEER_APPLICATION_REGISTRATION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabUnregisterApplication.Addr(), uintptr(unsafe.Pointer(pApplicationId)), uintptr(registrationType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabUnregisterEvent calls P2P!PeerCollabUnregisterEvent.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabunregisterevent
 // Minimum OS: windows6.0.6000.
-func PeerCollabUnregisterEvent(hPeerEvent unsafe.Pointer) foundation.HRESULT {
+func PeerCollabUnregisterEvent(hPeerEvent unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabUnregisterEvent.Addr(), uintptr(unsafe.Pointer(hPeerEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabUnsubscribeEndpointData calls P2P!PeerCollabUnsubscribeEndpointData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabunsubscribeendpointdata
 // Minimum OS: windows6.0.6000.
-func PeerCollabUnsubscribeEndpointData(pcEndpoint *PEER_ENDPOINT) foundation.HRESULT {
+func PeerCollabUnsubscribeEndpointData(pcEndpoint *PEER_ENDPOINT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabUnsubscribeEndpointData.Addr(), uintptr(unsafe.Pointer(pcEndpoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCollabUpdateContact calls P2P!PeerCollabUpdateContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabupdatecontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabUpdateContact(pContact *PEER_CONTACT) foundation.HRESULT {
+func PeerCollabUpdateContact(pContact *PEER_CONTACT) error {
 	r1, _, _ := syscall.SyscallN(procPeerCollabUpdateContact.Addr(), uintptr(unsafe.Pointer(pContact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerCreatePeerName calls P2P!PeerCreatePeerName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercreatepeername
 // Minimum OS: windows5.1.2600.
-func PeerCreatePeerName(pwzIdentity foundation.PWSTR, pwzClassifier foundation.PWSTR, ppwzPeerName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerCreatePeerName.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(pwzClassifier)), uintptr(unsafe.Pointer(ppwzPeerName)))
-	return foundation.HRESULT(r1)
+func PeerCreatePeerName(pwzIdentity string, pwzClassifier string, ppwzPeerName *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	_pwzClassifier := win32.UTF16Ptr(pwzClassifier)
+	r1, _, _ := syscall.SyscallN(procPeerCreatePeerName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzClassifier)), uintptr(unsafe.Pointer(ppwzPeerName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerDistClientAddContentInformation calls PeerDist!PeerDistClientAddContentInformation.
@@ -866,9 +883,10 @@ func PeerDistClientStreamRead(hPeerDist uintptr, hContentHandle uintptr, cbMaxNu
 // PeerDistGetOverlappedResult calls PeerDist!PeerDistGetOverlappedResult.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistgetoverlappedresult
 // Minimum OS: windows8.0.
-func PeerDistGetOverlappedResult(lpOverlapped *systemio.OVERLAPPED, lpNumberOfBytesTransferred *uint32, bWait foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPeerDistGetOverlappedResult.Addr(), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpNumberOfBytesTransferred)), uintptr(bWait))
-	return foundation.BOOL(r1)
+func PeerDistGetOverlappedResult(lpOverlapped *systemio.OVERLAPPED, lpNumberOfBytesTransferred *uint32, bWait bool) bool {
+	_bWait := win32.Bool32(bWait)
+	r1, _, _ := syscall.SyscallN(procPeerDistGetOverlappedResult.Addr(), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpNumberOfBytesTransferred)), uintptr(_bWait))
+	return r1 != 0
 }
 
 // PeerDistGetStatus calls PeerDist!PeerDistGetStatus.
@@ -1016,25 +1034,26 @@ func PeerDistUnregisterForStatusChangeNotification(hPeerDist uintptr) (uint32, e
 // PeerEndEnumeration calls P2P!PeerEndEnumeration.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerendenumeration
 // Minimum OS: windows5.1.2600.
-func PeerEndEnumeration(hPeerEnum unsafe.Pointer) foundation.HRESULT {
+func PeerEndEnumeration(hPeerEnum unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerEndEnumeration.Addr(), uintptr(unsafe.Pointer(hPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerEnumGroups calls P2P!PeerEnumGroups.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerenumgroups
 // Minimum OS: windows5.1.2600.
-func PeerEnumGroups(pwzIdentity foundation.PWSTR, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerEnumGroups.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+func PeerEnumGroups(pwzIdentity string, phPeerEnum *unsafe.Pointer) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	r1, _, _ := syscall.SyscallN(procPeerEnumGroups.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phPeerEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerEnumIdentities calls P2P!PeerEnumIdentities.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerenumidentities
 // Minimum OS: windows5.1.2600.
-func PeerEnumIdentities(phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerEnumIdentities(phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerEnumIdentities.Addr(), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerFreeData calls P2P!PeerFreeData.
@@ -1047,113 +1066,122 @@ func PeerFreeData(pvData unsafe.Pointer) {
 // PeerGetItemCount calls P2P!PeerGetItemCount.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergetitemcount
 // Minimum OS: windows5.1.2600.
-func PeerGetItemCount(hPeerEnum unsafe.Pointer, pCount *uint32) foundation.HRESULT {
+func PeerGetItemCount(hPeerEnum unsafe.Pointer, pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerGetItemCount.Addr(), uintptr(unsafe.Pointer(hPeerEnum)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGetNextItem calls P2P!PeerGetNextItem.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergetnextitem
 // Minimum OS: windows5.1.2600.
-func PeerGetNextItem(hPeerEnum unsafe.Pointer, pCount *uint32, pppvItems **unsafe.Pointer) foundation.HRESULT {
+func PeerGetNextItem(hPeerEnum unsafe.Pointer, pCount *uint32, pppvItems **unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGetNextItem.Addr(), uintptr(unsafe.Pointer(hPeerEnum)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pppvItems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphAddRecord calls P2PGRAPH!PeerGraphAddRecord.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphaddrecord
 // Minimum OS: windows5.1.2600.
-func PeerGraphAddRecord(hGraph unsafe.Pointer, pRecord *PEER_RECORD, pRecordId *win32.GUID) foundation.HRESULT {
+func PeerGraphAddRecord(hGraph unsafe.Pointer, pRecord *PEER_RECORD, pRecordId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphAddRecord.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecord)), uintptr(unsafe.Pointer(pRecordId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphClose calls P2PGRAPH!PeerGraphClose.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphclose
 // Minimum OS: windows5.1.2600.
-func PeerGraphClose(hGraph unsafe.Pointer) foundation.HRESULT {
+func PeerGraphClose(hGraph unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphClose.Addr(), uintptr(unsafe.Pointer(hGraph)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphCloseDirectConnection calls P2PGRAPH!PeerGraphCloseDirectConnection.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphclosedirectconnection
 // Minimum OS: windows5.1.2600.
-func PeerGraphCloseDirectConnection(hGraph unsafe.Pointer, ullConnectionId uint64) foundation.HRESULT {
+func PeerGraphCloseDirectConnection(hGraph unsafe.Pointer, ullConnectionId uint64) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphCloseDirectConnection.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(ullConnectionId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphConnect calls P2PGRAPH!PeerGraphConnect.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphconnect
 // Minimum OS: windows5.1.2600.
-func PeerGraphConnect(hGraph unsafe.Pointer, pwzPeerId foundation.PWSTR, pAddress *PEER_ADDRESS, pullConnectionId *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphConnect.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pwzPeerId)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
-	return foundation.HRESULT(r1)
+func PeerGraphConnect(hGraph unsafe.Pointer, pwzPeerId string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
+	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+	r1, _, _ := syscall.SyscallN(procPeerGraphConnect.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphCreate calls P2PGRAPH!PeerGraphCreate.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphcreate
 // Minimum OS: windows5.1.2600.
-func PeerGraphCreate(pGraphProperties *PEER_GRAPH_PROPERTIES, pwzDatabaseName foundation.PWSTR, pSecurityInterface *PEER_SECURITY_INTERFACE, phGraph *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphCreate.Addr(), uintptr(unsafe.Pointer(pGraphProperties)), uintptr(unsafe.Pointer(pwzDatabaseName)), uintptr(unsafe.Pointer(pSecurityInterface)), uintptr(unsafe.Pointer(phGraph)))
-	return foundation.HRESULT(r1)
+func PeerGraphCreate(pGraphProperties *PEER_GRAPH_PROPERTIES, pwzDatabaseName string, pSecurityInterface *PEER_SECURITY_INTERFACE, phGraph *unsafe.Pointer) error {
+	_pwzDatabaseName := win32.UTF16Ptr(pwzDatabaseName)
+	r1, _, _ := syscall.SyscallN(procPeerGraphCreate.Addr(), uintptr(unsafe.Pointer(pGraphProperties)), uintptr(unsafe.Pointer(_pwzDatabaseName)), uintptr(unsafe.Pointer(pSecurityInterface)), uintptr(unsafe.Pointer(phGraph)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphDelete calls P2PGRAPH!PeerGraphDelete.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphdelete
 // Minimum OS: windows5.1.2600.
-func PeerGraphDelete(pwzGraphId foundation.PWSTR, pwzPeerId foundation.PWSTR, pwzDatabaseName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphDelete.Addr(), uintptr(unsafe.Pointer(pwzGraphId)), uintptr(unsafe.Pointer(pwzPeerId)), uintptr(unsafe.Pointer(pwzDatabaseName)))
-	return foundation.HRESULT(r1)
+func PeerGraphDelete(pwzGraphId string, pwzPeerId string, pwzDatabaseName string) error {
+	_pwzGraphId := win32.UTF16Ptr(pwzGraphId)
+	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+	_pwzDatabaseName := win32.UTF16Ptr(pwzDatabaseName)
+	r1, _, _ := syscall.SyscallN(procPeerGraphDelete.Addr(), uintptr(unsafe.Pointer(_pwzGraphId)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(_pwzDatabaseName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphDeleteRecord calls P2PGRAPH!PeerGraphDeleteRecord.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphdeleterecord
 // Minimum OS: windows5.1.2600.
-func PeerGraphDeleteRecord(hGraph unsafe.Pointer, pRecordId *win32.GUID, fLocal foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphDeleteRecord.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordId)), uintptr(fLocal))
-	return foundation.HRESULT(r1)
+func PeerGraphDeleteRecord(hGraph unsafe.Pointer, pRecordId *win32.GUID, fLocal bool) error {
+	_fLocal := win32.Bool32(fLocal)
+	r1, _, _ := syscall.SyscallN(procPeerGraphDeleteRecord.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordId)), uintptr(_fLocal))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphEndEnumeration calls P2PGRAPH!PeerGraphEndEnumeration.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphendenumeration
 // Minimum OS: windows5.1.2600.
-func PeerGraphEndEnumeration(hPeerEnum unsafe.Pointer) foundation.HRESULT {
+func PeerGraphEndEnumeration(hPeerEnum unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphEndEnumeration.Addr(), uintptr(unsafe.Pointer(hPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphEnumConnections calls P2PGRAPH!PeerGraphEnumConnections.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphenumconnections
 // Minimum OS: windows5.1.2600.
-func PeerGraphEnumConnections(hGraph unsafe.Pointer, dwFlags uint32, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerGraphEnumConnections(hGraph unsafe.Pointer, dwFlags uint32, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphEnumConnections.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(dwFlags), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphEnumNodes calls P2PGRAPH!PeerGraphEnumNodes.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphenumnodes
 // Minimum OS: windows5.1.2600.
-func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId foundation.PWSTR, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphEnumNodes.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId string, phPeerEnum *unsafe.Pointer) error {
+	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+	r1, _, _ := syscall.SyscallN(procPeerGraphEnumNodes.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphEnumRecords calls P2PGRAPH!PeerGraphEnumRecords.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphenumrecords
 // Minimum OS: windows5.1.2600.
-func PeerGraphEnumRecords(hGraph unsafe.Pointer, pRecordType *win32.GUID, pwzPeerId foundation.PWSTR, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphEnumRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordType)), uintptr(unsafe.Pointer(pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+func PeerGraphEnumRecords(hGraph unsafe.Pointer, pRecordType *win32.GUID, pwzPeerId string, phPeerEnum *unsafe.Pointer) error {
+	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+	r1, _, _ := syscall.SyscallN(procPeerGraphEnumRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordType)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphExportDatabase calls P2PGRAPH!PeerGraphExportDatabase.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphexportdatabase
 // Minimum OS: windows5.1.2600.
-func PeerGraphExportDatabase(hGraph unsafe.Pointer, pwzFilePath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphExportDatabase.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pwzFilePath)))
-	return foundation.HRESULT(r1)
+func PeerGraphExportDatabase(hGraph unsafe.Pointer, pwzFilePath string) error {
+	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
+	r1, _, _ := syscall.SyscallN(procPeerGraphExportDatabase.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzFilePath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphFreeData calls P2PGRAPH!PeerGraphFreeData.
@@ -1166,661 +1194,736 @@ func PeerGraphFreeData(pvData unsafe.Pointer) {
 // PeerGraphGetEventData calls P2PGRAPH!PeerGraphGetEventData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphgeteventdata
 // Minimum OS: windows5.1.2600.
-func PeerGraphGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_GRAPH_EVENT_DATA) foundation.HRESULT {
+func PeerGraphGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_GRAPH_EVENT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetEventData.Addr(), uintptr(unsafe.Pointer(hPeerEvent)), uintptr(unsafe.Pointer(ppEventData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphGetItemCount calls P2PGRAPH!PeerGraphGetItemCount.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphgetitemcount
 // Minimum OS: windows5.1.2600.
-func PeerGraphGetItemCount(hPeerEnum unsafe.Pointer, pCount *uint32) foundation.HRESULT {
+func PeerGraphGetItemCount(hPeerEnum unsafe.Pointer, pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetItemCount.Addr(), uintptr(unsafe.Pointer(hPeerEnum)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphGetNextItem calls P2PGRAPH!PeerGraphGetNextItem.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphgetnextitem
 // Minimum OS: windows5.1.2600.
-func PeerGraphGetNextItem(hPeerEnum unsafe.Pointer, pCount *uint32, pppvItems **unsafe.Pointer) foundation.HRESULT {
+func PeerGraphGetNextItem(hPeerEnum unsafe.Pointer, pCount *uint32, pppvItems **unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetNextItem.Addr(), uintptr(unsafe.Pointer(hPeerEnum)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pppvItems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphGetNodeInfo calls P2PGRAPH!PeerGraphGetNodeInfo.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphgetnodeinfo
 // Minimum OS: windows5.1.2600.
-func PeerGraphGetNodeInfo(hGraph unsafe.Pointer, ullNodeId uint64, ppNodeInfo **PEER_NODE_INFO) foundation.HRESULT {
+func PeerGraphGetNodeInfo(hGraph unsafe.Pointer, ullNodeId uint64, ppNodeInfo **PEER_NODE_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetNodeInfo.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(ullNodeId), uintptr(unsafe.Pointer(ppNodeInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphGetProperties calls P2PGRAPH!PeerGraphGetProperties.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphgetproperties
 // Minimum OS: windows5.1.2600.
-func PeerGraphGetProperties(hGraph unsafe.Pointer, ppGraphProperties **PEER_GRAPH_PROPERTIES) foundation.HRESULT {
+func PeerGraphGetProperties(hGraph unsafe.Pointer, ppGraphProperties **PEER_GRAPH_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetProperties.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(ppGraphProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphGetRecord calls P2PGRAPH!PeerGraphGetRecord.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphgetrecord
 // Minimum OS: windows5.1.2600.
-func PeerGraphGetRecord(hGraph unsafe.Pointer, pRecordId *win32.GUID, ppRecord **PEER_RECORD) foundation.HRESULT {
+func PeerGraphGetRecord(hGraph unsafe.Pointer, pRecordId *win32.GUID, ppRecord **PEER_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetRecord.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordId)), uintptr(unsafe.Pointer(ppRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphGetStatus calls P2PGRAPH!PeerGraphGetStatus.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphgetstatus
 // Minimum OS: windows5.1.2600.
-func PeerGraphGetStatus(hGraph unsafe.Pointer, pdwStatus *uint32) foundation.HRESULT {
+func PeerGraphGetStatus(hGraph unsafe.Pointer, pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphGetStatus.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphImportDatabase calls P2PGRAPH!PeerGraphImportDatabase.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphimportdatabase
 // Minimum OS: windows5.1.2600.
-func PeerGraphImportDatabase(hGraph unsafe.Pointer, pwzFilePath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphImportDatabase.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pwzFilePath)))
-	return foundation.HRESULT(r1)
+func PeerGraphImportDatabase(hGraph unsafe.Pointer, pwzFilePath string) error {
+	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
+	r1, _, _ := syscall.SyscallN(procPeerGraphImportDatabase.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzFilePath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphListen calls P2PGRAPH!PeerGraphListen.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphlisten
 // Minimum OS: windows5.1.2600.
-func PeerGraphListen(hGraph unsafe.Pointer, dwScope uint32, dwScopeId uint32, wPort uint16) foundation.HRESULT {
+func PeerGraphListen(hGraph unsafe.Pointer, dwScope uint32, dwScopeId uint32, wPort uint16) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphListen.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(dwScope), uintptr(dwScopeId), uintptr(wPort))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphOpen calls P2PGRAPH!PeerGraphOpen.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphopen
 // Minimum OS: windows5.1.2600.
-func PeerGraphOpen(pwzGraphId foundation.PWSTR, pwzPeerId foundation.PWSTR, pwzDatabaseName foundation.PWSTR, pSecurityInterface *PEER_SECURITY_INTERFACE, cRecordTypeSyncPrecedence uint32, pRecordTypeSyncPrecedence *win32.GUID, phGraph *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphOpen.Addr(), uintptr(unsafe.Pointer(pwzGraphId)), uintptr(unsafe.Pointer(pwzPeerId)), uintptr(unsafe.Pointer(pwzDatabaseName)), uintptr(unsafe.Pointer(pSecurityInterface)), uintptr(cRecordTypeSyncPrecedence), uintptr(unsafe.Pointer(pRecordTypeSyncPrecedence)), uintptr(unsafe.Pointer(phGraph)))
-	return foundation.HRESULT(r1)
+func PeerGraphOpen(pwzGraphId string, pwzPeerId string, pwzDatabaseName string, pSecurityInterface *PEER_SECURITY_INTERFACE, pRecordTypeSyncPrecedence []win32.GUID, phGraph *unsafe.Pointer) error {
+	_pwzGraphId := win32.UTF16Ptr(pwzGraphId)
+	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+	_pwzDatabaseName := win32.UTF16Ptr(pwzDatabaseName)
+	var _pRecordTypeSyncPrecedence *win32.GUID
+	if len(pRecordTypeSyncPrecedence) > 0 {
+		_pRecordTypeSyncPrecedence = &pRecordTypeSyncPrecedence[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerGraphOpen.Addr(), uintptr(unsafe.Pointer(_pwzGraphId)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(_pwzDatabaseName)), uintptr(unsafe.Pointer(pSecurityInterface)), uintptr(len(pRecordTypeSyncPrecedence)), uintptr(unsafe.Pointer(_pRecordTypeSyncPrecedence)), uintptr(unsafe.Pointer(phGraph)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphOpenDirectConnection calls P2PGRAPH!PeerGraphOpenDirectConnection.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphopendirectconnection
 // Minimum OS: windows5.1.2600.
-func PeerGraphOpenDirectConnection(hGraph unsafe.Pointer, pwzPeerId foundation.PWSTR, pAddress *PEER_ADDRESS, pullConnectionId *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphOpenDirectConnection.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pwzPeerId)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
-	return foundation.HRESULT(r1)
+func PeerGraphOpenDirectConnection(hGraph unsafe.Pointer, pwzPeerId string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
+	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+	r1, _, _ := syscall.SyscallN(procPeerGraphOpenDirectConnection.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphPeerTimeToUniversalTime calls P2PGRAPH!PeerGraphPeerTimeToUniversalTime.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphpeertimetouniversaltime
 // Minimum OS: windows5.1.2600.
-func PeerGraphPeerTimeToUniversalTime(hGraph unsafe.Pointer, pftPeerTime *foundation.FILETIME, pftUniversalTime *foundation.FILETIME) foundation.HRESULT {
+func PeerGraphPeerTimeToUniversalTime(hGraph unsafe.Pointer, pftPeerTime *foundation.FILETIME, pftUniversalTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphPeerTimeToUniversalTime.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pftPeerTime)), uintptr(unsafe.Pointer(pftUniversalTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphRegisterEvent calls P2PGRAPH!PeerGraphRegisterEvent.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphregisterevent
 // Minimum OS: windows5.1.2600.
-func PeerGraphRegisterEvent(hGraph unsafe.Pointer, hEvent foundation.HANDLE, cEventRegistrations uint32, pEventRegistrations *PEER_GRAPH_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphRegisterEvent.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(hEvent), uintptr(cEventRegistrations), uintptr(unsafe.Pointer(pEventRegistrations)), uintptr(unsafe.Pointer(phPeerEvent)))
-	return foundation.HRESULT(r1)
+func PeerGraphRegisterEvent(hGraph unsafe.Pointer, hEvent foundation.HANDLE, pEventRegistrations []PEER_GRAPH_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) error {
+	var _pEventRegistrations *PEER_GRAPH_EVENT_REGISTRATION
+	if len(pEventRegistrations) > 0 {
+		_pEventRegistrations = &pEventRegistrations[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerGraphRegisterEvent.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(hEvent), uintptr(len(pEventRegistrations)), uintptr(unsafe.Pointer(_pEventRegistrations)), uintptr(unsafe.Pointer(phPeerEvent)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphSearchRecords calls P2PGRAPH!PeerGraphSearchRecords.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphsearchrecords
 // Minimum OS: windows5.1.2600.
-func PeerGraphSearchRecords(hGraph unsafe.Pointer, pwzCriteria foundation.PWSTR, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphSearchRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pwzCriteria)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+func PeerGraphSearchRecords(hGraph unsafe.Pointer, pwzCriteria string, phPeerEnum *unsafe.Pointer) error {
+	_pwzCriteria := win32.UTF16Ptr(pwzCriteria)
+	r1, _, _ := syscall.SyscallN(procPeerGraphSearchRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzCriteria)), uintptr(unsafe.Pointer(phPeerEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphSendData calls P2PGRAPH!PeerGraphSendData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphsenddata
 // Minimum OS: windows5.1.2600.
-func PeerGraphSendData(hGraph unsafe.Pointer, ullConnectionId uint64, pType *win32.GUID, cbData uint32, pvData unsafe.Pointer) foundation.HRESULT {
+func PeerGraphSendData(hGraph unsafe.Pointer, ullConnectionId uint64, pType *win32.GUID, cbData uint32, pvData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphSendData.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(ullConnectionId), uintptr(unsafe.Pointer(pType)), uintptr(cbData), uintptr(unsafe.Pointer(pvData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphSetNodeAttributes calls P2PGRAPH!PeerGraphSetNodeAttributes.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphsetnodeattributes
 // Minimum OS: windows5.1.2600.
-func PeerGraphSetNodeAttributes(hGraph unsafe.Pointer, pwzAttributes foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphSetNodeAttributes.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pwzAttributes)))
-	return foundation.HRESULT(r1)
+func PeerGraphSetNodeAttributes(hGraph unsafe.Pointer, pwzAttributes string) error {
+	_pwzAttributes := win32.UTF16Ptr(pwzAttributes)
+	r1, _, _ := syscall.SyscallN(procPeerGraphSetNodeAttributes.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzAttributes)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphSetPresence calls P2PGRAPH!PeerGraphSetPresence.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphsetpresence
 // Minimum OS: windows5.1.2600.
-func PeerGraphSetPresence(hGraph unsafe.Pointer, fPresent foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphSetPresence.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(fPresent))
-	return foundation.HRESULT(r1)
+func PeerGraphSetPresence(hGraph unsafe.Pointer, fPresent bool) error {
+	_fPresent := win32.Bool32(fPresent)
+	r1, _, _ := syscall.SyscallN(procPeerGraphSetPresence.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(_fPresent))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphSetProperties calls P2PGRAPH!PeerGraphSetProperties.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphsetproperties
 // Minimum OS: windows5.1.2600.
-func PeerGraphSetProperties(hGraph unsafe.Pointer, pGraphProperties *PEER_GRAPH_PROPERTIES) foundation.HRESULT {
+func PeerGraphSetProperties(hGraph unsafe.Pointer, pGraphProperties *PEER_GRAPH_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphSetProperties.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pGraphProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphShutdown calls P2PGRAPH!PeerGraphShutdown.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphshutdown
 // Minimum OS: windows5.1.2600.
-func PeerGraphShutdown() foundation.HRESULT {
+func PeerGraphShutdown() error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphShutdown.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphStartup calls P2PGRAPH!PeerGraphStartup.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphstartup
 // Minimum OS: windows5.1.2600.
-func PeerGraphStartup(wVersionRequested uint16, pVersionData *PEER_VERSION_DATA) foundation.HRESULT {
+func PeerGraphStartup(wVersionRequested uint16, pVersionData *PEER_VERSION_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphStartup.Addr(), uintptr(wVersionRequested), uintptr(unsafe.Pointer(pVersionData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphUniversalTimeToPeerTime calls P2PGRAPH!PeerGraphUniversalTimeToPeerTime.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphuniversaltimetopeertime
 // Minimum OS: windows5.1.2600.
-func PeerGraphUniversalTimeToPeerTime(hGraph unsafe.Pointer, pftUniversalTime *foundation.FILETIME, pftPeerTime *foundation.FILETIME) foundation.HRESULT {
+func PeerGraphUniversalTimeToPeerTime(hGraph unsafe.Pointer, pftUniversalTime *foundation.FILETIME, pftPeerTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphUniversalTimeToPeerTime.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pftUniversalTime)), uintptr(unsafe.Pointer(pftPeerTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphUnregisterEvent calls P2PGRAPH!PeerGraphUnregisterEvent.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphunregisterevent
 // Minimum OS: windows5.1.2600.
-func PeerGraphUnregisterEvent(hPeerEvent unsafe.Pointer) foundation.HRESULT {
+func PeerGraphUnregisterEvent(hPeerEvent unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphUnregisterEvent.Addr(), uintptr(unsafe.Pointer(hPeerEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphUpdateRecord calls P2PGRAPH!PeerGraphUpdateRecord.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphupdaterecord
 // Minimum OS: windows5.1.2600.
-func PeerGraphUpdateRecord(hGraph unsafe.Pointer, pRecord *PEER_RECORD) foundation.HRESULT {
+func PeerGraphUpdateRecord(hGraph unsafe.Pointer, pRecord *PEER_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procPeerGraphUpdateRecord.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGraphValidateDeferredRecords calls P2PGRAPH!PeerGraphValidateDeferredRecords.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphvalidatedeferredrecords
 // Minimum OS: windows5.1.2600.
-func PeerGraphValidateDeferredRecords(hGraph unsafe.Pointer, cRecordIds uint32, pRecordIds *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGraphValidateDeferredRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(cRecordIds), uintptr(unsafe.Pointer(pRecordIds)))
-	return foundation.HRESULT(r1)
+func PeerGraphValidateDeferredRecords(hGraph unsafe.Pointer, pRecordIds []win32.GUID) error {
+	var _pRecordIds *win32.GUID
+	if len(pRecordIds) > 0 {
+		_pRecordIds = &pRecordIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerGraphValidateDeferredRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(len(pRecordIds)), uintptr(unsafe.Pointer(_pRecordIds)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupAddRecord calls P2P!PeerGroupAddRecord.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupaddrecord
 // Minimum OS: windows5.1.2600.
-func PeerGroupAddRecord(hGroup unsafe.Pointer, pRecord *PEER_RECORD, pRecordId *win32.GUID) foundation.HRESULT {
+func PeerGroupAddRecord(hGroup unsafe.Pointer, pRecord *PEER_RECORD, pRecordId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupAddRecord.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecord)), uintptr(unsafe.Pointer(pRecordId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupClose calls P2P!PeerGroupClose.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupclose
 // Minimum OS: windows5.1.2600.
-func PeerGroupClose(hGroup unsafe.Pointer) foundation.HRESULT {
+func PeerGroupClose(hGroup unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupClose.Addr(), uintptr(unsafe.Pointer(hGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupCloseDirectConnection calls P2P!PeerGroupCloseDirectConnection.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupclosedirectconnection
 // Minimum OS: windows5.1.2600.
-func PeerGroupCloseDirectConnection(hGroup unsafe.Pointer, ullConnectionId uint64) foundation.HRESULT {
+func PeerGroupCloseDirectConnection(hGroup unsafe.Pointer, ullConnectionId uint64) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupCloseDirectConnection.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(ullConnectionId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupConnect calls P2P!PeerGroupConnect.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupconnect
 // Minimum OS: windows5.1.2600.
-func PeerGroupConnect(hGroup unsafe.Pointer) foundation.HRESULT {
+func PeerGroupConnect(hGroup unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupConnect.Addr(), uintptr(unsafe.Pointer(hGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupConnectByAddress calls P2P!PeerGroupConnectByAddress.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupconnectbyaddress
 // Minimum OS: windows5.1.2600.
-func PeerGroupConnectByAddress(hGroup unsafe.Pointer, cAddresses uint32, pAddresses *PEER_ADDRESS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupConnectByAddress.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(cAddresses), uintptr(unsafe.Pointer(pAddresses)))
-	return foundation.HRESULT(r1)
+func PeerGroupConnectByAddress(hGroup unsafe.Pointer, pAddresses []PEER_ADDRESS) error {
+	var _pAddresses *PEER_ADDRESS
+	if len(pAddresses) > 0 {
+		_pAddresses = &pAddresses[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerGroupConnectByAddress.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(len(pAddresses)), uintptr(unsafe.Pointer(_pAddresses)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupCreate calls P2P!PeerGroupCreate.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupcreate
 // Minimum OS: windows5.1.2600.
-func PeerGroupCreate(pProperties *PEER_GROUP_PROPERTIES, phGroup *unsafe.Pointer) foundation.HRESULT {
+func PeerGroupCreate(pProperties *PEER_GROUP_PROPERTIES, phGroup *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupCreate.Addr(), uintptr(unsafe.Pointer(pProperties)), uintptr(unsafe.Pointer(phGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupCreateInvitation calls P2P!PeerGroupCreateInvitation.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupcreateinvitation
 // Minimum OS: windows5.1.2600.
-func PeerGroupCreateInvitation(hGroup unsafe.Pointer, pwzIdentityInfo foundation.PWSTR, pftExpiration *foundation.FILETIME, cRoles uint32, pRoles *win32.GUID, ppwzInvitation *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupCreateInvitation.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pwzIdentityInfo)), uintptr(unsafe.Pointer(pftExpiration)), uintptr(cRoles), uintptr(unsafe.Pointer(pRoles)), uintptr(unsafe.Pointer(ppwzInvitation)))
-	return foundation.HRESULT(r1)
+func PeerGroupCreateInvitation(hGroup unsafe.Pointer, pwzIdentityInfo string, pftExpiration *foundation.FILETIME, pRoles []win32.GUID, ppwzInvitation *foundation.PWSTR) error {
+	_pwzIdentityInfo := win32.UTF16Ptr(pwzIdentityInfo)
+	var _pRoles *win32.GUID
+	if len(pRoles) > 0 {
+		_pRoles = &pRoles[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerGroupCreateInvitation.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzIdentityInfo)), uintptr(unsafe.Pointer(pftExpiration)), uintptr(len(pRoles)), uintptr(unsafe.Pointer(_pRoles)), uintptr(unsafe.Pointer(ppwzInvitation)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupCreatePasswordInvitation calls P2P!PeerGroupCreatePasswordInvitation.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupcreatepasswordinvitation
 // Minimum OS: windows5.1.2600.
-func PeerGroupCreatePasswordInvitation(hGroup unsafe.Pointer, ppwzInvitation *foundation.PWSTR) foundation.HRESULT {
+func PeerGroupCreatePasswordInvitation(hGroup unsafe.Pointer, ppwzInvitation *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupCreatePasswordInvitation.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(ppwzInvitation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupDelete calls P2P!PeerGroupDelete.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupdelete
 // Minimum OS: windows5.1.2600.
-func PeerGroupDelete(pwzIdentity foundation.PWSTR, pwzGroupPeerName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupDelete.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(pwzGroupPeerName)))
-	return foundation.HRESULT(r1)
+func PeerGroupDelete(pwzIdentity string, pwzGroupPeerName string) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	_pwzGroupPeerName := win32.UTF16Ptr(pwzGroupPeerName)
+	r1, _, _ := syscall.SyscallN(procPeerGroupDelete.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzGroupPeerName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupDeleteRecord calls P2P!PeerGroupDeleteRecord.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupdeleterecord
 // Minimum OS: windows5.1.2600.
-func PeerGroupDeleteRecord(hGroup unsafe.Pointer, pRecordId *win32.GUID) foundation.HRESULT {
+func PeerGroupDeleteRecord(hGroup unsafe.Pointer, pRecordId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupDeleteRecord.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecordId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupEnumConnections calls P2P!PeerGroupEnumConnections.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupenumconnections
 // Minimum OS: windows5.1.2600.
-func PeerGroupEnumConnections(hGroup unsafe.Pointer, dwFlags uint32, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerGroupEnumConnections(hGroup unsafe.Pointer, dwFlags uint32, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupEnumConnections.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(dwFlags), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupEnumMembers calls P2P!PeerGroupEnumMembers.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupenummembers
 // Minimum OS: windows5.1.2600.
-func PeerGroupEnumMembers(hGroup unsafe.Pointer, dwFlags uint32, pwzIdentity foundation.PWSTR, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupEnumMembers.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(dwFlags), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+func PeerGroupEnumMembers(hGroup unsafe.Pointer, dwFlags uint32, pwzIdentity string, phPeerEnum *unsafe.Pointer) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	r1, _, _ := syscall.SyscallN(procPeerGroupEnumMembers.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phPeerEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupEnumRecords calls P2P!PeerGroupEnumRecords.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupenumrecords
 // Minimum OS: windows5.1.2600.
-func PeerGroupEnumRecords(hGroup unsafe.Pointer, pRecordType *win32.GUID, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
+func PeerGroupEnumRecords(hGroup unsafe.Pointer, pRecordType *win32.GUID, phPeerEnum *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupEnumRecords.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecordType)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupExportConfig calls P2P!PeerGroupExportConfig.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupexportconfig
 // Minimum OS: windows5.1.2600.
-func PeerGroupExportConfig(hGroup unsafe.Pointer, pwzPassword foundation.PWSTR, ppwzXML *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupExportConfig.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pwzPassword)), uintptr(unsafe.Pointer(ppwzXML)))
-	return foundation.HRESULT(r1)
+func PeerGroupExportConfig(hGroup unsafe.Pointer, pwzPassword string, ppwzXML *foundation.PWSTR) error {
+	_pwzPassword := win32.UTF16Ptr(pwzPassword)
+	r1, _, _ := syscall.SyscallN(procPeerGroupExportConfig.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(ppwzXML)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupExportDatabase calls P2P!PeerGroupExportDatabase.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupexportdatabase
 // Minimum OS: windows5.1.2600.
-func PeerGroupExportDatabase(hGroup unsafe.Pointer, pwzFilePath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupExportDatabase.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pwzFilePath)))
-	return foundation.HRESULT(r1)
+func PeerGroupExportDatabase(hGroup unsafe.Pointer, pwzFilePath string) error {
+	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
+	r1, _, _ := syscall.SyscallN(procPeerGroupExportDatabase.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzFilePath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupGetEventData calls P2P!PeerGroupGetEventData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupgeteventdata
 // Minimum OS: windows5.1.2600.
-func PeerGroupGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_GROUP_EVENT_DATA) foundation.HRESULT {
+func PeerGroupGetEventData(hPeerEvent unsafe.Pointer, ppEventData **PEER_GROUP_EVENT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupGetEventData.Addr(), uintptr(unsafe.Pointer(hPeerEvent)), uintptr(unsafe.Pointer(ppEventData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupGetProperties calls P2P!PeerGroupGetProperties.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupgetproperties
 // Minimum OS: windows5.1.2600.
-func PeerGroupGetProperties(hGroup unsafe.Pointer, ppProperties **PEER_GROUP_PROPERTIES) foundation.HRESULT {
+func PeerGroupGetProperties(hGroup unsafe.Pointer, ppProperties **PEER_GROUP_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupGetProperties.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupGetRecord calls P2P!PeerGroupGetRecord.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupgetrecord
 // Minimum OS: windows5.1.2600.
-func PeerGroupGetRecord(hGroup unsafe.Pointer, pRecordId *win32.GUID, ppRecord **PEER_RECORD) foundation.HRESULT {
+func PeerGroupGetRecord(hGroup unsafe.Pointer, pRecordId *win32.GUID, ppRecord **PEER_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupGetRecord.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecordId)), uintptr(unsafe.Pointer(ppRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupGetStatus calls P2P!PeerGroupGetStatus.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupgetstatus
 // Minimum OS: windows5.1.2600.
-func PeerGroupGetStatus(hGroup unsafe.Pointer, pdwStatus *uint32) foundation.HRESULT {
+func PeerGroupGetStatus(hGroup unsafe.Pointer, pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupGetStatus.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupImportConfig calls P2P!PeerGroupImportConfig.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupimportconfig
 // Minimum OS: windows5.1.2600.
-func PeerGroupImportConfig(pwzXML foundation.PWSTR, pwzPassword foundation.PWSTR, fOverwrite foundation.BOOL, ppwzIdentity *foundation.PWSTR, ppwzGroup *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupImportConfig.Addr(), uintptr(unsafe.Pointer(pwzXML)), uintptr(unsafe.Pointer(pwzPassword)), uintptr(fOverwrite), uintptr(unsafe.Pointer(ppwzIdentity)), uintptr(unsafe.Pointer(ppwzGroup)))
-	return foundation.HRESULT(r1)
+func PeerGroupImportConfig(pwzXML string, pwzPassword string, fOverwrite bool, ppwzIdentity *foundation.PWSTR, ppwzGroup *foundation.PWSTR) error {
+	_pwzXML := win32.UTF16Ptr(pwzXML)
+	_pwzPassword := win32.UTF16Ptr(pwzPassword)
+	_fOverwrite := win32.Bool32(fOverwrite)
+	r1, _, _ := syscall.SyscallN(procPeerGroupImportConfig.Addr(), uintptr(unsafe.Pointer(_pwzXML)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(_fOverwrite), uintptr(unsafe.Pointer(ppwzIdentity)), uintptr(unsafe.Pointer(ppwzGroup)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupImportDatabase calls P2P!PeerGroupImportDatabase.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupimportdatabase
 // Minimum OS: windows5.1.2600.
-func PeerGroupImportDatabase(hGroup unsafe.Pointer, pwzFilePath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupImportDatabase.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pwzFilePath)))
-	return foundation.HRESULT(r1)
+func PeerGroupImportDatabase(hGroup unsafe.Pointer, pwzFilePath string) error {
+	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
+	r1, _, _ := syscall.SyscallN(procPeerGroupImportDatabase.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzFilePath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupIssueCredentials calls P2P!PeerGroupIssueCredentials.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupissuecredentials
 // Minimum OS: windows5.1.2600.
-func PeerGroupIssueCredentials(hGroup unsafe.Pointer, pwzSubjectIdentity foundation.PWSTR, pCredentialInfo *PEER_CREDENTIAL_INFO, dwFlags uint32, ppwzInvitation *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupIssueCredentials.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pwzSubjectIdentity)), uintptr(unsafe.Pointer(pCredentialInfo)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppwzInvitation)))
-	return foundation.HRESULT(r1)
+func PeerGroupIssueCredentials(hGroup unsafe.Pointer, pwzSubjectIdentity string, pCredentialInfo *PEER_CREDENTIAL_INFO, dwFlags uint32, ppwzInvitation *foundation.PWSTR) error {
+	_pwzSubjectIdentity := win32.UTF16Ptr(pwzSubjectIdentity)
+	r1, _, _ := syscall.SyscallN(procPeerGroupIssueCredentials.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzSubjectIdentity)), uintptr(unsafe.Pointer(pCredentialInfo)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppwzInvitation)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupJoin calls P2P!PeerGroupJoin.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupjoin
 // Minimum OS: windows5.1.2600.
-func PeerGroupJoin(pwzIdentity foundation.PWSTR, pwzInvitation foundation.PWSTR, pwzCloud foundation.PWSTR, phGroup *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupJoin.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(pwzInvitation)), uintptr(unsafe.Pointer(pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
-	return foundation.HRESULT(r1)
+func PeerGroupJoin(pwzIdentity string, pwzInvitation string, pwzCloud string, phGroup *unsafe.Pointer) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	_pwzInvitation := win32.UTF16Ptr(pwzInvitation)
+	_pwzCloud := win32.UTF16Ptr(pwzCloud)
+	r1, _, _ := syscall.SyscallN(procPeerGroupJoin.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupOpen calls P2P!PeerGroupOpen.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupopen
 // Minimum OS: windows5.1.2600.
-func PeerGroupOpen(pwzIdentity foundation.PWSTR, pwzGroupPeerName foundation.PWSTR, pwzCloud foundation.PWSTR, phGroup *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupOpen.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(pwzGroupPeerName)), uintptr(unsafe.Pointer(pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
-	return foundation.HRESULT(r1)
+func PeerGroupOpen(pwzIdentity string, pwzGroupPeerName string, pwzCloud string, phGroup *unsafe.Pointer) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	_pwzGroupPeerName := win32.UTF16Ptr(pwzGroupPeerName)
+	_pwzCloud := win32.UTF16Ptr(pwzCloud)
+	r1, _, _ := syscall.SyscallN(procPeerGroupOpen.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzGroupPeerName)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupOpenDirectConnection calls P2P!PeerGroupOpenDirectConnection.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupopendirectconnection
 // Minimum OS: windows5.1.2600.
-func PeerGroupOpenDirectConnection(hGroup unsafe.Pointer, pwzIdentity foundation.PWSTR, pAddress *PEER_ADDRESS, pullConnectionId *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupOpenDirectConnection.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
-	return foundation.HRESULT(r1)
+func PeerGroupOpenDirectConnection(hGroup unsafe.Pointer, pwzIdentity string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	r1, _, _ := syscall.SyscallN(procPeerGroupOpenDirectConnection.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupParseInvitation calls P2P!PeerGroupParseInvitation.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupparseinvitation
 // Minimum OS: windows5.1.2600.
-func PeerGroupParseInvitation(pwzInvitation foundation.PWSTR, ppInvitationInfo **PEER_INVITATION_INFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupParseInvitation.Addr(), uintptr(unsafe.Pointer(pwzInvitation)), uintptr(unsafe.Pointer(ppInvitationInfo)))
-	return foundation.HRESULT(r1)
+func PeerGroupParseInvitation(pwzInvitation string, ppInvitationInfo **PEER_INVITATION_INFO) error {
+	_pwzInvitation := win32.UTF16Ptr(pwzInvitation)
+	r1, _, _ := syscall.SyscallN(procPeerGroupParseInvitation.Addr(), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(ppInvitationInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupPasswordJoin calls P2P!PeerGroupPasswordJoin.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergrouppasswordjoin
 // Minimum OS: windows5.1.2600.
-func PeerGroupPasswordJoin(pwzIdentity foundation.PWSTR, pwzInvitation foundation.PWSTR, pwzPassword foundation.PWSTR, pwzCloud foundation.PWSTR, phGroup *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupPasswordJoin.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(pwzInvitation)), uintptr(unsafe.Pointer(pwzPassword)), uintptr(unsafe.Pointer(pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
-	return foundation.HRESULT(r1)
+func PeerGroupPasswordJoin(pwzIdentity string, pwzInvitation string, pwzPassword string, pwzCloud string, phGroup *unsafe.Pointer) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	_pwzInvitation := win32.UTF16Ptr(pwzInvitation)
+	_pwzPassword := win32.UTF16Ptr(pwzPassword)
+	_pwzCloud := win32.UTF16Ptr(pwzCloud)
+	r1, _, _ := syscall.SyscallN(procPeerGroupPasswordJoin.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupPeerTimeToUniversalTime calls P2P!PeerGroupPeerTimeToUniversalTime.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergrouppeertimetouniversaltime
 // Minimum OS: windows5.1.2600.
-func PeerGroupPeerTimeToUniversalTime(hGroup unsafe.Pointer, pftPeerTime *foundation.FILETIME, pftUniversalTime *foundation.FILETIME) foundation.HRESULT {
+func PeerGroupPeerTimeToUniversalTime(hGroup unsafe.Pointer, pftPeerTime *foundation.FILETIME, pftUniversalTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupPeerTimeToUniversalTime.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pftPeerTime)), uintptr(unsafe.Pointer(pftUniversalTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupRegisterEvent calls P2P!PeerGroupRegisterEvent.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupregisterevent
 // Minimum OS: windows5.1.2600.
-func PeerGroupRegisterEvent(hGroup unsafe.Pointer, hEvent foundation.HANDLE, cEventRegistration uint32, pEventRegistrations *PEER_GROUP_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupRegisterEvent.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(hEvent), uintptr(cEventRegistration), uintptr(unsafe.Pointer(pEventRegistrations)), uintptr(unsafe.Pointer(phPeerEvent)))
-	return foundation.HRESULT(r1)
+func PeerGroupRegisterEvent(hGroup unsafe.Pointer, hEvent foundation.HANDLE, pEventRegistrations []PEER_GROUP_EVENT_REGISTRATION, phPeerEvent *unsafe.Pointer) error {
+	var _pEventRegistrations *PEER_GROUP_EVENT_REGISTRATION
+	if len(pEventRegistrations) > 0 {
+		_pEventRegistrations = &pEventRegistrations[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerGroupRegisterEvent.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(hEvent), uintptr(len(pEventRegistrations)), uintptr(unsafe.Pointer(_pEventRegistrations)), uintptr(unsafe.Pointer(phPeerEvent)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupResumePasswordAuthentication calls P2P!PeerGroupResumePasswordAuthentication.
-func PeerGroupResumePasswordAuthentication(hGroup unsafe.Pointer, hPeerEventHandle unsafe.Pointer) foundation.HRESULT {
+func PeerGroupResumePasswordAuthentication(hGroup unsafe.Pointer, hPeerEventHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupResumePasswordAuthentication.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(hPeerEventHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupSearchRecords calls P2P!PeerGroupSearchRecords.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupsearchrecords
 // Minimum OS: windows5.1.2600.
-func PeerGroupSearchRecords(hGroup unsafe.Pointer, pwzCriteria foundation.PWSTR, phPeerEnum *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerGroupSearchRecords.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pwzCriteria)), uintptr(unsafe.Pointer(phPeerEnum)))
-	return foundation.HRESULT(r1)
+func PeerGroupSearchRecords(hGroup unsafe.Pointer, pwzCriteria string, phPeerEnum *unsafe.Pointer) error {
+	_pwzCriteria := win32.UTF16Ptr(pwzCriteria)
+	r1, _, _ := syscall.SyscallN(procPeerGroupSearchRecords.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(_pwzCriteria)), uintptr(unsafe.Pointer(phPeerEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupSendData calls P2P!PeerGroupSendData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupsenddata
 // Minimum OS: windows5.1.2600.
-func PeerGroupSendData(hGroup unsafe.Pointer, ullConnectionId uint64, pType *win32.GUID, cbData uint32, pvData unsafe.Pointer) foundation.HRESULT {
+func PeerGroupSendData(hGroup unsafe.Pointer, ullConnectionId uint64, pType *win32.GUID, cbData uint32, pvData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupSendData.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(ullConnectionId), uintptr(unsafe.Pointer(pType)), uintptr(cbData), uintptr(unsafe.Pointer(pvData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupSetProperties calls P2P!PeerGroupSetProperties.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupsetproperties
 // Minimum OS: windows5.1.2600.
-func PeerGroupSetProperties(hGroup unsafe.Pointer, pProperties *PEER_GROUP_PROPERTIES) foundation.HRESULT {
+func PeerGroupSetProperties(hGroup unsafe.Pointer, pProperties *PEER_GROUP_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupSetProperties.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupShutdown calls P2P!PeerGroupShutdown.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupshutdown
 // Minimum OS: windows5.1.2600.
-func PeerGroupShutdown() foundation.HRESULT {
+func PeerGroupShutdown() error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupShutdown.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupStartup calls P2P!PeerGroupStartup.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupstartup
 // Minimum OS: windows5.1.2600.
-func PeerGroupStartup(wVersionRequested uint16, pVersionData *PEER_VERSION_DATA) foundation.HRESULT {
+func PeerGroupStartup(wVersionRequested uint16, pVersionData *PEER_VERSION_DATA) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupStartup.Addr(), uintptr(wVersionRequested), uintptr(unsafe.Pointer(pVersionData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupUniversalTimeToPeerTime calls P2P!PeerGroupUniversalTimeToPeerTime.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupuniversaltimetopeertime
 // Minimum OS: windows5.1.2600.
-func PeerGroupUniversalTimeToPeerTime(hGroup unsafe.Pointer, pftUniversalTime *foundation.FILETIME, pftPeerTime *foundation.FILETIME) foundation.HRESULT {
+func PeerGroupUniversalTimeToPeerTime(hGroup unsafe.Pointer, pftUniversalTime *foundation.FILETIME, pftPeerTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupUniversalTimeToPeerTime.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pftUniversalTime)), uintptr(unsafe.Pointer(pftPeerTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupUnregisterEvent calls P2P!PeerGroupUnregisterEvent.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupunregisterevent
 // Minimum OS: windows5.1.2600.
-func PeerGroupUnregisterEvent(hPeerEvent unsafe.Pointer) foundation.HRESULT {
+func PeerGroupUnregisterEvent(hPeerEvent unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupUnregisterEvent.Addr(), uintptr(unsafe.Pointer(hPeerEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerGroupUpdateRecord calls P2P!PeerGroupUpdateRecord.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupupdaterecord
 // Minimum OS: windows5.1.2600.
-func PeerGroupUpdateRecord(hGroup unsafe.Pointer, pRecord *PEER_RECORD) foundation.HRESULT {
+func PeerGroupUpdateRecord(hGroup unsafe.Pointer, pRecord *PEER_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procPeerGroupUpdateRecord.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(unsafe.Pointer(pRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerHostNameToPeerName calls P2P!PeerHostNameToPeerName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerhostnametopeername
 // Minimum OS: windows5.1.2600.
-func PeerHostNameToPeerName(pwzHostName foundation.PWSTR, ppwzPeerName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerHostNameToPeerName.Addr(), uintptr(unsafe.Pointer(pwzHostName)), uintptr(unsafe.Pointer(ppwzPeerName)))
-	return foundation.HRESULT(r1)
+func PeerHostNameToPeerName(pwzHostName string, ppwzPeerName *foundation.PWSTR) error {
+	_pwzHostName := win32.UTF16Ptr(pwzHostName)
+	r1, _, _ := syscall.SyscallN(procPeerHostNameToPeerName.Addr(), uintptr(unsafe.Pointer(_pwzHostName)), uintptr(unsafe.Pointer(ppwzPeerName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerIdentityCreate calls P2P!PeerIdentityCreate.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitycreate
 // Minimum OS: windows5.1.2600.
-func PeerIdentityCreate(pwzClassifier foundation.PWSTR, pwzFriendlyName foundation.PWSTR, hCryptProv uintptr, ppwzIdentity *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerIdentityCreate.Addr(), uintptr(unsafe.Pointer(pwzClassifier)), uintptr(unsafe.Pointer(pwzFriendlyName)), uintptr(hCryptProv), uintptr(unsafe.Pointer(ppwzIdentity)))
-	return foundation.HRESULT(r1)
+func PeerIdentityCreate(pwzClassifier string, pwzFriendlyName string, hCryptProv uintptr, ppwzIdentity *foundation.PWSTR) error {
+	_pwzClassifier := win32.UTF16Ptr(pwzClassifier)
+	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
+	r1, _, _ := syscall.SyscallN(procPeerIdentityCreate.Addr(), uintptr(unsafe.Pointer(_pwzClassifier)), uintptr(unsafe.Pointer(_pwzFriendlyName)), uintptr(hCryptProv), uintptr(unsafe.Pointer(ppwzIdentity)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerIdentityDelete calls P2P!PeerIdentityDelete.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitydelete
 // Minimum OS: windows5.1.2600.
-func PeerIdentityDelete(pwzIdentity foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerIdentityDelete.Addr(), uintptr(unsafe.Pointer(pwzIdentity)))
-	return foundation.HRESULT(r1)
+func PeerIdentityDelete(pwzIdentity string) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	r1, _, _ := syscall.SyscallN(procPeerIdentityDelete.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerIdentityExport calls P2P!PeerIdentityExport.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentityexport
 // Minimum OS: windows5.1.2600.
-func PeerIdentityExport(pwzIdentity foundation.PWSTR, pwzPassword foundation.PWSTR, ppwzExportXML *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerIdentityExport.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(pwzPassword)), uintptr(unsafe.Pointer(ppwzExportXML)))
-	return foundation.HRESULT(r1)
+func PeerIdentityExport(pwzIdentity string, pwzPassword string, ppwzExportXML *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	_pwzPassword := win32.UTF16Ptr(pwzPassword)
+	r1, _, _ := syscall.SyscallN(procPeerIdentityExport.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(ppwzExportXML)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerIdentityGetCryptKey calls P2P!PeerIdentityGetCryptKey.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetcryptkey
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetCryptKey(pwzIdentity foundation.PWSTR, phCryptProv *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerIdentityGetCryptKey.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(phCryptProv)))
-	return foundation.HRESULT(r1)
+func PeerIdentityGetCryptKey(pwzIdentity string, phCryptProv *uintptr) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	r1, _, _ := syscall.SyscallN(procPeerIdentityGetCryptKey.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phCryptProv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerIdentityGetDefault calls P2P!PeerIdentityGetDefault.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetdefault
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetDefault(ppwzPeerName *foundation.PWSTR) foundation.HRESULT {
+func PeerIdentityGetDefault(ppwzPeerName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetDefault.Addr(), uintptr(unsafe.Pointer(ppwzPeerName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerIdentityGetFriendlyName calls P2P!PeerIdentityGetFriendlyName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetfriendlyname
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetFriendlyName(pwzIdentity foundation.PWSTR, ppwzFriendlyName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerIdentityGetFriendlyName.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(ppwzFriendlyName)))
-	return foundation.HRESULT(r1)
+func PeerIdentityGetFriendlyName(pwzIdentity string, ppwzFriendlyName *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	r1, _, _ := syscall.SyscallN(procPeerIdentityGetFriendlyName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(ppwzFriendlyName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerIdentityGetXML calls P2P!PeerIdentityGetXML.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetxml
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetXML(pwzIdentity foundation.PWSTR, ppwzIdentityXML *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerIdentityGetXML.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(ppwzIdentityXML)))
-	return foundation.HRESULT(r1)
+func PeerIdentityGetXML(pwzIdentity string, ppwzIdentityXML *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	r1, _, _ := syscall.SyscallN(procPeerIdentityGetXML.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(ppwzIdentityXML)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerIdentityImport calls P2P!PeerIdentityImport.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentityimport
 // Minimum OS: windows5.1.2600.
-func PeerIdentityImport(pwzImportXML foundation.PWSTR, pwzPassword foundation.PWSTR, ppwzIdentity *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerIdentityImport.Addr(), uintptr(unsafe.Pointer(pwzImportXML)), uintptr(unsafe.Pointer(pwzPassword)), uintptr(unsafe.Pointer(ppwzIdentity)))
-	return foundation.HRESULT(r1)
+func PeerIdentityImport(pwzImportXML string, pwzPassword string, ppwzIdentity *foundation.PWSTR) error {
+	_pwzImportXML := win32.UTF16Ptr(pwzImportXML)
+	_pwzPassword := win32.UTF16Ptr(pwzPassword)
+	r1, _, _ := syscall.SyscallN(procPeerIdentityImport.Addr(), uintptr(unsafe.Pointer(_pwzImportXML)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(ppwzIdentity)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerIdentitySetFriendlyName calls P2P!PeerIdentitySetFriendlyName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitysetfriendlyname
 // Minimum OS: windows5.1.2600.
-func PeerIdentitySetFriendlyName(pwzIdentity foundation.PWSTR, pwzFriendlyName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerIdentitySetFriendlyName.Addr(), uintptr(unsafe.Pointer(pwzIdentity)), uintptr(unsafe.Pointer(pwzFriendlyName)))
-	return foundation.HRESULT(r1)
+func PeerIdentitySetFriendlyName(pwzIdentity string, pwzFriendlyName string) error {
+	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
+	r1, _, _ := syscall.SyscallN(procPeerIdentitySetFriendlyName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzFriendlyName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerNameToPeerHostName calls P2P!PeerNameToPeerHostName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peernametopeerhostname
 // Minimum OS: windows5.1.2600.
-func PeerNameToPeerHostName(pwzPeerName foundation.PWSTR, ppwzHostName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerNameToPeerHostName.Addr(), uintptr(unsafe.Pointer(pwzPeerName)), uintptr(unsafe.Pointer(ppwzHostName)))
-	return foundation.HRESULT(r1)
+func PeerNameToPeerHostName(pwzPeerName string, ppwzHostName *foundation.PWSTR) error {
+	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
+	r1, _, _ := syscall.SyscallN(procPeerNameToPeerHostName.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppwzHostName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpEndResolve calls P2P!PeerPnrpEndResolve.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpendresolve
 // Minimum OS: windows5.1.2600.
-func PeerPnrpEndResolve(hResolve unsafe.Pointer) foundation.HRESULT {
+func PeerPnrpEndResolve(hResolve unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpEndResolve.Addr(), uintptr(unsafe.Pointer(hResolve)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpGetCloudInfo calls P2P!PeerPnrpGetCloudInfo.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpgetcloudinfo
 // Minimum OS: windows5.1.2600.
-func PeerPnrpGetCloudInfo(pcNumClouds *uint32, ppCloudInfo **PEER_PNRP_CLOUD_INFO) foundation.HRESULT {
+func PeerPnrpGetCloudInfo(pcNumClouds *uint32, ppCloudInfo **PEER_PNRP_CLOUD_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpGetCloudInfo.Addr(), uintptr(unsafe.Pointer(pcNumClouds)), uintptr(unsafe.Pointer(ppCloudInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpGetEndpoint calls P2P!PeerPnrpGetEndpoint.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpgetendpoint
 // Minimum OS: windows5.1.2600.
-func PeerPnrpGetEndpoint(hResolve unsafe.Pointer, ppEndpoint **PEER_PNRP_ENDPOINT_INFO) foundation.HRESULT {
+func PeerPnrpGetEndpoint(hResolve unsafe.Pointer, ppEndpoint **PEER_PNRP_ENDPOINT_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpGetEndpoint.Addr(), uintptr(unsafe.Pointer(hResolve)), uintptr(unsafe.Pointer(ppEndpoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpRegister calls P2P!PeerPnrpRegister.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpregister
 // Minimum OS: windows5.1.2600.
-func PeerPnrpRegister(pcwzPeerName foundation.PWSTR, pRegistrationInfo *PEER_PNRP_REGISTRATION_INFO, phRegistration *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerPnrpRegister.Addr(), uintptr(unsafe.Pointer(pcwzPeerName)), uintptr(unsafe.Pointer(pRegistrationInfo)), uintptr(unsafe.Pointer(phRegistration)))
-	return foundation.HRESULT(r1)
+func PeerPnrpRegister(pcwzPeerName string, pRegistrationInfo *PEER_PNRP_REGISTRATION_INFO, phRegistration *unsafe.Pointer) error {
+	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
+	r1, _, _ := syscall.SyscallN(procPeerPnrpRegister.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(pRegistrationInfo)), uintptr(unsafe.Pointer(phRegistration)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpResolve calls P2P!PeerPnrpResolve.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpresolve
 // Minimum OS: windows5.1.2600.
-func PeerPnrpResolve(pcwzPeerName foundation.PWSTR, pcwzCloudName foundation.PWSTR, pcEndpoints *uint32, ppEndpoints **PEER_PNRP_ENDPOINT_INFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerPnrpResolve.Addr(), uintptr(unsafe.Pointer(pcwzPeerName)), uintptr(unsafe.Pointer(pcwzCloudName)), uintptr(unsafe.Pointer(pcEndpoints)), uintptr(unsafe.Pointer(ppEndpoints)))
-	return foundation.HRESULT(r1)
+func PeerPnrpResolve(pcwzPeerName string, pcwzCloudName string, pcEndpoints *uint32, ppEndpoints **PEER_PNRP_ENDPOINT_INFO) error {
+	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
+	_pcwzCloudName := win32.UTF16Ptr(pcwzCloudName)
+	r1, _, _ := syscall.SyscallN(procPeerPnrpResolve.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(_pcwzCloudName)), uintptr(unsafe.Pointer(pcEndpoints)), uintptr(unsafe.Pointer(ppEndpoints)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpShutdown calls P2P!PeerPnrpShutdown.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpshutdown
 // Minimum OS: windows5.1.2600.
-func PeerPnrpShutdown() foundation.HRESULT {
+func PeerPnrpShutdown() error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpShutdown.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpStartResolve calls P2P!PeerPnrpStartResolve.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpstartresolve
 // Minimum OS: windows5.1.2600.
-func PeerPnrpStartResolve(pcwzPeerName foundation.PWSTR, pcwzCloudName foundation.PWSTR, cMaxEndpoints uint32, hEvent foundation.HANDLE, phResolve *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPeerPnrpStartResolve.Addr(), uintptr(unsafe.Pointer(pcwzPeerName)), uintptr(unsafe.Pointer(pcwzCloudName)), uintptr(cMaxEndpoints), uintptr(hEvent), uintptr(unsafe.Pointer(phResolve)))
-	return foundation.HRESULT(r1)
+func PeerPnrpStartResolve(pcwzPeerName string, pcwzCloudName string, cMaxEndpoints uint32, hEvent foundation.HANDLE, phResolve *unsafe.Pointer) error {
+	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
+	_pcwzCloudName := win32.UTF16Ptr(pcwzCloudName)
+	r1, _, _ := syscall.SyscallN(procPeerPnrpStartResolve.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(_pcwzCloudName)), uintptr(cMaxEndpoints), uintptr(hEvent), uintptr(unsafe.Pointer(phResolve)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpStartup calls P2P!PeerPnrpStartup.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpstartup
 // Minimum OS: windows5.1.2600.
-func PeerPnrpStartup(wVersionRequested uint16) foundation.HRESULT {
+func PeerPnrpStartup(wVersionRequested uint16) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpStartup.Addr(), uintptr(wVersionRequested))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpUnregister calls P2P!PeerPnrpUnregister.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpunregister
 // Minimum OS: windows5.1.2600.
-func PeerPnrpUnregister(hRegistration unsafe.Pointer) foundation.HRESULT {
+func PeerPnrpUnregister(hRegistration unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpUnregister.Addr(), uintptr(unsafe.Pointer(hRegistration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PeerPnrpUpdateRegistration calls P2P!PeerPnrpUpdateRegistration.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpupdateregistration
 // Minimum OS: windows5.1.2600.
-func PeerPnrpUpdateRegistration(hRegistration unsafe.Pointer, pRegistrationInfo *PEER_PNRP_REGISTRATION_INFO) foundation.HRESULT {
+func PeerPnrpUpdateRegistration(hRegistration unsafe.Pointer, pRegistrationInfo *PEER_PNRP_REGISTRATION_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPeerPnrpUpdateRegistration.Addr(), uintptr(unsafe.Pointer(hRegistration)), uintptr(unsafe.Pointer(pRegistrationInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

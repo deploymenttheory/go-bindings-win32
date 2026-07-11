@@ -9,8 +9,8 @@ import (
 )
 
 // IPNG_ADDRESS: https://learn.microsoft.com/windows/win32/api/madcapcl/ns-madcapcl-ipng_address
-// IPNG_ADDRESS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPNG_ADDRESS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPNG_ADDRESS struct {
 	Data [4]uint32
 }

@@ -767,8 +767,8 @@ type DVD_TIMECODE struct {
 	Bitfield uint32
 }
 
-// DVD_TitleAttributes_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DVD_TitleAttributes_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DVD_TitleAttributes_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1093,8 +1093,8 @@ type REGFILTER struct {
 	Name  foundation.PWSTR
 }
 
-// REGFILTER2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// REGFILTER2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type REGFILTER2_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -1170,8 +1170,8 @@ type VFW_FILTERLIST struct {
 	AClsId   [1]win32.GUID
 }
 
-// VIDEOINFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VIDEOINFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VIDEOINFO_Anonymous_e__Union struct {
 	Data [259]uint32
 }

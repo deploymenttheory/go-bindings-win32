@@ -15,8 +15,8 @@ type ALTERNATE_INTERFACE struct {
 	AlternateInterfaceNumber uint16
 }
 
-// BM_REQUEST_TYPE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BM_REQUEST_TYPE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BM_REQUEST_TYPE struct {
 	Data [1]byte
 }
@@ -57,8 +57,8 @@ type IO_BLOCK_EX struct {
 	FTransferDirectionIn byte
 }
 
-// OS_STRING_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// OS_STRING_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type OS_STRING_Anonymous_e__Union struct {
 	Data [1]byte
 }
@@ -71,8 +71,8 @@ type OS_STRING struct {
 	Anonymous       OS_STRING_Anonymous_e__Union
 }
 
-// URB_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// URB_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type URB_Anonymous_e__Union struct {
 	Data [19]uint64
 }
@@ -177,8 +177,8 @@ type USBFN_INTERFACE_INFO struct {
 	InterfaceDescriptorSet [1]byte
 }
 
-// USBFN_NOTIFICATION_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USBFN_NOTIFICATION_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USBFN_NOTIFICATION_u_e__Union struct {
 	Data [2]uint32
 }
@@ -303,26 +303,26 @@ type USBUSER_SEND_RAW_COMMAND struct {
 	Parameters [28]byte
 }
 
-// USB_20_PORT_CHANGE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_20_PORT_CHANGE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_20_PORT_CHANGE struct {
 	Data [2]byte
 }
 
-// USB_20_PORT_STATUS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_20_PORT_STATUS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_20_PORT_STATUS struct {
 	Data [2]byte
 }
 
-// USB_30_PORT_CHANGE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_30_PORT_CHANGE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_30_PORT_CHANGE struct {
 	Data [2]byte
 }
 
-// USB_30_PORT_STATUS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_30_PORT_STATUS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_30_PORT_STATUS struct {
 	Data [2]byte
 }
@@ -361,8 +361,8 @@ type USB_DEVICE_CAPABILITY_DESCRIPTOR struct {
 	BDevCapabilityType byte
 }
 
-// USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union struct {
 	Data [4]byte
 }
@@ -375,14 +375,14 @@ type USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR struct {
 	BmAttributes         USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union
 }
 
-// USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED struct {
 	Data [4]byte
 }
 
-// USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union struct {
 	Data [4]byte
 }
@@ -394,32 +394,32 @@ type USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR struct {
 	BmAttributes       USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union
 }
 
-// USB_DEVICE_STATUS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_DEVICE_STATUS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_DEVICE_STATUS struct {
 	Data [2]byte
 }
 
-// USB_ENDPOINT_STATUS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_ENDPOINT_STATUS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_ENDPOINT_STATUS struct {
 	Data [2]byte
 }
 
-// USB_FUNCTION_SUSPEND_OPTIONS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_FUNCTION_SUSPEND_OPTIONS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_FUNCTION_SUSPEND_OPTIONS struct {
 	Data [1]byte
 }
 
-// USB_HIGH_SPEED_MAXPACKET is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_HIGH_SPEED_MAXPACKET is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_HIGH_SPEED_MAXPACKET struct {
 	Data [2]byte
 }
 
-// USB_HUB_30_PORT_REMOTE_WAKE_MASK is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_HUB_30_PORT_REMOTE_WAKE_MASK is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_HUB_30_PORT_REMOTE_WAKE_MASK struct {
 	Data [1]byte
 }
@@ -428,14 +428,14 @@ type USB_HUB_CAPABILITIES_EX struct {
 	CapabilityFlags USB_HUB_CAP_FLAGS
 }
 
-// USB_HUB_CAP_FLAGS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_HUB_CAP_FLAGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_HUB_CAP_FLAGS struct {
 	Data [4]byte
 }
 
-// USB_HUB_CHANGE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_HUB_CHANGE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_HUB_CHANGE struct {
 	Data [2]byte
 }
@@ -445,14 +445,14 @@ type USB_HUB_INFORMATION struct {
 	HubIsBusPowered foundation.BOOLEAN
 }
 
-// USB_HUB_STATUS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_HUB_STATUS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_HUB_STATUS struct {
 	Data [2]byte
 }
 
-// USB_HUB_STATUS_AND_CHANGE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_HUB_STATUS_AND_CHANGE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_HUB_STATUS_AND_CHANGE struct {
 	Data [4]byte
 }
@@ -485,56 +485,56 @@ type USB_INTERFACE_DESCRIPTOR struct {
 	IInterface         byte
 }
 
-// USB_INTERFACE_STATUS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_INTERFACE_STATUS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_INTERFACE_STATUS struct {
 	Data [2]byte
 }
 
-// USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS struct {
 	Data [4]byte
 }
 
-// USB_PORT_CHANGE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_PORT_CHANGE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_PORT_CHANGE struct {
 	Data [2]byte
 }
 
-// USB_PORT_EXT_STATUS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_PORT_EXT_STATUS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_PORT_EXT_STATUS struct {
 	Data [4]byte
 }
 
-// USB_PORT_EXT_STATUS_AND_CHANGE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_PORT_EXT_STATUS_AND_CHANGE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_PORT_EXT_STATUS_AND_CHANGE struct {
 	Data [8]byte
 }
 
-// USB_PORT_PROPERTIES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_PORT_PROPERTIES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_PORT_PROPERTIES struct {
 	Data [4]byte
 }
 
-// USB_PORT_STATUS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_PORT_STATUS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_PORT_STATUS struct {
 	Data [2]byte
 }
 
-// USB_PORT_STATUS_AND_CHANGE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_PORT_STATUS_AND_CHANGE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_PORT_STATUS_AND_CHANGE struct {
 	Data [4]byte
 }
 
-// USB_PROTOCOLS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USB_PROTOCOLS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_PROTOCOLS struct {
 	Data [4]byte
 }

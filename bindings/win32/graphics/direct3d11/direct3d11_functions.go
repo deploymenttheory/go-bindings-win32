@@ -37,85 +37,93 @@ var (
 
 // D3D11CreateDevice calls d3d11!D3D11CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d3d11/nf-d3d11-d3d11createdevice
-func D3D11CreateDevice(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags D3D11_CREATE_DEVICE_FLAG, pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, FeatureLevels uint32, SDKVersion uint32, ppDevice **ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **ID3D11DeviceContext) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procD3D11CreateDevice.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(DriverType), uintptr(Software), uintptr(Flags), uintptr(unsafe.Pointer(pFeatureLevels)), uintptr(FeatureLevels), uintptr(SDKVersion), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(pFeatureLevel)), uintptr(unsafe.Pointer(ppImmediateContext)))
-	return foundation.HRESULT(r1)
+func D3D11CreateDevice(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags D3D11_CREATE_DEVICE_FLAG, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, ppDevice **ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **ID3D11DeviceContext) error {
+	var _pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL
+	if len(pFeatureLevels) > 0 {
+		_pFeatureLevels = &pFeatureLevels[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D11CreateDevice.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(DriverType), uintptr(Software), uintptr(Flags), uintptr(unsafe.Pointer(_pFeatureLevels)), uintptr(len(pFeatureLevels)), uintptr(SDKVersion), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(pFeatureLevel)), uintptr(unsafe.Pointer(ppImmediateContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D11CreateDeviceAndSwapChain calls d3d11!D3D11CreateDeviceAndSwapChain.
 // https://learn.microsoft.com/windows/win32/api/d3d11/nf-d3d11-d3d11createdeviceandswapchain
-func D3D11CreateDeviceAndSwapChain(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags D3D11_CREATE_DEVICE_FLAG, pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, FeatureLevels uint32, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **ID3D11DeviceContext) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procD3D11CreateDeviceAndSwapChain.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(DriverType), uintptr(Software), uintptr(Flags), uintptr(unsafe.Pointer(pFeatureLevels)), uintptr(FeatureLevels), uintptr(SDKVersion), uintptr(unsafe.Pointer(pSwapChainDesc)), uintptr(unsafe.Pointer(ppSwapChain)), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(pFeatureLevel)), uintptr(unsafe.Pointer(ppImmediateContext)))
-	return foundation.HRESULT(r1)
+func D3D11CreateDeviceAndSwapChain(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags D3D11_CREATE_DEVICE_FLAG, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **ID3D11DeviceContext) error {
+	var _pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL
+	if len(pFeatureLevels) > 0 {
+		_pFeatureLevels = &pFeatureLevels[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D11CreateDeviceAndSwapChain.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(DriverType), uintptr(Software), uintptr(Flags), uintptr(unsafe.Pointer(_pFeatureLevels)), uintptr(len(pFeatureLevels)), uintptr(SDKVersion), uintptr(unsafe.Pointer(pSwapChainDesc)), uintptr(unsafe.Pointer(ppSwapChain)), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(pFeatureLevel)), uintptr(unsafe.Pointer(ppImmediateContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DDisassemble11Trace calls D3DCOMPILER_47!D3DDisassemble11Trace.
 // https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace
 // Minimum OS: windows8.0.
-func D3DDisassemble11Trace(pSrcData unsafe.Pointer, SrcDataSize uintptr, pTrace *ID3D11ShaderTrace, StartStep uint32, NumSteps uint32, Flags uint32, ppDisassembly **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+func D3DDisassemble11Trace(pSrcData unsafe.Pointer, SrcDataSize uintptr, pTrace *ID3D11ShaderTrace, StartStep uint32, NumSteps uint32, Flags uint32, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3DDisassemble11Trace.Addr(), uintptr(unsafe.Pointer(pSrcData)), uintptr(SrcDataSize), uintptr(unsafe.Pointer(pTrace)), uintptr(StartStep), uintptr(NumSteps), uintptr(Flags), uintptr(unsafe.Pointer(ppDisassembly)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DX11CreateFFT calls d3dcsx!D3DX11CreateFFT.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft
-func D3DX11CreateFFT(pDeviceContext *ID3D11DeviceContext, pDesc *D3DX11_FFT_DESC, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) foundation.HRESULT {
+func D3DX11CreateFFT(pDeviceContext *ID3D11DeviceContext, pDesc *D3DX11_FFT_DESC, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) error {
 	r1, _, _ := syscall.SyscallN(procD3DX11CreateFFT.Addr(), uintptr(unsafe.Pointer(pDeviceContext)), uintptr(unsafe.Pointer(pDesc)), uintptr(Flags), uintptr(unsafe.Pointer(pBufferInfo)), uintptr(unsafe.Pointer(ppFFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DX11CreateFFT1DComplex calls d3dcsx!D3DX11CreateFFT1DComplex.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft1dcomplex
-func D3DX11CreateFFT1DComplex(pDeviceContext *ID3D11DeviceContext, X uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) foundation.HRESULT {
+func D3DX11CreateFFT1DComplex(pDeviceContext *ID3D11DeviceContext, X uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) error {
 	r1, _, _ := syscall.SyscallN(procD3DX11CreateFFT1DComplex.Addr(), uintptr(unsafe.Pointer(pDeviceContext)), uintptr(X), uintptr(Flags), uintptr(unsafe.Pointer(pBufferInfo)), uintptr(unsafe.Pointer(ppFFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DX11CreateFFT1DReal calls d3dcsx!D3DX11CreateFFT1DReal.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft1dreal
-func D3DX11CreateFFT1DReal(pDeviceContext *ID3D11DeviceContext, X uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) foundation.HRESULT {
+func D3DX11CreateFFT1DReal(pDeviceContext *ID3D11DeviceContext, X uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) error {
 	r1, _, _ := syscall.SyscallN(procD3DX11CreateFFT1DReal.Addr(), uintptr(unsafe.Pointer(pDeviceContext)), uintptr(X), uintptr(Flags), uintptr(unsafe.Pointer(pBufferInfo)), uintptr(unsafe.Pointer(ppFFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DX11CreateFFT2DComplex calls d3dcsx!D3DX11CreateFFT2DComplex.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft2dcomplex
-func D3DX11CreateFFT2DComplex(pDeviceContext *ID3D11DeviceContext, X uint32, Y uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) foundation.HRESULT {
+func D3DX11CreateFFT2DComplex(pDeviceContext *ID3D11DeviceContext, X uint32, Y uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) error {
 	r1, _, _ := syscall.SyscallN(procD3DX11CreateFFT2DComplex.Addr(), uintptr(unsafe.Pointer(pDeviceContext)), uintptr(X), uintptr(Y), uintptr(Flags), uintptr(unsafe.Pointer(pBufferInfo)), uintptr(unsafe.Pointer(ppFFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DX11CreateFFT2DReal calls d3dcsx!D3DX11CreateFFT2DReal.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft2dreal
-func D3DX11CreateFFT2DReal(pDeviceContext *ID3D11DeviceContext, X uint32, Y uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) foundation.HRESULT {
+func D3DX11CreateFFT2DReal(pDeviceContext *ID3D11DeviceContext, X uint32, Y uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) error {
 	r1, _, _ := syscall.SyscallN(procD3DX11CreateFFT2DReal.Addr(), uintptr(unsafe.Pointer(pDeviceContext)), uintptr(X), uintptr(Y), uintptr(Flags), uintptr(unsafe.Pointer(pBufferInfo)), uintptr(unsafe.Pointer(ppFFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DX11CreateFFT3DComplex calls d3dcsx!D3DX11CreateFFT3DComplex.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft3dcomplex
-func D3DX11CreateFFT3DComplex(pDeviceContext *ID3D11DeviceContext, X uint32, Y uint32, Z uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) foundation.HRESULT {
+func D3DX11CreateFFT3DComplex(pDeviceContext *ID3D11DeviceContext, X uint32, Y uint32, Z uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) error {
 	r1, _, _ := syscall.SyscallN(procD3DX11CreateFFT3DComplex.Addr(), uintptr(unsafe.Pointer(pDeviceContext)), uintptr(X), uintptr(Y), uintptr(Z), uintptr(Flags), uintptr(unsafe.Pointer(pBufferInfo)), uintptr(unsafe.Pointer(ppFFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DX11CreateFFT3DReal calls d3dcsx!D3DX11CreateFFT3DReal.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createfft3dreal
-func D3DX11CreateFFT3DReal(pDeviceContext *ID3D11DeviceContext, X uint32, Y uint32, Z uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) foundation.HRESULT {
+func D3DX11CreateFFT3DReal(pDeviceContext *ID3D11DeviceContext, X uint32, Y uint32, Z uint32, Flags uint32, pBufferInfo *D3DX11_FFT_BUFFER_INFO, ppFFT **ID3DX11FFT) error {
 	r1, _, _ := syscall.SyscallN(procD3DX11CreateFFT3DReal.Addr(), uintptr(unsafe.Pointer(pDeviceContext)), uintptr(X), uintptr(Y), uintptr(Z), uintptr(Flags), uintptr(unsafe.Pointer(pBufferInfo)), uintptr(unsafe.Pointer(ppFFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DX11CreateScan calls d3dcsx!D3DX11CreateScan.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createscan
-func D3DX11CreateScan(pDeviceContext *ID3D11DeviceContext, MaxElementScanSize uint32, MaxScanCount uint32, ppScan **ID3DX11Scan) foundation.HRESULT {
+func D3DX11CreateScan(pDeviceContext *ID3D11DeviceContext, MaxElementScanSize uint32, MaxScanCount uint32, ppScan **ID3DX11Scan) error {
 	r1, _, _ := syscall.SyscallN(procD3DX11CreateScan.Addr(), uintptr(unsafe.Pointer(pDeviceContext)), uintptr(MaxElementScanSize), uintptr(MaxScanCount), uintptr(unsafe.Pointer(ppScan)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3DX11CreateSegmentedScan calls d3dcsx!D3DX11CreateSegmentedScan.
 // https://learn.microsoft.com/windows/win32/api/d3dcsx/nf-d3dcsx-d3dx11createsegmentedscan
-func D3DX11CreateSegmentedScan(pDeviceContext *ID3D11DeviceContext, MaxElementScanSize uint32, ppScan **ID3DX11SegmentedScan) foundation.HRESULT {
+func D3DX11CreateSegmentedScan(pDeviceContext *ID3D11DeviceContext, MaxElementScanSize uint32, ppScan **ID3DX11SegmentedScan) error {
 	r1, _, _ := syscall.SyscallN(procD3DX11CreateSegmentedScan.Addr(), uintptr(unsafe.Pointer(pDeviceContext)), uintptr(MaxElementScanSize), uintptr(unsafe.Pointer(ppScan)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

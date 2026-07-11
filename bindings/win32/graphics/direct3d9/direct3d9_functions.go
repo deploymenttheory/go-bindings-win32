@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -30,8 +29,9 @@ var (
 
 // D3DPERF_BeginEvent calls d3d9!D3DPERF_BeginEvent.
 // https://learn.microsoft.com/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent
-func D3DPERF_BeginEvent(col uint32, wszName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procD3DPERF_BeginEvent.Addr(), uintptr(col), uintptr(unsafe.Pointer(wszName)))
+func D3DPERF_BeginEvent(col uint32, wszName string) int32 {
+	_wszName := win32.UTF16Ptr(wszName)
+	r1, _, _ := syscall.SyscallN(procD3DPERF_BeginEvent.Addr(), uintptr(col), uintptr(unsafe.Pointer(_wszName)))
 	return int32(r1)
 }
 
@@ -51,15 +51,16 @@ func D3DPERF_GetStatus() uint32 {
 
 // D3DPERF_QueryRepeatFrame calls d3d9!D3DPERF_QueryRepeatFrame.
 // https://learn.microsoft.com/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe
-func D3DPERF_QueryRepeatFrame() foundation.BOOL {
+func D3DPERF_QueryRepeatFrame() bool {
 	r1, _, _ := syscall.SyscallN(procD3DPERF_QueryRepeatFrame.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // D3DPERF_SetMarker calls d3d9!D3DPERF_SetMarker.
 // https://learn.microsoft.com/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker
-func D3DPERF_SetMarker(col uint32, wszName foundation.PWSTR) {
-	syscall.SyscallN(procD3DPERF_SetMarker.Addr(), uintptr(col), uintptr(unsafe.Pointer(wszName)))
+func D3DPERF_SetMarker(col uint32, wszName string) {
+	_wszName := win32.UTF16Ptr(wszName)
+	syscall.SyscallN(procD3DPERF_SetMarker.Addr(), uintptr(col), uintptr(unsafe.Pointer(_wszName)))
 }
 
 // D3DPERF_SetOptions calls d3d9!D3DPERF_SetOptions.
@@ -70,8 +71,9 @@ func D3DPERF_SetOptions(dwOptions uint32) {
 
 // D3DPERF_SetRegion calls d3d9!D3DPERF_SetRegion.
 // https://learn.microsoft.com/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion
-func D3DPERF_SetRegion(col uint32, wszName foundation.PWSTR) {
-	syscall.SyscallN(procD3DPERF_SetRegion.Addr(), uintptr(col), uintptr(unsafe.Pointer(wszName)))
+func D3DPERF_SetRegion(col uint32, wszName string) {
+	_wszName := win32.UTF16Ptr(wszName)
+	syscall.SyscallN(procD3DPERF_SetRegion.Addr(), uintptr(col), uintptr(unsafe.Pointer(_wszName)))
 }
 
 // Direct3DCreate9 calls d3d9!Direct3DCreate9.
@@ -83,7 +85,7 @@ func Direct3DCreate9(SDKVersion uint32) *IDirect3D9 {
 
 // Direct3DCreate9Ex calls d3d9!Direct3DCreate9Ex.
 // https://learn.microsoft.com/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex
-func Direct3DCreate9Ex(SDKVersion uint32, param1 **IDirect3D9Ex) foundation.HRESULT {
+func Direct3DCreate9Ex(SDKVersion uint32, param1 **IDirect3D9Ex) error {
 	r1, _, _ := syscall.SyscallN(procDirect3DCreate9Ex.Addr(), uintptr(SDKVersion), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -28,39 +28,40 @@ var (
 // CreateVssBackupComponentsInternal calls VSSAPI!CreateVssBackupComponentsInternal.
 // https://learn.microsoft.com/windows/win32/api/vsbackup/nf-vsbackup-createvssbackupcomponentsinternal
 // Minimum OS: windows5.1.2600.
-func CreateVssBackupComponentsInternal(ppBackup **IVssBackupComponents) foundation.HRESULT {
+func CreateVssBackupComponentsInternal(ppBackup **IVssBackupComponents) error {
 	r1, _, _ := syscall.SyscallN(procCreateVssBackupComponentsInternal.Addr(), uintptr(unsafe.Pointer(ppBackup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVssExamineWriterMetadataInternal calls VSSAPI!CreateVssExamineWriterMetadataInternal.
 // https://learn.microsoft.com/windows/win32/api/vsbackup/nf-vsbackup-createvssexaminewritermetadatainternal
 // Minimum OS: windows5.1.2600.
-func CreateVssExamineWriterMetadataInternal(bstrXML foundation.BSTR, ppMetadata **IVssExamineWriterMetadata) foundation.HRESULT {
+func CreateVssExamineWriterMetadataInternal(bstrXML foundation.BSTR, ppMetadata **IVssExamineWriterMetadata) error {
 	r1, _, _ := syscall.SyscallN(procCreateVssExamineWriterMetadataInternal.Addr(), uintptr(unsafe.Pointer(bstrXML)), uintptr(unsafe.Pointer(ppMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVssExpressWriterInternal calls VSSAPI!CreateVssExpressWriterInternal.
 // https://learn.microsoft.com/windows/win32/api/vswriter/nf-vswriter-createvssexpresswriterinternal
 // Minimum OS: windows6.1.
-func CreateVssExpressWriterInternal(ppWriter **IVssExpressWriter) foundation.HRESULT {
+func CreateVssExpressWriterInternal(ppWriter **IVssExpressWriter) error {
 	r1, _, _ := syscall.SyscallN(procCreateVssExpressWriterInternal.Addr(), uintptr(unsafe.Pointer(ppWriter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsVolumeSnapshottedInternal calls VSSAPI!IsVolumeSnapshottedInternal.
 // https://learn.microsoft.com/windows/win32/api/vsbackup/nf-vsbackup-isvolumesnapshottedinternal
 // Minimum OS: windows5.1.2600.
-func IsVolumeSnapshottedInternal(pwszVolumeName *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCapability *int32) foundation.HRESULT {
+func IsVolumeSnapshottedInternal(pwszVolumeName *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCapability *int32) error {
 	r1, _, _ := syscall.SyscallN(procIsVolumeSnapshottedInternal.Addr(), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSnapshotsPresent)), uintptr(unsafe.Pointer(plSnapshotCapability)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShouldBlockRevertInternal calls VSSAPI!ShouldBlockRevertInternal.
-func ShouldBlockRevertInternal(wszVolumeName foundation.PWSTR, pbBlock *bool) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procShouldBlockRevertInternal.Addr(), uintptr(unsafe.Pointer(wszVolumeName)), uintptr(unsafe.Pointer(pbBlock)))
-	return foundation.HRESULT(r1)
+func ShouldBlockRevertInternal(wszVolumeName string, pbBlock *bool) error {
+	_wszVolumeName := win32.UTF16Ptr(wszVolumeName)
+	r1, _, _ := syscall.SyscallN(procShouldBlockRevertInternal.Addr(), uintptr(unsafe.Pointer(_wszVolumeName)), uintptr(unsafe.Pointer(pbBlock)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VssFreeSnapshotPropertiesInternal calls VSSAPI!VssFreeSnapshotPropertiesInternal.

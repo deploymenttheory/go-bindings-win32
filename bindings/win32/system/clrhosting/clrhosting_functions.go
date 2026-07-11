@@ -49,51 +49,62 @@ var (
 )
 
 // CLRCreateInstance calls MSCorEE!CLRCreateInstance.
-func CLRCreateInstance(clsid *win32.GUID, riid *win32.GUID, ppInterface *unsafe.Pointer) foundation.HRESULT {
+func CLRCreateInstance(clsid *win32.GUID, riid *win32.GUID, ppInterface *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCLRCreateInstance.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CallFunctionShim calls MSCorEE!CallFunctionShim.
-func CallFunctionShim(szDllName foundation.PWSTR, szFunctionName foundation.PSTR, lpvArgument1 unsafe.Pointer, lpvArgument2 unsafe.Pointer, szVersion foundation.PWSTR, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCallFunctionShim.Addr(), uintptr(unsafe.Pointer(szDllName)), uintptr(unsafe.Pointer(szFunctionName)), uintptr(unsafe.Pointer(lpvArgument1)), uintptr(unsafe.Pointer(lpvArgument2)), uintptr(unsafe.Pointer(szVersion)), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+func CallFunctionShim(szDllName string, szFunctionName foundation.PSTR, lpvArgument1 unsafe.Pointer, lpvArgument2 unsafe.Pointer, szVersion string, pvReserved unsafe.Pointer) error {
+	_szDllName := win32.UTF16Ptr(szDllName)
+	_szVersion := win32.UTF16Ptr(szVersion)
+	r1, _, _ := syscall.SyscallN(procCallFunctionShim.Addr(), uintptr(unsafe.Pointer(_szDllName)), uintptr(unsafe.Pointer(szFunctionName)), uintptr(unsafe.Pointer(lpvArgument1)), uintptr(unsafe.Pointer(lpvArgument2)), uintptr(unsafe.Pointer(_szVersion)), uintptr(unsafe.Pointer(pvReserved)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClrCreateManagedInstance calls MSCorEE!ClrCreateManagedInstance.
-func ClrCreateManagedInstance(pTypeName foundation.PWSTR, riid *win32.GUID, ppObject *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procClrCreateManagedInstance.Addr(), uintptr(unsafe.Pointer(pTypeName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+func ClrCreateManagedInstance(pTypeName string, riid *win32.GUID, ppObject *unsafe.Pointer) error {
+	_pTypeName := win32.UTF16Ptr(pTypeName)
+	r1, _, _ := syscall.SyscallN(procClrCreateManagedInstance.Addr(), uintptr(unsafe.Pointer(_pTypeName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CorBindToCurrentRuntime calls MSCorEE!CorBindToCurrentRuntime.
-func CorBindToCurrentRuntime(pwszFileName foundation.PWSTR, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCorBindToCurrentRuntime.Addr(), uintptr(unsafe.Pointer(pwszFileName)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func CorBindToCurrentRuntime(pwszFileName string, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+	r1, _, _ := syscall.SyscallN(procCorBindToCurrentRuntime.Addr(), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CorBindToRuntime calls MSCorEE!CorBindToRuntime.
-func CorBindToRuntime(pwszVersion foundation.PWSTR, pwszBuildFlavor foundation.PWSTR, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCorBindToRuntime.Addr(), uintptr(unsafe.Pointer(pwszVersion)), uintptr(unsafe.Pointer(pwszBuildFlavor)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func CorBindToRuntime(pwszVersion string, pwszBuildFlavor string, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pwszVersion := win32.UTF16Ptr(pwszVersion)
+	_pwszBuildFlavor := win32.UTF16Ptr(pwszBuildFlavor)
+	r1, _, _ := syscall.SyscallN(procCorBindToRuntime.Addr(), uintptr(unsafe.Pointer(_pwszVersion)), uintptr(unsafe.Pointer(_pwszBuildFlavor)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CorBindToRuntimeByCfg calls MSCorEE!CorBindToRuntimeByCfg.
-func CorBindToRuntimeByCfg(pCfgStream *systemcom.IStream, reserved uint32, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func CorBindToRuntimeByCfg(pCfgStream *systemcom.IStream, reserved uint32, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCorBindToRuntimeByCfg.Addr(), uintptr(unsafe.Pointer(pCfgStream)), uintptr(reserved), uintptr(startupFlags), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CorBindToRuntimeEx calls MSCorEE!CorBindToRuntimeEx.
-func CorBindToRuntimeEx(pwszVersion foundation.PWSTR, pwszBuildFlavor foundation.PWSTR, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCorBindToRuntimeEx.Addr(), uintptr(unsafe.Pointer(pwszVersion)), uintptr(unsafe.Pointer(pwszBuildFlavor)), uintptr(startupFlags), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func CorBindToRuntimeEx(pwszVersion string, pwszBuildFlavor string, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pwszVersion := win32.UTF16Ptr(pwszVersion)
+	_pwszBuildFlavor := win32.UTF16Ptr(pwszBuildFlavor)
+	r1, _, _ := syscall.SyscallN(procCorBindToRuntimeEx.Addr(), uintptr(unsafe.Pointer(_pwszVersion)), uintptr(unsafe.Pointer(_pwszBuildFlavor)), uintptr(startupFlags), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CorBindToRuntimeHost calls MSCorEE!CorBindToRuntimeHost.
-func CorBindToRuntimeHost(pwszVersion foundation.PWSTR, pwszBuildFlavor foundation.PWSTR, pwszHostConfigFile foundation.PWSTR, pReserved unsafe.Pointer, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCorBindToRuntimeHost.Addr(), uintptr(unsafe.Pointer(pwszVersion)), uintptr(unsafe.Pointer(pwszBuildFlavor)), uintptr(unsafe.Pointer(pwszHostConfigFile)), uintptr(unsafe.Pointer(pReserved)), uintptr(startupFlags), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func CorBindToRuntimeHost(pwszVersion string, pwszBuildFlavor string, pwszHostConfigFile string, pReserved unsafe.Pointer, startupFlags uint32, rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pwszVersion := win32.UTF16Ptr(pwszVersion)
+	_pwszBuildFlavor := win32.UTF16Ptr(pwszBuildFlavor)
+	_pwszHostConfigFile := win32.UTF16Ptr(pwszHostConfigFile)
+	r1, _, _ := syscall.SyscallN(procCorBindToRuntimeHost.Addr(), uintptr(unsafe.Pointer(_pwszVersion)), uintptr(unsafe.Pointer(_pwszBuildFlavor)), uintptr(unsafe.Pointer(_pwszHostConfigFile)), uintptr(unsafe.Pointer(pReserved)), uintptr(startupFlags), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CorExitProcess calls MSCorEE!CorExitProcess.
@@ -102,9 +113,10 @@ func CorExitProcess(exitCode int32) {
 }
 
 // CorLaunchApplication calls MSCorEE!CorLaunchApplication.
-func CorLaunchApplication(dwClickOnceHost HOST_TYPE, pwzAppFullName foundation.PWSTR, dwManifestPaths uint32, ppwzManifestPaths *foundation.PWSTR, dwActivationData uint32, ppwzActivationData *foundation.PWSTR, lpProcessInformation *systemthreading.PROCESS_INFORMATION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCorLaunchApplication.Addr(), uintptr(dwClickOnceHost), uintptr(unsafe.Pointer(pwzAppFullName)), uintptr(dwManifestPaths), uintptr(unsafe.Pointer(ppwzManifestPaths)), uintptr(dwActivationData), uintptr(unsafe.Pointer(ppwzActivationData)), uintptr(unsafe.Pointer(lpProcessInformation)))
-	return foundation.HRESULT(r1)
+func CorLaunchApplication(dwClickOnceHost HOST_TYPE, pwzAppFullName string, dwManifestPaths uint32, ppwzManifestPaths *foundation.PWSTR, dwActivationData uint32, ppwzActivationData *foundation.PWSTR, lpProcessInformation *systemthreading.PROCESS_INFORMATION) error {
+	_pwzAppFullName := win32.UTF16Ptr(pwzAppFullName)
+	r1, _, _ := syscall.SyscallN(procCorLaunchApplication.Addr(), uintptr(dwClickOnceHost), uintptr(unsafe.Pointer(_pwzAppFullName)), uintptr(dwManifestPaths), uintptr(unsafe.Pointer(ppwzManifestPaths)), uintptr(dwActivationData), uintptr(unsafe.Pointer(ppwzActivationData)), uintptr(unsafe.Pointer(lpProcessInformation)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CorMarkThreadInThreadPool calls MSCorEE!CorMarkThreadInThreadPool.
@@ -113,98 +125,107 @@ func CorMarkThreadInThreadPool() {
 }
 
 // CreateDebuggingInterfaceFromVersion calls MSCorEE!CreateDebuggingInterfaceFromVersion.
-func CreateDebuggingInterfaceFromVersion(iDebuggerVersion int32, szDebuggeeVersion foundation.PWSTR, ppCordb **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDebuggingInterfaceFromVersion.Addr(), uintptr(iDebuggerVersion), uintptr(unsafe.Pointer(szDebuggeeVersion)), uintptr(unsafe.Pointer(ppCordb)))
-	return foundation.HRESULT(r1)
+func CreateDebuggingInterfaceFromVersion(iDebuggerVersion int32, szDebuggeeVersion string, ppCordb **systemcom.IUnknown) error {
+	_szDebuggeeVersion := win32.UTF16Ptr(szDebuggeeVersion)
+	r1, _, _ := syscall.SyscallN(procCreateDebuggingInterfaceFromVersion.Addr(), uintptr(iDebuggerVersion), uintptr(unsafe.Pointer(_szDebuggeeVersion)), uintptr(unsafe.Pointer(ppCordb)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCLRIdentityManager calls MSCorEE!GetCLRIdentityManager.
-func GetCLRIdentityManager(riid *win32.GUID, ppManager **systemcom.IUnknown) foundation.HRESULT {
+func GetCLRIdentityManager(riid *win32.GUID, ppManager **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procGetCLRIdentityManager.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCORRequiredVersion calls MSCorEE!GetCORRequiredVersion.
-func GetCORRequiredVersion(pbuffer foundation.PWSTR, cchBuffer uint32, dwLength *uint32) foundation.HRESULT {
+func GetCORRequiredVersion(pbuffer foundation.PWSTR, cchBuffer uint32, dwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetCORRequiredVersion.Addr(), uintptr(unsafe.Pointer(pbuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCORSystemDirectory calls MSCorEE!GetCORSystemDirectory.
-func GetCORSystemDirectory(pbuffer foundation.PWSTR, cchBuffer uint32, dwLength *uint32) foundation.HRESULT {
+func GetCORSystemDirectory(pbuffer foundation.PWSTR, cchBuffer uint32, dwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetCORSystemDirectory.Addr(), uintptr(unsafe.Pointer(pbuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCORVersion calls MSCorEE!GetCORVersion.
-func GetCORVersion(pbBuffer foundation.PWSTR, cchBuffer uint32, dwLength *uint32) foundation.HRESULT {
+func GetCORVersion(pbBuffer foundation.PWSTR, cchBuffer uint32, dwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetCORVersion.Addr(), uintptr(unsafe.Pointer(pbBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileVersion calls MSCorEE!GetFileVersion.
-func GetFileVersion(szFilename foundation.PWSTR, szBuffer foundation.PWSTR, cchBuffer uint32, dwLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetFileVersion.Addr(), uintptr(unsafe.Pointer(szFilename)), uintptr(unsafe.Pointer(szBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwLength)))
-	return foundation.HRESULT(r1)
+func GetFileVersion(szFilename string, szBuffer foundation.PWSTR, cchBuffer uint32, dwLength *uint32) error {
+	_szFilename := win32.UTF16Ptr(szFilename)
+	r1, _, _ := syscall.SyscallN(procGetFileVersion.Addr(), uintptr(unsafe.Pointer(_szFilename)), uintptr(unsafe.Pointer(szBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRealProcAddress calls MSCorEE!GetRealProcAddress.
-func GetRealProcAddress(pwszProcName foundation.PSTR, ppv *unsafe.Pointer) foundation.HRESULT {
+func GetRealProcAddress(pwszProcName foundation.PSTR, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procGetRealProcAddress.Addr(), uintptr(unsafe.Pointer(pwszProcName)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRequestedRuntimeInfo calls MSCorEE!GetRequestedRuntimeInfo.
-func GetRequestedRuntimeInfo(pExe foundation.PWSTR, pwszVersion foundation.PWSTR, pConfigurationFile foundation.PWSTR, startupFlags uint32, runtimeInfoFlags uint32, pDirectory foundation.PWSTR, dwDirectory uint32, dwDirectoryLength *uint32, pVersion foundation.PWSTR, cchBuffer uint32, dwlength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetRequestedRuntimeInfo.Addr(), uintptr(unsafe.Pointer(pExe)), uintptr(unsafe.Pointer(pwszVersion)), uintptr(unsafe.Pointer(pConfigurationFile)), uintptr(startupFlags), uintptr(runtimeInfoFlags), uintptr(unsafe.Pointer(pDirectory)), uintptr(dwDirectory), uintptr(unsafe.Pointer(dwDirectoryLength)), uintptr(unsafe.Pointer(pVersion)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwlength)))
-	return foundation.HRESULT(r1)
+func GetRequestedRuntimeInfo(pExe string, pwszVersion string, pConfigurationFile string, startupFlags uint32, runtimeInfoFlags uint32, pDirectory foundation.PWSTR, dwDirectory uint32, dwDirectoryLength *uint32, pVersion foundation.PWSTR, cchBuffer uint32, dwlength *uint32) error {
+	_pExe := win32.UTF16Ptr(pExe)
+	_pwszVersion := win32.UTF16Ptr(pwszVersion)
+	_pConfigurationFile := win32.UTF16Ptr(pConfigurationFile)
+	r1, _, _ := syscall.SyscallN(procGetRequestedRuntimeInfo.Addr(), uintptr(unsafe.Pointer(_pExe)), uintptr(unsafe.Pointer(_pwszVersion)), uintptr(unsafe.Pointer(_pConfigurationFile)), uintptr(startupFlags), uintptr(runtimeInfoFlags), uintptr(unsafe.Pointer(pDirectory)), uintptr(dwDirectory), uintptr(unsafe.Pointer(dwDirectoryLength)), uintptr(unsafe.Pointer(pVersion)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwlength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRequestedRuntimeVersion calls MSCorEE!GetRequestedRuntimeVersion.
-func GetRequestedRuntimeVersion(pExe foundation.PWSTR, pVersion foundation.PWSTR, cchBuffer uint32, dwLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetRequestedRuntimeVersion.Addr(), uintptr(unsafe.Pointer(pExe)), uintptr(unsafe.Pointer(pVersion)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwLength)))
-	return foundation.HRESULT(r1)
+func GetRequestedRuntimeVersion(pExe string, pVersion foundation.PWSTR, cchBuffer uint32, dwLength *uint32) error {
+	_pExe := win32.UTF16Ptr(pExe)
+	r1, _, _ := syscall.SyscallN(procGetRequestedRuntimeVersion.Addr(), uintptr(unsafe.Pointer(_pExe)), uintptr(unsafe.Pointer(pVersion)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRequestedRuntimeVersionForCLSID calls MSCorEE!GetRequestedRuntimeVersionForCLSID.
-func GetRequestedRuntimeVersionForCLSID(rclsid *win32.GUID, pVersion foundation.PWSTR, cchBuffer uint32, dwLength *uint32, dwResolutionFlags CLSID_RESOLUTION_FLAGS) foundation.HRESULT {
+func GetRequestedRuntimeVersionForCLSID(rclsid *win32.GUID, pVersion foundation.PWSTR, cchBuffer uint32, dwLength *uint32, dwResolutionFlags CLSID_RESOLUTION_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(procGetRequestedRuntimeVersionForCLSID.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pVersion)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwLength)), uintptr(dwResolutionFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVersionFromProcess calls MSCorEE!GetVersionFromProcess.
-func GetVersionFromProcess(hProcess foundation.HANDLE, pVersion foundation.PWSTR, cchBuffer uint32, dwLength *uint32) foundation.HRESULT {
+func GetVersionFromProcess(hProcess foundation.HANDLE, pVersion foundation.PWSTR, cchBuffer uint32, dwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetVersionFromProcess.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pVersion)), uintptr(cchBuffer), uintptr(unsafe.Pointer(dwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadLibraryShim calls MSCorEE!LoadLibraryShim.
 // https://learn.microsoft.com/windows/win32/DevNotes/loadlibraryshim
-func LoadLibraryShim(szDllName foundation.PWSTR, szVersion foundation.PWSTR, pvReserved unsafe.Pointer, phModDll *foundation.HMODULE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLoadLibraryShim.Addr(), uintptr(unsafe.Pointer(szDllName)), uintptr(unsafe.Pointer(szVersion)), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(phModDll)))
-	return foundation.HRESULT(r1)
+func LoadLibraryShim(szDllName string, szVersion string, pvReserved unsafe.Pointer, phModDll *foundation.HMODULE) error {
+	_szDllName := win32.UTF16Ptr(szDllName)
+	_szVersion := win32.UTF16Ptr(szVersion)
+	r1, _, _ := syscall.SyscallN(procLoadLibraryShim.Addr(), uintptr(unsafe.Pointer(_szDllName)), uintptr(unsafe.Pointer(_szVersion)), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(phModDll)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadStringRC calls MSCorEE!LoadStringRC.
-func LoadStringRC(iResouceID uint32, szBuffer foundation.PWSTR, iMax int32, bQuiet int32) foundation.HRESULT {
+func LoadStringRC(iResouceID uint32, szBuffer foundation.PWSTR, iMax int32, bQuiet int32) error {
 	r1, _, _ := syscall.SyscallN(procLoadStringRC.Addr(), uintptr(iResouceID), uintptr(unsafe.Pointer(szBuffer)), uintptr(iMax), uintptr(bQuiet))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadStringRCEx calls MSCorEE!LoadStringRCEx.
-func LoadStringRCEx(lcid uint32, iResouceID uint32, szBuffer foundation.PWSTR, iMax int32, bQuiet int32, pcwchUsed *int32) foundation.HRESULT {
+func LoadStringRCEx(lcid uint32, iResouceID uint32, szBuffer foundation.PWSTR, iMax int32, bQuiet int32, pcwchUsed *int32) error {
 	r1, _, _ := syscall.SyscallN(procLoadStringRCEx.Addr(), uintptr(lcid), uintptr(iResouceID), uintptr(unsafe.Pointer(szBuffer)), uintptr(iMax), uintptr(bQuiet), uintptr(unsafe.Pointer(pcwchUsed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockClrVersion calls MSCorEE!LockClrVersion.
-func LockClrVersion(hostCallback FLockClrVersionCallback, pBeginHostSetup *FLockClrVersionCallback, pEndHostSetup *FLockClrVersionCallback) foundation.HRESULT {
+func LockClrVersion(hostCallback FLockClrVersionCallback, pBeginHostSetup *FLockClrVersionCallback, pEndHostSetup *FLockClrVersionCallback) error {
 	r1, _, _ := syscall.SyscallN(procLockClrVersion.Addr(), uintptr(hostCallback), uintptr(unsafe.Pointer(pBeginHostSetup)), uintptr(unsafe.Pointer(pEndHostSetup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RunDll32ShimW calls MSCorEE!RunDll32ShimW.
-func RunDll32ShimW(hwnd foundation.HWND, hinst foundation.HINSTANCE, lpszCmdLine foundation.PWSTR, nCmdShow int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRunDll32ShimW.Addr(), uintptr(hwnd), uintptr(hinst), uintptr(unsafe.Pointer(lpszCmdLine)), uintptr(nCmdShow))
-	return foundation.HRESULT(r1)
+func RunDll32ShimW(hwnd foundation.HWND, hinst foundation.HINSTANCE, lpszCmdLine string, nCmdShow int32) error {
+	_lpszCmdLine := win32.UTF16Ptr(lpszCmdLine)
+	r1, _, _ := syscall.SyscallN(procRunDll32ShimW.Addr(), uintptr(hwnd), uintptr(hinst), uintptr(unsafe.Pointer(_lpszCmdLine)), uintptr(nCmdShow))
+	return win32.HRESULTError(int32(r1))
 }

@@ -22,28 +22,36 @@ var (
 
 var (
 	procImpersonateNamedPipeClient      = modADVAPI32.NewProc("ImpersonateNamedPipeClient")
+	procCallNamedPipe                   = modKERNEL32.NewProc("CallNamedPipeW")
 	procCallNamedPipeA                  = modKERNEL32.NewProc("CallNamedPipeA")
-	procCallNamedPipeW                  = modKERNEL32.NewProc("CallNamedPipeW")
 	procConnectNamedPipe                = modKERNEL32.NewProc("ConnectNamedPipe")
+	procCreateNamedPipe                 = modKERNEL32.NewProc("CreateNamedPipeW")
 	procCreateNamedPipeA                = modKERNEL32.NewProc("CreateNamedPipeA")
-	procCreateNamedPipeW                = modKERNEL32.NewProc("CreateNamedPipeW")
 	procCreatePipe                      = modKERNEL32.NewProc("CreatePipe")
 	procDisconnectNamedPipe             = modKERNEL32.NewProc("DisconnectNamedPipe")
+	procGetNamedPipeClientComputerName  = modKERNEL32.NewProc("GetNamedPipeClientComputerNameW")
 	procGetNamedPipeClientComputerNameA = modKERNEL32.NewProc("GetNamedPipeClientComputerNameA")
-	procGetNamedPipeClientComputerNameW = modKERNEL32.NewProc("GetNamedPipeClientComputerNameW")
 	procGetNamedPipeClientProcessId     = modKERNEL32.NewProc("GetNamedPipeClientProcessId")
 	procGetNamedPipeClientSessionId     = modKERNEL32.NewProc("GetNamedPipeClientSessionId")
+	procGetNamedPipeHandleState         = modKERNEL32.NewProc("GetNamedPipeHandleStateW")
 	procGetNamedPipeHandleStateA        = modKERNEL32.NewProc("GetNamedPipeHandleStateA")
-	procGetNamedPipeHandleStateW        = modKERNEL32.NewProc("GetNamedPipeHandleStateW")
 	procGetNamedPipeInfo                = modKERNEL32.NewProc("GetNamedPipeInfo")
 	procGetNamedPipeServerProcessId     = modKERNEL32.NewProc("GetNamedPipeServerProcessId")
 	procGetNamedPipeServerSessionId     = modKERNEL32.NewProc("GetNamedPipeServerSessionId")
 	procPeekNamedPipe                   = modKERNEL32.NewProc("PeekNamedPipe")
 	procSetNamedPipeHandleState         = modKERNEL32.NewProc("SetNamedPipeHandleState")
 	procTransactNamedPipe               = modKERNEL32.NewProc("TransactNamedPipe")
+	procWaitNamedPipe                   = modKERNEL32.NewProc("WaitNamedPipeW")
 	procWaitNamedPipeA                  = modKERNEL32.NewProc("WaitNamedPipeA")
-	procWaitNamedPipeW                  = modKERNEL32.NewProc("WaitNamedPipeW")
 )
+
+// CallNamedPipe calls KERNEL32!CallNamedPipeW.
+// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-callnamedpipew
+func CallNamedPipe(lpNamedPipeName string, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesRead *uint32, nTimeOut uint32) bool {
+	_lpNamedPipeName := win32.UTF16Ptr(lpNamedPipeName)
+	r1, _, _ := syscall.SyscallN(procCallNamedPipe.Addr(), uintptr(unsafe.Pointer(_lpNamedPipeName)), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(nTimeOut))
+	return r1 != 0
+}
 
 // CallNamedPipeA calls KERNEL32!CallNamedPipeA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-callnamedpipea
@@ -54,13 +62,6 @@ func CallNamedPipeA(lpNamedPipeName foundation.PSTR, lpInBuffer unsafe.Pointer, 
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// CallNamedPipeW calls KERNEL32!CallNamedPipeW.
-// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-callnamedpipew
-func CallNamedPipeW(lpNamedPipeName foundation.PWSTR, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesRead *uint32, nTimeOut uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCallNamedPipeW.Addr(), uintptr(unsafe.Pointer(lpNamedPipeName)), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(nTimeOut))
-	return foundation.BOOL(r1)
 }
 
 // ConnectNamedPipe calls KERNEL32!ConnectNamedPipe.
@@ -74,6 +75,14 @@ func ConnectNamedPipe(hNamedPipe foundation.HANDLE, lpOverlapped *systemio.OVERL
 	return nil
 }
 
+// CreateNamedPipe calls KERNEL32!CreateNamedPipeW.
+// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-createnamedpipew
+func CreateNamedPipe(lpName string, dwOpenMode storagefilesystem.FILE_FLAGS_AND_ATTRIBUTES, dwPipeMode NAMED_PIPE_MODE, nMaxInstances uint32, nOutBufferSize uint32, nInBufferSize uint32, nDefaultTimeOut uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) foundation.HANDLE {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, _ := syscall.SyscallN(procCreateNamedPipe.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(dwOpenMode), uintptr(dwPipeMode), uintptr(nMaxInstances), uintptr(nOutBufferSize), uintptr(nInBufferSize), uintptr(nDefaultTimeOut), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+	return foundation.HANDLE(r1)
+}
+
 // CreateNamedPipeA calls KERNEL32!CreateNamedPipeA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createnamedpipea
 // Minimum OS: windows5.0.
@@ -84,13 +93,6 @@ func CreateNamedPipeA(lpName foundation.PSTR, dwOpenMode storagefilesystem.FILE_
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
-}
-
-// CreateNamedPipeW calls KERNEL32!CreateNamedPipeW.
-// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-createnamedpipew
-func CreateNamedPipeW(lpName foundation.PWSTR, dwOpenMode storagefilesystem.FILE_FLAGS_AND_ATTRIBUTES, dwPipeMode NAMED_PIPE_MODE, nMaxInstances uint32, nOutBufferSize uint32, nInBufferSize uint32, nDefaultTimeOut uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procCreateNamedPipeW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(dwOpenMode), uintptr(dwPipeMode), uintptr(nMaxInstances), uintptr(nOutBufferSize), uintptr(nInBufferSize), uintptr(nDefaultTimeOut), uintptr(unsafe.Pointer(lpSecurityAttributes)))
-	return foundation.HANDLE(r1)
 }
 
 // CreatePipe calls KERNEL32!CreatePipe.
@@ -115,6 +117,13 @@ func DisconnectNamedPipe(hNamedPipe foundation.HANDLE) error {
 	return nil
 }
 
+// GetNamedPipeClientComputerName calls KERNEL32!GetNamedPipeClientComputerNameW.
+// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-getnamedpipeclientcomputernamew
+func GetNamedPipeClientComputerName(Pipe foundation.HANDLE, ClientComputerName foundation.PWSTR, ClientComputerNameLength uint32) bool {
+	r1, _, _ := syscall.SyscallN(procGetNamedPipeClientComputerName.Addr(), uintptr(Pipe), uintptr(unsafe.Pointer(ClientComputerName)), uintptr(ClientComputerNameLength))
+	return r1 != 0
+}
+
 // GetNamedPipeClientComputerNameA calls KERNEL32!GetNamedPipeClientComputerNameA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getnamedpipeclientcomputernamea
 // Minimum OS: windows6.0.6000.
@@ -124,13 +133,6 @@ func GetNamedPipeClientComputerNameA(Pipe foundation.HANDLE, ClientComputerName 
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// GetNamedPipeClientComputerNameW calls KERNEL32!GetNamedPipeClientComputerNameW.
-// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-getnamedpipeclientcomputernamew
-func GetNamedPipeClientComputerNameW(Pipe foundation.HANDLE, ClientComputerName foundation.PWSTR, ClientComputerNameLength uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetNamedPipeClientComputerNameW.Addr(), uintptr(Pipe), uintptr(unsafe.Pointer(ClientComputerName)), uintptr(ClientComputerNameLength))
-	return foundation.BOOL(r1)
 }
 
 // GetNamedPipeClientProcessId calls KERNEL32!GetNamedPipeClientProcessId.
@@ -155,6 +157,13 @@ func GetNamedPipeClientSessionId(Pipe foundation.HANDLE, ClientSessionId *uint32
 	return nil
 }
 
+// GetNamedPipeHandleState calls KERNEL32!GetNamedPipeHandleStateW.
+// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-getnamedpipehandlestatew
+func GetNamedPipeHandleState(hNamedPipe foundation.HANDLE, lpState *NAMED_PIPE_MODE, lpCurInstances *uint32, lpMaxCollectionCount *uint32, lpCollectDataTimeout *uint32, lpUserName foundation.PWSTR, nMaxUserNameSize uint32) bool {
+	r1, _, _ := syscall.SyscallN(procGetNamedPipeHandleState.Addr(), uintptr(hNamedPipe), uintptr(unsafe.Pointer(lpState)), uintptr(unsafe.Pointer(lpCurInstances)), uintptr(unsafe.Pointer(lpMaxCollectionCount)), uintptr(unsafe.Pointer(lpCollectDataTimeout)), uintptr(unsafe.Pointer(lpUserName)), uintptr(nMaxUserNameSize))
+	return r1 != 0
+}
+
 // GetNamedPipeHandleStateA calls KERNEL32!GetNamedPipeHandleStateA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getnamedpipehandlestatea
 // Minimum OS: windows5.0.
@@ -164,13 +173,6 @@ func GetNamedPipeHandleStateA(hNamedPipe foundation.HANDLE, lpState *NAMED_PIPE_
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// GetNamedPipeHandleStateW calls KERNEL32!GetNamedPipeHandleStateW.
-// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-getnamedpipehandlestatew
-func GetNamedPipeHandleStateW(hNamedPipe foundation.HANDLE, lpState *NAMED_PIPE_MODE, lpCurInstances *uint32, lpMaxCollectionCount *uint32, lpCollectDataTimeout *uint32, lpUserName foundation.PWSTR, nMaxUserNameSize uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetNamedPipeHandleStateW.Addr(), uintptr(hNamedPipe), uintptr(unsafe.Pointer(lpState)), uintptr(unsafe.Pointer(lpCurInstances)), uintptr(unsafe.Pointer(lpMaxCollectionCount)), uintptr(unsafe.Pointer(lpCollectDataTimeout)), uintptr(unsafe.Pointer(lpUserName)), uintptr(nMaxUserNameSize))
-	return foundation.BOOL(r1)
 }
 
 // GetNamedPipeInfo calls KERNEL32!GetNamedPipeInfo.
@@ -250,6 +252,14 @@ func TransactNamedPipe(hNamedPipe foundation.HANDLE, lpInBuffer unsafe.Pointer, 
 	return nil
 }
 
+// WaitNamedPipe calls KERNEL32!WaitNamedPipeW.
+// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-waitnamedpipew
+func WaitNamedPipe(lpNamedPipeName string, nTimeOut uint32) bool {
+	_lpNamedPipeName := win32.UTF16Ptr(lpNamedPipeName)
+	r1, _, _ := syscall.SyscallN(procWaitNamedPipe.Addr(), uintptr(unsafe.Pointer(_lpNamedPipeName)), uintptr(nTimeOut))
+	return r1 != 0
+}
+
 // WaitNamedPipeA calls KERNEL32!WaitNamedPipeA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-waitnamedpipea
 // Minimum OS: windows5.0.
@@ -259,11 +269,4 @@ func WaitNamedPipeA(lpNamedPipeName foundation.PSTR, nTimeOut uint32) error {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// WaitNamedPipeW calls KERNEL32!WaitNamedPipeW.
-// https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-waitnamedpipew
-func WaitNamedPipeW(lpNamedPipeName foundation.PWSTR, nTimeOut uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWaitNamedPipeW.Addr(), uintptr(unsafe.Pointer(lpNamedPipeName)), uintptr(nTimeOut))
-	return foundation.BOOL(r1)
 }

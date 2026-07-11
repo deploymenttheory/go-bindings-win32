@@ -505,8 +505,8 @@ type MI_ContextFT struct {
 	WriteError           uintptr
 }
 
-// MI_Datetime_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MI_Datetime_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MI_Datetime_u_e__Union struct {
 	Data [8]uint32
 }
@@ -1238,8 +1238,8 @@ type MI_Uint8Field struct {
 	Flags  byte
 }
 
-// MI_UserCredentials_credentials_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MI_UserCredentials_credentials_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MI_UserCredentials_credentials_e__Union struct {
 	Data [3]uint64
 }
@@ -1264,8 +1264,8 @@ type MI_UtilitiesFT struct {
 }
 
 // MI_Value: https://learn.microsoft.com/windows/win32/api/mi/ns-mi-mi_value
-// MI_Value is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MI_Value is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MI_Value struct {
 	Data [5]uint64
 }
@@ -1378,8 +1378,8 @@ type SWbemRefreshableItem struct {
 type SWbemRefresher struct {
 }
 
-// SWbemRpnConst is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SWbemRpnConst is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SWbemRpnConst struct {
 	Data [1]uint64
 }

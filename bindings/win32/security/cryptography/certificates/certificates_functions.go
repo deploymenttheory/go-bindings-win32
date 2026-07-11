@@ -51,17 +51,17 @@ var (
 // CertSrvBackupClose calls certadm!CertSrvBackupClose.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackupclose
 // Minimum OS: windowsserver2003.
-func CertSrvBackupClose(hbc unsafe.Pointer) foundation.HRESULT {
+func CertSrvBackupClose(hbc unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupClose.Addr(), uintptr(unsafe.Pointer(hbc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvBackupEnd calls certadm!CertSrvBackupEnd.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackupend
 // Minimum OS: windowsserver2003.
-func CertSrvBackupEnd(hbc unsafe.Pointer) foundation.HRESULT {
+func CertSrvBackupEnd(hbc unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupEnd.Addr(), uintptr(unsafe.Pointer(hbc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvBackupFree calls certadm!CertSrvBackupFree.
@@ -74,121 +74,132 @@ func CertSrvBackupFree(pv unsafe.Pointer) {
 // CertSrvBackupGetBackupLogsW calls certadm!CertSrvBackupGetBackupLogsW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackupgetbackuplogsw
 // Minimum OS: windowsserver2003.
-func CertSrvBackupGetBackupLogsW(hbc unsafe.Pointer, ppwszzBackupLogFiles *foundation.PWSTR, pcbSize *uint32) foundation.HRESULT {
+func CertSrvBackupGetBackupLogsW(hbc unsafe.Pointer, ppwszzBackupLogFiles *foundation.PWSTR, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupGetBackupLogsW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(ppwszzBackupLogFiles)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvBackupGetDatabaseNamesW calls certadm!CertSrvBackupGetDatabaseNamesW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackupgetdatabasenamesw
 // Minimum OS: windowsserver2003.
-func CertSrvBackupGetDatabaseNamesW(hbc unsafe.Pointer, ppwszzAttachmentInformation *foundation.PWSTR, pcbSize *uint32) foundation.HRESULT {
+func CertSrvBackupGetDatabaseNamesW(hbc unsafe.Pointer, ppwszzAttachmentInformation *foundation.PWSTR, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupGetDatabaseNamesW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(ppwszzAttachmentInformation)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvBackupGetDynamicFileListW calls certadm!CertSrvBackupGetDynamicFileListW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackupgetdynamicfilelistw
 // Minimum OS: windowsserver2003.
-func CertSrvBackupGetDynamicFileListW(hbc unsafe.Pointer, ppwszzFileList *foundation.PWSTR, pcbSize *uint32) foundation.HRESULT {
+func CertSrvBackupGetDynamicFileListW(hbc unsafe.Pointer, ppwszzFileList *foundation.PWSTR, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupGetDynamicFileListW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(ppwszzFileList)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvBackupOpenFileW calls certadm!CertSrvBackupOpenFileW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackupopenfilew
 // Minimum OS: windowsserver2003.
-func CertSrvBackupOpenFileW(hbc unsafe.Pointer, pwszAttachmentName foundation.PWSTR, cbReadHintSize uint32, pliFileSize *int64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCertSrvBackupOpenFileW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(pwszAttachmentName)), uintptr(cbReadHintSize), uintptr(unsafe.Pointer(pliFileSize)))
-	return foundation.HRESULT(r1)
+func CertSrvBackupOpenFileW(hbc unsafe.Pointer, pwszAttachmentName string, cbReadHintSize uint32, pliFileSize *int64) error {
+	_pwszAttachmentName := win32.UTF16Ptr(pwszAttachmentName)
+	r1, _, _ := syscall.SyscallN(procCertSrvBackupOpenFileW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(_pwszAttachmentName)), uintptr(cbReadHintSize), uintptr(unsafe.Pointer(pliFileSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvBackupPrepareW calls certadm!CertSrvBackupPrepareW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackuppreparew
 // Minimum OS: windowsserver2003.
-func CertSrvBackupPrepareW(pwszServerName foundation.PWSTR, grbitJet uint32, dwBackupFlags CSBACKUP_TYPE, phbc *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCertSrvBackupPrepareW.Addr(), uintptr(unsafe.Pointer(pwszServerName)), uintptr(grbitJet), uintptr(dwBackupFlags), uintptr(unsafe.Pointer(phbc)))
-	return foundation.HRESULT(r1)
+func CertSrvBackupPrepareW(pwszServerName string, grbitJet uint32, dwBackupFlags CSBACKUP_TYPE, phbc *unsafe.Pointer) error {
+	_pwszServerName := win32.UTF16Ptr(pwszServerName)
+	r1, _, _ := syscall.SyscallN(procCertSrvBackupPrepareW.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(grbitJet), uintptr(dwBackupFlags), uintptr(unsafe.Pointer(phbc)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvBackupRead calls certadm!CertSrvBackupRead.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackupread
 // Minimum OS: windowsserver2003.
-func CertSrvBackupRead(hbc unsafe.Pointer, pvBuffer unsafe.Pointer, cbBuffer uint32, pcbRead *uint32) foundation.HRESULT {
+func CertSrvBackupRead(hbc unsafe.Pointer, pvBuffer unsafe.Pointer, cbBuffer uint32, pcbRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupRead.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(pvBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcbRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvBackupTruncateLogs calls certadm!CertSrvBackupTruncateLogs.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackuptruncatelogs
 // Minimum OS: windowsserver2003.
-func CertSrvBackupTruncateLogs(hbc unsafe.Pointer) foundation.HRESULT {
+func CertSrvBackupTruncateLogs(hbc unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvBackupTruncateLogs.Addr(), uintptr(unsafe.Pointer(hbc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvIsServerOnlineW calls certadm!CertSrvIsServerOnlineW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvisserveronlinew
 // Minimum OS: windowsserver2003.
-func CertSrvIsServerOnlineW(pwszServerName foundation.PWSTR, pfServerOnline *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCertSrvIsServerOnlineW.Addr(), uintptr(unsafe.Pointer(pwszServerName)), uintptr(unsafe.Pointer(pfServerOnline)))
-	return foundation.HRESULT(r1)
+func CertSrvIsServerOnlineW(pwszServerName string, pfServerOnline *foundation.BOOL) error {
+	_pwszServerName := win32.UTF16Ptr(pwszServerName)
+	r1, _, _ := syscall.SyscallN(procCertSrvIsServerOnlineW.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(unsafe.Pointer(pfServerOnline)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvRestoreEnd calls certadm!CertSrvRestoreEnd.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvrestoreend
 // Minimum OS: windowsserver2003.
-func CertSrvRestoreEnd(hbc unsafe.Pointer) foundation.HRESULT {
+func CertSrvRestoreEnd(hbc unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvRestoreEnd.Addr(), uintptr(unsafe.Pointer(hbc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvRestoreGetDatabaseLocationsW calls certadm!CertSrvRestoreGetDatabaseLocationsW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvrestoregetdatabaselocationsw
 // Minimum OS: windowsserver2003.
-func CertSrvRestoreGetDatabaseLocationsW(hbc unsafe.Pointer, ppwszzDatabaseLocationList *foundation.PWSTR, pcbSize *uint32) foundation.HRESULT {
+func CertSrvRestoreGetDatabaseLocationsW(hbc unsafe.Pointer, ppwszzDatabaseLocationList *foundation.PWSTR, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvRestoreGetDatabaseLocationsW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(ppwszzDatabaseLocationList)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvRestorePrepareW calls certadm!CertSrvRestorePrepareW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvrestorepreparew
 // Minimum OS: windowsserver2003.
-func CertSrvRestorePrepareW(pwszServerName foundation.PWSTR, dwRestoreFlags uint32, phbc *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCertSrvRestorePrepareW.Addr(), uintptr(unsafe.Pointer(pwszServerName)), uintptr(dwRestoreFlags), uintptr(unsafe.Pointer(phbc)))
-	return foundation.HRESULT(r1)
+func CertSrvRestorePrepareW(pwszServerName string, dwRestoreFlags uint32, phbc *unsafe.Pointer) error {
+	_pwszServerName := win32.UTF16Ptr(pwszServerName)
+	r1, _, _ := syscall.SyscallN(procCertSrvRestorePrepareW.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(dwRestoreFlags), uintptr(unsafe.Pointer(phbc)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvRestoreRegisterComplete calls certadm!CertSrvRestoreRegisterComplete.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvrestoreregistercomplete
 // Minimum OS: windowsserver2003.
-func CertSrvRestoreRegisterComplete(hbc unsafe.Pointer, hrRestoreState foundation.HRESULT) foundation.HRESULT {
+func CertSrvRestoreRegisterComplete(hbc unsafe.Pointer, hrRestoreState foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(procCertSrvRestoreRegisterComplete.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(hrRestoreState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvRestoreRegisterThroughFile calls certadm!CertSrvRestoreRegisterThroughFile.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvrestoreregisterthroughfile
 // Minimum OS: windowsserver2003.
-func CertSrvRestoreRegisterThroughFile(hbc unsafe.Pointer, pwszCheckPointFilePath foundation.PWSTR, pwszLogPath foundation.PWSTR, rgrstmap *CSEDB_RSTMAPW, crstmap int32, pwszBackupLogPath foundation.PWSTR, genLow uint32, genHigh uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCertSrvRestoreRegisterThroughFile.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(pwszCheckPointFilePath)), uintptr(unsafe.Pointer(pwszLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstmap), uintptr(unsafe.Pointer(pwszBackupLogPath)), uintptr(genLow), uintptr(genHigh))
-	return foundation.HRESULT(r1)
+func CertSrvRestoreRegisterThroughFile(hbc unsafe.Pointer, pwszCheckPointFilePath string, pwszLogPath string, rgrstmap *CSEDB_RSTMAPW, crstmap int32, pwszBackupLogPath string, genLow uint32, genHigh uint32) error {
+	_pwszCheckPointFilePath := win32.UTF16Ptr(pwszCheckPointFilePath)
+	_pwszLogPath := win32.UTF16Ptr(pwszLogPath)
+	_pwszBackupLogPath := win32.UTF16Ptr(pwszBackupLogPath)
+	r1, _, _ := syscall.SyscallN(procCertSrvRestoreRegisterThroughFile.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(_pwszCheckPointFilePath)), uintptr(unsafe.Pointer(_pwszLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstmap), uintptr(unsafe.Pointer(_pwszBackupLogPath)), uintptr(genLow), uintptr(genHigh))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvRestoreRegisterW calls certadm!CertSrvRestoreRegisterW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvrestoreregisterw
 // Minimum OS: windowsserver2003.
-func CertSrvRestoreRegisterW(hbc unsafe.Pointer, pwszCheckPointFilePath foundation.PWSTR, pwszLogPath foundation.PWSTR, rgrstmap *CSEDB_RSTMAPW, crstmap int32, pwszBackupLogPath foundation.PWSTR, genLow uint32, genHigh uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCertSrvRestoreRegisterW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(pwszCheckPointFilePath)), uintptr(unsafe.Pointer(pwszLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstmap), uintptr(unsafe.Pointer(pwszBackupLogPath)), uintptr(genLow), uintptr(genHigh))
-	return foundation.HRESULT(r1)
+func CertSrvRestoreRegisterW(hbc unsafe.Pointer, pwszCheckPointFilePath string, pwszLogPath string, rgrstmap *CSEDB_RSTMAPW, crstmap int32, pwszBackupLogPath string, genLow uint32, genHigh uint32) error {
+	_pwszCheckPointFilePath := win32.UTF16Ptr(pwszCheckPointFilePath)
+	_pwszLogPath := win32.UTF16Ptr(pwszLogPath)
+	_pwszBackupLogPath := win32.UTF16Ptr(pwszBackupLogPath)
+	r1, _, _ := syscall.SyscallN(procCertSrvRestoreRegisterW.Addr(), uintptr(unsafe.Pointer(hbc)), uintptr(unsafe.Pointer(_pwszCheckPointFilePath)), uintptr(unsafe.Pointer(_pwszLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstmap), uintptr(unsafe.Pointer(_pwszBackupLogPath)), uintptr(genLow), uintptr(genHigh))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CertSrvServerControlW calls certadm!CertSrvServerControlW.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvservercontrolw
 // Minimum OS: windowsserver2003.
-func CertSrvServerControlW(pwszServerName foundation.PWSTR, dwControlFlags uint32, pcbOut *uint32, ppbOut **byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCertSrvServerControlW.Addr(), uintptr(unsafe.Pointer(pwszServerName)), uintptr(dwControlFlags), uintptr(unsafe.Pointer(pcbOut)), uintptr(unsafe.Pointer(ppbOut)))
-	return foundation.HRESULT(r1)
+func CertSrvServerControlW(pwszServerName string, dwControlFlags uint32, pcbOut *uint32, ppbOut **byte) error {
+	_pwszServerName := win32.UTF16Ptr(pwszServerName)
+	r1, _, _ := syscall.SyscallN(procCertSrvServerControlW.Addr(), uintptr(unsafe.Pointer(_pwszServerName)), uintptr(dwControlFlags), uintptr(unsafe.Pointer(pcbOut)), uintptr(unsafe.Pointer(ppbOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PstAcquirePrivateKey calls certpoleng!PstAcquirePrivateKey.
@@ -208,22 +219,35 @@ func PstGetCertificateChain(pCert *securitycryptography.CERT_CONTEXT, pTrustedIs
 // PstGetCertificates calls certpoleng!PstGetCertificates.
 // https://learn.microsoft.com/windows/win32/api/certpoleng/nf-certpoleng-pstgetcertificates
 // Minimum OS: windows6.1.
-func PstGetCertificates(pTargetName *foundation.UNICODE_STRING, cCriteria uint32, rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA, bIsClient foundation.BOOL, pdwCertChainContextCount *uint32, ppCertChainContexts ***securitycryptography.CERT_CHAIN_CONTEXT) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procPstGetCertificates.Addr(), uintptr(unsafe.Pointer(pTargetName)), uintptr(cCriteria), uintptr(unsafe.Pointer(rgpCriteria)), uintptr(bIsClient), uintptr(unsafe.Pointer(pdwCertChainContextCount)), uintptr(unsafe.Pointer(ppCertChainContexts)))
+func PstGetCertificates(pTargetName *foundation.UNICODE_STRING, rgpCriteria []securitycryptography.CERT_SELECT_CRITERIA, bIsClient bool, pdwCertChainContextCount *uint32, ppCertChainContexts ***securitycryptography.CERT_CHAIN_CONTEXT) foundation.NTSTATUS {
+	var _rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA
+	if len(rgpCriteria) > 0 {
+		_rgpCriteria = &rgpCriteria[0]
+	}
+	_bIsClient := win32.Bool32(bIsClient)
+	r1, _, _ := syscall.SyscallN(procPstGetCertificates.Addr(), uintptr(unsafe.Pointer(pTargetName)), uintptr(len(rgpCriteria)), uintptr(unsafe.Pointer(_rgpCriteria)), uintptr(_bIsClient), uintptr(unsafe.Pointer(pdwCertChainContextCount)), uintptr(unsafe.Pointer(ppCertChainContexts)))
 	return foundation.NTSTATUS(r1)
 }
 
 // PstGetTrustAnchors calls certpoleng!PstGetTrustAnchors.
 // https://learn.microsoft.com/windows/win32/api/certpoleng/nf-certpoleng-pstgettrustanchors
 // Minimum OS: windows6.1.
-func PstGetTrustAnchors(pTargetName *foundation.UNICODE_STRING, cCriteria uint32, rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA, ppTrustedIssuers **securityauthenticationidentity.SecPkgContext_IssuerListInfoEx) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procPstGetTrustAnchors.Addr(), uintptr(unsafe.Pointer(pTargetName)), uintptr(cCriteria), uintptr(unsafe.Pointer(rgpCriteria)), uintptr(unsafe.Pointer(ppTrustedIssuers)))
+func PstGetTrustAnchors(pTargetName *foundation.UNICODE_STRING, rgpCriteria []securitycryptography.CERT_SELECT_CRITERIA, ppTrustedIssuers **securityauthenticationidentity.SecPkgContext_IssuerListInfoEx) foundation.NTSTATUS {
+	var _rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA
+	if len(rgpCriteria) > 0 {
+		_rgpCriteria = &rgpCriteria[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPstGetTrustAnchors.Addr(), uintptr(unsafe.Pointer(pTargetName)), uintptr(len(rgpCriteria)), uintptr(unsafe.Pointer(_rgpCriteria)), uintptr(unsafe.Pointer(ppTrustedIssuers)))
 	return foundation.NTSTATUS(r1)
 }
 
 // PstGetTrustAnchorsEx calls certpoleng!PstGetTrustAnchorsEx.
-func PstGetTrustAnchorsEx(pTargetName *foundation.UNICODE_STRING, cCriteria uint32, rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA, pCertContext *securitycryptography.CERT_CONTEXT, ppTrustedIssuers **securityauthenticationidentity.SecPkgContext_IssuerListInfoEx) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procPstGetTrustAnchorsEx.Addr(), uintptr(unsafe.Pointer(pTargetName)), uintptr(cCriteria), uintptr(unsafe.Pointer(rgpCriteria)), uintptr(unsafe.Pointer(pCertContext)), uintptr(unsafe.Pointer(ppTrustedIssuers)))
+func PstGetTrustAnchorsEx(pTargetName *foundation.UNICODE_STRING, rgpCriteria []securitycryptography.CERT_SELECT_CRITERIA, pCertContext *securitycryptography.CERT_CONTEXT, ppTrustedIssuers **securityauthenticationidentity.SecPkgContext_IssuerListInfoEx) foundation.NTSTATUS {
+	var _rgpCriteria *securitycryptography.CERT_SELECT_CRITERIA
+	if len(rgpCriteria) > 0 {
+		_rgpCriteria = &rgpCriteria[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPstGetTrustAnchorsEx.Addr(), uintptr(unsafe.Pointer(pTargetName)), uintptr(len(rgpCriteria)), uintptr(unsafe.Pointer(_rgpCriteria)), uintptr(unsafe.Pointer(pCertContext)), uintptr(unsafe.Pointer(ppTrustedIssuers)))
 	return foundation.NTSTATUS(r1)
 }
 
@@ -246,7 +270,8 @@ func PstMapCertificate(pCert *securitycryptography.CERT_CONTEXT, pTokenInformati
 // PstValidate calls certpoleng!PstValidate.
 // https://learn.microsoft.com/windows/win32/api/certpoleng/nf-certpoleng-pstvalidate
 // Minimum OS: windows6.1.
-func PstValidate(pTargetName *foundation.UNICODE_STRING, bIsClient foundation.BOOL, pRequestedIssuancePolicy *securitycryptography.CERT_USAGE_MATCH, phAdditionalCertStore *securitycryptography.HCERTSTORE, pCert *securitycryptography.CERT_CONTEXT, pProvGUID *win32.GUID) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procPstValidate.Addr(), uintptr(unsafe.Pointer(pTargetName)), uintptr(bIsClient), uintptr(unsafe.Pointer(pRequestedIssuancePolicy)), uintptr(unsafe.Pointer(phAdditionalCertStore)), uintptr(unsafe.Pointer(pCert)), uintptr(unsafe.Pointer(pProvGUID)))
+func PstValidate(pTargetName *foundation.UNICODE_STRING, bIsClient bool, pRequestedIssuancePolicy *securitycryptography.CERT_USAGE_MATCH, phAdditionalCertStore *securitycryptography.HCERTSTORE, pCert *securitycryptography.CERT_CONTEXT, pProvGUID *win32.GUID) foundation.NTSTATUS {
+	_bIsClient := win32.Bool32(bIsClient)
+	r1, _, _ := syscall.SyscallN(procPstValidate.Addr(), uintptr(unsafe.Pointer(pTargetName)), uintptr(_bIsClient), uintptr(unsafe.Pointer(pRequestedIssuancePolicy)), uintptr(unsafe.Pointer(phAdditionalCertStore)), uintptr(unsafe.Pointer(pCert)), uintptr(unsafe.Pointer(pProvGUID)))
 	return foundation.NTSTATUS(r1)
 }

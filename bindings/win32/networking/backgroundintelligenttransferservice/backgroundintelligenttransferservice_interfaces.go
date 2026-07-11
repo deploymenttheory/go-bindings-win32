@@ -23,39 +23,39 @@ type AsyncIBackgroundCopyCallback struct {
 var IID_AsyncIBackgroundCopyCallback = win32.GUID{Data1: 0xca29d251, Data2: 0xb4bb, Data3: 0x4679, Data4: [8]byte{0xa3, 0xd9, 0xae, 0x80, 0x06, 0x11, 0x9d, 0x54}}
 
 // Begin_JobTransferred dispatches through AsyncIBackgroundCopyCallback's vtable slot 3.
-func (self *AsyncIBackgroundCopyCallback) Begin_JobTransferred(pJob *IBackgroundCopyJob) foundation.HRESULT {
+func (self *AsyncIBackgroundCopyCallback) Begin_JobTransferred(pJob *IBackgroundCopyJob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJob)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_JobTransferred dispatches through AsyncIBackgroundCopyCallback's vtable slot 4.
-func (self *AsyncIBackgroundCopyCallback) Finish_JobTransferred() foundation.HRESULT {
+func (self *AsyncIBackgroundCopyCallback) Finish_JobTransferred() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_JobError dispatches through AsyncIBackgroundCopyCallback's vtable slot 5.
-func (self *AsyncIBackgroundCopyCallback) Begin_JobError(pJob *IBackgroundCopyJob, pError *IBackgroundCopyError) foundation.HRESULT {
+func (self *AsyncIBackgroundCopyCallback) Begin_JobError(pJob *IBackgroundCopyJob, pError *IBackgroundCopyError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJob)), uintptr(unsafe.Pointer(pError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_JobError dispatches through AsyncIBackgroundCopyCallback's vtable slot 6.
-func (self *AsyncIBackgroundCopyCallback) Finish_JobError() foundation.HRESULT {
+func (self *AsyncIBackgroundCopyCallback) Finish_JobError() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_JobModification dispatches through AsyncIBackgroundCopyCallback's vtable slot 7.
-func (self *AsyncIBackgroundCopyCallback) Begin_JobModification(pJob *IBackgroundCopyJob, dwReserved uint32) foundation.HRESULT {
+func (self *AsyncIBackgroundCopyCallback) Begin_JobModification(pJob *IBackgroundCopyJob, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJob)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_JobModification dispatches through AsyncIBackgroundCopyCallback's vtable slot 8.
-func (self *AsyncIBackgroundCopyCallback) Finish_JobModification() foundation.HRESULT {
+func (self *AsyncIBackgroundCopyCallback) Finish_JobModification() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBITSExtensionSetup: https://learn.microsoft.com/windows/win32/api/bitscfg/nn-bitscfg-ibitsextensionsetup
@@ -68,27 +68,29 @@ type IBITSExtensionSetup struct {
 var IID_IBITSExtensionSetup = win32.GUID{Data1: 0x29cfbbf7, Data2: 0x09e4, Data3: 0x4b97, Data4: [8]byte{0xb0, 0xbc, 0xf2, 0x28, 0x7e, 0x3d, 0x8e, 0xb3}}
 
 // EnableBITSUploads dispatches through IBITSExtensionSetup's vtable slot 7.
-func (self *IBITSExtensionSetup) EnableBITSUploads() foundation.HRESULT {
+func (self *IBITSExtensionSetup) EnableBITSUploads() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisableBITSUploads dispatches through IBITSExtensionSetup's vtable slot 8.
-func (self *IBITSExtensionSetup) DisableBITSUploads() foundation.HRESULT {
+func (self *IBITSExtensionSetup) DisableBITSUploads() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCleanupTaskName dispatches through IBITSExtensionSetup's vtable slot 9.
-func (self *IBITSExtensionSetup) GetCleanupTaskName(pTaskName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTaskName)))
-	return foundation.HRESULT(r1)
+func (self *IBITSExtensionSetup) GetCleanupTaskName() (foundation.BSTR, error) {
+	var _pTaskName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTaskName)))
+	return _pTaskName, win32.HRESULTError(int32(r1))
 }
 
 // GetCleanupTask dispatches through IBITSExtensionSetup's vtable slot 10.
-func (self *IBITSExtensionSetup) GetCleanupTask(riid *win32.GUID, ppUnk **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+func (self *IBITSExtensionSetup) GetCleanupTask(riid *win32.GUID) (*systemcom.IUnknown, error) {
+	var _ppUnk *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppUnk)))
+	return _ppUnk, win32.HRESULTError(int32(r1))
 }
 
 // IBITSExtensionSetupFactory: https://learn.microsoft.com/windows/win32/api/bitscfg/nn-bitscfg-ibitsextensionsetupfactory
@@ -101,9 +103,10 @@ type IBITSExtensionSetupFactory struct {
 var IID_IBITSExtensionSetupFactory = win32.GUID{Data1: 0xd5d2d542, Data2: 0x5503, Data3: 0x4e64, Data4: [8]byte{0x8b, 0x48, 0x72, 0xef, 0x91, 0xa3, 0x2e, 0xe1}}
 
 // GetObject dispatches through IBITSExtensionSetupFactory's vtable slot 7.
-func (self *IBITSExtensionSetupFactory) GetObject(Path foundation.BSTR, ppExtensionSetup **IBITSExtensionSetup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Path)), uintptr(unsafe.Pointer(ppExtensionSetup)))
-	return foundation.HRESULT(r1)
+func (self *IBITSExtensionSetupFactory) GetObject(Path foundation.BSTR) (*IBITSExtensionSetup, error) {
+	var _ppExtensionSetup *IBITSExtensionSetup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Path)), uintptr(unsafe.Pointer(&_ppExtensionSetup)))
+	return _ppExtensionSetup, win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyCallback: https://learn.microsoft.com/windows/win32/api/bits/nn-bits-ibackgroundcopycallback
@@ -116,21 +119,21 @@ type IBackgroundCopyCallback struct {
 var IID_IBackgroundCopyCallback = win32.GUID{Data1: 0x97ea99c7, Data2: 0x0186, Data3: 0x4ad4, Data4: [8]byte{0x8d, 0xf9, 0xc5, 0xb4, 0xe0, 0xed, 0x6b, 0x22}}
 
 // JobTransferred dispatches through IBackgroundCopyCallback's vtable slot 3.
-func (self *IBackgroundCopyCallback) JobTransferred(pJob *IBackgroundCopyJob) foundation.HRESULT {
+func (self *IBackgroundCopyCallback) JobTransferred(pJob *IBackgroundCopyJob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJob)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // JobError dispatches through IBackgroundCopyCallback's vtable slot 4.
-func (self *IBackgroundCopyCallback) JobError(pJob *IBackgroundCopyJob, pError *IBackgroundCopyError) foundation.HRESULT {
+func (self *IBackgroundCopyCallback) JobError(pJob *IBackgroundCopyJob, pError *IBackgroundCopyError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJob)), uintptr(unsafe.Pointer(pError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // JobModification dispatches through IBackgroundCopyCallback's vtable slot 5.
-func (self *IBackgroundCopyCallback) JobModification(pJob *IBackgroundCopyJob, dwReserved uint32) foundation.HRESULT {
+func (self *IBackgroundCopyCallback) JobModification(pJob *IBackgroundCopyJob, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJob)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyCallback1: https://learn.microsoft.com/windows/win32/api/qmgr/nn-qmgr-ibackgroundcopycallback1
@@ -143,21 +146,21 @@ type IBackgroundCopyCallback1 struct {
 var IID_IBackgroundCopyCallback1 = win32.GUID{Data1: 0x084f6593, Data2: 0x3800, Data3: 0x4e08, Data4: [8]byte{0x9b, 0x59, 0x99, 0xfa, 0x59, 0xad, 0xdf, 0x82}}
 
 // OnStatus dispatches through IBackgroundCopyCallback1's vtable slot 3.
-func (self *IBackgroundCopyCallback1) OnStatus(pGroup *IBackgroundCopyGroup, pJob *IBackgroundCopyJob1, dwFileIndex uint32, dwStatus uint32, dwNumOfRetries uint32, dwWin32Result uint32, dwTransportResult uint32) foundation.HRESULT {
+func (self *IBackgroundCopyCallback1) OnStatus(pGroup *IBackgroundCopyGroup, pJob *IBackgroundCopyJob1, dwFileIndex uint32, dwStatus uint32, dwNumOfRetries uint32, dwWin32Result uint32, dwTransportResult uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroup)), uintptr(unsafe.Pointer(pJob)), uintptr(dwFileIndex), uintptr(dwStatus), uintptr(dwNumOfRetries), uintptr(dwWin32Result), uintptr(dwTransportResult))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnProgress dispatches through IBackgroundCopyCallback1's vtable slot 4.
-func (self *IBackgroundCopyCallback1) OnProgress(ProgressType uint32, pGroup *IBackgroundCopyGroup, pJob *IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32) foundation.HRESULT {
+func (self *IBackgroundCopyCallback1) OnProgress(ProgressType uint32, pGroup *IBackgroundCopyGroup, pJob *IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ProgressType), uintptr(unsafe.Pointer(pGroup)), uintptr(unsafe.Pointer(pJob)), uintptr(dwFileIndex), uintptr(dwProgressValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnProgressEx dispatches through IBackgroundCopyCallback1's vtable slot 5.
-func (self *IBackgroundCopyCallback1) OnProgressEx(ProgressType uint32, pGroup *IBackgroundCopyGroup, pJob *IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32, dwByteArraySize uint32, pByte *byte) foundation.HRESULT {
+func (self *IBackgroundCopyCallback1) OnProgressEx(ProgressType uint32, pGroup *IBackgroundCopyGroup, pJob *IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32, dwByteArraySize uint32, pByte *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ProgressType), uintptr(unsafe.Pointer(pGroup)), uintptr(unsafe.Pointer(pJob)), uintptr(dwFileIndex), uintptr(dwProgressValue), uintptr(dwByteArraySize), uintptr(unsafe.Pointer(pByte)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyCallback2: https://learn.microsoft.com/windows/win32/api/bits3_0/nn-bits3_0-ibackgroundcopycallback2
@@ -170,9 +173,9 @@ type IBackgroundCopyCallback2 struct {
 var IID_IBackgroundCopyCallback2 = win32.GUID{Data1: 0x659cdeac, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // FileTransferred dispatches through IBackgroundCopyCallback2's vtable slot 6.
-func (self *IBackgroundCopyCallback2) FileTransferred(pJob *IBackgroundCopyJob, pFile *IBackgroundCopyFile) foundation.HRESULT {
+func (self *IBackgroundCopyCallback2) FileTransferred(pJob *IBackgroundCopyJob, pFile *IBackgroundCopyFile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pJob)), uintptr(unsafe.Pointer(pFile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyCallback3: https://learn.microsoft.com/windows/win32/api/bits10_1/nn-bits10_1-ibackgroundcopycallback3
@@ -185,9 +188,9 @@ type IBackgroundCopyCallback3 struct {
 var IID_IBackgroundCopyCallback3 = win32.GUID{Data1: 0x98c97bd2, Data2: 0xe32b, Data3: 0x4ad8, Data4: [8]byte{0xa5, 0x28, 0x95, 0xfd, 0x8b, 0x16, 0xbd, 0x42}}
 
 // FileRangesTransferred dispatches through IBackgroundCopyCallback3's vtable slot 7.
-func (self *IBackgroundCopyCallback3) FileRangesTransferred(job *IBackgroundCopyJob, file *IBackgroundCopyFile, rangeCount uint32, ranges *BG_FILE_RANGE) foundation.HRESULT {
+func (self *IBackgroundCopyCallback3) FileRangesTransferred(job *IBackgroundCopyJob, file *IBackgroundCopyFile, rangeCount uint32, ranges *BG_FILE_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(job)), uintptr(unsafe.Pointer(file)), uintptr(rangeCount), uintptr(unsafe.Pointer(ranges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyError: https://learn.microsoft.com/windows/win32/api/bits/nn-bits-ibackgroundcopyerror
@@ -200,33 +203,33 @@ type IBackgroundCopyError struct {
 var IID_IBackgroundCopyError = win32.GUID{Data1: 0x19c613a0, Data2: 0xfcb8, Data3: 0x4f28, Data4: [8]byte{0x81, 0xae, 0x89, 0x7c, 0x3d, 0x07, 0x8f, 0x81}}
 
 // GetError dispatches through IBackgroundCopyError's vtable slot 3.
-func (self *IBackgroundCopyError) GetError(pContext *BG_ERROR_CONTEXT, pCode *foundation.HRESULT) foundation.HRESULT {
+func (self *IBackgroundCopyError) GetError(pContext *BG_ERROR_CONTEXT, pCode *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pCode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFile dispatches through IBackgroundCopyError's vtable slot 4.
-func (self *IBackgroundCopyError) GetFile(pVal **IBackgroundCopyFile) foundation.HRESULT {
+func (self *IBackgroundCopyError) GetFile(pVal **IBackgroundCopyFile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorDescription dispatches through IBackgroundCopyError's vtable slot 5.
-func (self *IBackgroundCopyError) GetErrorDescription(LanguageId uint32, pErrorDescription *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyError) GetErrorDescription(LanguageId uint32, pErrorDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(LanguageId), uintptr(unsafe.Pointer(pErrorDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorContextDescription dispatches through IBackgroundCopyError's vtable slot 6.
-func (self *IBackgroundCopyError) GetErrorContextDescription(LanguageId uint32, pContextDescription *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyError) GetErrorContextDescription(LanguageId uint32, pContextDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(LanguageId), uintptr(unsafe.Pointer(pContextDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProtocol dispatches through IBackgroundCopyError's vtable slot 7.
-func (self *IBackgroundCopyError) GetProtocol(pProtocol *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyError) GetProtocol(pProtocol *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProtocol)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyFile: https://learn.microsoft.com/windows/win32/api/bits/nn-bits-ibackgroundcopyfile
@@ -239,21 +242,21 @@ type IBackgroundCopyFile struct {
 var IID_IBackgroundCopyFile = win32.GUID{Data1: 0x01b7bd23, Data2: 0xfb88, Data3: 0x4a77, Data4: [8]byte{0x84, 0x90, 0x58, 0x91, 0xd3, 0xe4, 0x65, 0x3a}}
 
 // GetRemoteName dispatches through IBackgroundCopyFile's vtable slot 3.
-func (self *IBackgroundCopyFile) GetRemoteName(pVal *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyFile) GetRemoteName(pVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLocalName dispatches through IBackgroundCopyFile's vtable slot 4.
-func (self *IBackgroundCopyFile) GetLocalName(pVal *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyFile) GetLocalName(pVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProgress dispatches through IBackgroundCopyFile's vtable slot 5.
-func (self *IBackgroundCopyFile) GetProgress(pVal *BG_FILE_PROGRESS) foundation.HRESULT {
+func (self *IBackgroundCopyFile) GetProgress(pVal *BG_FILE_PROGRESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyFile2: https://learn.microsoft.com/windows/win32/api/bits2_0/nn-bits2_0-ibackgroundcopyfile2
@@ -266,15 +269,16 @@ type IBackgroundCopyFile2 struct {
 var IID_IBackgroundCopyFile2 = win32.GUID{Data1: 0x83e81b93, Data2: 0x0873, Data3: 0x474d, Data4: [8]byte{0x8a, 0x8c, 0xf2, 0x01, 0x8b, 0x1a, 0x93, 0x9c}}
 
 // GetFileRanges dispatches through IBackgroundCopyFile2's vtable slot 6.
-func (self *IBackgroundCopyFile2) GetFileRanges(RangeCount *uint32, Ranges **BG_FILE_RANGE) foundation.HRESULT {
+func (self *IBackgroundCopyFile2) GetFileRanges(RangeCount *uint32, Ranges **BG_FILE_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RangeCount)), uintptr(unsafe.Pointer(Ranges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRemoteName dispatches through IBackgroundCopyFile2's vtable slot 7.
-func (self *IBackgroundCopyFile2) SetRemoteName(Val foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Val)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyFile2) SetRemoteName(Val string) error {
+	_Val := win32.UTF16Ptr(Val)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Val)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyFile3: https://learn.microsoft.com/windows/win32/api/bits3_0/nn-bits3_0-ibackgroundcopyfile3
@@ -287,27 +291,28 @@ type IBackgroundCopyFile3 struct {
 var IID_IBackgroundCopyFile3 = win32.GUID{Data1: 0x659cdeaa, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // GetTemporaryName dispatches through IBackgroundCopyFile3's vtable slot 8.
-func (self *IBackgroundCopyFile3) GetTemporaryName(pFilename *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyFile3) GetTemporaryName(pFilename *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilename)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValidationState dispatches through IBackgroundCopyFile3's vtable slot 9.
-func (self *IBackgroundCopyFile3) SetValidationState(state foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(state))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyFile3) SetValidationState(state bool) error {
+	_state := win32.Bool32(state)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(_state))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValidationState dispatches through IBackgroundCopyFile3's vtable slot 10.
-func (self *IBackgroundCopyFile3) GetValidationState(pState *foundation.BOOL) foundation.HRESULT {
+func (self *IBackgroundCopyFile3) GetValidationState(pState *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDownloadedFromPeer dispatches through IBackgroundCopyFile3's vtable slot 11.
-func (self *IBackgroundCopyFile3) IsDownloadedFromPeer(pVal *foundation.BOOL) foundation.HRESULT {
+func (self *IBackgroundCopyFile3) IsDownloadedFromPeer(pVal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyFile4: https://learn.microsoft.com/windows/win32/api/bits4_0/nn-bits4_0-ibackgroundcopyfile4
@@ -320,9 +325,9 @@ type IBackgroundCopyFile4 struct {
 var IID_IBackgroundCopyFile4 = win32.GUID{Data1: 0xef7e0655, Data2: 0x7888, Data3: 0x4960, Data4: [8]byte{0xb0, 0xe5, 0x73, 0x08, 0x46, 0xe0, 0x34, 0x92}}
 
 // GetPeerDownloadStats dispatches through IBackgroundCopyFile4's vtable slot 12.
-func (self *IBackgroundCopyFile4) GetPeerDownloadStats(pFromOrigin *uint64, pFromPeers *uint64) foundation.HRESULT {
+func (self *IBackgroundCopyFile4) GetPeerDownloadStats(pFromOrigin *uint64, pFromPeers *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFromOrigin)), uintptr(unsafe.Pointer(pFromPeers)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyFile5: https://learn.microsoft.com/windows/win32/api/bits5_0/nn-bits5_0-ibackgroundcopyfile5
@@ -335,9 +340,9 @@ type IBackgroundCopyFile5 struct {
 var IID_IBackgroundCopyFile5 = win32.GUID{Data1: 0x85c1657f, Data2: 0xdafc, Data3: 0x40e8, Data4: [8]byte{0x88, 0x34, 0xdf, 0x18, 0xea, 0x25, 0x71, 0x7e}}
 
 // GetProperty dispatches through IBackgroundCopyFile5's vtable slot 14.
-func (self *IBackgroundCopyFile5) GetProperty(PropertyId BITS_FILE_PROPERTY_ID, PropertyValue *BITS_FILE_PROPERTY_VALUE) foundation.HRESULT {
+func (self *IBackgroundCopyFile5) GetProperty(PropertyId BITS_FILE_PROPERTY_ID, PropertyValue *BITS_FILE_PROPERTY_VALUE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(PropertyId), uintptr(unsafe.Pointer(PropertyValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyFile6: https://learn.microsoft.com/windows/win32/api/bits10_1/nn-bits10_1-ibackgroundcopyfile6
@@ -350,21 +355,21 @@ type IBackgroundCopyFile6 struct {
 var IID_IBackgroundCopyFile6 = win32.GUID{Data1: 0xcf6784f7, Data2: 0xd677, Data3: 0x49fd, Data4: [8]byte{0x93, 0x68, 0xcb, 0x47, 0xae, 0xe9, 0xd1, 0xad}}
 
 // UpdateDownloadPosition dispatches through IBackgroundCopyFile6's vtable slot 15.
-func (self *IBackgroundCopyFile6) UpdateDownloadPosition(offset uint64) foundation.HRESULT {
+func (self *IBackgroundCopyFile6) UpdateDownloadPosition(offset uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(offset))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestFileRanges dispatches through IBackgroundCopyFile6's vtable slot 16.
-func (self *IBackgroundCopyFile6) RequestFileRanges(rangeCount uint32, ranges *BG_FILE_RANGE) foundation.HRESULT {
+func (self *IBackgroundCopyFile6) RequestFileRanges(rangeCount uint32, ranges *BG_FILE_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(rangeCount), uintptr(unsafe.Pointer(ranges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilledFileRanges dispatches through IBackgroundCopyFile6's vtable slot 17.
-func (self *IBackgroundCopyFile6) GetFilledFileRanges(rangeCount *uint32, ranges **BG_FILE_RANGE) foundation.HRESULT {
+func (self *IBackgroundCopyFile6) GetFilledFileRanges(rangeCount *uint32, ranges **BG_FILE_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rangeCount)), uintptr(unsafe.Pointer(ranges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyGroup: https://learn.microsoft.com/windows/win32/api/qmgr/nn-qmgr-ibackgroundcopygroup
@@ -377,81 +382,81 @@ type IBackgroundCopyGroup struct {
 var IID_IBackgroundCopyGroup = win32.GUID{Data1: 0x1ded80a7, Data2: 0x53ea, Data3: 0x424f, Data4: [8]byte{0x8a, 0x04, 0x17, 0xfe, 0xa9, 0xad, 0xc4, 0xf5}}
 
 // GetProp dispatches through IBackgroundCopyGroup's vtable slot 3.
-func (self *IBackgroundCopyGroup) GetProp(propID GROUPPROP, pvarVal *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IBackgroundCopyGroup) GetProp(propID GROUPPROP, pvarVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(propID), uintptr(unsafe.Pointer(pvarVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProp dispatches through IBackgroundCopyGroup's vtable slot 4.
-func (self *IBackgroundCopyGroup) SetProp(propID GROUPPROP, pvarVal *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IBackgroundCopyGroup) SetProp(propID GROUPPROP, pvarVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(propID), uintptr(unsafe.Pointer(pvarVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProgress dispatches through IBackgroundCopyGroup's vtable slot 5.
-func (self *IBackgroundCopyGroup) GetProgress(dwFlags uint32, pdwProgress *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyGroup) GetProgress(dwFlags uint32, pdwProgress *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwProgress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IBackgroundCopyGroup's vtable slot 6.
-func (self *IBackgroundCopyGroup) GetStatus(pdwStatus *uint32, pdwJobIndex *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyGroup) GetStatus(pdwStatus *uint32, pdwJobIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)), uintptr(unsafe.Pointer(pdwJobIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SuspendGroup dispatches through IBackgroundCopyGroup's vtable slot 8.
-func (self *IBackgroundCopyGroup) SuspendGroup() foundation.HRESULT {
+func (self *IBackgroundCopyGroup) SuspendGroup() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResumeGroup dispatches through IBackgroundCopyGroup's vtable slot 9.
-func (self *IBackgroundCopyGroup) ResumeGroup() foundation.HRESULT {
+func (self *IBackgroundCopyGroup) ResumeGroup() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelGroup dispatches through IBackgroundCopyGroup's vtable slot 10.
-func (self *IBackgroundCopyGroup) CancelGroup() foundation.HRESULT {
+func (self *IBackgroundCopyGroup) CancelGroup() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Size dispatches through IBackgroundCopyGroup's vtable slot 11.
-func (self *IBackgroundCopyGroup) Get_Size(pdwSize *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyGroup) Get_Size(pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_GroupID dispatches through IBackgroundCopyGroup's vtable slot 12.
-func (self *IBackgroundCopyGroup) Get_GroupID(pguidGroupID *win32.GUID) foundation.HRESULT {
+func (self *IBackgroundCopyGroup) Get_GroupID(pguidGroupID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidGroupID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumJobs dispatches through IBackgroundCopyGroup's vtable slot 14.
-func (self *IBackgroundCopyGroup) EnumJobs(dwFlags uint32, ppEnumJobs **IEnumBackgroundCopyJobs1) foundation.HRESULT {
+func (self *IBackgroundCopyGroup) EnumJobs(dwFlags uint32, ppEnumJobs **IEnumBackgroundCopyJobs1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppEnumJobs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwitchToForeground dispatches through IBackgroundCopyGroup's vtable slot 15.
-func (self *IBackgroundCopyGroup) SwitchToForeground() foundation.HRESULT {
+func (self *IBackgroundCopyGroup) SwitchToForeground() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryNewJobInterface dispatches through IBackgroundCopyGroup's vtable slot 16.
-func (self *IBackgroundCopyGroup) QueryNewJobInterface(iid *win32.GUID, pUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IBackgroundCopyGroup) QueryNewJobInterface(iid *win32.GUID, pUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNotificationPointer dispatches through IBackgroundCopyGroup's vtable slot 17.
-func (self *IBackgroundCopyGroup) SetNotificationPointer(iid *win32.GUID, pUnk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IBackgroundCopyGroup) SetNotificationPointer(iid *win32.GUID, pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyJob: https://learn.microsoft.com/windows/win32/api/bits/nn-bits-ibackgroundcopyjob
@@ -464,195 +469,201 @@ type IBackgroundCopyJob struct {
 var IID_IBackgroundCopyJob = win32.GUID{Data1: 0x37668d37, Data2: 0x507e, Data3: 0x4160, Data4: [8]byte{0x93, 0x16, 0x26, 0x30, 0x6d, 0x15, 0x0b, 0x12}}
 
 // AddFileSet dispatches through IBackgroundCopyJob's vtable slot 3.
-func (self *IBackgroundCopyJob) AddFileSet(cFileCount uint32, pFileSet *BG_FILE_INFO) foundation.HRESULT {
+func (self *IBackgroundCopyJob) AddFileSet(cFileCount uint32, pFileSet *BG_FILE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFileCount), uintptr(unsafe.Pointer(pFileSet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddFile dispatches through IBackgroundCopyJob's vtable slot 4.
-func (self *IBackgroundCopyJob) AddFile(RemoteUrl foundation.PWSTR, LocalName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RemoteUrl)), uintptr(unsafe.Pointer(LocalName)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJob) AddFile(RemoteUrl string, LocalName string) error {
+	_RemoteUrl := win32.UTF16Ptr(RemoteUrl)
+	_LocalName := win32.UTF16Ptr(LocalName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_RemoteUrl)), uintptr(unsafe.Pointer(_LocalName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumFiles dispatches through IBackgroundCopyJob's vtable slot 5.
-func (self *IBackgroundCopyJob) EnumFiles(pEnum **IEnumBackgroundCopyFiles) foundation.HRESULT {
+func (self *IBackgroundCopyJob) EnumFiles(pEnum **IEnumBackgroundCopyFiles) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Suspend dispatches through IBackgroundCopyJob's vtable slot 6.
-func (self *IBackgroundCopyJob) Suspend() foundation.HRESULT {
+func (self *IBackgroundCopyJob) Suspend() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through IBackgroundCopyJob's vtable slot 7.
-func (self *IBackgroundCopyJob) Resume() foundation.HRESULT {
+func (self *IBackgroundCopyJob) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IBackgroundCopyJob's vtable slot 8.
-func (self *IBackgroundCopyJob) Cancel() foundation.HRESULT {
+func (self *IBackgroundCopyJob) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Complete dispatches through IBackgroundCopyJob's vtable slot 9.
-func (self *IBackgroundCopyJob) Complete() foundation.HRESULT {
+func (self *IBackgroundCopyJob) Complete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetId dispatches through IBackgroundCopyJob's vtable slot 10.
-func (self *IBackgroundCopyJob) GetId(pVal *win32.GUID) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetId(pVal *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetType dispatches through IBackgroundCopyJob's vtable slot 11.
-func (self *IBackgroundCopyJob) GetType(pVal *BG_JOB_TYPE) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetType(pVal *BG_JOB_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProgress dispatches through IBackgroundCopyJob's vtable slot 12.
-func (self *IBackgroundCopyJob) GetProgress(pVal *BG_JOB_PROGRESS) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetProgress(pVal *BG_JOB_PROGRESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimes dispatches through IBackgroundCopyJob's vtable slot 13.
-func (self *IBackgroundCopyJob) GetTimes(pVal *BG_JOB_TIMES) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetTimes(pVal *BG_JOB_TIMES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetState dispatches through IBackgroundCopyJob's vtable slot 14.
-func (self *IBackgroundCopyJob) GetState(pVal *BG_JOB_STATE) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetState(pVal *BG_JOB_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetError dispatches through IBackgroundCopyJob's vtable slot 15.
-func (self *IBackgroundCopyJob) GetError(ppError **IBackgroundCopyError) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetError(ppError **IBackgroundCopyError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOwner dispatches through IBackgroundCopyJob's vtable slot 16.
-func (self *IBackgroundCopyJob) GetOwner(pVal *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetOwner(pVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisplayName dispatches through IBackgroundCopyJob's vtable slot 17.
-func (self *IBackgroundCopyJob) SetDisplayName(Val foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Val)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJob) SetDisplayName(Val string) error {
+	_Val := win32.UTF16Ptr(Val)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Val)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayName dispatches through IBackgroundCopyJob's vtable slot 18.
-func (self *IBackgroundCopyJob) GetDisplayName(pVal *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetDisplayName(pVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDescription dispatches through IBackgroundCopyJob's vtable slot 19.
-func (self *IBackgroundCopyJob) SetDescription(Val foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Val)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJob) SetDescription(Val string) error {
+	_Val := win32.UTF16Ptr(Val)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Val)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescription dispatches through IBackgroundCopyJob's vtable slot 20.
-func (self *IBackgroundCopyJob) GetDescription(pVal *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetDescription(pVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPriority dispatches through IBackgroundCopyJob's vtable slot 21.
-func (self *IBackgroundCopyJob) SetPriority(Val BG_JOB_PRIORITY) foundation.HRESULT {
+func (self *IBackgroundCopyJob) SetPriority(Val BG_JOB_PRIORITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Val))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPriority dispatches through IBackgroundCopyJob's vtable slot 22.
-func (self *IBackgroundCopyJob) GetPriority(pVal *BG_JOB_PRIORITY) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetPriority(pVal *BG_JOB_PRIORITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNotifyFlags dispatches through IBackgroundCopyJob's vtable slot 23.
-func (self *IBackgroundCopyJob) SetNotifyFlags(Val uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob) SetNotifyFlags(Val uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Val))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNotifyFlags dispatches through IBackgroundCopyJob's vtable slot 24.
-func (self *IBackgroundCopyJob) GetNotifyFlags(pVal *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetNotifyFlags(pVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNotifyInterface dispatches through IBackgroundCopyJob's vtable slot 25.
-func (self *IBackgroundCopyJob) SetNotifyInterface(Val *systemcom.IUnknown) foundation.HRESULT {
+func (self *IBackgroundCopyJob) SetNotifyInterface(Val *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Val)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNotifyInterface dispatches through IBackgroundCopyJob's vtable slot 26.
-func (self *IBackgroundCopyJob) GetNotifyInterface(pVal **systemcom.IUnknown) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetNotifyInterface(pVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMinimumRetryDelay dispatches through IBackgroundCopyJob's vtable slot 27.
-func (self *IBackgroundCopyJob) SetMinimumRetryDelay(Seconds uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob) SetMinimumRetryDelay(Seconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Seconds))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMinimumRetryDelay dispatches through IBackgroundCopyJob's vtable slot 28.
-func (self *IBackgroundCopyJob) GetMinimumRetryDelay(Seconds *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetMinimumRetryDelay(Seconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Seconds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNoProgressTimeout dispatches through IBackgroundCopyJob's vtable slot 29.
-func (self *IBackgroundCopyJob) SetNoProgressTimeout(Seconds uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob) SetNoProgressTimeout(Seconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Seconds))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNoProgressTimeout dispatches through IBackgroundCopyJob's vtable slot 30.
-func (self *IBackgroundCopyJob) GetNoProgressTimeout(Seconds *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetNoProgressTimeout(Seconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Seconds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorCount dispatches through IBackgroundCopyJob's vtable slot 31.
-func (self *IBackgroundCopyJob) GetErrorCount(Errors *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetErrorCount(Errors *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Errors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProxySettings dispatches through IBackgroundCopyJob's vtable slot 32.
-func (self *IBackgroundCopyJob) SetProxySettings(ProxyUsage BG_JOB_PROXY_USAGE, ProxyList foundation.PWSTR, ProxyBypassList foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(ProxyUsage), uintptr(unsafe.Pointer(ProxyList)), uintptr(unsafe.Pointer(ProxyBypassList)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJob) SetProxySettings(ProxyUsage BG_JOB_PROXY_USAGE, ProxyList string, ProxyBypassList string) error {
+	_ProxyList := win32.UTF16Ptr(ProxyList)
+	_ProxyBypassList := win32.UTF16Ptr(ProxyBypassList)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(ProxyUsage), uintptr(unsafe.Pointer(_ProxyList)), uintptr(unsafe.Pointer(_ProxyBypassList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProxySettings dispatches through IBackgroundCopyJob's vtable slot 33.
-func (self *IBackgroundCopyJob) GetProxySettings(pProxyUsage *BG_JOB_PROXY_USAGE, pProxyList *foundation.PWSTR, pProxyBypassList *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyJob) GetProxySettings(pProxyUsage *BG_JOB_PROXY_USAGE, pProxyList *foundation.PWSTR, pProxyBypassList *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProxyUsage)), uintptr(unsafe.Pointer(pProxyList)), uintptr(unsafe.Pointer(pProxyBypassList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TakeOwnership dispatches through IBackgroundCopyJob's vtable slot 34.
-func (self *IBackgroundCopyJob) TakeOwnership() foundation.HRESULT {
+func (self *IBackgroundCopyJob) TakeOwnership() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyJob1: https://learn.microsoft.com/windows/win32/api/qmgr/nn-qmgr-ibackgroundcopyjob1
@@ -665,51 +676,51 @@ type IBackgroundCopyJob1 struct {
 var IID_IBackgroundCopyJob1 = win32.GUID{Data1: 0x59f5553c, Data2: 0x2031, Data3: 0x4629, Data4: [8]byte{0xbb, 0x18, 0x26, 0x45, 0xa6, 0x97, 0x09, 0x47}}
 
 // CancelJob dispatches through IBackgroundCopyJob1's vtable slot 3.
-func (self *IBackgroundCopyJob1) CancelJob() foundation.HRESULT {
+func (self *IBackgroundCopyJob1) CancelJob() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProgress dispatches through IBackgroundCopyJob1's vtable slot 4.
-func (self *IBackgroundCopyJob1) GetProgress(dwFlags uint32, pdwProgress *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob1) GetProgress(dwFlags uint32, pdwProgress *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwProgress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IBackgroundCopyJob1's vtable slot 5.
-func (self *IBackgroundCopyJob1) GetStatus(pdwStatus *uint32, pdwWin32Result *uint32, pdwTransportResult *uint32, pdwNumOfRetries *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob1) GetStatus(pdwStatus *uint32, pdwWin32Result *uint32, pdwTransportResult *uint32, pdwNumOfRetries *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)), uintptr(unsafe.Pointer(pdwWin32Result)), uintptr(unsafe.Pointer(pdwTransportResult)), uintptr(unsafe.Pointer(pdwNumOfRetries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddFiles dispatches through IBackgroundCopyJob1's vtable slot 6.
-func (self *IBackgroundCopyJob1) AddFiles(cFileCount uint32, ppFileSet **FILESETINFO) foundation.HRESULT {
+func (self *IBackgroundCopyJob1) AddFiles(cFileCount uint32, ppFileSet **FILESETINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cFileCount), uintptr(unsafe.Pointer(ppFileSet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFile dispatches through IBackgroundCopyJob1's vtable slot 7.
-func (self *IBackgroundCopyJob1) GetFile(cFileIndex uint32, pFileInfo *FILESETINFO) foundation.HRESULT {
+func (self *IBackgroundCopyJob1) GetFile(cFileIndex uint32, pFileInfo *FILESETINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cFileIndex), uintptr(unsafe.Pointer(pFileInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileCount dispatches through IBackgroundCopyJob1's vtable slot 8.
-func (self *IBackgroundCopyJob1) GetFileCount(pdwFileCount *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob1) GetFileCount(pdwFileCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFileCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwitchToForeground dispatches through IBackgroundCopyJob1's vtable slot 9.
-func (self *IBackgroundCopyJob1) SwitchToForeground() foundation.HRESULT {
+func (self *IBackgroundCopyJob1) SwitchToForeground() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_JobID dispatches through IBackgroundCopyJob1's vtable slot 10.
-func (self *IBackgroundCopyJob1) Get_JobID(pguidJobID *win32.GUID) foundation.HRESULT {
+func (self *IBackgroundCopyJob1) Get_JobID(pguidJobID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidJobID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyJob2: https://learn.microsoft.com/windows/win32/api/bits1_5/nn-bits1_5-ibackgroundcopyjob2
@@ -722,51 +733,54 @@ type IBackgroundCopyJob2 struct {
 var IID_IBackgroundCopyJob2 = win32.GUID{Data1: 0x54b50739, Data2: 0x686f, Data3: 0x45eb, Data4: [8]byte{0x9d, 0xff, 0xd6, 0xa9, 0xa0, 0xfa, 0xa9, 0xaf}}
 
 // SetNotifyCmdLine dispatches through IBackgroundCopyJob2's vtable slot 35.
-func (self *IBackgroundCopyJob2) SetNotifyCmdLine(Program foundation.PWSTR, Parameters foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Program)), uintptr(unsafe.Pointer(Parameters)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJob2) SetNotifyCmdLine(Program string, Parameters string) error {
+	_Program := win32.UTF16Ptr(Program)
+	_Parameters := win32.UTF16Ptr(Parameters)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Program)), uintptr(unsafe.Pointer(_Parameters)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNotifyCmdLine dispatches through IBackgroundCopyJob2's vtable slot 36.
-func (self *IBackgroundCopyJob2) GetNotifyCmdLine(pProgram *foundation.PWSTR, pParameters *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyJob2) GetNotifyCmdLine(pProgram *foundation.PWSTR, pParameters *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProgram)), uintptr(unsafe.Pointer(pParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReplyProgress dispatches through IBackgroundCopyJob2's vtable slot 37.
-func (self *IBackgroundCopyJob2) GetReplyProgress(pProgress *BG_JOB_REPLY_PROGRESS) foundation.HRESULT {
+func (self *IBackgroundCopyJob2) GetReplyProgress(pProgress *BG_JOB_REPLY_PROGRESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProgress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReplyData dispatches through IBackgroundCopyJob2's vtable slot 38.
-func (self *IBackgroundCopyJob2) GetReplyData(ppBuffer **byte, pLength *uint64) foundation.HRESULT {
+func (self *IBackgroundCopyJob2) GetReplyData(ppBuffer **byte, pLength *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetReplyFileName dispatches through IBackgroundCopyJob2's vtable slot 39.
-func (self *IBackgroundCopyJob2) SetReplyFileName(ReplyFileName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ReplyFileName)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJob2) SetReplyFileName(ReplyFileName string) error {
+	_ReplyFileName := win32.UTF16Ptr(ReplyFileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ReplyFileName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReplyFileName dispatches through IBackgroundCopyJob2's vtable slot 40.
-func (self *IBackgroundCopyJob2) GetReplyFileName(pReplyFileName *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyJob2) GetReplyFileName(pReplyFileName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReplyFileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCredentials dispatches through IBackgroundCopyJob2's vtable slot 41.
-func (self *IBackgroundCopyJob2) SetCredentials(credentials *BG_AUTH_CREDENTIALS) foundation.HRESULT {
+func (self *IBackgroundCopyJob2) SetCredentials(credentials *BG_AUTH_CREDENTIALS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(credentials)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveCredentials dispatches through IBackgroundCopyJob2's vtable slot 42.
-func (self *IBackgroundCopyJob2) RemoveCredentials(Target BG_AUTH_TARGET, Scheme BG_AUTH_SCHEME) foundation.HRESULT {
+func (self *IBackgroundCopyJob2) RemoveCredentials(Target BG_AUTH_TARGET, Scheme BG_AUTH_SCHEME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(Target), uintptr(Scheme))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyJob3: https://learn.microsoft.com/windows/win32/api/bits2_0/nn-bits2_0-ibackgroundcopyjob3
@@ -779,27 +793,31 @@ type IBackgroundCopyJob3 struct {
 var IID_IBackgroundCopyJob3 = win32.GUID{Data1: 0x443c8934, Data2: 0x90ff, Data3: 0x48ed, Data4: [8]byte{0xbc, 0xde, 0x26, 0xf5, 0xc7, 0x45, 0x00, 0x42}}
 
 // ReplaceRemotePrefix dispatches through IBackgroundCopyJob3's vtable slot 43.
-func (self *IBackgroundCopyJob3) ReplaceRemotePrefix(OldPrefix foundation.PWSTR, NewPrefix foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(OldPrefix)), uintptr(unsafe.Pointer(NewPrefix)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJob3) ReplaceRemotePrefix(OldPrefix string, NewPrefix string) error {
+	_OldPrefix := win32.UTF16Ptr(OldPrefix)
+	_NewPrefix := win32.UTF16Ptr(NewPrefix)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_OldPrefix)), uintptr(unsafe.Pointer(_NewPrefix)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddFileWithRanges dispatches through IBackgroundCopyJob3's vtable slot 44.
-func (self *IBackgroundCopyJob3) AddFileWithRanges(RemoteUrl foundation.PWSTR, LocalName foundation.PWSTR, RangeCount uint32, Ranges *BG_FILE_RANGE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RemoteUrl)), uintptr(unsafe.Pointer(LocalName)), uintptr(RangeCount), uintptr(unsafe.Pointer(Ranges)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJob3) AddFileWithRanges(RemoteUrl string, LocalName string, RangeCount uint32, Ranges *BG_FILE_RANGE) error {
+	_RemoteUrl := win32.UTF16Ptr(RemoteUrl)
+	_LocalName := win32.UTF16Ptr(LocalName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_RemoteUrl)), uintptr(unsafe.Pointer(_LocalName)), uintptr(RangeCount), uintptr(unsafe.Pointer(Ranges)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFileACLFlags dispatches through IBackgroundCopyJob3's vtable slot 45.
-func (self *IBackgroundCopyJob3) SetFileACLFlags(Flags uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob3) SetFileACLFlags(Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileACLFlags dispatches through IBackgroundCopyJob3's vtable slot 46.
-func (self *IBackgroundCopyJob3) GetFileACLFlags(Flags *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob3) GetFileACLFlags(Flags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Flags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyJob4: https://learn.microsoft.com/windows/win32/api/bits3_0/nn-bits3_0-ibackgroundcopyjob4
@@ -812,39 +830,39 @@ type IBackgroundCopyJob4 struct {
 var IID_IBackgroundCopyJob4 = win32.GUID{Data1: 0x659cdeae, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // SetPeerCachingFlags dispatches through IBackgroundCopyJob4's vtable slot 47.
-func (self *IBackgroundCopyJob4) SetPeerCachingFlags(Flags uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob4) SetPeerCachingFlags(Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPeerCachingFlags dispatches through IBackgroundCopyJob4's vtable slot 48.
-func (self *IBackgroundCopyJob4) GetPeerCachingFlags(pFlags *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob4) GetPeerCachingFlags(pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOwnerIntegrityLevel dispatches through IBackgroundCopyJob4's vtable slot 49.
-func (self *IBackgroundCopyJob4) GetOwnerIntegrityLevel(pLevel *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob4) GetOwnerIntegrityLevel(pLevel *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOwnerElevationState dispatches through IBackgroundCopyJob4's vtable slot 50.
-func (self *IBackgroundCopyJob4) GetOwnerElevationState(pElevated *foundation.BOOL) foundation.HRESULT {
+func (self *IBackgroundCopyJob4) GetOwnerElevationState(pElevated *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pElevated)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaximumDownloadTime dispatches through IBackgroundCopyJob4's vtable slot 51.
-func (self *IBackgroundCopyJob4) SetMaximumDownloadTime(Timeout uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob4) SetMaximumDownloadTime(Timeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(Timeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaximumDownloadTime dispatches through IBackgroundCopyJob4's vtable slot 52.
-func (self *IBackgroundCopyJob4) GetMaximumDownloadTime(pTimeout *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJob4) GetMaximumDownloadTime(pTimeout *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyJob5: https://learn.microsoft.com/windows/win32/api/bits5_0/nn-bits5_0-ibackgroundcopyjob5
@@ -857,9 +875,9 @@ type IBackgroundCopyJob5 struct {
 var IID_IBackgroundCopyJob5 = win32.GUID{Data1: 0xe847030c, Data2: 0xbbba, Data3: 0x4657, Data4: [8]byte{0xaf, 0x6d, 0x48, 0x4a, 0xa4, 0x2b, 0xf1, 0xfe}}
 
 // GetProperty dispatches through IBackgroundCopyJob5's vtable slot 54.
-func (self *IBackgroundCopyJob5) GetProperty(PropertyId BITS_JOB_PROPERTY_ID, PropertyValue *BITS_JOB_PROPERTY_VALUE) foundation.HRESULT {
+func (self *IBackgroundCopyJob5) GetProperty(PropertyId BITS_JOB_PROPERTY_ID, PropertyValue *BITS_JOB_PROPERTY_VALUE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(PropertyId), uintptr(unsafe.Pointer(PropertyValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyJobHttpOptions: https://learn.microsoft.com/windows/win32/api/bits2_5/nn-bits2_5-ibackgroundcopyjobhttpoptions
@@ -872,51 +890,55 @@ type IBackgroundCopyJobHttpOptions struct {
 var IID_IBackgroundCopyJobHttpOptions = win32.GUID{Data1: 0xf1bd1079, Data2: 0x9f01, Data3: 0x4bdc, Data4: [8]byte{0x80, 0x36, 0xf0, 0x9b, 0x70, 0x09, 0x50, 0x66}}
 
 // SetClientCertificateByID dispatches through IBackgroundCopyJobHttpOptions's vtable slot 3.
-func (self *IBackgroundCopyJobHttpOptions) SetClientCertificateByID(StoreLocation BG_CERT_STORE_LOCATION, StoreName foundation.PWSTR, pCertHashBlob *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(StoreLocation), uintptr(unsafe.Pointer(StoreName)), uintptr(unsafe.Pointer(pCertHashBlob)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJobHttpOptions) SetClientCertificateByID(StoreLocation BG_CERT_STORE_LOCATION, StoreName string, pCertHashBlob *byte) error {
+	_StoreName := win32.UTF16Ptr(StoreName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(StoreLocation), uintptr(unsafe.Pointer(_StoreName)), uintptr(unsafe.Pointer(pCertHashBlob)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClientCertificateByName dispatches through IBackgroundCopyJobHttpOptions's vtable slot 4.
-func (self *IBackgroundCopyJobHttpOptions) SetClientCertificateByName(StoreLocation BG_CERT_STORE_LOCATION, StoreName foundation.PWSTR, SubjectName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(StoreLocation), uintptr(unsafe.Pointer(StoreName)), uintptr(unsafe.Pointer(SubjectName)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJobHttpOptions) SetClientCertificateByName(StoreLocation BG_CERT_STORE_LOCATION, StoreName string, SubjectName string) error {
+	_StoreName := win32.UTF16Ptr(StoreName)
+	_SubjectName := win32.UTF16Ptr(SubjectName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(StoreLocation), uintptr(unsafe.Pointer(_StoreName)), uintptr(unsafe.Pointer(_SubjectName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveClientCertificate dispatches through IBackgroundCopyJobHttpOptions's vtable slot 5.
-func (self *IBackgroundCopyJobHttpOptions) RemoveClientCertificate() foundation.HRESULT {
+func (self *IBackgroundCopyJobHttpOptions) RemoveClientCertificate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClientCertificate dispatches through IBackgroundCopyJobHttpOptions's vtable slot 6.
-func (self *IBackgroundCopyJobHttpOptions) GetClientCertificate(pStoreLocation *BG_CERT_STORE_LOCATION, pStoreName *foundation.PWSTR, ppCertHashBlob **byte, pSubjectName *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyJobHttpOptions) GetClientCertificate(pStoreLocation *BG_CERT_STORE_LOCATION, pStoreName *foundation.PWSTR, ppCertHashBlob **byte, pSubjectName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStoreLocation)), uintptr(unsafe.Pointer(pStoreName)), uintptr(unsafe.Pointer(ppCertHashBlob)), uintptr(unsafe.Pointer(pSubjectName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCustomHeaders dispatches through IBackgroundCopyJobHttpOptions's vtable slot 7.
-func (self *IBackgroundCopyJobHttpOptions) SetCustomHeaders(RequestHeaders foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RequestHeaders)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJobHttpOptions) SetCustomHeaders(RequestHeaders string) error {
+	_RequestHeaders := win32.UTF16Ptr(RequestHeaders)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_RequestHeaders)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCustomHeaders dispatches through IBackgroundCopyJobHttpOptions's vtable slot 8.
-func (self *IBackgroundCopyJobHttpOptions) GetCustomHeaders(pRequestHeaders *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyJobHttpOptions) GetCustomHeaders(pRequestHeaders *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequestHeaders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSecurityFlags dispatches through IBackgroundCopyJobHttpOptions's vtable slot 9.
-func (self *IBackgroundCopyJobHttpOptions) SetSecurityFlags(Flags uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJobHttpOptions) SetSecurityFlags(Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecurityFlags dispatches through IBackgroundCopyJobHttpOptions's vtable slot 10.
-func (self *IBackgroundCopyJobHttpOptions) GetSecurityFlags(pFlags *uint32) foundation.HRESULT {
+func (self *IBackgroundCopyJobHttpOptions) GetSecurityFlags(pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyJobHttpOptions2: https://learn.microsoft.com/windows/win32/api/bits10_2/nn-bits10_2-ibackgroundcopyjobhttpoptions2
@@ -929,15 +951,16 @@ type IBackgroundCopyJobHttpOptions2 struct {
 var IID_IBackgroundCopyJobHttpOptions2 = win32.GUID{Data1: 0xb591a192, Data2: 0xa405, Data3: 0x4fc3, Data4: [8]byte{0x83, 0x23, 0x4c, 0x5c, 0x54, 0x25, 0x78, 0xfc}}
 
 // SetHttpMethod dispatches through IBackgroundCopyJobHttpOptions2's vtable slot 11.
-func (self *IBackgroundCopyJobHttpOptions2) SetHttpMethod(method foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(method)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyJobHttpOptions2) SetHttpMethod(method string) error {
+	_method := win32.UTF16Ptr(method)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_method)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHttpMethod dispatches through IBackgroundCopyJobHttpOptions2's vtable slot 12.
-func (self *IBackgroundCopyJobHttpOptions2) GetHttpMethod(method *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyJobHttpOptions2) GetHttpMethod(method *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(method)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyJobHttpOptions3: https://learn.microsoft.com/windows/win32/api/bits10_3/nn-bits10_3-ibackgroundcopyjobhttpoptions3
@@ -950,15 +973,15 @@ type IBackgroundCopyJobHttpOptions3 struct {
 var IID_IBackgroundCopyJobHttpOptions3 = win32.GUID{Data1: 0x8a9263d3, Data2: 0xfd4c, Data3: 0x4eda, Data4: [8]byte{0x9b, 0x28, 0x30, 0x13, 0x2a, 0x4d, 0x4e, 0x3c}}
 
 // SetServerCertificateValidationInterface dispatches through IBackgroundCopyJobHttpOptions3's vtable slot 13.
-func (self *IBackgroundCopyJobHttpOptions3) SetServerCertificateValidationInterface(certValidationCallback *systemcom.IUnknown) foundation.HRESULT {
+func (self *IBackgroundCopyJobHttpOptions3) SetServerCertificateValidationInterface(certValidationCallback *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(certValidationCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MakeCustomHeadersWriteOnly dispatches through IBackgroundCopyJobHttpOptions3's vtable slot 14.
-func (self *IBackgroundCopyJobHttpOptions3) MakeCustomHeadersWriteOnly() foundation.HRESULT {
+func (self *IBackgroundCopyJobHttpOptions3) MakeCustomHeadersWriteOnly() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyManager: https://learn.microsoft.com/windows/win32/api/bits/nn-bits-ibackgroundcopymanager
@@ -971,27 +994,28 @@ type IBackgroundCopyManager struct {
 var IID_IBackgroundCopyManager = win32.GUID{Data1: 0x5ce34c0d, Data2: 0x0dc9, Data3: 0x4c1f, Data4: [8]byte{0x89, 0x7c, 0xda, 0xa1, 0xb7, 0x8c, 0xee, 0x7c}}
 
 // CreateJob dispatches through IBackgroundCopyManager's vtable slot 3.
-func (self *IBackgroundCopyManager) CreateJob(DisplayName foundation.PWSTR, Type BG_JOB_TYPE, pJobId *win32.GUID, ppJob **IBackgroundCopyJob) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DisplayName)), uintptr(Type), uintptr(unsafe.Pointer(pJobId)), uintptr(unsafe.Pointer(ppJob)))
-	return foundation.HRESULT(r1)
+func (self *IBackgroundCopyManager) CreateJob(DisplayName string, Type BG_JOB_TYPE, pJobId *win32.GUID, ppJob **IBackgroundCopyJob) error {
+	_DisplayName := win32.UTF16Ptr(DisplayName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_DisplayName)), uintptr(Type), uintptr(unsafe.Pointer(pJobId)), uintptr(unsafe.Pointer(ppJob)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetJob dispatches through IBackgroundCopyManager's vtable slot 4.
-func (self *IBackgroundCopyManager) GetJob(jobID *win32.GUID, ppJob **IBackgroundCopyJob) foundation.HRESULT {
+func (self *IBackgroundCopyManager) GetJob(jobID *win32.GUID, ppJob **IBackgroundCopyJob) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(jobID)), uintptr(unsafe.Pointer(ppJob)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumJobs dispatches through IBackgroundCopyManager's vtable slot 5.
-func (self *IBackgroundCopyManager) EnumJobs(dwFlags uint32, ppEnum **IEnumBackgroundCopyJobs) foundation.HRESULT {
+func (self *IBackgroundCopyManager) EnumJobs(dwFlags uint32, ppEnum **IEnumBackgroundCopyJobs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorDescription dispatches through IBackgroundCopyManager's vtable slot 6.
-func (self *IBackgroundCopyManager) GetErrorDescription(hResult foundation.HRESULT, LanguageId uint32, pErrorDescription *foundation.PWSTR) foundation.HRESULT {
+func (self *IBackgroundCopyManager) GetErrorDescription(hResult foundation.HRESULT, LanguageId uint32, pErrorDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hResult), uintptr(LanguageId), uintptr(unsafe.Pointer(pErrorDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyQMgr: https://learn.microsoft.com/windows/win32/api/qmgr/nn-qmgr-ibackgroundcopyqmgr
@@ -1004,9 +1028,9 @@ type IBackgroundCopyQMgr struct {
 var IID_IBackgroundCopyQMgr = win32.GUID{Data1: 0x16f41c69, Data2: 0x09f5, Data3: 0x41d2, Data4: [8]byte{0x8c, 0xd8, 0x3c, 0x08, 0xc4, 0x7b, 0xc8, 0xa8}}
 
 // EnumGroups dispatches through IBackgroundCopyQMgr's vtable slot 5.
-func (self *IBackgroundCopyQMgr) EnumGroups(dwFlags uint32, ppEnumGroups **IEnumBackgroundCopyGroups) foundation.HRESULT {
+func (self *IBackgroundCopyQMgr) EnumGroups(dwFlags uint32, ppEnumGroups **IEnumBackgroundCopyGroups) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppEnumGroups)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBackgroundCopyServerCertificateValidationCallback: https://learn.microsoft.com/windows/win32/api/bits10_3/nn-bits10_3-ibackgroundcopyservercertificatevalidationcallback
@@ -1019,9 +1043,9 @@ type IBackgroundCopyServerCertificateValidationCallback struct {
 var IID_IBackgroundCopyServerCertificateValidationCallback = win32.GUID{Data1: 0x4cec0d02, Data2: 0xdef7, Data3: 0x4158, Data4: [8]byte{0x81, 0x3a, 0xc3, 0x2a, 0x46, 0x94, 0x5f, 0xf7}}
 
 // ValidateServerCertificate dispatches through IBackgroundCopyServerCertificateValidationCallback's vtable slot 3.
-func (self *IBackgroundCopyServerCertificateValidationCallback) ValidateServerCertificate(job *IBackgroundCopyJob, file *IBackgroundCopyFile, certLength uint32, certData *byte, certEncodingType uint32, certStoreLength uint32, certStoreData *byte) foundation.HRESULT {
+func (self *IBackgroundCopyServerCertificateValidationCallback) ValidateServerCertificate(job *IBackgroundCopyJob, file *IBackgroundCopyFile, certLength uint32, certData *byte, certEncodingType uint32, certStoreLength uint32, certStoreData *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(job)), uintptr(unsafe.Pointer(file)), uintptr(certLength), uintptr(unsafe.Pointer(certData)), uintptr(certEncodingType), uintptr(certStoreLength), uintptr(unsafe.Pointer(certStoreData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBitsPeer: https://learn.microsoft.com/windows/win32/api/bits3_0/nn-bits3_0-ibitspeer
@@ -1034,21 +1058,21 @@ type IBitsPeer struct {
 var IID_IBitsPeer = win32.GUID{Data1: 0x659cdea2, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // GetPeerName dispatches through IBitsPeer's vtable slot 3.
-func (self *IBitsPeer) GetPeerName(pName *foundation.PWSTR) foundation.HRESULT {
+func (self *IBitsPeer) GetPeerName(pName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsAuthenticated dispatches through IBitsPeer's vtable slot 4.
-func (self *IBitsPeer) IsAuthenticated(pAuth *foundation.BOOL) foundation.HRESULT {
+func (self *IBitsPeer) IsAuthenticated(pAuth *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAuth)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsAvailable dispatches through IBitsPeer's vtable slot 5.
-func (self *IBitsPeer) IsAvailable(pOnline *foundation.BOOL) foundation.HRESULT {
+func (self *IBitsPeer) IsAvailable(pOnline *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOnline)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBitsPeerCacheAdministration: https://learn.microsoft.com/windows/win32/api/bits3_0/nn-bits3_0-ibitspeercacheadministration
@@ -1061,87 +1085,88 @@ type IBitsPeerCacheAdministration struct {
 var IID_IBitsPeerCacheAdministration = win32.GUID{Data1: 0x659cdead, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // GetMaximumCacheSize dispatches through IBitsPeerCacheAdministration's vtable slot 3.
-func (self *IBitsPeerCacheAdministration) GetMaximumCacheSize(pBytes *uint32) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) GetMaximumCacheSize(pBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaximumCacheSize dispatches through IBitsPeerCacheAdministration's vtable slot 4.
-func (self *IBitsPeerCacheAdministration) SetMaximumCacheSize(Bytes uint32) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) SetMaximumCacheSize(Bytes uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Bytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaximumContentAge dispatches through IBitsPeerCacheAdministration's vtable slot 5.
-func (self *IBitsPeerCacheAdministration) GetMaximumContentAge(pSeconds *uint32) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) GetMaximumContentAge(pSeconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSeconds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaximumContentAge dispatches through IBitsPeerCacheAdministration's vtable slot 6.
-func (self *IBitsPeerCacheAdministration) SetMaximumContentAge(Seconds uint32) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) SetMaximumContentAge(Seconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Seconds))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConfigurationFlags dispatches through IBitsPeerCacheAdministration's vtable slot 7.
-func (self *IBitsPeerCacheAdministration) GetConfigurationFlags(pFlags *uint32) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) GetConfigurationFlags(pFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConfigurationFlags dispatches through IBitsPeerCacheAdministration's vtable slot 8.
-func (self *IBitsPeerCacheAdministration) SetConfigurationFlags(Flags uint32) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) SetConfigurationFlags(Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumRecords dispatches through IBitsPeerCacheAdministration's vtable slot 9.
-func (self *IBitsPeerCacheAdministration) EnumRecords(ppEnum **IEnumBitsPeerCacheRecords) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) EnumRecords(ppEnum **IEnumBitsPeerCacheRecords) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecord dispatches through IBitsPeerCacheAdministration's vtable slot 10.
-func (self *IBitsPeerCacheAdministration) GetRecord(id *win32.GUID, ppRecord **IBitsPeerCacheRecord) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) GetRecord(id *win32.GUID, ppRecord **IBitsPeerCacheRecord) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)), uintptr(unsafe.Pointer(ppRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearRecords dispatches through IBitsPeerCacheAdministration's vtable slot 11.
-func (self *IBitsPeerCacheAdministration) ClearRecords() foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) ClearRecords() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteRecord dispatches through IBitsPeerCacheAdministration's vtable slot 12.
-func (self *IBitsPeerCacheAdministration) DeleteRecord(id *win32.GUID) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) DeleteRecord(id *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteUrl dispatches through IBitsPeerCacheAdministration's vtable slot 13.
-func (self *IBitsPeerCacheAdministration) DeleteUrl(url foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(url)))
-	return foundation.HRESULT(r1)
+func (self *IBitsPeerCacheAdministration) DeleteUrl(url string) error {
+	_url := win32.UTF16Ptr(url)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_url)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumPeers dispatches through IBitsPeerCacheAdministration's vtable slot 14.
-func (self *IBitsPeerCacheAdministration) EnumPeers(ppEnum **IEnumBitsPeers) foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) EnumPeers(ppEnum **IEnumBitsPeers) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearPeers dispatches through IBitsPeerCacheAdministration's vtable slot 15.
-func (self *IBitsPeerCacheAdministration) ClearPeers() foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) ClearPeers() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DiscoverPeers dispatches through IBitsPeerCacheAdministration's vtable slot 16.
-func (self *IBitsPeerCacheAdministration) DiscoverPeers() foundation.HRESULT {
+func (self *IBitsPeerCacheAdministration) DiscoverPeers() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBitsPeerCacheRecord: https://learn.microsoft.com/windows/win32/api/bits3_0/nn-bits3_0-ibitspeercacherecord
@@ -1154,45 +1179,45 @@ type IBitsPeerCacheRecord struct {
 var IID_IBitsPeerCacheRecord = win32.GUID{Data1: 0x659cdeaf, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // GetId dispatches through IBitsPeerCacheRecord's vtable slot 3.
-func (self *IBitsPeerCacheRecord) GetId(pVal *win32.GUID) foundation.HRESULT {
+func (self *IBitsPeerCacheRecord) GetId(pVal *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOriginUrl dispatches through IBitsPeerCacheRecord's vtable slot 4.
-func (self *IBitsPeerCacheRecord) GetOriginUrl(pVal *foundation.PWSTR) foundation.HRESULT {
+func (self *IBitsPeerCacheRecord) GetOriginUrl(pVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileSize dispatches through IBitsPeerCacheRecord's vtable slot 5.
-func (self *IBitsPeerCacheRecord) GetFileSize(pVal *uint64) foundation.HRESULT {
+func (self *IBitsPeerCacheRecord) GetFileSize(pVal *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileModificationTime dispatches through IBitsPeerCacheRecord's vtable slot 6.
-func (self *IBitsPeerCacheRecord) GetFileModificationTime(pVal *foundation.FILETIME) foundation.HRESULT {
+func (self *IBitsPeerCacheRecord) GetFileModificationTime(pVal *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLastAccessTime dispatches through IBitsPeerCacheRecord's vtable slot 7.
-func (self *IBitsPeerCacheRecord) GetLastAccessTime(pVal *foundation.FILETIME) foundation.HRESULT {
+func (self *IBitsPeerCacheRecord) GetLastAccessTime(pVal *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsFileValidated dispatches through IBitsPeerCacheRecord's vtable slot 8.
-func (self *IBitsPeerCacheRecord) IsFileValidated() foundation.HRESULT {
+func (self *IBitsPeerCacheRecord) IsFileValidated() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileRanges dispatches through IBitsPeerCacheRecord's vtable slot 9.
-func (self *IBitsPeerCacheRecord) GetFileRanges(pRangeCount *uint32, ppRanges **BG_FILE_RANGE) foundation.HRESULT {
+func (self *IBitsPeerCacheRecord) GetFileRanges(pRangeCount *uint32, ppRanges **BG_FILE_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRangeCount)), uintptr(unsafe.Pointer(ppRanges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBitsTokenOptions: https://learn.microsoft.com/windows/win32/api/bits4_0/nn-bits4_0-ibitstokenoptions
@@ -1205,33 +1230,33 @@ type IBitsTokenOptions struct {
 var IID_IBitsTokenOptions = win32.GUID{Data1: 0x9a2584c3, Data2: 0xf7d2, Data3: 0x457a, Data4: [8]byte{0x9a, 0x5e, 0x22, 0xb6, 0x7b, 0xff, 0xc7, 0xd2}}
 
 // SetHelperTokenFlags dispatches through IBitsTokenOptions's vtable slot 3.
-func (self *IBitsTokenOptions) SetHelperTokenFlags(UsageFlags BG_TOKEN) foundation.HRESULT {
+func (self *IBitsTokenOptions) SetHelperTokenFlags(UsageFlags BG_TOKEN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(UsageFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHelperTokenFlags dispatches through IBitsTokenOptions's vtable slot 4.
-func (self *IBitsTokenOptions) GetHelperTokenFlags(pFlags *BG_TOKEN) foundation.HRESULT {
+func (self *IBitsTokenOptions) GetHelperTokenFlags(pFlags *BG_TOKEN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHelperToken dispatches through IBitsTokenOptions's vtable slot 5.
-func (self *IBitsTokenOptions) SetHelperToken() foundation.HRESULT {
+func (self *IBitsTokenOptions) SetHelperToken() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearHelperToken dispatches through IBitsTokenOptions's vtable slot 6.
-func (self *IBitsTokenOptions) ClearHelperToken() foundation.HRESULT {
+func (self *IBitsTokenOptions) ClearHelperToken() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHelperTokenSid dispatches through IBitsTokenOptions's vtable slot 7.
-func (self *IBitsTokenOptions) GetHelperTokenSid(pSid *foundation.PWSTR) foundation.HRESULT {
+func (self *IBitsTokenOptions) GetHelperTokenSid(pSid *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumBackgroundCopyFiles: https://learn.microsoft.com/windows/win32/api/bits/nn-bits-ienumbackgroundcopyfiles
@@ -1244,33 +1269,33 @@ type IEnumBackgroundCopyFiles struct {
 var IID_IEnumBackgroundCopyFiles = win32.GUID{Data1: 0xca51e165, Data2: 0xc365, Data3: 0x424c, Data4: [8]byte{0x8d, 0x41, 0x24, 0xaa, 0xa4, 0xff, 0x3c, 0x40}}
 
 // Next dispatches through IEnumBackgroundCopyFiles's vtable slot 3.
-func (self *IEnumBackgroundCopyFiles) Next(celt uint32, rgelt **IBackgroundCopyFile, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyFiles) Next(celt uint32, rgelt **IBackgroundCopyFile, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumBackgroundCopyFiles's vtable slot 4.
-func (self *IEnumBackgroundCopyFiles) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyFiles) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumBackgroundCopyFiles's vtable slot 5.
-func (self *IEnumBackgroundCopyFiles) Reset() foundation.HRESULT {
+func (self *IEnumBackgroundCopyFiles) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumBackgroundCopyFiles's vtable slot 6.
-func (self *IEnumBackgroundCopyFiles) Clone(ppenum **IEnumBackgroundCopyFiles) foundation.HRESULT {
+func (self *IEnumBackgroundCopyFiles) Clone(ppenum **IEnumBackgroundCopyFiles) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumBackgroundCopyFiles's vtable slot 7.
-func (self *IEnumBackgroundCopyFiles) GetCount(puCount *uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyFiles) GetCount(puCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumBackgroundCopyGroups: https://learn.microsoft.com/windows/win32/api/qmgr/nn-qmgr-ienumbackgroundcopygroups
@@ -1283,33 +1308,33 @@ type IEnumBackgroundCopyGroups struct {
 var IID_IEnumBackgroundCopyGroups = win32.GUID{Data1: 0xd993e603, Data2: 0x4aa4, Data3: 0x47c5, Data4: [8]byte{0x86, 0x65, 0xc2, 0x0d, 0x39, 0xc2, 0xba, 0x4f}}
 
 // Next dispatches through IEnumBackgroundCopyGroups's vtable slot 3.
-func (self *IEnumBackgroundCopyGroups) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyGroups) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumBackgroundCopyGroups's vtable slot 4.
-func (self *IEnumBackgroundCopyGroups) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyGroups) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumBackgroundCopyGroups's vtable slot 5.
-func (self *IEnumBackgroundCopyGroups) Reset() foundation.HRESULT {
+func (self *IEnumBackgroundCopyGroups) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumBackgroundCopyGroups's vtable slot 6.
-func (self *IEnumBackgroundCopyGroups) Clone(ppenum **IEnumBackgroundCopyGroups) foundation.HRESULT {
+func (self *IEnumBackgroundCopyGroups) Clone(ppenum **IEnumBackgroundCopyGroups) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumBackgroundCopyGroups's vtable slot 7.
-func (self *IEnumBackgroundCopyGroups) GetCount(puCount *uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyGroups) GetCount(puCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumBackgroundCopyJobs: https://learn.microsoft.com/windows/win32/api/bits/nn-bits-ienumbackgroundcopyjobs
@@ -1322,33 +1347,33 @@ type IEnumBackgroundCopyJobs struct {
 var IID_IEnumBackgroundCopyJobs = win32.GUID{Data1: 0x1af4f612, Data2: 0x3b71, Data3: 0x466f, Data4: [8]byte{0x8f, 0x58, 0x7b, 0x6f, 0x73, 0xac, 0x57, 0xad}}
 
 // Next dispatches through IEnumBackgroundCopyJobs's vtable slot 3.
-func (self *IEnumBackgroundCopyJobs) Next(celt uint32, rgelt **IBackgroundCopyJob, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs) Next(celt uint32, rgelt **IBackgroundCopyJob, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumBackgroundCopyJobs's vtable slot 4.
-func (self *IEnumBackgroundCopyJobs) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumBackgroundCopyJobs's vtable slot 5.
-func (self *IEnumBackgroundCopyJobs) Reset() foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumBackgroundCopyJobs's vtable slot 6.
-func (self *IEnumBackgroundCopyJobs) Clone(ppenum **IEnumBackgroundCopyJobs) foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs) Clone(ppenum **IEnumBackgroundCopyJobs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumBackgroundCopyJobs's vtable slot 7.
-func (self *IEnumBackgroundCopyJobs) GetCount(puCount *uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs) GetCount(puCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumBackgroundCopyJobs1: https://learn.microsoft.com/windows/win32/api/qmgr/nn-qmgr-ienumbackgroundcopyjobs1
@@ -1361,33 +1386,33 @@ type IEnumBackgroundCopyJobs1 struct {
 var IID_IEnumBackgroundCopyJobs1 = win32.GUID{Data1: 0x8baeba9d, Data2: 0x8f1c, Data3: 0x42c4, Data4: [8]byte{0xb8, 0x2c, 0x09, 0xae, 0x79, 0x98, 0x0d, 0x25}}
 
 // Next dispatches through IEnumBackgroundCopyJobs1's vtable slot 3.
-func (self *IEnumBackgroundCopyJobs1) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs1) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumBackgroundCopyJobs1's vtable slot 4.
-func (self *IEnumBackgroundCopyJobs1) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs1) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumBackgroundCopyJobs1's vtable slot 5.
-func (self *IEnumBackgroundCopyJobs1) Reset() foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs1) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumBackgroundCopyJobs1's vtable slot 6.
-func (self *IEnumBackgroundCopyJobs1) Clone(ppenum **IEnumBackgroundCopyJobs1) foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs1) Clone(ppenum **IEnumBackgroundCopyJobs1) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumBackgroundCopyJobs1's vtable slot 7.
-func (self *IEnumBackgroundCopyJobs1) GetCount(puCount *uint32) foundation.HRESULT {
+func (self *IEnumBackgroundCopyJobs1) GetCount(puCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumBitsPeerCacheRecords: https://learn.microsoft.com/windows/win32/api/bits3_0/nn-bits3_0-ienumbitspeercacherecords
@@ -1400,33 +1425,33 @@ type IEnumBitsPeerCacheRecords struct {
 var IID_IEnumBitsPeerCacheRecords = win32.GUID{Data1: 0x659cdea4, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // Next dispatches through IEnumBitsPeerCacheRecords's vtable slot 3.
-func (self *IEnumBitsPeerCacheRecords) Next(celt uint32, rgelt **IBitsPeerCacheRecord, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumBitsPeerCacheRecords) Next(celt uint32, rgelt **IBitsPeerCacheRecord, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumBitsPeerCacheRecords's vtable slot 4.
-func (self *IEnumBitsPeerCacheRecords) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumBitsPeerCacheRecords) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumBitsPeerCacheRecords's vtable slot 5.
-func (self *IEnumBitsPeerCacheRecords) Reset() foundation.HRESULT {
+func (self *IEnumBitsPeerCacheRecords) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumBitsPeerCacheRecords's vtable slot 6.
-func (self *IEnumBitsPeerCacheRecords) Clone(ppenum **IEnumBitsPeerCacheRecords) foundation.HRESULT {
+func (self *IEnumBitsPeerCacheRecords) Clone(ppenum **IEnumBitsPeerCacheRecords) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumBitsPeerCacheRecords's vtable slot 7.
-func (self *IEnumBitsPeerCacheRecords) GetCount(puCount *uint32) foundation.HRESULT {
+func (self *IEnumBitsPeerCacheRecords) GetCount(puCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumBitsPeers: https://learn.microsoft.com/windows/win32/api/bits3_0/nn-bits3_0-ienumbitspeers
@@ -1439,31 +1464,31 @@ type IEnumBitsPeers struct {
 var IID_IEnumBitsPeers = win32.GUID{Data1: 0x659cdea5, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // Next dispatches through IEnumBitsPeers's vtable slot 3.
-func (self *IEnumBitsPeers) Next(celt uint32, rgelt **IBitsPeer, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumBitsPeers) Next(celt uint32, rgelt **IBitsPeer, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumBitsPeers's vtable slot 4.
-func (self *IEnumBitsPeers) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumBitsPeers) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumBitsPeers's vtable slot 5.
-func (self *IEnumBitsPeers) Reset() foundation.HRESULT {
+func (self *IEnumBitsPeers) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumBitsPeers's vtable slot 6.
-func (self *IEnumBitsPeers) Clone(ppenum **IEnumBitsPeers) foundation.HRESULT {
+func (self *IEnumBitsPeers) Clone(ppenum **IEnumBitsPeers) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumBitsPeers's vtable slot 7.
-func (self *IEnumBitsPeers) GetCount(puCount *uint32) foundation.HRESULT {
+func (self *IEnumBitsPeers) GetCount(puCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

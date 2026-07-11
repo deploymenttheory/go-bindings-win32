@@ -10,8 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 )
 
-// FWPM_ACTION0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_ACTION0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_ACTION0_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -65,14 +65,14 @@ type FWPM_CLASSIFY_OPTIONS0 struct {
 	Options    *FWPM_CLASSIFY_OPTION0
 }
 
-// FWPM_CONNECTION0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_CONNECTION0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_CONNECTION0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// FWPM_CONNECTION0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_CONNECTION0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_CONNECTION0_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -121,8 +121,8 @@ type FWPM_FIELD0 struct {
 	DataType FWP_DATA_TYPE
 }
 
-// FWPM_FILTER0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_FILTER0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_FILTER0_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -225,8 +225,8 @@ type FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0 struct {
 	Settings    *FWPM_NETWORK_CONNECTION_POLICY_SETTING0
 }
 
-// FWPM_NET_EVENT0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -238,8 +238,8 @@ type FWPM_NET_EVENT0 struct {
 	Anonymous FWPM_NET_EVENT0_Anonymous_e__Union
 }
 
-// FWPM_NET_EVENT1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT1_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -251,8 +251,8 @@ type FWPM_NET_EVENT1 struct {
 	Anonymous FWPM_NET_EVENT1_Anonymous_e__Union
 }
 
-// FWPM_NET_EVENT2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT2_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -264,8 +264,8 @@ type FWPM_NET_EVENT2 struct {
 	Anonymous FWPM_NET_EVENT2_Anonymous_e__Union
 }
 
-// FWPM_NET_EVENT3_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT3_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT3_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -277,8 +277,8 @@ type FWPM_NET_EVENT3 struct {
 	Anonymous FWPM_NET_EVENT3_Anonymous_e__Union
 }
 
-// FWPM_NET_EVENT4_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT4_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT4_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -289,8 +289,8 @@ type FWPM_NET_EVENT4 struct {
 	Anonymous FWPM_NET_EVENT4_Anonymous_e__Union
 }
 
-// FWPM_NET_EVENT5_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT5_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT5_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -388,14 +388,14 @@ type FWPM_NET_EVENT_ENUM_TEMPLATE0 struct {
 	FilterCondition     *FWPM_FILTER_CONDITION0
 }
 
-// FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -415,20 +415,20 @@ type FWPM_NET_EVENT_HEADER0 struct {
 	UserId     *security.SID
 }
 
-// FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
-// FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union struct {
 	Data [7]uint64
 }
@@ -449,14 +449,14 @@ type FWPM_NET_EVENT_HEADER1 struct {
 	Anonymous3 FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union
 }
 
-// FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -478,14 +478,14 @@ type FWPM_NET_EVENT_HEADER2 struct {
 	PackageSid    *security.SID
 }
 
-// FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -597,14 +597,14 @@ type FWPM_NET_EVENT_IKEEXT_MM_FAILURE2 struct {
 	ProviderContextKey          *win32.GUID
 }
 
-// FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
-// FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous2_e__Union struct {
 	Data [2]uint64
 }
@@ -622,14 +622,14 @@ type FWPM_NET_EVENT_IKEEXT_QM_FAILURE0 struct {
 	QmFilterId       uint64
 }
 
-// FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
-// FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_Anonymous2_e__Union struct {
 	Data [2]uint64
 }
@@ -648,14 +648,14 @@ type FWPM_NET_EVENT_IKEEXT_QM_FAILURE1 struct {
 	MmProviderContextKey win32.GUID
 }
 
-// FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -704,8 +704,8 @@ type FWPM_PROVIDER_CHANGE0 struct {
 	ProviderKey win32.GUID
 }
 
-// FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -722,8 +722,8 @@ type FWPM_PROVIDER_CONTEXT0 struct {
 	ProviderContextId  uint64
 }
 
-// FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -740,8 +740,8 @@ type FWPM_PROVIDER_CONTEXT1 struct {
 	ProviderContextId  uint64
 }
 
-// FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -758,8 +758,8 @@ type FWPM_PROVIDER_CONTEXT2 struct {
 	ProviderContextId  uint64
 }
 
-// FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_PROVIDER_CONTEXT3_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -944,8 +944,8 @@ type FWPM_SYSTEM_PORTS_BY_TYPE0 struct {
 	Ports    *uint16
 }
 
-// FWPM_VSWITCH_EVENT0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWPM_VSWITCH_EVENT0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWPM_VSWITCH_EVENT0_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -979,8 +979,8 @@ type FWP_BYTE_BLOB struct {
 	Data *byte
 }
 
-// FWP_CONDITION_VALUE0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWP_CONDITION_VALUE0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWP_CONDITION_VALUE0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1017,8 +1017,8 @@ type FWP_V6_ADDR_AND_MASK struct {
 	PrefixLength byte
 }
 
-// FWP_VALUE0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FWP_VALUE0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FWP_VALUE0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1029,8 +1029,8 @@ type FWP_VALUE0 struct {
 	Anonymous FWP_VALUE0_Anonymous_e__Union
 }
 
-// IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union struct {
 	Data [7]uint64
 }
@@ -1041,8 +1041,8 @@ type IKEEXT_AUTHENTICATION_METHOD0 struct {
 	Anonymous                IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union
 }
 
-// IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union struct {
 	Data [9]uint64
 }
@@ -1053,8 +1053,8 @@ type IKEEXT_AUTHENTICATION_METHOD1 struct {
 	Anonymous                IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union
 }
 
-// IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union struct {
 	Data [9]uint64
 }
@@ -1065,14 +1065,14 @@ type IKEEXT_AUTHENTICATION_METHOD2 struct {
 	Anonymous                IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union
 }
 
-// IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
-// IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union struct {
 	Data [2]uint64
 }
@@ -1086,14 +1086,14 @@ type IKEEXT_CERTIFICATE_AUTHENTICATION0 struct {
 	Flags              IKEEXT_CERT_AUTH
 }
 
-// IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
-// IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union struct {
 	Data [2]uint64
 }
@@ -1108,14 +1108,14 @@ type IKEEXT_CERTIFICATE_AUTHENTICATION1 struct {
 	LocalCertLocationUrl FWP_BYTE_BLOB
 }
 
-// IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
-// IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union struct {
 	Data [2]uint64
 }
@@ -1203,8 +1203,8 @@ type IKEEXT_COOKIE_PAIR0 struct {
 	Responder uint64
 }
 
-// IKEEXT_CREDENTIAL0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_CREDENTIAL0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_CREDENTIAL0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1216,8 +1216,8 @@ type IKEEXT_CREDENTIAL0 struct {
 	Anonymous                IKEEXT_CREDENTIAL0_Anonymous_e__Union
 }
 
-// IKEEXT_CREDENTIAL1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_CREDENTIAL1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_CREDENTIAL1_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1229,8 +1229,8 @@ type IKEEXT_CREDENTIAL1 struct {
 	Anonymous                IKEEXT_CREDENTIAL1_Anonymous_e__Union
 }
 
-// IKEEXT_CREDENTIAL2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_CREDENTIAL2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_CREDENTIAL2_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1478,8 +1478,8 @@ type IKEEXT_RESERVED_AUTHENTICATION0 struct {
 	Flags IKEEXT_RESERVED_AUTHENTICATION_FLAGS
 }
 
-// IKEEXT_SA_DETAILS0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_SA_DETAILS0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_SA_DETAILS0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1498,8 +1498,8 @@ type IKEEXT_SA_DETAILS0 struct {
 	VirtualIfTunnelId uint64
 }
 
-// IKEEXT_SA_DETAILS1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_SA_DETAILS1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_SA_DETAILS1_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1519,8 +1519,8 @@ type IKEEXT_SA_DETAILS1 struct {
 	CorrelationKey    FWP_BYTE_BLOB
 }
 
-// IKEEXT_SA_DETAILS2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_SA_DETAILS2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_SA_DETAILS2_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1562,14 +1562,14 @@ type IKEEXT_STATISTICS1 struct {
 	CommonStatistics IKEEXT_COMMON_STATISTICS1
 }
 
-// IKEEXT_TRAFFIC0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_TRAFFIC0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_TRAFFIC0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// IKEEXT_TRAFFIC0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IKEEXT_TRAFFIC0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IKEEXT_TRAFFIC0_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -1738,8 +1738,8 @@ type IPSEC_ESP_DROP_PACKET_STATISTICS0 struct {
 	SaNotInitializedOnInbound       uint32
 }
 
-// IPSEC_GETSPI0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_GETSPI0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_GETSPI0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1752,8 +1752,8 @@ type IPSEC_GETSPI0 struct {
 	RngCryptoModuleID   *win32.GUID
 }
 
-// IPSEC_GETSPI1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_GETSPI1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_GETSPI1_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1820,8 +1820,8 @@ type IPSEC_PROPOSAL0 struct {
 	PfsGroup        IPSEC_PFS_GROUP
 }
 
-// IPSEC_SA0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_SA0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_SA0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1845,8 +1845,8 @@ type IPSEC_SA_AUTH_INFORMATION0 struct {
 	AuthKey       FWP_BYTE_BLOB
 }
 
-// IPSEC_SA_BUNDLE0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_SA_BUNDLE0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_SA_BUNDLE0_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1869,8 +1869,8 @@ type IPSEC_SA_BUNDLE0 struct {
 	PfsGroup                   IPSEC_PFS_GROUP
 }
 
-// IPSEC_SA_BUNDLE1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_SA_BUNDLE1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_SA_BUNDLE1_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1934,8 +1934,8 @@ type IPSEC_SA_CONTEXT_SUBSCRIPTION0 struct {
 	SessionKey   win32.GUID
 }
 
-// IPSEC_SA_DETAILS0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_SA_DETAILS0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_SA_DETAILS0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1950,8 +1950,8 @@ type IPSEC_SA_DETAILS0 struct {
 	TransportFilter *FWPM_FILTER0
 }
 
-// IPSEC_SA_DETAILS1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_SA_DETAILS1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_SA_DETAILS1_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1985,8 +1985,8 @@ type IPSEC_SA_LIFETIME0 struct {
 	LifetimePackets   uint32
 }
 
-// IPSEC_SA_TRANSFORM0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_SA_TRANSFORM0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_SA_TRANSFORM0_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2025,20 +2025,20 @@ type IPSEC_TOKEN0 struct {
 	Token     uint64
 }
 
-// IPSEC_TRAFFIC0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TRAFFIC0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TRAFFIC0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// IPSEC_TRAFFIC0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TRAFFIC0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TRAFFIC0_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
-// IPSEC_TRAFFIC0_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TRAFFIC0_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TRAFFIC0_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
@@ -2053,20 +2053,20 @@ type IPSEC_TRAFFIC0 struct {
 	RemotePort  uint16
 }
 
-// IPSEC_TRAFFIC1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TRAFFIC1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TRAFFIC1_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// IPSEC_TRAFFIC1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TRAFFIC1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TRAFFIC1_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
-// IPSEC_TRAFFIC1_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TRAFFIC1_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TRAFFIC1_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
@@ -2085,14 +2085,14 @@ type IPSEC_TRAFFIC1 struct {
 	RealIfProfileId uint32
 }
 
-// IPSEC_TRAFFIC_SELECTOR0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TRAFFIC_SELECTOR0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TRAFFIC_SELECTOR0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// IPSEC_TRAFFIC_SELECTOR0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TRAFFIC_SELECTOR0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TRAFFIC_SELECTOR0_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -2165,8 +2165,8 @@ type IPSEC_TRANSPORT_POLICY2 struct {
 	EmPolicy                   *IKEEXT_EM_POLICY2
 }
 
-// IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -2177,14 +2177,14 @@ type IPSEC_TUNNEL_ENDPOINT0 struct {
 	Anonymous IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union
 }
 
-// IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -2196,14 +2196,14 @@ type IPSEC_TUNNEL_ENDPOINTS0 struct {
 	Anonymous2 IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union
 }
 
-// IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -2216,14 +2216,14 @@ type IPSEC_TUNNEL_ENDPOINTS1 struct {
 	LocalIfLuid uint64
 }
 
-// IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union struct {
 	Data [4]uint32
 }

@@ -22,8 +22,8 @@ type APPKEY struct {
 	ScanCode uint16
 }
 
-// CHAR_INFO_Char_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CHAR_INFO_Char_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CHAR_INFO_Char_e__Union struct {
 	Data [1]uint16
 }
@@ -158,8 +158,8 @@ type FOCUS_EVENT_RECORD struct {
 	BSetFocus foundation.BOOL
 }
 
-// INPUT_RECORD_Event_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INPUT_RECORD_Event_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INPUT_RECORD_Event_e__Union struct {
 	Data [4]uint32
 }
@@ -170,8 +170,8 @@ type INPUT_RECORD struct {
 	Event     INPUT_RECORD_Event_e__Union
 }
 
-// KEY_EVENT_RECORD_uChar_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KEY_EVENT_RECORD_uChar_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KEY_EVENT_RECORD_uChar_e__Union struct {
 	Data [1]uint16
 }

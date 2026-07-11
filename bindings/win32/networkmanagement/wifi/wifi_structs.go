@@ -303,8 +303,8 @@ type DOT11_BSS_ENTRY struct {
 	UcBuffer                [1]byte
 }
 
-// DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO struct {
 	Data [3]uint32
 }
@@ -1038,8 +1038,8 @@ type DOT11_PER_MSDU_COUNTERS struct {
 	UACKFailureCount          uint32
 }
 
-// DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union struct {
 	Data [3]uint32
 }
@@ -1082,8 +1082,8 @@ type DOT11_PHY_FRAME_STATISTICS struct {
 	UllFCSErrorCount                    uint64
 }
 
-// DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1352,8 +1352,8 @@ type DOT11_RECV_SENSITIVITY struct {
 	LRSSIMax   int32
 }
 
-// DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union struct {
 	Data [1]uint32
 }

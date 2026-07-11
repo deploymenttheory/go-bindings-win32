@@ -24,10 +24,10 @@ var (
 
 var (
 	procCreateMappedBitmap                     = modCOMCTL32.NewProc("CreateMappedBitmap")
+	procCreatePropertySheetPage                = modCOMCTL32.NewProc("CreatePropertySheetPageW")
 	procCreatePropertySheetPageA               = modCOMCTL32.NewProc("CreatePropertySheetPageA")
-	procCreatePropertySheetPageW               = modCOMCTL32.NewProc("CreatePropertySheetPageW")
+	procCreateStatusWindow                     = modCOMCTL32.NewProc("CreateStatusWindowW")
 	procCreateStatusWindowA                    = modCOMCTL32.NewProc("CreateStatusWindowA")
-	procCreateStatusWindowW                    = modCOMCTL32.NewProc("CreateStatusWindowW")
 	procCreateToolbarEx                        = modCOMCTL32.NewProc("CreateToolbarEx")
 	procCreateUpDownControl                    = modCOMCTL32.NewProc("CreateUpDownControl")
 	procDPA_Clone                              = modCOMCTL32.NewProc("DPA_Clone")
@@ -65,8 +65,8 @@ var (
 	procDestroyPropertySheetPage               = modCOMCTL32.NewProc("DestroyPropertySheetPage")
 	procDrawInsert                             = modCOMCTL32.NewProc("DrawInsert")
 	procDrawShadowText                         = modCOMCTL32.NewProc("DrawShadowText")
+	procDrawStatusText                         = modCOMCTL32.NewProc("DrawStatusTextW")
 	procDrawStatusTextA                        = modCOMCTL32.NewProc("DrawStatusTextA")
-	procDrawStatusTextW                        = modCOMCTL32.NewProc("DrawStatusTextW")
 	procFlatSB_EnableScrollBar                 = modCOMCTL32.NewProc("FlatSB_EnableScrollBar")
 	procFlatSB_GetScrollInfo                   = modCOMCTL32.NewProc("FlatSB_GetScrollInfo")
 	procFlatSB_GetScrollPos                    = modCOMCTL32.NewProc("FlatSB_GetScrollPos")
@@ -102,8 +102,8 @@ var (
 	procImageList_GetIconSize                  = modCOMCTL32.NewProc("ImageList_GetIconSize")
 	procImageList_GetImageCount                = modCOMCTL32.NewProc("ImageList_GetImageCount")
 	procImageList_GetImageInfo                 = modCOMCTL32.NewProc("ImageList_GetImageInfo")
+	procImageList_LoadImage                    = modCOMCTL32.NewProc("ImageList_LoadImageW")
 	procImageList_LoadImageA                   = modCOMCTL32.NewProc("ImageList_LoadImageA")
-	procImageList_LoadImageW                   = modCOMCTL32.NewProc("ImageList_LoadImageW")
 	procImageList_Merge                        = modCOMCTL32.NewProc("ImageList_Merge")
 	procImageList_Read                         = modCOMCTL32.NewProc("ImageList_Read")
 	procImageList_ReadEx                       = modCOMCTL32.NewProc("ImageList_ReadEx")
@@ -125,8 +125,8 @@ var (
 	procLoadIconWithScaleDown                  = modCOMCTL32.NewProc("LoadIconWithScaleDown")
 	procMakeDragList                           = modCOMCTL32.NewProc("MakeDragList")
 	procMenuHelp                               = modCOMCTL32.NewProc("MenuHelp")
+	procPropertySheet                          = modCOMCTL32.NewProc("PropertySheetW")
 	procPropertySheetA                         = modCOMCTL32.NewProc("PropertySheetA")
-	procPropertySheetW                         = modCOMCTL32.NewProc("PropertySheetW")
 	procShowHideMenuCtl                        = modCOMCTL32.NewProc("ShowHideMenuCtl")
 	procStr_SetPtrW                            = modCOMCTL32.NewProc("Str_SetPtrW")
 	procTaskDialog                             = modCOMCTL32.NewProc("TaskDialog")
@@ -135,14 +135,14 @@ var (
 	procCheckDlgButton                         = modUSER32.NewProc("CheckDlgButton")
 	procCheckRadioButton                       = modUSER32.NewProc("CheckRadioButton")
 	procCreateSyntheticPointerDevice           = modUSER32.NewProc("CreateSyntheticPointerDevice")
+	procDlgDirList                             = modUSER32.NewProc("DlgDirListW")
 	procDlgDirListA                            = modUSER32.NewProc("DlgDirListA")
+	procDlgDirListComboBox                     = modUSER32.NewProc("DlgDirListComboBoxW")
 	procDlgDirListComboBoxA                    = modUSER32.NewProc("DlgDirListComboBoxA")
-	procDlgDirListComboBoxW                    = modUSER32.NewProc("DlgDirListComboBoxW")
-	procDlgDirListW                            = modUSER32.NewProc("DlgDirListW")
+	procDlgDirSelectComboBoxEx                 = modUSER32.NewProc("DlgDirSelectComboBoxExW")
 	procDlgDirSelectComboBoxExA                = modUSER32.NewProc("DlgDirSelectComboBoxExA")
-	procDlgDirSelectComboBoxExW                = modUSER32.NewProc("DlgDirSelectComboBoxExW")
+	procDlgDirSelectEx                         = modUSER32.NewProc("DlgDirSelectExW")
 	procDlgDirSelectExA                        = modUSER32.NewProc("DlgDirSelectExA")
-	procDlgDirSelectExW                        = modUSER32.NewProc("DlgDirSelectExW")
 	procEnableScrollBar                        = modUSER32.NewProc("EnableScrollBar")
 	procEvaluateProximityToPolygon             = modUSER32.NewProc("EvaluateProximityToPolygon")
 	procEvaluateProximityToRect                = modUSER32.NewProc("EvaluateProximityToRect")
@@ -257,57 +257,57 @@ func BeginBufferedPaint(hdcTarget graphicsgdi.HDC, prcTarget *foundation.RECT, d
 // BeginPanningFeedback calls UxTheme!BeginPanningFeedback.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-beginpanningfeedback
 // Minimum OS: windows6.1.
-func BeginPanningFeedback(hwnd foundation.HWND) foundation.BOOL {
+func BeginPanningFeedback(hwnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procBeginPanningFeedback.Addr(), uintptr(hwnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // BufferedPaintClear calls UXTHEME!BufferedPaintClear.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-bufferedpaintclear
 // Minimum OS: windows6.0.6000.
-func BufferedPaintClear(hBufferedPaint uintptr, prc *foundation.RECT) foundation.HRESULT {
+func BufferedPaintClear(hBufferedPaint uintptr, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintClear.Addr(), uintptr(hBufferedPaint), uintptr(unsafe.Pointer(prc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BufferedPaintInit calls UXTHEME!BufferedPaintInit.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-bufferedpaintinit
 // Minimum OS: windows6.0.6000.
-func BufferedPaintInit() foundation.HRESULT {
+func BufferedPaintInit() error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintInit.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BufferedPaintRenderAnimation calls UxTheme!BufferedPaintRenderAnimation.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-bufferedpaintrenderanimation
 // Minimum OS: windows6.0.6000.
-func BufferedPaintRenderAnimation(hwnd foundation.HWND, hdcTarget graphicsgdi.HDC) foundation.BOOL {
+func BufferedPaintRenderAnimation(hwnd foundation.HWND, hdcTarget graphicsgdi.HDC) bool {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintRenderAnimation.Addr(), uintptr(hwnd), uintptr(hdcTarget))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // BufferedPaintSetAlpha calls UxTheme!BufferedPaintSetAlpha.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-bufferedpaintsetalpha
 // Minimum OS: windows6.0.6000.
-func BufferedPaintSetAlpha(hBufferedPaint uintptr, prc *foundation.RECT, alpha byte) foundation.HRESULT {
+func BufferedPaintSetAlpha(hBufferedPaint uintptr, prc *foundation.RECT, alpha byte) error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintSetAlpha.Addr(), uintptr(hBufferedPaint), uintptr(unsafe.Pointer(prc)), uintptr(alpha))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BufferedPaintStopAllAnimations calls UXTHEME!BufferedPaintStopAllAnimations.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-bufferedpaintstopallanimations
 // Minimum OS: windows6.0.6000.
-func BufferedPaintStopAllAnimations(hwnd foundation.HWND) foundation.HRESULT {
+func BufferedPaintStopAllAnimations(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintStopAllAnimations.Addr(), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BufferedPaintUnInit calls UXTHEME!BufferedPaintUnInit.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-bufferedpaintuninit
 // Minimum OS: windows6.0.6000.
-func BufferedPaintUnInit() foundation.HRESULT {
+func BufferedPaintUnInit() error {
 	r1, _, _ := syscall.SyscallN(procBufferedPaintUnInit.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckDlgButton calls USER32!CheckDlgButton.
@@ -335,9 +335,9 @@ func CheckRadioButton(hDlg foundation.HWND, nIDFirstButton int32, nIDLastButton 
 // CloseThemeData calls UXTHEME!CloseThemeData.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-closethemedata
 // Minimum OS: windows6.0.6000.
-func CloseThemeData(hTheme HTHEME) foundation.HRESULT {
+func CloseThemeData(hTheme HTHEME) error {
 	r1, _, _ := syscall.SyscallN(procCloseThemeData.Addr(), uintptr(hTheme))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMappedBitmap calls COMCTL32!CreateMappedBitmap.
@@ -352,6 +352,14 @@ func CreateMappedBitmap(hInstance foundation.HINSTANCE, idBitmap uintptr, wFlags
 	return ret, nil
 }
 
+// CreatePropertySheetPage calls COMCTL32!CreatePropertySheetPageW.
+// https://learn.microsoft.com/windows/win32/api/prsht/nf-prsht-createpropertysheetpagew
+// Minimum OS: windows6.0.6000.
+func CreatePropertySheetPage(constPropSheetPagePointer *PROPSHEETPAGEW) HPROPSHEETPAGE {
+	r1, _, _ := syscall.SyscallN(procCreatePropertySheetPage.Addr(), uintptr(unsafe.Pointer(constPropSheetPagePointer)))
+	return HPROPSHEETPAGE(r1)
+}
+
 // CreatePropertySheetPageA calls COMCTL32!CreatePropertySheetPageA.
 // https://learn.microsoft.com/windows/win32/api/prsht/nf-prsht-createpropertysheetpagea
 // Minimum OS: windows6.0.6000.
@@ -360,19 +368,12 @@ func CreatePropertySheetPageA(constPropSheetPagePointer *PROPSHEETPAGEA) HPROPSH
 	return HPROPSHEETPAGE(r1)
 }
 
-// CreatePropertySheetPageW calls COMCTL32!CreatePropertySheetPageW.
-// https://learn.microsoft.com/windows/win32/api/prsht/nf-prsht-createpropertysheetpagew
+// CreateStatusWindow calls COMCTL32!CreateStatusWindowW.
+// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-createstatuswindoww
 // Minimum OS: windows6.0.6000.
-func CreatePropertySheetPageW(constPropSheetPagePointer *PROPSHEETPAGEW) HPROPSHEETPAGE {
-	r1, _, _ := syscall.SyscallN(procCreatePropertySheetPageW.Addr(), uintptr(unsafe.Pointer(constPropSheetPagePointer)))
-	return HPROPSHEETPAGE(r1)
-}
-
-// CreateStatusWindowA calls COMCTL32!CreateStatusWindowA.
-// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-createstatuswindowa
-// Minimum OS: windows6.0.6000.
-func CreateStatusWindowA(style int32, lpszText foundation.PSTR, hwndParent foundation.HWND, wID uint32) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateStatusWindowA.Addr(), uintptr(style), uintptr(unsafe.Pointer(lpszText)), uintptr(hwndParent), uintptr(wID))
+func CreateStatusWindow(style int32, lpszText string, hwndParent foundation.HWND, wID uint32) (foundation.HWND, error) {
+	_lpszText := win32.UTF16Ptr(lpszText)
+	r1, _, e1 := syscall.SyscallN(procCreateStatusWindow.Addr(), uintptr(style), uintptr(unsafe.Pointer(_lpszText)), uintptr(hwndParent), uintptr(wID))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -380,11 +381,11 @@ func CreateStatusWindowA(style int32, lpszText foundation.PSTR, hwndParent found
 	return ret, nil
 }
 
-// CreateStatusWindowW calls COMCTL32!CreateStatusWindowW.
-// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-createstatuswindoww
+// CreateStatusWindowA calls COMCTL32!CreateStatusWindowA.
+// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-createstatuswindowa
 // Minimum OS: windows6.0.6000.
-func CreateStatusWindowW(style int32, lpszText foundation.PWSTR, hwndParent foundation.HWND, wID uint32) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateStatusWindowW.Addr(), uintptr(style), uintptr(unsafe.Pointer(lpszText)), uintptr(hwndParent), uintptr(wID))
+func CreateStatusWindowA(style int32, lpszText foundation.PSTR, hwndParent foundation.HWND, wID uint32) (foundation.HWND, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateStatusWindowA.Addr(), uintptr(style), uintptr(unsafe.Pointer(lpszText)), uintptr(hwndParent), uintptr(wID))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -451,9 +452,9 @@ func DPA_CreateEx(cpGrow int32, hheap foundation.HANDLE) HDPA {
 // DPA_DeleteAllPtrs calls COMCTL32!DPA_DeleteAllPtrs.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_deleteallptrs
 // Minimum OS: windows6.0.6000.
-func DPA_DeleteAllPtrs(hdpa HDPA) foundation.BOOL {
+func DPA_DeleteAllPtrs(hdpa HDPA) bool {
 	r1, _, _ := syscall.SyscallN(procDPA_DeleteAllPtrs.Addr(), uintptr(hdpa))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DPA_DeletePtr calls COMCTL32!DPA_DeletePtr.
@@ -467,9 +468,9 @@ func DPA_DeletePtr(hdpa HDPA, i int32) unsafe.Pointer {
 // DPA_Destroy calls COMCTL32!DPA_Destroy.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_destroy
 // Minimum OS: windows6.0.6000.
-func DPA_Destroy(hdpa HDPA) foundation.BOOL {
+func DPA_Destroy(hdpa HDPA) bool {
 	r1, _, _ := syscall.SyscallN(procDPA_Destroy.Addr(), uintptr(hdpa))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DPA_DestroyCallback calls COMCTL32!DPA_DestroyCallback.
@@ -513,9 +514,9 @@ func DPA_GetSize(hdpa HDPA) uint64 {
 // DPA_Grow calls COMCTL32!DPA_Grow.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_grow
 // Minimum OS: windows6.0.6000.
-func DPA_Grow(pdpa HDPA, cp int32) foundation.BOOL {
+func DPA_Grow(pdpa HDPA, cp int32) bool {
 	r1, _, _ := syscall.SyscallN(procDPA_Grow.Addr(), uintptr(pdpa), uintptr(cp))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DPA_InsertPtr calls COMCTL32!DPA_InsertPtr.
@@ -529,25 +530,25 @@ func DPA_InsertPtr(hdpa HDPA, i int32, p unsafe.Pointer) int32 {
 // DPA_LoadStream calls COMCTL32!DPA_LoadStream.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_loadstream
 // Minimum OS: windows6.0.6000.
-func DPA_LoadStream(phdpa *HDPA, pfn PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) foundation.HRESULT {
+func DPA_LoadStream(phdpa *HDPA, pfn PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDPA_LoadStream.Addr(), uintptr(unsafe.Pointer(phdpa)), uintptr(pfn), uintptr(unsafe.Pointer(pstream)), uintptr(unsafe.Pointer(pvInstData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DPA_Merge calls COMCTL32!DPA_Merge.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_merge
 // Minimum OS: windows6.0.6000.
-func DPA_Merge(hdpaDest HDPA, hdpaSrc HDPA, dwFlags uint32, pfnCompare PFNDACOMPARE, pfnMerge PFNDPAMERGE, lParam foundation.LPARAM) foundation.BOOL {
+func DPA_Merge(hdpaDest HDPA, hdpaSrc HDPA, dwFlags uint32, pfnCompare PFNDACOMPARE, pfnMerge PFNDPAMERGE, lParam foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procDPA_Merge.Addr(), uintptr(hdpaDest), uintptr(hdpaSrc), uintptr(dwFlags), uintptr(pfnCompare), uintptr(pfnMerge), uintptr(lParam))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DPA_SaveStream calls COMCTL32!DPA_SaveStream.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_savestream
 // Minimum OS: windows6.0.6000.
-func DPA_SaveStream(hdpa HDPA, pfn PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) foundation.HRESULT {
+func DPA_SaveStream(hdpa HDPA, pfn PFNDPASTREAM, pstream *systemcom.IStream, pvInstData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDPA_SaveStream.Addr(), uintptr(hdpa), uintptr(pfn), uintptr(unsafe.Pointer(pstream)), uintptr(unsafe.Pointer(pvInstData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DPA_Search calls COMCTL32!DPA_Search.
@@ -561,17 +562,17 @@ func DPA_Search(hdpa HDPA, pFind unsafe.Pointer, iStart int32, pfnCompare PFNDAC
 // DPA_SetPtr calls COMCTL32!DPA_SetPtr.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_setptr
 // Minimum OS: windows6.0.6000.
-func DPA_SetPtr(hdpa HDPA, i int32, p unsafe.Pointer) foundation.BOOL {
+func DPA_SetPtr(hdpa HDPA, i int32, p unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procDPA_SetPtr.Addr(), uintptr(hdpa), uintptr(i), uintptr(unsafe.Pointer(p)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DPA_Sort calls COMCTL32!DPA_Sort.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dpa_sort
 // Minimum OS: windows6.0.6000.
-func DPA_Sort(hdpa HDPA, pfnCompare PFNDACOMPARE, lParam foundation.LPARAM) foundation.BOOL {
+func DPA_Sort(hdpa HDPA, pfnCompare PFNDACOMPARE, lParam foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procDPA_Sort.Addr(), uintptr(hdpa), uintptr(pfnCompare), uintptr(lParam))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DSA_Clone calls COMCTL32!DSA_Clone.
@@ -593,25 +594,25 @@ func DSA_Create(cbItem int32, cItemGrow int32) HDSA {
 // DSA_DeleteAllItems calls COMCTL32!DSA_DeleteAllItems.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dsa_deleteallitems
 // Minimum OS: windows6.0.6000.
-func DSA_DeleteAllItems(hdsa HDSA) foundation.BOOL {
+func DSA_DeleteAllItems(hdsa HDSA) bool {
 	r1, _, _ := syscall.SyscallN(procDSA_DeleteAllItems.Addr(), uintptr(hdsa))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DSA_DeleteItem calls COMCTL32!DSA_DeleteItem.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dsa_deleteitem
 // Minimum OS: windows6.0.6000.
-func DSA_DeleteItem(hdsa HDSA, i int32) foundation.BOOL {
+func DSA_DeleteItem(hdsa HDSA, i int32) bool {
 	r1, _, _ := syscall.SyscallN(procDSA_DeleteItem.Addr(), uintptr(hdsa), uintptr(i))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DSA_Destroy calls COMCTL32!DSA_Destroy.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dsa_destroy
 // Minimum OS: windows6.0.6000.
-func DSA_Destroy(hdsa HDSA) foundation.BOOL {
+func DSA_Destroy(hdsa HDSA) bool {
 	r1, _, _ := syscall.SyscallN(procDSA_Destroy.Addr(), uintptr(hdsa))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DSA_DestroyCallback calls COMCTL32!DSA_DestroyCallback.
@@ -631,9 +632,9 @@ func DSA_EnumCallback(hdsa HDSA, pfnCB PFNDAENUMCALLBACK, pData unsafe.Pointer) 
 // DSA_GetItem calls COMCTL32!DSA_GetItem.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dsa_getitem
 // Minimum OS: windows6.0.6000.
-func DSA_GetItem(hdsa HDSA, i int32, pitem unsafe.Pointer) foundation.BOOL {
+func DSA_GetItem(hdsa HDSA, i int32, pitem unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procDSA_GetItem.Addr(), uintptr(hdsa), uintptr(i), uintptr(unsafe.Pointer(pitem)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DSA_GetItemPtr calls COMCTL32!DSA_GetItemPtr.
@@ -663,25 +664,33 @@ func DSA_InsertItem(hdsa HDSA, i int32, pitem unsafe.Pointer) int32 {
 // DSA_SetItem calls COMCTL32!DSA_SetItem.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dsa_setitem
 // Minimum OS: windows6.0.6000.
-func DSA_SetItem(hdsa HDSA, i int32, pitem unsafe.Pointer) foundation.BOOL {
+func DSA_SetItem(hdsa HDSA, i int32, pitem unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procDSA_SetItem.Addr(), uintptr(hdsa), uintptr(i), uintptr(unsafe.Pointer(pitem)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DSA_Sort calls COMCTL32!DSA_Sort.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-dsa_sort
 // Minimum OS: windows6.0.6000.
-func DSA_Sort(pdsa HDSA, pfnCompare PFNDACOMPARE, lParam foundation.LPARAM) foundation.BOOL {
+func DSA_Sort(pdsa HDSA, pfnCompare PFNDACOMPARE, lParam foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procDSA_Sort.Addr(), uintptr(pdsa), uintptr(pfnCompare), uintptr(lParam))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DestroyPropertySheetPage calls COMCTL32!DestroyPropertySheetPage.
 // https://learn.microsoft.com/windows/win32/api/prsht/nf-prsht-destroypropertysheetpage
 // Minimum OS: windows6.0.6000.
-func DestroyPropertySheetPage(param0 HPROPSHEETPAGE) foundation.BOOL {
+func DestroyPropertySheetPage(param0 HPROPSHEETPAGE) bool {
 	r1, _, _ := syscall.SyscallN(procDestroyPropertySheetPage.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// DlgDirList calls USER32!DlgDirListW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dlgdirlistw
+// Minimum OS: windows6.0.6000.
+func DlgDirList(hDlg foundation.HWND, lpPathSpec foundation.PWSTR, nIDListBox int32, nIDStaticPath int32, uFileType DLG_DIR_LIST_FILE_TYPE) int32 {
+	r1, _, _ := syscall.SyscallN(procDlgDirList.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(lpPathSpec)), uintptr(nIDListBox), uintptr(nIDStaticPath), uintptr(uFileType))
+	return int32(r1)
 }
 
 // DlgDirListA calls USER32!DlgDirListA.
@@ -690,6 +699,17 @@ func DestroyPropertySheetPage(param0 HPROPSHEETPAGE) foundation.BOOL {
 func DlgDirListA(hDlg foundation.HWND, lpPathSpec foundation.PSTR, nIDListBox int32, nIDStaticPath int32, uFileType DLG_DIR_LIST_FILE_TYPE) int32 {
 	r1, _, _ := syscall.SyscallN(procDlgDirListA.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(lpPathSpec)), uintptr(nIDListBox), uintptr(nIDStaticPath), uintptr(uFileType))
 	return int32(r1)
+}
+
+// DlgDirListComboBox calls USER32!DlgDirListComboBoxW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dlgdirlistcomboboxw
+// Minimum OS: windows6.0.6000.
+func DlgDirListComboBox(hDlg foundation.HWND, lpPathSpec foundation.PWSTR, nIDComboBox int32, nIDStaticPath int32, uFiletype DLG_DIR_LIST_FILE_TYPE) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procDlgDirListComboBox.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(lpPathSpec)), uintptr(nIDComboBox), uintptr(nIDStaticPath), uintptr(uFiletype))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
 // DlgDirListComboBoxA calls USER32!DlgDirListComboBoxA.
@@ -703,23 +723,15 @@ func DlgDirListComboBoxA(hDlg foundation.HWND, lpPathSpec foundation.PSTR, nIDCo
 	return int32(r1), nil
 }
 
-// DlgDirListComboBoxW calls USER32!DlgDirListComboBoxW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dlgdirlistcomboboxw
+// DlgDirSelectComboBoxEx calls USER32!DlgDirSelectComboBoxExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dlgdirselectcomboboxexw
 // Minimum OS: windows6.0.6000.
-func DlgDirListComboBoxW(hDlg foundation.HWND, lpPathSpec foundation.PWSTR, nIDComboBox int32, nIDStaticPath int32, uFiletype DLG_DIR_LIST_FILE_TYPE) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procDlgDirListComboBoxW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(lpPathSpec)), uintptr(nIDComboBox), uintptr(nIDStaticPath), uintptr(uFiletype))
-	if e1 != 0 {
-		return int32(r1), e1
+func DlgDirSelectComboBoxEx(hwndDlg foundation.HWND, lpString foundation.PWSTR, cchOut int32, idComboBox int32) error {
+	r1, _, e1 := syscall.SyscallN(procDlgDirSelectComboBoxEx.Addr(), uintptr(hwndDlg), uintptr(unsafe.Pointer(lpString)), uintptr(cchOut), uintptr(idComboBox))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return int32(r1), nil
-}
-
-// DlgDirListW calls USER32!DlgDirListW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dlgdirlistw
-// Minimum OS: windows6.0.6000.
-func DlgDirListW(hDlg foundation.HWND, lpPathSpec foundation.PWSTR, nIDListBox int32, nIDStaticPath int32, uFileType DLG_DIR_LIST_FILE_TYPE) int32 {
-	r1, _, _ := syscall.SyscallN(procDlgDirListW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(lpPathSpec)), uintptr(nIDListBox), uintptr(nIDStaticPath), uintptr(uFileType))
-	return int32(r1)
+	return nil
 }
 
 // DlgDirSelectComboBoxExA calls USER32!DlgDirSelectComboBoxExA.
@@ -733,11 +745,11 @@ func DlgDirSelectComboBoxExA(hwndDlg foundation.HWND, lpString foundation.PSTR, 
 	return nil
 }
 
-// DlgDirSelectComboBoxExW calls USER32!DlgDirSelectComboBoxExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dlgdirselectcomboboxexw
+// DlgDirSelectEx calls USER32!DlgDirSelectExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dlgdirselectexw
 // Minimum OS: windows6.0.6000.
-func DlgDirSelectComboBoxExW(hwndDlg foundation.HWND, lpString foundation.PWSTR, cchOut int32, idComboBox int32) error {
-	r1, _, e1 := syscall.SyscallN(procDlgDirSelectComboBoxExW.Addr(), uintptr(hwndDlg), uintptr(unsafe.Pointer(lpString)), uintptr(cchOut), uintptr(idComboBox))
+func DlgDirSelectEx(hwndDlg foundation.HWND, lpString foundation.PWSTR, chCount int32, idListBox int32) error {
+	r1, _, e1 := syscall.SyscallN(procDlgDirSelectEx.Addr(), uintptr(hwndDlg), uintptr(unsafe.Pointer(lpString)), uintptr(chCount), uintptr(idListBox))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -755,17 +767,6 @@ func DlgDirSelectExA(hwndDlg foundation.HWND, lpString foundation.PSTR, chCount 
 	return nil
 }
 
-// DlgDirSelectExW calls USER32!DlgDirSelectExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dlgdirselectexw
-// Minimum OS: windows6.0.6000.
-func DlgDirSelectExW(hwndDlg foundation.HWND, lpString foundation.PWSTR, chCount int32, idListBox int32) error {
-	r1, _, e1 := syscall.SyscallN(procDlgDirSelectExW.Addr(), uintptr(hwndDlg), uintptr(unsafe.Pointer(lpString)), uintptr(chCount), uintptr(idListBox))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // DrawInsert calls COMCTL32!DrawInsert.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-drawinsert
 // Minimum OS: windows6.0.6000.
@@ -776,9 +777,18 @@ func DrawInsert(handParent foundation.HWND, hLB foundation.HWND, nItem int32) {
 // DrawShadowText calls COMCTL32!DrawShadowText.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-drawshadowtext
 // Minimum OS: windows6.0.6000.
-func DrawShadowText(hdc graphicsgdi.HDC, pszText foundation.PWSTR, cch uint32, prc *foundation.RECT, dwFlags uint32, crText foundation.COLORREF, crShadow foundation.COLORREF, ixOffset int32, iyOffset int32) int32 {
-	r1, _, _ := syscall.SyscallN(procDrawShadowText.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pszText)), uintptr(cch), uintptr(unsafe.Pointer(prc)), uintptr(dwFlags), uintptr(crText), uintptr(crShadow), uintptr(ixOffset), uintptr(iyOffset))
+func DrawShadowText(hdc graphicsgdi.HDC, pszText string, cch uint32, prc *foundation.RECT, dwFlags uint32, crText foundation.COLORREF, crShadow foundation.COLORREF, ixOffset int32, iyOffset int32) int32 {
+	_pszText := win32.UTF16Ptr(pszText)
+	r1, _, _ := syscall.SyscallN(procDrawShadowText.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_pszText)), uintptr(cch), uintptr(unsafe.Pointer(prc)), uintptr(dwFlags), uintptr(crText), uintptr(crShadow), uintptr(ixOffset), uintptr(iyOffset))
 	return int32(r1)
+}
+
+// DrawStatusText calls COMCTL32!DrawStatusTextW.
+// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-drawstatustextw
+// Minimum OS: windows6.0.6000.
+func DrawStatusText(hDC graphicsgdi.HDC, lprc *foundation.RECT, pszText string, uFlags uint32) {
+	_pszText := win32.UTF16Ptr(pszText)
+	syscall.SyscallN(procDrawStatusText.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(_pszText)), uintptr(uFlags))
 }
 
 // DrawStatusTextA calls COMCTL32!DrawStatusTextA.
@@ -788,75 +798,70 @@ func DrawStatusTextA(hDC graphicsgdi.HDC, lprc *foundation.RECT, pszText foundat
 	syscall.SyscallN(procDrawStatusTextA.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(pszText)), uintptr(uFlags))
 }
 
-// DrawStatusTextW calls COMCTL32!DrawStatusTextW.
-// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-drawstatustextw
-// Minimum OS: windows6.0.6000.
-func DrawStatusTextW(hDC graphicsgdi.HDC, lprc *foundation.RECT, pszText foundation.PWSTR, uFlags uint32) {
-	syscall.SyscallN(procDrawStatusTextW.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(pszText)), uintptr(uFlags))
-}
-
 // DrawThemeBackground calls UXTHEME!DrawThemeBackground.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-drawthemebackground
 // Minimum OS: windows6.0.6000.
-func DrawThemeBackground(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, pClipRect *foundation.RECT) foundation.HRESULT {
+func DrawThemeBackground(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, pClipRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeBackground.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pRect)), uintptr(unsafe.Pointer(pClipRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawThemeBackgroundEx calls UXTHEME!DrawThemeBackgroundEx.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-drawthemebackgroundex
 // Minimum OS: windows6.0.6000.
-func DrawThemeBackgroundEx(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, pOptions *DTBGOPTS) foundation.HRESULT {
+func DrawThemeBackgroundEx(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, pOptions *DTBGOPTS) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeBackgroundEx.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pRect)), uintptr(unsafe.Pointer(pOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawThemeEdge calls UxTheme!DrawThemeEdge.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-drawthemeedge
 // Minimum OS: windows6.0.6000.
-func DrawThemeEdge(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pDestRect *foundation.RECT, uEdge graphicsgdi.DRAWEDGE_FLAGS, uFlags graphicsgdi.DRAW_EDGE_FLAGS, pContentRect *foundation.RECT) foundation.HRESULT {
+func DrawThemeEdge(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pDestRect *foundation.RECT, uEdge graphicsgdi.DRAWEDGE_FLAGS, uFlags graphicsgdi.DRAW_EDGE_FLAGS, pContentRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeEdge.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pDestRect)), uintptr(uEdge), uintptr(uFlags), uintptr(unsafe.Pointer(pContentRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawThemeIcon calls UxTheme!DrawThemeIcon.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-drawthemeicon
 // Minimum OS: windows6.0.6000.
-func DrawThemeIcon(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, himl HIMAGELIST, iImageIndex int32) foundation.HRESULT {
+func DrawThemeIcon(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, himl HIMAGELIST, iImageIndex int32) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeIcon.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pRect)), uintptr(himl), uintptr(iImageIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawThemeParentBackground calls UXTHEME!DrawThemeParentBackground.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-drawthemeparentbackground
 // Minimum OS: windows6.0.6000.
-func DrawThemeParentBackground(hwnd foundation.HWND, hdc graphicsgdi.HDC, prc *foundation.RECT) foundation.HRESULT {
+func DrawThemeParentBackground(hwnd foundation.HWND, hdc graphicsgdi.HDC, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeParentBackground.Addr(), uintptr(hwnd), uintptr(hdc), uintptr(unsafe.Pointer(prc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawThemeParentBackgroundEx calls UxTheme!DrawThemeParentBackgroundEx.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-drawthemeparentbackgroundex
 // Minimum OS: windows6.0.6000.
-func DrawThemeParentBackgroundEx(hwnd foundation.HWND, hdc graphicsgdi.HDC, dwFlags DRAW_THEME_PARENT_BACKGROUND_FLAGS, prc *foundation.RECT) foundation.HRESULT {
+func DrawThemeParentBackgroundEx(hwnd foundation.HWND, hdc graphicsgdi.HDC, dwFlags DRAW_THEME_PARENT_BACKGROUND_FLAGS, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procDrawThemeParentBackgroundEx.Addr(), uintptr(hwnd), uintptr(hdc), uintptr(dwFlags), uintptr(unsafe.Pointer(prc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawThemeText calls UxTheme!DrawThemeText.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-drawthemetext
 // Minimum OS: windows6.0.6000.
-func DrawThemeText(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pszText foundation.PWSTR, cchText int32, dwTextFlags graphicsgdi.DRAW_TEXT_FORMAT, dwTextFlags2 uint32, pRect *foundation.RECT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDrawThemeText.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pszText)), uintptr(cchText), uintptr(dwTextFlags), uintptr(dwTextFlags2), uintptr(unsafe.Pointer(pRect)))
-	return foundation.HRESULT(r1)
+func DrawThemeText(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pszText string, cchText int32, dwTextFlags graphicsgdi.DRAW_TEXT_FORMAT, dwTextFlags2 uint32, pRect *foundation.RECT) error {
+	_pszText := win32.UTF16Ptr(pszText)
+	r1, _, _ := syscall.SyscallN(procDrawThemeText.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(_pszText)), uintptr(cchText), uintptr(dwTextFlags), uintptr(dwTextFlags2), uintptr(unsafe.Pointer(pRect)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawThemeTextEx calls UXTHEME!DrawThemeTextEx.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-drawthemetextex
 // Minimum OS: windows6.0.6000.
-func DrawThemeTextEx(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pszText foundation.PWSTR, cchText int32, dwTextFlags graphicsgdi.DRAW_TEXT_FORMAT, pRect *foundation.RECT, pOptions *DTTOPTS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDrawThemeTextEx.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pszText)), uintptr(cchText), uintptr(dwTextFlags), uintptr(unsafe.Pointer(pRect)), uintptr(unsafe.Pointer(pOptions)))
-	return foundation.HRESULT(r1)
+func DrawThemeTextEx(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pszText string, cchText int32, dwTextFlags graphicsgdi.DRAW_TEXT_FORMAT, pRect *foundation.RECT, pOptions *DTTOPTS) error {
+	_pszText := win32.UTF16Ptr(pszText)
+	r1, _, _ := syscall.SyscallN(procDrawThemeTextEx.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(_pszText)), uintptr(cchText), uintptr(dwTextFlags), uintptr(unsafe.Pointer(pRect)), uintptr(unsafe.Pointer(pOptions)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableScrollBar calls USER32!EnableScrollBar.
@@ -873,48 +878,56 @@ func EnableScrollBar(hWnd foundation.HWND, wSBflags uint32, wArrows ENABLE_SCROL
 // EnableThemeDialogTexture calls UxTheme!EnableThemeDialogTexture.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-enablethemedialogtexture
 // Minimum OS: windows6.0.6000.
-func EnableThemeDialogTexture(hwnd foundation.HWND, dwFlags uint32) foundation.HRESULT {
+func EnableThemeDialogTexture(hwnd foundation.HWND, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procEnableThemeDialogTexture.Addr(), uintptr(hwnd), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableTheming calls UxTheme!EnableTheming.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-enabletheming
 // Minimum OS: windows6.0.6000.
-func EnableTheming(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEnableTheming.Addr(), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func EnableTheming(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(procEnableTheming.Addr(), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndBufferedAnimation calls UxTheme!EndBufferedAnimation.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-endbufferedanimation
 // Minimum OS: windows6.0.6000.
-func EndBufferedAnimation(hbpAnimation uintptr, fUpdateTarget foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEndBufferedAnimation.Addr(), uintptr(hbpAnimation), uintptr(fUpdateTarget))
-	return foundation.HRESULT(r1)
+func EndBufferedAnimation(hbpAnimation uintptr, fUpdateTarget bool) error {
+	_fUpdateTarget := win32.Bool32(fUpdateTarget)
+	r1, _, _ := syscall.SyscallN(procEndBufferedAnimation.Addr(), uintptr(hbpAnimation), uintptr(_fUpdateTarget))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndBufferedPaint calls UXTHEME!EndBufferedPaint.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-endbufferedpaint
 // Minimum OS: windows6.0.6000.
-func EndBufferedPaint(hBufferedPaint uintptr, fUpdateTarget foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEndBufferedPaint.Addr(), uintptr(hBufferedPaint), uintptr(fUpdateTarget))
-	return foundation.HRESULT(r1)
+func EndBufferedPaint(hBufferedPaint uintptr, fUpdateTarget bool) error {
+	_fUpdateTarget := win32.Bool32(fUpdateTarget)
+	r1, _, _ := syscall.SyscallN(procEndBufferedPaint.Addr(), uintptr(hBufferedPaint), uintptr(_fUpdateTarget))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndPanningFeedback calls UxTheme!EndPanningFeedback.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-endpanningfeedback
 // Minimum OS: windows6.1.
-func EndPanningFeedback(hwnd foundation.HWND, fAnimateBack foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEndPanningFeedback.Addr(), uintptr(hwnd), uintptr(fAnimateBack))
-	return foundation.BOOL(r1)
+func EndPanningFeedback(hwnd foundation.HWND, fAnimateBack bool) bool {
+	_fAnimateBack := win32.Bool32(fAnimateBack)
+	r1, _, _ := syscall.SyscallN(procEndPanningFeedback.Addr(), uintptr(hwnd), uintptr(_fAnimateBack))
+	return r1 != 0
 }
 
 // EvaluateProximityToPolygon calls USER32!EvaluateProximityToPolygon.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-evaluateproximitytopolygon
 // Minimum OS: windows8.0.
-func EvaluateProximityToPolygon(numVertices uint32, controlPolygon *foundation.POINT, pHitTestingInput *TOUCH_HIT_TESTING_INPUT, pProximityEval *TOUCH_HIT_TESTING_PROXIMITY_EVALUATION) error {
-	r1, _, e1 := syscall.SyscallN(procEvaluateProximityToPolygon.Addr(), uintptr(numVertices), uintptr(unsafe.Pointer(controlPolygon)), uintptr(unsafe.Pointer(pHitTestingInput)), uintptr(unsafe.Pointer(pProximityEval)))
+func EvaluateProximityToPolygon(controlPolygon []foundation.POINT, pHitTestingInput *TOUCH_HIT_TESTING_INPUT, pProximityEval *TOUCH_HIT_TESTING_PROXIMITY_EVALUATION) error {
+	var _controlPolygon *foundation.POINT
+	if len(controlPolygon) > 0 {
+		_controlPolygon = &controlPolygon[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEvaluateProximityToPolygon.Addr(), uintptr(len(controlPolygon)), uintptr(unsafe.Pointer(_controlPolygon)), uintptr(unsafe.Pointer(pHitTestingInput)), uintptr(unsafe.Pointer(pProximityEval)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -935,17 +948,17 @@ func EvaluateProximityToRect(controlBoundingBox *foundation.RECT, pHitTestingInp
 // FlatSB_EnableScrollBar calls COMCTL32!FlatSB_EnableScrollBar.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_enablescrollbar
 // Minimum OS: windows6.0.6000.
-func FlatSB_EnableScrollBar(param0 foundation.HWND, param1 int32, param2 uint32) foundation.BOOL {
+func FlatSB_EnableScrollBar(param0 foundation.HWND, param1 int32, param2 uint32) bool {
 	r1, _, _ := syscall.SyscallN(procFlatSB_EnableScrollBar.Addr(), uintptr(param0), uintptr(param1), uintptr(param2))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FlatSB_GetScrollInfo calls COMCTL32!FlatSB_GetScrollInfo.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_getscrollinfo
 // Minimum OS: windows6.0.6000.
-func FlatSB_GetScrollInfo(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, param2 *uiwindowsandmessaging.SCROLLINFO) foundation.BOOL {
+func FlatSB_GetScrollInfo(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, param2 *uiwindowsandmessaging.SCROLLINFO) bool {
 	r1, _, _ := syscall.SyscallN(procFlatSB_GetScrollInfo.Addr(), uintptr(param0), uintptr(code), uintptr(unsafe.Pointer(param2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FlatSB_GetScrollPos calls COMCTL32!FlatSB_GetScrollPos.
@@ -959,65 +972,70 @@ func FlatSB_GetScrollPos(param0 foundation.HWND, code uiwindowsandmessaging.SCRO
 // FlatSB_GetScrollProp calls COMCTL32!FlatSB_GetScrollProp.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_getscrollprop
 // Minimum OS: windows6.0.6000.
-func FlatSB_GetScrollProp(param0 foundation.HWND, propIndex WSB_PROP, param2 *int32) foundation.BOOL {
+func FlatSB_GetScrollProp(param0 foundation.HWND, propIndex WSB_PROP, param2 *int32) bool {
 	r1, _, _ := syscall.SyscallN(procFlatSB_GetScrollProp.Addr(), uintptr(param0), uintptr(propIndex), uintptr(unsafe.Pointer(param2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FlatSB_GetScrollRange calls COMCTL32!FlatSB_GetScrollRange.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_getscrollrange
 // Minimum OS: windows6.0.6000.
-func FlatSB_GetScrollRange(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, param2 *int32, param3 *int32) foundation.BOOL {
+func FlatSB_GetScrollRange(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, param2 *int32, param3 *int32) bool {
 	r1, _, _ := syscall.SyscallN(procFlatSB_GetScrollRange.Addr(), uintptr(param0), uintptr(code), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FlatSB_SetScrollInfo calls COMCTL32!FlatSB_SetScrollInfo.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_setscrollinfo
 // Minimum OS: windows6.0.6000.
-func FlatSB_SetScrollInfo(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, psi *uiwindowsandmessaging.SCROLLINFO, fRedraw foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procFlatSB_SetScrollInfo.Addr(), uintptr(param0), uintptr(code), uintptr(unsafe.Pointer(psi)), uintptr(fRedraw))
+func FlatSB_SetScrollInfo(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, psi *uiwindowsandmessaging.SCROLLINFO, fRedraw bool) int32 {
+	_fRedraw := win32.Bool32(fRedraw)
+	r1, _, _ := syscall.SyscallN(procFlatSB_SetScrollInfo.Addr(), uintptr(param0), uintptr(code), uintptr(unsafe.Pointer(psi)), uintptr(_fRedraw))
 	return int32(r1)
 }
 
 // FlatSB_SetScrollPos calls COMCTL32!FlatSB_SetScrollPos.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_setscrollpos
 // Minimum OS: windows6.0.6000.
-func FlatSB_SetScrollPos(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, pos int32, fRedraw foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procFlatSB_SetScrollPos.Addr(), uintptr(param0), uintptr(code), uintptr(pos), uintptr(fRedraw))
+func FlatSB_SetScrollPos(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, pos int32, fRedraw bool) int32 {
+	_fRedraw := win32.Bool32(fRedraw)
+	r1, _, _ := syscall.SyscallN(procFlatSB_SetScrollPos.Addr(), uintptr(param0), uintptr(code), uintptr(pos), uintptr(_fRedraw))
 	return int32(r1)
 }
 
 // FlatSB_SetScrollProp calls COMCTL32!FlatSB_SetScrollProp.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_setscrollprop
 // Minimum OS: windows6.0.6000.
-func FlatSB_SetScrollProp(param0 foundation.HWND, index uint32, newValue uintptr, param3 foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFlatSB_SetScrollProp.Addr(), uintptr(param0), uintptr(index), uintptr(newValue), uintptr(param3))
-	return foundation.BOOL(r1)
+func FlatSB_SetScrollProp(param0 foundation.HWND, index uint32, newValue uintptr, param3 bool) bool {
+	_param3 := win32.Bool32(param3)
+	r1, _, _ := syscall.SyscallN(procFlatSB_SetScrollProp.Addr(), uintptr(param0), uintptr(index), uintptr(newValue), uintptr(_param3))
+	return r1 != 0
 }
 
 // FlatSB_SetScrollRange calls COMCTL32!FlatSB_SetScrollRange.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_setscrollrange
 // Minimum OS: windows6.0.6000.
-func FlatSB_SetScrollRange(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, min_ int32, max_ int32, fRedraw foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procFlatSB_SetScrollRange.Addr(), uintptr(param0), uintptr(code), uintptr(min_), uintptr(max_), uintptr(fRedraw))
+func FlatSB_SetScrollRange(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, min_ int32, max_ int32, fRedraw bool) int32 {
+	_fRedraw := win32.Bool32(fRedraw)
+	r1, _, _ := syscall.SyscallN(procFlatSB_SetScrollRange.Addr(), uintptr(param0), uintptr(code), uintptr(min_), uintptr(max_), uintptr(_fRedraw))
 	return int32(r1)
 }
 
 // FlatSB_ShowScrollBar calls COMCTL32!FlatSB_ShowScrollBar.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_showscrollbar
 // Minimum OS: windows6.0.6000.
-func FlatSB_ShowScrollBar(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, param2 foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFlatSB_ShowScrollBar.Addr(), uintptr(param0), uintptr(code), uintptr(param2))
-	return foundation.BOOL(r1)
+func FlatSB_ShowScrollBar(param0 foundation.HWND, code uiwindowsandmessaging.SCROLLBAR_CONSTANTS, param2 bool) bool {
+	_param2 := win32.Bool32(param2)
+	r1, _, _ := syscall.SyscallN(procFlatSB_ShowScrollBar.Addr(), uintptr(param0), uintptr(code), uintptr(_param2))
+	return r1 != 0
 }
 
 // GetBufferedPaintBits calls UXTHEME!GetBufferedPaintBits.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getbufferedpaintbits
 // Minimum OS: windows6.0.6000.
-func GetBufferedPaintBits(hBufferedPaint uintptr, ppbBuffer **graphicsgdi.RGBQUAD, pcxRow *int32) foundation.HRESULT {
+func GetBufferedPaintBits(hBufferedPaint uintptr, ppbBuffer **graphicsgdi.RGBQUAD, pcxRow *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetBufferedPaintBits.Addr(), uintptr(hBufferedPaint), uintptr(unsafe.Pointer(ppbBuffer)), uintptr(unsafe.Pointer(pcxRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferedPaintDC calls UxTheme!GetBufferedPaintDC.
@@ -1039,9 +1057,9 @@ func GetBufferedPaintTargetDC(hBufferedPaint uintptr) graphicsgdi.HDC {
 // GetBufferedPaintTargetRect calls UxTheme!GetBufferedPaintTargetRect.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getbufferedpainttargetrect
 // Minimum OS: windows6.0.6000.
-func GetBufferedPaintTargetRect(hBufferedPaint uintptr, prc *foundation.RECT) foundation.HRESULT {
+func GetBufferedPaintTargetRect(hBufferedPaint uintptr, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procGetBufferedPaintTargetRect.Addr(), uintptr(hBufferedPaint), uintptr(unsafe.Pointer(prc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetComboBoxInfo calls USER32!GetComboBoxInfo.
@@ -1058,9 +1076,9 @@ func GetComboBoxInfo(hwndCombo foundation.HWND, pcbi *COMBOBOXINFO) error {
 // GetCurrentThemeName calls UXTHEME!GetCurrentThemeName.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getcurrentthemename
 // Minimum OS: windows6.0.6000.
-func GetCurrentThemeName(pszThemeFileName foundation.PWSTR, cchMaxNameChars int32, pszColorBuff foundation.PWSTR, cchMaxColorChars int32, pszSizeBuff foundation.PWSTR, cchMaxSizeChars int32) foundation.HRESULT {
+func GetCurrentThemeName(pszThemeFileName foundation.PWSTR, cchMaxNameChars int32, pszColorBuff foundation.PWSTR, cchMaxColorChars int32, pszSizeBuff foundation.PWSTR, cchMaxSizeChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetCurrentThemeName.Addr(), uintptr(unsafe.Pointer(pszThemeFileName)), uintptr(cchMaxNameChars), uintptr(unsafe.Pointer(pszColorBuff)), uintptr(cchMaxColorChars), uintptr(unsafe.Pointer(pszSizeBuff)), uintptr(cchMaxSizeChars))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffectiveClientRect calls COMCTL32!GetEffectiveClientRect.
@@ -1089,17 +1107,17 @@ func GetMUILanguage() uint16 {
 // GetThemeAnimationProperty calls UXTHEME!GetThemeAnimationProperty.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeanimationproperty
 // Minimum OS: windows8.0.
-func GetThemeAnimationProperty(hTheme HTHEME, iStoryboardId int32, iTargetId int32, eProperty TA_PROPERTY, pvProperty unsafe.Pointer, cbSize uint32, pcbSizeOut *uint32) foundation.HRESULT {
+func GetThemeAnimationProperty(hTheme HTHEME, iStoryboardId int32, iTargetId int32, eProperty TA_PROPERTY, pvProperty unsafe.Pointer, cbSize uint32, pcbSizeOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeAnimationProperty.Addr(), uintptr(hTheme), uintptr(iStoryboardId), uintptr(iTargetId), uintptr(eProperty), uintptr(unsafe.Pointer(pvProperty)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbSizeOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeAnimationTransform calls UXTHEME!GetThemeAnimationTransform.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeanimationtransform
 // Minimum OS: windows8.0.
-func GetThemeAnimationTransform(hTheme HTHEME, iStoryboardId int32, iTargetId int32, dwTransformIndex uint32, pTransform *TA_TRANSFORM, cbSize uint32, pcbSizeOut *uint32) foundation.HRESULT {
+func GetThemeAnimationTransform(hTheme HTHEME, iStoryboardId int32, iTargetId int32, dwTransformIndex uint32, pTransform *TA_TRANSFORM, cbSize uint32, pcbSizeOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeAnimationTransform.Addr(), uintptr(hTheme), uintptr(iStoryboardId), uintptr(iTargetId), uintptr(dwTransformIndex), uintptr(unsafe.Pointer(pTransform)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbSizeOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeAppProperties calls UXTHEME!GetThemeAppProperties.
@@ -1113,169 +1131,171 @@ func GetThemeAppProperties() SET_THEME_APP_PROPERTIES_FLAGS {
 // GetThemeBackgroundContentRect calls UXTHEME!GetThemeBackgroundContentRect.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemebackgroundcontentrect
 // Minimum OS: windows6.0.6000.
-func GetThemeBackgroundContentRect(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pBoundingRect *foundation.RECT, pContentRect *foundation.RECT) foundation.HRESULT {
+func GetThemeBackgroundContentRect(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pBoundingRect *foundation.RECT, pContentRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBackgroundContentRect.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pBoundingRect)), uintptr(unsafe.Pointer(pContentRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeBackgroundExtent calls UXTHEME!GetThemeBackgroundExtent.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemebackgroundextent
 // Minimum OS: windows6.0.6000.
-func GetThemeBackgroundExtent(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pContentRect *foundation.RECT, pExtentRect *foundation.RECT) foundation.HRESULT {
+func GetThemeBackgroundExtent(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pContentRect *foundation.RECT, pExtentRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBackgroundExtent.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pContentRect)), uintptr(unsafe.Pointer(pExtentRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeBackgroundRegion calls UxTheme!GetThemeBackgroundRegion.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemebackgroundregion
 // Minimum OS: windows6.0.6000.
-func GetThemeBackgroundRegion(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, pRegion *graphicsgdi.HRGN) foundation.HRESULT {
+func GetThemeBackgroundRegion(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pRect *foundation.RECT, pRegion *graphicsgdi.HRGN) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBackgroundRegion.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pRect)), uintptr(unsafe.Pointer(pRegion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeBitmap calls UXTHEME!GetThemeBitmap.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemebitmap
 // Minimum OS: windows6.0.6000.
-func GetThemeBitmap(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, dwFlags GET_THEME_BITMAP_FLAGS, phBitmap *graphicsgdi.HBITMAP) foundation.HRESULT {
+func GetThemeBitmap(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, dwFlags GET_THEME_BITMAP_FLAGS, phBitmap *graphicsgdi.HBITMAP) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBitmap.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(dwFlags), uintptr(unsafe.Pointer(phBitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeBool calls UxTheme!GetThemeBool.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemebool
 // Minimum OS: windows6.0.6000.
-func GetThemeBool(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pfVal *foundation.BOOL) foundation.HRESULT {
+func GetThemeBool(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pfVal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBool.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pfVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeColor calls UXTHEME!GetThemeColor.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemecolor
 // Minimum OS: windows6.0.6000.
-func GetThemeColor(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pColor *foundation.COLORREF) foundation.HRESULT {
+func GetThemeColor(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pColor *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeColor.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pColor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeDocumentationProperty calls UxTheme!GetThemeDocumentationProperty.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemedocumentationproperty
 // Minimum OS: windows6.0.6000.
-func GetThemeDocumentationProperty(pszThemeName foundation.PWSTR, pszPropertyName foundation.PWSTR, pszValueBuff foundation.PWSTR, cchMaxValChars int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetThemeDocumentationProperty.Addr(), uintptr(unsafe.Pointer(pszThemeName)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(unsafe.Pointer(pszValueBuff)), uintptr(cchMaxValChars))
-	return foundation.HRESULT(r1)
+func GetThemeDocumentationProperty(pszThemeName string, pszPropertyName string, pszValueBuff foundation.PWSTR, cchMaxValChars int32) error {
+	_pszThemeName := win32.UTF16Ptr(pszThemeName)
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	r1, _, _ := syscall.SyscallN(procGetThemeDocumentationProperty.Addr(), uintptr(unsafe.Pointer(_pszThemeName)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszValueBuff)), uintptr(cchMaxValChars))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeEnumValue calls UXTHEME!GetThemeEnumValue.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeenumvalue
 // Minimum OS: windows6.0.6000.
-func GetThemeEnumValue(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, piVal *int32) foundation.HRESULT {
+func GetThemeEnumValue(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, piVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeEnumValue.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(piVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeFilename calls UxTheme!GetThemeFilename.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemefilename
 // Minimum OS: windows6.0.6000.
-func GetThemeFilename(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pszThemeFileName foundation.PWSTR, cchMaxBuffChars int32) foundation.HRESULT {
+func GetThemeFilename(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pszThemeFileName foundation.PWSTR, cchMaxBuffChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeFilename.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pszThemeFileName)), uintptr(cchMaxBuffChars))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeFont calls UXTHEME!GetThemeFont.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemefont
 // Minimum OS: windows6.0.6000.
-func GetThemeFont(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, pFont *graphicsgdi.LOGFONTW) foundation.HRESULT {
+func GetThemeFont(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, pFont *graphicsgdi.LOGFONTW) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeFont.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pFont)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeInt calls UXTHEME!GetThemeInt.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeint
 // Minimum OS: windows6.0.6000.
-func GetThemeInt(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, piVal *int32) foundation.HRESULT {
+func GetThemeInt(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, piVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeInt.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(piVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeIntList calls UxTheme!GetThemeIntList.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeintlist
 // Minimum OS: windows6.0.6000.
-func GetThemeIntList(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pIntList *INTLIST) foundation.HRESULT {
+func GetThemeIntList(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pIntList *INTLIST) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeIntList.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pIntList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeMargins calls UXTHEME!GetThemeMargins.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthememargins
 // Minimum OS: windows6.0.6000.
-func GetThemeMargins(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, prc *foundation.RECT, pMargins *MARGINS) foundation.HRESULT {
+func GetThemeMargins(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, prc *foundation.RECT, pMargins *MARGINS) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeMargins.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(prc)), uintptr(unsafe.Pointer(pMargins)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeMetric calls UXTHEME!GetThemeMetric.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthememetric
 // Minimum OS: windows6.0.6000.
-func GetThemeMetric(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, piVal *int32) foundation.HRESULT {
+func GetThemeMetric(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, piVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeMetric.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(piVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemePartSize calls UXTHEME!GetThemePartSize.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemepartsize
 // Minimum OS: windows6.0.6000.
-func GetThemePartSize(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, prc *foundation.RECT, eSize THEMESIZE, psz *foundation.SIZE) foundation.HRESULT {
+func GetThemePartSize(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, prc *foundation.RECT, eSize THEMESIZE, psz *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(procGetThemePartSize.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(prc)), uintptr(eSize), uintptr(unsafe.Pointer(psz)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemePosition calls UXTHEME!GetThemePosition.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeposition
 // Minimum OS: windows6.0.6000.
-func GetThemePosition(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pPoint *foundation.POINT) foundation.HRESULT {
+func GetThemePosition(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pPoint *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(procGetThemePosition.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pPoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemePropertyOrigin calls UxTheme!GetThemePropertyOrigin.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemepropertyorigin
 // Minimum OS: windows6.0.6000.
-func GetThemePropertyOrigin(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pOrigin *PROPERTYORIGIN) foundation.HRESULT {
+func GetThemePropertyOrigin(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pOrigin *PROPERTYORIGIN) error {
 	r1, _, _ := syscall.SyscallN(procGetThemePropertyOrigin.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pOrigin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeRect calls UXTHEME!GetThemeRect.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemerect
 // Minimum OS: windows6.0.6000.
-func GetThemeRect(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pRect *foundation.RECT) foundation.HRESULT {
+func GetThemeRect(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeRect.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeStream calls UXTHEME!GetThemeStream.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemestream
 // Minimum OS: windows6.0.6000.
-func GetThemeStream(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, ppvStream *unsafe.Pointer, pcbStream *uint32, hInst foundation.HINSTANCE) foundation.HRESULT {
+func GetThemeStream(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, ppvStream *unsafe.Pointer, pcbStream *uint32, hInst foundation.HINSTANCE) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeStream.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(ppvStream)), uintptr(unsafe.Pointer(pcbStream)), uintptr(hInst))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeString calls UxTheme!GetThemeString.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemestring
 // Minimum OS: windows6.0.6000.
-func GetThemeString(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pszBuff foundation.PWSTR, cchMaxBuffChars int32) foundation.HRESULT {
+func GetThemeString(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pszBuff foundation.PWSTR, cchMaxBuffChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeString.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pszBuff)), uintptr(cchMaxBuffChars))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeSysBool calls UxTheme!GetThemeSysBool.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemesysbool
 // Minimum OS: windows6.0.6000.
-func GetThemeSysBool(hTheme HTHEME, iBoolId int32) foundation.BOOL {
+func GetThemeSysBool(hTheme HTHEME, iBoolId int32) bool {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysBool.Addr(), uintptr(hTheme), uintptr(iBoolId))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetThemeSysColor calls UxTheme!GetThemeSysColor.
@@ -1297,17 +1317,17 @@ func GetThemeSysColorBrush(hTheme HTHEME, iColorId int32) graphicsgdi.HBRUSH {
 // GetThemeSysFont calls UxTheme!GetThemeSysFont.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemesysfont
 // Minimum OS: windows6.0.6000.
-func GetThemeSysFont(hTheme HTHEME, iFontId int32, plf *graphicsgdi.LOGFONTW) foundation.HRESULT {
+func GetThemeSysFont(hTheme HTHEME, iFontId int32, plf *graphicsgdi.LOGFONTW) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysFont.Addr(), uintptr(hTheme), uintptr(iFontId), uintptr(unsafe.Pointer(plf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeSysInt calls UxTheme!GetThemeSysInt.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemesysint
 // Minimum OS: windows6.0.6000.
-func GetThemeSysInt(hTheme HTHEME, iIntId int32, piValue *int32) foundation.HRESULT {
+func GetThemeSysInt(hTheme HTHEME, iIntId int32, piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysInt.Addr(), uintptr(hTheme), uintptr(iIntId), uintptr(unsafe.Pointer(piValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeSysSize calls UxTheme!GetThemeSysSize.
@@ -1321,49 +1341,50 @@ func GetThemeSysSize(hTheme HTHEME, iSizeId int32) int32 {
 // GetThemeSysString calls UxTheme!GetThemeSysString.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemesysstring
 // Minimum OS: windows6.0.6000.
-func GetThemeSysString(hTheme HTHEME, iStringId int32, pszStringBuff foundation.PWSTR, cchMaxStringChars int32) foundation.HRESULT {
+func GetThemeSysString(hTheme HTHEME, iStringId int32, pszStringBuff foundation.PWSTR, cchMaxStringChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysString.Addr(), uintptr(hTheme), uintptr(iStringId), uintptr(unsafe.Pointer(pszStringBuff)), uintptr(cchMaxStringChars))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeTextExtent calls UxTheme!GetThemeTextExtent.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemetextextent
 // Minimum OS: windows6.0.6000.
-func GetThemeTextExtent(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pszText foundation.PWSTR, cchCharCount int32, dwTextFlags graphicsgdi.DRAW_TEXT_FORMAT, pBoundingRect *foundation.RECT, pExtentRect *foundation.RECT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetThemeTextExtent.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(pszText)), uintptr(cchCharCount), uintptr(dwTextFlags), uintptr(unsafe.Pointer(pBoundingRect)), uintptr(unsafe.Pointer(pExtentRect)))
-	return foundation.HRESULT(r1)
+func GetThemeTextExtent(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, pszText string, cchCharCount int32, dwTextFlags graphicsgdi.DRAW_TEXT_FORMAT, pBoundingRect *foundation.RECT, pExtentRect *foundation.RECT) error {
+	_pszText := win32.UTF16Ptr(pszText)
+	r1, _, _ := syscall.SyscallN(procGetThemeTextExtent.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(_pszText)), uintptr(cchCharCount), uintptr(dwTextFlags), uintptr(unsafe.Pointer(pBoundingRect)), uintptr(unsafe.Pointer(pExtentRect)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeTextMetrics calls UxTheme!GetThemeTextMetrics.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemetextmetrics
 // Minimum OS: windows6.0.6000.
-func GetThemeTextMetrics(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, ptm *graphicsgdi.TEXTMETRICW) foundation.HRESULT {
+func GetThemeTextMetrics(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, ptm *graphicsgdi.TEXTMETRICW) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeTextMetrics.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(unsafe.Pointer(ptm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeTimingFunction calls UXTHEME!GetThemeTimingFunction.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemetimingfunction
 // Minimum OS: windows8.0.
-func GetThemeTimingFunction(hTheme HTHEME, iTimingFunctionId int32, pTimingFunction *TA_TIMINGFUNCTION, cbSize uint32, pcbSizeOut *uint32) foundation.HRESULT {
+func GetThemeTimingFunction(hTheme HTHEME, iTimingFunctionId int32, pTimingFunction *TA_TIMINGFUNCTION, cbSize uint32, pcbSizeOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeTimingFunction.Addr(), uintptr(hTheme), uintptr(iTimingFunctionId), uintptr(unsafe.Pointer(pTimingFunction)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbSizeOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThemeTransitionDuration calls UxTheme!GetThemeTransitionDuration.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemetransitionduration
 // Minimum OS: windows6.0.6000.
-func GetThemeTransitionDuration(hTheme HTHEME, iPartId int32, iStateIdFrom int32, iStateIdTo int32, iPropId int32, pdwDuration *uint32) foundation.HRESULT {
+func GetThemeTransitionDuration(hTheme HTHEME, iPartId int32, iStateIdFrom int32, iStateIdTo int32, iPropId int32, pdwDuration *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeTransitionDuration.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateIdFrom), uintptr(iStateIdTo), uintptr(iPropId), uintptr(unsafe.Pointer(pdwDuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWindowFeedbackSetting calls USER32!GetWindowFeedbackSetting.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowfeedbacksetting
 // Minimum OS: windows8.0.
-func GetWindowFeedbackSetting(hwnd foundation.HWND, feedback FEEDBACK_TYPE, dwFlags uint32, pSize *uint32, config unsafe.Pointer) foundation.BOOL {
+func GetWindowFeedbackSetting(hwnd foundation.HWND, feedback FEEDBACK_TYPE, dwFlags uint32, pSize *uint32, config unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procGetWindowFeedbackSetting.Addr(), uintptr(hwnd), uintptr(feedback), uintptr(dwFlags), uintptr(unsafe.Pointer(pSize)), uintptr(unsafe.Pointer(config)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetWindowTheme calls UXTHEME!GetWindowTheme.
@@ -1377,9 +1398,9 @@ func GetWindowTheme(hwnd foundation.HWND) HTHEME {
 // HIMAGELIST_QueryInterface calls COMCTL32!HIMAGELIST_QueryInterface.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-himagelist_queryinterface
 // Minimum OS: windows6.0.6000.
-func HIMAGELIST_QueryInterface(himl HIMAGELIST, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func HIMAGELIST_QueryInterface(himl HIMAGELIST, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHIMAGELIST_QueryInterface.Addr(), uintptr(himl), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ImageList_Add calls COMCTL32!ImageList_Add.
@@ -1401,25 +1422,25 @@ func ImageList_AddMasked(himl HIMAGELIST, hbmImage graphicsgdi.HBITMAP, crMask f
 // ImageList_BeginDrag calls COMCTL32!ImageList_BeginDrag.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_begindrag
 // Minimum OS: windows6.0.6000.
-func ImageList_BeginDrag(himlTrack HIMAGELIST, iTrack int32, dxHotspot int32, dyHotspot int32) foundation.BOOL {
+func ImageList_BeginDrag(himlTrack HIMAGELIST, iTrack int32, dxHotspot int32, dyHotspot int32) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_BeginDrag.Addr(), uintptr(himlTrack), uintptr(iTrack), uintptr(dxHotspot), uintptr(dyHotspot))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_CoCreateInstance calls COMCTL32!ImageList_CoCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/commoncontrols/nf-commoncontrols-imagelist_cocreateinstance
 // Minimum OS: windows6.0.6000.
-func ImageList_CoCreateInstance(rclsid *win32.GUID, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func ImageList_CoCreateInstance(rclsid *win32.GUID, punkOuter *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procImageList_CoCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ImageList_Copy calls COMCTL32!ImageList_Copy.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_copy
 // Minimum OS: windows6.0.6000.
-func ImageList_Copy(himlDst HIMAGELIST, iDst int32, himlSrc HIMAGELIST, iSrc int32, uFlags IMAGE_LIST_COPY_FLAGS) foundation.BOOL {
+func ImageList_Copy(himlDst HIMAGELIST, iDst int32, himlSrc HIMAGELIST, iSrc int32, uFlags IMAGE_LIST_COPY_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_Copy.Addr(), uintptr(himlDst), uintptr(iDst), uintptr(himlSrc), uintptr(iSrc), uintptr(uFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_Create calls COMCTL32!ImageList_Create.
@@ -1433,65 +1454,66 @@ func ImageList_Create(cx int32, cy int32, flags IMAGELIST_CREATION_FLAGS, cIniti
 // ImageList_Destroy calls COMCTL32!ImageList_Destroy.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_destroy
 // Minimum OS: windows6.0.6000.
-func ImageList_Destroy(himl HIMAGELIST) foundation.BOOL {
+func ImageList_Destroy(himl HIMAGELIST) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_Destroy.Addr(), uintptr(himl))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_DragEnter calls COMCTL32!ImageList_DragEnter.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_dragenter
 // Minimum OS: windows6.0.6000.
-func ImageList_DragEnter(hwndLock foundation.HWND, x int32, y int32) foundation.BOOL {
+func ImageList_DragEnter(hwndLock foundation.HWND, x int32, y int32) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_DragEnter.Addr(), uintptr(hwndLock), uintptr(x), uintptr(y))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_DragLeave calls COMCTL32!ImageList_DragLeave.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_dragleave
 // Minimum OS: windows6.0.6000.
-func ImageList_DragLeave(hwndLock foundation.HWND) foundation.BOOL {
+func ImageList_DragLeave(hwndLock foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_DragLeave.Addr(), uintptr(hwndLock))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_DragMove calls COMCTL32!ImageList_DragMove.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_dragmove
 // Minimum OS: windows6.0.6000.
-func ImageList_DragMove(x int32, y int32) foundation.BOOL {
+func ImageList_DragMove(x int32, y int32) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_DragMove.Addr(), uintptr(x), uintptr(y))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_DragShowNolock calls COMCTL32!ImageList_DragShowNolock.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_dragshownolock
 // Minimum OS: windows6.0.6000.
-func ImageList_DragShowNolock(fShow foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImageList_DragShowNolock.Addr(), uintptr(fShow))
-	return foundation.BOOL(r1)
+func ImageList_DragShowNolock(fShow bool) bool {
+	_fShow := win32.Bool32(fShow)
+	r1, _, _ := syscall.SyscallN(procImageList_DragShowNolock.Addr(), uintptr(_fShow))
+	return r1 != 0
 }
 
 // ImageList_Draw calls COMCTL32!ImageList_Draw.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_draw
 // Minimum OS: windows6.0.6000.
-func ImageList_Draw(himl HIMAGELIST, i int32, hdcDst graphicsgdi.HDC, x int32, y int32, fStyle IMAGE_LIST_DRAW_STYLE) foundation.BOOL {
+func ImageList_Draw(himl HIMAGELIST, i int32, hdcDst graphicsgdi.HDC, x int32, y int32, fStyle IMAGE_LIST_DRAW_STYLE) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_Draw.Addr(), uintptr(himl), uintptr(i), uintptr(hdcDst), uintptr(x), uintptr(y), uintptr(fStyle))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_DrawEx calls COMCTL32!ImageList_DrawEx.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_drawex
 // Minimum OS: windows6.0.6000.
-func ImageList_DrawEx(himl HIMAGELIST, i int32, hdcDst graphicsgdi.HDC, x int32, y int32, dx int32, dy int32, rgbBk foundation.COLORREF, rgbFg foundation.COLORREF, fStyle IMAGE_LIST_DRAW_STYLE) foundation.BOOL {
+func ImageList_DrawEx(himl HIMAGELIST, i int32, hdcDst graphicsgdi.HDC, x int32, y int32, dx int32, dy int32, rgbBk foundation.COLORREF, rgbFg foundation.COLORREF, fStyle IMAGE_LIST_DRAW_STYLE) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_DrawEx.Addr(), uintptr(himl), uintptr(i), uintptr(hdcDst), uintptr(x), uintptr(y), uintptr(dx), uintptr(dy), uintptr(rgbBk), uintptr(rgbFg), uintptr(fStyle))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_DrawIndirect calls COMCTL32!ImageList_DrawIndirect.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_drawindirect
 // Minimum OS: windows6.0.6000.
-func ImageList_DrawIndirect(pimldp *IMAGELISTDRAWPARAMS) foundation.BOOL {
+func ImageList_DrawIndirect(pimldp *IMAGELISTDRAWPARAMS) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_DrawIndirect.Addr(), uintptr(unsafe.Pointer(pimldp)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_Duplicate calls COMCTL32!ImageList_Duplicate.
@@ -1536,9 +1558,9 @@ func ImageList_GetIcon(himl HIMAGELIST, i int32, flags IMAGE_LIST_DRAW_STYLE) ui
 // ImageList_GetIconSize calls COMCTL32!ImageList_GetIconSize.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_geticonsize
 // Minimum OS: windows6.0.6000.
-func ImageList_GetIconSize(himl HIMAGELIST, cx *int32, cy *int32) foundation.BOOL {
+func ImageList_GetIconSize(himl HIMAGELIST, cx *int32, cy *int32) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_GetIconSize.Addr(), uintptr(himl), uintptr(unsafe.Pointer(cx)), uintptr(unsafe.Pointer(cy)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_GetImageCount calls COMCTL32!ImageList_GetImageCount.
@@ -1552,9 +1574,18 @@ func ImageList_GetImageCount(himl HIMAGELIST) int32 {
 // ImageList_GetImageInfo calls COMCTL32!ImageList_GetImageInfo.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_getimageinfo
 // Minimum OS: windows6.0.6000.
-func ImageList_GetImageInfo(himl HIMAGELIST, i int32, pImageInfo *IMAGEINFO) foundation.BOOL {
+func ImageList_GetImageInfo(himl HIMAGELIST, i int32, pImageInfo *IMAGEINFO) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_GetImageInfo.Addr(), uintptr(himl), uintptr(i), uintptr(unsafe.Pointer(pImageInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ImageList_LoadImage calls COMCTL32!ImageList_LoadImageW.
+// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_loadimagew
+// Minimum OS: windows6.0.6000.
+func ImageList_LoadImage(hi foundation.HINSTANCE, lpbmp string, cx int32, cGrow int32, crMask foundation.COLORREF, uType uint32, uFlags uiwindowsandmessaging.IMAGE_FLAGS) HIMAGELIST {
+	_lpbmp := win32.UTF16Ptr(lpbmp)
+	r1, _, _ := syscall.SyscallN(procImageList_LoadImage.Addr(), uintptr(hi), uintptr(unsafe.Pointer(_lpbmp)), uintptr(cx), uintptr(cGrow), uintptr(crMask), uintptr(uType), uintptr(uFlags))
+	return HIMAGELIST(r1)
 }
 
 // ImageList_LoadImageA calls COMCTL32!ImageList_LoadImageA.
@@ -1562,14 +1593,6 @@ func ImageList_GetImageInfo(himl HIMAGELIST, i int32, pImageInfo *IMAGEINFO) fou
 // Minimum OS: windows6.0.6000.
 func ImageList_LoadImageA(hi foundation.HINSTANCE, lpbmp foundation.PSTR, cx int32, cGrow int32, crMask foundation.COLORREF, uType uint32, uFlags uiwindowsandmessaging.IMAGE_FLAGS) HIMAGELIST {
 	r1, _, _ := syscall.SyscallN(procImageList_LoadImageA.Addr(), uintptr(hi), uintptr(unsafe.Pointer(lpbmp)), uintptr(cx), uintptr(cGrow), uintptr(crMask), uintptr(uType), uintptr(uFlags))
-	return HIMAGELIST(r1)
-}
-
-// ImageList_LoadImageW calls COMCTL32!ImageList_LoadImageW.
-// https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_loadimagew
-// Minimum OS: windows6.0.6000.
-func ImageList_LoadImageW(hi foundation.HINSTANCE, lpbmp foundation.PWSTR, cx int32, cGrow int32, crMask foundation.COLORREF, uType uint32, uFlags uiwindowsandmessaging.IMAGE_FLAGS) HIMAGELIST {
-	r1, _, _ := syscall.SyscallN(procImageList_LoadImageW.Addr(), uintptr(hi), uintptr(unsafe.Pointer(lpbmp)), uintptr(cx), uintptr(cGrow), uintptr(crMask), uintptr(uType), uintptr(uFlags))
 	return HIMAGELIST(r1)
 }
 
@@ -1592,25 +1615,25 @@ func ImageList_Read(pstm *systemcom.IStream) HIMAGELIST {
 // ImageList_ReadEx calls COMCTL32!ImageList_ReadEx.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_readex
 // Minimum OS: windows6.0.6000.
-func ImageList_ReadEx(dwFlags uint32, pstm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func ImageList_ReadEx(dwFlags uint32, pstm *systemcom.IStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procImageList_ReadEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ImageList_Remove calls COMCTL32!ImageList_Remove.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_remove
 // Minimum OS: windows6.0.6000.
-func ImageList_Remove(himl HIMAGELIST, i int32) foundation.BOOL {
+func ImageList_Remove(himl HIMAGELIST, i int32) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_Remove.Addr(), uintptr(himl), uintptr(i))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_Replace calls COMCTL32!ImageList_Replace.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_replace
 // Minimum OS: windows6.0.6000.
-func ImageList_Replace(himl HIMAGELIST, i int32, hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP) foundation.BOOL {
+func ImageList_Replace(himl HIMAGELIST, i int32, hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_Replace.Addr(), uintptr(himl), uintptr(i), uintptr(hbmImage), uintptr(hbmMask))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_ReplaceIcon calls COMCTL32!ImageList_ReplaceIcon.
@@ -1632,49 +1655,49 @@ func ImageList_SetBkColor(himl HIMAGELIST, clrBk foundation.COLORREF) foundation
 // ImageList_SetDragCursorImage calls COMCTL32!ImageList_SetDragCursorImage.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_setdragcursorimage
 // Minimum OS: windows6.0.6000.
-func ImageList_SetDragCursorImage(himlDrag HIMAGELIST, iDrag int32, dxHotspot int32, dyHotspot int32) foundation.BOOL {
+func ImageList_SetDragCursorImage(himlDrag HIMAGELIST, iDrag int32, dxHotspot int32, dyHotspot int32) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_SetDragCursorImage.Addr(), uintptr(himlDrag), uintptr(iDrag), uintptr(dxHotspot), uintptr(dyHotspot))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_SetIconSize calls COMCTL32!ImageList_SetIconSize.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_seticonsize
 // Minimum OS: windows6.0.6000.
-func ImageList_SetIconSize(himl HIMAGELIST, cx int32, cy int32) foundation.BOOL {
+func ImageList_SetIconSize(himl HIMAGELIST, cx int32, cy int32) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_SetIconSize.Addr(), uintptr(himl), uintptr(cx), uintptr(cy))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_SetImageCount calls COMCTL32!ImageList_SetImageCount.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_setimagecount
 // Minimum OS: windows6.0.6000.
-func ImageList_SetImageCount(himl HIMAGELIST, uNewCount uint32) foundation.BOOL {
+func ImageList_SetImageCount(himl HIMAGELIST, uNewCount uint32) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_SetImageCount.Addr(), uintptr(himl), uintptr(uNewCount))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_SetOverlayImage calls COMCTL32!ImageList_SetOverlayImage.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_setoverlayimage
 // Minimum OS: windows6.0.6000.
-func ImageList_SetOverlayImage(himl HIMAGELIST, iImage int32, iOverlay int32) foundation.BOOL {
+func ImageList_SetOverlayImage(himl HIMAGELIST, iImage int32, iOverlay int32) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_SetOverlayImage.Addr(), uintptr(himl), uintptr(iImage), uintptr(iOverlay))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_Write calls COMCTL32!ImageList_Write.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_write
 // Minimum OS: windows6.0.6000.
-func ImageList_Write(himl HIMAGELIST, pstm *systemcom.IStream) foundation.BOOL {
+func ImageList_Write(himl HIMAGELIST, pstm *systemcom.IStream) bool {
 	r1, _, _ := syscall.SyscallN(procImageList_Write.Addr(), uintptr(himl), uintptr(unsafe.Pointer(pstm)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageList_WriteEx calls COMCTL32!ImageList_WriteEx.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-imagelist_writeex
 // Minimum OS: windows6.0.6000.
-func ImageList_WriteEx(himl HIMAGELIST, dwFlags IMAGE_LIST_WRITE_STREAM_FLAGS, pstm *systemcom.IStream) foundation.HRESULT {
+func ImageList_WriteEx(himl HIMAGELIST, dwFlags IMAGE_LIST_WRITE_STREAM_FLAGS, pstm *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procImageList_WriteEx.Addr(), uintptr(himl), uintptr(dwFlags), uintptr(unsafe.Pointer(pstm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitCommonControls calls COMCTL32!InitCommonControls.
@@ -1687,9 +1710,9 @@ func InitCommonControls() {
 // InitCommonControlsEx calls COMCTL32!InitCommonControlsEx.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-initcommoncontrolsex
 // Minimum OS: windows6.0.6000.
-func InitCommonControlsEx(picce *INITCOMMONCONTROLSEX) foundation.BOOL {
+func InitCommonControlsEx(picce *INITCOMMONCONTROLSEX) bool {
 	r1, _, _ := syscall.SyscallN(procInitCommonControlsEx.Addr(), uintptr(unsafe.Pointer(picce)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InitMUILanguage calls COMCTL32!InitMUILanguage.
@@ -1702,25 +1725,25 @@ func InitMUILanguage(uiLang uint16) {
 // InitializeFlatSB calls COMCTL32!InitializeFlatSB.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-initializeflatsb
 // Minimum OS: windows6.0.6000.
-func InitializeFlatSB(param0 foundation.HWND) foundation.BOOL {
+func InitializeFlatSB(param0 foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procInitializeFlatSB.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsAppThemed calls UXTHEME!IsAppThemed.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-isappthemed
 // Minimum OS: windows6.0.6000.
-func IsAppThemed() foundation.BOOL {
+func IsAppThemed() bool {
 	r1, _, _ := syscall.SyscallN(procIsAppThemed.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsCompositionActive calls UXTHEME!IsCompositionActive.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-iscompositionactive
 // Minimum OS: windows6.0.6000.
-func IsCompositionActive() foundation.BOOL {
+func IsCompositionActive() bool {
 	r1, _, _ := syscall.SyscallN(procIsCompositionActive.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsDlgButtonChecked calls USER32!IsDlgButtonChecked.
@@ -1734,57 +1757,59 @@ func IsDlgButtonChecked(hDlg foundation.HWND, nIDButton int32) uint32 {
 // IsThemeActive calls UXTHEME!IsThemeActive.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-isthemeactive
 // Minimum OS: windows6.0.6000.
-func IsThemeActive() foundation.BOOL {
+func IsThemeActive() bool {
 	r1, _, _ := syscall.SyscallN(procIsThemeActive.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsThemeBackgroundPartiallyTransparent calls UxTheme!IsThemeBackgroundPartiallyTransparent.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-isthemebackgroundpartiallytransparent
 // Minimum OS: windows6.0.6000.
-func IsThemeBackgroundPartiallyTransparent(hTheme HTHEME, iPartId int32, iStateId int32) foundation.BOOL {
+func IsThemeBackgroundPartiallyTransparent(hTheme HTHEME, iPartId int32, iStateId int32) bool {
 	r1, _, _ := syscall.SyscallN(procIsThemeBackgroundPartiallyTransparent.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsThemeDialogTextureEnabled calls UxTheme!IsThemeDialogTextureEnabled.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-isthemedialogtextureenabled
 // Minimum OS: windows6.0.6000.
-func IsThemeDialogTextureEnabled(hwnd foundation.HWND) foundation.BOOL {
+func IsThemeDialogTextureEnabled(hwnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsThemeDialogTextureEnabled.Addr(), uintptr(hwnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsThemePartDefined calls UXTHEME!IsThemePartDefined.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-isthemepartdefined
 // Minimum OS: windows6.0.6000.
-func IsThemePartDefined(hTheme HTHEME, iPartId int32, iStateId int32) foundation.BOOL {
+func IsThemePartDefined(hTheme HTHEME, iPartId int32, iStateId int32) bool {
 	r1, _, _ := syscall.SyscallN(procIsThemePartDefined.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LoadIconMetric calls COMCTL32!LoadIconMetric.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-loadiconmetric
 // Minimum OS: windows6.0.6000.
-func LoadIconMetric(hinst foundation.HINSTANCE, pszName foundation.PWSTR, lims LI_METRIC, phico *uiwindowsandmessaging.HICON) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLoadIconMetric.Addr(), uintptr(hinst), uintptr(unsafe.Pointer(pszName)), uintptr(lims), uintptr(unsafe.Pointer(phico)))
-	return foundation.HRESULT(r1)
+func LoadIconMetric(hinst foundation.HINSTANCE, pszName string, lims LI_METRIC, phico *uiwindowsandmessaging.HICON) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procLoadIconMetric.Addr(), uintptr(hinst), uintptr(unsafe.Pointer(_pszName)), uintptr(lims), uintptr(unsafe.Pointer(phico)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadIconWithScaleDown calls COMCTL32!LoadIconWithScaleDown.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-loadiconwithscaledown
 // Minimum OS: windows6.0.6000.
-func LoadIconWithScaleDown(hinst foundation.HINSTANCE, pszName foundation.PWSTR, cx int32, cy int32, phico *uiwindowsandmessaging.HICON) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLoadIconWithScaleDown.Addr(), uintptr(hinst), uintptr(unsafe.Pointer(pszName)), uintptr(cx), uintptr(cy), uintptr(unsafe.Pointer(phico)))
-	return foundation.HRESULT(r1)
+func LoadIconWithScaleDown(hinst foundation.HINSTANCE, pszName string, cx int32, cy int32, phico *uiwindowsandmessaging.HICON) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procLoadIconWithScaleDown.Addr(), uintptr(hinst), uintptr(unsafe.Pointer(_pszName)), uintptr(cx), uintptr(cy), uintptr(unsafe.Pointer(phico)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MakeDragList calls COMCTL32!MakeDragList.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-makedraglist
 // Minimum OS: windows6.0.6000.
-func MakeDragList(hLB foundation.HWND) foundation.BOOL {
+func MakeDragList(hLB foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procMakeDragList.Addr(), uintptr(hLB))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MenuHelp calls COMCTL32!MenuHelp.
@@ -1797,16 +1822,18 @@ func MenuHelp(uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, h
 // OpenThemeData calls UXTHEME!OpenThemeData.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-openthemedata
 // Minimum OS: windows6.0.6000.
-func OpenThemeData(hwnd foundation.HWND, pszClassList foundation.PWSTR) HTHEME {
-	r1, _, _ := syscall.SyscallN(procOpenThemeData.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszClassList)))
+func OpenThemeData(hwnd foundation.HWND, pszClassList string) HTHEME {
+	_pszClassList := win32.UTF16Ptr(pszClassList)
+	r1, _, _ := syscall.SyscallN(procOpenThemeData.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszClassList)))
 	return HTHEME(r1)
 }
 
 // OpenThemeDataEx calls UXTHEME!OpenThemeDataEx.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-openthemedataex
 // Minimum OS: windows6.0.6000.
-func OpenThemeDataEx(hwnd foundation.HWND, pszClassList foundation.PWSTR, dwFlags OPEN_THEME_DATA_FLAGS) HTHEME {
-	r1, _, _ := syscall.SyscallN(procOpenThemeDataEx.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszClassList)), uintptr(dwFlags))
+func OpenThemeDataEx(hwnd foundation.HWND, pszClassList string, dwFlags OPEN_THEME_DATA_FLAGS) HTHEME {
+	_pszClassList := win32.UTF16Ptr(pszClassList)
+	r1, _, _ := syscall.SyscallN(procOpenThemeDataEx.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszClassList)), uintptr(dwFlags))
 	return HTHEME(r1)
 }
 
@@ -1821,6 +1848,17 @@ func PackTouchHitTestingProximityEvaluation(pHitTestingInput *TOUCH_HIT_TESTING_
 	return foundation.LRESULT(r1), nil
 }
 
+// PropertySheet calls COMCTL32!PropertySheetW.
+// https://learn.microsoft.com/windows/win32/api/prsht/nf-prsht-propertysheetw
+// Minimum OS: windows6.0.6000.
+func PropertySheet(param0 *PROPSHEETHEADERW_V2) (uintptr, error) {
+	r1, _, e1 := syscall.SyscallN(procPropertySheet.Addr(), uintptr(unsafe.Pointer(param0)))
+	if e1 != 0 {
+		return uintptr(r1), e1
+	}
+	return uintptr(r1), nil
+}
+
 // PropertySheetA calls COMCTL32!PropertySheetA.
 // https://learn.microsoft.com/windows/win32/api/prsht/nf-prsht-propertysheeta
 // Minimum OS: windows6.0.6000.
@@ -1832,22 +1870,12 @@ func PropertySheetA(param0 *PROPSHEETHEADERA_V2) (uintptr, error) {
 	return uintptr(r1), nil
 }
 
-// PropertySheetW calls COMCTL32!PropertySheetW.
-// https://learn.microsoft.com/windows/win32/api/prsht/nf-prsht-propertysheetw
-// Minimum OS: windows6.0.6000.
-func PropertySheetW(param0 *PROPSHEETHEADERW_V2) (uintptr, error) {
-	r1, _, e1 := syscall.SyscallN(procPropertySheetW.Addr(), uintptr(unsafe.Pointer(param0)))
-	if e1 != 0 {
-		return uintptr(r1), e1
-	}
-	return uintptr(r1), nil
-}
-
 // RegisterPointerDeviceNotifications calls USER32!RegisterPointerDeviceNotifications.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerpointerdevicenotifications
 // Minimum OS: windows8.0.
-func RegisterPointerDeviceNotifications(window foundation.HWND, notifyRange foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procRegisterPointerDeviceNotifications.Addr(), uintptr(window), uintptr(notifyRange))
+func RegisterPointerDeviceNotifications(window foundation.HWND, notifyRange bool) error {
+	_notifyRange := win32.Bool32(notifyRange)
+	r1, _, e1 := syscall.SyscallN(procRegisterPointerDeviceNotifications.Addr(), uintptr(window), uintptr(_notifyRange))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1868,16 +1896,18 @@ func RegisterTouchHitTestingWindow(hwnd foundation.HWND, value uint32) error {
 // SetScrollInfo calls USER32!SetScrollInfo.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setscrollinfo
 // Minimum OS: windows6.0.6000.
-func SetScrollInfo(hwnd foundation.HWND, nBar uiwindowsandmessaging.SCROLLBAR_CONSTANTS, lpsi *uiwindowsandmessaging.SCROLLINFO, redraw foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procSetScrollInfo.Addr(), uintptr(hwnd), uintptr(nBar), uintptr(unsafe.Pointer(lpsi)), uintptr(redraw))
+func SetScrollInfo(hwnd foundation.HWND, nBar uiwindowsandmessaging.SCROLLBAR_CONSTANTS, lpsi *uiwindowsandmessaging.SCROLLINFO, redraw bool) int32 {
+	_redraw := win32.Bool32(redraw)
+	r1, _, _ := syscall.SyscallN(procSetScrollInfo.Addr(), uintptr(hwnd), uintptr(nBar), uintptr(unsafe.Pointer(lpsi)), uintptr(_redraw))
 	return int32(r1)
 }
 
 // SetScrollPos calls USER32!SetScrollPos.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setscrollpos
 // Minimum OS: windows6.0.6000.
-func SetScrollPos(hWnd foundation.HWND, nBar uiwindowsandmessaging.SCROLLBAR_CONSTANTS, nPos int32, bRedraw foundation.BOOL) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetScrollPos.Addr(), uintptr(hWnd), uintptr(nBar), uintptr(nPos), uintptr(bRedraw))
+func SetScrollPos(hWnd foundation.HWND, nBar uiwindowsandmessaging.SCROLLBAR_CONSTANTS, nPos int32, bRedraw bool) (int32, error) {
+	_bRedraw := win32.Bool32(bRedraw)
+	r1, _, e1 := syscall.SyscallN(procSetScrollPos.Addr(), uintptr(hWnd), uintptr(nBar), uintptr(nPos), uintptr(_bRedraw))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1887,8 +1917,9 @@ func SetScrollPos(hWnd foundation.HWND, nBar uiwindowsandmessaging.SCROLLBAR_CON
 // SetScrollRange calls USER32!SetScrollRange.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setscrollrange
 // Minimum OS: windows6.0.6000.
-func SetScrollRange(hWnd foundation.HWND, nBar uiwindowsandmessaging.SCROLLBAR_CONSTANTS, nMinPos int32, nMaxPos int32, bRedraw foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetScrollRange.Addr(), uintptr(hWnd), uintptr(nBar), uintptr(nMinPos), uintptr(nMaxPos), uintptr(bRedraw))
+func SetScrollRange(hWnd foundation.HWND, nBar uiwindowsandmessaging.SCROLLBAR_CONSTANTS, nMinPos int32, nMaxPos int32, bRedraw bool) error {
+	_bRedraw := win32.Bool32(bRedraw)
+	r1, _, e1 := syscall.SyscallN(procSetScrollRange.Addr(), uintptr(hWnd), uintptr(nBar), uintptr(nMinPos), uintptr(nMaxPos), uintptr(_bRedraw))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1905,40 +1936,43 @@ func SetThemeAppProperties(dwFlags SET_THEME_APP_PROPERTIES_FLAGS) {
 // SetWindowFeedbackSetting calls USER32!SetWindowFeedbackSetting.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowfeedbacksetting
 // Minimum OS: windows8.0.
-func SetWindowFeedbackSetting(hwnd foundation.HWND, feedback FEEDBACK_TYPE, dwFlags uint32, size uint32, configuration unsafe.Pointer) foundation.BOOL {
+func SetWindowFeedbackSetting(hwnd foundation.HWND, feedback FEEDBACK_TYPE, dwFlags uint32, size uint32, configuration unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSetWindowFeedbackSetting.Addr(), uintptr(hwnd), uintptr(feedback), uintptr(dwFlags), uintptr(size), uintptr(unsafe.Pointer(configuration)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetWindowTheme calls UXTHEME!SetWindowTheme.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-setwindowtheme
 // Minimum OS: windows6.0.6000.
-func SetWindowTheme(hwnd foundation.HWND, pszSubAppName foundation.PWSTR, pszSubIdList foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetWindowTheme.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszSubAppName)), uintptr(unsafe.Pointer(pszSubIdList)))
-	return foundation.HRESULT(r1)
+func SetWindowTheme(hwnd foundation.HWND, pszSubAppName string, pszSubIdList string) error {
+	_pszSubAppName := win32.UTF16Ptr(pszSubAppName)
+	_pszSubIdList := win32.UTF16Ptr(pszSubIdList)
+	r1, _, _ := syscall.SyscallN(procSetWindowTheme.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszSubAppName)), uintptr(unsafe.Pointer(_pszSubIdList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWindowThemeAttribute calls UXTHEME!SetWindowThemeAttribute.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-setwindowthemeattribute
 // Minimum OS: windows6.0.6000.
-func SetWindowThemeAttribute(hwnd foundation.HWND, eAttribute WINDOWTHEMEATTRIBUTETYPE, pvAttribute unsafe.Pointer, cbAttribute uint32) foundation.HRESULT {
+func SetWindowThemeAttribute(hwnd foundation.HWND, eAttribute WINDOWTHEMEATTRIBUTETYPE, pvAttribute unsafe.Pointer, cbAttribute uint32) error {
 	r1, _, _ := syscall.SyscallN(procSetWindowThemeAttribute.Addr(), uintptr(hwnd), uintptr(eAttribute), uintptr(unsafe.Pointer(pvAttribute)), uintptr(cbAttribute))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowHideMenuCtl calls COMCTL32!ShowHideMenuCtl.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-showhidemenuctl
 // Minimum OS: windows6.0.6000.
-func ShowHideMenuCtl(hWnd foundation.HWND, uFlags uintptr, lpInfo *int32) foundation.BOOL {
+func ShowHideMenuCtl(hWnd foundation.HWND, uFlags uintptr, lpInfo *int32) bool {
 	r1, _, _ := syscall.SyscallN(procShowHideMenuCtl.Addr(), uintptr(hWnd), uintptr(uFlags), uintptr(unsafe.Pointer(lpInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ShowScrollBar calls USER32!ShowScrollBar.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-showscrollbar
 // Minimum OS: windows6.0.6000.
-func ShowScrollBar(hWnd foundation.HWND, wBar uiwindowsandmessaging.SCROLLBAR_CONSTANTS, bShow foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procShowScrollBar.Addr(), uintptr(hWnd), uintptr(wBar), uintptr(bShow))
+func ShowScrollBar(hWnd foundation.HWND, wBar uiwindowsandmessaging.SCROLLBAR_CONSTANTS, bShow bool) error {
+	_bShow := win32.Bool32(bShow)
+	r1, _, e1 := syscall.SyscallN(procShowScrollBar.Addr(), uintptr(hWnd), uintptr(wBar), uintptr(_bShow))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1948,39 +1982,45 @@ func ShowScrollBar(hWnd foundation.HWND, wBar uiwindowsandmessaging.SCROLLBAR_CO
 // Str_SetPtrW calls COMCTL32!Str_SetPtrW.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-str_setptrw
 // Minimum OS: windows6.0.6000.
-func Str_SetPtrW(ppsz *foundation.PWSTR, psz foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procStr_SetPtrW.Addr(), uintptr(unsafe.Pointer(ppsz)), uintptr(unsafe.Pointer(psz)))
-	return foundation.BOOL(r1)
+func Str_SetPtrW(ppsz *foundation.PWSTR, psz string) bool {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(procStr_SetPtrW.Addr(), uintptr(unsafe.Pointer(ppsz)), uintptr(unsafe.Pointer(_psz)))
+	return r1 != 0
 }
 
 // TaskDialog calls COMCTL32!TaskDialog.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-taskdialog
 // Minimum OS: windows6.0.6000.
-func TaskDialog(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszWindowTitle foundation.PWSTR, pszMainInstruction foundation.PWSTR, pszContent foundation.PWSTR, dwCommonButtons TASKDIALOG_COMMON_BUTTON_FLAGS, pszIcon foundation.PWSTR, pnButton *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procTaskDialog.Addr(), uintptr(hwndOwner), uintptr(hInstance), uintptr(unsafe.Pointer(pszWindowTitle)), uintptr(unsafe.Pointer(pszMainInstruction)), uintptr(unsafe.Pointer(pszContent)), uintptr(dwCommonButtons), uintptr(unsafe.Pointer(pszIcon)), uintptr(unsafe.Pointer(pnButton)))
-	return foundation.HRESULT(r1)
+func TaskDialog(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszWindowTitle string, pszMainInstruction string, pszContent string, dwCommonButtons TASKDIALOG_COMMON_BUTTON_FLAGS, pszIcon string, pnButton *int32) error {
+	_pszWindowTitle := win32.UTF16Ptr(pszWindowTitle)
+	_pszMainInstruction := win32.UTF16Ptr(pszMainInstruction)
+	_pszContent := win32.UTF16Ptr(pszContent)
+	_pszIcon := win32.UTF16Ptr(pszIcon)
+	r1, _, _ := syscall.SyscallN(procTaskDialog.Addr(), uintptr(hwndOwner), uintptr(hInstance), uintptr(unsafe.Pointer(_pszWindowTitle)), uintptr(unsafe.Pointer(_pszMainInstruction)), uintptr(unsafe.Pointer(_pszContent)), uintptr(dwCommonButtons), uintptr(unsafe.Pointer(_pszIcon)), uintptr(unsafe.Pointer(pnButton)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // TaskDialogIndirect calls COMCTL32!TaskDialogIndirect.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-taskdialogindirect
 // Minimum OS: windows6.0.6000.
-func TaskDialogIndirect(pTaskConfig unsafe.Pointer, pnButton *int32, pnRadioButton *int32, pfVerificationFlagChecked *foundation.BOOL) foundation.HRESULT {
+func TaskDialogIndirect(pTaskConfig unsafe.Pointer, pnButton *int32, pnRadioButton *int32, pfVerificationFlagChecked *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procTaskDialogIndirect.Addr(), uintptr(unsafe.Pointer(pTaskConfig)), uintptr(unsafe.Pointer(pnButton)), uintptr(unsafe.Pointer(pnRadioButton)), uintptr(unsafe.Pointer(pfVerificationFlagChecked)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UninitializeFlatSB calls COMCTL32!UninitializeFlatSB.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-uninitializeflatsb
 // Minimum OS: windows6.0.6000.
-func UninitializeFlatSB(param0 foundation.HWND) foundation.HRESULT {
+func UninitializeFlatSB(param0 foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procUninitializeFlatSB.Addr(), uintptr(param0))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdatePanningFeedback calls UxTheme!UpdatePanningFeedback.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-updatepanningfeedback
 // Minimum OS: windows6.1.
-func UpdatePanningFeedback(hwnd foundation.HWND, lTotalOverpanOffsetX int32, lTotalOverpanOffsetY int32, fInInertia foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procUpdatePanningFeedback.Addr(), uintptr(hwnd), uintptr(lTotalOverpanOffsetX), uintptr(lTotalOverpanOffsetY), uintptr(fInInertia))
-	return foundation.BOOL(r1)
+func UpdatePanningFeedback(hwnd foundation.HWND, lTotalOverpanOffsetX int32, lTotalOverpanOffsetY int32, fInInertia bool) bool {
+	_fInInertia := win32.Bool32(fInInertia)
+	r1, _, _ := syscall.SyscallN(procUpdatePanningFeedback.Addr(), uintptr(hwnd), uintptr(lTotalOverpanOffsetX), uintptr(lTotalOverpanOffsetY), uintptr(_fInInertia))
+	return r1 != 0
 }

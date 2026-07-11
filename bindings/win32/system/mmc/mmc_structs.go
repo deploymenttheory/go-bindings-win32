@@ -138,8 +138,8 @@ type MMC_SORT_SET_DATA struct {
 	PSortData *MMC_SORT_DATA
 }
 
-// MMC_TASK_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MMC_TASK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MMC_TASK_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -159,8 +159,8 @@ type MMC_TASK_DISPLAY_BITMAP struct {
 	SzMouseOffBitmap  foundation.PWSTR
 }
 
-// MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -222,8 +222,8 @@ type RESULTFINDINFO struct {
 	DwOptions uint32
 }
 
-// RESULT_VIEW_TYPE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RESULT_VIEW_TYPE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RESULT_VIEW_TYPE_INFO_Anonymous_e__Union struct {
 	Data [2]uint64
 }

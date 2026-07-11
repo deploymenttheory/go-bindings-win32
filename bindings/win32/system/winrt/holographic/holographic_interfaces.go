@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 )
@@ -24,33 +23,35 @@ type IHolographicCameraInterop struct {
 var IID_IHolographicCameraInterop = win32.GUID{Data1: 0x7cc1f9c5, Data2: 0x6d02, Data3: 0x41fa, Data4: [8]byte{0x95, 0x00, 0xe1, 0x80, 0x9e, 0xb4, 0x8e, 0xec}}
 
 // CreateDirect3D12BackBufferResource dispatches through IHolographicCameraInterop's vtable slot 6.
-func (self *IHolographicCameraInterop) CreateDirect3D12BackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, ppCreatedTexture2DResource **graphicsdirect3d12.ID3D12Resource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(ppCreatedTexture2DResource)))
-	return foundation.HRESULT(r1)
+func (self *IHolographicCameraInterop) CreateDirect3D12BackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (*graphicsdirect3d12.ID3D12Resource, error) {
+	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(&_ppCreatedTexture2DResource)))
+	return _ppCreatedTexture2DResource, win32.HRESULTError(int32(r1))
 }
 
 // CreateDirect3D12HardwareProtectedBackBufferResource dispatches through IHolographicCameraInterop's vtable slot 7.
-func (self *IHolographicCameraInterop) CreateDirect3D12HardwareProtectedBackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, ppCreatedTexture2DResource **graphicsdirect3d12.ID3D12Resource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(ppCreatedTexture2DResource)))
-	return foundation.HRESULT(r1)
+func (self *IHolographicCameraInterop) CreateDirect3D12HardwareProtectedBackBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) (*graphicsdirect3d12.ID3D12Resource, error) {
+	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(&_ppCreatedTexture2DResource)))
+	return _ppCreatedTexture2DResource, win32.HRESULTError(int32(r1))
 }
 
 // AcquireDirect3D12BufferResource dispatches through IHolographicCameraInterop's vtable slot 8.
-func (self *IHolographicCameraInterop) AcquireDirect3D12BufferResource(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) foundation.HRESULT {
+func (self *IHolographicCameraInterop) AcquireDirect3D12BufferResource(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceToAcquire)), uintptr(unsafe.Pointer(pCommandQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AcquireDirect3D12BufferResourceWithTimeout dispatches through IHolographicCameraInterop's vtable slot 9.
-func (self *IHolographicCameraInterop) AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, duration uint64) foundation.HRESULT {
+func (self *IHolographicCameraInterop) AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, duration uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceToAcquire)), uintptr(unsafe.Pointer(pCommandQueue)), uintptr(duration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnacquireDirect3D12BufferResource dispatches through IHolographicCameraInterop's vtable slot 10.
-func (self *IHolographicCameraInterop) UnacquireDirect3D12BufferResource(pResourceToUnacquire *graphicsdirect3d12.ID3D12Resource) foundation.HRESULT {
+func (self *IHolographicCameraInterop) UnacquireDirect3D12BufferResource(pResourceToUnacquire *graphicsdirect3d12.ID3D12Resource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceToUnacquire)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IHolographicCameraRenderingParametersInterop: https://learn.microsoft.com/windows/win32/api/windows.graphics.holographic.interop/nn-windows-graphics-holographic-interop-iholographiccamerarenderingparametersinterop
@@ -63,15 +64,15 @@ type IHolographicCameraRenderingParametersInterop struct {
 var IID_IHolographicCameraRenderingParametersInterop = win32.GUID{Data1: 0xf75b68d6, Data2: 0xd1fd, Data3: 0x4707, Data4: [8]byte{0xaa, 0xfd, 0xfa, 0x6f, 0x4c, 0x0e, 0x3b, 0xf4}}
 
 // CommitDirect3D12Resource dispatches through IHolographicCameraRenderingParametersInterop's vtable slot 6.
-func (self *IHolographicCameraRenderingParametersInterop) CommitDirect3D12Resource(pColorResourceToCommit *graphicsdirect3d12.ID3D12Resource, pColorResourceFence *graphicsdirect3d12.ID3D12Fence, colorResourceFenceSignalValue uint64) foundation.HRESULT {
+func (self *IHolographicCameraRenderingParametersInterop) CommitDirect3D12Resource(pColorResourceToCommit *graphicsdirect3d12.ID3D12Resource, pColorResourceFence *graphicsdirect3d12.ID3D12Fence, colorResourceFenceSignalValue uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorResourceToCommit)), uintptr(unsafe.Pointer(pColorResourceFence)), uintptr(colorResourceFenceSignalValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitDirect3D12ResourceWithDepthData dispatches through IHolographicCameraRenderingParametersInterop's vtable slot 7.
-func (self *IHolographicCameraRenderingParametersInterop) CommitDirect3D12ResourceWithDepthData(pColorResourceToCommit *graphicsdirect3d12.ID3D12Resource, pColorResourceFence *graphicsdirect3d12.ID3D12Fence, colorResourceFenceSignalValue uint64, pDepthResourceToCommit *graphicsdirect3d12.ID3D12Resource, pDepthResourceFence *graphicsdirect3d12.ID3D12Fence, depthResourceFenceSignalValue uint64) foundation.HRESULT {
+func (self *IHolographicCameraRenderingParametersInterop) CommitDirect3D12ResourceWithDepthData(pColorResourceToCommit *graphicsdirect3d12.ID3D12Resource, pColorResourceFence *graphicsdirect3d12.ID3D12Fence, colorResourceFenceSignalValue uint64, pDepthResourceToCommit *graphicsdirect3d12.ID3D12Resource, pDepthResourceFence *graphicsdirect3d12.ID3D12Fence, depthResourceFenceSignalValue uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorResourceToCommit)), uintptr(unsafe.Pointer(pColorResourceFence)), uintptr(colorResourceFenceSignalValue), uintptr(unsafe.Pointer(pDepthResourceToCommit)), uintptr(unsafe.Pointer(pDepthResourceFence)), uintptr(depthResourceFenceSignalValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IHolographicQuadLayerInterop: https://learn.microsoft.com/windows/win32/api/windows.graphics.holographic.interop/nn-windows-graphics-holographic-interop-iholographicquadlayerinterop
@@ -84,33 +85,35 @@ type IHolographicQuadLayerInterop struct {
 var IID_IHolographicQuadLayerInterop = win32.GUID{Data1: 0xcfa688f0, Data2: 0x639e, Data3: 0x4a47, Data4: [8]byte{0x83, 0xd7, 0x6b, 0x7f, 0x5e, 0xbf, 0x7f, 0xed}}
 
 // CreateDirect3D12ContentBufferResource dispatches through IHolographicQuadLayerInterop's vtable slot 6.
-func (self *IHolographicQuadLayerInterop) CreateDirect3D12ContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, ppTexture2DResource **graphicsdirect3d12.ID3D12Resource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(ppTexture2DResource)))
-	return foundation.HRESULT(r1)
+func (self *IHolographicQuadLayerInterop) CreateDirect3D12ContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC) (*graphicsdirect3d12.ID3D12Resource, error) {
+	var _ppTexture2DResource *graphicsdirect3d12.ID3D12Resource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(&_ppTexture2DResource)))
+	return _ppTexture2DResource, win32.HRESULTError(int32(r1))
 }
 
 // CreateDirect3D12HardwareProtectedContentBufferResource dispatches through IHolographicQuadLayerInterop's vtable slot 7.
-func (self *IHolographicQuadLayerInterop) CreateDirect3D12HardwareProtectedContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession, ppCreatedTexture2DResource **graphicsdirect3d12.ID3D12Resource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(ppCreatedTexture2DResource)))
-	return foundation.HRESULT(r1)
+func (self *IHolographicQuadLayerInterop) CreateDirect3D12HardwareProtectedContentBufferResource(pDevice *graphicsdirect3d12.ID3D12Device, pTexture2DDesc *graphicsdirect3d12.D3D12_RESOURCE_DESC, pProtectedResourceSession *graphicsdirect3d12.ID3D12ProtectedResourceSession) (*graphicsdirect3d12.ID3D12Resource, error) {
+	var _ppCreatedTexture2DResource *graphicsdirect3d12.ID3D12Resource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pTexture2DDesc)), uintptr(unsafe.Pointer(pProtectedResourceSession)), uintptr(unsafe.Pointer(&_ppCreatedTexture2DResource)))
+	return _ppCreatedTexture2DResource, win32.HRESULTError(int32(r1))
 }
 
 // AcquireDirect3D12BufferResource dispatches through IHolographicQuadLayerInterop's vtable slot 8.
-func (self *IHolographicQuadLayerInterop) AcquireDirect3D12BufferResource(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) foundation.HRESULT {
+func (self *IHolographicQuadLayerInterop) AcquireDirect3D12BufferResource(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceToAcquire)), uintptr(unsafe.Pointer(pCommandQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AcquireDirect3D12BufferResourceWithTimeout dispatches through IHolographicQuadLayerInterop's vtable slot 9.
-func (self *IHolographicQuadLayerInterop) AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, duration uint64) foundation.HRESULT {
+func (self *IHolographicQuadLayerInterop) AcquireDirect3D12BufferResourceWithTimeout(pResourceToAcquire *graphicsdirect3d12.ID3D12Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, duration uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceToAcquire)), uintptr(unsafe.Pointer(pCommandQueue)), uintptr(duration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnacquireDirect3D12BufferResource dispatches through IHolographicQuadLayerInterop's vtable slot 10.
-func (self *IHolographicQuadLayerInterop) UnacquireDirect3D12BufferResource(pResourceToUnacquire *graphicsdirect3d12.ID3D12Resource) foundation.HRESULT {
+func (self *IHolographicQuadLayerInterop) UnacquireDirect3D12BufferResource(pResourceToUnacquire *graphicsdirect3d12.ID3D12Resource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceToUnacquire)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IHolographicQuadLayerUpdateParametersInterop: https://learn.microsoft.com/windows/win32/api/windows.graphics.holographic.interop/nn-windows-graphics-holographic-interop-iholographicquadlayerupdateparametersinterop
@@ -123,7 +126,7 @@ type IHolographicQuadLayerUpdateParametersInterop struct {
 var IID_IHolographicQuadLayerUpdateParametersInterop = win32.GUID{Data1: 0xe5f549cd, Data2: 0xc909, Data3: 0x444f, Data4: [8]byte{0x88, 0x09, 0x7c, 0xc1, 0x8a, 0x9c, 0x89, 0x20}}
 
 // CommitDirect3D12Resource dispatches through IHolographicQuadLayerUpdateParametersInterop's vtable slot 6.
-func (self *IHolographicQuadLayerUpdateParametersInterop) CommitDirect3D12Resource(pColorResourceToCommit *graphicsdirect3d12.ID3D12Resource, pColorResourceFence *graphicsdirect3d12.ID3D12Fence, colorResourceFenceSignalValue uint64) foundation.HRESULT {
+func (self *IHolographicQuadLayerUpdateParametersInterop) CommitDirect3D12Resource(pColorResourceToCommit *graphicsdirect3d12.ID3D12Resource, pColorResourceFence *graphicsdirect3d12.ID3D12Fence, colorResourceFenceSignalValue uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColorResourceToCommit)), uintptr(unsafe.Pointer(pColorResourceFence)), uintptr(colorResourceFenceSignalValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

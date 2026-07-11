@@ -354,8 +354,12 @@ func FwpmConnectionGetSecurityInfo0(engineHandle FWPM_ENGINE_HANDLE, securityInf
 }
 
 // FwpmConnectionPolicyAdd0 calls fwpuclnt!FwpmConnectionPolicyAdd0.
-func FwpmConnectionPolicyAdd0(engineHandle FWPM_ENGINE_HANDLE, connectionPolicy *FWPM_PROVIDER_CONTEXT3, ipVersion FWP_IP_VERSION, weight uint64, numFilterConditions uint32, filterConditions *FWPM_FILTER_CONDITION0, sd security.PSECURITY_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procFwpmConnectionPolicyAdd0.Addr(), uintptr(engineHandle), uintptr(unsafe.Pointer(connectionPolicy)), uintptr(ipVersion), uintptr(weight), uintptr(numFilterConditions), uintptr(unsafe.Pointer(filterConditions)), uintptr(sd))
+func FwpmConnectionPolicyAdd0(engineHandle FWPM_ENGINE_HANDLE, connectionPolicy *FWPM_PROVIDER_CONTEXT3, ipVersion FWP_IP_VERSION, weight uint64, filterConditions []FWPM_FILTER_CONDITION0, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procFwpmConnectionPolicyAdd0.Addr(), uintptr(engineHandle), uintptr(unsafe.Pointer(connectionPolicy)), uintptr(ipVersion), uintptr(weight), uintptr(len(filterConditions)), uintptr(unsafe.Pointer(_filterConditions)), uintptr(sd))
 	return uint32(r1)
 }
 
@@ -430,8 +434,8 @@ func FwpmEngineGetSecurityInfo0(engineHandle FWPM_ENGINE_HANDLE, securityInfo ui
 // FwpmEngineOpen0 calls fwpuclnt!FwpmEngineOpen0.
 // https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmengineopen0
 // Minimum OS: windows6.0.6000.
-func FwpmEngineOpen0(serverName foundation.PWSTR, authnService uint32, authIdentity *systemrpc.SEC_WINNT_AUTH_IDENTITY_W, session *FWPM_SESSION0, engineHandle *FWPM_ENGINE_HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procFwpmEngineOpen0.Addr(), uintptr(unsafe.Pointer(serverName)), uintptr(authnService), uintptr(unsafe.Pointer(authIdentity)), uintptr(unsafe.Pointer(session)), uintptr(unsafe.Pointer(engineHandle)))
+func FwpmEngineOpen0(authnService uint32, authIdentity *systemrpc.SEC_WINNT_AUTH_IDENTITY_W, session *FWPM_SESSION0, engineHandle *FWPM_ENGINE_HANDLE) uint32 {
+	r1, _, _ := syscall.SyscallN(procFwpmEngineOpen0.Addr(), 0, uintptr(authnService), uintptr(unsafe.Pointer(authIdentity)), uintptr(unsafe.Pointer(session)), uintptr(unsafe.Pointer(engineHandle)))
 	return uint32(r1)
 }
 
@@ -565,38 +569,55 @@ func FwpmFreeMemory0(p *unsafe.Pointer) {
 // FwpmGetAppIdFromFileName0 calls fwpuclnt!FwpmGetAppIdFromFileName0.
 // https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmgetappidfromfilename0
 // Minimum OS: windows6.0.6000.
-func FwpmGetAppIdFromFileName0(fileName foundation.PWSTR, appId **FWP_BYTE_BLOB) uint32 {
-	r1, _, _ := syscall.SyscallN(procFwpmGetAppIdFromFileName0.Addr(), uintptr(unsafe.Pointer(fileName)), uintptr(unsafe.Pointer(appId)))
+func FwpmGetAppIdFromFileName0(fileName string, appId **FWP_BYTE_BLOB) uint32 {
+	_fileName := win32.UTF16Ptr(fileName)
+	r1, _, _ := syscall.SyscallN(procFwpmGetAppIdFromFileName0.Addr(), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(appId)))
 	return uint32(r1)
 }
 
 // FwpmIPsecTunnelAdd0 calls fwpuclnt!FwpmIPsecTunnelAdd0.
 // https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmipsectunneladd0
 // Minimum OS: windows6.0.6000.
-func FwpmIPsecTunnelAdd0(engineHandle FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *FWPM_PROVIDER_CONTEXT0, tunnelPolicy *FWPM_PROVIDER_CONTEXT0, numFilterConditions uint32, filterConditions *FWPM_FILTER_CONDITION0, sd security.PSECURITY_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procFwpmIPsecTunnelAdd0.Addr(), uintptr(engineHandle), uintptr(flags), uintptr(unsafe.Pointer(mainModePolicy)), uintptr(unsafe.Pointer(tunnelPolicy)), uintptr(numFilterConditions), uintptr(unsafe.Pointer(filterConditions)), uintptr(sd))
+func FwpmIPsecTunnelAdd0(engineHandle FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *FWPM_PROVIDER_CONTEXT0, tunnelPolicy *FWPM_PROVIDER_CONTEXT0, filterConditions []FWPM_FILTER_CONDITION0, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procFwpmIPsecTunnelAdd0.Addr(), uintptr(engineHandle), uintptr(flags), uintptr(unsafe.Pointer(mainModePolicy)), uintptr(unsafe.Pointer(tunnelPolicy)), uintptr(len(filterConditions)), uintptr(unsafe.Pointer(_filterConditions)), uintptr(sd))
 	return uint32(r1)
 }
 
 // FwpmIPsecTunnelAdd1 calls fwpuclnt!FwpmIPsecTunnelAdd1.
 // https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmipsectunneladd1
 // Minimum OS: windows6.1.
-func FwpmIPsecTunnelAdd1(engineHandle FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *FWPM_PROVIDER_CONTEXT1, tunnelPolicy *FWPM_PROVIDER_CONTEXT1, numFilterConditions uint32, filterConditions *FWPM_FILTER_CONDITION0, keyModKey *win32.GUID, sd security.PSECURITY_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procFwpmIPsecTunnelAdd1.Addr(), uintptr(engineHandle), uintptr(flags), uintptr(unsafe.Pointer(mainModePolicy)), uintptr(unsafe.Pointer(tunnelPolicy)), uintptr(numFilterConditions), uintptr(unsafe.Pointer(filterConditions)), uintptr(unsafe.Pointer(keyModKey)), uintptr(sd))
+func FwpmIPsecTunnelAdd1(engineHandle FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *FWPM_PROVIDER_CONTEXT1, tunnelPolicy *FWPM_PROVIDER_CONTEXT1, filterConditions []FWPM_FILTER_CONDITION0, keyModKey *win32.GUID, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procFwpmIPsecTunnelAdd1.Addr(), uintptr(engineHandle), uintptr(flags), uintptr(unsafe.Pointer(mainModePolicy)), uintptr(unsafe.Pointer(tunnelPolicy)), uintptr(len(filterConditions)), uintptr(unsafe.Pointer(_filterConditions)), uintptr(unsafe.Pointer(keyModKey)), uintptr(sd))
 	return uint32(r1)
 }
 
 // FwpmIPsecTunnelAdd2 calls fwpuclnt!FwpmIPsecTunnelAdd2.
 // https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmipsectunneladd2
 // Minimum OS: windows8.0.
-func FwpmIPsecTunnelAdd2(engineHandle FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *FWPM_PROVIDER_CONTEXT2, tunnelPolicy *FWPM_PROVIDER_CONTEXT2, numFilterConditions uint32, filterConditions *FWPM_FILTER_CONDITION0, keyModKey *win32.GUID, sd security.PSECURITY_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procFwpmIPsecTunnelAdd2.Addr(), uintptr(engineHandle), uintptr(flags), uintptr(unsafe.Pointer(mainModePolicy)), uintptr(unsafe.Pointer(tunnelPolicy)), uintptr(numFilterConditions), uintptr(unsafe.Pointer(filterConditions)), uintptr(unsafe.Pointer(keyModKey)), uintptr(sd))
+func FwpmIPsecTunnelAdd2(engineHandle FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *FWPM_PROVIDER_CONTEXT2, tunnelPolicy *FWPM_PROVIDER_CONTEXT2, filterConditions []FWPM_FILTER_CONDITION0, keyModKey *win32.GUID, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procFwpmIPsecTunnelAdd2.Addr(), uintptr(engineHandle), uintptr(flags), uintptr(unsafe.Pointer(mainModePolicy)), uintptr(unsafe.Pointer(tunnelPolicy)), uintptr(len(filterConditions)), uintptr(unsafe.Pointer(_filterConditions)), uintptr(unsafe.Pointer(keyModKey)), uintptr(sd))
 	return uint32(r1)
 }
 
 // FwpmIPsecTunnelAdd3 calls fwpuclnt!FwpmIPsecTunnelAdd3.
-func FwpmIPsecTunnelAdd3(engineHandle FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *FWPM_PROVIDER_CONTEXT3, tunnelPolicy *FWPM_PROVIDER_CONTEXT3, numFilterConditions uint32, filterConditions *FWPM_FILTER_CONDITION0, keyModKey *win32.GUID, sd security.PSECURITY_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procFwpmIPsecTunnelAdd3.Addr(), uintptr(engineHandle), uintptr(flags), uintptr(unsafe.Pointer(mainModePolicy)), uintptr(unsafe.Pointer(tunnelPolicy)), uintptr(numFilterConditions), uintptr(unsafe.Pointer(filterConditions)), uintptr(unsafe.Pointer(keyModKey)), uintptr(sd))
+func FwpmIPsecTunnelAdd3(engineHandle FWPM_ENGINE_HANDLE, flags uint32, mainModePolicy *FWPM_PROVIDER_CONTEXT3, tunnelPolicy *FWPM_PROVIDER_CONTEXT3, filterConditions []FWPM_FILTER_CONDITION0, keyModKey *win32.GUID, sd security.PSECURITY_DESCRIPTOR) uint32 {
+	var _filterConditions *FWPM_FILTER_CONDITION0
+	if len(filterConditions) > 0 {
+		_filterConditions = &filterConditions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procFwpmIPsecTunnelAdd3.Addr(), uintptr(engineHandle), uintptr(flags), uintptr(unsafe.Pointer(mainModePolicy)), uintptr(unsafe.Pointer(tunnelPolicy)), uintptr(len(filterConditions)), uintptr(unsafe.Pointer(_filterConditions)), uintptr(unsafe.Pointer(keyModKey)), uintptr(sd))
 	return uint32(r1)
 }
 
@@ -1195,8 +1216,8 @@ func FwpmSystemPortsGet0(engineHandle FWPM_ENGINE_HANDLE, sysPorts **FWPM_SYSTEM
 // FwpmSystemPortsSubscribe0 calls fwpuclnt!FwpmSystemPortsSubscribe0.
 // https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-fwpmsystemportssubscribe0
 // Minimum OS: windows6.1.
-func FwpmSystemPortsSubscribe0(engineHandle FWPM_ENGINE_HANDLE, reserved unsafe.Pointer, callback FWPM_SYSTEM_PORTS_CALLBACK0, context unsafe.Pointer, sysPortsHandle *foundation.HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procFwpmSystemPortsSubscribe0.Addr(), uintptr(engineHandle), uintptr(unsafe.Pointer(reserved)), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(sysPortsHandle)))
+func FwpmSystemPortsSubscribe0(engineHandle FWPM_ENGINE_HANDLE, callback FWPM_SYSTEM_PORTS_CALLBACK0, context unsafe.Pointer, sysPortsHandle *foundation.HANDLE) uint32 {
+	r1, _, _ := syscall.SyscallN(procFwpmSystemPortsSubscribe0.Addr(), uintptr(engineHandle), 0, uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(sysPortsHandle)))
 	return uint32(r1)
 }
 
@@ -1339,16 +1360,16 @@ func IPsecKeyManagerAddAndRegister0(engineHandle FWPM_ENGINE_HANDLE, keyManager 
 // IPsecKeyManagerGetSecurityInfoByKey0 calls fwpuclnt!IPsecKeyManagerGetSecurityInfoByKey0.
 // https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-ipseckeymanagergetsecurityinfobykey0
 // Minimum OS: windows8.0.
-func IPsecKeyManagerGetSecurityInfoByKey0(engineHandle FWPM_ENGINE_HANDLE, reserved unsafe.Pointer, securityInfo uint32, sidOwner *security.PSID, sidGroup *security.PSID, dacl **security.ACL, sacl **security.ACL, securityDescriptor *security.PSECURITY_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procIPsecKeyManagerGetSecurityInfoByKey0.Addr(), uintptr(engineHandle), uintptr(unsafe.Pointer(reserved)), uintptr(securityInfo), uintptr(unsafe.Pointer(sidOwner)), uintptr(unsafe.Pointer(sidGroup)), uintptr(unsafe.Pointer(dacl)), uintptr(unsafe.Pointer(sacl)), uintptr(unsafe.Pointer(securityDescriptor)))
+func IPsecKeyManagerGetSecurityInfoByKey0(engineHandle FWPM_ENGINE_HANDLE, securityInfo uint32, sidOwner *security.PSID, sidGroup *security.PSID, dacl **security.ACL, sacl **security.ACL, securityDescriptor *security.PSECURITY_DESCRIPTOR) uint32 {
+	r1, _, _ := syscall.SyscallN(procIPsecKeyManagerGetSecurityInfoByKey0.Addr(), uintptr(engineHandle), 0, uintptr(securityInfo), uintptr(unsafe.Pointer(sidOwner)), uintptr(unsafe.Pointer(sidGroup)), uintptr(unsafe.Pointer(dacl)), uintptr(unsafe.Pointer(sacl)), uintptr(unsafe.Pointer(securityDescriptor)))
 	return uint32(r1)
 }
 
 // IPsecKeyManagerSetSecurityInfoByKey0 calls fwpuclnt!IPsecKeyManagerSetSecurityInfoByKey0.
 // https://learn.microsoft.com/windows/win32/api/fwpmu/nf-fwpmu-ipseckeymanagersetsecurityinfobykey0
 // Minimum OS: windows8.0.
-func IPsecKeyManagerSetSecurityInfoByKey0(engineHandle FWPM_ENGINE_HANDLE, reserved unsafe.Pointer, securityInfo uint32, sidOwner *security.SID, sidGroup *security.SID, dacl *security.ACL, sacl *security.ACL) uint32 {
-	r1, _, _ := syscall.SyscallN(procIPsecKeyManagerSetSecurityInfoByKey0.Addr(), uintptr(engineHandle), uintptr(unsafe.Pointer(reserved)), uintptr(securityInfo), uintptr(unsafe.Pointer(sidOwner)), uintptr(unsafe.Pointer(sidGroup)), uintptr(unsafe.Pointer(dacl)), uintptr(unsafe.Pointer(sacl)))
+func IPsecKeyManagerSetSecurityInfoByKey0(engineHandle FWPM_ENGINE_HANDLE, securityInfo uint32, sidOwner *security.SID, sidGroup *security.SID, dacl *security.ACL, sacl *security.ACL) uint32 {
+	r1, _, _ := syscall.SyscallN(procIPsecKeyManagerSetSecurityInfoByKey0.Addr(), uintptr(engineHandle), 0, uintptr(securityInfo), uintptr(unsafe.Pointer(sidOwner)), uintptr(unsafe.Pointer(sidGroup)), uintptr(unsafe.Pointer(dacl)), uintptr(unsafe.Pointer(sacl)))
 	return uint32(r1)
 }
 

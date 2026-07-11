@@ -23,69 +23,69 @@ type IDeviceModelPlugIn struct {
 var IID_IDeviceModelPlugIn = win32.GUID{Data1: 0x1cd63475, Data2: 0x07c4, Data3: 0x46fe, Data4: [8]byte{0xa9, 0x03, 0xd6, 0x55, 0x31, 0x6d, 0x11, 0xfd}}
 
 // Initialize dispatches through IDeviceModelPlugIn's vtable slot 3.
-func (self *IDeviceModelPlugIn) Initialize(bstrXml foundation.BSTR, cNumModels uint32, iModelPosition uint32) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) Initialize(bstrXml foundation.BSTR, cNumModels uint32, iModelPosition uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXml)), uintptr(cNumModels), uintptr(iModelPosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNumChannels dispatches through IDeviceModelPlugIn's vtable slot 4.
-func (self *IDeviceModelPlugIn) GetNumChannels(pNumChannels *uint32) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) GetNumChannels(pNumChannels *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumChannels)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeviceToColorimetricColors dispatches through IDeviceModelPlugIn's vtable slot 5.
-func (self *IDeviceModelPlugIn) DeviceToColorimetricColors(cColors uint32, cChannels uint32, pDeviceValues *float32, pXYZColors *XYZColorF) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) DeviceToColorimetricColors(cColors uint32, cChannels uint32, pDeviceValues *float32, pXYZColors *XYZColorF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cColors), uintptr(cChannels), uintptr(unsafe.Pointer(pDeviceValues)), uintptr(unsafe.Pointer(pXYZColors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ColorimetricToDeviceColors dispatches through IDeviceModelPlugIn's vtable slot 6.
-func (self *IDeviceModelPlugIn) ColorimetricToDeviceColors(cColors uint32, cChannels uint32, pXYZColors *XYZColorF, pDeviceValues *float32) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) ColorimetricToDeviceColors(cColors uint32, cChannels uint32, pXYZColors *XYZColorF, pDeviceValues *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cColors), uintptr(cChannels), uintptr(unsafe.Pointer(pXYZColors)), uintptr(unsafe.Pointer(pDeviceValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ColorimetricToDeviceColorsWithBlack dispatches through IDeviceModelPlugIn's vtable slot 7.
-func (self *IDeviceModelPlugIn) ColorimetricToDeviceColorsWithBlack(cColors uint32, cChannels uint32, pXYZColors *XYZColorF, pBlackInformation *BlackInformation, pDeviceValues *float32) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) ColorimetricToDeviceColorsWithBlack(cColors uint32, cChannels uint32, pXYZColors *XYZColorF, pBlackInformation *BlackInformation, pDeviceValues *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cColors), uintptr(cChannels), uintptr(unsafe.Pointer(pXYZColors)), uintptr(unsafe.Pointer(pBlackInformation)), uintptr(unsafe.Pointer(pDeviceValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTransformDeviceModelInfo dispatches through IDeviceModelPlugIn's vtable slot 8.
-func (self *IDeviceModelPlugIn) SetTransformDeviceModelInfo(iModelPosition uint32, pIDeviceModelOther *IDeviceModelPlugIn) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) SetTransformDeviceModelInfo(iModelPosition uint32, pIDeviceModelOther *IDeviceModelPlugIn) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iModelPosition), uintptr(unsafe.Pointer(pIDeviceModelOther)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrimarySamples dispatches through IDeviceModelPlugIn's vtable slot 9.
-func (self *IDeviceModelPlugIn) GetPrimarySamples(pPrimaryColor *PrimaryXYZColors) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) GetPrimarySamples(pPrimaryColor *PrimaryXYZColors) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrimaryColor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGamutBoundaryMeshSize dispatches through IDeviceModelPlugIn's vtable slot 10.
-func (self *IDeviceModelPlugIn) GetGamutBoundaryMeshSize(pNumVertices *uint32, pNumTriangles *uint32) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) GetGamutBoundaryMeshSize(pNumVertices *uint32, pNumTriangles *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumVertices)), uintptr(unsafe.Pointer(pNumTriangles)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGamutBoundaryMesh dispatches through IDeviceModelPlugIn's vtable slot 11.
-func (self *IDeviceModelPlugIn) GetGamutBoundaryMesh(cChannels uint32, cVertices uint32, cTriangles uint32, pVertices *float32, pTriangles *GamutShellTriangle) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) GetGamutBoundaryMesh(cChannels uint32, cVertices uint32, cTriangles uint32, pVertices *float32, pTriangles *GamutShellTriangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(cChannels), uintptr(cVertices), uintptr(cTriangles), uintptr(unsafe.Pointer(pVertices)), uintptr(unsafe.Pointer(pTriangles)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNeutralAxisSize dispatches through IDeviceModelPlugIn's vtable slot 12.
-func (self *IDeviceModelPlugIn) GetNeutralAxisSize(pcColors *uint32) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) GetNeutralAxisSize(pcColors *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcColors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNeutralAxis dispatches through IDeviceModelPlugIn's vtable slot 13.
-func (self *IDeviceModelPlugIn) GetNeutralAxis(cColors uint32, pXYZColors *XYZColorF) foundation.HRESULT {
+func (self *IDeviceModelPlugIn) GetNeutralAxis(cColors uint32, pXYZColors *XYZColorF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(cColors), uintptr(unsafe.Pointer(pXYZColors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IGamutMapModelPlugIn: https://learn.microsoft.com/windows/win32/api/wcsplugin/nn-wcsplugin-igamutmapmodelplugin
@@ -98,13 +98,13 @@ type IGamutMapModelPlugIn struct {
 var IID_IGamutMapModelPlugIn = win32.GUID{Data1: 0x2dd80115, Data2: 0xad1e, Data3: 0x41f6, Data4: [8]byte{0xa2, 0x19, 0xa4, 0xf4, 0xb5, 0x83, 0xd1, 0xf9}}
 
 // Initialize dispatches through IGamutMapModelPlugIn's vtable slot 3.
-func (self *IGamutMapModelPlugIn) Initialize(bstrXml foundation.BSTR, pSrcPlugIn *IDeviceModelPlugIn, pDestPlugIn *IDeviceModelPlugIn, pSrcGBD *GamutBoundaryDescription, pDestGBD *GamutBoundaryDescription) foundation.HRESULT {
+func (self *IGamutMapModelPlugIn) Initialize(bstrXml foundation.BSTR, pSrcPlugIn *IDeviceModelPlugIn, pDestPlugIn *IDeviceModelPlugIn, pSrcGBD *GamutBoundaryDescription, pDestGBD *GamutBoundaryDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXml)), uintptr(unsafe.Pointer(pSrcPlugIn)), uintptr(unsafe.Pointer(pDestPlugIn)), uintptr(unsafe.Pointer(pSrcGBD)), uintptr(unsafe.Pointer(pDestGBD)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SourceToDestinationAppearanceColors dispatches through IGamutMapModelPlugIn's vtable slot 4.
-func (self *IGamutMapModelPlugIn) SourceToDestinationAppearanceColors(cColors uint32, pInputColors *JChColorF, pOutputColors *JChColorF) foundation.HRESULT {
+func (self *IGamutMapModelPlugIn) SourceToDestinationAppearanceColors(cColors uint32, pInputColors *JChColorF, pOutputColors *JChColorF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cColors), uintptr(unsafe.Pointer(pInputColors)), uintptr(unsafe.Pointer(pOutputColors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

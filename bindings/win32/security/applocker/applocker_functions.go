@@ -55,8 +55,8 @@ func SaferComputeTokenFromLevel(LevelHandle security.SAFER_LEVEL_HANDLE, InAcces
 // SaferCreateLevel calls ADVAPI32!SaferCreateLevel.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-safercreatelevel
 // Minimum OS: windows5.1.2600.
-func SaferCreateLevel(dwScopeId uint32, dwLevelId uint32, OpenFlags uint32, pLevelHandle *security.SAFER_LEVEL_HANDLE, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSaferCreateLevel.Addr(), uintptr(dwScopeId), uintptr(dwLevelId), uintptr(OpenFlags), uintptr(unsafe.Pointer(pLevelHandle)), uintptr(unsafe.Pointer(lpReserved)))
+func SaferCreateLevel(dwScopeId uint32, dwLevelId uint32, OpenFlags uint32, pLevelHandle *security.SAFER_LEVEL_HANDLE) error {
+	r1, _, e1 := syscall.SyscallN(procSaferCreateLevel.Addr(), uintptr(dwScopeId), uintptr(dwLevelId), uintptr(OpenFlags), uintptr(unsafe.Pointer(pLevelHandle)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -77,8 +77,8 @@ func SaferGetLevelInformation(LevelHandle security.SAFER_LEVEL_HANDLE, dwInfoTyp
 // SaferGetPolicyInformation calls ADVAPI32!SaferGetPolicyInformation.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-safergetpolicyinformation
 // Minimum OS: windows5.1.2600.
-func SaferGetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLICY_INFO_CLASS, InfoBufferSize uint32, InfoBuffer unsafe.Pointer, InfoBufferRetSize *uint32, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSaferGetPolicyInformation.Addr(), uintptr(dwScopeId), uintptr(SaferPolicyInfoClass), uintptr(InfoBufferSize), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(unsafe.Pointer(InfoBufferRetSize)), uintptr(unsafe.Pointer(lpReserved)))
+func SaferGetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLICY_INFO_CLASS, InfoBufferSize uint32, InfoBuffer unsafe.Pointer, InfoBufferRetSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSaferGetPolicyInformation.Addr(), uintptr(dwScopeId), uintptr(SaferPolicyInfoClass), uintptr(InfoBufferSize), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(unsafe.Pointer(InfoBufferRetSize)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -88,8 +88,12 @@ func SaferGetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLI
 // SaferIdentifyLevel calls ADVAPI32!SaferIdentifyLevel.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-saferidentifylevel
 // Minimum OS: windows5.1.2600.
-func SaferIdentifyLevel(dwNumProperties uint32, pCodeProperties *SAFER_CODE_PROPERTIES_V2, pLevelHandle *security.SAFER_LEVEL_HANDLE, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSaferIdentifyLevel.Addr(), uintptr(dwNumProperties), uintptr(unsafe.Pointer(pCodeProperties)), uintptr(unsafe.Pointer(pLevelHandle)), uintptr(unsafe.Pointer(lpReserved)))
+func SaferIdentifyLevel(pCodeProperties []SAFER_CODE_PROPERTIES_V2, pLevelHandle *security.SAFER_LEVEL_HANDLE, lpReserved unsafe.Pointer) error {
+	var _pCodeProperties *SAFER_CODE_PROPERTIES_V2
+	if len(pCodeProperties) > 0 {
+		_pCodeProperties = &pCodeProperties[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSaferIdentifyLevel.Addr(), uintptr(len(pCodeProperties)), uintptr(unsafe.Pointer(_pCodeProperties)), uintptr(unsafe.Pointer(pLevelHandle)), uintptr(unsafe.Pointer(lpReserved)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -99,8 +103,9 @@ func SaferIdentifyLevel(dwNumProperties uint32, pCodeProperties *SAFER_CODE_PROP
 // SaferRecordEventLogEntry calls ADVAPI32!SaferRecordEventLogEntry.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-saferrecordeventlogentry
 // Minimum OS: windows5.1.2600.
-func SaferRecordEventLogEntry(hLevel security.SAFER_LEVEL_HANDLE, szTargetPath foundation.PWSTR, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSaferRecordEventLogEntry.Addr(), uintptr(hLevel), uintptr(unsafe.Pointer(szTargetPath)), uintptr(unsafe.Pointer(lpReserved)))
+func SaferRecordEventLogEntry(hLevel security.SAFER_LEVEL_HANDLE, szTargetPath string) error {
+	_szTargetPath := win32.UTF16Ptr(szTargetPath)
+	r1, _, e1 := syscall.SyscallN(procSaferRecordEventLogEntry.Addr(), uintptr(hLevel), uintptr(unsafe.Pointer(_szTargetPath)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -121,8 +126,8 @@ func SaferSetLevelInformation(LevelHandle security.SAFER_LEVEL_HANDLE, dwInfoTyp
 // SaferSetPolicyInformation calls ADVAPI32!SaferSetPolicyInformation.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-safersetpolicyinformation
 // Minimum OS: windows5.1.2600.
-func SaferSetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLICY_INFO_CLASS, InfoBufferSize uint32, InfoBuffer unsafe.Pointer, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSaferSetPolicyInformation.Addr(), uintptr(dwScopeId), uintptr(SaferPolicyInfoClass), uintptr(InfoBufferSize), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(unsafe.Pointer(lpReserved)))
+func SaferSetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLICY_INFO_CLASS, InfoBufferSize uint32, InfoBuffer unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procSaferSetPolicyInformation.Addr(), uintptr(dwScopeId), uintptr(SaferPolicyInfoClass), uintptr(InfoBufferSize), uintptr(unsafe.Pointer(InfoBuffer)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -132,7 +137,8 @@ func SaferSetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLI
 // SaferiIsExecutableFileType calls ADVAPI32!SaferiIsExecutableFileType.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-saferiisexecutablefiletype
 // Minimum OS: windows5.1.2600.
-func SaferiIsExecutableFileType(szFullPathname foundation.PWSTR, bFromShellExecute foundation.BOOLEAN) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSaferiIsExecutableFileType.Addr(), uintptr(unsafe.Pointer(szFullPathname)), uintptr(bFromShellExecute))
-	return foundation.BOOL(r1)
+func SaferiIsExecutableFileType(szFullPathname string, bFromShellExecute foundation.BOOLEAN) bool {
+	_szFullPathname := win32.UTF16Ptr(szFullPathname)
+	r1, _, _ := syscall.SyscallN(procSaferiIsExecutableFileType.Addr(), uintptr(unsafe.Pointer(_szFullPathname)), uintptr(bFromShellExecute))
+	return r1 != 0
 }

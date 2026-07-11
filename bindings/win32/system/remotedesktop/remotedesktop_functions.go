@@ -30,55 +30,55 @@ var (
 	procWTSCloudAuthGetServerNonce                             = modWTSAPI32.NewProc("WTSCloudAuthGetServerNonce")
 	procWTSCloudAuthNetworkLogonWithSerializedCredential       = modWTSAPI32.NewProc("WTSCloudAuthNetworkLogonWithSerializedCredential")
 	procWTSCloudAuthOpen                                       = modWTSAPI32.NewProc("WTSCloudAuthOpen")
+	procWTSConnectSession                                      = modWTSAPI32.NewProc("WTSConnectSessionW")
 	procWTSConnectSessionA                                     = modWTSAPI32.NewProc("WTSConnectSessionA")
-	procWTSConnectSessionW                                     = modWTSAPI32.NewProc("WTSConnectSessionW")
+	procWTSCreateListener                                      = modWTSAPI32.NewProc("WTSCreateListenerW")
 	procWTSCreateListenerA                                     = modWTSAPI32.NewProc("WTSCreateListenerA")
-	procWTSCreateListenerW                                     = modWTSAPI32.NewProc("WTSCreateListenerW")
 	procWTSDisconnectSession                                   = modWTSAPI32.NewProc("WTSDisconnectSession")
 	procWTSEnableChildSessions                                 = modWTSAPI32.NewProc("WTSEnableChildSessions")
+	procWTSEnumerateListeners                                  = modWTSAPI32.NewProc("WTSEnumerateListenersW")
 	procWTSEnumerateListenersA                                 = modWTSAPI32.NewProc("WTSEnumerateListenersA")
-	procWTSEnumerateListenersW                                 = modWTSAPI32.NewProc("WTSEnumerateListenersW")
+	procWTSEnumerateProcesses                                  = modWTSAPI32.NewProc("WTSEnumerateProcessesW")
 	procWTSEnumerateProcessesA                                 = modWTSAPI32.NewProc("WTSEnumerateProcessesA")
+	procWTSEnumerateProcessesEx                                = modWTSAPI32.NewProc("WTSEnumerateProcessesExW")
 	procWTSEnumerateProcessesExA                               = modWTSAPI32.NewProc("WTSEnumerateProcessesExA")
-	procWTSEnumerateProcessesExW                               = modWTSAPI32.NewProc("WTSEnumerateProcessesExW")
-	procWTSEnumerateProcessesW                                 = modWTSAPI32.NewProc("WTSEnumerateProcessesW")
+	procWTSEnumerateServers                                    = modWTSAPI32.NewProc("WTSEnumerateServersW")
 	procWTSEnumerateServersA                                   = modWTSAPI32.NewProc("WTSEnumerateServersA")
-	procWTSEnumerateServersW                                   = modWTSAPI32.NewProc("WTSEnumerateServersW")
+	procWTSEnumerateSessions                                   = modWTSAPI32.NewProc("WTSEnumerateSessionsW")
 	procWTSEnumerateSessionsA                                  = modWTSAPI32.NewProc("WTSEnumerateSessionsA")
+	procWTSEnumerateSessionsEx                                 = modWTSAPI32.NewProc("WTSEnumerateSessionsExW")
 	procWTSEnumerateSessionsExA                                = modWTSAPI32.NewProc("WTSEnumerateSessionsExA")
-	procWTSEnumerateSessionsExW                                = modWTSAPI32.NewProc("WTSEnumerateSessionsExW")
-	procWTSEnumerateSessionsW                                  = modWTSAPI32.NewProc("WTSEnumerateSessionsW")
 	procWTSFreeMemory                                          = modWTSAPI32.NewProc("WTSFreeMemory")
+	procWTSFreeMemoryEx                                        = modWTSAPI32.NewProc("WTSFreeMemoryExW")
 	procWTSFreeMemoryExA                                       = modWTSAPI32.NewProc("WTSFreeMemoryExA")
-	procWTSFreeMemoryExW                                       = modWTSAPI32.NewProc("WTSFreeMemoryExW")
 	procWTSGetChildSessionId                                   = modWTSAPI32.NewProc("WTSGetChildSessionId")
+	procWTSGetListenerSecurity                                 = modWTSAPI32.NewProc("WTSGetListenerSecurityW")
 	procWTSGetListenerSecurityA                                = modWTSAPI32.NewProc("WTSGetListenerSecurityA")
-	procWTSGetListenerSecurityW                                = modWTSAPI32.NewProc("WTSGetListenerSecurityW")
 	procWTSIsChildSessionsEnabled                              = modWTSAPI32.NewProc("WTSIsChildSessionsEnabled")
 	procWTSLogoffSession                                       = modWTSAPI32.NewProc("WTSLogoffSession")
+	procWTSOpenServer                                          = modWTSAPI32.NewProc("WTSOpenServerW")
 	procWTSOpenServerA                                         = modWTSAPI32.NewProc("WTSOpenServerA")
+	procWTSOpenServerEx                                        = modWTSAPI32.NewProc("WTSOpenServerExW")
 	procWTSOpenServerExA                                       = modWTSAPI32.NewProc("WTSOpenServerExA")
-	procWTSOpenServerExW                                       = modWTSAPI32.NewProc("WTSOpenServerExW")
-	procWTSOpenServerW                                         = modWTSAPI32.NewProc("WTSOpenServerW")
+	procWTSQueryListenerConfig                                 = modWTSAPI32.NewProc("WTSQueryListenerConfigW")
 	procWTSQueryListenerConfigA                                = modWTSAPI32.NewProc("WTSQueryListenerConfigA")
-	procWTSQueryListenerConfigW                                = modWTSAPI32.NewProc("WTSQueryListenerConfigW")
+	procWTSQuerySessionInformation                             = modWTSAPI32.NewProc("WTSQuerySessionInformationW")
 	procWTSQuerySessionInformationA                            = modWTSAPI32.NewProc("WTSQuerySessionInformationA")
-	procWTSQuerySessionInformationW                            = modWTSAPI32.NewProc("WTSQuerySessionInformationW")
+	procWTSQueryUserConfig                                     = modWTSAPI32.NewProc("WTSQueryUserConfigW")
 	procWTSQueryUserConfigA                                    = modWTSAPI32.NewProc("WTSQueryUserConfigA")
-	procWTSQueryUserConfigW                                    = modWTSAPI32.NewProc("WTSQueryUserConfigW")
 	procWTSQueryUserToken                                      = modWTSAPI32.NewProc("WTSQueryUserToken")
 	procWTSRegisterSessionNotification                         = modWTSAPI32.NewProc("WTSRegisterSessionNotification")
 	procWTSRegisterSessionNotificationEx                       = modWTSAPI32.NewProc("WTSRegisterSessionNotificationEx")
+	procWTSSendMessage                                         = modWTSAPI32.NewProc("WTSSendMessageW")
 	procWTSSendMessageA                                        = modWTSAPI32.NewProc("WTSSendMessageA")
-	procWTSSendMessageW                                        = modWTSAPI32.NewProc("WTSSendMessageW")
+	procWTSSetListenerSecurity                                 = modWTSAPI32.NewProc("WTSSetListenerSecurityW")
 	procWTSSetListenerSecurityA                                = modWTSAPI32.NewProc("WTSSetListenerSecurityA")
-	procWTSSetListenerSecurityW                                = modWTSAPI32.NewProc("WTSSetListenerSecurityW")
 	procWTSSetRenderHint                                       = modWTSAPI32.NewProc("WTSSetRenderHint")
+	procWTSSetUserConfig                                       = modWTSAPI32.NewProc("WTSSetUserConfigW")
 	procWTSSetUserConfigA                                      = modWTSAPI32.NewProc("WTSSetUserConfigA")
-	procWTSSetUserConfigW                                      = modWTSAPI32.NewProc("WTSSetUserConfigW")
 	procWTSShutdownSystem                                      = modWTSAPI32.NewProc("WTSShutdownSystem")
+	procWTSStartRemoteControlSession                           = modWTSAPI32.NewProc("WTSStartRemoteControlSessionW")
 	procWTSStartRemoteControlSessionA                          = modWTSAPI32.NewProc("WTSStartRemoteControlSessionA")
-	procWTSStartRemoteControlSessionW                          = modWTSAPI32.NewProc("WTSStartRemoteControlSessionW")
 	procWTSStopRemoteControlSession                            = modWTSAPI32.NewProc("WTSStopRemoteControlSession")
 	procWTSTerminateProcess                                    = modWTSAPI32.NewProc("WTSTerminateProcess")
 	procWTSUnRegisterSessionNotification                       = modWTSAPI32.NewProc("WTSUnRegisterSessionNotification")
@@ -106,9 +106,9 @@ func ProcessIdToSessionId(dwProcessId uint32, pSessionId *uint32) error {
 }
 
 // WTSActiveSessionExists calls WTSAPI32!WTSActiveSessionExists.
-func WTSActiveSessionExists(pbActiveSessionExists *foundation.BOOL) foundation.BOOL {
+func WTSActiveSessionExists(pbActiveSessionExists *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procWTSActiveSessionExists.Addr(), uintptr(unsafe.Pointer(pbActiveSessionExists)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WTSCloseServer calls WTSAPI32!WTSCloseServer.
@@ -124,27 +124,28 @@ func WTSCloudAuthClose(cloudAuthHandle WTS_CLOUD_AUTH_HANDLE) {
 }
 
 // WTSCloudAuthConvertAssertionToSerializedUserCredential calls WTSAPI32!WTSCloudAuthConvertAssertionToSerializedUserCredential.
-func WTSCloudAuthConvertAssertionToSerializedUserCredential(cloudAuthHandle WTS_CLOUD_AUTH_HANDLE, assertion foundation.PSTR, assertionLength uint32, resourceId foundation.PWSTR, userCredential **WTS_SERIALIZED_USER_CREDENTIAL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWTSCloudAuthConvertAssertionToSerializedUserCredential.Addr(), uintptr(cloudAuthHandle), uintptr(unsafe.Pointer(assertion)), uintptr(assertionLength), uintptr(unsafe.Pointer(resourceId)), uintptr(unsafe.Pointer(userCredential)))
-	return foundation.BOOL(r1)
+func WTSCloudAuthConvertAssertionToSerializedUserCredential(cloudAuthHandle WTS_CLOUD_AUTH_HANDLE, assertion foundation.PSTR, assertionLength uint32, resourceId string, userCredential **WTS_SERIALIZED_USER_CREDENTIAL) bool {
+	_resourceId := win32.UTF16Ptr(resourceId)
+	r1, _, _ := syscall.SyscallN(procWTSCloudAuthConvertAssertionToSerializedUserCredential.Addr(), uintptr(cloudAuthHandle), uintptr(unsafe.Pointer(assertion)), uintptr(assertionLength), uintptr(unsafe.Pointer(_resourceId)), uintptr(unsafe.Pointer(userCredential)))
+	return r1 != 0
 }
 
 // WTSCloudAuthDuplicateSerializedUserCredential calls WTSAPI32!WTSCloudAuthDuplicateSerializedUserCredential.
-func WTSCloudAuthDuplicateSerializedUserCredential(userCredential *WTS_SERIALIZED_USER_CREDENTIAL, duplicatedUserCredential **WTS_SERIALIZED_USER_CREDENTIAL) foundation.BOOL {
+func WTSCloudAuthDuplicateSerializedUserCredential(userCredential *WTS_SERIALIZED_USER_CREDENTIAL, duplicatedUserCredential **WTS_SERIALIZED_USER_CREDENTIAL) bool {
 	r1, _, _ := syscall.SyscallN(procWTSCloudAuthDuplicateSerializedUserCredential.Addr(), uintptr(unsafe.Pointer(userCredential)), uintptr(unsafe.Pointer(duplicatedUserCredential)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WTSCloudAuthGetServerNonce calls WTSAPI32!WTSCloudAuthGetServerNonce.
-func WTSCloudAuthGetServerNonce(cloudAuthHandle WTS_CLOUD_AUTH_HANDLE, serverNonce *foundation.PWSTR) foundation.BOOL {
+func WTSCloudAuthGetServerNonce(cloudAuthHandle WTS_CLOUD_AUTH_HANDLE, serverNonce *foundation.PWSTR) bool {
 	r1, _, _ := syscall.SyscallN(procWTSCloudAuthGetServerNonce.Addr(), uintptr(cloudAuthHandle), uintptr(unsafe.Pointer(serverNonce)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WTSCloudAuthNetworkLogonWithSerializedCredential calls WTSAPI32!WTSCloudAuthNetworkLogonWithSerializedCredential.
-func WTSCloudAuthNetworkLogonWithSerializedCredential(cloudAuthHandle WTS_CLOUD_AUTH_HANDLE, userCredential *WTS_SERIALIZED_USER_CREDENTIAL, token *foundation.HANDLE) foundation.BOOL {
+func WTSCloudAuthNetworkLogonWithSerializedCredential(cloudAuthHandle WTS_CLOUD_AUTH_HANDLE, userCredential *WTS_SERIALIZED_USER_CREDENTIAL, token *foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procWTSCloudAuthNetworkLogonWithSerializedCredential.Addr(), uintptr(cloudAuthHandle), uintptr(unsafe.Pointer(userCredential)), uintptr(unsafe.Pointer(token)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WTSCloudAuthOpen calls WTSAPI32!WTSCloudAuthOpen.
@@ -153,22 +154,37 @@ func WTSCloudAuthOpen(activityId *win32.GUID) WTS_CLOUD_AUTH_HANDLE {
 	return WTS_CLOUD_AUTH_HANDLE(r1)
 }
 
-// WTSConnectSessionA calls WTSAPI32!WTSConnectSessionA.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsconnectsessiona
+// WTSConnectSession calls WTSAPI32!WTSConnectSessionW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsconnectsessionw
 // Minimum OS: windows6.0.6000.
-func WTSConnectSessionA(LogonId uint32, TargetLogonId uint32, pPassword foundation.PSTR, bWait foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procWTSConnectSessionA.Addr(), uintptr(LogonId), uintptr(TargetLogonId), uintptr(unsafe.Pointer(pPassword)), uintptr(bWait))
+func WTSConnectSession(LogonId uint32, TargetLogonId uint32, pPassword string, bWait bool) error {
+	_pPassword := win32.UTF16Ptr(pPassword)
+	_bWait := win32.Bool32(bWait)
+	r1, _, e1 := syscall.SyscallN(procWTSConnectSession.Addr(), uintptr(LogonId), uintptr(TargetLogonId), uintptr(unsafe.Pointer(_pPassword)), uintptr(_bWait))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// WTSConnectSessionW calls WTSAPI32!WTSConnectSessionW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsconnectsessionw
+// WTSConnectSessionA calls WTSAPI32!WTSConnectSessionA.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsconnectsessiona
 // Minimum OS: windows6.0.6000.
-func WTSConnectSessionW(LogonId uint32, TargetLogonId uint32, pPassword foundation.PWSTR, bWait foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procWTSConnectSessionW.Addr(), uintptr(LogonId), uintptr(TargetLogonId), uintptr(unsafe.Pointer(pPassword)), uintptr(bWait))
+func WTSConnectSessionA(LogonId uint32, TargetLogonId uint32, pPassword foundation.PSTR, bWait bool) error {
+	_bWait := win32.Bool32(bWait)
+	r1, _, e1 := syscall.SyscallN(procWTSConnectSessionA.Addr(), uintptr(LogonId), uintptr(TargetLogonId), uintptr(unsafe.Pointer(pPassword)), uintptr(_bWait))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// WTSCreateListener calls WTSAPI32!WTSCreateListenerW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtscreatelistenerw
+// Minimum OS: windows6.1.
+func WTSCreateListener(pReserved unsafe.Pointer, Reserved uint32, pListenerName string, pBuffer *WTSLISTENERCONFIGW, flag uint32) error {
+	_pListenerName := win32.UTF16Ptr(pListenerName)
+	r1, _, e1 := syscall.SyscallN(procWTSCreateListener.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(_pListenerName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(flag))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -178,19 +194,8 @@ func WTSConnectSessionW(LogonId uint32, TargetLogonId uint32, pPassword foundati
 // WTSCreateListenerA calls WTSAPI32!WTSCreateListenerA.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtscreatelistenera
 // Minimum OS: windows6.1.
-func WTSCreateListenerA(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PSTR, pBuffer *WTSLISTENERCONFIGA, flag uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSCreateListenerA.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(flag))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// WTSCreateListenerW calls WTSAPI32!WTSCreateListenerW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtscreatelistenerw
-// Minimum OS: windows6.1.
-func WTSCreateListenerW(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PWSTR, pBuffer *WTSLISTENERCONFIGW, flag uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSCreateListenerW.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(flag))
+func WTSCreateListenerA(pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PSTR, pBuffer *WTSLISTENERCONFIGA, flag uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSCreateListenerA.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(flag))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -200,8 +205,9 @@ func WTSCreateListenerW(hServer foundation.HANDLE, pReserved unsafe.Pointer, Res
 // WTSDisconnectSession calls WTSAPI32!WTSDisconnectSession.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsdisconnectsession
 // Minimum OS: windows6.0.6000.
-func WTSDisconnectSession(hServer foundation.HANDLE, SessionId uint32, bWait foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procWTSDisconnectSession.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(bWait))
+func WTSDisconnectSession(hServer foundation.HANDLE, SessionId uint32, bWait bool) error {
+	_bWait := win32.Bool32(bWait)
+	r1, _, e1 := syscall.SyscallN(procWTSDisconnectSession.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(_bWait))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -211,27 +217,39 @@ func WTSDisconnectSession(hServer foundation.HANDLE, SessionId uint32, bWait fou
 // WTSEnableChildSessions calls WTSAPI32!WTSEnableChildSessions.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenablechildsessions
 // Minimum OS: windows8.0.
-func WTSEnableChildSessions(bEnable foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWTSEnableChildSessions.Addr(), uintptr(bEnable))
-	return foundation.BOOL(r1)
+func WTSEnableChildSessions(bEnable bool) bool {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := syscall.SyscallN(procWTSEnableChildSessions.Addr(), uintptr(_bEnable))
+	return r1 != 0
 }
 
-// WTSEnumerateListenersA calls WTSAPI32!WTSEnumerateListenersA.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumeratelistenersa
+// WTSEnumerateListeners calls WTSAPI32!WTSEnumerateListenersW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumeratelistenersw
 // Minimum OS: windows6.1.
-func WTSEnumerateListenersA(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListeners **int8, pCount *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSEnumerateListenersA.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListeners)), uintptr(unsafe.Pointer(pCount)))
+func WTSEnumerateListeners(pReserved unsafe.Pointer, Reserved uint32, pListeners **uint16, pCount *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSEnumerateListeners.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListeners)), uintptr(unsafe.Pointer(pCount)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// WTSEnumerateListenersW calls WTSAPI32!WTSEnumerateListenersW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumeratelistenersw
+// WTSEnumerateListenersA calls WTSAPI32!WTSEnumerateListenersA.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumeratelistenersa
 // Minimum OS: windows6.1.
-func WTSEnumerateListenersW(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListeners **uint16, pCount *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSEnumerateListenersW.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListeners)), uintptr(unsafe.Pointer(pCount)))
+func WTSEnumerateListenersA(pReserved unsafe.Pointer, Reserved uint32, pListeners **int8, pCount *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSEnumerateListenersA.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListeners)), uintptr(unsafe.Pointer(pCount)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// WTSEnumerateProcesses calls WTSAPI32!WTSEnumerateProcessesW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumerateprocessesw
+// Minimum OS: windows6.0.6000.
+func WTSEnumerateProcesses(hServer foundation.HANDLE, Reserved uint32, Version uint32, ppProcessInfo **WTS_PROCESS_INFOW, pCount *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSEnumerateProcesses.Addr(), uintptr(hServer), uintptr(Reserved), uintptr(Version), uintptr(unsafe.Pointer(ppProcessInfo)), uintptr(unsafe.Pointer(pCount)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -249,6 +267,17 @@ func WTSEnumerateProcessesA(hServer foundation.HANDLE, Reserved uint32, Version 
 	return nil
 }
 
+// WTSEnumerateProcessesEx calls WTSAPI32!WTSEnumerateProcessesExW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumerateprocessesexw
+// Minimum OS: windows6.1.
+func WTSEnumerateProcessesEx(hServer foundation.HANDLE, pLevel *uint32, SessionId uint32, ppProcessInfo *foundation.PWSTR, pCount *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSEnumerateProcessesEx.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pLevel)), uintptr(SessionId), uintptr(unsafe.Pointer(ppProcessInfo)), uintptr(unsafe.Pointer(pCount)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // WTSEnumerateProcessesExA calls WTSAPI32!WTSEnumerateProcessesExA.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumerateprocessesexa
 // Minimum OS: windows6.1.
@@ -260,22 +289,12 @@ func WTSEnumerateProcessesExA(hServer foundation.HANDLE, pLevel *uint32, Session
 	return nil
 }
 
-// WTSEnumerateProcessesExW calls WTSAPI32!WTSEnumerateProcessesExW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumerateprocessesexw
-// Minimum OS: windows6.1.
-func WTSEnumerateProcessesExW(hServer foundation.HANDLE, pLevel *uint32, SessionId uint32, ppProcessInfo *foundation.PWSTR, pCount *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSEnumerateProcessesExW.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pLevel)), uintptr(SessionId), uintptr(unsafe.Pointer(ppProcessInfo)), uintptr(unsafe.Pointer(pCount)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// WTSEnumerateProcessesW calls WTSAPI32!WTSEnumerateProcessesW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumerateprocessesw
+// WTSEnumerateServers calls WTSAPI32!WTSEnumerateServersW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumerateserversw
 // Minimum OS: windows6.0.6000.
-func WTSEnumerateProcessesW(hServer foundation.HANDLE, Reserved uint32, Version uint32, ppProcessInfo **WTS_PROCESS_INFOW, pCount *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSEnumerateProcessesW.Addr(), uintptr(hServer), uintptr(Reserved), uintptr(Version), uintptr(unsafe.Pointer(ppProcessInfo)), uintptr(unsafe.Pointer(pCount)))
+func WTSEnumerateServers(pDomainName string, Reserved uint32, Version uint32, ppServerInfo **WTS_SERVER_INFOW, pCount *uint32) error {
+	_pDomainName := win32.UTF16Ptr(pDomainName)
+	r1, _, e1 := syscall.SyscallN(procWTSEnumerateServers.Addr(), uintptr(unsafe.Pointer(_pDomainName)), uintptr(Reserved), uintptr(Version), uintptr(unsafe.Pointer(ppServerInfo)), uintptr(unsafe.Pointer(pCount)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -293,11 +312,11 @@ func WTSEnumerateServersA(pDomainName foundation.PSTR, Reserved uint32, Version 
 	return nil
 }
 
-// WTSEnumerateServersW calls WTSAPI32!WTSEnumerateServersW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumerateserversw
+// WTSEnumerateSessions calls WTSAPI32!WTSEnumerateSessionsW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumeratesessionsw
 // Minimum OS: windows6.0.6000.
-func WTSEnumerateServersW(pDomainName foundation.PWSTR, Reserved uint32, Version uint32, ppServerInfo **WTS_SERVER_INFOW, pCount *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSEnumerateServersW.Addr(), uintptr(unsafe.Pointer(pDomainName)), uintptr(Reserved), uintptr(Version), uintptr(unsafe.Pointer(ppServerInfo)), uintptr(unsafe.Pointer(pCount)))
+func WTSEnumerateSessions(hServer foundation.HANDLE, Reserved uint32, Version uint32, ppSessionInfo **WTS_SESSION_INFOW, pCount *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSEnumerateSessions.Addr(), uintptr(hServer), uintptr(Reserved), uintptr(Version), uintptr(unsafe.Pointer(ppSessionInfo)), uintptr(unsafe.Pointer(pCount)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -315,33 +334,22 @@ func WTSEnumerateSessionsA(hServer foundation.HANDLE, Reserved uint32, Version u
 	return nil
 }
 
+// WTSEnumerateSessionsEx calls WTSAPI32!WTSEnumerateSessionsExW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumeratesessionsexw
+// Minimum OS: windows6.1.
+func WTSEnumerateSessionsEx(hServer foundation.HANDLE, pLevel *uint32, Filter uint32, ppSessionInfo **WTS_SESSION_INFO_1W, pCount *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSEnumerateSessionsEx.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pLevel)), uintptr(Filter), uintptr(unsafe.Pointer(ppSessionInfo)), uintptr(unsafe.Pointer(pCount)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // WTSEnumerateSessionsExA calls WTSAPI32!WTSEnumerateSessionsExA.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumeratesessionsexa
 // Minimum OS: windows6.1.
 func WTSEnumerateSessionsExA(hServer foundation.HANDLE, pLevel *uint32, Filter uint32, ppSessionInfo **WTS_SESSION_INFO_1A, pCount *uint32) error {
 	r1, _, e1 := syscall.SyscallN(procWTSEnumerateSessionsExA.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pLevel)), uintptr(Filter), uintptr(unsafe.Pointer(ppSessionInfo)), uintptr(unsafe.Pointer(pCount)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// WTSEnumerateSessionsExW calls WTSAPI32!WTSEnumerateSessionsExW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumeratesessionsexw
-// Minimum OS: windows6.1.
-func WTSEnumerateSessionsExW(hServer foundation.HANDLE, pLevel *uint32, Filter uint32, ppSessionInfo **WTS_SESSION_INFO_1W, pCount *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSEnumerateSessionsExW.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pLevel)), uintptr(Filter), uintptr(unsafe.Pointer(ppSessionInfo)), uintptr(unsafe.Pointer(pCount)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// WTSEnumerateSessionsW calls WTSAPI32!WTSEnumerateSessionsW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsenumeratesessionsw
-// Minimum OS: windows6.0.6000.
-func WTSEnumerateSessionsW(hServer foundation.HANDLE, Reserved uint32, Version uint32, ppSessionInfo **WTS_SESSION_INFOW, pCount *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSEnumerateSessionsW.Addr(), uintptr(hServer), uintptr(Reserved), uintptr(Version), uintptr(unsafe.Pointer(ppSessionInfo)), uintptr(unsafe.Pointer(pCount)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -355,22 +363,22 @@ func WTSFreeMemory(pMemory unsafe.Pointer) {
 	syscall.SyscallN(procWTSFreeMemory.Addr(), uintptr(unsafe.Pointer(pMemory)))
 }
 
-// WTSFreeMemoryExA calls WTSAPI32!WTSFreeMemoryExA.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsfreememoryexa
+// WTSFreeMemoryEx calls WTSAPI32!WTSFreeMemoryExW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsfreememoryexw
 // Minimum OS: windows6.1.
-func WTSFreeMemoryExA(WTSTypeClass WTS_TYPE_CLASS, pMemory unsafe.Pointer, NumberOfEntries uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSFreeMemoryExA.Addr(), uintptr(WTSTypeClass), uintptr(unsafe.Pointer(pMemory)), uintptr(NumberOfEntries))
+func WTSFreeMemoryEx(WTSTypeClass WTS_TYPE_CLASS, pMemory unsafe.Pointer, NumberOfEntries uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSFreeMemoryEx.Addr(), uintptr(WTSTypeClass), uintptr(unsafe.Pointer(pMemory)), uintptr(NumberOfEntries))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// WTSFreeMemoryExW calls WTSAPI32!WTSFreeMemoryExW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsfreememoryexw
+// WTSFreeMemoryExA calls WTSAPI32!WTSFreeMemoryExA.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsfreememoryexa
 // Minimum OS: windows6.1.
-func WTSFreeMemoryExW(WTSTypeClass WTS_TYPE_CLASS, pMemory unsafe.Pointer, NumberOfEntries uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSFreeMemoryExW.Addr(), uintptr(WTSTypeClass), uintptr(unsafe.Pointer(pMemory)), uintptr(NumberOfEntries))
+func WTSFreeMemoryExA(WTSTypeClass WTS_TYPE_CLASS, pMemory unsafe.Pointer, NumberOfEntries uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSFreeMemoryExA.Addr(), uintptr(WTSTypeClass), uintptr(unsafe.Pointer(pMemory)), uintptr(NumberOfEntries))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -388,27 +396,28 @@ func WTSGetActiveConsoleSessionId() uint32 {
 // WTSGetChildSessionId calls WTSAPI32!WTSGetChildSessionId.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsgetchildsessionid
 // Minimum OS: windows8.0.
-func WTSGetChildSessionId(pSessionId *uint32) foundation.BOOL {
+func WTSGetChildSessionId(pSessionId *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procWTSGetChildSessionId.Addr(), uintptr(unsafe.Pointer(pSessionId)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// WTSGetListenerSecurityA calls WTSAPI32!WTSGetListenerSecurityA.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsgetlistenersecuritya
+// WTSGetListenerSecurity calls WTSAPI32!WTSGetListenerSecurityW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsgetlistenersecurityw
 // Minimum OS: windows6.1.
-func WTSGetListenerSecurityA(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PSTR, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, nLength uint32, lpnLengthNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSGetListenerSecurityA.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
+func WTSGetListenerSecurity(pReserved unsafe.Pointer, Reserved uint32, pListenerName string, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, nLength uint32, lpnLengthNeeded *uint32) error {
+	_pListenerName := win32.UTF16Ptr(pListenerName)
+	r1, _, e1 := syscall.SyscallN(procWTSGetListenerSecurity.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(_pListenerName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// WTSGetListenerSecurityW calls WTSAPI32!WTSGetListenerSecurityW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsgetlistenersecurityw
+// WTSGetListenerSecurityA calls WTSAPI32!WTSGetListenerSecurityA.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsgetlistenersecuritya
 // Minimum OS: windows6.1.
-func WTSGetListenerSecurityW(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PWSTR, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, nLength uint32, lpnLengthNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSGetListenerSecurityW.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
+func WTSGetListenerSecurityA(pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PSTR, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, nLength uint32, lpnLengthNeeded *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSGetListenerSecurityA.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -418,20 +427,30 @@ func WTSGetListenerSecurityW(hServer foundation.HANDLE, pReserved unsafe.Pointer
 // WTSIsChildSessionsEnabled calls WTSAPI32!WTSIsChildSessionsEnabled.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsischildsessionsenabled
 // Minimum OS: windows8.0.
-func WTSIsChildSessionsEnabled(pbEnabled *foundation.BOOL) foundation.BOOL {
+func WTSIsChildSessionsEnabled(pbEnabled *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procWTSIsChildSessionsEnabled.Addr(), uintptr(unsafe.Pointer(pbEnabled)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WTSLogoffSession calls WTSAPI32!WTSLogoffSession.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtslogoffsession
 // Minimum OS: windows6.0.6000.
-func WTSLogoffSession(hServer foundation.HANDLE, SessionId uint32, bWait foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procWTSLogoffSession.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(bWait))
+func WTSLogoffSession(hServer foundation.HANDLE, SessionId uint32, bWait bool) error {
+	_bWait := win32.Bool32(bWait)
+	r1, _, e1 := syscall.SyscallN(procWTSLogoffSession.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(_bWait))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// WTSOpenServer calls WTSAPI32!WTSOpenServerW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsopenserverw
+// Minimum OS: windows6.0.6000.
+func WTSOpenServer(pServerName string) foundation.HANDLE {
+	_pServerName := win32.UTF16Ptr(pServerName)
+	r1, _, _ := syscall.SyscallN(procWTSOpenServer.Addr(), uintptr(unsafe.Pointer(_pServerName)))
+	return foundation.HANDLE(r1)
 }
 
 // WTSOpenServerA calls WTSAPI32!WTSOpenServerA.
@@ -439,6 +458,15 @@ func WTSLogoffSession(hServer foundation.HANDLE, SessionId uint32, bWait foundat
 // Minimum OS: windows6.0.6000.
 func WTSOpenServerA(pServerName foundation.PSTR) foundation.HANDLE {
 	r1, _, _ := syscall.SyscallN(procWTSOpenServerA.Addr(), uintptr(unsafe.Pointer(pServerName)))
+	return foundation.HANDLE(r1)
+}
+
+// WTSOpenServerEx calls WTSAPI32!WTSOpenServerExW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsopenserverexw
+// Minimum OS: windows6.1.
+func WTSOpenServerEx(pServerName string) foundation.HANDLE {
+	_pServerName := win32.UTF16Ptr(pServerName)
+	r1, _, _ := syscall.SyscallN(procWTSOpenServerEx.Addr(), uintptr(unsafe.Pointer(_pServerName)))
 	return foundation.HANDLE(r1)
 }
 
@@ -450,38 +478,34 @@ func WTSOpenServerExA(pServerName foundation.PSTR) foundation.HANDLE {
 	return foundation.HANDLE(r1)
 }
 
-// WTSOpenServerExW calls WTSAPI32!WTSOpenServerExW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsopenserverexw
+// WTSQueryListenerConfig calls WTSAPI32!WTSQueryListenerConfigW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsquerylistenerconfigw
 // Minimum OS: windows6.1.
-func WTSOpenServerExW(pServerName foundation.PWSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procWTSOpenServerExW.Addr(), uintptr(unsafe.Pointer(pServerName)))
-	return foundation.HANDLE(r1)
-}
-
-// WTSOpenServerW calls WTSAPI32!WTSOpenServerW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsopenserverw
-// Minimum OS: windows6.0.6000.
-func WTSOpenServerW(pServerName foundation.PWSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procWTSOpenServerW.Addr(), uintptr(unsafe.Pointer(pServerName)))
-	return foundation.HANDLE(r1)
-}
-
-// WTSQueryListenerConfigA calls WTSAPI32!WTSQueryListenerConfigA.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsquerylistenerconfiga
-// Minimum OS: windows6.1.
-func WTSQueryListenerConfigA(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PSTR, pBuffer *WTSLISTENERCONFIGA) error {
-	r1, _, e1 := syscall.SyscallN(procWTSQueryListenerConfigA.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(unsafe.Pointer(pBuffer)))
+func WTSQueryListenerConfig(pReserved unsafe.Pointer, Reserved uint32, pListenerName string, pBuffer *WTSLISTENERCONFIGW) error {
+	_pListenerName := win32.UTF16Ptr(pListenerName)
+	r1, _, e1 := syscall.SyscallN(procWTSQueryListenerConfig.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(_pListenerName)), uintptr(unsafe.Pointer(pBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// WTSQueryListenerConfigW calls WTSAPI32!WTSQueryListenerConfigW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsquerylistenerconfigw
+// WTSQueryListenerConfigA calls WTSAPI32!WTSQueryListenerConfigA.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsquerylistenerconfiga
 // Minimum OS: windows6.1.
-func WTSQueryListenerConfigW(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PWSTR, pBuffer *WTSLISTENERCONFIGW) error {
-	r1, _, e1 := syscall.SyscallN(procWTSQueryListenerConfigW.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(unsafe.Pointer(pBuffer)))
+func WTSQueryListenerConfigA(pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PSTR, pBuffer *WTSLISTENERCONFIGA) error {
+	r1, _, e1 := syscall.SyscallN(procWTSQueryListenerConfigA.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(unsafe.Pointer(pBuffer)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// WTSQuerySessionInformation calls WTSAPI32!WTSQuerySessionInformationW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsquerysessioninformationw
+// Minimum OS: windows6.0.6000.
+func WTSQuerySessionInformation(hServer foundation.HANDLE, SessionId uint32, WTSInfoClass WTS_INFO_CLASS, ppBuffer *foundation.PWSTR, pBytesReturned *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWTSQuerySessionInformation.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(WTSInfoClass), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pBytesReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -499,11 +523,13 @@ func WTSQuerySessionInformationA(hServer foundation.HANDLE, SessionId uint32, WT
 	return nil
 }
 
-// WTSQuerySessionInformationW calls WTSAPI32!WTSQuerySessionInformationW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsquerysessioninformationw
+// WTSQueryUserConfig calls WTSAPI32!WTSQueryUserConfigW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsqueryuserconfigw
 // Minimum OS: windows6.0.6000.
-func WTSQuerySessionInformationW(hServer foundation.HANDLE, SessionId uint32, WTSInfoClass WTS_INFO_CLASS, ppBuffer *foundation.PWSTR, pBytesReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSQuerySessionInformationW.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(WTSInfoClass), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pBytesReturned)))
+func WTSQueryUserConfig(pServerName string, pUserName string, WTSConfigClass WTS_CONFIG_CLASS, ppBuffer *foundation.PWSTR, pBytesReturned *uint32) error {
+	_pServerName := win32.UTF16Ptr(pServerName)
+	_pUserName := win32.UTF16Ptr(pUserName)
+	r1, _, e1 := syscall.SyscallN(procWTSQueryUserConfig.Addr(), uintptr(unsafe.Pointer(_pServerName)), uintptr(unsafe.Pointer(_pUserName)), uintptr(WTSConfigClass), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pBytesReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -515,17 +541,6 @@ func WTSQuerySessionInformationW(hServer foundation.HANDLE, SessionId uint32, WT
 // Minimum OS: windows6.0.6000.
 func WTSQueryUserConfigA(pServerName foundation.PSTR, pUserName foundation.PSTR, WTSConfigClass WTS_CONFIG_CLASS, ppBuffer *foundation.PSTR, pBytesReturned *uint32) error {
 	r1, _, e1 := syscall.SyscallN(procWTSQueryUserConfigA.Addr(), uintptr(unsafe.Pointer(pServerName)), uintptr(unsafe.Pointer(pUserName)), uintptr(WTSConfigClass), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pBytesReturned)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// WTSQueryUserConfigW calls WTSAPI32!WTSQueryUserConfigW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsqueryuserconfigw
-// Minimum OS: windows6.0.6000.
-func WTSQueryUserConfigW(pServerName foundation.PWSTR, pUserName foundation.PWSTR, WTSConfigClass WTS_CONFIG_CLASS, ppBuffer *foundation.PWSTR, pBytesReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSQueryUserConfigW.Addr(), uintptr(unsafe.Pointer(pServerName)), uintptr(unsafe.Pointer(pUserName)), uintptr(WTSConfigClass), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pBytesReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -565,22 +580,38 @@ func WTSRegisterSessionNotificationEx(hServer foundation.HANDLE, hWnd foundation
 	return nil
 }
 
-// WTSSendMessageA calls WTSAPI32!WTSSendMessageA.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtssendmessagea
+// WTSSendMessage calls WTSAPI32!WTSSendMessageW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtssendmessagew
 // Minimum OS: windows6.0.6000.
-func WTSSendMessageA(hServer foundation.HANDLE, SessionId uint32, pTitle foundation.PSTR, TitleLength uint32, pMessage foundation.PSTR, MessageLength uint32, Style uiwindowsandmessaging.MESSAGEBOX_STYLE, Timeout uint32, pResponse *uiwindowsandmessaging.MESSAGEBOX_RESULT, bWait foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procWTSSendMessageA.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(unsafe.Pointer(pTitle)), uintptr(TitleLength), uintptr(unsafe.Pointer(pMessage)), uintptr(MessageLength), uintptr(Style), uintptr(Timeout), uintptr(unsafe.Pointer(pResponse)), uintptr(bWait))
+func WTSSendMessage(hServer foundation.HANDLE, SessionId uint32, pTitle string, TitleLength uint32, pMessage string, MessageLength uint32, Style uiwindowsandmessaging.MESSAGEBOX_STYLE, Timeout uint32, pResponse *uiwindowsandmessaging.MESSAGEBOX_RESULT, bWait bool) error {
+	_pTitle := win32.UTF16Ptr(pTitle)
+	_pMessage := win32.UTF16Ptr(pMessage)
+	_bWait := win32.Bool32(bWait)
+	r1, _, e1 := syscall.SyscallN(procWTSSendMessage.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(unsafe.Pointer(_pTitle)), uintptr(TitleLength), uintptr(unsafe.Pointer(_pMessage)), uintptr(MessageLength), uintptr(Style), uintptr(Timeout), uintptr(unsafe.Pointer(pResponse)), uintptr(_bWait))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// WTSSendMessageW calls WTSAPI32!WTSSendMessageW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtssendmessagew
+// WTSSendMessageA calls WTSAPI32!WTSSendMessageA.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtssendmessagea
 // Minimum OS: windows6.0.6000.
-func WTSSendMessageW(hServer foundation.HANDLE, SessionId uint32, pTitle foundation.PWSTR, TitleLength uint32, pMessage foundation.PWSTR, MessageLength uint32, Style uiwindowsandmessaging.MESSAGEBOX_STYLE, Timeout uint32, pResponse *uiwindowsandmessaging.MESSAGEBOX_RESULT, bWait foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procWTSSendMessageW.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(unsafe.Pointer(pTitle)), uintptr(TitleLength), uintptr(unsafe.Pointer(pMessage)), uintptr(MessageLength), uintptr(Style), uintptr(Timeout), uintptr(unsafe.Pointer(pResponse)), uintptr(bWait))
+func WTSSendMessageA(hServer foundation.HANDLE, SessionId uint32, pTitle foundation.PSTR, TitleLength uint32, pMessage foundation.PSTR, MessageLength uint32, Style uiwindowsandmessaging.MESSAGEBOX_STYLE, Timeout uint32, pResponse *uiwindowsandmessaging.MESSAGEBOX_RESULT, bWait bool) error {
+	_bWait := win32.Bool32(bWait)
+	r1, _, e1 := syscall.SyscallN(procWTSSendMessageA.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(unsafe.Pointer(pTitle)), uintptr(TitleLength), uintptr(unsafe.Pointer(pMessage)), uintptr(MessageLength), uintptr(Style), uintptr(Timeout), uintptr(unsafe.Pointer(pResponse)), uintptr(_bWait))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// WTSSetListenerSecurity calls WTSAPI32!WTSSetListenerSecurityW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtssetlistenersecurityw
+// Minimum OS: windows6.1.
+func WTSSetListenerSecurity(pReserved unsafe.Pointer, Reserved uint32, pListenerName string, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) error {
+	_pListenerName := win32.UTF16Ptr(pListenerName)
+	r1, _, e1 := syscall.SyscallN(procWTSSetListenerSecurity.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(_pListenerName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -590,19 +621,8 @@ func WTSSendMessageW(hServer foundation.HANDLE, SessionId uint32, pTitle foundat
 // WTSSetListenerSecurityA calls WTSAPI32!WTSSetListenerSecurityA.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtssetlistenersecuritya
 // Minimum OS: windows6.1.
-func WTSSetListenerSecurityA(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PSTR, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) error {
-	r1, _, e1 := syscall.SyscallN(procWTSSetListenerSecurityA.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// WTSSetListenerSecurityW calls WTSAPI32!WTSSetListenerSecurityW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtssetlistenersecurityw
-// Minimum OS: windows6.1.
-func WTSSetListenerSecurityW(hServer foundation.HANDLE, pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PWSTR, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) error {
-	r1, _, e1 := syscall.SyscallN(procWTSSetListenerSecurityW.Addr(), uintptr(hServer), uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
+func WTSSetListenerSecurityA(pReserved unsafe.Pointer, Reserved uint32, pListenerName foundation.PSTR, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) error {
+	r1, _, e1 := syscall.SyscallN(procWTSSetListenerSecurityA.Addr(), 0, uintptr(unsafe.Pointer(pReserved)), uintptr(Reserved), uintptr(unsafe.Pointer(pListenerName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -612,9 +632,23 @@ func WTSSetListenerSecurityW(hServer foundation.HANDLE, pReserved unsafe.Pointer
 // WTSSetRenderHint calls WTSAPI32!WTSSetRenderHint.
 // https://learn.microsoft.com/windows/win32/api/wtshintapi/nf-wtshintapi-wtssetrenderhint
 // Minimum OS: windows8.0.
-func WTSSetRenderHint(pRenderHintID *uint64, hwndOwner foundation.HWND, renderHintType uint32, cbHintDataLength uint32, pHintData *byte) foundation.HRESULT {
+func WTSSetRenderHint(pRenderHintID *uint64, hwndOwner foundation.HWND, renderHintType uint32, cbHintDataLength uint32, pHintData *byte) error {
 	r1, _, _ := syscall.SyscallN(procWTSSetRenderHint.Addr(), uintptr(unsafe.Pointer(pRenderHintID)), uintptr(hwndOwner), uintptr(renderHintType), uintptr(cbHintDataLength), uintptr(unsafe.Pointer(pHintData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// WTSSetUserConfig calls WTSAPI32!WTSSetUserConfigW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtssetuserconfigw
+// Minimum OS: windows6.0.6000.
+func WTSSetUserConfig(pServerName string, pUserName string, WTSConfigClass WTS_CONFIG_CLASS, pBuffer string, DataLength uint32) error {
+	_pServerName := win32.UTF16Ptr(pServerName)
+	_pUserName := win32.UTF16Ptr(pUserName)
+	_pBuffer := win32.UTF16Ptr(pBuffer)
+	r1, _, e1 := syscall.SyscallN(procWTSSetUserConfig.Addr(), uintptr(unsafe.Pointer(_pServerName)), uintptr(unsafe.Pointer(_pUserName)), uintptr(WTSConfigClass), uintptr(unsafe.Pointer(_pBuffer)), uintptr(DataLength))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // WTSSetUserConfigA calls WTSAPI32!WTSSetUserConfigA.
@@ -622,17 +656,6 @@ func WTSSetRenderHint(pRenderHintID *uint64, hwndOwner foundation.HWND, renderHi
 // Minimum OS: windows6.0.6000.
 func WTSSetUserConfigA(pServerName foundation.PSTR, pUserName foundation.PSTR, WTSConfigClass WTS_CONFIG_CLASS, pBuffer foundation.PSTR, DataLength uint32) error {
 	r1, _, e1 := syscall.SyscallN(procWTSSetUserConfigA.Addr(), uintptr(unsafe.Pointer(pServerName)), uintptr(unsafe.Pointer(pUserName)), uintptr(WTSConfigClass), uintptr(unsafe.Pointer(pBuffer)), uintptr(DataLength))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// WTSSetUserConfigW calls WTSAPI32!WTSSetUserConfigW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtssetuserconfigw
-// Minimum OS: windows6.0.6000.
-func WTSSetUserConfigW(pServerName foundation.PWSTR, pUserName foundation.PWSTR, WTSConfigClass WTS_CONFIG_CLASS, pBuffer foundation.PWSTR, DataLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWTSSetUserConfigW.Addr(), uintptr(unsafe.Pointer(pServerName)), uintptr(unsafe.Pointer(pUserName)), uintptr(WTSConfigClass), uintptr(unsafe.Pointer(pBuffer)), uintptr(DataLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -650,22 +673,23 @@ func WTSShutdownSystem(hServer foundation.HANDLE, ShutdownFlag uint32) error {
 	return nil
 }
 
-// WTSStartRemoteControlSessionA calls WTSAPI32!WTSStartRemoteControlSessionA.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsstartremotecontrolsessiona
+// WTSStartRemoteControlSession calls WTSAPI32!WTSStartRemoteControlSessionW.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsstartremotecontrolsessionw
 // Minimum OS: windows6.0.6000.
-func WTSStartRemoteControlSessionA(pTargetServerName foundation.PSTR, TargetLogonId uint32, HotkeyVk byte, HotkeyModifiers uint16) error {
-	r1, _, e1 := syscall.SyscallN(procWTSStartRemoteControlSessionA.Addr(), uintptr(unsafe.Pointer(pTargetServerName)), uintptr(TargetLogonId), uintptr(HotkeyVk), uintptr(HotkeyModifiers))
+func WTSStartRemoteControlSession(pTargetServerName string, TargetLogonId uint32, HotkeyVk byte, HotkeyModifiers uint16) error {
+	_pTargetServerName := win32.UTF16Ptr(pTargetServerName)
+	r1, _, e1 := syscall.SyscallN(procWTSStartRemoteControlSession.Addr(), uintptr(unsafe.Pointer(_pTargetServerName)), uintptr(TargetLogonId), uintptr(HotkeyVk), uintptr(HotkeyModifiers))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// WTSStartRemoteControlSessionW calls WTSAPI32!WTSStartRemoteControlSessionW.
-// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsstartremotecontrolsessionw
+// WTSStartRemoteControlSessionA calls WTSAPI32!WTSStartRemoteControlSessionA.
+// https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsstartremotecontrolsessiona
 // Minimum OS: windows6.0.6000.
-func WTSStartRemoteControlSessionW(pTargetServerName foundation.PWSTR, TargetLogonId uint32, HotkeyVk byte, HotkeyModifiers uint16) error {
-	r1, _, e1 := syscall.SyscallN(procWTSStartRemoteControlSessionW.Addr(), uintptr(unsafe.Pointer(pTargetServerName)), uintptr(TargetLogonId), uintptr(HotkeyVk), uintptr(HotkeyModifiers))
+func WTSStartRemoteControlSessionA(pTargetServerName foundation.PSTR, TargetLogonId uint32, HotkeyVk byte, HotkeyModifiers uint16) error {
+	r1, _, e1 := syscall.SyscallN(procWTSStartRemoteControlSessionA.Addr(), uintptr(unsafe.Pointer(pTargetServerName)), uintptr(TargetLogonId), uintptr(HotkeyVk), uintptr(HotkeyModifiers))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -730,8 +754,8 @@ func WTSVirtualChannelClose(hChannelHandle foundation.HANDLE) error {
 // WTSVirtualChannelOpen calls WTSAPI32!WTSVirtualChannelOpen.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsvirtualchannelopen
 // Minimum OS: windows6.0.6000.
-func WTSVirtualChannelOpen(hServer foundation.HANDLE, SessionId uint32, pVirtualName foundation.PSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procWTSVirtualChannelOpen.Addr(), uintptr(hServer), uintptr(SessionId), uintptr(unsafe.Pointer(pVirtualName)))
+func WTSVirtualChannelOpen(SessionId uint32, pVirtualName foundation.PSTR) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procWTSVirtualChannelOpen.Addr(), 0, uintptr(SessionId), uintptr(unsafe.Pointer(pVirtualName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)

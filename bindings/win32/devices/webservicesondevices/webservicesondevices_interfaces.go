@@ -25,15 +25,17 @@ type IWSDAddress struct {
 var IID_IWSDAddress = win32.GUID{Data1: 0xb9574c6c, Data2: 0x12a6, Data3: 0x4f74, Data4: [8]byte{0x93, 0xa1, 0x33, 0x18, 0xff, 0x60, 0x57, 0x59}}
 
 // Serialize dispatches through IWSDAddress's vtable slot 3.
-func (self *IWSDAddress) Serialize(pszBuffer foundation.PWSTR, cchLength uint32, fSafe foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchLength), uintptr(fSafe))
-	return foundation.HRESULT(r1)
+func (self *IWSDAddress) Serialize(pszBuffer foundation.PWSTR, cchLength uint32, fSafe bool) error {
+	_fSafe := win32.Bool32(fSafe)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszBuffer)), uintptr(cchLength), uintptr(_fSafe))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Deserialize dispatches through IWSDAddress's vtable slot 4.
-func (self *IWSDAddress) Deserialize(pszBuffer foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszBuffer)))
-	return foundation.HRESULT(r1)
+func (self *IWSDAddress) Deserialize(pszBuffer string) error {
+	_pszBuffer := win32.UTF16Ptr(pszBuffer)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszBuffer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDAsyncCallback: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdasynccallback
@@ -46,9 +48,9 @@ type IWSDAsyncCallback struct {
 var IID_IWSDAsyncCallback = win32.GUID{Data1: 0xa63e109d, Data2: 0xce72, Data3: 0x49e2, Data4: [8]byte{0xba, 0x98, 0xe8, 0x45, 0xf5, 0xee, 0x16, 0x66}}
 
 // AsyncOperationComplete dispatches through IWSDAsyncCallback's vtable slot 3.
-func (self *IWSDAsyncCallback) AsyncOperationComplete(pAsyncResult *IWSDAsyncResult, pAsyncState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IWSDAsyncCallback) AsyncOperationComplete(pAsyncResult *IWSDAsyncResult, pAsyncState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsyncResult)), uintptr(unsafe.Pointer(pAsyncState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDAsyncResult: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdasyncresult
@@ -61,45 +63,45 @@ type IWSDAsyncResult struct {
 var IID_IWSDAsyncResult = win32.GUID{Data1: 0x11a9852a, Data2: 0x8dd8, Data3: 0x423e, Data4: [8]byte{0xb5, 0x37, 0x93, 0x56, 0xdb, 0x4f, 0xbf, 0xb8}}
 
 // SetCallback dispatches through IWSDAsyncResult's vtable slot 3.
-func (self *IWSDAsyncResult) SetCallback(pCallback *IWSDAsyncCallback, pAsyncState *systemcom.IUnknown) foundation.HRESULT {
+func (self *IWSDAsyncResult) SetCallback(pCallback *IWSDAsyncCallback, pAsyncState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pAsyncState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWaitHandle dispatches through IWSDAsyncResult's vtable slot 4.
-func (self *IWSDAsyncResult) SetWaitHandle(hWaitHandle foundation.HANDLE) foundation.HRESULT {
+func (self *IWSDAsyncResult) SetWaitHandle(hWaitHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWaitHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HasCompleted dispatches through IWSDAsyncResult's vtable slot 5.
-func (self *IWSDAsyncResult) HasCompleted() foundation.HRESULT {
+func (self *IWSDAsyncResult) HasCompleted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAsyncState dispatches through IWSDAsyncResult's vtable slot 6.
-func (self *IWSDAsyncResult) GetAsyncState(ppAsyncState **systemcom.IUnknown) foundation.HRESULT {
+func (self *IWSDAsyncResult) GetAsyncState(ppAsyncState **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsyncState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IWSDAsyncResult's vtable slot 7.
-func (self *IWSDAsyncResult) Abort() foundation.HRESULT {
+func (self *IWSDAsyncResult) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEvent dispatches through IWSDAsyncResult's vtable slot 8.
-func (self *IWSDAsyncResult) GetEvent(pEvent *WSD_EVENT) foundation.HRESULT {
+func (self *IWSDAsyncResult) GetEvent(pEvent *WSD_EVENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEndpointProxy dispatches through IWSDAsyncResult's vtable slot 9.
-func (self *IWSDAsyncResult) GetEndpointProxy(ppEndpoint **IWSDEndpointProxy) foundation.HRESULT {
+func (self *IWSDAsyncResult) GetEndpointProxy(ppEndpoint **IWSDEndpointProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEndpoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDAttachment: https://learn.microsoft.com/windows/win32/api/wsdattachment/nn-wsdattachment-iwsdattachment
@@ -121,75 +123,84 @@ type IWSDDeviceHost struct {
 var IID_IWSDDeviceHost = win32.GUID{Data1: 0x917fe891, Data2: 0x3d13, Data3: 0x4138, Data4: [8]byte{0x98, 0x09, 0x93, 0x4c, 0x8a, 0xbe, 0xb1, 0x2c}}
 
 // Init dispatches through IWSDDeviceHost's vtable slot 3.
-func (self *IWSDDeviceHost) Init(pszLocalId foundation.PWSTR, pContext *IWSDXMLContext, ppHostAddresses **IWSDAddress, dwHostAddressCount uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppHostAddresses)), uintptr(dwHostAddressCount))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceHost) Init(pszLocalId string, pContext *IWSDXMLContext, ppHostAddresses **IWSDAddress, dwHostAddressCount uint32) error {
+	_pszLocalId := win32.UTF16Ptr(pszLocalId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppHostAddresses)), uintptr(dwHostAddressCount))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IWSDDeviceHost's vtable slot 4.
-func (self *IWSDDeviceHost) Start(ullInstanceId uint64, pScopeList *WSD_URI_LIST, pNotificationSink *IWSDDeviceHostNotify) foundation.HRESULT {
+func (self *IWSDDeviceHost) Start(ullInstanceId uint64, pScopeList *WSD_URI_LIST, pNotificationSink *IWSDDeviceHostNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ullInstanceId), uintptr(unsafe.Pointer(pScopeList)), uintptr(unsafe.Pointer(pNotificationSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IWSDDeviceHost's vtable slot 5.
-func (self *IWSDDeviceHost) Stop() foundation.HRESULT {
+func (self *IWSDDeviceHost) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Terminate dispatches through IWSDDeviceHost's vtable slot 6.
-func (self *IWSDDeviceHost) Terminate() foundation.HRESULT {
+func (self *IWSDDeviceHost) Terminate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterPortType dispatches through IWSDDeviceHost's vtable slot 7.
-func (self *IWSDDeviceHost) RegisterPortType(pPortType *WSD_PORT_TYPE) foundation.HRESULT {
+func (self *IWSDDeviceHost) RegisterPortType(pPortType *WSD_PORT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMetadata dispatches through IWSDDeviceHost's vtable slot 8.
-func (self *IWSDDeviceHost) SetMetadata(pThisModelMetadata *WSD_THIS_MODEL_METADATA, pThisDeviceMetadata *WSD_THIS_DEVICE_METADATA, pHostMetadata *WSD_HOST_METADATA, pCustomMetadata *WSD_METADATA_SECTION_LIST) foundation.HRESULT {
+func (self *IWSDDeviceHost) SetMetadata(pThisModelMetadata *WSD_THIS_MODEL_METADATA, pThisDeviceMetadata *WSD_THIS_DEVICE_METADATA, pHostMetadata *WSD_HOST_METADATA, pCustomMetadata *WSD_METADATA_SECTION_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pThisModelMetadata)), uintptr(unsafe.Pointer(pThisDeviceMetadata)), uintptr(unsafe.Pointer(pHostMetadata)), uintptr(unsafe.Pointer(pCustomMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterService dispatches through IWSDDeviceHost's vtable slot 9.
-func (self *IWSDDeviceHost) RegisterService(pszServiceId foundation.PWSTR, pService *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszServiceId)), uintptr(unsafe.Pointer(pService)))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceHost) RegisterService(pszServiceId string, pService *systemcom.IUnknown) error {
+	_pszServiceId := win32.UTF16Ptr(pszServiceId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(pService)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RetireService dispatches through IWSDDeviceHost's vtable slot 10.
-func (self *IWSDDeviceHost) RetireService(pszServiceId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszServiceId)))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceHost) RetireService(pszServiceId string) error {
+	_pszServiceId := win32.UTF16Ptr(pszServiceId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDynamicService dispatches through IWSDDeviceHost's vtable slot 11.
-func (self *IWSDDeviceHost) AddDynamicService(pszServiceId foundation.PWSTR, pszEndpointAddress foundation.PWSTR, pPortType *WSD_PORT_TYPE, pPortName *WSDXML_NAME, pAny *WSDXML_ELEMENT, pService *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszServiceId)), uintptr(unsafe.Pointer(pszEndpointAddress)), uintptr(unsafe.Pointer(pPortType)), uintptr(unsafe.Pointer(pPortName)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pService)))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceHost) AddDynamicService(pszServiceId string, pszEndpointAddress string, pPortType *WSD_PORT_TYPE, pPortName *WSDXML_NAME, pAny *WSDXML_ELEMENT, pService *systemcom.IUnknown) error {
+	_pszServiceId := win32.UTF16Ptr(pszServiceId)
+	_pszEndpointAddress := win32.UTF16Ptr(pszEndpointAddress)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(_pszEndpointAddress)), uintptr(unsafe.Pointer(pPortType)), uintptr(unsafe.Pointer(pPortName)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pService)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveDynamicService dispatches through IWSDDeviceHost's vtable slot 12.
-func (self *IWSDDeviceHost) RemoveDynamicService(pszServiceId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszServiceId)))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceHost) RemoveDynamicService(pszServiceId string) error {
+	_pszServiceId := win32.UTF16Ptr(pszServiceId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetServiceDiscoverable dispatches through IWSDDeviceHost's vtable slot 13.
-func (self *IWSDDeviceHost) SetServiceDiscoverable(pszServiceId foundation.PWSTR, fDiscoverable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszServiceId)), uintptr(fDiscoverable))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceHost) SetServiceDiscoverable(pszServiceId string, fDiscoverable bool) error {
+	_pszServiceId := win32.UTF16Ptr(pszServiceId)
+	_fDiscoverable := win32.Bool32(fDiscoverable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(_fDiscoverable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SignalEvent dispatches through IWSDDeviceHost's vtable slot 14.
-func (self *IWSDDeviceHost) SignalEvent(pszServiceId foundation.PWSTR, pBody unsafe.Pointer, pOperation *WSD_OPERATION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszServiceId)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceHost) SignalEvent(pszServiceId string, pBody unsafe.Pointer, pOperation *WSD_OPERATION) error {
+	_pszServiceId := win32.UTF16Ptr(pszServiceId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDDeviceHostNotify: https://learn.microsoft.com/windows/win32/api/wsdhost/nn-wsdhost-iwsddevicehostnotify
@@ -202,9 +213,10 @@ type IWSDDeviceHostNotify struct {
 var IID_IWSDDeviceHostNotify = win32.GUID{Data1: 0xb5bee9f9, Data2: 0xeeda, Data3: 0x41fe, Data4: [8]byte{0x96, 0xf7, 0xf4, 0x5e, 0x14, 0x99, 0x0f, 0xb0}}
 
 // GetService dispatches through IWSDDeviceHostNotify's vtable slot 3.
-func (self *IWSDDeviceHostNotify) GetService(pszServiceId foundation.PWSTR, ppService **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszServiceId)), uintptr(unsafe.Pointer(ppService)))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceHostNotify) GetService(pszServiceId string, ppService **systemcom.IUnknown) error {
+	_pszServiceId := win32.UTF16Ptr(pszServiceId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(ppService)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDDeviceProxy: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsddeviceproxy
@@ -217,63 +229,66 @@ type IWSDDeviceProxy struct {
 var IID_IWSDDeviceProxy = win32.GUID{Data1: 0xeee0c031, Data2: 0xc578, Data3: 0x4c0e, Data4: [8]byte{0x9a, 0x3b, 0x97, 0x3c, 0x35, 0xf4, 0x09, 0xdb}}
 
 // Init dispatches through IWSDDeviceProxy's vtable slot 3.
-func (self *IWSDDeviceProxy) Init(pszDeviceId foundation.PWSTR, pDeviceAddress *IWSDAddress, pszLocalId foundation.PWSTR, pContext *IWSDXMLContext, pSponsor *IWSDDeviceProxy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDeviceId)), uintptr(unsafe.Pointer(pDeviceAddress)), uintptr(unsafe.Pointer(pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pSponsor)))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceProxy) Init(pszDeviceId string, pDeviceAddress *IWSDAddress, pszLocalId string, pContext *IWSDXMLContext, pSponsor *IWSDDeviceProxy) error {
+	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
+	_pszLocalId := win32.UTF16Ptr(pszLocalId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDeviceId)), uintptr(unsafe.Pointer(pDeviceAddress)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pSponsor)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginGetMetadata dispatches through IWSDDeviceProxy's vtable slot 4.
-func (self *IWSDDeviceProxy) BeginGetMetadata(ppResult **IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDDeviceProxy) BeginGetMetadata(ppResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndGetMetadata dispatches through IWSDDeviceProxy's vtable slot 5.
-func (self *IWSDDeviceProxy) EndGetMetadata(pResult *IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDDeviceProxy) EndGetMetadata(pResult *IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHostMetadata dispatches through IWSDDeviceProxy's vtable slot 6.
-func (self *IWSDDeviceProxy) GetHostMetadata(ppHostMetadata **WSD_HOST_METADATA) foundation.HRESULT {
+func (self *IWSDDeviceProxy) GetHostMetadata(ppHostMetadata **WSD_HOST_METADATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppHostMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThisModelMetadata dispatches through IWSDDeviceProxy's vtable slot 7.
-func (self *IWSDDeviceProxy) GetThisModelMetadata(ppManufacturerMetadata **WSD_THIS_MODEL_METADATA) foundation.HRESULT {
+func (self *IWSDDeviceProxy) GetThisModelMetadata(ppManufacturerMetadata **WSD_THIS_MODEL_METADATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppManufacturerMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThisDeviceMetadata dispatches through IWSDDeviceProxy's vtable slot 8.
-func (self *IWSDDeviceProxy) GetThisDeviceMetadata(ppThisDeviceMetadata **WSD_THIS_DEVICE_METADATA) foundation.HRESULT {
+func (self *IWSDDeviceProxy) GetThisDeviceMetadata(ppThisDeviceMetadata **WSD_THIS_DEVICE_METADATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppThisDeviceMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllMetadata dispatches through IWSDDeviceProxy's vtable slot 9.
-func (self *IWSDDeviceProxy) GetAllMetadata(ppMetadata **WSD_METADATA_SECTION_LIST) foundation.HRESULT {
+func (self *IWSDDeviceProxy) GetAllMetadata(ppMetadata **WSD_METADATA_SECTION_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetServiceProxyById dispatches through IWSDDeviceProxy's vtable slot 10.
-func (self *IWSDDeviceProxy) GetServiceProxyById(pszServiceId foundation.PWSTR, ppServiceProxy **IWSDServiceProxy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszServiceId)), uintptr(unsafe.Pointer(ppServiceProxy)))
-	return foundation.HRESULT(r1)
+func (self *IWSDDeviceProxy) GetServiceProxyById(pszServiceId string, ppServiceProxy **IWSDServiceProxy) error {
+	_pszServiceId := win32.UTF16Ptr(pszServiceId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(ppServiceProxy)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetServiceProxyByType dispatches through IWSDDeviceProxy's vtable slot 11.
-func (self *IWSDDeviceProxy) GetServiceProxyByType(pType *WSDXML_NAME, ppServiceProxy **IWSDServiceProxy) foundation.HRESULT {
+func (self *IWSDDeviceProxy) GetServiceProxyByType(pType *WSDXML_NAME, ppServiceProxy **IWSDServiceProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(ppServiceProxy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEndpointProxy dispatches through IWSDDeviceProxy's vtable slot 12.
-func (self *IWSDDeviceProxy) GetEndpointProxy(ppProxy **IWSDEndpointProxy) foundation.HRESULT {
+func (self *IWSDDeviceProxy) GetEndpointProxy(ppProxy **IWSDEndpointProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProxy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDEndpointProxy: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdendpointproxy
@@ -286,45 +301,45 @@ type IWSDEndpointProxy struct {
 var IID_IWSDEndpointProxy = win32.GUID{Data1: 0x1860d430, Data2: 0xb24c, Data3: 0x4975, Data4: [8]byte{0x9f, 0x90, 0xdb, 0xb3, 0x9b, 0xaa, 0x24, 0xec}}
 
 // SendOneWayRequest dispatches through IWSDEndpointProxy's vtable slot 3.
-func (self *IWSDEndpointProxy) SendOneWayRequest(pBody unsafe.Pointer, pOperation *WSD_OPERATION) foundation.HRESULT {
+func (self *IWSDEndpointProxy) SendOneWayRequest(pBody unsafe.Pointer, pOperation *WSD_OPERATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendTwoWayRequest dispatches through IWSDEndpointProxy's vtable slot 4.
-func (self *IWSDEndpointProxy) SendTwoWayRequest(pBody unsafe.Pointer, pOperation *WSD_OPERATION, pResponseContext *WSD_SYNCHRONOUS_RESPONSE_CONTEXT) foundation.HRESULT {
+func (self *IWSDEndpointProxy) SendTwoWayRequest(pBody unsafe.Pointer, pOperation *WSD_OPERATION, pResponseContext *WSD_SYNCHRONOUS_RESPONSE_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pResponseContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendTwoWayRequestAsync dispatches through IWSDEndpointProxy's vtable slot 5.
-func (self *IWSDEndpointProxy) SendTwoWayRequestAsync(pBody unsafe.Pointer, pOperation *WSD_OPERATION, pAsyncState *systemcom.IUnknown, pCallback *IWSDAsyncCallback, pResult **IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDEndpointProxy) SendTwoWayRequestAsync(pBody unsafe.Pointer, pOperation *WSD_OPERATION, pAsyncState *systemcom.IUnknown, pCallback *IWSDAsyncCallback, pResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AbortAsyncOperation dispatches through IWSDEndpointProxy's vtable slot 6.
-func (self *IWSDEndpointProxy) AbortAsyncOperation(pAsyncResult *IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDEndpointProxy) AbortAsyncOperation(pAsyncResult *IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsyncResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessFault dispatches through IWSDEndpointProxy's vtable slot 7.
-func (self *IWSDEndpointProxy) ProcessFault(pFault *WSD_SOAP_FAULT) foundation.HRESULT {
+func (self *IWSDEndpointProxy) ProcessFault(pFault *WSD_SOAP_FAULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFault)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorInfo dispatches through IWSDEndpointProxy's vtable slot 8.
-func (self *IWSDEndpointProxy) GetErrorInfo(ppszErrorInfo *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDEndpointProxy) GetErrorInfo(ppszErrorInfo *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFaultInfo dispatches through IWSDEndpointProxy's vtable slot 9.
-func (self *IWSDEndpointProxy) GetFaultInfo(ppFault **WSD_SOAP_FAULT) foundation.HRESULT {
+func (self *IWSDEndpointProxy) GetFaultInfo(ppFault **WSD_SOAP_FAULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFault)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDEventingStatus: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdeventingstatus
@@ -337,18 +352,21 @@ type IWSDEventingStatus struct {
 var IID_IWSDEventingStatus = win32.GUID{Data1: 0x49b17f52, Data2: 0x637a, Data3: 0x407a, Data4: [8]byte{0xae, 0x99, 0xfb, 0xe8, 0x2a, 0x4d, 0x38, 0xc0}}
 
 // SubscriptionRenewed dispatches through IWSDEventingStatus's vtable slot 3.
-func (self *IWSDEventingStatus) SubscriptionRenewed(pszSubscriptionAction foundation.PWSTR) {
-	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubscriptionAction)))
+func (self *IWSDEventingStatus) SubscriptionRenewed(pszSubscriptionAction string) {
+	_pszSubscriptionAction := win32.UTF16Ptr(pszSubscriptionAction)
+	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubscriptionAction)))
 }
 
 // SubscriptionRenewalFailed dispatches through IWSDEventingStatus's vtable slot 4.
-func (self *IWSDEventingStatus) SubscriptionRenewalFailed(pszSubscriptionAction foundation.PWSTR, hr foundation.HRESULT) {
-	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubscriptionAction)), uintptr(hr))
+func (self *IWSDEventingStatus) SubscriptionRenewalFailed(pszSubscriptionAction string, hr foundation.HRESULT) {
+	_pszSubscriptionAction := win32.UTF16Ptr(pszSubscriptionAction)
+	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubscriptionAction)), uintptr(hr))
 }
 
 // SubscriptionEnded dispatches through IWSDEventingStatus's vtable slot 5.
-func (self *IWSDEventingStatus) SubscriptionEnded(pszSubscriptionAction foundation.PWSTR) {
-	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubscriptionAction)))
+func (self *IWSDEventingStatus) SubscriptionEnded(pszSubscriptionAction string) {
+	_pszSubscriptionAction := win32.UTF16Ptr(pszSubscriptionAction)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubscriptionAction)))
 }
 
 // IWSDHttpAddress: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdhttpaddress
@@ -361,27 +379,29 @@ type IWSDHttpAddress struct {
 var IID_IWSDHttpAddress = win32.GUID{Data1: 0xd09ac7bd, Data2: 0x2a3e, Data3: 0x4b85, Data4: [8]byte{0x86, 0x05, 0x27, 0x37, 0xff, 0x3e, 0x4e, 0xa0}}
 
 // GetSecure dispatches through IWSDHttpAddress's vtable slot 10.
-func (self *IWSDHttpAddress) GetSecure() foundation.HRESULT {
+func (self *IWSDHttpAddress) GetSecure() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSecure dispatches through IWSDHttpAddress's vtable slot 11.
-func (self *IWSDHttpAddress) SetSecure(fSecure foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(fSecure))
-	return foundation.HRESULT(r1)
+func (self *IWSDHttpAddress) SetSecure(fSecure bool) error {
+	_fSecure := win32.Bool32(fSecure)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_fSecure))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPath dispatches through IWSDHttpAddress's vtable slot 12.
-func (self *IWSDHttpAddress) GetPath(ppszPath *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDHttpAddress) GetPath(ppszPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPath dispatches through IWSDHttpAddress's vtable slot 13.
-func (self *IWSDHttpAddress) SetPath(pszPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPath)))
-	return foundation.HRESULT(r1)
+func (self *IWSDHttpAddress) SetPath(pszPath string) error {
+	_pszPath := win32.UTF16Ptr(pszPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDHttpAuthParameters: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdhttpauthparameters
@@ -394,15 +414,15 @@ type IWSDHttpAuthParameters struct {
 var IID_IWSDHttpAuthParameters = win32.GUID{Data1: 0x0b476df0, Data2: 0x8dac, Data3: 0x480d, Data4: [8]byte{0xb0, 0x5c, 0x99, 0x78, 0x1a, 0x58, 0x84, 0xaa}}
 
 // GetClientAccessToken dispatches through IWSDHttpAuthParameters's vtable slot 3.
-func (self *IWSDHttpAuthParameters) GetClientAccessToken(phToken *foundation.HANDLE) foundation.HRESULT {
+func (self *IWSDHttpAuthParameters) GetClientAccessToken(phToken *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAuthType dispatches through IWSDHttpAuthParameters's vtable slot 4.
-func (self *IWSDHttpAuthParameters) GetAuthType(pAuthType *uint32) foundation.HRESULT {
+func (self *IWSDHttpAuthParameters) GetAuthType(pAuthType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAuthType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDHttpMessageParameters: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdhttpmessageparameters
@@ -415,57 +435,60 @@ type IWSDHttpMessageParameters struct {
 var IID_IWSDHttpMessageParameters = win32.GUID{Data1: 0x540bd122, Data2: 0x5c83, Data3: 0x4dec, Data4: [8]byte{0xb3, 0x96, 0xea, 0x62, 0xa2, 0x69, 0x7f, 0xdf}}
 
 // SetInboundHttpHeaders dispatches through IWSDHttpMessageParameters's vtable slot 8.
-func (self *IWSDHttpMessageParameters) SetInboundHttpHeaders(pszHeaders foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszHeaders)))
-	return foundation.HRESULT(r1)
+func (self *IWSDHttpMessageParameters) SetInboundHttpHeaders(pszHeaders string) error {
+	_pszHeaders := win32.UTF16Ptr(pszHeaders)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszHeaders)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInboundHttpHeaders dispatches through IWSDHttpMessageParameters's vtable slot 9.
-func (self *IWSDHttpMessageParameters) GetInboundHttpHeaders(ppszHeaders *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDHttpMessageParameters) GetInboundHttpHeaders(ppszHeaders *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszHeaders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutboundHttpHeaders dispatches through IWSDHttpMessageParameters's vtable slot 10.
-func (self *IWSDHttpMessageParameters) SetOutboundHttpHeaders(pszHeaders foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszHeaders)))
-	return foundation.HRESULT(r1)
+func (self *IWSDHttpMessageParameters) SetOutboundHttpHeaders(pszHeaders string) error {
+	_pszHeaders := win32.UTF16Ptr(pszHeaders)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszHeaders)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutboundHttpHeaders dispatches through IWSDHttpMessageParameters's vtable slot 11.
-func (self *IWSDHttpMessageParameters) GetOutboundHttpHeaders(ppszHeaders *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDHttpMessageParameters) GetOutboundHttpHeaders(ppszHeaders *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszHeaders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetID dispatches through IWSDHttpMessageParameters's vtable slot 12.
-func (self *IWSDHttpMessageParameters) SetID(pszId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszId)))
-	return foundation.HRESULT(r1)
+func (self *IWSDHttpMessageParameters) SetID(pszId string) error {
+	_pszId := win32.UTF16Ptr(pszId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetID dispatches through IWSDHttpMessageParameters's vtable slot 13.
-func (self *IWSDHttpMessageParameters) GetID(ppszId *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDHttpMessageParameters) GetID(ppszId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContext dispatches through IWSDHttpMessageParameters's vtable slot 14.
-func (self *IWSDHttpMessageParameters) SetContext(pContext *systemcom.IUnknown) foundation.HRESULT {
+func (self *IWSDHttpMessageParameters) SetContext(pContext *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContext dispatches through IWSDHttpMessageParameters's vtable slot 15.
-func (self *IWSDHttpMessageParameters) GetContext(ppContext **systemcom.IUnknown) foundation.HRESULT {
+func (self *IWSDHttpMessageParameters) GetContext(ppContext **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IWSDHttpMessageParameters's vtable slot 16.
-func (self *IWSDHttpMessageParameters) Clear() foundation.HRESULT {
+func (self *IWSDHttpMessageParameters) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDInboundAttachment: https://learn.microsoft.com/windows/win32/api/wsdattachment/nn-wsdattachment-iwsdinboundattachment
@@ -478,15 +501,15 @@ type IWSDInboundAttachment struct {
 var IID_IWSDInboundAttachment = win32.GUID{Data1: 0x5bd6ca65, Data2: 0x233c, Data3: 0x4fb8, Data4: [8]byte{0x9f, 0x7a, 0x26, 0x41, 0x61, 0x96, 0x55, 0xc9}}
 
 // Read dispatches through IWSDInboundAttachment's vtable slot 3.
-func (self *IWSDInboundAttachment) Read(pBuffer *byte, dwBytesToRead uint32, pdwNumberOfBytesRead *uint32) foundation.HRESULT {
+func (self *IWSDInboundAttachment) Read(pBuffer *byte, dwBytesToRead uint32, pdwNumberOfBytesRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwBytesToRead), uintptr(unsafe.Pointer(pdwNumberOfBytesRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IWSDInboundAttachment's vtable slot 4.
-func (self *IWSDInboundAttachment) Close() foundation.HRESULT {
+func (self *IWSDInboundAttachment) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDMessageParameters: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdmessageparameters
@@ -499,33 +522,33 @@ type IWSDMessageParameters struct {
 var IID_IWSDMessageParameters = win32.GUID{Data1: 0x1fafe8a2, Data2: 0xe6fc, Data3: 0x4b80, Data4: [8]byte{0xb6, 0xcf, 0xb7, 0xd4, 0x5c, 0x41, 0x6d, 0x7c}}
 
 // GetLocalAddress dispatches through IWSDMessageParameters's vtable slot 3.
-func (self *IWSDMessageParameters) GetLocalAddress(ppAddress **IWSDAddress) foundation.HRESULT {
+func (self *IWSDMessageParameters) GetLocalAddress(ppAddress **IWSDAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLocalAddress dispatches through IWSDMessageParameters's vtable slot 4.
-func (self *IWSDMessageParameters) SetLocalAddress(pAddress *IWSDAddress) foundation.HRESULT {
+func (self *IWSDMessageParameters) SetLocalAddress(pAddress *IWSDAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRemoteAddress dispatches through IWSDMessageParameters's vtable slot 5.
-func (self *IWSDMessageParameters) GetRemoteAddress(ppAddress **IWSDAddress) foundation.HRESULT {
+func (self *IWSDMessageParameters) GetRemoteAddress(ppAddress **IWSDAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRemoteAddress dispatches through IWSDMessageParameters's vtable slot 6.
-func (self *IWSDMessageParameters) SetRemoteAddress(pAddress *IWSDAddress) foundation.HRESULT {
+func (self *IWSDMessageParameters) SetRemoteAddress(pAddress *IWSDAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLowerParameters dispatches through IWSDMessageParameters's vtable slot 7.
-func (self *IWSDMessageParameters) GetLowerParameters(ppTxParams **IWSDMessageParameters) foundation.HRESULT {
+func (self *IWSDMessageParameters) GetLowerParameters(ppTxParams **IWSDMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTxParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDMetadataExchange: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdmetadataexchange
@@ -538,9 +561,9 @@ type IWSDMetadataExchange struct {
 var IID_IWSDMetadataExchange = win32.GUID{Data1: 0x06996d57, Data2: 0x1d67, Data3: 0x4928, Data4: [8]byte{0x93, 0x07, 0x3d, 0x78, 0x33, 0xfd, 0xb8, 0x46}}
 
 // GetMetadata dispatches through IWSDMetadataExchange's vtable slot 3.
-func (self *IWSDMetadataExchange) GetMetadata(MetadataOut **WSD_METADATA_SECTION_LIST) foundation.HRESULT {
+func (self *IWSDMetadataExchange) GetMetadata(MetadataOut **WSD_METADATA_SECTION_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MetadataOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDOutboundAttachment: https://learn.microsoft.com/windows/win32/api/wsdattachment/nn-wsdattachment-iwsdoutboundattachment
@@ -553,21 +576,21 @@ type IWSDOutboundAttachment struct {
 var IID_IWSDOutboundAttachment = win32.GUID{Data1: 0xaa302f8d, Data2: 0x5a22, Data3: 0x4ba5, Data4: [8]byte{0xb3, 0x92, 0xaa, 0x84, 0x86, 0xf4, 0xc1, 0x5d}}
 
 // Write dispatches through IWSDOutboundAttachment's vtable slot 3.
-func (self *IWSDOutboundAttachment) Write(pBuffer *byte, dwBytesToWrite uint32, pdwNumberOfBytesWritten *uint32) foundation.HRESULT {
+func (self *IWSDOutboundAttachment) Write(pBuffer *byte, dwBytesToWrite uint32, pdwNumberOfBytesWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwBytesToWrite), uintptr(unsafe.Pointer(pdwNumberOfBytesWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IWSDOutboundAttachment's vtable slot 4.
-func (self *IWSDOutboundAttachment) Close() foundation.HRESULT {
+func (self *IWSDOutboundAttachment) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IWSDOutboundAttachment's vtable slot 5.
-func (self *IWSDOutboundAttachment) Abort() foundation.HRESULT {
+func (self *IWSDOutboundAttachment) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDSSLClientCertificate: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdsslclientcertificate
@@ -580,15 +603,15 @@ type IWSDSSLClientCertificate struct {
 var IID_IWSDSSLClientCertificate = win32.GUID{Data1: 0xde105e87, Data2: 0xa0da, Data3: 0x418e, Data4: [8]byte{0x98, 0xad, 0x27, 0xb9, 0xee, 0xd8, 0x7b, 0xdc}}
 
 // GetClientCertificate dispatches through IWSDSSLClientCertificate's vtable slot 3.
-func (self *IWSDSSLClientCertificate) GetClientCertificate(ppCertContext **securitycryptography.CERT_CONTEXT) foundation.HRESULT {
+func (self *IWSDSSLClientCertificate) GetClientCertificate(ppCertContext **securitycryptography.CERT_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCertContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMappedAccessToken dispatches through IWSDSSLClientCertificate's vtable slot 4.
-func (self *IWSDSSLClientCertificate) GetMappedAccessToken(phToken *foundation.HANDLE) foundation.HRESULT {
+func (self *IWSDSSLClientCertificate) GetMappedAccessToken(phToken *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDScopeMatchingRule: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdscopematchingrule
@@ -601,15 +624,17 @@ type IWSDScopeMatchingRule struct {
 var IID_IWSDScopeMatchingRule = win32.GUID{Data1: 0xfcafe424, Data2: 0xfef5, Data3: 0x481a, Data4: [8]byte{0xbd, 0x9f, 0x33, 0xce, 0x05, 0x74, 0x25, 0x6f}}
 
 // GetScopeRule dispatches through IWSDScopeMatchingRule's vtable slot 3.
-func (self *IWSDScopeMatchingRule) GetScopeRule(ppszScopeMatchingRule *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDScopeMatchingRule) GetScopeRule(ppszScopeMatchingRule *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszScopeMatchingRule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MatchScopes dispatches through IWSDScopeMatchingRule's vtable slot 4.
-func (self *IWSDScopeMatchingRule) MatchScopes(pszScope1 foundation.PWSTR, pszScope2 foundation.PWSTR, pfMatch *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszScope1)), uintptr(unsafe.Pointer(pszScope2)), uintptr(unsafe.Pointer(pfMatch)))
-	return foundation.HRESULT(r1)
+func (self *IWSDScopeMatchingRule) MatchScopes(pszScope1 string, pszScope2 string, pfMatch *foundation.BOOL) error {
+	_pszScope1 := win32.UTF16Ptr(pszScope1)
+	_pszScope2 := win32.UTF16Ptr(pszScope2)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszScope1)), uintptr(unsafe.Pointer(_pszScope2)), uintptr(unsafe.Pointer(pfMatch)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDServiceMessaging: https://learn.microsoft.com/windows/win32/api/wsdhost/nn-wsdhost-iwsdservicemessaging
@@ -622,15 +647,15 @@ type IWSDServiceMessaging struct {
 var IID_IWSDServiceMessaging = win32.GUID{Data1: 0x94974cf4, Data2: 0x0cab, Data3: 0x460d, Data4: [8]byte{0xa3, 0xf6, 0x7a, 0x0a, 0xd6, 0x23, 0xc0, 0xe6}}
 
 // SendResponse dispatches through IWSDServiceMessaging's vtable slot 3.
-func (self *IWSDServiceMessaging) SendResponse(pBody unsafe.Pointer, pOperation *WSD_OPERATION, pMessageParameters *IWSDMessageParameters) foundation.HRESULT {
+func (self *IWSDServiceMessaging) SendResponse(pBody unsafe.Pointer, pOperation *WSD_OPERATION, pMessageParameters *IWSDMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pMessageParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FaultRequest dispatches through IWSDServiceMessaging's vtable slot 4.
-func (self *IWSDServiceMessaging) FaultRequest(pRequestHeader *WSD_SOAP_HEADER, pMessageParameters *IWSDMessageParameters, pFault *WSD_SOAP_FAULT) foundation.HRESULT {
+func (self *IWSDServiceMessaging) FaultRequest(pRequestHeader *WSD_SOAP_HEADER, pMessageParameters *IWSDMessageParameters, pFault *WSD_SOAP_FAULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequestHeader)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(pFault)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDServiceProxy: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdserviceproxy
@@ -643,45 +668,45 @@ type IWSDServiceProxy struct {
 var IID_IWSDServiceProxy = win32.GUID{Data1: 0xd4c7fb9c, Data2: 0x03ab, Data3: 0x4175, Data4: [8]byte{0x9d, 0x67, 0x09, 0x4f, 0xaf, 0xeb, 0xf4, 0x87}}
 
 // BeginGetMetadata dispatches through IWSDServiceProxy's vtable slot 4.
-func (self *IWSDServiceProxy) BeginGetMetadata(ppResult **IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDServiceProxy) BeginGetMetadata(ppResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndGetMetadata dispatches through IWSDServiceProxy's vtable slot 5.
-func (self *IWSDServiceProxy) EndGetMetadata(pResult *IWSDAsyncResult, ppMetadata **WSD_METADATA_SECTION_LIST) foundation.HRESULT {
+func (self *IWSDServiceProxy) EndGetMetadata(pResult *IWSDAsyncResult, ppMetadata **WSD_METADATA_SECTION_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetServiceMetadata dispatches through IWSDServiceProxy's vtable slot 6.
-func (self *IWSDServiceProxy) GetServiceMetadata(ppServiceMetadata **WSD_SERVICE_METADATA) foundation.HRESULT {
+func (self *IWSDServiceProxy) GetServiceMetadata(ppServiceMetadata **WSD_SERVICE_METADATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServiceMetadata)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SubscribeToOperation dispatches through IWSDServiceProxy's vtable slot 7.
-func (self *IWSDServiceProxy) SubscribeToOperation(pOperation *WSD_OPERATION, pUnknown *systemcom.IUnknown, pAny *WSDXML_ELEMENT, ppAny **WSDXML_ELEMENT) foundation.HRESULT {
+func (self *IWSDServiceProxy) SubscribeToOperation(pOperation *WSD_OPERATION, pUnknown *systemcom.IUnknown, pAny *WSDXML_ELEMENT, ppAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnsubscribeToOperation dispatches through IWSDServiceProxy's vtable slot 8.
-func (self *IWSDServiceProxy) UnsubscribeToOperation(pOperation *WSD_OPERATION) foundation.HRESULT {
+func (self *IWSDServiceProxy) UnsubscribeToOperation(pOperation *WSD_OPERATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEventingStatusCallback dispatches through IWSDServiceProxy's vtable slot 9.
-func (self *IWSDServiceProxy) SetEventingStatusCallback(pStatus *IWSDEventingStatus) foundation.HRESULT {
+func (self *IWSDServiceProxy) SetEventingStatusCallback(pStatus *IWSDEventingStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEndpointProxy dispatches through IWSDServiceProxy's vtable slot 10.
-func (self *IWSDServiceProxy) GetEndpointProxy(ppProxy **IWSDEndpointProxy) foundation.HRESULT {
+func (self *IWSDServiceProxy) GetEndpointProxy(ppProxy **IWSDEndpointProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProxy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDServiceProxyEventing: https://learn.microsoft.com/windows/win32/api/wsdclient/nn-wsdclient-iwsdserviceproxyeventing
@@ -694,75 +719,75 @@ type IWSDServiceProxyEventing struct {
 var IID_IWSDServiceProxyEventing = win32.GUID{Data1: 0xf9279d6d, Data2: 0x1012, Data3: 0x4a94, Data4: [8]byte{0xb8, 0xcc, 0xfd, 0x35, 0xd2, 0x20, 0x2b, 0xfe}}
 
 // SubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 11.
-func (self *IWSDServiceProxyEventing) SubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pUnknown *systemcom.IUnknown, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) SubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pUnknown *systemcom.IUnknown, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginSubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 12.
-func (self *IWSDServiceProxyEventing) BeginSubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pUnknown *systemcom.IUnknown, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) BeginSubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pUnknown *systemcom.IUnknown, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndSubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 13.
-func (self *IWSDServiceProxyEventing) EndSubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) EndSubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnsubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 14.
-func (self *IWSDServiceProxyEventing) UnsubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) UnsubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginUnsubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 15.
-func (self *IWSDServiceProxyEventing) BeginUnsubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) BeginUnsubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndUnsubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 16.
-func (self *IWSDServiceProxyEventing) EndUnsubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) EndUnsubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RenewMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 17.
-func (self *IWSDServiceProxyEventing) RenewMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) RenewMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginRenewMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 18.
-func (self *IWSDServiceProxyEventing) BeginRenewMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) BeginRenewMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndRenewMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 19.
-func (self *IWSDServiceProxyEventing) EndRenewMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) EndRenewMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatusForMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 20.
-func (self *IWSDServiceProxyEventing) GetStatusForMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) GetStatusForMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginGetStatusForMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 21.
-func (self *IWSDServiceProxyEventing) BeginGetStatusForMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) BeginGetStatusForMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndGetStatusForMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 22.
-func (self *IWSDServiceProxyEventing) EndGetStatusForMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) foundation.HRESULT {
+func (self *IWSDServiceProxyEventing) EndGetStatusForMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDSignatureProperty: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdsignatureproperty
@@ -775,33 +800,33 @@ type IWSDSignatureProperty struct {
 var IID_IWSDSignatureProperty = win32.GUID{Data1: 0x03ce20aa, Data2: 0x71c4, Data3: 0x45e2, Data4: [8]byte{0xb3, 0x2e, 0x37, 0x66, 0xc6, 0x1c, 0x79, 0x0f}}
 
 // IsMessageSigned dispatches through IWSDSignatureProperty's vtable slot 3.
-func (self *IWSDSignatureProperty) IsMessageSigned(pbSigned *foundation.BOOL) foundation.HRESULT {
+func (self *IWSDSignatureProperty) IsMessageSigned(pbSigned *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSigned)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsMessageSignatureTrusted dispatches through IWSDSignatureProperty's vtable slot 4.
-func (self *IWSDSignatureProperty) IsMessageSignatureTrusted(pbSignatureTrusted *foundation.BOOL) foundation.HRESULT {
+func (self *IWSDSignatureProperty) IsMessageSignatureTrusted(pbSignatureTrusted *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSignatureTrusted)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKeyInfo dispatches through IWSDSignatureProperty's vtable slot 5.
-func (self *IWSDSignatureProperty) GetKeyInfo(pbKeyInfo *byte, pdwKeyInfoSize *uint32) foundation.HRESULT {
+func (self *IWSDSignatureProperty) GetKeyInfo(pbKeyInfo *byte, pdwKeyInfoSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbKeyInfo)), uintptr(unsafe.Pointer(pdwKeyInfoSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignature dispatches through IWSDSignatureProperty's vtable slot 6.
-func (self *IWSDSignatureProperty) GetSignature(pbSignature *byte, pdwSignatureSize *uint32) foundation.HRESULT {
+func (self *IWSDSignatureProperty) GetSignature(pbSignature *byte, pdwSignatureSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSignature)), uintptr(unsafe.Pointer(pdwSignatureSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignedInfoHash dispatches through IWSDSignatureProperty's vtable slot 7.
-func (self *IWSDSignatureProperty) GetSignedInfoHash(pbSignedInfoHash *byte, pdwHashSize *uint32) foundation.HRESULT {
+func (self *IWSDSignatureProperty) GetSignedInfoHash(pbSignedInfoHash *byte, pdwHashSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSignedInfoHash)), uintptr(unsafe.Pointer(pdwHashSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDTransportAddress: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdtransportaddress
@@ -814,33 +839,35 @@ type IWSDTransportAddress struct {
 var IID_IWSDTransportAddress = win32.GUID{Data1: 0x70d23498, Data2: 0x4ee6, Data3: 0x4340, Data4: [8]byte{0xa3, 0xdf, 0xd8, 0x45, 0xd2, 0x23, 0x54, 0x67}}
 
 // GetPort dispatches through IWSDTransportAddress's vtable slot 5.
-func (self *IWSDTransportAddress) GetPort(pwPort *uint16) foundation.HRESULT {
+func (self *IWSDTransportAddress) GetPort(pwPort *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwPort)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPort dispatches through IWSDTransportAddress's vtable slot 6.
-func (self *IWSDTransportAddress) SetPort(wPort uint16) foundation.HRESULT {
+func (self *IWSDTransportAddress) SetPort(wPort uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(wPort))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransportAddress dispatches through IWSDTransportAddress's vtable slot 7.
-func (self *IWSDTransportAddress) GetTransportAddress(ppszAddress *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDTransportAddress) GetTransportAddress(ppszAddress *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransportAddressEx dispatches through IWSDTransportAddress's vtable slot 8.
-func (self *IWSDTransportAddress) GetTransportAddressEx(fSafe foundation.BOOL, ppszAddress *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fSafe), uintptr(unsafe.Pointer(ppszAddress)))
-	return foundation.HRESULT(r1)
+func (self *IWSDTransportAddress) GetTransportAddressEx(fSafe bool, ppszAddress *foundation.PWSTR) error {
+	_fSafe := win32.Bool32(fSafe)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(_fSafe), uintptr(unsafe.Pointer(ppszAddress)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTransportAddress dispatches through IWSDTransportAddress's vtable slot 9.
-func (self *IWSDTransportAddress) SetTransportAddress(pszAddress foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszAddress)))
-	return foundation.HRESULT(r1)
+func (self *IWSDTransportAddress) SetTransportAddress(pszAddress string) error {
+	_pszAddress := win32.UTF16Ptr(pszAddress)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAddress)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDUdpAddress: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdudpaddress
@@ -853,63 +880,64 @@ type IWSDUdpAddress struct {
 var IID_IWSDUdpAddress = win32.GUID{Data1: 0x74d6124a, Data2: 0xa441, Data3: 0x4f78, Data4: [8]byte{0xa1, 0xeb, 0x97, 0xa8, 0xd1, 0x99, 0x68, 0x93}}
 
 // SetSockaddr dispatches through IWSDUdpAddress's vtable slot 10.
-func (self *IWSDUdpAddress) SetSockaddr(pSockAddr *networkingwinsock.SOCKADDR_STORAGE) foundation.HRESULT {
+func (self *IWSDUdpAddress) SetSockaddr(pSockAddr *networkingwinsock.SOCKADDR_STORAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSockAddr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSockaddr dispatches through IWSDUdpAddress's vtable slot 11.
-func (self *IWSDUdpAddress) GetSockaddr(pSockAddr *networkingwinsock.SOCKADDR_STORAGE) foundation.HRESULT {
+func (self *IWSDUdpAddress) GetSockaddr(pSockAddr *networkingwinsock.SOCKADDR_STORAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSockAddr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetExclusive dispatches through IWSDUdpAddress's vtable slot 12.
-func (self *IWSDUdpAddress) SetExclusive(fExclusive foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(fExclusive))
-	return foundation.HRESULT(r1)
+func (self *IWSDUdpAddress) SetExclusive(fExclusive bool) error {
+	_fExclusive := win32.Bool32(fExclusive)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_fExclusive))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExclusive dispatches through IWSDUdpAddress's vtable slot 13.
-func (self *IWSDUdpAddress) GetExclusive() foundation.HRESULT {
+func (self *IWSDUdpAddress) GetExclusive() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMessageType dispatches through IWSDUdpAddress's vtable slot 14.
-func (self *IWSDUdpAddress) SetMessageType(messageType WSDUdpMessageType) foundation.HRESULT {
+func (self *IWSDUdpAddress) SetMessageType(messageType WSDUdpMessageType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(messageType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMessageType dispatches through IWSDUdpAddress's vtable slot 15.
-func (self *IWSDUdpAddress) GetMessageType(pMessageType *WSDUdpMessageType) foundation.HRESULT {
+func (self *IWSDUdpAddress) GetMessageType(pMessageType *WSDUdpMessageType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMessageType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTTL dispatches through IWSDUdpAddress's vtable slot 16.
-func (self *IWSDUdpAddress) SetTTL(dwTTL uint32) foundation.HRESULT {
+func (self *IWSDUdpAddress) SetTTL(dwTTL uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwTTL))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTTL dispatches through IWSDUdpAddress's vtable slot 17.
-func (self *IWSDUdpAddress) GetTTL(pdwTTL *uint32) foundation.HRESULT {
+func (self *IWSDUdpAddress) GetTTL(pdwTTL *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwTTL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAlias dispatches through IWSDUdpAddress's vtable slot 18.
-func (self *IWSDUdpAddress) SetAlias(pAlias *win32.GUID) foundation.HRESULT {
+func (self *IWSDUdpAddress) SetAlias(pAlias *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAlias)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAlias dispatches through IWSDUdpAddress's vtable slot 19.
-func (self *IWSDUdpAddress) GetAlias(pAlias *win32.GUID) foundation.HRESULT {
+func (self *IWSDUdpAddress) GetAlias(pAlias *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAlias)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDUdpMessageParameters: https://learn.microsoft.com/windows/win32/api/wsdbase/nn-wsdbase-iwsdudpmessageparameters
@@ -922,15 +950,15 @@ type IWSDUdpMessageParameters struct {
 var IID_IWSDUdpMessageParameters = win32.GUID{Data1: 0x9934149f, Data2: 0x8f0c, Data3: 0x447b, Data4: [8]byte{0xaa, 0x0b, 0x73, 0x12, 0x4b, 0x0c, 0xa7, 0xf0}}
 
 // SetRetransmitParams dispatches through IWSDUdpMessageParameters's vtable slot 8.
-func (self *IWSDUdpMessageParameters) SetRetransmitParams(pParams *WSDUdpRetransmitParams) foundation.HRESULT {
+func (self *IWSDUdpMessageParameters) SetRetransmitParams(pParams *WSDUdpRetransmitParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRetransmitParams dispatches through IWSDUdpMessageParameters's vtable slot 9.
-func (self *IWSDUdpMessageParameters) GetRetransmitParams(pParams *WSDUdpRetransmitParams) foundation.HRESULT {
+func (self *IWSDUdpMessageParameters) GetRetransmitParams(pParams *WSDUdpRetransmitParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDXMLContext: https://learn.microsoft.com/windows/win32/api/wsdxml/nn-wsdxml-iwsdxmlcontext
@@ -943,27 +971,31 @@ type IWSDXMLContext struct {
 var IID_IWSDXMLContext = win32.GUID{Data1: 0x75d8f3ee, Data2: 0x3e5a, Data3: 0x43b4, Data4: [8]byte{0xa1, 0x5a, 0xbc, 0xf6, 0x88, 0x74, 0x60, 0xc0}}
 
 // AddNamespace dispatches through IWSDXMLContext's vtable slot 3.
-func (self *IWSDXMLContext) AddNamespace(pszUri foundation.PWSTR, pszSuggestedPrefix foundation.PWSTR, ppNamespace **WSDXML_NAMESPACE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUri)), uintptr(unsafe.Pointer(pszSuggestedPrefix)), uintptr(unsafe.Pointer(ppNamespace)))
-	return foundation.HRESULT(r1)
+func (self *IWSDXMLContext) AddNamespace(pszUri string, pszSuggestedPrefix string, ppNamespace **WSDXML_NAMESPACE) error {
+	_pszUri := win32.UTF16Ptr(pszUri)
+	_pszSuggestedPrefix := win32.UTF16Ptr(pszSuggestedPrefix)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUri)), uintptr(unsafe.Pointer(_pszSuggestedPrefix)), uintptr(unsafe.Pointer(ppNamespace)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddNameToNamespace dispatches through IWSDXMLContext's vtable slot 4.
-func (self *IWSDXMLContext) AddNameToNamespace(pszUri foundation.PWSTR, pszName foundation.PWSTR, ppName **WSDXML_NAME) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUri)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+func (self *IWSDXMLContext) AddNameToNamespace(pszUri string, pszName string, ppName **WSDXML_NAME) error {
+	_pszUri := win32.UTF16Ptr(pszUri)
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUri)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNamespaces dispatches through IWSDXMLContext's vtable slot 5.
-func (self *IWSDXMLContext) SetNamespaces(pNamespaces **WSDXML_NAMESPACE, wNamespacesCount uint16, bLayerNumber byte) foundation.HRESULT {
+func (self *IWSDXMLContext) SetNamespaces(pNamespaces **WSDXML_NAMESPACE, wNamespacesCount uint16, bLayerNumber byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNamespaces)), uintptr(wNamespacesCount), uintptr(bLayerNumber))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTypes dispatches through IWSDXMLContext's vtable slot 6.
-func (self *IWSDXMLContext) SetTypes(pTypes **WSDXML_TYPE, dwTypesCount uint32, bLayerNumber byte) foundation.HRESULT {
+func (self *IWSDXMLContext) SetTypes(pTypes **WSDXML_TYPE, dwTypesCount uint32, bLayerNumber byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTypes)), uintptr(dwTypesCount), uintptr(bLayerNumber))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDiscoveredService: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoveredservice
@@ -976,69 +1008,69 @@ type IWSDiscoveredService struct {
 var IID_IWSDiscoveredService = win32.GUID{Data1: 0x4bad8a3b, Data2: 0xb374, Data3: 0x4420, Data4: [8]byte{0x96, 0x32, 0xaa, 0xc9, 0x45, 0xb3, 0x74, 0xaa}}
 
 // GetEndpointReference dispatches through IWSDiscoveredService's vtable slot 3.
-func (self *IWSDiscoveredService) GetEndpointReference(ppEndpointReference **WSD_ENDPOINT_REFERENCE) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetEndpointReference(ppEndpointReference **WSD_ENDPOINT_REFERENCE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEndpointReference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTypes dispatches through IWSDiscoveredService's vtable slot 4.
-func (self *IWSDiscoveredService) GetTypes(ppTypesList **WSD_NAME_LIST) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetTypes(ppTypesList **WSD_NAME_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTypesList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScopes dispatches through IWSDiscoveredService's vtable slot 5.
-func (self *IWSDiscoveredService) GetScopes(ppScopesList **WSD_URI_LIST) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetScopes(ppScopesList **WSD_URI_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppScopesList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetXAddrs dispatches through IWSDiscoveredService's vtable slot 6.
-func (self *IWSDiscoveredService) GetXAddrs(ppXAddrsList **WSD_URI_LIST) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetXAddrs(ppXAddrsList **WSD_URI_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppXAddrsList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMetadataVersion dispatches through IWSDiscoveredService's vtable slot 7.
-func (self *IWSDiscoveredService) GetMetadataVersion(pullMetadataVersion *uint64) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetMetadataVersion(pullMetadataVersion *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullMetadataVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExtendedDiscoXML dispatches through IWSDiscoveredService's vtable slot 8.
-func (self *IWSDiscoveredService) GetExtendedDiscoXML(ppHeaderAny **WSDXML_ELEMENT, ppBodyAny **WSDXML_ELEMENT) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetExtendedDiscoXML(ppHeaderAny **WSDXML_ELEMENT, ppBodyAny **WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppHeaderAny)), uintptr(unsafe.Pointer(ppBodyAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProbeResolveTag dispatches through IWSDiscoveredService's vtable slot 9.
-func (self *IWSDiscoveredService) GetProbeResolveTag(ppszTag *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetProbeResolveTag(ppszTag *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszTag)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRemoteTransportAddress dispatches through IWSDiscoveredService's vtable slot 10.
-func (self *IWSDiscoveredService) GetRemoteTransportAddress(ppszRemoteTransportAddress *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetRemoteTransportAddress(ppszRemoteTransportAddress *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszRemoteTransportAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLocalTransportAddress dispatches through IWSDiscoveredService's vtable slot 11.
-func (self *IWSDiscoveredService) GetLocalTransportAddress(ppszLocalTransportAddress *foundation.PWSTR) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetLocalTransportAddress(ppszLocalTransportAddress *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszLocalTransportAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLocalInterfaceGUID dispatches through IWSDiscoveredService's vtable slot 12.
-func (self *IWSDiscoveredService) GetLocalInterfaceGUID(pGuid *win32.GUID) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetLocalInterfaceGUID(pGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInstanceId dispatches through IWSDiscoveredService's vtable slot 13.
-func (self *IWSDiscoveredService) GetInstanceId(pullInstanceId *uint64) foundation.HRESULT {
+func (self *IWSDiscoveredService) GetInstanceId(pullInstanceId *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullInstanceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDiscoveryProvider: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoveryprovider
@@ -1051,45 +1083,51 @@ type IWSDiscoveryProvider struct {
 var IID_IWSDiscoveryProvider = win32.GUID{Data1: 0x8ffc8e55, Data2: 0xf0eb, Data3: 0x480f, Data4: [8]byte{0x88, 0xb7, 0xb4, 0x35, 0xdd, 0x28, 0x1d, 0x45}}
 
 // SetAddressFamily dispatches through IWSDiscoveryProvider's vtable slot 3.
-func (self *IWSDiscoveryProvider) SetAddressFamily(dwAddressFamily uint32) foundation.HRESULT {
+func (self *IWSDiscoveryProvider) SetAddressFamily(dwAddressFamily uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwAddressFamily))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Attach dispatches through IWSDiscoveryProvider's vtable slot 4.
-func (self *IWSDiscoveryProvider) Attach(pSink *IWSDiscoveryProviderNotify) foundation.HRESULT {
+func (self *IWSDiscoveryProvider) Attach(pSink *IWSDiscoveryProviderNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Detach dispatches through IWSDiscoveryProvider's vtable slot 5.
-func (self *IWSDiscoveryProvider) Detach() foundation.HRESULT {
+func (self *IWSDiscoveryProvider) Detach() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SearchById dispatches through IWSDiscoveryProvider's vtable slot 6.
-func (self *IWSDiscoveryProvider) SearchById(pszId foundation.PWSTR, pszTag foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszId)), uintptr(unsafe.Pointer(pszTag)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryProvider) SearchById(pszId string, pszTag string) error {
+	_pszId := win32.UTF16Ptr(pszId)
+	_pszTag := win32.UTF16Ptr(pszTag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(unsafe.Pointer(_pszTag)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SearchByAddress dispatches through IWSDiscoveryProvider's vtable slot 7.
-func (self *IWSDiscoveryProvider) SearchByAddress(pszAddress foundation.PWSTR, pszTag foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszAddress)), uintptr(unsafe.Pointer(pszTag)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryProvider) SearchByAddress(pszAddress string, pszTag string) error {
+	_pszAddress := win32.UTF16Ptr(pszAddress)
+	_pszTag := win32.UTF16Ptr(pszTag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAddress)), uintptr(unsafe.Pointer(_pszTag)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SearchByType dispatches through IWSDiscoveryProvider's vtable slot 8.
-func (self *IWSDiscoveryProvider) SearchByType(pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pszMatchBy foundation.PWSTR, pszTag foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pszMatchBy)), uintptr(unsafe.Pointer(pszTag)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryProvider) SearchByType(pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pszMatchBy string, pszTag string) error {
+	_pszMatchBy := win32.UTF16Ptr(pszMatchBy)
+	_pszTag := win32.UTF16Ptr(pszTag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(_pszMatchBy)), uintptr(unsafe.Pointer(_pszTag)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetXMLContext dispatches through IWSDiscoveryProvider's vtable slot 9.
-func (self *IWSDiscoveryProvider) GetXMLContext(ppContext **IWSDXMLContext) foundation.HRESULT {
+func (self *IWSDiscoveryProvider) GetXMLContext(ppContext **IWSDXMLContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDiscoveryProviderNotify: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoveryprovidernotify
@@ -1102,27 +1140,29 @@ type IWSDiscoveryProviderNotify struct {
 var IID_IWSDiscoveryProviderNotify = win32.GUID{Data1: 0x73ee3ced, Data2: 0xb6e6, Data3: 0x4329, Data4: [8]byte{0xa5, 0x46, 0x3e, 0x8a, 0xd4, 0x65, 0x63, 0xd2}}
 
 // Add dispatches through IWSDiscoveryProviderNotify's vtable slot 3.
-func (self *IWSDiscoveryProviderNotify) Add(pService *IWSDiscoveredService) foundation.HRESULT {
+func (self *IWSDiscoveryProviderNotify) Add(pService *IWSDiscoveredService) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pService)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IWSDiscoveryProviderNotify's vtable slot 4.
-func (self *IWSDiscoveryProviderNotify) Remove(pService *IWSDiscoveredService) foundation.HRESULT {
+func (self *IWSDiscoveryProviderNotify) Remove(pService *IWSDiscoveredService) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pService)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SearchFailed dispatches through IWSDiscoveryProviderNotify's vtable slot 5.
-func (self *IWSDiscoveryProviderNotify) SearchFailed(hr foundation.HRESULT, pszTag foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(unsafe.Pointer(pszTag)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryProviderNotify) SearchFailed(hr foundation.HRESULT, pszTag string) error {
+	_pszTag := win32.UTF16Ptr(pszTag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(unsafe.Pointer(_pszTag)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SearchComplete dispatches through IWSDiscoveryProviderNotify's vtable slot 6.
-func (self *IWSDiscoveryProviderNotify) SearchComplete(pszTag foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTag)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryProviderNotify) SearchComplete(pszTag string) error {
+	_pszTag := win32.UTF16Ptr(pszTag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTag)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDiscoveryPublisher: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoverypublisher
@@ -1135,81 +1175,95 @@ type IWSDiscoveryPublisher struct {
 var IID_IWSDiscoveryPublisher = win32.GUID{Data1: 0xae01e1a8, Data2: 0x3ff9, Data3: 0x4148, Data4: [8]byte{0x81, 0x16, 0x05, 0x7c, 0xc6, 0x16, 0xfe, 0x13}}
 
 // SetAddressFamily dispatches through IWSDiscoveryPublisher's vtable slot 3.
-func (self *IWSDiscoveryPublisher) SetAddressFamily(dwAddressFamily uint32) foundation.HRESULT {
+func (self *IWSDiscoveryPublisher) SetAddressFamily(dwAddressFamily uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwAddressFamily))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterNotificationSink dispatches through IWSDiscoveryPublisher's vtable slot 4.
-func (self *IWSDiscoveryPublisher) RegisterNotificationSink(pSink *IWSDiscoveryPublisherNotify) foundation.HRESULT {
+func (self *IWSDiscoveryPublisher) RegisterNotificationSink(pSink *IWSDiscoveryPublisherNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnRegisterNotificationSink dispatches through IWSDiscoveryPublisher's vtable slot 5.
-func (self *IWSDiscoveryPublisher) UnRegisterNotificationSink(pSink *IWSDiscoveryPublisherNotify) foundation.HRESULT {
+func (self *IWSDiscoveryPublisher) UnRegisterNotificationSink(pSink *IWSDiscoveryPublisherNotify) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Publish dispatches through IWSDiscoveryPublisher's vtable slot 6.
-func (self *IWSDiscoveryPublisher) Publish(pszId foundation.PWSTR, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId foundation.PWSTR, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryPublisher) Publish(pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) error {
+	_pszId := win32.UTF16Ptr(pszId)
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnPublish dispatches through IWSDiscoveryPublisher's vtable slot 7.
-func (self *IWSDiscoveryPublisher) UnPublish(pszId foundation.PWSTR, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId foundation.PWSTR, pAny *WSDXML_ELEMENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszId)), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pAny)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryPublisher) UnPublish(pszId string, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pAny *WSDXML_ELEMENT) error {
+	_pszId := win32.UTF16Ptr(pszId)
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pAny)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MatchProbe dispatches through IWSDiscoveryPublisher's vtable slot 8.
-func (self *IWSDiscoveryPublisher) MatchProbe(pProbeMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId foundation.PWSTR, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId foundation.PWSTR, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProbeMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryPublisher) MatchProbe(pProbeMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) error {
+	_pszId := win32.UTF16Ptr(pszId)
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProbeMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MatchResolve dispatches through IWSDiscoveryPublisher's vtable slot 9.
-func (self *IWSDiscoveryPublisher) MatchResolve(pResolveMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId foundation.PWSTR, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId foundation.PWSTR, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolveMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryPublisher) MatchResolve(pResolveMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) error {
+	_pszId := win32.UTF16Ptr(pszId)
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolveMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PublishEx dispatches through IWSDiscoveryPublisher's vtable slot 10.
-func (self *IWSDiscoveryPublisher) PublishEx(pszId foundation.PWSTR, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId foundation.PWSTR, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryPublisher) PublishEx(pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) error {
+	_pszId := win32.UTF16Ptr(pszId)
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MatchProbeEx dispatches through IWSDiscoveryPublisher's vtable slot 11.
-func (self *IWSDiscoveryPublisher) MatchProbeEx(pProbeMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId foundation.PWSTR, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId foundation.PWSTR, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProbeMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryPublisher) MatchProbeEx(pProbeMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) error {
+	_pszId := win32.UTF16Ptr(pszId)
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProbeMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MatchResolveEx dispatches through IWSDiscoveryPublisher's vtable slot 12.
-func (self *IWSDiscoveryPublisher) MatchResolveEx(pResolveMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId foundation.PWSTR, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId foundation.PWSTR, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolveMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
-	return foundation.HRESULT(r1)
+func (self *IWSDiscoveryPublisher) MatchResolveEx(pResolveMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) error {
+	_pszId := win32.UTF16Ptr(pszId)
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolveMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterScopeMatchingRule dispatches through IWSDiscoveryPublisher's vtable slot 13.
-func (self *IWSDiscoveryPublisher) RegisterScopeMatchingRule(pScopeMatchingRule *IWSDScopeMatchingRule) foundation.HRESULT {
+func (self *IWSDiscoveryPublisher) RegisterScopeMatchingRule(pScopeMatchingRule *IWSDScopeMatchingRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pScopeMatchingRule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnRegisterScopeMatchingRule dispatches through IWSDiscoveryPublisher's vtable slot 14.
-func (self *IWSDiscoveryPublisher) UnRegisterScopeMatchingRule(pScopeMatchingRule *IWSDScopeMatchingRule) foundation.HRESULT {
+func (self *IWSDiscoveryPublisher) UnRegisterScopeMatchingRule(pScopeMatchingRule *IWSDScopeMatchingRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pScopeMatchingRule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetXMLContext dispatches through IWSDiscoveryPublisher's vtable slot 15.
-func (self *IWSDiscoveryPublisher) GetXMLContext(ppContext **IWSDXMLContext) foundation.HRESULT {
+func (self *IWSDiscoveryPublisher) GetXMLContext(ppContext **IWSDXMLContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSDiscoveryPublisherNotify: https://learn.microsoft.com/windows/win32/api/wsddisco/nn-wsddisco-iwsdiscoverypublishernotify
@@ -1222,13 +1276,13 @@ type IWSDiscoveryPublisherNotify struct {
 var IID_IWSDiscoveryPublisherNotify = win32.GUID{Data1: 0xe67651b0, Data2: 0x337a, Data3: 0x4b3c, Data4: [8]byte{0x97, 0x58, 0x73, 0x33, 0x88, 0x56, 0x82, 0x51}}
 
 // ProbeHandler dispatches through IWSDiscoveryPublisherNotify's vtable slot 3.
-func (self *IWSDiscoveryPublisherNotify) ProbeHandler(pSoap *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters) foundation.HRESULT {
+func (self *IWSDiscoveryPublisherNotify) ProbeHandler(pSoap *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSoap)), uintptr(unsafe.Pointer(pMessageParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResolveHandler dispatches through IWSDiscoveryPublisherNotify's vtable slot 4.
-func (self *IWSDiscoveryPublisherNotify) ResolveHandler(pSoap *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters) foundation.HRESULT {
+func (self *IWSDiscoveryPublisherNotify) ResolveHandler(pSoap *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSoap)), uintptr(unsafe.Pointer(pMessageParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

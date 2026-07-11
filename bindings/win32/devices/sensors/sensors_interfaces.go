@@ -25,15 +25,15 @@ type ILocationPermissions struct {
 var IID_ILocationPermissions = win32.GUID{Data1: 0xd5fb0a7f, Data2: 0xe74e, Data3: 0x44f5, Data4: [8]byte{0x8e, 0x02, 0x48, 0x06, 0x86, 0x3a, 0x27, 0x4f}}
 
 // GetGlobalLocationPermission dispatches through ILocationPermissions's vtable slot 3.
-func (self *ILocationPermissions) GetGlobalLocationPermission(pfEnabled *foundation.BOOL) foundation.HRESULT {
+func (self *ILocationPermissions) GetGlobalLocationPermission(pfEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckLocationCapability dispatches through ILocationPermissions's vtable slot 4.
-func (self *ILocationPermissions) CheckLocationCapability(dwClientThreadId uint32) foundation.HRESULT {
+func (self *ILocationPermissions) CheckLocationCapability(dwClientThreadId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwClientThreadId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISensor: https://learn.microsoft.com/windows/win32/api/sensorsapi/nn-sensorsapi-isensor
@@ -46,93 +46,93 @@ type ISensor struct {
 var IID_ISensor = win32.GUID{Data1: 0x5fa08f80, Data2: 0x2657, Data3: 0x458e, Data4: [8]byte{0xaf, 0x75, 0x46, 0xf7, 0x3f, 0xa6, 0xac, 0x5c}}
 
 // GetID dispatches through ISensor's vtable slot 3.
-func (self *ISensor) GetID(pID *win32.GUID) foundation.HRESULT {
+func (self *ISensor) GetID(pID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCategory dispatches through ISensor's vtable slot 4.
-func (self *ISensor) GetCategory(pSensorCategory *win32.GUID) foundation.HRESULT {
+func (self *ISensor) GetCategory(pSensorCategory *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSensorCategory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetType dispatches through ISensor's vtable slot 5.
-func (self *ISensor) GetType(pSensorType *win32.GUID) foundation.HRESULT {
+func (self *ISensor) GetType(pSensorType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSensorType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFriendlyName dispatches through ISensor's vtable slot 6.
-func (self *ISensor) GetFriendlyName(pFriendlyName *foundation.BSTR) foundation.HRESULT {
+func (self *ISensor) GetFriendlyName(pFriendlyName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFriendlyName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through ISensor's vtable slot 7.
-func (self *ISensor) GetProperty(key *foundation.PROPERTYKEY, pProperty *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *ISensor) GetProperty(key *foundation.PROPERTYKEY, pProperty *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperties dispatches through ISensor's vtable slot 8.
-func (self *ISensor) GetProperties(pKeys *devicesportabledevices.IPortableDeviceKeyCollection, ppProperties **devicesportabledevices.IPortableDeviceValues) foundation.HRESULT {
+func (self *ISensor) GetProperties(pKeys *devicesportabledevices.IPortableDeviceKeyCollection, ppProperties **devicesportabledevices.IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedDataFields dispatches through ISensor's vtable slot 9.
-func (self *ISensor) GetSupportedDataFields(ppDataFields **devicesportabledevices.IPortableDeviceKeyCollection) foundation.HRESULT {
+func (self *ISensor) GetSupportedDataFields(ppDataFields **devicesportabledevices.IPortableDeviceKeyCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDataFields)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperties dispatches through ISensor's vtable slot 10.
-func (self *ISensor) SetProperties(pProperties *devicesportabledevices.IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) foundation.HRESULT {
+func (self *ISensor) SetProperties(pProperties *devicesportabledevices.IPortableDeviceValues, ppResults **devicesportabledevices.IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProperties)), uintptr(unsafe.Pointer(ppResults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SupportsDataField dispatches through ISensor's vtable slot 11.
-func (self *ISensor) SupportsDataField(key *foundation.PROPERTYKEY, pIsSupported *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISensor) SupportsDataField(key *foundation.PROPERTYKEY, pIsSupported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pIsSupported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetState dispatches through ISensor's vtable slot 12.
-func (self *ISensor) GetState(pState *SensorState) foundation.HRESULT {
+func (self *ISensor) GetState(pState *SensorState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetData dispatches through ISensor's vtable slot 13.
-func (self *ISensor) GetData(ppDataReport **ISensorDataReport) foundation.HRESULT {
+func (self *ISensor) GetData(ppDataReport **ISensorDataReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDataReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SupportsEvent dispatches through ISensor's vtable slot 14.
-func (self *ISensor) SupportsEvent(eventGuid *win32.GUID, pIsSupported *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISensor) SupportsEvent(eventGuid *win32.GUID, pIsSupported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eventGuid)), uintptr(unsafe.Pointer(pIsSupported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventInterest dispatches through ISensor's vtable slot 15.
-func (self *ISensor) GetEventInterest(ppValues **win32.GUID, pCount *uint32) foundation.HRESULT {
+func (self *ISensor) GetEventInterest(ppValues **win32.GUID, pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppValues)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEventInterest dispatches through ISensor's vtable slot 16.
-func (self *ISensor) SetEventInterest(pValues *win32.GUID, count uint32) foundation.HRESULT {
+func (self *ISensor) SetEventInterest(pValues *win32.GUID, count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValues)), uintptr(count))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEventSink dispatches through ISensor's vtable slot 17.
-func (self *ISensor) SetEventSink(pEvents *ISensorEvents) foundation.HRESULT {
+func (self *ISensor) SetEventSink(pEvents *ISensorEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISensorCollection: https://learn.microsoft.com/windows/win32/api/sensorsapi/nn-sensorsapi-isensorcollection
@@ -145,39 +145,39 @@ type ISensorCollection struct {
 var IID_ISensorCollection = win32.GUID{Data1: 0x23571e11, Data2: 0xe545, Data3: 0x4dd8, Data4: [8]byte{0xa3, 0x37, 0xb8, 0x9b, 0xf4, 0x4b, 0x10, 0xdf}}
 
 // GetAt dispatches through ISensorCollection's vtable slot 3.
-func (self *ISensorCollection) GetAt(ulIndex uint32, ppSensor **ISensor) foundation.HRESULT {
+func (self *ISensorCollection) GetAt(ulIndex uint32, ppSensor **ISensor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(unsafe.Pointer(ppSensor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through ISensorCollection's vtable slot 4.
-func (self *ISensorCollection) GetCount(pCount *uint32) foundation.HRESULT {
+func (self *ISensorCollection) GetCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through ISensorCollection's vtable slot 5.
-func (self *ISensorCollection) Add(pSensor *ISensor) foundation.HRESULT {
+func (self *ISensorCollection) Add(pSensor *ISensor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSensor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through ISensorCollection's vtable slot 6.
-func (self *ISensorCollection) Remove(pSensor *ISensor) foundation.HRESULT {
+func (self *ISensorCollection) Remove(pSensor *ISensor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSensor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveByID dispatches through ISensorCollection's vtable slot 7.
-func (self *ISensorCollection) RemoveByID(sensorID *win32.GUID) foundation.HRESULT {
+func (self *ISensorCollection) RemoveByID(sensorID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sensorID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through ISensorCollection's vtable slot 8.
-func (self *ISensorCollection) Clear() foundation.HRESULT {
+func (self *ISensorCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISensorDataReport: https://learn.microsoft.com/windows/win32/api/sensorsapi/nn-sensorsapi-isensordatareport
@@ -190,21 +190,21 @@ type ISensorDataReport struct {
 var IID_ISensorDataReport = win32.GUID{Data1: 0x0ab9df9b, Data2: 0xc4b5, Data3: 0x4796, Data4: [8]byte{0x88, 0x98, 0x04, 0x70, 0x70, 0x6a, 0x2e, 0x1d}}
 
 // GetTimestamp dispatches through ISensorDataReport's vtable slot 3.
-func (self *ISensorDataReport) GetTimestamp(pTimeStamp *foundation.SYSTEMTIME) foundation.HRESULT {
+func (self *ISensorDataReport) GetTimestamp(pTimeStamp *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeStamp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSensorValue dispatches through ISensorDataReport's vtable slot 4.
-func (self *ISensorDataReport) GetSensorValue(pKey *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *ISensorDataReport) GetSensorValue(pKey *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSensorValues dispatches through ISensorDataReport's vtable slot 5.
-func (self *ISensorDataReport) GetSensorValues(pKeys *devicesportabledevices.IPortableDeviceKeyCollection, ppValues **devicesportabledevices.IPortableDeviceValues) foundation.HRESULT {
+func (self *ISensorDataReport) GetSensorValues(pKeys *devicesportabledevices.IPortableDeviceKeyCollection, ppValues **devicesportabledevices.IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKeys)), uintptr(unsafe.Pointer(ppValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISensorEvents: https://learn.microsoft.com/windows/win32/api/sensorsapi/nn-sensorsapi-isensorevents
@@ -217,27 +217,27 @@ type ISensorEvents struct {
 var IID_ISensorEvents = win32.GUID{Data1: 0x5d8dcc91, Data2: 0x4641, Data3: 0x47e7, Data4: [8]byte{0xb7, 0xc3, 0xb7, 0x4f, 0x48, 0xa6, 0xc3, 0x91}}
 
 // OnStateChanged dispatches through ISensorEvents's vtable slot 3.
-func (self *ISensorEvents) OnStateChanged(pSensor *ISensor, state SensorState) foundation.HRESULT {
+func (self *ISensorEvents) OnStateChanged(pSensor *ISensor, state SensorState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSensor)), uintptr(state))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDataUpdated dispatches through ISensorEvents's vtable slot 4.
-func (self *ISensorEvents) OnDataUpdated(pSensor *ISensor, pNewData *ISensorDataReport) foundation.HRESULT {
+func (self *ISensorEvents) OnDataUpdated(pSensor *ISensor, pNewData *ISensorDataReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSensor)), uintptr(unsafe.Pointer(pNewData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEvent dispatches through ISensorEvents's vtable slot 5.
-func (self *ISensorEvents) OnEvent(pSensor *ISensor, eventID *win32.GUID, pEventData *devicesportabledevices.IPortableDeviceValues) foundation.HRESULT {
+func (self *ISensorEvents) OnEvent(pSensor *ISensor, eventID *win32.GUID, pEventData *devicesportabledevices.IPortableDeviceValues) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSensor)), uintptr(unsafe.Pointer(eventID)), uintptr(unsafe.Pointer(pEventData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnLeave dispatches through ISensorEvents's vtable slot 6.
-func (self *ISensorEvents) OnLeave(ID *win32.GUID) foundation.HRESULT {
+func (self *ISensorEvents) OnLeave(ID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISensorManager: https://learn.microsoft.com/windows/win32/api/sensorsapi/nn-sensorsapi-isensormanager
@@ -250,33 +250,34 @@ type ISensorManager struct {
 var IID_ISensorManager = win32.GUID{Data1: 0xbd77db67, Data2: 0x45a8, Data3: 0x42dc, Data4: [8]byte{0x8d, 0x00, 0x6d, 0xcf, 0x15, 0xf8, 0x37, 0x7a}}
 
 // GetSensorsByCategory dispatches through ISensorManager's vtable slot 3.
-func (self *ISensorManager) GetSensorsByCategory(sensorCategory *win32.GUID, ppSensorsFound **ISensorCollection) foundation.HRESULT {
+func (self *ISensorManager) GetSensorsByCategory(sensorCategory *win32.GUID, ppSensorsFound **ISensorCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sensorCategory)), uintptr(unsafe.Pointer(ppSensorsFound)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSensorsByType dispatches through ISensorManager's vtable slot 4.
-func (self *ISensorManager) GetSensorsByType(sensorType *win32.GUID, ppSensorsFound **ISensorCollection) foundation.HRESULT {
+func (self *ISensorManager) GetSensorsByType(sensorType *win32.GUID, ppSensorsFound **ISensorCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sensorType)), uintptr(unsafe.Pointer(ppSensorsFound)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSensorByID dispatches through ISensorManager's vtable slot 5.
-func (self *ISensorManager) GetSensorByID(sensorID *win32.GUID, ppSensor **ISensor) foundation.HRESULT {
+func (self *ISensorManager) GetSensorByID(sensorID *win32.GUID, ppSensor **ISensor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sensorID)), uintptr(unsafe.Pointer(ppSensor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEventSink dispatches through ISensorManager's vtable slot 6.
-func (self *ISensorManager) SetEventSink(pEvents *ISensorManagerEvents) foundation.HRESULT {
+func (self *ISensorManager) SetEventSink(pEvents *ISensorManagerEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestPermissions dispatches through ISensorManager's vtable slot 7.
-func (self *ISensorManager) RequestPermissions(hParent foundation.HWND, pSensors *ISensorCollection, fModal foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hParent), uintptr(unsafe.Pointer(pSensors)), uintptr(fModal))
-	return foundation.HRESULT(r1)
+func (self *ISensorManager) RequestPermissions(hParent foundation.HWND, pSensors *ISensorCollection, fModal bool) error {
+	_fModal := win32.Bool32(fModal)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hParent), uintptr(unsafe.Pointer(pSensors)), uintptr(_fModal))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISensorManagerEvents: https://learn.microsoft.com/windows/win32/api/sensorsapi/nn-sensorsapi-isensormanagerevents
@@ -289,7 +290,7 @@ type ISensorManagerEvents struct {
 var IID_ISensorManagerEvents = win32.GUID{Data1: 0x9b3b0b86, Data2: 0x266a, Data3: 0x4aad, Data4: [8]byte{0xb2, 0x1f, 0xfd, 0xe5, 0x50, 0x10, 0x01, 0xb7}}
 
 // OnSensorEnter dispatches through ISensorManagerEvents's vtable slot 3.
-func (self *ISensorManagerEvents) OnSensorEnter(pSensor *ISensor, state SensorState) foundation.HRESULT {
+func (self *ISensorManagerEvents) OnSensorEnter(pSensor *ISensor, state SensorState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSensor)), uintptr(state))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

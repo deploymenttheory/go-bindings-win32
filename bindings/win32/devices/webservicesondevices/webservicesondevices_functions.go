@@ -69,121 +69,150 @@ func WSDAttachLinkedMemory(pParent unsafe.Pointer, pChild unsafe.Pointer) {
 // WSDCreateDeviceHost calls wsdapi!WSDCreateDeviceHost.
 // https://learn.microsoft.com/windows/win32/api/wsdhost/nf-wsdhost-wsdcreatedevicehost
 // Minimum OS: windows6.0.6000.
-func WSDCreateDeviceHost(pszLocalId foundation.PWSTR, pContext *IWSDXMLContext, ppDeviceHost **IWSDDeviceHost) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceHost.Addr(), uintptr(unsafe.Pointer(pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppDeviceHost)))
-	return foundation.HRESULT(r1)
+func WSDCreateDeviceHost(pszLocalId string, pContext *IWSDXMLContext, ppDeviceHost **IWSDDeviceHost) error {
+	_pszLocalId := win32.UTF16Ptr(pszLocalId)
+	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceHost.Addr(), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppDeviceHost)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateDeviceHost2 calls wsdapi!WSDCreateDeviceHost2.
 // https://learn.microsoft.com/windows/win32/api/wsdhost/nf-wsdhost-wsdcreatedevicehost2
 // Minimum OS: windows6.1.
-func WSDCreateDeviceHost2(pszLocalId foundation.PWSTR, pContext *IWSDXMLContext, pConfigParams *WSD_CONFIG_PARAM, dwConfigParamCount uint32, ppDeviceHost **IWSDDeviceHost) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceHost2.Addr(), uintptr(unsafe.Pointer(pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pConfigParams)), uintptr(dwConfigParamCount), uintptr(unsafe.Pointer(ppDeviceHost)))
-	return foundation.HRESULT(r1)
+func WSDCreateDeviceHost2(pszLocalId string, pContext *IWSDXMLContext, pConfigParams []WSD_CONFIG_PARAM, ppDeviceHost **IWSDDeviceHost) error {
+	_pszLocalId := win32.UTF16Ptr(pszLocalId)
+	var _pConfigParams *WSD_CONFIG_PARAM
+	if len(pConfigParams) > 0 {
+		_pConfigParams = &pConfigParams[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceHost2.Addr(), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_pConfigParams)), uintptr(len(pConfigParams)), uintptr(unsafe.Pointer(ppDeviceHost)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateDeviceHostAdvanced calls wsdapi!WSDCreateDeviceHostAdvanced.
 // https://learn.microsoft.com/windows/win32/api/wsdhost/nf-wsdhost-wsdcreatedevicehostadvanced
 // Minimum OS: windows6.0.6000.
-func WSDCreateDeviceHostAdvanced(pszLocalId foundation.PWSTR, pContext *IWSDXMLContext, ppHostAddresses **IWSDAddress, dwHostAddressCount uint32, ppDeviceHost **IWSDDeviceHost) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceHostAdvanced.Addr(), uintptr(unsafe.Pointer(pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppHostAddresses)), uintptr(dwHostAddressCount), uintptr(unsafe.Pointer(ppDeviceHost)))
-	return foundation.HRESULT(r1)
+func WSDCreateDeviceHostAdvanced(pszLocalId string, pContext *IWSDXMLContext, ppHostAddresses []*IWSDAddress, ppDeviceHost **IWSDDeviceHost) error {
+	_pszLocalId := win32.UTF16Ptr(pszLocalId)
+	var _ppHostAddresses **IWSDAddress
+	if len(ppHostAddresses) > 0 {
+		_ppHostAddresses = &ppHostAddresses[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceHostAdvanced.Addr(), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_ppHostAddresses)), uintptr(len(ppHostAddresses)), uintptr(unsafe.Pointer(ppDeviceHost)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateDeviceProxy calls wsdapi!WSDCreateDeviceProxy.
 // https://learn.microsoft.com/windows/win32/api/wsdclient/nf-wsdclient-wsdcreatedeviceproxy
 // Minimum OS: windows6.0.6000.
-func WSDCreateDeviceProxy(pszDeviceId foundation.PWSTR, pszLocalId foundation.PWSTR, pContext *IWSDXMLContext, ppDeviceProxy **IWSDDeviceProxy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceProxy.Addr(), uintptr(unsafe.Pointer(pszDeviceId)), uintptr(unsafe.Pointer(pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppDeviceProxy)))
-	return foundation.HRESULT(r1)
+func WSDCreateDeviceProxy(pszDeviceId string, pszLocalId string, pContext *IWSDXMLContext, ppDeviceProxy **IWSDDeviceProxy) error {
+	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
+	_pszLocalId := win32.UTF16Ptr(pszLocalId)
+	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceProxy.Addr(), uintptr(unsafe.Pointer(_pszDeviceId)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppDeviceProxy)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateDeviceProxy2 calls wsdapi!WSDCreateDeviceProxy2.
 // https://learn.microsoft.com/windows/win32/api/wsdclient/nf-wsdclient-wsdcreatedeviceproxy2
 // Minimum OS: windows6.1.
-func WSDCreateDeviceProxy2(pszDeviceId foundation.PWSTR, pszLocalId foundation.PWSTR, pContext *IWSDXMLContext, pConfigParams *WSD_CONFIG_PARAM, dwConfigParamCount uint32, ppDeviceProxy **IWSDDeviceProxy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceProxy2.Addr(), uintptr(unsafe.Pointer(pszDeviceId)), uintptr(unsafe.Pointer(pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pConfigParams)), uintptr(dwConfigParamCount), uintptr(unsafe.Pointer(ppDeviceProxy)))
-	return foundation.HRESULT(r1)
+func WSDCreateDeviceProxy2(pszDeviceId string, pszLocalId string, pContext *IWSDXMLContext, pConfigParams []WSD_CONFIG_PARAM, ppDeviceProxy **IWSDDeviceProxy) error {
+	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
+	_pszLocalId := win32.UTF16Ptr(pszLocalId)
+	var _pConfigParams *WSD_CONFIG_PARAM
+	if len(pConfigParams) > 0 {
+		_pConfigParams = &pConfigParams[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceProxy2.Addr(), uintptr(unsafe.Pointer(_pszDeviceId)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_pConfigParams)), uintptr(len(pConfigParams)), uintptr(unsafe.Pointer(ppDeviceProxy)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateDeviceProxyAdvanced calls wsdapi!WSDCreateDeviceProxyAdvanced.
 // https://learn.microsoft.com/windows/win32/api/wsdclient/nf-wsdclient-wsdcreatedeviceproxyadvanced
 // Minimum OS: windows6.0.6000.
-func WSDCreateDeviceProxyAdvanced(pszDeviceId foundation.PWSTR, pDeviceAddress *IWSDAddress, pszLocalId foundation.PWSTR, pContext *IWSDXMLContext, ppDeviceProxy **IWSDDeviceProxy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceProxyAdvanced.Addr(), uintptr(unsafe.Pointer(pszDeviceId)), uintptr(unsafe.Pointer(pDeviceAddress)), uintptr(unsafe.Pointer(pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppDeviceProxy)))
-	return foundation.HRESULT(r1)
+func WSDCreateDeviceProxyAdvanced(pszDeviceId string, pDeviceAddress *IWSDAddress, pszLocalId string, pContext *IWSDXMLContext, ppDeviceProxy **IWSDDeviceProxy) error {
+	_pszDeviceId := win32.UTF16Ptr(pszDeviceId)
+	_pszLocalId := win32.UTF16Ptr(pszLocalId)
+	r1, _, _ := syscall.SyscallN(procWSDCreateDeviceProxyAdvanced.Addr(), uintptr(unsafe.Pointer(_pszDeviceId)), uintptr(unsafe.Pointer(pDeviceAddress)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppDeviceProxy)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateDiscoveryProvider calls wsdapi!WSDCreateDiscoveryProvider.
 // https://learn.microsoft.com/windows/win32/api/wsddisco/nf-wsddisco-wsdcreatediscoveryprovider
 // Minimum OS: windows6.0.6000.
-func WSDCreateDiscoveryProvider(pContext *IWSDXMLContext, ppProvider **IWSDiscoveryProvider) foundation.HRESULT {
+func WSDCreateDiscoveryProvider(pContext *IWSDXMLContext, ppProvider **IWSDiscoveryProvider) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryProvider.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateDiscoveryProvider2 calls wsdapi!WSDCreateDiscoveryProvider2.
 // https://learn.microsoft.com/windows/win32/api/wsddisco/nf-wsddisco-wsdcreatediscoveryprovider2
 // Minimum OS: windows6.1.
-func WSDCreateDiscoveryProvider2(pContext *IWSDXMLContext, pConfigParams *WSD_CONFIG_PARAM, dwConfigParamCount uint32, ppProvider **IWSDiscoveryProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryProvider2.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pConfigParams)), uintptr(dwConfigParamCount), uintptr(unsafe.Pointer(ppProvider)))
-	return foundation.HRESULT(r1)
+func WSDCreateDiscoveryProvider2(pContext *IWSDXMLContext, pConfigParams []WSD_CONFIG_PARAM, ppProvider **IWSDiscoveryProvider) error {
+	var _pConfigParams *WSD_CONFIG_PARAM
+	if len(pConfigParams) > 0 {
+		_pConfigParams = &pConfigParams[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryProvider2.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_pConfigParams)), uintptr(len(pConfigParams)), uintptr(unsafe.Pointer(ppProvider)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateDiscoveryPublisher calls wsdapi!WSDCreateDiscoveryPublisher.
 // https://learn.microsoft.com/windows/win32/api/wsddisco/nf-wsddisco-wsdcreatediscoverypublisher
 // Minimum OS: windows6.0.6000.
-func WSDCreateDiscoveryPublisher(pContext *IWSDXMLContext, ppPublisher **IWSDiscoveryPublisher) foundation.HRESULT {
+func WSDCreateDiscoveryPublisher(pContext *IWSDXMLContext, ppPublisher **IWSDiscoveryPublisher) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryPublisher.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppPublisher)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateDiscoveryPublisher2 calls wsdapi!WSDCreateDiscoveryPublisher2.
 // https://learn.microsoft.com/windows/win32/api/wsddisco/nf-wsddisco-wsdcreatediscoverypublisher2
 // Minimum OS: windows6.1.
-func WSDCreateDiscoveryPublisher2(pContext *IWSDXMLContext, pConfigParams *WSD_CONFIG_PARAM, dwConfigParamCount uint32, ppPublisher **IWSDiscoveryPublisher) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryPublisher2.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pConfigParams)), uintptr(dwConfigParamCount), uintptr(unsafe.Pointer(ppPublisher)))
-	return foundation.HRESULT(r1)
+func WSDCreateDiscoveryPublisher2(pContext *IWSDXMLContext, pConfigParams []WSD_CONFIG_PARAM, ppPublisher **IWSDiscoveryPublisher) error {
+	var _pConfigParams *WSD_CONFIG_PARAM
+	if len(pConfigParams) > 0 {
+		_pConfigParams = &pConfigParams[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSDCreateDiscoveryPublisher2.Addr(), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_pConfigParams)), uintptr(len(pConfigParams)), uintptr(unsafe.Pointer(ppPublisher)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateHttpAddress calls wsdapi!WSDCreateHttpAddress.
 // https://learn.microsoft.com/windows/win32/api/wsdbase/nf-wsdbase-wsdcreatehttpaddress
 // Minimum OS: windows6.0.6000.
-func WSDCreateHttpAddress(ppAddress **IWSDHttpAddress) foundation.HRESULT {
+func WSDCreateHttpAddress(ppAddress **IWSDHttpAddress) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateHttpAddress.Addr(), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateHttpMessageParameters calls wsdapi!WSDCreateHttpMessageParameters.
 // https://learn.microsoft.com/windows/win32/api/wsdbase/nf-wsdbase-wsdcreatehttpmessageparameters
 // Minimum OS: windows6.0.6000.
-func WSDCreateHttpMessageParameters(ppTxParams **IWSDHttpMessageParameters) foundation.HRESULT {
+func WSDCreateHttpMessageParameters(ppTxParams **IWSDHttpMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateHttpMessageParameters.Addr(), uintptr(unsafe.Pointer(ppTxParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateOutboundAttachment calls wsdapi!WSDCreateOutboundAttachment.
 // https://learn.microsoft.com/windows/win32/api/wsdattachment/nf-wsdattachment-wsdcreateoutboundattachment
 // Minimum OS: windows6.0.6000.
-func WSDCreateOutboundAttachment(ppAttachment **IWSDOutboundAttachment) foundation.HRESULT {
+func WSDCreateOutboundAttachment(ppAttachment **IWSDOutboundAttachment) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateOutboundAttachment.Addr(), uintptr(unsafe.Pointer(ppAttachment)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateUdpAddress calls wsdapi!WSDCreateUdpAddress.
 // https://learn.microsoft.com/windows/win32/api/wsdbase/nf-wsdbase-wsdcreateudpaddress
 // Minimum OS: windows6.0.6000.
-func WSDCreateUdpAddress(ppAddress **IWSDUdpAddress) foundation.HRESULT {
+func WSDCreateUdpAddress(ppAddress **IWSDUdpAddress) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateUdpAddress.Addr(), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDCreateUdpMessageParameters calls wsdapi!WSDCreateUdpMessageParameters.
 // https://learn.microsoft.com/windows/win32/api/wsdbase/nf-wsdbase-wsdcreateudpmessageparameters
 // Minimum OS: windows6.0.6000.
-func WSDCreateUdpMessageParameters(ppTxParams **IWSDUdpMessageParameters) foundation.HRESULT {
+func WSDCreateUdpMessageParameters(ppTxParams **IWSDUdpMessageParameters) error {
 	r1, _, _ := syscall.SyscallN(procWSDCreateUdpMessageParameters.Addr(), uintptr(unsafe.Pointer(ppTxParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDDetachLinkedMemory calls wsdapi!WSDDetachLinkedMemory.
@@ -203,103 +232,115 @@ func WSDFreeLinkedMemory(pVoid unsafe.Pointer) {
 // WSDGenerateFault calls wsdapi!WSDGenerateFault.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdgeneratefault
 // Minimum OS: windows6.0.6000.
-func WSDGenerateFault(pszCode foundation.PWSTR, pszSubCode foundation.PWSTR, pszReason foundation.PWSTR, pszDetail foundation.PWSTR, pContext *IWSDXMLContext, ppFault **WSD_SOAP_FAULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDGenerateFault.Addr(), uintptr(unsafe.Pointer(pszCode)), uintptr(unsafe.Pointer(pszSubCode)), uintptr(unsafe.Pointer(pszReason)), uintptr(unsafe.Pointer(pszDetail)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppFault)))
-	return foundation.HRESULT(r1)
+func WSDGenerateFault(pszCode string, pszSubCode string, pszReason string, pszDetail string, pContext *IWSDXMLContext, ppFault **WSD_SOAP_FAULT) error {
+	_pszCode := win32.UTF16Ptr(pszCode)
+	_pszSubCode := win32.UTF16Ptr(pszSubCode)
+	_pszReason := win32.UTF16Ptr(pszReason)
+	_pszDetail := win32.UTF16Ptr(pszDetail)
+	r1, _, _ := syscall.SyscallN(procWSDGenerateFault.Addr(), uintptr(unsafe.Pointer(_pszCode)), uintptr(unsafe.Pointer(_pszSubCode)), uintptr(unsafe.Pointer(_pszReason)), uintptr(unsafe.Pointer(_pszDetail)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppFault)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDGenerateFaultEx calls wsdapi!WSDGenerateFaultEx.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdgeneratefaultex
 // Minimum OS: windows6.0.6000.
-func WSDGenerateFaultEx(pCode *WSDXML_NAME, pSubCode *WSDXML_NAME, pReasons *WSD_LOCALIZED_STRING_LIST, pszDetail foundation.PWSTR, ppFault **WSD_SOAP_FAULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDGenerateFaultEx.Addr(), uintptr(unsafe.Pointer(pCode)), uintptr(unsafe.Pointer(pSubCode)), uintptr(unsafe.Pointer(pReasons)), uintptr(unsafe.Pointer(pszDetail)), uintptr(unsafe.Pointer(ppFault)))
-	return foundation.HRESULT(r1)
+func WSDGenerateFaultEx(pCode *WSDXML_NAME, pSubCode *WSDXML_NAME, pReasons *WSD_LOCALIZED_STRING_LIST, pszDetail string, ppFault **WSD_SOAP_FAULT) error {
+	_pszDetail := win32.UTF16Ptr(pszDetail)
+	r1, _, _ := syscall.SyscallN(procWSDGenerateFaultEx.Addr(), uintptr(unsafe.Pointer(pCode)), uintptr(unsafe.Pointer(pSubCode)), uintptr(unsafe.Pointer(pReasons)), uintptr(unsafe.Pointer(_pszDetail)), uintptr(unsafe.Pointer(ppFault)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDGetConfigurationOption calls wsdapi!WSDGetConfigurationOption.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdgetconfigurationoption
 // Minimum OS: windows6.0.6000.
-func WSDGetConfigurationOption(dwOption uint32, pVoid unsafe.Pointer, cbOutBuffer uint32) foundation.HRESULT {
+func WSDGetConfigurationOption(dwOption uint32, pVoid unsafe.Pointer, cbOutBuffer uint32) error {
 	r1, _, _ := syscall.SyscallN(procWSDGetConfigurationOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(pVoid)), uintptr(cbOutBuffer))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDSetConfigurationOption calls wsdapi!WSDSetConfigurationOption.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdsetconfigurationoption
 // Minimum OS: windows6.0.6000.
-func WSDSetConfigurationOption(dwOption uint32, pVoid unsafe.Pointer, cbInBuffer uint32) foundation.HRESULT {
+func WSDSetConfigurationOption(dwOption uint32, pVoid unsafe.Pointer, cbInBuffer uint32) error {
 	r1, _, _ := syscall.SyscallN(procWSDSetConfigurationOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(pVoid)), uintptr(cbInBuffer))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDUriDecode calls wsdapi!WSDUriDecode.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsduridecode
 // Minimum OS: windows6.1.
-func WSDUriDecode(source foundation.PWSTR, cchSource uint32, destOut *foundation.PWSTR, cchDestOut *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDUriDecode.Addr(), uintptr(unsafe.Pointer(source)), uintptr(cchSource), uintptr(unsafe.Pointer(destOut)), uintptr(unsafe.Pointer(cchDestOut)))
-	return foundation.HRESULT(r1)
+func WSDUriDecode(source string, cchSource uint32, destOut *foundation.PWSTR, cchDestOut *uint32) error {
+	_source := win32.UTF16Ptr(source)
+	r1, _, _ := syscall.SyscallN(procWSDUriDecode.Addr(), uintptr(unsafe.Pointer(_source)), uintptr(cchSource), uintptr(unsafe.Pointer(destOut)), uintptr(unsafe.Pointer(cchDestOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDUriEncode calls wsdapi!WSDUriEncode.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsduriencode
 // Minimum OS: windows6.1.
-func WSDUriEncode(source foundation.PWSTR, cchSource uint32, destOut *foundation.PWSTR, cchDestOut *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDUriEncode.Addr(), uintptr(unsafe.Pointer(source)), uintptr(cchSource), uintptr(unsafe.Pointer(destOut)), uintptr(unsafe.Pointer(cchDestOut)))
-	return foundation.HRESULT(r1)
+func WSDUriEncode(source string, cchSource uint32, destOut *foundation.PWSTR, cchDestOut *uint32) error {
+	_source := win32.UTF16Ptr(source)
+	r1, _, _ := syscall.SyscallN(procWSDUriEncode.Addr(), uintptr(unsafe.Pointer(_source)), uintptr(cchSource), uintptr(unsafe.Pointer(destOut)), uintptr(unsafe.Pointer(cchDestOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDXMLAddChild calls wsdapi!WSDXMLAddChild.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdxmladdchild
 // Minimum OS: windows6.0.6000.
-func WSDXMLAddChild(pParent *WSDXML_ELEMENT, pChild *WSDXML_ELEMENT) foundation.HRESULT {
+func WSDXMLAddChild(pParent *WSDXML_ELEMENT, pChild *WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(procWSDXMLAddChild.Addr(), uintptr(unsafe.Pointer(pParent)), uintptr(unsafe.Pointer(pChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDXMLAddSibling calls wsdapi!WSDXMLAddSibling.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdxmladdsibling
 // Minimum OS: windows6.0.6000.
-func WSDXMLAddSibling(pFirst *WSDXML_ELEMENT, pSecond *WSDXML_ELEMENT) foundation.HRESULT {
+func WSDXMLAddSibling(pFirst *WSDXML_ELEMENT, pSecond *WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(procWSDXMLAddSibling.Addr(), uintptr(unsafe.Pointer(pFirst)), uintptr(unsafe.Pointer(pSecond)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDXMLBuildAnyForSingleElement calls wsdapi!WSDXMLBuildAnyForSingleElement.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdxmlbuildanyforsingleelement
 // Minimum OS: windows6.0.6000.
-func WSDXMLBuildAnyForSingleElement(pElementName *WSDXML_NAME, pszText foundation.PWSTR, ppAny **WSDXML_ELEMENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDXMLBuildAnyForSingleElement.Addr(), uintptr(unsafe.Pointer(pElementName)), uintptr(unsafe.Pointer(pszText)), uintptr(unsafe.Pointer(ppAny)))
-	return foundation.HRESULT(r1)
+func WSDXMLBuildAnyForSingleElement(pElementName *WSDXML_NAME, pszText string, ppAny **WSDXML_ELEMENT) error {
+	_pszText := win32.UTF16Ptr(pszText)
+	r1, _, _ := syscall.SyscallN(procWSDXMLBuildAnyForSingleElement.Addr(), uintptr(unsafe.Pointer(pElementName)), uintptr(unsafe.Pointer(_pszText)), uintptr(unsafe.Pointer(ppAny)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDXMLCleanupElement calls wsdapi!WSDXMLCleanupElement.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdxmlcleanupelement
 // Minimum OS: windows6.0.6000.
-func WSDXMLCleanupElement(pAny *WSDXML_ELEMENT) foundation.HRESULT {
+func WSDXMLCleanupElement(pAny *WSDXML_ELEMENT) error {
 	r1, _, _ := syscall.SyscallN(procWSDXMLCleanupElement.Addr(), uintptr(unsafe.Pointer(pAny)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDXMLCreateContext calls wsdapi!WSDXMLCreateContext.
 // https://learn.microsoft.com/windows/win32/api/wsdxml/nf-wsdxml-wsdxmlcreatecontext
 // Minimum OS: windows6.0.6000.
-func WSDXMLCreateContext(ppContext **IWSDXMLContext) foundation.HRESULT {
+func WSDXMLCreateContext(ppContext **IWSDXMLContext) error {
 	r1, _, _ := syscall.SyscallN(procWSDXMLCreateContext.Addr(), uintptr(unsafe.Pointer(ppContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDXMLGetNameFromBuiltinNamespace calls wsdapi!WSDXMLGetNameFromBuiltinNamespace.
 // https://learn.microsoft.com/windows/win32/api/wsdxml/nf-wsdxml-wsdxmlgetnamefrombuiltinnamespace
 // Minimum OS: windows6.0.6000.
-func WSDXMLGetNameFromBuiltinNamespace(pszNamespace foundation.PWSTR, pszName foundation.PWSTR, ppName **WSDXML_NAME) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDXMLGetNameFromBuiltinNamespace.Addr(), uintptr(unsafe.Pointer(pszNamespace)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+func WSDXMLGetNameFromBuiltinNamespace(pszNamespace string, pszName string, ppName **WSDXML_NAME) error {
+	_pszNamespace := win32.UTF16Ptr(pszNamespace)
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procWSDXMLGetNameFromBuiltinNamespace.Addr(), uintptr(unsafe.Pointer(_pszNamespace)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WSDXMLGetValueFromAny calls wsdapi!WSDXMLGetValueFromAny.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdxmlgetvaluefromany
 // Minimum OS: windows6.0.6000.
-func WSDXMLGetValueFromAny(pszNamespace foundation.PWSTR, pszName foundation.PWSTR, pAny *WSDXML_ELEMENT, ppszValue *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWSDXMLGetValueFromAny.Addr(), uintptr(unsafe.Pointer(pszNamespace)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppszValue)))
-	return foundation.HRESULT(r1)
+func WSDXMLGetValueFromAny(pszNamespace string, pszName string, pAny *WSDXML_ELEMENT, ppszValue *foundation.PWSTR) error {
+	_pszNamespace := win32.UTF16Ptr(pszNamespace)
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procWSDXMLGetValueFromAny.Addr(), uintptr(unsafe.Pointer(_pszNamespace)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppszValue)))
+	return win32.HRESULTError(int32(r1))
 }

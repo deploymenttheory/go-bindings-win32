@@ -25,7 +25,7 @@ var (
 	procTimeSetEvent      = modWINMM.NewProc("timeSetEvent")
 )
 
-// timeBeginPeriod calls WINMM!timeBeginPeriod.
+// TimeBeginPeriod calls WINMM!timeBeginPeriod.
 // https://learn.microsoft.com/windows/win32/api/timeapi/nf-timeapi-timebeginperiod
 // Minimum OS: windows5.0.
 func TimeBeginPeriod(uPeriod uint32) uint32 {
@@ -33,7 +33,7 @@ func TimeBeginPeriod(uPeriod uint32) uint32 {
 	return uint32(r1)
 }
 
-// timeEndPeriod calls WINMM!timeEndPeriod.
+// TimeEndPeriod calls WINMM!timeEndPeriod.
 // https://learn.microsoft.com/windows/win32/api/timeapi/nf-timeapi-timeendperiod
 // Minimum OS: windows5.0.
 func TimeEndPeriod(uPeriod uint32) uint32 {
@@ -41,7 +41,7 @@ func TimeEndPeriod(uPeriod uint32) uint32 {
 	return uint32(r1)
 }
 
-// timeGetDevCaps calls WINMM!timeGetDevCaps.
+// TimeGetDevCaps calls WINMM!timeGetDevCaps.
 // https://learn.microsoft.com/windows/win32/api/timeapi/nf-timeapi-timegetdevcaps
 // Minimum OS: windows5.0.
 func TimeGetDevCaps(ptc *TIMECAPS, cbtc uint32) uint32 {
@@ -49,7 +49,7 @@ func TimeGetDevCaps(ptc *TIMECAPS, cbtc uint32) uint32 {
 	return uint32(r1)
 }
 
-// timeGetSystemTime calls WINMM!timeGetSystemTime.
+// TimeGetSystemTime calls WINMM!timeGetSystemTime.
 // https://learn.microsoft.com/windows/win32/api/timeapi/nf-timeapi-timegetsystemtime
 // Minimum OS: windows5.0.
 func TimeGetSystemTime(pmmt unsafe.Pointer, cbmmt uint32) uint32 {
@@ -57,7 +57,7 @@ func TimeGetSystemTime(pmmt unsafe.Pointer, cbmmt uint32) uint32 {
 	return uint32(r1)
 }
 
-// timeGetTime calls WINMM!timeGetTime.
+// TimeGetTime calls WINMM!timeGetTime.
 // https://learn.microsoft.com/windows/win32/api/timeapi/nf-timeapi-timegettime
 // Minimum OS: windows5.0.
 func TimeGetTime() uint32 {
@@ -65,13 +65,13 @@ func TimeGetTime() uint32 {
 	return uint32(r1)
 }
 
-// timeKillEvent calls WINMM!timeKillEvent.
+// TimeKillEvent calls WINMM!timeKillEvent.
 func TimeKillEvent(uTimerID uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procTimeKillEvent.Addr(), uintptr(uTimerID))
 	return uint32(r1)
 }
 
-// timeSetEvent calls WINMM!timeSetEvent.
+// TimeSetEvent calls WINMM!timeSetEvent.
 func TimeSetEvent(uDelay uint32, uResolution uint32, fptc LPTIMECALLBACK, dwUser uintptr, fuEvent uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procTimeSetEvent.Addr(), uintptr(uDelay), uintptr(uResolution), uintptr(fptc), uintptr(dwUser), uintptr(fuEvent))
 	return uint32(r1)

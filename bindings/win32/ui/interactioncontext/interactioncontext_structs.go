@@ -38,8 +38,8 @@ type INTERACTION_CONTEXT_CONFIGURATION struct {
 	Enable        INTERACTION_CONFIGURATION_FLAGS
 }
 
-// INTERACTION_CONTEXT_OUTPUT_arguments_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INTERACTION_CONTEXT_OUTPUT_arguments_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INTERACTION_CONTEXT_OUTPUT_arguments_e__Union struct {
 	Data [15]uint32
 }
@@ -54,8 +54,8 @@ type INTERACTION_CONTEXT_OUTPUT struct {
 	Arguments        INTERACTION_CONTEXT_OUTPUT_arguments_e__Union
 }
 
-// INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INTERACTION_CONTEXT_OUTPUT2_arguments_e__Union struct {
 	Data [15]uint32
 }

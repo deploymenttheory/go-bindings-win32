@@ -49,15 +49,11 @@ type Resolved struct {
 // Context carries per-resolution state.
 type Context struct {
 	// Namespace is the short namespace being emitted ("System.Threading");
-	// references into it stay unqualified (unless QualifyOwn). Blocked-edge
-	// and skipped-type decisions always key off this real namespace.
+	// references into it stay unqualified. Blocked-edge and skipped-type
+	// decisions key off this namespace.
 	Namespace string
 	// IsReturn marks return-position resolution.
 	IsReturn bool
-	// QualifyOwn qualifies even same-namespace references with their owning
-	// package. The idiomatic tier sets this because it lives in a different
-	// package than the raw types it names.
-	QualifyOwn bool
 }
 
 // Mapper resolves TypeRefs against the loaded Registry.
@@ -250,7 +246,7 @@ func (m *Mapper) resolveArray(ref *win32meta.TypeRef, ctx Context, imports Impor
 // import) unless it lives in the namespace being emitted.
 func (m *Mapper) qualifiedName(api, name string, ctx Context, imports ImportSet) string {
 	name = naming.Export(name)
-	if api == "" || (api == ctx.Namespace && !ctx.QualifyOwn) {
+	if api == "" || api == ctx.Namespace {
 		return name
 	}
 	alias := naming.ImportAlias(api)

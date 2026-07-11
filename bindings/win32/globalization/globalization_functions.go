@@ -1056,81 +1056,81 @@ var (
 	procUtrace_setLevel                                       = modicuuc.NewProc("utrace_setLevel")
 	procUtrace_vformat                                        = modicuuc.NewProc("utrace_vformat")
 	procAdjustCalendarDate                                    = modKERNEL32.NewProc("AdjustCalendarDate")
+	procCompareString                                         = modKERNEL32.NewProc("CompareStringW")
 	procCompareStringA                                        = modKERNEL32.NewProc("CompareStringA")
 	procCompareStringEx                                       = modKERNEL32.NewProc("CompareStringEx")
 	procCompareStringOrdinal                                  = modKERNEL32.NewProc("CompareStringOrdinal")
-	procCompareStringW                                        = modKERNEL32.NewProc("CompareStringW")
 	procConvertCalDateTimeToSystemTime                        = modKERNEL32.NewProc("ConvertCalDateTimeToSystemTime")
 	procConvertDefaultLocale                                  = modKERNEL32.NewProc("ConvertDefaultLocale")
 	procConvertSystemTimeToCalDateTime                        = modKERNEL32.NewProc("ConvertSystemTimeToCalDateTime")
+	procEnumCalendarInfo                                      = modKERNEL32.NewProc("EnumCalendarInfoW")
 	procEnumCalendarInfoA                                     = modKERNEL32.NewProc("EnumCalendarInfoA")
+	procEnumCalendarInfoEx                                    = modKERNEL32.NewProc("EnumCalendarInfoExW")
 	procEnumCalendarInfoExA                                   = modKERNEL32.NewProc("EnumCalendarInfoExA")
 	procEnumCalendarInfoExEx                                  = modKERNEL32.NewProc("EnumCalendarInfoExEx")
-	procEnumCalendarInfoExW                                   = modKERNEL32.NewProc("EnumCalendarInfoExW")
-	procEnumCalendarInfoW                                     = modKERNEL32.NewProc("EnumCalendarInfoW")
+	procEnumDateFormats                                       = modKERNEL32.NewProc("EnumDateFormatsW")
 	procEnumDateFormatsA                                      = modKERNEL32.NewProc("EnumDateFormatsA")
+	procEnumDateFormatsEx                                     = modKERNEL32.NewProc("EnumDateFormatsExW")
 	procEnumDateFormatsExA                                    = modKERNEL32.NewProc("EnumDateFormatsExA")
 	procEnumDateFormatsExEx                                   = modKERNEL32.NewProc("EnumDateFormatsExEx")
-	procEnumDateFormatsExW                                    = modKERNEL32.NewProc("EnumDateFormatsExW")
-	procEnumDateFormatsW                                      = modKERNEL32.NewProc("EnumDateFormatsW")
+	procEnumLanguageGroupLocales                              = modKERNEL32.NewProc("EnumLanguageGroupLocalesW")
 	procEnumLanguageGroupLocalesA                             = modKERNEL32.NewProc("EnumLanguageGroupLocalesA")
-	procEnumLanguageGroupLocalesW                             = modKERNEL32.NewProc("EnumLanguageGroupLocalesW")
+	procEnumSystemCodePages                                   = modKERNEL32.NewProc("EnumSystemCodePagesW")
 	procEnumSystemCodePagesA                                  = modKERNEL32.NewProc("EnumSystemCodePagesA")
-	procEnumSystemCodePagesW                                  = modKERNEL32.NewProc("EnumSystemCodePagesW")
 	procEnumSystemGeoID                                       = modKERNEL32.NewProc("EnumSystemGeoID")
 	procEnumSystemGeoNames                                    = modKERNEL32.NewProc("EnumSystemGeoNames")
+	procEnumSystemLanguageGroups                              = modKERNEL32.NewProc("EnumSystemLanguageGroupsW")
 	procEnumSystemLanguageGroupsA                             = modKERNEL32.NewProc("EnumSystemLanguageGroupsA")
-	procEnumSystemLanguageGroupsW                             = modKERNEL32.NewProc("EnumSystemLanguageGroupsW")
+	procEnumSystemLocales                                     = modKERNEL32.NewProc("EnumSystemLocalesW")
 	procEnumSystemLocalesA                                    = modKERNEL32.NewProc("EnumSystemLocalesA")
 	procEnumSystemLocalesEx                                   = modKERNEL32.NewProc("EnumSystemLocalesEx")
-	procEnumSystemLocalesW                                    = modKERNEL32.NewProc("EnumSystemLocalesW")
+	procEnumTimeFormats                                       = modKERNEL32.NewProc("EnumTimeFormatsW")
 	procEnumTimeFormatsA                                      = modKERNEL32.NewProc("EnumTimeFormatsA")
 	procEnumTimeFormatsEx                                     = modKERNEL32.NewProc("EnumTimeFormatsEx")
-	procEnumTimeFormatsW                                      = modKERNEL32.NewProc("EnumTimeFormatsW")
+	procEnumUILanguages                                       = modKERNEL32.NewProc("EnumUILanguagesW")
 	procEnumUILanguagesA                                      = modKERNEL32.NewProc("EnumUILanguagesA")
-	procEnumUILanguagesW                                      = modKERNEL32.NewProc("EnumUILanguagesW")
 	procFindNLSString                                         = modKERNEL32.NewProc("FindNLSString")
 	procFindNLSStringEx                                       = modKERNEL32.NewProc("FindNLSStringEx")
 	procFindStringOrdinal                                     = modKERNEL32.NewProc("FindStringOrdinal")
+	procFoldString                                            = modKERNEL32.NewProc("FoldStringW")
 	procFoldStringA                                           = modKERNEL32.NewProc("FoldStringA")
-	procFoldStringW                                           = modKERNEL32.NewProc("FoldStringW")
 	procGetACP                                                = modKERNEL32.NewProc("GetACP")
 	procGetCPInfo                                             = modKERNEL32.NewProc("GetCPInfo")
+	procGetCPInfoEx                                           = modKERNEL32.NewProc("GetCPInfoExW")
 	procGetCPInfoExA                                          = modKERNEL32.NewProc("GetCPInfoExA")
-	procGetCPInfoExW                                          = modKERNEL32.NewProc("GetCPInfoExW")
 	procGetCalendarDateFormatEx                               = modKERNEL32.NewProc("GetCalendarDateFormatEx")
+	procGetCalendarInfo                                       = modKERNEL32.NewProc("GetCalendarInfoW")
 	procGetCalendarInfoA                                      = modKERNEL32.NewProc("GetCalendarInfoA")
 	procGetCalendarInfoEx                                     = modKERNEL32.NewProc("GetCalendarInfoEx")
-	procGetCalendarInfoW                                      = modKERNEL32.NewProc("GetCalendarInfoW")
 	procGetCalendarSupportedDateRange                         = modKERNEL32.NewProc("GetCalendarSupportedDateRange")
+	procGetCurrencyFormat                                     = modKERNEL32.NewProc("GetCurrencyFormatW")
 	procGetCurrencyFormatA                                    = modKERNEL32.NewProc("GetCurrencyFormatA")
 	procGetCurrencyFormatEx                                   = modKERNEL32.NewProc("GetCurrencyFormatEx")
-	procGetCurrencyFormatW                                    = modKERNEL32.NewProc("GetCurrencyFormatW")
+	procGetDateFormat                                         = modKERNEL32.NewProc("GetDateFormatW")
 	procGetDateFormatA                                        = modKERNEL32.NewProc("GetDateFormatA")
 	procGetDateFormatEx                                       = modKERNEL32.NewProc("GetDateFormatEx")
-	procGetDateFormatW                                        = modKERNEL32.NewProc("GetDateFormatW")
 	procGetDurationFormat                                     = modKERNEL32.NewProc("GetDurationFormat")
 	procGetDurationFormatEx                                   = modKERNEL32.NewProc("GetDurationFormatEx")
 	procGetFileMUIInfo                                        = modKERNEL32.NewProc("GetFileMUIInfo")
 	procGetFileMUIPath                                        = modKERNEL32.NewProc("GetFileMUIPath")
+	procGetGeoInfo                                            = modKERNEL32.NewProc("GetGeoInfoW")
 	procGetGeoInfoA                                           = modKERNEL32.NewProc("GetGeoInfoA")
 	procGetGeoInfoEx                                          = modKERNEL32.NewProc("GetGeoInfoEx")
-	procGetGeoInfoW                                           = modKERNEL32.NewProc("GetGeoInfoW")
+	procGetLocaleInfo                                         = modKERNEL32.NewProc("GetLocaleInfoW")
 	procGetLocaleInfoA                                        = modKERNEL32.NewProc("GetLocaleInfoA")
 	procGetLocaleInfoEx                                       = modKERNEL32.NewProc("GetLocaleInfoEx")
-	procGetLocaleInfoW                                        = modKERNEL32.NewProc("GetLocaleInfoW")
 	procGetNLSVersion                                         = modKERNEL32.NewProc("GetNLSVersion")
 	procGetNLSVersionEx                                       = modKERNEL32.NewProc("GetNLSVersionEx")
+	procGetNumberFormat                                       = modKERNEL32.NewProc("GetNumberFormatW")
 	procGetNumberFormatA                                      = modKERNEL32.NewProc("GetNumberFormatA")
 	procGetNumberFormatEx                                     = modKERNEL32.NewProc("GetNumberFormatEx")
-	procGetNumberFormatW                                      = modKERNEL32.NewProc("GetNumberFormatW")
 	procGetOEMCP                                              = modKERNEL32.NewProc("GetOEMCP")
 	procGetProcessPreferredUILanguages                        = modKERNEL32.NewProc("GetProcessPreferredUILanguages")
 	procGetStringScripts                                      = modKERNEL32.NewProc("GetStringScripts")
+	procGetStringType                                         = modKERNEL32.NewProc("GetStringTypeW")
 	procGetStringTypeA                                        = modKERNEL32.NewProc("GetStringTypeA")
+	procGetStringTypeEx                                       = modKERNEL32.NewProc("GetStringTypeExW")
 	procGetStringTypeExA                                      = modKERNEL32.NewProc("GetStringTypeExA")
-	procGetStringTypeExW                                      = modKERNEL32.NewProc("GetStringTypeExW")
-	procGetStringTypeW                                        = modKERNEL32.NewProc("GetStringTypeW")
 	procGetSystemDefaultLCID                                  = modKERNEL32.NewProc("GetSystemDefaultLCID")
 	procGetSystemDefaultLangID                                = modKERNEL32.NewProc("GetSystemDefaultLangID")
 	procGetSystemDefaultLocaleName                            = modKERNEL32.NewProc("GetSystemDefaultLocaleName")
@@ -1139,9 +1139,9 @@ var (
 	procGetThreadLocale                                       = modKERNEL32.NewProc("GetThreadLocale")
 	procGetThreadPreferredUILanguages                         = modKERNEL32.NewProc("GetThreadPreferredUILanguages")
 	procGetThreadUILanguage                                   = modKERNEL32.NewProc("GetThreadUILanguage")
+	procGetTimeFormat                                         = modKERNEL32.NewProc("GetTimeFormatW")
 	procGetTimeFormatA                                        = modKERNEL32.NewProc("GetTimeFormatA")
 	procGetTimeFormatEx                                       = modKERNEL32.NewProc("GetTimeFormatEx")
-	procGetTimeFormatW                                        = modKERNEL32.NewProc("GetTimeFormatW")
 	procGetUILanguageInfo                                     = modKERNEL32.NewProc("GetUILanguageInfo")
 	procGetUserDefaultGeoName                                 = modKERNEL32.NewProc("GetUserDefaultGeoName")
 	procGetUserDefaultLCID                                    = modKERNEL32.NewProc("GetUserDefaultLCID")
@@ -1162,31 +1162,31 @@ var (
 	procIsValidLocaleName                                     = modKERNEL32.NewProc("IsValidLocaleName")
 	procIsValidNLSVersion                                     = modKERNEL32.NewProc("IsValidNLSVersion")
 	procLCIDToLocaleName                                      = modKERNEL32.NewProc("LCIDToLocaleName")
+	procLCMapString                                           = modKERNEL32.NewProc("LCMapStringW")
 	procLCMapStringA                                          = modKERNEL32.NewProc("LCMapStringA")
 	procLCMapStringEx                                         = modKERNEL32.NewProc("LCMapStringEx")
-	procLCMapStringW                                          = modKERNEL32.NewProc("LCMapStringW")
 	procLocaleNameToLCID                                      = modKERNEL32.NewProc("LocaleNameToLCID")
+	procLstrcat                                               = modKERNEL32.NewProc("lstrcatW")
 	procLstrcatA                                              = modKERNEL32.NewProc("lstrcatA")
-	procLstrcatW                                              = modKERNEL32.NewProc("lstrcatW")
+	procLstrcmp                                               = modKERNEL32.NewProc("lstrcmpW")
 	procLstrcmpA                                              = modKERNEL32.NewProc("lstrcmpA")
-	procLstrcmpW                                              = modKERNEL32.NewProc("lstrcmpW")
+	procLstrcmpi                                              = modKERNEL32.NewProc("lstrcmpiW")
 	procLstrcmpiA                                             = modKERNEL32.NewProc("lstrcmpiA")
-	procLstrcmpiW                                             = modKERNEL32.NewProc("lstrcmpiW")
+	procLstrcpy                                               = modKERNEL32.NewProc("lstrcpyW")
 	procLstrcpyA                                              = modKERNEL32.NewProc("lstrcpyA")
-	procLstrcpyW                                              = modKERNEL32.NewProc("lstrcpyW")
+	procLstrcpyn                                              = modKERNEL32.NewProc("lstrcpynW")
 	procLstrcpynA                                             = modKERNEL32.NewProc("lstrcpynA")
-	procLstrcpynW                                             = modKERNEL32.NewProc("lstrcpynW")
+	procLstrlen                                               = modKERNEL32.NewProc("lstrlenW")
 	procLstrlenA                                              = modKERNEL32.NewProc("lstrlenA")
-	procLstrlenW                                              = modKERNEL32.NewProc("lstrlenW")
 	procMultiByteToWideChar                                   = modKERNEL32.NewProc("MultiByteToWideChar")
 	procNormalizeString                                       = modKERNEL32.NewProc("NormalizeString")
 	procNotifyUILanguageChange                                = modKERNEL32.NewProc("NotifyUILanguageChange")
 	procResolveLocaleName                                     = modKERNEL32.NewProc("ResolveLocaleName")
 	procRestoreThreadPreferredUILanguages                     = modKERNEL32.NewProc("RestoreThreadPreferredUILanguages")
+	procSetCalendarInfo                                       = modKERNEL32.NewProc("SetCalendarInfoW")
 	procSetCalendarInfoA                                      = modKERNEL32.NewProc("SetCalendarInfoA")
-	procSetCalendarInfoW                                      = modKERNEL32.NewProc("SetCalendarInfoW")
+	procSetLocaleInfo                                         = modKERNEL32.NewProc("SetLocaleInfoW")
 	procSetLocaleInfoA                                        = modKERNEL32.NewProc("SetLocaleInfoA")
-	procSetLocaleInfoW                                        = modKERNEL32.NewProc("SetLocaleInfoW")
 	procSetProcessPreferredUILanguages                        = modKERNEL32.NewProc("SetProcessPreferredUILanguages")
 	procSetThreadLocale                                       = modKERNEL32.NewProc("SetThreadLocale")
 	procSetThreadPreferredUILanguages                         = modKERNEL32.NewProc("SetThreadPreferredUILanguages")
@@ -1242,24 +1242,45 @@ var (
 
 // AdjustCalendarDate calls KERNEL32!AdjustCalendarDate.
 // https://learn.microsoft.com/windows/win32/Intl/adjustcalendardate
-func AdjustCalendarDate(lpCalDateTime *CALDATETIME, calUnit CALDATETIME_DATEUNIT, amount int32) foundation.BOOL {
+func AdjustCalendarDate(lpCalDateTime *CALDATETIME, calUnit CALDATETIME_DATEUNIT, amount int32) bool {
 	r1, _, _ := syscall.SyscallN(procAdjustCalendarDate.Addr(), uintptr(unsafe.Pointer(lpCalDateTime)), uintptr(calUnit), uintptr(amount))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// CompareString calls KERNEL32!CompareStringW.
+// https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-comparestringw
+// Minimum OS: windows5.0.
+func CompareString(Locale uint32, dwCmpFlags uint32, lpString1 string, cchCount1 int32, lpString2 string, cchCount2 int32) COMPARESTRING_RESULT {
+	_lpString1 := win32.UTF16Ptr(lpString1)
+	_lpString2 := win32.UTF16Ptr(lpString2)
+	r1, _, _ := syscall.SyscallN(procCompareString.Addr(), uintptr(Locale), uintptr(dwCmpFlags), uintptr(unsafe.Pointer(_lpString1)), uintptr(cchCount1), uintptr(unsafe.Pointer(_lpString2)), uintptr(cchCount2))
+	return COMPARESTRING_RESULT(r1)
 }
 
 // CompareStringA calls KERNEL32!CompareStringA.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-comparestringa
 // Minimum OS: windows5.0.
-func CompareStringA(Locale uint32, dwCmpFlags uint32, lpString1 *int8, cchCount1 int32, lpString2 *int8, cchCount2 int32) COMPARESTRING_RESULT {
-	r1, _, _ := syscall.SyscallN(procCompareStringA.Addr(), uintptr(Locale), uintptr(dwCmpFlags), uintptr(unsafe.Pointer(lpString1)), uintptr(cchCount1), uintptr(unsafe.Pointer(lpString2)), uintptr(cchCount2))
+func CompareStringA(Locale uint32, dwCmpFlags uint32, lpString1 []int8, lpString2 []int8) COMPARESTRING_RESULT {
+	var _lpString1 *int8
+	if len(lpString1) > 0 {
+		_lpString1 = &lpString1[0]
+	}
+	var _lpString2 *int8
+	if len(lpString2) > 0 {
+		_lpString2 = &lpString2[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCompareStringA.Addr(), uintptr(Locale), uintptr(dwCmpFlags), uintptr(unsafe.Pointer(_lpString1)), uintptr(len(lpString1)), uintptr(unsafe.Pointer(_lpString2)), uintptr(len(lpString2)))
 	return COMPARESTRING_RESULT(r1)
 }
 
 // CompareStringEx calls KERNEL32!CompareStringEx.
 // https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-comparestringex
 // Minimum OS: windows6.0.6000.
-func CompareStringEx(lpLocaleName foundation.PWSTR, dwCmpFlags COMPARE_STRING_FLAGS, lpString1 foundation.PWSTR, cchCount1 int32, lpString2 foundation.PWSTR, cchCount2 int32, lpVersionInformation *NLSVERSIONINFO, lpReserved unsafe.Pointer, lParam foundation.LPARAM) (COMPARESTRING_RESULT, error) {
-	r1, _, e1 := syscall.SyscallN(procCompareStringEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwCmpFlags), uintptr(unsafe.Pointer(lpString1)), uintptr(cchCount1), uintptr(unsafe.Pointer(lpString2)), uintptr(cchCount2), uintptr(unsafe.Pointer(lpVersionInformation)), uintptr(unsafe.Pointer(lpReserved)), uintptr(lParam))
+func CompareStringEx(lpLocaleName string, dwCmpFlags COMPARE_STRING_FLAGS, lpString1 string, cchCount1 int32, lpString2 string, cchCount2 int32) (COMPARESTRING_RESULT, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	_lpString1 := win32.UTF16Ptr(lpString1)
+	_lpString2 := win32.UTF16Ptr(lpString2)
+	r1, _, e1 := syscall.SyscallN(procCompareStringEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwCmpFlags), uintptr(unsafe.Pointer(_lpString1)), uintptr(cchCount1), uintptr(unsafe.Pointer(_lpString2)), uintptr(cchCount2), 0, 0, 0)
 	if e1 != 0 {
 		return COMPARESTRING_RESULT(r1), e1
 	}
@@ -1269,27 +1290,22 @@ func CompareStringEx(lpLocaleName foundation.PWSTR, dwCmpFlags COMPARE_STRING_FL
 // CompareStringOrdinal calls KERNEL32!CompareStringOrdinal.
 // https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-comparestringordinal
 // Minimum OS: windows6.0.6000.
-func CompareStringOrdinal(lpString1 foundation.PWSTR, cchCount1 int32, lpString2 foundation.PWSTR, cchCount2 int32, bIgnoreCase foundation.BOOL) (COMPARESTRING_RESULT, error) {
-	r1, _, e1 := syscall.SyscallN(procCompareStringOrdinal.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(cchCount1), uintptr(unsafe.Pointer(lpString2)), uintptr(cchCount2), uintptr(bIgnoreCase))
+func CompareStringOrdinal(lpString1 string, cchCount1 int32, lpString2 string, cchCount2 int32, bIgnoreCase bool) (COMPARESTRING_RESULT, error) {
+	_lpString1 := win32.UTF16Ptr(lpString1)
+	_lpString2 := win32.UTF16Ptr(lpString2)
+	_bIgnoreCase := win32.Bool32(bIgnoreCase)
+	r1, _, e1 := syscall.SyscallN(procCompareStringOrdinal.Addr(), uintptr(unsafe.Pointer(_lpString1)), uintptr(cchCount1), uintptr(unsafe.Pointer(_lpString2)), uintptr(cchCount2), uintptr(_bIgnoreCase))
 	if e1 != 0 {
 		return COMPARESTRING_RESULT(r1), e1
 	}
 	return COMPARESTRING_RESULT(r1), nil
 }
 
-// CompareStringW calls KERNEL32!CompareStringW.
-// https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-comparestringw
-// Minimum OS: windows5.0.
-func CompareStringW(Locale uint32, dwCmpFlags uint32, lpString1 foundation.PWSTR, cchCount1 int32, lpString2 foundation.PWSTR, cchCount2 int32) COMPARESTRING_RESULT {
-	r1, _, _ := syscall.SyscallN(procCompareStringW.Addr(), uintptr(Locale), uintptr(dwCmpFlags), uintptr(unsafe.Pointer(lpString1)), uintptr(cchCount1), uintptr(unsafe.Pointer(lpString2)), uintptr(cchCount2))
-	return COMPARESTRING_RESULT(r1)
-}
-
 // ConvertCalDateTimeToSystemTime calls KERNEL32!ConvertCalDateTimeToSystemTime.
 // https://learn.microsoft.com/windows/win32/Intl/convertcaldatetimetosystemtime
-func ConvertCalDateTimeToSystemTime(lpCalDateTime *CALDATETIME, lpSysTime *foundation.SYSTEMTIME) foundation.BOOL {
+func ConvertCalDateTimeToSystemTime(lpCalDateTime *CALDATETIME, lpSysTime *foundation.SYSTEMTIME) bool {
 	r1, _, _ := syscall.SyscallN(procConvertCalDateTimeToSystemTime.Addr(), uintptr(unsafe.Pointer(lpCalDateTime)), uintptr(unsafe.Pointer(lpSysTime)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ConvertDefaultLocale calls KERNEL32!ConvertDefaultLocale.
@@ -1302,9 +1318,20 @@ func ConvertDefaultLocale(Locale uint32) uint32 {
 
 // ConvertSystemTimeToCalDateTime calls KERNEL32!ConvertSystemTimeToCalDateTime.
 // https://learn.microsoft.com/windows/win32/Intl/convertsystemtimetocaldatetime
-func ConvertSystemTimeToCalDateTime(lpSysTime *foundation.SYSTEMTIME, calId uint32, lpCalDateTime *CALDATETIME) foundation.BOOL {
+func ConvertSystemTimeToCalDateTime(lpSysTime *foundation.SYSTEMTIME, calId uint32, lpCalDateTime *CALDATETIME) bool {
 	r1, _, _ := syscall.SyscallN(procConvertSystemTimeToCalDateTime.Addr(), uintptr(unsafe.Pointer(lpSysTime)), uintptr(calId), uintptr(unsafe.Pointer(lpCalDateTime)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// EnumCalendarInfo calls KERNEL32!EnumCalendarInfoW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumcalendarinfow
+// Minimum OS: windows5.0.
+func EnumCalendarInfo(lpCalInfoEnumProc CALINFO_ENUMPROCW, Locale uint32, Calendar uint32, CalType uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEnumCalendarInfo.Addr(), uintptr(lpCalInfoEnumProc), uintptr(Locale), uintptr(Calendar), uintptr(CalType))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // EnumCalendarInfoA calls KERNEL32!EnumCalendarInfoA.
@@ -1312,6 +1339,17 @@ func ConvertSystemTimeToCalDateTime(lpSysTime *foundation.SYSTEMTIME, calId uint
 // Minimum OS: windows5.0.
 func EnumCalendarInfoA(lpCalInfoEnumProc CALINFO_ENUMPROCA, Locale uint32, Calendar uint32, CalType uint32) error {
 	r1, _, e1 := syscall.SyscallN(procEnumCalendarInfoA.Addr(), uintptr(lpCalInfoEnumProc), uintptr(Locale), uintptr(Calendar), uintptr(CalType))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// EnumCalendarInfoEx calls KERNEL32!EnumCalendarInfoExW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumcalendarinfoexw
+// Minimum OS: windows5.0.
+func EnumCalendarInfoEx(lpCalInfoEnumProcEx CALINFO_ENUMPROCEXW, Locale uint32, Calendar uint32, CalType uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEnumCalendarInfoEx.Addr(), uintptr(lpCalInfoEnumProcEx), uintptr(Locale), uintptr(Calendar), uintptr(CalType))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1332,30 +1370,20 @@ func EnumCalendarInfoExA(lpCalInfoEnumProcEx CALINFO_ENUMPROCEXA, Locale uint32,
 // EnumCalendarInfoExEx calls KERNEL32!EnumCalendarInfoExEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumcalendarinfoexex
 // Minimum OS: windows6.0.6000.
-func EnumCalendarInfoExEx(pCalInfoEnumProcExEx CALINFO_ENUMPROCEXEX, lpLocaleName foundation.PWSTR, Calendar uint32, lpReserved foundation.PWSTR, CalType uint32, lParam foundation.LPARAM) error {
-	r1, _, e1 := syscall.SyscallN(procEnumCalendarInfoExEx.Addr(), uintptr(pCalInfoEnumProcExEx), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(Calendar), uintptr(unsafe.Pointer(lpReserved)), uintptr(CalType), uintptr(lParam))
+func EnumCalendarInfoExEx(pCalInfoEnumProcExEx CALINFO_ENUMPROCEXEX, lpLocaleName string, Calendar uint32, CalType uint32, lParam foundation.LPARAM) error {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	r1, _, e1 := syscall.SyscallN(procEnumCalendarInfoExEx.Addr(), uintptr(pCalInfoEnumProcExEx), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(Calendar), 0, uintptr(CalType), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// EnumCalendarInfoExW calls KERNEL32!EnumCalendarInfoExW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumcalendarinfoexw
+// EnumDateFormats calls KERNEL32!EnumDateFormatsW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumdateformatsw
 // Minimum OS: windows5.0.
-func EnumCalendarInfoExW(lpCalInfoEnumProcEx CALINFO_ENUMPROCEXW, Locale uint32, Calendar uint32, CalType uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumCalendarInfoExW.Addr(), uintptr(lpCalInfoEnumProcEx), uintptr(Locale), uintptr(Calendar), uintptr(CalType))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// EnumCalendarInfoW calls KERNEL32!EnumCalendarInfoW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumcalendarinfow
-// Minimum OS: windows5.0.
-func EnumCalendarInfoW(lpCalInfoEnumProc CALINFO_ENUMPROCW, Locale uint32, Calendar uint32, CalType uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumCalendarInfoW.Addr(), uintptr(lpCalInfoEnumProc), uintptr(Locale), uintptr(Calendar), uintptr(CalType))
+func EnumDateFormats(lpDateFmtEnumProc DATEFMT_ENUMPROCW, Locale uint32, dwFlags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEnumDateFormats.Addr(), uintptr(lpDateFmtEnumProc), uintptr(Locale), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1367,6 +1395,17 @@ func EnumCalendarInfoW(lpCalInfoEnumProc CALINFO_ENUMPROCW, Locale uint32, Calen
 // Minimum OS: windows5.0.
 func EnumDateFormatsA(lpDateFmtEnumProc DATEFMT_ENUMPROCA, Locale uint32, dwFlags uint32) error {
 	r1, _, e1 := syscall.SyscallN(procEnumDateFormatsA.Addr(), uintptr(lpDateFmtEnumProc), uintptr(Locale), uintptr(dwFlags))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// EnumDateFormatsEx calls KERNEL32!EnumDateFormatsExW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumdateformatsexw
+// Minimum OS: windows5.0.
+func EnumDateFormatsEx(lpDateFmtEnumProcEx DATEFMT_ENUMPROCEXW, Locale uint32, dwFlags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEnumDateFormatsEx.Addr(), uintptr(lpDateFmtEnumProcEx), uintptr(Locale), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1387,30 +1426,20 @@ func EnumDateFormatsExA(lpDateFmtEnumProcEx DATEFMT_ENUMPROCEXA, Locale uint32, 
 // EnumDateFormatsExEx calls KERNEL32!EnumDateFormatsExEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumdateformatsexex
 // Minimum OS: windows6.0.6000.
-func EnumDateFormatsExEx(lpDateFmtEnumProcExEx DATEFMT_ENUMPROCEXEX, lpLocaleName foundation.PWSTR, dwFlags ENUM_DATE_FORMATS_FLAGS, lParam foundation.LPARAM) error {
-	r1, _, e1 := syscall.SyscallN(procEnumDateFormatsExEx.Addr(), uintptr(lpDateFmtEnumProcExEx), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwFlags), uintptr(lParam))
+func EnumDateFormatsExEx(lpDateFmtEnumProcExEx DATEFMT_ENUMPROCEXEX, lpLocaleName string, dwFlags ENUM_DATE_FORMATS_FLAGS, lParam foundation.LPARAM) error {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	r1, _, e1 := syscall.SyscallN(procEnumDateFormatsExEx.Addr(), uintptr(lpDateFmtEnumProcExEx), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// EnumDateFormatsExW calls KERNEL32!EnumDateFormatsExW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumdateformatsexw
+// EnumLanguageGroupLocales calls KERNEL32!EnumLanguageGroupLocalesW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumlanguagegrouplocalesw
 // Minimum OS: windows5.0.
-func EnumDateFormatsExW(lpDateFmtEnumProcEx DATEFMT_ENUMPROCEXW, Locale uint32, dwFlags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumDateFormatsExW.Addr(), uintptr(lpDateFmtEnumProcEx), uintptr(Locale), uintptr(dwFlags))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// EnumDateFormatsW calls KERNEL32!EnumDateFormatsW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumdateformatsw
-// Minimum OS: windows5.0.
-func EnumDateFormatsW(lpDateFmtEnumProc DATEFMT_ENUMPROCW, Locale uint32, dwFlags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumDateFormatsW.Addr(), uintptr(lpDateFmtEnumProc), uintptr(Locale), uintptr(dwFlags))
+func EnumLanguageGroupLocales(lpLangGroupLocaleEnumProc LANGGROUPLOCALE_ENUMPROCW, LanguageGroup uint32, dwFlags uint32, lParam uintptr) error {
+	r1, _, e1 := syscall.SyscallN(procEnumLanguageGroupLocales.Addr(), uintptr(lpLangGroupLocaleEnumProc), uintptr(LanguageGroup), uintptr(dwFlags), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1428,11 +1457,11 @@ func EnumLanguageGroupLocalesA(lpLangGroupLocaleEnumProc LANGGROUPLOCALE_ENUMPRO
 	return nil
 }
 
-// EnumLanguageGroupLocalesW calls KERNEL32!EnumLanguageGroupLocalesW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumlanguagegrouplocalesw
+// EnumSystemCodePages calls KERNEL32!EnumSystemCodePagesW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumsystemcodepagesw
 // Minimum OS: windows5.0.
-func EnumLanguageGroupLocalesW(lpLangGroupLocaleEnumProc LANGGROUPLOCALE_ENUMPROCW, LanguageGroup uint32, dwFlags uint32, lParam uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procEnumLanguageGroupLocalesW.Addr(), uintptr(lpLangGroupLocaleEnumProc), uintptr(LanguageGroup), uintptr(dwFlags), uintptr(lParam))
+func EnumSystemCodePages(lpCodePageEnumProc CODEPAGE_ENUMPROCW, dwFlags ENUM_SYSTEM_CODE_PAGES_FLAGS) error {
+	r1, _, e1 := syscall.SyscallN(procEnumSystemCodePages.Addr(), uintptr(lpCodePageEnumProc), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1444,17 +1473,6 @@ func EnumLanguageGroupLocalesW(lpLangGroupLocaleEnumProc LANGGROUPLOCALE_ENUMPRO
 // Minimum OS: windows5.0.
 func EnumSystemCodePagesA(lpCodePageEnumProc CODEPAGE_ENUMPROCA, dwFlags ENUM_SYSTEM_CODE_PAGES_FLAGS) error {
 	r1, _, e1 := syscall.SyscallN(procEnumSystemCodePagesA.Addr(), uintptr(lpCodePageEnumProc), uintptr(dwFlags))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// EnumSystemCodePagesW calls KERNEL32!EnumSystemCodePagesW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumsystemcodepagesw
-// Minimum OS: windows5.0.
-func EnumSystemCodePagesW(lpCodePageEnumProc CODEPAGE_ENUMPROCW, dwFlags ENUM_SYSTEM_CODE_PAGES_FLAGS) error {
-	r1, _, e1 := syscall.SyscallN(procEnumSystemCodePagesW.Addr(), uintptr(lpCodePageEnumProc), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1483,6 +1501,17 @@ func EnumSystemGeoNames(geoClass uint32, geoEnumProc GEO_ENUMNAMEPROC, data foun
 	return nil
 }
 
+// EnumSystemLanguageGroups calls KERNEL32!EnumSystemLanguageGroupsW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumsystemlanguagegroupsw
+// Minimum OS: windows5.0.
+func EnumSystemLanguageGroups(lpLanguageGroupEnumProc LANGUAGEGROUP_ENUMPROCW, dwFlags ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS, lParam uintptr) error {
+	r1, _, e1 := syscall.SyscallN(procEnumSystemLanguageGroups.Addr(), uintptr(lpLanguageGroupEnumProc), uintptr(dwFlags), uintptr(lParam))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // EnumSystemLanguageGroupsA calls KERNEL32!EnumSystemLanguageGroupsA.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumsystemlanguagegroupsa
 // Minimum OS: windows5.0.
@@ -1494,11 +1523,11 @@ func EnumSystemLanguageGroupsA(lpLanguageGroupEnumProc LANGUAGEGROUP_ENUMPROCA, 
 	return nil
 }
 
-// EnumSystemLanguageGroupsW calls KERNEL32!EnumSystemLanguageGroupsW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumsystemlanguagegroupsw
+// EnumSystemLocales calls KERNEL32!EnumSystemLocalesW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumsystemlocalesw
 // Minimum OS: windows5.0.
-func EnumSystemLanguageGroupsW(lpLanguageGroupEnumProc LANGUAGEGROUP_ENUMPROCW, dwFlags ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS, lParam uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procEnumSystemLanguageGroupsW.Addr(), uintptr(lpLanguageGroupEnumProc), uintptr(dwFlags), uintptr(lParam))
+func EnumSystemLocales(lpLocaleEnumProc LOCALE_ENUMPROCW, dwFlags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEnumSystemLocales.Addr(), uintptr(lpLocaleEnumProc), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1519,19 +1548,19 @@ func EnumSystemLocalesA(lpLocaleEnumProc LOCALE_ENUMPROCA, dwFlags uint32) error
 // EnumSystemLocalesEx calls KERNEL32!EnumSystemLocalesEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumsystemlocalesex
 // Minimum OS: windows6.0.6000.
-func EnumSystemLocalesEx(lpLocaleEnumProcEx LOCALE_ENUMPROCEX, dwFlags uint32, lParam foundation.LPARAM, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procEnumSystemLocalesEx.Addr(), uintptr(lpLocaleEnumProcEx), uintptr(dwFlags), uintptr(lParam), uintptr(unsafe.Pointer(lpReserved)))
+func EnumSystemLocalesEx(lpLocaleEnumProcEx LOCALE_ENUMPROCEX, dwFlags uint32, lParam foundation.LPARAM) error {
+	r1, _, e1 := syscall.SyscallN(procEnumSystemLocalesEx.Addr(), uintptr(lpLocaleEnumProcEx), uintptr(dwFlags), uintptr(lParam), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// EnumSystemLocalesW calls KERNEL32!EnumSystemLocalesW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumsystemlocalesw
+// EnumTimeFormats calls KERNEL32!EnumTimeFormatsW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumtimeformatsw
 // Minimum OS: windows5.0.
-func EnumSystemLocalesW(lpLocaleEnumProc LOCALE_ENUMPROCW, dwFlags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumSystemLocalesW.Addr(), uintptr(lpLocaleEnumProc), uintptr(dwFlags))
+func EnumTimeFormats(lpTimeFmtEnumProc TIMEFMT_ENUMPROCW, Locale uint32, dwFlags TIME_FORMAT_FLAGS) error {
+	r1, _, e1 := syscall.SyscallN(procEnumTimeFormats.Addr(), uintptr(lpTimeFmtEnumProc), uintptr(Locale), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1552,19 +1581,20 @@ func EnumTimeFormatsA(lpTimeFmtEnumProc TIMEFMT_ENUMPROCA, Locale uint32, dwFlag
 // EnumTimeFormatsEx calls KERNEL32!EnumTimeFormatsEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumtimeformatsex
 // Minimum OS: windows6.0.6000.
-func EnumTimeFormatsEx(lpTimeFmtEnumProcEx TIMEFMT_ENUMPROCEX, lpLocaleName foundation.PWSTR, dwFlags uint32, lParam foundation.LPARAM) error {
-	r1, _, e1 := syscall.SyscallN(procEnumTimeFormatsEx.Addr(), uintptr(lpTimeFmtEnumProcEx), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwFlags), uintptr(lParam))
+func EnumTimeFormatsEx(lpTimeFmtEnumProcEx TIMEFMT_ENUMPROCEX, lpLocaleName string, dwFlags uint32, lParam foundation.LPARAM) error {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	r1, _, e1 := syscall.SyscallN(procEnumTimeFormatsEx.Addr(), uintptr(lpTimeFmtEnumProcEx), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// EnumTimeFormatsW calls KERNEL32!EnumTimeFormatsW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumtimeformatsw
+// EnumUILanguages calls KERNEL32!EnumUILanguagesW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumuilanguagesw
 // Minimum OS: windows5.0.
-func EnumTimeFormatsW(lpTimeFmtEnumProc TIMEFMT_ENUMPROCW, Locale uint32, dwFlags TIME_FORMAT_FLAGS) error {
-	r1, _, e1 := syscall.SyscallN(procEnumTimeFormatsW.Addr(), uintptr(lpTimeFmtEnumProc), uintptr(Locale), uintptr(dwFlags))
+func EnumUILanguages(lpUILanguageEnumProc UILANGUAGE_ENUMPROCW, dwFlags uint32, lParam uintptr) error {
+	r1, _, e1 := syscall.SyscallN(procEnumUILanguages.Addr(), uintptr(lpUILanguageEnumProc), uintptr(dwFlags), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1582,22 +1612,13 @@ func EnumUILanguagesA(lpUILanguageEnumProc UILANGUAGE_ENUMPROCA, dwFlags uint32,
 	return nil
 }
 
-// EnumUILanguagesW calls KERNEL32!EnumUILanguagesW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumuilanguagesw
-// Minimum OS: windows5.0.
-func EnumUILanguagesW(lpUILanguageEnumProc UILANGUAGE_ENUMPROCW, dwFlags uint32, lParam uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procEnumUILanguagesW.Addr(), uintptr(lpUILanguageEnumProc), uintptr(dwFlags), uintptr(lParam))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // FindNLSString calls KERNEL32!FindNLSString.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-findnlsstring
 // Minimum OS: windows6.0.6000.
-func FindNLSString(Locale uint32, dwFindNLSStringFlags uint32, lpStringSource foundation.PWSTR, cchSource int32, lpStringValue foundation.PWSTR, cchValue int32, pcchFound *int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procFindNLSString.Addr(), uintptr(Locale), uintptr(dwFindNLSStringFlags), uintptr(unsafe.Pointer(lpStringSource)), uintptr(cchSource), uintptr(unsafe.Pointer(lpStringValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pcchFound)))
+func FindNLSString(Locale uint32, dwFindNLSStringFlags uint32, lpStringSource string, cchSource int32, lpStringValue string, cchValue int32, pcchFound *int32) (int32, error) {
+	_lpStringSource := win32.UTF16Ptr(lpStringSource)
+	_lpStringValue := win32.UTF16Ptr(lpStringValue)
+	r1, _, e1 := syscall.SyscallN(procFindNLSString.Addr(), uintptr(Locale), uintptr(dwFindNLSStringFlags), uintptr(unsafe.Pointer(_lpStringSource)), uintptr(cchSource), uintptr(unsafe.Pointer(_lpStringValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pcchFound)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1607,8 +1628,11 @@ func FindNLSString(Locale uint32, dwFindNLSStringFlags uint32, lpStringSource fo
 // FindNLSStringEx calls KERNEL32!FindNLSStringEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-findnlsstringex
 // Minimum OS: windows6.0.6000.
-func FindNLSStringEx(lpLocaleName foundation.PWSTR, dwFindNLSStringFlags uint32, lpStringSource foundation.PWSTR, cchSource int32, lpStringValue foundation.PWSTR, cchValue int32, pcchFound *int32, lpVersionInformation *NLSVERSIONINFO, lpReserved unsafe.Pointer, sortHandle foundation.LPARAM) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procFindNLSStringEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwFindNLSStringFlags), uintptr(unsafe.Pointer(lpStringSource)), uintptr(cchSource), uintptr(unsafe.Pointer(lpStringValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pcchFound)), uintptr(unsafe.Pointer(lpVersionInformation)), uintptr(unsafe.Pointer(lpReserved)), uintptr(sortHandle))
+func FindNLSStringEx(lpLocaleName string, dwFindNLSStringFlags uint32, lpStringSource string, cchSource int32, lpStringValue string, cchValue int32, pcchFound *int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	_lpStringSource := win32.UTF16Ptr(lpStringSource)
+	_lpStringValue := win32.UTF16Ptr(lpStringValue)
+	r1, _, e1 := syscall.SyscallN(procFindNLSStringEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFindNLSStringFlags), uintptr(unsafe.Pointer(_lpStringSource)), uintptr(cchSource), uintptr(unsafe.Pointer(_lpStringValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pcchFound)), uintptr(unsafe.Pointer(lpVersionInformation)), 0, uintptr(sortHandle))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1618,8 +1642,23 @@ func FindNLSStringEx(lpLocaleName foundation.PWSTR, dwFindNLSStringFlags uint32,
 // FindStringOrdinal calls KERNEL32!FindStringOrdinal.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-findstringordinal
 // Minimum OS: windows6.1.
-func FindStringOrdinal(dwFindStringOrdinalFlags uint32, lpStringSource foundation.PWSTR, cchSource int32, lpStringValue foundation.PWSTR, cchValue int32, bIgnoreCase foundation.BOOL) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procFindStringOrdinal.Addr(), uintptr(dwFindStringOrdinalFlags), uintptr(unsafe.Pointer(lpStringSource)), uintptr(cchSource), uintptr(unsafe.Pointer(lpStringValue)), uintptr(cchValue), uintptr(bIgnoreCase))
+func FindStringOrdinal(dwFindStringOrdinalFlags uint32, lpStringSource string, cchSource int32, lpStringValue string, cchValue int32, bIgnoreCase bool) (int32, error) {
+	_lpStringSource := win32.UTF16Ptr(lpStringSource)
+	_lpStringValue := win32.UTF16Ptr(lpStringValue)
+	_bIgnoreCase := win32.Bool32(bIgnoreCase)
+	r1, _, e1 := syscall.SyscallN(procFindStringOrdinal.Addr(), uintptr(dwFindStringOrdinalFlags), uintptr(unsafe.Pointer(_lpStringSource)), uintptr(cchSource), uintptr(unsafe.Pointer(_lpStringValue)), uintptr(cchValue), uintptr(_bIgnoreCase))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// FoldString calls KERNEL32!FoldStringW.
+// https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-foldstringw
+// Minimum OS: windows5.0.
+func FoldString(dwMapFlags FOLD_STRING_MAP_FLAGS, lpSrcStr string, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32) (int32, error) {
+	_lpSrcStr := win32.UTF16Ptr(lpSrcStr)
+	r1, _, e1 := syscall.SyscallN(procFoldString.Addr(), uintptr(dwMapFlags), uintptr(unsafe.Pointer(_lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpDestStr)), uintptr(cchDest))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1631,17 +1670,6 @@ func FindStringOrdinal(dwFindStringOrdinalFlags uint32, lpStringSource foundatio
 // Minimum OS: windows5.0.
 func FoldStringA(dwMapFlags FOLD_STRING_MAP_FLAGS, lpSrcStr foundation.PSTR, cchSrc int32, lpDestStr foundation.PSTR, cchDest int32) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procFoldStringA.Addr(), uintptr(dwMapFlags), uintptr(unsafe.Pointer(lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpDestStr)), uintptr(cchDest))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// FoldStringW calls KERNEL32!FoldStringW.
-// https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-foldstringw
-// Minimum OS: windows5.0.
-func FoldStringW(dwMapFlags FOLD_STRING_MAP_FLAGS, lpSrcStr foundation.PWSTR, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procFoldStringW.Addr(), uintptr(dwMapFlags), uintptr(unsafe.Pointer(lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpDestStr)), uintptr(cchDest))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1667,6 +1695,17 @@ func GetCPInfo(CodePage uint32, lpCPInfo *CPINFO) error {
 	return nil
 }
 
+// GetCPInfoEx calls KERNEL32!GetCPInfoExW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcpinfoexw
+// Minimum OS: windows5.0.
+func GetCPInfoEx(CodePage uint32, dwFlags uint32, lpCPInfoEx *CPINFOEXW) error {
+	r1, _, e1 := syscall.SyscallN(procGetCPInfoEx.Addr(), uintptr(CodePage), uintptr(dwFlags), uintptr(unsafe.Pointer(lpCPInfoEx)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetCPInfoExA calls KERNEL32!GetCPInfoExA.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcpinfoexa
 // Minimum OS: windows5.0.
@@ -1678,22 +1717,24 @@ func GetCPInfoExA(CodePage uint32, dwFlags uint32, lpCPInfoEx *CPINFOEXA) error 
 	return nil
 }
 
-// GetCPInfoExW calls KERNEL32!GetCPInfoExW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcpinfoexw
-// Minimum OS: windows5.0.
-func GetCPInfoExW(CodePage uint32, dwFlags uint32, lpCPInfoEx *CPINFOEXW) error {
-	r1, _, e1 := syscall.SyscallN(procGetCPInfoExW.Addr(), uintptr(CodePage), uintptr(dwFlags), uintptr(unsafe.Pointer(lpCPInfoEx)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // GetCalendarDateFormatEx calls KERNEL32!GetCalendarDateFormatEx.
 // https://learn.microsoft.com/windows/win32/Intl/getcalendardateformatex
-func GetCalendarDateFormatEx(lpszLocale foundation.PWSTR, dwFlags uint32, lpCalDateTime *CALDATETIME, lpFormat foundation.PWSTR, lpDateStr foundation.PWSTR, cchDate int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetCalendarDateFormatEx.Addr(), uintptr(unsafe.Pointer(lpszLocale)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpCalDateTime)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate))
-	return foundation.BOOL(r1)
+func GetCalendarDateFormatEx(lpszLocale string, dwFlags uint32, lpCalDateTime *CALDATETIME, lpFormat string, lpDateStr foundation.PWSTR, cchDate int32) bool {
+	_lpszLocale := win32.UTF16Ptr(lpszLocale)
+	_lpFormat := win32.UTF16Ptr(lpFormat)
+	r1, _, _ := syscall.SyscallN(procGetCalendarDateFormatEx.Addr(), uintptr(unsafe.Pointer(_lpszLocale)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpCalDateTime)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate))
+	return r1 != 0
+}
+
+// GetCalendarInfo calls KERNEL32!GetCalendarInfoW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcalendarinfow
+// Minimum OS: windows5.0.
+func GetCalendarInfo(Locale uint32, Calendar uint32, CalType uint32, lpCalData foundation.PWSTR, cchData int32, lpValue *uint32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetCalendarInfo.Addr(), uintptr(Locale), uintptr(Calendar), uintptr(CalType), uintptr(unsafe.Pointer(lpCalData)), uintptr(cchData), uintptr(unsafe.Pointer(lpValue)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
 // GetCalendarInfoA calls KERNEL32!GetCalendarInfoA.
@@ -1710,19 +1751,9 @@ func GetCalendarInfoA(Locale uint32, Calendar uint32, CalType uint32, lpCalData 
 // GetCalendarInfoEx calls KERNEL32!GetCalendarInfoEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcalendarinfoex
 // Minimum OS: windows6.0.6000.
-func GetCalendarInfoEx(lpLocaleName foundation.PWSTR, Calendar uint32, lpReserved foundation.PWSTR, CalType uint32, lpCalData foundation.PWSTR, cchData int32, lpValue *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetCalendarInfoEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(Calendar), uintptr(unsafe.Pointer(lpReserved)), uintptr(CalType), uintptr(unsafe.Pointer(lpCalData)), uintptr(cchData), uintptr(unsafe.Pointer(lpValue)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// GetCalendarInfoW calls KERNEL32!GetCalendarInfoW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcalendarinfow
-// Minimum OS: windows5.0.
-func GetCalendarInfoW(Locale uint32, Calendar uint32, CalType uint32, lpCalData foundation.PWSTR, cchData int32, lpValue *uint32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetCalendarInfoW.Addr(), uintptr(Locale), uintptr(Calendar), uintptr(CalType), uintptr(unsafe.Pointer(lpCalData)), uintptr(cchData), uintptr(unsafe.Pointer(lpValue)))
+func GetCalendarInfoEx(lpLocaleName string, Calendar uint32, CalType uint32, lpCalData foundation.PWSTR, cchData int32, lpValue *uint32) (int32, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	r1, _, e1 := syscall.SyscallN(procGetCalendarInfoEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(Calendar), 0, uintptr(CalType), uintptr(unsafe.Pointer(lpCalData)), uintptr(cchData), uintptr(unsafe.Pointer(lpValue)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1731,9 +1762,21 @@ func GetCalendarInfoW(Locale uint32, Calendar uint32, CalType uint32, lpCalData 
 
 // GetCalendarSupportedDateRange calls KERNEL32!GetCalendarSupportedDateRange.
 // https://learn.microsoft.com/windows/win32/Intl/getcalendarsupporteddaterange
-func GetCalendarSupportedDateRange(Calendar uint32, lpCalMinDateTime *CALDATETIME, lpCalMaxDateTime *CALDATETIME) foundation.BOOL {
+func GetCalendarSupportedDateRange(Calendar uint32, lpCalMinDateTime *CALDATETIME, lpCalMaxDateTime *CALDATETIME) bool {
 	r1, _, _ := syscall.SyscallN(procGetCalendarSupportedDateRange.Addr(), uintptr(Calendar), uintptr(unsafe.Pointer(lpCalMinDateTime)), uintptr(unsafe.Pointer(lpCalMaxDateTime)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetCurrencyFormat calls KERNEL32!GetCurrencyFormatW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcurrencyformatw
+// Minimum OS: windows5.0.
+func GetCurrencyFormat(Locale uint32, dwFlags uint32, lpValue string, lpFormat *CURRENCYFMTW, lpCurrencyStr foundation.PWSTR, cchCurrency int32) (int32, error) {
+	_lpValue := win32.UTF16Ptr(lpValue)
+	r1, _, e1 := syscall.SyscallN(procGetCurrencyFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpCurrencyStr)), uintptr(cchCurrency))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
 // GetCurrencyFormatA calls KERNEL32!GetCurrencyFormatA.
@@ -1750,19 +1793,22 @@ func GetCurrencyFormatA(Locale uint32, dwFlags uint32, lpValue foundation.PSTR, 
 // GetCurrencyFormatEx calls KERNEL32!GetCurrencyFormatEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcurrencyformatex
 // Minimum OS: windows5.0.
-func GetCurrencyFormatEx(lpLocaleName foundation.PWSTR, dwFlags uint32, lpValue foundation.PWSTR, lpFormat *CURRENCYFMTW, lpCurrencyStr foundation.PWSTR, cchCurrency int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetCurrencyFormatEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpCurrencyStr)), uintptr(cchCurrency))
+func GetCurrencyFormatEx(lpLocaleName string, dwFlags uint32, lpValue string, lpFormat *CURRENCYFMTW, lpCurrencyStr foundation.PWSTR, cchCurrency int32) (int32, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	_lpValue := win32.UTF16Ptr(lpValue)
+	r1, _, e1 := syscall.SyscallN(procGetCurrencyFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpCurrencyStr)), uintptr(cchCurrency))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// GetCurrencyFormatW calls KERNEL32!GetCurrencyFormatW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcurrencyformatw
+// GetDateFormat calls KERNEL32!GetDateFormatW.
+// https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-getdateformatw
 // Minimum OS: windows5.0.
-func GetCurrencyFormatW(Locale uint32, dwFlags uint32, lpValue foundation.PWSTR, lpFormat *CURRENCYFMTW, lpCurrencyStr foundation.PWSTR, cchCurrency int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetCurrencyFormatW.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpCurrencyStr)), uintptr(cchCurrency))
+func GetDateFormat(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME, lpFormat string, lpDateStr foundation.PWSTR, cchDate int32) (int32, error) {
+	_lpFormat := win32.UTF16Ptr(lpFormat)
+	r1, _, e1 := syscall.SyscallN(procGetDateFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDate)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1783,19 +1829,11 @@ func GetDateFormatA(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME
 // GetDateFormatEx calls KERNEL32!GetDateFormatEx.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-getdateformatex
 // Minimum OS: windows6.0.6000.
-func GetDateFormatEx(lpLocaleName foundation.PWSTR, dwFlags ENUM_DATE_FORMATS_FLAGS, lpDate *foundation.SYSTEMTIME, lpFormat foundation.PWSTR, lpDateStr foundation.PWSTR, cchDate int32, lpCalendar foundation.PWSTR) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetDateFormatEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDate)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate), uintptr(unsafe.Pointer(lpCalendar)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// GetDateFormatW calls KERNEL32!GetDateFormatW.
-// https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-getdateformatw
-// Minimum OS: windows5.0.
-func GetDateFormatW(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME, lpFormat foundation.PWSTR, lpDateStr foundation.PWSTR, cchDate int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetDateFormatW.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDate)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate))
+func GetDateFormatEx(lpLocaleName string, dwFlags ENUM_DATE_FORMATS_FLAGS, lpDate *foundation.SYSTEMTIME, lpFormat string, lpDateStr foundation.PWSTR, cchDate int32, lpCalendar string) (int32, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	_lpFormat := win32.UTF16Ptr(lpFormat)
+	_lpCalendar := win32.UTF16Ptr(lpCalendar)
+	r1, _, e1 := syscall.SyscallN(procGetDateFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDate)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate), uintptr(unsafe.Pointer(_lpCalendar)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1804,16 +1842,19 @@ func GetDateFormatW(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME
 
 // GetDistanceOfClosestLanguageInList calls bcp47mrm!GetDistanceOfClosestLanguageInList.
 // https://learn.microsoft.com/windows/win32/api/bcp47mrm/nf-bcp47mrm-getdistanceofclosestlanguageinlist
-func GetDistanceOfClosestLanguageInList(pszLanguage foundation.PWSTR, pszLanguagesList foundation.PWSTR, wchListDelimiter uint16, pClosestDistance *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetDistanceOfClosestLanguageInList.Addr(), uintptr(unsafe.Pointer(pszLanguage)), uintptr(unsafe.Pointer(pszLanguagesList)), uintptr(wchListDelimiter), uintptr(unsafe.Pointer(pClosestDistance)))
-	return foundation.HRESULT(r1)
+func GetDistanceOfClosestLanguageInList(pszLanguage string, pszLanguagesList string, wchListDelimiter uint16, pClosestDistance *float64) error {
+	_pszLanguage := win32.UTF16Ptr(pszLanguage)
+	_pszLanguagesList := win32.UTF16Ptr(pszLanguagesList)
+	r1, _, _ := syscall.SyscallN(procGetDistanceOfClosestLanguageInList.Addr(), uintptr(unsafe.Pointer(_pszLanguage)), uintptr(unsafe.Pointer(_pszLanguagesList)), uintptr(wchListDelimiter), uintptr(unsafe.Pointer(pClosestDistance)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDurationFormat calls KERNEL32!GetDurationFormat.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getdurationformat
 // Minimum OS: windows6.0.6000.
-func GetDurationFormat(Locale uint32, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat foundation.PWSTR, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetDurationFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDuration)), uintptr(ullDuration), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpDurationStr)), uintptr(cchDuration))
+func GetDurationFormat(Locale uint32, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
+	_lpFormat := win32.UTF16Ptr(lpFormat)
+	r1, _, e1 := syscall.SyscallN(procGetDurationFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDuration)), uintptr(ullDuration), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDurationStr)), uintptr(cchDuration))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1823,8 +1864,10 @@ func GetDurationFormat(Locale uint32, dwFlags uint32, lpDuration *foundation.SYS
 // GetDurationFormatEx calls KERNEL32!GetDurationFormatEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getdurationformatex
 // Minimum OS: windows6.0.6000.
-func GetDurationFormatEx(lpLocaleName foundation.PWSTR, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat foundation.PWSTR, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetDurationFormatEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDuration)), uintptr(ullDuration), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpDurationStr)), uintptr(cchDuration))
+func GetDurationFormatEx(lpLocaleName string, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	_lpFormat := win32.UTF16Ptr(lpFormat)
+	r1, _, e1 := syscall.SyscallN(procGetDurationFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDuration)), uintptr(ullDuration), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDurationStr)), uintptr(cchDuration))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1834,8 +1877,9 @@ func GetDurationFormatEx(lpLocaleName foundation.PWSTR, dwFlags uint32, lpDurati
 // GetFileMUIInfo calls KERNEL32!GetFileMUIInfo.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getfilemuiinfo
 // Minimum OS: windows6.0.6000.
-func GetFileMUIInfo(dwFlags uint32, pcwszFilePath foundation.PWSTR, pFileMUIInfo *FILEMUIINFO, pcbFileMUIInfo *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileMUIInfo.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pcwszFilePath)), uintptr(unsafe.Pointer(pFileMUIInfo)), uintptr(unsafe.Pointer(pcbFileMUIInfo)))
+func GetFileMUIInfo(dwFlags uint32, pcwszFilePath string, pFileMUIInfo *FILEMUIINFO, pcbFileMUIInfo *uint32) error {
+	_pcwszFilePath := win32.UTF16Ptr(pcwszFilePath)
+	r1, _, e1 := syscall.SyscallN(procGetFileMUIInfo.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pcwszFilePath)), uintptr(unsafe.Pointer(pFileMUIInfo)), uintptr(unsafe.Pointer(pcbFileMUIInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1845,12 +1889,24 @@ func GetFileMUIInfo(dwFlags uint32, pcwszFilePath foundation.PWSTR, pFileMUIInfo
 // GetFileMUIPath calls KERNEL32!GetFileMUIPath.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getfilemuipath
 // Minimum OS: windows6.0.6000.
-func GetFileMUIPath(dwFlags uint32, pcwszFilePath foundation.PWSTR, pwszLanguage foundation.PWSTR, pcchLanguage *uint32, pwszFileMUIPath foundation.PWSTR, pcchFileMUIPath *uint32, pululEnumerator *uint64) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileMUIPath.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pcwszFilePath)), uintptr(unsafe.Pointer(pwszLanguage)), uintptr(unsafe.Pointer(pcchLanguage)), uintptr(unsafe.Pointer(pwszFileMUIPath)), uintptr(unsafe.Pointer(pcchFileMUIPath)), uintptr(unsafe.Pointer(pululEnumerator)))
+func GetFileMUIPath(dwFlags uint32, pcwszFilePath string, pwszLanguage foundation.PWSTR, pcchLanguage *uint32, pwszFileMUIPath foundation.PWSTR, pcchFileMUIPath *uint32, pululEnumerator *uint64) error {
+	_pcwszFilePath := win32.UTF16Ptr(pcwszFilePath)
+	r1, _, e1 := syscall.SyscallN(procGetFileMUIPath.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pcwszFilePath)), uintptr(unsafe.Pointer(pwszLanguage)), uintptr(unsafe.Pointer(pcchLanguage)), uintptr(unsafe.Pointer(pwszFileMUIPath)), uintptr(unsafe.Pointer(pcchFileMUIPath)), uintptr(unsafe.Pointer(pululEnumerator)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// GetGeoInfo calls KERNEL32!GetGeoInfoW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getgeoinfow
+// Minimum OS: windows5.1.2600.
+func GetGeoInfo(Location int32, GeoType SYSGEOTYPE, lpGeoData foundation.PWSTR, cchData int32, LangId uint16) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetGeoInfo.Addr(), uintptr(Location), uintptr(GeoType), uintptr(unsafe.Pointer(lpGeoData)), uintptr(cchData), uintptr(LangId))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
 // GetGeoInfoA calls KERNEL32!GetGeoInfoA.
@@ -1867,19 +1923,20 @@ func GetGeoInfoA(Location int32, GeoType SYSGEOTYPE, lpGeoData foundation.PSTR, 
 // GetGeoInfoEx calls KERNEL32!GetGeoInfoEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getgeoinfoex
 // Minimum OS: windows10.0.16299.
-func GetGeoInfoEx(location foundation.PWSTR, geoType SYSGEOTYPE, geoData foundation.PWSTR, geoDataCount int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetGeoInfoEx.Addr(), uintptr(unsafe.Pointer(location)), uintptr(geoType), uintptr(unsafe.Pointer(geoData)), uintptr(geoDataCount))
+func GetGeoInfoEx(location string, geoType SYSGEOTYPE, geoData foundation.PWSTR, geoDataCount int32) (int32, error) {
+	_location := win32.UTF16Ptr(location)
+	r1, _, e1 := syscall.SyscallN(procGetGeoInfoEx.Addr(), uintptr(unsafe.Pointer(_location)), uintptr(geoType), uintptr(unsafe.Pointer(geoData)), uintptr(geoDataCount))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// GetGeoInfoW calls KERNEL32!GetGeoInfoW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getgeoinfow
-// Minimum OS: windows5.1.2600.
-func GetGeoInfoW(Location int32, GeoType SYSGEOTYPE, lpGeoData foundation.PWSTR, cchData int32, LangId uint16) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetGeoInfoW.Addr(), uintptr(Location), uintptr(GeoType), uintptr(unsafe.Pointer(lpGeoData)), uintptr(cchData), uintptr(LangId))
+// GetLocaleInfo calls KERNEL32!GetLocaleInfoW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getlocaleinfow
+// Minimum OS: windows5.0.
+func GetLocaleInfo(Locale uint32, LCType uint32, lpLCData foundation.PWSTR, cchData int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetLocaleInfo.Addr(), uintptr(Locale), uintptr(LCType), uintptr(unsafe.Pointer(lpLCData)), uintptr(cchData))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1900,19 +1957,9 @@ func GetLocaleInfoA(Locale uint32, LCType uint32, lpLCData foundation.PSTR, cchD
 // GetLocaleInfoEx calls KERNEL32!GetLocaleInfoEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getlocaleinfoex
 // Minimum OS: windows6.0.6000.
-func GetLocaleInfoEx(lpLocaleName foundation.PWSTR, LCType uint32, lpLCData foundation.PWSTR, cchData int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetLocaleInfoEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(LCType), uintptr(unsafe.Pointer(lpLCData)), uintptr(cchData))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// GetLocaleInfoW calls KERNEL32!GetLocaleInfoW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getlocaleinfow
-// Minimum OS: windows5.0.
-func GetLocaleInfoW(Locale uint32, LCType uint32, lpLCData foundation.PWSTR, cchData int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetLocaleInfoW.Addr(), uintptr(Locale), uintptr(LCType), uintptr(unsafe.Pointer(lpLCData)), uintptr(cchData))
+func GetLocaleInfoEx(lpLocaleName string, LCType uint32, lpLCData foundation.PWSTR, cchData int32) (int32, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	r1, _, e1 := syscall.SyscallN(procGetLocaleInfoEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(LCType), uintptr(unsafe.Pointer(lpLCData)), uintptr(cchData))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1933,12 +1980,25 @@ func GetNLSVersion(Function uint32, Locale uint32, lpVersionInformation *NLSVERS
 // GetNLSVersionEx calls KERNEL32!GetNLSVersionEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getnlsversionex
 // Minimum OS: windows6.0.6000.
-func GetNLSVersionEx(function uint32, lpLocaleName foundation.PWSTR, lpVersionInformation *NLSVERSIONINFOEX) error {
-	r1, _, e1 := syscall.SyscallN(procGetNLSVersionEx.Addr(), uintptr(function), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(unsafe.Pointer(lpVersionInformation)))
+func GetNLSVersionEx(function uint32, lpLocaleName string, lpVersionInformation *NLSVERSIONINFOEX) error {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	r1, _, e1 := syscall.SyscallN(procGetNLSVersionEx.Addr(), uintptr(function), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(unsafe.Pointer(lpVersionInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// GetNumberFormat calls KERNEL32!GetNumberFormatW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getnumberformatw
+// Minimum OS: windows5.0.
+func GetNumberFormat(Locale uint32, dwFlags uint32, lpValue string, lpFormat *NUMBERFMTW, lpNumberStr foundation.PWSTR, cchNumber int32) (int32, error) {
+	_lpValue := win32.UTF16Ptr(lpValue)
+	r1, _, e1 := syscall.SyscallN(procGetNumberFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpNumberStr)), uintptr(cchNumber))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
 }
 
 // GetNumberFormatA calls KERNEL32!GetNumberFormatA.
@@ -1955,19 +2015,10 @@ func GetNumberFormatA(Locale uint32, dwFlags uint32, lpValue foundation.PSTR, lp
 // GetNumberFormatEx calls KERNEL32!GetNumberFormatEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getnumberformatex
 // Minimum OS: windows6.0.6000.
-func GetNumberFormatEx(lpLocaleName foundation.PWSTR, dwFlags uint32, lpValue foundation.PWSTR, lpFormat *NUMBERFMTW, lpNumberStr foundation.PWSTR, cchNumber int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetNumberFormatEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpNumberStr)), uintptr(cchNumber))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// GetNumberFormatW calls KERNEL32!GetNumberFormatW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getnumberformatw
-// Minimum OS: windows5.0.
-func GetNumberFormatW(Locale uint32, dwFlags uint32, lpValue foundation.PWSTR, lpFormat *NUMBERFMTW, lpNumberStr foundation.PWSTR, cchNumber int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetNumberFormatW.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpNumberStr)), uintptr(cchNumber))
+func GetNumberFormatEx(lpLocaleName string, dwFlags uint32, lpValue string, lpFormat *NUMBERFMTW, lpNumberStr foundation.PWSTR, cchNumber int32) (int32, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	_lpValue := win32.UTF16Ptr(lpValue)
+	r1, _, e1 := syscall.SyscallN(procGetNumberFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpNumberStr)), uintptr(cchNumber))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1996,12 +2047,25 @@ func GetProcessPreferredUILanguages(dwFlags uint32, pulNumLanguages *uint32, pws
 // GetStringScripts calls KERNEL32!GetStringScripts.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getstringscripts
 // Minimum OS: windows6.0.6000.
-func GetStringScripts(dwFlags uint32, lpString foundation.PWSTR, cchString int32, lpScripts foundation.PWSTR, cchScripts int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetStringScripts.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpString)), uintptr(cchString), uintptr(unsafe.Pointer(lpScripts)), uintptr(cchScripts))
+func GetStringScripts(dwFlags uint32, lpString string, cchString int32, lpScripts foundation.PWSTR, cchScripts int32) (int32, error) {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procGetStringScripts.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpString)), uintptr(cchString), uintptr(unsafe.Pointer(lpScripts)), uintptr(cchScripts))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
+}
+
+// GetStringType calls KERNEL32!GetStringTypeW.
+// https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-getstringtypew
+// Minimum OS: windows5.0.
+func GetStringType(dwInfoType uint32, lpSrcStr string, cchSrc int32, lpCharType *uint16) error {
+	_lpSrcStr := win32.UTF16Ptr(lpSrcStr)
+	r1, _, e1 := syscall.SyscallN(procGetStringType.Addr(), uintptr(dwInfoType), uintptr(unsafe.Pointer(_lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpCharType)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GetStringTypeA calls KERNEL32!GetStringTypeA.
@@ -2015,33 +2079,23 @@ func GetStringTypeA(Locale uint32, dwInfoType uint32, lpSrcStr foundation.PSTR, 
 	return nil
 }
 
+// GetStringTypeEx calls KERNEL32!GetStringTypeExW.
+// https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-getstringtypeexw
+// Minimum OS: windows5.0.
+func GetStringTypeEx(Locale uint32, dwInfoType uint32, lpSrcStr string, cchSrc int32, lpCharType *uint16) error {
+	_lpSrcStr := win32.UTF16Ptr(lpSrcStr)
+	r1, _, e1 := syscall.SyscallN(procGetStringTypeEx.Addr(), uintptr(Locale), uintptr(dwInfoType), uintptr(unsafe.Pointer(_lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpCharType)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetStringTypeExA calls KERNEL32!GetStringTypeExA.
 // https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-getstringtypeexw
-func GetStringTypeExA(Locale uint32, dwInfoType uint32, lpSrcStr foundation.PSTR, cchSrc int32, lpCharType *uint16) foundation.BOOL {
+func GetStringTypeExA(Locale uint32, dwInfoType uint32, lpSrcStr foundation.PSTR, cchSrc int32, lpCharType *uint16) bool {
 	r1, _, _ := syscall.SyscallN(procGetStringTypeExA.Addr(), uintptr(Locale), uintptr(dwInfoType), uintptr(unsafe.Pointer(lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpCharType)))
-	return foundation.BOOL(r1)
-}
-
-// GetStringTypeExW calls KERNEL32!GetStringTypeExW.
-// https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-getstringtypeexw
-// Minimum OS: windows5.0.
-func GetStringTypeExW(Locale uint32, dwInfoType uint32, lpSrcStr foundation.PWSTR, cchSrc int32, lpCharType *uint16) error {
-	r1, _, e1 := syscall.SyscallN(procGetStringTypeExW.Addr(), uintptr(Locale), uintptr(dwInfoType), uintptr(unsafe.Pointer(lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpCharType)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetStringTypeW calls KERNEL32!GetStringTypeW.
-// https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-getstringtypew
-// Minimum OS: windows5.0.
-func GetStringTypeW(dwInfoType uint32, lpSrcStr foundation.PWSTR, cchSrc int32, lpCharType *uint16) error {
-	r1, _, e1 := syscall.SyscallN(procGetStringTypeW.Addr(), uintptr(dwInfoType), uintptr(unsafe.Pointer(lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpCharType)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+	return r1 != 0
 }
 
 // GetSystemDefaultLCID calls KERNEL32!GetSystemDefaultLCID.
@@ -2133,6 +2187,18 @@ func GetThreadUILanguage() uint16 {
 	return uint16(r1)
 }
 
+// GetTimeFormat calls KERNEL32!GetTimeFormatW.
+// https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatw
+// Minimum OS: windows5.0.
+func GetTimeFormat(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME, lpFormat string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
+	_lpFormat := win32.UTF16Ptr(lpFormat)
+	r1, _, e1 := syscall.SyscallN(procGetTimeFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTime)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpTimeStr)), uintptr(cchTime))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // GetTimeFormatA calls KERNEL32!GetTimeFormatA.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformata
 // Minimum OS: windows5.0.
@@ -2147,19 +2213,10 @@ func GetTimeFormatA(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME
 // GetTimeFormatEx calls KERNEL32!GetTimeFormatEx.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatex
 // Minimum OS: windows6.0.6000.
-func GetTimeFormatEx(lpLocaleName foundation.PWSTR, dwFlags TIME_FORMAT_FLAGS, lpTime *foundation.SYSTEMTIME, lpFormat foundation.PWSTR, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetTimeFormatEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTime)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpTimeStr)), uintptr(cchTime))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// GetTimeFormatW calls KERNEL32!GetTimeFormatW.
-// https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatw
-// Minimum OS: windows5.0.
-func GetTimeFormatW(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME, lpFormat foundation.PWSTR, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetTimeFormatW.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTime)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpTimeStr)), uintptr(cchTime))
+func GetTimeFormatEx(lpLocaleName string, dwFlags TIME_FORMAT_FLAGS, lpTime *foundation.SYSTEMTIME, lpFormat string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	_lpFormat := win32.UTF16Ptr(lpFormat)
+	r1, _, e1 := syscall.SyscallN(procGetTimeFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTime)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpTimeStr)), uintptr(cchTime))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2169,8 +2226,9 @@ func GetTimeFormatW(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME
 // GetUILanguageInfo calls KERNEL32!GetUILanguageInfo.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getuilanguageinfo
 // Minimum OS: windows6.0.6000.
-func GetUILanguageInfo(dwFlags uint32, pwmszLanguage foundation.PWSTR, pwszFallbackLanguages foundation.PWSTR, pcchFallbackLanguages *uint32, pAttributes *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetUILanguageInfo.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pwmszLanguage)), uintptr(unsafe.Pointer(pwszFallbackLanguages)), uintptr(unsafe.Pointer(pcchFallbackLanguages)), uintptr(unsafe.Pointer(pAttributes)))
+func GetUILanguageInfo(dwFlags uint32, pwmszLanguage string, pwszFallbackLanguages foundation.PWSTR, pcchFallbackLanguages *uint32, pAttributes *uint32) error {
+	_pwmszLanguage := win32.UTF16Ptr(pwmszLanguage)
+	r1, _, e1 := syscall.SyscallN(procGetUILanguageInfo.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwmszLanguage)), uintptr(unsafe.Pointer(pwszFallbackLanguages)), uintptr(unsafe.Pointer(pcchFallbackLanguages)), uintptr(unsafe.Pointer(pAttributes)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2245,8 +2303,9 @@ func GetUserPreferredUILanguages(dwFlags uint32, pulNumLanguages *uint32, pwszLa
 // IdnToAscii calls NORMALIZ!IdnToAscii.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-idntoascii
 // Minimum OS: windows6.0.6000.
-func IdnToAscii(dwFlags uint32, lpUnicodeCharStr foundation.PWSTR, cchUnicodeChar int32, lpASCIICharStr foundation.PWSTR, cchASCIIChar int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procIdnToAscii.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUnicodeCharStr)), uintptr(cchUnicodeChar), uintptr(unsafe.Pointer(lpASCIICharStr)), uintptr(cchASCIIChar))
+func IdnToAscii(dwFlags uint32, lpUnicodeCharStr string, cchUnicodeChar int32, lpASCIICharStr foundation.PWSTR, cchASCIIChar int32) (int32, error) {
+	_lpUnicodeCharStr := win32.UTF16Ptr(lpUnicodeCharStr)
+	r1, _, e1 := syscall.SyscallN(procIdnToAscii.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpUnicodeCharStr)), uintptr(cchUnicodeChar), uintptr(unsafe.Pointer(lpASCIICharStr)), uintptr(cchASCIIChar))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2256,8 +2315,9 @@ func IdnToAscii(dwFlags uint32, lpUnicodeCharStr foundation.PWSTR, cchUnicodeCha
 // IdnToNameprepUnicode calls KERNEL32!IdnToNameprepUnicode.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-idntonameprepunicode
 // Minimum OS: windows6.0.6000.
-func IdnToNameprepUnicode(dwFlags uint32, lpUnicodeCharStr foundation.PWSTR, cchUnicodeChar int32, lpNameprepCharStr foundation.PWSTR, cchNameprepChar int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procIdnToNameprepUnicode.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUnicodeCharStr)), uintptr(cchUnicodeChar), uintptr(unsafe.Pointer(lpNameprepCharStr)), uintptr(cchNameprepChar))
+func IdnToNameprepUnicode(dwFlags uint32, lpUnicodeCharStr string, cchUnicodeChar int32, lpNameprepCharStr foundation.PWSTR, cchNameprepChar int32) (int32, error) {
+	_lpUnicodeCharStr := win32.UTF16Ptr(lpUnicodeCharStr)
+	r1, _, e1 := syscall.SyscallN(procIdnToNameprepUnicode.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpUnicodeCharStr)), uintptr(cchUnicodeChar), uintptr(unsafe.Pointer(lpNameprepCharStr)), uintptr(cchNameprepChar))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2267,8 +2327,9 @@ func IdnToNameprepUnicode(dwFlags uint32, lpUnicodeCharStr foundation.PWSTR, cch
 // IdnToUnicode calls NORMALIZ!IdnToUnicode.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-idntounicode
 // Minimum OS: windows6.0.6000.
-func IdnToUnicode(dwFlags uint32, lpASCIICharStr foundation.PWSTR, cchASCIIChar int32, lpUnicodeCharStr foundation.PWSTR, cchUnicodeChar int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procIdnToUnicode.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpASCIICharStr)), uintptr(cchASCIIChar), uintptr(unsafe.Pointer(lpUnicodeCharStr)), uintptr(cchUnicodeChar))
+func IdnToUnicode(dwFlags uint32, lpASCIICharStr string, cchASCIIChar int32, lpUnicodeCharStr foundation.PWSTR, cchUnicodeChar int32) (int32, error) {
+	_lpASCIICharStr := win32.UTF16Ptr(lpASCIICharStr)
+	r1, _, e1 := syscall.SyscallN(procIdnToUnicode.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpASCIICharStr)), uintptr(cchASCIIChar), uintptr(unsafe.Pointer(lpUnicodeCharStr)), uintptr(cchUnicodeChar))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2277,9 +2338,9 @@ func IdnToUnicode(dwFlags uint32, lpASCIICharStr foundation.PWSTR, cchASCIIChar 
 
 // IsCalendarLeapYear calls KERNEL32!IsCalendarLeapYear.
 // https://learn.microsoft.com/windows/win32/Intl/iscalendarleapyear
-func IsCalendarLeapYear(calId uint32, year uint32, era uint32) foundation.BOOL {
+func IsCalendarLeapYear(calId uint32, year uint32, era uint32) bool {
 	r1, _, _ := syscall.SyscallN(procIsCalendarLeapYear.Addr(), uintptr(calId), uintptr(year), uintptr(era))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsDBCSLeadByte calls KERNEL32!IsDBCSLeadByte.
@@ -2307,8 +2368,9 @@ func IsDBCSLeadByteEx(CodePage uint32, TestChar byte) error {
 // IsNLSDefinedString calls KERNEL32!IsNLSDefinedString.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isnlsdefinedstring
 // Minimum OS: windows6.0.6000.
-func IsNLSDefinedString(Function uint32, dwFlags uint32, lpVersionInformation *NLSVERSIONINFO, lpString foundation.PWSTR, cchStr int32) error {
-	r1, _, e1 := syscall.SyscallN(procIsNLSDefinedString.Addr(), uintptr(Function), uintptr(dwFlags), uintptr(unsafe.Pointer(lpVersionInformation)), uintptr(unsafe.Pointer(lpString)), uintptr(cchStr))
+func IsNLSDefinedString(Function uint32, dwFlags uint32, lpVersionInformation *NLSVERSIONINFO, lpString string, cchStr int32) error {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procIsNLSDefinedString.Addr(), uintptr(Function), uintptr(dwFlags), uintptr(unsafe.Pointer(lpVersionInformation)), uintptr(unsafe.Pointer(_lpString)), uintptr(cchStr))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2318,8 +2380,9 @@ func IsNLSDefinedString(Function uint32, dwFlags uint32, lpVersionInformation *N
 // IsNormalizedString calls KERNEL32!IsNormalizedString.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isnormalizedstring
 // Minimum OS: windows6.0.6000.
-func IsNormalizedString(NormForm NORM_FORM, lpString foundation.PWSTR, cwLength int32) error {
-	r1, _, e1 := syscall.SyscallN(procIsNormalizedString.Addr(), uintptr(NormForm), uintptr(unsafe.Pointer(lpString)), uintptr(cwLength))
+func IsNormalizedString(NormForm NORM_FORM, lpString string, cwLength int32) error {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procIsNormalizedString.Addr(), uintptr(NormForm), uintptr(unsafe.Pointer(_lpString)), uintptr(cwLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2329,55 +2392,58 @@ func IsNormalizedString(NormForm NORM_FORM, lpString foundation.PWSTR, cwLength 
 // IsTextUnicode calls ADVAPI32!IsTextUnicode.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-istextunicode
 // Minimum OS: windows5.0.
-func IsTextUnicode(lpv unsafe.Pointer, iSize int32, lpiResult *IS_TEXT_UNICODE_RESULT) foundation.BOOL {
+func IsTextUnicode(lpv unsafe.Pointer, iSize int32, lpiResult *IS_TEXT_UNICODE_RESULT) bool {
 	r1, _, _ := syscall.SyscallN(procIsTextUnicode.Addr(), uintptr(unsafe.Pointer(lpv)), uintptr(iSize), uintptr(unsafe.Pointer(lpiResult)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsValidCodePage calls KERNEL32!IsValidCodePage.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isvalidcodepage
 // Minimum OS: windows5.0.
-func IsValidCodePage(CodePage uint32) foundation.BOOL {
+func IsValidCodePage(CodePage uint32) bool {
 	r1, _, _ := syscall.SyscallN(procIsValidCodePage.Addr(), uintptr(CodePage))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsValidLanguageGroup calls KERNEL32!IsValidLanguageGroup.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isvalidlanguagegroup
 // Minimum OS: windows5.0.
-func IsValidLanguageGroup(LanguageGroup uint32, dwFlags ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS) foundation.BOOL {
+func IsValidLanguageGroup(LanguageGroup uint32, dwFlags ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procIsValidLanguageGroup.Addr(), uintptr(LanguageGroup), uintptr(dwFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsValidLocale calls KERNEL32!IsValidLocale.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isvalidlocale
 // Minimum OS: windows5.0.
-func IsValidLocale(Locale uint32, dwFlags IS_VALID_LOCALE_FLAGS) foundation.BOOL {
+func IsValidLocale(Locale uint32, dwFlags IS_VALID_LOCALE_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procIsValidLocale.Addr(), uintptr(Locale), uintptr(dwFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsValidLocaleName calls KERNEL32!IsValidLocaleName.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isvalidlocalename
 // Minimum OS: windows6.0.6000.
-func IsValidLocaleName(lpLocaleName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIsValidLocaleName.Addr(), uintptr(unsafe.Pointer(lpLocaleName)))
-	return foundation.BOOL(r1)
+func IsValidLocaleName(lpLocaleName string) bool {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	r1, _, _ := syscall.SyscallN(procIsValidLocaleName.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)))
+	return r1 != 0
 }
 
 // IsValidNLSVersion calls KERNEL32!IsValidNLSVersion.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isvalidnlsversion
 // Minimum OS: windows8.0.
-func IsValidNLSVersion(function uint32, lpLocaleName foundation.PWSTR, lpVersionInformation *NLSVERSIONINFOEX) uint32 {
-	r1, _, _ := syscall.SyscallN(procIsValidNLSVersion.Addr(), uintptr(function), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(unsafe.Pointer(lpVersionInformation)))
+func IsValidNLSVersion(function uint32, lpLocaleName string, lpVersionInformation *NLSVERSIONINFOEX) uint32 {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	r1, _, _ := syscall.SyscallN(procIsValidNLSVersion.Addr(), uintptr(function), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(unsafe.Pointer(lpVersionInformation)))
 	return uint32(r1)
 }
 
 // IsWellFormedTag calls bcp47mrm!IsWellFormedTag.
 // https://learn.microsoft.com/windows/win32/api/bcp47mrm/nf-bcp47mrm-iswellformedtag
-func IsWellFormedTag(pszTag foundation.PWSTR) byte {
-	r1, _, _ := syscall.SyscallN(procIsWellFormedTag.Addr(), uintptr(unsafe.Pointer(pszTag)))
+func IsWellFormedTag(pszTag string) byte {
+	_pszTag := win32.UTF16Ptr(pszTag)
+	r1, _, _ := syscall.SyscallN(procIsWellFormedTag.Addr(), uintptr(unsafe.Pointer(_pszTag)))
 	return byte(r1)
 }
 
@@ -2386,6 +2452,18 @@ func IsWellFormedTag(pszTag foundation.PWSTR) byte {
 // Minimum OS: windows6.0.6000.
 func LCIDToLocaleName(Locale uint32, lpName foundation.PWSTR, cchName int32, dwFlags uint32) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procLCIDToLocaleName.Addr(), uintptr(Locale), uintptr(unsafe.Pointer(lpName)), uintptr(cchName), uintptr(dwFlags))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// LCMapString calls KERNEL32!LCMapStringW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-lcmapstringw
+// Minimum OS: windows5.0.
+func LCMapString(Locale uint32, dwMapFlags uint32, lpSrcStr string, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32) (int32, error) {
+	_lpSrcStr := win32.UTF16Ptr(lpSrcStr)
+	r1, _, e1 := syscall.SyscallN(procLCMapString.Addr(), uintptr(Locale), uintptr(dwMapFlags), uintptr(unsafe.Pointer(_lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpDestStr)), uintptr(cchDest))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2406,19 +2484,10 @@ func LCMapStringA(Locale uint32, dwMapFlags uint32, lpSrcStr foundation.PSTR, cc
 // LCMapStringEx calls KERNEL32!LCMapStringEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-lcmapstringex
 // Minimum OS: windows6.0.6000.
-func LCMapStringEx(lpLocaleName foundation.PWSTR, dwMapFlags uint32, lpSrcStr foundation.PWSTR, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32, lpVersionInformation *NLSVERSIONINFO, lpReserved unsafe.Pointer, sortHandle foundation.LPARAM) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procLCMapStringEx.Addr(), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(dwMapFlags), uintptr(unsafe.Pointer(lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpDestStr)), uintptr(cchDest), uintptr(unsafe.Pointer(lpVersionInformation)), uintptr(unsafe.Pointer(lpReserved)), uintptr(sortHandle))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// LCMapStringW calls KERNEL32!LCMapStringW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-lcmapstringw
-// Minimum OS: windows5.0.
-func LCMapStringW(Locale uint32, dwMapFlags uint32, lpSrcStr foundation.PWSTR, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procLCMapStringW.Addr(), uintptr(Locale), uintptr(dwMapFlags), uintptr(unsafe.Pointer(lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpDestStr)), uintptr(cchDest))
+func LCMapStringEx(lpLocaleName string, dwMapFlags uint32, lpSrcStr string, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
+	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+	_lpSrcStr := win32.UTF16Ptr(lpSrcStr)
+	r1, _, e1 := syscall.SyscallN(procLCMapStringEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwMapFlags), uintptr(unsafe.Pointer(_lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpDestStr)), uintptr(cchDest), uintptr(unsafe.Pointer(lpVersionInformation)), 0, uintptr(sortHandle))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2428,52 +2497,159 @@ func LCMapStringW(Locale uint32, dwMapFlags uint32, lpSrcStr foundation.PWSTR, c
 // LocaleNameToLCID calls KERNEL32!LocaleNameToLCID.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-localenametolcid
 // Minimum OS: windows6.0.6000.
-func LocaleNameToLCID(lpName foundation.PWSTR, dwFlags uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procLocaleNameToLCID.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(dwFlags))
+func LocaleNameToLCID(lpName string, dwFlags uint32) (uint32, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procLocaleNameToLCID.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(dwFlags))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
+// Lstrcat calls KERNEL32!lstrcatW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcatw
+// Minimum OS: windows5.0.
+func Lstrcat(lpString1 foundation.PWSTR, lpString2 string) foundation.PWSTR {
+	_lpString2 := win32.UTF16Ptr(lpString2)
+	r1, _, _ := syscall.SyscallN(procLstrcat.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(_lpString2)))
+	return foundation.PWSTR(unsafe.Pointer(r1))
+}
+
+// LstrcatA calls KERNEL32!lstrcatA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcata
+// Minimum OS: windows5.0.
+func LstrcatA(lpString1 foundation.PSTR, lpString2 foundation.PSTR) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procLstrcatA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Lstrcmp calls KERNEL32!lstrcmpW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcmpw
+// Minimum OS: windows5.0.
+func Lstrcmp(lpString1 string, lpString2 string) int32 {
+	_lpString1 := win32.UTF16Ptr(lpString1)
+	_lpString2 := win32.UTF16Ptr(lpString2)
+	r1, _, _ := syscall.SyscallN(procLstrcmp.Addr(), uintptr(unsafe.Pointer(_lpString1)), uintptr(unsafe.Pointer(_lpString2)))
+	return int32(r1)
+}
+
+// LstrcmpA calls KERNEL32!lstrcmpA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcmpa
+// Minimum OS: windows5.0.
+func LstrcmpA(lpString1 foundation.PSTR, lpString2 foundation.PSTR) int32 {
+	r1, _, _ := syscall.SyscallN(procLstrcmpA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
+	return int32(r1)
+}
+
+// Lstrcmpi calls KERNEL32!lstrcmpiW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcmpiw
+// Minimum OS: windows5.0.
+func Lstrcmpi(lpString1 string, lpString2 string) int32 {
+	_lpString1 := win32.UTF16Ptr(lpString1)
+	_lpString2 := win32.UTF16Ptr(lpString2)
+	r1, _, _ := syscall.SyscallN(procLstrcmpi.Addr(), uintptr(unsafe.Pointer(_lpString1)), uintptr(unsafe.Pointer(_lpString2)))
+	return int32(r1)
+}
+
+// LstrcmpiA calls KERNEL32!lstrcmpiA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcmpia
+// Minimum OS: windows5.0.
+func LstrcmpiA(lpString1 foundation.PSTR, lpString2 foundation.PSTR) int32 {
+	r1, _, _ := syscall.SyscallN(procLstrcmpiA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
+	return int32(r1)
+}
+
+// Lstrcpy calls KERNEL32!lstrcpyW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcpyw
+// Minimum OS: windows5.0.
+func Lstrcpy(lpString1 foundation.PWSTR, lpString2 string) foundation.PWSTR {
+	_lpString2 := win32.UTF16Ptr(lpString2)
+	r1, _, _ := syscall.SyscallN(procLstrcpy.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(_lpString2)))
+	return foundation.PWSTR(unsafe.Pointer(r1))
+}
+
+// LstrcpyA calls KERNEL32!lstrcpyA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcpya
+// Minimum OS: windows5.0.
+func LstrcpyA(lpString1 foundation.PSTR, lpString2 foundation.PSTR) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procLstrcpyA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Lstrcpyn calls KERNEL32!lstrcpynW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcpynw
+// Minimum OS: windows5.0.
+func Lstrcpyn(lpString1 foundation.PWSTR, lpString2 string, iMaxLength int32) foundation.PWSTR {
+	_lpString2 := win32.UTF16Ptr(lpString2)
+	r1, _, _ := syscall.SyscallN(procLstrcpyn.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(_lpString2)), uintptr(iMaxLength))
+	return foundation.PWSTR(unsafe.Pointer(r1))
+}
+
+// LstrcpynA calls KERNEL32!lstrcpynA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcpyna
+// Minimum OS: windows5.0.
+func LstrcpynA(lpString1 foundation.PSTR, lpString2 foundation.PSTR, iMaxLength int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procLstrcpynA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)), uintptr(iMaxLength))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Lstrlen calls KERNEL32!lstrlenW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrlenw
+// Minimum OS: windows5.0.
+func Lstrlen(lpString string) int32 {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, _ := syscall.SyscallN(procLstrlen.Addr(), uintptr(unsafe.Pointer(_lpString)))
+	return int32(r1)
+}
+
+// LstrlenA calls KERNEL32!lstrlenA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrlena
+// Minimum OS: windows5.0.
+func LstrlenA(lpString foundation.PSTR) int32 {
+	r1, _, _ := syscall.SyscallN(procLstrlenA.Addr(), uintptr(unsafe.Pointer(lpString)))
+	return int32(r1)
+}
+
 // MappingDoAction calls elscore!MappingDoAction.
 // https://learn.microsoft.com/windows/win32/api/elscore/nf-elscore-mappingdoaction
 // Minimum OS: windows6.1.
-func MappingDoAction(pBag *MAPPING_PROPERTY_BAG, dwRangeIndex uint32, pszActionId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMappingDoAction.Addr(), uintptr(unsafe.Pointer(pBag)), uintptr(dwRangeIndex), uintptr(unsafe.Pointer(pszActionId)))
-	return foundation.HRESULT(r1)
+func MappingDoAction(pBag *MAPPING_PROPERTY_BAG, dwRangeIndex uint32, pszActionId string) error {
+	_pszActionId := win32.UTF16Ptr(pszActionId)
+	r1, _, _ := syscall.SyscallN(procMappingDoAction.Addr(), uintptr(unsafe.Pointer(pBag)), uintptr(dwRangeIndex), uintptr(unsafe.Pointer(_pszActionId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MappingFreePropertyBag calls elscore!MappingFreePropertyBag.
 // https://learn.microsoft.com/windows/win32/api/elscore/nf-elscore-mappingfreepropertybag
 // Minimum OS: windows6.1.
-func MappingFreePropertyBag(pBag *MAPPING_PROPERTY_BAG) foundation.HRESULT {
+func MappingFreePropertyBag(pBag *MAPPING_PROPERTY_BAG) error {
 	r1, _, _ := syscall.SyscallN(procMappingFreePropertyBag.Addr(), uintptr(unsafe.Pointer(pBag)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MappingFreeServices calls elscore!MappingFreeServices.
 // https://learn.microsoft.com/windows/win32/api/elscore/nf-elscore-mappingfreeservices
 // Minimum OS: windows6.1.
-func MappingFreeServices(pServiceInfo *MAPPING_SERVICE_INFO) foundation.HRESULT {
+func MappingFreeServices(pServiceInfo *MAPPING_SERVICE_INFO) error {
 	r1, _, _ := syscall.SyscallN(procMappingFreeServices.Addr(), uintptr(unsafe.Pointer(pServiceInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MappingGetServices calls elscore!MappingGetServices.
 // https://learn.microsoft.com/windows/win32/api/elscore/nf-elscore-mappinggetservices
 // Minimum OS: windows6.1.
-func MappingGetServices(pOptions *MAPPING_ENUM_OPTIONS, prgServices **MAPPING_SERVICE_INFO, pdwServicesCount *uint32) foundation.HRESULT {
+func MappingGetServices(pOptions *MAPPING_ENUM_OPTIONS, prgServices **MAPPING_SERVICE_INFO, pdwServicesCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMappingGetServices.Addr(), uintptr(unsafe.Pointer(pOptions)), uintptr(unsafe.Pointer(prgServices)), uintptr(unsafe.Pointer(pdwServicesCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MappingRecognizeText calls elscore!MappingRecognizeText.
 // https://learn.microsoft.com/windows/win32/api/elscore/nf-elscore-mappingrecognizetext
 // Minimum OS: windows6.1.
-func MappingRecognizeText(pServiceInfo *MAPPING_SERVICE_INFO, pszText foundation.PWSTR, dwLength uint32, dwIndex uint32, pOptions *MAPPING_OPTIONS, pbag *MAPPING_PROPERTY_BAG) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMappingRecognizeText.Addr(), uintptr(unsafe.Pointer(pServiceInfo)), uintptr(unsafe.Pointer(pszText)), uintptr(dwLength), uintptr(dwIndex), uintptr(unsafe.Pointer(pOptions)), uintptr(unsafe.Pointer(pbag)))
-	return foundation.HRESULT(r1)
+func MappingRecognizeText(pServiceInfo *MAPPING_SERVICE_INFO, pszText string, dwLength uint32, dwIndex uint32, pOptions *MAPPING_OPTIONS, pbag *MAPPING_PROPERTY_BAG) error {
+	_pszText := win32.UTF16Ptr(pszText)
+	r1, _, _ := syscall.SyscallN(procMappingRecognizeText.Addr(), uintptr(unsafe.Pointer(pServiceInfo)), uintptr(unsafe.Pointer(_pszText)), uintptr(dwLength), uintptr(dwIndex), uintptr(unsafe.Pointer(pOptions)), uintptr(unsafe.Pointer(pbag)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MultiByteToWideChar calls KERNEL32!MultiByteToWideChar.
@@ -2490,8 +2666,9 @@ func MultiByteToWideChar(CodePage uint32, dwFlags MULTI_BYTE_TO_WIDE_CHAR_FLAGS,
 // NormalizeString calls KERNEL32!NormalizeString.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-normalizestring
 // Minimum OS: windows6.0.6000.
-func NormalizeString(NormForm NORM_FORM, lpSrcString foundation.PWSTR, cwSrcLength int32, lpDstString foundation.PWSTR, cwDstLength int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procNormalizeString.Addr(), uintptr(NormForm), uintptr(unsafe.Pointer(lpSrcString)), uintptr(cwSrcLength), uintptr(unsafe.Pointer(lpDstString)), uintptr(cwDstLength))
+func NormalizeString(NormForm NORM_FORM, lpSrcString string, cwSrcLength int32, lpDstString foundation.PWSTR, cwDstLength int32) (int32, error) {
+	_lpSrcString := win32.UTF16Ptr(lpSrcString)
+	r1, _, e1 := syscall.SyscallN(procNormalizeString.Addr(), uintptr(NormForm), uintptr(unsafe.Pointer(_lpSrcString)), uintptr(cwSrcLength), uintptr(unsafe.Pointer(lpDstString)), uintptr(cwDstLength))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2501,16 +2678,19 @@ func NormalizeString(NormForm NORM_FORM, lpSrcString foundation.PWSTR, cwSrcLeng
 // NotifyUILanguageChange calls KERNEL32!NotifyUILanguageChange.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-notifyuilanguagechange
 // Minimum OS: windows6.1.
-func NotifyUILanguageChange(dwFlags uint32, pcwstrNewLanguage foundation.PWSTR, pcwstrPreviousLanguage foundation.PWSTR, dwReserved uint32, pdwStatusRtrn *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procNotifyUILanguageChange.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pcwstrNewLanguage)), uintptr(unsafe.Pointer(pcwstrPreviousLanguage)), uintptr(dwReserved), uintptr(unsafe.Pointer(pdwStatusRtrn)))
-	return foundation.BOOL(r1)
+func NotifyUILanguageChange(dwFlags uint32, pcwstrNewLanguage string, pcwstrPreviousLanguage string, pdwStatusRtrn *uint32) bool {
+	_pcwstrNewLanguage := win32.UTF16Ptr(pcwstrNewLanguage)
+	_pcwstrPreviousLanguage := win32.UTF16Ptr(pcwstrPreviousLanguage)
+	r1, _, _ := syscall.SyscallN(procNotifyUILanguageChange.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pcwstrNewLanguage)), uintptr(unsafe.Pointer(_pcwstrPreviousLanguage)), 0, uintptr(unsafe.Pointer(pdwStatusRtrn)))
+	return r1 != 0
 }
 
 // ResolveLocaleName calls KERNEL32!ResolveLocaleName.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-resolvelocalename
 // Minimum OS: windows6.1.
-func ResolveLocaleName(lpNameToResolve foundation.PWSTR, lpLocaleName foundation.PWSTR, cchLocaleName int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procResolveLocaleName.Addr(), uintptr(unsafe.Pointer(lpNameToResolve)), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(cchLocaleName))
+func ResolveLocaleName(lpNameToResolve string, lpLocaleName foundation.PWSTR, cchLocaleName int32) (int32, error) {
+	_lpNameToResolve := win32.UTF16Ptr(lpNameToResolve)
+	r1, _, e1 := syscall.SyscallN(procResolveLocaleName.Addr(), uintptr(unsafe.Pointer(_lpNameToResolve)), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(cchLocaleName))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2525,265 +2705,300 @@ func RestoreThreadPreferredUILanguages(snapshot HSAVEDUILANGUAGES) {
 // ScriptApplyDigitSubstitution calls USP10!ScriptApplyDigitSubstitution.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptapplydigitsubstitution
 // Minimum OS: windows5.0.
-func ScriptApplyDigitSubstitution(psds *SCRIPT_DIGITSUBSTITUTE, psc *SCRIPT_CONTROL, pss *SCRIPT_STATE) foundation.HRESULT {
+func ScriptApplyDigitSubstitution(psds *SCRIPT_DIGITSUBSTITUTE, psc *SCRIPT_CONTROL, pss *SCRIPT_STATE) error {
 	r1, _, _ := syscall.SyscallN(procScriptApplyDigitSubstitution.Addr(), uintptr(unsafe.Pointer(psds)), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(pss)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptApplyLogicalWidth calls USP10!ScriptApplyLogicalWidth.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptapplylogicalwidth
 // Minimum OS: windows5.0.
-func ScriptApplyLogicalWidth(piDx *int32, cChars int32, cGlyphs int32, pwLogClust *uint16, psva *SCRIPT_VISATTR, piAdvance *int32, psa *SCRIPT_ANALYSIS, pABC *graphicsgdi.ABC, piJustify *int32) foundation.HRESULT {
+func ScriptApplyLogicalWidth(piDx *int32, cChars int32, cGlyphs int32, pwLogClust *uint16, psva *SCRIPT_VISATTR, piAdvance *int32, psa *SCRIPT_ANALYSIS, pABC *graphicsgdi.ABC, piJustify *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptApplyLogicalWidth.Addr(), uintptr(unsafe.Pointer(piDx)), uintptr(cChars), uintptr(cGlyphs), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(pABC)), uintptr(unsafe.Pointer(piJustify)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptBreak calls USP10!ScriptBreak.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptbreak
 // Minimum OS: windows5.0.
-func ScriptBreak(pwcChars foundation.PWSTR, cChars int32, psa *SCRIPT_ANALYSIS, psla *SCRIPT_LOGATTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptBreak.Addr(), uintptr(unsafe.Pointer(pwcChars)), uintptr(cChars), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(psla)))
-	return foundation.HRESULT(r1)
+func ScriptBreak(pwcChars string, cChars int32, psa *SCRIPT_ANALYSIS, psla *SCRIPT_LOGATTR) error {
+	_pwcChars := win32.UTF16Ptr(pwcChars)
+	r1, _, _ := syscall.SyscallN(procScriptBreak.Addr(), uintptr(unsafe.Pointer(_pwcChars)), uintptr(cChars), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(psla)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptCPtoX calls USP10!ScriptCPtoX.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptcptox
 // Minimum OS: windows5.0.
-func ScriptCPtoX(iCP int32, fTrailing foundation.BOOL, cChars int32, cGlyphs int32, pwLogClust *uint16, psva *SCRIPT_VISATTR, piAdvance *int32, psa *SCRIPT_ANALYSIS, piX *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptCPtoX.Addr(), uintptr(iCP), uintptr(fTrailing), uintptr(cChars), uintptr(cGlyphs), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(piX)))
-	return foundation.HRESULT(r1)
+func ScriptCPtoX(iCP int32, fTrailing bool, cGlyphs int32, pwLogClust []uint16, psva *SCRIPT_VISATTR, piAdvance *int32, psa *SCRIPT_ANALYSIS, piX *int32) error {
+	_fTrailing := win32.Bool32(fTrailing)
+	var _pwLogClust *uint16
+	if len(pwLogClust) > 0 {
+		_pwLogClust = &pwLogClust[0]
+	}
+	r1, _, _ := syscall.SyscallN(procScriptCPtoX.Addr(), uintptr(iCP), uintptr(_fTrailing), uintptr(len(pwLogClust)), uintptr(cGlyphs), uintptr(unsafe.Pointer(_pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(piX)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptCacheGetHeight calls USP10!ScriptCacheGetHeight.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptcachegetheight
 // Minimum OS: windows5.0.
-func ScriptCacheGetHeight(hdc graphicsgdi.HDC, psc *unsafe.Pointer, tmHeight *int32) foundation.HRESULT {
+func ScriptCacheGetHeight(hdc graphicsgdi.HDC, psc *unsafe.Pointer, tmHeight *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptCacheGetHeight.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(tmHeight)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptFreeCache calls USP10!ScriptFreeCache.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptfreecache
 // Minimum OS: windows5.0.
-func ScriptFreeCache(psc *unsafe.Pointer) foundation.HRESULT {
+func ScriptFreeCache(psc *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procScriptFreeCache.Addr(), uintptr(unsafe.Pointer(psc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptGetCMap calls USP10!ScriptGetCMap.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetcmap
 // Minimum OS: windows5.0.
-func ScriptGetCMap(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwcInChars foundation.PWSTR, cChars int32, dwFlags uint32, pwOutGlyphs *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptGetCMap.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(pwcInChars)), uintptr(cChars), uintptr(dwFlags), uintptr(unsafe.Pointer(pwOutGlyphs)))
-	return foundation.HRESULT(r1)
+func ScriptGetCMap(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwcInChars string, cChars int32, dwFlags uint32, pwOutGlyphs *uint16) error {
+	_pwcInChars := win32.UTF16Ptr(pwcInChars)
+	r1, _, _ := syscall.SyscallN(procScriptGetCMap.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(_pwcInChars)), uintptr(cChars), uintptr(dwFlags), uintptr(unsafe.Pointer(pwOutGlyphs)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptGetFontAlternateGlyphs calls USP10!ScriptGetFontAlternateGlyphs.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetfontalternateglyphs
 // Minimum OS: windows6.0.6000.
-func ScriptGetFontAlternateGlyphs(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, tagFeature uint32, wGlyphId uint16, cMaxAlternates int32, pAlternateGlyphs *uint16, pcAlternates *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptGetFontAlternateGlyphs.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(tagFeature), uintptr(wGlyphId), uintptr(cMaxAlternates), uintptr(unsafe.Pointer(pAlternateGlyphs)), uintptr(unsafe.Pointer(pcAlternates)))
-	return foundation.HRESULT(r1)
+func ScriptGetFontAlternateGlyphs(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, tagFeature uint32, wGlyphId uint16, pAlternateGlyphs []uint16, pcAlternates *int32) error {
+	var _pAlternateGlyphs *uint16
+	if len(pAlternateGlyphs) > 0 {
+		_pAlternateGlyphs = &pAlternateGlyphs[0]
+	}
+	r1, _, _ := syscall.SyscallN(procScriptGetFontAlternateGlyphs.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(tagFeature), uintptr(wGlyphId), uintptr(len(pAlternateGlyphs)), uintptr(unsafe.Pointer(_pAlternateGlyphs)), uintptr(unsafe.Pointer(pcAlternates)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptGetFontFeatureTags calls USP10!ScriptGetFontFeatureTags.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetfontfeaturetags
 // Minimum OS: windows6.0.6000.
-func ScriptGetFontFeatureTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, cMaxTags int32, pFeatureTags *uint32, pcTags *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptGetFontFeatureTags.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(cMaxTags), uintptr(unsafe.Pointer(pFeatureTags)), uintptr(unsafe.Pointer(pcTags)))
-	return foundation.HRESULT(r1)
+func ScriptGetFontFeatureTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, pFeatureTags []uint32, pcTags *int32) error {
+	var _pFeatureTags *uint32
+	if len(pFeatureTags) > 0 {
+		_pFeatureTags = &pFeatureTags[0]
+	}
+	r1, _, _ := syscall.SyscallN(procScriptGetFontFeatureTags.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(len(pFeatureTags)), uintptr(unsafe.Pointer(_pFeatureTags)), uintptr(unsafe.Pointer(pcTags)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptGetFontLanguageTags calls USP10!ScriptGetFontLanguageTags.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetfontlanguagetags
 // Minimum OS: windows6.0.6000.
-func ScriptGetFontLanguageTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, cMaxTags int32, pLangsysTags *uint32, pcTags *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptGetFontLanguageTags.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(cMaxTags), uintptr(unsafe.Pointer(pLangsysTags)), uintptr(unsafe.Pointer(pcTags)))
-	return foundation.HRESULT(r1)
+func ScriptGetFontLanguageTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, pLangsysTags []uint32, pcTags *int32) error {
+	var _pLangsysTags *uint32
+	if len(pLangsysTags) > 0 {
+		_pLangsysTags = &pLangsysTags[0]
+	}
+	r1, _, _ := syscall.SyscallN(procScriptGetFontLanguageTags.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(len(pLangsysTags)), uintptr(unsafe.Pointer(_pLangsysTags)), uintptr(unsafe.Pointer(pcTags)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptGetFontProperties calls USP10!ScriptGetFontProperties.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetfontproperties
 // Minimum OS: windows5.0.
-func ScriptGetFontProperties(hdc graphicsgdi.HDC, psc *unsafe.Pointer, sfp *SCRIPT_FONTPROPERTIES) foundation.HRESULT {
+func ScriptGetFontProperties(hdc graphicsgdi.HDC, psc *unsafe.Pointer, sfp *SCRIPT_FONTPROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procScriptGetFontProperties.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(sfp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptGetFontScriptTags calls USP10!ScriptGetFontScriptTags.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetfontscripttags
 // Minimum OS: windows6.0.6000.
-func ScriptGetFontScriptTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, cMaxTags int32, pScriptTags *uint32, pcTags *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptGetFontScriptTags.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(cMaxTags), uintptr(unsafe.Pointer(pScriptTags)), uintptr(unsafe.Pointer(pcTags)))
-	return foundation.HRESULT(r1)
+func ScriptGetFontScriptTags(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, pScriptTags []uint32, pcTags *int32) error {
+	var _pScriptTags *uint32
+	if len(pScriptTags) > 0 {
+		_pScriptTags = &pScriptTags[0]
+	}
+	r1, _, _ := syscall.SyscallN(procScriptGetFontScriptTags.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(len(pScriptTags)), uintptr(unsafe.Pointer(_pScriptTags)), uintptr(unsafe.Pointer(pcTags)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptGetGlyphABCWidth calls USP10!ScriptGetGlyphABCWidth.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetglyphabcwidth
 // Minimum OS: windows5.0.
-func ScriptGetGlyphABCWidth(hdc graphicsgdi.HDC, psc *unsafe.Pointer, wGlyph uint16, pABC *graphicsgdi.ABC) foundation.HRESULT {
+func ScriptGetGlyphABCWidth(hdc graphicsgdi.HDC, psc *unsafe.Pointer, wGlyph uint16, pABC *graphicsgdi.ABC) error {
 	r1, _, _ := syscall.SyscallN(procScriptGetGlyphABCWidth.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(wGlyph), uintptr(unsafe.Pointer(pABC)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptGetLogicalWidths calls USP10!ScriptGetLogicalWidths.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetlogicalwidths
 // Minimum OS: windows5.0.
-func ScriptGetLogicalWidths(psa *SCRIPT_ANALYSIS, cChars int32, cGlyphs int32, piGlyphWidth *int32, pwLogClust *uint16, psva *SCRIPT_VISATTR, piDx *int32) foundation.HRESULT {
+func ScriptGetLogicalWidths(psa *SCRIPT_ANALYSIS, cChars int32, cGlyphs int32, piGlyphWidth *int32, pwLogClust *uint16, psva *SCRIPT_VISATTR, piDx *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptGetLogicalWidths.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(cChars), uintptr(cGlyphs), uintptr(unsafe.Pointer(piGlyphWidth)), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piDx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptGetProperties calls USP10!ScriptGetProperties.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptgetproperties
 // Minimum OS: windows5.0.
-func ScriptGetProperties(ppSp ***SCRIPT_PROPERTIES, piNumScripts *int32) foundation.HRESULT {
+func ScriptGetProperties(ppSp ***SCRIPT_PROPERTIES, piNumScripts *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptGetProperties.Addr(), uintptr(unsafe.Pointer(ppSp)), uintptr(unsafe.Pointer(piNumScripts)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptIsComplex calls USP10!ScriptIsComplex.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptiscomplex
 // Minimum OS: windows5.0.
-func ScriptIsComplex(pwcInChars foundation.PWSTR, cInChars int32, dwFlags SCRIPT_IS_COMPLEX_FLAGS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptIsComplex.Addr(), uintptr(unsafe.Pointer(pwcInChars)), uintptr(cInChars), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func ScriptIsComplex(pwcInChars string, cInChars int32, dwFlags SCRIPT_IS_COMPLEX_FLAGS) error {
+	_pwcInChars := win32.UTF16Ptr(pwcInChars)
+	r1, _, _ := syscall.SyscallN(procScriptIsComplex.Addr(), uintptr(unsafe.Pointer(_pwcInChars)), uintptr(cInChars), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptItemize calls USP10!ScriptItemize.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptitemize
 // Minimum OS: windows5.0.
-func ScriptItemize(pwcInChars foundation.PWSTR, cInChars int32, cMaxItems int32, psControl *SCRIPT_CONTROL, psState *SCRIPT_STATE, pItems *SCRIPT_ITEM, pcItems *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptItemize.Addr(), uintptr(unsafe.Pointer(pwcInChars)), uintptr(cInChars), uintptr(cMaxItems), uintptr(unsafe.Pointer(psControl)), uintptr(unsafe.Pointer(psState)), uintptr(unsafe.Pointer(pItems)), uintptr(unsafe.Pointer(pcItems)))
-	return foundation.HRESULT(r1)
+func ScriptItemize(pwcInChars string, cInChars int32, psControl *SCRIPT_CONTROL, psState *SCRIPT_STATE, pItems []SCRIPT_ITEM, pcItems *int32) error {
+	_pwcInChars := win32.UTF16Ptr(pwcInChars)
+	var _pItems *SCRIPT_ITEM
+	if len(pItems) > 0 {
+		_pItems = &pItems[0]
+	}
+	r1, _, _ := syscall.SyscallN(procScriptItemize.Addr(), uintptr(unsafe.Pointer(_pwcInChars)), uintptr(cInChars), uintptr(len(pItems)), uintptr(unsafe.Pointer(psControl)), uintptr(unsafe.Pointer(psState)), uintptr(unsafe.Pointer(_pItems)), uintptr(unsafe.Pointer(pcItems)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptItemizeOpenType calls USP10!ScriptItemizeOpenType.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptitemizeopentype
 // Minimum OS: windows6.0.6000.
-func ScriptItemizeOpenType(pwcInChars foundation.PWSTR, cInChars int32, cMaxItems int32, psControl *SCRIPT_CONTROL, psState *SCRIPT_STATE, pItems *SCRIPT_ITEM, pScriptTags *uint32, pcItems *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptItemizeOpenType.Addr(), uintptr(unsafe.Pointer(pwcInChars)), uintptr(cInChars), uintptr(cMaxItems), uintptr(unsafe.Pointer(psControl)), uintptr(unsafe.Pointer(psState)), uintptr(unsafe.Pointer(pItems)), uintptr(unsafe.Pointer(pScriptTags)), uintptr(unsafe.Pointer(pcItems)))
-	return foundation.HRESULT(r1)
+func ScriptItemizeOpenType(pwcInChars string, cInChars int32, cMaxItems int32, psControl *SCRIPT_CONTROL, psState *SCRIPT_STATE, pItems *SCRIPT_ITEM, pScriptTags *uint32, pcItems *int32) error {
+	_pwcInChars := win32.UTF16Ptr(pwcInChars)
+	r1, _, _ := syscall.SyscallN(procScriptItemizeOpenType.Addr(), uintptr(unsafe.Pointer(_pwcInChars)), uintptr(cInChars), uintptr(cMaxItems), uintptr(unsafe.Pointer(psControl)), uintptr(unsafe.Pointer(psState)), uintptr(unsafe.Pointer(pItems)), uintptr(unsafe.Pointer(pScriptTags)), uintptr(unsafe.Pointer(pcItems)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptJustify calls USP10!ScriptJustify.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptjustify
 // Minimum OS: windows5.0.
-func ScriptJustify(psva *SCRIPT_VISATTR, piAdvance *int32, cGlyphs int32, iDx int32, iMinKashida int32, piJustify *int32) foundation.HRESULT {
+func ScriptJustify(psva *SCRIPT_VISATTR, piAdvance *int32, cGlyphs int32, iDx int32, iMinKashida int32, piJustify *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptJustify.Addr(), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(cGlyphs), uintptr(iDx), uintptr(iMinKashida), uintptr(unsafe.Pointer(piJustify)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptLayout calls USP10!ScriptLayout.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptlayout
 // Minimum OS: windows5.0.
-func ScriptLayout(cRuns int32, pbLevel *byte, piVisualToLogical *int32, piLogicalToVisual *int32) foundation.HRESULT {
+func ScriptLayout(cRuns int32, pbLevel *byte, piVisualToLogical *int32, piLogicalToVisual *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptLayout.Addr(), uintptr(cRuns), uintptr(unsafe.Pointer(pbLevel)), uintptr(unsafe.Pointer(piVisualToLogical)), uintptr(unsafe.Pointer(piLogicalToVisual)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptPlace calls USP10!ScriptPlace.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptplace
 // Minimum OS: windows5.0.
-func ScriptPlace(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwGlyphs *uint16, cGlyphs int32, psva *SCRIPT_VISATTR, psa *SCRIPT_ANALYSIS, piAdvance *int32, pGoffset *GOFFSET, pABC *graphicsgdi.ABC) foundation.HRESULT {
+func ScriptPlace(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwGlyphs *uint16, cGlyphs int32, psva *SCRIPT_VISATTR, psa *SCRIPT_ANALYSIS, piAdvance *int32, pGoffset *GOFFSET, pABC *graphicsgdi.ABC) error {
 	r1, _, _ := syscall.SyscallN(procScriptPlace.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(pwGlyphs)), uintptr(cGlyphs), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(pGoffset)), uintptr(unsafe.Pointer(pABC)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptPlaceOpenType calls USP10!ScriptPlaceOpenType.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptplaceopentype
 // Minimum OS: windows6.0.6000.
-func ScriptPlaceOpenType(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, rcRangeChars *int32, rpRangeProperties **TEXTRANGE_PROPERTIES, cRanges int32, pwcChars foundation.PWSTR, pwLogClust *uint16, pCharProps *SCRIPT_CHARPROP, cChars int32, pwGlyphs *uint16, pGlyphProps *SCRIPT_GLYPHPROP, cGlyphs int32, piAdvance *int32, pGoffset *GOFFSET, pABC *graphicsgdi.ABC) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptPlaceOpenType.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(unsafe.Pointer(rcRangeChars)), uintptr(unsafe.Pointer(rpRangeProperties)), uintptr(cRanges), uintptr(unsafe.Pointer(pwcChars)), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(pCharProps)), uintptr(cChars), uintptr(unsafe.Pointer(pwGlyphs)), uintptr(unsafe.Pointer(pGlyphProps)), uintptr(cGlyphs), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(pGoffset)), uintptr(unsafe.Pointer(pABC)))
-	return foundation.HRESULT(r1)
+func ScriptPlaceOpenType(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, rcRangeChars *int32, rpRangeProperties **TEXTRANGE_PROPERTIES, cRanges int32, pwcChars string, pwLogClust *uint16, pCharProps *SCRIPT_CHARPROP, cChars int32, pwGlyphs *uint16, pGlyphProps *SCRIPT_GLYPHPROP, cGlyphs int32, piAdvance *int32, pGoffset *GOFFSET, pABC *graphicsgdi.ABC) error {
+	_pwcChars := win32.UTF16Ptr(pwcChars)
+	r1, _, _ := syscall.SyscallN(procScriptPlaceOpenType.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(unsafe.Pointer(rcRangeChars)), uintptr(unsafe.Pointer(rpRangeProperties)), uintptr(cRanges), uintptr(unsafe.Pointer(_pwcChars)), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(pCharProps)), uintptr(cChars), uintptr(unsafe.Pointer(pwGlyphs)), uintptr(unsafe.Pointer(pGlyphProps)), uintptr(cGlyphs), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(pGoffset)), uintptr(unsafe.Pointer(pABC)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptRecordDigitSubstitution calls USP10!ScriptRecordDigitSubstitution.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptrecorddigitsubstitution
 // Minimum OS: windows5.0.
-func ScriptRecordDigitSubstitution(Locale uint32, psds *SCRIPT_DIGITSUBSTITUTE) foundation.HRESULT {
+func ScriptRecordDigitSubstitution(Locale uint32, psds *SCRIPT_DIGITSUBSTITUTE) error {
 	r1, _, _ := syscall.SyscallN(procScriptRecordDigitSubstitution.Addr(), uintptr(Locale), uintptr(unsafe.Pointer(psds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptShape calls USP10!ScriptShape.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptshape
 // Minimum OS: windows5.0.
-func ScriptShape(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwcChars foundation.PWSTR, cChars int32, cMaxGlyphs int32, psa *SCRIPT_ANALYSIS, pwOutGlyphs *uint16, pwLogClust *uint16, psva *SCRIPT_VISATTR, pcGlyphs *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptShape.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(pwcChars)), uintptr(cChars), uintptr(cMaxGlyphs), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(pwOutGlyphs)), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(pcGlyphs)))
-	return foundation.HRESULT(r1)
+func ScriptShape(hdc graphicsgdi.HDC, psc *unsafe.Pointer, pwcChars string, cChars int32, cMaxGlyphs int32, psa *SCRIPT_ANALYSIS, pwOutGlyphs *uint16, pwLogClust *uint16, psva *SCRIPT_VISATTR, pcGlyphs *int32) error {
+	_pwcChars := win32.UTF16Ptr(pwcChars)
+	r1, _, _ := syscall.SyscallN(procScriptShape.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(_pwcChars)), uintptr(cChars), uintptr(cMaxGlyphs), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(pwOutGlyphs)), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(pcGlyphs)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptShapeOpenType calls USP10!ScriptShapeOpenType.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptshapeopentype
 // Minimum OS: windows6.0.6000.
-func ScriptShapeOpenType(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, rcRangeChars *int32, rpRangeProperties **TEXTRANGE_PROPERTIES, cRanges int32, pwcChars foundation.PWSTR, cChars int32, cMaxGlyphs int32, pwLogClust *uint16, pCharProps *SCRIPT_CHARPROP, pwOutGlyphs *uint16, pOutGlyphProps *SCRIPT_GLYPHPROP, pcGlyphs *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptShapeOpenType.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(unsafe.Pointer(rcRangeChars)), uintptr(unsafe.Pointer(rpRangeProperties)), uintptr(cRanges), uintptr(unsafe.Pointer(pwcChars)), uintptr(cChars), uintptr(cMaxGlyphs), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(pCharProps)), uintptr(unsafe.Pointer(pwOutGlyphs)), uintptr(unsafe.Pointer(pOutGlyphProps)), uintptr(unsafe.Pointer(pcGlyphs)))
-	return foundation.HRESULT(r1)
+func ScriptShapeOpenType(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, rcRangeChars *int32, rpRangeProperties **TEXTRANGE_PROPERTIES, cRanges int32, pwcChars string, cChars int32, cMaxGlyphs int32, pwLogClust *uint16, pCharProps *SCRIPT_CHARPROP, pwOutGlyphs *uint16, pOutGlyphProps *SCRIPT_GLYPHPROP, pcGlyphs *int32) error {
+	_pwcChars := win32.UTF16Ptr(pwcChars)
+	r1, _, _ := syscall.SyscallN(procScriptShapeOpenType.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(unsafe.Pointer(rcRangeChars)), uintptr(unsafe.Pointer(rpRangeProperties)), uintptr(cRanges), uintptr(unsafe.Pointer(_pwcChars)), uintptr(cChars), uintptr(cMaxGlyphs), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(pCharProps)), uintptr(unsafe.Pointer(pwOutGlyphs)), uintptr(unsafe.Pointer(pOutGlyphProps)), uintptr(unsafe.Pointer(pcGlyphs)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptStringAnalyse calls USP10!ScriptStringAnalyse.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptstringanalyse
 // Minimum OS: windows5.0.
-func ScriptStringAnalyse(hdc graphicsgdi.HDC, pString unsafe.Pointer, cString int32, cGlyphs int32, iCharset int32, dwFlags uint32, iReqWidth int32, psControl *SCRIPT_CONTROL, psState *SCRIPT_STATE, piDx *int32, pTabdef *SCRIPT_TABDEF, pbInClass *byte, pssa *unsafe.Pointer) foundation.HRESULT {
+func ScriptStringAnalyse(hdc graphicsgdi.HDC, pString unsafe.Pointer, cString int32, cGlyphs int32, iCharset int32, dwFlags uint32, iReqWidth int32, psControl *SCRIPT_CONTROL, psState *SCRIPT_STATE, piDx *int32, pTabdef *SCRIPT_TABDEF, pbInClass *byte, pssa *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringAnalyse.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pString)), uintptr(cString), uintptr(cGlyphs), uintptr(iCharset), uintptr(dwFlags), uintptr(iReqWidth), uintptr(unsafe.Pointer(psControl)), uintptr(unsafe.Pointer(psState)), uintptr(unsafe.Pointer(piDx)), uintptr(unsafe.Pointer(pTabdef)), uintptr(unsafe.Pointer(pbInClass)), uintptr(unsafe.Pointer(pssa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptStringCPtoX calls USP10!ScriptStringCPtoX.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptstringcptox
 // Minimum OS: windows5.0.
-func ScriptStringCPtoX(ssa unsafe.Pointer, icp int32, fTrailing foundation.BOOL, pX *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptStringCPtoX.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(icp), uintptr(fTrailing), uintptr(unsafe.Pointer(pX)))
-	return foundation.HRESULT(r1)
+func ScriptStringCPtoX(ssa unsafe.Pointer, icp int32, fTrailing bool, pX *int32) error {
+	_fTrailing := win32.Bool32(fTrailing)
+	r1, _, _ := syscall.SyscallN(procScriptStringCPtoX.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(icp), uintptr(_fTrailing), uintptr(unsafe.Pointer(pX)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptStringFree calls USP10!ScriptStringFree.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptstringfree
 // Minimum OS: windows5.0.
-func ScriptStringFree(pssa *unsafe.Pointer) foundation.HRESULT {
+func ScriptStringFree(pssa *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringFree.Addr(), uintptr(unsafe.Pointer(pssa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptStringGetLogicalWidths calls USP10!ScriptStringGetLogicalWidths.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptstringgetlogicalwidths
 // Minimum OS: windows5.0.
-func ScriptStringGetLogicalWidths(ssa unsafe.Pointer, piDx *int32) foundation.HRESULT {
+func ScriptStringGetLogicalWidths(ssa unsafe.Pointer, piDx *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringGetLogicalWidths.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(unsafe.Pointer(piDx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptStringGetOrder calls USP10!ScriptStringGetOrder.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptstringgetorder
 // Minimum OS: windows5.0.
-func ScriptStringGetOrder(ssa unsafe.Pointer, puOrder *uint32) foundation.HRESULT {
+func ScriptStringGetOrder(ssa unsafe.Pointer, puOrder *uint32) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringGetOrder.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(unsafe.Pointer(puOrder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptStringOut calls USP10!ScriptStringOut.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptstringout
 // Minimum OS: windows5.0.
-func ScriptStringOut(ssa unsafe.Pointer, iX int32, iY int32, uOptions graphicsgdi.ETO_OPTIONS, prc *foundation.RECT, iMinSel int32, iMaxSel int32, fDisabled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptStringOut.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(iX), uintptr(iY), uintptr(uOptions), uintptr(unsafe.Pointer(prc)), uintptr(iMinSel), uintptr(iMaxSel), uintptr(fDisabled))
-	return foundation.HRESULT(r1)
+func ScriptStringOut(ssa unsafe.Pointer, iX int32, iY int32, uOptions graphicsgdi.ETO_OPTIONS, prc *foundation.RECT, iMinSel int32, iMaxSel int32, fDisabled bool) error {
+	_fDisabled := win32.Bool32(fDisabled)
+	r1, _, _ := syscall.SyscallN(procScriptStringOut.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(iX), uintptr(iY), uintptr(uOptions), uintptr(unsafe.Pointer(prc)), uintptr(iMinSel), uintptr(iMaxSel), uintptr(_fDisabled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptStringValidate calls USP10!ScriptStringValidate.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptstringvalidate
 // Minimum OS: windows5.0.
-func ScriptStringValidate(ssa unsafe.Pointer) foundation.HRESULT {
+func ScriptStringValidate(ssa unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringValidate.Addr(), uintptr(unsafe.Pointer(ssa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptStringXtoCP calls USP10!ScriptStringXtoCP.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptstringxtocp
 // Minimum OS: windows5.0.
-func ScriptStringXtoCP(ssa unsafe.Pointer, iX int32, piCh *int32, piTrailing *int32) foundation.HRESULT {
+func ScriptStringXtoCP(ssa unsafe.Pointer, iX int32, piCh *int32, piTrailing *int32) error {
 	r1, _, _ := syscall.SyscallN(procScriptStringXtoCP.Addr(), uintptr(unsafe.Pointer(ssa)), uintptr(iX), uintptr(unsafe.Pointer(piCh)), uintptr(unsafe.Pointer(piTrailing)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptString_pLogAttr calls USP10!ScriptString_pLogAttr.
@@ -2813,25 +3028,41 @@ func ScriptString_pcOutChars(ssa unsafe.Pointer) *int32 {
 // ScriptSubstituteSingleGlyph calls USP10!ScriptSubstituteSingleGlyph.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptsubstitutesingleglyph
 // Minimum OS: windows6.0.6000.
-func ScriptSubstituteSingleGlyph(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, tagFeature uint32, lParameter int32, wGlyphId uint16, pwOutGlyphId *uint16) foundation.HRESULT {
+func ScriptSubstituteSingleGlyph(hdc graphicsgdi.HDC, psc *unsafe.Pointer, psa *SCRIPT_ANALYSIS, tagScript uint32, tagLangSys uint32, tagFeature uint32, lParameter int32, wGlyphId uint16, pwOutGlyphId *uint16) error {
 	r1, _, _ := syscall.SyscallN(procScriptSubstituteSingleGlyph.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(psa)), uintptr(tagScript), uintptr(tagLangSys), uintptr(tagFeature), uintptr(lParameter), uintptr(wGlyphId), uintptr(unsafe.Pointer(pwOutGlyphId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptTextOut calls USP10!ScriptTextOut.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scripttextout
 // Minimum OS: windows5.0.
-func ScriptTextOut(hdc graphicsgdi.HDC, psc *unsafe.Pointer, x int32, y int32, fuOptions uint32, lprc *foundation.RECT, psa *SCRIPT_ANALYSIS, pwcReserved foundation.PWSTR, iReserved int32, pwGlyphs *uint16, cGlyphs int32, piAdvance *int32, piJustify *int32, pGoffset *GOFFSET) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptTextOut.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(x), uintptr(y), uintptr(fuOptions), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(pwcReserved)), uintptr(iReserved), uintptr(unsafe.Pointer(pwGlyphs)), uintptr(cGlyphs), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(piJustify)), uintptr(unsafe.Pointer(pGoffset)))
-	return foundation.HRESULT(r1)
+func ScriptTextOut(hdc graphicsgdi.HDC, psc *unsafe.Pointer, x int32, y int32, fuOptions uint32, lprc *foundation.RECT, psa *SCRIPT_ANALYSIS, pwGlyphs *uint16, cGlyphs int32, piAdvance *int32, piJustify *int32, pGoffset *GOFFSET) error {
+	r1, _, _ := syscall.SyscallN(procScriptTextOut.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(psc)), uintptr(x), uintptr(y), uintptr(fuOptions), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(psa)), 0, 0, uintptr(unsafe.Pointer(pwGlyphs)), uintptr(cGlyphs), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(piJustify)), uintptr(unsafe.Pointer(pGoffset)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptXtoCP calls USP10!ScriptXtoCP.
 // https://learn.microsoft.com/windows/win32/api/usp10/nf-usp10-scriptxtocp
 // Minimum OS: windows5.0.
-func ScriptXtoCP(iX int32, cChars int32, cGlyphs int32, pwLogClust *uint16, psva *SCRIPT_VISATTR, piAdvance *int32, psa *SCRIPT_ANALYSIS, piCP *int32, piTrailing *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procScriptXtoCP.Addr(), uintptr(iX), uintptr(cChars), uintptr(cGlyphs), uintptr(unsafe.Pointer(pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(piCP)), uintptr(unsafe.Pointer(piTrailing)))
-	return foundation.HRESULT(r1)
+func ScriptXtoCP(iX int32, cGlyphs int32, pwLogClust []uint16, psva *SCRIPT_VISATTR, piAdvance *int32, psa *SCRIPT_ANALYSIS, piCP *int32, piTrailing *int32) error {
+	var _pwLogClust *uint16
+	if len(pwLogClust) > 0 {
+		_pwLogClust = &pwLogClust[0]
+	}
+	r1, _, _ := syscall.SyscallN(procScriptXtoCP.Addr(), uintptr(iX), uintptr(len(pwLogClust)), uintptr(cGlyphs), uintptr(unsafe.Pointer(_pwLogClust)), uintptr(unsafe.Pointer(psva)), uintptr(unsafe.Pointer(piAdvance)), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(piCP)), uintptr(unsafe.Pointer(piTrailing)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// SetCalendarInfo calls KERNEL32!SetCalendarInfoW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setcalendarinfow
+// Minimum OS: windows5.0.
+func SetCalendarInfo(Locale uint32, Calendar uint32, CalType uint32, lpCalData string) error {
+	_lpCalData := win32.UTF16Ptr(lpCalData)
+	r1, _, e1 := syscall.SyscallN(procSetCalendarInfo.Addr(), uintptr(Locale), uintptr(Calendar), uintptr(CalType), uintptr(unsafe.Pointer(_lpCalData)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetCalendarInfoA calls KERNEL32!SetCalendarInfoA.
@@ -2845,11 +3076,12 @@ func SetCalendarInfoA(Locale uint32, Calendar uint32, CalType uint32, lpCalData 
 	return nil
 }
 
-// SetCalendarInfoW calls KERNEL32!SetCalendarInfoW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setcalendarinfow
+// SetLocaleInfo calls KERNEL32!SetLocaleInfoW.
+// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setlocaleinfow
 // Minimum OS: windows5.0.
-func SetCalendarInfoW(Locale uint32, Calendar uint32, CalType uint32, lpCalData foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetCalendarInfoW.Addr(), uintptr(Locale), uintptr(Calendar), uintptr(CalType), uintptr(unsafe.Pointer(lpCalData)))
+func SetLocaleInfo(Locale uint32, LCType uint32, lpLCData string) error {
+	_lpLCData := win32.UTF16Ptr(lpLCData)
+	r1, _, e1 := syscall.SyscallN(procSetLocaleInfo.Addr(), uintptr(Locale), uintptr(LCType), uintptr(unsafe.Pointer(_lpLCData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2867,22 +3099,12 @@ func SetLocaleInfoA(Locale uint32, LCType uint32, lpLCData foundation.PSTR) erro
 	return nil
 }
 
-// SetLocaleInfoW calls KERNEL32!SetLocaleInfoW.
-// https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setlocaleinfow
-// Minimum OS: windows5.0.
-func SetLocaleInfoW(Locale uint32, LCType uint32, lpLCData foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetLocaleInfoW.Addr(), uintptr(Locale), uintptr(LCType), uintptr(unsafe.Pointer(lpLCData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetProcessPreferredUILanguages calls KERNEL32!SetProcessPreferredUILanguages.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setprocesspreferreduilanguages
 // Minimum OS: windows6.1.
-func SetProcessPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer foundation.PWSTR, pulNumLanguages *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetProcessPreferredUILanguages.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pwszLanguagesBuffer)), uintptr(unsafe.Pointer(pulNumLanguages)))
+func SetProcessPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer string, pulNumLanguages *uint32) error {
+	_pwszLanguagesBuffer := win32.UTF16Ptr(pwszLanguagesBuffer)
+	r1, _, e1 := syscall.SyscallN(procSetProcessPreferredUILanguages.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszLanguagesBuffer)), uintptr(unsafe.Pointer(pulNumLanguages)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2892,23 +3114,25 @@ func SetProcessPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer foundati
 // SetThreadLocale calls KERNEL32!SetThreadLocale.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setthreadlocale
 // Minimum OS: windows5.0.
-func SetThreadLocale(Locale uint32) foundation.BOOL {
+func SetThreadLocale(Locale uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetThreadLocale.Addr(), uintptr(Locale))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetThreadPreferredUILanguages calls KERNEL32!SetThreadPreferredUILanguages.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setthreadpreferreduilanguages
 // Minimum OS: windows6.0.6000.
-func SetThreadPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer foundation.PWSTR, pulNumLanguages *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetThreadPreferredUILanguages.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pwszLanguagesBuffer)), uintptr(unsafe.Pointer(pulNumLanguages)))
-	return foundation.BOOL(r1)
+func SetThreadPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer string, pulNumLanguages *uint32) bool {
+	_pwszLanguagesBuffer := win32.UTF16Ptr(pwszLanguagesBuffer)
+	r1, _, _ := syscall.SyscallN(procSetThreadPreferredUILanguages.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszLanguagesBuffer)), uintptr(unsafe.Pointer(pulNumLanguages)))
+	return r1 != 0
 }
 
 // SetThreadPreferredUILanguages2 calls KERNEL32!SetThreadPreferredUILanguages2.
-func SetThreadPreferredUILanguages2(flags uint32, languages foundation.PWSTR, numLanguagesSet *uint32, snapshot *HSAVEDUILANGUAGES) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetThreadPreferredUILanguages2.Addr(), uintptr(flags), uintptr(unsafe.Pointer(languages)), uintptr(unsafe.Pointer(numLanguagesSet)), uintptr(unsafe.Pointer(snapshot)))
-	return foundation.BOOL(r1)
+func SetThreadPreferredUILanguages2(flags uint32, languages string, numLanguagesSet *uint32, snapshot *HSAVEDUILANGUAGES) bool {
+	_languages := win32.UTF16Ptr(languages)
+	r1, _, _ := syscall.SyscallN(procSetThreadPreferredUILanguages2.Addr(), uintptr(flags), uintptr(unsafe.Pointer(_languages)), uintptr(unsafe.Pointer(numLanguagesSet)), uintptr(unsafe.Pointer(snapshot)))
+	return r1 != 0
 }
 
 // SetThreadUILanguage calls KERNEL32!SetThreadUILanguage.
@@ -2936,8 +3160,9 @@ func SetUserGeoID(GeoId int32) error {
 // SetUserGeoName calls KERNEL32!SetUserGeoName.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setusergeoname
 // Minimum OS: windows10.0.16299.
-func SetUserGeoName(geoName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetUserGeoName.Addr(), uintptr(unsafe.Pointer(geoName)))
+func SetUserGeoName(geoName string) error {
+	_geoName := win32.UTF16Ptr(geoName)
+	r1, _, e1 := syscall.SyscallN(procSetUserGeoName.Addr(), uintptr(unsafe.Pointer(_geoName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2995,18 +3220,5825 @@ func UCNV_TO_U_CALLBACK_SUBSTITUTE(context unsafe.Pointer, toUArgs *UConverterTo
 	syscall.SyscallN(procUCNV_TO_U_CALLBACK_SUBSTITUTE.Addr(), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(toUArgs)), uintptr(unsafe.Pointer(codeUnits)), uintptr(length), uintptr(reason), uintptr(unsafe.Pointer(err_)))
 }
 
+// U_UCharsToChars calls icuuc!u_UCharsToChars.
+func U_UCharsToChars(us *uint16, cs foundation.PSTR, length int32) {
+	syscall.SyscallN(procU_UCharsToChars.Addr(), uintptr(unsafe.Pointer(us)), uintptr(unsafe.Pointer(cs)), uintptr(length))
+}
+
+// U_austrcpy calls icuuc!u_austrcpy.
+func U_austrcpy(dst foundation.PSTR, src *uint16) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procU_austrcpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// U_austrncpy calls icuuc!u_austrncpy.
+func U_austrncpy(dst foundation.PSTR, src *uint16, n int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procU_austrncpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)), uintptr(n))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// U_catclose calls icuuc!u_catclose.
+func U_catclose(catd *UResourceBundle) {
+	syscall.SyscallN(procU_catclose.Addr(), uintptr(unsafe.Pointer(catd)))
+}
+
+// U_catgets calls icuuc!u_catgets.
+func U_catgets(catd *UResourceBundle, set_num int32, msg_num int32, s *uint16, len_ *int32, ec *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_catgets.Addr(), uintptr(unsafe.Pointer(catd)), uintptr(set_num), uintptr(msg_num), uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(ec)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_catopen calls icuuc!u_catopen.
+func U_catopen(name foundation.PSTR, locale foundation.PSTR, ec *UErrorCode) *UResourceBundle {
+	r1, _, _ := syscall.SyscallN(procU_catopen.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(ec)))
+	return (*UResourceBundle)(unsafe.Pointer(r1))
+}
+
+// U_charAge calls icuuc!u_charAge.
+func U_charAge(c int32, versionArray *byte) {
+	syscall.SyscallN(procU_charAge.Addr(), uintptr(c), uintptr(unsafe.Pointer(versionArray)))
+}
+
+// U_charDigitValue calls icuuc!u_charDigitValue.
+func U_charDigitValue(c int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_charDigitValue.Addr(), uintptr(c))
+	return int32(r1)
+}
+
+// U_charDirection calls icuuc!u_charDirection.
+func U_charDirection(c int32) UCharDirection {
+	r1, _, _ := syscall.SyscallN(procU_charDirection.Addr(), uintptr(c))
+	return UCharDirection(r1)
+}
+
+// U_charFromName calls icuuc!u_charFromName.
+func U_charFromName(nameChoice UCharNameChoice, name foundation.PSTR, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_charFromName.Addr(), uintptr(nameChoice), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// U_charMirror calls icuuc!u_charMirror.
+func U_charMirror(c int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_charMirror.Addr(), uintptr(c))
+	return int32(r1)
+}
+
+// U_charName calls icuuc!u_charName.
+func U_charName(code int32, nameChoice UCharNameChoice, buffer foundation.PSTR, bufferLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_charName.Addr(), uintptr(code), uintptr(nameChoice), uintptr(unsafe.Pointer(buffer)), uintptr(bufferLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// U_charType calls icuuc!u_charType.
+func U_charType(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_charType.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_charsToUChars calls icuuc!u_charsToUChars.
+func U_charsToUChars(cs foundation.PSTR, us *uint16, length int32) {
+	syscall.SyscallN(procU_charsToUChars.Addr(), uintptr(unsafe.Pointer(cs)), uintptr(unsafe.Pointer(us)), uintptr(length))
+}
+
+// U_cleanup calls icuuc!u_cleanup.
+func U_cleanup() {
+	syscall.SyscallN(procU_cleanup.Addr())
+}
+
+// U_countChar32 calls icuuc!u_countChar32.
+func U_countChar32(s *uint16, length int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_countChar32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length))
+	return int32(r1)
+}
+
+// U_digit calls icuuc!u_digit.
+func U_digit(ch int32, radix int8) int32 {
+	r1, _, _ := syscall.SyscallN(procU_digit.Addr(), uintptr(ch), uintptr(radix))
+	return int32(r1)
+}
+
+// U_enumCharNames calls icuuc!u_enumCharNames.
+func U_enumCharNames(start int32, limit int32, fn *UEnumCharNamesFn, context unsafe.Pointer, nameChoice UCharNameChoice, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procU_enumCharNames.Addr(), uintptr(start), uintptr(limit), uintptr(unsafe.Pointer(fn)), uintptr(unsafe.Pointer(context)), uintptr(nameChoice), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// U_enumCharTypes calls icuuc!u_enumCharTypes.
+func U_enumCharTypes(enumRange *UCharEnumTypeRange, context unsafe.Pointer) {
+	syscall.SyscallN(procU_enumCharTypes.Addr(), uintptr(unsafe.Pointer(enumRange)), uintptr(unsafe.Pointer(context)))
+}
+
+// U_errorName calls icuuc!u_errorName.
+func U_errorName(code UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procU_errorName.Addr(), uintptr(code))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// U_foldCase calls icuuc!u_foldCase.
+func U_foldCase(c int32, options uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_foldCase.Addr(), uintptr(c), uintptr(options))
+	return int32(r1)
+}
+
+// U_forDigit calls icuuc!u_forDigit.
+func U_forDigit(digit int32, radix int8) int32 {
+	r1, _, _ := syscall.SyscallN(procU_forDigit.Addr(), uintptr(digit), uintptr(radix))
+	return int32(r1)
+}
+
+// U_formatMessage calls icuin!u_formatMessage.
+func U_formatMessage(locale foundation.PSTR, pattern *uint16, patternLength int32, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_formatMessage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// U_formatMessageWithError calls icuin!u_formatMessageWithError.
+func U_formatMessageWithError(locale foundation.PSTR, pattern *uint16, patternLength int32, result *uint16, resultLength int32, parseError *UParseError, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_formatMessageWithError.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// U_getBidiPairedBracket calls icuuc!u_getBidiPairedBracket.
+func U_getBidiPairedBracket(c int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_getBidiPairedBracket.Addr(), uintptr(c))
+	return int32(r1)
+}
+
+// U_getBinaryPropertySet calls icu!u_getBinaryPropertySet.
+func U_getBinaryPropertySet(property UProperty, pErrorCode *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procU_getBinaryPropertySet.Addr(), uintptr(property), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// U_getCombiningClass calls icuuc!u_getCombiningClass.
+func U_getCombiningClass(c int32) byte {
+	r1, _, _ := syscall.SyscallN(procU_getCombiningClass.Addr(), uintptr(c))
+	return byte(r1)
+}
+
+// U_getDataVersion calls icuuc!u_getDataVersion.
+func U_getDataVersion(dataVersionFillin *byte, status *UErrorCode) {
+	syscall.SyscallN(procU_getDataVersion.Addr(), uintptr(unsafe.Pointer(dataVersionFillin)), uintptr(unsafe.Pointer(status)))
+}
+
+// U_getFC_NFKC_Closure calls icuuc!u_getFC_NFKC_Closure.
+func U_getFC_NFKC_Closure(c int32, dest *uint16, destCapacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_getFC_NFKC_Closure.Addr(), uintptr(c), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// U_getIntPropertyMap calls icu!u_getIntPropertyMap.
+func U_getIntPropertyMap(property UProperty, pErrorCode *UErrorCode) *UCPMap {
+	r1, _, _ := syscall.SyscallN(procU_getIntPropertyMap.Addr(), uintptr(property), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UCPMap)(unsafe.Pointer(r1))
+}
+
+// U_getIntPropertyMaxValue calls icuuc!u_getIntPropertyMaxValue.
+func U_getIntPropertyMaxValue(which UProperty) int32 {
+	r1, _, _ := syscall.SyscallN(procU_getIntPropertyMaxValue.Addr(), uintptr(which))
+	return int32(r1)
+}
+
+// U_getIntPropertyMinValue calls icuuc!u_getIntPropertyMinValue.
+func U_getIntPropertyMinValue(which UProperty) int32 {
+	r1, _, _ := syscall.SyscallN(procU_getIntPropertyMinValue.Addr(), uintptr(which))
+	return int32(r1)
+}
+
+// U_getIntPropertyValue calls icuuc!u_getIntPropertyValue.
+func U_getIntPropertyValue(c int32, which UProperty) int32 {
+	r1, _, _ := syscall.SyscallN(procU_getIntPropertyValue.Addr(), uintptr(c), uintptr(which))
+	return int32(r1)
+}
+
+// U_getPropertyEnum calls icuuc!u_getPropertyEnum.
+func U_getPropertyEnum(alias foundation.PSTR) UProperty {
+	r1, _, _ := syscall.SyscallN(procU_getPropertyEnum.Addr(), uintptr(unsafe.Pointer(alias)))
+	return UProperty(r1)
+}
+
+// U_getPropertyName calls icuuc!u_getPropertyName.
+func U_getPropertyName(property UProperty, nameChoice UPropertyNameChoice) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procU_getPropertyName.Addr(), uintptr(property), uintptr(nameChoice))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// U_getPropertyValueEnum calls icuuc!u_getPropertyValueEnum.
+func U_getPropertyValueEnum(property UProperty, alias foundation.PSTR) int32 {
+	r1, _, _ := syscall.SyscallN(procU_getPropertyValueEnum.Addr(), uintptr(property), uintptr(unsafe.Pointer(alias)))
+	return int32(r1)
+}
+
+// U_getPropertyValueName calls icuuc!u_getPropertyValueName.
+func U_getPropertyValueName(property UProperty, value int32, nameChoice UPropertyNameChoice) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procU_getPropertyValueName.Addr(), uintptr(property), uintptr(value), uintptr(nameChoice))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// U_getUnicodeVersion calls icuuc!u_getUnicodeVersion.
+func U_getUnicodeVersion(versionArray *byte) {
+	syscall.SyscallN(procU_getUnicodeVersion.Addr(), uintptr(unsafe.Pointer(versionArray)))
+}
+
+// U_getVersion calls icuuc!u_getVersion.
+func U_getVersion(versionArray *byte) {
+	syscall.SyscallN(procU_getVersion.Addr(), uintptr(unsafe.Pointer(versionArray)))
+}
+
+// U_hasBinaryProperty calls icuuc!u_hasBinaryProperty.
+func U_hasBinaryProperty(c int32, which UProperty) int8 {
+	r1, _, _ := syscall.SyscallN(procU_hasBinaryProperty.Addr(), uintptr(c), uintptr(which))
+	return int8(r1)
+}
+
+// U_init calls icuuc!u_init.
+func U_init(status *UErrorCode) {
+	syscall.SyscallN(procU_init.Addr(), uintptr(unsafe.Pointer(status)))
+}
+
+// U_isIDIgnorable calls icuuc!u_isIDIgnorable.
+func U_isIDIgnorable(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isIDIgnorable.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isIDPart calls icuuc!u_isIDPart.
+func U_isIDPart(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isIDPart.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isIDStart calls icuuc!u_isIDStart.
+func U_isIDStart(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isIDStart.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isISOControl calls icuuc!u_isISOControl.
+func U_isISOControl(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isISOControl.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isJavaIDPart calls icuuc!u_isJavaIDPart.
+func U_isJavaIDPart(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isJavaIDPart.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isJavaIDStart calls icuuc!u_isJavaIDStart.
+func U_isJavaIDStart(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isJavaIDStart.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isJavaSpaceChar calls icuuc!u_isJavaSpaceChar.
+func U_isJavaSpaceChar(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isJavaSpaceChar.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isMirrored calls icuuc!u_isMirrored.
+func U_isMirrored(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isMirrored.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isUAlphabetic calls icuuc!u_isUAlphabetic.
+func U_isUAlphabetic(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isUAlphabetic.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isULowercase calls icuuc!u_isULowercase.
+func U_isULowercase(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isULowercase.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isUUppercase calls icuuc!u_isUUppercase.
+func U_isUUppercase(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isUUppercase.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isUWhiteSpace calls icuuc!u_isUWhiteSpace.
+func U_isUWhiteSpace(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isUWhiteSpace.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isWhitespace calls icuuc!u_isWhitespace.
+func U_isWhitespace(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isWhitespace.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isalnum calls icuuc!u_isalnum.
+func U_isalnum(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isalnum.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isalpha calls icuuc!u_isalpha.
+func U_isalpha(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isalpha.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isbase calls icuuc!u_isbase.
+func U_isbase(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isbase.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isblank calls icuuc!u_isblank.
+func U_isblank(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isblank.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_iscntrl calls icuuc!u_iscntrl.
+func U_iscntrl(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_iscntrl.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isdefined calls icuuc!u_isdefined.
+func U_isdefined(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isdefined.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isdigit calls icuuc!u_isdigit.
+func U_isdigit(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isdigit.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isgraph calls icuuc!u_isgraph.
+func U_isgraph(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isgraph.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_islower calls icuuc!u_islower.
+func U_islower(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_islower.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isprint calls icuuc!u_isprint.
+func U_isprint(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isprint.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_ispunct calls icuuc!u_ispunct.
+func U_ispunct(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_ispunct.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isspace calls icuuc!u_isspace.
+func U_isspace(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isspace.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_istitle calls icuuc!u_istitle.
+func U_istitle(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_istitle.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isupper calls icuuc!u_isupper.
+func U_isupper(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isupper.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_isxdigit calls icuuc!u_isxdigit.
+func U_isxdigit(c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_isxdigit.Addr(), uintptr(c))
+	return int8(r1)
+}
+
+// U_memcasecmp calls icuuc!u_memcasecmp.
+func U_memcasecmp(s1 *uint16, s2 *uint16, length int32, options uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_memcasecmp.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(length), uintptr(options))
+	return int32(r1)
+}
+
+// U_memchr calls icuuc!u_memchr.
+func U_memchr(s *uint16, c uint16, count int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_memchr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c), uintptr(count))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_memchr32 calls icuuc!u_memchr32.
+func U_memchr32(s *uint16, c int32, count int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_memchr32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c), uintptr(count))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_memcmp calls icuuc!u_memcmp.
+func U_memcmp(buf1 *uint16, buf2 *uint16, count int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_memcmp.Addr(), uintptr(unsafe.Pointer(buf1)), uintptr(unsafe.Pointer(buf2)), uintptr(count))
+	return int32(r1)
+}
+
+// U_memcmpCodePointOrder calls icuuc!u_memcmpCodePointOrder.
+func U_memcmpCodePointOrder(s1 *uint16, s2 *uint16, count int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_memcmpCodePointOrder.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(count))
+	return int32(r1)
+}
+
+// U_memcpy calls icuuc!u_memcpy.
+func U_memcpy(dest *uint16, src *uint16, count int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_memcpy.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(src)), uintptr(count))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_memmove calls icuuc!u_memmove.
+func U_memmove(dest *uint16, src *uint16, count int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_memmove.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(src)), uintptr(count))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_memrchr calls icuuc!u_memrchr.
+func U_memrchr(s *uint16, c uint16, count int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_memrchr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c), uintptr(count))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_memrchr32 calls icuuc!u_memrchr32.
+func U_memrchr32(s *uint16, c int32, count int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_memrchr32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c), uintptr(count))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_memset calls icuuc!u_memset.
+func U_memset(dest *uint16, c uint16, count int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_memset.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(c), uintptr(count))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_parseMessage calls icuin!u_parseMessage.
+func U_parseMessage(locale foundation.PSTR, pattern *uint16, patternLength int32, source *uint16, sourceLength int32, status *UErrorCode) {
+	syscall.SyscallN(procU_parseMessage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(status)))
+}
+
+// U_parseMessageWithError calls icuin!u_parseMessageWithError.
+func U_parseMessageWithError(locale foundation.PSTR, pattern *uint16, patternLength int32, source *uint16, sourceLength int32, parseError *UParseError, status *UErrorCode) {
+	syscall.SyscallN(procU_parseMessageWithError.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
+}
+
+// U_setMemoryFunctions calls icuuc!u_setMemoryFunctions.
+func U_setMemoryFunctions(context unsafe.Pointer, a *UMemAllocFn, r *UMemReallocFn, f *UMemFreeFn, status *UErrorCode) {
+	syscall.SyscallN(procU_setMemoryFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(a)), uintptr(unsafe.Pointer(r)), uintptr(unsafe.Pointer(f)), uintptr(unsafe.Pointer(status)))
+}
+
+// U_shapeArabic calls icuuc!u_shapeArabic.
+func U_shapeArabic(source *uint16, sourceLength int32, dest *uint16, destSize int32, options uint32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_shapeArabic.Addr(), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(dest)), uintptr(destSize), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// U_strCaseCompare calls icuuc!u_strCaseCompare.
+func U_strCaseCompare(s1 *uint16, length1 int32, s2 *uint16, length2 int32, options uint32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strCaseCompare.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(length1), uintptr(unsafe.Pointer(s2)), uintptr(length2), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// U_strCompare calls icuuc!u_strCompare.
+func U_strCompare(s1 *uint16, length1 int32, s2 *uint16, length2 int32, codePointOrder int8) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strCompare.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(length1), uintptr(unsafe.Pointer(s2)), uintptr(length2), uintptr(codePointOrder))
+	return int32(r1)
+}
+
+// U_strCompareIter calls icuuc!u_strCompareIter.
+func U_strCompareIter(iter1 *UCharIterator, iter2 *UCharIterator, codePointOrder int8) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strCompareIter.Addr(), uintptr(unsafe.Pointer(iter1)), uintptr(unsafe.Pointer(iter2)), uintptr(codePointOrder))
+	return int32(r1)
+}
+
+// U_strFindFirst calls icuuc!u_strFindFirst.
+func U_strFindFirst(s *uint16, length int32, substring *uint16, subLength int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strFindFirst.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(substring)), uintptr(subLength))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strFindLast calls icuuc!u_strFindLast.
+func U_strFindLast(s *uint16, length int32, substring *uint16, subLength int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strFindLast.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(substring)), uintptr(subLength))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strFoldCase calls icuuc!u_strFoldCase.
+func U_strFoldCase(dest *uint16, destCapacity int32, src *uint16, srcLength int32, options uint32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strFoldCase.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// U_strFromJavaModifiedUTF8WithSub calls icuuc!u_strFromJavaModifiedUTF8WithSub.
+func U_strFromJavaModifiedUTF8WithSub(dest *uint16, destCapacity int32, pDestLength *int32, src foundation.PSTR, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strFromJavaModifiedUTF8WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strFromUTF32 calls icuuc!u_strFromUTF32.
+func U_strFromUTF32(dest *uint16, destCapacity int32, pDestLength *int32, src *int32, srcLength int32, pErrorCode *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strFromUTF32.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strFromUTF32WithSub calls icuuc!u_strFromUTF32WithSub.
+func U_strFromUTF32WithSub(dest *uint16, destCapacity int32, pDestLength *int32, src *int32, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strFromUTF32WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strFromUTF8 calls icuuc!u_strFromUTF8.
+func U_strFromUTF8(dest *uint16, destCapacity int32, pDestLength *int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strFromUTF8.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strFromUTF8Lenient calls icuuc!u_strFromUTF8Lenient.
+func U_strFromUTF8Lenient(dest *uint16, destCapacity int32, pDestLength *int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strFromUTF8Lenient.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strFromUTF8WithSub calls icuuc!u_strFromUTF8WithSub.
+func U_strFromUTF8WithSub(dest *uint16, destCapacity int32, pDestLength *int32, src foundation.PSTR, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strFromUTF8WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strFromWCS calls icuuc!u_strFromWCS.
+func U_strFromWCS(dest *uint16, destCapacity int32, pDestLength *int32, src string, srcLength int32, pErrorCode *UErrorCode) *uint16 {
+	_src := win32.UTF16Ptr(src)
+	r1, _, _ := syscall.SyscallN(procU_strFromWCS.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(_src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strHasMoreChar32Than calls icuuc!u_strHasMoreChar32Than.
+func U_strHasMoreChar32Than(s *uint16, length int32, number int32) int8 {
+	r1, _, _ := syscall.SyscallN(procU_strHasMoreChar32Than.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(number))
+	return int8(r1)
+}
+
+// U_strToJavaModifiedUTF8 calls icuuc!u_strToJavaModifiedUTF8.
+func U_strToJavaModifiedUTF8(dest foundation.PSTR, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procU_strToJavaModifiedUTF8.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// U_strToLower calls icuuc!u_strToLower.
+func U_strToLower(dest *uint16, destCapacity int32, src *uint16, srcLength int32, locale foundation.PSTR, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strToLower.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// U_strToTitle calls icuuc!u_strToTitle.
+func U_strToTitle(dest *uint16, destCapacity int32, src *uint16, srcLength int32, titleIter *UBreakIterator, locale foundation.PSTR, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strToTitle.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(titleIter)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// U_strToUTF32 calls icuuc!u_strToUTF32.
+func U_strToUTF32(dest *int32, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) *int32 {
+	r1, _, _ := syscall.SyscallN(procU_strToUTF32.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*int32)(unsafe.Pointer(r1))
+}
+
+// U_strToUTF32WithSub calls icuuc!u_strToUTF32WithSub.
+func U_strToUTF32WithSub(dest *int32, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) *int32 {
+	r1, _, _ := syscall.SyscallN(procU_strToUTF32WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*int32)(unsafe.Pointer(r1))
+}
+
+// U_strToUTF8 calls icuuc!u_strToUTF8.
+func U_strToUTF8(dest foundation.PSTR, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procU_strToUTF8.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// U_strToUTF8WithSub calls icuuc!u_strToUTF8WithSub.
+func U_strToUTF8WithSub(dest foundation.PSTR, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procU_strToUTF8WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// U_strToUpper calls icuuc!u_strToUpper.
+func U_strToUpper(dest *uint16, destCapacity int32, src *uint16, srcLength int32, locale foundation.PSTR, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strToUpper.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// U_strToWCS calls icuuc!u_strToWCS.
+func U_strToWCS(dest string, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) foundation.PWSTR {
+	_dest := win32.UTF16Ptr(dest)
+	r1, _, _ := syscall.SyscallN(procU_strToWCS.Addr(), uintptr(unsafe.Pointer(_dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return foundation.PWSTR(unsafe.Pointer(r1))
+}
+
+// U_strcasecmp calls icuuc!u_strcasecmp.
+func U_strcasecmp(s1 *uint16, s2 *uint16, options uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strcasecmp.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(options))
+	return int32(r1)
+}
+
+// U_strcat calls icuuc!u_strcat.
+func U_strcat(dst *uint16, src *uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strcat.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strchr calls icuuc!u_strchr.
+func U_strchr(s *uint16, c uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strchr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strchr32 calls icuuc!u_strchr32.
+func U_strchr32(s *uint16, c int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strchr32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strcmp calls icuuc!u_strcmp.
+func U_strcmp(s1 *uint16, s2 *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strcmp.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)))
+	return int32(r1)
+}
+
+// U_strcmpCodePointOrder calls icuuc!u_strcmpCodePointOrder.
+func U_strcmpCodePointOrder(s1 *uint16, s2 *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strcmpCodePointOrder.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)))
+	return int32(r1)
+}
+
+// U_strcpy calls icuuc!u_strcpy.
+func U_strcpy(dst *uint16, src *uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strcpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strcspn calls icuuc!u_strcspn.
+func U_strcspn(string_ *uint16, matchSet *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strcspn.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(matchSet)))
+	return int32(r1)
+}
+
+// U_stringHasBinaryProperty calls icu!u_stringHasBinaryProperty.
+func U_stringHasBinaryProperty(s *uint16, length int32, which UProperty) int8 {
+	r1, _, _ := syscall.SyscallN(procU_stringHasBinaryProperty.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(which))
+	return int8(r1)
+}
+
+// U_strlen calls icuuc!u_strlen.
+func U_strlen(s *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strlen.Addr(), uintptr(unsafe.Pointer(s)))
+	return int32(r1)
+}
+
+// U_strncasecmp calls icuuc!u_strncasecmp.
+func U_strncasecmp(s1 *uint16, s2 *uint16, n int32, options uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strncasecmp.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(n), uintptr(options))
+	return int32(r1)
+}
+
+// U_strncat calls icuuc!u_strncat.
+func U_strncat(dst *uint16, src *uint16, n int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strncat.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)), uintptr(n))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strncmp calls icuuc!u_strncmp.
+func U_strncmp(ucs1 *uint16, ucs2 *uint16, n int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strncmp.Addr(), uintptr(unsafe.Pointer(ucs1)), uintptr(unsafe.Pointer(ucs2)), uintptr(n))
+	return int32(r1)
+}
+
+// U_strncmpCodePointOrder calls icuuc!u_strncmpCodePointOrder.
+func U_strncmpCodePointOrder(s1 *uint16, s2 *uint16, n int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strncmpCodePointOrder.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(n))
+	return int32(r1)
+}
+
+// U_strncpy calls icuuc!u_strncpy.
+func U_strncpy(dst *uint16, src *uint16, n int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strncpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)), uintptr(n))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strpbrk calls icuuc!u_strpbrk.
+func U_strpbrk(string_ *uint16, matchSet *uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strpbrk.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(matchSet)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strrchr calls icuuc!u_strrchr.
+func U_strrchr(s *uint16, c uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strrchr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strrchr32 calls icuuc!u_strrchr32.
+func U_strrchr32(s *uint16, c int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strrchr32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strrstr calls icuuc!u_strrstr.
+func U_strrstr(s *uint16, substring *uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strrstr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(substring)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strspn calls icuuc!u_strspn.
+func U_strspn(string_ *uint16, matchSet *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procU_strspn.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(matchSet)))
+	return int32(r1)
+}
+
+// U_strstr calls icuuc!u_strstr.
+func U_strstr(s *uint16, substring *uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strstr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(substring)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_strtok_r calls icuuc!u_strtok_r.
+func U_strtok_r(src *uint16, delim *uint16, saveState **uint16) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_strtok_r.Addr(), uintptr(unsafe.Pointer(src)), uintptr(unsafe.Pointer(delim)), uintptr(unsafe.Pointer(saveState)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_tolower calls icuuc!u_tolower.
+func U_tolower(c int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_tolower.Addr(), uintptr(c))
+	return int32(r1)
+}
+
+// U_totitle calls icuuc!u_totitle.
+func U_totitle(c int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_totitle.Addr(), uintptr(c))
+	return int32(r1)
+}
+
+// U_toupper calls icuuc!u_toupper.
+func U_toupper(c int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_toupper.Addr(), uintptr(c))
+	return int32(r1)
+}
+
+// U_uastrcpy calls icuuc!u_uastrcpy.
+func U_uastrcpy(dst *uint16, src foundation.PSTR) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_uastrcpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_uastrncpy calls icuuc!u_uastrncpy.
+func U_uastrncpy(dst *uint16, src foundation.PSTR, n int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procU_uastrncpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)), uintptr(n))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// U_unescape calls icuuc!u_unescape.
+func U_unescape(src foundation.PSTR, dest *uint16, destCapacity int32) int32 {
+	r1, _, _ := syscall.SyscallN(procU_unescape.Addr(), uintptr(unsafe.Pointer(src)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity))
+	return int32(r1)
+}
+
+// U_unescapeAt calls icuuc!u_unescapeAt.
+func U_unescapeAt(charAt UNESCAPE_CHAR_AT, offset *int32, length int32, context unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procU_unescapeAt.Addr(), uintptr(charAt), uintptr(unsafe.Pointer(offset)), uintptr(length), uintptr(unsafe.Pointer(context)))
+	return int32(r1)
+}
+
+// U_versionFromString calls icuuc!u_versionFromString.
+func U_versionFromString(versionArray *byte, versionString foundation.PSTR) {
+	syscall.SyscallN(procU_versionFromString.Addr(), uintptr(unsafe.Pointer(versionArray)), uintptr(unsafe.Pointer(versionString)))
+}
+
+// U_versionFromUString calls icuuc!u_versionFromUString.
+func U_versionFromUString(versionArray *byte, versionString *uint16) {
+	syscall.SyscallN(procU_versionFromUString.Addr(), uintptr(unsafe.Pointer(versionArray)), uintptr(unsafe.Pointer(versionString)))
+}
+
+// U_versionToString calls icuuc!u_versionToString.
+func U_versionToString(versionArray *byte, versionString foundation.PSTR) {
+	syscall.SyscallN(procU_versionToString.Addr(), uintptr(unsafe.Pointer(versionArray)), uintptr(unsafe.Pointer(versionString)))
+}
+
+// U_vformatMessage calls icuin!u_vformatMessage.
+func U_vformatMessage(locale foundation.PSTR, pattern *uint16, patternLength int32, result *uint16, resultLength int32, ap *int8, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_vformatMessage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// U_vformatMessageWithError calls icuin!u_vformatMessageWithError.
+func U_vformatMessageWithError(locale foundation.PSTR, pattern *uint16, patternLength int32, result *uint16, resultLength int32, parseError *UParseError, ap *int8, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procU_vformatMessageWithError.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// U_vparseMessage calls icuin!u_vparseMessage.
+func U_vparseMessage(locale foundation.PSTR, pattern *uint16, patternLength int32, source *uint16, sourceLength int32, ap *int8, status *UErrorCode) {
+	syscall.SyscallN(procU_vparseMessage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
+}
+
+// U_vparseMessageWithError calls icuin!u_vparseMessageWithError.
+func U_vparseMessageWithError(locale foundation.PSTR, pattern *uint16, patternLength int32, source *uint16, sourceLength int32, ap *int8, parseError *UParseError, status *UErrorCode) {
+	syscall.SyscallN(procU_vparseMessageWithError.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
+}
+
+// Ubidi_close calls icuuc!ubidi_close.
+func Ubidi_close(pBiDi *UBiDi) {
+	syscall.SyscallN(procUbidi_close.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+}
+
+// Ubidi_countParagraphs calls icuuc!ubidi_countParagraphs.
+func Ubidi_countParagraphs(pBiDi *UBiDi) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_countParagraphs.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return int32(r1)
+}
+
+// Ubidi_countRuns calls icuuc!ubidi_countRuns.
+func Ubidi_countRuns(pBiDi *UBiDi, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_countRuns.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ubidi_getBaseDirection calls icuuc!ubidi_getBaseDirection.
+func Ubidi_getBaseDirection(text *uint16, length int32) UBiDiDirection {
+	r1, _, _ := syscall.SyscallN(procUbidi_getBaseDirection.Addr(), uintptr(unsafe.Pointer(text)), uintptr(length))
+	return UBiDiDirection(r1)
+}
+
+// Ubidi_getClassCallback calls icuuc!ubidi_getClassCallback.
+func Ubidi_getClassCallback(pBiDi *UBiDi, fn *UBiDiClassCallback, context *unsafe.Pointer) {
+	syscall.SyscallN(procUbidi_getClassCallback.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(fn)), uintptr(unsafe.Pointer(context)))
+}
+
+// Ubidi_getCustomizedClass calls icuuc!ubidi_getCustomizedClass.
+func Ubidi_getCustomizedClass(pBiDi *UBiDi, c int32) UCharDirection {
+	r1, _, _ := syscall.SyscallN(procUbidi_getCustomizedClass.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(c))
+	return UCharDirection(r1)
+}
+
+// Ubidi_getDirection calls icuuc!ubidi_getDirection.
+func Ubidi_getDirection(pBiDi *UBiDi) UBiDiDirection {
+	r1, _, _ := syscall.SyscallN(procUbidi_getDirection.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return UBiDiDirection(r1)
+}
+
+// Ubidi_getLength calls icuuc!ubidi_getLength.
+func Ubidi_getLength(pBiDi *UBiDi) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_getLength.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return int32(r1)
+}
+
+// Ubidi_getLevelAt calls icuuc!ubidi_getLevelAt.
+func Ubidi_getLevelAt(pBiDi *UBiDi, charIndex int32) byte {
+	r1, _, _ := syscall.SyscallN(procUbidi_getLevelAt.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(charIndex))
+	return byte(r1)
+}
+
+// Ubidi_getLevels calls icuuc!ubidi_getLevels.
+func Ubidi_getLevels(pBiDi *UBiDi, pErrorCode *UErrorCode) *byte {
+	r1, _, _ := syscall.SyscallN(procUbidi_getLevels.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*byte)(unsafe.Pointer(r1))
+}
+
+// Ubidi_getLogicalIndex calls icuuc!ubidi_getLogicalIndex.
+func Ubidi_getLogicalIndex(pBiDi *UBiDi, visualIndex int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_getLogicalIndex.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(visualIndex), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ubidi_getLogicalMap calls icuuc!ubidi_getLogicalMap.
+func Ubidi_getLogicalMap(pBiDi *UBiDi, indexMap *int32, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUbidi_getLogicalMap.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(indexMap)), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ubidi_getLogicalRun calls icuuc!ubidi_getLogicalRun.
+func Ubidi_getLogicalRun(pBiDi *UBiDi, logicalPosition int32, pLogicalLimit *int32, pLevel *byte) {
+	syscall.SyscallN(procUbidi_getLogicalRun.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(logicalPosition), uintptr(unsafe.Pointer(pLogicalLimit)), uintptr(unsafe.Pointer(pLevel)))
+}
+
+// Ubidi_getParaLevel calls icuuc!ubidi_getParaLevel.
+func Ubidi_getParaLevel(pBiDi *UBiDi) byte {
+	r1, _, _ := syscall.SyscallN(procUbidi_getParaLevel.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return byte(r1)
+}
+
+// Ubidi_getParagraph calls icuuc!ubidi_getParagraph.
+func Ubidi_getParagraph(pBiDi *UBiDi, charIndex int32, pParaStart *int32, pParaLimit *int32, pParaLevel *byte, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_getParagraph.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(charIndex), uintptr(unsafe.Pointer(pParaStart)), uintptr(unsafe.Pointer(pParaLimit)), uintptr(unsafe.Pointer(pParaLevel)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ubidi_getParagraphByIndex calls icuuc!ubidi_getParagraphByIndex.
+func Ubidi_getParagraphByIndex(pBiDi *UBiDi, paraIndex int32, pParaStart *int32, pParaLimit *int32, pParaLevel *byte, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUbidi_getParagraphByIndex.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(paraIndex), uintptr(unsafe.Pointer(pParaStart)), uintptr(unsafe.Pointer(pParaLimit)), uintptr(unsafe.Pointer(pParaLevel)), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ubidi_getProcessedLength calls icuuc!ubidi_getProcessedLength.
+func Ubidi_getProcessedLength(pBiDi *UBiDi) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_getProcessedLength.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return int32(r1)
+}
+
+// Ubidi_getReorderingMode calls icuuc!ubidi_getReorderingMode.
+func Ubidi_getReorderingMode(pBiDi *UBiDi) UBiDiReorderingMode {
+	r1, _, _ := syscall.SyscallN(procUbidi_getReorderingMode.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return UBiDiReorderingMode(r1)
+}
+
+// Ubidi_getReorderingOptions calls icuuc!ubidi_getReorderingOptions.
+func Ubidi_getReorderingOptions(pBiDi *UBiDi) uint32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_getReorderingOptions.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return uint32(r1)
+}
+
+// Ubidi_getResultLength calls icuuc!ubidi_getResultLength.
+func Ubidi_getResultLength(pBiDi *UBiDi) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_getResultLength.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return int32(r1)
+}
+
+// Ubidi_getText calls icuuc!ubidi_getText.
+func Ubidi_getText(pBiDi *UBiDi) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUbidi_getText.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ubidi_getVisualIndex calls icuuc!ubidi_getVisualIndex.
+func Ubidi_getVisualIndex(pBiDi *UBiDi, logicalIndex int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_getVisualIndex.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(logicalIndex), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ubidi_getVisualMap calls icuuc!ubidi_getVisualMap.
+func Ubidi_getVisualMap(pBiDi *UBiDi, indexMap *int32, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUbidi_getVisualMap.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(indexMap)), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ubidi_getVisualRun calls icuuc!ubidi_getVisualRun.
+func Ubidi_getVisualRun(pBiDi *UBiDi, runIndex int32, pLogicalStart *int32, pLength *int32) UBiDiDirection {
+	r1, _, _ := syscall.SyscallN(procUbidi_getVisualRun.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(runIndex), uintptr(unsafe.Pointer(pLogicalStart)), uintptr(unsafe.Pointer(pLength)))
+	return UBiDiDirection(r1)
+}
+
+// Ubidi_invertMap calls icuuc!ubidi_invertMap.
+func Ubidi_invertMap(srcMap *int32, destMap *int32, length int32) {
+	syscall.SyscallN(procUbidi_invertMap.Addr(), uintptr(unsafe.Pointer(srcMap)), uintptr(unsafe.Pointer(destMap)), uintptr(length))
+}
+
+// Ubidi_isInverse calls icuuc!ubidi_isInverse.
+func Ubidi_isInverse(pBiDi *UBiDi) int8 {
+	r1, _, _ := syscall.SyscallN(procUbidi_isInverse.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return int8(r1)
+}
+
+// Ubidi_isOrderParagraphsLTR calls icuuc!ubidi_isOrderParagraphsLTR.
+func Ubidi_isOrderParagraphsLTR(pBiDi *UBiDi) int8 {
+	r1, _, _ := syscall.SyscallN(procUbidi_isOrderParagraphsLTR.Addr(), uintptr(unsafe.Pointer(pBiDi)))
+	return int8(r1)
+}
+
+// Ubidi_open calls icuuc!ubidi_open.
+func Ubidi_open() *UBiDi {
+	r1, _, _ := syscall.SyscallN(procUbidi_open.Addr())
+	return (*UBiDi)(unsafe.Pointer(r1))
+}
+
+// Ubidi_openSized calls icuuc!ubidi_openSized.
+func Ubidi_openSized(maxLength int32, maxRunCount int32, pErrorCode *UErrorCode) *UBiDi {
+	r1, _, _ := syscall.SyscallN(procUbidi_openSized.Addr(), uintptr(maxLength), uintptr(maxRunCount), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UBiDi)(unsafe.Pointer(r1))
+}
+
+// Ubidi_orderParagraphsLTR calls icuuc!ubidi_orderParagraphsLTR.
+func Ubidi_orderParagraphsLTR(pBiDi *UBiDi, orderParagraphsLTR int8) {
+	syscall.SyscallN(procUbidi_orderParagraphsLTR.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(orderParagraphsLTR))
+}
+
+// Ubidi_reorderLogical calls icuuc!ubidi_reorderLogical.
+func Ubidi_reorderLogical(levels *byte, length int32, indexMap *int32) {
+	syscall.SyscallN(procUbidi_reorderLogical.Addr(), uintptr(unsafe.Pointer(levels)), uintptr(length), uintptr(unsafe.Pointer(indexMap)))
+}
+
+// Ubidi_reorderVisual calls icuuc!ubidi_reorderVisual.
+func Ubidi_reorderVisual(levels *byte, length int32, indexMap *int32) {
+	syscall.SyscallN(procUbidi_reorderVisual.Addr(), uintptr(unsafe.Pointer(levels)), uintptr(length), uintptr(unsafe.Pointer(indexMap)))
+}
+
+// Ubidi_setClassCallback calls icuuc!ubidi_setClassCallback.
+func Ubidi_setClassCallback(pBiDi *UBiDi, newFn UBiDiClassCallback, newContext unsafe.Pointer, oldFn *UBiDiClassCallback, oldContext *unsafe.Pointer, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUbidi_setClassCallback.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(newFn), uintptr(unsafe.Pointer(newContext)), uintptr(unsafe.Pointer(oldFn)), uintptr(unsafe.Pointer(oldContext)), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ubidi_setContext calls icuuc!ubidi_setContext.
+func Ubidi_setContext(pBiDi *UBiDi, prologue *uint16, proLength int32, epilogue *uint16, epiLength int32, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUbidi_setContext.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(prologue)), uintptr(proLength), uintptr(unsafe.Pointer(epilogue)), uintptr(epiLength), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ubidi_setInverse calls icuuc!ubidi_setInverse.
+func Ubidi_setInverse(pBiDi *UBiDi, isInverse int8) {
+	syscall.SyscallN(procUbidi_setInverse.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(isInverse))
+}
+
+// Ubidi_setLine calls icuuc!ubidi_setLine.
+func Ubidi_setLine(pParaBiDi *UBiDi, start int32, limit int32, pLineBiDi *UBiDi, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUbidi_setLine.Addr(), uintptr(unsafe.Pointer(pParaBiDi)), uintptr(start), uintptr(limit), uintptr(unsafe.Pointer(pLineBiDi)), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ubidi_setPara calls icuuc!ubidi_setPara.
+func Ubidi_setPara(pBiDi *UBiDi, text *uint16, length int32, paraLevel byte, embeddingLevels *byte, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUbidi_setPara.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(text)), uintptr(length), uintptr(paraLevel), uintptr(unsafe.Pointer(embeddingLevels)), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ubidi_setReorderingMode calls icuuc!ubidi_setReorderingMode.
+func Ubidi_setReorderingMode(pBiDi *UBiDi, reorderingMode UBiDiReorderingMode) {
+	syscall.SyscallN(procUbidi_setReorderingMode.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(reorderingMode))
+}
+
+// Ubidi_setReorderingOptions calls icuuc!ubidi_setReorderingOptions.
+func Ubidi_setReorderingOptions(pBiDi *UBiDi, reorderingOptions uint32) {
+	syscall.SyscallN(procUbidi_setReorderingOptions.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(reorderingOptions))
+}
+
+// Ubidi_writeReordered calls icuuc!ubidi_writeReordered.
+func Ubidi_writeReordered(pBiDi *UBiDi, dest *uint16, destSize int32, options uint16, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_writeReordered.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(dest)), uintptr(destSize), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ubidi_writeReverse calls icuuc!ubidi_writeReverse.
+func Ubidi_writeReverse(src *uint16, srcLength int32, dest *uint16, destSize int32, options uint16, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUbidi_writeReverse.Addr(), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(dest)), uintptr(destSize), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ubiditransform_close calls icuuc!ubiditransform_close.
+func Ubiditransform_close(pBidiTransform *UBiDiTransform) {
+	syscall.SyscallN(procUbiditransform_close.Addr(), uintptr(unsafe.Pointer(pBidiTransform)))
+}
+
+// Ubiditransform_open calls icuuc!ubiditransform_open.
+func Ubiditransform_open(pErrorCode *UErrorCode) *UBiDiTransform {
+	r1, _, _ := syscall.SyscallN(procUbiditransform_open.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UBiDiTransform)(unsafe.Pointer(r1))
+}
+
+// Ubiditransform_transform calls icuuc!ubiditransform_transform.
+func Ubiditransform_transform(pBiDiTransform *UBiDiTransform, src *uint16, srcLength int32, dest *uint16, destSize int32, inParaLevel byte, inOrder UBiDiOrder, outParaLevel byte, outOrder UBiDiOrder, doMirroring UBiDiMirroring, shapingOptions uint32, pErrorCode *UErrorCode) uint32 {
+	r1, _, _ := syscall.SyscallN(procUbiditransform_transform.Addr(), uintptr(unsafe.Pointer(pBiDiTransform)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(dest)), uintptr(destSize), uintptr(inParaLevel), uintptr(inOrder), uintptr(outParaLevel), uintptr(outOrder), uintptr(doMirroring), uintptr(shapingOptions), uintptr(unsafe.Pointer(pErrorCode)))
+	return uint32(r1)
+}
+
+// Ublock_getCode calls icuuc!ublock_getCode.
+func Ublock_getCode(c int32) UBlockCode {
+	r1, _, _ := syscall.SyscallN(procUblock_getCode.Addr(), uintptr(c))
+	return UBlockCode(r1)
+}
+
+// Ubrk_clone calls icu!ubrk_clone.
+func Ubrk_clone(bi *UBreakIterator, status *UErrorCode) *UBreakIterator {
+	r1, _, _ := syscall.SyscallN(procUbrk_clone.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(status)))
+	return (*UBreakIterator)(unsafe.Pointer(r1))
+}
+
+// Ubrk_close calls icuuc!ubrk_close.
+func Ubrk_close(bi *UBreakIterator) {
+	syscall.SyscallN(procUbrk_close.Addr(), uintptr(unsafe.Pointer(bi)))
+}
+
+// Ubrk_countAvailable calls icuuc!ubrk_countAvailable.
+func Ubrk_countAvailable() int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_countAvailable.Addr())
+	return int32(r1)
+}
+
+// Ubrk_current calls icuuc!ubrk_current.
+func Ubrk_current(bi *UBreakIterator) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_current.Addr(), uintptr(unsafe.Pointer(bi)))
+	return int32(r1)
+}
+
+// Ubrk_first calls icuuc!ubrk_first.
+func Ubrk_first(bi *UBreakIterator) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_first.Addr(), uintptr(unsafe.Pointer(bi)))
+	return int32(r1)
+}
+
+// Ubrk_following calls icuuc!ubrk_following.
+func Ubrk_following(bi *UBreakIterator, offset int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_following.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(offset))
+	return int32(r1)
+}
+
+// Ubrk_getAvailable calls icuuc!ubrk_getAvailable.
+func Ubrk_getAvailable(index int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUbrk_getAvailable.Addr(), uintptr(index))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ubrk_getBinaryRules calls icuuc!ubrk_getBinaryRules.
+func Ubrk_getBinaryRules(bi *UBreakIterator, binaryRules *byte, rulesCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_getBinaryRules.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(binaryRules)), uintptr(rulesCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ubrk_getLocaleByType calls icuuc!ubrk_getLocaleByType.
+func Ubrk_getLocaleByType(bi *UBreakIterator, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUbrk_getLocaleByType.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ubrk_getRuleStatus calls icuuc!ubrk_getRuleStatus.
+func Ubrk_getRuleStatus(bi *UBreakIterator) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_getRuleStatus.Addr(), uintptr(unsafe.Pointer(bi)))
+	return int32(r1)
+}
+
+// Ubrk_getRuleStatusVec calls icuuc!ubrk_getRuleStatusVec.
+func Ubrk_getRuleStatusVec(bi *UBreakIterator, fillInVec *int32, capacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_getRuleStatusVec.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(fillInVec)), uintptr(capacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ubrk_isBoundary calls icuuc!ubrk_isBoundary.
+func Ubrk_isBoundary(bi *UBreakIterator, offset int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUbrk_isBoundary.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(offset))
+	return int8(r1)
+}
+
+// Ubrk_last calls icuuc!ubrk_last.
+func Ubrk_last(bi *UBreakIterator) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_last.Addr(), uintptr(unsafe.Pointer(bi)))
+	return int32(r1)
+}
+
+// Ubrk_next calls icuuc!ubrk_next.
+func Ubrk_next(bi *UBreakIterator) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_next.Addr(), uintptr(unsafe.Pointer(bi)))
+	return int32(r1)
+}
+
+// Ubrk_open calls icuuc!ubrk_open.
+func Ubrk_open(type_ UBreakIteratorType, locale foundation.PSTR, text *uint16, textLength int32, status *UErrorCode) *UBreakIterator {
+	r1, _, _ := syscall.SyscallN(procUbrk_open.Addr(), uintptr(type_), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
+	return (*UBreakIterator)(unsafe.Pointer(r1))
+}
+
+// Ubrk_openBinaryRules calls icuuc!ubrk_openBinaryRules.
+func Ubrk_openBinaryRules(binaryRules *byte, rulesLength int32, text *uint16, textLength int32, status *UErrorCode) *UBreakIterator {
+	r1, _, _ := syscall.SyscallN(procUbrk_openBinaryRules.Addr(), uintptr(unsafe.Pointer(binaryRules)), uintptr(rulesLength), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
+	return (*UBreakIterator)(unsafe.Pointer(r1))
+}
+
+// Ubrk_openRules calls icuuc!ubrk_openRules.
+func Ubrk_openRules(rules *uint16, rulesLength int32, text *uint16, textLength int32, parseErr *UParseError, status *UErrorCode) *UBreakIterator {
+	r1, _, _ := syscall.SyscallN(procUbrk_openRules.Addr(), uintptr(unsafe.Pointer(rules)), uintptr(rulesLength), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parseErr)), uintptr(unsafe.Pointer(status)))
+	return (*UBreakIterator)(unsafe.Pointer(r1))
+}
+
+// Ubrk_preceding calls icuuc!ubrk_preceding.
+func Ubrk_preceding(bi *UBreakIterator, offset int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_preceding.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(offset))
+	return int32(r1)
+}
+
+// Ubrk_previous calls icuuc!ubrk_previous.
+func Ubrk_previous(bi *UBreakIterator) int32 {
+	r1, _, _ := syscall.SyscallN(procUbrk_previous.Addr(), uintptr(unsafe.Pointer(bi)))
+	return int32(r1)
+}
+
+// Ubrk_refreshUText calls icuuc!ubrk_refreshUText.
+func Ubrk_refreshUText(bi *UBreakIterator, text *UText, status *UErrorCode) {
+	syscall.SyscallN(procUbrk_refreshUText.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(status)))
+}
+
+// Ubrk_safeClone calls icuuc!ubrk_safeClone.
+func Ubrk_safeClone(bi *UBreakIterator, stackBuffer unsafe.Pointer, pBufferSize *int32, status *UErrorCode) *UBreakIterator {
+	r1, _, _ := syscall.SyscallN(procUbrk_safeClone.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(stackBuffer)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(status)))
+	return (*UBreakIterator)(unsafe.Pointer(r1))
+}
+
+// Ubrk_setText calls icuuc!ubrk_setText.
+func Ubrk_setText(bi *UBreakIterator, text *uint16, textLength int32, status *UErrorCode) {
+	syscall.SyscallN(procUbrk_setText.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
+}
+
+// Ubrk_setUText calls icuuc!ubrk_setUText.
+func Ubrk_setUText(bi *UBreakIterator, text *UText, status *UErrorCode) {
+	syscall.SyscallN(procUbrk_setUText.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucal_add calls icuin!ucal_add.
+func Ucal_add(cal *unsafe.Pointer, field UCalendarDateFields, amount int32, status *UErrorCode) {
+	syscall.SyscallN(procUcal_add.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(amount), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucal_clear calls icuin!ucal_clear.
+func Ucal_clear(calendar *unsafe.Pointer) {
+	syscall.SyscallN(procUcal_clear.Addr(), uintptr(unsafe.Pointer(calendar)))
+}
+
+// Ucal_clearField calls icuin!ucal_clearField.
+func Ucal_clearField(cal *unsafe.Pointer, field UCalendarDateFields) {
+	syscall.SyscallN(procUcal_clearField.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field))
+}
+
+// Ucal_clone calls icuin!ucal_clone.
+func Ucal_clone(cal *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUcal_clone.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Ucal_close calls icuin!ucal_close.
+func Ucal_close(cal *unsafe.Pointer) {
+	syscall.SyscallN(procUcal_close.Addr(), uintptr(unsafe.Pointer(cal)))
+}
+
+// Ucal_countAvailable calls icuin!ucal_countAvailable.
+func Ucal_countAvailable() int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_countAvailable.Addr())
+	return int32(r1)
+}
+
+// Ucal_equivalentTo calls icuin!ucal_equivalentTo.
+func Ucal_equivalentTo(cal1 *unsafe.Pointer, cal2 *unsafe.Pointer) int8 {
+	r1, _, _ := syscall.SyscallN(procUcal_equivalentTo.Addr(), uintptr(unsafe.Pointer(cal1)), uintptr(unsafe.Pointer(cal2)))
+	return int8(r1)
+}
+
+// Ucal_get calls icuin!ucal_get.
+func Ucal_get(cal *unsafe.Pointer, field UCalendarDateFields, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_get.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucal_getAttribute calls icuin!ucal_getAttribute.
+func Ucal_getAttribute(cal *unsafe.Pointer, attr UCalendarAttribute) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getAttribute.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(attr))
+	return int32(r1)
+}
+
+// Ucal_getAvailable calls icuin!ucal_getAvailable.
+func Ucal_getAvailable(localeIndex int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcal_getAvailable.Addr(), uintptr(localeIndex))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucal_getCanonicalTimeZoneID calls icuin!ucal_getCanonicalTimeZoneID.
+func Ucal_getCanonicalTimeZoneID(id *uint16, len_ int32, result *uint16, resultCapacity int32, isSystemID *int8, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getCanonicalTimeZoneID.Addr(), uintptr(unsafe.Pointer(id)), uintptr(len_), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(isSystemID)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucal_getDSTSavings calls icuin!ucal_getDSTSavings.
+func Ucal_getDSTSavings(zoneID *uint16, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getDSTSavings.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Ucal_getDayOfWeekType calls icuin!ucal_getDayOfWeekType.
+func Ucal_getDayOfWeekType(cal *unsafe.Pointer, dayOfWeek UCalendarDaysOfWeek, status *UErrorCode) UCalendarWeekdayType {
+	r1, _, _ := syscall.SyscallN(procUcal_getDayOfWeekType.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(dayOfWeek), uintptr(unsafe.Pointer(status)))
+	return UCalendarWeekdayType(r1)
+}
+
+// Ucal_getDefaultTimeZone calls icuin!ucal_getDefaultTimeZone.
+func Ucal_getDefaultTimeZone(result *uint16, resultCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getDefaultTimeZone.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Ucal_getHostTimeZone calls icu!ucal_getHostTimeZone.
+func Ucal_getHostTimeZone(result *uint16, resultCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getHostTimeZone.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Ucal_getKeywordValuesForLocale calls icuin!ucal_getKeywordValuesForLocale.
+func Ucal_getKeywordValuesForLocale(key foundation.PSTR, locale foundation.PSTR, commonlyUsed int8, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcal_getKeywordValuesForLocale.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(locale)), uintptr(commonlyUsed), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucal_getLimit calls icuin!ucal_getLimit.
+func Ucal_getLimit(cal *unsafe.Pointer, field UCalendarDateFields, type_ UCalendarLimitType, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getLimit.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucal_getLocaleByType calls icuin!ucal_getLocaleByType.
+func Ucal_getLocaleByType(cal *unsafe.Pointer, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcal_getLocaleByType.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucal_getTZDataVersion calls icuin!ucal_getTZDataVersion.
+func Ucal_getTZDataVersion(status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcal_getTZDataVersion.Addr(), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucal_getTimeZoneDisplayName calls icuin!ucal_getTimeZoneDisplayName.
+func Ucal_getTimeZoneDisplayName(cal *unsafe.Pointer, type_ UCalendarDisplayNameType, locale foundation.PSTR, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getTimeZoneDisplayName.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(type_), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucal_getTimeZoneID calls icuin!ucal_getTimeZoneID.
+func Ucal_getTimeZoneID(cal *unsafe.Pointer, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getTimeZoneID.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucal_getTimeZoneIDForWindowsID calls icuin!ucal_getTimeZoneIDForWindowsID.
+func Ucal_getTimeZoneIDForWindowsID(winid *uint16, len_ int32, region foundation.PSTR, id *uint16, idCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getTimeZoneIDForWindowsID.Addr(), uintptr(unsafe.Pointer(winid)), uintptr(len_), uintptr(unsafe.Pointer(region)), uintptr(unsafe.Pointer(id)), uintptr(idCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucal_getTimeZoneOffsetFromLocal calls icu!ucal_getTimeZoneOffsetFromLocal.
+func Ucal_getTimeZoneOffsetFromLocal(cal *unsafe.Pointer, nonExistingTimeOpt UTimeZoneLocalOption, duplicatedTimeOpt UTimeZoneLocalOption, rawOffset *int32, dstOffset *int32, status *UErrorCode) {
+	syscall.SyscallN(procUcal_getTimeZoneOffsetFromLocal.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(nonExistingTimeOpt), uintptr(duplicatedTimeOpt), uintptr(unsafe.Pointer(rawOffset)), uintptr(unsafe.Pointer(dstOffset)), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucal_getTimeZoneTransitionDate calls icuin!ucal_getTimeZoneTransitionDate.
+func Ucal_getTimeZoneTransitionDate(cal *unsafe.Pointer, type_ UTimeZoneTransitionType, transition *float64, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUcal_getTimeZoneTransitionDate.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(type_), uintptr(unsafe.Pointer(transition)), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Ucal_getType calls icuin!ucal_getType.
+func Ucal_getType(cal *unsafe.Pointer, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcal_getType.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucal_getWeekendTransition calls icuin!ucal_getWeekendTransition.
+func Ucal_getWeekendTransition(cal *unsafe.Pointer, dayOfWeek UCalendarDaysOfWeek, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getWeekendTransition.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(dayOfWeek), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucal_getWindowsTimeZoneID calls icuin!ucal_getWindowsTimeZoneID.
+func Ucal_getWindowsTimeZoneID(id *uint16, len_ int32, winid *uint16, winidCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcal_getWindowsTimeZoneID.Addr(), uintptr(unsafe.Pointer(id)), uintptr(len_), uintptr(unsafe.Pointer(winid)), uintptr(winidCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucal_inDaylightTime calls icuin!ucal_inDaylightTime.
+func Ucal_inDaylightTime(cal *unsafe.Pointer, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUcal_inDaylightTime.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Ucal_isSet calls icuin!ucal_isSet.
+func Ucal_isSet(cal *unsafe.Pointer, field UCalendarDateFields) int8 {
+	r1, _, _ := syscall.SyscallN(procUcal_isSet.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field))
+	return int8(r1)
+}
+
+// Ucal_open calls icuin!ucal_open.
+func Ucal_open(zoneID *uint16, len_ int32, locale foundation.PSTR, type_ UCalendarType, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUcal_open.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(len_), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Ucal_openCountryTimeZones calls icuin!ucal_openCountryTimeZones.
+func Ucal_openCountryTimeZones(country foundation.PSTR, ec *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcal_openCountryTimeZones.Addr(), uintptr(unsafe.Pointer(country)), uintptr(unsafe.Pointer(ec)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucal_openTimeZoneIDEnumeration calls icuin!ucal_openTimeZoneIDEnumeration.
+func Ucal_openTimeZoneIDEnumeration(zoneType USystemTimeZoneType, region foundation.PSTR, rawOffset *int32, ec *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcal_openTimeZoneIDEnumeration.Addr(), uintptr(zoneType), uintptr(unsafe.Pointer(region)), uintptr(unsafe.Pointer(rawOffset)), uintptr(unsafe.Pointer(ec)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucal_openTimeZones calls icuin!ucal_openTimeZones.
+func Ucal_openTimeZones(ec *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcal_openTimeZones.Addr(), uintptr(unsafe.Pointer(ec)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucal_roll calls icuin!ucal_roll.
+func Ucal_roll(cal *unsafe.Pointer, field UCalendarDateFields, amount int32, status *UErrorCode) {
+	syscall.SyscallN(procUcal_roll.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(amount), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucal_set calls icuin!ucal_set.
+func Ucal_set(cal *unsafe.Pointer, field UCalendarDateFields, value int32) {
+	syscall.SyscallN(procUcal_set.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(value))
+}
+
+// Ucal_setAttribute calls icuin!ucal_setAttribute.
+func Ucal_setAttribute(cal *unsafe.Pointer, attr UCalendarAttribute, newValue int32) {
+	syscall.SyscallN(procUcal_setAttribute.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(attr), uintptr(newValue))
+}
+
+// Ucal_setDate calls icuin!ucal_setDate.
+func Ucal_setDate(cal *unsafe.Pointer, year int32, month int32, date int32, status *UErrorCode) {
+	syscall.SyscallN(procUcal_setDate.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(year), uintptr(month), uintptr(date), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucal_setDateTime calls icuin!ucal_setDateTime.
+func Ucal_setDateTime(cal *unsafe.Pointer, year int32, month int32, date int32, hour int32, minute int32, second int32, status *UErrorCode) {
+	syscall.SyscallN(procUcal_setDateTime.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(year), uintptr(month), uintptr(date), uintptr(hour), uintptr(minute), uintptr(second), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucal_setDefaultTimeZone calls icuin!ucal_setDefaultTimeZone.
+func Ucal_setDefaultTimeZone(zoneID *uint16, ec *UErrorCode) {
+	syscall.SyscallN(procUcal_setDefaultTimeZone.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(unsafe.Pointer(ec)))
+}
+
+// Ucal_setTimeZone calls icuin!ucal_setTimeZone.
+func Ucal_setTimeZone(cal *unsafe.Pointer, zoneID *uint16, len_ int32, status *UErrorCode) {
+	syscall.SyscallN(procUcal_setTimeZone.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(zoneID)), uintptr(len_), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucasemap_close calls icuuc!ucasemap_close.
+func Ucasemap_close(csm *UCaseMap) {
+	syscall.SyscallN(procUcasemap_close.Addr(), uintptr(unsafe.Pointer(csm)))
+}
+
+// Ucasemap_getBreakIterator calls icuuc!ucasemap_getBreakIterator.
+func Ucasemap_getBreakIterator(csm *UCaseMap) *UBreakIterator {
+	r1, _, _ := syscall.SyscallN(procUcasemap_getBreakIterator.Addr(), uintptr(unsafe.Pointer(csm)))
+	return (*UBreakIterator)(unsafe.Pointer(r1))
+}
+
+// Ucasemap_getLocale calls icuuc!ucasemap_getLocale.
+func Ucasemap_getLocale(csm *UCaseMap) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcasemap_getLocale.Addr(), uintptr(unsafe.Pointer(csm)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucasemap_getOptions calls icuuc!ucasemap_getOptions.
+func Ucasemap_getOptions(csm *UCaseMap) uint32 {
+	r1, _, _ := syscall.SyscallN(procUcasemap_getOptions.Addr(), uintptr(unsafe.Pointer(csm)))
+	return uint32(r1)
+}
+
+// Ucasemap_open calls icuuc!ucasemap_open.
+func Ucasemap_open(locale foundation.PSTR, options uint32, pErrorCode *UErrorCode) *UCaseMap {
+	r1, _, _ := syscall.SyscallN(procUcasemap_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UCaseMap)(unsafe.Pointer(r1))
+}
+
+// Ucasemap_setBreakIterator calls icuuc!ucasemap_setBreakIterator.
+func Ucasemap_setBreakIterator(csm *UCaseMap, iterToAdopt *UBreakIterator, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUcasemap_setBreakIterator.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(iterToAdopt)), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ucasemap_setLocale calls icuuc!ucasemap_setLocale.
+func Ucasemap_setLocale(csm *UCaseMap, locale foundation.PSTR, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUcasemap_setLocale.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ucasemap_setOptions calls icuuc!ucasemap_setOptions.
+func Ucasemap_setOptions(csm *UCaseMap, options uint32, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUcasemap_setOptions.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ucasemap_toTitle calls icuuc!ucasemap_toTitle.
+func Ucasemap_toTitle(csm *UCaseMap, dest *uint16, destCapacity int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcasemap_toTitle.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucasemap_utf8FoldCase calls icuuc!ucasemap_utf8FoldCase.
+func Ucasemap_utf8FoldCase(csm *UCaseMap, dest foundation.PSTR, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcasemap_utf8FoldCase.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucasemap_utf8ToLower calls icuuc!ucasemap_utf8ToLower.
+func Ucasemap_utf8ToLower(csm *UCaseMap, dest foundation.PSTR, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcasemap_utf8ToLower.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucasemap_utf8ToTitle calls icuuc!ucasemap_utf8ToTitle.
+func Ucasemap_utf8ToTitle(csm *UCaseMap, dest foundation.PSTR, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcasemap_utf8ToTitle.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucasemap_utf8ToUpper calls icuuc!ucasemap_utf8ToUpper.
+func Ucasemap_utf8ToUpper(csm *UCaseMap, dest foundation.PSTR, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcasemap_utf8ToUpper.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucfpos_close calls icu!ucfpos_close.
+func Ucfpos_close(ucfpos *UConstrainedFieldPosition) {
+	syscall.SyscallN(procUcfpos_close.Addr(), uintptr(unsafe.Pointer(ucfpos)))
+}
+
+// Ucfpos_constrainCategory calls icu!ucfpos_constrainCategory.
+func Ucfpos_constrainCategory(ucfpos *UConstrainedFieldPosition, category int32, ec *UErrorCode) {
+	syscall.SyscallN(procUcfpos_constrainCategory.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(category), uintptr(unsafe.Pointer(ec)))
+}
+
+// Ucfpos_constrainField calls icu!ucfpos_constrainField.
+func Ucfpos_constrainField(ucfpos *UConstrainedFieldPosition, category int32, field int32, ec *UErrorCode) {
+	syscall.SyscallN(procUcfpos_constrainField.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(category), uintptr(field), uintptr(unsafe.Pointer(ec)))
+}
+
+// Ucfpos_getCategory calls icu!ucfpos_getCategory.
+func Ucfpos_getCategory(ucfpos *UConstrainedFieldPosition, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcfpos_getCategory.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Ucfpos_getField calls icu!ucfpos_getField.
+func Ucfpos_getField(ucfpos *UConstrainedFieldPosition, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcfpos_getField.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Ucfpos_getIndexes calls icu!ucfpos_getIndexes.
+func Ucfpos_getIndexes(ucfpos *UConstrainedFieldPosition, pStart *int32, pLimit *int32, ec *UErrorCode) {
+	syscall.SyscallN(procUcfpos_getIndexes.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(pStart)), uintptr(unsafe.Pointer(pLimit)), uintptr(unsafe.Pointer(ec)))
+}
+
+// Ucfpos_getInt64IterationContext calls icu!ucfpos_getInt64IterationContext.
+func Ucfpos_getInt64IterationContext(ucfpos *UConstrainedFieldPosition, ec *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUcfpos_getInt64IterationContext.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
+	return int64(r1)
+}
+
+// Ucfpos_matchesField calls icu!ucfpos_matchesField.
+func Ucfpos_matchesField(ucfpos *UConstrainedFieldPosition, category int32, field int32, ec *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUcfpos_matchesField.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(category), uintptr(field), uintptr(unsafe.Pointer(ec)))
+	return int8(r1)
+}
+
+// Ucfpos_open calls icu!ucfpos_open.
+func Ucfpos_open(ec *UErrorCode) *UConstrainedFieldPosition {
+	r1, _, _ := syscall.SyscallN(procUcfpos_open.Addr(), uintptr(unsafe.Pointer(ec)))
+	return (*UConstrainedFieldPosition)(unsafe.Pointer(r1))
+}
+
+// Ucfpos_reset calls icu!ucfpos_reset.
+func Ucfpos_reset(ucfpos *UConstrainedFieldPosition, ec *UErrorCode) {
+	syscall.SyscallN(procUcfpos_reset.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
+}
+
+// Ucfpos_setInt64IterationContext calls icu!ucfpos_setInt64IterationContext.
+func Ucfpos_setInt64IterationContext(ucfpos *UConstrainedFieldPosition, context int64, ec *UErrorCode) {
+	syscall.SyscallN(procUcfpos_setInt64IterationContext.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(context), uintptr(unsafe.Pointer(ec)))
+}
+
+// Ucfpos_setState calls icu!ucfpos_setState.
+func Ucfpos_setState(ucfpos *UConstrainedFieldPosition, category int32, field int32, start int32, limit int32, ec *UErrorCode) {
+	syscall.SyscallN(procUcfpos_setState.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(category), uintptr(field), uintptr(start), uintptr(limit), uintptr(unsafe.Pointer(ec)))
+}
+
+// Ucnv_cbFromUWriteBytes calls icuuc!ucnv_cbFromUWriteBytes.
+func Ucnv_cbFromUWriteBytes(args *UConverterFromUnicodeArgs, source foundation.PSTR, length int32, offsetIndex int32, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_cbFromUWriteBytes.Addr(), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(source)), uintptr(length), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_cbFromUWriteSub calls icuuc!ucnv_cbFromUWriteSub.
+func Ucnv_cbFromUWriteSub(args *UConverterFromUnicodeArgs, offsetIndex int32, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_cbFromUWriteSub.Addr(), uintptr(unsafe.Pointer(args)), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_cbFromUWriteUChars calls icuuc!ucnv_cbFromUWriteUChars.
+func Ucnv_cbFromUWriteUChars(args *UConverterFromUnicodeArgs, source **uint16, sourceLimit *uint16, offsetIndex int32, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_cbFromUWriteUChars.Addr(), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_cbToUWriteSub calls icuuc!ucnv_cbToUWriteSub.
+func Ucnv_cbToUWriteSub(args *UConverterToUnicodeArgs, offsetIndex int32, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_cbToUWriteSub.Addr(), uintptr(unsafe.Pointer(args)), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_cbToUWriteUChars calls icuuc!ucnv_cbToUWriteUChars.
+func Ucnv_cbToUWriteUChars(args *UConverterToUnicodeArgs, source *uint16, length int32, offsetIndex int32, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_cbToUWriteUChars.Addr(), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(source)), uintptr(length), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_clone calls icu!ucnv_clone.
+func Ucnv_clone(cnv *UConverter, status *UErrorCode) *UConverter {
+	r1, _, _ := syscall.SyscallN(procUcnv_clone.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(status)))
+	return (*UConverter)(unsafe.Pointer(r1))
+}
+
+// Ucnv_close calls icuuc!ucnv_close.
+func Ucnv_close(converter *UConverter) {
+	syscall.SyscallN(procUcnv_close.Addr(), uintptr(unsafe.Pointer(converter)))
+}
+
+// Ucnv_compareNames calls icuuc!ucnv_compareNames.
+func Ucnv_compareNames(name1 foundation.PSTR, name2 foundation.PSTR) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_compareNames.Addr(), uintptr(unsafe.Pointer(name1)), uintptr(unsafe.Pointer(name2)))
+	return int32(r1)
+}
+
+// Ucnv_convert calls icuuc!ucnv_convert.
+func Ucnv_convert(toConverterName foundation.PSTR, fromConverterName foundation.PSTR, target foundation.PSTR, targetCapacity int32, source foundation.PSTR, sourceLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_convert.Addr(), uintptr(unsafe.Pointer(toConverterName)), uintptr(unsafe.Pointer(fromConverterName)), uintptr(unsafe.Pointer(target)), uintptr(targetCapacity), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucnv_convertEx calls icuuc!ucnv_convertEx.
+func Ucnv_convertEx(targetCnv *UConverter, sourceCnv *UConverter, target **int8, targetLimit foundation.PSTR, source **int8, sourceLimit foundation.PSTR, pivotStart *uint16, pivotSource **uint16, pivotTarget **uint16, pivotLimit *uint16, reset int8, flush int8, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUcnv_convertEx.Addr(), uintptr(unsafe.Pointer(targetCnv)), uintptr(unsafe.Pointer(sourceCnv)), uintptr(unsafe.Pointer(target)), uintptr(unsafe.Pointer(targetLimit)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(unsafe.Pointer(pivotStart)), uintptr(unsafe.Pointer(pivotSource)), uintptr(unsafe.Pointer(pivotTarget)), uintptr(unsafe.Pointer(pivotLimit)), uintptr(reset), uintptr(flush), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ucnv_countAliases calls icuuc!ucnv_countAliases.
+func Ucnv_countAliases(alias foundation.PSTR, pErrorCode *UErrorCode) uint16 {
+	r1, _, _ := syscall.SyscallN(procUcnv_countAliases.Addr(), uintptr(unsafe.Pointer(alias)), uintptr(unsafe.Pointer(pErrorCode)))
+	return uint16(r1)
+}
+
+// Ucnv_countAvailable calls icuuc!ucnv_countAvailable.
+func Ucnv_countAvailable() int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_countAvailable.Addr())
+	return int32(r1)
+}
+
+// Ucnv_countStandards calls icuuc!ucnv_countStandards.
+func Ucnv_countStandards() uint16 {
+	r1, _, _ := syscall.SyscallN(procUcnv_countStandards.Addr())
+	return uint16(r1)
+}
+
+// Ucnv_detectUnicodeSignature calls icuuc!ucnv_detectUnicodeSignature.
+func Ucnv_detectUnicodeSignature(source foundation.PSTR, sourceLength int32, signatureLength *int32, pErrorCode *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcnv_detectUnicodeSignature.Addr(), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(signatureLength)), uintptr(unsafe.Pointer(pErrorCode)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucnv_fixFileSeparator calls icuuc!ucnv_fixFileSeparator.
+func Ucnv_fixFileSeparator(cnv *UConverter, source *uint16, sourceLen int32) {
+	syscall.SyscallN(procUcnv_fixFileSeparator.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(source)), uintptr(sourceLen))
+}
+
+// Ucnv_flushCache calls icuuc!ucnv_flushCache.
+func Ucnv_flushCache() int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_flushCache.Addr())
+	return int32(r1)
+}
+
+// Ucnv_fromAlgorithmic calls icuuc!ucnv_fromAlgorithmic.
+func Ucnv_fromAlgorithmic(cnv *UConverter, algorithmicType UConverterType, target foundation.PSTR, targetCapacity int32, source foundation.PSTR, sourceLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_fromAlgorithmic.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(algorithmicType), uintptr(unsafe.Pointer(target)), uintptr(targetCapacity), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucnv_fromUChars calls icuuc!ucnv_fromUChars.
+func Ucnv_fromUChars(cnv *UConverter, dest foundation.PSTR, destCapacity int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_fromUChars.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucnv_fromUCountPending calls icuuc!ucnv_fromUCountPending.
+func Ucnv_fromUCountPending(cnv *UConverter, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_fromUCountPending.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucnv_fromUnicode calls icuuc!ucnv_fromUnicode.
+func Ucnv_fromUnicode(converter *UConverter, target **int8, targetLimit foundation.PSTR, source **uint16, sourceLimit *uint16, offsets *int32, flush int8, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_fromUnicode.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(target)), uintptr(unsafe.Pointer(targetLimit)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(unsafe.Pointer(offsets)), uintptr(flush), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_getAlias calls icuuc!ucnv_getAlias.
+func Ucnv_getAlias(alias foundation.PSTR, n uint16, pErrorCode *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcnv_getAlias.Addr(), uintptr(unsafe.Pointer(alias)), uintptr(n), uintptr(unsafe.Pointer(pErrorCode)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucnv_getAliases calls icuuc!ucnv_getAliases.
+func Ucnv_getAliases(alias foundation.PSTR, aliases **int8, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUcnv_getAliases.Addr(), uintptr(unsafe.Pointer(alias)), uintptr(unsafe.Pointer(aliases)), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ucnv_getAvailableName calls icuuc!ucnv_getAvailableName.
+func Ucnv_getAvailableName(n int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcnv_getAvailableName.Addr(), uintptr(n))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucnv_getCCSID calls icuuc!ucnv_getCCSID.
+func Ucnv_getCCSID(converter *UConverter, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_getCCSID.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Ucnv_getCanonicalName calls icuuc!ucnv_getCanonicalName.
+func Ucnv_getCanonicalName(alias foundation.PSTR, standard foundation.PSTR, pErrorCode *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcnv_getCanonicalName.Addr(), uintptr(unsafe.Pointer(alias)), uintptr(unsafe.Pointer(standard)), uintptr(unsafe.Pointer(pErrorCode)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucnv_getDefaultName calls icuuc!ucnv_getDefaultName.
+func Ucnv_getDefaultName() foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcnv_getDefaultName.Addr())
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucnv_getDisplayName calls icuuc!ucnv_getDisplayName.
+func Ucnv_getDisplayName(converter *UConverter, displayLocale foundation.PSTR, displayName *uint16, displayNameCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_getDisplayName.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(displayName)), uintptr(displayNameCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Ucnv_getFromUCallBack calls icuuc!ucnv_getFromUCallBack.
+func Ucnv_getFromUCallBack(converter *UConverter, action *UConverterFromUCallback, context *unsafe.Pointer) {
+	syscall.SyscallN(procUcnv_getFromUCallBack.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(action)), uintptr(unsafe.Pointer(context)))
+}
+
+// Ucnv_getInvalidChars calls icuuc!ucnv_getInvalidChars.
+func Ucnv_getInvalidChars(converter *UConverter, errBytes foundation.PSTR, len_ *int8, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_getInvalidChars.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(errBytes)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_getInvalidUChars calls icuuc!ucnv_getInvalidUChars.
+func Ucnv_getInvalidUChars(converter *UConverter, errUChars *uint16, len_ *int8, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_getInvalidUChars.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(errUChars)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_getMaxCharSize calls icuuc!ucnv_getMaxCharSize.
+func Ucnv_getMaxCharSize(converter *UConverter) int8 {
+	r1, _, _ := syscall.SyscallN(procUcnv_getMaxCharSize.Addr(), uintptr(unsafe.Pointer(converter)))
+	return int8(r1)
+}
+
+// Ucnv_getMinCharSize calls icuuc!ucnv_getMinCharSize.
+func Ucnv_getMinCharSize(converter *UConverter) int8 {
+	r1, _, _ := syscall.SyscallN(procUcnv_getMinCharSize.Addr(), uintptr(unsafe.Pointer(converter)))
+	return int8(r1)
+}
+
+// Ucnv_getName calls icuuc!ucnv_getName.
+func Ucnv_getName(converter *UConverter, err_ *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcnv_getName.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(err_)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucnv_getNextUChar calls icuuc!ucnv_getNextUChar.
+func Ucnv_getNextUChar(converter *UConverter, source **int8, sourceLimit foundation.PSTR, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_getNextUChar.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Ucnv_getPlatform calls icuuc!ucnv_getPlatform.
+func Ucnv_getPlatform(converter *UConverter, err_ *UErrorCode) UConverterPlatform {
+	r1, _, _ := syscall.SyscallN(procUcnv_getPlatform.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(err_)))
+	return UConverterPlatform(r1)
+}
+
+// Ucnv_getStandard calls icuuc!ucnv_getStandard.
+func Ucnv_getStandard(n uint16, pErrorCode *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcnv_getStandard.Addr(), uintptr(n), uintptr(unsafe.Pointer(pErrorCode)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucnv_getStandardName calls icuuc!ucnv_getStandardName.
+func Ucnv_getStandardName(name foundation.PSTR, standard foundation.PSTR, pErrorCode *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcnv_getStandardName.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(standard)), uintptr(unsafe.Pointer(pErrorCode)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucnv_getStarters calls icuuc!ucnv_getStarters.
+func Ucnv_getStarters(converter *UConverter, starters *int8, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_getStarters.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(starters)), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_getSubstChars calls icuuc!ucnv_getSubstChars.
+func Ucnv_getSubstChars(converter *UConverter, subChars foundation.PSTR, len_ *int8, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_getSubstChars.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(subChars)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_getToUCallBack calls icuuc!ucnv_getToUCallBack.
+func Ucnv_getToUCallBack(converter *UConverter, action *UConverterToUCallback, context *unsafe.Pointer) {
+	syscall.SyscallN(procUcnv_getToUCallBack.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(action)), uintptr(unsafe.Pointer(context)))
+}
+
+// Ucnv_getType calls icuuc!ucnv_getType.
+func Ucnv_getType(converter *UConverter) UConverterType {
+	r1, _, _ := syscall.SyscallN(procUcnv_getType.Addr(), uintptr(unsafe.Pointer(converter)))
+	return UConverterType(r1)
+}
+
+// Ucnv_getUnicodeSet calls icuuc!ucnv_getUnicodeSet.
+func Ucnv_getUnicodeSet(cnv *UConverter, setFillIn *USet, whichSet UConverterUnicodeSet, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUcnv_getUnicodeSet.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(setFillIn)), uintptr(whichSet), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ucnv_isAmbiguous calls icuuc!ucnv_isAmbiguous.
+func Ucnv_isAmbiguous(cnv *UConverter) int8 {
+	r1, _, _ := syscall.SyscallN(procUcnv_isAmbiguous.Addr(), uintptr(unsafe.Pointer(cnv)))
+	return int8(r1)
+}
+
+// Ucnv_isFixedWidth calls icuuc!ucnv_isFixedWidth.
+func Ucnv_isFixedWidth(cnv *UConverter, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUcnv_isFixedWidth.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Ucnv_open calls icuuc!ucnv_open.
+func Ucnv_open(converterName foundation.PSTR, err_ *UErrorCode) *UConverter {
+	r1, _, _ := syscall.SyscallN(procUcnv_open.Addr(), uintptr(unsafe.Pointer(converterName)), uintptr(unsafe.Pointer(err_)))
+	return (*UConverter)(unsafe.Pointer(r1))
+}
+
+// Ucnv_openAllNames calls icuuc!ucnv_openAllNames.
+func Ucnv_openAllNames(pErrorCode *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcnv_openAllNames.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucnv_openCCSID calls icuuc!ucnv_openCCSID.
+func Ucnv_openCCSID(codepage int32, platform UConverterPlatform, err_ *UErrorCode) *UConverter {
+	r1, _, _ := syscall.SyscallN(procUcnv_openCCSID.Addr(), uintptr(codepage), uintptr(platform), uintptr(unsafe.Pointer(err_)))
+	return (*UConverter)(unsafe.Pointer(r1))
+}
+
+// Ucnv_openPackage calls icuuc!ucnv_openPackage.
+func Ucnv_openPackage(packageName foundation.PSTR, converterName foundation.PSTR, err_ *UErrorCode) *UConverter {
+	r1, _, _ := syscall.SyscallN(procUcnv_openPackage.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(converterName)), uintptr(unsafe.Pointer(err_)))
+	return (*UConverter)(unsafe.Pointer(r1))
+}
+
+// Ucnv_openStandardNames calls icuuc!ucnv_openStandardNames.
+func Ucnv_openStandardNames(convName foundation.PSTR, standard foundation.PSTR, pErrorCode *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcnv_openStandardNames.Addr(), uintptr(unsafe.Pointer(convName)), uintptr(unsafe.Pointer(standard)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucnv_openU calls icuuc!ucnv_openU.
+func Ucnv_openU(name *uint16, err_ *UErrorCode) *UConverter {
+	r1, _, _ := syscall.SyscallN(procUcnv_openU.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(err_)))
+	return (*UConverter)(unsafe.Pointer(r1))
+}
+
+// Ucnv_reset calls icuuc!ucnv_reset.
+func Ucnv_reset(converter *UConverter) {
+	syscall.SyscallN(procUcnv_reset.Addr(), uintptr(unsafe.Pointer(converter)))
+}
+
+// Ucnv_resetFromUnicode calls icuuc!ucnv_resetFromUnicode.
+func Ucnv_resetFromUnicode(converter *UConverter) {
+	syscall.SyscallN(procUcnv_resetFromUnicode.Addr(), uintptr(unsafe.Pointer(converter)))
+}
+
+// Ucnv_resetToUnicode calls icuuc!ucnv_resetToUnicode.
+func Ucnv_resetToUnicode(converter *UConverter) {
+	syscall.SyscallN(procUcnv_resetToUnicode.Addr(), uintptr(unsafe.Pointer(converter)))
+}
+
+// Ucnv_safeClone calls icuuc!ucnv_safeClone.
+func Ucnv_safeClone(cnv *UConverter, stackBuffer unsafe.Pointer, pBufferSize *int32, status *UErrorCode) *UConverter {
+	r1, _, _ := syscall.SyscallN(procUcnv_safeClone.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(stackBuffer)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(status)))
+	return (*UConverter)(unsafe.Pointer(r1))
+}
+
+// Ucnv_setDefaultName calls icuuc!ucnv_setDefaultName.
+func Ucnv_setDefaultName(name foundation.PSTR) {
+	syscall.SyscallN(procUcnv_setDefaultName.Addr(), uintptr(unsafe.Pointer(name)))
+}
+
+// Ucnv_setFallback calls icuuc!ucnv_setFallback.
+func Ucnv_setFallback(cnv *UConverter, usesFallback int8) {
+	syscall.SyscallN(procUcnv_setFallback.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(usesFallback))
+}
+
+// Ucnv_setFromUCallBack calls icuuc!ucnv_setFromUCallBack.
+func Ucnv_setFromUCallBack(converter *UConverter, newAction UConverterFromUCallback, newContext unsafe.Pointer, oldAction *UConverterFromUCallback, oldContext *unsafe.Pointer, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_setFromUCallBack.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(newAction), uintptr(unsafe.Pointer(newContext)), uintptr(unsafe.Pointer(oldAction)), uintptr(unsafe.Pointer(oldContext)), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_setSubstChars calls icuuc!ucnv_setSubstChars.
+func Ucnv_setSubstChars(converter *UConverter, subChars foundation.PSTR, len_ int8, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_setSubstChars.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(subChars)), uintptr(len_), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_setSubstString calls icuuc!ucnv_setSubstString.
+func Ucnv_setSubstString(cnv *UConverter, s *uint16, length int32, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_setSubstString.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_setToUCallBack calls icuuc!ucnv_setToUCallBack.
+func Ucnv_setToUCallBack(converter *UConverter, newAction UConverterToUCallback, newContext unsafe.Pointer, oldAction *UConverterToUCallback, oldContext *unsafe.Pointer, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_setToUCallBack.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(newAction), uintptr(unsafe.Pointer(newContext)), uintptr(unsafe.Pointer(oldAction)), uintptr(unsafe.Pointer(oldContext)), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_toAlgorithmic calls icuuc!ucnv_toAlgorithmic.
+func Ucnv_toAlgorithmic(algorithmicType UConverterType, cnv *UConverter, target foundation.PSTR, targetCapacity int32, source foundation.PSTR, sourceLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_toAlgorithmic.Addr(), uintptr(algorithmicType), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(target)), uintptr(targetCapacity), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucnv_toUChars calls icuuc!ucnv_toUChars.
+func Ucnv_toUChars(cnv *UConverter, dest *uint16, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_toUChars.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucnv_toUCountPending calls icuuc!ucnv_toUCountPending.
+func Ucnv_toUCountPending(cnv *UConverter, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnv_toUCountPending.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucnv_toUnicode calls icuuc!ucnv_toUnicode.
+func Ucnv_toUnicode(converter *UConverter, target **uint16, targetLimit *uint16, source **int8, sourceLimit foundation.PSTR, offsets *int32, flush int8, err_ *UErrorCode) {
+	syscall.SyscallN(procUcnv_toUnicode.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(target)), uintptr(unsafe.Pointer(targetLimit)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(unsafe.Pointer(offsets)), uintptr(flush), uintptr(unsafe.Pointer(err_)))
+}
+
+// Ucnv_usesFallback calls icuuc!ucnv_usesFallback.
+func Ucnv_usesFallback(cnv *UConverter) int8 {
+	r1, _, _ := syscall.SyscallN(procUcnv_usesFallback.Addr(), uintptr(unsafe.Pointer(cnv)))
+	return int8(r1)
+}
+
+// Ucnvsel_close calls icuuc!ucnvsel_close.
+func Ucnvsel_close(sel *UConverterSelector) {
+	syscall.SyscallN(procUcnvsel_close.Addr(), uintptr(unsafe.Pointer(sel)))
+}
+
+// Ucnvsel_open calls icuuc!ucnvsel_open.
+func Ucnvsel_open(converterList **int8, converterListSize int32, excludedCodePoints *USet, whichSet UConverterUnicodeSet, status *UErrorCode) *UConverterSelector {
+	r1, _, _ := syscall.SyscallN(procUcnvsel_open.Addr(), uintptr(unsafe.Pointer(converterList)), uintptr(converterListSize), uintptr(unsafe.Pointer(excludedCodePoints)), uintptr(whichSet), uintptr(unsafe.Pointer(status)))
+	return (*UConverterSelector)(unsafe.Pointer(r1))
+}
+
+// Ucnvsel_openFromSerialized calls icuuc!ucnvsel_openFromSerialized.
+func Ucnvsel_openFromSerialized(buffer unsafe.Pointer, length int32, status *UErrorCode) *UConverterSelector {
+	r1, _, _ := syscall.SyscallN(procUcnvsel_openFromSerialized.Addr(), uintptr(unsafe.Pointer(buffer)), uintptr(length), uintptr(unsafe.Pointer(status)))
+	return (*UConverterSelector)(unsafe.Pointer(r1))
+}
+
+// Ucnvsel_selectForString calls icuuc!ucnvsel_selectForString.
+func Ucnvsel_selectForString(sel *UConverterSelector, s *uint16, length int32, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcnvsel_selectForString.Addr(), uintptr(unsafe.Pointer(sel)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucnvsel_selectForUTF8 calls icuuc!ucnvsel_selectForUTF8.
+func Ucnvsel_selectForUTF8(sel *UConverterSelector, s foundation.PSTR, length int32, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcnvsel_selectForUTF8.Addr(), uintptr(unsafe.Pointer(sel)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucnvsel_serialize calls icuuc!ucnvsel_serialize.
+func Ucnvsel_serialize(sel *UConverterSelector, buffer unsafe.Pointer, bufferCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcnvsel_serialize.Addr(), uintptr(unsafe.Pointer(sel)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucol_clone calls icu!ucol_clone.
+func Ucol_clone(coll *UCollator, status *UErrorCode) *UCollator {
+	r1, _, _ := syscall.SyscallN(procUcol_clone.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(status)))
+	return (*UCollator)(unsafe.Pointer(r1))
+}
+
+// Ucol_cloneBinary calls icuin!ucol_cloneBinary.
+func Ucol_cloneBinary(coll *UCollator, buffer *byte, capacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_cloneBinary.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(buffer)), uintptr(capacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucol_close calls icuin!ucol_close.
+func Ucol_close(coll *UCollator) {
+	syscall.SyscallN(procUcol_close.Addr(), uintptr(unsafe.Pointer(coll)))
+}
+
+// Ucol_closeElements calls icuin!ucol_closeElements.
+func Ucol_closeElements(elems *UCollationElements) {
+	syscall.SyscallN(procUcol_closeElements.Addr(), uintptr(unsafe.Pointer(elems)))
+}
+
+// Ucol_countAvailable calls icuin!ucol_countAvailable.
+func Ucol_countAvailable() int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_countAvailable.Addr())
+	return int32(r1)
+}
+
+// Ucol_equal calls icuin!ucol_equal.
+func Ucol_equal(coll *UCollator, source *uint16, sourceLength int32, target *uint16, targetLength int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUcol_equal.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength))
+	return int8(r1)
+}
+
+// Ucol_getAttribute calls icuin!ucol_getAttribute.
+func Ucol_getAttribute(coll *UCollator, attr UColAttribute, status *UErrorCode) UColAttributeValue {
+	r1, _, _ := syscall.SyscallN(procUcol_getAttribute.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(attr), uintptr(unsafe.Pointer(status)))
+	return UColAttributeValue(r1)
+}
+
+// Ucol_getAvailable calls icuin!ucol_getAvailable.
+func Ucol_getAvailable(localeIndex int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcol_getAvailable.Addr(), uintptr(localeIndex))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucol_getBound calls icuin!ucol_getBound.
+func Ucol_getBound(source *byte, sourceLength int32, boundType UColBoundMode, noOfLevels uint32, result *byte, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getBound.Addr(), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(boundType), uintptr(noOfLevels), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucol_getContractionsAndExpansions calls icuin!ucol_getContractionsAndExpansions.
+func Ucol_getContractionsAndExpansions(coll *UCollator, contractions *USet, expansions *USet, addPrefixes int8, status *UErrorCode) {
+	syscall.SyscallN(procUcol_getContractionsAndExpansions.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(contractions)), uintptr(unsafe.Pointer(expansions)), uintptr(addPrefixes), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucol_getDisplayName calls icuin!ucol_getDisplayName.
+func Ucol_getDisplayName(objLoc foundation.PSTR, dispLoc foundation.PSTR, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getDisplayName.Addr(), uintptr(unsafe.Pointer(objLoc)), uintptr(unsafe.Pointer(dispLoc)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucol_getEquivalentReorderCodes calls icuin!ucol_getEquivalentReorderCodes.
+func Ucol_getEquivalentReorderCodes(reorderCode int32, dest *int32, destCapacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getEquivalentReorderCodes.Addr(), uintptr(reorderCode), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucol_getFunctionalEquivalent calls icuin!ucol_getFunctionalEquivalent.
+func Ucol_getFunctionalEquivalent(result foundation.PSTR, resultCapacity int32, keyword foundation.PSTR, locale foundation.PSTR, isAvailable *int8, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getFunctionalEquivalent.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(isAvailable)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucol_getKeywordValues calls icuin!ucol_getKeywordValues.
+func Ucol_getKeywordValues(keyword foundation.PSTR, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcol_getKeywordValues.Addr(), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucol_getKeywordValuesForLocale calls icuin!ucol_getKeywordValuesForLocale.
+func Ucol_getKeywordValuesForLocale(key foundation.PSTR, locale foundation.PSTR, commonlyUsed int8, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcol_getKeywordValuesForLocale.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(locale)), uintptr(commonlyUsed), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucol_getKeywords calls icuin!ucol_getKeywords.
+func Ucol_getKeywords(status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcol_getKeywords.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucol_getLocaleByType calls icuin!ucol_getLocaleByType.
+func Ucol_getLocaleByType(coll *UCollator, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcol_getLocaleByType.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucol_getMaxExpansion calls icuin!ucol_getMaxExpansion.
+func Ucol_getMaxExpansion(elems *UCollationElements, order int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getMaxExpansion.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(order))
+	return int32(r1)
+}
+
+// Ucol_getMaxVariable calls icuin!ucol_getMaxVariable.
+func Ucol_getMaxVariable(coll *UCollator) UColReorderCode {
+	r1, _, _ := syscall.SyscallN(procUcol_getMaxVariable.Addr(), uintptr(unsafe.Pointer(coll)))
+	return UColReorderCode(r1)
+}
+
+// Ucol_getOffset calls icuin!ucol_getOffset.
+func Ucol_getOffset(elems *UCollationElements) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getOffset.Addr(), uintptr(unsafe.Pointer(elems)))
+	return int32(r1)
+}
+
+// Ucol_getReorderCodes calls icuin!ucol_getReorderCodes.
+func Ucol_getReorderCodes(coll *UCollator, dest *int32, destCapacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getReorderCodes.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucol_getRules calls icuin!ucol_getRules.
+func Ucol_getRules(coll *UCollator, length *int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUcol_getRules.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(length)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ucol_getRulesEx calls icuin!ucol_getRulesEx.
+func Ucol_getRulesEx(coll *UCollator, delta UColRuleOption, buffer *uint16, bufferLen int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getRulesEx.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(delta), uintptr(unsafe.Pointer(buffer)), uintptr(bufferLen))
+	return int32(r1)
+}
+
+// Ucol_getSortKey calls icuin!ucol_getSortKey.
+func Ucol_getSortKey(coll *UCollator, source *uint16, sourceLength int32, result *byte, resultLength int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getSortKey.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength))
+	return int32(r1)
+}
+
+// Ucol_getStrength calls icuin!ucol_getStrength.
+func Ucol_getStrength(coll *UCollator) UColAttributeValue {
+	r1, _, _ := syscall.SyscallN(procUcol_getStrength.Addr(), uintptr(unsafe.Pointer(coll)))
+	return UColAttributeValue(r1)
+}
+
+// Ucol_getTailoredSet calls icuin!ucol_getTailoredSet.
+func Ucol_getTailoredSet(coll *UCollator, status *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procUcol_getTailoredSet.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(status)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Ucol_getUCAVersion calls icuin!ucol_getUCAVersion.
+func Ucol_getUCAVersion(coll *UCollator, info *byte) {
+	syscall.SyscallN(procUcol_getUCAVersion.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(info)))
+}
+
+// Ucol_getVariableTop calls icuin!ucol_getVariableTop.
+func Ucol_getVariableTop(coll *UCollator, status *UErrorCode) uint32 {
+	r1, _, _ := syscall.SyscallN(procUcol_getVariableTop.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(status)))
+	return uint32(r1)
+}
+
+// Ucol_getVersion calls icuin!ucol_getVersion.
+func Ucol_getVersion(coll *UCollator, info *byte) {
+	syscall.SyscallN(procUcol_getVersion.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(info)))
+}
+
+// Ucol_greater calls icuin!ucol_greater.
+func Ucol_greater(coll *UCollator, source *uint16, sourceLength int32, target *uint16, targetLength int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUcol_greater.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength))
+	return int8(r1)
+}
+
+// Ucol_greaterOrEqual calls icuin!ucol_greaterOrEqual.
+func Ucol_greaterOrEqual(coll *UCollator, source *uint16, sourceLength int32, target *uint16, targetLength int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUcol_greaterOrEqual.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength))
+	return int8(r1)
+}
+
+// Ucol_keyHashCode calls icuin!ucol_keyHashCode.
+func Ucol_keyHashCode(key *byte, length int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_keyHashCode.Addr(), uintptr(unsafe.Pointer(key)), uintptr(length))
+	return int32(r1)
+}
+
+// Ucol_mergeSortkeys calls icuin!ucol_mergeSortkeys.
+func Ucol_mergeSortkeys(src1 *byte, src1Length int32, src2 *byte, src2Length int32, dest *byte, destCapacity int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_mergeSortkeys.Addr(), uintptr(unsafe.Pointer(src1)), uintptr(src1Length), uintptr(unsafe.Pointer(src2)), uintptr(src2Length), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity))
+	return int32(r1)
+}
+
+// Ucol_next calls icuin!ucol_next.
+func Ucol_next(elems *UCollationElements, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_next.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucol_nextSortKeyPart calls icuin!ucol_nextSortKeyPart.
+func Ucol_nextSortKeyPart(coll *UCollator, iter *UCharIterator, state *uint32, dest *byte, count int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_nextSortKeyPart.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(iter)), uintptr(unsafe.Pointer(state)), uintptr(unsafe.Pointer(dest)), uintptr(count), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucol_open calls icuin!ucol_open.
+func Ucol_open(loc foundation.PSTR, status *UErrorCode) *UCollator {
+	r1, _, _ := syscall.SyscallN(procUcol_open.Addr(), uintptr(unsafe.Pointer(loc)), uintptr(unsafe.Pointer(status)))
+	return (*UCollator)(unsafe.Pointer(r1))
+}
+
+// Ucol_openAvailableLocales calls icuin!ucol_openAvailableLocales.
+func Ucol_openAvailableLocales(status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcol_openAvailableLocales.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucol_openBinary calls icuin!ucol_openBinary.
+func Ucol_openBinary(bin *byte, length int32, base *UCollator, status *UErrorCode) *UCollator {
+	r1, _, _ := syscall.SyscallN(procUcol_openBinary.Addr(), uintptr(unsafe.Pointer(bin)), uintptr(length), uintptr(unsafe.Pointer(base)), uintptr(unsafe.Pointer(status)))
+	return (*UCollator)(unsafe.Pointer(r1))
+}
+
+// Ucol_openElements calls icuin!ucol_openElements.
+func Ucol_openElements(coll *UCollator, text *uint16, textLength int32, status *UErrorCode) *UCollationElements {
+	r1, _, _ := syscall.SyscallN(procUcol_openElements.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
+	return (*UCollationElements)(unsafe.Pointer(r1))
+}
+
+// Ucol_openRules calls icuin!ucol_openRules.
+func Ucol_openRules(rules *uint16, rulesLength int32, normalizationMode UColAttributeValue, strength UColAttributeValue, parseError *UParseError, status *UErrorCode) *UCollator {
+	r1, _, _ := syscall.SyscallN(procUcol_openRules.Addr(), uintptr(unsafe.Pointer(rules)), uintptr(rulesLength), uintptr(normalizationMode), uintptr(strength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
+	return (*UCollator)(unsafe.Pointer(r1))
+}
+
+// Ucol_previous calls icuin!ucol_previous.
+func Ucol_previous(elems *UCollationElements, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_previous.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucol_primaryOrder calls icuin!ucol_primaryOrder.
+func Ucol_primaryOrder(order int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_primaryOrder.Addr(), uintptr(order))
+	return int32(r1)
+}
+
+// Ucol_reset calls icuin!ucol_reset.
+func Ucol_reset(elems *UCollationElements) {
+	syscall.SyscallN(procUcol_reset.Addr(), uintptr(unsafe.Pointer(elems)))
+}
+
+// Ucol_safeClone calls icuin!ucol_safeClone.
+func Ucol_safeClone(coll *UCollator, stackBuffer unsafe.Pointer, pBufferSize *int32, status *UErrorCode) *UCollator {
+	r1, _, _ := syscall.SyscallN(procUcol_safeClone.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(stackBuffer)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(status)))
+	return (*UCollator)(unsafe.Pointer(r1))
+}
+
+// Ucol_secondaryOrder calls icuin!ucol_secondaryOrder.
+func Ucol_secondaryOrder(order int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_secondaryOrder.Addr(), uintptr(order))
+	return int32(r1)
+}
+
+// Ucol_setAttribute calls icuin!ucol_setAttribute.
+func Ucol_setAttribute(coll *UCollator, attr UColAttribute, value UColAttributeValue, status *UErrorCode) {
+	syscall.SyscallN(procUcol_setAttribute.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(attr), uintptr(value), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucol_setMaxVariable calls icuin!ucol_setMaxVariable.
+func Ucol_setMaxVariable(coll *UCollator, group UColReorderCode, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUcol_setMaxVariable.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(group), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ucol_setOffset calls icuin!ucol_setOffset.
+func Ucol_setOffset(elems *UCollationElements, offset int32, status *UErrorCode) {
+	syscall.SyscallN(procUcol_setOffset.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(offset), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucol_setReorderCodes calls icuin!ucol_setReorderCodes.
+func Ucol_setReorderCodes(coll *UCollator, reorderCodes *int32, reorderCodesLength int32, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUcol_setReorderCodes.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(reorderCodes)), uintptr(reorderCodesLength), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Ucol_setStrength calls icuin!ucol_setStrength.
+func Ucol_setStrength(coll *UCollator, strength UColAttributeValue) {
+	syscall.SyscallN(procUcol_setStrength.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(strength))
+}
+
+// Ucol_setText calls icuin!ucol_setText.
+func Ucol_setText(elems *UCollationElements, text *uint16, textLength int32, status *UErrorCode) {
+	syscall.SyscallN(procUcol_setText.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucol_strcoll calls icuin!ucol_strcoll.
+func Ucol_strcoll(coll *UCollator, source *uint16, sourceLength int32, target *uint16, targetLength int32) UCollationResult {
+	r1, _, _ := syscall.SyscallN(procUcol_strcoll.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength))
+	return UCollationResult(r1)
+}
+
+// Ucol_strcollIter calls icuin!ucol_strcollIter.
+func Ucol_strcollIter(coll *UCollator, sIter *UCharIterator, tIter *UCharIterator, status *UErrorCode) UCollationResult {
+	r1, _, _ := syscall.SyscallN(procUcol_strcollIter.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(sIter)), uintptr(unsafe.Pointer(tIter)), uintptr(unsafe.Pointer(status)))
+	return UCollationResult(r1)
+}
+
+// Ucol_strcollUTF8 calls icuin!ucol_strcollUTF8.
+func Ucol_strcollUTF8(coll *UCollator, source foundation.PSTR, sourceLength int32, target foundation.PSTR, targetLength int32, status *UErrorCode) UCollationResult {
+	r1, _, _ := syscall.SyscallN(procUcol_strcollUTF8.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength), uintptr(unsafe.Pointer(status)))
+	return UCollationResult(r1)
+}
+
+// Ucol_tertiaryOrder calls icuin!ucol_tertiaryOrder.
+func Ucol_tertiaryOrder(order int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcol_tertiaryOrder.Addr(), uintptr(order))
+	return int32(r1)
+}
+
+// Ucpmap_get calls icu!ucpmap_get.
+func Ucpmap_get(map_ *UCPMap, c int32) uint32 {
+	r1, _, _ := syscall.SyscallN(procUcpmap_get.Addr(), uintptr(unsafe.Pointer(map_)), uintptr(c))
+	return uint32(r1)
+}
+
+// Ucpmap_getRange calls icu!ucpmap_getRange.
+func Ucpmap_getRange(map_ *UCPMap, start int32, option UCPMapRangeOption, surrogateValue uint32, filter *UCPMapValueFilter, context unsafe.Pointer, pValue *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcpmap_getRange.Addr(), uintptr(unsafe.Pointer(map_)), uintptr(start), uintptr(option), uintptr(surrogateValue), uintptr(unsafe.Pointer(filter)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(pValue)))
+	return int32(r1)
+}
+
+// Ucptrie_close calls icu!ucptrie_close.
+func Ucptrie_close(trie *UCPTrie) {
+	syscall.SyscallN(procUcptrie_close.Addr(), uintptr(unsafe.Pointer(trie)))
+}
+
+// Ucptrie_get calls icu!ucptrie_get.
+func Ucptrie_get(trie *UCPTrie, c int32) uint32 {
+	r1, _, _ := syscall.SyscallN(procUcptrie_get.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c))
+	return uint32(r1)
+}
+
+// Ucptrie_getRange calls icu!ucptrie_getRange.
+func Ucptrie_getRange(trie *UCPTrie, start int32, option UCPMapRangeOption, surrogateValue uint32, filter *UCPMapValueFilter, context unsafe.Pointer, pValue *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcptrie_getRange.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(start), uintptr(option), uintptr(surrogateValue), uintptr(unsafe.Pointer(filter)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(pValue)))
+	return int32(r1)
+}
+
+// Ucptrie_getType calls icu!ucptrie_getType.
+func Ucptrie_getType(trie *UCPTrie) UCPTrieType {
+	r1, _, _ := syscall.SyscallN(procUcptrie_getType.Addr(), uintptr(unsafe.Pointer(trie)))
+	return UCPTrieType(r1)
+}
+
+// Ucptrie_getValueWidth calls icu!ucptrie_getValueWidth.
+func Ucptrie_getValueWidth(trie *UCPTrie) UCPTrieValueWidth {
+	r1, _, _ := syscall.SyscallN(procUcptrie_getValueWidth.Addr(), uintptr(unsafe.Pointer(trie)))
+	return UCPTrieValueWidth(r1)
+}
+
+// Ucptrie_internalSmallIndex calls icu!ucptrie_internalSmallIndex.
+func Ucptrie_internalSmallIndex(trie *UCPTrie, c int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUcptrie_internalSmallIndex.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c))
+	return int32(r1)
+}
+
+// Ucptrie_internalSmallU8Index calls icu!ucptrie_internalSmallU8Index.
+func Ucptrie_internalSmallU8Index(trie *UCPTrie, lt1 int32, t2 byte, t3 byte) int32 {
+	r1, _, _ := syscall.SyscallN(procUcptrie_internalSmallU8Index.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(lt1), uintptr(t2), uintptr(t3))
+	return int32(r1)
+}
+
+// Ucptrie_internalU8PrevIndex calls icu!ucptrie_internalU8PrevIndex.
+func Ucptrie_internalU8PrevIndex(trie *UCPTrie, c int32, start *byte, src *byte) int32 {
+	r1, _, _ := syscall.SyscallN(procUcptrie_internalU8PrevIndex.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c), uintptr(unsafe.Pointer(start)), uintptr(unsafe.Pointer(src)))
+	return int32(r1)
+}
+
+// Ucptrie_openFromBinary calls icu!ucptrie_openFromBinary.
+func Ucptrie_openFromBinary(type_ UCPTrieType, valueWidth UCPTrieValueWidth, data unsafe.Pointer, length int32, pActualLength *int32, pErrorCode *UErrorCode) *UCPTrie {
+	r1, _, _ := syscall.SyscallN(procUcptrie_openFromBinary.Addr(), uintptr(type_), uintptr(valueWidth), uintptr(unsafe.Pointer(data)), uintptr(length), uintptr(unsafe.Pointer(pActualLength)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UCPTrie)(unsafe.Pointer(r1))
+}
+
+// Ucptrie_toBinary calls icu!ucptrie_toBinary.
+func Ucptrie_toBinary(trie *UCPTrie, data unsafe.Pointer, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcptrie_toBinary.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(unsafe.Pointer(data)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ucsdet_close calls icuin!ucsdet_close.
+func Ucsdet_close(ucsd *UCharsetDetector) {
+	syscall.SyscallN(procUcsdet_close.Addr(), uintptr(unsafe.Pointer(ucsd)))
+}
+
+// Ucsdet_detect calls icuin!ucsdet_detect.
+func Ucsdet_detect(ucsd *UCharsetDetector, status *UErrorCode) *UCharsetMatch {
+	r1, _, _ := syscall.SyscallN(procUcsdet_detect.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(status)))
+	return (*UCharsetMatch)(unsafe.Pointer(r1))
+}
+
+// Ucsdet_detectAll calls icuin!ucsdet_detectAll.
+func Ucsdet_detectAll(ucsd *UCharsetDetector, matchesFound *int32, status *UErrorCode) **UCharsetMatch {
+	r1, _, _ := syscall.SyscallN(procUcsdet_detectAll.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(matchesFound)), uintptr(unsafe.Pointer(status)))
+	return (**UCharsetMatch)(unsafe.Pointer(r1))
+}
+
+// Ucsdet_enableInputFilter calls icuin!ucsdet_enableInputFilter.
+func Ucsdet_enableInputFilter(ucsd *UCharsetDetector, filter int8) int8 {
+	r1, _, _ := syscall.SyscallN(procUcsdet_enableInputFilter.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(filter))
+	return int8(r1)
+}
+
+// Ucsdet_getAllDetectableCharsets calls icuin!ucsdet_getAllDetectableCharsets.
+func Ucsdet_getAllDetectableCharsets(ucsd *UCharsetDetector, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcsdet_getAllDetectableCharsets.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucsdet_getConfidence calls icuin!ucsdet_getConfidence.
+func Ucsdet_getConfidence(ucsm *UCharsetMatch, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcsdet_getConfidence.Addr(), uintptr(unsafe.Pointer(ucsm)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucsdet_getLanguage calls icuin!ucsdet_getLanguage.
+func Ucsdet_getLanguage(ucsm *UCharsetMatch, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcsdet_getLanguage.Addr(), uintptr(unsafe.Pointer(ucsm)), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucsdet_getName calls icuin!ucsdet_getName.
+func Ucsdet_getName(ucsm *UCharsetMatch, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUcsdet_getName.Addr(), uintptr(unsafe.Pointer(ucsm)), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ucsdet_getUChars calls icuin!ucsdet_getUChars.
+func Ucsdet_getUChars(ucsm *UCharsetMatch, buf *uint16, cap_ int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcsdet_getUChars.Addr(), uintptr(unsafe.Pointer(ucsm)), uintptr(unsafe.Pointer(buf)), uintptr(cap_), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ucsdet_isInputFilterEnabled calls icuin!ucsdet_isInputFilterEnabled.
+func Ucsdet_isInputFilterEnabled(ucsd *UCharsetDetector) int8 {
+	r1, _, _ := syscall.SyscallN(procUcsdet_isInputFilterEnabled.Addr(), uintptr(unsafe.Pointer(ucsd)))
+	return int8(r1)
+}
+
+// Ucsdet_open calls icuin!ucsdet_open.
+func Ucsdet_open(status *UErrorCode) *UCharsetDetector {
+	r1, _, _ := syscall.SyscallN(procUcsdet_open.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*UCharsetDetector)(unsafe.Pointer(r1))
+}
+
+// Ucsdet_setDeclaredEncoding calls icuin!ucsdet_setDeclaredEncoding.
+func Ucsdet_setDeclaredEncoding(ucsd *UCharsetDetector, encoding foundation.PSTR, length int32, status *UErrorCode) {
+	syscall.SyscallN(procUcsdet_setDeclaredEncoding.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(encoding)), uintptr(length), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucsdet_setText calls icuin!ucsdet_setText.
+func Ucsdet_setText(ucsd *UCharsetDetector, textIn foundation.PSTR, len_ int32, status *UErrorCode) {
+	syscall.SyscallN(procUcsdet_setText.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(textIn)), uintptr(len_), uintptr(unsafe.Pointer(status)))
+}
+
+// Ucurr_forLocale calls icuuc!ucurr_forLocale.
+func Ucurr_forLocale(locale foundation.PSTR, buff *uint16, buffCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcurr_forLocale.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(buff)), uintptr(buffCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Ucurr_getDefaultFractionDigits calls icuuc!ucurr_getDefaultFractionDigits.
+func Ucurr_getDefaultFractionDigits(currency *uint16, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcurr_getDefaultFractionDigits.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Ucurr_getDefaultFractionDigitsForUsage calls icuuc!ucurr_getDefaultFractionDigitsForUsage.
+func Ucurr_getDefaultFractionDigitsForUsage(currency *uint16, usage UCurrencyUsage, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUcurr_getDefaultFractionDigitsForUsage.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(usage), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Ucurr_getKeywordValuesForLocale calls icuuc!ucurr_getKeywordValuesForLocale.
+func Ucurr_getKeywordValuesForLocale(key foundation.PSTR, locale foundation.PSTR, commonlyUsed int8, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcurr_getKeywordValuesForLocale.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(locale)), uintptr(commonlyUsed), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucurr_getName calls icuuc!ucurr_getName.
+func Ucurr_getName(currency *uint16, locale foundation.PSTR, nameStyle UCurrNameStyle, isChoiceFormat *int8, len_ *int32, ec *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUcurr_getName.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(locale)), uintptr(nameStyle), uintptr(unsafe.Pointer(isChoiceFormat)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(ec)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ucurr_getNumericCode calls icuuc!ucurr_getNumericCode.
+func Ucurr_getNumericCode(currency *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procUcurr_getNumericCode.Addr(), uintptr(unsafe.Pointer(currency)))
+	return int32(r1)
+}
+
+// Ucurr_getPluralName calls icuuc!ucurr_getPluralName.
+func Ucurr_getPluralName(currency *uint16, locale foundation.PSTR, isChoiceFormat *int8, pluralCount foundation.PSTR, len_ *int32, ec *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUcurr_getPluralName.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(isChoiceFormat)), uintptr(unsafe.Pointer(pluralCount)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(ec)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ucurr_openISOCurrencies calls icuuc!ucurr_openISOCurrencies.
+func Ucurr_openISOCurrencies(currType uint32, pErrorCode *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUcurr_openISOCurrencies.Addr(), uintptr(currType), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ucurr_register calls icuuc!ucurr_register.
+func Ucurr_register(isoCode *uint16, locale foundation.PSTR, status *UErrorCode) unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUcurr_register.Addr(), uintptr(unsafe.Pointer(isoCode)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
+	return unsafe.Pointer(r1)
+}
+
+// Ucurr_unregister calls icuuc!ucurr_unregister.
+func Ucurr_unregister(key unsafe.Pointer, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUcurr_unregister.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Udat_adoptNumberFormat calls icuin!udat_adoptNumberFormat.
+func Udat_adoptNumberFormat(fmt *unsafe.Pointer, numberFormatToAdopt *unsafe.Pointer) {
+	syscall.SyscallN(procUdat_adoptNumberFormat.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(numberFormatToAdopt)))
+}
+
+// Udat_adoptNumberFormatForFields calls icuin!udat_adoptNumberFormatForFields.
+func Udat_adoptNumberFormatForFields(fmt *unsafe.Pointer, fields *uint16, numberFormatToSet *unsafe.Pointer, status *UErrorCode) {
+	syscall.SyscallN(procUdat_adoptNumberFormatForFields.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(fields)), uintptr(unsafe.Pointer(numberFormatToSet)), uintptr(unsafe.Pointer(status)))
+}
+
+// Udat_applyPattern calls icuin!udat_applyPattern.
+func Udat_applyPattern(format *unsafe.Pointer, localized int8, pattern *uint16, patternLength int32) {
+	syscall.SyscallN(procUdat_applyPattern.Addr(), uintptr(unsafe.Pointer(format)), uintptr(localized), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength))
+}
+
+// Udat_clone calls icuin!udat_clone.
+func Udat_clone(fmt *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUdat_clone.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Udat_close calls icuin!udat_close.
+func Udat_close(format *unsafe.Pointer) {
+	syscall.SyscallN(procUdat_close.Addr(), uintptr(unsafe.Pointer(format)))
+}
+
+// Udat_countAvailable calls icuin!udat_countAvailable.
+func Udat_countAvailable() int32 {
+	r1, _, _ := syscall.SyscallN(procUdat_countAvailable.Addr())
+	return int32(r1)
+}
+
+// Udat_countSymbols calls icuin!udat_countSymbols.
+func Udat_countSymbols(fmt *unsafe.Pointer, type_ UDateFormatSymbolType) int32 {
+	r1, _, _ := syscall.SyscallN(procUdat_countSymbols.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_))
+	return int32(r1)
+}
+
+// Udat_formatCalendar calls icuin!udat_formatCalendar.
+func Udat_formatCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, result *uint16, capacity int32, position *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdat_formatCalendar.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(result)), uintptr(capacity), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Udat_formatCalendarForFields calls icuin!udat_formatCalendarForFields.
+func Udat_formatCalendarForFields(format *unsafe.Pointer, calendar *unsafe.Pointer, result *uint16, capacity int32, fpositer *UFieldPositionIterator, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdat_formatCalendarForFields.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(result)), uintptr(capacity), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Udat_getAvailable calls icuin!udat_getAvailable.
+func Udat_getAvailable(localeIndex int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUdat_getAvailable.Addr(), uintptr(localeIndex))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Udat_getBooleanAttribute calls icuin!udat_getBooleanAttribute.
+func Udat_getBooleanAttribute(fmt *unsafe.Pointer, attr UDateFormatBooleanAttribute, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUdat_getBooleanAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(attr), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Udat_getCalendar calls icuin!udat_getCalendar.
+func Udat_getCalendar(fmt *unsafe.Pointer) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUdat_getCalendar.Addr(), uintptr(unsafe.Pointer(fmt)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Udat_getContext calls icuin!udat_getContext.
+func Udat_getContext(fmt *unsafe.Pointer, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
+	r1, _, _ := syscall.SyscallN(procUdat_getContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return UDisplayContext(r1)
+}
+
+// Udat_getLocaleByType calls icuin!udat_getLocaleByType.
+func Udat_getLocaleByType(fmt *unsafe.Pointer, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUdat_getLocaleByType.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Udat_getNumberFormat calls icuin!udat_getNumberFormat.
+func Udat_getNumberFormat(fmt *unsafe.Pointer) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUdat_getNumberFormat.Addr(), uintptr(unsafe.Pointer(fmt)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Udat_getNumberFormatForField calls icuin!udat_getNumberFormatForField.
+func Udat_getNumberFormatForField(fmt *unsafe.Pointer, field uint16) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUdat_getNumberFormatForField.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(field))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Udat_getSymbols calls icuin!udat_getSymbols.
+func Udat_getSymbols(fmt *unsafe.Pointer, type_ UDateFormatSymbolType, symbolIndex int32, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdat_getSymbols.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(symbolIndex), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Udat_isLenient calls icuin!udat_isLenient.
+func Udat_isLenient(fmt *unsafe.Pointer) int8 {
+	r1, _, _ := syscall.SyscallN(procUdat_isLenient.Addr(), uintptr(unsafe.Pointer(fmt)))
+	return int8(r1)
+}
+
+// Udat_open calls icuin!udat_open.
+func Udat_open(timeStyle UDateFormatStyle, dateStyle UDateFormatStyle, locale foundation.PSTR, tzID *uint16, tzIDLength int32, pattern *uint16, patternLength int32, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUdat_open.Addr(), uintptr(timeStyle), uintptr(dateStyle), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(tzID)), uintptr(tzIDLength), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Udat_parseCalendar calls icuin!udat_parseCalendar.
+func Udat_parseCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) {
+	syscall.SyscallN(procUdat_parseCalendar.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+}
+
+// Udat_setBooleanAttribute calls icuin!udat_setBooleanAttribute.
+func Udat_setBooleanAttribute(fmt *unsafe.Pointer, attr UDateFormatBooleanAttribute, newValue int8, status *UErrorCode) {
+	syscall.SyscallN(procUdat_setBooleanAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(attr), uintptr(newValue), uintptr(unsafe.Pointer(status)))
+}
+
+// Udat_setCalendar calls icuin!udat_setCalendar.
+func Udat_setCalendar(fmt *unsafe.Pointer, calendarToSet *unsafe.Pointer) {
+	syscall.SyscallN(procUdat_setCalendar.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(calendarToSet)))
+}
+
+// Udat_setContext calls icuin!udat_setContext.
+func Udat_setContext(fmt *unsafe.Pointer, value UDisplayContext, status *UErrorCode) {
+	syscall.SyscallN(procUdat_setContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(value), uintptr(unsafe.Pointer(status)))
+}
+
+// Udat_setLenient calls icuin!udat_setLenient.
+func Udat_setLenient(fmt *unsafe.Pointer, isLenient int8) {
+	syscall.SyscallN(procUdat_setLenient.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(isLenient))
+}
+
+// Udat_setNumberFormat calls icuin!udat_setNumberFormat.
+func Udat_setNumberFormat(fmt *unsafe.Pointer, numberFormatToSet *unsafe.Pointer) {
+	syscall.SyscallN(procUdat_setNumberFormat.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(numberFormatToSet)))
+}
+
+// Udat_setSymbols calls icuin!udat_setSymbols.
+func Udat_setSymbols(format *unsafe.Pointer, type_ UDateFormatSymbolType, symbolIndex int32, value *uint16, valueLength int32, status *UErrorCode) {
+	syscall.SyscallN(procUdat_setSymbols.Addr(), uintptr(unsafe.Pointer(format)), uintptr(type_), uintptr(symbolIndex), uintptr(unsafe.Pointer(value)), uintptr(valueLength), uintptr(unsafe.Pointer(status)))
+}
+
+// Udat_toCalendarDateField calls icuin!udat_toCalendarDateField.
+func Udat_toCalendarDateField(field UDateFormatField) UCalendarDateFields {
+	r1, _, _ := syscall.SyscallN(procUdat_toCalendarDateField.Addr(), uintptr(field))
+	return UCalendarDateFields(r1)
+}
+
+// Udat_toPattern calls icuin!udat_toPattern.
+func Udat_toPattern(fmt *unsafe.Pointer, localized int8, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdat_toPattern.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(localized), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Udatpg_addPattern calls icuin!udatpg_addPattern.
+func Udatpg_addPattern(dtpg *unsafe.Pointer, pattern *uint16, patternLength int32, override int8, conflictingPattern *uint16, capacity int32, pLength *int32, pErrorCode *UErrorCode) UDateTimePatternConflict {
+	r1, _, _ := syscall.SyscallN(procUdatpg_addPattern.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(override), uintptr(unsafe.Pointer(conflictingPattern)), uintptr(capacity), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(pErrorCode)))
+	return UDateTimePatternConflict(r1)
+}
+
+// Udatpg_clone calls icuin!udatpg_clone.
+func Udatpg_clone(dtpg *unsafe.Pointer, pErrorCode *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUdatpg_clone.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Udatpg_close calls icuin!udatpg_close.
+func Udatpg_close(dtpg *unsafe.Pointer) {
+	syscall.SyscallN(procUdatpg_close.Addr(), uintptr(unsafe.Pointer(dtpg)))
+}
+
+// Udatpg_getAppendItemFormat calls icuin!udatpg_getAppendItemFormat.
+func Udatpg_getAppendItemFormat(dtpg *unsafe.Pointer, field UDateTimePatternField, pLength *int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getAppendItemFormat.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(unsafe.Pointer(pLength)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Udatpg_getAppendItemName calls icuin!udatpg_getAppendItemName.
+func Udatpg_getAppendItemName(dtpg *unsafe.Pointer, field UDateTimePatternField, pLength *int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getAppendItemName.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(unsafe.Pointer(pLength)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Udatpg_getBaseSkeleton calls icuin!udatpg_getBaseSkeleton.
+func Udatpg_getBaseSkeleton(unusedDtpg *unsafe.Pointer, pattern *uint16, length int32, baseSkeleton *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getBaseSkeleton.Addr(), uintptr(unsafe.Pointer(unusedDtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(length), uintptr(unsafe.Pointer(baseSkeleton)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Udatpg_getBestPattern calls icuin!udatpg_getBestPattern.
+func Udatpg_getBestPattern(dtpg *unsafe.Pointer, skeleton *uint16, length int32, bestPattern *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getBestPattern.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(skeleton)), uintptr(length), uintptr(unsafe.Pointer(bestPattern)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Udatpg_getBestPatternWithOptions calls icuin!udatpg_getBestPatternWithOptions.
+func Udatpg_getBestPatternWithOptions(dtpg *unsafe.Pointer, skeleton *uint16, length int32, options UDateTimePatternMatchOptions, bestPattern *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getBestPatternWithOptions.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(skeleton)), uintptr(length), uintptr(options), uintptr(unsafe.Pointer(bestPattern)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Udatpg_getDateTimeFormat calls icuin!udatpg_getDateTimeFormat.
+func Udatpg_getDateTimeFormat(dtpg *unsafe.Pointer, pLength *int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getDateTimeFormat.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pLength)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Udatpg_getDecimal calls icuin!udatpg_getDecimal.
+func Udatpg_getDecimal(dtpg *unsafe.Pointer, pLength *int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getDecimal.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pLength)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Udatpg_getDefaultHourCycle calls icu!udatpg_getDefaultHourCycle.
+func Udatpg_getDefaultHourCycle(dtpg *unsafe.Pointer, pErrorCode *UErrorCode) UDateFormatHourCycle {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getDefaultHourCycle.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pErrorCode)))
+	return UDateFormatHourCycle(r1)
+}
+
+// Udatpg_getFieldDisplayName calls icu!udatpg_getFieldDisplayName.
+func Udatpg_getFieldDisplayName(dtpg *unsafe.Pointer, field UDateTimePatternField, width UDateTimePGDisplayWidth, fieldName *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getFieldDisplayName.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(width), uintptr(unsafe.Pointer(fieldName)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Udatpg_getPatternForSkeleton calls icuin!udatpg_getPatternForSkeleton.
+func Udatpg_getPatternForSkeleton(dtpg *unsafe.Pointer, skeleton *uint16, skeletonLength int32, pLength *int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getPatternForSkeleton.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLength), uintptr(unsafe.Pointer(pLength)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Udatpg_getSkeleton calls icuin!udatpg_getSkeleton.
+func Udatpg_getSkeleton(unusedDtpg *unsafe.Pointer, pattern *uint16, length int32, skeleton *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_getSkeleton.Addr(), uintptr(unsafe.Pointer(unusedDtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(length), uintptr(unsafe.Pointer(skeleton)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Udatpg_open calls icuin!udatpg_open.
+func Udatpg_open(locale foundation.PSTR, pErrorCode *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUdatpg_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Udatpg_openBaseSkeletons calls icuin!udatpg_openBaseSkeletons.
+func Udatpg_openBaseSkeletons(dtpg *unsafe.Pointer, pErrorCode *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUdatpg_openBaseSkeletons.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Udatpg_openEmpty calls icuin!udatpg_openEmpty.
+func Udatpg_openEmpty(pErrorCode *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUdatpg_openEmpty.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Udatpg_openSkeletons calls icuin!udatpg_openSkeletons.
+func Udatpg_openSkeletons(dtpg *unsafe.Pointer, pErrorCode *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUdatpg_openSkeletons.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Udatpg_replaceFieldTypes calls icuin!udatpg_replaceFieldTypes.
+func Udatpg_replaceFieldTypes(dtpg *unsafe.Pointer, pattern *uint16, patternLength int32, skeleton *uint16, skeletonLength int32, dest *uint16, destCapacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_replaceFieldTypes.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLength), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Udatpg_replaceFieldTypesWithOptions calls icuin!udatpg_replaceFieldTypesWithOptions.
+func Udatpg_replaceFieldTypesWithOptions(dtpg *unsafe.Pointer, pattern *uint16, patternLength int32, skeleton *uint16, skeletonLength int32, options UDateTimePatternMatchOptions, dest *uint16, destCapacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUdatpg_replaceFieldTypesWithOptions.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLength), uintptr(options), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Udatpg_setAppendItemFormat calls icuin!udatpg_setAppendItemFormat.
+func Udatpg_setAppendItemFormat(dtpg *unsafe.Pointer, field UDateTimePatternField, value *uint16, length int32) {
+	syscall.SyscallN(procUdatpg_setAppendItemFormat.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(unsafe.Pointer(value)), uintptr(length))
+}
+
+// Udatpg_setAppendItemName calls icuin!udatpg_setAppendItemName.
+func Udatpg_setAppendItemName(dtpg *unsafe.Pointer, field UDateTimePatternField, value *uint16, length int32) {
+	syscall.SyscallN(procUdatpg_setAppendItemName.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(unsafe.Pointer(value)), uintptr(length))
+}
+
+// Udatpg_setDateTimeFormat calls icuin!udatpg_setDateTimeFormat.
+func Udatpg_setDateTimeFormat(dtpg *unsafe.Pointer, dtFormat *uint16, length int32) {
+	syscall.SyscallN(procUdatpg_setDateTimeFormat.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(dtFormat)), uintptr(length))
+}
+
+// Udatpg_setDecimal calls icuin!udatpg_setDecimal.
+func Udatpg_setDecimal(dtpg *unsafe.Pointer, decimal *uint16, length int32) {
+	syscall.SyscallN(procUdatpg_setDecimal.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(decimal)), uintptr(length))
+}
+
+// Udtitvfmt_close calls icuin!udtitvfmt_close.
+func Udtitvfmt_close(formatter *UDateIntervalFormat) {
+	syscall.SyscallN(procUdtitvfmt_close.Addr(), uintptr(unsafe.Pointer(formatter)))
+}
+
+// Udtitvfmt_closeResult calls icu!udtitvfmt_closeResult.
+func Udtitvfmt_closeResult(uresult *UFormattedDateInterval) {
+	syscall.SyscallN(procUdtitvfmt_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
+}
+
+// Udtitvfmt_getContext calls icu!udtitvfmt_getContext.
+func Udtitvfmt_getContext(formatter *UDateIntervalFormat, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
+	r1, _, _ := syscall.SyscallN(procUdtitvfmt_getContext.Addr(), uintptr(unsafe.Pointer(formatter)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return UDisplayContext(r1)
+}
+
+// Udtitvfmt_open calls icuin!udtitvfmt_open.
+func Udtitvfmt_open(locale foundation.PSTR, skeleton *uint16, skeletonLength int32, tzID *uint16, tzIDLength int32, status *UErrorCode) *UDateIntervalFormat {
+	r1, _, _ := syscall.SyscallN(procUdtitvfmt_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLength), uintptr(unsafe.Pointer(tzID)), uintptr(tzIDLength), uintptr(unsafe.Pointer(status)))
+	return (*UDateIntervalFormat)(unsafe.Pointer(r1))
+}
+
+// Udtitvfmt_openResult calls icu!udtitvfmt_openResult.
+func Udtitvfmt_openResult(ec *UErrorCode) *UFormattedDateInterval {
+	r1, _, _ := syscall.SyscallN(procUdtitvfmt_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedDateInterval)(unsafe.Pointer(r1))
+}
+
+// Udtitvfmt_resultAsValue calls icu!udtitvfmt_resultAsValue.
+func Udtitvfmt_resultAsValue(uresult *UFormattedDateInterval, ec *UErrorCode) *UFormattedValue {
+	r1, _, _ := syscall.SyscallN(procUdtitvfmt_resultAsValue.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedValue)(unsafe.Pointer(r1))
+}
+
+// Udtitvfmt_setContext calls icu!udtitvfmt_setContext.
+func Udtitvfmt_setContext(formatter *UDateIntervalFormat, value UDisplayContext, status *UErrorCode) {
+	syscall.SyscallN(procUdtitvfmt_setContext.Addr(), uintptr(unsafe.Pointer(formatter)), uintptr(value), uintptr(unsafe.Pointer(status)))
+}
+
+// Uenum_close calls icuuc!uenum_close.
+func Uenum_close(en *UEnumeration) {
+	syscall.SyscallN(procUenum_close.Addr(), uintptr(unsafe.Pointer(en)))
+}
+
+// Uenum_count calls icuuc!uenum_count.
+func Uenum_count(en *UEnumeration, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUenum_count.Addr(), uintptr(unsafe.Pointer(en)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uenum_next calls icuuc!uenum_next.
+func Uenum_next(en *UEnumeration, resultLength *int32, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUenum_next.Addr(), uintptr(unsafe.Pointer(en)), uintptr(unsafe.Pointer(resultLength)), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uenum_openCharStringsEnumeration calls icuuc!uenum_openCharStringsEnumeration.
+func Uenum_openCharStringsEnumeration(strings **int8, count int32, ec *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUenum_openCharStringsEnumeration.Addr(), uintptr(unsafe.Pointer(strings)), uintptr(count), uintptr(unsafe.Pointer(ec)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Uenum_openUCharStringsEnumeration calls icuuc!uenum_openUCharStringsEnumeration.
+func Uenum_openUCharStringsEnumeration(strings **uint16, count int32, ec *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUenum_openUCharStringsEnumeration.Addr(), uintptr(unsafe.Pointer(strings)), uintptr(count), uintptr(unsafe.Pointer(ec)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Uenum_reset calls icuuc!uenum_reset.
+func Uenum_reset(en *UEnumeration, status *UErrorCode) {
+	syscall.SyscallN(procUenum_reset.Addr(), uintptr(unsafe.Pointer(en)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uenum_unext calls icuuc!uenum_unext.
+func Uenum_unext(en *UEnumeration, resultLength *int32, status *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUenum_unext.Addr(), uintptr(unsafe.Pointer(en)), uintptr(unsafe.Pointer(resultLength)), uintptr(unsafe.Pointer(status)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ufieldpositer_close calls icuin!ufieldpositer_close.
+func Ufieldpositer_close(fpositer *UFieldPositionIterator) {
+	syscall.SyscallN(procUfieldpositer_close.Addr(), uintptr(unsafe.Pointer(fpositer)))
+}
+
+// Ufieldpositer_next calls icuin!ufieldpositer_next.
+func Ufieldpositer_next(fpositer *UFieldPositionIterator, beginIndex *int32, endIndex *int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUfieldpositer_next.Addr(), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(beginIndex)), uintptr(unsafe.Pointer(endIndex)))
+	return int32(r1)
+}
+
+// Ufieldpositer_open calls icuin!ufieldpositer_open.
+func Ufieldpositer_open(status *UErrorCode) *UFieldPositionIterator {
+	r1, _, _ := syscall.SyscallN(procUfieldpositer_open.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*UFieldPositionIterator)(unsafe.Pointer(r1))
+}
+
+// Ufmt_close calls icuin!ufmt_close.
+func Ufmt_close(fmt *unsafe.Pointer) {
+	syscall.SyscallN(procUfmt_close.Addr(), uintptr(unsafe.Pointer(fmt)))
+}
+
+// Ufmt_getArrayItemByIndex calls icuin!ufmt_getArrayItemByIndex.
+func Ufmt_getArrayItemByIndex(fmt *unsafe.Pointer, n int32, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUfmt_getArrayItemByIndex.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(n), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Ufmt_getArrayLength calls icuin!ufmt_getArrayLength.
+func Ufmt_getArrayLength(fmt *unsafe.Pointer, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUfmt_getArrayLength.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ufmt_getDecNumChars calls icuin!ufmt_getDecNumChars.
+func Ufmt_getDecNumChars(fmt *unsafe.Pointer, len_ *int32, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUfmt_getDecNumChars.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ufmt_getInt64 calls icuin!ufmt_getInt64.
+func Ufmt_getInt64(fmt *unsafe.Pointer, status *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUfmt_getInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return int64(r1)
+}
+
+// Ufmt_getLong calls icuin!ufmt_getLong.
+func Ufmt_getLong(fmt *unsafe.Pointer, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUfmt_getLong.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ufmt_getObject calls icuin!ufmt_getObject.
+func Ufmt_getObject(fmt *unsafe.Pointer, status *UErrorCode) unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUfmt_getObject.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return unsafe.Pointer(r1)
+}
+
+// Ufmt_getType calls icuin!ufmt_getType.
+func Ufmt_getType(fmt *unsafe.Pointer, status *UErrorCode) UFormattableType {
+	r1, _, _ := syscall.SyscallN(procUfmt_getType.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return UFormattableType(r1)
+}
+
+// Ufmt_getUChars calls icuin!ufmt_getUChars.
+func Ufmt_getUChars(fmt *unsafe.Pointer, len_ *int32, status *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUfmt_getUChars.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ufmt_isNumeric calls icuin!ufmt_isNumeric.
+func Ufmt_isNumeric(fmt *unsafe.Pointer) int8 {
+	r1, _, _ := syscall.SyscallN(procUfmt_isNumeric.Addr(), uintptr(unsafe.Pointer(fmt)))
+	return int8(r1)
+}
+
+// Ufmt_open calls icuin!ufmt_open.
+func Ufmt_open(status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUfmt_open.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Ufmtval_getString calls icu!ufmtval_getString.
+func Ufmtval_getString(ufmtval *UFormattedValue, pLength *int32, ec *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUfmtval_getString.Addr(), uintptr(unsafe.Pointer(ufmtval)), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(ec)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ufmtval_nextPosition calls icu!ufmtval_nextPosition.
+func Ufmtval_nextPosition(ufmtval *UFormattedValue, ucfpos *UConstrainedFieldPosition, ec *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUfmtval_nextPosition.Addr(), uintptr(unsafe.Pointer(ufmtval)), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
+	return int8(r1)
+}
+
+// Ugender_getInstance calls icuin!ugender_getInstance.
+func Ugender_getInstance(locale foundation.PSTR, status *UErrorCode) *UGenderInfo {
+	r1, _, _ := syscall.SyscallN(procUgender_getInstance.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
+	return (*UGenderInfo)(unsafe.Pointer(r1))
+}
+
+// Ugender_getListGender calls icuin!ugender_getListGender.
+func Ugender_getListGender(genderInfo *UGenderInfo, genders *UGender, size int32, status *UErrorCode) UGender {
+	r1, _, _ := syscall.SyscallN(procUgender_getListGender.Addr(), uintptr(unsafe.Pointer(genderInfo)), uintptr(unsafe.Pointer(genders)), uintptr(size), uintptr(unsafe.Pointer(status)))
+	return UGender(r1)
+}
+
+// Uidna_close calls icuuc!uidna_close.
+func Uidna_close(idna *UIDNA) {
+	syscall.SyscallN(procUidna_close.Addr(), uintptr(unsafe.Pointer(idna)))
+}
+
+// Uidna_labelToASCII calls icuuc!uidna_labelToASCII.
+func Uidna_labelToASCII(idna *UIDNA, label *uint16, length int32, dest *uint16, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUidna_labelToASCII.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(label)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uidna_labelToASCII_UTF8 calls icuuc!uidna_labelToASCII_UTF8.
+func Uidna_labelToASCII_UTF8(idna *UIDNA, label foundation.PSTR, length int32, dest foundation.PSTR, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUidna_labelToASCII_UTF8.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(label)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uidna_labelToUnicode calls icuuc!uidna_labelToUnicode.
+func Uidna_labelToUnicode(idna *UIDNA, label *uint16, length int32, dest *uint16, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUidna_labelToUnicode.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(label)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uidna_labelToUnicodeUTF8 calls icuuc!uidna_labelToUnicodeUTF8.
+func Uidna_labelToUnicodeUTF8(idna *UIDNA, label foundation.PSTR, length int32, dest foundation.PSTR, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUidna_labelToUnicodeUTF8.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(label)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uidna_nameToASCII calls icuuc!uidna_nameToASCII.
+func Uidna_nameToASCII(idna *UIDNA, name *uint16, length int32, dest *uint16, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUidna_nameToASCII.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(name)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uidna_nameToASCII_UTF8 calls icuuc!uidna_nameToASCII_UTF8.
+func Uidna_nameToASCII_UTF8(idna *UIDNA, name foundation.PSTR, length int32, dest foundation.PSTR, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUidna_nameToASCII_UTF8.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(name)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uidna_nameToUnicode calls icuuc!uidna_nameToUnicode.
+func Uidna_nameToUnicode(idna *UIDNA, name *uint16, length int32, dest *uint16, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUidna_nameToUnicode.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(name)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uidna_nameToUnicodeUTF8 calls icuuc!uidna_nameToUnicodeUTF8.
+func Uidna_nameToUnicodeUTF8(idna *UIDNA, name foundation.PSTR, length int32, dest foundation.PSTR, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUidna_nameToUnicodeUTF8.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(name)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uidna_openUTS46 calls icuuc!uidna_openUTS46.
+func Uidna_openUTS46(options uint32, pErrorCode *UErrorCode) *UIDNA {
+	r1, _, _ := syscall.SyscallN(procUidna_openUTS46.Addr(), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UIDNA)(unsafe.Pointer(r1))
+}
+
+// Uiter_current32 calls icuuc!uiter_current32.
+func Uiter_current32(iter *UCharIterator) int32 {
+	r1, _, _ := syscall.SyscallN(procUiter_current32.Addr(), uintptr(unsafe.Pointer(iter)))
+	return int32(r1)
+}
+
+// Uiter_getState calls icuuc!uiter_getState.
+func Uiter_getState(iter *UCharIterator) uint32 {
+	r1, _, _ := syscall.SyscallN(procUiter_getState.Addr(), uintptr(unsafe.Pointer(iter)))
+	return uint32(r1)
+}
+
+// Uiter_next32 calls icuuc!uiter_next32.
+func Uiter_next32(iter *UCharIterator) int32 {
+	r1, _, _ := syscall.SyscallN(procUiter_next32.Addr(), uintptr(unsafe.Pointer(iter)))
+	return int32(r1)
+}
+
+// Uiter_previous32 calls icuuc!uiter_previous32.
+func Uiter_previous32(iter *UCharIterator) int32 {
+	r1, _, _ := syscall.SyscallN(procUiter_previous32.Addr(), uintptr(unsafe.Pointer(iter)))
+	return int32(r1)
+}
+
+// Uiter_setState calls icuuc!uiter_setState.
+func Uiter_setState(iter *UCharIterator, state uint32, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUiter_setState.Addr(), uintptr(unsafe.Pointer(iter)), uintptr(state), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Uiter_setString calls icuuc!uiter_setString.
+func Uiter_setString(iter *UCharIterator, s *uint16, length int32) {
+	syscall.SyscallN(procUiter_setString.Addr(), uintptr(unsafe.Pointer(iter)), uintptr(unsafe.Pointer(s)), uintptr(length))
+}
+
+// Uiter_setUTF16BE calls icuuc!uiter_setUTF16BE.
+func Uiter_setUTF16BE(iter *UCharIterator, s foundation.PSTR, length int32) {
+	syscall.SyscallN(procUiter_setUTF16BE.Addr(), uintptr(unsafe.Pointer(iter)), uintptr(unsafe.Pointer(s)), uintptr(length))
+}
+
+// Uiter_setUTF8 calls icuuc!uiter_setUTF8.
+func Uiter_setUTF8(iter *UCharIterator, s foundation.PSTR, length int32) {
+	syscall.SyscallN(procUiter_setUTF8.Addr(), uintptr(unsafe.Pointer(iter)), uintptr(unsafe.Pointer(s)), uintptr(length))
+}
+
+// Uldn_close calls icuuc!uldn_close.
+func Uldn_close(ldn *ULocaleDisplayNames) {
+	syscall.SyscallN(procUldn_close.Addr(), uintptr(unsafe.Pointer(ldn)))
+}
+
+// Uldn_getContext calls icuuc!uldn_getContext.
+func Uldn_getContext(ldn *ULocaleDisplayNames, type_ UDisplayContextType, pErrorCode *UErrorCode) UDisplayContext {
+	r1, _, _ := syscall.SyscallN(procUldn_getContext.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(type_), uintptr(unsafe.Pointer(pErrorCode)))
+	return UDisplayContext(r1)
+}
+
+// Uldn_getDialectHandling calls icuuc!uldn_getDialectHandling.
+func Uldn_getDialectHandling(ldn *ULocaleDisplayNames) UDialectHandling {
+	r1, _, _ := syscall.SyscallN(procUldn_getDialectHandling.Addr(), uintptr(unsafe.Pointer(ldn)))
+	return UDialectHandling(r1)
+}
+
+// Uldn_getLocale calls icuuc!uldn_getLocale.
+func Uldn_getLocale(ldn *ULocaleDisplayNames) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUldn_getLocale.Addr(), uintptr(unsafe.Pointer(ldn)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uldn_keyDisplayName calls icuuc!uldn_keyDisplayName.
+func Uldn_keyDisplayName(ldn *ULocaleDisplayNames, key foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUldn_keyDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uldn_keyValueDisplayName calls icuuc!uldn_keyValueDisplayName.
+func Uldn_keyValueDisplayName(ldn *ULocaleDisplayNames, key foundation.PSTR, value foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUldn_keyValueDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uldn_languageDisplayName calls icuuc!uldn_languageDisplayName.
+func Uldn_languageDisplayName(ldn *ULocaleDisplayNames, lang foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUldn_languageDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(lang)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uldn_localeDisplayName calls icuuc!uldn_localeDisplayName.
+func Uldn_localeDisplayName(ldn *ULocaleDisplayNames, locale foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUldn_localeDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uldn_open calls icuuc!uldn_open.
+func Uldn_open(locale foundation.PSTR, dialectHandling UDialectHandling, pErrorCode *UErrorCode) *ULocaleDisplayNames {
+	r1, _, _ := syscall.SyscallN(procUldn_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(dialectHandling), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*ULocaleDisplayNames)(unsafe.Pointer(r1))
+}
+
+// Uldn_openForContext calls icuuc!uldn_openForContext.
+func Uldn_openForContext(locale foundation.PSTR, contexts *UDisplayContext, length int32, pErrorCode *UErrorCode) *ULocaleDisplayNames {
+	r1, _, _ := syscall.SyscallN(procUldn_openForContext.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(contexts)), uintptr(length), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*ULocaleDisplayNames)(unsafe.Pointer(r1))
+}
+
+// Uldn_regionDisplayName calls icuuc!uldn_regionDisplayName.
+func Uldn_regionDisplayName(ldn *ULocaleDisplayNames, region foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUldn_regionDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(region)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uldn_scriptCodeDisplayName calls icuuc!uldn_scriptCodeDisplayName.
+func Uldn_scriptCodeDisplayName(ldn *ULocaleDisplayNames, scriptCode UScriptCode, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUldn_scriptCodeDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(scriptCode), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uldn_scriptDisplayName calls icuuc!uldn_scriptDisplayName.
+func Uldn_scriptDisplayName(ldn *ULocaleDisplayNames, script foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUldn_scriptDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(script)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uldn_variantDisplayName calls icuuc!uldn_variantDisplayName.
+func Uldn_variantDisplayName(ldn *ULocaleDisplayNames, variant foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUldn_variantDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(variant)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Ulistfmt_close calls icuuc!ulistfmt_close.
+func Ulistfmt_close(listfmt *UListFormatter) {
+	syscall.SyscallN(procUlistfmt_close.Addr(), uintptr(unsafe.Pointer(listfmt)))
+}
+
+// Ulistfmt_closeResult calls icu!ulistfmt_closeResult.
+func Ulistfmt_closeResult(uresult *UFormattedList) {
+	syscall.SyscallN(procUlistfmt_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
+}
+
+// Ulistfmt_format calls icuuc!ulistfmt_format.
+func Ulistfmt_format(listfmt *UListFormatter, strings **uint16, stringLengths *int32, stringCount int32, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUlistfmt_format.Addr(), uintptr(unsafe.Pointer(listfmt)), uintptr(unsafe.Pointer(strings)), uintptr(unsafe.Pointer(stringLengths)), uintptr(stringCount), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ulistfmt_formatStringsToResult calls icu!ulistfmt_formatStringsToResult.
+func Ulistfmt_formatStringsToResult(listfmt *UListFormatter, strings **uint16, stringLengths *int32, stringCount int32, uresult *UFormattedList, status *UErrorCode) {
+	syscall.SyscallN(procUlistfmt_formatStringsToResult.Addr(), uintptr(unsafe.Pointer(listfmt)), uintptr(unsafe.Pointer(strings)), uintptr(unsafe.Pointer(stringLengths)), uintptr(stringCount), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(status)))
+}
+
+// Ulistfmt_open calls icuuc!ulistfmt_open.
+func Ulistfmt_open(locale foundation.PSTR, status *UErrorCode) *UListFormatter {
+	r1, _, _ := syscall.SyscallN(procUlistfmt_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
+	return (*UListFormatter)(unsafe.Pointer(r1))
+}
+
+// Ulistfmt_openForType calls icu!ulistfmt_openForType.
+func Ulistfmt_openForType(locale foundation.PSTR, type_ UListFormatterType, width UListFormatterWidth, status *UErrorCode) *UListFormatter {
+	r1, _, _ := syscall.SyscallN(procUlistfmt_openForType.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(width), uintptr(unsafe.Pointer(status)))
+	return (*UListFormatter)(unsafe.Pointer(r1))
+}
+
+// Ulistfmt_openResult calls icu!ulistfmt_openResult.
+func Ulistfmt_openResult(ec *UErrorCode) *UFormattedList {
+	r1, _, _ := syscall.SyscallN(procUlistfmt_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedList)(unsafe.Pointer(r1))
+}
+
+// Ulistfmt_resultAsValue calls icu!ulistfmt_resultAsValue.
+func Ulistfmt_resultAsValue(uresult *UFormattedList, ec *UErrorCode) *UFormattedValue {
+	r1, _, _ := syscall.SyscallN(procUlistfmt_resultAsValue.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedValue)(unsafe.Pointer(r1))
+}
+
+// Uloc_acceptLanguage calls icuuc!uloc_acceptLanguage.
+func Uloc_acceptLanguage(result foundation.PSTR, resultAvailable int32, outResult *UAcceptResult, acceptList **int8, acceptListCount int32, availableLocales *UEnumeration, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_acceptLanguage.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultAvailable), uintptr(unsafe.Pointer(outResult)), uintptr(unsafe.Pointer(acceptList)), uintptr(acceptListCount), uintptr(unsafe.Pointer(availableLocales)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_acceptLanguageFromHTTP calls icuuc!uloc_acceptLanguageFromHTTP.
+func Uloc_acceptLanguageFromHTTP(result foundation.PSTR, resultAvailable int32, outResult *UAcceptResult, httpAcceptLanguage foundation.PSTR, availableLocales *UEnumeration, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_acceptLanguageFromHTTP.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultAvailable), uintptr(unsafe.Pointer(outResult)), uintptr(unsafe.Pointer(httpAcceptLanguage)), uintptr(unsafe.Pointer(availableLocales)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_addLikelySubtags calls icuuc!uloc_addLikelySubtags.
+func Uloc_addLikelySubtags(localeID foundation.PSTR, maximizedLocaleID foundation.PSTR, maximizedLocaleIDCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_addLikelySubtags.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(maximizedLocaleID)), uintptr(maximizedLocaleIDCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_canonicalize calls icuuc!uloc_canonicalize.
+func Uloc_canonicalize(localeID foundation.PSTR, name foundation.PSTR, nameCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_canonicalize.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(name)), uintptr(nameCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_countAvailable calls icuuc!uloc_countAvailable.
+func Uloc_countAvailable() int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_countAvailable.Addr())
+	return int32(r1)
+}
+
+// Uloc_forLanguageTag calls icuuc!uloc_forLanguageTag.
+func Uloc_forLanguageTag(langtag foundation.PSTR, localeID foundation.PSTR, localeIDCapacity int32, parsedLength *int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_forLanguageTag.Addr(), uintptr(unsafe.Pointer(langtag)), uintptr(unsafe.Pointer(localeID)), uintptr(localeIDCapacity), uintptr(unsafe.Pointer(parsedLength)), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_getAvailable calls icuuc!uloc_getAvailable.
+func Uloc_getAvailable(n int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUloc_getAvailable.Addr(), uintptr(n))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uloc_getBaseName calls icuuc!uloc_getBaseName.
+func Uloc_getBaseName(localeID foundation.PSTR, name foundation.PSTR, nameCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getBaseName.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(name)), uintptr(nameCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_getCharacterOrientation calls icuuc!uloc_getCharacterOrientation.
+func Uloc_getCharacterOrientation(localeId foundation.PSTR, status *UErrorCode) ULayoutType {
+	r1, _, _ := syscall.SyscallN(procUloc_getCharacterOrientation.Addr(), uintptr(unsafe.Pointer(localeId)), uintptr(unsafe.Pointer(status)))
+	return ULayoutType(r1)
+}
+
+// Uloc_getCountry calls icuuc!uloc_getCountry.
+func Uloc_getCountry(localeID foundation.PSTR, country foundation.PSTR, countryCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getCountry.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(country)), uintptr(countryCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_getDefault calls icuuc!uloc_getDefault.
+func Uloc_getDefault() foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUloc_getDefault.Addr())
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uloc_getDisplayCountry calls icuuc!uloc_getDisplayCountry.
+func Uloc_getDisplayCountry(locale foundation.PSTR, displayLocale foundation.PSTR, country *uint16, countryCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getDisplayCountry.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(country)), uintptr(countryCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_getDisplayKeyword calls icuuc!uloc_getDisplayKeyword.
+func Uloc_getDisplayKeyword(keyword foundation.PSTR, displayLocale foundation.PSTR, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getDisplayKeyword.Addr(), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_getDisplayKeywordValue calls icuuc!uloc_getDisplayKeywordValue.
+func Uloc_getDisplayKeywordValue(locale foundation.PSTR, keyword foundation.PSTR, displayLocale foundation.PSTR, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getDisplayKeywordValue.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_getDisplayLanguage calls icuuc!uloc_getDisplayLanguage.
+func Uloc_getDisplayLanguage(locale foundation.PSTR, displayLocale foundation.PSTR, language *uint16, languageCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getDisplayLanguage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(language)), uintptr(languageCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_getDisplayName calls icuuc!uloc_getDisplayName.
+func Uloc_getDisplayName(localeID foundation.PSTR, inLocaleID foundation.PSTR, result *uint16, maxResultSize int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getDisplayName.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(inLocaleID)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_getDisplayScript calls icuuc!uloc_getDisplayScript.
+func Uloc_getDisplayScript(locale foundation.PSTR, displayLocale foundation.PSTR, script *uint16, scriptCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getDisplayScript.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(script)), uintptr(scriptCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_getDisplayVariant calls icuuc!uloc_getDisplayVariant.
+func Uloc_getDisplayVariant(locale foundation.PSTR, displayLocale foundation.PSTR, variant *uint16, variantCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getDisplayVariant.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(variant)), uintptr(variantCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_getISO3Country calls icuuc!uloc_getISO3Country.
+func Uloc_getISO3Country(localeID foundation.PSTR) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUloc_getISO3Country.Addr(), uintptr(unsafe.Pointer(localeID)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uloc_getISO3Language calls icuuc!uloc_getISO3Language.
+func Uloc_getISO3Language(localeID foundation.PSTR) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUloc_getISO3Language.Addr(), uintptr(unsafe.Pointer(localeID)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uloc_getISOCountries calls icuuc!uloc_getISOCountries.
+func Uloc_getISOCountries() **int8 {
+	r1, _, _ := syscall.SyscallN(procUloc_getISOCountries.Addr())
+	return (**int8)(unsafe.Pointer(r1))
+}
+
+// Uloc_getISOLanguages calls icuuc!uloc_getISOLanguages.
+func Uloc_getISOLanguages() **int8 {
+	r1, _, _ := syscall.SyscallN(procUloc_getISOLanguages.Addr())
+	return (**int8)(unsafe.Pointer(r1))
+}
+
+// Uloc_getKeywordValue calls icuuc!uloc_getKeywordValue.
+func Uloc_getKeywordValue(localeID foundation.PSTR, keywordName foundation.PSTR, buffer foundation.PSTR, bufferCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getKeywordValue.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(keywordName)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_getLCID calls icuuc!uloc_getLCID.
+func Uloc_getLCID(localeID foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getLCID.Addr(), uintptr(unsafe.Pointer(localeID)))
+	return uint32(r1)
+}
+
+// Uloc_getLanguage calls icuuc!uloc_getLanguage.
+func Uloc_getLanguage(localeID foundation.PSTR, language foundation.PSTR, languageCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getLanguage.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(language)), uintptr(languageCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_getLineOrientation calls icuuc!uloc_getLineOrientation.
+func Uloc_getLineOrientation(localeId foundation.PSTR, status *UErrorCode) ULayoutType {
+	r1, _, _ := syscall.SyscallN(procUloc_getLineOrientation.Addr(), uintptr(unsafe.Pointer(localeId)), uintptr(unsafe.Pointer(status)))
+	return ULayoutType(r1)
+}
+
+// Uloc_getLocaleForLCID calls icuuc!uloc_getLocaleForLCID.
+func Uloc_getLocaleForLCID(hostID uint32, locale foundation.PSTR, localeCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getLocaleForLCID.Addr(), uintptr(hostID), uintptr(unsafe.Pointer(locale)), uintptr(localeCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_getName calls icuuc!uloc_getName.
+func Uloc_getName(localeID foundation.PSTR, name foundation.PSTR, nameCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getName.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(name)), uintptr(nameCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_getParent calls icuuc!uloc_getParent.
+func Uloc_getParent(localeID foundation.PSTR, parent foundation.PSTR, parentCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getParent.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(parent)), uintptr(parentCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_getScript calls icuuc!uloc_getScript.
+func Uloc_getScript(localeID foundation.PSTR, script foundation.PSTR, scriptCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getScript.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(script)), uintptr(scriptCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_getVariant calls icuuc!uloc_getVariant.
+func Uloc_getVariant(localeID foundation.PSTR, variant foundation.PSTR, variantCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_getVariant.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(variant)), uintptr(variantCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_isRightToLeft calls icuuc!uloc_isRightToLeft.
+func Uloc_isRightToLeft(locale foundation.PSTR) int8 {
+	r1, _, _ := syscall.SyscallN(procUloc_isRightToLeft.Addr(), uintptr(unsafe.Pointer(locale)))
+	return int8(r1)
+}
+
+// Uloc_minimizeSubtags calls icuuc!uloc_minimizeSubtags.
+func Uloc_minimizeSubtags(localeID foundation.PSTR, minimizedLocaleID foundation.PSTR, minimizedLocaleIDCapacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_minimizeSubtags.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(minimizedLocaleID)), uintptr(minimizedLocaleIDCapacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_openAvailableByType calls icu!uloc_openAvailableByType.
+func Uloc_openAvailableByType(type_ ULocAvailableType, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUloc_openAvailableByType.Addr(), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Uloc_openKeywords calls icuuc!uloc_openKeywords.
+func Uloc_openKeywords(localeID foundation.PSTR, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUloc_openKeywords.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Uloc_setDefault calls icuuc!uloc_setDefault.
+func Uloc_setDefault(localeID foundation.PSTR, status *UErrorCode) {
+	syscall.SyscallN(procUloc_setDefault.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uloc_setKeywordValue calls icuuc!uloc_setKeywordValue.
+func Uloc_setKeywordValue(keywordName foundation.PSTR, keywordValue foundation.PSTR, buffer foundation.PSTR, bufferCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_setKeywordValue.Addr(), uintptr(unsafe.Pointer(keywordName)), uintptr(unsafe.Pointer(keywordValue)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uloc_toLanguageTag calls icuuc!uloc_toLanguageTag.
+func Uloc_toLanguageTag(localeID foundation.PSTR, langtag foundation.PSTR, langtagCapacity int32, strict int8, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUloc_toLanguageTag.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(langtag)), uintptr(langtagCapacity), uintptr(strict), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uloc_toLegacyKey calls icuuc!uloc_toLegacyKey.
+func Uloc_toLegacyKey(keyword foundation.PSTR) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUloc_toLegacyKey.Addr(), uintptr(unsafe.Pointer(keyword)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uloc_toLegacyType calls icuuc!uloc_toLegacyType.
+func Uloc_toLegacyType(keyword foundation.PSTR, value foundation.PSTR) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUloc_toLegacyType.Addr(), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(value)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uloc_toUnicodeLocaleKey calls icuuc!uloc_toUnicodeLocaleKey.
+func Uloc_toUnicodeLocaleKey(keyword foundation.PSTR) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUloc_toUnicodeLocaleKey.Addr(), uintptr(unsafe.Pointer(keyword)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uloc_toUnicodeLocaleType calls icuuc!uloc_toUnicodeLocaleType.
+func Uloc_toUnicodeLocaleType(keyword foundation.PSTR, value foundation.PSTR) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUloc_toUnicodeLocaleType.Addr(), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(value)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ulocdata_close calls icuin!ulocdata_close.
+func Ulocdata_close(uld *ULocaleData) {
+	syscall.SyscallN(procUlocdata_close.Addr(), uintptr(unsafe.Pointer(uld)))
+}
+
+// Ulocdata_getCLDRVersion calls icuin!ulocdata_getCLDRVersion.
+func Ulocdata_getCLDRVersion(versionArray *byte, status *UErrorCode) {
+	syscall.SyscallN(procUlocdata_getCLDRVersion.Addr(), uintptr(unsafe.Pointer(versionArray)), uintptr(unsafe.Pointer(status)))
+}
+
+// Ulocdata_getDelimiter calls icuin!ulocdata_getDelimiter.
+func Ulocdata_getDelimiter(uld *ULocaleData, type_ ULocaleDataDelimiterType, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUlocdata_getDelimiter.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(type_), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ulocdata_getExemplarSet calls icuin!ulocdata_getExemplarSet.
+func Ulocdata_getExemplarSet(uld *ULocaleData, fillIn *USet, options uint32, extype ULocaleDataExemplarSetType, status *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procUlocdata_getExemplarSet.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(unsafe.Pointer(fillIn)), uintptr(options), uintptr(extype), uintptr(unsafe.Pointer(status)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Ulocdata_getLocaleDisplayPattern calls icuin!ulocdata_getLocaleDisplayPattern.
+func Ulocdata_getLocaleDisplayPattern(uld *ULocaleData, pattern *uint16, patternCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUlocdata_getLocaleDisplayPattern.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(unsafe.Pointer(pattern)), uintptr(patternCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ulocdata_getLocaleSeparator calls icuin!ulocdata_getLocaleSeparator.
+func Ulocdata_getLocaleSeparator(uld *ULocaleData, separator *uint16, separatorCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUlocdata_getLocaleSeparator.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(unsafe.Pointer(separator)), uintptr(separatorCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ulocdata_getMeasurementSystem calls icuin!ulocdata_getMeasurementSystem.
+func Ulocdata_getMeasurementSystem(localeID foundation.PSTR, status *UErrorCode) UMeasurementSystem {
+	r1, _, _ := syscall.SyscallN(procUlocdata_getMeasurementSystem.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(status)))
+	return UMeasurementSystem(r1)
+}
+
+// Ulocdata_getNoSubstitute calls icuin!ulocdata_getNoSubstitute.
+func Ulocdata_getNoSubstitute(uld *ULocaleData) int8 {
+	r1, _, _ := syscall.SyscallN(procUlocdata_getNoSubstitute.Addr(), uintptr(unsafe.Pointer(uld)))
+	return int8(r1)
+}
+
+// Ulocdata_getPaperSize calls icuin!ulocdata_getPaperSize.
+func Ulocdata_getPaperSize(localeID foundation.PSTR, height *int32, width *int32, status *UErrorCode) {
+	syscall.SyscallN(procUlocdata_getPaperSize.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(height)), uintptr(unsafe.Pointer(width)), uintptr(unsafe.Pointer(status)))
+}
+
+// Ulocdata_open calls icuin!ulocdata_open.
+func Ulocdata_open(localeID foundation.PSTR, status *UErrorCode) *ULocaleData {
+	r1, _, _ := syscall.SyscallN(procUlocdata_open.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(status)))
+	return (*ULocaleData)(unsafe.Pointer(r1))
+}
+
+// Ulocdata_setNoSubstitute calls icuin!ulocdata_setNoSubstitute.
+func Ulocdata_setNoSubstitute(uld *ULocaleData, setting int8) {
+	syscall.SyscallN(procUlocdata_setNoSubstitute.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(setting))
+}
+
+// Umsg_applyPattern calls icuin!umsg_applyPattern.
+func Umsg_applyPattern(fmt *unsafe.Pointer, pattern *uint16, patternLength int32, parseError *UParseError, status *UErrorCode) {
+	syscall.SyscallN(procUmsg_applyPattern.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
+}
+
+// Umsg_autoQuoteApostrophe calls icuin!umsg_autoQuoteApostrophe.
+func Umsg_autoQuoteApostrophe(pattern *uint16, patternLength int32, dest *uint16, destCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUmsg_autoQuoteApostrophe.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Umsg_clone calls icuin!umsg_clone.
+func Umsg_clone(fmt *unsafe.Pointer, status *UErrorCode) unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUmsg_clone.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return unsafe.Pointer(r1)
+}
+
+// Umsg_close calls icuin!umsg_close.
+func Umsg_close(format *unsafe.Pointer) {
+	syscall.SyscallN(procUmsg_close.Addr(), uintptr(unsafe.Pointer(format)))
+}
+
+// Umsg_format calls icuin!umsg_format.
+func Umsg_format(fmt *unsafe.Pointer, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUmsg_format.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Umsg_getLocale calls icuin!umsg_getLocale.
+func Umsg_getLocale(fmt *unsafe.Pointer) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUmsg_getLocale.Addr(), uintptr(unsafe.Pointer(fmt)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Umsg_open calls icuin!umsg_open.
+func Umsg_open(pattern *uint16, patternLength int32, locale foundation.PSTR, parseError *UParseError, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUmsg_open.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Umsg_parse calls icuin!umsg_parse.
+func Umsg_parse(fmt *unsafe.Pointer, source *uint16, sourceLength int32, count *int32, status *UErrorCode) {
+	syscall.SyscallN(procUmsg_parse.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(status)))
+}
+
+// Umsg_setLocale calls icuin!umsg_setLocale.
+func Umsg_setLocale(fmt *unsafe.Pointer, locale foundation.PSTR) {
+	syscall.SyscallN(procUmsg_setLocale.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(locale)))
+}
+
+// Umsg_toPattern calls icuin!umsg_toPattern.
+func Umsg_toPattern(fmt *unsafe.Pointer, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUmsg_toPattern.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Umsg_vformat calls icuin!umsg_vformat.
+func Umsg_vformat(fmt *unsafe.Pointer, result *uint16, resultLength int32, ap *int8, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUmsg_vformat.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Umsg_vparse calls icuin!umsg_vparse.
+func Umsg_vparse(fmt *unsafe.Pointer, source *uint16, sourceLength int32, count *int32, ap *int8, status *UErrorCode) {
+	syscall.SyscallN(procUmsg_vparse.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
+}
+
+// Umutablecptrie_buildImmutable calls icu!umutablecptrie_buildImmutable.
+func Umutablecptrie_buildImmutable(trie *UMutableCPTrie, type_ UCPTrieType, valueWidth UCPTrieValueWidth, pErrorCode *UErrorCode) *UCPTrie {
+	r1, _, _ := syscall.SyscallN(procUmutablecptrie_buildImmutable.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(type_), uintptr(valueWidth), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UCPTrie)(unsafe.Pointer(r1))
+}
+
+// Umutablecptrie_clone calls icu!umutablecptrie_clone.
+func Umutablecptrie_clone(other *UMutableCPTrie, pErrorCode *UErrorCode) *UMutableCPTrie {
+	r1, _, _ := syscall.SyscallN(procUmutablecptrie_clone.Addr(), uintptr(unsafe.Pointer(other)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UMutableCPTrie)(unsafe.Pointer(r1))
+}
+
+// Umutablecptrie_close calls icu!umutablecptrie_close.
+func Umutablecptrie_close(trie *UMutableCPTrie) {
+	syscall.SyscallN(procUmutablecptrie_close.Addr(), uintptr(unsafe.Pointer(trie)))
+}
+
+// Umutablecptrie_fromUCPMap calls icu!umutablecptrie_fromUCPMap.
+func Umutablecptrie_fromUCPMap(map_ *UCPMap, pErrorCode *UErrorCode) *UMutableCPTrie {
+	r1, _, _ := syscall.SyscallN(procUmutablecptrie_fromUCPMap.Addr(), uintptr(unsafe.Pointer(map_)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UMutableCPTrie)(unsafe.Pointer(r1))
+}
+
+// Umutablecptrie_fromUCPTrie calls icu!umutablecptrie_fromUCPTrie.
+func Umutablecptrie_fromUCPTrie(trie *UCPTrie, pErrorCode *UErrorCode) *UMutableCPTrie {
+	r1, _, _ := syscall.SyscallN(procUmutablecptrie_fromUCPTrie.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UMutableCPTrie)(unsafe.Pointer(r1))
+}
+
+// Umutablecptrie_get calls icu!umutablecptrie_get.
+func Umutablecptrie_get(trie *UMutableCPTrie, c int32) uint32 {
+	r1, _, _ := syscall.SyscallN(procUmutablecptrie_get.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c))
+	return uint32(r1)
+}
+
+// Umutablecptrie_getRange calls icu!umutablecptrie_getRange.
+func Umutablecptrie_getRange(trie *UMutableCPTrie, start int32, option UCPMapRangeOption, surrogateValue uint32, filter *UCPMapValueFilter, context unsafe.Pointer, pValue *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procUmutablecptrie_getRange.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(start), uintptr(option), uintptr(surrogateValue), uintptr(unsafe.Pointer(filter)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(pValue)))
+	return int32(r1)
+}
+
+// Umutablecptrie_open calls icu!umutablecptrie_open.
+func Umutablecptrie_open(initialValue uint32, errorValue uint32, pErrorCode *UErrorCode) *UMutableCPTrie {
+	r1, _, _ := syscall.SyscallN(procUmutablecptrie_open.Addr(), uintptr(initialValue), uintptr(errorValue), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UMutableCPTrie)(unsafe.Pointer(r1))
+}
+
+// Umutablecptrie_set calls icu!umutablecptrie_set.
+func Umutablecptrie_set(trie *UMutableCPTrie, c int32, value uint32, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUmutablecptrie_set.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c), uintptr(value), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Umutablecptrie_setRange calls icu!umutablecptrie_setRange.
+func Umutablecptrie_setRange(trie *UMutableCPTrie, start int32, end int32, value uint32, pErrorCode *UErrorCode) {
+	syscall.SyscallN(procUmutablecptrie_setRange.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(start), uintptr(end), uintptr(value), uintptr(unsafe.Pointer(pErrorCode)))
+}
+
+// Unorm2_append calls icuuc!unorm2_append.
+func Unorm2_append(norm2 *UNormalizer2, first *uint16, firstLength int32, firstCapacity int32, second *uint16, secondLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_append.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(first)), uintptr(firstLength), uintptr(firstCapacity), uintptr(unsafe.Pointer(second)), uintptr(secondLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Unorm2_close calls icuuc!unorm2_close.
+func Unorm2_close(norm2 *UNormalizer2) {
+	syscall.SyscallN(procUnorm2_close.Addr(), uintptr(unsafe.Pointer(norm2)))
+}
+
+// Unorm2_composePair calls icuuc!unorm2_composePair.
+func Unorm2_composePair(norm2 *UNormalizer2, a int32, b int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_composePair.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(a), uintptr(b))
+	return int32(r1)
+}
+
+// Unorm2_getCombiningClass calls icuuc!unorm2_getCombiningClass.
+func Unorm2_getCombiningClass(norm2 *UNormalizer2, c int32) byte {
+	r1, _, _ := syscall.SyscallN(procUnorm2_getCombiningClass.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c))
+	return byte(r1)
+}
+
+// Unorm2_getDecomposition calls icuuc!unorm2_getDecomposition.
+func Unorm2_getDecomposition(norm2 *UNormalizer2, c int32, decomposition *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_getDecomposition.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c), uintptr(unsafe.Pointer(decomposition)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Unorm2_getInstance calls icuuc!unorm2_getInstance.
+func Unorm2_getInstance(packageName foundation.PSTR, name foundation.PSTR, mode UNormalization2Mode, pErrorCode *UErrorCode) *UNormalizer2 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_getInstance.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(name)), uintptr(mode), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UNormalizer2)(unsafe.Pointer(r1))
+}
+
+// Unorm2_getNFCInstance calls icuuc!unorm2_getNFCInstance.
+func Unorm2_getNFCInstance(pErrorCode *UErrorCode) *UNormalizer2 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_getNFCInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UNormalizer2)(unsafe.Pointer(r1))
+}
+
+// Unorm2_getNFDInstance calls icuuc!unorm2_getNFDInstance.
+func Unorm2_getNFDInstance(pErrorCode *UErrorCode) *UNormalizer2 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_getNFDInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UNormalizer2)(unsafe.Pointer(r1))
+}
+
+// Unorm2_getNFKCCasefoldInstance calls icuuc!unorm2_getNFKCCasefoldInstance.
+func Unorm2_getNFKCCasefoldInstance(pErrorCode *UErrorCode) *UNormalizer2 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_getNFKCCasefoldInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UNormalizer2)(unsafe.Pointer(r1))
+}
+
+// Unorm2_getNFKCInstance calls icuuc!unorm2_getNFKCInstance.
+func Unorm2_getNFKCInstance(pErrorCode *UErrorCode) *UNormalizer2 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_getNFKCInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UNormalizer2)(unsafe.Pointer(r1))
+}
+
+// Unorm2_getNFKDInstance calls icuuc!unorm2_getNFKDInstance.
+func Unorm2_getNFKDInstance(pErrorCode *UErrorCode) *UNormalizer2 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_getNFKDInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UNormalizer2)(unsafe.Pointer(r1))
+}
+
+// Unorm2_getRawDecomposition calls icuuc!unorm2_getRawDecomposition.
+func Unorm2_getRawDecomposition(norm2 *UNormalizer2, c int32, decomposition *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_getRawDecomposition.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c), uintptr(unsafe.Pointer(decomposition)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Unorm2_hasBoundaryAfter calls icuuc!unorm2_hasBoundaryAfter.
+func Unorm2_hasBoundaryAfter(norm2 *UNormalizer2, c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_hasBoundaryAfter.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c))
+	return int8(r1)
+}
+
+// Unorm2_hasBoundaryBefore calls icuuc!unorm2_hasBoundaryBefore.
+func Unorm2_hasBoundaryBefore(norm2 *UNormalizer2, c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_hasBoundaryBefore.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c))
+	return int8(r1)
+}
+
+// Unorm2_isInert calls icuuc!unorm2_isInert.
+func Unorm2_isInert(norm2 *UNormalizer2, c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_isInert.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c))
+	return int8(r1)
+}
+
+// Unorm2_isNormalized calls icuuc!unorm2_isNormalized.
+func Unorm2_isNormalized(norm2 *UNormalizer2, s *uint16, length int32, pErrorCode *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_isNormalized.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(pErrorCode)))
+	return int8(r1)
+}
+
+// Unorm2_normalize calls icuuc!unorm2_normalize.
+func Unorm2_normalize(norm2 *UNormalizer2, src *uint16, length int32, dest *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_normalize.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(src)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Unorm2_normalizeSecondAndAppend calls icuuc!unorm2_normalizeSecondAndAppend.
+func Unorm2_normalizeSecondAndAppend(norm2 *UNormalizer2, first *uint16, firstLength int32, firstCapacity int32, second *uint16, secondLength int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_normalizeSecondAndAppend.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(first)), uintptr(firstLength), uintptr(firstCapacity), uintptr(unsafe.Pointer(second)), uintptr(secondLength), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Unorm2_openFiltered calls icuuc!unorm2_openFiltered.
+func Unorm2_openFiltered(norm2 *UNormalizer2, filterSet *USet, pErrorCode *UErrorCode) *UNormalizer2 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_openFiltered.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(filterSet)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UNormalizer2)(unsafe.Pointer(r1))
+}
+
+// Unorm2_quickCheck calls icuuc!unorm2_quickCheck.
+func Unorm2_quickCheck(norm2 *UNormalizer2, s *uint16, length int32, pErrorCode *UErrorCode) UNormalizationCheckResult {
+	r1, _, _ := syscall.SyscallN(procUnorm2_quickCheck.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(pErrorCode)))
+	return UNormalizationCheckResult(r1)
+}
+
+// Unorm2_spanQuickCheckYes calls icuuc!unorm2_spanQuickCheckYes.
+func Unorm2_spanQuickCheckYes(norm2 *UNormalizer2, s *uint16, length int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnorm2_spanQuickCheckYes.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Unorm_compare calls icuuc!unorm_compare.
+func Unorm_compare(s1 *uint16, length1 int32, s2 *uint16, length2 int32, options uint32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnorm_compare.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(length1), uintptr(unsafe.Pointer(s2)), uintptr(length2), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Unum_applyPattern calls icuin!unum_applyPattern.
+func Unum_applyPattern(format *unsafe.Pointer, localized int8, pattern *uint16, patternLength int32, parseError *UParseError, status *UErrorCode) {
+	syscall.SyscallN(procUnum_applyPattern.Addr(), uintptr(unsafe.Pointer(format)), uintptr(localized), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
+}
+
+// Unum_clone calls icuin!unum_clone.
+func Unum_clone(fmt *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUnum_clone.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Unum_close calls icuin!unum_close.
+func Unum_close(fmt *unsafe.Pointer) {
+	syscall.SyscallN(procUnum_close.Addr(), uintptr(unsafe.Pointer(fmt)))
+}
+
+// Unum_countAvailable calls icuin!unum_countAvailable.
+func Unum_countAvailable() int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_countAvailable.Addr())
+	return int32(r1)
+}
+
+// Unum_format calls icuin!unum_format.
+func Unum_format(fmt *unsafe.Pointer, number int32, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_format.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(number), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unum_formatDecimal calls icuin!unum_formatDecimal.
+func Unum_formatDecimal(fmt *unsafe.Pointer, number foundation.PSTR, length int32, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_formatDecimal.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(number)), uintptr(length), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unum_formatInt64 calls icuin!unum_formatInt64.
+func Unum_formatInt64(fmt *unsafe.Pointer, number int64, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_formatInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(number), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unum_formatUFormattable calls icuin!unum_formatUFormattable.
+func Unum_formatUFormattable(fmt *unsafe.Pointer, number *unsafe.Pointer, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_formatUFormattable.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(number)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unum_getAttribute calls icuin!unum_getAttribute.
+func Unum_getAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_getAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(attr))
+	return int32(r1)
+}
+
+// Unum_getAvailable calls icuin!unum_getAvailable.
+func Unum_getAvailable(localeIndex int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUnum_getAvailable.Addr(), uintptr(localeIndex))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Unum_getContext calls icuin!unum_getContext.
+func Unum_getContext(fmt *unsafe.Pointer, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
+	r1, _, _ := syscall.SyscallN(procUnum_getContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return UDisplayContext(r1)
+}
+
+// Unum_getLocaleByType calls icuin!unum_getLocaleByType.
+func Unum_getLocaleByType(fmt *unsafe.Pointer, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUnum_getLocaleByType.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Unum_getSymbol calls icuin!unum_getSymbol.
+func Unum_getSymbol(fmt *unsafe.Pointer, symbol UNumberFormatSymbol, buffer *uint16, size int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_getSymbol.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(symbol), uintptr(unsafe.Pointer(buffer)), uintptr(size), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unum_getTextAttribute calls icuin!unum_getTextAttribute.
+func Unum_getTextAttribute(fmt *unsafe.Pointer, tag UNumberFormatTextAttribute, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_getTextAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(tag), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unum_open calls icuin!unum_open.
+func Unum_open(style UNumberFormatStyle, pattern *uint16, patternLength int32, locale foundation.PSTR, parseErr *UParseError, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUnum_open.Addr(), uintptr(style), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(parseErr)), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Unum_parse calls icuin!unum_parse.
+func Unum_parse(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_parse.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unum_parseDecimal calls icuin!unum_parseDecimal.
+func Unum_parseDecimal(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, outBuf foundation.PSTR, outBufLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_parseDecimal.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(outBuf)), uintptr(outBufLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unum_parseInt64 calls icuin!unum_parseInt64.
+func Unum_parseInt64(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUnum_parseInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+	return int64(r1)
+}
+
+// Unum_parseToUFormattable calls icuin!unum_parseToUFormattable.
+func Unum_parseToUFormattable(fmt *unsafe.Pointer, result *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUnum_parseToUFormattable.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Unum_setAttribute calls icuin!unum_setAttribute.
+func Unum_setAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute, newValue int32) {
+	syscall.SyscallN(procUnum_setAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(attr), uintptr(newValue))
+}
+
+// Unum_setContext calls icuin!unum_setContext.
+func Unum_setContext(fmt *unsafe.Pointer, value UDisplayContext, status *UErrorCode) {
+	syscall.SyscallN(procUnum_setContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(value), uintptr(unsafe.Pointer(status)))
+}
+
+// Unum_setSymbol calls icuin!unum_setSymbol.
+func Unum_setSymbol(fmt *unsafe.Pointer, symbol UNumberFormatSymbol, value *uint16, length int32, status *UErrorCode) {
+	syscall.SyscallN(procUnum_setSymbol.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(symbol), uintptr(unsafe.Pointer(value)), uintptr(length), uintptr(unsafe.Pointer(status)))
+}
+
+// Unum_setTextAttribute calls icuin!unum_setTextAttribute.
+func Unum_setTextAttribute(fmt *unsafe.Pointer, tag UNumberFormatTextAttribute, newValue *uint16, newValueLength int32, status *UErrorCode) {
+	syscall.SyscallN(procUnum_setTextAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(tag), uintptr(unsafe.Pointer(newValue)), uintptr(newValueLength), uintptr(unsafe.Pointer(status)))
+}
+
+// Unum_toPattern calls icuin!unum_toPattern.
+func Unum_toPattern(fmt *unsafe.Pointer, isPatternLocalized int8, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnum_toPattern.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(isPatternLocalized), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unumf_close calls icu!unumf_close.
+func Unumf_close(uformatter *UNumberFormatter) {
+	syscall.SyscallN(procUnumf_close.Addr(), uintptr(unsafe.Pointer(uformatter)))
+}
+
+// Unumf_closeResult calls icu!unumf_closeResult.
+func Unumf_closeResult(uresult *UFormattedNumber) {
+	syscall.SyscallN(procUnumf_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
+}
+
+// Unumf_formatDecimal calls icu!unumf_formatDecimal.
+func Unumf_formatDecimal(uformatter *UNumberFormatter, value foundation.PSTR, valueLen int32, uresult *UFormattedNumber, ec *UErrorCode) {
+	syscall.SyscallN(procUnumf_formatDecimal.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(unsafe.Pointer(value)), uintptr(valueLen), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+}
+
+// Unumf_formatInt calls icu!unumf_formatInt.
+func Unumf_formatInt(uformatter *UNumberFormatter, value int64, uresult *UFormattedNumber, ec *UErrorCode) {
+	syscall.SyscallN(procUnumf_formatInt.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(value), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+}
+
+// Unumf_openForSkeletonAndLocale calls icu!unumf_openForSkeletonAndLocale.
+func Unumf_openForSkeletonAndLocale(skeleton *uint16, skeletonLen int32, locale foundation.PSTR, ec *UErrorCode) *UNumberFormatter {
+	r1, _, _ := syscall.SyscallN(procUnumf_openForSkeletonAndLocale.Addr(), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLen), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(ec)))
+	return (*UNumberFormatter)(unsafe.Pointer(r1))
+}
+
+// Unumf_openForSkeletonAndLocaleWithError calls icu!unumf_openForSkeletonAndLocaleWithError.
+func Unumf_openForSkeletonAndLocaleWithError(skeleton *uint16, skeletonLen int32, locale foundation.PSTR, perror *UParseError, ec *UErrorCode) *UNumberFormatter {
+	r1, _, _ := syscall.SyscallN(procUnumf_openForSkeletonAndLocaleWithError.Addr(), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLen), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(perror)), uintptr(unsafe.Pointer(ec)))
+	return (*UNumberFormatter)(unsafe.Pointer(r1))
+}
+
+// Unumf_openResult calls icu!unumf_openResult.
+func Unumf_openResult(ec *UErrorCode) *UFormattedNumber {
+	r1, _, _ := syscall.SyscallN(procUnumf_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedNumber)(unsafe.Pointer(r1))
+}
+
+// Unumf_resultAsValue calls icu!unumf_resultAsValue.
+func Unumf_resultAsValue(uresult *UFormattedNumber, ec *UErrorCode) *UFormattedValue {
+	r1, _, _ := syscall.SyscallN(procUnumf_resultAsValue.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedValue)(unsafe.Pointer(r1))
+}
+
+// Unumf_resultGetAllFieldPositions calls icu!unumf_resultGetAllFieldPositions.
+func Unumf_resultGetAllFieldPositions(uresult *UFormattedNumber, ufpositer *UFieldPositionIterator, ec *UErrorCode) {
+	syscall.SyscallN(procUnumf_resultGetAllFieldPositions.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ufpositer)), uintptr(unsafe.Pointer(ec)))
+}
+
+// Unumf_resultNextFieldPosition calls icu!unumf_resultNextFieldPosition.
+func Unumf_resultNextFieldPosition(uresult *UFormattedNumber, ufpos *UFieldPosition, ec *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUnumf_resultNextFieldPosition.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ufpos)), uintptr(unsafe.Pointer(ec)))
+	return int8(r1)
+}
+
+// Unumf_resultToDecimalNumber calls icu!unumf_resultToDecimalNumber.
+func Unumf_resultToDecimalNumber(uresult *UFormattedNumber, dest foundation.PSTR, destCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnumf_resultToDecimalNumber.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Unumf_resultToString calls icu!unumf_resultToString.
+func Unumf_resultToString(uresult *UFormattedNumber, buffer *uint16, bufferCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnumf_resultToString.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Unumrf_close calls icu!unumrf_close.
+func Unumrf_close(uformatter *UNumberRangeFormatter) {
+	syscall.SyscallN(procUnumrf_close.Addr(), uintptr(unsafe.Pointer(uformatter)))
+}
+
+// Unumrf_closeResult calls icu!unumrf_closeResult.
+func Unumrf_closeResult(uresult *UFormattedNumberRange) {
+	syscall.SyscallN(procUnumrf_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
+}
+
+// Unumrf_formatDecimalRange calls icu!unumrf_formatDecimalRange.
+func Unumrf_formatDecimalRange(uformatter *UNumberRangeFormatter, first foundation.PSTR, firstLen int32, second foundation.PSTR, secondLen int32, uresult *UFormattedNumberRange, ec *UErrorCode) {
+	syscall.SyscallN(procUnumrf_formatDecimalRange.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(unsafe.Pointer(first)), uintptr(firstLen), uintptr(unsafe.Pointer(second)), uintptr(secondLen), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+}
+
+// Unumrf_openForSkeletonWithCollapseAndIdentityFallback calls icu!unumrf_openForSkeletonWithCollapseAndIdentityFallback.
+func Unumrf_openForSkeletonWithCollapseAndIdentityFallback(skeleton *uint16, skeletonLen int32, collapse UNumberRangeCollapse, identityFallback UNumberRangeIdentityFallback, locale foundation.PSTR, perror *UParseError, ec *UErrorCode) *UNumberRangeFormatter {
+	r1, _, _ := syscall.SyscallN(procUnumrf_openForSkeletonWithCollapseAndIdentityFallback.Addr(), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLen), uintptr(collapse), uintptr(identityFallback), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(perror)), uintptr(unsafe.Pointer(ec)))
+	return (*UNumberRangeFormatter)(unsafe.Pointer(r1))
+}
+
+// Unumrf_openResult calls icu!unumrf_openResult.
+func Unumrf_openResult(ec *UErrorCode) *UFormattedNumberRange {
+	r1, _, _ := syscall.SyscallN(procUnumrf_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedNumberRange)(unsafe.Pointer(r1))
+}
+
+// Unumrf_resultAsValue calls icu!unumrf_resultAsValue.
+func Unumrf_resultAsValue(uresult *UFormattedNumberRange, ec *UErrorCode) *UFormattedValue {
+	r1, _, _ := syscall.SyscallN(procUnumrf_resultAsValue.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedValue)(unsafe.Pointer(r1))
+}
+
+// Unumrf_resultGetFirstDecimalNumber calls icu!unumrf_resultGetFirstDecimalNumber.
+func Unumrf_resultGetFirstDecimalNumber(uresult *UFormattedNumberRange, dest foundation.PSTR, destCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnumrf_resultGetFirstDecimalNumber.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Unumrf_resultGetIdentityResult calls icu!unumrf_resultGetIdentityResult.
+func Unumrf_resultGetIdentityResult(uresult *UFormattedNumberRange, ec *UErrorCode) UNumberRangeIdentityResult {
+	r1, _, _ := syscall.SyscallN(procUnumrf_resultGetIdentityResult.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+	return UNumberRangeIdentityResult(r1)
+}
+
+// Unumrf_resultGetSecondDecimalNumber calls icu!unumrf_resultGetSecondDecimalNumber.
+func Unumrf_resultGetSecondDecimalNumber(uresult *UFormattedNumberRange, dest foundation.PSTR, destCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnumrf_resultGetSecondDecimalNumber.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Unumsys_close calls icuin!unumsys_close.
+func Unumsys_close(unumsys *UNumberingSystem) {
+	syscall.SyscallN(procUnumsys_close.Addr(), uintptr(unsafe.Pointer(unumsys)))
+}
+
+// Unumsys_getDescription calls icuin!unumsys_getDescription.
+func Unumsys_getDescription(unumsys *UNumberingSystem, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUnumsys_getDescription.Addr(), uintptr(unsafe.Pointer(unumsys)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Unumsys_getName calls icuin!unumsys_getName.
+func Unumsys_getName(unumsys *UNumberingSystem) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUnumsys_getName.Addr(), uintptr(unsafe.Pointer(unumsys)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Unumsys_getRadix calls icuin!unumsys_getRadix.
+func Unumsys_getRadix(unumsys *UNumberingSystem) int32 {
+	r1, _, _ := syscall.SyscallN(procUnumsys_getRadix.Addr(), uintptr(unsafe.Pointer(unumsys)))
+	return int32(r1)
+}
+
+// Unumsys_isAlgorithmic calls icuin!unumsys_isAlgorithmic.
+func Unumsys_isAlgorithmic(unumsys *UNumberingSystem) int8 {
+	r1, _, _ := syscall.SyscallN(procUnumsys_isAlgorithmic.Addr(), uintptr(unsafe.Pointer(unumsys)))
+	return int8(r1)
+}
+
+// Unumsys_open calls icuin!unumsys_open.
+func Unumsys_open(locale foundation.PSTR, status *UErrorCode) *UNumberingSystem {
+	r1, _, _ := syscall.SyscallN(procUnumsys_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
+	return (*UNumberingSystem)(unsafe.Pointer(r1))
+}
+
+// Unumsys_openAvailableNames calls icuin!unumsys_openAvailableNames.
+func Unumsys_openAvailableNames(status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUnumsys_openAvailableNames.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Unumsys_openByName calls icuin!unumsys_openByName.
+func Unumsys_openByName(name foundation.PSTR, status *UErrorCode) *UNumberingSystem {
+	r1, _, _ := syscall.SyscallN(procUnumsys_openByName.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(status)))
+	return (*UNumberingSystem)(unsafe.Pointer(r1))
+}
+
 // UpdateCalendarDayOfWeek calls KERNEL32!UpdateCalendarDayOfWeek.
 // https://learn.microsoft.com/windows/win32/Intl/updatecalendardayofweek
-func UpdateCalendarDayOfWeek(lpCalDateTime *CALDATETIME) foundation.BOOL {
+func UpdateCalendarDayOfWeek(lpCalDateTime *CALDATETIME) bool {
 	r1, _, _ := syscall.SyscallN(procUpdateCalendarDayOfWeek.Addr(), uintptr(unsafe.Pointer(lpCalDateTime)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// Uplrules_close calls icuin!uplrules_close.
+func Uplrules_close(uplrules *UPluralRules) {
+	syscall.SyscallN(procUplrules_close.Addr(), uintptr(unsafe.Pointer(uplrules)))
+}
+
+// Uplrules_getKeywords calls icuin!uplrules_getKeywords.
+func Uplrules_getKeywords(uplrules *UPluralRules, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUplrules_getKeywords.Addr(), uintptr(unsafe.Pointer(uplrules)), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Uplrules_open calls icuin!uplrules_open.
+func Uplrules_open(locale foundation.PSTR, status *UErrorCode) *UPluralRules {
+	r1, _, _ := syscall.SyscallN(procUplrules_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
+	return (*UPluralRules)(unsafe.Pointer(r1))
+}
+
+// Uplrules_openForType calls icuin!uplrules_openForType.
+func Uplrules_openForType(locale foundation.PSTR, type_ UPluralType, status *UErrorCode) *UPluralRules {
+	r1, _, _ := syscall.SyscallN(procUplrules_openForType.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return (*UPluralRules)(unsafe.Pointer(r1))
+}
+
+// Uplrules_selectFormatted calls icu!uplrules_selectFormatted.
+func Uplrules_selectFormatted(uplrules *UPluralRules, number *UFormattedNumber, keyword *uint16, capacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUplrules_selectFormatted.Addr(), uintptr(unsafe.Pointer(uplrules)), uintptr(unsafe.Pointer(number)), uintptr(unsafe.Pointer(keyword)), uintptr(capacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_appendReplacement calls icuin!uregex_appendReplacement.
+func Uregex_appendReplacement(regexp *URegularExpression, replacementText *uint16, replacementLength int32, destBuf **uint16, destCapacity *int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_appendReplacement.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacementText)), uintptr(replacementLength), uintptr(unsafe.Pointer(destBuf)), uintptr(unsafe.Pointer(destCapacity)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_appendReplacementUText calls icuin!uregex_appendReplacementUText.
+func Uregex_appendReplacementUText(regexp *URegularExpression, replacementText *UText, dest *UText, status *UErrorCode) {
+	syscall.SyscallN(procUregex_appendReplacementUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacementText)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_appendTail calls icuin!uregex_appendTail.
+func Uregex_appendTail(regexp *URegularExpression, destBuf **uint16, destCapacity *int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_appendTail.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(destBuf)), uintptr(unsafe.Pointer(destCapacity)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_appendTailUText calls icuin!uregex_appendTailUText.
+func Uregex_appendTailUText(regexp *URegularExpression, dest *UText, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUregex_appendTailUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Uregex_clone calls icuin!uregex_clone.
+func Uregex_clone(regexp *URegularExpression, status *UErrorCode) *URegularExpression {
+	r1, _, _ := syscall.SyscallN(procUregex_clone.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return (*URegularExpression)(unsafe.Pointer(r1))
+}
+
+// Uregex_close calls icuin!uregex_close.
+func Uregex_close(regexp *URegularExpression) {
+	syscall.SyscallN(procUregex_close.Addr(), uintptr(unsafe.Pointer(regexp)))
+}
+
+// Uregex_end calls icuin!uregex_end.
+func Uregex_end(regexp *URegularExpression, groupNum int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_end.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_end64 calls icuin!uregex_end64.
+func Uregex_end64(regexp *URegularExpression, groupNum int32, status *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUregex_end64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(status)))
+	return int64(r1)
+}
+
+// Uregex_find calls icuin!uregex_find.
+func Uregex_find(regexp *URegularExpression, startIndex int32, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_find.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_find64 calls icuin!uregex_find64.
+func Uregex_find64(regexp *URegularExpression, startIndex int64, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_find64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_findNext calls icuin!uregex_findNext.
+func Uregex_findNext(regexp *URegularExpression, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_findNext.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_flags calls icuin!uregex_flags.
+func Uregex_flags(regexp *URegularExpression, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_flags.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_getFindProgressCallback calls icuin!uregex_getFindProgressCallback.
+func Uregex_getFindProgressCallback(regexp *URegularExpression, callback *URegexFindProgressCallback, context *unsafe.Pointer, status *UErrorCode) {
+	syscall.SyscallN(procUregex_getFindProgressCallback.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_getMatchCallback calls icuin!uregex_getMatchCallback.
+func Uregex_getMatchCallback(regexp *URegularExpression, callback *URegexMatchCallback, context *unsafe.Pointer, status *UErrorCode) {
+	syscall.SyscallN(procUregex_getMatchCallback.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_getStackLimit calls icuin!uregex_getStackLimit.
+func Uregex_getStackLimit(regexp *URegularExpression, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_getStackLimit.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_getText calls icuin!uregex_getText.
+func Uregex_getText(regexp *URegularExpression, textLength *int32, status *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUregex_getText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(textLength)), uintptr(unsafe.Pointer(status)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Uregex_getTimeLimit calls icuin!uregex_getTimeLimit.
+func Uregex_getTimeLimit(regexp *URegularExpression, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_getTimeLimit.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_getUText calls icuin!uregex_getUText.
+func Uregex_getUText(regexp *URegularExpression, dest *UText, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUregex_getUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Uregex_group calls icuin!uregex_group.
+func Uregex_group(regexp *URegularExpression, groupNum int32, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_group.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_groupCount calls icuin!uregex_groupCount.
+func Uregex_groupCount(regexp *URegularExpression, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_groupCount.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_groupNumberFromCName calls icuin!uregex_groupNumberFromCName.
+func Uregex_groupNumberFromCName(regexp *URegularExpression, groupName foundation.PSTR, nameLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_groupNumberFromCName.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(groupName)), uintptr(nameLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_groupNumberFromName calls icuin!uregex_groupNumberFromName.
+func Uregex_groupNumberFromName(regexp *URegularExpression, groupName *uint16, nameLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_groupNumberFromName.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(groupName)), uintptr(nameLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_groupUText calls icuin!uregex_groupUText.
+func Uregex_groupUText(regexp *URegularExpression, groupNum int32, dest *UText, groupLength *int64, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUregex_groupUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(groupLength)), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Uregex_hasAnchoringBounds calls icuin!uregex_hasAnchoringBounds.
+func Uregex_hasAnchoringBounds(regexp *URegularExpression, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_hasAnchoringBounds.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_hasTransparentBounds calls icuin!uregex_hasTransparentBounds.
+func Uregex_hasTransparentBounds(regexp *URegularExpression, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_hasTransparentBounds.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_hitEnd calls icuin!uregex_hitEnd.
+func Uregex_hitEnd(regexp *URegularExpression, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_hitEnd.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_lookingAt calls icuin!uregex_lookingAt.
+func Uregex_lookingAt(regexp *URegularExpression, startIndex int32, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_lookingAt.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_lookingAt64 calls icuin!uregex_lookingAt64.
+func Uregex_lookingAt64(regexp *URegularExpression, startIndex int64, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_lookingAt64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_matches calls icuin!uregex_matches.
+func Uregex_matches(regexp *URegularExpression, startIndex int32, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_matches.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_matches64 calls icuin!uregex_matches64.
+func Uregex_matches64(regexp *URegularExpression, startIndex int64, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_matches64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_open calls icuin!uregex_open.
+func Uregex_open(pattern *uint16, patternLength int32, flags uint32, pe *UParseError, status *UErrorCode) *URegularExpression {
+	r1, _, _ := syscall.SyscallN(procUregex_open.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(flags), uintptr(unsafe.Pointer(pe)), uintptr(unsafe.Pointer(status)))
+	return (*URegularExpression)(unsafe.Pointer(r1))
+}
+
+// Uregex_openC calls icuin!uregex_openC.
+func Uregex_openC(pattern foundation.PSTR, flags uint32, pe *UParseError, status *UErrorCode) *URegularExpression {
+	r1, _, _ := syscall.SyscallN(procUregex_openC.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(flags), uintptr(unsafe.Pointer(pe)), uintptr(unsafe.Pointer(status)))
+	return (*URegularExpression)(unsafe.Pointer(r1))
+}
+
+// Uregex_openUText calls icuin!uregex_openUText.
+func Uregex_openUText(pattern *UText, flags uint32, pe *UParseError, status *UErrorCode) *URegularExpression {
+	r1, _, _ := syscall.SyscallN(procUregex_openUText.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(flags), uintptr(unsafe.Pointer(pe)), uintptr(unsafe.Pointer(status)))
+	return (*URegularExpression)(unsafe.Pointer(r1))
+}
+
+// Uregex_pattern calls icuin!uregex_pattern.
+func Uregex_pattern(regexp *URegularExpression, patLength *int32, status *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUregex_pattern.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(patLength)), uintptr(unsafe.Pointer(status)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Uregex_patternUText calls icuin!uregex_patternUText.
+func Uregex_patternUText(regexp *URegularExpression, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUregex_patternUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Uregex_refreshUText calls icuin!uregex_refreshUText.
+func Uregex_refreshUText(regexp *URegularExpression, text *UText, status *UErrorCode) {
+	syscall.SyscallN(procUregex_refreshUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_regionEnd calls icuin!uregex_regionEnd.
+func Uregex_regionEnd(regexp *URegularExpression, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_regionEnd.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_regionEnd64 calls icuin!uregex_regionEnd64.
+func Uregex_regionEnd64(regexp *URegularExpression, status *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUregex_regionEnd64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int64(r1)
+}
+
+// Uregex_regionStart calls icuin!uregex_regionStart.
+func Uregex_regionStart(regexp *URegularExpression, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_regionStart.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_regionStart64 calls icuin!uregex_regionStart64.
+func Uregex_regionStart64(regexp *URegularExpression, status *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUregex_regionStart64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int64(r1)
+}
+
+// Uregex_replaceAll calls icuin!uregex_replaceAll.
+func Uregex_replaceAll(regexp *URegularExpression, replacementText *uint16, replacementLength int32, destBuf *uint16, destCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_replaceAll.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacementText)), uintptr(replacementLength), uintptr(unsafe.Pointer(destBuf)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_replaceAllUText calls icuin!uregex_replaceAllUText.
+func Uregex_replaceAllUText(regexp *URegularExpression, replacement *UText, dest *UText, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUregex_replaceAllUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacement)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Uregex_replaceFirst calls icuin!uregex_replaceFirst.
+func Uregex_replaceFirst(regexp *URegularExpression, replacementText *uint16, replacementLength int32, destBuf *uint16, destCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_replaceFirst.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacementText)), uintptr(replacementLength), uintptr(unsafe.Pointer(destBuf)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_replaceFirstUText calls icuin!uregex_replaceFirstUText.
+func Uregex_replaceFirstUText(regexp *URegularExpression, replacement *UText, dest *UText, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUregex_replaceFirstUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacement)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Uregex_requireEnd calls icuin!uregex_requireEnd.
+func Uregex_requireEnd(regexp *URegularExpression, status *UErrorCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUregex_requireEnd.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
+	return int8(r1)
+}
+
+// Uregex_reset calls icuin!uregex_reset.
+func Uregex_reset(regexp *URegularExpression, index int32, status *UErrorCode) {
+	syscall.SyscallN(procUregex_reset.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(index), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_reset64 calls icuin!uregex_reset64.
+func Uregex_reset64(regexp *URegularExpression, index int64, status *UErrorCode) {
+	syscall.SyscallN(procUregex_reset64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(index), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_setFindProgressCallback calls icuin!uregex_setFindProgressCallback.
+func Uregex_setFindProgressCallback(regexp *URegularExpression, callback URegexFindProgressCallback, context unsafe.Pointer, status *UErrorCode) {
+	syscall.SyscallN(procUregex_setFindProgressCallback.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_setMatchCallback calls icuin!uregex_setMatchCallback.
+func Uregex_setMatchCallback(regexp *URegularExpression, callback URegexMatchCallback, context unsafe.Pointer, status *UErrorCode) {
+	syscall.SyscallN(procUregex_setMatchCallback.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_setRegion calls icuin!uregex_setRegion.
+func Uregex_setRegion(regexp *URegularExpression, regionStart int32, regionLimit int32, status *UErrorCode) {
+	syscall.SyscallN(procUregex_setRegion.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(regionStart), uintptr(regionLimit), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_setRegion64 calls icuin!uregex_setRegion64.
+func Uregex_setRegion64(regexp *URegularExpression, regionStart int64, regionLimit int64, status *UErrorCode) {
+	syscall.SyscallN(procUregex_setRegion64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(regionStart), uintptr(regionLimit), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_setRegionAndStart calls icuin!uregex_setRegionAndStart.
+func Uregex_setRegionAndStart(regexp *URegularExpression, regionStart int64, regionLimit int64, startIndex int64, status *UErrorCode) {
+	syscall.SyscallN(procUregex_setRegionAndStart.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(regionStart), uintptr(regionLimit), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_setStackLimit calls icuin!uregex_setStackLimit.
+func Uregex_setStackLimit(regexp *URegularExpression, limit int32, status *UErrorCode) {
+	syscall.SyscallN(procUregex_setStackLimit.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(limit), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_setText calls icuin!uregex_setText.
+func Uregex_setText(regexp *URegularExpression, text *uint16, textLength int32, status *UErrorCode) {
+	syscall.SyscallN(procUregex_setText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_setTimeLimit calls icuin!uregex_setTimeLimit.
+func Uregex_setTimeLimit(regexp *URegularExpression, limit int32, status *UErrorCode) {
+	syscall.SyscallN(procUregex_setTimeLimit.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(limit), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_setUText calls icuin!uregex_setUText.
+func Uregex_setUText(regexp *URegularExpression, text *UText, status *UErrorCode) {
+	syscall.SyscallN(procUregex_setUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_split calls icuin!uregex_split.
+func Uregex_split(regexp *URegularExpression, destBuf *uint16, destCapacity int32, requiredCapacity *int32, destFields **uint16, destFieldsCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_split.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(destBuf)), uintptr(destCapacity), uintptr(unsafe.Pointer(requiredCapacity)), uintptr(unsafe.Pointer(destFields)), uintptr(destFieldsCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_splitUText calls icuin!uregex_splitUText.
+func Uregex_splitUText(regexp *URegularExpression, destFields **UText, destFieldsCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_splitUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(destFields)), uintptr(destFieldsCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_start calls icuin!uregex_start.
+func Uregex_start(regexp *URegularExpression, groupNum int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUregex_start.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uregex_start64 calls icuin!uregex_start64.
+func Uregex_start64(regexp *URegularExpression, groupNum int32, status *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUregex_start64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(status)))
+	return int64(r1)
+}
+
+// Uregex_useAnchoringBounds calls icuin!uregex_useAnchoringBounds.
+func Uregex_useAnchoringBounds(regexp *URegularExpression, b int8, status *UErrorCode) {
+	syscall.SyscallN(procUregex_useAnchoringBounds.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(b), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregex_useTransparentBounds calls icuin!uregex_useTransparentBounds.
+func Uregex_useTransparentBounds(regexp *URegularExpression, b int8, status *UErrorCode) {
+	syscall.SyscallN(procUregex_useTransparentBounds.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(b), uintptr(unsafe.Pointer(status)))
+}
+
+// Uregion_areEqual calls icuin!uregion_areEqual.
+func Uregion_areEqual(uregion *URegion, otherRegion *URegion) int8 {
+	r1, _, _ := syscall.SyscallN(procUregion_areEqual.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(unsafe.Pointer(otherRegion)))
+	return int8(r1)
+}
+
+// Uregion_contains calls icuin!uregion_contains.
+func Uregion_contains(uregion *URegion, otherRegion *URegion) int8 {
+	r1, _, _ := syscall.SyscallN(procUregion_contains.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(unsafe.Pointer(otherRegion)))
+	return int8(r1)
+}
+
+// Uregion_getAvailable calls icuin!uregion_getAvailable.
+func Uregion_getAvailable(type_ URegionType, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUregion_getAvailable.Addr(), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Uregion_getContainedRegions calls icuin!uregion_getContainedRegions.
+func Uregion_getContainedRegions(uregion *URegion, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUregion_getContainedRegions.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Uregion_getContainedRegionsOfType calls icuin!uregion_getContainedRegionsOfType.
+func Uregion_getContainedRegionsOfType(uregion *URegion, type_ URegionType, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUregion_getContainedRegionsOfType.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Uregion_getContainingRegion calls icuin!uregion_getContainingRegion.
+func Uregion_getContainingRegion(uregion *URegion) *URegion {
+	r1, _, _ := syscall.SyscallN(procUregion_getContainingRegion.Addr(), uintptr(unsafe.Pointer(uregion)))
+	return (*URegion)(unsafe.Pointer(r1))
+}
+
+// Uregion_getContainingRegionOfType calls icuin!uregion_getContainingRegionOfType.
+func Uregion_getContainingRegionOfType(uregion *URegion, type_ URegionType) *URegion {
+	r1, _, _ := syscall.SyscallN(procUregion_getContainingRegionOfType.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(type_))
+	return (*URegion)(unsafe.Pointer(r1))
+}
+
+// Uregion_getNumericCode calls icuin!uregion_getNumericCode.
+func Uregion_getNumericCode(uregion *URegion) int32 {
+	r1, _, _ := syscall.SyscallN(procUregion_getNumericCode.Addr(), uintptr(unsafe.Pointer(uregion)))
+	return int32(r1)
+}
+
+// Uregion_getPreferredValues calls icuin!uregion_getPreferredValues.
+func Uregion_getPreferredValues(uregion *URegion, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUregion_getPreferredValues.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Uregion_getRegionCode calls icuin!uregion_getRegionCode.
+func Uregion_getRegionCode(uregion *URegion) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUregion_getRegionCode.Addr(), uintptr(unsafe.Pointer(uregion)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uregion_getRegionFromCode calls icuin!uregion_getRegionFromCode.
+func Uregion_getRegionFromCode(regionCode foundation.PSTR, status *UErrorCode) *URegion {
+	r1, _, _ := syscall.SyscallN(procUregion_getRegionFromCode.Addr(), uintptr(unsafe.Pointer(regionCode)), uintptr(unsafe.Pointer(status)))
+	return (*URegion)(unsafe.Pointer(r1))
+}
+
+// Uregion_getRegionFromNumericCode calls icuin!uregion_getRegionFromNumericCode.
+func Uregion_getRegionFromNumericCode(code int32, status *UErrorCode) *URegion {
+	r1, _, _ := syscall.SyscallN(procUregion_getRegionFromNumericCode.Addr(), uintptr(code), uintptr(unsafe.Pointer(status)))
+	return (*URegion)(unsafe.Pointer(r1))
+}
+
+// Uregion_getType calls icuin!uregion_getType.
+func Uregion_getType(uregion *URegion) URegionType {
+	r1, _, _ := syscall.SyscallN(procUregion_getType.Addr(), uintptr(unsafe.Pointer(uregion)))
+	return URegionType(r1)
+}
+
+// Ureldatefmt_close calls icuin!ureldatefmt_close.
+func Ureldatefmt_close(reldatefmt *URelativeDateTimeFormatter) {
+	syscall.SyscallN(procUreldatefmt_close.Addr(), uintptr(unsafe.Pointer(reldatefmt)))
+}
+
+// Ureldatefmt_closeResult calls icu!ureldatefmt_closeResult.
+func Ureldatefmt_closeResult(ufrdt *UFormattedRelativeDateTime) {
+	syscall.SyscallN(procUreldatefmt_closeResult.Addr(), uintptr(unsafe.Pointer(ufrdt)))
+}
+
+// Ureldatefmt_combineDateAndTime calls icuin!ureldatefmt_combineDateAndTime.
+func Ureldatefmt_combineDateAndTime(reldatefmt *URelativeDateTimeFormatter, relativeDateString *uint16, relativeDateStringLen int32, timeString *uint16, timeStringLen int32, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUreldatefmt_combineDateAndTime.Addr(), uintptr(unsafe.Pointer(reldatefmt)), uintptr(unsafe.Pointer(relativeDateString)), uintptr(relativeDateStringLen), uintptr(unsafe.Pointer(timeString)), uintptr(timeStringLen), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ureldatefmt_open calls icuin!ureldatefmt_open.
+func Ureldatefmt_open(locale foundation.PSTR, nfToAdopt *unsafe.Pointer, width UDateRelativeDateTimeFormatterStyle, capitalizationContext UDisplayContext, status *UErrorCode) *URelativeDateTimeFormatter {
+	r1, _, _ := syscall.SyscallN(procUreldatefmt_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(nfToAdopt)), uintptr(width), uintptr(capitalizationContext), uintptr(unsafe.Pointer(status)))
+	return (*URelativeDateTimeFormatter)(unsafe.Pointer(r1))
+}
+
+// Ureldatefmt_openResult calls icu!ureldatefmt_openResult.
+func Ureldatefmt_openResult(ec *UErrorCode) *UFormattedRelativeDateTime {
+	r1, _, _ := syscall.SyscallN(procUreldatefmt_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedRelativeDateTime)(unsafe.Pointer(r1))
+}
+
+// Ureldatefmt_resultAsValue calls icu!ureldatefmt_resultAsValue.
+func Ureldatefmt_resultAsValue(ufrdt *UFormattedRelativeDateTime, ec *UErrorCode) *UFormattedValue {
+	r1, _, _ := syscall.SyscallN(procUreldatefmt_resultAsValue.Addr(), uintptr(unsafe.Pointer(ufrdt)), uintptr(unsafe.Pointer(ec)))
+	return (*UFormattedValue)(unsafe.Pointer(r1))
+}
+
+// Ures_close calls icuuc!ures_close.
+func Ures_close(resourceBundle *UResourceBundle) {
+	syscall.SyscallN(procUres_close.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
+}
+
+// Ures_getBinary calls icuuc!ures_getBinary.
+func Ures_getBinary(resourceBundle *UResourceBundle, len_ *int32, status *UErrorCode) *byte {
+	r1, _, _ := syscall.SyscallN(procUres_getBinary.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
+	return (*byte)(unsafe.Pointer(r1))
+}
+
+// Ures_getByIndex calls icuuc!ures_getByIndex.
+func Ures_getByIndex(resourceBundle *UResourceBundle, indexR int32, fillIn *UResourceBundle, status *UErrorCode) *UResourceBundle {
+	r1, _, _ := syscall.SyscallN(procUres_getByIndex.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(indexR), uintptr(unsafe.Pointer(fillIn)), uintptr(unsafe.Pointer(status)))
+	return (*UResourceBundle)(unsafe.Pointer(r1))
+}
+
+// Ures_getByKey calls icuuc!ures_getByKey.
+func Ures_getByKey(resourceBundle *UResourceBundle, key foundation.PSTR, fillIn *UResourceBundle, status *UErrorCode) *UResourceBundle {
+	r1, _, _ := syscall.SyscallN(procUres_getByKey.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(fillIn)), uintptr(unsafe.Pointer(status)))
+	return (*UResourceBundle)(unsafe.Pointer(r1))
+}
+
+// Ures_getInt calls icuuc!ures_getInt.
+func Ures_getInt(resourceBundle *UResourceBundle, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUres_getInt.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Ures_getIntVector calls icuuc!ures_getIntVector.
+func Ures_getIntVector(resourceBundle *UResourceBundle, len_ *int32, status *UErrorCode) *int32 {
+	r1, _, _ := syscall.SyscallN(procUres_getIntVector.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
+	return (*int32)(unsafe.Pointer(r1))
+}
+
+// Ures_getKey calls icuuc!ures_getKey.
+func Ures_getKey(resourceBundle *UResourceBundle) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUres_getKey.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ures_getLocaleByType calls icuuc!ures_getLocaleByType.
+func Ures_getLocaleByType(resourceBundle *UResourceBundle, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUres_getLocaleByType.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ures_getNextResource calls icuuc!ures_getNextResource.
+func Ures_getNextResource(resourceBundle *UResourceBundle, fillIn *UResourceBundle, status *UErrorCode) *UResourceBundle {
+	r1, _, _ := syscall.SyscallN(procUres_getNextResource.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(fillIn)), uintptr(unsafe.Pointer(status)))
+	return (*UResourceBundle)(unsafe.Pointer(r1))
+}
+
+// Ures_getNextString calls icuuc!ures_getNextString.
+func Ures_getNextString(resourceBundle *UResourceBundle, len_ *int32, key **int8, status *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUres_getNextString.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(status)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ures_getSize calls icuuc!ures_getSize.
+func Ures_getSize(resourceBundle *UResourceBundle) int32 {
+	r1, _, _ := syscall.SyscallN(procUres_getSize.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
+	return int32(r1)
+}
+
+// Ures_getString calls icuuc!ures_getString.
+func Ures_getString(resourceBundle *UResourceBundle, len_ *int32, status *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUres_getString.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ures_getStringByIndex calls icuuc!ures_getStringByIndex.
+func Ures_getStringByIndex(resourceBundle *UResourceBundle, indexS int32, len_ *int32, status *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUres_getStringByIndex.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(indexS), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ures_getStringByKey calls icuuc!ures_getStringByKey.
+func Ures_getStringByKey(resB *UResourceBundle, key foundation.PSTR, len_ *int32, status *UErrorCode) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUres_getStringByKey.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Ures_getType calls icuuc!ures_getType.
+func Ures_getType(resourceBundle *UResourceBundle) UResType {
+	r1, _, _ := syscall.SyscallN(procUres_getType.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
+	return UResType(r1)
+}
+
+// Ures_getUInt calls icuuc!ures_getUInt.
+func Ures_getUInt(resourceBundle *UResourceBundle, status *UErrorCode) uint32 {
+	r1, _, _ := syscall.SyscallN(procUres_getUInt.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(status)))
+	return uint32(r1)
+}
+
+// Ures_getUTF8String calls icuuc!ures_getUTF8String.
+func Ures_getUTF8String(resB *UResourceBundle, dest foundation.PSTR, length *int32, forceCopy int8, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUres_getUTF8String.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(length)), uintptr(forceCopy), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ures_getUTF8StringByIndex calls icuuc!ures_getUTF8StringByIndex.
+func Ures_getUTF8StringByIndex(resB *UResourceBundle, stringIndex int32, dest foundation.PSTR, pLength *int32, forceCopy int8, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUres_getUTF8StringByIndex.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(stringIndex), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(pLength)), uintptr(forceCopy), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ures_getUTF8StringByKey calls icuuc!ures_getUTF8StringByKey.
+func Ures_getUTF8StringByKey(resB *UResourceBundle, key foundation.PSTR, dest foundation.PSTR, pLength *int32, forceCopy int8, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUres_getUTF8StringByKey.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(pLength)), uintptr(forceCopy), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Ures_getVersion calls icuuc!ures_getVersion.
+func Ures_getVersion(resB *UResourceBundle, versionInfo *byte) {
+	syscall.SyscallN(procUres_getVersion.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(unsafe.Pointer(versionInfo)))
+}
+
+// Ures_hasNext calls icuuc!ures_hasNext.
+func Ures_hasNext(resourceBundle *UResourceBundle) int8 {
+	r1, _, _ := syscall.SyscallN(procUres_hasNext.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
+	return int8(r1)
+}
+
+// Ures_open calls icuuc!ures_open.
+func Ures_open(packageName foundation.PSTR, locale foundation.PSTR, status *UErrorCode) *UResourceBundle {
+	r1, _, _ := syscall.SyscallN(procUres_open.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
+	return (*UResourceBundle)(unsafe.Pointer(r1))
+}
+
+// Ures_openAvailableLocales calls icuuc!ures_openAvailableLocales.
+func Ures_openAvailableLocales(packageName foundation.PSTR, status *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUres_openAvailableLocales.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(status)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Ures_openDirect calls icuuc!ures_openDirect.
+func Ures_openDirect(packageName foundation.PSTR, locale foundation.PSTR, status *UErrorCode) *UResourceBundle {
+	r1, _, _ := syscall.SyscallN(procUres_openDirect.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
+	return (*UResourceBundle)(unsafe.Pointer(r1))
+}
+
+// Ures_openU calls icuuc!ures_openU.
+func Ures_openU(packageName *uint16, locale foundation.PSTR, status *UErrorCode) *UResourceBundle {
+	r1, _, _ := syscall.SyscallN(procUres_openU.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
+	return (*UResourceBundle)(unsafe.Pointer(r1))
+}
+
+// Ures_resetIterator calls icuuc!ures_resetIterator.
+func Ures_resetIterator(resourceBundle *UResourceBundle) {
+	syscall.SyscallN(procUres_resetIterator.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
+}
+
+// Uscript_breaksBetweenLetters calls icuuc!uscript_breaksBetweenLetters.
+func Uscript_breaksBetweenLetters(script UScriptCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUscript_breaksBetweenLetters.Addr(), uintptr(script))
+	return int8(r1)
+}
+
+// Uscript_getCode calls icuuc!uscript_getCode.
+func Uscript_getCode(nameOrAbbrOrLocale foundation.PSTR, fillIn *UScriptCode, capacity int32, err_ *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUscript_getCode.Addr(), uintptr(unsafe.Pointer(nameOrAbbrOrLocale)), uintptr(unsafe.Pointer(fillIn)), uintptr(capacity), uintptr(unsafe.Pointer(err_)))
+	return int32(r1)
+}
+
+// Uscript_getName calls icuuc!uscript_getName.
+func Uscript_getName(scriptCode UScriptCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUscript_getName.Addr(), uintptr(scriptCode))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uscript_getSampleString calls icuuc!uscript_getSampleString.
+func Uscript_getSampleString(script UScriptCode, dest *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUscript_getSampleString.Addr(), uintptr(script), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uscript_getScript calls icuuc!uscript_getScript.
+func Uscript_getScript(codepoint int32, err_ *UErrorCode) UScriptCode {
+	r1, _, _ := syscall.SyscallN(procUscript_getScript.Addr(), uintptr(codepoint), uintptr(unsafe.Pointer(err_)))
+	return UScriptCode(r1)
+}
+
+// Uscript_getScriptExtensions calls icuuc!uscript_getScriptExtensions.
+func Uscript_getScriptExtensions(c int32, scripts *UScriptCode, capacity int32, errorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUscript_getScriptExtensions.Addr(), uintptr(c), uintptr(unsafe.Pointer(scripts)), uintptr(capacity), uintptr(unsafe.Pointer(errorCode)))
+	return int32(r1)
+}
+
+// Uscript_getShortName calls icuuc!uscript_getShortName.
+func Uscript_getShortName(scriptCode UScriptCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUscript_getShortName.Addr(), uintptr(scriptCode))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uscript_getUsage calls icuuc!uscript_getUsage.
+func Uscript_getUsage(script UScriptCode) UScriptUsage {
+	r1, _, _ := syscall.SyscallN(procUscript_getUsage.Addr(), uintptr(script))
+	return UScriptUsage(r1)
+}
+
+// Uscript_hasScript calls icuuc!uscript_hasScript.
+func Uscript_hasScript(c int32, sc UScriptCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUscript_hasScript.Addr(), uintptr(c), uintptr(sc))
+	return int8(r1)
+}
+
+// Uscript_isCased calls icuuc!uscript_isCased.
+func Uscript_isCased(script UScriptCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUscript_isCased.Addr(), uintptr(script))
+	return int8(r1)
+}
+
+// Uscript_isRightToLeft calls icuuc!uscript_isRightToLeft.
+func Uscript_isRightToLeft(script UScriptCode) int8 {
+	r1, _, _ := syscall.SyscallN(procUscript_isRightToLeft.Addr(), uintptr(script))
+	return int8(r1)
+}
+
+// Usearch_close calls icuin!usearch_close.
+func Usearch_close(searchiter *UStringSearch) {
+	syscall.SyscallN(procUsearch_close.Addr(), uintptr(unsafe.Pointer(searchiter)))
+}
+
+// Usearch_first calls icuin!usearch_first.
+func Usearch_first(strsrch *UStringSearch, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_first.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Usearch_following calls icuin!usearch_following.
+func Usearch_following(strsrch *UStringSearch, position int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_following.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(position), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Usearch_getAttribute calls icuin!usearch_getAttribute.
+func Usearch_getAttribute(strsrch *UStringSearch, attribute USearchAttribute) USearchAttributeValue {
+	r1, _, _ := syscall.SyscallN(procUsearch_getAttribute.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(attribute))
+	return USearchAttributeValue(r1)
+}
+
+// Usearch_getBreakIterator calls icuin!usearch_getBreakIterator.
+func Usearch_getBreakIterator(strsrch *UStringSearch) *UBreakIterator {
+	r1, _, _ := syscall.SyscallN(procUsearch_getBreakIterator.Addr(), uintptr(unsafe.Pointer(strsrch)))
+	return (*UBreakIterator)(unsafe.Pointer(r1))
+}
+
+// Usearch_getCollator calls icuin!usearch_getCollator.
+func Usearch_getCollator(strsrch *UStringSearch) *UCollator {
+	r1, _, _ := syscall.SyscallN(procUsearch_getCollator.Addr(), uintptr(unsafe.Pointer(strsrch)))
+	return (*UCollator)(unsafe.Pointer(r1))
+}
+
+// Usearch_getMatchedLength calls icuin!usearch_getMatchedLength.
+func Usearch_getMatchedLength(strsrch *UStringSearch) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_getMatchedLength.Addr(), uintptr(unsafe.Pointer(strsrch)))
+	return int32(r1)
+}
+
+// Usearch_getMatchedStart calls icuin!usearch_getMatchedStart.
+func Usearch_getMatchedStart(strsrch *UStringSearch) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_getMatchedStart.Addr(), uintptr(unsafe.Pointer(strsrch)))
+	return int32(r1)
+}
+
+// Usearch_getMatchedText calls icuin!usearch_getMatchedText.
+func Usearch_getMatchedText(strsrch *UStringSearch, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_getMatchedText.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Usearch_getOffset calls icuin!usearch_getOffset.
+func Usearch_getOffset(strsrch *UStringSearch) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_getOffset.Addr(), uintptr(unsafe.Pointer(strsrch)))
+	return int32(r1)
+}
+
+// Usearch_getPattern calls icuin!usearch_getPattern.
+func Usearch_getPattern(strsrch *UStringSearch, length *int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUsearch_getPattern.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(length)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Usearch_getText calls icuin!usearch_getText.
+func Usearch_getText(strsrch *UStringSearch, length *int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUsearch_getText.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(length)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Usearch_last calls icuin!usearch_last.
+func Usearch_last(strsrch *UStringSearch, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_last.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Usearch_next calls icuin!usearch_next.
+func Usearch_next(strsrch *UStringSearch, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_next.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Usearch_open calls icuin!usearch_open.
+func Usearch_open(pattern *uint16, patternlength int32, text *uint16, textlength int32, locale foundation.PSTR, breakiter *UBreakIterator, status *UErrorCode) *UStringSearch {
+	r1, _, _ := syscall.SyscallN(procUsearch_open.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternlength), uintptr(unsafe.Pointer(text)), uintptr(textlength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(breakiter)), uintptr(unsafe.Pointer(status)))
+	return (*UStringSearch)(unsafe.Pointer(r1))
+}
+
+// Usearch_openFromCollator calls icuin!usearch_openFromCollator.
+func Usearch_openFromCollator(pattern *uint16, patternlength int32, text *uint16, textlength int32, collator *UCollator, breakiter *UBreakIterator, status *UErrorCode) *UStringSearch {
+	r1, _, _ := syscall.SyscallN(procUsearch_openFromCollator.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternlength), uintptr(unsafe.Pointer(text)), uintptr(textlength), uintptr(unsafe.Pointer(collator)), uintptr(unsafe.Pointer(breakiter)), uintptr(unsafe.Pointer(status)))
+	return (*UStringSearch)(unsafe.Pointer(r1))
+}
+
+// Usearch_preceding calls icuin!usearch_preceding.
+func Usearch_preceding(strsrch *UStringSearch, position int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_preceding.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(position), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Usearch_previous calls icuin!usearch_previous.
+func Usearch_previous(strsrch *UStringSearch, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUsearch_previous.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Usearch_reset calls icuin!usearch_reset.
+func Usearch_reset(strsrch *UStringSearch) {
+	syscall.SyscallN(procUsearch_reset.Addr(), uintptr(unsafe.Pointer(strsrch)))
+}
+
+// Usearch_setAttribute calls icuin!usearch_setAttribute.
+func Usearch_setAttribute(strsrch *UStringSearch, attribute USearchAttribute, value USearchAttributeValue, status *UErrorCode) {
+	syscall.SyscallN(procUsearch_setAttribute.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(attribute), uintptr(value), uintptr(unsafe.Pointer(status)))
+}
+
+// Usearch_setBreakIterator calls icuin!usearch_setBreakIterator.
+func Usearch_setBreakIterator(strsrch *UStringSearch, breakiter *UBreakIterator, status *UErrorCode) {
+	syscall.SyscallN(procUsearch_setBreakIterator.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(breakiter)), uintptr(unsafe.Pointer(status)))
+}
+
+// Usearch_setCollator calls icuin!usearch_setCollator.
+func Usearch_setCollator(strsrch *UStringSearch, collator *UCollator, status *UErrorCode) {
+	syscall.SyscallN(procUsearch_setCollator.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(collator)), uintptr(unsafe.Pointer(status)))
+}
+
+// Usearch_setOffset calls icuin!usearch_setOffset.
+func Usearch_setOffset(strsrch *UStringSearch, position int32, status *UErrorCode) {
+	syscall.SyscallN(procUsearch_setOffset.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(position), uintptr(unsafe.Pointer(status)))
+}
+
+// Usearch_setPattern calls icuin!usearch_setPattern.
+func Usearch_setPattern(strsrch *UStringSearch, pattern *uint16, patternlength int32, status *UErrorCode) {
+	syscall.SyscallN(procUsearch_setPattern.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(pattern)), uintptr(patternlength), uintptr(unsafe.Pointer(status)))
+}
+
+// Usearch_setText calls icuin!usearch_setText.
+func Usearch_setText(strsrch *UStringSearch, text *uint16, textlength int32, status *UErrorCode) {
+	syscall.SyscallN(procUsearch_setText.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(text)), uintptr(textlength), uintptr(unsafe.Pointer(status)))
+}
+
+// Uset_add calls icuuc!uset_add.
+func Uset_add(set *USet, c int32) {
+	syscall.SyscallN(procUset_add.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
+}
+
+// Uset_addAll calls icuuc!uset_addAll.
+func Uset_addAll(set *USet, additionalSet *USet) {
+	syscall.SyscallN(procUset_addAll.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(additionalSet)))
+}
+
+// Uset_addAllCodePoints calls icuuc!uset_addAllCodePoints.
+func Uset_addAllCodePoints(set *USet, str *uint16, strLen int32) {
+	syscall.SyscallN(procUset_addAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
+}
+
+// Uset_addRange calls icuuc!uset_addRange.
+func Uset_addRange(set *USet, start int32, end int32) {
+	syscall.SyscallN(procUset_addRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
+}
+
+// Uset_addString calls icuuc!uset_addString.
+func Uset_addString(set *USet, str *uint16, strLen int32) {
+	syscall.SyscallN(procUset_addString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
+}
+
+// Uset_applyIntPropertyValue calls icuuc!uset_applyIntPropertyValue.
+func Uset_applyIntPropertyValue(set *USet, prop UProperty, value int32, ec *UErrorCode) {
+	syscall.SyscallN(procUset_applyIntPropertyValue.Addr(), uintptr(unsafe.Pointer(set)), uintptr(prop), uintptr(value), uintptr(unsafe.Pointer(ec)))
+}
+
+// Uset_applyPattern calls icuuc!uset_applyPattern.
+func Uset_applyPattern(set *USet, pattern *uint16, patternLength int32, options uint32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_applyPattern.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(options), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uset_applyPropertyAlias calls icuuc!uset_applyPropertyAlias.
+func Uset_applyPropertyAlias(set *USet, prop *uint16, propLength int32, value *uint16, valueLength int32, ec *UErrorCode) {
+	syscall.SyscallN(procUset_applyPropertyAlias.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(prop)), uintptr(propLength), uintptr(unsafe.Pointer(value)), uintptr(valueLength), uintptr(unsafe.Pointer(ec)))
+}
+
+// Uset_charAt calls icuuc!uset_charAt.
+func Uset_charAt(set *USet, charIndex int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_charAt.Addr(), uintptr(unsafe.Pointer(set)), uintptr(charIndex))
+	return int32(r1)
+}
+
+// Uset_clear calls icuuc!uset_clear.
+func Uset_clear(set *USet) {
+	syscall.SyscallN(procUset_clear.Addr(), uintptr(unsafe.Pointer(set)))
+}
+
+// Uset_clone calls icuuc!uset_clone.
+func Uset_clone(set *USet) *USet {
+	r1, _, _ := syscall.SyscallN(procUset_clone.Addr(), uintptr(unsafe.Pointer(set)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uset_cloneAsThawed calls icuuc!uset_cloneAsThawed.
+func Uset_cloneAsThawed(set *USet) *USet {
+	r1, _, _ := syscall.SyscallN(procUset_cloneAsThawed.Addr(), uintptr(unsafe.Pointer(set)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uset_close calls icuuc!uset_close.
+func Uset_close(set *USet) {
+	syscall.SyscallN(procUset_close.Addr(), uintptr(unsafe.Pointer(set)))
+}
+
+// Uset_closeOver calls icuuc!uset_closeOver.
+func Uset_closeOver(set *USet, attributes int32) {
+	syscall.SyscallN(procUset_closeOver.Addr(), uintptr(unsafe.Pointer(set)), uintptr(attributes))
+}
+
+// Uset_compact calls icuuc!uset_compact.
+func Uset_compact(set *USet) {
+	syscall.SyscallN(procUset_compact.Addr(), uintptr(unsafe.Pointer(set)))
+}
+
+// Uset_complement calls icuuc!uset_complement.
+func Uset_complement(set *USet) {
+	syscall.SyscallN(procUset_complement.Addr(), uintptr(unsafe.Pointer(set)))
+}
+
+// Uset_complementAll calls icuuc!uset_complementAll.
+func Uset_complementAll(set *USet, complement *USet) {
+	syscall.SyscallN(procUset_complementAll.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(complement)))
+}
+
+// Uset_complementAllCodePoints calls icu!uset_complementAllCodePoints.
+func Uset_complementAllCodePoints(set *USet, str *uint16, length int32) {
+	syscall.SyscallN(procUset_complementAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
+}
+
+// Uset_complementRange calls icu!uset_complementRange.
+func Uset_complementRange(set *USet, start int32, end int32) {
+	syscall.SyscallN(procUset_complementRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
+}
+
+// Uset_complementString calls icu!uset_complementString.
+func Uset_complementString(set *USet, str *uint16, length int32) {
+	syscall.SyscallN(procUset_complementString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
+}
+
+// Uset_contains calls icuuc!uset_contains.
+func Uset_contains(set *USet, c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_contains.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
+	return int8(r1)
+}
+
+// Uset_containsAll calls icuuc!uset_containsAll.
+func Uset_containsAll(set1 *USet, set2 *USet) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_containsAll.Addr(), uintptr(unsafe.Pointer(set1)), uintptr(unsafe.Pointer(set2)))
+	return int8(r1)
+}
+
+// Uset_containsAllCodePoints calls icuuc!uset_containsAllCodePoints.
+func Uset_containsAllCodePoints(set *USet, str *uint16, strLen int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_containsAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
+	return int8(r1)
+}
+
+// Uset_containsNone calls icuuc!uset_containsNone.
+func Uset_containsNone(set1 *USet, set2 *USet) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_containsNone.Addr(), uintptr(unsafe.Pointer(set1)), uintptr(unsafe.Pointer(set2)))
+	return int8(r1)
+}
+
+// Uset_containsRange calls icuuc!uset_containsRange.
+func Uset_containsRange(set *USet, start int32, end int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_containsRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
+	return int8(r1)
+}
+
+// Uset_containsSome calls icuuc!uset_containsSome.
+func Uset_containsSome(set1 *USet, set2 *USet) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_containsSome.Addr(), uintptr(unsafe.Pointer(set1)), uintptr(unsafe.Pointer(set2)))
+	return int8(r1)
+}
+
+// Uset_containsString calls icuuc!uset_containsString.
+func Uset_containsString(set *USet, str *uint16, strLen int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_containsString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
+	return int8(r1)
+}
+
+// Uset_equals calls icuuc!uset_equals.
+func Uset_equals(set1 *USet, set2 *USet) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_equals.Addr(), uintptr(unsafe.Pointer(set1)), uintptr(unsafe.Pointer(set2)))
+	return int8(r1)
+}
+
+// Uset_freeze calls icuuc!uset_freeze.
+func Uset_freeze(set *USet) {
+	syscall.SyscallN(procUset_freeze.Addr(), uintptr(unsafe.Pointer(set)))
+}
+
+// Uset_getItem calls icuuc!uset_getItem.
+func Uset_getItem(set *USet, itemIndex int32, start *int32, end *int32, str *uint16, strCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_getItem.Addr(), uintptr(unsafe.Pointer(set)), uintptr(itemIndex), uintptr(unsafe.Pointer(start)), uintptr(unsafe.Pointer(end)), uintptr(unsafe.Pointer(str)), uintptr(strCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Uset_getItemCount calls icuuc!uset_getItemCount.
+func Uset_getItemCount(set *USet) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_getItemCount.Addr(), uintptr(unsafe.Pointer(set)))
+	return int32(r1)
+}
+
+// Uset_getRangeCount calls icu!uset_getRangeCount.
+func Uset_getRangeCount(set *USet) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_getRangeCount.Addr(), uintptr(unsafe.Pointer(set)))
+	return int32(r1)
+}
+
+// Uset_getSerializedRange calls icuuc!uset_getSerializedRange.
+func Uset_getSerializedRange(set *USerializedSet, rangeIndex int32, pStart *int32, pEnd *int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_getSerializedRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(rangeIndex), uintptr(unsafe.Pointer(pStart)), uintptr(unsafe.Pointer(pEnd)))
+	return int8(r1)
+}
+
+// Uset_getSerializedRangeCount calls icuuc!uset_getSerializedRangeCount.
+func Uset_getSerializedRangeCount(set *USerializedSet) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_getSerializedRangeCount.Addr(), uintptr(unsafe.Pointer(set)))
+	return int32(r1)
+}
+
+// Uset_getSerializedSet calls icuuc!uset_getSerializedSet.
+func Uset_getSerializedSet(fillSet *USerializedSet, src *uint16, srcLength int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_getSerializedSet.Addr(), uintptr(unsafe.Pointer(fillSet)), uintptr(unsafe.Pointer(src)), uintptr(srcLength))
+	return int8(r1)
+}
+
+// Uset_hasStrings calls icu!uset_hasStrings.
+func Uset_hasStrings(set *USet) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_hasStrings.Addr(), uintptr(unsafe.Pointer(set)))
+	return int8(r1)
+}
+
+// Uset_indexOf calls icuuc!uset_indexOf.
+func Uset_indexOf(set *USet, c int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_indexOf.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
+	return int32(r1)
+}
+
+// Uset_isEmpty calls icuuc!uset_isEmpty.
+func Uset_isEmpty(set *USet) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_isEmpty.Addr(), uintptr(unsafe.Pointer(set)))
+	return int8(r1)
+}
+
+// Uset_isFrozen calls icuuc!uset_isFrozen.
+func Uset_isFrozen(set *USet) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_isFrozen.Addr(), uintptr(unsafe.Pointer(set)))
+	return int8(r1)
+}
+
+// Uset_open calls icuuc!uset_open.
+func Uset_open(start int32, end int32) *USet {
+	r1, _, _ := syscall.SyscallN(procUset_open.Addr(), uintptr(start), uintptr(end))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uset_openEmpty calls icuuc!uset_openEmpty.
+func Uset_openEmpty() *USet {
+	r1, _, _ := syscall.SyscallN(procUset_openEmpty.Addr())
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uset_openPattern calls icuuc!uset_openPattern.
+func Uset_openPattern(pattern *uint16, patternLength int32, ec *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procUset_openPattern.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(ec)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uset_openPatternOptions calls icuuc!uset_openPatternOptions.
+func Uset_openPatternOptions(pattern *uint16, patternLength int32, options uint32, ec *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procUset_openPatternOptions.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(options), uintptr(unsafe.Pointer(ec)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uset_remove calls icuuc!uset_remove.
+func Uset_remove(set *USet, c int32) {
+	syscall.SyscallN(procUset_remove.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
+}
+
+// Uset_removeAll calls icuuc!uset_removeAll.
+func Uset_removeAll(set *USet, removeSet *USet) {
+	syscall.SyscallN(procUset_removeAll.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(removeSet)))
+}
+
+// Uset_removeAllCodePoints calls icu!uset_removeAllCodePoints.
+func Uset_removeAllCodePoints(set *USet, str *uint16, length int32) {
+	syscall.SyscallN(procUset_removeAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
+}
+
+// Uset_removeAllStrings calls icuuc!uset_removeAllStrings.
+func Uset_removeAllStrings(set *USet) {
+	syscall.SyscallN(procUset_removeAllStrings.Addr(), uintptr(unsafe.Pointer(set)))
+}
+
+// Uset_removeRange calls icuuc!uset_removeRange.
+func Uset_removeRange(set *USet, start int32, end int32) {
+	syscall.SyscallN(procUset_removeRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
+}
+
+// Uset_removeString calls icuuc!uset_removeString.
+func Uset_removeString(set *USet, str *uint16, strLen int32) {
+	syscall.SyscallN(procUset_removeString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
+}
+
+// Uset_resemblesPattern calls icuuc!uset_resemblesPattern.
+func Uset_resemblesPattern(pattern *uint16, patternLength int32, pos int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_resemblesPattern.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(pos))
+	return int8(r1)
+}
+
+// Uset_retain calls icuuc!uset_retain.
+func Uset_retain(set *USet, start int32, end int32) {
+	syscall.SyscallN(procUset_retain.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
+}
+
+// Uset_retainAll calls icuuc!uset_retainAll.
+func Uset_retainAll(set *USet, retain *USet) {
+	syscall.SyscallN(procUset_retainAll.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(retain)))
+}
+
+// Uset_retainAllCodePoints calls icu!uset_retainAllCodePoints.
+func Uset_retainAllCodePoints(set *USet, str *uint16, length int32) {
+	syscall.SyscallN(procUset_retainAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
+}
+
+// Uset_retainString calls icu!uset_retainString.
+func Uset_retainString(set *USet, str *uint16, length int32) {
+	syscall.SyscallN(procUset_retainString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
+}
+
+// Uset_serialize calls icuuc!uset_serialize.
+func Uset_serialize(set *USet, dest *uint16, destCapacity int32, pErrorCode *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_serialize.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
+	return int32(r1)
+}
+
+// Uset_serializedContains calls icuuc!uset_serializedContains.
+func Uset_serializedContains(set *USerializedSet, c int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUset_serializedContains.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
+	return int8(r1)
+}
+
+// Uset_set calls icuuc!uset_set.
+func Uset_set(set *USet, start int32, end int32) {
+	syscall.SyscallN(procUset_set.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
+}
+
+// Uset_setSerializedToOne calls icuuc!uset_setSerializedToOne.
+func Uset_setSerializedToOne(fillSet *USerializedSet, c int32) {
+	syscall.SyscallN(procUset_setSerializedToOne.Addr(), uintptr(unsafe.Pointer(fillSet)), uintptr(c))
+}
+
+// Uset_size calls icuuc!uset_size.
+func Uset_size(set *USet) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_size.Addr(), uintptr(unsafe.Pointer(set)))
+	return int32(r1)
+}
+
+// Uset_span calls icuuc!uset_span.
+func Uset_span(set *USet, s *uint16, length int32, spanCondition USetSpanCondition) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_span.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(spanCondition))
+	return int32(r1)
+}
+
+// Uset_spanBack calls icuuc!uset_spanBack.
+func Uset_spanBack(set *USet, s *uint16, length int32, spanCondition USetSpanCondition) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_spanBack.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(spanCondition))
+	return int32(r1)
+}
+
+// Uset_spanBackUTF8 calls icuuc!uset_spanBackUTF8.
+func Uset_spanBackUTF8(set *USet, s foundation.PSTR, length int32, spanCondition USetSpanCondition) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_spanBackUTF8.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(spanCondition))
+	return int32(r1)
+}
+
+// Uset_spanUTF8 calls icuuc!uset_spanUTF8.
+func Uset_spanUTF8(set *USet, s foundation.PSTR, length int32, spanCondition USetSpanCondition) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_spanUTF8.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(spanCondition))
+	return int32(r1)
+}
+
+// Uset_toPattern calls icuuc!uset_toPattern.
+func Uset_toPattern(set *USet, result *uint16, resultCapacity int32, escapeUnprintable int8, ec *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUset_toPattern.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(escapeUnprintable), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+// Uspoof_areConfusable calls icuin!uspoof_areConfusable.
+func Uspoof_areConfusable(sc *USpoofChecker, id1 *uint16, length1 int32, id2 *uint16, length2 int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_areConfusable.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id1)), uintptr(length1), uintptr(unsafe.Pointer(id2)), uintptr(length2), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_areConfusableUTF8 calls icuin!uspoof_areConfusableUTF8.
+func Uspoof_areConfusableUTF8(sc *USpoofChecker, id1 foundation.PSTR, length1 int32, id2 foundation.PSTR, length2 int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_areConfusableUTF8.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id1)), uintptr(length1), uintptr(unsafe.Pointer(id2)), uintptr(length2), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_check calls icuin!uspoof_check.
+func Uspoof_check(sc *USpoofChecker, id *uint16, length int32, position *int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_check.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_check2 calls icuin!uspoof_check2.
+func Uspoof_check2(sc *USpoofChecker, id *uint16, length int32, checkResult *USpoofCheckResult, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_check2.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_check2UTF8 calls icuin!uspoof_check2UTF8.
+func Uspoof_check2UTF8(sc *USpoofChecker, id foundation.PSTR, length int32, checkResult *USpoofCheckResult, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_check2UTF8.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_checkUTF8 calls icuin!uspoof_checkUTF8.
+func Uspoof_checkUTF8(sc *USpoofChecker, id foundation.PSTR, length int32, position *int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_checkUTF8.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_clone calls icuin!uspoof_clone.
+func Uspoof_clone(sc *USpoofChecker, status *UErrorCode) *USpoofChecker {
+	r1, _, _ := syscall.SyscallN(procUspoof_clone.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(status)))
+	return (*USpoofChecker)(unsafe.Pointer(r1))
+}
+
+// Uspoof_close calls icuin!uspoof_close.
+func Uspoof_close(sc *USpoofChecker) {
+	syscall.SyscallN(procUspoof_close.Addr(), uintptr(unsafe.Pointer(sc)))
+}
+
+// Uspoof_closeCheckResult calls icuin!uspoof_closeCheckResult.
+func Uspoof_closeCheckResult(checkResult *USpoofCheckResult) {
+	syscall.SyscallN(procUspoof_closeCheckResult.Addr(), uintptr(unsafe.Pointer(checkResult)))
+}
+
+// Uspoof_getAllowedChars calls icuin!uspoof_getAllowedChars.
+func Uspoof_getAllowedChars(sc *USpoofChecker, status *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procUspoof_getAllowedChars.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(status)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uspoof_getAllowedLocales calls icuin!uspoof_getAllowedLocales.
+func Uspoof_getAllowedLocales(sc *USpoofChecker, status *UErrorCode) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUspoof_getAllowedLocales.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(status)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Uspoof_getCheckResultChecks calls icuin!uspoof_getCheckResultChecks.
+func Uspoof_getCheckResultChecks(checkResult *USpoofCheckResult, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_getCheckResultChecks.Addr(), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_getCheckResultNumerics calls icuin!uspoof_getCheckResultNumerics.
+func Uspoof_getCheckResultNumerics(checkResult *USpoofCheckResult, status *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procUspoof_getCheckResultNumerics.Addr(), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uspoof_getCheckResultRestrictionLevel calls icuin!uspoof_getCheckResultRestrictionLevel.
+func Uspoof_getCheckResultRestrictionLevel(checkResult *USpoofCheckResult, status *UErrorCode) URestrictionLevel {
+	r1, _, _ := syscall.SyscallN(procUspoof_getCheckResultRestrictionLevel.Addr(), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
+	return URestrictionLevel(r1)
+}
+
+// Uspoof_getChecks calls icuin!uspoof_getChecks.
+func Uspoof_getChecks(sc *USpoofChecker, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_getChecks.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_getInclusionSet calls icuin!uspoof_getInclusionSet.
+func Uspoof_getInclusionSet(status *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procUspoof_getInclusionSet.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uspoof_getRecommendedSet calls icuin!uspoof_getRecommendedSet.
+func Uspoof_getRecommendedSet(status *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procUspoof_getRecommendedSet.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Uspoof_getRestrictionLevel calls icuin!uspoof_getRestrictionLevel.
+func Uspoof_getRestrictionLevel(sc *USpoofChecker) URestrictionLevel {
+	r1, _, _ := syscall.SyscallN(procUspoof_getRestrictionLevel.Addr(), uintptr(unsafe.Pointer(sc)))
+	return URestrictionLevel(r1)
+}
+
+// Uspoof_getSkeleton calls icuin!uspoof_getSkeleton.
+func Uspoof_getSkeleton(sc *USpoofChecker, type_ uint32, id *uint16, length int32, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_getSkeleton.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(type_), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_getSkeletonUTF8 calls icuin!uspoof_getSkeletonUTF8.
+func Uspoof_getSkeletonUTF8(sc *USpoofChecker, type_ uint32, id foundation.PSTR, length int32, dest foundation.PSTR, destCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_getSkeletonUTF8.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(type_), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_open calls icuin!uspoof_open.
+func Uspoof_open(status *UErrorCode) *USpoofChecker {
+	r1, _, _ := syscall.SyscallN(procUspoof_open.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*USpoofChecker)(unsafe.Pointer(r1))
+}
+
+// Uspoof_openCheckResult calls icuin!uspoof_openCheckResult.
+func Uspoof_openCheckResult(status *UErrorCode) *USpoofCheckResult {
+	r1, _, _ := syscall.SyscallN(procUspoof_openCheckResult.Addr(), uintptr(unsafe.Pointer(status)))
+	return (*USpoofCheckResult)(unsafe.Pointer(r1))
+}
+
+// Uspoof_openFromSerialized calls icuin!uspoof_openFromSerialized.
+func Uspoof_openFromSerialized(data unsafe.Pointer, length int32, pActualLength *int32, pErrorCode *UErrorCode) *USpoofChecker {
+	r1, _, _ := syscall.SyscallN(procUspoof_openFromSerialized.Addr(), uintptr(unsafe.Pointer(data)), uintptr(length), uintptr(unsafe.Pointer(pActualLength)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*USpoofChecker)(unsafe.Pointer(r1))
+}
+
+// Uspoof_openFromSource calls icuin!uspoof_openFromSource.
+func Uspoof_openFromSource(confusables foundation.PSTR, confusablesLen int32, confusablesWholeScript foundation.PSTR, confusablesWholeScriptLen int32, errType *int32, pe *UParseError, status *UErrorCode) *USpoofChecker {
+	r1, _, _ := syscall.SyscallN(procUspoof_openFromSource.Addr(), uintptr(unsafe.Pointer(confusables)), uintptr(confusablesLen), uintptr(unsafe.Pointer(confusablesWholeScript)), uintptr(confusablesWholeScriptLen), uintptr(unsafe.Pointer(errType)), uintptr(unsafe.Pointer(pe)), uintptr(unsafe.Pointer(status)))
+	return (*USpoofChecker)(unsafe.Pointer(r1))
+}
+
+// Uspoof_serialize calls icuin!uspoof_serialize.
+func Uspoof_serialize(sc *USpoofChecker, data unsafe.Pointer, capacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUspoof_serialize.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(data)), uintptr(capacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Uspoof_setAllowedChars calls icuin!uspoof_setAllowedChars.
+func Uspoof_setAllowedChars(sc *USpoofChecker, chars *USet, status *UErrorCode) {
+	syscall.SyscallN(procUspoof_setAllowedChars.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(chars)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uspoof_setAllowedLocales calls icuin!uspoof_setAllowedLocales.
+func Uspoof_setAllowedLocales(sc *USpoofChecker, localesList foundation.PSTR, status *UErrorCode) {
+	syscall.SyscallN(procUspoof_setAllowedLocales.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(localesList)), uintptr(unsafe.Pointer(status)))
+}
+
+// Uspoof_setChecks calls icuin!uspoof_setChecks.
+func Uspoof_setChecks(sc *USpoofChecker, checks int32, status *UErrorCode) {
+	syscall.SyscallN(procUspoof_setChecks.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(checks), uintptr(unsafe.Pointer(status)))
+}
+
+// Uspoof_setRestrictionLevel calls icuin!uspoof_setRestrictionLevel.
+func Uspoof_setRestrictionLevel(sc *USpoofChecker, restrictionLevel URestrictionLevel) {
+	syscall.SyscallN(procUspoof_setRestrictionLevel.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(restrictionLevel))
+}
+
+// Usprep_close calls icuuc!usprep_close.
+func Usprep_close(profile *UStringPrepProfile) {
+	syscall.SyscallN(procUsprep_close.Addr(), uintptr(unsafe.Pointer(profile)))
+}
+
+// Usprep_open calls icuuc!usprep_open.
+func Usprep_open(path foundation.PSTR, fileName foundation.PSTR, status *UErrorCode) *UStringPrepProfile {
+	r1, _, _ := syscall.SyscallN(procUsprep_open.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(fileName)), uintptr(unsafe.Pointer(status)))
+	return (*UStringPrepProfile)(unsafe.Pointer(r1))
+}
+
+// Usprep_openByType calls icuuc!usprep_openByType.
+func Usprep_openByType(type_ UStringPrepProfileType, status *UErrorCode) *UStringPrepProfile {
+	r1, _, _ := syscall.SyscallN(procUsprep_openByType.Addr(), uintptr(type_), uintptr(unsafe.Pointer(status)))
+	return (*UStringPrepProfile)(unsafe.Pointer(r1))
+}
+
+// Usprep_prepare calls icuuc!usprep_prepare.
+func Usprep_prepare(prep *UStringPrepProfile, src *uint16, srcLength int32, dest *uint16, destCapacity int32, options int32, parseError *UParseError, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUsprep_prepare.Addr(), uintptr(unsafe.Pointer(prep)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(options), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Utext_char32At calls icuuc!utext_char32At.
+func Utext_char32At(ut *UText, nativeIndex int64) int32 {
+	r1, _, _ := syscall.SyscallN(procUtext_char32At.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeIndex))
+	return int32(r1)
+}
+
+// Utext_clone calls icuuc!utext_clone.
+func Utext_clone(dest *UText, src *UText, deep int8, readOnly int8, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUtext_clone.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(src)), uintptr(deep), uintptr(readOnly), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Utext_close calls icuuc!utext_close.
+func Utext_close(ut *UText) *UText {
+	r1, _, _ := syscall.SyscallN(procUtext_close.Addr(), uintptr(unsafe.Pointer(ut)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Utext_copy calls icuuc!utext_copy.
+func Utext_copy(ut *UText, nativeStart int64, nativeLimit int64, destIndex int64, move int8, status *UErrorCode) {
+	syscall.SyscallN(procUtext_copy.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeStart), uintptr(nativeLimit), uintptr(destIndex), uintptr(move), uintptr(unsafe.Pointer(status)))
+}
+
+// Utext_current32 calls icuuc!utext_current32.
+func Utext_current32(ut *UText) int32 {
+	r1, _, _ := syscall.SyscallN(procUtext_current32.Addr(), uintptr(unsafe.Pointer(ut)))
+	return int32(r1)
+}
+
+// Utext_equals calls icuuc!utext_equals.
+func Utext_equals(a *UText, b *UText) int8 {
+	r1, _, _ := syscall.SyscallN(procUtext_equals.Addr(), uintptr(unsafe.Pointer(a)), uintptr(unsafe.Pointer(b)))
+	return int8(r1)
+}
+
+// Utext_extract calls icuuc!utext_extract.
+func Utext_extract(ut *UText, nativeStart int64, nativeLimit int64, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUtext_extract.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeStart), uintptr(nativeLimit), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Utext_freeze calls icuuc!utext_freeze.
+func Utext_freeze(ut *UText) {
+	syscall.SyscallN(procUtext_freeze.Addr(), uintptr(unsafe.Pointer(ut)))
+}
+
+// Utext_getNativeIndex calls icuuc!utext_getNativeIndex.
+func Utext_getNativeIndex(ut *UText) int64 {
+	r1, _, _ := syscall.SyscallN(procUtext_getNativeIndex.Addr(), uintptr(unsafe.Pointer(ut)))
+	return int64(r1)
+}
+
+// Utext_getPreviousNativeIndex calls icuuc!utext_getPreviousNativeIndex.
+func Utext_getPreviousNativeIndex(ut *UText) int64 {
+	r1, _, _ := syscall.SyscallN(procUtext_getPreviousNativeIndex.Addr(), uintptr(unsafe.Pointer(ut)))
+	return int64(r1)
+}
+
+// Utext_hasMetaData calls icuuc!utext_hasMetaData.
+func Utext_hasMetaData(ut *UText) int8 {
+	r1, _, _ := syscall.SyscallN(procUtext_hasMetaData.Addr(), uintptr(unsafe.Pointer(ut)))
+	return int8(r1)
+}
+
+// Utext_isLengthExpensive calls icuuc!utext_isLengthExpensive.
+func Utext_isLengthExpensive(ut *UText) int8 {
+	r1, _, _ := syscall.SyscallN(procUtext_isLengthExpensive.Addr(), uintptr(unsafe.Pointer(ut)))
+	return int8(r1)
+}
+
+// Utext_isWritable calls icuuc!utext_isWritable.
+func Utext_isWritable(ut *UText) int8 {
+	r1, _, _ := syscall.SyscallN(procUtext_isWritable.Addr(), uintptr(unsafe.Pointer(ut)))
+	return int8(r1)
+}
+
+// Utext_moveIndex32 calls icuuc!utext_moveIndex32.
+func Utext_moveIndex32(ut *UText, delta int32) int8 {
+	r1, _, _ := syscall.SyscallN(procUtext_moveIndex32.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(delta))
+	return int8(r1)
+}
+
+// Utext_nativeLength calls icuuc!utext_nativeLength.
+func Utext_nativeLength(ut *UText) int64 {
+	r1, _, _ := syscall.SyscallN(procUtext_nativeLength.Addr(), uintptr(unsafe.Pointer(ut)))
+	return int64(r1)
+}
+
+// Utext_next32 calls icuuc!utext_next32.
+func Utext_next32(ut *UText) int32 {
+	r1, _, _ := syscall.SyscallN(procUtext_next32.Addr(), uintptr(unsafe.Pointer(ut)))
+	return int32(r1)
+}
+
+// Utext_next32From calls icuuc!utext_next32From.
+func Utext_next32From(ut *UText, nativeIndex int64) int32 {
+	r1, _, _ := syscall.SyscallN(procUtext_next32From.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeIndex))
+	return int32(r1)
+}
+
+// Utext_openUChars calls icuuc!utext_openUChars.
+func Utext_openUChars(ut *UText, s *uint16, length int64, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUtext_openUChars.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Utext_openUTF8 calls icuuc!utext_openUTF8.
+func Utext_openUTF8(ut *UText, s foundation.PSTR, length int64, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUtext_openUTF8.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Utext_previous32 calls icuuc!utext_previous32.
+func Utext_previous32(ut *UText) int32 {
+	r1, _, _ := syscall.SyscallN(procUtext_previous32.Addr(), uintptr(unsafe.Pointer(ut)))
+	return int32(r1)
+}
+
+// Utext_previous32From calls icuuc!utext_previous32From.
+func Utext_previous32From(ut *UText, nativeIndex int64) int32 {
+	r1, _, _ := syscall.SyscallN(procUtext_previous32From.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeIndex))
+	return int32(r1)
+}
+
+// Utext_replace calls icuuc!utext_replace.
+func Utext_replace(ut *UText, nativeStart int64, nativeLimit int64, replacementText *uint16, replacementLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUtext_replace.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeStart), uintptr(nativeLimit), uintptr(unsafe.Pointer(replacementText)), uintptr(replacementLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Utext_setNativeIndex calls icuuc!utext_setNativeIndex.
+func Utext_setNativeIndex(ut *UText, nativeIndex int64) {
+	syscall.SyscallN(procUtext_setNativeIndex.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeIndex))
+}
+
+// Utext_setup calls icuuc!utext_setup.
+func Utext_setup(ut *UText, extraSpace int32, status *UErrorCode) *UText {
+	r1, _, _ := syscall.SyscallN(procUtext_setup.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(extraSpace), uintptr(unsafe.Pointer(status)))
+	return (*UText)(unsafe.Pointer(r1))
+}
+
+// Utf8_appendCharSafeBody calls icuuc!utf8_appendCharSafeBody.
+func Utf8_appendCharSafeBody(s *byte, i int32, length int32, c int32, pIsError *int8) int32 {
+	r1, _, _ := syscall.SyscallN(procUtf8_appendCharSafeBody.Addr(), uintptr(unsafe.Pointer(s)), uintptr(i), uintptr(length), uintptr(c), uintptr(unsafe.Pointer(pIsError)))
+	return int32(r1)
+}
+
+// Utf8_back1SafeBody calls icuuc!utf8_back1SafeBody.
+func Utf8_back1SafeBody(s *byte, start int32, i int32) int32 {
+	r1, _, _ := syscall.SyscallN(procUtf8_back1SafeBody.Addr(), uintptr(unsafe.Pointer(s)), uintptr(start), uintptr(i))
+	return int32(r1)
+}
+
+// Utf8_nextCharSafeBody calls icuuc!utf8_nextCharSafeBody.
+func Utf8_nextCharSafeBody(s *byte, pi *int32, length int32, c int32, strict int8) int32 {
+	r1, _, _ := syscall.SyscallN(procUtf8_nextCharSafeBody.Addr(), uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(pi)), uintptr(length), uintptr(c), uintptr(strict))
+	return int32(r1)
+}
+
+// Utf8_prevCharSafeBody calls icuuc!utf8_prevCharSafeBody.
+func Utf8_prevCharSafeBody(s *byte, start int32, pi *int32, c int32, strict int8) int32 {
+	r1, _, _ := syscall.SyscallN(procUtf8_prevCharSafeBody.Addr(), uintptr(unsafe.Pointer(s)), uintptr(start), uintptr(unsafe.Pointer(pi)), uintptr(c), uintptr(strict))
+	return int32(r1)
+}
+
+// Utmscale_fromInt64 calls icuin!utmscale_fromInt64.
+func Utmscale_fromInt64(otherTime int64, timeScale UDateTimeScale, status *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUtmscale_fromInt64.Addr(), uintptr(otherTime), uintptr(timeScale), uintptr(unsafe.Pointer(status)))
+	return int64(r1)
+}
+
+// Utmscale_getTimeScaleValue calls icuin!utmscale_getTimeScaleValue.
+func Utmscale_getTimeScaleValue(timeScale UDateTimeScale, value UTimeScaleValue, status *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUtmscale_getTimeScaleValue.Addr(), uintptr(timeScale), uintptr(value), uintptr(unsafe.Pointer(status)))
+	return int64(r1)
+}
+
+// Utmscale_toInt64 calls icuin!utmscale_toInt64.
+func Utmscale_toInt64(universalTime int64, timeScale UDateTimeScale, status *UErrorCode) int64 {
+	r1, _, _ := syscall.SyscallN(procUtmscale_toInt64.Addr(), uintptr(universalTime), uintptr(timeScale), uintptr(unsafe.Pointer(status)))
+	return int64(r1)
+}
+
+// Utrace_format calls icuuc!utrace_format.
+func Utrace_format(outBuf foundation.PSTR, capacity int32, indent int32, fmt foundation.PSTR) int32 {
+	r1, _, _ := syscall.SyscallN(procUtrace_format.Addr(), uintptr(unsafe.Pointer(outBuf)), uintptr(capacity), uintptr(indent), uintptr(unsafe.Pointer(fmt)))
+	return int32(r1)
+}
+
+// Utrace_functionName calls icuuc!utrace_functionName.
+func Utrace_functionName(fnNumber int32) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procUtrace_functionName.Addr(), uintptr(fnNumber))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// Utrace_getFunctions calls icuuc!utrace_getFunctions.
+func Utrace_getFunctions(context *unsafe.Pointer, e *UTraceEntry, x *UTraceExit, d *UTraceData) {
+	syscall.SyscallN(procUtrace_getFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(e)), uintptr(unsafe.Pointer(x)), uintptr(unsafe.Pointer(d)))
+}
+
+// Utrace_getLevel calls icuuc!utrace_getLevel.
+func Utrace_getLevel() int32 {
+	r1, _, _ := syscall.SyscallN(procUtrace_getLevel.Addr())
+	return int32(r1)
+}
+
+// Utrace_setFunctions calls icuuc!utrace_setFunctions.
+func Utrace_setFunctions(context unsafe.Pointer, e UTraceEntry, x UTraceExit, d UTraceData) {
+	syscall.SyscallN(procUtrace_setFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(e), uintptr(x), uintptr(d))
+}
+
+// Utrace_setLevel calls icuuc!utrace_setLevel.
+func Utrace_setLevel(traceLevel int32) {
+	syscall.SyscallN(procUtrace_setLevel.Addr(), uintptr(traceLevel))
+}
+
+// Utrace_vformat calls icuuc!utrace_vformat.
+func Utrace_vformat(outBuf foundation.PSTR, capacity int32, indent int32, fmt foundation.PSTR, args *int8) int32 {
+	r1, _, _ := syscall.SyscallN(procUtrace_vformat.Addr(), uintptr(unsafe.Pointer(outBuf)), uintptr(capacity), uintptr(indent), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(args)))
+	return int32(r1)
+}
+
+// Utrans_clone calls icuin!utrans_clone.
+func Utrans_clone(trans *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUtrans_clone.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Utrans_close calls icuin!utrans_close.
+func Utrans_close(trans *unsafe.Pointer) {
+	syscall.SyscallN(procUtrans_close.Addr(), uintptr(unsafe.Pointer(trans)))
+}
+
+// Utrans_countAvailableIDs calls icuin!utrans_countAvailableIDs.
+func Utrans_countAvailableIDs() int32 {
+	r1, _, _ := syscall.SyscallN(procUtrans_countAvailableIDs.Addr())
+	return int32(r1)
+}
+
+// Utrans_getSourceSet calls icuin!utrans_getSourceSet.
+func Utrans_getSourceSet(trans *unsafe.Pointer, ignoreFilter int8, fillIn *USet, status *UErrorCode) *USet {
+	r1, _, _ := syscall.SyscallN(procUtrans_getSourceSet.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(ignoreFilter), uintptr(unsafe.Pointer(fillIn)), uintptr(unsafe.Pointer(status)))
+	return (*USet)(unsafe.Pointer(r1))
+}
+
+// Utrans_getUnicodeID calls icuin!utrans_getUnicodeID.
+func Utrans_getUnicodeID(trans *unsafe.Pointer, resultLength *int32) *uint16 {
+	r1, _, _ := syscall.SyscallN(procUtrans_getUnicodeID.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(resultLength)))
+	return (*uint16)(unsafe.Pointer(r1))
+}
+
+// Utrans_openIDs calls icuin!utrans_openIDs.
+func Utrans_openIDs(pErrorCode *UErrorCode) *UEnumeration {
+	r1, _, _ := syscall.SyscallN(procUtrans_openIDs.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*UEnumeration)(unsafe.Pointer(r1))
+}
+
+// Utrans_openInverse calls icuin!utrans_openInverse.
+func Utrans_openInverse(trans *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUtrans_openInverse.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(status)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Utrans_openU calls icuin!utrans_openU.
+func Utrans_openU(id *uint16, idLength int32, dir UTransDirection, rules *uint16, rulesLength int32, parseError *UParseError, pErrorCode *UErrorCode) *unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procUtrans_openU.Addr(), uintptr(unsafe.Pointer(id)), uintptr(idLength), uintptr(dir), uintptr(unsafe.Pointer(rules)), uintptr(rulesLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(pErrorCode)))
+	return (*unsafe.Pointer)(unsafe.Pointer(r1))
+}
+
+// Utrans_register calls icuin!utrans_register.
+func Utrans_register(adoptedTrans *unsafe.Pointer, status *UErrorCode) {
+	syscall.SyscallN(procUtrans_register.Addr(), uintptr(unsafe.Pointer(adoptedTrans)), uintptr(unsafe.Pointer(status)))
+}
+
+// Utrans_setFilter calls icuin!utrans_setFilter.
+func Utrans_setFilter(trans *unsafe.Pointer, filterPattern *uint16, filterPatternLen int32, status *UErrorCode) {
+	syscall.SyscallN(procUtrans_setFilter.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(filterPattern)), uintptr(filterPatternLen), uintptr(unsafe.Pointer(status)))
+}
+
+// Utrans_toRules calls icuin!utrans_toRules.
+func Utrans_toRules(trans *unsafe.Pointer, escapeUnprintable int8, result *uint16, resultLength int32, status *UErrorCode) int32 {
+	r1, _, _ := syscall.SyscallN(procUtrans_toRules.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(escapeUnprintable), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
+	return int32(r1)
+}
+
+// Utrans_trans calls icuin!utrans_trans.
+func Utrans_trans(trans *unsafe.Pointer, rep *unsafe.Pointer, repFunc *UReplaceableCallbacks, start int32, limit *int32, status *UErrorCode) {
+	syscall.SyscallN(procUtrans_trans.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(rep)), uintptr(unsafe.Pointer(repFunc)), uintptr(start), uintptr(unsafe.Pointer(limit)), uintptr(unsafe.Pointer(status)))
+}
+
+// Utrans_transIncremental calls icuin!utrans_transIncremental.
+func Utrans_transIncremental(trans *unsafe.Pointer, rep *unsafe.Pointer, repFunc *UReplaceableCallbacks, pos *UTransPosition, status *UErrorCode) {
+	syscall.SyscallN(procUtrans_transIncremental.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(rep)), uintptr(unsafe.Pointer(repFunc)), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
+}
+
+// Utrans_transIncrementalUChars calls icuin!utrans_transIncrementalUChars.
+func Utrans_transIncrementalUChars(trans *unsafe.Pointer, text *uint16, textLength *int32, textCapacity int32, pos *UTransPosition, status *UErrorCode) {
+	syscall.SyscallN(procUtrans_transIncrementalUChars.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(textLength)), uintptr(textCapacity), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
+}
+
+// Utrans_transUChars calls icuin!utrans_transUChars.
+func Utrans_transUChars(trans *unsafe.Pointer, text *uint16, textLength *int32, textCapacity int32, start int32, limit *int32, status *UErrorCode) {
+	syscall.SyscallN(procUtrans_transUChars.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(textLength)), uintptr(textCapacity), uintptr(start), uintptr(unsafe.Pointer(limit)), uintptr(unsafe.Pointer(status)))
+}
+
+// Utrans_unregisterID calls icuin!utrans_unregisterID.
+func Utrans_unregisterID(id *uint16, idLength int32) {
+	syscall.SyscallN(procUtrans_unregisterID.Addr(), uintptr(unsafe.Pointer(id)), uintptr(idLength))
 }
 
 // VerifyScripts calls KERNEL32!VerifyScripts.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-verifyscripts
 // Minimum OS: windows6.0.6000.
-func VerifyScripts(dwFlags uint32, lpLocaleScripts foundation.PWSTR, cchLocaleScripts int32, lpTestScripts foundation.PWSTR, cchTestScripts int32) error {
-	r1, _, e1 := syscall.SyscallN(procVerifyScripts.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpLocaleScripts)), uintptr(cchLocaleScripts), uintptr(unsafe.Pointer(lpTestScripts)), uintptr(cchTestScripts))
+func VerifyScripts(dwFlags uint32, lpLocaleScripts string, cchLocaleScripts int32, lpTestScripts string, cchTestScripts int32) error {
+	_lpLocaleScripts := win32.UTF16Ptr(lpLocaleScripts)
+	_lpTestScripts := win32.UTF16Ptr(lpTestScripts)
+	r1, _, e1 := syscall.SyscallN(procVerifyScripts.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpLocaleScripts)), uintptr(cchLocaleScripts), uintptr(unsafe.Pointer(_lpTestScripts)), uintptr(cchTestScripts))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3016,5909 +9048,11 @@ func VerifyScripts(dwFlags uint32, lpLocaleScripts foundation.PWSTR, cchLocaleSc
 // WideCharToMultiByte calls KERNEL32!WideCharToMultiByte.
 // https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-widechartomultibyte
 // Minimum OS: windows5.0.
-func WideCharToMultiByte(CodePage uint32, dwFlags uint32, lpWideCharStr foundation.PWSTR, cchWideChar int32, lpMultiByteStr foundation.PSTR, cbMultiByte int32, lpDefaultChar foundation.PSTR, lpUsedDefaultChar *foundation.BOOL) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWideCharToMultiByte.Addr(), uintptr(CodePage), uintptr(dwFlags), uintptr(unsafe.Pointer(lpWideCharStr)), uintptr(cchWideChar), uintptr(unsafe.Pointer(lpMultiByteStr)), uintptr(cbMultiByte), uintptr(unsafe.Pointer(lpDefaultChar)), uintptr(unsafe.Pointer(lpUsedDefaultChar)))
+func WideCharToMultiByte(CodePage uint32, dwFlags uint32, lpWideCharStr string, cchWideChar int32, lpMultiByteStr foundation.PSTR, cbMultiByte int32, lpDefaultChar foundation.PSTR, lpUsedDefaultChar *foundation.BOOL) (int32, error) {
+	_lpWideCharStr := win32.UTF16Ptr(lpWideCharStr)
+	r1, _, e1 := syscall.SyscallN(procWideCharToMultiByte.Addr(), uintptr(CodePage), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpWideCharStr)), uintptr(cchWideChar), uintptr(unsafe.Pointer(lpMultiByteStr)), uintptr(cbMultiByte), uintptr(unsafe.Pointer(lpDefaultChar)), uintptr(unsafe.Pointer(lpUsedDefaultChar)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
-}
-
-// lstrcatA calls KERNEL32!lstrcatA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcata
-// Minimum OS: windows5.0.
-func LstrcatA(lpString1 foundation.PSTR, lpString2 foundation.PSTR) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procLstrcatA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// lstrcatW calls KERNEL32!lstrcatW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcatw
-// Minimum OS: windows5.0.
-func LstrcatW(lpString1 foundation.PWSTR, lpString2 foundation.PWSTR) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procLstrcatW.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
-	return foundation.PWSTR(unsafe.Pointer(r1))
-}
-
-// lstrcmpA calls KERNEL32!lstrcmpA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcmpa
-// Minimum OS: windows5.0.
-func LstrcmpA(lpString1 foundation.PSTR, lpString2 foundation.PSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLstrcmpA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
-	return int32(r1)
-}
-
-// lstrcmpW calls KERNEL32!lstrcmpW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcmpw
-// Minimum OS: windows5.0.
-func LstrcmpW(lpString1 foundation.PWSTR, lpString2 foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLstrcmpW.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
-	return int32(r1)
-}
-
-// lstrcmpiA calls KERNEL32!lstrcmpiA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcmpia
-// Minimum OS: windows5.0.
-func LstrcmpiA(lpString1 foundation.PSTR, lpString2 foundation.PSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLstrcmpiA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
-	return int32(r1)
-}
-
-// lstrcmpiW calls KERNEL32!lstrcmpiW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcmpiw
-// Minimum OS: windows5.0.
-func LstrcmpiW(lpString1 foundation.PWSTR, lpString2 foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLstrcmpiW.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
-	return int32(r1)
-}
-
-// lstrcpyA calls KERNEL32!lstrcpyA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcpya
-// Minimum OS: windows5.0.
-func LstrcpyA(lpString1 foundation.PSTR, lpString2 foundation.PSTR) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procLstrcpyA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// lstrcpyW calls KERNEL32!lstrcpyW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcpyw
-// Minimum OS: windows5.0.
-func LstrcpyW(lpString1 foundation.PWSTR, lpString2 foundation.PWSTR) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procLstrcpyW.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)))
-	return foundation.PWSTR(unsafe.Pointer(r1))
-}
-
-// lstrcpynA calls KERNEL32!lstrcpynA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcpyna
-// Minimum OS: windows5.0.
-func LstrcpynA(lpString1 foundation.PSTR, lpString2 foundation.PSTR, iMaxLength int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procLstrcpynA.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)), uintptr(iMaxLength))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// lstrcpynW calls KERNEL32!lstrcpynW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrcpynw
-// Minimum OS: windows5.0.
-func LstrcpynW(lpString1 foundation.PWSTR, lpString2 foundation.PWSTR, iMaxLength int32) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procLstrcpynW.Addr(), uintptr(unsafe.Pointer(lpString1)), uintptr(unsafe.Pointer(lpString2)), uintptr(iMaxLength))
-	return foundation.PWSTR(unsafe.Pointer(r1))
-}
-
-// lstrlenA calls KERNEL32!lstrlenA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrlena
-// Minimum OS: windows5.0.
-func LstrlenA(lpString foundation.PSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLstrlenA.Addr(), uintptr(unsafe.Pointer(lpString)))
-	return int32(r1)
-}
-
-// lstrlenW calls KERNEL32!lstrlenW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lstrlenw
-// Minimum OS: windows5.0.
-func LstrlenW(lpString foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procLstrlenW.Addr(), uintptr(unsafe.Pointer(lpString)))
-	return int32(r1)
-}
-
-// u_UCharsToChars calls icuuc!u_UCharsToChars.
-func U_UCharsToChars(us *uint16, cs foundation.PSTR, length int32) {
-	syscall.SyscallN(procU_UCharsToChars.Addr(), uintptr(unsafe.Pointer(us)), uintptr(unsafe.Pointer(cs)), uintptr(length))
-}
-
-// u_austrcpy calls icuuc!u_austrcpy.
-func U_austrcpy(dst foundation.PSTR, src *uint16) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procU_austrcpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// u_austrncpy calls icuuc!u_austrncpy.
-func U_austrncpy(dst foundation.PSTR, src *uint16, n int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procU_austrncpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)), uintptr(n))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// u_catclose calls icuuc!u_catclose.
-func U_catclose(catd *UResourceBundle) {
-	syscall.SyscallN(procU_catclose.Addr(), uintptr(unsafe.Pointer(catd)))
-}
-
-// u_catgets calls icuuc!u_catgets.
-func U_catgets(catd *UResourceBundle, set_num int32, msg_num int32, s *uint16, len_ *int32, ec *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_catgets.Addr(), uintptr(unsafe.Pointer(catd)), uintptr(set_num), uintptr(msg_num), uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(ec)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_catopen calls icuuc!u_catopen.
-func U_catopen(name foundation.PSTR, locale foundation.PSTR, ec *UErrorCode) *UResourceBundle {
-	r1, _, _ := syscall.SyscallN(procU_catopen.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(ec)))
-	return (*UResourceBundle)(unsafe.Pointer(r1))
-}
-
-// u_charAge calls icuuc!u_charAge.
-func U_charAge(c int32, versionArray *byte) {
-	syscall.SyscallN(procU_charAge.Addr(), uintptr(c), uintptr(unsafe.Pointer(versionArray)))
-}
-
-// u_charDigitValue calls icuuc!u_charDigitValue.
-func U_charDigitValue(c int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_charDigitValue.Addr(), uintptr(c))
-	return int32(r1)
-}
-
-// u_charDirection calls icuuc!u_charDirection.
-func U_charDirection(c int32) UCharDirection {
-	r1, _, _ := syscall.SyscallN(procU_charDirection.Addr(), uintptr(c))
-	return UCharDirection(r1)
-}
-
-// u_charFromName calls icuuc!u_charFromName.
-func U_charFromName(nameChoice UCharNameChoice, name foundation.PSTR, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_charFromName.Addr(), uintptr(nameChoice), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// u_charMirror calls icuuc!u_charMirror.
-func U_charMirror(c int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_charMirror.Addr(), uintptr(c))
-	return int32(r1)
-}
-
-// u_charName calls icuuc!u_charName.
-func U_charName(code int32, nameChoice UCharNameChoice, buffer foundation.PSTR, bufferLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_charName.Addr(), uintptr(code), uintptr(nameChoice), uintptr(unsafe.Pointer(buffer)), uintptr(bufferLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// u_charType calls icuuc!u_charType.
-func U_charType(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_charType.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_charsToUChars calls icuuc!u_charsToUChars.
-func U_charsToUChars(cs foundation.PSTR, us *uint16, length int32) {
-	syscall.SyscallN(procU_charsToUChars.Addr(), uintptr(unsafe.Pointer(cs)), uintptr(unsafe.Pointer(us)), uintptr(length))
-}
-
-// u_cleanup calls icuuc!u_cleanup.
-func U_cleanup() {
-	syscall.SyscallN(procU_cleanup.Addr())
-}
-
-// u_countChar32 calls icuuc!u_countChar32.
-func U_countChar32(s *uint16, length int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_countChar32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length))
-	return int32(r1)
-}
-
-// u_digit calls icuuc!u_digit.
-func U_digit(ch int32, radix int8) int32 {
-	r1, _, _ := syscall.SyscallN(procU_digit.Addr(), uintptr(ch), uintptr(radix))
-	return int32(r1)
-}
-
-// u_enumCharNames calls icuuc!u_enumCharNames.
-func U_enumCharNames(start int32, limit int32, fn *UEnumCharNamesFn, context unsafe.Pointer, nameChoice UCharNameChoice, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procU_enumCharNames.Addr(), uintptr(start), uintptr(limit), uintptr(unsafe.Pointer(fn)), uintptr(unsafe.Pointer(context)), uintptr(nameChoice), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// u_enumCharTypes calls icuuc!u_enumCharTypes.
-func U_enumCharTypes(enumRange *UCharEnumTypeRange, context unsafe.Pointer) {
-	syscall.SyscallN(procU_enumCharTypes.Addr(), uintptr(unsafe.Pointer(enumRange)), uintptr(unsafe.Pointer(context)))
-}
-
-// u_errorName calls icuuc!u_errorName.
-func U_errorName(code UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procU_errorName.Addr(), uintptr(code))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// u_foldCase calls icuuc!u_foldCase.
-func U_foldCase(c int32, options uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_foldCase.Addr(), uintptr(c), uintptr(options))
-	return int32(r1)
-}
-
-// u_forDigit calls icuuc!u_forDigit.
-func U_forDigit(digit int32, radix int8) int32 {
-	r1, _, _ := syscall.SyscallN(procU_forDigit.Addr(), uintptr(digit), uintptr(radix))
-	return int32(r1)
-}
-
-// u_formatMessage calls icuin!u_formatMessage.
-func U_formatMessage(locale foundation.PSTR, pattern *uint16, patternLength int32, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_formatMessage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// u_formatMessageWithError calls icuin!u_formatMessageWithError.
-func U_formatMessageWithError(locale foundation.PSTR, pattern *uint16, patternLength int32, result *uint16, resultLength int32, parseError *UParseError, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_formatMessageWithError.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// u_getBidiPairedBracket calls icuuc!u_getBidiPairedBracket.
-func U_getBidiPairedBracket(c int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_getBidiPairedBracket.Addr(), uintptr(c))
-	return int32(r1)
-}
-
-// u_getBinaryPropertySet calls icu!u_getBinaryPropertySet.
-func U_getBinaryPropertySet(property UProperty, pErrorCode *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procU_getBinaryPropertySet.Addr(), uintptr(property), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// u_getCombiningClass calls icuuc!u_getCombiningClass.
-func U_getCombiningClass(c int32) byte {
-	r1, _, _ := syscall.SyscallN(procU_getCombiningClass.Addr(), uintptr(c))
-	return byte(r1)
-}
-
-// u_getDataVersion calls icuuc!u_getDataVersion.
-func U_getDataVersion(dataVersionFillin *byte, status *UErrorCode) {
-	syscall.SyscallN(procU_getDataVersion.Addr(), uintptr(unsafe.Pointer(dataVersionFillin)), uintptr(unsafe.Pointer(status)))
-}
-
-// u_getFC_NFKC_Closure calls icuuc!u_getFC_NFKC_Closure.
-func U_getFC_NFKC_Closure(c int32, dest *uint16, destCapacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_getFC_NFKC_Closure.Addr(), uintptr(c), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// u_getIntPropertyMap calls icu!u_getIntPropertyMap.
-func U_getIntPropertyMap(property UProperty, pErrorCode *UErrorCode) *UCPMap {
-	r1, _, _ := syscall.SyscallN(procU_getIntPropertyMap.Addr(), uintptr(property), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UCPMap)(unsafe.Pointer(r1))
-}
-
-// u_getIntPropertyMaxValue calls icuuc!u_getIntPropertyMaxValue.
-func U_getIntPropertyMaxValue(which UProperty) int32 {
-	r1, _, _ := syscall.SyscallN(procU_getIntPropertyMaxValue.Addr(), uintptr(which))
-	return int32(r1)
-}
-
-// u_getIntPropertyMinValue calls icuuc!u_getIntPropertyMinValue.
-func U_getIntPropertyMinValue(which UProperty) int32 {
-	r1, _, _ := syscall.SyscallN(procU_getIntPropertyMinValue.Addr(), uintptr(which))
-	return int32(r1)
-}
-
-// u_getIntPropertyValue calls icuuc!u_getIntPropertyValue.
-func U_getIntPropertyValue(c int32, which UProperty) int32 {
-	r1, _, _ := syscall.SyscallN(procU_getIntPropertyValue.Addr(), uintptr(c), uintptr(which))
-	return int32(r1)
-}
-
-// u_getPropertyEnum calls icuuc!u_getPropertyEnum.
-func U_getPropertyEnum(alias foundation.PSTR) UProperty {
-	r1, _, _ := syscall.SyscallN(procU_getPropertyEnum.Addr(), uintptr(unsafe.Pointer(alias)))
-	return UProperty(r1)
-}
-
-// u_getPropertyName calls icuuc!u_getPropertyName.
-func U_getPropertyName(property UProperty, nameChoice UPropertyNameChoice) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procU_getPropertyName.Addr(), uintptr(property), uintptr(nameChoice))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// u_getPropertyValueEnum calls icuuc!u_getPropertyValueEnum.
-func U_getPropertyValueEnum(property UProperty, alias foundation.PSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procU_getPropertyValueEnum.Addr(), uintptr(property), uintptr(unsafe.Pointer(alias)))
-	return int32(r1)
-}
-
-// u_getPropertyValueName calls icuuc!u_getPropertyValueName.
-func U_getPropertyValueName(property UProperty, value int32, nameChoice UPropertyNameChoice) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procU_getPropertyValueName.Addr(), uintptr(property), uintptr(value), uintptr(nameChoice))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// u_getUnicodeVersion calls icuuc!u_getUnicodeVersion.
-func U_getUnicodeVersion(versionArray *byte) {
-	syscall.SyscallN(procU_getUnicodeVersion.Addr(), uintptr(unsafe.Pointer(versionArray)))
-}
-
-// u_getVersion calls icuuc!u_getVersion.
-func U_getVersion(versionArray *byte) {
-	syscall.SyscallN(procU_getVersion.Addr(), uintptr(unsafe.Pointer(versionArray)))
-}
-
-// u_hasBinaryProperty calls icuuc!u_hasBinaryProperty.
-func U_hasBinaryProperty(c int32, which UProperty) int8 {
-	r1, _, _ := syscall.SyscallN(procU_hasBinaryProperty.Addr(), uintptr(c), uintptr(which))
-	return int8(r1)
-}
-
-// u_init calls icuuc!u_init.
-func U_init(status *UErrorCode) {
-	syscall.SyscallN(procU_init.Addr(), uintptr(unsafe.Pointer(status)))
-}
-
-// u_isIDIgnorable calls icuuc!u_isIDIgnorable.
-func U_isIDIgnorable(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isIDIgnorable.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isIDPart calls icuuc!u_isIDPart.
-func U_isIDPart(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isIDPart.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isIDStart calls icuuc!u_isIDStart.
-func U_isIDStart(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isIDStart.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isISOControl calls icuuc!u_isISOControl.
-func U_isISOControl(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isISOControl.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isJavaIDPart calls icuuc!u_isJavaIDPart.
-func U_isJavaIDPart(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isJavaIDPart.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isJavaIDStart calls icuuc!u_isJavaIDStart.
-func U_isJavaIDStart(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isJavaIDStart.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isJavaSpaceChar calls icuuc!u_isJavaSpaceChar.
-func U_isJavaSpaceChar(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isJavaSpaceChar.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isMirrored calls icuuc!u_isMirrored.
-func U_isMirrored(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isMirrored.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isUAlphabetic calls icuuc!u_isUAlphabetic.
-func U_isUAlphabetic(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isUAlphabetic.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isULowercase calls icuuc!u_isULowercase.
-func U_isULowercase(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isULowercase.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isUUppercase calls icuuc!u_isUUppercase.
-func U_isUUppercase(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isUUppercase.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isUWhiteSpace calls icuuc!u_isUWhiteSpace.
-func U_isUWhiteSpace(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isUWhiteSpace.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isWhitespace calls icuuc!u_isWhitespace.
-func U_isWhitespace(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isWhitespace.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isalnum calls icuuc!u_isalnum.
-func U_isalnum(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isalnum.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isalpha calls icuuc!u_isalpha.
-func U_isalpha(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isalpha.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isbase calls icuuc!u_isbase.
-func U_isbase(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isbase.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isblank calls icuuc!u_isblank.
-func U_isblank(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isblank.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_iscntrl calls icuuc!u_iscntrl.
-func U_iscntrl(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_iscntrl.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isdefined calls icuuc!u_isdefined.
-func U_isdefined(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isdefined.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isdigit calls icuuc!u_isdigit.
-func U_isdigit(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isdigit.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isgraph calls icuuc!u_isgraph.
-func U_isgraph(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isgraph.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_islower calls icuuc!u_islower.
-func U_islower(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_islower.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isprint calls icuuc!u_isprint.
-func U_isprint(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isprint.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_ispunct calls icuuc!u_ispunct.
-func U_ispunct(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_ispunct.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isspace calls icuuc!u_isspace.
-func U_isspace(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isspace.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_istitle calls icuuc!u_istitle.
-func U_istitle(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_istitle.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isupper calls icuuc!u_isupper.
-func U_isupper(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isupper.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_isxdigit calls icuuc!u_isxdigit.
-func U_isxdigit(c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_isxdigit.Addr(), uintptr(c))
-	return int8(r1)
-}
-
-// u_memcasecmp calls icuuc!u_memcasecmp.
-func U_memcasecmp(s1 *uint16, s2 *uint16, length int32, options uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_memcasecmp.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(length), uintptr(options))
-	return int32(r1)
-}
-
-// u_memchr calls icuuc!u_memchr.
-func U_memchr(s *uint16, c uint16, count int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_memchr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c), uintptr(count))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_memchr32 calls icuuc!u_memchr32.
-func U_memchr32(s *uint16, c int32, count int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_memchr32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c), uintptr(count))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_memcmp calls icuuc!u_memcmp.
-func U_memcmp(buf1 *uint16, buf2 *uint16, count int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_memcmp.Addr(), uintptr(unsafe.Pointer(buf1)), uintptr(unsafe.Pointer(buf2)), uintptr(count))
-	return int32(r1)
-}
-
-// u_memcmpCodePointOrder calls icuuc!u_memcmpCodePointOrder.
-func U_memcmpCodePointOrder(s1 *uint16, s2 *uint16, count int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_memcmpCodePointOrder.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(count))
-	return int32(r1)
-}
-
-// u_memcpy calls icuuc!u_memcpy.
-func U_memcpy(dest *uint16, src *uint16, count int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_memcpy.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(src)), uintptr(count))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_memmove calls icuuc!u_memmove.
-func U_memmove(dest *uint16, src *uint16, count int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_memmove.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(src)), uintptr(count))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_memrchr calls icuuc!u_memrchr.
-func U_memrchr(s *uint16, c uint16, count int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_memrchr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c), uintptr(count))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_memrchr32 calls icuuc!u_memrchr32.
-func U_memrchr32(s *uint16, c int32, count int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_memrchr32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c), uintptr(count))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_memset calls icuuc!u_memset.
-func U_memset(dest *uint16, c uint16, count int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_memset.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(c), uintptr(count))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_parseMessage calls icuin!u_parseMessage.
-func U_parseMessage(locale foundation.PSTR, pattern *uint16, patternLength int32, source *uint16, sourceLength int32, status *UErrorCode) {
-	syscall.SyscallN(procU_parseMessage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(status)))
-}
-
-// u_parseMessageWithError calls icuin!u_parseMessageWithError.
-func U_parseMessageWithError(locale foundation.PSTR, pattern *uint16, patternLength int32, source *uint16, sourceLength int32, parseError *UParseError, status *UErrorCode) {
-	syscall.SyscallN(procU_parseMessageWithError.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
-}
-
-// u_setMemoryFunctions calls icuuc!u_setMemoryFunctions.
-func U_setMemoryFunctions(context unsafe.Pointer, a *UMemAllocFn, r *UMemReallocFn, f *UMemFreeFn, status *UErrorCode) {
-	syscall.SyscallN(procU_setMemoryFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(a)), uintptr(unsafe.Pointer(r)), uintptr(unsafe.Pointer(f)), uintptr(unsafe.Pointer(status)))
-}
-
-// u_shapeArabic calls icuuc!u_shapeArabic.
-func U_shapeArabic(source *uint16, sourceLength int32, dest *uint16, destSize int32, options uint32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_shapeArabic.Addr(), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(dest)), uintptr(destSize), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// u_strCaseCompare calls icuuc!u_strCaseCompare.
-func U_strCaseCompare(s1 *uint16, length1 int32, s2 *uint16, length2 int32, options uint32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strCaseCompare.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(length1), uintptr(unsafe.Pointer(s2)), uintptr(length2), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// u_strCompare calls icuuc!u_strCompare.
-func U_strCompare(s1 *uint16, length1 int32, s2 *uint16, length2 int32, codePointOrder int8) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strCompare.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(length1), uintptr(unsafe.Pointer(s2)), uintptr(length2), uintptr(codePointOrder))
-	return int32(r1)
-}
-
-// u_strCompareIter calls icuuc!u_strCompareIter.
-func U_strCompareIter(iter1 *UCharIterator, iter2 *UCharIterator, codePointOrder int8) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strCompareIter.Addr(), uintptr(unsafe.Pointer(iter1)), uintptr(unsafe.Pointer(iter2)), uintptr(codePointOrder))
-	return int32(r1)
-}
-
-// u_strFindFirst calls icuuc!u_strFindFirst.
-func U_strFindFirst(s *uint16, length int32, substring *uint16, subLength int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strFindFirst.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(substring)), uintptr(subLength))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strFindLast calls icuuc!u_strFindLast.
-func U_strFindLast(s *uint16, length int32, substring *uint16, subLength int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strFindLast.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(substring)), uintptr(subLength))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strFoldCase calls icuuc!u_strFoldCase.
-func U_strFoldCase(dest *uint16, destCapacity int32, src *uint16, srcLength int32, options uint32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strFoldCase.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// u_strFromJavaModifiedUTF8WithSub calls icuuc!u_strFromJavaModifiedUTF8WithSub.
-func U_strFromJavaModifiedUTF8WithSub(dest *uint16, destCapacity int32, pDestLength *int32, src foundation.PSTR, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strFromJavaModifiedUTF8WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strFromUTF32 calls icuuc!u_strFromUTF32.
-func U_strFromUTF32(dest *uint16, destCapacity int32, pDestLength *int32, src *int32, srcLength int32, pErrorCode *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strFromUTF32.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strFromUTF32WithSub calls icuuc!u_strFromUTF32WithSub.
-func U_strFromUTF32WithSub(dest *uint16, destCapacity int32, pDestLength *int32, src *int32, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strFromUTF32WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strFromUTF8 calls icuuc!u_strFromUTF8.
-func U_strFromUTF8(dest *uint16, destCapacity int32, pDestLength *int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strFromUTF8.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strFromUTF8Lenient calls icuuc!u_strFromUTF8Lenient.
-func U_strFromUTF8Lenient(dest *uint16, destCapacity int32, pDestLength *int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strFromUTF8Lenient.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strFromUTF8WithSub calls icuuc!u_strFromUTF8WithSub.
-func U_strFromUTF8WithSub(dest *uint16, destCapacity int32, pDestLength *int32, src foundation.PSTR, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strFromUTF8WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strFromWCS calls icuuc!u_strFromWCS.
-func U_strFromWCS(dest *uint16, destCapacity int32, pDestLength *int32, src foundation.PWSTR, srcLength int32, pErrorCode *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strFromWCS.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strHasMoreChar32Than calls icuuc!u_strHasMoreChar32Than.
-func U_strHasMoreChar32Than(s *uint16, length int32, number int32) int8 {
-	r1, _, _ := syscall.SyscallN(procU_strHasMoreChar32Than.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(number))
-	return int8(r1)
-}
-
-// u_strToJavaModifiedUTF8 calls icuuc!u_strToJavaModifiedUTF8.
-func U_strToJavaModifiedUTF8(dest foundation.PSTR, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procU_strToJavaModifiedUTF8.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// u_strToLower calls icuuc!u_strToLower.
-func U_strToLower(dest *uint16, destCapacity int32, src *uint16, srcLength int32, locale foundation.PSTR, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strToLower.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// u_strToTitle calls icuuc!u_strToTitle.
-func U_strToTitle(dest *uint16, destCapacity int32, src *uint16, srcLength int32, titleIter *UBreakIterator, locale foundation.PSTR, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strToTitle.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(titleIter)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// u_strToUTF32 calls icuuc!u_strToUTF32.
-func U_strToUTF32(dest *int32, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) *int32 {
-	r1, _, _ := syscall.SyscallN(procU_strToUTF32.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*int32)(unsafe.Pointer(r1))
-}
-
-// u_strToUTF32WithSub calls icuuc!u_strToUTF32WithSub.
-func U_strToUTF32WithSub(dest *int32, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) *int32 {
-	r1, _, _ := syscall.SyscallN(procU_strToUTF32WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*int32)(unsafe.Pointer(r1))
-}
-
-// u_strToUTF8 calls icuuc!u_strToUTF8.
-func U_strToUTF8(dest foundation.PSTR, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procU_strToUTF8.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// u_strToUTF8WithSub calls icuuc!u_strToUTF8WithSub.
-func U_strToUTF8WithSub(dest foundation.PSTR, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, subchar int32, pNumSubstitutions *int32, pErrorCode *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procU_strToUTF8WithSub.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(subchar), uintptr(unsafe.Pointer(pNumSubstitutions)), uintptr(unsafe.Pointer(pErrorCode)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// u_strToUpper calls icuuc!u_strToUpper.
-func U_strToUpper(dest *uint16, destCapacity int32, src *uint16, srcLength int32, locale foundation.PSTR, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strToUpper.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// u_strToWCS calls icuuc!u_strToWCS.
-func U_strToWCS(dest foundation.PWSTR, destCapacity int32, pDestLength *int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procU_strToWCS.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pDestLength)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return foundation.PWSTR(unsafe.Pointer(r1))
-}
-
-// u_strcasecmp calls icuuc!u_strcasecmp.
-func U_strcasecmp(s1 *uint16, s2 *uint16, options uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strcasecmp.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(options))
-	return int32(r1)
-}
-
-// u_strcat calls icuuc!u_strcat.
-func U_strcat(dst *uint16, src *uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strcat.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strchr calls icuuc!u_strchr.
-func U_strchr(s *uint16, c uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strchr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strchr32 calls icuuc!u_strchr32.
-func U_strchr32(s *uint16, c int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strchr32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strcmp calls icuuc!u_strcmp.
-func U_strcmp(s1 *uint16, s2 *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strcmp.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)))
-	return int32(r1)
-}
-
-// u_strcmpCodePointOrder calls icuuc!u_strcmpCodePointOrder.
-func U_strcmpCodePointOrder(s1 *uint16, s2 *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strcmpCodePointOrder.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)))
-	return int32(r1)
-}
-
-// u_strcpy calls icuuc!u_strcpy.
-func U_strcpy(dst *uint16, src *uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strcpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strcspn calls icuuc!u_strcspn.
-func U_strcspn(string_ *uint16, matchSet *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strcspn.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(matchSet)))
-	return int32(r1)
-}
-
-// u_stringHasBinaryProperty calls icu!u_stringHasBinaryProperty.
-func U_stringHasBinaryProperty(s *uint16, length int32, which UProperty) int8 {
-	r1, _, _ := syscall.SyscallN(procU_stringHasBinaryProperty.Addr(), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(which))
-	return int8(r1)
-}
-
-// u_strlen calls icuuc!u_strlen.
-func U_strlen(s *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strlen.Addr(), uintptr(unsafe.Pointer(s)))
-	return int32(r1)
-}
-
-// u_strncasecmp calls icuuc!u_strncasecmp.
-func U_strncasecmp(s1 *uint16, s2 *uint16, n int32, options uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strncasecmp.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(n), uintptr(options))
-	return int32(r1)
-}
-
-// u_strncat calls icuuc!u_strncat.
-func U_strncat(dst *uint16, src *uint16, n int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strncat.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)), uintptr(n))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strncmp calls icuuc!u_strncmp.
-func U_strncmp(ucs1 *uint16, ucs2 *uint16, n int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strncmp.Addr(), uintptr(unsafe.Pointer(ucs1)), uintptr(unsafe.Pointer(ucs2)), uintptr(n))
-	return int32(r1)
-}
-
-// u_strncmpCodePointOrder calls icuuc!u_strncmpCodePointOrder.
-func U_strncmpCodePointOrder(s1 *uint16, s2 *uint16, n int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strncmpCodePointOrder.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(unsafe.Pointer(s2)), uintptr(n))
-	return int32(r1)
-}
-
-// u_strncpy calls icuuc!u_strncpy.
-func U_strncpy(dst *uint16, src *uint16, n int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strncpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)), uintptr(n))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strpbrk calls icuuc!u_strpbrk.
-func U_strpbrk(string_ *uint16, matchSet *uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strpbrk.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(matchSet)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strrchr calls icuuc!u_strrchr.
-func U_strrchr(s *uint16, c uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strrchr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strrchr32 calls icuuc!u_strrchr32.
-func U_strrchr32(s *uint16, c int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strrchr32.Addr(), uintptr(unsafe.Pointer(s)), uintptr(c))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strrstr calls icuuc!u_strrstr.
-func U_strrstr(s *uint16, substring *uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strrstr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(substring)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strspn calls icuuc!u_strspn.
-func U_strspn(string_ *uint16, matchSet *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procU_strspn.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(matchSet)))
-	return int32(r1)
-}
-
-// u_strstr calls icuuc!u_strstr.
-func U_strstr(s *uint16, substring *uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strstr.Addr(), uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(substring)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_strtok_r calls icuuc!u_strtok_r.
-func U_strtok_r(src *uint16, delim *uint16, saveState **uint16) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_strtok_r.Addr(), uintptr(unsafe.Pointer(src)), uintptr(unsafe.Pointer(delim)), uintptr(unsafe.Pointer(saveState)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_tolower calls icuuc!u_tolower.
-func U_tolower(c int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_tolower.Addr(), uintptr(c))
-	return int32(r1)
-}
-
-// u_totitle calls icuuc!u_totitle.
-func U_totitle(c int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_totitle.Addr(), uintptr(c))
-	return int32(r1)
-}
-
-// u_toupper calls icuuc!u_toupper.
-func U_toupper(c int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_toupper.Addr(), uintptr(c))
-	return int32(r1)
-}
-
-// u_uastrcpy calls icuuc!u_uastrcpy.
-func U_uastrcpy(dst *uint16, src foundation.PSTR) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_uastrcpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_uastrncpy calls icuuc!u_uastrncpy.
-func U_uastrncpy(dst *uint16, src foundation.PSTR, n int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procU_uastrncpy.Addr(), uintptr(unsafe.Pointer(dst)), uintptr(unsafe.Pointer(src)), uintptr(n))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// u_unescape calls icuuc!u_unescape.
-func U_unescape(src foundation.PSTR, dest *uint16, destCapacity int32) int32 {
-	r1, _, _ := syscall.SyscallN(procU_unescape.Addr(), uintptr(unsafe.Pointer(src)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity))
-	return int32(r1)
-}
-
-// u_unescapeAt calls icuuc!u_unescapeAt.
-func U_unescapeAt(charAt UNESCAPE_CHAR_AT, offset *int32, length int32, context unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procU_unescapeAt.Addr(), uintptr(charAt), uintptr(unsafe.Pointer(offset)), uintptr(length), uintptr(unsafe.Pointer(context)))
-	return int32(r1)
-}
-
-// u_versionFromString calls icuuc!u_versionFromString.
-func U_versionFromString(versionArray *byte, versionString foundation.PSTR) {
-	syscall.SyscallN(procU_versionFromString.Addr(), uintptr(unsafe.Pointer(versionArray)), uintptr(unsafe.Pointer(versionString)))
-}
-
-// u_versionFromUString calls icuuc!u_versionFromUString.
-func U_versionFromUString(versionArray *byte, versionString *uint16) {
-	syscall.SyscallN(procU_versionFromUString.Addr(), uintptr(unsafe.Pointer(versionArray)), uintptr(unsafe.Pointer(versionString)))
-}
-
-// u_versionToString calls icuuc!u_versionToString.
-func U_versionToString(versionArray *byte, versionString foundation.PSTR) {
-	syscall.SyscallN(procU_versionToString.Addr(), uintptr(unsafe.Pointer(versionArray)), uintptr(unsafe.Pointer(versionString)))
-}
-
-// u_vformatMessage calls icuin!u_vformatMessage.
-func U_vformatMessage(locale foundation.PSTR, pattern *uint16, patternLength int32, result *uint16, resultLength int32, ap *int8, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_vformatMessage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// u_vformatMessageWithError calls icuin!u_vformatMessageWithError.
-func U_vformatMessageWithError(locale foundation.PSTR, pattern *uint16, patternLength int32, result *uint16, resultLength int32, parseError *UParseError, ap *int8, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procU_vformatMessageWithError.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// u_vparseMessage calls icuin!u_vparseMessage.
-func U_vparseMessage(locale foundation.PSTR, pattern *uint16, patternLength int32, source *uint16, sourceLength int32, ap *int8, status *UErrorCode) {
-	syscall.SyscallN(procU_vparseMessage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
-}
-
-// u_vparseMessageWithError calls icuin!u_vparseMessageWithError.
-func U_vparseMessageWithError(locale foundation.PSTR, pattern *uint16, patternLength int32, source *uint16, sourceLength int32, ap *int8, parseError *UParseError, status *UErrorCode) {
-	syscall.SyscallN(procU_vparseMessageWithError.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
-}
-
-// ubidi_close calls icuuc!ubidi_close.
-func Ubidi_close(pBiDi *UBiDi) {
-	syscall.SyscallN(procUbidi_close.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-}
-
-// ubidi_countParagraphs calls icuuc!ubidi_countParagraphs.
-func Ubidi_countParagraphs(pBiDi *UBiDi) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_countParagraphs.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return int32(r1)
-}
-
-// ubidi_countRuns calls icuuc!ubidi_countRuns.
-func Ubidi_countRuns(pBiDi *UBiDi, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_countRuns.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ubidi_getBaseDirection calls icuuc!ubidi_getBaseDirection.
-func Ubidi_getBaseDirection(text *uint16, length int32) UBiDiDirection {
-	r1, _, _ := syscall.SyscallN(procUbidi_getBaseDirection.Addr(), uintptr(unsafe.Pointer(text)), uintptr(length))
-	return UBiDiDirection(r1)
-}
-
-// ubidi_getClassCallback calls icuuc!ubidi_getClassCallback.
-func Ubidi_getClassCallback(pBiDi *UBiDi, fn *UBiDiClassCallback, context *unsafe.Pointer) {
-	syscall.SyscallN(procUbidi_getClassCallback.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(fn)), uintptr(unsafe.Pointer(context)))
-}
-
-// ubidi_getCustomizedClass calls icuuc!ubidi_getCustomizedClass.
-func Ubidi_getCustomizedClass(pBiDi *UBiDi, c int32) UCharDirection {
-	r1, _, _ := syscall.SyscallN(procUbidi_getCustomizedClass.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(c))
-	return UCharDirection(r1)
-}
-
-// ubidi_getDirection calls icuuc!ubidi_getDirection.
-func Ubidi_getDirection(pBiDi *UBiDi) UBiDiDirection {
-	r1, _, _ := syscall.SyscallN(procUbidi_getDirection.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return UBiDiDirection(r1)
-}
-
-// ubidi_getLength calls icuuc!ubidi_getLength.
-func Ubidi_getLength(pBiDi *UBiDi) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_getLength.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return int32(r1)
-}
-
-// ubidi_getLevelAt calls icuuc!ubidi_getLevelAt.
-func Ubidi_getLevelAt(pBiDi *UBiDi, charIndex int32) byte {
-	r1, _, _ := syscall.SyscallN(procUbidi_getLevelAt.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(charIndex))
-	return byte(r1)
-}
-
-// ubidi_getLevels calls icuuc!ubidi_getLevels.
-func Ubidi_getLevels(pBiDi *UBiDi, pErrorCode *UErrorCode) *byte {
-	r1, _, _ := syscall.SyscallN(procUbidi_getLevels.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*byte)(unsafe.Pointer(r1))
-}
-
-// ubidi_getLogicalIndex calls icuuc!ubidi_getLogicalIndex.
-func Ubidi_getLogicalIndex(pBiDi *UBiDi, visualIndex int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_getLogicalIndex.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(visualIndex), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ubidi_getLogicalMap calls icuuc!ubidi_getLogicalMap.
-func Ubidi_getLogicalMap(pBiDi *UBiDi, indexMap *int32, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUbidi_getLogicalMap.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(indexMap)), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ubidi_getLogicalRun calls icuuc!ubidi_getLogicalRun.
-func Ubidi_getLogicalRun(pBiDi *UBiDi, logicalPosition int32, pLogicalLimit *int32, pLevel *byte) {
-	syscall.SyscallN(procUbidi_getLogicalRun.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(logicalPosition), uintptr(unsafe.Pointer(pLogicalLimit)), uintptr(unsafe.Pointer(pLevel)))
-}
-
-// ubidi_getParaLevel calls icuuc!ubidi_getParaLevel.
-func Ubidi_getParaLevel(pBiDi *UBiDi) byte {
-	r1, _, _ := syscall.SyscallN(procUbidi_getParaLevel.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return byte(r1)
-}
-
-// ubidi_getParagraph calls icuuc!ubidi_getParagraph.
-func Ubidi_getParagraph(pBiDi *UBiDi, charIndex int32, pParaStart *int32, pParaLimit *int32, pParaLevel *byte, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_getParagraph.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(charIndex), uintptr(unsafe.Pointer(pParaStart)), uintptr(unsafe.Pointer(pParaLimit)), uintptr(unsafe.Pointer(pParaLevel)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ubidi_getParagraphByIndex calls icuuc!ubidi_getParagraphByIndex.
-func Ubidi_getParagraphByIndex(pBiDi *UBiDi, paraIndex int32, pParaStart *int32, pParaLimit *int32, pParaLevel *byte, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUbidi_getParagraphByIndex.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(paraIndex), uintptr(unsafe.Pointer(pParaStart)), uintptr(unsafe.Pointer(pParaLimit)), uintptr(unsafe.Pointer(pParaLevel)), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ubidi_getProcessedLength calls icuuc!ubidi_getProcessedLength.
-func Ubidi_getProcessedLength(pBiDi *UBiDi) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_getProcessedLength.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return int32(r1)
-}
-
-// ubidi_getReorderingMode calls icuuc!ubidi_getReorderingMode.
-func Ubidi_getReorderingMode(pBiDi *UBiDi) UBiDiReorderingMode {
-	r1, _, _ := syscall.SyscallN(procUbidi_getReorderingMode.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return UBiDiReorderingMode(r1)
-}
-
-// ubidi_getReorderingOptions calls icuuc!ubidi_getReorderingOptions.
-func Ubidi_getReorderingOptions(pBiDi *UBiDi) uint32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_getReorderingOptions.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return uint32(r1)
-}
-
-// ubidi_getResultLength calls icuuc!ubidi_getResultLength.
-func Ubidi_getResultLength(pBiDi *UBiDi) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_getResultLength.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return int32(r1)
-}
-
-// ubidi_getText calls icuuc!ubidi_getText.
-func Ubidi_getText(pBiDi *UBiDi) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUbidi_getText.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ubidi_getVisualIndex calls icuuc!ubidi_getVisualIndex.
-func Ubidi_getVisualIndex(pBiDi *UBiDi, logicalIndex int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_getVisualIndex.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(logicalIndex), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ubidi_getVisualMap calls icuuc!ubidi_getVisualMap.
-func Ubidi_getVisualMap(pBiDi *UBiDi, indexMap *int32, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUbidi_getVisualMap.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(indexMap)), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ubidi_getVisualRun calls icuuc!ubidi_getVisualRun.
-func Ubidi_getVisualRun(pBiDi *UBiDi, runIndex int32, pLogicalStart *int32, pLength *int32) UBiDiDirection {
-	r1, _, _ := syscall.SyscallN(procUbidi_getVisualRun.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(runIndex), uintptr(unsafe.Pointer(pLogicalStart)), uintptr(unsafe.Pointer(pLength)))
-	return UBiDiDirection(r1)
-}
-
-// ubidi_invertMap calls icuuc!ubidi_invertMap.
-func Ubidi_invertMap(srcMap *int32, destMap *int32, length int32) {
-	syscall.SyscallN(procUbidi_invertMap.Addr(), uintptr(unsafe.Pointer(srcMap)), uintptr(unsafe.Pointer(destMap)), uintptr(length))
-}
-
-// ubidi_isInverse calls icuuc!ubidi_isInverse.
-func Ubidi_isInverse(pBiDi *UBiDi) int8 {
-	r1, _, _ := syscall.SyscallN(procUbidi_isInverse.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return int8(r1)
-}
-
-// ubidi_isOrderParagraphsLTR calls icuuc!ubidi_isOrderParagraphsLTR.
-func Ubidi_isOrderParagraphsLTR(pBiDi *UBiDi) int8 {
-	r1, _, _ := syscall.SyscallN(procUbidi_isOrderParagraphsLTR.Addr(), uintptr(unsafe.Pointer(pBiDi)))
-	return int8(r1)
-}
-
-// ubidi_open calls icuuc!ubidi_open.
-func Ubidi_open() *UBiDi {
-	r1, _, _ := syscall.SyscallN(procUbidi_open.Addr())
-	return (*UBiDi)(unsafe.Pointer(r1))
-}
-
-// ubidi_openSized calls icuuc!ubidi_openSized.
-func Ubidi_openSized(maxLength int32, maxRunCount int32, pErrorCode *UErrorCode) *UBiDi {
-	r1, _, _ := syscall.SyscallN(procUbidi_openSized.Addr(), uintptr(maxLength), uintptr(maxRunCount), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UBiDi)(unsafe.Pointer(r1))
-}
-
-// ubidi_orderParagraphsLTR calls icuuc!ubidi_orderParagraphsLTR.
-func Ubidi_orderParagraphsLTR(pBiDi *UBiDi, orderParagraphsLTR int8) {
-	syscall.SyscallN(procUbidi_orderParagraphsLTR.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(orderParagraphsLTR))
-}
-
-// ubidi_reorderLogical calls icuuc!ubidi_reorderLogical.
-func Ubidi_reorderLogical(levels *byte, length int32, indexMap *int32) {
-	syscall.SyscallN(procUbidi_reorderLogical.Addr(), uintptr(unsafe.Pointer(levels)), uintptr(length), uintptr(unsafe.Pointer(indexMap)))
-}
-
-// ubidi_reorderVisual calls icuuc!ubidi_reorderVisual.
-func Ubidi_reorderVisual(levels *byte, length int32, indexMap *int32) {
-	syscall.SyscallN(procUbidi_reorderVisual.Addr(), uintptr(unsafe.Pointer(levels)), uintptr(length), uintptr(unsafe.Pointer(indexMap)))
-}
-
-// ubidi_setClassCallback calls icuuc!ubidi_setClassCallback.
-func Ubidi_setClassCallback(pBiDi *UBiDi, newFn UBiDiClassCallback, newContext unsafe.Pointer, oldFn *UBiDiClassCallback, oldContext *unsafe.Pointer, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUbidi_setClassCallback.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(newFn), uintptr(unsafe.Pointer(newContext)), uintptr(unsafe.Pointer(oldFn)), uintptr(unsafe.Pointer(oldContext)), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ubidi_setContext calls icuuc!ubidi_setContext.
-func Ubidi_setContext(pBiDi *UBiDi, prologue *uint16, proLength int32, epilogue *uint16, epiLength int32, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUbidi_setContext.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(prologue)), uintptr(proLength), uintptr(unsafe.Pointer(epilogue)), uintptr(epiLength), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ubidi_setInverse calls icuuc!ubidi_setInverse.
-func Ubidi_setInverse(pBiDi *UBiDi, isInverse int8) {
-	syscall.SyscallN(procUbidi_setInverse.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(isInverse))
-}
-
-// ubidi_setLine calls icuuc!ubidi_setLine.
-func Ubidi_setLine(pParaBiDi *UBiDi, start int32, limit int32, pLineBiDi *UBiDi, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUbidi_setLine.Addr(), uintptr(unsafe.Pointer(pParaBiDi)), uintptr(start), uintptr(limit), uintptr(unsafe.Pointer(pLineBiDi)), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ubidi_setPara calls icuuc!ubidi_setPara.
-func Ubidi_setPara(pBiDi *UBiDi, text *uint16, length int32, paraLevel byte, embeddingLevels *byte, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUbidi_setPara.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(text)), uintptr(length), uintptr(paraLevel), uintptr(unsafe.Pointer(embeddingLevels)), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ubidi_setReorderingMode calls icuuc!ubidi_setReorderingMode.
-func Ubidi_setReorderingMode(pBiDi *UBiDi, reorderingMode UBiDiReorderingMode) {
-	syscall.SyscallN(procUbidi_setReorderingMode.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(reorderingMode))
-}
-
-// ubidi_setReorderingOptions calls icuuc!ubidi_setReorderingOptions.
-func Ubidi_setReorderingOptions(pBiDi *UBiDi, reorderingOptions uint32) {
-	syscall.SyscallN(procUbidi_setReorderingOptions.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(reorderingOptions))
-}
-
-// ubidi_writeReordered calls icuuc!ubidi_writeReordered.
-func Ubidi_writeReordered(pBiDi *UBiDi, dest *uint16, destSize int32, options uint16, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_writeReordered.Addr(), uintptr(unsafe.Pointer(pBiDi)), uintptr(unsafe.Pointer(dest)), uintptr(destSize), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ubidi_writeReverse calls icuuc!ubidi_writeReverse.
-func Ubidi_writeReverse(src *uint16, srcLength int32, dest *uint16, destSize int32, options uint16, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUbidi_writeReverse.Addr(), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(dest)), uintptr(destSize), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ubiditransform_close calls icuuc!ubiditransform_close.
-func Ubiditransform_close(pBidiTransform *UBiDiTransform) {
-	syscall.SyscallN(procUbiditransform_close.Addr(), uintptr(unsafe.Pointer(pBidiTransform)))
-}
-
-// ubiditransform_open calls icuuc!ubiditransform_open.
-func Ubiditransform_open(pErrorCode *UErrorCode) *UBiDiTransform {
-	r1, _, _ := syscall.SyscallN(procUbiditransform_open.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UBiDiTransform)(unsafe.Pointer(r1))
-}
-
-// ubiditransform_transform calls icuuc!ubiditransform_transform.
-func Ubiditransform_transform(pBiDiTransform *UBiDiTransform, src *uint16, srcLength int32, dest *uint16, destSize int32, inParaLevel byte, inOrder UBiDiOrder, outParaLevel byte, outOrder UBiDiOrder, doMirroring UBiDiMirroring, shapingOptions uint32, pErrorCode *UErrorCode) uint32 {
-	r1, _, _ := syscall.SyscallN(procUbiditransform_transform.Addr(), uintptr(unsafe.Pointer(pBiDiTransform)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(dest)), uintptr(destSize), uintptr(inParaLevel), uintptr(inOrder), uintptr(outParaLevel), uintptr(outOrder), uintptr(doMirroring), uintptr(shapingOptions), uintptr(unsafe.Pointer(pErrorCode)))
-	return uint32(r1)
-}
-
-// ublock_getCode calls icuuc!ublock_getCode.
-func Ublock_getCode(c int32) UBlockCode {
-	r1, _, _ := syscall.SyscallN(procUblock_getCode.Addr(), uintptr(c))
-	return UBlockCode(r1)
-}
-
-// ubrk_clone calls icu!ubrk_clone.
-func Ubrk_clone(bi *UBreakIterator, status *UErrorCode) *UBreakIterator {
-	r1, _, _ := syscall.SyscallN(procUbrk_clone.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(status)))
-	return (*UBreakIterator)(unsafe.Pointer(r1))
-}
-
-// ubrk_close calls icuuc!ubrk_close.
-func Ubrk_close(bi *UBreakIterator) {
-	syscall.SyscallN(procUbrk_close.Addr(), uintptr(unsafe.Pointer(bi)))
-}
-
-// ubrk_countAvailable calls icuuc!ubrk_countAvailable.
-func Ubrk_countAvailable() int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_countAvailable.Addr())
-	return int32(r1)
-}
-
-// ubrk_current calls icuuc!ubrk_current.
-func Ubrk_current(bi *UBreakIterator) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_current.Addr(), uintptr(unsafe.Pointer(bi)))
-	return int32(r1)
-}
-
-// ubrk_first calls icuuc!ubrk_first.
-func Ubrk_first(bi *UBreakIterator) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_first.Addr(), uintptr(unsafe.Pointer(bi)))
-	return int32(r1)
-}
-
-// ubrk_following calls icuuc!ubrk_following.
-func Ubrk_following(bi *UBreakIterator, offset int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_following.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(offset))
-	return int32(r1)
-}
-
-// ubrk_getAvailable calls icuuc!ubrk_getAvailable.
-func Ubrk_getAvailable(index int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUbrk_getAvailable.Addr(), uintptr(index))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ubrk_getBinaryRules calls icuuc!ubrk_getBinaryRules.
-func Ubrk_getBinaryRules(bi *UBreakIterator, binaryRules *byte, rulesCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_getBinaryRules.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(binaryRules)), uintptr(rulesCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ubrk_getLocaleByType calls icuuc!ubrk_getLocaleByType.
-func Ubrk_getLocaleByType(bi *UBreakIterator, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUbrk_getLocaleByType.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ubrk_getRuleStatus calls icuuc!ubrk_getRuleStatus.
-func Ubrk_getRuleStatus(bi *UBreakIterator) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_getRuleStatus.Addr(), uintptr(unsafe.Pointer(bi)))
-	return int32(r1)
-}
-
-// ubrk_getRuleStatusVec calls icuuc!ubrk_getRuleStatusVec.
-func Ubrk_getRuleStatusVec(bi *UBreakIterator, fillInVec *int32, capacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_getRuleStatusVec.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(fillInVec)), uintptr(capacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ubrk_isBoundary calls icuuc!ubrk_isBoundary.
-func Ubrk_isBoundary(bi *UBreakIterator, offset int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUbrk_isBoundary.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(offset))
-	return int8(r1)
-}
-
-// ubrk_last calls icuuc!ubrk_last.
-func Ubrk_last(bi *UBreakIterator) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_last.Addr(), uintptr(unsafe.Pointer(bi)))
-	return int32(r1)
-}
-
-// ubrk_next calls icuuc!ubrk_next.
-func Ubrk_next(bi *UBreakIterator) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_next.Addr(), uintptr(unsafe.Pointer(bi)))
-	return int32(r1)
-}
-
-// ubrk_open calls icuuc!ubrk_open.
-func Ubrk_open(type_ UBreakIteratorType, locale foundation.PSTR, text *uint16, textLength int32, status *UErrorCode) *UBreakIterator {
-	r1, _, _ := syscall.SyscallN(procUbrk_open.Addr(), uintptr(type_), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
-	return (*UBreakIterator)(unsafe.Pointer(r1))
-}
-
-// ubrk_openBinaryRules calls icuuc!ubrk_openBinaryRules.
-func Ubrk_openBinaryRules(binaryRules *byte, rulesLength int32, text *uint16, textLength int32, status *UErrorCode) *UBreakIterator {
-	r1, _, _ := syscall.SyscallN(procUbrk_openBinaryRules.Addr(), uintptr(unsafe.Pointer(binaryRules)), uintptr(rulesLength), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
-	return (*UBreakIterator)(unsafe.Pointer(r1))
-}
-
-// ubrk_openRules calls icuuc!ubrk_openRules.
-func Ubrk_openRules(rules *uint16, rulesLength int32, text *uint16, textLength int32, parseErr *UParseError, status *UErrorCode) *UBreakIterator {
-	r1, _, _ := syscall.SyscallN(procUbrk_openRules.Addr(), uintptr(unsafe.Pointer(rules)), uintptr(rulesLength), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parseErr)), uintptr(unsafe.Pointer(status)))
-	return (*UBreakIterator)(unsafe.Pointer(r1))
-}
-
-// ubrk_preceding calls icuuc!ubrk_preceding.
-func Ubrk_preceding(bi *UBreakIterator, offset int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_preceding.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(offset))
-	return int32(r1)
-}
-
-// ubrk_previous calls icuuc!ubrk_previous.
-func Ubrk_previous(bi *UBreakIterator) int32 {
-	r1, _, _ := syscall.SyscallN(procUbrk_previous.Addr(), uintptr(unsafe.Pointer(bi)))
-	return int32(r1)
-}
-
-// ubrk_refreshUText calls icuuc!ubrk_refreshUText.
-func Ubrk_refreshUText(bi *UBreakIterator, text *UText, status *UErrorCode) {
-	syscall.SyscallN(procUbrk_refreshUText.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(status)))
-}
-
-// ubrk_safeClone calls icuuc!ubrk_safeClone.
-func Ubrk_safeClone(bi *UBreakIterator, stackBuffer unsafe.Pointer, pBufferSize *int32, status *UErrorCode) *UBreakIterator {
-	r1, _, _ := syscall.SyscallN(procUbrk_safeClone.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(stackBuffer)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(status)))
-	return (*UBreakIterator)(unsafe.Pointer(r1))
-}
-
-// ubrk_setText calls icuuc!ubrk_setText.
-func Ubrk_setText(bi *UBreakIterator, text *uint16, textLength int32, status *UErrorCode) {
-	syscall.SyscallN(procUbrk_setText.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
-}
-
-// ubrk_setUText calls icuuc!ubrk_setUText.
-func Ubrk_setUText(bi *UBreakIterator, text *UText, status *UErrorCode) {
-	syscall.SyscallN(procUbrk_setUText.Addr(), uintptr(unsafe.Pointer(bi)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(status)))
-}
-
-// ucal_add calls icuin!ucal_add.
-func Ucal_add(cal *unsafe.Pointer, field UCalendarDateFields, amount int32, status *UErrorCode) {
-	syscall.SyscallN(procUcal_add.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(amount), uintptr(unsafe.Pointer(status)))
-}
-
-// ucal_clear calls icuin!ucal_clear.
-func Ucal_clear(calendar *unsafe.Pointer) {
-	syscall.SyscallN(procUcal_clear.Addr(), uintptr(unsafe.Pointer(calendar)))
-}
-
-// ucal_clearField calls icuin!ucal_clearField.
-func Ucal_clearField(cal *unsafe.Pointer, field UCalendarDateFields) {
-	syscall.SyscallN(procUcal_clearField.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field))
-}
-
-// ucal_clone calls icuin!ucal_clone.
-func Ucal_clone(cal *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUcal_clone.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// ucal_close calls icuin!ucal_close.
-func Ucal_close(cal *unsafe.Pointer) {
-	syscall.SyscallN(procUcal_close.Addr(), uintptr(unsafe.Pointer(cal)))
-}
-
-// ucal_countAvailable calls icuin!ucal_countAvailable.
-func Ucal_countAvailable() int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_countAvailable.Addr())
-	return int32(r1)
-}
-
-// ucal_equivalentTo calls icuin!ucal_equivalentTo.
-func Ucal_equivalentTo(cal1 *unsafe.Pointer, cal2 *unsafe.Pointer) int8 {
-	r1, _, _ := syscall.SyscallN(procUcal_equivalentTo.Addr(), uintptr(unsafe.Pointer(cal1)), uintptr(unsafe.Pointer(cal2)))
-	return int8(r1)
-}
-
-// ucal_get calls icuin!ucal_get.
-func Ucal_get(cal *unsafe.Pointer, field UCalendarDateFields, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_get.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucal_getAttribute calls icuin!ucal_getAttribute.
-func Ucal_getAttribute(cal *unsafe.Pointer, attr UCalendarAttribute) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getAttribute.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(attr))
-	return int32(r1)
-}
-
-// ucal_getAvailable calls icuin!ucal_getAvailable.
-func Ucal_getAvailable(localeIndex int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcal_getAvailable.Addr(), uintptr(localeIndex))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucal_getCanonicalTimeZoneID calls icuin!ucal_getCanonicalTimeZoneID.
-func Ucal_getCanonicalTimeZoneID(id *uint16, len_ int32, result *uint16, resultCapacity int32, isSystemID *int8, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getCanonicalTimeZoneID.Addr(), uintptr(unsafe.Pointer(id)), uintptr(len_), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(isSystemID)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucal_getDSTSavings calls icuin!ucal_getDSTSavings.
-func Ucal_getDSTSavings(zoneID *uint16, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getDSTSavings.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// ucal_getDayOfWeekType calls icuin!ucal_getDayOfWeekType.
-func Ucal_getDayOfWeekType(cal *unsafe.Pointer, dayOfWeek UCalendarDaysOfWeek, status *UErrorCode) UCalendarWeekdayType {
-	r1, _, _ := syscall.SyscallN(procUcal_getDayOfWeekType.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(dayOfWeek), uintptr(unsafe.Pointer(status)))
-	return UCalendarWeekdayType(r1)
-}
-
-// ucal_getDefaultTimeZone calls icuin!ucal_getDefaultTimeZone.
-func Ucal_getDefaultTimeZone(result *uint16, resultCapacity int32, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getDefaultTimeZone.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// ucal_getHostTimeZone calls icu!ucal_getHostTimeZone.
-func Ucal_getHostTimeZone(result *uint16, resultCapacity int32, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getHostTimeZone.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// ucal_getKeywordValuesForLocale calls icuin!ucal_getKeywordValuesForLocale.
-func Ucal_getKeywordValuesForLocale(key foundation.PSTR, locale foundation.PSTR, commonlyUsed int8, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcal_getKeywordValuesForLocale.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(locale)), uintptr(commonlyUsed), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucal_getLimit calls icuin!ucal_getLimit.
-func Ucal_getLimit(cal *unsafe.Pointer, field UCalendarDateFields, type_ UCalendarLimitType, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getLimit.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucal_getLocaleByType calls icuin!ucal_getLocaleByType.
-func Ucal_getLocaleByType(cal *unsafe.Pointer, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcal_getLocaleByType.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucal_getTZDataVersion calls icuin!ucal_getTZDataVersion.
-func Ucal_getTZDataVersion(status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcal_getTZDataVersion.Addr(), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucal_getTimeZoneDisplayName calls icuin!ucal_getTimeZoneDisplayName.
-func Ucal_getTimeZoneDisplayName(cal *unsafe.Pointer, type_ UCalendarDisplayNameType, locale foundation.PSTR, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getTimeZoneDisplayName.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(type_), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucal_getTimeZoneID calls icuin!ucal_getTimeZoneID.
-func Ucal_getTimeZoneID(cal *unsafe.Pointer, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getTimeZoneID.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucal_getTimeZoneIDForWindowsID calls icuin!ucal_getTimeZoneIDForWindowsID.
-func Ucal_getTimeZoneIDForWindowsID(winid *uint16, len_ int32, region foundation.PSTR, id *uint16, idCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getTimeZoneIDForWindowsID.Addr(), uintptr(unsafe.Pointer(winid)), uintptr(len_), uintptr(unsafe.Pointer(region)), uintptr(unsafe.Pointer(id)), uintptr(idCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucal_getTimeZoneOffsetFromLocal calls icu!ucal_getTimeZoneOffsetFromLocal.
-func Ucal_getTimeZoneOffsetFromLocal(cal *unsafe.Pointer, nonExistingTimeOpt UTimeZoneLocalOption, duplicatedTimeOpt UTimeZoneLocalOption, rawOffset *int32, dstOffset *int32, status *UErrorCode) {
-	syscall.SyscallN(procUcal_getTimeZoneOffsetFromLocal.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(nonExistingTimeOpt), uintptr(duplicatedTimeOpt), uintptr(unsafe.Pointer(rawOffset)), uintptr(unsafe.Pointer(dstOffset)), uintptr(unsafe.Pointer(status)))
-}
-
-// ucal_getTimeZoneTransitionDate calls icuin!ucal_getTimeZoneTransitionDate.
-func Ucal_getTimeZoneTransitionDate(cal *unsafe.Pointer, type_ UTimeZoneTransitionType, transition *float64, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUcal_getTimeZoneTransitionDate.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(type_), uintptr(unsafe.Pointer(transition)), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// ucal_getType calls icuin!ucal_getType.
-func Ucal_getType(cal *unsafe.Pointer, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcal_getType.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucal_getWeekendTransition calls icuin!ucal_getWeekendTransition.
-func Ucal_getWeekendTransition(cal *unsafe.Pointer, dayOfWeek UCalendarDaysOfWeek, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getWeekendTransition.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(dayOfWeek), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucal_getWindowsTimeZoneID calls icuin!ucal_getWindowsTimeZoneID.
-func Ucal_getWindowsTimeZoneID(id *uint16, len_ int32, winid *uint16, winidCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcal_getWindowsTimeZoneID.Addr(), uintptr(unsafe.Pointer(id)), uintptr(len_), uintptr(unsafe.Pointer(winid)), uintptr(winidCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucal_inDaylightTime calls icuin!ucal_inDaylightTime.
-func Ucal_inDaylightTime(cal *unsafe.Pointer, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUcal_inDaylightTime.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// ucal_isSet calls icuin!ucal_isSet.
-func Ucal_isSet(cal *unsafe.Pointer, field UCalendarDateFields) int8 {
-	r1, _, _ := syscall.SyscallN(procUcal_isSet.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field))
-	return int8(r1)
-}
-
-// ucal_open calls icuin!ucal_open.
-func Ucal_open(zoneID *uint16, len_ int32, locale foundation.PSTR, type_ UCalendarType, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUcal_open.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(len_), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// ucal_openCountryTimeZones calls icuin!ucal_openCountryTimeZones.
-func Ucal_openCountryTimeZones(country foundation.PSTR, ec *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcal_openCountryTimeZones.Addr(), uintptr(unsafe.Pointer(country)), uintptr(unsafe.Pointer(ec)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucal_openTimeZoneIDEnumeration calls icuin!ucal_openTimeZoneIDEnumeration.
-func Ucal_openTimeZoneIDEnumeration(zoneType USystemTimeZoneType, region foundation.PSTR, rawOffset *int32, ec *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcal_openTimeZoneIDEnumeration.Addr(), uintptr(zoneType), uintptr(unsafe.Pointer(region)), uintptr(unsafe.Pointer(rawOffset)), uintptr(unsafe.Pointer(ec)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucal_openTimeZones calls icuin!ucal_openTimeZones.
-func Ucal_openTimeZones(ec *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcal_openTimeZones.Addr(), uintptr(unsafe.Pointer(ec)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucal_roll calls icuin!ucal_roll.
-func Ucal_roll(cal *unsafe.Pointer, field UCalendarDateFields, amount int32, status *UErrorCode) {
-	syscall.SyscallN(procUcal_roll.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(amount), uintptr(unsafe.Pointer(status)))
-}
-
-// ucal_set calls icuin!ucal_set.
-func Ucal_set(cal *unsafe.Pointer, field UCalendarDateFields, value int32) {
-	syscall.SyscallN(procUcal_set.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(field), uintptr(value))
-}
-
-// ucal_setAttribute calls icuin!ucal_setAttribute.
-func Ucal_setAttribute(cal *unsafe.Pointer, attr UCalendarAttribute, newValue int32) {
-	syscall.SyscallN(procUcal_setAttribute.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(attr), uintptr(newValue))
-}
-
-// ucal_setDate calls icuin!ucal_setDate.
-func Ucal_setDate(cal *unsafe.Pointer, year int32, month int32, date int32, status *UErrorCode) {
-	syscall.SyscallN(procUcal_setDate.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(year), uintptr(month), uintptr(date), uintptr(unsafe.Pointer(status)))
-}
-
-// ucal_setDateTime calls icuin!ucal_setDateTime.
-func Ucal_setDateTime(cal *unsafe.Pointer, year int32, month int32, date int32, hour int32, minute int32, second int32, status *UErrorCode) {
-	syscall.SyscallN(procUcal_setDateTime.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(year), uintptr(month), uintptr(date), uintptr(hour), uintptr(minute), uintptr(second), uintptr(unsafe.Pointer(status)))
-}
-
-// ucal_setDefaultTimeZone calls icuin!ucal_setDefaultTimeZone.
-func Ucal_setDefaultTimeZone(zoneID *uint16, ec *UErrorCode) {
-	syscall.SyscallN(procUcal_setDefaultTimeZone.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(unsafe.Pointer(ec)))
-}
-
-// ucal_setTimeZone calls icuin!ucal_setTimeZone.
-func Ucal_setTimeZone(cal *unsafe.Pointer, zoneID *uint16, len_ int32, status *UErrorCode) {
-	syscall.SyscallN(procUcal_setTimeZone.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(zoneID)), uintptr(len_), uintptr(unsafe.Pointer(status)))
-}
-
-// ucasemap_close calls icuuc!ucasemap_close.
-func Ucasemap_close(csm *UCaseMap) {
-	syscall.SyscallN(procUcasemap_close.Addr(), uintptr(unsafe.Pointer(csm)))
-}
-
-// ucasemap_getBreakIterator calls icuuc!ucasemap_getBreakIterator.
-func Ucasemap_getBreakIterator(csm *UCaseMap) *UBreakIterator {
-	r1, _, _ := syscall.SyscallN(procUcasemap_getBreakIterator.Addr(), uintptr(unsafe.Pointer(csm)))
-	return (*UBreakIterator)(unsafe.Pointer(r1))
-}
-
-// ucasemap_getLocale calls icuuc!ucasemap_getLocale.
-func Ucasemap_getLocale(csm *UCaseMap) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcasemap_getLocale.Addr(), uintptr(unsafe.Pointer(csm)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucasemap_getOptions calls icuuc!ucasemap_getOptions.
-func Ucasemap_getOptions(csm *UCaseMap) uint32 {
-	r1, _, _ := syscall.SyscallN(procUcasemap_getOptions.Addr(), uintptr(unsafe.Pointer(csm)))
-	return uint32(r1)
-}
-
-// ucasemap_open calls icuuc!ucasemap_open.
-func Ucasemap_open(locale foundation.PSTR, options uint32, pErrorCode *UErrorCode) *UCaseMap {
-	r1, _, _ := syscall.SyscallN(procUcasemap_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UCaseMap)(unsafe.Pointer(r1))
-}
-
-// ucasemap_setBreakIterator calls icuuc!ucasemap_setBreakIterator.
-func Ucasemap_setBreakIterator(csm *UCaseMap, iterToAdopt *UBreakIterator, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUcasemap_setBreakIterator.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(iterToAdopt)), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ucasemap_setLocale calls icuuc!ucasemap_setLocale.
-func Ucasemap_setLocale(csm *UCaseMap, locale foundation.PSTR, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUcasemap_setLocale.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ucasemap_setOptions calls icuuc!ucasemap_setOptions.
-func Ucasemap_setOptions(csm *UCaseMap, options uint32, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUcasemap_setOptions.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ucasemap_toTitle calls icuuc!ucasemap_toTitle.
-func Ucasemap_toTitle(csm *UCaseMap, dest *uint16, destCapacity int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcasemap_toTitle.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucasemap_utf8FoldCase calls icuuc!ucasemap_utf8FoldCase.
-func Ucasemap_utf8FoldCase(csm *UCaseMap, dest foundation.PSTR, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcasemap_utf8FoldCase.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucasemap_utf8ToLower calls icuuc!ucasemap_utf8ToLower.
-func Ucasemap_utf8ToLower(csm *UCaseMap, dest foundation.PSTR, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcasemap_utf8ToLower.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucasemap_utf8ToTitle calls icuuc!ucasemap_utf8ToTitle.
-func Ucasemap_utf8ToTitle(csm *UCaseMap, dest foundation.PSTR, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcasemap_utf8ToTitle.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucasemap_utf8ToUpper calls icuuc!ucasemap_utf8ToUpper.
-func Ucasemap_utf8ToUpper(csm *UCaseMap, dest foundation.PSTR, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcasemap_utf8ToUpper.Addr(), uintptr(unsafe.Pointer(csm)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucfpos_close calls icu!ucfpos_close.
-func Ucfpos_close(ucfpos *UConstrainedFieldPosition) {
-	syscall.SyscallN(procUcfpos_close.Addr(), uintptr(unsafe.Pointer(ucfpos)))
-}
-
-// ucfpos_constrainCategory calls icu!ucfpos_constrainCategory.
-func Ucfpos_constrainCategory(ucfpos *UConstrainedFieldPosition, category int32, ec *UErrorCode) {
-	syscall.SyscallN(procUcfpos_constrainCategory.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(category), uintptr(unsafe.Pointer(ec)))
-}
-
-// ucfpos_constrainField calls icu!ucfpos_constrainField.
-func Ucfpos_constrainField(ucfpos *UConstrainedFieldPosition, category int32, field int32, ec *UErrorCode) {
-	syscall.SyscallN(procUcfpos_constrainField.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(category), uintptr(field), uintptr(unsafe.Pointer(ec)))
-}
-
-// ucfpos_getCategory calls icu!ucfpos_getCategory.
-func Ucfpos_getCategory(ucfpos *UConstrainedFieldPosition, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcfpos_getCategory.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// ucfpos_getField calls icu!ucfpos_getField.
-func Ucfpos_getField(ucfpos *UConstrainedFieldPosition, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcfpos_getField.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// ucfpos_getIndexes calls icu!ucfpos_getIndexes.
-func Ucfpos_getIndexes(ucfpos *UConstrainedFieldPosition, pStart *int32, pLimit *int32, ec *UErrorCode) {
-	syscall.SyscallN(procUcfpos_getIndexes.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(pStart)), uintptr(unsafe.Pointer(pLimit)), uintptr(unsafe.Pointer(ec)))
-}
-
-// ucfpos_getInt64IterationContext calls icu!ucfpos_getInt64IterationContext.
-func Ucfpos_getInt64IterationContext(ucfpos *UConstrainedFieldPosition, ec *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUcfpos_getInt64IterationContext.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
-	return int64(r1)
-}
-
-// ucfpos_matchesField calls icu!ucfpos_matchesField.
-func Ucfpos_matchesField(ucfpos *UConstrainedFieldPosition, category int32, field int32, ec *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUcfpos_matchesField.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(category), uintptr(field), uintptr(unsafe.Pointer(ec)))
-	return int8(r1)
-}
-
-// ucfpos_open calls icu!ucfpos_open.
-func Ucfpos_open(ec *UErrorCode) *UConstrainedFieldPosition {
-	r1, _, _ := syscall.SyscallN(procUcfpos_open.Addr(), uintptr(unsafe.Pointer(ec)))
-	return (*UConstrainedFieldPosition)(unsafe.Pointer(r1))
-}
-
-// ucfpos_reset calls icu!ucfpos_reset.
-func Ucfpos_reset(ucfpos *UConstrainedFieldPosition, ec *UErrorCode) {
-	syscall.SyscallN(procUcfpos_reset.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
-}
-
-// ucfpos_setInt64IterationContext calls icu!ucfpos_setInt64IterationContext.
-func Ucfpos_setInt64IterationContext(ucfpos *UConstrainedFieldPosition, context int64, ec *UErrorCode) {
-	syscall.SyscallN(procUcfpos_setInt64IterationContext.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(context), uintptr(unsafe.Pointer(ec)))
-}
-
-// ucfpos_setState calls icu!ucfpos_setState.
-func Ucfpos_setState(ucfpos *UConstrainedFieldPosition, category int32, field int32, start int32, limit int32, ec *UErrorCode) {
-	syscall.SyscallN(procUcfpos_setState.Addr(), uintptr(unsafe.Pointer(ucfpos)), uintptr(category), uintptr(field), uintptr(start), uintptr(limit), uintptr(unsafe.Pointer(ec)))
-}
-
-// ucnv_cbFromUWriteBytes calls icuuc!ucnv_cbFromUWriteBytes.
-func Ucnv_cbFromUWriteBytes(args *UConverterFromUnicodeArgs, source foundation.PSTR, length int32, offsetIndex int32, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_cbFromUWriteBytes.Addr(), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(source)), uintptr(length), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_cbFromUWriteSub calls icuuc!ucnv_cbFromUWriteSub.
-func Ucnv_cbFromUWriteSub(args *UConverterFromUnicodeArgs, offsetIndex int32, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_cbFromUWriteSub.Addr(), uintptr(unsafe.Pointer(args)), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_cbFromUWriteUChars calls icuuc!ucnv_cbFromUWriteUChars.
-func Ucnv_cbFromUWriteUChars(args *UConverterFromUnicodeArgs, source **uint16, sourceLimit *uint16, offsetIndex int32, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_cbFromUWriteUChars.Addr(), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_cbToUWriteSub calls icuuc!ucnv_cbToUWriteSub.
-func Ucnv_cbToUWriteSub(args *UConverterToUnicodeArgs, offsetIndex int32, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_cbToUWriteSub.Addr(), uintptr(unsafe.Pointer(args)), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_cbToUWriteUChars calls icuuc!ucnv_cbToUWriteUChars.
-func Ucnv_cbToUWriteUChars(args *UConverterToUnicodeArgs, source *uint16, length int32, offsetIndex int32, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_cbToUWriteUChars.Addr(), uintptr(unsafe.Pointer(args)), uintptr(unsafe.Pointer(source)), uintptr(length), uintptr(offsetIndex), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_clone calls icu!ucnv_clone.
-func Ucnv_clone(cnv *UConverter, status *UErrorCode) *UConverter {
-	r1, _, _ := syscall.SyscallN(procUcnv_clone.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(status)))
-	return (*UConverter)(unsafe.Pointer(r1))
-}
-
-// ucnv_close calls icuuc!ucnv_close.
-func Ucnv_close(converter *UConverter) {
-	syscall.SyscallN(procUcnv_close.Addr(), uintptr(unsafe.Pointer(converter)))
-}
-
-// ucnv_compareNames calls icuuc!ucnv_compareNames.
-func Ucnv_compareNames(name1 foundation.PSTR, name2 foundation.PSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_compareNames.Addr(), uintptr(unsafe.Pointer(name1)), uintptr(unsafe.Pointer(name2)))
-	return int32(r1)
-}
-
-// ucnv_convert calls icuuc!ucnv_convert.
-func Ucnv_convert(toConverterName foundation.PSTR, fromConverterName foundation.PSTR, target foundation.PSTR, targetCapacity int32, source foundation.PSTR, sourceLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_convert.Addr(), uintptr(unsafe.Pointer(toConverterName)), uintptr(unsafe.Pointer(fromConverterName)), uintptr(unsafe.Pointer(target)), uintptr(targetCapacity), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucnv_convertEx calls icuuc!ucnv_convertEx.
-func Ucnv_convertEx(targetCnv *UConverter, sourceCnv *UConverter, target **int8, targetLimit foundation.PSTR, source **int8, sourceLimit foundation.PSTR, pivotStart *uint16, pivotSource **uint16, pivotTarget **uint16, pivotLimit *uint16, reset int8, flush int8, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUcnv_convertEx.Addr(), uintptr(unsafe.Pointer(targetCnv)), uintptr(unsafe.Pointer(sourceCnv)), uintptr(unsafe.Pointer(target)), uintptr(unsafe.Pointer(targetLimit)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(unsafe.Pointer(pivotStart)), uintptr(unsafe.Pointer(pivotSource)), uintptr(unsafe.Pointer(pivotTarget)), uintptr(unsafe.Pointer(pivotLimit)), uintptr(reset), uintptr(flush), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ucnv_countAliases calls icuuc!ucnv_countAliases.
-func Ucnv_countAliases(alias foundation.PSTR, pErrorCode *UErrorCode) uint16 {
-	r1, _, _ := syscall.SyscallN(procUcnv_countAliases.Addr(), uintptr(unsafe.Pointer(alias)), uintptr(unsafe.Pointer(pErrorCode)))
-	return uint16(r1)
-}
-
-// ucnv_countAvailable calls icuuc!ucnv_countAvailable.
-func Ucnv_countAvailable() int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_countAvailable.Addr())
-	return int32(r1)
-}
-
-// ucnv_countStandards calls icuuc!ucnv_countStandards.
-func Ucnv_countStandards() uint16 {
-	r1, _, _ := syscall.SyscallN(procUcnv_countStandards.Addr())
-	return uint16(r1)
-}
-
-// ucnv_detectUnicodeSignature calls icuuc!ucnv_detectUnicodeSignature.
-func Ucnv_detectUnicodeSignature(source foundation.PSTR, sourceLength int32, signatureLength *int32, pErrorCode *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcnv_detectUnicodeSignature.Addr(), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(signatureLength)), uintptr(unsafe.Pointer(pErrorCode)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucnv_fixFileSeparator calls icuuc!ucnv_fixFileSeparator.
-func Ucnv_fixFileSeparator(cnv *UConverter, source *uint16, sourceLen int32) {
-	syscall.SyscallN(procUcnv_fixFileSeparator.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(source)), uintptr(sourceLen))
-}
-
-// ucnv_flushCache calls icuuc!ucnv_flushCache.
-func Ucnv_flushCache() int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_flushCache.Addr())
-	return int32(r1)
-}
-
-// ucnv_fromAlgorithmic calls icuuc!ucnv_fromAlgorithmic.
-func Ucnv_fromAlgorithmic(cnv *UConverter, algorithmicType UConverterType, target foundation.PSTR, targetCapacity int32, source foundation.PSTR, sourceLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_fromAlgorithmic.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(algorithmicType), uintptr(unsafe.Pointer(target)), uintptr(targetCapacity), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucnv_fromUChars calls icuuc!ucnv_fromUChars.
-func Ucnv_fromUChars(cnv *UConverter, dest foundation.PSTR, destCapacity int32, src *uint16, srcLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_fromUChars.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucnv_fromUCountPending calls icuuc!ucnv_fromUCountPending.
-func Ucnv_fromUCountPending(cnv *UConverter, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_fromUCountPending.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucnv_fromUnicode calls icuuc!ucnv_fromUnicode.
-func Ucnv_fromUnicode(converter *UConverter, target **int8, targetLimit foundation.PSTR, source **uint16, sourceLimit *uint16, offsets *int32, flush int8, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_fromUnicode.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(target)), uintptr(unsafe.Pointer(targetLimit)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(unsafe.Pointer(offsets)), uintptr(flush), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_getAlias calls icuuc!ucnv_getAlias.
-func Ucnv_getAlias(alias foundation.PSTR, n uint16, pErrorCode *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcnv_getAlias.Addr(), uintptr(unsafe.Pointer(alias)), uintptr(n), uintptr(unsafe.Pointer(pErrorCode)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucnv_getAliases calls icuuc!ucnv_getAliases.
-func Ucnv_getAliases(alias foundation.PSTR, aliases **int8, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUcnv_getAliases.Addr(), uintptr(unsafe.Pointer(alias)), uintptr(unsafe.Pointer(aliases)), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ucnv_getAvailableName calls icuuc!ucnv_getAvailableName.
-func Ucnv_getAvailableName(n int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcnv_getAvailableName.Addr(), uintptr(n))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucnv_getCCSID calls icuuc!ucnv_getCCSID.
-func Ucnv_getCCSID(converter *UConverter, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_getCCSID.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// ucnv_getCanonicalName calls icuuc!ucnv_getCanonicalName.
-func Ucnv_getCanonicalName(alias foundation.PSTR, standard foundation.PSTR, pErrorCode *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcnv_getCanonicalName.Addr(), uintptr(unsafe.Pointer(alias)), uintptr(unsafe.Pointer(standard)), uintptr(unsafe.Pointer(pErrorCode)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucnv_getDefaultName calls icuuc!ucnv_getDefaultName.
-func Ucnv_getDefaultName() foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcnv_getDefaultName.Addr())
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucnv_getDisplayName calls icuuc!ucnv_getDisplayName.
-func Ucnv_getDisplayName(converter *UConverter, displayLocale foundation.PSTR, displayName *uint16, displayNameCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_getDisplayName.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(displayName)), uintptr(displayNameCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// ucnv_getFromUCallBack calls icuuc!ucnv_getFromUCallBack.
-func Ucnv_getFromUCallBack(converter *UConverter, action *UConverterFromUCallback, context *unsafe.Pointer) {
-	syscall.SyscallN(procUcnv_getFromUCallBack.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(action)), uintptr(unsafe.Pointer(context)))
-}
-
-// ucnv_getInvalidChars calls icuuc!ucnv_getInvalidChars.
-func Ucnv_getInvalidChars(converter *UConverter, errBytes foundation.PSTR, len_ *int8, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_getInvalidChars.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(errBytes)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_getInvalidUChars calls icuuc!ucnv_getInvalidUChars.
-func Ucnv_getInvalidUChars(converter *UConverter, errUChars *uint16, len_ *int8, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_getInvalidUChars.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(errUChars)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_getMaxCharSize calls icuuc!ucnv_getMaxCharSize.
-func Ucnv_getMaxCharSize(converter *UConverter) int8 {
-	r1, _, _ := syscall.SyscallN(procUcnv_getMaxCharSize.Addr(), uintptr(unsafe.Pointer(converter)))
-	return int8(r1)
-}
-
-// ucnv_getMinCharSize calls icuuc!ucnv_getMinCharSize.
-func Ucnv_getMinCharSize(converter *UConverter) int8 {
-	r1, _, _ := syscall.SyscallN(procUcnv_getMinCharSize.Addr(), uintptr(unsafe.Pointer(converter)))
-	return int8(r1)
-}
-
-// ucnv_getName calls icuuc!ucnv_getName.
-func Ucnv_getName(converter *UConverter, err_ *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcnv_getName.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(err_)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucnv_getNextUChar calls icuuc!ucnv_getNextUChar.
-func Ucnv_getNextUChar(converter *UConverter, source **int8, sourceLimit foundation.PSTR, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_getNextUChar.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// ucnv_getPlatform calls icuuc!ucnv_getPlatform.
-func Ucnv_getPlatform(converter *UConverter, err_ *UErrorCode) UConverterPlatform {
-	r1, _, _ := syscall.SyscallN(procUcnv_getPlatform.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(err_)))
-	return UConverterPlatform(r1)
-}
-
-// ucnv_getStandard calls icuuc!ucnv_getStandard.
-func Ucnv_getStandard(n uint16, pErrorCode *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcnv_getStandard.Addr(), uintptr(n), uintptr(unsafe.Pointer(pErrorCode)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucnv_getStandardName calls icuuc!ucnv_getStandardName.
-func Ucnv_getStandardName(name foundation.PSTR, standard foundation.PSTR, pErrorCode *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcnv_getStandardName.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(standard)), uintptr(unsafe.Pointer(pErrorCode)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucnv_getStarters calls icuuc!ucnv_getStarters.
-func Ucnv_getStarters(converter *UConverter, starters *int8, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_getStarters.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(starters)), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_getSubstChars calls icuuc!ucnv_getSubstChars.
-func Ucnv_getSubstChars(converter *UConverter, subChars foundation.PSTR, len_ *int8, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_getSubstChars.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(subChars)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_getToUCallBack calls icuuc!ucnv_getToUCallBack.
-func Ucnv_getToUCallBack(converter *UConverter, action *UConverterToUCallback, context *unsafe.Pointer) {
-	syscall.SyscallN(procUcnv_getToUCallBack.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(action)), uintptr(unsafe.Pointer(context)))
-}
-
-// ucnv_getType calls icuuc!ucnv_getType.
-func Ucnv_getType(converter *UConverter) UConverterType {
-	r1, _, _ := syscall.SyscallN(procUcnv_getType.Addr(), uintptr(unsafe.Pointer(converter)))
-	return UConverterType(r1)
-}
-
-// ucnv_getUnicodeSet calls icuuc!ucnv_getUnicodeSet.
-func Ucnv_getUnicodeSet(cnv *UConverter, setFillIn *USet, whichSet UConverterUnicodeSet, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUcnv_getUnicodeSet.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(setFillIn)), uintptr(whichSet), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ucnv_isAmbiguous calls icuuc!ucnv_isAmbiguous.
-func Ucnv_isAmbiguous(cnv *UConverter) int8 {
-	r1, _, _ := syscall.SyscallN(procUcnv_isAmbiguous.Addr(), uintptr(unsafe.Pointer(cnv)))
-	return int8(r1)
-}
-
-// ucnv_isFixedWidth calls icuuc!ucnv_isFixedWidth.
-func Ucnv_isFixedWidth(cnv *UConverter, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUcnv_isFixedWidth.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// ucnv_open calls icuuc!ucnv_open.
-func Ucnv_open(converterName foundation.PSTR, err_ *UErrorCode) *UConverter {
-	r1, _, _ := syscall.SyscallN(procUcnv_open.Addr(), uintptr(unsafe.Pointer(converterName)), uintptr(unsafe.Pointer(err_)))
-	return (*UConverter)(unsafe.Pointer(r1))
-}
-
-// ucnv_openAllNames calls icuuc!ucnv_openAllNames.
-func Ucnv_openAllNames(pErrorCode *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcnv_openAllNames.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucnv_openCCSID calls icuuc!ucnv_openCCSID.
-func Ucnv_openCCSID(codepage int32, platform UConverterPlatform, err_ *UErrorCode) *UConverter {
-	r1, _, _ := syscall.SyscallN(procUcnv_openCCSID.Addr(), uintptr(codepage), uintptr(platform), uintptr(unsafe.Pointer(err_)))
-	return (*UConverter)(unsafe.Pointer(r1))
-}
-
-// ucnv_openPackage calls icuuc!ucnv_openPackage.
-func Ucnv_openPackage(packageName foundation.PSTR, converterName foundation.PSTR, err_ *UErrorCode) *UConverter {
-	r1, _, _ := syscall.SyscallN(procUcnv_openPackage.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(converterName)), uintptr(unsafe.Pointer(err_)))
-	return (*UConverter)(unsafe.Pointer(r1))
-}
-
-// ucnv_openStandardNames calls icuuc!ucnv_openStandardNames.
-func Ucnv_openStandardNames(convName foundation.PSTR, standard foundation.PSTR, pErrorCode *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcnv_openStandardNames.Addr(), uintptr(unsafe.Pointer(convName)), uintptr(unsafe.Pointer(standard)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucnv_openU calls icuuc!ucnv_openU.
-func Ucnv_openU(name *uint16, err_ *UErrorCode) *UConverter {
-	r1, _, _ := syscall.SyscallN(procUcnv_openU.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(err_)))
-	return (*UConverter)(unsafe.Pointer(r1))
-}
-
-// ucnv_reset calls icuuc!ucnv_reset.
-func Ucnv_reset(converter *UConverter) {
-	syscall.SyscallN(procUcnv_reset.Addr(), uintptr(unsafe.Pointer(converter)))
-}
-
-// ucnv_resetFromUnicode calls icuuc!ucnv_resetFromUnicode.
-func Ucnv_resetFromUnicode(converter *UConverter) {
-	syscall.SyscallN(procUcnv_resetFromUnicode.Addr(), uintptr(unsafe.Pointer(converter)))
-}
-
-// ucnv_resetToUnicode calls icuuc!ucnv_resetToUnicode.
-func Ucnv_resetToUnicode(converter *UConverter) {
-	syscall.SyscallN(procUcnv_resetToUnicode.Addr(), uintptr(unsafe.Pointer(converter)))
-}
-
-// ucnv_safeClone calls icuuc!ucnv_safeClone.
-func Ucnv_safeClone(cnv *UConverter, stackBuffer unsafe.Pointer, pBufferSize *int32, status *UErrorCode) *UConverter {
-	r1, _, _ := syscall.SyscallN(procUcnv_safeClone.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(stackBuffer)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(status)))
-	return (*UConverter)(unsafe.Pointer(r1))
-}
-
-// ucnv_setDefaultName calls icuuc!ucnv_setDefaultName.
-func Ucnv_setDefaultName(name foundation.PSTR) {
-	syscall.SyscallN(procUcnv_setDefaultName.Addr(), uintptr(unsafe.Pointer(name)))
-}
-
-// ucnv_setFallback calls icuuc!ucnv_setFallback.
-func Ucnv_setFallback(cnv *UConverter, usesFallback int8) {
-	syscall.SyscallN(procUcnv_setFallback.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(usesFallback))
-}
-
-// ucnv_setFromUCallBack calls icuuc!ucnv_setFromUCallBack.
-func Ucnv_setFromUCallBack(converter *UConverter, newAction UConverterFromUCallback, newContext unsafe.Pointer, oldAction *UConverterFromUCallback, oldContext *unsafe.Pointer, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_setFromUCallBack.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(newAction), uintptr(unsafe.Pointer(newContext)), uintptr(unsafe.Pointer(oldAction)), uintptr(unsafe.Pointer(oldContext)), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_setSubstChars calls icuuc!ucnv_setSubstChars.
-func Ucnv_setSubstChars(converter *UConverter, subChars foundation.PSTR, len_ int8, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_setSubstChars.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(subChars)), uintptr(len_), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_setSubstString calls icuuc!ucnv_setSubstString.
-func Ucnv_setSubstString(cnv *UConverter, s *uint16, length int32, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_setSubstString.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_setToUCallBack calls icuuc!ucnv_setToUCallBack.
-func Ucnv_setToUCallBack(converter *UConverter, newAction UConverterToUCallback, newContext unsafe.Pointer, oldAction *UConverterToUCallback, oldContext *unsafe.Pointer, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_setToUCallBack.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(newAction), uintptr(unsafe.Pointer(newContext)), uintptr(unsafe.Pointer(oldAction)), uintptr(unsafe.Pointer(oldContext)), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_toAlgorithmic calls icuuc!ucnv_toAlgorithmic.
-func Ucnv_toAlgorithmic(algorithmicType UConverterType, cnv *UConverter, target foundation.PSTR, targetCapacity int32, source foundation.PSTR, sourceLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_toAlgorithmic.Addr(), uintptr(algorithmicType), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(target)), uintptr(targetCapacity), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucnv_toUChars calls icuuc!ucnv_toUChars.
-func Ucnv_toUChars(cnv *UConverter, dest *uint16, destCapacity int32, src foundation.PSTR, srcLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_toUChars.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucnv_toUCountPending calls icuuc!ucnv_toUCountPending.
-func Ucnv_toUCountPending(cnv *UConverter, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnv_toUCountPending.Addr(), uintptr(unsafe.Pointer(cnv)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucnv_toUnicode calls icuuc!ucnv_toUnicode.
-func Ucnv_toUnicode(converter *UConverter, target **uint16, targetLimit *uint16, source **int8, sourceLimit foundation.PSTR, offsets *int32, flush int8, err_ *UErrorCode) {
-	syscall.SyscallN(procUcnv_toUnicode.Addr(), uintptr(unsafe.Pointer(converter)), uintptr(unsafe.Pointer(target)), uintptr(unsafe.Pointer(targetLimit)), uintptr(unsafe.Pointer(source)), uintptr(unsafe.Pointer(sourceLimit)), uintptr(unsafe.Pointer(offsets)), uintptr(flush), uintptr(unsafe.Pointer(err_)))
-}
-
-// ucnv_usesFallback calls icuuc!ucnv_usesFallback.
-func Ucnv_usesFallback(cnv *UConverter) int8 {
-	r1, _, _ := syscall.SyscallN(procUcnv_usesFallback.Addr(), uintptr(unsafe.Pointer(cnv)))
-	return int8(r1)
-}
-
-// ucnvsel_close calls icuuc!ucnvsel_close.
-func Ucnvsel_close(sel *UConverterSelector) {
-	syscall.SyscallN(procUcnvsel_close.Addr(), uintptr(unsafe.Pointer(sel)))
-}
-
-// ucnvsel_open calls icuuc!ucnvsel_open.
-func Ucnvsel_open(converterList **int8, converterListSize int32, excludedCodePoints *USet, whichSet UConverterUnicodeSet, status *UErrorCode) *UConverterSelector {
-	r1, _, _ := syscall.SyscallN(procUcnvsel_open.Addr(), uintptr(unsafe.Pointer(converterList)), uintptr(converterListSize), uintptr(unsafe.Pointer(excludedCodePoints)), uintptr(whichSet), uintptr(unsafe.Pointer(status)))
-	return (*UConverterSelector)(unsafe.Pointer(r1))
-}
-
-// ucnvsel_openFromSerialized calls icuuc!ucnvsel_openFromSerialized.
-func Ucnvsel_openFromSerialized(buffer unsafe.Pointer, length int32, status *UErrorCode) *UConverterSelector {
-	r1, _, _ := syscall.SyscallN(procUcnvsel_openFromSerialized.Addr(), uintptr(unsafe.Pointer(buffer)), uintptr(length), uintptr(unsafe.Pointer(status)))
-	return (*UConverterSelector)(unsafe.Pointer(r1))
-}
-
-// ucnvsel_selectForString calls icuuc!ucnvsel_selectForString.
-func Ucnvsel_selectForString(sel *UConverterSelector, s *uint16, length int32, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcnvsel_selectForString.Addr(), uintptr(unsafe.Pointer(sel)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucnvsel_selectForUTF8 calls icuuc!ucnvsel_selectForUTF8.
-func Ucnvsel_selectForUTF8(sel *UConverterSelector, s foundation.PSTR, length int32, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcnvsel_selectForUTF8.Addr(), uintptr(unsafe.Pointer(sel)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucnvsel_serialize calls icuuc!ucnvsel_serialize.
-func Ucnvsel_serialize(sel *UConverterSelector, buffer unsafe.Pointer, bufferCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcnvsel_serialize.Addr(), uintptr(unsafe.Pointer(sel)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucol_clone calls icu!ucol_clone.
-func Ucol_clone(coll *UCollator, status *UErrorCode) *UCollator {
-	r1, _, _ := syscall.SyscallN(procUcol_clone.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(status)))
-	return (*UCollator)(unsafe.Pointer(r1))
-}
-
-// ucol_cloneBinary calls icuin!ucol_cloneBinary.
-func Ucol_cloneBinary(coll *UCollator, buffer *byte, capacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_cloneBinary.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(buffer)), uintptr(capacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucol_close calls icuin!ucol_close.
-func Ucol_close(coll *UCollator) {
-	syscall.SyscallN(procUcol_close.Addr(), uintptr(unsafe.Pointer(coll)))
-}
-
-// ucol_closeElements calls icuin!ucol_closeElements.
-func Ucol_closeElements(elems *UCollationElements) {
-	syscall.SyscallN(procUcol_closeElements.Addr(), uintptr(unsafe.Pointer(elems)))
-}
-
-// ucol_countAvailable calls icuin!ucol_countAvailable.
-func Ucol_countAvailable() int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_countAvailable.Addr())
-	return int32(r1)
-}
-
-// ucol_equal calls icuin!ucol_equal.
-func Ucol_equal(coll *UCollator, source *uint16, sourceLength int32, target *uint16, targetLength int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUcol_equal.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength))
-	return int8(r1)
-}
-
-// ucol_getAttribute calls icuin!ucol_getAttribute.
-func Ucol_getAttribute(coll *UCollator, attr UColAttribute, status *UErrorCode) UColAttributeValue {
-	r1, _, _ := syscall.SyscallN(procUcol_getAttribute.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(attr), uintptr(unsafe.Pointer(status)))
-	return UColAttributeValue(r1)
-}
-
-// ucol_getAvailable calls icuin!ucol_getAvailable.
-func Ucol_getAvailable(localeIndex int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcol_getAvailable.Addr(), uintptr(localeIndex))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucol_getBound calls icuin!ucol_getBound.
-func Ucol_getBound(source *byte, sourceLength int32, boundType UColBoundMode, noOfLevels uint32, result *byte, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getBound.Addr(), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(boundType), uintptr(noOfLevels), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucol_getContractionsAndExpansions calls icuin!ucol_getContractionsAndExpansions.
-func Ucol_getContractionsAndExpansions(coll *UCollator, contractions *USet, expansions *USet, addPrefixes int8, status *UErrorCode) {
-	syscall.SyscallN(procUcol_getContractionsAndExpansions.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(contractions)), uintptr(unsafe.Pointer(expansions)), uintptr(addPrefixes), uintptr(unsafe.Pointer(status)))
-}
-
-// ucol_getDisplayName calls icuin!ucol_getDisplayName.
-func Ucol_getDisplayName(objLoc foundation.PSTR, dispLoc foundation.PSTR, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getDisplayName.Addr(), uintptr(unsafe.Pointer(objLoc)), uintptr(unsafe.Pointer(dispLoc)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucol_getEquivalentReorderCodes calls icuin!ucol_getEquivalentReorderCodes.
-func Ucol_getEquivalentReorderCodes(reorderCode int32, dest *int32, destCapacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getEquivalentReorderCodes.Addr(), uintptr(reorderCode), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucol_getFunctionalEquivalent calls icuin!ucol_getFunctionalEquivalent.
-func Ucol_getFunctionalEquivalent(result foundation.PSTR, resultCapacity int32, keyword foundation.PSTR, locale foundation.PSTR, isAvailable *int8, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getFunctionalEquivalent.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(isAvailable)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucol_getKeywordValues calls icuin!ucol_getKeywordValues.
-func Ucol_getKeywordValues(keyword foundation.PSTR, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcol_getKeywordValues.Addr(), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucol_getKeywordValuesForLocale calls icuin!ucol_getKeywordValuesForLocale.
-func Ucol_getKeywordValuesForLocale(key foundation.PSTR, locale foundation.PSTR, commonlyUsed int8, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcol_getKeywordValuesForLocale.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(locale)), uintptr(commonlyUsed), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucol_getKeywords calls icuin!ucol_getKeywords.
-func Ucol_getKeywords(status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcol_getKeywords.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucol_getLocaleByType calls icuin!ucol_getLocaleByType.
-func Ucol_getLocaleByType(coll *UCollator, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcol_getLocaleByType.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucol_getMaxExpansion calls icuin!ucol_getMaxExpansion.
-func Ucol_getMaxExpansion(elems *UCollationElements, order int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getMaxExpansion.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(order))
-	return int32(r1)
-}
-
-// ucol_getMaxVariable calls icuin!ucol_getMaxVariable.
-func Ucol_getMaxVariable(coll *UCollator) UColReorderCode {
-	r1, _, _ := syscall.SyscallN(procUcol_getMaxVariable.Addr(), uintptr(unsafe.Pointer(coll)))
-	return UColReorderCode(r1)
-}
-
-// ucol_getOffset calls icuin!ucol_getOffset.
-func Ucol_getOffset(elems *UCollationElements) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getOffset.Addr(), uintptr(unsafe.Pointer(elems)))
-	return int32(r1)
-}
-
-// ucol_getReorderCodes calls icuin!ucol_getReorderCodes.
-func Ucol_getReorderCodes(coll *UCollator, dest *int32, destCapacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getReorderCodes.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucol_getRules calls icuin!ucol_getRules.
-func Ucol_getRules(coll *UCollator, length *int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUcol_getRules.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(length)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ucol_getRulesEx calls icuin!ucol_getRulesEx.
-func Ucol_getRulesEx(coll *UCollator, delta UColRuleOption, buffer *uint16, bufferLen int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getRulesEx.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(delta), uintptr(unsafe.Pointer(buffer)), uintptr(bufferLen))
-	return int32(r1)
-}
-
-// ucol_getSortKey calls icuin!ucol_getSortKey.
-func Ucol_getSortKey(coll *UCollator, source *uint16, sourceLength int32, result *byte, resultLength int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getSortKey.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(result)), uintptr(resultLength))
-	return int32(r1)
-}
-
-// ucol_getStrength calls icuin!ucol_getStrength.
-func Ucol_getStrength(coll *UCollator) UColAttributeValue {
-	r1, _, _ := syscall.SyscallN(procUcol_getStrength.Addr(), uintptr(unsafe.Pointer(coll)))
-	return UColAttributeValue(r1)
-}
-
-// ucol_getTailoredSet calls icuin!ucol_getTailoredSet.
-func Ucol_getTailoredSet(coll *UCollator, status *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procUcol_getTailoredSet.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(status)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// ucol_getUCAVersion calls icuin!ucol_getUCAVersion.
-func Ucol_getUCAVersion(coll *UCollator, info *byte) {
-	syscall.SyscallN(procUcol_getUCAVersion.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(info)))
-}
-
-// ucol_getVariableTop calls icuin!ucol_getVariableTop.
-func Ucol_getVariableTop(coll *UCollator, status *UErrorCode) uint32 {
-	r1, _, _ := syscall.SyscallN(procUcol_getVariableTop.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(status)))
-	return uint32(r1)
-}
-
-// ucol_getVersion calls icuin!ucol_getVersion.
-func Ucol_getVersion(coll *UCollator, info *byte) {
-	syscall.SyscallN(procUcol_getVersion.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(info)))
-}
-
-// ucol_greater calls icuin!ucol_greater.
-func Ucol_greater(coll *UCollator, source *uint16, sourceLength int32, target *uint16, targetLength int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUcol_greater.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength))
-	return int8(r1)
-}
-
-// ucol_greaterOrEqual calls icuin!ucol_greaterOrEqual.
-func Ucol_greaterOrEqual(coll *UCollator, source *uint16, sourceLength int32, target *uint16, targetLength int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUcol_greaterOrEqual.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength))
-	return int8(r1)
-}
-
-// ucol_keyHashCode calls icuin!ucol_keyHashCode.
-func Ucol_keyHashCode(key *byte, length int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_keyHashCode.Addr(), uintptr(unsafe.Pointer(key)), uintptr(length))
-	return int32(r1)
-}
-
-// ucol_mergeSortkeys calls icuin!ucol_mergeSortkeys.
-func Ucol_mergeSortkeys(src1 *byte, src1Length int32, src2 *byte, src2Length int32, dest *byte, destCapacity int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_mergeSortkeys.Addr(), uintptr(unsafe.Pointer(src1)), uintptr(src1Length), uintptr(unsafe.Pointer(src2)), uintptr(src2Length), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity))
-	return int32(r1)
-}
-
-// ucol_next calls icuin!ucol_next.
-func Ucol_next(elems *UCollationElements, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_next.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucol_nextSortKeyPart calls icuin!ucol_nextSortKeyPart.
-func Ucol_nextSortKeyPart(coll *UCollator, iter *UCharIterator, state *uint32, dest *byte, count int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_nextSortKeyPart.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(iter)), uintptr(unsafe.Pointer(state)), uintptr(unsafe.Pointer(dest)), uintptr(count), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucol_open calls icuin!ucol_open.
-func Ucol_open(loc foundation.PSTR, status *UErrorCode) *UCollator {
-	r1, _, _ := syscall.SyscallN(procUcol_open.Addr(), uintptr(unsafe.Pointer(loc)), uintptr(unsafe.Pointer(status)))
-	return (*UCollator)(unsafe.Pointer(r1))
-}
-
-// ucol_openAvailableLocales calls icuin!ucol_openAvailableLocales.
-func Ucol_openAvailableLocales(status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcol_openAvailableLocales.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucol_openBinary calls icuin!ucol_openBinary.
-func Ucol_openBinary(bin *byte, length int32, base *UCollator, status *UErrorCode) *UCollator {
-	r1, _, _ := syscall.SyscallN(procUcol_openBinary.Addr(), uintptr(unsafe.Pointer(bin)), uintptr(length), uintptr(unsafe.Pointer(base)), uintptr(unsafe.Pointer(status)))
-	return (*UCollator)(unsafe.Pointer(r1))
-}
-
-// ucol_openElements calls icuin!ucol_openElements.
-func Ucol_openElements(coll *UCollator, text *uint16, textLength int32, status *UErrorCode) *UCollationElements {
-	r1, _, _ := syscall.SyscallN(procUcol_openElements.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
-	return (*UCollationElements)(unsafe.Pointer(r1))
-}
-
-// ucol_openRules calls icuin!ucol_openRules.
-func Ucol_openRules(rules *uint16, rulesLength int32, normalizationMode UColAttributeValue, strength UColAttributeValue, parseError *UParseError, status *UErrorCode) *UCollator {
-	r1, _, _ := syscall.SyscallN(procUcol_openRules.Addr(), uintptr(unsafe.Pointer(rules)), uintptr(rulesLength), uintptr(normalizationMode), uintptr(strength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
-	return (*UCollator)(unsafe.Pointer(r1))
-}
-
-// ucol_previous calls icuin!ucol_previous.
-func Ucol_previous(elems *UCollationElements, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_previous.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucol_primaryOrder calls icuin!ucol_primaryOrder.
-func Ucol_primaryOrder(order int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_primaryOrder.Addr(), uintptr(order))
-	return int32(r1)
-}
-
-// ucol_reset calls icuin!ucol_reset.
-func Ucol_reset(elems *UCollationElements) {
-	syscall.SyscallN(procUcol_reset.Addr(), uintptr(unsafe.Pointer(elems)))
-}
-
-// ucol_safeClone calls icuin!ucol_safeClone.
-func Ucol_safeClone(coll *UCollator, stackBuffer unsafe.Pointer, pBufferSize *int32, status *UErrorCode) *UCollator {
-	r1, _, _ := syscall.SyscallN(procUcol_safeClone.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(stackBuffer)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(status)))
-	return (*UCollator)(unsafe.Pointer(r1))
-}
-
-// ucol_secondaryOrder calls icuin!ucol_secondaryOrder.
-func Ucol_secondaryOrder(order int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_secondaryOrder.Addr(), uintptr(order))
-	return int32(r1)
-}
-
-// ucol_setAttribute calls icuin!ucol_setAttribute.
-func Ucol_setAttribute(coll *UCollator, attr UColAttribute, value UColAttributeValue, status *UErrorCode) {
-	syscall.SyscallN(procUcol_setAttribute.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(attr), uintptr(value), uintptr(unsafe.Pointer(status)))
-}
-
-// ucol_setMaxVariable calls icuin!ucol_setMaxVariable.
-func Ucol_setMaxVariable(coll *UCollator, group UColReorderCode, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUcol_setMaxVariable.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(group), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ucol_setOffset calls icuin!ucol_setOffset.
-func Ucol_setOffset(elems *UCollationElements, offset int32, status *UErrorCode) {
-	syscall.SyscallN(procUcol_setOffset.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(offset), uintptr(unsafe.Pointer(status)))
-}
-
-// ucol_setReorderCodes calls icuin!ucol_setReorderCodes.
-func Ucol_setReorderCodes(coll *UCollator, reorderCodes *int32, reorderCodesLength int32, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUcol_setReorderCodes.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(reorderCodes)), uintptr(reorderCodesLength), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// ucol_setStrength calls icuin!ucol_setStrength.
-func Ucol_setStrength(coll *UCollator, strength UColAttributeValue) {
-	syscall.SyscallN(procUcol_setStrength.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(strength))
-}
-
-// ucol_setText calls icuin!ucol_setText.
-func Ucol_setText(elems *UCollationElements, text *uint16, textLength int32, status *UErrorCode) {
-	syscall.SyscallN(procUcol_setText.Addr(), uintptr(unsafe.Pointer(elems)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
-}
-
-// ucol_strcoll calls icuin!ucol_strcoll.
-func Ucol_strcoll(coll *UCollator, source *uint16, sourceLength int32, target *uint16, targetLength int32) UCollationResult {
-	r1, _, _ := syscall.SyscallN(procUcol_strcoll.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength))
-	return UCollationResult(r1)
-}
-
-// ucol_strcollIter calls icuin!ucol_strcollIter.
-func Ucol_strcollIter(coll *UCollator, sIter *UCharIterator, tIter *UCharIterator, status *UErrorCode) UCollationResult {
-	r1, _, _ := syscall.SyscallN(procUcol_strcollIter.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(sIter)), uintptr(unsafe.Pointer(tIter)), uintptr(unsafe.Pointer(status)))
-	return UCollationResult(r1)
-}
-
-// ucol_strcollUTF8 calls icuin!ucol_strcollUTF8.
-func Ucol_strcollUTF8(coll *UCollator, source foundation.PSTR, sourceLength int32, target foundation.PSTR, targetLength int32, status *UErrorCode) UCollationResult {
-	r1, _, _ := syscall.SyscallN(procUcol_strcollUTF8.Addr(), uintptr(unsafe.Pointer(coll)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(target)), uintptr(targetLength), uintptr(unsafe.Pointer(status)))
-	return UCollationResult(r1)
-}
-
-// ucol_tertiaryOrder calls icuin!ucol_tertiaryOrder.
-func Ucol_tertiaryOrder(order int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcol_tertiaryOrder.Addr(), uintptr(order))
-	return int32(r1)
-}
-
-// ucpmap_get calls icu!ucpmap_get.
-func Ucpmap_get(map_ *UCPMap, c int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procUcpmap_get.Addr(), uintptr(unsafe.Pointer(map_)), uintptr(c))
-	return uint32(r1)
-}
-
-// ucpmap_getRange calls icu!ucpmap_getRange.
-func Ucpmap_getRange(map_ *UCPMap, start int32, option UCPMapRangeOption, surrogateValue uint32, filter *UCPMapValueFilter, context unsafe.Pointer, pValue *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcpmap_getRange.Addr(), uintptr(unsafe.Pointer(map_)), uintptr(start), uintptr(option), uintptr(surrogateValue), uintptr(unsafe.Pointer(filter)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(pValue)))
-	return int32(r1)
-}
-
-// ucptrie_close calls icu!ucptrie_close.
-func Ucptrie_close(trie *UCPTrie) {
-	syscall.SyscallN(procUcptrie_close.Addr(), uintptr(unsafe.Pointer(trie)))
-}
-
-// ucptrie_get calls icu!ucptrie_get.
-func Ucptrie_get(trie *UCPTrie, c int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procUcptrie_get.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c))
-	return uint32(r1)
-}
-
-// ucptrie_getRange calls icu!ucptrie_getRange.
-func Ucptrie_getRange(trie *UCPTrie, start int32, option UCPMapRangeOption, surrogateValue uint32, filter *UCPMapValueFilter, context unsafe.Pointer, pValue *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcptrie_getRange.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(start), uintptr(option), uintptr(surrogateValue), uintptr(unsafe.Pointer(filter)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(pValue)))
-	return int32(r1)
-}
-
-// ucptrie_getType calls icu!ucptrie_getType.
-func Ucptrie_getType(trie *UCPTrie) UCPTrieType {
-	r1, _, _ := syscall.SyscallN(procUcptrie_getType.Addr(), uintptr(unsafe.Pointer(trie)))
-	return UCPTrieType(r1)
-}
-
-// ucptrie_getValueWidth calls icu!ucptrie_getValueWidth.
-func Ucptrie_getValueWidth(trie *UCPTrie) UCPTrieValueWidth {
-	r1, _, _ := syscall.SyscallN(procUcptrie_getValueWidth.Addr(), uintptr(unsafe.Pointer(trie)))
-	return UCPTrieValueWidth(r1)
-}
-
-// ucptrie_internalSmallIndex calls icu!ucptrie_internalSmallIndex.
-func Ucptrie_internalSmallIndex(trie *UCPTrie, c int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUcptrie_internalSmallIndex.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c))
-	return int32(r1)
-}
-
-// ucptrie_internalSmallU8Index calls icu!ucptrie_internalSmallU8Index.
-func Ucptrie_internalSmallU8Index(trie *UCPTrie, lt1 int32, t2 byte, t3 byte) int32 {
-	r1, _, _ := syscall.SyscallN(procUcptrie_internalSmallU8Index.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(lt1), uintptr(t2), uintptr(t3))
-	return int32(r1)
-}
-
-// ucptrie_internalU8PrevIndex calls icu!ucptrie_internalU8PrevIndex.
-func Ucptrie_internalU8PrevIndex(trie *UCPTrie, c int32, start *byte, src *byte) int32 {
-	r1, _, _ := syscall.SyscallN(procUcptrie_internalU8PrevIndex.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c), uintptr(unsafe.Pointer(start)), uintptr(unsafe.Pointer(src)))
-	return int32(r1)
-}
-
-// ucptrie_openFromBinary calls icu!ucptrie_openFromBinary.
-func Ucptrie_openFromBinary(type_ UCPTrieType, valueWidth UCPTrieValueWidth, data unsafe.Pointer, length int32, pActualLength *int32, pErrorCode *UErrorCode) *UCPTrie {
-	r1, _, _ := syscall.SyscallN(procUcptrie_openFromBinary.Addr(), uintptr(type_), uintptr(valueWidth), uintptr(unsafe.Pointer(data)), uintptr(length), uintptr(unsafe.Pointer(pActualLength)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UCPTrie)(unsafe.Pointer(r1))
-}
-
-// ucptrie_toBinary calls icu!ucptrie_toBinary.
-func Ucptrie_toBinary(trie *UCPTrie, data unsafe.Pointer, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcptrie_toBinary.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(unsafe.Pointer(data)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ucsdet_close calls icuin!ucsdet_close.
-func Ucsdet_close(ucsd *UCharsetDetector) {
-	syscall.SyscallN(procUcsdet_close.Addr(), uintptr(unsafe.Pointer(ucsd)))
-}
-
-// ucsdet_detect calls icuin!ucsdet_detect.
-func Ucsdet_detect(ucsd *UCharsetDetector, status *UErrorCode) *UCharsetMatch {
-	r1, _, _ := syscall.SyscallN(procUcsdet_detect.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(status)))
-	return (*UCharsetMatch)(unsafe.Pointer(r1))
-}
-
-// ucsdet_detectAll calls icuin!ucsdet_detectAll.
-func Ucsdet_detectAll(ucsd *UCharsetDetector, matchesFound *int32, status *UErrorCode) **UCharsetMatch {
-	r1, _, _ := syscall.SyscallN(procUcsdet_detectAll.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(matchesFound)), uintptr(unsafe.Pointer(status)))
-	return (**UCharsetMatch)(unsafe.Pointer(r1))
-}
-
-// ucsdet_enableInputFilter calls icuin!ucsdet_enableInputFilter.
-func Ucsdet_enableInputFilter(ucsd *UCharsetDetector, filter int8) int8 {
-	r1, _, _ := syscall.SyscallN(procUcsdet_enableInputFilter.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(filter))
-	return int8(r1)
-}
-
-// ucsdet_getAllDetectableCharsets calls icuin!ucsdet_getAllDetectableCharsets.
-func Ucsdet_getAllDetectableCharsets(ucsd *UCharsetDetector, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcsdet_getAllDetectableCharsets.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucsdet_getConfidence calls icuin!ucsdet_getConfidence.
-func Ucsdet_getConfidence(ucsm *UCharsetMatch, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcsdet_getConfidence.Addr(), uintptr(unsafe.Pointer(ucsm)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucsdet_getLanguage calls icuin!ucsdet_getLanguage.
-func Ucsdet_getLanguage(ucsm *UCharsetMatch, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcsdet_getLanguage.Addr(), uintptr(unsafe.Pointer(ucsm)), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucsdet_getName calls icuin!ucsdet_getName.
-func Ucsdet_getName(ucsm *UCharsetMatch, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUcsdet_getName.Addr(), uintptr(unsafe.Pointer(ucsm)), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ucsdet_getUChars calls icuin!ucsdet_getUChars.
-func Ucsdet_getUChars(ucsm *UCharsetMatch, buf *uint16, cap_ int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcsdet_getUChars.Addr(), uintptr(unsafe.Pointer(ucsm)), uintptr(unsafe.Pointer(buf)), uintptr(cap_), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ucsdet_isInputFilterEnabled calls icuin!ucsdet_isInputFilterEnabled.
-func Ucsdet_isInputFilterEnabled(ucsd *UCharsetDetector) int8 {
-	r1, _, _ := syscall.SyscallN(procUcsdet_isInputFilterEnabled.Addr(), uintptr(unsafe.Pointer(ucsd)))
-	return int8(r1)
-}
-
-// ucsdet_open calls icuin!ucsdet_open.
-func Ucsdet_open(status *UErrorCode) *UCharsetDetector {
-	r1, _, _ := syscall.SyscallN(procUcsdet_open.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*UCharsetDetector)(unsafe.Pointer(r1))
-}
-
-// ucsdet_setDeclaredEncoding calls icuin!ucsdet_setDeclaredEncoding.
-func Ucsdet_setDeclaredEncoding(ucsd *UCharsetDetector, encoding foundation.PSTR, length int32, status *UErrorCode) {
-	syscall.SyscallN(procUcsdet_setDeclaredEncoding.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(encoding)), uintptr(length), uintptr(unsafe.Pointer(status)))
-}
-
-// ucsdet_setText calls icuin!ucsdet_setText.
-func Ucsdet_setText(ucsd *UCharsetDetector, textIn foundation.PSTR, len_ int32, status *UErrorCode) {
-	syscall.SyscallN(procUcsdet_setText.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(textIn)), uintptr(len_), uintptr(unsafe.Pointer(status)))
-}
-
-// ucurr_forLocale calls icuuc!ucurr_forLocale.
-func Ucurr_forLocale(locale foundation.PSTR, buff *uint16, buffCapacity int32, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcurr_forLocale.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(buff)), uintptr(buffCapacity), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// ucurr_getDefaultFractionDigits calls icuuc!ucurr_getDefaultFractionDigits.
-func Ucurr_getDefaultFractionDigits(currency *uint16, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcurr_getDefaultFractionDigits.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// ucurr_getDefaultFractionDigitsForUsage calls icuuc!ucurr_getDefaultFractionDigitsForUsage.
-func Ucurr_getDefaultFractionDigitsForUsage(currency *uint16, usage UCurrencyUsage, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUcurr_getDefaultFractionDigitsForUsage.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(usage), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// ucurr_getKeywordValuesForLocale calls icuuc!ucurr_getKeywordValuesForLocale.
-func Ucurr_getKeywordValuesForLocale(key foundation.PSTR, locale foundation.PSTR, commonlyUsed int8, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcurr_getKeywordValuesForLocale.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(locale)), uintptr(commonlyUsed), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucurr_getName calls icuuc!ucurr_getName.
-func Ucurr_getName(currency *uint16, locale foundation.PSTR, nameStyle UCurrNameStyle, isChoiceFormat *int8, len_ *int32, ec *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUcurr_getName.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(locale)), uintptr(nameStyle), uintptr(unsafe.Pointer(isChoiceFormat)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(ec)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ucurr_getNumericCode calls icuuc!ucurr_getNumericCode.
-func Ucurr_getNumericCode(currency *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procUcurr_getNumericCode.Addr(), uintptr(unsafe.Pointer(currency)))
-	return int32(r1)
-}
-
-// ucurr_getPluralName calls icuuc!ucurr_getPluralName.
-func Ucurr_getPluralName(currency *uint16, locale foundation.PSTR, isChoiceFormat *int8, pluralCount foundation.PSTR, len_ *int32, ec *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUcurr_getPluralName.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(isChoiceFormat)), uintptr(unsafe.Pointer(pluralCount)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(ec)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ucurr_openISOCurrencies calls icuuc!ucurr_openISOCurrencies.
-func Ucurr_openISOCurrencies(currType uint32, pErrorCode *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUcurr_openISOCurrencies.Addr(), uintptr(currType), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ucurr_register calls icuuc!ucurr_register.
-func Ucurr_register(isoCode *uint16, locale foundation.PSTR, status *UErrorCode) unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUcurr_register.Addr(), uintptr(unsafe.Pointer(isoCode)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
-	return unsafe.Pointer(r1)
-}
-
-// ucurr_unregister calls icuuc!ucurr_unregister.
-func Ucurr_unregister(key unsafe.Pointer, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUcurr_unregister.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// udat_adoptNumberFormat calls icuin!udat_adoptNumberFormat.
-func Udat_adoptNumberFormat(fmt *unsafe.Pointer, numberFormatToAdopt *unsafe.Pointer) {
-	syscall.SyscallN(procUdat_adoptNumberFormat.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(numberFormatToAdopt)))
-}
-
-// udat_adoptNumberFormatForFields calls icuin!udat_adoptNumberFormatForFields.
-func Udat_adoptNumberFormatForFields(fmt *unsafe.Pointer, fields *uint16, numberFormatToSet *unsafe.Pointer, status *UErrorCode) {
-	syscall.SyscallN(procUdat_adoptNumberFormatForFields.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(fields)), uintptr(unsafe.Pointer(numberFormatToSet)), uintptr(unsafe.Pointer(status)))
-}
-
-// udat_applyPattern calls icuin!udat_applyPattern.
-func Udat_applyPattern(format *unsafe.Pointer, localized int8, pattern *uint16, patternLength int32) {
-	syscall.SyscallN(procUdat_applyPattern.Addr(), uintptr(unsafe.Pointer(format)), uintptr(localized), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength))
-}
-
-// udat_clone calls icuin!udat_clone.
-func Udat_clone(fmt *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUdat_clone.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// udat_close calls icuin!udat_close.
-func Udat_close(format *unsafe.Pointer) {
-	syscall.SyscallN(procUdat_close.Addr(), uintptr(unsafe.Pointer(format)))
-}
-
-// udat_countAvailable calls icuin!udat_countAvailable.
-func Udat_countAvailable() int32 {
-	r1, _, _ := syscall.SyscallN(procUdat_countAvailable.Addr())
-	return int32(r1)
-}
-
-// udat_countSymbols calls icuin!udat_countSymbols.
-func Udat_countSymbols(fmt *unsafe.Pointer, type_ UDateFormatSymbolType) int32 {
-	r1, _, _ := syscall.SyscallN(procUdat_countSymbols.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_))
-	return int32(r1)
-}
-
-// udat_formatCalendar calls icuin!udat_formatCalendar.
-func Udat_formatCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, result *uint16, capacity int32, position *UFieldPosition, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdat_formatCalendar.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(result)), uintptr(capacity), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// udat_formatCalendarForFields calls icuin!udat_formatCalendarForFields.
-func Udat_formatCalendarForFields(format *unsafe.Pointer, calendar *unsafe.Pointer, result *uint16, capacity int32, fpositer *UFieldPositionIterator, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdat_formatCalendarForFields.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(result)), uintptr(capacity), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// udat_getAvailable calls icuin!udat_getAvailable.
-func Udat_getAvailable(localeIndex int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUdat_getAvailable.Addr(), uintptr(localeIndex))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// udat_getBooleanAttribute calls icuin!udat_getBooleanAttribute.
-func Udat_getBooleanAttribute(fmt *unsafe.Pointer, attr UDateFormatBooleanAttribute, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUdat_getBooleanAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(attr), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// udat_getCalendar calls icuin!udat_getCalendar.
-func Udat_getCalendar(fmt *unsafe.Pointer) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUdat_getCalendar.Addr(), uintptr(unsafe.Pointer(fmt)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// udat_getContext calls icuin!udat_getContext.
-func Udat_getContext(fmt *unsafe.Pointer, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
-	r1, _, _ := syscall.SyscallN(procUdat_getContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return UDisplayContext(r1)
-}
-
-// udat_getLocaleByType calls icuin!udat_getLocaleByType.
-func Udat_getLocaleByType(fmt *unsafe.Pointer, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUdat_getLocaleByType.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// udat_getNumberFormat calls icuin!udat_getNumberFormat.
-func Udat_getNumberFormat(fmt *unsafe.Pointer) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUdat_getNumberFormat.Addr(), uintptr(unsafe.Pointer(fmt)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// udat_getNumberFormatForField calls icuin!udat_getNumberFormatForField.
-func Udat_getNumberFormatForField(fmt *unsafe.Pointer, field uint16) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUdat_getNumberFormatForField.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(field))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// udat_getSymbols calls icuin!udat_getSymbols.
-func Udat_getSymbols(fmt *unsafe.Pointer, type_ UDateFormatSymbolType, symbolIndex int32, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdat_getSymbols.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(symbolIndex), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// udat_isLenient calls icuin!udat_isLenient.
-func Udat_isLenient(fmt *unsafe.Pointer) int8 {
-	r1, _, _ := syscall.SyscallN(procUdat_isLenient.Addr(), uintptr(unsafe.Pointer(fmt)))
-	return int8(r1)
-}
-
-// udat_open calls icuin!udat_open.
-func Udat_open(timeStyle UDateFormatStyle, dateStyle UDateFormatStyle, locale foundation.PSTR, tzID *uint16, tzIDLength int32, pattern *uint16, patternLength int32, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUdat_open.Addr(), uintptr(timeStyle), uintptr(dateStyle), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(tzID)), uintptr(tzIDLength), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// udat_parseCalendar calls icuin!udat_parseCalendar.
-func Udat_parseCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) {
-	syscall.SyscallN(procUdat_parseCalendar.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
-}
-
-// udat_setBooleanAttribute calls icuin!udat_setBooleanAttribute.
-func Udat_setBooleanAttribute(fmt *unsafe.Pointer, attr UDateFormatBooleanAttribute, newValue int8, status *UErrorCode) {
-	syscall.SyscallN(procUdat_setBooleanAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(attr), uintptr(newValue), uintptr(unsafe.Pointer(status)))
-}
-
-// udat_setCalendar calls icuin!udat_setCalendar.
-func Udat_setCalendar(fmt *unsafe.Pointer, calendarToSet *unsafe.Pointer) {
-	syscall.SyscallN(procUdat_setCalendar.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(calendarToSet)))
-}
-
-// udat_setContext calls icuin!udat_setContext.
-func Udat_setContext(fmt *unsafe.Pointer, value UDisplayContext, status *UErrorCode) {
-	syscall.SyscallN(procUdat_setContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(value), uintptr(unsafe.Pointer(status)))
-}
-
-// udat_setLenient calls icuin!udat_setLenient.
-func Udat_setLenient(fmt *unsafe.Pointer, isLenient int8) {
-	syscall.SyscallN(procUdat_setLenient.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(isLenient))
-}
-
-// udat_setNumberFormat calls icuin!udat_setNumberFormat.
-func Udat_setNumberFormat(fmt *unsafe.Pointer, numberFormatToSet *unsafe.Pointer) {
-	syscall.SyscallN(procUdat_setNumberFormat.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(numberFormatToSet)))
-}
-
-// udat_setSymbols calls icuin!udat_setSymbols.
-func Udat_setSymbols(format *unsafe.Pointer, type_ UDateFormatSymbolType, symbolIndex int32, value *uint16, valueLength int32, status *UErrorCode) {
-	syscall.SyscallN(procUdat_setSymbols.Addr(), uintptr(unsafe.Pointer(format)), uintptr(type_), uintptr(symbolIndex), uintptr(unsafe.Pointer(value)), uintptr(valueLength), uintptr(unsafe.Pointer(status)))
-}
-
-// udat_toCalendarDateField calls icuin!udat_toCalendarDateField.
-func Udat_toCalendarDateField(field UDateFormatField) UCalendarDateFields {
-	r1, _, _ := syscall.SyscallN(procUdat_toCalendarDateField.Addr(), uintptr(field))
-	return UCalendarDateFields(r1)
-}
-
-// udat_toPattern calls icuin!udat_toPattern.
-func Udat_toPattern(fmt *unsafe.Pointer, localized int8, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdat_toPattern.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(localized), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// udatpg_addPattern calls icuin!udatpg_addPattern.
-func Udatpg_addPattern(dtpg *unsafe.Pointer, pattern *uint16, patternLength int32, override int8, conflictingPattern *uint16, capacity int32, pLength *int32, pErrorCode *UErrorCode) UDateTimePatternConflict {
-	r1, _, _ := syscall.SyscallN(procUdatpg_addPattern.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(override), uintptr(unsafe.Pointer(conflictingPattern)), uintptr(capacity), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(pErrorCode)))
-	return UDateTimePatternConflict(r1)
-}
-
-// udatpg_clone calls icuin!udatpg_clone.
-func Udatpg_clone(dtpg *unsafe.Pointer, pErrorCode *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUdatpg_clone.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// udatpg_close calls icuin!udatpg_close.
-func Udatpg_close(dtpg *unsafe.Pointer) {
-	syscall.SyscallN(procUdatpg_close.Addr(), uintptr(unsafe.Pointer(dtpg)))
-}
-
-// udatpg_getAppendItemFormat calls icuin!udatpg_getAppendItemFormat.
-func Udatpg_getAppendItemFormat(dtpg *unsafe.Pointer, field UDateTimePatternField, pLength *int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getAppendItemFormat.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(unsafe.Pointer(pLength)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// udatpg_getAppendItemName calls icuin!udatpg_getAppendItemName.
-func Udatpg_getAppendItemName(dtpg *unsafe.Pointer, field UDateTimePatternField, pLength *int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getAppendItemName.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(unsafe.Pointer(pLength)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// udatpg_getBaseSkeleton calls icuin!udatpg_getBaseSkeleton.
-func Udatpg_getBaseSkeleton(unusedDtpg *unsafe.Pointer, pattern *uint16, length int32, baseSkeleton *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getBaseSkeleton.Addr(), uintptr(unsafe.Pointer(unusedDtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(length), uintptr(unsafe.Pointer(baseSkeleton)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// udatpg_getBestPattern calls icuin!udatpg_getBestPattern.
-func Udatpg_getBestPattern(dtpg *unsafe.Pointer, skeleton *uint16, length int32, bestPattern *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getBestPattern.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(skeleton)), uintptr(length), uintptr(unsafe.Pointer(bestPattern)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// udatpg_getBestPatternWithOptions calls icuin!udatpg_getBestPatternWithOptions.
-func Udatpg_getBestPatternWithOptions(dtpg *unsafe.Pointer, skeleton *uint16, length int32, options UDateTimePatternMatchOptions, bestPattern *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getBestPatternWithOptions.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(skeleton)), uintptr(length), uintptr(options), uintptr(unsafe.Pointer(bestPattern)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// udatpg_getDateTimeFormat calls icuin!udatpg_getDateTimeFormat.
-func Udatpg_getDateTimeFormat(dtpg *unsafe.Pointer, pLength *int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getDateTimeFormat.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pLength)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// udatpg_getDecimal calls icuin!udatpg_getDecimal.
-func Udatpg_getDecimal(dtpg *unsafe.Pointer, pLength *int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getDecimal.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pLength)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// udatpg_getDefaultHourCycle calls icu!udatpg_getDefaultHourCycle.
-func Udatpg_getDefaultHourCycle(dtpg *unsafe.Pointer, pErrorCode *UErrorCode) UDateFormatHourCycle {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getDefaultHourCycle.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pErrorCode)))
-	return UDateFormatHourCycle(r1)
-}
-
-// udatpg_getFieldDisplayName calls icu!udatpg_getFieldDisplayName.
-func Udatpg_getFieldDisplayName(dtpg *unsafe.Pointer, field UDateTimePatternField, width UDateTimePGDisplayWidth, fieldName *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getFieldDisplayName.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(width), uintptr(unsafe.Pointer(fieldName)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// udatpg_getPatternForSkeleton calls icuin!udatpg_getPatternForSkeleton.
-func Udatpg_getPatternForSkeleton(dtpg *unsafe.Pointer, skeleton *uint16, skeletonLength int32, pLength *int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getPatternForSkeleton.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLength), uintptr(unsafe.Pointer(pLength)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// udatpg_getSkeleton calls icuin!udatpg_getSkeleton.
-func Udatpg_getSkeleton(unusedDtpg *unsafe.Pointer, pattern *uint16, length int32, skeleton *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_getSkeleton.Addr(), uintptr(unsafe.Pointer(unusedDtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(length), uintptr(unsafe.Pointer(skeleton)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// udatpg_open calls icuin!udatpg_open.
-func Udatpg_open(locale foundation.PSTR, pErrorCode *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUdatpg_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// udatpg_openBaseSkeletons calls icuin!udatpg_openBaseSkeletons.
-func Udatpg_openBaseSkeletons(dtpg *unsafe.Pointer, pErrorCode *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUdatpg_openBaseSkeletons.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// udatpg_openEmpty calls icuin!udatpg_openEmpty.
-func Udatpg_openEmpty(pErrorCode *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUdatpg_openEmpty.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// udatpg_openSkeletons calls icuin!udatpg_openSkeletons.
-func Udatpg_openSkeletons(dtpg *unsafe.Pointer, pErrorCode *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUdatpg_openSkeletons.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// udatpg_replaceFieldTypes calls icuin!udatpg_replaceFieldTypes.
-func Udatpg_replaceFieldTypes(dtpg *unsafe.Pointer, pattern *uint16, patternLength int32, skeleton *uint16, skeletonLength int32, dest *uint16, destCapacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_replaceFieldTypes.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLength), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// udatpg_replaceFieldTypesWithOptions calls icuin!udatpg_replaceFieldTypesWithOptions.
-func Udatpg_replaceFieldTypesWithOptions(dtpg *unsafe.Pointer, pattern *uint16, patternLength int32, skeleton *uint16, skeletonLength int32, options UDateTimePatternMatchOptions, dest *uint16, destCapacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUdatpg_replaceFieldTypesWithOptions.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLength), uintptr(options), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// udatpg_setAppendItemFormat calls icuin!udatpg_setAppendItemFormat.
-func Udatpg_setAppendItemFormat(dtpg *unsafe.Pointer, field UDateTimePatternField, value *uint16, length int32) {
-	syscall.SyscallN(procUdatpg_setAppendItemFormat.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(unsafe.Pointer(value)), uintptr(length))
-}
-
-// udatpg_setAppendItemName calls icuin!udatpg_setAppendItemName.
-func Udatpg_setAppendItemName(dtpg *unsafe.Pointer, field UDateTimePatternField, value *uint16, length int32) {
-	syscall.SyscallN(procUdatpg_setAppendItemName.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(field), uintptr(unsafe.Pointer(value)), uintptr(length))
-}
-
-// udatpg_setDateTimeFormat calls icuin!udatpg_setDateTimeFormat.
-func Udatpg_setDateTimeFormat(dtpg *unsafe.Pointer, dtFormat *uint16, length int32) {
-	syscall.SyscallN(procUdatpg_setDateTimeFormat.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(dtFormat)), uintptr(length))
-}
-
-// udatpg_setDecimal calls icuin!udatpg_setDecimal.
-func Udatpg_setDecimal(dtpg *unsafe.Pointer, decimal *uint16, length int32) {
-	syscall.SyscallN(procUdatpg_setDecimal.Addr(), uintptr(unsafe.Pointer(dtpg)), uintptr(unsafe.Pointer(decimal)), uintptr(length))
-}
-
-// udtitvfmt_close calls icuin!udtitvfmt_close.
-func Udtitvfmt_close(formatter *UDateIntervalFormat) {
-	syscall.SyscallN(procUdtitvfmt_close.Addr(), uintptr(unsafe.Pointer(formatter)))
-}
-
-// udtitvfmt_closeResult calls icu!udtitvfmt_closeResult.
-func Udtitvfmt_closeResult(uresult *UFormattedDateInterval) {
-	syscall.SyscallN(procUdtitvfmt_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
-}
-
-// udtitvfmt_getContext calls icu!udtitvfmt_getContext.
-func Udtitvfmt_getContext(formatter *UDateIntervalFormat, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
-	r1, _, _ := syscall.SyscallN(procUdtitvfmt_getContext.Addr(), uintptr(unsafe.Pointer(formatter)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return UDisplayContext(r1)
-}
-
-// udtitvfmt_open calls icuin!udtitvfmt_open.
-func Udtitvfmt_open(locale foundation.PSTR, skeleton *uint16, skeletonLength int32, tzID *uint16, tzIDLength int32, status *UErrorCode) *UDateIntervalFormat {
-	r1, _, _ := syscall.SyscallN(procUdtitvfmt_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLength), uintptr(unsafe.Pointer(tzID)), uintptr(tzIDLength), uintptr(unsafe.Pointer(status)))
-	return (*UDateIntervalFormat)(unsafe.Pointer(r1))
-}
-
-// udtitvfmt_openResult calls icu!udtitvfmt_openResult.
-func Udtitvfmt_openResult(ec *UErrorCode) *UFormattedDateInterval {
-	r1, _, _ := syscall.SyscallN(procUdtitvfmt_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedDateInterval)(unsafe.Pointer(r1))
-}
-
-// udtitvfmt_resultAsValue calls icu!udtitvfmt_resultAsValue.
-func Udtitvfmt_resultAsValue(uresult *UFormattedDateInterval, ec *UErrorCode) *UFormattedValue {
-	r1, _, _ := syscall.SyscallN(procUdtitvfmt_resultAsValue.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedValue)(unsafe.Pointer(r1))
-}
-
-// udtitvfmt_setContext calls icu!udtitvfmt_setContext.
-func Udtitvfmt_setContext(formatter *UDateIntervalFormat, value UDisplayContext, status *UErrorCode) {
-	syscall.SyscallN(procUdtitvfmt_setContext.Addr(), uintptr(unsafe.Pointer(formatter)), uintptr(value), uintptr(unsafe.Pointer(status)))
-}
-
-// uenum_close calls icuuc!uenum_close.
-func Uenum_close(en *UEnumeration) {
-	syscall.SyscallN(procUenum_close.Addr(), uintptr(unsafe.Pointer(en)))
-}
-
-// uenum_count calls icuuc!uenum_count.
-func Uenum_count(en *UEnumeration, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUenum_count.Addr(), uintptr(unsafe.Pointer(en)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uenum_next calls icuuc!uenum_next.
-func Uenum_next(en *UEnumeration, resultLength *int32, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUenum_next.Addr(), uintptr(unsafe.Pointer(en)), uintptr(unsafe.Pointer(resultLength)), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uenum_openCharStringsEnumeration calls icuuc!uenum_openCharStringsEnumeration.
-func Uenum_openCharStringsEnumeration(strings **int8, count int32, ec *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUenum_openCharStringsEnumeration.Addr(), uintptr(unsafe.Pointer(strings)), uintptr(count), uintptr(unsafe.Pointer(ec)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// uenum_openUCharStringsEnumeration calls icuuc!uenum_openUCharStringsEnumeration.
-func Uenum_openUCharStringsEnumeration(strings **uint16, count int32, ec *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUenum_openUCharStringsEnumeration.Addr(), uintptr(unsafe.Pointer(strings)), uintptr(count), uintptr(unsafe.Pointer(ec)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// uenum_reset calls icuuc!uenum_reset.
-func Uenum_reset(en *UEnumeration, status *UErrorCode) {
-	syscall.SyscallN(procUenum_reset.Addr(), uintptr(unsafe.Pointer(en)), uintptr(unsafe.Pointer(status)))
-}
-
-// uenum_unext calls icuuc!uenum_unext.
-func Uenum_unext(en *UEnumeration, resultLength *int32, status *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUenum_unext.Addr(), uintptr(unsafe.Pointer(en)), uintptr(unsafe.Pointer(resultLength)), uintptr(unsafe.Pointer(status)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ufieldpositer_close calls icuin!ufieldpositer_close.
-func Ufieldpositer_close(fpositer *UFieldPositionIterator) {
-	syscall.SyscallN(procUfieldpositer_close.Addr(), uintptr(unsafe.Pointer(fpositer)))
-}
-
-// ufieldpositer_next calls icuin!ufieldpositer_next.
-func Ufieldpositer_next(fpositer *UFieldPositionIterator, beginIndex *int32, endIndex *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUfieldpositer_next.Addr(), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(beginIndex)), uintptr(unsafe.Pointer(endIndex)))
-	return int32(r1)
-}
-
-// ufieldpositer_open calls icuin!ufieldpositer_open.
-func Ufieldpositer_open(status *UErrorCode) *UFieldPositionIterator {
-	r1, _, _ := syscall.SyscallN(procUfieldpositer_open.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*UFieldPositionIterator)(unsafe.Pointer(r1))
-}
-
-// ufmt_close calls icuin!ufmt_close.
-func Ufmt_close(fmt *unsafe.Pointer) {
-	syscall.SyscallN(procUfmt_close.Addr(), uintptr(unsafe.Pointer(fmt)))
-}
-
-// ufmt_getArrayItemByIndex calls icuin!ufmt_getArrayItemByIndex.
-func Ufmt_getArrayItemByIndex(fmt *unsafe.Pointer, n int32, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUfmt_getArrayItemByIndex.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(n), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// ufmt_getArrayLength calls icuin!ufmt_getArrayLength.
-func Ufmt_getArrayLength(fmt *unsafe.Pointer, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUfmt_getArrayLength.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ufmt_getDecNumChars calls icuin!ufmt_getDecNumChars.
-func Ufmt_getDecNumChars(fmt *unsafe.Pointer, len_ *int32, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUfmt_getDecNumChars.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ufmt_getInt64 calls icuin!ufmt_getInt64.
-func Ufmt_getInt64(fmt *unsafe.Pointer, status *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUfmt_getInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
-	return int64(r1)
-}
-
-// ufmt_getLong calls icuin!ufmt_getLong.
-func Ufmt_getLong(fmt *unsafe.Pointer, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUfmt_getLong.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ufmt_getObject calls icuin!ufmt_getObject.
-func Ufmt_getObject(fmt *unsafe.Pointer, status *UErrorCode) unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUfmt_getObject.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
-	return unsafe.Pointer(r1)
-}
-
-// ufmt_getType calls icuin!ufmt_getType.
-func Ufmt_getType(fmt *unsafe.Pointer, status *UErrorCode) UFormattableType {
-	r1, _, _ := syscall.SyscallN(procUfmt_getType.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
-	return UFormattableType(r1)
-}
-
-// ufmt_getUChars calls icuin!ufmt_getUChars.
-func Ufmt_getUChars(fmt *unsafe.Pointer, len_ *int32, status *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUfmt_getUChars.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ufmt_isNumeric calls icuin!ufmt_isNumeric.
-func Ufmt_isNumeric(fmt *unsafe.Pointer) int8 {
-	r1, _, _ := syscall.SyscallN(procUfmt_isNumeric.Addr(), uintptr(unsafe.Pointer(fmt)))
-	return int8(r1)
-}
-
-// ufmt_open calls icuin!ufmt_open.
-func Ufmt_open(status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUfmt_open.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// ufmtval_getString calls icu!ufmtval_getString.
-func Ufmtval_getString(ufmtval *UFormattedValue, pLength *int32, ec *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUfmtval_getString.Addr(), uintptr(unsafe.Pointer(ufmtval)), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(ec)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ufmtval_nextPosition calls icu!ufmtval_nextPosition.
-func Ufmtval_nextPosition(ufmtval *UFormattedValue, ucfpos *UConstrainedFieldPosition, ec *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUfmtval_nextPosition.Addr(), uintptr(unsafe.Pointer(ufmtval)), uintptr(unsafe.Pointer(ucfpos)), uintptr(unsafe.Pointer(ec)))
-	return int8(r1)
-}
-
-// ugender_getInstance calls icuin!ugender_getInstance.
-func Ugender_getInstance(locale foundation.PSTR, status *UErrorCode) *UGenderInfo {
-	r1, _, _ := syscall.SyscallN(procUgender_getInstance.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
-	return (*UGenderInfo)(unsafe.Pointer(r1))
-}
-
-// ugender_getListGender calls icuin!ugender_getListGender.
-func Ugender_getListGender(genderInfo *UGenderInfo, genders *UGender, size int32, status *UErrorCode) UGender {
-	r1, _, _ := syscall.SyscallN(procUgender_getListGender.Addr(), uintptr(unsafe.Pointer(genderInfo)), uintptr(unsafe.Pointer(genders)), uintptr(size), uintptr(unsafe.Pointer(status)))
-	return UGender(r1)
-}
-
-// uidna_close calls icuuc!uidna_close.
-func Uidna_close(idna *UIDNA) {
-	syscall.SyscallN(procUidna_close.Addr(), uintptr(unsafe.Pointer(idna)))
-}
-
-// uidna_labelToASCII calls icuuc!uidna_labelToASCII.
-func Uidna_labelToASCII(idna *UIDNA, label *uint16, length int32, dest *uint16, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUidna_labelToASCII.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(label)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uidna_labelToASCII_UTF8 calls icuuc!uidna_labelToASCII_UTF8.
-func Uidna_labelToASCII_UTF8(idna *UIDNA, label foundation.PSTR, length int32, dest foundation.PSTR, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUidna_labelToASCII_UTF8.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(label)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uidna_labelToUnicode calls icuuc!uidna_labelToUnicode.
-func Uidna_labelToUnicode(idna *UIDNA, label *uint16, length int32, dest *uint16, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUidna_labelToUnicode.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(label)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uidna_labelToUnicodeUTF8 calls icuuc!uidna_labelToUnicodeUTF8.
-func Uidna_labelToUnicodeUTF8(idna *UIDNA, label foundation.PSTR, length int32, dest foundation.PSTR, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUidna_labelToUnicodeUTF8.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(label)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uidna_nameToASCII calls icuuc!uidna_nameToASCII.
-func Uidna_nameToASCII(idna *UIDNA, name *uint16, length int32, dest *uint16, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUidna_nameToASCII.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(name)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uidna_nameToASCII_UTF8 calls icuuc!uidna_nameToASCII_UTF8.
-func Uidna_nameToASCII_UTF8(idna *UIDNA, name foundation.PSTR, length int32, dest foundation.PSTR, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUidna_nameToASCII_UTF8.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(name)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uidna_nameToUnicode calls icuuc!uidna_nameToUnicode.
-func Uidna_nameToUnicode(idna *UIDNA, name *uint16, length int32, dest *uint16, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUidna_nameToUnicode.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(name)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uidna_nameToUnicodeUTF8 calls icuuc!uidna_nameToUnicodeUTF8.
-func Uidna_nameToUnicodeUTF8(idna *UIDNA, name foundation.PSTR, length int32, dest foundation.PSTR, capacity int32, pInfo *UIDNAInfo, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUidna_nameToUnicodeUTF8.Addr(), uintptr(unsafe.Pointer(idna)), uintptr(unsafe.Pointer(name)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uidna_openUTS46 calls icuuc!uidna_openUTS46.
-func Uidna_openUTS46(options uint32, pErrorCode *UErrorCode) *UIDNA {
-	r1, _, _ := syscall.SyscallN(procUidna_openUTS46.Addr(), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UIDNA)(unsafe.Pointer(r1))
-}
-
-// uiter_current32 calls icuuc!uiter_current32.
-func Uiter_current32(iter *UCharIterator) int32 {
-	r1, _, _ := syscall.SyscallN(procUiter_current32.Addr(), uintptr(unsafe.Pointer(iter)))
-	return int32(r1)
-}
-
-// uiter_getState calls icuuc!uiter_getState.
-func Uiter_getState(iter *UCharIterator) uint32 {
-	r1, _, _ := syscall.SyscallN(procUiter_getState.Addr(), uintptr(unsafe.Pointer(iter)))
-	return uint32(r1)
-}
-
-// uiter_next32 calls icuuc!uiter_next32.
-func Uiter_next32(iter *UCharIterator) int32 {
-	r1, _, _ := syscall.SyscallN(procUiter_next32.Addr(), uintptr(unsafe.Pointer(iter)))
-	return int32(r1)
-}
-
-// uiter_previous32 calls icuuc!uiter_previous32.
-func Uiter_previous32(iter *UCharIterator) int32 {
-	r1, _, _ := syscall.SyscallN(procUiter_previous32.Addr(), uintptr(unsafe.Pointer(iter)))
-	return int32(r1)
-}
-
-// uiter_setState calls icuuc!uiter_setState.
-func Uiter_setState(iter *UCharIterator, state uint32, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUiter_setState.Addr(), uintptr(unsafe.Pointer(iter)), uintptr(state), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// uiter_setString calls icuuc!uiter_setString.
-func Uiter_setString(iter *UCharIterator, s *uint16, length int32) {
-	syscall.SyscallN(procUiter_setString.Addr(), uintptr(unsafe.Pointer(iter)), uintptr(unsafe.Pointer(s)), uintptr(length))
-}
-
-// uiter_setUTF16BE calls icuuc!uiter_setUTF16BE.
-func Uiter_setUTF16BE(iter *UCharIterator, s foundation.PSTR, length int32) {
-	syscall.SyscallN(procUiter_setUTF16BE.Addr(), uintptr(unsafe.Pointer(iter)), uintptr(unsafe.Pointer(s)), uintptr(length))
-}
-
-// uiter_setUTF8 calls icuuc!uiter_setUTF8.
-func Uiter_setUTF8(iter *UCharIterator, s foundation.PSTR, length int32) {
-	syscall.SyscallN(procUiter_setUTF8.Addr(), uintptr(unsafe.Pointer(iter)), uintptr(unsafe.Pointer(s)), uintptr(length))
-}
-
-// uldn_close calls icuuc!uldn_close.
-func Uldn_close(ldn *ULocaleDisplayNames) {
-	syscall.SyscallN(procUldn_close.Addr(), uintptr(unsafe.Pointer(ldn)))
-}
-
-// uldn_getContext calls icuuc!uldn_getContext.
-func Uldn_getContext(ldn *ULocaleDisplayNames, type_ UDisplayContextType, pErrorCode *UErrorCode) UDisplayContext {
-	r1, _, _ := syscall.SyscallN(procUldn_getContext.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(type_), uintptr(unsafe.Pointer(pErrorCode)))
-	return UDisplayContext(r1)
-}
-
-// uldn_getDialectHandling calls icuuc!uldn_getDialectHandling.
-func Uldn_getDialectHandling(ldn *ULocaleDisplayNames) UDialectHandling {
-	r1, _, _ := syscall.SyscallN(procUldn_getDialectHandling.Addr(), uintptr(unsafe.Pointer(ldn)))
-	return UDialectHandling(r1)
-}
-
-// uldn_getLocale calls icuuc!uldn_getLocale.
-func Uldn_getLocale(ldn *ULocaleDisplayNames) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUldn_getLocale.Addr(), uintptr(unsafe.Pointer(ldn)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uldn_keyDisplayName calls icuuc!uldn_keyDisplayName.
-func Uldn_keyDisplayName(ldn *ULocaleDisplayNames, key foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUldn_keyDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uldn_keyValueDisplayName calls icuuc!uldn_keyValueDisplayName.
-func Uldn_keyValueDisplayName(ldn *ULocaleDisplayNames, key foundation.PSTR, value foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUldn_keyValueDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uldn_languageDisplayName calls icuuc!uldn_languageDisplayName.
-func Uldn_languageDisplayName(ldn *ULocaleDisplayNames, lang foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUldn_languageDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(lang)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uldn_localeDisplayName calls icuuc!uldn_localeDisplayName.
-func Uldn_localeDisplayName(ldn *ULocaleDisplayNames, locale foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUldn_localeDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uldn_open calls icuuc!uldn_open.
-func Uldn_open(locale foundation.PSTR, dialectHandling UDialectHandling, pErrorCode *UErrorCode) *ULocaleDisplayNames {
-	r1, _, _ := syscall.SyscallN(procUldn_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(dialectHandling), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*ULocaleDisplayNames)(unsafe.Pointer(r1))
-}
-
-// uldn_openForContext calls icuuc!uldn_openForContext.
-func Uldn_openForContext(locale foundation.PSTR, contexts *UDisplayContext, length int32, pErrorCode *UErrorCode) *ULocaleDisplayNames {
-	r1, _, _ := syscall.SyscallN(procUldn_openForContext.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(contexts)), uintptr(length), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*ULocaleDisplayNames)(unsafe.Pointer(r1))
-}
-
-// uldn_regionDisplayName calls icuuc!uldn_regionDisplayName.
-func Uldn_regionDisplayName(ldn *ULocaleDisplayNames, region foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUldn_regionDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(region)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uldn_scriptCodeDisplayName calls icuuc!uldn_scriptCodeDisplayName.
-func Uldn_scriptCodeDisplayName(ldn *ULocaleDisplayNames, scriptCode UScriptCode, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUldn_scriptCodeDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(scriptCode), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uldn_scriptDisplayName calls icuuc!uldn_scriptDisplayName.
-func Uldn_scriptDisplayName(ldn *ULocaleDisplayNames, script foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUldn_scriptDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(script)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uldn_variantDisplayName calls icuuc!uldn_variantDisplayName.
-func Uldn_variantDisplayName(ldn *ULocaleDisplayNames, variant foundation.PSTR, result *uint16, maxResultSize int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUldn_variantDisplayName.Addr(), uintptr(unsafe.Pointer(ldn)), uintptr(unsafe.Pointer(variant)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// ulistfmt_close calls icuuc!ulistfmt_close.
-func Ulistfmt_close(listfmt *UListFormatter) {
-	syscall.SyscallN(procUlistfmt_close.Addr(), uintptr(unsafe.Pointer(listfmt)))
-}
-
-// ulistfmt_closeResult calls icu!ulistfmt_closeResult.
-func Ulistfmt_closeResult(uresult *UFormattedList) {
-	syscall.SyscallN(procUlistfmt_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
-}
-
-// ulistfmt_format calls icuuc!ulistfmt_format.
-func Ulistfmt_format(listfmt *UListFormatter, strings **uint16, stringLengths *int32, stringCount int32, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUlistfmt_format.Addr(), uintptr(unsafe.Pointer(listfmt)), uintptr(unsafe.Pointer(strings)), uintptr(unsafe.Pointer(stringLengths)), uintptr(stringCount), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ulistfmt_formatStringsToResult calls icu!ulistfmt_formatStringsToResult.
-func Ulistfmt_formatStringsToResult(listfmt *UListFormatter, strings **uint16, stringLengths *int32, stringCount int32, uresult *UFormattedList, status *UErrorCode) {
-	syscall.SyscallN(procUlistfmt_formatStringsToResult.Addr(), uintptr(unsafe.Pointer(listfmt)), uintptr(unsafe.Pointer(strings)), uintptr(unsafe.Pointer(stringLengths)), uintptr(stringCount), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(status)))
-}
-
-// ulistfmt_open calls icuuc!ulistfmt_open.
-func Ulistfmt_open(locale foundation.PSTR, status *UErrorCode) *UListFormatter {
-	r1, _, _ := syscall.SyscallN(procUlistfmt_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
-	return (*UListFormatter)(unsafe.Pointer(r1))
-}
-
-// ulistfmt_openForType calls icu!ulistfmt_openForType.
-func Ulistfmt_openForType(locale foundation.PSTR, type_ UListFormatterType, width UListFormatterWidth, status *UErrorCode) *UListFormatter {
-	r1, _, _ := syscall.SyscallN(procUlistfmt_openForType.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(width), uintptr(unsafe.Pointer(status)))
-	return (*UListFormatter)(unsafe.Pointer(r1))
-}
-
-// ulistfmt_openResult calls icu!ulistfmt_openResult.
-func Ulistfmt_openResult(ec *UErrorCode) *UFormattedList {
-	r1, _, _ := syscall.SyscallN(procUlistfmt_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedList)(unsafe.Pointer(r1))
-}
-
-// ulistfmt_resultAsValue calls icu!ulistfmt_resultAsValue.
-func Ulistfmt_resultAsValue(uresult *UFormattedList, ec *UErrorCode) *UFormattedValue {
-	r1, _, _ := syscall.SyscallN(procUlistfmt_resultAsValue.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedValue)(unsafe.Pointer(r1))
-}
-
-// uloc_acceptLanguage calls icuuc!uloc_acceptLanguage.
-func Uloc_acceptLanguage(result foundation.PSTR, resultAvailable int32, outResult *UAcceptResult, acceptList **int8, acceptListCount int32, availableLocales *UEnumeration, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_acceptLanguage.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultAvailable), uintptr(unsafe.Pointer(outResult)), uintptr(unsafe.Pointer(acceptList)), uintptr(acceptListCount), uintptr(unsafe.Pointer(availableLocales)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_acceptLanguageFromHTTP calls icuuc!uloc_acceptLanguageFromHTTP.
-func Uloc_acceptLanguageFromHTTP(result foundation.PSTR, resultAvailable int32, outResult *UAcceptResult, httpAcceptLanguage foundation.PSTR, availableLocales *UEnumeration, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_acceptLanguageFromHTTP.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultAvailable), uintptr(unsafe.Pointer(outResult)), uintptr(unsafe.Pointer(httpAcceptLanguage)), uintptr(unsafe.Pointer(availableLocales)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_addLikelySubtags calls icuuc!uloc_addLikelySubtags.
-func Uloc_addLikelySubtags(localeID foundation.PSTR, maximizedLocaleID foundation.PSTR, maximizedLocaleIDCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_addLikelySubtags.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(maximizedLocaleID)), uintptr(maximizedLocaleIDCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_canonicalize calls icuuc!uloc_canonicalize.
-func Uloc_canonicalize(localeID foundation.PSTR, name foundation.PSTR, nameCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_canonicalize.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(name)), uintptr(nameCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_countAvailable calls icuuc!uloc_countAvailable.
-func Uloc_countAvailable() int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_countAvailable.Addr())
-	return int32(r1)
-}
-
-// uloc_forLanguageTag calls icuuc!uloc_forLanguageTag.
-func Uloc_forLanguageTag(langtag foundation.PSTR, localeID foundation.PSTR, localeIDCapacity int32, parsedLength *int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_forLanguageTag.Addr(), uintptr(unsafe.Pointer(langtag)), uintptr(unsafe.Pointer(localeID)), uintptr(localeIDCapacity), uintptr(unsafe.Pointer(parsedLength)), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_getAvailable calls icuuc!uloc_getAvailable.
-func Uloc_getAvailable(n int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUloc_getAvailable.Addr(), uintptr(n))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uloc_getBaseName calls icuuc!uloc_getBaseName.
-func Uloc_getBaseName(localeID foundation.PSTR, name foundation.PSTR, nameCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getBaseName.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(name)), uintptr(nameCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_getCharacterOrientation calls icuuc!uloc_getCharacterOrientation.
-func Uloc_getCharacterOrientation(localeId foundation.PSTR, status *UErrorCode) ULayoutType {
-	r1, _, _ := syscall.SyscallN(procUloc_getCharacterOrientation.Addr(), uintptr(unsafe.Pointer(localeId)), uintptr(unsafe.Pointer(status)))
-	return ULayoutType(r1)
-}
-
-// uloc_getCountry calls icuuc!uloc_getCountry.
-func Uloc_getCountry(localeID foundation.PSTR, country foundation.PSTR, countryCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getCountry.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(country)), uintptr(countryCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_getDefault calls icuuc!uloc_getDefault.
-func Uloc_getDefault() foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUloc_getDefault.Addr())
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uloc_getDisplayCountry calls icuuc!uloc_getDisplayCountry.
-func Uloc_getDisplayCountry(locale foundation.PSTR, displayLocale foundation.PSTR, country *uint16, countryCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getDisplayCountry.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(country)), uintptr(countryCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_getDisplayKeyword calls icuuc!uloc_getDisplayKeyword.
-func Uloc_getDisplayKeyword(keyword foundation.PSTR, displayLocale foundation.PSTR, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getDisplayKeyword.Addr(), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_getDisplayKeywordValue calls icuuc!uloc_getDisplayKeywordValue.
-func Uloc_getDisplayKeywordValue(locale foundation.PSTR, keyword foundation.PSTR, displayLocale foundation.PSTR, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getDisplayKeywordValue.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_getDisplayLanguage calls icuuc!uloc_getDisplayLanguage.
-func Uloc_getDisplayLanguage(locale foundation.PSTR, displayLocale foundation.PSTR, language *uint16, languageCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getDisplayLanguage.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(language)), uintptr(languageCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_getDisplayName calls icuuc!uloc_getDisplayName.
-func Uloc_getDisplayName(localeID foundation.PSTR, inLocaleID foundation.PSTR, result *uint16, maxResultSize int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getDisplayName.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(inLocaleID)), uintptr(unsafe.Pointer(result)), uintptr(maxResultSize), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_getDisplayScript calls icuuc!uloc_getDisplayScript.
-func Uloc_getDisplayScript(locale foundation.PSTR, displayLocale foundation.PSTR, script *uint16, scriptCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getDisplayScript.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(script)), uintptr(scriptCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_getDisplayVariant calls icuuc!uloc_getDisplayVariant.
-func Uloc_getDisplayVariant(locale foundation.PSTR, displayLocale foundation.PSTR, variant *uint16, variantCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getDisplayVariant.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(displayLocale)), uintptr(unsafe.Pointer(variant)), uintptr(variantCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_getISO3Country calls icuuc!uloc_getISO3Country.
-func Uloc_getISO3Country(localeID foundation.PSTR) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUloc_getISO3Country.Addr(), uintptr(unsafe.Pointer(localeID)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uloc_getISO3Language calls icuuc!uloc_getISO3Language.
-func Uloc_getISO3Language(localeID foundation.PSTR) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUloc_getISO3Language.Addr(), uintptr(unsafe.Pointer(localeID)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uloc_getISOCountries calls icuuc!uloc_getISOCountries.
-func Uloc_getISOCountries() **int8 {
-	r1, _, _ := syscall.SyscallN(procUloc_getISOCountries.Addr())
-	return (**int8)(unsafe.Pointer(r1))
-}
-
-// uloc_getISOLanguages calls icuuc!uloc_getISOLanguages.
-func Uloc_getISOLanguages() **int8 {
-	r1, _, _ := syscall.SyscallN(procUloc_getISOLanguages.Addr())
-	return (**int8)(unsafe.Pointer(r1))
-}
-
-// uloc_getKeywordValue calls icuuc!uloc_getKeywordValue.
-func Uloc_getKeywordValue(localeID foundation.PSTR, keywordName foundation.PSTR, buffer foundation.PSTR, bufferCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getKeywordValue.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(keywordName)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_getLCID calls icuuc!uloc_getLCID.
-func Uloc_getLCID(localeID foundation.PSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getLCID.Addr(), uintptr(unsafe.Pointer(localeID)))
-	return uint32(r1)
-}
-
-// uloc_getLanguage calls icuuc!uloc_getLanguage.
-func Uloc_getLanguage(localeID foundation.PSTR, language foundation.PSTR, languageCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getLanguage.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(language)), uintptr(languageCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_getLineOrientation calls icuuc!uloc_getLineOrientation.
-func Uloc_getLineOrientation(localeId foundation.PSTR, status *UErrorCode) ULayoutType {
-	r1, _, _ := syscall.SyscallN(procUloc_getLineOrientation.Addr(), uintptr(unsafe.Pointer(localeId)), uintptr(unsafe.Pointer(status)))
-	return ULayoutType(r1)
-}
-
-// uloc_getLocaleForLCID calls icuuc!uloc_getLocaleForLCID.
-func Uloc_getLocaleForLCID(hostID uint32, locale foundation.PSTR, localeCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getLocaleForLCID.Addr(), uintptr(hostID), uintptr(unsafe.Pointer(locale)), uintptr(localeCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_getName calls icuuc!uloc_getName.
-func Uloc_getName(localeID foundation.PSTR, name foundation.PSTR, nameCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getName.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(name)), uintptr(nameCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_getParent calls icuuc!uloc_getParent.
-func Uloc_getParent(localeID foundation.PSTR, parent foundation.PSTR, parentCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getParent.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(parent)), uintptr(parentCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_getScript calls icuuc!uloc_getScript.
-func Uloc_getScript(localeID foundation.PSTR, script foundation.PSTR, scriptCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getScript.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(script)), uintptr(scriptCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_getVariant calls icuuc!uloc_getVariant.
-func Uloc_getVariant(localeID foundation.PSTR, variant foundation.PSTR, variantCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_getVariant.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(variant)), uintptr(variantCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_isRightToLeft calls icuuc!uloc_isRightToLeft.
-func Uloc_isRightToLeft(locale foundation.PSTR) int8 {
-	r1, _, _ := syscall.SyscallN(procUloc_isRightToLeft.Addr(), uintptr(unsafe.Pointer(locale)))
-	return int8(r1)
-}
-
-// uloc_minimizeSubtags calls icuuc!uloc_minimizeSubtags.
-func Uloc_minimizeSubtags(localeID foundation.PSTR, minimizedLocaleID foundation.PSTR, minimizedLocaleIDCapacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_minimizeSubtags.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(minimizedLocaleID)), uintptr(minimizedLocaleIDCapacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_openAvailableByType calls icu!uloc_openAvailableByType.
-func Uloc_openAvailableByType(type_ ULocAvailableType, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUloc_openAvailableByType.Addr(), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// uloc_openKeywords calls icuuc!uloc_openKeywords.
-func Uloc_openKeywords(localeID foundation.PSTR, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUloc_openKeywords.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// uloc_setDefault calls icuuc!uloc_setDefault.
-func Uloc_setDefault(localeID foundation.PSTR, status *UErrorCode) {
-	syscall.SyscallN(procUloc_setDefault.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(status)))
-}
-
-// uloc_setKeywordValue calls icuuc!uloc_setKeywordValue.
-func Uloc_setKeywordValue(keywordName foundation.PSTR, keywordValue foundation.PSTR, buffer foundation.PSTR, bufferCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_setKeywordValue.Addr(), uintptr(unsafe.Pointer(keywordName)), uintptr(unsafe.Pointer(keywordValue)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uloc_toLanguageTag calls icuuc!uloc_toLanguageTag.
-func Uloc_toLanguageTag(localeID foundation.PSTR, langtag foundation.PSTR, langtagCapacity int32, strict int8, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUloc_toLanguageTag.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(langtag)), uintptr(langtagCapacity), uintptr(strict), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uloc_toLegacyKey calls icuuc!uloc_toLegacyKey.
-func Uloc_toLegacyKey(keyword foundation.PSTR) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUloc_toLegacyKey.Addr(), uintptr(unsafe.Pointer(keyword)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uloc_toLegacyType calls icuuc!uloc_toLegacyType.
-func Uloc_toLegacyType(keyword foundation.PSTR, value foundation.PSTR) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUloc_toLegacyType.Addr(), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(value)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uloc_toUnicodeLocaleKey calls icuuc!uloc_toUnicodeLocaleKey.
-func Uloc_toUnicodeLocaleKey(keyword foundation.PSTR) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUloc_toUnicodeLocaleKey.Addr(), uintptr(unsafe.Pointer(keyword)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uloc_toUnicodeLocaleType calls icuuc!uloc_toUnicodeLocaleType.
-func Uloc_toUnicodeLocaleType(keyword foundation.PSTR, value foundation.PSTR) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUloc_toUnicodeLocaleType.Addr(), uintptr(unsafe.Pointer(keyword)), uintptr(unsafe.Pointer(value)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ulocdata_close calls icuin!ulocdata_close.
-func Ulocdata_close(uld *ULocaleData) {
-	syscall.SyscallN(procUlocdata_close.Addr(), uintptr(unsafe.Pointer(uld)))
-}
-
-// ulocdata_getCLDRVersion calls icuin!ulocdata_getCLDRVersion.
-func Ulocdata_getCLDRVersion(versionArray *byte, status *UErrorCode) {
-	syscall.SyscallN(procUlocdata_getCLDRVersion.Addr(), uintptr(unsafe.Pointer(versionArray)), uintptr(unsafe.Pointer(status)))
-}
-
-// ulocdata_getDelimiter calls icuin!ulocdata_getDelimiter.
-func Ulocdata_getDelimiter(uld *ULocaleData, type_ ULocaleDataDelimiterType, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUlocdata_getDelimiter.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(type_), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ulocdata_getExemplarSet calls icuin!ulocdata_getExemplarSet.
-func Ulocdata_getExemplarSet(uld *ULocaleData, fillIn *USet, options uint32, extype ULocaleDataExemplarSetType, status *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procUlocdata_getExemplarSet.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(unsafe.Pointer(fillIn)), uintptr(options), uintptr(extype), uintptr(unsafe.Pointer(status)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// ulocdata_getLocaleDisplayPattern calls icuin!ulocdata_getLocaleDisplayPattern.
-func Ulocdata_getLocaleDisplayPattern(uld *ULocaleData, pattern *uint16, patternCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUlocdata_getLocaleDisplayPattern.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(unsafe.Pointer(pattern)), uintptr(patternCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ulocdata_getLocaleSeparator calls icuin!ulocdata_getLocaleSeparator.
-func Ulocdata_getLocaleSeparator(uld *ULocaleData, separator *uint16, separatorCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUlocdata_getLocaleSeparator.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(unsafe.Pointer(separator)), uintptr(separatorCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ulocdata_getMeasurementSystem calls icuin!ulocdata_getMeasurementSystem.
-func Ulocdata_getMeasurementSystem(localeID foundation.PSTR, status *UErrorCode) UMeasurementSystem {
-	r1, _, _ := syscall.SyscallN(procUlocdata_getMeasurementSystem.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(status)))
-	return UMeasurementSystem(r1)
-}
-
-// ulocdata_getNoSubstitute calls icuin!ulocdata_getNoSubstitute.
-func Ulocdata_getNoSubstitute(uld *ULocaleData) int8 {
-	r1, _, _ := syscall.SyscallN(procUlocdata_getNoSubstitute.Addr(), uintptr(unsafe.Pointer(uld)))
-	return int8(r1)
-}
-
-// ulocdata_getPaperSize calls icuin!ulocdata_getPaperSize.
-func Ulocdata_getPaperSize(localeID foundation.PSTR, height *int32, width *int32, status *UErrorCode) {
-	syscall.SyscallN(procUlocdata_getPaperSize.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(height)), uintptr(unsafe.Pointer(width)), uintptr(unsafe.Pointer(status)))
-}
-
-// ulocdata_open calls icuin!ulocdata_open.
-func Ulocdata_open(localeID foundation.PSTR, status *UErrorCode) *ULocaleData {
-	r1, _, _ := syscall.SyscallN(procUlocdata_open.Addr(), uintptr(unsafe.Pointer(localeID)), uintptr(unsafe.Pointer(status)))
-	return (*ULocaleData)(unsafe.Pointer(r1))
-}
-
-// ulocdata_setNoSubstitute calls icuin!ulocdata_setNoSubstitute.
-func Ulocdata_setNoSubstitute(uld *ULocaleData, setting int8) {
-	syscall.SyscallN(procUlocdata_setNoSubstitute.Addr(), uintptr(unsafe.Pointer(uld)), uintptr(setting))
-}
-
-// umsg_applyPattern calls icuin!umsg_applyPattern.
-func Umsg_applyPattern(fmt *unsafe.Pointer, pattern *uint16, patternLength int32, parseError *UParseError, status *UErrorCode) {
-	syscall.SyscallN(procUmsg_applyPattern.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
-}
-
-// umsg_autoQuoteApostrophe calls icuin!umsg_autoQuoteApostrophe.
-func Umsg_autoQuoteApostrophe(pattern *uint16, patternLength int32, dest *uint16, destCapacity int32, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUmsg_autoQuoteApostrophe.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// umsg_clone calls icuin!umsg_clone.
-func Umsg_clone(fmt *unsafe.Pointer, status *UErrorCode) unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUmsg_clone.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
-	return unsafe.Pointer(r1)
-}
-
-// umsg_close calls icuin!umsg_close.
-func Umsg_close(format *unsafe.Pointer) {
-	syscall.SyscallN(procUmsg_close.Addr(), uintptr(unsafe.Pointer(format)))
-}
-
-// umsg_format calls icuin!umsg_format.
-func Umsg_format(fmt *unsafe.Pointer, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUmsg_format.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// umsg_getLocale calls icuin!umsg_getLocale.
-func Umsg_getLocale(fmt *unsafe.Pointer) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUmsg_getLocale.Addr(), uintptr(unsafe.Pointer(fmt)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// umsg_open calls icuin!umsg_open.
-func Umsg_open(pattern *uint16, patternLength int32, locale foundation.PSTR, parseError *UParseError, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUmsg_open.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// umsg_parse calls icuin!umsg_parse.
-func Umsg_parse(fmt *unsafe.Pointer, source *uint16, sourceLength int32, count *int32, status *UErrorCode) {
-	syscall.SyscallN(procUmsg_parse.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(status)))
-}
-
-// umsg_setLocale calls icuin!umsg_setLocale.
-func Umsg_setLocale(fmt *unsafe.Pointer, locale foundation.PSTR) {
-	syscall.SyscallN(procUmsg_setLocale.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(locale)))
-}
-
-// umsg_toPattern calls icuin!umsg_toPattern.
-func Umsg_toPattern(fmt *unsafe.Pointer, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUmsg_toPattern.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// umsg_vformat calls icuin!umsg_vformat.
-func Umsg_vformat(fmt *unsafe.Pointer, result *uint16, resultLength int32, ap *int8, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUmsg_vformat.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// umsg_vparse calls icuin!umsg_vparse.
-func Umsg_vparse(fmt *unsafe.Pointer, source *uint16, sourceLength int32, count *int32, ap *int8, status *UErrorCode) {
-	syscall.SyscallN(procUmsg_vparse.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(source)), uintptr(sourceLength), uintptr(unsafe.Pointer(count)), uintptr(unsafe.Pointer(ap)), uintptr(unsafe.Pointer(status)))
-}
-
-// umutablecptrie_buildImmutable calls icu!umutablecptrie_buildImmutable.
-func Umutablecptrie_buildImmutable(trie *UMutableCPTrie, type_ UCPTrieType, valueWidth UCPTrieValueWidth, pErrorCode *UErrorCode) *UCPTrie {
-	r1, _, _ := syscall.SyscallN(procUmutablecptrie_buildImmutable.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(type_), uintptr(valueWidth), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UCPTrie)(unsafe.Pointer(r1))
-}
-
-// umutablecptrie_clone calls icu!umutablecptrie_clone.
-func Umutablecptrie_clone(other *UMutableCPTrie, pErrorCode *UErrorCode) *UMutableCPTrie {
-	r1, _, _ := syscall.SyscallN(procUmutablecptrie_clone.Addr(), uintptr(unsafe.Pointer(other)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UMutableCPTrie)(unsafe.Pointer(r1))
-}
-
-// umutablecptrie_close calls icu!umutablecptrie_close.
-func Umutablecptrie_close(trie *UMutableCPTrie) {
-	syscall.SyscallN(procUmutablecptrie_close.Addr(), uintptr(unsafe.Pointer(trie)))
-}
-
-// umutablecptrie_fromUCPMap calls icu!umutablecptrie_fromUCPMap.
-func Umutablecptrie_fromUCPMap(map_ *UCPMap, pErrorCode *UErrorCode) *UMutableCPTrie {
-	r1, _, _ := syscall.SyscallN(procUmutablecptrie_fromUCPMap.Addr(), uintptr(unsafe.Pointer(map_)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UMutableCPTrie)(unsafe.Pointer(r1))
-}
-
-// umutablecptrie_fromUCPTrie calls icu!umutablecptrie_fromUCPTrie.
-func Umutablecptrie_fromUCPTrie(trie *UCPTrie, pErrorCode *UErrorCode) *UMutableCPTrie {
-	r1, _, _ := syscall.SyscallN(procUmutablecptrie_fromUCPTrie.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UMutableCPTrie)(unsafe.Pointer(r1))
-}
-
-// umutablecptrie_get calls icu!umutablecptrie_get.
-func Umutablecptrie_get(trie *UMutableCPTrie, c int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procUmutablecptrie_get.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c))
-	return uint32(r1)
-}
-
-// umutablecptrie_getRange calls icu!umutablecptrie_getRange.
-func Umutablecptrie_getRange(trie *UMutableCPTrie, start int32, option UCPMapRangeOption, surrogateValue uint32, filter *UCPMapValueFilter, context unsafe.Pointer, pValue *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procUmutablecptrie_getRange.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(start), uintptr(option), uintptr(surrogateValue), uintptr(unsafe.Pointer(filter)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(pValue)))
-	return int32(r1)
-}
-
-// umutablecptrie_open calls icu!umutablecptrie_open.
-func Umutablecptrie_open(initialValue uint32, errorValue uint32, pErrorCode *UErrorCode) *UMutableCPTrie {
-	r1, _, _ := syscall.SyscallN(procUmutablecptrie_open.Addr(), uintptr(initialValue), uintptr(errorValue), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UMutableCPTrie)(unsafe.Pointer(r1))
-}
-
-// umutablecptrie_set calls icu!umutablecptrie_set.
-func Umutablecptrie_set(trie *UMutableCPTrie, c int32, value uint32, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUmutablecptrie_set.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(c), uintptr(value), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// umutablecptrie_setRange calls icu!umutablecptrie_setRange.
-func Umutablecptrie_setRange(trie *UMutableCPTrie, start int32, end int32, value uint32, pErrorCode *UErrorCode) {
-	syscall.SyscallN(procUmutablecptrie_setRange.Addr(), uintptr(unsafe.Pointer(trie)), uintptr(start), uintptr(end), uintptr(value), uintptr(unsafe.Pointer(pErrorCode)))
-}
-
-// unorm2_append calls icuuc!unorm2_append.
-func Unorm2_append(norm2 *UNormalizer2, first *uint16, firstLength int32, firstCapacity int32, second *uint16, secondLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_append.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(first)), uintptr(firstLength), uintptr(firstCapacity), uintptr(unsafe.Pointer(second)), uintptr(secondLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// unorm2_close calls icuuc!unorm2_close.
-func Unorm2_close(norm2 *UNormalizer2) {
-	syscall.SyscallN(procUnorm2_close.Addr(), uintptr(unsafe.Pointer(norm2)))
-}
-
-// unorm2_composePair calls icuuc!unorm2_composePair.
-func Unorm2_composePair(norm2 *UNormalizer2, a int32, b int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_composePair.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(a), uintptr(b))
-	return int32(r1)
-}
-
-// unorm2_getCombiningClass calls icuuc!unorm2_getCombiningClass.
-func Unorm2_getCombiningClass(norm2 *UNormalizer2, c int32) byte {
-	r1, _, _ := syscall.SyscallN(procUnorm2_getCombiningClass.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c))
-	return byte(r1)
-}
-
-// unorm2_getDecomposition calls icuuc!unorm2_getDecomposition.
-func Unorm2_getDecomposition(norm2 *UNormalizer2, c int32, decomposition *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_getDecomposition.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c), uintptr(unsafe.Pointer(decomposition)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// unorm2_getInstance calls icuuc!unorm2_getInstance.
-func Unorm2_getInstance(packageName foundation.PSTR, name foundation.PSTR, mode UNormalization2Mode, pErrorCode *UErrorCode) *UNormalizer2 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_getInstance.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(name)), uintptr(mode), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UNormalizer2)(unsafe.Pointer(r1))
-}
-
-// unorm2_getNFCInstance calls icuuc!unorm2_getNFCInstance.
-func Unorm2_getNFCInstance(pErrorCode *UErrorCode) *UNormalizer2 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_getNFCInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UNormalizer2)(unsafe.Pointer(r1))
-}
-
-// unorm2_getNFDInstance calls icuuc!unorm2_getNFDInstance.
-func Unorm2_getNFDInstance(pErrorCode *UErrorCode) *UNormalizer2 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_getNFDInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UNormalizer2)(unsafe.Pointer(r1))
-}
-
-// unorm2_getNFKCCasefoldInstance calls icuuc!unorm2_getNFKCCasefoldInstance.
-func Unorm2_getNFKCCasefoldInstance(pErrorCode *UErrorCode) *UNormalizer2 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_getNFKCCasefoldInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UNormalizer2)(unsafe.Pointer(r1))
-}
-
-// unorm2_getNFKCInstance calls icuuc!unorm2_getNFKCInstance.
-func Unorm2_getNFKCInstance(pErrorCode *UErrorCode) *UNormalizer2 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_getNFKCInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UNormalizer2)(unsafe.Pointer(r1))
-}
-
-// unorm2_getNFKDInstance calls icuuc!unorm2_getNFKDInstance.
-func Unorm2_getNFKDInstance(pErrorCode *UErrorCode) *UNormalizer2 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_getNFKDInstance.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UNormalizer2)(unsafe.Pointer(r1))
-}
-
-// unorm2_getRawDecomposition calls icuuc!unorm2_getRawDecomposition.
-func Unorm2_getRawDecomposition(norm2 *UNormalizer2, c int32, decomposition *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_getRawDecomposition.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c), uintptr(unsafe.Pointer(decomposition)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// unorm2_hasBoundaryAfter calls icuuc!unorm2_hasBoundaryAfter.
-func Unorm2_hasBoundaryAfter(norm2 *UNormalizer2, c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_hasBoundaryAfter.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c))
-	return int8(r1)
-}
-
-// unorm2_hasBoundaryBefore calls icuuc!unorm2_hasBoundaryBefore.
-func Unorm2_hasBoundaryBefore(norm2 *UNormalizer2, c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_hasBoundaryBefore.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c))
-	return int8(r1)
-}
-
-// unorm2_isInert calls icuuc!unorm2_isInert.
-func Unorm2_isInert(norm2 *UNormalizer2, c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_isInert.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(c))
-	return int8(r1)
-}
-
-// unorm2_isNormalized calls icuuc!unorm2_isNormalized.
-func Unorm2_isNormalized(norm2 *UNormalizer2, s *uint16, length int32, pErrorCode *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_isNormalized.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(pErrorCode)))
-	return int8(r1)
-}
-
-// unorm2_normalize calls icuuc!unorm2_normalize.
-func Unorm2_normalize(norm2 *UNormalizer2, src *uint16, length int32, dest *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_normalize.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(src)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// unorm2_normalizeSecondAndAppend calls icuuc!unorm2_normalizeSecondAndAppend.
-func Unorm2_normalizeSecondAndAppend(norm2 *UNormalizer2, first *uint16, firstLength int32, firstCapacity int32, second *uint16, secondLength int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_normalizeSecondAndAppend.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(first)), uintptr(firstLength), uintptr(firstCapacity), uintptr(unsafe.Pointer(second)), uintptr(secondLength), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// unorm2_openFiltered calls icuuc!unorm2_openFiltered.
-func Unorm2_openFiltered(norm2 *UNormalizer2, filterSet *USet, pErrorCode *UErrorCode) *UNormalizer2 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_openFiltered.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(filterSet)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UNormalizer2)(unsafe.Pointer(r1))
-}
-
-// unorm2_quickCheck calls icuuc!unorm2_quickCheck.
-func Unorm2_quickCheck(norm2 *UNormalizer2, s *uint16, length int32, pErrorCode *UErrorCode) UNormalizationCheckResult {
-	r1, _, _ := syscall.SyscallN(procUnorm2_quickCheck.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(pErrorCode)))
-	return UNormalizationCheckResult(r1)
-}
-
-// unorm2_spanQuickCheckYes calls icuuc!unorm2_spanQuickCheckYes.
-func Unorm2_spanQuickCheckYes(norm2 *UNormalizer2, s *uint16, length int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnorm2_spanQuickCheckYes.Addr(), uintptr(unsafe.Pointer(norm2)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// unorm_compare calls icuuc!unorm_compare.
-func Unorm_compare(s1 *uint16, length1 int32, s2 *uint16, length2 int32, options uint32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnorm_compare.Addr(), uintptr(unsafe.Pointer(s1)), uintptr(length1), uintptr(unsafe.Pointer(s2)), uintptr(length2), uintptr(options), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// unum_applyPattern calls icuin!unum_applyPattern.
-func Unum_applyPattern(format *unsafe.Pointer, localized int8, pattern *uint16, patternLength int32, parseError *UParseError, status *UErrorCode) {
-	syscall.SyscallN(procUnum_applyPattern.Addr(), uintptr(unsafe.Pointer(format)), uintptr(localized), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
-}
-
-// unum_clone calls icuin!unum_clone.
-func Unum_clone(fmt *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUnum_clone.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// unum_close calls icuin!unum_close.
-func Unum_close(fmt *unsafe.Pointer) {
-	syscall.SyscallN(procUnum_close.Addr(), uintptr(unsafe.Pointer(fmt)))
-}
-
-// unum_countAvailable calls icuin!unum_countAvailable.
-func Unum_countAvailable() int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_countAvailable.Addr())
-	return int32(r1)
-}
-
-// unum_format calls icuin!unum_format.
-func Unum_format(fmt *unsafe.Pointer, number int32, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_format.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(number), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unum_formatDecimal calls icuin!unum_formatDecimal.
-func Unum_formatDecimal(fmt *unsafe.Pointer, number foundation.PSTR, length int32, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_formatDecimal.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(number)), uintptr(length), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unum_formatInt64 calls icuin!unum_formatInt64.
-func Unum_formatInt64(fmt *unsafe.Pointer, number int64, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_formatInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(number), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unum_formatUFormattable calls icuin!unum_formatUFormattable.
-func Unum_formatUFormattable(fmt *unsafe.Pointer, number *unsafe.Pointer, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_formatUFormattable.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(number)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unum_getAttribute calls icuin!unum_getAttribute.
-func Unum_getAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_getAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(attr))
-	return int32(r1)
-}
-
-// unum_getAvailable calls icuin!unum_getAvailable.
-func Unum_getAvailable(localeIndex int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUnum_getAvailable.Addr(), uintptr(localeIndex))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// unum_getContext calls icuin!unum_getContext.
-func Unum_getContext(fmt *unsafe.Pointer, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
-	r1, _, _ := syscall.SyscallN(procUnum_getContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return UDisplayContext(r1)
-}
-
-// unum_getLocaleByType calls icuin!unum_getLocaleByType.
-func Unum_getLocaleByType(fmt *unsafe.Pointer, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUnum_getLocaleByType.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// unum_getSymbol calls icuin!unum_getSymbol.
-func Unum_getSymbol(fmt *unsafe.Pointer, symbol UNumberFormatSymbol, buffer *uint16, size int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_getSymbol.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(symbol), uintptr(unsafe.Pointer(buffer)), uintptr(size), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unum_getTextAttribute calls icuin!unum_getTextAttribute.
-func Unum_getTextAttribute(fmt *unsafe.Pointer, tag UNumberFormatTextAttribute, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_getTextAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(tag), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unum_open calls icuin!unum_open.
-func Unum_open(style UNumberFormatStyle, pattern *uint16, patternLength int32, locale foundation.PSTR, parseErr *UParseError, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUnum_open.Addr(), uintptr(style), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(parseErr)), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// unum_parse calls icuin!unum_parse.
-func Unum_parse(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_parse.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unum_parseDecimal calls icuin!unum_parseDecimal.
-func Unum_parseDecimal(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, outBuf foundation.PSTR, outBufLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_parseDecimal.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(outBuf)), uintptr(outBufLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unum_parseInt64 calls icuin!unum_parseInt64.
-func Unum_parseInt64(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUnum_parseInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
-	return int64(r1)
-}
-
-// unum_parseToUFormattable calls icuin!unum_parseToUFormattable.
-func Unum_parseToUFormattable(fmt *unsafe.Pointer, result *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUnum_parseToUFormattable.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// unum_setAttribute calls icuin!unum_setAttribute.
-func Unum_setAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute, newValue int32) {
-	syscall.SyscallN(procUnum_setAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(attr), uintptr(newValue))
-}
-
-// unum_setContext calls icuin!unum_setContext.
-func Unum_setContext(fmt *unsafe.Pointer, value UDisplayContext, status *UErrorCode) {
-	syscall.SyscallN(procUnum_setContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(value), uintptr(unsafe.Pointer(status)))
-}
-
-// unum_setSymbol calls icuin!unum_setSymbol.
-func Unum_setSymbol(fmt *unsafe.Pointer, symbol UNumberFormatSymbol, value *uint16, length int32, status *UErrorCode) {
-	syscall.SyscallN(procUnum_setSymbol.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(symbol), uintptr(unsafe.Pointer(value)), uintptr(length), uintptr(unsafe.Pointer(status)))
-}
-
-// unum_setTextAttribute calls icuin!unum_setTextAttribute.
-func Unum_setTextAttribute(fmt *unsafe.Pointer, tag UNumberFormatTextAttribute, newValue *uint16, newValueLength int32, status *UErrorCode) {
-	syscall.SyscallN(procUnum_setTextAttribute.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(tag), uintptr(unsafe.Pointer(newValue)), uintptr(newValueLength), uintptr(unsafe.Pointer(status)))
-}
-
-// unum_toPattern calls icuin!unum_toPattern.
-func Unum_toPattern(fmt *unsafe.Pointer, isPatternLocalized int8, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnum_toPattern.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(isPatternLocalized), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unumf_close calls icu!unumf_close.
-func Unumf_close(uformatter *UNumberFormatter) {
-	syscall.SyscallN(procUnumf_close.Addr(), uintptr(unsafe.Pointer(uformatter)))
-}
-
-// unumf_closeResult calls icu!unumf_closeResult.
-func Unumf_closeResult(uresult *UFormattedNumber) {
-	syscall.SyscallN(procUnumf_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
-}
-
-// unumf_formatDecimal calls icu!unumf_formatDecimal.
-func Unumf_formatDecimal(uformatter *UNumberFormatter, value foundation.PSTR, valueLen int32, uresult *UFormattedNumber, ec *UErrorCode) {
-	syscall.SyscallN(procUnumf_formatDecimal.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(unsafe.Pointer(value)), uintptr(valueLen), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
-}
-
-// unumf_formatInt calls icu!unumf_formatInt.
-func Unumf_formatInt(uformatter *UNumberFormatter, value int64, uresult *UFormattedNumber, ec *UErrorCode) {
-	syscall.SyscallN(procUnumf_formatInt.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(value), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
-}
-
-// unumf_openForSkeletonAndLocale calls icu!unumf_openForSkeletonAndLocale.
-func Unumf_openForSkeletonAndLocale(skeleton *uint16, skeletonLen int32, locale foundation.PSTR, ec *UErrorCode) *UNumberFormatter {
-	r1, _, _ := syscall.SyscallN(procUnumf_openForSkeletonAndLocale.Addr(), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLen), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(ec)))
-	return (*UNumberFormatter)(unsafe.Pointer(r1))
-}
-
-// unumf_openForSkeletonAndLocaleWithError calls icu!unumf_openForSkeletonAndLocaleWithError.
-func Unumf_openForSkeletonAndLocaleWithError(skeleton *uint16, skeletonLen int32, locale foundation.PSTR, perror *UParseError, ec *UErrorCode) *UNumberFormatter {
-	r1, _, _ := syscall.SyscallN(procUnumf_openForSkeletonAndLocaleWithError.Addr(), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLen), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(perror)), uintptr(unsafe.Pointer(ec)))
-	return (*UNumberFormatter)(unsafe.Pointer(r1))
-}
-
-// unumf_openResult calls icu!unumf_openResult.
-func Unumf_openResult(ec *UErrorCode) *UFormattedNumber {
-	r1, _, _ := syscall.SyscallN(procUnumf_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedNumber)(unsafe.Pointer(r1))
-}
-
-// unumf_resultAsValue calls icu!unumf_resultAsValue.
-func Unumf_resultAsValue(uresult *UFormattedNumber, ec *UErrorCode) *UFormattedValue {
-	r1, _, _ := syscall.SyscallN(procUnumf_resultAsValue.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedValue)(unsafe.Pointer(r1))
-}
-
-// unumf_resultGetAllFieldPositions calls icu!unumf_resultGetAllFieldPositions.
-func Unumf_resultGetAllFieldPositions(uresult *UFormattedNumber, ufpositer *UFieldPositionIterator, ec *UErrorCode) {
-	syscall.SyscallN(procUnumf_resultGetAllFieldPositions.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ufpositer)), uintptr(unsafe.Pointer(ec)))
-}
-
-// unumf_resultNextFieldPosition calls icu!unumf_resultNextFieldPosition.
-func Unumf_resultNextFieldPosition(uresult *UFormattedNumber, ufpos *UFieldPosition, ec *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUnumf_resultNextFieldPosition.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ufpos)), uintptr(unsafe.Pointer(ec)))
-	return int8(r1)
-}
-
-// unumf_resultToDecimalNumber calls icu!unumf_resultToDecimalNumber.
-func Unumf_resultToDecimalNumber(uresult *UFormattedNumber, dest foundation.PSTR, destCapacity int32, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnumf_resultToDecimalNumber.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// unumf_resultToString calls icu!unumf_resultToString.
-func Unumf_resultToString(uresult *UFormattedNumber, buffer *uint16, bufferCapacity int32, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnumf_resultToString.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferCapacity), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// unumrf_close calls icu!unumrf_close.
-func Unumrf_close(uformatter *UNumberRangeFormatter) {
-	syscall.SyscallN(procUnumrf_close.Addr(), uintptr(unsafe.Pointer(uformatter)))
-}
-
-// unumrf_closeResult calls icu!unumrf_closeResult.
-func Unumrf_closeResult(uresult *UFormattedNumberRange) {
-	syscall.SyscallN(procUnumrf_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
-}
-
-// unumrf_formatDecimalRange calls icu!unumrf_formatDecimalRange.
-func Unumrf_formatDecimalRange(uformatter *UNumberRangeFormatter, first foundation.PSTR, firstLen int32, second foundation.PSTR, secondLen int32, uresult *UFormattedNumberRange, ec *UErrorCode) {
-	syscall.SyscallN(procUnumrf_formatDecimalRange.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(unsafe.Pointer(first)), uintptr(firstLen), uintptr(unsafe.Pointer(second)), uintptr(secondLen), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
-}
-
-// unumrf_openForSkeletonWithCollapseAndIdentityFallback calls icu!unumrf_openForSkeletonWithCollapseAndIdentityFallback.
-func Unumrf_openForSkeletonWithCollapseAndIdentityFallback(skeleton *uint16, skeletonLen int32, collapse UNumberRangeCollapse, identityFallback UNumberRangeIdentityFallback, locale foundation.PSTR, perror *UParseError, ec *UErrorCode) *UNumberRangeFormatter {
-	r1, _, _ := syscall.SyscallN(procUnumrf_openForSkeletonWithCollapseAndIdentityFallback.Addr(), uintptr(unsafe.Pointer(skeleton)), uintptr(skeletonLen), uintptr(collapse), uintptr(identityFallback), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(perror)), uintptr(unsafe.Pointer(ec)))
-	return (*UNumberRangeFormatter)(unsafe.Pointer(r1))
-}
-
-// unumrf_openResult calls icu!unumrf_openResult.
-func Unumrf_openResult(ec *UErrorCode) *UFormattedNumberRange {
-	r1, _, _ := syscall.SyscallN(procUnumrf_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedNumberRange)(unsafe.Pointer(r1))
-}
-
-// unumrf_resultAsValue calls icu!unumrf_resultAsValue.
-func Unumrf_resultAsValue(uresult *UFormattedNumberRange, ec *UErrorCode) *UFormattedValue {
-	r1, _, _ := syscall.SyscallN(procUnumrf_resultAsValue.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedValue)(unsafe.Pointer(r1))
-}
-
-// unumrf_resultGetFirstDecimalNumber calls icu!unumrf_resultGetFirstDecimalNumber.
-func Unumrf_resultGetFirstDecimalNumber(uresult *UFormattedNumberRange, dest foundation.PSTR, destCapacity int32, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnumrf_resultGetFirstDecimalNumber.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// unumrf_resultGetIdentityResult calls icu!unumrf_resultGetIdentityResult.
-func Unumrf_resultGetIdentityResult(uresult *UFormattedNumberRange, ec *UErrorCode) UNumberRangeIdentityResult {
-	r1, _, _ := syscall.SyscallN(procUnumrf_resultGetIdentityResult.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
-	return UNumberRangeIdentityResult(r1)
-}
-
-// unumrf_resultGetSecondDecimalNumber calls icu!unumrf_resultGetSecondDecimalNumber.
-func Unumrf_resultGetSecondDecimalNumber(uresult *UFormattedNumberRange, dest foundation.PSTR, destCapacity int32, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnumrf_resultGetSecondDecimalNumber.Addr(), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// unumsys_close calls icuin!unumsys_close.
-func Unumsys_close(unumsys *UNumberingSystem) {
-	syscall.SyscallN(procUnumsys_close.Addr(), uintptr(unsafe.Pointer(unumsys)))
-}
-
-// unumsys_getDescription calls icuin!unumsys_getDescription.
-func Unumsys_getDescription(unumsys *UNumberingSystem, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUnumsys_getDescription.Addr(), uintptr(unsafe.Pointer(unumsys)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// unumsys_getName calls icuin!unumsys_getName.
-func Unumsys_getName(unumsys *UNumberingSystem) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUnumsys_getName.Addr(), uintptr(unsafe.Pointer(unumsys)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// unumsys_getRadix calls icuin!unumsys_getRadix.
-func Unumsys_getRadix(unumsys *UNumberingSystem) int32 {
-	r1, _, _ := syscall.SyscallN(procUnumsys_getRadix.Addr(), uintptr(unsafe.Pointer(unumsys)))
-	return int32(r1)
-}
-
-// unumsys_isAlgorithmic calls icuin!unumsys_isAlgorithmic.
-func Unumsys_isAlgorithmic(unumsys *UNumberingSystem) int8 {
-	r1, _, _ := syscall.SyscallN(procUnumsys_isAlgorithmic.Addr(), uintptr(unsafe.Pointer(unumsys)))
-	return int8(r1)
-}
-
-// unumsys_open calls icuin!unumsys_open.
-func Unumsys_open(locale foundation.PSTR, status *UErrorCode) *UNumberingSystem {
-	r1, _, _ := syscall.SyscallN(procUnumsys_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
-	return (*UNumberingSystem)(unsafe.Pointer(r1))
-}
-
-// unumsys_openAvailableNames calls icuin!unumsys_openAvailableNames.
-func Unumsys_openAvailableNames(status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUnumsys_openAvailableNames.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// unumsys_openByName calls icuin!unumsys_openByName.
-func Unumsys_openByName(name foundation.PSTR, status *UErrorCode) *UNumberingSystem {
-	r1, _, _ := syscall.SyscallN(procUnumsys_openByName.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(status)))
-	return (*UNumberingSystem)(unsafe.Pointer(r1))
-}
-
-// uplrules_close calls icuin!uplrules_close.
-func Uplrules_close(uplrules *UPluralRules) {
-	syscall.SyscallN(procUplrules_close.Addr(), uintptr(unsafe.Pointer(uplrules)))
-}
-
-// uplrules_getKeywords calls icuin!uplrules_getKeywords.
-func Uplrules_getKeywords(uplrules *UPluralRules, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUplrules_getKeywords.Addr(), uintptr(unsafe.Pointer(uplrules)), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// uplrules_open calls icuin!uplrules_open.
-func Uplrules_open(locale foundation.PSTR, status *UErrorCode) *UPluralRules {
-	r1, _, _ := syscall.SyscallN(procUplrules_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
-	return (*UPluralRules)(unsafe.Pointer(r1))
-}
-
-// uplrules_openForType calls icuin!uplrules_openForType.
-func Uplrules_openForType(locale foundation.PSTR, type_ UPluralType, status *UErrorCode) *UPluralRules {
-	r1, _, _ := syscall.SyscallN(procUplrules_openForType.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return (*UPluralRules)(unsafe.Pointer(r1))
-}
-
-// uplrules_selectFormatted calls icu!uplrules_selectFormatted.
-func Uplrules_selectFormatted(uplrules *UPluralRules, number *UFormattedNumber, keyword *uint16, capacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUplrules_selectFormatted.Addr(), uintptr(unsafe.Pointer(uplrules)), uintptr(unsafe.Pointer(number)), uintptr(unsafe.Pointer(keyword)), uintptr(capacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_appendReplacement calls icuin!uregex_appendReplacement.
-func Uregex_appendReplacement(regexp *URegularExpression, replacementText *uint16, replacementLength int32, destBuf **uint16, destCapacity *int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_appendReplacement.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacementText)), uintptr(replacementLength), uintptr(unsafe.Pointer(destBuf)), uintptr(unsafe.Pointer(destCapacity)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_appendReplacementUText calls icuin!uregex_appendReplacementUText.
-func Uregex_appendReplacementUText(regexp *URegularExpression, replacementText *UText, dest *UText, status *UErrorCode) {
-	syscall.SyscallN(procUregex_appendReplacementUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacementText)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_appendTail calls icuin!uregex_appendTail.
-func Uregex_appendTail(regexp *URegularExpression, destBuf **uint16, destCapacity *int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_appendTail.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(destBuf)), uintptr(unsafe.Pointer(destCapacity)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_appendTailUText calls icuin!uregex_appendTailUText.
-func Uregex_appendTailUText(regexp *URegularExpression, dest *UText, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUregex_appendTailUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// uregex_clone calls icuin!uregex_clone.
-func Uregex_clone(regexp *URegularExpression, status *UErrorCode) *URegularExpression {
-	r1, _, _ := syscall.SyscallN(procUregex_clone.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return (*URegularExpression)(unsafe.Pointer(r1))
-}
-
-// uregex_close calls icuin!uregex_close.
-func Uregex_close(regexp *URegularExpression) {
-	syscall.SyscallN(procUregex_close.Addr(), uintptr(unsafe.Pointer(regexp)))
-}
-
-// uregex_end calls icuin!uregex_end.
-func Uregex_end(regexp *URegularExpression, groupNum int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_end.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_end64 calls icuin!uregex_end64.
-func Uregex_end64(regexp *URegularExpression, groupNum int32, status *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUregex_end64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(status)))
-	return int64(r1)
-}
-
-// uregex_find calls icuin!uregex_find.
-func Uregex_find(regexp *URegularExpression, startIndex int32, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_find.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_find64 calls icuin!uregex_find64.
-func Uregex_find64(regexp *URegularExpression, startIndex int64, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_find64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_findNext calls icuin!uregex_findNext.
-func Uregex_findNext(regexp *URegularExpression, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_findNext.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_flags calls icuin!uregex_flags.
-func Uregex_flags(regexp *URegularExpression, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_flags.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_getFindProgressCallback calls icuin!uregex_getFindProgressCallback.
-func Uregex_getFindProgressCallback(regexp *URegularExpression, callback *URegexFindProgressCallback, context *unsafe.Pointer, status *UErrorCode) {
-	syscall.SyscallN(procUregex_getFindProgressCallback.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_getMatchCallback calls icuin!uregex_getMatchCallback.
-func Uregex_getMatchCallback(regexp *URegularExpression, callback *URegexMatchCallback, context *unsafe.Pointer, status *UErrorCode) {
-	syscall.SyscallN(procUregex_getMatchCallback.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_getStackLimit calls icuin!uregex_getStackLimit.
-func Uregex_getStackLimit(regexp *URegularExpression, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_getStackLimit.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_getText calls icuin!uregex_getText.
-func Uregex_getText(regexp *URegularExpression, textLength *int32, status *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUregex_getText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(textLength)), uintptr(unsafe.Pointer(status)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// uregex_getTimeLimit calls icuin!uregex_getTimeLimit.
-func Uregex_getTimeLimit(regexp *URegularExpression, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_getTimeLimit.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_getUText calls icuin!uregex_getUText.
-func Uregex_getUText(regexp *URegularExpression, dest *UText, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUregex_getUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// uregex_group calls icuin!uregex_group.
-func Uregex_group(regexp *URegularExpression, groupNum int32, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_group.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_groupCount calls icuin!uregex_groupCount.
-func Uregex_groupCount(regexp *URegularExpression, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_groupCount.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_groupNumberFromCName calls icuin!uregex_groupNumberFromCName.
-func Uregex_groupNumberFromCName(regexp *URegularExpression, groupName foundation.PSTR, nameLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_groupNumberFromCName.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(groupName)), uintptr(nameLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_groupNumberFromName calls icuin!uregex_groupNumberFromName.
-func Uregex_groupNumberFromName(regexp *URegularExpression, groupName *uint16, nameLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_groupNumberFromName.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(groupName)), uintptr(nameLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_groupUText calls icuin!uregex_groupUText.
-func Uregex_groupUText(regexp *URegularExpression, groupNum int32, dest *UText, groupLength *int64, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUregex_groupUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(groupLength)), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// uregex_hasAnchoringBounds calls icuin!uregex_hasAnchoringBounds.
-func Uregex_hasAnchoringBounds(regexp *URegularExpression, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_hasAnchoringBounds.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_hasTransparentBounds calls icuin!uregex_hasTransparentBounds.
-func Uregex_hasTransparentBounds(regexp *URegularExpression, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_hasTransparentBounds.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_hitEnd calls icuin!uregex_hitEnd.
-func Uregex_hitEnd(regexp *URegularExpression, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_hitEnd.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_lookingAt calls icuin!uregex_lookingAt.
-func Uregex_lookingAt(regexp *URegularExpression, startIndex int32, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_lookingAt.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_lookingAt64 calls icuin!uregex_lookingAt64.
-func Uregex_lookingAt64(regexp *URegularExpression, startIndex int64, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_lookingAt64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_matches calls icuin!uregex_matches.
-func Uregex_matches(regexp *URegularExpression, startIndex int32, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_matches.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_matches64 calls icuin!uregex_matches64.
-func Uregex_matches64(regexp *URegularExpression, startIndex int64, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_matches64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_open calls icuin!uregex_open.
-func Uregex_open(pattern *uint16, patternLength int32, flags uint32, pe *UParseError, status *UErrorCode) *URegularExpression {
-	r1, _, _ := syscall.SyscallN(procUregex_open.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(flags), uintptr(unsafe.Pointer(pe)), uintptr(unsafe.Pointer(status)))
-	return (*URegularExpression)(unsafe.Pointer(r1))
-}
-
-// uregex_openC calls icuin!uregex_openC.
-func Uregex_openC(pattern foundation.PSTR, flags uint32, pe *UParseError, status *UErrorCode) *URegularExpression {
-	r1, _, _ := syscall.SyscallN(procUregex_openC.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(flags), uintptr(unsafe.Pointer(pe)), uintptr(unsafe.Pointer(status)))
-	return (*URegularExpression)(unsafe.Pointer(r1))
-}
-
-// uregex_openUText calls icuin!uregex_openUText.
-func Uregex_openUText(pattern *UText, flags uint32, pe *UParseError, status *UErrorCode) *URegularExpression {
-	r1, _, _ := syscall.SyscallN(procUregex_openUText.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(flags), uintptr(unsafe.Pointer(pe)), uintptr(unsafe.Pointer(status)))
-	return (*URegularExpression)(unsafe.Pointer(r1))
-}
-
-// uregex_pattern calls icuin!uregex_pattern.
-func Uregex_pattern(regexp *URegularExpression, patLength *int32, status *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUregex_pattern.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(patLength)), uintptr(unsafe.Pointer(status)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// uregex_patternUText calls icuin!uregex_patternUText.
-func Uregex_patternUText(regexp *URegularExpression, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUregex_patternUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// uregex_refreshUText calls icuin!uregex_refreshUText.
-func Uregex_refreshUText(regexp *URegularExpression, text *UText, status *UErrorCode) {
-	syscall.SyscallN(procUregex_refreshUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_regionEnd calls icuin!uregex_regionEnd.
-func Uregex_regionEnd(regexp *URegularExpression, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_regionEnd.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_regionEnd64 calls icuin!uregex_regionEnd64.
-func Uregex_regionEnd64(regexp *URegularExpression, status *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUregex_regionEnd64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int64(r1)
-}
-
-// uregex_regionStart calls icuin!uregex_regionStart.
-func Uregex_regionStart(regexp *URegularExpression, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_regionStart.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_regionStart64 calls icuin!uregex_regionStart64.
-func Uregex_regionStart64(regexp *URegularExpression, status *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUregex_regionStart64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int64(r1)
-}
-
-// uregex_replaceAll calls icuin!uregex_replaceAll.
-func Uregex_replaceAll(regexp *URegularExpression, replacementText *uint16, replacementLength int32, destBuf *uint16, destCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_replaceAll.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacementText)), uintptr(replacementLength), uintptr(unsafe.Pointer(destBuf)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_replaceAllUText calls icuin!uregex_replaceAllUText.
-func Uregex_replaceAllUText(regexp *URegularExpression, replacement *UText, dest *UText, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUregex_replaceAllUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacement)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// uregex_replaceFirst calls icuin!uregex_replaceFirst.
-func Uregex_replaceFirst(regexp *URegularExpression, replacementText *uint16, replacementLength int32, destBuf *uint16, destCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_replaceFirst.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacementText)), uintptr(replacementLength), uintptr(unsafe.Pointer(destBuf)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_replaceFirstUText calls icuin!uregex_replaceFirstUText.
-func Uregex_replaceFirstUText(regexp *URegularExpression, replacement *UText, dest *UText, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUregex_replaceFirstUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(replacement)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// uregex_requireEnd calls icuin!uregex_requireEnd.
-func Uregex_requireEnd(regexp *URegularExpression, status *UErrorCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUregex_requireEnd.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(status)))
-	return int8(r1)
-}
-
-// uregex_reset calls icuin!uregex_reset.
-func Uregex_reset(regexp *URegularExpression, index int32, status *UErrorCode) {
-	syscall.SyscallN(procUregex_reset.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(index), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_reset64 calls icuin!uregex_reset64.
-func Uregex_reset64(regexp *URegularExpression, index int64, status *UErrorCode) {
-	syscall.SyscallN(procUregex_reset64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(index), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_setFindProgressCallback calls icuin!uregex_setFindProgressCallback.
-func Uregex_setFindProgressCallback(regexp *URegularExpression, callback URegexFindProgressCallback, context unsafe.Pointer, status *UErrorCode) {
-	syscall.SyscallN(procUregex_setFindProgressCallback.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_setMatchCallback calls icuin!uregex_setMatchCallback.
-func Uregex_setMatchCallback(regexp *URegularExpression, callback URegexMatchCallback, context unsafe.Pointer, status *UErrorCode) {
-	syscall.SyscallN(procUregex_setMatchCallback.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(callback), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_setRegion calls icuin!uregex_setRegion.
-func Uregex_setRegion(regexp *URegularExpression, regionStart int32, regionLimit int32, status *UErrorCode) {
-	syscall.SyscallN(procUregex_setRegion.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(regionStart), uintptr(regionLimit), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_setRegion64 calls icuin!uregex_setRegion64.
-func Uregex_setRegion64(regexp *URegularExpression, regionStart int64, regionLimit int64, status *UErrorCode) {
-	syscall.SyscallN(procUregex_setRegion64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(regionStart), uintptr(regionLimit), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_setRegionAndStart calls icuin!uregex_setRegionAndStart.
-func Uregex_setRegionAndStart(regexp *URegularExpression, regionStart int64, regionLimit int64, startIndex int64, status *UErrorCode) {
-	syscall.SyscallN(procUregex_setRegionAndStart.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(regionStart), uintptr(regionLimit), uintptr(startIndex), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_setStackLimit calls icuin!uregex_setStackLimit.
-func Uregex_setStackLimit(regexp *URegularExpression, limit int32, status *UErrorCode) {
-	syscall.SyscallN(procUregex_setStackLimit.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(limit), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_setText calls icuin!uregex_setText.
-func Uregex_setText(regexp *URegularExpression, text *uint16, textLength int32, status *UErrorCode) {
-	syscall.SyscallN(procUregex_setText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_setTimeLimit calls icuin!uregex_setTimeLimit.
-func Uregex_setTimeLimit(regexp *URegularExpression, limit int32, status *UErrorCode) {
-	syscall.SyscallN(procUregex_setTimeLimit.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(limit), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_setUText calls icuin!uregex_setUText.
-func Uregex_setUText(regexp *URegularExpression, text *UText, status *UErrorCode) {
-	syscall.SyscallN(procUregex_setUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_split calls icuin!uregex_split.
-func Uregex_split(regexp *URegularExpression, destBuf *uint16, destCapacity int32, requiredCapacity *int32, destFields **uint16, destFieldsCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_split.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(destBuf)), uintptr(destCapacity), uintptr(unsafe.Pointer(requiredCapacity)), uintptr(unsafe.Pointer(destFields)), uintptr(destFieldsCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_splitUText calls icuin!uregex_splitUText.
-func Uregex_splitUText(regexp *URegularExpression, destFields **UText, destFieldsCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_splitUText.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(unsafe.Pointer(destFields)), uintptr(destFieldsCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_start calls icuin!uregex_start.
-func Uregex_start(regexp *URegularExpression, groupNum int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUregex_start.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uregex_start64 calls icuin!uregex_start64.
-func Uregex_start64(regexp *URegularExpression, groupNum int32, status *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUregex_start64.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(groupNum), uintptr(unsafe.Pointer(status)))
-	return int64(r1)
-}
-
-// uregex_useAnchoringBounds calls icuin!uregex_useAnchoringBounds.
-func Uregex_useAnchoringBounds(regexp *URegularExpression, b int8, status *UErrorCode) {
-	syscall.SyscallN(procUregex_useAnchoringBounds.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(b), uintptr(unsafe.Pointer(status)))
-}
-
-// uregex_useTransparentBounds calls icuin!uregex_useTransparentBounds.
-func Uregex_useTransparentBounds(regexp *URegularExpression, b int8, status *UErrorCode) {
-	syscall.SyscallN(procUregex_useTransparentBounds.Addr(), uintptr(unsafe.Pointer(regexp)), uintptr(b), uintptr(unsafe.Pointer(status)))
-}
-
-// uregion_areEqual calls icuin!uregion_areEqual.
-func Uregion_areEqual(uregion *URegion, otherRegion *URegion) int8 {
-	r1, _, _ := syscall.SyscallN(procUregion_areEqual.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(unsafe.Pointer(otherRegion)))
-	return int8(r1)
-}
-
-// uregion_contains calls icuin!uregion_contains.
-func Uregion_contains(uregion *URegion, otherRegion *URegion) int8 {
-	r1, _, _ := syscall.SyscallN(procUregion_contains.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(unsafe.Pointer(otherRegion)))
-	return int8(r1)
-}
-
-// uregion_getAvailable calls icuin!uregion_getAvailable.
-func Uregion_getAvailable(type_ URegionType, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUregion_getAvailable.Addr(), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// uregion_getContainedRegions calls icuin!uregion_getContainedRegions.
-func Uregion_getContainedRegions(uregion *URegion, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUregion_getContainedRegions.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// uregion_getContainedRegionsOfType calls icuin!uregion_getContainedRegionsOfType.
-func Uregion_getContainedRegionsOfType(uregion *URegion, type_ URegionType, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUregion_getContainedRegionsOfType.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// uregion_getContainingRegion calls icuin!uregion_getContainingRegion.
-func Uregion_getContainingRegion(uregion *URegion) *URegion {
-	r1, _, _ := syscall.SyscallN(procUregion_getContainingRegion.Addr(), uintptr(unsafe.Pointer(uregion)))
-	return (*URegion)(unsafe.Pointer(r1))
-}
-
-// uregion_getContainingRegionOfType calls icuin!uregion_getContainingRegionOfType.
-func Uregion_getContainingRegionOfType(uregion *URegion, type_ URegionType) *URegion {
-	r1, _, _ := syscall.SyscallN(procUregion_getContainingRegionOfType.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(type_))
-	return (*URegion)(unsafe.Pointer(r1))
-}
-
-// uregion_getNumericCode calls icuin!uregion_getNumericCode.
-func Uregion_getNumericCode(uregion *URegion) int32 {
-	r1, _, _ := syscall.SyscallN(procUregion_getNumericCode.Addr(), uintptr(unsafe.Pointer(uregion)))
-	return int32(r1)
-}
-
-// uregion_getPreferredValues calls icuin!uregion_getPreferredValues.
-func Uregion_getPreferredValues(uregion *URegion, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUregion_getPreferredValues.Addr(), uintptr(unsafe.Pointer(uregion)), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// uregion_getRegionCode calls icuin!uregion_getRegionCode.
-func Uregion_getRegionCode(uregion *URegion) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUregion_getRegionCode.Addr(), uintptr(unsafe.Pointer(uregion)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uregion_getRegionFromCode calls icuin!uregion_getRegionFromCode.
-func Uregion_getRegionFromCode(regionCode foundation.PSTR, status *UErrorCode) *URegion {
-	r1, _, _ := syscall.SyscallN(procUregion_getRegionFromCode.Addr(), uintptr(unsafe.Pointer(regionCode)), uintptr(unsafe.Pointer(status)))
-	return (*URegion)(unsafe.Pointer(r1))
-}
-
-// uregion_getRegionFromNumericCode calls icuin!uregion_getRegionFromNumericCode.
-func Uregion_getRegionFromNumericCode(code int32, status *UErrorCode) *URegion {
-	r1, _, _ := syscall.SyscallN(procUregion_getRegionFromNumericCode.Addr(), uintptr(code), uintptr(unsafe.Pointer(status)))
-	return (*URegion)(unsafe.Pointer(r1))
-}
-
-// uregion_getType calls icuin!uregion_getType.
-func Uregion_getType(uregion *URegion) URegionType {
-	r1, _, _ := syscall.SyscallN(procUregion_getType.Addr(), uintptr(unsafe.Pointer(uregion)))
-	return URegionType(r1)
-}
-
-// ureldatefmt_close calls icuin!ureldatefmt_close.
-func Ureldatefmt_close(reldatefmt *URelativeDateTimeFormatter) {
-	syscall.SyscallN(procUreldatefmt_close.Addr(), uintptr(unsafe.Pointer(reldatefmt)))
-}
-
-// ureldatefmt_closeResult calls icu!ureldatefmt_closeResult.
-func Ureldatefmt_closeResult(ufrdt *UFormattedRelativeDateTime) {
-	syscall.SyscallN(procUreldatefmt_closeResult.Addr(), uintptr(unsafe.Pointer(ufrdt)))
-}
-
-// ureldatefmt_combineDateAndTime calls icuin!ureldatefmt_combineDateAndTime.
-func Ureldatefmt_combineDateAndTime(reldatefmt *URelativeDateTimeFormatter, relativeDateString *uint16, relativeDateStringLen int32, timeString *uint16, timeStringLen int32, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUreldatefmt_combineDateAndTime.Addr(), uintptr(unsafe.Pointer(reldatefmt)), uintptr(unsafe.Pointer(relativeDateString)), uintptr(relativeDateStringLen), uintptr(unsafe.Pointer(timeString)), uintptr(timeStringLen), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ureldatefmt_open calls icuin!ureldatefmt_open.
-func Ureldatefmt_open(locale foundation.PSTR, nfToAdopt *unsafe.Pointer, width UDateRelativeDateTimeFormatterStyle, capitalizationContext UDisplayContext, status *UErrorCode) *URelativeDateTimeFormatter {
-	r1, _, _ := syscall.SyscallN(procUreldatefmt_open.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(nfToAdopt)), uintptr(width), uintptr(capitalizationContext), uintptr(unsafe.Pointer(status)))
-	return (*URelativeDateTimeFormatter)(unsafe.Pointer(r1))
-}
-
-// ureldatefmt_openResult calls icu!ureldatefmt_openResult.
-func Ureldatefmt_openResult(ec *UErrorCode) *UFormattedRelativeDateTime {
-	r1, _, _ := syscall.SyscallN(procUreldatefmt_openResult.Addr(), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedRelativeDateTime)(unsafe.Pointer(r1))
-}
-
-// ureldatefmt_resultAsValue calls icu!ureldatefmt_resultAsValue.
-func Ureldatefmt_resultAsValue(ufrdt *UFormattedRelativeDateTime, ec *UErrorCode) *UFormattedValue {
-	r1, _, _ := syscall.SyscallN(procUreldatefmt_resultAsValue.Addr(), uintptr(unsafe.Pointer(ufrdt)), uintptr(unsafe.Pointer(ec)))
-	return (*UFormattedValue)(unsafe.Pointer(r1))
-}
-
-// ures_close calls icuuc!ures_close.
-func Ures_close(resourceBundle *UResourceBundle) {
-	syscall.SyscallN(procUres_close.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
-}
-
-// ures_getBinary calls icuuc!ures_getBinary.
-func Ures_getBinary(resourceBundle *UResourceBundle, len_ *int32, status *UErrorCode) *byte {
-	r1, _, _ := syscall.SyscallN(procUres_getBinary.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
-	return (*byte)(unsafe.Pointer(r1))
-}
-
-// ures_getByIndex calls icuuc!ures_getByIndex.
-func Ures_getByIndex(resourceBundle *UResourceBundle, indexR int32, fillIn *UResourceBundle, status *UErrorCode) *UResourceBundle {
-	r1, _, _ := syscall.SyscallN(procUres_getByIndex.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(indexR), uintptr(unsafe.Pointer(fillIn)), uintptr(unsafe.Pointer(status)))
-	return (*UResourceBundle)(unsafe.Pointer(r1))
-}
-
-// ures_getByKey calls icuuc!ures_getByKey.
-func Ures_getByKey(resourceBundle *UResourceBundle, key foundation.PSTR, fillIn *UResourceBundle, status *UErrorCode) *UResourceBundle {
-	r1, _, _ := syscall.SyscallN(procUres_getByKey.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(fillIn)), uintptr(unsafe.Pointer(status)))
-	return (*UResourceBundle)(unsafe.Pointer(r1))
-}
-
-// ures_getInt calls icuuc!ures_getInt.
-func Ures_getInt(resourceBundle *UResourceBundle, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUres_getInt.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// ures_getIntVector calls icuuc!ures_getIntVector.
-func Ures_getIntVector(resourceBundle *UResourceBundle, len_ *int32, status *UErrorCode) *int32 {
-	r1, _, _ := syscall.SyscallN(procUres_getIntVector.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
-	return (*int32)(unsafe.Pointer(r1))
-}
-
-// ures_getKey calls icuuc!ures_getKey.
-func Ures_getKey(resourceBundle *UResourceBundle) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUres_getKey.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ures_getLocaleByType calls icuuc!ures_getLocaleByType.
-func Ures_getLocaleByType(resourceBundle *UResourceBundle, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUres_getLocaleByType.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ures_getNextResource calls icuuc!ures_getNextResource.
-func Ures_getNextResource(resourceBundle *UResourceBundle, fillIn *UResourceBundle, status *UErrorCode) *UResourceBundle {
-	r1, _, _ := syscall.SyscallN(procUres_getNextResource.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(fillIn)), uintptr(unsafe.Pointer(status)))
-	return (*UResourceBundle)(unsafe.Pointer(r1))
-}
-
-// ures_getNextString calls icuuc!ures_getNextString.
-func Ures_getNextString(resourceBundle *UResourceBundle, len_ *int32, key **int8, status *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUres_getNextString.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(status)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ures_getSize calls icuuc!ures_getSize.
-func Ures_getSize(resourceBundle *UResourceBundle) int32 {
-	r1, _, _ := syscall.SyscallN(procUres_getSize.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
-	return int32(r1)
-}
-
-// ures_getString calls icuuc!ures_getString.
-func Ures_getString(resourceBundle *UResourceBundle, len_ *int32, status *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUres_getString.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ures_getStringByIndex calls icuuc!ures_getStringByIndex.
-func Ures_getStringByIndex(resourceBundle *UResourceBundle, indexS int32, len_ *int32, status *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUres_getStringByIndex.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(indexS), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ures_getStringByKey calls icuuc!ures_getStringByKey.
-func Ures_getStringByKey(resB *UResourceBundle, key foundation.PSTR, len_ *int32, status *UErrorCode) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUres_getStringByKey.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// ures_getType calls icuuc!ures_getType.
-func Ures_getType(resourceBundle *UResourceBundle) UResType {
-	r1, _, _ := syscall.SyscallN(procUres_getType.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
-	return UResType(r1)
-}
-
-// ures_getUInt calls icuuc!ures_getUInt.
-func Ures_getUInt(resourceBundle *UResourceBundle, status *UErrorCode) uint32 {
-	r1, _, _ := syscall.SyscallN(procUres_getUInt.Addr(), uintptr(unsafe.Pointer(resourceBundle)), uintptr(unsafe.Pointer(status)))
-	return uint32(r1)
-}
-
-// ures_getUTF8String calls icuuc!ures_getUTF8String.
-func Ures_getUTF8String(resB *UResourceBundle, dest foundation.PSTR, length *int32, forceCopy int8, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUres_getUTF8String.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(length)), uintptr(forceCopy), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ures_getUTF8StringByIndex calls icuuc!ures_getUTF8StringByIndex.
-func Ures_getUTF8StringByIndex(resB *UResourceBundle, stringIndex int32, dest foundation.PSTR, pLength *int32, forceCopy int8, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUres_getUTF8StringByIndex.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(stringIndex), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(pLength)), uintptr(forceCopy), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ures_getUTF8StringByKey calls icuuc!ures_getUTF8StringByKey.
-func Ures_getUTF8StringByKey(resB *UResourceBundle, key foundation.PSTR, dest foundation.PSTR, pLength *int32, forceCopy int8, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUres_getUTF8StringByKey.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(pLength)), uintptr(forceCopy), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// ures_getVersion calls icuuc!ures_getVersion.
-func Ures_getVersion(resB *UResourceBundle, versionInfo *byte) {
-	syscall.SyscallN(procUres_getVersion.Addr(), uintptr(unsafe.Pointer(resB)), uintptr(unsafe.Pointer(versionInfo)))
-}
-
-// ures_hasNext calls icuuc!ures_hasNext.
-func Ures_hasNext(resourceBundle *UResourceBundle) int8 {
-	r1, _, _ := syscall.SyscallN(procUres_hasNext.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
-	return int8(r1)
-}
-
-// ures_open calls icuuc!ures_open.
-func Ures_open(packageName foundation.PSTR, locale foundation.PSTR, status *UErrorCode) *UResourceBundle {
-	r1, _, _ := syscall.SyscallN(procUres_open.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
-	return (*UResourceBundle)(unsafe.Pointer(r1))
-}
-
-// ures_openAvailableLocales calls icuuc!ures_openAvailableLocales.
-func Ures_openAvailableLocales(packageName foundation.PSTR, status *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUres_openAvailableLocales.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(status)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// ures_openDirect calls icuuc!ures_openDirect.
-func Ures_openDirect(packageName foundation.PSTR, locale foundation.PSTR, status *UErrorCode) *UResourceBundle {
-	r1, _, _ := syscall.SyscallN(procUres_openDirect.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
-	return (*UResourceBundle)(unsafe.Pointer(r1))
-}
-
-// ures_openU calls icuuc!ures_openU.
-func Ures_openU(packageName *uint16, locale foundation.PSTR, status *UErrorCode) *UResourceBundle {
-	r1, _, _ := syscall.SyscallN(procUres_openU.Addr(), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(status)))
-	return (*UResourceBundle)(unsafe.Pointer(r1))
-}
-
-// ures_resetIterator calls icuuc!ures_resetIterator.
-func Ures_resetIterator(resourceBundle *UResourceBundle) {
-	syscall.SyscallN(procUres_resetIterator.Addr(), uintptr(unsafe.Pointer(resourceBundle)))
-}
-
-// uscript_breaksBetweenLetters calls icuuc!uscript_breaksBetweenLetters.
-func Uscript_breaksBetweenLetters(script UScriptCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUscript_breaksBetweenLetters.Addr(), uintptr(script))
-	return int8(r1)
-}
-
-// uscript_getCode calls icuuc!uscript_getCode.
-func Uscript_getCode(nameOrAbbrOrLocale foundation.PSTR, fillIn *UScriptCode, capacity int32, err_ *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUscript_getCode.Addr(), uintptr(unsafe.Pointer(nameOrAbbrOrLocale)), uintptr(unsafe.Pointer(fillIn)), uintptr(capacity), uintptr(unsafe.Pointer(err_)))
-	return int32(r1)
-}
-
-// uscript_getName calls icuuc!uscript_getName.
-func Uscript_getName(scriptCode UScriptCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUscript_getName.Addr(), uintptr(scriptCode))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uscript_getSampleString calls icuuc!uscript_getSampleString.
-func Uscript_getSampleString(script UScriptCode, dest *uint16, capacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUscript_getSampleString.Addr(), uintptr(script), uintptr(unsafe.Pointer(dest)), uintptr(capacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uscript_getScript calls icuuc!uscript_getScript.
-func Uscript_getScript(codepoint int32, err_ *UErrorCode) UScriptCode {
-	r1, _, _ := syscall.SyscallN(procUscript_getScript.Addr(), uintptr(codepoint), uintptr(unsafe.Pointer(err_)))
-	return UScriptCode(r1)
-}
-
-// uscript_getScriptExtensions calls icuuc!uscript_getScriptExtensions.
-func Uscript_getScriptExtensions(c int32, scripts *UScriptCode, capacity int32, errorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUscript_getScriptExtensions.Addr(), uintptr(c), uintptr(unsafe.Pointer(scripts)), uintptr(capacity), uintptr(unsafe.Pointer(errorCode)))
-	return int32(r1)
-}
-
-// uscript_getShortName calls icuuc!uscript_getShortName.
-func Uscript_getShortName(scriptCode UScriptCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUscript_getShortName.Addr(), uintptr(scriptCode))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uscript_getUsage calls icuuc!uscript_getUsage.
-func Uscript_getUsage(script UScriptCode) UScriptUsage {
-	r1, _, _ := syscall.SyscallN(procUscript_getUsage.Addr(), uintptr(script))
-	return UScriptUsage(r1)
-}
-
-// uscript_hasScript calls icuuc!uscript_hasScript.
-func Uscript_hasScript(c int32, sc UScriptCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUscript_hasScript.Addr(), uintptr(c), uintptr(sc))
-	return int8(r1)
-}
-
-// uscript_isCased calls icuuc!uscript_isCased.
-func Uscript_isCased(script UScriptCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUscript_isCased.Addr(), uintptr(script))
-	return int8(r1)
-}
-
-// uscript_isRightToLeft calls icuuc!uscript_isRightToLeft.
-func Uscript_isRightToLeft(script UScriptCode) int8 {
-	r1, _, _ := syscall.SyscallN(procUscript_isRightToLeft.Addr(), uintptr(script))
-	return int8(r1)
-}
-
-// usearch_close calls icuin!usearch_close.
-func Usearch_close(searchiter *UStringSearch) {
-	syscall.SyscallN(procUsearch_close.Addr(), uintptr(unsafe.Pointer(searchiter)))
-}
-
-// usearch_first calls icuin!usearch_first.
-func Usearch_first(strsrch *UStringSearch, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_first.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// usearch_following calls icuin!usearch_following.
-func Usearch_following(strsrch *UStringSearch, position int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_following.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(position), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// usearch_getAttribute calls icuin!usearch_getAttribute.
-func Usearch_getAttribute(strsrch *UStringSearch, attribute USearchAttribute) USearchAttributeValue {
-	r1, _, _ := syscall.SyscallN(procUsearch_getAttribute.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(attribute))
-	return USearchAttributeValue(r1)
-}
-
-// usearch_getBreakIterator calls icuin!usearch_getBreakIterator.
-func Usearch_getBreakIterator(strsrch *UStringSearch) *UBreakIterator {
-	r1, _, _ := syscall.SyscallN(procUsearch_getBreakIterator.Addr(), uintptr(unsafe.Pointer(strsrch)))
-	return (*UBreakIterator)(unsafe.Pointer(r1))
-}
-
-// usearch_getCollator calls icuin!usearch_getCollator.
-func Usearch_getCollator(strsrch *UStringSearch) *UCollator {
-	r1, _, _ := syscall.SyscallN(procUsearch_getCollator.Addr(), uintptr(unsafe.Pointer(strsrch)))
-	return (*UCollator)(unsafe.Pointer(r1))
-}
-
-// usearch_getMatchedLength calls icuin!usearch_getMatchedLength.
-func Usearch_getMatchedLength(strsrch *UStringSearch) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_getMatchedLength.Addr(), uintptr(unsafe.Pointer(strsrch)))
-	return int32(r1)
-}
-
-// usearch_getMatchedStart calls icuin!usearch_getMatchedStart.
-func Usearch_getMatchedStart(strsrch *UStringSearch) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_getMatchedStart.Addr(), uintptr(unsafe.Pointer(strsrch)))
-	return int32(r1)
-}
-
-// usearch_getMatchedText calls icuin!usearch_getMatchedText.
-func Usearch_getMatchedText(strsrch *UStringSearch, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_getMatchedText.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// usearch_getOffset calls icuin!usearch_getOffset.
-func Usearch_getOffset(strsrch *UStringSearch) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_getOffset.Addr(), uintptr(unsafe.Pointer(strsrch)))
-	return int32(r1)
-}
-
-// usearch_getPattern calls icuin!usearch_getPattern.
-func Usearch_getPattern(strsrch *UStringSearch, length *int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUsearch_getPattern.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(length)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// usearch_getText calls icuin!usearch_getText.
-func Usearch_getText(strsrch *UStringSearch, length *int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUsearch_getText.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(length)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// usearch_last calls icuin!usearch_last.
-func Usearch_last(strsrch *UStringSearch, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_last.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// usearch_next calls icuin!usearch_next.
-func Usearch_next(strsrch *UStringSearch, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_next.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// usearch_open calls icuin!usearch_open.
-func Usearch_open(pattern *uint16, patternlength int32, text *uint16, textlength int32, locale foundation.PSTR, breakiter *UBreakIterator, status *UErrorCode) *UStringSearch {
-	r1, _, _ := syscall.SyscallN(procUsearch_open.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternlength), uintptr(unsafe.Pointer(text)), uintptr(textlength), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(breakiter)), uintptr(unsafe.Pointer(status)))
-	return (*UStringSearch)(unsafe.Pointer(r1))
-}
-
-// usearch_openFromCollator calls icuin!usearch_openFromCollator.
-func Usearch_openFromCollator(pattern *uint16, patternlength int32, text *uint16, textlength int32, collator *UCollator, breakiter *UBreakIterator, status *UErrorCode) *UStringSearch {
-	r1, _, _ := syscall.SyscallN(procUsearch_openFromCollator.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternlength), uintptr(unsafe.Pointer(text)), uintptr(textlength), uintptr(unsafe.Pointer(collator)), uintptr(unsafe.Pointer(breakiter)), uintptr(unsafe.Pointer(status)))
-	return (*UStringSearch)(unsafe.Pointer(r1))
-}
-
-// usearch_preceding calls icuin!usearch_preceding.
-func Usearch_preceding(strsrch *UStringSearch, position int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_preceding.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(position), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// usearch_previous calls icuin!usearch_previous.
-func Usearch_previous(strsrch *UStringSearch, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUsearch_previous.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// usearch_reset calls icuin!usearch_reset.
-func Usearch_reset(strsrch *UStringSearch) {
-	syscall.SyscallN(procUsearch_reset.Addr(), uintptr(unsafe.Pointer(strsrch)))
-}
-
-// usearch_setAttribute calls icuin!usearch_setAttribute.
-func Usearch_setAttribute(strsrch *UStringSearch, attribute USearchAttribute, value USearchAttributeValue, status *UErrorCode) {
-	syscall.SyscallN(procUsearch_setAttribute.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(attribute), uintptr(value), uintptr(unsafe.Pointer(status)))
-}
-
-// usearch_setBreakIterator calls icuin!usearch_setBreakIterator.
-func Usearch_setBreakIterator(strsrch *UStringSearch, breakiter *UBreakIterator, status *UErrorCode) {
-	syscall.SyscallN(procUsearch_setBreakIterator.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(breakiter)), uintptr(unsafe.Pointer(status)))
-}
-
-// usearch_setCollator calls icuin!usearch_setCollator.
-func Usearch_setCollator(strsrch *UStringSearch, collator *UCollator, status *UErrorCode) {
-	syscall.SyscallN(procUsearch_setCollator.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(collator)), uintptr(unsafe.Pointer(status)))
-}
-
-// usearch_setOffset calls icuin!usearch_setOffset.
-func Usearch_setOffset(strsrch *UStringSearch, position int32, status *UErrorCode) {
-	syscall.SyscallN(procUsearch_setOffset.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(position), uintptr(unsafe.Pointer(status)))
-}
-
-// usearch_setPattern calls icuin!usearch_setPattern.
-func Usearch_setPattern(strsrch *UStringSearch, pattern *uint16, patternlength int32, status *UErrorCode) {
-	syscall.SyscallN(procUsearch_setPattern.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(pattern)), uintptr(patternlength), uintptr(unsafe.Pointer(status)))
-}
-
-// usearch_setText calls icuin!usearch_setText.
-func Usearch_setText(strsrch *UStringSearch, text *uint16, textlength int32, status *UErrorCode) {
-	syscall.SyscallN(procUsearch_setText.Addr(), uintptr(unsafe.Pointer(strsrch)), uintptr(unsafe.Pointer(text)), uintptr(textlength), uintptr(unsafe.Pointer(status)))
-}
-
-// uset_add calls icuuc!uset_add.
-func Uset_add(set *USet, c int32) {
-	syscall.SyscallN(procUset_add.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
-}
-
-// uset_addAll calls icuuc!uset_addAll.
-func Uset_addAll(set *USet, additionalSet *USet) {
-	syscall.SyscallN(procUset_addAll.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(additionalSet)))
-}
-
-// uset_addAllCodePoints calls icuuc!uset_addAllCodePoints.
-func Uset_addAllCodePoints(set *USet, str *uint16, strLen int32) {
-	syscall.SyscallN(procUset_addAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
-}
-
-// uset_addRange calls icuuc!uset_addRange.
-func Uset_addRange(set *USet, start int32, end int32) {
-	syscall.SyscallN(procUset_addRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
-}
-
-// uset_addString calls icuuc!uset_addString.
-func Uset_addString(set *USet, str *uint16, strLen int32) {
-	syscall.SyscallN(procUset_addString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
-}
-
-// uset_applyIntPropertyValue calls icuuc!uset_applyIntPropertyValue.
-func Uset_applyIntPropertyValue(set *USet, prop UProperty, value int32, ec *UErrorCode) {
-	syscall.SyscallN(procUset_applyIntPropertyValue.Addr(), uintptr(unsafe.Pointer(set)), uintptr(prop), uintptr(value), uintptr(unsafe.Pointer(ec)))
-}
-
-// uset_applyPattern calls icuuc!uset_applyPattern.
-func Uset_applyPattern(set *USet, pattern *uint16, patternLength int32, options uint32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_applyPattern.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(options), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uset_applyPropertyAlias calls icuuc!uset_applyPropertyAlias.
-func Uset_applyPropertyAlias(set *USet, prop *uint16, propLength int32, value *uint16, valueLength int32, ec *UErrorCode) {
-	syscall.SyscallN(procUset_applyPropertyAlias.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(prop)), uintptr(propLength), uintptr(unsafe.Pointer(value)), uintptr(valueLength), uintptr(unsafe.Pointer(ec)))
-}
-
-// uset_charAt calls icuuc!uset_charAt.
-func Uset_charAt(set *USet, charIndex int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_charAt.Addr(), uintptr(unsafe.Pointer(set)), uintptr(charIndex))
-	return int32(r1)
-}
-
-// uset_clear calls icuuc!uset_clear.
-func Uset_clear(set *USet) {
-	syscall.SyscallN(procUset_clear.Addr(), uintptr(unsafe.Pointer(set)))
-}
-
-// uset_clone calls icuuc!uset_clone.
-func Uset_clone(set *USet) *USet {
-	r1, _, _ := syscall.SyscallN(procUset_clone.Addr(), uintptr(unsafe.Pointer(set)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uset_cloneAsThawed calls icuuc!uset_cloneAsThawed.
-func Uset_cloneAsThawed(set *USet) *USet {
-	r1, _, _ := syscall.SyscallN(procUset_cloneAsThawed.Addr(), uintptr(unsafe.Pointer(set)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uset_close calls icuuc!uset_close.
-func Uset_close(set *USet) {
-	syscall.SyscallN(procUset_close.Addr(), uintptr(unsafe.Pointer(set)))
-}
-
-// uset_closeOver calls icuuc!uset_closeOver.
-func Uset_closeOver(set *USet, attributes int32) {
-	syscall.SyscallN(procUset_closeOver.Addr(), uintptr(unsafe.Pointer(set)), uintptr(attributes))
-}
-
-// uset_compact calls icuuc!uset_compact.
-func Uset_compact(set *USet) {
-	syscall.SyscallN(procUset_compact.Addr(), uintptr(unsafe.Pointer(set)))
-}
-
-// uset_complement calls icuuc!uset_complement.
-func Uset_complement(set *USet) {
-	syscall.SyscallN(procUset_complement.Addr(), uintptr(unsafe.Pointer(set)))
-}
-
-// uset_complementAll calls icuuc!uset_complementAll.
-func Uset_complementAll(set *USet, complement *USet) {
-	syscall.SyscallN(procUset_complementAll.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(complement)))
-}
-
-// uset_complementAllCodePoints calls icu!uset_complementAllCodePoints.
-func Uset_complementAllCodePoints(set *USet, str *uint16, length int32) {
-	syscall.SyscallN(procUset_complementAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
-}
-
-// uset_complementRange calls icu!uset_complementRange.
-func Uset_complementRange(set *USet, start int32, end int32) {
-	syscall.SyscallN(procUset_complementRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
-}
-
-// uset_complementString calls icu!uset_complementString.
-func Uset_complementString(set *USet, str *uint16, length int32) {
-	syscall.SyscallN(procUset_complementString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
-}
-
-// uset_contains calls icuuc!uset_contains.
-func Uset_contains(set *USet, c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_contains.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
-	return int8(r1)
-}
-
-// uset_containsAll calls icuuc!uset_containsAll.
-func Uset_containsAll(set1 *USet, set2 *USet) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_containsAll.Addr(), uintptr(unsafe.Pointer(set1)), uintptr(unsafe.Pointer(set2)))
-	return int8(r1)
-}
-
-// uset_containsAllCodePoints calls icuuc!uset_containsAllCodePoints.
-func Uset_containsAllCodePoints(set *USet, str *uint16, strLen int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_containsAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
-	return int8(r1)
-}
-
-// uset_containsNone calls icuuc!uset_containsNone.
-func Uset_containsNone(set1 *USet, set2 *USet) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_containsNone.Addr(), uintptr(unsafe.Pointer(set1)), uintptr(unsafe.Pointer(set2)))
-	return int8(r1)
-}
-
-// uset_containsRange calls icuuc!uset_containsRange.
-func Uset_containsRange(set *USet, start int32, end int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_containsRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
-	return int8(r1)
-}
-
-// uset_containsSome calls icuuc!uset_containsSome.
-func Uset_containsSome(set1 *USet, set2 *USet) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_containsSome.Addr(), uintptr(unsafe.Pointer(set1)), uintptr(unsafe.Pointer(set2)))
-	return int8(r1)
-}
-
-// uset_containsString calls icuuc!uset_containsString.
-func Uset_containsString(set *USet, str *uint16, strLen int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_containsString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
-	return int8(r1)
-}
-
-// uset_equals calls icuuc!uset_equals.
-func Uset_equals(set1 *USet, set2 *USet) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_equals.Addr(), uintptr(unsafe.Pointer(set1)), uintptr(unsafe.Pointer(set2)))
-	return int8(r1)
-}
-
-// uset_freeze calls icuuc!uset_freeze.
-func Uset_freeze(set *USet) {
-	syscall.SyscallN(procUset_freeze.Addr(), uintptr(unsafe.Pointer(set)))
-}
-
-// uset_getItem calls icuuc!uset_getItem.
-func Uset_getItem(set *USet, itemIndex int32, start *int32, end *int32, str *uint16, strCapacity int32, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_getItem.Addr(), uintptr(unsafe.Pointer(set)), uintptr(itemIndex), uintptr(unsafe.Pointer(start)), uintptr(unsafe.Pointer(end)), uintptr(unsafe.Pointer(str)), uintptr(strCapacity), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// uset_getItemCount calls icuuc!uset_getItemCount.
-func Uset_getItemCount(set *USet) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_getItemCount.Addr(), uintptr(unsafe.Pointer(set)))
-	return int32(r1)
-}
-
-// uset_getRangeCount calls icu!uset_getRangeCount.
-func Uset_getRangeCount(set *USet) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_getRangeCount.Addr(), uintptr(unsafe.Pointer(set)))
-	return int32(r1)
-}
-
-// uset_getSerializedRange calls icuuc!uset_getSerializedRange.
-func Uset_getSerializedRange(set *USerializedSet, rangeIndex int32, pStart *int32, pEnd *int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_getSerializedRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(rangeIndex), uintptr(unsafe.Pointer(pStart)), uintptr(unsafe.Pointer(pEnd)))
-	return int8(r1)
-}
-
-// uset_getSerializedRangeCount calls icuuc!uset_getSerializedRangeCount.
-func Uset_getSerializedRangeCount(set *USerializedSet) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_getSerializedRangeCount.Addr(), uintptr(unsafe.Pointer(set)))
-	return int32(r1)
-}
-
-// uset_getSerializedSet calls icuuc!uset_getSerializedSet.
-func Uset_getSerializedSet(fillSet *USerializedSet, src *uint16, srcLength int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_getSerializedSet.Addr(), uintptr(unsafe.Pointer(fillSet)), uintptr(unsafe.Pointer(src)), uintptr(srcLength))
-	return int8(r1)
-}
-
-// uset_hasStrings calls icu!uset_hasStrings.
-func Uset_hasStrings(set *USet) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_hasStrings.Addr(), uintptr(unsafe.Pointer(set)))
-	return int8(r1)
-}
-
-// uset_indexOf calls icuuc!uset_indexOf.
-func Uset_indexOf(set *USet, c int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_indexOf.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
-	return int32(r1)
-}
-
-// uset_isEmpty calls icuuc!uset_isEmpty.
-func Uset_isEmpty(set *USet) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_isEmpty.Addr(), uintptr(unsafe.Pointer(set)))
-	return int8(r1)
-}
-
-// uset_isFrozen calls icuuc!uset_isFrozen.
-func Uset_isFrozen(set *USet) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_isFrozen.Addr(), uintptr(unsafe.Pointer(set)))
-	return int8(r1)
-}
-
-// uset_open calls icuuc!uset_open.
-func Uset_open(start int32, end int32) *USet {
-	r1, _, _ := syscall.SyscallN(procUset_open.Addr(), uintptr(start), uintptr(end))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uset_openEmpty calls icuuc!uset_openEmpty.
-func Uset_openEmpty() *USet {
-	r1, _, _ := syscall.SyscallN(procUset_openEmpty.Addr())
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uset_openPattern calls icuuc!uset_openPattern.
-func Uset_openPattern(pattern *uint16, patternLength int32, ec *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procUset_openPattern.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(unsafe.Pointer(ec)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uset_openPatternOptions calls icuuc!uset_openPatternOptions.
-func Uset_openPatternOptions(pattern *uint16, patternLength int32, options uint32, ec *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procUset_openPatternOptions.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(options), uintptr(unsafe.Pointer(ec)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uset_remove calls icuuc!uset_remove.
-func Uset_remove(set *USet, c int32) {
-	syscall.SyscallN(procUset_remove.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
-}
-
-// uset_removeAll calls icuuc!uset_removeAll.
-func Uset_removeAll(set *USet, removeSet *USet) {
-	syscall.SyscallN(procUset_removeAll.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(removeSet)))
-}
-
-// uset_removeAllCodePoints calls icu!uset_removeAllCodePoints.
-func Uset_removeAllCodePoints(set *USet, str *uint16, length int32) {
-	syscall.SyscallN(procUset_removeAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
-}
-
-// uset_removeAllStrings calls icuuc!uset_removeAllStrings.
-func Uset_removeAllStrings(set *USet) {
-	syscall.SyscallN(procUset_removeAllStrings.Addr(), uintptr(unsafe.Pointer(set)))
-}
-
-// uset_removeRange calls icuuc!uset_removeRange.
-func Uset_removeRange(set *USet, start int32, end int32) {
-	syscall.SyscallN(procUset_removeRange.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
-}
-
-// uset_removeString calls icuuc!uset_removeString.
-func Uset_removeString(set *USet, str *uint16, strLen int32) {
-	syscall.SyscallN(procUset_removeString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(strLen))
-}
-
-// uset_resemblesPattern calls icuuc!uset_resemblesPattern.
-func Uset_resemblesPattern(pattern *uint16, patternLength int32, pos int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_resemblesPattern.Addr(), uintptr(unsafe.Pointer(pattern)), uintptr(patternLength), uintptr(pos))
-	return int8(r1)
-}
-
-// uset_retain calls icuuc!uset_retain.
-func Uset_retain(set *USet, start int32, end int32) {
-	syscall.SyscallN(procUset_retain.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
-}
-
-// uset_retainAll calls icuuc!uset_retainAll.
-func Uset_retainAll(set *USet, retain *USet) {
-	syscall.SyscallN(procUset_retainAll.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(retain)))
-}
-
-// uset_retainAllCodePoints calls icu!uset_retainAllCodePoints.
-func Uset_retainAllCodePoints(set *USet, str *uint16, length int32) {
-	syscall.SyscallN(procUset_retainAllCodePoints.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
-}
-
-// uset_retainString calls icu!uset_retainString.
-func Uset_retainString(set *USet, str *uint16, length int32) {
-	syscall.SyscallN(procUset_retainString.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(str)), uintptr(length))
-}
-
-// uset_serialize calls icuuc!uset_serialize.
-func Uset_serialize(set *USet, dest *uint16, destCapacity int32, pErrorCode *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_serialize.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(pErrorCode)))
-	return int32(r1)
-}
-
-// uset_serializedContains calls icuuc!uset_serializedContains.
-func Uset_serializedContains(set *USerializedSet, c int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUset_serializedContains.Addr(), uintptr(unsafe.Pointer(set)), uintptr(c))
-	return int8(r1)
-}
-
-// uset_set calls icuuc!uset_set.
-func Uset_set(set *USet, start int32, end int32) {
-	syscall.SyscallN(procUset_set.Addr(), uintptr(unsafe.Pointer(set)), uintptr(start), uintptr(end))
-}
-
-// uset_setSerializedToOne calls icuuc!uset_setSerializedToOne.
-func Uset_setSerializedToOne(fillSet *USerializedSet, c int32) {
-	syscall.SyscallN(procUset_setSerializedToOne.Addr(), uintptr(unsafe.Pointer(fillSet)), uintptr(c))
-}
-
-// uset_size calls icuuc!uset_size.
-func Uset_size(set *USet) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_size.Addr(), uintptr(unsafe.Pointer(set)))
-	return int32(r1)
-}
-
-// uset_span calls icuuc!uset_span.
-func Uset_span(set *USet, s *uint16, length int32, spanCondition USetSpanCondition) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_span.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(spanCondition))
-	return int32(r1)
-}
-
-// uset_spanBack calls icuuc!uset_spanBack.
-func Uset_spanBack(set *USet, s *uint16, length int32, spanCondition USetSpanCondition) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_spanBack.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(spanCondition))
-	return int32(r1)
-}
-
-// uset_spanBackUTF8 calls icuuc!uset_spanBackUTF8.
-func Uset_spanBackUTF8(set *USet, s foundation.PSTR, length int32, spanCondition USetSpanCondition) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_spanBackUTF8.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(spanCondition))
-	return int32(r1)
-}
-
-// uset_spanUTF8 calls icuuc!uset_spanUTF8.
-func Uset_spanUTF8(set *USet, s foundation.PSTR, length int32, spanCondition USetSpanCondition) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_spanUTF8.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(spanCondition))
-	return int32(r1)
-}
-
-// uset_toPattern calls icuuc!uset_toPattern.
-func Uset_toPattern(set *USet, result *uint16, resultCapacity int32, escapeUnprintable int8, ec *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUset_toPattern.Addr(), uintptr(unsafe.Pointer(set)), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(escapeUnprintable), uintptr(unsafe.Pointer(ec)))
-	return int32(r1)
-}
-
-// uspoof_areConfusable calls icuin!uspoof_areConfusable.
-func Uspoof_areConfusable(sc *USpoofChecker, id1 *uint16, length1 int32, id2 *uint16, length2 int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_areConfusable.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id1)), uintptr(length1), uintptr(unsafe.Pointer(id2)), uintptr(length2), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_areConfusableUTF8 calls icuin!uspoof_areConfusableUTF8.
-func Uspoof_areConfusableUTF8(sc *USpoofChecker, id1 foundation.PSTR, length1 int32, id2 foundation.PSTR, length2 int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_areConfusableUTF8.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id1)), uintptr(length1), uintptr(unsafe.Pointer(id2)), uintptr(length2), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_check calls icuin!uspoof_check.
-func Uspoof_check(sc *USpoofChecker, id *uint16, length int32, position *int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_check.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_check2 calls icuin!uspoof_check2.
-func Uspoof_check2(sc *USpoofChecker, id *uint16, length int32, checkResult *USpoofCheckResult, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_check2.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_check2UTF8 calls icuin!uspoof_check2UTF8.
-func Uspoof_check2UTF8(sc *USpoofChecker, id foundation.PSTR, length int32, checkResult *USpoofCheckResult, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_check2UTF8.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_checkUTF8 calls icuin!uspoof_checkUTF8.
-func Uspoof_checkUTF8(sc *USpoofChecker, id foundation.PSTR, length int32, position *int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_checkUTF8.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_clone calls icuin!uspoof_clone.
-func Uspoof_clone(sc *USpoofChecker, status *UErrorCode) *USpoofChecker {
-	r1, _, _ := syscall.SyscallN(procUspoof_clone.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(status)))
-	return (*USpoofChecker)(unsafe.Pointer(r1))
-}
-
-// uspoof_close calls icuin!uspoof_close.
-func Uspoof_close(sc *USpoofChecker) {
-	syscall.SyscallN(procUspoof_close.Addr(), uintptr(unsafe.Pointer(sc)))
-}
-
-// uspoof_closeCheckResult calls icuin!uspoof_closeCheckResult.
-func Uspoof_closeCheckResult(checkResult *USpoofCheckResult) {
-	syscall.SyscallN(procUspoof_closeCheckResult.Addr(), uintptr(unsafe.Pointer(checkResult)))
-}
-
-// uspoof_getAllowedChars calls icuin!uspoof_getAllowedChars.
-func Uspoof_getAllowedChars(sc *USpoofChecker, status *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procUspoof_getAllowedChars.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(status)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uspoof_getAllowedLocales calls icuin!uspoof_getAllowedLocales.
-func Uspoof_getAllowedLocales(sc *USpoofChecker, status *UErrorCode) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUspoof_getAllowedLocales.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(status)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// uspoof_getCheckResultChecks calls icuin!uspoof_getCheckResultChecks.
-func Uspoof_getCheckResultChecks(checkResult *USpoofCheckResult, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_getCheckResultChecks.Addr(), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_getCheckResultNumerics calls icuin!uspoof_getCheckResultNumerics.
-func Uspoof_getCheckResultNumerics(checkResult *USpoofCheckResult, status *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procUspoof_getCheckResultNumerics.Addr(), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uspoof_getCheckResultRestrictionLevel calls icuin!uspoof_getCheckResultRestrictionLevel.
-func Uspoof_getCheckResultRestrictionLevel(checkResult *USpoofCheckResult, status *UErrorCode) URestrictionLevel {
-	r1, _, _ := syscall.SyscallN(procUspoof_getCheckResultRestrictionLevel.Addr(), uintptr(unsafe.Pointer(checkResult)), uintptr(unsafe.Pointer(status)))
-	return URestrictionLevel(r1)
-}
-
-// uspoof_getChecks calls icuin!uspoof_getChecks.
-func Uspoof_getChecks(sc *USpoofChecker, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_getChecks.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_getInclusionSet calls icuin!uspoof_getInclusionSet.
-func Uspoof_getInclusionSet(status *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procUspoof_getInclusionSet.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uspoof_getRecommendedSet calls icuin!uspoof_getRecommendedSet.
-func Uspoof_getRecommendedSet(status *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procUspoof_getRecommendedSet.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// uspoof_getRestrictionLevel calls icuin!uspoof_getRestrictionLevel.
-func Uspoof_getRestrictionLevel(sc *USpoofChecker) URestrictionLevel {
-	r1, _, _ := syscall.SyscallN(procUspoof_getRestrictionLevel.Addr(), uintptr(unsafe.Pointer(sc)))
-	return URestrictionLevel(r1)
-}
-
-// uspoof_getSkeleton calls icuin!uspoof_getSkeleton.
-func Uspoof_getSkeleton(sc *USpoofChecker, type_ uint32, id *uint16, length int32, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_getSkeleton.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(type_), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_getSkeletonUTF8 calls icuin!uspoof_getSkeletonUTF8.
-func Uspoof_getSkeletonUTF8(sc *USpoofChecker, type_ uint32, id foundation.PSTR, length int32, dest foundation.PSTR, destCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_getSkeletonUTF8.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(type_), uintptr(unsafe.Pointer(id)), uintptr(length), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_open calls icuin!uspoof_open.
-func Uspoof_open(status *UErrorCode) *USpoofChecker {
-	r1, _, _ := syscall.SyscallN(procUspoof_open.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*USpoofChecker)(unsafe.Pointer(r1))
-}
-
-// uspoof_openCheckResult calls icuin!uspoof_openCheckResult.
-func Uspoof_openCheckResult(status *UErrorCode) *USpoofCheckResult {
-	r1, _, _ := syscall.SyscallN(procUspoof_openCheckResult.Addr(), uintptr(unsafe.Pointer(status)))
-	return (*USpoofCheckResult)(unsafe.Pointer(r1))
-}
-
-// uspoof_openFromSerialized calls icuin!uspoof_openFromSerialized.
-func Uspoof_openFromSerialized(data unsafe.Pointer, length int32, pActualLength *int32, pErrorCode *UErrorCode) *USpoofChecker {
-	r1, _, _ := syscall.SyscallN(procUspoof_openFromSerialized.Addr(), uintptr(unsafe.Pointer(data)), uintptr(length), uintptr(unsafe.Pointer(pActualLength)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*USpoofChecker)(unsafe.Pointer(r1))
-}
-
-// uspoof_openFromSource calls icuin!uspoof_openFromSource.
-func Uspoof_openFromSource(confusables foundation.PSTR, confusablesLen int32, confusablesWholeScript foundation.PSTR, confusablesWholeScriptLen int32, errType *int32, pe *UParseError, status *UErrorCode) *USpoofChecker {
-	r1, _, _ := syscall.SyscallN(procUspoof_openFromSource.Addr(), uintptr(unsafe.Pointer(confusables)), uintptr(confusablesLen), uintptr(unsafe.Pointer(confusablesWholeScript)), uintptr(confusablesWholeScriptLen), uintptr(unsafe.Pointer(errType)), uintptr(unsafe.Pointer(pe)), uintptr(unsafe.Pointer(status)))
-	return (*USpoofChecker)(unsafe.Pointer(r1))
-}
-
-// uspoof_serialize calls icuin!uspoof_serialize.
-func Uspoof_serialize(sc *USpoofChecker, data unsafe.Pointer, capacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUspoof_serialize.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(data)), uintptr(capacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// uspoof_setAllowedChars calls icuin!uspoof_setAllowedChars.
-func Uspoof_setAllowedChars(sc *USpoofChecker, chars *USet, status *UErrorCode) {
-	syscall.SyscallN(procUspoof_setAllowedChars.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(chars)), uintptr(unsafe.Pointer(status)))
-}
-
-// uspoof_setAllowedLocales calls icuin!uspoof_setAllowedLocales.
-func Uspoof_setAllowedLocales(sc *USpoofChecker, localesList foundation.PSTR, status *UErrorCode) {
-	syscall.SyscallN(procUspoof_setAllowedLocales.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(unsafe.Pointer(localesList)), uintptr(unsafe.Pointer(status)))
-}
-
-// uspoof_setChecks calls icuin!uspoof_setChecks.
-func Uspoof_setChecks(sc *USpoofChecker, checks int32, status *UErrorCode) {
-	syscall.SyscallN(procUspoof_setChecks.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(checks), uintptr(unsafe.Pointer(status)))
-}
-
-// uspoof_setRestrictionLevel calls icuin!uspoof_setRestrictionLevel.
-func Uspoof_setRestrictionLevel(sc *USpoofChecker, restrictionLevel URestrictionLevel) {
-	syscall.SyscallN(procUspoof_setRestrictionLevel.Addr(), uintptr(unsafe.Pointer(sc)), uintptr(restrictionLevel))
-}
-
-// usprep_close calls icuuc!usprep_close.
-func Usprep_close(profile *UStringPrepProfile) {
-	syscall.SyscallN(procUsprep_close.Addr(), uintptr(unsafe.Pointer(profile)))
-}
-
-// usprep_open calls icuuc!usprep_open.
-func Usprep_open(path foundation.PSTR, fileName foundation.PSTR, status *UErrorCode) *UStringPrepProfile {
-	r1, _, _ := syscall.SyscallN(procUsprep_open.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(fileName)), uintptr(unsafe.Pointer(status)))
-	return (*UStringPrepProfile)(unsafe.Pointer(r1))
-}
-
-// usprep_openByType calls icuuc!usprep_openByType.
-func Usprep_openByType(type_ UStringPrepProfileType, status *UErrorCode) *UStringPrepProfile {
-	r1, _, _ := syscall.SyscallN(procUsprep_openByType.Addr(), uintptr(type_), uintptr(unsafe.Pointer(status)))
-	return (*UStringPrepProfile)(unsafe.Pointer(r1))
-}
-
-// usprep_prepare calls icuuc!usprep_prepare.
-func Usprep_prepare(prep *UStringPrepProfile, src *uint16, srcLength int32, dest *uint16, destCapacity int32, options int32, parseError *UParseError, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUsprep_prepare.Addr(), uintptr(unsafe.Pointer(prep)), uintptr(unsafe.Pointer(src)), uintptr(srcLength), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(options), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// utext_char32At calls icuuc!utext_char32At.
-func Utext_char32At(ut *UText, nativeIndex int64) int32 {
-	r1, _, _ := syscall.SyscallN(procUtext_char32At.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeIndex))
-	return int32(r1)
-}
-
-// utext_clone calls icuuc!utext_clone.
-func Utext_clone(dest *UText, src *UText, deep int8, readOnly int8, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUtext_clone.Addr(), uintptr(unsafe.Pointer(dest)), uintptr(unsafe.Pointer(src)), uintptr(deep), uintptr(readOnly), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// utext_close calls icuuc!utext_close.
-func Utext_close(ut *UText) *UText {
-	r1, _, _ := syscall.SyscallN(procUtext_close.Addr(), uintptr(unsafe.Pointer(ut)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// utext_copy calls icuuc!utext_copy.
-func Utext_copy(ut *UText, nativeStart int64, nativeLimit int64, destIndex int64, move int8, status *UErrorCode) {
-	syscall.SyscallN(procUtext_copy.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeStart), uintptr(nativeLimit), uintptr(destIndex), uintptr(move), uintptr(unsafe.Pointer(status)))
-}
-
-// utext_current32 calls icuuc!utext_current32.
-func Utext_current32(ut *UText) int32 {
-	r1, _, _ := syscall.SyscallN(procUtext_current32.Addr(), uintptr(unsafe.Pointer(ut)))
-	return int32(r1)
-}
-
-// utext_equals calls icuuc!utext_equals.
-func Utext_equals(a *UText, b *UText) int8 {
-	r1, _, _ := syscall.SyscallN(procUtext_equals.Addr(), uintptr(unsafe.Pointer(a)), uintptr(unsafe.Pointer(b)))
-	return int8(r1)
-}
-
-// utext_extract calls icuuc!utext_extract.
-func Utext_extract(ut *UText, nativeStart int64, nativeLimit int64, dest *uint16, destCapacity int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUtext_extract.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeStart), uintptr(nativeLimit), uintptr(unsafe.Pointer(dest)), uintptr(destCapacity), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// utext_freeze calls icuuc!utext_freeze.
-func Utext_freeze(ut *UText) {
-	syscall.SyscallN(procUtext_freeze.Addr(), uintptr(unsafe.Pointer(ut)))
-}
-
-// utext_getNativeIndex calls icuuc!utext_getNativeIndex.
-func Utext_getNativeIndex(ut *UText) int64 {
-	r1, _, _ := syscall.SyscallN(procUtext_getNativeIndex.Addr(), uintptr(unsafe.Pointer(ut)))
-	return int64(r1)
-}
-
-// utext_getPreviousNativeIndex calls icuuc!utext_getPreviousNativeIndex.
-func Utext_getPreviousNativeIndex(ut *UText) int64 {
-	r1, _, _ := syscall.SyscallN(procUtext_getPreviousNativeIndex.Addr(), uintptr(unsafe.Pointer(ut)))
-	return int64(r1)
-}
-
-// utext_hasMetaData calls icuuc!utext_hasMetaData.
-func Utext_hasMetaData(ut *UText) int8 {
-	r1, _, _ := syscall.SyscallN(procUtext_hasMetaData.Addr(), uintptr(unsafe.Pointer(ut)))
-	return int8(r1)
-}
-
-// utext_isLengthExpensive calls icuuc!utext_isLengthExpensive.
-func Utext_isLengthExpensive(ut *UText) int8 {
-	r1, _, _ := syscall.SyscallN(procUtext_isLengthExpensive.Addr(), uintptr(unsafe.Pointer(ut)))
-	return int8(r1)
-}
-
-// utext_isWritable calls icuuc!utext_isWritable.
-func Utext_isWritable(ut *UText) int8 {
-	r1, _, _ := syscall.SyscallN(procUtext_isWritable.Addr(), uintptr(unsafe.Pointer(ut)))
-	return int8(r1)
-}
-
-// utext_moveIndex32 calls icuuc!utext_moveIndex32.
-func Utext_moveIndex32(ut *UText, delta int32) int8 {
-	r1, _, _ := syscall.SyscallN(procUtext_moveIndex32.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(delta))
-	return int8(r1)
-}
-
-// utext_nativeLength calls icuuc!utext_nativeLength.
-func Utext_nativeLength(ut *UText) int64 {
-	r1, _, _ := syscall.SyscallN(procUtext_nativeLength.Addr(), uintptr(unsafe.Pointer(ut)))
-	return int64(r1)
-}
-
-// utext_next32 calls icuuc!utext_next32.
-func Utext_next32(ut *UText) int32 {
-	r1, _, _ := syscall.SyscallN(procUtext_next32.Addr(), uintptr(unsafe.Pointer(ut)))
-	return int32(r1)
-}
-
-// utext_next32From calls icuuc!utext_next32From.
-func Utext_next32From(ut *UText, nativeIndex int64) int32 {
-	r1, _, _ := syscall.SyscallN(procUtext_next32From.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeIndex))
-	return int32(r1)
-}
-
-// utext_openUChars calls icuuc!utext_openUChars.
-func Utext_openUChars(ut *UText, s *uint16, length int64, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUtext_openUChars.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// utext_openUTF8 calls icuuc!utext_openUTF8.
-func Utext_openUTF8(ut *UText, s foundation.PSTR, length int64, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUtext_openUTF8.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(unsafe.Pointer(s)), uintptr(length), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// utext_previous32 calls icuuc!utext_previous32.
-func Utext_previous32(ut *UText) int32 {
-	r1, _, _ := syscall.SyscallN(procUtext_previous32.Addr(), uintptr(unsafe.Pointer(ut)))
-	return int32(r1)
-}
-
-// utext_previous32From calls icuuc!utext_previous32From.
-func Utext_previous32From(ut *UText, nativeIndex int64) int32 {
-	r1, _, _ := syscall.SyscallN(procUtext_previous32From.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeIndex))
-	return int32(r1)
-}
-
-// utext_replace calls icuuc!utext_replace.
-func Utext_replace(ut *UText, nativeStart int64, nativeLimit int64, replacementText *uint16, replacementLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUtext_replace.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeStart), uintptr(nativeLimit), uintptr(unsafe.Pointer(replacementText)), uintptr(replacementLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// utext_setNativeIndex calls icuuc!utext_setNativeIndex.
-func Utext_setNativeIndex(ut *UText, nativeIndex int64) {
-	syscall.SyscallN(procUtext_setNativeIndex.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(nativeIndex))
-}
-
-// utext_setup calls icuuc!utext_setup.
-func Utext_setup(ut *UText, extraSpace int32, status *UErrorCode) *UText {
-	r1, _, _ := syscall.SyscallN(procUtext_setup.Addr(), uintptr(unsafe.Pointer(ut)), uintptr(extraSpace), uintptr(unsafe.Pointer(status)))
-	return (*UText)(unsafe.Pointer(r1))
-}
-
-// utf8_appendCharSafeBody calls icuuc!utf8_appendCharSafeBody.
-func Utf8_appendCharSafeBody(s *byte, i int32, length int32, c int32, pIsError *int8) int32 {
-	r1, _, _ := syscall.SyscallN(procUtf8_appendCharSafeBody.Addr(), uintptr(unsafe.Pointer(s)), uintptr(i), uintptr(length), uintptr(c), uintptr(unsafe.Pointer(pIsError)))
-	return int32(r1)
-}
-
-// utf8_back1SafeBody calls icuuc!utf8_back1SafeBody.
-func Utf8_back1SafeBody(s *byte, start int32, i int32) int32 {
-	r1, _, _ := syscall.SyscallN(procUtf8_back1SafeBody.Addr(), uintptr(unsafe.Pointer(s)), uintptr(start), uintptr(i))
-	return int32(r1)
-}
-
-// utf8_nextCharSafeBody calls icuuc!utf8_nextCharSafeBody.
-func Utf8_nextCharSafeBody(s *byte, pi *int32, length int32, c int32, strict int8) int32 {
-	r1, _, _ := syscall.SyscallN(procUtf8_nextCharSafeBody.Addr(), uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(pi)), uintptr(length), uintptr(c), uintptr(strict))
-	return int32(r1)
-}
-
-// utf8_prevCharSafeBody calls icuuc!utf8_prevCharSafeBody.
-func Utf8_prevCharSafeBody(s *byte, start int32, pi *int32, c int32, strict int8) int32 {
-	r1, _, _ := syscall.SyscallN(procUtf8_prevCharSafeBody.Addr(), uintptr(unsafe.Pointer(s)), uintptr(start), uintptr(unsafe.Pointer(pi)), uintptr(c), uintptr(strict))
-	return int32(r1)
-}
-
-// utmscale_fromInt64 calls icuin!utmscale_fromInt64.
-func Utmscale_fromInt64(otherTime int64, timeScale UDateTimeScale, status *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUtmscale_fromInt64.Addr(), uintptr(otherTime), uintptr(timeScale), uintptr(unsafe.Pointer(status)))
-	return int64(r1)
-}
-
-// utmscale_getTimeScaleValue calls icuin!utmscale_getTimeScaleValue.
-func Utmscale_getTimeScaleValue(timeScale UDateTimeScale, value UTimeScaleValue, status *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUtmscale_getTimeScaleValue.Addr(), uintptr(timeScale), uintptr(value), uintptr(unsafe.Pointer(status)))
-	return int64(r1)
-}
-
-// utmscale_toInt64 calls icuin!utmscale_toInt64.
-func Utmscale_toInt64(universalTime int64, timeScale UDateTimeScale, status *UErrorCode) int64 {
-	r1, _, _ := syscall.SyscallN(procUtmscale_toInt64.Addr(), uintptr(universalTime), uintptr(timeScale), uintptr(unsafe.Pointer(status)))
-	return int64(r1)
-}
-
-// utrace_format calls icuuc!utrace_format.
-func Utrace_format(outBuf foundation.PSTR, capacity int32, indent int32, fmt foundation.PSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procUtrace_format.Addr(), uintptr(unsafe.Pointer(outBuf)), uintptr(capacity), uintptr(indent), uintptr(unsafe.Pointer(fmt)))
-	return int32(r1)
-}
-
-// utrace_functionName calls icuuc!utrace_functionName.
-func Utrace_functionName(fnNumber int32) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procUtrace_functionName.Addr(), uintptr(fnNumber))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// utrace_getFunctions calls icuuc!utrace_getFunctions.
-func Utrace_getFunctions(context *unsafe.Pointer, e *UTraceEntry, x *UTraceExit, d *UTraceData) {
-	syscall.SyscallN(procUtrace_getFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(e)), uintptr(unsafe.Pointer(x)), uintptr(unsafe.Pointer(d)))
-}
-
-// utrace_getLevel calls icuuc!utrace_getLevel.
-func Utrace_getLevel() int32 {
-	r1, _, _ := syscall.SyscallN(procUtrace_getLevel.Addr())
-	return int32(r1)
-}
-
-// utrace_setFunctions calls icuuc!utrace_setFunctions.
-func Utrace_setFunctions(context unsafe.Pointer, e UTraceEntry, x UTraceExit, d UTraceData) {
-	syscall.SyscallN(procUtrace_setFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(e), uintptr(x), uintptr(d))
-}
-
-// utrace_setLevel calls icuuc!utrace_setLevel.
-func Utrace_setLevel(traceLevel int32) {
-	syscall.SyscallN(procUtrace_setLevel.Addr(), uintptr(traceLevel))
-}
-
-// utrace_vformat calls icuuc!utrace_vformat.
-func Utrace_vformat(outBuf foundation.PSTR, capacity int32, indent int32, fmt foundation.PSTR, args *int8) int32 {
-	r1, _, _ := syscall.SyscallN(procUtrace_vformat.Addr(), uintptr(unsafe.Pointer(outBuf)), uintptr(capacity), uintptr(indent), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(args)))
-	return int32(r1)
-}
-
-// utrans_clone calls icuin!utrans_clone.
-func Utrans_clone(trans *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUtrans_clone.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// utrans_close calls icuin!utrans_close.
-func Utrans_close(trans *unsafe.Pointer) {
-	syscall.SyscallN(procUtrans_close.Addr(), uintptr(unsafe.Pointer(trans)))
-}
-
-// utrans_countAvailableIDs calls icuin!utrans_countAvailableIDs.
-func Utrans_countAvailableIDs() int32 {
-	r1, _, _ := syscall.SyscallN(procUtrans_countAvailableIDs.Addr())
-	return int32(r1)
-}
-
-// utrans_getSourceSet calls icuin!utrans_getSourceSet.
-func Utrans_getSourceSet(trans *unsafe.Pointer, ignoreFilter int8, fillIn *USet, status *UErrorCode) *USet {
-	r1, _, _ := syscall.SyscallN(procUtrans_getSourceSet.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(ignoreFilter), uintptr(unsafe.Pointer(fillIn)), uintptr(unsafe.Pointer(status)))
-	return (*USet)(unsafe.Pointer(r1))
-}
-
-// utrans_getUnicodeID calls icuin!utrans_getUnicodeID.
-func Utrans_getUnicodeID(trans *unsafe.Pointer, resultLength *int32) *uint16 {
-	r1, _, _ := syscall.SyscallN(procUtrans_getUnicodeID.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(resultLength)))
-	return (*uint16)(unsafe.Pointer(r1))
-}
-
-// utrans_openIDs calls icuin!utrans_openIDs.
-func Utrans_openIDs(pErrorCode *UErrorCode) *UEnumeration {
-	r1, _, _ := syscall.SyscallN(procUtrans_openIDs.Addr(), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*UEnumeration)(unsafe.Pointer(r1))
-}
-
-// utrans_openInverse calls icuin!utrans_openInverse.
-func Utrans_openInverse(trans *unsafe.Pointer, status *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUtrans_openInverse.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(status)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// utrans_openU calls icuin!utrans_openU.
-func Utrans_openU(id *uint16, idLength int32, dir UTransDirection, rules *uint16, rulesLength int32, parseError *UParseError, pErrorCode *UErrorCode) *unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procUtrans_openU.Addr(), uintptr(unsafe.Pointer(id)), uintptr(idLength), uintptr(dir), uintptr(unsafe.Pointer(rules)), uintptr(rulesLength), uintptr(unsafe.Pointer(parseError)), uintptr(unsafe.Pointer(pErrorCode)))
-	return (*unsafe.Pointer)(unsafe.Pointer(r1))
-}
-
-// utrans_register calls icuin!utrans_register.
-func Utrans_register(adoptedTrans *unsafe.Pointer, status *UErrorCode) {
-	syscall.SyscallN(procUtrans_register.Addr(), uintptr(unsafe.Pointer(adoptedTrans)), uintptr(unsafe.Pointer(status)))
-}
-
-// utrans_setFilter calls icuin!utrans_setFilter.
-func Utrans_setFilter(trans *unsafe.Pointer, filterPattern *uint16, filterPatternLen int32, status *UErrorCode) {
-	syscall.SyscallN(procUtrans_setFilter.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(filterPattern)), uintptr(filterPatternLen), uintptr(unsafe.Pointer(status)))
-}
-
-// utrans_toRules calls icuin!utrans_toRules.
-func Utrans_toRules(trans *unsafe.Pointer, escapeUnprintable int8, result *uint16, resultLength int32, status *UErrorCode) int32 {
-	r1, _, _ := syscall.SyscallN(procUtrans_toRules.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(escapeUnprintable), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(status)))
-	return int32(r1)
-}
-
-// utrans_trans calls icuin!utrans_trans.
-func Utrans_trans(trans *unsafe.Pointer, rep *unsafe.Pointer, repFunc *UReplaceableCallbacks, start int32, limit *int32, status *UErrorCode) {
-	syscall.SyscallN(procUtrans_trans.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(rep)), uintptr(unsafe.Pointer(repFunc)), uintptr(start), uintptr(unsafe.Pointer(limit)), uintptr(unsafe.Pointer(status)))
-}
-
-// utrans_transIncremental calls icuin!utrans_transIncremental.
-func Utrans_transIncremental(trans *unsafe.Pointer, rep *unsafe.Pointer, repFunc *UReplaceableCallbacks, pos *UTransPosition, status *UErrorCode) {
-	syscall.SyscallN(procUtrans_transIncremental.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(rep)), uintptr(unsafe.Pointer(repFunc)), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
-}
-
-// utrans_transIncrementalUChars calls icuin!utrans_transIncrementalUChars.
-func Utrans_transIncrementalUChars(trans *unsafe.Pointer, text *uint16, textLength *int32, textCapacity int32, pos *UTransPosition, status *UErrorCode) {
-	syscall.SyscallN(procUtrans_transIncrementalUChars.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(textLength)), uintptr(textCapacity), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
-}
-
-// utrans_transUChars calls icuin!utrans_transUChars.
-func Utrans_transUChars(trans *unsafe.Pointer, text *uint16, textLength *int32, textCapacity int32, start int32, limit *int32, status *UErrorCode) {
-	syscall.SyscallN(procUtrans_transUChars.Addr(), uintptr(unsafe.Pointer(trans)), uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(textLength)), uintptr(textCapacity), uintptr(start), uintptr(unsafe.Pointer(limit)), uintptr(unsafe.Pointer(status)))
-}
-
-// utrans_unregisterID calls icuin!utrans_unregisterID.
-func Utrans_unregisterID(id *uint16, idLength int32) {
-	syscall.SyscallN(procUtrans_unregisterID.Addr(), uintptr(unsafe.Pointer(id)), uintptr(idLength))
 }

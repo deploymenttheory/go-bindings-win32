@@ -189,8 +189,8 @@ type NDIS_802_11_STATUS_INDICATION struct {
 	StatusType NDIS_802_11_STATUS_TYPE
 }
 
-// NDIS_802_11_TEST_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NDIS_802_11_TEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NDIS_802_11_TEST_Anonymous_e__Union struct {
 	Data [5]uint32
 }
@@ -250,8 +250,8 @@ type NDIS_CO_LINK_SPEED struct {
 	Inbound  uint32
 }
 
-// NDIS_GUID_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NDIS_GUID_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NDIS_GUID_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -952,8 +952,8 @@ type NET_IF_RCV_ADDRESS_LH struct {
 }
 
 // NET_LUID_LH: https://learn.microsoft.com/windows/win32/api/ifdef/ns-ifdef-net_luid_lh
-// NET_LUID_LH is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NET_LUID_LH is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NET_LUID_LH struct {
 	Data [1]uint64
 }

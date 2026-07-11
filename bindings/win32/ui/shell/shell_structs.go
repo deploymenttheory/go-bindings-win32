@@ -658,8 +658,8 @@ type NC_ADDRESS struct {
 	PrefixLength byte
 }
 
-// NOTIFYICONDATAA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NOTIFYICONDATAA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NOTIFYICONDATAA_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -683,8 +683,8 @@ type NOTIFYICONDATAA struct {
 	HBalloonIcon     uiwindowsandmessaging.HICON
 }
 
-// NOTIFYICONDATAW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NOTIFYICONDATAW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NOTIFYICONDATAW_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -982,8 +982,8 @@ type SHDRAGIMAGE struct {
 	CrColorKey    foundation.COLORREF
 }
 
-// SHELLEXECUTEINFOA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SHELLEXECUTEINFOA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SHELLEXECUTEINFOA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1007,8 +1007,8 @@ type SHELLEXECUTEINFOA struct {
 	HProcess     foundation.HANDLE
 }
 
-// SHELLEXECUTEINFOW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SHELLEXECUTEINFOW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SHELLEXECUTEINFOW_Anonymous_e__Union struct {
 	Data [1]uint64
 }

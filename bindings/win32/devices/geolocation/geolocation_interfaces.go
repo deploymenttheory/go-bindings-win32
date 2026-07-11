@@ -25,45 +25,45 @@ type ICivicAddressReport struct {
 var IID_ICivicAddressReport = win32.GUID{Data1: 0xc0b19f70, Data2: 0x4adf, Data3: 0x445d, Data4: [8]byte{0x87, 0xf2, 0xca, 0xd8, 0xfd, 0x71, 0x17, 0x92}}
 
 // GetAddressLine1 dispatches through ICivicAddressReport's vtable slot 6.
-func (self *ICivicAddressReport) GetAddressLine1(pbstrAddress1 *foundation.BSTR) foundation.HRESULT {
+func (self *ICivicAddressReport) GetAddressLine1(pbstrAddress1 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrAddress1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAddressLine2 dispatches through ICivicAddressReport's vtable slot 7.
-func (self *ICivicAddressReport) GetAddressLine2(pbstrAddress2 *foundation.BSTR) foundation.HRESULT {
+func (self *ICivicAddressReport) GetAddressLine2(pbstrAddress2 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrAddress2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCity dispatches through ICivicAddressReport's vtable slot 8.
-func (self *ICivicAddressReport) GetCity(pbstrCity *foundation.BSTR) foundation.HRESULT {
+func (self *ICivicAddressReport) GetCity(pbstrCity *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStateProvince dispatches through ICivicAddressReport's vtable slot 9.
-func (self *ICivicAddressReport) GetStateProvince(pbstrStateProvince *foundation.BSTR) foundation.HRESULT {
+func (self *ICivicAddressReport) GetStateProvince(pbstrStateProvince *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStateProvince)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPostalCode dispatches through ICivicAddressReport's vtable slot 10.
-func (self *ICivicAddressReport) GetPostalCode(pbstrPostalCode *foundation.BSTR) foundation.HRESULT {
+func (self *ICivicAddressReport) GetPostalCode(pbstrPostalCode *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPostalCode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCountryRegion dispatches through ICivicAddressReport's vtable slot 11.
-func (self *ICivicAddressReport) GetCountryRegion(pbstrCountryRegion *foundation.BSTR) foundation.HRESULT {
+func (self *ICivicAddressReport) GetCountryRegion(pbstrCountryRegion *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCountryRegion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDetailLevel dispatches through ICivicAddressReport's vtable slot 12.
-func (self *ICivicAddressReport) GetDetailLevel(pDetailLevel *uint32) foundation.HRESULT {
+func (self *ICivicAddressReport) GetDetailLevel(pDetailLevel *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDetailLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bf773b93-c64f-4bee-beb2-67c0b8df66e0
@@ -75,9 +75,9 @@ type ICivicAddressReportFactory struct {
 var IID_ICivicAddressReportFactory = win32.GUID{Data1: 0xbf773b93, Data2: 0xc64f, Data3: 0x4bee, Data4: [8]byte{0xbe, 0xb2, 0x67, 0xc0, 0xb8, 0xdf, 0x66, 0xe0}}
 
 // Get_CivicAddressReport dispatches through ICivicAddressReportFactory's vtable slot 15.
-func (self *ICivicAddressReportFactory) Get_CivicAddressReport(pVal **IDispCivicAddressReport) foundation.HRESULT {
+func (self *ICivicAddressReportFactory) Get_CivicAddressReport(pVal **IDispCivicAddressReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDefaultLocation: https://learn.microsoft.com/windows/win32/api/locationapi/nn-locationapi-idefaultlocation
@@ -90,15 +90,15 @@ type IDefaultLocation struct {
 var IID_IDefaultLocation = win32.GUID{Data1: 0xa65af77e, Data2: 0x969a, Data3: 0x4a2e, Data4: [8]byte{0x8a, 0xca, 0x33, 0xbb, 0x7c, 0xbb, 0x12, 0x35}}
 
 // SetReport dispatches through IDefaultLocation's vtable slot 3.
-func (self *IDefaultLocation) SetReport(reportType *win32.GUID, pLocationReport *ILocationReport) foundation.HRESULT {
+func (self *IDefaultLocation) SetReport(reportType *win32.GUID, pLocationReport *ILocationReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(unsafe.Pointer(pLocationReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReport dispatches through IDefaultLocation's vtable slot 4.
-func (self *IDefaultLocation) GetReport(reportType *win32.GUID, ppLocationReport **ILocationReport) foundation.HRESULT {
+func (self *IDefaultLocation) GetReport(reportType *win32.GUID, ppLocationReport **ILocationReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(unsafe.Pointer(ppLocationReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 16ff1a34-9e30-42c3-b44d-e22513b5767a
@@ -110,51 +110,51 @@ type IDispCivicAddressReport struct {
 var IID_IDispCivicAddressReport = win32.GUID{Data1: 0x16ff1a34, Data2: 0x9e30, Data3: 0x42c3, Data4: [8]byte{0xb4, 0x4d, 0xe2, 0x25, 0x13, 0xb5, 0x76, 0x7a}}
 
 // Get_AddressLine1 dispatches through IDispCivicAddressReport's vtable slot 7.
-func (self *IDispCivicAddressReport) Get_AddressLine1(pAddress1 *foundation.BSTR) foundation.HRESULT {
+func (self *IDispCivicAddressReport) Get_AddressLine1(pAddress1 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AddressLine2 dispatches through IDispCivicAddressReport's vtable slot 8.
-func (self *IDispCivicAddressReport) Get_AddressLine2(pAddress2 *foundation.BSTR) foundation.HRESULT {
+func (self *IDispCivicAddressReport) Get_AddressLine2(pAddress2 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_City dispatches through IDispCivicAddressReport's vtable slot 9.
-func (self *IDispCivicAddressReport) Get_City(pCity *foundation.BSTR) foundation.HRESULT {
+func (self *IDispCivicAddressReport) Get_City(pCity *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StateProvince dispatches through IDispCivicAddressReport's vtable slot 10.
-func (self *IDispCivicAddressReport) Get_StateProvince(pStateProvince *foundation.BSTR) foundation.HRESULT {
+func (self *IDispCivicAddressReport) Get_StateProvince(pStateProvince *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStateProvince)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PostalCode dispatches through IDispCivicAddressReport's vtable slot 11.
-func (self *IDispCivicAddressReport) Get_PostalCode(pPostalCode *foundation.BSTR) foundation.HRESULT {
+func (self *IDispCivicAddressReport) Get_PostalCode(pPostalCode *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPostalCode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CountryRegion dispatches through IDispCivicAddressReport's vtable slot 12.
-func (self *IDispCivicAddressReport) Get_CountryRegion(pCountryRegion *foundation.BSTR) foundation.HRESULT {
+func (self *IDispCivicAddressReport) Get_CountryRegion(pCountryRegion *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCountryRegion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DetailLevel dispatches through IDispCivicAddressReport's vtable slot 13.
-func (self *IDispCivicAddressReport) Get_DetailLevel(pDetailLevel *uint32) foundation.HRESULT {
+func (self *IDispCivicAddressReport) Get_DetailLevel(pDetailLevel *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDetailLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Timestamp dispatches through IDispCivicAddressReport's vtable slot 14.
-func (self *IDispCivicAddressReport) Get_Timestamp(pVal *float64) foundation.HRESULT {
+func (self *IDispCivicAddressReport) Get_Timestamp(pVal *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8ae32723-389b-4a11-9957-5bdd48fc9617
@@ -166,39 +166,39 @@ type IDispLatLongReport struct {
 var IID_IDispLatLongReport = win32.GUID{Data1: 0x8ae32723, Data2: 0x389b, Data3: 0x4a11, Data4: [8]byte{0x99, 0x57, 0x5b, 0xdd, 0x48, 0xfc, 0x96, 0x17}}
 
 // Get_Latitude dispatches through IDispLatLongReport's vtable slot 7.
-func (self *IDispLatLongReport) Get_Latitude(pVal *float64) foundation.HRESULT {
+func (self *IDispLatLongReport) Get_Latitude(pVal *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Longitude dispatches through IDispLatLongReport's vtable slot 8.
-func (self *IDispLatLongReport) Get_Longitude(pVal *float64) foundation.HRESULT {
+func (self *IDispLatLongReport) Get_Longitude(pVal *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ErrorRadius dispatches through IDispLatLongReport's vtable slot 9.
-func (self *IDispLatLongReport) Get_ErrorRadius(pVal *float64) foundation.HRESULT {
+func (self *IDispLatLongReport) Get_ErrorRadius(pVal *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Altitude dispatches through IDispLatLongReport's vtable slot 10.
-func (self *IDispLatLongReport) Get_Altitude(pVal *float64) foundation.HRESULT {
+func (self *IDispLatLongReport) Get_Altitude(pVal *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AltitudeError dispatches through IDispLatLongReport's vtable slot 11.
-func (self *IDispLatLongReport) Get_AltitudeError(pVal *float64) foundation.HRESULT {
+func (self *IDispLatLongReport) Get_AltitudeError(pVal *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Timestamp dispatches through IDispLatLongReport's vtable slot 12.
-func (self *IDispLatLongReport) Get_Timestamp(pVal *float64) foundation.HRESULT {
+func (self *IDispLatLongReport) Get_Timestamp(pVal *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILatLongReport: https://learn.microsoft.com/windows/win32/api/locationapi/nn-locationapi-ilatlongreport
@@ -211,33 +211,33 @@ type ILatLongReport struct {
 var IID_ILatLongReport = win32.GUID{Data1: 0x7fed806d, Data2: 0x0ef8, Data3: 0x4f07, Data4: [8]byte{0x80, 0xac, 0x36, 0xa0, 0xbe, 0xae, 0x31, 0x34}}
 
 // GetLatitude dispatches through ILatLongReport's vtable slot 6.
-func (self *ILatLongReport) GetLatitude(pLatitude *float64) foundation.HRESULT {
+func (self *ILatLongReport) GetLatitude(pLatitude *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLatitude)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLongitude dispatches through ILatLongReport's vtable slot 7.
-func (self *ILatLongReport) GetLongitude(pLongitude *float64) foundation.HRESULT {
+func (self *ILatLongReport) GetLongitude(pLongitude *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLongitude)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorRadius dispatches through ILatLongReport's vtable slot 8.
-func (self *ILatLongReport) GetErrorRadius(pErrorRadius *float64) foundation.HRESULT {
+func (self *ILatLongReport) GetErrorRadius(pErrorRadius *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorRadius)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAltitude dispatches through ILatLongReport's vtable slot 9.
-func (self *ILatLongReport) GetAltitude(pAltitude *float64) foundation.HRESULT {
+func (self *ILatLongReport) GetAltitude(pAltitude *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAltitude)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAltitudeError dispatches through ILatLongReport's vtable slot 10.
-func (self *ILatLongReport) GetAltitudeError(pAltitudeError *float64) foundation.HRESULT {
+func (self *ILatLongReport) GetAltitudeError(pAltitudeError *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAltitudeError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3f0804cb-b114-447d-83dd-390174ebb082
@@ -249,9 +249,9 @@ type ILatLongReportFactory struct {
 var IID_ILatLongReportFactory = win32.GUID{Data1: 0x3f0804cb, Data2: 0xb114, Data3: 0x447d, Data4: [8]byte{0x83, 0xdd, 0x39, 0x01, 0x74, 0xeb, 0xb0, 0x82}}
 
 // Get_LatLongReport dispatches through ILatLongReportFactory's vtable slot 15.
-func (self *ILatLongReportFactory) Get_LatLongReport(pVal **IDispLatLongReport) foundation.HRESULT {
+func (self *ILatLongReportFactory) Get_LatLongReport(pVal **IDispLatLongReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILocation: https://learn.microsoft.com/windows/win32/api/locationapi/nn-locationapi-ilocation
@@ -264,57 +264,58 @@ type ILocation struct {
 var IID_ILocation = win32.GUID{Data1: 0xab2ece69, Data2: 0x56d9, Data3: 0x4f28, Data4: [8]byte{0xb5, 0x25, 0xde, 0x1b, 0x0e, 0xe4, 0x42, 0x37}}
 
 // RegisterForReport dispatches through ILocation's vtable slot 3.
-func (self *ILocation) RegisterForReport(pEvents *ILocationEvents, reportType *win32.GUID, dwRequestedReportInterval uint32) foundation.HRESULT {
+func (self *ILocation) RegisterForReport(pEvents *ILocationEvents, reportType *win32.GUID, dwRequestedReportInterval uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvents)), uintptr(unsafe.Pointer(reportType)), uintptr(dwRequestedReportInterval))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterForReport dispatches through ILocation's vtable slot 4.
-func (self *ILocation) UnregisterForReport(reportType *win32.GUID) foundation.HRESULT {
+func (self *ILocation) UnregisterForReport(reportType *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReport dispatches through ILocation's vtable slot 5.
-func (self *ILocation) GetReport(reportType *win32.GUID, ppLocationReport **ILocationReport) foundation.HRESULT {
+func (self *ILocation) GetReport(reportType *win32.GUID, ppLocationReport **ILocationReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(unsafe.Pointer(ppLocationReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReportStatus dispatches through ILocation's vtable slot 6.
-func (self *ILocation) GetReportStatus(reportType *win32.GUID, pStatus *LOCATION_REPORT_STATUS) foundation.HRESULT {
+func (self *ILocation) GetReportStatus(reportType *win32.GUID, pStatus *LOCATION_REPORT_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReportInterval dispatches through ILocation's vtable slot 7.
-func (self *ILocation) GetReportInterval(reportType *win32.GUID, pMilliseconds *uint32) foundation.HRESULT {
+func (self *ILocation) GetReportInterval(reportType *win32.GUID, pMilliseconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(unsafe.Pointer(pMilliseconds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetReportInterval dispatches through ILocation's vtable slot 8.
-func (self *ILocation) SetReportInterval(reportType *win32.GUID, millisecondsRequested uint32) foundation.HRESULT {
+func (self *ILocation) SetReportInterval(reportType *win32.GUID, millisecondsRequested uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(millisecondsRequested))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesiredAccuracy dispatches through ILocation's vtable slot 9.
-func (self *ILocation) GetDesiredAccuracy(reportType *win32.GUID, pDesiredAccuracy *devicessensors.LOCATION_DESIRED_ACCURACY) foundation.HRESULT {
+func (self *ILocation) GetDesiredAccuracy(reportType *win32.GUID, pDesiredAccuracy *devicessensors.LOCATION_DESIRED_ACCURACY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(unsafe.Pointer(pDesiredAccuracy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDesiredAccuracy dispatches through ILocation's vtable slot 10.
-func (self *ILocation) SetDesiredAccuracy(reportType *win32.GUID, desiredAccuracy devicessensors.LOCATION_DESIRED_ACCURACY) foundation.HRESULT {
+func (self *ILocation) SetDesiredAccuracy(reportType *win32.GUID, desiredAccuracy devicessensors.LOCATION_DESIRED_ACCURACY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(desiredAccuracy))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestPermissions dispatches through ILocation's vtable slot 11.
-func (self *ILocation) RequestPermissions(hParent foundation.HWND, pReportTypes *win32.GUID, count uint32, fModal foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hParent), uintptr(unsafe.Pointer(pReportTypes)), uintptr(count), uintptr(fModal))
-	return foundation.HRESULT(r1)
+func (self *ILocation) RequestPermissions(hParent foundation.HWND, pReportTypes *win32.GUID, count uint32, fModal bool) error {
+	_fModal := win32.Bool32(fModal)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hParent), uintptr(unsafe.Pointer(pReportTypes)), uintptr(count), uintptr(_fModal))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILocationEvents: https://learn.microsoft.com/windows/win32/api/locationapi/nn-locationapi-ilocationevents
@@ -327,15 +328,15 @@ type ILocationEvents struct {
 var IID_ILocationEvents = win32.GUID{Data1: 0xcae02bbf, Data2: 0x798b, Data3: 0x4508, Data4: [8]byte{0xa2, 0x07, 0x35, 0xa7, 0x90, 0x6d, 0xc7, 0x3d}}
 
 // OnLocationChanged dispatches through ILocationEvents's vtable slot 3.
-func (self *ILocationEvents) OnLocationChanged(reportType *win32.GUID, pLocationReport *ILocationReport) foundation.HRESULT {
+func (self *ILocationEvents) OnLocationChanged(reportType *win32.GUID, pLocationReport *ILocationReport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(unsafe.Pointer(pLocationReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnStatusChanged dispatches through ILocationEvents's vtable slot 4.
-func (self *ILocationEvents) OnStatusChanged(reportType *win32.GUID, newStatus LOCATION_REPORT_STATUS) foundation.HRESULT {
+func (self *ILocationEvents) OnStatusChanged(reportType *win32.GUID, newStatus LOCATION_REPORT_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reportType)), uintptr(newStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILocationPower: https://learn.microsoft.com/windows/win32/api/locationapi/nn-locationapi-ilocationpower
@@ -348,15 +349,15 @@ type ILocationPower struct {
 var IID_ILocationPower = win32.GUID{Data1: 0x193e7729, Data2: 0xab6b, Data3: 0x4b12, Data4: [8]byte{0x86, 0x17, 0x75, 0x96, 0xe1, 0xbb, 0x19, 0x1c}}
 
 // Connect dispatches through ILocationPower's vtable slot 3.
-func (self *ILocationPower) Connect() foundation.HRESULT {
+func (self *ILocationPower) Connect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through ILocationPower's vtable slot 4.
-func (self *ILocationPower) Disconnect() foundation.HRESULT {
+func (self *ILocationPower) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILocationReport: https://learn.microsoft.com/windows/win32/api/locationapi/nn-locationapi-ilocationreport
@@ -369,21 +370,21 @@ type ILocationReport struct {
 var IID_ILocationReport = win32.GUID{Data1: 0xc8b7f7ee, Data2: 0x75d0, Data3: 0x4db9, Data4: [8]byte{0xb6, 0x2d, 0x7a, 0x0f, 0x36, 0x9c, 0xa4, 0x56}}
 
 // GetSensorID dispatches through ILocationReport's vtable slot 3.
-func (self *ILocationReport) GetSensorID(pSensorID *win32.GUID) foundation.HRESULT {
+func (self *ILocationReport) GetSensorID(pSensorID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSensorID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimestamp dispatches through ILocationReport's vtable slot 4.
-func (self *ILocationReport) GetTimestamp(pCreationTime *foundation.SYSTEMTIME) foundation.HRESULT {
+func (self *ILocationReport) GetTimestamp(pCreationTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCreationTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValue dispatches through ILocationReport's vtable slot 5.
-func (self *ILocationReport) GetValue(pKey *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *ILocationReport) GetValue(pKey *foundation.PROPERTYKEY, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2daec322-90b2-47e4-bb08-0da841935a6b
@@ -395,51 +396,51 @@ type ILocationReportFactory struct {
 var IID_ILocationReportFactory = win32.GUID{Data1: 0x2daec322, Data2: 0x90b2, Data3: 0x47e4, Data4: [8]byte{0xbb, 0x08, 0x0d, 0xa8, 0x41, 0x93, 0x5a, 0x6b}}
 
 // ListenForReports dispatches through ILocationReportFactory's vtable slot 7.
-func (self *ILocationReportFactory) ListenForReports(requestedReportInterval uint32) foundation.HRESULT {
+func (self *ILocationReportFactory) ListenForReports(requestedReportInterval uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(requestedReportInterval))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopListeningForReports dispatches through ILocationReportFactory's vtable slot 8.
-func (self *ILocationReportFactory) StopListeningForReports() foundation.HRESULT {
+func (self *ILocationReportFactory) StopListeningForReports() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Status dispatches through ILocationReportFactory's vtable slot 9.
-func (self *ILocationReportFactory) Get_Status(pVal *uint32) foundation.HRESULT {
+func (self *ILocationReportFactory) Get_Status(pVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReportInterval dispatches through ILocationReportFactory's vtable slot 10.
-func (self *ILocationReportFactory) Get_ReportInterval(pMilliseconds *uint32) foundation.HRESULT {
+func (self *ILocationReportFactory) Get_ReportInterval(pMilliseconds *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMilliseconds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ReportInterval dispatches through ILocationReportFactory's vtable slot 11.
-func (self *ILocationReportFactory) Put_ReportInterval(millisecondsRequested uint32) foundation.HRESULT {
+func (self *ILocationReportFactory) Put_ReportInterval(millisecondsRequested uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(millisecondsRequested))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DesiredAccuracy dispatches through ILocationReportFactory's vtable slot 12.
-func (self *ILocationReportFactory) Get_DesiredAccuracy(pDesiredAccuracy *uint32) foundation.HRESULT {
+func (self *ILocationReportFactory) Get_DesiredAccuracy(pDesiredAccuracy *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesiredAccuracy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DesiredAccuracy dispatches through ILocationReportFactory's vtable slot 13.
-func (self *ILocationReportFactory) Put_DesiredAccuracy(desiredAccuracy uint32) foundation.HRESULT {
+func (self *ILocationReportFactory) Put_DesiredAccuracy(desiredAccuracy uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(desiredAccuracy))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestPermissions dispatches through ILocationReportFactory's vtable slot 14.
-func (self *ILocationReportFactory) RequestPermissions(hWnd *uint32) foundation.HRESULT {
+func (self *ILocationReportFactory) RequestPermissions(hWnd *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hWnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c96039ff-72ec-4617-89bd-84d88bedc722

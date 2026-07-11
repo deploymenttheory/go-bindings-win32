@@ -96,15 +96,15 @@ func GetTimeZoneInformationForYear(wYear uint16, pdtzi *DYNAMIC_TIME_ZONE_INFORM
 }
 
 // LocalFileTimeToLocalSystemTime calls KERNEL32!LocalFileTimeToLocalSystemTime.
-func LocalFileTimeToLocalSystemTime(timeZoneInformation *TIME_ZONE_INFORMATION, localFileTime *foundation.FILETIME, localSystemTime *foundation.SYSTEMTIME) foundation.BOOL {
+func LocalFileTimeToLocalSystemTime(timeZoneInformation *TIME_ZONE_INFORMATION, localFileTime *foundation.FILETIME, localSystemTime *foundation.SYSTEMTIME) bool {
 	r1, _, _ := syscall.SyscallN(procLocalFileTimeToLocalSystemTime.Addr(), uintptr(unsafe.Pointer(timeZoneInformation)), uintptr(unsafe.Pointer(localFileTime)), uintptr(unsafe.Pointer(localSystemTime)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LocalSystemTimeToLocalFileTime calls KERNEL32!LocalSystemTimeToLocalFileTime.
-func LocalSystemTimeToLocalFileTime(timeZoneInformation *TIME_ZONE_INFORMATION, localSystemTime *foundation.SYSTEMTIME, localFileTime *foundation.FILETIME) foundation.BOOL {
+func LocalSystemTimeToLocalFileTime(timeZoneInformation *TIME_ZONE_INFORMATION, localSystemTime *foundation.SYSTEMTIME, localFileTime *foundation.FILETIME) bool {
 	r1, _, _ := syscall.SyscallN(procLocalSystemTimeToLocalFileTime.Addr(), uintptr(unsafe.Pointer(timeZoneInformation)), uintptr(unsafe.Pointer(localSystemTime)), uintptr(unsafe.Pointer(localFileTime)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetDynamicTimeZoneInformation calls KERNEL32!SetDynamicTimeZoneInformation.

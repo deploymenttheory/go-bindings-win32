@@ -23,27 +23,27 @@ type ICreateDeviceAccessAsync struct {
 var IID_ICreateDeviceAccessAsync = win32.GUID{Data1: 0x3474628f, Data2: 0x683d, Data3: 0x42d2, Data4: [8]byte{0xab, 0xcb, 0xdb, 0x01, 0x8c, 0x65, 0x03, 0xbc}}
 
 // Cancel dispatches through ICreateDeviceAccessAsync's vtable slot 3.
-func (self *ICreateDeviceAccessAsync) Cancel() foundation.HRESULT {
+func (self *ICreateDeviceAccessAsync) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Wait dispatches through ICreateDeviceAccessAsync's vtable slot 4.
-func (self *ICreateDeviceAccessAsync) Wait(timeout uint32) foundation.HRESULT {
+func (self *ICreateDeviceAccessAsync) Wait(timeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(timeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through ICreateDeviceAccessAsync's vtable slot 5.
-func (self *ICreateDeviceAccessAsync) Close() foundation.HRESULT {
+func (self *ICreateDeviceAccessAsync) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResult dispatches through ICreateDeviceAccessAsync's vtable slot 6.
-func (self *ICreateDeviceAccessAsync) GetResult(riid *win32.GUID, deviceAccess *unsafe.Pointer) foundation.HRESULT {
+func (self *ICreateDeviceAccessAsync) GetResult(riid *win32.GUID, deviceAccess *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(deviceAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDeviceIoControl: https://learn.microsoft.com/windows/win32/api/deviceaccess/nn-deviceaccess-ideviceiocontrol
@@ -56,21 +56,21 @@ type IDeviceIoControl struct {
 var IID_IDeviceIoControl = win32.GUID{Data1: 0x9eefe161, Data2: 0x23ab, Data3: 0x4f18, Data4: [8]byte{0x9b, 0x49, 0x99, 0x1b, 0x58, 0x6a, 0xe9, 0x70}}
 
 // DeviceIoControlSync dispatches through IDeviceIoControl's vtable slot 3.
-func (self *IDeviceIoControl) DeviceIoControlSync(ioControlCode uint32, inputBuffer *byte, inputBufferSize uint32, outputBuffer *byte, outputBufferSize uint32, bytesReturned *uint32) foundation.HRESULT {
+func (self *IDeviceIoControl) DeviceIoControlSync(ioControlCode uint32, inputBuffer *byte, inputBufferSize uint32, outputBuffer *byte, outputBufferSize uint32, bytesReturned *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ioControlCode), uintptr(unsafe.Pointer(inputBuffer)), uintptr(inputBufferSize), uintptr(unsafe.Pointer(outputBuffer)), uintptr(outputBufferSize), uintptr(unsafe.Pointer(bytesReturned)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeviceIoControlAsync dispatches through IDeviceIoControl's vtable slot 4.
-func (self *IDeviceIoControl) DeviceIoControlAsync(ioControlCode uint32, inputBuffer *byte, inputBufferSize uint32, outputBuffer *byte, outputBufferSize uint32, requestCompletionCallback *IDeviceRequestCompletionCallback, cancelContext *uintptr) foundation.HRESULT {
+func (self *IDeviceIoControl) DeviceIoControlAsync(ioControlCode uint32, inputBuffer *byte, inputBufferSize uint32, outputBuffer *byte, outputBufferSize uint32, requestCompletionCallback *IDeviceRequestCompletionCallback, cancelContext *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ioControlCode), uintptr(unsafe.Pointer(inputBuffer)), uintptr(inputBufferSize), uintptr(unsafe.Pointer(outputBuffer)), uintptr(outputBufferSize), uintptr(unsafe.Pointer(requestCompletionCallback)), uintptr(unsafe.Pointer(cancelContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelOperation dispatches through IDeviceIoControl's vtable slot 5.
-func (self *IDeviceIoControl) CancelOperation(cancelContext uintptr) foundation.HRESULT {
+func (self *IDeviceIoControl) CancelOperation(cancelContext uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cancelContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDeviceRequestCompletionCallback: https://learn.microsoft.com/windows/win32/api/deviceaccess/nn-deviceaccess-idevicerequestcompletioncallback
@@ -83,7 +83,7 @@ type IDeviceRequestCompletionCallback struct {
 var IID_IDeviceRequestCompletionCallback = win32.GUID{Data1: 0x999bad24, Data2: 0x9acd, Data3: 0x45bb, Data4: [8]byte{0x86, 0x69, 0x2a, 0x2f, 0xc0, 0x28, 0x8b, 0x04}}
 
 // Invoke dispatches through IDeviceRequestCompletionCallback's vtable slot 3.
-func (self *IDeviceRequestCompletionCallback) Invoke(requestResult foundation.HRESULT, bytesReturned uint32) foundation.HRESULT {
+func (self *IDeviceRequestCompletionCallback) Invoke(requestResult foundation.HRESULT, bytesReturned uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(requestResult), uintptr(bytesReturned))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

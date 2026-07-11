@@ -38,74 +38,8 @@ type Generator struct {
 	// files from earlier runs can be pruned afterwards.
 	writtenFiles map[string]bool
 
-	// emittedFunctions records which function wrappers each namespace
-	// actually emitted (namespace → exported Go name), consumed by the
-	// idiomatic tier so it never wraps a skipped function.
-	emittedFunctions map[string]map[string]bool
-
-	// emittedComMethods records the exact emitted Go name of each COM
-	// method, keyed "namespace\x00Interface" → metadata-index → Go name, so
-	// the idiomatic tier calls the right (deduped, non-skipped) raw method.
-	emittedComMethods map[string]map[int]string
-
-	// emittedSymbols records every emitted top-level identifier per
-	// namespace and its kind, so the idiomatic tier can re-export the ones
-	// it does not itself define (making the idiomatic package self-contained).
-	emittedSymbols map[string][]Symbol
-
-	// emittedNamespaces is the set of namespaces this run emitted (the
-	// filter plus its reference closure), so the idiomatic pass can target
-	// exactly the same set.
-	emittedNamespaces map[string]bool
-
 	// Diagnostics collects all degradations and skips (ratchet input).
 	Diagnostics []string
-}
-
-// Mapper exposes the type mapper (blocked edges, skip set) so the idiomatic
-// tier resolves types with identical degradation decisions.
-func (g *Generator) Mapper() *typemap.Mapper { return g.mapper }
-
-// EmittedFunctions returns namespace → set of emitted function Go names.
-func (g *Generator) EmittedFunctions() map[string]map[string]bool {
-	return g.emittedFunctions
-}
-
-// EmittedComMethods returns "namespace\x00Interface" → metadata-index → the
-// emitted raw Go method name.
-func (g *Generator) EmittedComMethods() map[string]map[int]string {
-	return g.emittedComMethods
-}
-
-// SymbolKind classifies an emitted top-level identifier.
-type SymbolKind uint8
-
-const (
-	SymbolTypedef  SymbolKind = iota // handle/scalar typedef
-	SymbolEnum                       // enum type
-	SymbolStruct                     // struct/union
-	SymbolDelegate                   // callback function-pointer type
-	SymbolType                       // other named type (COM interface)
-	SymbolConst                      // const declaration
-	SymbolVar                        // var declaration (GUIDs, IIDs, struct inits)
-	SymbolFunc                       // function
-)
-
-// Symbol is one emitted top-level identifier.
-type Symbol struct {
-	Name string
-	Kind SymbolKind
-}
-
-// EmittedSymbols returns namespace → the top-level identifiers emitted there.
-func (g *Generator) EmittedSymbols() map[string][]Symbol { return g.emittedSymbols }
-
-// EmittedNamespaces returns the set of namespaces this run emitted.
-func (g *Generator) EmittedNamespaces() map[string]bool { return g.emittedNamespaces }
-
-// recordSymbol notes an emitted top-level identifier.
-func (g *Generator) recordSymbol(namespace, name string, kind SymbolKind) {
-	g.emittedSymbols[namespace] = append(g.emittedSymbols[namespace], Symbol{Name: name, Kind: kind})
 }
 
 // New builds a Generator. Import cycles among namespaces are computed up
@@ -131,9 +65,6 @@ func (g *Generator) EmitAll(filter map[string]bool) (int, error) {
 	// pass will skip; keep only real-pass records.
 	g.abiRecords = map[string]ABIRecord{}
 	g.writtenFiles = map[string]bool{}
-	g.emittedFunctions = map[string]map[string]bool{}
-	g.emittedComMethods = map[string]map[int]string{}
-	g.emittedSymbols = map[string][]Symbol{}
 	emitted := map[string]bool{}
 	pending := make([]string, 0, len(g.registry.Namespaces))
 	if len(filter) > 0 {
@@ -178,7 +109,6 @@ func (g *Generator) EmitAll(filter map[string]bool) (int, error) {
 	if err := g.pruneStale(len(filter) == 0); err != nil {
 		return len(emitted), err
 	}
-	g.emittedNamespaces = emitted
 	g.Diagnostics = append(g.Diagnostics, g.mapper.Diagnostics...)
 	return len(emitted), nil
 }
@@ -281,7 +211,6 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	typedefImports := typemap.ImportSet{}
 	var typedefBody strings.Builder
 	for _, model := range g.buildTypedefModels(meta, typedefImports) {
-		g.recordSymbol(meta.Namespace, model.TypeName, SymbolTypedef)
 		if err := renderInto(&typedefBody, render.Typedef, model); err != nil {
 			return err
 		}
@@ -292,10 +221,6 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 
 	var enumBody strings.Builder
 	for _, model := range g.buildEnumModels(meta) {
-		g.recordSymbol(meta.Namespace, model.TypeName, SymbolEnum)
-		for _, member := range model.Members {
-			g.recordSymbol(meta.Namespace, member.Name, SymbolConst)
-		}
 		if err := renderInto(&enumBody, render.Enum, model); err != nil {
 			return err
 		}
@@ -307,7 +232,6 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	structImports := typemap.ImportSet{}
 	var structBody strings.Builder
 	for _, model := range g.buildStructModels(meta, structImports) {
-		g.recordSymbol(meta.Namespace, model.TypeName, SymbolStruct)
 		if err := renderInto(&structBody, render.Struct, model); err != nil {
 			return err
 		}
@@ -319,7 +243,6 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	delegateImports := typemap.ImportSet{}
 	var delegateBody strings.Builder
 	for _, model := range g.buildDelegateModels(meta, delegateImports) {
-		g.recordSymbol(meta.Namespace, model.TypeName, SymbolDelegate)
 		if err := renderInto(&delegateBody, render.Delegate, model); err != nil {
 			return err
 		}
@@ -332,10 +255,6 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	interfaceImports := typemap.ImportSet{}
 	var interfaceBody strings.Builder
 	for _, model := range g.buildInterfaceModels(meta, interfaceImports) {
-		g.recordSymbol(meta.Namespace, model.TypeName, SymbolType)
-		if model.IIDVar != "" {
-			g.recordSymbol(meta.Namespace, model.IIDVar, SymbolVar)
-		}
 		if err := renderInto(&interfaceBody, render.Interface, model); err != nil {
 			return err
 		}
@@ -348,11 +267,6 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	constImports := typemap.ImportSet{}
 	var constBody strings.Builder
 	for _, model := range g.buildConstantModels(meta, constImports) {
-		if model.IsVar {
-			g.recordSymbol(meta.Namespace, model.Name, SymbolVar)
-		} else {
-			g.recordSymbol(meta.Namespace, model.Name, SymbolConst)
-		}
 		if err := renderInto(&constBody, render.Constant, model); err != nil {
 			return err
 		}
@@ -373,12 +287,19 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 		funcBody.WriteString(block)
 	}
 	for _, model := range functions {
-		g.recordSymbol(meta.Namespace, model.GoName, SymbolFunc)
 		if err := renderInto(&funcBody, render.Function, model); err != nil {
 			return err
 		}
 	}
 	if err := g.writeFile(packageDir, packageName+"_functions.go", packageName, funcImports, funcBody.String()); err != nil {
+		return err
+	}
+
+	// Handle closers file: Close<Handle>(h) error helpers from [RAIIFree].
+	// Claimed last so a closer never shadows a type or function.
+	handleImports := typemap.ImportSet{}
+	handleBody := g.buildHandleClosers(meta, handleImports)
+	if err := g.writeFile(packageDir, packageName+"_handles.go", packageName, handleImports, handleBody); err != nil {
 		return err
 	}
 

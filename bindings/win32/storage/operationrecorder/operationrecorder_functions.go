@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -24,15 +23,15 @@ var (
 // OperationEnd calls ADVAPI32!OperationEnd.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-operationend
 // Minimum OS: windows8.0.
-func OperationEnd(OperationEndParams *OPERATION_END_PARAMETERS) foundation.BOOL {
+func OperationEnd(OperationEndParams *OPERATION_END_PARAMETERS) bool {
 	r1, _, _ := syscall.SyscallN(procOperationEnd.Addr(), uintptr(unsafe.Pointer(OperationEndParams)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // OperationStart calls ADVAPI32!OperationStart.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-operationstart
 // Minimum OS: windows8.0.
-func OperationStart(OperationStartParams *OPERATION_START_PARAMETERS) foundation.BOOL {
+func OperationStart(OperationStartParams *OPERATION_START_PARAMETERS) bool {
 	r1, _, _ := syscall.SyscallN(procOperationStart.Addr(), uintptr(unsafe.Pointer(OperationStartParams)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

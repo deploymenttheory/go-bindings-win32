@@ -34,8 +34,8 @@ type AD_GUARANTEED struct {
 	DSum   uint32
 }
 
-// CONTROL_SERVICE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CONTROL_SERVICE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CONTROL_SERVICE_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -75,8 +75,8 @@ type IDPE_ATTR struct {
 }
 
 // IN_ADDR_IPV4: https://learn.microsoft.com/windows/win32/api/qossp/ns-qossp-in_addr_ipv4
-// IN_ADDR_IPV4 is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IN_ADDR_IPV4 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IN_ADDR_IPV4 struct {
 	Data [1]uint32
 }
@@ -98,8 +98,8 @@ type IPX_PATTERN struct {
 	Dest IPX_PATTERN_Src_e__Struct
 }
 
-// IP_PATTERN_S_un_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP_PATTERN_S_un_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP_PATTERN_S_un_e__Union struct {
 	Data [1]uint32
 }
@@ -225,8 +225,8 @@ type RSVP_ADSPEC struct {
 	Services         [1]CONTROL_SERVICE
 }
 
-// RSVP_FILTERSPEC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RSVP_FILTERSPEC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RSVP_FILTERSPEC_Anonymous_e__Union struct {
 	Data [5]uint32
 }

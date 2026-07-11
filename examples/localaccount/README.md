@@ -9,20 +9,20 @@ and delete. Everything runs against `netapi32.dll`'s
 
 | Step | Win32 API | Symbol source |
 |---|---|---|
-| Assemble the account definition | `USER_INFO_1` struct + `USER_PRIV_USER`, `UF_SCRIPT` | idiomatic package |
+| Assemble the account definition | `USER_INFO_1` struct + `USER_PRIV_USER`, `UF_SCRIPT` | `bindings/win32/networkmanagement/netmanagement` |
 | Fill the struct's `PWSTR` fields | `UTF16Ptr` | **runtime** (`bindings/runtime/win32`) |
-| Create the account | `NetUserAdd(server, level, …)` | idiomatic package |
-| Read it back | `NetUserGetInfo` + `NetApiBufferFree` | idiomatic package |
-| List local accounts | `NetUserEnum` (level 0) | idiomatic package |
-| Delete it | `NetUserDel(server, name)` | idiomatic package |
+| Create the account | `NetUserAdd(server, level, …)` | `bindings/win32/networkmanagement/netmanagement` |
+| Read it back | `NetUserGetInfo` + `NetApiBufferFree` | `bindings/win32/networkmanagement/netmanagement` |
+| List local accounts | `NetUserEnum` (level 0) | `bindings/win32/networkmanagement/netmanagement` |
+| Delete it | `NetUserDel(server, name)` | `bindings/win32/networkmanagement/netmanagement` |
 
-The program imports **only** the idiomatic package (plus the shared runtime for
-UTF-16 conversion) — never `bindings/win32`. The idiomatic layer is
-self-contained: it improves what it can (`NetUserAdd` takes a Go `string`
-server) and re-exports the rest (the `USER_INFO_1`/`USER_INFO_0` structs, the
-`USER_PRIV_*`/`UF_*`/`NERR_*` constants, and the `NetApiBufferFree`
-pass-through) so a consumer never drops to the raw package. The `PWSTR` struct
-fields are still raw UTF-16 pointers, which the **runtime**'s `UTF16Ptr`
+The program imports the generated
+`bindings/win32/networkmanagement/netmanagement` package (plus the shared
+runtime for UTF-16 conversion). That one package holds everything the example
+needs: the improved calls (`NetUserAdd` takes a Go `string` server), the
+`USER_INFO_1`/`USER_INFO_0` structs, the `USER_PRIV_*`/`UF_*`/`NERR_*`
+constants, and the `NetApiBufferFree` pass-through all live there. The `PWSTR`
+struct fields are raw UTF-16 pointers, which the **runtime**'s `UTF16Ptr`
 produces.
 
 ## Running it
@@ -53,7 +53,7 @@ clear "access denied — run as Administrator" message and exits non-zero.
 ## Why the return is `uint32`, not `error`
 
 The `NetUser*` functions report failure through a `NET_API_STATUS` return code
-(a `DWORD`), not via `GetLastError`. The idiomatic layer only lowers a return
+(a `DWORD`), not via `GetLastError`. The bindings only lower a return
 to `error` when the metadata marks the function `SetLastError`, so these keep
 their `uint32` status — which the example compares against `NERR_Success` (0),
 `NERR_UserExists` (2224), and `ERROR_ACCESS_DENIED` (5). This is the honest

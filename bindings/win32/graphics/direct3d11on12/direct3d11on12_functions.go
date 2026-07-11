@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
 	graphicsdirect3d11 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d11"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
@@ -25,7 +24,15 @@ var (
 
 // D3D11On12CreateDevice calls d3d11!D3D11On12CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d3d11on12/nf-d3d11on12-d3d11on12createdevice
-func D3D11On12CreateDevice(pDevice *systemcom.IUnknown, Flags uint32, pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, FeatureLevels uint32, ppCommandQueues **systemcom.IUnknown, NumQueues uint32, NodeMask uint32, ppDevice **graphicsdirect3d11.ID3D11Device, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext, pChosenFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procD3D11On12CreateDevice.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(Flags), uintptr(unsafe.Pointer(pFeatureLevels)), uintptr(FeatureLevels), uintptr(unsafe.Pointer(ppCommandQueues)), uintptr(NumQueues), uintptr(NodeMask), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(ppImmediateContext)), uintptr(unsafe.Pointer(pChosenFeatureLevel)))
-	return foundation.HRESULT(r1)
+func D3D11On12CreateDevice(pDevice *systemcom.IUnknown, Flags uint32, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, ppCommandQueues []*systemcom.IUnknown, NodeMask uint32, ppDevice **graphicsdirect3d11.ID3D11Device, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext, pChosenFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL) error {
+	var _pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL
+	if len(pFeatureLevels) > 0 {
+		_pFeatureLevels = &pFeatureLevels[0]
+	}
+	var _ppCommandQueues **systemcom.IUnknown
+	if len(ppCommandQueues) > 0 {
+		_ppCommandQueues = &ppCommandQueues[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D11On12CreateDevice.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(Flags), uintptr(unsafe.Pointer(_pFeatureLevels)), uintptr(len(pFeatureLevels)), uintptr(unsafe.Pointer(_ppCommandQueues)), uintptr(len(ppCommandQueues)), uintptr(NodeMask), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(ppImmediateContext)), uintptr(unsafe.Pointer(pChosenFeatureLevel)))
+	return win32.HRESULTError(int32(r1))
 }

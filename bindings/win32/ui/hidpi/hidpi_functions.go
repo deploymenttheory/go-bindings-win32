@@ -56,8 +56,9 @@ var (
 // AdjustWindowRectExForDpi calls USER32!AdjustWindowRectExForDpi.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi
 // Minimum OS: windows10.0.14393.
-func AdjustWindowRectExForDpi(lpRect *foundation.RECT, dwStyle uiwindowsandmessaging.WINDOW_STYLE, bMenu foundation.BOOL, dwExStyle uiwindowsandmessaging.WINDOW_EX_STYLE, dpi uint32) error {
-	r1, _, e1 := syscall.SyscallN(procAdjustWindowRectExForDpi.Addr(), uintptr(unsafe.Pointer(lpRect)), uintptr(dwStyle), uintptr(bMenu), uintptr(dwExStyle), uintptr(dpi))
+func AdjustWindowRectExForDpi(lpRect *foundation.RECT, dwStyle uiwindowsandmessaging.WINDOW_STYLE, bMenu bool, dwExStyle uiwindowsandmessaging.WINDOW_EX_STYLE, dpi uint32) error {
+	_bMenu := win32.Bool32(bMenu)
+	r1, _, e1 := syscall.SyscallN(procAdjustWindowRectExForDpi.Addr(), uintptr(unsafe.Pointer(lpRect)), uintptr(dwStyle), uintptr(_bMenu), uintptr(dwExStyle), uintptr(dpi))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -67,9 +68,9 @@ func AdjustWindowRectExForDpi(lpRect *foundation.RECT, dwStyle uiwindowsandmessa
 // AreDpiAwarenessContextsEqual calls USER32!AreDpiAwarenessContextsEqual.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-aredpiawarenesscontextsequal
 // Minimum OS: windows10.0.14393.
-func AreDpiAwarenessContextsEqual(dpiContextA DPI_AWARENESS_CONTEXT, dpiContextB DPI_AWARENESS_CONTEXT) foundation.BOOL {
+func AreDpiAwarenessContextsEqual(dpiContextA DPI_AWARENESS_CONTEXT, dpiContextB DPI_AWARENESS_CONTEXT) bool {
 	r1, _, _ := syscall.SyscallN(procAreDpiAwarenessContextsEqual.Addr(), uintptr(dpiContextA), uintptr(dpiContextB))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EnableNonClientDpiScaling calls USER32!EnableNonClientDpiScaling.
@@ -122,9 +123,9 @@ func GetDpiAwarenessContextForProcess(hProcess foundation.HANDLE) DPI_AWARENESS_
 // GetDpiForMonitor calls api-ms-win-shcore-scaling-l1-1-1!GetDpiForMonitor.
 // https://learn.microsoft.com/windows/win32/api/shellscalingapi/nf-shellscalingapi-getdpiformonitor
 // Minimum OS: windows8.1.
-func GetDpiForMonitor(hmonitor graphicsgdi.HMONITOR, dpiType MONITOR_DPI_TYPE, dpiX *uint32, dpiY *uint32) foundation.HRESULT {
+func GetDpiForMonitor(hmonitor graphicsgdi.HMONITOR, dpiType MONITOR_DPI_TYPE, dpiX *uint32, dpiY *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetDpiForMonitor.Addr(), uintptr(hmonitor), uintptr(dpiType), uintptr(unsafe.Pointer(dpiX)), uintptr(unsafe.Pointer(dpiY)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDpiForSystem calls USER32!GetDpiForSystem.
@@ -154,9 +155,9 @@ func GetDpiFromDpiAwarenessContext(value DPI_AWARENESS_CONTEXT) uint32 {
 // GetProcessDpiAwareness calls api-ms-win-shcore-scaling-l1-1-1!GetProcessDpiAwareness.
 // https://learn.microsoft.com/windows/win32/api/shellscalingapi/nf-shellscalingapi-getprocessdpiawareness
 // Minimum OS: windows8.1.
-func GetProcessDpiAwareness(hprocess foundation.HANDLE, value *PROCESS_DPI_AWARENESS) foundation.HRESULT {
+func GetProcessDpiAwareness(hprocess foundation.HANDLE, value *PROCESS_DPI_AWARENESS) error {
 	r1, _, _ := syscall.SyscallN(procGetProcessDpiAwareness.Addr(), uintptr(hprocess), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSystemDpiForProcess calls USER32!GetSystemDpiForProcess.
@@ -213,33 +214,34 @@ func GetWindowDpiHostingBehavior(hwnd foundation.HWND) DPI_HOSTING_BEHAVIOR {
 // IsValidDpiAwarenessContext calls USER32!IsValidDpiAwarenessContext.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-isvaliddpiawarenesscontext
 // Minimum OS: windows10.0.14393.
-func IsValidDpiAwarenessContext(value DPI_AWARENESS_CONTEXT) foundation.BOOL {
+func IsValidDpiAwarenessContext(value DPI_AWARENESS_CONTEXT) bool {
 	r1, _, _ := syscall.SyscallN(procIsValidDpiAwarenessContext.Addr(), uintptr(value))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LogicalToPhysicalPointForPerMonitorDPI calls USER32!LogicalToPhysicalPointForPerMonitorDPI.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-logicaltophysicalpointforpermonitordpi
 // Minimum OS: windows8.1.
-func LogicalToPhysicalPointForPerMonitorDPI(hWnd foundation.HWND, lpPoint *foundation.POINT) foundation.BOOL {
+func LogicalToPhysicalPointForPerMonitorDPI(hWnd foundation.HWND, lpPoint *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procLogicalToPhysicalPointForPerMonitorDPI.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpPoint)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // OpenThemeDataForDpi calls UxTheme!OpenThemeDataForDpi.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-openthemedatafordpi
 // Minimum OS: windows10.0.15063.
-func OpenThemeDataForDpi(hwnd foundation.HWND, pszClassList foundation.PWSTR, dpi uint32) uicontrols.HTHEME {
-	r1, _, _ := syscall.SyscallN(procOpenThemeDataForDpi.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszClassList)), uintptr(dpi))
+func OpenThemeDataForDpi(hwnd foundation.HWND, pszClassList string, dpi uint32) uicontrols.HTHEME {
+	_pszClassList := win32.UTF16Ptr(pszClassList)
+	r1, _, _ := syscall.SyscallN(procOpenThemeDataForDpi.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszClassList)), uintptr(dpi))
 	return uicontrols.HTHEME(r1)
 }
 
 // PhysicalToLogicalPointForPerMonitorDPI calls USER32!PhysicalToLogicalPointForPerMonitorDPI.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-physicaltologicalpointforpermonitordpi
 // Minimum OS: windows8.1.
-func PhysicalToLogicalPointForPerMonitorDPI(hWnd foundation.HWND, lpPoint *foundation.POINT) foundation.BOOL {
+func PhysicalToLogicalPointForPerMonitorDPI(hWnd foundation.HWND, lpPoint *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procPhysicalToLogicalPointForPerMonitorDPI.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpPoint)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetDialogControlDpiChangeBehavior calls USER32!SetDialogControlDpiChangeBehavior.
@@ -267,9 +269,9 @@ func SetDialogDpiChangeBehavior(hDlg foundation.HWND, mask DIALOG_DPI_CHANGE_BEH
 // SetProcessDpiAwareness calls api-ms-win-shcore-scaling-l1-1-1!SetProcessDpiAwareness.
 // https://learn.microsoft.com/windows/win32/api/shellscalingapi/nf-shellscalingapi-setprocessdpiawareness
 // Minimum OS: windows8.1.
-func SetProcessDpiAwareness(value PROCESS_DPI_AWARENESS) foundation.HRESULT {
+func SetProcessDpiAwareness(value PROCESS_DPI_AWARENESS) error {
 	r1, _, _ := syscall.SyscallN(procSetProcessDpiAwareness.Addr(), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProcessDpiAwarenessContext calls USER32!SetProcessDpiAwarenessContext.

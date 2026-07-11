@@ -42,17 +42,37 @@ func WebSocketAbortHandle(hWebSocket WEB_SOCKET_HANDLE) {
 // WebSocketBeginClientHandshake calls websocket!WebSocketBeginClientHandshake.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketbeginclienthandshake
 // Minimum OS: windows8.0.
-func WebSocketBeginClientHandshake(hWebSocket WEB_SOCKET_HANDLE, pszSubprotocols *foundation.PSTR, ulSubprotocolCount uint32, pszExtensions *foundation.PSTR, ulExtensionCount uint32, pInitialHeaders *WEB_SOCKET_HTTP_HEADER, ulInitialHeaderCount uint32, pAdditionalHeaders **WEB_SOCKET_HTTP_HEADER, pulAdditionalHeaderCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWebSocketBeginClientHandshake.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(pszSubprotocols)), uintptr(ulSubprotocolCount), uintptr(unsafe.Pointer(pszExtensions)), uintptr(ulExtensionCount), uintptr(unsafe.Pointer(pInitialHeaders)), uintptr(ulInitialHeaderCount), uintptr(unsafe.Pointer(pAdditionalHeaders)), uintptr(unsafe.Pointer(pulAdditionalHeaderCount)))
-	return foundation.HRESULT(r1)
+func WebSocketBeginClientHandshake(hWebSocket WEB_SOCKET_HANDLE, pszSubprotocols []foundation.PSTR, pszExtensions []foundation.PSTR, pInitialHeaders []WEB_SOCKET_HTTP_HEADER, pAdditionalHeaders **WEB_SOCKET_HTTP_HEADER, pulAdditionalHeaderCount *uint32) error {
+	var _pszSubprotocols *foundation.PSTR
+	if len(pszSubprotocols) > 0 {
+		_pszSubprotocols = &pszSubprotocols[0]
+	}
+	var _pszExtensions *foundation.PSTR
+	if len(pszExtensions) > 0 {
+		_pszExtensions = &pszExtensions[0]
+	}
+	var _pInitialHeaders *WEB_SOCKET_HTTP_HEADER
+	if len(pInitialHeaders) > 0 {
+		_pInitialHeaders = &pInitialHeaders[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebSocketBeginClientHandshake.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(_pszSubprotocols)), uintptr(len(pszSubprotocols)), uintptr(unsafe.Pointer(_pszExtensions)), uintptr(len(pszExtensions)), uintptr(unsafe.Pointer(_pInitialHeaders)), uintptr(len(pInitialHeaders)), uintptr(unsafe.Pointer(pAdditionalHeaders)), uintptr(unsafe.Pointer(pulAdditionalHeaderCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WebSocketBeginServerHandshake calls websocket!WebSocketBeginServerHandshake.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketbeginserverhandshake
 // Minimum OS: windows8.0.
-func WebSocketBeginServerHandshake(hWebSocket WEB_SOCKET_HANDLE, pszSubprotocolSelected foundation.PSTR, pszExtensionSelected *foundation.PSTR, ulExtensionSelectedCount uint32, pRequestHeaders *WEB_SOCKET_HTTP_HEADER, ulRequestHeaderCount uint32, pResponseHeaders **WEB_SOCKET_HTTP_HEADER, pulResponseHeaderCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWebSocketBeginServerHandshake.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(pszSubprotocolSelected)), uintptr(unsafe.Pointer(pszExtensionSelected)), uintptr(ulExtensionSelectedCount), uintptr(unsafe.Pointer(pRequestHeaders)), uintptr(ulRequestHeaderCount), uintptr(unsafe.Pointer(pResponseHeaders)), uintptr(unsafe.Pointer(pulResponseHeaderCount)))
-	return foundation.HRESULT(r1)
+func WebSocketBeginServerHandshake(hWebSocket WEB_SOCKET_HANDLE, pszSubprotocolSelected foundation.PSTR, pszExtensionSelected []foundation.PSTR, pRequestHeaders []WEB_SOCKET_HTTP_HEADER, pResponseHeaders **WEB_SOCKET_HTTP_HEADER, pulResponseHeaderCount *uint32) error {
+	var _pszExtensionSelected *foundation.PSTR
+	if len(pszExtensionSelected) > 0 {
+		_pszExtensionSelected = &pszExtensionSelected[0]
+	}
+	var _pRequestHeaders *WEB_SOCKET_HTTP_HEADER
+	if len(pRequestHeaders) > 0 {
+		_pRequestHeaders = &pRequestHeaders[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebSocketBeginServerHandshake.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(pszSubprotocolSelected)), uintptr(unsafe.Pointer(_pszExtensionSelected)), uintptr(len(pszExtensionSelected)), uintptr(unsafe.Pointer(_pRequestHeaders)), uintptr(len(pRequestHeaders)), uintptr(unsafe.Pointer(pResponseHeaders)), uintptr(unsafe.Pointer(pulResponseHeaderCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WebSocketCompleteAction calls websocket!WebSocketCompleteAction.
@@ -65,17 +85,25 @@ func WebSocketCompleteAction(hWebSocket WEB_SOCKET_HANDLE, pvActionContext unsaf
 // WebSocketCreateClientHandle calls websocket!WebSocketCreateClientHandle.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketcreateclienthandle
 // Minimum OS: windows8.0.
-func WebSocketCreateClientHandle(pProperties *WEB_SOCKET_PROPERTY, ulPropertyCount uint32, phWebSocket *WEB_SOCKET_HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWebSocketCreateClientHandle.Addr(), uintptr(unsafe.Pointer(pProperties)), uintptr(ulPropertyCount), uintptr(unsafe.Pointer(phWebSocket)))
-	return foundation.HRESULT(r1)
+func WebSocketCreateClientHandle(pProperties []WEB_SOCKET_PROPERTY, phWebSocket *WEB_SOCKET_HANDLE) error {
+	var _pProperties *WEB_SOCKET_PROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebSocketCreateClientHandle.Addr(), uintptr(unsafe.Pointer(_pProperties)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(phWebSocket)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WebSocketCreateServerHandle calls websocket!WebSocketCreateServerHandle.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketcreateserverhandle
 // Minimum OS: windows8.0.
-func WebSocketCreateServerHandle(pProperties *WEB_SOCKET_PROPERTY, ulPropertyCount uint32, phWebSocket *WEB_SOCKET_HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWebSocketCreateServerHandle.Addr(), uintptr(unsafe.Pointer(pProperties)), uintptr(ulPropertyCount), uintptr(unsafe.Pointer(phWebSocket)))
-	return foundation.HRESULT(r1)
+func WebSocketCreateServerHandle(pProperties []WEB_SOCKET_PROPERTY, phWebSocket *WEB_SOCKET_HANDLE) error {
+	var _pProperties *WEB_SOCKET_PROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebSocketCreateServerHandle.Addr(), uintptr(unsafe.Pointer(_pProperties)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(phWebSocket)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WebSocketDeleteHandle calls websocket!WebSocketDeleteHandle.
@@ -88,47 +116,51 @@ func WebSocketDeleteHandle(hWebSocket WEB_SOCKET_HANDLE) {
 // WebSocketEndClientHandshake calls websocket!WebSocketEndClientHandshake.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketendclienthandshake
 // Minimum OS: windows8.0.
-func WebSocketEndClientHandshake(hWebSocket WEB_SOCKET_HANDLE, pResponseHeaders *WEB_SOCKET_HTTP_HEADER, ulReponseHeaderCount uint32, pulSelectedExtensions *uint32, pulSelectedExtensionCount *uint32, pulSelectedSubprotocol *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWebSocketEndClientHandshake.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(pResponseHeaders)), uintptr(ulReponseHeaderCount), uintptr(unsafe.Pointer(pulSelectedExtensions)), uintptr(unsafe.Pointer(pulSelectedExtensionCount)), uintptr(unsafe.Pointer(pulSelectedSubprotocol)))
-	return foundation.HRESULT(r1)
+func WebSocketEndClientHandshake(hWebSocket WEB_SOCKET_HANDLE, pResponseHeaders []WEB_SOCKET_HTTP_HEADER, pulSelectedExtensions *uint32, pulSelectedExtensionCount *uint32, pulSelectedSubprotocol *uint32) error {
+	var _pResponseHeaders *WEB_SOCKET_HTTP_HEADER
+	if len(pResponseHeaders) > 0 {
+		_pResponseHeaders = &pResponseHeaders[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebSocketEndClientHandshake.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(_pResponseHeaders)), uintptr(len(pResponseHeaders)), uintptr(unsafe.Pointer(pulSelectedExtensions)), uintptr(unsafe.Pointer(pulSelectedExtensionCount)), uintptr(unsafe.Pointer(pulSelectedSubprotocol)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WebSocketEndServerHandshake calls websocket!WebSocketEndServerHandshake.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketendserverhandshake
 // Minimum OS: windows8.0.
-func WebSocketEndServerHandshake(hWebSocket WEB_SOCKET_HANDLE) foundation.HRESULT {
+func WebSocketEndServerHandshake(hWebSocket WEB_SOCKET_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketEndServerHandshake.Addr(), uintptr(hWebSocket))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WebSocketGetAction calls websocket!WebSocketGetAction.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketgetaction
 // Minimum OS: windows8.0.
-func WebSocketGetAction(hWebSocket WEB_SOCKET_HANDLE, eActionQueue WEB_SOCKET_ACTION_QUEUE, pDataBuffers *WEB_SOCKET_BUFFER, pulDataBufferCount *uint32, pAction *WEB_SOCKET_ACTION, pBufferType *WEB_SOCKET_BUFFER_TYPE, pvApplicationContext *unsafe.Pointer, pvActionContext *unsafe.Pointer) foundation.HRESULT {
+func WebSocketGetAction(hWebSocket WEB_SOCKET_HANDLE, eActionQueue WEB_SOCKET_ACTION_QUEUE, pDataBuffers *WEB_SOCKET_BUFFER, pulDataBufferCount *uint32, pAction *WEB_SOCKET_ACTION, pBufferType *WEB_SOCKET_BUFFER_TYPE, pvApplicationContext *unsafe.Pointer, pvActionContext *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketGetAction.Addr(), uintptr(hWebSocket), uintptr(eActionQueue), uintptr(unsafe.Pointer(pDataBuffers)), uintptr(unsafe.Pointer(pulDataBufferCount)), uintptr(unsafe.Pointer(pAction)), uintptr(unsafe.Pointer(pBufferType)), uintptr(unsafe.Pointer(pvApplicationContext)), uintptr(unsafe.Pointer(pvActionContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WebSocketGetGlobalProperty calls websocket!WebSocketGetGlobalProperty.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketgetglobalproperty
 // Minimum OS: windows8.0.
-func WebSocketGetGlobalProperty(eType WEB_SOCKET_PROPERTY_TYPE, pvValue unsafe.Pointer, ulSize *uint32) foundation.HRESULT {
+func WebSocketGetGlobalProperty(eType WEB_SOCKET_PROPERTY_TYPE, pvValue unsafe.Pointer, ulSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketGetGlobalProperty.Addr(), uintptr(eType), uintptr(unsafe.Pointer(pvValue)), uintptr(unsafe.Pointer(ulSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WebSocketReceive calls websocket!WebSocketReceive.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketreceive
 // Minimum OS: windows8.0.
-func WebSocketReceive(hWebSocket WEB_SOCKET_HANDLE, pBuffer *WEB_SOCKET_BUFFER, pvContext unsafe.Pointer) foundation.HRESULT {
+func WebSocketReceive(hWebSocket WEB_SOCKET_HANDLE, pBuffer *WEB_SOCKET_BUFFER, pvContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketReceive.Addr(), uintptr(hWebSocket), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pvContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WebSocketSend calls websocket!WebSocketSend.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketsend
 // Minimum OS: windows8.0.
-func WebSocketSend(hWebSocket WEB_SOCKET_HANDLE, BufferType WEB_SOCKET_BUFFER_TYPE, pBuffer *WEB_SOCKET_BUFFER, Context unsafe.Pointer) foundation.HRESULT {
+func WebSocketSend(hWebSocket WEB_SOCKET_HANDLE, BufferType WEB_SOCKET_BUFFER_TYPE, pBuffer *WEB_SOCKET_BUFFER, Context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWebSocketSend.Addr(), uintptr(hWebSocket), uintptr(BufferType), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(Context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

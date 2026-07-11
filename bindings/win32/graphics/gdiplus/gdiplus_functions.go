@@ -87,8 +87,8 @@ var (
 	procGdipCreateCachedBitmap                           = modgdiplus.NewProc("GdipCreateCachedBitmap")
 	procGdipCreateFontFamilyFromName                     = modgdiplus.NewProc("GdipCreateFontFamilyFromName")
 	procGdipCreateFontFromDC                             = modgdiplus.NewProc("GdipCreateFontFromDC")
+	procGdipCreateFontFromLogfont                        = modgdiplus.NewProc("GdipCreateFontFromLogfontW")
 	procGdipCreateFontFromLogfontA                       = modgdiplus.NewProc("GdipCreateFontFromLogfontA")
-	procGdipCreateFontFromLogfontW                       = modgdiplus.NewProc("GdipCreateFontFromLogfontW")
 	procGdipCreateFromHDC                                = modgdiplus.NewProc("GdipCreateFromHDC")
 	procGdipCreateFromHDC2                               = modgdiplus.NewProc("GdipCreateFromHDC2")
 	procGdipCreateFromHWND                               = modgdiplus.NewProc("GdipCreateFromHWND")
@@ -277,8 +277,8 @@ var (
 	procGdipGetLineSpacing                               = modgdiplus.NewProc("GdipGetLineSpacing")
 	procGdipGetLineTransform                             = modgdiplus.NewProc("GdipGetLineTransform")
 	procGdipGetLineWrapMode                              = modgdiplus.NewProc("GdipGetLineWrapMode")
+	procGdipGetLogFont                                   = modgdiplus.NewProc("GdipGetLogFontW")
 	procGdipGetLogFontA                                  = modgdiplus.NewProc("GdipGetLogFontA")
-	procGdipGetLogFontW                                  = modgdiplus.NewProc("GdipGetLogFontW")
 	procGdipGetMatrixElements                            = modgdiplus.NewProc("GdipGetMatrixElements")
 	procGdipGetMetafileDownLevelRasterizationLimit       = modgdiplus.NewProc("GdipGetMetafileDownLevelRasterizationLimit")
 	procGdipGetMetafileHeaderFromEmf                     = modgdiplus.NewProc("GdipGetMetafileHeaderFromEmf")
@@ -613,8 +613,9 @@ func GdipAddPathLineI(path *GpPath, x1 int32, y1 int32, x2 int32, y2 int32) Stat
 }
 
 // GdipAddPathPath calls gdiplus!GdipAddPathPath.
-func GdipAddPathPath(path *GpPath, addingPath *GpPath, connect foundation.BOOL) Status {
-	r1, _, _ := syscall.SyscallN(procGdipAddPathPath.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(addingPath)), uintptr(connect))
+func GdipAddPathPath(path *GpPath, addingPath *GpPath, connect bool) Status {
+	_connect := win32.Bool32(connect)
+	r1, _, _ := syscall.SyscallN(procGdipAddPathPath.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(addingPath)), uintptr(_connect))
 	return Status(r1)
 }
 
@@ -673,14 +674,16 @@ func GdipBeginContainerI(graphics *GpGraphics, dstrect *Rect, srcrect *Rect, uni
 }
 
 // GdipBitmapApplyEffect calls gdiplus!GdipBitmapApplyEffect.
-func GdipBitmapApplyEffect(bitmap *GpBitmap, effect *CGpEffect, roi *foundation.RECT, useAuxData foundation.BOOL, auxData *unsafe.Pointer, auxDataSize *int32) Status {
-	r1, _, _ := syscall.SyscallN(procGdipBitmapApplyEffect.Addr(), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(effect)), uintptr(unsafe.Pointer(roi)), uintptr(useAuxData), uintptr(unsafe.Pointer(auxData)), uintptr(unsafe.Pointer(auxDataSize)))
+func GdipBitmapApplyEffect(bitmap *GpBitmap, effect *CGpEffect, roi *foundation.RECT, useAuxData bool, auxData *unsafe.Pointer, auxDataSize *int32) Status {
+	_useAuxData := win32.Bool32(useAuxData)
+	r1, _, _ := syscall.SyscallN(procGdipBitmapApplyEffect.Addr(), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(effect)), uintptr(unsafe.Pointer(roi)), uintptr(_useAuxData), uintptr(unsafe.Pointer(auxData)), uintptr(unsafe.Pointer(auxDataSize)))
 	return Status(r1)
 }
 
 // GdipBitmapCreateApplyEffect calls gdiplus!GdipBitmapCreateApplyEffect.
-func GdipBitmapCreateApplyEffect(inputBitmaps **GpBitmap, numInputs int32, effect *CGpEffect, roi *foundation.RECT, outputRect *foundation.RECT, outputBitmap **GpBitmap, useAuxData foundation.BOOL, auxData *unsafe.Pointer, auxDataSize *int32) Status {
-	r1, _, _ := syscall.SyscallN(procGdipBitmapCreateApplyEffect.Addr(), uintptr(unsafe.Pointer(inputBitmaps)), uintptr(numInputs), uintptr(unsafe.Pointer(effect)), uintptr(unsafe.Pointer(roi)), uintptr(unsafe.Pointer(outputRect)), uintptr(unsafe.Pointer(outputBitmap)), uintptr(useAuxData), uintptr(unsafe.Pointer(auxData)), uintptr(unsafe.Pointer(auxDataSize)))
+func GdipBitmapCreateApplyEffect(inputBitmaps **GpBitmap, numInputs int32, effect *CGpEffect, roi *foundation.RECT, outputRect *foundation.RECT, outputBitmap **GpBitmap, useAuxData bool, auxData *unsafe.Pointer, auxDataSize *int32) Status {
+	_useAuxData := win32.Bool32(useAuxData)
+	r1, _, _ := syscall.SyscallN(procGdipBitmapCreateApplyEffect.Addr(), uintptr(unsafe.Pointer(inputBitmaps)), uintptr(numInputs), uintptr(unsafe.Pointer(effect)), uintptr(unsafe.Pointer(roi)), uintptr(unsafe.Pointer(outputRect)), uintptr(unsafe.Pointer(outputBitmap)), uintptr(_useAuxData), uintptr(unsafe.Pointer(auxData)), uintptr(unsafe.Pointer(auxDataSize)))
 	return Status(r1)
 }
 
@@ -841,20 +844,24 @@ func GdipComment(graphics *GpGraphics, sizeData uint32, data *byte) Status {
 }
 
 // GdipConvertToEmfPlus calls gdiplus!GdipConvertToEmfPlus.
-func GdipConvertToEmfPlus(refGraphics *GpGraphics, metafile *GpMetafile, conversionFailureFlag *int32, emfType EmfType, description foundation.PWSTR, out_metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipConvertToEmfPlus.Addr(), uintptr(unsafe.Pointer(refGraphics)), uintptr(unsafe.Pointer(metafile)), uintptr(unsafe.Pointer(conversionFailureFlag)), uintptr(emfType), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(out_metafile)))
+func GdipConvertToEmfPlus(refGraphics *GpGraphics, metafile *GpMetafile, conversionFailureFlag *int32, emfType EmfType, description string, out_metafile **GpMetafile) Status {
+	_description := win32.UTF16Ptr(description)
+	r1, _, _ := syscall.SyscallN(procGdipConvertToEmfPlus.Addr(), uintptr(unsafe.Pointer(refGraphics)), uintptr(unsafe.Pointer(metafile)), uintptr(unsafe.Pointer(conversionFailureFlag)), uintptr(emfType), uintptr(unsafe.Pointer(_description)), uintptr(unsafe.Pointer(out_metafile)))
 	return Status(r1)
 }
 
 // GdipConvertToEmfPlusToFile calls gdiplus!GdipConvertToEmfPlusToFile.
-func GdipConvertToEmfPlusToFile(refGraphics *GpGraphics, metafile *GpMetafile, conversionFailureFlag *int32, filename foundation.PWSTR, emfType EmfType, description foundation.PWSTR, out_metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipConvertToEmfPlusToFile.Addr(), uintptr(unsafe.Pointer(refGraphics)), uintptr(unsafe.Pointer(metafile)), uintptr(unsafe.Pointer(conversionFailureFlag)), uintptr(unsafe.Pointer(filename)), uintptr(emfType), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(out_metafile)))
+func GdipConvertToEmfPlusToFile(refGraphics *GpGraphics, metafile *GpMetafile, conversionFailureFlag *int32, filename string, emfType EmfType, description string, out_metafile **GpMetafile) Status {
+	_filename := win32.UTF16Ptr(filename)
+	_description := win32.UTF16Ptr(description)
+	r1, _, _ := syscall.SyscallN(procGdipConvertToEmfPlusToFile.Addr(), uintptr(unsafe.Pointer(refGraphics)), uintptr(unsafe.Pointer(metafile)), uintptr(unsafe.Pointer(conversionFailureFlag)), uintptr(unsafe.Pointer(_filename)), uintptr(emfType), uintptr(unsafe.Pointer(_description)), uintptr(unsafe.Pointer(out_metafile)))
 	return Status(r1)
 }
 
 // GdipConvertToEmfPlusToStream calls gdiplus!GdipConvertToEmfPlusToStream.
-func GdipConvertToEmfPlusToStream(refGraphics *GpGraphics, metafile *GpMetafile, conversionFailureFlag *int32, stream *systemcom.IStream, emfType EmfType, description foundation.PWSTR, out_metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipConvertToEmfPlusToStream.Addr(), uintptr(unsafe.Pointer(refGraphics)), uintptr(unsafe.Pointer(metafile)), uintptr(unsafe.Pointer(conversionFailureFlag)), uintptr(unsafe.Pointer(stream)), uintptr(emfType), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(out_metafile)))
+func GdipConvertToEmfPlusToStream(refGraphics *GpGraphics, metafile *GpMetafile, conversionFailureFlag *int32, stream *systemcom.IStream, emfType EmfType, description string, out_metafile **GpMetafile) Status {
+	_description := win32.UTF16Ptr(description)
+	r1, _, _ := syscall.SyscallN(procGdipConvertToEmfPlusToStream.Addr(), uintptr(unsafe.Pointer(refGraphics)), uintptr(unsafe.Pointer(metafile)), uintptr(unsafe.Pointer(conversionFailureFlag)), uintptr(unsafe.Pointer(stream)), uintptr(emfType), uintptr(unsafe.Pointer(_description)), uintptr(unsafe.Pointer(out_metafile)))
 	return Status(r1)
 }
 
@@ -865,14 +872,16 @@ func GdipCreateBitmapFromDirectDrawSurface(surface *graphicsdirectdraw.IDirectDr
 }
 
 // GdipCreateBitmapFromFile calls gdiplus!GdipCreateBitmapFromFile.
-func GdipCreateBitmapFromFile(filename foundation.PWSTR, bitmap **GpBitmap) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromFile.Addr(), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(bitmap)))
+func GdipCreateBitmapFromFile(filename string, bitmap **GpBitmap) Status {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromFile.Addr(), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(bitmap)))
 	return Status(r1)
 }
 
 // GdipCreateBitmapFromFileICM calls gdiplus!GdipCreateBitmapFromFileICM.
-func GdipCreateBitmapFromFileICM(filename foundation.PWSTR, bitmap **GpBitmap) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromFileICM.Addr(), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(bitmap)))
+func GdipCreateBitmapFromFileICM(filename string, bitmap **GpBitmap) Status {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromFileICM.Addr(), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(bitmap)))
 	return Status(r1)
 }
 
@@ -901,8 +910,9 @@ func GdipCreateBitmapFromHICON(hicon uiwindowsandmessaging.HICON, bitmap **GpBit
 }
 
 // GdipCreateBitmapFromResource calls gdiplus!GdipCreateBitmapFromResource.
-func GdipCreateBitmapFromResource(hInstance foundation.HINSTANCE, lpBitmapName foundation.PWSTR, bitmap **GpBitmap) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromResource.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpBitmapName)), uintptr(unsafe.Pointer(bitmap)))
+func GdipCreateBitmapFromResource(hInstance foundation.HINSTANCE, lpBitmapName string, bitmap **GpBitmap) Status {
+	_lpBitmapName := win32.UTF16Ptr(lpBitmapName)
+	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromResource.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpBitmapName)), uintptr(unsafe.Pointer(bitmap)))
 	return Status(r1)
 }
 
@@ -931,8 +941,9 @@ func GdipCreateCachedBitmap(bitmap *GpBitmap, graphics *GpGraphics, cachedBitmap
 }
 
 // GdipCreateFontFamilyFromName calls gdiplus!GdipCreateFontFamilyFromName.
-func GdipCreateFontFamilyFromName(name foundation.PWSTR, fontCollection *GpFontCollection, fontFamily **GpFontFamily) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateFontFamilyFromName.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(fontCollection)), uintptr(unsafe.Pointer(fontFamily)))
+func GdipCreateFontFamilyFromName(name string, fontCollection *GpFontCollection, fontFamily **GpFontFamily) Status {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(procGdipCreateFontFamilyFromName.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(fontCollection)), uintptr(unsafe.Pointer(fontFamily)))
 	return Status(r1)
 }
 
@@ -942,15 +953,15 @@ func GdipCreateFontFromDC(hdc graphicsgdi.HDC, font **GpFont) Status {
 	return Status(r1)
 }
 
-// GdipCreateFontFromLogfontA calls gdiplus!GdipCreateFontFromLogfontA.
-func GdipCreateFontFromLogfontA(hdc graphicsgdi.HDC, logfont *graphicsgdi.LOGFONTA, font **GpFont) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateFontFromLogfontA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(logfont)), uintptr(unsafe.Pointer(font)))
+// GdipCreateFontFromLogfont calls gdiplus!GdipCreateFontFromLogfontW.
+func GdipCreateFontFromLogfont(hdc graphicsgdi.HDC, logfont *graphicsgdi.LOGFONTW, font **GpFont) Status {
+	r1, _, _ := syscall.SyscallN(procGdipCreateFontFromLogfont.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(logfont)), uintptr(unsafe.Pointer(font)))
 	return Status(r1)
 }
 
-// GdipCreateFontFromLogfontW calls gdiplus!GdipCreateFontFromLogfontW.
-func GdipCreateFontFromLogfontW(hdc graphicsgdi.HDC, logfont *graphicsgdi.LOGFONTW, font **GpFont) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateFontFromLogfontW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(logfont)), uintptr(unsafe.Pointer(font)))
+// GdipCreateFontFromLogfontA calls gdiplus!GdipCreateFontFromLogfontA.
+func GdipCreateFontFromLogfontA(hdc graphicsgdi.HDC, logfont *graphicsgdi.LOGFONTA, font **GpFont) Status {
+	r1, _, _ := syscall.SyscallN(procGdipCreateFontFromLogfontA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(logfont)), uintptr(unsafe.Pointer(font)))
 	return Status(r1)
 }
 
@@ -1051,14 +1062,16 @@ func GdipCreateMatrix3I(rect *Rect, dstplg *Point, matrix **Matrix) Status {
 }
 
 // GdipCreateMetafileFromEmf calls gdiplus!GdipCreateMetafileFromEmf.
-func GdipCreateMetafileFromEmf(hEmf graphicsgdi.HENHMETAFILE, deleteEmf foundation.BOOL, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromEmf.Addr(), uintptr(hEmf), uintptr(deleteEmf), uintptr(unsafe.Pointer(metafile)))
+func GdipCreateMetafileFromEmf(hEmf graphicsgdi.HENHMETAFILE, deleteEmf bool, metafile **GpMetafile) Status {
+	_deleteEmf := win32.Bool32(deleteEmf)
+	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromEmf.Addr(), uintptr(hEmf), uintptr(_deleteEmf), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
 // GdipCreateMetafileFromFile calls gdiplus!GdipCreateMetafileFromFile.
-func GdipCreateMetafileFromFile(file foundation.PWSTR, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromFile.Addr(), uintptr(unsafe.Pointer(file)), uintptr(unsafe.Pointer(metafile)))
+func GdipCreateMetafileFromFile(file string, metafile **GpMetafile) Status {
+	_file := win32.UTF16Ptr(file)
+	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromFile.Addr(), uintptr(unsafe.Pointer(_file)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
@@ -1069,14 +1082,16 @@ func GdipCreateMetafileFromStream(stream *systemcom.IStream, metafile **GpMetafi
 }
 
 // GdipCreateMetafileFromWmf calls gdiplus!GdipCreateMetafileFromWmf.
-func GdipCreateMetafileFromWmf(hWmf graphicsgdi.HMETAFILE, deleteWmf foundation.BOOL, wmfPlaceableFileHeader unsafe.Pointer, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromWmf.Addr(), uintptr(hWmf), uintptr(deleteWmf), uintptr(unsafe.Pointer(wmfPlaceableFileHeader)), uintptr(unsafe.Pointer(metafile)))
+func GdipCreateMetafileFromWmf(hWmf graphicsgdi.HMETAFILE, deleteWmf bool, wmfPlaceableFileHeader unsafe.Pointer, metafile **GpMetafile) Status {
+	_deleteWmf := win32.Bool32(deleteWmf)
+	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromWmf.Addr(), uintptr(hWmf), uintptr(_deleteWmf), uintptr(unsafe.Pointer(wmfPlaceableFileHeader)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
 // GdipCreateMetafileFromWmfFile calls gdiplus!GdipCreateMetafileFromWmfFile.
-func GdipCreateMetafileFromWmfFile(file foundation.PWSTR, wmfPlaceableFileHeader unsafe.Pointer, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromWmfFile.Addr(), uintptr(unsafe.Pointer(file)), uintptr(unsafe.Pointer(wmfPlaceableFileHeader)), uintptr(unsafe.Pointer(metafile)))
+func GdipCreateMetafileFromWmfFile(file string, wmfPlaceableFileHeader unsafe.Pointer, metafile **GpMetafile) Status {
+	_file := win32.UTF16Ptr(file)
+	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromWmfFile.Addr(), uintptr(unsafe.Pointer(_file)), uintptr(unsafe.Pointer(wmfPlaceableFileHeader)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
@@ -1165,8 +1180,9 @@ func GdipCreateSolidFill(color uint32, brush **GpSolidFill) Status {
 }
 
 // GdipCreateStreamOnFile calls gdiplus!GdipCreateStreamOnFile.
-func GdipCreateStreamOnFile(filename foundation.PWSTR, access uint32, stream **systemcom.IStream) Status {
-	r1, _, _ := syscall.SyscallN(procGdipCreateStreamOnFile.Addr(), uintptr(unsafe.Pointer(filename)), uintptr(access), uintptr(unsafe.Pointer(stream)))
+func GdipCreateStreamOnFile(filename string, access uint32, stream **systemcom.IStream) Status {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(procGdipCreateStreamOnFile.Addr(), uintptr(unsafe.Pointer(_filename)), uintptr(access), uintptr(unsafe.Pointer(stream)))
 	return Status(r1)
 }
 
@@ -1453,14 +1469,19 @@ func GdipDrawRectanglesI(graphics *GpGraphics, pen *GpPen, rects *Rect, count in
 }
 
 // GdipDrawString calls gdiplus!GdipDrawString.
-func GdipDrawString(graphics *GpGraphics, string_ foundation.PWSTR, length int32, font *GpFont, layoutRect *RectF, stringFormat *GpStringFormat, brush *GpBrush) Status {
-	r1, _, _ := syscall.SyscallN(procGdipDrawString.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(string_)), uintptr(length), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(stringFormat)), uintptr(unsafe.Pointer(brush)))
+func GdipDrawString(graphics *GpGraphics, string_ string, length int32, font *GpFont, layoutRect *RectF, stringFormat *GpStringFormat, brush *GpBrush) Status {
+	_string_ := win32.UTF16Ptr(string_)
+	r1, _, _ := syscall.SyscallN(procGdipDrawString.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(_string_)), uintptr(length), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(stringFormat)), uintptr(unsafe.Pointer(brush)))
 	return Status(r1)
 }
 
 // GdipEmfToWmfBits calls gdiplus!GdipEmfToWmfBits.
-func GdipEmfToWmfBits(hemf graphicsgdi.HENHMETAFILE, cbData16 uint32, pData16 *byte, iMapMode int32, eFlags int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGdipEmfToWmfBits.Addr(), uintptr(hemf), uintptr(cbData16), uintptr(unsafe.Pointer(pData16)), uintptr(iMapMode), uintptr(eFlags))
+func GdipEmfToWmfBits(hemf graphicsgdi.HENHMETAFILE, pData16 []byte, iMapMode int32, eFlags int32) uint32 {
+	var _pData16 *byte
+	if len(pData16) > 0 {
+		_pData16 = &pData16[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGdipEmfToWmfBits.Addr(), uintptr(hemf), uintptr(len(pData16)), uintptr(unsafe.Pointer(_pData16)), uintptr(iMapMode), uintptr(eFlags))
 	return uint32(r1)
 }
 
@@ -1818,8 +1839,12 @@ func GdipGetFontCollectionFamilyCount(fontCollection *GpFontCollection, numFound
 }
 
 // GdipGetFontCollectionFamilyList calls gdiplus!GdipGetFontCollectionFamilyList.
-func GdipGetFontCollectionFamilyList(fontCollection *GpFontCollection, numSought int32, gpfamilies **GpFontFamily, numFound *int32) Status {
-	r1, _, _ := syscall.SyscallN(procGdipGetFontCollectionFamilyList.Addr(), uintptr(unsafe.Pointer(fontCollection)), uintptr(numSought), uintptr(unsafe.Pointer(gpfamilies)), uintptr(unsafe.Pointer(numFound)))
+func GdipGetFontCollectionFamilyList(fontCollection *GpFontCollection, gpfamilies []*GpFontFamily, numFound *int32) Status {
+	var _gpfamilies **GpFontFamily
+	if len(gpfamilies) > 0 {
+		_gpfamilies = &gpfamilies[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGdipGetFontCollectionFamilyList.Addr(), uintptr(unsafe.Pointer(fontCollection)), uintptr(len(gpfamilies)), uintptr(unsafe.Pointer(_gpfamilies)), uintptr(unsafe.Pointer(numFound)))
 	return Status(r1)
 }
 
@@ -2081,15 +2106,15 @@ func GdipGetLineWrapMode(brush *GpLineGradient, wrapmode *WrapMode) Status {
 	return Status(r1)
 }
 
-// GdipGetLogFontA calls gdiplus!GdipGetLogFontA.
-func GdipGetLogFontA(font *GpFont, graphics *GpGraphics, logfontA *graphicsgdi.LOGFONTA) Status {
-	r1, _, _ := syscall.SyscallN(procGdipGetLogFontA.Addr(), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(logfontA)))
+// GdipGetLogFont calls gdiplus!GdipGetLogFontW.
+func GdipGetLogFont(font *GpFont, graphics *GpGraphics, logfontW *graphicsgdi.LOGFONTW) Status {
+	r1, _, _ := syscall.SyscallN(procGdipGetLogFont.Addr(), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(logfontW)))
 	return Status(r1)
 }
 
-// GdipGetLogFontW calls gdiplus!GdipGetLogFontW.
-func GdipGetLogFontW(font *GpFont, graphics *GpGraphics, logfontW *graphicsgdi.LOGFONTW) Status {
-	r1, _, _ := syscall.SyscallN(procGdipGetLogFontW.Addr(), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(logfontW)))
+// GdipGetLogFontA calls gdiplus!GdipGetLogFontA.
+func GdipGetLogFontA(font *GpFont, graphics *GpGraphics, logfontA *graphicsgdi.LOGFONTA) Status {
+	r1, _, _ := syscall.SyscallN(procGdipGetLogFontA.Addr(), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(logfontA)))
 	return Status(r1)
 }
 
@@ -2112,8 +2137,9 @@ func GdipGetMetafileHeaderFromEmf(hEmf graphicsgdi.HENHMETAFILE, header *Metafil
 }
 
 // GdipGetMetafileHeaderFromFile calls gdiplus!GdipGetMetafileHeaderFromFile.
-func GdipGetMetafileHeaderFromFile(filename foundation.PWSTR, header *MetafileHeader) Status {
-	r1, _, _ := syscall.SyscallN(procGdipGetMetafileHeaderFromFile.Addr(), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(header)))
+func GdipGetMetafileHeaderFromFile(filename string, header *MetafileHeader) Status {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(procGdipGetMetafileHeaderFromFile.Addr(), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(header)))
 	return Status(r1)
 }
 
@@ -2478,8 +2504,12 @@ func GdipGetRegionBoundsI(region *GpRegion, graphics *GpGraphics, rect *Rect) St
 }
 
 // GdipGetRegionData calls gdiplus!GdipGetRegionData.
-func GdipGetRegionData(region *GpRegion, buffer *byte, bufferSize uint32, sizeFilled *uint32) Status {
-	r1, _, _ := syscall.SyscallN(procGdipGetRegionData.Addr(), uintptr(unsafe.Pointer(region)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSize), uintptr(unsafe.Pointer(sizeFilled)))
+func GdipGetRegionData(region *GpRegion, buffer []byte, sizeFilled *uint32) Status {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGdipGetRegionData.Addr(), uintptr(unsafe.Pointer(region)), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(sizeFilled)))
 	return Status(r1)
 }
 
@@ -2688,8 +2718,9 @@ func GdipImageSetAbort(pImage *GpImage, pIAbort *GdiplusAbort) Status {
 }
 
 // GdipInitializePalette calls gdiplus!GdipInitializePalette.
-func GdipInitializePalette(palette *ColorPalette, palettetype PaletteType, optimalColors int32, useTransparentColor foundation.BOOL, bitmap *GpBitmap) Status {
-	r1, _, _ := syscall.SyscallN(procGdipInitializePalette.Addr(), uintptr(unsafe.Pointer(palette)), uintptr(palettetype), uintptr(optimalColors), uintptr(useTransparentColor), uintptr(unsafe.Pointer(bitmap)))
+func GdipInitializePalette(palette *ColorPalette, palettetype PaletteType, optimalColors int32, useTransparentColor bool, bitmap *GpBitmap) Status {
+	_useTransparentColor := win32.Bool32(useTransparentColor)
+	r1, _, _ := syscall.SyscallN(procGdipInitializePalette.Addr(), uintptr(unsafe.Pointer(palette)), uintptr(palettetype), uintptr(optimalColors), uintptr(_useTransparentColor), uintptr(unsafe.Pointer(bitmap)))
 	return Status(r1)
 }
 
@@ -2790,14 +2821,16 @@ func GdipIsVisibleRegionRectI(region *GpRegion, x int32, y int32, width int32, h
 }
 
 // GdipLoadImageFromFile calls gdiplus!GdipLoadImageFromFile.
-func GdipLoadImageFromFile(filename foundation.PWSTR, image **GpImage) Status {
-	r1, _, _ := syscall.SyscallN(procGdipLoadImageFromFile.Addr(), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(image)))
+func GdipLoadImageFromFile(filename string, image **GpImage) Status {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(procGdipLoadImageFromFile.Addr(), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(image)))
 	return Status(r1)
 }
 
 // GdipLoadImageFromFileICM calls gdiplus!GdipLoadImageFromFileICM.
-func GdipLoadImageFromFileICM(filename foundation.PWSTR, image **GpImage) Status {
-	r1, _, _ := syscall.SyscallN(procGdipLoadImageFromFileICM.Addr(), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(image)))
+func GdipLoadImageFromFileICM(filename string, image **GpImage) Status {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(procGdipLoadImageFromFileICM.Addr(), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(image)))
 	return Status(r1)
 }
 
@@ -2814,8 +2847,9 @@ func GdipLoadImageFromStreamICM(stream *systemcom.IStream, image **GpImage) Stat
 }
 
 // GdipMeasureCharacterRanges calls gdiplus!GdipMeasureCharacterRanges.
-func GdipMeasureCharacterRanges(graphics *GpGraphics, string_ foundation.PWSTR, length int32, font *GpFont, layoutRect *RectF, stringFormat *GpStringFormat, regionCount int32, regions **GpRegion) Status {
-	r1, _, _ := syscall.SyscallN(procGdipMeasureCharacterRanges.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(string_)), uintptr(length), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(stringFormat)), uintptr(regionCount), uintptr(unsafe.Pointer(regions)))
+func GdipMeasureCharacterRanges(graphics *GpGraphics, string_ string, length int32, font *GpFont, layoutRect *RectF, stringFormat *GpStringFormat, regionCount int32, regions **GpRegion) Status {
+	_string_ := win32.UTF16Ptr(string_)
+	r1, _, _ := syscall.SyscallN(procGdipMeasureCharacterRanges.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(_string_)), uintptr(length), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(stringFormat)), uintptr(regionCount), uintptr(unsafe.Pointer(regions)))
 	return Status(r1)
 }
 
@@ -2826,8 +2860,9 @@ func GdipMeasureDriverString(graphics *GpGraphics, text *uint16, length int32, f
 }
 
 // GdipMeasureString calls gdiplus!GdipMeasureString.
-func GdipMeasureString(graphics *GpGraphics, string_ foundation.PWSTR, length int32, font *GpFont, layoutRect *RectF, stringFormat *GpStringFormat, boundingBox *RectF, codepointsFitted *int32, linesFilled *int32) Status {
-	r1, _, _ := syscall.SyscallN(procGdipMeasureString.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(string_)), uintptr(length), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(stringFormat)), uintptr(unsafe.Pointer(boundingBox)), uintptr(unsafe.Pointer(codepointsFitted)), uintptr(unsafe.Pointer(linesFilled)))
+func GdipMeasureString(graphics *GpGraphics, string_ string, length int32, font *GpFont, layoutRect *RectF, stringFormat *GpStringFormat, boundingBox *RectF, codepointsFitted *int32, linesFilled *int32) Status {
+	_string_ := win32.UTF16Ptr(string_)
+	r1, _, _ := syscall.SyscallN(procGdipMeasureString.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(_string_)), uintptr(length), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(stringFormat)), uintptr(unsafe.Pointer(boundingBox)), uintptr(unsafe.Pointer(codepointsFitted)), uintptr(unsafe.Pointer(linesFilled)))
 	return Status(r1)
 }
 
@@ -2958,8 +2993,9 @@ func GdipPlayMetafileRecord(metafile *GpMetafile, recordType EmfPlusRecordType, 
 }
 
 // GdipPrivateAddFontFile calls gdiplus!GdipPrivateAddFontFile.
-func GdipPrivateAddFontFile(fontCollection *GpFontCollection, filename foundation.PWSTR) Status {
-	r1, _, _ := syscall.SyscallN(procGdipPrivateAddFontFile.Addr(), uintptr(unsafe.Pointer(fontCollection)), uintptr(unsafe.Pointer(filename)))
+func GdipPrivateAddFontFile(fontCollection *GpFontCollection, filename string) Status {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(procGdipPrivateAddFontFile.Addr(), uintptr(unsafe.Pointer(fontCollection)), uintptr(unsafe.Pointer(_filename)))
 	return Status(r1)
 }
 
@@ -2970,38 +3006,46 @@ func GdipPrivateAddMemoryFont(fontCollection *GpFontCollection, memory unsafe.Po
 }
 
 // GdipRecordMetafile calls gdiplus!GdipRecordMetafile.
-func GdipRecordMetafile(referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *RectF, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipRecordMetafile.Addr(), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
+func GdipRecordMetafile(referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *RectF, frameUnit MetafileFrameUnit, description string, metafile **GpMetafile) Status {
+	_description := win32.UTF16Ptr(description)
+	r1, _, _ := syscall.SyscallN(procGdipRecordMetafile.Addr(), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(_description)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
 // GdipRecordMetafileFileName calls gdiplus!GdipRecordMetafileFileName.
-func GdipRecordMetafileFileName(fileName foundation.PWSTR, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *RectF, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileFileName.Addr(), uintptr(unsafe.Pointer(fileName)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
+func GdipRecordMetafileFileName(fileName string, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *RectF, frameUnit MetafileFrameUnit, description string, metafile **GpMetafile) Status {
+	_fileName := win32.UTF16Ptr(fileName)
+	_description := win32.UTF16Ptr(description)
+	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileFileName.Addr(), uintptr(unsafe.Pointer(_fileName)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(_description)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
 // GdipRecordMetafileFileNameI calls gdiplus!GdipRecordMetafileFileNameI.
-func GdipRecordMetafileFileNameI(fileName foundation.PWSTR, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *Rect, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileFileNameI.Addr(), uintptr(unsafe.Pointer(fileName)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
+func GdipRecordMetafileFileNameI(fileName string, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *Rect, frameUnit MetafileFrameUnit, description string, metafile **GpMetafile) Status {
+	_fileName := win32.UTF16Ptr(fileName)
+	_description := win32.UTF16Ptr(description)
+	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileFileNameI.Addr(), uintptr(unsafe.Pointer(_fileName)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(_description)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
 // GdipRecordMetafileI calls gdiplus!GdipRecordMetafileI.
-func GdipRecordMetafileI(referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *Rect, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileI.Addr(), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
+func GdipRecordMetafileI(referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *Rect, frameUnit MetafileFrameUnit, description string, metafile **GpMetafile) Status {
+	_description := win32.UTF16Ptr(description)
+	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileI.Addr(), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(_description)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
 // GdipRecordMetafileStream calls gdiplus!GdipRecordMetafileStream.
-func GdipRecordMetafileStream(stream *systemcom.IStream, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *RectF, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
+func GdipRecordMetafileStream(stream *systemcom.IStream, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *RectF, frameUnit MetafileFrameUnit, description string, metafile **GpMetafile) Status {
+	_description := win32.UTF16Ptr(description)
+	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileStream.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(_description)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
 // GdipRecordMetafileStreamI calls gdiplus!GdipRecordMetafileStreamI.
-func GdipRecordMetafileStreamI(stream *systemcom.IStream, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *Rect, frameUnit MetafileFrameUnit, description foundation.PWSTR, metafile **GpMetafile) Status {
-	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileStreamI.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(metafile)))
+func GdipRecordMetafileStreamI(stream *systemcom.IStream, referenceHdc graphicsgdi.HDC, type_ EmfType, frameRect *Rect, frameUnit MetafileFrameUnit, description string, metafile **GpMetafile) Status {
+	_description := win32.UTF16Ptr(description)
+	r1, _, _ := syscall.SyscallN(procGdipRecordMetafileStreamI.Addr(), uintptr(unsafe.Pointer(stream)), uintptr(referenceHdc), uintptr(type_), uintptr(unsafe.Pointer(frameRect)), uintptr(frameUnit), uintptr(unsafe.Pointer(_description)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
@@ -3102,8 +3146,9 @@ func GdipSaveGraphics(graphics *GpGraphics, state *uint32) Status {
 }
 
 // GdipSaveImageToFile calls gdiplus!GdipSaveImageToFile.
-func GdipSaveImageToFile(image *GpImage, filename foundation.PWSTR, clsidEncoder *win32.GUID, encoderParams *EncoderParameters) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSaveImageToFile.Addr(), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(clsidEncoder)), uintptr(unsafe.Pointer(encoderParams)))
+func GdipSaveImageToFile(image *GpImage, filename string, clsidEncoder *win32.GUID, encoderParams *EncoderParameters) Status {
+	_filename := win32.UTF16Ptr(filename)
+	r1, _, _ := syscall.SyscallN(procGdipSaveImageToFile.Addr(), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(_filename)), uintptr(unsafe.Pointer(clsidEncoder)), uintptr(unsafe.Pointer(encoderParams)))
 	return Status(r1)
 }
 
@@ -3114,8 +3159,9 @@ func GdipSaveImageToStream(image *GpImage, stream *systemcom.IStream, clsidEncod
 }
 
 // GdipSetAdjustableArrowCapFillState calls gdiplus!GdipSetAdjustableArrowCapFillState.
-func GdipSetAdjustableArrowCapFillState(cap_ *GpAdjustableArrowCap, fillState foundation.BOOL) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetAdjustableArrowCapFillState.Addr(), uintptr(unsafe.Pointer(cap_)), uintptr(fillState))
+func GdipSetAdjustableArrowCapFillState(cap_ *GpAdjustableArrowCap, fillState bool) Status {
+	_fillState := win32.Bool32(fillState)
+	r1, _, _ := syscall.SyscallN(procGdipSetAdjustableArrowCapFillState.Addr(), uintptr(unsafe.Pointer(cap_)), uintptr(_fillState))
 	return Status(r1)
 }
 
@@ -3192,44 +3238,52 @@ func GdipSetEmpty(region *GpRegion) Status {
 }
 
 // GdipSetImageAttributesCachedBackground calls gdiplus!GdipSetImageAttributesCachedBackground.
-func GdipSetImageAttributesCachedBackground(imageattr *GpImageAttributes, enableFlag foundation.BOOL) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesCachedBackground.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(enableFlag))
+func GdipSetImageAttributesCachedBackground(imageattr *GpImageAttributes, enableFlag bool) Status {
+	_enableFlag := win32.Bool32(enableFlag)
+	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesCachedBackground.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(_enableFlag))
 	return Status(r1)
 }
 
 // GdipSetImageAttributesColorKeys calls gdiplus!GdipSetImageAttributesColorKeys.
-func GdipSetImageAttributesColorKeys(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag foundation.BOOL, colorLow uint32, colorHigh uint32) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesColorKeys.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(enableFlag), uintptr(colorLow), uintptr(colorHigh))
+func GdipSetImageAttributesColorKeys(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool, colorLow uint32, colorHigh uint32) Status {
+	_enableFlag := win32.Bool32(enableFlag)
+	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesColorKeys.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(_enableFlag), uintptr(colorLow), uintptr(colorHigh))
 	return Status(r1)
 }
 
 // GdipSetImageAttributesColorMatrix calls gdiplus!GdipSetImageAttributesColorMatrix.
-func GdipSetImageAttributesColorMatrix(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag foundation.BOOL, colorMatrix *ColorMatrix, grayMatrix *ColorMatrix, flags ColorMatrixFlags) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesColorMatrix.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(enableFlag), uintptr(unsafe.Pointer(colorMatrix)), uintptr(unsafe.Pointer(grayMatrix)), uintptr(flags))
+func GdipSetImageAttributesColorMatrix(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool, colorMatrix *ColorMatrix, grayMatrix *ColorMatrix, flags ColorMatrixFlags) Status {
+	_enableFlag := win32.Bool32(enableFlag)
+	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesColorMatrix.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(_enableFlag), uintptr(unsafe.Pointer(colorMatrix)), uintptr(unsafe.Pointer(grayMatrix)), uintptr(flags))
 	return Status(r1)
 }
 
 // GdipSetImageAttributesNoOp calls gdiplus!GdipSetImageAttributesNoOp.
-func GdipSetImageAttributesNoOp(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag foundation.BOOL) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesNoOp.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(enableFlag))
+func GdipSetImageAttributesNoOp(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool) Status {
+	_enableFlag := win32.Bool32(enableFlag)
+	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesNoOp.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(_enableFlag))
 	return Status(r1)
 }
 
 // GdipSetImageAttributesOutputChannel calls gdiplus!GdipSetImageAttributesOutputChannel.
-func GdipSetImageAttributesOutputChannel(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag foundation.BOOL, channelFlags ColorChannelFlags) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesOutputChannel.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(enableFlag), uintptr(channelFlags))
+func GdipSetImageAttributesOutputChannel(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool, channelFlags ColorChannelFlags) Status {
+	_enableFlag := win32.Bool32(enableFlag)
+	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesOutputChannel.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(_enableFlag), uintptr(channelFlags))
 	return Status(r1)
 }
 
 // GdipSetImageAttributesOutputChannelColorProfile calls gdiplus!GdipSetImageAttributesOutputChannelColorProfile.
-func GdipSetImageAttributesOutputChannelColorProfile(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag foundation.BOOL, colorProfileFilename foundation.PWSTR) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesOutputChannelColorProfile.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(enableFlag), uintptr(unsafe.Pointer(colorProfileFilename)))
+func GdipSetImageAttributesOutputChannelColorProfile(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool, colorProfileFilename string) Status {
+	_enableFlag := win32.Bool32(enableFlag)
+	_colorProfileFilename := win32.UTF16Ptr(colorProfileFilename)
+	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesOutputChannelColorProfile.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(_enableFlag), uintptr(unsafe.Pointer(_colorProfileFilename)))
 	return Status(r1)
 }
 
 // GdipSetImageAttributesRemapTable calls gdiplus!GdipSetImageAttributesRemapTable.
-func GdipSetImageAttributesRemapTable(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag foundation.BOOL, mapSize uint32, map_ *ColorMap) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesRemapTable.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(enableFlag), uintptr(mapSize), uintptr(unsafe.Pointer(map_)))
+func GdipSetImageAttributesRemapTable(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool, mapSize uint32, map_ *ColorMap) Status {
+	_enableFlag := win32.Bool32(enableFlag)
+	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesRemapTable.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(_enableFlag), uintptr(mapSize), uintptr(unsafe.Pointer(map_)))
 	return Status(r1)
 }
 
@@ -3240,8 +3294,9 @@ func GdipSetImageAttributesToIdentity(imageattr *GpImageAttributes, type_ ColorA
 }
 
 // GdipSetImageAttributesWrapMode calls gdiplus!GdipSetImageAttributesWrapMode.
-func GdipSetImageAttributesWrapMode(imageAttr *GpImageAttributes, wrap WrapMode, argb uint32, clamp foundation.BOOL) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesWrapMode.Addr(), uintptr(unsafe.Pointer(imageAttr)), uintptr(wrap), uintptr(argb), uintptr(clamp))
+func GdipSetImageAttributesWrapMode(imageAttr *GpImageAttributes, wrap WrapMode, argb uint32, clamp bool) Status {
+	_clamp := win32.Bool32(clamp)
+	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesWrapMode.Addr(), uintptr(unsafe.Pointer(imageAttr)), uintptr(wrap), uintptr(argb), uintptr(_clamp))
 	return Status(r1)
 }
 
@@ -3276,8 +3331,9 @@ func GdipSetLineColors(brush *GpLineGradient, color1 uint32, color2 uint32) Stat
 }
 
 // GdipSetLineGammaCorrection calls gdiplus!GdipSetLineGammaCorrection.
-func GdipSetLineGammaCorrection(brush *GpLineGradient, useGammaCorrection foundation.BOOL) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetLineGammaCorrection.Addr(), uintptr(unsafe.Pointer(brush)), uintptr(useGammaCorrection))
+func GdipSetLineGammaCorrection(brush *GpLineGradient, useGammaCorrection bool) Status {
+	_useGammaCorrection := win32.Bool32(useGammaCorrection)
+	r1, _, _ := syscall.SyscallN(procGdipSetLineGammaCorrection.Addr(), uintptr(unsafe.Pointer(brush)), uintptr(_useGammaCorrection))
 	return Status(r1)
 }
 
@@ -3342,8 +3398,9 @@ func GdipSetPathGradientCenterPointI(brush *GpPathGradient, points *Point) Statu
 }
 
 // GdipSetPathGradientGammaCorrection calls gdiplus!GdipSetPathGradientGammaCorrection.
-func GdipSetPathGradientGammaCorrection(brush *GpPathGradient, useGammaCorrection foundation.BOOL) Status {
-	r1, _, _ := syscall.SyscallN(procGdipSetPathGradientGammaCorrection.Addr(), uintptr(unsafe.Pointer(brush)), uintptr(useGammaCorrection))
+func GdipSetPathGradientGammaCorrection(brush *GpPathGradient, useGammaCorrection bool) Status {
+	_useGammaCorrection := win32.Bool32(useGammaCorrection)
+	r1, _, _ := syscall.SyscallN(procGdipSetPathGradientGammaCorrection.Addr(), uintptr(unsafe.Pointer(brush)), uintptr(_useGammaCorrection))
 	return Status(r1)
 }
 

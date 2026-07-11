@@ -25,15 +25,25 @@ var (
 // StartXpsPrintJob calls XPSPRINT!StartXpsPrintJob.
 // https://learn.microsoft.com/windows/win32/api/xpsprint/nf-xpsprint-startxpsprintjob
 // Minimum OS: windows6.1.
-func StartXpsPrintJob(printerName foundation.PWSTR, jobName foundation.PWSTR, outputFileName foundation.PWSTR, progressEvent foundation.HANDLE, completionEvent foundation.HANDLE, printablePagesOn *byte, printablePagesOnCount uint32, xpsPrintJob **IXpsPrintJob, documentStream **IXpsPrintJobStream, printTicketStream **IXpsPrintJobStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStartXpsPrintJob.Addr(), uintptr(unsafe.Pointer(printerName)), uintptr(unsafe.Pointer(jobName)), uintptr(unsafe.Pointer(outputFileName)), uintptr(progressEvent), uintptr(completionEvent), uintptr(unsafe.Pointer(printablePagesOn)), uintptr(printablePagesOnCount), uintptr(unsafe.Pointer(xpsPrintJob)), uintptr(unsafe.Pointer(documentStream)), uintptr(unsafe.Pointer(printTicketStream)))
-	return foundation.HRESULT(r1)
+func StartXpsPrintJob(printerName string, jobName string, outputFileName string, progressEvent foundation.HANDLE, completionEvent foundation.HANDLE, printablePagesOn []byte, xpsPrintJob **IXpsPrintJob, documentStream **IXpsPrintJobStream, printTicketStream **IXpsPrintJobStream) error {
+	_printerName := win32.UTF16Ptr(printerName)
+	_jobName := win32.UTF16Ptr(jobName)
+	_outputFileName := win32.UTF16Ptr(outputFileName)
+	var _printablePagesOn *byte
+	if len(printablePagesOn) > 0 {
+		_printablePagesOn = &printablePagesOn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procStartXpsPrintJob.Addr(), uintptr(unsafe.Pointer(_printerName)), uintptr(unsafe.Pointer(_jobName)), uintptr(unsafe.Pointer(_outputFileName)), uintptr(progressEvent), uintptr(completionEvent), uintptr(unsafe.Pointer(_printablePagesOn)), uintptr(len(printablePagesOn)), uintptr(unsafe.Pointer(xpsPrintJob)), uintptr(unsafe.Pointer(documentStream)), uintptr(unsafe.Pointer(printTicketStream)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartXpsPrintJob1 calls XPSPRINT!StartXpsPrintJob1.
 // https://learn.microsoft.com/windows/win32/api/xpsprint/nf-xpsprint-startxpsprintjob1
 // Minimum OS: windows6.1.
-func StartXpsPrintJob1(printerName foundation.PWSTR, jobName foundation.PWSTR, outputFileName foundation.PWSTR, progressEvent foundation.HANDLE, completionEvent foundation.HANDLE, xpsPrintJob **IXpsPrintJob, printContentReceiver **storagexps.IXpsOMPackageTarget) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStartXpsPrintJob1.Addr(), uintptr(unsafe.Pointer(printerName)), uintptr(unsafe.Pointer(jobName)), uintptr(unsafe.Pointer(outputFileName)), uintptr(progressEvent), uintptr(completionEvent), uintptr(unsafe.Pointer(xpsPrintJob)), uintptr(unsafe.Pointer(printContentReceiver)))
-	return foundation.HRESULT(r1)
+func StartXpsPrintJob1(printerName string, jobName string, outputFileName string, progressEvent foundation.HANDLE, completionEvent foundation.HANDLE, xpsPrintJob **IXpsPrintJob, printContentReceiver **storagexps.IXpsOMPackageTarget) error {
+	_printerName := win32.UTF16Ptr(printerName)
+	_jobName := win32.UTF16Ptr(jobName)
+	_outputFileName := win32.UTF16Ptr(outputFileName)
+	r1, _, _ := syscall.SyscallN(procStartXpsPrintJob1.Addr(), uintptr(unsafe.Pointer(_printerName)), uintptr(unsafe.Pointer(_jobName)), uintptr(unsafe.Pointer(_outputFileName)), uintptr(progressEvent), uintptr(completionEvent), uintptr(unsafe.Pointer(xpsPrintJob)), uintptr(unsafe.Pointer(printContentReceiver)))
+	return win32.HRESULTError(int32(r1))
 }

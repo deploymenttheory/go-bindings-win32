@@ -25,9 +25,9 @@ type IWebApplicationActivation struct {
 var IID_IWebApplicationActivation = win32.GUID{Data1: 0xbcdcd0de, Data2: 0x330e, Data3: 0x481b, Data4: [8]byte{0xb8, 0x43, 0x48, 0x98, 0xa6, 0xa8, 0xeb, 0xac}}
 
 // CancelPendingActivation dispatches through IWebApplicationActivation's vtable slot 3.
-func (self *IWebApplicationActivation) CancelPendingActivation() foundation.HRESULT {
+func (self *IWebApplicationActivation) CancelPendingActivation() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWebApplicationAuthoringMode: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationauthoringmode
@@ -40,9 +40,9 @@ type IWebApplicationAuthoringMode struct {
 var IID_IWebApplicationAuthoringMode = win32.GUID{Data1: 0x720aea93, Data2: 0x1964, Data3: 0x4db0, Data4: [8]byte{0xb0, 0x05, 0x29, 0xeb, 0x9e, 0x2b, 0x18, 0xa9}}
 
 // Get_AuthoringClientBinary dispatches through IWebApplicationAuthoringMode's vtable slot 4.
-func (self *IWebApplicationAuthoringMode) Get_AuthoringClientBinary(designModeDllPath *foundation.BSTR) foundation.HRESULT {
+func (self *IWebApplicationAuthoringMode) Get_AuthoringClientBinary(designModeDllPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(designModeDllPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWebApplicationHost: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationhost
@@ -55,33 +55,33 @@ type IWebApplicationHost struct {
 var IID_IWebApplicationHost = win32.GUID{Data1: 0xcecbd2c3, Data2: 0xa3a5, Data3: 0x4749, Data4: [8]byte{0x96, 0x81, 0x20, 0xe9, 0x16, 0x1c, 0x67, 0x94}}
 
 // Get_HWND dispatches through IWebApplicationHost's vtable slot 3.
-func (self *IWebApplicationHost) Get_HWND(hwnd *foundation.HWND) foundation.HRESULT {
+func (self *IWebApplicationHost) Get_HWND(hwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Document dispatches through IWebApplicationHost's vtable slot 4.
-func (self *IWebApplicationHost) Get_Document(htmlDocument **webmshtml.IHTMLDocument2) foundation.HRESULT {
+func (self *IWebApplicationHost) Get_Document(htmlDocument **webmshtml.IHTMLDocument2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlDocument)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IWebApplicationHost's vtable slot 5.
-func (self *IWebApplicationHost) Refresh() foundation.HRESULT {
+func (self *IWebApplicationHost) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Advise dispatches through IWebApplicationHost's vtable slot 6.
-func (self *IWebApplicationHost) Advise(interfaceId *win32.GUID, callback *systemcom.IUnknown, cookie *uint32) foundation.HRESULT {
+func (self *IWebApplicationHost) Advise(interfaceId *win32.GUID, callback *systemcom.IUnknown, cookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interfaceId)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(cookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unadvise dispatches through IWebApplicationHost's vtable slot 7.
-func (self *IWebApplicationHost) Unadvise(cookie uint32) foundation.HRESULT {
+func (self *IWebApplicationHost) Unadvise(cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWebApplicationNavigationEvents: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationnavigationevents
@@ -94,39 +94,45 @@ type IWebApplicationNavigationEvents struct {
 var IID_IWebApplicationNavigationEvents = win32.GUID{Data1: 0xc22615d2, Data2: 0xd318, Data3: 0x4da2, Data4: [8]byte{0x84, 0x22, 0x1f, 0xca, 0xf7, 0x7b, 0x10, 0xe4}}
 
 // BeforeNavigate dispatches through IWebApplicationNavigationEvents's vtable slot 3.
-func (self *IWebApplicationNavigationEvents) BeforeNavigate(htmlWindow *webmshtml.IHTMLWindow2, url foundation.PWSTR, navigationFlags uint32, targetFrameName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(url)), uintptr(navigationFlags), uintptr(unsafe.Pointer(targetFrameName)))
-	return foundation.HRESULT(r1)
+func (self *IWebApplicationNavigationEvents) BeforeNavigate(htmlWindow *webmshtml.IHTMLWindow2, url string, navigationFlags uint32, targetFrameName string) error {
+	_url := win32.UTF16Ptr(url)
+	_targetFrameName := win32.UTF16Ptr(targetFrameName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)), uintptr(navigationFlags), uintptr(unsafe.Pointer(_targetFrameName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NavigateComplete dispatches through IWebApplicationNavigationEvents's vtable slot 4.
-func (self *IWebApplicationNavigationEvents) NavigateComplete(htmlWindow *webmshtml.IHTMLWindow2, url foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(url)))
-	return foundation.HRESULT(r1)
+func (self *IWebApplicationNavigationEvents) NavigateComplete(htmlWindow *webmshtml.IHTMLWindow2, url string) error {
+	_url := win32.UTF16Ptr(url)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NavigateError dispatches through IWebApplicationNavigationEvents's vtable slot 5.
-func (self *IWebApplicationNavigationEvents) NavigateError(htmlWindow *webmshtml.IHTMLWindow2, url foundation.PWSTR, targetFrameName foundation.PWSTR, statusCode uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(url)), uintptr(unsafe.Pointer(targetFrameName)), uintptr(statusCode))
-	return foundation.HRESULT(r1)
+func (self *IWebApplicationNavigationEvents) NavigateError(htmlWindow *webmshtml.IHTMLWindow2, url string, targetFrameName string, statusCode uint32) error {
+	_url := win32.UTF16Ptr(url)
+	_targetFrameName := win32.UTF16Ptr(targetFrameName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)), uintptr(unsafe.Pointer(_targetFrameName)), uintptr(statusCode))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DocumentComplete dispatches through IWebApplicationNavigationEvents's vtable slot 6.
-func (self *IWebApplicationNavigationEvents) DocumentComplete(htmlWindow *webmshtml.IHTMLWindow2, url foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(url)))
-	return foundation.HRESULT(r1)
+func (self *IWebApplicationNavigationEvents) DocumentComplete(htmlWindow *webmshtml.IHTMLWindow2, url string) error {
+	_url := win32.UTF16Ptr(url)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DownloadBegin dispatches through IWebApplicationNavigationEvents's vtable slot 7.
-func (self *IWebApplicationNavigationEvents) DownloadBegin() foundation.HRESULT {
+func (self *IWebApplicationNavigationEvents) DownloadBegin() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DownloadComplete dispatches through IWebApplicationNavigationEvents's vtable slot 8.
-func (self *IWebApplicationNavigationEvents) DownloadComplete() foundation.HRESULT {
+func (self *IWebApplicationNavigationEvents) DownloadComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWebApplicationScriptEvents: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationscriptevents
@@ -139,15 +145,17 @@ type IWebApplicationScriptEvents struct {
 var IID_IWebApplicationScriptEvents = win32.GUID{Data1: 0x7c3f6998, Data2: 0x1567, Data3: 0x4bba, Data4: [8]byte{0xb5, 0x2b, 0x48, 0xd3, 0x21, 0x41, 0xd6, 0x13}}
 
 // BeforeScriptExecute dispatches through IWebApplicationScriptEvents's vtable slot 3.
-func (self *IWebApplicationScriptEvents) BeforeScriptExecute(htmlWindow *webmshtml.IHTMLWindow2) foundation.HRESULT {
+func (self *IWebApplicationScriptEvents) BeforeScriptExecute(htmlWindow *webmshtml.IHTMLWindow2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptError dispatches through IWebApplicationScriptEvents's vtable slot 4.
-func (self *IWebApplicationScriptEvents) ScriptError(htmlWindow *webmshtml.IHTMLWindow2, scriptError *systemdiagnosticsdebugactivescript.IActiveScriptError, url foundation.PWSTR, errorHandled foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(scriptError)), uintptr(unsafe.Pointer(url)), uintptr(errorHandled))
-	return foundation.HRESULT(r1)
+func (self *IWebApplicationScriptEvents) ScriptError(htmlWindow *webmshtml.IHTMLWindow2, scriptError *systemdiagnosticsdebugactivescript.IActiveScriptError, url string, errorHandled bool) error {
+	_url := win32.UTF16Ptr(url)
+	_errorHandled := win32.Bool32(errorHandled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(scriptError)), uintptr(unsafe.Pointer(_url)), uintptr(_errorHandled))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWebApplicationUIEvents: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationuievents
@@ -160,9 +168,9 @@ type IWebApplicationUIEvents struct {
 var IID_IWebApplicationUIEvents = win32.GUID{Data1: 0x5b2b3f99, Data2: 0x328c, Data3: 0x41d5, Data4: [8]byte{0xa6, 0xf7, 0x74, 0x83, 0xed, 0x8e, 0x71, 0xdd}}
 
 // SecurityProblem dispatches through IWebApplicationUIEvents's vtable slot 3.
-func (self *IWebApplicationUIEvents) SecurityProblem(securityProblem uint32, result *foundation.HRESULT) foundation.HRESULT {
+func (self *IWebApplicationUIEvents) SecurityProblem(securityProblem uint32, result *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(securityProblem), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWebApplicationUpdateEvents: https://learn.microsoft.com/windows/win32/api/webapplication/nn-webapplication-iwebapplicationupdateevents
@@ -175,13 +183,13 @@ type IWebApplicationUpdateEvents struct {
 var IID_IWebApplicationUpdateEvents = win32.GUID{Data1: 0x3e59e6b7, Data2: 0xc652, Data3: 0x4daf, Data4: [8]byte{0xad, 0x5e, 0x16, 0xfe, 0xb3, 0x50, 0xcd, 0xe3}}
 
 // OnPaint dispatches through IWebApplicationUpdateEvents's vtable slot 3.
-func (self *IWebApplicationUpdateEvents) OnPaint() foundation.HRESULT {
+func (self *IWebApplicationUpdateEvents) OnPaint() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnCssChanged dispatches through IWebApplicationUpdateEvents's vtable slot 4.
-func (self *IWebApplicationUpdateEvents) OnCssChanged() foundation.HRESULT {
+func (self *IWebApplicationUpdateEvents) OnCssChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

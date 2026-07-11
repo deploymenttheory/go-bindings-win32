@@ -23,33 +23,33 @@ type IDXCoreAdapter struct {
 var IID_IDXCoreAdapter = win32.GUID{Data1: 0xf0db4c7f, Data2: 0xfe5a, Data3: 0x42a2, Data4: [8]byte{0xbd, 0x62, 0xf2, 0xa6, 0xcf, 0x6f, 0xc8, 0x3e}}
 
 // GetProperty dispatches through IDXCoreAdapter's vtable slot 6.
-func (self *IDXCoreAdapter) GetProperty(property DXCoreAdapterProperty, bufferSize uintptr, propertyData unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapter) GetProperty(property DXCoreAdapterProperty, bufferSize uintptr, propertyData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(bufferSize), uintptr(unsafe.Pointer(propertyData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertySize dispatches through IDXCoreAdapter's vtable slot 7.
-func (self *IDXCoreAdapter) GetPropertySize(property DXCoreAdapterProperty, bufferSize *uintptr) foundation.HRESULT {
+func (self *IDXCoreAdapter) GetPropertySize(property DXCoreAdapterProperty, bufferSize *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(unsafe.Pointer(bufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryState dispatches through IDXCoreAdapter's vtable slot 9.
-func (self *IDXCoreAdapter) QueryState(state DXCoreAdapterState, inputStateDetailsSize uintptr, inputStateDetails unsafe.Pointer, outputBufferSize uintptr, outputBuffer unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapter) QueryState(state DXCoreAdapterState, inputStateDetailsSize uintptr, inputStateDetails unsafe.Pointer, outputBufferSize uintptr, outputBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(state), uintptr(inputStateDetailsSize), uintptr(unsafe.Pointer(inputStateDetails)), uintptr(outputBufferSize), uintptr(unsafe.Pointer(outputBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetState dispatches through IDXCoreAdapter's vtable slot 11.
-func (self *IDXCoreAdapter) SetState(state DXCoreAdapterState, inputStateDetailsSize uintptr, inputStateDetails unsafe.Pointer, inputDataSize uintptr, inputData unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapter) SetState(state DXCoreAdapterState, inputStateDetailsSize uintptr, inputStateDetails unsafe.Pointer, inputDataSize uintptr, inputData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(state), uintptr(inputStateDetailsSize), uintptr(unsafe.Pointer(inputStateDetails)), uintptr(inputDataSize), uintptr(unsafe.Pointer(inputData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFactory dispatches through IDXCoreAdapter's vtable slot 12.
-func (self *IDXCoreAdapter) GetFactory(riid *win32.GUID, ppvFactory *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapter) GetFactory(riid *win32.GUID, ppvFactory *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvFactory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a0783366-cfa3-43be-9d79-55b2da97c63c
@@ -61,9 +61,9 @@ type IDXCoreAdapter1 struct {
 var IID_IDXCoreAdapter1 = win32.GUID{Data1: 0xa0783366, Data2: 0xcfa3, Data3: 0x43be, Data4: [8]byte{0x9d, 0x79, 0x55, 0xb2, 0xda, 0x97, 0xc6, 0x3c}}
 
 // GetPropertyWithInput dispatches through IDXCoreAdapter1's vtable slot 13.
-func (self *IDXCoreAdapter1) GetPropertyWithInput(property DXCoreAdapterProperty, inputPropertyDetailsSize uintptr, inputPropertyDetails unsafe.Pointer, outputBufferSize uintptr, outputBuffer unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapter1) GetPropertyWithInput(property DXCoreAdapterProperty, inputPropertyDetailsSize uintptr, inputPropertyDetails unsafe.Pointer, outputBufferSize uintptr, outputBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(inputPropertyDetailsSize), uintptr(unsafe.Pointer(inputPropertyDetails)), uintptr(outputBufferSize), uintptr(unsafe.Pointer(outputBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXCoreAdapterFactory: https://learn.microsoft.com/windows/win32/api/dxcore_interface/nn-dxcore_interface-idxcoreadapterfactory
@@ -76,27 +76,27 @@ type IDXCoreAdapterFactory struct {
 var IID_IDXCoreAdapterFactory = win32.GUID{Data1: 0x78ee5945, Data2: 0xc36e, Data3: 0x4b13, Data4: [8]byte{0xa6, 0x69, 0x00, 0x5d, 0xd1, 0x1c, 0x0f, 0x06}}
 
 // CreateAdapterList dispatches through IDXCoreAdapterFactory's vtable slot 3.
-func (self *IDXCoreAdapterFactory) CreateAdapterList(numAttributes uint32, filterAttributes *win32.GUID, riid *win32.GUID, ppvAdapterList *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapterFactory) CreateAdapterList(numAttributes uint32, filterAttributes *win32.GUID, riid *win32.GUID, ppvAdapterList *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(numAttributes), uintptr(unsafe.Pointer(filterAttributes)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapterList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdapterByLuid dispatches through IDXCoreAdapterFactory's vtable slot 4.
-func (self *IDXCoreAdapterFactory) GetAdapterByLuid(adapterLUID *foundation.LUID, riid *win32.GUID, ppvAdapter *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapterFactory) GetAdapterByLuid(adapterLUID *foundation.LUID, riid *win32.GUID, ppvAdapter *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(adapterLUID)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterEventNotification dispatches through IDXCoreAdapterFactory's vtable slot 6.
-func (self *IDXCoreAdapterFactory) RegisterEventNotification(dxCoreObject *systemcom.IUnknown, notificationType DXCoreNotificationType, callbackFunction PFN_DXCORE_NOTIFICATION_CALLBACK, callbackContext unsafe.Pointer, eventCookie *uint32) foundation.HRESULT {
+func (self *IDXCoreAdapterFactory) RegisterEventNotification(dxCoreObject *systemcom.IUnknown, notificationType DXCoreNotificationType, callbackFunction PFN_DXCORE_NOTIFICATION_CALLBACK, callbackContext unsafe.Pointer, eventCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxCoreObject)), uintptr(notificationType), uintptr(callbackFunction), uintptr(unsafe.Pointer(callbackContext)), uintptr(unsafe.Pointer(eventCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterEventNotification dispatches through IDXCoreAdapterFactory's vtable slot 7.
-func (self *IDXCoreAdapterFactory) UnregisterEventNotification(eventCookie uint32) foundation.HRESULT {
+func (self *IDXCoreAdapterFactory) UnregisterEventNotification(eventCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(eventCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d5682e19-6d21-401c-827a-9a51a4ea35d7
@@ -108,9 +108,9 @@ type IDXCoreAdapterFactory1 struct {
 var IID_IDXCoreAdapterFactory1 = win32.GUID{Data1: 0xd5682e19, Data2: 0x6d21, Data3: 0x401c, Data4: [8]byte{0x82, 0x7a, 0x9a, 0x51, 0xa4, 0xea, 0x35, 0xd7}}
 
 // CreateAdapterListByWorkload dispatches through IDXCoreAdapterFactory1's vtable slot 8.
-func (self *IDXCoreAdapterFactory1) CreateAdapterListByWorkload(workload DXCoreWorkload, runtimeFilter DXCoreRuntimeFilterFlags, hardwareTypeFilter DXCoreHardwareTypeFilterFlags, riid *win32.GUID, ppvAdapterList *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapterFactory1) CreateAdapterListByWorkload(workload DXCoreWorkload, runtimeFilter DXCoreRuntimeFilterFlags, hardwareTypeFilter DXCoreHardwareTypeFilterFlags, riid *win32.GUID, ppvAdapterList *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(workload), uintptr(runtimeFilter), uintptr(hardwareTypeFilter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapterList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDXCoreAdapterList: https://learn.microsoft.com/windows/win32/api/dxcore_interface/nn-dxcore_interface-idxcoreadapterlist
@@ -123,9 +123,9 @@ type IDXCoreAdapterList struct {
 var IID_IDXCoreAdapterList = win32.GUID{Data1: 0x526c7776, Data2: 0x40e9, Data3: 0x459b, Data4: [8]byte{0xb7, 0x11, 0xf3, 0x2a, 0xd7, 0x6d, 0xfc, 0x28}}
 
 // GetAdapter dispatches through IDXCoreAdapterList's vtable slot 3.
-func (self *IDXCoreAdapterList) GetAdapter(index uint32, riid *win32.GUID, ppvAdapter *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapterList) GetAdapter(index uint32, riid *win32.GUID, ppvAdapter *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvAdapter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdapterCount dispatches through IDXCoreAdapterList's vtable slot 4.
@@ -135,13 +135,13 @@ func (self *IDXCoreAdapterList) GetAdapterCount() uint32 {
 }
 
 // GetFactory dispatches through IDXCoreAdapterList's vtable slot 6.
-func (self *IDXCoreAdapterList) GetFactory(riid *win32.GUID, ppvFactory *unsafe.Pointer) foundation.HRESULT {
+func (self *IDXCoreAdapterList) GetFactory(riid *win32.GUID, ppvFactory *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvFactory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Sort dispatches through IDXCoreAdapterList's vtable slot 7.
-func (self *IDXCoreAdapterList) Sort(numPreferences uint32, preferences *DXCoreAdapterPreference) foundation.HRESULT {
+func (self *IDXCoreAdapterList) Sort(numPreferences uint32, preferences *DXCoreAdapterPreference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(numPreferences), uintptr(unsafe.Pointer(preferences)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

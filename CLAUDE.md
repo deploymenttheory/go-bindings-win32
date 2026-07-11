@@ -25,19 +25,15 @@ go run ./cmd/generate/ ingest
 # Ingest a subset
 go run ./cmd/generate/ ingest --namespace System.Threading,Foundation
 
-# 2. Emit BOTH tiers in one command — raw (bindings/win32/) and idiomatic
-#    (opinionated/idiomatic/win32/) — each self-cleaning (all 324 namespaces).
+# 2. Emit the single idiomatic-shaped bindings tree (bindings/win32/),
+#    self-cleaning (all 324 namespaces).
 go run ./cmd/generate/ bindings
 
-# One namespace plus the transitive closure it references (both tiers)
+# One namespace plus the transitive closure it references
 go run ./cmd/generate/ bindings --namespace System.Threading
 
-# Raw tier only; or verbose diagnostics (degradations, skips, cycle breaks)
-go run ./cmd/generate/ bindings --raw-only
+# Verbose diagnostics (degradations, skips, cycle breaks)
 go run ./cmd/generate/ bindings -v
-
-# Emit only the idiomatic layer (bindings already does both)
-go run ./cmd/generate/ idiomatic
 
 # Regenerate bindings AND the ABI layout acceptance test (acceptance/abi_generated_test.go)
 go run ./cmd/generate/ abitest
@@ -102,11 +98,14 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
   ImportSet)`: the only place type decisions live. Cross-namespace refs
   qualify + record imports as a side effect; every degradation lands in
   `Diagnostics`. `Kind` classifies results for marshaling (`ArgClassOf`).
-- **`internal/codegen/emit/raw/`** (pkg `rawwin`) — the gather → view → render
-  compiler:
-  - gather (`types.go`, `functions.go`, `sizes.go`, `generator.go`): all
-    decisions; unions become size/alignment-correct opaque blobs, C layout is
-    computed in `sizes.go` (amd64 model).
+- **`internal/codegen/emit/raw/`** (pkg `rawwin`) — the single emitter, a
+  gather → view → render compiler. (Still named `raw` for historical reasons;
+  it now emits the one idiomatic-shaped tree. Renaming it is a cosmetic
+  follow-up.)
+  - gather (`types.go`, `functions.go`, `interfaces.go`, `handles.go`,
+    `sizes.go`, `generator.go`): all decisions; the function/COM gathers apply
+    the idiomatic shaping (see below), unions become size/alignment-correct
+    opaque blobs, C layout is computed in `sizes.go` (amd64 model).
   - `view/` — pure-data IR; imports nothing from meta/typemap.
   - `render/` — `//go:embed templates/*.tmpl`; imports only `view` (the
     render firewall). Templates branch on `ReturnKind`, never decide.
@@ -124,88 +123,69 @@ One package per namespace, directory = namespace path
 cross-refs = all segments joined: `systemthreading`). Files per package, split
 by construct: `doc.go`, `<pkg>_typedefs.go`, `<pkg>_enums.go`,
 `<pkg>_structs.go`, `<pkg>_delegates.go`, `<pkg>_constants.go`,
-`<pkg>_interfaces.go` (COM), `<pkg>_functions.go` (empty files are not
-written). The idiomatic package uses the **same** file names for its
-re-exports, plus `<pkg>_handles.go` for the closers.
+`<pkg>_functions.go`, `<pkg>_interfaces.go` (COM), `<pkg>_handles.go` (RAII
+closers). Empty files are not written.
 
-Function shapes (view.ReturnKind):
-- void → no return
-- `BOOL` + SetLastError → `error` only
+There is **one** tree. The typed constructs (typedefs/enums/structs/delegates/
+constants/interfaces) are the full faithful definitions; the functions and COM
+methods carry an idiomatic look-and-feel while dispatching through `syscall`
+**inline** (no wrapper calling a second function). The former two-tier split
+(a separate `opinionated/idiomatic/win32` layer wrapping a 1:1 raw tier) has
+been dissolved into this single emitter.
+
+### Idiomatic shaping (functions and COM methods)
+
+The function and COM-method gathers (`functions.go`, `interfaces.go`) shape
+each call, then the template dispatches via `syscall.SyscallN`:
+
+- input `PWSTR`/`PCWSTR` → Go `string` (UTF-16 at the boundary:
+  `_name := win32.UTF16Ptr(name)`)
+- input `BOOL` → Go `bool` (`win32.Bool32`); plain `BOOL` return → `bool`
+- `HRESULT` return → `error`; `BOOL` + SetLastError → `error`
 - handle/pointer + SetLastError → `(T, error)`, failure sentinels from
-  `[InvalidHandleValue]` metadata
-- other + SetLastError → `(T, error)` where err is the advisory GetLastError
-- no SetLastError → bare `T`
-
-### Idiomatic tier (`opinionated/idiomatic/win32/`, pkg per namespace)
-
-`internal/codegen/emit/idiomatic/` (pkg `idiowin`) is a second view→render
-leaf that wraps the raw tier — hermetic (only calls the raw packages).
-`generate idiomatic` first runs the raw emitter to learn the emitted-function
-set and share the mapper's exact degradation decisions (so a wrapper's
-resolved types always match the raw function it calls), then emits one
-ergonomic wrapper per improvable function:
-
-- input `PWSTR`/`PCWSTR` → Go `string` (UTF-16 at the boundary)
-- input `BOOL` → Go `bool`; plain `BOOL` return → `bool`
-- `HRESULT` return (no SetLastError) → `error`
-- `[Reserved]` params elided (passed as the raw type's zero)
-- `-W` functions de-suffixed when the bare name is free
+  `[InvalidHandleValue]` metadata; other + SetLastError → `(T, error)` where
+  err is the advisory GetLastError; no SetLastError → bare `T`
+- `[Reserved]` params elided from the signature (passed as `0`)
+- `-W` functions de-suffixed when the bare name is free (`CreateEventW` →
+  `CreateEvent`); `-A` variants and unsuffixed names keep their name
 - an array-pointer param + its input count param (`[NativeArrayInfo]`
   `CountParamIndex`) collapse into a single `[]T` (count derived from `len`
   at the call site). Applies only to typed-pointer arrays with a unique,
-  input-only integer count; shared/out counts stay raw. (~600 wrappers)
+  input-only integer count; shared/out counts stay raw.
 - an `[out,retval]` param is elevated out of the signature into a Go return
-  value (`Get_X() (T, error)`). For flat functions only when the raw return
-  is a clean status (HRESULT / BOOL+SetLastError / void); for COM methods
-  whenever the return is HRESULT. (~8,600 COM methods + flat functions)
+  value (`Get_X() (T, error)`). For flat functions only when the return is a
+  clean status (HRESULT / BOOL+SetLastError / void); for COM methods whenever
+  the return is HRESULT.
+- a parameter whose name would shadow a type used in the signature (e.g. a
+  param `Node` in a method returning `(*Node, error)`) is suffixed with `_`,
+  because Go puts parameter names in scope for the result types.
+
+The set of emittable functions is exactly what `syscall.SyscallN` can marshal:
+by-value struct/union/array/GUID params and floats are skipped with a
+diagnostic. The merged `view.ReturnKind` enumerates all the shapes above.
 
 **Handle RAII** (`<pkg>_handles.go`): each `[RAIIFree]` handle typedef gets a
-`Close<Handle>(h) error` helper that calls the closer (looked up via the
-registry's function-owner index, possibly cross-namespace) and normalizes
-its return to `error`. Emitted only when the closer is unambiguous, was
-emitted by the raw tier, takes exactly the handle, and has a normalizable
-return; otherwise skipped with a diagnostic (~107 closers).
+`Close<Handle>(h) error` helper that calls the (idiomatic-shaped) free function
+— looked up via the registry's function-owner index, possibly cross-namespace —
+and normalizes its return to `error`. Emitted only when the closer is
+unambiguous, takes exactly the handle, and has a normalizable return; otherwise
+skipped with a diagnostic (~107 closers).
 
-Functions with nothing to improve are skipped (no pointless alias). Types
-resolve with `Context.QualifyOwn = true` so even same-namespace raw types are
-package-qualified. Selection mirrors the raw tier exactly (metadata order,
-first amd64 entry per name) so signatures always align (~8,200 function
-wrappers, 208 packages).
+**COM interfaces** (`<pkg>_interfaces.go`): the generated struct **is** the COM
+object — obtain one by casting a factory out-param / `QueryInterface` pointer
+(`var s *com.IStream; structuredstorage.CreateStreamOnHGlobal(0, true, &s)`).
+Roots carry `LpVtbl *[1024]uintptr`; derived interfaces embed their base,
+promoting its methods. Methods dispatch through the absolute vtable slot
+(`syscall.SyscallN(self.LpVtbl[slot], uintptr(unsafe.Pointer(self)), args…)`),
+converting `HRESULT` → `error` and lifting `[out,retval]` COM outs to typed
+`*IFoo` return values. `IID_*` GUID vars are generated. There is **no**
+`WrapIFoo` constructor and **no** `.Raw` field. Severed base embeddings (import
+cycles) demote to a rootless vtable with a doc note; slots stay correct.
 
-**Self-contained (re-exports).** The idiomatic package is usable on its own —
-consumers never import `bindings/win32`. Every raw top-level identifier the
-idiomatic tier does not itself improve is re-exported: types as aliases
-(`type USER_INFO_1 = raw.USER_INFO_1`), constants as `const`/`var` aliases,
-and pass-through functions as `var Name = raw.Name`. Because the aliases keep
-type identity, a re-exported struct is still assignable to the raw calls the
-wrappers make. Re-exports are grouped into the same per-construct file names
-the raw tier uses (`_typedefs.go`/`_enums.go`/`_structs.go`/`_delegates.go`/
-`_constants.go`, and pass-through functions in `_functions.go`) — so every
-namespace emits an idiomatic package (324), not just those with improvable
-functions.
-
-**One command, both tiers.** `generate bindings` clears and re-emits *both*
-`bindings/win32/` and `opinionated/idiomatic/win32/` in a single run (the
-idiomatic pass reuses the raw pass's mapper and targets exactly the
-namespaces the raw pass emitted). Both trees are self-cleaning. `--raw-only`
-skips the idiomatic tier; `idiomatic` regenerates only the idiomatic layer.
-
-**Idiomatic COM** (`<pkg>_interfaces.go`): each raw COM interface gets a
-wrapper struct holding the raw pointer (`Raw *rawpkg.IFoo`) and embedding its
-idiomatic base wrapper (promoting inherited methods); `WrapIFoo(raw)`
-constructs it, threading the raw embedded base field. Methods forward to the
-raw vtable call, converting `HRESULT` → `error` and Go string/bool inputs.
-The raw tier records each emitted (deduped, non-skipped) COM method name so
-the wrapper calls the exact raw method; base embedding mirrors the raw tier's
-decision (severed cycle edges → rootless wrapper). ~43,600 wrappers.
-
-COM interface **parameters** use idiomatic wrapper types, not raw pointers:
-an input COM param takes the wrapper value and forwards its `.Raw` to the
-vtable call; an `[out,retval]` COM param is elevated to a wrapper return
-value via `Wrap<Interface>(...)`. Cross-namespace wrappers import the peer
-idiomatic package under an `…idiom` alias (the graph stays acyclic because
-it mirrors the already-cycle-broken raw graph). Falls back to the raw
-pointer when the peer wrapper was not emitted.
+**One command.** `generate bindings` clears and re-emits `bindings/win32/` in a
+single self-cleaning run. Selection is metadata order, first amd64 entry per
+name; names are claimed types-first, then functions (desuffix-when-free), then
+closers, so nothing shadows.
 
 ### Architecture support
 
@@ -247,9 +227,8 @@ DO-NOT-EDIT header are never touched.
 
 - `ci.yml` — build, vet (non-generated packages only: generated syscall
   wrappers trip vet's unsafe.Pointer heuristic by design), unit + acceptance
-  tests, then the regeneration gate: ingest → validate → abitest → idiomatic
-  → ratchet →
-  `git diff --exit-code` over `bindings/` + `acceptance/`.
+  tests, then the regeneration gate: ingest → validate → bindings (with
+  ratchet) → abitest → `git diff --exit-code` over `bindings/` + `acceptance/`.
 - `winmd-update.yml` — weekly + manual: `fetch-metadata` checks NuGet; on a
   new version it re-ingests, regenerates, rewrites the baseline, and opens a
   PR whose body is the `generate diff` output old→new.
@@ -263,9 +242,10 @@ DO-NOT-EDIT header are never touched.
   interface (roots carry `LpVtbl *[1024]uintptr`; derived interfaces embed
   their base, promoting its methods), methods dispatch through absolute
   vtable slots computed from the metadata base chain, `IID_*` GUID vars are
-  generated, and raw `HRESULT` returns convert via `win32.Succeeded`/
-  `win32.HRESULTError`. Severed base embeddings (import cycles) demote to a
-  rootless vtable with a doc note; slots stay correct.
+  generated, and `HRESULT` returns convert to `error` via `win32.HRESULTError`.
+  The struct IS the COM object (no `Wrap`/`.Raw`). Severed base embeddings
+  (import cycles) demote to a rootless vtable with a doc note; slots stay
+  correct.
 - **Skipped constructs are tracked**: functions with by-value struct/float
   params, packed structs, struct-initializer constants → diagnostics, never
   broken output. A pre-pass (`computeSkippedTypes`) guarantees no reference

@@ -22,49 +22,50 @@ type IChannelCredentials struct {
 var IID_IChannelCredentials = win32.GUID{Data1: 0x181b448c, Data2: 0xc17c, Data3: 0x4b17, Data4: [8]byte{0xac, 0x6d, 0x06, 0x69, 0x9b, 0x93, 0x19, 0x8f}}
 
 // SetWindowsCredential dispatches through IChannelCredentials's vtable slot 7.
-func (self *IChannelCredentials) SetWindowsCredential(domain foundation.BSTR, username foundation.BSTR, password foundation.BSTR, impersonationLevel int32, allowNtlm foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(domain)), uintptr(unsafe.Pointer(username)), uintptr(unsafe.Pointer(password)), uintptr(impersonationLevel), uintptr(allowNtlm))
-	return foundation.HRESULT(r1)
+func (self *IChannelCredentials) SetWindowsCredential(domain foundation.BSTR, username foundation.BSTR, password foundation.BSTR, impersonationLevel int32, allowNtlm bool) error {
+	_allowNtlm := win32.Bool32(allowNtlm)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(domain)), uintptr(unsafe.Pointer(username)), uintptr(unsafe.Pointer(password)), uintptr(impersonationLevel), uintptr(_allowNtlm))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUserNameCredential dispatches through IChannelCredentials's vtable slot 8.
-func (self *IChannelCredentials) SetUserNameCredential(username foundation.BSTR, password foundation.BSTR) foundation.HRESULT {
+func (self *IChannelCredentials) SetUserNameCredential(username foundation.BSTR, password foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(username)), uintptr(unsafe.Pointer(password)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClientCertificateFromStoreByName dispatches through IChannelCredentials's vtable slot 10.
-func (self *IChannelCredentials) SetClientCertificateFromStoreByName(subjectName foundation.BSTR, storeLocation foundation.BSTR, storeName foundation.BSTR) foundation.HRESULT {
+func (self *IChannelCredentials) SetClientCertificateFromStoreByName(subjectName foundation.BSTR, storeLocation foundation.BSTR, storeName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subjectName)), uintptr(unsafe.Pointer(storeLocation)), uintptr(unsafe.Pointer(storeName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClientCertificateFromFile dispatches through IChannelCredentials's vtable slot 11.
-func (self *IChannelCredentials) SetClientCertificateFromFile(filename foundation.BSTR, password foundation.BSTR, keystorageFlags foundation.BSTR) foundation.HRESULT {
+func (self *IChannelCredentials) SetClientCertificateFromFile(filename foundation.BSTR, password foundation.BSTR, keystorageFlags foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(password)), uintptr(unsafe.Pointer(keystorageFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDefaultServiceCertificateFromStoreByName dispatches through IChannelCredentials's vtable slot 13.
-func (self *IChannelCredentials) SetDefaultServiceCertificateFromStoreByName(subjectName foundation.BSTR, storeLocation foundation.BSTR, storeName foundation.BSTR) foundation.HRESULT {
+func (self *IChannelCredentials) SetDefaultServiceCertificateFromStoreByName(subjectName foundation.BSTR, storeLocation foundation.BSTR, storeName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subjectName)), uintptr(unsafe.Pointer(storeLocation)), uintptr(unsafe.Pointer(storeName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDefaultServiceCertificateFromFile dispatches through IChannelCredentials's vtable slot 14.
-func (self *IChannelCredentials) SetDefaultServiceCertificateFromFile(filename foundation.BSTR, password foundation.BSTR, keystorageFlags foundation.BSTR) foundation.HRESULT {
+func (self *IChannelCredentials) SetDefaultServiceCertificateFromFile(filename foundation.BSTR, password foundation.BSTR, keystorageFlags foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(password)), uintptr(unsafe.Pointer(keystorageFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetServiceCertificateAuthentication dispatches through IChannelCredentials's vtable slot 15.
-func (self *IChannelCredentials) SetServiceCertificateAuthentication(storeLocation foundation.BSTR, revocationMode foundation.BSTR, certificateValidationMode foundation.BSTR) foundation.HRESULT {
+func (self *IChannelCredentials) SetServiceCertificateAuthentication(storeLocation foundation.BSTR, revocationMode foundation.BSTR, certificateValidationMode foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storeLocation)), uintptr(unsafe.Pointer(revocationMode)), uintptr(unsafe.Pointer(certificateValidationMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIssuedToken dispatches through IChannelCredentials's vtable slot 16.
-func (self *IChannelCredentials) SetIssuedToken(localIssuerAddres foundation.BSTR, localIssuerBindingType foundation.BSTR, localIssuerBinding foundation.BSTR) foundation.HRESULT {
+func (self *IChannelCredentials) SetIssuedToken(localIssuerAddres foundation.BSTR, localIssuerBindingType foundation.BSTR, localIssuerBinding foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(localIssuerAddres)), uintptr(unsafe.Pointer(localIssuerBindingType)), uintptr(unsafe.Pointer(localIssuerBinding)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

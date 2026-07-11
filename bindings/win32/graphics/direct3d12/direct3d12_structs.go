@@ -55,8 +55,8 @@ type D3D12_AUTO_BREADCRUMB_NODE1 struct {
 	PBreadcrumbContexts     *D3D12_DRED_BREADCRUMB_CONTEXT
 }
 
-// D3D12_BARRIER_GROUP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_BARRIER_GROUP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_BARRIER_GROUP_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -163,8 +163,8 @@ type D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC struct {
 	ScratchAccelerationStructureData uint64
 }
 
-// D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -190,8 +190,8 @@ type D3D12_CACHED_PIPELINE_STATE struct {
 	CachedBlobSizeInBytes uintptr
 }
 
-// D3D12_CLEAR_VALUE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_CLEAR_VALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_CLEAR_VALUE_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -388,8 +388,8 @@ type D3D12_DEPTH_STENCIL_VALUE struct {
 	Stencil byte
 }
 
-// D3D12_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
 }
@@ -477,8 +477,8 @@ type D3D12_DISPATCH_ARGUMENTS struct {
 	ThreadGroupCountZ uint32
 }
 
-// D3D12_DISPATCH_GRAPH_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_DISPATCH_GRAPH_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_DISPATCH_GRAPH_DESC_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -1098,8 +1098,8 @@ type D3D12_INDEX_BUFFER_VIEW struct {
 	Format         graphicsdxgicommon.DXGI_FORMAT
 }
 
-// D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
 }
@@ -1210,8 +1210,8 @@ type D3D12_MULTI_NODE_GPU_INPUT struct {
 	NodeInputs    D3D12_GPU_VIRTUAL_ADDRESS_AND_STRIDE
 }
 
-// D3D12_NODE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_NODE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_NODE_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -1434,8 +1434,8 @@ type D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC struct {
 	InfoType   D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_TYPE
 }
 
-// D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1469,8 +1469,8 @@ type D3D12_RAYTRACING_GEOMETRY_AABBS_DESC struct {
 	AABBs     D3D12_GPU_VIRTUAL_ADDRESS_AND_STRIDE
 }
 
-// D3D12_RAYTRACING_GEOMETRY_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_RAYTRACING_GEOMETRY_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_RAYTRACING_GEOMETRY_DESC_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -1572,8 +1572,8 @@ type D3D12_REGISTER_TRIM_NOTIFICATION struct {
 	CallbackCookie uint32
 }
 
-// D3D12_RENDER_PASS_BEGINNING_ACCESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_RENDER_PASS_BEGINNING_ACCESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_RENDER_PASS_BEGINNING_ACCESS_Anonymous_e__Union struct {
 	Data [5]uint32
 }
@@ -1603,8 +1603,8 @@ type D3D12_RENDER_PASS_DEPTH_STENCIL_DESC struct {
 	StencilEndingAccess    D3D12_RENDER_PASS_ENDING_ACCESS
 }
 
-// D3D12_RENDER_PASS_ENDING_ACCESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_RENDER_PASS_ENDING_ACCESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_RENDER_PASS_ENDING_ACCESS_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -1661,8 +1661,8 @@ type D3D12_RENDER_TARGET_BLEND_DESC struct {
 	RenderTargetWriteMask byte
 }
 
-// D3D12_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -1693,8 +1693,8 @@ type D3D12_RESOURCE_ALLOCATION_INFO1 struct {
 	SizeInBytes uint64
 }
 
-// D3D12_RESOURCE_BARRIER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_RESOURCE_BARRIER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_RESOURCE_BARRIER_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -1780,8 +1780,8 @@ type D3D12_ROOT_DESCRIPTOR_TABLE1 struct {
 	PDescriptorRanges   *D3D12_DESCRIPTOR_RANGE1
 }
 
-// D3D12_ROOT_PARAMETER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_ROOT_PARAMETER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_ROOT_PARAMETER_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -1793,8 +1793,8 @@ type D3D12_ROOT_PARAMETER struct {
 	ShaderVisibility D3D12_SHADER_VISIBILITY
 }
 
-// D3D12_ROOT_PARAMETER1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_ROOT_PARAMETER1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_ROOT_PARAMETER1_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -1852,8 +1852,8 @@ type D3D12_SAMPLER_DESC struct {
 	MaxLOD         float32
 }
 
-// D3D12_SAMPLER_DESC2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_SAMPLER_DESC2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_SAMPLER_DESC2_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -1896,8 +1896,8 @@ type D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER struct {
 	NumBottomLevelAccelerationStructurePointersAfterHeader uint64
 }
 
-// D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER1_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1919,8 +1919,8 @@ type D3D12_SET_GENERIC_PIPELINE_DESC struct {
 	ProgramIdentifier D3D12_PROGRAM_IDENTIFIER
 }
 
-// D3D12_SET_PROGRAM_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_SET_PROGRAM_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_SET_PROGRAM_DESC_Anonymous_e__Union struct {
 	Data [10]uint64
 }
@@ -2023,8 +2023,8 @@ type D3D12_SHADER_INPUT_BIND_DESC struct {
 	UID        uint32
 }
 
-// D3D12_SHADER_NODE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_SHADER_NODE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_SHADER_NODE_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2035,8 +2035,8 @@ type D3D12_SHADER_NODE struct {
 	Anonymous     D3D12_SHADER_NODE_Anonymous_e__Union
 }
 
-// D3D12_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -2417,8 +2417,8 @@ type D3D12_TEXTURE_BARRIER struct {
 	Flags        D3D12_TEXTURE_BARRIER_FLAGS
 }
 
-// D3D12_TEXTURE_COPY_LOCATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_TEXTURE_COPY_LOCATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_TEXTURE_COPY_LOCATION_Anonymous_e__Union struct {
 	Data [4]uint64
 }
@@ -2469,8 +2469,8 @@ type D3D12_TRIM_NOTIFICATION struct {
 	NumBytesToTrim uint64
 }
 
-// D3D12_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union struct {
 	Data [5]uint64
 }
@@ -2482,8 +2482,8 @@ type D3D12_UNORDERED_ACCESS_VIEW_DESC struct {
 	Anonymous     D3D12_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union
 }
 
-// D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_Anonymous_e__Union struct {
 	Data [7]uint64
 }
@@ -2494,8 +2494,8 @@ type D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA struct {
 	Anonymous D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_Anonymous_e__Union
 }
 
-// D3D12_VERSIONED_ROOT_SIGNATURE_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VERSIONED_ROOT_SIGNATURE_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VERSIONED_ROOT_SIGNATURE_DESC_Anonymous_e__Union struct {
 	Data [5]uint64
 }
@@ -2506,8 +2506,8 @@ type D3D12_VERSIONED_ROOT_SIGNATURE_DESC struct {
 	Anonymous D3D12_VERSIONED_ROOT_SIGNATURE_DESC_Anonymous_e__Union
 }
 
-// D3D12_VERSION_NUMBER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VERSION_NUMBER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VERSION_NUMBER struct {
 	Data [1]uint64
 }

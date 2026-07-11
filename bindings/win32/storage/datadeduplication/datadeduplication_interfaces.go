@@ -23,9 +23,9 @@ type IDedupBackupSupport struct {
 var IID_IDedupBackupSupport = win32.GUID{Data1: 0xc719d963, Data2: 0x2b2d, Data3: 0x415e, Data4: [8]byte{0xac, 0xf7, 0x7e, 0xb7, 0xca, 0x59, 0x6f, 0xf4}}
 
 // RestoreFiles dispatches through IDedupBackupSupport's vtable slot 3.
-func (self *IDedupBackupSupport) RestoreFiles(NumberOfFiles uint32, FileFullPaths *foundation.BSTR, Store *IDedupReadFileCallback, Flags uint32, FileResults *foundation.HRESULT) foundation.HRESULT {
+func (self *IDedupBackupSupport) RestoreFiles(NumberOfFiles uint32, FileFullPaths *foundation.BSTR, Store *IDedupReadFileCallback, Flags uint32, FileResults *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(NumberOfFiles), uintptr(unsafe.Pointer(FileFullPaths)), uintptr(unsafe.Pointer(Store)), uintptr(Flags), uintptr(unsafe.Pointer(FileResults)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bb5144d7-2720-4dcc-8777-78597416ec23
@@ -37,15 +37,15 @@ type IDedupChunkLibrary struct {
 var IID_IDedupChunkLibrary = win32.GUID{Data1: 0xbb5144d7, Data2: 0x2720, Data3: 0x4dcc, Data4: [8]byte{0x87, 0x77, 0x78, 0x59, 0x74, 0x16, 0xec, 0x23}}
 
 // InitializeForPushBuffers dispatches through IDedupChunkLibrary's vtable slot 3.
-func (self *IDedupChunkLibrary) InitializeForPushBuffers() foundation.HRESULT {
+func (self *IDedupChunkLibrary) InitializeForPushBuffers() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Uninitialize dispatches through IDedupChunkLibrary's vtable slot 4.
-func (self *IDedupChunkLibrary) Uninitialize() foundation.HRESULT {
+func (self *IDedupChunkLibrary) Uninitialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7963d734-40a9-4ea3-bbf6-5a89d26f7ae8
@@ -57,51 +57,51 @@ type IDedupDataPort struct {
 var IID_IDedupDataPort = win32.GUID{Data1: 0x7963d734, Data2: 0x40a9, Data3: 0x4ea3, Data4: [8]byte{0xbb, 0xf6, 0x5a, 0x89, 0xd2, 0x6f, 0x7a, 0xe8}}
 
 // GetStatus dispatches through IDedupDataPort's vtable slot 3.
-func (self *IDedupDataPort) GetStatus(pStatus *DedupDataPortVolumeStatus, pDataHeadroomMb *uint32) foundation.HRESULT {
+func (self *IDedupDataPort) GetStatus(pStatus *DedupDataPortVolumeStatus, pDataHeadroomMb *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)), uintptr(unsafe.Pointer(pDataHeadroomMb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LookupChunks dispatches through IDedupDataPort's vtable slot 4.
-func (self *IDedupDataPort) LookupChunks(Count uint32, pHashes *DedupHash, pRequestId *win32.GUID) foundation.HRESULT {
+func (self *IDedupDataPort) LookupChunks(Count uint32, pHashes *DedupHash, pRequestId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(pHashes)), uintptr(unsafe.Pointer(pRequestId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertChunks dispatches through IDedupDataPort's vtable slot 5.
-func (self *IDedupDataPort) InsertChunks(ChunkCount uint32, pChunkMetadata *DedupChunk, DataByteCount uint32, pChunkData *byte, pRequestId *win32.GUID) foundation.HRESULT {
+func (self *IDedupDataPort) InsertChunks(ChunkCount uint32, pChunkMetadata *DedupChunk, DataByteCount uint32, pChunkData *byte, pRequestId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ChunkCount), uintptr(unsafe.Pointer(pChunkMetadata)), uintptr(DataByteCount), uintptr(unsafe.Pointer(pChunkData)), uintptr(unsafe.Pointer(pRequestId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertChunksWithStream dispatches through IDedupDataPort's vtable slot 6.
-func (self *IDedupDataPort) InsertChunksWithStream(ChunkCount uint32, pChunkMetadata *DedupChunk, DataByteCount uint32, pChunkDataStream *systemcom.IStream, pRequestId *win32.GUID) foundation.HRESULT {
+func (self *IDedupDataPort) InsertChunksWithStream(ChunkCount uint32, pChunkMetadata *DedupChunk, DataByteCount uint32, pChunkDataStream *systemcom.IStream, pRequestId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ChunkCount), uintptr(unsafe.Pointer(pChunkMetadata)), uintptr(DataByteCount), uintptr(unsafe.Pointer(pChunkDataStream)), uintptr(unsafe.Pointer(pRequestId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitStreams dispatches through IDedupDataPort's vtable slot 7.
-func (self *IDedupDataPort) CommitStreams(StreamCount uint32, pStreams *DedupStream, EntryCount uint32, pEntries *DedupStreamEntry, pRequestId *win32.GUID) foundation.HRESULT {
+func (self *IDedupDataPort) CommitStreams(StreamCount uint32, pStreams *DedupStream, EntryCount uint32, pEntries *DedupStreamEntry, pRequestId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(StreamCount), uintptr(unsafe.Pointer(pStreams)), uintptr(EntryCount), uintptr(unsafe.Pointer(pEntries)), uintptr(unsafe.Pointer(pRequestId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitStreamsWithStream dispatches through IDedupDataPort's vtable slot 8.
-func (self *IDedupDataPort) CommitStreamsWithStream(StreamCount uint32, pStreams *DedupStream, EntryCount uint32, pEntriesStream *systemcom.IStream, pRequestId *win32.GUID) foundation.HRESULT {
+func (self *IDedupDataPort) CommitStreamsWithStream(StreamCount uint32, pStreams *DedupStream, EntryCount uint32, pEntriesStream *systemcom.IStream, pRequestId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(StreamCount), uintptr(unsafe.Pointer(pStreams)), uintptr(EntryCount), uintptr(unsafe.Pointer(pEntriesStream)), uintptr(unsafe.Pointer(pRequestId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreams dispatches through IDedupDataPort's vtable slot 9.
-func (self *IDedupDataPort) GetStreams(StreamCount uint32, pStreamPaths *foundation.BSTR, pRequestId *win32.GUID) foundation.HRESULT {
+func (self *IDedupDataPort) GetStreams(StreamCount uint32, pStreamPaths *foundation.BSTR, pRequestId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(StreamCount), uintptr(unsafe.Pointer(pStreamPaths)), uintptr(unsafe.Pointer(pRequestId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChunks dispatches through IDedupDataPort's vtable slot 11.
-func (self *IDedupDataPort) GetChunks(Count uint32, pHashes *DedupHash, pRequestId *win32.GUID) foundation.HRESULT {
+func (self *IDedupDataPort) GetChunks(Count uint32, pHashes *DedupHash, pRequestId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(pHashes)), uintptr(unsafe.Pointer(pRequestId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 44677452-b90a-445e-8192-cdcfe81511fb
@@ -113,21 +113,21 @@ type IDedupDataPortManager struct {
 var IID_IDedupDataPortManager = win32.GUID{Data1: 0x44677452, Data2: 0xb90a, Data3: 0x445e, Data4: [8]byte{0x81, 0x92, 0xcd, 0xcf, 0xe8, 0x15, 0x11, 0xfb}}
 
 // GetConfiguration dispatches through IDedupDataPortManager's vtable slot 3.
-func (self *IDedupDataPortManager) GetConfiguration(pMinChunkSize *uint32, pMaxChunkSize *uint32, pChunkingAlgorithm *DedupChunkingAlgorithm, pHashingAlgorithm *DedupHashingAlgorithm, pCompressionAlgorithm *DedupCompressionAlgorithm) foundation.HRESULT {
+func (self *IDedupDataPortManager) GetConfiguration(pMinChunkSize *uint32, pMaxChunkSize *uint32, pChunkingAlgorithm *DedupChunkingAlgorithm, pHashingAlgorithm *DedupHashingAlgorithm, pCompressionAlgorithm *DedupCompressionAlgorithm) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMinChunkSize)), uintptr(unsafe.Pointer(pMaxChunkSize)), uintptr(unsafe.Pointer(pChunkingAlgorithm)), uintptr(unsafe.Pointer(pHashingAlgorithm)), uintptr(unsafe.Pointer(pCompressionAlgorithm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolumeStatus dispatches through IDedupDataPortManager's vtable slot 4.
-func (self *IDedupDataPortManager) GetVolumeStatus(Options uint32, Path foundation.BSTR, pStatus *DedupDataPortVolumeStatus) foundation.HRESULT {
+func (self *IDedupDataPortManager) GetVolumeStatus(Options uint32, Path foundation.BSTR, pStatus *DedupDataPortVolumeStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(unsafe.Pointer(Path)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolumeDataPort dispatches through IDedupDataPortManager's vtable slot 5.
-func (self *IDedupDataPortManager) GetVolumeDataPort(Options uint32, Path foundation.BSTR, ppDataPort **IDedupDataPort) foundation.HRESULT {
+func (self *IDedupDataPortManager) GetVolumeDataPort(Options uint32, Path foundation.BSTR, ppDataPort **IDedupDataPort) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(unsafe.Pointer(Path)), uintptr(unsafe.Pointer(ppDataPort)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 90b584d3-72aa-400f-9767-cad866a5a2d8
@@ -139,27 +139,27 @@ type IDedupIterateChunksHash32 struct {
 var IID_IDedupIterateChunksHash32 = win32.GUID{Data1: 0x90b584d3, Data2: 0x72aa, Data3: 0x400f, Data4: [8]byte{0x97, 0x67, 0xca, 0xd8, 0x66, 0xa5, 0xa2, 0xd8}}
 
 // PushBuffer dispatches through IDedupIterateChunksHash32's vtable slot 3.
-func (self *IDedupIterateChunksHash32) PushBuffer(pBuffer *byte, ulBufferLength uint32) foundation.HRESULT {
+func (self *IDedupIterateChunksHash32) PushBuffer(pBuffer *byte, ulBufferLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(ulBufferLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IDedupIterateChunksHash32's vtable slot 4.
-func (self *IDedupIterateChunksHash32) Next(ulMaxChunks uint32, pArrChunks *DEDUP_CHUNK_INFO_HASH32, pulFetched *uint32) foundation.HRESULT {
+func (self *IDedupIterateChunksHash32) Next(ulMaxChunks uint32, pArrChunks *DEDUP_CHUNK_INFO_HASH32, pulFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulMaxChunks), uintptr(unsafe.Pointer(pArrChunks)), uintptr(unsafe.Pointer(pulFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Drain dispatches through IDedupIterateChunksHash32's vtable slot 5.
-func (self *IDedupIterateChunksHash32) Drain() foundation.HRESULT {
+func (self *IDedupIterateChunksHash32) Drain() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IDedupIterateChunksHash32's vtable slot 6.
-func (self *IDedupIterateChunksHash32) Reset() foundation.HRESULT {
+func (self *IDedupIterateChunksHash32) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDedupReadFileCallback: https://learn.microsoft.com/windows/win32/api/ddpbackup/nn-ddpbackup-idedupreadfilecallback
@@ -172,19 +172,19 @@ type IDedupReadFileCallback struct {
 var IID_IDedupReadFileCallback = win32.GUID{Data1: 0x7bacc67a, Data2: 0x2f1d, Data3: 0x42d0, Data4: [8]byte{0x89, 0x7e, 0x6f, 0xf6, 0x2d, 0xd5, 0x33, 0xbb}}
 
 // ReadBackupFile dispatches through IDedupReadFileCallback's vtable slot 3.
-func (self *IDedupReadFileCallback) ReadBackupFile(FileFullPath foundation.BSTR, FileOffset int64, SizeToRead uint32, FileBuffer *byte, ReturnedSize *uint32, Flags uint32) foundation.HRESULT {
+func (self *IDedupReadFileCallback) ReadBackupFile(FileFullPath foundation.BSTR, FileOffset int64, SizeToRead uint32, FileBuffer *byte, ReturnedSize *uint32, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileFullPath)), uintptr(FileOffset), uintptr(SizeToRead), uintptr(unsafe.Pointer(FileBuffer)), uintptr(unsafe.Pointer(ReturnedSize)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OrderContainersRestore dispatches through IDedupReadFileCallback's vtable slot 4.
-func (self *IDedupReadFileCallback) OrderContainersRestore(NumberOfContainers uint32, ContainerPaths *foundation.BSTR, ReadPlanEntries *uint32, ReadPlan **DEDUP_CONTAINER_EXTENT) foundation.HRESULT {
+func (self *IDedupReadFileCallback) OrderContainersRestore(NumberOfContainers uint32, ContainerPaths *foundation.BSTR, ReadPlanEntries *uint32, ReadPlan **DEDUP_CONTAINER_EXTENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(NumberOfContainers), uintptr(unsafe.Pointer(ContainerPaths)), uintptr(unsafe.Pointer(ReadPlanEntries)), uintptr(unsafe.Pointer(ReadPlan)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PreviewContainerRead dispatches through IDedupReadFileCallback's vtable slot 5.
-func (self *IDedupReadFileCallback) PreviewContainerRead(FileFullPath foundation.BSTR, NumberOfReads uint32, ReadOffsets *DDP_FILE_EXTENT) foundation.HRESULT {
+func (self *IDedupReadFileCallback) PreviewContainerRead(FileFullPath foundation.BSTR, NumberOfReads uint32, ReadOffsets *DDP_FILE_EXTENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileFullPath)), uintptr(NumberOfReads), uintptr(unsafe.Pointer(ReadOffsets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

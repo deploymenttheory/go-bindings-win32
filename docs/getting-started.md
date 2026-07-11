@@ -17,9 +17,9 @@ dependency is `golang.org/x/sys/windows`.
 
 ## Your first call
 
-Pick the namespace you need under `opinionated/idiomatic/win32/…` and call it.
+Pick the namespace you need under `bindings/win32/…` and call it.
 Namespaces map from win32metadata: `Windows.Win32.System.Threading` →
-`opinionated/idiomatic/win32/system/threading`.
+`bindings/win32/system/threading`.
 
 ```go
 //go:build windows
@@ -29,8 +29,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/foundation"
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/threading"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 )
 
 func main() {
@@ -52,17 +52,16 @@ func main() {
 Run it: `go run .` — see [`examples/`](../examples) for complete, runnable
 programs.
 
-## Which layer to import
+## What to import
 
-| Layer | Import path | Use it for |
+| Package | Import path | What it gives you |
 |---|---|---|
-| **Idiomatic** *(default)* | `opinionated/idiomatic/win32/<namespace>` | Go strings for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, elevated `[out,retval]` returns, `Close<Handle>` helpers, COM interfaces as method-bearing wrappers. **Self-contained** — it re-exports every struct/constant/pass-through it doesn't improve, so you never import the raw package. |
-| **Raw** | `bindings/win32/<namespace>` | The 1:1 `syscall` surface. Only if you need an un-adapted signature. |
-| **Runtime** | `bindings/runtime/win32` | Shared helpers both tiers use: `UTF16Ptr`, `UTF16ToString`, `GUID`, `HRESULTError`, `Bool32`. |
+| **Namespace bindings** | `bindings/win32/<namespace>` | The generated API for a namespace: Go strings for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, elevated `[out,retval]` returns, `Close<Handle>` helpers, COM interfaces as method-bearing vtable structs — plus every struct, constant, and function. One Go package per namespace. |
+| **Runtime** | `bindings/runtime/win32` | Shared helpers the bindings use: `UTF16Ptr`, `UTF16ToString`, `GUID`, `HRESULTError`, `Bool32`. |
 
-Rule of thumb: **import only the idiomatic package and the runtime.** If you
-reach for `bindings/win32`, first check whether the idiomatic package already
-re-exports the symbol — it almost always does.
+Rule of thumb: **import `bindings/win32/<namespace>` and the runtime
+`bindings/runtime/win32`.** There is a single bindings tree — the Go-friendly
+shaping is built in, so there is no separate package to reach for.
 
 ## Next
 
@@ -70,6 +69,6 @@ re-exports the symbol — it almost always does.
   bindings surface each.
 - [Strings, structs, and memory](strings-and-memory.md) — UTF-16, self-sized
   structs, buffer ownership, and handles.
-- [Using COM interfaces](com.md) — wrapper types, `QueryInterface`, and
-  lifetimes.
+- [Using COM interfaces](com.md) — method-bearing structs, `QueryInterface`,
+  and lifetimes.
 - [Examples](../examples) — runnable programs with their own READMEs.

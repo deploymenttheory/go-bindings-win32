@@ -25,9 +25,12 @@ type IAccessibleWinSAT struct {
 var IID_IAccessibleWinSAT = win32.GUID{Data1: 0x30e6018a, Data2: 0x94a8, Data3: 0x4ff8, Data4: [8]byte{0xa6, 0x9a, 0x71, 0xb6, 0x74, 0x13, 0xf0, 0x7b}}
 
 // SetAccessiblityData dispatches through IAccessibleWinSAT's vtable slot 28.
-func (self *IAccessibleWinSAT) SetAccessiblityData(wsName foundation.PWSTR, wsValue foundation.PWSTR, wsDesc foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wsName)), uintptr(unsafe.Pointer(wsValue)), uintptr(unsafe.Pointer(wsDesc)))
-	return foundation.HRESULT(r1)
+func (self *IAccessibleWinSAT) SetAccessiblityData(wsName string, wsValue string, wsDesc string) error {
+	_wsName := win32.UTF16Ptr(wsName)
+	_wsValue := win32.UTF16Ptr(wsValue)
+	_wsDesc := win32.UTF16Ptr(wsDesc)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wsName)), uintptr(unsafe.Pointer(_wsValue)), uintptr(unsafe.Pointer(_wsDesc)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IInitiateWinSATAssessment: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/nn-winsatcominterfacei-iinitiatewinsatassessment
@@ -40,21 +43,22 @@ type IInitiateWinSATAssessment struct {
 var IID_IInitiateWinSATAssessment = win32.GUID{Data1: 0xd983fc50, Data2: 0xf5bf, Data3: 0x49d5, Data4: [8]byte{0xb5, 0xed, 0xcc, 0xcb, 0x18, 0xaa, 0x7f, 0xc1}}
 
 // InitiateAssessment dispatches through IInitiateWinSATAssessment's vtable slot 3.
-func (self *IInitiateWinSATAssessment) InitiateAssessment(cmdLine foundation.PWSTR, pCallbacks *IWinSATInitiateEvents, callerHwnd foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cmdLine)), uintptr(unsafe.Pointer(pCallbacks)), uintptr(callerHwnd))
-	return foundation.HRESULT(r1)
+func (self *IInitiateWinSATAssessment) InitiateAssessment(cmdLine string, pCallbacks *IWinSATInitiateEvents, callerHwnd foundation.HWND) error {
+	_cmdLine := win32.UTF16Ptr(cmdLine)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_cmdLine)), uintptr(unsafe.Pointer(pCallbacks)), uintptr(callerHwnd))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitiateFormalAssessment dispatches through IInitiateWinSATAssessment's vtable slot 4.
-func (self *IInitiateWinSATAssessment) InitiateFormalAssessment(pCallbacks *IWinSATInitiateEvents, callerHwnd foundation.HWND) foundation.HRESULT {
+func (self *IInitiateWinSATAssessment) InitiateFormalAssessment(pCallbacks *IWinSATInitiateEvents, callerHwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallbacks)), uintptr(callerHwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelAssessment dispatches through IInitiateWinSATAssessment's vtable slot 5.
-func (self *IInitiateWinSATAssessment) CancelAssessment() foundation.HRESULT {
+func (self *IInitiateWinSATAssessment) CancelAssessment() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProvideWinSATAssessmentInfo: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/nn-winsatcominterfacei-iprovidewinsatassessmentinfo
@@ -67,21 +71,21 @@ type IProvideWinSATAssessmentInfo struct {
 var IID_IProvideWinSATAssessmentInfo = win32.GUID{Data1: 0x0cd1c380, Data2: 0x52d3, Data3: 0x4678, Data4: [8]byte{0xac, 0x6f, 0xe9, 0x29, 0xe4, 0x80, 0xbe, 0x9e}}
 
 // Get_Score dispatches through IProvideWinSATAssessmentInfo's vtable slot 7.
-func (self *IProvideWinSATAssessmentInfo) Get_Score(score *float32) foundation.HRESULT {
+func (self *IProvideWinSATAssessmentInfo) Get_Score(score *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(score)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Title dispatches through IProvideWinSATAssessmentInfo's vtable slot 8.
-func (self *IProvideWinSATAssessmentInfo) Get_Title(title *foundation.BSTR) foundation.HRESULT {
+func (self *IProvideWinSATAssessmentInfo) Get_Title(title *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(title)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Description dispatches through IProvideWinSATAssessmentInfo's vtable slot 9.
-func (self *IProvideWinSATAssessmentInfo) Get_Description(description *foundation.BSTR) foundation.HRESULT {
+func (self *IProvideWinSATAssessmentInfo) Get_Description(description *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProvideWinSATResultsInfo: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/nn-winsatcominterfacei-iprovidewinsatresultsinfo
@@ -94,33 +98,33 @@ type IProvideWinSATResultsInfo struct {
 var IID_IProvideWinSATResultsInfo = win32.GUID{Data1: 0xf8334d5d, Data2: 0x568e, Data3: 0x4075, Data4: [8]byte{0x87, 0x5f, 0x9d, 0xf3, 0x41, 0x50, 0x66, 0x40}}
 
 // GetAssessmentInfo dispatches through IProvideWinSATResultsInfo's vtable slot 7.
-func (self *IProvideWinSATResultsInfo) GetAssessmentInfo(assessment WINSAT_ASSESSMENT_TYPE, ppinfo **IProvideWinSATAssessmentInfo) foundation.HRESULT {
+func (self *IProvideWinSATResultsInfo) GetAssessmentInfo(assessment WINSAT_ASSESSMENT_TYPE, ppinfo **IProvideWinSATAssessmentInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(assessment), uintptr(unsafe.Pointer(ppinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AssessmentState dispatches through IProvideWinSATResultsInfo's vtable slot 8.
-func (self *IProvideWinSATResultsInfo) Get_AssessmentState(state *WINSAT_ASSESSMENT_STATE) foundation.HRESULT {
+func (self *IProvideWinSATResultsInfo) Get_AssessmentState(state *WINSAT_ASSESSMENT_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(state)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AssessmentDateTime dispatches through IProvideWinSATResultsInfo's vtable slot 9.
-func (self *IProvideWinSATResultsInfo) Get_AssessmentDateTime(fileTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IProvideWinSATResultsInfo) Get_AssessmentDateTime(fileTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SystemRating dispatches through IProvideWinSATResultsInfo's vtable slot 10.
-func (self *IProvideWinSATResultsInfo) Get_SystemRating(level *float32) foundation.HRESULT {
+func (self *IProvideWinSATResultsInfo) Get_SystemRating(level *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(level)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RatingStateDesc dispatches through IProvideWinSATResultsInfo's vtable slot 11.
-func (self *IProvideWinSATResultsInfo) Get_RatingStateDesc(description *foundation.BSTR) foundation.HRESULT {
+func (self *IProvideWinSATResultsInfo) Get_RatingStateDesc(description *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProvideWinSATVisuals: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/nn-winsatcominterfacei-iprovidewinsatvisuals
@@ -142,9 +146,9 @@ type IQueryAllWinSATAssessments struct {
 var IID_IQueryAllWinSATAssessments = win32.GUID{Data1: 0x0b89ed1d, Data2: 0x6398, Data3: 0x4fea, Data4: [8]byte{0x87, 0xfc, 0x56, 0x7d, 0x8d, 0x19, 0x17, 0x6f}}
 
 // Get_AllXML dispatches through IQueryAllWinSATAssessments's vtable slot 7.
-func (self *IQueryAllWinSATAssessments) Get_AllXML(xPath foundation.BSTR, namespaces foundation.BSTR, ppDomNodeList **dataxmlmsxml.IXMLDOMNodeList) foundation.HRESULT {
+func (self *IQueryAllWinSATAssessments) Get_AllXML(xPath foundation.BSTR, namespaces foundation.BSTR, ppDomNodeList **dataxmlmsxml.IXMLDOMNodeList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xPath)), uintptr(unsafe.Pointer(namespaces)), uintptr(unsafe.Pointer(ppDomNodeList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bc9a6a9f-ad4e-420e-9953-b34671e9df22
@@ -156,9 +160,9 @@ type IQueryOEMWinSATCustomization struct {
 var IID_IQueryOEMWinSATCustomization = win32.GUID{Data1: 0xbc9a6a9f, Data2: 0xad4e, Data3: 0x420e, Data4: [8]byte{0x99, 0x53, 0xb3, 0x46, 0x71, 0xe9, 0xdf, 0x22}}
 
 // GetOEMPrePopulationInfo dispatches through IQueryOEMWinSATCustomization's vtable slot 3.
-func (self *IQueryOEMWinSATCustomization) GetOEMPrePopulationInfo(state *WINSAT_OEM_CUSTOMIZATION_STATE) foundation.HRESULT {
+func (self *IQueryOEMWinSATCustomization) GetOEMPrePopulationInfo(state *WINSAT_OEM_CUSTOMIZATION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(state)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IQueryRecentWinSATAssessment: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/nn-winsatcominterfacei-iqueryrecentwinsatassessment
@@ -171,15 +175,15 @@ type IQueryRecentWinSATAssessment struct {
 var IID_IQueryRecentWinSATAssessment = win32.GUID{Data1: 0xf8ad5d1f, Data2: 0x3b47, Data3: 0x4bdc, Data4: [8]byte{0x93, 0x75, 0x7c, 0x6b, 0x1d, 0xa4, 0xec, 0xa7}}
 
 // Get_XML dispatches through IQueryRecentWinSATAssessment's vtable slot 7.
-func (self *IQueryRecentWinSATAssessment) Get_XML(xPath foundation.BSTR, namespaces foundation.BSTR, ppDomNodeList **dataxmlmsxml.IXMLDOMNodeList) foundation.HRESULT {
+func (self *IQueryRecentWinSATAssessment) Get_XML(xPath foundation.BSTR, namespaces foundation.BSTR, ppDomNodeList **dataxmlmsxml.IXMLDOMNodeList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xPath)), uintptr(unsafe.Pointer(namespaces)), uintptr(unsafe.Pointer(ppDomNodeList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Info dispatches through IQueryRecentWinSATAssessment's vtable slot 8.
-func (self *IQueryRecentWinSATAssessment) Get_Info(ppWinSATAssessmentInfo **IProvideWinSATResultsInfo) foundation.HRESULT {
+func (self *IQueryRecentWinSATAssessment) Get_Info(ppWinSATAssessmentInfo **IProvideWinSATResultsInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppWinSATAssessmentInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWinSATInitiateEvents: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/nn-winsatcominterfacei-iwinsatinitiateevents
@@ -192,13 +196,15 @@ type IWinSATInitiateEvents struct {
 var IID_IWinSATInitiateEvents = win32.GUID{Data1: 0x262a1918, Data2: 0xba0d, Data3: 0x41d5, Data4: [8]byte{0x92, 0xc2, 0xfa, 0xb4, 0x63, 0x3e, 0xe7, 0x4f}}
 
 // WinSATComplete dispatches through IWinSATInitiateEvents's vtable slot 3.
-func (self *IWinSATInitiateEvents) WinSATComplete(hresult foundation.HRESULT, strDescription foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hresult), uintptr(unsafe.Pointer(strDescription)))
-	return foundation.HRESULT(r1)
+func (self *IWinSATInitiateEvents) WinSATComplete(hresult foundation.HRESULT, strDescription string) error {
+	_strDescription := win32.UTF16Ptr(strDescription)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hresult), uintptr(unsafe.Pointer(_strDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinSATUpdate dispatches through IWinSATInitiateEvents's vtable slot 4.
-func (self *IWinSATInitiateEvents) WinSATUpdate(uCurrentTick uint32, uTickTotal uint32, strCurrentState foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uCurrentTick), uintptr(uTickTotal), uintptr(unsafe.Pointer(strCurrentState)))
-	return foundation.HRESULT(r1)
+func (self *IWinSATInitiateEvents) WinSATUpdate(uCurrentTick uint32, uTickTotal uint32, strCurrentState string) error {
+	_strCurrentState := win32.UTF16Ptr(strCurrentState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uCurrentTick), uintptr(uTickTotal), uintptr(unsafe.Pointer(_strCurrentState)))
+	return win32.HRESULTError(int32(r1))
 }

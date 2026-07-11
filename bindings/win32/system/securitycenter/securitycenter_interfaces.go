@@ -22,9 +22,9 @@ type IWSCDefaultProduct struct {
 var IID_IWSCDefaultProduct = win32.GUID{Data1: 0x0476d69c, Data2: 0xf21a, Data3: 0x11e5, Data4: [8]byte{0x9c, 0xe9, 0x5e, 0x55, 0x17, 0x50, 0x7c, 0x66}}
 
 // SetDefaultProduct dispatches through IWSCDefaultProduct's vtable slot 7.
-func (self *IWSCDefaultProduct) SetDefaultProduct(eType SECURITY_PRODUCT_TYPE, pGuid foundation.BSTR) foundation.HRESULT {
+func (self *IWSCDefaultProduct) SetDefaultProduct(eType SECURITY_PRODUCT_TYPE, pGuid foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(eType), uintptr(unsafe.Pointer(pGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWSCProductList: https://learn.microsoft.com/windows/win32/api/iwscapi/nn-iwscapi-iwscproductlist
@@ -37,21 +37,21 @@ type IWSCProductList struct {
 var IID_IWSCProductList = win32.GUID{Data1: 0x722a338c, Data2: 0x6e8e, Data3: 0x4e72, Data4: [8]byte{0xac, 0x27, 0x14, 0x17, 0xfb, 0x0c, 0x81, 0xc2}}
 
 // Initialize dispatches through IWSCProductList's vtable slot 7.
-func (self *IWSCProductList) Initialize(provider uint32) foundation.HRESULT {
+func (self *IWSCProductList) Initialize(provider uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(provider))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IWSCProductList's vtable slot 8.
-func (self *IWSCProductList) Get_Count(pVal *int32) foundation.HRESULT {
+func (self *IWSCProductList) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through IWSCProductList's vtable slot 9.
-func (self *IWSCProductList) Get_Item(index uint32, pVal **IWscProduct) foundation.HRESULT {
+func (self *IWSCProductList) Get_Item(index uint32, pVal **IWscProduct) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWscProduct: https://learn.microsoft.com/windows/win32/api/iwscapi/nn-iwscapi-iwscproduct
@@ -64,45 +64,45 @@ type IWscProduct struct {
 var IID_IWscProduct = win32.GUID{Data1: 0x8c38232e, Data2: 0x3a45, Data3: 0x4a27, Data4: [8]byte{0x92, 0xb0, 0x1a, 0x16, 0xa9, 0x75, 0xf6, 0x69}}
 
 // Get_ProductName dispatches through IWscProduct's vtable slot 7.
-func (self *IWscProduct) Get_ProductName(pVal *foundation.BSTR) foundation.HRESULT {
+func (self *IWscProduct) Get_ProductName(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ProductState dispatches through IWscProduct's vtable slot 8.
-func (self *IWscProduct) Get_ProductState(pVal *WSC_SECURITY_PRODUCT_STATE) foundation.HRESULT {
+func (self *IWscProduct) Get_ProductState(pVal *WSC_SECURITY_PRODUCT_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SignatureStatus dispatches through IWscProduct's vtable slot 9.
-func (self *IWscProduct) Get_SignatureStatus(pVal *WSC_SECURITY_SIGNATURE_STATUS) foundation.HRESULT {
+func (self *IWscProduct) Get_SignatureStatus(pVal *WSC_SECURITY_SIGNATURE_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemediationPath dispatches through IWscProduct's vtable slot 10.
-func (self *IWscProduct) Get_RemediationPath(pVal *foundation.BSTR) foundation.HRESULT {
+func (self *IWscProduct) Get_RemediationPath(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ProductStateTimestamp dispatches through IWscProduct's vtable slot 11.
-func (self *IWscProduct) Get_ProductStateTimestamp(pVal *foundation.BSTR) foundation.HRESULT {
+func (self *IWscProduct) Get_ProductStateTimestamp(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ProductGuid dispatches through IWscProduct's vtable slot 12.
-func (self *IWscProduct) Get_ProductGuid(pVal *foundation.BSTR) foundation.HRESULT {
+func (self *IWscProduct) Get_ProductGuid(pVal *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ProductIsDefault dispatches through IWscProduct's vtable slot 13.
-func (self *IWscProduct) Get_ProductIsDefault(pVal *foundation.BOOL) foundation.HRESULT {
+func (self *IWscProduct) Get_ProductIsDefault(pVal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f896ca54-fe09-4403-86d4-23cb488d81d8
@@ -114,39 +114,39 @@ type IWscProduct2 struct {
 var IID_IWscProduct2 = win32.GUID{Data1: 0xf896ca54, Data2: 0xfe09, Data3: 0x4403, Data4: [8]byte{0x86, 0xd4, 0x23, 0xcb, 0x48, 0x8d, 0x81, 0xd8}}
 
 // Get_AntivirusScanSubstatus dispatches through IWscProduct2's vtable slot 14.
-func (self *IWscProduct2) Get_AntivirusScanSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) foundation.HRESULT {
+func (self *IWscProduct2) Get_AntivirusScanSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AntivirusSettingsSubstatus dispatches through IWscProduct2's vtable slot 15.
-func (self *IWscProduct2) Get_AntivirusSettingsSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) foundation.HRESULT {
+func (self *IWscProduct2) Get_AntivirusSettingsSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AntivirusProtectionUpdateSubstatus dispatches through IWscProduct2's vtable slot 16.
-func (self *IWscProduct2) Get_AntivirusProtectionUpdateSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) foundation.HRESULT {
+func (self *IWscProduct2) Get_AntivirusProtectionUpdateSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FirewallDomainProfileSubstatus dispatches through IWscProduct2's vtable slot 17.
-func (self *IWscProduct2) Get_FirewallDomainProfileSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) foundation.HRESULT {
+func (self *IWscProduct2) Get_FirewallDomainProfileSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FirewallPrivateProfileSubstatus dispatches through IWscProduct2's vtable slot 18.
-func (self *IWscProduct2) Get_FirewallPrivateProfileSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) foundation.HRESULT {
+func (self *IWscProduct2) Get_FirewallPrivateProfileSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FirewallPublicProfileSubstatus dispatches through IWscProduct2's vtable slot 19.
-func (self *IWscProduct2) Get_FirewallPublicProfileSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) foundation.HRESULT {
+func (self *IWscProduct2) Get_FirewallPublicProfileSubstatus(peStatus *WSC_SECURITY_PRODUCT_SUBSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 55536524-d1d1-4726-8c7c-04996a1904e7
@@ -158,7 +158,7 @@ type IWscProduct3 struct {
 var IID_IWscProduct3 = win32.GUID{Data1: 0x55536524, Data2: 0xd1d1, Data3: 0x4726, Data4: [8]byte{0x8c, 0x7c, 0x04, 0x99, 0x6a, 0x19, 0x04, 0xe7}}
 
 // Get_AntivirusDaysUntilExpired dispatches through IWscProduct3's vtable slot 20.
-func (self *IWscProduct3) Get_AntivirusDaysUntilExpired(pdwDays *uint32) foundation.HRESULT {
+func (self *IWscProduct3) Get_AntivirusDaysUntilExpired(pdwDays *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwDays)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

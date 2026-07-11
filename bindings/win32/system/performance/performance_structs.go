@@ -122,8 +122,8 @@ type PDH_BROWSE_DLG_CONFIG_W struct {
 	SzDialogBoxCaption   foundation.PWSTR
 }
 
-// PDH_COUNTER_INFO_A_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PDH_COUNTER_INFO_A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PDH_COUNTER_INFO_A_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -144,8 +144,8 @@ type PDH_COUNTER_INFO_A struct {
 	DataBuffer      [1]uint32
 }
 
-// PDH_COUNTER_INFO_W_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PDH_COUNTER_INFO_W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PDH_COUNTER_INFO_W_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -202,8 +202,8 @@ type PDH_DATA_ITEM_PATH_ELEMENTS_W struct {
 	SzInstanceName foundation.PWSTR
 }
 
-// PDH_FMT_COUNTERVALUE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PDH_FMT_COUNTERVALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PDH_FMT_COUNTERVALUE_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -226,8 +226,8 @@ type PDH_FMT_COUNTERVALUE_ITEM_W struct {
 	FmtValue PDH_FMT_COUNTERVALUE
 }
 
-// PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -244,8 +244,8 @@ type PDH_LOG_SERVICE_QUERY_INFO_A struct {
 	Anonymous        PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union
 }
 
-// PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union struct {
 	Data [6]uint64
 }

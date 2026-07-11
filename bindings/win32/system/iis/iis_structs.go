@@ -306,8 +306,8 @@ type MD_CHANGE_OBJECT_W struct {
 	PdwMDDataIDs   *uint32
 }
 
-// METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union struct {
 	Data [1]uint64
 }

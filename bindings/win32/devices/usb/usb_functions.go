@@ -86,9 +86,9 @@ func WinUsb_FlushPipe(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte) erro
 
 // WinUsb_Free calls WINUSB!WinUsb_Free.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_free
-func WinUsb_Free(InterfaceHandle WINUSB_INTERFACE_HANDLE) foundation.BOOL {
+func WinUsb_Free(InterfaceHandle WINUSB_INTERFACE_HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procWinUsb_Free.Addr(), uintptr(InterfaceHandle))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WinUsb_GetAdjustedFrameNumber calls WINUSB!WinUsb_GetAdjustedFrameNumber.
@@ -156,8 +156,9 @@ func WinUsb_GetDescriptor(InterfaceHandle WINUSB_INTERFACE_HANDLE, DescriptorTyp
 
 // WinUsb_GetOverlappedResult calls WINUSB!WinUsb_GetOverlappedResult.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_getoverlappedresult
-func WinUsb_GetOverlappedResult(InterfaceHandle WINUSB_INTERFACE_HANDLE, lpOverlapped *systemio.OVERLAPPED, lpNumberOfBytesTransferred *uint32, bWait foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_GetOverlappedResult.Addr(), uintptr(InterfaceHandle), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpNumberOfBytesTransferred)), uintptr(bWait))
+func WinUsb_GetOverlappedResult(InterfaceHandle WINUSB_INTERFACE_HANDLE, lpOverlapped *systemio.OVERLAPPED, lpNumberOfBytesTransferred *uint32, bWait bool) error {
+	_bWait := win32.Bool32(bWait)
+	r1, _, e1 := syscall.SyscallN(procWinUsb_GetOverlappedResult.Addr(), uintptr(InterfaceHandle), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpNumberOfBytesTransferred)), uintptr(_bWait))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -257,8 +258,12 @@ func WinUsb_QueryPipeEx(InterfaceHandle WINUSB_INTERFACE_HANDLE, AlternateSettin
 // WinUsb_ReadIsochPipe calls WINUSB!WinUsb_ReadIsochPipe.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_readisochpipe
 // Minimum OS: windows8.1.
-func WinUsb_ReadIsochPipe(BufferHandle unsafe.Pointer, Offset uint32, Length uint32, FrameNumber *uint32, NumberOfPackets uint32, IsoPacketDescriptors *USBD_ISO_PACKET_DESCRIPTOR, Overlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_ReadIsochPipe.Addr(), uintptr(unsafe.Pointer(BufferHandle)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(FrameNumber)), uintptr(NumberOfPackets), uintptr(unsafe.Pointer(IsoPacketDescriptors)), uintptr(unsafe.Pointer(Overlapped)))
+func WinUsb_ReadIsochPipe(BufferHandle unsafe.Pointer, Offset uint32, Length uint32, FrameNumber *uint32, IsoPacketDescriptors []USBD_ISO_PACKET_DESCRIPTOR, Overlapped *systemio.OVERLAPPED) error {
+	var _IsoPacketDescriptors *USBD_ISO_PACKET_DESCRIPTOR
+	if len(IsoPacketDescriptors) > 0 {
+		_IsoPacketDescriptors = &IsoPacketDescriptors[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_ReadIsochPipe.Addr(), uintptr(unsafe.Pointer(BufferHandle)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(FrameNumber)), uintptr(len(IsoPacketDescriptors)), uintptr(unsafe.Pointer(_IsoPacketDescriptors)), uintptr(unsafe.Pointer(Overlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -268,8 +273,13 @@ func WinUsb_ReadIsochPipe(BufferHandle unsafe.Pointer, Offset uint32, Length uin
 // WinUsb_ReadIsochPipeAsap calls WINUSB!WinUsb_ReadIsochPipeAsap.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_readisochpipeasap
 // Minimum OS: windows8.1.
-func WinUsb_ReadIsochPipeAsap(BufferHandle unsafe.Pointer, Offset uint32, Length uint32, ContinueStream foundation.BOOL, NumberOfPackets uint32, IsoPacketDescriptors *USBD_ISO_PACKET_DESCRIPTOR, Overlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_ReadIsochPipeAsap.Addr(), uintptr(unsafe.Pointer(BufferHandle)), uintptr(Offset), uintptr(Length), uintptr(ContinueStream), uintptr(NumberOfPackets), uintptr(unsafe.Pointer(IsoPacketDescriptors)), uintptr(unsafe.Pointer(Overlapped)))
+func WinUsb_ReadIsochPipeAsap(BufferHandle unsafe.Pointer, Offset uint32, Length uint32, ContinueStream bool, IsoPacketDescriptors []USBD_ISO_PACKET_DESCRIPTOR, Overlapped *systemio.OVERLAPPED) error {
+	_ContinueStream := win32.Bool32(ContinueStream)
+	var _IsoPacketDescriptors *USBD_ISO_PACKET_DESCRIPTOR
+	if len(IsoPacketDescriptors) > 0 {
+		_IsoPacketDescriptors = &IsoPacketDescriptors[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_ReadIsochPipeAsap.Addr(), uintptr(unsafe.Pointer(BufferHandle)), uintptr(Offset), uintptr(Length), uintptr(_ContinueStream), uintptr(len(IsoPacketDescriptors)), uintptr(unsafe.Pointer(_IsoPacketDescriptors)), uintptr(unsafe.Pointer(Overlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -384,8 +394,9 @@ func WinUsb_WriteIsochPipe(BufferHandle unsafe.Pointer, Offset uint32, Length ui
 // WinUsb_WriteIsochPipeAsap calls WINUSB!WinUsb_WriteIsochPipeAsap.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_writeisochpipeasap
 // Minimum OS: windows8.1.
-func WinUsb_WriteIsochPipeAsap(BufferHandle unsafe.Pointer, Offset uint32, Length uint32, ContinueStream foundation.BOOL, Overlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_WriteIsochPipeAsap.Addr(), uintptr(unsafe.Pointer(BufferHandle)), uintptr(Offset), uintptr(Length), uintptr(ContinueStream), uintptr(unsafe.Pointer(Overlapped)))
+func WinUsb_WriteIsochPipeAsap(BufferHandle unsafe.Pointer, Offset uint32, Length uint32, ContinueStream bool, Overlapped *systemio.OVERLAPPED) error {
+	_ContinueStream := win32.Bool32(ContinueStream)
+	r1, _, e1 := syscall.SyscallN(procWinUsb_WriteIsochPipeAsap.Addr(), uintptr(unsafe.Pointer(BufferHandle)), uintptr(Offset), uintptr(Length), uintptr(_ContinueStream), uintptr(unsafe.Pointer(Overlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

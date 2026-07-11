@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -48,7 +47,7 @@ func (self *ID2D1SimplifiedGeometrySink) EndFigure(figureEnd D2D1_FIGURE_END) {
 }
 
 // Close dispatches through ID2D1SimplifiedGeometrySink's vtable slot 9.
-func (self *ID2D1SimplifiedGeometrySink) Close() foundation.HRESULT {
+func (self *ID2D1SimplifiedGeometrySink) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

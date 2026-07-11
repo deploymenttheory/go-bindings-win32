@@ -17,20 +17,20 @@ var (
 )
 
 var (
+	procJetAddColumn                     = modESENT.NewProc("JetAddColumnW")
 	procJetAddColumnA                    = modESENT.NewProc("JetAddColumnA")
-	procJetAddColumnW                    = modESENT.NewProc("JetAddColumnW")
+	procJetAttachDatabase                = modESENT.NewProc("JetAttachDatabaseW")
+	procJetAttachDatabase2               = modESENT.NewProc("JetAttachDatabase2W")
 	procJetAttachDatabase2A              = modESENT.NewProc("JetAttachDatabase2A")
-	procJetAttachDatabase2W              = modESENT.NewProc("JetAttachDatabase2W")
 	procJetAttachDatabaseA               = modESENT.NewProc("JetAttachDatabaseA")
-	procJetAttachDatabaseW               = modESENT.NewProc("JetAttachDatabaseW")
+	procJetBackup                        = modESENT.NewProc("JetBackupW")
 	procJetBackupA                       = modESENT.NewProc("JetBackupA")
+	procJetBackupInstance                = modESENT.NewProc("JetBackupInstanceW")
 	procJetBackupInstanceA               = modESENT.NewProc("JetBackupInstanceA")
-	procJetBackupInstanceW               = modESENT.NewProc("JetBackupInstanceW")
-	procJetBackupW                       = modESENT.NewProc("JetBackupW")
 	procJetBeginExternalBackup           = modESENT.NewProc("JetBeginExternalBackup")
 	procJetBeginExternalBackupInstance   = modESENT.NewProc("JetBeginExternalBackupInstance")
+	procJetBeginSession                  = modESENT.NewProc("JetBeginSessionW")
 	procJetBeginSessionA                 = modESENT.NewProc("JetBeginSessionA")
-	procJetBeginSessionW                 = modESENT.NewProc("JetBeginSessionW")
 	procJetBeginTransaction              = modESENT.NewProc("JetBeginTransaction")
 	procJetBeginTransaction2             = modESENT.NewProc("JetBeginTransaction2")
 	procJetBeginTransaction3             = modESENT.NewProc("JetBeginTransaction3")
@@ -40,116 +40,116 @@ var (
 	procJetCloseTable                    = modESENT.NewProc("JetCloseTable")
 	procJetCommitTransaction             = modESENT.NewProc("JetCommitTransaction")
 	procJetCommitTransaction2            = modESENT.NewProc("JetCommitTransaction2")
+	procJetCompact                       = modESENT.NewProc("JetCompactW")
 	procJetCompactA                      = modESENT.NewProc("JetCompactA")
-	procJetCompactW                      = modESENT.NewProc("JetCompactW")
 	procJetComputeStats                  = modESENT.NewProc("JetComputeStats")
 	procJetConfigureProcessForCrashDump  = modESENT.NewProc("JetConfigureProcessForCrashDump")
+	procJetCreateDatabase                = modESENT.NewProc("JetCreateDatabaseW")
+	procJetCreateDatabase2               = modESENT.NewProc("JetCreateDatabase2W")
 	procJetCreateDatabase2A              = modESENT.NewProc("JetCreateDatabase2A")
-	procJetCreateDatabase2W              = modESENT.NewProc("JetCreateDatabase2W")
 	procJetCreateDatabaseA               = modESENT.NewProc("JetCreateDatabaseA")
-	procJetCreateDatabaseW               = modESENT.NewProc("JetCreateDatabaseW")
+	procJetCreateIndex                   = modESENT.NewProc("JetCreateIndexW")
+	procJetCreateIndex2                  = modESENT.NewProc("JetCreateIndex2W")
 	procJetCreateIndex2A                 = modESENT.NewProc("JetCreateIndex2A")
-	procJetCreateIndex2W                 = modESENT.NewProc("JetCreateIndex2W")
+	procJetCreateIndex3                  = modESENT.NewProc("JetCreateIndex3W")
 	procJetCreateIndex3A                 = modESENT.NewProc("JetCreateIndex3A")
-	procJetCreateIndex3W                 = modESENT.NewProc("JetCreateIndex3W")
+	procJetCreateIndex4                  = modESENT.NewProc("JetCreateIndex4W")
 	procJetCreateIndex4A                 = modESENT.NewProc("JetCreateIndex4A")
-	procJetCreateIndex4W                 = modESENT.NewProc("JetCreateIndex4W")
 	procJetCreateIndexA                  = modESENT.NewProc("JetCreateIndexA")
-	procJetCreateIndexW                  = modESENT.NewProc("JetCreateIndexW")
+	procJetCreateInstance                = modESENT.NewProc("JetCreateInstanceW")
+	procJetCreateInstance2               = modESENT.NewProc("JetCreateInstance2W")
 	procJetCreateInstance2A              = modESENT.NewProc("JetCreateInstance2A")
-	procJetCreateInstance2W              = modESENT.NewProc("JetCreateInstance2W")
 	procJetCreateInstanceA               = modESENT.NewProc("JetCreateInstanceA")
-	procJetCreateInstanceW               = modESENT.NewProc("JetCreateInstanceW")
+	procJetCreateTable                   = modESENT.NewProc("JetCreateTableW")
 	procJetCreateTableA                  = modESENT.NewProc("JetCreateTableA")
+	procJetCreateTableColumnIndex        = modESENT.NewProc("JetCreateTableColumnIndexW")
+	procJetCreateTableColumnIndex2       = modESENT.NewProc("JetCreateTableColumnIndex2W")
 	procJetCreateTableColumnIndex2A      = modESENT.NewProc("JetCreateTableColumnIndex2A")
-	procJetCreateTableColumnIndex2W      = modESENT.NewProc("JetCreateTableColumnIndex2W")
+	procJetCreateTableColumnIndex3       = modESENT.NewProc("JetCreateTableColumnIndex3W")
 	procJetCreateTableColumnIndex3A      = modESENT.NewProc("JetCreateTableColumnIndex3A")
-	procJetCreateTableColumnIndex3W      = modESENT.NewProc("JetCreateTableColumnIndex3W")
+	procJetCreateTableColumnIndex4       = modESENT.NewProc("JetCreateTableColumnIndex4W")
 	procJetCreateTableColumnIndex4A      = modESENT.NewProc("JetCreateTableColumnIndex4A")
-	procJetCreateTableColumnIndex4W      = modESENT.NewProc("JetCreateTableColumnIndex4W")
 	procJetCreateTableColumnIndexA       = modESENT.NewProc("JetCreateTableColumnIndexA")
-	procJetCreateTableColumnIndexW       = modESENT.NewProc("JetCreateTableColumnIndexW")
-	procJetCreateTableW                  = modESENT.NewProc("JetCreateTableW")
+	procJetDefragment                    = modESENT.NewProc("JetDefragmentW")
+	procJetDefragment2                   = modESENT.NewProc("JetDefragment2W")
 	procJetDefragment2A                  = modESENT.NewProc("JetDefragment2A")
-	procJetDefragment2W                  = modESENT.NewProc("JetDefragment2W")
+	procJetDefragment3                   = modESENT.NewProc("JetDefragment3W")
 	procJetDefragment3A                  = modESENT.NewProc("JetDefragment3A")
-	procJetDefragment3W                  = modESENT.NewProc("JetDefragment3W")
 	procJetDefragmentA                   = modESENT.NewProc("JetDefragmentA")
-	procJetDefragmentW                   = modESENT.NewProc("JetDefragmentW")
 	procJetDelete                        = modESENT.NewProc("JetDelete")
+	procJetDeleteColumn                  = modESENT.NewProc("JetDeleteColumnW")
+	procJetDeleteColumn2                 = modESENT.NewProc("JetDeleteColumn2W")
 	procJetDeleteColumn2A                = modESENT.NewProc("JetDeleteColumn2A")
-	procJetDeleteColumn2W                = modESENT.NewProc("JetDeleteColumn2W")
 	procJetDeleteColumnA                 = modESENT.NewProc("JetDeleteColumnA")
-	procJetDeleteColumnW                 = modESENT.NewProc("JetDeleteColumnW")
+	procJetDeleteIndex                   = modESENT.NewProc("JetDeleteIndexW")
 	procJetDeleteIndexA                  = modESENT.NewProc("JetDeleteIndexA")
-	procJetDeleteIndexW                  = modESENT.NewProc("JetDeleteIndexW")
+	procJetDeleteTable                   = modESENT.NewProc("JetDeleteTableW")
 	procJetDeleteTableA                  = modESENT.NewProc("JetDeleteTableA")
-	procJetDeleteTableW                  = modESENT.NewProc("JetDeleteTableW")
+	procJetDetachDatabase                = modESENT.NewProc("JetDetachDatabaseW")
+	procJetDetachDatabase2               = modESENT.NewProc("JetDetachDatabase2W")
 	procJetDetachDatabase2A              = modESENT.NewProc("JetDetachDatabase2A")
-	procJetDetachDatabase2W              = modESENT.NewProc("JetDetachDatabase2W")
 	procJetDetachDatabaseA               = modESENT.NewProc("JetDetachDatabaseA")
-	procJetDetachDatabaseW               = modESENT.NewProc("JetDetachDatabaseW")
 	procJetDupCursor                     = modESENT.NewProc("JetDupCursor")
 	procJetDupSession                    = modESENT.NewProc("JetDupSession")
+	procJetEnableMultiInstance           = modESENT.NewProc("JetEnableMultiInstanceW")
 	procJetEnableMultiInstanceA          = modESENT.NewProc("JetEnableMultiInstanceA")
-	procJetEnableMultiInstanceW          = modESENT.NewProc("JetEnableMultiInstanceW")
 	procJetEndExternalBackup             = modESENT.NewProc("JetEndExternalBackup")
 	procJetEndExternalBackupInstance     = modESENT.NewProc("JetEndExternalBackupInstance")
 	procJetEndExternalBackupInstance2    = modESENT.NewProc("JetEndExternalBackupInstance2")
 	procJetEndSession                    = modESENT.NewProc("JetEndSession")
 	procJetEnumerateColumns              = modESENT.NewProc("JetEnumerateColumns")
 	procJetEscrowUpdate                  = modESENT.NewProc("JetEscrowUpdate")
+	procJetExternalRestore               = modESENT.NewProc("JetExternalRestoreW")
+	procJetExternalRestore2              = modESENT.NewProc("JetExternalRestore2W")
 	procJetExternalRestore2A             = modESENT.NewProc("JetExternalRestore2A")
-	procJetExternalRestore2W             = modESENT.NewProc("JetExternalRestore2W")
 	procJetExternalRestoreA              = modESENT.NewProc("JetExternalRestoreA")
-	procJetExternalRestoreW              = modESENT.NewProc("JetExternalRestoreW")
 	procJetFreeBuffer                    = modESENT.NewProc("JetFreeBuffer")
+	procJetGetAttachInfo                 = modESENT.NewProc("JetGetAttachInfoW")
 	procJetGetAttachInfoA                = modESENT.NewProc("JetGetAttachInfoA")
+	procJetGetAttachInfoInstance         = modESENT.NewProc("JetGetAttachInfoInstanceW")
 	procJetGetAttachInfoInstanceA        = modESENT.NewProc("JetGetAttachInfoInstanceA")
-	procJetGetAttachInfoInstanceW        = modESENT.NewProc("JetGetAttachInfoInstanceW")
-	procJetGetAttachInfoW                = modESENT.NewProc("JetGetAttachInfoW")
 	procJetGetBookmark                   = modESENT.NewProc("JetGetBookmark")
+	procJetGetColumnInfo                 = modESENT.NewProc("JetGetColumnInfoW")
 	procJetGetColumnInfoA                = modESENT.NewProc("JetGetColumnInfoA")
-	procJetGetColumnInfoW                = modESENT.NewProc("JetGetColumnInfoW")
+	procJetGetCurrentIndex               = modESENT.NewProc("JetGetCurrentIndexW")
 	procJetGetCurrentIndexA              = modESENT.NewProc("JetGetCurrentIndexA")
-	procJetGetCurrentIndexW              = modESENT.NewProc("JetGetCurrentIndexW")
 	procJetGetCursorInfo                 = modESENT.NewProc("JetGetCursorInfo")
+	procJetGetDatabaseFileInfo           = modESENT.NewProc("JetGetDatabaseFileInfoW")
 	procJetGetDatabaseFileInfoA          = modESENT.NewProc("JetGetDatabaseFileInfoA")
-	procJetGetDatabaseFileInfoW          = modESENT.NewProc("JetGetDatabaseFileInfoW")
+	procJetGetDatabaseInfo               = modESENT.NewProc("JetGetDatabaseInfoW")
 	procJetGetDatabaseInfoA              = modESENT.NewProc("JetGetDatabaseInfoA")
-	procJetGetDatabaseInfoW              = modESENT.NewProc("JetGetDatabaseInfoW")
 	procJetGetErrorInfoW                 = modESENT.NewProc("JetGetErrorInfoW")
+	procJetGetIndexInfo                  = modESENT.NewProc("JetGetIndexInfoW")
 	procJetGetIndexInfoA                 = modESENT.NewProc("JetGetIndexInfoA")
-	procJetGetIndexInfoW                 = modESENT.NewProc("JetGetIndexInfoW")
+	procJetGetInstanceInfo               = modESENT.NewProc("JetGetInstanceInfoW")
 	procJetGetInstanceInfoA              = modESENT.NewProc("JetGetInstanceInfoA")
-	procJetGetInstanceInfoW              = modESENT.NewProc("JetGetInstanceInfoW")
 	procJetGetInstanceMiscInfo           = modESENT.NewProc("JetGetInstanceMiscInfo")
 	procJetGetLS                         = modESENT.NewProc("JetGetLS")
 	procJetGetLock                       = modESENT.NewProc("JetGetLock")
+	procJetGetLogInfo                    = modESENT.NewProc("JetGetLogInfoW")
 	procJetGetLogInfoA                   = modESENT.NewProc("JetGetLogInfoA")
+	procJetGetLogInfoInstance            = modESENT.NewProc("JetGetLogInfoInstanceW")
+	procJetGetLogInfoInstance2           = modESENT.NewProc("JetGetLogInfoInstance2W")
 	procJetGetLogInfoInstance2A          = modESENT.NewProc("JetGetLogInfoInstance2A")
-	procJetGetLogInfoInstance2W          = modESENT.NewProc("JetGetLogInfoInstance2W")
 	procJetGetLogInfoInstanceA           = modESENT.NewProc("JetGetLogInfoInstanceA")
-	procJetGetLogInfoInstanceW           = modESENT.NewProc("JetGetLogInfoInstanceW")
-	procJetGetLogInfoW                   = modESENT.NewProc("JetGetLogInfoW")
+	procJetGetObjectInfo                 = modESENT.NewProc("JetGetObjectInfoW")
 	procJetGetObjectInfoA                = modESENT.NewProc("JetGetObjectInfoA")
-	procJetGetObjectInfoW                = modESENT.NewProc("JetGetObjectInfoW")
 	procJetGetRecordPosition             = modESENT.NewProc("JetGetRecordPosition")
 	procJetGetRecordSize                 = modESENT.NewProc("JetGetRecordSize")
 	procJetGetRecordSize2                = modESENT.NewProc("JetGetRecordSize2")
 	procJetGetSecondaryIndexBookmark     = modESENT.NewProc("JetGetSecondaryIndexBookmark")
 	procJetGetSessionParameter           = modESENT.NewProc("JetGetSessionParameter")
+	procJetGetSystemParameter            = modESENT.NewProc("JetGetSystemParameterW")
 	procJetGetSystemParameterA           = modESENT.NewProc("JetGetSystemParameterA")
-	procJetGetSystemParameterW           = modESENT.NewProc("JetGetSystemParameterW")
+	procJetGetTableColumnInfo            = modESENT.NewProc("JetGetTableColumnInfoW")
 	procJetGetTableColumnInfoA           = modESENT.NewProc("JetGetTableColumnInfoA")
-	procJetGetTableColumnInfoW           = modESENT.NewProc("JetGetTableColumnInfoW")
+	procJetGetTableIndexInfo             = modESENT.NewProc("JetGetTableIndexInfoW")
 	procJetGetTableIndexInfoA            = modESENT.NewProc("JetGetTableIndexInfoA")
-	procJetGetTableIndexInfoW            = modESENT.NewProc("JetGetTableIndexInfoW")
+	procJetGetTableInfo                  = modESENT.NewProc("JetGetTableInfoW")
 	procJetGetTableInfoA                 = modESENT.NewProc("JetGetTableInfoA")
-	procJetGetTableInfoW                 = modESENT.NewProc("JetGetTableInfoW")
 	procJetGetThreadStats                = modESENT.NewProc("JetGetThreadStats")
+	procJetGetTruncateLogInfoInstance    = modESENT.NewProc("JetGetTruncateLogInfoInstanceW")
 	procJetGetTruncateLogInfoInstanceA   = modESENT.NewProc("JetGetTruncateLogInfoInstanceA")
-	procJetGetTruncateLogInfoInstanceW   = modESENT.NewProc("JetGetTruncateLogInfoInstanceW")
 	procJetGetVersion                    = modESENT.NewProc("JetGetVersion")
 	procJetGotoBookmark                  = modESENT.NewProc("JetGotoBookmark")
 	procJetGotoPosition                  = modESENT.NewProc("JetGotoPosition")
@@ -159,30 +159,30 @@ var (
 	procJetIndexRecordCount              = modESENT.NewProc("JetIndexRecordCount")
 	procJetInit                          = modESENT.NewProc("JetInit")
 	procJetInit2                         = modESENT.NewProc("JetInit2")
+	procJetInit3                         = modESENT.NewProc("JetInit3W")
 	procJetInit3A                        = modESENT.NewProc("JetInit3A")
-	procJetInit3W                        = modESENT.NewProc("JetInit3W")
 	procJetIntersectIndexes              = modESENT.NewProc("JetIntersectIndexes")
 	procJetMakeKey                       = modESENT.NewProc("JetMakeKey")
 	procJetMove                          = modESENT.NewProc("JetMove")
 	procJetOSSnapshotAbort               = modESENT.NewProc("JetOSSnapshotAbort")
 	procJetOSSnapshotEnd                 = modESENT.NewProc("JetOSSnapshotEnd")
+	procJetOSSnapshotFreeze              = modESENT.NewProc("JetOSSnapshotFreezeW")
 	procJetOSSnapshotFreezeA             = modESENT.NewProc("JetOSSnapshotFreezeA")
-	procJetOSSnapshotFreezeW             = modESENT.NewProc("JetOSSnapshotFreezeW")
+	procJetOSSnapshotGetFreezeInfo       = modESENT.NewProc("JetOSSnapshotGetFreezeInfoW")
 	procJetOSSnapshotGetFreezeInfoA      = modESENT.NewProc("JetOSSnapshotGetFreezeInfoA")
-	procJetOSSnapshotGetFreezeInfoW      = modESENT.NewProc("JetOSSnapshotGetFreezeInfoW")
 	procJetOSSnapshotPrepare             = modESENT.NewProc("JetOSSnapshotPrepare")
 	procJetOSSnapshotPrepareInstance     = modESENT.NewProc("JetOSSnapshotPrepareInstance")
 	procJetOSSnapshotThaw                = modESENT.NewProc("JetOSSnapshotThaw")
 	procJetOSSnapshotTruncateLog         = modESENT.NewProc("JetOSSnapshotTruncateLog")
 	procJetOSSnapshotTruncateLogInstance = modESENT.NewProc("JetOSSnapshotTruncateLogInstance")
+	procJetOpenDatabase                  = modESENT.NewProc("JetOpenDatabaseW")
 	procJetOpenDatabaseA                 = modESENT.NewProc("JetOpenDatabaseA")
-	procJetOpenDatabaseW                 = modESENT.NewProc("JetOpenDatabaseW")
+	procJetOpenFile                      = modESENT.NewProc("JetOpenFileW")
 	procJetOpenFileA                     = modESENT.NewProc("JetOpenFileA")
+	procJetOpenFileInstance              = modESENT.NewProc("JetOpenFileInstanceW")
 	procJetOpenFileInstanceA             = modESENT.NewProc("JetOpenFileInstanceA")
-	procJetOpenFileInstanceW             = modESENT.NewProc("JetOpenFileInstanceW")
-	procJetOpenFileW                     = modESENT.NewProc("JetOpenFileW")
+	procJetOpenTable                     = modESENT.NewProc("JetOpenTableW")
 	procJetOpenTableA                    = modESENT.NewProc("JetOpenTableA")
-	procJetOpenTableW                    = modESENT.NewProc("JetOpenTableW")
 	procJetOpenTempTable                 = modESENT.NewProc("JetOpenTempTable")
 	procJetOpenTempTable2                = modESENT.NewProc("JetOpenTempTable2")
 	procJetOpenTempTable3                = modESENT.NewProc("JetOpenTempTable3")
@@ -194,45 +194,45 @@ var (
 	procJetReadFile                      = modESENT.NewProc("JetReadFile")
 	procJetReadFileInstance              = modESENT.NewProc("JetReadFileInstance")
 	procJetRegisterCallback              = modESENT.NewProc("JetRegisterCallback")
+	procJetRenameColumn                  = modESENT.NewProc("JetRenameColumnW")
 	procJetRenameColumnA                 = modESENT.NewProc("JetRenameColumnA")
-	procJetRenameColumnW                 = modESENT.NewProc("JetRenameColumnW")
+	procJetRenameTable                   = modESENT.NewProc("JetRenameTableW")
 	procJetRenameTableA                  = modESENT.NewProc("JetRenameTableA")
-	procJetRenameTableW                  = modESENT.NewProc("JetRenameTableW")
 	procJetResetSessionContext           = modESENT.NewProc("JetResetSessionContext")
 	procJetResetTableSequential          = modESENT.NewProc("JetResetTableSequential")
 	procJetResizeDatabase                = modESENT.NewProc("JetResizeDatabase")
+	procJetRestore                       = modESENT.NewProc("JetRestoreW")
+	procJetRestore2                      = modESENT.NewProc("JetRestore2W")
 	procJetRestore2A                     = modESENT.NewProc("JetRestore2A")
-	procJetRestore2W                     = modESENT.NewProc("JetRestore2W")
 	procJetRestoreA                      = modESENT.NewProc("JetRestoreA")
+	procJetRestoreInstance               = modESENT.NewProc("JetRestoreInstanceW")
 	procJetRestoreInstanceA              = modESENT.NewProc("JetRestoreInstanceA")
-	procJetRestoreInstanceW              = modESENT.NewProc("JetRestoreInstanceW")
-	procJetRestoreW                      = modESENT.NewProc("JetRestoreW")
 	procJetRetrieveColumn                = modESENT.NewProc("JetRetrieveColumn")
 	procJetRetrieveColumns               = modESENT.NewProc("JetRetrieveColumns")
 	procJetRetrieveKey                   = modESENT.NewProc("JetRetrieveKey")
 	procJetRollback                      = modESENT.NewProc("JetRollback")
 	procJetSeek                          = modESENT.NewProc("JetSeek")
 	procJetSetColumn                     = modESENT.NewProc("JetSetColumn")
+	procJetSetColumnDefaultValue         = modESENT.NewProc("JetSetColumnDefaultValueW")
 	procJetSetColumnDefaultValueA        = modESENT.NewProc("JetSetColumnDefaultValueA")
-	procJetSetColumnDefaultValueW        = modESENT.NewProc("JetSetColumnDefaultValueW")
 	procJetSetColumns                    = modESENT.NewProc("JetSetColumns")
+	procJetSetCurrentIndex               = modESENT.NewProc("JetSetCurrentIndexW")
+	procJetSetCurrentIndex2              = modESENT.NewProc("JetSetCurrentIndex2W")
 	procJetSetCurrentIndex2A             = modESENT.NewProc("JetSetCurrentIndex2A")
-	procJetSetCurrentIndex2W             = modESENT.NewProc("JetSetCurrentIndex2W")
+	procJetSetCurrentIndex3              = modESENT.NewProc("JetSetCurrentIndex3W")
 	procJetSetCurrentIndex3A             = modESENT.NewProc("JetSetCurrentIndex3A")
-	procJetSetCurrentIndex3W             = modESENT.NewProc("JetSetCurrentIndex3W")
+	procJetSetCurrentIndex4              = modESENT.NewProc("JetSetCurrentIndex4W")
 	procJetSetCurrentIndex4A             = modESENT.NewProc("JetSetCurrentIndex4A")
-	procJetSetCurrentIndex4W             = modESENT.NewProc("JetSetCurrentIndex4W")
 	procJetSetCurrentIndexA              = modESENT.NewProc("JetSetCurrentIndexA")
-	procJetSetCurrentIndexW              = modESENT.NewProc("JetSetCurrentIndexW")
 	procJetSetCursorFilter               = modESENT.NewProc("JetSetCursorFilter")
+	procJetSetDatabaseSize               = modESENT.NewProc("JetSetDatabaseSizeW")
 	procJetSetDatabaseSizeA              = modESENT.NewProc("JetSetDatabaseSizeA")
-	procJetSetDatabaseSizeW              = modESENT.NewProc("JetSetDatabaseSizeW")
 	procJetSetIndexRange                 = modESENT.NewProc("JetSetIndexRange")
 	procJetSetLS                         = modESENT.NewProc("JetSetLS")
 	procJetSetSessionContext             = modESENT.NewProc("JetSetSessionContext")
 	procJetSetSessionParameter           = modESENT.NewProc("JetSetSessionParameter")
+	procJetSetSystemParameter            = modESENT.NewProc("JetSetSystemParameterW")
 	procJetSetSystemParameterA           = modESENT.NewProc("JetSetSystemParameterA")
-	procJetSetSystemParameterW           = modESENT.NewProc("JetSetSystemParameterW")
 	procJetSetTableSequential            = modESENT.NewProc("JetSetTableSequential")
 	procJetStopBackup                    = modESENT.NewProc("JetStopBackup")
 	procJetStopBackupInstance            = modESENT.NewProc("JetStopBackupInstance")
@@ -248,6 +248,13 @@ var (
 	procJetUpdate2                       = modESENT.NewProc("JetUpdate2")
 )
 
+// JetAddColumn calls ESENT!JetAddColumnW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetaddcolumn-function
+func JetAddColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, pcolumndef *JET_COLUMNDEF, pvDefault unsafe.Pointer, cbDefault uint32, pcolumnid *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetAddColumn.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pcolumndef)), uintptr(unsafe.Pointer(pvDefault)), uintptr(cbDefault), uintptr(unsafe.Pointer(pcolumnid)))
+	return int32(r1)
+}
+
 // JetAddColumnA calls ESENT!JetAddColumnA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetaddcolumn-function
 func JetAddColumnA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *int8, pcolumndef *JET_COLUMNDEF, pvDefault unsafe.Pointer, cbDefault uint32, pcolumnid *uint32) int32 {
@@ -255,10 +262,17 @@ func JetAddColumnA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID
 	return int32(r1)
 }
 
-// JetAddColumnW calls ESENT!JetAddColumnW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetaddcolumn-function
-func JetAddColumnW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, pcolumndef *JET_COLUMNDEF, pvDefault unsafe.Pointer, cbDefault uint32, pcolumnid *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetAddColumnW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pcolumndef)), uintptr(unsafe.Pointer(pvDefault)), uintptr(cbDefault), uintptr(unsafe.Pointer(pcolumnid)))
+// JetAttachDatabase calls ESENT!JetAttachDatabaseW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetattachdatabase-function
+func JetAttachDatabase(sesid JET_SESID, szFilename *uint16, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetAttachDatabase.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(grbit))
+	return int32(r1)
+}
+
+// JetAttachDatabase2 calls ESENT!JetAttachDatabase2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetattachdatabase2-function
+func JetAttachDatabase2(sesid JET_SESID, szFilename *uint16, cpgDatabaseSizeMax uint32, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetAttachDatabase2.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(cpgDatabaseSizeMax), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -269,13 +283,6 @@ func JetAttachDatabase2A(sesid JET_SESID, szFilename *int8, cpgDatabaseSizeMax u
 	return int32(r1)
 }
 
-// JetAttachDatabase2W calls ESENT!JetAttachDatabase2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetattachdatabase2-function
-func JetAttachDatabase2W(sesid JET_SESID, szFilename *uint16, cpgDatabaseSizeMax uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetAttachDatabase2W.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(cpgDatabaseSizeMax), uintptr(grbit))
-	return int32(r1)
-}
-
 // JetAttachDatabaseA calls ESENT!JetAttachDatabaseA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetattachdatabase-function
 func JetAttachDatabaseA(sesid JET_SESID, szFilename *int8, grbit uint32) int32 {
@@ -283,10 +290,10 @@ func JetAttachDatabaseA(sesid JET_SESID, szFilename *int8, grbit uint32) int32 {
 	return int32(r1)
 }
 
-// JetAttachDatabaseW calls ESENT!JetAttachDatabaseW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetattachdatabase-function
-func JetAttachDatabaseW(sesid JET_SESID, szFilename *uint16, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetAttachDatabaseW.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(grbit))
+// JetBackup calls ESENT!JetBackupW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetbackup-function
+func JetBackup(szBackupPath *uint16, grbit uint32, pfnStatus JET_PFNSTATUS) int32 {
+	r1, _, _ := syscall.SyscallN(procJetBackup.Addr(), uintptr(unsafe.Pointer(szBackupPath)), uintptr(grbit), uintptr(pfnStatus))
 	return int32(r1)
 }
 
@@ -297,24 +304,17 @@ func JetBackupA(szBackupPath *int8, grbit uint32, pfnStatus JET_PFNSTATUS) int32
 	return int32(r1)
 }
 
+// JetBackupInstance calls ESENT!JetBackupInstanceW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetbackupinstance-function
+func JetBackupInstance(instance JET_INSTANCE, szBackupPath *uint16, grbit uint32, pfnStatus JET_PFNSTATUS) int32 {
+	r1, _, _ := syscall.SyscallN(procJetBackupInstance.Addr(), uintptr(instance), uintptr(unsafe.Pointer(szBackupPath)), uintptr(grbit), uintptr(pfnStatus))
+	return int32(r1)
+}
+
 // JetBackupInstanceA calls ESENT!JetBackupInstanceA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetbackupinstance-function
 func JetBackupInstanceA(instance JET_INSTANCE, szBackupPath *int8, grbit uint32, pfnStatus JET_PFNSTATUS) int32 {
 	r1, _, _ := syscall.SyscallN(procJetBackupInstanceA.Addr(), uintptr(instance), uintptr(unsafe.Pointer(szBackupPath)), uintptr(grbit), uintptr(pfnStatus))
-	return int32(r1)
-}
-
-// JetBackupInstanceW calls ESENT!JetBackupInstanceW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetbackupinstance-function
-func JetBackupInstanceW(instance JET_INSTANCE, szBackupPath *uint16, grbit uint32, pfnStatus JET_PFNSTATUS) int32 {
-	r1, _, _ := syscall.SyscallN(procJetBackupInstanceW.Addr(), uintptr(instance), uintptr(unsafe.Pointer(szBackupPath)), uintptr(grbit), uintptr(pfnStatus))
-	return int32(r1)
-}
-
-// JetBackupW calls ESENT!JetBackupW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetbackup-function
-func JetBackupW(szBackupPath *uint16, grbit uint32, pfnStatus JET_PFNSTATUS) int32 {
-	r1, _, _ := syscall.SyscallN(procJetBackupW.Addr(), uintptr(unsafe.Pointer(szBackupPath)), uintptr(grbit), uintptr(pfnStatus))
 	return int32(r1)
 }
 
@@ -332,17 +332,17 @@ func JetBeginExternalBackupInstance(instance JET_INSTANCE, grbit uint32) int32 {
 	return int32(r1)
 }
 
+// JetBeginSession calls ESENT!JetBeginSessionW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetbeginsession-function
+func JetBeginSession(instance JET_INSTANCE, psesid *JET_SESID, szUserName *uint16, szPassword *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procJetBeginSession.Addr(), uintptr(instance), uintptr(unsafe.Pointer(psesid)), uintptr(unsafe.Pointer(szUserName)), uintptr(unsafe.Pointer(szPassword)))
+	return int32(r1)
+}
+
 // JetBeginSessionA calls ESENT!JetBeginSessionA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetbeginsession-function
 func JetBeginSessionA(instance JET_INSTANCE, psesid *JET_SESID, szUserName *int8, szPassword *int8) int32 {
 	r1, _, _ := syscall.SyscallN(procJetBeginSessionA.Addr(), uintptr(instance), uintptr(unsafe.Pointer(psesid)), uintptr(unsafe.Pointer(szUserName)), uintptr(unsafe.Pointer(szPassword)))
-	return int32(r1)
-}
-
-// JetBeginSessionW calls ESENT!JetBeginSessionW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetbeginsession-function
-func JetBeginSessionW(instance JET_INSTANCE, psesid *JET_SESID, szUserName *uint16, szPassword *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procJetBeginSessionW.Addr(), uintptr(instance), uintptr(unsafe.Pointer(psesid)), uintptr(unsafe.Pointer(szUserName)), uintptr(unsafe.Pointer(szPassword)))
 	return int32(r1)
 }
 
@@ -409,17 +409,17 @@ func JetCommitTransaction2(sesid JET_SESID, grbit uint32, cmsecDurableCommit uin
 	return int32(r1)
 }
 
+// JetCompact calls ESENT!JetCompactW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcompact-function
+func JetCompact(sesid JET_SESID, szDatabaseSrc *uint16, szDatabaseDest *uint16, pfnStatus JET_PFNSTATUS, pconvert *JET_CONVERT_W, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCompact.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szDatabaseSrc)), uintptr(unsafe.Pointer(szDatabaseDest)), uintptr(pfnStatus), uintptr(unsafe.Pointer(pconvert)), uintptr(grbit))
+	return int32(r1)
+}
+
 // JetCompactA calls ESENT!JetCompactA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcompact-function
 func JetCompactA(sesid JET_SESID, szDatabaseSrc *int8, szDatabaseDest *int8, pfnStatus JET_PFNSTATUS, pconvert *JET_CONVERT_A, grbit uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetCompactA.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szDatabaseSrc)), uintptr(unsafe.Pointer(szDatabaseDest)), uintptr(pfnStatus), uintptr(unsafe.Pointer(pconvert)), uintptr(grbit))
-	return int32(r1)
-}
-
-// JetCompactW calls ESENT!JetCompactW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcompact-function
-func JetCompactW(sesid JET_SESID, szDatabaseSrc *uint16, szDatabaseDest *uint16, pfnStatus JET_PFNSTATUS, pconvert *JET_CONVERT_W, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCompactW.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szDatabaseSrc)), uintptr(unsafe.Pointer(szDatabaseDest)), uintptr(pfnStatus), uintptr(unsafe.Pointer(pconvert)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -436,17 +436,24 @@ func JetConfigureProcessForCrashDump(grbit uint32) int32 {
 	return int32(r1)
 }
 
+// JetCreateDatabase calls ESENT!JetCreateDatabaseW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatedatabase-function
+func JetCreateDatabase(sesid JET_SESID, szFilename *uint16, szConnect *uint16, pdbid *uint32, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateDatabase.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(unsafe.Pointer(szConnect)), uintptr(unsafe.Pointer(pdbid)), uintptr(grbit))
+	return int32(r1)
+}
+
+// JetCreateDatabase2 calls ESENT!JetCreateDatabase2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatedatabase2-function
+func JetCreateDatabase2(sesid JET_SESID, szFilename *uint16, cpgDatabaseSizeMax uint32, pdbid *uint32, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateDatabase2.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(cpgDatabaseSizeMax), uintptr(unsafe.Pointer(pdbid)), uintptr(grbit))
+	return int32(r1)
+}
+
 // JetCreateDatabase2A calls ESENT!JetCreateDatabase2A.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatedatabase2-function
 func JetCreateDatabase2A(sesid JET_SESID, szFilename *int8, cpgDatabaseSizeMax uint32, pdbid *uint32, grbit uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetCreateDatabase2A.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(cpgDatabaseSizeMax), uintptr(unsafe.Pointer(pdbid)), uintptr(grbit))
-	return int32(r1)
-}
-
-// JetCreateDatabase2W calls ESENT!JetCreateDatabase2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatedatabase2-function
-func JetCreateDatabase2W(sesid JET_SESID, szFilename *uint16, cpgDatabaseSizeMax uint32, pdbid *uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateDatabase2W.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(cpgDatabaseSizeMax), uintptr(unsafe.Pointer(pdbid)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -457,51 +464,75 @@ func JetCreateDatabaseA(sesid JET_SESID, szFilename *int8, szConnect *int8, pdbi
 	return int32(r1)
 }
 
-// JetCreateDatabaseW calls ESENT!JetCreateDatabaseW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatedatabase-function
-func JetCreateDatabaseW(sesid JET_SESID, szFilename *uint16, szConnect *uint16, pdbid *uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateDatabaseW.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(unsafe.Pointer(szConnect)), uintptr(unsafe.Pointer(pdbid)), uintptr(grbit))
+// JetCreateIndex calls ESENT!JetCreateIndexW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex-function
+func JetCreateIndex(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, grbit uint32, szKey *uint16, cbKey uint32, lDensity uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateIndex.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(grbit), uintptr(unsafe.Pointer(szKey)), uintptr(cbKey), uintptr(lDensity))
+	return int32(r1)
+}
+
+// JetCreateIndex2 calls ESENT!JetCreateIndex2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex2-function
+func JetCreateIndex2(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []JET_INDEXCREATE_W) int32 {
+	var _pindexcreate *JET_INDEXCREATE_W
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetCreateIndex2.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pindexcreate)), uintptr(len(pindexcreate)))
 	return int32(r1)
 }
 
 // JetCreateIndex2A calls ESENT!JetCreateIndex2A.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex2-function
-func JetCreateIndex2A(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate *JET_INDEXCREATE_A, cIndexCreate uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateIndex2A.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pindexcreate)), uintptr(cIndexCreate))
+func JetCreateIndex2A(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []JET_INDEXCREATE_A) int32 {
+	var _pindexcreate *JET_INDEXCREATE_A
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetCreateIndex2A.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pindexcreate)), uintptr(len(pindexcreate)))
 	return int32(r1)
 }
 
-// JetCreateIndex2W calls ESENT!JetCreateIndex2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex2-function
-func JetCreateIndex2W(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate *JET_INDEXCREATE_W, cIndexCreate uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateIndex2W.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pindexcreate)), uintptr(cIndexCreate))
+// JetCreateIndex3 calls ESENT!JetCreateIndex3W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex3-function
+func JetCreateIndex3(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []JET_INDEXCREATE2_W) int32 {
+	var _pindexcreate *JET_INDEXCREATE2_W
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetCreateIndex3.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pindexcreate)), uintptr(len(pindexcreate)))
 	return int32(r1)
 }
 
 // JetCreateIndex3A calls ESENT!JetCreateIndex3A.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex3-function
-func JetCreateIndex3A(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate *JET_INDEXCREATE2_A, cIndexCreate uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateIndex3A.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pindexcreate)), uintptr(cIndexCreate))
+func JetCreateIndex3A(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []JET_INDEXCREATE2_A) int32 {
+	var _pindexcreate *JET_INDEXCREATE2_A
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetCreateIndex3A.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pindexcreate)), uintptr(len(pindexcreate)))
 	return int32(r1)
 }
 
-// JetCreateIndex3W calls ESENT!JetCreateIndex3W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex3-function
-func JetCreateIndex3W(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate *JET_INDEXCREATE2_W, cIndexCreate uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateIndex3W.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pindexcreate)), uintptr(cIndexCreate))
+// JetCreateIndex4 calls ESENT!JetCreateIndex4W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex4w-function
+func JetCreateIndex4(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []JET_INDEXCREATE3_W) int32 {
+	var _pindexcreate *JET_INDEXCREATE3_W
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetCreateIndex4.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pindexcreate)), uintptr(len(pindexcreate)))
 	return int32(r1)
 }
 
 // JetCreateIndex4A calls ESENT!JetCreateIndex4A.
-func JetCreateIndex4A(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate *JET_INDEXCREATE3_A, cIndexCreate uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateIndex4A.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pindexcreate)), uintptr(cIndexCreate))
-	return int32(r1)
-}
-
-// JetCreateIndex4W calls ESENT!JetCreateIndex4W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex4w-function
-func JetCreateIndex4W(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate *JET_INDEXCREATE3_W, cIndexCreate uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateIndex4W.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pindexcreate)), uintptr(cIndexCreate))
+func JetCreateIndex4A(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pindexcreate []JET_INDEXCREATE3_A) int32 {
+	var _pindexcreate *JET_INDEXCREATE3_A
+	if len(pindexcreate) > 0 {
+		_pindexcreate = &pindexcreate[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetCreateIndex4A.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pindexcreate)), uintptr(len(pindexcreate)))
 	return int32(r1)
 }
 
@@ -512,10 +543,17 @@ func JetCreateIndexA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLE
 	return int32(r1)
 }
 
-// JetCreateIndexW calls ESENT!JetCreateIndexW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateindex-function
-func JetCreateIndexW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, grbit uint32, szKey *uint16, cbKey uint32, lDensity uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateIndexW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(grbit), uintptr(unsafe.Pointer(szKey)), uintptr(cbKey), uintptr(lDensity))
+// JetCreateInstance calls ESENT!JetCreateInstanceW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateinstance-function
+func JetCreateInstance(pinstance *JET_INSTANCE, szInstanceName *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateInstance.Addr(), uintptr(unsafe.Pointer(pinstance)), uintptr(unsafe.Pointer(szInstanceName)))
+	return int32(r1)
+}
+
+// JetCreateInstance2 calls ESENT!JetCreateInstance2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateinstance2-function
+func JetCreateInstance2(pinstance *JET_INSTANCE, szInstanceName *uint16, szDisplayName *uint16, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateInstance2.Addr(), uintptr(unsafe.Pointer(pinstance)), uintptr(unsafe.Pointer(szInstanceName)), uintptr(unsafe.Pointer(szDisplayName)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -526,13 +564,6 @@ func JetCreateInstance2A(pinstance *JET_INSTANCE, szInstanceName *int8, szDispla
 	return int32(r1)
 }
 
-// JetCreateInstance2W calls ESENT!JetCreateInstance2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateinstance2-function
-func JetCreateInstance2W(pinstance *JET_INSTANCE, szInstanceName *uint16, szDisplayName *uint16, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateInstance2W.Addr(), uintptr(unsafe.Pointer(pinstance)), uintptr(unsafe.Pointer(szInstanceName)), uintptr(unsafe.Pointer(szDisplayName)), uintptr(grbit))
-	return int32(r1)
-}
-
 // JetCreateInstanceA calls ESENT!JetCreateInstanceA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateinstance-function
 func JetCreateInstanceA(pinstance *JET_INSTANCE, szInstanceName *int8) int32 {
@@ -540,10 +571,10 @@ func JetCreateInstanceA(pinstance *JET_INSTANCE, szInstanceName *int8) int32 {
 	return int32(r1)
 }
 
-// JetCreateInstanceW calls ESENT!JetCreateInstanceW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreateinstance-function
-func JetCreateInstanceW(pinstance *JET_INSTANCE, szInstanceName *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateInstanceW.Addr(), uintptr(unsafe.Pointer(pinstance)), uintptr(unsafe.Pointer(szInstanceName)))
+// JetCreateTable calls ESENT!JetCreateTableW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetable-function
+func JetCreateTable(sesid JET_SESID, dbid uint32, szTableName *uint16, lPages uint32, lDensity uint32, ptableid *storagestructuredstorage.JET_TABLEID) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateTable.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(lPages), uintptr(lDensity), uintptr(unsafe.Pointer(ptableid)))
 	return int32(r1)
 }
 
@@ -554,6 +585,20 @@ func JetCreateTableA(sesid JET_SESID, dbid uint32, szTableName *int8, lPages uin
 	return int32(r1)
 }
 
+// JetCreateTableColumnIndex calls ESENT!JetCreateTableColumnIndexW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetablecolumnindex-function
+func JetCreateTableColumnIndex(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE_W) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateTableColumnIndex.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(ptablecreate)))
+	return int32(r1)
+}
+
+// JetCreateTableColumnIndex2 calls ESENT!JetCreateTableColumnIndex2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetablecolumnindex2-function
+func JetCreateTableColumnIndex2(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE2_W) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateTableColumnIndex2.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(ptablecreate)))
+	return int32(r1)
+}
+
 // JetCreateTableColumnIndex2A calls ESENT!JetCreateTableColumnIndex2A.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetablecolumnindex2-function
 func JetCreateTableColumnIndex2A(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE2_A) int32 {
@@ -561,10 +606,10 @@ func JetCreateTableColumnIndex2A(sesid JET_SESID, dbid uint32, ptablecreate *JET
 	return int32(r1)
 }
 
-// JetCreateTableColumnIndex2W calls ESENT!JetCreateTableColumnIndex2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetablecolumnindex2-function
-func JetCreateTableColumnIndex2W(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE2_W) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateTableColumnIndex2W.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(ptablecreate)))
+// JetCreateTableColumnIndex3 calls ESENT!JetCreateTableColumnIndex3W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetablecolumnindex3-function
+func JetCreateTableColumnIndex3(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE3_W) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateTableColumnIndex3.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(ptablecreate)))
 	return int32(r1)
 }
 
@@ -575,23 +620,16 @@ func JetCreateTableColumnIndex3A(sesid JET_SESID, dbid uint32, ptablecreate *JET
 	return int32(r1)
 }
 
-// JetCreateTableColumnIndex3W calls ESENT!JetCreateTableColumnIndex3W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetablecolumnindex3-function
-func JetCreateTableColumnIndex3W(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE3_W) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateTableColumnIndex3W.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(ptablecreate)))
+// JetCreateTableColumnIndex4 calls ESENT!JetCreateTableColumnIndex4W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetablecolumnindex4w-function
+func JetCreateTableColumnIndex4(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE4_W) int32 {
+	r1, _, _ := syscall.SyscallN(procJetCreateTableColumnIndex4.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(ptablecreate)))
 	return int32(r1)
 }
 
 // JetCreateTableColumnIndex4A calls ESENT!JetCreateTableColumnIndex4A.
 func JetCreateTableColumnIndex4A(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE4_A) int32 {
 	r1, _, _ := syscall.SyscallN(procJetCreateTableColumnIndex4A.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(ptablecreate)))
-	return int32(r1)
-}
-
-// JetCreateTableColumnIndex4W calls ESENT!JetCreateTableColumnIndex4W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetablecolumnindex4w-function
-func JetCreateTableColumnIndex4W(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE4_W) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateTableColumnIndex4W.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(ptablecreate)))
 	return int32(r1)
 }
 
@@ -602,17 +640,17 @@ func JetCreateTableColumnIndexA(sesid JET_SESID, dbid uint32, ptablecreate *JET_
 	return int32(r1)
 }
 
-// JetCreateTableColumnIndexW calls ESENT!JetCreateTableColumnIndexW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetablecolumnindex-function
-func JetCreateTableColumnIndexW(sesid JET_SESID, dbid uint32, ptablecreate *JET_TABLECREATE_W) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateTableColumnIndexW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(ptablecreate)))
+// JetDefragment calls ESENT!JetDefragmentW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdefragment-function
+func JetDefragment(sesid JET_SESID, dbid uint32, szTableName *uint16, pcPasses *uint32, pcSeconds *uint32, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetDefragment.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pcPasses)), uintptr(unsafe.Pointer(pcSeconds)), uintptr(grbit))
 	return int32(r1)
 }
 
-// JetCreateTableW calls ESENT!JetCreateTableW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetcreatetable-function
-func JetCreateTableW(sesid JET_SESID, dbid uint32, szTableName *uint16, lPages uint32, lDensity uint32, ptableid *storagestructuredstorage.JET_TABLEID) int32 {
-	r1, _, _ := syscall.SyscallN(procJetCreateTableW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(lPages), uintptr(lDensity), uintptr(unsafe.Pointer(ptableid)))
+// JetDefragment2 calls ESENT!JetDefragment2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdefragment2-function
+func JetDefragment2(sesid JET_SESID, dbid uint32, szTableName *uint16, pcPasses *uint32, pcSeconds *uint32, callback JET_CALLBACK, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetDefragment2.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pcPasses)), uintptr(unsafe.Pointer(pcSeconds)), uintptr(callback), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -623,22 +661,15 @@ func JetDefragment2A(sesid JET_SESID, dbid uint32, szTableName *int8, pcPasses *
 	return int32(r1)
 }
 
-// JetDefragment2W calls ESENT!JetDefragment2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdefragment2-function
-func JetDefragment2W(sesid JET_SESID, dbid uint32, szTableName *uint16, pcPasses *uint32, pcSeconds *uint32, callback JET_CALLBACK, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetDefragment2W.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pcPasses)), uintptr(unsafe.Pointer(pcSeconds)), uintptr(callback), uintptr(grbit))
+// JetDefragment3 calls ESENT!JetDefragment3W.
+func JetDefragment3(sesid JET_SESID, szDatabaseName *uint16, szTableName *uint16, pcPasses *uint32, pcSeconds *uint32, callback JET_CALLBACK, pvContext unsafe.Pointer, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetDefragment3.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pcPasses)), uintptr(unsafe.Pointer(pcSeconds)), uintptr(callback), uintptr(unsafe.Pointer(pvContext)), uintptr(grbit))
 	return int32(r1)
 }
 
 // JetDefragment3A calls ESENT!JetDefragment3A.
 func JetDefragment3A(sesid JET_SESID, szDatabaseName *int8, szTableName *int8, pcPasses *uint32, pcSeconds *uint32, callback JET_CALLBACK, pvContext unsafe.Pointer, grbit uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetDefragment3A.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pcPasses)), uintptr(unsafe.Pointer(pcSeconds)), uintptr(callback), uintptr(unsafe.Pointer(pvContext)), uintptr(grbit))
-	return int32(r1)
-}
-
-// JetDefragment3W calls ESENT!JetDefragment3W.
-func JetDefragment3W(sesid JET_SESID, szDatabaseName *uint16, szTableName *uint16, pcPasses *uint32, pcSeconds *uint32, callback JET_CALLBACK, pvContext unsafe.Pointer, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetDefragment3W.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pcPasses)), uintptr(unsafe.Pointer(pcSeconds)), uintptr(callback), uintptr(unsafe.Pointer(pvContext)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -649,17 +680,24 @@ func JetDefragmentA(sesid JET_SESID, dbid uint32, szTableName *int8, pcPasses *u
 	return int32(r1)
 }
 
-// JetDefragmentW calls ESENT!JetDefragmentW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdefragment-function
-func JetDefragmentW(sesid JET_SESID, dbid uint32, szTableName *uint16, pcPasses *uint32, pcSeconds *uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetDefragmentW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pcPasses)), uintptr(unsafe.Pointer(pcSeconds)), uintptr(grbit))
-	return int32(r1)
-}
-
 // JetDelete calls ESENT!JetDelete.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdelete-function
 func JetDelete(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID) int32 {
 	r1, _, _ := syscall.SyscallN(procJetDelete.Addr(), uintptr(sesid), uintptr(tableid))
+	return int32(r1)
+}
+
+// JetDeleteColumn calls ESENT!JetDeleteColumnW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdeletecolumn-function
+func JetDeleteColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procJetDeleteColumn.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)))
+	return int32(r1)
+}
+
+// JetDeleteColumn2 calls ESENT!JetDeleteColumn2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdeletecolumn2-function
+func JetDeleteColumn2(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetDeleteColumn2.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -670,13 +708,6 @@ func JetDeleteColumn2A(sesid JET_SESID, tableid storagestructuredstorage.JET_TAB
 	return int32(r1)
 }
 
-// JetDeleteColumn2W calls ESENT!JetDeleteColumn2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdeletecolumn2-function
-func JetDeleteColumn2W(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetDeleteColumn2W.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(grbit))
-	return int32(r1)
-}
-
 // JetDeleteColumnA calls ESENT!JetDeleteColumnA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdeletecolumn-function
 func JetDeleteColumnA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *int8) int32 {
@@ -684,10 +715,10 @@ func JetDeleteColumnA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABL
 	return int32(r1)
 }
 
-// JetDeleteColumnW calls ESENT!JetDeleteColumnW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdeletecolumn-function
-func JetDeleteColumnW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procJetDeleteColumnW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)))
+// JetDeleteIndex calls ESENT!JetDeleteIndexW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdeleteindex-function
+func JetDeleteIndex(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procJetDeleteIndex.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)))
 	return int32(r1)
 }
 
@@ -698,10 +729,10 @@ func JetDeleteIndexA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLE
 	return int32(r1)
 }
 
-// JetDeleteIndexW calls ESENT!JetDeleteIndexW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdeleteindex-function
-func JetDeleteIndexW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procJetDeleteIndexW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)))
+// JetDeleteTable calls ESENT!JetDeleteTableW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdeletetable-function
+func JetDeleteTable(sesid JET_SESID, dbid uint32, szTableName *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procJetDeleteTable.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)))
 	return int32(r1)
 }
 
@@ -712,10 +743,17 @@ func JetDeleteTableA(sesid JET_SESID, dbid uint32, szTableName *int8) int32 {
 	return int32(r1)
 }
 
-// JetDeleteTableW calls ESENT!JetDeleteTableW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdeletetable-function
-func JetDeleteTableW(sesid JET_SESID, dbid uint32, szTableName *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procJetDeleteTableW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)))
+// JetDetachDatabase calls ESENT!JetDetachDatabaseW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdetachdatabase-function
+func JetDetachDatabase(sesid JET_SESID, szFilename *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procJetDetachDatabase.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)))
+	return int32(r1)
+}
+
+// JetDetachDatabase2 calls ESENT!JetDetachDatabase2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdetachdatabase2-function
+func JetDetachDatabase2(sesid JET_SESID, szFilename *uint16, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetDetachDatabase2.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -726,24 +764,10 @@ func JetDetachDatabase2A(sesid JET_SESID, szFilename *int8, grbit uint32) int32 
 	return int32(r1)
 }
 
-// JetDetachDatabase2W calls ESENT!JetDetachDatabase2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdetachdatabase2-function
-func JetDetachDatabase2W(sesid JET_SESID, szFilename *uint16, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetDetachDatabase2W.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(grbit))
-	return int32(r1)
-}
-
 // JetDetachDatabaseA calls ESENT!JetDetachDatabaseA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdetachdatabase-function
 func JetDetachDatabaseA(sesid JET_SESID, szFilename *int8) int32 {
 	r1, _, _ := syscall.SyscallN(procJetDetachDatabaseA.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)))
-	return int32(r1)
-}
-
-// JetDetachDatabaseW calls ESENT!JetDetachDatabaseW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetdetachdatabase-function
-func JetDetachDatabaseW(sesid JET_SESID, szFilename *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procJetDetachDatabaseW.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)))
 	return int32(r1)
 }
 
@@ -761,17 +785,25 @@ func JetDupSession(sesid JET_SESID, psesid *JET_SESID) int32 {
 	return int32(r1)
 }
 
-// JetEnableMultiInstanceA calls ESENT!JetEnableMultiInstanceA.
+// JetEnableMultiInstance calls ESENT!JetEnableMultiInstanceW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetenablemultiinstance-function
-func JetEnableMultiInstanceA(psetsysparam *JET_SETSYSPARAM_A, csetsysparam uint32, pcsetsucceed *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetEnableMultiInstanceA.Addr(), uintptr(unsafe.Pointer(psetsysparam)), uintptr(csetsysparam), uintptr(unsafe.Pointer(pcsetsucceed)))
+func JetEnableMultiInstance(psetsysparam []JET_SETSYSPARAM_W, pcsetsucceed *uint32) int32 {
+	var _psetsysparam *JET_SETSYSPARAM_W
+	if len(psetsysparam) > 0 {
+		_psetsysparam = &psetsysparam[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetEnableMultiInstance.Addr(), uintptr(unsafe.Pointer(_psetsysparam)), uintptr(len(psetsysparam)), uintptr(unsafe.Pointer(pcsetsucceed)))
 	return int32(r1)
 }
 
-// JetEnableMultiInstanceW calls ESENT!JetEnableMultiInstanceW.
+// JetEnableMultiInstanceA calls ESENT!JetEnableMultiInstanceA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetenablemultiinstance-function
-func JetEnableMultiInstanceW(psetsysparam *JET_SETSYSPARAM_W, csetsysparam uint32, pcsetsucceed *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetEnableMultiInstanceW.Addr(), uintptr(unsafe.Pointer(psetsysparam)), uintptr(csetsysparam), uintptr(unsafe.Pointer(pcsetsucceed)))
+func JetEnableMultiInstanceA(psetsysparam []JET_SETSYSPARAM_A, pcsetsucceed *uint32) int32 {
+	var _psetsysparam *JET_SETSYSPARAM_A
+	if len(psetsysparam) > 0 {
+		_psetsysparam = &psetsysparam[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetEnableMultiInstanceA.Addr(), uintptr(unsafe.Pointer(_psetsysparam)), uintptr(len(psetsysparam)), uintptr(unsafe.Pointer(pcsetsucceed)))
 	return int32(r1)
 }
 
@@ -805,8 +837,12 @@ func JetEndSession(sesid JET_SESID, grbit uint32) int32 {
 
 // JetEnumerateColumns calls ESENT!JetEnumerateColumns.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetenumeratecolumns-function
-func JetEnumerateColumns(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, cEnumColumnId uint32, rgEnumColumnId *JET_ENUMCOLUMNID, pcEnumColumn *uint32, prgEnumColumn **JET_ENUMCOLUMN, pfnRealloc JET_PFNREALLOC, pvReallocContext unsafe.Pointer, cbDataMost uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetEnumerateColumns.Addr(), uintptr(sesid), uintptr(tableid), uintptr(cEnumColumnId), uintptr(unsafe.Pointer(rgEnumColumnId)), uintptr(unsafe.Pointer(pcEnumColumn)), uintptr(unsafe.Pointer(prgEnumColumn)), uintptr(pfnRealloc), uintptr(unsafe.Pointer(pvReallocContext)), uintptr(cbDataMost), uintptr(grbit))
+func JetEnumerateColumns(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, rgEnumColumnId []JET_ENUMCOLUMNID, pcEnumColumn *uint32, prgEnumColumn **JET_ENUMCOLUMN, pfnRealloc JET_PFNREALLOC, pvReallocContext unsafe.Pointer, cbDataMost uint32, grbit uint32) int32 {
+	var _rgEnumColumnId *JET_ENUMCOLUMNID
+	if len(rgEnumColumnId) > 0 {
+		_rgEnumColumnId = &rgEnumColumnId[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetEnumerateColumns.Addr(), uintptr(sesid), uintptr(tableid), uintptr(len(rgEnumColumnId)), uintptr(unsafe.Pointer(_rgEnumColumnId)), uintptr(unsafe.Pointer(pcEnumColumn)), uintptr(unsafe.Pointer(prgEnumColumn)), uintptr(pfnRealloc), uintptr(unsafe.Pointer(pvReallocContext)), uintptr(cbDataMost), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -817,31 +853,47 @@ func JetEscrowUpdate(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLE
 	return int32(r1)
 }
 
-// JetExternalRestore2A calls ESENT!JetExternalRestore2A.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore2-function
-func JetExternalRestore2A(szCheckpointFilePath *int8, szLogPath *int8, rgrstmap *JET_RSTMAP_A, crstfilemap int32, szBackupLogPath *int8, pLogInfo *JET_LOGINFO_A, szTargetInstanceName *int8, szTargetInstanceLogPath *int8, szTargetInstanceCheckpointPath *int8, pfn JET_PFNSTATUS) int32 {
-	r1, _, _ := syscall.SyscallN(procJetExternalRestore2A.Addr(), uintptr(unsafe.Pointer(szCheckpointFilePath)), uintptr(unsafe.Pointer(szLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstfilemap), uintptr(unsafe.Pointer(szBackupLogPath)), uintptr(unsafe.Pointer(pLogInfo)), uintptr(unsafe.Pointer(szTargetInstanceName)), uintptr(unsafe.Pointer(szTargetInstanceLogPath)), uintptr(unsafe.Pointer(szTargetInstanceCheckpointPath)), uintptr(pfn))
+// JetExternalRestore calls ESENT!JetExternalRestoreW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore-function
+func JetExternalRestore(szCheckpointFilePath *uint16, szLogPath *uint16, rgrstmap []JET_RSTMAP_W, szBackupLogPath *uint16, genLow int32, genHigh int32, pfn JET_PFNSTATUS) int32 {
+	var _rgrstmap *JET_RSTMAP_W
+	if len(rgrstmap) > 0 {
+		_rgrstmap = &rgrstmap[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetExternalRestore.Addr(), uintptr(unsafe.Pointer(szCheckpointFilePath)), uintptr(unsafe.Pointer(szLogPath)), uintptr(unsafe.Pointer(_rgrstmap)), uintptr(len(rgrstmap)), uintptr(unsafe.Pointer(szBackupLogPath)), uintptr(genLow), uintptr(genHigh), uintptr(pfn))
 	return int32(r1)
 }
 
-// JetExternalRestore2W calls ESENT!JetExternalRestore2W.
+// JetExternalRestore2 calls ESENT!JetExternalRestore2W.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore2-function
-func JetExternalRestore2W(szCheckpointFilePath *uint16, szLogPath *uint16, rgrstmap *JET_RSTMAP_W, crstfilemap int32, szBackupLogPath *uint16, pLogInfo *JET_LOGINFO_W, szTargetInstanceName *uint16, szTargetInstanceLogPath *uint16, szTargetInstanceCheckpointPath *uint16, pfn JET_PFNSTATUS) int32 {
-	r1, _, _ := syscall.SyscallN(procJetExternalRestore2W.Addr(), uintptr(unsafe.Pointer(szCheckpointFilePath)), uintptr(unsafe.Pointer(szLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstfilemap), uintptr(unsafe.Pointer(szBackupLogPath)), uintptr(unsafe.Pointer(pLogInfo)), uintptr(unsafe.Pointer(szTargetInstanceName)), uintptr(unsafe.Pointer(szTargetInstanceLogPath)), uintptr(unsafe.Pointer(szTargetInstanceCheckpointPath)), uintptr(pfn))
+func JetExternalRestore2(szCheckpointFilePath *uint16, szLogPath *uint16, rgrstmap []JET_RSTMAP_W, szBackupLogPath *uint16, pLogInfo *JET_LOGINFO_W, szTargetInstanceName *uint16, szTargetInstanceLogPath *uint16, szTargetInstanceCheckpointPath *uint16, pfn JET_PFNSTATUS) int32 {
+	var _rgrstmap *JET_RSTMAP_W
+	if len(rgrstmap) > 0 {
+		_rgrstmap = &rgrstmap[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetExternalRestore2.Addr(), uintptr(unsafe.Pointer(szCheckpointFilePath)), uintptr(unsafe.Pointer(szLogPath)), uintptr(unsafe.Pointer(_rgrstmap)), uintptr(len(rgrstmap)), uintptr(unsafe.Pointer(szBackupLogPath)), uintptr(unsafe.Pointer(pLogInfo)), uintptr(unsafe.Pointer(szTargetInstanceName)), uintptr(unsafe.Pointer(szTargetInstanceLogPath)), uintptr(unsafe.Pointer(szTargetInstanceCheckpointPath)), uintptr(pfn))
+	return int32(r1)
+}
+
+// JetExternalRestore2A calls ESENT!JetExternalRestore2A.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore2-function
+func JetExternalRestore2A(szCheckpointFilePath *int8, szLogPath *int8, rgrstmap []JET_RSTMAP_A, szBackupLogPath *int8, pLogInfo *JET_LOGINFO_A, szTargetInstanceName *int8, szTargetInstanceLogPath *int8, szTargetInstanceCheckpointPath *int8, pfn JET_PFNSTATUS) int32 {
+	var _rgrstmap *JET_RSTMAP_A
+	if len(rgrstmap) > 0 {
+		_rgrstmap = &rgrstmap[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetExternalRestore2A.Addr(), uintptr(unsafe.Pointer(szCheckpointFilePath)), uintptr(unsafe.Pointer(szLogPath)), uintptr(unsafe.Pointer(_rgrstmap)), uintptr(len(rgrstmap)), uintptr(unsafe.Pointer(szBackupLogPath)), uintptr(unsafe.Pointer(pLogInfo)), uintptr(unsafe.Pointer(szTargetInstanceName)), uintptr(unsafe.Pointer(szTargetInstanceLogPath)), uintptr(unsafe.Pointer(szTargetInstanceCheckpointPath)), uintptr(pfn))
 	return int32(r1)
 }
 
 // JetExternalRestoreA calls ESENT!JetExternalRestoreA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore-function
-func JetExternalRestoreA(szCheckpointFilePath *int8, szLogPath *int8, rgrstmap *JET_RSTMAP_A, crstfilemap int32, szBackupLogPath *int8, genLow int32, genHigh int32, pfn JET_PFNSTATUS) int32 {
-	r1, _, _ := syscall.SyscallN(procJetExternalRestoreA.Addr(), uintptr(unsafe.Pointer(szCheckpointFilePath)), uintptr(unsafe.Pointer(szLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstfilemap), uintptr(unsafe.Pointer(szBackupLogPath)), uintptr(genLow), uintptr(genHigh), uintptr(pfn))
-	return int32(r1)
-}
-
-// JetExternalRestoreW calls ESENT!JetExternalRestoreW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetexternalrestore-function
-func JetExternalRestoreW(szCheckpointFilePath *uint16, szLogPath *uint16, rgrstmap *JET_RSTMAP_W, crstfilemap int32, szBackupLogPath *uint16, genLow int32, genHigh int32, pfn JET_PFNSTATUS) int32 {
-	r1, _, _ := syscall.SyscallN(procJetExternalRestoreW.Addr(), uintptr(unsafe.Pointer(szCheckpointFilePath)), uintptr(unsafe.Pointer(szLogPath)), uintptr(unsafe.Pointer(rgrstmap)), uintptr(crstfilemap), uintptr(unsafe.Pointer(szBackupLogPath)), uintptr(genLow), uintptr(genHigh), uintptr(pfn))
+func JetExternalRestoreA(szCheckpointFilePath *int8, szLogPath *int8, rgrstmap []JET_RSTMAP_A, szBackupLogPath *int8, genLow int32, genHigh int32, pfn JET_PFNSTATUS) int32 {
+	var _rgrstmap *JET_RSTMAP_A
+	if len(rgrstmap) > 0 {
+		_rgrstmap = &rgrstmap[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetExternalRestoreA.Addr(), uintptr(unsafe.Pointer(szCheckpointFilePath)), uintptr(unsafe.Pointer(szLogPath)), uintptr(unsafe.Pointer(_rgrstmap)), uintptr(len(rgrstmap)), uintptr(unsafe.Pointer(szBackupLogPath)), uintptr(genLow), uintptr(genHigh), uintptr(pfn))
 	return int32(r1)
 }
 
@@ -852,10 +904,24 @@ func JetFreeBuffer(pbBuf *int8) int32 {
 	return int32(r1)
 }
 
+// JetGetAttachInfo calls ESENT!JetGetAttachInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetattachinfo-function
+func JetGetAttachInfo(wszzDatabases *uint16, cbMax uint32, pcbActual *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetAttachInfo.Addr(), uintptr(unsafe.Pointer(wszzDatabases)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
+	return int32(r1)
+}
+
 // JetGetAttachInfoA calls ESENT!JetGetAttachInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetattachinfo-function
 func JetGetAttachInfoA(szzDatabases *int8, cbMax uint32, pcbActual *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetGetAttachInfoA.Addr(), uintptr(unsafe.Pointer(szzDatabases)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
+	return int32(r1)
+}
+
+// JetGetAttachInfoInstance calls ESENT!JetGetAttachInfoInstanceW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetattachinfoinstance-function
+func JetGetAttachInfoInstance(instance JET_INSTANCE, szzDatabases *uint16, cbMax uint32, pcbActual *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetAttachInfoInstance.Addr(), uintptr(instance), uintptr(unsafe.Pointer(szzDatabases)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
 	return int32(r1)
 }
 
@@ -866,24 +932,17 @@ func JetGetAttachInfoInstanceA(instance JET_INSTANCE, szzDatabases *int8, cbMax 
 	return int32(r1)
 }
 
-// JetGetAttachInfoInstanceW calls ESENT!JetGetAttachInfoInstanceW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetattachinfoinstance-function
-func JetGetAttachInfoInstanceW(instance JET_INSTANCE, szzDatabases *uint16, cbMax uint32, pcbActual *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetAttachInfoInstanceW.Addr(), uintptr(instance), uintptr(unsafe.Pointer(szzDatabases)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
-	return int32(r1)
-}
-
-// JetGetAttachInfoW calls ESENT!JetGetAttachInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetattachinfo-function
-func JetGetAttachInfoW(wszzDatabases *uint16, cbMax uint32, pcbActual *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetAttachInfoW.Addr(), uintptr(unsafe.Pointer(wszzDatabases)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
-	return int32(r1)
-}
-
 // JetGetBookmark calls ESENT!JetGetBookmark.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetbookmark-function
 func JetGetBookmark(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvBookmark unsafe.Pointer, cbMax uint32, pcbActual *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetGetBookmark.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvBookmark)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
+	return int32(r1)
+}
+
+// JetGetColumnInfo calls ESENT!JetGetColumnInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetcolumninfo-function
+func JetGetColumnInfo(sesid JET_SESID, dbid uint32, szTableName *uint16, pwColumnNameOrId *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetColumnInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pwColumnNameOrId)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -894,10 +953,10 @@ func JetGetColumnInfoA(sesid JET_SESID, dbid uint32, szTableName *int8, pColumnN
 	return int32(r1)
 }
 
-// JetGetColumnInfoW calls ESENT!JetGetColumnInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetcolumninfo-function
-func JetGetColumnInfoW(sesid JET_SESID, dbid uint32, szTableName *uint16, pwColumnNameOrId *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetColumnInfoW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pwColumnNameOrId)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+// JetGetCurrentIndex calls ESENT!JetGetCurrentIndexW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetcurrentindex-function
+func JetGetCurrentIndex(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, cbIndexName uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetCurrentIndex.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(cbIndexName))
 	return int32(r1)
 }
 
@@ -908,17 +967,17 @@ func JetGetCurrentIndexA(sesid JET_SESID, tableid storagestructuredstorage.JET_T
 	return int32(r1)
 }
 
-// JetGetCurrentIndexW calls ESENT!JetGetCurrentIndexW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetcurrentindex-function
-func JetGetCurrentIndexW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, cbIndexName uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetCurrentIndexW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(cbIndexName))
-	return int32(r1)
-}
-
 // JetGetCursorInfo calls ESENT!JetGetCursorInfo.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetcursorinfo-function
 func JetGetCursorInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetGetCursorInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+	return int32(r1)
+}
+
+// JetGetDatabaseFileInfo calls ESENT!JetGetDatabaseFileInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetdatabasefileinfo-function
+func JetGetDatabaseFileInfo(szDatabaseName *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetDatabaseFileInfo.Addr(), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -929,22 +988,15 @@ func JetGetDatabaseFileInfoA(szDatabaseName *int8, pvResult unsafe.Pointer, cbMa
 	return int32(r1)
 }
 
-// JetGetDatabaseFileInfoW calls ESENT!JetGetDatabaseFileInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetdatabasefileinfo-function
-func JetGetDatabaseFileInfoW(szDatabaseName *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetDatabaseFileInfoW.Addr(), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+// JetGetDatabaseInfo calls ESENT!JetGetDatabaseInfoW.
+func JetGetDatabaseInfo(sesid JET_SESID, dbid uint32, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetDatabaseInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetDatabaseInfoA calls ESENT!JetGetDatabaseInfoA.
 func JetGetDatabaseInfoA(sesid JET_SESID, dbid uint32, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetGetDatabaseInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
-	return int32(r1)
-}
-
-// JetGetDatabaseInfoW calls ESENT!JetGetDatabaseInfoW.
-func JetGetDatabaseInfoW(sesid JET_SESID, dbid uint32, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetDatabaseInfoW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -955,6 +1007,13 @@ func JetGetErrorInfoW(pvContext unsafe.Pointer, pvResult unsafe.Pointer, cbMax u
 	return int32(r1)
 }
 
+// JetGetIndexInfo calls ESENT!JetGetIndexInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetindexinfo-function
+func JetGetIndexInfo(sesid JET_SESID, dbid uint32, szTableName *uint16, szIndexName *uint16, pvResult unsafe.Pointer, cbResult uint32, InfoLevel uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetIndexInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbResult), uintptr(InfoLevel))
+	return int32(r1)
+}
+
 // JetGetIndexInfoA calls ESENT!JetGetIndexInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetindexinfo-function
 func JetGetIndexInfoA(sesid JET_SESID, dbid uint32, szTableName *int8, szIndexName *int8, pvResult unsafe.Pointer, cbResult uint32, InfoLevel uint32) int32 {
@@ -962,10 +1021,10 @@ func JetGetIndexInfoA(sesid JET_SESID, dbid uint32, szTableName *int8, szIndexNa
 	return int32(r1)
 }
 
-// JetGetIndexInfoW calls ESENT!JetGetIndexInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetindexinfo-function
-func JetGetIndexInfoW(sesid JET_SESID, dbid uint32, szTableName *uint16, szIndexName *uint16, pvResult unsafe.Pointer, cbResult uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetIndexInfoW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbResult), uintptr(InfoLevel))
+// JetGetInstanceInfo calls ESENT!JetGetInstanceInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetinstanceinfo-function
+func JetGetInstanceInfo(pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_INFO_W) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetInstanceInfo.Addr(), uintptr(unsafe.Pointer(pcInstanceInfo)), uintptr(unsafe.Pointer(paInstanceInfo)))
 	return int32(r1)
 }
 
@@ -973,13 +1032,6 @@ func JetGetIndexInfoW(sesid JET_SESID, dbid uint32, szTableName *uint16, szIndex
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetinstanceinfo-function
 func JetGetInstanceInfoA(pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_INFO_A) int32 {
 	r1, _, _ := syscall.SyscallN(procJetGetInstanceInfoA.Addr(), uintptr(unsafe.Pointer(pcInstanceInfo)), uintptr(unsafe.Pointer(paInstanceInfo)))
-	return int32(r1)
-}
-
-// JetGetInstanceInfoW calls ESENT!JetGetInstanceInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetinstanceinfo-function
-func JetGetInstanceInfoW(pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_INFO_W) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetInstanceInfoW.Addr(), uintptr(unsafe.Pointer(pcInstanceInfo)), uintptr(unsafe.Pointer(paInstanceInfo)))
 	return int32(r1)
 }
 
@@ -1004,10 +1056,31 @@ func JetGetLock(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, g
 	return int32(r1)
 }
 
+// JetGetLogInfo calls ESENT!JetGetLogInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetloginfo-function
+func JetGetLogInfo(szzLogs *uint16, cbMax uint32, pcbActual *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetLogInfo.Addr(), uintptr(unsafe.Pointer(szzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
+	return int32(r1)
+}
+
 // JetGetLogInfoA calls ESENT!JetGetLogInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetloginfo-function
 func JetGetLogInfoA(szzLogs *int8, cbMax uint32, pcbActual *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetGetLogInfoA.Addr(), uintptr(unsafe.Pointer(szzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
+	return int32(r1)
+}
+
+// JetGetLogInfoInstance calls ESENT!JetGetLogInfoInstanceW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetloginfoinstance-function
+func JetGetLogInfoInstance(instance JET_INSTANCE, wszzLogs *uint16, cbMax uint32, pcbActual *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetLogInfoInstance.Addr(), uintptr(instance), uintptr(unsafe.Pointer(wszzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
+	return int32(r1)
+}
+
+// JetGetLogInfoInstance2 calls ESENT!JetGetLogInfoInstance2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetloginfoinstance2-function
+func JetGetLogInfoInstance2(instance JET_INSTANCE, wszzLogs *uint16, cbMax uint32, pcbActual *uint32, pLogInfo *JET_LOGINFO_W) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetLogInfoInstance2.Addr(), uintptr(instance), uintptr(unsafe.Pointer(wszzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)), uintptr(unsafe.Pointer(pLogInfo)))
 	return int32(r1)
 }
 
@@ -1018,13 +1091,6 @@ func JetGetLogInfoInstance2A(instance JET_INSTANCE, szzLogs *int8, cbMax uint32,
 	return int32(r1)
 }
 
-// JetGetLogInfoInstance2W calls ESENT!JetGetLogInfoInstance2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetloginfoinstance2-function
-func JetGetLogInfoInstance2W(instance JET_INSTANCE, wszzLogs *uint16, cbMax uint32, pcbActual *uint32, pLogInfo *JET_LOGINFO_W) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetLogInfoInstance2W.Addr(), uintptr(instance), uintptr(unsafe.Pointer(wszzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)), uintptr(unsafe.Pointer(pLogInfo)))
-	return int32(r1)
-}
-
 // JetGetLogInfoInstanceA calls ESENT!JetGetLogInfoInstanceA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetloginfoinstance-function
 func JetGetLogInfoInstanceA(instance JET_INSTANCE, szzLogs *int8, cbMax uint32, pcbActual *uint32) int32 {
@@ -1032,17 +1098,10 @@ func JetGetLogInfoInstanceA(instance JET_INSTANCE, szzLogs *int8, cbMax uint32, 
 	return int32(r1)
 }
 
-// JetGetLogInfoInstanceW calls ESENT!JetGetLogInfoInstanceW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetloginfoinstance-function
-func JetGetLogInfoInstanceW(instance JET_INSTANCE, wszzLogs *uint16, cbMax uint32, pcbActual *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetLogInfoInstanceW.Addr(), uintptr(instance), uintptr(unsafe.Pointer(wszzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
-	return int32(r1)
-}
-
-// JetGetLogInfoW calls ESENT!JetGetLogInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetloginfo-function
-func JetGetLogInfoW(szzLogs *uint16, cbMax uint32, pcbActual *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetLogInfoW.Addr(), uintptr(unsafe.Pointer(szzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
+// JetGetObjectInfo calls ESENT!JetGetObjectInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetobjectinfo-function
+func JetGetObjectInfo(sesid JET_SESID, dbid uint32, objtyp uint32, szContainerName *uint16, szObjectName *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetObjectInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(objtyp), uintptr(unsafe.Pointer(szContainerName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -1050,13 +1109,6 @@ func JetGetLogInfoW(szzLogs *uint16, cbMax uint32, pcbActual *uint32) int32 {
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetobjectinfo-function
 func JetGetObjectInfoA(sesid JET_SESID, dbid uint32, objtyp uint32, szContainerName *int8, szObjectName *int8, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetGetObjectInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(objtyp), uintptr(unsafe.Pointer(szContainerName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
-	return int32(r1)
-}
-
-// JetGetObjectInfoW calls ESENT!JetGetObjectInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetobjectinfo-function
-func JetGetObjectInfoW(sesid JET_SESID, dbid uint32, objtyp uint32, szContainerName *uint16, szObjectName *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetObjectInfoW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(objtyp), uintptr(unsafe.Pointer(szContainerName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -1095,6 +1147,13 @@ func JetGetSessionParameter(sesid JET_SESID, sesparamid uint32, pvParam unsafe.P
 	return int32(r1)
 }
 
+// JetGetSystemParameter calls ESENT!JetGetSystemParameterW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetsystemparameter-function
+func JetGetSystemParameter(instance JET_INSTANCE, sesid JET_SESID, paramid uint32, plParam *storagestructuredstorage.JET_API_PTR, szParam *uint16, cbMax uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetSystemParameter.Addr(), uintptr(instance), uintptr(sesid), uintptr(paramid), uintptr(unsafe.Pointer(plParam)), uintptr(unsafe.Pointer(szParam)), uintptr(cbMax))
+	return int32(r1)
+}
+
 // JetGetSystemParameterA calls ESENT!JetGetSystemParameterA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetsystemparameter-function
 func JetGetSystemParameterA(instance JET_INSTANCE, sesid JET_SESID, paramid uint32, plParam *storagestructuredstorage.JET_API_PTR, szParam *int8, cbMax uint32) int32 {
@@ -1102,10 +1161,10 @@ func JetGetSystemParameterA(instance JET_INSTANCE, sesid JET_SESID, paramid uint
 	return int32(r1)
 }
 
-// JetGetSystemParameterW calls ESENT!JetGetSystemParameterW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetsystemparameter-function
-func JetGetSystemParameterW(instance JET_INSTANCE, sesid JET_SESID, paramid uint32, plParam *storagestructuredstorage.JET_API_PTR, szParam *uint16, cbMax uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetSystemParameterW.Addr(), uintptr(instance), uintptr(sesid), uintptr(paramid), uintptr(unsafe.Pointer(plParam)), uintptr(unsafe.Pointer(szParam)), uintptr(cbMax))
+// JetGetTableColumnInfo calls ESENT!JetGetTableColumnInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettablecolumninfo-function
+func JetGetTableColumnInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetTableColumnInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -1116,10 +1175,10 @@ func JetGetTableColumnInfoA(sesid JET_SESID, tableid storagestructuredstorage.JE
 	return int32(r1)
 }
 
-// JetGetTableColumnInfoW calls ESENT!JetGetTableColumnInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettablecolumninfo-function
-func JetGetTableColumnInfoW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTableColumnInfoW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+// JetGetTableIndexInfo calls ESENT!JetGetTableIndexInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettableindexinfo-function
+func JetGetTableIndexInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, pvResult unsafe.Pointer, cbResult uint32, InfoLevel uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetTableIndexInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbResult), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -1130,10 +1189,10 @@ func JetGetTableIndexInfoA(sesid JET_SESID, tableid storagestructuredstorage.JET
 	return int32(r1)
 }
 
-// JetGetTableIndexInfoW calls ESENT!JetGetTableIndexInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettableindexinfo-function
-func JetGetTableIndexInfoW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, pvResult unsafe.Pointer, cbResult uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTableIndexInfoW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbResult), uintptr(InfoLevel))
+// JetGetTableInfo calls ESENT!JetGetTableInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettableinfo-function
+func JetGetTableInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetTableInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -1144,13 +1203,6 @@ func JetGetTableInfoA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABL
 	return int32(r1)
 }
 
-// JetGetTableInfoW calls ESENT!JetGetTableInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettableinfo-function
-func JetGetTableInfoW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTableInfoW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
-	return int32(r1)
-}
-
 // JetGetThreadStats calls ESENT!JetGetThreadStats.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetthreadstats-function
 func JetGetThreadStats(pvResult unsafe.Pointer, cbMax uint32) int32 {
@@ -1158,17 +1210,17 @@ func JetGetThreadStats(pvResult unsafe.Pointer, cbMax uint32) int32 {
 	return int32(r1)
 }
 
+// JetGetTruncateLogInfoInstance calls ESENT!JetGetTruncateLogInfoInstanceW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettruncateloginfoinstance-function
+func JetGetTruncateLogInfoInstance(instance JET_INSTANCE, wszzLogs *uint16, cbMax uint32, pcbActual *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetGetTruncateLogInfoInstance.Addr(), uintptr(instance), uintptr(unsafe.Pointer(wszzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
+	return int32(r1)
+}
+
 // JetGetTruncateLogInfoInstanceA calls ESENT!JetGetTruncateLogInfoInstanceA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettruncateloginfoinstance-function
 func JetGetTruncateLogInfoInstanceA(instance JET_INSTANCE, szzLogs *int8, cbMax uint32, pcbActual *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetGetTruncateLogInfoInstanceA.Addr(), uintptr(instance), uintptr(unsafe.Pointer(szzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
-	return int32(r1)
-}
-
-// JetGetTruncateLogInfoInstanceW calls ESENT!JetGetTruncateLogInfoInstanceW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettruncateloginfoinstance-function
-func JetGetTruncateLogInfoInstanceW(instance JET_INSTANCE, wszzLogs *uint16, cbMax uint32, pcbActual *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTruncateLogInfoInstanceW.Addr(), uintptr(instance), uintptr(unsafe.Pointer(wszzLogs)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
 	return int32(r1)
 }
 
@@ -1235,6 +1287,13 @@ func JetInit2(pinstance *JET_INSTANCE, grbit uint32) int32 {
 	return int32(r1)
 }
 
+// JetInit3 calls ESENT!JetInit3W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetinit3-function
+func JetInit3(pinstance *JET_INSTANCE, prstInfo *JET_RSTINFO_W, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetInit3.Addr(), uintptr(unsafe.Pointer(pinstance)), uintptr(unsafe.Pointer(prstInfo)), uintptr(grbit))
+	return int32(r1)
+}
+
 // JetInit3A calls ESENT!JetInit3A.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetinit3-function
 func JetInit3A(pinstance *JET_INSTANCE, prstInfo *JET_RSTINFO_A, grbit uint32) int32 {
@@ -1242,17 +1301,14 @@ func JetInit3A(pinstance *JET_INSTANCE, prstInfo *JET_RSTINFO_A, grbit uint32) i
 	return int32(r1)
 }
 
-// JetInit3W calls ESENT!JetInit3W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetinit3-function
-func JetInit3W(pinstance *JET_INSTANCE, prstInfo *JET_RSTINFO_W, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetInit3W.Addr(), uintptr(unsafe.Pointer(pinstance)), uintptr(unsafe.Pointer(prstInfo)), uintptr(grbit))
-	return int32(r1)
-}
-
 // JetIntersectIndexes calls ESENT!JetIntersectIndexes.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetintersectindexes-function
-func JetIntersectIndexes(sesid JET_SESID, rgindexrange *JET_INDEXRANGE, cindexrange uint32, precordlist *JET_RECORDLIST, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetIntersectIndexes.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(rgindexrange)), uintptr(cindexrange), uintptr(unsafe.Pointer(precordlist)), uintptr(grbit))
+func JetIntersectIndexes(sesid JET_SESID, rgindexrange []JET_INDEXRANGE, precordlist *JET_RECORDLIST, grbit uint32) int32 {
+	var _rgindexrange *JET_INDEXRANGE
+	if len(rgindexrange) > 0 {
+		_rgindexrange = &rgindexrange[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetIntersectIndexes.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(_rgindexrange)), uintptr(len(rgindexrange)), uintptr(unsafe.Pointer(precordlist)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1284,6 +1340,13 @@ func JetOSSnapshotEnd(snapId JET_OSSNAPID, grbit uint32) int32 {
 	return int32(r1)
 }
 
+// JetOSSnapshotFreeze calls ESENT!JetOSSnapshotFreezeW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetossnapshotfreeze-function
+func JetOSSnapshotFreeze(snapId JET_OSSNAPID, pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_INFO_W, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetOSSnapshotFreeze.Addr(), uintptr(snapId), uintptr(unsafe.Pointer(pcInstanceInfo)), uintptr(unsafe.Pointer(paInstanceInfo)), uintptr(grbit))
+	return int32(r1)
+}
+
 // JetOSSnapshotFreezeA calls ESENT!JetOSSnapshotFreezeA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetossnapshotfreeze-function
 func JetOSSnapshotFreezeA(snapId JET_OSSNAPID, pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_INFO_A, grbit uint32) int32 {
@@ -1291,10 +1354,10 @@ func JetOSSnapshotFreezeA(snapId JET_OSSNAPID, pcInstanceInfo *uint32, paInstanc
 	return int32(r1)
 }
 
-// JetOSSnapshotFreezeW calls ESENT!JetOSSnapshotFreezeW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetossnapshotfreeze-function
-func JetOSSnapshotFreezeW(snapId JET_OSSNAPID, pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_INFO_W, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetOSSnapshotFreezeW.Addr(), uintptr(snapId), uintptr(unsafe.Pointer(pcInstanceInfo)), uintptr(unsafe.Pointer(paInstanceInfo)), uintptr(grbit))
+// JetOSSnapshotGetFreezeInfo calls ESENT!JetOSSnapshotGetFreezeInfoW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetossnapshotgetfreezeinfo-function
+func JetOSSnapshotGetFreezeInfo(snapId JET_OSSNAPID, pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_INFO_W, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetOSSnapshotGetFreezeInfo.Addr(), uintptr(snapId), uintptr(unsafe.Pointer(pcInstanceInfo)), uintptr(unsafe.Pointer(paInstanceInfo)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1302,13 +1365,6 @@ func JetOSSnapshotFreezeW(snapId JET_OSSNAPID, pcInstanceInfo *uint32, paInstanc
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetossnapshotgetfreezeinfo-function
 func JetOSSnapshotGetFreezeInfoA(snapId JET_OSSNAPID, pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_INFO_A, grbit uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetOSSnapshotGetFreezeInfoA.Addr(), uintptr(snapId), uintptr(unsafe.Pointer(pcInstanceInfo)), uintptr(unsafe.Pointer(paInstanceInfo)), uintptr(grbit))
-	return int32(r1)
-}
-
-// JetOSSnapshotGetFreezeInfoW calls ESENT!JetOSSnapshotGetFreezeInfoW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetossnapshotgetfreezeinfo-function
-func JetOSSnapshotGetFreezeInfoW(snapId JET_OSSNAPID, pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_INFO_W, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetOSSnapshotGetFreezeInfoW.Addr(), uintptr(snapId), uintptr(unsafe.Pointer(pcInstanceInfo)), uintptr(unsafe.Pointer(paInstanceInfo)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1347,6 +1403,13 @@ func JetOSSnapshotTruncateLogInstance(snapId JET_OSSNAPID, instance JET_INSTANCE
 	return int32(r1)
 }
 
+// JetOpenDatabase calls ESENT!JetOpenDatabaseW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopendatabase-function
+func JetOpenDatabase(sesid JET_SESID, szFilename *uint16, szConnect *uint16, pdbid *uint32, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetOpenDatabase.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(unsafe.Pointer(szConnect)), uintptr(unsafe.Pointer(pdbid)), uintptr(grbit))
+	return int32(r1)
+}
+
 // JetOpenDatabaseA calls ESENT!JetOpenDatabaseA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopendatabase-function
 func JetOpenDatabaseA(sesid JET_SESID, szFilename *int8, szConnect *int8, pdbid *uint32, grbit uint32) int32 {
@@ -1354,10 +1417,10 @@ func JetOpenDatabaseA(sesid JET_SESID, szFilename *int8, szConnect *int8, pdbid 
 	return int32(r1)
 }
 
-// JetOpenDatabaseW calls ESENT!JetOpenDatabaseW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopendatabase-function
-func JetOpenDatabaseW(sesid JET_SESID, szFilename *uint16, szConnect *uint16, pdbid *uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetOpenDatabaseW.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szFilename)), uintptr(unsafe.Pointer(szConnect)), uintptr(unsafe.Pointer(pdbid)), uintptr(grbit))
+// JetOpenFile calls ESENT!JetOpenFileW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopenfile-function
+func JetOpenFile(szFileName *uint16, phfFile *storagestructuredstorage.JET_HANDLE, pulFileSizeLow *uint32, pulFileSizeHigh *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetOpenFile.Addr(), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(phfFile)), uintptr(unsafe.Pointer(pulFileSizeLow)), uintptr(unsafe.Pointer(pulFileSizeHigh)))
 	return int32(r1)
 }
 
@@ -1368,6 +1431,13 @@ func JetOpenFileA(szFileName *int8, phfFile *storagestructuredstorage.JET_HANDLE
 	return int32(r1)
 }
 
+// JetOpenFileInstance calls ESENT!JetOpenFileInstanceW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopenfileinstance-function
+func JetOpenFileInstance(instance JET_INSTANCE, szFileName *uint16, phfFile *storagestructuredstorage.JET_HANDLE, pulFileSizeLow *uint32, pulFileSizeHigh *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetOpenFileInstance.Addr(), uintptr(instance), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(phfFile)), uintptr(unsafe.Pointer(pulFileSizeLow)), uintptr(unsafe.Pointer(pulFileSizeHigh)))
+	return int32(r1)
+}
+
 // JetOpenFileInstanceA calls ESENT!JetOpenFileInstanceA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopenfileinstance-function
 func JetOpenFileInstanceA(instance JET_INSTANCE, szFileName *int8, phfFile *storagestructuredstorage.JET_HANDLE, pulFileSizeLow *uint32, pulFileSizeHigh *uint32) int32 {
@@ -1375,17 +1445,10 @@ func JetOpenFileInstanceA(instance JET_INSTANCE, szFileName *int8, phfFile *stor
 	return int32(r1)
 }
 
-// JetOpenFileInstanceW calls ESENT!JetOpenFileInstanceW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopenfileinstance-function
-func JetOpenFileInstanceW(instance JET_INSTANCE, szFileName *uint16, phfFile *storagestructuredstorage.JET_HANDLE, pulFileSizeLow *uint32, pulFileSizeHigh *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetOpenFileInstanceW.Addr(), uintptr(instance), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(phfFile)), uintptr(unsafe.Pointer(pulFileSizeLow)), uintptr(unsafe.Pointer(pulFileSizeHigh)))
-	return int32(r1)
-}
-
-// JetOpenFileW calls ESENT!JetOpenFileW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopenfile-function
-func JetOpenFileW(szFileName *uint16, phfFile *storagestructuredstorage.JET_HANDLE, pulFileSizeLow *uint32, pulFileSizeHigh *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetOpenFileW.Addr(), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(phfFile)), uintptr(unsafe.Pointer(pulFileSizeLow)), uintptr(unsafe.Pointer(pulFileSizeHigh)))
+// JetOpenTable calls ESENT!JetOpenTableW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopentable-function
+func JetOpenTable(sesid JET_SESID, dbid uint32, szTableName *uint16, pvParameters unsafe.Pointer, cbParameters uint32, grbit uint32, ptableid *storagestructuredstorage.JET_TABLEID) int32 {
+	r1, _, _ := syscall.SyscallN(procJetOpenTable.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pvParameters)), uintptr(cbParameters), uintptr(grbit), uintptr(unsafe.Pointer(ptableid)))
 	return int32(r1)
 }
 
@@ -1393,13 +1456,6 @@ func JetOpenFileW(szFileName *uint16, phfFile *storagestructuredstorage.JET_HAND
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopentable-function
 func JetOpenTableA(sesid JET_SESID, dbid uint32, szTableName *int8, pvParameters unsafe.Pointer, cbParameters uint32, grbit uint32, ptableid *storagestructuredstorage.JET_TABLEID) int32 {
 	r1, _, _ := syscall.SyscallN(procJetOpenTableA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pvParameters)), uintptr(cbParameters), uintptr(grbit), uintptr(unsafe.Pointer(ptableid)))
-	return int32(r1)
-}
-
-// JetOpenTableW calls ESENT!JetOpenTableW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopentable-function
-func JetOpenTableW(sesid JET_SESID, dbid uint32, szTableName *uint16, pvParameters unsafe.Pointer, cbParameters uint32, grbit uint32, ptableid *storagestructuredstorage.JET_TABLEID) int32 {
-	r1, _, _ := syscall.SyscallN(procJetOpenTableW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pvParameters)), uintptr(cbParameters), uintptr(grbit), uintptr(unsafe.Pointer(ptableid)))
 	return int32(r1)
 }
 
@@ -1447,8 +1503,16 @@ func JetPrepareUpdate(sesid JET_SESID, tableid storagestructuredstorage.JET_TABL
 
 // JetPrereadIndexRanges calls ESENT!JetPrereadIndexRanges.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetprereadindexranges-function
-func JetPrereadIndexRanges(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, rgIndexRanges *JET_INDEX_RANGE, cIndexRanges uint32, pcRangesPreread *uint32, rgcolumnidPreread *uint32, ccolumnidPreread uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetPrereadIndexRanges.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(rgIndexRanges)), uintptr(cIndexRanges), uintptr(unsafe.Pointer(pcRangesPreread)), uintptr(unsafe.Pointer(rgcolumnidPreread)), uintptr(ccolumnidPreread), uintptr(grbit))
+func JetPrereadIndexRanges(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, rgIndexRanges []JET_INDEX_RANGE, pcRangesPreread *uint32, rgcolumnidPreread []uint32, grbit uint32) int32 {
+	var _rgIndexRanges *JET_INDEX_RANGE
+	if len(rgIndexRanges) > 0 {
+		_rgIndexRanges = &rgIndexRanges[0]
+	}
+	var _rgcolumnidPreread *uint32
+	if len(rgcolumnidPreread) > 0 {
+		_rgcolumnidPreread = &rgcolumnidPreread[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetPrereadIndexRanges.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_rgIndexRanges)), uintptr(len(rgIndexRanges)), uintptr(unsafe.Pointer(pcRangesPreread)), uintptr(unsafe.Pointer(_rgcolumnidPreread)), uintptr(len(rgcolumnidPreread)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1480,15 +1544,22 @@ func JetRegisterCallback(sesid JET_SESID, tableid storagestructuredstorage.JET_T
 	return int32(r1)
 }
 
+// JetRenameColumn calls ESENT!JetRenameColumnW.
+func JetRenameColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szName *uint16, szNameNew *uint16, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetRenameColumn.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(szNameNew)), uintptr(grbit))
+	return int32(r1)
+}
+
 // JetRenameColumnA calls ESENT!JetRenameColumnA.
 func JetRenameColumnA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szName *int8, szNameNew *int8, grbit uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetRenameColumnA.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(szNameNew)), uintptr(grbit))
 	return int32(r1)
 }
 
-// JetRenameColumnW calls ESENT!JetRenameColumnW.
-func JetRenameColumnW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szName *uint16, szNameNew *uint16, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetRenameColumnW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(szNameNew)), uintptr(grbit))
+// JetRenameTable calls ESENT!JetRenameTableW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrenametable-function
+func JetRenameTable(sesid JET_SESID, dbid uint32, szName *uint16, szNameNew *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procJetRenameTable.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(szNameNew)))
 	return int32(r1)
 }
 
@@ -1496,13 +1567,6 @@ func JetRenameColumnW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABL
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrenametable-function
 func JetRenameTableA(sesid JET_SESID, dbid uint32, szName *int8, szNameNew *int8) int32 {
 	r1, _, _ := syscall.SyscallN(procJetRenameTableA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(szNameNew)))
-	return int32(r1)
-}
-
-// JetRenameTableW calls ESENT!JetRenameTableW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrenametable-function
-func JetRenameTableW(sesid JET_SESID, dbid uint32, szName *uint16, szNameNew *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procJetRenameTableW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(szNameNew)))
 	return int32(r1)
 }
 
@@ -1527,17 +1591,24 @@ func JetResizeDatabase(sesid JET_SESID, dbid uint32, cpgTarget uint32, pcpgActua
 	return int32(r1)
 }
 
+// JetRestore calls ESENT!JetRestoreW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrestore-function
+func JetRestore(szSource *uint16, pfn JET_PFNSTATUS) int32 {
+	r1, _, _ := syscall.SyscallN(procJetRestore.Addr(), uintptr(unsafe.Pointer(szSource)), uintptr(pfn))
+	return int32(r1)
+}
+
+// JetRestore2 calls ESENT!JetRestore2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrestore2-function
+func JetRestore2(sz *uint16, szDest *uint16, pfn JET_PFNSTATUS) int32 {
+	r1, _, _ := syscall.SyscallN(procJetRestore2.Addr(), uintptr(unsafe.Pointer(sz)), uintptr(unsafe.Pointer(szDest)), uintptr(pfn))
+	return int32(r1)
+}
+
 // JetRestore2A calls ESENT!JetRestore2A.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrestore2-function
 func JetRestore2A(sz *int8, szDest *int8, pfn JET_PFNSTATUS) int32 {
 	r1, _, _ := syscall.SyscallN(procJetRestore2A.Addr(), uintptr(unsafe.Pointer(sz)), uintptr(unsafe.Pointer(szDest)), uintptr(pfn))
-	return int32(r1)
-}
-
-// JetRestore2W calls ESENT!JetRestore2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrestore2-function
-func JetRestore2W(sz *uint16, szDest *uint16, pfn JET_PFNSTATUS) int32 {
-	r1, _, _ := syscall.SyscallN(procJetRestore2W.Addr(), uintptr(unsafe.Pointer(sz)), uintptr(unsafe.Pointer(szDest)), uintptr(pfn))
 	return int32(r1)
 }
 
@@ -1548,24 +1619,17 @@ func JetRestoreA(szSource *int8, pfn JET_PFNSTATUS) int32 {
 	return int32(r1)
 }
 
+// JetRestoreInstance calls ESENT!JetRestoreInstanceW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrestoreinstance-function
+func JetRestoreInstance(instance JET_INSTANCE, sz *uint16, szDest *uint16, pfn JET_PFNSTATUS) int32 {
+	r1, _, _ := syscall.SyscallN(procJetRestoreInstance.Addr(), uintptr(instance), uintptr(unsafe.Pointer(sz)), uintptr(unsafe.Pointer(szDest)), uintptr(pfn))
+	return int32(r1)
+}
+
 // JetRestoreInstanceA calls ESENT!JetRestoreInstanceA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrestoreinstance-function
 func JetRestoreInstanceA(instance JET_INSTANCE, sz *int8, szDest *int8, pfn JET_PFNSTATUS) int32 {
 	r1, _, _ := syscall.SyscallN(procJetRestoreInstanceA.Addr(), uintptr(instance), uintptr(unsafe.Pointer(sz)), uintptr(unsafe.Pointer(szDest)), uintptr(pfn))
-	return int32(r1)
-}
-
-// JetRestoreInstanceW calls ESENT!JetRestoreInstanceW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrestoreinstance-function
-func JetRestoreInstanceW(instance JET_INSTANCE, sz *uint16, szDest *uint16, pfn JET_PFNSTATUS) int32 {
-	r1, _, _ := syscall.SyscallN(procJetRestoreInstanceW.Addr(), uintptr(instance), uintptr(unsafe.Pointer(sz)), uintptr(unsafe.Pointer(szDest)), uintptr(pfn))
-	return int32(r1)
-}
-
-// JetRestoreW calls ESENT!JetRestoreW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetrestore-function
-func JetRestoreW(szSource *uint16, pfn JET_PFNSTATUS) int32 {
-	r1, _, _ := syscall.SyscallN(procJetRestoreW.Addr(), uintptr(unsafe.Pointer(szSource)), uintptr(pfn))
 	return int32(r1)
 }
 
@@ -1578,8 +1642,12 @@ func JetRetrieveColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TAB
 
 // JetRetrieveColumns calls ESENT!JetRetrieveColumns.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetretrievecolumns-function
-func JetRetrieveColumns(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pretrievecolumn *JET_RETRIEVECOLUMN, cretrievecolumn uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetRetrieveColumns.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pretrievecolumn)), uintptr(cretrievecolumn))
+func JetRetrieveColumns(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pretrievecolumn []JET_RETRIEVECOLUMN) int32 {
+	var _pretrievecolumn *JET_RETRIEVECOLUMN
+	if len(pretrievecolumn) > 0 {
+		_pretrievecolumn = &pretrievecolumn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetRetrieveColumns.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pretrievecolumn)), uintptr(len(pretrievecolumn)))
 	return int32(r1)
 }
 
@@ -1611,22 +1679,40 @@ func JetSetColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID,
 	return int32(r1)
 }
 
+// JetSetColumnDefaultValue calls ESENT!JetSetColumnDefaultValueW.
+func JetSetColumnDefaultValue(sesid JET_SESID, dbid uint32, szTableName *uint16, szColumnName *uint16, pvData unsafe.Pointer, cbData uint32, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetSetColumnDefaultValue.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(grbit))
+	return int32(r1)
+}
+
 // JetSetColumnDefaultValueA calls ESENT!JetSetColumnDefaultValueA.
 func JetSetColumnDefaultValueA(sesid JET_SESID, dbid uint32, szTableName *int8, szColumnName *int8, pvData unsafe.Pointer, cbData uint32, grbit uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetSetColumnDefaultValueA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(grbit))
 	return int32(r1)
 }
 
-// JetSetColumnDefaultValueW calls ESENT!JetSetColumnDefaultValueW.
-func JetSetColumnDefaultValueW(sesid JET_SESID, dbid uint32, szTableName *uint16, szColumnName *uint16, pvData unsafe.Pointer, cbData uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetColumnDefaultValueW.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(grbit))
+// JetSetColumns calls ESENT!JetSetColumns.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcolumns-function
+func JetSetColumns(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, psetcolumn []JET_SETCOLUMN) int32 {
+	var _psetcolumn *JET_SETCOLUMN
+	if len(psetcolumn) > 0 {
+		_psetcolumn = &psetcolumn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetSetColumns.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_psetcolumn)), uintptr(len(psetcolumn)))
 	return int32(r1)
 }
 
-// JetSetColumns calls ESENT!JetSetColumns.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcolumns-function
-func JetSetColumns(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, psetcolumn *JET_SETCOLUMN, csetcolumn uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetColumns.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(psetcolumn)), uintptr(csetcolumn))
+// JetSetCurrentIndex calls ESENT!JetSetCurrentIndexW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex-function
+func JetSetCurrentIndex(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procJetSetCurrentIndex.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)))
+	return int32(r1)
+}
+
+// JetSetCurrentIndex2 calls ESENT!JetSetCurrentIndex2W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex2-function
+func JetSetCurrentIndex2(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, grbit uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetSetCurrentIndex2.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1637,10 +1723,10 @@ func JetSetCurrentIndex2A(sesid JET_SESID, tableid storagestructuredstorage.JET_
 	return int32(r1)
 }
 
-// JetSetCurrentIndex2W calls ESENT!JetSetCurrentIndex2W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex2-function
-func JetSetCurrentIndex2W(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetCurrentIndex2W.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(grbit))
+// JetSetCurrentIndex3 calls ESENT!JetSetCurrentIndex3W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex3-function
+func JetSetCurrentIndex3(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, grbit uint32, itagSequence uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetSetCurrentIndex3.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(grbit), uintptr(itagSequence))
 	return int32(r1)
 }
 
@@ -1651,10 +1737,10 @@ func JetSetCurrentIndex3A(sesid JET_SESID, tableid storagestructuredstorage.JET_
 	return int32(r1)
 }
 
-// JetSetCurrentIndex3W calls ESENT!JetSetCurrentIndex3W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex3-function
-func JetSetCurrentIndex3W(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, grbit uint32, itagSequence uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetCurrentIndex3W.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(grbit), uintptr(itagSequence))
+// JetSetCurrentIndex4 calls ESENT!JetSetCurrentIndex4W.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex4-function
+func JetSetCurrentIndex4(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, pindexid *JET_INDEXID, grbit uint32, itagSequence uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetSetCurrentIndex4.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pindexid)), uintptr(grbit), uintptr(itagSequence))
 	return int32(r1)
 }
 
@@ -1665,13 +1751,6 @@ func JetSetCurrentIndex4A(sesid JET_SESID, tableid storagestructuredstorage.JET_
 	return int32(r1)
 }
 
-// JetSetCurrentIndex4W calls ESENT!JetSetCurrentIndex4W.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex4-function
-func JetSetCurrentIndex4W(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, pindexid *JET_INDEXID, grbit uint32, itagSequence uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetCurrentIndex4W.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pindexid)), uintptr(grbit), uintptr(itagSequence))
-	return int32(r1)
-}
-
 // JetSetCurrentIndexA calls ESENT!JetSetCurrentIndexA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex-function
 func JetSetCurrentIndexA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *int8) int32 {
@@ -1679,17 +1758,21 @@ func JetSetCurrentIndexA(sesid JET_SESID, tableid storagestructuredstorage.JET_T
 	return int32(r1)
 }
 
-// JetSetCurrentIndexW calls ESENT!JetSetCurrentIndexW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcurrentindex-function
-func JetSetCurrentIndexW(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetCurrentIndexW.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)))
+// JetSetCursorFilter calls ESENT!JetSetCursorFilter.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcursorfilter-function
+func JetSetCursorFilter(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, rgColumnFilters []JET_INDEX_COLUMN, grbit uint32) int32 {
+	var _rgColumnFilters *JET_INDEX_COLUMN
+	if len(rgColumnFilters) > 0 {
+		_rgColumnFilters = &rgColumnFilters[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetSetCursorFilter.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_rgColumnFilters)), uintptr(len(rgColumnFilters)), uintptr(grbit))
 	return int32(r1)
 }
 
-// JetSetCursorFilter calls ESENT!JetSetCursorFilter.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcursorfilter-function
-func JetSetCursorFilter(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, rgColumnFilters *JET_INDEX_COLUMN, cColumnFilters uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetCursorFilter.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(rgColumnFilters)), uintptr(cColumnFilters), uintptr(grbit))
+// JetSetDatabaseSize calls ESENT!JetSetDatabaseSizeW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetdatabasesize-function
+func JetSetDatabaseSize(sesid JET_SESID, szDatabaseName *uint16, cpg uint32, pcpgReal *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procJetSetDatabaseSize.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(cpg), uintptr(unsafe.Pointer(pcpgReal)))
 	return int32(r1)
 }
 
@@ -1697,13 +1780,6 @@ func JetSetCursorFilter(sesid JET_SESID, tableid storagestructuredstorage.JET_TA
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetdatabasesize-function
 func JetSetDatabaseSizeA(sesid JET_SESID, szDatabaseName *int8, cpg uint32, pcpgReal *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procJetSetDatabaseSizeA.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(cpg), uintptr(unsafe.Pointer(pcpgReal)))
-	return int32(r1)
-}
-
-// JetSetDatabaseSizeW calls ESENT!JetSetDatabaseSizeW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetdatabasesize-function
-func JetSetDatabaseSizeW(sesid JET_SESID, szDatabaseName *uint16, cpg uint32, pcpgReal *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetDatabaseSizeW.Addr(), uintptr(sesid), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(cpg), uintptr(unsafe.Pointer(pcpgReal)))
 	return int32(r1)
 }
 
@@ -1735,17 +1811,17 @@ func JetSetSessionParameter(sesid JET_SESID, sesparamid uint32, pvParam unsafe.P
 	return int32(r1)
 }
 
+// JetSetSystemParameter calls ESENT!JetSetSystemParameterW.
+// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetsystemparameter-function
+func JetSetSystemParameter(pinstance *JET_INSTANCE, sesid JET_SESID, paramid uint32, lParam storagestructuredstorage.JET_API_PTR, szParam *uint16) int32 {
+	r1, _, _ := syscall.SyscallN(procJetSetSystemParameter.Addr(), uintptr(unsafe.Pointer(pinstance)), uintptr(sesid), uintptr(paramid), uintptr(lParam), uintptr(unsafe.Pointer(szParam)))
+	return int32(r1)
+}
+
 // JetSetSystemParameterA calls ESENT!JetSetSystemParameterA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetsystemparameter-function
 func JetSetSystemParameterA(pinstance *JET_INSTANCE, sesid JET_SESID, paramid uint32, lParam storagestructuredstorage.JET_API_PTR, szParam *int8) int32 {
 	r1, _, _ := syscall.SyscallN(procJetSetSystemParameterA.Addr(), uintptr(unsafe.Pointer(pinstance)), uintptr(sesid), uintptr(paramid), uintptr(lParam), uintptr(unsafe.Pointer(szParam)))
-	return int32(r1)
-}
-
-// JetSetSystemParameterW calls ESENT!JetSetSystemParameterW.
-// https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetsystemparameter-function
-func JetSetSystemParameterW(pinstance *JET_INSTANCE, sesid JET_SESID, paramid uint32, lParam storagestructuredstorage.JET_API_PTR, szParam *uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetSystemParameterW.Addr(), uintptr(unsafe.Pointer(pinstance)), uintptr(sesid), uintptr(paramid), uintptr(lParam), uintptr(unsafe.Pointer(szParam)))
 	return int32(r1)
 }
 

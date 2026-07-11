@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -24,15 +23,15 @@ var (
 )
 
 // GetExtensionVersion calls RpcProxy!GetExtensionVersion.
-func GetExtensionVersion(pVer *HSE_VERSION_INFO) foundation.BOOL {
+func GetExtensionVersion(pVer *HSE_VERSION_INFO) bool {
 	r1, _, _ := syscall.SyscallN(procGetExtensionVersion.Addr(), uintptr(unsafe.Pointer(pVer)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetFilterVersion calls RpcProxy!GetFilterVersion.
-func GetFilterVersion(pVer *HTTP_FILTER_VERSION) foundation.BOOL {
+func GetFilterVersion(pVer *HTTP_FILTER_VERSION) bool {
 	r1, _, _ := syscall.SyscallN(procGetFilterVersion.Addr(), uintptr(unsafe.Pointer(pVer)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // HttpExtensionProc calls RpcProxy!HttpExtensionProc.

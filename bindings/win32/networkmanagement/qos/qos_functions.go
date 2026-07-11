@@ -39,106 +39,106 @@ var (
 	procTcDeregisterClient      = modTRAFFIC.NewProc("TcDeregisterClient")
 	procTcEnumerateFlows        = modTRAFFIC.NewProc("TcEnumerateFlows")
 	procTcEnumerateInterfaces   = modTRAFFIC.NewProc("TcEnumerateInterfaces")
+	procTcGetFlowName           = modTRAFFIC.NewProc("TcGetFlowNameW")
 	procTcGetFlowNameA          = modTRAFFIC.NewProc("TcGetFlowNameA")
-	procTcGetFlowNameW          = modTRAFFIC.NewProc("TcGetFlowNameW")
 	procTcModifyFlow            = modTRAFFIC.NewProc("TcModifyFlow")
+	procTcOpenInterface         = modTRAFFIC.NewProc("TcOpenInterfaceW")
 	procTcOpenInterfaceA        = modTRAFFIC.NewProc("TcOpenInterfaceA")
-	procTcOpenInterfaceW        = modTRAFFIC.NewProc("TcOpenInterfaceW")
+	procTcQueryFlow             = modTRAFFIC.NewProc("TcQueryFlowW")
 	procTcQueryFlowA            = modTRAFFIC.NewProc("TcQueryFlowA")
-	procTcQueryFlowW            = modTRAFFIC.NewProc("TcQueryFlowW")
 	procTcQueryInterface        = modTRAFFIC.NewProc("TcQueryInterface")
 	procTcRegisterClient        = modTRAFFIC.NewProc("TcRegisterClient")
+	procTcSetFlow               = modTRAFFIC.NewProc("TcSetFlowW")
 	procTcSetFlowA              = modTRAFFIC.NewProc("TcSetFlowA")
-	procTcSetFlowW              = modTRAFFIC.NewProc("TcSetFlowW")
 	procTcSetInterface          = modTRAFFIC.NewProc("TcSetInterface")
 )
 
 // QOSAddSocketToFlow calls qwave!QOSAddSocketToFlow.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qosaddsockettoflow
 // Minimum OS: windows6.0.6000.
-func QOSAddSocketToFlow(QOSHandle foundation.HANDLE, Socket networkingwinsock.SOCKET, DestAddr *networkingwinsock.SOCKADDR, TrafficType QOS_TRAFFIC_TYPE, Flags uint32, FlowId *uint32) foundation.BOOL {
+func QOSAddSocketToFlow(QOSHandle foundation.HANDLE, Socket networkingwinsock.SOCKET, DestAddr *networkingwinsock.SOCKADDR, TrafficType QOS_TRAFFIC_TYPE, Flags uint32, FlowId *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procQOSAddSocketToFlow.Addr(), uintptr(QOSHandle), uintptr(Socket), uintptr(unsafe.Pointer(DestAddr)), uintptr(TrafficType), uintptr(Flags), uintptr(unsafe.Pointer(FlowId)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QOSCancel calls qwave!QOSCancel.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qoscancel
 // Minimum OS: windows6.0.6000.
-func QOSCancel(QOSHandle foundation.HANDLE, Overlapped *systemio.OVERLAPPED) foundation.BOOL {
+func QOSCancel(QOSHandle foundation.HANDLE, Overlapped *systemio.OVERLAPPED) bool {
 	r1, _, _ := syscall.SyscallN(procQOSCancel.Addr(), uintptr(QOSHandle), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QOSCloseHandle calls qwave!QOSCloseHandle.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qosclosehandle
 // Minimum OS: windows6.0.6000.
-func QOSCloseHandle(QOSHandle foundation.HANDLE) foundation.BOOL {
+func QOSCloseHandle(QOSHandle foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procQOSCloseHandle.Addr(), uintptr(QOSHandle))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QOSCreateHandle calls qwave!QOSCreateHandle.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qoscreatehandle
 // Minimum OS: windows6.0.6000.
-func QOSCreateHandle(Version *QOS_VERSION, QOSHandle *foundation.HANDLE) foundation.BOOL {
+func QOSCreateHandle(Version *QOS_VERSION, QOSHandle *foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procQOSCreateHandle.Addr(), uintptr(unsafe.Pointer(Version)), uintptr(unsafe.Pointer(QOSHandle)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QOSEnumerateFlows calls qwave!QOSEnumerateFlows.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qosenumerateflows
 // Minimum OS: windows6.0.6000.
-func QOSEnumerateFlows(QOSHandle foundation.HANDLE, Size *uint32, Buffer unsafe.Pointer) foundation.BOOL {
+func QOSEnumerateFlows(QOSHandle foundation.HANDLE, Size *uint32, Buffer unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procQOSEnumerateFlows.Addr(), uintptr(QOSHandle), uintptr(unsafe.Pointer(Size)), uintptr(unsafe.Pointer(Buffer)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QOSNotifyFlow calls qwave!QOSNotifyFlow.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qosnotifyflow
 // Minimum OS: windows6.0.6000.
-func QOSNotifyFlow(QOSHandle foundation.HANDLE, FlowId uint32, Operation QOS_NOTIFY_FLOW, Size *uint32, Buffer unsafe.Pointer, Flags uint32, Overlapped *systemio.OVERLAPPED) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procQOSNotifyFlow.Addr(), uintptr(QOSHandle), uintptr(FlowId), uintptr(Operation), uintptr(unsafe.Pointer(Size)), uintptr(unsafe.Pointer(Buffer)), uintptr(Flags), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.BOOL(r1)
+func QOSNotifyFlow(QOSHandle foundation.HANDLE, FlowId uint32, Operation QOS_NOTIFY_FLOW, Size *uint32, Buffer unsafe.Pointer, Overlapped *systemio.OVERLAPPED) bool {
+	r1, _, _ := syscall.SyscallN(procQOSNotifyFlow.Addr(), uintptr(QOSHandle), uintptr(FlowId), uintptr(Operation), uintptr(unsafe.Pointer(Size)), uintptr(unsafe.Pointer(Buffer)), 0, uintptr(unsafe.Pointer(Overlapped)))
+	return r1 != 0
 }
 
 // QOSQueryFlow calls qwave!QOSQueryFlow.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qosqueryflow
 // Minimum OS: windows6.0.6000.
-func QOSQueryFlow(QOSHandle foundation.HANDLE, FlowId uint32, Operation QOS_QUERY_FLOW, Size *uint32, Buffer unsafe.Pointer, Flags uint32, Overlapped *systemio.OVERLAPPED) foundation.BOOL {
+func QOSQueryFlow(QOSHandle foundation.HANDLE, FlowId uint32, Operation QOS_QUERY_FLOW, Size *uint32, Buffer unsafe.Pointer, Flags uint32, Overlapped *systemio.OVERLAPPED) bool {
 	r1, _, _ := syscall.SyscallN(procQOSQueryFlow.Addr(), uintptr(QOSHandle), uintptr(FlowId), uintptr(Operation), uintptr(unsafe.Pointer(Size)), uintptr(unsafe.Pointer(Buffer)), uintptr(Flags), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QOSRemoveSocketFromFlow calls qwave!QOSRemoveSocketFromFlow.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qosremovesocketfromflow
 // Minimum OS: windows6.0.6000.
-func QOSRemoveSocketFromFlow(QOSHandle foundation.HANDLE, Socket networkingwinsock.SOCKET, FlowId uint32, Flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procQOSRemoveSocketFromFlow.Addr(), uintptr(QOSHandle), uintptr(Socket), uintptr(FlowId), uintptr(Flags))
-	return foundation.BOOL(r1)
+func QOSRemoveSocketFromFlow(QOSHandle foundation.HANDLE, Socket networkingwinsock.SOCKET, FlowId uint32) bool {
+	r1, _, _ := syscall.SyscallN(procQOSRemoveSocketFromFlow.Addr(), uintptr(QOSHandle), uintptr(Socket), uintptr(FlowId), 0)
+	return r1 != 0
 }
 
 // QOSSetFlow calls qwave!QOSSetFlow.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qossetflow
 // Minimum OS: windows6.0.6000.
-func QOSSetFlow(QOSHandle foundation.HANDLE, FlowId uint32, Operation QOS_SET_FLOW, Size uint32, Buffer unsafe.Pointer, Flags uint32, Overlapped *systemio.OVERLAPPED) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procQOSSetFlow.Addr(), uintptr(QOSHandle), uintptr(FlowId), uintptr(Operation), uintptr(Size), uintptr(unsafe.Pointer(Buffer)), uintptr(Flags), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.BOOL(r1)
+func QOSSetFlow(QOSHandle foundation.HANDLE, FlowId uint32, Operation QOS_SET_FLOW, Size uint32, Buffer unsafe.Pointer, Overlapped *systemio.OVERLAPPED) bool {
+	r1, _, _ := syscall.SyscallN(procQOSSetFlow.Addr(), uintptr(QOSHandle), uintptr(FlowId), uintptr(Operation), uintptr(Size), uintptr(unsafe.Pointer(Buffer)), 0, uintptr(unsafe.Pointer(Overlapped)))
+	return r1 != 0
 }
 
 // QOSStartTrackingClient calls qwave!QOSStartTrackingClient.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qosstarttrackingclient
 // Minimum OS: windows6.0.6000.
-func QOSStartTrackingClient(QOSHandle foundation.HANDLE, DestAddr *networkingwinsock.SOCKADDR, Flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procQOSStartTrackingClient.Addr(), uintptr(QOSHandle), uintptr(unsafe.Pointer(DestAddr)), uintptr(Flags))
-	return foundation.BOOL(r1)
+func QOSStartTrackingClient(QOSHandle foundation.HANDLE, DestAddr *networkingwinsock.SOCKADDR) bool {
+	r1, _, _ := syscall.SyscallN(procQOSStartTrackingClient.Addr(), uintptr(QOSHandle), uintptr(unsafe.Pointer(DestAddr)), 0)
+	return r1 != 0
 }
 
 // QOSStopTrackingClient calls qwave!QOSStopTrackingClient.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qosstoptrackingclient
 // Minimum OS: windows6.0.6000.
-func QOSStopTrackingClient(QOSHandle foundation.HANDLE, DestAddr *networkingwinsock.SOCKADDR, Flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procQOSStopTrackingClient.Addr(), uintptr(QOSHandle), uintptr(unsafe.Pointer(DestAddr)), uintptr(Flags))
-	return foundation.BOOL(r1)
+func QOSStopTrackingClient(QOSHandle foundation.HANDLE, DestAddr *networkingwinsock.SOCKADDR) bool {
+	r1, _, _ := syscall.SyscallN(procQOSStopTrackingClient.Addr(), uintptr(QOSHandle), uintptr(unsafe.Pointer(DestAddr)), 0)
+	return r1 != 0
 }
 
 // TcAddFilter calls TRAFFIC!TcAddFilter.
@@ -205,19 +205,19 @@ func TcEnumerateInterfaces(ClientHandle foundation.HANDLE, pBufferSize *uint32, 
 	return uint32(r1)
 }
 
+// TcGetFlowName calls TRAFFIC!TcGetFlowNameW.
+// https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcgetflownamew
+// Minimum OS: windows5.0.
+func TcGetFlowName(FlowHandle foundation.HANDLE, StrSize uint32, pFlowName foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procTcGetFlowName.Addr(), uintptr(FlowHandle), uintptr(StrSize), uintptr(unsafe.Pointer(pFlowName)))
+	return uint32(r1)
+}
+
 // TcGetFlowNameA calls TRAFFIC!TcGetFlowNameA.
 // https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcgetflownamea
 // Minimum OS: windows5.0.
 func TcGetFlowNameA(FlowHandle foundation.HANDLE, StrSize uint32, pFlowName foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procTcGetFlowNameA.Addr(), uintptr(FlowHandle), uintptr(StrSize), uintptr(unsafe.Pointer(pFlowName)))
-	return uint32(r1)
-}
-
-// TcGetFlowNameW calls TRAFFIC!TcGetFlowNameW.
-// https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcgetflownamew
-// Minimum OS: windows5.0.
-func TcGetFlowNameW(FlowHandle foundation.HANDLE, StrSize uint32, pFlowName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procTcGetFlowNameW.Addr(), uintptr(FlowHandle), uintptr(StrSize), uintptr(unsafe.Pointer(pFlowName)))
 	return uint32(r1)
 }
 
@@ -229,6 +229,15 @@ func TcModifyFlow(FlowHandle foundation.HANDLE, pGenericFlow *TC_GEN_FLOW) uint3
 	return uint32(r1)
 }
 
+// TcOpenInterface calls TRAFFIC!TcOpenInterfaceW.
+// https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcopeninterfacew
+// Minimum OS: windows5.0.
+func TcOpenInterface(pInterfaceName string, ClientHandle foundation.HANDLE, ClIfcCtx foundation.HANDLE, pIfcHandle *foundation.HANDLE) uint32 {
+	_pInterfaceName := win32.UTF16Ptr(pInterfaceName)
+	r1, _, _ := syscall.SyscallN(procTcOpenInterface.Addr(), uintptr(unsafe.Pointer(_pInterfaceName)), uintptr(ClientHandle), uintptr(ClIfcCtx), uintptr(unsafe.Pointer(pIfcHandle)))
+	return uint32(r1)
+}
+
 // TcOpenInterfaceA calls TRAFFIC!TcOpenInterfaceA.
 // https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcopeninterfacea
 // Minimum OS: windows5.0.
@@ -237,11 +246,12 @@ func TcOpenInterfaceA(pInterfaceName foundation.PSTR, ClientHandle foundation.HA
 	return uint32(r1)
 }
 
-// TcOpenInterfaceW calls TRAFFIC!TcOpenInterfaceW.
-// https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcopeninterfacew
+// TcQueryFlow calls TRAFFIC!TcQueryFlowW.
+// https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcqueryfloww
 // Minimum OS: windows5.0.
-func TcOpenInterfaceW(pInterfaceName foundation.PWSTR, ClientHandle foundation.HANDLE, ClIfcCtx foundation.HANDLE, pIfcHandle *foundation.HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procTcOpenInterfaceW.Addr(), uintptr(unsafe.Pointer(pInterfaceName)), uintptr(ClientHandle), uintptr(ClIfcCtx), uintptr(unsafe.Pointer(pIfcHandle)))
+func TcQueryFlow(pFlowName string, pGuidParam *win32.GUID, pBufferSize *uint32, Buffer unsafe.Pointer) uint32 {
+	_pFlowName := win32.UTF16Ptr(pFlowName)
+	r1, _, _ := syscall.SyscallN(procTcQueryFlow.Addr(), uintptr(unsafe.Pointer(_pFlowName)), uintptr(unsafe.Pointer(pGuidParam)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
@@ -250,14 +260,6 @@ func TcOpenInterfaceW(pInterfaceName foundation.PWSTR, ClientHandle foundation.H
 // Minimum OS: windows5.0.
 func TcQueryFlowA(pFlowName foundation.PSTR, pGuidParam *win32.GUID, pBufferSize *uint32, Buffer unsafe.Pointer) uint32 {
 	r1, _, _ := syscall.SyscallN(procTcQueryFlowA.Addr(), uintptr(unsafe.Pointer(pFlowName)), uintptr(unsafe.Pointer(pGuidParam)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(Buffer)))
-	return uint32(r1)
-}
-
-// TcQueryFlowW calls TRAFFIC!TcQueryFlowW.
-// https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcqueryfloww
-// Minimum OS: windows5.0.
-func TcQueryFlowW(pFlowName foundation.PWSTR, pGuidParam *win32.GUID, pBufferSize *uint32, Buffer unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procTcQueryFlowW.Addr(), uintptr(unsafe.Pointer(pFlowName)), uintptr(unsafe.Pointer(pGuidParam)), uintptr(unsafe.Pointer(pBufferSize)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
@@ -277,19 +279,20 @@ func TcRegisterClient(TciVersion uint32, ClRegCtx foundation.HANDLE, ClientHandl
 	return uint32(r1)
 }
 
+// TcSetFlow calls TRAFFIC!TcSetFlowW.
+// https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcsetfloww
+// Minimum OS: windows5.0.
+func TcSetFlow(pFlowName string, pGuidParam *win32.GUID, BufferSize uint32, Buffer unsafe.Pointer) uint32 {
+	_pFlowName := win32.UTF16Ptr(pFlowName)
+	r1, _, _ := syscall.SyscallN(procTcSetFlow.Addr(), uintptr(unsafe.Pointer(_pFlowName)), uintptr(unsafe.Pointer(pGuidParam)), uintptr(BufferSize), uintptr(unsafe.Pointer(Buffer)))
+	return uint32(r1)
+}
+
 // TcSetFlowA calls TRAFFIC!TcSetFlowA.
 // https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcsetflowa
 // Minimum OS: windows5.0.
 func TcSetFlowA(pFlowName foundation.PSTR, pGuidParam *win32.GUID, BufferSize uint32, Buffer unsafe.Pointer) uint32 {
 	r1, _, _ := syscall.SyscallN(procTcSetFlowA.Addr(), uintptr(unsafe.Pointer(pFlowName)), uintptr(unsafe.Pointer(pGuidParam)), uintptr(BufferSize), uintptr(unsafe.Pointer(Buffer)))
-	return uint32(r1)
-}
-
-// TcSetFlowW calls TRAFFIC!TcSetFlowW.
-// https://learn.microsoft.com/windows/win32/api/traffic/nf-traffic-tcsetfloww
-// Minimum OS: windows5.0.
-func TcSetFlowW(pFlowName foundation.PWSTR, pGuidParam *win32.GUID, BufferSize uint32, Buffer unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procTcSetFlowW.Addr(), uintptr(unsafe.Pointer(pFlowName)), uintptr(unsafe.Pointer(pGuidParam)), uintptr(BufferSize), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 

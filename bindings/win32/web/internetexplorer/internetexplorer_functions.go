@@ -83,325 +83,368 @@ var (
 )
 
 // ComputeInvCMAP calls ImgUtil!ComputeInvCMAP.
-func ComputeInvCMAP(pRGBColors *graphicsgdi.RGBQUAD, nColors uint32, pInvTable *byte, cbTable uint32) foundation.HRESULT {
+func ComputeInvCMAP(pRGBColors *graphicsgdi.RGBQUAD, nColors uint32, pInvTable *byte, cbTable uint32) error {
 	r1, _, _ := syscall.SyscallN(procComputeInvCMAP.Addr(), uintptr(unsafe.Pointer(pRGBColors)), uintptr(nColors), uintptr(unsafe.Pointer(pInvTable)), uintptr(cbTable))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDDrawSurfaceOnDIB calls ImgUtil!CreateDDrawSurfaceOnDIB.
-func CreateDDrawSurfaceOnDIB(hbmDib graphicsgdi.HBITMAP, ppSurface **graphicsdirectdraw.IDirectDrawSurface) foundation.HRESULT {
+func CreateDDrawSurfaceOnDIB(hbmDib graphicsgdi.HBITMAP, ppSurface **graphicsdirectdraw.IDirectDrawSurface) error {
 	r1, _, _ := syscall.SyscallN(procCreateDDrawSurfaceOnDIB.Addr(), uintptr(hbmDib), uintptr(unsafe.Pointer(ppSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMIMEMap calls ImgUtil!CreateMIMEMap.
-func CreateMIMEMap(ppMap **IMapMIMEToCLSID) foundation.HRESULT {
+func CreateMIMEMap(ppMap **IMapMIMEToCLSID) error {
 	r1, _, _ := syscall.SyscallN(procCreateMIMEMap.Addr(), uintptr(unsafe.Pointer(ppMap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DecodeImage calls ImgUtil!DecodeImage.
-func DecodeImage(pStream *systemcom.IStream, pMap *IMapMIMEToCLSID, pEventSink *systemcom.IUnknown) foundation.HRESULT {
+func DecodeImage(pStream *systemcom.IStream, pMap *IMapMIMEToCLSID, pEventSink *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDecodeImage.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pMap)), uintptr(unsafe.Pointer(pEventSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DecodeImageEx calls ImgUtil!DecodeImageEx.
-func DecodeImageEx(pStream *systemcom.IStream, pMap *IMapMIMEToCLSID, pEventSink *systemcom.IUnknown, pszMIMETypeParam foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDecodeImageEx.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pMap)), uintptr(unsafe.Pointer(pEventSink)), uintptr(unsafe.Pointer(pszMIMETypeParam)))
-	return foundation.HRESULT(r1)
+func DecodeImageEx(pStream *systemcom.IStream, pMap *IMapMIMEToCLSID, pEventSink *systemcom.IUnknown, pszMIMETypeParam string) error {
+	_pszMIMETypeParam := win32.UTF16Ptr(pszMIMETypeParam)
+	r1, _, _ := syscall.SyscallN(procDecodeImageEx.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pMap)), uintptr(unsafe.Pointer(pEventSink)), uintptr(unsafe.Pointer(_pszMIMETypeParam)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DitherTo8 calls ImgUtil!DitherTo8.
-func DitherTo8(pDestBits *byte, nDestPitch int32, pSrcBits *byte, nSrcPitch int32, bfidSrc *win32.GUID, prgbDestColors *graphicsgdi.RGBQUAD, prgbSrcColors *graphicsgdi.RGBQUAD, pbDestInvMap *byte, x int32, y int32, cx int32, cy int32, lDestTrans int32, lSrcTrans int32) foundation.HRESULT {
+func DitherTo8(pDestBits *byte, nDestPitch int32, pSrcBits *byte, nSrcPitch int32, bfidSrc *win32.GUID, prgbDestColors *graphicsgdi.RGBQUAD, prgbSrcColors *graphicsgdi.RGBQUAD, pbDestInvMap *byte, x int32, y int32, cx int32, cy int32, lDestTrans int32, lSrcTrans int32) error {
 	r1, _, _ := syscall.SyscallN(procDitherTo8.Addr(), uintptr(unsafe.Pointer(pDestBits)), uintptr(nDestPitch), uintptr(unsafe.Pointer(pSrcBits)), uintptr(nSrcPitch), uintptr(unsafe.Pointer(bfidSrc)), uintptr(unsafe.Pointer(prgbDestColors)), uintptr(unsafe.Pointer(prgbSrcColors)), uintptr(unsafe.Pointer(pbDestInvMap)), uintptr(x), uintptr(y), uintptr(cx), uintptr(cy), uintptr(lDestTrans), uintptr(lSrcTrans))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxMIMEIDBytes calls ImgUtil!GetMaxMIMEIDBytes.
-func GetMaxMIMEIDBytes(pnMaxBytes *uint32) foundation.HRESULT {
+func GetMaxMIMEIDBytes(pnMaxBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetMaxMIMEIDBytes.Addr(), uintptr(unsafe.Pointer(pnMaxBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEAssociateThreadWithTab calls Ieframe!IEAssociateThreadWithTab.
-func IEAssociateThreadWithTab(dwTabThreadID uint32, dwAssociatedThreadID uint32) foundation.HRESULT {
+func IEAssociateThreadWithTab(dwTabThreadID uint32, dwAssociatedThreadID uint32) error {
 	r1, _, _ := syscall.SyscallN(procIEAssociateThreadWithTab.Addr(), uintptr(dwTabThreadID), uintptr(dwAssociatedThreadID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IECancelSaveFile calls Ieframe!IECancelSaveFile.
-func IECancelSaveFile(hState foundation.HANDLE) foundation.HRESULT {
+func IECancelSaveFile(hState foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procIECancelSaveFile.Addr(), uintptr(hState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IECreateDirectory calls Ieframe!IECreateDirectory.
-func IECreateDirectory(lpPathName foundation.PWSTR, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIECreateDirectory.Addr(), uintptr(unsafe.Pointer(lpPathName)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
-	return foundation.BOOL(r1)
+func IECreateDirectory(lpPathName string, lpSecurityAttributes *security.SECURITY_ATTRIBUTES) bool {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, _ := syscall.SyscallN(procIECreateDirectory.Addr(), uintptr(unsafe.Pointer(_lpPathName)), uintptr(unsafe.Pointer(lpSecurityAttributes)))
+	return r1 != 0
 }
 
 // IECreateFile calls Ieframe!IECreateFile.
-func IECreateFile(lpFileName foundation.PWSTR, dwDesiredAccess uint32, dwShareMode uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition uint32, dwFlagsAndAttributes uint32, hTemplateFile foundation.HANDLE) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procIECreateFile.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile))
+func IECreateFile(lpFileName string, dwDesiredAccess uint32, dwShareMode uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwCreationDisposition uint32, dwFlagsAndAttributes uint32, hTemplateFile foundation.HANDLE) foundation.HANDLE {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procIECreateFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwCreationDisposition), uintptr(dwFlagsAndAttributes), uintptr(hTemplateFile))
 	return foundation.HANDLE(r1)
 }
 
 // IEDeleteFile calls Ieframe!IEDeleteFile.
-func IEDeleteFile(lpFileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIEDeleteFile.Addr(), uintptr(unsafe.Pointer(lpFileName)))
-	return foundation.BOOL(r1)
+func IEDeleteFile(lpFileName string) bool {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procIEDeleteFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)))
+	return r1 != 0
 }
 
 // IEDisassociateThreadWithTab calls Ieframe!IEDisassociateThreadWithTab.
-func IEDisassociateThreadWithTab(dwTabThreadID uint32, dwAssociatedThreadID uint32) foundation.HRESULT {
+func IEDisassociateThreadWithTab(dwTabThreadID uint32, dwAssociatedThreadID uint32) error {
 	r1, _, _ := syscall.SyscallN(procIEDisassociateThreadWithTab.Addr(), uintptr(dwTabThreadID), uintptr(dwAssociatedThreadID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEFindFirstFile calls Ieframe!IEFindFirstFile.
-func IEFindFirstFile(lpFileName foundation.PWSTR, lpFindFileData *storagefilesystem.WIN32_FIND_DATAA) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procIEFindFirstFile.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(unsafe.Pointer(lpFindFileData)))
+func IEFindFirstFile(lpFileName string, lpFindFileData *storagefilesystem.WIN32_FIND_DATAA) foundation.HANDLE {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procIEFindFirstFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(lpFindFileData)))
 	return foundation.HANDLE(r1)
 }
 
 // IEGetFileAttributesEx calls Ieframe!IEGetFileAttributesEx.
-func IEGetFileAttributesEx(lpFileName foundation.PWSTR, fInfoLevelId storagefilesystem.GET_FILEEX_INFO_LEVELS, lpFileInformation unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIEGetFileAttributesEx.Addr(), uintptr(unsafe.Pointer(lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFileInformation)))
-	return foundation.BOOL(r1)
+func IEGetFileAttributesEx(lpFileName string, fInfoLevelId storagefilesystem.GET_FILEEX_INFO_LEVELS, lpFileInformation unsafe.Pointer) bool {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procIEGetFileAttributesEx.Addr(), uintptr(unsafe.Pointer(_lpFileName)), uintptr(fInfoLevelId), uintptr(unsafe.Pointer(lpFileInformation)))
+	return r1 != 0
 }
 
 // IEGetProtectedModeCookie calls Ieframe!IEGetProtectedModeCookie.
-func IEGetProtectedModeCookie(lpszURL foundation.PWSTR, lpszCookieName foundation.PWSTR, lpszCookieData foundation.PWSTR, pcchCookieData *uint32, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIEGetProtectedModeCookie.Addr(), uintptr(unsafe.Pointer(lpszURL)), uintptr(unsafe.Pointer(lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(unsafe.Pointer(pcchCookieData)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func IEGetProtectedModeCookie(lpszURL string, lpszCookieName string, lpszCookieData foundation.PWSTR, pcchCookieData *uint32, dwFlags uint32) error {
+	_lpszURL := win32.UTF16Ptr(lpszURL)
+	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
+	r1, _, _ := syscall.SyscallN(procIEGetProtectedModeCookie.Addr(), uintptr(unsafe.Pointer(_lpszURL)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(unsafe.Pointer(pcchCookieData)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEGetWriteableFolderPath calls Ieframe!IEGetWriteableFolderPath.
-func IEGetWriteableFolderPath(clsidFolderID *win32.GUID, lppwstrPath *foundation.PWSTR) foundation.HRESULT {
+func IEGetWriteableFolderPath(clsidFolderID *win32.GUID, lppwstrPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procIEGetWriteableFolderPath.Addr(), uintptr(unsafe.Pointer(clsidFolderID)), uintptr(unsafe.Pointer(lppwstrPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEGetWriteableLowHKCU calls Ieframe!IEGetWriteableLowHKCU.
-func IEGetWriteableLowHKCU(pHKey *systemregistry.HKEY) foundation.HRESULT {
+func IEGetWriteableLowHKCU(pHKey *systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(procIEGetWriteableLowHKCU.Addr(), uintptr(unsafe.Pointer(pHKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEInPrivateFilteringEnabled calls Ieframe!IEInPrivateFilteringEnabled.
-func IEInPrivateFilteringEnabled() foundation.BOOL {
+func IEInPrivateFilteringEnabled() bool {
 	r1, _, _ := syscall.SyscallN(procIEInPrivateFilteringEnabled.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IEIsInPrivateBrowsing calls Ieframe!IEIsInPrivateBrowsing.
-func IEIsInPrivateBrowsing() foundation.BOOL {
+func IEIsInPrivateBrowsing() bool {
 	r1, _, _ := syscall.SyscallN(procIEIsInPrivateBrowsing.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IEIsProtectedModeProcess calls Ieframe!IEIsProtectedModeProcess.
-func IEIsProtectedModeProcess(pbResult *foundation.BOOL) foundation.HRESULT {
+func IEIsProtectedModeProcess(pbResult *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIEIsProtectedModeProcess.Addr(), uintptr(unsafe.Pointer(pbResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEIsProtectedModeURL calls Ieframe!IEIsProtectedModeURL.
-func IEIsProtectedModeURL(lpwstrUrl foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIEIsProtectedModeURL.Addr(), uintptr(unsafe.Pointer(lpwstrUrl)))
-	return foundation.HRESULT(r1)
+func IEIsProtectedModeURL(lpwstrUrl string) error {
+	_lpwstrUrl := win32.UTF16Ptr(lpwstrUrl)
+	r1, _, _ := syscall.SyscallN(procIEIsProtectedModeURL.Addr(), uintptr(unsafe.Pointer(_lpwstrUrl)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IELaunchURL calls Ieframe!IELaunchURL.
-func IELaunchURL(lpwstrUrl foundation.PWSTR, lpProcInfo *systemthreading.PROCESS_INFORMATION, lpInfo unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIELaunchURL.Addr(), uintptr(unsafe.Pointer(lpwstrUrl)), uintptr(unsafe.Pointer(lpProcInfo)), uintptr(unsafe.Pointer(lpInfo)))
-	return foundation.HRESULT(r1)
+func IELaunchURL(lpwstrUrl string, lpProcInfo *systemthreading.PROCESS_INFORMATION, lpInfo unsafe.Pointer) error {
+	_lpwstrUrl := win32.UTF16Ptr(lpwstrUrl)
+	r1, _, _ := syscall.SyscallN(procIELaunchURL.Addr(), uintptr(unsafe.Pointer(_lpwstrUrl)), uintptr(unsafe.Pointer(lpProcInfo)), uintptr(unsafe.Pointer(lpInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEMoveFileEx calls Ieframe!IEMoveFileEx.
-func IEMoveFileEx(lpExistingFileName foundation.PWSTR, lpNewFileName foundation.PWSTR, dwFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIEMoveFileEx.Addr(), uintptr(unsafe.Pointer(lpExistingFileName)), uintptr(unsafe.Pointer(lpNewFileName)), uintptr(dwFlags))
-	return foundation.BOOL(r1)
+func IEMoveFileEx(lpExistingFileName string, lpNewFileName string, dwFlags uint32) bool {
+	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
+	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	r1, _, _ := syscall.SyscallN(procIEMoveFileEx.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(dwFlags))
+	return r1 != 0
 }
 
 // IERefreshElevationPolicy calls Ieframe!IERefreshElevationPolicy.
-func IERefreshElevationPolicy() foundation.HRESULT {
+func IERefreshElevationPolicy() error {
 	r1, _, _ := syscall.SyscallN(procIERefreshElevationPolicy.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IERegCreateKeyEx calls Ieframe!IERegCreateKeyEx.
-func IERegCreateKeyEx(lpSubKey foundation.PWSTR, Reserved uint32, lpClass foundation.PWSTR, dwOptions uint32, samDesired uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, phkResult *systemregistry.HKEY, lpdwDisposition *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIERegCreateKeyEx.Addr(), uintptr(unsafe.Pointer(lpSubKey)), uintptr(Reserved), uintptr(unsafe.Pointer(lpClass)), uintptr(dwOptions), uintptr(samDesired), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(unsafe.Pointer(phkResult)), uintptr(unsafe.Pointer(lpdwDisposition)))
-	return foundation.HRESULT(r1)
+func IERegCreateKeyEx(lpSubKey string, Reserved uint32, lpClass string, dwOptions uint32, samDesired uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, phkResult *systemregistry.HKEY, lpdwDisposition *uint32) error {
+	_lpSubKey := win32.UTF16Ptr(lpSubKey)
+	_lpClass := win32.UTF16Ptr(lpClass)
+	r1, _, _ := syscall.SyscallN(procIERegCreateKeyEx.Addr(), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(Reserved), uintptr(unsafe.Pointer(_lpClass)), uintptr(dwOptions), uintptr(samDesired), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(unsafe.Pointer(phkResult)), uintptr(unsafe.Pointer(lpdwDisposition)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IERegSetValueEx calls Ieframe!IERegSetValueEx.
-func IERegSetValueEx(lpSubKey foundation.PWSTR, lpValueName foundation.PWSTR, Reserved uint32, dwType uint32, lpData *byte, cbData uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIERegSetValueEx.Addr(), uintptr(unsafe.Pointer(lpSubKey)), uintptr(unsafe.Pointer(lpValueName)), uintptr(Reserved), uintptr(dwType), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
-	return foundation.HRESULT(r1)
+func IERegSetValueEx(lpSubKey string, lpValueName string, Reserved uint32, dwType uint32, lpData *byte, cbData uint32) error {
+	_lpSubKey := win32.UTF16Ptr(lpSubKey)
+	_lpValueName := win32.UTF16Ptr(lpValueName)
+	r1, _, _ := syscall.SyscallN(procIERegSetValueEx.Addr(), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(unsafe.Pointer(_lpValueName)), uintptr(Reserved), uintptr(dwType), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IERemoveDirectory calls Ieframe!IERemoveDirectory.
-func IERemoveDirectory(lpPathName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIERemoveDirectory.Addr(), uintptr(unsafe.Pointer(lpPathName)))
-	return foundation.BOOL(r1)
+func IERemoveDirectory(lpPathName string) bool {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, _ := syscall.SyscallN(procIERemoveDirectory.Addr(), uintptr(unsafe.Pointer(_lpPathName)))
+	return r1 != 0
 }
 
 // IESaveFile calls Ieframe!IESaveFile.
-func IESaveFile(hState foundation.HANDLE, lpwstrSourceFile foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIESaveFile.Addr(), uintptr(hState), uintptr(unsafe.Pointer(lpwstrSourceFile)))
-	return foundation.HRESULT(r1)
+func IESaveFile(hState foundation.HANDLE, lpwstrSourceFile string) error {
+	_lpwstrSourceFile := win32.UTF16Ptr(lpwstrSourceFile)
+	r1, _, _ := syscall.SyscallN(procIESaveFile.Addr(), uintptr(hState), uintptr(unsafe.Pointer(_lpwstrSourceFile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IESetProtectedModeCookie calls Ieframe!IESetProtectedModeCookie.
-func IESetProtectedModeCookie(lpszURL foundation.PWSTR, lpszCookieName foundation.PWSTR, lpszCookieData foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIESetProtectedModeCookie.Addr(), uintptr(unsafe.Pointer(lpszURL)), uintptr(unsafe.Pointer(lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func IESetProtectedModeCookie(lpszURL string, lpszCookieName string, lpszCookieData string, dwFlags uint32) error {
+	_lpszURL := win32.UTF16Ptr(lpszURL)
+	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
+	_lpszCookieData := win32.UTF16Ptr(lpszCookieData)
+	r1, _, _ := syscall.SyscallN(procIESetProtectedModeCookie.Addr(), uintptr(unsafe.Pointer(_lpszURL)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(_lpszCookieData)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEShowOpenFileDialog calls Ieframe!IEShowOpenFileDialog.
-func IEShowOpenFileDialog(hwnd foundation.HWND, lpwstrFileName foundation.PWSTR, cchMaxFileName uint32, lpwstrInitialDir foundation.PWSTR, lpwstrFilter foundation.PWSTR, lpwstrDefExt foundation.PWSTR, dwFilterIndex uint32, dwFlags uint32, phFile *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIEShowOpenFileDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(lpwstrFileName)), uintptr(cchMaxFileName), uintptr(unsafe.Pointer(lpwstrInitialDir)), uintptr(unsafe.Pointer(lpwstrFilter)), uintptr(unsafe.Pointer(lpwstrDefExt)), uintptr(dwFilterIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(phFile)))
-	return foundation.HRESULT(r1)
+func IEShowOpenFileDialog(hwnd foundation.HWND, lpwstrFileName foundation.PWSTR, cchMaxFileName uint32, lpwstrInitialDir string, lpwstrFilter string, lpwstrDefExt string, dwFilterIndex uint32, dwFlags uint32, phFile *foundation.HANDLE) error {
+	_lpwstrInitialDir := win32.UTF16Ptr(lpwstrInitialDir)
+	_lpwstrFilter := win32.UTF16Ptr(lpwstrFilter)
+	_lpwstrDefExt := win32.UTF16Ptr(lpwstrDefExt)
+	r1, _, _ := syscall.SyscallN(procIEShowOpenFileDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(lpwstrFileName)), uintptr(cchMaxFileName), uintptr(unsafe.Pointer(_lpwstrInitialDir)), uintptr(unsafe.Pointer(_lpwstrFilter)), uintptr(unsafe.Pointer(_lpwstrDefExt)), uintptr(dwFilterIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(phFile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEShowSaveFileDialog calls Ieframe!IEShowSaveFileDialog.
-func IEShowSaveFileDialog(hwnd foundation.HWND, lpwstrInitialFileName foundation.PWSTR, lpwstrInitialDir foundation.PWSTR, lpwstrFilter foundation.PWSTR, lpwstrDefExt foundation.PWSTR, dwFilterIndex uint32, dwFlags uint32, lppwstrDestinationFilePath *foundation.PWSTR, phState *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIEShowSaveFileDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(lpwstrInitialFileName)), uintptr(unsafe.Pointer(lpwstrInitialDir)), uintptr(unsafe.Pointer(lpwstrFilter)), uintptr(unsafe.Pointer(lpwstrDefExt)), uintptr(dwFilterIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(lppwstrDestinationFilePath)), uintptr(unsafe.Pointer(phState)))
-	return foundation.HRESULT(r1)
+func IEShowSaveFileDialog(hwnd foundation.HWND, lpwstrInitialFileName string, lpwstrInitialDir string, lpwstrFilter string, lpwstrDefExt string, dwFilterIndex uint32, dwFlags uint32, lppwstrDestinationFilePath *foundation.PWSTR, phState *foundation.HANDLE) error {
+	_lpwstrInitialFileName := win32.UTF16Ptr(lpwstrInitialFileName)
+	_lpwstrInitialDir := win32.UTF16Ptr(lpwstrInitialDir)
+	_lpwstrFilter := win32.UTF16Ptr(lpwstrFilter)
+	_lpwstrDefExt := win32.UTF16Ptr(lpwstrDefExt)
+	r1, _, _ := syscall.SyscallN(procIEShowSaveFileDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_lpwstrInitialFileName)), uintptr(unsafe.Pointer(_lpwstrInitialDir)), uintptr(unsafe.Pointer(_lpwstrFilter)), uintptr(unsafe.Pointer(_lpwstrDefExt)), uintptr(dwFilterIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(lppwstrDestinationFilePath)), uintptr(unsafe.Pointer(phState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IETrackingProtectionEnabled calls Ieframe!IETrackingProtectionEnabled.
-func IETrackingProtectionEnabled() foundation.BOOL {
+func IETrackingProtectionEnabled() bool {
 	r1, _, _ := syscall.SyscallN(procIETrackingProtectionEnabled.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IdentifyMIMEType calls ImgUtil!IdentifyMIMEType.
-func IdentifyMIMEType(pbBytes *byte, nBytes uint32, pnFormat *uint32) foundation.HRESULT {
+func IdentifyMIMEType(pbBytes *byte, nBytes uint32, pnFormat *uint32) error {
 	r1, _, _ := syscall.SyscallN(procIdentifyMIMEType.Addr(), uintptr(unsafe.Pointer(pbBytes)), uintptr(nBytes), uintptr(unsafe.Pointer(pnFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingAccessDeniedDialog calls MSRATING!RatingAccessDeniedDialog.
-func RatingAccessDeniedDialog(hDlg foundation.HWND, pszUsername foundation.PSTR, pszContentDescription foundation.PSTR, pRatingDetails unsafe.Pointer) foundation.HRESULT {
+func RatingAccessDeniedDialog(hDlg foundation.HWND, pszUsername foundation.PSTR, pszContentDescription foundation.PSTR, pRatingDetails unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialog.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszContentDescription)), uintptr(unsafe.Pointer(pRatingDetails)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingAccessDeniedDialog2 calls MSRATING!RatingAccessDeniedDialog2.
-func RatingAccessDeniedDialog2(hDlg foundation.HWND, pszUsername foundation.PSTR, pRatingDetails unsafe.Pointer) foundation.HRESULT {
+func RatingAccessDeniedDialog2(hDlg foundation.HWND, pszUsername foundation.PSTR, pRatingDetails unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialog2.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pRatingDetails)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingAccessDeniedDialog2W calls MSRATING!RatingAccessDeniedDialog2W.
-func RatingAccessDeniedDialog2W(hDlg foundation.HWND, pszUsername foundation.PWSTR, pRatingDetails unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialog2W.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pRatingDetails)))
-	return foundation.HRESULT(r1)
+func RatingAccessDeniedDialog2W(hDlg foundation.HWND, pszUsername string, pRatingDetails unsafe.Pointer) error {
+	_pszUsername := win32.UTF16Ptr(pszUsername)
+	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialog2W.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(pRatingDetails)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingAccessDeniedDialogW calls MSRATING!RatingAccessDeniedDialogW.
-func RatingAccessDeniedDialogW(hDlg foundation.HWND, pszUsername foundation.PWSTR, pszContentDescription foundation.PWSTR, pRatingDetails unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialogW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszContentDescription)), uintptr(unsafe.Pointer(pRatingDetails)))
-	return foundation.HRESULT(r1)
+func RatingAccessDeniedDialogW(hDlg foundation.HWND, pszUsername string, pszContentDescription string, pRatingDetails unsafe.Pointer) error {
+	_pszUsername := win32.UTF16Ptr(pszUsername)
+	_pszContentDescription := win32.UTF16Ptr(pszContentDescription)
+	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialogW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(_pszContentDescription)), uintptr(unsafe.Pointer(pRatingDetails)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingAddToApprovedSites calls MSRATING!RatingAddToApprovedSites.
-func RatingAddToApprovedSites(hDlg foundation.HWND, cbPasswordBlob uint32, pbPasswordBlob *byte, lpszUrl foundation.PWSTR, fAlwaysNever foundation.BOOL, fSitePage foundation.BOOL, fApprovedSitesEnforced foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRatingAddToApprovedSites.Addr(), uintptr(hDlg), uintptr(cbPasswordBlob), uintptr(unsafe.Pointer(pbPasswordBlob)), uintptr(unsafe.Pointer(lpszUrl)), uintptr(fAlwaysNever), uintptr(fSitePage), uintptr(fApprovedSitesEnforced))
-	return foundation.HRESULT(r1)
+func RatingAddToApprovedSites(hDlg foundation.HWND, cbPasswordBlob uint32, pbPasswordBlob *byte, lpszUrl string, fAlwaysNever bool, fSitePage bool, fApprovedSitesEnforced bool) error {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	_fAlwaysNever := win32.Bool32(fAlwaysNever)
+	_fSitePage := win32.Bool32(fSitePage)
+	_fApprovedSitesEnforced := win32.Bool32(fApprovedSitesEnforced)
+	r1, _, _ := syscall.SyscallN(procRatingAddToApprovedSites.Addr(), uintptr(hDlg), uintptr(cbPasswordBlob), uintptr(unsafe.Pointer(pbPasswordBlob)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(_fAlwaysNever), uintptr(_fSitePage), uintptr(_fApprovedSitesEnforced))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingCheckUserAccess calls MSRATING!RatingCheckUserAccess.
-func RatingCheckUserAccess(pszUsername foundation.PSTR, pszURL foundation.PSTR, pszRatingInfo foundation.PSTR, pData *byte, cbData uint32, ppRatingDetails *unsafe.Pointer) foundation.HRESULT {
+func RatingCheckUserAccess(pszUsername foundation.PSTR, pszURL foundation.PSTR, pszRatingInfo foundation.PSTR, pData *byte, cbData uint32, ppRatingDetails *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRatingCheckUserAccess.Addr(), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pszRatingInfo)), uintptr(unsafe.Pointer(pData)), uintptr(cbData), uintptr(unsafe.Pointer(ppRatingDetails)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingCheckUserAccessW calls MSRATING!RatingCheckUserAccessW.
-func RatingCheckUserAccessW(pszUsername foundation.PWSTR, pszURL foundation.PWSTR, pszRatingInfo foundation.PWSTR, pData *byte, cbData uint32, ppRatingDetails *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRatingCheckUserAccessW.Addr(), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pszRatingInfo)), uintptr(unsafe.Pointer(pData)), uintptr(cbData), uintptr(unsafe.Pointer(ppRatingDetails)))
-	return foundation.HRESULT(r1)
+func RatingCheckUserAccessW(pszUsername string, pszURL string, pszRatingInfo string, pData *byte, cbData uint32, ppRatingDetails *unsafe.Pointer) error {
+	_pszUsername := win32.UTF16Ptr(pszUsername)
+	_pszURL := win32.UTF16Ptr(pszURL)
+	_pszRatingInfo := win32.UTF16Ptr(pszRatingInfo)
+	r1, _, _ := syscall.SyscallN(procRatingCheckUserAccessW.Addr(), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(_pszRatingInfo)), uintptr(unsafe.Pointer(pData)), uintptr(cbData), uintptr(unsafe.Pointer(ppRatingDetails)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingClickedOnPRFInternal calls MSRATING!RatingClickedOnPRFInternal.
-func RatingClickedOnPRFInternal(hWndOwner foundation.HWND, param1 foundation.HINSTANCE, lpszFileName foundation.PSTR, nShow int32) foundation.HRESULT {
+func RatingClickedOnPRFInternal(hWndOwner foundation.HWND, param1 foundation.HINSTANCE, lpszFileName foundation.PSTR, nShow int32) error {
 	r1, _, _ := syscall.SyscallN(procRatingClickedOnPRFInternal.Addr(), uintptr(hWndOwner), uintptr(param1), uintptr(unsafe.Pointer(lpszFileName)), uintptr(nShow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingClickedOnRATInternal calls MSRATING!RatingClickedOnRATInternal.
-func RatingClickedOnRATInternal(hWndOwner foundation.HWND, param1 foundation.HINSTANCE, lpszFileName foundation.PSTR, nShow int32) foundation.HRESULT {
+func RatingClickedOnRATInternal(hWndOwner foundation.HWND, param1 foundation.HINSTANCE, lpszFileName foundation.PSTR, nShow int32) error {
 	r1, _, _ := syscall.SyscallN(procRatingClickedOnRATInternal.Addr(), uintptr(hWndOwner), uintptr(param1), uintptr(unsafe.Pointer(lpszFileName)), uintptr(nShow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingEnable calls MSRATING!RatingEnable.
-func RatingEnable(hwndParent foundation.HWND, pszUsername foundation.PSTR, fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRatingEnable.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(pszUsername)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func RatingEnable(hwndParent foundation.HWND, pszUsername foundation.PSTR, fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(procRatingEnable.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(pszUsername)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingEnableW calls MSRATING!RatingEnableW.
-func RatingEnableW(hwndParent foundation.HWND, pszUsername foundation.PWSTR, fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRatingEnableW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(pszUsername)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func RatingEnableW(hwndParent foundation.HWND, pszUsername string, fEnable bool) error {
+	_pszUsername := win32.UTF16Ptr(pszUsername)
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(procRatingEnableW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszUsername)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingEnabledQuery calls MSRATING!RatingEnabledQuery.
-func RatingEnabledQuery() foundation.HRESULT {
+func RatingEnabledQuery() error {
 	r1, _, _ := syscall.SyscallN(procRatingEnabledQuery.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingFreeDetails calls MSRATING!RatingFreeDetails.
-func RatingFreeDetails(pRatingDetails unsafe.Pointer) foundation.HRESULT {
+func RatingFreeDetails(pRatingDetails unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procRatingFreeDetails.Addr(), uintptr(unsafe.Pointer(pRatingDetails)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingInit calls MSRATING!RatingInit.
-func RatingInit() foundation.HRESULT {
+func RatingInit() error {
 	r1, _, _ := syscall.SyscallN(procRatingInit.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingObtainCancel calls MSRATING!RatingObtainCancel.
-func RatingObtainCancel(hRatingObtainQuery foundation.HANDLE) foundation.HRESULT {
+func RatingObtainCancel(hRatingObtainQuery foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRatingObtainCancel.Addr(), uintptr(hRatingObtainQuery))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingObtainQuery calls MSRATING!RatingObtainQuery.
-func RatingObtainQuery(pszTargetUrl foundation.PSTR, dwUserData uint32, fCallback uintptr, phRatingObtainQuery *foundation.HANDLE) foundation.HRESULT {
+func RatingObtainQuery(pszTargetUrl foundation.PSTR, dwUserData uint32, fCallback uintptr, phRatingObtainQuery *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRatingObtainQuery.Addr(), uintptr(unsafe.Pointer(pszTargetUrl)), uintptr(dwUserData), uintptr(fCallback), uintptr(unsafe.Pointer(phRatingObtainQuery)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingObtainQueryW calls MSRATING!RatingObtainQueryW.
-func RatingObtainQueryW(pszTargetUrl foundation.PWSTR, dwUserData uint32, fCallback uintptr, phRatingObtainQuery *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRatingObtainQueryW.Addr(), uintptr(unsafe.Pointer(pszTargetUrl)), uintptr(dwUserData), uintptr(fCallback), uintptr(unsafe.Pointer(phRatingObtainQuery)))
-	return foundation.HRESULT(r1)
+func RatingObtainQueryW(pszTargetUrl string, dwUserData uint32, fCallback uintptr, phRatingObtainQuery *foundation.HANDLE) error {
+	_pszTargetUrl := win32.UTF16Ptr(pszTargetUrl)
+	r1, _, _ := syscall.SyscallN(procRatingObtainQueryW.Addr(), uintptr(unsafe.Pointer(_pszTargetUrl)), uintptr(dwUserData), uintptr(fCallback), uintptr(unsafe.Pointer(phRatingObtainQuery)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingSetupUI calls MSRATING!RatingSetupUI.
-func RatingSetupUI(hDlg foundation.HWND, pszUsername foundation.PSTR) foundation.HRESULT {
+func RatingSetupUI(hDlg foundation.HWND, pszUsername foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procRatingSetupUI.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(pszUsername)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RatingSetupUIW calls MSRATING!RatingSetupUIW.
-func RatingSetupUIW(hDlg foundation.HWND, pszUsername foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRatingSetupUIW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(pszUsername)))
-	return foundation.HRESULT(r1)
+func RatingSetupUIW(hDlg foundation.HWND, pszUsername string) error {
+	_pszUsername := win32.UTF16Ptr(pszUsername)
+	r1, _, _ := syscall.SyscallN(procRatingSetupUIW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_pszUsername)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SniffStream calls ImgUtil!SniffStream.
-func SniffStream(pInStream *systemcom.IStream, pnFormat *uint32, ppOutStream **systemcom.IStream) foundation.HRESULT {
+func SniffStream(pInStream *systemcom.IStream, pnFormat *uint32, ppOutStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procSniffStream.Addr(), uintptr(unsafe.Pointer(pInStream)), uintptr(unsafe.Pointer(pnFormat)), uintptr(unsafe.Pointer(ppOutStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

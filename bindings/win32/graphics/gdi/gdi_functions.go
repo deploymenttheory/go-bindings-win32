@@ -26,10 +26,10 @@ var (
 	procMergeFontPackage                = modFONTSUB.NewProc("MergeFontPackage")
 	procAbortPath                       = modGDI32.NewProc("AbortPath")
 	procAddFontMemResourceEx            = modGDI32.NewProc("AddFontMemResourceEx")
+	procAddFontResource                 = modGDI32.NewProc("AddFontResourceW")
 	procAddFontResourceA                = modGDI32.NewProc("AddFontResourceA")
+	procAddFontResourceEx               = modGDI32.NewProc("AddFontResourceExW")
 	procAddFontResourceExA              = modGDI32.NewProc("AddFontResourceExA")
-	procAddFontResourceExW              = modGDI32.NewProc("AddFontResourceExW")
-	procAddFontResourceW                = modGDI32.NewProc("AddFontResourceW")
 	procAnimatePalette                  = modGDI32.NewProc("AnimatePalette")
 	procArc                             = modGDI32.NewProc("Arc")
 	procArcTo                           = modGDI32.NewProc("ArcTo")
@@ -42,17 +42,17 @@ var (
 	procCloseMetaFile                   = modGDI32.NewProc("CloseMetaFile")
 	procCombineRgn                      = modGDI32.NewProc("CombineRgn")
 	procCombineTransform                = modGDI32.NewProc("CombineTransform")
+	procCopyEnhMetaFile                 = modGDI32.NewProc("CopyEnhMetaFileW")
 	procCopyEnhMetaFileA                = modGDI32.NewProc("CopyEnhMetaFileA")
-	procCopyEnhMetaFileW                = modGDI32.NewProc("CopyEnhMetaFileW")
+	procCopyMetaFile                    = modGDI32.NewProc("CopyMetaFileW")
 	procCopyMetaFileA                   = modGDI32.NewProc("CopyMetaFileA")
-	procCopyMetaFileW                   = modGDI32.NewProc("CopyMetaFileW")
 	procCreateBitmap                    = modGDI32.NewProc("CreateBitmap")
 	procCreateBitmapIndirect            = modGDI32.NewProc("CreateBitmapIndirect")
 	procCreateBrushIndirect             = modGDI32.NewProc("CreateBrushIndirect")
 	procCreateCompatibleBitmap          = modGDI32.NewProc("CreateCompatibleBitmap")
 	procCreateCompatibleDC              = modGDI32.NewProc("CreateCompatibleDC")
+	procCreateDC                        = modGDI32.NewProc("CreateDCW")
 	procCreateDCA                       = modGDI32.NewProc("CreateDCA")
-	procCreateDCW                       = modGDI32.NewProc("CreateDCW")
 	procCreateDIBPatternBrush           = modGDI32.NewProc("CreateDIBPatternBrush")
 	procCreateDIBPatternBrushPt         = modGDI32.NewProc("CreateDIBPatternBrushPt")
 	procCreateDIBSection                = modGDI32.NewProc("CreateDIBSection")
@@ -60,20 +60,20 @@ var (
 	procCreateDiscardableBitmap         = modGDI32.NewProc("CreateDiscardableBitmap")
 	procCreateEllipticRgn               = modGDI32.NewProc("CreateEllipticRgn")
 	procCreateEllipticRgnIndirect       = modGDI32.NewProc("CreateEllipticRgnIndirect")
+	procCreateEnhMetaFile               = modGDI32.NewProc("CreateEnhMetaFileW")
 	procCreateEnhMetaFileA              = modGDI32.NewProc("CreateEnhMetaFileA")
-	procCreateEnhMetaFileW              = modGDI32.NewProc("CreateEnhMetaFileW")
+	procCreateFont                      = modGDI32.NewProc("CreateFontW")
 	procCreateFontA                     = modGDI32.NewProc("CreateFontA")
+	procCreateFontIndirect              = modGDI32.NewProc("CreateFontIndirectW")
 	procCreateFontIndirectA             = modGDI32.NewProc("CreateFontIndirectA")
+	procCreateFontIndirectEx            = modGDI32.NewProc("CreateFontIndirectExW")
 	procCreateFontIndirectExA           = modGDI32.NewProc("CreateFontIndirectExA")
-	procCreateFontIndirectExW           = modGDI32.NewProc("CreateFontIndirectExW")
-	procCreateFontIndirectW             = modGDI32.NewProc("CreateFontIndirectW")
-	procCreateFontW                     = modGDI32.NewProc("CreateFontW")
 	procCreateHalftonePalette           = modGDI32.NewProc("CreateHalftonePalette")
 	procCreateHatchBrush                = modGDI32.NewProc("CreateHatchBrush")
+	procCreateIC                        = modGDI32.NewProc("CreateICW")
 	procCreateICA                       = modGDI32.NewProc("CreateICA")
-	procCreateICW                       = modGDI32.NewProc("CreateICW")
+	procCreateMetaFile                  = modGDI32.NewProc("CreateMetaFileW")
 	procCreateMetaFileA                 = modGDI32.NewProc("CreateMetaFileA")
-	procCreateMetaFileW                 = modGDI32.NewProc("CreateMetaFileW")
 	procCreatePalette                   = modGDI32.NewProc("CreatePalette")
 	procCreatePatternBrush              = modGDI32.NewProc("CreatePatternBrush")
 	procCreatePen                       = modGDI32.NewProc("CreatePen")
@@ -83,8 +83,8 @@ var (
 	procCreateRectRgn                   = modGDI32.NewProc("CreateRectRgn")
 	procCreateRectRgnIndirect           = modGDI32.NewProc("CreateRectRgnIndirect")
 	procCreateRoundRectRgn              = modGDI32.NewProc("CreateRoundRectRgn")
+	procCreateScalableFontResource      = modGDI32.NewProc("CreateScalableFontResourceW")
 	procCreateScalableFontResourceA     = modGDI32.NewProc("CreateScalableFontResourceA")
-	procCreateScalableFontResourceW     = modGDI32.NewProc("CreateScalableFontResourceW")
 	procCreateSolidBrush                = modGDI32.NewProc("CreateSolidBrush")
 	procDPtoLP                          = modGDI32.NewProc("DPtoLP")
 	procDeleteDC                        = modGDI32.NewProc("DeleteDC")
@@ -95,12 +95,12 @@ var (
 	procEllipse                         = modGDI32.NewProc("Ellipse")
 	procEndPath                         = modGDI32.NewProc("EndPath")
 	procEnumEnhMetaFile                 = modGDI32.NewProc("EnumEnhMetaFile")
+	procEnumFontFamilies                = modGDI32.NewProc("EnumFontFamiliesW")
 	procEnumFontFamiliesA               = modGDI32.NewProc("EnumFontFamiliesA")
+	procEnumFontFamiliesEx              = modGDI32.NewProc("EnumFontFamiliesExW")
 	procEnumFontFamiliesExA             = modGDI32.NewProc("EnumFontFamiliesExA")
-	procEnumFontFamiliesExW             = modGDI32.NewProc("EnumFontFamiliesExW")
-	procEnumFontFamiliesW               = modGDI32.NewProc("EnumFontFamiliesW")
+	procEnumFonts                       = modGDI32.NewProc("EnumFontsW")
 	procEnumFontsA                      = modGDI32.NewProc("EnumFontsA")
-	procEnumFontsW                      = modGDI32.NewProc("EnumFontsW")
 	procEnumMetaFile                    = modGDI32.NewProc("EnumMetaFile")
 	procEnumObjects                     = modGDI32.NewProc("EnumObjects")
 	procEqualRgn                        = modGDI32.NewProc("EqualRgn")
@@ -109,8 +109,8 @@ var (
 	procExtCreateRegion                 = modGDI32.NewProc("ExtCreateRegion")
 	procExtFloodFill                    = modGDI32.NewProc("ExtFloodFill")
 	procExtSelectClipRgn                = modGDI32.NewProc("ExtSelectClipRgn")
+	procExtTextOut                      = modGDI32.NewProc("ExtTextOutW")
 	procExtTextOutA                     = modGDI32.NewProc("ExtTextOutA")
-	procExtTextOutW                     = modGDI32.NewProc("ExtTextOutW")
 	procFillPath                        = modGDI32.NewProc("FillPath")
 	procFillRgn                         = modGDI32.NewProc("FillRgn")
 	procFixBrushOrgEx                   = modGDI32.NewProc("FixBrushOrgEx")
@@ -131,20 +131,20 @@ var (
 	procGetBkMode                       = modGDI32.NewProc("GetBkMode")
 	procGetBoundsRect                   = modGDI32.NewProc("GetBoundsRect")
 	procGetBrushOrgEx                   = modGDI32.NewProc("GetBrushOrgEx")
+	procGetCharABCWidths                = modGDI32.NewProc("GetCharABCWidthsW")
 	procGetCharABCWidthsA               = modGDI32.NewProc("GetCharABCWidthsA")
+	procGetCharABCWidthsFloat           = modGDI32.NewProc("GetCharABCWidthsFloatW")
 	procGetCharABCWidthsFloatA          = modGDI32.NewProc("GetCharABCWidthsFloatA")
-	procGetCharABCWidthsFloatW          = modGDI32.NewProc("GetCharABCWidthsFloatW")
 	procGetCharABCWidthsI               = modGDI32.NewProc("GetCharABCWidthsI")
-	procGetCharABCWidthsW               = modGDI32.NewProc("GetCharABCWidthsW")
+	procGetCharWidth                    = modGDI32.NewProc("GetCharWidthW")
+	procGetCharWidth32                  = modGDI32.NewProc("GetCharWidth32W")
 	procGetCharWidth32A                 = modGDI32.NewProc("GetCharWidth32A")
-	procGetCharWidth32W                 = modGDI32.NewProc("GetCharWidth32W")
 	procGetCharWidthA                   = modGDI32.NewProc("GetCharWidthA")
+	procGetCharWidthFloat               = modGDI32.NewProc("GetCharWidthFloatW")
 	procGetCharWidthFloatA              = modGDI32.NewProc("GetCharWidthFloatA")
-	procGetCharWidthFloatW              = modGDI32.NewProc("GetCharWidthFloatW")
 	procGetCharWidthI                   = modGDI32.NewProc("GetCharWidthI")
-	procGetCharWidthW                   = modGDI32.NewProc("GetCharWidthW")
+	procGetCharacterPlacement           = modGDI32.NewProc("GetCharacterPlacementW")
 	procGetCharacterPlacementA          = modGDI32.NewProc("GetCharacterPlacementA")
-	procGetCharacterPlacementW          = modGDI32.NewProc("GetCharacterPlacementW")
 	procGetClipBox                      = modGDI32.NewProc("GetClipBox")
 	procGetClipRgn                      = modGDI32.NewProc("GetClipRgn")
 	procGetColorAdjustment              = modGDI32.NewProc("GetColorAdjustment")
@@ -156,37 +156,37 @@ var (
 	procGetDIBColorTable                = modGDI32.NewProc("GetDIBColorTable")
 	procGetDIBits                       = modGDI32.NewProc("GetDIBits")
 	procGetDeviceCaps                   = modGDI32.NewProc("GetDeviceCaps")
+	procGetEnhMetaFile                  = modGDI32.NewProc("GetEnhMetaFileW")
 	procGetEnhMetaFileA                 = modGDI32.NewProc("GetEnhMetaFileA")
 	procGetEnhMetaFileBits              = modGDI32.NewProc("GetEnhMetaFileBits")
+	procGetEnhMetaFileDescription       = modGDI32.NewProc("GetEnhMetaFileDescriptionW")
 	procGetEnhMetaFileDescriptionA      = modGDI32.NewProc("GetEnhMetaFileDescriptionA")
-	procGetEnhMetaFileDescriptionW      = modGDI32.NewProc("GetEnhMetaFileDescriptionW")
 	procGetEnhMetaFileHeader            = modGDI32.NewProc("GetEnhMetaFileHeader")
 	procGetEnhMetaFilePaletteEntries    = modGDI32.NewProc("GetEnhMetaFilePaletteEntries")
-	procGetEnhMetaFileW                 = modGDI32.NewProc("GetEnhMetaFileW")
 	procGetFontData                     = modGDI32.NewProc("GetFontData")
 	procGetFontLanguageInfo             = modGDI32.NewProc("GetFontLanguageInfo")
 	procGetFontUnicodeRanges            = modGDI32.NewProc("GetFontUnicodeRanges")
+	procGetGlyphIndices                 = modGDI32.NewProc("GetGlyphIndicesW")
 	procGetGlyphIndicesA                = modGDI32.NewProc("GetGlyphIndicesA")
-	procGetGlyphIndicesW                = modGDI32.NewProc("GetGlyphIndicesW")
+	procGetGlyphOutline                 = modGDI32.NewProc("GetGlyphOutlineW")
 	procGetGlyphOutlineA                = modGDI32.NewProc("GetGlyphOutlineA")
-	procGetGlyphOutlineW                = modGDI32.NewProc("GetGlyphOutlineW")
 	procGetGraphicsMode                 = modGDI32.NewProc("GetGraphicsMode")
+	procGetKerningPairs                 = modGDI32.NewProc("GetKerningPairsW")
 	procGetKerningPairsA                = modGDI32.NewProc("GetKerningPairsA")
-	procGetKerningPairsW                = modGDI32.NewProc("GetKerningPairsW")
 	procGetLayout                       = modGDI32.NewProc("GetLayout")
 	procGetMapMode                      = modGDI32.NewProc("GetMapMode")
+	procGetMetaFile                     = modGDI32.NewProc("GetMetaFileW")
 	procGetMetaFileA                    = modGDI32.NewProc("GetMetaFileA")
 	procGetMetaFileBitsEx               = modGDI32.NewProc("GetMetaFileBitsEx")
-	procGetMetaFileW                    = modGDI32.NewProc("GetMetaFileW")
 	procGetMetaRgn                      = modGDI32.NewProc("GetMetaRgn")
 	procGetMiterLimit                   = modGDI32.NewProc("GetMiterLimit")
 	procGetNearestColor                 = modGDI32.NewProc("GetNearestColor")
 	procGetNearestPaletteIndex          = modGDI32.NewProc("GetNearestPaletteIndex")
+	procGetObject                       = modGDI32.NewProc("GetObjectW")
 	procGetObjectA                      = modGDI32.NewProc("GetObjectA")
 	procGetObjectType                   = modGDI32.NewProc("GetObjectType")
-	procGetObjectW                      = modGDI32.NewProc("GetObjectW")
+	procGetOutlineTextMetrics           = modGDI32.NewProc("GetOutlineTextMetricsW")
 	procGetOutlineTextMetricsA          = modGDI32.NewProc("GetOutlineTextMetricsA")
-	procGetOutlineTextMetricsW          = modGDI32.NewProc("GetOutlineTextMetricsW")
 	procGetPaletteEntries               = modGDI32.NewProc("GetPaletteEntries")
 	procGetPath                         = modGDI32.NewProc("GetPath")
 	procGetPixel                        = modGDI32.NewProc("GetPixel")
@@ -203,18 +203,18 @@ var (
 	procGetTextAlign                    = modGDI32.NewProc("GetTextAlign")
 	procGetTextCharacterExtra           = modGDI32.NewProc("GetTextCharacterExtra")
 	procGetTextColor                    = modGDI32.NewProc("GetTextColor")
+	procGetTextExtentExPoint            = modGDI32.NewProc("GetTextExtentExPointW")
 	procGetTextExtentExPointA           = modGDI32.NewProc("GetTextExtentExPointA")
 	procGetTextExtentExPointI           = modGDI32.NewProc("GetTextExtentExPointI")
-	procGetTextExtentExPointW           = modGDI32.NewProc("GetTextExtentExPointW")
+	procGetTextExtentPoint              = modGDI32.NewProc("GetTextExtentPointW")
+	procGetTextExtentPoint32            = modGDI32.NewProc("GetTextExtentPoint32W")
 	procGetTextExtentPoint32A           = modGDI32.NewProc("GetTextExtentPoint32A")
-	procGetTextExtentPoint32W           = modGDI32.NewProc("GetTextExtentPoint32W")
 	procGetTextExtentPointA             = modGDI32.NewProc("GetTextExtentPointA")
 	procGetTextExtentPointI             = modGDI32.NewProc("GetTextExtentPointI")
-	procGetTextExtentPointW             = modGDI32.NewProc("GetTextExtentPointW")
+	procGetTextFace                     = modGDI32.NewProc("GetTextFaceW")
 	procGetTextFaceA                    = modGDI32.NewProc("GetTextFaceA")
-	procGetTextFaceW                    = modGDI32.NewProc("GetTextFaceW")
+	procGetTextMetrics                  = modGDI32.NewProc("GetTextMetricsW")
 	procGetTextMetricsA                 = modGDI32.NewProc("GetTextMetricsA")
-	procGetTextMetricsW                 = modGDI32.NewProc("GetTextMetricsW")
 	procGetViewportExtEx                = modGDI32.NewProc("GetViewportExtEx")
 	procGetViewportOrgEx                = modGDI32.NewProc("GetViewportOrgEx")
 	procGetWinMetaFileBits              = modGDI32.NewProc("GetWinMetaFileBits")
@@ -247,8 +247,8 @@ var (
 	procPolyDraw                        = modGDI32.NewProc("PolyDraw")
 	procPolyPolygon                     = modGDI32.NewProc("PolyPolygon")
 	procPolyPolyline                    = modGDI32.NewProc("PolyPolyline")
+	procPolyTextOut                     = modGDI32.NewProc("PolyTextOutW")
 	procPolyTextOutA                    = modGDI32.NewProc("PolyTextOutA")
-	procPolyTextOutW                    = modGDI32.NewProc("PolyTextOutW")
 	procPolygon                         = modGDI32.NewProc("Polygon")
 	procPolyline                        = modGDI32.NewProc("Polyline")
 	procPolylineTo                      = modGDI32.NewProc("PolylineTo")
@@ -259,12 +259,12 @@ var (
 	procRectVisible                     = modGDI32.NewProc("RectVisible")
 	procRectangle                       = modGDI32.NewProc("Rectangle")
 	procRemoveFontMemResourceEx         = modGDI32.NewProc("RemoveFontMemResourceEx")
+	procRemoveFontResource              = modGDI32.NewProc("RemoveFontResourceW")
 	procRemoveFontResourceA             = modGDI32.NewProc("RemoveFontResourceA")
+	procRemoveFontResourceEx            = modGDI32.NewProc("RemoveFontResourceExW")
 	procRemoveFontResourceExA           = modGDI32.NewProc("RemoveFontResourceExA")
-	procRemoveFontResourceExW           = modGDI32.NewProc("RemoveFontResourceExW")
-	procRemoveFontResourceW             = modGDI32.NewProc("RemoveFontResourceW")
+	procResetDC                         = modGDI32.NewProc("ResetDCW")
 	procResetDCA                        = modGDI32.NewProc("ResetDCA")
-	procResetDCW                        = modGDI32.NewProc("ResetDCW")
 	procResizePalette                   = modGDI32.NewProc("ResizePalette")
 	procRestoreDC                       = modGDI32.NewProc("RestoreDC")
 	procRoundRect                       = modGDI32.NewProc("RoundRect")
@@ -316,8 +316,8 @@ var (
 	procStretchDIBits                   = modGDI32.NewProc("StretchDIBits")
 	procStrokeAndFillPath               = modGDI32.NewProc("StrokeAndFillPath")
 	procStrokePath                      = modGDI32.NewProc("StrokePath")
+	procTextOut                         = modGDI32.NewProc("TextOutW")
 	procTextOutA                        = modGDI32.NewProc("TextOutA")
-	procTextOutW                        = modGDI32.NewProc("TextOutW")
 	procUnrealizeObject                 = modGDI32.NewProc("UnrealizeObject")
 	procUpdateColors                    = modGDI32.NewProc("UpdateColors")
 	procWidenPath                       = modGDI32.NewProc("WidenPath")
@@ -339,10 +339,10 @@ var (
 	procTTRunValidationTests            = modt2embed.NewProc("TTRunValidationTests")
 	procTTRunValidationTestsEx          = modt2embed.NewProc("TTRunValidationTestsEx")
 	procBeginPaint                      = modUSER32.NewProc("BeginPaint")
+	procChangeDisplaySettings           = modUSER32.NewProc("ChangeDisplaySettingsW")
 	procChangeDisplaySettingsA          = modUSER32.NewProc("ChangeDisplaySettingsA")
+	procChangeDisplaySettingsEx         = modUSER32.NewProc("ChangeDisplaySettingsExW")
 	procChangeDisplaySettingsExA        = modUSER32.NewProc("ChangeDisplaySettingsExA")
-	procChangeDisplaySettingsExW        = modUSER32.NewProc("ChangeDisplaySettingsExW")
-	procChangeDisplaySettingsW          = modUSER32.NewProc("ChangeDisplaySettingsW")
 	procClientToScreen                  = modUSER32.NewProc("ClientToScreen")
 	procCopyRect                        = modUSER32.NewProc("CopyRect")
 	procDrawAnimatedRects               = modUSER32.NewProc("DrawAnimatedRects")
@@ -350,47 +350,47 @@ var (
 	procDrawEdge                        = modUSER32.NewProc("DrawEdge")
 	procDrawFocusRect                   = modUSER32.NewProc("DrawFocusRect")
 	procDrawFrameControl                = modUSER32.NewProc("DrawFrameControl")
+	procDrawState                       = modUSER32.NewProc("DrawStateW")
 	procDrawStateA                      = modUSER32.NewProc("DrawStateA")
-	procDrawStateW                      = modUSER32.NewProc("DrawStateW")
+	procDrawText                        = modUSER32.NewProc("DrawTextW")
 	procDrawTextA                       = modUSER32.NewProc("DrawTextA")
+	procDrawTextEx                      = modUSER32.NewProc("DrawTextExW")
 	procDrawTextExA                     = modUSER32.NewProc("DrawTextExA")
-	procDrawTextExW                     = modUSER32.NewProc("DrawTextExW")
-	procDrawTextW                       = modUSER32.NewProc("DrawTextW")
 	procEndPaint                        = modUSER32.NewProc("EndPaint")
+	procEnumDisplayDevices              = modUSER32.NewProc("EnumDisplayDevicesW")
 	procEnumDisplayDevicesA             = modUSER32.NewProc("EnumDisplayDevicesA")
-	procEnumDisplayDevicesW             = modUSER32.NewProc("EnumDisplayDevicesW")
 	procEnumDisplayMonitors             = modUSER32.NewProc("EnumDisplayMonitors")
+	procEnumDisplaySettings             = modUSER32.NewProc("EnumDisplaySettingsW")
 	procEnumDisplaySettingsA            = modUSER32.NewProc("EnumDisplaySettingsA")
+	procEnumDisplaySettingsEx           = modUSER32.NewProc("EnumDisplaySettingsExW")
 	procEnumDisplaySettingsExA          = modUSER32.NewProc("EnumDisplaySettingsExA")
-	procEnumDisplaySettingsExW          = modUSER32.NewProc("EnumDisplaySettingsExW")
-	procEnumDisplaySettingsW            = modUSER32.NewProc("EnumDisplaySettingsW")
 	procEqualRect                       = modUSER32.NewProc("EqualRect")
 	procExcludeUpdateRgn                = modUSER32.NewProc("ExcludeUpdateRgn")
 	procFillRect                        = modUSER32.NewProc("FillRect")
 	procFrameRect                       = modUSER32.NewProc("FrameRect")
 	procGetDC                           = modUSER32.NewProc("GetDC")
 	procGetDCEx                         = modUSER32.NewProc("GetDCEx")
+	procGetMonitorInfo                  = modUSER32.NewProc("GetMonitorInfoW")
 	procGetMonitorInfoA                 = modUSER32.NewProc("GetMonitorInfoA")
-	procGetMonitorInfoW                 = modUSER32.NewProc("GetMonitorInfoW")
 	procGetSysColor                     = modUSER32.NewProc("GetSysColor")
 	procGetSysColorBrush                = modUSER32.NewProc("GetSysColorBrush")
+	procGetTabbedTextExtent             = modUSER32.NewProc("GetTabbedTextExtentW")
 	procGetTabbedTextExtentA            = modUSER32.NewProc("GetTabbedTextExtentA")
-	procGetTabbedTextExtentW            = modUSER32.NewProc("GetTabbedTextExtentW")
 	procGetUpdateRect                   = modUSER32.NewProc("GetUpdateRect")
 	procGetUpdateRgn                    = modUSER32.NewProc("GetUpdateRgn")
 	procGetWindowDC                     = modUSER32.NewProc("GetWindowDC")
 	procGetWindowRgn                    = modUSER32.NewProc("GetWindowRgn")
 	procGetWindowRgnBox                 = modUSER32.NewProc("GetWindowRgnBox")
+	procGrayString                      = modUSER32.NewProc("GrayStringW")
 	procGrayStringA                     = modUSER32.NewProc("GrayStringA")
-	procGrayStringW                     = modUSER32.NewProc("GrayStringW")
 	procInflateRect                     = modUSER32.NewProc("InflateRect")
 	procIntersectRect                   = modUSER32.NewProc("IntersectRect")
 	procInvalidateRect                  = modUSER32.NewProc("InvalidateRect")
 	procInvalidateRgn                   = modUSER32.NewProc("InvalidateRgn")
 	procInvertRect                      = modUSER32.NewProc("InvertRect")
 	procIsRectEmpty                     = modUSER32.NewProc("IsRectEmpty")
+	procLoadBitmap                      = modUSER32.NewProc("LoadBitmapW")
 	procLoadBitmapA                     = modUSER32.NewProc("LoadBitmapA")
-	procLoadBitmapW                     = modUSER32.NewProc("LoadBitmapW")
 	procLockWindowUpdate                = modUSER32.NewProc("LockWindowUpdate")
 	procMapWindowPoints                 = modUSER32.NewProc("MapWindowPoints")
 	procMonitorFromRect                 = modUSER32.NewProc("MonitorFromRect")
@@ -405,8 +405,8 @@ var (
 	procSetSysColors                    = modUSER32.NewProc("SetSysColors")
 	procSetWindowRgn                    = modUSER32.NewProc("SetWindowRgn")
 	procSubtractRect                    = modUSER32.NewProc("SubtractRect")
+	procTabbedTextOut                   = modUSER32.NewProc("TabbedTextOutW")
 	procTabbedTextOutA                  = modUSER32.NewProc("TabbedTextOutA")
-	procTabbedTextOutW                  = modUSER32.NewProc("TabbedTextOutW")
 	procUnionRect                       = modUSER32.NewProc("UnionRect")
 	procUpdateWindow                    = modUSER32.NewProc("UpdateWindow")
 	procValidateRect                    = modUSER32.NewProc("ValidateRect")
@@ -417,17 +417,26 @@ var (
 // AbortPath calls GDI32!AbortPath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-abortpath
 // Minimum OS: windows5.0.
-func AbortPath(hdc HDC) foundation.BOOL {
+func AbortPath(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procAbortPath.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // AddFontMemResourceEx calls GDI32!AddFontMemResourceEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-addfontmemresourceex
 // Minimum OS: windows5.0.
-func AddFontMemResourceEx(pFileView unsafe.Pointer, cjSize uint32, pvResrved unsafe.Pointer, pNumFonts *uint32) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procAddFontMemResourceEx.Addr(), uintptr(unsafe.Pointer(pFileView)), uintptr(cjSize), uintptr(unsafe.Pointer(pvResrved)), uintptr(unsafe.Pointer(pNumFonts)))
+func AddFontMemResourceEx(pFileView unsafe.Pointer, cjSize uint32, pNumFonts *uint32) foundation.HANDLE {
+	r1, _, _ := syscall.SyscallN(procAddFontMemResourceEx.Addr(), uintptr(unsafe.Pointer(pFileView)), uintptr(cjSize), 0, uintptr(unsafe.Pointer(pNumFonts)))
 	return foundation.HANDLE(r1)
+}
+
+// AddFontResource calls GDI32!AddFontResourceW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-addfontresourcew
+// Minimum OS: windows5.0.
+func AddFontResource(param0 string) int32 {
+	_param0 := win32.UTF16Ptr(param0)
+	r1, _, _ := syscall.SyscallN(procAddFontResource.Addr(), uintptr(unsafe.Pointer(_param0)))
+	return int32(r1)
 }
 
 // AddFontResourceA calls GDI32!AddFontResourceA.
@@ -438,52 +447,49 @@ func AddFontResourceA(param0 foundation.PSTR) int32 {
 	return int32(r1)
 }
 
+// AddFontResourceEx calls GDI32!AddFontResourceExW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-addfontresourceexw
+// Minimum OS: windows5.0.
+func AddFontResourceEx(name string, fl FONT_RESOURCE_CHARACTERISTICS) int32 {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(procAddFontResourceEx.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(fl), 0)
+	return int32(r1)
+}
+
 // AddFontResourceExA calls GDI32!AddFontResourceExA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-addfontresourceexa
 // Minimum OS: windows5.0.
-func AddFontResourceExA(name foundation.PSTR, fl FONT_RESOURCE_CHARACTERISTICS, res unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procAddFontResourceExA.Addr(), uintptr(unsafe.Pointer(name)), uintptr(fl), uintptr(unsafe.Pointer(res)))
-	return int32(r1)
-}
-
-// AddFontResourceExW calls GDI32!AddFontResourceExW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-addfontresourceexw
-// Minimum OS: windows5.0.
-func AddFontResourceExW(name foundation.PWSTR, fl FONT_RESOURCE_CHARACTERISTICS, res unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procAddFontResourceExW.Addr(), uintptr(unsafe.Pointer(name)), uintptr(fl), uintptr(unsafe.Pointer(res)))
-	return int32(r1)
-}
-
-// AddFontResourceW calls GDI32!AddFontResourceW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-addfontresourcew
-// Minimum OS: windows5.0.
-func AddFontResourceW(param0 foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procAddFontResourceW.Addr(), uintptr(unsafe.Pointer(param0)))
+func AddFontResourceExA(name foundation.PSTR, fl FONT_RESOURCE_CHARACTERISTICS) int32 {
+	r1, _, _ := syscall.SyscallN(procAddFontResourceExA.Addr(), uintptr(unsafe.Pointer(name)), uintptr(fl), 0)
 	return int32(r1)
 }
 
 // AnimatePalette calls GDI32!AnimatePalette.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-animatepalette
 // Minimum OS: windows5.0.
-func AnimatePalette(hPal HPALETTE, iStartIndex uint32, cEntries uint32, ppe *PALETTEENTRY) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAnimatePalette.Addr(), uintptr(hPal), uintptr(iStartIndex), uintptr(cEntries), uintptr(unsafe.Pointer(ppe)))
-	return foundation.BOOL(r1)
+func AnimatePalette(hPal HPALETTE, iStartIndex uint32, ppe []PALETTEENTRY) bool {
+	var _ppe *PALETTEENTRY
+	if len(ppe) > 0 {
+		_ppe = &ppe[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAnimatePalette.Addr(), uintptr(hPal), uintptr(iStartIndex), uintptr(len(ppe)), uintptr(unsafe.Pointer(_ppe)))
+	return r1 != 0
 }
 
 // Arc calls GDI32!Arc.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-arc
 // Minimum OS: windows5.0.
-func Arc(hdc HDC, x1 int32, y1 int32, x2 int32, y2 int32, x3 int32, y3 int32, x4 int32, y4 int32) foundation.BOOL {
+func Arc(hdc HDC, x1 int32, y1 int32, x2 int32, y2 int32, x3 int32, y3 int32, x4 int32, y4 int32) bool {
 	r1, _, _ := syscall.SyscallN(procArc.Addr(), uintptr(hdc), uintptr(x1), uintptr(y1), uintptr(x2), uintptr(y2), uintptr(x3), uintptr(y3), uintptr(x4), uintptr(y4))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ArcTo calls GDI32!ArcTo.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-arcto
 // Minimum OS: windows5.0.
-func ArcTo(hdc HDC, left int32, top int32, right int32, bottom int32, xr1 int32, yr1 int32, xr2 int32, yr2 int32) foundation.BOOL {
+func ArcTo(hdc HDC, left int32, top int32, right int32, bottom int32, xr1 int32, yr1 int32, xr2 int32, yr2 int32) bool {
 	r1, _, _ := syscall.SyscallN(procArcTo.Addr(), uintptr(hdc), uintptr(left), uintptr(top), uintptr(right), uintptr(bottom), uintptr(xr1), uintptr(yr1), uintptr(xr2), uintptr(yr2))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // BeginPaint calls USER32!BeginPaint.
@@ -497,9 +503,9 @@ func BeginPaint(hWnd foundation.HWND, lpPaint *PAINTSTRUCT) HDC {
 // BeginPath calls GDI32!BeginPath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-beginpath
 // Minimum OS: windows5.0.
-func BeginPath(hdc HDC) foundation.BOOL {
+func BeginPath(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procBeginPath.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // BitBlt calls GDI32!BitBlt.
@@ -516,9 +522,17 @@ func BitBlt(hdc HDC, x int32, y int32, cx int32, cy int32, hdcSrc HDC, x1 int32,
 // CancelDC calls GDI32!CancelDC.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-canceldc
 // Minimum OS: windows5.0.
-func CancelDC(hdc HDC) foundation.BOOL {
+func CancelDC(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procCancelDC.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ChangeDisplaySettings calls USER32!ChangeDisplaySettingsW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-changedisplaysettingsw
+// Minimum OS: windows5.0.
+func ChangeDisplaySettings(lpDevMode *DEVMODEW, dwFlags CDS_TYPE) DISP_CHANGE {
+	r1, _, _ := syscall.SyscallN(procChangeDisplaySettings.Addr(), uintptr(unsafe.Pointer(lpDevMode)), uintptr(dwFlags))
+	return DISP_CHANGE(r1)
 }
 
 // ChangeDisplaySettingsA calls USER32!ChangeDisplaySettingsA.
@@ -529,44 +543,37 @@ func ChangeDisplaySettingsA(lpDevMode *DEVMODEA, dwFlags CDS_TYPE) DISP_CHANGE {
 	return DISP_CHANGE(r1)
 }
 
+// ChangeDisplaySettingsEx calls USER32!ChangeDisplaySettingsExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-changedisplaysettingsexw
+// Minimum OS: windows5.0.
+func ChangeDisplaySettingsEx(lpszDeviceName string, lpDevMode *DEVMODEW, dwflags CDS_TYPE, lParam unsafe.Pointer) DISP_CHANGE {
+	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+	r1, _, _ := syscall.SyscallN(procChangeDisplaySettingsEx.Addr(), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(unsafe.Pointer(lpDevMode)), 0, uintptr(dwflags), uintptr(unsafe.Pointer(lParam)))
+	return DISP_CHANGE(r1)
+}
+
 // ChangeDisplaySettingsExA calls USER32!ChangeDisplaySettingsExA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-changedisplaysettingsexa
 // Minimum OS: windows5.0.
-func ChangeDisplaySettingsExA(lpszDeviceName foundation.PSTR, lpDevMode *DEVMODEA, hwnd foundation.HWND, dwflags CDS_TYPE, lParam unsafe.Pointer) DISP_CHANGE {
-	r1, _, _ := syscall.SyscallN(procChangeDisplaySettingsExA.Addr(), uintptr(unsafe.Pointer(lpszDeviceName)), uintptr(unsafe.Pointer(lpDevMode)), uintptr(hwnd), uintptr(dwflags), uintptr(unsafe.Pointer(lParam)))
-	return DISP_CHANGE(r1)
-}
-
-// ChangeDisplaySettingsExW calls USER32!ChangeDisplaySettingsExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-changedisplaysettingsexw
-// Minimum OS: windows5.0.
-func ChangeDisplaySettingsExW(lpszDeviceName foundation.PWSTR, lpDevMode *DEVMODEW, hwnd foundation.HWND, dwflags CDS_TYPE, lParam unsafe.Pointer) DISP_CHANGE {
-	r1, _, _ := syscall.SyscallN(procChangeDisplaySettingsExW.Addr(), uintptr(unsafe.Pointer(lpszDeviceName)), uintptr(unsafe.Pointer(lpDevMode)), uintptr(hwnd), uintptr(dwflags), uintptr(unsafe.Pointer(lParam)))
-	return DISP_CHANGE(r1)
-}
-
-// ChangeDisplaySettingsW calls USER32!ChangeDisplaySettingsW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-changedisplaysettingsw
-// Minimum OS: windows5.0.
-func ChangeDisplaySettingsW(lpDevMode *DEVMODEW, dwFlags CDS_TYPE) DISP_CHANGE {
-	r1, _, _ := syscall.SyscallN(procChangeDisplaySettingsW.Addr(), uintptr(unsafe.Pointer(lpDevMode)), uintptr(dwFlags))
+func ChangeDisplaySettingsExA(lpszDeviceName foundation.PSTR, lpDevMode *DEVMODEA, dwflags CDS_TYPE, lParam unsafe.Pointer) DISP_CHANGE {
+	r1, _, _ := syscall.SyscallN(procChangeDisplaySettingsExA.Addr(), uintptr(unsafe.Pointer(lpszDeviceName)), uintptr(unsafe.Pointer(lpDevMode)), 0, uintptr(dwflags), uintptr(unsafe.Pointer(lParam)))
 	return DISP_CHANGE(r1)
 }
 
 // Chord calls GDI32!Chord.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-chord
 // Minimum OS: windows5.0.
-func Chord(hdc HDC, x1 int32, y1 int32, x2 int32, y2 int32, x3 int32, y3 int32, x4 int32, y4 int32) foundation.BOOL {
+func Chord(hdc HDC, x1 int32, y1 int32, x2 int32, y2 int32, x3 int32, y3 int32, x4 int32, y4 int32) bool {
 	r1, _, _ := syscall.SyscallN(procChord.Addr(), uintptr(hdc), uintptr(x1), uintptr(y1), uintptr(x2), uintptr(y2), uintptr(x3), uintptr(y3), uintptr(x4), uintptr(y4))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ClientToScreen calls USER32!ClientToScreen.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-clienttoscreen
 // Minimum OS: windows5.0.
-func ClientToScreen(hWnd foundation.HWND, lpPoint *foundation.POINT) foundation.BOOL {
+func ClientToScreen(hWnd foundation.HWND, lpPoint *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procClientToScreen.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpPoint)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CloseEnhMetaFile calls GDI32!CloseEnhMetaFile.
@@ -580,9 +587,9 @@ func CloseEnhMetaFile(hdc HDC) HENHMETAFILE {
 // CloseFigure calls GDI32!CloseFigure.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-closefigure
 // Minimum OS: windows5.0.
-func CloseFigure(hdc HDC) foundation.BOOL {
+func CloseFigure(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procCloseFigure.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CloseMetaFile calls GDI32!CloseMetaFile.
@@ -604,9 +611,18 @@ func CombineRgn(hrgnDst HRGN, hrgnSrc1 HRGN, hrgnSrc2 HRGN, iMode RGN_COMBINE_MO
 // CombineTransform calls GDI32!CombineTransform.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-combinetransform
 // Minimum OS: windows5.0.
-func CombineTransform(lpxfOut *XFORM, lpxf1 *XFORM, lpxf2 *XFORM) foundation.BOOL {
+func CombineTransform(lpxfOut *XFORM, lpxf1 *XFORM, lpxf2 *XFORM) bool {
 	r1, _, _ := syscall.SyscallN(procCombineTransform.Addr(), uintptr(unsafe.Pointer(lpxfOut)), uintptr(unsafe.Pointer(lpxf1)), uintptr(unsafe.Pointer(lpxf2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// CopyEnhMetaFile calls GDI32!CopyEnhMetaFileW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-copyenhmetafilew
+// Minimum OS: windows5.0.
+func CopyEnhMetaFile(hEnh HENHMETAFILE, lpFileName string) HENHMETAFILE {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procCopyEnhMetaFile.Addr(), uintptr(hEnh), uintptr(unsafe.Pointer(_lpFileName)))
+	return HENHMETAFILE(r1)
 }
 
 // CopyEnhMetaFileA calls GDI32!CopyEnhMetaFileA.
@@ -617,12 +633,13 @@ func CopyEnhMetaFileA(hEnh HENHMETAFILE, lpFileName foundation.PSTR) HENHMETAFIL
 	return HENHMETAFILE(r1)
 }
 
-// CopyEnhMetaFileW calls GDI32!CopyEnhMetaFileW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-copyenhmetafilew
+// CopyMetaFile calls GDI32!CopyMetaFileW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-copymetafilew
 // Minimum OS: windows5.0.
-func CopyEnhMetaFileW(hEnh HENHMETAFILE, lpFileName foundation.PWSTR) HENHMETAFILE {
-	r1, _, _ := syscall.SyscallN(procCopyEnhMetaFileW.Addr(), uintptr(hEnh), uintptr(unsafe.Pointer(lpFileName)))
-	return HENHMETAFILE(r1)
+func CopyMetaFile(param0 HMETAFILE, param1 string) HMETAFILE {
+	_param1 := win32.UTF16Ptr(param1)
+	r1, _, _ := syscall.SyscallN(procCopyMetaFile.Addr(), uintptr(param0), uintptr(unsafe.Pointer(_param1)))
+	return HMETAFILE(r1)
 }
 
 // CopyMetaFileA calls GDI32!CopyMetaFileA.
@@ -633,20 +650,12 @@ func CopyMetaFileA(param0 HMETAFILE, param1 foundation.PSTR) HMETAFILE {
 	return HMETAFILE(r1)
 }
 
-// CopyMetaFileW calls GDI32!CopyMetaFileW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-copymetafilew
-// Minimum OS: windows5.0.
-func CopyMetaFileW(param0 HMETAFILE, param1 foundation.PWSTR) HMETAFILE {
-	r1, _, _ := syscall.SyscallN(procCopyMetaFileW.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return HMETAFILE(r1)
-}
-
 // CopyRect calls USER32!CopyRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-copyrect
 // Minimum OS: windows5.0.
-func CopyRect(lprcDst *foundation.RECT, lprcSrc *foundation.RECT) foundation.BOOL {
+func CopyRect(lprcDst *foundation.RECT, lprcSrc *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procCopyRect.Addr(), uintptr(unsafe.Pointer(lprcDst)), uintptr(unsafe.Pointer(lprcSrc)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CreateBitmap calls GDI32!CreateBitmap.
@@ -689,19 +698,22 @@ func CreateCompatibleDC(hdc HDC) HDC {
 	return HDC(r1)
 }
 
+// CreateDC calls GDI32!CreateDCW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createdcw
+// Minimum OS: windows5.0.
+func CreateDC(pwszDriver string, pwszDevice string, pszPort string, pdm *DEVMODEW) HDC {
+	_pwszDriver := win32.UTF16Ptr(pwszDriver)
+	_pwszDevice := win32.UTF16Ptr(pwszDevice)
+	_pszPort := win32.UTF16Ptr(pszPort)
+	r1, _, _ := syscall.SyscallN(procCreateDC.Addr(), uintptr(unsafe.Pointer(_pwszDriver)), uintptr(unsafe.Pointer(_pwszDevice)), uintptr(unsafe.Pointer(_pszPort)), uintptr(unsafe.Pointer(pdm)))
+	return HDC(r1)
+}
+
 // CreateDCA calls GDI32!CreateDCA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createdca
 // Minimum OS: windows5.0.
 func CreateDCA(pwszDriver foundation.PSTR, pwszDevice foundation.PSTR, pszPort foundation.PSTR, pdm *DEVMODEA) HDC {
 	r1, _, _ := syscall.SyscallN(procCreateDCA.Addr(), uintptr(unsafe.Pointer(pwszDriver)), uintptr(unsafe.Pointer(pwszDevice)), uintptr(unsafe.Pointer(pszPort)), uintptr(unsafe.Pointer(pdm)))
-	return HDC(r1)
-}
-
-// CreateDCW calls GDI32!CreateDCW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createdcw
-// Minimum OS: windows5.0.
-func CreateDCW(pwszDriver foundation.PWSTR, pwszDevice foundation.PWSTR, pszPort foundation.PWSTR, pdm *DEVMODEW) HDC {
-	r1, _, _ := syscall.SyscallN(procCreateDCW.Addr(), uintptr(unsafe.Pointer(pwszDriver)), uintptr(unsafe.Pointer(pwszDevice)), uintptr(unsafe.Pointer(pszPort)), uintptr(unsafe.Pointer(pdm)))
 	return HDC(r1)
 }
 
@@ -765,6 +777,16 @@ func CreateEllipticRgnIndirect(lprect *foundation.RECT) HRGN {
 	return HRGN(r1)
 }
 
+// CreateEnhMetaFile calls GDI32!CreateEnhMetaFileW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createenhmetafilew
+// Minimum OS: windows5.0.
+func CreateEnhMetaFile(hdc HDC, lpFilename string, lprc *foundation.RECT, lpDesc string) HDC {
+	_lpFilename := win32.UTF16Ptr(lpFilename)
+	_lpDesc := win32.UTF16Ptr(lpDesc)
+	r1, _, _ := syscall.SyscallN(procCreateEnhMetaFile.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpFilename)), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(_lpDesc)))
+	return HDC(r1)
+}
+
 // CreateEnhMetaFileA calls GDI32!CreateEnhMetaFileA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createenhmetafilea
 // Minimum OS: windows5.0.
@@ -773,12 +795,13 @@ func CreateEnhMetaFileA(hdc HDC, lpFilename foundation.PSTR, lprc *foundation.RE
 	return HDC(r1)
 }
 
-// CreateEnhMetaFileW calls GDI32!CreateEnhMetaFileW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createenhmetafilew
+// CreateFont calls GDI32!CreateFontW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createfontw
 // Minimum OS: windows5.0.
-func CreateEnhMetaFileW(hdc HDC, lpFilename foundation.PWSTR, lprc *foundation.RECT, lpDesc foundation.PWSTR) HDC {
-	r1, _, _ := syscall.SyscallN(procCreateEnhMetaFileW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpFilename)), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(lpDesc)))
-	return HDC(r1)
+func CreateFont(cHeight int32, cWidth int32, cEscapement int32, cOrientation int32, cWeight int32, bItalic uint32, bUnderline uint32, bStrikeOut uint32, iCharSet uint32, iOutPrecision uint32, iClipPrecision uint32, iQuality uint32, iPitchAndFamily uint32, pszFaceName string) HFONT {
+	_pszFaceName := win32.UTF16Ptr(pszFaceName)
+	r1, _, _ := syscall.SyscallN(procCreateFont.Addr(), uintptr(cHeight), uintptr(cWidth), uintptr(cEscapement), uintptr(cOrientation), uintptr(cWeight), uintptr(bItalic), uintptr(bUnderline), uintptr(bStrikeOut), uintptr(iCharSet), uintptr(iOutPrecision), uintptr(iClipPrecision), uintptr(iQuality), uintptr(iPitchAndFamily), uintptr(unsafe.Pointer(_pszFaceName)))
+	return HFONT(r1)
 }
 
 // CreateFontA calls GDI32!CreateFontA.
@@ -786,6 +809,14 @@ func CreateEnhMetaFileW(hdc HDC, lpFilename foundation.PWSTR, lprc *foundation.R
 // Minimum OS: windows5.0.
 func CreateFontA(cHeight int32, cWidth int32, cEscapement int32, cOrientation int32, cWeight int32, bItalic uint32, bUnderline uint32, bStrikeOut uint32, iCharSet uint32, iOutPrecision uint32, iClipPrecision uint32, iQuality uint32, iPitchAndFamily uint32, pszFaceName foundation.PSTR) HFONT {
 	r1, _, _ := syscall.SyscallN(procCreateFontA.Addr(), uintptr(cHeight), uintptr(cWidth), uintptr(cEscapement), uintptr(cOrientation), uintptr(cWeight), uintptr(bItalic), uintptr(bUnderline), uintptr(bStrikeOut), uintptr(iCharSet), uintptr(iOutPrecision), uintptr(iClipPrecision), uintptr(iQuality), uintptr(iPitchAndFamily), uintptr(unsafe.Pointer(pszFaceName)))
+	return HFONT(r1)
+}
+
+// CreateFontIndirect calls GDI32!CreateFontIndirectW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createfontindirectw
+// Minimum OS: windows5.0.
+func CreateFontIndirect(lplf *LOGFONTW) HFONT {
+	r1, _, _ := syscall.SyscallN(procCreateFontIndirect.Addr(), uintptr(unsafe.Pointer(lplf)))
 	return HFONT(r1)
 }
 
@@ -797,27 +828,19 @@ func CreateFontIndirectA(lplf *LOGFONTA) HFONT {
 	return HFONT(r1)
 }
 
+// CreateFontIndirectEx calls GDI32!CreateFontIndirectExW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createfontindirectexw
+// Minimum OS: windows5.0.
+func CreateFontIndirectEx(param0 *ENUMLOGFONTEXDVW) HFONT {
+	r1, _, _ := syscall.SyscallN(procCreateFontIndirectEx.Addr(), uintptr(unsafe.Pointer(param0)))
+	return HFONT(r1)
+}
+
 // CreateFontIndirectExA calls GDI32!CreateFontIndirectExA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createfontindirectexa
 // Minimum OS: windows5.0.
 func CreateFontIndirectExA(param0 *ENUMLOGFONTEXDVA) HFONT {
 	r1, _, _ := syscall.SyscallN(procCreateFontIndirectExA.Addr(), uintptr(unsafe.Pointer(param0)))
-	return HFONT(r1)
-}
-
-// CreateFontIndirectExW calls GDI32!CreateFontIndirectExW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createfontindirectexw
-// Minimum OS: windows5.0.
-func CreateFontIndirectExW(param0 *ENUMLOGFONTEXDVW) HFONT {
-	r1, _, _ := syscall.SyscallN(procCreateFontIndirectExW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return HFONT(r1)
-}
-
-// CreateFontIndirectW calls GDI32!CreateFontIndirectW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createfontindirectw
-// Minimum OS: windows5.0.
-func CreateFontIndirectW(lplf *LOGFONTW) HFONT {
-	r1, _, _ := syscall.SyscallN(procCreateFontIndirectW.Addr(), uintptr(unsafe.Pointer(lplf)))
 	return HFONT(r1)
 }
 
@@ -827,14 +850,6 @@ func CreateFontIndirectW(lplf *LOGFONTW) HFONT {
 func CreateFontPackage(puchSrcBuffer *byte, ulSrcBufferSize uint32, ppuchFontPackageBuffer **byte, pulFontPackageBufferSize *uint32, pulBytesWritten *uint32, usFlag uint16, usTTCIndex uint16, usSubsetFormat uint16, usSubsetLanguage uint16, usSubsetPlatform CREATE_FONT_PACKAGE_SUBSET_PLATFORM, usSubsetEncoding CREATE_FONT_PACKAGE_SUBSET_ENCODING, pusSubsetKeepList *uint16, usSubsetListCount uint16, lpfnAllocate CFP_ALLOCPROC, lpfnReAllocate CFP_REALLOCPROC, lpfnFree CFP_FREEPROC, lpvReserved unsafe.Pointer) uint32 {
 	r1, _, _ := syscall.SyscallN(procCreateFontPackage.Addr(), uintptr(unsafe.Pointer(puchSrcBuffer)), uintptr(ulSrcBufferSize), uintptr(unsafe.Pointer(ppuchFontPackageBuffer)), uintptr(unsafe.Pointer(pulFontPackageBufferSize)), uintptr(unsafe.Pointer(pulBytesWritten)), uintptr(usFlag), uintptr(usTTCIndex), uintptr(usSubsetFormat), uintptr(usSubsetLanguage), uintptr(usSubsetPlatform), uintptr(usSubsetEncoding), uintptr(unsafe.Pointer(pusSubsetKeepList)), uintptr(usSubsetListCount), uintptr(lpfnAllocate), uintptr(lpfnReAllocate), uintptr(lpfnFree), uintptr(unsafe.Pointer(lpvReserved)))
 	return uint32(r1)
-}
-
-// CreateFontW calls GDI32!CreateFontW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createfontw
-// Minimum OS: windows5.0.
-func CreateFontW(cHeight int32, cWidth int32, cEscapement int32, cOrientation int32, cWeight int32, bItalic uint32, bUnderline uint32, bStrikeOut uint32, iCharSet uint32, iOutPrecision uint32, iClipPrecision uint32, iQuality uint32, iPitchAndFamily uint32, pszFaceName foundation.PWSTR) HFONT {
-	r1, _, _ := syscall.SyscallN(procCreateFontW.Addr(), uintptr(cHeight), uintptr(cWidth), uintptr(cEscapement), uintptr(cOrientation), uintptr(cWeight), uintptr(bItalic), uintptr(bUnderline), uintptr(bStrikeOut), uintptr(iCharSet), uintptr(iOutPrecision), uintptr(iClipPrecision), uintptr(iQuality), uintptr(iPitchAndFamily), uintptr(unsafe.Pointer(pszFaceName)))
-	return HFONT(r1)
 }
 
 // CreateHalftonePalette calls GDI32!CreateHalftonePalette.
@@ -853,6 +868,17 @@ func CreateHatchBrush(iHatch HATCH_BRUSH_STYLE, color foundation.COLORREF) HBRUS
 	return HBRUSH(r1)
 }
 
+// CreateIC calls GDI32!CreateICW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createicw
+// Minimum OS: windows5.0.
+func CreateIC(pszDriver string, pszDevice string, pszPort string, pdm *DEVMODEW) HDC {
+	_pszDriver := win32.UTF16Ptr(pszDriver)
+	_pszDevice := win32.UTF16Ptr(pszDevice)
+	_pszPort := win32.UTF16Ptr(pszPort)
+	r1, _, _ := syscall.SyscallN(procCreateIC.Addr(), uintptr(unsafe.Pointer(_pszDriver)), uintptr(unsafe.Pointer(_pszDevice)), uintptr(unsafe.Pointer(_pszPort)), uintptr(unsafe.Pointer(pdm)))
+	return HDC(r1)
+}
+
 // CreateICA calls GDI32!CreateICA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createica
 // Minimum OS: windows5.0.
@@ -861,11 +887,12 @@ func CreateICA(pszDriver foundation.PSTR, pszDevice foundation.PSTR, pszPort fou
 	return HDC(r1)
 }
 
-// CreateICW calls GDI32!CreateICW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createicw
+// CreateMetaFile calls GDI32!CreateMetaFileW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createmetafilew
 // Minimum OS: windows5.0.
-func CreateICW(pszDriver foundation.PWSTR, pszDevice foundation.PWSTR, pszPort foundation.PWSTR, pdm *DEVMODEW) HDC {
-	r1, _, _ := syscall.SyscallN(procCreateICW.Addr(), uintptr(unsafe.Pointer(pszDriver)), uintptr(unsafe.Pointer(pszDevice)), uintptr(unsafe.Pointer(pszPort)), uintptr(unsafe.Pointer(pdm)))
+func CreateMetaFile(pszFile string) HDC {
+	_pszFile := win32.UTF16Ptr(pszFile)
+	r1, _, _ := syscall.SyscallN(procCreateMetaFile.Addr(), uintptr(unsafe.Pointer(_pszFile)))
 	return HDC(r1)
 }
 
@@ -874,14 +901,6 @@ func CreateICW(pszDriver foundation.PWSTR, pszDevice foundation.PWSTR, pszPort f
 // Minimum OS: windows5.0.
 func CreateMetaFileA(pszFile foundation.PSTR) HDC {
 	r1, _, _ := syscall.SyscallN(procCreateMetaFileA.Addr(), uintptr(unsafe.Pointer(pszFile)))
-	return HDC(r1)
-}
-
-// CreateMetaFileW calls GDI32!CreateMetaFileW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createmetafilew
-// Minimum OS: windows5.0.
-func CreateMetaFileW(pszFile foundation.PWSTR) HDC {
-	r1, _, _ := syscall.SyscallN(procCreateMetaFileW.Addr(), uintptr(unsafe.Pointer(pszFile)))
 	return HDC(r1)
 }
 
@@ -920,16 +939,24 @@ func CreatePenIndirect(plpen *LOGPEN) HPEN {
 // CreatePolyPolygonRgn calls GDI32!CreatePolyPolygonRgn.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createpolypolygonrgn
 // Minimum OS: windows5.0.
-func CreatePolyPolygonRgn(pptl *foundation.POINT, pc *int32, cPoly int32, iMode CREATE_POLYGON_RGN_MODE) HRGN {
-	r1, _, _ := syscall.SyscallN(procCreatePolyPolygonRgn.Addr(), uintptr(unsafe.Pointer(pptl)), uintptr(unsafe.Pointer(pc)), uintptr(cPoly), uintptr(iMode))
+func CreatePolyPolygonRgn(pptl *foundation.POINT, pc []int32, iMode CREATE_POLYGON_RGN_MODE) HRGN {
+	var _pc *int32
+	if len(pc) > 0 {
+		_pc = &pc[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCreatePolyPolygonRgn.Addr(), uintptr(unsafe.Pointer(pptl)), uintptr(unsafe.Pointer(_pc)), uintptr(len(pc)), uintptr(iMode))
 	return HRGN(r1)
 }
 
 // CreatePolygonRgn calls GDI32!CreatePolygonRgn.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createpolygonrgn
 // Minimum OS: windows5.0.
-func CreatePolygonRgn(pptl *foundation.POINT, cPoint int32, iMode CREATE_POLYGON_RGN_MODE) HRGN {
-	r1, _, _ := syscall.SyscallN(procCreatePolygonRgn.Addr(), uintptr(unsafe.Pointer(pptl)), uintptr(cPoint), uintptr(iMode))
+func CreatePolygonRgn(pptl []foundation.POINT, iMode CREATE_POLYGON_RGN_MODE) HRGN {
+	var _pptl *foundation.POINT
+	if len(pptl) > 0 {
+		_pptl = &pptl[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCreatePolygonRgn.Addr(), uintptr(unsafe.Pointer(_pptl)), uintptr(len(pptl)), uintptr(iMode))
 	return HRGN(r1)
 }
 
@@ -957,22 +984,25 @@ func CreateRoundRectRgn(x1 int32, y1 int32, x2 int32, y2 int32, w int32, h int32
 	return HRGN(r1)
 }
 
-// CreateScalableFontResourceA calls GDI32!CreateScalableFontResourceA.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createscalablefontresourcea
+// CreateScalableFontResource calls GDI32!CreateScalableFontResourceW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createscalablefontresourcew
 // Minimum OS: windows5.0.
-func CreateScalableFontResourceA(fdwHidden uint32, lpszFont foundation.PSTR, lpszFile foundation.PSTR, lpszPath foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procCreateScalableFontResourceA.Addr(), uintptr(fdwHidden), uintptr(unsafe.Pointer(lpszFont)), uintptr(unsafe.Pointer(lpszFile)), uintptr(unsafe.Pointer(lpszPath)))
+func CreateScalableFontResource(fdwHidden uint32, lpszFont string, lpszFile string, lpszPath string) error {
+	_lpszFont := win32.UTF16Ptr(lpszFont)
+	_lpszFile := win32.UTF16Ptr(lpszFile)
+	_lpszPath := win32.UTF16Ptr(lpszPath)
+	r1, _, e1 := syscall.SyscallN(procCreateScalableFontResource.Addr(), uintptr(fdwHidden), uintptr(unsafe.Pointer(_lpszFont)), uintptr(unsafe.Pointer(_lpszFile)), uintptr(unsafe.Pointer(_lpszPath)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// CreateScalableFontResourceW calls GDI32!CreateScalableFontResourceW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createscalablefontresourcew
+// CreateScalableFontResourceA calls GDI32!CreateScalableFontResourceA.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createscalablefontresourcea
 // Minimum OS: windows5.0.
-func CreateScalableFontResourceW(fdwHidden uint32, lpszFont foundation.PWSTR, lpszFile foundation.PWSTR, lpszPath foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procCreateScalableFontResourceW.Addr(), uintptr(fdwHidden), uintptr(unsafe.Pointer(lpszFont)), uintptr(unsafe.Pointer(lpszFile)), uintptr(unsafe.Pointer(lpszPath)))
+func CreateScalableFontResourceA(fdwHidden uint32, lpszFont foundation.PSTR, lpszFile foundation.PSTR, lpszPath foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procCreateScalableFontResourceA.Addr(), uintptr(fdwHidden), uintptr(unsafe.Pointer(lpszFont)), uintptr(unsafe.Pointer(lpszFile)), uintptr(unsafe.Pointer(lpszPath)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -990,65 +1020,69 @@ func CreateSolidBrush(color foundation.COLORREF) HBRUSH {
 // DPtoLP calls GDI32!DPtoLP.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-dptolp
 // Minimum OS: windows5.0.
-func DPtoLP(hdc HDC, lppt *foundation.POINT, c int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDPtoLP.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lppt)), uintptr(c))
-	return foundation.BOOL(r1)
+func DPtoLP(hdc HDC, lppt []foundation.POINT) bool {
+	var _lppt *foundation.POINT
+	if len(lppt) > 0 {
+		_lppt = &lppt[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDPtoLP.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lppt)), uintptr(len(lppt)))
+	return r1 != 0
 }
 
 // DeleteDC calls GDI32!DeleteDC.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-deletedc
 // Minimum OS: windows5.0.
-func DeleteDC(hdc HDC) foundation.BOOL {
+func DeleteDC(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procDeleteDC.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DeleteEnhMetaFile calls GDI32!DeleteEnhMetaFile.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-deleteenhmetafile
 // Minimum OS: windows5.0.
-func DeleteEnhMetaFile(hmf HENHMETAFILE) foundation.BOOL {
+func DeleteEnhMetaFile(hmf HENHMETAFILE) bool {
 	r1, _, _ := syscall.SyscallN(procDeleteEnhMetaFile.Addr(), uintptr(hmf))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DeleteMetaFile calls GDI32!DeleteMetaFile.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-deletemetafile
 // Minimum OS: windows5.0.
-func DeleteMetaFile(hmf HMETAFILE) foundation.BOOL {
+func DeleteMetaFile(hmf HMETAFILE) bool {
 	r1, _, _ := syscall.SyscallN(procDeleteMetaFile.Addr(), uintptr(hmf))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DeleteObject calls GDI32!DeleteObject.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-deleteobject
 // Minimum OS: windows5.0.
-func DeleteObject(ho HGDIOBJ) foundation.BOOL {
+func DeleteObject(ho HGDIOBJ) bool {
 	r1, _, _ := syscall.SyscallN(procDeleteObject.Addr(), uintptr(ho))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawAnimatedRects calls USER32!DrawAnimatedRects.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawanimatedrects
 // Minimum OS: windows5.0.
-func DrawAnimatedRects(hwnd foundation.HWND, idAni int32, lprcFrom *foundation.RECT, lprcTo *foundation.RECT) foundation.BOOL {
+func DrawAnimatedRects(hwnd foundation.HWND, idAni int32, lprcFrom *foundation.RECT, lprcTo *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procDrawAnimatedRects.Addr(), uintptr(hwnd), uintptr(idAni), uintptr(unsafe.Pointer(lprcFrom)), uintptr(unsafe.Pointer(lprcTo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawCaption calls USER32!DrawCaption.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawcaption
 // Minimum OS: windows5.0.
-func DrawCaption(hwnd foundation.HWND, hdc HDC, lprect *foundation.RECT, flags DRAW_CAPTION_FLAGS) foundation.BOOL {
+func DrawCaption(hwnd foundation.HWND, hdc HDC, lprect *foundation.RECT, flags DRAW_CAPTION_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procDrawCaption.Addr(), uintptr(hwnd), uintptr(hdc), uintptr(unsafe.Pointer(lprect)), uintptr(flags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawEdge calls USER32!DrawEdge.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawedge
 // Minimum OS: windows5.0.
-func DrawEdge(hdc HDC, qrc *foundation.RECT, edge DRAWEDGE_FLAGS, grfFlags DRAW_EDGE_FLAGS) foundation.BOOL {
+func DrawEdge(hdc HDC, qrc *foundation.RECT, edge DRAWEDGE_FLAGS, grfFlags DRAW_EDGE_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procDrawEdge.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(qrc)), uintptr(edge), uintptr(grfFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawEscape calls GDI32!DrawEscape.
@@ -1062,33 +1096,41 @@ func DrawEscape(hdc HDC, iEscape int32, cjIn int32, lpIn foundation.PSTR) int32 
 // DrawFocusRect calls USER32!DrawFocusRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawfocusrect
 // Minimum OS: windows5.0.
-func DrawFocusRect(hDC HDC, lprc *foundation.RECT) foundation.BOOL {
+func DrawFocusRect(hDC HDC, lprc *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procDrawFocusRect.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(lprc)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DrawFrameControl calls USER32!DrawFrameControl.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawframecontrol
 // Minimum OS: windows5.0.
-func DrawFrameControl(hdc HDC, lprc *foundation.RECT, uType uint32, uState uint32) foundation.BOOL {
+func DrawFrameControl(hdc HDC, lprc *foundation.RECT, uType uint32, uState uint32) bool {
 	r1, _, _ := syscall.SyscallN(procDrawFrameControl.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lprc)), uintptr(uType), uintptr(uState))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// DrawState calls USER32!DrawStateW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawstatew
+// Minimum OS: windows5.0.
+func DrawState(hdc HDC, hbrFore HBRUSH, qfnCallBack DRAWSTATEPROC, lData foundation.LPARAM, wData foundation.WPARAM, x int32, y int32, cx int32, cy int32, uFlags DRAWSTATE_FLAGS) bool {
+	r1, _, _ := syscall.SyscallN(procDrawState.Addr(), uintptr(hdc), uintptr(hbrFore), uintptr(qfnCallBack), uintptr(lData), uintptr(wData), uintptr(x), uintptr(y), uintptr(cx), uintptr(cy), uintptr(uFlags))
+	return r1 != 0
 }
 
 // DrawStateA calls USER32!DrawStateA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawstatea
 // Minimum OS: windows5.0.
-func DrawStateA(hdc HDC, hbrFore HBRUSH, qfnCallBack DRAWSTATEPROC, lData foundation.LPARAM, wData foundation.WPARAM, x int32, y int32, cx int32, cy int32, uFlags DRAWSTATE_FLAGS) foundation.BOOL {
+func DrawStateA(hdc HDC, hbrFore HBRUSH, qfnCallBack DRAWSTATEPROC, lData foundation.LPARAM, wData foundation.WPARAM, x int32, y int32, cx int32, cy int32, uFlags DRAWSTATE_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procDrawStateA.Addr(), uintptr(hdc), uintptr(hbrFore), uintptr(qfnCallBack), uintptr(lData), uintptr(wData), uintptr(x), uintptr(y), uintptr(cx), uintptr(cy), uintptr(uFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// DrawStateW calls USER32!DrawStateW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawstatew
+// DrawText calls USER32!DrawTextW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawtextw
 // Minimum OS: windows5.0.
-func DrawStateW(hdc HDC, hbrFore HBRUSH, qfnCallBack DRAWSTATEPROC, lData foundation.LPARAM, wData foundation.WPARAM, x int32, y int32, cx int32, cy int32, uFlags DRAWSTATE_FLAGS) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDrawStateW.Addr(), uintptr(hdc), uintptr(hbrFore), uintptr(qfnCallBack), uintptr(lData), uintptr(wData), uintptr(x), uintptr(y), uintptr(cx), uintptr(cy), uintptr(uFlags))
-	return foundation.BOOL(r1)
+func DrawText(hdc HDC, lpchText foundation.PWSTR, cchText int32, lprc *foundation.RECT, format DRAW_TEXT_FORMAT) int32 {
+	r1, _, _ := syscall.SyscallN(procDrawText.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpchText)), uintptr(cchText), uintptr(unsafe.Pointer(lprc)), uintptr(format))
+	return int32(r1)
 }
 
 // DrawTextA calls USER32!DrawTextA.
@@ -1096,6 +1138,14 @@ func DrawStateW(hdc HDC, hbrFore HBRUSH, qfnCallBack DRAWSTATEPROC, lData founda
 // Minimum OS: windows5.0.
 func DrawTextA(hdc HDC, lpchText foundation.PSTR, cchText int32, lprc *foundation.RECT, format DRAW_TEXT_FORMAT) int32 {
 	r1, _, _ := syscall.SyscallN(procDrawTextA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpchText)), uintptr(cchText), uintptr(unsafe.Pointer(lprc)), uintptr(format))
+	return int32(r1)
+}
+
+// DrawTextEx calls USER32!DrawTextExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawtextexw
+// Minimum OS: windows5.0.
+func DrawTextEx(hdc HDC, lpchText foundation.PWSTR, cchText int32, lprc *foundation.RECT, format DRAW_TEXT_FORMAT, lpdtp *DRAWTEXTPARAMS) int32 {
+	r1, _, _ := syscall.SyscallN(procDrawTextEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpchText)), uintptr(cchText), uintptr(unsafe.Pointer(lprc)), uintptr(format), uintptr(unsafe.Pointer(lpdtp)))
 	return int32(r1)
 }
 
@@ -1107,108 +1157,104 @@ func DrawTextExA(hdc HDC, lpchText foundation.PSTR, cchText int32, lprc *foundat
 	return int32(r1)
 }
 
-// DrawTextExW calls USER32!DrawTextExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawtextexw
-// Minimum OS: windows5.0.
-func DrawTextExW(hdc HDC, lpchText foundation.PWSTR, cchText int32, lprc *foundation.RECT, format DRAW_TEXT_FORMAT, lpdtp *DRAWTEXTPARAMS) int32 {
-	r1, _, _ := syscall.SyscallN(procDrawTextExW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpchText)), uintptr(cchText), uintptr(unsafe.Pointer(lprc)), uintptr(format), uintptr(unsafe.Pointer(lpdtp)))
-	return int32(r1)
-}
-
-// DrawTextW calls USER32!DrawTextW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-drawtextw
-// Minimum OS: windows5.0.
-func DrawTextW(hdc HDC, lpchText foundation.PWSTR, cchText int32, lprc *foundation.RECT, format DRAW_TEXT_FORMAT) int32 {
-	r1, _, _ := syscall.SyscallN(procDrawTextW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpchText)), uintptr(cchText), uintptr(unsafe.Pointer(lprc)), uintptr(format))
-	return int32(r1)
-}
-
 // Ellipse calls GDI32!Ellipse.
 // https://learn.microsoft.com/windows/win32/api/d2d1helper/nf-d2d1helper-ellipse
 // Minimum OS: windows6.1.
-func Ellipse(hdc HDC, left int32, top int32, right int32, bottom int32) foundation.BOOL {
+func Ellipse(hdc HDC, left int32, top int32, right int32, bottom int32) bool {
 	r1, _, _ := syscall.SyscallN(procEllipse.Addr(), uintptr(hdc), uintptr(left), uintptr(top), uintptr(right), uintptr(bottom))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EndPaint calls USER32!EndPaint.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-endpaint
 // Minimum OS: windows5.0.
-func EndPaint(hWnd foundation.HWND, lpPaint *PAINTSTRUCT) foundation.BOOL {
+func EndPaint(hWnd foundation.HWND, lpPaint *PAINTSTRUCT) bool {
 	r1, _, _ := syscall.SyscallN(procEndPaint.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpPaint)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EndPath calls GDI32!EndPath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-endpath
 // Minimum OS: windows5.0.
-func EndPath(hdc HDC) foundation.BOOL {
+func EndPath(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procEndPath.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// EnumDisplayDevices calls USER32!EnumDisplayDevicesW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaydevicesw
+// Minimum OS: windows5.0.
+func EnumDisplayDevices(lpDevice string, iDevNum uint32, lpDisplayDevice *DISPLAY_DEVICEW, dwFlags uint32) bool {
+	_lpDevice := win32.UTF16Ptr(lpDevice)
+	r1, _, _ := syscall.SyscallN(procEnumDisplayDevices.Addr(), uintptr(unsafe.Pointer(_lpDevice)), uintptr(iDevNum), uintptr(unsafe.Pointer(lpDisplayDevice)), uintptr(dwFlags))
+	return r1 != 0
 }
 
 // EnumDisplayDevicesA calls USER32!EnumDisplayDevicesA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaydevicesa
 // Minimum OS: windows5.0.
-func EnumDisplayDevicesA(lpDevice foundation.PSTR, iDevNum uint32, lpDisplayDevice *DISPLAY_DEVICEA, dwFlags uint32) foundation.BOOL {
+func EnumDisplayDevicesA(lpDevice foundation.PSTR, iDevNum uint32, lpDisplayDevice *DISPLAY_DEVICEA, dwFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEnumDisplayDevicesA.Addr(), uintptr(unsafe.Pointer(lpDevice)), uintptr(iDevNum), uintptr(unsafe.Pointer(lpDisplayDevice)), uintptr(dwFlags))
-	return foundation.BOOL(r1)
-}
-
-// EnumDisplayDevicesW calls USER32!EnumDisplayDevicesW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaydevicesw
-// Minimum OS: windows5.0.
-func EnumDisplayDevicesW(lpDevice foundation.PWSTR, iDevNum uint32, lpDisplayDevice *DISPLAY_DEVICEW, dwFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumDisplayDevicesW.Addr(), uintptr(unsafe.Pointer(lpDevice)), uintptr(iDevNum), uintptr(unsafe.Pointer(lpDisplayDevice)), uintptr(dwFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EnumDisplayMonitors calls USER32!EnumDisplayMonitors.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaymonitors
 // Minimum OS: windows5.0.
-func EnumDisplayMonitors(hdc HDC, lprcClip *foundation.RECT, lpfnEnum MONITORENUMPROC, dwData foundation.LPARAM) foundation.BOOL {
+func EnumDisplayMonitors(hdc HDC, lprcClip *foundation.RECT, lpfnEnum MONITORENUMPROC, dwData foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procEnumDisplayMonitors.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lprcClip)), uintptr(lpfnEnum), uintptr(dwData))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// EnumDisplaySettings calls USER32!EnumDisplaySettingsW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsw
+// Minimum OS: windows5.0.
+func EnumDisplaySettings(lpszDeviceName string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW) bool {
+	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+	r1, _, _ := syscall.SyscallN(procEnumDisplaySettings.Addr(), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)))
+	return r1 != 0
 }
 
 // EnumDisplaySettingsA calls USER32!EnumDisplaySettingsA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsa
 // Minimum OS: windows5.0.
-func EnumDisplaySettingsA(lpszDeviceName foundation.PSTR, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEA) foundation.BOOL {
+func EnumDisplaySettingsA(lpszDeviceName foundation.PSTR, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEA) bool {
 	r1, _, _ := syscall.SyscallN(procEnumDisplaySettingsA.Addr(), uintptr(unsafe.Pointer(lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// EnumDisplaySettingsEx calls USER32!EnumDisplaySettingsExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsexw
+// Minimum OS: windows5.0.
+func EnumDisplaySettingsEx(lpszDeviceName string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW, dwFlags ENUM_DISPLAY_SETTINGS_FLAGS) bool {
+	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+	r1, _, _ := syscall.SyscallN(procEnumDisplaySettingsEx.Addr(), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)), uintptr(dwFlags))
+	return r1 != 0
 }
 
 // EnumDisplaySettingsExA calls USER32!EnumDisplaySettingsExA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsexa
 // Minimum OS: windows5.0.
-func EnumDisplaySettingsExA(lpszDeviceName foundation.PSTR, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEA, dwFlags ENUM_DISPLAY_SETTINGS_FLAGS) foundation.BOOL {
+func EnumDisplaySettingsExA(lpszDeviceName foundation.PSTR, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEA, dwFlags ENUM_DISPLAY_SETTINGS_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procEnumDisplaySettingsExA.Addr(), uintptr(unsafe.Pointer(lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)), uintptr(dwFlags))
-	return foundation.BOOL(r1)
-}
-
-// EnumDisplaySettingsExW calls USER32!EnumDisplaySettingsExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsexw
-// Minimum OS: windows5.0.
-func EnumDisplaySettingsExW(lpszDeviceName foundation.PWSTR, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW, dwFlags ENUM_DISPLAY_SETTINGS_FLAGS) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumDisplaySettingsExW.Addr(), uintptr(unsafe.Pointer(lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)), uintptr(dwFlags))
-	return foundation.BOOL(r1)
-}
-
-// EnumDisplaySettingsW calls USER32!EnumDisplaySettingsW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsw
-// Minimum OS: windows5.0.
-func EnumDisplaySettingsW(lpszDeviceName foundation.PWSTR, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumDisplaySettingsW.Addr(), uintptr(unsafe.Pointer(lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EnumEnhMetaFile calls GDI32!EnumEnhMetaFile.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumenhmetafile
 // Minimum OS: windows5.0.
-func EnumEnhMetaFile(hdc HDC, hmf HENHMETAFILE, proc ENHMFENUMPROC, param3 unsafe.Pointer, lpRect *foundation.RECT) foundation.BOOL {
+func EnumEnhMetaFile(hdc HDC, hmf HENHMETAFILE, proc ENHMFENUMPROC, param3 unsafe.Pointer, lpRect *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procEnumEnhMetaFile.Addr(), uintptr(hdc), uintptr(hmf), uintptr(proc), uintptr(unsafe.Pointer(param3)), uintptr(unsafe.Pointer(lpRect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// EnumFontFamilies calls GDI32!EnumFontFamiliesW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesw
+// Minimum OS: windows5.0.
+func EnumFontFamilies(hdc HDC, lpLogfont string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
+	_lpLogfont := win32.UTF16Ptr(lpLogfont)
+	r1, _, _ := syscall.SyscallN(procEnumFontFamilies.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpLogfont)), uintptr(lpProc), uintptr(lParam))
+	return int32(r1)
 }
 
 // EnumFontFamiliesA calls GDI32!EnumFontFamiliesA.
@@ -1216,6 +1262,14 @@ func EnumEnhMetaFile(hdc HDC, hmf HENHMETAFILE, proc ENHMFENUMPROC, param3 unsaf
 // Minimum OS: windows5.0.
 func EnumFontFamiliesA(hdc HDC, lpLogfont foundation.PSTR, lpProc FONTENUMPROCA, lParam foundation.LPARAM) int32 {
 	r1, _, _ := syscall.SyscallN(procEnumFontFamiliesA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpLogfont)), uintptr(lpProc), uintptr(lParam))
+	return int32(r1)
+}
+
+// EnumFontFamiliesEx calls GDI32!EnumFontFamiliesExW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw
+// Minimum OS: windows5.0.
+func EnumFontFamiliesEx(hdc HDC, lpLogfont *LOGFONTW, lpProc FONTENUMPROCW, lParam foundation.LPARAM, dwFlags uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procEnumFontFamiliesEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpLogfont)), uintptr(lpProc), uintptr(lParam), uintptr(dwFlags))
 	return int32(r1)
 }
 
@@ -1227,19 +1281,12 @@ func EnumFontFamiliesExA(hdc HDC, lpLogfont *LOGFONTA, lpProc FONTENUMPROCA, lPa
 	return int32(r1)
 }
 
-// EnumFontFamiliesExW calls GDI32!EnumFontFamiliesExW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw
+// EnumFonts calls GDI32!EnumFontsW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontsw
 // Minimum OS: windows5.0.
-func EnumFontFamiliesExW(hdc HDC, lpLogfont *LOGFONTW, lpProc FONTENUMPROCW, lParam foundation.LPARAM, dwFlags uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procEnumFontFamiliesExW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpLogfont)), uintptr(lpProc), uintptr(lParam), uintptr(dwFlags))
-	return int32(r1)
-}
-
-// EnumFontFamiliesW calls GDI32!EnumFontFamiliesW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesw
-// Minimum OS: windows5.0.
-func EnumFontFamiliesW(hdc HDC, lpLogfont foundation.PWSTR, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
-	r1, _, _ := syscall.SyscallN(procEnumFontFamiliesW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpLogfont)), uintptr(lpProc), uintptr(lParam))
+func EnumFonts(hdc HDC, lpLogfont string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
+	_lpLogfont := win32.UTF16Ptr(lpLogfont)
+	r1, _, _ := syscall.SyscallN(procEnumFonts.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpLogfont)), uintptr(lpProc), uintptr(lParam))
 	return int32(r1)
 }
 
@@ -1251,20 +1298,12 @@ func EnumFontsA(hdc HDC, lpLogfont foundation.PSTR, lpProc FONTENUMPROCA, lParam
 	return int32(r1)
 }
 
-// EnumFontsW calls GDI32!EnumFontsW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontsw
-// Minimum OS: windows5.0.
-func EnumFontsW(hdc HDC, lpLogfont foundation.PWSTR, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
-	r1, _, _ := syscall.SyscallN(procEnumFontsW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpLogfont)), uintptr(lpProc), uintptr(lParam))
-	return int32(r1)
-}
-
 // EnumMetaFile calls GDI32!EnumMetaFile.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enummetafile
 // Minimum OS: windows5.0.
-func EnumMetaFile(hdc HDC, hmf HMETAFILE, proc MFENUMPROC, param3 foundation.LPARAM) foundation.BOOL {
+func EnumMetaFile(hdc HDC, hmf HMETAFILE, proc MFENUMPROC, param3 foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procEnumMetaFile.Addr(), uintptr(hdc), uintptr(hmf), uintptr(proc), uintptr(param3))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EnumObjects calls GDI32!EnumObjects.
@@ -1278,17 +1317,17 @@ func EnumObjects(hdc HDC, nType OBJ_TYPE, lpFunc GOBJENUMPROC, lParam foundation
 // EqualRect calls USER32!EqualRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-equalrect
 // Minimum OS: windows5.0.
-func EqualRect(lprc1 *foundation.RECT, lprc2 *foundation.RECT) foundation.BOOL {
+func EqualRect(lprc1 *foundation.RECT, lprc2 *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procEqualRect.Addr(), uintptr(unsafe.Pointer(lprc1)), uintptr(unsafe.Pointer(lprc2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EqualRgn calls GDI32!EqualRgn.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-equalrgn
 // Minimum OS: windows5.0.
-func EqualRgn(hrgn1 HRGN, hrgn2 HRGN) foundation.BOOL {
+func EqualRgn(hrgn1 HRGN, hrgn2 HRGN) bool {
 	r1, _, _ := syscall.SyscallN(procEqualRgn.Addr(), uintptr(hrgn1), uintptr(hrgn2))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ExcludeClipRect calls GDI32!ExcludeClipRect.
@@ -1310,8 +1349,12 @@ func ExcludeUpdateRgn(hDC HDC, hWnd foundation.HWND) int32 {
 // ExtCreatePen calls GDI32!ExtCreatePen.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-extcreatepen
 // Minimum OS: windows5.0.
-func ExtCreatePen(iPenStyle uint32, cWidth uint32, plbrush *LOGBRUSH, cStyle uint32, pstyle *uint32) HPEN {
-	r1, _, _ := syscall.SyscallN(procExtCreatePen.Addr(), uintptr(iPenStyle), uintptr(cWidth), uintptr(unsafe.Pointer(plbrush)), uintptr(cStyle), uintptr(unsafe.Pointer(pstyle)))
+func ExtCreatePen(iPenStyle uint32, cWidth uint32, plbrush *LOGBRUSH, pstyle []uint32) HPEN {
+	var _pstyle *uint32
+	if len(pstyle) > 0 {
+		_pstyle = &pstyle[0]
+	}
+	r1, _, _ := syscall.SyscallN(procExtCreatePen.Addr(), uintptr(iPenStyle), uintptr(cWidth), uintptr(unsafe.Pointer(plbrush)), uintptr(len(pstyle)), uintptr(unsafe.Pointer(_pstyle)))
 	return HPEN(r1)
 }
 
@@ -1326,9 +1369,9 @@ func ExtCreateRegion(lpx *XFORM, nCount uint32, lpData *RGNDATA) HRGN {
 // ExtFloodFill calls GDI32!ExtFloodFill.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-extfloodfill
 // Minimum OS: windows5.0.
-func ExtFloodFill(hdc HDC, x int32, y int32, color foundation.COLORREF, type_ EXT_FLOOD_FILL_TYPE) foundation.BOOL {
+func ExtFloodFill(hdc HDC, x int32, y int32, color foundation.COLORREF, type_ EXT_FLOOD_FILL_TYPE) bool {
 	r1, _, _ := syscall.SyscallN(procExtFloodFill.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(color), uintptr(type_))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ExtSelectClipRgn calls GDI32!ExtSelectClipRgn.
@@ -1339,28 +1382,29 @@ func ExtSelectClipRgn(hdc HDC, hrgn HRGN, mode RGN_COMBINE_MODE) GDI_REGION_TYPE
 	return GDI_REGION_TYPE(r1)
 }
 
+// ExtTextOut calls GDI32!ExtTextOutW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-exttextoutw
+// Minimum OS: windows5.0.
+func ExtTextOut(hdc HDC, x int32, y int32, options ETO_OPTIONS, lprect *foundation.RECT, lpString string, c uint32, lpDx *int32) bool {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, _ := syscall.SyscallN(procExtTextOut.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(options), uintptr(unsafe.Pointer(lprect)), uintptr(unsafe.Pointer(_lpString)), uintptr(c), uintptr(unsafe.Pointer(lpDx)))
+	return r1 != 0
+}
+
 // ExtTextOutA calls GDI32!ExtTextOutA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-exttextouta
 // Minimum OS: windows5.0.
-func ExtTextOutA(hdc HDC, x int32, y int32, options ETO_OPTIONS, lprect *foundation.RECT, lpString foundation.PSTR, c uint32, lpDx *int32) foundation.BOOL {
+func ExtTextOutA(hdc HDC, x int32, y int32, options ETO_OPTIONS, lprect *foundation.RECT, lpString foundation.PSTR, c uint32, lpDx *int32) bool {
 	r1, _, _ := syscall.SyscallN(procExtTextOutA.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(options), uintptr(unsafe.Pointer(lprect)), uintptr(unsafe.Pointer(lpString)), uintptr(c), uintptr(unsafe.Pointer(lpDx)))
-	return foundation.BOOL(r1)
-}
-
-// ExtTextOutW calls GDI32!ExtTextOutW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-exttextoutw
-// Minimum OS: windows5.0.
-func ExtTextOutW(hdc HDC, x int32, y int32, options ETO_OPTIONS, lprect *foundation.RECT, lpString foundation.PWSTR, c uint32, lpDx *int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procExtTextOutW.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(options), uintptr(unsafe.Pointer(lprect)), uintptr(unsafe.Pointer(lpString)), uintptr(c), uintptr(unsafe.Pointer(lpDx)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FillPath calls GDI32!FillPath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-fillpath
 // Minimum OS: windows5.0.
-func FillPath(hdc HDC) foundation.BOOL {
+func FillPath(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procFillPath.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FillRect calls USER32!FillRect.
@@ -1374,31 +1418,31 @@ func FillRect(hDC HDC, lprc *foundation.RECT, hbr HBRUSH) int32 {
 // FillRgn calls GDI32!FillRgn.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-fillrgn
 // Minimum OS: windows5.0.
-func FillRgn(hdc HDC, hrgn HRGN, hbr HBRUSH) foundation.BOOL {
+func FillRgn(hdc HDC, hrgn HRGN, hbr HBRUSH) bool {
 	r1, _, _ := syscall.SyscallN(procFillRgn.Addr(), uintptr(hdc), uintptr(hrgn), uintptr(hbr))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FixBrushOrgEx calls GDI32!FixBrushOrgEx.
-func FixBrushOrgEx(hdc HDC, x int32, y int32, ptl *foundation.POINT) foundation.BOOL {
+func FixBrushOrgEx(hdc HDC, x int32, y int32, ptl *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procFixBrushOrgEx.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(ptl)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FlattenPath calls GDI32!FlattenPath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-flattenpath
 // Minimum OS: windows5.0.
-func FlattenPath(hdc HDC) foundation.BOOL {
+func FlattenPath(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procFlattenPath.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FloodFill calls GDI32!FloodFill.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-floodfill
 // Minimum OS: windows5.0.
-func FloodFill(hdc HDC, x int32, y int32, color foundation.COLORREF) foundation.BOOL {
+func FloodFill(hdc HDC, x int32, y int32, color foundation.COLORREF) bool {
 	r1, _, _ := syscall.SyscallN(procFloodFill.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(color))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FrameRect calls USER32!FrameRect.
@@ -1412,25 +1456,25 @@ func FrameRect(hDC HDC, lprc *foundation.RECT, hbr HBRUSH) int32 {
 // FrameRgn calls GDI32!FrameRgn.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-framergn
 // Minimum OS: windows5.0.
-func FrameRgn(hdc HDC, hrgn HRGN, hbr HBRUSH, w int32, h int32) foundation.BOOL {
+func FrameRgn(hdc HDC, hrgn HRGN, hbr HBRUSH, w int32, h int32) bool {
 	r1, _, _ := syscall.SyscallN(procFrameRgn.Addr(), uintptr(hdc), uintptr(hrgn), uintptr(hbr), uintptr(w), uintptr(h))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiComment calls GDI32!GdiComment.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gdicomment
 // Minimum OS: windows5.0.
-func GdiComment(hdc HDC, nSize uint32, lpData *byte) foundation.BOOL {
+func GdiComment(hdc HDC, nSize uint32, lpData *byte) bool {
 	r1, _, _ := syscall.SyscallN(procGdiComment.Addr(), uintptr(hdc), uintptr(nSize), uintptr(unsafe.Pointer(lpData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiFlush calls GDI32!GdiFlush.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gdiflush
 // Minimum OS: windows5.0.
-func GdiFlush() foundation.BOOL {
+func GdiFlush() bool {
 	r1, _, _ := syscall.SyscallN(procGdiFlush.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GdiGetBatchLimit calls GDI32!GdiGetBatchLimit.
@@ -1444,9 +1488,13 @@ func GdiGetBatchLimit() uint32 {
 // GdiGradientFill calls GDI32!GdiGradientFill.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gdigradientfill
 // Minimum OS: windows5.0.
-func GdiGradientFill(hdc HDC, pVertex *TRIVERTEX, nVertex uint32, pMesh unsafe.Pointer, nCount uint32, ulMode GRADIENT_FILL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGdiGradientFill.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pVertex)), uintptr(nVertex), uintptr(unsafe.Pointer(pMesh)), uintptr(nCount), uintptr(ulMode))
-	return foundation.BOOL(r1)
+func GdiGradientFill(hdc HDC, pVertex []TRIVERTEX, pMesh unsafe.Pointer, nCount uint32, ulMode GRADIENT_FILL) bool {
+	var _pVertex *TRIVERTEX
+	if len(pVertex) > 0 {
+		_pVertex = &pVertex[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGdiGradientFill.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_pVertex)), uintptr(len(pVertex)), uintptr(unsafe.Pointer(pMesh)), uintptr(nCount), uintptr(ulMode))
+	return r1 != 0
 }
 
 // GdiSetBatchLimit calls GDI32!GdiSetBatchLimit.
@@ -1460,9 +1508,9 @@ func GdiSetBatchLimit(dw uint32) uint32 {
 // GdiTransparentBlt calls GDI32!GdiTransparentBlt.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gditransparentblt
 // Minimum OS: windows5.0.
-func GdiTransparentBlt(hdcDest HDC, xoriginDest int32, yoriginDest int32, wDest int32, hDest int32, hdcSrc HDC, xoriginSrc int32, yoriginSrc int32, wSrc int32, hSrc int32, crTransparent uint32) foundation.BOOL {
+func GdiTransparentBlt(hdcDest HDC, xoriginDest int32, yoriginDest int32, wDest int32, hDest int32, hdcSrc HDC, xoriginSrc int32, yoriginSrc int32, wSrc int32, hSrc int32, crTransparent uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGdiTransparentBlt.Addr(), uintptr(hdcDest), uintptr(xoriginDest), uintptr(yoriginDest), uintptr(wDest), uintptr(hDest), uintptr(hdcSrc), uintptr(xoriginSrc), uintptr(yoriginSrc), uintptr(wSrc), uintptr(hSrc), uintptr(crTransparent))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetArcDirection calls GDI32!GetArcDirection.
@@ -1476,9 +1524,9 @@ func GetArcDirection(hdc HDC) int32 {
 // GetAspectRatioFilterEx calls GDI32!GetAspectRatioFilterEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getaspectratiofilterex
 // Minimum OS: windows5.0.
-func GetAspectRatioFilterEx(hdc HDC, lpsize *foundation.SIZE) foundation.BOOL {
+func GetAspectRatioFilterEx(hdc HDC, lpsize *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procGetAspectRatioFilterEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpsize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetBitmapBits calls GDI32!GetBitmapBits.
@@ -1492,9 +1540,9 @@ func GetBitmapBits(hbit HBITMAP, cb int32, lpvBits unsafe.Pointer) int32 {
 // GetBitmapDimensionEx calls GDI32!GetBitmapDimensionEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getbitmapdimensionex
 // Minimum OS: windows5.0.
-func GetBitmapDimensionEx(hbit HBITMAP, lpsize *foundation.SIZE) foundation.BOOL {
+func GetBitmapDimensionEx(hbit HBITMAP, lpsize *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procGetBitmapDimensionEx.Addr(), uintptr(hbit), uintptr(unsafe.Pointer(lpsize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetBkColor calls GDI32!GetBkColor.
@@ -1524,105 +1572,114 @@ func GetBoundsRect(hdc HDC, lprect *foundation.RECT, flags uint32) uint32 {
 // GetBrushOrgEx calls GDI32!GetBrushOrgEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getbrushorgex
 // Minimum OS: windows5.0.
-func GetBrushOrgEx(hdc HDC, lppt *foundation.POINT) foundation.BOOL {
+func GetBrushOrgEx(hdc HDC, lppt *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procGetBrushOrgEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lppt)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetCharABCWidths calls GDI32!GetCharABCWidthsW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharabcwidthsw
+// Minimum OS: windows5.0.
+func GetCharABCWidths(hdc HDC, wFirst uint32, wLast uint32, lpABC *ABC) bool {
+	r1, _, _ := syscall.SyscallN(procGetCharABCWidths.Addr(), uintptr(hdc), uintptr(wFirst), uintptr(wLast), uintptr(unsafe.Pointer(lpABC)))
+	return r1 != 0
 }
 
 // GetCharABCWidthsA calls GDI32!GetCharABCWidthsA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharabcwidthsa
 // Minimum OS: windows5.0.
-func GetCharABCWidthsA(hdc HDC, wFirst uint32, wLast uint32, lpABC *ABC) foundation.BOOL {
+func GetCharABCWidthsA(hdc HDC, wFirst uint32, wLast uint32, lpABC *ABC) bool {
 	r1, _, _ := syscall.SyscallN(procGetCharABCWidthsA.Addr(), uintptr(hdc), uintptr(wFirst), uintptr(wLast), uintptr(unsafe.Pointer(lpABC)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetCharABCWidthsFloat calls GDI32!GetCharABCWidthsFloatW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharabcwidthsfloatw
+// Minimum OS: windows5.0.
+func GetCharABCWidthsFloat(hdc HDC, iFirst uint32, iLast uint32, lpABC *ABCFLOAT) bool {
+	r1, _, _ := syscall.SyscallN(procGetCharABCWidthsFloat.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpABC)))
+	return r1 != 0
 }
 
 // GetCharABCWidthsFloatA calls GDI32!GetCharABCWidthsFloatA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharabcwidthsfloata
 // Minimum OS: windows5.0.
-func GetCharABCWidthsFloatA(hdc HDC, iFirst uint32, iLast uint32, lpABC *ABCFLOAT) foundation.BOOL {
+func GetCharABCWidthsFloatA(hdc HDC, iFirst uint32, iLast uint32, lpABC *ABCFLOAT) bool {
 	r1, _, _ := syscall.SyscallN(procGetCharABCWidthsFloatA.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpABC)))
-	return foundation.BOOL(r1)
-}
-
-// GetCharABCWidthsFloatW calls GDI32!GetCharABCWidthsFloatW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharabcwidthsfloatw
-// Minimum OS: windows5.0.
-func GetCharABCWidthsFloatW(hdc HDC, iFirst uint32, iLast uint32, lpABC *ABCFLOAT) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetCharABCWidthsFloatW.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpABC)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetCharABCWidthsI calls GDI32!GetCharABCWidthsI.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharabcwidthsi
 // Minimum OS: windows5.0.
-func GetCharABCWidthsI(hdc HDC, giFirst uint32, cgi uint32, pgi *uint16, pabc *ABC) foundation.BOOL {
+func GetCharABCWidthsI(hdc HDC, giFirst uint32, cgi uint32, pgi *uint16, pabc *ABC) bool {
 	r1, _, _ := syscall.SyscallN(procGetCharABCWidthsI.Addr(), uintptr(hdc), uintptr(giFirst), uintptr(cgi), uintptr(unsafe.Pointer(pgi)), uintptr(unsafe.Pointer(pabc)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetCharABCWidthsW calls GDI32!GetCharABCWidthsW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharabcwidthsw
+// GetCharWidth calls GDI32!GetCharWidthW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidthw
 // Minimum OS: windows5.0.
-func GetCharABCWidthsW(hdc HDC, wFirst uint32, wLast uint32, lpABC *ABC) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetCharABCWidthsW.Addr(), uintptr(hdc), uintptr(wFirst), uintptr(wLast), uintptr(unsafe.Pointer(lpABC)))
-	return foundation.BOOL(r1)
+func GetCharWidth(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *int32) bool {
+	r1, _, _ := syscall.SyscallN(procGetCharWidth.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpBuffer)))
+	return r1 != 0
+}
+
+// GetCharWidth32 calls GDI32!GetCharWidth32W.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidth32w
+// Minimum OS: windows5.0.
+func GetCharWidth32(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *int32) bool {
+	r1, _, _ := syscall.SyscallN(procGetCharWidth32.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpBuffer)))
+	return r1 != 0
 }
 
 // GetCharWidth32A calls GDI32!GetCharWidth32A.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidth32a
 // Minimum OS: windows5.0.
-func GetCharWidth32A(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *int32) foundation.BOOL {
+func GetCharWidth32A(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *int32) bool {
 	r1, _, _ := syscall.SyscallN(procGetCharWidth32A.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.BOOL(r1)
-}
-
-// GetCharWidth32W calls GDI32!GetCharWidth32W.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidth32w
-// Minimum OS: windows5.0.
-func GetCharWidth32W(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetCharWidth32W.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetCharWidthA calls GDI32!GetCharWidthA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidtha
 // Minimum OS: windows5.0.
-func GetCharWidthA(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *int32) foundation.BOOL {
+func GetCharWidthA(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *int32) bool {
 	r1, _, _ := syscall.SyscallN(procGetCharWidthA.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetCharWidthFloat calls GDI32!GetCharWidthFloatW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidthfloatw
+// Minimum OS: windows5.0.
+func GetCharWidthFloat(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *float32) bool {
+	r1, _, _ := syscall.SyscallN(procGetCharWidthFloat.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpBuffer)))
+	return r1 != 0
 }
 
 // GetCharWidthFloatA calls GDI32!GetCharWidthFloatA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidthfloata
 // Minimum OS: windows5.0.
-func GetCharWidthFloatA(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *float32) foundation.BOOL {
+func GetCharWidthFloatA(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *float32) bool {
 	r1, _, _ := syscall.SyscallN(procGetCharWidthFloatA.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.BOOL(r1)
-}
-
-// GetCharWidthFloatW calls GDI32!GetCharWidthFloatW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidthfloatw
-// Minimum OS: windows5.0.
-func GetCharWidthFloatW(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *float32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetCharWidthFloatW.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetCharWidthI calls GDI32!GetCharWidthI.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidthi
 // Minimum OS: windows5.0.
-func GetCharWidthI(hdc HDC, giFirst uint32, cgi uint32, pgi *uint16, piWidths *int32) foundation.BOOL {
+func GetCharWidthI(hdc HDC, giFirst uint32, cgi uint32, pgi *uint16, piWidths *int32) bool {
 	r1, _, _ := syscall.SyscallN(procGetCharWidthI.Addr(), uintptr(hdc), uintptr(giFirst), uintptr(cgi), uintptr(unsafe.Pointer(pgi)), uintptr(unsafe.Pointer(piWidths)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetCharWidthW calls GDI32!GetCharWidthW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharwidthw
+// GetCharacterPlacement calls GDI32!GetCharacterPlacementW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharacterplacementw
 // Minimum OS: windows5.0.
-func GetCharWidthW(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetCharWidthW.Addr(), uintptr(hdc), uintptr(iFirst), uintptr(iLast), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.BOOL(r1)
+func GetCharacterPlacement(hdc HDC, lpString string, nCount int32, nMexExtent int32, lpResults *GCP_RESULTSW, dwFlags GET_CHARACTER_PLACEMENT_FLAGS) uint32 {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, _ := syscall.SyscallN(procGetCharacterPlacement.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpString)), uintptr(nCount), uintptr(nMexExtent), uintptr(unsafe.Pointer(lpResults)), uintptr(dwFlags))
+	return uint32(r1)
 }
 
 // GetCharacterPlacementA calls GDI32!GetCharacterPlacementA.
@@ -1630,14 +1687,6 @@ func GetCharWidthW(hdc HDC, iFirst uint32, iLast uint32, lpBuffer *int32) founda
 // Minimum OS: windows5.0.
 func GetCharacterPlacementA(hdc HDC, lpString foundation.PSTR, nCount int32, nMexExtent int32, lpResults *GCP_RESULTSA, dwFlags GET_CHARACTER_PLACEMENT_FLAGS) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetCharacterPlacementA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpString)), uintptr(nCount), uintptr(nMexExtent), uintptr(unsafe.Pointer(lpResults)), uintptr(dwFlags))
-	return uint32(r1)
-}
-
-// GetCharacterPlacementW calls GDI32!GetCharacterPlacementW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcharacterplacementw
-// Minimum OS: windows5.0.
-func GetCharacterPlacementW(hdc HDC, lpString foundation.PWSTR, nCount int32, nMexExtent int32, lpResults *GCP_RESULTSW, dwFlags GET_CHARACTER_PLACEMENT_FLAGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetCharacterPlacementW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpString)), uintptr(nCount), uintptr(nMexExtent), uintptr(unsafe.Pointer(lpResults)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -1660,9 +1709,9 @@ func GetClipRgn(hdc HDC, hrgn HRGN) int32 {
 // GetColorAdjustment calls GDI32!GetColorAdjustment.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcoloradjustment
 // Minimum OS: windows5.0.
-func GetColorAdjustment(hdc HDC, lpca *COLORADJUSTMENT) foundation.BOOL {
+func GetColorAdjustment(hdc HDC, lpca *COLORADJUSTMENT) bool {
 	r1, _, _ := syscall.SyscallN(procGetColorAdjustment.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpca)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetCurrentObject calls GDI32!GetCurrentObject.
@@ -1676,9 +1725,9 @@ func GetCurrentObject(hdc HDC, type_ uint32) HGDIOBJ {
 // GetCurrentPositionEx calls GDI32!GetCurrentPositionEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcurrentpositionex
 // Minimum OS: windows5.0.
-func GetCurrentPositionEx(hdc HDC, lppt *foundation.POINT) foundation.BOOL {
+func GetCurrentPositionEx(hdc HDC, lppt *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procGetCurrentPositionEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lppt)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetDC calls USER32!GetDC.
@@ -1708,9 +1757,9 @@ func GetDCEx(hWnd foundation.HWND, hrgnClip HRGN, flags GET_DCX_FLAGS) HDC {
 // GetDCOrgEx calls GDI32!GetDCOrgEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getdcorgex
 // Minimum OS: windows5.0.
-func GetDCOrgEx(hdc HDC, lppt *foundation.POINT) foundation.BOOL {
+func GetDCOrgEx(hdc HDC, lppt *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procGetDCOrgEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lppt)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetDCPenColor calls GDI32!GetDCPenColor.
@@ -1724,8 +1773,12 @@ func GetDCPenColor(hdc HDC) foundation.COLORREF {
 // GetDIBColorTable calls GDI32!GetDIBColorTable.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getdibcolortable
 // Minimum OS: windows5.0.
-func GetDIBColorTable(hdc HDC, iStart uint32, cEntries uint32, prgbq *RGBQUAD) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetDIBColorTable.Addr(), uintptr(hdc), uintptr(iStart), uintptr(cEntries), uintptr(unsafe.Pointer(prgbq)))
+func GetDIBColorTable(hdc HDC, iStart uint32, prgbq []RGBQUAD) uint32 {
+	var _prgbq *RGBQUAD
+	if len(prgbq) > 0 {
+		_prgbq = &prgbq[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetDIBColorTable.Addr(), uintptr(hdc), uintptr(iStart), uintptr(len(prgbq)), uintptr(unsafe.Pointer(_prgbq)))
 	return uint32(r1)
 }
 
@@ -1745,6 +1798,15 @@ func GetDeviceCaps(hdc HDC, index int32) int32 {
 	return int32(r1)
 }
 
+// GetEnhMetaFile calls GDI32!GetEnhMetaFileW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafilew
+// Minimum OS: windows5.0.
+func GetEnhMetaFile(lpName string) HENHMETAFILE {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, _ := syscall.SyscallN(procGetEnhMetaFile.Addr(), uintptr(unsafe.Pointer(_lpName)))
+	return HENHMETAFILE(r1)
+}
+
 // GetEnhMetaFileA calls GDI32!GetEnhMetaFileA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafilea
 // Minimum OS: windows5.0.
@@ -1761,19 +1823,19 @@ func GetEnhMetaFileBits(hEMF HENHMETAFILE, nSize uint32, lpData *byte) uint32 {
 	return uint32(r1)
 }
 
+// GetEnhMetaFileDescription calls GDI32!GetEnhMetaFileDescriptionW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafiledescriptionw
+// Minimum OS: windows5.0.
+func GetEnhMetaFileDescription(hemf HENHMETAFILE, cchBuffer uint32, lpDescription foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetEnhMetaFileDescription.Addr(), uintptr(hemf), uintptr(cchBuffer), uintptr(unsafe.Pointer(lpDescription)))
+	return uint32(r1)
+}
+
 // GetEnhMetaFileDescriptionA calls GDI32!GetEnhMetaFileDescriptionA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafiledescriptiona
 // Minimum OS: windows5.0.
 func GetEnhMetaFileDescriptionA(hemf HENHMETAFILE, cchBuffer uint32, lpDescription foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetEnhMetaFileDescriptionA.Addr(), uintptr(hemf), uintptr(cchBuffer), uintptr(unsafe.Pointer(lpDescription)))
-	return uint32(r1)
-}
-
-// GetEnhMetaFileDescriptionW calls GDI32!GetEnhMetaFileDescriptionW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafiledescriptionw
-// Minimum OS: windows5.0.
-func GetEnhMetaFileDescriptionW(hemf HENHMETAFILE, cchBuffer uint32, lpDescription foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetEnhMetaFileDescriptionW.Addr(), uintptr(hemf), uintptr(cchBuffer), uintptr(unsafe.Pointer(lpDescription)))
 	return uint32(r1)
 }
 
@@ -1788,17 +1850,13 @@ func GetEnhMetaFileHeader(hemf HENHMETAFILE, nSize uint32, lpEnhMetaHeader *ENHM
 // GetEnhMetaFilePaletteEntries calls GDI32!GetEnhMetaFilePaletteEntries.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafilepaletteentries
 // Minimum OS: windows5.0.
-func GetEnhMetaFilePaletteEntries(hemf HENHMETAFILE, nNumEntries uint32, lpPaletteEntries *PALETTEENTRY) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetEnhMetaFilePaletteEntries.Addr(), uintptr(hemf), uintptr(nNumEntries), uintptr(unsafe.Pointer(lpPaletteEntries)))
+func GetEnhMetaFilePaletteEntries(hemf HENHMETAFILE, lpPaletteEntries []PALETTEENTRY) uint32 {
+	var _lpPaletteEntries *PALETTEENTRY
+	if len(lpPaletteEntries) > 0 {
+		_lpPaletteEntries = &lpPaletteEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetEnhMetaFilePaletteEntries.Addr(), uintptr(hemf), uintptr(len(lpPaletteEntries)), uintptr(unsafe.Pointer(_lpPaletteEntries)))
 	return uint32(r1)
-}
-
-// GetEnhMetaFileW calls GDI32!GetEnhMetaFileW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafilew
-// Minimum OS: windows5.0.
-func GetEnhMetaFileW(lpName foundation.PWSTR) HENHMETAFILE {
-	r1, _, _ := syscall.SyscallN(procGetEnhMetaFileW.Addr(), uintptr(unsafe.Pointer(lpName)))
-	return HENHMETAFILE(r1)
 }
 
 // GetFontData calls GDI32!GetFontData.
@@ -1825,6 +1883,15 @@ func GetFontUnicodeRanges(hdc HDC, lpgs *GLYPHSET) uint32 {
 	return uint32(r1)
 }
 
+// GetGlyphIndices calls GDI32!GetGlyphIndicesW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getglyphindicesw
+// Minimum OS: windows5.0.
+func GetGlyphIndices(hdc HDC, lpstr string, c int32, pgi *uint16, fl uint32) uint32 {
+	_lpstr := win32.UTF16Ptr(lpstr)
+	r1, _, _ := syscall.SyscallN(procGetGlyphIndices.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpstr)), uintptr(c), uintptr(unsafe.Pointer(pgi)), uintptr(fl))
+	return uint32(r1)
+}
+
 // GetGlyphIndicesA calls GDI32!GetGlyphIndicesA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getglyphindicesa
 // Minimum OS: windows5.0.
@@ -1833,11 +1900,11 @@ func GetGlyphIndicesA(hdc HDC, lpstr foundation.PSTR, c int32, pgi *uint16, fl u
 	return uint32(r1)
 }
 
-// GetGlyphIndicesW calls GDI32!GetGlyphIndicesW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getglyphindicesw
+// GetGlyphOutline calls GDI32!GetGlyphOutlineW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getglyphoutlinew
 // Minimum OS: windows5.0.
-func GetGlyphIndicesW(hdc HDC, lpstr foundation.PWSTR, c int32, pgi *uint16, fl uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetGlyphIndicesW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpstr)), uintptr(c), uintptr(unsafe.Pointer(pgi)), uintptr(fl))
+func GetGlyphOutline(hdc HDC, uChar uint32, fuFormat GET_GLYPH_OUTLINE_FORMAT, lpgm *GLYPHMETRICS, cjBuffer uint32, pvBuffer unsafe.Pointer, lpmat2 *MAT2) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetGlyphOutline.Addr(), uintptr(hdc), uintptr(uChar), uintptr(fuFormat), uintptr(unsafe.Pointer(lpgm)), uintptr(cjBuffer), uintptr(unsafe.Pointer(pvBuffer)), uintptr(unsafe.Pointer(lpmat2)))
 	return uint32(r1)
 }
 
@@ -1849,14 +1916,6 @@ func GetGlyphOutlineA(hdc HDC, uChar uint32, fuFormat GET_GLYPH_OUTLINE_FORMAT, 
 	return uint32(r1)
 }
 
-// GetGlyphOutlineW calls GDI32!GetGlyphOutlineW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getglyphoutlinew
-// Minimum OS: windows5.0.
-func GetGlyphOutlineW(hdc HDC, uChar uint32, fuFormat GET_GLYPH_OUTLINE_FORMAT, lpgm *GLYPHMETRICS, cjBuffer uint32, pvBuffer unsafe.Pointer, lpmat2 *MAT2) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetGlyphOutlineW.Addr(), uintptr(hdc), uintptr(uChar), uintptr(fuFormat), uintptr(unsafe.Pointer(lpgm)), uintptr(cjBuffer), uintptr(unsafe.Pointer(pvBuffer)), uintptr(unsafe.Pointer(lpmat2)))
-	return uint32(r1)
-}
-
 // GetGraphicsMode calls GDI32!GetGraphicsMode.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getgraphicsmode
 // Minimum OS: windows5.0.
@@ -1865,19 +1924,27 @@ func GetGraphicsMode(hdc HDC) int32 {
 	return int32(r1)
 }
 
-// GetKerningPairsA calls GDI32!GetKerningPairsA.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getkerningpairsa
+// GetKerningPairs calls GDI32!GetKerningPairsW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getkerningpairsw
 // Minimum OS: windows5.0.
-func GetKerningPairsA(hdc HDC, nPairs uint32, lpKernPair *KERNINGPAIR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetKerningPairsA.Addr(), uintptr(hdc), uintptr(nPairs), uintptr(unsafe.Pointer(lpKernPair)))
+func GetKerningPairs(hdc HDC, lpKernPair []KERNINGPAIR) uint32 {
+	var _lpKernPair *KERNINGPAIR
+	if len(lpKernPair) > 0 {
+		_lpKernPair = &lpKernPair[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetKerningPairs.Addr(), uintptr(hdc), uintptr(len(lpKernPair)), uintptr(unsafe.Pointer(_lpKernPair)))
 	return uint32(r1)
 }
 
-// GetKerningPairsW calls GDI32!GetKerningPairsW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getkerningpairsw
+// GetKerningPairsA calls GDI32!GetKerningPairsA.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getkerningpairsa
 // Minimum OS: windows5.0.
-func GetKerningPairsW(hdc HDC, nPairs uint32, lpKernPair *KERNINGPAIR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetKerningPairsW.Addr(), uintptr(hdc), uintptr(nPairs), uintptr(unsafe.Pointer(lpKernPair)))
+func GetKerningPairsA(hdc HDC, lpKernPair []KERNINGPAIR) uint32 {
+	var _lpKernPair *KERNINGPAIR
+	if len(lpKernPair) > 0 {
+		_lpKernPair = &lpKernPair[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetKerningPairsA.Addr(), uintptr(hdc), uintptr(len(lpKernPair)), uintptr(unsafe.Pointer(_lpKernPair)))
 	return uint32(r1)
 }
 
@@ -1900,6 +1967,14 @@ func GetMapMode(hdc HDC) HDC_MAP_MODE {
 	return HDC_MAP_MODE(r1)
 }
 
+// GetMetaFile calls GDI32!GetMetaFileW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getmetafilew
+func GetMetaFile(lpName string) HMETAFILE {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, _ := syscall.SyscallN(procGetMetaFile.Addr(), uintptr(unsafe.Pointer(_lpName)))
+	return HMETAFILE(r1)
+}
+
 // GetMetaFileA calls GDI32!GetMetaFileA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getmetafilea
 func GetMetaFileA(lpName foundation.PSTR) HMETAFILE {
@@ -1915,13 +1990,6 @@ func GetMetaFileBitsEx(hMF HMETAFILE, cbBuffer uint32, lpData unsafe.Pointer) ui
 	return uint32(r1)
 }
 
-// GetMetaFileW calls GDI32!GetMetaFileW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getmetafilew
-func GetMetaFileW(lpName foundation.PWSTR) HMETAFILE {
-	r1, _, _ := syscall.SyscallN(procGetMetaFileW.Addr(), uintptr(unsafe.Pointer(lpName)))
-	return HMETAFILE(r1)
-}
-
 // GetMetaRgn calls GDI32!GetMetaRgn.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getmetargn
 // Minimum OS: windows5.0.
@@ -1933,25 +2001,25 @@ func GetMetaRgn(hdc HDC, hrgn HRGN) int32 {
 // GetMiterLimit calls GDI32!GetMiterLimit.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getmiterlimit
 // Minimum OS: windows5.0.
-func GetMiterLimit(hdc HDC, plimit *float32) foundation.BOOL {
+func GetMiterLimit(hdc HDC, plimit *float32) bool {
 	r1, _, _ := syscall.SyscallN(procGetMiterLimit.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(plimit)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetMonitorInfo calls USER32!GetMonitorInfoW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmonitorinfow
+// Minimum OS: windows5.0.
+func GetMonitorInfo(hMonitor HMONITOR, lpmi *MONITORINFO) bool {
+	r1, _, _ := syscall.SyscallN(procGetMonitorInfo.Addr(), uintptr(hMonitor), uintptr(unsafe.Pointer(lpmi)))
+	return r1 != 0
 }
 
 // GetMonitorInfoA calls USER32!GetMonitorInfoA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmonitorinfoa
 // Minimum OS: windows5.0.
-func GetMonitorInfoA(hMonitor HMONITOR, lpmi *MONITORINFO) foundation.BOOL {
+func GetMonitorInfoA(hMonitor HMONITOR, lpmi *MONITORINFO) bool {
 	r1, _, _ := syscall.SyscallN(procGetMonitorInfoA.Addr(), uintptr(hMonitor), uintptr(unsafe.Pointer(lpmi)))
-	return foundation.BOOL(r1)
-}
-
-// GetMonitorInfoW calls USER32!GetMonitorInfoW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmonitorinfow
-// Minimum OS: windows5.0.
-func GetMonitorInfoW(hMonitor HMONITOR, lpmi *MONITORINFO) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetMonitorInfoW.Addr(), uintptr(hMonitor), uintptr(unsafe.Pointer(lpmi)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetNearestColor calls GDI32!GetNearestColor.
@@ -1970,6 +2038,14 @@ func GetNearestPaletteIndex(h HPALETTE, color foundation.COLORREF) uint32 {
 	return uint32(r1)
 }
 
+// GetObject calls GDI32!GetObjectW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getobjectw
+// Minimum OS: windows5.0.
+func GetObject(h HGDIOBJ, c int32, pv unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procGetObject.Addr(), uintptr(h), uintptr(c), uintptr(unsafe.Pointer(pv)))
+	return int32(r1)
+}
+
 // GetObjectA calls GDI32!GetObjectA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getobjecta
 func GetObjectA(h HGDIOBJ, c int32, pv unsafe.Pointer) int32 {
@@ -1985,12 +2061,12 @@ func GetObjectType(h HGDIOBJ) uint32 {
 	return uint32(r1)
 }
 
-// GetObjectW calls GDI32!GetObjectW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getobjectw
+// GetOutlineTextMetrics calls GDI32!GetOutlineTextMetricsW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getoutlinetextmetricsw
 // Minimum OS: windows5.0.
-func GetObjectW(h HGDIOBJ, c int32, pv unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procGetObjectW.Addr(), uintptr(h), uintptr(c), uintptr(unsafe.Pointer(pv)))
-	return int32(r1)
+func GetOutlineTextMetrics(hdc HDC, cjCopy uint32, potm *OUTLINETEXTMETRICW) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetOutlineTextMetrics.Addr(), uintptr(hdc), uintptr(cjCopy), uintptr(unsafe.Pointer(potm)))
+	return uint32(r1)
 }
 
 // GetOutlineTextMetricsA calls GDI32!GetOutlineTextMetricsA.
@@ -2001,19 +2077,15 @@ func GetOutlineTextMetricsA(hdc HDC, cjCopy uint32, potm *OUTLINETEXTMETRICA) ui
 	return uint32(r1)
 }
 
-// GetOutlineTextMetricsW calls GDI32!GetOutlineTextMetricsW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getoutlinetextmetricsw
-// Minimum OS: windows5.0.
-func GetOutlineTextMetricsW(hdc HDC, cjCopy uint32, potm *OUTLINETEXTMETRICW) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetOutlineTextMetricsW.Addr(), uintptr(hdc), uintptr(cjCopy), uintptr(unsafe.Pointer(potm)))
-	return uint32(r1)
-}
-
 // GetPaletteEntries calls GDI32!GetPaletteEntries.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getpaletteentries
 // Minimum OS: windows5.0.
-func GetPaletteEntries(hpal HPALETTE, iStart uint32, cEntries uint32, pPalEntries *PALETTEENTRY) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetPaletteEntries.Addr(), uintptr(hpal), uintptr(iStart), uintptr(cEntries), uintptr(unsafe.Pointer(pPalEntries)))
+func GetPaletteEntries(hpal HPALETTE, iStart uint32, pPalEntries []PALETTEENTRY) uint32 {
+	var _pPalEntries *PALETTEENTRY
+	if len(pPalEntries) > 0 {
+		_pPalEntries = &pPalEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPaletteEntries.Addr(), uintptr(hpal), uintptr(iStart), uintptr(len(pPalEntries)), uintptr(unsafe.Pointer(_pPalEntries)))
 	return uint32(r1)
 }
 
@@ -2060,9 +2132,9 @@ func GetRandomRgn(hdc HDC, hrgn HRGN, i int32) int32 {
 // GetRasterizerCaps calls GDI32!GetRasterizerCaps.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getrasterizercaps
 // Minimum OS: windows5.0.
-func GetRasterizerCaps(lpraststat *RASTERIZER_STATUS, cjBytes uint32) foundation.BOOL {
+func GetRasterizerCaps(lpraststat *RASTERIZER_STATUS, cjBytes uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetRasterizerCaps.Addr(), uintptr(unsafe.Pointer(lpraststat)), uintptr(cjBytes))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetRegionData calls GDI32!GetRegionData.
@@ -2116,8 +2188,12 @@ func GetSysColorBrush(nIndex SYS_COLOR_INDEX) HBRUSH {
 // GetSystemPaletteEntries calls GDI32!GetSystemPaletteEntries.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getsystempaletteentries
 // Minimum OS: windows5.0.
-func GetSystemPaletteEntries(hdc HDC, iStart uint32, cEntries uint32, pPalEntries *PALETTEENTRY) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetSystemPaletteEntries.Addr(), uintptr(hdc), uintptr(iStart), uintptr(cEntries), uintptr(unsafe.Pointer(pPalEntries)))
+func GetSystemPaletteEntries(hdc HDC, iStart uint32, pPalEntries []PALETTEENTRY) uint32 {
+	var _pPalEntries *PALETTEENTRY
+	if len(pPalEntries) > 0 {
+		_pPalEntries = &pPalEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetSystemPaletteEntries.Addr(), uintptr(hdc), uintptr(iStart), uintptr(len(pPalEntries)), uintptr(unsafe.Pointer(_pPalEntries)))
 	return uint32(r1)
 }
 
@@ -2129,19 +2205,28 @@ func GetSystemPaletteUse(hdc HDC) uint32 {
 	return uint32(r1)
 }
 
-// GetTabbedTextExtentA calls USER32!GetTabbedTextExtentA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-gettabbedtextextenta
+// GetTabbedTextExtent calls USER32!GetTabbedTextExtentW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-gettabbedtextextentw
 // Minimum OS: windows5.0.
-func GetTabbedTextExtentA(hdc HDC, lpString foundation.PSTR, chCount int32, nTabPositions int32, lpnTabStopPositions *int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetTabbedTextExtentA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpString)), uintptr(chCount), uintptr(nTabPositions), uintptr(unsafe.Pointer(lpnTabStopPositions)))
+func GetTabbedTextExtent(hdc HDC, lpString string, chCount int32, lpnTabStopPositions []int32) uint32 {
+	_lpString := win32.UTF16Ptr(lpString)
+	var _lpnTabStopPositions *int32
+	if len(lpnTabStopPositions) > 0 {
+		_lpnTabStopPositions = &lpnTabStopPositions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetTabbedTextExtent.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpString)), uintptr(chCount), uintptr(len(lpnTabStopPositions)), uintptr(unsafe.Pointer(_lpnTabStopPositions)))
 	return uint32(r1)
 }
 
-// GetTabbedTextExtentW calls USER32!GetTabbedTextExtentW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-gettabbedtextextentw
+// GetTabbedTextExtentA calls USER32!GetTabbedTextExtentA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-gettabbedtextextenta
 // Minimum OS: windows5.0.
-func GetTabbedTextExtentW(hdc HDC, lpString foundation.PWSTR, chCount int32, nTabPositions int32, lpnTabStopPositions *int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetTabbedTextExtentW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpString)), uintptr(chCount), uintptr(nTabPositions), uintptr(unsafe.Pointer(lpnTabStopPositions)))
+func GetTabbedTextExtentA(hdc HDC, lpString foundation.PSTR, chCount int32, lpnTabStopPositions []int32) uint32 {
+	var _lpnTabStopPositions *int32
+	if len(lpnTabStopPositions) > 0 {
+		_lpnTabStopPositions = &lpnTabStopPositions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetTabbedTextExtentA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpString)), uintptr(chCount), uintptr(len(lpnTabStopPositions)), uintptr(unsafe.Pointer(_lpnTabStopPositions)))
 	return uint32(r1)
 }
 
@@ -2169,68 +2254,83 @@ func GetTextColor(hdc HDC) foundation.COLORREF {
 	return foundation.COLORREF(r1)
 }
 
+// GetTextExtentExPoint calls GDI32!GetTextExtentExPointW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentexpointw
+// Minimum OS: windows5.0.
+func GetTextExtentExPoint(hdc HDC, lpszString string, cchString int32, nMaxExtent int32, lpnFit *int32, lpnDx *int32, lpSize *foundation.SIZE) bool {
+	_lpszString := win32.UTF16Ptr(lpszString)
+	r1, _, _ := syscall.SyscallN(procGetTextExtentExPoint.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpszString)), uintptr(cchString), uintptr(nMaxExtent), uintptr(unsafe.Pointer(lpnFit)), uintptr(unsafe.Pointer(lpnDx)), uintptr(unsafe.Pointer(lpSize)))
+	return r1 != 0
+}
+
 // GetTextExtentExPointA calls GDI32!GetTextExtentExPointA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentexpointa
 // Minimum OS: windows5.0.
-func GetTextExtentExPointA(hdc HDC, lpszString foundation.PSTR, cchString int32, nMaxExtent int32, lpnFit *int32, lpnDx *int32, lpSize *foundation.SIZE) foundation.BOOL {
+func GetTextExtentExPointA(hdc HDC, lpszString foundation.PSTR, cchString int32, nMaxExtent int32, lpnFit *int32, lpnDx *int32, lpSize *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procGetTextExtentExPointA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpszString)), uintptr(cchString), uintptr(nMaxExtent), uintptr(unsafe.Pointer(lpnFit)), uintptr(unsafe.Pointer(lpnDx)), uintptr(unsafe.Pointer(lpSize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetTextExtentExPointI calls GDI32!GetTextExtentExPointI.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentexpointi
 // Minimum OS: windows5.0.
-func GetTextExtentExPointI(hdc HDC, lpwszString *uint16, cwchString int32, nMaxExtent int32, lpnFit *int32, lpnDx *int32, lpSize *foundation.SIZE) foundation.BOOL {
+func GetTextExtentExPointI(hdc HDC, lpwszString *uint16, cwchString int32, nMaxExtent int32, lpnFit *int32, lpnDx *int32, lpSize *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procGetTextExtentExPointI.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpwszString)), uintptr(cwchString), uintptr(nMaxExtent), uintptr(unsafe.Pointer(lpnFit)), uintptr(unsafe.Pointer(lpnDx)), uintptr(unsafe.Pointer(lpSize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetTextExtentExPointW calls GDI32!GetTextExtentExPointW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentexpointw
+// GetTextExtentPoint calls GDI32!GetTextExtentPointW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentpointw
 // Minimum OS: windows5.0.
-func GetTextExtentExPointW(hdc HDC, lpszString foundation.PWSTR, cchString int32, nMaxExtent int32, lpnFit *int32, lpnDx *int32, lpSize *foundation.SIZE) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetTextExtentExPointW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpszString)), uintptr(cchString), uintptr(nMaxExtent), uintptr(unsafe.Pointer(lpnFit)), uintptr(unsafe.Pointer(lpnDx)), uintptr(unsafe.Pointer(lpSize)))
-	return foundation.BOOL(r1)
+func GetTextExtentPoint(hdc HDC, lpString string, c int32, lpsz *foundation.SIZE) bool {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, _ := syscall.SyscallN(procGetTextExtentPoint.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpString)), uintptr(c), uintptr(unsafe.Pointer(lpsz)))
+	return r1 != 0
+}
+
+// GetTextExtentPoint32 calls GDI32!GetTextExtentPoint32W.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentpoint32w
+// Minimum OS: windows5.0.
+func GetTextExtentPoint32(hdc HDC, lpString string, c int32, psizl *foundation.SIZE) bool {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, _ := syscall.SyscallN(procGetTextExtentPoint32.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpString)), uintptr(c), uintptr(unsafe.Pointer(psizl)))
+	return r1 != 0
 }
 
 // GetTextExtentPoint32A calls GDI32!GetTextExtentPoint32A.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentpoint32a
 // Minimum OS: windows5.0.
-func GetTextExtentPoint32A(hdc HDC, lpString foundation.PSTR, c int32, psizl *foundation.SIZE) foundation.BOOL {
+func GetTextExtentPoint32A(hdc HDC, lpString foundation.PSTR, c int32, psizl *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procGetTextExtentPoint32A.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpString)), uintptr(c), uintptr(unsafe.Pointer(psizl)))
-	return foundation.BOOL(r1)
-}
-
-// GetTextExtentPoint32W calls GDI32!GetTextExtentPoint32W.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentpoint32w
-// Minimum OS: windows5.0.
-func GetTextExtentPoint32W(hdc HDC, lpString foundation.PWSTR, c int32, psizl *foundation.SIZE) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetTextExtentPoint32W.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpString)), uintptr(c), uintptr(unsafe.Pointer(psizl)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetTextExtentPointA calls GDI32!GetTextExtentPointA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentpointa
 // Minimum OS: windows5.0.
-func GetTextExtentPointA(hdc HDC, lpString foundation.PSTR, c int32, lpsz *foundation.SIZE) foundation.BOOL {
+func GetTextExtentPointA(hdc HDC, lpString foundation.PSTR, c int32, lpsz *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procGetTextExtentPointA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpString)), uintptr(c), uintptr(unsafe.Pointer(lpsz)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetTextExtentPointI calls GDI32!GetTextExtentPointI.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentpointi
 // Minimum OS: windows5.0.
-func GetTextExtentPointI(hdc HDC, pgiIn *uint16, cgi int32, psize *foundation.SIZE) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetTextExtentPointI.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pgiIn)), uintptr(cgi), uintptr(unsafe.Pointer(psize)))
-	return foundation.BOOL(r1)
+func GetTextExtentPointI(hdc HDC, pgiIn []uint16, psize *foundation.SIZE) bool {
+	var _pgiIn *uint16
+	if len(pgiIn) > 0 {
+		_pgiIn = &pgiIn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetTextExtentPointI.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_pgiIn)), uintptr(len(pgiIn)), uintptr(unsafe.Pointer(psize)))
+	return r1 != 0
 }
 
-// GetTextExtentPointW calls GDI32!GetTextExtentPointW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextextentpointw
+// GetTextFace calls GDI32!GetTextFaceW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextfacew
 // Minimum OS: windows5.0.
-func GetTextExtentPointW(hdc HDC, lpString foundation.PWSTR, c int32, lpsz *foundation.SIZE) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetTextExtentPointW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpString)), uintptr(c), uintptr(unsafe.Pointer(lpsz)))
-	return foundation.BOOL(r1)
+func GetTextFace(hdc HDC, c int32, lpName foundation.PWSTR) int32 {
+	r1, _, _ := syscall.SyscallN(procGetTextFace.Addr(), uintptr(hdc), uintptr(c), uintptr(unsafe.Pointer(lpName)))
+	return int32(r1)
 }
 
 // GetTextFaceA calls GDI32!GetTextFaceA.
@@ -2241,60 +2341,54 @@ func GetTextFaceA(hdc HDC, c int32, lpName foundation.PSTR) int32 {
 	return int32(r1)
 }
 
-// GetTextFaceW calls GDI32!GetTextFaceW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextfacew
+// GetTextMetrics calls GDI32!GetTextMetricsW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextmetricsw
 // Minimum OS: windows5.0.
-func GetTextFaceW(hdc HDC, c int32, lpName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procGetTextFaceW.Addr(), uintptr(hdc), uintptr(c), uintptr(unsafe.Pointer(lpName)))
-	return int32(r1)
+func GetTextMetrics(hdc HDC, lptm *TEXTMETRICW) bool {
+	r1, _, _ := syscall.SyscallN(procGetTextMetrics.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lptm)))
+	return r1 != 0
 }
 
 // GetTextMetricsA calls GDI32!GetTextMetricsA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextmetricsa
 // Minimum OS: windows5.0.
-func GetTextMetricsA(hdc HDC, lptm *TEXTMETRICA) foundation.BOOL {
+func GetTextMetricsA(hdc HDC, lptm *TEXTMETRICA) bool {
 	r1, _, _ := syscall.SyscallN(procGetTextMetricsA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lptm)))
-	return foundation.BOOL(r1)
-}
-
-// GetTextMetricsW calls GDI32!GetTextMetricsW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gettextmetricsw
-// Minimum OS: windows5.0.
-func GetTextMetricsW(hdc HDC, lptm *TEXTMETRICW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetTextMetricsW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lptm)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetUpdateRect calls USER32!GetUpdateRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getupdaterect
 // Minimum OS: windows5.0.
-func GetUpdateRect(hWnd foundation.HWND, lpRect *foundation.RECT, bErase foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetUpdateRect.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpRect)), uintptr(bErase))
-	return foundation.BOOL(r1)
+func GetUpdateRect(hWnd foundation.HWND, lpRect *foundation.RECT, bErase bool) bool {
+	_bErase := win32.Bool32(bErase)
+	r1, _, _ := syscall.SyscallN(procGetUpdateRect.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpRect)), uintptr(_bErase))
+	return r1 != 0
 }
 
 // GetUpdateRgn calls USER32!GetUpdateRgn.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getupdatergn
 // Minimum OS: windows5.0.
-func GetUpdateRgn(hWnd foundation.HWND, hRgn HRGN, bErase foundation.BOOL) GDI_REGION_TYPE {
-	r1, _, _ := syscall.SyscallN(procGetUpdateRgn.Addr(), uintptr(hWnd), uintptr(hRgn), uintptr(bErase))
+func GetUpdateRgn(hWnd foundation.HWND, hRgn HRGN, bErase bool) GDI_REGION_TYPE {
+	_bErase := win32.Bool32(bErase)
+	r1, _, _ := syscall.SyscallN(procGetUpdateRgn.Addr(), uintptr(hWnd), uintptr(hRgn), uintptr(_bErase))
 	return GDI_REGION_TYPE(r1)
 }
 
 // GetViewportExtEx calls GDI32!GetViewportExtEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getviewportextex
 // Minimum OS: windows5.0.
-func GetViewportExtEx(hdc HDC, lpsize *foundation.SIZE) foundation.BOOL {
+func GetViewportExtEx(hdc HDC, lpsize *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procGetViewportExtEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpsize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetViewportOrgEx calls GDI32!GetViewportOrgEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getviewportorgex
 // Minimum OS: windows5.0.
-func GetViewportOrgEx(hdc HDC, lppoint *foundation.POINT) foundation.BOOL {
+func GetViewportOrgEx(hdc HDC, lppoint *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procGetViewportOrgEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lppoint)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetWinMetaFileBits calls GDI32!GetWinMetaFileBits.
@@ -2316,17 +2410,17 @@ func GetWindowDC(hWnd foundation.HWND) HDC {
 // GetWindowExtEx calls GDI32!GetWindowExtEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getwindowextex
 // Minimum OS: windows5.0.
-func GetWindowExtEx(hdc HDC, lpsize *foundation.SIZE) foundation.BOOL {
+func GetWindowExtEx(hdc HDC, lpsize *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procGetWindowExtEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpsize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetWindowOrgEx calls GDI32!GetWindowOrgEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getwindoworgex
 // Minimum OS: windows5.0.
-func GetWindowOrgEx(hdc HDC, lppoint *foundation.POINT) foundation.BOOL {
+func GetWindowOrgEx(hdc HDC, lppoint *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procGetWindowOrgEx.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lppoint)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetWindowRgn calls USER32!GetWindowRgn.
@@ -2348,41 +2442,45 @@ func GetWindowRgnBox(hWnd foundation.HWND, lprc *foundation.RECT) GDI_REGION_TYP
 // GetWorldTransform calls GDI32!GetWorldTransform.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getworldtransform
 // Minimum OS: windows5.0.
-func GetWorldTransform(hdc HDC, lpxf *XFORM) foundation.BOOL {
+func GetWorldTransform(hdc HDC, lpxf *XFORM) bool {
 	r1, _, _ := syscall.SyscallN(procGetWorldTransform.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpxf)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GradientFill calls MSIMG32!GradientFill.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gradientfill
 // Minimum OS: windows5.0.
-func GradientFill(hdc HDC, pVertex *TRIVERTEX, nVertex uint32, pMesh unsafe.Pointer, nMesh uint32, ulMode GRADIENT_FILL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGradientFill.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pVertex)), uintptr(nVertex), uintptr(unsafe.Pointer(pMesh)), uintptr(nMesh), uintptr(ulMode))
-	return foundation.BOOL(r1)
+func GradientFill(hdc HDC, pVertex []TRIVERTEX, pMesh unsafe.Pointer, nMesh uint32, ulMode GRADIENT_FILL) bool {
+	var _pVertex *TRIVERTEX
+	if len(pVertex) > 0 {
+		_pVertex = &pVertex[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGradientFill.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_pVertex)), uintptr(len(pVertex)), uintptr(unsafe.Pointer(pMesh)), uintptr(nMesh), uintptr(ulMode))
+	return r1 != 0
+}
+
+// GrayString calls USER32!GrayStringW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-graystringw
+// Minimum OS: windows5.0.
+func GrayString(hDC HDC, hBrush HBRUSH, lpOutputFunc GRAYSTRINGPROC, lpData foundation.LPARAM, nCount int32, X int32, Y int32, nWidth int32, nHeight int32) bool {
+	r1, _, _ := syscall.SyscallN(procGrayString.Addr(), uintptr(hDC), uintptr(hBrush), uintptr(lpOutputFunc), uintptr(lpData), uintptr(nCount), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight))
+	return r1 != 0
 }
 
 // GrayStringA calls USER32!GrayStringA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-graystringa
 // Minimum OS: windows5.0.
-func GrayStringA(hDC HDC, hBrush HBRUSH, lpOutputFunc GRAYSTRINGPROC, lpData foundation.LPARAM, nCount int32, X int32, Y int32, nWidth int32, nHeight int32) foundation.BOOL {
+func GrayStringA(hDC HDC, hBrush HBRUSH, lpOutputFunc GRAYSTRINGPROC, lpData foundation.LPARAM, nCount int32, X int32, Y int32, nWidth int32, nHeight int32) bool {
 	r1, _, _ := syscall.SyscallN(procGrayStringA.Addr(), uintptr(hDC), uintptr(hBrush), uintptr(lpOutputFunc), uintptr(lpData), uintptr(nCount), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight))
-	return foundation.BOOL(r1)
-}
-
-// GrayStringW calls USER32!GrayStringW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-graystringw
-// Minimum OS: windows5.0.
-func GrayStringW(hDC HDC, hBrush HBRUSH, lpOutputFunc GRAYSTRINGPROC, lpData foundation.LPARAM, nCount int32, X int32, Y int32, nWidth int32, nHeight int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGrayStringW.Addr(), uintptr(hDC), uintptr(hBrush), uintptr(lpOutputFunc), uintptr(lpData), uintptr(nCount), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InflateRect calls USER32!InflateRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-inflaterect
 // Minimum OS: windows5.0.
-func InflateRect(lprc *foundation.RECT, dx int32, dy int32) foundation.BOOL {
+func InflateRect(lprc *foundation.RECT, dx int32, dy int32) bool {
 	r1, _, _ := syscall.SyscallN(procInflateRect.Addr(), uintptr(unsafe.Pointer(lprc)), uintptr(dx), uintptr(dy))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IntersectClipRect calls GDI32!IntersectClipRect.
@@ -2396,73 +2494,88 @@ func IntersectClipRect(hdc HDC, left int32, top int32, right int32, bottom int32
 // IntersectRect calls USER32!IntersectRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-intersectrect
 // Minimum OS: windows5.0.
-func IntersectRect(lprcDst *foundation.RECT, lprcSrc1 *foundation.RECT, lprcSrc2 *foundation.RECT) foundation.BOOL {
+func IntersectRect(lprcDst *foundation.RECT, lprcSrc1 *foundation.RECT, lprcSrc2 *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procIntersectRect.Addr(), uintptr(unsafe.Pointer(lprcDst)), uintptr(unsafe.Pointer(lprcSrc1)), uintptr(unsafe.Pointer(lprcSrc2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InvalidateRect calls USER32!InvalidateRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-invalidaterect
 // Minimum OS: windows5.0.
-func InvalidateRect(hWnd foundation.HWND, lpRect *foundation.RECT, bErase foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInvalidateRect.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpRect)), uintptr(bErase))
-	return foundation.BOOL(r1)
+func InvalidateRect(hWnd foundation.HWND, lpRect *foundation.RECT, bErase bool) bool {
+	_bErase := win32.Bool32(bErase)
+	r1, _, _ := syscall.SyscallN(procInvalidateRect.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpRect)), uintptr(_bErase))
+	return r1 != 0
 }
 
 // InvalidateRgn calls USER32!InvalidateRgn.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-invalidatergn
 // Minimum OS: windows5.0.
-func InvalidateRgn(hWnd foundation.HWND, hRgn HRGN, bErase foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInvalidateRgn.Addr(), uintptr(hWnd), uintptr(hRgn), uintptr(bErase))
-	return foundation.BOOL(r1)
+func InvalidateRgn(hWnd foundation.HWND, hRgn HRGN, bErase bool) bool {
+	_bErase := win32.Bool32(bErase)
+	r1, _, _ := syscall.SyscallN(procInvalidateRgn.Addr(), uintptr(hWnd), uintptr(hRgn), uintptr(_bErase))
+	return r1 != 0
 }
 
 // InvertRect calls USER32!InvertRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-invertrect
 // Minimum OS: windows5.0.
-func InvertRect(hDC HDC, lprc *foundation.RECT) foundation.BOOL {
+func InvertRect(hDC HDC, lprc *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procInvertRect.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(lprc)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InvertRgn calls GDI32!InvertRgn.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-invertrgn
 // Minimum OS: windows5.0.
-func InvertRgn(hdc HDC, hrgn HRGN) foundation.BOOL {
+func InvertRgn(hdc HDC, hrgn HRGN) bool {
 	r1, _, _ := syscall.SyscallN(procInvertRgn.Addr(), uintptr(hdc), uintptr(hrgn))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsRectEmpty calls USER32!IsRectEmpty.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-isrectempty
 // Minimum OS: windows5.0.
-func IsRectEmpty(lprc *foundation.RECT) foundation.BOOL {
+func IsRectEmpty(lprc *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procIsRectEmpty.Addr(), uintptr(unsafe.Pointer(lprc)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LPtoDP calls GDI32!LPtoDP.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-lptodp
 // Minimum OS: windows5.0.
-func LPtoDP(hdc HDC, lppt *foundation.POINT, c int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procLPtoDP.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lppt)), uintptr(c))
-	return foundation.BOOL(r1)
+func LPtoDP(hdc HDC, lppt []foundation.POINT) bool {
+	var _lppt *foundation.POINT
+	if len(lppt) > 0 {
+		_lppt = &lppt[0]
+	}
+	r1, _, _ := syscall.SyscallN(procLPtoDP.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lppt)), uintptr(len(lppt)))
+	return r1 != 0
 }
 
 // LineDDA calls GDI32!LineDDA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-linedda
 // Minimum OS: windows5.0.
-func LineDDA(xStart int32, yStart int32, xEnd int32, yEnd int32, lpProc LINEDDAPROC, data foundation.LPARAM) foundation.BOOL {
+func LineDDA(xStart int32, yStart int32, xEnd int32, yEnd int32, lpProc LINEDDAPROC, data foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procLineDDA.Addr(), uintptr(xStart), uintptr(yStart), uintptr(xEnd), uintptr(yEnd), uintptr(lpProc), uintptr(data))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LineTo calls GDI32!LineTo.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-lineto
 // Minimum OS: windows5.0.
-func LineTo(hdc HDC, x int32, y int32) foundation.BOOL {
+func LineTo(hdc HDC, x int32, y int32) bool {
 	r1, _, _ := syscall.SyscallN(procLineTo.Addr(), uintptr(hdc), uintptr(x), uintptr(y))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// LoadBitmap calls USER32!LoadBitmapW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadbitmapw
+// Minimum OS: windows5.0.
+func LoadBitmap(hInstance foundation.HINSTANCE, lpBitmapName string) HBITMAP {
+	_lpBitmapName := win32.UTF16Ptr(lpBitmapName)
+	r1, _, _ := syscall.SyscallN(procLoadBitmap.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpBitmapName)))
+	return HBITMAP(r1)
 }
 
 // LoadBitmapA calls USER32!LoadBitmapA.
@@ -2473,36 +2586,32 @@ func LoadBitmapA(hInstance foundation.HINSTANCE, lpBitmapName foundation.PSTR) H
 	return HBITMAP(r1)
 }
 
-// LoadBitmapW calls USER32!LoadBitmapW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadbitmapw
-// Minimum OS: windows5.0.
-func LoadBitmapW(hInstance foundation.HINSTANCE, lpBitmapName foundation.PWSTR) HBITMAP {
-	r1, _, _ := syscall.SyscallN(procLoadBitmapW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpBitmapName)))
-	return HBITMAP(r1)
-}
-
 // LockWindowUpdate calls USER32!LockWindowUpdate.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-lockwindowupdate
 // Minimum OS: windows5.0.
-func LockWindowUpdate(hWndLock foundation.HWND) foundation.BOOL {
+func LockWindowUpdate(hWndLock foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procLockWindowUpdate.Addr(), uintptr(hWndLock))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MapWindowPoints calls USER32!MapWindowPoints.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-mapwindowpoints
 // Minimum OS: windows5.0.
-func MapWindowPoints(hWndFrom foundation.HWND, hWndTo foundation.HWND, lpPoints *foundation.POINT, cPoints uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procMapWindowPoints.Addr(), uintptr(hWndFrom), uintptr(hWndTo), uintptr(unsafe.Pointer(lpPoints)), uintptr(cPoints))
+func MapWindowPoints(hWndFrom foundation.HWND, hWndTo foundation.HWND, lpPoints []foundation.POINT) int32 {
+	var _lpPoints *foundation.POINT
+	if len(lpPoints) > 0 {
+		_lpPoints = &lpPoints[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMapWindowPoints.Addr(), uintptr(hWndFrom), uintptr(hWndTo), uintptr(unsafe.Pointer(_lpPoints)), uintptr(len(lpPoints)))
 	return int32(r1)
 }
 
 // MaskBlt calls GDI32!MaskBlt.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-maskblt
 // Minimum OS: windows5.0.
-func MaskBlt(hdcDest HDC, xDest int32, yDest int32, width int32, height int32, hdcSrc HDC, xSrc int32, ySrc int32, hbmMask HBITMAP, xMask int32, yMask int32, rop uint32) foundation.BOOL {
+func MaskBlt(hdcDest HDC, xDest int32, yDest int32, width int32, height int32, hdcSrc HDC, xSrc int32, ySrc int32, hbmMask HBITMAP, xMask int32, yMask int32, rop uint32) bool {
 	r1, _, _ := syscall.SyscallN(procMaskBlt.Addr(), uintptr(hdcDest), uintptr(xDest), uintptr(yDest), uintptr(width), uintptr(height), uintptr(hdcSrc), uintptr(xSrc), uintptr(ySrc), uintptr(hbmMask), uintptr(xMask), uintptr(yMask), uintptr(rop))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MergeFontPackage calls FONTSUB!MergeFontPackage.
@@ -2516,9 +2625,9 @@ func MergeFontPackage(puchMergeFontBuffer *byte, ulMergeFontBufferSize uint32, p
 // ModifyWorldTransform calls GDI32!ModifyWorldTransform.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-modifyworldtransform
 // Minimum OS: windows5.0.
-func ModifyWorldTransform(hdc HDC, lpxf *XFORM, mode MODIFY_WORLD_TRANSFORM_MODE) foundation.BOOL {
+func ModifyWorldTransform(hdc HDC, lpxf *XFORM, mode MODIFY_WORLD_TRANSFORM_MODE) bool {
 	r1, _, _ := syscall.SyscallN(procModifyWorldTransform.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpxf)), uintptr(mode))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MonitorFromRect calls USER32!MonitorFromRect.
@@ -2540,9 +2649,9 @@ func MonitorFromWindow(hwnd foundation.HWND, dwFlags MONITOR_FROM_FLAGS) HMONITO
 // MoveToEx calls GDI32!MoveToEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-movetoex
 // Minimum OS: windows5.0.
-func MoveToEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) foundation.BOOL {
+func MoveToEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procMoveToEx.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lppt)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // OffsetClipRgn calls GDI32!OffsetClipRgn.
@@ -2556,9 +2665,9 @@ func OffsetClipRgn(hdc HDC, x int32, y int32) GDI_REGION_TYPE {
 // OffsetRect calls USER32!OffsetRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-offsetrect
 // Minimum OS: windows5.0.
-func OffsetRect(lprc *foundation.RECT, dx int32, dy int32) foundation.BOOL {
+func OffsetRect(lprc *foundation.RECT, dx int32, dy int32) bool {
 	r1, _, _ := syscall.SyscallN(procOffsetRect.Addr(), uintptr(unsafe.Pointer(lprc)), uintptr(dx), uintptr(dy))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // OffsetRgn calls GDI32!OffsetRgn.
@@ -2572,41 +2681,41 @@ func OffsetRgn(hrgn HRGN, x int32, y int32) GDI_REGION_TYPE {
 // OffsetViewportOrgEx calls GDI32!OffsetViewportOrgEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-offsetviewportorgex
 // Minimum OS: windows5.0.
-func OffsetViewportOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) foundation.BOOL {
+func OffsetViewportOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procOffsetViewportOrgEx.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lppt)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // OffsetWindowOrgEx calls GDI32!OffsetWindowOrgEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-offsetwindoworgex
 // Minimum OS: windows5.0.
-func OffsetWindowOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) foundation.BOOL {
+func OffsetWindowOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procOffsetWindowOrgEx.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lppt)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PaintDesktop calls USER32!PaintDesktop.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-paintdesktop
 // Minimum OS: windows5.0.
-func PaintDesktop(hdc HDC) foundation.BOOL {
+func PaintDesktop(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procPaintDesktop.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PaintRgn calls GDI32!PaintRgn.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-paintrgn
 // Minimum OS: windows5.0.
-func PaintRgn(hdc HDC, hrgn HRGN) foundation.BOOL {
+func PaintRgn(hdc HDC, hrgn HRGN) bool {
 	r1, _, _ := syscall.SyscallN(procPaintRgn.Addr(), uintptr(hdc), uintptr(hrgn))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PatBlt calls GDI32!PatBlt.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-patblt
 // Minimum OS: windows5.0.
-func PatBlt(hdc HDC, x int32, y int32, w int32, h int32, rop ROP_CODE) foundation.BOOL {
+func PatBlt(hdc HDC, x int32, y int32, w int32, h int32, rop ROP_CODE) bool {
 	r1, _, _ := syscall.SyscallN(procPatBlt.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(w), uintptr(h), uintptr(rop))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PathToRegion calls GDI32!PathToRegion.
@@ -2620,145 +2729,189 @@ func PathToRegion(hdc HDC) HRGN {
 // Pie calls GDI32!Pie.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-pie
 // Minimum OS: windows5.0.
-func Pie(hdc HDC, left int32, top int32, right int32, bottom int32, xr1 int32, yr1 int32, xr2 int32, yr2 int32) foundation.BOOL {
+func Pie(hdc HDC, left int32, top int32, right int32, bottom int32, xr1 int32, yr1 int32, xr2 int32, yr2 int32) bool {
 	r1, _, _ := syscall.SyscallN(procPie.Addr(), uintptr(hdc), uintptr(left), uintptr(top), uintptr(right), uintptr(bottom), uintptr(xr1), uintptr(yr1), uintptr(xr2), uintptr(yr2))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PlayEnhMetaFile calls GDI32!PlayEnhMetaFile.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-playenhmetafile
 // Minimum OS: windows5.0.
-func PlayEnhMetaFile(hdc HDC, hmf HENHMETAFILE, lprect *foundation.RECT) foundation.BOOL {
+func PlayEnhMetaFile(hdc HDC, hmf HENHMETAFILE, lprect *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procPlayEnhMetaFile.Addr(), uintptr(hdc), uintptr(hmf), uintptr(unsafe.Pointer(lprect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PlayEnhMetaFileRecord calls GDI32!PlayEnhMetaFileRecord.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-playenhmetafilerecord
 // Minimum OS: windows5.0.
-func PlayEnhMetaFileRecord(hdc HDC, pht *HANDLETABLE, pmr *ENHMETARECORD, cht uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPlayEnhMetaFileRecord.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pht)), uintptr(unsafe.Pointer(pmr)), uintptr(cht))
-	return foundation.BOOL(r1)
+func PlayEnhMetaFileRecord(hdc HDC, pht []HANDLETABLE, pmr *ENHMETARECORD) bool {
+	var _pht *HANDLETABLE
+	if len(pht) > 0 {
+		_pht = &pht[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPlayEnhMetaFileRecord.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_pht)), uintptr(unsafe.Pointer(pmr)), uintptr(len(pht)))
+	return r1 != 0
 }
 
 // PlayMetaFile calls GDI32!PlayMetaFile.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-playmetafile
 // Minimum OS: windows5.0.
-func PlayMetaFile(hdc HDC, hmf HMETAFILE) foundation.BOOL {
+func PlayMetaFile(hdc HDC, hmf HMETAFILE) bool {
 	r1, _, _ := syscall.SyscallN(procPlayMetaFile.Addr(), uintptr(hdc), uintptr(hmf))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PlayMetaFileRecord calls GDI32!PlayMetaFileRecord.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-playmetafilerecord
 // Minimum OS: windows5.0.
-func PlayMetaFileRecord(hdc HDC, lpHandleTable *HANDLETABLE, lpMR *METARECORD, noObjs uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPlayMetaFileRecord.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpHandleTable)), uintptr(unsafe.Pointer(lpMR)), uintptr(noObjs))
-	return foundation.BOOL(r1)
+func PlayMetaFileRecord(hdc HDC, lpHandleTable []HANDLETABLE, lpMR *METARECORD) bool {
+	var _lpHandleTable *HANDLETABLE
+	if len(lpHandleTable) > 0 {
+		_lpHandleTable = &lpHandleTable[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPlayMetaFileRecord.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpHandleTable)), uintptr(unsafe.Pointer(lpMR)), uintptr(len(lpHandleTable)))
+	return r1 != 0
 }
 
 // PlgBlt calls GDI32!PlgBlt.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-plgblt
 // Minimum OS: windows5.0.
-func PlgBlt(hdcDest HDC, lpPoint *foundation.POINT, hdcSrc HDC, xSrc int32, ySrc int32, width int32, height int32, hbmMask HBITMAP, xMask int32, yMask int32) foundation.BOOL {
+func PlgBlt(hdcDest HDC, lpPoint *foundation.POINT, hdcSrc HDC, xSrc int32, ySrc int32, width int32, height int32, hbmMask HBITMAP, xMask int32, yMask int32) bool {
 	r1, _, _ := syscall.SyscallN(procPlgBlt.Addr(), uintptr(hdcDest), uintptr(unsafe.Pointer(lpPoint)), uintptr(hdcSrc), uintptr(xSrc), uintptr(ySrc), uintptr(width), uintptr(height), uintptr(hbmMask), uintptr(xMask), uintptr(yMask))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PolyBezier calls GDI32!PolyBezier.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polybezier
 // Minimum OS: windows5.0.
-func PolyBezier(hdc HDC, apt *foundation.POINT, cpt uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPolyBezier.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(cpt))
-	return foundation.BOOL(r1)
+func PolyBezier(hdc HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPolyBezier.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_apt)), uintptr(len(apt)))
+	return r1 != 0
 }
 
 // PolyBezierTo calls GDI32!PolyBezierTo.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polybezierto
 // Minimum OS: windows5.0.
-func PolyBezierTo(hdc HDC, apt *foundation.POINT, cpt uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPolyBezierTo.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(cpt))
-	return foundation.BOOL(r1)
+func PolyBezierTo(hdc HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPolyBezierTo.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_apt)), uintptr(len(apt)))
+	return r1 != 0
 }
 
 // PolyDraw calls GDI32!PolyDraw.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polydraw
 // Minimum OS: windows5.0.
-func PolyDraw(hdc HDC, apt *foundation.POINT, aj *byte, cpt int32) foundation.BOOL {
+func PolyDraw(hdc HDC, apt *foundation.POINT, aj *byte, cpt int32) bool {
 	r1, _, _ := syscall.SyscallN(procPolyDraw.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(unsafe.Pointer(aj)), uintptr(cpt))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PolyPolygon calls GDI32!PolyPolygon.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polypolygon
 // Minimum OS: windows5.0.
-func PolyPolygon(hdc HDC, apt *foundation.POINT, asz *int32, csz int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPolyPolygon.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(unsafe.Pointer(asz)), uintptr(csz))
-	return foundation.BOOL(r1)
+func PolyPolygon(hdc HDC, apt *foundation.POINT, asz []int32) bool {
+	var _asz *int32
+	if len(asz) > 0 {
+		_asz = &asz[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPolyPolygon.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(unsafe.Pointer(_asz)), uintptr(len(asz)))
+	return r1 != 0
 }
 
 // PolyPolyline calls GDI32!PolyPolyline.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polypolyline
 // Minimum OS: windows5.0.
-func PolyPolyline(hdc HDC, apt *foundation.POINT, asz *uint32, csz uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPolyPolyline.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(unsafe.Pointer(asz)), uintptr(csz))
-	return foundation.BOOL(r1)
+func PolyPolyline(hdc HDC, apt *foundation.POINT, asz []uint32) bool {
+	var _asz *uint32
+	if len(asz) > 0 {
+		_asz = &asz[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPolyPolyline.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(unsafe.Pointer(_asz)), uintptr(len(asz)))
+	return r1 != 0
+}
+
+// PolyTextOut calls GDI32!PolyTextOutW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polytextoutw
+// Minimum OS: windows5.0.
+func PolyTextOut(hdc HDC, ppt []POLYTEXTW) bool {
+	var _ppt *POLYTEXTW
+	if len(ppt) > 0 {
+		_ppt = &ppt[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPolyTextOut.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_ppt)), uintptr(len(ppt)))
+	return r1 != 0
 }
 
 // PolyTextOutA calls GDI32!PolyTextOutA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polytextouta
 // Minimum OS: windows5.0.
-func PolyTextOutA(hdc HDC, ppt *POLYTEXTA, nstrings int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPolyTextOutA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(ppt)), uintptr(nstrings))
-	return foundation.BOOL(r1)
-}
-
-// PolyTextOutW calls GDI32!PolyTextOutW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polytextoutw
-// Minimum OS: windows5.0.
-func PolyTextOutW(hdc HDC, ppt *POLYTEXTW, nstrings int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPolyTextOutW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(ppt)), uintptr(nstrings))
-	return foundation.BOOL(r1)
+func PolyTextOutA(hdc HDC, ppt []POLYTEXTA) bool {
+	var _ppt *POLYTEXTA
+	if len(ppt) > 0 {
+		_ppt = &ppt[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPolyTextOutA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_ppt)), uintptr(len(ppt)))
+	return r1 != 0
 }
 
 // Polygon calls GDI32!Polygon.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polygon
 // Minimum OS: windows5.0.
-func Polygon(hdc HDC, apt *foundation.POINT, cpt int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPolygon.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(cpt))
-	return foundation.BOOL(r1)
+func Polygon(hdc HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPolygon.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_apt)), uintptr(len(apt)))
+	return r1 != 0
 }
 
 // Polyline calls GDI32!Polyline.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polyline
 // Minimum OS: windows5.0.
-func Polyline(hdc HDC, apt *foundation.POINT, cpt int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPolyline.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(cpt))
-	return foundation.BOOL(r1)
+func Polyline(hdc HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPolyline.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_apt)), uintptr(len(apt)))
+	return r1 != 0
 }
 
 // PolylineTo calls GDI32!PolylineTo.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-polylineto
 // Minimum OS: windows5.0.
-func PolylineTo(hdc HDC, apt *foundation.POINT, cpt uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPolylineTo.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(apt)), uintptr(cpt))
-	return foundation.BOOL(r1)
+func PolylineTo(hdc HDC, apt []foundation.POINT) bool {
+	var _apt *foundation.POINT
+	if len(apt) > 0 {
+		_apt = &apt[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPolylineTo.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_apt)), uintptr(len(apt)))
+	return r1 != 0
 }
 
 // PtInRegion calls GDI32!PtInRegion.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-ptinregion
 // Minimum OS: windows5.0.
-func PtInRegion(hrgn HRGN, x int32, y int32) foundation.BOOL {
+func PtInRegion(hrgn HRGN, x int32, y int32) bool {
 	r1, _, _ := syscall.SyscallN(procPtInRegion.Addr(), uintptr(hrgn), uintptr(x), uintptr(y))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PtVisible calls GDI32!PtVisible.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-ptvisible
 // Minimum OS: windows5.0.
-func PtVisible(hdc HDC, x int32, y int32) foundation.BOOL {
+func PtVisible(hdc HDC, x int32, y int32) bool {
 	r1, _, _ := syscall.SyscallN(procPtVisible.Addr(), uintptr(hdc), uintptr(x), uintptr(y))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RealizePalette calls GDI32!RealizePalette.
@@ -2772,33 +2925,33 @@ func RealizePalette(hdc HDC) uint32 {
 // RectInRegion calls GDI32!RectInRegion.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-rectinregion
 // Minimum OS: windows5.0.
-func RectInRegion(hrgn HRGN, lprect *foundation.RECT) foundation.BOOL {
+func RectInRegion(hrgn HRGN, lprect *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procRectInRegion.Addr(), uintptr(hrgn), uintptr(unsafe.Pointer(lprect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RectVisible calls GDI32!RectVisible.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-rectvisible
 // Minimum OS: windows5.0.
-func RectVisible(hdc HDC, lprect *foundation.RECT) foundation.BOOL {
+func RectVisible(hdc HDC, lprect *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procRectVisible.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lprect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // Rectangle calls GDI32!Rectangle.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-rectangle
 // Minimum OS: windows5.0.
-func Rectangle(hdc HDC, left int32, top int32, right int32, bottom int32) foundation.BOOL {
+func Rectangle(hdc HDC, left int32, top int32, right int32, bottom int32) bool {
 	r1, _, _ := syscall.SyscallN(procRectangle.Addr(), uintptr(hdc), uintptr(left), uintptr(top), uintptr(right), uintptr(bottom))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RedrawWindow calls USER32!RedrawWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-redrawwindow
 // Minimum OS: windows5.0.
-func RedrawWindow(hWnd foundation.HWND, lprcUpdate *foundation.RECT, hrgnUpdate HRGN, flags REDRAW_WINDOW_FLAGS) foundation.BOOL {
+func RedrawWindow(hWnd foundation.HWND, lprcUpdate *foundation.RECT, hrgnUpdate HRGN, flags REDRAW_WINDOW_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procRedrawWindow.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lprcUpdate)), uintptr(hrgnUpdate), uintptr(flags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ReleaseDC calls USER32!ReleaseDC.
@@ -2812,41 +2965,51 @@ func ReleaseDC(hWnd foundation.HWND, hDC HDC) int32 {
 // RemoveFontMemResourceEx calls GDI32!RemoveFontMemResourceEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-removefontmemresourceex
 // Minimum OS: windows5.0.
-func RemoveFontMemResourceEx(h foundation.HANDLE) foundation.BOOL {
+func RemoveFontMemResourceEx(h foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procRemoveFontMemResourceEx.Addr(), uintptr(h))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// RemoveFontResource calls GDI32!RemoveFontResourceW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-removefontresourcew
+// Minimum OS: windows5.0.
+func RemoveFontResource(lpFileName string) bool {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procRemoveFontResource.Addr(), uintptr(unsafe.Pointer(_lpFileName)))
+	return r1 != 0
 }
 
 // RemoveFontResourceA calls GDI32!RemoveFontResourceA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-removefontresourcea
 // Minimum OS: windows5.0.
-func RemoveFontResourceA(lpFileName foundation.PSTR) foundation.BOOL {
+func RemoveFontResourceA(lpFileName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procRemoveFontResourceA.Addr(), uintptr(unsafe.Pointer(lpFileName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// RemoveFontResourceEx calls GDI32!RemoveFontResourceExW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-removefontresourceexw
+// Minimum OS: windows5.0.
+func RemoveFontResourceEx(name string, fl uint32) bool {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(procRemoveFontResourceEx.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(fl), 0)
+	return r1 != 0
 }
 
 // RemoveFontResourceExA calls GDI32!RemoveFontResourceExA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-removefontresourceexa
 // Minimum OS: windows5.0.
-func RemoveFontResourceExA(name foundation.PSTR, fl uint32, pdv unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRemoveFontResourceExA.Addr(), uintptr(unsafe.Pointer(name)), uintptr(fl), uintptr(unsafe.Pointer(pdv)))
-	return foundation.BOOL(r1)
+func RemoveFontResourceExA(name foundation.PSTR, fl uint32) bool {
+	r1, _, _ := syscall.SyscallN(procRemoveFontResourceExA.Addr(), uintptr(unsafe.Pointer(name)), uintptr(fl), 0)
+	return r1 != 0
 }
 
-// RemoveFontResourceExW calls GDI32!RemoveFontResourceExW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-removefontresourceexw
+// ResetDC calls GDI32!ResetDCW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-resetdcw
 // Minimum OS: windows5.0.
-func RemoveFontResourceExW(name foundation.PWSTR, fl uint32, pdv unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRemoveFontResourceExW.Addr(), uintptr(unsafe.Pointer(name)), uintptr(fl), uintptr(unsafe.Pointer(pdv)))
-	return foundation.BOOL(r1)
-}
-
-// RemoveFontResourceW calls GDI32!RemoveFontResourceW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-removefontresourcew
-// Minimum OS: windows5.0.
-func RemoveFontResourceW(lpFileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRemoveFontResourceW.Addr(), uintptr(unsafe.Pointer(lpFileName)))
-	return foundation.BOOL(r1)
+func ResetDC(hdc HDC, lpdm *DEVMODEW) HDC {
+	r1, _, _ := syscall.SyscallN(procResetDC.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpdm)))
+	return HDC(r1)
 }
 
 // ResetDCA calls GDI32!ResetDCA.
@@ -2857,36 +3020,28 @@ func ResetDCA(hdc HDC, lpdm *DEVMODEA) HDC {
 	return HDC(r1)
 }
 
-// ResetDCW calls GDI32!ResetDCW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-resetdcw
-// Minimum OS: windows5.0.
-func ResetDCW(hdc HDC, lpdm *DEVMODEW) HDC {
-	r1, _, _ := syscall.SyscallN(procResetDCW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpdm)))
-	return HDC(r1)
-}
-
 // ResizePalette calls GDI32!ResizePalette.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-resizepalette
 // Minimum OS: windows5.0.
-func ResizePalette(hpal HPALETTE, n uint32) foundation.BOOL {
+func ResizePalette(hpal HPALETTE, n uint32) bool {
 	r1, _, _ := syscall.SyscallN(procResizePalette.Addr(), uintptr(hpal), uintptr(n))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RestoreDC calls GDI32!RestoreDC.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-restoredc
 // Minimum OS: windows5.0.
-func RestoreDC(hdc HDC, nSavedDC int32) foundation.BOOL {
+func RestoreDC(hdc HDC, nSavedDC int32) bool {
 	r1, _, _ := syscall.SyscallN(procRestoreDC.Addr(), uintptr(hdc), uintptr(nSavedDC))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RoundRect calls GDI32!RoundRect.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-roundrect
 // Minimum OS: windows5.0.
-func RoundRect(hdc HDC, left int32, top int32, right int32, bottom int32, width int32, height int32) foundation.BOOL {
+func RoundRect(hdc HDC, left int32, top int32, right int32, bottom int32, width int32, height int32) bool {
 	r1, _, _ := syscall.SyscallN(procRoundRect.Addr(), uintptr(hdc), uintptr(left), uintptr(top), uintptr(right), uintptr(bottom), uintptr(width), uintptr(height))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SaveDC calls GDI32!SaveDC.
@@ -2900,33 +3055,33 @@ func SaveDC(hdc HDC) int32 {
 // ScaleViewportExtEx calls GDI32!ScaleViewportExtEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-scaleviewportextex
 // Minimum OS: windows5.0.
-func ScaleViewportExtEx(hdc HDC, xn int32, dx int32, yn int32, yd int32, lpsz *foundation.SIZE) foundation.BOOL {
+func ScaleViewportExtEx(hdc HDC, xn int32, dx int32, yn int32, yd int32, lpsz *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procScaleViewportExtEx.Addr(), uintptr(hdc), uintptr(xn), uintptr(dx), uintptr(yn), uintptr(yd), uintptr(unsafe.Pointer(lpsz)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ScaleWindowExtEx calls GDI32!ScaleWindowExtEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-scalewindowextex
 // Minimum OS: windows5.0.
-func ScaleWindowExtEx(hdc HDC, xn int32, xd int32, yn int32, yd int32, lpsz *foundation.SIZE) foundation.BOOL {
+func ScaleWindowExtEx(hdc HDC, xn int32, xd int32, yn int32, yd int32, lpsz *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procScaleWindowExtEx.Addr(), uintptr(hdc), uintptr(xn), uintptr(xd), uintptr(yn), uintptr(yd), uintptr(unsafe.Pointer(lpsz)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ScreenToClient calls USER32!ScreenToClient.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-screentoclient
 // Minimum OS: windows5.0.
-func ScreenToClient(hWnd foundation.HWND, lpPoint *foundation.POINT) foundation.BOOL {
+func ScreenToClient(hWnd foundation.HWND, lpPoint *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procScreenToClient.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpPoint)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SelectClipPath calls GDI32!SelectClipPath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-selectclippath
 // Minimum OS: windows5.0.
-func SelectClipPath(hdc HDC, mode RGN_COMBINE_MODE) foundation.BOOL {
+func SelectClipPath(hdc HDC, mode RGN_COMBINE_MODE) bool {
 	r1, _, _ := syscall.SyscallN(procSelectClipPath.Addr(), uintptr(hdc), uintptr(mode))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SelectClipRgn calls GDI32!SelectClipRgn.
@@ -2948,8 +3103,9 @@ func SelectObject(hdc HDC, h HGDIOBJ) HGDIOBJ {
 // SelectPalette calls GDI32!SelectPalette.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-selectpalette
 // Minimum OS: windows5.0.
-func SelectPalette(hdc HDC, hPal HPALETTE, bForceBkgd foundation.BOOL) HPALETTE {
-	r1, _, _ := syscall.SyscallN(procSelectPalette.Addr(), uintptr(hdc), uintptr(hPal), uintptr(bForceBkgd))
+func SelectPalette(hdc HDC, hPal HPALETTE, bForceBkgd bool) HPALETTE {
+	_bForceBkgd := win32.Bool32(bForceBkgd)
+	r1, _, _ := syscall.SyscallN(procSelectPalette.Addr(), uintptr(hdc), uintptr(hPal), uintptr(_bForceBkgd))
 	return HPALETTE(r1)
 }
 
@@ -2972,9 +3128,9 @@ func SetBitmapBits(hbm HBITMAP, cb uint32, pvBits unsafe.Pointer) int32 {
 // SetBitmapDimensionEx calls GDI32!SetBitmapDimensionEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setbitmapdimensionex
 // Minimum OS: windows5.0.
-func SetBitmapDimensionEx(hbm HBITMAP, w int32, h int32, lpsz *foundation.SIZE) foundation.BOOL {
+func SetBitmapDimensionEx(hbm HBITMAP, w int32, h int32, lpsz *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procSetBitmapDimensionEx.Addr(), uintptr(hbm), uintptr(w), uintptr(h), uintptr(unsafe.Pointer(lpsz)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetBkColor calls GDI32!SetBkColor.
@@ -3004,17 +3160,17 @@ func SetBoundsRect(hdc HDC, lprect *foundation.RECT, flags SET_BOUNDS_RECT_FLAGS
 // SetBrushOrgEx calls GDI32!SetBrushOrgEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setbrushorgex
 // Minimum OS: windows5.0.
-func SetBrushOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) foundation.BOOL {
+func SetBrushOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procSetBrushOrgEx.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lppt)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetColorAdjustment calls GDI32!SetColorAdjustment.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setcoloradjustment
 // Minimum OS: windows5.0.
-func SetColorAdjustment(hdc HDC, lpca *COLORADJUSTMENT) foundation.BOOL {
+func SetColorAdjustment(hdc HDC, lpca *COLORADJUSTMENT) bool {
 	r1, _, _ := syscall.SyscallN(procSetColorAdjustment.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpca)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetDCBrushColor calls GDI32!SetDCBrushColor.
@@ -3036,8 +3192,12 @@ func SetDCPenColor(hdc HDC, color foundation.COLORREF) foundation.COLORREF {
 // SetDIBColorTable calls GDI32!SetDIBColorTable.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setdibcolortable
 // Minimum OS: windows5.0.
-func SetDIBColorTable(hdc HDC, iStart uint32, cEntries uint32, prgbq *RGBQUAD) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetDIBColorTable.Addr(), uintptr(hdc), uintptr(iStart), uintptr(cEntries), uintptr(unsafe.Pointer(prgbq)))
+func SetDIBColorTable(hdc HDC, iStart uint32, prgbq []RGBQUAD) uint32 {
+	var _prgbq *RGBQUAD
+	if len(prgbq) > 0 {
+		_prgbq = &prgbq[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetDIBColorTable.Addr(), uintptr(hdc), uintptr(iStart), uintptr(len(prgbq)), uintptr(unsafe.Pointer(_prgbq)))
 	return uint32(r1)
 }
 
@@ -3116,8 +3276,12 @@ func SetMetaRgn(hdc HDC) GDI_REGION_TYPE {
 // SetPaletteEntries calls GDI32!SetPaletteEntries.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setpaletteentries
 // Minimum OS: windows5.0.
-func SetPaletteEntries(hpal HPALETTE, iStart uint32, cEntries uint32, pPalEntries *PALETTEENTRY) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetPaletteEntries.Addr(), uintptr(hpal), uintptr(iStart), uintptr(cEntries), uintptr(unsafe.Pointer(pPalEntries)))
+func SetPaletteEntries(hpal HPALETTE, iStart uint32, pPalEntries []PALETTEENTRY) uint32 {
+	var _pPalEntries *PALETTEENTRY
+	if len(pPalEntries) > 0 {
+		_pPalEntries = &pPalEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetPaletteEntries.Addr(), uintptr(hpal), uintptr(iStart), uintptr(len(pPalEntries)), uintptr(unsafe.Pointer(_pPalEntries)))
 	return uint32(r1)
 }
 
@@ -3132,9 +3296,9 @@ func SetPixel(hdc HDC, x int32, y int32, color foundation.COLORREF) foundation.C
 // SetPixelV calls GDI32!SetPixelV.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setpixelv
 // Minimum OS: windows5.0.
-func SetPixelV(hdc HDC, x int32, y int32, color foundation.COLORREF) foundation.BOOL {
+func SetPixelV(hdc HDC, x int32, y int32, color foundation.COLORREF) bool {
 	r1, _, _ := syscall.SyscallN(procSetPixelV.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(color))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetPolyFillMode calls GDI32!SetPolyFillMode.
@@ -3156,25 +3320,25 @@ func SetROP2(hdc HDC, rop2 R2_MODE) int32 {
 // SetRect calls USER32!SetRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setrect
 // Minimum OS: windows5.0.
-func SetRect(lprc *foundation.RECT, xLeft int32, yTop int32, xRight int32, yBottom int32) foundation.BOOL {
+func SetRect(lprc *foundation.RECT, xLeft int32, yTop int32, xRight int32, yBottom int32) bool {
 	r1, _, _ := syscall.SyscallN(procSetRect.Addr(), uintptr(unsafe.Pointer(lprc)), uintptr(xLeft), uintptr(yTop), uintptr(xRight), uintptr(yBottom))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetRectEmpty calls USER32!SetRectEmpty.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setrectempty
 // Minimum OS: windows5.0.
-func SetRectEmpty(lprc *foundation.RECT) foundation.BOOL {
+func SetRectEmpty(lprc *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procSetRectEmpty.Addr(), uintptr(unsafe.Pointer(lprc)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetRectRgn calls GDI32!SetRectRgn.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setrectrgn
 // Minimum OS: windows5.0.
-func SetRectRgn(hrgn HRGN, left int32, top int32, right int32, bottom int32) foundation.BOOL {
+func SetRectRgn(hrgn HRGN, left int32, top int32, right int32, bottom int32) bool {
 	r1, _, _ := syscall.SyscallN(procSetRectRgn.Addr(), uintptr(hrgn), uintptr(left), uintptr(top), uintptr(right), uintptr(bottom))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetStretchBltMode calls GDI32!SetStretchBltMode.
@@ -3231,65 +3395,66 @@ func SetTextColor(hdc HDC, color foundation.COLORREF) foundation.COLORREF {
 // SetTextJustification calls GDI32!SetTextJustification.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-settextjustification
 // Minimum OS: windows5.0.
-func SetTextJustification(hdc HDC, extra int32, count int32) foundation.BOOL {
+func SetTextJustification(hdc HDC, extra int32, count int32) bool {
 	r1, _, _ := syscall.SyscallN(procSetTextJustification.Addr(), uintptr(hdc), uintptr(extra), uintptr(count))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetViewportExtEx calls GDI32!SetViewportExtEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setviewportextex
 // Minimum OS: windows5.0.
-func SetViewportExtEx(hdc HDC, x int32, y int32, lpsz *foundation.SIZE) foundation.BOOL {
+func SetViewportExtEx(hdc HDC, x int32, y int32, lpsz *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procSetViewportExtEx.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lpsz)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetViewportOrgEx calls GDI32!SetViewportOrgEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setviewportorgex
 // Minimum OS: windows5.0.
-func SetViewportOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) foundation.BOOL {
+func SetViewportOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procSetViewportOrgEx.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lppt)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetWindowExtEx calls GDI32!SetWindowExtEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setwindowextex
 // Minimum OS: windows5.0.
-func SetWindowExtEx(hdc HDC, x int32, y int32, lpsz *foundation.SIZE) foundation.BOOL {
+func SetWindowExtEx(hdc HDC, x int32, y int32, lpsz *foundation.SIZE) bool {
 	r1, _, _ := syscall.SyscallN(procSetWindowExtEx.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lpsz)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetWindowOrgEx calls GDI32!SetWindowOrgEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setwindoworgex
 // Minimum OS: windows5.0.
-func SetWindowOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) foundation.BOOL {
+func SetWindowOrgEx(hdc HDC, x int32, y int32, lppt *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procSetWindowOrgEx.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lppt)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetWindowRgn calls USER32!SetWindowRgn.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowrgn
 // Minimum OS: windows5.0.
-func SetWindowRgn(hWnd foundation.HWND, hRgn HRGN, bRedraw foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procSetWindowRgn.Addr(), uintptr(hWnd), uintptr(hRgn), uintptr(bRedraw))
+func SetWindowRgn(hWnd foundation.HWND, hRgn HRGN, bRedraw bool) int32 {
+	_bRedraw := win32.Bool32(bRedraw)
+	r1, _, _ := syscall.SyscallN(procSetWindowRgn.Addr(), uintptr(hWnd), uintptr(hRgn), uintptr(_bRedraw))
 	return int32(r1)
 }
 
 // SetWorldTransform calls GDI32!SetWorldTransform.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setworldtransform
 // Minimum OS: windows5.0.
-func SetWorldTransform(hdc HDC, lpxf *XFORM) foundation.BOOL {
+func SetWorldTransform(hdc HDC, lpxf *XFORM) bool {
 	r1, _, _ := syscall.SyscallN(procSetWorldTransform.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpxf)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // StretchBlt calls GDI32!StretchBlt.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-stretchblt
 // Minimum OS: windows5.0.
-func StretchBlt(hdcDest HDC, xDest int32, yDest int32, wDest int32, hDest int32, hdcSrc HDC, xSrc int32, ySrc int32, wSrc int32, hSrc int32, rop ROP_CODE) foundation.BOOL {
+func StretchBlt(hdcDest HDC, xDest int32, yDest int32, wDest int32, hDest int32, hdcSrc HDC, xSrc int32, ySrc int32, wSrc int32, hSrc int32, rop ROP_CODE) bool {
 	r1, _, _ := syscall.SyscallN(procStretchBlt.Addr(), uintptr(hdcDest), uintptr(xDest), uintptr(yDest), uintptr(wDest), uintptr(hDest), uintptr(hdcSrc), uintptr(xSrc), uintptr(ySrc), uintptr(wSrc), uintptr(hSrc), uintptr(rop))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // StretchDIBits calls GDI32!StretchDIBits.
@@ -3303,32 +3468,40 @@ func StretchDIBits(hdc HDC, xDest int32, yDest int32, DestWidth int32, DestHeigh
 // StrokeAndFillPath calls GDI32!StrokeAndFillPath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-strokeandfillpath
 // Minimum OS: windows5.0.
-func StrokeAndFillPath(hdc HDC) foundation.BOOL {
+func StrokeAndFillPath(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procStrokeAndFillPath.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // StrokePath calls GDI32!StrokePath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-strokepath
 // Minimum OS: windows5.0.
-func StrokePath(hdc HDC) foundation.BOOL {
+func StrokePath(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procStrokePath.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SubtractRect calls USER32!SubtractRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-subtractrect
 // Minimum OS: windows5.0.
-func SubtractRect(lprcDst *foundation.RECT, lprcSrc1 *foundation.RECT, lprcSrc2 *foundation.RECT) foundation.BOOL {
+func SubtractRect(lprcDst *foundation.RECT, lprcSrc1 *foundation.RECT, lprcSrc2 *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procSubtractRect.Addr(), uintptr(unsafe.Pointer(lprcDst)), uintptr(unsafe.Pointer(lprcSrc1)), uintptr(unsafe.Pointer(lprcSrc2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TTCharToUnicode calls t2embed!TTCharToUnicode.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttchartounicode
 // Minimum OS: windows5.0.
-func TTCharToUnicode(hDC HDC, pucCharCodes *byte, ulCharCodeSize uint32, pusShortCodes *uint16, ulShortCodeSize uint32, ulFlags uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procTTCharToUnicode.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(pucCharCodes)), uintptr(ulCharCodeSize), uintptr(unsafe.Pointer(pusShortCodes)), uintptr(ulShortCodeSize), uintptr(ulFlags))
+func TTCharToUnicode(hDC HDC, pucCharCodes []byte, pusShortCodes []uint16, ulFlags uint32) int32 {
+	var _pucCharCodes *byte
+	if len(pucCharCodes) > 0 {
+		_pucCharCodes = &pucCharCodes[0]
+	}
+	var _pusShortCodes *uint16
+	if len(pusShortCodes) > 0 {
+		_pusShortCodes = &pusShortCodes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTTCharToUnicode.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(_pucCharCodes)), uintptr(len(pucCharCodes)), uintptr(unsafe.Pointer(_pusShortCodes)), uintptr(len(pusShortCodes)), uintptr(ulFlags))
 	return int32(r1)
 }
 
@@ -3343,32 +3516,45 @@ func TTDeleteEmbeddedFont(hFontReference foundation.HANDLE, ulFlags uint32, pulS
 // TTEmbedFont calls t2embed!TTEmbedFont.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttembedfont
 // Minimum OS: windows5.0.
-func TTEmbedFont(hDC HDC, ulFlags TTEMBED_FLAGS, ulCharSet EMBED_FONT_CHARSET, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, pulStatus *uint32, lpfnWriteToStream WRITEEMBEDPROC, lpvWriteStream unsafe.Pointer, pusCharCodeSet *uint16, usCharCodeCount uint16, usLanguage uint16, pTTEmbedInfo *TTEMBEDINFO) int32 {
-	r1, _, _ := syscall.SyscallN(procTTEmbedFont.Addr(), uintptr(hDC), uintptr(ulFlags), uintptr(ulCharSet), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnWriteToStream), uintptr(unsafe.Pointer(lpvWriteStream)), uintptr(unsafe.Pointer(pusCharCodeSet)), uintptr(usCharCodeCount), uintptr(usLanguage), uintptr(unsafe.Pointer(pTTEmbedInfo)))
+func TTEmbedFont(hDC HDC, ulFlags TTEMBED_FLAGS, ulCharSet EMBED_FONT_CHARSET, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, pulStatus *uint32, lpfnWriteToStream WRITEEMBEDPROC, lpvWriteStream unsafe.Pointer, pusCharCodeSet []uint16, usLanguage uint16, pTTEmbedInfo *TTEMBEDINFO) int32 {
+	var _pusCharCodeSet *uint16
+	if len(pusCharCodeSet) > 0 {
+		_pusCharCodeSet = &pusCharCodeSet[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTTEmbedFont.Addr(), uintptr(hDC), uintptr(ulFlags), uintptr(ulCharSet), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnWriteToStream), uintptr(unsafe.Pointer(lpvWriteStream)), uintptr(unsafe.Pointer(_pusCharCodeSet)), uintptr(len(pusCharCodeSet)), uintptr(usLanguage), uintptr(unsafe.Pointer(pTTEmbedInfo)))
 	return int32(r1)
 }
 
 // TTEmbedFontEx calls t2embed!TTEmbedFontEx.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttembedfontex
 // Minimum OS: windows5.0.
-func TTEmbedFontEx(hDC HDC, ulFlags TTEMBED_FLAGS, ulCharSet EMBED_FONT_CHARSET, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, pulStatus *uint32, lpfnWriteToStream WRITEEMBEDPROC, lpvWriteStream unsafe.Pointer, pulCharCodeSet *uint32, usCharCodeCount uint16, usLanguage uint16, pTTEmbedInfo *TTEMBEDINFO) int32 {
-	r1, _, _ := syscall.SyscallN(procTTEmbedFontEx.Addr(), uintptr(hDC), uintptr(ulFlags), uintptr(ulCharSet), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnWriteToStream), uintptr(unsafe.Pointer(lpvWriteStream)), uintptr(unsafe.Pointer(pulCharCodeSet)), uintptr(usCharCodeCount), uintptr(usLanguage), uintptr(unsafe.Pointer(pTTEmbedInfo)))
+func TTEmbedFontEx(hDC HDC, ulFlags TTEMBED_FLAGS, ulCharSet EMBED_FONT_CHARSET, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, pulStatus *uint32, lpfnWriteToStream WRITEEMBEDPROC, lpvWriteStream unsafe.Pointer, pulCharCodeSet []uint32, usLanguage uint16, pTTEmbedInfo *TTEMBEDINFO) int32 {
+	var _pulCharCodeSet *uint32
+	if len(pulCharCodeSet) > 0 {
+		_pulCharCodeSet = &pulCharCodeSet[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTTEmbedFontEx.Addr(), uintptr(hDC), uintptr(ulFlags), uintptr(ulCharSet), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnWriteToStream), uintptr(unsafe.Pointer(lpvWriteStream)), uintptr(unsafe.Pointer(_pulCharCodeSet)), uintptr(len(pulCharCodeSet)), uintptr(usLanguage), uintptr(unsafe.Pointer(pTTEmbedInfo)))
 	return int32(r1)
 }
 
 // TTEmbedFontFromFileA calls t2embed!TTEmbedFontFromFileA.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttembedfontfromfilea
 // Minimum OS: windows5.0.
-func TTEmbedFontFromFileA(hDC HDC, szFontFileName foundation.PSTR, usTTCIndex uint16, ulFlags TTEMBED_FLAGS, ulCharSet EMBED_FONT_CHARSET, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, pulStatus *uint32, lpfnWriteToStream WRITEEMBEDPROC, lpvWriteStream unsafe.Pointer, pusCharCodeSet *uint16, usCharCodeCount uint16, usLanguage uint16, pTTEmbedInfo *TTEMBEDINFO) int32 {
-	r1, _, _ := syscall.SyscallN(procTTEmbedFontFromFileA.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(szFontFileName)), uintptr(usTTCIndex), uintptr(ulFlags), uintptr(ulCharSet), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnWriteToStream), uintptr(unsafe.Pointer(lpvWriteStream)), uintptr(unsafe.Pointer(pusCharCodeSet)), uintptr(usCharCodeCount), uintptr(usLanguage), uintptr(unsafe.Pointer(pTTEmbedInfo)))
+func TTEmbedFontFromFileA(hDC HDC, szFontFileName foundation.PSTR, usTTCIndex uint16, ulFlags TTEMBED_FLAGS, ulCharSet EMBED_FONT_CHARSET, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, pulStatus *uint32, lpfnWriteToStream WRITEEMBEDPROC, lpvWriteStream unsafe.Pointer, pusCharCodeSet []uint16, usLanguage uint16, pTTEmbedInfo *TTEMBEDINFO) int32 {
+	var _pusCharCodeSet *uint16
+	if len(pusCharCodeSet) > 0 {
+		_pusCharCodeSet = &pusCharCodeSet[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTTEmbedFontFromFileA.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(szFontFileName)), uintptr(usTTCIndex), uintptr(ulFlags), uintptr(ulCharSet), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnWriteToStream), uintptr(unsafe.Pointer(lpvWriteStream)), uintptr(unsafe.Pointer(_pusCharCodeSet)), uintptr(len(pusCharCodeSet)), uintptr(usLanguage), uintptr(unsafe.Pointer(pTTEmbedInfo)))
 	return int32(r1)
 }
 
 // TTEnableEmbeddingForFacename calls t2embed!TTEnableEmbeddingForFacename.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttenableembeddingforfacename
 // Minimum OS: windows5.0.
-func TTEnableEmbeddingForFacename(lpszFacename foundation.PSTR, bEnable foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procTTEnableEmbeddingForFacename.Addr(), uintptr(unsafe.Pointer(lpszFacename)), uintptr(bEnable))
+func TTEnableEmbeddingForFacename(lpszFacename foundation.PSTR, bEnable bool) int32 {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := syscall.SyscallN(procTTEnableEmbeddingForFacename.Addr(), uintptr(unsafe.Pointer(lpszFacename)), uintptr(_bEnable))
 	return int32(r1)
 }
 
@@ -3415,8 +3601,9 @@ func TTIsEmbeddingEnabledForFacename(lpszFacename foundation.PSTR, pbEnabled *fo
 // TTLoadEmbeddedFont calls t2embed!TTLoadEmbeddedFont.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttloadembeddedfont
 // Minimum OS: windows5.0.
-func TTLoadEmbeddedFont(phFontReference *foundation.HANDLE, ulFlags uint32, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, ulPrivs FONT_LICENSE_PRIVS, pulStatus *TTLOAD_EMBEDDED_FONT_STATUS, lpfnReadFromStream READEMBEDPROC, lpvReadStream unsafe.Pointer, szWinFamilyName foundation.PWSTR, szMacFamilyName foundation.PSTR, pTTLoadInfo *TTLOADINFO) int32 {
-	r1, _, _ := syscall.SyscallN(procTTLoadEmbeddedFont.Addr(), uintptr(unsafe.Pointer(phFontReference)), uintptr(ulFlags), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(ulPrivs), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnReadFromStream), uintptr(unsafe.Pointer(lpvReadStream)), uintptr(unsafe.Pointer(szWinFamilyName)), uintptr(unsafe.Pointer(szMacFamilyName)), uintptr(unsafe.Pointer(pTTLoadInfo)))
+func TTLoadEmbeddedFont(phFontReference *foundation.HANDLE, ulFlags uint32, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, ulPrivs FONT_LICENSE_PRIVS, pulStatus *TTLOAD_EMBEDDED_FONT_STATUS, lpfnReadFromStream READEMBEDPROC, lpvReadStream unsafe.Pointer, szWinFamilyName string, szMacFamilyName foundation.PSTR, pTTLoadInfo *TTLOADINFO) int32 {
+	_szWinFamilyName := win32.UTF16Ptr(szWinFamilyName)
+	r1, _, _ := syscall.SyscallN(procTTLoadEmbeddedFont.Addr(), uintptr(unsafe.Pointer(phFontReference)), uintptr(ulFlags), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(ulPrivs), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnReadFromStream), uintptr(unsafe.Pointer(lpvReadStream)), uintptr(unsafe.Pointer(_szWinFamilyName)), uintptr(unsafe.Pointer(szMacFamilyName)), uintptr(unsafe.Pointer(pTTLoadInfo)))
 	return int32(r1)
 }
 
@@ -3436,100 +3623,116 @@ func TTRunValidationTestsEx(hDC HDC, pTestParam *TTVALIDATIONTESTSPARAMSEX) int3
 	return int32(r1)
 }
 
-// TabbedTextOutA calls USER32!TabbedTextOutA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-tabbedtextouta
+// TabbedTextOut calls USER32!TabbedTextOutW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-tabbedtextoutw
 // Minimum OS: windows5.0.
-func TabbedTextOutA(hdc HDC, x int32, y int32, lpString foundation.PSTR, chCount int32, nTabPositions int32, lpnTabStopPositions *int32, nTabOrigin int32) int32 {
-	r1, _, _ := syscall.SyscallN(procTabbedTextOutA.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lpString)), uintptr(chCount), uintptr(nTabPositions), uintptr(unsafe.Pointer(lpnTabStopPositions)), uintptr(nTabOrigin))
+func TabbedTextOut(hdc HDC, x int32, y int32, lpString string, chCount int32, lpnTabStopPositions []int32, nTabOrigin int32) int32 {
+	_lpString := win32.UTF16Ptr(lpString)
+	var _lpnTabStopPositions *int32
+	if len(lpnTabStopPositions) > 0 {
+		_lpnTabStopPositions = &lpnTabStopPositions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTabbedTextOut.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(_lpString)), uintptr(chCount), uintptr(len(lpnTabStopPositions)), uintptr(unsafe.Pointer(_lpnTabStopPositions)), uintptr(nTabOrigin))
 	return int32(r1)
 }
 
-// TabbedTextOutW calls USER32!TabbedTextOutW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-tabbedtextoutw
+// TabbedTextOutA calls USER32!TabbedTextOutA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-tabbedtextouta
 // Minimum OS: windows5.0.
-func TabbedTextOutW(hdc HDC, x int32, y int32, lpString foundation.PWSTR, chCount int32, nTabPositions int32, lpnTabStopPositions *int32, nTabOrigin int32) int32 {
-	r1, _, _ := syscall.SyscallN(procTabbedTextOutW.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lpString)), uintptr(chCount), uintptr(nTabPositions), uintptr(unsafe.Pointer(lpnTabStopPositions)), uintptr(nTabOrigin))
+func TabbedTextOutA(hdc HDC, x int32, y int32, lpString foundation.PSTR, chCount int32, lpnTabStopPositions []int32, nTabOrigin int32) int32 {
+	var _lpnTabStopPositions *int32
+	if len(lpnTabStopPositions) > 0 {
+		_lpnTabStopPositions = &lpnTabStopPositions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTabbedTextOutA.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lpString)), uintptr(chCount), uintptr(len(lpnTabStopPositions)), uintptr(unsafe.Pointer(_lpnTabStopPositions)), uintptr(nTabOrigin))
 	return int32(r1)
+}
+
+// TextOut calls GDI32!TextOutW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-textoutw
+// Minimum OS: windows5.0.
+func TextOut(hdc HDC, x int32, y int32, lpString string, c int32) bool {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, _ := syscall.SyscallN(procTextOut.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(_lpString)), uintptr(c))
+	return r1 != 0
 }
 
 // TextOutA calls GDI32!TextOutA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-textouta
 // Minimum OS: windows5.0.
-func TextOutA(hdc HDC, x int32, y int32, lpString foundation.PSTR, c int32) foundation.BOOL {
+func TextOutA(hdc HDC, x int32, y int32, lpString foundation.PSTR, c int32) bool {
 	r1, _, _ := syscall.SyscallN(procTextOutA.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lpString)), uintptr(c))
-	return foundation.BOOL(r1)
-}
-
-// TextOutW calls GDI32!TextOutW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-textoutw
-// Minimum OS: windows5.0.
-func TextOutW(hdc HDC, x int32, y int32, lpString foundation.PWSTR, c int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procTextOutW.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lpString)), uintptr(c))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TransparentBlt calls MSIMG32!TransparentBlt.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-transparentblt
 // Minimum OS: windows5.0.
-func TransparentBlt(hdcDest HDC, xoriginDest int32, yoriginDest int32, wDest int32, hDest int32, hdcSrc HDC, xoriginSrc int32, yoriginSrc int32, wSrc int32, hSrc int32, crTransparent uint32) foundation.BOOL {
+func TransparentBlt(hdcDest HDC, xoriginDest int32, yoriginDest int32, wDest int32, hDest int32, hdcSrc HDC, xoriginSrc int32, yoriginSrc int32, wSrc int32, hSrc int32, crTransparent uint32) bool {
 	r1, _, _ := syscall.SyscallN(procTransparentBlt.Addr(), uintptr(hdcDest), uintptr(xoriginDest), uintptr(yoriginDest), uintptr(wDest), uintptr(hDest), uintptr(hdcSrc), uintptr(xoriginSrc), uintptr(yoriginSrc), uintptr(wSrc), uintptr(hSrc), uintptr(crTransparent))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UnionRect calls USER32!UnionRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-unionrect
 // Minimum OS: windows5.0.
-func UnionRect(lprcDst *foundation.RECT, lprcSrc1 *foundation.RECT, lprcSrc2 *foundation.RECT) foundation.BOOL {
+func UnionRect(lprcDst *foundation.RECT, lprcSrc1 *foundation.RECT, lprcSrc2 *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procUnionRect.Addr(), uintptr(unsafe.Pointer(lprcDst)), uintptr(unsafe.Pointer(lprcSrc1)), uintptr(unsafe.Pointer(lprcSrc2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UnrealizeObject calls GDI32!UnrealizeObject.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-unrealizeobject
 // Minimum OS: windows5.0.
-func UnrealizeObject(h HGDIOBJ) foundation.BOOL {
+func UnrealizeObject(h HGDIOBJ) bool {
 	r1, _, _ := syscall.SyscallN(procUnrealizeObject.Addr(), uintptr(h))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UpdateColors calls GDI32!UpdateColors.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-updatecolors
 // Minimum OS: windows5.0.
-func UpdateColors(hdc HDC) foundation.BOOL {
+func UpdateColors(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procUpdateColors.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UpdateWindow calls USER32!UpdateWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-updatewindow
 // Minimum OS: windows5.0.
-func UpdateWindow(hWnd foundation.HWND) foundation.BOOL {
+func UpdateWindow(hWnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procUpdateWindow.Addr(), uintptr(hWnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ValidateRect calls USER32!ValidateRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-validaterect
 // Minimum OS: windows5.0.
-func ValidateRect(hWnd foundation.HWND, lpRect *foundation.RECT) foundation.BOOL {
+func ValidateRect(hWnd foundation.HWND, lpRect *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procValidateRect.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpRect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ValidateRgn calls USER32!ValidateRgn.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-validatergn
 // Minimum OS: windows5.0.
-func ValidateRgn(hWnd foundation.HWND, hRgn HRGN) foundation.BOOL {
+func ValidateRgn(hWnd foundation.HWND, hRgn HRGN) bool {
 	r1, _, _ := syscall.SyscallN(procValidateRgn.Addr(), uintptr(hWnd), uintptr(hRgn))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// WglSwapMultipleBuffers calls OPENGL32!wglSwapMultipleBuffers.
+func WglSwapMultipleBuffers(param0 uint32, param1 *WGLSWAP) uint32 {
+	r1, _, _ := syscall.SyscallN(procWglSwapMultipleBuffers.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
+	return uint32(r1)
 }
 
 // WidenPath calls GDI32!WidenPath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-widenpath
 // Minimum OS: windows5.0.
-func WidenPath(hdc HDC) foundation.BOOL {
+func WidenPath(hdc HDC) bool {
 	r1, _, _ := syscall.SyscallN(procWidenPath.Addr(), uintptr(hdc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WindowFromDC calls USER32!WindowFromDC.
@@ -3538,10 +3741,4 @@ func WidenPath(hdc HDC) foundation.BOOL {
 func WindowFromDC(hDC HDC) foundation.HWND {
 	r1, _, _ := syscall.SyscallN(procWindowFromDC.Addr(), uintptr(hDC))
 	return foundation.HWND(r1)
-}
-
-// wglSwapMultipleBuffers calls OPENGL32!wglSwapMultipleBuffers.
-func WglSwapMultipleBuffers(param0 uint32, param1 *WGLSWAP) uint32 {
-	r1, _, _ := syscall.SyscallN(procWglSwapMultipleBuffers.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return uint32(r1)
 }

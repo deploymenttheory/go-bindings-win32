@@ -24,45 +24,47 @@ type IAutomaticUpdates struct {
 var IID_IAutomaticUpdates = win32.GUID{Data1: 0x673425bf, Data2: 0xc082, Data3: 0x4c7c, Data4: [8]byte{0xbd, 0xfd, 0x56, 0x94, 0x64, 0xb8, 0xe0, 0xce}}
 
 // DetectNow dispatches through IAutomaticUpdates's vtable slot 7.
-func (self *IAutomaticUpdates) DetectNow() foundation.HRESULT {
+func (self *IAutomaticUpdates) DetectNow() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IAutomaticUpdates's vtable slot 8.
-func (self *IAutomaticUpdates) Pause() foundation.HRESULT {
+func (self *IAutomaticUpdates) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through IAutomaticUpdates's vtable slot 9.
-func (self *IAutomaticUpdates) Resume() foundation.HRESULT {
+func (self *IAutomaticUpdates) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowSettingsDialog dispatches through IAutomaticUpdates's vtable slot 10.
-func (self *IAutomaticUpdates) ShowSettingsDialog() foundation.HRESULT {
+func (self *IAutomaticUpdates) ShowSettingsDialog() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Settings dispatches through IAutomaticUpdates's vtable slot 11.
-func (self *IAutomaticUpdates) Get_Settings(retval **IAutomaticUpdatesSettings) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdates) Get_Settings() (*IAutomaticUpdatesSettings, error) {
+	var _retval *IAutomaticUpdatesSettings
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceEnabled dispatches through IAutomaticUpdates's vtable slot 12.
-func (self *IAutomaticUpdates) Get_ServiceEnabled(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdates) Get_ServiceEnabled() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // EnableService dispatches through IAutomaticUpdates's vtable slot 13.
-func (self *IAutomaticUpdates) EnableService() foundation.HRESULT {
+func (self *IAutomaticUpdates) EnableService() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAutomaticUpdates2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iautomaticupdates2
@@ -75,9 +77,10 @@ type IAutomaticUpdates2 struct {
 var IID_IAutomaticUpdates2 = win32.GUID{Data1: 0x4a2f5c31, Data2: 0xcfd9, Data3: 0x410e, Data4: [8]byte{0xb7, 0xfb, 0x29, 0xa6, 0x53, 0x97, 0x3a, 0x0f}}
 
 // Get_Results dispatches through IAutomaticUpdates2's vtable slot 14.
-func (self *IAutomaticUpdates2) Get_Results(retval **IAutomaticUpdatesResults) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdates2) Get_Results() (*IAutomaticUpdatesResults, error) {
+	var _retval *IAutomaticUpdatesResults
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IAutomaticUpdatesResults: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iautomaticupdatesresults
@@ -90,15 +93,17 @@ type IAutomaticUpdatesResults struct {
 var IID_IAutomaticUpdatesResults = win32.GUID{Data1: 0xe7a4d634, Data2: 0x7942, Data3: 0x4dd9, Data4: [8]byte{0xa1, 0x11, 0x82, 0x22, 0x8b, 0xa3, 0x39, 0x01}}
 
 // Get_LastSearchSuccessDate dispatches through IAutomaticUpdatesResults's vtable slot 7.
-func (self *IAutomaticUpdatesResults) Get_LastSearchSuccessDate(retval *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesResults) Get_LastSearchSuccessDate() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_LastInstallationSuccessDate dispatches through IAutomaticUpdatesResults's vtable slot 8.
-func (self *IAutomaticUpdatesResults) Get_LastInstallationSuccessDate(retval *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesResults) Get_LastInstallationSuccessDate() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IAutomaticUpdatesSettings: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iautomaticupdatessettings
@@ -111,63 +116,68 @@ type IAutomaticUpdatesSettings struct {
 var IID_IAutomaticUpdatesSettings = win32.GUID{Data1: 0x2ee48f22, Data2: 0xaf3c, Data3: 0x405f, Data4: [8]byte{0x89, 0x70, 0xf7, 0x1b, 0xe1, 0x2e, 0xe9, 0xa2}}
 
 // Get_NotificationLevel dispatches through IAutomaticUpdatesSettings's vtable slot 7.
-func (self *IAutomaticUpdatesSettings) Get_NotificationLevel(retval *AutomaticUpdatesNotificationLevel) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesSettings) Get_NotificationLevel() (AutomaticUpdatesNotificationLevel, error) {
+	var _retval AutomaticUpdatesNotificationLevel
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_NotificationLevel dispatches through IAutomaticUpdatesSettings's vtable slot 8.
-func (self *IAutomaticUpdatesSettings) Put_NotificationLevel(value AutomaticUpdatesNotificationLevel) foundation.HRESULT {
+func (self *IAutomaticUpdatesSettings) Put_NotificationLevel(value AutomaticUpdatesNotificationLevel) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReadOnly dispatches through IAutomaticUpdatesSettings's vtable slot 9.
-func (self *IAutomaticUpdatesSettings) Get_ReadOnly(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesSettings) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Required dispatches through IAutomaticUpdatesSettings's vtable slot 10.
-func (self *IAutomaticUpdatesSettings) Get_Required(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesSettings) Get_Required() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ScheduledInstallationDay dispatches through IAutomaticUpdatesSettings's vtable slot 11.
-func (self *IAutomaticUpdatesSettings) Get_ScheduledInstallationDay(retval *AutomaticUpdatesScheduledInstallationDay) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesSettings) Get_ScheduledInstallationDay() (AutomaticUpdatesScheduledInstallationDay, error) {
+	var _retval AutomaticUpdatesScheduledInstallationDay
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ScheduledInstallationDay dispatches through IAutomaticUpdatesSettings's vtable slot 12.
-func (self *IAutomaticUpdatesSettings) Put_ScheduledInstallationDay(value AutomaticUpdatesScheduledInstallationDay) foundation.HRESULT {
+func (self *IAutomaticUpdatesSettings) Put_ScheduledInstallationDay(value AutomaticUpdatesScheduledInstallationDay) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ScheduledInstallationTime dispatches through IAutomaticUpdatesSettings's vtable slot 13.
-func (self *IAutomaticUpdatesSettings) Get_ScheduledInstallationTime(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesSettings) Get_ScheduledInstallationTime() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ScheduledInstallationTime dispatches through IAutomaticUpdatesSettings's vtable slot 14.
-func (self *IAutomaticUpdatesSettings) Put_ScheduledInstallationTime(value int32) foundation.HRESULT {
+func (self *IAutomaticUpdatesSettings) Put_ScheduledInstallationTime(value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IAutomaticUpdatesSettings's vtable slot 15.
-func (self *IAutomaticUpdatesSettings) Refresh() foundation.HRESULT {
+func (self *IAutomaticUpdatesSettings) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Save dispatches through IAutomaticUpdatesSettings's vtable slot 16.
-func (self *IAutomaticUpdatesSettings) Save() foundation.HRESULT {
+func (self *IAutomaticUpdatesSettings) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAutomaticUpdatesSettings2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iautomaticupdatessettings2
@@ -180,21 +190,23 @@ type IAutomaticUpdatesSettings2 struct {
 var IID_IAutomaticUpdatesSettings2 = win32.GUID{Data1: 0x6abc136a, Data2: 0xc3ca, Data3: 0x4384, Data4: [8]byte{0x81, 0x71, 0xcb, 0x2b, 0x1e, 0x59, 0xb8, 0xdc}}
 
 // Get_IncludeRecommendedUpdates dispatches through IAutomaticUpdatesSettings2's vtable slot 17.
-func (self *IAutomaticUpdatesSettings2) Get_IncludeRecommendedUpdates(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesSettings2) Get_IncludeRecommendedUpdates() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_IncludeRecommendedUpdates dispatches through IAutomaticUpdatesSettings2's vtable slot 18.
-func (self *IAutomaticUpdatesSettings2) Put_IncludeRecommendedUpdates(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IAutomaticUpdatesSettings2) Put_IncludeRecommendedUpdates(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckPermission dispatches through IAutomaticUpdatesSettings2's vtable slot 19.
-func (self *IAutomaticUpdatesSettings2) CheckPermission(userType AutomaticUpdatesUserType, permissionType AutomaticUpdatesPermissionType, userHasPermission *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(userType), uintptr(permissionType), uintptr(unsafe.Pointer(userHasPermission)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesSettings2) CheckPermission(userType AutomaticUpdatesUserType, permissionType AutomaticUpdatesPermissionType) (foundation.VARIANT_BOOL, error) {
+	var _userHasPermission foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(userType), uintptr(permissionType), uintptr(unsafe.Pointer(&_userHasPermission)))
+	return _userHasPermission, win32.HRESULTError(int32(r1))
 }
 
 // IAutomaticUpdatesSettings3: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iautomaticupdatessettings3
@@ -207,27 +219,29 @@ type IAutomaticUpdatesSettings3 struct {
 var IID_IAutomaticUpdatesSettings3 = win32.GUID{Data1: 0xb587f5c3, Data2: 0xf57e, Data3: 0x485f, Data4: [8]byte{0xbb, 0xf5, 0x0d, 0x18, 0x1c, 0x5c, 0xd0, 0xdc}}
 
 // Get_NonAdministratorsElevated dispatches through IAutomaticUpdatesSettings3's vtable slot 20.
-func (self *IAutomaticUpdatesSettings3) Get_NonAdministratorsElevated(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesSettings3) Get_NonAdministratorsElevated() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_NonAdministratorsElevated dispatches through IAutomaticUpdatesSettings3's vtable slot 21.
-func (self *IAutomaticUpdatesSettings3) Put_NonAdministratorsElevated(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IAutomaticUpdatesSettings3) Put_NonAdministratorsElevated(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FeaturedUpdatesEnabled dispatches through IAutomaticUpdatesSettings3's vtable slot 22.
-func (self *IAutomaticUpdatesSettings3) Get_FeaturedUpdatesEnabled(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IAutomaticUpdatesSettings3) Get_FeaturedUpdatesEnabled() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_FeaturedUpdatesEnabled dispatches through IAutomaticUpdatesSettings3's vtable slot 23.
-func (self *IAutomaticUpdatesSettings3) Put_FeaturedUpdatesEnabled(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IAutomaticUpdatesSettings3) Put_FeaturedUpdatesEnabled(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICategory: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-icategory
@@ -240,57 +254,66 @@ type ICategory struct {
 var IID_ICategory = win32.GUID{Data1: 0x81ddc1b8, Data2: 0x9d35, Data3: 0x47a6, Data4: [8]byte{0xb4, 0x71, 0x5b, 0x80, 0xf5, 0x19, 0x22, 0x3b}}
 
 // Get_Name dispatches through ICategory's vtable slot 7.
-func (self *ICategory) Get_Name(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategory) Get_Name() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CategoryID dispatches through ICategory's vtable slot 8.
-func (self *ICategory) Get_CategoryID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategory) Get_CategoryID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Children dispatches through ICategory's vtable slot 9.
-func (self *ICategory) Get_Children(retval **ICategoryCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategory) Get_Children() (*ICategoryCollection, error) {
+	var _retval *ICategoryCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Description dispatches through ICategory's vtable slot 10.
-func (self *ICategory) Get_Description(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategory) Get_Description() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Image dispatches through ICategory's vtable slot 11.
-func (self *ICategory) Get_Image(retval **IImageInformation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategory) Get_Image() (*IImageInformation, error) {
+	var _retval *IImageInformation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Order dispatches through ICategory's vtable slot 12.
-func (self *ICategory) Get_Order(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategory) Get_Order() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Parent dispatches through ICategory's vtable slot 13.
-func (self *ICategory) Get_Parent(retval **ICategory) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategory) Get_Parent() (*ICategory, error) {
+	var _retval *ICategory
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Type dispatches through ICategory's vtable slot 14.
-func (self *ICategory) Get_Type(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategory) Get_Type() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Updates dispatches through ICategory's vtable slot 15.
-func (self *ICategory) Get_Updates(retval **IUpdateCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategory) Get_Updates() (*IUpdateCollection, error) {
+	var _retval *IUpdateCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // ICategoryCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-icategorycollection
@@ -303,21 +326,24 @@ type ICategoryCollection struct {
 var IID_ICategoryCollection = win32.GUID{Data1: 0x3a56bfb8, Data2: 0x576c, Data3: 0x43f7, Data4: [8]byte{0x93, 0x35, 0xfe, 0x48, 0x38, 0xfd, 0x7e, 0x37}}
 
 // Get_Item dispatches through ICategoryCollection's vtable slot 7.
-func (self *ICategoryCollection) Get_Item(index int32, retval **ICategory) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategoryCollection) Get_Item(index int32) (*ICategory, error) {
+	var _retval *ICategory
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ICategoryCollection's vtable slot 8.
-func (self *ICategoryCollection) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategoryCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through ICategoryCollection's vtable slot 9.
-func (self *ICategoryCollection) Get_Count(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ICategoryCollection) Get_Count() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IDownloadCompletedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-idownloadcompletedcallback
@@ -330,9 +356,9 @@ type IDownloadCompletedCallback struct {
 var IID_IDownloadCompletedCallback = win32.GUID{Data1: 0x77254866, Data2: 0x9f5b, Data3: 0x4c8e, Data4: [8]byte{0xb9, 0xe2, 0xc7, 0x7a, 0x85, 0x30, 0xd6, 0x4b}}
 
 // Invoke dispatches through IDownloadCompletedCallback's vtable slot 3.
-func (self *IDownloadCompletedCallback) Invoke(downloadJob *IDownloadJob, callbackArgs *IDownloadCompletedCallbackArgs) foundation.HRESULT {
+func (self *IDownloadCompletedCallback) Invoke(downloadJob *IDownloadJob, callbackArgs *IDownloadCompletedCallbackArgs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(downloadJob)), uintptr(unsafe.Pointer(callbackArgs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDownloadCompletedCallbackArgs: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-idownloadcompletedcallbackargs
@@ -354,39 +380,43 @@ type IDownloadJob struct {
 var IID_IDownloadJob = win32.GUID{Data1: 0xc574de85, Data2: 0x7358, Data3: 0x43f6, Data4: [8]byte{0xaa, 0xe8, 0x86, 0x97, 0xe6, 0x2d, 0x8b, 0xa7}}
 
 // Get_AsyncState dispatches through IDownloadJob's vtable slot 7.
-func (self *IDownloadJob) Get_AsyncState(retval *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadJob) Get_AsyncState() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsCompleted dispatches through IDownloadJob's vtable slot 8.
-func (self *IDownloadJob) Get_IsCompleted(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadJob) Get_IsCompleted() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Updates dispatches through IDownloadJob's vtable slot 9.
-func (self *IDownloadJob) Get_Updates(retval **IUpdateCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadJob) Get_Updates() (*IUpdateCollection, error) {
+	var _retval *IUpdateCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // CleanUp dispatches through IDownloadJob's vtable slot 10.
-func (self *IDownloadJob) CleanUp() foundation.HRESULT {
+func (self *IDownloadJob) CleanUp() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProgress dispatches through IDownloadJob's vtable slot 11.
-func (self *IDownloadJob) GetProgress(retval **IDownloadProgress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadJob) GetProgress() (*IDownloadProgress, error) {
+	var _retval *IDownloadProgress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // RequestAbort dispatches through IDownloadJob's vtable slot 12.
-func (self *IDownloadJob) RequestAbort() foundation.HRESULT {
+func (self *IDownloadJob) RequestAbort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDownloadProgress: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-idownloadprogress
@@ -399,57 +429,66 @@ type IDownloadProgress struct {
 var IID_IDownloadProgress = win32.GUID{Data1: 0xd31a5bac, Data2: 0xf719, Data3: 0x4178, Data4: [8]byte{0x9d, 0xbb, 0x5e, 0x2c, 0xb4, 0x7f, 0xd1, 0x8a}}
 
 // Get_CurrentUpdateBytesDownloaded dispatches through IDownloadProgress's vtable slot 7.
-func (self *IDownloadProgress) Get_CurrentUpdateBytesDownloaded(retval *foundation.DECIMAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgress) Get_CurrentUpdateBytesDownloaded() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentUpdateBytesToDownload dispatches through IDownloadProgress's vtable slot 8.
-func (self *IDownloadProgress) Get_CurrentUpdateBytesToDownload(retval *foundation.DECIMAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgress) Get_CurrentUpdateBytesToDownload() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentUpdateIndex dispatches through IDownloadProgress's vtable slot 9.
-func (self *IDownloadProgress) Get_CurrentUpdateIndex(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgress) Get_CurrentUpdateIndex() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_PercentComplete dispatches through IDownloadProgress's vtable slot 10.
-func (self *IDownloadProgress) Get_PercentComplete(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgress) Get_PercentComplete() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalBytesDownloaded dispatches through IDownloadProgress's vtable slot 11.
-func (self *IDownloadProgress) Get_TotalBytesDownloaded(retval *foundation.DECIMAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgress) Get_TotalBytesDownloaded() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalBytesToDownload dispatches through IDownloadProgress's vtable slot 12.
-func (self *IDownloadProgress) Get_TotalBytesToDownload(retval *foundation.DECIMAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgress) Get_TotalBytesToDownload() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // GetUpdateResult dispatches through IDownloadProgress's vtable slot 13.
-func (self *IDownloadProgress) GetUpdateResult(updateIndex int32, retval **IUpdateDownloadResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgress) GetUpdateResult(updateIndex int32) (*IUpdateDownloadResult, error) {
+	var _retval *IUpdateDownloadResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentUpdateDownloadPhase dispatches through IDownloadProgress's vtable slot 14.
-func (self *IDownloadProgress) Get_CurrentUpdateDownloadPhase(retval *DownloadPhase) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgress) Get_CurrentUpdateDownloadPhase() (DownloadPhase, error) {
+	var _retval DownloadPhase
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentUpdatePercentComplete dispatches through IDownloadProgress's vtable slot 15.
-func (self *IDownloadProgress) Get_CurrentUpdatePercentComplete(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgress) Get_CurrentUpdatePercentComplete() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IDownloadProgressChangedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-idownloadprogresschangedcallback
@@ -462,9 +501,9 @@ type IDownloadProgressChangedCallback struct {
 var IID_IDownloadProgressChangedCallback = win32.GUID{Data1: 0x8c3f1cdd, Data2: 0x6173, Data3: 0x4591, Data4: [8]byte{0xae, 0xbd, 0xa5, 0x6a, 0x53, 0xca, 0x77, 0xc1}}
 
 // Invoke dispatches through IDownloadProgressChangedCallback's vtable slot 3.
-func (self *IDownloadProgressChangedCallback) Invoke(downloadJob *IDownloadJob, callbackArgs *IDownloadProgressChangedCallbackArgs) foundation.HRESULT {
+func (self *IDownloadProgressChangedCallback) Invoke(downloadJob *IDownloadJob, callbackArgs *IDownloadProgressChangedCallbackArgs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(downloadJob)), uintptr(unsafe.Pointer(callbackArgs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDownloadProgressChangedCallbackArgs: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-idownloadprogresschangedcallbackargs
@@ -477,9 +516,10 @@ type IDownloadProgressChangedCallbackArgs struct {
 var IID_IDownloadProgressChangedCallbackArgs = win32.GUID{Data1: 0x324ff2c6, Data2: 0x4981, Data3: 0x4b04, Data4: [8]byte{0x94, 0x12, 0x57, 0x48, 0x17, 0x45, 0xab, 0x24}}
 
 // Get_Progress dispatches through IDownloadProgressChangedCallbackArgs's vtable slot 7.
-func (self *IDownloadProgressChangedCallbackArgs) Get_Progress(retval **IDownloadProgress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadProgressChangedCallbackArgs) Get_Progress() (*IDownloadProgress, error) {
+	var _retval *IDownloadProgress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IDownloadResult: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-idownloadresult
@@ -492,21 +532,24 @@ type IDownloadResult struct {
 var IID_IDownloadResult = win32.GUID{Data1: 0xdaa4fdd0, Data2: 0x4727, Data3: 0x4dbe, Data4: [8]byte{0xa1, 0xe7, 0x74, 0x5d, 0xca, 0x31, 0x71, 0x44}}
 
 // Get_HResult dispatches through IDownloadResult's vtable slot 7.
-func (self *IDownloadResult) Get_HResult(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadResult) Get_HResult() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ResultCode dispatches through IDownloadResult's vtable slot 8.
-func (self *IDownloadResult) Get_ResultCode(retval *OperationResultCode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadResult) Get_ResultCode() (OperationResultCode, error) {
+	var _retval OperationResultCode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // GetUpdateResult dispatches through IDownloadResult's vtable slot 9.
-func (self *IDownloadResult) GetUpdateResult(updateIndex int32, retval **IUpdateDownloadResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IDownloadResult) GetUpdateResult(updateIndex int32) (*IUpdateDownloadResult, error) {
+	var _retval *IUpdateDownloadResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IImageInformation: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iimageinformation
@@ -519,27 +562,31 @@ type IImageInformation struct {
 var IID_IImageInformation = win32.GUID{Data1: 0x7c907864, Data2: 0x346c, Data3: 0x4aeb, Data4: [8]byte{0x8f, 0x3f, 0x57, 0xda, 0x28, 0x9f, 0x96, 0x9f}}
 
 // Get_AltText dispatches through IImageInformation's vtable slot 7.
-func (self *IImageInformation) Get_AltText(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IImageInformation) Get_AltText() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Height dispatches through IImageInformation's vtable slot 8.
-func (self *IImageInformation) Get_Height(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IImageInformation) Get_Height() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Source dispatches through IImageInformation's vtable slot 9.
-func (self *IImageInformation) Get_Source(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IImageInformation) Get_Source() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Width dispatches through IImageInformation's vtable slot 10.
-func (self *IImageInformation) Get_Width(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IImageInformation) Get_Width() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IInstallationAgent: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationagent
@@ -552,9 +599,9 @@ type IInstallationAgent struct {
 var IID_IInstallationAgent = win32.GUID{Data1: 0x925cbc18, Data2: 0xa2ea, Data3: 0x4648, Data4: [8]byte{0xbf, 0x1c, 0xec, 0x8b, 0xad, 0xcf, 0xe2, 0x0a}}
 
 // RecordInstallationResult dispatches through IInstallationAgent's vtable slot 7.
-func (self *IInstallationAgent) RecordInstallationResult(installationResultCookie foundation.BSTR, hresult int32, extendedReportingData *IStringCollection) foundation.HRESULT {
+func (self *IInstallationAgent) RecordInstallationResult(installationResultCookie foundation.BSTR, hresult int32, extendedReportingData *IStringCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(installationResultCookie)), uintptr(hresult), uintptr(unsafe.Pointer(extendedReportingData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IInstallationBehavior: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationbehavior
@@ -567,27 +614,31 @@ type IInstallationBehavior struct {
 var IID_IInstallationBehavior = win32.GUID{Data1: 0xd9a59339, Data2: 0xe245, Data3: 0x4dbd, Data4: [8]byte{0x96, 0x86, 0x4d, 0x57, 0x63, 0xe3, 0x96, 0x24}}
 
 // Get_CanRequestUserInput dispatches through IInstallationBehavior's vtable slot 7.
-func (self *IInstallationBehavior) Get_CanRequestUserInput(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationBehavior) Get_CanRequestUserInput() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Impact dispatches through IInstallationBehavior's vtable slot 8.
-func (self *IInstallationBehavior) Get_Impact(retval *InstallationImpact) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationBehavior) Get_Impact() (InstallationImpact, error) {
+	var _retval InstallationImpact
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RebootBehavior dispatches through IInstallationBehavior's vtable slot 9.
-func (self *IInstallationBehavior) Get_RebootBehavior(retval *InstallationRebootBehavior) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationBehavior) Get_RebootBehavior() (InstallationRebootBehavior, error) {
+	var _retval InstallationRebootBehavior
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RequiresNetworkConnectivity dispatches through IInstallationBehavior's vtable slot 10.
-func (self *IInstallationBehavior) Get_RequiresNetworkConnectivity(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationBehavior) Get_RequiresNetworkConnectivity() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IInstallationCompletedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationcompletedcallback
@@ -600,9 +651,9 @@ type IInstallationCompletedCallback struct {
 var IID_IInstallationCompletedCallback = win32.GUID{Data1: 0x45f4f6f3, Data2: 0xd602, Data3: 0x4f98, Data4: [8]byte{0x9a, 0x8a, 0x3e, 0xfa, 0x15, 0x2a, 0xd2, 0xd3}}
 
 // Invoke dispatches through IInstallationCompletedCallback's vtable slot 3.
-func (self *IInstallationCompletedCallback) Invoke(installationJob *IInstallationJob, callbackArgs *IInstallationCompletedCallbackArgs) foundation.HRESULT {
+func (self *IInstallationCompletedCallback) Invoke(installationJob *IInstallationJob, callbackArgs *IInstallationCompletedCallbackArgs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(installationJob)), uintptr(unsafe.Pointer(callbackArgs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IInstallationCompletedCallbackArgs: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationcompletedcallbackargs
@@ -624,39 +675,43 @@ type IInstallationJob struct {
 var IID_IInstallationJob = win32.GUID{Data1: 0x5c209f0b, Data2: 0xbad5, Data3: 0x432a, Data4: [8]byte{0x95, 0x56, 0x46, 0x99, 0xbe, 0xd2, 0x63, 0x8a}}
 
 // Get_AsyncState dispatches through IInstallationJob's vtable slot 7.
-func (self *IInstallationJob) Get_AsyncState(retval *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationJob) Get_AsyncState() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsCompleted dispatches through IInstallationJob's vtable slot 8.
-func (self *IInstallationJob) Get_IsCompleted(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationJob) Get_IsCompleted() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Updates dispatches through IInstallationJob's vtable slot 9.
-func (self *IInstallationJob) Get_Updates(retval **IUpdateCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationJob) Get_Updates() (*IUpdateCollection, error) {
+	var _retval *IUpdateCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // CleanUp dispatches through IInstallationJob's vtable slot 10.
-func (self *IInstallationJob) CleanUp() foundation.HRESULT {
+func (self *IInstallationJob) CleanUp() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProgress dispatches through IInstallationJob's vtable slot 11.
-func (self *IInstallationJob) GetProgress(retval **IInstallationProgress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationJob) GetProgress() (*IInstallationProgress, error) {
+	var _retval *IInstallationProgress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // RequestAbort dispatches through IInstallationJob's vtable slot 12.
-func (self *IInstallationJob) RequestAbort() foundation.HRESULT {
+func (self *IInstallationJob) RequestAbort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IInstallationProgress: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationprogress
@@ -669,27 +724,31 @@ type IInstallationProgress struct {
 var IID_IInstallationProgress = win32.GUID{Data1: 0x345c8244, Data2: 0x43a3, Data3: 0x4e32, Data4: [8]byte{0xa3, 0x68, 0x65, 0xf0, 0x73, 0xb7, 0x6f, 0x36}}
 
 // Get_CurrentUpdateIndex dispatches through IInstallationProgress's vtable slot 7.
-func (self *IInstallationProgress) Get_CurrentUpdateIndex(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationProgress) Get_CurrentUpdateIndex() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentUpdatePercentComplete dispatches through IInstallationProgress's vtable slot 8.
-func (self *IInstallationProgress) Get_CurrentUpdatePercentComplete(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationProgress) Get_CurrentUpdatePercentComplete() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_PercentComplete dispatches through IInstallationProgress's vtable slot 9.
-func (self *IInstallationProgress) Get_PercentComplete(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationProgress) Get_PercentComplete() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // GetUpdateResult dispatches through IInstallationProgress's vtable slot 10.
-func (self *IInstallationProgress) GetUpdateResult(updateIndex int32, retval **IUpdateInstallationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationProgress) GetUpdateResult(updateIndex int32) (*IUpdateInstallationResult, error) {
+	var _retval *IUpdateInstallationResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IInstallationProgressChangedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationprogresschangedcallback
@@ -702,9 +761,9 @@ type IInstallationProgressChangedCallback struct {
 var IID_IInstallationProgressChangedCallback = win32.GUID{Data1: 0xe01402d5, Data2: 0xf8da, Data3: 0x43ba, Data4: [8]byte{0xa0, 0x12, 0x38, 0x89, 0x4b, 0xd0, 0x48, 0xf1}}
 
 // Invoke dispatches through IInstallationProgressChangedCallback's vtable slot 3.
-func (self *IInstallationProgressChangedCallback) Invoke(installationJob *IInstallationJob, callbackArgs *IInstallationProgressChangedCallbackArgs) foundation.HRESULT {
+func (self *IInstallationProgressChangedCallback) Invoke(installationJob *IInstallationJob, callbackArgs *IInstallationProgressChangedCallbackArgs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(installationJob)), uintptr(unsafe.Pointer(callbackArgs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IInstallationProgressChangedCallbackArgs: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationprogresschangedcallbackargs
@@ -717,9 +776,10 @@ type IInstallationProgressChangedCallbackArgs struct {
 var IID_IInstallationProgressChangedCallbackArgs = win32.GUID{Data1: 0xe4f14e1e, Data2: 0x689d, Data3: 0x4218, Data4: [8]byte{0xa0, 0xb9, 0xbc, 0x18, 0x9c, 0x48, 0x4a, 0x01}}
 
 // Get_Progress dispatches through IInstallationProgressChangedCallbackArgs's vtable slot 7.
-func (self *IInstallationProgressChangedCallbackArgs) Get_Progress(retval **IInstallationProgress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationProgressChangedCallbackArgs) Get_Progress() (*IInstallationProgress, error) {
+	var _retval *IInstallationProgress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IInstallationResult: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinstallationresult
@@ -732,27 +792,31 @@ type IInstallationResult struct {
 var IID_IInstallationResult = win32.GUID{Data1: 0xa43c56d6, Data2: 0x7451, Data3: 0x48d4, Data4: [8]byte{0xaf, 0x96, 0xb6, 0xcd, 0x2d, 0x0d, 0x9b, 0x7a}}
 
 // Get_HResult dispatches through IInstallationResult's vtable slot 7.
-func (self *IInstallationResult) Get_HResult(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationResult) Get_HResult() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RebootRequired dispatches through IInstallationResult's vtable slot 8.
-func (self *IInstallationResult) Get_RebootRequired(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationResult) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ResultCode dispatches through IInstallationResult's vtable slot 9.
-func (self *IInstallationResult) Get_ResultCode(retval *OperationResultCode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationResult) Get_ResultCode() (OperationResultCode, error) {
+	var _retval OperationResultCode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // GetUpdateResult dispatches through IInstallationResult's vtable slot 10.
-func (self *IInstallationResult) GetUpdateResult(updateIndex int32, retval **IUpdateInstallationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInstallationResult) GetUpdateResult(updateIndex int32) (*IUpdateInstallationResult, error) {
+	var _retval *IUpdateInstallationResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(updateIndex), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IInvalidProductLicenseException: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iinvalidproductlicenseexception
@@ -765,9 +829,10 @@ type IInvalidProductLicenseException struct {
 var IID_IInvalidProductLicenseException = win32.GUID{Data1: 0xa37d00f5, Data2: 0x7bb0, Data3: 0x4953, Data4: [8]byte{0xb4, 0x14, 0xf9, 0xe9, 0x83, 0x26, 0xf2, 0xe8}}
 
 // Get_Product dispatches through IInvalidProductLicenseException's vtable slot 10.
-func (self *IInvalidProductLicenseException) Get_Product(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IInvalidProductLicenseException) Get_Product() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // ISearchCompletedCallback: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-isearchcompletedcallback
@@ -780,9 +845,9 @@ type ISearchCompletedCallback struct {
 var IID_ISearchCompletedCallback = win32.GUID{Data1: 0x88aee058, Data2: 0xd4b0, Data3: 0x4725, Data4: [8]byte{0xa2, 0xf1, 0x81, 0x4a, 0x67, 0xae, 0x96, 0x4c}}
 
 // Invoke dispatches through ISearchCompletedCallback's vtable slot 3.
-func (self *ISearchCompletedCallback) Invoke(searchJob *ISearchJob, callbackArgs *ISearchCompletedCallbackArgs) foundation.HRESULT {
+func (self *ISearchCompletedCallback) Invoke(searchJob *ISearchJob, callbackArgs *ISearchCompletedCallbackArgs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(searchJob)), uintptr(unsafe.Pointer(callbackArgs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchCompletedCallbackArgs: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-isearchcompletedcallbackargs
@@ -804,27 +869,29 @@ type ISearchJob struct {
 var IID_ISearchJob = win32.GUID{Data1: 0x7366ea16, Data2: 0x7a1a, Data3: 0x4ea2, Data4: [8]byte{0xb0, 0x42, 0x97, 0x3d, 0x3e, 0x9c, 0xd9, 0x9b}}
 
 // Get_AsyncState dispatches through ISearchJob's vtable slot 7.
-func (self *ISearchJob) Get_AsyncState(retval *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISearchJob) Get_AsyncState() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsCompleted dispatches through ISearchJob's vtable slot 8.
-func (self *ISearchJob) Get_IsCompleted(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISearchJob) Get_IsCompleted() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // CleanUp dispatches through ISearchJob's vtable slot 9.
-func (self *ISearchJob) CleanUp() foundation.HRESULT {
+func (self *ISearchJob) CleanUp() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestAbort dispatches through ISearchJob's vtable slot 10.
-func (self *ISearchJob) RequestAbort() foundation.HRESULT {
+func (self *ISearchJob) RequestAbort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchResult: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-isearchresult
@@ -837,27 +904,31 @@ type ISearchResult struct {
 var IID_ISearchResult = win32.GUID{Data1: 0xd40cff62, Data2: 0xe08c, Data3: 0x4498, Data4: [8]byte{0x94, 0x1a, 0x01, 0xe2, 0x5f, 0x0f, 0xd3, 0x3c}}
 
 // Get_ResultCode dispatches through ISearchResult's vtable slot 7.
-func (self *ISearchResult) Get_ResultCode(retval *OperationResultCode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISearchResult) Get_ResultCode() (OperationResultCode, error) {
+	var _retval OperationResultCode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RootCategories dispatches through ISearchResult's vtable slot 8.
-func (self *ISearchResult) Get_RootCategories(retval **ICategoryCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISearchResult) Get_RootCategories() (*ICategoryCollection, error) {
+	var _retval *ICategoryCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Updates dispatches through ISearchResult's vtable slot 9.
-func (self *ISearchResult) Get_Updates(retval **IUpdateCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISearchResult) Get_Updates() (*IUpdateCollection, error) {
+	var _retval *IUpdateCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Warnings dispatches through ISearchResult's vtable slot 10.
-func (self *ISearchResult) Get_Warnings(retval **IUpdateExceptionCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISearchResult) Get_Warnings() (*IUpdateExceptionCollection, error) {
+	var _retval *IUpdateExceptionCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IStringCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-istringcollection
@@ -870,63 +941,69 @@ type IStringCollection struct {
 var IID_IStringCollection = win32.GUID{Data1: 0xeff90582, Data2: 0x2ddc, Data3: 0x480f, Data4: [8]byte{0xa0, 0x6d, 0x60, 0xf3, 0xfb, 0xc3, 0x62, 0xc3}}
 
 // Get_Item dispatches through IStringCollection's vtable slot 7.
-func (self *IStringCollection) Get_Item(index int32, retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IStringCollection) Get_Item(index int32) (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_Item dispatches through IStringCollection's vtable slot 8.
-func (self *IStringCollection) Put_Item(index int32, value foundation.BSTR) foundation.HRESULT {
+func (self *IStringCollection) Put_Item(index int32, value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IStringCollection's vtable slot 9.
-func (self *IStringCollection) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IStringCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IStringCollection's vtable slot 10.
-func (self *IStringCollection) Get_Count(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IStringCollection) Get_Count() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ReadOnly dispatches through IStringCollection's vtable slot 11.
-func (self *IStringCollection) Get_ReadOnly(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IStringCollection) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IStringCollection's vtable slot 12.
-func (self *IStringCollection) Add(value foundation.BSTR, retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IStringCollection) Add(value foundation.BSTR) (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IStringCollection's vtable slot 13.
-func (self *IStringCollection) Clear() foundation.HRESULT {
+func (self *IStringCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Copy dispatches through IStringCollection's vtable slot 14.
-func (self *IStringCollection) Copy(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IStringCollection) Copy() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Insert dispatches through IStringCollection's vtable slot 15.
-func (self *IStringCollection) Insert(index int32, value foundation.BSTR) foundation.HRESULT {
+func (self *IStringCollection) Insert(index int32, value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAt dispatches through IStringCollection's vtable slot 16.
-func (self *IStringCollection) RemoveAt(index int32) foundation.HRESULT {
+func (self *IStringCollection) RemoveAt(index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISystemInformation: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-isysteminformation
@@ -939,15 +1016,17 @@ type ISystemInformation struct {
 var IID_ISystemInformation = win32.GUID{Data1: 0xade87bf7, Data2: 0x7b56, Data3: 0x4275, Data4: [8]byte{0x8f, 0xab, 0xb9, 0xb0, 0xe5, 0x91, 0x84, 0x4b}}
 
 // Get_OemHardwareSupportLink dispatches through ISystemInformation's vtable slot 7.
-func (self *ISystemInformation) Get_OemHardwareSupportLink(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISystemInformation) Get_OemHardwareSupportLink() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RebootRequired dispatches through ISystemInformation's vtable slot 8.
-func (self *ISystemInformation) Get_RebootRequired(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISystemInformation) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdate: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdate
@@ -960,273 +1039,315 @@ type IUpdate struct {
 var IID_IUpdate = win32.GUID{Data1: 0x6a92b07a, Data2: 0xd821, Data3: 0x4682, Data4: [8]byte{0xb4, 0x23, 0x5c, 0x80, 0x50, 0x22, 0xcc, 0x4d}}
 
 // Get_Title dispatches through IUpdate's vtable slot 7.
-func (self *IUpdate) Get_Title(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_Title() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoSelectOnWebSites dispatches through IUpdate's vtable slot 8.
-func (self *IUpdate) Get_AutoSelectOnWebSites(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_AutoSelectOnWebSites() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_BundledUpdates dispatches through IUpdate's vtable slot 9.
-func (self *IUpdate) Get_BundledUpdates(retval **IUpdateCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_BundledUpdates() (*IUpdateCollection, error) {
+	var _retval *IUpdateCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CanRequireSource dispatches through IUpdate's vtable slot 10.
-func (self *IUpdate) Get_CanRequireSource(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_CanRequireSource() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Categories dispatches through IUpdate's vtable slot 11.
-func (self *IUpdate) Get_Categories(retval **ICategoryCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_Categories() (*ICategoryCollection, error) {
+	var _retval *ICategoryCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Deadline dispatches through IUpdate's vtable slot 12.
-func (self *IUpdate) Get_Deadline(retval *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_Deadline() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeltaCompressedContentAvailable dispatches through IUpdate's vtable slot 13.
-func (self *IUpdate) Get_DeltaCompressedContentAvailable(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_DeltaCompressedContentAvailable() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeltaCompressedContentPreferred dispatches through IUpdate's vtable slot 14.
-func (self *IUpdate) Get_DeltaCompressedContentPreferred(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_DeltaCompressedContentPreferred() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Description dispatches through IUpdate's vtable slot 15.
-func (self *IUpdate) Get_Description(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_Description() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_EulaAccepted dispatches through IUpdate's vtable slot 16.
-func (self *IUpdate) Get_EulaAccepted(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_EulaAccepted() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_EulaText dispatches through IUpdate's vtable slot 17.
-func (self *IUpdate) Get_EulaText(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_EulaText() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_HandlerID dispatches through IUpdate's vtable slot 18.
-func (self *IUpdate) Get_HandlerID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_HandlerID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Identity dispatches through IUpdate's vtable slot 19.
-func (self *IUpdate) Get_Identity(retval **IUpdateIdentity) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_Identity() (*IUpdateIdentity, error) {
+	var _retval *IUpdateIdentity
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Image dispatches through IUpdate's vtable slot 20.
-func (self *IUpdate) Get_Image(retval **IImageInformation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_Image() (*IImageInformation, error) {
+	var _retval *IImageInformation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_InstallationBehavior dispatches through IUpdate's vtable slot 21.
-func (self *IUpdate) Get_InstallationBehavior(retval **IInstallationBehavior) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_InstallationBehavior() (*IInstallationBehavior, error) {
+	var _retval *IInstallationBehavior
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsBeta dispatches through IUpdate's vtable slot 22.
-func (self *IUpdate) Get_IsBeta(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_IsBeta() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsDownloaded dispatches through IUpdate's vtable slot 23.
-func (self *IUpdate) Get_IsDownloaded(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_IsDownloaded() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsHidden dispatches through IUpdate's vtable slot 24.
-func (self *IUpdate) Get_IsHidden(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_IsHidden() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_IsHidden dispatches through IUpdate's vtable slot 25.
-func (self *IUpdate) Put_IsHidden(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdate) Put_IsHidden(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsInstalled dispatches through IUpdate's vtable slot 26.
-func (self *IUpdate) Get_IsInstalled(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_IsInstalled() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsMandatory dispatches through IUpdate's vtable slot 27.
-func (self *IUpdate) Get_IsMandatory(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_IsMandatory() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsUninstallable dispatches through IUpdate's vtable slot 28.
-func (self *IUpdate) Get_IsUninstallable(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_IsUninstallable() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Languages dispatches through IUpdate's vtable slot 29.
-func (self *IUpdate) Get_Languages(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_Languages() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_LastDeploymentChangeTime dispatches through IUpdate's vtable slot 30.
-func (self *IUpdate) Get_LastDeploymentChangeTime(retval *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_LastDeploymentChangeTime() (float64, error) {
+	var _retval float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxDownloadSize dispatches through IUpdate's vtable slot 31.
-func (self *IUpdate) Get_MaxDownloadSize(retval *foundation.DECIMAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_MaxDownloadSize() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_MinDownloadSize dispatches through IUpdate's vtable slot 32.
-func (self *IUpdate) Get_MinDownloadSize(retval *foundation.DECIMAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_MinDownloadSize() (foundation.DECIMAL, error) {
+	var _retval foundation.DECIMAL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_MoreInfoUrls dispatches through IUpdate's vtable slot 33.
-func (self *IUpdate) Get_MoreInfoUrls(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_MoreInfoUrls() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_MsrcSeverity dispatches through IUpdate's vtable slot 34.
-func (self *IUpdate) Get_MsrcSeverity(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_MsrcSeverity() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RecommendedCpuSpeed dispatches through IUpdate's vtable slot 35.
-func (self *IUpdate) Get_RecommendedCpuSpeed(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_RecommendedCpuSpeed() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RecommendedHardDiskSpace dispatches through IUpdate's vtable slot 36.
-func (self *IUpdate) Get_RecommendedHardDiskSpace(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_RecommendedHardDiskSpace() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RecommendedMemory dispatches through IUpdate's vtable slot 37.
-func (self *IUpdate) Get_RecommendedMemory(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_RecommendedMemory() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ReleaseNotes dispatches through IUpdate's vtable slot 38.
-func (self *IUpdate) Get_ReleaseNotes(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_ReleaseNotes() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_SecurityBulletinIDs dispatches through IUpdate's vtable slot 39.
-func (self *IUpdate) Get_SecurityBulletinIDs(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_SecurityBulletinIDs() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_SupersededUpdateIDs dispatches through IUpdate's vtable slot 40.
-func (self *IUpdate) Get_SupersededUpdateIDs(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_SupersededUpdateIDs() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_SupportUrl dispatches through IUpdate's vtable slot 41.
-func (self *IUpdate) Get_SupportUrl(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_SupportUrl() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Type dispatches through IUpdate's vtable slot 42.
-func (self *IUpdate) Get_Type(retval *UpdateType) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_Type() (UpdateType, error) {
+	var _retval UpdateType
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_UninstallationNotes dispatches through IUpdate's vtable slot 43.
-func (self *IUpdate) Get_UninstallationNotes(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_UninstallationNotes() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_UninstallationBehavior dispatches through IUpdate's vtable slot 44.
-func (self *IUpdate) Get_UninstallationBehavior(retval **IInstallationBehavior) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_UninstallationBehavior() (*IInstallationBehavior, error) {
+	var _retval *IInstallationBehavior
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_UninstallationSteps dispatches through IUpdate's vtable slot 45.
-func (self *IUpdate) Get_UninstallationSteps(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_UninstallationSteps() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_KBArticleIDs dispatches through IUpdate's vtable slot 46.
-func (self *IUpdate) Get_KBArticleIDs(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_KBArticleIDs() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // AcceptEula dispatches through IUpdate's vtable slot 47.
-func (self *IUpdate) AcceptEula() foundation.HRESULT {
+func (self *IUpdate) AcceptEula() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DeploymentAction dispatches through IUpdate's vtable slot 48.
-func (self *IUpdate) Get_DeploymentAction(retval *DeploymentAction) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_DeploymentAction() (DeploymentAction, error) {
+	var _retval DeploymentAction
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // CopyFromCache dispatches through IUpdate's vtable slot 49.
-func (self *IUpdate) CopyFromCache(path foundation.BSTR, toExtractCabFiles foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdate) CopyFromCache(path foundation.BSTR, toExtractCabFiles foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(toExtractCabFiles))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DownloadPriority dispatches through IUpdate's vtable slot 50.
-func (self *IUpdate) Get_DownloadPriority(retval *DownloadPriority) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_DownloadPriority() (DownloadPriority, error) {
+	var _retval DownloadPriority
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DownloadContents dispatches through IUpdate's vtable slot 51.
-func (self *IUpdate) Get_DownloadContents(retval **IUpdateDownloadContentCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate) Get_DownloadContents() (*IUpdateDownloadContentCollection, error) {
+	var _retval *IUpdateDownloadContentCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdate2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdate2
@@ -1239,27 +1360,30 @@ type IUpdate2 struct {
 var IID_IUpdate2 = win32.GUID{Data1: 0x144fe9b0, Data2: 0xd23d, Data3: 0x4a8b, Data4: [8]byte{0x86, 0x34, 0xfb, 0x44, 0x57, 0x53, 0x3b, 0x7a}}
 
 // Get_RebootRequired dispatches through IUpdate2's vtable slot 52.
-func (self *IUpdate2) Get_RebootRequired(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate2) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsPresent dispatches through IUpdate2's vtable slot 53.
-func (self *IUpdate2) Get_IsPresent(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate2) Get_IsPresent() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CveIDs dispatches through IUpdate2's vtable slot 54.
-func (self *IUpdate2) Get_CveIDs(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate2) Get_CveIDs() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // CopyToCache dispatches through IUpdate2's vtable slot 55.
-func (self *IUpdate2) CopyToCache(pFiles *IStringCollection) foundation.HRESULT {
+func (self *IUpdate2) CopyToCache(pFiles *IStringCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFiles)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdate3: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdate3
@@ -1272,9 +1396,10 @@ type IUpdate3 struct {
 var IID_IUpdate3 = win32.GUID{Data1: 0x112eda6b, Data2: 0x95b3, Data3: 0x476f, Data4: [8]byte{0x9d, 0x90, 0xae, 0xe8, 0x2c, 0x6b, 0x81, 0x81}}
 
 // Get_BrowseOnly dispatches through IUpdate3's vtable slot 56.
-func (self *IUpdate3) Get_BrowseOnly(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate3) Get_BrowseOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdate4: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdate4
@@ -1287,9 +1412,10 @@ type IUpdate4 struct {
 var IID_IUpdate4 = win32.GUID{Data1: 0x27e94b0d, Data2: 0x5139, Data3: 0x49a2, Data4: [8]byte{0x9a, 0x61, 0x93, 0x52, 0x2d, 0xc5, 0x46, 0x52}}
 
 // Get_PerUser dispatches through IUpdate4's vtable slot 57.
-func (self *IUpdate4) Get_PerUser(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate4) Get_PerUser() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdate5: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdate5
@@ -1302,15 +1428,17 @@ type IUpdate5 struct {
 var IID_IUpdate5 = win32.GUID{Data1: 0xc1c2f21a, Data2: 0xd2f4, Data3: 0x4902, Data4: [8]byte{0xb5, 0xc6, 0x8a, 0x08, 0x1c, 0x19, 0xa8, 0x90}}
 
 // Get_AutoSelection dispatches through IUpdate5's vtable slot 58.
-func (self *IUpdate5) Get_AutoSelection(retval *AutoSelectionMode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate5) Get_AutoSelection() (AutoSelectionMode, error) {
+	var _retval AutoSelectionMode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoDownload dispatches through IUpdate5's vtable slot 59.
-func (self *IUpdate5) Get_AutoDownload(retval *AutoDownloadMode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdate5) Get_AutoDownload() (AutoDownloadMode, error) {
+	var _retval AutoDownloadMode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatecollection
@@ -1323,63 +1451,69 @@ type IUpdateCollection struct {
 var IID_IUpdateCollection = win32.GUID{Data1: 0x07f7438c, Data2: 0x7709, Data3: 0x4ca5, Data4: [8]byte{0xb5, 0x18, 0x91, 0x27, 0x92, 0x88, 0x13, 0x4e}}
 
 // Get_Item dispatches through IUpdateCollection's vtable slot 7.
-func (self *IUpdateCollection) Get_Item(index int32, retval **IUpdate) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateCollection) Get_Item(index int32) (*IUpdate, error) {
+	var _retval *IUpdate
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_Item dispatches through IUpdateCollection's vtable slot 8.
-func (self *IUpdateCollection) Put_Item(index int32, value *IUpdate) foundation.HRESULT {
+func (self *IUpdateCollection) Put_Item(index int32, value *IUpdate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUpdateCollection's vtable slot 9.
-func (self *IUpdateCollection) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateCollection's vtable slot 10.
-func (self *IUpdateCollection) Get_Count(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateCollection) Get_Count() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ReadOnly dispatches through IUpdateCollection's vtable slot 11.
-func (self *IUpdateCollection) Get_ReadOnly(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateCollection) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IUpdateCollection's vtable slot 12.
-func (self *IUpdateCollection) Add(value *IUpdate, retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateCollection) Add(value *IUpdate) (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IUpdateCollection's vtable slot 13.
-func (self *IUpdateCollection) Clear() foundation.HRESULT {
+func (self *IUpdateCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Copy dispatches through IUpdateCollection's vtable slot 14.
-func (self *IUpdateCollection) Copy(retval **IUpdateCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateCollection) Copy() (*IUpdateCollection, error) {
+	var _retval *IUpdateCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Insert dispatches through IUpdateCollection's vtable slot 15.
-func (self *IUpdateCollection) Insert(index int32, value *IUpdate) foundation.HRESULT {
+func (self *IUpdateCollection) Insert(index int32, value *IUpdate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAt dispatches through IUpdateCollection's vtable slot 16.
-func (self *IUpdateCollection) RemoveAt(index int32) foundation.HRESULT {
+func (self *IUpdateCollection) RemoveAt(index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdateDownloadContent: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatedownloadcontent
@@ -1392,9 +1526,10 @@ type IUpdateDownloadContent struct {
 var IID_IUpdateDownloadContent = win32.GUID{Data1: 0x54a2cb2d, Data2: 0x9a0c, Data3: 0x48b6, Data4: [8]byte{0x8a, 0x50, 0x9a, 0xbb, 0x69, 0xee, 0x2d, 0x02}}
 
 // Get_DownloadUrl dispatches through IUpdateDownloadContent's vtable slot 7.
-func (self *IUpdateDownloadContent) Get_DownloadUrl(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloadContent) Get_DownloadUrl() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateDownloadContent2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatedownloadcontent2
@@ -1407,9 +1542,10 @@ type IUpdateDownloadContent2 struct {
 var IID_IUpdateDownloadContent2 = win32.GUID{Data1: 0xc97ad11b, Data2: 0xf257, Data3: 0x420b, Data4: [8]byte{0x9d, 0x9f, 0x37, 0x7f, 0x73, 0x3f, 0x6f, 0x68}}
 
 // Get_IsDeltaCompressedContent dispatches through IUpdateDownloadContent2's vtable slot 8.
-func (self *IUpdateDownloadContent2) Get_IsDeltaCompressedContent(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloadContent2) Get_IsDeltaCompressedContent() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateDownloadContentCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatedownloadcontentcollection
@@ -1422,21 +1558,24 @@ type IUpdateDownloadContentCollection struct {
 var IID_IUpdateDownloadContentCollection = win32.GUID{Data1: 0xbc5513c8, Data2: 0xb3b8, Data3: 0x4bf7, Data4: [8]byte{0xa4, 0xd4, 0x36, 0x1c, 0x0d, 0x8c, 0x88, 0xba}}
 
 // Get_Item dispatches through IUpdateDownloadContentCollection's vtable slot 7.
-func (self *IUpdateDownloadContentCollection) Get_Item(index int32, retval **IUpdateDownloadContent) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloadContentCollection) Get_Item(index int32) (*IUpdateDownloadContent, error) {
+	var _retval *IUpdateDownloadContent
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUpdateDownloadContentCollection's vtable slot 8.
-func (self *IUpdateDownloadContentCollection) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloadContentCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateDownloadContentCollection's vtable slot 9.
-func (self *IUpdateDownloadContentCollection) Get_Count(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloadContentCollection) Get_Count() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateDownloadResult: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatedownloadresult
@@ -1449,15 +1588,17 @@ type IUpdateDownloadResult struct {
 var IID_IUpdateDownloadResult = win32.GUID{Data1: 0xbf99af76, Data2: 0xb575, Data3: 0x42ad, Data4: [8]byte{0x8a, 0xa4, 0x33, 0xcb, 0xb5, 0x47, 0x7a, 0xf1}}
 
 // Get_HResult dispatches through IUpdateDownloadResult's vtable slot 7.
-func (self *IUpdateDownloadResult) Get_HResult(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloadResult) Get_HResult() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ResultCode dispatches through IUpdateDownloadResult's vtable slot 8.
-func (self *IUpdateDownloadResult) Get_ResultCode(retval *OperationResultCode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloadResult) Get_ResultCode() (OperationResultCode, error) {
+	var _retval OperationResultCode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateDownloader: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatedownloader
@@ -1470,63 +1611,69 @@ type IUpdateDownloader struct {
 var IID_IUpdateDownloader = win32.GUID{Data1: 0x68f1c6f9, Data2: 0x7ecc, Data3: 0x4666, Data4: [8]byte{0xa4, 0x64, 0x24, 0x7f, 0xe1, 0x24, 0x96, 0xc3}}
 
 // Get_ClientApplicationID dispatches through IUpdateDownloader's vtable slot 7.
-func (self *IUpdateDownloader) Get_ClientApplicationID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloader) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateDownloader's vtable slot 8.
-func (self *IUpdateDownloader) Put_ClientApplicationID(value foundation.BSTR) foundation.HRESULT {
+func (self *IUpdateDownloader) Put_ClientApplicationID(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsForced dispatches through IUpdateDownloader's vtable slot 9.
-func (self *IUpdateDownloader) Get_IsForced(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloader) Get_IsForced() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_IsForced dispatches through IUpdateDownloader's vtable slot 10.
-func (self *IUpdateDownloader) Put_IsForced(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdateDownloader) Put_IsForced(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Priority dispatches through IUpdateDownloader's vtable slot 11.
-func (self *IUpdateDownloader) Get_Priority(retval *DownloadPriority) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloader) Get_Priority() (DownloadPriority, error) {
+	var _retval DownloadPriority
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_Priority dispatches through IUpdateDownloader's vtable slot 12.
-func (self *IUpdateDownloader) Put_Priority(value DownloadPriority) foundation.HRESULT {
+func (self *IUpdateDownloader) Put_Priority(value DownloadPriority) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Updates dispatches through IUpdateDownloader's vtable slot 13.
-func (self *IUpdateDownloader) Get_Updates(retval **IUpdateCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloader) Get_Updates() (*IUpdateCollection, error) {
+	var _retval *IUpdateCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_Updates dispatches through IUpdateDownloader's vtable slot 14.
-func (self *IUpdateDownloader) Put_Updates(value *IUpdateCollection) foundation.HRESULT {
+func (self *IUpdateDownloader) Put_Updates(value *IUpdateCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Download dispatches through IUpdateDownloader's vtable slot 16.
-func (self *IUpdateDownloader) Download(retval **IDownloadResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloader) Download() (*IDownloadResult, error) {
+	var _retval *IDownloadResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // EndDownload dispatches through IUpdateDownloader's vtable slot 17.
-func (self *IUpdateDownloader) EndDownload(value *IDownloadJob, retval **IDownloadResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloader) EndDownload(value *IDownloadJob) (*IDownloadResult, error) {
+	var _retval *IDownloadResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IID: 94726306-f12a-482a-a774-fb4f870d98c0
@@ -1538,9 +1685,10 @@ type IUpdateDownloaderEx struct {
 var IID_IUpdateDownloaderEx = win32.GUID{Data1: 0x94726306, Data2: 0xf12a, Data3: 0x482a, Data4: [8]byte{0xa7, 0x74, 0xfb, 0x4f, 0x87, 0x0d, 0x98, 0xc0}}
 
 // Download2 dispatches through IUpdateDownloaderEx's vtable slot 19.
-func (self *IUpdateDownloaderEx) Download2(downloadType DownloadType, retval **IDownloadResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(downloadType), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateDownloaderEx) Download2(downloadType DownloadType) (*IDownloadResult, error) {
+	var _retval *IDownloadResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(downloadType), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IID: 769355a3-c5a0-497c-a606-560a36d2121c
@@ -1552,15 +1700,17 @@ type IUpdateEx struct {
 var IID_IUpdateEx = win32.GUID{Data1: 0x769355a3, Data2: 0xc5a0, Data3: 0x497c, Data4: [8]byte{0xa6, 0x06, 0x56, 0x0a, 0x36, 0xd2, 0x12, 0x1c}}
 
 // Get_ExtendedStaticProperty dispatches through IUpdateEx's vtable slot 60.
-func (self *IUpdateEx) Get_ExtendedStaticProperty(propertyName foundation.BSTR, retval *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateEx) Get_ExtendedStaticProperty(propertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // EvaluateExtendedDynamicProperty dispatches through IUpdateEx's vtable slot 61.
-func (self *IUpdateEx) EvaluateExtendedDynamicProperty(propertyName foundation.BSTR, retval *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateEx) EvaluateExtendedDynamicProperty(propertyName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateException: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateexception
@@ -1573,21 +1723,24 @@ type IUpdateException struct {
 var IID_IUpdateException = win32.GUID{Data1: 0xa376dd5e, Data2: 0x09d4, Data3: 0x427f, Data4: [8]byte{0xaf, 0x7c, 0xfe, 0xd5, 0xb6, 0xe1, 0xc1, 0xd6}}
 
 // Get_Message dispatches through IUpdateException's vtable slot 7.
-func (self *IUpdateException) Get_Message(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateException) Get_Message() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_HResult dispatches through IUpdateException's vtable slot 8.
-func (self *IUpdateException) Get_HResult(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateException) Get_HResult() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Context dispatches through IUpdateException's vtable slot 9.
-func (self *IUpdateException) Get_Context(retval *UpdateExceptionContext) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateException) Get_Context() (UpdateExceptionContext, error) {
+	var _retval UpdateExceptionContext
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateExceptionCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateexceptioncollection
@@ -1600,21 +1753,24 @@ type IUpdateExceptionCollection struct {
 var IID_IUpdateExceptionCollection = win32.GUID{Data1: 0x503626a3, Data2: 0x8e14, Data3: 0x4729, Data4: [8]byte{0x93, 0x55, 0x0f, 0xe6, 0x64, 0xbd, 0x23, 0x21}}
 
 // Get_Item dispatches through IUpdateExceptionCollection's vtable slot 7.
-func (self *IUpdateExceptionCollection) Get_Item(index int32, retval **IUpdateException) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateExceptionCollection) Get_Item(index int32) (*IUpdateException, error) {
+	var _retval *IUpdateException
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUpdateExceptionCollection's vtable slot 8.
-func (self *IUpdateExceptionCollection) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateExceptionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateExceptionCollection's vtable slot 9.
-func (self *IUpdateExceptionCollection) Get_Count(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateExceptionCollection) Get_Count() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateHistoryEntry: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatehistoryentry
@@ -1627,87 +1783,101 @@ type IUpdateHistoryEntry struct {
 var IID_IUpdateHistoryEntry = win32.GUID{Data1: 0xbe56a644, Data2: 0xaf0e, Data3: 0x4e0e, Data4: [8]byte{0xa3, 0x11, 0xc1, 0xd8, 0xe6, 0x95, 0xcb, 0xff}}
 
 // Get_Operation dispatches through IUpdateHistoryEntry's vtable slot 7.
-func (self *IUpdateHistoryEntry) Get_Operation(retval *UpdateOperation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_Operation() (UpdateOperation, error) {
+	var _retval UpdateOperation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ResultCode dispatches through IUpdateHistoryEntry's vtable slot 8.
-func (self *IUpdateHistoryEntry) Get_ResultCode(retval *OperationResultCode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_ResultCode() (OperationResultCode, error) {
+	var _retval OperationResultCode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_HResult dispatches through IUpdateHistoryEntry's vtable slot 9.
-func (self *IUpdateHistoryEntry) Get_HResult(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_HResult() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Date dispatches through IUpdateHistoryEntry's vtable slot 10.
-func (self *IUpdateHistoryEntry) Get_Date(retval *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_Date() (float64, error) {
+	var _retval float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_UpdateIdentity dispatches through IUpdateHistoryEntry's vtable slot 11.
-func (self *IUpdateHistoryEntry) Get_UpdateIdentity(retval **IUpdateIdentity) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_UpdateIdentity() (*IUpdateIdentity, error) {
+	var _retval *IUpdateIdentity
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Title dispatches through IUpdateHistoryEntry's vtable slot 12.
-func (self *IUpdateHistoryEntry) Get_Title(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_Title() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Description dispatches through IUpdateHistoryEntry's vtable slot 13.
-func (self *IUpdateHistoryEntry) Get_Description(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_Description() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_UnmappedResultCode dispatches through IUpdateHistoryEntry's vtable slot 14.
-func (self *IUpdateHistoryEntry) Get_UnmappedResultCode(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_UnmappedResultCode() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClientApplicationID dispatches through IUpdateHistoryEntry's vtable slot 15.
-func (self *IUpdateHistoryEntry) Get_ClientApplicationID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ServerSelection dispatches through IUpdateHistoryEntry's vtable slot 16.
-func (self *IUpdateHistoryEntry) Get_ServerSelection(retval *ServerSelection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_ServerSelection() (ServerSelection, error) {
+	var _retval ServerSelection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceID dispatches through IUpdateHistoryEntry's vtable slot 17.
-func (self *IUpdateHistoryEntry) Get_ServiceID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_ServiceID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_UninstallationSteps dispatches through IUpdateHistoryEntry's vtable slot 18.
-func (self *IUpdateHistoryEntry) Get_UninstallationSteps(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_UninstallationSteps() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_UninstallationNotes dispatches through IUpdateHistoryEntry's vtable slot 19.
-func (self *IUpdateHistoryEntry) Get_UninstallationNotes(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_UninstallationNotes() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_SupportUrl dispatches through IUpdateHistoryEntry's vtable slot 20.
-func (self *IUpdateHistoryEntry) Get_SupportUrl(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry) Get_SupportUrl() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateHistoryEntry2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatehistoryentry2
@@ -1720,9 +1890,10 @@ type IUpdateHistoryEntry2 struct {
 var IID_IUpdateHistoryEntry2 = win32.GUID{Data1: 0xc2bfb780, Data2: 0x4539, Data3: 0x4132, Data4: [8]byte{0xab, 0x8c, 0x0a, 0x87, 0x72, 0x01, 0x3a, 0xb6}}
 
 // Get_Categories dispatches through IUpdateHistoryEntry2's vtable slot 21.
-func (self *IUpdateHistoryEntry2) Get_Categories(retval **ICategoryCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntry2) Get_Categories() (*ICategoryCollection, error) {
+	var _retval *ICategoryCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateHistoryEntryCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatehistoryentrycollection
@@ -1735,21 +1906,24 @@ type IUpdateHistoryEntryCollection struct {
 var IID_IUpdateHistoryEntryCollection = win32.GUID{Data1: 0xa7f04f3c, Data2: 0xa290, Data3: 0x435b, Data4: [8]byte{0xaa, 0xdf, 0xa1, 0x16, 0xc3, 0x35, 0x7a, 0x5c}}
 
 // Get_Item dispatches through IUpdateHistoryEntryCollection's vtable slot 7.
-func (self *IUpdateHistoryEntryCollection) Get_Item(index int32, retval **IUpdateHistoryEntry) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntryCollection) Get_Item(index int32) (*IUpdateHistoryEntry, error) {
+	var _retval *IUpdateHistoryEntry
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUpdateHistoryEntryCollection's vtable slot 8.
-func (self *IUpdateHistoryEntryCollection) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntryCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateHistoryEntryCollection's vtable slot 9.
-func (self *IUpdateHistoryEntryCollection) Get_Count(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateHistoryEntryCollection) Get_Count() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateIdentity: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateidentity
@@ -1762,15 +1936,17 @@ type IUpdateIdentity struct {
 var IID_IUpdateIdentity = win32.GUID{Data1: 0x46297823, Data2: 0x9940, Data3: 0x4c09, Data4: [8]byte{0xae, 0xd9, 0xcd, 0x3e, 0xa6, 0xd0, 0x59, 0x68}}
 
 // Get_RevisionNumber dispatches through IUpdateIdentity's vtable slot 7.
-func (self *IUpdateIdentity) Get_RevisionNumber(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateIdentity) Get_RevisionNumber() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_UpdateID dispatches through IUpdateIdentity's vtable slot 8.
-func (self *IUpdateIdentity) Get_UpdateID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateIdentity) Get_UpdateID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateInstallationResult: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateinstallationresult
@@ -1783,21 +1959,24 @@ type IUpdateInstallationResult struct {
 var IID_IUpdateInstallationResult = win32.GUID{Data1: 0xd940f0f8, Data2: 0x3cbb, Data3: 0x4fd0, Data4: [8]byte{0x99, 0x3f, 0x47, 0x1e, 0x7f, 0x23, 0x28, 0xad}}
 
 // Get_HResult dispatches through IUpdateInstallationResult's vtable slot 7.
-func (self *IUpdateInstallationResult) Get_HResult(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstallationResult) Get_HResult() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RebootRequired dispatches through IUpdateInstallationResult's vtable slot 8.
-func (self *IUpdateInstallationResult) Get_RebootRequired(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstallationResult) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ResultCode dispatches through IUpdateInstallationResult's vtable slot 9.
-func (self *IUpdateInstallationResult) Get_ResultCode(retval *OperationResultCode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstallationResult) Get_ResultCode() (OperationResultCode, error) {
+	var _retval OperationResultCode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateInstaller: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateinstaller
@@ -1810,117 +1989,130 @@ type IUpdateInstaller struct {
 var IID_IUpdateInstaller = win32.GUID{Data1: 0x7b929c68, Data2: 0xccdc, Data3: 0x4226, Data4: [8]byte{0x96, 0xb1, 0x87, 0x24, 0x60, 0x0b, 0x54, 0xc2}}
 
 // Get_ClientApplicationID dispatches through IUpdateInstaller's vtable slot 7.
-func (self *IUpdateInstaller) Get_ClientApplicationID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateInstaller's vtable slot 8.
-func (self *IUpdateInstaller) Put_ClientApplicationID(value foundation.BSTR) foundation.HRESULT {
+func (self *IUpdateInstaller) Put_ClientApplicationID(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsForced dispatches through IUpdateInstaller's vtable slot 9.
-func (self *IUpdateInstaller) Get_IsForced(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Get_IsForced() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_IsForced dispatches through IUpdateInstaller's vtable slot 10.
-func (self *IUpdateInstaller) Put_IsForced(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdateInstaller) Put_IsForced(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ParentHwnd dispatches through IUpdateInstaller's vtable slot 11.
-func (self *IUpdateInstaller) Get_ParentHwnd(retval *foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Get_ParentHwnd() (foundation.HWND, error) {
+	var _retval foundation.HWND
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ParentHwnd dispatches through IUpdateInstaller's vtable slot 12.
-func (self *IUpdateInstaller) Put_ParentHwnd(value foundation.HWND) foundation.HRESULT {
+func (self *IUpdateInstaller) Put_ParentHwnd(value foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ParentWindow dispatches through IUpdateInstaller's vtable slot 13.
-func (self *IUpdateInstaller) Put_ParentWindow(value *systemcom.IUnknown) foundation.HRESULT {
+func (self *IUpdateInstaller) Put_ParentWindow(value *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ParentWindow dispatches through IUpdateInstaller's vtable slot 14.
-func (self *IUpdateInstaller) Get_ParentWindow(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Get_ParentWindow() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Updates dispatches through IUpdateInstaller's vtable slot 15.
-func (self *IUpdateInstaller) Get_Updates(retval **IUpdateCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Get_Updates() (*IUpdateCollection, error) {
+	var _retval *IUpdateCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_Updates dispatches through IUpdateInstaller's vtable slot 16.
-func (self *IUpdateInstaller) Put_Updates(value *IUpdateCollection) foundation.HRESULT {
+func (self *IUpdateInstaller) Put_Updates(value *IUpdateCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndInstall dispatches through IUpdateInstaller's vtable slot 19.
-func (self *IUpdateInstaller) EndInstall(value *IInstallationJob, retval **IInstallationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) EndInstall(value *IInstallationJob) (*IInstallationResult, error) {
+	var _retval *IInstallationResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // EndUninstall dispatches through IUpdateInstaller's vtable slot 20.
-func (self *IUpdateInstaller) EndUninstall(value *IInstallationJob, retval **IInstallationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) EndUninstall(value *IInstallationJob) (*IInstallationResult, error) {
+	var _retval *IInstallationResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Install dispatches through IUpdateInstaller's vtable slot 21.
-func (self *IUpdateInstaller) Install(retval **IInstallationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Install() (*IInstallationResult, error) {
+	var _retval *IInstallationResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // RunWizard dispatches through IUpdateInstaller's vtable slot 22.
-func (self *IUpdateInstaller) RunWizard(dialogTitle foundation.BSTR, retval **IInstallationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dialogTitle)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) RunWizard(dialogTitle foundation.BSTR) (*IInstallationResult, error) {
+	var _retval *IInstallationResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dialogTitle)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsBusy dispatches through IUpdateInstaller's vtable slot 23.
-func (self *IUpdateInstaller) Get_IsBusy(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Get_IsBusy() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Uninstall dispatches through IUpdateInstaller's vtable slot 24.
-func (self *IUpdateInstaller) Uninstall(retval **IInstallationResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Uninstall() (*IInstallationResult, error) {
+	var _retval *IInstallationResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowSourcePrompts dispatches through IUpdateInstaller's vtable slot 25.
-func (self *IUpdateInstaller) Get_AllowSourcePrompts(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Get_AllowSourcePrompts() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowSourcePrompts dispatches through IUpdateInstaller's vtable slot 26.
-func (self *IUpdateInstaller) Put_AllowSourcePrompts(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdateInstaller) Put_AllowSourcePrompts(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RebootRequiredBeforeInstallation dispatches through IUpdateInstaller's vtable slot 27.
-func (self *IUpdateInstaller) Get_RebootRequiredBeforeInstallation(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller) Get_RebootRequiredBeforeInstallation() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateInstaller2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateinstaller2
@@ -1933,15 +2125,16 @@ type IUpdateInstaller2 struct {
 var IID_IUpdateInstaller2 = win32.GUID{Data1: 0x3442d4fe, Data2: 0x224d, Data3: 0x4cee, Data4: [8]byte{0x98, 0xcf, 0x30, 0xe0, 0xc4, 0xd2, 0x29, 0xe6}}
 
 // Get_ForceQuiet dispatches through IUpdateInstaller2's vtable slot 28.
-func (self *IUpdateInstaller2) Get_ForceQuiet(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller2) Get_ForceQuiet() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ForceQuiet dispatches through IUpdateInstaller2's vtable slot 29.
-func (self *IUpdateInstaller2) Put_ForceQuiet(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdateInstaller2) Put_ForceQuiet(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdateInstaller3: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateinstaller3
@@ -1954,15 +2147,16 @@ type IUpdateInstaller3 struct {
 var IID_IUpdateInstaller3 = win32.GUID{Data1: 0x16d11c35, Data2: 0x099a, Data3: 0x48d0, Data4: [8]byte{0x83, 0x38, 0x5f, 0xae, 0x64, 0x04, 0x7f, 0x8e}}
 
 // Get_AttemptCloseAppsIfNecessary dispatches through IUpdateInstaller3's vtable slot 30.
-func (self *IUpdateInstaller3) Get_AttemptCloseAppsIfNecessary(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateInstaller3) Get_AttemptCloseAppsIfNecessary() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_AttemptCloseAppsIfNecessary dispatches through IUpdateInstaller3's vtable slot 31.
-func (self *IUpdateInstaller3) Put_AttemptCloseAppsIfNecessary(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdateInstaller3) Put_AttemptCloseAppsIfNecessary(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdateInstaller4: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateinstaller4
@@ -1975,9 +2169,9 @@ type IUpdateInstaller4 struct {
 var IID_IUpdateInstaller4 = win32.GUID{Data1: 0xef8208ea, Data2: 0x2304, Data3: 0x492d, Data4: [8]byte{0x91, 0x09, 0x23, 0x81, 0x3b, 0x09, 0x58, 0xe1}}
 
 // Commit dispatches through IUpdateInstaller4's vtable slot 32.
-func (self *IUpdateInstaller4) Commit(dwFlags uint32) foundation.HRESULT {
+func (self *IUpdateInstaller4) Commit(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdateLockdown: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatelockdown
@@ -1990,9 +2184,9 @@ type IUpdateLockdown struct {
 var IID_IUpdateLockdown = win32.GUID{Data1: 0xa976c28d, Data2: 0x75a1, Data3: 0x42aa, Data4: [8]byte{0x94, 0xae, 0x8a, 0xf8, 0xb8, 0x72, 0x08, 0x9a}}
 
 // LockDown dispatches through IUpdateLockdown's vtable slot 3.
-func (self *IUpdateLockdown) LockDown(flags int32) foundation.HRESULT {
+func (self *IUpdateLockdown) LockDown(flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdateSearcher: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatesearcher
@@ -2005,105 +2199,116 @@ type IUpdateSearcher struct {
 var IID_IUpdateSearcher = win32.GUID{Data1: 0x8f45abf1, Data2: 0xf9ae, Data3: 0x4b95, Data4: [8]byte{0xa9, 0x33, 0xf0, 0xf6, 0x6e, 0x50, 0x56, 0xea}}
 
 // Get_CanAutomaticallyUpgradeService dispatches through IUpdateSearcher's vtable slot 7.
-func (self *IUpdateSearcher) Get_CanAutomaticallyUpgradeService(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) Get_CanAutomaticallyUpgradeService() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_CanAutomaticallyUpgradeService dispatches through IUpdateSearcher's vtable slot 8.
-func (self *IUpdateSearcher) Put_CanAutomaticallyUpgradeService(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdateSearcher) Put_CanAutomaticallyUpgradeService(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ClientApplicationID dispatches through IUpdateSearcher's vtable slot 9.
-func (self *IUpdateSearcher) Get_ClientApplicationID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateSearcher's vtable slot 10.
-func (self *IUpdateSearcher) Put_ClientApplicationID(value foundation.BSTR) foundation.HRESULT {
+func (self *IUpdateSearcher) Put_ClientApplicationID(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IncludePotentiallySupersededUpdates dispatches through IUpdateSearcher's vtable slot 11.
-func (self *IUpdateSearcher) Get_IncludePotentiallySupersededUpdates(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) Get_IncludePotentiallySupersededUpdates() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_IncludePotentiallySupersededUpdates dispatches through IUpdateSearcher's vtable slot 12.
-func (self *IUpdateSearcher) Put_IncludePotentiallySupersededUpdates(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdateSearcher) Put_IncludePotentiallySupersededUpdates(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServerSelection dispatches through IUpdateSearcher's vtable slot 13.
-func (self *IUpdateSearcher) Get_ServerSelection(retval *ServerSelection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) Get_ServerSelection() (ServerSelection, error) {
+	var _retval ServerSelection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ServerSelection dispatches through IUpdateSearcher's vtable slot 14.
-func (self *IUpdateSearcher) Put_ServerSelection(value ServerSelection) foundation.HRESULT {
+func (self *IUpdateSearcher) Put_ServerSelection(value ServerSelection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndSearch dispatches through IUpdateSearcher's vtable slot 16.
-func (self *IUpdateSearcher) EndSearch(searchJob *ISearchJob, retval **ISearchResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(searchJob)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) EndSearch(searchJob *ISearchJob) (*ISearchResult, error) {
+	var _retval *ISearchResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(searchJob)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // EscapeString dispatches through IUpdateSearcher's vtable slot 17.
-func (self *IUpdateSearcher) EscapeString(unescaped foundation.BSTR, retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(unescaped)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) EscapeString(unescaped foundation.BSTR) (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(unescaped)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // QueryHistory dispatches through IUpdateSearcher's vtable slot 18.
-func (self *IUpdateSearcher) QueryHistory(startIndex int32, count int32, retval **IUpdateHistoryEntryCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(startIndex), uintptr(count), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) QueryHistory(startIndex int32, count int32) (*IUpdateHistoryEntryCollection, error) {
+	var _retval *IUpdateHistoryEntryCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(startIndex), uintptr(count), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Search dispatches through IUpdateSearcher's vtable slot 19.
-func (self *IUpdateSearcher) Search(criteria foundation.BSTR, retval **ISearchResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(criteria)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) Search(criteria foundation.BSTR) (*ISearchResult, error) {
+	var _retval *ISearchResult
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(criteria)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Online dispatches through IUpdateSearcher's vtable slot 20.
-func (self *IUpdateSearcher) Get_Online(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) Get_Online() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_Online dispatches through IUpdateSearcher's vtable slot 21.
-func (self *IUpdateSearcher) Put_Online(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdateSearcher) Put_Online(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTotalHistoryCount dispatches through IUpdateSearcher's vtable slot 22.
-func (self *IUpdateSearcher) GetTotalHistoryCount(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) GetTotalHistoryCount() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceID dispatches through IUpdateSearcher's vtable slot 23.
-func (self *IUpdateSearcher) Get_ServiceID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher) Get_ServiceID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ServiceID dispatches through IUpdateSearcher's vtable slot 24.
-func (self *IUpdateSearcher) Put_ServiceID(value foundation.BSTR) foundation.HRESULT {
+func (self *IUpdateSearcher) Put_ServiceID(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdateSearcher2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatesearcher2
@@ -2116,15 +2321,16 @@ type IUpdateSearcher2 struct {
 var IID_IUpdateSearcher2 = win32.GUID{Data1: 0x4cbdcb2d, Data2: 0x1589, Data3: 0x4beb, Data4: [8]byte{0xbd, 0x1c, 0x3e, 0x58, 0x2f, 0xf0, 0xad, 0xd0}}
 
 // Get_IgnoreDownloadPriority dispatches through IUpdateSearcher2's vtable slot 25.
-func (self *IUpdateSearcher2) Get_IgnoreDownloadPriority(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher2) Get_IgnoreDownloadPriority() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_IgnoreDownloadPriority dispatches through IUpdateSearcher2's vtable slot 26.
-func (self *IUpdateSearcher2) Put_IgnoreDownloadPriority(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IUpdateSearcher2) Put_IgnoreDownloadPriority(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdateSearcher3: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatesearcher3
@@ -2137,15 +2343,16 @@ type IUpdateSearcher3 struct {
 var IID_IUpdateSearcher3 = win32.GUID{Data1: 0x04c6895d, Data2: 0xeaf2, Data3: 0x4034, Data4: [8]byte{0x97, 0xf3, 0x31, 0x1d, 0xe9, 0xbe, 0x41, 0x3a}}
 
 // Get_SearchScope dispatches through IUpdateSearcher3's vtable slot 27.
-func (self *IUpdateSearcher3) Get_SearchScope(retval *SearchScope) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSearcher3) Get_SearchScope() (SearchScope, error) {
+	var _retval SearchScope
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_SearchScope dispatches through IUpdateSearcher3's vtable slot 28.
-func (self *IUpdateSearcher3) Put_SearchScope(value SearchScope) foundation.HRESULT {
+func (self *IUpdateSearcher3) Put_SearchScope(value SearchScope) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdateService: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservice
@@ -2158,81 +2365,94 @@ type IUpdateService struct {
 var IID_IUpdateService = win32.GUID{Data1: 0x76b3b17e, Data2: 0xaed6, Data3: 0x4da5, Data4: [8]byte{0x85, 0xf0, 0x83, 0x58, 0x7f, 0x81, 0xab, 0xe3}}
 
 // Get_Name dispatches through IUpdateService's vtable slot 7.
-func (self *IUpdateService) Get_Name(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_Name() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ContentValidationCert dispatches through IUpdateService's vtable slot 8.
-func (self *IUpdateService) Get_ContentValidationCert(retval *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_ContentValidationCert() (systemvariant.VARIANT, error) {
+	var _retval systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ExpirationDate dispatches through IUpdateService's vtable slot 9.
-func (self *IUpdateService) Get_ExpirationDate(retval *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_ExpirationDate() (float64, error) {
+	var _retval float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsManaged dispatches through IUpdateService's vtable slot 10.
-func (self *IUpdateService) Get_IsManaged(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_IsManaged() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsRegisteredWithAU dispatches through IUpdateService's vtable slot 11.
-func (self *IUpdateService) Get_IsRegisteredWithAU(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_IsRegisteredWithAU() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IssueDate dispatches through IUpdateService's vtable slot 12.
-func (self *IUpdateService) Get_IssueDate(retval *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_IssueDate() (float64, error) {
+	var _retval float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_OffersWindowsUpdates dispatches through IUpdateService's vtable slot 13.
-func (self *IUpdateService) Get_OffersWindowsUpdates(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_OffersWindowsUpdates() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_RedirectUrls dispatches through IUpdateService's vtable slot 14.
-func (self *IUpdateService) Get_RedirectUrls(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_RedirectUrls() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceID dispatches through IUpdateService's vtable slot 15.
-func (self *IUpdateService) Get_ServiceID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_ServiceID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsScanPackageService dispatches through IUpdateService's vtable slot 16.
-func (self *IUpdateService) Get_IsScanPackageService(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_IsScanPackageService() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CanRegisterWithAU dispatches through IUpdateService's vtable slot 17.
-func (self *IUpdateService) Get_CanRegisterWithAU(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_CanRegisterWithAU() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceUrl dispatches through IUpdateService's vtable slot 18.
-func (self *IUpdateService) Get_ServiceUrl(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_ServiceUrl() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_SetupPrefix dispatches through IUpdateService's vtable slot 19.
-func (self *IUpdateService) Get_SetupPrefix(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService) Get_SetupPrefix() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateService2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservice2
@@ -2245,9 +2465,10 @@ type IUpdateService2 struct {
 var IID_IUpdateService2 = win32.GUID{Data1: 0x1518b460, Data2: 0x6518, Data3: 0x4172, Data4: [8]byte{0x94, 0x0f, 0xc7, 0x58, 0x83, 0xb2, 0x4c, 0xeb}}
 
 // Get_IsDefaultAUService dispatches through IUpdateService2's vtable slot 20.
-func (self *IUpdateService2) Get_IsDefaultAUService(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateService2) Get_IsDefaultAUService() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateServiceCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservicecollection
@@ -2260,21 +2481,24 @@ type IUpdateServiceCollection struct {
 var IID_IUpdateServiceCollection = win32.GUID{Data1: 0x9b0353aa, Data2: 0x0e52, Data3: 0x44ff, Data4: [8]byte{0xb8, 0xb0, 0x1f, 0x7f, 0xa0, 0x43, 0x7f, 0x88}}
 
 // Get_Item dispatches through IUpdateServiceCollection's vtable slot 7.
-func (self *IUpdateServiceCollection) Get_Item(index int32, retval **IUpdateService) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceCollection) Get_Item(index int32) (*IUpdateService, error) {
+	var _retval *IUpdateService
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IUpdateServiceCollection's vtable slot 8.
-func (self *IUpdateServiceCollection) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IUpdateServiceCollection's vtable slot 9.
-func (self *IUpdateServiceCollection) Get_Count(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceCollection) Get_Count() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateServiceManager: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservicemanager
@@ -2287,39 +2511,42 @@ type IUpdateServiceManager struct {
 var IID_IUpdateServiceManager = win32.GUID{Data1: 0x23857e3c, Data2: 0x02ba, Data3: 0x44a3, Data4: [8]byte{0x94, 0x23, 0xb1, 0xc9, 0x00, 0x80, 0x5f, 0x37}}
 
 // Get_Services dispatches through IUpdateServiceManager's vtable slot 7.
-func (self *IUpdateServiceManager) Get_Services(retval **IUpdateServiceCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceManager) Get_Services() (*IUpdateServiceCollection, error) {
+	var _retval *IUpdateServiceCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // AddService dispatches through IUpdateServiceManager's vtable slot 8.
-func (self *IUpdateServiceManager) AddService(serviceID foundation.BSTR, authorizationCabPath foundation.BSTR, retval **IUpdateService) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(unsafe.Pointer(authorizationCabPath)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceManager) AddService(serviceID foundation.BSTR, authorizationCabPath foundation.BSTR) (*IUpdateService, error) {
+	var _retval *IUpdateService
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(unsafe.Pointer(authorizationCabPath)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // RegisterServiceWithAU dispatches through IUpdateServiceManager's vtable slot 9.
-func (self *IUpdateServiceManager) RegisterServiceWithAU(serviceID foundation.BSTR) foundation.HRESULT {
+func (self *IUpdateServiceManager) RegisterServiceWithAU(serviceID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveService dispatches through IUpdateServiceManager's vtable slot 10.
-func (self *IUpdateServiceManager) RemoveService(serviceID foundation.BSTR) foundation.HRESULT {
+func (self *IUpdateServiceManager) RemoveService(serviceID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterServiceWithAU dispatches through IUpdateServiceManager's vtable slot 11.
-func (self *IUpdateServiceManager) UnregisterServiceWithAU(serviceID foundation.BSTR) foundation.HRESULT {
+func (self *IUpdateServiceManager) UnregisterServiceWithAU(serviceID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddScanPackageService dispatches through IUpdateServiceManager's vtable slot 12.
-func (self *IUpdateServiceManager) AddScanPackageService(serviceName foundation.BSTR, scanFileLocation foundation.BSTR, flags int32, ppService **IUpdateService) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)), uintptr(unsafe.Pointer(scanFileLocation)), uintptr(flags), uintptr(unsafe.Pointer(ppService)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceManager) AddScanPackageService(serviceName foundation.BSTR, scanFileLocation foundation.BSTR, flags int32) (*IUpdateService, error) {
+	var _ppService *IUpdateService
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)), uintptr(unsafe.Pointer(scanFileLocation)), uintptr(flags), uintptr(unsafe.Pointer(&_ppService)))
+	return _ppService, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateServiceManager2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservicemanager2
@@ -2332,27 +2559,30 @@ type IUpdateServiceManager2 struct {
 var IID_IUpdateServiceManager2 = win32.GUID{Data1: 0x0bb8531d, Data2: 0x7e8d, Data3: 0x424f, Data4: [8]byte{0x98, 0x6c, 0xa0, 0xb8, 0xf6, 0x0a, 0x3e, 0x7b}}
 
 // Get_ClientApplicationID dispatches through IUpdateServiceManager2's vtable slot 14.
-func (self *IUpdateServiceManager2) Get_ClientApplicationID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceManager2) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateServiceManager2's vtable slot 15.
-func (self *IUpdateServiceManager2) Put_ClientApplicationID(value foundation.BSTR) foundation.HRESULT {
+func (self *IUpdateServiceManager2) Put_ClientApplicationID(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryServiceRegistration dispatches through IUpdateServiceManager2's vtable slot 16.
-func (self *IUpdateServiceManager2) QueryServiceRegistration(serviceID foundation.BSTR, retval **IUpdateServiceRegistration) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceManager2) QueryServiceRegistration(serviceID foundation.BSTR) (*IUpdateServiceRegistration, error) {
+	var _retval *IUpdateServiceRegistration
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // AddService2 dispatches through IUpdateServiceManager2's vtable slot 17.
-func (self *IUpdateServiceManager2) AddService2(serviceID foundation.BSTR, flags int32, authorizationCabPath foundation.BSTR, retval **IUpdateServiceRegistration) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(flags), uintptr(unsafe.Pointer(authorizationCabPath)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceManager2) AddService2(serviceID foundation.BSTR, flags int32, authorizationCabPath foundation.BSTR) (*IUpdateServiceRegistration, error) {
+	var _retval *IUpdateServiceRegistration
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceID)), uintptr(flags), uintptr(unsafe.Pointer(authorizationCabPath)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateServiceRegistration: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateserviceregistration
@@ -2365,27 +2595,31 @@ type IUpdateServiceRegistration struct {
 var IID_IUpdateServiceRegistration = win32.GUID{Data1: 0xdde02280, Data2: 0x12b3, Data3: 0x4e0b, Data4: [8]byte{0x93, 0x7b, 0x67, 0x47, 0xf6, 0xac, 0xb2, 0x86}}
 
 // Get_RegistrationState dispatches through IUpdateServiceRegistration's vtable slot 7.
-func (self *IUpdateServiceRegistration) Get_RegistrationState(retval *UpdateServiceRegistrationState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceRegistration) Get_RegistrationState() (UpdateServiceRegistrationState, error) {
+	var _retval UpdateServiceRegistrationState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceID dispatches through IUpdateServiceRegistration's vtable slot 8.
-func (self *IUpdateServiceRegistration) Get_ServiceID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceRegistration) Get_ServiceID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsPendingRegistrationWithAU dispatches through IUpdateServiceRegistration's vtable slot 9.
-func (self *IUpdateServiceRegistration) Get_IsPendingRegistrationWithAU(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceRegistration) Get_IsPendingRegistrationWithAU() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Service dispatches through IUpdateServiceRegistration's vtable slot 10.
-func (self *IUpdateServiceRegistration) Get_Service(retval **IUpdateService2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateServiceRegistration) Get_Service() (*IUpdateService2, error) {
+	var _retval *IUpdateService2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateSession: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatesession
@@ -2398,51 +2632,57 @@ type IUpdateSession struct {
 var IID_IUpdateSession = win32.GUID{Data1: 0x816858a4, Data2: 0x260d, Data3: 0x4260, Data4: [8]byte{0x93, 0x3a, 0x25, 0x85, 0xf1, 0xab, 0xc7, 0x6b}}
 
 // Get_ClientApplicationID dispatches through IUpdateSession's vtable slot 7.
-func (self *IUpdateSession) Get_ClientApplicationID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSession) Get_ClientApplicationID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_ClientApplicationID dispatches through IUpdateSession's vtable slot 8.
-func (self *IUpdateSession) Put_ClientApplicationID(value foundation.BSTR) foundation.HRESULT {
+func (self *IUpdateSession) Put_ClientApplicationID(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReadOnly dispatches through IUpdateSession's vtable slot 9.
-func (self *IUpdateSession) Get_ReadOnly(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSession) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_WebProxy dispatches through IUpdateSession's vtable slot 10.
-func (self *IUpdateSession) Get_WebProxy(retval **IWebProxy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSession) Get_WebProxy() (*IWebProxy, error) {
+	var _retval *IWebProxy
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_WebProxy dispatches through IUpdateSession's vtable slot 11.
-func (self *IUpdateSession) Put_WebProxy(value *IWebProxy) foundation.HRESULT {
+func (self *IUpdateSession) Put_WebProxy(value *IWebProxy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateUpdateSearcher dispatches through IUpdateSession's vtable slot 12.
-func (self *IUpdateSession) CreateUpdateSearcher(retval **IUpdateSearcher) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSession) CreateUpdateSearcher() (*IUpdateSearcher, error) {
+	var _retval *IUpdateSearcher
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // CreateUpdateDownloader dispatches through IUpdateSession's vtable slot 13.
-func (self *IUpdateSession) CreateUpdateDownloader(retval **IUpdateDownloader) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSession) CreateUpdateDownloader() (*IUpdateDownloader, error) {
+	var _retval *IUpdateDownloader
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // CreateUpdateInstaller dispatches through IUpdateSession's vtable slot 14.
-func (self *IUpdateSession) CreateUpdateInstaller(retval **IUpdateInstaller) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSession) CreateUpdateInstaller() (*IUpdateInstaller, error) {
+	var _retval *IUpdateInstaller
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IUpdateSession2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatesession2
@@ -2455,15 +2695,16 @@ type IUpdateSession2 struct {
 var IID_IUpdateSession2 = win32.GUID{Data1: 0x91caf7b0, Data2: 0xeb23, Data3: 0x49ed, Data4: [8]byte{0x99, 0x37, 0xc5, 0x2d, 0x81, 0x7f, 0x46, 0xf7}}
 
 // Get_UserLocale dispatches through IUpdateSession2's vtable slot 15.
-func (self *IUpdateSession2) Get_UserLocale(retval *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSession2) Get_UserLocale() (uint32, error) {
+	var _retval uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_UserLocale dispatches through IUpdateSession2's vtable slot 16.
-func (self *IUpdateSession2) Put_UserLocale(lcid uint32) foundation.HRESULT {
+func (self *IUpdateSession2) Put_UserLocale(lcid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lcid))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUpdateSession3: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdatesession3
@@ -2476,15 +2717,17 @@ type IUpdateSession3 struct {
 var IID_IUpdateSession3 = win32.GUID{Data1: 0x918efd1e, Data2: 0xb5d8, Data3: 0x4c90, Data4: [8]byte{0x85, 0x40, 0xae, 0xb9, 0xbd, 0xc5, 0x6f, 0x9d}}
 
 // CreateUpdateServiceManager dispatches through IUpdateSession3's vtable slot 17.
-func (self *IUpdateSession3) CreateUpdateServiceManager(retval **IUpdateServiceManager2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSession3) CreateUpdateServiceManager() (*IUpdateServiceManager2, error) {
+	var _retval *IUpdateServiceManager2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // QueryHistory dispatches through IUpdateSession3's vtable slot 18.
-func (self *IUpdateSession3) QueryHistory(criteria foundation.BSTR, startIndex int32, count int32, retval **IUpdateHistoryEntryCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(criteria)), uintptr(startIndex), uintptr(count), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IUpdateSession3) QueryHistory(criteria foundation.BSTR, startIndex int32, count int32) (*IUpdateHistoryEntryCollection, error) {
+	var _retval *IUpdateHistoryEntryCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(criteria)), uintptr(startIndex), uintptr(count), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IWebProxy: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwebproxy
@@ -2497,87 +2740,93 @@ type IWebProxy struct {
 var IID_IWebProxy = win32.GUID{Data1: 0x174c81fe, Data2: 0xaecd, Data3: 0x4dae, Data4: [8]byte{0xb8, 0xa0, 0x2c, 0x63, 0x18, 0xdd, 0x86, 0xa8}}
 
 // Get_Address dispatches through IWebProxy's vtable slot 7.
-func (self *IWebProxy) Get_Address(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWebProxy) Get_Address() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_Address dispatches through IWebProxy's vtable slot 8.
-func (self *IWebProxy) Put_Address(value foundation.BSTR) foundation.HRESULT {
+func (self *IWebProxy) Put_Address(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BypassList dispatches through IWebProxy's vtable slot 9.
-func (self *IWebProxy) Get_BypassList(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWebProxy) Get_BypassList() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_BypassList dispatches through IWebProxy's vtable slot 10.
-func (self *IWebProxy) Put_BypassList(value *IStringCollection) foundation.HRESULT {
+func (self *IWebProxy) Put_BypassList(value *IStringCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BypassProxyOnLocal dispatches through IWebProxy's vtable slot 11.
-func (self *IWebProxy) Get_BypassProxyOnLocal(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWebProxy) Get_BypassProxyOnLocal() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_BypassProxyOnLocal dispatches through IWebProxy's vtable slot 12.
-func (self *IWebProxy) Put_BypassProxyOnLocal(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IWebProxy) Put_BypassProxyOnLocal(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReadOnly dispatches through IWebProxy's vtable slot 13.
-func (self *IWebProxy) Get_ReadOnly(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWebProxy) Get_ReadOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_UserName dispatches through IWebProxy's vtable slot 14.
-func (self *IWebProxy) Get_UserName(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWebProxy) Get_UserName() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_UserName dispatches through IWebProxy's vtable slot 15.
-func (self *IWebProxy) Put_UserName(value foundation.BSTR) foundation.HRESULT {
+func (self *IWebProxy) Put_UserName(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPassword dispatches through IWebProxy's vtable slot 16.
-func (self *IWebProxy) SetPassword(value foundation.BSTR) foundation.HRESULT {
+func (self *IWebProxy) SetPassword(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PromptForCredentials dispatches through IWebProxy's vtable slot 17.
-func (self *IWebProxy) PromptForCredentials(parentWindow *systemcom.IUnknown, title foundation.BSTR) foundation.HRESULT {
+func (self *IWebProxy) PromptForCredentials(parentWindow *systemcom.IUnknown, title foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(parentWindow)), uintptr(unsafe.Pointer(title)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PromptForCredentialsFromHwnd dispatches through IWebProxy's vtable slot 18.
-func (self *IWebProxy) PromptForCredentialsFromHwnd(parentWindow foundation.HWND, title foundation.BSTR) foundation.HRESULT {
+func (self *IWebProxy) PromptForCredentialsFromHwnd(parentWindow foundation.HWND, title foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(parentWindow), uintptr(unsafe.Pointer(title)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoDetect dispatches through IWebProxy's vtable slot 19.
-func (self *IWebProxy) Get_AutoDetect(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWebProxy) Get_AutoDetect() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoDetect dispatches through IWebProxy's vtable slot 20.
-func (self *IWebProxy) Put_AutoDetect(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IWebProxy) Put_AutoDetect(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWindowsDriverUpdate: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdate
@@ -2590,51 +2839,59 @@ type IWindowsDriverUpdate struct {
 var IID_IWindowsDriverUpdate = win32.GUID{Data1: 0xb383cd1a, Data2: 0x5ce9, Data3: 0x4504, Data4: [8]byte{0x9f, 0x63, 0x76, 0x4b, 0x12, 0x36, 0xf1, 0x91}}
 
 // Get_DriverClass dispatches through IWindowsDriverUpdate's vtable slot 52.
-func (self *IWindowsDriverUpdate) Get_DriverClass(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate) Get_DriverClass() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverHardwareID dispatches through IWindowsDriverUpdate's vtable slot 53.
-func (self *IWindowsDriverUpdate) Get_DriverHardwareID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate) Get_DriverHardwareID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverManufacturer dispatches through IWindowsDriverUpdate's vtable slot 54.
-func (self *IWindowsDriverUpdate) Get_DriverManufacturer(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate) Get_DriverManufacturer() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverModel dispatches through IWindowsDriverUpdate's vtable slot 55.
-func (self *IWindowsDriverUpdate) Get_DriverModel(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate) Get_DriverModel() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverProvider dispatches through IWindowsDriverUpdate's vtable slot 56.
-func (self *IWindowsDriverUpdate) Get_DriverProvider(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate) Get_DriverProvider() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverVerDate dispatches through IWindowsDriverUpdate's vtable slot 57.
-func (self *IWindowsDriverUpdate) Get_DriverVerDate(retval *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate) Get_DriverVerDate() (float64, error) {
+	var _retval float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeviceProblemNumber dispatches through IWindowsDriverUpdate's vtable slot 58.
-func (self *IWindowsDriverUpdate) Get_DeviceProblemNumber(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate) Get_DeviceProblemNumber() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeviceStatus dispatches through IWindowsDriverUpdate's vtable slot 59.
-func (self *IWindowsDriverUpdate) Get_DeviceStatus(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate) Get_DeviceStatus() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IWindowsDriverUpdate2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdate2
@@ -2647,27 +2904,30 @@ type IWindowsDriverUpdate2 struct {
 var IID_IWindowsDriverUpdate2 = win32.GUID{Data1: 0x615c4269, Data2: 0x7a48, Data3: 0x43bd, Data4: [8]byte{0x96, 0xb7, 0xbf, 0x6c, 0xa2, 0x7d, 0x6c, 0x3e}}
 
 // Get_RebootRequired dispatches through IWindowsDriverUpdate2's vtable slot 60.
-func (self *IWindowsDriverUpdate2) Get_RebootRequired(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate2) Get_RebootRequired() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsPresent dispatches through IWindowsDriverUpdate2's vtable slot 61.
-func (self *IWindowsDriverUpdate2) Get_IsPresent(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate2) Get_IsPresent() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_CveIDs dispatches through IWindowsDriverUpdate2's vtable slot 62.
-func (self *IWindowsDriverUpdate2) Get_CveIDs(retval **IStringCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate2) Get_CveIDs() (*IStringCollection, error) {
+	var _retval *IStringCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // CopyToCache dispatches through IWindowsDriverUpdate2's vtable slot 63.
-func (self *IWindowsDriverUpdate2) CopyToCache(pFiles *IStringCollection) foundation.HRESULT {
+func (self *IWindowsDriverUpdate2) CopyToCache(pFiles *IStringCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFiles)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWindowsDriverUpdate3: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdate3
@@ -2680,9 +2940,10 @@ type IWindowsDriverUpdate3 struct {
 var IID_IWindowsDriverUpdate3 = win32.GUID{Data1: 0x49ebd502, Data2: 0x4a96, Data3: 0x41bd, Data4: [8]byte{0x9e, 0x3e, 0x4c, 0x50, 0x57, 0xf4, 0x25, 0x0c}}
 
 // Get_BrowseOnly dispatches through IWindowsDriverUpdate3's vtable slot 64.
-func (self *IWindowsDriverUpdate3) Get_BrowseOnly(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate3) Get_BrowseOnly() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IWindowsDriverUpdate4: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdate4
@@ -2695,15 +2956,17 @@ type IWindowsDriverUpdate4 struct {
 var IID_IWindowsDriverUpdate4 = win32.GUID{Data1: 0x004c6a2b, Data2: 0x0c19, Data3: 0x4c69, Data4: [8]byte{0x9f, 0x5c, 0xa2, 0x69, 0xb2, 0x56, 0x0d, 0xb9}}
 
 // Get_WindowsDriverUpdateEntries dispatches through IWindowsDriverUpdate4's vtable slot 65.
-func (self *IWindowsDriverUpdate4) Get_WindowsDriverUpdateEntries(retval **IWindowsDriverUpdateEntryCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate4) Get_WindowsDriverUpdateEntries() (*IWindowsDriverUpdateEntryCollection, error) {
+	var _retval *IWindowsDriverUpdateEntryCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_PerUser dispatches through IWindowsDriverUpdate4's vtable slot 66.
-func (self *IWindowsDriverUpdate4) Get_PerUser(retval *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate4) Get_PerUser() (foundation.VARIANT_BOOL, error) {
+	var _retval foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IWindowsDriverUpdate5: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdate5
@@ -2716,15 +2979,17 @@ type IWindowsDriverUpdate5 struct {
 var IID_IWindowsDriverUpdate5 = win32.GUID{Data1: 0x70cf5c82, Data2: 0x8642, Data3: 0x42bb, Data4: [8]byte{0x9d, 0xbc, 0x0c, 0xfd, 0x26, 0x3c, 0x6c, 0x4f}}
 
 // Get_AutoSelection dispatches through IWindowsDriverUpdate5's vtable slot 67.
-func (self *IWindowsDriverUpdate5) Get_AutoSelection(retval *AutoSelectionMode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate5) Get_AutoSelection() (AutoSelectionMode, error) {
+	var _retval AutoSelectionMode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoDownload dispatches through IWindowsDriverUpdate5's vtable slot 68.
-func (self *IWindowsDriverUpdate5) Get_AutoDownload(retval *AutoDownloadMode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdate5) Get_AutoDownload() (AutoDownloadMode, error) {
+	var _retval AutoDownloadMode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IWindowsDriverUpdateEntry: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdateentry
@@ -2737,51 +3002,59 @@ type IWindowsDriverUpdateEntry struct {
 var IID_IWindowsDriverUpdateEntry = win32.GUID{Data1: 0xed8bfe40, Data2: 0xa60b, Data3: 0x42ea, Data4: [8]byte{0x96, 0x52, 0x81, 0x7d, 0xfc, 0xfa, 0x23, 0xec}}
 
 // Get_DriverClass dispatches through IWindowsDriverUpdateEntry's vtable slot 7.
-func (self *IWindowsDriverUpdateEntry) Get_DriverClass(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntry) Get_DriverClass() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverHardwareID dispatches through IWindowsDriverUpdateEntry's vtable slot 8.
-func (self *IWindowsDriverUpdateEntry) Get_DriverHardwareID(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntry) Get_DriverHardwareID() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverManufacturer dispatches through IWindowsDriverUpdateEntry's vtable slot 9.
-func (self *IWindowsDriverUpdateEntry) Get_DriverManufacturer(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntry) Get_DriverManufacturer() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverModel dispatches through IWindowsDriverUpdateEntry's vtable slot 10.
-func (self *IWindowsDriverUpdateEntry) Get_DriverModel(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntry) Get_DriverModel() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverProvider dispatches through IWindowsDriverUpdateEntry's vtable slot 11.
-func (self *IWindowsDriverUpdateEntry) Get_DriverProvider(retval *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntry) Get_DriverProvider() (foundation.BSTR, error) {
+	var _retval foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverVerDate dispatches through IWindowsDriverUpdateEntry's vtable slot 12.
-func (self *IWindowsDriverUpdateEntry) Get_DriverVerDate(retval *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntry) Get_DriverVerDate() (float64, error) {
+	var _retval float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeviceProblemNumber dispatches through IWindowsDriverUpdateEntry's vtable slot 13.
-func (self *IWindowsDriverUpdateEntry) Get_DeviceProblemNumber(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntry) Get_DeviceProblemNumber() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeviceStatus dispatches through IWindowsDriverUpdateEntry's vtable slot 14.
-func (self *IWindowsDriverUpdateEntry) Get_DeviceStatus(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntry) Get_DeviceStatus() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IWindowsDriverUpdateEntryCollection: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsdriverupdateentrycollection
@@ -2794,21 +3067,24 @@ type IWindowsDriverUpdateEntryCollection struct {
 var IID_IWindowsDriverUpdateEntryCollection = win32.GUID{Data1: 0x0d521700, Data2: 0xa372, Data3: 0x4bef, Data4: [8]byte{0x82, 0x8b, 0x3d, 0x00, 0xc1, 0x0a, 0xde, 0xbd}}
 
 // Get_Item dispatches through IWindowsDriverUpdateEntryCollection's vtable slot 7.
-func (self *IWindowsDriverUpdateEntryCollection) Get_Item(index int32, retval **IWindowsDriverUpdateEntry) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntryCollection) Get_Item(index int32) (*IWindowsDriverUpdateEntry, error) {
+	var _retval *IWindowsDriverUpdateEntry
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IWindowsDriverUpdateEntryCollection's vtable slot 8.
-func (self *IWindowsDriverUpdateEntryCollection) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntryCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IWindowsDriverUpdateEntryCollection's vtable slot 9.
-func (self *IWindowsDriverUpdateEntryCollection) Get_Count(retval *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDriverUpdateEntryCollection) Get_Count() (int32, error) {
+	var _retval int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IWindowsUpdateAgentInfo: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iwindowsupdateagentinfo

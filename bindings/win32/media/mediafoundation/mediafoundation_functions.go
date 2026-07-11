@@ -272,1318 +272,1356 @@ var (
 // CreateNamedPropertyStore calls MF!CreateNamedPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-createnamedpropertystore
 // Minimum OS: windows6.0.6000.
-func CreateNamedPropertyStore(ppStore **uishellpropertiessystem.INamedPropertyStore) foundation.HRESULT {
+func CreateNamedPropertyStore(ppStore **uishellpropertiessystem.INamedPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(procCreateNamedPropertyStore.Addr(), uintptr(unsafe.Pointer(ppStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePropertyStore calls MFPlat!CreatePropertyStore.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-createpropertystore
 // Minimum OS: windows6.0.6000.
-func CreatePropertyStore(ppStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func CreatePropertyStore(ppStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(procCreatePropertyStore.Addr(), uintptr(unsafe.Pointer(ppStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DXVA2CreateDirect3DDeviceManager9 calls dxva2!DXVA2CreateDirect3DDeviceManager9.
 // https://learn.microsoft.com/windows/win32/api/dxva2api/nf-dxva2api-dxva2createdirect3ddevicemanager9
 // Minimum OS: windows6.0.6000.
-func DXVA2CreateDirect3DDeviceManager9(pResetToken *uint32, ppDeviceManager **IDirect3DDeviceManager9) foundation.HRESULT {
+func DXVA2CreateDirect3DDeviceManager9(pResetToken *uint32, ppDeviceManager **IDirect3DDeviceManager9) error {
 	r1, _, _ := syscall.SyscallN(procDXVA2CreateDirect3DDeviceManager9.Addr(), uintptr(unsafe.Pointer(pResetToken)), uintptr(unsafe.Pointer(ppDeviceManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DXVA2CreateVideoService calls dxva2!DXVA2CreateVideoService.
 // https://learn.microsoft.com/windows/win32/api/dxva2api/nf-dxva2api-dxva2createvideoservice
 // Minimum OS: windows6.0.6000.
-func DXVA2CreateVideoService(pDD *graphicsdirect3d9.IDirect3DDevice9, riid *win32.GUID, ppService *unsafe.Pointer) foundation.HRESULT {
+func DXVA2CreateVideoService(pDD *graphicsdirect3d9.IDirect3DDevice9, riid *win32.GUID, ppService *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDXVA2CreateVideoService.Addr(), uintptr(unsafe.Pointer(pDD)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppService)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DXVAHD_CreateDevice calls dxva2!DXVAHD_CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/dxvahd/nf-dxvahd-dxvahd_createdevice
 // Minimum OS: windows6.1.
-func DXVAHD_CreateDevice(pD3DDevice *graphicsdirect3d9.IDirect3DDevice9Ex, pContentDesc *DXVAHD_CONTENT_DESC, Usage DXVAHD_DEVICE_USAGE, pPlugin PDXVAHDSW_Plugin, ppDevice **IDXVAHD_Device) foundation.HRESULT {
+func DXVAHD_CreateDevice(pD3DDevice *graphicsdirect3d9.IDirect3DDevice9Ex, pContentDesc *DXVAHD_CONTENT_DESC, Usage DXVAHD_DEVICE_USAGE, pPlugin PDXVAHDSW_Plugin, ppDevice **IDXVAHD_Device) error {
 	r1, _, _ := syscall.SyscallN(procDXVAHD_CreateDevice.Addr(), uintptr(unsafe.Pointer(pD3DDevice)), uintptr(unsafe.Pointer(pContentDesc)), uintptr(Usage), uintptr(pPlugin), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFAddPeriodicCallback calls MFPlat!MFAddPeriodicCallback.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfaddperiodiccallback
 // Minimum OS: windows6.0.6000.
-func MFAddPeriodicCallback(Callback MFPERIODICCALLBACK, pContext *systemcom.IUnknown, pdwKey *uint32) foundation.HRESULT {
+func MFAddPeriodicCallback(Callback MFPERIODICCALLBACK, pContext *systemcom.IUnknown, pdwKey *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAddPeriodicCallback.Addr(), uintptr(Callback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(pdwKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFAllocateSerialWorkQueue calls MFPlat!MFAllocateSerialWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfallocateserialworkqueue
 // Minimum OS: windows8.0.
-func MFAllocateSerialWorkQueue(dwWorkQueue uint32, pdwWorkQueue *uint32) foundation.HRESULT {
+func MFAllocateSerialWorkQueue(dwWorkQueue uint32, pdwWorkQueue *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAllocateSerialWorkQueue.Addr(), uintptr(dwWorkQueue), uintptr(unsafe.Pointer(pdwWorkQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFAllocateWorkQueue calls MFPlat!MFAllocateWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfallocateworkqueue
 // Minimum OS: windows6.0.6000.
-func MFAllocateWorkQueue(pdwWorkQueue *uint32) foundation.HRESULT {
+func MFAllocateWorkQueue(pdwWorkQueue *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAllocateWorkQueue.Addr(), uintptr(unsafe.Pointer(pdwWorkQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFAllocateWorkQueueEx calls MFPlat!MFAllocateWorkQueueEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfallocateworkqueueex
 // Minimum OS: windows6.1.
-func MFAllocateWorkQueueEx(WorkQueueType MFASYNC_WORKQUEUE_TYPE, pdwWorkQueue *uint32) foundation.HRESULT {
+func MFAllocateWorkQueueEx(WorkQueueType MFASYNC_WORKQUEUE_TYPE, pdwWorkQueue *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAllocateWorkQueueEx.Addr(), uintptr(WorkQueueType), uintptr(unsafe.Pointer(pdwWorkQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFAverageTimePerFrameToFrameRate calls MFPlat!MFAverageTimePerFrameToFrameRate.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfaveragetimeperframetoframerate
 // Minimum OS: windows6.0.6000.
-func MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame uint64, punNumerator *uint32, punDenominator *uint32) foundation.HRESULT {
+func MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame uint64, punNumerator *uint32, punDenominator *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFAverageTimePerFrameToFrameRate.Addr(), uintptr(unAverageTimePerFrame), uintptr(unsafe.Pointer(punNumerator)), uintptr(unsafe.Pointer(punDenominator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFBeginCreateFile calls MFPlat!MFBeginCreateFile.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfbegincreatefile
 // Minimum OS: windows6.0.6000.
-func MFBeginCreateFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFlags MF_FILE_FLAGS, pwszFilePath foundation.PWSTR, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown, ppCancelCookie **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFBeginCreateFile.Addr(), uintptr(AccessMode), uintptr(OpenMode), uintptr(fFlags), uintptr(unsafe.Pointer(pwszFilePath)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)), uintptr(unsafe.Pointer(ppCancelCookie)))
-	return foundation.HRESULT(r1)
+func MFBeginCreateFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFlags MF_FILE_FLAGS, pwszFilePath string, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown, ppCancelCookie **systemcom.IUnknown) error {
+	_pwszFilePath := win32.UTF16Ptr(pwszFilePath)
+	r1, _, _ := syscall.SyscallN(procMFBeginCreateFile.Addr(), uintptr(AccessMode), uintptr(OpenMode), uintptr(fFlags), uintptr(unsafe.Pointer(_pwszFilePath)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)), uintptr(unsafe.Pointer(ppCancelCookie)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFBeginRegisterWorkQueueWithMMCSS calls MFPlat!MFBeginRegisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfbeginregisterworkqueuewithmmcss
 // Minimum OS: windows6.0.6000.
-func MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId uint32, wszClass foundation.PWSTR, dwTaskId uint32, pDoneCallback *IMFAsyncCallback, pDoneState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFBeginRegisterWorkQueueWithMMCSS.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(wszClass)), uintptr(dwTaskId), uintptr(unsafe.Pointer(pDoneCallback)), uintptr(unsafe.Pointer(pDoneState)))
-	return foundation.HRESULT(r1)
+func MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId uint32, wszClass string, dwTaskId uint32, pDoneCallback *IMFAsyncCallback, pDoneState *systemcom.IUnknown) error {
+	_wszClass := win32.UTF16Ptr(wszClass)
+	r1, _, _ := syscall.SyscallN(procMFBeginRegisterWorkQueueWithMMCSS.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(_wszClass)), uintptr(dwTaskId), uintptr(unsafe.Pointer(pDoneCallback)), uintptr(unsafe.Pointer(pDoneState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFBeginRegisterWorkQueueWithMMCSSEx calls MFPlat!MFBeginRegisterWorkQueueWithMMCSSEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfbeginregisterworkqueuewithmmcssex
 // Minimum OS: windows8.0.
-func MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId uint32, wszClass foundation.PWSTR, dwTaskId uint32, lPriority int32, pDoneCallback *IMFAsyncCallback, pDoneState *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFBeginRegisterWorkQueueWithMMCSSEx.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(wszClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(unsafe.Pointer(pDoneCallback)), uintptr(unsafe.Pointer(pDoneState)))
-	return foundation.HRESULT(r1)
+func MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId uint32, wszClass string, dwTaskId uint32, lPriority int32, pDoneCallback *IMFAsyncCallback, pDoneState *systemcom.IUnknown) error {
+	_wszClass := win32.UTF16Ptr(wszClass)
+	r1, _, _ := syscall.SyscallN(procMFBeginRegisterWorkQueueWithMMCSSEx.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(_wszClass)), uintptr(dwTaskId), uintptr(lPriority), uintptr(unsafe.Pointer(pDoneCallback)), uintptr(unsafe.Pointer(pDoneState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFBeginUnregisterWorkQueueWithMMCSS calls MFPlat!MFBeginUnregisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfbeginunregisterworkqueuewithmmcss
 // Minimum OS: windows6.0.6000.
-func MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId uint32, pDoneCallback *IMFAsyncCallback, pDoneState *systemcom.IUnknown) foundation.HRESULT {
+func MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId uint32, pDoneCallback *IMFAsyncCallback, pDoneState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFBeginUnregisterWorkQueueWithMMCSS.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(pDoneCallback)), uintptr(unsafe.Pointer(pDoneState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCalculateBitmapImageSize calls MFPlat!MFCalculateBitmapImageSize.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcalculatebitmapimagesize
 // Minimum OS: windows6.0.6000.
-func MFCalculateBitmapImageSize(pBMIH *graphicsgdi.BITMAPINFOHEADER, cbBufSize uint32, pcbImageSize *uint32, pbKnown *foundation.BOOL) foundation.HRESULT {
+func MFCalculateBitmapImageSize(pBMIH *graphicsgdi.BITMAPINFOHEADER, cbBufSize uint32, pcbImageSize *uint32, pbKnown *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procMFCalculateBitmapImageSize.Addr(), uintptr(unsafe.Pointer(pBMIH)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbImageSize)), uintptr(unsafe.Pointer(pbKnown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCalculateImageSize calls MFPlat!MFCalculateImageSize.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcalculateimagesize
 // Minimum OS: windows6.0.6000.
-func MFCalculateImageSize(guidSubtype *win32.GUID, unWidth uint32, unHeight uint32, pcbImageSize *uint32) foundation.HRESULT {
+func MFCalculateImageSize(guidSubtype *win32.GUID, unWidth uint32, unHeight uint32, pcbImageSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCalculateImageSize.Addr(), uintptr(unsafe.Pointer(guidSubtype)), uintptr(unWidth), uintptr(unHeight), uintptr(unsafe.Pointer(pcbImageSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCancelCreateFile calls MFPlat!MFCancelCreateFile.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcancelcreatefile
 // Minimum OS: windows6.0.6000.
-func MFCancelCreateFile(pCancelCookie *systemcom.IUnknown) foundation.HRESULT {
+func MFCancelCreateFile(pCancelCookie *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFCancelCreateFile.Addr(), uintptr(unsafe.Pointer(pCancelCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCancelWorkItem calls MFPlat!MFCancelWorkItem.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcancelworkitem
 // Minimum OS: windows6.0.6000.
-func MFCancelWorkItem(Key uint64) foundation.HRESULT {
+func MFCancelWorkItem(Key uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFCancelWorkItem.Addr(), uintptr(Key))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCombineSamples calls MFPlat!MFCombineSamples.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcombinesamples
 // Minimum OS: windows10.0.19041.
-func MFCombineSamples(pSample *IMFSample, pSampleToAdd *IMFSample, dwMaxMergedDurationInMS uint32, pMerged *foundation.BOOL) foundation.HRESULT {
+func MFCombineSamples(pSample *IMFSample, pSampleToAdd *IMFSample, dwMaxMergedDurationInMS uint32, pMerged *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procMFCombineSamples.Addr(), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(pSampleToAdd)), uintptr(dwMaxMergedDurationInMS), uintptr(unsafe.Pointer(pMerged)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCompareFullToPartialMediaType calls MFPlat!MFCompareFullToPartialMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcomparefulltopartialmediatype
 // Minimum OS: windows6.0.6000.
-func MFCompareFullToPartialMediaType(pMFTypeFull *IMFMediaType, pMFTypePartial *IMFMediaType) foundation.BOOL {
+func MFCompareFullToPartialMediaType(pMFTypeFull *IMFMediaType, pMFTypePartial *IMFMediaType) bool {
 	r1, _, _ := syscall.SyscallN(procMFCompareFullToPartialMediaType.Addr(), uintptr(unsafe.Pointer(pMFTypeFull)), uintptr(unsafe.Pointer(pMFTypePartial)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MFConvertColorInfoFromDXVA calls MFPlat!MFConvertColorInfoFromDXVA.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfconvertcolorinfofromdxva
 // Minimum OS: windows6.0.6000.
-func MFConvertColorInfoFromDXVA(pToFormat *MFVIDEOFORMAT, dwFromDXVA uint32) foundation.HRESULT {
+func MFConvertColorInfoFromDXVA(pToFormat *MFVIDEOFORMAT, dwFromDXVA uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFConvertColorInfoFromDXVA.Addr(), uintptr(unsafe.Pointer(pToFormat)), uintptr(dwFromDXVA))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFConvertColorInfoToDXVA calls MFPlat!MFConvertColorInfoToDXVA.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfconvertcolorinfotodxva
 // Minimum OS: windows6.0.6000.
-func MFConvertColorInfoToDXVA(pdwToDXVA *uint32, pFromFormat *MFVIDEOFORMAT) foundation.HRESULT {
+func MFConvertColorInfoToDXVA(pdwToDXVA *uint32, pFromFormat *MFVIDEOFORMAT) error {
 	r1, _, _ := syscall.SyscallN(procMFConvertColorInfoToDXVA.Addr(), uintptr(unsafe.Pointer(pdwToDXVA)), uintptr(unsafe.Pointer(pFromFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFConvertFromFP16Array calls MFPlat!MFConvertFromFP16Array.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfconvertfromfp16array
 // Minimum OS: windows6.0.6000.
-func MFConvertFromFP16Array(pDest *float32, pSrc *uint16, dwCount uint32) foundation.HRESULT {
+func MFConvertFromFP16Array(pDest *float32, pSrc *uint16, dwCount uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFConvertFromFP16Array.Addr(), uintptr(unsafe.Pointer(pDest)), uintptr(unsafe.Pointer(pSrc)), uintptr(dwCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFConvertToFP16Array calls MFPlat!MFConvertToFP16Array.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfconverttofp16array
 // Minimum OS: windows6.0.6000.
-func MFConvertToFP16Array(pDest *uint16, pSrc *float32, dwCount uint32) foundation.HRESULT {
+func MFConvertToFP16Array(pDest *uint16, pSrc *float32, dwCount uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFConvertToFP16Array.Addr(), uintptr(unsafe.Pointer(pDest)), uintptr(unsafe.Pointer(pSrc)), uintptr(dwCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCopyImage calls MFPlat!MFCopyImage.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcopyimage
 // Minimum OS: windows6.0.6000.
-func MFCopyImage(pDest *byte, lDestStride int32, pSrc *byte, lSrcStride int32, dwWidthInBytes uint32, dwLines uint32) foundation.HRESULT {
+func MFCopyImage(pDest *byte, lDestStride int32, pSrc *byte, lSrcStride int32, dwWidthInBytes uint32, dwLines uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCopyImage.Addr(), uintptr(unsafe.Pointer(pDest)), uintptr(lDestStride), uintptr(unsafe.Pointer(pSrc)), uintptr(lSrcStride), uintptr(dwWidthInBytes), uintptr(dwLines))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreate2DMediaBuffer calls MFPlat!MFCreate2DMediaBuffer.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreate2dmediabuffer
 // Minimum OS: windows8.0.
-func MFCreate2DMediaBuffer(dwWidth uint32, dwHeight uint32, dwFourCC uint32, fBottomUp foundation.BOOL, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreate2DMediaBuffer.Addr(), uintptr(dwWidth), uintptr(dwHeight), uintptr(dwFourCC), uintptr(fBottomUp), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+func MFCreate2DMediaBuffer(dwWidth uint32, dwHeight uint32, dwFourCC uint32, fBottomUp bool, ppBuffer **IMFMediaBuffer) error {
+	_fBottomUp := win32.Bool32(fBottomUp)
+	r1, _, _ := syscall.SyscallN(procMFCreate2DMediaBuffer.Addr(), uintptr(dwWidth), uintptr(dwHeight), uintptr(dwFourCC), uintptr(_fBottomUp), uintptr(unsafe.Pointer(ppBuffer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreate3GPMediaSink calls MF!MFCreate3GPMediaSink.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreate3gpmediasink
 // Minimum OS: windows6.1.
-func MFCreate3GPMediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreate3GPMediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreate3GPMediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(pVideoMediaType)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateAC3MediaSink calls MF!MFCreateAC3MediaSink.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateac3mediasink
 // Minimum OS: windows8.0.
-func MFCreateAC3MediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateAC3MediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAC3MediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateADTSMediaSink calls MF!MFCreateADTSMediaSink.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateadtsmediasink
 // Minimum OS: windows8.0.
-func MFCreateADTSMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateADTSMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateADTSMediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFContentInfo calls MF!MFCreateASFContentInfo.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfcontentinfo
 // Minimum OS: windows6.0.6000.
-func MFCreateASFContentInfo(ppIContentInfo **IMFASFContentInfo) foundation.HRESULT {
+func MFCreateASFContentInfo(ppIContentInfo **IMFASFContentInfo) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFContentInfo.Addr(), uintptr(unsafe.Pointer(ppIContentInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFIndexer calls MF!MFCreateASFIndexer.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfindexer
 // Minimum OS: windows6.0.6000.
-func MFCreateASFIndexer(ppIIndexer **IMFASFIndexer) foundation.HRESULT {
+func MFCreateASFIndexer(ppIIndexer **IMFASFIndexer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFIndexer.Addr(), uintptr(unsafe.Pointer(ppIIndexer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFIndexerByteStream calls MF!MFCreateASFIndexerByteStream.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfindexerbytestream
 // Minimum OS: windows6.0.6000.
-func MFCreateASFIndexerByteStream(pIContentByteStream *IMFByteStream, cbIndexStartOffset uint64, pIIndexByteStream **IMFByteStream) foundation.HRESULT {
+func MFCreateASFIndexerByteStream(pIContentByteStream *IMFByteStream, cbIndexStartOffset uint64, pIIndexByteStream **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFIndexerByteStream.Addr(), uintptr(unsafe.Pointer(pIContentByteStream)), uintptr(cbIndexStartOffset), uintptr(unsafe.Pointer(pIIndexByteStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFMediaSink calls MF!MFCreateASFMediaSink.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfmediasink
 // Minimum OS: windows6.0.6000.
-func MFCreateASFMediaSink(pIByteStream *IMFByteStream, ppIMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateASFMediaSink(pIByteStream *IMFByteStream, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFMediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFMediaSinkActivate calls MF!MFCreateASFMediaSinkActivate.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfmediasinkactivate
 // Minimum OS: windows6.0.6000.
-func MFCreateASFMediaSinkActivate(pwszFileName foundation.PWSTR, pContentInfo *IMFASFContentInfo, ppIActivate **IMFActivate) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateASFMediaSinkActivate.Addr(), uintptr(unsafe.Pointer(pwszFileName)), uintptr(unsafe.Pointer(pContentInfo)), uintptr(unsafe.Pointer(ppIActivate)))
-	return foundation.HRESULT(r1)
+func MFCreateASFMediaSinkActivate(pwszFileName string, pContentInfo *IMFASFContentInfo, ppIActivate **IMFActivate) error {
+	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+	r1, _, _ := syscall.SyscallN(procMFCreateASFMediaSinkActivate.Addr(), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(pContentInfo)), uintptr(unsafe.Pointer(ppIActivate)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFMultiplexer calls MF!MFCreateASFMultiplexer.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfmultiplexer
 // Minimum OS: windows6.0.6000.
-func MFCreateASFMultiplexer(ppIMultiplexer **IMFASFMultiplexer) foundation.HRESULT {
+func MFCreateASFMultiplexer(ppIMultiplexer **IMFASFMultiplexer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFMultiplexer.Addr(), uintptr(unsafe.Pointer(ppIMultiplexer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFProfile calls MF!MFCreateASFProfile.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfprofile
 // Minimum OS: windows6.0.6000.
-func MFCreateASFProfile(ppIProfile **IMFASFProfile) foundation.HRESULT {
+func MFCreateASFProfile(ppIProfile **IMFASFProfile) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFProfile.Addr(), uintptr(unsafe.Pointer(ppIProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFProfileFromPresentationDescriptor calls MF!MFCreateASFProfileFromPresentationDescriptor.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfprofilefrompresentationdescriptor
 // Minimum OS: windows6.0.6000.
-func MFCreateASFProfileFromPresentationDescriptor(pIPD *IMFPresentationDescriptor, ppIProfile **IMFASFProfile) foundation.HRESULT {
+func MFCreateASFProfileFromPresentationDescriptor(pIPD *IMFPresentationDescriptor, ppIProfile **IMFASFProfile) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFProfileFromPresentationDescriptor.Addr(), uintptr(unsafe.Pointer(pIPD)), uintptr(unsafe.Pointer(ppIProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFSplitter calls MF!MFCreateASFSplitter.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfsplitter
 // Minimum OS: windows6.0.6000.
-func MFCreateASFSplitter(ppISplitter **IMFASFSplitter) foundation.HRESULT {
+func MFCreateASFSplitter(ppISplitter **IMFASFSplitter) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFSplitter.Addr(), uintptr(unsafe.Pointer(ppISplitter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFStreamSelector calls MF!MFCreateASFStreamSelector.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfstreamselector
 // Minimum OS: windows6.0.6000.
-func MFCreateASFStreamSelector(pIASFProfile *IMFASFProfile, ppSelector **IMFASFStreamSelector) foundation.HRESULT {
+func MFCreateASFStreamSelector(pIASFProfile *IMFASFProfile, ppSelector **IMFASFStreamSelector) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFStreamSelector.Addr(), uintptr(unsafe.Pointer(pIASFProfile)), uintptr(unsafe.Pointer(ppSelector)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFStreamingMediaSink calls MF!MFCreateASFStreamingMediaSink.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfstreamingmediasink
 // Minimum OS: windows6.1.
-func MFCreateASFStreamingMediaSink(pIByteStream *IMFByteStream, ppIMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateASFStreamingMediaSink(pIByteStream *IMFByteStream, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFStreamingMediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateASFStreamingMediaSinkActivate calls MF!MFCreateASFStreamingMediaSinkActivate.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreateasfstreamingmediasinkactivate
 // Minimum OS: windows6.1.
-func MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate *IMFActivate, pContentInfo *IMFASFContentInfo, ppIActivate **IMFActivate) foundation.HRESULT {
+func MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate *IMFActivate, pContentInfo *IMFASFContentInfo, ppIActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateASFStreamingMediaSinkActivate.Addr(), uintptr(unsafe.Pointer(pByteStreamActivate)), uintptr(unsafe.Pointer(pContentInfo)), uintptr(unsafe.Pointer(ppIActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateAVIMediaSink calls mfsrcsnk!MFCreateAVIMediaSink.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateavimediasink
 // Minimum OS: windows8.1.
-func MFCreateAVIMediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateAVIMediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAVIMediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(pVideoMediaType)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateAggregateSource calls MF!MFCreateAggregateSource.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateaggregatesource
 // Minimum OS: windows6.1.
-func MFCreateAggregateSource(pSourceCollection *IMFCollection, ppAggSource **IMFMediaSource) foundation.HRESULT {
+func MFCreateAggregateSource(pSourceCollection *IMFCollection, ppAggSource **IMFMediaSource) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAggregateSource.Addr(), uintptr(unsafe.Pointer(pSourceCollection)), uintptr(unsafe.Pointer(ppAggSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateAlignedMemoryBuffer calls MFPlat!MFCreateAlignedMemoryBuffer.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatealignedmemorybuffer
 // Minimum OS: windows6.0.6000.
-func MFCreateAlignedMemoryBuffer(cbMaxLength uint32, cbAligment uint32, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
+func MFCreateAlignedMemoryBuffer(cbMaxLength uint32, cbAligment uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAlignedMemoryBuffer.Addr(), uintptr(cbMaxLength), uintptr(cbAligment), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateAsyncResult calls MFPlat!MFCreateAsyncResult.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreateasyncresult
 // Minimum OS: windows6.0.6000.
-func MFCreateAsyncResult(punkObject *systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown, ppAsyncResult **IMFAsyncResult) foundation.HRESULT {
+func MFCreateAsyncResult(punkObject *systemcom.IUnknown, pCallback *IMFAsyncCallback, punkState *systemcom.IUnknown, ppAsyncResult **IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAsyncResult.Addr(), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(punkState)), uintptr(unsafe.Pointer(ppAsyncResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateAttributes calls MFPlat!MFCreateAttributes.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreateattributes
 // Minimum OS: windows6.0.6000.
-func MFCreateAttributes(ppMFAttributes **IMFAttributes, cInitialSize uint32) foundation.HRESULT {
+func MFCreateAttributes(ppMFAttributes **IMFAttributes, cInitialSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAttributes.Addr(), uintptr(unsafe.Pointer(ppMFAttributes)), uintptr(cInitialSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateAudioMediaType calls MFPlat!MFCreateAudioMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreateaudiomediatype
 // Minimum OS: windows6.0.6000.
-func MFCreateAudioMediaType(pAudioFormat unsafe.Pointer, ppIAudioMediaType **IMFAudioMediaType) foundation.HRESULT {
+func MFCreateAudioMediaType(pAudioFormat unsafe.Pointer, ppIAudioMediaType **IMFAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAudioMediaType.Addr(), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(ppIAudioMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateAudioRenderer calls MF!MFCreateAudioRenderer.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateaudiorenderer
 // Minimum OS: windows6.0.6000.
-func MFCreateAudioRenderer(pAudioAttributes *IMFAttributes, ppSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateAudioRenderer(pAudioAttributes *IMFAttributes, ppSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAudioRenderer.Addr(), uintptr(unsafe.Pointer(pAudioAttributes)), uintptr(unsafe.Pointer(ppSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateAudioRendererActivate calls MF!MFCreateAudioRendererActivate.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateaudiorendereractivate
 // Minimum OS: windows6.0.6000.
-func MFCreateAudioRendererActivate(ppActivate **IMFActivate) foundation.HRESULT {
+func MFCreateAudioRendererActivate(ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAudioRendererActivate.Addr(), uintptr(unsafe.Pointer(ppActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateCameraControlMonitor calls MFSENSORGROUP!MFCreateCameraControlMonitor.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatecameracontrolmonitor
-func MFCreateCameraControlMonitor(symbolicLink foundation.PWSTR, callback *IMFCameraControlNotify, ppCameraControlMonitor **IMFCameraControlMonitor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateCameraControlMonitor.Addr(), uintptr(unsafe.Pointer(symbolicLink)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(ppCameraControlMonitor)))
-	return foundation.HRESULT(r1)
+func MFCreateCameraControlMonitor(symbolicLink string, callback *IMFCameraControlNotify, ppCameraControlMonitor **IMFCameraControlMonitor) error {
+	_symbolicLink := win32.UTF16Ptr(symbolicLink)
+	r1, _, _ := syscall.SyscallN(procMFCreateCameraControlMonitor.Addr(), uintptr(unsafe.Pointer(_symbolicLink)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(ppCameraControlMonitor)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateCameraOcclusionStateMonitor calls MFSENSORGROUP!MFCreateCameraOcclusionStateMonitor.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatecameraocclusionstatemonitor
-func MFCreateCameraOcclusionStateMonitor(symbolicLink foundation.PWSTR, callback *IMFCameraOcclusionStateReportCallback, occlusionStateMonitor **IMFCameraOcclusionStateMonitor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateCameraOcclusionStateMonitor.Addr(), uintptr(unsafe.Pointer(symbolicLink)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(occlusionStateMonitor)))
-	return foundation.HRESULT(r1)
+func MFCreateCameraOcclusionStateMonitor(symbolicLink string, callback *IMFCameraOcclusionStateReportCallback, occlusionStateMonitor **IMFCameraOcclusionStateMonitor) error {
+	_symbolicLink := win32.UTF16Ptr(symbolicLink)
+	r1, _, _ := syscall.SyscallN(procMFCreateCameraOcclusionStateMonitor.Addr(), uintptr(unsafe.Pointer(_symbolicLink)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(occlusionStateMonitor)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateCollection calls MFPlat!MFCreateCollection.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatecollection
 // Minimum OS: windows6.0.6000.
-func MFCreateCollection(ppIMFCollection **IMFCollection) foundation.HRESULT {
+func MFCreateCollection(ppIMFCollection **IMFCollection) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateCollection.Addr(), uintptr(unsafe.Pointer(ppIMFCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateContentDecryptorContext calls MFPlat!MFCreateContentDecryptorContext.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatecontentdecryptorcontext
 // Minimum OS: windows10.0.10240.
-func MFCreateContentDecryptorContext(guidMediaProtectionSystemId *win32.GUID, pD3DManager *IMFDXGIDeviceManager, pContentProtectionDevice *IMFContentProtectionDevice, ppContentDecryptorContext **IMFContentDecryptorContext) foundation.HRESULT {
+func MFCreateContentDecryptorContext(guidMediaProtectionSystemId *win32.GUID, pD3DManager *IMFDXGIDeviceManager, pContentProtectionDevice *IMFContentProtectionDevice, ppContentDecryptorContext **IMFContentDecryptorContext) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateContentDecryptorContext.Addr(), uintptr(unsafe.Pointer(guidMediaProtectionSystemId)), uintptr(unsafe.Pointer(pD3DManager)), uintptr(unsafe.Pointer(pContentProtectionDevice)), uintptr(unsafe.Pointer(ppContentDecryptorContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateContentProtectionDevice calls MFPlat!MFCreateContentProtectionDevice.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatecontentprotectiondevice
 // Minimum OS: windows10.0.10240.
-func MFCreateContentProtectionDevice(ProtectionSystemId *win32.GUID, ContentProtectionDevice **IMFContentProtectionDevice) foundation.HRESULT {
+func MFCreateContentProtectionDevice(ProtectionSystemId *win32.GUID, ContentProtectionDevice **IMFContentProtectionDevice) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateContentProtectionDevice.Addr(), uintptr(unsafe.Pointer(ProtectionSystemId)), uintptr(unsafe.Pointer(ContentProtectionDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateCredentialCache calls MF!MFCreateCredentialCache.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatecredentialcache
 // Minimum OS: windows6.0.6000.
-func MFCreateCredentialCache(ppCache **IMFNetCredentialCache) foundation.HRESULT {
+func MFCreateCredentialCache(ppCache **IMFNetCredentialCache) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateCredentialCache.Addr(), uintptr(unsafe.Pointer(ppCache)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateD3D12SynchronizationObject calls MFPlat!MFCreateD3D12SynchronizationObject.
 // https://learn.microsoft.com/windows/win32/api/mfd3d12/nf-mfd3d12-mfcreated3d12synchronizationobject
-func MFCreateD3D12SynchronizationObject(pDevice *graphicsdirect3d12.ID3D12Device, riid *win32.GUID, ppvSyncObject *unsafe.Pointer) foundation.HRESULT {
+func MFCreateD3D12SynchronizationObject(pDevice *graphicsdirect3d12.ID3D12Device, riid *win32.GUID, ppvSyncObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateD3D12SynchronizationObject.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvSyncObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateDXGICrossAdapterBuffer calls MFPlat.DLL!MFCreateDXGICrossAdapterBuffer.
-func MFCreateDXGICrossAdapterBuffer(riid *win32.GUID, punkDevice *systemcom.IUnknown, pMediaType *IMFMediaType, uSubresource uint32, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
+func MFCreateDXGICrossAdapterBuffer(riid *win32.GUID, punkDevice *systemcom.IUnknown, pMediaType *IMFMediaType, uSubresource uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateDXGICrossAdapterBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkDevice)), uintptr(unsafe.Pointer(pMediaType)), uintptr(uSubresource), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateDXGIDeviceManager calls MFPlat!MFCreateDXGIDeviceManager.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatedxgidevicemanager
 // Minimum OS: windows8.0.
-func MFCreateDXGIDeviceManager(resetToken *uint32, ppDeviceManager **IMFDXGIDeviceManager) foundation.HRESULT {
+func MFCreateDXGIDeviceManager(resetToken *uint32, ppDeviceManager **IMFDXGIDeviceManager) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateDXGIDeviceManager.Addr(), uintptr(unsafe.Pointer(resetToken)), uintptr(unsafe.Pointer(ppDeviceManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateDXGISurfaceBuffer calls MFPlat!MFCreateDXGISurfaceBuffer.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatedxgisurfacebuffer
 // Minimum OS: windows8.0.
-func MFCreateDXGISurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, uSubresourceIndex uint32, fBottomUpWhenLinear foundation.BOOL, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateDXGISurfaceBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkSurface)), uintptr(uSubresourceIndex), uintptr(fBottomUpWhenLinear), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+func MFCreateDXGISurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, uSubresourceIndex uint32, fBottomUpWhenLinear bool, ppBuffer **IMFMediaBuffer) error {
+	_fBottomUpWhenLinear := win32.Bool32(fBottomUpWhenLinear)
+	r1, _, _ := syscall.SyscallN(procMFCreateDXGISurfaceBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkSurface)), uintptr(uSubresourceIndex), uintptr(_fBottomUpWhenLinear), uintptr(unsafe.Pointer(ppBuffer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateDXSurfaceBuffer calls MFPlat!MFCreateDXSurfaceBuffer.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatedxsurfacebuffer
 // Minimum OS: windows6.0.6000.
-func MFCreateDXSurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, fBottomUpWhenLinear foundation.BOOL, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateDXSurfaceBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkSurface)), uintptr(fBottomUpWhenLinear), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+func MFCreateDXSurfaceBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, fBottomUpWhenLinear bool, ppBuffer **IMFMediaBuffer) error {
+	_fBottomUpWhenLinear := win32.Bool32(fBottomUpWhenLinear)
+	r1, _, _ := syscall.SyscallN(procMFCreateDXSurfaceBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkSurface)), uintptr(_fBottomUpWhenLinear), uintptr(unsafe.Pointer(ppBuffer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateDeviceSource calls MF!MFCreateDeviceSource.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatedevicesource
 // Minimum OS: windows6.1.
-func MFCreateDeviceSource(pAttributes *IMFAttributes, ppSource **IMFMediaSource) foundation.HRESULT {
+func MFCreateDeviceSource(pAttributes *IMFAttributes, ppSource **IMFMediaSource) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateDeviceSource.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateDeviceSourceActivate calls MF!MFCreateDeviceSourceActivate.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatedevicesourceactivate
 // Minimum OS: windows6.1.
-func MFCreateDeviceSourceActivate(pAttributes *IMFAttributes, ppActivate **IMFActivate) foundation.HRESULT {
+func MFCreateDeviceSourceActivate(pAttributes *IMFAttributes, ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateDeviceSourceActivate.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateEncryptedMediaExtensionsStoreActivate calls MF!MFCreateEncryptedMediaExtensionsStoreActivate.
 // https://learn.microsoft.com/windows/win32/api/mfcontentdecryptionmodule/nf-mfcontentdecryptionmodule-mfcreateencryptedmediaextensionsstoreactivate
 // Minimum OS: windows10.0.19041.
-func MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost *IMFPMPHostApp, objectStream *systemcom.IStream, classId foundation.PWSTR, activate **IMFActivate) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateEncryptedMediaExtensionsStoreActivate.Addr(), uintptr(unsafe.Pointer(pmpHost)), uintptr(unsafe.Pointer(objectStream)), uintptr(unsafe.Pointer(classId)), uintptr(unsafe.Pointer(activate)))
-	return foundation.HRESULT(r1)
+func MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost *IMFPMPHostApp, objectStream *systemcom.IStream, classId string, activate **IMFActivate) error {
+	_classId := win32.UTF16Ptr(classId)
+	r1, _, _ := syscall.SyscallN(procMFCreateEncryptedMediaExtensionsStoreActivate.Addr(), uintptr(unsafe.Pointer(pmpHost)), uintptr(unsafe.Pointer(objectStream)), uintptr(unsafe.Pointer(_classId)), uintptr(unsafe.Pointer(activate)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateEventQueue calls MFPlat!MFCreateEventQueue.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreateeventqueue
 // Minimum OS: windows6.0.6000.
-func MFCreateEventQueue(ppMediaEventQueue **IMFMediaEventQueue) foundation.HRESULT {
+func MFCreateEventQueue(ppMediaEventQueue **IMFMediaEventQueue) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateEventQueue.Addr(), uintptr(unsafe.Pointer(ppMediaEventQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateExtendedCameraIntrinsicModel calls MFCORE!MFCreateExtendedCameraIntrinsicModel.
-func MFCreateExtendedCameraIntrinsicModel(distortionModelType MFCameraIntrinsic_DistortionModelType, ppExtendedCameraIntrinsicModel **IMFExtendedCameraIntrinsicModel) foundation.HRESULT {
+func MFCreateExtendedCameraIntrinsicModel(distortionModelType MFCameraIntrinsic_DistortionModelType, ppExtendedCameraIntrinsicModel **IMFExtendedCameraIntrinsicModel) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateExtendedCameraIntrinsicModel.Addr(), uintptr(distortionModelType), uintptr(unsafe.Pointer(ppExtendedCameraIntrinsicModel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateExtendedCameraIntrinsics calls MFCORE!MFCreateExtendedCameraIntrinsics.
-func MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics **IMFExtendedCameraIntrinsics) foundation.HRESULT {
+func MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics **IMFExtendedCameraIntrinsics) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateExtendedCameraIntrinsics.Addr(), uintptr(unsafe.Pointer(ppExtendedCameraIntrinsics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateFMPEG4MediaSink calls MF!MFCreateFMPEG4MediaSink.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatefmpeg4mediasink
 // Minimum OS: windows8.0.
-func MFCreateFMPEG4MediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateFMPEG4MediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateFMPEG4MediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(pVideoMediaType)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateFile calls MFPlat!MFCreateFile.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatefile
 // Minimum OS: windows6.0.6000.
-func MFCreateFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFlags MF_FILE_FLAGS, pwszFileURL foundation.PWSTR, ppIByteStream **IMFByteStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateFile.Addr(), uintptr(AccessMode), uintptr(OpenMode), uintptr(fFlags), uintptr(unsafe.Pointer(pwszFileURL)), uintptr(unsafe.Pointer(ppIByteStream)))
-	return foundation.HRESULT(r1)
+func MFCreateFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFlags MF_FILE_FLAGS, pwszFileURL string, ppIByteStream **IMFByteStream) error {
+	_pwszFileURL := win32.UTF16Ptr(pwszFileURL)
+	r1, _, _ := syscall.SyscallN(procMFCreateFile.Addr(), uintptr(AccessMode), uintptr(OpenMode), uintptr(fFlags), uintptr(unsafe.Pointer(_pwszFileURL)), uintptr(unsafe.Pointer(ppIByteStream)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateLegacyMediaBufferOnMFMediaBuffer calls MFPlat!MFCreateLegacyMediaBufferOnMFMediaBuffer.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatelegacymediabufferonmfmediabuffer
 // Minimum OS: windows6.0.6000.
-func MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample *IMFSample, pMFMediaBuffer *IMFMediaBuffer, cbOffset uint32, ppMediaBuffer **mediadxmediaobjects.IMediaBuffer) foundation.HRESULT {
+func MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample *IMFSample, pMFMediaBuffer *IMFMediaBuffer, cbOffset uint32, ppMediaBuffer **mediadxmediaobjects.IMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateLegacyMediaBufferOnMFMediaBuffer.Addr(), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(pMFMediaBuffer)), uintptr(cbOffset), uintptr(unsafe.Pointer(ppMediaBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMFByteStreamOnStream calls MFPlat!MFCreateMFByteStreamOnStream.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemfbytestreamonstream
 // Minimum OS: windows6.1.
-func MFCreateMFByteStreamOnStream(pStream *systemcom.IStream, ppByteStream **IMFByteStream) foundation.HRESULT {
+func MFCreateMFByteStreamOnStream(pStream *systemcom.IStream, ppByteStream **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMFByteStreamOnStream.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(ppByteStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMFByteStreamOnStreamEx calls MFPlat!MFCreateMFByteStreamOnStreamEx.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemfbytestreamonstreamex
 // Minimum OS: windows8.0.
-func MFCreateMFByteStreamOnStreamEx(punkStream *systemcom.IUnknown, ppByteStream **IMFByteStream) foundation.HRESULT {
+func MFCreateMFByteStreamOnStreamEx(punkStream *systemcom.IUnknown, ppByteStream **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMFByteStreamOnStreamEx.Addr(), uintptr(unsafe.Pointer(punkStream)), uintptr(unsafe.Pointer(ppByteStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMFByteStreamWrapper calls MFPlat!MFCreateMFByteStreamWrapper.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemfbytestreamwrapper
 // Minimum OS: windows8.0.
-func MFCreateMFByteStreamWrapper(pStream *IMFByteStream, ppStreamWrapper **IMFByteStream) foundation.HRESULT {
+func MFCreateMFByteStreamWrapper(pStream *IMFByteStream, ppStreamWrapper **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMFByteStreamWrapper.Addr(), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(ppStreamWrapper)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMFVideoFormatFromMFMediaType calls MFPlat!MFCreateMFVideoFormatFromMFMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemfvideoformatfrommfmediatype
 // Minimum OS: windows6.0.6000.
-func MFCreateMFVideoFormatFromMFMediaType(pMFType *IMFMediaType, ppMFVF **MFVIDEOFORMAT, pcbSize *uint32) foundation.HRESULT {
+func MFCreateMFVideoFormatFromMFMediaType(pMFType *IMFMediaType, ppMFVF **MFVIDEOFORMAT, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMFVideoFormatFromMFMediaType.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(ppMFVF)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMP3MediaSink calls MF!MFCreateMP3MediaSink.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemp3mediasink
 // Minimum OS: windows6.1.
-func MFCreateMP3MediaSink(pTargetByteStream *IMFByteStream, ppMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateMP3MediaSink(pTargetByteStream *IMFByteStream, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMP3MediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(ppMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMPEG4MediaSink calls MF!MFCreateMPEG4MediaSink.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatempeg4mediasink
 // Minimum OS: windows6.1.
-func MFCreateMPEG4MediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateMPEG4MediaSink(pIByteStream *IMFByteStream, pVideoMediaType *IMFMediaType, pAudioMediaType *IMFMediaType, ppIMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMPEG4MediaSink.Addr(), uintptr(unsafe.Pointer(pIByteStream)), uintptr(unsafe.Pointer(pVideoMediaType)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppIMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMediaBufferFromMediaType calls MFPlat!MFCreateMediaBufferFromMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediabufferfrommediatype
 // Minimum OS: windows8.0.
-func MFCreateMediaBufferFromMediaType(pMediaType *IMFMediaType, llDuration int64, dwMinLength uint32, dwMinAlignment uint32, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
+func MFCreateMediaBufferFromMediaType(pMediaType *IMFMediaType, llDuration int64, dwMinLength uint32, dwMinAlignment uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaBufferFromMediaType.Addr(), uintptr(unsafe.Pointer(pMediaType)), uintptr(llDuration), uintptr(dwMinLength), uintptr(dwMinAlignment), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMediaBufferWrapper calls MFPlat!MFCreateMediaBufferWrapper.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediabufferwrapper
 // Minimum OS: windows6.0.6000.
-func MFCreateMediaBufferWrapper(pBuffer *IMFMediaBuffer, cbOffset uint32, dwLength uint32, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
+func MFCreateMediaBufferWrapper(pBuffer *IMFMediaBuffer, cbOffset uint32, dwLength uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaBufferWrapper.Addr(), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbOffset), uintptr(dwLength), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMediaEvent calls MFPlat!MFCreateMediaEvent.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediaevent
 // Minimum OS: windows6.0.6000.
-func MFCreateMediaEvent(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pvValue *systemcomstructuredstorage.PROPVARIANT, ppEvent **IMFMediaEvent) foundation.HRESULT {
+func MFCreateMediaEvent(met uint32, guidExtendedType *win32.GUID, hrStatus foundation.HRESULT, pvValue *systemcomstructuredstorage.PROPVARIANT, ppEvent **IMFMediaEvent) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaEvent.Addr(), uintptr(met), uintptr(unsafe.Pointer(guidExtendedType)), uintptr(hrStatus), uintptr(unsafe.Pointer(pvValue)), uintptr(unsafe.Pointer(ppEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMediaExtensionActivate calls MFPlat!MFCreateMediaExtensionActivate.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediaextensionactivate
 // Minimum OS: windows8.0.
-func MFCreateMediaExtensionActivate(szActivatableClassId foundation.PWSTR, pConfiguration *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateMediaExtensionActivate.Addr(), uintptr(unsafe.Pointer(szActivatableClassId)), uintptr(unsafe.Pointer(pConfiguration)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+func MFCreateMediaExtensionActivate(szActivatableClassId string, pConfiguration *systemcom.IUnknown, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
+	_szActivatableClassId := win32.UTF16Ptr(szActivatableClassId)
+	r1, _, _ := syscall.SyscallN(procMFCreateMediaExtensionActivate.Addr(), uintptr(unsafe.Pointer(_szActivatableClassId)), uintptr(unsafe.Pointer(pConfiguration)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMediaSession calls MF!MFCreateMediaSession.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemediasession
 // Minimum OS: windows6.0.6000.
-func MFCreateMediaSession(pConfiguration *IMFAttributes, ppMediaSession **IMFMediaSession) foundation.HRESULT {
+func MFCreateMediaSession(pConfiguration *IMFAttributes, ppMediaSession **IMFMediaSession) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaSession.Addr(), uintptr(unsafe.Pointer(pConfiguration)), uintptr(unsafe.Pointer(ppMediaSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMediaType calls MFPlat!MFCreateMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediatype
 // Minimum OS: windows6.0.6000.
-func MFCreateMediaType(ppMFType **IMFMediaType) foundation.HRESULT {
+func MFCreateMediaType(ppMFType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaType.Addr(), uintptr(unsafe.Pointer(ppMFType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMediaTypeFromProperties calls MFPlat!MFCreateMediaTypeFromProperties.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemediatypefromproperties
 // Minimum OS: windows8.0.
-func MFCreateMediaTypeFromProperties(punkStream *systemcom.IUnknown, ppMediaType **IMFMediaType) foundation.HRESULT {
+func MFCreateMediaTypeFromProperties(punkStream *systemcom.IUnknown, ppMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMediaTypeFromProperties.Addr(), uintptr(unsafe.Pointer(punkStream)), uintptr(unsafe.Pointer(ppMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMemoryBuffer calls MFPlat!MFCreateMemoryBuffer.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatememorybuffer
 // Minimum OS: windows6.0.6000.
-func MFCreateMemoryBuffer(cbMaxLength uint32, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
+func MFCreateMemoryBuffer(cbMaxLength uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMemoryBuffer.Addr(), uintptr(cbMaxLength), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMuxStreamAttributes calls MFPlat!MFCreateMuxStreamAttributes.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemuxstreamattributes
 // Minimum OS: windows10.0.15063.
-func MFCreateMuxStreamAttributes(pAttributesToMux *IMFCollection, ppMuxAttribs **IMFAttributes) foundation.HRESULT {
+func MFCreateMuxStreamAttributes(pAttributesToMux *IMFCollection, ppMuxAttribs **IMFAttributes) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMuxStreamAttributes.Addr(), uintptr(unsafe.Pointer(pAttributesToMux)), uintptr(unsafe.Pointer(ppMuxAttribs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMuxStreamMediaType calls MFPlat!MFCreateMuxStreamMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemuxstreammediatype
 // Minimum OS: windows10.0.15063.
-func MFCreateMuxStreamMediaType(pMediaTypesToMux *IMFCollection, ppMuxMediaType **IMFMediaType) foundation.HRESULT {
+func MFCreateMuxStreamMediaType(pMediaTypesToMux *IMFCollection, ppMuxMediaType **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMuxStreamMediaType.Addr(), uintptr(unsafe.Pointer(pMediaTypesToMux)), uintptr(unsafe.Pointer(ppMuxMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateMuxStreamSample calls MFPlat!MFCreateMuxStreamSample.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemuxstreamsample
 // Minimum OS: windows10.0.15063.
-func MFCreateMuxStreamSample(pSamplesToMux *IMFCollection, ppMuxSample **IMFSample) foundation.HRESULT {
+func MFCreateMuxStreamSample(pSamplesToMux *IMFCollection, ppMuxSample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMuxStreamSample.Addr(), uintptr(unsafe.Pointer(pSamplesToMux)), uintptr(unsafe.Pointer(ppMuxSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateNetSchemePlugin calls MF!MFCreateNetSchemePlugin.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatenetschemeplugin
 // Minimum OS: windows6.0.6000.
-func MFCreateNetSchemePlugin(riid *win32.GUID, ppvHandler *unsafe.Pointer) foundation.HRESULT {
+func MFCreateNetSchemePlugin(riid *win32.GUID, ppvHandler *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateNetSchemePlugin.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreatePMPMediaSession calls MF!MFCreatePMPMediaSession.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatepmpmediasession
 // Minimum OS: windows6.0.6000.
-func MFCreatePMPMediaSession(dwCreationFlags uint32, pConfiguration *IMFAttributes, ppMediaSession **IMFMediaSession, ppEnablerActivate **IMFActivate) foundation.HRESULT {
+func MFCreatePMPMediaSession(dwCreationFlags uint32, pConfiguration *IMFAttributes, ppMediaSession **IMFMediaSession, ppEnablerActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePMPMediaSession.Addr(), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(pConfiguration)), uintptr(unsafe.Pointer(ppMediaSession)), uintptr(unsafe.Pointer(ppEnablerActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreatePMPServer calls MF!MFCreatePMPServer.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatepmpserver
 // Minimum OS: windows6.0.6000.
-func MFCreatePMPServer(dwCreationFlags uint32, ppPMPServer **IMFPMPServer) foundation.HRESULT {
+func MFCreatePMPServer(dwCreationFlags uint32, ppPMPServer **IMFPMPServer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePMPServer.Addr(), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(ppPMPServer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreatePresentationClock calls MF!MFCreatePresentationClock.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatepresentationclock
 // Minimum OS: windows6.0.6000.
-func MFCreatePresentationClock(ppPresentationClock **IMFPresentationClock) foundation.HRESULT {
+func MFCreatePresentationClock(ppPresentationClock **IMFPresentationClock) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePresentationClock.Addr(), uintptr(unsafe.Pointer(ppPresentationClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreatePresentationDescriptor calls MFPlat!MFCreatePresentationDescriptor.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatepresentationdescriptor
 // Minimum OS: windows6.0.6000.
-func MFCreatePresentationDescriptor(cStreamDescriptors uint32, apStreamDescriptors **IMFStreamDescriptor, ppPresentationDescriptor **IMFPresentationDescriptor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreatePresentationDescriptor.Addr(), uintptr(cStreamDescriptors), uintptr(unsafe.Pointer(apStreamDescriptors)), uintptr(unsafe.Pointer(ppPresentationDescriptor)))
-	return foundation.HRESULT(r1)
+func MFCreatePresentationDescriptor(apStreamDescriptors []*IMFStreamDescriptor, ppPresentationDescriptor **IMFPresentationDescriptor) error {
+	var _apStreamDescriptors **IMFStreamDescriptor
+	if len(apStreamDescriptors) > 0 {
+		_apStreamDescriptors = &apStreamDescriptors[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFCreatePresentationDescriptor.Addr(), uintptr(len(apStreamDescriptors)), uintptr(unsafe.Pointer(_apStreamDescriptors)), uintptr(unsafe.Pointer(ppPresentationDescriptor)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreatePresentationDescriptorFromASFProfile calls MF!MFCreatePresentationDescriptorFromASFProfile.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreatepresentationdescriptorfromasfprofile
 // Minimum OS: windows6.0.6000.
-func MFCreatePresentationDescriptorFromASFProfile(pIProfile *IMFASFProfile, ppIPD **IMFPresentationDescriptor) foundation.HRESULT {
+func MFCreatePresentationDescriptorFromASFProfile(pIProfile *IMFASFProfile, ppIPD **IMFPresentationDescriptor) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePresentationDescriptorFromASFProfile.Addr(), uintptr(unsafe.Pointer(pIProfile)), uintptr(unsafe.Pointer(ppIPD)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreatePropertiesFromMediaType calls MFPlat!MFCreatePropertiesFromMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatepropertiesfrommediatype
 // Minimum OS: windows8.0.
-func MFCreatePropertiesFromMediaType(pMediaType *IMFMediaType, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func MFCreatePropertiesFromMediaType(pMediaType *IMFMediaType, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreatePropertiesFromMediaType.Addr(), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateProtectedEnvironmentAccess calls MF!MFCreateProtectedEnvironmentAccess.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateprotectedenvironmentaccess
 // Minimum OS: windows8.0.
-func MFCreateProtectedEnvironmentAccess(ppAccess **IMFProtectedEnvironmentAccess) foundation.HRESULT {
+func MFCreateProtectedEnvironmentAccess(ppAccess **IMFProtectedEnvironmentAccess) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateProtectedEnvironmentAccess.Addr(), uintptr(unsafe.Pointer(ppAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateProxyLocator calls MF!MFCreateProxyLocator.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateproxylocator
 // Minimum OS: windows6.0.6000.
-func MFCreateProxyLocator(pszProtocol foundation.PWSTR, pProxyConfig *uishellpropertiessystem.IPropertyStore, ppProxyLocator **IMFNetProxyLocator) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateProxyLocator.Addr(), uintptr(unsafe.Pointer(pszProtocol)), uintptr(unsafe.Pointer(pProxyConfig)), uintptr(unsafe.Pointer(ppProxyLocator)))
-	return foundation.HRESULT(r1)
+func MFCreateProxyLocator(pszProtocol string, pProxyConfig *uishellpropertiessystem.IPropertyStore, ppProxyLocator **IMFNetProxyLocator) error {
+	_pszProtocol := win32.UTF16Ptr(pszProtocol)
+	r1, _, _ := syscall.SyscallN(procMFCreateProxyLocator.Addr(), uintptr(unsafe.Pointer(_pszProtocol)), uintptr(unsafe.Pointer(pProxyConfig)), uintptr(unsafe.Pointer(ppProxyLocator)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateRelativePanelWatcher calls MFSENSORGROUP!MFCreateRelativePanelWatcher.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreaterelativepanelwatcher
 // Minimum OS: windows10.0.19041.
-func MFCreateRelativePanelWatcher(videoDeviceId foundation.PWSTR, displayMonitorDeviceId foundation.PWSTR, ppRelativePanelWatcher **IMFRelativePanelWatcher) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateRelativePanelWatcher.Addr(), uintptr(unsafe.Pointer(videoDeviceId)), uintptr(unsafe.Pointer(displayMonitorDeviceId)), uintptr(unsafe.Pointer(ppRelativePanelWatcher)))
-	return foundation.HRESULT(r1)
+func MFCreateRelativePanelWatcher(videoDeviceId string, displayMonitorDeviceId string, ppRelativePanelWatcher **IMFRelativePanelWatcher) error {
+	_videoDeviceId := win32.UTF16Ptr(videoDeviceId)
+	_displayMonitorDeviceId := win32.UTF16Ptr(displayMonitorDeviceId)
+	r1, _, _ := syscall.SyscallN(procMFCreateRelativePanelWatcher.Addr(), uintptr(unsafe.Pointer(_videoDeviceId)), uintptr(unsafe.Pointer(_displayMonitorDeviceId)), uintptr(unsafe.Pointer(ppRelativePanelWatcher)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateRemoteDesktopPlugin calls MF!MFCreateRemoteDesktopPlugin.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreateremotedesktopplugin
 // Minimum OS: windows6.0.6000.
-func MFCreateRemoteDesktopPlugin(ppPlugin **IMFRemoteDesktopPlugin) foundation.HRESULT {
+func MFCreateRemoteDesktopPlugin(ppPlugin **IMFRemoteDesktopPlugin) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateRemoteDesktopPlugin.Addr(), uintptr(unsafe.Pointer(ppPlugin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSample calls MFPlat!MFCreateSample.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatesample
 // Minimum OS: windows6.0.6000.
-func MFCreateSample(ppIMFSample **IMFSample) foundation.HRESULT {
+func MFCreateSample(ppIMFSample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSample.Addr(), uintptr(unsafe.Pointer(ppIMFSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSampleCopierMFT calls MF!MFCreateSampleCopierMFT.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesamplecopiermft
 // Minimum OS: windows6.1.
-func MFCreateSampleCopierMFT(ppCopierMFT **IMFTransform) foundation.HRESULT {
+func MFCreateSampleCopierMFT(ppCopierMFT **IMFTransform) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSampleCopierMFT.Addr(), uintptr(unsafe.Pointer(ppCopierMFT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSampleGrabberSinkActivate calls MF!MFCreateSampleGrabberSinkActivate.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesamplegrabbersinkactivate
 // Minimum OS: windows6.0.6000.
-func MFCreateSampleGrabberSinkActivate(pIMFMediaType *IMFMediaType, pIMFSampleGrabberSinkCallback *IMFSampleGrabberSinkCallback, ppIActivate **IMFActivate) foundation.HRESULT {
+func MFCreateSampleGrabberSinkActivate(pIMFMediaType *IMFMediaType, pIMFSampleGrabberSinkCallback *IMFSampleGrabberSinkCallback, ppIActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSampleGrabberSinkActivate.Addr(), uintptr(unsafe.Pointer(pIMFMediaType)), uintptr(unsafe.Pointer(pIMFSampleGrabberSinkCallback)), uintptr(unsafe.Pointer(ppIActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSensorActivityMonitor calls MFSENSORGROUP!MFCreateSensorActivityMonitor.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensoractivitymonitor
-func MFCreateSensorActivityMonitor(pCallback *IMFSensorActivitiesReportCallback, ppActivityMonitor **IMFSensorActivityMonitor) foundation.HRESULT {
+func MFCreateSensorActivityMonitor(pCallback *IMFSensorActivitiesReportCallback, ppActivityMonitor **IMFSensorActivityMonitor) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorActivityMonitor.Addr(), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppActivityMonitor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSensorGroup calls MFSENSORGROUP!MFCreateSensorGroup.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensorgroup
 // Minimum OS: windows10.0.14393.
-func MFCreateSensorGroup(SensorGroupSymbolicLink foundation.PWSTR, ppSensorGroup **IMFSensorGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateSensorGroup.Addr(), uintptr(unsafe.Pointer(SensorGroupSymbolicLink)), uintptr(unsafe.Pointer(ppSensorGroup)))
-	return foundation.HRESULT(r1)
+func MFCreateSensorGroup(SensorGroupSymbolicLink string, ppSensorGroup **IMFSensorGroup) error {
+	_SensorGroupSymbolicLink := win32.UTF16Ptr(SensorGroupSymbolicLink)
+	r1, _, _ := syscall.SyscallN(procMFCreateSensorGroup.Addr(), uintptr(unsafe.Pointer(_SensorGroupSymbolicLink)), uintptr(unsafe.Pointer(ppSensorGroup)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSensorProfile calls MFSENSORGROUP!MFCreateSensorProfile.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensorprofile
 // Minimum OS: windows10.0.17134.
-func MFCreateSensorProfile(ProfileType *win32.GUID, ProfileIndex uint32, Constraints foundation.PWSTR, ppProfile **IMFSensorProfile) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateSensorProfile.Addr(), uintptr(unsafe.Pointer(ProfileType)), uintptr(ProfileIndex), uintptr(unsafe.Pointer(Constraints)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func MFCreateSensorProfile(ProfileType *win32.GUID, ProfileIndex uint32, Constraints string, ppProfile **IMFSensorProfile) error {
+	_Constraints := win32.UTF16Ptr(Constraints)
+	r1, _, _ := syscall.SyscallN(procMFCreateSensorProfile.Addr(), uintptr(unsafe.Pointer(ProfileType)), uintptr(ProfileIndex), uintptr(unsafe.Pointer(_Constraints)), uintptr(unsafe.Pointer(ppProfile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSensorProfileCollection calls MFSENSORGROUP!MFCreateSensorProfileCollection.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensorprofilecollection
 // Minimum OS: windows10.0.15063.
-func MFCreateSensorProfileCollection(ppSensorProfile **IMFSensorProfileCollection) foundation.HRESULT {
+func MFCreateSensorProfileCollection(ppSensorProfile **IMFSensorProfileCollection) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorProfileCollection.Addr(), uintptr(unsafe.Pointer(ppSensorProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSensorStream calls MFSENSORGROUP!MFCreateSensorStream.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensorstream
 // Minimum OS: windows10.0.15063.
-func MFCreateSensorStream(StreamId uint32, pAttributes *IMFAttributes, pMediaTypeCollection *IMFCollection, ppStream **IMFSensorStream) foundation.HRESULT {
+func MFCreateSensorStream(StreamId uint32, pAttributes *IMFAttributes, pMediaTypeCollection *IMFCollection, ppStream **IMFSensorStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorStream.Addr(), uintptr(StreamId), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pMediaTypeCollection)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSequencerSegmentOffset calls MF!MFCreateSequencerSegmentOffset.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesequencersegmentoffset
 // Minimum OS: windows6.0.6000.
-func MFCreateSequencerSegmentOffset(dwId uint32, hnsOffset int64, pvarSegmentOffset *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func MFCreateSequencerSegmentOffset(dwId uint32, hnsOffset int64, pvarSegmentOffset *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSequencerSegmentOffset.Addr(), uintptr(dwId), uintptr(hnsOffset), uintptr(unsafe.Pointer(pvarSegmentOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSequencerSource calls MF!MFCreateSequencerSource.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesequencersource
 // Minimum OS: windows6.0.6000.
-func MFCreateSequencerSource(pReserved *systemcom.IUnknown, ppSequencerSource **IMFSequencerSource) foundation.HRESULT {
+func MFCreateSequencerSource(pReserved *systemcom.IUnknown, ppSequencerSource **IMFSequencerSource) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSequencerSource.Addr(), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(ppSequencerSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSimpleTypeHandler calls MF!MFCreateSimpleTypeHandler.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesimpletypehandler
 // Minimum OS: windows6.0.6000.
-func MFCreateSimpleTypeHandler(ppHandler **IMFMediaTypeHandler) foundation.HRESULT {
+func MFCreateSimpleTypeHandler(ppHandler **IMFMediaTypeHandler) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSimpleTypeHandler.Addr(), uintptr(unsafe.Pointer(ppHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSinkWriterFromMediaSink calls MFReadWrite!MFCreateSinkWriterFromMediaSink.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesinkwriterfrommediasink
 // Minimum OS: windows6.1.
-func MFCreateSinkWriterFromMediaSink(pMediaSink *IMFMediaSink, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) foundation.HRESULT {
+func MFCreateSinkWriterFromMediaSink(pMediaSink *IMFMediaSink, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSinkWriterFromMediaSink.Addr(), uintptr(unsafe.Pointer(pMediaSink)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSinkWriter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSinkWriterFromURL calls MFReadWrite!MFCreateSinkWriterFromURL.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesinkwriterfromurl
 // Minimum OS: windows6.1.
-func MFCreateSinkWriterFromURL(pwszOutputURL foundation.PWSTR, pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateSinkWriterFromURL.Addr(), uintptr(unsafe.Pointer(pwszOutputURL)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSinkWriter)))
-	return foundation.HRESULT(r1)
+func MFCreateSinkWriterFromURL(pwszOutputURL string, pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) error {
+	_pwszOutputURL := win32.UTF16Ptr(pwszOutputURL)
+	r1, _, _ := syscall.SyscallN(procMFCreateSinkWriterFromURL.Addr(), uintptr(unsafe.Pointer(_pwszOutputURL)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSinkWriter)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSourceReaderFromByteStream calls MFReadWrite!MFCreateSourceReaderFromByteStream.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesourcereaderfrombytestream
 // Minimum OS: windows6.1.
-func MFCreateSourceReaderFromByteStream(pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSourceReader **IMFSourceReader) foundation.HRESULT {
+func MFCreateSourceReaderFromByteStream(pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSourceReader **IMFSourceReader) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSourceReaderFromByteStream.Addr(), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSourceReader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSourceReaderFromMediaSource calls MFReadWrite!MFCreateSourceReaderFromMediaSource.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesourcereaderfrommediasource
 // Minimum OS: windows6.1.
-func MFCreateSourceReaderFromMediaSource(pMediaSource *IMFMediaSource, pAttributes *IMFAttributes, ppSourceReader **IMFSourceReader) foundation.HRESULT {
+func MFCreateSourceReaderFromMediaSource(pMediaSource *IMFMediaSource, pAttributes *IMFAttributes, ppSourceReader **IMFSourceReader) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSourceReaderFromMediaSource.Addr(), uintptr(unsafe.Pointer(pMediaSource)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSourceReader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSourceReaderFromURL calls MFReadWrite!MFCreateSourceReaderFromURL.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesourcereaderfromurl
 // Minimum OS: windows6.1.
-func MFCreateSourceReaderFromURL(pwszURL foundation.PWSTR, pAttributes *IMFAttributes, ppSourceReader **IMFSourceReader) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateSourceReaderFromURL.Addr(), uintptr(unsafe.Pointer(pwszURL)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSourceReader)))
-	return foundation.HRESULT(r1)
+func MFCreateSourceReaderFromURL(pwszURL string, pAttributes *IMFAttributes, ppSourceReader **IMFSourceReader) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(procMFCreateSourceReaderFromURL.Addr(), uintptr(unsafe.Pointer(_pwszURL)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSourceReader)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSourceResolver calls MFPlat!MFCreateSourceResolver.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesourceresolver
 // Minimum OS: windows6.0.6000.
-func MFCreateSourceResolver(ppISourceResolver **IMFSourceResolver) foundation.HRESULT {
+func MFCreateSourceResolver(ppISourceResolver **IMFSourceResolver) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSourceResolver.Addr(), uintptr(unsafe.Pointer(ppISourceResolver)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateStandardQualityManager calls MF!MFCreateStandardQualityManager.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatestandardqualitymanager
 // Minimum OS: windows6.0.6000.
-func MFCreateStandardQualityManager(ppQualityManager **IMFQualityManager) foundation.HRESULT {
+func MFCreateStandardQualityManager(ppQualityManager **IMFQualityManager) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateStandardQualityManager.Addr(), uintptr(unsafe.Pointer(ppQualityManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateStreamDescriptor calls MFPlat!MFCreateStreamDescriptor.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatestreamdescriptor
 // Minimum OS: windows6.0.6000.
-func MFCreateStreamDescriptor(dwStreamIdentifier uint32, cMediaTypes uint32, apMediaTypes **IMFMediaType, ppDescriptor **IMFStreamDescriptor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateStreamDescriptor.Addr(), uintptr(dwStreamIdentifier), uintptr(cMediaTypes), uintptr(unsafe.Pointer(apMediaTypes)), uintptr(unsafe.Pointer(ppDescriptor)))
-	return foundation.HRESULT(r1)
+func MFCreateStreamDescriptor(dwStreamIdentifier uint32, apMediaTypes []*IMFMediaType, ppDescriptor **IMFStreamDescriptor) error {
+	var _apMediaTypes **IMFMediaType
+	if len(apMediaTypes) > 0 {
+		_apMediaTypes = &apMediaTypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFCreateStreamDescriptor.Addr(), uintptr(dwStreamIdentifier), uintptr(len(apMediaTypes)), uintptr(unsafe.Pointer(_apMediaTypes)), uintptr(unsafe.Pointer(ppDescriptor)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateStreamOnMFByteStream calls MFPlat!MFCreateStreamOnMFByteStream.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatestreamonmfbytestream
 // Minimum OS: windows8.0.
-func MFCreateStreamOnMFByteStream(pByteStream *IMFByteStream, ppStream **systemcom.IStream) foundation.HRESULT {
+func MFCreateStreamOnMFByteStream(pByteStream *IMFByteStream, ppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateStreamOnMFByteStream.Addr(), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateStreamOnMFByteStreamEx calls MFPlat!MFCreateStreamOnMFByteStreamEx.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatestreamonmfbytestreamex
 // Minimum OS: windows8.0.
-func MFCreateStreamOnMFByteStreamEx(pByteStream *IMFByteStream, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func MFCreateStreamOnMFByteStreamEx(pByteStream *IMFByteStream, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateStreamOnMFByteStreamEx.Addr(), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateSystemTimeSource calls MFPlat!MFCreateSystemTimeSource.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesystemtimesource
 // Minimum OS: windows6.0.6000.
-func MFCreateSystemTimeSource(ppSystemTimeSource **IMFPresentationTimeSource) foundation.HRESULT {
+func MFCreateSystemTimeSource(ppSystemTimeSource **IMFPresentationTimeSource) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateSystemTimeSource.Addr(), uintptr(unsafe.Pointer(ppSystemTimeSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTempFile calls MFPlat!MFCreateTempFile.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatetempfile
 // Minimum OS: windows6.0.6000.
-func MFCreateTempFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFlags MF_FILE_FLAGS, ppIByteStream **IMFByteStream) foundation.HRESULT {
+func MFCreateTempFile(AccessMode MF_FILE_ACCESSMODE, OpenMode MF_FILE_OPENMODE, fFlags MF_FILE_FLAGS, ppIByteStream **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTempFile.Addr(), uintptr(AccessMode), uintptr(OpenMode), uintptr(fFlags), uintptr(unsafe.Pointer(ppIByteStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTopoLoader calls MF!MFCreateTopoLoader.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetopoloader
 // Minimum OS: windows6.0.6000.
-func MFCreateTopoLoader(ppObj **IMFTopoLoader) foundation.HRESULT {
+func MFCreateTopoLoader(ppObj **IMFTopoLoader) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTopoLoader.Addr(), uintptr(unsafe.Pointer(ppObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTopology calls MF!MFCreateTopology.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetopology
 // Minimum OS: windows6.0.6000.
-func MFCreateTopology(ppTopo **IMFTopology) foundation.HRESULT {
+func MFCreateTopology(ppTopo **IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTopology.Addr(), uintptr(unsafe.Pointer(ppTopo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTopologyNode calls MF!MFCreateTopologyNode.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetopologynode
 // Minimum OS: windows6.0.6000.
-func MFCreateTopologyNode(NodeType MF_TOPOLOGY_TYPE, ppNode **IMFTopologyNode) foundation.HRESULT {
+func MFCreateTopologyNode(NodeType MF_TOPOLOGY_TYPE, ppNode **IMFTopologyNode) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTopologyNode.Addr(), uintptr(NodeType), uintptr(unsafe.Pointer(ppNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTrackedSample calls MFPlat!MFCreateTrackedSample.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetrackedsample
 // Minimum OS: windows8.0.
-func MFCreateTrackedSample(ppMFSample **IMFTrackedSample) foundation.HRESULT {
+func MFCreateTrackedSample(ppMFSample **IMFTrackedSample) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTrackedSample.Addr(), uintptr(unsafe.Pointer(ppMFSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTranscodeProfile calls MF!MFCreateTranscodeProfile.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetranscodeprofile
 // Minimum OS: windows6.1.
-func MFCreateTranscodeProfile(ppTranscodeProfile **IMFTranscodeProfile) foundation.HRESULT {
+func MFCreateTranscodeProfile(ppTranscodeProfile **IMFTranscodeProfile) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTranscodeProfile.Addr(), uintptr(unsafe.Pointer(ppTranscodeProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTranscodeSinkActivate calls MF!MFCreateTranscodeSinkActivate.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetranscodesinkactivate
 // Minimum OS: windows6.1.
-func MFCreateTranscodeSinkActivate(ppActivate **IMFActivate) foundation.HRESULT {
+func MFCreateTranscodeSinkActivate(ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTranscodeSinkActivate.Addr(), uintptr(unsafe.Pointer(ppActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTranscodeTopology calls MF!MFCreateTranscodeTopology.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetranscodetopology
 // Minimum OS: windows6.1.
-func MFCreateTranscodeTopology(pSrc *IMFMediaSource, pwszOutputFilePath foundation.PWSTR, pProfile *IMFTranscodeProfile, ppTranscodeTopo **IMFTopology) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateTranscodeTopology.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pwszOutputFilePath)), uintptr(unsafe.Pointer(pProfile)), uintptr(unsafe.Pointer(ppTranscodeTopo)))
-	return foundation.HRESULT(r1)
+func MFCreateTranscodeTopology(pSrc *IMFMediaSource, pwszOutputFilePath string, pProfile *IMFTranscodeProfile, ppTranscodeTopo **IMFTopology) error {
+	_pwszOutputFilePath := win32.UTF16Ptr(pwszOutputFilePath)
+	r1, _, _ := syscall.SyscallN(procMFCreateTranscodeTopology.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(_pwszOutputFilePath)), uintptr(unsafe.Pointer(pProfile)), uintptr(unsafe.Pointer(ppTranscodeTopo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTranscodeTopologyFromByteStream calls MF!MFCreateTranscodeTopologyFromByteStream.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatetranscodetopologyfrombytestream
 // Minimum OS: windows8.0.
-func MFCreateTranscodeTopologyFromByteStream(pSrc *IMFMediaSource, pOutputStream *IMFByteStream, pProfile *IMFTranscodeProfile, ppTranscodeTopo **IMFTopology) foundation.HRESULT {
+func MFCreateTranscodeTopologyFromByteStream(pSrc *IMFMediaSource, pOutputStream *IMFByteStream, pProfile *IMFTranscodeProfile, ppTranscodeTopo **IMFTopology) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTranscodeTopologyFromByteStream.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pOutputStream)), uintptr(unsafe.Pointer(pProfile)), uintptr(unsafe.Pointer(ppTranscodeTopo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateTransformActivate calls MFPlat!MFCreateTransformActivate.
 // https://learn.microsoft.com/windows/win32/api/mftransform/nf-mftransform-mfcreatetransformactivate
 // Minimum OS: windows6.1.
-func MFCreateTransformActivate(ppActivate **IMFActivate) foundation.HRESULT {
+func MFCreateTransformActivate(ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateTransformActivate.Addr(), uintptr(unsafe.Pointer(ppActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoMediaType calls MFPlat!MFCreateVideoMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatevideomediatype
 // Minimum OS: windows6.0.6000.
-func MFCreateVideoMediaType(pVideoFormat *MFVIDEOFORMAT, ppIVideoMediaType **IMFVideoMediaType) foundation.HRESULT {
+func MFCreateVideoMediaType(pVideoFormat *MFVIDEOFORMAT, ppIVideoMediaType **IMFVideoMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMediaType.Addr(), uintptr(unsafe.Pointer(pVideoFormat)), uintptr(unsafe.Pointer(ppIVideoMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoMediaTypeFromBitMapInfoHeader calls MFPlat!MFCreateVideoMediaTypeFromBitMapInfoHeader.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatevideomediatypefrombitmapinfoheader
 // Minimum OS: windows6.0.6000.
-func MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader *graphicsgdi.BITMAPINFOHEADER, dwPixelAspectRatioX uint32, dwPixelAspectRatioY uint32, InterlaceMode MFVideoInterlaceMode, VideoFlags uint64, qwFramesPerSecondNumerator uint64, qwFramesPerSecondDenominator uint64, dwMaxBitRate uint32, ppIVideoMediaType **IMFVideoMediaType) foundation.HRESULT {
+func MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader *graphicsgdi.BITMAPINFOHEADER, dwPixelAspectRatioX uint32, dwPixelAspectRatioY uint32, InterlaceMode MFVideoInterlaceMode, VideoFlags uint64, qwFramesPerSecondNumerator uint64, qwFramesPerSecondDenominator uint64, dwMaxBitRate uint32, ppIVideoMediaType **IMFVideoMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMediaTypeFromBitMapInfoHeader.Addr(), uintptr(unsafe.Pointer(pbmihBitMapInfoHeader)), uintptr(dwPixelAspectRatioX), uintptr(dwPixelAspectRatioY), uintptr(InterlaceMode), uintptr(VideoFlags), uintptr(qwFramesPerSecondNumerator), uintptr(qwFramesPerSecondDenominator), uintptr(dwMaxBitRate), uintptr(unsafe.Pointer(ppIVideoMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoMediaTypeFromBitMapInfoHeaderEx calls MFPlat!MFCreateVideoMediaTypeFromBitMapInfoHeaderEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatevideomediatypefrombitmapinfoheaderex
 // Minimum OS: windows6.1.
-func MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader *graphicsgdi.BITMAPINFOHEADER, cbBitMapInfoHeader uint32, dwPixelAspectRatioX uint32, dwPixelAspectRatioY uint32, InterlaceMode MFVideoInterlaceMode, VideoFlags uint64, dwFramesPerSecondNumerator uint32, dwFramesPerSecondDenominator uint32, dwMaxBitRate uint32, ppIVideoMediaType **IMFVideoMediaType) foundation.HRESULT {
+func MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader *graphicsgdi.BITMAPINFOHEADER, cbBitMapInfoHeader uint32, dwPixelAspectRatioX uint32, dwPixelAspectRatioY uint32, InterlaceMode MFVideoInterlaceMode, VideoFlags uint64, dwFramesPerSecondNumerator uint32, dwFramesPerSecondDenominator uint32, dwMaxBitRate uint32, ppIVideoMediaType **IMFVideoMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMediaTypeFromBitMapInfoHeaderEx.Addr(), uintptr(unsafe.Pointer(pbmihBitMapInfoHeader)), uintptr(cbBitMapInfoHeader), uintptr(dwPixelAspectRatioX), uintptr(dwPixelAspectRatioY), uintptr(InterlaceMode), uintptr(VideoFlags), uintptr(dwFramesPerSecondNumerator), uintptr(dwFramesPerSecondDenominator), uintptr(dwMaxBitRate), uintptr(unsafe.Pointer(ppIVideoMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoMediaTypeFromSubtype calls MFPlat!MFCreateVideoMediaTypeFromSubtype.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatevideomediatypefromsubtype
 // Minimum OS: windows6.0.6000.
-func MFCreateVideoMediaTypeFromSubtype(pAMSubtype *win32.GUID, ppIVideoMediaType **IMFVideoMediaType) foundation.HRESULT {
+func MFCreateVideoMediaTypeFromSubtype(pAMSubtype *win32.GUID, ppIVideoMediaType **IMFVideoMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMediaTypeFromSubtype.Addr(), uintptr(unsafe.Pointer(pAMSubtype)), uintptr(unsafe.Pointer(ppIVideoMediaType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoMixer calls EVR!MFCreateVideoMixer.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideomixer
-func MFCreateVideoMixer(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func MFCreateVideoMixer(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMixer.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(riidDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoMixerAndPresenter calls EVR!MFCreateVideoMixerAndPresenter.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideomixerandpresenter
-func MFCreateVideoMixerAndPresenter(pMixerOwner *systemcom.IUnknown, pPresenterOwner *systemcom.IUnknown, riidMixer *win32.GUID, ppvVideoMixer *unsafe.Pointer, riidPresenter *win32.GUID, ppvVideoPresenter *unsafe.Pointer) foundation.HRESULT {
+func MFCreateVideoMixerAndPresenter(pMixerOwner *systemcom.IUnknown, pPresenterOwner *systemcom.IUnknown, riidMixer *win32.GUID, ppvVideoMixer *unsafe.Pointer, riidPresenter *win32.GUID, ppvVideoPresenter *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoMixerAndPresenter.Addr(), uintptr(unsafe.Pointer(pMixerOwner)), uintptr(unsafe.Pointer(pPresenterOwner)), uintptr(unsafe.Pointer(riidMixer)), uintptr(unsafe.Pointer(ppvVideoMixer)), uintptr(unsafe.Pointer(riidPresenter)), uintptr(unsafe.Pointer(ppvVideoPresenter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoPresenter calls EVR!MFCreateVideoPresenter.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideopresenter
-func MFCreateVideoPresenter(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppVideoPresenter *unsafe.Pointer) foundation.HRESULT {
+func MFCreateVideoPresenter(pOwner *systemcom.IUnknown, riidDevice *win32.GUID, riid *win32.GUID, ppVideoPresenter *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoPresenter.Addr(), uintptr(unsafe.Pointer(pOwner)), uintptr(unsafe.Pointer(riidDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppVideoPresenter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoRenderer calls MF!MFCreateVideoRenderer.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideorenderer
-func MFCreateVideoRenderer(riidRenderer *win32.GUID, ppVideoRenderer *unsafe.Pointer) foundation.HRESULT {
+func MFCreateVideoRenderer(riidRenderer *win32.GUID, ppVideoRenderer *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoRenderer.Addr(), uintptr(unsafe.Pointer(riidRenderer)), uintptr(unsafe.Pointer(ppVideoRenderer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoRendererActivate calls MF!MFCreateVideoRendererActivate.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatevideorendereractivate
 // Minimum OS: windows6.0.6000.
-func MFCreateVideoRendererActivate(hwndVideo foundation.HWND, ppActivate **IMFActivate) foundation.HRESULT {
+func MFCreateVideoRendererActivate(hwndVideo foundation.HWND, ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoRendererActivate.Addr(), uintptr(hwndVideo), uintptr(unsafe.Pointer(ppActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoSampleAllocator calls EVR!MFCreateVideoSampleAllocator.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideosampleallocator
-func MFCreateVideoSampleAllocator(riid *win32.GUID, ppSampleAllocator *unsafe.Pointer) foundation.HRESULT {
+func MFCreateVideoSampleAllocator(riid *win32.GUID, ppSampleAllocator *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoSampleAllocator.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSampleAllocator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoSampleAllocatorEx calls MFPlat!MFCreateVideoSampleAllocatorEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatevideosampleallocatorex
 // Minimum OS: windows8.0.
-func MFCreateVideoSampleAllocatorEx(riid *win32.GUID, ppSampleAllocator *unsafe.Pointer) foundation.HRESULT {
+func MFCreateVideoSampleAllocatorEx(riid *win32.GUID, ppSampleAllocator *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoSampleAllocatorEx.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSampleAllocator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVideoSampleFromSurface calls EVR!MFCreateVideoSampleFromSurface.
 // https://learn.microsoft.com/windows/win32/api/evr/nc-evr-mfcreatevideosamplefromsurface
-func MFCreateVideoSampleFromSurface(pUnkSurface *systemcom.IUnknown, ppSample **IMFSample) foundation.HRESULT {
+func MFCreateVideoSampleFromSurface(pUnkSurface *systemcom.IUnknown, ppSample **IMFSample) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateVideoSampleFromSurface.Addr(), uintptr(unsafe.Pointer(pUnkSurface)), uintptr(unsafe.Pointer(ppSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateVirtualCamera calls MFSENSORGROUP!MFCreateVirtualCamera.
 // https://learn.microsoft.com/windows/win32/api/mfvirtualcamera/nf-mfvirtualcamera-mfcreatevirtualcamera
-func MFCreateVirtualCamera(type_ MFVirtualCameraType, lifetime MFVirtualCameraLifetime, access MFVirtualCameraAccess, friendlyName foundation.PWSTR, sourceId foundation.PWSTR, categories *win32.GUID, categoryCount uint32, virtualCamera **IMFVirtualCamera) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFCreateVirtualCamera.Addr(), uintptr(type_), uintptr(lifetime), uintptr(access), uintptr(unsafe.Pointer(friendlyName)), uintptr(unsafe.Pointer(sourceId)), uintptr(unsafe.Pointer(categories)), uintptr(categoryCount), uintptr(unsafe.Pointer(virtualCamera)))
-	return foundation.HRESULT(r1)
+func MFCreateVirtualCamera(type_ MFVirtualCameraType, lifetime MFVirtualCameraLifetime, access MFVirtualCameraAccess, friendlyName string, sourceId string, categories []win32.GUID, virtualCamera **IMFVirtualCamera) error {
+	_friendlyName := win32.UTF16Ptr(friendlyName)
+	_sourceId := win32.UTF16Ptr(sourceId)
+	var _categories *win32.GUID
+	if len(categories) > 0 {
+		_categories = &categories[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFCreateVirtualCamera.Addr(), uintptr(type_), uintptr(lifetime), uintptr(access), uintptr(unsafe.Pointer(_friendlyName)), uintptr(unsafe.Pointer(_sourceId)), uintptr(unsafe.Pointer(_categories)), uintptr(len(categories)), uintptr(unsafe.Pointer(virtualCamera)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateWAVEMediaSink calls mfsrcsnk!MFCreateWAVEMediaSink.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatewavemediasink
 // Minimum OS: windows8.1.
-func MFCreateWAVEMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) foundation.HRESULT {
+func MFCreateWAVEMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWAVEMediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppMediaSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateWICBitmapBuffer calls MFPlat!MFCreateWICBitmapBuffer.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatewicbitmapbuffer
 // Minimum OS: windows8.0.
-func MFCreateWICBitmapBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, ppBuffer **IMFMediaBuffer) foundation.HRESULT {
+func MFCreateWICBitmapBuffer(riid *win32.GUID, punkSurface *systemcom.IUnknown, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWICBitmapBuffer.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punkSurface)), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateWMAEncoderActivate calls MF!MFCreateWMAEncoderActivate.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreatewmaencoderactivate
 // Minimum OS: windows6.0.6000.
-func MFCreateWMAEncoderActivate(pMediaType *IMFMediaType, pEncodingConfigurationProperties *uishellpropertiessystem.IPropertyStore, ppActivate **IMFActivate) foundation.HRESULT {
+func MFCreateWMAEncoderActivate(pMediaType *IMFMediaType, pEncodingConfigurationProperties *uishellpropertiessystem.IPropertyStore, ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWMAEncoderActivate.Addr(), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(pEncodingConfigurationProperties)), uintptr(unsafe.Pointer(ppActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateWMVEncoderActivate calls MF!MFCreateWMVEncoderActivate.
 // https://learn.microsoft.com/windows/win32/api/wmcontainer/nf-wmcontainer-mfcreatewmvencoderactivate
 // Minimum OS: windows6.0.6000.
-func MFCreateWMVEncoderActivate(pMediaType *IMFMediaType, pEncodingConfigurationProperties *uishellpropertiessystem.IPropertyStore, ppActivate **IMFActivate) foundation.HRESULT {
+func MFCreateWMVEncoderActivate(pMediaType *IMFMediaType, pEncodingConfigurationProperties *uishellpropertiessystem.IPropertyStore, ppActivate **IMFActivate) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWMVEncoderActivate.Addr(), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(pEncodingConfigurationProperties)), uintptr(unsafe.Pointer(ppActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFCreateWaveFormatExFromMFMediaType calls MFPlat!MFCreateWaveFormatExFromMFMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatewaveformatexfrommfmediatype
 // Minimum OS: windows6.0.6000.
-func MFCreateWaveFormatExFromMFMediaType(pMFType *IMFMediaType, ppWF *unsafe.Pointer, pcbSize *uint32, Flags uint32) foundation.HRESULT {
+func MFCreateWaveFormatExFromMFMediaType(pMFType *IMFMediaType, ppWF *unsafe.Pointer, pcbSize *uint32, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWaveFormatExFromMFMediaType.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(ppWF)), uintptr(unsafe.Pointer(pcbSize)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFDeserializeAttributesFromStream calls MFPlat!MFDeserializeAttributesFromStream.
 // https://learn.microsoft.com/windows/win32/api/mfobjects/nf-mfobjects-mfdeserializeattributesfromstream
 // Minimum OS: windows6.0.6000.
-func MFDeserializeAttributesFromStream(pAttr *IMFAttributes, dwOptions uint32, pStm *systemcom.IStream) foundation.HRESULT {
+func MFDeserializeAttributesFromStream(pAttr *IMFAttributes, dwOptions uint32, pStm *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procMFDeserializeAttributesFromStream.Addr(), uintptr(unsafe.Pointer(pAttr)), uintptr(dwOptions), uintptr(unsafe.Pointer(pStm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFDeserializePresentationDescriptor calls MFPlat!MFDeserializePresentationDescriptor.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfdeserializepresentationdescriptor
 // Minimum OS: windows6.0.6000.
-func MFDeserializePresentationDescriptor(cbData uint32, pbData *byte, ppPD **IMFPresentationDescriptor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFDeserializePresentationDescriptor.Addr(), uintptr(cbData), uintptr(unsafe.Pointer(pbData)), uintptr(unsafe.Pointer(ppPD)))
-	return foundation.HRESULT(r1)
+func MFDeserializePresentationDescriptor(pbData []byte, ppPD **IMFPresentationDescriptor) error {
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFDeserializePresentationDescriptor.Addr(), uintptr(len(pbData)), uintptr(unsafe.Pointer(_pbData)), uintptr(unsafe.Pointer(ppPD)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFEndCreateFile calls MFPlat!MFEndCreateFile.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfendcreatefile
 // Minimum OS: windows6.0.6000.
-func MFEndCreateFile(pResult *IMFAsyncResult, ppFile **IMFByteStream) foundation.HRESULT {
+func MFEndCreateFile(pResult *IMFAsyncResult, ppFile **IMFByteStream) error {
 	r1, _, _ := syscall.SyscallN(procMFEndCreateFile.Addr(), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppFile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFEndRegisterWorkQueueWithMMCSS calls MFPlat!MFEndRegisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfendregisterworkqueuewithmmcss
 // Minimum OS: windows6.0.6000.
-func MFEndRegisterWorkQueueWithMMCSS(pResult *IMFAsyncResult, pdwTaskId *uint32) foundation.HRESULT {
+func MFEndRegisterWorkQueueWithMMCSS(pResult *IMFAsyncResult, pdwTaskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFEndRegisterWorkQueueWithMMCSS.Addr(), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pdwTaskId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFEndUnregisterWorkQueueWithMMCSS calls MFPlat!MFEndUnregisterWorkQueueWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfendunregisterworkqueuewithmmcss
 // Minimum OS: windows6.0.6000.
-func MFEndUnregisterWorkQueueWithMMCSS(pResult *IMFAsyncResult) foundation.HRESULT {
+func MFEndUnregisterWorkQueueWithMMCSS(pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFEndUnregisterWorkQueueWithMMCSS.Addr(), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFEnumDeviceSources calls MF!MFEnumDeviceSources.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfenumdevicesources
 // Minimum OS: windows6.1.
-func MFEnumDeviceSources(pAttributes *IMFAttributes, pppSourceActivate ***IMFActivate, pcSourceActivate *uint32) foundation.HRESULT {
+func MFEnumDeviceSources(pAttributes *IMFAttributes, pppSourceActivate ***IMFActivate, pcSourceActivate *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFEnumDeviceSources.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pppSourceActivate)), uintptr(unsafe.Pointer(pcSourceActivate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFFrameRateToAverageTimePerFrame calls MFPlat!MFFrameRateToAverageTimePerFrame.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfframeratetoaveragetimeperframe
 // Minimum OS: windows6.0.6000.
-func MFFrameRateToAverageTimePerFrame(unNumerator uint32, unDenominator uint32, punAverageTimePerFrame *uint64) foundation.HRESULT {
+func MFFrameRateToAverageTimePerFrame(unNumerator uint32, unDenominator uint32, punAverageTimePerFrame *uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFFrameRateToAverageTimePerFrame.Addr(), uintptr(unNumerator), uintptr(unDenominator), uintptr(unsafe.Pointer(punAverageTimePerFrame)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetAttributesAsBlob calls MFPlat!MFGetAttributesAsBlob.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetattributesasblob
 // Minimum OS: windows6.0.6000.
-func MFGetAttributesAsBlob(pAttributes *IMFAttributes, pBuf *byte, cbBufSize uint32) foundation.HRESULT {
+func MFGetAttributesAsBlob(pAttributes *IMFAttributes, pBuf *byte, cbBufSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetAttributesAsBlob.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBufSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetAttributesAsBlobSize calls MFPlat!MFGetAttributesAsBlobSize.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetattributesasblobsize
 // Minimum OS: windows6.0.6000.
-func MFGetAttributesAsBlobSize(pAttributes *IMFAttributes, pcbBufSize *uint32) foundation.HRESULT {
+func MFGetAttributesAsBlobSize(pAttributes *IMFAttributes, pcbBufSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetAttributesAsBlobSize.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pcbBufSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetContentProtectionSystemCLSID calls MFPlat!MFGetContentProtectionSystemCLSID.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetcontentprotectionsystemclsid
 // Minimum OS: windows8.0.
-func MFGetContentProtectionSystemCLSID(guidProtectionSystemID *win32.GUID, pclsid *win32.GUID) foundation.HRESULT {
+func MFGetContentProtectionSystemCLSID(guidProtectionSystemID *win32.GUID, pclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFGetContentProtectionSystemCLSID.Addr(), uintptr(unsafe.Pointer(guidProtectionSystemID)), uintptr(unsafe.Pointer(pclsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetDXGIDeviceManageMode calls MFPlat.DLL!MFGetDXGIDeviceManageMode.
-func MFGetDXGIDeviceManageMode(pDeviceManager *systemcom.IUnknown, mode *MF_DXGI_DEVICE_MANAGER_MODE) foundation.HRESULT {
+func MFGetDXGIDeviceManageMode(pDeviceManager *systemcom.IUnknown, mode *MF_DXGI_DEVICE_MANAGER_MODE) error {
 	r1, _, _ := syscall.SyscallN(procMFGetDXGIDeviceManageMode.Addr(), uintptr(unsafe.Pointer(pDeviceManager)), uintptr(unsafe.Pointer(mode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetLocalId calls MF!MFGetLocalId.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgetlocalid
 // Minimum OS: windows8.0.
-func MFGetLocalId(verifier *byte, size uint32, id *foundation.PWSTR) foundation.HRESULT {
+func MFGetLocalId(verifier *byte, size uint32, id *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procMFGetLocalId.Addr(), uintptr(unsafe.Pointer(verifier)), uintptr(size), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetMFTMerit calls MFPlat!MFGetMFTMerit.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetmftmerit
 // Minimum OS: windows6.1.
-func MFGetMFTMerit(pMFT *systemcom.IUnknown, cbVerifier uint32, verifier *byte, merit *uint32) foundation.HRESULT {
+func MFGetMFTMerit(pMFT *systemcom.IUnknown, cbVerifier uint32, verifier *byte, merit *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetMFTMerit.Addr(), uintptr(unsafe.Pointer(pMFT)), uintptr(cbVerifier), uintptr(unsafe.Pointer(verifier)), uintptr(unsafe.Pointer(merit)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetPlaneSize calls EVR!MFGetPlaneSize.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetplanesize
 // Minimum OS: windows6.0.6000.
-func MFGetPlaneSize(format uint32, dwWidth uint32, dwHeight uint32, pdwPlaneSize *uint32) foundation.HRESULT {
+func MFGetPlaneSize(format uint32, dwWidth uint32, dwHeight uint32, pdwPlaneSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetPlaneSize.Addr(), uintptr(format), uintptr(dwWidth), uintptr(dwHeight), uintptr(unsafe.Pointer(pdwPlaneSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetPluginControl calls MFPlat!MFGetPluginControl.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetplugincontrol
 // Minimum OS: windows6.1.
-func MFGetPluginControl(ppPluginControl **IMFPluginControl) foundation.HRESULT {
+func MFGetPluginControl(ppPluginControl **IMFPluginControl) error {
 	r1, _, _ := syscall.SyscallN(procMFGetPluginControl.Addr(), uintptr(unsafe.Pointer(ppPluginControl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetService calls MF!MFGetService.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgetservice
 // Minimum OS: windows6.0.6000.
-func MFGetService(punkObject *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func MFGetService(punkObject *systemcom.IUnknown, guidService *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMFGetService.Addr(), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetStrideForBitmapInfoHeader calls MFPlat!MFGetStrideForBitmapInfoHeader.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetstrideforbitmapinfoheader
 // Minimum OS: windows6.0.6000.
-func MFGetStrideForBitmapInfoHeader(format uint32, dwWidth uint32, pStride *int32) foundation.HRESULT {
+func MFGetStrideForBitmapInfoHeader(format uint32, dwWidth uint32, pStride *int32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetStrideForBitmapInfoHeader.Addr(), uintptr(format), uintptr(dwWidth), uintptr(unsafe.Pointer(pStride)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetSupportedMimeTypes calls MFPlat!MFGetSupportedMimeTypes.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgetsupportedmimetypes
 // Minimum OS: windows6.0.6000.
-func MFGetSupportedMimeTypes(pPropVarMimeTypeArray *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func MFGetSupportedMimeTypes(pPropVarMimeTypeArray *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procMFGetSupportedMimeTypes.Addr(), uintptr(unsafe.Pointer(pPropVarMimeTypeArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetSupportedSchemes calls MFPlat!MFGetSupportedSchemes.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgetsupportedschemes
 // Minimum OS: windows6.0.6000.
-func MFGetSupportedSchemes(pPropVarSchemeArray *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func MFGetSupportedSchemes(pPropVarSchemeArray *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procMFGetSupportedSchemes.Addr(), uintptr(unsafe.Pointer(pPropVarSchemeArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetSystemId calls MF!MFGetSystemId.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgetsystemid
 // Minimum OS: windows8.0.
-func MFGetSystemId(ppId **IMFSystemId) foundation.HRESULT {
+func MFGetSystemId(ppId **IMFSystemId) error {
 	r1, _, _ := syscall.SyscallN(procMFGetSystemId.Addr(), uintptr(unsafe.Pointer(ppId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetSystemTime calls MFPlat!MFGetSystemTime.
@@ -1597,17 +1635,18 @@ func MFGetSystemTime() int64 {
 // MFGetTimerPeriodicity calls MFPlat!MFGetTimerPeriodicity.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgettimerperiodicity
 // Minimum OS: windows6.0.6000.
-func MFGetTimerPeriodicity(Periodicity *uint32) foundation.HRESULT {
+func MFGetTimerPeriodicity(Periodicity *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetTimerPeriodicity.Addr(), uintptr(unsafe.Pointer(Periodicity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetTopoNodeCurrentType calls MF!MFGetTopoNodeCurrentType.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgettoponodecurrenttype
 // Minimum OS: windows6.1.
-func MFGetTopoNodeCurrentType(pNode *IMFTopologyNode, dwStreamIndex uint32, fOutput foundation.BOOL, ppType **IMFMediaType) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFGetTopoNodeCurrentType.Addr(), uintptr(unsafe.Pointer(pNode)), uintptr(dwStreamIndex), uintptr(fOutput), uintptr(unsafe.Pointer(ppType)))
-	return foundation.HRESULT(r1)
+func MFGetTopoNodeCurrentType(pNode *IMFTopologyNode, dwStreamIndex uint32, fOutput bool, ppType **IMFMediaType) error {
+	_fOutput := win32.Bool32(fOutput)
+	r1, _, _ := syscall.SyscallN(procMFGetTopoNodeCurrentType.Addr(), uintptr(unsafe.Pointer(pNode)), uintptr(dwStreamIndex), uintptr(_fOutput), uintptr(unsafe.Pointer(ppType)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetUncompressedVideoFormat calls MFPlat!MFGetUncompressedVideoFormat.
@@ -1621,25 +1660,25 @@ func MFGetUncompressedVideoFormat(pVideoFormat *MFVIDEOFORMAT) uint32 {
 // MFGetWorkQueueMMCSSClass calls MFPlat!MFGetWorkQueueMMCSSClass.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetworkqueuemmcssclass
 // Minimum OS: windows6.0.6000.
-func MFGetWorkQueueMMCSSClass(dwWorkQueueId uint32, pwszClass foundation.PWSTR, pcchClass *uint32) foundation.HRESULT {
+func MFGetWorkQueueMMCSSClass(dwWorkQueueId uint32, pwszClass foundation.PWSTR, pcchClass *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetWorkQueueMMCSSClass.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(pwszClass)), uintptr(unsafe.Pointer(pcchClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetWorkQueueMMCSSPriority calls MFPlat!MFGetWorkQueueMMCSSPriority.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetworkqueuemmcsspriority
 // Minimum OS: windows8.0.
-func MFGetWorkQueueMMCSSPriority(dwWorkQueueId uint32, lPriority *int32) foundation.HRESULT {
+func MFGetWorkQueueMMCSSPriority(dwWorkQueueId uint32, lPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetWorkQueueMMCSSPriority.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(lPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetWorkQueueMMCSSTaskId calls MFPlat!MFGetWorkQueueMMCSSTaskId.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetworkqueuemmcsstaskid
 // Minimum OS: windows6.0.6000.
-func MFGetWorkQueueMMCSSTaskId(dwWorkQueueId uint32, pdwTaskId *uint32) foundation.HRESULT {
+func MFGetWorkQueueMMCSSTaskId(dwWorkQueueId uint32, pdwTaskId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFGetWorkQueueMMCSSTaskId.Addr(), uintptr(dwWorkQueueId), uintptr(unsafe.Pointer(pdwTaskId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFHeapAlloc calls MFPlat!MFHeapAlloc.
@@ -1660,152 +1699,154 @@ func MFHeapFree(pv unsafe.Pointer) {
 // MFInitAttributesFromBlob calls MFPlat!MFInitAttributesFromBlob.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitattributesfromblob
 // Minimum OS: windows6.0.6000.
-func MFInitAttributesFromBlob(pAttributes *IMFAttributes, pBuf *byte, cbBufSize uint32) foundation.HRESULT {
+func MFInitAttributesFromBlob(pAttributes *IMFAttributes, pBuf *byte, cbBufSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFInitAttributesFromBlob.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBufSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInitMediaTypeFromAMMediaType calls MFPlat!MFInitMediaTypeFromAMMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefromammediatype
 // Minimum OS: windows6.0.6000.
-func MFInitMediaTypeFromAMMediaType(pMFType *IMFMediaType, pAMType *AM_MEDIA_TYPE) foundation.HRESULT {
+func MFInitMediaTypeFromAMMediaType(pMFType *IMFMediaType, pAMType *AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromAMMediaType.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pAMType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInitMediaTypeFromMFVideoFormat calls MFPlat!MFInitMediaTypeFromMFVideoFormat.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefrommfvideoformat
 // Minimum OS: windows6.0.6000.
-func MFInitMediaTypeFromMFVideoFormat(pMFType *IMFMediaType, pMFVF *MFVIDEOFORMAT, cbBufSize uint32) foundation.HRESULT {
+func MFInitMediaTypeFromMFVideoFormat(pMFType *IMFMediaType, pMFVF *MFVIDEOFORMAT, cbBufSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromMFVideoFormat.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pMFVF)), uintptr(cbBufSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInitMediaTypeFromMPEG1VideoInfo calls MFPlat!MFInitMediaTypeFromMPEG1VideoInfo.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefrommpeg1videoinfo
 // Minimum OS: windows6.0.6000.
-func MFInitMediaTypeFromMPEG1VideoInfo(pMFType *IMFMediaType, pMP1VI *MPEG1VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) foundation.HRESULT {
+func MFInitMediaTypeFromMPEG1VideoInfo(pMFType *IMFMediaType, pMP1VI *MPEG1VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromMPEG1VideoInfo.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pMP1VI)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pSubtype)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInitMediaTypeFromMPEG2VideoInfo calls MFPlat!MFInitMediaTypeFromMPEG2VideoInfo.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefrommpeg2videoinfo
 // Minimum OS: windows6.0.6000.
-func MFInitMediaTypeFromMPEG2VideoInfo(pMFType *IMFMediaType, pMP2VI *MPEG2VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) foundation.HRESULT {
+func MFInitMediaTypeFromMPEG2VideoInfo(pMFType *IMFMediaType, pMP2VI *MPEG2VIDEOINFO, cbBufSize uint32, pSubtype *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromMPEG2VideoInfo.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pMP2VI)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pSubtype)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInitMediaTypeFromVideoInfoHeader calls MFPlat!MFInitMediaTypeFromVideoInfoHeader.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefromvideoinfoheader
 // Minimum OS: windows6.0.6000.
-func MFInitMediaTypeFromVideoInfoHeader(pMFType *IMFMediaType, pVIH *VIDEOINFOHEADER, cbBufSize uint32, pSubtype *win32.GUID) foundation.HRESULT {
+func MFInitMediaTypeFromVideoInfoHeader(pMFType *IMFMediaType, pVIH *VIDEOINFOHEADER, cbBufSize uint32, pSubtype *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromVideoInfoHeader.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pVIH)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pSubtype)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInitMediaTypeFromVideoInfoHeader2 calls MFPlat!MFInitMediaTypeFromVideoInfoHeader2.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefromvideoinfoheader2
 // Minimum OS: windows6.0.6000.
-func MFInitMediaTypeFromVideoInfoHeader2(pMFType *IMFMediaType, pVIH2 *VIDEOINFOHEADER2, cbBufSize uint32, pSubtype *win32.GUID) foundation.HRESULT {
+func MFInitMediaTypeFromVideoInfoHeader2(pMFType *IMFMediaType, pVIH2 *VIDEOINFOHEADER2, cbBufSize uint32, pSubtype *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromVideoInfoHeader2.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pVIH2)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pSubtype)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInitMediaTypeFromWaveFormatEx calls MFPlat!MFInitMediaTypeFromWaveFormatEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefromwaveformatex
 // Minimum OS: windows6.0.6000.
-func MFInitMediaTypeFromWaveFormatEx(pMFType *IMFMediaType, pWaveFormat unsafe.Pointer, cbBufSize uint32) foundation.HRESULT {
+func MFInitMediaTypeFromWaveFormatEx(pMFType *IMFMediaType, pWaveFormat unsafe.Pointer, cbBufSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromWaveFormatEx.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pWaveFormat)), uintptr(cbBufSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInitVideoFormat calls MFPlat!MFInitVideoFormat.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitvideoformat
 // Minimum OS: windows6.0.6000.
-func MFInitVideoFormat(pVideoFormat *MFVIDEOFORMAT, type_ MFStandardVideoFormat) foundation.HRESULT {
+func MFInitVideoFormat(pVideoFormat *MFVIDEOFORMAT, type_ MFStandardVideoFormat) error {
 	r1, _, _ := syscall.SyscallN(procMFInitVideoFormat.Addr(), uintptr(unsafe.Pointer(pVideoFormat)), uintptr(type_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInitVideoFormat_RGB calls MFPlat!MFInitVideoFormat_RGB.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitvideoformat_rgb
 // Minimum OS: windows6.0.6000.
-func MFInitVideoFormat_RGB(pVideoFormat *MFVIDEOFORMAT, dwWidth uint32, dwHeight uint32, D3Dfmt uint32) foundation.HRESULT {
+func MFInitVideoFormat_RGB(pVideoFormat *MFVIDEOFORMAT, dwWidth uint32, dwHeight uint32, D3Dfmt uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFInitVideoFormat_RGB.Addr(), uintptr(unsafe.Pointer(pVideoFormat)), uintptr(dwWidth), uintptr(dwHeight), uintptr(D3Dfmt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFInvokeCallback calls MFPlat!MFInvokeCallback.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinvokecallback
 // Minimum OS: windows6.0.6000.
-func MFInvokeCallback(pAsyncResult *IMFAsyncResult) foundation.HRESULT {
+func MFInvokeCallback(pAsyncResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFInvokeCallback.Addr(), uintptr(unsafe.Pointer(pAsyncResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFIsContentProtectionDeviceSupported calls MFPlat!MFIsContentProtectionDeviceSupported.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfiscontentprotectiondevicesupported
 // Minimum OS: windows10.0.10240.
-func MFIsContentProtectionDeviceSupported(ProtectionSystemId *win32.GUID, isSupported *foundation.BOOL) foundation.HRESULT {
+func MFIsContentProtectionDeviceSupported(ProtectionSystemId *win32.GUID, isSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procMFIsContentProtectionDeviceSupported.Addr(), uintptr(unsafe.Pointer(ProtectionSystemId)), uintptr(unsafe.Pointer(isSupported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFIsFormatYUV calls EVR!MFIsFormatYUV.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfisformatyuv
 // Minimum OS: windows6.0.6000.
-func MFIsFormatYUV(Format uint32) foundation.BOOL {
+func MFIsFormatYUV(Format uint32) bool {
 	r1, _, _ := syscall.SyscallN(procMFIsFormatYUV.Addr(), uintptr(Format))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MFIsVirtualCameraTypeSupported calls MFSENSORGROUP!MFIsVirtualCameraTypeSupported.
 // https://learn.microsoft.com/windows/win32/api/mfvirtualcamera/nf-mfvirtualcamera-mfisvirtualcameratypesupported
-func MFIsVirtualCameraTypeSupported(type_ MFVirtualCameraType, supported *foundation.BOOL) foundation.HRESULT {
+func MFIsVirtualCameraTypeSupported(type_ MFVirtualCameraType, supported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procMFIsVirtualCameraTypeSupported.Addr(), uintptr(type_), uintptr(unsafe.Pointer(supported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFLoadSignedLibrary calls MF!MFLoadSignedLibrary.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfloadsignedlibrary
 // Minimum OS: windows8.0.
-func MFLoadSignedLibrary(pszName foundation.PWSTR, ppLib **IMFSignedLibrary) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFLoadSignedLibrary.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(ppLib)))
-	return foundation.HRESULT(r1)
+func MFLoadSignedLibrary(pszName string, ppLib **IMFSignedLibrary) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procMFLoadSignedLibrary.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppLib)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFLockDXGIDeviceManager calls MFPlat!MFLockDXGIDeviceManager.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mflockdxgidevicemanager
 // Minimum OS: windows8.0.
-func MFLockDXGIDeviceManager(pResetToken *uint32, ppManager **IMFDXGIDeviceManager) foundation.HRESULT {
+func MFLockDXGIDeviceManager(pResetToken *uint32, ppManager **IMFDXGIDeviceManager) error {
 	r1, _, _ := syscall.SyscallN(procMFLockDXGIDeviceManager.Addr(), uintptr(unsafe.Pointer(pResetToken)), uintptr(unsafe.Pointer(ppManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFLockPlatform calls MFPlat!MFLockPlatform.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mflockplatform
 // Minimum OS: windows6.0.6000.
-func MFLockPlatform() foundation.HRESULT {
+func MFLockPlatform() error {
 	r1, _, _ := syscall.SyscallN(procMFLockPlatform.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFLockSharedWorkQueue calls MFPlat!MFLockSharedWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mflocksharedworkqueue
 // Minimum OS: windows8.0.
-func MFLockSharedWorkQueue(wszClass foundation.PWSTR, BasePriority int32, pdwTaskId *uint32, pID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFLockSharedWorkQueue.Addr(), uintptr(unsafe.Pointer(wszClass)), uintptr(BasePriority), uintptr(unsafe.Pointer(pdwTaskId)), uintptr(unsafe.Pointer(pID)))
-	return foundation.HRESULT(r1)
+func MFLockSharedWorkQueue(wszClass string, BasePriority int32, pdwTaskId *uint32, pID *uint32) error {
+	_wszClass := win32.UTF16Ptr(wszClass)
+	r1, _, _ := syscall.SyscallN(procMFLockSharedWorkQueue.Addr(), uintptr(unsafe.Pointer(_wszClass)), uintptr(BasePriority), uintptr(unsafe.Pointer(pdwTaskId)), uintptr(unsafe.Pointer(pID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFLockWorkQueue calls MFPlat!MFLockWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mflockworkqueue
 // Minimum OS: windows6.0.6000.
-func MFLockWorkQueue(dwWorkQueue uint32) foundation.HRESULT {
+func MFLockWorkQueue(dwWorkQueue uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFLockWorkQueue.Addr(), uintptr(dwWorkQueue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFMapDX9FormatToDXGIFormat calls MFPlat!MFMapDX9FormatToDXGIFormat.
@@ -1827,233 +1868,261 @@ func MFMapDXGIFormatToDX9Format(dx11 graphicsdxgicommon.DXGI_FORMAT) uint32 {
 // MFPCreateMediaPlayer calls MFPlay!MFPCreateMediaPlayer.
 // https://learn.microsoft.com/windows/win32/api/mfplay/nf-mfplay-mfpcreatemediaplayer
 // Minimum OS: windows6.1.
-func MFPCreateMediaPlayer(pwszURL foundation.PWSTR, fStartPlayback foundation.BOOL, creationOptions MFP_CREATION_OPTIONS, pCallback *IMFPMediaPlayerCallback, hWnd foundation.HWND, ppMediaPlayer **IMFPMediaPlayer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFPCreateMediaPlayer.Addr(), uintptr(unsafe.Pointer(pwszURL)), uintptr(fStartPlayback), uintptr(creationOptions), uintptr(unsafe.Pointer(pCallback)), uintptr(hWnd), uintptr(unsafe.Pointer(ppMediaPlayer)))
-	return foundation.HRESULT(r1)
+func MFPCreateMediaPlayer(pwszURL string, fStartPlayback bool, creationOptions MFP_CREATION_OPTIONS, pCallback *IMFPMediaPlayerCallback, hWnd foundation.HWND, ppMediaPlayer **IMFPMediaPlayer) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	_fStartPlayback := win32.Bool32(fStartPlayback)
+	r1, _, _ := syscall.SyscallN(procMFPCreateMediaPlayer.Addr(), uintptr(unsafe.Pointer(_pwszURL)), uintptr(_fStartPlayback), uintptr(creationOptions), uintptr(unsafe.Pointer(pCallback)), uintptr(hWnd), uintptr(unsafe.Pointer(ppMediaPlayer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFPutWaitingWorkItem calls MFPlat!MFPutWaitingWorkItem.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputwaitingworkitem
 // Minimum OS: windows8.0.
-func MFPutWaitingWorkItem(hEvent foundation.HANDLE, Priority int32, pResult *IMFAsyncResult, pKey *uint64) foundation.HRESULT {
+func MFPutWaitingWorkItem(hEvent foundation.HANDLE, Priority int32, pResult *IMFAsyncResult, pKey *uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWaitingWorkItem.Addr(), uintptr(hEvent), uintptr(Priority), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(pKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFPutWorkItem calls MFPlat!MFPutWorkItem.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputworkitem
 // Minimum OS: windows6.0.6000.
-func MFPutWorkItem(dwQueue uint32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
+func MFPutWorkItem(dwQueue uint32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWorkItem.Addr(), uintptr(dwQueue), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFPutWorkItem2 calls MFPlat!MFPutWorkItem2.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputworkitem2
 // Minimum OS: windows8.0.
-func MFPutWorkItem2(dwQueue uint32, Priority int32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) foundation.HRESULT {
+func MFPutWorkItem2(dwQueue uint32, Priority int32, pCallback *IMFAsyncCallback, pState *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWorkItem2.Addr(), uintptr(dwQueue), uintptr(Priority), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFPutWorkItemEx calls MFPlat!MFPutWorkItemEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputworkitemex
 // Minimum OS: windows6.0.6000.
-func MFPutWorkItemEx(dwQueue uint32, pResult *IMFAsyncResult) foundation.HRESULT {
+func MFPutWorkItemEx(dwQueue uint32, pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWorkItemEx.Addr(), uintptr(dwQueue), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFPutWorkItemEx2 calls MFPlat!MFPutWorkItemEx2.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfputworkitemex2
 // Minimum OS: windows8.0.
-func MFPutWorkItemEx2(dwQueue uint32, Priority int32, pResult *IMFAsyncResult) foundation.HRESULT {
+func MFPutWorkItemEx2(dwQueue uint32, Priority int32, pResult *IMFAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(procMFPutWorkItemEx2.Addr(), uintptr(dwQueue), uintptr(Priority), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFRegisterLocalByteStreamHandler calls MFPlat!MFRegisterLocalByteStreamHandler.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfregisterlocalbytestreamhandler
 // Minimum OS: windows8.0.
-func MFRegisterLocalByteStreamHandler(szFileExtension foundation.PWSTR, szMimeType foundation.PWSTR, pActivate *IMFActivate) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFRegisterLocalByteStreamHandler.Addr(), uintptr(unsafe.Pointer(szFileExtension)), uintptr(unsafe.Pointer(szMimeType)), uintptr(unsafe.Pointer(pActivate)))
-	return foundation.HRESULT(r1)
+func MFRegisterLocalByteStreamHandler(szFileExtension string, szMimeType string, pActivate *IMFActivate) error {
+	_szFileExtension := win32.UTF16Ptr(szFileExtension)
+	_szMimeType := win32.UTF16Ptr(szMimeType)
+	r1, _, _ := syscall.SyscallN(procMFRegisterLocalByteStreamHandler.Addr(), uintptr(unsafe.Pointer(_szFileExtension)), uintptr(unsafe.Pointer(_szMimeType)), uintptr(unsafe.Pointer(pActivate)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFRegisterLocalSchemeHandler calls MFPlat!MFRegisterLocalSchemeHandler.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfregisterlocalschemehandler
 // Minimum OS: windows8.0.
-func MFRegisterLocalSchemeHandler(szScheme foundation.PWSTR, pActivate *IMFActivate) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFRegisterLocalSchemeHandler.Addr(), uintptr(unsafe.Pointer(szScheme)), uintptr(unsafe.Pointer(pActivate)))
-	return foundation.HRESULT(r1)
+func MFRegisterLocalSchemeHandler(szScheme string, pActivate *IMFActivate) error {
+	_szScheme := win32.UTF16Ptr(szScheme)
+	r1, _, _ := syscall.SyscallN(procMFRegisterLocalSchemeHandler.Addr(), uintptr(unsafe.Pointer(_szScheme)), uintptr(unsafe.Pointer(pActivate)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFRegisterPlatformWithMMCSS calls MFPlat!MFRegisterPlatformWithMMCSS.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfregisterplatformwithmmcss
 // Minimum OS: windows8.0.
-func MFRegisterPlatformWithMMCSS(wszClass foundation.PWSTR, pdwTaskId *uint32, lPriority int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFRegisterPlatformWithMMCSS.Addr(), uintptr(unsafe.Pointer(wszClass)), uintptr(unsafe.Pointer(pdwTaskId)), uintptr(lPriority))
-	return foundation.HRESULT(r1)
+func MFRegisterPlatformWithMMCSS(wszClass string, pdwTaskId *uint32, lPriority int32) error {
+	_wszClass := win32.UTF16Ptr(wszClass)
+	r1, _, _ := syscall.SyscallN(procMFRegisterPlatformWithMMCSS.Addr(), uintptr(unsafe.Pointer(_wszClass)), uintptr(unsafe.Pointer(pdwTaskId)), uintptr(lPriority))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFRemovePeriodicCallback calls MFPlat!MFRemovePeriodicCallback.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfremoveperiodiccallback
 // Minimum OS: windows6.0.6000.
-func MFRemovePeriodicCallback(dwKey uint32) foundation.HRESULT {
+func MFRemovePeriodicCallback(dwKey uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFRemovePeriodicCallback.Addr(), uintptr(dwKey))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFRequireProtectedEnvironment calls MF!MFRequireProtectedEnvironment.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfrequireprotectedenvironment
 // Minimum OS: windows6.0.6000.
-func MFRequireProtectedEnvironment(pPresentationDescriptor *IMFPresentationDescriptor) foundation.HRESULT {
+func MFRequireProtectedEnvironment(pPresentationDescriptor *IMFPresentationDescriptor) error {
 	r1, _, _ := syscall.SyscallN(procMFRequireProtectedEnvironment.Addr(), uintptr(unsafe.Pointer(pPresentationDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFScheduleWorkItem calls MFPlat!MFScheduleWorkItem.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfscheduleworkitem
 // Minimum OS: windows6.0.6000.
-func MFScheduleWorkItem(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown, Timeout int64, pKey *uint64) foundation.HRESULT {
+func MFScheduleWorkItem(pCallback *IMFAsyncCallback, pState *systemcom.IUnknown, Timeout int64, pKey *uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFScheduleWorkItem.Addr(), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pState)), uintptr(Timeout), uintptr(unsafe.Pointer(pKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFScheduleWorkItemEx calls MFPlat!MFScheduleWorkItemEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfscheduleworkitemex
 // Minimum OS: windows6.0.6000.
-func MFScheduleWorkItemEx(pResult *IMFAsyncResult, Timeout int64, pKey *uint64) foundation.HRESULT {
+func MFScheduleWorkItemEx(pResult *IMFAsyncResult, Timeout int64, pKey *uint64) error {
 	r1, _, _ := syscall.SyscallN(procMFScheduleWorkItemEx.Addr(), uintptr(unsafe.Pointer(pResult)), uintptr(Timeout), uintptr(unsafe.Pointer(pKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFSerializeAttributesToStream calls MFPlat!MFSerializeAttributesToStream.
 // https://learn.microsoft.com/windows/win32/api/mfobjects/nf-mfobjects-mfserializeattributestostream
 // Minimum OS: windows6.0.6000.
-func MFSerializeAttributesToStream(pAttr *IMFAttributes, dwOptions uint32, pStm *systemcom.IStream) foundation.HRESULT {
+func MFSerializeAttributesToStream(pAttr *IMFAttributes, dwOptions uint32, pStm *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procMFSerializeAttributesToStream.Addr(), uintptr(unsafe.Pointer(pAttr)), uintptr(dwOptions), uintptr(unsafe.Pointer(pStm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFSerializePresentationDescriptor calls MFPlat!MFSerializePresentationDescriptor.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfserializepresentationdescriptor
 // Minimum OS: windows6.0.6000.
-func MFSerializePresentationDescriptor(pPD *IMFPresentationDescriptor, pcbData *uint32, ppbData **byte) foundation.HRESULT {
+func MFSerializePresentationDescriptor(pPD *IMFPresentationDescriptor, pcbData *uint32, ppbData **byte) error {
 	r1, _, _ := syscall.SyscallN(procMFSerializePresentationDescriptor.Addr(), uintptr(unsafe.Pointer(pPD)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(ppbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFShutdown calls MFPlat!MFShutdown.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfshutdown
 // Minimum OS: windows6.0.6000.
-func MFShutdown() foundation.HRESULT {
+func MFShutdown() error {
 	r1, _, _ := syscall.SyscallN(procMFShutdown.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFShutdownObject calls MF!MFShutdownObject.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfshutdownobject
 // Minimum OS: windows6.0.6000.
-func MFShutdownObject(pUnk *systemcom.IUnknown) foundation.HRESULT {
+func MFShutdownObject(pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procMFShutdownObject.Addr(), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFSplitSample calls MFPlat!MFSplitSample.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfsplitsample
 // Minimum OS: windows10.0.19041.
-func MFSplitSample(pSample *IMFSample, pOutputSamples **IMFSample, dwOutputSampleMaxCount uint32, pdwOutputSampleCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFSplitSample.Addr(), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(pOutputSamples)), uintptr(dwOutputSampleMaxCount), uintptr(unsafe.Pointer(pdwOutputSampleCount)))
-	return foundation.HRESULT(r1)
+func MFSplitSample(pSample *IMFSample, pOutputSamples []*IMFSample, pdwOutputSampleCount *uint32) error {
+	var _pOutputSamples **IMFSample
+	if len(pOutputSamples) > 0 {
+		_pOutputSamples = &pOutputSamples[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFSplitSample.Addr(), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(_pOutputSamples)), uintptr(len(pOutputSamples)), uintptr(unsafe.Pointer(pdwOutputSampleCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFStartup calls MFPlat!MFStartup.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfstartup
 // Minimum OS: windows6.0.6000.
-func MFStartup(Version uint32, dwFlags uint32) foundation.HRESULT {
+func MFStartup(Version uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFStartup.Addr(), uintptr(Version), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFTRegisterLocal calls MFPlat!MFTRegisterLocal.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftregisterlocal
 // Minimum OS: windows6.1.
-func MFTRegisterLocal(pClassFactory *systemcom.IClassFactory, guidCategory *win32.GUID, pszName foundation.PWSTR, Flags uint32, cInputTypes uint32, pInputTypes *MFT_REGISTER_TYPE_INFO, cOutputTypes uint32, pOutputTypes *MFT_REGISTER_TYPE_INFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFTRegisterLocal.Addr(), uintptr(unsafe.Pointer(pClassFactory)), uintptr(unsafe.Pointer(guidCategory)), uintptr(unsafe.Pointer(pszName)), uintptr(Flags), uintptr(cInputTypes), uintptr(unsafe.Pointer(pInputTypes)), uintptr(cOutputTypes), uintptr(unsafe.Pointer(pOutputTypes)))
-	return foundation.HRESULT(r1)
+func MFTRegisterLocal(pClassFactory *systemcom.IClassFactory, guidCategory *win32.GUID, pszName string, Flags uint32, pInputTypes []MFT_REGISTER_TYPE_INFO, pOutputTypes []MFT_REGISTER_TYPE_INFO) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	var _pInputTypes *MFT_REGISTER_TYPE_INFO
+	if len(pInputTypes) > 0 {
+		_pInputTypes = &pInputTypes[0]
+	}
+	var _pOutputTypes *MFT_REGISTER_TYPE_INFO
+	if len(pOutputTypes) > 0 {
+		_pOutputTypes = &pOutputTypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFTRegisterLocal.Addr(), uintptr(unsafe.Pointer(pClassFactory)), uintptr(unsafe.Pointer(guidCategory)), uintptr(unsafe.Pointer(_pszName)), uintptr(Flags), uintptr(len(pInputTypes)), uintptr(unsafe.Pointer(_pInputTypes)), uintptr(len(pOutputTypes)), uintptr(unsafe.Pointer(_pOutputTypes)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFTRegisterLocalByCLSID calls MFPlat!MFTRegisterLocalByCLSID.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftregisterlocalbyclsid
 // Minimum OS: windows6.1.
-func MFTRegisterLocalByCLSID(clisdMFT *win32.GUID, guidCategory *win32.GUID, pszName foundation.PWSTR, Flags uint32, cInputTypes uint32, pInputTypes *MFT_REGISTER_TYPE_INFO, cOutputTypes uint32, pOutputTypes *MFT_REGISTER_TYPE_INFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMFTRegisterLocalByCLSID.Addr(), uintptr(unsafe.Pointer(clisdMFT)), uintptr(unsafe.Pointer(guidCategory)), uintptr(unsafe.Pointer(pszName)), uintptr(Flags), uintptr(cInputTypes), uintptr(unsafe.Pointer(pInputTypes)), uintptr(cOutputTypes), uintptr(unsafe.Pointer(pOutputTypes)))
-	return foundation.HRESULT(r1)
+func MFTRegisterLocalByCLSID(clisdMFT *win32.GUID, guidCategory *win32.GUID, pszName string, Flags uint32, pInputTypes []MFT_REGISTER_TYPE_INFO, pOutputTypes []MFT_REGISTER_TYPE_INFO) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	var _pInputTypes *MFT_REGISTER_TYPE_INFO
+	if len(pInputTypes) > 0 {
+		_pInputTypes = &pInputTypes[0]
+	}
+	var _pOutputTypes *MFT_REGISTER_TYPE_INFO
+	if len(pOutputTypes) > 0 {
+		_pOutputTypes = &pOutputTypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFTRegisterLocalByCLSID.Addr(), uintptr(unsafe.Pointer(clisdMFT)), uintptr(unsafe.Pointer(guidCategory)), uintptr(unsafe.Pointer(_pszName)), uintptr(Flags), uintptr(len(pInputTypes)), uintptr(unsafe.Pointer(_pInputTypes)), uintptr(len(pOutputTypes)), uintptr(unsafe.Pointer(_pOutputTypes)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFTUnregisterLocal calls MFPlat!MFTUnregisterLocal.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftunregisterlocal
 // Minimum OS: windows6.1.
-func MFTUnregisterLocal(pClassFactory *systemcom.IClassFactory) foundation.HRESULT {
+func MFTUnregisterLocal(pClassFactory *systemcom.IClassFactory) error {
 	r1, _, _ := syscall.SyscallN(procMFTUnregisterLocal.Addr(), uintptr(unsafe.Pointer(pClassFactory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFTranscodeGetAudioOutputAvailableTypes calls MF!MFTranscodeGetAudioOutputAvailableTypes.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mftranscodegetaudiooutputavailabletypes
 // Minimum OS: windows6.1.
-func MFTranscodeGetAudioOutputAvailableTypes(guidSubType *win32.GUID, dwMFTFlags uint32, pCodecConfig *IMFAttributes, ppAvailableTypes **IMFCollection) foundation.HRESULT {
+func MFTranscodeGetAudioOutputAvailableTypes(guidSubType *win32.GUID, dwMFTFlags uint32, pCodecConfig *IMFAttributes, ppAvailableTypes **IMFCollection) error {
 	r1, _, _ := syscall.SyscallN(procMFTranscodeGetAudioOutputAvailableTypes.Addr(), uintptr(unsafe.Pointer(guidSubType)), uintptr(dwMFTFlags), uintptr(unsafe.Pointer(pCodecConfig)), uintptr(unsafe.Pointer(ppAvailableTypes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFUnlockDXGIDeviceManager calls MFPlat!MFUnlockDXGIDeviceManager.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfunlockdxgidevicemanager
 // Minimum OS: windows8.0.
-func MFUnlockDXGIDeviceManager() foundation.HRESULT {
+func MFUnlockDXGIDeviceManager() error {
 	r1, _, _ := syscall.SyscallN(procMFUnlockDXGIDeviceManager.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFUnlockPlatform calls MFPlat!MFUnlockPlatform.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfunlockplatform
 // Minimum OS: windows6.0.6000.
-func MFUnlockPlatform() foundation.HRESULT {
+func MFUnlockPlatform() error {
 	r1, _, _ := syscall.SyscallN(procMFUnlockPlatform.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFUnlockWorkQueue calls MFPlat!MFUnlockWorkQueue.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfunlockworkqueue
 // Minimum OS: windows6.0.6000.
-func MFUnlockWorkQueue(dwWorkQueue uint32) foundation.HRESULT {
+func MFUnlockWorkQueue(dwWorkQueue uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFUnlockWorkQueue.Addr(), uintptr(dwWorkQueue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFUnregisterPlatformFromMMCSS calls MFPlat!MFUnregisterPlatformFromMMCSS.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfunregisterplatformfrommmcss
 // Minimum OS: windows8.0.
-func MFUnregisterPlatformFromMMCSS() foundation.HRESULT {
+func MFUnregisterPlatformFromMMCSS() error {
 	r1, _, _ := syscall.SyscallN(procMFUnregisterPlatformFromMMCSS.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFUnwrapMediaType calls MFPlat!MFUnwrapMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfunwrapmediatype
 // Minimum OS: windows6.0.6000.
-func MFUnwrapMediaType(pWrap *IMFMediaType, ppOrig **IMFMediaType) foundation.HRESULT {
+func MFUnwrapMediaType(pWrap *IMFMediaType, ppOrig **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFUnwrapMediaType.Addr(), uintptr(unsafe.Pointer(pWrap)), uintptr(unsafe.Pointer(ppOrig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFWrapMediaType calls MFPlat!MFWrapMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfwrapmediatype
 // Minimum OS: windows6.0.6000.
-func MFWrapMediaType(pOrig *IMFMediaType, MajorType *win32.GUID, SubType *win32.GUID, ppWrap **IMFMediaType) foundation.HRESULT {
+func MFWrapMediaType(pOrig *IMFMediaType, MajorType *win32.GUID, SubType *win32.GUID, ppWrap **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFWrapMediaType.Addr(), uintptr(unsafe.Pointer(pOrig)), uintptr(unsafe.Pointer(MajorType)), uintptr(unsafe.Pointer(SubType)), uintptr(unsafe.Pointer(ppWrap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MFllMulDiv calls MFPlat!MFllMulDiv.
@@ -2067,41 +2136,41 @@ func MFllMulDiv(a int64, b int64, c int64, d int64) int64 {
 // OPMGetVideoOutputForTarget calls dxva2!OPMGetVideoOutputForTarget.
 // https://learn.microsoft.com/windows/win32/api/opmapi/nf-opmapi-opmgetvideooutputfortarget
 // Minimum OS: windows6.0.6000.
-func OPMGetVideoOutputForTarget(pAdapterLuid *foundation.LUID, VidPnTarget uint32, vos OPM_VIDEO_OUTPUT_SEMANTICS, ppOPMVideoOutput **IOPMVideoOutput) foundation.HRESULT {
+func OPMGetVideoOutputForTarget(pAdapterLuid *foundation.LUID, VidPnTarget uint32, vos OPM_VIDEO_OUTPUT_SEMANTICS, ppOPMVideoOutput **IOPMVideoOutput) error {
 	r1, _, _ := syscall.SyscallN(procOPMGetVideoOutputForTarget.Addr(), uintptr(unsafe.Pointer(pAdapterLuid)), uintptr(VidPnTarget), uintptr(vos), uintptr(unsafe.Pointer(ppOPMVideoOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OPMGetVideoOutputsFromHMONITOR calls dxva2!OPMGetVideoOutputsFromHMONITOR.
 // https://learn.microsoft.com/windows/win32/api/opmapi/nf-opmapi-opmgetvideooutputsfromhmonitor
 // Minimum OS: windows6.0.6000.
-func OPMGetVideoOutputsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, vos OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs *uint32, pppOPMVideoOutputArray ***IOPMVideoOutput) foundation.HRESULT {
+func OPMGetVideoOutputsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, vos OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs *uint32, pppOPMVideoOutputArray ***IOPMVideoOutput) error {
 	r1, _, _ := syscall.SyscallN(procOPMGetVideoOutputsFromHMONITOR.Addr(), uintptr(hMonitor), uintptr(vos), uintptr(unsafe.Pointer(pulNumVideoOutputs)), uintptr(unsafe.Pointer(pppOPMVideoOutputArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OPMGetVideoOutputsFromIDirect3DDevice9Object calls dxva2!OPMGetVideoOutputsFromIDirect3DDevice9Object.
 // https://learn.microsoft.com/windows/win32/api/opmapi/nf-opmapi-opmgetvideooutputsfromidirect3ddevice9object
 // Minimum OS: windows6.0.6000.
-func OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, vos OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs *uint32, pppOPMVideoOutputArray ***IOPMVideoOutput) foundation.HRESULT {
+func OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, vos OPM_VIDEO_OUTPUT_SEMANTICS, pulNumVideoOutputs *uint32, pppOPMVideoOutputArray ***IOPMVideoOutput) error {
 	r1, _, _ := syscall.SyscallN(procOPMGetVideoOutputsFromIDirect3DDevice9Object.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(vos), uintptr(unsafe.Pointer(pulNumVideoOutputs)), uintptr(unsafe.Pointer(pppOPMVideoOutputArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OPMXboxEnableHDCP calls OPMXbox!OPMXboxEnableHDCP.
-func OPMXboxEnableHDCP(HDCPType OPM_HDCP_TYPE) foundation.HRESULT {
+func OPMXboxEnableHDCP(HDCPType OPM_HDCP_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procOPMXboxEnableHDCP.Addr(), uintptr(HDCPType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OPMXboxGetHDCPStatus calls OPMXbox!OPMXboxGetHDCPStatus.
-func OPMXboxGetHDCPStatus(pHDCPStatus *OPM_HDCP_STATUS) foundation.HRESULT {
+func OPMXboxGetHDCPStatus(pHDCPStatus *OPM_HDCP_STATUS) error {
 	r1, _, _ := syscall.SyscallN(procOPMXboxGetHDCPStatus.Addr(), uintptr(unsafe.Pointer(pHDCPStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OPMXboxGetHDCPStatusAndType calls OPMXbox!OPMXboxGetHDCPStatusAndType.
-func OPMXboxGetHDCPStatusAndType(pHDCPStatus *OPM_HDCP_STATUS, pHDCPType *OPM_HDCP_TYPE) foundation.HRESULT {
+func OPMXboxGetHDCPStatusAndType(pHDCPStatus *OPM_HDCP_STATUS, pHDCPType *OPM_HDCP_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procOPMXboxGetHDCPStatusAndType.Addr(), uintptr(unsafe.Pointer(pHDCPStatus)), uintptr(unsafe.Pointer(pHDCPType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -25,19 +25,21 @@ type IXMLGraphBuilder struct {
 var IID_IXMLGraphBuilder = win32.GUID{Data1: 0x1bb05960, Data2: 0x5fbf, Data3: 0x11d2, Data4: [8]byte{0xa5, 0x21, 0x44, 0xdf, 0x07, 0xc1, 0x00, 0x00}}
 
 // BuildFromXML dispatches through IXMLGraphBuilder's vtable slot 3.
-func (self *IXMLGraphBuilder) BuildFromXML(pGraph *mediadirectshow.IGraphBuilder, pxml *dataxmlmsxml.IXMLElement) foundation.HRESULT {
+func (self *IXMLGraphBuilder) BuildFromXML(pGraph *mediadirectshow.IGraphBuilder, pxml *dataxmlmsxml.IXMLElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(pxml)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveToXML dispatches through IXMLGraphBuilder's vtable slot 4.
-func (self *IXMLGraphBuilder) SaveToXML(pGraph *mediadirectshow.IGraphBuilder, pbstrxml *foundation.BSTR) foundation.HRESULT {
+func (self *IXMLGraphBuilder) SaveToXML(pGraph *mediadirectshow.IGraphBuilder, pbstrxml *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(pbstrxml)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BuildFromXMLFile dispatches through IXMLGraphBuilder's vtable slot 5.
-func (self *IXMLGraphBuilder) BuildFromXMLFile(pGraph *mediadirectshow.IGraphBuilder, wszFileName foundation.PWSTR, wszBaseURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(wszFileName)), uintptr(unsafe.Pointer(wszBaseURL)))
-	return foundation.HRESULT(r1)
+func (self *IXMLGraphBuilder) BuildFromXMLFile(pGraph *mediadirectshow.IGraphBuilder, wszFileName string, wszBaseURL string) error {
+	_wszFileName := win32.UTF16Ptr(wszFileName)
+	_wszBaseURL := win32.UTF16Ptr(wszBaseURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(_wszFileName)), uintptr(unsafe.Pointer(_wszBaseURL)))
+	return win32.HRESULTError(int32(r1))
 }

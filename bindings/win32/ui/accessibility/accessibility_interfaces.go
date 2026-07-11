@@ -25,9 +25,9 @@ type IAccIdentity struct {
 var IID_IAccIdentity = win32.GUID{Data1: 0x7852b78d, Data2: 0x1cfd, Data3: 0x41c1, Data4: [8]byte{0xa6, 0x15, 0x9c, 0x0c, 0x85, 0x96, 0x0b, 0x5f}}
 
 // GetIdentityString dispatches through IAccIdentity's vtable slot 3.
-func (self *IAccIdentity) GetIdentityString(dwIDChild uint32, ppIDString **byte, pdwIDStringLen *uint32) foundation.HRESULT {
+func (self *IAccIdentity) GetIdentityString(dwIDChild uint32, ppIDString **byte, pdwIDStringLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwIDChild), uintptr(unsafe.Pointer(ppIDString)), uintptr(unsafe.Pointer(pdwIDStringLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAccPropServer: https://learn.microsoft.com/windows/win32/api/oleacc/nn-oleacc-iaccpropserver
@@ -49,63 +49,63 @@ type IAccPropServices struct {
 var IID_IAccPropServices = win32.GUID{Data1: 0x6e26e776, Data2: 0x04f0, Data3: 0x495d, Data4: [8]byte{0x80, 0xe4, 0x33, 0x30, 0x35, 0x2e, 0x31, 0x69}}
 
 // SetPropServer dispatches through IAccPropServices's vtable slot 4.
-func (self *IAccPropServices) SetPropServer(pIDString *byte, dwIDStringLen uint32, paProps *win32.GUID, cProps int32, pServer *IAccPropServer, annoScope AnnoScope) foundation.HRESULT {
+func (self *IAccPropServices) SetPropServer(pIDString *byte, dwIDStringLen uint32, paProps *win32.GUID, cProps int32, pServer *IAccPropServer, annoScope AnnoScope) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDString)), uintptr(dwIDStringLen), uintptr(unsafe.Pointer(paProps)), uintptr(cProps), uintptr(unsafe.Pointer(pServer)), uintptr(annoScope))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearProps dispatches through IAccPropServices's vtable slot 5.
-func (self *IAccPropServices) ClearProps(pIDString *byte, dwIDStringLen uint32, paProps *win32.GUID, cProps int32) foundation.HRESULT {
+func (self *IAccPropServices) ClearProps(pIDString *byte, dwIDStringLen uint32, paProps *win32.GUID, cProps int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDString)), uintptr(dwIDStringLen), uintptr(unsafe.Pointer(paProps)), uintptr(cProps))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHwndPropServer dispatches through IAccPropServices's vtable slot 8.
-func (self *IAccPropServices) SetHwndPropServer(hwnd foundation.HWND, idObject uint32, idChild uint32, paProps *win32.GUID, cProps int32, pServer *IAccPropServer, annoScope AnnoScope) foundation.HRESULT {
+func (self *IAccPropServices) SetHwndPropServer(hwnd foundation.HWND, idObject uint32, idChild uint32, paProps *win32.GUID, cProps int32, pServer *IAccPropServer, annoScope AnnoScope) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(paProps)), uintptr(cProps), uintptr(unsafe.Pointer(pServer)), uintptr(annoScope))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearHwndProps dispatches through IAccPropServices's vtable slot 9.
-func (self *IAccPropServices) ClearHwndProps(hwnd foundation.HWND, idObject uint32, idChild uint32, paProps *win32.GUID, cProps int32) foundation.HRESULT {
+func (self *IAccPropServices) ClearHwndProps(hwnd foundation.HWND, idObject uint32, idChild uint32, paProps *win32.GUID, cProps int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(paProps)), uintptr(cProps))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ComposeHwndIdentityString dispatches through IAccPropServices's vtable slot 10.
-func (self *IAccPropServices) ComposeHwndIdentityString(hwnd foundation.HWND, idObject uint32, idChild uint32, ppIDString **byte, pdwIDStringLen *uint32) foundation.HRESULT {
+func (self *IAccPropServices) ComposeHwndIdentityString(hwnd foundation.HWND, idObject uint32, idChild uint32, ppIDString **byte, pdwIDStringLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(ppIDString)), uintptr(unsafe.Pointer(pdwIDStringLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DecomposeHwndIdentityString dispatches through IAccPropServices's vtable slot 11.
-func (self *IAccPropServices) DecomposeHwndIdentityString(pIDString *byte, dwIDStringLen uint32, phwnd *foundation.HWND, pidObject *uint32, pidChild *uint32) foundation.HRESULT {
+func (self *IAccPropServices) DecomposeHwndIdentityString(pIDString *byte, dwIDStringLen uint32, phwnd *foundation.HWND, pidObject *uint32, pidChild *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDString)), uintptr(dwIDStringLen), uintptr(unsafe.Pointer(phwnd)), uintptr(unsafe.Pointer(pidObject)), uintptr(unsafe.Pointer(pidChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHmenuPropServer dispatches through IAccPropServices's vtable slot 14.
-func (self *IAccPropServices) SetHmenuPropServer(hmenu uiwindowsandmessaging.HMENU, idChild uint32, paProps *win32.GUID, cProps int32, pServer *IAccPropServer, annoScope AnnoScope) foundation.HRESULT {
+func (self *IAccPropServices) SetHmenuPropServer(hmenu uiwindowsandmessaging.HMENU, idChild uint32, paProps *win32.GUID, cProps int32, pServer *IAccPropServer, annoScope AnnoScope) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hmenu), uintptr(idChild), uintptr(unsafe.Pointer(paProps)), uintptr(cProps), uintptr(unsafe.Pointer(pServer)), uintptr(annoScope))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearHmenuProps dispatches through IAccPropServices's vtable slot 15.
-func (self *IAccPropServices) ClearHmenuProps(hmenu uiwindowsandmessaging.HMENU, idChild uint32, paProps *win32.GUID, cProps int32) foundation.HRESULT {
+func (self *IAccPropServices) ClearHmenuProps(hmenu uiwindowsandmessaging.HMENU, idChild uint32, paProps *win32.GUID, cProps int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hmenu), uintptr(idChild), uintptr(unsafe.Pointer(paProps)), uintptr(cProps))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ComposeHmenuIdentityString dispatches through IAccPropServices's vtable slot 16.
-func (self *IAccPropServices) ComposeHmenuIdentityString(hmenu uiwindowsandmessaging.HMENU, idChild uint32, ppIDString **byte, pdwIDStringLen *uint32) foundation.HRESULT {
+func (self *IAccPropServices) ComposeHmenuIdentityString(hmenu uiwindowsandmessaging.HMENU, idChild uint32, ppIDString **byte, pdwIDStringLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hmenu), uintptr(idChild), uintptr(unsafe.Pointer(ppIDString)), uintptr(unsafe.Pointer(pdwIDStringLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DecomposeHmenuIdentityString dispatches through IAccPropServices's vtable slot 17.
-func (self *IAccPropServices) DecomposeHmenuIdentityString(pIDString *byte, dwIDStringLen uint32, phmenu *uiwindowsandmessaging.HMENU, pidChild *uint32) foundation.HRESULT {
+func (self *IAccPropServices) DecomposeHmenuIdentityString(pIDString *byte, dwIDStringLen uint32, phmenu *uiwindowsandmessaging.HMENU, pidChild *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDString)), uintptr(dwIDStringLen), uintptr(unsafe.Pointer(phmenu)), uintptr(unsafe.Pointer(pidChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAccessible: https://learn.microsoft.com/windows/win32/api/oleacc/nn-oleacc-iaccessible
@@ -118,33 +118,38 @@ type IAccessible struct {
 var IID_IAccessible = win32.GUID{Data1: 0x618736e0, Data2: 0x3c3d, Data3: 0x11cf, Data4: [8]byte{0x81, 0x0c, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71}}
 
 // Get_accParent dispatches through IAccessible's vtable slot 7.
-func (self *IAccessible) Get_accParent(ppdispParent **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdispParent)))
-	return foundation.HRESULT(r1)
+func (self *IAccessible) Get_accParent() (*systemcom.IDispatch, error) {
+	var _ppdispParent *systemcom.IDispatch
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppdispParent)))
+	return _ppdispParent, win32.HRESULTError(int32(r1))
 }
 
 // Get_accChildCount dispatches through IAccessible's vtable slot 8.
-func (self *IAccessible) Get_accChildCount(pcountChildren *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcountChildren)))
-	return foundation.HRESULT(r1)
+func (self *IAccessible) Get_accChildCount() (int32, error) {
+	var _pcountChildren int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pcountChildren)))
+	return _pcountChildren, win32.HRESULTError(int32(r1))
 }
 
 // Get_accFocus dispatches through IAccessible's vtable slot 18.
-func (self *IAccessible) Get_accFocus(pvarChild *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarChild)))
-	return foundation.HRESULT(r1)
+func (self *IAccessible) Get_accFocus() (systemvariant.VARIANT, error) {
+	var _pvarChild systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarChild)))
+	return _pvarChild, win32.HRESULTError(int32(r1))
 }
 
 // Get_accSelection dispatches through IAccessible's vtable slot 19.
-func (self *IAccessible) Get_accSelection(pvarChildren *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarChildren)))
-	return foundation.HRESULT(r1)
+func (self *IAccessible) Get_accSelection() (systemvariant.VARIANT, error) {
+	var _pvarChildren systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarChildren)))
+	return _pvarChildren, win32.HRESULTError(int32(r1))
 }
 
 // AccHitTest dispatches through IAccessible's vtable slot 24.
-func (self *IAccessible) AccHitTest(xLeft int32, yTop int32, pvarChild *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(xLeft), uintptr(yTop), uintptr(unsafe.Pointer(pvarChild)))
-	return foundation.HRESULT(r1)
+func (self *IAccessible) AccHitTest(xLeft int32, yTop int32) (systemvariant.VARIANT, error) {
+	var _pvarChild systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(xLeft), uintptr(yTop), uintptr(unsafe.Pointer(&_pvarChild)))
+	return _pvarChild, win32.HRESULTError(int32(r1))
 }
 
 // IAccessibleEx: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iaccessibleex
@@ -157,27 +162,29 @@ type IAccessibleEx struct {
 var IID_IAccessibleEx = win32.GUID{Data1: 0xf8b80ada, Data2: 0x2c44, Data3: 0x48d0, Data4: [8]byte{0x89, 0xbe, 0x5f, 0xf2, 0x3c, 0x9c, 0xd8, 0x75}}
 
 // GetObjectForChild dispatches through IAccessibleEx's vtable slot 3.
-func (self *IAccessibleEx) GetObjectForChild(idChild int32, pRetVal **IAccessibleEx) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(idChild), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IAccessibleEx) GetObjectForChild(idChild int32) (*IAccessibleEx, error) {
+	var _pRetVal *IAccessibleEx
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(idChild), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetIAccessiblePair dispatches through IAccessibleEx's vtable slot 4.
-func (self *IAccessibleEx) GetIAccessiblePair(ppAcc **IAccessible, pidChild *int32) foundation.HRESULT {
+func (self *IAccessibleEx) GetIAccessiblePair(ppAcc **IAccessible, pidChild *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAcc)), uintptr(unsafe.Pointer(pidChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRuntimeId dispatches through IAccessibleEx's vtable slot 5.
-func (self *IAccessibleEx) GetRuntimeId(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IAccessibleEx) GetRuntimeId() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ConvertReturnedElement dispatches through IAccessibleEx's vtable slot 6.
-func (self *IAccessibleEx) ConvertReturnedElement(pIn *IRawElementProviderSimple, ppRetValOut **IAccessibleEx) foundation.HRESULT {
+func (self *IAccessibleEx) ConvertReturnedElement(pIn *IRawElementProviderSimple, ppRetValOut **IAccessibleEx) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIn)), uintptr(unsafe.Pointer(ppRetValOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAccessibleHandler: https://learn.microsoft.com/windows/win32/api/oleacc/nn-oleacc-iaccessiblehandler
@@ -190,9 +197,9 @@ type IAccessibleHandler struct {
 var IID_IAccessibleHandler = win32.GUID{Data1: 0x03022430, Data2: 0xabc4, Data3: 0x11d0, Data4: [8]byte{0xbd, 0xe2, 0x00, 0xaa, 0x00, 0x1a, 0x19, 0x53}}
 
 // AccessibleObjectFromID dispatches through IAccessibleHandler's vtable slot 3.
-func (self *IAccessibleHandler) AccessibleObjectFromID(hwnd int32, lObjectID int32, pIAccessible **IAccessible) foundation.HRESULT {
+func (self *IAccessibleHandler) AccessibleObjectFromID(hwnd int32, lObjectID int32, pIAccessible **IAccessible) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(lObjectID), uintptr(unsafe.Pointer(pIAccessible)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAccessibleHostingElementProviders: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iaccessiblehostingelementproviders
@@ -205,15 +212,16 @@ type IAccessibleHostingElementProviders struct {
 var IID_IAccessibleHostingElementProviders = win32.GUID{Data1: 0x33ac331b, Data2: 0x943e, Data3: 0x4020, Data4: [8]byte{0xb2, 0x95, 0xdb, 0x37, 0x78, 0x49, 0x74, 0xa3}}
 
 // GetEmbeddedFragmentRoots dispatches through IAccessibleHostingElementProviders's vtable slot 3.
-func (self *IAccessibleHostingElementProviders) GetEmbeddedFragmentRoots(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IAccessibleHostingElementProviders) GetEmbeddedFragmentRoots() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetObjectIdForProvider dispatches through IAccessibleHostingElementProviders's vtable slot 4.
-func (self *IAccessibleHostingElementProviders) GetObjectIdForProvider(pProvider *IRawElementProviderSimple, pidObject *int32) foundation.HRESULT {
+func (self *IAccessibleHostingElementProviders) GetObjectIdForProvider(pProvider *IRawElementProviderSimple, pidObject *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProvider)), uintptr(unsafe.Pointer(pidObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAccessibleWindowlessSite: https://learn.microsoft.com/windows/win32/api/oleacc/nn-oleacc-iaccessiblewindowlesssite
@@ -226,27 +234,27 @@ type IAccessibleWindowlessSite struct {
 var IID_IAccessibleWindowlessSite = win32.GUID{Data1: 0xbf3abd9c, Data2: 0x76da, Data3: 0x4389, Data4: [8]byte{0x9e, 0xb6, 0x14, 0x27, 0xd2, 0x5a, 0xba, 0xb7}}
 
 // AcquireObjectIdRange dispatches through IAccessibleWindowlessSite's vtable slot 3.
-func (self *IAccessibleWindowlessSite) AcquireObjectIdRange(rangeSize int32, pRangeOwner *IAccessibleHandler, pRangeBase *int32) foundation.HRESULT {
+func (self *IAccessibleWindowlessSite) AcquireObjectIdRange(rangeSize int32, pRangeOwner *IAccessibleHandler, pRangeBase *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(rangeSize), uintptr(unsafe.Pointer(pRangeOwner)), uintptr(unsafe.Pointer(pRangeBase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseObjectIdRange dispatches through IAccessibleWindowlessSite's vtable slot 4.
-func (self *IAccessibleWindowlessSite) ReleaseObjectIdRange(rangeBase int32, pRangeOwner *IAccessibleHandler) foundation.HRESULT {
+func (self *IAccessibleWindowlessSite) ReleaseObjectIdRange(rangeBase int32, pRangeOwner *IAccessibleHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(rangeBase), uintptr(unsafe.Pointer(pRangeOwner)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryObjectIdRanges dispatches through IAccessibleWindowlessSite's vtable slot 5.
-func (self *IAccessibleWindowlessSite) QueryObjectIdRanges(pRangesOwner *IAccessibleHandler, psaRanges **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IAccessibleWindowlessSite) QueryObjectIdRanges(pRangesOwner *IAccessibleHandler, psaRanges **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRangesOwner)), uintptr(unsafe.Pointer(psaRanges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParentAccessible dispatches through IAccessibleWindowlessSite's vtable slot 6.
-func (self *IAccessibleWindowlessSite) GetParentAccessible(ppParent **IAccessible) foundation.HRESULT {
+func (self *IAccessibleWindowlessSite) GetParentAccessible(ppParent **IAccessible) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppParent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAnnotationProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iannotationprovider
@@ -259,33 +267,38 @@ type IAnnotationProvider struct {
 var IID_IAnnotationProvider = win32.GUID{Data1: 0xf95c7e80, Data2: 0xbd63, Data3: 0x4601, Data4: [8]byte{0x97, 0x82, 0x44, 0x5e, 0xbf, 0xf0, 0x11, 0xfc}}
 
 // Get_AnnotationTypeId dispatches through IAnnotationProvider's vtable slot 3.
-func (self *IAnnotationProvider) Get_AnnotationTypeId(retVal *UIA_ANNOTATIONTYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IAnnotationProvider) Get_AnnotationTypeId() (UIA_ANNOTATIONTYPE, error) {
+	var _retVal UIA_ANNOTATIONTYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_AnnotationTypeName dispatches through IAnnotationProvider's vtable slot 4.
-func (self *IAnnotationProvider) Get_AnnotationTypeName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IAnnotationProvider) Get_AnnotationTypeName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Author dispatches through IAnnotationProvider's vtable slot 5.
-func (self *IAnnotationProvider) Get_Author(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IAnnotationProvider) Get_Author() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_DateTime dispatches through IAnnotationProvider's vtable slot 6.
-func (self *IAnnotationProvider) Get_DateTime(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IAnnotationProvider) Get_DateTime() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Target dispatches through IAnnotationProvider's vtable slot 7.
-func (self *IAnnotationProvider) Get_Target(retVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IAnnotationProvider) Get_Target() (*IRawElementProviderSimple, error) {
+	var _retVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IID: 2062a28a-8c07-4b94-8e12-7037c622aeb8
@@ -297,9 +310,10 @@ type ICustomNavigationProvider struct {
 var IID_ICustomNavigationProvider = win32.GUID{Data1: 0x2062a28a, Data2: 0x8c07, Data3: 0x4b94, Data4: [8]byte{0x8e, 0x12, 0x70, 0x37, 0xc6, 0x22, 0xae, 0xb8}}
 
 // Navigate dispatches through ICustomNavigationProvider's vtable slot 3.
-func (self *ICustomNavigationProvider) Navigate(direction NavigateDirection, pRetVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ICustomNavigationProvider) Navigate(direction NavigateDirection) (*IRawElementProviderSimple, error) {
+	var _pRetVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IDockProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-idockprovider
@@ -312,15 +326,16 @@ type IDockProvider struct {
 var IID_IDockProvider = win32.GUID{Data1: 0x159bc72c, Data2: 0x4ad3, Data3: 0x485e, Data4: [8]byte{0x96, 0x37, 0xd7, 0x05, 0x2e, 0xdf, 0x01, 0x46}}
 
 // SetDockPosition dispatches through IDockProvider's vtable slot 3.
-func (self *IDockProvider) SetDockPosition(dockPosition DockPosition) foundation.HRESULT {
+func (self *IDockProvider) SetDockPosition(dockPosition DockPosition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dockPosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DockPosition dispatches through IDockProvider's vtable slot 4.
-func (self *IDockProvider) Get_DockPosition(pRetVal *DockPosition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IDockProvider) Get_DockPosition() (DockPosition, error) {
+	var _pRetVal DockPosition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IDragProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-idragprovider
@@ -333,27 +348,31 @@ type IDragProvider struct {
 var IID_IDragProvider = win32.GUID{Data1: 0x6aa7bbbb, Data2: 0x7ff9, Data3: 0x497d, Data4: [8]byte{0x90, 0x4f, 0xd2, 0x0b, 0x89, 0x79, 0x29, 0xd8}}
 
 // Get_IsGrabbed dispatches through IDragProvider's vtable slot 3.
-func (self *IDragProvider) Get_IsGrabbed(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IDragProvider) Get_IsGrabbed() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_DropEffect dispatches through IDragProvider's vtable slot 4.
-func (self *IDragProvider) Get_DropEffect(pRetVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IDragProvider) Get_DropEffect() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_DropEffects dispatches through IDragProvider's vtable slot 5.
-func (self *IDragProvider) Get_DropEffects(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IDragProvider) Get_DropEffects() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetGrabbedItems dispatches through IDragProvider's vtable slot 6.
-func (self *IDragProvider) GetGrabbedItems(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IDragProvider) GetGrabbedItems() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IDropTargetProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-idroptargetprovider
@@ -366,15 +385,17 @@ type IDropTargetProvider struct {
 var IID_IDropTargetProvider = win32.GUID{Data1: 0xbae82bfd, Data2: 0x358a, Data3: 0x481c, Data4: [8]byte{0x85, 0xa0, 0xd8, 0xb4, 0xd9, 0x0a, 0x5d, 0x61}}
 
 // Get_DropTargetEffect dispatches through IDropTargetProvider's vtable slot 3.
-func (self *IDropTargetProvider) Get_DropTargetEffect(pRetVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IDropTargetProvider) Get_DropTargetEffect() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_DropTargetEffects dispatches through IDropTargetProvider's vtable slot 4.
-func (self *IDropTargetProvider) Get_DropTargetEffects(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IDropTargetProvider) Get_DropTargetEffects() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IExpandCollapseProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iexpandcollapseprovider
@@ -387,21 +408,22 @@ type IExpandCollapseProvider struct {
 var IID_IExpandCollapseProvider = win32.GUID{Data1: 0xd847d3a5, Data2: 0xcab0, Data3: 0x4a98, Data4: [8]byte{0x8c, 0x32, 0xec, 0xb4, 0x5c, 0x59, 0xad, 0x24}}
 
 // Expand dispatches through IExpandCollapseProvider's vtable slot 3.
-func (self *IExpandCollapseProvider) Expand() foundation.HRESULT {
+func (self *IExpandCollapseProvider) Expand() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Collapse dispatches through IExpandCollapseProvider's vtable slot 4.
-func (self *IExpandCollapseProvider) Collapse() foundation.HRESULT {
+func (self *IExpandCollapseProvider) Collapse() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ExpandCollapseState dispatches through IExpandCollapseProvider's vtable slot 5.
-func (self *IExpandCollapseProvider) Get_ExpandCollapseState(pRetVal *ExpandCollapseState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IExpandCollapseProvider) Get_ExpandCollapseState() (ExpandCollapseState, error) {
+	var _pRetVal ExpandCollapseState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IGridItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-igriditemprovider
@@ -414,33 +436,38 @@ type IGridItemProvider struct {
 var IID_IGridItemProvider = win32.GUID{Data1: 0xd02541f1, Data2: 0xfb81, Data3: 0x4d64, Data4: [8]byte{0xae, 0x32, 0xf5, 0x20, 0xf8, 0xa6, 0xdb, 0xd1}}
 
 // Get_Row dispatches through IGridItemProvider's vtable slot 3.
-func (self *IGridItemProvider) Get_Row(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IGridItemProvider) Get_Row() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Column dispatches through IGridItemProvider's vtable slot 4.
-func (self *IGridItemProvider) Get_Column(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IGridItemProvider) Get_Column() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_RowSpan dispatches through IGridItemProvider's vtable slot 5.
-func (self *IGridItemProvider) Get_RowSpan(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IGridItemProvider) Get_RowSpan() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ColumnSpan dispatches through IGridItemProvider's vtable slot 6.
-func (self *IGridItemProvider) Get_ColumnSpan(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IGridItemProvider) Get_ColumnSpan() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ContainingGrid dispatches through IGridItemProvider's vtable slot 7.
-func (self *IGridItemProvider) Get_ContainingGrid(pRetVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IGridItemProvider) Get_ContainingGrid() (*IRawElementProviderSimple, error) {
+	var _pRetVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IGridProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-igridprovider
@@ -453,21 +480,24 @@ type IGridProvider struct {
 var IID_IGridProvider = win32.GUID{Data1: 0xb17d6187, Data2: 0x0907, Data3: 0x464b, Data4: [8]byte{0xa1, 0x68, 0x0e, 0xf1, 0x7a, 0x15, 0x72, 0xb1}}
 
 // GetItem dispatches through IGridProvider's vtable slot 3.
-func (self *IGridProvider) GetItem(row int32, column int32, pRetVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IGridProvider) GetItem(row int32, column int32) (*IRawElementProviderSimple, error) {
+	var _pRetVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_RowCount dispatches through IGridProvider's vtable slot 4.
-func (self *IGridProvider) Get_RowCount(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IGridProvider) Get_RowCount() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ColumnCount dispatches through IGridProvider's vtable slot 5.
-func (self *IGridProvider) Get_ColumnCount(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IGridProvider) Get_ColumnCount() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IInvokeProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iinvokeprovider
@@ -480,9 +510,9 @@ type IInvokeProvider struct {
 var IID_IInvokeProvider = win32.GUID{Data1: 0x54fcb24b, Data2: 0xe18e, Data3: 0x47a2, Data4: [8]byte{0xb4, 0xd3, 0xec, 0xcb, 0xe7, 0x75, 0x99, 0xa2}}
 
 // Invoke dispatches through IInvokeProvider's vtable slot 3.
-func (self *IInvokeProvider) Invoke() foundation.HRESULT {
+func (self *IInvokeProvider) Invoke() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IItemContainerProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iitemcontainerprovider
@@ -504,87 +534,99 @@ type ILegacyIAccessibleProvider struct {
 var IID_ILegacyIAccessibleProvider = win32.GUID{Data1: 0xe44c3566, Data2: 0x915d, Data3: 0x4070, Data4: [8]byte{0x99, 0xc6, 0x04, 0x7b, 0xff, 0x5a, 0x08, 0xf5}}
 
 // Select dispatches through ILegacyIAccessibleProvider's vtable slot 3.
-func (self *ILegacyIAccessibleProvider) Select(flagsSelect int32) foundation.HRESULT {
+func (self *ILegacyIAccessibleProvider) Select(flagsSelect int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(flagsSelect))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DoDefaultAction dispatches through ILegacyIAccessibleProvider's vtable slot 4.
-func (self *ILegacyIAccessibleProvider) DoDefaultAction() foundation.HRESULT {
+func (self *ILegacyIAccessibleProvider) DoDefaultAction() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValue dispatches through ILegacyIAccessibleProvider's vtable slot 5.
-func (self *ILegacyIAccessibleProvider) SetValue(szValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szValue)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) SetValue(szValue string) error {
+	_szValue := win32.UTF16Ptr(szValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIAccessible dispatches through ILegacyIAccessibleProvider's vtable slot 6.
-func (self *ILegacyIAccessibleProvider) GetIAccessible(ppAccessible **IAccessible) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAccessible)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) GetIAccessible() (*IAccessible, error) {
+	var _ppAccessible *IAccessible
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAccessible)))
+	return _ppAccessible, win32.HRESULTError(int32(r1))
 }
 
 // Get_ChildId dispatches through ILegacyIAccessibleProvider's vtable slot 7.
-func (self *ILegacyIAccessibleProvider) Get_ChildId(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) Get_ChildId() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ILegacyIAccessibleProvider's vtable slot 8.
-func (self *ILegacyIAccessibleProvider) Get_Name(pszName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) Get_Name() (foundation.BSTR, error) {
+	var _pszName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszName)))
+	return _pszName, win32.HRESULTError(int32(r1))
 }
 
 // Get_Value dispatches through ILegacyIAccessibleProvider's vtable slot 9.
-func (self *ILegacyIAccessibleProvider) Get_Value(pszValue *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValue)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) Get_Value() (foundation.BSTR, error) {
+	var _pszValue foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszValue)))
+	return _pszValue, win32.HRESULTError(int32(r1))
 }
 
 // Get_Description dispatches through ILegacyIAccessibleProvider's vtable slot 10.
-func (self *ILegacyIAccessibleProvider) Get_Description(pszDescription *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDescription)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) Get_Description() (foundation.BSTR, error) {
+	var _pszDescription foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDescription)))
+	return _pszDescription, win32.HRESULTError(int32(r1))
 }
 
 // Get_Role dispatches through ILegacyIAccessibleProvider's vtable slot 11.
-func (self *ILegacyIAccessibleProvider) Get_Role(pdwRole *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRole)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) Get_Role() (uint32, error) {
+	var _pdwRole uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwRole)))
+	return _pdwRole, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ILegacyIAccessibleProvider's vtable slot 12.
-func (self *ILegacyIAccessibleProvider) Get_State(pdwState *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwState)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) Get_State() (uint32, error) {
+	var _pdwState uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwState)))
+	return _pdwState, win32.HRESULTError(int32(r1))
 }
 
 // Get_Help dispatches through ILegacyIAccessibleProvider's vtable slot 13.
-func (self *ILegacyIAccessibleProvider) Get_Help(pszHelp *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszHelp)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) Get_Help() (foundation.BSTR, error) {
+	var _pszHelp foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszHelp)))
+	return _pszHelp, win32.HRESULTError(int32(r1))
 }
 
 // Get_KeyboardShortcut dispatches through ILegacyIAccessibleProvider's vtable slot 14.
-func (self *ILegacyIAccessibleProvider) Get_KeyboardShortcut(pszKeyboardShortcut *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszKeyboardShortcut)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) Get_KeyboardShortcut() (foundation.BSTR, error) {
+	var _pszKeyboardShortcut foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszKeyboardShortcut)))
+	return _pszKeyboardShortcut, win32.HRESULTError(int32(r1))
 }
 
 // GetSelection dispatches through ILegacyIAccessibleProvider's vtable slot 15.
-func (self *ILegacyIAccessibleProvider) GetSelection(pvarSelectedChildren **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelectedChildren)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) GetSelection() (*systemcom.SAFEARRAY, error) {
+	var _pvarSelectedChildren *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarSelectedChildren)))
+	return _pvarSelectedChildren, win32.HRESULTError(int32(r1))
 }
 
 // Get_DefaultAction dispatches through ILegacyIAccessibleProvider's vtable slot 16.
-func (self *ILegacyIAccessibleProvider) Get_DefaultAction(pszDefaultAction *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDefaultAction)))
-	return foundation.HRESULT(r1)
+func (self *ILegacyIAccessibleProvider) Get_DefaultAction() (foundation.BSTR, error) {
+	var _pszDefaultAction foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDefaultAction)))
+	return _pszDefaultAction, win32.HRESULTError(int32(r1))
 }
 
 // IMultipleViewProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-imultipleviewprovider
@@ -597,27 +639,30 @@ type IMultipleViewProvider struct {
 var IID_IMultipleViewProvider = win32.GUID{Data1: 0x6278cab1, Data2: 0xb556, Data3: 0x4a1a, Data4: [8]byte{0xb4, 0xe0, 0x41, 0x8a, 0xcc, 0x52, 0x32, 0x01}}
 
 // GetViewName dispatches through IMultipleViewProvider's vtable slot 3.
-func (self *IMultipleViewProvider) GetViewName(viewId int32, pRetVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(viewId), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IMultipleViewProvider) GetViewName(viewId int32) (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(viewId), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentView dispatches through IMultipleViewProvider's vtable slot 4.
-func (self *IMultipleViewProvider) SetCurrentView(viewId int32) foundation.HRESULT {
+func (self *IMultipleViewProvider) SetCurrentView(viewId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(viewId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentView dispatches through IMultipleViewProvider's vtable slot 5.
-func (self *IMultipleViewProvider) Get_CurrentView(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IMultipleViewProvider) Get_CurrentView() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedViews dispatches through IMultipleViewProvider's vtable slot 6.
-func (self *IMultipleViewProvider) GetSupportedViews(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IMultipleViewProvider) GetSupportedViews() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IObjectModelProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iobjectmodelprovider
@@ -630,9 +675,10 @@ type IObjectModelProvider struct {
 var IID_IObjectModelProvider = win32.GUID{Data1: 0x3ad86ebd, Data2: 0xf5ef, Data3: 0x483d, Data4: [8]byte{0xbb, 0x18, 0xb1, 0x04, 0x2a, 0x47, 0x5d, 0x64}}
 
 // GetUnderlyingObjectModel dispatches through IObjectModelProvider's vtable slot 3.
-func (self *IObjectModelProvider) GetUnderlyingObjectModel(ppUnknown **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnknown)))
-	return foundation.HRESULT(r1)
+func (self *IObjectModelProvider) GetUnderlyingObjectModel() (*systemcom.IUnknown, error) {
+	var _ppUnknown *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUnknown)))
+	return _ppUnknown, win32.HRESULTError(int32(r1))
 }
 
 // IProxyProviderWinEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iproxyproviderwineventhandler
@@ -645,9 +691,9 @@ type IProxyProviderWinEventHandler struct {
 var IID_IProxyProviderWinEventHandler = win32.GUID{Data1: 0x89592ad4, Data2: 0xf4e0, Data3: 0x43d5, Data4: [8]byte{0xa3, 0xb6, 0xba, 0xd7, 0xe1, 0x11, 0xb4, 0x35}}
 
 // RespondToWinEvent dispatches through IProxyProviderWinEventHandler's vtable slot 3.
-func (self *IProxyProviderWinEventHandler) RespondToWinEvent(idWinEvent uint32, hwnd foundation.HWND, idObject int32, idChild int32, pSink *IProxyProviderWinEventSink) foundation.HRESULT {
+func (self *IProxyProviderWinEventHandler) RespondToWinEvent(idWinEvent uint32, hwnd foundation.HWND, idObject int32, idChild int32, pSink *IProxyProviderWinEventSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(idWinEvent), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(pSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProxyProviderWinEventSink: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iproxyproviderwineventsink
@@ -660,15 +706,15 @@ type IProxyProviderWinEventSink struct {
 var IID_IProxyProviderWinEventSink = win32.GUID{Data1: 0x4fd82b78, Data2: 0xa43e, Data3: 0x46ac, Data4: [8]byte{0x98, 0x03, 0x0a, 0x69, 0x69, 0xc7, 0xc1, 0x83}}
 
 // AddAutomationEvent dispatches through IProxyProviderWinEventSink's vtable slot 4.
-func (self *IProxyProviderWinEventSink) AddAutomationEvent(pProvider *IRawElementProviderSimple, id UIA_EVENT_ID) foundation.HRESULT {
+func (self *IProxyProviderWinEventSink) AddAutomationEvent(pProvider *IRawElementProviderSimple, id UIA_EVENT_ID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProvider)), uintptr(id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStructureChangedEvent dispatches through IProxyProviderWinEventSink's vtable slot 5.
-func (self *IProxyProviderWinEventSink) AddStructureChangedEvent(pProvider *IRawElementProviderSimple, structureChangeType StructureChangeType, runtimeId *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IProxyProviderWinEventSink) AddStructureChangedEvent(pProvider *IRawElementProviderSimple, structureChangeType StructureChangeType, runtimeId *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProvider)), uintptr(structureChangeType), uintptr(unsafe.Pointer(runtimeId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRangeValueProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irangevalueprovider
@@ -681,39 +727,45 @@ type IRangeValueProvider struct {
 var IID_IRangeValueProvider = win32.GUID{Data1: 0x36dc7aef, Data2: 0x33e6, Data3: 0x4691, Data4: [8]byte{0xaf, 0xe1, 0x2b, 0xe7, 0x27, 0x4b, 0x3d, 0x33}}
 
 // Get_Value dispatches through IRangeValueProvider's vtable slot 4.
-func (self *IRangeValueProvider) Get_Value(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRangeValueProvider) Get_Value() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsReadOnly dispatches through IRangeValueProvider's vtable slot 5.
-func (self *IRangeValueProvider) Get_IsReadOnly(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRangeValueProvider) Get_IsReadOnly() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Maximum dispatches through IRangeValueProvider's vtable slot 6.
-func (self *IRangeValueProvider) Get_Maximum(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRangeValueProvider) Get_Maximum() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Minimum dispatches through IRangeValueProvider's vtable slot 7.
-func (self *IRangeValueProvider) Get_Minimum(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRangeValueProvider) Get_Minimum() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_LargeChange dispatches through IRangeValueProvider's vtable slot 8.
-func (self *IRangeValueProvider) Get_LargeChange(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRangeValueProvider) Get_LargeChange() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_SmallChange dispatches through IRangeValueProvider's vtable slot 9.
-func (self *IRangeValueProvider) Get_SmallChange(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRangeValueProvider) Get_SmallChange() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IRawElementProviderAdviseEvents: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementprovideradviseevents
@@ -726,15 +778,15 @@ type IRawElementProviderAdviseEvents struct {
 var IID_IRawElementProviderAdviseEvents = win32.GUID{Data1: 0xa407b27b, Data2: 0x0f6d, Data3: 0x4427, Data4: [8]byte{0x92, 0x92, 0x47, 0x3c, 0x7b, 0xf9, 0x32, 0x58}}
 
 // AdviseEventAdded dispatches through IRawElementProviderAdviseEvents's vtable slot 3.
-func (self *IRawElementProviderAdviseEvents) AdviseEventAdded(eventId UIA_EVENT_ID, propertyIDs *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IRawElementProviderAdviseEvents) AdviseEventAdded(eventId UIA_EVENT_ID, propertyIDs *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(unsafe.Pointer(propertyIDs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AdviseEventRemoved dispatches through IRawElementProviderAdviseEvents's vtable slot 4.
-func (self *IRawElementProviderAdviseEvents) AdviseEventRemoved(eventId UIA_EVENT_ID, propertyIDs *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IRawElementProviderAdviseEvents) AdviseEventRemoved(eventId UIA_EVENT_ID, propertyIDs *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(unsafe.Pointer(propertyIDs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRawElementProviderFragment: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementproviderfragment
@@ -747,39 +799,44 @@ type IRawElementProviderFragment struct {
 var IID_IRawElementProviderFragment = win32.GUID{Data1: 0xf7063da8, Data2: 0x8359, Data3: 0x439c, Data4: [8]byte{0x92, 0x97, 0xbb, 0xc5, 0x29, 0x9a, 0x7d, 0x87}}
 
 // Navigate dispatches through IRawElementProviderFragment's vtable slot 3.
-func (self *IRawElementProviderFragment) Navigate(direction NavigateDirection, pRetVal **IRawElementProviderFragment) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderFragment) Navigate(direction NavigateDirection) (*IRawElementProviderFragment, error) {
+	var _pRetVal *IRawElementProviderFragment
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetRuntimeId dispatches through IRawElementProviderFragment's vtable slot 4.
-func (self *IRawElementProviderFragment) GetRuntimeId(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderFragment) GetRuntimeId() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_BoundingRectangle dispatches through IRawElementProviderFragment's vtable slot 5.
-func (self *IRawElementProviderFragment) Get_BoundingRectangle(pRetVal *UiaRect) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderFragment) Get_BoundingRectangle() (UiaRect, error) {
+	var _pRetVal UiaRect
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetEmbeddedFragmentRoots dispatches through IRawElementProviderFragment's vtable slot 6.
-func (self *IRawElementProviderFragment) GetEmbeddedFragmentRoots(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderFragment) GetEmbeddedFragmentRoots() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // SetFocus dispatches through IRawElementProviderFragment's vtable slot 7.
-func (self *IRawElementProviderFragment) SetFocus() foundation.HRESULT {
+func (self *IRawElementProviderFragment) SetFocus() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FragmentRoot dispatches through IRawElementProviderFragment's vtable slot 8.
-func (self *IRawElementProviderFragment) Get_FragmentRoot(pRetVal **IRawElementProviderFragmentRoot) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderFragment) Get_FragmentRoot() (*IRawElementProviderFragmentRoot, error) {
+	var _pRetVal *IRawElementProviderFragmentRoot
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IRawElementProviderFragmentRoot: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementproviderfragmentroot
@@ -792,9 +849,10 @@ type IRawElementProviderFragmentRoot struct {
 var IID_IRawElementProviderFragmentRoot = win32.GUID{Data1: 0x620ce2a5, Data2: 0xab8f, Data3: 0x40a9, Data4: [8]byte{0x86, 0xcb, 0xde, 0x3c, 0x75, 0x59, 0x9b, 0x58}}
 
 // GetFocus dispatches through IRawElementProviderFragmentRoot's vtable slot 4.
-func (self *IRawElementProviderFragmentRoot) GetFocus(pRetVal **IRawElementProviderFragment) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderFragmentRoot) GetFocus() (*IRawElementProviderFragment, error) {
+	var _pRetVal *IRawElementProviderFragment
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IRawElementProviderHostingAccessibles: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementproviderhostingaccessibles
@@ -807,9 +865,10 @@ type IRawElementProviderHostingAccessibles struct {
 var IID_IRawElementProviderHostingAccessibles = win32.GUID{Data1: 0x24be0b07, Data2: 0xd37d, Data3: 0x487a, Data4: [8]byte{0x98, 0xcf, 0xa1, 0x3e, 0xd4, 0x65, 0xe9, 0xb3}}
 
 // GetEmbeddedAccessibles dispatches through IRawElementProviderHostingAccessibles's vtable slot 3.
-func (self *IRawElementProviderHostingAccessibles) GetEmbeddedAccessibles(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderHostingAccessibles) GetEmbeddedAccessibles() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IRawElementProviderHwndOverride: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementproviderhwndoverride
@@ -822,9 +881,10 @@ type IRawElementProviderHwndOverride struct {
 var IID_IRawElementProviderHwndOverride = win32.GUID{Data1: 0x1d5df27c, Data2: 0x8947, Data3: 0x4425, Data4: [8]byte{0xb8, 0xd9, 0x79, 0x78, 0x7b, 0xb4, 0x60, 0xb8}}
 
 // GetOverrideProviderForHwnd dispatches through IRawElementProviderHwndOverride's vtable slot 3.
-func (self *IRawElementProviderHwndOverride) GetOverrideProviderForHwnd(hwnd foundation.HWND, pRetVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderHwndOverride) GetOverrideProviderForHwnd(hwnd foundation.HWND) (*IRawElementProviderSimple, error) {
+	var _pRetVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IRawElementProviderSimple: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementprovidersimple
@@ -837,27 +897,31 @@ type IRawElementProviderSimple struct {
 var IID_IRawElementProviderSimple = win32.GUID{Data1: 0xd6dd68d1, Data2: 0x86fd, Data3: 0x4332, Data4: [8]byte{0x86, 0x66, 0x9a, 0xbe, 0xde, 0xa2, 0xd2, 0x4c}}
 
 // Get_ProviderOptions dispatches through IRawElementProviderSimple's vtable slot 3.
-func (self *IRawElementProviderSimple) Get_ProviderOptions(pRetVal *ProviderOptions) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderSimple) Get_ProviderOptions() (ProviderOptions, error) {
+	var _pRetVal ProviderOptions
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetPatternProvider dispatches through IRawElementProviderSimple's vtable slot 4.
-func (self *IRawElementProviderSimple) GetPatternProvider(patternId UIA_PATTERN_ID, pRetVal **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderSimple) GetPatternProvider(patternId UIA_PATTERN_ID) (*systemcom.IUnknown, error) {
+	var _pRetVal *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyValue dispatches through IRawElementProviderSimple's vtable slot 5.
-func (self *IRawElementProviderSimple) GetPropertyValue(propertyId UIA_PROPERTY_ID, pRetVal *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderSimple) GetPropertyValue(propertyId UIA_PROPERTY_ID) (systemvariant.VARIANT, error) {
+	var _pRetVal systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_HostRawElementProvider dispatches through IRawElementProviderSimple's vtable slot 6.
-func (self *IRawElementProviderSimple) Get_HostRawElementProvider(pRetVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderSimple) Get_HostRawElementProvider() (*IRawElementProviderSimple, error) {
+	var _pRetVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IRawElementProviderSimple2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementprovidersimple2
@@ -870,9 +934,9 @@ type IRawElementProviderSimple2 struct {
 var IID_IRawElementProviderSimple2 = win32.GUID{Data1: 0xa0a839a9, Data2: 0x8da1, Data3: 0x4a82, Data4: [8]byte{0x80, 0x6a, 0x8e, 0x0d, 0x44, 0xe7, 0x9f, 0x56}}
 
 // ShowContextMenu dispatches through IRawElementProviderSimple2's vtable slot 7.
-func (self *IRawElementProviderSimple2) ShowContextMenu() foundation.HRESULT {
+func (self *IRawElementProviderSimple2) ShowContextMenu() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRawElementProviderSimple3: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementprovidersimple3
@@ -885,9 +949,10 @@ type IRawElementProviderSimple3 struct {
 var IID_IRawElementProviderSimple3 = win32.GUID{Data1: 0xfcf5d820, Data2: 0xd7ec, Data3: 0x4613, Data4: [8]byte{0xbd, 0xf6, 0x42, 0xa8, 0x4c, 0xe7, 0xda, 0xaf}}
 
 // GetMetadataValue dispatches through IRawElementProviderSimple3's vtable slot 8.
-func (self *IRawElementProviderSimple3) GetMetadataValue(targetId int32, metadataId UIA_METADATA_ID, returnVal *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(targetId), uintptr(metadataId), uintptr(unsafe.Pointer(returnVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderSimple3) GetMetadataValue(targetId int32, metadataId UIA_METADATA_ID) (systemvariant.VARIANT, error) {
+	var _returnVal systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(targetId), uintptr(metadataId), uintptr(unsafe.Pointer(&_returnVal)))
+	return _returnVal, win32.HRESULTError(int32(r1))
 }
 
 // IRawElementProviderWindowlessSite: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-irawelementproviderwindowlesssite
@@ -900,15 +965,17 @@ type IRawElementProviderWindowlessSite struct {
 var IID_IRawElementProviderWindowlessSite = win32.GUID{Data1: 0x0a2a93cc, Data2: 0xbfad, Data3: 0x42ac, Data4: [8]byte{0x9b, 0x2e, 0x09, 0x91, 0xfb, 0x0d, 0x3e, 0xa0}}
 
 // GetAdjacentFragment dispatches through IRawElementProviderWindowlessSite's vtable slot 3.
-func (self *IRawElementProviderWindowlessSite) GetAdjacentFragment(direction NavigateDirection, ppParent **IRawElementProviderFragment) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(ppParent)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderWindowlessSite) GetAdjacentFragment(direction NavigateDirection) (*IRawElementProviderFragment, error) {
+	var _ppParent *IRawElementProviderFragment
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(&_ppParent)))
+	return _ppParent, win32.HRESULTError(int32(r1))
 }
 
 // GetRuntimeIdPrefix dispatches through IRawElementProviderWindowlessSite's vtable slot 4.
-func (self *IRawElementProviderWindowlessSite) GetRuntimeIdPrefix(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IRawElementProviderWindowlessSite) GetRuntimeIdPrefix() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IRichEditUiaInformation: https://learn.microsoft.com/windows/win32/api/textserv/nn-textserv-irichedituiainformation
@@ -921,15 +988,15 @@ type IRichEditUiaInformation struct {
 var IID_IRichEditUiaInformation = win32.GUID{Data1: 0x23969a9d, Data2: 0x8546, Data3: 0x4032, Data4: [8]byte{0xa1, 0xbb, 0x73, 0x75, 0x0c, 0xbf, 0x33, 0x33}}
 
 // GetBoundaryRectangle dispatches through IRichEditUiaInformation's vtable slot 3.
-func (self *IRichEditUiaInformation) GetBoundaryRectangle(pUiaRect *UiaRect) foundation.HRESULT {
+func (self *IRichEditUiaInformation) GetBoundaryRectangle(pUiaRect *UiaRect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUiaRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsVisible dispatches through IRichEditUiaInformation's vtable slot 4.
-func (self *IRichEditUiaInformation) IsVisible() foundation.HRESULT {
+func (self *IRichEditUiaInformation) IsVisible() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRicheditWindowlessAccessibility: https://learn.microsoft.com/windows/win32/api/textserv/nn-textserv-iricheditwindowlessaccessibility
@@ -942,9 +1009,9 @@ type IRicheditWindowlessAccessibility struct {
 var IID_IRicheditWindowlessAccessibility = win32.GUID{Data1: 0x983e572d, Data2: 0x20cd, Data3: 0x460b, Data4: [8]byte{0x91, 0x04, 0x83, 0x11, 0x15, 0x92, 0xdd, 0x10}}
 
 // CreateProvider dispatches through IRicheditWindowlessAccessibility's vtable slot 3.
-func (self *IRicheditWindowlessAccessibility) CreateProvider(pSite *IRawElementProviderWindowlessSite, ppProvider **IRawElementProviderSimple) foundation.HRESULT {
+func (self *IRicheditWindowlessAccessibility) CreateProvider(pSite *IRawElementProviderWindowlessSite, ppProvider **IRawElementProviderSimple) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSite)), uintptr(unsafe.Pointer(ppProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IScrollItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iscrollitemprovider
@@ -957,9 +1024,9 @@ type IScrollItemProvider struct {
 var IID_IScrollItemProvider = win32.GUID{Data1: 0x2360c714, Data2: 0x4bf1, Data3: 0x4b26, Data4: [8]byte{0xba, 0x65, 0x9b, 0x21, 0x31, 0x61, 0x27, 0xeb}}
 
 // ScrollIntoView dispatches through IScrollItemProvider's vtable slot 3.
-func (self *IScrollItemProvider) ScrollIntoView() foundation.HRESULT {
+func (self *IScrollItemProvider) ScrollIntoView() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IScrollProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iscrollprovider
@@ -972,45 +1039,51 @@ type IScrollProvider struct {
 var IID_IScrollProvider = win32.GUID{Data1: 0xb38b8077, Data2: 0x1fc3, Data3: 0x42a5, Data4: [8]byte{0x8c, 0xae, 0xd4, 0x0c, 0x22, 0x15, 0x05, 0x5a}}
 
 // Scroll dispatches through IScrollProvider's vtable slot 3.
-func (self *IScrollProvider) Scroll(horizontalAmount ScrollAmount, verticalAmount ScrollAmount) foundation.HRESULT {
+func (self *IScrollProvider) Scroll(horizontalAmount ScrollAmount, verticalAmount ScrollAmount) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(horizontalAmount), uintptr(verticalAmount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HorizontalScrollPercent dispatches through IScrollProvider's vtable slot 5.
-func (self *IScrollProvider) Get_HorizontalScrollPercent(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IScrollProvider) Get_HorizontalScrollPercent() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_VerticalScrollPercent dispatches through IScrollProvider's vtable slot 6.
-func (self *IScrollProvider) Get_VerticalScrollPercent(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IScrollProvider) Get_VerticalScrollPercent() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_HorizontalViewSize dispatches through IScrollProvider's vtable slot 7.
-func (self *IScrollProvider) Get_HorizontalViewSize(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IScrollProvider) Get_HorizontalViewSize() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_VerticalViewSize dispatches through IScrollProvider's vtable slot 8.
-func (self *IScrollProvider) Get_VerticalViewSize(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IScrollProvider) Get_VerticalViewSize() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_HorizontallyScrollable dispatches through IScrollProvider's vtable slot 9.
-func (self *IScrollProvider) Get_HorizontallyScrollable(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IScrollProvider) Get_HorizontallyScrollable() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_VerticallyScrollable dispatches through IScrollProvider's vtable slot 10.
-func (self *IScrollProvider) Get_VerticallyScrollable(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IScrollProvider) Get_VerticallyScrollable() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ISelectionItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iselectionitemprovider
@@ -1023,33 +1096,35 @@ type ISelectionItemProvider struct {
 var IID_ISelectionItemProvider = win32.GUID{Data1: 0x2acad808, Data2: 0xb2d4, Data3: 0x452d, Data4: [8]byte{0xa4, 0x07, 0x91, 0xff, 0x1a, 0xd1, 0x67, 0xb2}}
 
 // Select dispatches through ISelectionItemProvider's vtable slot 3.
-func (self *ISelectionItemProvider) Select() foundation.HRESULT {
+func (self *ISelectionItemProvider) Select() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddToSelection dispatches through ISelectionItemProvider's vtable slot 4.
-func (self *ISelectionItemProvider) AddToSelection() foundation.HRESULT {
+func (self *ISelectionItemProvider) AddToSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveFromSelection dispatches through ISelectionItemProvider's vtable slot 5.
-func (self *ISelectionItemProvider) RemoveFromSelection() foundation.HRESULT {
+func (self *ISelectionItemProvider) RemoveFromSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsSelected dispatches through ISelectionItemProvider's vtable slot 6.
-func (self *ISelectionItemProvider) Get_IsSelected(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ISelectionItemProvider) Get_IsSelected() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_SelectionContainer dispatches through ISelectionItemProvider's vtable slot 7.
-func (self *ISelectionItemProvider) Get_SelectionContainer(pRetVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ISelectionItemProvider) Get_SelectionContainer() (*IRawElementProviderSimple, error) {
+	var _pRetVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ISelectionProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iselectionprovider
@@ -1062,21 +1137,24 @@ type ISelectionProvider struct {
 var IID_ISelectionProvider = win32.GUID{Data1: 0xfb8b03af, Data2: 0x3bdf, Data3: 0x48d4, Data4: [8]byte{0xbd, 0x36, 0x1a, 0x65, 0x79, 0x3b, 0xe1, 0x68}}
 
 // GetSelection dispatches through ISelectionProvider's vtable slot 3.
-func (self *ISelectionProvider) GetSelection(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ISelectionProvider) GetSelection() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CanSelectMultiple dispatches through ISelectionProvider's vtable slot 4.
-func (self *ISelectionProvider) Get_CanSelectMultiple(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ISelectionProvider) Get_CanSelectMultiple() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsSelectionRequired dispatches through ISelectionProvider's vtable slot 5.
-func (self *ISelectionProvider) Get_IsSelectionRequired(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ISelectionProvider) Get_IsSelectionRequired() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ISelectionProvider2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iselectionprovider2
@@ -1089,27 +1167,31 @@ type ISelectionProvider2 struct {
 var IID_ISelectionProvider2 = win32.GUID{Data1: 0x14f68475, Data2: 0xee1c, Data3: 0x44f6, Data4: [8]byte{0xa8, 0x69, 0xd2, 0x39, 0x38, 0x1f, 0x0f, 0xe7}}
 
 // Get_FirstSelectedItem dispatches through ISelectionProvider2's vtable slot 6.
-func (self *ISelectionProvider2) Get_FirstSelectedItem(retVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *ISelectionProvider2) Get_FirstSelectedItem() (*IRawElementProviderSimple, error) {
+	var _retVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_LastSelectedItem dispatches through ISelectionProvider2's vtable slot 7.
-func (self *ISelectionProvider2) Get_LastSelectedItem(retVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *ISelectionProvider2) Get_LastSelectedItem() (*IRawElementProviderSimple, error) {
+	var _retVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentSelectedItem dispatches through ISelectionProvider2's vtable slot 8.
-func (self *ISelectionProvider2) Get_CurrentSelectedItem(retVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *ISelectionProvider2) Get_CurrentSelectedItem() (*IRawElementProviderSimple, error) {
+	var _retVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ItemCount dispatches through ISelectionProvider2's vtable slot 9.
-func (self *ISelectionProvider2) Get_ItemCount(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *ISelectionProvider2) Get_ItemCount() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // ISpreadsheetItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-ispreadsheetitemprovider
@@ -1122,21 +1204,24 @@ type ISpreadsheetItemProvider struct {
 var IID_ISpreadsheetItemProvider = win32.GUID{Data1: 0xeaed4660, Data2: 0x7b3d, Data3: 0x4879, Data4: [8]byte{0xa2, 0xe6, 0x36, 0x5c, 0xe6, 0x03, 0xf3, 0xd0}}
 
 // Get_Formula dispatches through ISpreadsheetItemProvider's vtable slot 3.
-func (self *ISpreadsheetItemProvider) Get_Formula(pRetVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ISpreadsheetItemProvider) Get_Formula() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetAnnotationObjects dispatches through ISpreadsheetItemProvider's vtable slot 4.
-func (self *ISpreadsheetItemProvider) GetAnnotationObjects(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ISpreadsheetItemProvider) GetAnnotationObjects() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetAnnotationTypes dispatches through ISpreadsheetItemProvider's vtable slot 5.
-func (self *ISpreadsheetItemProvider) GetAnnotationTypes(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ISpreadsheetItemProvider) GetAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ISpreadsheetProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-ispreadsheetprovider
@@ -1149,9 +1234,11 @@ type ISpreadsheetProvider struct {
 var IID_ISpreadsheetProvider = win32.GUID{Data1: 0x6f6b5d35, Data2: 0x5525, Data3: 0x4f80, Data4: [8]byte{0xb7, 0x58, 0x85, 0x47, 0x38, 0x32, 0xff, 0xc7}}
 
 // GetItemByName dispatches through ISpreadsheetProvider's vtable slot 3.
-func (self *ISpreadsheetProvider) GetItemByName(name foundation.PWSTR, pRetVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ISpreadsheetProvider) GetItemByName(name string) (*IRawElementProviderSimple, error) {
+	_name := win32.UTF16Ptr(name)
+	var _pRetVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IStylesProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-istylesprovider
@@ -1164,45 +1251,52 @@ type IStylesProvider struct {
 var IID_IStylesProvider = win32.GUID{Data1: 0x19b6b649, Data2: 0xf5d7, Data3: 0x4a6d, Data4: [8]byte{0xbd, 0xcb, 0x12, 0x92, 0x52, 0xbe, 0x58, 0x8a}}
 
 // Get_StyleId dispatches through IStylesProvider's vtable slot 3.
-func (self *IStylesProvider) Get_StyleId(retVal *UIA_STYLE_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IStylesProvider) Get_StyleId() (UIA_STYLE_ID, error) {
+	var _retVal UIA_STYLE_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_StyleName dispatches through IStylesProvider's vtable slot 4.
-func (self *IStylesProvider) Get_StyleName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IStylesProvider) Get_StyleName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_FillColor dispatches through IStylesProvider's vtable slot 5.
-func (self *IStylesProvider) Get_FillColor(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IStylesProvider) Get_FillColor() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_FillPatternStyle dispatches through IStylesProvider's vtable slot 6.
-func (self *IStylesProvider) Get_FillPatternStyle(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IStylesProvider) Get_FillPatternStyle() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Shape dispatches through IStylesProvider's vtable slot 7.
-func (self *IStylesProvider) Get_Shape(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IStylesProvider) Get_Shape() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_FillPatternColor dispatches through IStylesProvider's vtable slot 8.
-func (self *IStylesProvider) Get_FillPatternColor(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IStylesProvider) Get_FillPatternColor() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ExtendedProperties dispatches through IStylesProvider's vtable slot 9.
-func (self *IStylesProvider) Get_ExtendedProperties(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IStylesProvider) Get_ExtendedProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // ISynchronizedInputProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-isynchronizedinputprovider
@@ -1215,15 +1309,15 @@ type ISynchronizedInputProvider struct {
 var IID_ISynchronizedInputProvider = win32.GUID{Data1: 0x29db1a06, Data2: 0x02ce, Data3: 0x4cf7, Data4: [8]byte{0x9b, 0x42, 0x56, 0x5d, 0x4f, 0xab, 0x20, 0xee}}
 
 // StartListening dispatches through ISynchronizedInputProvider's vtable slot 3.
-func (self *ISynchronizedInputProvider) StartListening(inputType SynchronizedInputType) foundation.HRESULT {
+func (self *ISynchronizedInputProvider) StartListening(inputType SynchronizedInputType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(inputType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through ISynchronizedInputProvider's vtable slot 4.
-func (self *ISynchronizedInputProvider) Cancel() foundation.HRESULT {
+func (self *ISynchronizedInputProvider) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITableItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itableitemprovider
@@ -1236,15 +1330,17 @@ type ITableItemProvider struct {
 var IID_ITableItemProvider = win32.GUID{Data1: 0xb9734fa6, Data2: 0x771f, Data3: 0x4d78, Data4: [8]byte{0x9c, 0x90, 0x25, 0x17, 0x99, 0x93, 0x49, 0xcd}}
 
 // GetRowHeaderItems dispatches through ITableItemProvider's vtable slot 3.
-func (self *ITableItemProvider) GetRowHeaderItems(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITableItemProvider) GetRowHeaderItems() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetColumnHeaderItems dispatches through ITableItemProvider's vtable slot 4.
-func (self *ITableItemProvider) GetColumnHeaderItems(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITableItemProvider) GetColumnHeaderItems() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ITableProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itableprovider
@@ -1257,21 +1353,24 @@ type ITableProvider struct {
 var IID_ITableProvider = win32.GUID{Data1: 0x9c860395, Data2: 0x97b3, Data3: 0x490a, Data4: [8]byte{0xb5, 0x2a, 0x85, 0x8c, 0xc2, 0x2a, 0xf1, 0x66}}
 
 // GetRowHeaders dispatches through ITableProvider's vtable slot 3.
-func (self *ITableProvider) GetRowHeaders(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITableProvider) GetRowHeaders() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetColumnHeaders dispatches through ITableProvider's vtable slot 4.
-func (self *ITableProvider) GetColumnHeaders(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITableProvider) GetColumnHeaders() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_RowOrColumnMajor dispatches through ITableProvider's vtable slot 5.
-func (self *ITableProvider) Get_RowOrColumnMajor(pRetVal *RowOrColumnMajor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITableProvider) Get_RowOrColumnMajor() (RowOrColumnMajor, error) {
+	var _pRetVal RowOrColumnMajor
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ITextChildProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextchildprovider
@@ -1284,15 +1383,17 @@ type ITextChildProvider struct {
 var IID_ITextChildProvider = win32.GUID{Data1: 0x4c2de2b9, Data2: 0xc88f, Data3: 0x4f88, Data4: [8]byte{0xa1, 0x11, 0xf1, 0xd3, 0x36, 0xb7, 0xd1, 0xa9}}
 
 // Get_TextContainer dispatches through ITextChildProvider's vtable slot 3.
-func (self *ITextChildProvider) Get_TextContainer(pRetVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextChildProvider) Get_TextContainer() (*IRawElementProviderSimple, error) {
+	var _pRetVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_TextRange dispatches through ITextChildProvider's vtable slot 4.
-func (self *ITextChildProvider) Get_TextRange(pRetVal **ITextRangeProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextChildProvider) Get_TextRange() (*ITextRangeProvider, error) {
+	var _pRetVal *ITextRangeProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ITextEditProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itexteditprovider
@@ -1305,15 +1406,17 @@ type ITextEditProvider struct {
 var IID_ITextEditProvider = win32.GUID{Data1: 0xea3605b4, Data2: 0x3a05, Data3: 0x400e, Data4: [8]byte{0xb5, 0xf9, 0x4e, 0x91, 0xb4, 0x0f, 0x61, 0x76}}
 
 // GetActiveComposition dispatches through ITextEditProvider's vtable slot 9.
-func (self *ITextEditProvider) GetActiveComposition(pRetVal **ITextRangeProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextEditProvider) GetActiveComposition() (*ITextRangeProvider, error) {
+	var _pRetVal *ITextRangeProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetConversionTarget dispatches through ITextEditProvider's vtable slot 10.
-func (self *ITextEditProvider) GetConversionTarget(pRetVal **ITextRangeProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextEditProvider) GetConversionTarget() (*ITextRangeProvider, error) {
+	var _pRetVal *ITextRangeProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ITextProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextprovider
@@ -1326,33 +1429,38 @@ type ITextProvider struct {
 var IID_ITextProvider = win32.GUID{Data1: 0x3589c92c, Data2: 0x63f3, Data3: 0x4367, Data4: [8]byte{0x99, 0xbb, 0xad, 0xa6, 0x53, 0xb7, 0x7c, 0xf2}}
 
 // GetSelection dispatches through ITextProvider's vtable slot 3.
-func (self *ITextProvider) GetSelection(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextProvider) GetSelection() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetVisibleRanges dispatches through ITextProvider's vtable slot 4.
-func (self *ITextProvider) GetVisibleRanges(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextProvider) GetVisibleRanges() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // RangeFromChild dispatches through ITextProvider's vtable slot 5.
-func (self *ITextProvider) RangeFromChild(childElement *IRawElementProviderSimple, pRetVal **ITextRangeProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childElement)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextProvider) RangeFromChild(childElement *IRawElementProviderSimple) (*ITextRangeProvider, error) {
+	var _pRetVal *ITextRangeProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childElement)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_DocumentRange dispatches through ITextProvider's vtable slot 7.
-func (self *ITextProvider) Get_DocumentRange(pRetVal **ITextRangeProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextProvider) Get_DocumentRange() (*ITextRangeProvider, error) {
+	var _pRetVal *ITextRangeProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_SupportedTextSelection dispatches through ITextProvider's vtable slot 8.
-func (self *ITextProvider) Get_SupportedTextSelection(pRetVal *SupportedTextSelection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextProvider) Get_SupportedTextSelection() (SupportedTextSelection, error) {
+	var _pRetVal SupportedTextSelection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ITextProvider2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextprovider2
@@ -1365,15 +1473,17 @@ type ITextProvider2 struct {
 var IID_ITextProvider2 = win32.GUID{Data1: 0x0dc5e6ed, Data2: 0x3e16, Data3: 0x4bf1, Data4: [8]byte{0x8f, 0x9a, 0xa9, 0x79, 0x87, 0x8b, 0xc1, 0x95}}
 
 // RangeFromAnnotation dispatches through ITextProvider2's vtable slot 9.
-func (self *ITextProvider2) RangeFromAnnotation(annotationElement *IRawElementProviderSimple, pRetVal **ITextRangeProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(annotationElement)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextProvider2) RangeFromAnnotation(annotationElement *IRawElementProviderSimple) (*ITextRangeProvider, error) {
+	var _pRetVal *ITextRangeProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(annotationElement)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCaretRange dispatches through ITextProvider2's vtable slot 10.
-func (self *ITextProvider2) GetCaretRange(isActive *foundation.BOOL, pRetVal **ITextRangeProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextProvider2) GetCaretRange(isActive *foundation.BOOL) (*ITextRangeProvider, error) {
+	var _pRetVal *ITextRangeProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ITextRangeProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextrangeprovider
@@ -1386,105 +1496,119 @@ type ITextRangeProvider struct {
 var IID_ITextRangeProvider = win32.GUID{Data1: 0x5347ad7b, Data2: 0xc355, Data3: 0x46f8, Data4: [8]byte{0xaf, 0xf5, 0x90, 0x90, 0x33, 0x58, 0x2f, 0x63}}
 
 // Clone dispatches through ITextRangeProvider's vtable slot 3.
-func (self *ITextRangeProvider) Clone(pRetVal **ITextRangeProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) Clone() (*ITextRangeProvider, error) {
+	var _pRetVal *ITextRangeProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Compare dispatches through ITextRangeProvider's vtable slot 4.
-func (self *ITextRangeProvider) Compare(range_ *ITextRangeProvider, pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) Compare(range_ *ITextRangeProvider) (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // CompareEndpoints dispatches through ITextRangeProvider's vtable slot 5.
-func (self *ITextRangeProvider) CompareEndpoints(endpoint TextPatternRangeEndpoint, targetRange *ITextRangeProvider, targetEndpoint TextPatternRangeEndpoint, pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unsafe.Pointer(targetRange)), uintptr(targetEndpoint), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) CompareEndpoints(endpoint TextPatternRangeEndpoint, targetRange *ITextRangeProvider, targetEndpoint TextPatternRangeEndpoint) (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unsafe.Pointer(targetRange)), uintptr(targetEndpoint), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ExpandToEnclosingUnit dispatches through ITextRangeProvider's vtable slot 6.
-func (self *ITextRangeProvider) ExpandToEnclosingUnit(unit TextUnit) foundation.HRESULT {
+func (self *ITextRangeProvider) ExpandToEnclosingUnit(unit TextUnit) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unit))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindText dispatches through ITextRangeProvider's vtable slot 8.
-func (self *ITextRangeProvider) FindText(text foundation.BSTR, backward foundation.BOOL, ignoreCase foundation.BOOL, pRetVal **ITextRangeProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(backward), uintptr(ignoreCase), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) FindText(text foundation.BSTR, backward bool, ignoreCase bool) (*ITextRangeProvider, error) {
+	_backward := win32.Bool32(backward)
+	_ignoreCase := win32.Bool32(ignoreCase)
+	var _pRetVal *ITextRangeProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(_backward), uintptr(_ignoreCase), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetAttributeValue dispatches through ITextRangeProvider's vtable slot 9.
-func (self *ITextRangeProvider) GetAttributeValue(attributeId UIA_TEXTATTRIBUTE_ID, pRetVal *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(attributeId), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) GetAttributeValue(attributeId UIA_TEXTATTRIBUTE_ID) (systemvariant.VARIANT, error) {
+	var _pRetVal systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(attributeId), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetBoundingRectangles dispatches through ITextRangeProvider's vtable slot 10.
-func (self *ITextRangeProvider) GetBoundingRectangles(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) GetBoundingRectangles() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetEnclosingElement dispatches through ITextRangeProvider's vtable slot 11.
-func (self *ITextRangeProvider) GetEnclosingElement(pRetVal **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) GetEnclosingElement() (*IRawElementProviderSimple, error) {
+	var _pRetVal *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // GetText dispatches through ITextRangeProvider's vtable slot 12.
-func (self *ITextRangeProvider) GetText(maxLength int32, pRetVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(maxLength), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) GetText(maxLength int32) (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(maxLength), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Move dispatches through ITextRangeProvider's vtable slot 13.
-func (self *ITextRangeProvider) Move(unit TextUnit, count int32, pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) Move(unit TextUnit, count int32) (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // MoveEndpointByUnit dispatches through ITextRangeProvider's vtable slot 14.
-func (self *ITextRangeProvider) MoveEndpointByUnit(endpoint TextPatternRangeEndpoint, unit TextUnit, count int32, pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) MoveEndpointByUnit(endpoint TextPatternRangeEndpoint, unit TextUnit, count int32) (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // MoveEndpointByRange dispatches through ITextRangeProvider's vtable slot 15.
-func (self *ITextRangeProvider) MoveEndpointByRange(endpoint TextPatternRangeEndpoint, targetRange *ITextRangeProvider, targetEndpoint TextPatternRangeEndpoint) foundation.HRESULT {
+func (self *ITextRangeProvider) MoveEndpointByRange(endpoint TextPatternRangeEndpoint, targetRange *ITextRangeProvider, targetEndpoint TextPatternRangeEndpoint) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unsafe.Pointer(targetRange)), uintptr(targetEndpoint))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Select dispatches through ITextRangeProvider's vtable slot 16.
-func (self *ITextRangeProvider) Select() foundation.HRESULT {
+func (self *ITextRangeProvider) Select() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddToSelection dispatches through ITextRangeProvider's vtable slot 17.
-func (self *ITextRangeProvider) AddToSelection() foundation.HRESULT {
+func (self *ITextRangeProvider) AddToSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveFromSelection dispatches through ITextRangeProvider's vtable slot 18.
-func (self *ITextRangeProvider) RemoveFromSelection() foundation.HRESULT {
+func (self *ITextRangeProvider) RemoveFromSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScrollIntoView dispatches through ITextRangeProvider's vtable slot 19.
-func (self *ITextRangeProvider) ScrollIntoView(alignToTop foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(alignToTop))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) ScrollIntoView(alignToTop bool) error {
+	_alignToTop := win32.Bool32(alignToTop)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(_alignToTop))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChildren dispatches through ITextRangeProvider's vtable slot 20.
-func (self *ITextRangeProvider) GetChildren(pRetVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITextRangeProvider) GetChildren() (*systemcom.SAFEARRAY, error) {
+	var _pRetVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ITextRangeProvider2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itextrangeprovider2
@@ -1497,9 +1621,9 @@ type ITextRangeProvider2 struct {
 var IID_ITextRangeProvider2 = win32.GUID{Data1: 0x9bbce42c, Data2: 0x1921, Data3: 0x4f18, Data4: [8]byte{0x89, 0xca, 0xdb, 0xa1, 0x91, 0x0a, 0x03, 0x86}}
 
 // ShowContextMenu dispatches through ITextRangeProvider2's vtable slot 21.
-func (self *ITextRangeProvider2) ShowContextMenu() foundation.HRESULT {
+func (self *ITextRangeProvider2) ShowContextMenu() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IToggleProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itoggleprovider
@@ -1512,15 +1636,16 @@ type IToggleProvider struct {
 var IID_IToggleProvider = win32.GUID{Data1: 0x56d00bd0, Data2: 0xc4f4, Data3: 0x433c, Data4: [8]byte{0xa8, 0x36, 0x1a, 0x52, 0xa5, 0x7e, 0x08, 0x92}}
 
 // Toggle dispatches through IToggleProvider's vtable slot 3.
-func (self *IToggleProvider) Toggle() foundation.HRESULT {
+func (self *IToggleProvider) Toggle() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ToggleState dispatches through IToggleProvider's vtable slot 4.
-func (self *IToggleProvider) Get_ToggleState(pRetVal *ToggleState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IToggleProvider) Get_ToggleState() (ToggleState, error) {
+	var _pRetVal ToggleState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ITransformProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itransformprovider
@@ -1533,21 +1658,24 @@ type ITransformProvider struct {
 var IID_ITransformProvider = win32.GUID{Data1: 0x6829ddc4, Data2: 0x4f91, Data3: 0x4ffa, Data4: [8]byte{0xb8, 0x6f, 0xbd, 0x3e, 0x29, 0x87, 0xcb, 0x4c}}
 
 // Get_CanMove dispatches through ITransformProvider's vtable slot 6.
-func (self *ITransformProvider) Get_CanMove(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITransformProvider) Get_CanMove() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CanResize dispatches through ITransformProvider's vtable slot 7.
-func (self *ITransformProvider) Get_CanResize(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITransformProvider) Get_CanResize() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CanRotate dispatches through ITransformProvider's vtable slot 8.
-func (self *ITransformProvider) Get_CanRotate(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITransformProvider) Get_CanRotate() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ITransformProvider2: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-itransformprovider2
@@ -1560,33 +1688,37 @@ type ITransformProvider2 struct {
 var IID_ITransformProvider2 = win32.GUID{Data1: 0x4758742f, Data2: 0x7ac2, Data3: 0x460c, Data4: [8]byte{0xbc, 0x48, 0x09, 0xfc, 0x09, 0x30, 0x8a, 0x93}}
 
 // Get_CanZoom dispatches through ITransformProvider2's vtable slot 10.
-func (self *ITransformProvider2) Get_CanZoom(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITransformProvider2) Get_CanZoom() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ZoomLevel dispatches through ITransformProvider2's vtable slot 11.
-func (self *ITransformProvider2) Get_ZoomLevel(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITransformProvider2) Get_ZoomLevel() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ZoomMinimum dispatches through ITransformProvider2's vtable slot 12.
-func (self *ITransformProvider2) Get_ZoomMinimum(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITransformProvider2) Get_ZoomMinimum() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ZoomMaximum dispatches through ITransformProvider2's vtable slot 13.
-func (self *ITransformProvider2) Get_ZoomMaximum(pRetVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *ITransformProvider2) Get_ZoomMaximum() (float64, error) {
+	var _pRetVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // ZoomByUnit dispatches through ITransformProvider2's vtable slot 14.
-func (self *ITransformProvider2) ZoomByUnit(zoomUnit ZoomUnit) foundation.HRESULT {
+func (self *ITransformProvider2) ZoomByUnit(zoomUnit ZoomUnit) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(zoomUnit))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomation: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomation
@@ -1599,291 +1731,327 @@ type IUIAutomation struct {
 var IID_IUIAutomation = win32.GUID{Data1: 0x30cbe57d, Data2: 0xd9d0, Data3: 0x452a, Data4: [8]byte{0xab, 0x13, 0x7a, 0xc5, 0xac, 0x48, 0x25, 0xee}}
 
 // CompareElements dispatches through IUIAutomation's vtable slot 3.
-func (self *IUIAutomation) CompareElements(el1 *IUIAutomationElement, el2 *IUIAutomationElement, areSame *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(el1)), uintptr(unsafe.Pointer(el2)), uintptr(unsafe.Pointer(areSame)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CompareElements(el1 *IUIAutomationElement, el2 *IUIAutomationElement) (foundation.BOOL, error) {
+	var _areSame foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(el1)), uintptr(unsafe.Pointer(el2)), uintptr(unsafe.Pointer(&_areSame)))
+	return _areSame, win32.HRESULTError(int32(r1))
 }
 
 // CompareRuntimeIds dispatches through IUIAutomation's vtable slot 4.
-func (self *IUIAutomation) CompareRuntimeIds(runtimeId1 *systemcom.SAFEARRAY, runtimeId2 *systemcom.SAFEARRAY, areSame *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(runtimeId1)), uintptr(unsafe.Pointer(runtimeId2)), uintptr(unsafe.Pointer(areSame)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CompareRuntimeIds(runtimeId1 *systemcom.SAFEARRAY, runtimeId2 *systemcom.SAFEARRAY) (foundation.BOOL, error) {
+	var _areSame foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(runtimeId1)), uintptr(unsafe.Pointer(runtimeId2)), uintptr(unsafe.Pointer(&_areSame)))
+	return _areSame, win32.HRESULTError(int32(r1))
 }
 
 // GetRootElement dispatches through IUIAutomation's vtable slot 5.
-func (self *IUIAutomation) GetRootElement(root **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(root)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) GetRootElement() (*IUIAutomationElement, error) {
+	var _root *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_root)))
+	return _root, win32.HRESULTError(int32(r1))
 }
 
 // ElementFromHandle dispatches through IUIAutomation's vtable slot 6.
-func (self *IUIAutomation) ElementFromHandle(hwnd foundation.HWND, element **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) ElementFromHandle(hwnd foundation.HWND) (*IUIAutomationElement, error) {
+	var _element *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // GetFocusedElement dispatches through IUIAutomation's vtable slot 8.
-func (self *IUIAutomation) GetFocusedElement(element **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) GetFocusedElement() (*IUIAutomationElement, error) {
+	var _element *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // GetRootElementBuildCache dispatches through IUIAutomation's vtable slot 9.
-func (self *IUIAutomation) GetRootElementBuildCache(cacheRequest *IUIAutomationCacheRequest, root **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(root)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) GetRootElementBuildCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _root *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_root)))
+	return _root, win32.HRESULTError(int32(r1))
 }
 
 // ElementFromHandleBuildCache dispatches through IUIAutomation's vtable slot 10.
-func (self *IUIAutomation) ElementFromHandleBuildCache(hwnd foundation.HWND, cacheRequest *IUIAutomationCacheRequest, element **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) ElementFromHandleBuildCache(hwnd foundation.HWND, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _element *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // GetFocusedElementBuildCache dispatches through IUIAutomation's vtable slot 12.
-func (self *IUIAutomation) GetFocusedElementBuildCache(cacheRequest *IUIAutomationCacheRequest, element **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) GetFocusedElementBuildCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _element *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // CreateTreeWalker dispatches through IUIAutomation's vtable slot 13.
-func (self *IUIAutomation) CreateTreeWalker(pCondition *IUIAutomationCondition, walker **IUIAutomationTreeWalker) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCondition)), uintptr(unsafe.Pointer(walker)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateTreeWalker(pCondition *IUIAutomationCondition) (*IUIAutomationTreeWalker, error) {
+	var _walker *IUIAutomationTreeWalker
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCondition)), uintptr(unsafe.Pointer(&_walker)))
+	return _walker, win32.HRESULTError(int32(r1))
 }
 
 // Get_ControlViewWalker dispatches through IUIAutomation's vtable slot 14.
-func (self *IUIAutomation) Get_ControlViewWalker(walker **IUIAutomationTreeWalker) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(walker)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) Get_ControlViewWalker() (*IUIAutomationTreeWalker, error) {
+	var _walker *IUIAutomationTreeWalker
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_walker)))
+	return _walker, win32.HRESULTError(int32(r1))
 }
 
 // Get_ContentViewWalker dispatches through IUIAutomation's vtable slot 15.
-func (self *IUIAutomation) Get_ContentViewWalker(walker **IUIAutomationTreeWalker) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(walker)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) Get_ContentViewWalker() (*IUIAutomationTreeWalker, error) {
+	var _walker *IUIAutomationTreeWalker
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_walker)))
+	return _walker, win32.HRESULTError(int32(r1))
 }
 
 // Get_RawViewWalker dispatches through IUIAutomation's vtable slot 16.
-func (self *IUIAutomation) Get_RawViewWalker(walker **IUIAutomationTreeWalker) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(walker)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) Get_RawViewWalker() (*IUIAutomationTreeWalker, error) {
+	var _walker *IUIAutomationTreeWalker
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_walker)))
+	return _walker, win32.HRESULTError(int32(r1))
 }
 
 // Get_RawViewCondition dispatches through IUIAutomation's vtable slot 17.
-func (self *IUIAutomation) Get_RawViewCondition(condition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) Get_RawViewCondition() (*IUIAutomationCondition, error) {
+	var _condition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
+	return _condition, win32.HRESULTError(int32(r1))
 }
 
 // Get_ControlViewCondition dispatches through IUIAutomation's vtable slot 18.
-func (self *IUIAutomation) Get_ControlViewCondition(condition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) Get_ControlViewCondition() (*IUIAutomationCondition, error) {
+	var _condition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
+	return _condition, win32.HRESULTError(int32(r1))
 }
 
 // Get_ContentViewCondition dispatches through IUIAutomation's vtable slot 19.
-func (self *IUIAutomation) Get_ContentViewCondition(condition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) Get_ContentViewCondition() (*IUIAutomationCondition, error) {
+	var _condition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
+	return _condition, win32.HRESULTError(int32(r1))
 }
 
 // CreateCacheRequest dispatches through IUIAutomation's vtable slot 20.
-func (self *IUIAutomation) CreateCacheRequest(cacheRequest **IUIAutomationCacheRequest) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateCacheRequest() (*IUIAutomationCacheRequest, error) {
+	var _cacheRequest *IUIAutomationCacheRequest
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_cacheRequest)))
+	return _cacheRequest, win32.HRESULTError(int32(r1))
 }
 
 // CreateTrueCondition dispatches through IUIAutomation's vtable slot 21.
-func (self *IUIAutomation) CreateTrueCondition(newCondition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newCondition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateTrueCondition() (*IUIAutomationCondition, error) {
+	var _newCondition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_newCondition)))
+	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
 // CreateFalseCondition dispatches through IUIAutomation's vtable slot 22.
-func (self *IUIAutomation) CreateFalseCondition(newCondition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newCondition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateFalseCondition() (*IUIAutomationCondition, error) {
+	var _newCondition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_newCondition)))
+	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
 // CreateAndCondition dispatches through IUIAutomation's vtable slot 25.
-func (self *IUIAutomation) CreateAndCondition(condition1 *IUIAutomationCondition, condition2 *IUIAutomationCondition, newCondition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition1)), uintptr(unsafe.Pointer(condition2)), uintptr(unsafe.Pointer(newCondition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateAndCondition(condition1 *IUIAutomationCondition, condition2 *IUIAutomationCondition) (*IUIAutomationCondition, error) {
+	var _newCondition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition1)), uintptr(unsafe.Pointer(condition2)), uintptr(unsafe.Pointer(&_newCondition)))
+	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
 // CreateAndConditionFromArray dispatches through IUIAutomation's vtable slot 26.
-func (self *IUIAutomation) CreateAndConditionFromArray(conditions *systemcom.SAFEARRAY, newCondition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(unsafe.Pointer(newCondition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateAndConditionFromArray(conditions *systemcom.SAFEARRAY) (*IUIAutomationCondition, error) {
+	var _newCondition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(unsafe.Pointer(&_newCondition)))
+	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
 // CreateAndConditionFromNativeArray dispatches through IUIAutomation's vtable slot 27.
-func (self *IUIAutomation) CreateAndConditionFromNativeArray(conditions **IUIAutomationCondition, conditionCount int32, newCondition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(conditionCount), uintptr(unsafe.Pointer(newCondition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateAndConditionFromNativeArray(conditions **IUIAutomationCondition, conditionCount int32) (*IUIAutomationCondition, error) {
+	var _newCondition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(conditionCount), uintptr(unsafe.Pointer(&_newCondition)))
+	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
 // CreateOrCondition dispatches through IUIAutomation's vtable slot 28.
-func (self *IUIAutomation) CreateOrCondition(condition1 *IUIAutomationCondition, condition2 *IUIAutomationCondition, newCondition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition1)), uintptr(unsafe.Pointer(condition2)), uintptr(unsafe.Pointer(newCondition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateOrCondition(condition1 *IUIAutomationCondition, condition2 *IUIAutomationCondition) (*IUIAutomationCondition, error) {
+	var _newCondition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition1)), uintptr(unsafe.Pointer(condition2)), uintptr(unsafe.Pointer(&_newCondition)))
+	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
 // CreateOrConditionFromArray dispatches through IUIAutomation's vtable slot 29.
-func (self *IUIAutomation) CreateOrConditionFromArray(conditions *systemcom.SAFEARRAY, newCondition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(unsafe.Pointer(newCondition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateOrConditionFromArray(conditions *systemcom.SAFEARRAY) (*IUIAutomationCondition, error) {
+	var _newCondition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(unsafe.Pointer(&_newCondition)))
+	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
 // CreateOrConditionFromNativeArray dispatches through IUIAutomation's vtable slot 30.
-func (self *IUIAutomation) CreateOrConditionFromNativeArray(conditions **IUIAutomationCondition, conditionCount int32, newCondition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(conditionCount), uintptr(unsafe.Pointer(newCondition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateOrConditionFromNativeArray(conditions **IUIAutomationCondition, conditionCount int32) (*IUIAutomationCondition, error) {
+	var _newCondition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(conditionCount), uintptr(unsafe.Pointer(&_newCondition)))
+	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
 // CreateNotCondition dispatches through IUIAutomation's vtable slot 31.
-func (self *IUIAutomation) CreateNotCondition(condition *IUIAutomationCondition, newCondition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(newCondition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateNotCondition(condition *IUIAutomationCondition) (*IUIAutomationCondition, error) {
+	var _newCondition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(&_newCondition)))
+	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
 // AddAutomationEventHandler dispatches through IUIAutomation's vtable slot 32.
-func (self *IUIAutomation) AddAutomationEventHandler(eventId UIA_EVENT_ID, element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationEventHandler) foundation.HRESULT {
+func (self *IUIAutomation) AddAutomationEventHandler(eventId UIA_EVENT_ID, element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAutomationEventHandler dispatches through IUIAutomation's vtable slot 33.
-func (self *IUIAutomation) RemoveAutomationEventHandler(eventId UIA_EVENT_ID, element *IUIAutomationElement, handler *IUIAutomationEventHandler) foundation.HRESULT {
+func (self *IUIAutomation) RemoveAutomationEventHandler(eventId UIA_EVENT_ID, element *IUIAutomationElement, handler *IUIAutomationEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPropertyChangedEventHandlerNativeArray dispatches through IUIAutomation's vtable slot 34.
-func (self *IUIAutomation) AddPropertyChangedEventHandlerNativeArray(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray *UIA_PROPERTY_ID, propertyCount int32) foundation.HRESULT {
+func (self *IUIAutomation) AddPropertyChangedEventHandlerNativeArray(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray *UIA_PROPERTY_ID, propertyCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)), uintptr(unsafe.Pointer(propertyArray)), uintptr(propertyCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPropertyChangedEventHandler dispatches through IUIAutomation's vtable slot 35.
-func (self *IUIAutomation) AddPropertyChangedEventHandler(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IUIAutomation) AddPropertyChangedEventHandler(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)), uintptr(unsafe.Pointer(propertyArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemovePropertyChangedEventHandler dispatches through IUIAutomation's vtable slot 36.
-func (self *IUIAutomation) RemovePropertyChangedEventHandler(element *IUIAutomationElement, handler *IUIAutomationPropertyChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomation) RemovePropertyChangedEventHandler(element *IUIAutomationElement, handler *IUIAutomationPropertyChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStructureChangedEventHandler dispatches through IUIAutomation's vtable slot 37.
-func (self *IUIAutomation) AddStructureChangedEventHandler(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationStructureChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomation) AddStructureChangedEventHandler(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationStructureChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStructureChangedEventHandler dispatches through IUIAutomation's vtable slot 38.
-func (self *IUIAutomation) RemoveStructureChangedEventHandler(element *IUIAutomationElement, handler *IUIAutomationStructureChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomation) RemoveStructureChangedEventHandler(element *IUIAutomationElement, handler *IUIAutomationStructureChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddFocusChangedEventHandler dispatches through IUIAutomation's vtable slot 39.
-func (self *IUIAutomation) AddFocusChangedEventHandler(cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationFocusChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomation) AddFocusChangedEventHandler(cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationFocusChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveFocusChangedEventHandler dispatches through IUIAutomation's vtable slot 40.
-func (self *IUIAutomation) RemoveFocusChangedEventHandler(handler *IUIAutomationFocusChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomation) RemoveFocusChangedEventHandler(handler *IUIAutomationFocusChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllEventHandlers dispatches through IUIAutomation's vtable slot 41.
-func (self *IUIAutomation) RemoveAllEventHandlers() foundation.HRESULT {
+func (self *IUIAutomation) RemoveAllEventHandlers() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IntNativeArrayToSafeArray dispatches through IUIAutomation's vtable slot 42.
-func (self *IUIAutomation) IntNativeArrayToSafeArray(array *int32, arrayCount int32, safeArray **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(array)), uintptr(arrayCount), uintptr(unsafe.Pointer(safeArray)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) IntNativeArrayToSafeArray(array *int32, arrayCount int32) (*systemcom.SAFEARRAY, error) {
+	var _safeArray *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(array)), uintptr(arrayCount), uintptr(unsafe.Pointer(&_safeArray)))
+	return _safeArray, win32.HRESULTError(int32(r1))
 }
 
 // IntSafeArrayToNativeArray dispatches through IUIAutomation's vtable slot 43.
-func (self *IUIAutomation) IntSafeArrayToNativeArray(intArray *systemcom.SAFEARRAY, array **int32, arrayCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(intArray)), uintptr(unsafe.Pointer(array)), uintptr(unsafe.Pointer(arrayCount)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) IntSafeArrayToNativeArray(intArray *systemcom.SAFEARRAY, array **int32) (int32, error) {
+	var _arrayCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(intArray)), uintptr(unsafe.Pointer(array)), uintptr(unsafe.Pointer(&_arrayCount)))
+	return _arrayCount, win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayToRectNativeArray dispatches through IUIAutomation's vtable slot 46.
-func (self *IUIAutomation) SafeArrayToRectNativeArray(rects *systemcom.SAFEARRAY, rectArray **foundation.RECT, rectArrayCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rects)), uintptr(unsafe.Pointer(rectArray)), uintptr(unsafe.Pointer(rectArrayCount)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) SafeArrayToRectNativeArray(rects *systemcom.SAFEARRAY, rectArray **foundation.RECT) (int32, error) {
+	var _rectArrayCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rects)), uintptr(unsafe.Pointer(rectArray)), uintptr(unsafe.Pointer(&_rectArrayCount)))
+	return _rectArrayCount, win32.HRESULTError(int32(r1))
 }
 
 // CreateProxyFactoryEntry dispatches through IUIAutomation's vtable slot 47.
-func (self *IUIAutomation) CreateProxyFactoryEntry(factory *IUIAutomationProxyFactory, factoryEntry **IUIAutomationProxyFactoryEntry) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(factoryEntry)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) CreateProxyFactoryEntry(factory *IUIAutomationProxyFactory) (*IUIAutomationProxyFactoryEntry, error) {
+	var _factoryEntry *IUIAutomationProxyFactoryEntry
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(&_factoryEntry)))
+	return _factoryEntry, win32.HRESULTError(int32(r1))
 }
 
 // Get_ProxyFactoryMapping dispatches through IUIAutomation's vtable slot 48.
-func (self *IUIAutomation) Get_ProxyFactoryMapping(factoryMapping **IUIAutomationProxyFactoryMapping) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factoryMapping)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) Get_ProxyFactoryMapping() (*IUIAutomationProxyFactoryMapping, error) {
+	var _factoryMapping *IUIAutomationProxyFactoryMapping
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_factoryMapping)))
+	return _factoryMapping, win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyProgrammaticName dispatches through IUIAutomation's vtable slot 49.
-func (self *IUIAutomation) GetPropertyProgrammaticName(property UIA_PROPERTY_ID, name *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) GetPropertyProgrammaticName(property UIA_PROPERTY_ID) (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(property), uintptr(unsafe.Pointer(&_name)))
+	return _name, win32.HRESULTError(int32(r1))
 }
 
 // GetPatternProgrammaticName dispatches through IUIAutomation's vtable slot 50.
-func (self *IUIAutomation) GetPatternProgrammaticName(pattern UIA_PATTERN_ID, name *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(pattern), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) GetPatternProgrammaticName(pattern UIA_PATTERN_ID) (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(pattern), uintptr(unsafe.Pointer(&_name)))
+	return _name, win32.HRESULTError(int32(r1))
 }
 
 // PollForPotentialSupportedPatterns dispatches through IUIAutomation's vtable slot 51.
-func (self *IUIAutomation) PollForPotentialSupportedPatterns(pElement *IUIAutomationElement, patternIds **systemcom.SAFEARRAY, patternNames **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IUIAutomation) PollForPotentialSupportedPatterns(pElement *IUIAutomationElement, patternIds **systemcom.SAFEARRAY, patternNames **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pElement)), uintptr(unsafe.Pointer(patternIds)), uintptr(unsafe.Pointer(patternNames)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PollForPotentialSupportedProperties dispatches through IUIAutomation's vtable slot 52.
-func (self *IUIAutomation) PollForPotentialSupportedProperties(pElement *IUIAutomationElement, propertyIds **systemcom.SAFEARRAY, propertyNames **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IUIAutomation) PollForPotentialSupportedProperties(pElement *IUIAutomationElement, propertyIds **systemcom.SAFEARRAY, propertyNames **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pElement)), uintptr(unsafe.Pointer(propertyIds)), uintptr(unsafe.Pointer(propertyNames)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReservedNotSupportedValue dispatches through IUIAutomation's vtable slot 54.
-func (self *IUIAutomation) Get_ReservedNotSupportedValue(notSupportedValue **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(notSupportedValue)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) Get_ReservedNotSupportedValue() (*systemcom.IUnknown, error) {
+	var _notSupportedValue *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_notSupportedValue)))
+	return _notSupportedValue, win32.HRESULTError(int32(r1))
 }
 
 // Get_ReservedMixedAttributeValue dispatches through IUIAutomation's vtable slot 55.
-func (self *IUIAutomation) Get_ReservedMixedAttributeValue(mixedAttributeValue **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mixedAttributeValue)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) Get_ReservedMixedAttributeValue() (*systemcom.IUnknown, error) {
+	var _mixedAttributeValue *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mixedAttributeValue)))
+	return _mixedAttributeValue, win32.HRESULTError(int32(r1))
 }
 
 // ElementFromIAccessible dispatches through IUIAutomation's vtable slot 56.
-func (self *IUIAutomation) ElementFromIAccessible(accessible *IAccessible, childId int32, element **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(accessible)), uintptr(childId), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) ElementFromIAccessible(accessible *IAccessible, childId int32) (*IUIAutomationElement, error) {
+	var _element *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(accessible)), uintptr(childId), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // ElementFromIAccessibleBuildCache dispatches through IUIAutomation's vtable slot 57.
-func (self *IUIAutomation) ElementFromIAccessibleBuildCache(accessible *IAccessible, childId int32, cacheRequest *IUIAutomationCacheRequest, element **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(accessible)), uintptr(childId), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation) ElementFromIAccessibleBuildCache(accessible *IAccessible, childId int32, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _element *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(accessible)), uintptr(childId), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomation2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomation2
@@ -1896,39 +2064,43 @@ type IUIAutomation2 struct {
 var IID_IUIAutomation2 = win32.GUID{Data1: 0x34723aff, Data2: 0x0c9d, Data3: 0x49d0, Data4: [8]byte{0x98, 0x96, 0x7a, 0xb5, 0x2d, 0xf8, 0xcd, 0x8a}}
 
 // Get_AutoSetFocus dispatches through IUIAutomation2's vtable slot 58.
-func (self *IUIAutomation2) Get_AutoSetFocus(autoSetFocus *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(autoSetFocus)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation2) Get_AutoSetFocus() (foundation.BOOL, error) {
+	var _autoSetFocus foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_autoSetFocus)))
+	return _autoSetFocus, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoSetFocus dispatches through IUIAutomation2's vtable slot 59.
-func (self *IUIAutomation2) Put_AutoSetFocus(autoSetFocus foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(autoSetFocus))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation2) Put_AutoSetFocus(autoSetFocus bool) error {
+	_autoSetFocus := win32.Bool32(autoSetFocus)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(_autoSetFocus))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ConnectionTimeout dispatches through IUIAutomation2's vtable slot 60.
-func (self *IUIAutomation2) Get_ConnectionTimeout(timeout *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(timeout)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation2) Get_ConnectionTimeout() (uint32, error) {
+	var _timeout uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeout)))
+	return _timeout, win32.HRESULTError(int32(r1))
 }
 
 // Put_ConnectionTimeout dispatches through IUIAutomation2's vtable slot 61.
-func (self *IUIAutomation2) Put_ConnectionTimeout(timeout uint32) foundation.HRESULT {
+func (self *IUIAutomation2) Put_ConnectionTimeout(timeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(timeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TransactionTimeout dispatches through IUIAutomation2's vtable slot 62.
-func (self *IUIAutomation2) Get_TransactionTimeout(timeout *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(timeout)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation2) Get_TransactionTimeout() (uint32, error) {
+	var _timeout uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_timeout)))
+	return _timeout, win32.HRESULTError(int32(r1))
 }
 
 // Put_TransactionTimeout dispatches through IUIAutomation2's vtable slot 63.
-func (self *IUIAutomation2) Put_TransactionTimeout(timeout uint32) foundation.HRESULT {
+func (self *IUIAutomation2) Put_TransactionTimeout(timeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(timeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomation3: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomation3
@@ -1941,15 +2113,15 @@ type IUIAutomation3 struct {
 var IID_IUIAutomation3 = win32.GUID{Data1: 0x73d768da, Data2: 0x9b51, Data3: 0x4b89, Data4: [8]byte{0x93, 0x6e, 0xc2, 0x09, 0x29, 0x09, 0x73, 0xe7}}
 
 // AddTextEditTextChangedEventHandler dispatches through IUIAutomation3's vtable slot 64.
-func (self *IUIAutomation3) AddTextEditTextChangedEventHandler(element *IUIAutomationElement, scope TreeScope, textEditChangeType TextEditChangeType, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationTextEditTextChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomation3) AddTextEditTextChangedEventHandler(element *IUIAutomationElement, scope TreeScope, textEditChangeType TextEditChangeType, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationTextEditTextChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(textEditChangeType), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveTextEditTextChangedEventHandler dispatches through IUIAutomation3's vtable slot 65.
-func (self *IUIAutomation3) RemoveTextEditTextChangedEventHandler(element *IUIAutomationElement, handler *IUIAutomationTextEditTextChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomation3) RemoveTextEditTextChangedEventHandler(element *IUIAutomationElement, handler *IUIAutomationTextEditTextChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomation4: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomation4
@@ -1962,15 +2134,15 @@ type IUIAutomation4 struct {
 var IID_IUIAutomation4 = win32.GUID{Data1: 0x1189c02a, Data2: 0x05f8, Data3: 0x4319, Data4: [8]byte{0x8e, 0x21, 0xe8, 0x17, 0xe3, 0xdb, 0x28, 0x60}}
 
 // AddChangesEventHandler dispatches through IUIAutomation4's vtable slot 66.
-func (self *IUIAutomation4) AddChangesEventHandler(element *IUIAutomationElement, scope TreeScope, changeTypes *int32, changesCount int32, pCacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationChangesEventHandler) foundation.HRESULT {
+func (self *IUIAutomation4) AddChangesEventHandler(element *IUIAutomationElement, scope TreeScope, changeTypes *int32, changesCount int32, pCacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationChangesEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(changeTypes)), uintptr(changesCount), uintptr(unsafe.Pointer(pCacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveChangesEventHandler dispatches through IUIAutomation4's vtable slot 67.
-func (self *IUIAutomation4) RemoveChangesEventHandler(element *IUIAutomationElement, handler *IUIAutomationChangesEventHandler) foundation.HRESULT {
+func (self *IUIAutomation4) RemoveChangesEventHandler(element *IUIAutomationElement, handler *IUIAutomationChangesEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomation5: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomation5
@@ -1983,15 +2155,15 @@ type IUIAutomation5 struct {
 var IID_IUIAutomation5 = win32.GUID{Data1: 0x25f700c8, Data2: 0xd816, Data3: 0x4057, Data4: [8]byte{0xa9, 0xdc, 0x3c, 0xbd, 0xee, 0x77, 0xe2, 0x56}}
 
 // AddNotificationEventHandler dispatches through IUIAutomation5's vtable slot 68.
-func (self *IUIAutomation5) AddNotificationEventHandler(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationNotificationEventHandler) foundation.HRESULT {
+func (self *IUIAutomation5) AddNotificationEventHandler(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationNotificationEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveNotificationEventHandler dispatches through IUIAutomation5's vtable slot 69.
-func (self *IUIAutomation5) RemoveNotificationEventHandler(element *IUIAutomationElement, handler *IUIAutomationNotificationEventHandler) foundation.HRESULT {
+func (self *IUIAutomation5) RemoveNotificationEventHandler(element *IUIAutomationElement, handler *IUIAutomationNotificationEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomation6: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomation6
@@ -2004,57 +2176,59 @@ type IUIAutomation6 struct {
 var IID_IUIAutomation6 = win32.GUID{Data1: 0xaae072da, Data2: 0x29e3, Data3: 0x413d, Data4: [8]byte{0x87, 0xa7, 0x19, 0x2d, 0xbf, 0x81, 0xed, 0x10}}
 
 // CreateEventHandlerGroup dispatches through IUIAutomation6's vtable slot 70.
-func (self *IUIAutomation6) CreateEventHandlerGroup(handlerGroup **IUIAutomationEventHandlerGroup) foundation.HRESULT {
+func (self *IUIAutomation6) CreateEventHandlerGroup(handlerGroup **IUIAutomationEventHandlerGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handlerGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEventHandlerGroup dispatches through IUIAutomation6's vtable slot 71.
-func (self *IUIAutomation6) AddEventHandlerGroup(element *IUIAutomationElement, handlerGroup *IUIAutomationEventHandlerGroup) foundation.HRESULT {
+func (self *IUIAutomation6) AddEventHandlerGroup(element *IUIAutomationElement, handlerGroup *IUIAutomationEventHandlerGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(handlerGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveEventHandlerGroup dispatches through IUIAutomation6's vtable slot 72.
-func (self *IUIAutomation6) RemoveEventHandlerGroup(element *IUIAutomationElement, handlerGroup *IUIAutomationEventHandlerGroup) foundation.HRESULT {
+func (self *IUIAutomation6) RemoveEventHandlerGroup(element *IUIAutomationElement, handlerGroup *IUIAutomationEventHandlerGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(handlerGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ConnectionRecoveryBehavior dispatches through IUIAutomation6's vtable slot 73.
-func (self *IUIAutomation6) Get_ConnectionRecoveryBehavior(connectionRecoveryBehaviorOptions *ConnectionRecoveryBehaviorOptions) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(connectionRecoveryBehaviorOptions)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation6) Get_ConnectionRecoveryBehavior() (ConnectionRecoveryBehaviorOptions, error) {
+	var _connectionRecoveryBehaviorOptions ConnectionRecoveryBehaviorOptions
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_connectionRecoveryBehaviorOptions)))
+	return _connectionRecoveryBehaviorOptions, win32.HRESULTError(int32(r1))
 }
 
 // Put_ConnectionRecoveryBehavior dispatches through IUIAutomation6's vtable slot 74.
-func (self *IUIAutomation6) Put_ConnectionRecoveryBehavior(connectionRecoveryBehaviorOptions ConnectionRecoveryBehaviorOptions) foundation.HRESULT {
+func (self *IUIAutomation6) Put_ConnectionRecoveryBehavior(connectionRecoveryBehaviorOptions ConnectionRecoveryBehaviorOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(connectionRecoveryBehaviorOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CoalesceEvents dispatches through IUIAutomation6's vtable slot 75.
-func (self *IUIAutomation6) Get_CoalesceEvents(coalesceEventsOptions *CoalesceEventsOptions) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(coalesceEventsOptions)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomation6) Get_CoalesceEvents() (CoalesceEventsOptions, error) {
+	var _coalesceEventsOptions CoalesceEventsOptions
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_coalesceEventsOptions)))
+	return _coalesceEventsOptions, win32.HRESULTError(int32(r1))
 }
 
 // Put_CoalesceEvents dispatches through IUIAutomation6's vtable slot 76.
-func (self *IUIAutomation6) Put_CoalesceEvents(coalesceEventsOptions CoalesceEventsOptions) foundation.HRESULT {
+func (self *IUIAutomation6) Put_CoalesceEvents(coalesceEventsOptions CoalesceEventsOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(coalesceEventsOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddActiveTextPositionChangedEventHandler dispatches through IUIAutomation6's vtable slot 77.
-func (self *IUIAutomation6) AddActiveTextPositionChangedEventHandler(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationActiveTextPositionChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomation6) AddActiveTextPositionChangedEventHandler(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationActiveTextPositionChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveActiveTextPositionChangedEventHandler dispatches through IUIAutomation6's vtable slot 78.
-func (self *IUIAutomation6) RemoveActiveTextPositionChangedEventHandler(element *IUIAutomationElement, handler *IUIAutomationActiveTextPositionChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomation6) RemoveActiveTextPositionChangedEventHandler(element *IUIAutomationElement, handler *IUIAutomationActiveTextPositionChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationActiveTextPositionChangedEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationactivetextpositionchangedeventhandler
@@ -2067,9 +2241,9 @@ type IUIAutomationActiveTextPositionChangedEventHandler struct {
 var IID_IUIAutomationActiveTextPositionChangedEventHandler = win32.GUID{Data1: 0xf97933b0, Data2: 0x8dae, Data3: 0x4496, Data4: [8]byte{0x89, 0x97, 0x5b, 0xa0, 0x15, 0xfe, 0x0d, 0x82}}
 
 // HandleActiveTextPositionChangedEvent dispatches through IUIAutomationActiveTextPositionChangedEventHandler's vtable slot 3.
-func (self *IUIAutomationActiveTextPositionChangedEventHandler) HandleActiveTextPositionChangedEvent(sender *IUIAutomationElement, range_ *IUIAutomationTextRange) foundation.HRESULT {
+func (self *IUIAutomationActiveTextPositionChangedEventHandler) HandleActiveTextPositionChangedEvent(sender *IUIAutomationElement, range_ *IUIAutomationTextRange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(unsafe.Pointer(range_)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationAndCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationandcondition
@@ -2082,21 +2256,23 @@ type IUIAutomationAndCondition struct {
 var IID_IUIAutomationAndCondition = win32.GUID{Data1: 0xa7d0af36, Data2: 0xb912, Data3: 0x45fe, Data4: [8]byte{0x98, 0x55, 0x09, 0x1d, 0xdc, 0x17, 0x4a, 0xec}}
 
 // Get_ChildCount dispatches through IUIAutomationAndCondition's vtable slot 3.
-func (self *IUIAutomationAndCondition) Get_ChildCount(childCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childCount)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAndCondition) Get_ChildCount() (int32, error) {
+	var _childCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_childCount)))
+	return _childCount, win32.HRESULTError(int32(r1))
 }
 
 // GetChildrenAsNativeArray dispatches through IUIAutomationAndCondition's vtable slot 4.
-func (self *IUIAutomationAndCondition) GetChildrenAsNativeArray(childArray ***IUIAutomationCondition, childArrayCount *int32) foundation.HRESULT {
+func (self *IUIAutomationAndCondition) GetChildrenAsNativeArray(childArray ***IUIAutomationCondition, childArrayCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childArray)), uintptr(unsafe.Pointer(childArrayCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChildren dispatches through IUIAutomationAndCondition's vtable slot 5.
-func (self *IUIAutomationAndCondition) GetChildren(childArray **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childArray)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAndCondition) GetChildren() (*systemcom.SAFEARRAY, error) {
+	var _childArray *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_childArray)))
+	return _childArray, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationAnnotationPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationannotationpattern
@@ -2109,63 +2285,73 @@ type IUIAutomationAnnotationPattern struct {
 var IID_IUIAutomationAnnotationPattern = win32.GUID{Data1: 0x9a175b21, Data2: 0x339e, Data3: 0x41b1, Data4: [8]byte{0x8e, 0x8b, 0x62, 0x3f, 0x6b, 0x68, 0x10, 0x98}}
 
 // Get_CurrentAnnotationTypeId dispatches through IUIAutomationAnnotationPattern's vtable slot 3.
-func (self *IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeId(retVal *UIA_ANNOTATIONTYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeId() (UIA_ANNOTATIONTYPE, error) {
+	var _retVal UIA_ANNOTATIONTYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAnnotationTypeName dispatches through IUIAutomationAnnotationPattern's vtable slot 4.
-func (self *IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CurrentAnnotationTypeName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAuthor dispatches through IUIAutomationAnnotationPattern's vtable slot 5.
-func (self *IUIAutomationAnnotationPattern) Get_CurrentAuthor(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CurrentAuthor() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentDateTime dispatches through IUIAutomationAnnotationPattern's vtable slot 6.
-func (self *IUIAutomationAnnotationPattern) Get_CurrentDateTime(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CurrentDateTime() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentTarget dispatches through IUIAutomationAnnotationPattern's vtable slot 7.
-func (self *IUIAutomationAnnotationPattern) Get_CurrentTarget(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CurrentTarget() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAnnotationTypeId dispatches through IUIAutomationAnnotationPattern's vtable slot 8.
-func (self *IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeId(retVal *UIA_ANNOTATIONTYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeId() (UIA_ANNOTATIONTYPE, error) {
+	var _retVal UIA_ANNOTATIONTYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAnnotationTypeName dispatches through IUIAutomationAnnotationPattern's vtable slot 9.
-func (self *IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CachedAnnotationTypeName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAuthor dispatches through IUIAutomationAnnotationPattern's vtable slot 10.
-func (self *IUIAutomationAnnotationPattern) Get_CachedAuthor(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CachedAuthor() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedDateTime dispatches through IUIAutomationAnnotationPattern's vtable slot 11.
-func (self *IUIAutomationAnnotationPattern) Get_CachedDateTime(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CachedDateTime() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedTarget dispatches through IUIAutomationAnnotationPattern's vtable slot 12.
-func (self *IUIAutomationAnnotationPattern) Get_CachedTarget(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationAnnotationPattern) Get_CachedTarget() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationBoolCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationboolcondition
@@ -2178,9 +2364,10 @@ type IUIAutomationBoolCondition struct {
 var IID_IUIAutomationBoolCondition = win32.GUID{Data1: 0x1b4e1f2e, Data2: 0x75eb, Data3: 0x4d0b, Data4: [8]byte{0x89, 0x52, 0x5a, 0x69, 0x98, 0x8e, 0x23, 0x07}}
 
 // Get_BooleanValue dispatches through IUIAutomationBoolCondition's vtable slot 3.
-func (self *IUIAutomationBoolCondition) Get_BooleanValue(boolVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(boolVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationBoolCondition) Get_BooleanValue() (foundation.BOOL, error) {
+	var _boolVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_boolVal)))
+	return _boolVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationCacheRequest: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationcacherequest
@@ -2193,57 +2380,61 @@ type IUIAutomationCacheRequest struct {
 var IID_IUIAutomationCacheRequest = win32.GUID{Data1: 0xb32a92b5, Data2: 0xbc25, Data3: 0x4078, Data4: [8]byte{0x9c, 0x08, 0xd7, 0xee, 0x95, 0xc4, 0x8e, 0x03}}
 
 // AddProperty dispatches through IUIAutomationCacheRequest's vtable slot 3.
-func (self *IUIAutomationCacheRequest) AddProperty(propertyId UIA_PROPERTY_ID) foundation.HRESULT {
+func (self *IUIAutomationCacheRequest) AddProperty(propertyId UIA_PROPERTY_ID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(propertyId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPattern dispatches through IUIAutomationCacheRequest's vtable slot 4.
-func (self *IUIAutomationCacheRequest) AddPattern(patternId UIA_PATTERN_ID) foundation.HRESULT {
+func (self *IUIAutomationCacheRequest) AddPattern(patternId UIA_PATTERN_ID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(patternId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IUIAutomationCacheRequest's vtable slot 5.
-func (self *IUIAutomationCacheRequest) Clone(clonedRequest **IUIAutomationCacheRequest) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clonedRequest)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationCacheRequest) Clone() (*IUIAutomationCacheRequest, error) {
+	var _clonedRequest *IUIAutomationCacheRequest
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_clonedRequest)))
+	return _clonedRequest, win32.HRESULTError(int32(r1))
 }
 
 // Get_TreeScope dispatches through IUIAutomationCacheRequest's vtable slot 6.
-func (self *IUIAutomationCacheRequest) Get_TreeScope(scope *TreeScope) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scope)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationCacheRequest) Get_TreeScope() (TreeScope, error) {
+	var _scope TreeScope
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_scope)))
+	return _scope, win32.HRESULTError(int32(r1))
 }
 
 // Put_TreeScope dispatches through IUIAutomationCacheRequest's vtable slot 7.
-func (self *IUIAutomationCacheRequest) Put_TreeScope(scope TreeScope) foundation.HRESULT {
+func (self *IUIAutomationCacheRequest) Put_TreeScope(scope TreeScope) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(scope))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TreeFilter dispatches through IUIAutomationCacheRequest's vtable slot 8.
-func (self *IUIAutomationCacheRequest) Get_TreeFilter(filter **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filter)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationCacheRequest) Get_TreeFilter() (*IUIAutomationCondition, error) {
+	var _filter *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_filter)))
+	return _filter, win32.HRESULTError(int32(r1))
 }
 
 // Put_TreeFilter dispatches through IUIAutomationCacheRequest's vtable slot 9.
-func (self *IUIAutomationCacheRequest) Put_TreeFilter(filter *IUIAutomationCondition) foundation.HRESULT {
+func (self *IUIAutomationCacheRequest) Put_TreeFilter(filter *IUIAutomationCondition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutomationElementMode dispatches through IUIAutomationCacheRequest's vtable slot 10.
-func (self *IUIAutomationCacheRequest) Get_AutomationElementMode(mode *AutomationElementMode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mode)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationCacheRequest) Get_AutomationElementMode() (AutomationElementMode, error) {
+	var _mode AutomationElementMode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mode)))
+	return _mode, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutomationElementMode dispatches through IUIAutomationCacheRequest's vtable slot 11.
-func (self *IUIAutomationCacheRequest) Put_AutomationElementMode(mode AutomationElementMode) foundation.HRESULT {
+func (self *IUIAutomationCacheRequest) Put_AutomationElementMode(mode AutomationElementMode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationChangesEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationchangeseventhandler
@@ -2256,9 +2447,9 @@ type IUIAutomationChangesEventHandler struct {
 var IID_IUIAutomationChangesEventHandler = win32.GUID{Data1: 0x58edca55, Data2: 0x2c3e, Data3: 0x4980, Data4: [8]byte{0xb1, 0xb9, 0x56, 0xc1, 0x7f, 0x27, 0xa2, 0xa0}}
 
 // HandleChangesEvent dispatches through IUIAutomationChangesEventHandler's vtable slot 3.
-func (self *IUIAutomationChangesEventHandler) HandleChangesEvent(sender *IUIAutomationElement, uiaChanges *UiaChangeInfo, changesCount int32) foundation.HRESULT {
+func (self *IUIAutomationChangesEventHandler) HandleChangesEvent(sender *IUIAutomationElement, uiaChanges *UiaChangeInfo, changesCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(unsafe.Pointer(uiaChanges)), uintptr(changesCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5b8e8f2a-9c7d-4f3e-a1b2-8d6e9f4c0a1b
@@ -2270,15 +2461,15 @@ type IUIAutomationClientConnectionCallback struct {
 var IID_IUIAutomationClientConnectionCallback = win32.GUID{Data1: 0x5b8e8f2a, Data2: 0x9c7d, Data3: 0x4f3e, Data4: [8]byte{0xa1, 0xb2, 0x8d, 0x6e, 0x9f, 0x4c, 0x0a, 0x1b}}
 
 // OnConnected dispatches through IUIAutomationClientConnectionCallback's vtable slot 3.
-func (self *IUIAutomationClientConnectionCallback) OnConnected(clientInfo *IUIAutomationClientInfo) foundation.HRESULT {
+func (self *IUIAutomationClientConnectionCallback) OnConnected(clientInfo *IUIAutomationClientInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDisconnected dispatches through IUIAutomationClientConnectionCallback's vtable slot 4.
-func (self *IUIAutomationClientConnectionCallback) OnDisconnected(clientInfo *IUIAutomationClientInfo) foundation.HRESULT {
+func (self *IUIAutomationClientConnectionCallback) OnDisconnected(clientInfo *IUIAutomationClientInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b2e8a3f1-4c5d-4e7a-8f6b-3d2e1c9a0b8f
@@ -2290,15 +2481,15 @@ type IUIAutomationClientInfo struct {
 var IID_IUIAutomationClientInfo = win32.GUID{Data1: 0xb2e8a3f1, Data2: 0x4c5d, Data3: 0x4e7a, Data4: [8]byte{0x8f, 0x6b, 0x3d, 0x2e, 0x1c, 0x9a, 0x0b, 0x8f}}
 
 // Get_ProcessId dispatches through IUIAutomationClientInfo's vtable slot 3.
-func (self *IUIAutomationClientInfo) Get_ProcessId(processId *uint32) foundation.HRESULT {
+func (self *IUIAutomationClientInfo) Get_ProcessId(processId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(processId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ProcessName dispatches through IUIAutomationClientInfo's vtable slot 4.
-func (self *IUIAutomationClientInfo) Get_ProcessName(processName *foundation.BSTR) foundation.HRESULT {
+func (self *IUIAutomationClientInfo) Get_ProcessName(processName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(processName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f4b8a2e1-9c3d-4a7e-8f6b-2d5e4c1a9b8f
@@ -2310,21 +2501,22 @@ type IUIAutomationClientInfoSource struct {
 var IID_IUIAutomationClientInfoSource = win32.GUID{Data1: 0xf4b8a2e1, Data2: 0x9c3d, Data3: 0x4a7e, Data4: [8]byte{0x8f, 0x6b, 0x2d, 0x5e, 0x4c, 0x1a, 0x9b, 0x8f}}
 
 // RegisterClientConnectionCallback dispatches through IUIAutomationClientInfoSource's vtable slot 3.
-func (self *IUIAutomationClientInfoSource) RegisterClientConnectionCallback(callback *IUIAutomationClientConnectionCallback, handle *uint64) foundation.HRESULT {
+func (self *IUIAutomationClientInfoSource) RegisterClientConnectionCallback(callback *IUIAutomationClientConnectionCallback, handle *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(callback)), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterClientConnectionCallback dispatches through IUIAutomationClientInfoSource's vtable slot 4.
-func (self *IUIAutomationClientInfoSource) UnregisterClientConnectionCallback(handle uint64) foundation.HRESULT {
+func (self *IUIAutomationClientInfoSource) UnregisterClientConnectionCallback(handle uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(handle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConnectedClients dispatches through IUIAutomationClientInfoSource's vtable slot 5.
-func (self *IUIAutomationClientInfoSource) GetConnectedClients(clients **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clients)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationClientInfoSource) GetConnectedClients() (*systemcom.SAFEARRAY, error) {
+	var _clients *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_clients)))
+	return _clients, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationcondition
@@ -2346,9 +2538,10 @@ type IUIAutomationCustomNavigationPattern struct {
 var IID_IUIAutomationCustomNavigationPattern = win32.GUID{Data1: 0x01ea217a, Data2: 0x1766, Data3: 0x47ed, Data4: [8]byte{0xa6, 0xcc, 0xac, 0xf4, 0x92, 0x85, 0x4b, 0x1f}}
 
 // Navigate dispatches through IUIAutomationCustomNavigationPattern's vtable slot 3.
-func (self *IUIAutomationCustomNavigationPattern) Navigate(direction NavigateDirection, pRetVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationCustomNavigationPattern) Navigate(direction NavigateDirection) (*IUIAutomationElement, error) {
+	var _pRetVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(direction), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationDockPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationdockpattern
@@ -2361,21 +2554,23 @@ type IUIAutomationDockPattern struct {
 var IID_IUIAutomationDockPattern = win32.GUID{Data1: 0xfde5ef97, Data2: 0x1464, Data3: 0x48f6, Data4: [8]byte{0x90, 0xbf, 0x43, 0xd0, 0x94, 0x8e, 0x86, 0xec}}
 
 // SetDockPosition dispatches through IUIAutomationDockPattern's vtable slot 3.
-func (self *IUIAutomationDockPattern) SetDockPosition(dockPos DockPosition) foundation.HRESULT {
+func (self *IUIAutomationDockPattern) SetDockPosition(dockPos DockPosition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dockPos))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentDockPosition dispatches through IUIAutomationDockPattern's vtable slot 4.
-func (self *IUIAutomationDockPattern) Get_CurrentDockPosition(retVal *DockPosition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDockPattern) Get_CurrentDockPosition() (DockPosition, error) {
+	var _retVal DockPosition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedDockPosition dispatches through IUIAutomationDockPattern's vtable slot 5.
-func (self *IUIAutomationDockPattern) Get_CachedDockPosition(retVal *DockPosition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDockPattern) Get_CachedDockPosition() (DockPosition, error) {
+	var _retVal DockPosition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationDragPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationdragpattern
@@ -2388,51 +2583,59 @@ type IUIAutomationDragPattern struct {
 var IID_IUIAutomationDragPattern = win32.GUID{Data1: 0x1dc7b570, Data2: 0x1f54, Data3: 0x4bad, Data4: [8]byte{0xbc, 0xda, 0xd3, 0x6a, 0x72, 0x2f, 0xb7, 0xbd}}
 
 // Get_CurrentIsGrabbed dispatches through IUIAutomationDragPattern's vtable slot 3.
-func (self *IUIAutomationDragPattern) Get_CurrentIsGrabbed(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDragPattern) Get_CurrentIsGrabbed() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsGrabbed dispatches through IUIAutomationDragPattern's vtable slot 4.
-func (self *IUIAutomationDragPattern) Get_CachedIsGrabbed(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDragPattern) Get_CachedIsGrabbed() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentDropEffect dispatches through IUIAutomationDragPattern's vtable slot 5.
-func (self *IUIAutomationDragPattern) Get_CurrentDropEffect(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDragPattern) Get_CurrentDropEffect() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedDropEffect dispatches through IUIAutomationDragPattern's vtable slot 6.
-func (self *IUIAutomationDragPattern) Get_CachedDropEffect(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDragPattern) Get_CachedDropEffect() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentDropEffects dispatches through IUIAutomationDragPattern's vtable slot 7.
-func (self *IUIAutomationDragPattern) Get_CurrentDropEffects(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDragPattern) Get_CurrentDropEffects() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedDropEffects dispatches through IUIAutomationDragPattern's vtable slot 8.
-func (self *IUIAutomationDragPattern) Get_CachedDropEffects(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDragPattern) Get_CachedDropEffects() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentGrabbedItems dispatches through IUIAutomationDragPattern's vtable slot 9.
-func (self *IUIAutomationDragPattern) GetCurrentGrabbedItems(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDragPattern) GetCurrentGrabbedItems() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedGrabbedItems dispatches through IUIAutomationDragPattern's vtable slot 10.
-func (self *IUIAutomationDragPattern) GetCachedGrabbedItems(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDragPattern) GetCachedGrabbedItems() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationDropTargetPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationdroptargetpattern
@@ -2445,27 +2648,31 @@ type IUIAutomationDropTargetPattern struct {
 var IID_IUIAutomationDropTargetPattern = win32.GUID{Data1: 0x69a095f7, Data2: 0xeee4, Data3: 0x430e, Data4: [8]byte{0xa4, 0x6b, 0xfb, 0x73, 0xb1, 0xae, 0x39, 0xa5}}
 
 // Get_CurrentDropTargetEffect dispatches through IUIAutomationDropTargetPattern's vtable slot 3.
-func (self *IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffect(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffect() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedDropTargetEffect dispatches through IUIAutomationDropTargetPattern's vtable slot 4.
-func (self *IUIAutomationDropTargetPattern) Get_CachedDropTargetEffect(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDropTargetPattern) Get_CachedDropTargetEffect() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentDropTargetEffects dispatches through IUIAutomationDropTargetPattern's vtable slot 5.
-func (self *IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffects(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDropTargetPattern) Get_CurrentDropTargetEffects() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedDropTargetEffects dispatches through IUIAutomationDropTargetPattern's vtable slot 6.
-func (self *IUIAutomationDropTargetPattern) Get_CachedDropTargetEffects(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationDropTargetPattern) Get_CachedDropTargetEffects() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElement: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement
@@ -2478,495 +2685,576 @@ type IUIAutomationElement struct {
 var IID_IUIAutomationElement = win32.GUID{Data1: 0xd22108aa, Data2: 0x8ac5, Data3: 0x49a5, Data4: [8]byte{0x83, 0x7b, 0x37, 0xbb, 0xb3, 0xd7, 0x59, 0x1e}}
 
 // SetFocus dispatches through IUIAutomationElement's vtable slot 3.
-func (self *IUIAutomationElement) SetFocus() foundation.HRESULT {
+func (self *IUIAutomationElement) SetFocus() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRuntimeId dispatches through IUIAutomationElement's vtable slot 4.
-func (self *IUIAutomationElement) GetRuntimeId(runtimeId **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(runtimeId)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetRuntimeId() (*systemcom.SAFEARRAY, error) {
+	var _runtimeId *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_runtimeId)))
+	return _runtimeId, win32.HRESULTError(int32(r1))
 }
 
 // FindFirst dispatches through IUIAutomationElement's vtable slot 5.
-func (self *IUIAutomationElement) FindFirst(scope TreeScope, condition *IUIAutomationCondition, found **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) FindFirst(scope TreeScope, condition *IUIAutomationCondition) (*IUIAutomationElement, error) {
+	var _found *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(&_found)))
+	return _found, win32.HRESULTError(int32(r1))
 }
 
 // FindAll dispatches through IUIAutomationElement's vtable slot 6.
-func (self *IUIAutomationElement) FindAll(scope TreeScope, condition *IUIAutomationCondition, found **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) FindAll(scope TreeScope, condition *IUIAutomationCondition) (*IUIAutomationElementArray, error) {
+	var _found *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(&_found)))
+	return _found, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstBuildCache dispatches through IUIAutomationElement's vtable slot 7.
-func (self *IUIAutomationElement) FindFirstBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest, found **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) FindFirstBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _found *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_found)))
+	return _found, win32.HRESULTError(int32(r1))
 }
 
 // FindAllBuildCache dispatches through IUIAutomationElement's vtable slot 8.
-func (self *IUIAutomationElement) FindAllBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest, found **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) FindAllBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElementArray, error) {
+	var _found *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_found)))
+	return _found, win32.HRESULTError(int32(r1))
 }
 
 // BuildUpdatedCache dispatches through IUIAutomationElement's vtable slot 9.
-func (self *IUIAutomationElement) BuildUpdatedCache(cacheRequest *IUIAutomationCacheRequest, updatedElement **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(updatedElement)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) BuildUpdatedCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _updatedElement *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_updatedElement)))
+	return _updatedElement, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPropertyValue dispatches through IUIAutomationElement's vtable slot 10.
-func (self *IUIAutomationElement) GetCurrentPropertyValue(propertyId UIA_PROPERTY_ID, retVal *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetCurrentPropertyValue(propertyId UIA_PROPERTY_ID) (systemvariant.VARIANT, error) {
+	var _retVal systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPropertyValueEx dispatches through IUIAutomationElement's vtable slot 11.
-func (self *IUIAutomationElement) GetCurrentPropertyValueEx(propertyId UIA_PROPERTY_ID, ignoreDefaultValue foundation.BOOL, retVal *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(ignoreDefaultValue), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetCurrentPropertyValueEx(propertyId UIA_PROPERTY_ID, ignoreDefaultValue bool) (systemvariant.VARIANT, error) {
+	_ignoreDefaultValue := win32.Bool32(ignoreDefaultValue)
+	var _retVal systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(_ignoreDefaultValue), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedPropertyValue dispatches through IUIAutomationElement's vtable slot 12.
-func (self *IUIAutomationElement) GetCachedPropertyValue(propertyId UIA_PROPERTY_ID, retVal *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetCachedPropertyValue(propertyId UIA_PROPERTY_ID) (systemvariant.VARIANT, error) {
+	var _retVal systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedPropertyValueEx dispatches through IUIAutomationElement's vtable slot 13.
-func (self *IUIAutomationElement) GetCachedPropertyValueEx(propertyId UIA_PROPERTY_ID, ignoreDefaultValue foundation.BOOL, retVal *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(ignoreDefaultValue), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetCachedPropertyValueEx(propertyId UIA_PROPERTY_ID, ignoreDefaultValue bool) (systemvariant.VARIANT, error) {
+	_ignoreDefaultValue := win32.Bool32(ignoreDefaultValue)
+	var _retVal systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(_ignoreDefaultValue), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPatternAs dispatches through IUIAutomationElement's vtable slot 14.
-func (self *IUIAutomationElement) GetCurrentPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID, patternObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IUIAutomationElement) GetCurrentPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID, patternObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(patternObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCachedPatternAs dispatches through IUIAutomationElement's vtable slot 15.
-func (self *IUIAutomationElement) GetCachedPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID, patternObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IUIAutomationElement) GetCachedPatternAs(patternId UIA_PATTERN_ID, riid *win32.GUID, patternObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(patternObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPattern dispatches through IUIAutomationElement's vtable slot 16.
-func (self *IUIAutomationElement) GetCurrentPattern(patternId UIA_PATTERN_ID, patternObject **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(patternObject)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetCurrentPattern(patternId UIA_PATTERN_ID) (*systemcom.IUnknown, error) {
+	var _patternObject *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(&_patternObject)))
+	return _patternObject, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedPattern dispatches through IUIAutomationElement's vtable slot 17.
-func (self *IUIAutomationElement) GetCachedPattern(patternId UIA_PATTERN_ID, patternObject **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(patternObject)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetCachedPattern(patternId UIA_PATTERN_ID) (*systemcom.IUnknown, error) {
+	var _patternObject *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(patternId), uintptr(unsafe.Pointer(&_patternObject)))
+	return _patternObject, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedParent dispatches through IUIAutomationElement's vtable slot 18.
-func (self *IUIAutomationElement) GetCachedParent(parent **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(parent)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetCachedParent() (*IUIAutomationElement, error) {
+	var _parent *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_parent)))
+	return _parent, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedChildren dispatches through IUIAutomationElement's vtable slot 19.
-func (self *IUIAutomationElement) GetCachedChildren(children **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(children)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetCachedChildren() (*IUIAutomationElementArray, error) {
+	var _children *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_children)))
+	return _children, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentProcessId dispatches through IUIAutomationElement's vtable slot 20.
-func (self *IUIAutomationElement) Get_CurrentProcessId(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentProcessId() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentControlType dispatches through IUIAutomationElement's vtable slot 21.
-func (self *IUIAutomationElement) Get_CurrentControlType(retVal *UIA_CONTROLTYPE_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentControlType() (UIA_CONTROLTYPE_ID, error) {
+	var _retVal UIA_CONTROLTYPE_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentLocalizedControlType dispatches through IUIAutomationElement's vtable slot 22.
-func (self *IUIAutomationElement) Get_CurrentLocalizedControlType(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentLocalizedControlType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentName dispatches through IUIAutomationElement's vtable slot 23.
-func (self *IUIAutomationElement) Get_CurrentName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAcceleratorKey dispatches through IUIAutomationElement's vtable slot 24.
-func (self *IUIAutomationElement) Get_CurrentAcceleratorKey(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentAcceleratorKey() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAccessKey dispatches through IUIAutomationElement's vtable slot 25.
-func (self *IUIAutomationElement) Get_CurrentAccessKey(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentAccessKey() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentHasKeyboardFocus dispatches through IUIAutomationElement's vtable slot 26.
-func (self *IUIAutomationElement) Get_CurrentHasKeyboardFocus(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentHasKeyboardFocus() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsKeyboardFocusable dispatches through IUIAutomationElement's vtable slot 27.
-func (self *IUIAutomationElement) Get_CurrentIsKeyboardFocusable(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentIsKeyboardFocusable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsEnabled dispatches through IUIAutomationElement's vtable slot 28.
-func (self *IUIAutomationElement) Get_CurrentIsEnabled(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentIsEnabled() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAutomationId dispatches through IUIAutomationElement's vtable slot 29.
-func (self *IUIAutomationElement) Get_CurrentAutomationId(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentAutomationId() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentClassName dispatches through IUIAutomationElement's vtable slot 30.
-func (self *IUIAutomationElement) Get_CurrentClassName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentClassName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentHelpText dispatches through IUIAutomationElement's vtable slot 31.
-func (self *IUIAutomationElement) Get_CurrentHelpText(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentHelpText() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCulture dispatches through IUIAutomationElement's vtable slot 32.
-func (self *IUIAutomationElement) Get_CurrentCulture(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentCulture() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsControlElement dispatches through IUIAutomationElement's vtable slot 33.
-func (self *IUIAutomationElement) Get_CurrentIsControlElement(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentIsControlElement() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsContentElement dispatches through IUIAutomationElement's vtable slot 34.
-func (self *IUIAutomationElement) Get_CurrentIsContentElement(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentIsContentElement() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsPassword dispatches through IUIAutomationElement's vtable slot 35.
-func (self *IUIAutomationElement) Get_CurrentIsPassword(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentIsPassword() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentNativeWindowHandle dispatches through IUIAutomationElement's vtable slot 36.
-func (self *IUIAutomationElement) Get_CurrentNativeWindowHandle(retVal *foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentNativeWindowHandle() (foundation.HWND, error) {
+	var _retVal foundation.HWND
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentItemType dispatches through IUIAutomationElement's vtable slot 37.
-func (self *IUIAutomationElement) Get_CurrentItemType(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentItemType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsOffscreen dispatches through IUIAutomationElement's vtable slot 38.
-func (self *IUIAutomationElement) Get_CurrentIsOffscreen(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentIsOffscreen() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentOrientation dispatches through IUIAutomationElement's vtable slot 39.
-func (self *IUIAutomationElement) Get_CurrentOrientation(retVal *OrientationType) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentOrientation() (OrientationType, error) {
+	var _retVal OrientationType
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentFrameworkId dispatches through IUIAutomationElement's vtable slot 40.
-func (self *IUIAutomationElement) Get_CurrentFrameworkId(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentFrameworkId() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsRequiredForForm dispatches through IUIAutomationElement's vtable slot 41.
-func (self *IUIAutomationElement) Get_CurrentIsRequiredForForm(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentIsRequiredForForm() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentItemStatus dispatches through IUIAutomationElement's vtable slot 42.
-func (self *IUIAutomationElement) Get_CurrentItemStatus(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentItemStatus() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentBoundingRectangle dispatches through IUIAutomationElement's vtable slot 43.
-func (self *IUIAutomationElement) Get_CurrentBoundingRectangle(retVal *foundation.RECT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentBoundingRectangle() (foundation.RECT, error) {
+	var _retVal foundation.RECT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentLabeledBy dispatches through IUIAutomationElement's vtable slot 44.
-func (self *IUIAutomationElement) Get_CurrentLabeledBy(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentLabeledBy() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAriaRole dispatches through IUIAutomationElement's vtable slot 45.
-func (self *IUIAutomationElement) Get_CurrentAriaRole(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentAriaRole() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAriaProperties dispatches through IUIAutomationElement's vtable slot 46.
-func (self *IUIAutomationElement) Get_CurrentAriaProperties(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentAriaProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsDataValidForForm dispatches through IUIAutomationElement's vtable slot 47.
-func (self *IUIAutomationElement) Get_CurrentIsDataValidForForm(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentIsDataValidForForm() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentControllerFor dispatches through IUIAutomationElement's vtable slot 48.
-func (self *IUIAutomationElement) Get_CurrentControllerFor(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentControllerFor() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentDescribedBy dispatches through IUIAutomationElement's vtable slot 49.
-func (self *IUIAutomationElement) Get_CurrentDescribedBy(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentDescribedBy() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentFlowsTo dispatches through IUIAutomationElement's vtable slot 50.
-func (self *IUIAutomationElement) Get_CurrentFlowsTo(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentFlowsTo() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentProviderDescription dispatches through IUIAutomationElement's vtable slot 51.
-func (self *IUIAutomationElement) Get_CurrentProviderDescription(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CurrentProviderDescription() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedProcessId dispatches through IUIAutomationElement's vtable slot 52.
-func (self *IUIAutomationElement) Get_CachedProcessId(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedProcessId() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedControlType dispatches through IUIAutomationElement's vtable slot 53.
-func (self *IUIAutomationElement) Get_CachedControlType(retVal *UIA_CONTROLTYPE_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedControlType() (UIA_CONTROLTYPE_ID, error) {
+	var _retVal UIA_CONTROLTYPE_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedLocalizedControlType dispatches through IUIAutomationElement's vtable slot 54.
-func (self *IUIAutomationElement) Get_CachedLocalizedControlType(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedLocalizedControlType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedName dispatches through IUIAutomationElement's vtable slot 55.
-func (self *IUIAutomationElement) Get_CachedName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAcceleratorKey dispatches through IUIAutomationElement's vtable slot 56.
-func (self *IUIAutomationElement) Get_CachedAcceleratorKey(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedAcceleratorKey() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAccessKey dispatches through IUIAutomationElement's vtable slot 57.
-func (self *IUIAutomationElement) Get_CachedAccessKey(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedAccessKey() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedHasKeyboardFocus dispatches through IUIAutomationElement's vtable slot 58.
-func (self *IUIAutomationElement) Get_CachedHasKeyboardFocus(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedHasKeyboardFocus() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsKeyboardFocusable dispatches through IUIAutomationElement's vtable slot 59.
-func (self *IUIAutomationElement) Get_CachedIsKeyboardFocusable(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedIsKeyboardFocusable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsEnabled dispatches through IUIAutomationElement's vtable slot 60.
-func (self *IUIAutomationElement) Get_CachedIsEnabled(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedIsEnabled() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAutomationId dispatches through IUIAutomationElement's vtable slot 61.
-func (self *IUIAutomationElement) Get_CachedAutomationId(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedAutomationId() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedClassName dispatches through IUIAutomationElement's vtable slot 62.
-func (self *IUIAutomationElement) Get_CachedClassName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedClassName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedHelpText dispatches through IUIAutomationElement's vtable slot 63.
-func (self *IUIAutomationElement) Get_CachedHelpText(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedHelpText() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCulture dispatches through IUIAutomationElement's vtable slot 64.
-func (self *IUIAutomationElement) Get_CachedCulture(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedCulture() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsControlElement dispatches through IUIAutomationElement's vtable slot 65.
-func (self *IUIAutomationElement) Get_CachedIsControlElement(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedIsControlElement() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsContentElement dispatches through IUIAutomationElement's vtable slot 66.
-func (self *IUIAutomationElement) Get_CachedIsContentElement(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedIsContentElement() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsPassword dispatches through IUIAutomationElement's vtable slot 67.
-func (self *IUIAutomationElement) Get_CachedIsPassword(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedIsPassword() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedNativeWindowHandle dispatches through IUIAutomationElement's vtable slot 68.
-func (self *IUIAutomationElement) Get_CachedNativeWindowHandle(retVal *foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedNativeWindowHandle() (foundation.HWND, error) {
+	var _retVal foundation.HWND
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedItemType dispatches through IUIAutomationElement's vtable slot 69.
-func (self *IUIAutomationElement) Get_CachedItemType(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedItemType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsOffscreen dispatches through IUIAutomationElement's vtable slot 70.
-func (self *IUIAutomationElement) Get_CachedIsOffscreen(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedIsOffscreen() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedOrientation dispatches through IUIAutomationElement's vtable slot 71.
-func (self *IUIAutomationElement) Get_CachedOrientation(retVal *OrientationType) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedOrientation() (OrientationType, error) {
+	var _retVal OrientationType
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedFrameworkId dispatches through IUIAutomationElement's vtable slot 72.
-func (self *IUIAutomationElement) Get_CachedFrameworkId(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedFrameworkId() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsRequiredForForm dispatches through IUIAutomationElement's vtable slot 73.
-func (self *IUIAutomationElement) Get_CachedIsRequiredForForm(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedIsRequiredForForm() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedItemStatus dispatches through IUIAutomationElement's vtable slot 74.
-func (self *IUIAutomationElement) Get_CachedItemStatus(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedItemStatus() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedBoundingRectangle dispatches through IUIAutomationElement's vtable slot 75.
-func (self *IUIAutomationElement) Get_CachedBoundingRectangle(retVal *foundation.RECT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedBoundingRectangle() (foundation.RECT, error) {
+	var _retVal foundation.RECT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedLabeledBy dispatches through IUIAutomationElement's vtable slot 76.
-func (self *IUIAutomationElement) Get_CachedLabeledBy(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedLabeledBy() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAriaRole dispatches through IUIAutomationElement's vtable slot 77.
-func (self *IUIAutomationElement) Get_CachedAriaRole(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedAriaRole() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAriaProperties dispatches through IUIAutomationElement's vtable slot 78.
-func (self *IUIAutomationElement) Get_CachedAriaProperties(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedAriaProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsDataValidForForm dispatches through IUIAutomationElement's vtable slot 79.
-func (self *IUIAutomationElement) Get_CachedIsDataValidForForm(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedIsDataValidForForm() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedControllerFor dispatches through IUIAutomationElement's vtable slot 80.
-func (self *IUIAutomationElement) Get_CachedControllerFor(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedControllerFor() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedDescribedBy dispatches through IUIAutomationElement's vtable slot 81.
-func (self *IUIAutomationElement) Get_CachedDescribedBy(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedDescribedBy() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedFlowsTo dispatches through IUIAutomationElement's vtable slot 82.
-func (self *IUIAutomationElement) Get_CachedFlowsTo(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedFlowsTo() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedProviderDescription dispatches through IUIAutomationElement's vtable slot 83.
-func (self *IUIAutomationElement) Get_CachedProviderDescription(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) Get_CachedProviderDescription() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetClickablePoint dispatches through IUIAutomationElement's vtable slot 84.
-func (self *IUIAutomationElement) GetClickablePoint(clickable *foundation.POINT, gotClickable *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clickable)), uintptr(unsafe.Pointer(gotClickable)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement) GetClickablePoint(clickable *foundation.POINT) (foundation.BOOL, error) {
+	var _gotClickable foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clickable)), uintptr(unsafe.Pointer(&_gotClickable)))
+	return _gotClickable, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElement2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement2
@@ -2979,39 +3267,45 @@ type IUIAutomationElement2 struct {
 var IID_IUIAutomationElement2 = win32.GUID{Data1: 0x6749c683, Data2: 0xf70d, Data3: 0x4487, Data4: [8]byte{0xa6, 0x98, 0x5f, 0x79, 0xd5, 0x52, 0x90, 0xd6}}
 
 // Get_CurrentOptimizeForVisualContent dispatches through IUIAutomationElement2's vtable slot 85.
-func (self *IUIAutomationElement2) Get_CurrentOptimizeForVisualContent(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement2) Get_CurrentOptimizeForVisualContent() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedOptimizeForVisualContent dispatches through IUIAutomationElement2's vtable slot 86.
-func (self *IUIAutomationElement2) Get_CachedOptimizeForVisualContent(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement2) Get_CachedOptimizeForVisualContent() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentLiveSetting dispatches through IUIAutomationElement2's vtable slot 87.
-func (self *IUIAutomationElement2) Get_CurrentLiveSetting(retVal *LiveSetting) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement2) Get_CurrentLiveSetting() (LiveSetting, error) {
+	var _retVal LiveSetting
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedLiveSetting dispatches through IUIAutomationElement2's vtable slot 88.
-func (self *IUIAutomationElement2) Get_CachedLiveSetting(retVal *LiveSetting) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement2) Get_CachedLiveSetting() (LiveSetting, error) {
+	var _retVal LiveSetting
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentFlowsFrom dispatches through IUIAutomationElement2's vtable slot 89.
-func (self *IUIAutomationElement2) Get_CurrentFlowsFrom(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement2) Get_CurrentFlowsFrom() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedFlowsFrom dispatches through IUIAutomationElement2's vtable slot 90.
-func (self *IUIAutomationElement2) Get_CachedFlowsFrom(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement2) Get_CachedFlowsFrom() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElement3: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement3
@@ -3024,21 +3318,23 @@ type IUIAutomationElement3 struct {
 var IID_IUIAutomationElement3 = win32.GUID{Data1: 0x8471df34, Data2: 0xaee0, Data3: 0x4a01, Data4: [8]byte{0xa7, 0xde, 0x7d, 0xb9, 0xaf, 0x12, 0xc2, 0x96}}
 
 // ShowContextMenu dispatches through IUIAutomationElement3's vtable slot 91.
-func (self *IUIAutomationElement3) ShowContextMenu() foundation.HRESULT {
+func (self *IUIAutomationElement3) ShowContextMenu() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsPeripheral dispatches through IUIAutomationElement3's vtable slot 92.
-func (self *IUIAutomationElement3) Get_CurrentIsPeripheral(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement3) Get_CurrentIsPeripheral() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsPeripheral dispatches through IUIAutomationElement3's vtable slot 93.
-func (self *IUIAutomationElement3) Get_CachedIsPeripheral(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement3) Get_CachedIsPeripheral() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElement4: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement4
@@ -3051,63 +3347,73 @@ type IUIAutomationElement4 struct {
 var IID_IUIAutomationElement4 = win32.GUID{Data1: 0x3b6e233c, Data2: 0x52fb, Data3: 0x4063, Data4: [8]byte{0xa4, 0xc9, 0x77, 0xc0, 0x75, 0xc2, 0xa0, 0x6b}}
 
 // Get_CurrentPositionInSet dispatches through IUIAutomationElement4's vtable slot 94.
-func (self *IUIAutomationElement4) Get_CurrentPositionInSet(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CurrentPositionInSet() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentSizeOfSet dispatches through IUIAutomationElement4's vtable slot 95.
-func (self *IUIAutomationElement4) Get_CurrentSizeOfSet(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CurrentSizeOfSet() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentLevel dispatches through IUIAutomationElement4's vtable slot 96.
-func (self *IUIAutomationElement4) Get_CurrentLevel(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CurrentLevel() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAnnotationTypes dispatches through IUIAutomationElement4's vtable slot 97.
-func (self *IUIAutomationElement4) Get_CurrentAnnotationTypes(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CurrentAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAnnotationObjects dispatches through IUIAutomationElement4's vtable slot 98.
-func (self *IUIAutomationElement4) Get_CurrentAnnotationObjects(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CurrentAnnotationObjects() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedPositionInSet dispatches through IUIAutomationElement4's vtable slot 99.
-func (self *IUIAutomationElement4) Get_CachedPositionInSet(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CachedPositionInSet() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedSizeOfSet dispatches through IUIAutomationElement4's vtable slot 100.
-func (self *IUIAutomationElement4) Get_CachedSizeOfSet(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CachedSizeOfSet() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedLevel dispatches through IUIAutomationElement4's vtable slot 101.
-func (self *IUIAutomationElement4) Get_CachedLevel(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CachedLevel() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAnnotationTypes dispatches through IUIAutomationElement4's vtable slot 102.
-func (self *IUIAutomationElement4) Get_CachedAnnotationTypes(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CachedAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedAnnotationObjects dispatches through IUIAutomationElement4's vtable slot 103.
-func (self *IUIAutomationElement4) Get_CachedAnnotationObjects(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement4) Get_CachedAnnotationObjects() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElement5: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement5
@@ -3120,27 +3426,31 @@ type IUIAutomationElement5 struct {
 var IID_IUIAutomationElement5 = win32.GUID{Data1: 0x98141c1d, Data2: 0x0d0e, Data3: 0x4175, Data4: [8]byte{0xbb, 0xe2, 0x6b, 0xff, 0x45, 0x58, 0x42, 0xa7}}
 
 // Get_CurrentLandmarkType dispatches through IUIAutomationElement5's vtable slot 104.
-func (self *IUIAutomationElement5) Get_CurrentLandmarkType(retVal *UIA_LANDMARKTYPE_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement5) Get_CurrentLandmarkType() (UIA_LANDMARKTYPE_ID, error) {
+	var _retVal UIA_LANDMARKTYPE_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentLocalizedLandmarkType dispatches through IUIAutomationElement5's vtable slot 105.
-func (self *IUIAutomationElement5) Get_CurrentLocalizedLandmarkType(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement5) Get_CurrentLocalizedLandmarkType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedLandmarkType dispatches through IUIAutomationElement5's vtable slot 106.
-func (self *IUIAutomationElement5) Get_CachedLandmarkType(retVal *UIA_LANDMARKTYPE_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement5) Get_CachedLandmarkType() (UIA_LANDMARKTYPE_ID, error) {
+	var _retVal UIA_LANDMARKTYPE_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedLocalizedLandmarkType dispatches through IUIAutomationElement5's vtable slot 107.
-func (self *IUIAutomationElement5) Get_CachedLocalizedLandmarkType(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement5) Get_CachedLocalizedLandmarkType() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElement6: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement6
@@ -3153,15 +3463,17 @@ type IUIAutomationElement6 struct {
 var IID_IUIAutomationElement6 = win32.GUID{Data1: 0x4780d450, Data2: 0x8bca, Data3: 0x4977, Data4: [8]byte{0xaf, 0xa5, 0xa4, 0xa5, 0x17, 0xf5, 0x55, 0xe3}}
 
 // Get_CurrentFullDescription dispatches through IUIAutomationElement6's vtable slot 108.
-func (self *IUIAutomationElement6) Get_CurrentFullDescription(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement6) Get_CurrentFullDescription() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedFullDescription dispatches through IUIAutomationElement6's vtable slot 109.
-func (self *IUIAutomationElement6) Get_CachedFullDescription(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement6) Get_CachedFullDescription() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElement7: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement7
@@ -3174,33 +3486,38 @@ type IUIAutomationElement7 struct {
 var IID_IUIAutomationElement7 = win32.GUID{Data1: 0x204e8572, Data2: 0xcfc3, Data3: 0x4c11, Data4: [8]byte{0xb0, 0xc8, 0x7d, 0xa7, 0x42, 0x07, 0x50, 0xb7}}
 
 // FindFirstWithOptions dispatches through IUIAutomationElement7's vtable slot 110.
-func (self *IUIAutomationElement7) FindFirstWithOptions(scope TreeScope, condition *IUIAutomationCondition, traversalOptions TreeTraversalOptions, root *IUIAutomationElement, found **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement7) FindFirstWithOptions(scope TreeScope, condition *IUIAutomationCondition, traversalOptions TreeTraversalOptions, root *IUIAutomationElement) (*IUIAutomationElement, error) {
+	var _found *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(&_found)))
+	return _found, win32.HRESULTError(int32(r1))
 }
 
 // FindAllWithOptions dispatches through IUIAutomationElement7's vtable slot 111.
-func (self *IUIAutomationElement7) FindAllWithOptions(scope TreeScope, condition *IUIAutomationCondition, traversalOptions TreeTraversalOptions, root *IUIAutomationElement, found **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement7) FindAllWithOptions(scope TreeScope, condition *IUIAutomationCondition, traversalOptions TreeTraversalOptions, root *IUIAutomationElement) (*IUIAutomationElementArray, error) {
+	var _found *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(&_found)))
+	return _found, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstWithOptionsBuildCache dispatches through IUIAutomationElement7's vtable slot 112.
-func (self *IUIAutomationElement7) FindFirstWithOptionsBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest, traversalOptions TreeTraversalOptions, root *IUIAutomationElement, found **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement7) FindFirstWithOptionsBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest, traversalOptions TreeTraversalOptions, root *IUIAutomationElement) (*IUIAutomationElement, error) {
+	var _found *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(&_found)))
+	return _found, win32.HRESULTError(int32(r1))
 }
 
 // FindAllWithOptionsBuildCache dispatches through IUIAutomationElement7's vtable slot 113.
-func (self *IUIAutomationElement7) FindAllWithOptionsBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest, traversalOptions TreeTraversalOptions, root *IUIAutomationElement, found **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[113], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement7) FindAllWithOptionsBuildCache(scope TreeScope, condition *IUIAutomationCondition, cacheRequest *IUIAutomationCacheRequest, traversalOptions TreeTraversalOptions, root *IUIAutomationElement) (*IUIAutomationElementArray, error) {
+	var _found *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[113], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(condition)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(traversalOptions), uintptr(unsafe.Pointer(root)), uintptr(unsafe.Pointer(&_found)))
+	return _found, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentMetadataValue dispatches through IUIAutomationElement7's vtable slot 114.
-func (self *IUIAutomationElement7) GetCurrentMetadataValue(targetId int32, metadataId UIA_METADATA_ID, returnVal *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[114], uintptr(unsafe.Pointer(self)), uintptr(targetId), uintptr(metadataId), uintptr(unsafe.Pointer(returnVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement7) GetCurrentMetadataValue(targetId int32, metadataId UIA_METADATA_ID) (systemvariant.VARIANT, error) {
+	var _returnVal systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[114], uintptr(unsafe.Pointer(self)), uintptr(targetId), uintptr(metadataId), uintptr(unsafe.Pointer(&_returnVal)))
+	return _returnVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElement8: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement8
@@ -3213,15 +3530,17 @@ type IUIAutomationElement8 struct {
 var IID_IUIAutomationElement8 = win32.GUID{Data1: 0x8c60217d, Data2: 0x5411, Data3: 0x4cde, Data4: [8]byte{0xbc, 0xc0, 0x1c, 0xed, 0xa2, 0x23, 0x83, 0x0c}}
 
 // Get_CurrentHeadingLevel dispatches through IUIAutomationElement8's vtable slot 115.
-func (self *IUIAutomationElement8) Get_CurrentHeadingLevel(retVal *UIA_HEADINGLEVEL_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement8) Get_CurrentHeadingLevel() (UIA_HEADINGLEVEL_ID, error) {
+	var _retVal UIA_HEADINGLEVEL_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedHeadingLevel dispatches through IUIAutomationElement8's vtable slot 116.
-func (self *IUIAutomationElement8) Get_CachedHeadingLevel(retVal *UIA_HEADINGLEVEL_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement8) Get_CachedHeadingLevel() (UIA_HEADINGLEVEL_ID, error) {
+	var _retVal UIA_HEADINGLEVEL_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElement9: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelement9
@@ -3234,15 +3553,17 @@ type IUIAutomationElement9 struct {
 var IID_IUIAutomationElement9 = win32.GUID{Data1: 0x39325fac, Data2: 0x039d, Data3: 0x440e, Data4: [8]byte{0xa3, 0xa3, 0x5e, 0xb8, 0x1a, 0x5c, 0xec, 0xc3}}
 
 // Get_CurrentIsDialog dispatches through IUIAutomationElement9's vtable slot 117.
-func (self *IUIAutomationElement9) Get_CurrentIsDialog(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement9) Get_CurrentIsDialog() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsDialog dispatches through IUIAutomationElement9's vtable slot 118.
-func (self *IUIAutomationElement9) Get_CachedIsDialog(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[118], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElement9) Get_CachedIsDialog() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[118], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationElementArray: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationelementarray
@@ -3255,15 +3576,17 @@ type IUIAutomationElementArray struct {
 var IID_IUIAutomationElementArray = win32.GUID{Data1: 0x14314595, Data2: 0xb4bc, Data3: 0x4055, Data4: [8]byte{0x95, 0xf2, 0x58, 0xf2, 0xe4, 0x2c, 0x98, 0x55}}
 
 // Get_Length dispatches through IUIAutomationElementArray's vtable slot 3.
-func (self *IUIAutomationElementArray) Get_Length(length *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(length)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElementArray) Get_Length() (int32, error) {
+	var _length int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
+	return _length, win32.HRESULTError(int32(r1))
 }
 
 // GetElement dispatches through IUIAutomationElementArray's vtable slot 4.
-func (self *IUIAutomationElementArray) GetElement(index int32, element **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationElementArray) GetElement(index int32) (*IUIAutomationElement, error) {
+	var _element *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationeventhandler
@@ -3276,9 +3599,9 @@ type IUIAutomationEventHandler struct {
 var IID_IUIAutomationEventHandler = win32.GUID{Data1: 0x146c3c17, Data2: 0xf12e, Data3: 0x4e22, Data4: [8]byte{0x8c, 0x27, 0xf8, 0x94, 0xb9, 0xb7, 0x9c, 0x69}}
 
 // HandleAutomationEvent dispatches through IUIAutomationEventHandler's vtable slot 3.
-func (self *IUIAutomationEventHandler) HandleAutomationEvent(sender *IUIAutomationElement, eventId UIA_EVENT_ID) foundation.HRESULT {
+func (self *IUIAutomationEventHandler) HandleAutomationEvent(sender *IUIAutomationElement, eventId UIA_EVENT_ID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(eventId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationEventHandlerGroup: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationeventhandlergroup
@@ -3291,45 +3614,45 @@ type IUIAutomationEventHandlerGroup struct {
 var IID_IUIAutomationEventHandlerGroup = win32.GUID{Data1: 0xc9ee12f2, Data2: 0xc13b, Data3: 0x4408, Data4: [8]byte{0x99, 0x7c, 0x63, 0x99, 0x14, 0x37, 0x7f, 0x4e}}
 
 // AddActiveTextPositionChangedEventHandler dispatches through IUIAutomationEventHandlerGroup's vtable slot 3.
-func (self *IUIAutomationEventHandlerGroup) AddActiveTextPositionChangedEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationActiveTextPositionChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomationEventHandlerGroup) AddActiveTextPositionChangedEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationActiveTextPositionChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddAutomationEventHandler dispatches through IUIAutomationEventHandlerGroup's vtable slot 4.
-func (self *IUIAutomationEventHandlerGroup) AddAutomationEventHandler(eventId UIA_EVENT_ID, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationEventHandler) foundation.HRESULT {
+func (self *IUIAutomationEventHandlerGroup) AddAutomationEventHandler(eventId UIA_EVENT_ID, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddChangesEventHandler dispatches through IUIAutomationEventHandlerGroup's vtable slot 5.
-func (self *IUIAutomationEventHandlerGroup) AddChangesEventHandler(scope TreeScope, changeTypes *int32, changesCount int32, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationChangesEventHandler) foundation.HRESULT {
+func (self *IUIAutomationEventHandlerGroup) AddChangesEventHandler(scope TreeScope, changeTypes *int32, changesCount int32, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationChangesEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(changeTypes)), uintptr(changesCount), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddNotificationEventHandler dispatches through IUIAutomationEventHandlerGroup's vtable slot 6.
-func (self *IUIAutomationEventHandlerGroup) AddNotificationEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationNotificationEventHandler) foundation.HRESULT {
+func (self *IUIAutomationEventHandlerGroup) AddNotificationEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationNotificationEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPropertyChangedEventHandler dispatches through IUIAutomationEventHandlerGroup's vtable slot 7.
-func (self *IUIAutomationEventHandlerGroup) AddPropertyChangedEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray *UIA_PROPERTY_ID, propertyCount int32) foundation.HRESULT {
+func (self *IUIAutomationEventHandlerGroup) AddPropertyChangedEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray *UIA_PROPERTY_ID, propertyCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)), uintptr(unsafe.Pointer(propertyArray)), uintptr(propertyCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStructureChangedEventHandler dispatches through IUIAutomationEventHandlerGroup's vtable slot 8.
-func (self *IUIAutomationEventHandlerGroup) AddStructureChangedEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationStructureChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomationEventHandlerGroup) AddStructureChangedEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationStructureChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTextEditTextChangedEventHandler dispatches through IUIAutomationEventHandlerGroup's vtable slot 9.
-func (self *IUIAutomationEventHandlerGroup) AddTextEditTextChangedEventHandler(scope TreeScope, textEditChangeType TextEditChangeType, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationTextEditTextChangedEventHandler) foundation.HRESULT {
+func (self *IUIAutomationEventHandlerGroup) AddTextEditTextChangedEventHandler(scope TreeScope, textEditChangeType TextEditChangeType, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationTextEditTextChangedEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(textEditChangeType), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationExpandCollapsePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationexpandcollapsepattern
@@ -3342,27 +3665,29 @@ type IUIAutomationExpandCollapsePattern struct {
 var IID_IUIAutomationExpandCollapsePattern = win32.GUID{Data1: 0x619be086, Data2: 0x1f4e, Data3: 0x4ee4, Data4: [8]byte{0xba, 0xfa, 0x21, 0x01, 0x28, 0x73, 0x87, 0x30}}
 
 // Expand dispatches through IUIAutomationExpandCollapsePattern's vtable slot 3.
-func (self *IUIAutomationExpandCollapsePattern) Expand() foundation.HRESULT {
+func (self *IUIAutomationExpandCollapsePattern) Expand() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Collapse dispatches through IUIAutomationExpandCollapsePattern's vtable slot 4.
-func (self *IUIAutomationExpandCollapsePattern) Collapse() foundation.HRESULT {
+func (self *IUIAutomationExpandCollapsePattern) Collapse() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentExpandCollapseState dispatches through IUIAutomationExpandCollapsePattern's vtable slot 5.
-func (self *IUIAutomationExpandCollapsePattern) Get_CurrentExpandCollapseState(retVal *ExpandCollapseState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationExpandCollapsePattern) Get_CurrentExpandCollapseState() (ExpandCollapseState, error) {
+	var _retVal ExpandCollapseState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedExpandCollapseState dispatches through IUIAutomationExpandCollapsePattern's vtable slot 6.
-func (self *IUIAutomationExpandCollapsePattern) Get_CachedExpandCollapseState(retVal *ExpandCollapseState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationExpandCollapsePattern) Get_CachedExpandCollapseState() (ExpandCollapseState, error) {
+	var _retVal ExpandCollapseState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationFocusChangedEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationfocuschangedeventhandler
@@ -3375,9 +3700,9 @@ type IUIAutomationFocusChangedEventHandler struct {
 var IID_IUIAutomationFocusChangedEventHandler = win32.GUID{Data1: 0xc270f6b5, Data2: 0x5c69, Data3: 0x4290, Data4: [8]byte{0x97, 0x45, 0x7a, 0x7f, 0x97, 0x16, 0x94, 0x68}}
 
 // HandleFocusChangedEvent dispatches through IUIAutomationFocusChangedEventHandler's vtable slot 3.
-func (self *IUIAutomationFocusChangedEventHandler) HandleFocusChangedEvent(sender *IUIAutomationElement) foundation.HRESULT {
+func (self *IUIAutomationFocusChangedEventHandler) HandleFocusChangedEvent(sender *IUIAutomationElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationGridItemPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationgriditempattern
@@ -3390,63 +3715,73 @@ type IUIAutomationGridItemPattern struct {
 var IID_IUIAutomationGridItemPattern = win32.GUID{Data1: 0x78f8ef57, Data2: 0x66c3, Data3: 0x4e09, Data4: [8]byte{0xbd, 0x7c, 0xe7, 0x9b, 0x20, 0x04, 0x89, 0x4d}}
 
 // Get_CurrentContainingGrid dispatches through IUIAutomationGridItemPattern's vtable slot 3.
-func (self *IUIAutomationGridItemPattern) Get_CurrentContainingGrid(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CurrentContainingGrid() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentRow dispatches through IUIAutomationGridItemPattern's vtable slot 4.
-func (self *IUIAutomationGridItemPattern) Get_CurrentRow(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CurrentRow() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentColumn dispatches through IUIAutomationGridItemPattern's vtable slot 5.
-func (self *IUIAutomationGridItemPattern) Get_CurrentColumn(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CurrentColumn() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentRowSpan dispatches through IUIAutomationGridItemPattern's vtable slot 6.
-func (self *IUIAutomationGridItemPattern) Get_CurrentRowSpan(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CurrentRowSpan() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentColumnSpan dispatches through IUIAutomationGridItemPattern's vtable slot 7.
-func (self *IUIAutomationGridItemPattern) Get_CurrentColumnSpan(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CurrentColumnSpan() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedContainingGrid dispatches through IUIAutomationGridItemPattern's vtable slot 8.
-func (self *IUIAutomationGridItemPattern) Get_CachedContainingGrid(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CachedContainingGrid() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedRow dispatches through IUIAutomationGridItemPattern's vtable slot 9.
-func (self *IUIAutomationGridItemPattern) Get_CachedRow(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CachedRow() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedColumn dispatches through IUIAutomationGridItemPattern's vtable slot 10.
-func (self *IUIAutomationGridItemPattern) Get_CachedColumn(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CachedColumn() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedRowSpan dispatches through IUIAutomationGridItemPattern's vtable slot 11.
-func (self *IUIAutomationGridItemPattern) Get_CachedRowSpan(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CachedRowSpan() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedColumnSpan dispatches through IUIAutomationGridItemPattern's vtable slot 12.
-func (self *IUIAutomationGridItemPattern) Get_CachedColumnSpan(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridItemPattern) Get_CachedColumnSpan() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationGridPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationgridpattern
@@ -3459,33 +3794,38 @@ type IUIAutomationGridPattern struct {
 var IID_IUIAutomationGridPattern = win32.GUID{Data1: 0x414c3cdc, Data2: 0x856b, Data3: 0x4f5b, Data4: [8]byte{0x85, 0x38, 0x31, 0x31, 0xc6, 0x30, 0x25, 0x50}}
 
 // GetItem dispatches through IUIAutomationGridPattern's vtable slot 3.
-func (self *IUIAutomationGridPattern) GetItem(row int32, column int32, element **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridPattern) GetItem(row int32, column int32) (*IUIAutomationElement, error) {
+	var _element *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentRowCount dispatches through IUIAutomationGridPattern's vtable slot 4.
-func (self *IUIAutomationGridPattern) Get_CurrentRowCount(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridPattern) Get_CurrentRowCount() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentColumnCount dispatches through IUIAutomationGridPattern's vtable slot 5.
-func (self *IUIAutomationGridPattern) Get_CurrentColumnCount(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridPattern) Get_CurrentColumnCount() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedRowCount dispatches through IUIAutomationGridPattern's vtable slot 6.
-func (self *IUIAutomationGridPattern) Get_CachedRowCount(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridPattern) Get_CachedRowCount() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedColumnCount dispatches through IUIAutomationGridPattern's vtable slot 7.
-func (self *IUIAutomationGridPattern) Get_CachedColumnCount(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationGridPattern) Get_CachedColumnCount() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationInvokePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationinvokepattern
@@ -3498,9 +3838,9 @@ type IUIAutomationInvokePattern struct {
 var IID_IUIAutomationInvokePattern = win32.GUID{Data1: 0xfb377fbe, Data2: 0x8ea6, Data3: 0x46d5, Data4: [8]byte{0x9c, 0x73, 0x64, 0x99, 0x64, 0x2d, 0x30, 0x59}}
 
 // Invoke dispatches through IUIAutomationInvokePattern's vtable slot 3.
-func (self *IUIAutomationInvokePattern) Invoke() foundation.HRESULT {
+func (self *IUIAutomationInvokePattern) Invoke() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationItemContainerPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationitemcontainerpattern
@@ -3522,147 +3862,169 @@ type IUIAutomationLegacyIAccessiblePattern struct {
 var IID_IUIAutomationLegacyIAccessiblePattern = win32.GUID{Data1: 0x828055ad, Data2: 0x355b, Data3: 0x4435, Data4: [8]byte{0x86, 0xd5, 0x3b, 0x51, 0xc1, 0x4a, 0x9b, 0x1b}}
 
 // Select dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 3.
-func (self *IUIAutomationLegacyIAccessiblePattern) Select(flagsSelect int32) foundation.HRESULT {
+func (self *IUIAutomationLegacyIAccessiblePattern) Select(flagsSelect int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(flagsSelect))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DoDefaultAction dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 4.
-func (self *IUIAutomationLegacyIAccessiblePattern) DoDefaultAction() foundation.HRESULT {
+func (self *IUIAutomationLegacyIAccessiblePattern) DoDefaultAction() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValue dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 5.
-func (self *IUIAutomationLegacyIAccessiblePattern) SetValue(szValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szValue)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) SetValue(szValue string) error {
+	_szValue := win32.UTF16Ptr(szValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentChildId dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 6.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentChildId(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentChildId() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentName dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 7.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentName(pszName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentName() (foundation.BSTR, error) {
+	var _pszName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszName)))
+	return _pszName, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentValue dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 8.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentValue(pszValue *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValue)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentValue() (foundation.BSTR, error) {
+	var _pszValue foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszValue)))
+	return _pszValue, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentDescription dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 9.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentDescription(pszDescription *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDescription)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentDescription() (foundation.BSTR, error) {
+	var _pszDescription foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDescription)))
+	return _pszDescription, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentRole dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 10.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentRole(pdwRole *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRole)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentRole() (uint32, error) {
+	var _pdwRole uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwRole)))
+	return _pdwRole, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentState dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 11.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentState(pdwState *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwState)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentState() (uint32, error) {
+	var _pdwState uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwState)))
+	return _pdwState, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentHelp dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 12.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentHelp(pszHelp *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszHelp)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentHelp() (foundation.BSTR, error) {
+	var _pszHelp foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszHelp)))
+	return _pszHelp, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentKeyboardShortcut dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 13.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentKeyboardShortcut(pszKeyboardShortcut *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszKeyboardShortcut)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentKeyboardShortcut() (foundation.BSTR, error) {
+	var _pszKeyboardShortcut foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszKeyboardShortcut)))
+	return _pszKeyboardShortcut, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentSelection dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 14.
-func (self *IUIAutomationLegacyIAccessiblePattern) GetCurrentSelection(pvarSelectedChildren **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelectedChildren)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) GetCurrentSelection() (*IUIAutomationElementArray, error) {
+	var _pvarSelectedChildren *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarSelectedChildren)))
+	return _pvarSelectedChildren, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentDefaultAction dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 15.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentDefaultAction(pszDefaultAction *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDefaultAction)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CurrentDefaultAction() (foundation.BSTR, error) {
+	var _pszDefaultAction foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDefaultAction)))
+	return _pszDefaultAction, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedChildId dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 16.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedChildId(pRetVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedChildId() (int32, error) {
+	var _pRetVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedName dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 17.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedName(pszName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedName() (foundation.BSTR, error) {
+	var _pszName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszName)))
+	return _pszName, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedValue dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 18.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedValue(pszValue *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValue)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedValue() (foundation.BSTR, error) {
+	var _pszValue foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszValue)))
+	return _pszValue, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedDescription dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 19.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedDescription(pszDescription *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDescription)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedDescription() (foundation.BSTR, error) {
+	var _pszDescription foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDescription)))
+	return _pszDescription, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedRole dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 20.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedRole(pdwRole *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRole)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedRole() (uint32, error) {
+	var _pdwRole uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwRole)))
+	return _pdwRole, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedState dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 21.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedState(pdwState *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwState)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedState() (uint32, error) {
+	var _pdwState uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwState)))
+	return _pdwState, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedHelp dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 22.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedHelp(pszHelp *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszHelp)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedHelp() (foundation.BSTR, error) {
+	var _pszHelp foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszHelp)))
+	return _pszHelp, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedKeyboardShortcut dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 23.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedKeyboardShortcut(pszKeyboardShortcut *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszKeyboardShortcut)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedKeyboardShortcut() (foundation.BSTR, error) {
+	var _pszKeyboardShortcut foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszKeyboardShortcut)))
+	return _pszKeyboardShortcut, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedSelection dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 24.
-func (self *IUIAutomationLegacyIAccessiblePattern) GetCachedSelection(pvarSelectedChildren **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelectedChildren)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) GetCachedSelection() (*IUIAutomationElementArray, error) {
+	var _pvarSelectedChildren *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarSelectedChildren)))
+	return _pvarSelectedChildren, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedDefaultAction dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 25.
-func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedDefaultAction(pszDefaultAction *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDefaultAction)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) Get_CachedDefaultAction() (foundation.BSTR, error) {
+	var _pszDefaultAction foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszDefaultAction)))
+	return _pszDefaultAction, win32.HRESULTError(int32(r1))
 }
 
 // GetIAccessible dispatches through IUIAutomationLegacyIAccessiblePattern's vtable slot 26.
-func (self *IUIAutomationLegacyIAccessiblePattern) GetIAccessible(ppAccessible **IAccessible) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAccessible)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationLegacyIAccessiblePattern) GetIAccessible() (*IAccessible, error) {
+	var _ppAccessible *IAccessible
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAccessible)))
+	return _ppAccessible, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationMultipleViewPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationmultipleviewpattern
@@ -3675,39 +4037,44 @@ type IUIAutomationMultipleViewPattern struct {
 var IID_IUIAutomationMultipleViewPattern = win32.GUID{Data1: 0x8d253c91, Data2: 0x1dc5, Data3: 0x4bb5, Data4: [8]byte{0xb1, 0x8f, 0xad, 0xe1, 0x6f, 0xa4, 0x95, 0xe8}}
 
 // GetViewName dispatches through IUIAutomationMultipleViewPattern's vtable slot 3.
-func (self *IUIAutomationMultipleViewPattern) GetViewName(view int32, name *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(view), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationMultipleViewPattern) GetViewName(view int32) (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(view), uintptr(unsafe.Pointer(&_name)))
+	return _name, win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentView dispatches through IUIAutomationMultipleViewPattern's vtable slot 4.
-func (self *IUIAutomationMultipleViewPattern) SetCurrentView(view int32) foundation.HRESULT {
+func (self *IUIAutomationMultipleViewPattern) SetCurrentView(view int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(view))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCurrentView dispatches through IUIAutomationMultipleViewPattern's vtable slot 5.
-func (self *IUIAutomationMultipleViewPattern) Get_CurrentCurrentView(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationMultipleViewPattern) Get_CurrentCurrentView() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentSupportedViews dispatches through IUIAutomationMultipleViewPattern's vtable slot 6.
-func (self *IUIAutomationMultipleViewPattern) GetCurrentSupportedViews(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationMultipleViewPattern) GetCurrentSupportedViews() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCurrentView dispatches through IUIAutomationMultipleViewPattern's vtable slot 7.
-func (self *IUIAutomationMultipleViewPattern) Get_CachedCurrentView(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationMultipleViewPattern) Get_CachedCurrentView() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedSupportedViews dispatches through IUIAutomationMultipleViewPattern's vtable slot 8.
-func (self *IUIAutomationMultipleViewPattern) GetCachedSupportedViews(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationMultipleViewPattern) GetCachedSupportedViews() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationNotCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationnotcondition
@@ -3720,9 +4087,10 @@ type IUIAutomationNotCondition struct {
 var IID_IUIAutomationNotCondition = win32.GUID{Data1: 0xf528b657, Data2: 0x847b, Data3: 0x498c, Data4: [8]byte{0x88, 0x96, 0xd5, 0x2b, 0x56, 0x54, 0x07, 0xa1}}
 
 // GetChild dispatches through IUIAutomationNotCondition's vtable slot 3.
-func (self *IUIAutomationNotCondition) GetChild(condition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationNotCondition) GetChild() (*IUIAutomationCondition, error) {
+	var _condition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
+	return _condition, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationNotificationEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationnotificationeventhandler
@@ -3735,9 +4103,9 @@ type IUIAutomationNotificationEventHandler struct {
 var IID_IUIAutomationNotificationEventHandler = win32.GUID{Data1: 0xc7cb2637, Data2: 0xe6c2, Data3: 0x4d0c, Data4: [8]byte{0x85, 0xde, 0x49, 0x48, 0xc0, 0x21, 0x75, 0xc7}}
 
 // HandleNotificationEvent dispatches through IUIAutomationNotificationEventHandler's vtable slot 3.
-func (self *IUIAutomationNotificationEventHandler) HandleNotificationEvent(sender *IUIAutomationElement, notificationKind NotificationKind, notificationProcessing NotificationProcessing, displayString foundation.BSTR, activityId foundation.BSTR) foundation.HRESULT {
+func (self *IUIAutomationNotificationEventHandler) HandleNotificationEvent(sender *IUIAutomationElement, notificationKind NotificationKind, notificationProcessing NotificationProcessing, displayString foundation.BSTR, activityId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(notificationKind), uintptr(notificationProcessing), uintptr(unsafe.Pointer(displayString)), uintptr(unsafe.Pointer(activityId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationObjectModelPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationobjectmodelpattern
@@ -3750,9 +4118,10 @@ type IUIAutomationObjectModelPattern struct {
 var IID_IUIAutomationObjectModelPattern = win32.GUID{Data1: 0x71c284b3, Data2: 0xc14d, Data3: 0x4d14, Data4: [8]byte{0x98, 0x1e, 0x19, 0x75, 0x1b, 0x0d, 0x75, 0x6d}}
 
 // GetUnderlyingObjectModel dispatches through IUIAutomationObjectModelPattern's vtable slot 3.
-func (self *IUIAutomationObjectModelPattern) GetUnderlyingObjectModel(retVal **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationObjectModelPattern) GetUnderlyingObjectModel() (*systemcom.IUnknown, error) {
+	var _retVal *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationOrCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationorcondition
@@ -3765,21 +4134,23 @@ type IUIAutomationOrCondition struct {
 var IID_IUIAutomationOrCondition = win32.GUID{Data1: 0x8753f032, Data2: 0x3db1, Data3: 0x47b5, Data4: [8]byte{0xa1, 0xfc, 0x6e, 0x34, 0xa2, 0x66, 0xc7, 0x12}}
 
 // Get_ChildCount dispatches through IUIAutomationOrCondition's vtable slot 3.
-func (self *IUIAutomationOrCondition) Get_ChildCount(childCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childCount)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationOrCondition) Get_ChildCount() (int32, error) {
+	var _childCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_childCount)))
+	return _childCount, win32.HRESULTError(int32(r1))
 }
 
 // GetChildrenAsNativeArray dispatches through IUIAutomationOrCondition's vtable slot 4.
-func (self *IUIAutomationOrCondition) GetChildrenAsNativeArray(childArray ***IUIAutomationCondition, childArrayCount *int32) foundation.HRESULT {
+func (self *IUIAutomationOrCondition) GetChildrenAsNativeArray(childArray ***IUIAutomationCondition, childArrayCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childArray)), uintptr(unsafe.Pointer(childArrayCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChildren dispatches through IUIAutomationOrCondition's vtable slot 5.
-func (self *IUIAutomationOrCondition) GetChildren(childArray **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(childArray)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationOrCondition) GetChildren() (*systemcom.SAFEARRAY, error) {
+	var _childArray *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_childArray)))
+	return _childArray, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationPatternHandler: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iuiautomationpatternhandler
@@ -3792,15 +4163,15 @@ type IUIAutomationPatternHandler struct {
 var IID_IUIAutomationPatternHandler = win32.GUID{Data1: 0xd97022f3, Data2: 0xa947, Data3: 0x465e, Data4: [8]byte{0x8b, 0x2a, 0xac, 0x43, 0x15, 0xfa, 0x54, 0xe8}}
 
 // CreateClientWrapper dispatches through IUIAutomationPatternHandler's vtable slot 3.
-func (self *IUIAutomationPatternHandler) CreateClientWrapper(pPatternInstance *IUIAutomationPatternInstance, pClientWrapper **systemcom.IUnknown) foundation.HRESULT {
+func (self *IUIAutomationPatternHandler) CreateClientWrapper(pPatternInstance *IUIAutomationPatternInstance, pClientWrapper **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPatternInstance)), uintptr(unsafe.Pointer(pClientWrapper)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Dispatch dispatches through IUIAutomationPatternHandler's vtable slot 4.
-func (self *IUIAutomationPatternHandler) Dispatch(pTarget *systemcom.IUnknown, index uint32, pParams *UIAutomationParameter, cParams uint32) foundation.HRESULT {
+func (self *IUIAutomationPatternHandler) Dispatch(pTarget *systemcom.IUnknown, index uint32, pParams *UIAutomationParameter, cParams uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTarget)), uintptr(index), uintptr(unsafe.Pointer(pParams)), uintptr(cParams))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationPatternInstance: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iuiautomationpatterninstance
@@ -3813,15 +4184,16 @@ type IUIAutomationPatternInstance struct {
 var IID_IUIAutomationPatternInstance = win32.GUID{Data1: 0xc03a7fe4, Data2: 0x9431, Data3: 0x409f, Data4: [8]byte{0xbe, 0xd8, 0xae, 0x7c, 0x22, 0x99, 0xbc, 0x8d}}
 
 // GetProperty dispatches through IUIAutomationPatternInstance's vtable slot 3.
-func (self *IUIAutomationPatternInstance) GetProperty(index uint32, cached foundation.BOOL, type_ UIAutomationType, pPtr unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(cached), uintptr(type_), uintptr(unsafe.Pointer(pPtr)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationPatternInstance) GetProperty(index uint32, cached bool, type_ UIAutomationType, pPtr unsafe.Pointer) error {
+	_cached := win32.Bool32(cached)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(_cached), uintptr(type_), uintptr(unsafe.Pointer(pPtr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CallMethod dispatches through IUIAutomationPatternInstance's vtable slot 4.
-func (self *IUIAutomationPatternInstance) CallMethod(index uint32, pParams *UIAutomationParameter, cParams uint32) foundation.HRESULT {
+func (self *IUIAutomationPatternInstance) CallMethod(index uint32, pParams *UIAutomationParameter, cParams uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pParams)), uintptr(cParams))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationPropertyChangedEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationpropertychangedeventhandler
@@ -3843,21 +4215,24 @@ type IUIAutomationPropertyCondition struct {
 var IID_IUIAutomationPropertyCondition = win32.GUID{Data1: 0x99ebf2cb, Data2: 0x5578, Data3: 0x4267, Data4: [8]byte{0x9a, 0xd4, 0xaf, 0xd6, 0xea, 0x77, 0xe9, 0x4b}}
 
 // Get_PropertyId dispatches through IUIAutomationPropertyCondition's vtable slot 3.
-func (self *IUIAutomationPropertyCondition) Get_PropertyId(propertyId *UIA_PROPERTY_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyId)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationPropertyCondition) Get_PropertyId() (UIA_PROPERTY_ID, error) {
+	var _propertyId UIA_PROPERTY_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertyId)))
+	return _propertyId, win32.HRESULTError(int32(r1))
 }
 
 // Get_PropertyValue dispatches through IUIAutomationPropertyCondition's vtable slot 4.
-func (self *IUIAutomationPropertyCondition) Get_PropertyValue(propertyValue *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyValue)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationPropertyCondition) Get_PropertyValue() (systemvariant.VARIANT, error) {
+	var _propertyValue systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_propertyValue)))
+	return _propertyValue, win32.HRESULTError(int32(r1))
 }
 
 // Get_PropertyConditionFlags dispatches through IUIAutomationPropertyCondition's vtable slot 5.
-func (self *IUIAutomationPropertyCondition) Get_PropertyConditionFlags(flags *PropertyConditionFlags) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(flags)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationPropertyCondition) Get_PropertyConditionFlags() (PropertyConditionFlags, error) {
+	var _flags PropertyConditionFlags
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_flags)))
+	return _flags, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationProxyFactory: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationproxyfactory
@@ -3870,15 +4245,17 @@ type IUIAutomationProxyFactory struct {
 var IID_IUIAutomationProxyFactory = win32.GUID{Data1: 0x85b94ecd, Data2: 0x849d, Data3: 0x42b6, Data4: [8]byte{0xb9, 0x4d, 0xd6, 0xdb, 0x23, 0xfd, 0xf5, 0xa4}}
 
 // CreateProvider dispatches through IUIAutomationProxyFactory's vtable slot 3.
-func (self *IUIAutomationProxyFactory) CreateProvider(hwnd foundation.HWND, idObject int32, idChild int32, provider **IRawElementProviderSimple) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(provider)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactory) CreateProvider(hwnd foundation.HWND, idObject int32, idChild int32) (*IRawElementProviderSimple, error) {
+	var _provider *IRawElementProviderSimple
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(&_provider)))
+	return _provider, win32.HRESULTError(int32(r1))
 }
 
 // Get_ProxyFactoryId dispatches through IUIAutomationProxyFactory's vtable slot 4.
-func (self *IUIAutomationProxyFactory) Get_ProxyFactoryId(factoryId *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factoryId)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactory) Get_ProxyFactoryId() (foundation.BSTR, error) {
+	var _factoryId foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_factoryId)))
+	return _factoryId, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationProxyFactoryEntry: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationproxyfactoryentry
@@ -3891,81 +4268,93 @@ type IUIAutomationProxyFactoryEntry struct {
 var IID_IUIAutomationProxyFactoryEntry = win32.GUID{Data1: 0xd50e472e, Data2: 0xb64b, Data3: 0x490c, Data4: [8]byte{0xbc, 0xa1, 0xd3, 0x06, 0x96, 0xf9, 0xf2, 0x89}}
 
 // Get_ProxyFactory dispatches through IUIAutomationProxyFactoryEntry's vtable slot 3.
-func (self *IUIAutomationProxyFactoryEntry) Get_ProxyFactory(factory **IUIAutomationProxyFactory) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Get_ProxyFactory() (*IUIAutomationProxyFactory, error) {
+	var _factory *IUIAutomationProxyFactory
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_factory)))
+	return _factory, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClassName dispatches through IUIAutomationProxyFactoryEntry's vtable slot 4.
-func (self *IUIAutomationProxyFactoryEntry) Get_ClassName(className *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(className)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Get_ClassName() (foundation.BSTR, error) {
+	var _className foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_className)))
+	return _className, win32.HRESULTError(int32(r1))
 }
 
 // Get_ImageName dispatches through IUIAutomationProxyFactoryEntry's vtable slot 5.
-func (self *IUIAutomationProxyFactoryEntry) Get_ImageName(imageName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageName)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Get_ImageName() (foundation.BSTR, error) {
+	var _imageName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageName)))
+	return _imageName, win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowSubstringMatch dispatches through IUIAutomationProxyFactoryEntry's vtable slot 6.
-func (self *IUIAutomationProxyFactoryEntry) Get_AllowSubstringMatch(allowSubstringMatch *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allowSubstringMatch)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Get_AllowSubstringMatch() (foundation.BOOL, error) {
+	var _allowSubstringMatch foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allowSubstringMatch)))
+	return _allowSubstringMatch, win32.HRESULTError(int32(r1))
 }
 
 // Get_CanCheckBaseClass dispatches through IUIAutomationProxyFactoryEntry's vtable slot 7.
-func (self *IUIAutomationProxyFactoryEntry) Get_CanCheckBaseClass(canCheckBaseClass *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(canCheckBaseClass)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Get_CanCheckBaseClass() (foundation.BOOL, error) {
+	var _canCheckBaseClass foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_canCheckBaseClass)))
+	return _canCheckBaseClass, win32.HRESULTError(int32(r1))
 }
 
 // Get_NeedsAdviseEvents dispatches through IUIAutomationProxyFactoryEntry's vtable slot 8.
-func (self *IUIAutomationProxyFactoryEntry) Get_NeedsAdviseEvents(adviseEvents *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(adviseEvents)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Get_NeedsAdviseEvents() (foundation.BOOL, error) {
+	var _adviseEvents foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_adviseEvents)))
+	return _adviseEvents, win32.HRESULTError(int32(r1))
 }
 
 // Put_ClassName dispatches through IUIAutomationProxyFactoryEntry's vtable slot 9.
-func (self *IUIAutomationProxyFactoryEntry) Put_ClassName(className foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(className)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Put_ClassName(className string) error {
+	_className := win32.UTF16Ptr(className)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_className)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ImageName dispatches through IUIAutomationProxyFactoryEntry's vtable slot 10.
-func (self *IUIAutomationProxyFactoryEntry) Put_ImageName(imageName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageName)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Put_ImageName(imageName string) error {
+	_imageName := win32.UTF16Ptr(imageName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_imageName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowSubstringMatch dispatches through IUIAutomationProxyFactoryEntry's vtable slot 11.
-func (self *IUIAutomationProxyFactoryEntry) Put_AllowSubstringMatch(allowSubstringMatch foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(allowSubstringMatch))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Put_AllowSubstringMatch(allowSubstringMatch bool) error {
+	_allowSubstringMatch := win32.Bool32(allowSubstringMatch)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_allowSubstringMatch))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_CanCheckBaseClass dispatches through IUIAutomationProxyFactoryEntry's vtable slot 12.
-func (self *IUIAutomationProxyFactoryEntry) Put_CanCheckBaseClass(canCheckBaseClass foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(canCheckBaseClass))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Put_CanCheckBaseClass(canCheckBaseClass bool) error {
+	_canCheckBaseClass := win32.Bool32(canCheckBaseClass)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_canCheckBaseClass))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_NeedsAdviseEvents dispatches through IUIAutomationProxyFactoryEntry's vtable slot 13.
-func (self *IUIAutomationProxyFactoryEntry) Put_NeedsAdviseEvents(adviseEvents foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(adviseEvents))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) Put_NeedsAdviseEvents(adviseEvents bool) error {
+	_adviseEvents := win32.Bool32(adviseEvents)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_adviseEvents))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWinEventsForAutomationEvent dispatches through IUIAutomationProxyFactoryEntry's vtable slot 14.
-func (self *IUIAutomationProxyFactoryEntry) SetWinEventsForAutomationEvent(eventId UIA_EVENT_ID, propertyId UIA_PROPERTY_ID, winEvents *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IUIAutomationProxyFactoryEntry) SetWinEventsForAutomationEvent(eventId UIA_EVENT_ID, propertyId UIA_PROPERTY_ID, winEvents *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(propertyId), uintptr(unsafe.Pointer(winEvents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWinEventsForAutomationEvent dispatches through IUIAutomationProxyFactoryEntry's vtable slot 15.
-func (self *IUIAutomationProxyFactoryEntry) GetWinEventsForAutomationEvent(eventId UIA_EVENT_ID, propertyId UIA_PROPERTY_ID, winEvents **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(propertyId), uintptr(unsafe.Pointer(winEvents)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryEntry) GetWinEventsForAutomationEvent(eventId UIA_EVENT_ID, propertyId UIA_PROPERTY_ID) (*systemcom.SAFEARRAY, error) {
+	var _winEvents *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(eventId), uintptr(propertyId), uintptr(unsafe.Pointer(&_winEvents)))
+	return _winEvents, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationProxyFactoryMapping: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationproxyfactorymapping
@@ -3978,57 +4367,60 @@ type IUIAutomationProxyFactoryMapping struct {
 var IID_IUIAutomationProxyFactoryMapping = win32.GUID{Data1: 0x09e31e18, Data2: 0x872d, Data3: 0x4873, Data4: [8]byte{0x93, 0xd1, 0x1e, 0x54, 0x1e, 0xc1, 0x33, 0xfd}}
 
 // Get_Count dispatches through IUIAutomationProxyFactoryMapping's vtable slot 3.
-func (self *IUIAutomationProxyFactoryMapping) Get_Count(count *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryMapping) Get_Count() (uint32, error) {
+	var _count uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
+	return _count, win32.HRESULTError(int32(r1))
 }
 
 // GetTable dispatches through IUIAutomationProxyFactoryMapping's vtable slot 4.
-func (self *IUIAutomationProxyFactoryMapping) GetTable(table **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(table)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryMapping) GetTable() (*systemcom.SAFEARRAY, error) {
+	var _table *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_table)))
+	return _table, win32.HRESULTError(int32(r1))
 }
 
 // GetEntry dispatches through IUIAutomationProxyFactoryMapping's vtable slot 5.
-func (self *IUIAutomationProxyFactoryMapping) GetEntry(index uint32, entry **IUIAutomationProxyFactoryEntry) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(entry)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationProxyFactoryMapping) GetEntry(index uint32) (*IUIAutomationProxyFactoryEntry, error) {
+	var _entry *IUIAutomationProxyFactoryEntry
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_entry)))
+	return _entry, win32.HRESULTError(int32(r1))
 }
 
 // SetTable dispatches through IUIAutomationProxyFactoryMapping's vtable slot 6.
-func (self *IUIAutomationProxyFactoryMapping) SetTable(factoryList *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IUIAutomationProxyFactoryMapping) SetTable(factoryList *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factoryList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertEntries dispatches through IUIAutomationProxyFactoryMapping's vtable slot 7.
-func (self *IUIAutomationProxyFactoryMapping) InsertEntries(before uint32, factoryList *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IUIAutomationProxyFactoryMapping) InsertEntries(before uint32, factoryList *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(before), uintptr(unsafe.Pointer(factoryList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertEntry dispatches through IUIAutomationProxyFactoryMapping's vtable slot 8.
-func (self *IUIAutomationProxyFactoryMapping) InsertEntry(before uint32, factory *IUIAutomationProxyFactoryEntry) foundation.HRESULT {
+func (self *IUIAutomationProxyFactoryMapping) InsertEntry(before uint32, factory *IUIAutomationProxyFactoryEntry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(before), uintptr(unsafe.Pointer(factory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveEntry dispatches through IUIAutomationProxyFactoryMapping's vtable slot 9.
-func (self *IUIAutomationProxyFactoryMapping) RemoveEntry(index uint32) foundation.HRESULT {
+func (self *IUIAutomationProxyFactoryMapping) RemoveEntry(index uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearTable dispatches through IUIAutomationProxyFactoryMapping's vtable slot 10.
-func (self *IUIAutomationProxyFactoryMapping) ClearTable() foundation.HRESULT {
+func (self *IUIAutomationProxyFactoryMapping) ClearTable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreDefaultTable dispatches through IUIAutomationProxyFactoryMapping's vtable slot 11.
-func (self *IUIAutomationProxyFactoryMapping) RestoreDefaultTable() foundation.HRESULT {
+func (self *IUIAutomationProxyFactoryMapping) RestoreDefaultTable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationRangeValuePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationrangevaluepattern
@@ -4041,75 +4433,87 @@ type IUIAutomationRangeValuePattern struct {
 var IID_IUIAutomationRangeValuePattern = win32.GUID{Data1: 0x59213f4f, Data2: 0x7346, Data3: 0x49e5, Data4: [8]byte{0xb1, 0x20, 0x80, 0x55, 0x59, 0x87, 0xa1, 0x48}}
 
 // Get_CurrentValue dispatches through IUIAutomationRangeValuePattern's vtable slot 4.
-func (self *IUIAutomationRangeValuePattern) Get_CurrentValue(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CurrentValue() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsReadOnly dispatches through IUIAutomationRangeValuePattern's vtable slot 5.
-func (self *IUIAutomationRangeValuePattern) Get_CurrentIsReadOnly(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CurrentIsReadOnly() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentMaximum dispatches through IUIAutomationRangeValuePattern's vtable slot 6.
-func (self *IUIAutomationRangeValuePattern) Get_CurrentMaximum(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CurrentMaximum() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentMinimum dispatches through IUIAutomationRangeValuePattern's vtable slot 7.
-func (self *IUIAutomationRangeValuePattern) Get_CurrentMinimum(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CurrentMinimum() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentLargeChange dispatches through IUIAutomationRangeValuePattern's vtable slot 8.
-func (self *IUIAutomationRangeValuePattern) Get_CurrentLargeChange(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CurrentLargeChange() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentSmallChange dispatches through IUIAutomationRangeValuePattern's vtable slot 9.
-func (self *IUIAutomationRangeValuePattern) Get_CurrentSmallChange(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CurrentSmallChange() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedValue dispatches through IUIAutomationRangeValuePattern's vtable slot 10.
-func (self *IUIAutomationRangeValuePattern) Get_CachedValue(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CachedValue() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsReadOnly dispatches through IUIAutomationRangeValuePattern's vtable slot 11.
-func (self *IUIAutomationRangeValuePattern) Get_CachedIsReadOnly(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CachedIsReadOnly() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedMaximum dispatches through IUIAutomationRangeValuePattern's vtable slot 12.
-func (self *IUIAutomationRangeValuePattern) Get_CachedMaximum(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CachedMaximum() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedMinimum dispatches through IUIAutomationRangeValuePattern's vtable slot 13.
-func (self *IUIAutomationRangeValuePattern) Get_CachedMinimum(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CachedMinimum() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedLargeChange dispatches through IUIAutomationRangeValuePattern's vtable slot 14.
-func (self *IUIAutomationRangeValuePattern) Get_CachedLargeChange(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CachedLargeChange() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedSmallChange dispatches through IUIAutomationRangeValuePattern's vtable slot 15.
-func (self *IUIAutomationRangeValuePattern) Get_CachedSmallChange(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationRangeValuePattern) Get_CachedSmallChange() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationRegistrar: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iuiautomationregistrar
@@ -4122,21 +4526,21 @@ type IUIAutomationRegistrar struct {
 var IID_IUIAutomationRegistrar = win32.GUID{Data1: 0x8609c4ec, Data2: 0x4a1a, Data3: 0x4d88, Data4: [8]byte{0xa3, 0x57, 0x5a, 0x66, 0xe0, 0x60, 0xe1, 0xcf}}
 
 // RegisterProperty dispatches through IUIAutomationRegistrar's vtable slot 3.
-func (self *IUIAutomationRegistrar) RegisterProperty(property *UIAutomationPropertyInfo, propertyId *int32) foundation.HRESULT {
+func (self *IUIAutomationRegistrar) RegisterProperty(property *UIAutomationPropertyInfo, propertyId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(property)), uintptr(unsafe.Pointer(propertyId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterEvent dispatches through IUIAutomationRegistrar's vtable slot 4.
-func (self *IUIAutomationRegistrar) RegisterEvent(event *UIAutomationEventInfo, eventId *int32) foundation.HRESULT {
+func (self *IUIAutomationRegistrar) RegisterEvent(event *UIAutomationEventInfo, eventId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(event)), uintptr(unsafe.Pointer(eventId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterPattern dispatches through IUIAutomationRegistrar's vtable slot 5.
-func (self *IUIAutomationRegistrar) RegisterPattern(pattern *UIAutomationPatternInfo, pPatternId *int32, pPatternAvailablePropertyId *int32, propertyIdCount uint32, pPropertyIds *int32, eventIdCount uint32, pEventIds *int32) foundation.HRESULT {
+func (self *IUIAutomationRegistrar) RegisterPattern(pattern *UIAutomationPatternInfo, pPatternId *int32, pPatternAvailablePropertyId *int32, propertyIdCount uint32, pPropertyIds *int32, eventIdCount uint32, pEventIds *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pattern)), uintptr(unsafe.Pointer(pPatternId)), uintptr(unsafe.Pointer(pPatternAvailablePropertyId)), uintptr(propertyIdCount), uintptr(unsafe.Pointer(pPropertyIds)), uintptr(eventIdCount), uintptr(unsafe.Pointer(pEventIds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationScrollItemPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationscrollitempattern
@@ -4149,9 +4553,9 @@ type IUIAutomationScrollItemPattern struct {
 var IID_IUIAutomationScrollItemPattern = win32.GUID{Data1: 0xb488300f, Data2: 0xd015, Data3: 0x4f19, Data4: [8]byte{0x9c, 0x29, 0xbb, 0x59, 0x5e, 0x36, 0x45, 0xef}}
 
 // ScrollIntoView dispatches through IUIAutomationScrollItemPattern's vtable slot 3.
-func (self *IUIAutomationScrollItemPattern) ScrollIntoView() foundation.HRESULT {
+func (self *IUIAutomationScrollItemPattern) ScrollIntoView() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationScrollPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationscrollpattern
@@ -4164,81 +4568,93 @@ type IUIAutomationScrollPattern struct {
 var IID_IUIAutomationScrollPattern = win32.GUID{Data1: 0x88f4d42a, Data2: 0xe881, Data3: 0x459d, Data4: [8]byte{0xa7, 0x7c, 0x73, 0xbb, 0xbb, 0x7e, 0x02, 0xdc}}
 
 // Scroll dispatches through IUIAutomationScrollPattern's vtable slot 3.
-func (self *IUIAutomationScrollPattern) Scroll(horizontalAmount ScrollAmount, verticalAmount ScrollAmount) foundation.HRESULT {
+func (self *IUIAutomationScrollPattern) Scroll(horizontalAmount ScrollAmount, verticalAmount ScrollAmount) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(horizontalAmount), uintptr(verticalAmount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentHorizontalScrollPercent dispatches through IUIAutomationScrollPattern's vtable slot 5.
-func (self *IUIAutomationScrollPattern) Get_CurrentHorizontalScrollPercent(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CurrentHorizontalScrollPercent() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentVerticalScrollPercent dispatches through IUIAutomationScrollPattern's vtable slot 6.
-func (self *IUIAutomationScrollPattern) Get_CurrentVerticalScrollPercent(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CurrentVerticalScrollPercent() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentHorizontalViewSize dispatches through IUIAutomationScrollPattern's vtable slot 7.
-func (self *IUIAutomationScrollPattern) Get_CurrentHorizontalViewSize(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CurrentHorizontalViewSize() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentVerticalViewSize dispatches through IUIAutomationScrollPattern's vtable slot 8.
-func (self *IUIAutomationScrollPattern) Get_CurrentVerticalViewSize(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CurrentVerticalViewSize() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentHorizontallyScrollable dispatches through IUIAutomationScrollPattern's vtable slot 9.
-func (self *IUIAutomationScrollPattern) Get_CurrentHorizontallyScrollable(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CurrentHorizontallyScrollable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentVerticallyScrollable dispatches through IUIAutomationScrollPattern's vtable slot 10.
-func (self *IUIAutomationScrollPattern) Get_CurrentVerticallyScrollable(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CurrentVerticallyScrollable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedHorizontalScrollPercent dispatches through IUIAutomationScrollPattern's vtable slot 11.
-func (self *IUIAutomationScrollPattern) Get_CachedHorizontalScrollPercent(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CachedHorizontalScrollPercent() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedVerticalScrollPercent dispatches through IUIAutomationScrollPattern's vtable slot 12.
-func (self *IUIAutomationScrollPattern) Get_CachedVerticalScrollPercent(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CachedVerticalScrollPercent() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedHorizontalViewSize dispatches through IUIAutomationScrollPattern's vtable slot 13.
-func (self *IUIAutomationScrollPattern) Get_CachedHorizontalViewSize(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CachedHorizontalViewSize() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedVerticalViewSize dispatches through IUIAutomationScrollPattern's vtable slot 14.
-func (self *IUIAutomationScrollPattern) Get_CachedVerticalViewSize(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CachedVerticalViewSize() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedHorizontallyScrollable dispatches through IUIAutomationScrollPattern's vtable slot 15.
-func (self *IUIAutomationScrollPattern) Get_CachedHorizontallyScrollable(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CachedHorizontallyScrollable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedVerticallyScrollable dispatches through IUIAutomationScrollPattern's vtable slot 16.
-func (self *IUIAutomationScrollPattern) Get_CachedVerticallyScrollable(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationScrollPattern) Get_CachedVerticallyScrollable() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationSelectionItemPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationselectionitempattern
@@ -4251,45 +4667,49 @@ type IUIAutomationSelectionItemPattern struct {
 var IID_IUIAutomationSelectionItemPattern = win32.GUID{Data1: 0xa8efa66a, Data2: 0x0fda, Data3: 0x421a, Data4: [8]byte{0x91, 0x94, 0x38, 0x02, 0x1f, 0x35, 0x78, 0xea}}
 
 // Select dispatches through IUIAutomationSelectionItemPattern's vtable slot 3.
-func (self *IUIAutomationSelectionItemPattern) Select() foundation.HRESULT {
+func (self *IUIAutomationSelectionItemPattern) Select() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddToSelection dispatches through IUIAutomationSelectionItemPattern's vtable slot 4.
-func (self *IUIAutomationSelectionItemPattern) AddToSelection() foundation.HRESULT {
+func (self *IUIAutomationSelectionItemPattern) AddToSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveFromSelection dispatches through IUIAutomationSelectionItemPattern's vtable slot 5.
-func (self *IUIAutomationSelectionItemPattern) RemoveFromSelection() foundation.HRESULT {
+func (self *IUIAutomationSelectionItemPattern) RemoveFromSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsSelected dispatches through IUIAutomationSelectionItemPattern's vtable slot 6.
-func (self *IUIAutomationSelectionItemPattern) Get_CurrentIsSelected(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionItemPattern) Get_CurrentIsSelected() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentSelectionContainer dispatches through IUIAutomationSelectionItemPattern's vtable slot 7.
-func (self *IUIAutomationSelectionItemPattern) Get_CurrentSelectionContainer(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionItemPattern) Get_CurrentSelectionContainer() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsSelected dispatches through IUIAutomationSelectionItemPattern's vtable slot 8.
-func (self *IUIAutomationSelectionItemPattern) Get_CachedIsSelected(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionItemPattern) Get_CachedIsSelected() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedSelectionContainer dispatches through IUIAutomationSelectionItemPattern's vtable slot 9.
-func (self *IUIAutomationSelectionItemPattern) Get_CachedSelectionContainer(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionItemPattern) Get_CachedSelectionContainer() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationSelectionPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationselectionpattern
@@ -4302,39 +4722,45 @@ type IUIAutomationSelectionPattern struct {
 var IID_IUIAutomationSelectionPattern = win32.GUID{Data1: 0x5ed5202e, Data2: 0xb2ac, Data3: 0x47a6, Data4: [8]byte{0xb6, 0x38, 0x4b, 0x0b, 0xf1, 0x40, 0xd7, 0x8e}}
 
 // GetCurrentSelection dispatches through IUIAutomationSelectionPattern's vtable slot 3.
-func (self *IUIAutomationSelectionPattern) GetCurrentSelection(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern) GetCurrentSelection() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCanSelectMultiple dispatches through IUIAutomationSelectionPattern's vtable slot 4.
-func (self *IUIAutomationSelectionPattern) Get_CurrentCanSelectMultiple(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern) Get_CurrentCanSelectMultiple() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsSelectionRequired dispatches through IUIAutomationSelectionPattern's vtable slot 5.
-func (self *IUIAutomationSelectionPattern) Get_CurrentIsSelectionRequired(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern) Get_CurrentIsSelectionRequired() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedSelection dispatches through IUIAutomationSelectionPattern's vtable slot 6.
-func (self *IUIAutomationSelectionPattern) GetCachedSelection(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern) GetCachedSelection() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCanSelectMultiple dispatches through IUIAutomationSelectionPattern's vtable slot 7.
-func (self *IUIAutomationSelectionPattern) Get_CachedCanSelectMultiple(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern) Get_CachedCanSelectMultiple() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsSelectionRequired dispatches through IUIAutomationSelectionPattern's vtable slot 8.
-func (self *IUIAutomationSelectionPattern) Get_CachedIsSelectionRequired(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern) Get_CachedIsSelectionRequired() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationSelectionPattern2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationselectionpattern2
@@ -4347,51 +4773,59 @@ type IUIAutomationSelectionPattern2 struct {
 var IID_IUIAutomationSelectionPattern2 = win32.GUID{Data1: 0x0532bfae, Data2: 0xc011, Data3: 0x4e32, Data4: [8]byte{0xa3, 0x43, 0x6d, 0x64, 0x2d, 0x79, 0x85, 0x55}}
 
 // Get_CurrentFirstSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 9.
-func (self *IUIAutomationSelectionPattern2) Get_CurrentFirstSelectedItem(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern2) Get_CurrentFirstSelectedItem() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentLastSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 10.
-func (self *IUIAutomationSelectionPattern2) Get_CurrentLastSelectedItem(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern2) Get_CurrentLastSelectedItem() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCurrentSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 11.
-func (self *IUIAutomationSelectionPattern2) Get_CurrentCurrentSelectedItem(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern2) Get_CurrentCurrentSelectedItem() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentItemCount dispatches through IUIAutomationSelectionPattern2's vtable slot 12.
-func (self *IUIAutomationSelectionPattern2) Get_CurrentItemCount(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern2) Get_CurrentItemCount() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedFirstSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 13.
-func (self *IUIAutomationSelectionPattern2) Get_CachedFirstSelectedItem(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern2) Get_CachedFirstSelectedItem() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedLastSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 14.
-func (self *IUIAutomationSelectionPattern2) Get_CachedLastSelectedItem(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern2) Get_CachedLastSelectedItem() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCurrentSelectedItem dispatches through IUIAutomationSelectionPattern2's vtable slot 15.
-func (self *IUIAutomationSelectionPattern2) Get_CachedCurrentSelectedItem(retVal **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern2) Get_CachedCurrentSelectedItem() (*IUIAutomationElement, error) {
+	var _retVal *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedItemCount dispatches through IUIAutomationSelectionPattern2's vtable slot 16.
-func (self *IUIAutomationSelectionPattern2) Get_CachedItemCount(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSelectionPattern2) Get_CachedItemCount() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationSpreadsheetItemPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationspreadsheetitempattern
@@ -4404,39 +4838,45 @@ type IUIAutomationSpreadsheetItemPattern struct {
 var IID_IUIAutomationSpreadsheetItemPattern = win32.GUID{Data1: 0x7d4fb86c, Data2: 0x8d34, Data3: 0x40e1, Data4: [8]byte{0x8e, 0x83, 0x62, 0xc1, 0x52, 0x04, 0xe3, 0x35}}
 
 // Get_CurrentFormula dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 3.
-func (self *IUIAutomationSpreadsheetItemPattern) Get_CurrentFormula(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSpreadsheetItemPattern) Get_CurrentFormula() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentAnnotationObjects dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 4.
-func (self *IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationObjects(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationObjects() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentAnnotationTypes dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 5.
-func (self *IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationTypes(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSpreadsheetItemPattern) GetCurrentAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedFormula dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 6.
-func (self *IUIAutomationSpreadsheetItemPattern) Get_CachedFormula(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSpreadsheetItemPattern) Get_CachedFormula() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedAnnotationObjects dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 7.
-func (self *IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationObjects(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationObjects() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedAnnotationTypes dispatches through IUIAutomationSpreadsheetItemPattern's vtable slot 8.
-func (self *IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationTypes(retVal **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSpreadsheetItemPattern) GetCachedAnnotationTypes() (*systemcom.SAFEARRAY, error) {
+	var _retVal *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationSpreadsheetPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationspreadsheetpattern
@@ -4449,9 +4889,10 @@ type IUIAutomationSpreadsheetPattern struct {
 var IID_IUIAutomationSpreadsheetPattern = win32.GUID{Data1: 0x7517a7c8, Data2: 0xfaae, Data3: 0x4de9, Data4: [8]byte{0x9f, 0x08, 0x29, 0xb9, 0x1e, 0x85, 0x95, 0xc1}}
 
 // GetItemByName dispatches through IUIAutomationSpreadsheetPattern's vtable slot 3.
-func (self *IUIAutomationSpreadsheetPattern) GetItemByName(name foundation.BSTR, element **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationSpreadsheetPattern) GetItemByName(name foundation.BSTR) (*IUIAutomationElement, error) {
+	var _element *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationStructureChangedEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationstructurechangedeventhandler
@@ -4464,9 +4905,9 @@ type IUIAutomationStructureChangedEventHandler struct {
 var IID_IUIAutomationStructureChangedEventHandler = win32.GUID{Data1: 0xe81d1b4e, Data2: 0x11c5, Data3: 0x42f8, Data4: [8]byte{0x97, 0x54, 0xe7, 0x03, 0x6c, 0x79, 0xf0, 0x54}}
 
 // HandleStructureChangedEvent dispatches through IUIAutomationStructureChangedEventHandler's vtable slot 3.
-func (self *IUIAutomationStructureChangedEventHandler) HandleStructureChangedEvent(sender *IUIAutomationElement, changeType StructureChangeType, runtimeId *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IUIAutomationStructureChangedEventHandler) HandleStructureChangedEvent(sender *IUIAutomationElement, changeType StructureChangeType, runtimeId *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(changeType), uintptr(unsafe.Pointer(runtimeId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationStylesPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationstylespattern
@@ -4479,99 +4920,113 @@ type IUIAutomationStylesPattern struct {
 var IID_IUIAutomationStylesPattern = win32.GUID{Data1: 0x85b5f0a2, Data2: 0xbd79, Data3: 0x484a, Data4: [8]byte{0xad, 0x2b, 0x38, 0x8c, 0x98, 0x38, 0xd5, 0xfb}}
 
 // Get_CurrentStyleId dispatches through IUIAutomationStylesPattern's vtable slot 3.
-func (self *IUIAutomationStylesPattern) Get_CurrentStyleId(retVal *UIA_STYLE_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CurrentStyleId() (UIA_STYLE_ID, error) {
+	var _retVal UIA_STYLE_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentStyleName dispatches through IUIAutomationStylesPattern's vtable slot 4.
-func (self *IUIAutomationStylesPattern) Get_CurrentStyleName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CurrentStyleName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentFillColor dispatches through IUIAutomationStylesPattern's vtable slot 5.
-func (self *IUIAutomationStylesPattern) Get_CurrentFillColor(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CurrentFillColor() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentFillPatternStyle dispatches through IUIAutomationStylesPattern's vtable slot 6.
-func (self *IUIAutomationStylesPattern) Get_CurrentFillPatternStyle(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CurrentFillPatternStyle() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentShape dispatches through IUIAutomationStylesPattern's vtable slot 7.
-func (self *IUIAutomationStylesPattern) Get_CurrentShape(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CurrentShape() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentFillPatternColor dispatches through IUIAutomationStylesPattern's vtable slot 8.
-func (self *IUIAutomationStylesPattern) Get_CurrentFillPatternColor(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CurrentFillPatternColor() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentExtendedProperties dispatches through IUIAutomationStylesPattern's vtable slot 9.
-func (self *IUIAutomationStylesPattern) Get_CurrentExtendedProperties(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CurrentExtendedProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentExtendedPropertiesAsArray dispatches through IUIAutomationStylesPattern's vtable slot 10.
-func (self *IUIAutomationStylesPattern) GetCurrentExtendedPropertiesAsArray(propertyArray **ExtendedProperty, propertyCount *int32) foundation.HRESULT {
+func (self *IUIAutomationStylesPattern) GetCurrentExtendedPropertiesAsArray(propertyArray **ExtendedProperty, propertyCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyArray)), uintptr(unsafe.Pointer(propertyCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedStyleId dispatches through IUIAutomationStylesPattern's vtable slot 11.
-func (self *IUIAutomationStylesPattern) Get_CachedStyleId(retVal *UIA_STYLE_ID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CachedStyleId() (UIA_STYLE_ID, error) {
+	var _retVal UIA_STYLE_ID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedStyleName dispatches through IUIAutomationStylesPattern's vtable slot 12.
-func (self *IUIAutomationStylesPattern) Get_CachedStyleName(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CachedStyleName() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedFillColor dispatches through IUIAutomationStylesPattern's vtable slot 13.
-func (self *IUIAutomationStylesPattern) Get_CachedFillColor(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CachedFillColor() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedFillPatternStyle dispatches through IUIAutomationStylesPattern's vtable slot 14.
-func (self *IUIAutomationStylesPattern) Get_CachedFillPatternStyle(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CachedFillPatternStyle() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedShape dispatches through IUIAutomationStylesPattern's vtable slot 15.
-func (self *IUIAutomationStylesPattern) Get_CachedShape(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CachedShape() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedFillPatternColor dispatches through IUIAutomationStylesPattern's vtable slot 16.
-func (self *IUIAutomationStylesPattern) Get_CachedFillPatternColor(retVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CachedFillPatternColor() (int32, error) {
+	var _retVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedExtendedProperties dispatches through IUIAutomationStylesPattern's vtable slot 17.
-func (self *IUIAutomationStylesPattern) Get_CachedExtendedProperties(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationStylesPattern) Get_CachedExtendedProperties() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedExtendedPropertiesAsArray dispatches through IUIAutomationStylesPattern's vtable slot 18.
-func (self *IUIAutomationStylesPattern) GetCachedExtendedPropertiesAsArray(propertyArray **ExtendedProperty, propertyCount *int32) foundation.HRESULT {
+func (self *IUIAutomationStylesPattern) GetCachedExtendedPropertiesAsArray(propertyArray **ExtendedProperty, propertyCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyArray)), uintptr(unsafe.Pointer(propertyCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationSynchronizedInputPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationsynchronizedinputpattern
@@ -4584,15 +5039,15 @@ type IUIAutomationSynchronizedInputPattern struct {
 var IID_IUIAutomationSynchronizedInputPattern = win32.GUID{Data1: 0x2233be0b, Data2: 0xafb7, Data3: 0x448b, Data4: [8]byte{0x9f, 0xda, 0x3b, 0x37, 0x8a, 0xa5, 0xea, 0xe1}}
 
 // StartListening dispatches through IUIAutomationSynchronizedInputPattern's vtable slot 3.
-func (self *IUIAutomationSynchronizedInputPattern) StartListening(inputType SynchronizedInputType) foundation.HRESULT {
+func (self *IUIAutomationSynchronizedInputPattern) StartListening(inputType SynchronizedInputType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(inputType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IUIAutomationSynchronizedInputPattern's vtable slot 4.
-func (self *IUIAutomationSynchronizedInputPattern) Cancel() foundation.HRESULT {
+func (self *IUIAutomationSynchronizedInputPattern) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTableItemPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtableitempattern
@@ -4605,27 +5060,31 @@ type IUIAutomationTableItemPattern struct {
 var IID_IUIAutomationTableItemPattern = win32.GUID{Data1: 0x0b964eb3, Data2: 0xef2e, Data3: 0x4464, Data4: [8]byte{0x9c, 0x79, 0x61, 0xd6, 0x17, 0x37, 0xa2, 0x7e}}
 
 // GetCurrentRowHeaderItems dispatches through IUIAutomationTableItemPattern's vtable slot 3.
-func (self *IUIAutomationTableItemPattern) GetCurrentRowHeaderItems(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTableItemPattern) GetCurrentRowHeaderItems() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentColumnHeaderItems dispatches through IUIAutomationTableItemPattern's vtable slot 4.
-func (self *IUIAutomationTableItemPattern) GetCurrentColumnHeaderItems(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTableItemPattern) GetCurrentColumnHeaderItems() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedRowHeaderItems dispatches through IUIAutomationTableItemPattern's vtable slot 5.
-func (self *IUIAutomationTableItemPattern) GetCachedRowHeaderItems(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTableItemPattern) GetCachedRowHeaderItems() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedColumnHeaderItems dispatches through IUIAutomationTableItemPattern's vtable slot 6.
-func (self *IUIAutomationTableItemPattern) GetCachedColumnHeaderItems(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTableItemPattern) GetCachedColumnHeaderItems() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTablePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtablepattern
@@ -4638,39 +5097,45 @@ type IUIAutomationTablePattern struct {
 var IID_IUIAutomationTablePattern = win32.GUID{Data1: 0x620e691c, Data2: 0xea96, Data3: 0x4710, Data4: [8]byte{0xa8, 0x50, 0x75, 0x4b, 0x24, 0xce, 0x24, 0x17}}
 
 // GetCurrentRowHeaders dispatches through IUIAutomationTablePattern's vtable slot 3.
-func (self *IUIAutomationTablePattern) GetCurrentRowHeaders(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTablePattern) GetCurrentRowHeaders() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentColumnHeaders dispatches through IUIAutomationTablePattern's vtable slot 4.
-func (self *IUIAutomationTablePattern) GetCurrentColumnHeaders(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTablePattern) GetCurrentColumnHeaders() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentRowOrColumnMajor dispatches through IUIAutomationTablePattern's vtable slot 5.
-func (self *IUIAutomationTablePattern) Get_CurrentRowOrColumnMajor(retVal *RowOrColumnMajor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTablePattern) Get_CurrentRowOrColumnMajor() (RowOrColumnMajor, error) {
+	var _retVal RowOrColumnMajor
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedRowHeaders dispatches through IUIAutomationTablePattern's vtable slot 6.
-func (self *IUIAutomationTablePattern) GetCachedRowHeaders(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTablePattern) GetCachedRowHeaders() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // GetCachedColumnHeaders dispatches through IUIAutomationTablePattern's vtable slot 7.
-func (self *IUIAutomationTablePattern) GetCachedColumnHeaders(retVal **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTablePattern) GetCachedColumnHeaders() (*IUIAutomationElementArray, error) {
+	var _retVal *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedRowOrColumnMajor dispatches through IUIAutomationTablePattern's vtable slot 8.
-func (self *IUIAutomationTablePattern) Get_CachedRowOrColumnMajor(retVal *RowOrColumnMajor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTablePattern) Get_CachedRowOrColumnMajor() (RowOrColumnMajor, error) {
+	var _retVal RowOrColumnMajor
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTextChildPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextchildpattern
@@ -4683,15 +5148,17 @@ type IUIAutomationTextChildPattern struct {
 var IID_IUIAutomationTextChildPattern = win32.GUID{Data1: 0x6552b038, Data2: 0xae05, Data3: 0x40c8, Data4: [8]byte{0xab, 0xfd, 0xaa, 0x08, 0x35, 0x2a, 0xab, 0x86}}
 
 // Get_TextContainer dispatches through IUIAutomationTextChildPattern's vtable slot 3.
-func (self *IUIAutomationTextChildPattern) Get_TextContainer(container **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(container)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextChildPattern) Get_TextContainer() (*IUIAutomationElement, error) {
+	var _container *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_container)))
+	return _container, win32.HRESULTError(int32(r1))
 }
 
 // Get_TextRange dispatches through IUIAutomationTextChildPattern's vtable slot 4.
-func (self *IUIAutomationTextChildPattern) Get_TextRange(range_ **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextChildPattern) Get_TextRange() (*IUIAutomationTextRange, error) {
+	var _range_ *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_range_)))
+	return _range_, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTextEditPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtexteditpattern
@@ -4704,15 +5171,17 @@ type IUIAutomationTextEditPattern struct {
 var IID_IUIAutomationTextEditPattern = win32.GUID{Data1: 0x17e21576, Data2: 0x996c, Data3: 0x4870, Data4: [8]byte{0x99, 0xd9, 0xbf, 0xf3, 0x23, 0x38, 0x0c, 0x06}}
 
 // GetActiveComposition dispatches through IUIAutomationTextEditPattern's vtable slot 9.
-func (self *IUIAutomationTextEditPattern) GetActiveComposition(range_ **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextEditPattern) GetActiveComposition() (*IUIAutomationTextRange, error) {
+	var _range_ *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_range_)))
+	return _range_, win32.HRESULTError(int32(r1))
 }
 
 // GetConversionTarget dispatches through IUIAutomationTextEditPattern's vtable slot 10.
-func (self *IUIAutomationTextEditPattern) GetConversionTarget(range_ **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextEditPattern) GetConversionTarget() (*IUIAutomationTextRange, error) {
+	var _range_ *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_range_)))
+	return _range_, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTextEditTextChangedEventHandler: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextedittextchangedeventhandler
@@ -4725,9 +5194,9 @@ type IUIAutomationTextEditTextChangedEventHandler struct {
 var IID_IUIAutomationTextEditTextChangedEventHandler = win32.GUID{Data1: 0x92faa680, Data2: 0xe704, Data3: 0x4156, Data4: [8]byte{0x93, 0x1a, 0xe3, 0x2d, 0x5b, 0xb3, 0x8f, 0x3f}}
 
 // HandleTextEditTextChangedEvent dispatches through IUIAutomationTextEditTextChangedEventHandler's vtable slot 3.
-func (self *IUIAutomationTextEditTextChangedEventHandler) HandleTextEditTextChangedEvent(sender *IUIAutomationElement, textEditChangeType TextEditChangeType, eventStrings *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IUIAutomationTextEditTextChangedEventHandler) HandleTextEditTextChangedEvent(sender *IUIAutomationElement, textEditChangeType TextEditChangeType, eventStrings *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(textEditChangeType), uintptr(unsafe.Pointer(eventStrings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTextPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextpattern
@@ -4740,33 +5209,38 @@ type IUIAutomationTextPattern struct {
 var IID_IUIAutomationTextPattern = win32.GUID{Data1: 0x32eba289, Data2: 0x3583, Data3: 0x42c9, Data4: [8]byte{0x9c, 0x59, 0x3b, 0x6d, 0x9a, 0x1e, 0x9b, 0x6a}}
 
 // RangeFromChild dispatches through IUIAutomationTextPattern's vtable slot 4.
-func (self *IUIAutomationTextPattern) RangeFromChild(child *IUIAutomationElement, range_ **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(child)), uintptr(unsafe.Pointer(range_)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextPattern) RangeFromChild(child *IUIAutomationElement) (*IUIAutomationTextRange, error) {
+	var _range_ *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(child)), uintptr(unsafe.Pointer(&_range_)))
+	return _range_, win32.HRESULTError(int32(r1))
 }
 
 // GetSelection dispatches through IUIAutomationTextPattern's vtable slot 5.
-func (self *IUIAutomationTextPattern) GetSelection(ranges **IUIAutomationTextRangeArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ranges)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextPattern) GetSelection() (*IUIAutomationTextRangeArray, error) {
+	var _ranges *IUIAutomationTextRangeArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ranges)))
+	return _ranges, win32.HRESULTError(int32(r1))
 }
 
 // GetVisibleRanges dispatches through IUIAutomationTextPattern's vtable slot 6.
-func (self *IUIAutomationTextPattern) GetVisibleRanges(ranges **IUIAutomationTextRangeArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ranges)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextPattern) GetVisibleRanges() (*IUIAutomationTextRangeArray, error) {
+	var _ranges *IUIAutomationTextRangeArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ranges)))
+	return _ranges, win32.HRESULTError(int32(r1))
 }
 
 // Get_DocumentRange dispatches through IUIAutomationTextPattern's vtable slot 7.
-func (self *IUIAutomationTextPattern) Get_DocumentRange(range_ **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextPattern) Get_DocumentRange() (*IUIAutomationTextRange, error) {
+	var _range_ *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_range_)))
+	return _range_, win32.HRESULTError(int32(r1))
 }
 
 // Get_SupportedTextSelection dispatches through IUIAutomationTextPattern's vtable slot 8.
-func (self *IUIAutomationTextPattern) Get_SupportedTextSelection(supportedTextSelection *SupportedTextSelection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(supportedTextSelection)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextPattern) Get_SupportedTextSelection() (SupportedTextSelection, error) {
+	var _supportedTextSelection SupportedTextSelection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_supportedTextSelection)))
+	return _supportedTextSelection, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTextPattern2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextpattern2
@@ -4779,15 +5253,17 @@ type IUIAutomationTextPattern2 struct {
 var IID_IUIAutomationTextPattern2 = win32.GUID{Data1: 0x506a921a, Data2: 0xfcc9, Data3: 0x409f, Data4: [8]byte{0xb2, 0x3b, 0x37, 0xeb, 0x74, 0x10, 0x68, 0x72}}
 
 // RangeFromAnnotation dispatches through IUIAutomationTextPattern2's vtable slot 9.
-func (self *IUIAutomationTextPattern2) RangeFromAnnotation(annotation *IUIAutomationElement, range_ **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(annotation)), uintptr(unsafe.Pointer(range_)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextPattern2) RangeFromAnnotation(annotation *IUIAutomationElement) (*IUIAutomationTextRange, error) {
+	var _range_ *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(annotation)), uintptr(unsafe.Pointer(&_range_)))
+	return _range_, win32.HRESULTError(int32(r1))
 }
 
 // GetCaretRange dispatches through IUIAutomationTextPattern2's vtable slot 10.
-func (self *IUIAutomationTextPattern2) GetCaretRange(isActive *foundation.BOOL, range_ **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)), uintptr(unsafe.Pointer(range_)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextPattern2) GetCaretRange(isActive *foundation.BOOL) (*IUIAutomationTextRange, error) {
+	var _range_ *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)), uintptr(unsafe.Pointer(&_range_)))
+	return _range_, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTextRange: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextrange
@@ -4800,105 +5276,119 @@ type IUIAutomationTextRange struct {
 var IID_IUIAutomationTextRange = win32.GUID{Data1: 0xa543cc6a, Data2: 0xf4ae, Data3: 0x494b, Data4: [8]byte{0x82, 0x39, 0xc8, 0x14, 0x48, 0x11, 0x87, 0xa8}}
 
 // Clone dispatches through IUIAutomationTextRange's vtable slot 3.
-func (self *IUIAutomationTextRange) Clone(clonedRange **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clonedRange)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) Clone() (*IUIAutomationTextRange, error) {
+	var _clonedRange *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_clonedRange)))
+	return _clonedRange, win32.HRESULTError(int32(r1))
 }
 
 // Compare dispatches through IUIAutomationTextRange's vtable slot 4.
-func (self *IUIAutomationTextRange) Compare(range_ *IUIAutomationTextRange, areSame *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)), uintptr(unsafe.Pointer(areSame)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) Compare(range_ *IUIAutomationTextRange) (foundation.BOOL, error) {
+	var _areSame foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(range_)), uintptr(unsafe.Pointer(&_areSame)))
+	return _areSame, win32.HRESULTError(int32(r1))
 }
 
 // CompareEndpoints dispatches through IUIAutomationTextRange's vtable slot 5.
-func (self *IUIAutomationTextRange) CompareEndpoints(srcEndPoint TextPatternRangeEndpoint, range_ *IUIAutomationTextRange, targetEndPoint TextPatternRangeEndpoint, compValue *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(srcEndPoint), uintptr(unsafe.Pointer(range_)), uintptr(targetEndPoint), uintptr(unsafe.Pointer(compValue)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) CompareEndpoints(srcEndPoint TextPatternRangeEndpoint, range_ *IUIAutomationTextRange, targetEndPoint TextPatternRangeEndpoint) (int32, error) {
+	var _compValue int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(srcEndPoint), uintptr(unsafe.Pointer(range_)), uintptr(targetEndPoint), uintptr(unsafe.Pointer(&_compValue)))
+	return _compValue, win32.HRESULTError(int32(r1))
 }
 
 // ExpandToEnclosingUnit dispatches through IUIAutomationTextRange's vtable slot 6.
-func (self *IUIAutomationTextRange) ExpandToEnclosingUnit(textUnit TextUnit) foundation.HRESULT {
+func (self *IUIAutomationTextRange) ExpandToEnclosingUnit(textUnit TextUnit) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(textUnit))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindText dispatches through IUIAutomationTextRange's vtable slot 8.
-func (self *IUIAutomationTextRange) FindText(text foundation.BSTR, backward foundation.BOOL, ignoreCase foundation.BOOL, found **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(backward), uintptr(ignoreCase), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) FindText(text foundation.BSTR, backward bool, ignoreCase bool) (*IUIAutomationTextRange, error) {
+	_backward := win32.Bool32(backward)
+	_ignoreCase := win32.Bool32(ignoreCase)
+	var _found *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(_backward), uintptr(_ignoreCase), uintptr(unsafe.Pointer(&_found)))
+	return _found, win32.HRESULTError(int32(r1))
 }
 
 // GetAttributeValue dispatches through IUIAutomationTextRange's vtable slot 9.
-func (self *IUIAutomationTextRange) GetAttributeValue(attr UIA_TEXTATTRIBUTE_ID, value *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(attr), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) GetAttributeValue(attr UIA_TEXTATTRIBUTE_ID) (systemvariant.VARIANT, error) {
+	var _value systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(attr), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // GetBoundingRectangles dispatches through IUIAutomationTextRange's vtable slot 10.
-func (self *IUIAutomationTextRange) GetBoundingRectangles(boundingRects **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(boundingRects)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) GetBoundingRectangles() (*systemcom.SAFEARRAY, error) {
+	var _boundingRects *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_boundingRects)))
+	return _boundingRects, win32.HRESULTError(int32(r1))
 }
 
 // GetEnclosingElement dispatches through IUIAutomationTextRange's vtable slot 11.
-func (self *IUIAutomationTextRange) GetEnclosingElement(enclosingElement **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enclosingElement)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) GetEnclosingElement() (*IUIAutomationElement, error) {
+	var _enclosingElement *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enclosingElement)))
+	return _enclosingElement, win32.HRESULTError(int32(r1))
 }
 
 // GetText dispatches through IUIAutomationTextRange's vtable slot 12.
-func (self *IUIAutomationTextRange) GetText(maxLength int32, text *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(maxLength), uintptr(unsafe.Pointer(text)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) GetText(maxLength int32) (foundation.BSTR, error) {
+	var _text foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(maxLength), uintptr(unsafe.Pointer(&_text)))
+	return _text, win32.HRESULTError(int32(r1))
 }
 
 // Move dispatches through IUIAutomationTextRange's vtable slot 13.
-func (self *IUIAutomationTextRange) Move(unit TextUnit, count int32, moved *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(moved)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) Move(unit TextUnit, count int32) (int32, error) {
+	var _moved int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(&_moved)))
+	return _moved, win32.HRESULTError(int32(r1))
 }
 
 // MoveEndpointByUnit dispatches through IUIAutomationTextRange's vtable slot 14.
-func (self *IUIAutomationTextRange) MoveEndpointByUnit(endpoint TextPatternRangeEndpoint, unit TextUnit, count int32, moved *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(moved)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) MoveEndpointByUnit(endpoint TextPatternRangeEndpoint, unit TextUnit, count int32) (int32, error) {
+	var _moved int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(endpoint), uintptr(unit), uintptr(count), uintptr(unsafe.Pointer(&_moved)))
+	return _moved, win32.HRESULTError(int32(r1))
 }
 
 // MoveEndpointByRange dispatches through IUIAutomationTextRange's vtable slot 15.
-func (self *IUIAutomationTextRange) MoveEndpointByRange(srcEndPoint TextPatternRangeEndpoint, range_ *IUIAutomationTextRange, targetEndPoint TextPatternRangeEndpoint) foundation.HRESULT {
+func (self *IUIAutomationTextRange) MoveEndpointByRange(srcEndPoint TextPatternRangeEndpoint, range_ *IUIAutomationTextRange, targetEndPoint TextPatternRangeEndpoint) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(srcEndPoint), uintptr(unsafe.Pointer(range_)), uintptr(targetEndPoint))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Select dispatches through IUIAutomationTextRange's vtable slot 16.
-func (self *IUIAutomationTextRange) Select() foundation.HRESULT {
+func (self *IUIAutomationTextRange) Select() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddToSelection dispatches through IUIAutomationTextRange's vtable slot 17.
-func (self *IUIAutomationTextRange) AddToSelection() foundation.HRESULT {
+func (self *IUIAutomationTextRange) AddToSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveFromSelection dispatches through IUIAutomationTextRange's vtable slot 18.
-func (self *IUIAutomationTextRange) RemoveFromSelection() foundation.HRESULT {
+func (self *IUIAutomationTextRange) RemoveFromSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScrollIntoView dispatches through IUIAutomationTextRange's vtable slot 19.
-func (self *IUIAutomationTextRange) ScrollIntoView(alignToTop foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(alignToTop))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) ScrollIntoView(alignToTop bool) error {
+	_alignToTop := win32.Bool32(alignToTop)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(_alignToTop))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChildren dispatches through IUIAutomationTextRange's vtable slot 20.
-func (self *IUIAutomationTextRange) GetChildren(children **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(children)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange) GetChildren() (*IUIAutomationElementArray, error) {
+	var _children *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_children)))
+	return _children, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTextRange2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextrange2
@@ -4911,9 +5401,9 @@ type IUIAutomationTextRange2 struct {
 var IID_IUIAutomationTextRange2 = win32.GUID{Data1: 0xbb9b40e0, Data2: 0x5e04, Data3: 0x46bd, Data4: [8]byte{0x9b, 0xe0, 0x4b, 0x60, 0x1b, 0x9a, 0xfa, 0xd4}}
 
 // ShowContextMenu dispatches through IUIAutomationTextRange2's vtable slot 21.
-func (self *IUIAutomationTextRange2) ShowContextMenu() foundation.HRESULT {
+func (self *IUIAutomationTextRange2) ShowContextMenu() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTextRange3: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextrange3
@@ -4926,21 +5416,24 @@ type IUIAutomationTextRange3 struct {
 var IID_IUIAutomationTextRange3 = win32.GUID{Data1: 0x6a315d69, Data2: 0x5512, Data3: 0x4c2e, Data4: [8]byte{0x85, 0xf0, 0x53, 0xfc, 0xe6, 0xdd, 0x4b, 0xc2}}
 
 // GetEnclosingElementBuildCache dispatches through IUIAutomationTextRange3's vtable slot 22.
-func (self *IUIAutomationTextRange3) GetEnclosingElementBuildCache(cacheRequest *IUIAutomationCacheRequest, enclosingElement **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(enclosingElement)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange3) GetEnclosingElementBuildCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _enclosingElement *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_enclosingElement)))
+	return _enclosingElement, win32.HRESULTError(int32(r1))
 }
 
 // GetChildrenBuildCache dispatches through IUIAutomationTextRange3's vtable slot 23.
-func (self *IUIAutomationTextRange3) GetChildrenBuildCache(cacheRequest *IUIAutomationCacheRequest, children **IUIAutomationElementArray) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(children)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange3) GetChildrenBuildCache(cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElementArray, error) {
+	var _children *IUIAutomationElementArray
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_children)))
+	return _children, win32.HRESULTError(int32(r1))
 }
 
 // GetAttributeValues dispatches through IUIAutomationTextRange3's vtable slot 24.
-func (self *IUIAutomationTextRange3) GetAttributeValues(attributeIds *UIA_TEXTATTRIBUTE_ID, attributeIdCount int32, attributeValues **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(attributeIds)), uintptr(attributeIdCount), uintptr(unsafe.Pointer(attributeValues)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRange3) GetAttributeValues(attributeIds *UIA_TEXTATTRIBUTE_ID, attributeIdCount int32) (*systemcom.SAFEARRAY, error) {
+	var _attributeValues *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(attributeIds)), uintptr(attributeIdCount), uintptr(unsafe.Pointer(&_attributeValues)))
+	return _attributeValues, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTextRangeArray: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtextrangearray
@@ -4953,15 +5446,17 @@ type IUIAutomationTextRangeArray struct {
 var IID_IUIAutomationTextRangeArray = win32.GUID{Data1: 0xce4ae76a, Data2: 0xe717, Data3: 0x4c98, Data4: [8]byte{0x81, 0xea, 0x47, 0x37, 0x1d, 0x02, 0x8e, 0xb6}}
 
 // Get_Length dispatches through IUIAutomationTextRangeArray's vtable slot 3.
-func (self *IUIAutomationTextRangeArray) Get_Length(length *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(length)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRangeArray) Get_Length() (int32, error) {
+	var _length int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_length)))
+	return _length, win32.HRESULTError(int32(r1))
 }
 
 // GetElement dispatches through IUIAutomationTextRangeArray's vtable slot 4.
-func (self *IUIAutomationTextRangeArray) GetElement(index int32, element **IUIAutomationTextRange) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(element)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTextRangeArray) GetElement(index int32) (*IUIAutomationTextRange, error) {
+	var _element *IUIAutomationTextRange
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_element)))
+	return _element, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTogglePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtogglepattern
@@ -4974,21 +5469,23 @@ type IUIAutomationTogglePattern struct {
 var IID_IUIAutomationTogglePattern = win32.GUID{Data1: 0x94cf8058, Data2: 0x9b8d, Data3: 0x4ab9, Data4: [8]byte{0x8b, 0xfd, 0x4c, 0xd0, 0xa3, 0x3c, 0x8c, 0x70}}
 
 // Toggle dispatches through IUIAutomationTogglePattern's vtable slot 3.
-func (self *IUIAutomationTogglePattern) Toggle() foundation.HRESULT {
+func (self *IUIAutomationTogglePattern) Toggle() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentToggleState dispatches through IUIAutomationTogglePattern's vtable slot 4.
-func (self *IUIAutomationTogglePattern) Get_CurrentToggleState(retVal *ToggleState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTogglePattern) Get_CurrentToggleState() (ToggleState, error) {
+	var _retVal ToggleState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedToggleState dispatches through IUIAutomationTogglePattern's vtable slot 5.
-func (self *IUIAutomationTogglePattern) Get_CachedToggleState(retVal *ToggleState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTogglePattern) Get_CachedToggleState() (ToggleState, error) {
+	var _retVal ToggleState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTransformPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtransformpattern
@@ -5001,39 +5498,45 @@ type IUIAutomationTransformPattern struct {
 var IID_IUIAutomationTransformPattern = win32.GUID{Data1: 0xa9b55844, Data2: 0xa55d, Data3: 0x4ef0, Data4: [8]byte{0x92, 0x6d, 0x56, 0x9c, 0x16, 0xff, 0x89, 0xbb}}
 
 // Get_CurrentCanMove dispatches through IUIAutomationTransformPattern's vtable slot 6.
-func (self *IUIAutomationTransformPattern) Get_CurrentCanMove(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern) Get_CurrentCanMove() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCanResize dispatches through IUIAutomationTransformPattern's vtable slot 7.
-func (self *IUIAutomationTransformPattern) Get_CurrentCanResize(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern) Get_CurrentCanResize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCanRotate dispatches through IUIAutomationTransformPattern's vtable slot 8.
-func (self *IUIAutomationTransformPattern) Get_CurrentCanRotate(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern) Get_CurrentCanRotate() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCanMove dispatches through IUIAutomationTransformPattern's vtable slot 9.
-func (self *IUIAutomationTransformPattern) Get_CachedCanMove(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern) Get_CachedCanMove() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCanResize dispatches through IUIAutomationTransformPattern's vtable slot 10.
-func (self *IUIAutomationTransformPattern) Get_CachedCanResize(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern) Get_CachedCanResize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCanRotate dispatches through IUIAutomationTransformPattern's vtable slot 11.
-func (self *IUIAutomationTransformPattern) Get_CachedCanRotate(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern) Get_CachedCanRotate() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTransformPattern2: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtransformpattern2
@@ -5046,57 +5549,65 @@ type IUIAutomationTransformPattern2 struct {
 var IID_IUIAutomationTransformPattern2 = win32.GUID{Data1: 0x6d74d017, Data2: 0x6ecb, Data3: 0x4381, Data4: [8]byte{0xb3, 0x8b, 0x3c, 0x17, 0xa4, 0x8f, 0xf1, 0xc2}}
 
 // ZoomByUnit dispatches through IUIAutomationTransformPattern2's vtable slot 13.
-func (self *IUIAutomationTransformPattern2) ZoomByUnit(zoomUnit ZoomUnit) foundation.HRESULT {
+func (self *IUIAutomationTransformPattern2) ZoomByUnit(zoomUnit ZoomUnit) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(zoomUnit))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCanZoom dispatches through IUIAutomationTransformPattern2's vtable slot 14.
-func (self *IUIAutomationTransformPattern2) Get_CurrentCanZoom(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern2) Get_CurrentCanZoom() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCanZoom dispatches through IUIAutomationTransformPattern2's vtable slot 15.
-func (self *IUIAutomationTransformPattern2) Get_CachedCanZoom(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern2) Get_CachedCanZoom() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentZoomLevel dispatches through IUIAutomationTransformPattern2's vtable slot 16.
-func (self *IUIAutomationTransformPattern2) Get_CurrentZoomLevel(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern2) Get_CurrentZoomLevel() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedZoomLevel dispatches through IUIAutomationTransformPattern2's vtable slot 17.
-func (self *IUIAutomationTransformPattern2) Get_CachedZoomLevel(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern2) Get_CachedZoomLevel() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentZoomMinimum dispatches through IUIAutomationTransformPattern2's vtable slot 18.
-func (self *IUIAutomationTransformPattern2) Get_CurrentZoomMinimum(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern2) Get_CurrentZoomMinimum() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedZoomMinimum dispatches through IUIAutomationTransformPattern2's vtable slot 19.
-func (self *IUIAutomationTransformPattern2) Get_CachedZoomMinimum(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern2) Get_CachedZoomMinimum() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentZoomMaximum dispatches through IUIAutomationTransformPattern2's vtable slot 20.
-func (self *IUIAutomationTransformPattern2) Get_CurrentZoomMaximum(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern2) Get_CurrentZoomMaximum() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedZoomMaximum dispatches through IUIAutomationTransformPattern2's vtable slot 21.
-func (self *IUIAutomationTransformPattern2) Get_CachedZoomMaximum(retVal *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTransformPattern2) Get_CachedZoomMaximum() (float64, error) {
+	var _retVal float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationTreeWalker: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationtreewalker
@@ -5109,81 +5620,94 @@ type IUIAutomationTreeWalker struct {
 var IID_IUIAutomationTreeWalker = win32.GUID{Data1: 0x4042c624, Data2: 0x389c, Data3: 0x4afc, Data4: [8]byte{0xa6, 0x30, 0x9d, 0xf8, 0x54, 0xa5, 0x41, 0xfc}}
 
 // GetParentElement dispatches through IUIAutomationTreeWalker's vtable slot 3.
-func (self *IUIAutomationTreeWalker) GetParentElement(element *IUIAutomationElement, parent **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(parent)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetParentElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
+	var _parent *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_parent)))
+	return _parent, win32.HRESULTError(int32(r1))
 }
 
 // GetFirstChildElement dispatches through IUIAutomationTreeWalker's vtable slot 4.
-func (self *IUIAutomationTreeWalker) GetFirstChildElement(element *IUIAutomationElement, first **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(first)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetFirstChildElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
+	var _first *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_first)))
+	return _first, win32.HRESULTError(int32(r1))
 }
 
 // GetLastChildElement dispatches through IUIAutomationTreeWalker's vtable slot 5.
-func (self *IUIAutomationTreeWalker) GetLastChildElement(element *IUIAutomationElement, last **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(last)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetLastChildElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
+	var _last *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_last)))
+	return _last, win32.HRESULTError(int32(r1))
 }
 
 // GetNextSiblingElement dispatches through IUIAutomationTreeWalker's vtable slot 6.
-func (self *IUIAutomationTreeWalker) GetNextSiblingElement(element *IUIAutomationElement, next **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(next)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetNextSiblingElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
+	var _next *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_next)))
+	return _next, win32.HRESULTError(int32(r1))
 }
 
 // GetPreviousSiblingElement dispatches through IUIAutomationTreeWalker's vtable slot 7.
-func (self *IUIAutomationTreeWalker) GetPreviousSiblingElement(element *IUIAutomationElement, previous **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(previous)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetPreviousSiblingElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
+	var _previous *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_previous)))
+	return _previous, win32.HRESULTError(int32(r1))
 }
 
 // NormalizeElement dispatches through IUIAutomationTreeWalker's vtable slot 8.
-func (self *IUIAutomationTreeWalker) NormalizeElement(element *IUIAutomationElement, normalized **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(normalized)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) NormalizeElement(element *IUIAutomationElement) (*IUIAutomationElement, error) {
+	var _normalized *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&_normalized)))
+	return _normalized, win32.HRESULTError(int32(r1))
 }
 
 // GetParentElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 9.
-func (self *IUIAutomationTreeWalker) GetParentElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest, parent **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(parent)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetParentElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _parent *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_parent)))
+	return _parent, win32.HRESULTError(int32(r1))
 }
 
 // GetFirstChildElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 10.
-func (self *IUIAutomationTreeWalker) GetFirstChildElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest, first **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(first)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetFirstChildElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _first *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_first)))
+	return _first, win32.HRESULTError(int32(r1))
 }
 
 // GetLastChildElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 11.
-func (self *IUIAutomationTreeWalker) GetLastChildElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest, last **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(last)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetLastChildElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _last *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_last)))
+	return _last, win32.HRESULTError(int32(r1))
 }
 
 // GetNextSiblingElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 12.
-func (self *IUIAutomationTreeWalker) GetNextSiblingElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest, next **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(next)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetNextSiblingElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _next *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_next)))
+	return _next, win32.HRESULTError(int32(r1))
 }
 
 // GetPreviousSiblingElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 13.
-func (self *IUIAutomationTreeWalker) GetPreviousSiblingElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest, previous **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(previous)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) GetPreviousSiblingElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _previous *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_previous)))
+	return _previous, win32.HRESULTError(int32(r1))
 }
 
 // NormalizeElementBuildCache dispatches through IUIAutomationTreeWalker's vtable slot 14.
-func (self *IUIAutomationTreeWalker) NormalizeElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest, normalized **IUIAutomationElement) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(normalized)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) NormalizeElementBuildCache(element *IUIAutomationElement, cacheRequest *IUIAutomationCacheRequest) (*IUIAutomationElement, error) {
+	var _normalized *IUIAutomationElement
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(&_normalized)))
+	return _normalized, win32.HRESULTError(int32(r1))
 }
 
 // Get_Condition dispatches through IUIAutomationTreeWalker's vtable slot 15.
-func (self *IUIAutomationTreeWalker) Get_Condition(condition **IUIAutomationCondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(condition)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationTreeWalker) Get_Condition() (*IUIAutomationCondition, error) {
+	var _condition *IUIAutomationCondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_condition)))
+	return _condition, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationValuePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationvaluepattern
@@ -5196,33 +5720,37 @@ type IUIAutomationValuePattern struct {
 var IID_IUIAutomationValuePattern = win32.GUID{Data1: 0xa94cd8b1, Data2: 0x0844, Data3: 0x4cd6, Data4: [8]byte{0x9d, 0x2d, 0x64, 0x05, 0x37, 0xab, 0x39, 0xe9}}
 
 // SetValue dispatches through IUIAutomationValuePattern's vtable slot 3.
-func (self *IUIAutomationValuePattern) SetValue(val foundation.BSTR) foundation.HRESULT {
+func (self *IUIAutomationValuePattern) SetValue(val foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(val)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentValue dispatches through IUIAutomationValuePattern's vtable slot 4.
-func (self *IUIAutomationValuePattern) Get_CurrentValue(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationValuePattern) Get_CurrentValue() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsReadOnly dispatches through IUIAutomationValuePattern's vtable slot 5.
-func (self *IUIAutomationValuePattern) Get_CurrentIsReadOnly(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationValuePattern) Get_CurrentIsReadOnly() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedValue dispatches through IUIAutomationValuePattern's vtable slot 6.
-func (self *IUIAutomationValuePattern) Get_CachedValue(retVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationValuePattern) Get_CachedValue() (foundation.BSTR, error) {
+	var _retVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsReadOnly dispatches through IUIAutomationValuePattern's vtable slot 7.
-func (self *IUIAutomationValuePattern) Get_CachedIsReadOnly(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationValuePattern) Get_CachedIsReadOnly() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationVirtualizedItemPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationvirtualizeditempattern
@@ -5235,9 +5763,9 @@ type IUIAutomationVirtualizedItemPattern struct {
 var IID_IUIAutomationVirtualizedItemPattern = win32.GUID{Data1: 0x6ba3d7a6, Data2: 0x04cf, Data3: 0x4f11, Data4: [8]byte{0x87, 0x93, 0xa8, 0xd1, 0xcd, 0xe9, 0x96, 0x9f}}
 
 // Realize dispatches through IUIAutomationVirtualizedItemPattern's vtable slot 3.
-func (self *IUIAutomationVirtualizedItemPattern) Realize() foundation.HRESULT {
+func (self *IUIAutomationVirtualizedItemPattern) Realize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAutomationWindowPattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationwindowpattern
@@ -5250,93 +5778,106 @@ type IUIAutomationWindowPattern struct {
 var IID_IUIAutomationWindowPattern = win32.GUID{Data1: 0x0faef453, Data2: 0x9208, Data3: 0x43ef, Data4: [8]byte{0xbb, 0xb2, 0x3b, 0x48, 0x51, 0x77, 0x86, 0x4f}}
 
 // Close dispatches through IUIAutomationWindowPattern's vtable slot 3.
-func (self *IUIAutomationWindowPattern) Close() foundation.HRESULT {
+func (self *IUIAutomationWindowPattern) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForInputIdle dispatches through IUIAutomationWindowPattern's vtable slot 4.
-func (self *IUIAutomationWindowPattern) WaitForInputIdle(milliseconds int32, success *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(milliseconds), uintptr(unsafe.Pointer(success)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) WaitForInputIdle(milliseconds int32) (foundation.BOOL, error) {
+	var _success foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(milliseconds), uintptr(unsafe.Pointer(&_success)))
+	return _success, win32.HRESULTError(int32(r1))
 }
 
 // SetWindowVisualState dispatches through IUIAutomationWindowPattern's vtable slot 5.
-func (self *IUIAutomationWindowPattern) SetWindowVisualState(state WindowVisualState) foundation.HRESULT {
+func (self *IUIAutomationWindowPattern) SetWindowVisualState(state WindowVisualState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(state))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCanMaximize dispatches through IUIAutomationWindowPattern's vtable slot 6.
-func (self *IUIAutomationWindowPattern) Get_CurrentCanMaximize(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CurrentCanMaximize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCanMinimize dispatches through IUIAutomationWindowPattern's vtable slot 7.
-func (self *IUIAutomationWindowPattern) Get_CurrentCanMinimize(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CurrentCanMinimize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsModal dispatches through IUIAutomationWindowPattern's vtable slot 8.
-func (self *IUIAutomationWindowPattern) Get_CurrentIsModal(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CurrentIsModal() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentIsTopmost dispatches through IUIAutomationWindowPattern's vtable slot 9.
-func (self *IUIAutomationWindowPattern) Get_CurrentIsTopmost(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CurrentIsTopmost() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentWindowVisualState dispatches through IUIAutomationWindowPattern's vtable slot 10.
-func (self *IUIAutomationWindowPattern) Get_CurrentWindowVisualState(retVal *WindowVisualState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CurrentWindowVisualState() (WindowVisualState, error) {
+	var _retVal WindowVisualState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentWindowInteractionState dispatches through IUIAutomationWindowPattern's vtable slot 11.
-func (self *IUIAutomationWindowPattern) Get_CurrentWindowInteractionState(retVal *WindowInteractionState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CurrentWindowInteractionState() (WindowInteractionState, error) {
+	var _retVal WindowInteractionState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCanMaximize dispatches through IUIAutomationWindowPattern's vtable slot 12.
-func (self *IUIAutomationWindowPattern) Get_CachedCanMaximize(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CachedCanMaximize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedCanMinimize dispatches through IUIAutomationWindowPattern's vtable slot 13.
-func (self *IUIAutomationWindowPattern) Get_CachedCanMinimize(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CachedCanMinimize() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsModal dispatches through IUIAutomationWindowPattern's vtable slot 14.
-func (self *IUIAutomationWindowPattern) Get_CachedIsModal(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CachedIsModal() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedIsTopmost dispatches through IUIAutomationWindowPattern's vtable slot 15.
-func (self *IUIAutomationWindowPattern) Get_CachedIsTopmost(retVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CachedIsTopmost() (foundation.BOOL, error) {
+	var _retVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedWindowVisualState dispatches through IUIAutomationWindowPattern's vtable slot 16.
-func (self *IUIAutomationWindowPattern) Get_CachedWindowVisualState(retVal *WindowVisualState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CachedWindowVisualState() (WindowVisualState, error) {
+	var _retVal WindowVisualState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CachedWindowInteractionState dispatches through IUIAutomationWindowPattern's vtable slot 17.
-func (self *IUIAutomationWindowPattern) Get_CachedWindowInteractionState(retVal *WindowInteractionState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
-	return foundation.HRESULT(r1)
+func (self *IUIAutomationWindowPattern) Get_CachedWindowInteractionState() (WindowInteractionState, error) {
+	var _retVal WindowInteractionState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retVal)))
+	return _retVal, win32.HRESULTError(int32(r1))
 }
 
 // IValueProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-ivalueprovider
@@ -5349,21 +5890,24 @@ type IValueProvider struct {
 var IID_IValueProvider = win32.GUID{Data1: 0xc7935180, Data2: 0x6fb3, Data3: 0x4201, Data4: [8]byte{0xb1, 0x74, 0x7d, 0xf7, 0x3a, 0xdb, 0xf6, 0x4a}}
 
 // SetValue dispatches through IValueProvider's vtable slot 3.
-func (self *IValueProvider) SetValue(val foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(val)))
-	return foundation.HRESULT(r1)
+func (self *IValueProvider) SetValue(val string) error {
+	_val := win32.UTF16Ptr(val)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_val)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Value dispatches through IValueProvider's vtable slot 4.
-func (self *IValueProvider) Get_Value(pRetVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IValueProvider) Get_Value() (foundation.BSTR, error) {
+	var _pRetVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsReadOnly dispatches through IValueProvider's vtable slot 5.
-func (self *IValueProvider) Get_IsReadOnly(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IValueProvider) Get_IsReadOnly() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // IVirtualizedItemProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-ivirtualizeditemprovider
@@ -5376,9 +5920,9 @@ type IVirtualizedItemProvider struct {
 var IID_IVirtualizedItemProvider = win32.GUID{Data1: 0xcb98b665, Data2: 0x2d35, Data3: 0x4fac, Data4: [8]byte{0xad, 0x35, 0xf3, 0xc6, 0x0d, 0x0c, 0x0b, 0x8b}}
 
 // Realize dispatches through IVirtualizedItemProvider's vtable slot 3.
-func (self *IVirtualizedItemProvider) Realize() foundation.HRESULT {
+func (self *IVirtualizedItemProvider) Realize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWindowProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iwindowprovider
@@ -5391,55 +5935,62 @@ type IWindowProvider struct {
 var IID_IWindowProvider = win32.GUID{Data1: 0x987df77b, Data2: 0xdb06, Data3: 0x4d77, Data4: [8]byte{0x8f, 0x8a, 0x86, 0xa9, 0xc3, 0xbb, 0x90, 0xb9}}
 
 // SetVisualState dispatches through IWindowProvider's vtable slot 3.
-func (self *IWindowProvider) SetVisualState(state WindowVisualState) foundation.HRESULT {
+func (self *IWindowProvider) SetVisualState(state WindowVisualState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(state))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IWindowProvider's vtable slot 4.
-func (self *IWindowProvider) Close() foundation.HRESULT {
+func (self *IWindowProvider) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForInputIdle dispatches through IWindowProvider's vtable slot 5.
-func (self *IWindowProvider) WaitForInputIdle(milliseconds int32, pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(milliseconds), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IWindowProvider) WaitForInputIdle(milliseconds int32) (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(milliseconds), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CanMaximize dispatches through IWindowProvider's vtable slot 6.
-func (self *IWindowProvider) Get_CanMaximize(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IWindowProvider) Get_CanMaximize() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_CanMinimize dispatches through IWindowProvider's vtable slot 7.
-func (self *IWindowProvider) Get_CanMinimize(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IWindowProvider) Get_CanMinimize() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsModal dispatches through IWindowProvider's vtable slot 8.
-func (self *IWindowProvider) Get_IsModal(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IWindowProvider) Get_IsModal() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_WindowVisualState dispatches through IWindowProvider's vtable slot 9.
-func (self *IWindowProvider) Get_WindowVisualState(pRetVal *WindowVisualState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IWindowProvider) Get_WindowVisualState() (WindowVisualState, error) {
+	var _pRetVal WindowVisualState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_WindowInteractionState dispatches through IWindowProvider's vtable slot 10.
-func (self *IWindowProvider) Get_WindowInteractionState(pRetVal *WindowInteractionState) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IWindowProvider) Get_WindowInteractionState() (WindowInteractionState, error) {
+	var _pRetVal WindowInteractionState
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsTopmost dispatches through IWindowProvider's vtable slot 11.
-func (self *IWindowProvider) Get_IsTopmost(pRetVal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IWindowProvider) Get_IsTopmost() (foundation.BOOL, error) {
+	var _pRetVal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }

@@ -43,8 +43,8 @@ type D2D_COLOR_F struct {
 	A float32
 }
 
-// D2D_MATRIX_3X2_F_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D2D_MATRIX_3X2_F_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D2D_MATRIX_3X2_F_Anonymous_e__Union struct {
 	Data [6]uint32
 }
@@ -54,8 +54,8 @@ type D2D_MATRIX_3X2_F struct {
 	Anonymous D2D_MATRIX_3X2_F_Anonymous_e__Union
 }
 
-// D2D_MATRIX_4X3_F_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D2D_MATRIX_4X3_F_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D2D_MATRIX_4X3_F_Anonymous_e__Union struct {
 	Data [12]uint32
 }
@@ -65,8 +65,8 @@ type D2D_MATRIX_4X3_F struct {
 	Anonymous D2D_MATRIX_4X3_F_Anonymous_e__Union
 }
 
-// D2D_MATRIX_4X4_F_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D2D_MATRIX_4X4_F_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D2D_MATRIX_4X4_F_Anonymous_e__Union struct {
 	Data [16]uint32
 }
@@ -76,8 +76,8 @@ type D2D_MATRIX_4X4_F struct {
 	Anonymous D2D_MATRIX_4X4_F_Anonymous_e__Union
 }
 
-// D2D_MATRIX_5X4_F_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D2D_MATRIX_5X4_F_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D2D_MATRIX_5X4_F_Anonymous_e__Union struct {
 	Data [20]uint32
 }

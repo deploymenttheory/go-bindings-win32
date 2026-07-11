@@ -150,288 +150,349 @@ var (
 // ClearPropVariantArray calls PROPSYS!ClearPropVariantArray.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-clearpropvariantarray
 // Minimum OS: windows5.1.2600.
-func ClearPropVariantArray(rgPropVar *PROPVARIANT, cVars uint32) {
-	syscall.SyscallN(procClearPropVariantArray.Addr(), uintptr(unsafe.Pointer(rgPropVar)), uintptr(cVars))
+func ClearPropVariantArray(rgPropVar []PROPVARIANT) {
+	var _rgPropVar *PROPVARIANT
+	if len(rgPropVar) > 0 {
+		_rgPropVar = &rgPropVar[0]
+	}
+	syscall.SyscallN(procClearPropVariantArray.Addr(), uintptr(unsafe.Pointer(_rgPropVar)), uintptr(len(rgPropVar)))
 }
 
 // CoGetInstanceFromFile calls OLE32!CoGetInstanceFromFile.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-cogetinstancefromfile
 // Minimum OS: windows5.0.
-func CoGetInstanceFromFile(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, grfMode uint32, pwszName foundation.PWSTR, dwCount uint32, pResults *systemcom.MULTI_QI) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromFile.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(grfMode), uintptr(unsafe.Pointer(pwszName)), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
-	return foundation.HRESULT(r1)
+func CoGetInstanceFromFile(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, grfMode uint32, pwszName string, pResults []systemcom.MULTI_QI) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	var _pResults *systemcom.MULTI_QI
+	if len(pResults) > 0 {
+		_pResults = &pResults[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromFile.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(grfMode), uintptr(unsafe.Pointer(_pwszName)), uintptr(len(pResults)), uintptr(unsafe.Pointer(_pResults)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CoGetInstanceFromIStorage calls OLE32!CoGetInstanceFromIStorage.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-cogetinstancefromistorage
 // Minimum OS: windows5.0.
-func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, pstg *IStorage, dwCount uint32, pResults *systemcom.MULTI_QI) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromIStorage.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pstg)), uintptr(dwCount), uintptr(unsafe.Pointer(pResults)))
-	return foundation.HRESULT(r1)
+func CoGetInstanceFromIStorage(pServerInfo *systemcom.COSERVERINFO, pClsid *win32.GUID, punkOuter *systemcom.IUnknown, dwClsCtx systemcom.CLSCTX, pstg *IStorage, pResults []systemcom.MULTI_QI) error {
+	var _pResults *systemcom.MULTI_QI
+	if len(pResults) > 0 {
+		_pResults = &pResults[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCoGetInstanceFromIStorage.Addr(), uintptr(unsafe.Pointer(pServerInfo)), uintptr(unsafe.Pointer(pClsid)), uintptr(unsafe.Pointer(punkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pstg)), uintptr(len(pResults)), uintptr(unsafe.Pointer(_pResults)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CoGetInterfaceAndReleaseStream calls OLE32!CoGetInterfaceAndReleaseStream.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetinterfaceandreleasestream
 // Minimum OS: windows5.0.
-func CoGetInterfaceAndReleaseStream(pStm *systemcom.IStream, iid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func CoGetInterfaceAndReleaseStream(pStm *systemcom.IStream, iid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCoGetInterfaceAndReleaseStream.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateILockBytesOnHGlobal calls OLE32!CreateILockBytesOnHGlobal.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-createilockbytesonhglobal
 // Minimum OS: windows5.0.
-func CreateILockBytesOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease foundation.BOOL, pplkbyt **ILockBytes) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateILockBytesOnHGlobal.Addr(), uintptr(hGlobal), uintptr(fDeleteOnRelease), uintptr(unsafe.Pointer(pplkbyt)))
-	return foundation.HRESULT(r1)
+func CreateILockBytesOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease bool, pplkbyt **ILockBytes) error {
+	_fDeleteOnRelease := win32.Bool32(fDeleteOnRelease)
+	r1, _, _ := syscall.SyscallN(procCreateILockBytesOnHGlobal.Addr(), uintptr(hGlobal), uintptr(_fDeleteOnRelease), uintptr(unsafe.Pointer(pplkbyt)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStreamOnHGlobal calls OLE32!CreateStreamOnHGlobal.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-createstreamonhglobal
 // Minimum OS: windows5.0.
-func CreateStreamOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease foundation.BOOL, ppstm **systemcom.IStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateStreamOnHGlobal.Addr(), uintptr(hGlobal), uintptr(fDeleteOnRelease), uintptr(unsafe.Pointer(ppstm)))
-	return foundation.HRESULT(r1)
+func CreateStreamOnHGlobal(hGlobal foundation.HGLOBAL, fDeleteOnRelease bool, ppstm **systemcom.IStream) error {
+	_fDeleteOnRelease := win32.Bool32(fDeleteOnRelease)
+	r1, _, _ := syscall.SyscallN(procCreateStreamOnHGlobal.Addr(), uintptr(hGlobal), uintptr(_fDeleteOnRelease), uintptr(unsafe.Pointer(ppstm)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FmtIdToPropStgName calls OLE32!FmtIdToPropStgName.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-fmtidtopropstgname
 // Minimum OS: windows5.0.
-func FmtIdToPropStgName(pfmtid *win32.GUID, oszName foundation.PWSTR) foundation.HRESULT {
+func FmtIdToPropStgName(pfmtid *win32.GUID, oszName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procFmtIdToPropStgName.Addr(), uintptr(unsafe.Pointer(pfmtid)), uintptr(unsafe.Pointer(oszName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreePropVariantArray calls OLE32!FreePropVariantArray.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-freepropvariantarray
 // Minimum OS: windows5.0.
-func FreePropVariantArray(cVariants uint32, rgvars *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFreePropVariantArray.Addr(), uintptr(cVariants), uintptr(unsafe.Pointer(rgvars)))
-	return foundation.HRESULT(r1)
+func FreePropVariantArray(rgvars []PROPVARIANT) error {
+	var _rgvars *PROPVARIANT
+	if len(rgvars) > 0 {
+		_rgvars = &rgvars[0]
+	}
+	r1, _, _ := syscall.SyscallN(procFreePropVariantArray.Addr(), uintptr(len(rgvars)), uintptr(unsafe.Pointer(_rgvars)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConvertStg calls OLE32!GetConvertStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-getconvertstg
 // Minimum OS: windows5.0.
-func GetConvertStg(pStg *IStorage) foundation.HRESULT {
+func GetConvertStg(pStg *IStorage) error {
 	r1, _, _ := syscall.SyscallN(procGetConvertStg.Addr(), uintptr(unsafe.Pointer(pStg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHGlobalFromILockBytes calls OLE32!GetHGlobalFromILockBytes.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-gethglobalfromilockbytes
 // Minimum OS: windows5.0.
-func GetHGlobalFromILockBytes(plkbyt *ILockBytes, phglobal *foundation.HGLOBAL) foundation.HRESULT {
+func GetHGlobalFromILockBytes(plkbyt *ILockBytes, phglobal *foundation.HGLOBAL) error {
 	r1, _, _ := syscall.SyscallN(procGetHGlobalFromILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(unsafe.Pointer(phglobal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHGlobalFromStream calls OLE32!GetHGlobalFromStream.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-gethglobalfromstream
 // Minimum OS: windows5.0.
-func GetHGlobalFromStream(pstm *systemcom.IStream, phglobal *foundation.HGLOBAL) foundation.HRESULT {
+func GetHGlobalFromStream(pstm *systemcom.IStream, phglobal *foundation.HGLOBAL) error {
 	r1, _, _ := syscall.SyscallN(procGetHGlobalFromStream.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(phglobal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromBooleanVector calls PROPSYS!InitPropVariantFromBooleanVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfrombooleanvector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromBooleanVector(prgf *foundation.BOOL, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromBooleanVector.Addr(), uintptr(unsafe.Pointer(prgf)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromBooleanVector(prgf []foundation.BOOL, ppropvar *PROPVARIANT) error {
+	var _prgf *foundation.BOOL
+	if len(prgf) > 0 {
+		_prgf = &prgf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromBooleanVector.Addr(), uintptr(unsafe.Pointer(_prgf)), uintptr(len(prgf)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromBuffer calls PROPSYS!InitPropVariantFromBuffer.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfrombuffer
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromBuffer(pv unsafe.Pointer, cb uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
+func InitPropVariantFromBuffer(pv unsafe.Pointer, cb uint32, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromBuffer.Addr(), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromCLSID calls PROPSYS!InitPropVariantFromCLSID.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromclsid
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromCLSID(clsid *win32.GUID, ppropvar *PROPVARIANT) foundation.HRESULT {
+func InitPropVariantFromCLSID(clsid *win32.GUID, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromCLSID.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromDoubleVector calls PROPSYS!InitPropVariantFromDoubleVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromdoublevector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromDoubleVector(prgn *float64, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromDoubleVector.Addr(), uintptr(unsafe.Pointer(prgn)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromDoubleVector(prgn []float64, ppropvar *PROPVARIANT) error {
+	var _prgn *float64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromDoubleVector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromFileTime calls PROPSYS!InitPropVariantFromFileTime.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromfiletime
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromFileTime(pftIn *foundation.FILETIME, ppropvar *PROPVARIANT) foundation.HRESULT {
+func InitPropVariantFromFileTime(pftIn *foundation.FILETIME, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromFileTime.Addr(), uintptr(unsafe.Pointer(pftIn)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromFileTimeVector calls PROPSYS!InitPropVariantFromFileTimeVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromfiletimevector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromFileTimeVector(prgft *foundation.FILETIME, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromFileTimeVector.Addr(), uintptr(unsafe.Pointer(prgft)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromFileTimeVector(prgft []foundation.FILETIME, ppropvar *PROPVARIANT) error {
+	var _prgft *foundation.FILETIME
+	if len(prgft) > 0 {
+		_prgft = &prgft[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromFileTimeVector.Addr(), uintptr(unsafe.Pointer(_prgft)), uintptr(len(prgft)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromGUIDAsString calls PROPSYS!InitPropVariantFromGUIDAsString.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromguidasstring
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromGUIDAsString(guid *win32.GUID, ppropvar *PROPVARIANT) foundation.HRESULT {
+func InitPropVariantFromGUIDAsString(guid *win32.GUID, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromGUIDAsString.Addr(), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromInt16Vector calls PROPSYS!InitPropVariantFromInt16Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromint16vector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromInt16Vector(prgn *int16, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromInt16Vector.Addr(), uintptr(unsafe.Pointer(prgn)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromInt16Vector(prgn []int16, ppropvar *PROPVARIANT) error {
+	var _prgn *int16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromInt16Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromInt32Vector calls PROPSYS!InitPropVariantFromInt32Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromint32vector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromInt32Vector(prgn *int32, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromInt32Vector.Addr(), uintptr(unsafe.Pointer(prgn)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromInt32Vector(prgn []int32, ppropvar *PROPVARIANT) error {
+	var _prgn *int32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromInt32Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromInt64Vector calls PROPSYS!InitPropVariantFromInt64Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromint64vector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromInt64Vector(prgn *int64, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromInt64Vector.Addr(), uintptr(unsafe.Pointer(prgn)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromInt64Vector(prgn []int64, ppropvar *PROPVARIANT) error {
+	var _prgn *int64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromInt64Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromPropVariantVectorElem calls PROPSYS!InitPropVariantFromPropVariantVectorElem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfrompropvariantvectorelem
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromPropVariantVectorElem(propvarIn *PROPVARIANT, iElem uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
+func InitPropVariantFromPropVariantVectorElem(propvarIn *PROPVARIANT, iElem uint32, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromPropVariantVectorElem.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(iElem), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromResource calls PROPSYS!InitPropVariantFromResource.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromresource
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromResource(hinst foundation.HINSTANCE, id uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
+func InitPropVariantFromResource(hinst foundation.HINSTANCE, id uint32, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromResource.Addr(), uintptr(hinst), uintptr(id), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromStringAsVector calls PROPSYS!InitPropVariantFromStringAsVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromstringasvector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromStringAsVector(psz foundation.PWSTR, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromStringAsVector.Addr(), uintptr(unsafe.Pointer(psz)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromStringAsVector(psz string, ppropvar *PROPVARIANT) error {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromStringAsVector.Addr(), uintptr(unsafe.Pointer(_psz)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromStringVector calls PROPSYS!InitPropVariantFromStringVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromstringvector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromStringVector(prgsz *foundation.PWSTR, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromStringVector.Addr(), uintptr(unsafe.Pointer(prgsz)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromStringVector(prgsz []foundation.PWSTR, ppropvar *PROPVARIANT) error {
+	var _prgsz *foundation.PWSTR
+	if len(prgsz) > 0 {
+		_prgsz = &prgsz[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromStringVector.Addr(), uintptr(unsafe.Pointer(_prgsz)), uintptr(len(prgsz)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromUInt16Vector calls PROPSYS!InitPropVariantFromUInt16Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromuint16vector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromUInt16Vector(prgn *uint16, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromUInt16Vector.Addr(), uintptr(unsafe.Pointer(prgn)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromUInt16Vector(prgn []uint16, ppropvar *PROPVARIANT) error {
+	var _prgn *uint16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromUInt16Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromUInt32Vector calls PROPSYS!InitPropVariantFromUInt32Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromuint32vector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromUInt32Vector(prgn *uint32, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromUInt32Vector.Addr(), uintptr(unsafe.Pointer(prgn)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromUInt32Vector(prgn []uint32, ppropvar *PROPVARIANT) error {
+	var _prgn *uint32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromUInt32Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantFromUInt64Vector calls PROPSYS!InitPropVariantFromUInt64Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromuint64vector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromUInt64Vector(prgn *uint64, cElems uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromUInt64Vector.Addr(), uintptr(unsafe.Pointer(prgn)), uintptr(cElems), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromUInt64Vector(prgn []uint64, ppropvar *PROPVARIANT) error {
+	var _prgn *uint64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromUInt64Vector.Addr(), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitPropVariantVectorFromPropVariant calls PROPSYS!InitPropVariantVectorFromPropVariant.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantvectorfrompropvariant
 // Minimum OS: windows5.1.2600.
-func InitPropVariantVectorFromPropVariant(propvarSingle *PROPVARIANT, ppropvarVector *PROPVARIANT) foundation.HRESULT {
+func InitPropVariantVectorFromPropVariant(propvarSingle *PROPVARIANT, ppropvarVector *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procInitPropVariantVectorFromPropVariant.Addr(), uintptr(unsafe.Pointer(propvarSingle)), uintptr(unsafe.Pointer(ppropvarVector)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleConvertIStorageToOLESTREAM calls ole32!OleConvertIStorageToOLESTREAM.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertistoragetoolestream
 // Minimum OS: windows5.0.
-func OleConvertIStorageToOLESTREAM(pstg *IStorage, lpolestream *OLESTREAM) foundation.HRESULT {
+func OleConvertIStorageToOLESTREAM(pstg *IStorage, lpolestream *OLESTREAM) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertIStorageToOLESTREAM.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(lpolestream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleConvertIStorageToOLESTREAMEx calls ole32!OleConvertIStorageToOLESTREAMEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertistoragetoolestreamex
 // Minimum OS: windows5.0.
-func OleConvertIStorageToOLESTREAMEx(pstg *IStorage, cfFormat uint16, lWidth int32, lHeight int32, dwSize uint32, pmedium *systemcom.STGMEDIUM, polestm *OLESTREAM) foundation.HRESULT {
+func OleConvertIStorageToOLESTREAMEx(pstg *IStorage, cfFormat uint16, lWidth int32, lHeight int32, dwSize uint32, pmedium *systemcom.STGMEDIUM, polestm *OLESTREAM) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertIStorageToOLESTREAMEx.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(cfFormat), uintptr(lWidth), uintptr(lHeight), uintptr(dwSize), uintptr(unsafe.Pointer(pmedium)), uintptr(unsafe.Pointer(polestm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleConvertOLESTREAMToIStorage calls ole32!OleConvertOLESTREAMToIStorage.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertolestreamtoistorage
 // Minimum OS: windows5.0.
-func OleConvertOLESTREAMToIStorage(lpolestream *OLESTREAM, pstg *IStorage, ptd *systemcom.DVTARGETDEVICE) foundation.HRESULT {
+func OleConvertOLESTREAMToIStorage(lpolestream *OLESTREAM, pstg *IStorage, ptd *systemcom.DVTARGETDEVICE) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorage.Addr(), uintptr(unsafe.Pointer(lpolestream)), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(ptd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleConvertOLESTREAMToIStorageEx calls ole32!OleConvertOLESTREAMToIStorageEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleconvertolestreamtoistorageex
 // Minimum OS: windows5.0.
-func OleConvertOLESTREAMToIStorageEx(polestm *OLESTREAM, pstg *IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM) foundation.HRESULT {
+func OleConvertOLESTREAMToIStorageEx(polestm *OLESTREAM, pstg *IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorageEx.Addr(), uintptr(unsafe.Pointer(polestm)), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(pcfFormat)), uintptr(unsafe.Pointer(plwWidth)), uintptr(unsafe.Pointer(plHeight)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(pmedium)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropStgNameToFmtId calls OLE32!PropStgNameToFmtId.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-propstgnametofmtid
 // Minimum OS: windows5.0.
-func PropStgNameToFmtId(oszName foundation.PWSTR, pfmtid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropStgNameToFmtId.Addr(), uintptr(unsafe.Pointer(oszName)), uintptr(unsafe.Pointer(pfmtid)))
-	return foundation.HRESULT(r1)
+func PropStgNameToFmtId(oszName string, pfmtid *win32.GUID) error {
+	_oszName := win32.UTF16Ptr(oszName)
+	r1, _, _ := syscall.SyscallN(procPropStgNameToFmtId.Addr(), uintptr(unsafe.Pointer(_oszName)), uintptr(unsafe.Pointer(pfmtid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantChangeType calls PROPSYS!PropVariantChangeType.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantchangetype
 // Minimum OS: windows5.1.2600.
-func PropVariantChangeType(ppropvarDest *PROPVARIANT, propvarSrc *PROPVARIANT, flags PROPVAR_CHANGE_FLAGS, vt systemvariant.VARENUM) foundation.HRESULT {
+func PropVariantChangeType(ppropvarDest *PROPVARIANT, propvarSrc *PROPVARIANT, flags PROPVAR_CHANGE_FLAGS, vt systemvariant.VARENUM) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantChangeType.Addr(), uintptr(unsafe.Pointer(ppropvarDest)), uintptr(unsafe.Pointer(propvarSrc)), uintptr(flags), uintptr(vt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantClear calls OLE32!PropVariantClear.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-propvariantclear
 // Minimum OS: windows5.0.
-func PropVariantClear(pvar *PROPVARIANT) foundation.HRESULT {
+func PropVariantClear(pvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantClear.Addr(), uintptr(unsafe.Pointer(pvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantCompareEx calls PROPSYS!PropVariantCompareEx.
@@ -445,25 +506,25 @@ func PropVariantCompareEx(propvar1 *PROPVARIANT, propvar2 *PROPVARIANT, unit PRO
 // PropVariantCopy calls OLE32!PropVariantCopy.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-propvariantcopy
 // Minimum OS: windows5.0.
-func PropVariantCopy(pvarDest *PROPVARIANT, pvarSrc *PROPVARIANT) foundation.HRESULT {
+func PropVariantCopy(pvarDest *PROPVARIANT, pvarSrc *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantCopy.Addr(), uintptr(unsafe.Pointer(pvarDest)), uintptr(unsafe.Pointer(pvarSrc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetBooleanElem calls PROPSYS!PropVariantGetBooleanElem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetbooleanelem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetBooleanElem(propvar *PROPVARIANT, iElem uint32, pfVal *foundation.BOOL) foundation.HRESULT {
+func PropVariantGetBooleanElem(propvar *PROPVARIANT, iElem uint32, pfVal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetBooleanElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pfVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetDoubleElem calls PROPSYS!PropVariantGetDoubleElem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetdoubleelem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetDoubleElem(propvar *PROPVARIANT, iElem uint32, pnVal *float64) foundation.HRESULT {
+func PropVariantGetDoubleElem(propvar *PROPVARIANT, iElem uint32, pnVal *float64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetDoubleElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetElementCount calls PROPSYS!PropVariantGetElementCount.
@@ -477,193 +538,210 @@ func PropVariantGetElementCount(propvar *PROPVARIANT) uint32 {
 // PropVariantGetFileTimeElem calls PROPSYS!PropVariantGetFileTimeElem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetfiletimeelem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetFileTimeElem(propvar *PROPVARIANT, iElem uint32, pftVal *foundation.FILETIME) foundation.HRESULT {
+func PropVariantGetFileTimeElem(propvar *PROPVARIANT, iElem uint32, pftVal *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetFileTimeElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pftVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetInt16Elem calls PROPSYS!PropVariantGetInt16Elem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetint16elem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetInt16Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int16) foundation.HRESULT {
+func PropVariantGetInt16Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int16) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetInt16Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetInt32Elem calls PROPSYS!PropVariantGetInt32Elem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetint32elem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetInt32Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int32) foundation.HRESULT {
+func PropVariantGetInt32Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetInt32Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetInt64Elem calls PROPSYS!PropVariantGetInt64Elem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetint64elem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetInt64Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int64) foundation.HRESULT {
+func PropVariantGetInt64Elem(propvar *PROPVARIANT, iElem uint32, pnVal *int64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetInt64Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetStringElem calls PROPSYS!PropVariantGetStringElem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetstringelem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetStringElem(propvar *PROPVARIANT, iElem uint32, ppszVal *foundation.PWSTR) foundation.HRESULT {
+func PropVariantGetStringElem(propvar *PROPVARIANT, iElem uint32, ppszVal *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetStringElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(ppszVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetUInt16Elem calls PROPSYS!PropVariantGetUInt16Elem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetuint16elem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetUInt16Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint16) foundation.HRESULT {
+func PropVariantGetUInt16Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint16) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetUInt16Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetUInt32Elem calls PROPSYS!PropVariantGetUInt32Elem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetuint32elem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetUInt32Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint32) foundation.HRESULT {
+func PropVariantGetUInt32Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetUInt32Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantGetUInt64Elem calls PROPSYS!PropVariantGetUInt64Elem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetuint64elem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetUInt64Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint64) foundation.HRESULT {
+func PropVariantGetUInt64Elem(propvar *PROPVARIANT, iElem uint32, pnVal *uint64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantGetUInt64Elem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pnVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToBSTR calls PROPSYS!PropVariantToBSTR.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttobstr
 // Minimum OS: windows5.1.2600.
-func PropVariantToBSTR(propvar *PROPVARIANT, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func PropVariantToBSTR(propvar *PROPVARIANT, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToBSTR.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToBoolean calls PROPSYS!PropVariantToBoolean.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoboolean
 // Minimum OS: windows5.1.2600.
-func PropVariantToBoolean(propvarIn *PROPVARIANT, pfRet *foundation.BOOL) foundation.HRESULT {
+func PropVariantToBoolean(propvarIn *PROPVARIANT, pfRet *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToBoolean.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pfRet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToBooleanVector calls PROPSYS!PropVariantToBooleanVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttobooleanvector
 // Minimum OS: windows5.1.2600.
-func PropVariantToBooleanVector(propvar *PROPVARIANT, prgf *foundation.BOOL, crgf uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToBooleanVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgf)), uintptr(crgf), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToBooleanVector(propvar *PROPVARIANT, prgf []foundation.BOOL, pcElem *uint32) error {
+	var _prgf *foundation.BOOL
+	if len(prgf) > 0 {
+		_prgf = &prgf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToBooleanVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgf)), uintptr(len(prgf)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToBooleanVectorAlloc calls PROPSYS!PropVariantToBooleanVectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttobooleanvectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToBooleanVectorAlloc(propvar *PROPVARIANT, pprgf **foundation.BOOL, pcElem *uint32) foundation.HRESULT {
+func PropVariantToBooleanVectorAlloc(propvar *PROPVARIANT, pprgf **foundation.BOOL, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToBooleanVectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgf)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToBooleanWithDefault calls PROPSYS!PropVariantToBooleanWithDefault.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttobooleanwithdefault
 // Minimum OS: windows5.1.2600.
-func PropVariantToBooleanWithDefault(propvarIn *PROPVARIANT, fDefault foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPropVariantToBooleanWithDefault.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(fDefault))
-	return foundation.BOOL(r1)
+func PropVariantToBooleanWithDefault(propvarIn *PROPVARIANT, fDefault bool) bool {
+	_fDefault := win32.Bool32(fDefault)
+	r1, _, _ := syscall.SyscallN(procPropVariantToBooleanWithDefault.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(_fDefault))
+	return r1 != 0
 }
 
 // PropVariantToBuffer calls PROPSYS!PropVariantToBuffer.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttobuffer
 // Minimum OS: windows5.1.2600.
-func PropVariantToBuffer(propvar *PROPVARIANT, pv unsafe.Pointer, cb uint32) foundation.HRESULT {
+func PropVariantToBuffer(propvar *PROPVARIANT, pv unsafe.Pointer, cb uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToBuffer.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pv)), uintptr(cb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToDouble calls PROPSYS!PropVariantToDouble.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttodouble
 // Minimum OS: windows5.1.2600.
-func PropVariantToDouble(propvarIn *PROPVARIANT, pdblRet *float64) foundation.HRESULT {
+func PropVariantToDouble(propvarIn *PROPVARIANT, pdblRet *float64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToDouble.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pdblRet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToDoubleVector calls PROPSYS!PropVariantToDoubleVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttodoublevector
 // Minimum OS: windows5.1.2600.
-func PropVariantToDoubleVector(propvar *PROPVARIANT, prgn *float64, crgn uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToDoubleVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgn)), uintptr(crgn), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToDoubleVector(propvar *PROPVARIANT, prgn []float64, pcElem *uint32) error {
+	var _prgn *float64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToDoubleVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToDoubleVectorAlloc calls PROPSYS!PropVariantToDoubleVectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttodoublevectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToDoubleVectorAlloc(propvar *PROPVARIANT, pprgn **float64, pcElem *uint32) foundation.HRESULT {
+func PropVariantToDoubleVectorAlloc(propvar *PROPVARIANT, pprgn **float64, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToDoubleVectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToFileTime calls PROPSYS!PropVariantToFileTime.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttofiletime
 // Minimum OS: windows5.1.2600.
-func PropVariantToFileTime(propvar *PROPVARIANT, pstfOut systemvariant.PSTIME_FLAGS, pftOut *foundation.FILETIME) foundation.HRESULT {
+func PropVariantToFileTime(propvar *PROPVARIANT, pstfOut systemvariant.PSTIME_FLAGS, pftOut *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToFileTime.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(pstfOut), uintptr(unsafe.Pointer(pftOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToFileTimeVector calls PROPSYS!PropVariantToFileTimeVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttofiletimevector
 // Minimum OS: windows5.1.2600.
-func PropVariantToFileTimeVector(propvar *PROPVARIANT, prgft *foundation.FILETIME, crgft uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToFileTimeVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgft)), uintptr(crgft), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToFileTimeVector(propvar *PROPVARIANT, prgft []foundation.FILETIME, pcElem *uint32) error {
+	var _prgft *foundation.FILETIME
+	if len(prgft) > 0 {
+		_prgft = &prgft[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToFileTimeVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgft)), uintptr(len(prgft)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToFileTimeVectorAlloc calls PROPSYS!PropVariantToFileTimeVectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttofiletimevectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToFileTimeVectorAlloc(propvar *PROPVARIANT, pprgft **foundation.FILETIME, pcElem *uint32) foundation.HRESULT {
+func PropVariantToFileTimeVectorAlloc(propvar *PROPVARIANT, pprgft **foundation.FILETIME, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToFileTimeVectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgft)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToGUID calls PROPSYS!PropVariantToGUID.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoguid
 // Minimum OS: windows5.1.2600.
-func PropVariantToGUID(propvar *PROPVARIANT, pguid *win32.GUID) foundation.HRESULT {
+func PropVariantToGUID(propvar *PROPVARIANT, pguid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToGUID.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pguid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt16 calls PROPSYS!PropVariantToInt16.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint16
 // Minimum OS: windows5.1.2600.
-func PropVariantToInt16(propvarIn *PROPVARIANT, piRet *int16) foundation.HRESULT {
+func PropVariantToInt16(propvarIn *PROPVARIANT, piRet *int16) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt16.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(piRet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt16Vector calls PROPSYS!PropVariantToInt16Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint16vector
 // Minimum OS: windows5.1.2600.
-func PropVariantToInt16Vector(propvar *PROPVARIANT, prgn *int16, crgn uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToInt16Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgn)), uintptr(crgn), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToInt16Vector(propvar *PROPVARIANT, prgn []int16, pcElem *uint32) error {
+	var _prgn *int16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToInt16Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt16VectorAlloc calls PROPSYS!PropVariantToInt16VectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint16vectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToInt16VectorAlloc(propvar *PROPVARIANT, pprgn **int16, pcElem *uint32) foundation.HRESULT {
+func PropVariantToInt16VectorAlloc(propvar *PROPVARIANT, pprgn **int16, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt16VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt16WithDefault calls PROPSYS!PropVariantToInt16WithDefault.
@@ -677,25 +755,29 @@ func PropVariantToInt16WithDefault(propvarIn *PROPVARIANT, iDefault int16) int16
 // PropVariantToInt32 calls PROPSYS!PropVariantToInt32.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint32
 // Minimum OS: windows5.1.2600.
-func PropVariantToInt32(propvarIn *PROPVARIANT, plRet *int32) foundation.HRESULT {
+func PropVariantToInt32(propvarIn *PROPVARIANT, plRet *int32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt32.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(plRet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt32Vector calls PROPSYS!PropVariantToInt32Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint32vector
 // Minimum OS: windows5.1.2600.
-func PropVariantToInt32Vector(propvar *PROPVARIANT, prgn *int32, crgn uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToInt32Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgn)), uintptr(crgn), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToInt32Vector(propvar *PROPVARIANT, prgn []int32, pcElem *uint32) error {
+	var _prgn *int32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToInt32Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt32VectorAlloc calls PROPSYS!PropVariantToInt32VectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint32vectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToInt32VectorAlloc(propvar *PROPVARIANT, pprgn **int32, pcElem *uint32) foundation.HRESULT {
+func PropVariantToInt32VectorAlloc(propvar *PROPVARIANT, pprgn **int32, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt32VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt32WithDefault calls PROPSYS!PropVariantToInt32WithDefault.
@@ -709,25 +791,29 @@ func PropVariantToInt32WithDefault(propvarIn *PROPVARIANT, lDefault int32) int32
 // PropVariantToInt64 calls PROPSYS!PropVariantToInt64.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint64
 // Minimum OS: windows5.1.2600.
-func PropVariantToInt64(propvarIn *PROPVARIANT, pllRet *int64) foundation.HRESULT {
+func PropVariantToInt64(propvarIn *PROPVARIANT, pllRet *int64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt64.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pllRet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt64Vector calls PROPSYS!PropVariantToInt64Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint64vector
 // Minimum OS: windows5.1.2600.
-func PropVariantToInt64Vector(propvar *PROPVARIANT, prgn *int64, crgn uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToInt64Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgn)), uintptr(crgn), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToInt64Vector(propvar *PROPVARIANT, prgn []int64, pcElem *uint32) error {
+	var _prgn *int64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToInt64Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt64VectorAlloc calls PROPSYS!PropVariantToInt64VectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoint64vectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToInt64VectorAlloc(propvar *PROPVARIANT, pprgn **int64, pcElem *uint32) foundation.HRESULT {
+func PropVariantToInt64VectorAlloc(propvar *PROPVARIANT, pprgn **int64, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToInt64VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToInt64WithDefault calls PROPSYS!PropVariantToInt64WithDefault.
@@ -741,65 +827,74 @@ func PropVariantToInt64WithDefault(propvarIn *PROPVARIANT, llDefault int64) int6
 // PropVariantToString calls PROPSYS!PropVariantToString.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostring
 // Minimum OS: windows5.1.2600.
-func PropVariantToString(propvar *PROPVARIANT, psz foundation.PWSTR, cch uint32) foundation.HRESULT {
+func PropVariantToString(propvar *PROPVARIANT, psz foundation.PWSTR, cch uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToString.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(psz)), uintptr(cch))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToStringAlloc calls PROPSYS!PropVariantToStringAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostringalloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToStringAlloc(propvar *PROPVARIANT, ppszOut *foundation.PWSTR) foundation.HRESULT {
+func PropVariantToStringAlloc(propvar *PROPVARIANT, ppszOut *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToStringAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(ppszOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToStringVector calls PROPSYS!PropVariantToStringVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostringvector
 // Minimum OS: windows5.1.2600.
-func PropVariantToStringVector(propvar *PROPVARIANT, prgsz *foundation.PWSTR, crgsz uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToStringVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgsz)), uintptr(crgsz), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToStringVector(propvar *PROPVARIANT, prgsz []foundation.PWSTR, pcElem *uint32) error {
+	var _prgsz *foundation.PWSTR
+	if len(prgsz) > 0 {
+		_prgsz = &prgsz[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToStringVector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgsz)), uintptr(len(prgsz)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToStringVectorAlloc calls PROPSYS!PropVariantToStringVectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostringvectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToStringVectorAlloc(propvar *PROPVARIANT, pprgsz **foundation.PWSTR, pcElem *uint32) foundation.HRESULT {
+func PropVariantToStringVectorAlloc(propvar *PROPVARIANT, pprgsz **foundation.PWSTR, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToStringVectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgsz)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToStringWithDefault calls PROPSYS!PropVariantToStringWithDefault.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostringwithdefault
 // Minimum OS: windows5.1.2600.
-func PropVariantToStringWithDefault(propvarIn *PROPVARIANT, pszDefault foundation.PWSTR) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procPropVariantToStringWithDefault.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pszDefault)))
+func PropVariantToStringWithDefault(propvarIn *PROPVARIANT, pszDefault string) foundation.PWSTR {
+	_pszDefault := win32.UTF16Ptr(pszDefault)
+	r1, _, _ := syscall.SyscallN(procPropVariantToStringWithDefault.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(_pszDefault)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
 // PropVariantToUInt16 calls PROPSYS!PropVariantToUInt16.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint16
 // Minimum OS: windows5.1.2600.
-func PropVariantToUInt16(propvarIn *PROPVARIANT, puiRet *uint16) foundation.HRESULT {
+func PropVariantToUInt16(propvarIn *PROPVARIANT, puiRet *uint16) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt16.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(puiRet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToUInt16Vector calls PROPSYS!PropVariantToUInt16Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint16vector
 // Minimum OS: windows5.1.2600.
-func PropVariantToUInt16Vector(propvar *PROPVARIANT, prgn *uint16, crgn uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToUInt16Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgn)), uintptr(crgn), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToUInt16Vector(propvar *PROPVARIANT, prgn []uint16, pcElem *uint32) error {
+	var _prgn *uint16
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToUInt16Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToUInt16VectorAlloc calls PROPSYS!PropVariantToUInt16VectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint16vectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToUInt16VectorAlloc(propvar *PROPVARIANT, pprgn **uint16, pcElem *uint32) foundation.HRESULT {
+func PropVariantToUInt16VectorAlloc(propvar *PROPVARIANT, pprgn **uint16, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt16VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToUInt16WithDefault calls PROPSYS!PropVariantToUInt16WithDefault.
@@ -813,25 +908,29 @@ func PropVariantToUInt16WithDefault(propvarIn *PROPVARIANT, uiDefault uint16) ui
 // PropVariantToUInt32 calls PROPSYS!PropVariantToUInt32.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint32
 // Minimum OS: windows5.1.2600.
-func PropVariantToUInt32(propvarIn *PROPVARIANT, pulRet *uint32) foundation.HRESULT {
+func PropVariantToUInt32(propvarIn *PROPVARIANT, pulRet *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt32.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pulRet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToUInt32Vector calls PROPSYS!PropVariantToUInt32Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint32vector
 // Minimum OS: windows5.1.2600.
-func PropVariantToUInt32Vector(propvar *PROPVARIANT, prgn *uint32, crgn uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToUInt32Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgn)), uintptr(crgn), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToUInt32Vector(propvar *PROPVARIANT, prgn []uint32, pcElem *uint32) error {
+	var _prgn *uint32
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToUInt32Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToUInt32VectorAlloc calls PROPSYS!PropVariantToUInt32VectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint32vectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToUInt32VectorAlloc(propvar *PROPVARIANT, pprgn **uint32, pcElem *uint32) foundation.HRESULT {
+func PropVariantToUInt32VectorAlloc(propvar *PROPVARIANT, pprgn **uint32, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt32VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToUInt32WithDefault calls PROPSYS!PropVariantToUInt32WithDefault.
@@ -845,25 +944,29 @@ func PropVariantToUInt32WithDefault(propvarIn *PROPVARIANT, ulDefault uint32) ui
 // PropVariantToUInt64 calls PROPSYS!PropVariantToUInt64.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint64
 // Minimum OS: windows5.1.2600.
-func PropVariantToUInt64(propvarIn *PROPVARIANT, pullRet *uint64) foundation.HRESULT {
+func PropVariantToUInt64(propvarIn *PROPVARIANT, pullRet *uint64) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt64.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pullRet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToUInt64Vector calls PROPSYS!PropVariantToUInt64Vector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint64vector
 // Minimum OS: windows5.1.2600.
-func PropVariantToUInt64Vector(propvar *PROPVARIANT, prgn *uint64, crgn uint32, pcElem *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPropVariantToUInt64Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(prgn)), uintptr(crgn), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+func PropVariantToUInt64Vector(propvar *PROPVARIANT, prgn []uint64, pcElem *uint32) error {
+	var _prgn *uint64
+	if len(prgn) > 0 {
+		_prgn = &prgn[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPropVariantToUInt64Vector.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_prgn)), uintptr(len(prgn)), uintptr(unsafe.Pointer(pcElem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToUInt64VectorAlloc calls PROPSYS!PropVariantToUInt64VectorAlloc.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttouint64vectoralloc
 // Minimum OS: windows5.1.2600.
-func PropVariantToUInt64VectorAlloc(propvar *PROPVARIANT, pprgn **uint64, pcElem *uint32) foundation.HRESULT {
+func PropVariantToUInt64VectorAlloc(propvar *PROPVARIANT, pprgn **uint64, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToUInt64VectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToUInt64WithDefault calls PROPSYS!PropVariantToUInt64WithDefault.
@@ -877,49 +980,50 @@ func PropVariantToUInt64WithDefault(propvarIn *PROPVARIANT, ullDefault uint64) u
 // PropVariantToVariant calls PROPSYS!PropVariantToVariant.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttovariant
 // Minimum OS: windows6.0.6000.
-func PropVariantToVariant(pPropVar *PROPVARIANT, pVar *systemvariant.VARIANT) foundation.HRESULT {
+func PropVariantToVariant(pPropVar *PROPVARIANT, pVar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToVariant.Addr(), uintptr(unsafe.Pointer(pPropVar)), uintptr(unsafe.Pointer(pVar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropVariantToWinRTPropertyValue calls PROPSYS!PropVariantToWinRTPropertyValue.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-propvarianttowinrtpropertyvalue
 // Minimum OS: windows8.0.
-func PropVariantToWinRTPropertyValue(propvar *PROPVARIANT, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PropVariantToWinRTPropertyValue(propvar *PROPVARIANT, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToWinRTPropertyValue.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadClassStg calls OLE32!ReadClassStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-readclassstg
 // Minimum OS: windows5.0.
-func ReadClassStg(pStg *IStorage, pclsid *win32.GUID) foundation.HRESULT {
+func ReadClassStg(pStg *IStorage, pclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procReadClassStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(pclsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadClassStm calls OLE32!ReadClassStm.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-readclassstm
 // Minimum OS: windows5.0.
-func ReadClassStm(pStm *systemcom.IStream, pclsid *win32.GUID) foundation.HRESULT {
+func ReadClassStm(pStm *systemcom.IStream, pclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procReadClassStm.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(pclsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadFmtUserTypeStg calls OLE32!ReadFmtUserTypeStg.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-readfmtusertypestg
 // Minimum OS: windows5.0.
-func ReadFmtUserTypeStg(pstg *IStorage, pcf *uint16, lplpszUserType *foundation.PWSTR) foundation.HRESULT {
+func ReadFmtUserTypeStg(pstg *IStorage, pcf *uint16, lplpszUserType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procReadFmtUserTypeStg.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(pcf)), uintptr(unsafe.Pointer(lplpszUserType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConvertStg calls OLE32!SetConvertStg.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-setconvertstg
 // Minimum OS: windows5.0.
-func SetConvertStg(pStg *IStorage, fConvert foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetConvertStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(fConvert))
-	return foundation.HRESULT(r1)
+func SetConvertStg(pStg *IStorage, fConvert bool) error {
+	_fConvert := win32.Bool32(fConvert)
+	r1, _, _ := syscall.SyscallN(procSetConvertStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(_fConvert))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgConvertPropertyToVariant calls ole32!StgConvertPropertyToVariant.
@@ -933,195 +1037,204 @@ func StgConvertPropertyToVariant(pprop *SERIALIZEDPROPERTYVALUE, CodePage uint16
 // StgConvertVariantToProperty calls ole32!StgConvertVariantToProperty.
 // https://learn.microsoft.com/windows/win32/api/propidl/nf-propidl-stgconvertvarianttoproperty
 // Minimum OS: windows5.0.
-func StgConvertVariantToProperty(pvar *PROPVARIANT, CodePage uint16, pprop *SERIALIZEDPROPERTYVALUE, pcb *uint32, pid uint32, fReserved foundation.BOOLEAN, pcIndirect *uint32) *SERIALIZEDPROPERTYVALUE {
-	r1, _, _ := syscall.SyscallN(procStgConvertVariantToProperty.Addr(), uintptr(unsafe.Pointer(pvar)), uintptr(CodePage), uintptr(unsafe.Pointer(pprop)), uintptr(unsafe.Pointer(pcb)), uintptr(pid), uintptr(fReserved), uintptr(unsafe.Pointer(pcIndirect)))
+func StgConvertVariantToProperty(pvar *PROPVARIANT, CodePage uint16, pprop *SERIALIZEDPROPERTYVALUE, pcb *uint32, pid uint32, pcIndirect *uint32) *SERIALIZEDPROPERTYVALUE {
+	r1, _, _ := syscall.SyscallN(procStgConvertVariantToProperty.Addr(), uintptr(unsafe.Pointer(pvar)), uintptr(CodePage), uintptr(unsafe.Pointer(pprop)), uintptr(unsafe.Pointer(pcb)), uintptr(pid), 0, uintptr(unsafe.Pointer(pcIndirect)))
 	return (*SERIALIZEDPROPERTYVALUE)(unsafe.Pointer(r1))
 }
 
 // StgCreateDocfile calls OLE32!StgCreateDocfile.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatedocfile
 // Minimum OS: windows5.0.
-func StgCreateDocfile(pwcsName foundation.PWSTR, grfMode systemcom.STGM, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgCreateDocfile.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(grfMode), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
-	return foundation.HRESULT(r1)
+func StgCreateDocfile(pwcsName string, grfMode systemcom.STGM, ppstgOpen **IStorage) error {
+	_pwcsName := win32.UTF16Ptr(pwcsName)
+	r1, _, _ := syscall.SyscallN(procStgCreateDocfile.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), 0, uintptr(unsafe.Pointer(ppstgOpen)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgCreateDocfileOnILockBytes calls OLE32!StgCreateDocfileOnILockBytes.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatedocfileonilockbytes
 // Minimum OS: windows5.0.
-func StgCreateDocfileOnILockBytes(plkbyt *ILockBytes, grfMode systemcom.STGM, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
+func StgCreateDocfileOnILockBytes(plkbyt *ILockBytes, grfMode systemcom.STGM, reserved uint32, ppstgOpen **IStorage) error {
 	r1, _, _ := syscall.SyscallN(procStgCreateDocfileOnILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(grfMode), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgCreatePropSetStg calls OLE32!StgCreatePropSetStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatepropsetstg
 // Minimum OS: windows5.0.
-func StgCreatePropSetStg(pStorage *IStorage, dwReserved uint32, ppPropSetStg **IPropertySetStorage) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgCreatePropSetStg.Addr(), uintptr(unsafe.Pointer(pStorage)), uintptr(dwReserved), uintptr(unsafe.Pointer(ppPropSetStg)))
-	return foundation.HRESULT(r1)
+func StgCreatePropSetStg(pStorage *IStorage, ppPropSetStg **IPropertySetStorage) error {
+	r1, _, _ := syscall.SyscallN(procStgCreatePropSetStg.Addr(), uintptr(unsafe.Pointer(pStorage)), 0, uintptr(unsafe.Pointer(ppPropSetStg)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgCreatePropStg calls OLE32!StgCreatePropStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatepropstg
 // Minimum OS: windows5.0.
-func StgCreatePropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, dwReserved uint32, ppPropStg **IPropertyStorage) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgCreatePropStg.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(fmtid)), uintptr(unsafe.Pointer(pclsid)), uintptr(grfFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppPropStg)))
-	return foundation.HRESULT(r1)
+func StgCreatePropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, ppPropStg **IPropertyStorage) error {
+	r1, _, _ := syscall.SyscallN(procStgCreatePropStg.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(fmtid)), uintptr(unsafe.Pointer(pclsid)), uintptr(grfFlags), 0, uintptr(unsafe.Pointer(ppPropStg)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgCreateStorageEx calls OLE32!StgCreateStorageEx.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatestorageex
 // Minimum OS: windows5.0.
-func StgCreateStorageEx(pwcsName foundation.PWSTR, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgCreateStorageEx.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
-	return foundation.HRESULT(r1)
+func StgCreateStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen *unsafe.Pointer) error {
+	_pwcsName := win32.UTF16Ptr(pwcsName)
+	r1, _, _ := syscall.SyscallN(procStgCreateStorageEx.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgDeserializePropVariant calls PROPSYS!StgDeserializePropVariant.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-stgdeserializepropvariant
 // Minimum OS: windows5.0.
-func StgDeserializePropVariant(pprop *SERIALIZEDPROPERTYVALUE, cbMax uint32, ppropvar *PROPVARIANT) foundation.HRESULT {
+func StgDeserializePropVariant(pprop *SERIALIZEDPROPERTYVALUE, cbMax uint32, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procStgDeserializePropVariant.Addr(), uintptr(unsafe.Pointer(pprop)), uintptr(cbMax), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgGetIFillLockBytesOnFile calls ole32!StgGetIFillLockBytesOnFile.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stggetifilllockbytesonfile
-func StgGetIFillLockBytesOnFile(pwcsName foundation.PWSTR, ppflb **IFillLockBytes) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgGetIFillLockBytesOnFile.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(unsafe.Pointer(ppflb)))
-	return foundation.HRESULT(r1)
+func StgGetIFillLockBytesOnFile(pwcsName string, ppflb **IFillLockBytes) error {
+	_pwcsName := win32.UTF16Ptr(pwcsName)
+	r1, _, _ := syscall.SyscallN(procStgGetIFillLockBytesOnFile.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(ppflb)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgGetIFillLockBytesOnILockBytes calls ole32!StgGetIFillLockBytesOnILockBytes.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stggetifilllockbytesonilockbytes
-func StgGetIFillLockBytesOnILockBytes(pilb *ILockBytes, ppflb **IFillLockBytes) foundation.HRESULT {
+func StgGetIFillLockBytesOnILockBytes(pilb *ILockBytes, ppflb **IFillLockBytes) error {
 	r1, _, _ := syscall.SyscallN(procStgGetIFillLockBytesOnILockBytes.Addr(), uintptr(unsafe.Pointer(pilb)), uintptr(unsafe.Pointer(ppflb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgIsStorageFile calls OLE32!StgIsStorageFile.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgisstoragefile
 // Minimum OS: windows5.0.
-func StgIsStorageFile(pwcsName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgIsStorageFile.Addr(), uintptr(unsafe.Pointer(pwcsName)))
-	return foundation.HRESULT(r1)
+func StgIsStorageFile(pwcsName string) error {
+	_pwcsName := win32.UTF16Ptr(pwcsName)
+	r1, _, _ := syscall.SyscallN(procStgIsStorageFile.Addr(), uintptr(unsafe.Pointer(_pwcsName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgIsStorageILockBytes calls OLE32!StgIsStorageILockBytes.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgisstorageilockbytes
 // Minimum OS: windows5.0.
-func StgIsStorageILockBytes(plkbyt *ILockBytes) foundation.HRESULT {
+func StgIsStorageILockBytes(plkbyt *ILockBytes) error {
 	r1, _, _ := syscall.SyscallN(procStgIsStorageILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgOpenAsyncDocfileOnIFillLockBytes calls ole32!StgOpenAsyncDocfileOnIFillLockBytes.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stgopenasyncdocfileonifilllockbytes
-func StgOpenAsyncDocfileOnIFillLockBytes(pflb *IFillLockBytes, grfMode uint32, asyncFlags uint32, ppstgOpen **IStorage) foundation.HRESULT {
+func StgOpenAsyncDocfileOnIFillLockBytes(pflb *IFillLockBytes, grfMode uint32, asyncFlags uint32, ppstgOpen **IStorage) error {
 	r1, _, _ := syscall.SyscallN(procStgOpenAsyncDocfileOnIFillLockBytes.Addr(), uintptr(unsafe.Pointer(pflb)), uintptr(grfMode), uintptr(asyncFlags), uintptr(unsafe.Pointer(ppstgOpen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgOpenLayoutDocfile calls dflayout!StgOpenLayoutDocfile.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-stgopenlayoutdocfile
-func StgOpenLayoutDocfile(pwcsDfName foundation.PWSTR, grfMode uint32, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenLayoutDocfile.Addr(), uintptr(unsafe.Pointer(pwcsDfName)), uintptr(grfMode), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
-	return foundation.HRESULT(r1)
+func StgOpenLayoutDocfile(pwcsDfName string, grfMode uint32, reserved uint32, ppstgOpen **IStorage) error {
+	_pwcsDfName := win32.UTF16Ptr(pwcsDfName)
+	r1, _, _ := syscall.SyscallN(procStgOpenLayoutDocfile.Addr(), uintptr(unsafe.Pointer(_pwcsDfName)), uintptr(grfMode), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgOpenPropStg calls OLE32!StgOpenPropStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenpropstg
 // Minimum OS: windows5.0.
-func StgOpenPropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, grfFlags uint32, dwReserved uint32, ppPropStg **IPropertyStorage) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenPropStg.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(fmtid)), uintptr(grfFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppPropStg)))
-	return foundation.HRESULT(r1)
+func StgOpenPropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, grfFlags uint32, ppPropStg **IPropertyStorage) error {
+	r1, _, _ := syscall.SyscallN(procStgOpenPropStg.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(fmtid)), uintptr(grfFlags), 0, uintptr(unsafe.Pointer(ppPropStg)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgOpenStorage calls OLE32!StgOpenStorage.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorage
 // Minimum OS: windows5.0.
-func StgOpenStorage(pwcsName foundation.PWSTR, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenStorage.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
-	return foundation.HRESULT(r1)
+func StgOpenStorage(pwcsName string, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) error {
+	_pwcsName := win32.UTF16Ptr(pwcsName)
+	r1, _, _ := syscall.SyscallN(procStgOpenStorage.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgOpenStorageEx calls OLE32!StgOpenStorageEx.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorageex
 // Minimum OS: windows5.0.
-func StgOpenStorageEx(pwcsName foundation.PWSTR, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenStorageEx.Addr(), uintptr(unsafe.Pointer(pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
-	return foundation.HRESULT(r1)
+func StgOpenStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen *unsafe.Pointer) error {
+	_pwcsName := win32.UTF16Ptr(pwcsName)
+	r1, _, _ := syscall.SyscallN(procStgOpenStorageEx.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgOpenStorageOnILockBytes calls OLE32!StgOpenStorageOnILockBytes.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorageonilockbytes
 // Minimum OS: windows5.0.
-func StgOpenStorageOnILockBytes(plkbyt *ILockBytes, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgOpenStorageOnILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
-	return foundation.HRESULT(r1)
+func StgOpenStorageOnILockBytes(plkbyt *ILockBytes, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, ppstgOpen **IStorage) error {
+	r1, _, _ := syscall.SyscallN(procStgOpenStorageOnILockBytes.Addr(), uintptr(unsafe.Pointer(plkbyt)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), 0, uintptr(unsafe.Pointer(ppstgOpen)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgPropertyLengthAsVariant calls ole32!StgPropertyLengthAsVariant.
 // https://learn.microsoft.com/windows/win32/api/propapi/nf-propapi-stgpropertylengthasvariant
 // Minimum OS: windows5.0.
-func StgPropertyLengthAsVariant(pProp *SERIALIZEDPROPERTYVALUE, cbProp uint32, CodePage uint16, bReserved byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procStgPropertyLengthAsVariant.Addr(), uintptr(unsafe.Pointer(pProp)), uintptr(cbProp), uintptr(CodePage), uintptr(bReserved))
+func StgPropertyLengthAsVariant(pProp *SERIALIZEDPROPERTYVALUE, cbProp uint32, CodePage uint16) uint32 {
+	r1, _, _ := syscall.SyscallN(procStgPropertyLengthAsVariant.Addr(), uintptr(unsafe.Pointer(pProp)), uintptr(cbProp), uintptr(CodePage), 0)
 	return uint32(r1)
 }
 
 // StgSerializePropVariant calls PROPSYS!StgSerializePropVariant.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-stgserializepropvariant
 // Minimum OS: windows5.0.
-func StgSerializePropVariant(ppropvar *PROPVARIANT, ppProp **SERIALIZEDPROPERTYVALUE, pcb *uint32) foundation.HRESULT {
+func StgSerializePropVariant(ppropvar *PROPVARIANT, ppProp **SERIALIZEDPROPERTYVALUE, pcb *uint32) error {
 	r1, _, _ := syscall.SyscallN(procStgSerializePropVariant.Addr(), uintptr(unsafe.Pointer(ppropvar)), uintptr(unsafe.Pointer(ppProp)), uintptr(unsafe.Pointer(pcb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StgSetTimes calls OLE32!StgSetTimes.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgsettimes
 // Minimum OS: windows5.0.
-func StgSetTimes(lpszName foundation.PWSTR, pctime *foundation.FILETIME, patime *foundation.FILETIME, pmtime *foundation.FILETIME) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procStgSetTimes.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(pctime)), uintptr(unsafe.Pointer(patime)), uintptr(unsafe.Pointer(pmtime)))
-	return foundation.HRESULT(r1)
+func StgSetTimes(lpszName string, pctime *foundation.FILETIME, patime *foundation.FILETIME, pmtime *foundation.FILETIME) error {
+	_lpszName := win32.UTF16Ptr(lpszName)
+	r1, _, _ := syscall.SyscallN(procStgSetTimes.Addr(), uintptr(unsafe.Pointer(_lpszName)), uintptr(unsafe.Pointer(pctime)), uintptr(unsafe.Pointer(patime)), uintptr(unsafe.Pointer(pmtime)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VariantToPropVariant calls PROPSYS!VariantToPropVariant.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttopropvariant
 // Minimum OS: windows6.0.6000.
-func VariantToPropVariant(pVar *systemvariant.VARIANT, pPropVar *PROPVARIANT) foundation.HRESULT {
+func VariantToPropVariant(pVar *systemvariant.VARIANT, pPropVar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVariantToPropVariant.Addr(), uintptr(unsafe.Pointer(pVar)), uintptr(unsafe.Pointer(pPropVar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinRTPropertyValueToPropVariant calls PROPSYS!WinRTPropertyValueToPropVariant.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-winrtpropertyvaluetopropvariant
 // Minimum OS: windows8.0.
-func WinRTPropertyValueToPropVariant(punkPropertyValue *systemcom.IUnknown, ppropvar *PROPVARIANT) foundation.HRESULT {
+func WinRTPropertyValueToPropVariant(punkPropertyValue *systemcom.IUnknown, ppropvar *PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procWinRTPropertyValueToPropVariant.Addr(), uintptr(unsafe.Pointer(punkPropertyValue)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteClassStg calls OLE32!WriteClassStg.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-writeclassstg
 // Minimum OS: windows5.0.
-func WriteClassStg(pStg *IStorage, rclsid *win32.GUID) foundation.HRESULT {
+func WriteClassStg(pStg *IStorage, rclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procWriteClassStg.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(rclsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteClassStm calls OLE32!WriteClassStm.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-writeclassstm
 // Minimum OS: windows5.0.
-func WriteClassStm(pStm *systemcom.IStream, rclsid *win32.GUID) foundation.HRESULT {
+func WriteClassStm(pStm *systemcom.IStream, rclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procWriteClassStm.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(rclsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteFmtUserTypeStg calls OLE32!WriteFmtUserTypeStg.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-writefmtusertypestg
 // Minimum OS: windows5.0.
-func WriteFmtUserTypeStg(pstg *IStorage, cf uint16, lpszUserType foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWriteFmtUserTypeStg.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(cf), uintptr(unsafe.Pointer(lpszUserType)))
-	return foundation.HRESULT(r1)
+func WriteFmtUserTypeStg(pstg *IStorage, cf uint16, lpszUserType string) error {
+	_lpszUserType := win32.UTF16Ptr(lpszUserType)
+	r1, _, _ := syscall.SyscallN(procWriteFmtUserTypeStg.Addr(), uintptr(unsafe.Pointer(pstg)), uintptr(cf), uintptr(unsafe.Pointer(_lpszUserType)))
+	return win32.HRESULTError(int32(r1))
 }

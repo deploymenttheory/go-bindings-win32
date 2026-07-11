@@ -58,32 +58,32 @@ type DDBLTBATCH struct {
 	LpDDBltFx *DDBLTFX
 }
 
-// DDBLTFX_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDBLTFX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDBLTFX_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// DDBLTFX_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDBLTFX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDBLTFX_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
-// DDBLTFX_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDBLTFX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDBLTFX_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
 
-// DDBLTFX_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDBLTFX_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDBLTFX_Anonymous4_e__Union struct {
 	Data [1]uint64
 }
 
-// DDBLTFX_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDBLTFX_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDBLTFX_Anonymous5_e__Union struct {
 	Data [1]uint64
 }
@@ -985,8 +985,8 @@ type DDHAL_GETDRIVERINFODATA struct {
 	DwContext      uintptr
 }
 
-// DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1490,14 +1490,14 @@ type DDOSCAPS struct {
 	DwCaps uint32
 }
 
-// DDOVERLAYFX_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDOVERLAYFX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDOVERLAYFX_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// DDOVERLAYFX_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDOVERLAYFX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDOVERLAYFX_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1518,32 +1518,32 @@ type DDOVERLAYFX struct {
 	DwFlags                  uint32
 }
 
-// DDPIXELFORMAT_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDPIXELFORMAT_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDPIXELFORMAT_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// DDPIXELFORMAT_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDPIXELFORMAT_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDPIXELFORMAT_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// DDPIXELFORMAT_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDPIXELFORMAT_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDPIXELFORMAT_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
-// DDPIXELFORMAT_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDPIXELFORMAT_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDPIXELFORMAT_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
 
-// DDPIXELFORMAT_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDPIXELFORMAT_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDPIXELFORMAT_Anonymous5_e__Union struct {
 	Data [1]uint32
 }
@@ -1613,8 +1613,8 @@ type DDRAWI_DDRAWCLIPPER_LCL struct {
 	PAddrefedThisOwner *systemcom.IUnknown
 }
 
-// DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1652,26 +1652,26 @@ type DDRAWI_DDRAWPALETTE_LCL struct {
 	DwDDRAWReserved3 uintptr
 }
 
-// DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
-// DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
 
-// DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
@@ -1691,8 +1691,8 @@ type DDRAWI_DDRAWSURFACE_GBL struct {
 	DdpfSurface   DDPIXELFORMAT
 }
 
-// DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1726,14 +1726,14 @@ type DDRAWI_DDRAWSURFACE_INT struct {
 	DwIntRefCnt uint32
 }
 
-// DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1956,8 +1956,8 @@ type DDSCAPS struct {
 	DwCaps uint32
 }
 
-// DDSCAPS2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDSCAPS2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDSCAPS2_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1970,8 +1970,8 @@ type DDSCAPS2 struct {
 	Anonymous DDSCAPS2_Anonymous_e__Union
 }
 
-// DDSCAPSEX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDSCAPSEX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDSCAPSEX_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -2037,14 +2037,14 @@ type DDSURFACEDATA struct {
 	DwDriverReserved4   uint32
 }
 
-// DDSURFACEDESC_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDSURFACEDESC_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDSURFACEDESC_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// DDSURFACEDESC_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDSURFACEDESC_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDSURFACEDESC_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -2069,32 +2069,32 @@ type DDSURFACEDESC struct {
 	DdsCaps           DDSCAPS
 }
 
-// DDSURFACEDESC2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDSURFACEDESC2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDSURFACEDESC2_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// DDSURFACEDESC2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDSURFACEDESC2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDSURFACEDESC2_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// DDSURFACEDESC2_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDSURFACEDESC2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDSURFACEDESC2_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
-// DDSURFACEDESC2_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDSURFACEDESC2_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDSURFACEDESC2_Anonymous4_e__Union struct {
 	Data [2]uint32
 }
 
-// DDSURFACEDESC2_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DDSURFACEDESC2_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DDSURFACEDESC2_Anonymous5_e__Union struct {
 	Data [8]uint32
 }
@@ -2550,8 +2550,8 @@ type DD_GETDRIVERINFODATA struct {
 	DdRVal         foundation.HRESULT
 }
 
-// DD_GETDRIVERSTATEDATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DD_GETDRIVERSTATEDATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DD_GETDRIVERSTATEDATA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2989,20 +2989,20 @@ type DD_SURFACECALLBACKS struct {
 	SetPalette         PDD_SURFCB_SETPALETTE
 }
 
-// DD_SURFACE_GLOBAL_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DD_SURFACE_GLOBAL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DD_SURFACE_GLOBAL_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// DD_SURFACE_GLOBAL_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DD_SURFACE_GLOBAL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DD_SURFACE_GLOBAL_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
-// DD_SURFACE_GLOBAL_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DD_SURFACE_GLOBAL_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DD_SURFACE_GLOBAL_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
@@ -3028,14 +3028,14 @@ type DD_SURFACE_INT struct {
 	LpLcl *DD_SURFACE_LOCAL
 }
 
-// DD_SURFACE_LOCAL_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DD_SURFACE_LOCAL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DD_SURFACE_LOCAL_Anonymous1_e__Union struct {
 	Data [2]uint32
 }
 
-// DD_SURFACE_LOCAL_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DD_SURFACE_LOCAL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DD_SURFACE_LOCAL_Anonymous2_e__Union struct {
 	Data [2]uint32
 }
@@ -3272,8 +3272,8 @@ type PROCESS_LIST struct {
 	DwZDepth     uint32
 }
 
-// SURFACEALIGNMENT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SURFACEALIGNMENT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SURFACEALIGNMENT_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -3283,14 +3283,14 @@ type SURFACEALIGNMENT struct {
 	Anonymous SURFACEALIGNMENT_Anonymous_e__Union
 }
 
-// VIDEOMEMORY_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VIDEOMEMORY_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VIDEOMEMORY_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// VIDEOMEMORY_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VIDEOMEMORY_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VIDEOMEMORY_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -3321,14 +3321,14 @@ type VIDEOMEMORYINFO struct {
 	PvPrimary        unsafe.Pointer
 }
 
-// VIDMEM_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VIDMEM_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VIDMEM_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// VIDMEM_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VIDMEM_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VIDMEM_Anonymous2_e__Union struct {
 	Data [1]uint64
 }

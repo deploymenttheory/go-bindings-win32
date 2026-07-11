@@ -26,9 +26,9 @@ type IGetClusterDataInfo struct {
 var IID_IGetClusterDataInfo = win32.GUID{Data1: 0x97dede51, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // GetClusterName dispatches through IGetClusterDataInfo's vtable slot 3.
-func (self *IGetClusterDataInfo) GetClusterName(lpszName foundation.BSTR, pcchName *int32) foundation.HRESULT {
+func (self *IGetClusterDataInfo) GetClusterName(lpszName foundation.BSTR, pcchName *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(pcchName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClusterHandle dispatches through IGetClusterDataInfo's vtable slot 4.
@@ -113,9 +113,9 @@ type IGetClusterObjectInfo struct {
 var IID_IGetClusterObjectInfo = win32.GUID{Data1: 0x97dede52, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // GetObjectName dispatches through IGetClusterObjectInfo's vtable slot 3.
-func (self *IGetClusterObjectInfo) GetObjectName(lObjIndex int32, lpszName foundation.BSTR, pcchName *int32) foundation.HRESULT {
+func (self *IGetClusterObjectInfo) GetObjectName(lObjIndex int32, lpszName foundation.BSTR, pcchName *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lObjIndex), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(pcchName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjectType dispatches through IGetClusterObjectInfo's vtable slot 4.
@@ -140,9 +140,9 @@ func (self *IGetClusterResourceInfo) GetResourceHandle(lObjIndex int32) HRESOURC
 }
 
 // GetResourceTypeName dispatches through IGetClusterResourceInfo's vtable slot 4.
-func (self *IGetClusterResourceInfo) GetResourceTypeName(lObjIndex int32, lpszResTypeName foundation.BSTR, pcchResTypeName *int32) foundation.HRESULT {
+func (self *IGetClusterResourceInfo) GetResourceTypeName(lObjIndex int32, lpszResTypeName foundation.BSTR, pcchResTypeName *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lObjIndex), uintptr(unsafe.Pointer(lpszResTypeName)), uintptr(unsafe.Pointer(pcchResTypeName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResourceNetworkName dispatches through IGetClusterResourceInfo's vtable slot 5.
@@ -161,9 +161,9 @@ type IGetClusterUIInfo struct {
 var IID_IGetClusterUIInfo = win32.GUID{Data1: 0x97dede50, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // GetClusterName dispatches through IGetClusterUIInfo's vtable slot 3.
-func (self *IGetClusterUIInfo) GetClusterName(lpszName foundation.BSTR, pcchName *int32) foundation.HRESULT {
+func (self *IGetClusterUIInfo) GetClusterName(lpszName foundation.BSTR, pcchName *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(pcchName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLocale dispatches through IGetClusterUIInfo's vtable slot 4.
@@ -193,21 +193,24 @@ type ISClusApplication struct {
 var IID_ISClusApplication = win32.GUID{Data1: 0xf2e606e6, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_DomainNames dispatches through ISClusApplication's vtable slot 7.
-func (self *ISClusApplication) Get_DomainNames(ppDomains **ISDomainNames) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDomains)))
-	return foundation.HRESULT(r1)
+func (self *ISClusApplication) Get_DomainNames() (*ISDomainNames, error) {
+	var _ppDomains *ISDomainNames
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDomains)))
+	return _ppDomains, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClusterNames dispatches through ISClusApplication's vtable slot 8.
-func (self *ISClusApplication) Get_ClusterNames(bstrDomainName foundation.BSTR, ppClusters **ISClusterNames) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDomainName)), uintptr(unsafe.Pointer(ppClusters)))
-	return foundation.HRESULT(r1)
+func (self *ISClusApplication) Get_ClusterNames(bstrDomainName foundation.BSTR) (*ISClusterNames, error) {
+	var _ppClusters *ISClusterNames
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDomainName)), uintptr(unsafe.Pointer(&_ppClusters)))
+	return _ppClusters, win32.HRESULTError(int32(r1))
 }
 
 // OpenCluster dispatches through ISClusApplication's vtable slot 9.
-func (self *ISClusApplication) OpenCluster(bstrClusterName foundation.BSTR, pCluster **ISCluster) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClusterName)), uintptr(unsafe.Pointer(pCluster)))
-	return foundation.HRESULT(r1)
+func (self *ISClusApplication) OpenCluster(bstrClusterName foundation.BSTR) (*ISCluster, error) {
+	var _pCluster *ISCluster
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClusterName)), uintptr(unsafe.Pointer(&_pCluster)))
+	return _pCluster, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e6072c-2631-11d1-89f1-00a0c90d061e
@@ -219,27 +222,29 @@ type ISClusCryptoKeys struct {
 var IID_ISClusCryptoKeys = win32.GUID{Data1: 0xf2e6072c, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusCryptoKeys's vtable slot 7.
-func (self *ISClusCryptoKeys) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusCryptoKeys) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusCryptoKeys's vtable slot 8.
-func (self *ISClusCryptoKeys) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusCryptoKeys) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusCryptoKeys's vtable slot 9.
-func (self *ISClusCryptoKeys) Refresh() foundation.HRESULT {
+func (self *ISClusCryptoKeys) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddItem dispatches through ISClusCryptoKeys's vtable slot 11.
-func (self *ISClusCryptoKeys) AddItem(bstrCryptoKey foundation.BSTR) foundation.HRESULT {
+func (self *ISClusCryptoKeys) AddItem(bstrCryptoKey foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCryptoKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60724-2631-11d1-89f1-00a0c90d061e
@@ -251,27 +256,31 @@ type ISClusDisk struct {
 var IID_ISClusDisk = win32.GUID{Data1: 0xf2e60724, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Signature dispatches through ISClusDisk's vtable slot 7.
-func (self *ISClusDisk) Get_Signature(plSignature *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSignature)))
-	return foundation.HRESULT(r1)
+func (self *ISClusDisk) Get_Signature() (int32, error) {
+	var _plSignature int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plSignature)))
+	return _plSignature, win32.HRESULTError(int32(r1))
 }
 
 // Get_ScsiAddress dispatches through ISClusDisk's vtable slot 8.
-func (self *ISClusDisk) Get_ScsiAddress(ppScsiAddress **ISClusScsiAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppScsiAddress)))
-	return foundation.HRESULT(r1)
+func (self *ISClusDisk) Get_ScsiAddress() (*ISClusScsiAddress, error) {
+	var _ppScsiAddress *ISClusScsiAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppScsiAddress)))
+	return _ppScsiAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_DiskNumber dispatches through ISClusDisk's vtable slot 9.
-func (self *ISClusDisk) Get_DiskNumber(plDiskNumber *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDiskNumber)))
-	return foundation.HRESULT(r1)
+func (self *ISClusDisk) Get_DiskNumber() (int32, error) {
+	var _plDiskNumber int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plDiskNumber)))
+	return _plDiskNumber, win32.HRESULTError(int32(r1))
 }
 
 // Get_Partitions dispatches through ISClusDisk's vtable slot 10.
-func (self *ISClusDisk) Get_Partitions(ppPartitions **ISClusPartitions) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPartitions)))
-	return foundation.HRESULT(r1)
+func (self *ISClusDisk) Get_Partitions() (*ISClusPartitions, error) {
+	var _ppPartitions *ISClusPartitions
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPartitions)))
+	return _ppPartitions, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60726-2631-11d1-89f1-00a0c90d061e
@@ -283,15 +292,17 @@ type ISClusDisks struct {
 var IID_ISClusDisks = win32.GUID{Data1: 0xf2e60726, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusDisks's vtable slot 7.
-func (self *ISClusDisks) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusDisks) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusDisks's vtable slot 8.
-func (self *ISClusDisks) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusDisks) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606ee-2631-11d1-89f1-00a0c90d061e
@@ -303,51 +314,59 @@ type ISClusNetInterface struct {
 var IID_ISClusNetInterface = win32.GUID{Data1: 0xf2e606ee, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_CommonProperties dispatches through ISClusNetInterface's vtable slot 7.
-func (self *ISClusNetInterface) Get_CommonProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterface) Get_CommonProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusNetInterface's vtable slot 8.
-func (self *ISClusNetInterface) Get_PrivateProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterface) Get_PrivateProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusNetInterface's vtable slot 9.
-func (self *ISClusNetInterface) Get_CommonROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterface) Get_CommonROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusNetInterface's vtable slot 10.
-func (self *ISClusNetInterface) Get_PrivateROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterface) Get_PrivateROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ISClusNetInterface's vtable slot 11.
-func (self *ISClusNetInterface) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterface) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusNetInterface's vtable slot 12.
-func (self *ISClusNetInterface) Get_Handle(phandle *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phandle)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterface) Get_Handle() (uintptr, error) {
+	var _phandle uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
+	return _phandle, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ISClusNetInterface's vtable slot 13.
-func (self *ISClusNetInterface) Get_State(dwState *CLUSTER_NETINTERFACE_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwState)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterface) Get_State() (CLUSTER_NETINTERFACE_STATE, error) {
+	var _dwState CLUSTER_NETINTERFACE_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
+	return _dwState, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusNetInterface's vtable slot 14.
-func (self *ISClusNetInterface) Get_Cluster(ppCluster **ISCluster) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCluster)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterface) Get_Cluster() (*ISCluster, error) {
+	var _ppCluster *ISCluster
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
+	return _ppCluster, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606f0-2631-11d1-89f1-00a0c90d061e
@@ -359,21 +378,23 @@ type ISClusNetInterfaces struct {
 var IID_ISClusNetInterfaces = win32.GUID{Data1: 0xf2e606f0, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusNetInterfaces's vtable slot 7.
-func (self *ISClusNetInterfaces) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterfaces) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNetInterfaces's vtable slot 8.
-func (self *ISClusNetInterfaces) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusNetInterfaces's vtable slot 9.
-func (self *ISClusNetInterfaces) Refresh() foundation.HRESULT {
+func (self *ISClusNetInterfaces) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606f2-2631-11d1-89f1-00a0c90d061e
@@ -385,69 +406,79 @@ type ISClusNetwork struct {
 var IID_ISClusNetwork = win32.GUID{Data1: 0xf2e606f2, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_CommonProperties dispatches through ISClusNetwork's vtable slot 7.
-func (self *ISClusNetwork) Get_CommonProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_CommonProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusNetwork's vtable slot 8.
-func (self *ISClusNetwork) Get_PrivateProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_PrivateProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusNetwork's vtable slot 9.
-func (self *ISClusNetwork) Get_CommonROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_CommonROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusNetwork's vtable slot 10.
-func (self *ISClusNetwork) Get_PrivateROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_PrivateROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusNetwork's vtable slot 11.
-func (self *ISClusNetwork) Get_Handle(phandle *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phandle)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_Handle() (uintptr, error) {
+	var _phandle uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
+	return _phandle, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ISClusNetwork's vtable slot 12.
-func (self *ISClusNetwork) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through ISClusNetwork's vtable slot 13.
-func (self *ISClusNetwork) Put_Name(bstrNetworkName foundation.BSTR) foundation.HRESULT {
+func (self *ISClusNetwork) Put_Name(bstrNetworkName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNetworkName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NetworkID dispatches through ISClusNetwork's vtable slot 14.
-func (self *ISClusNetwork) Get_NetworkID(pbstrNetworkID *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNetworkID)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_NetworkID() (foundation.BSTR, error) {
+	var _pbstrNetworkID foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNetworkID)))
+	return _pbstrNetworkID, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ISClusNetwork's vtable slot 15.
-func (self *ISClusNetwork) Get_State(dwState *CLUSTER_NETWORK_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwState)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_State() (CLUSTER_NETWORK_STATE, error) {
+	var _dwState CLUSTER_NETWORK_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
+	return _dwState, win32.HRESULTError(int32(r1))
 }
 
 // Get_NetInterfaces dispatches through ISClusNetwork's vtable slot 16.
-func (self *ISClusNetwork) Get_NetInterfaces(ppClusNetInterfaces **ISClusNetworkNetInterfaces) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClusNetInterfaces)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_NetInterfaces() (*ISClusNetworkNetInterfaces, error) {
+	var _ppClusNetInterfaces *ISClusNetworkNetInterfaces
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusNetInterfaces)))
+	return _ppClusNetInterfaces, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusNetwork's vtable slot 17.
-func (self *ISClusNetwork) Get_Cluster(ppCluster **ISCluster) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCluster)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetwork) Get_Cluster() (*ISCluster, error) {
+	var _ppCluster *ISCluster
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
+	return _ppCluster, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606f6-2631-11d1-89f1-00a0c90d061e
@@ -459,21 +490,23 @@ type ISClusNetworkNetInterfaces struct {
 var IID_ISClusNetworkNetInterfaces = win32.GUID{Data1: 0xf2e606f6, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusNetworkNetInterfaces's vtable slot 7.
-func (self *ISClusNetworkNetInterfaces) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetworkNetInterfaces) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNetworkNetInterfaces's vtable slot 8.
-func (self *ISClusNetworkNetInterfaces) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetworkNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusNetworkNetInterfaces's vtable slot 9.
-func (self *ISClusNetworkNetInterfaces) Refresh() foundation.HRESULT {
+func (self *ISClusNetworkNetInterfaces) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606f4-2631-11d1-89f1-00a0c90d061e
@@ -485,21 +518,23 @@ type ISClusNetworks struct {
 var IID_ISClusNetworks = win32.GUID{Data1: 0xf2e606f4, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusNetworks's vtable slot 7.
-func (self *ISClusNetworks) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetworks) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNetworks's vtable slot 8.
-func (self *ISClusNetworks) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNetworks) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusNetworks's vtable slot 9.
-func (self *ISClusNetworks) Refresh() foundation.HRESULT {
+func (self *ISClusNetworks) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606f8-2631-11d1-89f1-00a0c90d061e
@@ -511,87 +546,98 @@ type ISClusNode struct {
 var IID_ISClusNode = win32.GUID{Data1: 0xf2e606f8, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_CommonProperties dispatches through ISClusNode's vtable slot 7.
-func (self *ISClusNode) Get_CommonProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_CommonProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusNode's vtable slot 8.
-func (self *ISClusNode) Get_PrivateProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_PrivateProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusNode's vtable slot 9.
-func (self *ISClusNode) Get_CommonROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_CommonROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusNode's vtable slot 10.
-func (self *ISClusNode) Get_PrivateROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_PrivateROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ISClusNode's vtable slot 11.
-func (self *ISClusNode) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusNode's vtable slot 12.
-func (self *ISClusNode) Get_Handle(phandle *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phandle)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_Handle() (uintptr, error) {
+	var _phandle uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
+	return _phandle, win32.HRESULTError(int32(r1))
 }
 
 // Get_NodeID dispatches through ISClusNode's vtable slot 13.
-func (self *ISClusNode) Get_NodeID(pbstrNodeID *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNodeID)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_NodeID() (foundation.BSTR, error) {
+	var _pbstrNodeID foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNodeID)))
+	return _pbstrNodeID, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ISClusNode's vtable slot 14.
-func (self *ISClusNode) Get_State(dwState *CLUSTER_NODE_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwState)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_State() (CLUSTER_NODE_STATE, error) {
+	var _dwState CLUSTER_NODE_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
+	return _dwState, win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through ISClusNode's vtable slot 15.
-func (self *ISClusNode) Pause() foundation.HRESULT {
+func (self *ISClusNode) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through ISClusNode's vtable slot 16.
-func (self *ISClusNode) Resume() foundation.HRESULT {
+func (self *ISClusNode) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Evict dispatches through ISClusNode's vtable slot 17.
-func (self *ISClusNode) Evict() foundation.HRESULT {
+func (self *ISClusNode) Evict() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ResourceGroups dispatches through ISClusNode's vtable slot 18.
-func (self *ISClusNode) Get_ResourceGroups(ppResourceGroups **ISClusResGroups) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResourceGroups)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_ResourceGroups() (*ISClusResGroups, error) {
+	var _ppResourceGroups *ISClusResGroups
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResourceGroups)))
+	return _ppResourceGroups, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusNode's vtable slot 19.
-func (self *ISClusNode) Get_Cluster(ppCluster **ISCluster) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCluster)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_Cluster() (*ISCluster, error) {
+	var _ppCluster *ISCluster
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
+	return _ppCluster, win32.HRESULTError(int32(r1))
 }
 
 // Get_NetInterfaces dispatches through ISClusNode's vtable slot 20.
-func (self *ISClusNode) Get_NetInterfaces(ppClusNetInterfaces **ISClusNodeNetInterfaces) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClusNetInterfaces)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNode) Get_NetInterfaces() (*ISClusNodeNetInterfaces, error) {
+	var _ppClusNetInterfaces *ISClusNodeNetInterfaces
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusNetInterfaces)))
+	return _ppClusNetInterfaces, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606fc-2631-11d1-89f1-00a0c90d061e
@@ -603,21 +649,23 @@ type ISClusNodeNetInterfaces struct {
 var IID_ISClusNodeNetInterfaces = win32.GUID{Data1: 0xf2e606fc, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusNodeNetInterfaces's vtable slot 7.
-func (self *ISClusNodeNetInterfaces) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNodeNetInterfaces) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNodeNetInterfaces's vtable slot 8.
-func (self *ISClusNodeNetInterfaces) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNodeNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusNodeNetInterfaces's vtable slot 9.
-func (self *ISClusNodeNetInterfaces) Refresh() foundation.HRESULT {
+func (self *ISClusNodeNetInterfaces) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606fa-2631-11d1-89f1-00a0c90d061e
@@ -629,21 +677,23 @@ type ISClusNodes struct {
 var IID_ISClusNodes = win32.GUID{Data1: 0xf2e606fa, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusNodes's vtable slot 7.
-func (self *ISClusNodes) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNodes) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusNodes's vtable slot 8.
-func (self *ISClusNodes) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusNodes's vtable slot 9.
-func (self *ISClusNodes) Refresh() foundation.HRESULT {
+func (self *ISClusNodes) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60720-2631-11d1-89f1-00a0c90d061e
@@ -655,45 +705,52 @@ type ISClusPartition struct {
 var IID_ISClusPartition = win32.GUID{Data1: 0xf2e60720, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Flags dispatches through ISClusPartition's vtable slot 7.
-func (self *ISClusPartition) Get_Flags(plFlags *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFlags)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartition) Get_Flags() (int32, error) {
+	var _plFlags int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFlags)))
+	return _plFlags, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeviceName dispatches through ISClusPartition's vtable slot 8.
-func (self *ISClusPartition) Get_DeviceName(pbstrDeviceName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDeviceName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartition) Get_DeviceName() (foundation.BSTR, error) {
+	var _pbstrDeviceName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDeviceName)))
+	return _pbstrDeviceName, win32.HRESULTError(int32(r1))
 }
 
 // Get_VolumeLabel dispatches through ISClusPartition's vtable slot 9.
-func (self *ISClusPartition) Get_VolumeLabel(pbstrVolumeLabel *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrVolumeLabel)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartition) Get_VolumeLabel() (foundation.BSTR, error) {
+	var _pbstrVolumeLabel foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrVolumeLabel)))
+	return _pbstrVolumeLabel, win32.HRESULTError(int32(r1))
 }
 
 // Get_SerialNumber dispatches through ISClusPartition's vtable slot 10.
-func (self *ISClusPartition) Get_SerialNumber(plSerialNumber *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSerialNumber)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartition) Get_SerialNumber() (int32, error) {
+	var _plSerialNumber int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plSerialNumber)))
+	return _plSerialNumber, win32.HRESULTError(int32(r1))
 }
 
 // Get_MaximumComponentLength dispatches through ISClusPartition's vtable slot 11.
-func (self *ISClusPartition) Get_MaximumComponentLength(plMaximumComponentLength *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaximumComponentLength)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartition) Get_MaximumComponentLength() (int32, error) {
+	var _plMaximumComponentLength int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMaximumComponentLength)))
+	return _plMaximumComponentLength, win32.HRESULTError(int32(r1))
 }
 
 // Get_FileSystemFlags dispatches through ISClusPartition's vtable slot 12.
-func (self *ISClusPartition) Get_FileSystemFlags(plFileSystemFlags *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFileSystemFlags)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartition) Get_FileSystemFlags() (int32, error) {
+	var _plFileSystemFlags int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFileSystemFlags)))
+	return _plFileSystemFlags, win32.HRESULTError(int32(r1))
 }
 
 // Get_FileSystem dispatches through ISClusPartition's vtable slot 13.
-func (self *ISClusPartition) Get_FileSystem(pbstrFileSystem *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFileSystem)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartition) Get_FileSystem() (foundation.BSTR, error) {
+	var _pbstrFileSystem foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrFileSystem)))
+	return _pbstrFileSystem, win32.HRESULTError(int32(r1))
 }
 
 // ISClusPartitionEx: https://learn.microsoft.com/windows/win32/api/msclus/nn-msclus-iscluspartitionex
@@ -706,33 +763,38 @@ type ISClusPartitionEx struct {
 var IID_ISClusPartitionEx = win32.GUID{Data1: 0x8802d4fe, Data2: 0xb32e, Data3: 0x4ad1, Data4: [8]byte{0x9d, 0xbd, 0x64, 0xf1, 0x8e, 0x11, 0x66, 0xce}}
 
 // Get_TotalSize dispatches through ISClusPartitionEx's vtable slot 14.
-func (self *ISClusPartitionEx) Get_TotalSize(plTotalSize *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTotalSize)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartitionEx) Get_TotalSize() (int32, error) {
+	var _plTotalSize int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plTotalSize)))
+	return _plTotalSize, win32.HRESULTError(int32(r1))
 }
 
 // Get_FreeSpace dispatches through ISClusPartitionEx's vtable slot 15.
-func (self *ISClusPartitionEx) Get_FreeSpace(plFreeSpace *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFreeSpace)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartitionEx) Get_FreeSpace() (int32, error) {
+	var _plFreeSpace int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFreeSpace)))
+	return _plFreeSpace, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeviceNumber dispatches through ISClusPartitionEx's vtable slot 16.
-func (self *ISClusPartitionEx) Get_DeviceNumber(plDeviceNumber *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDeviceNumber)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartitionEx) Get_DeviceNumber() (int32, error) {
+	var _plDeviceNumber int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plDeviceNumber)))
+	return _plDeviceNumber, win32.HRESULTError(int32(r1))
 }
 
 // Get_PartitionNumber dispatches through ISClusPartitionEx's vtable slot 17.
-func (self *ISClusPartitionEx) Get_PartitionNumber(plPartitionNumber *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPartitionNumber)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartitionEx) Get_PartitionNumber() (int32, error) {
+	var _plPartitionNumber int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plPartitionNumber)))
+	return _plPartitionNumber, win32.HRESULTError(int32(r1))
 }
 
 // Get_VolumeGuid dispatches through ISClusPartitionEx's vtable slot 18.
-func (self *ISClusPartitionEx) Get_VolumeGuid(pbstrVolumeGuid *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrVolumeGuid)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartitionEx) Get_VolumeGuid() (foundation.BSTR, error) {
+	var _pbstrVolumeGuid foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrVolumeGuid)))
+	return _pbstrVolumeGuid, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60722-2631-11d1-89f1-00a0c90d061e
@@ -744,15 +806,17 @@ type ISClusPartitions struct {
 var IID_ISClusPartitions = win32.GUID{Data1: 0xf2e60722, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusPartitions's vtable slot 7.
-func (self *ISClusPartitions) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartitions) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusPartitions's vtable slot 8.
-func (self *ISClusPartitions) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPartitions) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60700-2631-11d1-89f1-00a0c90d061e
@@ -764,51 +828,57 @@ type ISClusProperties struct {
 var IID_ISClusProperties = win32.GUID{Data1: 0xf2e60700, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusProperties's vtable slot 7.
-func (self *ISClusProperties) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperties) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusProperties's vtable slot 8.
-func (self *ISClusProperties) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperties) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusProperties's vtable slot 9.
-func (self *ISClusProperties) Refresh() foundation.HRESULT {
+func (self *ISClusProperties) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveChanges dispatches through ISClusProperties's vtable slot 13.
-func (self *ISClusProperties) SaveChanges(pvarStatusCode *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISClusProperties) SaveChanges(pvarStatusCode *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarStatusCode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReadOnly dispatches through ISClusProperties's vtable slot 14.
-func (self *ISClusProperties) Get_ReadOnly(pvarReadOnly *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarReadOnly)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperties) Get_ReadOnly() (systemvariant.VARIANT, error) {
+	var _pvarReadOnly systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarReadOnly)))
+	return _pvarReadOnly, win32.HRESULTError(int32(r1))
 }
 
 // Get_Private dispatches through ISClusProperties's vtable slot 15.
-func (self *ISClusProperties) Get_Private(pvarPrivate *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarPrivate)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperties) Get_Private() (systemvariant.VARIANT, error) {
+	var _pvarPrivate systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarPrivate)))
+	return _pvarPrivate, win32.HRESULTError(int32(r1))
 }
 
 // Get_Common dispatches through ISClusProperties's vtable slot 16.
-func (self *ISClusProperties) Get_Common(pvarCommon *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarCommon)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperties) Get_Common() (systemvariant.VARIANT, error) {
+	var _pvarCommon systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarCommon)))
+	return _pvarCommon, win32.HRESULTError(int32(r1))
 }
 
 // Get_Modified dispatches through ISClusProperties's vtable slot 17.
-func (self *ISClusProperties) Get_Modified(pvarModified *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarModified)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperties) Get_Modified() (systemvariant.VARIANT, error) {
+	var _pvarModified systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarModified)))
+	return _pvarModified, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606fe-2631-11d1-89f1-00a0c90d061e
@@ -820,87 +890,98 @@ type ISClusProperty struct {
 var IID_ISClusProperty = win32.GUID{Data1: 0xf2e606fe, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Name dispatches through ISClusProperty's vtable slot 7.
-func (self *ISClusProperty) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_Length dispatches through ISClusProperty's vtable slot 8.
-func (self *ISClusProperty) Get_Length(pLength *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLength)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_Length() (int32, error) {
+	var _pLength int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pLength)))
+	return _pLength, win32.HRESULTError(int32(r1))
 }
 
 // Get_ValueCount dispatches through ISClusProperty's vtable slot 9.
-func (self *ISClusProperty) Get_ValueCount(pCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_ValueCount() (int32, error) {
+	var _pCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
+	return _pCount, win32.HRESULTError(int32(r1))
 }
 
 // Get_Values dispatches through ISClusProperty's vtable slot 10.
-func (self *ISClusProperty) Get_Values(ppClusterPropertyValues **ISClusPropertyValues) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClusterPropertyValues)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_Values() (*ISClusPropertyValues, error) {
+	var _ppClusterPropertyValues *ISClusPropertyValues
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterPropertyValues)))
+	return _ppClusterPropertyValues, win32.HRESULTError(int32(r1))
 }
 
 // Get_Value dispatches through ISClusProperty's vtable slot 11.
-func (self *ISClusProperty) Get_Value(pvarValue *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarValue)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_Value() (systemvariant.VARIANT, error) {
+	var _pvarValue systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarValue)))
+	return _pvarValue, win32.HRESULTError(int32(r1))
 }
 
 // Get_Type dispatches through ISClusProperty's vtable slot 13.
-func (self *ISClusProperty) Get_Type(pType *CLUSTER_PROPERTY_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_Type() (CLUSTER_PROPERTY_TYPE, error) {
+	var _pType CLUSTER_PROPERTY_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pType)))
+	return _pType, win32.HRESULTError(int32(r1))
 }
 
 // Put_Type dispatches through ISClusProperty's vtable slot 14.
-func (self *ISClusProperty) Put_Type(Type CLUSTER_PROPERTY_TYPE) foundation.HRESULT {
+func (self *ISClusProperty) Put_Type(Type CLUSTER_PROPERTY_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Type))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Format dispatches through ISClusProperty's vtable slot 15.
-func (self *ISClusProperty) Get_Format(pFormat *CLUSTER_PROPERTY_FORMAT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_Format() (CLUSTER_PROPERTY_FORMAT, error) {
+	var _pFormat CLUSTER_PROPERTY_FORMAT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFormat)))
+	return _pFormat, win32.HRESULTError(int32(r1))
 }
 
 // Put_Format dispatches through ISClusProperty's vtable slot 16.
-func (self *ISClusProperty) Put_Format(Format CLUSTER_PROPERTY_FORMAT) foundation.HRESULT {
+func (self *ISClusProperty) Put_Format(Format CLUSTER_PROPERTY_FORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Format))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReadOnly dispatches through ISClusProperty's vtable slot 17.
-func (self *ISClusProperty) Get_ReadOnly(pvarReadOnly *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarReadOnly)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_ReadOnly() (systemvariant.VARIANT, error) {
+	var _pvarReadOnly systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarReadOnly)))
+	return _pvarReadOnly, win32.HRESULTError(int32(r1))
 }
 
 // Get_Private dispatches through ISClusProperty's vtable slot 18.
-func (self *ISClusProperty) Get_Private(pvarPrivate *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarPrivate)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_Private() (systemvariant.VARIANT, error) {
+	var _pvarPrivate systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarPrivate)))
+	return _pvarPrivate, win32.HRESULTError(int32(r1))
 }
 
 // Get_Common dispatches through ISClusProperty's vtable slot 19.
-func (self *ISClusProperty) Get_Common(pvarCommon *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarCommon)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_Common() (systemvariant.VARIANT, error) {
+	var _pvarCommon systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarCommon)))
+	return _pvarCommon, win32.HRESULTError(int32(r1))
 }
 
 // Get_Modified dispatches through ISClusProperty's vtable slot 20.
-func (self *ISClusProperty) Get_Modified(pvarModified *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarModified)))
-	return foundation.HRESULT(r1)
+func (self *ISClusProperty) Get_Modified() (systemvariant.VARIANT, error) {
+	var _pvarModified systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarModified)))
+	return _pvarModified, win32.HRESULTError(int32(r1))
 }
 
 // UseDefaultValue dispatches through ISClusProperty's vtable slot 21.
-func (self *ISClusProperty) UseDefaultValue() foundation.HRESULT {
+func (self *ISClusProperty) UseDefaultValue() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e6071a-2631-11d1-89f1-00a0c90d061e
@@ -912,51 +993,57 @@ type ISClusPropertyValue struct {
 var IID_ISClusPropertyValue = win32.GUID{Data1: 0xf2e6071a, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Value dispatches through ISClusPropertyValue's vtable slot 7.
-func (self *ISClusPropertyValue) Get_Value(pvarValue *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarValue)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValue) Get_Value() (systemvariant.VARIANT, error) {
+	var _pvarValue systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarValue)))
+	return _pvarValue, win32.HRESULTError(int32(r1))
 }
 
 // Get_Type dispatches through ISClusPropertyValue's vtable slot 9.
-func (self *ISClusPropertyValue) Get_Type(pType *CLUSTER_PROPERTY_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValue) Get_Type() (CLUSTER_PROPERTY_TYPE, error) {
+	var _pType CLUSTER_PROPERTY_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pType)))
+	return _pType, win32.HRESULTError(int32(r1))
 }
 
 // Put_Type dispatches through ISClusPropertyValue's vtable slot 10.
-func (self *ISClusPropertyValue) Put_Type(Type CLUSTER_PROPERTY_TYPE) foundation.HRESULT {
+func (self *ISClusPropertyValue) Put_Type(Type CLUSTER_PROPERTY_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Type))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Format dispatches through ISClusPropertyValue's vtable slot 11.
-func (self *ISClusPropertyValue) Get_Format(pFormat *CLUSTER_PROPERTY_FORMAT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValue) Get_Format() (CLUSTER_PROPERTY_FORMAT, error) {
+	var _pFormat CLUSTER_PROPERTY_FORMAT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFormat)))
+	return _pFormat, win32.HRESULTError(int32(r1))
 }
 
 // Put_Format dispatches through ISClusPropertyValue's vtable slot 12.
-func (self *ISClusPropertyValue) Put_Format(Format CLUSTER_PROPERTY_FORMAT) foundation.HRESULT {
+func (self *ISClusPropertyValue) Put_Format(Format CLUSTER_PROPERTY_FORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Format))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Length dispatches through ISClusPropertyValue's vtable slot 13.
-func (self *ISClusPropertyValue) Get_Length(pLength *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLength)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValue) Get_Length() (int32, error) {
+	var _pLength int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pLength)))
+	return _pLength, win32.HRESULTError(int32(r1))
 }
 
 // Get_DataCount dispatches through ISClusPropertyValue's vtable slot 14.
-func (self *ISClusPropertyValue) Get_DataCount(pCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValue) Get_DataCount() (int32, error) {
+	var _pCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
+	return _pCount, win32.HRESULTError(int32(r1))
 }
 
 // Get_Data dispatches through ISClusPropertyValue's vtable slot 15.
-func (self *ISClusPropertyValue) Get_Data(ppClusterPropertyValueData **ISClusPropertyValueData) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClusterPropertyValueData)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValue) Get_Data() (*ISClusPropertyValueData, error) {
+	var _ppClusterPropertyValueData *ISClusPropertyValueData
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterPropertyValueData)))
+	return _ppClusterPropertyValueData, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e6071e-2631-11d1-89f1-00a0c90d061e
@@ -968,15 +1055,17 @@ type ISClusPropertyValueData struct {
 var IID_ISClusPropertyValueData = win32.GUID{Data1: 0xf2e6071e, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusPropertyValueData's vtable slot 7.
-func (self *ISClusPropertyValueData) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValueData) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusPropertyValueData's vtable slot 8.
-func (self *ISClusPropertyValueData) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValueData) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e6071c-2631-11d1-89f1-00a0c90d061e
@@ -988,15 +1077,17 @@ type ISClusPropertyValues struct {
 var IID_ISClusPropertyValues = win32.GUID{Data1: 0xf2e6071c, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusPropertyValues's vtable slot 7.
-func (self *ISClusPropertyValues) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValues) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusPropertyValues's vtable slot 8.
-func (self *ISClusPropertyValues) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusPropertyValues) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60702-2631-11d1-89f1-00a0c90d061e
@@ -1008,9 +1099,10 @@ type ISClusRefObject struct {
 var IID_ISClusRefObject = win32.GUID{Data1: 0xf2e60702, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Handle dispatches through ISClusRefObject's vtable slot 7.
-func (self *ISClusRefObject) Get_Handle(phandle *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phandle)))
-	return foundation.HRESULT(r1)
+func (self *ISClusRefObject) Get_Handle() (uintptr, error) {
+	var _phandle uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
+	return _phandle, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e6072a-2631-11d1-89f1-00a0c90d061e
@@ -1022,27 +1114,29 @@ type ISClusRegistryKeys struct {
 var IID_ISClusRegistryKeys = win32.GUID{Data1: 0xf2e6072a, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusRegistryKeys's vtable slot 7.
-func (self *ISClusRegistryKeys) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusRegistryKeys) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusRegistryKeys's vtable slot 8.
-func (self *ISClusRegistryKeys) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusRegistryKeys) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusRegistryKeys's vtable slot 9.
-func (self *ISClusRegistryKeys) Refresh() foundation.HRESULT {
+func (self *ISClusRegistryKeys) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddItem dispatches through ISClusRegistryKeys's vtable slot 11.
-func (self *ISClusRegistryKeys) AddItem(bstrRegistryKey foundation.BSTR) foundation.HRESULT {
+func (self *ISClusRegistryKeys) AddItem(bstrRegistryKey foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRegistryKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60704-2631-11d1-89f1-00a0c90d061e
@@ -1054,33 +1148,36 @@ type ISClusResDependencies struct {
 var IID_ISClusResDependencies = win32.GUID{Data1: 0xf2e60704, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResDependencies's vtable slot 7.
-func (self *ISClusResDependencies) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResDependencies) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResDependencies's vtable slot 8.
-func (self *ISClusResDependencies) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResDependencies) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResDependencies's vtable slot 9.
-func (self *ISClusResDependencies) Refresh() foundation.HRESULT {
+func (self *ISClusResDependencies) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateItem dispatches through ISClusResDependencies's vtable slot 11.
-func (self *ISClusResDependencies) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource **ISClusResource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppClusterResource)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResDependencies) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
+	var _ppClusterResource *ISClusResource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
+	return _ppClusterResource, win32.HRESULTError(int32(r1))
 }
 
 // AddItem dispatches through ISClusResDependencies's vtable slot 13.
-func (self *ISClusResDependencies) AddItem(pResource *ISClusResource) foundation.HRESULT {
+func (self *ISClusResDependencies) AddItem(pResource *ISClusResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e6072e-2631-11d1-89f1-00a0c90d061e
@@ -1092,33 +1189,36 @@ type ISClusResDependents struct {
 var IID_ISClusResDependents = win32.GUID{Data1: 0xf2e6072e, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResDependents's vtable slot 7.
-func (self *ISClusResDependents) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResDependents) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResDependents's vtable slot 8.
-func (self *ISClusResDependents) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResDependents) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResDependents's vtable slot 9.
-func (self *ISClusResDependents) Refresh() foundation.HRESULT {
+func (self *ISClusResDependents) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateItem dispatches through ISClusResDependents's vtable slot 11.
-func (self *ISClusResDependents) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource **ISClusResource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppClusterResource)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResDependents) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
+	var _ppClusterResource *ISClusResource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
+	return _ppClusterResource, win32.HRESULTError(int32(r1))
 }
 
 // AddItem dispatches through ISClusResDependents's vtable slot 13.
-func (self *ISClusResDependents) AddItem(pResource *ISClusResource) foundation.HRESULT {
+func (self *ISClusResDependents) AddItem(pResource *ISClusResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60706-2631-11d1-89f1-00a0c90d061e
@@ -1130,81 +1230,92 @@ type ISClusResGroup struct {
 var IID_ISClusResGroup = win32.GUID{Data1: 0xf2e60706, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_CommonProperties dispatches through ISClusResGroup's vtable slot 7.
-func (self *ISClusResGroup) Get_CommonProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_CommonProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusResGroup's vtable slot 8.
-func (self *ISClusResGroup) Get_PrivateProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_PrivateProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusResGroup's vtable slot 9.
-func (self *ISClusResGroup) Get_CommonROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_CommonROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusResGroup's vtable slot 10.
-func (self *ISClusResGroup) Get_PrivateROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_PrivateROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusResGroup's vtable slot 11.
-func (self *ISClusResGroup) Get_Handle(phandle *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phandle)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_Handle() (uintptr, error) {
+	var _phandle uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
+	return _phandle, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ISClusResGroup's vtable slot 12.
-func (self *ISClusResGroup) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through ISClusResGroup's vtable slot 13.
-func (self *ISClusResGroup) Put_Name(bstrGroupName foundation.BSTR) foundation.HRESULT {
+func (self *ISClusResGroup) Put_Name(bstrGroupName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ISClusResGroup's vtable slot 14.
-func (self *ISClusResGroup) Get_State(dwState *CLUSTER_GROUP_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwState)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_State() (CLUSTER_GROUP_STATE, error) {
+	var _dwState CLUSTER_GROUP_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
+	return _dwState, win32.HRESULTError(int32(r1))
 }
 
 // Get_OwnerNode dispatches through ISClusResGroup's vtable slot 15.
-func (self *ISClusResGroup) Get_OwnerNode(ppOwnerNode **ISClusNode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOwnerNode)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_OwnerNode() (*ISClusNode, error) {
+	var _ppOwnerNode *ISClusNode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNode)))
+	return _ppOwnerNode, win32.HRESULTError(int32(r1))
 }
 
 // Get_Resources dispatches through ISClusResGroup's vtable slot 16.
-func (self *ISClusResGroup) Get_Resources(ppClusterGroupResources **ISClusResGroupResources) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClusterGroupResources)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_Resources() (*ISClusResGroupResources, error) {
+	var _ppClusterGroupResources *ISClusResGroupResources
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterGroupResources)))
+	return _ppClusterGroupResources, win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredOwnerNodes dispatches through ISClusResGroup's vtable slot 17.
-func (self *ISClusResGroup) Get_PreferredOwnerNodes(ppOwnerNodes **ISClusResGroupPreferredOwnerNodes) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOwnerNodes)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_PreferredOwnerNodes() (*ISClusResGroupPreferredOwnerNodes, error) {
+	var _ppOwnerNodes *ISClusResGroupPreferredOwnerNodes
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNodes)))
+	return _ppOwnerNodes, win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through ISClusResGroup's vtable slot 18.
-func (self *ISClusResGroup) Delete() foundation.HRESULT {
+func (self *ISClusResGroup) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusResGroup's vtable slot 22.
-func (self *ISClusResGroup) Get_Cluster(ppCluster **ISCluster) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCluster)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroup) Get_Cluster() (*ISCluster, error) {
+	var _ppCluster *ISCluster
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
+	return _ppCluster, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606e8-2631-11d1-89f1-00a0c90d061e
@@ -1216,45 +1327,48 @@ type ISClusResGroupPreferredOwnerNodes struct {
 var IID_ISClusResGroupPreferredOwnerNodes = win32.GUID{Data1: 0xf2e606e8, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 7.
-func (self *ISClusResGroupPreferredOwnerNodes) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroupPreferredOwnerNodes) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 8.
-func (self *ISClusResGroupPreferredOwnerNodes) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroupPreferredOwnerNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 9.
-func (self *ISClusResGroupPreferredOwnerNodes) Refresh() foundation.HRESULT {
+func (self *ISClusResGroupPreferredOwnerNodes) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertItem dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 11.
-func (self *ISClusResGroupPreferredOwnerNodes) InsertItem(pNode *ISClusNode, nPosition int32) foundation.HRESULT {
+func (self *ISClusResGroupPreferredOwnerNodes) InsertItem(pNode *ISClusNode, nPosition int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)), uintptr(nPosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Modified dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 13.
-func (self *ISClusResGroupPreferredOwnerNodes) Get_Modified(pvarModified *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarModified)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroupPreferredOwnerNodes) Get_Modified() (systemvariant.VARIANT, error) {
+	var _pvarModified systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarModified)))
+	return _pvarModified, win32.HRESULTError(int32(r1))
 }
 
 // SaveChanges dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 14.
-func (self *ISClusResGroupPreferredOwnerNodes) SaveChanges() foundation.HRESULT {
+func (self *ISClusResGroupPreferredOwnerNodes) SaveChanges() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddItem dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 15.
-func (self *ISClusResGroupPreferredOwnerNodes) AddItem(pNode *ISClusNode) foundation.HRESULT {
+func (self *ISClusResGroupPreferredOwnerNodes) AddItem(pNode *ISClusNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606ea-2631-11d1-89f1-00a0c90d061e
@@ -1266,27 +1380,30 @@ type ISClusResGroupResources struct {
 var IID_ISClusResGroupResources = win32.GUID{Data1: 0xf2e606ea, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResGroupResources's vtable slot 7.
-func (self *ISClusResGroupResources) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroupResources) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResGroupResources's vtable slot 8.
-func (self *ISClusResGroupResources) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroupResources) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResGroupResources's vtable slot 9.
-func (self *ISClusResGroupResources) Refresh() foundation.HRESULT {
+func (self *ISClusResGroupResources) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateItem dispatches through ISClusResGroupResources's vtable slot 11.
-func (self *ISClusResGroupResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource **ISClusResource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppClusterResource)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroupResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
+	var _ppClusterResource *ISClusResource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
+	return _ppClusterResource, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60708-2631-11d1-89f1-00a0c90d061e
@@ -1298,27 +1415,30 @@ type ISClusResGroups struct {
 var IID_ISClusResGroups = win32.GUID{Data1: 0xf2e60708, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResGroups's vtable slot 7.
-func (self *ISClusResGroups) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroups) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResGroups's vtable slot 8.
-func (self *ISClusResGroups) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroups) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResGroups's vtable slot 9.
-func (self *ISClusResGroups) Refresh() foundation.HRESULT {
+func (self *ISClusResGroups) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateItem dispatches through ISClusResGroups's vtable slot 11.
-func (self *ISClusResGroups) CreateItem(bstrResourceGroupName foundation.BSTR, ppResourceGroup **ISClusResGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceGroupName)), uintptr(unsafe.Pointer(ppResourceGroup)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResGroups) CreateItem(bstrResourceGroupName foundation.BSTR) (*ISClusResGroup, error) {
+	var _ppResourceGroup *ISClusResGroup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceGroupName)), uintptr(unsafe.Pointer(&_ppResourceGroup)))
+	return _ppResourceGroup, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e6070e-2631-11d1-89f1-00a0c90d061e
@@ -1330,33 +1450,36 @@ type ISClusResPossibleOwnerNodes struct {
 var IID_ISClusResPossibleOwnerNodes = win32.GUID{Data1: 0xf2e6070e, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResPossibleOwnerNodes's vtable slot 7.
-func (self *ISClusResPossibleOwnerNodes) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResPossibleOwnerNodes) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResPossibleOwnerNodes's vtable slot 8.
-func (self *ISClusResPossibleOwnerNodes) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResPossibleOwnerNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResPossibleOwnerNodes's vtable slot 9.
-func (self *ISClusResPossibleOwnerNodes) Refresh() foundation.HRESULT {
+func (self *ISClusResPossibleOwnerNodes) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddItem dispatches through ISClusResPossibleOwnerNodes's vtable slot 11.
-func (self *ISClusResPossibleOwnerNodes) AddItem(pNode *ISClusNode) foundation.HRESULT {
+func (self *ISClusResPossibleOwnerNodes) AddItem(pNode *ISClusNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Modified dispatches through ISClusResPossibleOwnerNodes's vtable slot 13.
-func (self *ISClusResPossibleOwnerNodes) Get_Modified(pvarModified *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarModified)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResPossibleOwnerNodes) Get_Modified() (systemvariant.VARIANT, error) {
+	var _pvarModified systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarModified)))
+	return _pvarModified, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60710-2631-11d1-89f1-00a0c90d061e
@@ -1368,63 +1491,72 @@ type ISClusResType struct {
 var IID_ISClusResType = win32.GUID{Data1: 0xf2e60710, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_CommonProperties dispatches through ISClusResType's vtable slot 7.
-func (self *ISClusResType) Get_CommonProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResType) Get_CommonProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusResType's vtable slot 8.
-func (self *ISClusResType) Get_PrivateProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResType) Get_PrivateProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusResType's vtable slot 9.
-func (self *ISClusResType) Get_CommonROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResType) Get_CommonROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusResType's vtable slot 10.
-func (self *ISClusResType) Get_PrivateROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResType) Get_PrivateROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ISClusResType's vtable slot 11.
-func (self *ISClusResType) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResType) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through ISClusResType's vtable slot 12.
-func (self *ISClusResType) Delete() foundation.HRESULT {
+func (self *ISClusResType) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusResType's vtable slot 13.
-func (self *ISClusResType) Get_Cluster(ppCluster **ISCluster) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCluster)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResType) Get_Cluster() (*ISCluster, error) {
+	var _ppCluster *ISCluster
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
+	return _ppCluster, win32.HRESULTError(int32(r1))
 }
 
 // Get_Resources dispatches through ISClusResType's vtable slot 14.
-func (self *ISClusResType) Get_Resources(ppClusterResTypeResources **ISClusResTypeResources) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClusterResTypeResources)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResType) Get_Resources() (*ISClusResTypeResources, error) {
+	var _ppClusterResTypeResources *ISClusResTypeResources
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterResTypeResources)))
+	return _ppClusterResTypeResources, win32.HRESULTError(int32(r1))
 }
 
 // Get_PossibleOwnerNodes dispatches through ISClusResType's vtable slot 15.
-func (self *ISClusResType) Get_PossibleOwnerNodes(ppOwnerNodes **ISClusResTypePossibleOwnerNodes) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOwnerNodes)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResType) Get_PossibleOwnerNodes() (*ISClusResTypePossibleOwnerNodes, error) {
+	var _ppOwnerNodes *ISClusResTypePossibleOwnerNodes
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNodes)))
+	return _ppOwnerNodes, win32.HRESULTError(int32(r1))
 }
 
 // Get_AvailableDisks dispatches through ISClusResType's vtable slot 16.
-func (self *ISClusResType) Get_AvailableDisks(ppAvailableDisks **ISClusDisks) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAvailableDisks)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResType) Get_AvailableDisks() (*ISClusDisks, error) {
+	var _ppAvailableDisks *ISClusDisks
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAvailableDisks)))
+	return _ppAvailableDisks, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60718-2631-11d1-89f1-00a0c90d061e
@@ -1436,21 +1568,23 @@ type ISClusResTypePossibleOwnerNodes struct {
 var IID_ISClusResTypePossibleOwnerNodes = win32.GUID{Data1: 0xf2e60718, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResTypePossibleOwnerNodes's vtable slot 7.
-func (self *ISClusResTypePossibleOwnerNodes) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResTypePossibleOwnerNodes) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResTypePossibleOwnerNodes's vtable slot 8.
-func (self *ISClusResTypePossibleOwnerNodes) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResTypePossibleOwnerNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResTypePossibleOwnerNodes's vtable slot 9.
-func (self *ISClusResTypePossibleOwnerNodes) Refresh() foundation.HRESULT {
+func (self *ISClusResTypePossibleOwnerNodes) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60714-2631-11d1-89f1-00a0c90d061e
@@ -1462,27 +1596,30 @@ type ISClusResTypeResources struct {
 var IID_ISClusResTypeResources = win32.GUID{Data1: 0xf2e60714, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResTypeResources's vtable slot 7.
-func (self *ISClusResTypeResources) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResTypeResources) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResTypeResources's vtable slot 8.
-func (self *ISClusResTypeResources) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResTypeResources) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResTypeResources's vtable slot 9.
-func (self *ISClusResTypeResources) Refresh() foundation.HRESULT {
+func (self *ISClusResTypeResources) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateItem dispatches through ISClusResTypeResources's vtable slot 11.
-func (self *ISClusResTypeResources) CreateItem(bstrResourceName foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource **ISClusResource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppClusterResource)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResTypeResources) CreateItem(bstrResourceName foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
+	var _ppClusterResource *ISClusResource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
+	return _ppClusterResource, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60712-2631-11d1-89f1-00a0c90d061e
@@ -1494,27 +1631,30 @@ type ISClusResTypes struct {
 var IID_ISClusResTypes = win32.GUID{Data1: 0xf2e60712, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResTypes's vtable slot 7.
-func (self *ISClusResTypes) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResTypes) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResTypes's vtable slot 8.
-func (self *ISClusResTypes) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResTypes) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResTypes's vtable slot 9.
-func (self *ISClusResTypes) Refresh() foundation.HRESULT {
+func (self *ISClusResTypes) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateItem dispatches through ISClusResTypes's vtable slot 11.
-func (self *ISClusResTypes) CreateItem(bstrResourceTypeName foundation.BSTR, bstrDisplayName foundation.BSTR, bstrResourceTypeDll foundation.BSTR, dwLooksAlivePollInterval int32, dwIsAlivePollInterval int32, ppResourceType **ISClusResType) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceTypeName)), uintptr(unsafe.Pointer(bstrDisplayName)), uintptr(unsafe.Pointer(bstrResourceTypeDll)), uintptr(dwLooksAlivePollInterval), uintptr(dwIsAlivePollInterval), uintptr(unsafe.Pointer(ppResourceType)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResTypes) CreateItem(bstrResourceTypeName foundation.BSTR, bstrDisplayName foundation.BSTR, bstrResourceTypeDll foundation.BSTR, dwLooksAlivePollInterval int32, dwIsAlivePollInterval int32) (*ISClusResType, error) {
+	var _ppResourceType *ISClusResType
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceTypeName)), uintptr(unsafe.Pointer(bstrDisplayName)), uintptr(unsafe.Pointer(bstrResourceTypeDll)), uintptr(dwLooksAlivePollInterval), uintptr(dwIsAlivePollInterval), uintptr(unsafe.Pointer(&_ppResourceType)))
+	return _ppResourceType, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e6070a-2631-11d1-89f1-00a0c90d061e
@@ -1526,195 +1666,220 @@ type ISClusResource struct {
 var IID_ISClusResource = win32.GUID{Data1: 0xf2e6070a, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_CommonProperties dispatches through ISClusResource's vtable slot 7.
-func (self *ISClusResource) Get_CommonProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_CommonProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISClusResource's vtable slot 8.
-func (self *ISClusResource) Get_PrivateProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_PrivateProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISClusResource's vtable slot 9.
-func (self *ISClusResource) Get_CommonROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_CommonROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISClusResource's vtable slot 10.
-func (self *ISClusResource) Get_PrivateROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_PrivateROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through ISClusResource's vtable slot 11.
-func (self *ISClusResource) Get_Handle(phandle *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phandle)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_Handle() (uintptr, error) {
+	var _phandle uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
+	return _phandle, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ISClusResource's vtable slot 12.
-func (self *ISClusResource) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through ISClusResource's vtable slot 13.
-func (self *ISClusResource) Put_Name(bstrResourceName foundation.BSTR) foundation.HRESULT {
+func (self *ISClusResource) Put_Name(bstrResourceName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ISClusResource's vtable slot 14.
-func (self *ISClusResource) Get_State(dwState *CLUSTER_RESOURCE_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwState)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_State() (CLUSTER_RESOURCE_STATE, error) {
+	var _dwState CLUSTER_RESOURCE_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwState)))
+	return _dwState, win32.HRESULTError(int32(r1))
 }
 
 // Get_CoreFlag dispatches through ISClusResource's vtable slot 15.
-func (self *ISClusResource) Get_CoreFlag(dwCoreFlag *CLUS_FLAGS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwCoreFlag)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_CoreFlag() (CLUS_FLAGS, error) {
+	var _dwCoreFlag CLUS_FLAGS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dwCoreFlag)))
+	return _dwCoreFlag, win32.HRESULTError(int32(r1))
 }
 
 // BecomeQuorumResource dispatches through ISClusResource's vtable slot 16.
-func (self *ISClusResource) BecomeQuorumResource(bstrDevicePath foundation.BSTR, lMaxLogSize int32) foundation.HRESULT {
+func (self *ISClusResource) BecomeQuorumResource(bstrDevicePath foundation.BSTR, lMaxLogSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDevicePath)), uintptr(lMaxLogSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through ISClusResource's vtable slot 17.
-func (self *ISClusResource) Delete() foundation.HRESULT {
+func (self *ISClusResource) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Fail dispatches through ISClusResource's vtable slot 18.
-func (self *ISClusResource) Fail() foundation.HRESULT {
+func (self *ISClusResource) Fail() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Online dispatches through ISClusResource's vtable slot 19.
-func (self *ISClusResource) Online(nTimeout int32, pvarPending *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(nTimeout), uintptr(unsafe.Pointer(pvarPending)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Online(nTimeout int32) (systemvariant.VARIANT, error) {
+	var _pvarPending systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(nTimeout), uintptr(unsafe.Pointer(&_pvarPending)))
+	return _pvarPending, win32.HRESULTError(int32(r1))
 }
 
 // Offline dispatches through ISClusResource's vtable slot 20.
-func (self *ISClusResource) Offline(nTimeout int32, pvarPending *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(nTimeout), uintptr(unsafe.Pointer(pvarPending)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Offline(nTimeout int32) (systemvariant.VARIANT, error) {
+	var _pvarPending systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(nTimeout), uintptr(unsafe.Pointer(&_pvarPending)))
+	return _pvarPending, win32.HRESULTError(int32(r1))
 }
 
 // ChangeResourceGroup dispatches through ISClusResource's vtable slot 21.
-func (self *ISClusResource) ChangeResourceGroup(pResourceGroup *ISClusResGroup) foundation.HRESULT {
+func (self *ISClusResource) ChangeResourceGroup(pResourceGroup *ISClusResGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddResourceNode dispatches through ISClusResource's vtable slot 22.
-func (self *ISClusResource) AddResourceNode(pNode *ISClusNode) foundation.HRESULT {
+func (self *ISClusResource) AddResourceNode(pNode *ISClusNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveResourceNode dispatches through ISClusResource's vtable slot 23.
-func (self *ISClusResource) RemoveResourceNode(pNode *ISClusNode) foundation.HRESULT {
+func (self *ISClusResource) RemoveResourceNode(pNode *ISClusNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanResourceBeDependent dispatches through ISClusResource's vtable slot 24.
-func (self *ISClusResource) CanResourceBeDependent(pResource *ISClusResource, pvarDependent *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pvarDependent)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) CanResourceBeDependent(pResource *ISClusResource) (systemvariant.VARIANT, error) {
+	var _pvarDependent systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(&_pvarDependent)))
+	return _pvarDependent, win32.HRESULTError(int32(r1))
 }
 
 // Get_PossibleOwnerNodes dispatches through ISClusResource's vtable slot 25.
-func (self *ISClusResource) Get_PossibleOwnerNodes(ppOwnerNodes **ISClusResPossibleOwnerNodes) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOwnerNodes)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_PossibleOwnerNodes() (*ISClusResPossibleOwnerNodes, error) {
+	var _ppOwnerNodes *ISClusResPossibleOwnerNodes
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNodes)))
+	return _ppOwnerNodes, win32.HRESULTError(int32(r1))
 }
 
 // Get_Dependencies dispatches through ISClusResource's vtable slot 26.
-func (self *ISClusResource) Get_Dependencies(ppResDependencies **ISClusResDependencies) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResDependencies)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_Dependencies() (*ISClusResDependencies, error) {
+	var _ppResDependencies *ISClusResDependencies
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResDependencies)))
+	return _ppResDependencies, win32.HRESULTError(int32(r1))
 }
 
 // Get_Dependents dispatches through ISClusResource's vtable slot 27.
-func (self *ISClusResource) Get_Dependents(ppResDependents **ISClusResDependents) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResDependents)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_Dependents() (*ISClusResDependents, error) {
+	var _ppResDependents *ISClusResDependents
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResDependents)))
+	return _ppResDependents, win32.HRESULTError(int32(r1))
 }
 
 // Get_Group dispatches through ISClusResource's vtable slot 28.
-func (self *ISClusResource) Get_Group(ppResGroup **ISClusResGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResGroup)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_Group() (*ISClusResGroup, error) {
+	var _ppResGroup *ISClusResGroup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResGroup)))
+	return _ppResGroup, win32.HRESULTError(int32(r1))
 }
 
 // Get_OwnerNode dispatches through ISClusResource's vtable slot 29.
-func (self *ISClusResource) Get_OwnerNode(ppOwnerNode **ISClusNode) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOwnerNode)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_OwnerNode() (*ISClusNode, error) {
+	var _ppOwnerNode *ISClusNode
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOwnerNode)))
+	return _ppOwnerNode, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cluster dispatches through ISClusResource's vtable slot 30.
-func (self *ISClusResource) Get_Cluster(ppCluster **ISCluster) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCluster)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_Cluster() (*ISCluster, error) {
+	var _ppCluster *ISCluster
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCluster)))
+	return _ppCluster, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClassInfo dispatches through ISClusResource's vtable slot 31.
-func (self *ISClusResource) Get_ClassInfo(prcClassInfo *CLUSTER_RESOURCE_CLASS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcClassInfo)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_ClassInfo() (CLUSTER_RESOURCE_CLASS, error) {
+	var _prcClassInfo CLUSTER_RESOURCE_CLASS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_prcClassInfo)))
+	return _prcClassInfo, win32.HRESULTError(int32(r1))
 }
 
 // Get_Disk dispatches through ISClusResource's vtable slot 32.
-func (self *ISClusResource) Get_Disk(ppDisk **ISClusDisk) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDisk)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_Disk() (*ISClusDisk, error) {
+	var _ppDisk *ISClusDisk
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDisk)))
+	return _ppDisk, win32.HRESULTError(int32(r1))
 }
 
 // Get_RegistryKeys dispatches through ISClusResource's vtable slot 33.
-func (self *ISClusResource) Get_RegistryKeys(ppRegistryKeys **ISClusRegistryKeys) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRegistryKeys)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_RegistryKeys() (*ISClusRegistryKeys, error) {
+	var _ppRegistryKeys *ISClusRegistryKeys
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRegistryKeys)))
+	return _ppRegistryKeys, win32.HRESULTError(int32(r1))
 }
 
 // Get_CryptoKeys dispatches through ISClusResource's vtable slot 34.
-func (self *ISClusResource) Get_CryptoKeys(ppCryptoKeys **ISClusCryptoKeys) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCryptoKeys)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_CryptoKeys() (*ISClusCryptoKeys, error) {
+	var _ppCryptoKeys *ISClusCryptoKeys
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCryptoKeys)))
+	return _ppCryptoKeys, win32.HRESULTError(int32(r1))
 }
 
 // Get_TypeName dispatches through ISClusResource's vtable slot 35.
-func (self *ISClusResource) Get_TypeName(pbstrTypeName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTypeName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_TypeName() (foundation.BSTR, error) {
+	var _pbstrTypeName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrTypeName)))
+	return _pbstrTypeName, win32.HRESULTError(int32(r1))
 }
 
 // Get_Type dispatches through ISClusResource's vtable slot 36.
-func (self *ISClusResource) Get_Type(ppResourceType **ISClusResType) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResourceType)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_Type() (*ISClusResType, error) {
+	var _ppResourceType *ISClusResType
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResourceType)))
+	return _ppResourceType, win32.HRESULTError(int32(r1))
 }
 
 // Get_MaintenanceMode dispatches through ISClusResource's vtable slot 37.
-func (self *ISClusResource) Get_MaintenanceMode(pbMaintenanceMode *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMaintenanceMode)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Get_MaintenanceMode() (foundation.BOOL, error) {
+	var _pbMaintenanceMode foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbMaintenanceMode)))
+	return _pbMaintenanceMode, win32.HRESULTError(int32(r1))
 }
 
 // Put_MaintenanceMode dispatches through ISClusResource's vtable slot 38.
-func (self *ISClusResource) Put_MaintenanceMode(bMaintenanceMode foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(bMaintenanceMode))
-	return foundation.HRESULT(r1)
+func (self *ISClusResource) Put_MaintenanceMode(bMaintenanceMode bool) error {
+	_bMaintenanceMode := win32.Bool32(bMaintenanceMode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(_bMaintenanceMode))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e6070c-2631-11d1-89f1-00a0c90d061e
@@ -1726,27 +1891,30 @@ type ISClusResources struct {
 var IID_ISClusResources = win32.GUID{Data1: 0xf2e6070c, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusResources's vtable slot 7.
-func (self *ISClusResources) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResources) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusResources's vtable slot 8.
-func (self *ISClusResources) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResources) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusResources's vtable slot 9.
-func (self *ISClusResources) Refresh() foundation.HRESULT {
+func (self *ISClusResources) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateItem dispatches through ISClusResources's vtable slot 11.
-func (self *ISClusResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS, ppClusterResource **ISClusResource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppClusterResource)))
-	return foundation.HRESULT(r1)
+func (self *ISClusResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
+	var _ppClusterResource *ISClusResource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(unsafe.Pointer(&_ppClusterResource)))
+	return _ppClusterResource, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60728-2631-11d1-89f1-00a0c90d061e
@@ -1758,27 +1926,31 @@ type ISClusScsiAddress struct {
 var IID_ISClusScsiAddress = win32.GUID{Data1: 0xf2e60728, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_PortNumber dispatches through ISClusScsiAddress's vtable slot 7.
-func (self *ISClusScsiAddress) Get_PortNumber(pvarPortNumber *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarPortNumber)))
-	return foundation.HRESULT(r1)
+func (self *ISClusScsiAddress) Get_PortNumber() (systemvariant.VARIANT, error) {
+	var _pvarPortNumber systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarPortNumber)))
+	return _pvarPortNumber, win32.HRESULTError(int32(r1))
 }
 
 // Get_PathId dispatches through ISClusScsiAddress's vtable slot 8.
-func (self *ISClusScsiAddress) Get_PathId(pvarPathId *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarPathId)))
-	return foundation.HRESULT(r1)
+func (self *ISClusScsiAddress) Get_PathId() (systemvariant.VARIANT, error) {
+	var _pvarPathId systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarPathId)))
+	return _pvarPathId, win32.HRESULTError(int32(r1))
 }
 
 // Get_TargetId dispatches through ISClusScsiAddress's vtable slot 9.
-func (self *ISClusScsiAddress) Get_TargetId(pvarTargetId *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarTargetId)))
-	return foundation.HRESULT(r1)
+func (self *ISClusScsiAddress) Get_TargetId() (systemvariant.VARIANT, error) {
+	var _pvarTargetId systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarTargetId)))
+	return _pvarTargetId, win32.HRESULTError(int32(r1))
 }
 
 // Get_Lun dispatches through ISClusScsiAddress's vtable slot 10.
-func (self *ISClusScsiAddress) Get_Lun(pvarLun *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarLun)))
-	return foundation.HRESULT(r1)
+func (self *ISClusScsiAddress) Get_Lun() (systemvariant.VARIANT, error) {
+	var _pvarLun systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarLun)))
+	return _pvarLun, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e60716-2631-11d1-89f1-00a0c90d061e
@@ -1790,63 +1962,73 @@ type ISClusVersion struct {
 var IID_ISClusVersion = win32.GUID{Data1: 0xf2e60716, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Name dispatches through ISClusVersion's vtable slot 7.
-func (self *ISClusVersion) Get_Name(pbstrClusterName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrClusterName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_Name() (foundation.BSTR, error) {
+	var _pbstrClusterName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrClusterName)))
+	return _pbstrClusterName, win32.HRESULTError(int32(r1))
 }
 
 // Get_MajorVersion dispatches through ISClusVersion's vtable slot 8.
-func (self *ISClusVersion) Get_MajorVersion(pnMajorVersion *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnMajorVersion)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_MajorVersion() (int32, error) {
+	var _pnMajorVersion int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnMajorVersion)))
+	return _pnMajorVersion, win32.HRESULTError(int32(r1))
 }
 
 // Get_MinorVersion dispatches through ISClusVersion's vtable slot 9.
-func (self *ISClusVersion) Get_MinorVersion(pnMinorVersion *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnMinorVersion)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_MinorVersion() (int32, error) {
+	var _pnMinorVersion int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnMinorVersion)))
+	return _pnMinorVersion, win32.HRESULTError(int32(r1))
 }
 
 // Get_BuildNumber dispatches through ISClusVersion's vtable slot 10.
-func (self *ISClusVersion) Get_BuildNumber(pnBuildNumber *int16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnBuildNumber)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_BuildNumber() (int16, error) {
+	var _pnBuildNumber int16
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnBuildNumber)))
+	return _pnBuildNumber, win32.HRESULTError(int32(r1))
 }
 
 // Get_VendorId dispatches through ISClusVersion's vtable slot 11.
-func (self *ISClusVersion) Get_VendorId(pbstrVendorId *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrVendorId)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_VendorId() (foundation.BSTR, error) {
+	var _pbstrVendorId foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrVendorId)))
+	return _pbstrVendorId, win32.HRESULTError(int32(r1))
 }
 
 // Get_CSDVersion dispatches through ISClusVersion's vtable slot 12.
-func (self *ISClusVersion) Get_CSDVersion(pbstrCSDVersion *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCSDVersion)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_CSDVersion() (foundation.BSTR, error) {
+	var _pbstrCSDVersion foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrCSDVersion)))
+	return _pbstrCSDVersion, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClusterHighestVersion dispatches through ISClusVersion's vtable slot 13.
-func (self *ISClusVersion) Get_ClusterHighestVersion(pnClusterHighestVersion *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnClusterHighestVersion)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_ClusterHighestVersion() (int32, error) {
+	var _pnClusterHighestVersion int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnClusterHighestVersion)))
+	return _pnClusterHighestVersion, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClusterLowestVersion dispatches through ISClusVersion's vtable slot 14.
-func (self *ISClusVersion) Get_ClusterLowestVersion(pnClusterLowestVersion *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnClusterLowestVersion)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_ClusterLowestVersion() (int32, error) {
+	var _pnClusterLowestVersion int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnClusterLowestVersion)))
+	return _pnClusterLowestVersion, win32.HRESULTError(int32(r1))
 }
 
 // Get_Flags dispatches through ISClusVersion's vtable slot 15.
-func (self *ISClusVersion) Get_Flags(pnFlags *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnFlags)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_Flags() (int32, error) {
+	var _pnFlags int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnFlags)))
+	return _pnFlags, win32.HRESULTError(int32(r1))
 }
 
 // Get_MixedVersion dispatches through ISClusVersion's vtable slot 16.
-func (self *ISClusVersion) Get_MixedVersion(pvarMixedVersion *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMixedVersion)))
-	return foundation.HRESULT(r1)
+func (self *ISClusVersion) Get_MixedVersion() (systemvariant.VARIANT, error) {
+	var _pvarMixedVersion systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pvarMixedVersion)))
+	return _pvarMixedVersion, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606e4-2631-11d1-89f1-00a0c90d061e
@@ -1858,129 +2040,145 @@ type ISCluster struct {
 var IID_ISCluster = win32.GUID{Data1: 0xf2e606e4, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_CommonProperties dispatches through ISCluster's vtable slot 7.
-func (self *ISCluster) Get_CommonProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_CommonProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateProperties dispatches through ISCluster's vtable slot 8.
-func (self *ISCluster) Get_PrivateProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_PrivateProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_CommonROProperties dispatches through ISCluster's vtable slot 9.
-func (self *ISCluster) Get_CommonROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_CommonROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateROProperties dispatches through ISCluster's vtable slot 10.
-func (self *ISCluster) Get_PrivateROProperties(ppProperties **ISClusProperties) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_PrivateROProperties() (*ISClusProperties, error) {
+	var _ppProperties *ISClusProperties
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProperties)))
+	return _ppProperties, win32.HRESULTError(int32(r1))
 }
 
 // Get_Handle dispatches through ISCluster's vtable slot 11.
-func (self *ISCluster) Get_Handle(phandle *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phandle)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_Handle() (uintptr, error) {
+	var _phandle uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phandle)))
+	return _phandle, win32.HRESULTError(int32(r1))
 }
 
 // Open dispatches through ISCluster's vtable slot 12.
-func (self *ISCluster) Open(bstrClusterName foundation.BSTR) foundation.HRESULT {
+func (self *ISCluster) Open(bstrClusterName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClusterName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ISCluster's vtable slot 13.
-func (self *ISCluster) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through ISCluster's vtable slot 14.
-func (self *ISCluster) Put_Name(bstrClusterName foundation.BSTR) foundation.HRESULT {
+func (self *ISCluster) Put_Name(bstrClusterName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClusterName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Version dispatches through ISCluster's vtable slot 15.
-func (self *ISCluster) Get_Version(ppClusVersion **ISClusVersion) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClusVersion)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_Version() (*ISClusVersion, error) {
+	var _ppClusVersion *ISClusVersion
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusVersion)))
+	return _ppClusVersion, win32.HRESULTError(int32(r1))
 }
 
 // Put_QuorumResource dispatches through ISCluster's vtable slot 16.
-func (self *ISCluster) Put_QuorumResource(pClusterResource *ISClusResource) foundation.HRESULT {
+func (self *ISCluster) Put_QuorumResource(pClusterResource *ISClusResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClusterResource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QuorumResource dispatches through ISCluster's vtable slot 17.
-func (self *ISCluster) Get_QuorumResource(pClusterResource **ISClusResource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClusterResource)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_QuorumResource() (*ISClusResource, error) {
+	var _pClusterResource *ISClusResource
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pClusterResource)))
+	return _pClusterResource, win32.HRESULTError(int32(r1))
 }
 
 // Get_QuorumLogSize dispatches through ISCluster's vtable slot 18.
-func (self *ISCluster) Get_QuorumLogSize(pnLogSize *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnLogSize)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_QuorumLogSize() (int32, error) {
+	var _pnLogSize int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pnLogSize)))
+	return _pnLogSize, win32.HRESULTError(int32(r1))
 }
 
 // Put_QuorumLogSize dispatches through ISCluster's vtable slot 19.
-func (self *ISCluster) Put_QuorumLogSize(nLogSize int32) foundation.HRESULT {
+func (self *ISCluster) Put_QuorumLogSize(nLogSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(nLogSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QuorumPath dispatches through ISCluster's vtable slot 20.
-func (self *ISCluster) Get_QuorumPath(ppPath *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPath)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_QuorumPath() (foundation.BSTR, error) {
+	var _ppPath foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPath)))
+	return _ppPath, win32.HRESULTError(int32(r1))
 }
 
 // Put_QuorumPath dispatches through ISCluster's vtable slot 21.
-func (self *ISCluster) Put_QuorumPath(pPath foundation.BSTR) foundation.HRESULT {
+func (self *ISCluster) Put_QuorumPath(pPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Nodes dispatches through ISCluster's vtable slot 22.
-func (self *ISCluster) Get_Nodes(ppNodes **ISClusNodes) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNodes)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_Nodes() (*ISClusNodes, error) {
+	var _ppNodes *ISClusNodes
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNodes)))
+	return _ppNodes, win32.HRESULTError(int32(r1))
 }
 
 // Get_ResourceGroups dispatches through ISCluster's vtable slot 23.
-func (self *ISCluster) Get_ResourceGroups(ppClusterResourceGroups **ISClusResGroups) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClusterResourceGroups)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_ResourceGroups() (*ISClusResGroups, error) {
+	var _ppClusterResourceGroups *ISClusResGroups
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterResourceGroups)))
+	return _ppClusterResourceGroups, win32.HRESULTError(int32(r1))
 }
 
 // Get_Resources dispatches through ISCluster's vtable slot 24.
-func (self *ISCluster) Get_Resources(ppClusterResources **ISClusResources) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClusterResources)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_Resources() (*ISClusResources, error) {
+	var _ppClusterResources *ISClusResources
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClusterResources)))
+	return _ppClusterResources, win32.HRESULTError(int32(r1))
 }
 
 // Get_ResourceTypes dispatches through ISCluster's vtable slot 25.
-func (self *ISCluster) Get_ResourceTypes(ppResourceTypes **ISClusResTypes) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResourceTypes)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_ResourceTypes() (*ISClusResTypes, error) {
+	var _ppResourceTypes *ISClusResTypes
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppResourceTypes)))
+	return _ppResourceTypes, win32.HRESULTError(int32(r1))
 }
 
 // Get_Networks dispatches through ISCluster's vtable slot 26.
-func (self *ISCluster) Get_Networks(ppNetworks **ISClusNetworks) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNetworks)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_Networks() (*ISClusNetworks, error) {
+	var _ppNetworks *ISClusNetworks
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNetworks)))
+	return _ppNetworks, win32.HRESULTError(int32(r1))
 }
 
 // Get_NetInterfaces dispatches through ISCluster's vtable slot 27.
-func (self *ISCluster) Get_NetInterfaces(ppNetInterfaces **ISClusNetInterfaces) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNetInterfaces)))
-	return foundation.HRESULT(r1)
+func (self *ISCluster) Get_NetInterfaces() (*ISClusNetInterfaces, error) {
+	var _ppNetInterfaces *ISClusNetInterfaces
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNetInterfaces)))
+	return _ppNetInterfaces, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606ec-2631-11d1-89f1-00a0c90d061e
@@ -1992,27 +2190,30 @@ type ISClusterNames struct {
 var IID_ISClusterNames = win32.GUID{Data1: 0xf2e606ec, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISClusterNames's vtable slot 7.
-func (self *ISClusterNames) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISClusterNames) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISClusterNames's vtable slot 8.
-func (self *ISClusterNames) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISClusterNames) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISClusterNames's vtable slot 9.
-func (self *ISClusterNames) Refresh() foundation.HRESULT {
+func (self *ISClusterNames) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DomainName dispatches through ISClusterNames's vtable slot 11.
-func (self *ISClusterNames) Get_DomainName(pbstrDomainName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDomainName)))
-	return foundation.HRESULT(r1)
+func (self *ISClusterNames) Get_DomainName() (foundation.BSTR, error) {
+	var _pbstrDomainName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDomainName)))
+	return _pbstrDomainName, win32.HRESULTError(int32(r1))
 }
 
 // IID: f2e606e2-2631-11d1-89f1-00a0c90d061e
@@ -2024,21 +2225,23 @@ type ISDomainNames struct {
 var IID_ISDomainNames = win32.GUID{Data1: 0xf2e606e2, Data2: 0x2631, Data3: 0x11d1, Data4: [8]byte{0x89, 0xf1, 0x00, 0xa0, 0xc9, 0x0d, 0x06, 0x1e}}
 
 // Get_Count dispatches through ISDomainNames's vtable slot 7.
-func (self *ISDomainNames) Get_Count(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISDomainNames) Get_Count() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISDomainNames's vtable slot 8.
-func (self *ISDomainNames) Get__NewEnum(retval **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
-	return foundation.HRESULT(r1)
+func (self *ISDomainNames) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _retval *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_retval)))
+	return _retval, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through ISDomainNames's vtable slot 9.
-func (self *ISDomainNames) Refresh() foundation.HRESULT {
+func (self *ISDomainNames) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWCContextMenuCallback: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iwccontextmenucallback
@@ -2051,9 +2254,9 @@ type IWCContextMenuCallback struct {
 var IID_IWCContextMenuCallback = win32.GUID{Data1: 0x97dede64, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // AddExtensionMenuItem dispatches through IWCContextMenuCallback's vtable slot 3.
-func (self *IWCContextMenuCallback) AddExtensionMenuItem(lpszName foundation.BSTR, lpszStatusBarText foundation.BSTR, nCommandID uint32, nSubmenuCommandID uint32, uFlags uint32) foundation.HRESULT {
+func (self *IWCContextMenuCallback) AddExtensionMenuItem(lpszName foundation.BSTR, lpszStatusBarText foundation.BSTR, nCommandID uint32, nSubmenuCommandID uint32, uFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(lpszStatusBarText)), uintptr(nCommandID), uintptr(nSubmenuCommandID), uintptr(uFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWCPropertySheetCallback: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iwcpropertysheetcallback
@@ -2066,9 +2269,9 @@ type IWCPropertySheetCallback struct {
 var IID_IWCPropertySheetCallback = win32.GUID{Data1: 0x97dede60, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // AddPropertySheetPage dispatches through IWCPropertySheetCallback's vtable slot 3.
-func (self *IWCPropertySheetCallback) AddPropertySheetPage(hpage *int32) foundation.HRESULT {
+func (self *IWCPropertySheetCallback) AddPropertySheetPage(hpage *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hpage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWCWizard97Callback: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iwcwizard97callback
@@ -2081,15 +2284,16 @@ type IWCWizard97Callback struct {
 var IID_IWCWizard97Callback = win32.GUID{Data1: 0x97dede67, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // AddWizard97Page dispatches through IWCWizard97Callback's vtable slot 3.
-func (self *IWCWizard97Callback) AddWizard97Page(hpage *int32) foundation.HRESULT {
+func (self *IWCWizard97Callback) AddWizard97Page(hpage *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hpage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableNext dispatches through IWCWizard97Callback's vtable slot 4.
-func (self *IWCWizard97Callback) EnableNext(hpage *int32, bEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hpage)), uintptr(bEnable))
-	return foundation.HRESULT(r1)
+func (self *IWCWizard97Callback) EnableNext(hpage *int32, bEnable bool) error {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hpage)), uintptr(_bEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWCWizardCallback: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iwcwizardcallback
@@ -2102,15 +2306,16 @@ type IWCWizardCallback struct {
 var IID_IWCWizardCallback = win32.GUID{Data1: 0x97dede62, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // AddWizardPage dispatches through IWCWizardCallback's vtable slot 3.
-func (self *IWCWizardCallback) AddWizardPage(hpage *int32) foundation.HRESULT {
+func (self *IWCWizardCallback) AddWizardPage(hpage *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hpage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableNext dispatches through IWCWizardCallback's vtable slot 4.
-func (self *IWCWizardCallback) EnableNext(hpage *int32, bEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hpage)), uintptr(bEnable))
-	return foundation.HRESULT(r1)
+func (self *IWCWizardCallback) EnableNext(hpage *int32, bEnable bool) error {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hpage)), uintptr(_bEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWEExtendContextMenu: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iweextendcontextmenu
@@ -2123,9 +2328,9 @@ type IWEExtendContextMenu struct {
 var IID_IWEExtendContextMenu = win32.GUID{Data1: 0x97dede65, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // AddContextMenuItems dispatches through IWEExtendContextMenu's vtable slot 3.
-func (self *IWEExtendContextMenu) AddContextMenuItems(piData *systemcom.IUnknown, piCallback *IWCContextMenuCallback) foundation.HRESULT {
+func (self *IWEExtendContextMenu) AddContextMenuItems(piData *systemcom.IUnknown, piCallback *IWCContextMenuCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piData)), uintptr(unsafe.Pointer(piCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWEExtendPropertySheet: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iweextendpropertysheet
@@ -2138,9 +2343,9 @@ type IWEExtendPropertySheet struct {
 var IID_IWEExtendPropertySheet = win32.GUID{Data1: 0x97dede61, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // CreatePropertySheetPages dispatches through IWEExtendPropertySheet's vtable slot 3.
-func (self *IWEExtendPropertySheet) CreatePropertySheetPages(piData *systemcom.IUnknown, piCallback *IWCPropertySheetCallback) foundation.HRESULT {
+func (self *IWEExtendPropertySheet) CreatePropertySheetPages(piData *systemcom.IUnknown, piCallback *IWCPropertySheetCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piData)), uintptr(unsafe.Pointer(piCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWEExtendWizard: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iweextendwizard
@@ -2153,9 +2358,9 @@ type IWEExtendWizard struct {
 var IID_IWEExtendWizard = win32.GUID{Data1: 0x97dede63, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // CreateWizardPages dispatches through IWEExtendWizard's vtable slot 3.
-func (self *IWEExtendWizard) CreateWizardPages(piData *systemcom.IUnknown, piCallback *IWCWizardCallback) foundation.HRESULT {
+func (self *IWEExtendWizard) CreateWizardPages(piData *systemcom.IUnknown, piCallback *IWCWizardCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piData)), uintptr(unsafe.Pointer(piCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWEExtendWizard97: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iweextendwizard97
@@ -2168,9 +2373,9 @@ type IWEExtendWizard97 struct {
 var IID_IWEExtendWizard97 = win32.GUID{Data1: 0x97dede68, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // CreateWizard97Pages dispatches through IWEExtendWizard97's vtable slot 3.
-func (self *IWEExtendWizard97) CreateWizard97Pages(piData *systemcom.IUnknown, piCallback *IWCWizard97Callback) foundation.HRESULT {
+func (self *IWEExtendWizard97) CreateWizard97Pages(piData *systemcom.IUnknown, piCallback *IWCWizard97Callback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piData)), uintptr(unsafe.Pointer(piCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWEInvokeCommand: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iweinvokecommand
@@ -2183,7 +2388,7 @@ type IWEInvokeCommand struct {
 var IID_IWEInvokeCommand = win32.GUID{Data1: 0x97dede66, Data2: 0xfc6b, Data3: 0x11cf, Data4: [8]byte{0xb5, 0xf5, 0x00, 0xa0, 0xc9, 0x0a, 0xb5, 0x05}}
 
 // InvokeCommand dispatches through IWEInvokeCommand's vtable slot 3.
-func (self *IWEInvokeCommand) InvokeCommand(nCommandID uint32, piData *systemcom.IUnknown) foundation.HRESULT {
+func (self *IWEInvokeCommand) InvokeCommand(nCommandID uint32, piData *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(nCommandID), uintptr(unsafe.Pointer(piData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

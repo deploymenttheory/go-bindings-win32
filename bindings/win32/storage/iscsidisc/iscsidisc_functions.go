@@ -17,86 +17,95 @@ var (
 )
 
 var (
+	procAddISNSServer                       = modISCSIDSC.NewProc("AddISNSServerW")
 	procAddISNSServerA                      = modISCSIDSC.NewProc("AddISNSServerA")
-	procAddISNSServerW                      = modISCSIDSC.NewProc("AddISNSServerW")
+	procAddIScsiConnection                  = modISCSIDSC.NewProc("AddIScsiConnectionW")
 	procAddIScsiConnectionA                 = modISCSIDSC.NewProc("AddIScsiConnectionA")
-	procAddIScsiConnectionW                 = modISCSIDSC.NewProc("AddIScsiConnectionW")
+	procAddIScsiSendTargetPortal            = modISCSIDSC.NewProc("AddIScsiSendTargetPortalW")
 	procAddIScsiSendTargetPortalA           = modISCSIDSC.NewProc("AddIScsiSendTargetPortalA")
-	procAddIScsiSendTargetPortalW           = modISCSIDSC.NewProc("AddIScsiSendTargetPortalW")
+	procAddIScsiStaticTarget                = modISCSIDSC.NewProc("AddIScsiStaticTargetW")
 	procAddIScsiStaticTargetA               = modISCSIDSC.NewProc("AddIScsiStaticTargetA")
-	procAddIScsiStaticTargetW               = modISCSIDSC.NewProc("AddIScsiStaticTargetW")
+	procAddPersistentIScsiDevice            = modISCSIDSC.NewProc("AddPersistentIScsiDeviceW")
 	procAddPersistentIScsiDeviceA           = modISCSIDSC.NewProc("AddPersistentIScsiDeviceA")
-	procAddPersistentIScsiDeviceW           = modISCSIDSC.NewProc("AddPersistentIScsiDeviceW")
+	procAddRadiusServer                     = modISCSIDSC.NewProc("AddRadiusServerW")
 	procAddRadiusServerA                    = modISCSIDSC.NewProc("AddRadiusServerA")
-	procAddRadiusServerW                    = modISCSIDSC.NewProc("AddRadiusServerW")
 	procClearPersistentIScsiDevices         = modISCSIDSC.NewProc("ClearPersistentIScsiDevices")
+	procGetDevicesForIScsiSession           = modISCSIDSC.NewProc("GetDevicesForIScsiSessionW")
 	procGetDevicesForIScsiSessionA          = modISCSIDSC.NewProc("GetDevicesForIScsiSessionA")
-	procGetDevicesForIScsiSessionW          = modISCSIDSC.NewProc("GetDevicesForIScsiSessionW")
+	procGetIScsiIKEInfo                     = modISCSIDSC.NewProc("GetIScsiIKEInfoW")
 	procGetIScsiIKEInfoA                    = modISCSIDSC.NewProc("GetIScsiIKEInfoA")
-	procGetIScsiIKEInfoW                    = modISCSIDSC.NewProc("GetIScsiIKEInfoW")
+	procGetIScsiInitiatorNodeName           = modISCSIDSC.NewProc("GetIScsiInitiatorNodeNameW")
 	procGetIScsiInitiatorNodeNameA          = modISCSIDSC.NewProc("GetIScsiInitiatorNodeNameA")
-	procGetIScsiInitiatorNodeNameW          = modISCSIDSC.NewProc("GetIScsiInitiatorNodeNameW")
+	procGetIScsiSessionList                 = modISCSIDSC.NewProc("GetIScsiSessionListW")
 	procGetIScsiSessionListA                = modISCSIDSC.NewProc("GetIScsiSessionListA")
 	procGetIScsiSessionListEx               = modISCSIDSC.NewProc("GetIScsiSessionListEx")
-	procGetIScsiSessionListW                = modISCSIDSC.NewProc("GetIScsiSessionListW")
+	procGetIScsiTargetInformation           = modISCSIDSC.NewProc("GetIScsiTargetInformationW")
 	procGetIScsiTargetInformationA          = modISCSIDSC.NewProc("GetIScsiTargetInformationA")
-	procGetIScsiTargetInformationW          = modISCSIDSC.NewProc("GetIScsiTargetInformationW")
 	procGetIScsiVersionInformation          = modISCSIDSC.NewProc("GetIScsiVersionInformation")
+	procLoginIScsiTarget                    = modISCSIDSC.NewProc("LoginIScsiTargetW")
 	procLoginIScsiTargetA                   = modISCSIDSC.NewProc("LoginIScsiTargetA")
-	procLoginIScsiTargetW                   = modISCSIDSC.NewProc("LoginIScsiTargetW")
 	procLogoutIScsiTarget                   = modISCSIDSC.NewProc("LogoutIScsiTarget")
+	procRefreshISNSServer                   = modISCSIDSC.NewProc("RefreshISNSServerW")
 	procRefreshISNSServerA                  = modISCSIDSC.NewProc("RefreshISNSServerA")
-	procRefreshISNSServerW                  = modISCSIDSC.NewProc("RefreshISNSServerW")
+	procRefreshIScsiSendTargetPortal        = modISCSIDSC.NewProc("RefreshIScsiSendTargetPortalW")
 	procRefreshIScsiSendTargetPortalA       = modISCSIDSC.NewProc("RefreshIScsiSendTargetPortalA")
-	procRefreshIScsiSendTargetPortalW       = modISCSIDSC.NewProc("RefreshIScsiSendTargetPortalW")
+	procRemoveISNSServer                    = modISCSIDSC.NewProc("RemoveISNSServerW")
 	procRemoveISNSServerA                   = modISCSIDSC.NewProc("RemoveISNSServerA")
-	procRemoveISNSServerW                   = modISCSIDSC.NewProc("RemoveISNSServerW")
 	procRemoveIScsiConnection               = modISCSIDSC.NewProc("RemoveIScsiConnection")
+	procRemoveIScsiPersistentTarget         = modISCSIDSC.NewProc("RemoveIScsiPersistentTargetW")
 	procRemoveIScsiPersistentTargetA        = modISCSIDSC.NewProc("RemoveIScsiPersistentTargetA")
-	procRemoveIScsiPersistentTargetW        = modISCSIDSC.NewProc("RemoveIScsiPersistentTargetW")
+	procRemoveIScsiSendTargetPortal         = modISCSIDSC.NewProc("RemoveIScsiSendTargetPortalW")
 	procRemoveIScsiSendTargetPortalA        = modISCSIDSC.NewProc("RemoveIScsiSendTargetPortalA")
-	procRemoveIScsiSendTargetPortalW        = modISCSIDSC.NewProc("RemoveIScsiSendTargetPortalW")
+	procRemoveIScsiStaticTarget             = modISCSIDSC.NewProc("RemoveIScsiStaticTargetW")
 	procRemoveIScsiStaticTargetA            = modISCSIDSC.NewProc("RemoveIScsiStaticTargetA")
-	procRemoveIScsiStaticTargetW            = modISCSIDSC.NewProc("RemoveIScsiStaticTargetW")
+	procRemovePersistentIScsiDevice         = modISCSIDSC.NewProc("RemovePersistentIScsiDeviceW")
 	procRemovePersistentIScsiDeviceA        = modISCSIDSC.NewProc("RemovePersistentIScsiDeviceA")
-	procRemovePersistentIScsiDeviceW        = modISCSIDSC.NewProc("RemovePersistentIScsiDeviceW")
+	procRemoveRadiusServer                  = modISCSIDSC.NewProc("RemoveRadiusServerW")
 	procRemoveRadiusServerA                 = modISCSIDSC.NewProc("RemoveRadiusServerA")
-	procRemoveRadiusServerW                 = modISCSIDSC.NewProc("RemoveRadiusServerW")
+	procReportActiveIScsiTargetMappings     = modISCSIDSC.NewProc("ReportActiveIScsiTargetMappingsW")
 	procReportActiveIScsiTargetMappingsA    = modISCSIDSC.NewProc("ReportActiveIScsiTargetMappingsA")
-	procReportActiveIScsiTargetMappingsW    = modISCSIDSC.NewProc("ReportActiveIScsiTargetMappingsW")
+	procReportISNSServerList                = modISCSIDSC.NewProc("ReportISNSServerListW")
 	procReportISNSServerListA               = modISCSIDSC.NewProc("ReportISNSServerListA")
-	procReportISNSServerListW               = modISCSIDSC.NewProc("ReportISNSServerListW")
+	procReportIScsiInitiatorList            = modISCSIDSC.NewProc("ReportIScsiInitiatorListW")
 	procReportIScsiInitiatorListA           = modISCSIDSC.NewProc("ReportIScsiInitiatorListA")
-	procReportIScsiInitiatorListW           = modISCSIDSC.NewProc("ReportIScsiInitiatorListW")
+	procReportIScsiPersistentLogins         = modISCSIDSC.NewProc("ReportIScsiPersistentLoginsW")
 	procReportIScsiPersistentLoginsA        = modISCSIDSC.NewProc("ReportIScsiPersistentLoginsA")
-	procReportIScsiPersistentLoginsW        = modISCSIDSC.NewProc("ReportIScsiPersistentLoginsW")
+	procReportIScsiSendTargetPortals        = modISCSIDSC.NewProc("ReportIScsiSendTargetPortalsW")
 	procReportIScsiSendTargetPortalsA       = modISCSIDSC.NewProc("ReportIScsiSendTargetPortalsA")
+	procReportIScsiSendTargetPortalsEx      = modISCSIDSC.NewProc("ReportIScsiSendTargetPortalsExW")
 	procReportIScsiSendTargetPortalsExA     = modISCSIDSC.NewProc("ReportIScsiSendTargetPortalsExA")
-	procReportIScsiSendTargetPortalsExW     = modISCSIDSC.NewProc("ReportIScsiSendTargetPortalsExW")
-	procReportIScsiSendTargetPortalsW       = modISCSIDSC.NewProc("ReportIScsiSendTargetPortalsW")
+	procReportIScsiTargetPortals            = modISCSIDSC.NewProc("ReportIScsiTargetPortalsW")
 	procReportIScsiTargetPortalsA           = modISCSIDSC.NewProc("ReportIScsiTargetPortalsA")
-	procReportIScsiTargetPortalsW           = modISCSIDSC.NewProc("ReportIScsiTargetPortalsW")
+	procReportIScsiTargets                  = modISCSIDSC.NewProc("ReportIScsiTargetsW")
 	procReportIScsiTargetsA                 = modISCSIDSC.NewProc("ReportIScsiTargetsA")
-	procReportIScsiTargetsW                 = modISCSIDSC.NewProc("ReportIScsiTargetsW")
+	procReportPersistentIScsiDevices        = modISCSIDSC.NewProc("ReportPersistentIScsiDevicesW")
 	procReportPersistentIScsiDevicesA       = modISCSIDSC.NewProc("ReportPersistentIScsiDevicesA")
-	procReportPersistentIScsiDevicesW       = modISCSIDSC.NewProc("ReportPersistentIScsiDevicesW")
+	procReportRadiusServerList              = modISCSIDSC.NewProc("ReportRadiusServerListW")
 	procReportRadiusServerListA             = modISCSIDSC.NewProc("ReportRadiusServerListA")
-	procReportRadiusServerListW             = modISCSIDSC.NewProc("ReportRadiusServerListW")
 	procSendScsiInquiry                     = modISCSIDSC.NewProc("SendScsiInquiry")
 	procSendScsiReadCapacity                = modISCSIDSC.NewProc("SendScsiReadCapacity")
 	procSendScsiReportLuns                  = modISCSIDSC.NewProc("SendScsiReportLuns")
 	procSetIScsiGroupPresharedKey           = modISCSIDSC.NewProc("SetIScsiGroupPresharedKey")
+	procSetIScsiIKEInfo                     = modISCSIDSC.NewProc("SetIScsiIKEInfoW")
 	procSetIScsiIKEInfoA                    = modISCSIDSC.NewProc("SetIScsiIKEInfoA")
-	procSetIScsiIKEInfoW                    = modISCSIDSC.NewProc("SetIScsiIKEInfoW")
 	procSetIScsiInitiatorCHAPSharedSecret   = modISCSIDSC.NewProc("SetIScsiInitiatorCHAPSharedSecret")
+	procSetIScsiInitiatorNodeName           = modISCSIDSC.NewProc("SetIScsiInitiatorNodeNameW")
 	procSetIScsiInitiatorNodeNameA          = modISCSIDSC.NewProc("SetIScsiInitiatorNodeNameA")
-	procSetIScsiInitiatorNodeNameW          = modISCSIDSC.NewProc("SetIScsiInitiatorNodeNameW")
 	procSetIScsiInitiatorRADIUSSharedSecret = modISCSIDSC.NewProc("SetIScsiInitiatorRADIUSSharedSecret")
+	procSetIScsiTunnelModeOuterAddress      = modISCSIDSC.NewProc("SetIScsiTunnelModeOuterAddressW")
 	procSetIScsiTunnelModeOuterAddressA     = modISCSIDSC.NewProc("SetIScsiTunnelModeOuterAddressA")
-	procSetIScsiTunnelModeOuterAddressW     = modISCSIDSC.NewProc("SetIScsiTunnelModeOuterAddressW")
 	procSetupPersistentIScsiDevices         = modISCSIDSC.NewProc("SetupPersistentIScsiDevices")
 	procSetupPersistentIScsiVolumes         = modISCSIDSC.NewProc("SetupPersistentIScsiVolumes")
 )
+
+// AddISNSServer calls ISCSIDSC!AddISNSServerW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addisnsserverw
+// Minimum OS: windows6.0.6000.
+func AddISNSServer(Address string) uint32 {
+	_Address := win32.UTF16Ptr(Address)
+	r1, _, _ := syscall.SyscallN(procAddISNSServer.Addr(), uintptr(unsafe.Pointer(_Address)))
+	return uint32(r1)
+}
 
 // AddISNSServerA calls ISCSIDSC!AddISNSServerA.
 // https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addisnsservera
@@ -106,11 +115,11 @@ func AddISNSServerA(Address foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// AddISNSServerW calls ISCSIDSC!AddISNSServerW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addisnsserverw
+// AddIScsiConnection calls ISCSIDSC!AddIScsiConnectionW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addiscsiconnectionw
 // Minimum OS: windows6.0.6000.
-func AddISNSServerW(Address foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procAddISNSServerW.Addr(), uintptr(unsafe.Pointer(Address)))
+func AddIScsiConnection(UniqueSessionId *ISCSI_UNIQUE_SESSION_ID, Reserved unsafe.Pointer, InitiatorPortNumber uint32, TargetPortal *ISCSI_TARGET_PORTALW, SecurityFlags uint64, LoginOptions *ISCSI_LOGIN_OPTIONS, KeySize uint32, Key foundation.PSTR, ConnectionId *ISCSI_UNIQUE_SESSION_ID) uint32 {
+	r1, _, _ := syscall.SyscallN(procAddIScsiConnection.Addr(), uintptr(unsafe.Pointer(UniqueSessionId)), uintptr(unsafe.Pointer(Reserved)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(TargetPortal)), uintptr(SecurityFlags), uintptr(unsafe.Pointer(LoginOptions)), uintptr(KeySize), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ConnectionId)))
 	return uint32(r1)
 }
 
@@ -122,11 +131,12 @@ func AddIScsiConnectionA(UniqueSessionId *ISCSI_UNIQUE_SESSION_ID, Reserved unsa
 	return uint32(r1)
 }
 
-// AddIScsiConnectionW calls ISCSIDSC!AddIScsiConnectionW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addiscsiconnectionw
+// AddIScsiSendTargetPortal calls ISCSIDSC!AddIScsiSendTargetPortalW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addiscsisendtargetportalw
 // Minimum OS: windows6.0.6000.
-func AddIScsiConnectionW(UniqueSessionId *ISCSI_UNIQUE_SESSION_ID, Reserved unsafe.Pointer, InitiatorPortNumber uint32, TargetPortal *ISCSI_TARGET_PORTALW, SecurityFlags uint64, LoginOptions *ISCSI_LOGIN_OPTIONS, KeySize uint32, Key foundation.PSTR, ConnectionId *ISCSI_UNIQUE_SESSION_ID) uint32 {
-	r1, _, _ := syscall.SyscallN(procAddIScsiConnectionW.Addr(), uintptr(unsafe.Pointer(UniqueSessionId)), uintptr(unsafe.Pointer(Reserved)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(TargetPortal)), uintptr(SecurityFlags), uintptr(unsafe.Pointer(LoginOptions)), uintptr(KeySize), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ConnectionId)))
+func AddIScsiSendTargetPortal(InitiatorInstance string, InitiatorPortNumber uint32, LoginOptions *ISCSI_LOGIN_OPTIONS, SecurityFlags uint64, Portal *ISCSI_TARGET_PORTALW) uint32 {
+	_InitiatorInstance := win32.UTF16Ptr(InitiatorInstance)
+	r1, _, _ := syscall.SyscallN(procAddIScsiSendTargetPortal.Addr(), uintptr(unsafe.Pointer(_InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(LoginOptions)), uintptr(SecurityFlags), uintptr(unsafe.Pointer(Portal)))
 	return uint32(r1)
 }
 
@@ -138,11 +148,13 @@ func AddIScsiSendTargetPortalA(InitiatorInstance foundation.PSTR, InitiatorPortN
 	return uint32(r1)
 }
 
-// AddIScsiSendTargetPortalW calls ISCSIDSC!AddIScsiSendTargetPortalW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addiscsisendtargetportalw
+// AddIScsiStaticTarget calls ISCSIDSC!AddIScsiStaticTargetW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addiscsistatictargetw
 // Minimum OS: windows6.0.6000.
-func AddIScsiSendTargetPortalW(InitiatorInstance foundation.PWSTR, InitiatorPortNumber uint32, LoginOptions *ISCSI_LOGIN_OPTIONS, SecurityFlags uint64, Portal *ISCSI_TARGET_PORTALW) uint32 {
-	r1, _, _ := syscall.SyscallN(procAddIScsiSendTargetPortalW.Addr(), uintptr(unsafe.Pointer(InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(LoginOptions)), uintptr(SecurityFlags), uintptr(unsafe.Pointer(Portal)))
+func AddIScsiStaticTarget(TargetName string, TargetAlias string, TargetFlags uint32, Persist foundation.BOOLEAN, Mappings *ISCSI_TARGET_MAPPINGW, LoginOptions *ISCSI_LOGIN_OPTIONS, PortalGroup *ISCSI_TARGET_PORTAL_GROUPW) uint32 {
+	_TargetName := win32.UTF16Ptr(TargetName)
+	_TargetAlias := win32.UTF16Ptr(TargetAlias)
+	r1, _, _ := syscall.SyscallN(procAddIScsiStaticTarget.Addr(), uintptr(unsafe.Pointer(_TargetName)), uintptr(unsafe.Pointer(_TargetAlias)), uintptr(TargetFlags), uintptr(Persist), uintptr(unsafe.Pointer(Mappings)), uintptr(unsafe.Pointer(LoginOptions)), uintptr(unsafe.Pointer(PortalGroup)))
 	return uint32(r1)
 }
 
@@ -154,11 +166,12 @@ func AddIScsiStaticTargetA(TargetName foundation.PSTR, TargetAlias foundation.PS
 	return uint32(r1)
 }
 
-// AddIScsiStaticTargetW calls ISCSIDSC!AddIScsiStaticTargetW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addiscsistatictargetw
+// AddPersistentIScsiDevice calls ISCSIDSC!AddPersistentIScsiDeviceW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addpersistentiscsidevicew
 // Minimum OS: windows6.0.6000.
-func AddIScsiStaticTargetW(TargetName foundation.PWSTR, TargetAlias foundation.PWSTR, TargetFlags uint32, Persist foundation.BOOLEAN, Mappings *ISCSI_TARGET_MAPPINGW, LoginOptions *ISCSI_LOGIN_OPTIONS, PortalGroup *ISCSI_TARGET_PORTAL_GROUPW) uint32 {
-	r1, _, _ := syscall.SyscallN(procAddIScsiStaticTargetW.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(unsafe.Pointer(TargetAlias)), uintptr(TargetFlags), uintptr(Persist), uintptr(unsafe.Pointer(Mappings)), uintptr(unsafe.Pointer(LoginOptions)), uintptr(unsafe.Pointer(PortalGroup)))
+func AddPersistentIScsiDevice(DevicePath string) uint32 {
+	_DevicePath := win32.UTF16Ptr(DevicePath)
+	r1, _, _ := syscall.SyscallN(procAddPersistentIScsiDevice.Addr(), uintptr(unsafe.Pointer(_DevicePath)))
 	return uint32(r1)
 }
 
@@ -170,11 +183,12 @@ func AddPersistentIScsiDeviceA(DevicePath foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// AddPersistentIScsiDeviceW calls ISCSIDSC!AddPersistentIScsiDeviceW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addpersistentiscsidevicew
+// AddRadiusServer calls ISCSIDSC!AddRadiusServerW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addradiusserverw
 // Minimum OS: windows6.0.6000.
-func AddPersistentIScsiDeviceW(DevicePath foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procAddPersistentIScsiDeviceW.Addr(), uintptr(unsafe.Pointer(DevicePath)))
+func AddRadiusServer(Address string) uint32 {
+	_Address := win32.UTF16Ptr(Address)
+	r1, _, _ := syscall.SyscallN(procAddRadiusServer.Addr(), uintptr(unsafe.Pointer(_Address)))
 	return uint32(r1)
 }
 
@@ -186,19 +200,19 @@ func AddRadiusServerA(Address foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// AddRadiusServerW calls ISCSIDSC!AddRadiusServerW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-addradiusserverw
-// Minimum OS: windows6.0.6000.
-func AddRadiusServerW(Address foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procAddRadiusServerW.Addr(), uintptr(unsafe.Pointer(Address)))
-	return uint32(r1)
-}
-
 // ClearPersistentIScsiDevices calls ISCSIDSC!ClearPersistentIScsiDevices.
 // https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-clearpersistentiscsidevices
 // Minimum OS: windows6.0.6000.
 func ClearPersistentIScsiDevices() uint32 {
 	r1, _, _ := syscall.SyscallN(procClearPersistentIScsiDevices.Addr())
+	return uint32(r1)
+}
+
+// GetDevicesForIScsiSession calls ISCSIDSC!GetDevicesForIScsiSessionW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getdevicesforiscsisessionw
+// Minimum OS: windows6.0.6000.
+func GetDevicesForIScsiSession(UniqueSessionId *ISCSI_UNIQUE_SESSION_ID, DeviceCount *uint32, Devices *ISCSI_DEVICE_ON_SESSIONW) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetDevicesForIScsiSession.Addr(), uintptr(unsafe.Pointer(UniqueSessionId)), uintptr(unsafe.Pointer(DeviceCount)), uintptr(unsafe.Pointer(Devices)))
 	return uint32(r1)
 }
 
@@ -210,11 +224,12 @@ func GetDevicesForIScsiSessionA(UniqueSessionId *ISCSI_UNIQUE_SESSION_ID, Device
 	return uint32(r1)
 }
 
-// GetDevicesForIScsiSessionW calls ISCSIDSC!GetDevicesForIScsiSessionW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getdevicesforiscsisessionw
+// GetIScsiIKEInfo calls ISCSIDSC!GetIScsiIKEInfoW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getiscsiikeinfow
 // Minimum OS: windows6.0.6000.
-func GetDevicesForIScsiSessionW(UniqueSessionId *ISCSI_UNIQUE_SESSION_ID, DeviceCount *uint32, Devices *ISCSI_DEVICE_ON_SESSIONW) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetDevicesForIScsiSessionW.Addr(), uintptr(unsafe.Pointer(UniqueSessionId)), uintptr(unsafe.Pointer(DeviceCount)), uintptr(unsafe.Pointer(Devices)))
+func GetIScsiIKEInfo(InitiatorName string, InitiatorPortNumber uint32, Reserved *uint32, AuthInfo *IKE_AUTHENTICATION_INFORMATION) uint32 {
+	_InitiatorName := win32.UTF16Ptr(InitiatorName)
+	r1, _, _ := syscall.SyscallN(procGetIScsiIKEInfo.Addr(), uintptr(unsafe.Pointer(_InitiatorName)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(AuthInfo)))
 	return uint32(r1)
 }
 
@@ -226,11 +241,11 @@ func GetIScsiIKEInfoA(InitiatorName foundation.PSTR, InitiatorPortNumber uint32,
 	return uint32(r1)
 }
 
-// GetIScsiIKEInfoW calls ISCSIDSC!GetIScsiIKEInfoW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getiscsiikeinfow
+// GetIScsiInitiatorNodeName calls ISCSIDSC!GetIScsiInitiatorNodeNameW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getiscsiinitiatornodenamew
 // Minimum OS: windows6.0.6000.
-func GetIScsiIKEInfoW(InitiatorName foundation.PWSTR, InitiatorPortNumber uint32, Reserved *uint32, AuthInfo *IKE_AUTHENTICATION_INFORMATION) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetIScsiIKEInfoW.Addr(), uintptr(unsafe.Pointer(InitiatorName)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(AuthInfo)))
+func GetIScsiInitiatorNodeName(InitiatorNodeName foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetIScsiInitiatorNodeName.Addr(), uintptr(unsafe.Pointer(InitiatorNodeName)))
 	return uint32(r1)
 }
 
@@ -242,11 +257,11 @@ func GetIScsiInitiatorNodeNameA(InitiatorNodeName foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// GetIScsiInitiatorNodeNameW calls ISCSIDSC!GetIScsiInitiatorNodeNameW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getiscsiinitiatornodenamew
+// GetIScsiSessionList calls ISCSIDSC!GetIScsiSessionListW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getiscsisessionlistw
 // Minimum OS: windows6.0.6000.
-func GetIScsiInitiatorNodeNameW(InitiatorNodeName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetIScsiInitiatorNodeNameW.Addr(), uintptr(unsafe.Pointer(InitiatorNodeName)))
+func GetIScsiSessionList(BufferSize *uint32, SessionCount *uint32, SessionInfo *ISCSI_SESSION_INFOW) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetIScsiSessionList.Addr(), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(SessionCount)), uintptr(unsafe.Pointer(SessionInfo)))
 	return uint32(r1)
 }
 
@@ -264,11 +279,13 @@ func GetIScsiSessionListEx(BufferSize *uint32, SessionCountPtr *uint32, SessionI
 	return uint32(r1)
 }
 
-// GetIScsiSessionListW calls ISCSIDSC!GetIScsiSessionListW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getiscsisessionlistw
+// GetIScsiTargetInformation calls ISCSIDSC!GetIScsiTargetInformationW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getiscsitargetinformationw
 // Minimum OS: windows6.0.6000.
-func GetIScsiSessionListW(BufferSize *uint32, SessionCount *uint32, SessionInfo *ISCSI_SESSION_INFOW) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetIScsiSessionListW.Addr(), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(SessionCount)), uintptr(unsafe.Pointer(SessionInfo)))
+func GetIScsiTargetInformation(TargetName string, DiscoveryMechanism string, InfoClass TARGET_INFORMATION_CLASS, BufferSize *uint32, Buffer unsafe.Pointer) uint32 {
+	_TargetName := win32.UTF16Ptr(TargetName)
+	_DiscoveryMechanism := win32.UTF16Ptr(DiscoveryMechanism)
+	r1, _, _ := syscall.SyscallN(procGetIScsiTargetInformation.Addr(), uintptr(unsafe.Pointer(_TargetName)), uintptr(unsafe.Pointer(_DiscoveryMechanism)), uintptr(InfoClass), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
@@ -280,19 +297,21 @@ func GetIScsiTargetInformationA(TargetName foundation.PSTR, DiscoveryMechanism f
 	return uint32(r1)
 }
 
-// GetIScsiTargetInformationW calls ISCSIDSC!GetIScsiTargetInformationW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getiscsitargetinformationw
-// Minimum OS: windows6.0.6000.
-func GetIScsiTargetInformationW(TargetName foundation.PWSTR, DiscoveryMechanism foundation.PWSTR, InfoClass TARGET_INFORMATION_CLASS, BufferSize *uint32, Buffer unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetIScsiTargetInformationW.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(unsafe.Pointer(DiscoveryMechanism)), uintptr(InfoClass), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)))
-	return uint32(r1)
-}
-
 // GetIScsiVersionInformation calls ISCSIDSC!GetIScsiVersionInformation.
 // https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-getiscsiversioninformation
 // Minimum OS: windows6.0.6000.
 func GetIScsiVersionInformation(VersionInfo *ISCSI_VERSION_INFO) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetIScsiVersionInformation.Addr(), uintptr(unsafe.Pointer(VersionInfo)))
+	return uint32(r1)
+}
+
+// LoginIScsiTarget calls ISCSIDSC!LoginIScsiTargetW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-loginiscsitargetw
+// Minimum OS: windows6.0.6000.
+func LoginIScsiTarget(TargetName string, IsInformationalSession foundation.BOOLEAN, InitiatorInstance string, InitiatorPortNumber uint32, TargetPortal *ISCSI_TARGET_PORTALW, SecurityFlags uint64, Mappings *ISCSI_TARGET_MAPPINGW, LoginOptions *ISCSI_LOGIN_OPTIONS, KeySize uint32, Key foundation.PSTR, IsPersistent foundation.BOOLEAN, UniqueSessionId *ISCSI_UNIQUE_SESSION_ID, UniqueConnectionId *ISCSI_UNIQUE_SESSION_ID) uint32 {
+	_TargetName := win32.UTF16Ptr(TargetName)
+	_InitiatorInstance := win32.UTF16Ptr(InitiatorInstance)
+	r1, _, _ := syscall.SyscallN(procLoginIScsiTarget.Addr(), uintptr(unsafe.Pointer(_TargetName)), uintptr(IsInformationalSession), uintptr(unsafe.Pointer(_InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(TargetPortal)), uintptr(SecurityFlags), uintptr(unsafe.Pointer(Mappings)), uintptr(unsafe.Pointer(LoginOptions)), uintptr(KeySize), uintptr(unsafe.Pointer(Key)), uintptr(IsPersistent), uintptr(unsafe.Pointer(UniqueSessionId)), uintptr(unsafe.Pointer(UniqueConnectionId)))
 	return uint32(r1)
 }
 
@@ -304,19 +323,20 @@ func LoginIScsiTargetA(TargetName foundation.PSTR, IsInformationalSession founda
 	return uint32(r1)
 }
 
-// LoginIScsiTargetW calls ISCSIDSC!LoginIScsiTargetW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-loginiscsitargetw
-// Minimum OS: windows6.0.6000.
-func LoginIScsiTargetW(TargetName foundation.PWSTR, IsInformationalSession foundation.BOOLEAN, InitiatorInstance foundation.PWSTR, InitiatorPortNumber uint32, TargetPortal *ISCSI_TARGET_PORTALW, SecurityFlags uint64, Mappings *ISCSI_TARGET_MAPPINGW, LoginOptions *ISCSI_LOGIN_OPTIONS, KeySize uint32, Key foundation.PSTR, IsPersistent foundation.BOOLEAN, UniqueSessionId *ISCSI_UNIQUE_SESSION_ID, UniqueConnectionId *ISCSI_UNIQUE_SESSION_ID) uint32 {
-	r1, _, _ := syscall.SyscallN(procLoginIScsiTargetW.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(IsInformationalSession), uintptr(unsafe.Pointer(InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(TargetPortal)), uintptr(SecurityFlags), uintptr(unsafe.Pointer(Mappings)), uintptr(unsafe.Pointer(LoginOptions)), uintptr(KeySize), uintptr(unsafe.Pointer(Key)), uintptr(IsPersistent), uintptr(unsafe.Pointer(UniqueSessionId)), uintptr(unsafe.Pointer(UniqueConnectionId)))
-	return uint32(r1)
-}
-
 // LogoutIScsiTarget calls ISCSIDSC!LogoutIScsiTarget.
 // https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-logoutiscsitarget
 // Minimum OS: windows6.0.6000.
 func LogoutIScsiTarget(UniqueSessionId *ISCSI_UNIQUE_SESSION_ID) uint32 {
 	r1, _, _ := syscall.SyscallN(procLogoutIScsiTarget.Addr(), uintptr(unsafe.Pointer(UniqueSessionId)))
+	return uint32(r1)
+}
+
+// RefreshISNSServer calls ISCSIDSC!RefreshISNSServerW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-refreshisnsserverw
+// Minimum OS: windows6.0.6000.
+func RefreshISNSServer(Address string) uint32 {
+	_Address := win32.UTF16Ptr(Address)
+	r1, _, _ := syscall.SyscallN(procRefreshISNSServer.Addr(), uintptr(unsafe.Pointer(_Address)))
 	return uint32(r1)
 }
 
@@ -328,11 +348,12 @@ func RefreshISNSServerA(Address foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// RefreshISNSServerW calls ISCSIDSC!RefreshISNSServerW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-refreshisnsserverw
+// RefreshIScsiSendTargetPortal calls ISCSIDSC!RefreshIScsiSendTargetPortalW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-refreshiscsisendtargetportalw
 // Minimum OS: windows6.0.6000.
-func RefreshISNSServerW(Address foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procRefreshISNSServerW.Addr(), uintptr(unsafe.Pointer(Address)))
+func RefreshIScsiSendTargetPortal(InitiatorInstance string, InitiatorPortNumber uint32, Portal *ISCSI_TARGET_PORTALW) uint32 {
+	_InitiatorInstance := win32.UTF16Ptr(InitiatorInstance)
+	r1, _, _ := syscall.SyscallN(procRefreshIScsiSendTargetPortal.Addr(), uintptr(unsafe.Pointer(_InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(Portal)))
 	return uint32(r1)
 }
 
@@ -344,11 +365,12 @@ func RefreshIScsiSendTargetPortalA(InitiatorInstance foundation.PSTR, InitiatorP
 	return uint32(r1)
 }
 
-// RefreshIScsiSendTargetPortalW calls ISCSIDSC!RefreshIScsiSendTargetPortalW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-refreshiscsisendtargetportalw
+// RemoveISNSServer calls ISCSIDSC!RemoveISNSServerW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeisnsserverw
 // Minimum OS: windows6.0.6000.
-func RefreshIScsiSendTargetPortalW(InitiatorInstance foundation.PWSTR, InitiatorPortNumber uint32, Portal *ISCSI_TARGET_PORTALW) uint32 {
-	r1, _, _ := syscall.SyscallN(procRefreshIScsiSendTargetPortalW.Addr(), uintptr(unsafe.Pointer(InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(Portal)))
+func RemoveISNSServer(Address string) uint32 {
+	_Address := win32.UTF16Ptr(Address)
+	r1, _, _ := syscall.SyscallN(procRemoveISNSServer.Addr(), uintptr(unsafe.Pointer(_Address)))
 	return uint32(r1)
 }
 
@@ -360,19 +382,21 @@ func RemoveISNSServerA(Address foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// RemoveISNSServerW calls ISCSIDSC!RemoveISNSServerW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeisnsserverw
-// Minimum OS: windows6.0.6000.
-func RemoveISNSServerW(Address foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procRemoveISNSServerW.Addr(), uintptr(unsafe.Pointer(Address)))
-	return uint32(r1)
-}
-
 // RemoveIScsiConnection calls ISCSIDSC!RemoveIScsiConnection.
 // https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeiscsiconnection
 // Minimum OS: windows6.0.6000.
 func RemoveIScsiConnection(UniqueSessionId *ISCSI_UNIQUE_SESSION_ID, ConnectionId *ISCSI_UNIQUE_SESSION_ID) uint32 {
 	r1, _, _ := syscall.SyscallN(procRemoveIScsiConnection.Addr(), uintptr(unsafe.Pointer(UniqueSessionId)), uintptr(unsafe.Pointer(ConnectionId)))
+	return uint32(r1)
+}
+
+// RemoveIScsiPersistentTarget calls ISCSIDSC!RemoveIScsiPersistentTargetW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeiscsipersistenttargetw
+// Minimum OS: windows6.0.6000.
+func RemoveIScsiPersistentTarget(InitiatorInstance string, InitiatorPortNumber uint32, TargetName string, Portal *ISCSI_TARGET_PORTALW) uint32 {
+	_InitiatorInstance := win32.UTF16Ptr(InitiatorInstance)
+	_TargetName := win32.UTF16Ptr(TargetName)
+	r1, _, _ := syscall.SyscallN(procRemoveIScsiPersistentTarget.Addr(), uintptr(unsafe.Pointer(_InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(_TargetName)), uintptr(unsafe.Pointer(Portal)))
 	return uint32(r1)
 }
 
@@ -384,11 +408,12 @@ func RemoveIScsiPersistentTargetA(InitiatorInstance foundation.PSTR, InitiatorPo
 	return uint32(r1)
 }
 
-// RemoveIScsiPersistentTargetW calls ISCSIDSC!RemoveIScsiPersistentTargetW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeiscsipersistenttargetw
+// RemoveIScsiSendTargetPortal calls ISCSIDSC!RemoveIScsiSendTargetPortalW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeiscsisendtargetportalw
 // Minimum OS: windows6.0.6000.
-func RemoveIScsiPersistentTargetW(InitiatorInstance foundation.PWSTR, InitiatorPortNumber uint32, TargetName foundation.PWSTR, Portal *ISCSI_TARGET_PORTALW) uint32 {
-	r1, _, _ := syscall.SyscallN(procRemoveIScsiPersistentTargetW.Addr(), uintptr(unsafe.Pointer(InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(TargetName)), uintptr(unsafe.Pointer(Portal)))
+func RemoveIScsiSendTargetPortal(InitiatorInstance string, InitiatorPortNumber uint32, Portal *ISCSI_TARGET_PORTALW) uint32 {
+	_InitiatorInstance := win32.UTF16Ptr(InitiatorInstance)
+	r1, _, _ := syscall.SyscallN(procRemoveIScsiSendTargetPortal.Addr(), uintptr(unsafe.Pointer(_InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(Portal)))
 	return uint32(r1)
 }
 
@@ -400,11 +425,12 @@ func RemoveIScsiSendTargetPortalA(InitiatorInstance foundation.PSTR, InitiatorPo
 	return uint32(r1)
 }
 
-// RemoveIScsiSendTargetPortalW calls ISCSIDSC!RemoveIScsiSendTargetPortalW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeiscsisendtargetportalw
+// RemoveIScsiStaticTarget calls ISCSIDSC!RemoveIScsiStaticTargetW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeiscsistatictargetw
 // Minimum OS: windows6.0.6000.
-func RemoveIScsiSendTargetPortalW(InitiatorInstance foundation.PWSTR, InitiatorPortNumber uint32, Portal *ISCSI_TARGET_PORTALW) uint32 {
-	r1, _, _ := syscall.SyscallN(procRemoveIScsiSendTargetPortalW.Addr(), uintptr(unsafe.Pointer(InitiatorInstance)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(Portal)))
+func RemoveIScsiStaticTarget(TargetName string) uint32 {
+	_TargetName := win32.UTF16Ptr(TargetName)
+	r1, _, _ := syscall.SyscallN(procRemoveIScsiStaticTarget.Addr(), uintptr(unsafe.Pointer(_TargetName)))
 	return uint32(r1)
 }
 
@@ -416,11 +442,12 @@ func RemoveIScsiStaticTargetA(TargetName foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// RemoveIScsiStaticTargetW calls ISCSIDSC!RemoveIScsiStaticTargetW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeiscsistatictargetw
+// RemovePersistentIScsiDevice calls ISCSIDSC!RemovePersistentIScsiDeviceW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removepersistentiscsidevicew
 // Minimum OS: windows6.0.6000.
-func RemoveIScsiStaticTargetW(TargetName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procRemoveIScsiStaticTargetW.Addr(), uintptr(unsafe.Pointer(TargetName)))
+func RemovePersistentIScsiDevice(DevicePath string) uint32 {
+	_DevicePath := win32.UTF16Ptr(DevicePath)
+	r1, _, _ := syscall.SyscallN(procRemovePersistentIScsiDevice.Addr(), uintptr(unsafe.Pointer(_DevicePath)))
 	return uint32(r1)
 }
 
@@ -432,11 +459,12 @@ func RemovePersistentIScsiDeviceA(DevicePath foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// RemovePersistentIScsiDeviceW calls ISCSIDSC!RemovePersistentIScsiDeviceW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removepersistentiscsidevicew
+// RemoveRadiusServer calls ISCSIDSC!RemoveRadiusServerW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeradiusserverw
 // Minimum OS: windows6.0.6000.
-func RemovePersistentIScsiDeviceW(DevicePath foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procRemovePersistentIScsiDeviceW.Addr(), uintptr(unsafe.Pointer(DevicePath)))
+func RemoveRadiusServer(Address string) uint32 {
+	_Address := win32.UTF16Ptr(Address)
+	r1, _, _ := syscall.SyscallN(procRemoveRadiusServer.Addr(), uintptr(unsafe.Pointer(_Address)))
 	return uint32(r1)
 }
 
@@ -448,11 +476,11 @@ func RemoveRadiusServerA(Address foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// RemoveRadiusServerW calls ISCSIDSC!RemoveRadiusServerW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-removeradiusserverw
+// ReportActiveIScsiTargetMappings calls ISCSIDSC!ReportActiveIScsiTargetMappingsW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportactiveiscsitargetmappingsw
 // Minimum OS: windows6.0.6000.
-func RemoveRadiusServerW(Address foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procRemoveRadiusServerW.Addr(), uintptr(unsafe.Pointer(Address)))
+func ReportActiveIScsiTargetMappings(BufferSize *uint32, MappingCount *uint32, Mappings *ISCSI_TARGET_MAPPINGW) uint32 {
+	r1, _, _ := syscall.SyscallN(procReportActiveIScsiTargetMappings.Addr(), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(MappingCount)), uintptr(unsafe.Pointer(Mappings)))
 	return uint32(r1)
 }
 
@@ -464,11 +492,11 @@ func ReportActiveIScsiTargetMappingsA(BufferSize *uint32, MappingCount *uint32, 
 	return uint32(r1)
 }
 
-// ReportActiveIScsiTargetMappingsW calls ISCSIDSC!ReportActiveIScsiTargetMappingsW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportactiveiscsitargetmappingsw
+// ReportISNSServerList calls ISCSIDSC!ReportISNSServerListW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportisnsserverlistw
 // Minimum OS: windows6.0.6000.
-func ReportActiveIScsiTargetMappingsW(BufferSize *uint32, MappingCount *uint32, Mappings *ISCSI_TARGET_MAPPINGW) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportActiveIScsiTargetMappingsW.Addr(), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(MappingCount)), uintptr(unsafe.Pointer(Mappings)))
+func ReportISNSServerList(BufferSizeInChar *uint32, Buffer foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procReportISNSServerList.Addr(), uintptr(unsafe.Pointer(BufferSizeInChar)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
@@ -480,11 +508,11 @@ func ReportISNSServerListA(BufferSizeInChar *uint32, Buffer foundation.PSTR) uin
 	return uint32(r1)
 }
 
-// ReportISNSServerListW calls ISCSIDSC!ReportISNSServerListW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportisnsserverlistw
+// ReportIScsiInitiatorList calls ISCSIDSC!ReportIScsiInitiatorListW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsiinitiatorlistw
 // Minimum OS: windows6.0.6000.
-func ReportISNSServerListW(BufferSizeInChar *uint32, Buffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportISNSServerListW.Addr(), uintptr(unsafe.Pointer(BufferSizeInChar)), uintptr(unsafe.Pointer(Buffer)))
+func ReportIScsiInitiatorList(BufferSize *uint32, Buffer foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procReportIScsiInitiatorList.Addr(), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
@@ -496,11 +524,11 @@ func ReportIScsiInitiatorListA(BufferSize *uint32, Buffer foundation.PSTR) uint3
 	return uint32(r1)
 }
 
-// ReportIScsiInitiatorListW calls ISCSIDSC!ReportIScsiInitiatorListW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsiinitiatorlistw
+// ReportIScsiPersistentLogins calls ISCSIDSC!ReportIScsiPersistentLoginsW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsipersistentloginsw
 // Minimum OS: windows6.0.6000.
-func ReportIScsiInitiatorListW(BufferSize *uint32, Buffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportIScsiInitiatorListW.Addr(), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)))
+func ReportIScsiPersistentLogins(Count *uint32, PersistentLoginInfo *PERSISTENT_ISCSI_LOGIN_INFOW, BufferSizeInBytes *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procReportIScsiPersistentLogins.Addr(), uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(PersistentLoginInfo)), uintptr(unsafe.Pointer(BufferSizeInBytes)))
 	return uint32(r1)
 }
 
@@ -512,11 +540,11 @@ func ReportIScsiPersistentLoginsA(Count *uint32, PersistentLoginInfo *PERSISTENT
 	return uint32(r1)
 }
 
-// ReportIScsiPersistentLoginsW calls ISCSIDSC!ReportIScsiPersistentLoginsW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsipersistentloginsw
+// ReportIScsiSendTargetPortals calls ISCSIDSC!ReportIScsiSendTargetPortalsW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsisendtargetportalsw
 // Minimum OS: windows6.0.6000.
-func ReportIScsiPersistentLoginsW(Count *uint32, PersistentLoginInfo *PERSISTENT_ISCSI_LOGIN_INFOW, BufferSizeInBytes *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportIScsiPersistentLoginsW.Addr(), uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(PersistentLoginInfo)), uintptr(unsafe.Pointer(BufferSizeInBytes)))
+func ReportIScsiSendTargetPortals(PortalCount *uint32, PortalInfo *ISCSI_TARGET_PORTAL_INFOW) uint32 {
+	r1, _, _ := syscall.SyscallN(procReportIScsiSendTargetPortals.Addr(), uintptr(unsafe.Pointer(PortalCount)), uintptr(unsafe.Pointer(PortalInfo)))
 	return uint32(r1)
 }
 
@@ -528,6 +556,14 @@ func ReportIScsiSendTargetPortalsA(PortalCount *uint32, PortalInfo *ISCSI_TARGET
 	return uint32(r1)
 }
 
+// ReportIScsiSendTargetPortalsEx calls ISCSIDSC!ReportIScsiSendTargetPortalsExW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsisendtargetportalsexw
+// Minimum OS: windows6.0.6000.
+func ReportIScsiSendTargetPortalsEx(PortalCount *uint32, PortalInfoSize *uint32, PortalInfo *ISCSI_TARGET_PORTAL_INFO_EXW) uint32 {
+	r1, _, _ := syscall.SyscallN(procReportIScsiSendTargetPortalsEx.Addr(), uintptr(unsafe.Pointer(PortalCount)), uintptr(unsafe.Pointer(PortalInfoSize)), uintptr(unsafe.Pointer(PortalInfo)))
+	return uint32(r1)
+}
+
 // ReportIScsiSendTargetPortalsExA calls ISCSIDSC!ReportIScsiSendTargetPortalsExA.
 // https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsisendtargetportalsexa
 // Minimum OS: windows6.0.6000.
@@ -536,19 +572,13 @@ func ReportIScsiSendTargetPortalsExA(PortalCount *uint32, PortalInfoSize *uint32
 	return uint32(r1)
 }
 
-// ReportIScsiSendTargetPortalsExW calls ISCSIDSC!ReportIScsiSendTargetPortalsExW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsisendtargetportalsexw
+// ReportIScsiTargetPortals calls ISCSIDSC!ReportIScsiTargetPortalsW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsitargetportalsw
 // Minimum OS: windows6.0.6000.
-func ReportIScsiSendTargetPortalsExW(PortalCount *uint32, PortalInfoSize *uint32, PortalInfo *ISCSI_TARGET_PORTAL_INFO_EXW) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportIScsiSendTargetPortalsExW.Addr(), uintptr(unsafe.Pointer(PortalCount)), uintptr(unsafe.Pointer(PortalInfoSize)), uintptr(unsafe.Pointer(PortalInfo)))
-	return uint32(r1)
-}
-
-// ReportIScsiSendTargetPortalsW calls ISCSIDSC!ReportIScsiSendTargetPortalsW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsisendtargetportalsw
-// Minimum OS: windows6.0.6000.
-func ReportIScsiSendTargetPortalsW(PortalCount *uint32, PortalInfo *ISCSI_TARGET_PORTAL_INFOW) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportIScsiSendTargetPortalsW.Addr(), uintptr(unsafe.Pointer(PortalCount)), uintptr(unsafe.Pointer(PortalInfo)))
+func ReportIScsiTargetPortals(InitiatorName string, TargetName string, TargetPortalTag *uint16, ElementCount *uint32, Portals *ISCSI_TARGET_PORTALW) uint32 {
+	_InitiatorName := win32.UTF16Ptr(InitiatorName)
+	_TargetName := win32.UTF16Ptr(TargetName)
+	r1, _, _ := syscall.SyscallN(procReportIScsiTargetPortals.Addr(), uintptr(unsafe.Pointer(_InitiatorName)), uintptr(unsafe.Pointer(_TargetName)), uintptr(unsafe.Pointer(TargetPortalTag)), uintptr(unsafe.Pointer(ElementCount)), uintptr(unsafe.Pointer(Portals)))
 	return uint32(r1)
 }
 
@@ -560,11 +590,11 @@ func ReportIScsiTargetPortalsA(InitiatorName foundation.PSTR, TargetName foundat
 	return uint32(r1)
 }
 
-// ReportIScsiTargetPortalsW calls ISCSIDSC!ReportIScsiTargetPortalsW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsitargetportalsw
+// ReportIScsiTargets calls ISCSIDSC!ReportIScsiTargetsW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsitargetsw
 // Minimum OS: windows6.0.6000.
-func ReportIScsiTargetPortalsW(InitiatorName foundation.PWSTR, TargetName foundation.PWSTR, TargetPortalTag *uint16, ElementCount *uint32, Portals *ISCSI_TARGET_PORTALW) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportIScsiTargetPortalsW.Addr(), uintptr(unsafe.Pointer(InitiatorName)), uintptr(unsafe.Pointer(TargetName)), uintptr(unsafe.Pointer(TargetPortalTag)), uintptr(unsafe.Pointer(ElementCount)), uintptr(unsafe.Pointer(Portals)))
+func ReportIScsiTargets(ForceUpdate foundation.BOOLEAN, BufferSize *uint32, Buffer foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procReportIScsiTargets.Addr(), uintptr(ForceUpdate), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
@@ -576,11 +606,11 @@ func ReportIScsiTargetsA(ForceUpdate foundation.BOOLEAN, BufferSize *uint32, Buf
 	return uint32(r1)
 }
 
-// ReportIScsiTargetsW calls ISCSIDSC!ReportIScsiTargetsW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportiscsitargetsw
+// ReportPersistentIScsiDevices calls ISCSIDSC!ReportPersistentIScsiDevicesW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportpersistentiscsidevicesw
 // Minimum OS: windows6.0.6000.
-func ReportIScsiTargetsW(ForceUpdate foundation.BOOLEAN, BufferSize *uint32, Buffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportIScsiTargetsW.Addr(), uintptr(ForceUpdate), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)))
+func ReportPersistentIScsiDevices(BufferSizeInChar *uint32, Buffer foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procReportPersistentIScsiDevices.Addr(), uintptr(unsafe.Pointer(BufferSizeInChar)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
@@ -592,11 +622,11 @@ func ReportPersistentIScsiDevicesA(BufferSizeInChar *uint32, Buffer foundation.P
 	return uint32(r1)
 }
 
-// ReportPersistentIScsiDevicesW calls ISCSIDSC!ReportPersistentIScsiDevicesW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportpersistentiscsidevicesw
+// ReportRadiusServerList calls ISCSIDSC!ReportRadiusServerListW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportradiusserverlistw
 // Minimum OS: windows6.0.6000.
-func ReportPersistentIScsiDevicesW(BufferSizeInChar *uint32, Buffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportPersistentIScsiDevicesW.Addr(), uintptr(unsafe.Pointer(BufferSizeInChar)), uintptr(unsafe.Pointer(Buffer)))
+func ReportRadiusServerList(BufferSizeInChar *uint32, Buffer foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procReportRadiusServerList.Addr(), uintptr(unsafe.Pointer(BufferSizeInChar)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
@@ -605,14 +635,6 @@ func ReportPersistentIScsiDevicesW(BufferSizeInChar *uint32, Buffer foundation.P
 // Minimum OS: windows6.0.6000.
 func ReportRadiusServerListA(BufferSizeInChar *uint32, Buffer foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procReportRadiusServerListA.Addr(), uintptr(unsafe.Pointer(BufferSizeInChar)), uintptr(unsafe.Pointer(Buffer)))
-	return uint32(r1)
-}
-
-// ReportRadiusServerListW calls ISCSIDSC!ReportRadiusServerListW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-reportradiusserverlistw
-// Minimum OS: windows6.0.6000.
-func ReportRadiusServerListW(BufferSizeInChar *uint32, Buffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procReportRadiusServerListW.Addr(), uintptr(unsafe.Pointer(BufferSizeInChar)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
@@ -648,19 +670,20 @@ func SetIScsiGroupPresharedKey(KeyLength uint32, Key *byte, Persist foundation.B
 	return uint32(r1)
 }
 
+// SetIScsiIKEInfo calls ISCSIDSC!SetIScsiIKEInfoW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-setiscsiikeinfow
+// Minimum OS: windows6.0.6000.
+func SetIScsiIKEInfo(InitiatorName string, InitiatorPortNumber uint32, AuthInfo *IKE_AUTHENTICATION_INFORMATION, Persist foundation.BOOLEAN) uint32 {
+	_InitiatorName := win32.UTF16Ptr(InitiatorName)
+	r1, _, _ := syscall.SyscallN(procSetIScsiIKEInfo.Addr(), uintptr(unsafe.Pointer(_InitiatorName)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(AuthInfo)), uintptr(Persist))
+	return uint32(r1)
+}
+
 // SetIScsiIKEInfoA calls ISCSIDSC!SetIScsiIKEInfoA.
 // https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-setiscsiikeinfoa
 // Minimum OS: windows6.0.6000.
 func SetIScsiIKEInfoA(InitiatorName foundation.PSTR, InitiatorPortNumber uint32, AuthInfo *IKE_AUTHENTICATION_INFORMATION, Persist foundation.BOOLEAN) uint32 {
 	r1, _, _ := syscall.SyscallN(procSetIScsiIKEInfoA.Addr(), uintptr(unsafe.Pointer(InitiatorName)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(AuthInfo)), uintptr(Persist))
-	return uint32(r1)
-}
-
-// SetIScsiIKEInfoW calls ISCSIDSC!SetIScsiIKEInfoW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-setiscsiikeinfow
-// Minimum OS: windows6.0.6000.
-func SetIScsiIKEInfoW(InitiatorName foundation.PWSTR, InitiatorPortNumber uint32, AuthInfo *IKE_AUTHENTICATION_INFORMATION, Persist foundation.BOOLEAN) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetIScsiIKEInfoW.Addr(), uintptr(unsafe.Pointer(InitiatorName)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(AuthInfo)), uintptr(Persist))
 	return uint32(r1)
 }
 
@@ -672,19 +695,20 @@ func SetIScsiInitiatorCHAPSharedSecret(SharedSecretLength uint32, SharedSecret *
 	return uint32(r1)
 }
 
+// SetIScsiInitiatorNodeName calls ISCSIDSC!SetIScsiInitiatorNodeNameW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-setiscsiinitiatornodenamew
+// Minimum OS: windows6.0.6000.
+func SetIScsiInitiatorNodeName(InitiatorNodeName string) uint32 {
+	_InitiatorNodeName := win32.UTF16Ptr(InitiatorNodeName)
+	r1, _, _ := syscall.SyscallN(procSetIScsiInitiatorNodeName.Addr(), uintptr(unsafe.Pointer(_InitiatorNodeName)))
+	return uint32(r1)
+}
+
 // SetIScsiInitiatorNodeNameA calls ISCSIDSC!SetIScsiInitiatorNodeNameA.
 // https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-setiscsiinitiatornodenamea
 // Minimum OS: windows6.0.6000.
 func SetIScsiInitiatorNodeNameA(InitiatorNodeName foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procSetIScsiInitiatorNodeNameA.Addr(), uintptr(unsafe.Pointer(InitiatorNodeName)))
-	return uint32(r1)
-}
-
-// SetIScsiInitiatorNodeNameW calls ISCSIDSC!SetIScsiInitiatorNodeNameW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-setiscsiinitiatornodenamew
-// Minimum OS: windows6.0.6000.
-func SetIScsiInitiatorNodeNameW(InitiatorNodeName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetIScsiInitiatorNodeNameW.Addr(), uintptr(unsafe.Pointer(InitiatorNodeName)))
 	return uint32(r1)
 }
 
@@ -696,19 +720,22 @@ func SetIScsiInitiatorRADIUSSharedSecret(SharedSecretLength uint32, SharedSecret
 	return uint32(r1)
 }
 
+// SetIScsiTunnelModeOuterAddress calls ISCSIDSC!SetIScsiTunnelModeOuterAddressW.
+// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-setiscsitunnelmodeouteraddressw
+// Minimum OS: windows6.0.6000.
+func SetIScsiTunnelModeOuterAddress(InitiatorName string, InitiatorPortNumber uint32, DestinationAddress string, OuterModeAddress string, Persist foundation.BOOLEAN) uint32 {
+	_InitiatorName := win32.UTF16Ptr(InitiatorName)
+	_DestinationAddress := win32.UTF16Ptr(DestinationAddress)
+	_OuterModeAddress := win32.UTF16Ptr(OuterModeAddress)
+	r1, _, _ := syscall.SyscallN(procSetIScsiTunnelModeOuterAddress.Addr(), uintptr(unsafe.Pointer(_InitiatorName)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(_DestinationAddress)), uintptr(unsafe.Pointer(_OuterModeAddress)), uintptr(Persist))
+	return uint32(r1)
+}
+
 // SetIScsiTunnelModeOuterAddressA calls ISCSIDSC!SetIScsiTunnelModeOuterAddressA.
 // https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-setiscsitunnelmodeouteraddressa
 // Minimum OS: windows6.0.6000.
 func SetIScsiTunnelModeOuterAddressA(InitiatorName foundation.PSTR, InitiatorPortNumber uint32, DestinationAddress foundation.PSTR, OuterModeAddress foundation.PSTR, Persist foundation.BOOLEAN) uint32 {
 	r1, _, _ := syscall.SyscallN(procSetIScsiTunnelModeOuterAddressA.Addr(), uintptr(unsafe.Pointer(InitiatorName)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(DestinationAddress)), uintptr(unsafe.Pointer(OuterModeAddress)), uintptr(Persist))
-	return uint32(r1)
-}
-
-// SetIScsiTunnelModeOuterAddressW calls ISCSIDSC!SetIScsiTunnelModeOuterAddressW.
-// https://learn.microsoft.com/windows/win32/api/iscsidsc/nf-iscsidsc-setiscsitunnelmodeouteraddressw
-// Minimum OS: windows6.0.6000.
-func SetIScsiTunnelModeOuterAddressW(InitiatorName foundation.PWSTR, InitiatorPortNumber uint32, DestinationAddress foundation.PWSTR, OuterModeAddress foundation.PWSTR, Persist foundation.BOOLEAN) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetIScsiTunnelModeOuterAddressW.Addr(), uintptr(unsafe.Pointer(InitiatorName)), uintptr(InitiatorPortNumber), uintptr(unsafe.Pointer(DestinationAddress)), uintptr(unsafe.Pointer(OuterModeAddress)), uintptr(Persist))
 	return uint32(r1)
 }
 

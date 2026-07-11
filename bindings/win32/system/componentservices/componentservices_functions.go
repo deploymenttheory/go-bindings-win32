@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -34,25 +33,25 @@ var (
 // CoCreateActivity calls comsvcs!CoCreateActivity.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-cocreateactivity
 // Minimum OS: windows5.1.2600.
-func CoCreateActivity(pIUnknown *systemcom.IUnknown, riid *win32.GUID, ppObj *unsafe.Pointer) foundation.HRESULT {
+func CoCreateActivity(pIUnknown *systemcom.IUnknown, riid *win32.GUID, ppObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCoCreateActivity.Addr(), uintptr(unsafe.Pointer(pIUnknown)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CoEnterServiceDomain calls comsvcs!CoEnterServiceDomain.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-coenterservicedomain
 // Minimum OS: windows5.1.2600.
-func CoEnterServiceDomain(pConfigObject *systemcom.IUnknown) foundation.HRESULT {
+func CoEnterServiceDomain(pConfigObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoEnterServiceDomain.Addr(), uintptr(unsafe.Pointer(pConfigObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CoGetDefaultContext calls OLE32!CoGetDefaultContext.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetdefaultcontext
 // Minimum OS: windows5.1.2600.
-func CoGetDefaultContext(aptType systemcom.APTTYPE, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func CoGetDefaultContext(aptType systemcom.APTTYPE, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCoGetDefaultContext.Addr(), uintptr(aptType), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CoLeaveServiceDomain calls comsvcs!CoLeaveServiceDomain.
@@ -65,33 +64,33 @@ func CoLeaveServiceDomain(pUnkStatus *systemcom.IUnknown) {
 // GetDispenserManager calls MTxDM!GetDispenserManager.
 // https://learn.microsoft.com/windows/win32/api/mtxdm/nf-mtxdm-getdispensermanager
 // Minimum OS: windows5.0.
-func GetDispenserManager(param0 **IDispenserManager) foundation.HRESULT {
+func GetDispenserManager(param0 **IDispenserManager) error {
 	r1, _, _ := syscall.SyscallN(procGetDispenserManager.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetManagedExtensions calls comsvcs!GetManagedExtensions.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-getmanagedextensions
 // Minimum OS: windows5.1.2600.
-func GetManagedExtensions(dwExts *uint32) foundation.HRESULT {
+func GetManagedExtensions(dwExts *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetManagedExtensions.Addr(), uintptr(unsafe.Pointer(dwExts)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MTSCreateActivity calls comsvcs!MTSCreateActivity.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-mtscreateactivity
 // Minimum OS: windows5.0.
-func MTSCreateActivity(riid *win32.GUID, ppobj *unsafe.Pointer) foundation.HRESULT {
+func MTSCreateActivity(riid *win32.GUID, ppobj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMTSCreateActivity.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppobj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RecycleSurrogate calls comsvcs!RecycleSurrogate.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-recyclesurrogate
 // Minimum OS: windows5.0.
-func RecycleSurrogate(lReasonCode int32) foundation.HRESULT {
+func RecycleSurrogate(lReasonCode int32) error {
 	r1, _, _ := syscall.SyscallN(procRecycleSurrogate.Addr(), uintptr(lReasonCode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeRef calls comsvcs!SafeRef.

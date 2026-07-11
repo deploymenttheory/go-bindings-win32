@@ -41,78 +41,78 @@ var (
 	procAllowSetForegroundWindow                       = modUSER32.NewProc("AllowSetForegroundWindow")
 	procAnimateWindow                                  = modUSER32.NewProc("AnimateWindow")
 	procAnyPopup                                       = modUSER32.NewProc("AnyPopup")
+	procAppendMenu                                     = modUSER32.NewProc("AppendMenuW")
 	procAppendMenuA                                    = modUSER32.NewProc("AppendMenuA")
-	procAppendMenuW                                    = modUSER32.NewProc("AppendMenuW")
 	procApplyWindowAction                              = modUSER32.NewProc("ApplyWindowAction")
 	procArrangeIconicWindows                           = modUSER32.NewProc("ArrangeIconicWindows")
 	procBeginDeferWindowPos                            = modUSER32.NewProc("BeginDeferWindowPos")
 	procBringWindowToTop                               = modUSER32.NewProc("BringWindowToTop")
 	procCalculatePopupWindowPosition                   = modUSER32.NewProc("CalculatePopupWindowPosition")
+	procCallMsgFilter                                  = modUSER32.NewProc("CallMsgFilterW")
 	procCallMsgFilterA                                 = modUSER32.NewProc("CallMsgFilterA")
-	procCallMsgFilterW                                 = modUSER32.NewProc("CallMsgFilterW")
 	procCallNextHookEx                                 = modUSER32.NewProc("CallNextHookEx")
+	procCallWindowProc                                 = modUSER32.NewProc("CallWindowProcW")
 	procCallWindowProcA                                = modUSER32.NewProc("CallWindowProcA")
-	procCallWindowProcW                                = modUSER32.NewProc("CallWindowProcW")
 	procCancelShutdown                                 = modUSER32.NewProc("CancelShutdown")
 	procCascadeWindows                                 = modUSER32.NewProc("CascadeWindows")
+	procChangeMenu                                     = modUSER32.NewProc("ChangeMenuW")
 	procChangeMenuA                                    = modUSER32.NewProc("ChangeMenuA")
-	procChangeMenuW                                    = modUSER32.NewProc("ChangeMenuW")
 	procChangeWindowMessageFilter                      = modUSER32.NewProc("ChangeWindowMessageFilter")
 	procChangeWindowMessageFilterEx                    = modUSER32.NewProc("ChangeWindowMessageFilterEx")
+	procCharLower                                      = modUSER32.NewProc("CharLowerW")
 	procCharLowerA                                     = modUSER32.NewProc("CharLowerA")
+	procCharLowerBuff                                  = modUSER32.NewProc("CharLowerBuffW")
 	procCharLowerBuffA                                 = modUSER32.NewProc("CharLowerBuffA")
-	procCharLowerBuffW                                 = modUSER32.NewProc("CharLowerBuffW")
-	procCharLowerW                                     = modUSER32.NewProc("CharLowerW")
+	procCharNext                                       = modUSER32.NewProc("CharNextW")
 	procCharNextA                                      = modUSER32.NewProc("CharNextA")
 	procCharNextExA                                    = modUSER32.NewProc("CharNextExA")
-	procCharNextW                                      = modUSER32.NewProc("CharNextW")
+	procCharPrev                                       = modUSER32.NewProc("CharPrevW")
 	procCharPrevA                                      = modUSER32.NewProc("CharPrevA")
 	procCharPrevExA                                    = modUSER32.NewProc("CharPrevExA")
-	procCharPrevW                                      = modUSER32.NewProc("CharPrevW")
+	procCharToOem                                      = modUSER32.NewProc("CharToOemW")
 	procCharToOemA                                     = modUSER32.NewProc("CharToOemA")
+	procCharToOemBuff                                  = modUSER32.NewProc("CharToOemBuffW")
 	procCharToOemBuffA                                 = modUSER32.NewProc("CharToOemBuffA")
-	procCharToOemBuffW                                 = modUSER32.NewProc("CharToOemBuffW")
-	procCharToOemW                                     = modUSER32.NewProc("CharToOemW")
+	procCharUpper                                      = modUSER32.NewProc("CharUpperW")
 	procCharUpperA                                     = modUSER32.NewProc("CharUpperA")
+	procCharUpperBuff                                  = modUSER32.NewProc("CharUpperBuffW")
 	procCharUpperBuffA                                 = modUSER32.NewProc("CharUpperBuffA")
-	procCharUpperBuffW                                 = modUSER32.NewProc("CharUpperBuffW")
-	procCharUpperW                                     = modUSER32.NewProc("CharUpperW")
 	procCheckMenuItem                                  = modUSER32.NewProc("CheckMenuItem")
 	procCheckMenuRadioItem                             = modUSER32.NewProc("CheckMenuRadioItem")
 	procClipCursor                                     = modUSER32.NewProc("ClipCursor")
 	procCloseWindow                                    = modUSER32.NewProc("CloseWindow")
 	procConvertPrimaryPointerToMouseDrag               = modUSER32.NewProc("ConvertPrimaryPointerToMouseDrag")
 	procConvertToInterceptWindow                       = modUSER32.NewProc("ConvertToInterceptWindow")
+	procCopyAcceleratorTable                           = modUSER32.NewProc("CopyAcceleratorTableW")
 	procCopyAcceleratorTableA                          = modUSER32.NewProc("CopyAcceleratorTableA")
-	procCopyAcceleratorTableW                          = modUSER32.NewProc("CopyAcceleratorTableW")
 	procCopyIcon                                       = modUSER32.NewProc("CopyIcon")
 	procCopyImage                                      = modUSER32.NewProc("CopyImage")
+	procCreateAcceleratorTable                         = modUSER32.NewProc("CreateAcceleratorTableW")
 	procCreateAcceleratorTableA                        = modUSER32.NewProc("CreateAcceleratorTableA")
-	procCreateAcceleratorTableW                        = modUSER32.NewProc("CreateAcceleratorTableW")
 	procCreateCaret                                    = modUSER32.NewProc("CreateCaret")
 	procCreateCursor                                   = modUSER32.NewProc("CreateCursor")
+	procCreateDialogIndirectParam                      = modUSER32.NewProc("CreateDialogIndirectParamW")
 	procCreateDialogIndirectParamA                     = modUSER32.NewProc("CreateDialogIndirectParamA")
-	procCreateDialogIndirectParamW                     = modUSER32.NewProc("CreateDialogIndirectParamW")
+	procCreateDialogParam                              = modUSER32.NewProc("CreateDialogParamW")
 	procCreateDialogParamA                             = modUSER32.NewProc("CreateDialogParamA")
-	procCreateDialogParamW                             = modUSER32.NewProc("CreateDialogParamW")
 	procCreateIcon                                     = modUSER32.NewProc("CreateIcon")
 	procCreateIconFromResource                         = modUSER32.NewProc("CreateIconFromResource")
 	procCreateIconFromResourceEx                       = modUSER32.NewProc("CreateIconFromResourceEx")
 	procCreateIconIndirect                             = modUSER32.NewProc("CreateIconIndirect")
+	procCreateMDIWindow                                = modUSER32.NewProc("CreateMDIWindowW")
 	procCreateMDIWindowA                               = modUSER32.NewProc("CreateMDIWindowA")
-	procCreateMDIWindowW                               = modUSER32.NewProc("CreateMDIWindowW")
 	procCreateMenu                                     = modUSER32.NewProc("CreateMenu")
 	procCreatePopupMenu                                = modUSER32.NewProc("CreatePopupMenu")
+	procCreateWindowEx                                 = modUSER32.NewProc("CreateWindowExW")
 	procCreateWindowExA                                = modUSER32.NewProc("CreateWindowExA")
-	procCreateWindowExW                                = modUSER32.NewProc("CreateWindowExW")
+	procDefDlgProc                                     = modUSER32.NewProc("DefDlgProcW")
 	procDefDlgProcA                                    = modUSER32.NewProc("DefDlgProcA")
-	procDefDlgProcW                                    = modUSER32.NewProc("DefDlgProcW")
+	procDefFrameProc                                   = modUSER32.NewProc("DefFrameProcW")
 	procDefFrameProcA                                  = modUSER32.NewProc("DefFrameProcA")
-	procDefFrameProcW                                  = modUSER32.NewProc("DefFrameProcW")
+	procDefMDIChildProc                                = modUSER32.NewProc("DefMDIChildProcW")
 	procDefMDIChildProcA                               = modUSER32.NewProc("DefMDIChildProcA")
-	procDefMDIChildProcW                               = modUSER32.NewProc("DefMDIChildProcW")
+	procDefWindowProc                                  = modUSER32.NewProc("DefWindowProcW")
 	procDefWindowProcA                                 = modUSER32.NewProc("DefWindowProcA")
-	procDefWindowProcW                                 = modUSER32.NewProc("DefWindowProcW")
 	procDeferWindowPos                                 = modUSER32.NewProc("DeferWindowPos")
 	procDeleteMenu                                     = modUSER32.NewProc("DeleteMenu")
 	procDeregisterShellHookWindow                      = modUSER32.NewProc("DeregisterShellHookWindow")
@@ -122,13 +122,13 @@ var (
 	procDestroyIcon                                    = modUSER32.NewProc("DestroyIcon")
 	procDestroyMenu                                    = modUSER32.NewProc("DestroyMenu")
 	procDestroyWindow                                  = modUSER32.NewProc("DestroyWindow")
+	procDialogBoxIndirectParam                         = modUSER32.NewProc("DialogBoxIndirectParamW")
 	procDialogBoxIndirectParamA                        = modUSER32.NewProc("DialogBoxIndirectParamA")
-	procDialogBoxIndirectParamW                        = modUSER32.NewProc("DialogBoxIndirectParamW")
+	procDialogBoxParam                                 = modUSER32.NewProc("DialogBoxParamW")
 	procDialogBoxParamA                                = modUSER32.NewProc("DialogBoxParamA")
-	procDialogBoxParamW                                = modUSER32.NewProc("DialogBoxParamW")
 	procDisableProcessWindowsGhosting                  = modUSER32.NewProc("DisableProcessWindowsGhosting")
+	procDispatchMessage                                = modUSER32.NewProc("DispatchMessageW")
 	procDispatchMessageA                               = modUSER32.NewProc("DispatchMessageA")
-	procDispatchMessageW                               = modUSER32.NewProc("DispatchMessageW")
 	procDragObject                                     = modUSER32.NewProc("DragObject")
 	procDrawIcon                                       = modUSER32.NewProc("DrawIcon")
 	procDrawIconEx                                     = modUSER32.NewProc("DrawIconEx")
@@ -138,33 +138,33 @@ var (
 	procEndDialog                                      = modUSER32.NewProc("EndDialog")
 	procEndMenu                                        = modUSER32.NewProc("EndMenu")
 	procEnumChildWindows                               = modUSER32.NewProc("EnumChildWindows")
+	procEnumProps                                      = modUSER32.NewProc("EnumPropsW")
 	procEnumPropsA                                     = modUSER32.NewProc("EnumPropsA")
+	procEnumPropsEx                                    = modUSER32.NewProc("EnumPropsExW")
 	procEnumPropsExA                                   = modUSER32.NewProc("EnumPropsExA")
-	procEnumPropsExW                                   = modUSER32.NewProc("EnumPropsExW")
-	procEnumPropsW                                     = modUSER32.NewProc("EnumPropsW")
 	procEnumThreadWindows                              = modUSER32.NewProc("EnumThreadWindows")
 	procEnumWindows                                    = modUSER32.NewProc("EnumWindows")
+	procFindWindow                                     = modUSER32.NewProc("FindWindowW")
 	procFindWindowA                                    = modUSER32.NewProc("FindWindowA")
+	procFindWindowEx                                   = modUSER32.NewProc("FindWindowExW")
 	procFindWindowExA                                  = modUSER32.NewProc("FindWindowExA")
-	procFindWindowExW                                  = modUSER32.NewProc("FindWindowExW")
-	procFindWindowW                                    = modUSER32.NewProc("FindWindowW")
 	procFlashWindow                                    = modUSER32.NewProc("FlashWindow")
 	procFlashWindowEx                                  = modUSER32.NewProc("FlashWindowEx")
+	procGetAltTabInfo                                  = modUSER32.NewProc("GetAltTabInfoW")
 	procGetAltTabInfoA                                 = modUSER32.NewProc("GetAltTabInfoA")
-	procGetAltTabInfoW                                 = modUSER32.NewProc("GetAltTabInfoW")
 	procGetAncestor                                    = modUSER32.NewProc("GetAncestor")
 	procGetCaretBlinkTime                              = modUSER32.NewProc("GetCaretBlinkTime")
 	procGetCaretPos                                    = modUSER32.NewProc("GetCaretPos")
+	procGetClassInfo                                   = modUSER32.NewProc("GetClassInfoW")
 	procGetClassInfoA                                  = modUSER32.NewProc("GetClassInfoA")
+	procGetClassInfoEx                                 = modUSER32.NewProc("GetClassInfoExW")
 	procGetClassInfoExA                                = modUSER32.NewProc("GetClassInfoExA")
-	procGetClassInfoExW                                = modUSER32.NewProc("GetClassInfoExW")
-	procGetClassInfoW                                  = modUSER32.NewProc("GetClassInfoW")
+	procGetClassLong                                   = modUSER32.NewProc("GetClassLongW")
 	procGetClassLongA                                  = modUSER32.NewProc("GetClassLongA")
+	procGetClassLongPtr                                = modUSER32.NewProc("GetClassLongPtrW")
 	procGetClassLongPtrA                               = modUSER32.NewProc("GetClassLongPtrA")
-	procGetClassLongPtrW                               = modUSER32.NewProc("GetClassLongPtrW")
-	procGetClassLongW                                  = modUSER32.NewProc("GetClassLongW")
+	procGetClassName                                   = modUSER32.NewProc("GetClassNameW")
 	procGetClassNameA                                  = modUSER32.NewProc("GetClassNameA")
-	procGetClassNameW                                  = modUSER32.NewProc("GetClassNameW")
 	procGetClassWord                                   = modUSER32.NewProc("GetClassWord")
 	procGetClientRect                                  = modUSER32.NewProc("GetClientRect")
 	procGetClipCursor                                  = modUSER32.NewProc("GetClipCursor")
@@ -177,13 +177,13 @@ var (
 	procGetDlgCtrlID                                   = modUSER32.NewProc("GetDlgCtrlID")
 	procGetDlgItem                                     = modUSER32.NewProc("GetDlgItem")
 	procGetDlgItemInt                                  = modUSER32.NewProc("GetDlgItemInt")
+	procGetDlgItemText                                 = modUSER32.NewProc("GetDlgItemTextW")
 	procGetDlgItemTextA                                = modUSER32.NewProc("GetDlgItemTextA")
-	procGetDlgItemTextW                                = modUSER32.NewProc("GetDlgItemTextW")
 	procGetForegroundWindow                            = modUSER32.NewProc("GetForegroundWindow")
 	procGetGUIThreadInfo                               = modUSER32.NewProc("GetGUIThreadInfo")
 	procGetIconInfo                                    = modUSER32.NewProc("GetIconInfo")
+	procGetIconInfoEx                                  = modUSER32.NewProc("GetIconInfoExW")
 	procGetIconInfoExA                                 = modUSER32.NewProc("GetIconInfoExA")
-	procGetIconInfoExW                                 = modUSER32.NewProc("GetIconInfoExW")
 	procGetInputState                                  = modUSER32.NewProc("GetInputState")
 	procGetLastActivePopup                             = modUSER32.NewProc("GetLastActivePopup")
 	procGetLayeredWindowAttributes                     = modUSER32.NewProc("GetLayeredWindowAttributes")
@@ -194,24 +194,24 @@ var (
 	procGetMenuInfo                                    = modUSER32.NewProc("GetMenuInfo")
 	procGetMenuItemCount                               = modUSER32.NewProc("GetMenuItemCount")
 	procGetMenuItemID                                  = modUSER32.NewProc("GetMenuItemID")
+	procGetMenuItemInfo                                = modUSER32.NewProc("GetMenuItemInfoW")
 	procGetMenuItemInfoA                               = modUSER32.NewProc("GetMenuItemInfoA")
-	procGetMenuItemInfoW                               = modUSER32.NewProc("GetMenuItemInfoW")
 	procGetMenuItemRect                                = modUSER32.NewProc("GetMenuItemRect")
 	procGetMenuState                                   = modUSER32.NewProc("GetMenuState")
+	procGetMenuString                                  = modUSER32.NewProc("GetMenuStringW")
 	procGetMenuStringA                                 = modUSER32.NewProc("GetMenuStringA")
-	procGetMenuStringW                                 = modUSER32.NewProc("GetMenuStringW")
+	procGetMessage                                     = modUSER32.NewProc("GetMessageW")
 	procGetMessageA                                    = modUSER32.NewProc("GetMessageA")
 	procGetMessageExtraInfo                            = modUSER32.NewProc("GetMessageExtraInfo")
 	procGetMessagePos                                  = modUSER32.NewProc("GetMessagePos")
 	procGetMessageTime                                 = modUSER32.NewProc("GetMessageTime")
-	procGetMessageW                                    = modUSER32.NewProc("GetMessageW")
 	procGetNextDlgGroupItem                            = modUSER32.NewProc("GetNextDlgGroupItem")
 	procGetNextDlgTabItem                              = modUSER32.NewProc("GetNextDlgTabItem")
 	procGetParent                                      = modUSER32.NewProc("GetParent")
 	procGetPhysicalCursorPos                           = modUSER32.NewProc("GetPhysicalCursorPos")
 	procGetProcessDefaultLayout                        = modUSER32.NewProc("GetProcessDefaultLayout")
+	procGetProp                                        = modUSER32.NewProc("GetPropW")
 	procGetPropA                                       = modUSER32.NewProc("GetPropA")
-	procGetPropW                                       = modUSER32.NewProc("GetPropW")
 	procGetQueueStatus                                 = modUSER32.NewProc("GetQueueStatus")
 	procGetScrollBarInfo                               = modUSER32.NewProc("GetScrollBarInfo")
 	procGetScrollInfo                                  = modUSER32.NewProc("GetScrollInfo")
@@ -226,18 +226,18 @@ var (
 	procGetWindow                                      = modUSER32.NewProc("GetWindow")
 	procGetWindowDisplayAffinity                       = modUSER32.NewProc("GetWindowDisplayAffinity")
 	procGetWindowInfo                                  = modUSER32.NewProc("GetWindowInfo")
+	procGetWindowLong                                  = modUSER32.NewProc("GetWindowLongW")
 	procGetWindowLongA                                 = modUSER32.NewProc("GetWindowLongA")
+	procGetWindowLongPtr                               = modUSER32.NewProc("GetWindowLongPtrW")
 	procGetWindowLongPtrA                              = modUSER32.NewProc("GetWindowLongPtrA")
-	procGetWindowLongPtrW                              = modUSER32.NewProc("GetWindowLongPtrW")
-	procGetWindowLongW                                 = modUSER32.NewProc("GetWindowLongW")
+	procGetWindowModuleFileName                        = modUSER32.NewProc("GetWindowModuleFileNameW")
 	procGetWindowModuleFileNameA                       = modUSER32.NewProc("GetWindowModuleFileNameA")
-	procGetWindowModuleFileNameW                       = modUSER32.NewProc("GetWindowModuleFileNameW")
 	procGetWindowPlacement                             = modUSER32.NewProc("GetWindowPlacement")
 	procGetWindowRect                                  = modUSER32.NewProc("GetWindowRect")
+	procGetWindowText                                  = modUSER32.NewProc("GetWindowTextW")
 	procGetWindowTextA                                 = modUSER32.NewProc("GetWindowTextA")
+	procGetWindowTextLength                            = modUSER32.NewProc("GetWindowTextLengthW")
 	procGetWindowTextLengthA                           = modUSER32.NewProc("GetWindowTextLengthA")
-	procGetWindowTextLengthW                           = modUSER32.NewProc("GetWindowTextLengthW")
-	procGetWindowTextW                                 = modUSER32.NewProc("GetWindowTextW")
 	procGetWindowThreadProcessId                       = modUSER32.NewProc("GetWindowThreadProcessId")
 	procGetWindowWord                                  = modUSER32.NewProc("GetWindowWord")
 	procHideCaret                                      = modUSER32.NewProc("HideCaret")
@@ -245,22 +245,22 @@ var (
 	procInSendMessage                                  = modUSER32.NewProc("InSendMessage")
 	procInSendMessageEx                                = modUSER32.NewProc("InSendMessageEx")
 	procInheritWindowMonitor                           = modUSER32.NewProc("InheritWindowMonitor")
+	procInsertMenu                                     = modUSER32.NewProc("InsertMenuW")
 	procInsertMenuA                                    = modUSER32.NewProc("InsertMenuA")
+	procInsertMenuItem                                 = modUSER32.NewProc("InsertMenuItemW")
 	procInsertMenuItemA                                = modUSER32.NewProc("InsertMenuItemA")
-	procInsertMenuItemW                                = modUSER32.NewProc("InsertMenuItemW")
-	procInsertMenuW                                    = modUSER32.NewProc("InsertMenuW")
 	procInternalGetWindowText                          = modUSER32.NewProc("InternalGetWindowText")
+	procIsCharAlpha                                    = modUSER32.NewProc("IsCharAlphaW")
 	procIsCharAlphaA                                   = modUSER32.NewProc("IsCharAlphaA")
+	procIsCharAlphaNumeric                             = modUSER32.NewProc("IsCharAlphaNumericW")
 	procIsCharAlphaNumericA                            = modUSER32.NewProc("IsCharAlphaNumericA")
-	procIsCharAlphaNumericW                            = modUSER32.NewProc("IsCharAlphaNumericW")
-	procIsCharAlphaW                                   = modUSER32.NewProc("IsCharAlphaW")
+	procIsCharLower                                    = modUSER32.NewProc("IsCharLowerW")
 	procIsCharLowerA                                   = modUSER32.NewProc("IsCharLowerA")
-	procIsCharLowerW                                   = modUSER32.NewProc("IsCharLowerW")
+	procIsCharUpper                                    = modUSER32.NewProc("IsCharUpperW")
 	procIsCharUpperA                                   = modUSER32.NewProc("IsCharUpperA")
-	procIsCharUpperW                                   = modUSER32.NewProc("IsCharUpperW")
 	procIsChild                                        = modUSER32.NewProc("IsChild")
+	procIsDialogMessage                                = modUSER32.NewProc("IsDialogMessageW")
 	procIsDialogMessageA                               = modUSER32.NewProc("IsDialogMessageA")
-	procIsDialogMessageW                               = modUSER32.NewProc("IsDialogMessageW")
 	procIsGUIThread                                    = modUSER32.NewProc("IsGUIThread")
 	procIsHungAppWindow                                = modUSER32.NewProc("IsHungAppWindow")
 	procIsIconic                                       = modUSER32.NewProc("IsIconic")
@@ -274,130 +274,130 @@ var (
 	procIsWow64Message                                 = modUSER32.NewProc("IsWow64Message")
 	procIsZoomed                                       = modUSER32.NewProc("IsZoomed")
 	procKillTimer                                      = modUSER32.NewProc("KillTimer")
+	procLoadAccelerators                               = modUSER32.NewProc("LoadAcceleratorsW")
 	procLoadAcceleratorsA                              = modUSER32.NewProc("LoadAcceleratorsA")
-	procLoadAcceleratorsW                              = modUSER32.NewProc("LoadAcceleratorsW")
+	procLoadCursor                                     = modUSER32.NewProc("LoadCursorW")
 	procLoadCursorA                                    = modUSER32.NewProc("LoadCursorA")
+	procLoadCursorFromFile                             = modUSER32.NewProc("LoadCursorFromFileW")
 	procLoadCursorFromFileA                            = modUSER32.NewProc("LoadCursorFromFileA")
-	procLoadCursorFromFileW                            = modUSER32.NewProc("LoadCursorFromFileW")
-	procLoadCursorW                                    = modUSER32.NewProc("LoadCursorW")
+	procLoadIcon                                       = modUSER32.NewProc("LoadIconW")
 	procLoadIconA                                      = modUSER32.NewProc("LoadIconA")
-	procLoadIconW                                      = modUSER32.NewProc("LoadIconW")
+	procLoadImage                                      = modUSER32.NewProc("LoadImageW")
 	procLoadImageA                                     = modUSER32.NewProc("LoadImageA")
-	procLoadImageW                                     = modUSER32.NewProc("LoadImageW")
+	procLoadMenu                                       = modUSER32.NewProc("LoadMenuW")
 	procLoadMenuA                                      = modUSER32.NewProc("LoadMenuA")
+	procLoadMenuIndirect                               = modUSER32.NewProc("LoadMenuIndirectW")
 	procLoadMenuIndirectA                              = modUSER32.NewProc("LoadMenuIndirectA")
-	procLoadMenuIndirectW                              = modUSER32.NewProc("LoadMenuIndirectW")
-	procLoadMenuW                                      = modUSER32.NewProc("LoadMenuW")
+	procLoadString                                     = modUSER32.NewProc("LoadStringW")
 	procLoadStringA                                    = modUSER32.NewProc("LoadStringA")
-	procLoadStringW                                    = modUSER32.NewProc("LoadStringW")
 	procLockSetForegroundWindow                        = modUSER32.NewProc("LockSetForegroundWindow")
 	procLogicalToPhysicalPoint                         = modUSER32.NewProc("LogicalToPhysicalPoint")
 	procLookupIconIdFromDirectory                      = modUSER32.NewProc("LookupIconIdFromDirectory")
 	procLookupIconIdFromDirectoryEx                    = modUSER32.NewProc("LookupIconIdFromDirectoryEx")
 	procMapDialogRect                                  = modUSER32.NewProc("MapDialogRect")
+	procMessageBox                                     = modUSER32.NewProc("MessageBoxW")
 	procMessageBoxA                                    = modUSER32.NewProc("MessageBoxA")
+	procMessageBoxEx                                   = modUSER32.NewProc("MessageBoxExW")
 	procMessageBoxExA                                  = modUSER32.NewProc("MessageBoxExA")
-	procMessageBoxExW                                  = modUSER32.NewProc("MessageBoxExW")
+	procMessageBoxIndirect                             = modUSER32.NewProc("MessageBoxIndirectW")
 	procMessageBoxIndirectA                            = modUSER32.NewProc("MessageBoxIndirectA")
-	procMessageBoxIndirectW                            = modUSER32.NewProc("MessageBoxIndirectW")
-	procMessageBoxW                                    = modUSER32.NewProc("MessageBoxW")
+	procModifyMenu                                     = modUSER32.NewProc("ModifyMenuW")
 	procModifyMenuA                                    = modUSER32.NewProc("ModifyMenuA")
-	procModifyMenuW                                    = modUSER32.NewProc("ModifyMenuW")
 	procMoveWindow                                     = modUSER32.NewProc("MoveWindow")
 	procMsgWaitForMultipleObjects                      = modUSER32.NewProc("MsgWaitForMultipleObjects")
 	procMsgWaitForMultipleObjectsEx                    = modUSER32.NewProc("MsgWaitForMultipleObjectsEx")
+	procOemToChar                                      = modUSER32.NewProc("OemToCharW")
 	procOemToCharA                                     = modUSER32.NewProc("OemToCharA")
+	procOemToCharBuff                                  = modUSER32.NewProc("OemToCharBuffW")
 	procOemToCharBuffA                                 = modUSER32.NewProc("OemToCharBuffA")
-	procOemToCharBuffW                                 = modUSER32.NewProc("OemToCharBuffW")
-	procOemToCharW                                     = modUSER32.NewProc("OemToCharW")
 	procOpenIcon                                       = modUSER32.NewProc("OpenIcon")
+	procPeekMessage                                    = modUSER32.NewProc("PeekMessageW")
 	procPeekMessageA                                   = modUSER32.NewProc("PeekMessageA")
-	procPeekMessageW                                   = modUSER32.NewProc("PeekMessageW")
 	procPhysicalToLogicalPoint                         = modUSER32.NewProc("PhysicalToLogicalPoint")
+	procPostMessage                                    = modUSER32.NewProc("PostMessageW")
 	procPostMessageA                                   = modUSER32.NewProc("PostMessageA")
-	procPostMessageW                                   = modUSER32.NewProc("PostMessageW")
 	procPostQuitMessage                                = modUSER32.NewProc("PostQuitMessage")
+	procPostThreadMessage                              = modUSER32.NewProc("PostThreadMessageW")
 	procPostThreadMessageA                             = modUSER32.NewProc("PostThreadMessageA")
-	procPostThreadMessageW                             = modUSER32.NewProc("PostThreadMessageW")
+	procPrivateExtractIcons                            = modUSER32.NewProc("PrivateExtractIconsW")
 	procPrivateExtractIconsA                           = modUSER32.NewProc("PrivateExtractIconsA")
-	procPrivateExtractIconsW                           = modUSER32.NewProc("PrivateExtractIconsW")
+	procRealGetWindowClass                             = modUSER32.NewProc("RealGetWindowClassW")
 	procRealGetWindowClassA                            = modUSER32.NewProc("RealGetWindowClassA")
-	procRealGetWindowClassW                            = modUSER32.NewProc("RealGetWindowClassW")
+	procRegisterClass                                  = modUSER32.NewProc("RegisterClassW")
 	procRegisterClassA                                 = modUSER32.NewProc("RegisterClassA")
+	procRegisterClassEx                                = modUSER32.NewProc("RegisterClassExW")
 	procRegisterClassExA                               = modUSER32.NewProc("RegisterClassExA")
-	procRegisterClassExW                               = modUSER32.NewProc("RegisterClassExW")
-	procRegisterClassW                                 = modUSER32.NewProc("RegisterClassW")
 	procRegisterCloakedNotification                    = modUSER32.NewProc("RegisterCloakedNotification")
+	procRegisterDeviceNotification                     = modUSER32.NewProc("RegisterDeviceNotificationW")
 	procRegisterDeviceNotificationA                    = modUSER32.NewProc("RegisterDeviceNotificationA")
-	procRegisterDeviceNotificationW                    = modUSER32.NewProc("RegisterDeviceNotificationW")
 	procRegisterForTooltipDismissNotification          = modUSER32.NewProc("RegisterForTooltipDismissNotification")
 	procRegisterShellHookWindow                        = modUSER32.NewProc("RegisterShellHookWindow")
+	procRegisterWindowMessage                          = modUSER32.NewProc("RegisterWindowMessageW")
 	procRegisterWindowMessageA                         = modUSER32.NewProc("RegisterWindowMessageA")
-	procRegisterWindowMessageW                         = modUSER32.NewProc("RegisterWindowMessageW")
 	procRemoveMenu                                     = modUSER32.NewProc("RemoveMenu")
+	procRemoveProp                                     = modUSER32.NewProc("RemovePropW")
 	procRemovePropA                                    = modUSER32.NewProc("RemovePropA")
-	procRemovePropW                                    = modUSER32.NewProc("RemovePropW")
 	procReplyMessage                                   = modUSER32.NewProc("ReplyMessage")
 	procScrollDC                                       = modUSER32.NewProc("ScrollDC")
 	procScrollWindow                                   = modUSER32.NewProc("ScrollWindow")
 	procScrollWindowEx                                 = modUSER32.NewProc("ScrollWindowEx")
+	procSendDlgItemMessage                             = modUSER32.NewProc("SendDlgItemMessageW")
 	procSendDlgItemMessageA                            = modUSER32.NewProc("SendDlgItemMessageA")
-	procSendDlgItemMessageW                            = modUSER32.NewProc("SendDlgItemMessageW")
+	procSendMessage                                    = modUSER32.NewProc("SendMessageW")
 	procSendMessageA                                   = modUSER32.NewProc("SendMessageA")
+	procSendMessageCallback                            = modUSER32.NewProc("SendMessageCallbackW")
 	procSendMessageCallbackA                           = modUSER32.NewProc("SendMessageCallbackA")
-	procSendMessageCallbackW                           = modUSER32.NewProc("SendMessageCallbackW")
+	procSendMessageTimeout                             = modUSER32.NewProc("SendMessageTimeoutW")
 	procSendMessageTimeoutA                            = modUSER32.NewProc("SendMessageTimeoutA")
-	procSendMessageTimeoutW                            = modUSER32.NewProc("SendMessageTimeoutW")
-	procSendMessageW                                   = modUSER32.NewProc("SendMessageW")
+	procSendNotifyMessage                              = modUSER32.NewProc("SendNotifyMessageW")
 	procSendNotifyMessageA                             = modUSER32.NewProc("SendNotifyMessageA")
-	procSendNotifyMessageW                             = modUSER32.NewProc("SendNotifyMessageW")
 	procSetAdditionalForegroundBoostProcesses          = modUSER32.NewProc("SetAdditionalForegroundBoostProcesses")
 	procSetCaretBlinkTime                              = modUSER32.NewProc("SetCaretBlinkTime")
 	procSetCaretPos                                    = modUSER32.NewProc("SetCaretPos")
+	procSetClassLong                                   = modUSER32.NewProc("SetClassLongW")
 	procSetClassLongA                                  = modUSER32.NewProc("SetClassLongA")
+	procSetClassLongPtr                                = modUSER32.NewProc("SetClassLongPtrW")
 	procSetClassLongPtrA                               = modUSER32.NewProc("SetClassLongPtrA")
-	procSetClassLongPtrW                               = modUSER32.NewProc("SetClassLongPtrW")
-	procSetClassLongW                                  = modUSER32.NewProc("SetClassLongW")
 	procSetClassWord                                   = modUSER32.NewProc("SetClassWord")
 	procSetCoalescableTimer                            = modUSER32.NewProc("SetCoalescableTimer")
 	procSetCursor                                      = modUSER32.NewProc("SetCursor")
 	procSetCursorPos                                   = modUSER32.NewProc("SetCursorPos")
 	procSetDebugErrorLevel                             = modUSER32.NewProc("SetDebugErrorLevel")
 	procSetDlgItemInt                                  = modUSER32.NewProc("SetDlgItemInt")
+	procSetDlgItemText                                 = modUSER32.NewProc("SetDlgItemTextW")
 	procSetDlgItemTextA                                = modUSER32.NewProc("SetDlgItemTextA")
-	procSetDlgItemTextW                                = modUSER32.NewProc("SetDlgItemTextW")
 	procSetForegroundWindow                            = modUSER32.NewProc("SetForegroundWindow")
 	procSetLayeredWindowAttributes                     = modUSER32.NewProc("SetLayeredWindowAttributes")
 	procSetMenu                                        = modUSER32.NewProc("SetMenu")
 	procSetMenuDefaultItem                             = modUSER32.NewProc("SetMenuDefaultItem")
 	procSetMenuInfo                                    = modUSER32.NewProc("SetMenuInfo")
 	procSetMenuItemBitmaps                             = modUSER32.NewProc("SetMenuItemBitmaps")
+	procSetMenuItemInfo                                = modUSER32.NewProc("SetMenuItemInfoW")
 	procSetMenuItemInfoA                               = modUSER32.NewProc("SetMenuItemInfoA")
-	procSetMenuItemInfoW                               = modUSER32.NewProc("SetMenuItemInfoW")
 	procSetMessageExtraInfo                            = modUSER32.NewProc("SetMessageExtraInfo")
 	procSetMessageQueue                                = modUSER32.NewProc("SetMessageQueue")
 	procSetParent                                      = modUSER32.NewProc("SetParent")
 	procSetPhysicalCursorPos                           = modUSER32.NewProc("SetPhysicalCursorPos")
 	procSetProcessDPIAware                             = modUSER32.NewProc("SetProcessDPIAware")
 	procSetProcessDefaultLayout                        = modUSER32.NewProc("SetProcessDefaultLayout")
+	procSetProp                                        = modUSER32.NewProc("SetPropW")
 	procSetPropA                                       = modUSER32.NewProc("SetPropA")
-	procSetPropW                                       = modUSER32.NewProc("SetPropW")
 	procSetSystemCursor                                = modUSER32.NewProc("SetSystemCursor")
 	procSetTimer                                       = modUSER32.NewProc("SetTimer")
 	procSetWindowDisplayAffinity                       = modUSER32.NewProc("SetWindowDisplayAffinity")
+	procSetWindowLong                                  = modUSER32.NewProc("SetWindowLongW")
 	procSetWindowLongA                                 = modUSER32.NewProc("SetWindowLongA")
+	procSetWindowLongPtr                               = modUSER32.NewProc("SetWindowLongPtrW")
 	procSetWindowLongPtrA                              = modUSER32.NewProc("SetWindowLongPtrA")
-	procSetWindowLongPtrW                              = modUSER32.NewProc("SetWindowLongPtrW")
-	procSetWindowLongW                                 = modUSER32.NewProc("SetWindowLongW")
 	procSetWindowPlacement                             = modUSER32.NewProc("SetWindowPlacement")
 	procSetWindowPos                                   = modUSER32.NewProc("SetWindowPos")
+	procSetWindowText                                  = modUSER32.NewProc("SetWindowTextW")
 	procSetWindowTextA                                 = modUSER32.NewProc("SetWindowTextA")
-	procSetWindowTextW                                 = modUSER32.NewProc("SetWindowTextW")
 	procSetWindowWord                                  = modUSER32.NewProc("SetWindowWord")
+	procSetWindowsHook                                 = modUSER32.NewProc("SetWindowsHookW")
 	procSetWindowsHookA                                = modUSER32.NewProc("SetWindowsHookA")
+	procSetWindowsHookEx                               = modUSER32.NewProc("SetWindowsHookExW")
 	procSetWindowsHookExA                              = modUSER32.NewProc("SetWindowsHookExA")
-	procSetWindowsHookExW                              = modUSER32.NewProc("SetWindowsHookExW")
-	procSetWindowsHookW                                = modUSER32.NewProc("SetWindowsHookW")
 	procShowCaret                                      = modUSER32.NewProc("ShowCaret")
 	procShowCursor                                     = modUSER32.NewProc("ShowCursor")
 	procShowOwnedPopups                                = modUSER32.NewProc("ShowOwnedPopups")
@@ -405,34 +405,35 @@ var (
 	procShowWindowAsync                                = modUSER32.NewProc("ShowWindowAsync")
 	procSoundSentry                                    = modUSER32.NewProc("SoundSentry")
 	procSwitchToThisWindow                             = modUSER32.NewProc("SwitchToThisWindow")
+	procSystemParametersInfo                           = modUSER32.NewProc("SystemParametersInfoW")
 	procSystemParametersInfoA                          = modUSER32.NewProc("SystemParametersInfoA")
-	procSystemParametersInfoW                          = modUSER32.NewProc("SystemParametersInfoW")
 	procTileWindows                                    = modUSER32.NewProc("TileWindows")
 	procTrackPopupMenu                                 = modUSER32.NewProc("TrackPopupMenu")
 	procTrackPopupMenuEx                               = modUSER32.NewProc("TrackPopupMenuEx")
+	procTranslateAccelerator                           = modUSER32.NewProc("TranslateAcceleratorW")
 	procTranslateAcceleratorA                          = modUSER32.NewProc("TranslateAcceleratorA")
-	procTranslateAcceleratorW                          = modUSER32.NewProc("TranslateAcceleratorW")
 	procTranslateMDISysAccel                           = modUSER32.NewProc("TranslateMDISysAccel")
 	procTranslateMessage                               = modUSER32.NewProc("TranslateMessage")
 	procUnhookWindowsHook                              = modUSER32.NewProc("UnhookWindowsHook")
 	procUnhookWindowsHookEx                            = modUSER32.NewProc("UnhookWindowsHookEx")
+	procUnregisterClass                                = modUSER32.NewProc("UnregisterClassW")
 	procUnregisterClassA                               = modUSER32.NewProc("UnregisterClassA")
-	procUnregisterClassW                               = modUSER32.NewProc("UnregisterClassW")
 	procUnregisterDeviceNotification                   = modUSER32.NewProc("UnregisterDeviceNotification")
 	procUpdateLayeredWindow                            = modUSER32.NewProc("UpdateLayeredWindow")
 	procUpdateLayeredWindowIndirect                    = modUSER32.NewProc("UpdateLayeredWindowIndirect")
 	procWaitMessage                                    = modUSER32.NewProc("WaitMessage")
+	procWsprintf                                       = modUSER32.NewProc("wsprintfW")
 	procWsprintfA                                      = modUSER32.NewProc("wsprintfA")
-	procWsprintfW                                      = modUSER32.NewProc("wsprintfW")
+	procWvsprintf                                      = modUSER32.NewProc("wvsprintfW")
 	procWvsprintfA                                     = modUSER32.NewProc("wvsprintfA")
-	procWvsprintfW                                     = modUSER32.NewProc("wvsprintfW")
 )
 
 // AdjustWindowRect calls USER32!AdjustWindowRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-adjustwindowrect
 // Minimum OS: windows5.0.
-func AdjustWindowRect(lpRect *foundation.RECT, dwStyle WINDOW_STYLE, bMenu foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procAdjustWindowRect.Addr(), uintptr(unsafe.Pointer(lpRect)), uintptr(dwStyle), uintptr(bMenu))
+func AdjustWindowRect(lpRect *foundation.RECT, dwStyle WINDOW_STYLE, bMenu bool) error {
+	_bMenu := win32.Bool32(bMenu)
+	r1, _, e1 := syscall.SyscallN(procAdjustWindowRect.Addr(), uintptr(unsafe.Pointer(lpRect)), uintptr(dwStyle), uintptr(_bMenu))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -442,8 +443,9 @@ func AdjustWindowRect(lpRect *foundation.RECT, dwStyle WINDOW_STYLE, bMenu found
 // AdjustWindowRectEx calls USER32!AdjustWindowRectEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-adjustwindowrectex
 // Minimum OS: windows5.0.
-func AdjustWindowRectEx(lpRect *foundation.RECT, dwStyle WINDOW_STYLE, bMenu foundation.BOOL, dwExStyle WINDOW_EX_STYLE) error {
-	r1, _, e1 := syscall.SyscallN(procAdjustWindowRectEx.Addr(), uintptr(unsafe.Pointer(lpRect)), uintptr(dwStyle), uintptr(bMenu), uintptr(dwExStyle))
+func AdjustWindowRectEx(lpRect *foundation.RECT, dwStyle WINDOW_STYLE, bMenu bool, dwExStyle WINDOW_EX_STYLE) error {
+	_bMenu := win32.Bool32(bMenu)
+	r1, _, e1 := syscall.SyscallN(procAdjustWindowRectEx.Addr(), uintptr(unsafe.Pointer(lpRect)), uintptr(dwStyle), uintptr(_bMenu), uintptr(dwExStyle))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -475,9 +477,21 @@ func AnimateWindow(hWnd foundation.HWND, dwTime uint32, dwFlags ANIMATE_WINDOW_F
 // AnyPopup calls USER32!AnyPopup.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-anypopup
 // Minimum OS: windows5.0.
-func AnyPopup() foundation.BOOL {
+func AnyPopup() bool {
 	r1, _, _ := syscall.SyscallN(procAnyPopup.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// AppendMenu calls USER32!AppendMenuW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-appendmenuw
+// Minimum OS: windows5.0.
+func AppendMenu(hMenu HMENU, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem string) error {
+	_lpNewItem := win32.UTF16Ptr(lpNewItem)
+	r1, _, e1 := syscall.SyscallN(procAppendMenu.Addr(), uintptr(hMenu), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(_lpNewItem)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // AppendMenuA calls USER32!AppendMenuA.
@@ -491,21 +505,10 @@ func AppendMenuA(hMenu HMENU, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewI
 	return nil
 }
 
-// AppendMenuW calls USER32!AppendMenuW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-appendmenuw
-// Minimum OS: windows5.0.
-func AppendMenuW(hMenu HMENU, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procAppendMenuW.Addr(), uintptr(hMenu), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(lpNewItem)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // ApplyWindowAction calls USER32!ApplyWindowAction.
-func ApplyWindowAction(hwnd foundation.HWND, pAction *WINDOW_ACTION) foundation.BOOL {
+func ApplyWindowAction(hwnd foundation.HWND, pAction *WINDOW_ACTION) bool {
 	r1, _, _ := syscall.SyscallN(procApplyWindowAction.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pAction)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ArrangeIconicWindows calls USER32!ArrangeIconicWindows.
@@ -553,20 +556,20 @@ func CalculatePopupWindowPosition(anchorPoint *foundation.POINT, windowSize *fou
 	return nil
 }
 
+// CallMsgFilter calls USER32!CallMsgFilterW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-callmsgfilterw
+// Minimum OS: windows5.0.
+func CallMsgFilter(lpMsg *MSG, nCode int32) bool {
+	r1, _, _ := syscall.SyscallN(procCallMsgFilter.Addr(), uintptr(unsafe.Pointer(lpMsg)), uintptr(nCode))
+	return r1 != 0
+}
+
 // CallMsgFilterA calls USER32!CallMsgFilterA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-callmsgfiltera
 // Minimum OS: windows5.0.
-func CallMsgFilterA(lpMsg *MSG, nCode int32) foundation.BOOL {
+func CallMsgFilterA(lpMsg *MSG, nCode int32) bool {
 	r1, _, _ := syscall.SyscallN(procCallMsgFilterA.Addr(), uintptr(unsafe.Pointer(lpMsg)), uintptr(nCode))
-	return foundation.BOOL(r1)
-}
-
-// CallMsgFilterW calls USER32!CallMsgFilterW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-callmsgfilterw
-// Minimum OS: windows5.0.
-func CallMsgFilterW(lpMsg *MSG, nCode int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCallMsgFilterW.Addr(), uintptr(unsafe.Pointer(lpMsg)), uintptr(nCode))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CallNextHookEx calls USER32!CallNextHookEx.
@@ -574,6 +577,14 @@ func CallMsgFilterW(lpMsg *MSG, nCode int32) foundation.BOOL {
 // Minimum OS: windows5.0.
 func CallNextHookEx(hhk HHOOK, nCode int32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
 	r1, _, _ := syscall.SyscallN(procCallNextHookEx.Addr(), uintptr(hhk), uintptr(nCode), uintptr(wParam), uintptr(lParam))
+	return foundation.LRESULT(r1)
+}
+
+// CallWindowProc calls USER32!CallWindowProcW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-callwindowprocw
+// Minimum OS: windows5.0.
+func CallWindowProc(lpPrevWndFunc WNDPROC, hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procCallWindowProc.Addr(), uintptr(lpPrevWndFunc), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
 	return foundation.LRESULT(r1)
 }
 
@@ -585,41 +596,38 @@ func CallWindowProcA(lpPrevWndFunc WNDPROC, hWnd foundation.HWND, Msg uint32, wP
 	return foundation.LRESULT(r1)
 }
 
-// CallWindowProcW calls USER32!CallWindowProcW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-callwindowprocw
-// Minimum OS: windows5.0.
-func CallWindowProcW(lpPrevWndFunc WNDPROC, hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procCallWindowProcW.Addr(), uintptr(lpPrevWndFunc), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
-	return foundation.LRESULT(r1)
-}
-
 // CancelShutdown calls USER32!CancelShutdown.
-func CancelShutdown() foundation.BOOL {
+func CancelShutdown() bool {
 	r1, _, _ := syscall.SyscallN(procCancelShutdown.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CascadeWindows calls USER32!CascadeWindows.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-cascadewindows
 // Minimum OS: windows5.0.
-func CascadeWindows(hwndParent foundation.HWND, wHow CASCADE_WINDOWS_HOW, lpRect *foundation.RECT, cKids uint32, lpKids *foundation.HWND) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procCascadeWindows.Addr(), uintptr(hwndParent), uintptr(wHow), uintptr(unsafe.Pointer(lpRect)), uintptr(cKids), uintptr(unsafe.Pointer(lpKids)))
+func CascadeWindows(hwndParent foundation.HWND, wHow CASCADE_WINDOWS_HOW, lpRect *foundation.RECT, lpKids []foundation.HWND) (uint16, error) {
+	var _lpKids *foundation.HWND
+	if len(lpKids) > 0 {
+		_lpKids = &lpKids[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCascadeWindows.Addr(), uintptr(hwndParent), uintptr(wHow), uintptr(unsafe.Pointer(lpRect)), uintptr(len(lpKids)), uintptr(unsafe.Pointer(_lpKids)))
 	if e1 != 0 {
 		return uint16(r1), e1
 	}
 	return uint16(r1), nil
 }
 
-// ChangeMenuA calls USER32!ChangeMenuA.
-func ChangeMenuA(hMenu HMENU, cmd uint32, lpszNewItem foundation.PSTR, cmdInsert uint32, flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procChangeMenuA.Addr(), uintptr(hMenu), uintptr(cmd), uintptr(unsafe.Pointer(lpszNewItem)), uintptr(cmdInsert), uintptr(flags))
-	return foundation.BOOL(r1)
+// ChangeMenu calls USER32!ChangeMenuW.
+func ChangeMenu(hMenu HMENU, cmd uint32, lpszNewItem string, cmdInsert uint32, flags uint32) bool {
+	_lpszNewItem := win32.UTF16Ptr(lpszNewItem)
+	r1, _, _ := syscall.SyscallN(procChangeMenu.Addr(), uintptr(hMenu), uintptr(cmd), uintptr(unsafe.Pointer(_lpszNewItem)), uintptr(cmdInsert), uintptr(flags))
+	return r1 != 0
 }
 
-// ChangeMenuW calls USER32!ChangeMenuW.
-func ChangeMenuW(hMenu HMENU, cmd uint32, lpszNewItem foundation.PWSTR, cmdInsert uint32, flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procChangeMenuW.Addr(), uintptr(hMenu), uintptr(cmd), uintptr(unsafe.Pointer(lpszNewItem)), uintptr(cmdInsert), uintptr(flags))
-	return foundation.BOOL(r1)
+// ChangeMenuA calls USER32!ChangeMenuA.
+func ChangeMenuA(hMenu HMENU, cmd uint32, lpszNewItem foundation.PSTR, cmdInsert uint32, flags uint32) bool {
+	r1, _, _ := syscall.SyscallN(procChangeMenuA.Addr(), uintptr(hMenu), uintptr(cmd), uintptr(unsafe.Pointer(lpszNewItem)), uintptr(cmdInsert), uintptr(flags))
+	return r1 != 0
 }
 
 // ChangeWindowMessageFilter calls USER32!ChangeWindowMessageFilter.
@@ -644,6 +652,18 @@ func ChangeWindowMessageFilterEx(hwnd foundation.HWND, message uint32, action WI
 	return nil
 }
 
+// CharLower calls USER32!CharLowerW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charlowerw
+// Minimum OS: windows5.0.
+func CharLower(lpsz foundation.PWSTR) (foundation.PWSTR, error) {
+	r1, _, e1 := syscall.SyscallN(procCharLower.Addr(), uintptr(unsafe.Pointer(lpsz)))
+	ret := foundation.PWSTR(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CharLowerA calls USER32!CharLowerA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charlowera
 // Minimum OS: windows5.0.
@@ -656,6 +676,14 @@ func CharLowerA(lpsz foundation.PSTR) (foundation.PSTR, error) {
 	return ret, nil
 }
 
+// CharLowerBuff calls USER32!CharLowerBuffW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charlowerbuffw
+// Minimum OS: windows5.0.
+func CharLowerBuff(lpsz foundation.PWSTR, cchLength uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procCharLowerBuff.Addr(), uintptr(unsafe.Pointer(lpsz)), uintptr(cchLength))
+	return uint32(r1)
+}
+
 // CharLowerBuffA calls USER32!CharLowerBuffA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charlowerbuffa
 // Minimum OS: windows5.0.
@@ -664,24 +692,13 @@ func CharLowerBuffA(lpsz foundation.PSTR, cchLength uint32) uint32 {
 	return uint32(r1)
 }
 
-// CharLowerBuffW calls USER32!CharLowerBuffW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charlowerbuffw
+// CharNext calls USER32!CharNextW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charnextw
 // Minimum OS: windows5.0.
-func CharLowerBuffW(lpsz foundation.PWSTR, cchLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procCharLowerBuffW.Addr(), uintptr(unsafe.Pointer(lpsz)), uintptr(cchLength))
-	return uint32(r1)
-}
-
-// CharLowerW calls USER32!CharLowerW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charlowerw
-// Minimum OS: windows5.0.
-func CharLowerW(lpsz foundation.PWSTR) (foundation.PWSTR, error) {
-	r1, _, e1 := syscall.SyscallN(procCharLowerW.Addr(), uintptr(unsafe.Pointer(lpsz)))
-	ret := foundation.PWSTR(unsafe.Pointer(r1))
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
+func CharNext(lpsz string) foundation.PWSTR {
+	_lpsz := win32.UTF16Ptr(lpsz)
+	r1, _, _ := syscall.SyscallN(procCharNext.Addr(), uintptr(unsafe.Pointer(_lpsz)))
+	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
 // CharNextA calls USER32!CharNextA.
@@ -700,11 +717,13 @@ func CharNextExA(CodePage uint16, lpCurrentChar foundation.PSTR, dwFlags uint32)
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// CharNextW calls USER32!CharNextW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charnextw
+// CharPrev calls USER32!CharPrevW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charprevw
 // Minimum OS: windows5.0.
-func CharNextW(lpsz foundation.PWSTR) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procCharNextW.Addr(), uintptr(unsafe.Pointer(lpsz)))
+func CharPrev(lpszStart string, lpszCurrent string) foundation.PWSTR {
+	_lpszStart := win32.UTF16Ptr(lpszStart)
+	_lpszCurrent := win32.UTF16Ptr(lpszCurrent)
+	r1, _, _ := syscall.SyscallN(procCharPrev.Addr(), uintptr(unsafe.Pointer(_lpszStart)), uintptr(unsafe.Pointer(_lpszCurrent)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
@@ -724,12 +743,16 @@ func CharPrevExA(CodePage uint16, lpStart foundation.PSTR, lpCurrentChar foundat
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// CharPrevW calls USER32!CharPrevW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charprevw
+// CharToOem calls USER32!CharToOemW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-chartooemw
 // Minimum OS: windows5.0.
-func CharPrevW(lpszStart foundation.PWSTR, lpszCurrent foundation.PWSTR) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procCharPrevW.Addr(), uintptr(unsafe.Pointer(lpszStart)), uintptr(unsafe.Pointer(lpszCurrent)))
-	return foundation.PWSTR(unsafe.Pointer(r1))
+func CharToOem(pSrc string, pDst foundation.PSTR) error {
+	_pSrc := win32.UTF16Ptr(pSrc)
+	r1, _, e1 := syscall.SyscallN(procCharToOem.Addr(), uintptr(unsafe.Pointer(_pSrc)), uintptr(unsafe.Pointer(pDst)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // CharToOemA calls USER32!CharToOemA.
@@ -737,6 +760,18 @@ func CharPrevW(lpszStart foundation.PWSTR, lpszCurrent foundation.PWSTR) foundat
 // Minimum OS: windows5.0.
 func CharToOemA(pSrc foundation.PSTR, pDst foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procCharToOemA.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CharToOemBuff calls USER32!CharToOemBuffW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-chartooembuffw
+// Minimum OS: windows5.0.
+func CharToOemBuff(lpszSrc string, lpszDst foundation.PSTR, cchDstLength uint32) error {
+	_lpszSrc := win32.UTF16Ptr(lpszSrc)
+	r1, _, e1 := syscall.SyscallN(procCharToOemBuff.Addr(), uintptr(unsafe.Pointer(_lpszSrc)), uintptr(unsafe.Pointer(lpszDst)), uintptr(cchDstLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -754,26 +789,16 @@ func CharToOemBuffA(lpszSrc foundation.PSTR, lpszDst foundation.PSTR, cchDstLeng
 	return nil
 }
 
-// CharToOemBuffW calls USER32!CharToOemBuffW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-chartooembuffw
+// CharUpper calls USER32!CharUpperW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charupperw
 // Minimum OS: windows5.0.
-func CharToOemBuffW(lpszSrc foundation.PWSTR, lpszDst foundation.PSTR, cchDstLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCharToOemBuffW.Addr(), uintptr(unsafe.Pointer(lpszSrc)), uintptr(unsafe.Pointer(lpszDst)), uintptr(cchDstLength))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func CharUpper(lpsz foundation.PWSTR) (foundation.PWSTR, error) {
+	r1, _, e1 := syscall.SyscallN(procCharUpper.Addr(), uintptr(unsafe.Pointer(lpsz)))
+	ret := foundation.PWSTR(unsafe.Pointer(r1))
+	if ret == nil {
+		return ret, win32.LastError(e1)
 	}
-	return nil
-}
-
-// CharToOemW calls USER32!CharToOemW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-chartooemw
-// Minimum OS: windows5.0.
-func CharToOemW(pSrc foundation.PWSTR, pDst foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procCharToOemW.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+	return ret, nil
 }
 
 // CharUpperA calls USER32!CharUpperA.
@@ -788,32 +813,20 @@ func CharUpperA(lpsz foundation.PSTR) (foundation.PSTR, error) {
 	return ret, nil
 }
 
+// CharUpperBuff calls USER32!CharUpperBuffW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charupperbuffw
+// Minimum OS: windows5.0.
+func CharUpperBuff(lpsz foundation.PWSTR, cchLength uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procCharUpperBuff.Addr(), uintptr(unsafe.Pointer(lpsz)), uintptr(cchLength))
+	return uint32(r1)
+}
+
 // CharUpperBuffA calls USER32!CharUpperBuffA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charupperbuffa
 // Minimum OS: windows5.0.
 func CharUpperBuffA(lpsz foundation.PSTR, cchLength uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procCharUpperBuffA.Addr(), uintptr(unsafe.Pointer(lpsz)), uintptr(cchLength))
 	return uint32(r1)
-}
-
-// CharUpperBuffW calls USER32!CharUpperBuffW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charupperbuffw
-// Minimum OS: windows5.0.
-func CharUpperBuffW(lpsz foundation.PWSTR, cchLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procCharUpperBuffW.Addr(), uintptr(unsafe.Pointer(lpsz)), uintptr(cchLength))
-	return uint32(r1)
-}
-
-// CharUpperW calls USER32!CharUpperW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-charupperw
-// Minimum OS: windows5.0.
-func CharUpperW(lpsz foundation.PWSTR) (foundation.PWSTR, error) {
-	r1, _, e1 := syscall.SyscallN(procCharUpperW.Addr(), uintptr(unsafe.Pointer(lpsz)))
-	ret := foundation.PWSTR(unsafe.Pointer(r1))
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
 }
 
 // CheckMenuItem calls USER32!CheckMenuItem.
@@ -858,30 +871,38 @@ func CloseWindow(hWnd foundation.HWND) error {
 }
 
 // ConvertPrimaryPointerToMouseDrag calls USER32!ConvertPrimaryPointerToMouseDrag.
-func ConvertPrimaryPointerToMouseDrag() foundation.BOOL {
+func ConvertPrimaryPointerToMouseDrag() bool {
 	r1, _, _ := syscall.SyscallN(procConvertPrimaryPointerToMouseDrag.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ConvertToInterceptWindow calls USER32!ConvertToInterceptWindow.
-func ConvertToInterceptWindow(topLevelWindow foundation.HWND) foundation.BOOL {
+func ConvertToInterceptWindow(topLevelWindow foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procConvertToInterceptWindow.Addr(), uintptr(topLevelWindow))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// CopyAcceleratorTable calls USER32!CopyAcceleratorTableW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-copyacceleratortablew
+// Minimum OS: windows5.0.
+func CopyAcceleratorTable(hAccelSrc HACCEL, lpAccelDst []ACCEL) int32 {
+	var _lpAccelDst *ACCEL
+	if len(lpAccelDst) > 0 {
+		_lpAccelDst = &lpAccelDst[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCopyAcceleratorTable.Addr(), uintptr(hAccelSrc), uintptr(unsafe.Pointer(_lpAccelDst)), uintptr(len(lpAccelDst)))
+	return int32(r1)
 }
 
 // CopyAcceleratorTableA calls USER32!CopyAcceleratorTableA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-copyacceleratortablea
 // Minimum OS: windows5.0.
-func CopyAcceleratorTableA(hAccelSrc HACCEL, lpAccelDst *ACCEL, cAccelEntries int32) int32 {
-	r1, _, _ := syscall.SyscallN(procCopyAcceleratorTableA.Addr(), uintptr(hAccelSrc), uintptr(unsafe.Pointer(lpAccelDst)), uintptr(cAccelEntries))
-	return int32(r1)
-}
-
-// CopyAcceleratorTableW calls USER32!CopyAcceleratorTableW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-copyacceleratortablew
-// Minimum OS: windows5.0.
-func CopyAcceleratorTableW(hAccelSrc HACCEL, lpAccelDst *ACCEL, cAccelEntries int32) int32 {
-	r1, _, _ := syscall.SyscallN(procCopyAcceleratorTableW.Addr(), uintptr(hAccelSrc), uintptr(unsafe.Pointer(lpAccelDst)), uintptr(cAccelEntries))
+func CopyAcceleratorTableA(hAccelSrc HACCEL, lpAccelDst []ACCEL) int32 {
+	var _lpAccelDst *ACCEL
+	if len(lpAccelDst) > 0 {
+		_lpAccelDst = &lpAccelDst[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCopyAcceleratorTableA.Addr(), uintptr(hAccelSrc), uintptr(unsafe.Pointer(_lpAccelDst)), uintptr(len(lpAccelDst)))
 	return int32(r1)
 }
 
@@ -909,11 +930,15 @@ func CopyImage(h foundation.HANDLE, type_ GDI_IMAGE_TYPE, cx int32, cy int32, fl
 	return ret, nil
 }
 
-// CreateAcceleratorTableA calls USER32!CreateAcceleratorTableA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createacceleratortablea
+// CreateAcceleratorTable calls USER32!CreateAcceleratorTableW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createacceleratortablew
 // Minimum OS: windows5.0.
-func CreateAcceleratorTableA(paccel *ACCEL, cAccel int32) (HACCEL, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateAcceleratorTableA.Addr(), uintptr(unsafe.Pointer(paccel)), uintptr(cAccel))
+func CreateAcceleratorTable(paccel []ACCEL) (HACCEL, error) {
+	var _paccel *ACCEL
+	if len(paccel) > 0 {
+		_paccel = &paccel[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCreateAcceleratorTable.Addr(), uintptr(unsafe.Pointer(_paccel)), uintptr(len(paccel)))
 	ret := HACCEL(r1)
 	if ret == ^HACCEL(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -921,11 +946,15 @@ func CreateAcceleratorTableA(paccel *ACCEL, cAccel int32) (HACCEL, error) {
 	return ret, nil
 }
 
-// CreateAcceleratorTableW calls USER32!CreateAcceleratorTableW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createacceleratortablew
+// CreateAcceleratorTableA calls USER32!CreateAcceleratorTableA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createacceleratortablea
 // Minimum OS: windows5.0.
-func CreateAcceleratorTableW(paccel *ACCEL, cAccel int32) (HACCEL, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateAcceleratorTableW.Addr(), uintptr(unsafe.Pointer(paccel)), uintptr(cAccel))
+func CreateAcceleratorTableA(paccel []ACCEL) (HACCEL, error) {
+	var _paccel *ACCEL
+	if len(paccel) > 0 {
+		_paccel = &paccel[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCreateAcceleratorTableA.Addr(), uintptr(unsafe.Pointer(_paccel)), uintptr(len(paccel)))
 	ret := HACCEL(r1)
 	if ret == ^HACCEL(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -956,6 +985,18 @@ func CreateCursor(hInst foundation.HINSTANCE, xHotSpot int32, yHotSpot int32, nW
 	return ret, nil
 }
 
+// CreateDialogIndirectParam calls USER32!CreateDialogIndirectParamW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdialogindirectparamw
+// Minimum OS: windows5.0.
+func CreateDialogIndirectParam(hInstance foundation.HINSTANCE, lpTemplate unsafe.Pointer, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (foundation.HWND, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateDialogIndirectParam.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpTemplate)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
+	ret := foundation.HWND(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CreateDialogIndirectParamA calls USER32!CreateDialogIndirectParamA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdialogindirectparama
 // Minimum OS: windows5.0.
@@ -968,11 +1009,12 @@ func CreateDialogIndirectParamA(hInstance foundation.HINSTANCE, lpTemplate unsaf
 	return ret, nil
 }
 
-// CreateDialogIndirectParamW calls USER32!CreateDialogIndirectParamW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdialogindirectparamw
+// CreateDialogParam calls USER32!CreateDialogParamW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdialogparamw
 // Minimum OS: windows5.0.
-func CreateDialogIndirectParamW(hInstance foundation.HINSTANCE, lpTemplate unsafe.Pointer, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateDialogIndirectParamW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpTemplate)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
+func CreateDialogParam(hInstance foundation.HINSTANCE, lpTemplateName string, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (foundation.HWND, error) {
+	_lpTemplateName := win32.UTF16Ptr(lpTemplateName)
+	r1, _, e1 := syscall.SyscallN(procCreateDialogParam.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpTemplateName)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -985,18 +1027,6 @@ func CreateDialogIndirectParamW(hInstance foundation.HINSTANCE, lpTemplate unsaf
 // Minimum OS: windows5.0.
 func CreateDialogParamA(hInstance foundation.HINSTANCE, lpTemplateName foundation.PSTR, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (foundation.HWND, error) {
 	r1, _, e1 := syscall.SyscallN(procCreateDialogParamA.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpTemplateName)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
-	ret := foundation.HWND(r1)
-	if ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateDialogParamW calls USER32!CreateDialogParamW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdialogparamw
-// Minimum OS: windows5.0.
-func CreateDialogParamW(hInstance foundation.HINSTANCE, lpTemplateName foundation.PWSTR, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateDialogParamW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpTemplateName)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1019,8 +1049,9 @@ func CreateIcon(hInstance foundation.HINSTANCE, nWidth int32, nHeight int32, cPl
 // CreateIconFromResource calls USER32!CreateIconFromResource.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createiconfromresource
 // Minimum OS: windows5.0.
-func CreateIconFromResource(presbits *byte, dwResSize uint32, fIcon foundation.BOOL, dwVer uint32) (HICON, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateIconFromResource.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(dwResSize), uintptr(fIcon), uintptr(dwVer))
+func CreateIconFromResource(presbits *byte, dwResSize uint32, fIcon bool, dwVer uint32) (HICON, error) {
+	_fIcon := win32.Bool32(fIcon)
+	r1, _, e1 := syscall.SyscallN(procCreateIconFromResource.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(dwResSize), uintptr(_fIcon), uintptr(dwVer))
 	ret := HICON(r1)
 	if ret == ^HICON(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1031,8 +1062,9 @@ func CreateIconFromResource(presbits *byte, dwResSize uint32, fIcon foundation.B
 // CreateIconFromResourceEx calls USER32!CreateIconFromResourceEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createiconfromresourceex
 // Minimum OS: windows5.0.
-func CreateIconFromResourceEx(presbits *byte, dwResSize uint32, fIcon foundation.BOOL, dwVer uint32, cxDesired int32, cyDesired int32, Flags IMAGE_FLAGS) (HICON, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateIconFromResourceEx.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(dwResSize), uintptr(fIcon), uintptr(dwVer), uintptr(cxDesired), uintptr(cyDesired), uintptr(Flags))
+func CreateIconFromResourceEx(presbits *byte, dwResSize uint32, fIcon bool, dwVer uint32, cxDesired int32, cyDesired int32, Flags IMAGE_FLAGS) (HICON, error) {
+	_fIcon := win32.Bool32(fIcon)
+	r1, _, e1 := syscall.SyscallN(procCreateIconFromResourceEx.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(dwResSize), uintptr(_fIcon), uintptr(dwVer), uintptr(cxDesired), uintptr(cyDesired), uintptr(Flags))
 	ret := HICON(r1)
 	if ret == ^HICON(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1052,11 +1084,13 @@ func CreateIconIndirect(piconinfo *ICONINFO) (HICON, error) {
 	return ret, nil
 }
 
-// CreateMDIWindowA calls USER32!CreateMDIWindowA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createmdiwindowa
+// CreateMDIWindow calls USER32!CreateMDIWindowW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createmdiwindoww
 // Minimum OS: windows5.0.
-func CreateMDIWindowA(lpClassName foundation.PSTR, lpWindowName foundation.PSTR, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hInstance foundation.HINSTANCE, lParam foundation.LPARAM) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateMDIWindowA.Addr(), uintptr(unsafe.Pointer(lpClassName)), uintptr(unsafe.Pointer(lpWindowName)), uintptr(dwStyle), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(hWndParent), uintptr(hInstance), uintptr(lParam))
+func CreateMDIWindow(lpClassName string, lpWindowName string, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hInstance foundation.HINSTANCE, lParam foundation.LPARAM) (foundation.HWND, error) {
+	_lpClassName := win32.UTF16Ptr(lpClassName)
+	_lpWindowName := win32.UTF16Ptr(lpWindowName)
+	r1, _, e1 := syscall.SyscallN(procCreateMDIWindow.Addr(), uintptr(unsafe.Pointer(_lpClassName)), uintptr(unsafe.Pointer(_lpWindowName)), uintptr(dwStyle), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(hWndParent), uintptr(hInstance), uintptr(lParam))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1064,11 +1098,11 @@ func CreateMDIWindowA(lpClassName foundation.PSTR, lpWindowName foundation.PSTR,
 	return ret, nil
 }
 
-// CreateMDIWindowW calls USER32!CreateMDIWindowW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createmdiwindoww
+// CreateMDIWindowA calls USER32!CreateMDIWindowA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createmdiwindowa
 // Minimum OS: windows5.0.
-func CreateMDIWindowW(lpClassName foundation.PWSTR, lpWindowName foundation.PWSTR, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hInstance foundation.HINSTANCE, lParam foundation.LPARAM) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateMDIWindowW.Addr(), uintptr(unsafe.Pointer(lpClassName)), uintptr(unsafe.Pointer(lpWindowName)), uintptr(dwStyle), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(hWndParent), uintptr(hInstance), uintptr(lParam))
+func CreateMDIWindowA(lpClassName foundation.PSTR, lpWindowName foundation.PSTR, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hInstance foundation.HINSTANCE, lParam foundation.LPARAM) (foundation.HWND, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateMDIWindowA.Addr(), uintptr(unsafe.Pointer(lpClassName)), uintptr(unsafe.Pointer(lpWindowName)), uintptr(dwStyle), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(hWndParent), uintptr(hInstance), uintptr(lParam))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1103,9 +1137,25 @@ func CreatePopupMenu() (HMENU, error) {
 // CreateResourceIndexer calls MrmSupport!CreateResourceIndexer.
 // https://learn.microsoft.com/windows/win32/api/resourceindexer/nf-resourceindexer-createresourceindexer
 // Minimum OS: windows10.0.10240.
-func CreateResourceIndexer(projectRoot foundation.PWSTR, extensionDllPath foundation.PWSTR, ppResourceIndexer *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(projectRoot)), uintptr(unsafe.Pointer(extensionDllPath)), uintptr(unsafe.Pointer(ppResourceIndexer)))
-	return foundation.HRESULT(r1)
+func CreateResourceIndexer(projectRoot string, extensionDllPath string, ppResourceIndexer *unsafe.Pointer) error {
+	_projectRoot := win32.UTF16Ptr(projectRoot)
+	_extensionDllPath := win32.UTF16Ptr(extensionDllPath)
+	r1, _, _ := syscall.SyscallN(procCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(unsafe.Pointer(_extensionDllPath)), uintptr(unsafe.Pointer(ppResourceIndexer)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// CreateWindowEx calls USER32!CreateWindowExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw
+// Minimum OS: windows5.0.
+func CreateWindowEx(dwExStyle WINDOW_EX_STYLE, lpClassName string, lpWindowName string, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hMenu HMENU, hInstance foundation.HINSTANCE, lpParam unsafe.Pointer) (foundation.HWND, error) {
+	_lpClassName := win32.UTF16Ptr(lpClassName)
+	_lpWindowName := win32.UTF16Ptr(lpWindowName)
+	r1, _, e1 := syscall.SyscallN(procCreateWindowEx.Addr(), uintptr(dwExStyle), uintptr(unsafe.Pointer(_lpClassName)), uintptr(unsafe.Pointer(_lpWindowName)), uintptr(dwStyle), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(hWndParent), uintptr(hMenu), uintptr(hInstance), uintptr(unsafe.Pointer(lpParam)))
+	ret := foundation.HWND(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // CreateWindowExA calls USER32!CreateWindowExA.
@@ -1120,16 +1170,12 @@ func CreateWindowExA(dwExStyle WINDOW_EX_STYLE, lpClassName foundation.PSTR, lpW
 	return ret, nil
 }
 
-// CreateWindowExW calls USER32!CreateWindowExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw
+// DefDlgProc calls USER32!DefDlgProcW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defdlgprocw
 // Minimum OS: windows5.0.
-func CreateWindowExW(dwExStyle WINDOW_EX_STYLE, lpClassName foundation.PWSTR, lpWindowName foundation.PWSTR, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hMenu HMENU, hInstance foundation.HINSTANCE, lpParam unsafe.Pointer) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateWindowExW.Addr(), uintptr(dwExStyle), uintptr(unsafe.Pointer(lpClassName)), uintptr(unsafe.Pointer(lpWindowName)), uintptr(dwStyle), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(hWndParent), uintptr(hMenu), uintptr(hInstance), uintptr(unsafe.Pointer(lpParam)))
-	ret := foundation.HWND(r1)
-	if ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
+func DefDlgProc(hDlg foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procDefDlgProc.Addr(), uintptr(hDlg), uintptr(Msg), uintptr(wParam), uintptr(lParam))
+	return foundation.LRESULT(r1)
 }
 
 // DefDlgProcA calls USER32!DefDlgProcA.
@@ -1139,11 +1185,11 @@ func DefDlgProcA(hDlg foundation.HWND, Msg uint32, wParam foundation.WPARAM, lPa
 	return foundation.LRESULT(r1)
 }
 
-// DefDlgProcW calls USER32!DefDlgProcW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defdlgprocw
+// DefFrameProc calls USER32!DefFrameProcW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defframeprocw
 // Minimum OS: windows5.0.
-func DefDlgProcW(hDlg foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procDefDlgProcW.Addr(), uintptr(hDlg), uintptr(Msg), uintptr(wParam), uintptr(lParam))
+func DefFrameProc(hWnd foundation.HWND, hWndMDIClient foundation.HWND, uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procDefFrameProc.Addr(), uintptr(hWnd), uintptr(hWndMDIClient), uintptr(uMsg), uintptr(wParam), uintptr(lParam))
 	return foundation.LRESULT(r1)
 }
 
@@ -1155,11 +1201,11 @@ func DefFrameProcA(hWnd foundation.HWND, hWndMDIClient foundation.HWND, uMsg uin
 	return foundation.LRESULT(r1)
 }
 
-// DefFrameProcW calls USER32!DefFrameProcW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defframeprocw
+// DefMDIChildProc calls USER32!DefMDIChildProcW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defmdichildprocw
 // Minimum OS: windows5.0.
-func DefFrameProcW(hWnd foundation.HWND, hWndMDIClient foundation.HWND, uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procDefFrameProcW.Addr(), uintptr(hWnd), uintptr(hWndMDIClient), uintptr(uMsg), uintptr(wParam), uintptr(lParam))
+func DefMDIChildProc(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procDefMDIChildProc.Addr(), uintptr(hWnd), uintptr(uMsg), uintptr(wParam), uintptr(lParam))
 	return foundation.LRESULT(r1)
 }
 
@@ -1171,11 +1217,11 @@ func DefMDIChildProcA(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARA
 	return foundation.LRESULT(r1)
 }
 
-// DefMDIChildProcW calls USER32!DefMDIChildProcW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defmdichildprocw
+// DefWindowProc calls USER32!DefWindowProcW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defwindowprocw
 // Minimum OS: windows5.0.
-func DefMDIChildProcW(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procDefMDIChildProcW.Addr(), uintptr(hWnd), uintptr(uMsg), uintptr(wParam), uintptr(lParam))
+func DefWindowProc(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procDefWindowProc.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
 	return foundation.LRESULT(r1)
 }
 
@@ -1184,14 +1230,6 @@ func DefMDIChildProcW(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARA
 // Minimum OS: windows5.0.
 func DefWindowProcA(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
 	r1, _, _ := syscall.SyscallN(procDefWindowProcA.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
-	return foundation.LRESULT(r1)
-}
-
-// DefWindowProcW calls USER32!DefWindowProcW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defwindowprocw
-// Minimum OS: windows5.0.
-func DefWindowProcW(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procDefWindowProcW.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
 	return foundation.LRESULT(r1)
 }
 
@@ -1221,17 +1259,17 @@ func DeleteMenu(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS) error {
 // DeregisterShellHookWindow calls USER32!DeregisterShellHookWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-deregistershellhookwindow
 // Minimum OS: windows5.0.
-func DeregisterShellHookWindow(hwnd foundation.HWND) foundation.BOOL {
+func DeregisterShellHookWindow(hwnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procDeregisterShellHookWindow.Addr(), uintptr(hwnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DestroyAcceleratorTable calls USER32!DestroyAcceleratorTable.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-destroyacceleratortable
 // Minimum OS: windows5.0.
-func DestroyAcceleratorTable(hAccel HACCEL) foundation.BOOL {
+func DestroyAcceleratorTable(hAccel HACCEL) bool {
 	r1, _, _ := syscall.SyscallN(procDestroyAcceleratorTable.Addr(), uintptr(hAccel))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DestroyCaret calls USER32!DestroyCaret.
@@ -1270,8 +1308,13 @@ func DestroyIcon(hIcon HICON) error {
 // DestroyIndexedResults calls MrmSupport!DestroyIndexedResults.
 // https://learn.microsoft.com/windows/win32/api/resourceindexer/nf-resourceindexer-destroyindexedresults
 // Minimum OS: windows10.0.10240.
-func DestroyIndexedResults(resourceUri foundation.PWSTR, qualifierCount uint32, qualifiers *IndexedResourceQualifier) {
-	syscall.SyscallN(procDestroyIndexedResults.Addr(), uintptr(unsafe.Pointer(resourceUri)), uintptr(qualifierCount), uintptr(unsafe.Pointer(qualifiers)))
+func DestroyIndexedResults(resourceUri string, qualifiers []IndexedResourceQualifier) {
+	_resourceUri := win32.UTF16Ptr(resourceUri)
+	var _qualifiers *IndexedResourceQualifier
+	if len(qualifiers) > 0 {
+		_qualifiers = &qualifiers[0]
+	}
+	syscall.SyscallN(procDestroyIndexedResults.Addr(), uintptr(unsafe.Pointer(_resourceUri)), uintptr(len(qualifiers)), uintptr(unsafe.Pointer(_qualifiers)))
 }
 
 // DestroyMenu calls USER32!DestroyMenu.
@@ -1303,6 +1346,17 @@ func DestroyWindow(hWnd foundation.HWND) error {
 	return nil
 }
 
+// DialogBoxIndirectParam calls USER32!DialogBoxIndirectParamW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dialogboxindirectparamw
+// Minimum OS: windows5.0.
+func DialogBoxIndirectParam(hInstance foundation.HINSTANCE, hDialogTemplate unsafe.Pointer, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (uintptr, error) {
+	r1, _, e1 := syscall.SyscallN(procDialogBoxIndirectParam.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(hDialogTemplate)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
+	if e1 != 0 {
+		return uintptr(r1), e1
+	}
+	return uintptr(r1), nil
+}
+
 // DialogBoxIndirectParamA calls USER32!DialogBoxIndirectParamA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dialogboxindirectparama
 // Minimum OS: windows5.0.
@@ -1314,11 +1368,12 @@ func DialogBoxIndirectParamA(hInstance foundation.HINSTANCE, hDialogTemplate uns
 	return uintptr(r1), nil
 }
 
-// DialogBoxIndirectParamW calls USER32!DialogBoxIndirectParamW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dialogboxindirectparamw
+// DialogBoxParam calls USER32!DialogBoxParamW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dialogboxparamw
 // Minimum OS: windows5.0.
-func DialogBoxIndirectParamW(hInstance foundation.HINSTANCE, hDialogTemplate unsafe.Pointer, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (uintptr, error) {
-	r1, _, e1 := syscall.SyscallN(procDialogBoxIndirectParamW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(hDialogTemplate)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
+func DialogBoxParam(hInstance foundation.HINSTANCE, lpTemplateName string, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (uintptr, error) {
+	_lpTemplateName := win32.UTF16Ptr(lpTemplateName)
+	r1, _, e1 := syscall.SyscallN(procDialogBoxParam.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpTemplateName)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
 	if e1 != 0 {
 		return uintptr(r1), e1
 	}
@@ -1336,17 +1391,6 @@ func DialogBoxParamA(hInstance foundation.HINSTANCE, lpTemplateName foundation.P
 	return uintptr(r1), nil
 }
 
-// DialogBoxParamW calls USER32!DialogBoxParamW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dialogboxparamw
-// Minimum OS: windows5.0.
-func DialogBoxParamW(hInstance foundation.HINSTANCE, lpTemplateName foundation.PWSTR, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (uintptr, error) {
-	r1, _, e1 := syscall.SyscallN(procDialogBoxParamW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpTemplateName)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
-	if e1 != 0 {
-		return uintptr(r1), e1
-	}
-	return uintptr(r1), nil
-}
-
 // DisableProcessWindowsGhosting calls USER32!DisableProcessWindowsGhosting.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-disableprocesswindowsghosting
 // Minimum OS: windows5.1.2600.
@@ -1354,19 +1398,19 @@ func DisableProcessWindowsGhosting() {
 	syscall.SyscallN(procDisableProcessWindowsGhosting.Addr())
 }
 
+// DispatchMessage calls USER32!DispatchMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dispatchmessagew
+// Minimum OS: windows5.0.
+func DispatchMessage(lpMsg *MSG) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procDispatchMessage.Addr(), uintptr(unsafe.Pointer(lpMsg)))
+	return foundation.LRESULT(r1)
+}
+
 // DispatchMessageA calls USER32!DispatchMessageA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dispatchmessagea
 // Minimum OS: windows5.0.
 func DispatchMessageA(lpMsg *MSG) foundation.LRESULT {
 	r1, _, _ := syscall.SyscallN(procDispatchMessageA.Addr(), uintptr(unsafe.Pointer(lpMsg)))
-	return foundation.LRESULT(r1)
-}
-
-// DispatchMessageW calls USER32!DispatchMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dispatchmessagew
-// Minimum OS: windows5.0.
-func DispatchMessageW(lpMsg *MSG) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procDispatchMessageW.Addr(), uintptr(unsafe.Pointer(lpMsg)))
 	return foundation.LRESULT(r1)
 }
 
@@ -1412,9 +1456,9 @@ func DrawMenuBar(hWnd foundation.HWND) error {
 // EnableMenuItem calls USER32!EnableMenuItem.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enablemenuitem
 // Minimum OS: windows5.0.
-func EnableMenuItem(hMenu HMENU, uIDEnableItem uint32, uEnable MENU_ITEM_FLAGS) foundation.BOOL {
+func EnableMenuItem(hMenu HMENU, uIDEnableItem uint32, uEnable MENU_ITEM_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procEnableMenuItem.Addr(), uintptr(hMenu), uintptr(uIDEnableItem), uintptr(uEnable))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EndDeferWindowPos calls USER32!EndDeferWindowPos.
@@ -1453,9 +1497,17 @@ func EndMenu() error {
 // EnumChildWindows calls USER32!EnumChildWindows.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumchildwindows
 // Minimum OS: windows5.0.
-func EnumChildWindows(hWndParent foundation.HWND, lpEnumFunc WNDENUMPROC, lParam foundation.LPARAM) foundation.BOOL {
+func EnumChildWindows(hWndParent foundation.HWND, lpEnumFunc WNDENUMPROC, lParam foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procEnumChildWindows.Addr(), uintptr(hWndParent), uintptr(lpEnumFunc), uintptr(lParam))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// EnumProps calls USER32!EnumPropsW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumpropsw
+// Minimum OS: windows5.0.
+func EnumProps(hWnd foundation.HWND, lpEnumFunc PROPENUMPROCW) int32 {
+	r1, _, _ := syscall.SyscallN(procEnumProps.Addr(), uintptr(hWnd), uintptr(lpEnumFunc))
+	return int32(r1)
 }
 
 // EnumPropsA calls USER32!EnumPropsA.
@@ -1463,6 +1515,14 @@ func EnumChildWindows(hWndParent foundation.HWND, lpEnumFunc WNDENUMPROC, lParam
 // Minimum OS: windows5.0.
 func EnumPropsA(hWnd foundation.HWND, lpEnumFunc PROPENUMPROCA) int32 {
 	r1, _, _ := syscall.SyscallN(procEnumPropsA.Addr(), uintptr(hWnd), uintptr(lpEnumFunc))
+	return int32(r1)
+}
+
+// EnumPropsEx calls USER32!EnumPropsExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumpropsexw
+// Minimum OS: windows5.0.
+func EnumPropsEx(hWnd foundation.HWND, lpEnumFunc PROPENUMPROCEXW, lParam foundation.LPARAM) int32 {
+	r1, _, _ := syscall.SyscallN(procEnumPropsEx.Addr(), uintptr(hWnd), uintptr(lpEnumFunc), uintptr(lParam))
 	return int32(r1)
 }
 
@@ -1474,28 +1534,12 @@ func EnumPropsExA(hWnd foundation.HWND, lpEnumFunc PROPENUMPROCEXA, lParam found
 	return int32(r1)
 }
 
-// EnumPropsExW calls USER32!EnumPropsExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumpropsexw
-// Minimum OS: windows5.0.
-func EnumPropsExW(hWnd foundation.HWND, lpEnumFunc PROPENUMPROCEXW, lParam foundation.LPARAM) int32 {
-	r1, _, _ := syscall.SyscallN(procEnumPropsExW.Addr(), uintptr(hWnd), uintptr(lpEnumFunc), uintptr(lParam))
-	return int32(r1)
-}
-
-// EnumPropsW calls USER32!EnumPropsW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumpropsw
-// Minimum OS: windows5.0.
-func EnumPropsW(hWnd foundation.HWND, lpEnumFunc PROPENUMPROCW) int32 {
-	r1, _, _ := syscall.SyscallN(procEnumPropsW.Addr(), uintptr(hWnd), uintptr(lpEnumFunc))
-	return int32(r1)
-}
-
 // EnumThreadWindows calls USER32!EnumThreadWindows.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumthreadwindows
 // Minimum OS: windows5.0.
-func EnumThreadWindows(dwThreadId uint32, lpfn WNDENUMPROC, lParam foundation.LPARAM) foundation.BOOL {
+func EnumThreadWindows(dwThreadId uint32, lpfn WNDENUMPROC, lParam foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procEnumThreadWindows.Addr(), uintptr(dwThreadId), uintptr(lpfn), uintptr(lParam))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EnumWindows calls USER32!EnumWindows.
@@ -1509,11 +1553,39 @@ func EnumWindows(lpEnumFunc WNDENUMPROC, lParam foundation.LPARAM) error {
 	return nil
 }
 
+// FindWindow calls USER32!FindWindowW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-findwindoww
+// Minimum OS: windows5.0.
+func FindWindow(lpClassName string, lpWindowName string) (foundation.HWND, error) {
+	_lpClassName := win32.UTF16Ptr(lpClassName)
+	_lpWindowName := win32.UTF16Ptr(lpWindowName)
+	r1, _, e1 := syscall.SyscallN(procFindWindow.Addr(), uintptr(unsafe.Pointer(_lpClassName)), uintptr(unsafe.Pointer(_lpWindowName)))
+	ret := foundation.HWND(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // FindWindowA calls USER32!FindWindowA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-findwindowa
 // Minimum OS: windows5.0.
 func FindWindowA(lpClassName foundation.PSTR, lpWindowName foundation.PSTR) (foundation.HWND, error) {
 	r1, _, e1 := syscall.SyscallN(procFindWindowA.Addr(), uintptr(unsafe.Pointer(lpClassName)), uintptr(unsafe.Pointer(lpWindowName)))
+	ret := foundation.HWND(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// FindWindowEx calls USER32!FindWindowExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-findwindowexw
+// Minimum OS: windows5.0.
+func FindWindowEx(hWndParent foundation.HWND, hWndChildAfter foundation.HWND, lpszClass string, lpszWindow string) (foundation.HWND, error) {
+	_lpszClass := win32.UTF16Ptr(lpszClass)
+	_lpszWindow := win32.UTF16Ptr(lpszWindow)
+	r1, _, e1 := syscall.SyscallN(procFindWindowEx.Addr(), uintptr(hWndParent), uintptr(hWndChildAfter), uintptr(unsafe.Pointer(_lpszClass)), uintptr(unsafe.Pointer(_lpszWindow)))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1533,44 +1605,32 @@ func FindWindowExA(hWndParent foundation.HWND, hWndChildAfter foundation.HWND, l
 	return ret, nil
 }
 
-// FindWindowExW calls USER32!FindWindowExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-findwindowexw
-// Minimum OS: windows5.0.
-func FindWindowExW(hWndParent foundation.HWND, hWndChildAfter foundation.HWND, lpszClass foundation.PWSTR, lpszWindow foundation.PWSTR) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procFindWindowExW.Addr(), uintptr(hWndParent), uintptr(hWndChildAfter), uintptr(unsafe.Pointer(lpszClass)), uintptr(unsafe.Pointer(lpszWindow)))
-	ret := foundation.HWND(r1)
-	if ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// FindWindowW calls USER32!FindWindowW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-findwindoww
-// Minimum OS: windows5.0.
-func FindWindowW(lpClassName foundation.PWSTR, lpWindowName foundation.PWSTR) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procFindWindowW.Addr(), uintptr(unsafe.Pointer(lpClassName)), uintptr(unsafe.Pointer(lpWindowName)))
-	ret := foundation.HWND(r1)
-	if ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
 // FlashWindow calls USER32!FlashWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-flashwindow
 // Minimum OS: windows5.1.2600.
-func FlashWindow(hWnd foundation.HWND, bInvert foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFlashWindow.Addr(), uintptr(hWnd), uintptr(bInvert))
-	return foundation.BOOL(r1)
+func FlashWindow(hWnd foundation.HWND, bInvert bool) bool {
+	_bInvert := win32.Bool32(bInvert)
+	r1, _, _ := syscall.SyscallN(procFlashWindow.Addr(), uintptr(hWnd), uintptr(_bInvert))
+	return r1 != 0
 }
 
 // FlashWindowEx calls USER32!FlashWindowEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-flashwindowex
 // Minimum OS: windows5.1.2600.
-func FlashWindowEx(pfwi *FLASHWINFO) foundation.BOOL {
+func FlashWindowEx(pfwi *FLASHWINFO) bool {
 	r1, _, _ := syscall.SyscallN(procFlashWindowEx.Addr(), uintptr(unsafe.Pointer(pfwi)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetAltTabInfo calls USER32!GetAltTabInfoW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getalttabinfow
+// Minimum OS: windows5.0.
+func GetAltTabInfo(hwnd foundation.HWND, iItem int32, pati *ALTTABINFO, pszItemText foundation.PWSTR, cchItemText uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetAltTabInfo.Addr(), uintptr(hwnd), uintptr(iItem), uintptr(unsafe.Pointer(pati)), uintptr(unsafe.Pointer(pszItemText)), uintptr(cchItemText))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GetAltTabInfoA calls USER32!GetAltTabInfoA.
@@ -1578,17 +1638,6 @@ func FlashWindowEx(pfwi *FLASHWINFO) foundation.BOOL {
 // Minimum OS: windows5.0.
 func GetAltTabInfoA(hwnd foundation.HWND, iItem int32, pati *ALTTABINFO, pszItemText foundation.PSTR, cchItemText uint32) error {
 	r1, _, e1 := syscall.SyscallN(procGetAltTabInfoA.Addr(), uintptr(hwnd), uintptr(iItem), uintptr(unsafe.Pointer(pati)), uintptr(unsafe.Pointer(pszItemText)), uintptr(cchItemText))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetAltTabInfoW calls USER32!GetAltTabInfoW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getalttabinfow
-// Minimum OS: windows5.0.
-func GetAltTabInfoW(hwnd foundation.HWND, iItem int32, pati *ALTTABINFO, pszItemText foundation.PWSTR, cchItemText uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetAltTabInfoW.Addr(), uintptr(hwnd), uintptr(iItem), uintptr(unsafe.Pointer(pati)), uintptr(unsafe.Pointer(pszItemText)), uintptr(cchItemText))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1625,11 +1674,35 @@ func GetCaretPos(lpPoint *foundation.POINT) error {
 	return nil
 }
 
+// GetClassInfo calls USER32!GetClassInfoW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassinfow
+// Minimum OS: windows5.0.
+func GetClassInfo(hInstance foundation.HINSTANCE, lpClassName string, lpWndClass *WNDCLASSW) error {
+	_lpClassName := win32.UTF16Ptr(lpClassName)
+	r1, _, e1 := syscall.SyscallN(procGetClassInfo.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpClassName)), uintptr(unsafe.Pointer(lpWndClass)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetClassInfoA calls USER32!GetClassInfoA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassinfoa
 // Minimum OS: windows5.0.
 func GetClassInfoA(hInstance foundation.HINSTANCE, lpClassName foundation.PSTR, lpWndClass *WNDCLASSA) error {
 	r1, _, e1 := syscall.SyscallN(procGetClassInfoA.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpClassName)), uintptr(unsafe.Pointer(lpWndClass)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// GetClassInfoEx calls USER32!GetClassInfoExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassinfoexw
+// Minimum OS: windows5.0.
+func GetClassInfoEx(hInstance foundation.HINSTANCE, lpszClass string, lpwcx *WNDCLASSEXW) error {
+	_lpszClass := win32.UTF16Ptr(lpszClass)
+	r1, _, e1 := syscall.SyscallN(procGetClassInfoEx.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpszClass)), uintptr(unsafe.Pointer(lpwcx)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1647,26 +1720,15 @@ func GetClassInfoExA(hInstance foundation.HINSTANCE, lpszClass foundation.PSTR, 
 	return nil
 }
 
-// GetClassInfoExW calls USER32!GetClassInfoExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassinfoexw
+// GetClassLong calls USER32!GetClassLongW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclasslongw
 // Minimum OS: windows5.0.
-func GetClassInfoExW(hInstance foundation.HINSTANCE, lpszClass foundation.PWSTR, lpwcx *WNDCLASSEXW) error {
-	r1, _, e1 := syscall.SyscallN(procGetClassInfoExW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpszClass)), uintptr(unsafe.Pointer(lpwcx)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func GetClassLong(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetClassLong.Addr(), uintptr(hWnd), uintptr(nIndex))
+	if e1 != 0 {
+		return uint32(r1), e1
 	}
-	return nil
-}
-
-// GetClassInfoW calls USER32!GetClassInfoW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassinfow
-// Minimum OS: windows5.0.
-func GetClassInfoW(hInstance foundation.HINSTANCE, lpClassName foundation.PWSTR, lpWndClass *WNDCLASSW) error {
-	r1, _, e1 := syscall.SyscallN(procGetClassInfoW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpClassName)), uintptr(unsafe.Pointer(lpWndClass)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+	return uint32(r1), nil
 }
 
 // GetClassLongA calls USER32!GetClassLongA.
@@ -1680,6 +1742,17 @@ func GetClassLongA(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX) (uint32, e
 	return uint32(r1), nil
 }
 
+// GetClassLongPtr calls USER32!GetClassLongPtrW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclasslongptrw
+// Minimum OS: windows5.0.
+func GetClassLongPtr(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX) (uintptr, error) {
+	r1, _, e1 := syscall.SyscallN(procGetClassLongPtr.Addr(), uintptr(hWnd), uintptr(nIndex))
+	if e1 != 0 {
+		return uintptr(r1), e1
+	}
+	return uintptr(r1), nil
+}
+
 // GetClassLongPtrA calls USER32!GetClassLongPtrA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclasslongptra
 // Minimum OS: windows5.0.
@@ -1691,26 +1764,15 @@ func GetClassLongPtrA(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX) (uintpt
 	return uintptr(r1), nil
 }
 
-// GetClassLongPtrW calls USER32!GetClassLongPtrW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclasslongptrw
+// GetClassName calls USER32!GetClassNameW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassnamew
 // Minimum OS: windows5.0.
-func GetClassLongPtrW(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX) (uintptr, error) {
-	r1, _, e1 := syscall.SyscallN(procGetClassLongPtrW.Addr(), uintptr(hWnd), uintptr(nIndex))
+func GetClassName(hWnd foundation.HWND, lpClassName foundation.PWSTR, nMaxCount int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetClassName.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpClassName)), uintptr(nMaxCount))
 	if e1 != 0 {
-		return uintptr(r1), e1
+		return int32(r1), e1
 	}
-	return uintptr(r1), nil
-}
-
-// GetClassLongW calls USER32!GetClassLongW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclasslongw
-// Minimum OS: windows5.0.
-func GetClassLongW(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetClassLongW.Addr(), uintptr(hWnd), uintptr(nIndex))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
+	return int32(r1), nil
 }
 
 // GetClassNameA calls USER32!GetClassNameA.
@@ -1718,17 +1780,6 @@ func GetClassLongW(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX) (uint32, e
 // Minimum OS: windows5.0.
 func GetClassNameA(hWnd foundation.HWND, lpClassName foundation.PSTR, nMaxCount int32) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetClassNameA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpClassName)), uintptr(nMaxCount))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// GetClassNameW calls USER32!GetClassNameW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getclassnamew
-// Minimum OS: windows5.0.
-func GetClassNameW(hWnd foundation.HWND, lpClassName foundation.PWSTR, nMaxCount int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetClassNameW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpClassName)), uintptr(nMaxCount))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1846,8 +1897,20 @@ func GetDlgItem(hDlg foundation.HWND, nIDDlgItem int32) (foundation.HWND, error)
 // GetDlgItemInt calls USER32!GetDlgItemInt.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getdlgitemint
 // Minimum OS: windows5.0.
-func GetDlgItemInt(hDlg foundation.HWND, nIDDlgItem int32, lpTranslated *foundation.BOOL, bSigned foundation.BOOL) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetDlgItemInt.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(unsafe.Pointer(lpTranslated)), uintptr(bSigned))
+func GetDlgItemInt(hDlg foundation.HWND, nIDDlgItem int32, lpTranslated *foundation.BOOL, bSigned bool) (uint32, error) {
+	_bSigned := win32.Bool32(bSigned)
+	r1, _, e1 := syscall.SyscallN(procGetDlgItemInt.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(unsafe.Pointer(lpTranslated)), uintptr(_bSigned))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
+// GetDlgItemText calls USER32!GetDlgItemTextW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getdlgitemtextw
+// Minimum OS: windows5.0.
+func GetDlgItemText(hDlg foundation.HWND, nIDDlgItem int32, lpString foundation.PWSTR, cchMax int32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetDlgItemText.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(unsafe.Pointer(lpString)), uintptr(cchMax))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1859,17 +1922,6 @@ func GetDlgItemInt(hDlg foundation.HWND, nIDDlgItem int32, lpTranslated *foundat
 // Minimum OS: windows5.0.
 func GetDlgItemTextA(hDlg foundation.HWND, nIDDlgItem int32, lpString foundation.PSTR, cchMax int32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetDlgItemTextA.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(unsafe.Pointer(lpString)), uintptr(cchMax))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetDlgItemTextW calls USER32!GetDlgItemTextW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getdlgitemtextw
-// Minimum OS: windows5.0.
-func GetDlgItemTextW(hDlg foundation.HWND, nIDDlgItem int32, lpString foundation.PWSTR, cchMax int32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetDlgItemTextW.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(unsafe.Pointer(lpString)), uintptr(cchMax))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1906,28 +1958,28 @@ func GetIconInfo(hIcon HICON, piconinfo *ICONINFO) error {
 	return nil
 }
 
+// GetIconInfoEx calls USER32!GetIconInfoExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-geticoninfoexw
+// Minimum OS: windows6.0.6000.
+func GetIconInfoEx(hicon HICON, piconinfo *ICONINFOEXW) bool {
+	r1, _, _ := syscall.SyscallN(procGetIconInfoEx.Addr(), uintptr(hicon), uintptr(unsafe.Pointer(piconinfo)))
+	return r1 != 0
+}
+
 // GetIconInfoExA calls USER32!GetIconInfoExA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-geticoninfoexa
 // Minimum OS: windows6.0.6000.
-func GetIconInfoExA(hicon HICON, piconinfo *ICONINFOEXA) foundation.BOOL {
+func GetIconInfoExA(hicon HICON, piconinfo *ICONINFOEXA) bool {
 	r1, _, _ := syscall.SyscallN(procGetIconInfoExA.Addr(), uintptr(hicon), uintptr(unsafe.Pointer(piconinfo)))
-	return foundation.BOOL(r1)
-}
-
-// GetIconInfoExW calls USER32!GetIconInfoExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-geticoninfoexw
-// Minimum OS: windows6.0.6000.
-func GetIconInfoExW(hicon HICON, piconinfo *ICONINFOEXW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetIconInfoExW.Addr(), uintptr(hicon), uintptr(unsafe.Pointer(piconinfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetInputState calls USER32!GetInputState.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getinputstate
 // Minimum OS: windows5.0.
-func GetInputState() foundation.BOOL {
+func GetInputState() bool {
 	r1, _, _ := syscall.SyscallN(procGetInputState.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetLastActivePopup calls USER32!GetLastActivePopup.
@@ -2017,22 +2069,24 @@ func GetMenuItemID(hMenu HMENU, nPos int32) uint32 {
 	return uint32(r1)
 }
 
-// GetMenuItemInfoA calls USER32!GetMenuItemInfoA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmenuiteminfoa
+// GetMenuItemInfo calls USER32!GetMenuItemInfoW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmenuiteminfow
 // Minimum OS: windows5.0.
-func GetMenuItemInfoA(hmenu HMENU, item uint32, fByPosition foundation.BOOL, lpmii *MENUITEMINFOA) error {
-	r1, _, e1 := syscall.SyscallN(procGetMenuItemInfoA.Addr(), uintptr(hmenu), uintptr(item), uintptr(fByPosition), uintptr(unsafe.Pointer(lpmii)))
+func GetMenuItemInfo(hmenu HMENU, item uint32, fByPosition bool, lpmii *MENUITEMINFOW) error {
+	_fByPosition := win32.Bool32(fByPosition)
+	r1, _, e1 := syscall.SyscallN(procGetMenuItemInfo.Addr(), uintptr(hmenu), uintptr(item), uintptr(_fByPosition), uintptr(unsafe.Pointer(lpmii)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// GetMenuItemInfoW calls USER32!GetMenuItemInfoW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmenuiteminfow
+// GetMenuItemInfoA calls USER32!GetMenuItemInfoA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmenuiteminfoa
 // Minimum OS: windows5.0.
-func GetMenuItemInfoW(hmenu HMENU, item uint32, fByPosition foundation.BOOL, lpmii *MENUITEMINFOW) error {
-	r1, _, e1 := syscall.SyscallN(procGetMenuItemInfoW.Addr(), uintptr(hmenu), uintptr(item), uintptr(fByPosition), uintptr(unsafe.Pointer(lpmii)))
+func GetMenuItemInfoA(hmenu HMENU, item uint32, fByPosition bool, lpmii *MENUITEMINFOA) error {
+	_fByPosition := win32.Bool32(fByPosition)
+	r1, _, e1 := syscall.SyscallN(procGetMenuItemInfoA.Addr(), uintptr(hmenu), uintptr(item), uintptr(_fByPosition), uintptr(unsafe.Pointer(lpmii)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2058,6 +2112,14 @@ func GetMenuState(hMenu HMENU, uId uint32, uFlags MENU_ITEM_FLAGS) uint32 {
 	return uint32(r1)
 }
 
+// GetMenuString calls USER32!GetMenuStringW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmenustringw
+// Minimum OS: windows5.0.
+func GetMenuString(hMenu HMENU, uIDItem uint32, lpString foundation.PWSTR, cchMax int32, flags MENU_ITEM_FLAGS) int32 {
+	r1, _, _ := syscall.SyscallN(procGetMenuString.Addr(), uintptr(hMenu), uintptr(uIDItem), uintptr(unsafe.Pointer(lpString)), uintptr(cchMax), uintptr(flags))
+	return int32(r1)
+}
+
 // GetMenuStringA calls USER32!GetMenuStringA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmenustringa
 // Minimum OS: windows5.0.
@@ -2066,12 +2128,15 @@ func GetMenuStringA(hMenu HMENU, uIDItem uint32, lpString foundation.PSTR, cchMa
 	return int32(r1)
 }
 
-// GetMenuStringW calls USER32!GetMenuStringW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmenustringw
+// GetMessage calls USER32!GetMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmessagew
 // Minimum OS: windows5.0.
-func GetMenuStringW(hMenu HMENU, uIDItem uint32, lpString foundation.PWSTR, cchMax int32, flags MENU_ITEM_FLAGS) int32 {
-	r1, _, _ := syscall.SyscallN(procGetMenuStringW.Addr(), uintptr(hMenu), uintptr(uIDItem), uintptr(unsafe.Pointer(lpString)), uintptr(cchMax), uintptr(flags))
-	return int32(r1)
+func GetMessage(lpMsg *MSG, hWnd foundation.HWND, wMsgFilterMin uint32, wMsgFilterMax uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetMessage.Addr(), uintptr(unsafe.Pointer(lpMsg)), uintptr(hWnd), uintptr(wMsgFilterMin), uintptr(wMsgFilterMax))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GetMessageA calls USER32!GetMessageA.
@@ -2109,22 +2174,12 @@ func GetMessageTime() int32 {
 	return int32(r1)
 }
 
-// GetMessageW calls USER32!GetMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmessagew
-// Minimum OS: windows5.0.
-func GetMessageW(lpMsg *MSG, hWnd foundation.HWND, wMsgFilterMin uint32, wMsgFilterMax uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetMessageW.Addr(), uintptr(unsafe.Pointer(lpMsg)), uintptr(hWnd), uintptr(wMsgFilterMin), uintptr(wMsgFilterMax))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // GetNextDlgGroupItem calls USER32!GetNextDlgGroupItem.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getnextdlggroupitem
 // Minimum OS: windows5.0.
-func GetNextDlgGroupItem(hDlg foundation.HWND, hCtl foundation.HWND, bPrevious foundation.BOOL) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procGetNextDlgGroupItem.Addr(), uintptr(hDlg), uintptr(hCtl), uintptr(bPrevious))
+func GetNextDlgGroupItem(hDlg foundation.HWND, hCtl foundation.HWND, bPrevious bool) (foundation.HWND, error) {
+	_bPrevious := win32.Bool32(bPrevious)
+	r1, _, e1 := syscall.SyscallN(procGetNextDlgGroupItem.Addr(), uintptr(hDlg), uintptr(hCtl), uintptr(_bPrevious))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2135,8 +2190,9 @@ func GetNextDlgGroupItem(hDlg foundation.HWND, hCtl foundation.HWND, bPrevious f
 // GetNextDlgTabItem calls USER32!GetNextDlgTabItem.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getnextdlgtabitem
 // Minimum OS: windows5.0.
-func GetNextDlgTabItem(hDlg foundation.HWND, hCtl foundation.HWND, bPrevious foundation.BOOL) (foundation.HWND, error) {
-	r1, _, e1 := syscall.SyscallN(procGetNextDlgTabItem.Addr(), uintptr(hDlg), uintptr(hCtl), uintptr(bPrevious))
+func GetNextDlgTabItem(hDlg foundation.HWND, hCtl foundation.HWND, bPrevious bool) (foundation.HWND, error) {
+	_bPrevious := win32.Bool32(bPrevious)
+	r1, _, e1 := syscall.SyscallN(procGetNextDlgTabItem.Addr(), uintptr(hDlg), uintptr(hCtl), uintptr(_bPrevious))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2178,19 +2234,20 @@ func GetProcessDefaultLayout(pdwDefaultLayout *uint32) error {
 	return nil
 }
 
+// GetProp calls USER32!GetPropW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getpropw
+// Minimum OS: windows5.0.
+func GetProp(hWnd foundation.HWND, lpString string) foundation.HANDLE {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, _ := syscall.SyscallN(procGetProp.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpString)))
+	return foundation.HANDLE(r1)
+}
+
 // GetPropA calls USER32!GetPropA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getpropa
 // Minimum OS: windows5.0.
 func GetPropA(hWnd foundation.HWND, lpString foundation.PSTR) foundation.HANDLE {
 	r1, _, _ := syscall.SyscallN(procGetPropA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)))
-	return foundation.HANDLE(r1)
-}
-
-// GetPropW calls USER32!GetPropW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getpropw
-// Minimum OS: windows5.0.
-func GetPropW(hWnd foundation.HWND, lpString foundation.PWSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procGetPropW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)))
 	return foundation.HANDLE(r1)
 }
 
@@ -2265,8 +2322,9 @@ func GetSubMenu(hMenu HMENU, nPos int32) HMENU {
 // GetSystemMenu calls USER32!GetSystemMenu.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getsystemmenu
 // Minimum OS: windows5.0.
-func GetSystemMenu(hWnd foundation.HWND, bRevert foundation.BOOL) HMENU {
-	r1, _, _ := syscall.SyscallN(procGetSystemMenu.Addr(), uintptr(hWnd), uintptr(bRevert))
+func GetSystemMenu(hWnd foundation.HWND, bRevert bool) HMENU {
+	_bRevert := win32.Bool32(bRevert)
+	r1, _, _ := syscall.SyscallN(procGetSystemMenu.Addr(), uintptr(hWnd), uintptr(_bRevert))
 	return HMENU(r1)
 }
 
@@ -2335,6 +2393,17 @@ func GetWindowInfo(hwnd foundation.HWND, pwi *WINDOWINFO) error {
 	return nil
 }
 
+// GetWindowLong calls USER32!GetWindowLongW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowlongw
+// Minimum OS: windows5.0.
+func GetWindowLong(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetWindowLong.Addr(), uintptr(hWnd), uintptr(nIndex))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // GetWindowLongA calls USER32!GetWindowLongA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowlonga
 // Minimum OS: windows5.0.
@@ -2344,6 +2413,17 @@ func GetWindowLongA(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX) (int32, 
 		return int32(r1), e1
 	}
 	return int32(r1), nil
+}
+
+// GetWindowLongPtr calls USER32!GetWindowLongPtrW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowlongptrw
+// Minimum OS: windows5.0.
+func GetWindowLongPtr(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX) (uintptr, error) {
+	r1, _, e1 := syscall.SyscallN(procGetWindowLongPtr.Addr(), uintptr(hWnd), uintptr(nIndex))
+	if e1 != 0 {
+		return uintptr(r1), e1
+	}
+	return uintptr(r1), nil
 }
 
 // GetWindowLongPtrA calls USER32!GetWindowLongPtrA.
@@ -2357,26 +2437,12 @@ func GetWindowLongPtrA(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX) (uint
 	return uintptr(r1), nil
 }
 
-// GetWindowLongPtrW calls USER32!GetWindowLongPtrW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowlongptrw
+// GetWindowModuleFileName calls USER32!GetWindowModuleFileNameW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowmodulefilenamew
 // Minimum OS: windows5.0.
-func GetWindowLongPtrW(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX) (uintptr, error) {
-	r1, _, e1 := syscall.SyscallN(procGetWindowLongPtrW.Addr(), uintptr(hWnd), uintptr(nIndex))
-	if e1 != 0 {
-		return uintptr(r1), e1
-	}
-	return uintptr(r1), nil
-}
-
-// GetWindowLongW calls USER32!GetWindowLongW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowlongw
-// Minimum OS: windows5.0.
-func GetWindowLongW(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetWindowLongW.Addr(), uintptr(hWnd), uintptr(nIndex))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
+func GetWindowModuleFileName(hwnd foundation.HWND, pszFileName foundation.PWSTR, cchFileNameMax uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetWindowModuleFileName.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszFileName)), uintptr(cchFileNameMax))
+	return uint32(r1)
 }
 
 // GetWindowModuleFileNameA calls USER32!GetWindowModuleFileNameA.
@@ -2384,14 +2450,6 @@ func GetWindowLongW(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX) (int32, 
 // Minimum OS: windows5.0.
 func GetWindowModuleFileNameA(hwnd foundation.HWND, pszFileName foundation.PSTR, cchFileNameMax uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetWindowModuleFileNameA.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszFileName)), uintptr(cchFileNameMax))
-	return uint32(r1)
-}
-
-// GetWindowModuleFileNameW calls USER32!GetWindowModuleFileNameW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowmodulefilenamew
-// Minimum OS: windows5.0.
-func GetWindowModuleFileNameW(hwnd foundation.HWND, pszFileName foundation.PWSTR, cchFileNameMax uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetWindowModuleFileNameW.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszFileName)), uintptr(cchFileNameMax))
 	return uint32(r1)
 }
 
@@ -2417,6 +2475,17 @@ func GetWindowRect(hWnd foundation.HWND, lpRect *foundation.RECT) error {
 	return nil
 }
 
+// GetWindowText calls USER32!GetWindowTextW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowtextw
+// Minimum OS: windows5.0.
+func GetWindowText(hWnd foundation.HWND, lpString foundation.PWSTR, nMaxCount int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetWindowText.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)), uintptr(nMaxCount))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // GetWindowTextA calls USER32!GetWindowTextA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowtexta
 // Minimum OS: windows5.0.
@@ -2428,33 +2497,22 @@ func GetWindowTextA(hWnd foundation.HWND, lpString foundation.PSTR, nMaxCount in
 	return int32(r1), nil
 }
 
+// GetWindowTextLength calls USER32!GetWindowTextLengthW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowtextlengthw
+// Minimum OS: windows5.0.
+func GetWindowTextLength(hWnd foundation.HWND) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetWindowTextLength.Addr(), uintptr(hWnd))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // GetWindowTextLengthA calls USER32!GetWindowTextLengthA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowtextlengtha
 // Minimum OS: windows5.0.
 func GetWindowTextLengthA(hWnd foundation.HWND) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetWindowTextLengthA.Addr(), uintptr(hWnd))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// GetWindowTextLengthW calls USER32!GetWindowTextLengthW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowtextlengthw
-// Minimum OS: windows5.0.
-func GetWindowTextLengthW(hWnd foundation.HWND) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetWindowTextLengthW.Addr(), uintptr(hWnd))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// GetWindowTextW calls USER32!GetWindowTextW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowtextw
-// Minimum OS: windows5.0.
-func GetWindowTextW(hWnd foundation.HWND, lpString foundation.PWSTR, nMaxCount int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetWindowTextW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)), uintptr(nMaxCount))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2490,39 +2548,52 @@ func HideCaret(hWnd foundation.HWND) error {
 // HiliteMenuItem calls USER32!HiliteMenuItem.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-hilitemenuitem
 // Minimum OS: windows5.0.
-func HiliteMenuItem(hWnd foundation.HWND, hMenu HMENU, uIDHiliteItem uint32, uHilite uint32) foundation.BOOL {
+func HiliteMenuItem(hWnd foundation.HWND, hMenu HMENU, uIDHiliteItem uint32, uHilite uint32) bool {
 	r1, _, _ := syscall.SyscallN(procHiliteMenuItem.Addr(), uintptr(hWnd), uintptr(hMenu), uintptr(uIDHiliteItem), uintptr(uHilite))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InSendMessage calls USER32!InSendMessage.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-insendmessage
 // Minimum OS: windows5.0.
-func InSendMessage() foundation.BOOL {
+func InSendMessage() bool {
 	r1, _, _ := syscall.SyscallN(procInSendMessage.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InSendMessageEx calls USER32!InSendMessageEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-insendmessageex
 // Minimum OS: windows5.0.
-func InSendMessageEx(lpReserved unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procInSendMessageEx.Addr(), uintptr(unsafe.Pointer(lpReserved)))
+func InSendMessageEx() uint32 {
+	r1, _, _ := syscall.SyscallN(procInSendMessageEx.Addr(), 0)
 	return uint32(r1)
 }
 
 // IndexFilePath calls MrmSupport!IndexFilePath.
 // https://learn.microsoft.com/windows/win32/api/resourceindexer/nf-resourceindexer-indexfilepath
 // Minimum OS: windows10.0.10240.
-func IndexFilePath(resourceIndexer unsafe.Pointer, filePath foundation.PWSTR, ppResourceUri *foundation.PWSTR, pQualifierCount *uint32, ppQualifiers **IndexedResourceQualifier) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIndexFilePath.Addr(), uintptr(unsafe.Pointer(resourceIndexer)), uintptr(unsafe.Pointer(filePath)), uintptr(unsafe.Pointer(ppResourceUri)), uintptr(unsafe.Pointer(pQualifierCount)), uintptr(unsafe.Pointer(ppQualifiers)))
-	return foundation.HRESULT(r1)
+func IndexFilePath(resourceIndexer unsafe.Pointer, filePath string, ppResourceUri *foundation.PWSTR, pQualifierCount *uint32, ppQualifiers **IndexedResourceQualifier) error {
+	_filePath := win32.UTF16Ptr(filePath)
+	r1, _, _ := syscall.SyscallN(procIndexFilePath.Addr(), uintptr(unsafe.Pointer(resourceIndexer)), uintptr(unsafe.Pointer(_filePath)), uintptr(unsafe.Pointer(ppResourceUri)), uintptr(unsafe.Pointer(pQualifierCount)), uintptr(unsafe.Pointer(ppQualifiers)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InheritWindowMonitor calls USER32!InheritWindowMonitor.
-func InheritWindowMonitor(hwnd foundation.HWND, hwndInherit foundation.HWND) foundation.BOOL {
+func InheritWindowMonitor(hwnd foundation.HWND, hwndInherit foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procInheritWindowMonitor.Addr(), uintptr(hwnd), uintptr(hwndInherit))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// InsertMenu calls USER32!InsertMenuW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-insertmenuw
+// Minimum OS: windows5.0.
+func InsertMenu(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem string) error {
+	_lpNewItem := win32.UTF16Ptr(lpNewItem)
+	r1, _, e1 := syscall.SyscallN(procInsertMenu.Addr(), uintptr(hMenu), uintptr(uPosition), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(_lpNewItem)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // InsertMenuA calls USER32!InsertMenuA.
@@ -2536,33 +2607,24 @@ func InsertMenuA(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewIt
 	return nil
 }
 
+// InsertMenuItem calls USER32!InsertMenuItemW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-insertmenuitemw
+// Minimum OS: windows5.0.
+func InsertMenuItem(hmenu HMENU, item uint32, fByPosition bool, lpmi *MENUITEMINFOW) error {
+	_fByPosition := win32.Bool32(fByPosition)
+	r1, _, e1 := syscall.SyscallN(procInsertMenuItem.Addr(), uintptr(hmenu), uintptr(item), uintptr(_fByPosition), uintptr(unsafe.Pointer(lpmi)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // InsertMenuItemA calls USER32!InsertMenuItemA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-insertmenuitema
 // Minimum OS: windows5.0.
-func InsertMenuItemA(hmenu HMENU, item uint32, fByPosition foundation.BOOL, lpmi *MENUITEMINFOA) error {
-	r1, _, e1 := syscall.SyscallN(procInsertMenuItemA.Addr(), uintptr(hmenu), uintptr(item), uintptr(fByPosition), uintptr(unsafe.Pointer(lpmi)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// InsertMenuItemW calls USER32!InsertMenuItemW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-insertmenuitemw
-// Minimum OS: windows5.0.
-func InsertMenuItemW(hmenu HMENU, item uint32, fByPosition foundation.BOOL, lpmi *MENUITEMINFOW) error {
-	r1, _, e1 := syscall.SyscallN(procInsertMenuItemW.Addr(), uintptr(hmenu), uintptr(item), uintptr(fByPosition), uintptr(unsafe.Pointer(lpmi)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// InsertMenuW calls USER32!InsertMenuW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-insertmenuw
-// Minimum OS: windows5.0.
-func InsertMenuW(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procInsertMenuW.Addr(), uintptr(hMenu), uintptr(uPosition), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(lpNewItem)))
+func InsertMenuItemA(hmenu HMENU, item uint32, fByPosition bool, lpmi *MENUITEMINFOA) error {
+	_fByPosition := win32.Bool32(fByPosition)
+	r1, _, e1 := syscall.SyscallN(procInsertMenuItemA.Addr(), uintptr(hmenu), uintptr(item), uintptr(_fByPosition), uintptr(unsafe.Pointer(lpmi)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2580,11 +2642,33 @@ func InternalGetWindowText(hWnd foundation.HWND, pString foundation.PWSTR, cchMa
 	return int32(r1), nil
 }
 
+// IsCharAlpha calls USER32!IsCharAlphaW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischaralphaw
+// Minimum OS: windows5.0.
+func IsCharAlpha(ch uint16) error {
+	r1, _, e1 := syscall.SyscallN(procIsCharAlpha.Addr(), uintptr(ch))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // IsCharAlphaA calls USER32!IsCharAlphaA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischaralphaa
 // Minimum OS: windows5.0.
 func IsCharAlphaA(ch foundation.CHAR) error {
 	r1, _, e1 := syscall.SyscallN(procIsCharAlphaA.Addr(), uintptr(ch))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// IsCharAlphaNumeric calls USER32!IsCharAlphaNumericW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischaralphanumericw
+// Minimum OS: windows5.0.
+func IsCharAlphaNumeric(ch uint16) error {
+	r1, _, e1 := syscall.SyscallN(procIsCharAlphaNumeric.Addr(), uintptr(ch))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2602,22 +2686,10 @@ func IsCharAlphaNumericA(ch foundation.CHAR) error {
 	return nil
 }
 
-// IsCharAlphaNumericW calls USER32!IsCharAlphaNumericW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischaralphanumericw
-// Minimum OS: windows5.0.
-func IsCharAlphaNumericW(ch uint16) error {
-	r1, _, e1 := syscall.SyscallN(procIsCharAlphaNumericW.Addr(), uintptr(ch))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// IsCharAlphaW calls USER32!IsCharAlphaW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischaralphaw
-// Minimum OS: windows5.0.
-func IsCharAlphaW(ch uint16) error {
-	r1, _, e1 := syscall.SyscallN(procIsCharAlphaW.Addr(), uintptr(ch))
+// IsCharLower calls USER32!IsCharLowerW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischarlowerw
+func IsCharLower(ch uint16) error {
+	r1, _, e1 := syscall.SyscallN(procIsCharLower.Addr(), uintptr(ch))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2635,10 +2707,11 @@ func IsCharLowerA(ch foundation.CHAR) error {
 	return nil
 }
 
-// IsCharLowerW calls USER32!IsCharLowerW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischarlowerw
-func IsCharLowerW(ch uint16) error {
-	r1, _, e1 := syscall.SyscallN(procIsCharLowerW.Addr(), uintptr(ch))
+// IsCharUpper calls USER32!IsCharUpperW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischarupperw
+// Minimum OS: windows5.0.
+func IsCharUpper(ch uint16) error {
+	r1, _, e1 := syscall.SyscallN(procIsCharUpper.Addr(), uintptr(ch))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2656,132 +2729,122 @@ func IsCharUpperA(ch foundation.CHAR) error {
 	return nil
 }
 
-// IsCharUpperW calls USER32!IsCharUpperW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischarupperw
-// Minimum OS: windows5.0.
-func IsCharUpperW(ch uint16) error {
-	r1, _, e1 := syscall.SyscallN(procIsCharUpperW.Addr(), uintptr(ch))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // IsChild calls USER32!IsChild.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ischild
 // Minimum OS: windows5.0.
-func IsChild(hWndParent foundation.HWND, hWnd foundation.HWND) foundation.BOOL {
+func IsChild(hWndParent foundation.HWND, hWnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsChild.Addr(), uintptr(hWndParent), uintptr(hWnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// IsDialogMessage calls USER32!IsDialogMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-isdialogmessagew
+// Minimum OS: windows5.0.
+func IsDialogMessage(hDlg foundation.HWND, lpMsg *MSG) bool {
+	r1, _, _ := syscall.SyscallN(procIsDialogMessage.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(lpMsg)))
+	return r1 != 0
 }
 
 // IsDialogMessageA calls USER32!IsDialogMessageA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-isdialogmessagea
 // Minimum OS: windows5.0.
-func IsDialogMessageA(hDlg foundation.HWND, lpMsg *MSG) foundation.BOOL {
+func IsDialogMessageA(hDlg foundation.HWND, lpMsg *MSG) bool {
 	r1, _, _ := syscall.SyscallN(procIsDialogMessageA.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(lpMsg)))
-	return foundation.BOOL(r1)
-}
-
-// IsDialogMessageW calls USER32!IsDialogMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-isdialogmessagew
-// Minimum OS: windows5.0.
-func IsDialogMessageW(hDlg foundation.HWND, lpMsg *MSG) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIsDialogMessageW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(lpMsg)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsGUIThread calls USER32!IsGUIThread.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-isguithread
 // Minimum OS: windows5.1.2600.
-func IsGUIThread(bConvert foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIsGUIThread.Addr(), uintptr(bConvert))
-	return foundation.BOOL(r1)
+func IsGUIThread(bConvert bool) bool {
+	_bConvert := win32.Bool32(bConvert)
+	r1, _, _ := syscall.SyscallN(procIsGUIThread.Addr(), uintptr(_bConvert))
+	return r1 != 0
 }
 
 // IsHungAppWindow calls USER32!IsHungAppWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ishungappwindow
 // Minimum OS: windows5.0.
-func IsHungAppWindow(hwnd foundation.HWND) foundation.BOOL {
+func IsHungAppWindow(hwnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsHungAppWindow.Addr(), uintptr(hwnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsIconic calls USER32!IsIconic.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-isiconic
 // Minimum OS: windows5.0.
-func IsIconic(hWnd foundation.HWND) foundation.BOOL {
+func IsIconic(hWnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsIconic.Addr(), uintptr(hWnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsInterceptWindow calls USER32!IsInterceptWindow.
-func IsInterceptWindow(topLevelWindow foundation.HWND, isIntercept *foundation.BOOL) foundation.BOOL {
+func IsInterceptWindow(topLevelWindow foundation.HWND, isIntercept *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procIsInterceptWindow.Addr(), uintptr(topLevelWindow), uintptr(unsafe.Pointer(isIntercept)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsMenu calls USER32!IsMenu.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ismenu
 // Minimum OS: windows5.0.
-func IsMenu(hMenu HMENU) foundation.BOOL {
+func IsMenu(hMenu HMENU) bool {
 	r1, _, _ := syscall.SyscallN(procIsMenu.Addr(), uintptr(hMenu))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsProcessDPIAware calls USER32!IsProcessDPIAware.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-isprocessdpiaware
 // Minimum OS: windows6.0.6000.
-func IsProcessDPIAware() foundation.BOOL {
+func IsProcessDPIAware() bool {
 	r1, _, _ := syscall.SyscallN(procIsProcessDPIAware.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsWindow calls USER32!IsWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-iswindow
 // Minimum OS: windows5.0.
-func IsWindow(hWnd foundation.HWND) foundation.BOOL {
+func IsWindow(hWnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsWindow.Addr(), uintptr(hWnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsWindowArranged calls USER32!IsWindowArranged.
 // https://learn.microsoft.com/windows/win32/winmsg/winuser/nf-winuser-iswindowarranged
-func IsWindowArranged(hwnd foundation.HWND) foundation.BOOL {
+func IsWindowArranged(hwnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsWindowArranged.Addr(), uintptr(hwnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsWindowUnicode calls USER32!IsWindowUnicode.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-iswindowunicode
 // Minimum OS: windows5.0.
-func IsWindowUnicode(hWnd foundation.HWND) foundation.BOOL {
+func IsWindowUnicode(hWnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsWindowUnicode.Addr(), uintptr(hWnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsWindowVisible calls USER32!IsWindowVisible.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-iswindowvisible
 // Minimum OS: windows5.0.
-func IsWindowVisible(hWnd foundation.HWND) foundation.BOOL {
+func IsWindowVisible(hWnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsWindowVisible.Addr(), uintptr(hWnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsWow64Message calls USER32!IsWow64Message.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-iswow64message
 // Minimum OS: windows6.0.6000.
-func IsWow64Message() foundation.BOOL {
+func IsWow64Message() bool {
 	r1, _, _ := syscall.SyscallN(procIsWow64Message.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsZoomed calls USER32!IsZoomed.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-iszoomed
 // Minimum OS: windows5.0.
-func IsZoomed(hWnd foundation.HWND) foundation.BOOL {
+func IsZoomed(hWnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsZoomed.Addr(), uintptr(hWnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // KillTimer calls USER32!KillTimer.
@@ -2793,6 +2856,19 @@ func KillTimer(hWnd foundation.HWND, uIDEvent uintptr) error {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// LoadAccelerators calls USER32!LoadAcceleratorsW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadacceleratorsw
+// Minimum OS: windows5.0.
+func LoadAccelerators(hInstance foundation.HINSTANCE, lpTableName string) (HACCEL, error) {
+	_lpTableName := win32.UTF16Ptr(lpTableName)
+	r1, _, e1 := syscall.SyscallN(procLoadAccelerators.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpTableName)))
+	ret := HACCEL(r1)
+	if ret == ^HACCEL(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // LoadAcceleratorsA calls USER32!LoadAcceleratorsA.
@@ -2807,13 +2883,14 @@ func LoadAcceleratorsA(hInstance foundation.HINSTANCE, lpTableName foundation.PS
 	return ret, nil
 }
 
-// LoadAcceleratorsW calls USER32!LoadAcceleratorsW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadacceleratorsw
+// LoadCursor calls USER32!LoadCursorW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorw
 // Minimum OS: windows5.0.
-func LoadAcceleratorsW(hInstance foundation.HINSTANCE, lpTableName foundation.PWSTR) (HACCEL, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadAcceleratorsW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpTableName)))
-	ret := HACCEL(r1)
-	if ret == ^HACCEL(0) || ret == 0 {
+func LoadCursor(hInstance foundation.HINSTANCE, lpCursorName string) (HCURSOR, error) {
+	_lpCursorName := win32.UTF16Ptr(lpCursorName)
+	r1, _, e1 := syscall.SyscallN(procLoadCursor.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpCursorName)))
+	ret := HCURSOR(r1)
+	if ret == ^HCURSOR(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
@@ -2824,6 +2901,19 @@ func LoadAcceleratorsW(hInstance foundation.HINSTANCE, lpTableName foundation.PW
 // Minimum OS: windows5.0.
 func LoadCursorA(hInstance foundation.HINSTANCE, lpCursorName foundation.PSTR) (HCURSOR, error) {
 	r1, _, e1 := syscall.SyscallN(procLoadCursorA.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpCursorName)))
+	ret := HCURSOR(r1)
+	if ret == ^HCURSOR(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// LoadCursorFromFile calls USER32!LoadCursorFromFileW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorfromfilew
+// Minimum OS: windows5.0.
+func LoadCursorFromFile(lpFileName string) (HCURSOR, error) {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procLoadCursorFromFile.Addr(), uintptr(unsafe.Pointer(_lpFileName)))
 	ret := HCURSOR(r1)
 	if ret == ^HCURSOR(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2843,25 +2933,14 @@ func LoadCursorFromFileA(lpFileName foundation.PSTR) (HCURSOR, error) {
 	return ret, nil
 }
 
-// LoadCursorFromFileW calls USER32!LoadCursorFromFileW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorfromfilew
+// LoadIcon calls USER32!LoadIconW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadiconw
 // Minimum OS: windows5.0.
-func LoadCursorFromFileW(lpFileName foundation.PWSTR) (HCURSOR, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadCursorFromFileW.Addr(), uintptr(unsafe.Pointer(lpFileName)))
-	ret := HCURSOR(r1)
-	if ret == ^HCURSOR(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// LoadCursorW calls USER32!LoadCursorW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadcursorw
-// Minimum OS: windows5.0.
-func LoadCursorW(hInstance foundation.HINSTANCE, lpCursorName foundation.PWSTR) (HCURSOR, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadCursorW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpCursorName)))
-	ret := HCURSOR(r1)
-	if ret == ^HCURSOR(0) || ret == 0 {
+func LoadIcon(hInstance foundation.HINSTANCE, lpIconName string) (HICON, error) {
+	_lpIconName := win32.UTF16Ptr(lpIconName)
+	r1, _, e1 := syscall.SyscallN(procLoadIcon.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpIconName)))
+	ret := HICON(r1)
+	if ret == ^HICON(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
@@ -2879,13 +2958,14 @@ func LoadIconA(hInstance foundation.HINSTANCE, lpIconName foundation.PSTR) (HICO
 	return ret, nil
 }
 
-// LoadIconW calls USER32!LoadIconW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadiconw
+// LoadImage calls USER32!LoadImageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadimagew
 // Minimum OS: windows5.0.
-func LoadIconW(hInstance foundation.HINSTANCE, lpIconName foundation.PWSTR) (HICON, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadIconW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpIconName)))
-	ret := HICON(r1)
-	if ret == ^HICON(0) || ret == 0 {
+func LoadImage(hInst foundation.HINSTANCE, name string, type_ GDI_IMAGE_TYPE, cx int32, cy int32, fuLoad IMAGE_FLAGS) (foundation.HANDLE, error) {
+	_name := win32.UTF16Ptr(name)
+	r1, _, e1 := syscall.SyscallN(procLoadImage.Addr(), uintptr(hInst), uintptr(unsafe.Pointer(_name)), uintptr(type_), uintptr(cx), uintptr(cy), uintptr(fuLoad))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
@@ -2903,13 +2983,14 @@ func LoadImageA(hInst foundation.HINSTANCE, name foundation.PSTR, type_ GDI_IMAG
 	return ret, nil
 }
 
-// LoadImageW calls USER32!LoadImageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadimagew
+// LoadMenu calls USER32!LoadMenuW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadmenuw
 // Minimum OS: windows5.0.
-func LoadImageW(hInst foundation.HINSTANCE, name foundation.PWSTR, type_ GDI_IMAGE_TYPE, cx int32, cy int32, fuLoad IMAGE_FLAGS) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadImageW.Addr(), uintptr(hInst), uintptr(unsafe.Pointer(name)), uintptr(type_), uintptr(cx), uintptr(cy), uintptr(fuLoad))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
+func LoadMenu(hInstance foundation.HINSTANCE, lpMenuName string) (HMENU, error) {
+	_lpMenuName := win32.UTF16Ptr(lpMenuName)
+	r1, _, e1 := syscall.SyscallN(procLoadMenu.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(_lpMenuName)))
+	ret := HMENU(r1)
+	if ret == ^HMENU(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
@@ -2920,6 +3001,18 @@ func LoadImageW(hInst foundation.HINSTANCE, name foundation.PWSTR, type_ GDI_IMA
 // Minimum OS: windows5.0.
 func LoadMenuA(hInstance foundation.HINSTANCE, lpMenuName foundation.PSTR) (HMENU, error) {
 	r1, _, e1 := syscall.SyscallN(procLoadMenuA.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpMenuName)))
+	ret := HMENU(r1)
+	if ret == ^HMENU(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// LoadMenuIndirect calls USER32!LoadMenuIndirectW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadmenuindirectw
+// Minimum OS: windows5.0.
+func LoadMenuIndirect(lpMenuTemplate unsafe.Pointer) (HMENU, error) {
+	r1, _, e1 := syscall.SyscallN(procLoadMenuIndirect.Addr(), uintptr(unsafe.Pointer(lpMenuTemplate)))
 	ret := HMENU(r1)
 	if ret == ^HMENU(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2939,28 +3032,15 @@ func LoadMenuIndirectA(lpMenuTemplate unsafe.Pointer) (HMENU, error) {
 	return ret, nil
 }
 
-// LoadMenuIndirectW calls USER32!LoadMenuIndirectW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadmenuindirectw
+// LoadString calls USER32!LoadStringW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadstringw
 // Minimum OS: windows5.0.
-func LoadMenuIndirectW(lpMenuTemplate unsafe.Pointer) (HMENU, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadMenuIndirectW.Addr(), uintptr(unsafe.Pointer(lpMenuTemplate)))
-	ret := HMENU(r1)
-	if ret == ^HMENU(0) || ret == 0 {
-		return ret, win32.LastError(e1)
+func LoadString(hInstance foundation.HINSTANCE, uID uint32, lpBuffer foundation.PWSTR, cchBufferMax int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procLoadString.Addr(), uintptr(hInstance), uintptr(uID), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cchBufferMax))
+	if e1 != 0 {
+		return int32(r1), e1
 	}
-	return ret, nil
-}
-
-// LoadMenuW calls USER32!LoadMenuW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadmenuw
-// Minimum OS: windows5.0.
-func LoadMenuW(hInstance foundation.HINSTANCE, lpMenuName foundation.PWSTR) (HMENU, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadMenuW.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpMenuName)))
-	ret := HMENU(r1)
-	if ret == ^HMENU(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
+	return int32(r1), nil
 }
 
 // LoadStringA calls USER32!LoadStringA.
@@ -2968,17 +3048,6 @@ func LoadMenuW(hInstance foundation.HINSTANCE, lpMenuName foundation.PWSTR) (HME
 // Minimum OS: windows5.0.
 func LoadStringA(hInstance foundation.HINSTANCE, uID uint32, lpBuffer foundation.PSTR, cchBufferMax int32) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procLoadStringA.Addr(), uintptr(hInstance), uintptr(uID), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cchBufferMax))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// LoadStringW calls USER32!LoadStringW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadstringw
-// Minimum OS: windows5.0.
-func LoadStringW(hInstance foundation.HINSTANCE, uID uint32, lpBuffer foundation.PWSTR, cchBufferMax int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadStringW.Addr(), uintptr(hInstance), uintptr(uID), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cchBufferMax))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2999,16 +3068,17 @@ func LockSetForegroundWindow(uLockCode FOREGROUND_WINDOW_LOCK_CODE) error {
 // LogicalToPhysicalPoint calls USER32!LogicalToPhysicalPoint.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-logicaltophysicalpoint
 // Minimum OS: windows6.0.6000.
-func LogicalToPhysicalPoint(hWnd foundation.HWND, lpPoint *foundation.POINT) foundation.BOOL {
+func LogicalToPhysicalPoint(hWnd foundation.HWND, lpPoint *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procLogicalToPhysicalPoint.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpPoint)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LookupIconIdFromDirectory calls USER32!LookupIconIdFromDirectory.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-lookupiconidfromdirectory
 // Minimum OS: windows5.0.
-func LookupIconIdFromDirectory(presbits *byte, fIcon foundation.BOOL) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procLookupIconIdFromDirectory.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(fIcon))
+func LookupIconIdFromDirectory(presbits *byte, fIcon bool) (int32, error) {
+	_fIcon := win32.Bool32(fIcon)
+	r1, _, e1 := syscall.SyscallN(procLookupIconIdFromDirectory.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(_fIcon))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -3018,8 +3088,9 @@ func LookupIconIdFromDirectory(presbits *byte, fIcon foundation.BOOL) (int32, er
 // LookupIconIdFromDirectoryEx calls USER32!LookupIconIdFromDirectoryEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-lookupiconidfromdirectoryex
 // Minimum OS: windows5.0.
-func LookupIconIdFromDirectoryEx(presbits *byte, fIcon foundation.BOOL, cxDesired int32, cyDesired int32, Flags IMAGE_FLAGS) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procLookupIconIdFromDirectoryEx.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(fIcon), uintptr(cxDesired), uintptr(cyDesired), uintptr(Flags))
+func LookupIconIdFromDirectoryEx(presbits *byte, fIcon bool, cxDesired int32, cyDesired int32, Flags IMAGE_FLAGS) (int32, error) {
+	_fIcon := win32.Bool32(fIcon)
+	r1, _, e1 := syscall.SyscallN(procLookupIconIdFromDirectoryEx.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(_fIcon), uintptr(cxDesired), uintptr(cyDesired), uintptr(Flags))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -3037,11 +3108,37 @@ func MapDialogRect(hDlg foundation.HWND, lpRect *foundation.RECT) error {
 	return nil
 }
 
+// MessageBox calls USER32!MessageBoxW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw
+// Minimum OS: windows5.0.
+func MessageBox(hWnd foundation.HWND, lpText string, lpCaption string, uType MESSAGEBOX_STYLE) (MESSAGEBOX_RESULT, error) {
+	_lpText := win32.UTF16Ptr(lpText)
+	_lpCaption := win32.UTF16Ptr(lpCaption)
+	r1, _, e1 := syscall.SyscallN(procMessageBox.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpText)), uintptr(unsafe.Pointer(_lpCaption)), uintptr(uType))
+	if e1 != 0 {
+		return MESSAGEBOX_RESULT(r1), e1
+	}
+	return MESSAGEBOX_RESULT(r1), nil
+}
+
 // MessageBoxA calls USER32!MessageBoxA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxa
 // Minimum OS: windows5.0.
 func MessageBoxA(hWnd foundation.HWND, lpText foundation.PSTR, lpCaption foundation.PSTR, uType MESSAGEBOX_STYLE) (MESSAGEBOX_RESULT, error) {
 	r1, _, e1 := syscall.SyscallN(procMessageBoxA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpText)), uintptr(unsafe.Pointer(lpCaption)), uintptr(uType))
+	if e1 != 0 {
+		return MESSAGEBOX_RESULT(r1), e1
+	}
+	return MESSAGEBOX_RESULT(r1), nil
+}
+
+// MessageBoxEx calls USER32!MessageBoxExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxexw
+// Minimum OS: windows5.0.
+func MessageBoxEx(hWnd foundation.HWND, lpText string, lpCaption string, uType MESSAGEBOX_STYLE, wLanguageId uint16) (MESSAGEBOX_RESULT, error) {
+	_lpText := win32.UTF16Ptr(lpText)
+	_lpCaption := win32.UTF16Ptr(lpCaption)
+	r1, _, e1 := syscall.SyscallN(procMessageBoxEx.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpText)), uintptr(unsafe.Pointer(_lpCaption)), uintptr(uType), uintptr(wLanguageId))
 	if e1 != 0 {
 		return MESSAGEBOX_RESULT(r1), e1
 	}
@@ -3059,15 +3156,12 @@ func MessageBoxExA(hWnd foundation.HWND, lpText foundation.PSTR, lpCaption found
 	return MESSAGEBOX_RESULT(r1), nil
 }
 
-// MessageBoxExW calls USER32!MessageBoxExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxexw
+// MessageBoxIndirect calls USER32!MessageBoxIndirectW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxindirectw
 // Minimum OS: windows5.0.
-func MessageBoxExW(hWnd foundation.HWND, lpText foundation.PWSTR, lpCaption foundation.PWSTR, uType MESSAGEBOX_STYLE, wLanguageId uint16) (MESSAGEBOX_RESULT, error) {
-	r1, _, e1 := syscall.SyscallN(procMessageBoxExW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpText)), uintptr(unsafe.Pointer(lpCaption)), uintptr(uType), uintptr(wLanguageId))
-	if e1 != 0 {
-		return MESSAGEBOX_RESULT(r1), e1
-	}
-	return MESSAGEBOX_RESULT(r1), nil
+func MessageBoxIndirect(lpmbp *MSGBOXPARAMSW) MESSAGEBOX_RESULT {
+	r1, _, _ := syscall.SyscallN(procMessageBoxIndirect.Addr(), uintptr(unsafe.Pointer(lpmbp)))
+	return MESSAGEBOX_RESULT(r1)
 }
 
 // MessageBoxIndirectA calls USER32!MessageBoxIndirectA.
@@ -3078,23 +3172,16 @@ func MessageBoxIndirectA(lpmbp *MSGBOXPARAMSA) MESSAGEBOX_RESULT {
 	return MESSAGEBOX_RESULT(r1)
 }
 
-// MessageBoxIndirectW calls USER32!MessageBoxIndirectW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxindirectw
+// ModifyMenu calls USER32!ModifyMenuW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-modifymenuw
 // Minimum OS: windows5.0.
-func MessageBoxIndirectW(lpmbp *MSGBOXPARAMSW) MESSAGEBOX_RESULT {
-	r1, _, _ := syscall.SyscallN(procMessageBoxIndirectW.Addr(), uintptr(unsafe.Pointer(lpmbp)))
-	return MESSAGEBOX_RESULT(r1)
-}
-
-// MessageBoxW calls USER32!MessageBoxW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw
-// Minimum OS: windows5.0.
-func MessageBoxW(hWnd foundation.HWND, lpText foundation.PWSTR, lpCaption foundation.PWSTR, uType MESSAGEBOX_STYLE) (MESSAGEBOX_RESULT, error) {
-	r1, _, e1 := syscall.SyscallN(procMessageBoxW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpText)), uintptr(unsafe.Pointer(lpCaption)), uintptr(uType))
-	if e1 != 0 {
-		return MESSAGEBOX_RESULT(r1), e1
+func ModifyMenu(hMnu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem string) error {
+	_lpNewItem := win32.UTF16Ptr(lpNewItem)
+	r1, _, e1 := syscall.SyscallN(procModifyMenu.Addr(), uintptr(hMnu), uintptr(uPosition), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(_lpNewItem)))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return MESSAGEBOX_RESULT(r1), nil
+	return nil
 }
 
 // ModifyMenuA calls USER32!ModifyMenuA.
@@ -3108,22 +3195,12 @@ func ModifyMenuA(hMnu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewIte
 	return nil
 }
 
-// ModifyMenuW calls USER32!ModifyMenuW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-modifymenuw
-// Minimum OS: windows5.0.
-func ModifyMenuW(hMnu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procModifyMenuW.Addr(), uintptr(hMnu), uintptr(uPosition), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(lpNewItem)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // MoveWindow calls USER32!MoveWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-movewindow
 // Minimum OS: windows5.0.
-func MoveWindow(hWnd foundation.HWND, X int32, Y int32, nWidth int32, nHeight int32, bRepaint foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procMoveWindow.Addr(), uintptr(hWnd), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(bRepaint))
+func MoveWindow(hWnd foundation.HWND, X int32, Y int32, nWidth int32, nHeight int32, bRepaint bool) error {
+	_bRepaint := win32.Bool32(bRepaint)
+	r1, _, e1 := syscall.SyscallN(procMoveWindow.Addr(), uintptr(hWnd), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(_bRepaint))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3132,98 +3209,128 @@ func MoveWindow(hWnd foundation.HWND, X int32, Y int32, nWidth int32, nHeight in
 
 // MrmCreateConfig calls MrmSupport!MrmCreateConfig.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateconfig
-func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers foundation.PWSTR, outputXmlFile foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmCreateConfig.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(defaultQualifiers)), uintptr(unsafe.Pointer(outputXmlFile)))
-	return foundation.HRESULT(r1)
+func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers string, outputXmlFile string) error {
+	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_outputXmlFile := win32.UTF16Ptr(outputXmlFile)
+	r1, _, _ := syscall.SyscallN(procMrmCreateConfig.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_outputXmlFile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmCreateConfigInMemory calls MrmSupport!MrmCreateConfigInMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateconfiginmemory
-func MrmCreateConfigInMemory(platformVersion MrmPlatformVersion, defaultQualifiers foundation.PWSTR, outputXmlData **byte, outputXmlSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmCreateConfigInMemory.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(defaultQualifiers)), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
-	return foundation.HRESULT(r1)
+func MrmCreateConfigInMemory(platformVersion MrmPlatformVersion, defaultQualifiers string, outputXmlData **byte, outputXmlSize *uint32) error {
+	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	r1, _, _ := syscall.SyscallN(procMrmCreateConfigInMemory.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmCreateResourceIndexer calls MrmSupport!MrmCreateResourceIndexer.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexer
-func MrmCreateResourceIndexer(packageFamilyName foundation.PWSTR, projectRoot foundation.PWSTR, platformVersion MrmPlatformVersion, defaultQualifiers foundation.PWSTR, indexer *MrmResourceIndexerHandle) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(defaultQualifiers)), uintptr(unsafe.Pointer(indexer)))
-	return foundation.HRESULT(r1)
+func MrmCreateResourceIndexer(packageFamilyName string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, indexer *MrmResourceIndexerHandle) error {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	_projectRoot := win32.UTF16Ptr(projectRoot)
+	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(indexer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousPriData calls MrmSupport!MrmCreateResourceIndexerFromPreviousPriData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviouspridata-
-func MrmCreateResourceIndexerFromPreviousPriData(projectRoot foundation.PWSTR, platformVersion MrmPlatformVersion, defaultQualifiers foundation.PWSTR, priData *byte, priSize uint32, indexer *MrmResourceIndexerHandle) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriData.Addr(), uintptr(unsafe.Pointer(projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(defaultQualifiers)), uintptr(unsafe.Pointer(priData)), uintptr(priSize), uintptr(unsafe.Pointer(indexer)))
-	return foundation.HRESULT(r1)
+func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, priData *byte, priSize uint32, indexer *MrmResourceIndexerHandle) error {
+	_projectRoot := win32.UTF16Ptr(projectRoot)
+	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriData.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(priData)), uintptr(priSize), uintptr(unsafe.Pointer(indexer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousPriFile calls MrmSupport!MrmCreateResourceIndexerFromPreviousPriFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousprifile
-func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot foundation.PWSTR, platformVersion MrmPlatformVersion, defaultQualifiers foundation.PWSTR, priFile foundation.PWSTR, indexer *MrmResourceIndexerHandle) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriFile.Addr(), uintptr(unsafe.Pointer(projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(defaultQualifiers)), uintptr(unsafe.Pointer(priFile)), uintptr(unsafe.Pointer(indexer)))
-	return foundation.HRESULT(r1)
+func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, priFile string, indexer *MrmResourceIndexerHandle) error {
+	_projectRoot := win32.UTF16Ptr(projectRoot)
+	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_priFile := win32.UTF16Ptr(priFile)
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriFile.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_priFile)), uintptr(unsafe.Pointer(indexer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousSchemaData calls MrmSupport!MrmCreateResourceIndexerFromPreviousSchemaData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousschemadata
-func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot foundation.PWSTR, platformVersion MrmPlatformVersion, defaultQualifiers foundation.PWSTR, schemaXmlData *byte, schemaXmlSize uint32, indexer *MrmResourceIndexerHandle) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaData.Addr(), uintptr(unsafe.Pointer(projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(defaultQualifiers)), uintptr(unsafe.Pointer(schemaXmlData)), uintptr(schemaXmlSize), uintptr(unsafe.Pointer(indexer)))
-	return foundation.HRESULT(r1)
+func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, schemaXmlData *byte, schemaXmlSize uint32, indexer *MrmResourceIndexerHandle) error {
+	_projectRoot := win32.UTF16Ptr(projectRoot)
+	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaData.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(schemaXmlData)), uintptr(schemaXmlSize), uintptr(unsafe.Pointer(indexer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousSchemaFile calls MrmSupport!MrmCreateResourceIndexerFromPreviousSchemaFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousschemafile
-func MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot foundation.PWSTR, platformVersion MrmPlatformVersion, defaultQualifiers foundation.PWSTR, schemaFile foundation.PWSTR, indexer *MrmResourceIndexerHandle) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaFile.Addr(), uintptr(unsafe.Pointer(projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(defaultQualifiers)), uintptr(unsafe.Pointer(schemaFile)), uintptr(unsafe.Pointer(indexer)))
-	return foundation.HRESULT(r1)
+func MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, schemaFile string, indexer *MrmResourceIndexerHandle) error {
+	_projectRoot := win32.UTF16Ptr(projectRoot)
+	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_schemaFile := win32.UTF16Ptr(schemaFile)
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaFile.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_schemaFile)), uintptr(unsafe.Pointer(indexer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmCreateResourceIndexerWithFlags calls MrmSupport!MrmCreateResourceIndexerWithFlags.
-func MrmCreateResourceIndexerWithFlags(packageFamilyName foundation.PWSTR, projectRoot foundation.PWSTR, platformVersion MrmPlatformVersion, defaultQualifiers foundation.PWSTR, flags MrmIndexerFlags, indexer *MrmResourceIndexerHandle) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerWithFlags.Addr(), uintptr(unsafe.Pointer(packageFamilyName)), uintptr(unsafe.Pointer(projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(defaultQualifiers)), uintptr(flags), uintptr(unsafe.Pointer(indexer)))
-	return foundation.HRESULT(r1)
+func MrmCreateResourceIndexerWithFlags(packageFamilyName string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, flags MrmIndexerFlags, indexer *MrmResourceIndexerHandle) error {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	_projectRoot := win32.UTF16Ptr(projectRoot)
+	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerWithFlags.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(flags), uintptr(unsafe.Pointer(indexer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmDumpPriDataInMemory calls MrmSupport!MrmDumpPriDataInMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmdumppridatainmemory
-func MrmDumpPriDataInMemory(inputPriData *byte, inputPriSize uint32, schemaPriData *byte, schemaPriSize uint32, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) foundation.HRESULT {
+func MrmDumpPriDataInMemory(inputPriData *byte, inputPriSize uint32, schemaPriData *byte, schemaPriSize uint32, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMrmDumpPriDataInMemory.Addr(), uintptr(unsafe.Pointer(inputPriData)), uintptr(inputPriSize), uintptr(unsafe.Pointer(schemaPriData)), uintptr(schemaPriSize), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmDumpPriFile calls MrmSupport!MrmDumpPriFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmdumpprifile
-func MrmDumpPriFile(indexFileName foundation.PWSTR, schemaPriFile foundation.PWSTR, dumpType MrmDumpType, outputXmlFile foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmDumpPriFile.Addr(), uintptr(unsafe.Pointer(indexFileName)), uintptr(unsafe.Pointer(schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlFile)))
-	return foundation.HRESULT(r1)
+func MrmDumpPriFile(indexFileName string, schemaPriFile string, dumpType MrmDumpType, outputXmlFile string) error {
+	_indexFileName := win32.UTF16Ptr(indexFileName)
+	_schemaPriFile := win32.UTF16Ptr(schemaPriFile)
+	_outputXmlFile := win32.UTF16Ptr(outputXmlFile)
+	r1, _, _ := syscall.SyscallN(procMrmDumpPriFile.Addr(), uintptr(unsafe.Pointer(_indexFileName)), uintptr(unsafe.Pointer(_schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(_outputXmlFile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmDumpPriFileInMemory calls MrmSupport!MrmDumpPriFileInMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmdumpprifileinmemory
-func MrmDumpPriFileInMemory(indexFileName foundation.PWSTR, schemaPriFile foundation.PWSTR, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmDumpPriFileInMemory.Addr(), uintptr(unsafe.Pointer(indexFileName)), uintptr(unsafe.Pointer(schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
-	return foundation.HRESULT(r1)
+func MrmDumpPriFileInMemory(indexFileName string, schemaPriFile string, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) error {
+	_indexFileName := win32.UTF16Ptr(indexFileName)
+	_schemaPriFile := win32.UTF16Ptr(schemaPriFile)
+	r1, _, _ := syscall.SyscallN(procMrmDumpPriFileInMemory.Addr(), uintptr(unsafe.Pointer(_indexFileName)), uintptr(unsafe.Pointer(_schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmFreeMemory calls MrmSupport!MrmFreeMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmfreememory
-func MrmFreeMemory(data *byte) foundation.HRESULT {
+func MrmFreeMemory(data *byte) error {
 	r1, _, _ := syscall.SyscallN(procMrmFreeMemory.Addr(), uintptr(unsafe.Pointer(data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MrmGetPriFileContentChecksum calls MrmSupport!MrmGetPriFileContentChecksum.
-func MrmGetPriFileContentChecksum(priFile foundation.PWSTR, checksum *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMrmGetPriFileContentChecksum.Addr(), uintptr(unsafe.Pointer(priFile)), uintptr(unsafe.Pointer(checksum)))
-	return foundation.HRESULT(r1)
+func MrmGetPriFileContentChecksum(priFile string, checksum *uint32) error {
+	_priFile := win32.UTF16Ptr(priFile)
+	r1, _, _ := syscall.SyscallN(procMrmGetPriFileContentChecksum.Addr(), uintptr(unsafe.Pointer(_priFile)), uintptr(unsafe.Pointer(checksum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MsgWaitForMultipleObjects calls USER32!MsgWaitForMultipleObjects.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-msgwaitformultipleobjects
 // Minimum OS: windows5.1.2600.
-func MsgWaitForMultipleObjects(nCount uint32, pHandles *foundation.HANDLE, fWaitAll foundation.BOOL, dwMilliseconds uint32, dwWakeMask QUEUE_STATUS_FLAGS) (foundation.WAIT_EVENT, error) {
-	r1, _, e1 := syscall.SyscallN(procMsgWaitForMultipleObjects.Addr(), uintptr(nCount), uintptr(unsafe.Pointer(pHandles)), uintptr(fWaitAll), uintptr(dwMilliseconds), uintptr(dwWakeMask))
+func MsgWaitForMultipleObjects(pHandles []foundation.HANDLE, fWaitAll bool, dwMilliseconds uint32, dwWakeMask QUEUE_STATUS_FLAGS) (foundation.WAIT_EVENT, error) {
+	var _pHandles *foundation.HANDLE
+	if len(pHandles) > 0 {
+		_pHandles = &pHandles[0]
+	}
+	_fWaitAll := win32.Bool32(fWaitAll)
+	r1, _, e1 := syscall.SyscallN(procMsgWaitForMultipleObjects.Addr(), uintptr(len(pHandles)), uintptr(unsafe.Pointer(_pHandles)), uintptr(_fWaitAll), uintptr(dwMilliseconds), uintptr(dwWakeMask))
 	if e1 != 0 {
 		return foundation.WAIT_EVENT(r1), e1
 	}
@@ -3233,12 +3340,27 @@ func MsgWaitForMultipleObjects(nCount uint32, pHandles *foundation.HANDLE, fWait
 // MsgWaitForMultipleObjectsEx calls USER32!MsgWaitForMultipleObjectsEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-msgwaitformultipleobjectsex
 // Minimum OS: windows5.1.2600.
-func MsgWaitForMultipleObjectsEx(nCount uint32, pHandles *foundation.HANDLE, dwMilliseconds uint32, dwWakeMask QUEUE_STATUS_FLAGS, dwFlags MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS) (foundation.WAIT_EVENT, error) {
-	r1, _, e1 := syscall.SyscallN(procMsgWaitForMultipleObjectsEx.Addr(), uintptr(nCount), uintptr(unsafe.Pointer(pHandles)), uintptr(dwMilliseconds), uintptr(dwWakeMask), uintptr(dwFlags))
+func MsgWaitForMultipleObjectsEx(pHandles []foundation.HANDLE, dwMilliseconds uint32, dwWakeMask QUEUE_STATUS_FLAGS, dwFlags MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS) (foundation.WAIT_EVENT, error) {
+	var _pHandles *foundation.HANDLE
+	if len(pHandles) > 0 {
+		_pHandles = &pHandles[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procMsgWaitForMultipleObjectsEx.Addr(), uintptr(len(pHandles)), uintptr(unsafe.Pointer(_pHandles)), uintptr(dwMilliseconds), uintptr(dwWakeMask), uintptr(dwFlags))
 	if e1 != 0 {
 		return foundation.WAIT_EVENT(r1), e1
 	}
 	return foundation.WAIT_EVENT(r1), nil
+}
+
+// OemToChar calls USER32!OemToCharW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-oemtocharw
+// Minimum OS: windows5.0.
+func OemToChar(pSrc foundation.PSTR, pDst foundation.PWSTR) error {
+	r1, _, e1 := syscall.SyscallN(procOemToChar.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // OemToCharA calls USER32!OemToCharA.
@@ -3246,6 +3368,17 @@ func MsgWaitForMultipleObjectsEx(nCount uint32, pHandles *foundation.HANDLE, dwM
 // Minimum OS: windows5.0.
 func OemToCharA(pSrc foundation.PSTR, pDst foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procOemToCharA.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// OemToCharBuff calls USER32!OemToCharBuffW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-oemtocharbuffw
+// Minimum OS: windows5.0.
+func OemToCharBuff(lpszSrc foundation.PSTR, lpszDst foundation.PWSTR, cchDstLength uint32) error {
+	r1, _, e1 := syscall.SyscallN(procOemToCharBuff.Addr(), uintptr(unsafe.Pointer(lpszSrc)), uintptr(unsafe.Pointer(lpszDst)), uintptr(cchDstLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3263,28 +3396,6 @@ func OemToCharBuffA(lpszSrc foundation.PSTR, lpszDst foundation.PSTR, cchDstLeng
 	return nil
 }
 
-// OemToCharBuffW calls USER32!OemToCharBuffW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-oemtocharbuffw
-// Minimum OS: windows5.0.
-func OemToCharBuffW(lpszSrc foundation.PSTR, lpszDst foundation.PWSTR, cchDstLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procOemToCharBuffW.Addr(), uintptr(unsafe.Pointer(lpszSrc)), uintptr(unsafe.Pointer(lpszDst)), uintptr(cchDstLength))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// OemToCharW calls USER32!OemToCharW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-oemtocharw
-// Minimum OS: windows5.0.
-func OemToCharW(pSrc foundation.PSTR, pDst foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procOemToCharW.Addr(), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // OpenIcon calls USER32!OpenIcon.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-openicon
 // Minimum OS: windows5.0.
@@ -3296,28 +3407,39 @@ func OpenIcon(hWnd foundation.HWND) error {
 	return nil
 }
 
+// PeekMessage calls USER32!PeekMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-peekmessagew
+// Minimum OS: windows5.0.
+func PeekMessage(lpMsg *MSG, hWnd foundation.HWND, wMsgFilterMin uint32, wMsgFilterMax uint32, wRemoveMsg PEEK_MESSAGE_REMOVE_TYPE) bool {
+	r1, _, _ := syscall.SyscallN(procPeekMessage.Addr(), uintptr(unsafe.Pointer(lpMsg)), uintptr(hWnd), uintptr(wMsgFilterMin), uintptr(wMsgFilterMax), uintptr(wRemoveMsg))
+	return r1 != 0
+}
+
 // PeekMessageA calls USER32!PeekMessageA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-peekmessagea
 // Minimum OS: windows5.0.
-func PeekMessageA(lpMsg *MSG, hWnd foundation.HWND, wMsgFilterMin uint32, wMsgFilterMax uint32, wRemoveMsg PEEK_MESSAGE_REMOVE_TYPE) foundation.BOOL {
+func PeekMessageA(lpMsg *MSG, hWnd foundation.HWND, wMsgFilterMin uint32, wMsgFilterMax uint32, wRemoveMsg PEEK_MESSAGE_REMOVE_TYPE) bool {
 	r1, _, _ := syscall.SyscallN(procPeekMessageA.Addr(), uintptr(unsafe.Pointer(lpMsg)), uintptr(hWnd), uintptr(wMsgFilterMin), uintptr(wMsgFilterMax), uintptr(wRemoveMsg))
-	return foundation.BOOL(r1)
-}
-
-// PeekMessageW calls USER32!PeekMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-peekmessagew
-// Minimum OS: windows5.0.
-func PeekMessageW(lpMsg *MSG, hWnd foundation.HWND, wMsgFilterMin uint32, wMsgFilterMax uint32, wRemoveMsg PEEK_MESSAGE_REMOVE_TYPE) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPeekMessageW.Addr(), uintptr(unsafe.Pointer(lpMsg)), uintptr(hWnd), uintptr(wMsgFilterMin), uintptr(wMsgFilterMax), uintptr(wRemoveMsg))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PhysicalToLogicalPoint calls USER32!PhysicalToLogicalPoint.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-physicaltologicalpoint
 // Minimum OS: windows6.0.6000.
-func PhysicalToLogicalPoint(hWnd foundation.HWND, lpPoint *foundation.POINT) foundation.BOOL {
+func PhysicalToLogicalPoint(hWnd foundation.HWND, lpPoint *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procPhysicalToLogicalPoint.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpPoint)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// PostMessage calls USER32!PostMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-postmessagew
+// Minimum OS: windows5.0.
+func PostMessage(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
+	r1, _, e1 := syscall.SyscallN(procPostMessage.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // PostMessageA calls USER32!PostMessageA.
@@ -3331,22 +3453,22 @@ func PostMessageA(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lP
 	return nil
 }
 
-// PostMessageW calls USER32!PostMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-postmessagew
-// Minimum OS: windows5.0.
-func PostMessageW(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
-	r1, _, e1 := syscall.SyscallN(procPostMessageW.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // PostQuitMessage calls USER32!PostQuitMessage.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-postquitmessage
 // Minimum OS: windows5.0.
 func PostQuitMessage(nExitCode int32) {
 	syscall.SyscallN(procPostQuitMessage.Addr(), uintptr(nExitCode))
+}
+
+// PostThreadMessage calls USER32!PostThreadMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-postthreadmessagew
+// Minimum OS: windows5.0.
+func PostThreadMessage(idThread uint32, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
+	r1, _, e1 := syscall.SyscallN(procPostThreadMessage.Addr(), uintptr(idThread), uintptr(Msg), uintptr(wParam), uintptr(lParam))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // PostThreadMessageA calls USER32!PostThreadMessageA.
@@ -3360,31 +3482,40 @@ func PostThreadMessageA(idThread uint32, Msg uint32, wParam foundation.WPARAM, l
 	return nil
 }
 
-// PostThreadMessageW calls USER32!PostThreadMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-postthreadmessagew
+// PrivateExtractIcons calls USER32!PrivateExtractIconsW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-privateextracticonsw
 // Minimum OS: windows5.0.
-func PostThreadMessageW(idThread uint32, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
-	r1, _, e1 := syscall.SyscallN(procPostThreadMessageW.Addr(), uintptr(idThread), uintptr(Msg), uintptr(wParam), uintptr(lParam))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func PrivateExtractIcons(szFileName string, nIconIndex int32, cxIcon int32, cyIcon int32, phicon []HICON, piconid *uint32, flags uint32) uint32 {
+	_szFileName := win32.UTF16Ptr(szFileName)
+	var _phicon *HICON
+	if len(phicon) > 0 {
+		_phicon = &phicon[0]
 	}
-	return nil
+	r1, _, _ := syscall.SyscallN(procPrivateExtractIcons.Addr(), uintptr(unsafe.Pointer(_szFileName)), uintptr(nIconIndex), uintptr(cxIcon), uintptr(cyIcon), uintptr(unsafe.Pointer(_phicon)), uintptr(unsafe.Pointer(piconid)), uintptr(len(phicon)), uintptr(flags))
+	return uint32(r1)
 }
 
 // PrivateExtractIconsA calls USER32!PrivateExtractIconsA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-privateextracticonsa
 // Minimum OS: windows5.0.
-func PrivateExtractIconsA(szFileName foundation.PSTR, nIconIndex int32, cxIcon int32, cyIcon int32, phicon *HICON, piconid *uint32, nIcons uint32, flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPrivateExtractIconsA.Addr(), uintptr(unsafe.Pointer(szFileName)), uintptr(nIconIndex), uintptr(cxIcon), uintptr(cyIcon), uintptr(unsafe.Pointer(phicon)), uintptr(unsafe.Pointer(piconid)), uintptr(nIcons), uintptr(flags))
+func PrivateExtractIconsA(szFileName foundation.PSTR, nIconIndex int32, cxIcon int32, cyIcon int32, phicon []HICON, piconid *uint32, flags uint32) uint32 {
+	var _phicon *HICON
+	if len(phicon) > 0 {
+		_phicon = &phicon[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPrivateExtractIconsA.Addr(), uintptr(unsafe.Pointer(szFileName)), uintptr(nIconIndex), uintptr(cxIcon), uintptr(cyIcon), uintptr(unsafe.Pointer(_phicon)), uintptr(unsafe.Pointer(piconid)), uintptr(len(phicon)), uintptr(flags))
 	return uint32(r1)
 }
 
-// PrivateExtractIconsW calls USER32!PrivateExtractIconsW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-privateextracticonsw
+// RealGetWindowClass calls USER32!RealGetWindowClassW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-realgetwindowclassw
 // Minimum OS: windows5.0.
-func PrivateExtractIconsW(szFileName foundation.PWSTR, nIconIndex int32, cxIcon int32, cyIcon int32, phicon *HICON, piconid *uint32, nIcons uint32, flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPrivateExtractIconsW.Addr(), uintptr(unsafe.Pointer(szFileName)), uintptr(nIconIndex), uintptr(cxIcon), uintptr(cyIcon), uintptr(unsafe.Pointer(phicon)), uintptr(unsafe.Pointer(piconid)), uintptr(nIcons), uintptr(flags))
-	return uint32(r1)
+func RealGetWindowClass(hwnd foundation.HWND, ptszClassName foundation.PWSTR, cchClassNameMax uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procRealGetWindowClass.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(ptszClassName)), uintptr(cchClassNameMax))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // RealGetWindowClassA calls USER32!RealGetWindowClassA.
@@ -3394,15 +3525,15 @@ func RealGetWindowClassA(hwnd foundation.HWND, ptszClassName foundation.PSTR, cc
 	return uint32(r1)
 }
 
-// RealGetWindowClassW calls USER32!RealGetWindowClassW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-realgetwindowclassw
+// RegisterClass calls USER32!RegisterClassW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerclassw
 // Minimum OS: windows5.0.
-func RealGetWindowClassW(hwnd foundation.HWND, ptszClassName foundation.PWSTR, cchClassNameMax uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procRealGetWindowClassW.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(ptszClassName)), uintptr(cchClassNameMax))
+func RegisterClass(lpWndClass *WNDCLASSW) (uint16, error) {
+	r1, _, e1 := syscall.SyscallN(procRegisterClass.Addr(), uintptr(unsafe.Pointer(lpWndClass)))
 	if e1 != 0 {
-		return uint32(r1), e1
+		return uint16(r1), e1
 	}
-	return uint32(r1), nil
+	return uint16(r1), nil
 }
 
 // RegisterClassA calls USER32!RegisterClassA.
@@ -3410,6 +3541,17 @@ func RealGetWindowClassW(hwnd foundation.HWND, ptszClassName foundation.PWSTR, c
 // Minimum OS: windows5.0.
 func RegisterClassA(lpWndClass *WNDCLASSA) (uint16, error) {
 	r1, _, e1 := syscall.SyscallN(procRegisterClassA.Addr(), uintptr(unsafe.Pointer(lpWndClass)))
+	if e1 != 0 {
+		return uint16(r1), e1
+	}
+	return uint16(r1), nil
+}
+
+// RegisterClassEx calls USER32!RegisterClassExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerclassexw
+// Minimum OS: windows5.0.
+func RegisterClassEx(param0 *WNDCLASSEXW) (uint16, error) {
+	r1, _, e1 := syscall.SyscallN(procRegisterClassEx.Addr(), uintptr(unsafe.Pointer(param0)))
 	if e1 != 0 {
 		return uint16(r1), e1
 	}
@@ -3427,32 +3569,23 @@ func RegisterClassExA(param0 *WNDCLASSEXA) (uint16, error) {
 	return uint16(r1), nil
 }
 
-// RegisterClassExW calls USER32!RegisterClassExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerclassexw
-// Minimum OS: windows5.0.
-func RegisterClassExW(param0 *WNDCLASSEXW) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procRegisterClassExW.Addr(), uintptr(unsafe.Pointer(param0)))
-	if e1 != 0 {
-		return uint16(r1), e1
-	}
-	return uint16(r1), nil
-}
-
-// RegisterClassW calls USER32!RegisterClassW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerclassw
-// Minimum OS: windows5.0.
-func RegisterClassW(lpWndClass *WNDCLASSW) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procRegisterClassW.Addr(), uintptr(unsafe.Pointer(lpWndClass)))
-	if e1 != 0 {
-		return uint16(r1), e1
-	}
-	return uint16(r1), nil
-}
-
 // RegisterCloakedNotification calls USER32!RegisterCloakedNotification.
-func RegisterCloakedNotification(hwnd foundation.HWND, fRegister foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRegisterCloakedNotification.Addr(), uintptr(hwnd), uintptr(fRegister))
-	return foundation.BOOL(r1)
+func RegisterCloakedNotification(hwnd foundation.HWND, fRegister bool) bool {
+	_fRegister := win32.Bool32(fRegister)
+	r1, _, _ := syscall.SyscallN(procRegisterCloakedNotification.Addr(), uintptr(hwnd), uintptr(_fRegister))
+	return r1 != 0
+}
+
+// RegisterDeviceNotification calls USER32!RegisterDeviceNotificationW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerdevicenotificationw
+// Minimum OS: windows5.1.2600.
+func RegisterDeviceNotification(hRecipient foundation.HANDLE, NotificationFilter unsafe.Pointer, Flags REGISTER_NOTIFICATION_FLAGS) (HDEVNOTIFY, error) {
+	r1, _, e1 := syscall.SyscallN(procRegisterDeviceNotification.Addr(), uintptr(hRecipient), uintptr(unsafe.Pointer(NotificationFilter)), uintptr(Flags))
+	ret := HDEVNOTIFY(r1)
+	if ret == ^HDEVNOTIFY(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // RegisterDeviceNotificationA calls USER32!RegisterDeviceNotificationA.
@@ -3467,31 +3600,31 @@ func RegisterDeviceNotificationA(hRecipient foundation.HANDLE, NotificationFilte
 	return ret, nil
 }
 
-// RegisterDeviceNotificationW calls USER32!RegisterDeviceNotificationW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerdevicenotificationw
-// Minimum OS: windows5.1.2600.
-func RegisterDeviceNotificationW(hRecipient foundation.HANDLE, NotificationFilter unsafe.Pointer, Flags REGISTER_NOTIFICATION_FLAGS) (HDEVNOTIFY, error) {
-	r1, _, e1 := syscall.SyscallN(procRegisterDeviceNotificationW.Addr(), uintptr(hRecipient), uintptr(unsafe.Pointer(NotificationFilter)), uintptr(Flags))
-	ret := HDEVNOTIFY(r1)
-	if ret == ^HDEVNOTIFY(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
 // RegisterForTooltipDismissNotification calls USER32!RegisterForTooltipDismissNotification.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerfortooltipdismissnotification
-func RegisterForTooltipDismissNotification(hWnd foundation.HWND, tdFlags TOOLTIP_DISMISS_FLAGS) foundation.BOOL {
+func RegisterForTooltipDismissNotification(hWnd foundation.HWND, tdFlags TOOLTIP_DISMISS_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procRegisterForTooltipDismissNotification.Addr(), uintptr(hWnd), uintptr(tdFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RegisterShellHookWindow calls USER32!RegisterShellHookWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registershellhookwindow
 // Minimum OS: windows5.0.
-func RegisterShellHookWindow(hwnd foundation.HWND) foundation.BOOL {
+func RegisterShellHookWindow(hwnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procRegisterShellHookWindow.Addr(), uintptr(hwnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// RegisterWindowMessage calls USER32!RegisterWindowMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerwindowmessagew
+// Minimum OS: windows5.0.
+func RegisterWindowMessage(lpString string) (uint32, error) {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procRegisterWindowMessage.Addr(), uintptr(unsafe.Pointer(_lpString)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // RegisterWindowMessageA calls USER32!RegisterWindowMessageA.
@@ -3499,17 +3632,6 @@ func RegisterShellHookWindow(hwnd foundation.HWND) foundation.BOOL {
 // Minimum OS: windows5.0.
 func RegisterWindowMessageA(lpString foundation.PSTR) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procRegisterWindowMessageA.Addr(), uintptr(unsafe.Pointer(lpString)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// RegisterWindowMessageW calls USER32!RegisterWindowMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerwindowmessagew
-// Minimum OS: windows5.0.
-func RegisterWindowMessageW(lpString foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procRegisterWindowMessageW.Addr(), uintptr(unsafe.Pointer(lpString)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -3527,6 +3649,19 @@ func RemoveMenu(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS) error {
 	return nil
 }
 
+// RemoveProp calls USER32!RemovePropW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-removepropw
+// Minimum OS: windows5.0.
+func RemoveProp(hWnd foundation.HWND, lpString string) (foundation.HANDLE, error) {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procRemoveProp.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpString)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // RemovePropA calls USER32!RemovePropA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-removepropa
 // Minimum OS: windows5.0.
@@ -3539,24 +3674,12 @@ func RemovePropA(hWnd foundation.HWND, lpString foundation.PSTR) (foundation.HAN
 	return ret, nil
 }
 
-// RemovePropW calls USER32!RemovePropW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-removepropw
-// Minimum OS: windows5.0.
-func RemovePropW(hWnd foundation.HWND, lpString foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procRemovePropW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
 // ReplyMessage calls USER32!ReplyMessage.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-replymessage
 // Minimum OS: windows5.0.
-func ReplyMessage(lResult foundation.LRESULT) foundation.BOOL {
+func ReplyMessage(lResult foundation.LRESULT) bool {
 	r1, _, _ := syscall.SyscallN(procReplyMessage.Addr(), uintptr(lResult))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ScrollDC calls USER32!ScrollDC.
@@ -3592,6 +3715,14 @@ func ScrollWindowEx(hWnd foundation.HWND, dx int32, dy int32, prcScroll *foundat
 	return int32(r1), nil
 }
 
+// SendDlgItemMessage calls USER32!SendDlgItemMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-senddlgitemmessagew
+// Minimum OS: windows5.0.
+func SendDlgItemMessage(hDlg foundation.HWND, nIDDlgItem int32, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
+	r1, _, _ := syscall.SyscallN(procSendDlgItemMessage.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(Msg), uintptr(wParam), uintptr(lParam))
+	return foundation.LRESULT(r1)
+}
+
 // SendDlgItemMessageA calls USER32!SendDlgItemMessageA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-senddlgitemmessagea
 // Minimum OS: windows5.0.
@@ -3600,12 +3731,15 @@ func SendDlgItemMessageA(hDlg foundation.HWND, nIDDlgItem int32, Msg uint32, wPa
 	return foundation.LRESULT(r1)
 }
 
-// SendDlgItemMessageW calls USER32!SendDlgItemMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-senddlgitemmessagew
+// SendMessage calls USER32!SendMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew
 // Minimum OS: windows5.0.
-func SendDlgItemMessageW(hDlg foundation.HWND, nIDDlgItem int32, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procSendDlgItemMessageW.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(Msg), uintptr(wParam), uintptr(lParam))
-	return foundation.LRESULT(r1)
+func SendMessage(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) (foundation.LRESULT, error) {
+	r1, _, e1 := syscall.SyscallN(procSendMessage.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
+	if e1 != 0 {
+		return foundation.LRESULT(r1), e1
+	}
+	return foundation.LRESULT(r1), nil
 }
 
 // SendMessageA calls USER32!SendMessageA.
@@ -3619,6 +3753,17 @@ func SendMessageA(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lP
 	return foundation.LRESULT(r1), nil
 }
 
+// SendMessageCallback calls USER32!SendMessageCallbackW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagecallbackw
+// Minimum OS: windows5.0.
+func SendMessageCallback(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, lpResultCallBack SENDASYNCPROC, dwData uintptr) error {
+	r1, _, e1 := syscall.SyscallN(procSendMessageCallback.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam), uintptr(lpResultCallBack), uintptr(dwData))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SendMessageCallbackA calls USER32!SendMessageCallbackA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagecallbacka
 // Minimum OS: windows5.0.
@@ -3630,15 +3775,15 @@ func SendMessageCallbackA(hWnd foundation.HWND, Msg uint32, wParam foundation.WP
 	return nil
 }
 
-// SendMessageCallbackW calls USER32!SendMessageCallbackW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagecallbackw
+// SendMessageTimeout calls USER32!SendMessageTimeoutW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw
 // Minimum OS: windows5.0.
-func SendMessageCallbackW(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, lpResultCallBack SENDASYNCPROC, dwData uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procSendMessageCallbackW.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam), uintptr(lpResultCallBack), uintptr(dwData))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func SendMessageTimeout(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, fuFlags SEND_MESSAGE_TIMEOUT_FLAGS, uTimeout uint32, lpdwResult *uintptr) (foundation.LRESULT, error) {
+	r1, _, e1 := syscall.SyscallN(procSendMessageTimeout.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam), uintptr(fuFlags), uintptr(uTimeout), uintptr(unsafe.Pointer(lpdwResult)))
+	if e1 != 0 {
+		return foundation.LRESULT(r1), e1
 	}
-	return nil
+	return foundation.LRESULT(r1), nil
 }
 
 // SendMessageTimeoutA calls USER32!SendMessageTimeoutA.
@@ -3652,26 +3797,15 @@ func SendMessageTimeoutA(hWnd foundation.HWND, Msg uint32, wParam foundation.WPA
 	return foundation.LRESULT(r1), nil
 }
 
-// SendMessageTimeoutW calls USER32!SendMessageTimeoutW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw
+// SendNotifyMessage calls USER32!SendNotifyMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendnotifymessagew
 // Minimum OS: windows5.0.
-func SendMessageTimeoutW(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, fuFlags SEND_MESSAGE_TIMEOUT_FLAGS, uTimeout uint32, lpdwResult *uintptr) (foundation.LRESULT, error) {
-	r1, _, e1 := syscall.SyscallN(procSendMessageTimeoutW.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam), uintptr(fuFlags), uintptr(uTimeout), uintptr(unsafe.Pointer(lpdwResult)))
-	if e1 != 0 {
-		return foundation.LRESULT(r1), e1
+func SendNotifyMessage(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
+	r1, _, e1 := syscall.SyscallN(procSendNotifyMessage.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return foundation.LRESULT(r1), nil
-}
-
-// SendMessageW calls USER32!SendMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagew
-// Minimum OS: windows5.0.
-func SendMessageW(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) (foundation.LRESULT, error) {
-	r1, _, e1 := syscall.SyscallN(procSendMessageW.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
-	if e1 != 0 {
-		return foundation.LRESULT(r1), e1
-	}
-	return foundation.LRESULT(r1), nil
+	return nil
 }
 
 // SendNotifyMessageA calls USER32!SendNotifyMessageA.
@@ -3685,22 +3819,15 @@ func SendNotifyMessageA(hWnd foundation.HWND, Msg uint32, wParam foundation.WPAR
 	return nil
 }
 
-// SendNotifyMessageW calls USER32!SendNotifyMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendnotifymessagew
-// Minimum OS: windows5.0.
-func SendNotifyMessageW(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
-	r1, _, e1 := syscall.SyscallN(procSendNotifyMessageW.Addr(), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetAdditionalForegroundBoostProcesses calls USER32!SetAdditionalForegroundBoostProcesses.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setadditionalforegroundboostprocesses
-func SetAdditionalForegroundBoostProcesses(topLevelWindow foundation.HWND, processHandleCount uint32, processHandleArray *foundation.HANDLE) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetAdditionalForegroundBoostProcesses.Addr(), uintptr(topLevelWindow), uintptr(processHandleCount), uintptr(unsafe.Pointer(processHandleArray)))
-	return foundation.BOOL(r1)
+func SetAdditionalForegroundBoostProcesses(topLevelWindow foundation.HWND, processHandleArray []foundation.HANDLE) bool {
+	var _processHandleArray *foundation.HANDLE
+	if len(processHandleArray) > 0 {
+		_processHandleArray = &processHandleArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetAdditionalForegroundBoostProcesses.Addr(), uintptr(topLevelWindow), uintptr(len(processHandleArray)), uintptr(unsafe.Pointer(_processHandleArray)))
+	return r1 != 0
 }
 
 // SetCaretBlinkTime calls USER32!SetCaretBlinkTime.
@@ -3725,6 +3852,17 @@ func SetCaretPos(X int32, Y int32) error {
 	return nil
 }
 
+// SetClassLong calls USER32!SetClassLongW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setclasslongw
+// Minimum OS: windows5.0.
+func SetClassLong(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX, dwNewLong int32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procSetClassLong.Addr(), uintptr(hWnd), uintptr(nIndex), uintptr(dwNewLong))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // SetClassLongA calls USER32!SetClassLongA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setclasslonga
 // Minimum OS: windows5.0.
@@ -3736,6 +3874,17 @@ func SetClassLongA(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX, dwNewLong 
 	return uint32(r1), nil
 }
 
+// SetClassLongPtr calls USER32!SetClassLongPtrW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setclasslongptrw
+// Minimum OS: windows5.0.
+func SetClassLongPtr(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX, dwNewLong uintptr) (uintptr, error) {
+	r1, _, e1 := syscall.SyscallN(procSetClassLongPtr.Addr(), uintptr(hWnd), uintptr(nIndex), uintptr(dwNewLong))
+	if e1 != 0 {
+		return uintptr(r1), e1
+	}
+	return uintptr(r1), nil
+}
+
 // SetClassLongPtrA calls USER32!SetClassLongPtrA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setclasslongptra
 // Minimum OS: windows5.0.
@@ -3745,28 +3894,6 @@ func SetClassLongPtrA(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX, dwNewLo
 		return uintptr(r1), e1
 	}
 	return uintptr(r1), nil
-}
-
-// SetClassLongPtrW calls USER32!SetClassLongPtrW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setclasslongptrw
-// Minimum OS: windows5.0.
-func SetClassLongPtrW(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX, dwNewLong uintptr) (uintptr, error) {
-	r1, _, e1 := syscall.SyscallN(procSetClassLongPtrW.Addr(), uintptr(hWnd), uintptr(nIndex), uintptr(dwNewLong))
-	if e1 != 0 {
-		return uintptr(r1), e1
-	}
-	return uintptr(r1), nil
-}
-
-// SetClassLongW calls USER32!SetClassLongW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setclasslongw
-// Minimum OS: windows5.0.
-func SetClassLongW(hWnd foundation.HWND, nIndex GET_CLASS_LONG_INDEX, dwNewLong int32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetClassLongW.Addr(), uintptr(hWnd), uintptr(nIndex), uintptr(dwNewLong))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
 }
 
 // SetClassWord calls USER32!SetClassWord.
@@ -3818,8 +3945,21 @@ func SetDebugErrorLevel(dwLevel uint32) {
 // SetDlgItemInt calls USER32!SetDlgItemInt.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setdlgitemint
 // Minimum OS: windows5.0.
-func SetDlgItemInt(hDlg foundation.HWND, nIDDlgItem int32, uValue uint32, bSigned foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetDlgItemInt.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(uValue), uintptr(bSigned))
+func SetDlgItemInt(hDlg foundation.HWND, nIDDlgItem int32, uValue uint32, bSigned bool) error {
+	_bSigned := win32.Bool32(bSigned)
+	r1, _, e1 := syscall.SyscallN(procSetDlgItemInt.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(uValue), uintptr(_bSigned))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetDlgItemText calls USER32!SetDlgItemTextW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setdlgitemtextw
+// Minimum OS: windows5.0.
+func SetDlgItemText(hDlg foundation.HWND, nIDDlgItem int32, lpString string) error {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procSetDlgItemText.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(unsafe.Pointer(_lpString)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3837,23 +3977,12 @@ func SetDlgItemTextA(hDlg foundation.HWND, nIDDlgItem int32, lpString foundation
 	return nil
 }
 
-// SetDlgItemTextW calls USER32!SetDlgItemTextW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setdlgitemtextw
-// Minimum OS: windows5.0.
-func SetDlgItemTextW(hDlg foundation.HWND, nIDDlgItem int32, lpString foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetDlgItemTextW.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(unsafe.Pointer(lpString)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetForegroundWindow calls USER32!SetForegroundWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setforegroundwindow
 // Minimum OS: windows5.0.
-func SetForegroundWindow(hWnd foundation.HWND) foundation.BOOL {
+func SetForegroundWindow(hWnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procSetForegroundWindow.Addr(), uintptr(hWnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetLayeredWindowAttributes calls USER32!SetLayeredWindowAttributes.
@@ -3911,22 +4040,24 @@ func SetMenuItemBitmaps(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, h
 	return nil
 }
 
-// SetMenuItemInfoA calls USER32!SetMenuItemInfoA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setmenuiteminfoa
+// SetMenuItemInfo calls USER32!SetMenuItemInfoW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setmenuiteminfow
 // Minimum OS: windows5.0.
-func SetMenuItemInfoA(hmenu HMENU, item uint32, fByPositon foundation.BOOL, lpmii *MENUITEMINFOA) error {
-	r1, _, e1 := syscall.SyscallN(procSetMenuItemInfoA.Addr(), uintptr(hmenu), uintptr(item), uintptr(fByPositon), uintptr(unsafe.Pointer(lpmii)))
+func SetMenuItemInfo(hmenu HMENU, item uint32, fByPositon bool, lpmii *MENUITEMINFOW) error {
+	_fByPositon := win32.Bool32(fByPositon)
+	r1, _, e1 := syscall.SyscallN(procSetMenuItemInfo.Addr(), uintptr(hmenu), uintptr(item), uintptr(_fByPositon), uintptr(unsafe.Pointer(lpmii)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetMenuItemInfoW calls USER32!SetMenuItemInfoW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setmenuiteminfow
+// SetMenuItemInfoA calls USER32!SetMenuItemInfoA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setmenuiteminfoa
 // Minimum OS: windows5.0.
-func SetMenuItemInfoW(hmenu HMENU, item uint32, fByPositon foundation.BOOL, lpmii *MENUITEMINFOW) error {
-	r1, _, e1 := syscall.SyscallN(procSetMenuItemInfoW.Addr(), uintptr(hmenu), uintptr(item), uintptr(fByPositon), uintptr(unsafe.Pointer(lpmii)))
+func SetMenuItemInfoA(hmenu HMENU, item uint32, fByPositon bool, lpmii *MENUITEMINFOA) error {
+	_fByPositon := win32.Bool32(fByPositon)
+	r1, _, e1 := syscall.SyscallN(procSetMenuItemInfoA.Addr(), uintptr(hmenu), uintptr(item), uintptr(_fByPositon), uintptr(unsafe.Pointer(lpmii)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3942,9 +4073,9 @@ func SetMessageExtraInfo(lParam foundation.LPARAM) foundation.LPARAM {
 }
 
 // SetMessageQueue calls USER32!SetMessageQueue.
-func SetMessageQueue(cMessagesMax int32) foundation.BOOL {
+func SetMessageQueue(cMessagesMax int32) bool {
 	r1, _, _ := syscall.SyscallN(procSetMessageQueue.Addr(), uintptr(cMessagesMax))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetParent calls USER32!SetParent.
@@ -3973,9 +4104,9 @@ func SetPhysicalCursorPos(X int32, Y int32) error {
 // SetProcessDPIAware calls USER32!SetProcessDPIAware.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setprocessdpiaware
 // Minimum OS: windows6.0.6000.
-func SetProcessDPIAware() foundation.BOOL {
+func SetProcessDPIAware() bool {
 	r1, _, _ := syscall.SyscallN(procSetProcessDPIAware.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetProcessDefaultLayout calls USER32!SetProcessDefaultLayout.
@@ -3989,22 +4120,23 @@ func SetProcessDefaultLayout(dwDefaultLayout uint32) error {
 	return nil
 }
 
-// SetPropA calls USER32!SetPropA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setpropa
+// SetProp calls USER32!SetPropW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setpropw
 // Minimum OS: windows5.0.
-func SetPropA(hWnd foundation.HWND, lpString foundation.PSTR, hData foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procSetPropA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)), uintptr(hData))
+func SetProp(hWnd foundation.HWND, lpString string, hData foundation.HANDLE) error {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procSetProp.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpString)), uintptr(hData))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetPropW calls USER32!SetPropW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setpropw
+// SetPropA calls USER32!SetPropA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setpropa
 // Minimum OS: windows5.0.
-func SetPropW(hWnd foundation.HWND, lpString foundation.PWSTR, hData foundation.HANDLE) error {
-	r1, _, e1 := syscall.SyscallN(procSetPropW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)), uintptr(hData))
+func SetPropA(hWnd foundation.HWND, lpString foundation.PSTR, hData foundation.HANDLE) error {
+	r1, _, e1 := syscall.SyscallN(procSetPropA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)), uintptr(hData))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4044,6 +4176,17 @@ func SetWindowDisplayAffinity(hWnd foundation.HWND, dwAffinity WINDOW_DISPLAY_AF
 	return nil
 }
 
+// SetWindowLong calls USER32!SetWindowLongW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowlongw
+// Minimum OS: windows5.0.
+func SetWindowLong(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX, dwNewLong int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procSetWindowLong.Addr(), uintptr(hWnd), uintptr(nIndex), uintptr(dwNewLong))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // SetWindowLongA calls USER32!SetWindowLongA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowlonga
 // Minimum OS: windows5.0.
@@ -4055,6 +4198,17 @@ func SetWindowLongA(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX, dwNewLon
 	return int32(r1), nil
 }
 
+// SetWindowLongPtr calls USER32!SetWindowLongPtrW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowlongptrw
+// Minimum OS: windows5.0.
+func SetWindowLongPtr(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX, dwNewLong uintptr) (uintptr, error) {
+	r1, _, e1 := syscall.SyscallN(procSetWindowLongPtr.Addr(), uintptr(hWnd), uintptr(nIndex), uintptr(dwNewLong))
+	if e1 != 0 {
+		return uintptr(r1), e1
+	}
+	return uintptr(r1), nil
+}
+
 // SetWindowLongPtrA calls USER32!SetWindowLongPtrA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowlongptra
 // Minimum OS: windows5.0.
@@ -4064,28 +4218,6 @@ func SetWindowLongPtrA(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX, dwNew
 		return uintptr(r1), e1
 	}
 	return uintptr(r1), nil
-}
-
-// SetWindowLongPtrW calls USER32!SetWindowLongPtrW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowlongptrw
-// Minimum OS: windows5.0.
-func SetWindowLongPtrW(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX, dwNewLong uintptr) (uintptr, error) {
-	r1, _, e1 := syscall.SyscallN(procSetWindowLongPtrW.Addr(), uintptr(hWnd), uintptr(nIndex), uintptr(dwNewLong))
-	if e1 != 0 {
-		return uintptr(r1), e1
-	}
-	return uintptr(r1), nil
-}
-
-// SetWindowLongW calls USER32!SetWindowLongW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowlongw
-// Minimum OS: windows5.0.
-func SetWindowLongW(hWnd foundation.HWND, nIndex WINDOW_LONG_PTR_INDEX, dwNewLong int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetWindowLongW.Addr(), uintptr(hWnd), uintptr(nIndex), uintptr(dwNewLong))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
 }
 
 // SetWindowPlacement calls USER32!SetWindowPlacement.
@@ -4110,22 +4242,23 @@ func SetWindowPos(hWnd foundation.HWND, hWndInsertAfter foundation.HWND, X int32
 	return nil
 }
 
-// SetWindowTextA calls USER32!SetWindowTextA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowtexta
+// SetWindowText calls USER32!SetWindowTextW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowtextw
 // Minimum OS: windows5.0.
-func SetWindowTextA(hWnd foundation.HWND, lpString foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetWindowTextA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)))
+func SetWindowText(hWnd foundation.HWND, lpString string) error {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, e1 := syscall.SyscallN(procSetWindowText.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpString)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetWindowTextW calls USER32!SetWindowTextW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowtextw
+// SetWindowTextA calls USER32!SetWindowTextA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowtexta
 // Minimum OS: windows5.0.
-func SetWindowTextW(hWnd foundation.HWND, lpString foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetWindowTextW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)))
+func SetWindowTextA(hWnd foundation.HWND, lpString foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetWindowTextA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(lpString)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4138,10 +4271,28 @@ func SetWindowWord(hWnd foundation.HWND, nIndex int32, wNewWord uint16) uint16 {
 	return uint16(r1)
 }
 
+// SetWindowsHook calls USER32!SetWindowsHookW.
+func SetWindowsHook(nFilterType int32, pfnFilterProc HOOKPROC) HHOOK {
+	r1, _, _ := syscall.SyscallN(procSetWindowsHook.Addr(), uintptr(nFilterType), uintptr(pfnFilterProc))
+	return HHOOK(r1)
+}
+
 // SetWindowsHookA calls USER32!SetWindowsHookA.
 func SetWindowsHookA(nFilterType int32, pfnFilterProc HOOKPROC) HHOOK {
 	r1, _, _ := syscall.SyscallN(procSetWindowsHookA.Addr(), uintptr(nFilterType), uintptr(pfnFilterProc))
 	return HHOOK(r1)
+}
+
+// SetWindowsHookEx calls USER32!SetWindowsHookExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowshookexw
+// Minimum OS: windows5.0.
+func SetWindowsHookEx(idHook WINDOWS_HOOK_ID, lpfn HOOKPROC, hmod foundation.HINSTANCE, dwThreadId uint32) (HHOOK, error) {
+	r1, _, e1 := syscall.SyscallN(procSetWindowsHookEx.Addr(), uintptr(idHook), uintptr(lpfn), uintptr(hmod), uintptr(dwThreadId))
+	ret := HHOOK(r1)
+	if ret == ^HHOOK(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // SetWindowsHookExA calls USER32!SetWindowsHookExA.
@@ -4154,24 +4305,6 @@ func SetWindowsHookExA(idHook WINDOWS_HOOK_ID, lpfn HOOKPROC, hmod foundation.HI
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
-}
-
-// SetWindowsHookExW calls USER32!SetWindowsHookExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowshookexw
-// Minimum OS: windows5.0.
-func SetWindowsHookExW(idHook WINDOWS_HOOK_ID, lpfn HOOKPROC, hmod foundation.HINSTANCE, dwThreadId uint32) (HHOOK, error) {
-	r1, _, e1 := syscall.SyscallN(procSetWindowsHookExW.Addr(), uintptr(idHook), uintptr(lpfn), uintptr(hmod), uintptr(dwThreadId))
-	ret := HHOOK(r1)
-	if ret == ^HHOOK(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// SetWindowsHookW calls USER32!SetWindowsHookW.
-func SetWindowsHookW(nFilterType int32, pfnFilterProc HOOKPROC) HHOOK {
-	r1, _, _ := syscall.SyscallN(procSetWindowsHookW.Addr(), uintptr(nFilterType), uintptr(pfnFilterProc))
-	return HHOOK(r1)
 }
 
 // ShowCaret calls USER32!ShowCaret.
@@ -4188,16 +4321,18 @@ func ShowCaret(hWnd foundation.HWND) error {
 // ShowCursor calls USER32!ShowCursor.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-showcursor
 // Minimum OS: windows5.0.
-func ShowCursor(bShow foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procShowCursor.Addr(), uintptr(bShow))
+func ShowCursor(bShow bool) int32 {
+	_bShow := win32.Bool32(bShow)
+	r1, _, _ := syscall.SyscallN(procShowCursor.Addr(), uintptr(_bShow))
 	return int32(r1)
 }
 
 // ShowOwnedPopups calls USER32!ShowOwnedPopups.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-showownedpopups
 // Minimum OS: windows5.0.
-func ShowOwnedPopups(hWnd foundation.HWND, fShow foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procShowOwnedPopups.Addr(), uintptr(hWnd), uintptr(fShow))
+func ShowOwnedPopups(hWnd foundation.HWND, fShow bool) error {
+	_fShow := win32.Bool32(fShow)
+	r1, _, e1 := syscall.SyscallN(procShowOwnedPopups.Addr(), uintptr(hWnd), uintptr(_fShow))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4207,32 +4342,44 @@ func ShowOwnedPopups(hWnd foundation.HWND, fShow foundation.BOOL) error {
 // ShowWindow calls USER32!ShowWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-showwindow
 // Minimum OS: windows5.0.
-func ShowWindow(hWnd foundation.HWND, nCmdShow SHOW_WINDOW_CMD) foundation.BOOL {
+func ShowWindow(hWnd foundation.HWND, nCmdShow SHOW_WINDOW_CMD) bool {
 	r1, _, _ := syscall.SyscallN(procShowWindow.Addr(), uintptr(hWnd), uintptr(nCmdShow))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ShowWindowAsync calls USER32!ShowWindowAsync.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-showwindowasync
 // Minimum OS: windows5.0.
-func ShowWindowAsync(hWnd foundation.HWND, nCmdShow SHOW_WINDOW_CMD) foundation.BOOL {
+func ShowWindowAsync(hWnd foundation.HWND, nCmdShow SHOW_WINDOW_CMD) bool {
 	r1, _, _ := syscall.SyscallN(procShowWindowAsync.Addr(), uintptr(hWnd), uintptr(nCmdShow))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SoundSentry calls USER32!SoundSentry.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-soundsentry
 // Minimum OS: windows6.0.6000.
-func SoundSentry() foundation.BOOL {
+func SoundSentry() bool {
 	r1, _, _ := syscall.SyscallN(procSoundSentry.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SwitchToThisWindow calls USER32!SwitchToThisWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-switchtothiswindow
 // Minimum OS: windows5.0.
-func SwitchToThisWindow(hwnd foundation.HWND, fUnknown foundation.BOOL) {
-	syscall.SyscallN(procSwitchToThisWindow.Addr(), uintptr(hwnd), uintptr(fUnknown))
+func SwitchToThisWindow(hwnd foundation.HWND, fUnknown bool) {
+	_fUnknown := win32.Bool32(fUnknown)
+	syscall.SyscallN(procSwitchToThisWindow.Addr(), uintptr(hwnd), uintptr(_fUnknown))
+}
+
+// SystemParametersInfo calls USER32!SystemParametersInfoW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-systemparametersinfow
+// Minimum OS: windows5.0.
+func SystemParametersInfo(uiAction SYSTEM_PARAMETERS_INFO_ACTION, uiParam uint32, pvParam unsafe.Pointer, fWinIni SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) error {
+	r1, _, e1 := syscall.SyscallN(procSystemParametersInfo.Addr(), uintptr(uiAction), uintptr(uiParam), uintptr(unsafe.Pointer(pvParam)), uintptr(fWinIni))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SystemParametersInfoA calls USER32!SystemParametersInfoA.
@@ -4246,22 +4393,15 @@ func SystemParametersInfoA(uiAction SYSTEM_PARAMETERS_INFO_ACTION, uiParam uint3
 	return nil
 }
 
-// SystemParametersInfoW calls USER32!SystemParametersInfoW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-systemparametersinfow
-// Minimum OS: windows5.0.
-func SystemParametersInfoW(uiAction SYSTEM_PARAMETERS_INFO_ACTION, uiParam uint32, pvParam unsafe.Pointer, fWinIni SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) error {
-	r1, _, e1 := syscall.SyscallN(procSystemParametersInfoW.Addr(), uintptr(uiAction), uintptr(uiParam), uintptr(unsafe.Pointer(pvParam)), uintptr(fWinIni))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // TileWindows calls USER32!TileWindows.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-tilewindows
 // Minimum OS: windows5.0.
-func TileWindows(hwndParent foundation.HWND, wHow TILE_WINDOWS_HOW, lpRect *foundation.RECT, cKids uint32, lpKids *foundation.HWND) (uint16, error) {
-	r1, _, e1 := syscall.SyscallN(procTileWindows.Addr(), uintptr(hwndParent), uintptr(wHow), uintptr(unsafe.Pointer(lpRect)), uintptr(cKids), uintptr(unsafe.Pointer(lpKids)))
+func TileWindows(hwndParent foundation.HWND, wHow TILE_WINDOWS_HOW, lpRect *foundation.RECT, lpKids []foundation.HWND) (uint16, error) {
+	var _lpKids *foundation.HWND
+	if len(lpKids) > 0 {
+		_lpKids = &lpKids[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procTileWindows.Addr(), uintptr(hwndParent), uintptr(wHow), uintptr(unsafe.Pointer(lpRect)), uintptr(len(lpKids)), uintptr(unsafe.Pointer(_lpKids)))
 	if e1 != 0 {
 		return uint16(r1), e1
 	}
@@ -4271,8 +4411,8 @@ func TileWindows(hwndParent foundation.HWND, wHow TILE_WINDOWS_HOW, lpRect *foun
 // TrackPopupMenu calls USER32!TrackPopupMenu.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-trackpopupmenu
 // Minimum OS: windows5.0.
-func TrackPopupMenu(hMenu HMENU, uFlags TRACK_POPUP_MENU_FLAGS, x int32, y int32, nReserved int32, hWnd foundation.HWND, prcRect *foundation.RECT) error {
-	r1, _, e1 := syscall.SyscallN(procTrackPopupMenu.Addr(), uintptr(hMenu), uintptr(uFlags), uintptr(x), uintptr(y), uintptr(nReserved), uintptr(hWnd), uintptr(unsafe.Pointer(prcRect)))
+func TrackPopupMenu(hMenu HMENU, uFlags TRACK_POPUP_MENU_FLAGS, x int32, y int32, hWnd foundation.HWND, prcRect *foundation.RECT) error {
+	r1, _, e1 := syscall.SyscallN(procTrackPopupMenu.Addr(), uintptr(hMenu), uintptr(uFlags), uintptr(x), uintptr(y), 0, uintptr(hWnd), uintptr(unsafe.Pointer(prcRect)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4290,6 +4430,17 @@ func TrackPopupMenuEx(hMenu HMENU, uFlags uint32, x int32, y int32, hwnd foundat
 	return nil
 }
 
+// TranslateAccelerator calls USER32!TranslateAcceleratorW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-translateacceleratorw
+// Minimum OS: windows5.0.
+func TranslateAccelerator(hWnd foundation.HWND, hAccTable HACCEL, lpMsg *MSG) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procTranslateAccelerator.Addr(), uintptr(hWnd), uintptr(hAccTable), uintptr(unsafe.Pointer(lpMsg)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // TranslateAcceleratorA calls USER32!TranslateAcceleratorA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-translateacceleratora
 // Minimum OS: windows5.0.
@@ -4301,37 +4452,26 @@ func TranslateAcceleratorA(hWnd foundation.HWND, hAccTable HACCEL, lpMsg *MSG) (
 	return int32(r1), nil
 }
 
-// TranslateAcceleratorW calls USER32!TranslateAcceleratorW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-translateacceleratorw
-// Minimum OS: windows5.0.
-func TranslateAcceleratorW(hWnd foundation.HWND, hAccTable HACCEL, lpMsg *MSG) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procTranslateAcceleratorW.Addr(), uintptr(hWnd), uintptr(hAccTable), uintptr(unsafe.Pointer(lpMsg)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
 // TranslateMDISysAccel calls USER32!TranslateMDISysAccel.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-translatemdisysaccel
 // Minimum OS: windows5.0.
-func TranslateMDISysAccel(hWndClient foundation.HWND, lpMsg *MSG) foundation.BOOL {
+func TranslateMDISysAccel(hWndClient foundation.HWND, lpMsg *MSG) bool {
 	r1, _, _ := syscall.SyscallN(procTranslateMDISysAccel.Addr(), uintptr(hWndClient), uintptr(unsafe.Pointer(lpMsg)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TranslateMessage calls USER32!TranslateMessage.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-translatemessage
 // Minimum OS: windows5.0.
-func TranslateMessage(lpMsg *MSG) foundation.BOOL {
+func TranslateMessage(lpMsg *MSG) bool {
 	r1, _, _ := syscall.SyscallN(procTranslateMessage.Addr(), uintptr(unsafe.Pointer(lpMsg)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UnhookWindowsHook calls USER32!UnhookWindowsHook.
-func UnhookWindowsHook(nCode int32, pfnFilterProc HOOKPROC) foundation.BOOL {
+func UnhookWindowsHook(nCode int32, pfnFilterProc HOOKPROC) bool {
 	r1, _, _ := syscall.SyscallN(procUnhookWindowsHook.Addr(), uintptr(nCode), uintptr(pfnFilterProc))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UnhookWindowsHookEx calls USER32!UnhookWindowsHookEx.
@@ -4345,22 +4485,23 @@ func UnhookWindowsHookEx(hhk HHOOK) error {
 	return nil
 }
 
-// UnregisterClassA calls USER32!UnregisterClassA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-unregisterclassa
+// UnregisterClass calls USER32!UnregisterClassW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-unregisterclassw
 // Minimum OS: windows5.0.
-func UnregisterClassA(lpClassName foundation.PSTR, hInstance foundation.HINSTANCE) error {
-	r1, _, e1 := syscall.SyscallN(procUnregisterClassA.Addr(), uintptr(unsafe.Pointer(lpClassName)), uintptr(hInstance))
+func UnregisterClass(lpClassName string, hInstance foundation.HINSTANCE) error {
+	_lpClassName := win32.UTF16Ptr(lpClassName)
+	r1, _, e1 := syscall.SyscallN(procUnregisterClass.Addr(), uintptr(unsafe.Pointer(_lpClassName)), uintptr(hInstance))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// UnregisterClassW calls USER32!UnregisterClassW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-unregisterclassw
+// UnregisterClassA calls USER32!UnregisterClassA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-unregisterclassa
 // Minimum OS: windows5.0.
-func UnregisterClassW(lpClassName foundation.PWSTR, hInstance foundation.HINSTANCE) error {
-	r1, _, e1 := syscall.SyscallN(procUnregisterClassW.Addr(), uintptr(unsafe.Pointer(lpClassName)), uintptr(hInstance))
+func UnregisterClassA(lpClassName foundation.PSTR, hInstance foundation.HINSTANCE) error {
+	r1, _, e1 := syscall.SyscallN(procUnregisterClassA.Addr(), uintptr(unsafe.Pointer(lpClassName)), uintptr(hInstance))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4390,9 +4531,9 @@ func UpdateLayeredWindow(hWnd foundation.HWND, hdcDst graphicsgdi.HDC, pptDst *f
 }
 
 // UpdateLayeredWindowIndirect calls USER32!UpdateLayeredWindowIndirect.
-func UpdateLayeredWindowIndirect(hWnd foundation.HWND, pULWInfo *UPDATELAYEREDWINDOWINFO) foundation.BOOL {
+func UpdateLayeredWindowIndirect(hWnd foundation.HWND, pULWInfo *UPDATELAYEREDWINDOWINFO) bool {
 	r1, _, _ := syscall.SyscallN(procUpdateLayeredWindowIndirect.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pULWInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WaitMessage calls USER32!WaitMessage.
@@ -4406,7 +4547,19 @@ func WaitMessage() error {
 	return nil
 }
 
-// wsprintfA calls USER32!wsprintfA.
+// Wsprintf calls USER32!wsprintfW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-wsprintfw
+// Minimum OS: windows5.0.
+func Wsprintf(param0 foundation.PWSTR, param1 string) (int32, error) {
+	_param1 := win32.UTF16Ptr(param1)
+	r1, _, e1 := syscall.SyscallN(procWsprintf.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
+// WsprintfA calls USER32!wsprintfA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-wsprintfa
 // Minimum OS: windows5.0.
 func WsprintfA(param0 foundation.PSTR, param1 foundation.PSTR) (int32, error) {
@@ -4417,33 +4570,23 @@ func WsprintfA(param0 foundation.PSTR, param1 foundation.PSTR) (int32, error) {
 	return int32(r1), nil
 }
 
-// wsprintfW calls USER32!wsprintfW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-wsprintfw
+// Wvsprintf calls USER32!wvsprintfW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-wvsprintfw
 // Minimum OS: windows5.0.
-func WsprintfW(param0 foundation.PWSTR, param1 foundation.PWSTR) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWsprintfW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)))
+func Wvsprintf(param0 foundation.PWSTR, param1 string, arglist *int8) (int32, error) {
+	_param1 := win32.UTF16Ptr(param1)
+	r1, _, e1 := syscall.SyscallN(procWvsprintf.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(arglist)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// wvsprintfA calls USER32!wvsprintfA.
+// WvsprintfA calls USER32!wvsprintfA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-wvsprintfa
 // Minimum OS: windows5.0.
 func WvsprintfA(param0 foundation.PSTR, param1 foundation.PSTR, arglist *int8) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procWvsprintfA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(arglist)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// wvsprintfW calls USER32!wvsprintfW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-wvsprintfw
-// Minimum OS: windows5.0.
-func WvsprintfW(param0 foundation.PWSTR, param1 foundation.PWSTR, arglist *int8) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWvsprintfW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(arglist)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}

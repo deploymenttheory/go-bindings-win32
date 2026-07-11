@@ -25,57 +25,58 @@ type IDirectMusic struct {
 var IID_IDirectMusic = win32.GUID{Data1: 0x6536115a, Data2: 0x7b2d, Data3: 0x11d2, Data4: [8]byte{0xba, 0x18, 0x00, 0x00, 0xf8, 0x75, 0xac, 0x12}}
 
 // EnumPort dispatches through IDirectMusic's vtable slot 3.
-func (self *IDirectMusic) EnumPort(dwIndex uint32, pPortCaps *DMUS_PORTCAPS) foundation.HRESULT {
+func (self *IDirectMusic) EnumPort(dwIndex uint32, pPortCaps *DMUS_PORTCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pPortCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMusicBuffer dispatches through IDirectMusic's vtable slot 4.
-func (self *IDirectMusic) CreateMusicBuffer(pBufferDesc *DMUS_BUFFERDESC, ppBuffer **IDirectMusicBuffer, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectMusic) CreateMusicBuffer(pBufferDesc *DMUS_BUFFERDESC, ppBuffer **IDirectMusicBuffer, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBufferDesc)), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePort dispatches through IDirectMusic's vtable slot 5.
-func (self *IDirectMusic) CreatePort(rclsidPort *win32.GUID, pPortParams *DMUS_PORTPARAMS8, ppPort **IDirectMusicPort, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectMusic) CreatePort(rclsidPort *win32.GUID, pPortParams *DMUS_PORTPARAMS8, ppPort **IDirectMusicPort, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsidPort)), uintptr(unsafe.Pointer(pPortParams)), uintptr(unsafe.Pointer(ppPort)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMasterClock dispatches through IDirectMusic's vtable slot 6.
-func (self *IDirectMusic) EnumMasterClock(dwIndex uint32, lpClockInfo *DMUS_CLOCKINFO8) foundation.HRESULT {
+func (self *IDirectMusic) EnumMasterClock(dwIndex uint32, lpClockInfo *DMUS_CLOCKINFO8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(lpClockInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMasterClock dispatches through IDirectMusic's vtable slot 7.
-func (self *IDirectMusic) GetMasterClock(pguidClock *win32.GUID, ppReferenceClock **media.IReferenceClock) foundation.HRESULT {
+func (self *IDirectMusic) GetMasterClock(pguidClock *win32.GUID, ppReferenceClock **media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidClock)), uintptr(unsafe.Pointer(ppReferenceClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMasterClock dispatches through IDirectMusic's vtable slot 8.
-func (self *IDirectMusic) SetMasterClock(rguidClock *win32.GUID) foundation.HRESULT {
+func (self *IDirectMusic) SetMasterClock(rguidClock *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Activate dispatches through IDirectMusic's vtable slot 9.
-func (self *IDirectMusic) Activate(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *IDirectMusic) Activate(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultPort dispatches through IDirectMusic's vtable slot 10.
-func (self *IDirectMusic) GetDefaultPort(pguidPort *win32.GUID) foundation.HRESULT {
+func (self *IDirectMusic) GetDefaultPort(pguidPort *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidPort)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDirectSound dispatches through IDirectMusic's vtable slot 11.
-func (self *IDirectMusic) SetDirectSound(pDirectSound *mediaaudiodirectsound.IDirectSound, hWnd foundation.HWND) foundation.HRESULT {
+func (self *IDirectMusic) SetDirectSound(pDirectSound *mediaaudiodirectsound.IDirectSound, hWnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectSound)), uintptr(hWnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2d3629f7-813d-4939-8508-f05c6b75fd97
@@ -87,9 +88,9 @@ type IDirectMusic8 struct {
 var IID_IDirectMusic8 = win32.GUID{Data1: 0x2d3629f7, Data2: 0x813d, Data3: 0x4939, Data4: [8]byte{0x85, 0x08, 0xf0, 0x5c, 0x6b, 0x75, 0xfd, 0x97}}
 
 // SetExternalMasterClock dispatches through IDirectMusic8's vtable slot 12.
-func (self *IDirectMusic8) SetExternalMasterClock(pClock *media.IReferenceClock) foundation.HRESULT {
+func (self *IDirectMusic8) SetExternalMasterClock(pClock *media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d2ac2878-b39b-11d1-8704-00600893b1bd
@@ -101,81 +102,81 @@ type IDirectMusicBuffer struct {
 var IID_IDirectMusicBuffer = win32.GUID{Data1: 0xd2ac2878, Data2: 0xb39b, Data3: 0x11d1, Data4: [8]byte{0x87, 0x04, 0x00, 0x60, 0x08, 0x93, 0xb1, 0xbd}}
 
 // Flush dispatches through IDirectMusicBuffer's vtable slot 3.
-func (self *IDirectMusicBuffer) Flush() foundation.HRESULT {
+func (self *IDirectMusicBuffer) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TotalTime dispatches through IDirectMusicBuffer's vtable slot 4.
-func (self *IDirectMusicBuffer) TotalTime(prtTime *int64) foundation.HRESULT {
+func (self *IDirectMusicBuffer) TotalTime(prtTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prtTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PackStructured dispatches through IDirectMusicBuffer's vtable slot 5.
-func (self *IDirectMusicBuffer) PackStructured(rt int64, dwChannelGroup uint32, dwChannelMessage uint32) foundation.HRESULT {
+func (self *IDirectMusicBuffer) PackStructured(rt int64, dwChannelGroup uint32, dwChannelMessage uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(rt), uintptr(dwChannelGroup), uintptr(dwChannelMessage))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PackUnstructured dispatches through IDirectMusicBuffer's vtable slot 6.
-func (self *IDirectMusicBuffer) PackUnstructured(rt int64, dwChannelGroup uint32, cb uint32, lpb *byte) foundation.HRESULT {
+func (self *IDirectMusicBuffer) PackUnstructured(rt int64, dwChannelGroup uint32, cb uint32, lpb *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(rt), uintptr(dwChannelGroup), uintptr(cb), uintptr(unsafe.Pointer(lpb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetReadPtr dispatches through IDirectMusicBuffer's vtable slot 7.
-func (self *IDirectMusicBuffer) ResetReadPtr() foundation.HRESULT {
+func (self *IDirectMusicBuffer) ResetReadPtr() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextEvent dispatches through IDirectMusicBuffer's vtable slot 8.
-func (self *IDirectMusicBuffer) GetNextEvent(prt *int64, pdwChannelGroup *uint32, pdwLength *uint32, ppData **byte) foundation.HRESULT {
+func (self *IDirectMusicBuffer) GetNextEvent(prt *int64, pdwChannelGroup *uint32, pdwLength *uint32, ppData **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prt)), uintptr(unsafe.Pointer(pdwChannelGroup)), uintptr(unsafe.Pointer(pdwLength)), uintptr(unsafe.Pointer(ppData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRawBufferPtr dispatches through IDirectMusicBuffer's vtable slot 9.
-func (self *IDirectMusicBuffer) GetRawBufferPtr(ppData **byte) foundation.HRESULT {
+func (self *IDirectMusicBuffer) GetRawBufferPtr(ppData **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStartTime dispatches through IDirectMusicBuffer's vtable slot 10.
-func (self *IDirectMusicBuffer) GetStartTime(prt *int64) foundation.HRESULT {
+func (self *IDirectMusicBuffer) GetStartTime(prt *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUsedBytes dispatches through IDirectMusicBuffer's vtable slot 11.
-func (self *IDirectMusicBuffer) GetUsedBytes(pcb *uint32) foundation.HRESULT {
+func (self *IDirectMusicBuffer) GetUsedBytes(pcb *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxBytes dispatches through IDirectMusicBuffer's vtable slot 12.
-func (self *IDirectMusicBuffer) GetMaxBytes(pcb *uint32) foundation.HRESULT {
+func (self *IDirectMusicBuffer) GetMaxBytes(pcb *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferFormat dispatches through IDirectMusicBuffer's vtable slot 13.
-func (self *IDirectMusicBuffer) GetBufferFormat(pGuidFormat *win32.GUID) foundation.HRESULT {
+func (self *IDirectMusicBuffer) GetBufferFormat(pGuidFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuidFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStartTime dispatches through IDirectMusicBuffer's vtable slot 14.
-func (self *IDirectMusicBuffer) SetStartTime(rt int64) foundation.HRESULT {
+func (self *IDirectMusicBuffer) SetStartTime(rt int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(rt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUsedBytes dispatches through IDirectMusicBuffer's vtable slot 15.
-func (self *IDirectMusicBuffer) SetUsedBytes(cb uint32) foundation.HRESULT {
+func (self *IDirectMusicBuffer) SetUsedBytes(cb uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(cb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d2ac287c-b39b-11d1-8704-00600893b1bd
@@ -187,15 +188,16 @@ type IDirectMusicCollection struct {
 var IID_IDirectMusicCollection = win32.GUID{Data1: 0xd2ac287c, Data2: 0xb39b, Data3: 0x11d1, Data4: [8]byte{0x87, 0x04, 0x00, 0x60, 0x08, 0x93, 0xb1, 0xbd}}
 
 // GetInstrument dispatches through IDirectMusicCollection's vtable slot 3.
-func (self *IDirectMusicCollection) GetInstrument(dwPatch uint32, ppInstrument **IDirectMusicInstrument) foundation.HRESULT {
+func (self *IDirectMusicCollection) GetInstrument(dwPatch uint32, ppInstrument **IDirectMusicInstrument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwPatch), uintptr(unsafe.Pointer(ppInstrument)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumInstrument dispatches through IDirectMusicCollection's vtable slot 4.
-func (self *IDirectMusicCollection) EnumInstrument(dwIndex uint32, pdwPatch *uint32, pwszName foundation.PWSTR, dwNameLen uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pdwPatch)), uintptr(unsafe.Pointer(pwszName)), uintptr(dwNameLen))
-	return foundation.HRESULT(r1)
+func (self *IDirectMusicCollection) EnumInstrument(dwIndex uint32, pdwPatch *uint32, pwszName string, dwNameLen uint32) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pdwPatch)), uintptr(unsafe.Pointer(_pwszName)), uintptr(dwNameLen))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d2ac287b-b39b-11d1-8704-00600893b1bd
@@ -207,9 +209,9 @@ type IDirectMusicDownload struct {
 var IID_IDirectMusicDownload = win32.GUID{Data1: 0xd2ac287b, Data2: 0xb39b, Data3: 0x11d1, Data4: [8]byte{0x87, 0x04, 0x00, 0x60, 0x08, 0x93, 0xb1, 0xbd}}
 
 // GetBuffer dispatches through IDirectMusicDownload's vtable slot 3.
-func (self *IDirectMusicDownload) GetBuffer(ppvBuffer *unsafe.Pointer, pdwSize *uint32) foundation.HRESULT {
+func (self *IDirectMusicDownload) GetBuffer(ppvBuffer *unsafe.Pointer, pdwSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppvBuffer)), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d2ac287e-b39b-11d1-8704-00600893b1bd
@@ -229,15 +231,15 @@ type IDirectMusicInstrument struct {
 var IID_IDirectMusicInstrument = win32.GUID{Data1: 0xd2ac287d, Data2: 0xb39b, Data3: 0x11d1, Data4: [8]byte{0x87, 0x04, 0x00, 0x60, 0x08, 0x93, 0xb1, 0xbd}}
 
 // GetPatch dispatches through IDirectMusicInstrument's vtable slot 3.
-func (self *IDirectMusicInstrument) GetPatch(pdwPatch *uint32) foundation.HRESULT {
+func (self *IDirectMusicInstrument) GetPatch(pdwPatch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPatch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPatch dispatches through IDirectMusicInstrument's vtable slot 4.
-func (self *IDirectMusicInstrument) SetPatch(dwPatch uint32) foundation.HRESULT {
+func (self *IDirectMusicInstrument) SetPatch(dwPatch uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwPatch))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 08f2d8c9-37c2-11d2-b9f9-0000f875ac12
@@ -249,105 +251,106 @@ type IDirectMusicPort struct {
 var IID_IDirectMusicPort = win32.GUID{Data1: 0x08f2d8c9, Data2: 0x37c2, Data3: 0x11d2, Data4: [8]byte{0xb9, 0xf9, 0x00, 0x00, 0xf8, 0x75, 0xac, 0x12}}
 
 // PlayBuffer dispatches through IDirectMusicPort's vtable slot 3.
-func (self *IDirectMusicPort) PlayBuffer(pBuffer *IDirectMusicBuffer) foundation.HRESULT {
+func (self *IDirectMusicPort) PlayBuffer(pBuffer *IDirectMusicBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetReadNotificationHandle dispatches through IDirectMusicPort's vtable slot 4.
-func (self *IDirectMusicPort) SetReadNotificationHandle(hEvent foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectMusicPort) SetReadNotificationHandle(hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hEvent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Read dispatches through IDirectMusicPort's vtable slot 5.
-func (self *IDirectMusicPort) Read(pBuffer *IDirectMusicBuffer) foundation.HRESULT {
+func (self *IDirectMusicPort) Read(pBuffer *IDirectMusicBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DownloadInstrument dispatches through IDirectMusicPort's vtable slot 6.
-func (self *IDirectMusicPort) DownloadInstrument(pInstrument *IDirectMusicInstrument, ppDownloadedInstrument **IDirectMusicDownloadedInstrument, pNoteRanges *DMUS_NOTERANGE, dwNumNoteRanges uint32) foundation.HRESULT {
+func (self *IDirectMusicPort) DownloadInstrument(pInstrument *IDirectMusicInstrument, ppDownloadedInstrument **IDirectMusicDownloadedInstrument, pNoteRanges *DMUS_NOTERANGE, dwNumNoteRanges uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstrument)), uintptr(unsafe.Pointer(ppDownloadedInstrument)), uintptr(unsafe.Pointer(pNoteRanges)), uintptr(dwNumNoteRanges))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnloadInstrument dispatches through IDirectMusicPort's vtable slot 7.
-func (self *IDirectMusicPort) UnloadInstrument(pDownloadedInstrument *IDirectMusicDownloadedInstrument) foundation.HRESULT {
+func (self *IDirectMusicPort) UnloadInstrument(pDownloadedInstrument *IDirectMusicDownloadedInstrument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDownloadedInstrument)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLatencyClock dispatches through IDirectMusicPort's vtable slot 8.
-func (self *IDirectMusicPort) GetLatencyClock(ppClock **media.IReferenceClock) foundation.HRESULT {
+func (self *IDirectMusicPort) GetLatencyClock(ppClock **media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRunningStats dispatches through IDirectMusicPort's vtable slot 9.
-func (self *IDirectMusicPort) GetRunningStats(pStats *DMUS_SYNTHSTATS) foundation.HRESULT {
+func (self *IDirectMusicPort) GetRunningStats(pStats *DMUS_SYNTHSTATS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Compact dispatches through IDirectMusicPort's vtable slot 10.
-func (self *IDirectMusicPort) Compact() foundation.HRESULT {
+func (self *IDirectMusicPort) Compact() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectMusicPort's vtable slot 11.
-func (self *IDirectMusicPort) GetCaps(pPortCaps *DMUS_PORTCAPS) foundation.HRESULT {
+func (self *IDirectMusicPort) GetCaps(pPortCaps *DMUS_PORTCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeviceIoControl dispatches through IDirectMusicPort's vtable slot 12.
-func (self *IDirectMusicPort) DeviceIoControl(dwIoControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED) foundation.HRESULT {
+func (self *IDirectMusicPort) DeviceIoControl(dwIoControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNumChannelGroups dispatches through IDirectMusicPort's vtable slot 13.
-func (self *IDirectMusicPort) SetNumChannelGroups(dwChannelGroups uint32) foundation.HRESULT {
+func (self *IDirectMusicPort) SetNumChannelGroups(dwChannelGroups uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwChannelGroups))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNumChannelGroups dispatches through IDirectMusicPort's vtable slot 14.
-func (self *IDirectMusicPort) GetNumChannelGroups(pdwChannelGroups *uint32) foundation.HRESULT {
+func (self *IDirectMusicPort) GetNumChannelGroups(pdwChannelGroups *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwChannelGroups)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Activate dispatches through IDirectMusicPort's vtable slot 15.
-func (self *IDirectMusicPort) Activate(fActive foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(fActive))
-	return foundation.HRESULT(r1)
+func (self *IDirectMusicPort) Activate(fActive bool) error {
+	_fActive := win32.Bool32(fActive)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(_fActive))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetChannelPriority dispatches through IDirectMusicPort's vtable slot 16.
-func (self *IDirectMusicPort) SetChannelPriority(dwChannelGroup uint32, dwChannel uint32, dwPriority uint32) foundation.HRESULT {
+func (self *IDirectMusicPort) SetChannelPriority(dwChannelGroup uint32, dwChannel uint32, dwPriority uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwChannelGroup), uintptr(dwChannel), uintptr(dwPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChannelPriority dispatches through IDirectMusicPort's vtable slot 17.
-func (self *IDirectMusicPort) GetChannelPriority(dwChannelGroup uint32, dwChannel uint32, pdwPriority *uint32) foundation.HRESULT {
+func (self *IDirectMusicPort) GetChannelPriority(dwChannelGroup uint32, dwChannel uint32, pdwPriority *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwChannelGroup), uintptr(dwChannel), uintptr(unsafe.Pointer(pdwPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDirectSound dispatches through IDirectMusicPort's vtable slot 18.
-func (self *IDirectMusicPort) SetDirectSound(pDirectSound *mediaaudiodirectsound.IDirectSound, pDirectSoundBuffer *mediaaudiodirectsound.IDirectSoundBuffer) foundation.HRESULT {
+func (self *IDirectMusicPort) SetDirectSound(pDirectSound *mediaaudiodirectsound.IDirectSound, pDirectSoundBuffer *mediaaudiodirectsound.IDirectSoundBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectSound)), uintptr(unsafe.Pointer(pDirectSoundBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormat dispatches through IDirectMusicPort's vtable slot 19.
-func (self *IDirectMusicPort) GetFormat(pWaveFormatEx unsafe.Pointer, pdwWaveFormatExSize *uint32, pdwBufferSize *uint32) foundation.HRESULT {
+func (self *IDirectMusicPort) GetFormat(pWaveFormatEx unsafe.Pointer, pdwWaveFormatExSize *uint32, pdwBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(unsafe.Pointer(pdwWaveFormatExSize)), uintptr(unsafe.Pointer(pdwBufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d2ac287a-b39b-11d1-8704-00600893b1bd
@@ -359,39 +362,39 @@ type IDirectMusicPortDownload struct {
 var IID_IDirectMusicPortDownload = win32.GUID{Data1: 0xd2ac287a, Data2: 0xb39b, Data3: 0x11d1, Data4: [8]byte{0x87, 0x04, 0x00, 0x60, 0x08, 0x93, 0xb1, 0xbd}}
 
 // GetBuffer dispatches through IDirectMusicPortDownload's vtable slot 3.
-func (self *IDirectMusicPortDownload) GetBuffer(dwDLId uint32, ppIDMDownload **IDirectMusicDownload) foundation.HRESULT {
+func (self *IDirectMusicPortDownload) GetBuffer(dwDLId uint32, ppIDMDownload **IDirectMusicDownload) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwDLId), uintptr(unsafe.Pointer(ppIDMDownload)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AllocateBuffer dispatches through IDirectMusicPortDownload's vtable slot 4.
-func (self *IDirectMusicPortDownload) AllocateBuffer(dwSize uint32, ppIDMDownload **IDirectMusicDownload) foundation.HRESULT {
+func (self *IDirectMusicPortDownload) AllocateBuffer(dwSize uint32, ppIDMDownload **IDirectMusicDownload) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwSize), uintptr(unsafe.Pointer(ppIDMDownload)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDLId dispatches through IDirectMusicPortDownload's vtable slot 5.
-func (self *IDirectMusicPortDownload) GetDLId(pdwStartDLId *uint32, dwCount uint32) foundation.HRESULT {
+func (self *IDirectMusicPortDownload) GetDLId(pdwStartDLId *uint32, dwCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStartDLId)), uintptr(dwCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAppend dispatches through IDirectMusicPortDownload's vtable slot 6.
-func (self *IDirectMusicPortDownload) GetAppend(pdwAppend *uint32) foundation.HRESULT {
+func (self *IDirectMusicPortDownload) GetAppend(pdwAppend *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAppend)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Download dispatches through IDirectMusicPortDownload's vtable slot 7.
-func (self *IDirectMusicPortDownload) Download(pIDMDownload *IDirectMusicDownload) foundation.HRESULT {
+func (self *IDirectMusicPortDownload) Download(pIDMDownload *IDirectMusicDownload) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDMDownload)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unload dispatches through IDirectMusicPortDownload's vtable slot 8.
-func (self *IDirectMusicPortDownload) Unload(pIDMDownload *IDirectMusicDownload) foundation.HRESULT {
+func (self *IDirectMusicPortDownload) Unload(pIDMDownload *IDirectMusicDownload) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDMDownload)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectMusicSynth: https://learn.microsoft.com/windows/win32/api/dmusics/nn-dmusics-idirectmusicsynth
@@ -404,105 +407,106 @@ type IDirectMusicSynth struct {
 var IID_IDirectMusicSynth = win32.GUID{Data1: 0x09823661, Data2: 0x5c85, Data3: 0x11d2, Data4: [8]byte{0xaf, 0xa6, 0x00, 0xaa, 0x00, 0x24, 0xd8, 0xb6}}
 
 // Open dispatches through IDirectMusicSynth's vtable slot 3.
-func (self *IDirectMusicSynth) Open(pPortParams *DMUS_PORTPARAMS8) foundation.HRESULT {
+func (self *IDirectMusicSynth) Open(pPortParams *DMUS_PORTPARAMS8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IDirectMusicSynth's vtable slot 4.
-func (self *IDirectMusicSynth) Close() foundation.HRESULT {
+func (self *IDirectMusicSynth) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNumChannelGroups dispatches through IDirectMusicSynth's vtable slot 5.
-func (self *IDirectMusicSynth) SetNumChannelGroups(dwGroups uint32) foundation.HRESULT {
+func (self *IDirectMusicSynth) SetNumChannelGroups(dwGroups uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwGroups))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Download dispatches through IDirectMusicSynth's vtable slot 6.
-func (self *IDirectMusicSynth) Download(phDownload *foundation.HANDLE, pvData unsafe.Pointer, pbFree *foundation.BOOL) foundation.HRESULT {
+func (self *IDirectMusicSynth) Download(phDownload *foundation.HANDLE, pvData unsafe.Pointer, pbFree *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phDownload)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pbFree)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unload dispatches through IDirectMusicSynth's vtable slot 7.
-func (self *IDirectMusicSynth) Unload(hDownload foundation.HANDLE, lpFreeHandle uintptr, hUserData foundation.HANDLE) foundation.HRESULT {
+func (self *IDirectMusicSynth) Unload(hDownload foundation.HANDLE, lpFreeHandle uintptr, hUserData foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hDownload), uintptr(lpFreeHandle), uintptr(hUserData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PlayBuffer dispatches through IDirectMusicSynth's vtable slot 8.
-func (self *IDirectMusicSynth) PlayBuffer(rt int64, pbBuffer *byte, cbBuffer uint32) foundation.HRESULT {
+func (self *IDirectMusicSynth) PlayBuffer(rt int64, pbBuffer *byte, cbBuffer uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(rt), uintptr(unsafe.Pointer(pbBuffer)), uintptr(cbBuffer))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRunningStats dispatches through IDirectMusicSynth's vtable slot 9.
-func (self *IDirectMusicSynth) GetRunningStats(pStats *DMUS_SYNTHSTATS) foundation.HRESULT {
+func (self *IDirectMusicSynth) GetRunningStats(pStats *DMUS_SYNTHSTATS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPortCaps dispatches through IDirectMusicSynth's vtable slot 10.
-func (self *IDirectMusicSynth) GetPortCaps(pCaps *DMUS_PORTCAPS) foundation.HRESULT {
+func (self *IDirectMusicSynth) GetPortCaps(pCaps *DMUS_PORTCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMasterClock dispatches through IDirectMusicSynth's vtable slot 11.
-func (self *IDirectMusicSynth) SetMasterClock(pClock *media.IReferenceClock) foundation.HRESULT {
+func (self *IDirectMusicSynth) SetMasterClock(pClock *media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLatencyClock dispatches through IDirectMusicSynth's vtable slot 12.
-func (self *IDirectMusicSynth) GetLatencyClock(ppClock **media.IReferenceClock) foundation.HRESULT {
+func (self *IDirectMusicSynth) GetLatencyClock(ppClock **media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Activate dispatches through IDirectMusicSynth's vtable slot 13.
-func (self *IDirectMusicSynth) Activate(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *IDirectMusicSynth) Activate(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSynthSink dispatches through IDirectMusicSynth's vtable slot 14.
-func (self *IDirectMusicSynth) SetSynthSink(pSynthSink *IDirectMusicSynthSink) foundation.HRESULT {
+func (self *IDirectMusicSynth) SetSynthSink(pSynthSink *IDirectMusicSynthSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSynthSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Render dispatches through IDirectMusicSynth's vtable slot 15.
-func (self *IDirectMusicSynth) Render(pBuffer *int16, dwLength uint32, llPosition int64) foundation.HRESULT {
+func (self *IDirectMusicSynth) Render(pBuffer *int16, dwLength uint32, llPosition int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwLength), uintptr(llPosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetChannelPriority dispatches through IDirectMusicSynth's vtable slot 16.
-func (self *IDirectMusicSynth) SetChannelPriority(dwChannelGroup uint32, dwChannel uint32, dwPriority uint32) foundation.HRESULT {
+func (self *IDirectMusicSynth) SetChannelPriority(dwChannelGroup uint32, dwChannel uint32, dwPriority uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwChannelGroup), uintptr(dwChannel), uintptr(dwPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChannelPriority dispatches through IDirectMusicSynth's vtable slot 17.
-func (self *IDirectMusicSynth) GetChannelPriority(dwChannelGroup uint32, dwChannel uint32, pdwPriority *uint32) foundation.HRESULT {
+func (self *IDirectMusicSynth) GetChannelPriority(dwChannelGroup uint32, dwChannel uint32, pdwPriority *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwChannelGroup), uintptr(dwChannel), uintptr(unsafe.Pointer(pdwPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormat dispatches through IDirectMusicSynth's vtable slot 18.
-func (self *IDirectMusicSynth) GetFormat(pWaveFormatEx unsafe.Pointer, pdwWaveFormatExSize *uint32) foundation.HRESULT {
+func (self *IDirectMusicSynth) GetFormat(pWaveFormatEx unsafe.Pointer, pdwWaveFormatExSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(unsafe.Pointer(pdwWaveFormatExSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAppend dispatches through IDirectMusicSynth's vtable slot 19.
-func (self *IDirectMusicSynth) GetAppend(pdwAppend *uint32) foundation.HRESULT {
+func (self *IDirectMusicSynth) GetAppend(pdwAppend *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAppend)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectMusicSynth8: https://learn.microsoft.com/windows/win32/api/dmusics/nn-dmusics-idirectmusicsynth8
@@ -515,33 +519,33 @@ type IDirectMusicSynth8 struct {
 var IID_IDirectMusicSynth8 = win32.GUID{Data1: 0x53cab625, Data2: 0x2711, Data3: 0x4c9f, Data4: [8]byte{0x9d, 0xe7, 0x1b, 0x7f, 0x92, 0x5f, 0x6f, 0xc8}}
 
 // PlayVoice dispatches through IDirectMusicSynth8's vtable slot 20.
-func (self *IDirectMusicSynth8) PlayVoice(rt int64, dwVoiceId uint32, dwChannelGroup uint32, dwChannel uint32, dwDLId uint32, prPitch int32, vrVolume int32, stVoiceStart uint64, stLoopStart uint64, stLoopEnd uint64) foundation.HRESULT {
+func (self *IDirectMusicSynth8) PlayVoice(rt int64, dwVoiceId uint32, dwChannelGroup uint32, dwChannel uint32, dwDLId uint32, prPitch int32, vrVolume int32, stVoiceStart uint64, stLoopStart uint64, stLoopEnd uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(rt), uintptr(dwVoiceId), uintptr(dwChannelGroup), uintptr(dwChannel), uintptr(dwDLId), uintptr(prPitch), uintptr(vrVolume), uintptr(stVoiceStart), uintptr(stLoopStart), uintptr(stLoopEnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopVoice dispatches through IDirectMusicSynth8's vtable slot 21.
-func (self *IDirectMusicSynth8) StopVoice(rt int64, dwVoiceId uint32) foundation.HRESULT {
+func (self *IDirectMusicSynth8) StopVoice(rt int64, dwVoiceId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(rt), uintptr(dwVoiceId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVoiceState dispatches through IDirectMusicSynth8's vtable slot 22.
-func (self *IDirectMusicSynth8) GetVoiceState(dwVoice *uint32, cbVoice uint32, dwVoiceState *DMUS_VOICE_STATE) foundation.HRESULT {
+func (self *IDirectMusicSynth8) GetVoiceState(dwVoice *uint32, cbVoice uint32, dwVoiceState *DMUS_VOICE_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwVoice)), uintptr(cbVoice), uintptr(unsafe.Pointer(dwVoiceState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IDirectMusicSynth8's vtable slot 23.
-func (self *IDirectMusicSynth8) Refresh(dwDownloadID uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IDirectMusicSynth8) Refresh(dwDownloadID uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(dwDownloadID), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AssignChannelToBuses dispatches through IDirectMusicSynth8's vtable slot 24.
-func (self *IDirectMusicSynth8) AssignChannelToBuses(dwChannelGroup uint32, dwChannel uint32, pdwBuses *uint32, cBuses uint32) foundation.HRESULT {
+func (self *IDirectMusicSynth8) AssignChannelToBuses(dwChannelGroup uint32, dwChannel uint32, pdwBuses *uint32, cBuses uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(dwChannelGroup), uintptr(dwChannel), uintptr(unsafe.Pointer(pdwBuses)), uintptr(cBuses))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectMusicSynthSink: https://learn.microsoft.com/windows/win32/api/dmusics/nn-dmusics-idirectmusicsynthsink
@@ -554,51 +558,52 @@ type IDirectMusicSynthSink struct {
 var IID_IDirectMusicSynthSink = win32.GUID{Data1: 0x09823663, Data2: 0x5c85, Data3: 0x11d2, Data4: [8]byte{0xaf, 0xa6, 0x00, 0xaa, 0x00, 0x24, 0xd8, 0xb6}}
 
 // Init dispatches through IDirectMusicSynthSink's vtable slot 3.
-func (self *IDirectMusicSynthSink) Init(pSynth *IDirectMusicSynth) foundation.HRESULT {
+func (self *IDirectMusicSynthSink) Init(pSynth *IDirectMusicSynth) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSynth)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMasterClock dispatches through IDirectMusicSynthSink's vtable slot 4.
-func (self *IDirectMusicSynthSink) SetMasterClock(pClock *media.IReferenceClock) foundation.HRESULT {
+func (self *IDirectMusicSynthSink) SetMasterClock(pClock *media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLatencyClock dispatches through IDirectMusicSynthSink's vtable slot 5.
-func (self *IDirectMusicSynthSink) GetLatencyClock(ppClock **media.IReferenceClock) foundation.HRESULT {
+func (self *IDirectMusicSynthSink) GetLatencyClock(ppClock **media.IReferenceClock) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Activate dispatches through IDirectMusicSynthSink's vtable slot 6.
-func (self *IDirectMusicSynthSink) Activate(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *IDirectMusicSynthSink) Activate(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SampleToRefTime dispatches through IDirectMusicSynthSink's vtable slot 7.
-func (self *IDirectMusicSynthSink) SampleToRefTime(llSampleTime int64, prfTime *int64) foundation.HRESULT {
+func (self *IDirectMusicSynthSink) SampleToRefTime(llSampleTime int64, prfTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(llSampleTime), uintptr(unsafe.Pointer(prfTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RefTimeToSample dispatches through IDirectMusicSynthSink's vtable slot 8.
-func (self *IDirectMusicSynthSink) RefTimeToSample(rfTime int64, pllSampleTime *int64) foundation.HRESULT {
+func (self *IDirectMusicSynthSink) RefTimeToSample(rfTime int64, pllSampleTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(rfTime), uintptr(unsafe.Pointer(pllSampleTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDirectSound dispatches through IDirectMusicSynthSink's vtable slot 9.
-func (self *IDirectMusicSynthSink) SetDirectSound(pDirectSound *mediaaudiodirectsound.IDirectSound, pDirectSoundBuffer *mediaaudiodirectsound.IDirectSoundBuffer) foundation.HRESULT {
+func (self *IDirectMusicSynthSink) SetDirectSound(pDirectSound *mediaaudiodirectsound.IDirectSound, pDirectSoundBuffer *mediaaudiodirectsound.IDirectSoundBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectSound)), uintptr(unsafe.Pointer(pDirectSoundBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesiredBufferSize dispatches through IDirectMusicSynthSink's vtable slot 10.
-func (self *IDirectMusicSynthSink) GetDesiredBufferSize(pdwBufferSizeInSamples *uint32) foundation.HRESULT {
+func (self *IDirectMusicSynthSink) GetDesiredBufferSize(pdwBufferSizeInSamples *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwBufferSizeInSamples)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ced153e7-3606-11d2-b9f9-0000f875ac12
@@ -610,7 +615,7 @@ type IDirectMusicThru struct {
 var IID_IDirectMusicThru = win32.GUID{Data1: 0xced153e7, Data2: 0x3606, Data3: 0x11d2, Data4: [8]byte{0xb9, 0xf9, 0x00, 0x00, 0xf8, 0x75, 0xac, 0x12}}
 
 // ThruChannel dispatches through IDirectMusicThru's vtable slot 3.
-func (self *IDirectMusicThru) ThruChannel(dwSourceChannelGroup uint32, dwSourceChannel uint32, dwDestinationChannelGroup uint32, dwDestinationChannel uint32, pDestinationPort *IDirectMusicPort) foundation.HRESULT {
+func (self *IDirectMusicThru) ThruChannel(dwSourceChannelGroup uint32, dwSourceChannel uint32, dwDestinationChannelGroup uint32, dwDestinationChannel uint32, pDestinationPort *IDirectMusicPort) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSourceChannelGroup), uintptr(dwSourceChannel), uintptr(dwDestinationChannelGroup), uintptr(dwDestinationChannel), uintptr(unsafe.Pointer(pDestinationPort)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

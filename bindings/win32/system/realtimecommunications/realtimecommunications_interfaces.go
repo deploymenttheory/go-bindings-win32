@@ -25,15 +25,15 @@ type INetworkTransportSettings struct {
 var IID_INetworkTransportSettings = win32.GUID{Data1: 0x5e7abb2c, Data2: 0xf2c1, Data3: 0x4a61, Data4: [8]byte{0xbd, 0x35, 0xde, 0xb7, 0xa0, 0x8a, 0xb0, 0xf1}}
 
 // ApplySetting dispatches through INetworkTransportSettings's vtable slot 3.
-func (self *INetworkTransportSettings) ApplySetting(SettingId *networkingwinsock.TRANSPORT_SETTING_ID, LengthIn uint32, ValueIn *byte, LengthOut *uint32, ValueOut **byte) foundation.HRESULT {
+func (self *INetworkTransportSettings) ApplySetting(SettingId *networkingwinsock.TRANSPORT_SETTING_ID, LengthIn uint32, ValueIn *byte, LengthOut *uint32, ValueOut **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingId)), uintptr(LengthIn), uintptr(unsafe.Pointer(ValueIn)), uintptr(unsafe.Pointer(LengthOut)), uintptr(unsafe.Pointer(ValueOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QuerySetting dispatches through INetworkTransportSettings's vtable slot 4.
-func (self *INetworkTransportSettings) QuerySetting(SettingId *networkingwinsock.TRANSPORT_SETTING_ID, LengthIn uint32, ValueIn *byte, LengthOut *uint32, ValueOut **byte) foundation.HRESULT {
+func (self *INetworkTransportSettings) QuerySetting(SettingId *networkingwinsock.TRANSPORT_SETTING_ID, LengthIn uint32, ValueIn *byte, LengthOut *uint32, ValueOut **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingId)), uintptr(LengthIn), uintptr(unsafe.Pointer(ValueIn)), uintptr(unsafe.Pointer(LengthOut)), uintptr(unsafe.Pointer(ValueOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eb1402-0ab8-49c0-9e14-a1ae4ba93058
@@ -45,15 +45,15 @@ type INotificationTransportSync struct {
 var IID_INotificationTransportSync = win32.GUID{Data1: 0x79eb1402, Data2: 0x0ab8, Data3: 0x49c0, Data4: [8]byte{0x9e, 0x14, 0xa1, 0xae, 0x4b, 0xa9, 0x30, 0x58}}
 
 // CompleteDelivery dispatches through INotificationTransportSync's vtable slot 3.
-func (self *INotificationTransportSync) CompleteDelivery() foundation.HRESULT {
+func (self *INotificationTransportSync) CompleteDelivery() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flush dispatches through INotificationTransportSync's vtable slot 4.
-func (self *INotificationTransportSync) Flush() foundation.HRESULT {
+func (self *INotificationTransportSync) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: fcb136c8-7b90-4e0c-befe-56edf0ba6f1c
@@ -65,15 +65,17 @@ type IRTCBuddy struct {
 var IID_IRTCBuddy = win32.GUID{Data1: 0xfcb136c8, Data2: 0x7b90, Data3: 0x4e0c, Data4: [8]byte{0xbe, 0xfe, 0x56, 0xed, 0xf0, 0xba, 0x6f, 0x1c}}
 
 // Get_Status dispatches through IRTCBuddy's vtable slot 11.
-func (self *IRTCBuddy) Get_Status(penStatus *RTC_PRESENCE_STATUS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penStatus)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddy) Get_Status() (RTC_PRESENCE_STATUS, error) {
+	var _penStatus RTC_PRESENCE_STATUS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penStatus)))
+	return _penStatus, win32.HRESULTError(int32(r1))
 }
 
 // Get_Notes dispatches through IRTCBuddy's vtable slot 12.
-func (self *IRTCBuddy) Get_Notes(pbstrNotes *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNotes)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddy) Get_Notes() (foundation.BSTR, error) {
+	var _pbstrNotes foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNotes)))
+	return _pbstrNotes, win32.HRESULTError(int32(r1))
 }
 
 // IID: 102f9588-23e7-40e3-954d-cd7a1d5c0361
@@ -85,51 +87,58 @@ type IRTCBuddy2 struct {
 var IID_IRTCBuddy2 = win32.GUID{Data1: 0x102f9588, Data2: 0x23e7, Data3: 0x40e3, Data4: [8]byte{0x95, 0x4d, 0xcd, 0x7a, 0x1d, 0x5c, 0x03, 0x61}}
 
 // Get_Profile dispatches through IRTCBuddy2's vtable slot 13.
-func (self *IRTCBuddy2) Get_Profile(ppProfile **IRTCProfile2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddy2) Get_Profile() (*IRTCProfile2, error) {
+	var _ppProfile *IRTCProfile2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
+	return _ppProfile, win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IRTCBuddy2's vtable slot 14.
-func (self *IRTCBuddy2) Refresh() foundation.HRESULT {
+func (self *IRTCBuddy2) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateGroups dispatches through IRTCBuddy2's vtable slot 15.
-func (self *IRTCBuddy2) EnumerateGroups(ppEnum **IRTCEnumGroups) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddy2) EnumerateGroups() (*IRTCEnumGroups, error) {
+	var _ppEnum *IRTCEnumGroups
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_Groups dispatches through IRTCBuddy2's vtable slot 16.
-func (self *IRTCBuddy2) Get_Groups(ppCollection **IRTCCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddy2) Get_Groups() (*IRTCCollection, error) {
+	var _ppCollection *IRTCCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
+	return _ppCollection, win32.HRESULTError(int32(r1))
 }
 
 // Get_PresenceProperty dispatches through IRTCBuddy2's vtable slot 17.
-func (self *IRTCBuddy2) Get_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY, pbstrProperty *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(pbstrProperty)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddy2) Get_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY) (foundation.BSTR, error) {
+	var _pbstrProperty foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(&_pbstrProperty)))
+	return _pbstrProperty, win32.HRESULTError(int32(r1))
 }
 
 // EnumeratePresenceDevices dispatches through IRTCBuddy2's vtable slot 18.
-func (self *IRTCBuddy2) EnumeratePresenceDevices(ppEnumDevices **IRTCEnumPresenceDevices) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumDevices)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddy2) EnumeratePresenceDevices() (*IRTCEnumPresenceDevices, error) {
+	var _ppEnumDevices *IRTCEnumPresenceDevices
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumDevices)))
+	return _ppEnumDevices, win32.HRESULTError(int32(r1))
 }
 
 // Get_PresenceDevices dispatches through IRTCBuddy2's vtable slot 19.
-func (self *IRTCBuddy2) Get_PresenceDevices(ppDevicesCollection **IRTCCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevicesCollection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddy2) Get_PresenceDevices() (*IRTCCollection, error) {
+	var _ppDevicesCollection *IRTCCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDevicesCollection)))
+	return _ppDevicesCollection, win32.HRESULTError(int32(r1))
 }
 
 // Get_SubscriptionType dispatches through IRTCBuddy2's vtable slot 20.
-func (self *IRTCBuddy2) Get_SubscriptionType(penSubscriptionType *RTC_BUDDY_SUBSCRIPTION_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penSubscriptionType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddy2) Get_SubscriptionType() (RTC_BUDDY_SUBSCRIPTION_TYPE, error) {
+	var _penSubscriptionType RTC_BUDDY_SUBSCRIPTION_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penSubscriptionType)))
+	return _penSubscriptionType, win32.HRESULTError(int32(r1))
 }
 
 // IID: f36d755d-17e6-404e-954f-0fc07574c78d
@@ -141,9 +150,10 @@ type IRTCBuddyEvent struct {
 var IID_IRTCBuddyEvent = win32.GUID{Data1: 0xf36d755d, Data2: 0x17e6, Data3: 0x404e, Data4: [8]byte{0x95, 0x4f, 0x0f, 0xc0, 0x75, 0x74, 0xc7, 0x8d}}
 
 // Get_Buddy dispatches through IRTCBuddyEvent's vtable slot 7.
-func (self *IRTCBuddyEvent) Get_Buddy(ppBuddy **IRTCBuddy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuddy)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyEvent) Get_Buddy() (*IRTCBuddy, error) {
+	var _ppBuddy *IRTCBuddy
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppBuddy)))
+	return _ppBuddy, win32.HRESULTError(int32(r1))
 }
 
 // IID: 484a7f1e-73f0-4990-bfc2-60bc3978a720
@@ -155,21 +165,24 @@ type IRTCBuddyEvent2 struct {
 var IID_IRTCBuddyEvent2 = win32.GUID{Data1: 0x484a7f1e, Data2: 0x73f0, Data3: 0x4990, Data4: [8]byte{0xbf, 0xc2, 0x60, 0xbc, 0x39, 0x78, 0xa7, 0x20}}
 
 // Get_EventType dispatches through IRTCBuddyEvent2's vtable slot 8.
-func (self *IRTCBuddyEvent2) Get_EventType(pEventType *RTC_BUDDY_EVENT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyEvent2) Get_EventType() (RTC_BUDDY_EVENT_TYPE, error) {
+	var _pEventType RTC_BUDDY_EVENT_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
+	return _pEventType, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCBuddyEvent2's vtable slot 9.
-func (self *IRTCBuddyEvent2) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyEvent2) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCBuddyEvent2's vtable slot 10.
-func (self *IRTCBuddyEvent2) Get_StatusText(pbstrStatusText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyEvent2) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
+	return _pbstrStatusText, win32.HRESULTError(int32(r1))
 }
 
 // IID: 60361e68-9164-4389-a4c6-d0b3925bda5e
@@ -181,57 +194,62 @@ type IRTCBuddyGroup struct {
 var IID_IRTCBuddyGroup = win32.GUID{Data1: 0x60361e68, Data2: 0x9164, Data3: 0x4389, Data4: [8]byte{0xa4, 0xc6, 0xd0, 0xb3, 0x92, 0x5b, 0xda, 0x5e}}
 
 // Get_Name dispatches through IRTCBuddyGroup's vtable slot 3.
-func (self *IRTCBuddyGroup) Get_Name(pbstrGroupName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGroupName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyGroup) Get_Name() (foundation.BSTR, error) {
+	var _pbstrGroupName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrGroupName)))
+	return _pbstrGroupName, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through IRTCBuddyGroup's vtable slot 4.
-func (self *IRTCBuddyGroup) Put_Name(bstrGroupName foundation.BSTR) foundation.HRESULT {
+func (self *IRTCBuddyGroup) Put_Name(bstrGroupName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddBuddy dispatches through IRTCBuddyGroup's vtable slot 5.
-func (self *IRTCBuddyGroup) AddBuddy(pBuddy *IRTCBuddy) foundation.HRESULT {
+func (self *IRTCBuddyGroup) AddBuddy(pBuddy *IRTCBuddy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuddy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveBuddy dispatches through IRTCBuddyGroup's vtable slot 6.
-func (self *IRTCBuddyGroup) RemoveBuddy(pBuddy *IRTCBuddy) foundation.HRESULT {
+func (self *IRTCBuddyGroup) RemoveBuddy(pBuddy *IRTCBuddy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuddy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateBuddies dispatches through IRTCBuddyGroup's vtable slot 7.
-func (self *IRTCBuddyGroup) EnumerateBuddies(ppEnum **IRTCEnumBuddies) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyGroup) EnumerateBuddies() (*IRTCEnumBuddies, error) {
+	var _ppEnum *IRTCEnumBuddies
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_Buddies dispatches through IRTCBuddyGroup's vtable slot 8.
-func (self *IRTCBuddyGroup) Get_Buddies(ppCollection **IRTCCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyGroup) Get_Buddies() (*IRTCCollection, error) {
+	var _ppCollection *IRTCCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
+	return _ppCollection, win32.HRESULTError(int32(r1))
 }
 
 // Get_Data dispatches through IRTCBuddyGroup's vtable slot 9.
-func (self *IRTCBuddyGroup) Get_Data(pbstrData *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrData)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyGroup) Get_Data() (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
+	return _pbstrData, win32.HRESULTError(int32(r1))
 }
 
 // Put_Data dispatches through IRTCBuddyGroup's vtable slot 10.
-func (self *IRTCBuddyGroup) Put_Data(bstrData foundation.BSTR) foundation.HRESULT {
+func (self *IRTCBuddyGroup) Put_Data(bstrData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Profile dispatches through IRTCBuddyGroup's vtable slot 11.
-func (self *IRTCBuddyGroup) Get_Profile(ppProfile **IRTCProfile2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyGroup) Get_Profile() (*IRTCProfile2, error) {
+	var _ppProfile *IRTCProfile2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
+	return _ppProfile, win32.HRESULTError(int32(r1))
 }
 
 // IID: 3a79e1d1-b736-4414-96f8-bbc7f08863e4
@@ -243,27 +261,31 @@ type IRTCBuddyGroupEvent struct {
 var IID_IRTCBuddyGroupEvent = win32.GUID{Data1: 0x3a79e1d1, Data2: 0xb736, Data3: 0x4414, Data4: [8]byte{0x96, 0xf8, 0xbb, 0xc7, 0xf0, 0x88, 0x63, 0xe4}}
 
 // Get_EventType dispatches through IRTCBuddyGroupEvent's vtable slot 7.
-func (self *IRTCBuddyGroupEvent) Get_EventType(pEventType *RTC_GROUP_EVENT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyGroupEvent) Get_EventType() (RTC_GROUP_EVENT_TYPE, error) {
+	var _pEventType RTC_GROUP_EVENT_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
+	return _pEventType, win32.HRESULTError(int32(r1))
 }
 
 // Get_Group dispatches through IRTCBuddyGroupEvent's vtable slot 8.
-func (self *IRTCBuddyGroupEvent) Get_Group(ppGroup **IRTCBuddyGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroup)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyGroupEvent) Get_Group() (*IRTCBuddyGroup, error) {
+	var _ppGroup *IRTCBuddyGroup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGroup)))
+	return _ppGroup, win32.HRESULTError(int32(r1))
 }
 
 // Get_Buddy dispatches through IRTCBuddyGroupEvent's vtable slot 9.
-func (self *IRTCBuddyGroupEvent) Get_Buddy(ppBuddy **IRTCBuddy2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBuddy)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyGroupEvent) Get_Buddy() (*IRTCBuddy2, error) {
+	var _ppBuddy *IRTCBuddy2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppBuddy)))
+	return _ppBuddy, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCBuddyGroupEvent's vtable slot 10.
-func (self *IRTCBuddyGroupEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCBuddyGroupEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // IID: 07829e45-9a34-408e-a011-bddf13487cd1
@@ -275,255 +297,276 @@ type IRTCClient struct {
 var IID_IRTCClient = win32.GUID{Data1: 0x07829e45, Data2: 0x9a34, Data3: 0x408e, Data4: [8]byte{0xa0, 0x11, 0xbd, 0xdf, 0x13, 0x48, 0x7c, 0xd1}}
 
 // Initialize dispatches through IRTCClient's vtable slot 3.
-func (self *IRTCClient) Initialize() foundation.HRESULT {
+func (self *IRTCClient) Initialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IRTCClient's vtable slot 4.
-func (self *IRTCClient) Shutdown() foundation.HRESULT {
+func (self *IRTCClient) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrepareForShutdown dispatches through IRTCClient's vtable slot 5.
-func (self *IRTCClient) PrepareForShutdown() foundation.HRESULT {
+func (self *IRTCClient) PrepareForShutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EventFilter dispatches through IRTCClient's vtable slot 6.
-func (self *IRTCClient) Put_EventFilter(lFilter int32) foundation.HRESULT {
+func (self *IRTCClient) Put_EventFilter(lFilter int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lFilter))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EventFilter dispatches through IRTCClient's vtable slot 7.
-func (self *IRTCClient) Get_EventFilter(plFilter *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFilter)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_EventFilter() (int32, error) {
+	var _plFilter int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFilter)))
+	return _plFilter, win32.HRESULTError(int32(r1))
 }
 
 // SetPreferredMediaTypes dispatches through IRTCClient's vtable slot 8.
-func (self *IRTCClient) SetPreferredMediaTypes(lMediaTypes int32, fPersistent foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRTCClient) SetPreferredMediaTypes(lMediaTypes int32, fPersistent foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lMediaTypes), uintptr(fPersistent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredMediaTypes dispatches through IRTCClient's vtable slot 9.
-func (self *IRTCClient) Get_PreferredMediaTypes(plMediaTypes *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaTypes)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_PreferredMediaTypes() (int32, error) {
+	var _plMediaTypes int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypes)))
+	return _plMediaTypes, win32.HRESULTError(int32(r1))
 }
 
 // Get_MediaCapabilities dispatches through IRTCClient's vtable slot 10.
-func (self *IRTCClient) Get_MediaCapabilities(plMediaTypes *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaTypes)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_MediaCapabilities() (int32, error) {
+	var _plMediaTypes int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypes)))
+	return _plMediaTypes, win32.HRESULTError(int32(r1))
 }
 
 // CreateSession dispatches through IRTCClient's vtable slot 11.
-func (self *IRTCClient) CreateSession(enType RTC_SESSION_TYPE, bstrLocalPhoneURI foundation.BSTR, pProfile *IRTCProfile, lFlags int32, ppSession **IRTCSession) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(unsafe.Pointer(bstrLocalPhoneURI)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) CreateSession(enType RTC_SESSION_TYPE, bstrLocalPhoneURI foundation.BSTR, pProfile *IRTCProfile, lFlags int32) (*IRTCSession, error) {
+	var _ppSession *IRTCSession
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(unsafe.Pointer(bstrLocalPhoneURI)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppSession)))
+	return _ppSession, win32.HRESULTError(int32(r1))
 }
 
 // Put_ListenForIncomingSessions dispatches through IRTCClient's vtable slot 12.
-func (self *IRTCClient) Put_ListenForIncomingSessions(enListen RTC_LISTEN_MODE) foundation.HRESULT {
+func (self *IRTCClient) Put_ListenForIncomingSessions(enListen RTC_LISTEN_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(enListen))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ListenForIncomingSessions dispatches through IRTCClient's vtable slot 13.
-func (self *IRTCClient) Get_ListenForIncomingSessions(penListen *RTC_LISTEN_MODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penListen)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_ListenForIncomingSessions() (RTC_LISTEN_MODE, error) {
+	var _penListen RTC_LISTEN_MODE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penListen)))
+	return _penListen, win32.HRESULTError(int32(r1))
 }
 
 // Get_NetworkAddresses dispatches through IRTCClient's vtable slot 14.
-func (self *IRTCClient) Get_NetworkAddresses(fTCP foundation.VARIANT_BOOL, fExternal foundation.VARIANT_BOOL, pvAddresses *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(fTCP), uintptr(fExternal), uintptr(unsafe.Pointer(pvAddresses)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_NetworkAddresses(fTCP foundation.VARIANT_BOOL, fExternal foundation.VARIANT_BOOL) (systemvariant.VARIANT, error) {
+	var _pvAddresses systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(fTCP), uintptr(fExternal), uintptr(unsafe.Pointer(&_pvAddresses)))
+	return _pvAddresses, win32.HRESULTError(int32(r1))
 }
 
 // Put_Volume dispatches through IRTCClient's vtable slot 15.
-func (self *IRTCClient) Put_Volume(enDevice RTC_AUDIO_DEVICE, lVolume int32) foundation.HRESULT {
+func (self *IRTCClient) Put_Volume(enDevice RTC_AUDIO_DEVICE, lVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(lVolume))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Volume dispatches through IRTCClient's vtable slot 16.
-func (self *IRTCClient) Get_Volume(enDevice RTC_AUDIO_DEVICE, plVolume *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(plVolume)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_Volume(enDevice RTC_AUDIO_DEVICE) (int32, error) {
+	var _plVolume int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_plVolume)))
+	return _plVolume, win32.HRESULTError(int32(r1))
 }
 
 // Put_AudioMuted dispatches through IRTCClient's vtable slot 17.
-func (self *IRTCClient) Put_AudioMuted(enDevice RTC_AUDIO_DEVICE, fMuted foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRTCClient) Put_AudioMuted(enDevice RTC_AUDIO_DEVICE, fMuted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(fMuted))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioMuted dispatches through IRTCClient's vtable slot 18.
-func (self *IRTCClient) Get_AudioMuted(enDevice RTC_AUDIO_DEVICE, pfMuted *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(pfMuted)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_AudioMuted(enDevice RTC_AUDIO_DEVICE) (foundation.VARIANT_BOOL, error) {
+	var _pfMuted foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_pfMuted)))
+	return _pfMuted, win32.HRESULTError(int32(r1))
 }
 
 // Get_IVideoWindow dispatches through IRTCClient's vtable slot 19.
-func (self *IRTCClient) Get_IVideoWindow(enDevice RTC_VIDEO_DEVICE, ppIVideoWindow **mediadirectshow.IVideoWindow) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(ppIVideoWindow)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_IVideoWindow(enDevice RTC_VIDEO_DEVICE) (*mediadirectshow.IVideoWindow, error) {
+	var _ppIVideoWindow *mediadirectshow.IVideoWindow
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_ppIVideoWindow)))
+	return _ppIVideoWindow, win32.HRESULTError(int32(r1))
 }
 
 // Put_PreferredAudioDevice dispatches through IRTCClient's vtable slot 20.
-func (self *IRTCClient) Put_PreferredAudioDevice(enDevice RTC_AUDIO_DEVICE, bstrDeviceName foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClient) Put_PreferredAudioDevice(enDevice RTC_AUDIO_DEVICE, bstrDeviceName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(bstrDeviceName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredAudioDevice dispatches through IRTCClient's vtable slot 21.
-func (self *IRTCClient) Get_PreferredAudioDevice(enDevice RTC_AUDIO_DEVICE, pbstrDeviceName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(pbstrDeviceName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_PreferredAudioDevice(enDevice RTC_AUDIO_DEVICE) (foundation.BSTR, error) {
+	var _pbstrDeviceName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_pbstrDeviceName)))
+	return _pbstrDeviceName, win32.HRESULTError(int32(r1))
 }
 
 // Put_PreferredVolume dispatches through IRTCClient's vtable slot 22.
-func (self *IRTCClient) Put_PreferredVolume(enDevice RTC_AUDIO_DEVICE, lVolume int32) foundation.HRESULT {
+func (self *IRTCClient) Put_PreferredVolume(enDevice RTC_AUDIO_DEVICE, lVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(lVolume))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredVolume dispatches through IRTCClient's vtable slot 23.
-func (self *IRTCClient) Get_PreferredVolume(enDevice RTC_AUDIO_DEVICE, plVolume *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(plVolume)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_PreferredVolume(enDevice RTC_AUDIO_DEVICE) (int32, error) {
+	var _plVolume int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(enDevice), uintptr(unsafe.Pointer(&_plVolume)))
+	return _plVolume, win32.HRESULTError(int32(r1))
 }
 
 // Put_PreferredAEC dispatches through IRTCClient's vtable slot 24.
-func (self *IRTCClient) Put_PreferredAEC(bEnable foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRTCClient) Put_PreferredAEC(bEnable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(bEnable))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredAEC dispatches through IRTCClient's vtable slot 25.
-func (self *IRTCClient) Get_PreferredAEC(pbEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_PreferredAEC() (foundation.VARIANT_BOOL, error) {
+	var _pbEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbEnabled)))
+	return _pbEnabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_PreferredVideoDevice dispatches through IRTCClient's vtable slot 26.
-func (self *IRTCClient) Put_PreferredVideoDevice(bstrDeviceName foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClient) Put_PreferredVideoDevice(bstrDeviceName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredVideoDevice dispatches through IRTCClient's vtable slot 27.
-func (self *IRTCClient) Get_PreferredVideoDevice(pbstrDeviceName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDeviceName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_PreferredVideoDevice() (foundation.BSTR, error) {
+	var _pbstrDeviceName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDeviceName)))
+	return _pbstrDeviceName, win32.HRESULTError(int32(r1))
 }
 
 // Get_ActiveMedia dispatches through IRTCClient's vtable slot 28.
-func (self *IRTCClient) Get_ActiveMedia(plMediaType *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_ActiveMedia() (int32, error) {
+	var _plMediaType int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaType)))
+	return _plMediaType, win32.HRESULTError(int32(r1))
 }
 
 // Put_MaxBitrate dispatches through IRTCClient's vtable slot 29.
-func (self *IRTCClient) Put_MaxBitrate(lMaxBitrate int32) foundation.HRESULT {
+func (self *IRTCClient) Put_MaxBitrate(lMaxBitrate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lMaxBitrate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxBitrate dispatches through IRTCClient's vtable slot 30.
-func (self *IRTCClient) Get_MaxBitrate(plMaxBitrate *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMaxBitrate)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_MaxBitrate() (int32, error) {
+	var _plMaxBitrate int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMaxBitrate)))
+	return _plMaxBitrate, win32.HRESULTError(int32(r1))
 }
 
 // Put_TemporalSpatialTradeOff dispatches through IRTCClient's vtable slot 31.
-func (self *IRTCClient) Put_TemporalSpatialTradeOff(lValue int32) foundation.HRESULT {
+func (self *IRTCClient) Put_TemporalSpatialTradeOff(lValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TemporalSpatialTradeOff dispatches through IRTCClient's vtable slot 32.
-func (self *IRTCClient) Get_TemporalSpatialTradeOff(plValue *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plValue)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_TemporalSpatialTradeOff() (int32, error) {
+	var _plValue int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plValue)))
+	return _plValue, win32.HRESULTError(int32(r1))
 }
 
 // Get_NetworkQuality dispatches through IRTCClient's vtable slot 33.
-func (self *IRTCClient) Get_NetworkQuality(plNetworkQuality *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plNetworkQuality)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_NetworkQuality() (int32, error) {
+	var _plNetworkQuality int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plNetworkQuality)))
+	return _plNetworkQuality, win32.HRESULTError(int32(r1))
 }
 
 // StartT120Applet dispatches through IRTCClient's vtable slot 34.
-func (self *IRTCClient) StartT120Applet(enApplet RTC_T120_APPLET) foundation.HRESULT {
+func (self *IRTCClient) StartT120Applet(enApplet RTC_T120_APPLET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(enApplet))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopT120Applets dispatches through IRTCClient's vtable slot 35.
-func (self *IRTCClient) StopT120Applets() foundation.HRESULT {
+func (self *IRTCClient) StopT120Applets() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsT120AppletRunning dispatches through IRTCClient's vtable slot 36.
-func (self *IRTCClient) Get_IsT120AppletRunning(enApplet RTC_T120_APPLET, pfRunning *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(enApplet), uintptr(unsafe.Pointer(pfRunning)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_IsT120AppletRunning(enApplet RTC_T120_APPLET) (foundation.VARIANT_BOOL, error) {
+	var _pfRunning foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(enApplet), uintptr(unsafe.Pointer(&_pfRunning)))
+	return _pfRunning, win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalUserURI dispatches through IRTCClient's vtable slot 37.
-func (self *IRTCClient) Get_LocalUserURI(pbstrUserURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUserURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_LocalUserURI() (foundation.BSTR, error) {
+	var _pbstrUserURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserURI)))
+	return _pbstrUserURI, win32.HRESULTError(int32(r1))
 }
 
 // Put_LocalUserURI dispatches through IRTCClient's vtable slot 38.
-func (self *IRTCClient) Put_LocalUserURI(bstrUserURI foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClient) Put_LocalUserURI(bstrUserURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserURI)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalUserName dispatches through IRTCClient's vtable slot 39.
-func (self *IRTCClient) Get_LocalUserName(pbstrUserName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUserName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_LocalUserName() (foundation.BSTR, error) {
+	var _pbstrUserName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserName)))
+	return _pbstrUserName, win32.HRESULTError(int32(r1))
 }
 
 // Put_LocalUserName dispatches through IRTCClient's vtable slot 40.
-func (self *IRTCClient) Put_LocalUserName(bstrUserName foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClient) Put_LocalUserName(bstrUserName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PlayRing dispatches through IRTCClient's vtable slot 41.
-func (self *IRTCClient) PlayRing(enType RTC_RING_TYPE, bPlay foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRTCClient) PlayRing(enType RTC_RING_TYPE, bPlay foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(bPlay))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendDTMF dispatches through IRTCClient's vtable slot 42.
-func (self *IRTCClient) SendDTMF(enDTMF RTC_DTMF) foundation.HRESULT {
+func (self *IRTCClient) SendDTMF(enDTMF RTC_DTMF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(enDTMF))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InvokeTuningWizard dispatches through IRTCClient's vtable slot 43.
-func (self *IRTCClient) InvokeTuningWizard(hwndParent uintptr) foundation.HRESULT {
+func (self *IRTCClient) InvokeTuningWizard(hwndParent uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(hwndParent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsTuned dispatches through IRTCClient's vtable slot 44.
-func (self *IRTCClient) Get_IsTuned(pfTuned *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfTuned)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient) Get_IsTuned() (foundation.VARIANT_BOOL, error) {
+	var _pfTuned foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfTuned)))
+	return _pfTuned, win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c91d71d-1064-42da-bfa5-572beb8eea84
@@ -535,81 +578,86 @@ type IRTCClient2 struct {
 var IID_IRTCClient2 = win32.GUID{Data1: 0x0c91d71d, Data2: 0x1064, Data3: 0x42da, Data4: [8]byte{0xbf, 0xa5, 0x57, 0x2b, 0xeb, 0x8e, 0xea, 0x84}}
 
 // Put_AnswerMode dispatches through IRTCClient2's vtable slot 45.
-func (self *IRTCClient2) Put_AnswerMode(enType RTC_SESSION_TYPE, enMode RTC_ANSWER_MODE) foundation.HRESULT {
+func (self *IRTCClient2) Put_AnswerMode(enType RTC_SESSION_TYPE, enMode RTC_ANSWER_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(enMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AnswerMode dispatches through IRTCClient2's vtable slot 46.
-func (self *IRTCClient2) Get_AnswerMode(enType RTC_SESSION_TYPE, penMode *RTC_ANSWER_MODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(unsafe.Pointer(penMode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient2) Get_AnswerMode(enType RTC_SESSION_TYPE) (RTC_ANSWER_MODE, error) {
+	var _penMode RTC_ANSWER_MODE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(unsafe.Pointer(&_penMode)))
+	return _penMode, win32.HRESULTError(int32(r1))
 }
 
 // InvokeTuningWizardEx dispatches through IRTCClient2's vtable slot 47.
-func (self *IRTCClient2) InvokeTuningWizardEx(hwndParent uintptr, fAllowAudio foundation.VARIANT_BOOL, fAllowVideo foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRTCClient2) InvokeTuningWizardEx(hwndParent uintptr, fAllowAudio foundation.VARIANT_BOOL, fAllowVideo foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(fAllowAudio), uintptr(fAllowVideo))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Version dispatches through IRTCClient2's vtable slot 48.
-func (self *IRTCClient2) Get_Version(plVersion *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plVersion)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient2) Get_Version() (int32, error) {
+	var _plVersion int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plVersion)))
+	return _plVersion, win32.HRESULTError(int32(r1))
 }
 
 // Put_ClientName dispatches through IRTCClient2's vtable slot 49.
-func (self *IRTCClient2) Put_ClientName(bstrClientName foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClient2) Put_ClientName(bstrClientName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClientName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ClientCurVer dispatches through IRTCClient2's vtable slot 50.
-func (self *IRTCClient2) Put_ClientCurVer(bstrClientCurVer foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClient2) Put_ClientCurVer(bstrClientCurVer foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClientCurVer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitializeEx dispatches through IRTCClient2's vtable slot 51.
-func (self *IRTCClient2) InitializeEx(lFlags int32) foundation.HRESULT {
+func (self *IRTCClient2) InitializeEx(lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(lFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSessionWithDescription dispatches through IRTCClient2's vtable slot 52.
-func (self *IRTCClient2) CreateSessionWithDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, pProfile *IRTCProfile, lFlags int32, ppSession2 **IRTCSession2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(ppSession2)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient2) CreateSessionWithDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, pProfile *IRTCProfile, lFlags int32) (*IRTCSession2, error) {
+	var _ppSession2 *IRTCSession2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppSession2)))
+	return _ppSession2, win32.HRESULTError(int32(r1))
 }
 
 // SetSessionDescriptionManager dispatches through IRTCClient2's vtable slot 53.
-func (self *IRTCClient2) SetSessionDescriptionManager(pSessionDescriptionManager *IRTCSessionDescriptionManager) foundation.HRESULT {
+func (self *IRTCClient2) SetSessionDescriptionManager(pSessionDescriptionManager *IRTCSessionDescriptionManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSessionDescriptionManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PreferredSecurityLevel dispatches through IRTCClient2's vtable slot 54.
-func (self *IRTCClient2) Put_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, enSecurityLevel RTC_SECURITY_LEVEL) foundation.HRESULT {
+func (self *IRTCClient2) Put_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, enSecurityLevel RTC_SECURITY_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(enSecurityLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredSecurityLevel dispatches through IRTCClient2's vtable slot 55.
-func (self *IRTCClient2) Get_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, penSecurityLevel *RTC_SECURITY_LEVEL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(penSecurityLevel)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient2) Get_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE) (RTC_SECURITY_LEVEL, error) {
+	var _penSecurityLevel RTC_SECURITY_LEVEL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_penSecurityLevel)))
+	return _penSecurityLevel, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowedPorts dispatches through IRTCClient2's vtable slot 56.
-func (self *IRTCClient2) Put_AllowedPorts(lTransport int32, enListenMode RTC_LISTEN_MODE) foundation.HRESULT {
+func (self *IRTCClient2) Put_AllowedPorts(lTransport int32, enListenMode RTC_LISTEN_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(lTransport), uintptr(enListenMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowedPorts dispatches through IRTCClient2's vtable slot 57.
-func (self *IRTCClient2) Get_AllowedPorts(lTransport int32, penListenMode *RTC_LISTEN_MODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(lTransport), uintptr(unsafe.Pointer(penListenMode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClient2) Get_AllowedPorts(lTransport int32) (RTC_LISTEN_MODE, error) {
+	var _penListenMode RTC_LISTEN_MODE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(lTransport), uintptr(unsafe.Pointer(&_penListenMode)))
+	return _penListenMode, win32.HRESULTError(int32(r1))
 }
 
 // IID: 2b493b7a-3cba-4170-9c8b-76a9dacdd644
@@ -621,15 +669,17 @@ type IRTCClientEvent struct {
 var IID_IRTCClientEvent = win32.GUID{Data1: 0x2b493b7a, Data2: 0x3cba, Data3: 0x4170, Data4: [8]byte{0x9c, 0x8b, 0x76, 0xa9, 0xda, 0xcd, 0xd6, 0x44}}
 
 // Get_EventType dispatches through IRTCClientEvent's vtable slot 7.
-func (self *IRTCClientEvent) Get_EventType(penEventType *RTC_CLIENT_EVENT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penEventType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientEvent) Get_EventType() (RTC_CLIENT_EVENT_TYPE, error) {
+	var _penEventType RTC_CLIENT_EVENT_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penEventType)))
+	return _penEventType, win32.HRESULTError(int32(r1))
 }
 
 // Get_Client dispatches through IRTCClientEvent's vtable slot 8.
-func (self *IRTCClientEvent) Get_Client(ppClient **IRTCClient) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClient)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientEvent) Get_Client() (*IRTCClient, error) {
+	var _ppClient *IRTCClient
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClient)))
+	return _ppClient, win32.HRESULTError(int32(r1))
 }
 
 // IID: d5df3f03-4bde-4417-aefe-71177bdaea66
@@ -641,21 +691,21 @@ type IRTCClientPortManagement struct {
 var IID_IRTCClientPortManagement = win32.GUID{Data1: 0xd5df3f03, Data2: 0x4bde, Data3: 0x4417, Data4: [8]byte{0xae, 0xfe, 0x71, 0x17, 0x7b, 0xda, 0xea, 0x66}}
 
 // StartListenAddressAndPort dispatches through IRTCClientPortManagement's vtable slot 3.
-func (self *IRTCClientPortManagement) StartListenAddressAndPort(bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32) foundation.HRESULT {
+func (self *IRTCClientPortManagement) StartListenAddressAndPort(bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInternalLocalAddress)), uintptr(lInternalLocalPort))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopListenAddressAndPort dispatches through IRTCClientPortManagement's vtable slot 4.
-func (self *IRTCClientPortManagement) StopListenAddressAndPort(bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32) foundation.HRESULT {
+func (self *IRTCClientPortManagement) StopListenAddressAndPort(bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInternalLocalAddress)), uintptr(lInternalLocalPort))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPortRange dispatches through IRTCClientPortManagement's vtable slot 5.
-func (self *IRTCClientPortManagement) GetPortRange(enPortType RTC_PORT_TYPE, plMinValue *int32, plMaxValue *int32) foundation.HRESULT {
+func (self *IRTCClientPortManagement) GetPortRange(enPortType RTC_PORT_TYPE, plMinValue *int32, plMaxValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(enPortType), uintptr(unsafe.Pointer(plMinValue)), uintptr(unsafe.Pointer(plMaxValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 11c3cbcc-0744-42d1-968a-51aa1bb274c6
@@ -667,93 +717,103 @@ type IRTCClientPresence struct {
 var IID_IRTCClientPresence = win32.GUID{Data1: 0x11c3cbcc, Data2: 0x0744, Data3: 0x42d1, Data4: [8]byte{0x96, 0x8a, 0x51, 0xaa, 0x1b, 0xb2, 0x74, 0xc6}}
 
 // EnumerateBuddies dispatches through IRTCClientPresence's vtable slot 6.
-func (self *IRTCClientPresence) EnumerateBuddies(ppEnum **IRTCEnumBuddies) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) EnumerateBuddies() (*IRTCEnumBuddies, error) {
+	var _ppEnum *IRTCEnumBuddies
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_Buddies dispatches through IRTCClientPresence's vtable slot 7.
-func (self *IRTCClientPresence) Get_Buddies(ppCollection **IRTCCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) Get_Buddies() (*IRTCCollection, error) {
+	var _ppCollection *IRTCCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
+	return _ppCollection, win32.HRESULTError(int32(r1))
 }
 
 // Get_Buddy dispatches through IRTCClientPresence's vtable slot 8.
-func (self *IRTCClientPresence) Get_Buddy(bstrPresentityURI foundation.BSTR, ppBuddy **IRTCBuddy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(ppBuddy)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) Get_Buddy(bstrPresentityURI foundation.BSTR) (*IRTCBuddy, error) {
+	var _ppBuddy *IRTCBuddy
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(&_ppBuddy)))
+	return _ppBuddy, win32.HRESULTError(int32(r1))
 }
 
 // AddBuddy dispatches through IRTCClientPresence's vtable slot 9.
-func (self *IRTCClientPresence) AddBuddy(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, pProfile *IRTCProfile, lFlags int32, ppBuddy **IRTCBuddy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(fPersistent), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(ppBuddy)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) AddBuddy(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, pProfile *IRTCProfile, lFlags int32) (*IRTCBuddy, error) {
+	var _ppBuddy *IRTCBuddy
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(fPersistent), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppBuddy)))
+	return _ppBuddy, win32.HRESULTError(int32(r1))
 }
 
 // RemoveBuddy dispatches through IRTCClientPresence's vtable slot 10.
-func (self *IRTCClientPresence) RemoveBuddy(pBuddy *IRTCBuddy) foundation.HRESULT {
+func (self *IRTCClientPresence) RemoveBuddy(pBuddy *IRTCBuddy) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuddy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateWatchers dispatches through IRTCClientPresence's vtable slot 11.
-func (self *IRTCClientPresence) EnumerateWatchers(ppEnum **IRTCEnumWatchers) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) EnumerateWatchers() (*IRTCEnumWatchers, error) {
+	var _ppEnum *IRTCEnumWatchers
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_Watchers dispatches through IRTCClientPresence's vtable slot 12.
-func (self *IRTCClientPresence) Get_Watchers(ppCollection **IRTCCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) Get_Watchers() (*IRTCCollection, error) {
+	var _ppCollection *IRTCCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
+	return _ppCollection, win32.HRESULTError(int32(r1))
 }
 
 // Get_Watcher dispatches through IRTCClientPresence's vtable slot 13.
-func (self *IRTCClientPresence) Get_Watcher(bstrPresentityURI foundation.BSTR, ppWatcher **IRTCWatcher) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(ppWatcher)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) Get_Watcher(bstrPresentityURI foundation.BSTR) (*IRTCWatcher, error) {
+	var _ppWatcher *IRTCWatcher
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(&_ppWatcher)))
+	return _ppWatcher, win32.HRESULTError(int32(r1))
 }
 
 // AddWatcher dispatches through IRTCClientPresence's vtable slot 14.
-func (self *IRTCClientPresence) AddWatcher(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fBlocked foundation.VARIANT_BOOL, fPersistent foundation.VARIANT_BOOL, ppWatcher **IRTCWatcher) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(fBlocked), uintptr(fPersistent), uintptr(unsafe.Pointer(ppWatcher)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) AddWatcher(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fBlocked foundation.VARIANT_BOOL, fPersistent foundation.VARIANT_BOOL) (*IRTCWatcher, error) {
+	var _ppWatcher *IRTCWatcher
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(fBlocked), uintptr(fPersistent), uintptr(unsafe.Pointer(&_ppWatcher)))
+	return _ppWatcher, win32.HRESULTError(int32(r1))
 }
 
 // RemoveWatcher dispatches through IRTCClientPresence's vtable slot 15.
-func (self *IRTCClientPresence) RemoveWatcher(pWatcher *IRTCWatcher) foundation.HRESULT {
+func (self *IRTCClientPresence) RemoveWatcher(pWatcher *IRTCWatcher) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWatcher)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLocalPresenceInfo dispatches through IRTCClientPresence's vtable slot 16.
-func (self *IRTCClientPresence) SetLocalPresenceInfo(enStatus RTC_PRESENCE_STATUS, bstrNotes foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClientPresence) SetLocalPresenceInfo(enStatus RTC_PRESENCE_STATUS, bstrNotes foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(enStatus), uintptr(unsafe.Pointer(bstrNotes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_OfferWatcherMode dispatches through IRTCClientPresence's vtable slot 17.
-func (self *IRTCClientPresence) Get_OfferWatcherMode(penMode *RTC_OFFER_WATCHER_MODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penMode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) Get_OfferWatcherMode() (RTC_OFFER_WATCHER_MODE, error) {
+	var _penMode RTC_OFFER_WATCHER_MODE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penMode)))
+	return _penMode, win32.HRESULTError(int32(r1))
 }
 
 // Put_OfferWatcherMode dispatches through IRTCClientPresence's vtable slot 18.
-func (self *IRTCClientPresence) Put_OfferWatcherMode(enMode RTC_OFFER_WATCHER_MODE) foundation.HRESULT {
+func (self *IRTCClientPresence) Put_OfferWatcherMode(enMode RTC_OFFER_WATCHER_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(enMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivacyMode dispatches through IRTCClientPresence's vtable slot 19.
-func (self *IRTCClientPresence) Get_PrivacyMode(penMode *RTC_PRIVACY_MODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penMode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence) Get_PrivacyMode() (RTC_PRIVACY_MODE, error) {
+	var _penMode RTC_PRIVACY_MODE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penMode)))
+	return _penMode, win32.HRESULTError(int32(r1))
 }
 
 // Put_PrivacyMode dispatches through IRTCClientPresence's vtable slot 20.
-func (self *IRTCClientPresence) Put_PrivacyMode(enMode RTC_PRIVACY_MODE) foundation.HRESULT {
+func (self *IRTCClientPresence) Put_PrivacyMode(enMode RTC_PRIVACY_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(enMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ad1809e8-62f7-4783-909a-29c9d2cb1d34
@@ -765,87 +825,95 @@ type IRTCClientPresence2 struct {
 var IID_IRTCClientPresence2 = win32.GUID{Data1: 0xad1809e8, Data2: 0x62f7, Data3: 0x4783, Data4: [8]byte{0x90, 0x9a, 0x29, 0xc9, 0xd2, 0xcb, 0x1d, 0x34}}
 
 // DisablePresence dispatches through IRTCClientPresence2's vtable slot 22.
-func (self *IRTCClientPresence2) DisablePresence() foundation.HRESULT {
+func (self *IRTCClientPresence2) DisablePresence() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddGroup dispatches through IRTCClientPresence2's vtable slot 23.
-func (self *IRTCClientPresence2) AddGroup(bstrGroupName foundation.BSTR, bstrData foundation.BSTR, pProfile *IRTCProfile, lFlags int32, ppGroup **IRTCBuddyGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(bstrData)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(ppGroup)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence2) AddGroup(bstrGroupName foundation.BSTR, bstrData foundation.BSTR, pProfile *IRTCProfile, lFlags int32) (*IRTCBuddyGroup, error) {
+	var _ppGroup *IRTCBuddyGroup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(bstrData)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppGroup)))
+	return _ppGroup, win32.HRESULTError(int32(r1))
 }
 
 // RemoveGroup dispatches through IRTCClientPresence2's vtable slot 24.
-func (self *IRTCClientPresence2) RemoveGroup(pGroup *IRTCBuddyGroup) foundation.HRESULT {
+func (self *IRTCClientPresence2) RemoveGroup(pGroup *IRTCBuddyGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateGroups dispatches through IRTCClientPresence2's vtable slot 25.
-func (self *IRTCClientPresence2) EnumerateGroups(ppEnum **IRTCEnumGroups) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence2) EnumerateGroups() (*IRTCEnumGroups, error) {
+	var _ppEnum *IRTCEnumGroups
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_Groups dispatches through IRTCClientPresence2's vtable slot 26.
-func (self *IRTCClientPresence2) Get_Groups(ppCollection **IRTCCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence2) Get_Groups() (*IRTCCollection, error) {
+	var _ppCollection *IRTCCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
+	return _ppCollection, win32.HRESULTError(int32(r1))
 }
 
 // Get_Group dispatches through IRTCClientPresence2's vtable slot 27.
-func (self *IRTCClientPresence2) Get_Group(bstrGroupName foundation.BSTR, ppGroup **IRTCBuddyGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(ppGroup)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence2) Get_Group(bstrGroupName foundation.BSTR) (*IRTCBuddyGroup, error) {
+	var _ppGroup *IRTCBuddyGroup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&_ppGroup)))
+	return _ppGroup, win32.HRESULTError(int32(r1))
 }
 
 // AddWatcherEx dispatches through IRTCClientPresence2's vtable slot 28.
-func (self *IRTCClientPresence2) AddWatcherEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, enState RTC_WATCHER_STATE, fPersistent foundation.VARIANT_BOOL, enScope RTC_ACE_SCOPE, pProfile *IRTCProfile, lFlags int32, ppWatcher **IRTCWatcher2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(enState), uintptr(fPersistent), uintptr(enScope), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(ppWatcher)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence2) AddWatcherEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, enState RTC_WATCHER_STATE, fPersistent foundation.VARIANT_BOOL, enScope RTC_ACE_SCOPE, pProfile *IRTCProfile, lFlags int32) (*IRTCWatcher2, error) {
+	var _ppWatcher *IRTCWatcher2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(enState), uintptr(fPersistent), uintptr(enScope), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppWatcher)))
+	return _ppWatcher, win32.HRESULTError(int32(r1))
 }
 
 // Get_WatcherEx dispatches through IRTCClientPresence2's vtable slot 29.
-func (self *IRTCClientPresence2) Get_WatcherEx(enMode RTC_WATCHER_MATCH_MODE, bstrPresentityURI foundation.BSTR, ppWatcher **IRTCWatcher2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(enMode), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(ppWatcher)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence2) Get_WatcherEx(enMode RTC_WATCHER_MATCH_MODE, bstrPresentityURI foundation.BSTR) (*IRTCWatcher2, error) {
+	var _ppWatcher *IRTCWatcher2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(enMode), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(&_ppWatcher)))
+	return _ppWatcher, win32.HRESULTError(int32(r1))
 }
 
 // Put_PresenceProperty dispatches through IRTCClientPresence2's vtable slot 30.
-func (self *IRTCClientPresence2) Put_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY, bstrProperty foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClientPresence2) Put_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY, bstrProperty foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(bstrProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PresenceProperty dispatches through IRTCClientPresence2's vtable slot 31.
-func (self *IRTCClientPresence2) Get_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY, pbstrProperty *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(pbstrProperty)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence2) Get_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY) (foundation.BSTR, error) {
+	var _pbstrProperty foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(&_pbstrProperty)))
+	return _pbstrProperty, win32.HRESULTError(int32(r1))
 }
 
 // SetPresenceData dispatches through IRTCClientPresence2's vtable slot 32.
-func (self *IRTCClientPresence2) SetPresenceData(bstrNamespace foundation.BSTR, bstrData foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClientPresence2) SetPresenceData(bstrNamespace foundation.BSTR, bstrData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNamespace)), uintptr(unsafe.Pointer(bstrData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresenceData dispatches through IRTCClientPresence2's vtable slot 33.
-func (self *IRTCClientPresence2) GetPresenceData(pbstrNamespace *foundation.BSTR, pbstrData *foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClientPresence2) GetPresenceData(pbstrNamespace *foundation.BSTR, pbstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNamespace)), uintptr(unsafe.Pointer(pbstrData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLocalPresenceInfo dispatches through IRTCClientPresence2's vtable slot 34.
-func (self *IRTCClientPresence2) GetLocalPresenceInfo(penStatus *RTC_PRESENCE_STATUS, pbstrNotes *foundation.BSTR) foundation.HRESULT {
+func (self *IRTCClientPresence2) GetLocalPresenceInfo(penStatus *RTC_PRESENCE_STATUS, pbstrNotes *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penStatus)), uintptr(unsafe.Pointer(pbstrNotes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddBuddyEx dispatches through IRTCClientPresence2's vtable slot 35.
-func (self *IRTCClientPresence2) AddBuddyEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, enSubscriptionType RTC_BUDDY_SUBSCRIPTION_TYPE, pProfile *IRTCProfile, lFlags int32, ppBuddy **IRTCBuddy2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(fPersistent), uintptr(enSubscriptionType), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(ppBuddy)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientPresence2) AddBuddyEx(bstrPresentityURI foundation.BSTR, bstrUserName foundation.BSTR, bstrData foundation.BSTR, fPersistent foundation.VARIANT_BOOL, enSubscriptionType RTC_BUDDY_SUBSCRIPTION_TYPE, pProfile *IRTCProfile, lFlags int32) (*IRTCBuddy2, error) {
+	var _ppBuddy *IRTCBuddy2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrData)), uintptr(fPersistent), uintptr(enSubscriptionType), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags), uintptr(unsafe.Pointer(&_ppBuddy)))
+	return _ppBuddy, win32.HRESULTError(int32(r1))
 }
 
 // IID: b9f5cf06-65b9-4a80-a0e6-73cae3ef3822
@@ -857,45 +925,49 @@ type IRTCClientProvisioning struct {
 var IID_IRTCClientProvisioning = win32.GUID{Data1: 0xb9f5cf06, Data2: 0x65b9, Data3: 0x4a80, Data4: [8]byte{0xa0, 0xe6, 0x73, 0xca, 0xe3, 0xef, 0x38, 0x22}}
 
 // CreateProfile dispatches through IRTCClientProvisioning's vtable slot 3.
-func (self *IRTCClientProvisioning) CreateProfile(bstrProfileXML foundation.BSTR, ppProfile **IRTCProfile) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProfileXML)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientProvisioning) CreateProfile(bstrProfileXML foundation.BSTR) (*IRTCProfile, error) {
+	var _ppProfile *IRTCProfile
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProfileXML)), uintptr(unsafe.Pointer(&_ppProfile)))
+	return _ppProfile, win32.HRESULTError(int32(r1))
 }
 
 // EnableProfile dispatches through IRTCClientProvisioning's vtable slot 4.
-func (self *IRTCClientProvisioning) EnableProfile(pProfile *IRTCProfile, lRegisterFlags int32) foundation.HRESULT {
+func (self *IRTCClientProvisioning) EnableProfile(pProfile *IRTCProfile, lRegisterFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)), uintptr(lRegisterFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisableProfile dispatches through IRTCClientProvisioning's vtable slot 5.
-func (self *IRTCClientProvisioning) DisableProfile(pProfile *IRTCProfile) foundation.HRESULT {
+func (self *IRTCClientProvisioning) DisableProfile(pProfile *IRTCProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateProfiles dispatches through IRTCClientProvisioning's vtable slot 6.
-func (self *IRTCClientProvisioning) EnumerateProfiles(ppEnum **IRTCEnumProfiles) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientProvisioning) EnumerateProfiles() (*IRTCEnumProfiles, error) {
+	var _ppEnum *IRTCEnumProfiles
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_Profiles dispatches through IRTCClientProvisioning's vtable slot 7.
-func (self *IRTCClientProvisioning) Get_Profiles(ppCollection **IRTCCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientProvisioning) Get_Profiles() (*IRTCCollection, error) {
+	var _ppCollection *IRTCCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
+	return _ppCollection, win32.HRESULTError(int32(r1))
 }
 
 // GetProfile dispatches through IRTCClientProvisioning's vtable slot 8.
-func (self *IRTCClientProvisioning) GetProfile(bstrUserAccount foundation.BSTR, bstrUserPassword foundation.BSTR, bstrUserURI foundation.BSTR, bstrServer foundation.BSTR, lTransport int32, lCookie uintptr) foundation.HRESULT {
+func (self *IRTCClientProvisioning) GetProfile(bstrUserAccount foundation.BSTR, bstrUserPassword foundation.BSTR, bstrUserURI foundation.BSTR, bstrServer foundation.BSTR, lTransport int32, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserAccount)), uintptr(unsafe.Pointer(bstrUserPassword)), uintptr(unsafe.Pointer(bstrUserURI)), uintptr(unsafe.Pointer(bstrServer)), uintptr(lTransport), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SessionCapabilities dispatches through IRTCClientProvisioning's vtable slot 9.
-func (self *IRTCClientProvisioning) Get_SessionCapabilities(plSupportedSessions *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSupportedSessions)))
-	return foundation.HRESULT(r1)
+func (self *IRTCClientProvisioning) Get_SessionCapabilities() (int32, error) {
+	var _plSupportedSessions int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plSupportedSessions)))
+	return _plSupportedSessions, win32.HRESULTError(int32(r1))
 }
 
 // IID: a70909b5-f40e-4587-bb75-e6bc0845023e
@@ -907,9 +979,9 @@ type IRTCClientProvisioning2 struct {
 var IID_IRTCClientProvisioning2 = win32.GUID{Data1: 0xa70909b5, Data2: 0xf40e, Data3: 0x4587, Data4: [8]byte{0xbb, 0x75, 0xe6, 0xbc, 0x08, 0x45, 0x02, 0x3e}}
 
 // EnableProfileEx dispatches through IRTCClientProvisioning2's vtable slot 10.
-func (self *IRTCClientProvisioning2) EnableProfileEx(pProfile *IRTCProfile, lRegisterFlags int32, lRoamingFlags int32) foundation.HRESULT {
+func (self *IRTCClientProvisioning2) EnableProfileEx(pProfile *IRTCProfile, lRegisterFlags int32, lRoamingFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)), uintptr(lRegisterFlags), uintptr(lRoamingFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ec7c8096-b918-4044-94f1-e4fba0361d5c
@@ -921,21 +993,24 @@ type IRTCCollection struct {
 var IID_IRTCCollection = win32.GUID{Data1: 0xec7c8096, Data2: 0xb918, Data3: 0x4044, Data4: [8]byte{0x94, 0xf1, 0xe4, 0xfb, 0xa0, 0x36, 0x1d, 0x5c}}
 
 // Get_Count dispatches through IRTCCollection's vtable slot 7.
-func (self *IRTCCollection) Get_Count(lCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lCount)))
-	return foundation.HRESULT(r1)
+func (self *IRTCCollection) Get_Count() (int32, error) {
+	var _lCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lCount)))
+	return _lCount, win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through IRTCCollection's vtable slot 8.
-func (self *IRTCCollection) Get_Item(Index int32, pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *IRTCCollection) Get_Item(Index int32) (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IRTCCollection's vtable slot 9.
-func (self *IRTCCollection) Get__NewEnum(ppNewEnum **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNewEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppNewEnum *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNewEnum)))
+	return _ppNewEnum, win32.HRESULTError(int32(r1))
 }
 
 // IID: 176ddfbe-fec0-4d55-bc87-84cff1ef7f91
@@ -955,27 +1030,28 @@ type IRTCEnumBuddies struct {
 var IID_IRTCEnumBuddies = win32.GUID{Data1: 0xf7296917, Data2: 0x5569, Data3: 0x4b3b, Data4: [8]byte{0xb3, 0xaf, 0x98, 0xd1, 0x14, 0x4b, 0x2b, 0x87}}
 
 // Next dispatches through IRTCEnumBuddies's vtable slot 3.
-func (self *IRTCEnumBuddies) Next(celt uint32, ppElements **IRTCBuddy, pceltFetched *uint32) foundation.HRESULT {
+func (self *IRTCEnumBuddies) Next(celt uint32, ppElements **IRTCBuddy, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumBuddies's vtable slot 4.
-func (self *IRTCEnumBuddies) Reset() foundation.HRESULT {
+func (self *IRTCEnumBuddies) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumBuddies's vtable slot 5.
-func (self *IRTCEnumBuddies) Skip(celt uint32) foundation.HRESULT {
+func (self *IRTCEnumBuddies) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumBuddies's vtable slot 6.
-func (self *IRTCEnumBuddies) Clone(ppEnum **IRTCEnumBuddies) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCEnumBuddies) Clone() (*IRTCEnumBuddies, error) {
+	var _ppEnum *IRTCEnumBuddies
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IID: 742378d6-a141-4415-8f27-35d99076cf5d
@@ -987,27 +1063,28 @@ type IRTCEnumGroups struct {
 var IID_IRTCEnumGroups = win32.GUID{Data1: 0x742378d6, Data2: 0xa141, Data3: 0x4415, Data4: [8]byte{0x8f, 0x27, 0x35, 0xd9, 0x90, 0x76, 0xcf, 0x5d}}
 
 // Next dispatches through IRTCEnumGroups's vtable slot 3.
-func (self *IRTCEnumGroups) Next(celt uint32, ppElements **IRTCBuddyGroup, pceltFetched *uint32) foundation.HRESULT {
+func (self *IRTCEnumGroups) Next(celt uint32, ppElements **IRTCBuddyGroup, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumGroups's vtable slot 4.
-func (self *IRTCEnumGroups) Reset() foundation.HRESULT {
+func (self *IRTCEnumGroups) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumGroups's vtable slot 5.
-func (self *IRTCEnumGroups) Skip(celt uint32) foundation.HRESULT {
+func (self *IRTCEnumGroups) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumGroups's vtable slot 6.
-func (self *IRTCEnumGroups) Clone(ppEnum **IRTCEnumGroups) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCEnumGroups) Clone() (*IRTCEnumGroups, error) {
+	var _ppEnum *IRTCEnumGroups
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IID: fcd56f29-4a4f-41b2-ba5c-f5bccc060bf6
@@ -1019,27 +1096,28 @@ type IRTCEnumParticipants struct {
 var IID_IRTCEnumParticipants = win32.GUID{Data1: 0xfcd56f29, Data2: 0x4a4f, Data3: 0x41b2, Data4: [8]byte{0xba, 0x5c, 0xf5, 0xbc, 0xcc, 0x06, 0x0b, 0xf6}}
 
 // Next dispatches through IRTCEnumParticipants's vtable slot 3.
-func (self *IRTCEnumParticipants) Next(celt uint32, ppElements **IRTCParticipant, pceltFetched *uint32) foundation.HRESULT {
+func (self *IRTCEnumParticipants) Next(celt uint32, ppElements **IRTCParticipant, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumParticipants's vtable slot 4.
-func (self *IRTCEnumParticipants) Reset() foundation.HRESULT {
+func (self *IRTCEnumParticipants) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumParticipants's vtable slot 5.
-func (self *IRTCEnumParticipants) Skip(celt uint32) foundation.HRESULT {
+func (self *IRTCEnumParticipants) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumParticipants's vtable slot 6.
-func (self *IRTCEnumParticipants) Clone(ppEnum **IRTCEnumParticipants) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCEnumParticipants) Clone() (*IRTCEnumParticipants, error) {
+	var _ppEnum *IRTCEnumParticipants
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IID: 708c2ab7-8bf8-42f8-8c7d-635197ad5539
@@ -1051,27 +1129,28 @@ type IRTCEnumPresenceDevices struct {
 var IID_IRTCEnumPresenceDevices = win32.GUID{Data1: 0x708c2ab7, Data2: 0x8bf8, Data3: 0x42f8, Data4: [8]byte{0x8c, 0x7d, 0x63, 0x51, 0x97, 0xad, 0x55, 0x39}}
 
 // Next dispatches through IRTCEnumPresenceDevices's vtable slot 3.
-func (self *IRTCEnumPresenceDevices) Next(celt uint32, ppElements **IRTCPresenceDevice, pceltFetched *uint32) foundation.HRESULT {
+func (self *IRTCEnumPresenceDevices) Next(celt uint32, ppElements **IRTCPresenceDevice, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumPresenceDevices's vtable slot 4.
-func (self *IRTCEnumPresenceDevices) Reset() foundation.HRESULT {
+func (self *IRTCEnumPresenceDevices) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumPresenceDevices's vtable slot 5.
-func (self *IRTCEnumPresenceDevices) Skip(celt uint32) foundation.HRESULT {
+func (self *IRTCEnumPresenceDevices) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumPresenceDevices's vtable slot 6.
-func (self *IRTCEnumPresenceDevices) Clone(ppEnum **IRTCEnumPresenceDevices) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCEnumPresenceDevices) Clone() (*IRTCEnumPresenceDevices, error) {
+	var _ppEnum *IRTCEnumPresenceDevices
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IID: 29b7c41c-ed82-4bca-84ad-39d5101b58e3
@@ -1083,27 +1162,28 @@ type IRTCEnumProfiles struct {
 var IID_IRTCEnumProfiles = win32.GUID{Data1: 0x29b7c41c, Data2: 0xed82, Data3: 0x4bca, Data4: [8]byte{0x84, 0xad, 0x39, 0xd5, 0x10, 0x1b, 0x58, 0xe3}}
 
 // Next dispatches through IRTCEnumProfiles's vtable slot 3.
-func (self *IRTCEnumProfiles) Next(celt uint32, ppElements **IRTCProfile, pceltFetched *uint32) foundation.HRESULT {
+func (self *IRTCEnumProfiles) Next(celt uint32, ppElements **IRTCProfile, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumProfiles's vtable slot 4.
-func (self *IRTCEnumProfiles) Reset() foundation.HRESULT {
+func (self *IRTCEnumProfiles) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumProfiles's vtable slot 5.
-func (self *IRTCEnumProfiles) Skip(celt uint32) foundation.HRESULT {
+func (self *IRTCEnumProfiles) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumProfiles's vtable slot 6.
-func (self *IRTCEnumProfiles) Clone(ppEnum **IRTCEnumProfiles) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCEnumProfiles) Clone() (*IRTCEnumProfiles, error) {
+	var _ppEnum *IRTCEnumProfiles
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IID: 83d4d877-aa5d-4a5b-8d0e-002a8067e0e8
@@ -1115,27 +1195,28 @@ type IRTCEnumUserSearchResults struct {
 var IID_IRTCEnumUserSearchResults = win32.GUID{Data1: 0x83d4d877, Data2: 0xaa5d, Data3: 0x4a5b, Data4: [8]byte{0x8d, 0x0e, 0x00, 0x2a, 0x80, 0x67, 0xe0, 0xe8}}
 
 // Next dispatches through IRTCEnumUserSearchResults's vtable slot 3.
-func (self *IRTCEnumUserSearchResults) Next(celt uint32, ppElements **IRTCUserSearchResult, pceltFetched *uint32) foundation.HRESULT {
+func (self *IRTCEnumUserSearchResults) Next(celt uint32, ppElements **IRTCUserSearchResult, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumUserSearchResults's vtable slot 4.
-func (self *IRTCEnumUserSearchResults) Reset() foundation.HRESULT {
+func (self *IRTCEnumUserSearchResults) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumUserSearchResults's vtable slot 5.
-func (self *IRTCEnumUserSearchResults) Skip(celt uint32) foundation.HRESULT {
+func (self *IRTCEnumUserSearchResults) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumUserSearchResults's vtable slot 6.
-func (self *IRTCEnumUserSearchResults) Clone(ppEnum **IRTCEnumUserSearchResults) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCEnumUserSearchResults) Clone() (*IRTCEnumUserSearchResults, error) {
+	var _ppEnum *IRTCEnumUserSearchResults
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IID: a87d55d7-db74-4ed1-9ca4-77a0e41b413e
@@ -1147,27 +1228,28 @@ type IRTCEnumWatchers struct {
 var IID_IRTCEnumWatchers = win32.GUID{Data1: 0xa87d55d7, Data2: 0xdb74, Data3: 0x4ed1, Data4: [8]byte{0x9c, 0xa4, 0x77, 0xa0, 0xe4, 0x1b, 0x41, 0x3e}}
 
 // Next dispatches through IRTCEnumWatchers's vtable slot 3.
-func (self *IRTCEnumWatchers) Next(celt uint32, ppElements **IRTCWatcher, pceltFetched *uint32) foundation.HRESULT {
+func (self *IRTCEnumWatchers) Next(celt uint32, ppElements **IRTCWatcher, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IRTCEnumWatchers's vtable slot 4.
-func (self *IRTCEnumWatchers) Reset() foundation.HRESULT {
+func (self *IRTCEnumWatchers) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IRTCEnumWatchers's vtable slot 5.
-func (self *IRTCEnumWatchers) Skip(celt uint32) foundation.HRESULT {
+func (self *IRTCEnumWatchers) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IRTCEnumWatchers's vtable slot 6.
-func (self *IRTCEnumWatchers) Clone(ppEnum **IRTCEnumWatchers) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCEnumWatchers) Clone() (*IRTCEnumWatchers, error) {
+	var _ppEnum *IRTCEnumWatchers
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IID: 13fa24c7-5748-4b21-91f5-7397609ce747
@@ -1179,9 +1261,9 @@ type IRTCEventNotification struct {
 var IID_IRTCEventNotification = win32.GUID{Data1: 0x13fa24c7, Data2: 0x5748, Data3: 0x4b21, Data4: [8]byte{0x91, 0xf5, 0x73, 0x97, 0x60, 0x9c, 0xe7, 0x47}}
 
 // Event dispatches through IRTCEventNotification's vtable slot 3.
-func (self *IRTCEventNotification) Event(RTCEvent RTC_EVENT, pEvent *systemcom.IDispatch) foundation.HRESULT {
+func (self *IRTCEventNotification) Event(RTCEvent RTC_EVENT, pEvent *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(RTCEvent), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4e1d68ae-1912-4f49-b2c3-594fadfd425f
@@ -1193,27 +1275,31 @@ type IRTCInfoEvent struct {
 var IID_IRTCInfoEvent = win32.GUID{Data1: 0x4e1d68ae, Data2: 0x1912, Data3: 0x4f49, Data4: [8]byte{0xb2, 0xc3, 0x59, 0x4f, 0xad, 0xfd, 0x42, 0x5f}}
 
 // Get_Session dispatches through IRTCInfoEvent's vtable slot 7.
-func (self *IRTCInfoEvent) Get_Session(ppSession **IRTCSession2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+func (self *IRTCInfoEvent) Get_Session() (*IRTCSession2, error) {
+	var _ppSession *IRTCSession2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
+	return _ppSession, win32.HRESULTError(int32(r1))
 }
 
 // Get_Participant dispatches through IRTCInfoEvent's vtable slot 8.
-func (self *IRTCInfoEvent) Get_Participant(ppParticipant **IRTCParticipant) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppParticipant)))
-	return foundation.HRESULT(r1)
+func (self *IRTCInfoEvent) Get_Participant() (*IRTCParticipant, error) {
+	var _ppParticipant *IRTCParticipant
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParticipant)))
+	return _ppParticipant, win32.HRESULTError(int32(r1))
 }
 
 // Get_Info dispatches through IRTCInfoEvent's vtable slot 9.
-func (self *IRTCInfoEvent) Get_Info(pbstrInfo *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrInfo)))
-	return foundation.HRESULT(r1)
+func (self *IRTCInfoEvent) Get_Info() (foundation.BSTR, error) {
+	var _pbstrInfo foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrInfo)))
+	return _pbstrInfo, win32.HRESULTError(int32(r1))
 }
 
 // Get_InfoHeader dispatches through IRTCInfoEvent's vtable slot 10.
-func (self *IRTCInfoEvent) Get_InfoHeader(pbstrInfoHeader *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrInfoHeader)))
-	return foundation.HRESULT(r1)
+func (self *IRTCInfoEvent) Get_InfoHeader() (foundation.BSTR, error) {
+	var _pbstrInfoHeader foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrInfoHeader)))
+	return _pbstrInfoHeader, win32.HRESULTError(int32(r1))
 }
 
 // IID: 4c23bf51-390c-4992-a41d-41eec05b2a4b
@@ -1225,27 +1311,31 @@ type IRTCIntensityEvent struct {
 var IID_IRTCIntensityEvent = win32.GUID{Data1: 0x4c23bf51, Data2: 0x390c, Data3: 0x4992, Data4: [8]byte{0xa4, 0x1d, 0x41, 0xee, 0xc0, 0x5b, 0x2a, 0x4b}}
 
 // Get_Level dispatches through IRTCIntensityEvent's vtable slot 7.
-func (self *IRTCIntensityEvent) Get_Level(plLevel *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLevel)))
-	return foundation.HRESULT(r1)
+func (self *IRTCIntensityEvent) Get_Level() (int32, error) {
+	var _plLevel int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plLevel)))
+	return _plLevel, win32.HRESULTError(int32(r1))
 }
 
 // Get_Min dispatches through IRTCIntensityEvent's vtable slot 8.
-func (self *IRTCIntensityEvent) Get_Min(plMin *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMin)))
-	return foundation.HRESULT(r1)
+func (self *IRTCIntensityEvent) Get_Min() (int32, error) {
+	var _plMin int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMin)))
+	return _plMin, win32.HRESULTError(int32(r1))
 }
 
 // Get_Max dispatches through IRTCIntensityEvent's vtable slot 9.
-func (self *IRTCIntensityEvent) Get_Max(plMax *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMax)))
-	return foundation.HRESULT(r1)
+func (self *IRTCIntensityEvent) Get_Max() (int32, error) {
+	var _plMax int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMax)))
+	return _plMax, win32.HRESULTError(int32(r1))
 }
 
 // Get_Direction dispatches through IRTCIntensityEvent's vtable slot 10.
-func (self *IRTCIntensityEvent) Get_Direction(penDirection *RTC_AUDIO_DEVICE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penDirection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCIntensityEvent) Get_Direction() (RTC_AUDIO_DEVICE, error) {
+	var _penDirection RTC_AUDIO_DEVICE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penDirection)))
+	return _penDirection, win32.HRESULTError(int32(r1))
 }
 
 // IID: 099944fb-bcda-453e-8c41-e13da2adf7f3
@@ -1257,21 +1347,24 @@ type IRTCMediaEvent struct {
 var IID_IRTCMediaEvent = win32.GUID{Data1: 0x099944fb, Data2: 0xbcda, Data3: 0x453e, Data4: [8]byte{0x8c, 0x41, 0xe1, 0x3d, 0xa2, 0xad, 0xf7, 0xf3}}
 
 // Get_MediaType dispatches through IRTCMediaEvent's vtable slot 7.
-func (self *IRTCMediaEvent) Get_MediaType(pMediaType *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMediaEvent) Get_MediaType() (int32, error) {
+	var _pMediaType int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pMediaType)))
+	return _pMediaType, win32.HRESULTError(int32(r1))
 }
 
 // Get_EventType dispatches through IRTCMediaEvent's vtable slot 8.
-func (self *IRTCMediaEvent) Get_EventType(penEventType *RTC_MEDIA_EVENT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penEventType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMediaEvent) Get_EventType() (RTC_MEDIA_EVENT_TYPE, error) {
+	var _penEventType RTC_MEDIA_EVENT_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penEventType)))
+	return _penEventType, win32.HRESULTError(int32(r1))
 }
 
 // Get_EventReason dispatches through IRTCMediaEvent's vtable slot 9.
-func (self *IRTCMediaEvent) Get_EventReason(penEventReason *RTC_MEDIA_EVENT_REASON) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penEventReason)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMediaEvent) Get_EventReason() (RTC_MEDIA_EVENT_REASON, error) {
+	var _penEventReason RTC_MEDIA_EVENT_REASON
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penEventReason)))
+	return _penEventReason, win32.HRESULTError(int32(r1))
 }
 
 // IID: 52572d15-148c-4d97-a36c-2da55c289d63
@@ -1283,45 +1376,50 @@ type IRTCMediaRequestEvent struct {
 var IID_IRTCMediaRequestEvent = win32.GUID{Data1: 0x52572d15, Data2: 0x148c, Data3: 0x4d97, Data4: [8]byte{0xa3, 0x6c, 0x2d, 0xa5, 0x5c, 0x28, 0x9d, 0x63}}
 
 // Get_Session dispatches through IRTCMediaRequestEvent's vtable slot 7.
-func (self *IRTCMediaRequestEvent) Get_Session(ppSession **IRTCSession2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMediaRequestEvent) Get_Session() (*IRTCSession2, error) {
+	var _ppSession *IRTCSession2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
+	return _ppSession, win32.HRESULTError(int32(r1))
 }
 
 // Get_ProposedMedia dispatches through IRTCMediaRequestEvent's vtable slot 8.
-func (self *IRTCMediaRequestEvent) Get_ProposedMedia(plMediaTypes *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaTypes)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMediaRequestEvent) Get_ProposedMedia() (int32, error) {
+	var _plMediaTypes int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypes)))
+	return _plMediaTypes, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentMedia dispatches through IRTCMediaRequestEvent's vtable slot 9.
-func (self *IRTCMediaRequestEvent) Get_CurrentMedia(plMediaTypes *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaTypes)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMediaRequestEvent) Get_CurrentMedia() (int32, error) {
+	var _plMediaTypes int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypes)))
+	return _plMediaTypes, win32.HRESULTError(int32(r1))
 }
 
 // Accept dispatches through IRTCMediaRequestEvent's vtable slot 10.
-func (self *IRTCMediaRequestEvent) Accept(lMediaTypes int32) foundation.HRESULT {
+func (self *IRTCMediaRequestEvent) Accept(lMediaTypes int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lMediaTypes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemotePreferredSecurityLevel dispatches through IRTCMediaRequestEvent's vtable slot 11.
-func (self *IRTCMediaRequestEvent) Get_RemotePreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, penSecurityLevel *RTC_SECURITY_LEVEL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(penSecurityLevel)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMediaRequestEvent) Get_RemotePreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE) (RTC_SECURITY_LEVEL, error) {
+	var _penSecurityLevel RTC_SECURITY_LEVEL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_penSecurityLevel)))
+	return _penSecurityLevel, win32.HRESULTError(int32(r1))
 }
 
 // Reject dispatches through IRTCMediaRequestEvent's vtable slot 12.
-func (self *IRTCMediaRequestEvent) Reject() foundation.HRESULT {
+func (self *IRTCMediaRequestEvent) Reject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRTCMediaRequestEvent's vtable slot 13.
-func (self *IRTCMediaRequestEvent) Get_State(pState *RTC_REINVITE_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMediaRequestEvent) Get_State() (RTC_REINVITE_STATE, error) {
+	var _pState RTC_REINVITE_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
+	return _pState, win32.HRESULTError(int32(r1))
 }
 
 // IID: d3609541-1b29-4de5-a4ad-5aebaf319512
@@ -1333,39 +1431,45 @@ type IRTCMessagingEvent struct {
 var IID_IRTCMessagingEvent = win32.GUID{Data1: 0xd3609541, Data2: 0x1b29, Data3: 0x4de5, Data4: [8]byte{0xa4, 0xad, 0x5a, 0xeb, 0xaf, 0x31, 0x95, 0x12}}
 
 // Get_Session dispatches through IRTCMessagingEvent's vtable slot 7.
-func (self *IRTCMessagingEvent) Get_Session(ppSession **IRTCSession) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMessagingEvent) Get_Session() (*IRTCSession, error) {
+	var _ppSession *IRTCSession
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
+	return _ppSession, win32.HRESULTError(int32(r1))
 }
 
 // Get_Participant dispatches through IRTCMessagingEvent's vtable slot 8.
-func (self *IRTCMessagingEvent) Get_Participant(ppParticipant **IRTCParticipant) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppParticipant)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMessagingEvent) Get_Participant() (*IRTCParticipant, error) {
+	var _ppParticipant *IRTCParticipant
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParticipant)))
+	return _ppParticipant, win32.HRESULTError(int32(r1))
 }
 
 // Get_EventType dispatches through IRTCMessagingEvent's vtable slot 9.
-func (self *IRTCMessagingEvent) Get_EventType(penEventType *RTC_MESSAGING_EVENT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penEventType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMessagingEvent) Get_EventType() (RTC_MESSAGING_EVENT_TYPE, error) {
+	var _penEventType RTC_MESSAGING_EVENT_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penEventType)))
+	return _penEventType, win32.HRESULTError(int32(r1))
 }
 
 // Get_Message dispatches through IRTCMessagingEvent's vtable slot 10.
-func (self *IRTCMessagingEvent) Get_Message(pbstrMessage *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMessage)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMessagingEvent) Get_Message() (foundation.BSTR, error) {
+	var _pbstrMessage foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrMessage)))
+	return _pbstrMessage, win32.HRESULTError(int32(r1))
 }
 
 // Get_MessageHeader dispatches through IRTCMessagingEvent's vtable slot 11.
-func (self *IRTCMessagingEvent) Get_MessageHeader(pbstrMessageHeader *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMessageHeader)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMessagingEvent) Get_MessageHeader() (foundation.BSTR, error) {
+	var _pbstrMessageHeader foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrMessageHeader)))
+	return _pbstrMessageHeader, win32.HRESULTError(int32(r1))
 }
 
 // Get_UserStatus dispatches through IRTCMessagingEvent's vtable slot 12.
-func (self *IRTCMessagingEvent) Get_UserStatus(penUserStatus *RTC_MESSAGING_USER_STATUS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penUserStatus)))
-	return foundation.HRESULT(r1)
+func (self *IRTCMessagingEvent) Get_UserStatus() (RTC_MESSAGING_USER_STATUS, error) {
+	var _penUserStatus RTC_MESSAGING_USER_STATUS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penUserStatus)))
+	return _penUserStatus, win32.HRESULTError(int32(r1))
 }
 
 // IID: ae86add5-26b1-4414-af1d-b94cd938d739
@@ -1377,33 +1481,38 @@ type IRTCParticipant struct {
 var IID_IRTCParticipant = win32.GUID{Data1: 0xae86add5, Data2: 0x26b1, Data3: 0x4414, Data4: [8]byte{0xaf, 0x1d, 0xb9, 0x4c, 0xd9, 0x38, 0xd7, 0x39}}
 
 // Get_UserURI dispatches through IRTCParticipant's vtable slot 3.
-func (self *IRTCParticipant) Get_UserURI(pbstrUserURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUserURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCParticipant) Get_UserURI() (foundation.BSTR, error) {
+	var _pbstrUserURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserURI)))
+	return _pbstrUserURI, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through IRTCParticipant's vtable slot 4.
-func (self *IRTCParticipant) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCParticipant) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_Removable dispatches through IRTCParticipant's vtable slot 5.
-func (self *IRTCParticipant) Get_Removable(pfRemovable *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRemovable)))
-	return foundation.HRESULT(r1)
+func (self *IRTCParticipant) Get_Removable() (foundation.VARIANT_BOOL, error) {
+	var _pfRemovable foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfRemovable)))
+	return _pfRemovable, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRTCParticipant's vtable slot 6.
-func (self *IRTCParticipant) Get_State(penState *RTC_PARTICIPANT_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penState)))
-	return foundation.HRESULT(r1)
+func (self *IRTCParticipant) Get_State() (RTC_PARTICIPANT_STATE, error) {
+	var _penState RTC_PARTICIPANT_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
+	return _penState, win32.HRESULTError(int32(r1))
 }
 
 // Get_Session dispatches through IRTCParticipant's vtable slot 7.
-func (self *IRTCParticipant) Get_Session(ppSession **IRTCSession) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+func (self *IRTCParticipant) Get_Session() (*IRTCSession, error) {
+	var _ppSession *IRTCSession
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
+	return _ppSession, win32.HRESULTError(int32(r1))
 }
 
 // IID: 09bcb597-f0fa-48f9-b420-468cea7fde04
@@ -1415,21 +1524,24 @@ type IRTCParticipantStateChangeEvent struct {
 var IID_IRTCParticipantStateChangeEvent = win32.GUID{Data1: 0x09bcb597, Data2: 0xf0fa, Data3: 0x48f9, Data4: [8]byte{0xb4, 0x20, 0x46, 0x8c, 0xea, 0x7f, 0xde, 0x04}}
 
 // Get_Participant dispatches through IRTCParticipantStateChangeEvent's vtable slot 7.
-func (self *IRTCParticipantStateChangeEvent) Get_Participant(ppParticipant **IRTCParticipant) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppParticipant)))
-	return foundation.HRESULT(r1)
+func (self *IRTCParticipantStateChangeEvent) Get_Participant() (*IRTCParticipant, error) {
+	var _ppParticipant *IRTCParticipant
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParticipant)))
+	return _ppParticipant, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRTCParticipantStateChangeEvent's vtable slot 8.
-func (self *IRTCParticipantStateChangeEvent) Get_State(penState *RTC_PARTICIPANT_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penState)))
-	return foundation.HRESULT(r1)
+func (self *IRTCParticipantStateChangeEvent) Get_State() (RTC_PARTICIPANT_STATE, error) {
+	var _penState RTC_PARTICIPANT_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
+	return _penState, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCParticipantStateChangeEvent's vtable slot 9.
-func (self *IRTCParticipantStateChangeEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCParticipantStateChangeEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // IID: da77c14b-6208-43ca-8ddf-5b60a0a69fac
@@ -1441,21 +1553,21 @@ type IRTCPortManager struct {
 var IID_IRTCPortManager = win32.GUID{Data1: 0xda77c14b, Data2: 0x6208, Data3: 0x43ca, Data4: [8]byte{0x8d, 0xdf, 0x5b, 0x60, 0xa0, 0xa6, 0x9f, 0xac}}
 
 // GetMapping dispatches through IRTCPortManager's vtable slot 3.
-func (self *IRTCPortManager) GetMapping(bstrRemoteAddress foundation.BSTR, enPortType RTC_PORT_TYPE, pbstrInternalLocalAddress *foundation.BSTR, plInternalLocalPort *int32, pbstrExternalLocalAddress *foundation.BSTR, plExternalLocalPort *int32) foundation.HRESULT {
+func (self *IRTCPortManager) GetMapping(bstrRemoteAddress foundation.BSTR, enPortType RTC_PORT_TYPE, pbstrInternalLocalAddress *foundation.BSTR, plInternalLocalPort *int32, pbstrExternalLocalAddress *foundation.BSTR, plExternalLocalPort *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRemoteAddress)), uintptr(enPortType), uintptr(unsafe.Pointer(pbstrInternalLocalAddress)), uintptr(unsafe.Pointer(plInternalLocalPort)), uintptr(unsafe.Pointer(pbstrExternalLocalAddress)), uintptr(unsafe.Pointer(plExternalLocalPort)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateRemoteAddress dispatches through IRTCPortManager's vtable slot 4.
-func (self *IRTCPortManager) UpdateRemoteAddress(bstrRemoteAddress foundation.BSTR, bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32, bstrExternalLocalAddress foundation.BSTR, lExternalLocalPort int32) foundation.HRESULT {
+func (self *IRTCPortManager) UpdateRemoteAddress(bstrRemoteAddress foundation.BSTR, bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32, bstrExternalLocalAddress foundation.BSTR, lExternalLocalPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRemoteAddress)), uintptr(unsafe.Pointer(bstrInternalLocalAddress)), uintptr(lInternalLocalPort), uintptr(unsafe.Pointer(bstrExternalLocalAddress)), uintptr(lExternalLocalPort))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseMapping dispatches through IRTCPortManager's vtable slot 5.
-func (self *IRTCPortManager) ReleaseMapping(bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32, bstrExternalLocalAddress foundation.BSTR, lExternalLocalAddress int32) foundation.HRESULT {
+func (self *IRTCPortManager) ReleaseMapping(bstrInternalLocalAddress foundation.BSTR, lInternalLocalPort int32, bstrExternalLocalAddress foundation.BSTR, lExternalLocalAddress int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInternalLocalAddress)), uintptr(lInternalLocalPort), uintptr(unsafe.Pointer(bstrExternalLocalAddress)), uintptr(lExternalLocalAddress))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8b22f92c-cd90-42db-a733-212205c3e3df
@@ -1467,51 +1579,55 @@ type IRTCPresenceContact struct {
 var IID_IRTCPresenceContact = win32.GUID{Data1: 0x8b22f92c, Data2: 0xcd90, Data3: 0x42db, Data4: [8]byte{0xa7, 0x33, 0x21, 0x22, 0x05, 0xc3, 0xe3, 0xdf}}
 
 // Get_PresentityURI dispatches through IRTCPresenceContact's vtable slot 3.
-func (self *IRTCPresenceContact) Get_PresentityURI(pbstrPresentityURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPresentityURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceContact) Get_PresentityURI() (foundation.BSTR, error) {
+	var _pbstrPresentityURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrPresentityURI)))
+	return _pbstrPresentityURI, win32.HRESULTError(int32(r1))
 }
 
 // Put_PresentityURI dispatches through IRTCPresenceContact's vtable slot 4.
-func (self *IRTCPresenceContact) Put_PresentityURI(bstrPresentityURI foundation.BSTR) foundation.HRESULT {
+func (self *IRTCPresenceContact) Put_PresentityURI(bstrPresentityURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPresentityURI)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through IRTCPresenceContact's vtable slot 5.
-func (self *IRTCPresenceContact) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceContact) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through IRTCPresenceContact's vtable slot 6.
-func (self *IRTCPresenceContact) Put_Name(bstrName foundation.BSTR) foundation.HRESULT {
+func (self *IRTCPresenceContact) Put_Name(bstrName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Data dispatches through IRTCPresenceContact's vtable slot 7.
-func (self *IRTCPresenceContact) Get_Data(pbstrData *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrData)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceContact) Get_Data() (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
+	return _pbstrData, win32.HRESULTError(int32(r1))
 }
 
 // Put_Data dispatches through IRTCPresenceContact's vtable slot 8.
-func (self *IRTCPresenceContact) Put_Data(bstrData foundation.BSTR) foundation.HRESULT {
+func (self *IRTCPresenceContact) Put_Data(bstrData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Persistent dispatches through IRTCPresenceContact's vtable slot 9.
-func (self *IRTCPresenceContact) Get_Persistent(pfPersistent *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfPersistent)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceContact) Get_Persistent() (foundation.VARIANT_BOOL, error) {
+	var _pfPersistent foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfPersistent)))
+	return _pfPersistent, win32.HRESULTError(int32(r1))
 }
 
 // Put_Persistent dispatches through IRTCPresenceContact's vtable slot 10.
-func (self *IRTCPresenceContact) Put_Persistent(fPersistent foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRTCPresenceContact) Put_Persistent(fPersistent foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fPersistent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 38f0e78c-8b87-4c04-a82d-aedd83c909bb
@@ -1523,21 +1639,23 @@ type IRTCPresenceDataEvent struct {
 var IID_IRTCPresenceDataEvent = win32.GUID{Data1: 0x38f0e78c, Data2: 0x8b87, Data3: 0x4c04, Data4: [8]byte{0xa8, 0x2d, 0xae, 0xdd, 0x83, 0xc9, 0x09, 0xbb}}
 
 // Get_StatusCode dispatches through IRTCPresenceDataEvent's vtable slot 7.
-func (self *IRTCPresenceDataEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceDataEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCPresenceDataEvent's vtable slot 8.
-func (self *IRTCPresenceDataEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceDataEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
+	return _pbstrStatusText, win32.HRESULTError(int32(r1))
 }
 
 // GetPresenceData dispatches through IRTCPresenceDataEvent's vtable slot 9.
-func (self *IRTCPresenceDataEvent) GetPresenceData(pbstrNamespace *foundation.BSTR, pbstrData *foundation.BSTR) foundation.HRESULT {
+func (self *IRTCPresenceDataEvent) GetPresenceData(pbstrNamespace *foundation.BSTR, pbstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNamespace)), uintptr(unsafe.Pointer(pbstrData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bc6a90dd-ad9a-48da-9b0c-2515e38521ad
@@ -1549,27 +1667,30 @@ type IRTCPresenceDevice struct {
 var IID_IRTCPresenceDevice = win32.GUID{Data1: 0xbc6a90dd, Data2: 0xad9a, Data3: 0x48da, Data4: [8]byte{0x9b, 0x0c, 0x25, 0x15, 0xe3, 0x85, 0x21, 0xad}}
 
 // Get_Status dispatches through IRTCPresenceDevice's vtable slot 3.
-func (self *IRTCPresenceDevice) Get_Status(penStatus *RTC_PRESENCE_STATUS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penStatus)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceDevice) Get_Status() (RTC_PRESENCE_STATUS, error) {
+	var _penStatus RTC_PRESENCE_STATUS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penStatus)))
+	return _penStatus, win32.HRESULTError(int32(r1))
 }
 
 // Get_Notes dispatches through IRTCPresenceDevice's vtable slot 4.
-func (self *IRTCPresenceDevice) Get_Notes(pbstrNotes *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNotes)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceDevice) Get_Notes() (foundation.BSTR, error) {
+	var _pbstrNotes foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNotes)))
+	return _pbstrNotes, win32.HRESULTError(int32(r1))
 }
 
 // Get_PresenceProperty dispatches through IRTCPresenceDevice's vtable slot 5.
-func (self *IRTCPresenceDevice) Get_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY, pbstrProperty *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(pbstrProperty)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceDevice) Get_PresenceProperty(enProperty RTC_PRESENCE_PROPERTY) (foundation.BSTR, error) {
+	var _pbstrProperty foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(enProperty), uintptr(unsafe.Pointer(&_pbstrProperty)))
+	return _pbstrProperty, win32.HRESULTError(int32(r1))
 }
 
 // GetPresenceData dispatches through IRTCPresenceDevice's vtable slot 6.
-func (self *IRTCPresenceDevice) GetPresenceData(pbstrNamespace *foundation.BSTR, pbstrData *foundation.BSTR) foundation.HRESULT {
+func (self *IRTCPresenceDevice) GetPresenceData(pbstrNamespace *foundation.BSTR, pbstrData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNamespace)), uintptr(unsafe.Pointer(pbstrData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f777f570-a820-49d5-86bd-e099493f1518
@@ -1581,27 +1702,31 @@ type IRTCPresencePropertyEvent struct {
 var IID_IRTCPresencePropertyEvent = win32.GUID{Data1: 0xf777f570, Data2: 0xa820, Data3: 0x49d5, Data4: [8]byte{0x86, 0xbd, 0xe0, 0x99, 0x49, 0x3f, 0x15, 0x18}}
 
 // Get_StatusCode dispatches through IRTCPresencePropertyEvent's vtable slot 7.
-func (self *IRTCPresencePropertyEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresencePropertyEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCPresencePropertyEvent's vtable slot 8.
-func (self *IRTCPresencePropertyEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresencePropertyEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
+	return _pbstrStatusText, win32.HRESULTError(int32(r1))
 }
 
 // Get_PresenceProperty dispatches through IRTCPresencePropertyEvent's vtable slot 9.
-func (self *IRTCPresencePropertyEvent) Get_PresenceProperty(penPresProp *RTC_PRESENCE_PROPERTY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penPresProp)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresencePropertyEvent) Get_PresenceProperty() (RTC_PRESENCE_PROPERTY, error) {
+	var _penPresProp RTC_PRESENCE_PROPERTY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penPresProp)))
+	return _penPresProp, win32.HRESULTError(int32(r1))
 }
 
 // Get_Value dispatches through IRTCPresencePropertyEvent's vtable slot 10.
-func (self *IRTCPresencePropertyEvent) Get_Value(pbstrValue *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrValue)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresencePropertyEvent) Get_Value() (foundation.BSTR, error) {
+	var _pbstrValue foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrValue)))
+	return _pbstrValue, win32.HRESULTError(int32(r1))
 }
 
 // IID: 78673f32-4a0f-462c-89aa-ee7706707678
@@ -1613,21 +1738,23 @@ type IRTCPresenceStatusEvent struct {
 var IID_IRTCPresenceStatusEvent = win32.GUID{Data1: 0x78673f32, Data2: 0x4a0f, Data3: 0x462c, Data4: [8]byte{0x89, 0xaa, 0xee, 0x77, 0x06, 0x70, 0x76, 0x78}}
 
 // Get_StatusCode dispatches through IRTCPresenceStatusEvent's vtable slot 7.
-func (self *IRTCPresenceStatusEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceStatusEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCPresenceStatusEvent's vtable slot 8.
-func (self *IRTCPresenceStatusEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IRTCPresenceStatusEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
+	return _pbstrStatusText, win32.HRESULTError(int32(r1))
 }
 
 // GetLocalPresenceInfo dispatches through IRTCPresenceStatusEvent's vtable slot 9.
-func (self *IRTCPresenceStatusEvent) GetLocalPresenceInfo(penStatus *RTC_PRESENCE_STATUS, pbstrNotes *foundation.BSTR) foundation.HRESULT {
+func (self *IRTCPresenceStatusEvent) GetLocalPresenceInfo(penStatus *RTC_PRESENCE_STATUS, pbstrNotes *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penStatus)), uintptr(unsafe.Pointer(pbstrNotes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d07eca9e-4062-4dd4-9e7d-722a49ba7303
@@ -1639,111 +1766,128 @@ type IRTCProfile struct {
 var IID_IRTCProfile = win32.GUID{Data1: 0xd07eca9e, Data2: 0x4062, Data3: 0x4dd4, Data4: [8]byte{0x9e, 0x7d, 0x72, 0x2a, 0x49, 0xba, 0x73, 0x03}}
 
 // Get_Key dispatches through IRTCProfile's vtable slot 3.
-func (self *IRTCProfile) Get_Key(pbstrKey *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrKey)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_Key() (foundation.BSTR, error) {
+	var _pbstrKey foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrKey)))
+	return _pbstrKey, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through IRTCProfile's vtable slot 4.
-func (self *IRTCProfile) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_XML dispatches through IRTCProfile's vtable slot 5.
-func (self *IRTCProfile) Get_XML(pbstrXML *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrXML)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_XML() (foundation.BSTR, error) {
+	var _pbstrXML foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrXML)))
+	return _pbstrXML, win32.HRESULTError(int32(r1))
 }
 
 // Get_ProviderName dispatches through IRTCProfile's vtable slot 6.
-func (self *IRTCProfile) Get_ProviderName(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_ProviderName() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_ProviderURI dispatches through IRTCProfile's vtable slot 7.
-func (self *IRTCProfile) Get_ProviderURI(enURI RTC_PROVIDER_URI, pbstrURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enURI), uintptr(unsafe.Pointer(pbstrURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_ProviderURI(enURI RTC_PROVIDER_URI) (foundation.BSTR, error) {
+	var _pbstrURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enURI), uintptr(unsafe.Pointer(&_pbstrURI)))
+	return _pbstrURI, win32.HRESULTError(int32(r1))
 }
 
 // Get_ProviderData dispatches through IRTCProfile's vtable slot 8.
-func (self *IRTCProfile) Get_ProviderData(pbstrData *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrData)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_ProviderData() (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
+	return _pbstrData, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClientName dispatches through IRTCProfile's vtable slot 9.
-func (self *IRTCProfile) Get_ClientName(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_ClientName() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClientBanner dispatches through IRTCProfile's vtable slot 10.
-func (self *IRTCProfile) Get_ClientBanner(pfBanner *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfBanner)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_ClientBanner() (foundation.VARIANT_BOOL, error) {
+	var _pfBanner foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfBanner)))
+	return _pfBanner, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClientMinVer dispatches through IRTCProfile's vtable slot 11.
-func (self *IRTCProfile) Get_ClientMinVer(pbstrMinVer *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrMinVer)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_ClientMinVer() (foundation.BSTR, error) {
+	var _pbstrMinVer foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrMinVer)))
+	return _pbstrMinVer, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClientCurVer dispatches through IRTCProfile's vtable slot 12.
-func (self *IRTCProfile) Get_ClientCurVer(pbstrCurVer *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrCurVer)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_ClientCurVer() (foundation.BSTR, error) {
+	var _pbstrCurVer foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrCurVer)))
+	return _pbstrCurVer, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClientUpdateURI dispatches through IRTCProfile's vtable slot 13.
-func (self *IRTCProfile) Get_ClientUpdateURI(pbstrUpdateURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUpdateURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_ClientUpdateURI() (foundation.BSTR, error) {
+	var _pbstrUpdateURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUpdateURI)))
+	return _pbstrUpdateURI, win32.HRESULTError(int32(r1))
 }
 
 // Get_ClientData dispatches through IRTCProfile's vtable slot 14.
-func (self *IRTCProfile) Get_ClientData(pbstrData *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrData)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_ClientData() (foundation.BSTR, error) {
+	var _pbstrData foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrData)))
+	return _pbstrData, win32.HRESULTError(int32(r1))
 }
 
 // Get_UserURI dispatches through IRTCProfile's vtable slot 15.
-func (self *IRTCProfile) Get_UserURI(pbstrUserURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUserURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_UserURI() (foundation.BSTR, error) {
+	var _pbstrUserURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserURI)))
+	return _pbstrUserURI, win32.HRESULTError(int32(r1))
 }
 
 // Get_UserName dispatches through IRTCProfile's vtable slot 16.
-func (self *IRTCProfile) Get_UserName(pbstrUserName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUserName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_UserName() (foundation.BSTR, error) {
+	var _pbstrUserName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserName)))
+	return _pbstrUserName, win32.HRESULTError(int32(r1))
 }
 
 // Get_UserAccount dispatches through IRTCProfile's vtable slot 17.
-func (self *IRTCProfile) Get_UserAccount(pbstrUserAccount *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUserAccount)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_UserAccount() (foundation.BSTR, error) {
+	var _pbstrUserAccount foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserAccount)))
+	return _pbstrUserAccount, win32.HRESULTError(int32(r1))
 }
 
 // SetCredentials dispatches through IRTCProfile's vtable slot 18.
-func (self *IRTCProfile) SetCredentials(bstrUserURI foundation.BSTR, bstrUserAccount foundation.BSTR, bstrPassword foundation.BSTR) foundation.HRESULT {
+func (self *IRTCProfile) SetCredentials(bstrUserURI foundation.BSTR, bstrUserAccount foundation.BSTR, bstrPassword foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserURI)), uintptr(unsafe.Pointer(bstrUserAccount)), uintptr(unsafe.Pointer(bstrPassword)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SessionCapabilities dispatches through IRTCProfile's vtable slot 19.
-func (self *IRTCProfile) Get_SessionCapabilities(plSupportedSessions *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plSupportedSessions)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_SessionCapabilities() (int32, error) {
+	var _plSupportedSessions int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plSupportedSessions)))
+	return _plSupportedSessions, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRTCProfile's vtable slot 20.
-func (self *IRTCProfile) Get_State(penState *RTC_REGISTRATION_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penState)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile) Get_State() (RTC_REGISTRATION_STATE, error) {
+	var _penState RTC_REGISTRATION_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
+	return _penState, win32.HRESULTError(int32(r1))
 }
 
 // IID: 4b81f84e-bdc7-4184-9154-3cb2dd7917fb
@@ -1755,27 +1899,29 @@ type IRTCProfile2 struct {
 var IID_IRTCProfile2 = win32.GUID{Data1: 0x4b81f84e, Data2: 0xbdc7, Data3: 0x4184, Data4: [8]byte{0x91, 0x54, 0x3c, 0xb2, 0xdd, 0x79, 0x17, 0xfb}}
 
 // Get_Realm dispatches through IRTCProfile2's vtable slot 21.
-func (self *IRTCProfile2) Get_Realm(pbstrRealm *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrRealm)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile2) Get_Realm() (foundation.BSTR, error) {
+	var _pbstrRealm foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrRealm)))
+	return _pbstrRealm, win32.HRESULTError(int32(r1))
 }
 
 // Put_Realm dispatches through IRTCProfile2's vtable slot 22.
-func (self *IRTCProfile2) Put_Realm(bstrRealm foundation.BSTR) foundation.HRESULT {
+func (self *IRTCProfile2) Put_Realm(bstrRealm foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRealm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowedAuth dispatches through IRTCProfile2's vtable slot 23.
-func (self *IRTCProfile2) Get_AllowedAuth(plAllowedAuth *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAllowedAuth)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfile2) Get_AllowedAuth() (int32, error) {
+	var _plAllowedAuth int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plAllowedAuth)))
+	return _plAllowedAuth, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowedAuth dispatches through IRTCProfile2's vtable slot 24.
-func (self *IRTCProfile2) Put_AllowedAuth(lAllowedAuth int32) foundation.HRESULT {
+func (self *IRTCProfile2) Put_AllowedAuth(lAllowedAuth int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lAllowedAuth))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d6d5ab3b-770e-43e8-800a-79b062395fca
@@ -1787,21 +1933,24 @@ type IRTCProfileEvent struct {
 var IID_IRTCProfileEvent = win32.GUID{Data1: 0xd6d5ab3b, Data2: 0x770e, Data3: 0x43e8, Data4: [8]byte{0x80, 0x0a, 0x79, 0xb0, 0x62, 0x39, 0x5f, 0xca}}
 
 // Get_Profile dispatches through IRTCProfileEvent's vtable slot 7.
-func (self *IRTCProfileEvent) Get_Profile(ppProfile **IRTCProfile) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfileEvent) Get_Profile() (*IRTCProfile, error) {
+	var _ppProfile *IRTCProfile
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
+	return _ppProfile, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cookie dispatches through IRTCProfileEvent's vtable slot 8.
-func (self *IRTCProfileEvent) Get_Cookie(plCookie *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCookie)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfileEvent) Get_Cookie() (uintptr, error) {
+	var _plCookie uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCookie)))
+	return _plCookie, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCProfileEvent's vtable slot 9.
-func (self *IRTCProfileEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfileEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // IID: 62e56edc-03fa-4121-94fb-23493fd0ae64
@@ -1813,9 +1962,10 @@ type IRTCProfileEvent2 struct {
 var IID_IRTCProfileEvent2 = win32.GUID{Data1: 0x62e56edc, Data2: 0x03fa, Data3: 0x4121, Data4: [8]byte{0x94, 0xfb, 0x23, 0x49, 0x3f, 0xd0, 0xae, 0x64}}
 
 // Get_EventType dispatches through IRTCProfileEvent2's vtable slot 10.
-func (self *IRTCProfileEvent2) Get_EventType(pEventType *RTC_PROFILE_EVENT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCProfileEvent2) Get_EventType() (RTC_PROFILE_EVENT_TYPE, error) {
+	var _pEventType RTC_PROFILE_EVENT_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
+	return _pEventType, win32.HRESULTError(int32(r1))
 }
 
 // IID: 11558d84-204c-43e7-99b0-2034e9417f7d
@@ -1827,33 +1977,35 @@ type IRTCReInviteEvent struct {
 var IID_IRTCReInviteEvent = win32.GUID{Data1: 0x11558d84, Data2: 0x204c, Data3: 0x43e7, Data4: [8]byte{0x99, 0xb0, 0x20, 0x34, 0xe9, 0x41, 0x7f, 0x7d}}
 
 // Get_Session dispatches through IRTCReInviteEvent's vtable slot 7.
-func (self *IRTCReInviteEvent) Get_Session(ppSession2 **IRTCSession2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession2)))
-	return foundation.HRESULT(r1)
+func (self *IRTCReInviteEvent) Get_Session() (*IRTCSession2, error) {
+	var _ppSession2 *IRTCSession2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession2)))
+	return _ppSession2, win32.HRESULTError(int32(r1))
 }
 
 // Accept dispatches through IRTCReInviteEvent's vtable slot 8.
-func (self *IRTCReInviteEvent) Accept(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR) foundation.HRESULT {
+func (self *IRTCReInviteEvent) Accept(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reject dispatches through IRTCReInviteEvent's vtable slot 9.
-func (self *IRTCReInviteEvent) Reject() foundation.HRESULT {
+func (self *IRTCReInviteEvent) Reject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRTCReInviteEvent's vtable slot 10.
-func (self *IRTCReInviteEvent) Get_State(pState *RTC_REINVITE_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+func (self *IRTCReInviteEvent) Get_State() (RTC_REINVITE_STATE, error) {
+	var _pState RTC_REINVITE_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
+	return _pState, win32.HRESULTError(int32(r1))
 }
 
 // GetRemoteSessionDescription dispatches through IRTCReInviteEvent's vtable slot 11.
-func (self *IRTCReInviteEvent) GetRemoteSessionDescription(pbstrContentType *foundation.BSTR, pbstrSessionDescription *foundation.BSTR) foundation.HRESULT {
+func (self *IRTCReInviteEvent) GetRemoteSessionDescription(pbstrContentType *foundation.BSTR, pbstrSessionDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContentType)), uintptr(unsafe.Pointer(pbstrSessionDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 62d0991b-50ab-4f02-b948-ca94f26f8f95
@@ -1865,27 +2017,31 @@ type IRTCRegistrationStateChangeEvent struct {
 var IID_IRTCRegistrationStateChangeEvent = win32.GUID{Data1: 0x62d0991b, Data2: 0x50ab, Data3: 0x4f02, Data4: [8]byte{0xb9, 0x48, 0xca, 0x94, 0xf2, 0x6f, 0x8f, 0x95}}
 
 // Get_Profile dispatches through IRTCRegistrationStateChangeEvent's vtable slot 7.
-func (self *IRTCRegistrationStateChangeEvent) Get_Profile(ppProfile **IRTCProfile) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func (self *IRTCRegistrationStateChangeEvent) Get_Profile() (*IRTCProfile, error) {
+	var _ppProfile *IRTCProfile
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
+	return _ppProfile, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRTCRegistrationStateChangeEvent's vtable slot 8.
-func (self *IRTCRegistrationStateChangeEvent) Get_State(penState *RTC_REGISTRATION_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penState)))
-	return foundation.HRESULT(r1)
+func (self *IRTCRegistrationStateChangeEvent) Get_State() (RTC_REGISTRATION_STATE, error) {
+	var _penState RTC_REGISTRATION_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
+	return _penState, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCRegistrationStateChangeEvent's vtable slot 9.
-func (self *IRTCRegistrationStateChangeEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCRegistrationStateChangeEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCRegistrationStateChangeEvent's vtable slot 10.
-func (self *IRTCRegistrationStateChangeEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IRTCRegistrationStateChangeEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
+	return _pbstrStatusText, win32.HRESULTError(int32(r1))
 }
 
 // IID: 79960a6b-0cb1-4dc8-a805-7318e99902e8
@@ -1897,27 +2053,31 @@ type IRTCRoamingEvent struct {
 var IID_IRTCRoamingEvent = win32.GUID{Data1: 0x79960a6b, Data2: 0x0cb1, Data3: 0x4dc8, Data4: [8]byte{0xa8, 0x05, 0x73, 0x18, 0xe9, 0x99, 0x02, 0xe8}}
 
 // Get_EventType dispatches through IRTCRoamingEvent's vtable slot 7.
-func (self *IRTCRoamingEvent) Get_EventType(pEventType *RTC_ROAMING_EVENT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCRoamingEvent) Get_EventType() (RTC_ROAMING_EVENT_TYPE, error) {
+	var _pEventType RTC_ROAMING_EVENT_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
+	return _pEventType, win32.HRESULTError(int32(r1))
 }
 
 // Get_Profile dispatches through IRTCRoamingEvent's vtable slot 8.
-func (self *IRTCRoamingEvent) Get_Profile(ppProfile **IRTCProfile2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func (self *IRTCRoamingEvent) Get_Profile() (*IRTCProfile2, error) {
+	var _ppProfile *IRTCProfile2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
+	return _ppProfile, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCRoamingEvent's vtable slot 9.
-func (self *IRTCRoamingEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCRoamingEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCRoamingEvent's vtable slot 10.
-func (self *IRTCRoamingEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IRTCRoamingEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
+	return _pbstrStatusText, win32.HRESULTError(int32(r1))
 }
 
 // IID: 387c8086-99be-42fb-9973-7c0fc0ca9fa8
@@ -1929,123 +2089,133 @@ type IRTCSession struct {
 var IID_IRTCSession = win32.GUID{Data1: 0x387c8086, Data2: 0x99be, Data3: 0x42fb, Data4: [8]byte{0x99, 0x73, 0x7c, 0x0f, 0xc0, 0xca, 0x9f, 0xa8}}
 
 // Get_Client dispatches through IRTCSession's vtable slot 3.
-func (self *IRTCSession) Get_Client(ppClient **IRTCClient) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClient)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) Get_Client() (*IRTCClient, error) {
+	var _ppClient *IRTCClient
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppClient)))
+	return _ppClient, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRTCSession's vtable slot 4.
-func (self *IRTCSession) Get_State(penState *RTC_SESSION_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penState)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) Get_State() (RTC_SESSION_STATE, error) {
+	var _penState RTC_SESSION_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
+	return _penState, win32.HRESULTError(int32(r1))
 }
 
 // Get_Type dispatches through IRTCSession's vtable slot 5.
-func (self *IRTCSession) Get_Type(penType *RTC_SESSION_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) Get_Type() (RTC_SESSION_TYPE, error) {
+	var _penType RTC_SESSION_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penType)))
+	return _penType, win32.HRESULTError(int32(r1))
 }
 
 // Get_Profile dispatches through IRTCSession's vtable slot 6.
-func (self *IRTCSession) Get_Profile(ppProfile **IRTCProfile) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) Get_Profile() (*IRTCProfile, error) {
+	var _ppProfile *IRTCProfile
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
+	return _ppProfile, win32.HRESULTError(int32(r1))
 }
 
 // Get_Participants dispatches through IRTCSession's vtable slot 7.
-func (self *IRTCSession) Get_Participants(ppCollection **IRTCCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) Get_Participants() (*IRTCCollection, error) {
+	var _ppCollection *IRTCCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
+	return _ppCollection, win32.HRESULTError(int32(r1))
 }
 
 // Answer dispatches through IRTCSession's vtable slot 8.
-func (self *IRTCSession) Answer() foundation.HRESULT {
+func (self *IRTCSession) Answer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Terminate dispatches through IRTCSession's vtable slot 9.
-func (self *IRTCSession) Terminate(enReason RTC_TERMINATE_REASON) foundation.HRESULT {
+func (self *IRTCSession) Terminate(enReason RTC_TERMINATE_REASON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(enReason))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Redirect dispatches through IRTCSession's vtable slot 10.
-func (self *IRTCSession) Redirect(enType RTC_SESSION_TYPE, bstrLocalPhoneURI foundation.BSTR, pProfile *IRTCProfile, lFlags int32) foundation.HRESULT {
+func (self *IRTCSession) Redirect(enType RTC_SESSION_TYPE, bstrLocalPhoneURI foundation.BSTR, pProfile *IRTCProfile, lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(enType), uintptr(unsafe.Pointer(bstrLocalPhoneURI)), uintptr(unsafe.Pointer(pProfile)), uintptr(lFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddParticipant dispatches through IRTCSession's vtable slot 11.
-func (self *IRTCSession) AddParticipant(bstrAddress foundation.BSTR, bstrName foundation.BSTR, ppParticipant **IRTCParticipant) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAddress)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(ppParticipant)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) AddParticipant(bstrAddress foundation.BSTR, bstrName foundation.BSTR) (*IRTCParticipant, error) {
+	var _ppParticipant *IRTCParticipant
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAddress)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_ppParticipant)))
+	return _ppParticipant, win32.HRESULTError(int32(r1))
 }
 
 // RemoveParticipant dispatches through IRTCSession's vtable slot 12.
-func (self *IRTCSession) RemoveParticipant(pParticipant *IRTCParticipant) foundation.HRESULT {
+func (self *IRTCSession) RemoveParticipant(pParticipant *IRTCParticipant) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParticipant)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateParticipants dispatches through IRTCSession's vtable slot 13.
-func (self *IRTCSession) EnumerateParticipants(ppEnum **IRTCEnumParticipants) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) EnumerateParticipants() (*IRTCEnumParticipants, error) {
+	var _ppEnum *IRTCEnumParticipants
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_CanAddParticipants dispatches through IRTCSession's vtable slot 14.
-func (self *IRTCSession) Get_CanAddParticipants(pfCanAdd *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCanAdd)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) Get_CanAddParticipants() (foundation.VARIANT_BOOL, error) {
+	var _pfCanAdd foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfCanAdd)))
+	return _pfCanAdd, win32.HRESULTError(int32(r1))
 }
 
 // Get_RedirectedUserURI dispatches through IRTCSession's vtable slot 15.
-func (self *IRTCSession) Get_RedirectedUserURI(pbstrUserURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUserURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) Get_RedirectedUserURI() (foundation.BSTR, error) {
+	var _pbstrUserURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserURI)))
+	return _pbstrUserURI, win32.HRESULTError(int32(r1))
 }
 
 // Get_RedirectedUserName dispatches through IRTCSession's vtable slot 16.
-func (self *IRTCSession) Get_RedirectedUserName(pbstrUserName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrUserName)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession) Get_RedirectedUserName() (foundation.BSTR, error) {
+	var _pbstrUserName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrUserName)))
+	return _pbstrUserName, win32.HRESULTError(int32(r1))
 }
 
 // NextRedirectedUser dispatches through IRTCSession's vtable slot 17.
-func (self *IRTCSession) NextRedirectedUser() foundation.HRESULT {
+func (self *IRTCSession) NextRedirectedUser() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendMessage dispatches through IRTCSession's vtable slot 18.
-func (self *IRTCSession) SendMessage(bstrMessageHeader foundation.BSTR, bstrMessage foundation.BSTR, lCookie uintptr) foundation.HRESULT {
+func (self *IRTCSession) SendMessage(bstrMessageHeader foundation.BSTR, bstrMessage foundation.BSTR, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMessageHeader)), uintptr(unsafe.Pointer(bstrMessage)), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendMessageStatus dispatches through IRTCSession's vtable slot 19.
-func (self *IRTCSession) SendMessageStatus(enUserStatus RTC_MESSAGING_USER_STATUS, lCookie uintptr) foundation.HRESULT {
+func (self *IRTCSession) SendMessageStatus(enUserStatus RTC_MESSAGING_USER_STATUS, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(enUserStatus), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStream dispatches through IRTCSession's vtable slot 20.
-func (self *IRTCSession) AddStream(lMediaType int32, lCookie uintptr) foundation.HRESULT {
+func (self *IRTCSession) AddStream(lMediaType int32, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStream dispatches through IRTCSession's vtable slot 21.
-func (self *IRTCSession) RemoveStream(lMediaType int32, lCookie uintptr) foundation.HRESULT {
+func (self *IRTCSession) RemoveStream(lMediaType int32, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EncryptionKey dispatches through IRTCSession's vtable slot 22.
-func (self *IRTCSession) Put_EncryptionKey(lMediaType int32, EncryptionKey foundation.BSTR) foundation.HRESULT {
+func (self *IRTCSession) Put_EncryptionKey(lMediaType int32, EncryptionKey foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(unsafe.Pointer(EncryptionKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 17d7cdfc-b007-484c-99d2-86a8a820991d
@@ -2057,39 +2227,41 @@ type IRTCSession2 struct {
 var IID_IRTCSession2 = win32.GUID{Data1: 0x17d7cdfc, Data2: 0xb007, Data3: 0x484c, Data4: [8]byte{0x99, 0xd2, 0x86, 0xa8, 0xa8, 0x20, 0x99, 0x1d}}
 
 // SendInfo dispatches through IRTCSession2's vtable slot 23.
-func (self *IRTCSession2) SendInfo(bstrInfoHeader foundation.BSTR, bstrInfo foundation.BSTR, lCookie uintptr) foundation.HRESULT {
+func (self *IRTCSession2) SendInfo(bstrInfoHeader foundation.BSTR, bstrInfo foundation.BSTR, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInfoHeader)), uintptr(unsafe.Pointer(bstrInfo)), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_PreferredSecurityLevel dispatches through IRTCSession2's vtable slot 24.
-func (self *IRTCSession2) Put_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, enSecurityLevel RTC_SECURITY_LEVEL) foundation.HRESULT {
+func (self *IRTCSession2) Put_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, enSecurityLevel RTC_SECURITY_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(enSecurityLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredSecurityLevel dispatches through IRTCSession2's vtable slot 25.
-func (self *IRTCSession2) Get_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, penSecurityLevel *RTC_SECURITY_LEVEL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(penSecurityLevel)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession2) Get_PreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE) (RTC_SECURITY_LEVEL, error) {
+	var _penSecurityLevel RTC_SECURITY_LEVEL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_penSecurityLevel)))
+	return _penSecurityLevel, win32.HRESULTError(int32(r1))
 }
 
 // IsSecurityEnabled dispatches through IRTCSession2's vtable slot 26.
-func (self *IRTCSession2) IsSecurityEnabled(enSecurityType RTC_SECURITY_TYPE, pfSecurityEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(pfSecurityEnabled)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSession2) IsSecurityEnabled(enSecurityType RTC_SECURITY_TYPE) (foundation.VARIANT_BOOL, error) {
+	var _pfSecurityEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_pfSecurityEnabled)))
+	return _pfSecurityEnabled, win32.HRESULTError(int32(r1))
 }
 
 // AnswerWithSessionDescription dispatches through IRTCSession2's vtable slot 27.
-func (self *IRTCSession2) AnswerWithSessionDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR) foundation.HRESULT {
+func (self *IRTCSession2) AnswerWithSessionDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReInviteWithSessionDescription dispatches through IRTCSession2's vtable slot 28.
-func (self *IRTCSession2) ReInviteWithSessionDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, lCookie uintptr) foundation.HRESULT {
+func (self *IRTCSession2) ReInviteWithSessionDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e9a50d94-190b-4f82-9530-3b8ebf60758a
@@ -2101,57 +2273,60 @@ type IRTCSessionCallControl struct {
 var IID_IRTCSessionCallControl = win32.GUID{Data1: 0xe9a50d94, Data2: 0x190b, Data3: 0x4f82, Data4: [8]byte{0x95, 0x30, 0x3b, 0x8e, 0xbf, 0x60, 0x75, 0x8a}}
 
 // Hold dispatches through IRTCSessionCallControl's vtable slot 3.
-func (self *IRTCSessionCallControl) Hold(lCookie uintptr) foundation.HRESULT {
+func (self *IRTCSessionCallControl) Hold(lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnHold dispatches through IRTCSessionCallControl's vtable slot 4.
-func (self *IRTCSessionCallControl) UnHold(lCookie uintptr) foundation.HRESULT {
+func (self *IRTCSessionCallControl) UnHold(lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Forward dispatches through IRTCSessionCallControl's vtable slot 5.
-func (self *IRTCSessionCallControl) Forward(bstrForwardToURI foundation.BSTR) foundation.HRESULT {
+func (self *IRTCSessionCallControl) Forward(bstrForwardToURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrForwardToURI)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refer dispatches through IRTCSessionCallControl's vtable slot 6.
-func (self *IRTCSessionCallControl) Refer(bstrReferToURI foundation.BSTR, bstrReferCookie foundation.BSTR) foundation.HRESULT {
+func (self *IRTCSessionCallControl) Refer(bstrReferToURI foundation.BSTR, bstrReferCookie foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReferToURI)), uintptr(unsafe.Pointer(bstrReferCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ReferredByURI dispatches through IRTCSessionCallControl's vtable slot 7.
-func (self *IRTCSessionCallControl) Put_ReferredByURI(bstrReferredByURI foundation.BSTR) foundation.HRESULT {
+func (self *IRTCSessionCallControl) Put_ReferredByURI(bstrReferredByURI foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReferredByURI)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReferredByURI dispatches through IRTCSessionCallControl's vtable slot 8.
-func (self *IRTCSessionCallControl) Get_ReferredByURI(pbstrReferredByURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrReferredByURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionCallControl) Get_ReferredByURI() (foundation.BSTR, error) {
+	var _pbstrReferredByURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferredByURI)))
+	return _pbstrReferredByURI, win32.HRESULTError(int32(r1))
 }
 
 // Put_ReferCookie dispatches through IRTCSessionCallControl's vtable slot 9.
-func (self *IRTCSessionCallControl) Put_ReferCookie(bstrReferCookie foundation.BSTR) foundation.HRESULT {
+func (self *IRTCSessionCallControl) Put_ReferCookie(bstrReferCookie foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReferCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReferCookie dispatches through IRTCSessionCallControl's vtable slot 10.
-func (self *IRTCSessionCallControl) Get_ReferCookie(pbstrReferCookie *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrReferCookie)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionCallControl) Get_ReferCookie() (foundation.BSTR, error) {
+	var _pbstrReferCookie foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferCookie)))
+	return _pbstrReferCookie, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsReferred dispatches through IRTCSessionCallControl's vtable slot 11.
-func (self *IRTCSessionCallControl) Get_IsReferred(pfIsReferred *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsReferred)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionCallControl) Get_IsReferred() (foundation.VARIANT_BOOL, error) {
+	var _pfIsReferred foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfIsReferred)))
+	return _pfIsReferred, win32.HRESULTError(int32(r1))
 }
 
 // IID: ba7f518e-d336-4070-93a6-865395c843f9
@@ -2163,9 +2338,9 @@ type IRTCSessionDescriptionManager struct {
 var IID_IRTCSessionDescriptionManager = win32.GUID{Data1: 0xba7f518e, Data2: 0xd336, Data3: 0x4070, Data4: [8]byte{0x93, 0xa6, 0x86, 0x53, 0x95, 0xc8, 0x43, 0xf9}}
 
 // EvaluateSessionDescription dispatches through IRTCSessionDescriptionManager's vtable slot 3.
-func (self *IRTCSessionDescriptionManager) EvaluateSessionDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, pfApplicationSession *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRTCSessionDescriptionManager) EvaluateSessionDescription(bstrContentType foundation.BSTR, bstrSessionDescription foundation.BSTR, pfApplicationSession *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrContentType)), uintptr(unsafe.Pointer(bstrSessionDescription)), uintptr(unsafe.Pointer(pfApplicationSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a6bff4c0-f7c8-4d3c-9a41-3550f78a95b0
@@ -2177,27 +2352,31 @@ type IRTCSessionOperationCompleteEvent struct {
 var IID_IRTCSessionOperationCompleteEvent = win32.GUID{Data1: 0xa6bff4c0, Data2: 0xf7c8, Data3: 0x4d3c, Data4: [8]byte{0x9a, 0x41, 0x35, 0x50, 0xf7, 0x8a, 0x95, 0xb0}}
 
 // Get_Session dispatches through IRTCSessionOperationCompleteEvent's vtable slot 7.
-func (self *IRTCSessionOperationCompleteEvent) Get_Session(ppSession **IRTCSession) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionOperationCompleteEvent) Get_Session() (*IRTCSession, error) {
+	var _ppSession *IRTCSession
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
+	return _ppSession, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cookie dispatches through IRTCSessionOperationCompleteEvent's vtable slot 8.
-func (self *IRTCSessionOperationCompleteEvent) Get_Cookie(plCookie *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCookie)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionOperationCompleteEvent) Get_Cookie() (uintptr, error) {
+	var _plCookie uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCookie)))
+	return _plCookie, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCSessionOperationCompleteEvent's vtable slot 9.
-func (self *IRTCSessionOperationCompleteEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionOperationCompleteEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCSessionOperationCompleteEvent's vtable slot 10.
-func (self *IRTCSessionOperationCompleteEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionOperationCompleteEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
+	return _pbstrStatusText, win32.HRESULTError(int32(r1))
 }
 
 // IID: f6fc2a9b-d5bc-4241-b436-1b8460c13832
@@ -2209,15 +2388,16 @@ type IRTCSessionOperationCompleteEvent2 struct {
 var IID_IRTCSessionOperationCompleteEvent2 = win32.GUID{Data1: 0xf6fc2a9b, Data2: 0xd5bc, Data3: 0x4241, Data4: [8]byte{0xb4, 0x36, 0x1b, 0x84, 0x60, 0xc1, 0x38, 0x32}}
 
 // Get_Participant dispatches through IRTCSessionOperationCompleteEvent2's vtable slot 11.
-func (self *IRTCSessionOperationCompleteEvent2) Get_Participant(ppParticipant **IRTCParticipant) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppParticipant)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionOperationCompleteEvent2) Get_Participant() (*IRTCParticipant, error) {
+	var _ppParticipant *IRTCParticipant
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppParticipant)))
+	return _ppParticipant, win32.HRESULTError(int32(r1))
 }
 
 // GetRemoteSessionDescription dispatches through IRTCSessionOperationCompleteEvent2's vtable slot 12.
-func (self *IRTCSessionOperationCompleteEvent2) GetRemoteSessionDescription(pbstrContentType *foundation.BSTR, pbstrSessionDescription *foundation.BSTR) foundation.HRESULT {
+func (self *IRTCSessionOperationCompleteEvent2) GetRemoteSessionDescription(pbstrContentType *foundation.BSTR, pbstrSessionDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContentType)), uintptr(unsafe.Pointer(pbstrSessionDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a072f1d6-0286-4e1f-85f2-17a2948456ec
@@ -2229,9 +2409,9 @@ type IRTCSessionPortManagement struct {
 var IID_IRTCSessionPortManagement = win32.GUID{Data1: 0xa072f1d6, Data2: 0x0286, Data3: 0x4e1f, Data4: [8]byte{0x85, 0xf2, 0x17, 0xa2, 0x94, 0x84, 0x56, 0xec}}
 
 // SetPortManager dispatches through IRTCSessionPortManagement's vtable slot 3.
-func (self *IRTCSessionPortManagement) SetPortManager(pPortManager *IRTCPortManager) foundation.HRESULT {
+func (self *IRTCSessionPortManagement) SetPortManager(pPortManager *IRTCPortManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPortManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3d8fc2cd-5d76-44ab-bb68-2a80353b34a2
@@ -2243,27 +2423,31 @@ type IRTCSessionReferStatusEvent struct {
 var IID_IRTCSessionReferStatusEvent = win32.GUID{Data1: 0x3d8fc2cd, Data2: 0x5d76, Data3: 0x44ab, Data4: [8]byte{0xbb, 0x68, 0x2a, 0x80, 0x35, 0x3b, 0x34, 0xa2}}
 
 // Get_Session dispatches through IRTCSessionReferStatusEvent's vtable slot 7.
-func (self *IRTCSessionReferStatusEvent) Get_Session(ppSession **IRTCSession2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionReferStatusEvent) Get_Session() (*IRTCSession2, error) {
+	var _ppSession *IRTCSession2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
+	return _ppSession, win32.HRESULTError(int32(r1))
 }
 
 // Get_ReferStatus dispatches through IRTCSessionReferStatusEvent's vtable slot 8.
-func (self *IRTCSessionReferStatusEvent) Get_ReferStatus(penReferStatus *RTC_SESSION_REFER_STATUS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penReferStatus)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionReferStatusEvent) Get_ReferStatus() (RTC_SESSION_REFER_STATUS, error) {
+	var _penReferStatus RTC_SESSION_REFER_STATUS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penReferStatus)))
+	return _penReferStatus, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCSessionReferStatusEvent's vtable slot 9.
-func (self *IRTCSessionReferStatusEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionReferStatusEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCSessionReferStatusEvent's vtable slot 10.
-func (self *IRTCSessionReferStatusEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionReferStatusEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
+	return _pbstrStatusText, win32.HRESULTError(int32(r1))
 }
 
 // IID: 176a6828-4fcc-4f28-a862-04597a6cf1c4
@@ -2275,45 +2459,49 @@ type IRTCSessionReferredEvent struct {
 var IID_IRTCSessionReferredEvent = win32.GUID{Data1: 0x176a6828, Data2: 0x4fcc, Data3: 0x4f28, Data4: [8]byte{0xa8, 0x62, 0x04, 0x59, 0x7a, 0x6c, 0xf1, 0xc4}}
 
 // Get_Session dispatches through IRTCSessionReferredEvent's vtable slot 7.
-func (self *IRTCSessionReferredEvent) Get_Session(ppSession **IRTCSession2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionReferredEvent) Get_Session() (*IRTCSession2, error) {
+	var _ppSession *IRTCSession2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
+	return _ppSession, win32.HRESULTError(int32(r1))
 }
 
 // Get_ReferredByURI dispatches through IRTCSessionReferredEvent's vtable slot 8.
-func (self *IRTCSessionReferredEvent) Get_ReferredByURI(pbstrReferredByURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrReferredByURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionReferredEvent) Get_ReferredByURI() (foundation.BSTR, error) {
+	var _pbstrReferredByURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferredByURI)))
+	return _pbstrReferredByURI, win32.HRESULTError(int32(r1))
 }
 
 // Get_ReferToURI dispatches through IRTCSessionReferredEvent's vtable slot 9.
-func (self *IRTCSessionReferredEvent) Get_ReferToURI(pbstrReferoURI *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrReferoURI)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionReferredEvent) Get_ReferToURI() (foundation.BSTR, error) {
+	var _pbstrReferoURI foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferoURI)))
+	return _pbstrReferoURI, win32.HRESULTError(int32(r1))
 }
 
 // Get_ReferCookie dispatches through IRTCSessionReferredEvent's vtable slot 10.
-func (self *IRTCSessionReferredEvent) Get_ReferCookie(pbstrReferCookie *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrReferCookie)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionReferredEvent) Get_ReferCookie() (foundation.BSTR, error) {
+	var _pbstrReferCookie foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrReferCookie)))
+	return _pbstrReferCookie, win32.HRESULTError(int32(r1))
 }
 
 // Accept dispatches through IRTCSessionReferredEvent's vtable slot 11.
-func (self *IRTCSessionReferredEvent) Accept() foundation.HRESULT {
+func (self *IRTCSessionReferredEvent) Accept() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reject dispatches through IRTCSessionReferredEvent's vtable slot 12.
-func (self *IRTCSessionReferredEvent) Reject() foundation.HRESULT {
+func (self *IRTCSessionReferredEvent) Reject() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetReferredSessionState dispatches through IRTCSessionReferredEvent's vtable slot 13.
-func (self *IRTCSessionReferredEvent) SetReferredSessionState(enState RTC_SESSION_STATE) foundation.HRESULT {
+func (self *IRTCSessionReferredEvent) SetReferredSessionState(enState RTC_SESSION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(enState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b5bad703-5952-48b3-9321-7f4500521506
@@ -2325,27 +2513,31 @@ type IRTCSessionStateChangeEvent struct {
 var IID_IRTCSessionStateChangeEvent = win32.GUID{Data1: 0xb5bad703, Data2: 0x5952, Data3: 0x48b3, Data4: [8]byte{0x93, 0x21, 0x7f, 0x45, 0x00, 0x52, 0x15, 0x06}}
 
 // Get_Session dispatches through IRTCSessionStateChangeEvent's vtable slot 7.
-func (self *IRTCSessionStateChangeEvent) Get_Session(ppSession **IRTCSession) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionStateChangeEvent) Get_Session() (*IRTCSession, error) {
+	var _ppSession *IRTCSession
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSession)))
+	return _ppSession, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRTCSessionStateChangeEvent's vtable slot 8.
-func (self *IRTCSessionStateChangeEvent) Get_State(penState *RTC_SESSION_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penState)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionStateChangeEvent) Get_State() (RTC_SESSION_STATE, error) {
+	var _penState RTC_SESSION_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
+	return _penState, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCSessionStateChangeEvent's vtable slot 9.
-func (self *IRTCSessionStateChangeEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionStateChangeEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusText dispatches through IRTCSessionStateChangeEvent's vtable slot 10.
-func (self *IRTCSessionStateChangeEvent) Get_StatusText(pbstrStatusText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionStateChangeEvent) Get_StatusText() (foundation.BSTR, error) {
+	var _pbstrStatusText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrStatusText)))
+	return _pbstrStatusText, win32.HRESULTError(int32(r1))
 }
 
 // IID: 4f933171-6f95-4880-80d9-2ec8d495d261
@@ -2357,27 +2549,30 @@ type IRTCSessionStateChangeEvent2 struct {
 var IID_IRTCSessionStateChangeEvent2 = win32.GUID{Data1: 0x4f933171, Data2: 0x6f95, Data3: 0x4880, Data4: [8]byte{0x80, 0xd9, 0x2e, 0xc8, 0xd4, 0x95, 0xd2, 0x61}}
 
 // Get_MediaTypes dispatches through IRTCSessionStateChangeEvent2's vtable slot 11.
-func (self *IRTCSessionStateChangeEvent2) Get_MediaTypes(pMediaTypes *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaTypes)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionStateChangeEvent2) Get_MediaTypes() (int32, error) {
+	var _pMediaTypes int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pMediaTypes)))
+	return _pMediaTypes, win32.HRESULTError(int32(r1))
 }
 
 // Get_RemotePreferredSecurityLevel dispatches through IRTCSessionStateChangeEvent2's vtable slot 12.
-func (self *IRTCSessionStateChangeEvent2) Get_RemotePreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE, penSecurityLevel *RTC_SECURITY_LEVEL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(penSecurityLevel)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionStateChangeEvent2) Get_RemotePreferredSecurityLevel(enSecurityType RTC_SECURITY_TYPE) (RTC_SECURITY_LEVEL, error) {
+	var _penSecurityLevel RTC_SECURITY_LEVEL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(enSecurityType), uintptr(unsafe.Pointer(&_penSecurityLevel)))
+	return _penSecurityLevel, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsForked dispatches through IRTCSessionStateChangeEvent2's vtable slot 13.
-func (self *IRTCSessionStateChangeEvent2) Get_IsForked(pfIsForked *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsForked)))
-	return foundation.HRESULT(r1)
+func (self *IRTCSessionStateChangeEvent2) Get_IsForked() (foundation.VARIANT_BOOL, error) {
+	var _pfIsForked foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfIsForked)))
+	return _pfIsForked, win32.HRESULTError(int32(r1))
 }
 
 // GetRemoteSessionDescription dispatches through IRTCSessionStateChangeEvent2's vtable slot 14.
-func (self *IRTCSessionStateChangeEvent2) GetRemoteSessionDescription(pbstrContentType *foundation.BSTR, pbstrSessionDescription *foundation.BSTR) foundation.HRESULT {
+func (self *IRTCSessionStateChangeEvent2) GetRemoteSessionDescription(pbstrContentType *foundation.BSTR, pbstrSessionDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrContentType)), uintptr(unsafe.Pointer(pbstrSessionDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b619882b-860c-4db4-be1b-693b6505bbe5
@@ -2389,15 +2584,16 @@ type IRTCUserSearch struct {
 var IID_IRTCUserSearch = win32.GUID{Data1: 0xb619882b, Data2: 0x860c, Data3: 0x4db4, Data4: [8]byte{0xbe, 0x1b, 0x69, 0x3b, 0x65, 0x05, 0xbb, 0xe5}}
 
 // CreateQuery dispatches through IRTCUserSearch's vtable slot 3.
-func (self *IRTCUserSearch) CreateQuery(ppQuery **IRTCUserSearchQuery) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppQuery)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearch) CreateQuery() (*IRTCUserSearchQuery, error) {
+	var _ppQuery *IRTCUserSearchQuery
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppQuery)))
+	return _ppQuery, win32.HRESULTError(int32(r1))
 }
 
 // ExecuteSearch dispatches through IRTCUserSearch's vtable slot 4.
-func (self *IRTCUserSearch) ExecuteSearch(pQuery *IRTCUserSearchQuery, pProfile *IRTCProfile, lCookie uintptr) foundation.HRESULT {
+func (self *IRTCUserSearch) ExecuteSearch(pQuery *IRTCUserSearchQuery, pProfile *IRTCProfile, lCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pQuery)), uintptr(unsafe.Pointer(pProfile)), uintptr(lCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 288300f5-d23a-4365-9a73-9985c98c2881
@@ -2409,45 +2605,49 @@ type IRTCUserSearchQuery struct {
 var IID_IRTCUserSearchQuery = win32.GUID{Data1: 0x288300f5, Data2: 0xd23a, Data3: 0x4365, Data4: [8]byte{0x9a, 0x73, 0x99, 0x85, 0xc9, 0x8c, 0x28, 0x81}}
 
 // Put_SearchTerm dispatches through IRTCUserSearchQuery's vtable slot 3.
-func (self *IRTCUserSearchQuery) Put_SearchTerm(bstrName foundation.BSTR, bstrValue foundation.BSTR) foundation.HRESULT {
+func (self *IRTCUserSearchQuery) Put_SearchTerm(bstrName foundation.BSTR, bstrValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(bstrValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SearchTerm dispatches through IRTCUserSearchQuery's vtable slot 4.
-func (self *IRTCUserSearchQuery) Get_SearchTerm(bstrName foundation.BSTR, pbstrValue *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pbstrValue)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchQuery) Get_SearchTerm(bstrName foundation.BSTR) (foundation.BSTR, error) {
+	var _pbstrValue foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_pbstrValue)))
+	return _pbstrValue, win32.HRESULTError(int32(r1))
 }
 
 // Get_SearchTerms dispatches through IRTCUserSearchQuery's vtable slot 5.
-func (self *IRTCUserSearchQuery) Get_SearchTerms(pbstrNames *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrNames)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchQuery) Get_SearchTerms() (foundation.BSTR, error) {
+	var _pbstrNames foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrNames)))
+	return _pbstrNames, win32.HRESULTError(int32(r1))
 }
 
 // Put_SearchPreference dispatches through IRTCUserSearchQuery's vtable slot 6.
-func (self *IRTCUserSearchQuery) Put_SearchPreference(enPreference RTC_USER_SEARCH_PREFERENCE, lValue int32) foundation.HRESULT {
+func (self *IRTCUserSearchQuery) Put_SearchPreference(enPreference RTC_USER_SEARCH_PREFERENCE, lValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(enPreference), uintptr(lValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SearchPreference dispatches through IRTCUserSearchQuery's vtable slot 7.
-func (self *IRTCUserSearchQuery) Get_SearchPreference(enPreference RTC_USER_SEARCH_PREFERENCE, plValue *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enPreference), uintptr(unsafe.Pointer(plValue)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchQuery) Get_SearchPreference(enPreference RTC_USER_SEARCH_PREFERENCE) (int32, error) {
+	var _plValue int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enPreference), uintptr(unsafe.Pointer(&_plValue)))
+	return _plValue, win32.HRESULTError(int32(r1))
 }
 
 // Put_SearchDomain dispatches through IRTCUserSearchQuery's vtable slot 8.
-func (self *IRTCUserSearchQuery) Put_SearchDomain(bstrDomain foundation.BSTR) foundation.HRESULT {
+func (self *IRTCUserSearchQuery) Put_SearchDomain(bstrDomain foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDomain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SearchDomain dispatches through IRTCUserSearchQuery's vtable slot 9.
-func (self *IRTCUserSearchQuery) Get_SearchDomain(pbstrDomain *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDomain)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchQuery) Get_SearchDomain() (foundation.BSTR, error) {
+	var _pbstrDomain foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDomain)))
+	return _pbstrDomain, win32.HRESULTError(int32(r1))
 }
 
 // IID: 851278b2-9592-480f-8db5-2de86b26b54d
@@ -2459,9 +2659,10 @@ type IRTCUserSearchResult struct {
 var IID_IRTCUserSearchResult = win32.GUID{Data1: 0x851278b2, Data2: 0x9592, Data3: 0x480f, Data4: [8]byte{0x8d, 0xb5, 0x2d, 0xe8, 0x6b, 0x26, 0xb5, 0x4d}}
 
 // Get_Value dispatches through IRTCUserSearchResult's vtable slot 3.
-func (self *IRTCUserSearchResult) Get_Value(enColumn RTC_USER_SEARCH_COLUMN, pbstrValue *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(enColumn), uintptr(unsafe.Pointer(pbstrValue)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchResult) Get_Value(enColumn RTC_USER_SEARCH_COLUMN) (foundation.BSTR, error) {
+	var _pbstrValue foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(enColumn), uintptr(unsafe.Pointer(&_pbstrValue)))
+	return _pbstrValue, win32.HRESULTError(int32(r1))
 }
 
 // IID: d8c8c3cd-7fac-4088-81c5-c24cbc0938e3
@@ -2473,45 +2674,52 @@ type IRTCUserSearchResultsEvent struct {
 var IID_IRTCUserSearchResultsEvent = win32.GUID{Data1: 0xd8c8c3cd, Data2: 0x7fac, Data3: 0x4088, Data4: [8]byte{0x81, 0xc5, 0xc2, 0x4c, 0xbc, 0x09, 0x38, 0xe3}}
 
 // EnumerateResults dispatches through IRTCUserSearchResultsEvent's vtable slot 7.
-func (self *IRTCUserSearchResultsEvent) EnumerateResults(ppEnum **IRTCEnumUserSearchResults) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchResultsEvent) EnumerateResults() (*IRTCEnumUserSearchResults, error) {
+	var _ppEnum *IRTCEnumUserSearchResults
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_Results dispatches through IRTCUserSearchResultsEvent's vtable slot 8.
-func (self *IRTCUserSearchResultsEvent) Get_Results(ppCollection **IRTCCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchResultsEvent) Get_Results() (*IRTCCollection, error) {
+	var _ppCollection *IRTCCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
+	return _ppCollection, win32.HRESULTError(int32(r1))
 }
 
 // Get_Profile dispatches through IRTCUserSearchResultsEvent's vtable slot 9.
-func (self *IRTCUserSearchResultsEvent) Get_Profile(ppProfile **IRTCProfile2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchResultsEvent) Get_Profile() (*IRTCProfile2, error) {
+	var _ppProfile *IRTCProfile2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
+	return _ppProfile, win32.HRESULTError(int32(r1))
 }
 
 // Get_Query dispatches through IRTCUserSearchResultsEvent's vtable slot 10.
-func (self *IRTCUserSearchResultsEvent) Get_Query(ppQuery **IRTCUserSearchQuery) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppQuery)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchResultsEvent) Get_Query() (*IRTCUserSearchQuery, error) {
+	var _ppQuery *IRTCUserSearchQuery
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppQuery)))
+	return _ppQuery, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cookie dispatches through IRTCUserSearchResultsEvent's vtable slot 11.
-func (self *IRTCUserSearchResultsEvent) Get_Cookie(plCookie *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCookie)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchResultsEvent) Get_Cookie() (uintptr, error) {
+	var _plCookie uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCookie)))
+	return _plCookie, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCUserSearchResultsEvent's vtable slot 12.
-func (self *IRTCUserSearchResultsEvent) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchResultsEvent) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_MoreAvailable dispatches through IRTCUserSearchResultsEvent's vtable slot 13.
-func (self *IRTCUserSearchResultsEvent) Get_MoreAvailable(pfMoreAvailable *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfMoreAvailable)))
-	return foundation.HRESULT(r1)
+func (self *IRTCUserSearchResultsEvent) Get_MoreAvailable() (foundation.VARIANT_BOOL, error) {
+	var _pfMoreAvailable foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfMoreAvailable)))
+	return _pfMoreAvailable, win32.HRESULTError(int32(r1))
 }
 
 // IID: c7cedad8-346b-4d1b-ac02-a2088df9be4f
@@ -2523,15 +2731,16 @@ type IRTCWatcher struct {
 var IID_IRTCWatcher = win32.GUID{Data1: 0xc7cedad8, Data2: 0x346b, Data3: 0x4d1b, Data4: [8]byte{0xac, 0x02, 0xa2, 0x08, 0x8d, 0xf9, 0xbe, 0x4f}}
 
 // Get_State dispatches through IRTCWatcher's vtable slot 11.
-func (self *IRTCWatcher) Get_State(penState *RTC_WATCHER_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penState)))
-	return foundation.HRESULT(r1)
+func (self *IRTCWatcher) Get_State() (RTC_WATCHER_STATE, error) {
+	var _penState RTC_WATCHER_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penState)))
+	return _penState, win32.HRESULTError(int32(r1))
 }
 
 // Put_State dispatches through IRTCWatcher's vtable slot 12.
-func (self *IRTCWatcher) Put_State(enState RTC_WATCHER_STATE) foundation.HRESULT {
+func (self *IRTCWatcher) Put_State(enState RTC_WATCHER_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(enState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d4d9967f-d011-4b1d-91e3-aba78f96393d
@@ -2543,15 +2752,17 @@ type IRTCWatcher2 struct {
 var IID_IRTCWatcher2 = win32.GUID{Data1: 0xd4d9967f, Data2: 0xd011, Data3: 0x4b1d, Data4: [8]byte{0x91, 0xe3, 0xab, 0xa7, 0x8f, 0x96, 0x39, 0x3d}}
 
 // Get_Profile dispatches through IRTCWatcher2's vtable slot 13.
-func (self *IRTCWatcher2) Get_Profile(ppProfile **IRTCProfile2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProfile)))
-	return foundation.HRESULT(r1)
+func (self *IRTCWatcher2) Get_Profile() (*IRTCProfile2, error) {
+	var _ppProfile *IRTCProfile2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProfile)))
+	return _ppProfile, win32.HRESULTError(int32(r1))
 }
 
 // Get_Scope dispatches through IRTCWatcher2's vtable slot 14.
-func (self *IRTCWatcher2) Get_Scope(penScope *RTC_ACE_SCOPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(penScope)))
-	return foundation.HRESULT(r1)
+func (self *IRTCWatcher2) Get_Scope() (RTC_ACE_SCOPE, error) {
+	var _penScope RTC_ACE_SCOPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_penScope)))
+	return _penScope, win32.HRESULTError(int32(r1))
 }
 
 // IID: f30d7261-587a-424f-822c-312788f43548
@@ -2563,9 +2774,10 @@ type IRTCWatcherEvent struct {
 var IID_IRTCWatcherEvent = win32.GUID{Data1: 0xf30d7261, Data2: 0x587a, Data3: 0x424f, Data4: [8]byte{0x82, 0x2c, 0x31, 0x27, 0x88, 0xf4, 0x35, 0x48}}
 
 // Get_Watcher dispatches through IRTCWatcherEvent's vtable slot 7.
-func (self *IRTCWatcherEvent) Get_Watcher(ppWatcher **IRTCWatcher) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppWatcher)))
-	return foundation.HRESULT(r1)
+func (self *IRTCWatcherEvent) Get_Watcher() (*IRTCWatcher, error) {
+	var _ppWatcher *IRTCWatcher
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppWatcher)))
+	return _ppWatcher, win32.HRESULTError(int32(r1))
 }
 
 // IID: e52891e8-188c-49af-b005-98ed13f83f9c
@@ -2577,15 +2789,17 @@ type IRTCWatcherEvent2 struct {
 var IID_IRTCWatcherEvent2 = win32.GUID{Data1: 0xe52891e8, Data2: 0x188c, Data3: 0x49af, Data4: [8]byte{0xb0, 0x05, 0x98, 0xed, 0x13, 0xf8, 0x3f, 0x9c}}
 
 // Get_EventType dispatches through IRTCWatcherEvent2's vtable slot 8.
-func (self *IRTCWatcherEvent2) Get_EventType(pEventType *RTC_WATCHER_EVENT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventType)))
-	return foundation.HRESULT(r1)
+func (self *IRTCWatcherEvent2) Get_EventType() (RTC_WATCHER_EVENT_TYPE, error) {
+	var _pEventType RTC_WATCHER_EVENT_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventType)))
+	return _pEventType, win32.HRESULTError(int32(r1))
 }
 
 // Get_StatusCode dispatches through IRTCWatcherEvent2's vtable slot 9.
-func (self *IRTCWatcherEvent2) Get_StatusCode(plStatusCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStatusCode)))
-	return foundation.HRESULT(r1)
+func (self *IRTCWatcherEvent2) Get_StatusCode() (int32, error) {
+	var _plStatusCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStatusCode)))
+	return _plStatusCode, win32.HRESULTError(int32(r1))
 }
 
 // IID: 5123e076-29e3-4bfd-84fe-0192d411e3e8
@@ -2597,13 +2811,13 @@ type ITransportSettingsInternal struct {
 var IID_ITransportSettingsInternal = win32.GUID{Data1: 0x5123e076, Data2: 0x29e3, Data3: 0x4bfd, Data4: [8]byte{0x84, 0xfe, 0x01, 0x92, 0xd4, 0x11, 0xe3, 0xe8}}
 
 // ApplySetting dispatches through ITransportSettingsInternal's vtable slot 3.
-func (self *ITransportSettingsInternal) ApplySetting(Setting *TRANSPORT_SETTING) foundation.HRESULT {
+func (self *ITransportSettingsInternal) ApplySetting(Setting *TRANSPORT_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Setting)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QuerySetting dispatches through ITransportSettingsInternal's vtable slot 4.
-func (self *ITransportSettingsInternal) QuerySetting(Setting *TRANSPORT_SETTING) foundation.HRESULT {
+func (self *ITransportSettingsInternal) QuerySetting(Setting *TRANSPORT_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Setting)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

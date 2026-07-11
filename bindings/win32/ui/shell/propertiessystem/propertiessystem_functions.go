@@ -103,521 +103,574 @@ var (
 // PSCoerceToCanonicalValue calls PROPSYS!PSCoerceToCanonicalValue.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscoercetocanonicalvalue
 // Minimum OS: windows5.1.2600.
-func PSCoerceToCanonicalValue(key *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func PSCoerceToCanonicalValue(key *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPSCoerceToCanonicalValue.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSCreateAdapterFromPropertyStore calls PROPSYS!PSCreateAdapterFromPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreateadapterfrompropertystore
 // Minimum OS: windows5.1.2600.
-func PSCreateAdapterFromPropertyStore(pps *IPropertyStore, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PSCreateAdapterFromPropertyStore(pps *IPropertyStore, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPSCreateAdapterFromPropertyStore.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSCreateDelayedMultiplexPropertyStore calls PROPSYS!PSCreateDelayedMultiplexPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatedelayedmultiplexpropertystore
 // Minimum OS: windows5.1.2600.
-func PSCreateDelayedMultiplexPropertyStore(flags GETPROPERTYSTOREFLAGS, pdpsf *IDelayedPropertyStoreFactory, rgStoreIds *uint32, cStores uint32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSCreateDelayedMultiplexPropertyStore.Addr(), uintptr(flags), uintptr(unsafe.Pointer(pdpsf)), uintptr(unsafe.Pointer(rgStoreIds)), uintptr(cStores), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func PSCreateDelayedMultiplexPropertyStore(flags GETPROPERTYSTOREFLAGS, pdpsf *IDelayedPropertyStoreFactory, rgStoreIds []uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	var _rgStoreIds *uint32
+	if len(rgStoreIds) > 0 {
+		_rgStoreIds = &rgStoreIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPSCreateDelayedMultiplexPropertyStore.Addr(), uintptr(flags), uintptr(unsafe.Pointer(pdpsf)), uintptr(unsafe.Pointer(_rgStoreIds)), uintptr(len(rgStoreIds)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSCreateMemoryPropertyStore calls PROPSYS!PSCreateMemoryPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatememorypropertystore
 // Minimum OS: windows5.1.2600.
-func PSCreateMemoryPropertyStore(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PSCreateMemoryPropertyStore(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPSCreateMemoryPropertyStore.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSCreateMultiplexPropertyStore calls PROPSYS!PSCreateMultiplexPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatemultiplexpropertystore
 // Minimum OS: windows5.1.2600.
-func PSCreateMultiplexPropertyStore(prgpunkStores **systemcom.IUnknown, cStores uint32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSCreateMultiplexPropertyStore.Addr(), uintptr(unsafe.Pointer(prgpunkStores)), uintptr(cStores), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func PSCreateMultiplexPropertyStore(prgpunkStores []*systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	var _prgpunkStores **systemcom.IUnknown
+	if len(prgpunkStores) > 0 {
+		_prgpunkStores = &prgpunkStores[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPSCreateMultiplexPropertyStore.Addr(), uintptr(unsafe.Pointer(_prgpunkStores)), uintptr(len(prgpunkStores)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSCreatePropertyChangeArray calls PROPSYS!PSCreatePropertyChangeArray.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatepropertychangearray
 // Minimum OS: windows5.1.2600.
-func PSCreatePropertyChangeArray(rgpropkey *foundation.PROPERTYKEY, rgflags *PKA_FLAGS, rgpropvar *systemcomstructuredstorage.PROPVARIANT, cChanges uint32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PSCreatePropertyChangeArray(rgpropkey *foundation.PROPERTYKEY, rgflags *PKA_FLAGS, rgpropvar *systemcomstructuredstorage.PROPVARIANT, cChanges uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPSCreatePropertyChangeArray.Addr(), uintptr(unsafe.Pointer(rgpropkey)), uintptr(unsafe.Pointer(rgflags)), uintptr(unsafe.Pointer(rgpropvar)), uintptr(cChanges), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSCreatePropertyStoreFromObject calls PROPSYS!PSCreatePropertyStoreFromObject.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatepropertystorefromobject
 // Minimum OS: windows5.1.2600.
-func PSCreatePropertyStoreFromObject(punk *systemcom.IUnknown, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PSCreatePropertyStoreFromObject(punk *systemcom.IUnknown, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPSCreatePropertyStoreFromObject.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(grfMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSCreatePropertyStoreFromPropertySetStorage calls PROPSYS!PSCreatePropertyStoreFromPropertySetStorage.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatepropertystorefrompropertysetstorage
 // Minimum OS: windows5.1.2600.
-func PSCreatePropertyStoreFromPropertySetStorage(ppss *systemcomstructuredstorage.IPropertySetStorage, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PSCreatePropertyStoreFromPropertySetStorage(ppss *systemcomstructuredstorage.IPropertySetStorage, grfMode uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPSCreatePropertyStoreFromPropertySetStorage.Addr(), uintptr(unsafe.Pointer(ppss)), uintptr(grfMode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSCreateSimplePropertyChange calls PROPSYS!PSCreateSimplePropertyChange.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscreatesimplepropertychange
 // Minimum OS: windows5.1.2600.
-func PSCreateSimplePropertyChange(flags PKA_FLAGS, key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PSCreateSimplePropertyChange(flags PKA_FLAGS, key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPSCreateSimplePropertyChange.Addr(), uintptr(flags), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSEnumeratePropertyDescriptions calls PROPSYS!PSEnumeratePropertyDescriptions.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psenumeratepropertydescriptions
 // Minimum OS: windows5.1.2600.
-func PSEnumeratePropertyDescriptions(filterOn PROPDESC_ENUMFILTER, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PSEnumeratePropertyDescriptions(filterOn PROPDESC_ENUMFILTER, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPSEnumeratePropertyDescriptions.Addr(), uintptr(filterOn), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSFormatForDisplay calls PROPSYS!PSFormatForDisplay.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psformatfordisplay
 // Minimum OS: windows6.0.6000.
-func PSFormatForDisplay(propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, pdfFlags PROPDESC_FORMAT_FLAGS, pwszText foundation.PWSTR, cchText uint32) foundation.HRESULT {
+func PSFormatForDisplay(propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, pdfFlags PROPDESC_FORMAT_FLAGS, pwszText foundation.PWSTR, cchText uint32) error {
 	r1, _, _ := syscall.SyscallN(procPSFormatForDisplay.Addr(), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(propvar)), uintptr(pdfFlags), uintptr(unsafe.Pointer(pwszText)), uintptr(cchText))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSFormatForDisplayAlloc calls PROPSYS!PSFormatForDisplayAlloc.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psformatfordisplayalloc
 // Minimum OS: windows6.0.6000.
-func PSFormatForDisplayAlloc(key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, pdff PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) foundation.HRESULT {
+func PSFormatForDisplayAlloc(key *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, pdff PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPSFormatForDisplayAlloc.Addr(), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(propvar)), uintptr(pdff), uintptr(unsafe.Pointer(ppszDisplay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSFormatPropertyValue calls PROPSYS!PSFormatPropertyValue.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psformatpropertyvalue
 // Minimum OS: windows6.0.6000.
-func PSFormatPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, pdff PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) foundation.HRESULT {
+func PSFormatPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, pdff PROPDESC_FORMAT_FLAGS, ppszDisplay *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPSFormatPropertyValue.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(ppd)), uintptr(pdff), uintptr(unsafe.Pointer(ppszDisplay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetImageReferenceForValue calls PROPSYS!PSGetImageReferenceForValue.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetimagereferenceforvalue
 // Minimum OS: windows6.1.
-func PSGetImageReferenceForValue(propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, ppszImageRes *foundation.PWSTR) foundation.HRESULT {
+func PSGetImageReferenceForValue(propkey *foundation.PROPERTYKEY, propvar *systemcomstructuredstorage.PROPVARIANT, ppszImageRes *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPSGetImageReferenceForValue.Addr(), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(ppszImageRes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetItemPropertyHandler calls PROPSYS!PSGetItemPropertyHandler.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetitempropertyhandler
 // Minimum OS: windows5.1.2600.
-func PSGetItemPropertyHandler(punkItem *systemcom.IUnknown, fReadWrite foundation.BOOL, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSGetItemPropertyHandler.Addr(), uintptr(unsafe.Pointer(punkItem)), uintptr(fReadWrite), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func PSGetItemPropertyHandler(punkItem *systemcom.IUnknown, fReadWrite bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_fReadWrite := win32.Bool32(fReadWrite)
+	r1, _, _ := syscall.SyscallN(procPSGetItemPropertyHandler.Addr(), uintptr(unsafe.Pointer(punkItem)), uintptr(_fReadWrite), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetItemPropertyHandlerWithCreateObject calls PROPSYS!PSGetItemPropertyHandlerWithCreateObject.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetitempropertyhandlerwithcreateobject
 // Minimum OS: windows5.1.2600.
-func PSGetItemPropertyHandlerWithCreateObject(punkItem *systemcom.IUnknown, fReadWrite foundation.BOOL, punkCreateObject *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSGetItemPropertyHandlerWithCreateObject.Addr(), uintptr(unsafe.Pointer(punkItem)), uintptr(fReadWrite), uintptr(unsafe.Pointer(punkCreateObject)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func PSGetItemPropertyHandlerWithCreateObject(punkItem *systemcom.IUnknown, fReadWrite bool, punkCreateObject *systemcom.IUnknown, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_fReadWrite := win32.Bool32(fReadWrite)
+	r1, _, _ := syscall.SyscallN(procPSGetItemPropertyHandlerWithCreateObject.Addr(), uintptr(unsafe.Pointer(punkItem)), uintptr(_fReadWrite), uintptr(unsafe.Pointer(punkCreateObject)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetNameFromPropertyKey calls PROPSYS!PSGetNameFromPropertyKey.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetnamefrompropertykey
 // Minimum OS: windows5.1.2600.
-func PSGetNameFromPropertyKey(propkey *foundation.PROPERTYKEY, ppszCanonicalName *foundation.PWSTR) foundation.HRESULT {
+func PSGetNameFromPropertyKey(propkey *foundation.PROPERTYKEY, ppszCanonicalName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procPSGetNameFromPropertyKey.Addr(), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(ppszCanonicalName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetNamedPropertyFromPropertyStorage calls PROPSYS!PSGetNamedPropertyFromPropertyStorage.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetnamedpropertyfrompropertystorage
 // Minimum OS: windows5.1.2600.
-func PSGetNamedPropertyFromPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uint32, pszName foundation.PWSTR, ppropvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSGetNamedPropertyFromPropertyStorage.Addr(), uintptr(psps), uintptr(cb), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func PSGetNamedPropertyFromPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uint32, pszName string, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procPSGetNamedPropertyFromPropertyStorage.Addr(), uintptr(psps), uintptr(cb), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetPropertyDescription calls PROPSYS!PSGetPropertyDescription.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertydescription
 // Minimum OS: windows5.1.2600.
-func PSGetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PSGetPropertyDescription(propkey *foundation.PROPERTYKEY, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescription.Addr(), uintptr(unsafe.Pointer(propkey)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetPropertyDescriptionByName calls PROPSYS!PSGetPropertyDescriptionByName.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertydescriptionbyname
 // Minimum OS: windows5.1.2600.
-func PSGetPropertyDescriptionByName(pszCanonicalName foundation.PWSTR, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescriptionByName.Addr(), uintptr(unsafe.Pointer(pszCanonicalName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func PSGetPropertyDescriptionByName(pszCanonicalName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pszCanonicalName := win32.UTF16Ptr(pszCanonicalName)
+	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescriptionByName.Addr(), uintptr(unsafe.Pointer(_pszCanonicalName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetPropertyDescriptionListFromString calls PROPSYS!PSGetPropertyDescriptionListFromString.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertydescriptionlistfromstring
 // Minimum OS: windows5.1.2600.
-func PSGetPropertyDescriptionListFromString(pszPropList foundation.PWSTR, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescriptionListFromString.Addr(), uintptr(unsafe.Pointer(pszPropList)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func PSGetPropertyDescriptionListFromString(pszPropList string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pszPropList := win32.UTF16Ptr(pszPropList)
+	r1, _, _ := syscall.SyscallN(procPSGetPropertyDescriptionListFromString.Addr(), uintptr(unsafe.Pointer(_pszPropList)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetPropertyFromPropertyStorage calls PROPSYS!PSGetPropertyFromPropertyStorage.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertyfrompropertystorage
 // Minimum OS: windows5.1.2600.
-func PSGetPropertyFromPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uint32, rpkey *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func PSGetPropertyFromPropertyStorage(psps PCUSERIALIZEDPROPSTORAGE, cb uint32, rpkey *foundation.PROPERTYKEY, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyFromPropertyStorage.Addr(), uintptr(psps), uintptr(cb), uintptr(unsafe.Pointer(rpkey)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetPropertyKeyFromName calls PROPSYS!PSGetPropertyKeyFromName.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertykeyfromname
 // Minimum OS: windows5.1.2600.
-func PSGetPropertyKeyFromName(pszName foundation.PWSTR, ppropkey *foundation.PROPERTYKEY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSGetPropertyKeyFromName.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(ppropkey)))
-	return foundation.HRESULT(r1)
+func PSGetPropertyKeyFromName(pszName string, ppropkey *foundation.PROPERTYKEY) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procPSGetPropertyKeyFromName.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(ppropkey)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetPropertySystem calls PROPSYS!PSGetPropertySystem.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertysystem
 // Minimum OS: windows5.1.2600.
-func PSGetPropertySystem(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func PSGetPropertySystem(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertySystem.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSGetPropertyValue calls PROPSYS!PSGetPropertyValue.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psgetpropertyvalue
 // Minimum OS: windows5.1.2600.
-func PSGetPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, ppropvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func PSGetPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPSGetPropertyValue.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(ppd)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSLookupPropertyHandlerCLSID calls PROPSYS!PSLookupPropertyHandlerCLSID.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pslookuppropertyhandlerclsid
 // Minimum OS: windows5.1.2600.
-func PSLookupPropertyHandlerCLSID(pszFilePath foundation.PWSTR, pclsid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSLookupPropertyHandlerCLSID.Addr(), uintptr(unsafe.Pointer(pszFilePath)), uintptr(unsafe.Pointer(pclsid)))
-	return foundation.HRESULT(r1)
+func PSLookupPropertyHandlerCLSID(pszFilePath string, pclsid *win32.GUID) error {
+	_pszFilePath := win32.UTF16Ptr(pszFilePath)
+	r1, _, _ := syscall.SyscallN(procPSLookupPropertyHandlerCLSID.Addr(), uintptr(unsafe.Pointer(_pszFilePath)), uintptr(unsafe.Pointer(pclsid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_Delete calls PROPSYS!PSPropertyBag_Delete.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_delete
 // Minimum OS: windows6.1.
-func PSPropertyBag_Delete(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_Delete.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_Delete(propBag *systemcomstructuredstorage.IPropertyBag, propName string) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_Delete.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadBOOL calls PROPSYS!PSPropertyBag_ReadBOOL.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readbool
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadBOOL(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadBOOL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadBOOL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.BOOL) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadBOOL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadBSTR calls PROPSYS!PSPropertyBag_ReadBSTR.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readbstr
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadBSTR(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadBSTR.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadBSTR(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.BSTR) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadBSTR.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadDWORD calls PROPSYS!PSPropertyBag_ReadDWORD.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readdword
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadDWORD(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadDWORD.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadDWORD(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *uint32) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadDWORD.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadGUID calls PROPSYS!PSPropertyBag_ReadGUID.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readguid
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadGUID(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadGUID.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadGUID(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *win32.GUID) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadGUID.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadInt calls PROPSYS!PSPropertyBag_ReadInt.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readint
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadInt(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadInt.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadInt(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *int32) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadInt.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadLONG calls PROPSYS!PSPropertyBag_ReadLONG.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readlong
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *int32) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadPOINTL calls PROPSYS!PSPropertyBag_ReadPOINTL.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readpointl
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadPOINTL(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.POINTL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadPOINTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadPOINTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTL) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadPOINTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadPOINTS calls PROPSYS!PSPropertyBag_ReadPOINTS.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readpoints
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadPOINTS(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.POINTS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadPOINTS.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadPOINTS(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTS) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadPOINTS.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadPropertyKey calls PROPSYS!PSPropertyBag_ReadPropertyKey.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readpropertykey
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadPropertyKey(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.PROPERTYKEY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadPropertyKey.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadPropertyKey(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.PROPERTYKEY) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadPropertyKey.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadRECTL calls PROPSYS!PSPropertyBag_ReadRECTL.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readrectl
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadRECTL(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.RECTL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadRECTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadRECTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.RECTL) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadRECTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadSHORT calls PROPSYS!PSPropertyBag_ReadSHORT.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readshort
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadSHORT(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *int16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadSHORT.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadSHORT(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *int16) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadSHORT.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadStr calls PROPSYS!PSPropertyBag_ReadStr.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readstr
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadStr(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value foundation.PWSTR, characterCount int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadStr.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)), uintptr(characterCount))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadStr(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value foundation.PWSTR, characterCount int32) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadStr.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)), uintptr(characterCount))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadStrAlloc calls PROPSYS!PSPropertyBag_ReadStrAlloc.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readstralloc
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadStrAlloc(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadStrAlloc.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadStrAlloc(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.PWSTR) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadStrAlloc.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadStream calls PROPSYS!PSPropertyBag_ReadStream.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readstream
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadStream(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value **systemcom.IStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadStream.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadStream(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value **systemcom.IStream) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadStream.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadType calls PROPSYS!PSPropertyBag_ReadType.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readtype
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadType(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, var_ *systemvariant.VARIANT, type_ systemvariant.VARENUM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadType.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(var_)), uintptr(type_))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadType(propBag *systemcomstructuredstorage.IPropertyBag, propName string, var_ *systemvariant.VARIANT, type_ systemvariant.VARENUM) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadType.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(var_)), uintptr(type_))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadULONGLONG calls PROPSYS!PSPropertyBag_ReadULONGLONG.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readulonglong
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadULONGLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadULONGLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadULONGLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *uint64) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadULONGLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_ReadUnknown calls PROPSYS!PSPropertyBag_ReadUnknown.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readunknown
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadUnknown.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_ReadUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName string, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadUnknown.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteBOOL calls PROPSYS!PSPropertyBag_WriteBOOL.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writebool
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteBOOL(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteBOOL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(value))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteBOOL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value bool) error {
+	_propName := win32.UTF16Ptr(propName)
+	_value := win32.Bool32(value)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteBOOL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(_value))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteBSTR calls PROPSYS!PSPropertyBag_WriteBSTR.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writebstr
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteBSTR(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteBSTR.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteBSTR(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value foundation.BSTR) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteBSTR.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteDWORD calls PROPSYS!PSPropertyBag_WriteDWORD.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writedword
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteDWORD(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteDWORD.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(value))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteDWORD(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value uint32) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteDWORD.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteGUID calls PROPSYS!PSPropertyBag_WriteGUID.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeguid
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteGUID(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteGUID.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteGUID(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *win32.GUID) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteGUID.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteInt calls PROPSYS!PSPropertyBag_WriteInt.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeint
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteInt(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteInt.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(value))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteInt(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value int32) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteInt.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteLONG calls PROPSYS!PSPropertyBag_WriteLONG.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writelong
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(value))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value int32) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WritePOINTL calls PROPSYS!PSPropertyBag_WritePOINTL.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writepointl
 // Minimum OS: windows6.1.
-func PSPropertyBag_WritePOINTL(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.POINTL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WritePOINTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WritePOINTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTL) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WritePOINTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WritePOINTS calls PROPSYS!PSPropertyBag_WritePOINTS.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writepoints
 // Minimum OS: windows6.1.
-func PSPropertyBag_WritePOINTS(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.POINTS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WritePOINTS.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WritePOINTS(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.POINTS) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WritePOINTS.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WritePropertyKey calls PROPSYS!PSPropertyBag_WritePropertyKey.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writepropertykey
 // Minimum OS: windows6.1.
-func PSPropertyBag_WritePropertyKey(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.PROPERTYKEY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WritePropertyKey.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WritePropertyKey(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.PROPERTYKEY) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WritePropertyKey.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteRECTL calls PROPSYS!PSPropertyBag_WriteRECTL.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writerectl
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteRECTL(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *foundation.RECTL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteRECTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteRECTL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.RECTL) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteRECTL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteSHORT calls PROPSYS!PSPropertyBag_WriteSHORT.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeshort
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteSHORT(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value int16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteSHORT.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(value))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteSHORT(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value int16) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteSHORT.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteStr calls PROPSYS!PSPropertyBag_WriteStr.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writestr
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteStr(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteStr.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteStr(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value string) error {
+	_propName := win32.UTF16Ptr(propName)
+	_value := win32.UTF16Ptr(value)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteStr.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(_value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteStream calls PROPSYS!PSPropertyBag_WriteStream.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writestream
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteStream(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value *systemcom.IStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteStream.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteStream(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *systemcom.IStream) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteStream.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteULONGLONG calls PROPSYS!PSPropertyBag_WriteULONGLONG.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeulonglong
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteULONGLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, value uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteULONGLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(value))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteULONGLONG(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value uint64) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteULONGLONG.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(value))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyBag_WriteUnknown calls PROPSYS!PSPropertyBag_WriteUnknown.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_writeunknown
 // Minimum OS: windows6.1.
-func PSPropertyBag_WriteUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName foundation.PWSTR, punk *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteUnknown.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(propName)), uintptr(unsafe.Pointer(punk)))
-	return foundation.HRESULT(r1)
+func PSPropertyBag_WriteUnknown(propBag *systemcomstructuredstorage.IPropertyBag, propName string, punk *systemcom.IUnknown) error {
+	_propName := win32.UTF16Ptr(propName)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_WriteUnknown.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(punk)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSPropertyKeyFromString calls PROPSYS!PSPropertyKeyFromString.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertykeyfromstring
 // Minimum OS: windows5.1.2600.
-func PSPropertyKeyFromString(pszString foundation.PWSTR, pkey *foundation.PROPERTYKEY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSPropertyKeyFromString.Addr(), uintptr(unsafe.Pointer(pszString)), uintptr(unsafe.Pointer(pkey)))
-	return foundation.HRESULT(r1)
+func PSPropertyKeyFromString(pszString string, pkey *foundation.PROPERTYKEY) error {
+	_pszString := win32.UTF16Ptr(pszString)
+	r1, _, _ := syscall.SyscallN(procPSPropertyKeyFromString.Addr(), uintptr(unsafe.Pointer(_pszString)), uintptr(unsafe.Pointer(pkey)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSRefreshPropertySchema calls PROPSYS!PSRefreshPropertySchema.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psrefreshpropertyschema
 // Minimum OS: windows5.1.2600.
-func PSRefreshPropertySchema() foundation.HRESULT {
+func PSRefreshPropertySchema() error {
 	r1, _, _ := syscall.SyscallN(procPSRefreshPropertySchema.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSRegisterPropertySchema calls PROPSYS!PSRegisterPropertySchema.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psregisterpropertyschema
 // Minimum OS: windows5.1.2600.
-func PSRegisterPropertySchema(pszPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSRegisterPropertySchema.Addr(), uintptr(unsafe.Pointer(pszPath)))
-	return foundation.HRESULT(r1)
+func PSRegisterPropertySchema(pszPath string) error {
+	_pszPath := win32.UTF16Ptr(pszPath)
+	r1, _, _ := syscall.SyscallN(procPSRegisterPropertySchema.Addr(), uintptr(unsafe.Pointer(_pszPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSSetPropertyValue calls PROPSYS!PSSetPropertyValue.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pssetpropertyvalue
 // Minimum OS: windows5.1.2600.
-func PSSetPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, propvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func PSSetPropertyValue(pps *IPropertyStore, ppd *IPropertyDescription, propvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procPSSetPropertyValue.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(ppd)), uintptr(unsafe.Pointer(propvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSStringFromPropertyKey calls PROPSYS!PSStringFromPropertyKey.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psstringfrompropertykey
 // Minimum OS: windows5.1.2600.
-func PSStringFromPropertyKey(pkey *foundation.PROPERTYKEY, psz foundation.PWSTR, cch uint32) foundation.HRESULT {
+func PSStringFromPropertyKey(pkey *foundation.PROPERTYKEY, psz foundation.PWSTR, cch uint32) error {
 	r1, _, _ := syscall.SyscallN(procPSStringFromPropertyKey.Addr(), uintptr(unsafe.Pointer(pkey)), uintptr(unsafe.Pointer(psz)), uintptr(cch))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PSUnregisterPropertySchema calls PROPSYS!PSUnregisterPropertySchema.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-psunregisterpropertyschema
 // Minimum OS: windows5.1.2600.
-func PSUnregisterPropertySchema(pszPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPSUnregisterPropertySchema.Addr(), uintptr(unsafe.Pointer(pszPath)))
-	return foundation.HRESULT(r1)
+func PSUnregisterPropertySchema(pszPath string) error {
+	_pszPath := win32.UTF16Ptr(pszPath)
+	r1, _, _ := syscall.SyscallN(procPSUnregisterPropertySchema.Addr(), uintptr(unsafe.Pointer(_pszPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PifMgr_CloseProperties calls SHELL32!PifMgr_CloseProperties.
@@ -639,8 +692,10 @@ func PifMgr_GetProperties(hProps foundation.HANDLE, pszGroup foundation.PSTR, lp
 // PifMgr_OpenProperties calls SHELL32!PifMgr_OpenProperties.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pifmgr_openproperties
 // Minimum OS: windows5.0.
-func PifMgr_OpenProperties(pszApp foundation.PWSTR, pszPIF foundation.PWSTR, hInf uint32, flOpt uint32) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procPifMgr_OpenProperties.Addr(), uintptr(unsafe.Pointer(pszApp)), uintptr(unsafe.Pointer(pszPIF)), uintptr(hInf), uintptr(flOpt))
+func PifMgr_OpenProperties(pszApp string, pszPIF string, hInf uint32, flOpt uint32) foundation.HANDLE {
+	_pszApp := win32.UTF16Ptr(pszApp)
+	_pszPIF := win32.UTF16Ptr(pszPIF)
+	r1, _, _ := syscall.SyscallN(procPifMgr_OpenProperties.Addr(), uintptr(unsafe.Pointer(_pszApp)), uintptr(unsafe.Pointer(_pszPIF)), uintptr(hInf), uintptr(flOpt))
 	return foundation.HANDLE(r1)
 }
 
@@ -655,55 +710,57 @@ func PifMgr_SetProperties(hProps foundation.HANDLE, pszGroup foundation.PSTR, lp
 // SHAddDefaultPropertiesByExt calls SHELL32!SHAddDefaultPropertiesByExt.
 // https://learn.microsoft.com/windows/win32/api/shobjidl/nf-shobjidl-shadddefaultpropertiesbyext
 // Minimum OS: windows6.0.6000.
-func SHAddDefaultPropertiesByExt(pszExt foundation.PWSTR, pPropStore *IPropertyStore) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHAddDefaultPropertiesByExt.Addr(), uintptr(unsafe.Pointer(pszExt)), uintptr(unsafe.Pointer(pPropStore)))
-	return foundation.HRESULT(r1)
+func SHAddDefaultPropertiesByExt(pszExt string, pPropStore *IPropertyStore) error {
+	_pszExt := win32.UTF16Ptr(pszExt)
+	r1, _, _ := syscall.SyscallN(procSHAddDefaultPropertiesByExt.Addr(), uintptr(unsafe.Pointer(_pszExt)), uintptr(unsafe.Pointer(pPropStore)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SHGetPropertyStoreForWindow calls SHELL32!SHGetPropertyStoreForWindow.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetpropertystoreforwindow
 // Minimum OS: windows6.1.
-func SHGetPropertyStoreForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func SHGetPropertyStoreForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreForWindow.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SHGetPropertyStoreFromIDList calls SHELL32!SHGetPropertyStoreFromIDList.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetpropertystorefromidlist
 // Minimum OS: windows6.0.6000.
-func SHGetPropertyStoreFromIDList(pidl *uishellcommon.ITEMIDLIST, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func SHGetPropertyStoreFromIDList(pidl *uishellcommon.ITEMIDLIST, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreFromIDList.Addr(), uintptr(unsafe.Pointer(pidl)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SHGetPropertyStoreFromParsingName calls SHELL32!SHGetPropertyStoreFromParsingName.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shgetpropertystorefromparsingname
 // Minimum OS: windows6.0.6000.
-func SHGetPropertyStoreFromParsingName(pszPath foundation.PWSTR, pbc *systemcom.IBindCtx, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreFromParsingName.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(unsafe.Pointer(pbc)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func SHGetPropertyStoreFromParsingName(pszPath string, pbc *systemcom.IBindCtx, flags GETPROPERTYSTOREFLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pszPath := win32.UTF16Ptr(pszPath)
+	r1, _, _ := syscall.SyscallN(procSHGetPropertyStoreFromParsingName.Addr(), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(pbc)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SHPropStgCreate calls SHELL32!SHPropStgCreate.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpropstgcreate
 // Minimum OS: windows5.0.
-func SHPropStgCreate(psstg *systemcomstructuredstorage.IPropertySetStorage, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, grfMode uint32, dwDisposition uint32, ppstg **systemcomstructuredstorage.IPropertyStorage, puCodePage *uint32) foundation.HRESULT {
+func SHPropStgCreate(psstg *systemcomstructuredstorage.IPropertySetStorage, fmtid *win32.GUID, pclsid *win32.GUID, grfFlags uint32, grfMode uint32, dwDisposition uint32, ppstg **systemcomstructuredstorage.IPropertyStorage, puCodePage *uint32) error {
 	r1, _, _ := syscall.SyscallN(procSHPropStgCreate.Addr(), uintptr(unsafe.Pointer(psstg)), uintptr(unsafe.Pointer(fmtid)), uintptr(unsafe.Pointer(pclsid)), uintptr(grfFlags), uintptr(grfMode), uintptr(dwDisposition), uintptr(unsafe.Pointer(ppstg)), uintptr(unsafe.Pointer(puCodePage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SHPropStgReadMultiple calls SHELL32!SHPropStgReadMultiple.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpropstgreadmultiple
 // Minimum OS: windows5.1.2600.
-func SHPropStgReadMultiple(pps *systemcomstructuredstorage.IPropertyStorage, uCodePage uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func SHPropStgReadMultiple(pps *systemcomstructuredstorage.IPropertyStorage, uCodePage uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procSHPropStgReadMultiple.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(uCodePage), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)), uintptr(unsafe.Pointer(rgvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SHPropStgWriteMultiple calls SHELL32!SHPropStgWriteMultiple.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shpropstgwritemultiple
 // Minimum OS: windows5.1.2600.
-func SHPropStgWriteMultiple(pps *systemcomstructuredstorage.IPropertyStorage, puCodePage *uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT, propidNameFirst uint32) foundation.HRESULT {
+func SHPropStgWriteMultiple(pps *systemcomstructuredstorage.IPropertyStorage, puCodePage *uint32, cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC, rgvar *systemcomstructuredstorage.PROPVARIANT, propidNameFirst uint32) error {
 	r1, _, _ := syscall.SyscallN(procSHPropStgWriteMultiple.Addr(), uintptr(unsafe.Pointer(pps)), uintptr(unsafe.Pointer(puCodePage)), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)), uintptr(unsafe.Pointer(rgvar)), uintptr(propidNameFirst))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

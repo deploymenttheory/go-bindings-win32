@@ -39,119 +39,141 @@ var (
 // NdfCancelIncident calls NDFAPI!NdfCancelIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcancelincident
 // Minimum OS: windows6.1.
-func NdfCancelIncident(Handle unsafe.Pointer) foundation.HRESULT {
+func NdfCancelIncident(Handle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procNdfCancelIncident.Addr(), uintptr(unsafe.Pointer(Handle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCloseIncident calls NDFAPI!NdfCloseIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcloseincident
 // Minimum OS: windows6.0.6000.
-func NdfCloseIncident(handle unsafe.Pointer) foundation.HRESULT {
+func NdfCloseIncident(handle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procNdfCloseIncident.Addr(), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCreateConnectivityIncident calls NDFAPI!NdfCreateConnectivityIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreateconnectivityincident
 // Minimum OS: windows6.0.6000.
-func NdfCreateConnectivityIncident(handle *unsafe.Pointer) foundation.HRESULT {
+func NdfCreateConnectivityIncident(handle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procNdfCreateConnectivityIncident.Addr(), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCreateDNSIncident calls NDFAPI!NdfCreateDNSIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreatednsincident
 // Minimum OS: windows6.0.6000.
-func NdfCreateDNSIncident(hostname foundation.PWSTR, queryType uint16, handle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNdfCreateDNSIncident.Addr(), uintptr(unsafe.Pointer(hostname)), uintptr(queryType), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+func NdfCreateDNSIncident(hostname string, queryType uint16, handle *unsafe.Pointer) error {
+	_hostname := win32.UTF16Ptr(hostname)
+	r1, _, _ := syscall.SyscallN(procNdfCreateDNSIncident.Addr(), uintptr(unsafe.Pointer(_hostname)), uintptr(queryType), uintptr(unsafe.Pointer(handle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCreateGroupingIncident calls NDFAPI!NdfCreateGroupingIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreategroupingincident
 // Minimum OS: windows6.1.
-func NdfCreateGroupingIncident(CloudName foundation.PWSTR, GroupName foundation.PWSTR, Identity foundation.PWSTR, Invitation foundation.PWSTR, Addresses *networkingwinsock.SOCKET_ADDRESS_LIST, appId foundation.PWSTR, handle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNdfCreateGroupingIncident.Addr(), uintptr(unsafe.Pointer(CloudName)), uintptr(unsafe.Pointer(GroupName)), uintptr(unsafe.Pointer(Identity)), uintptr(unsafe.Pointer(Invitation)), uintptr(unsafe.Pointer(Addresses)), uintptr(unsafe.Pointer(appId)), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+func NdfCreateGroupingIncident(CloudName string, GroupName string, Identity string, Invitation string, Addresses *networkingwinsock.SOCKET_ADDRESS_LIST, appId string, handle *unsafe.Pointer) error {
+	_CloudName := win32.UTF16Ptr(CloudName)
+	_GroupName := win32.UTF16Ptr(GroupName)
+	_Identity := win32.UTF16Ptr(Identity)
+	_Invitation := win32.UTF16Ptr(Invitation)
+	_appId := win32.UTF16Ptr(appId)
+	r1, _, _ := syscall.SyscallN(procNdfCreateGroupingIncident.Addr(), uintptr(unsafe.Pointer(_CloudName)), uintptr(unsafe.Pointer(_GroupName)), uintptr(unsafe.Pointer(_Identity)), uintptr(unsafe.Pointer(_Invitation)), uintptr(unsafe.Pointer(Addresses)), uintptr(unsafe.Pointer(_appId)), uintptr(unsafe.Pointer(handle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCreateIncident calls NDFAPI!NdfCreateIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreateincident
 // Minimum OS: windows6.0.6000.
-func NdfCreateIncident(helperClassName foundation.PWSTR, celt uint32, attributes *HELPER_ATTRIBUTE, handle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNdfCreateIncident.Addr(), uintptr(unsafe.Pointer(helperClassName)), uintptr(celt), uintptr(unsafe.Pointer(attributes)), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+func NdfCreateIncident(helperClassName string, attributes []HELPER_ATTRIBUTE, handle *unsafe.Pointer) error {
+	_helperClassName := win32.UTF16Ptr(helperClassName)
+	var _attributes *HELPER_ATTRIBUTE
+	if len(attributes) > 0 {
+		_attributes = &attributes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procNdfCreateIncident.Addr(), uintptr(unsafe.Pointer(_helperClassName)), uintptr(len(attributes)), uintptr(unsafe.Pointer(_attributes)), uintptr(unsafe.Pointer(handle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCreatePnrpIncident calls NDFAPI!NdfCreatePnrpIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreatepnrpincident
 // Minimum OS: windows6.1.
-func NdfCreatePnrpIncident(cloudname foundation.PWSTR, peername foundation.PWSTR, diagnosePublish foundation.BOOL, appId foundation.PWSTR, handle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNdfCreatePnrpIncident.Addr(), uintptr(unsafe.Pointer(cloudname)), uintptr(unsafe.Pointer(peername)), uintptr(diagnosePublish), uintptr(unsafe.Pointer(appId)), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+func NdfCreatePnrpIncident(cloudname string, peername string, diagnosePublish bool, appId string, handle *unsafe.Pointer) error {
+	_cloudname := win32.UTF16Ptr(cloudname)
+	_peername := win32.UTF16Ptr(peername)
+	_diagnosePublish := win32.Bool32(diagnosePublish)
+	_appId := win32.UTF16Ptr(appId)
+	r1, _, _ := syscall.SyscallN(procNdfCreatePnrpIncident.Addr(), uintptr(unsafe.Pointer(_cloudname)), uintptr(unsafe.Pointer(_peername)), uintptr(_diagnosePublish), uintptr(unsafe.Pointer(_appId)), uintptr(unsafe.Pointer(handle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCreateSharingIncident calls NDFAPI!NdfCreateSharingIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreatesharingincident
 // Minimum OS: windows6.0.6000.
-func NdfCreateSharingIncident(UNCPath foundation.PWSTR, handle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNdfCreateSharingIncident.Addr(), uintptr(unsafe.Pointer(UNCPath)), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+func NdfCreateSharingIncident(UNCPath string, handle *unsafe.Pointer) error {
+	_UNCPath := win32.UTF16Ptr(UNCPath)
+	r1, _, _ := syscall.SyscallN(procNdfCreateSharingIncident.Addr(), uintptr(unsafe.Pointer(_UNCPath)), uintptr(unsafe.Pointer(handle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCreateWebIncident calls NDFAPI!NdfCreateWebIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreatewebincident
 // Minimum OS: windows6.0.6000.
-func NdfCreateWebIncident(url foundation.PWSTR, handle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNdfCreateWebIncident.Addr(), uintptr(unsafe.Pointer(url)), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+func NdfCreateWebIncident(url string, handle *unsafe.Pointer) error {
+	_url := win32.UTF16Ptr(url)
+	r1, _, _ := syscall.SyscallN(procNdfCreateWebIncident.Addr(), uintptr(unsafe.Pointer(_url)), uintptr(unsafe.Pointer(handle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCreateWebIncidentEx calls NDFAPI!NdfCreateWebIncidentEx.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreatewebincidentex
 // Minimum OS: windows6.0.6000.
-func NdfCreateWebIncidentEx(url foundation.PWSTR, useWinHTTP foundation.BOOL, moduleName foundation.PWSTR, handle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNdfCreateWebIncidentEx.Addr(), uintptr(unsafe.Pointer(url)), uintptr(useWinHTTP), uintptr(unsafe.Pointer(moduleName)), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+func NdfCreateWebIncidentEx(url string, useWinHTTP bool, moduleName string, handle *unsafe.Pointer) error {
+	_url := win32.UTF16Ptr(url)
+	_useWinHTTP := win32.Bool32(useWinHTTP)
+	_moduleName := win32.UTF16Ptr(moduleName)
+	r1, _, _ := syscall.SyscallN(procNdfCreateWebIncidentEx.Addr(), uintptr(unsafe.Pointer(_url)), uintptr(_useWinHTTP), uintptr(unsafe.Pointer(_moduleName)), uintptr(unsafe.Pointer(handle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfCreateWinSockIncident calls NDFAPI!NdfCreateWinSockIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreatewinsockincident
 // Minimum OS: windows6.0.6000.
-func NdfCreateWinSockIncident(sock networkingwinsock.SOCKET, host foundation.PWSTR, port uint16, appId foundation.PWSTR, userId *security.SID, handle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNdfCreateWinSockIncident.Addr(), uintptr(sock), uintptr(unsafe.Pointer(host)), uintptr(port), uintptr(unsafe.Pointer(appId)), uintptr(unsafe.Pointer(userId)), uintptr(unsafe.Pointer(handle)))
-	return foundation.HRESULT(r1)
+func NdfCreateWinSockIncident(sock networkingwinsock.SOCKET, host string, port uint16, appId string, userId *security.SID, handle *unsafe.Pointer) error {
+	_host := win32.UTF16Ptr(host)
+	_appId := win32.UTF16Ptr(appId)
+	r1, _, _ := syscall.SyscallN(procNdfCreateWinSockIncident.Addr(), uintptr(sock), uintptr(unsafe.Pointer(_host)), uintptr(port), uintptr(unsafe.Pointer(_appId)), uintptr(unsafe.Pointer(userId)), uintptr(unsafe.Pointer(handle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfDiagnoseIncident calls NDFAPI!NdfDiagnoseIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfdiagnoseincident
 // Minimum OS: windows6.1.
-func NdfDiagnoseIncident(Handle unsafe.Pointer, RootCauseCount *uint32, RootCauses **RootCauseInfo, dwWait uint32, dwFlags uint32) foundation.HRESULT {
+func NdfDiagnoseIncident(Handle unsafe.Pointer, RootCauseCount *uint32, RootCauses **RootCauseInfo, dwWait uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procNdfDiagnoseIncident.Addr(), uintptr(unsafe.Pointer(Handle)), uintptr(unsafe.Pointer(RootCauseCount)), uintptr(unsafe.Pointer(RootCauses)), uintptr(dwWait), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfExecuteDiagnosis calls NDFAPI!NdfExecuteDiagnosis.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfexecutediagnosis
 // Minimum OS: windows6.0.6000.
-func NdfExecuteDiagnosis(handle unsafe.Pointer, hwnd foundation.HWND) foundation.HRESULT {
+func NdfExecuteDiagnosis(handle unsafe.Pointer, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procNdfExecuteDiagnosis.Addr(), uintptr(unsafe.Pointer(handle)), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfGetTraceFile calls NDFAPI!NdfGetTraceFile.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfgettracefile
 // Minimum OS: windows6.1.
-func NdfGetTraceFile(Handle unsafe.Pointer, TraceFileLocation *foundation.PWSTR) foundation.HRESULT {
+func NdfGetTraceFile(Handle unsafe.Pointer, TraceFileLocation *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procNdfGetTraceFile.Addr(), uintptr(unsafe.Pointer(Handle)), uintptr(unsafe.Pointer(TraceFileLocation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NdfRepairIncident calls NDFAPI!NdfRepairIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfrepairincident
 // Minimum OS: windows6.1.
-func NdfRepairIncident(Handle unsafe.Pointer, RepairEx *RepairInfoEx, dwWait uint32) foundation.HRESULT {
+func NdfRepairIncident(Handle unsafe.Pointer, RepairEx *RepairInfoEx, dwWait uint32) error {
 	r1, _, _ := syscall.SyscallN(procNdfRepairIncident.Addr(), uintptr(unsafe.Pointer(Handle)), uintptr(unsafe.Pointer(RepairEx)), uintptr(dwWait))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

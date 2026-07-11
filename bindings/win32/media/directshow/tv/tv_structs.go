@@ -105,8 +105,8 @@ type ChannelIDTuneRequest struct {
 type ChannelIDTuningSpace struct {
 }
 
-// ChannelInfo_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// ChannelInfo_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type ChannelInfo_Anonymous_e__Union struct {
 	Data [3]uint32
 }
@@ -700,8 +700,8 @@ type KSM_BDA_ISDBCAS_REQUEST struct {
 	ArgbIsdbCommandData [1]byte
 }
 
-// KSM_BDA_PIN_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSM_BDA_PIN_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSM_BDA_PIN_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -712,14 +712,14 @@ type KSM_BDA_PIN struct {
 	Reserved  uint32
 }
 
-// KSM_BDA_PIN_PAIR_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSM_BDA_PIN_PAIR_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSM_BDA_PIN_PAIR_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// KSM_BDA_PIN_PAIR_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// KSM_BDA_PIN_PAIR_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type KSM_BDA_PIN_PAIR_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -1285,8 +1285,8 @@ type SBE_PIN_DATA struct {
 	CTimestamps       uint64
 }
 
-// SECTION_Header_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SECTION_Header_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SECTION_Header_e__Union struct {
 	Data [2]byte
 }
@@ -1338,8 +1338,8 @@ type SystemTuningSpaces struct {
 type TIFLoad struct {
 }
 
-// TRANSPORT_PROPERTIES_Fields_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRANSPORT_PROPERTIES_Fields_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRANSPORT_PROPERTIES_Fields_e__Union struct {
 	Data [1]uint64
 }

@@ -8,8 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-// D3DMATRIX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATRIX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATRIX_Anonymous_e__Union struct {
 	Data [16]uint32
 }
@@ -53,8 +53,8 @@ type D3D_SHADER_MACRO struct {
 	Definition foundation.PSTR
 }
 
-// D3D_VERSION_NUMBER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D_VERSION_NUMBER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D_VERSION_NUMBER struct {
 	Data [1]uint64
 }

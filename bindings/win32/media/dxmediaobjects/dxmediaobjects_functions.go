@@ -32,77 +32,78 @@ var (
 
 // DMOEnum calls msdmo!DMOEnum.
 // https://learn.microsoft.com/windows/win32/api/dmoreg/nf-dmoreg-dmoenum
-func DMOEnum(guidCategory *win32.GUID, dwFlags uint32, cInTypes uint32, pInTypes *DMO_PARTIAL_MEDIATYPE, cOutTypes uint32, pOutTypes *DMO_PARTIAL_MEDIATYPE, ppEnum **IEnumDMO) foundation.HRESULT {
+func DMOEnum(guidCategory *win32.GUID, dwFlags uint32, cInTypes uint32, pInTypes *DMO_PARTIAL_MEDIATYPE, cOutTypes uint32, pOutTypes *DMO_PARTIAL_MEDIATYPE, ppEnum **IEnumDMO) error {
 	r1, _, _ := syscall.SyscallN(procDMOEnum.Addr(), uintptr(unsafe.Pointer(guidCategory)), uintptr(dwFlags), uintptr(cInTypes), uintptr(unsafe.Pointer(pInTypes)), uintptr(cOutTypes), uintptr(unsafe.Pointer(pOutTypes)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DMOGetName calls msdmo!DMOGetName.
 // https://learn.microsoft.com/windows/win32/api/dmoreg/nf-dmoreg-dmogetname
-func DMOGetName(clsidDMO *win32.GUID, szName foundation.PWSTR) foundation.HRESULT {
+func DMOGetName(clsidDMO *win32.GUID, szName foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procDMOGetName.Addr(), uintptr(unsafe.Pointer(clsidDMO)), uintptr(unsafe.Pointer(szName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DMOGetTypes calls msdmo!DMOGetTypes.
 // https://learn.microsoft.com/windows/win32/api/dmoreg/nf-dmoreg-dmogettypes
-func DMOGetTypes(clsidDMO *win32.GUID, ulInputTypesRequested uint32, pulInputTypesSupplied *uint32, pInputTypes *DMO_PARTIAL_MEDIATYPE, ulOutputTypesRequested uint32, pulOutputTypesSupplied *uint32, pOutputTypes *DMO_PARTIAL_MEDIATYPE) foundation.HRESULT {
+func DMOGetTypes(clsidDMO *win32.GUID, ulInputTypesRequested uint32, pulInputTypesSupplied *uint32, pInputTypes *DMO_PARTIAL_MEDIATYPE, ulOutputTypesRequested uint32, pulOutputTypesSupplied *uint32, pOutputTypes *DMO_PARTIAL_MEDIATYPE) error {
 	r1, _, _ := syscall.SyscallN(procDMOGetTypes.Addr(), uintptr(unsafe.Pointer(clsidDMO)), uintptr(ulInputTypesRequested), uintptr(unsafe.Pointer(pulInputTypesSupplied)), uintptr(unsafe.Pointer(pInputTypes)), uintptr(ulOutputTypesRequested), uintptr(unsafe.Pointer(pulOutputTypesSupplied)), uintptr(unsafe.Pointer(pOutputTypes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DMORegister calls msdmo!DMORegister.
 // https://learn.microsoft.com/windows/win32/api/dmoreg/nf-dmoreg-dmoregister
-func DMORegister(szName foundation.PWSTR, clsidDMO *win32.GUID, guidCategory *win32.GUID, dwFlags uint32, cInTypes uint32, pInTypes *DMO_PARTIAL_MEDIATYPE, cOutTypes uint32, pOutTypes *DMO_PARTIAL_MEDIATYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDMORegister.Addr(), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(clsidDMO)), uintptr(unsafe.Pointer(guidCategory)), uintptr(dwFlags), uintptr(cInTypes), uintptr(unsafe.Pointer(pInTypes)), uintptr(cOutTypes), uintptr(unsafe.Pointer(pOutTypes)))
-	return foundation.HRESULT(r1)
+func DMORegister(szName string, clsidDMO *win32.GUID, guidCategory *win32.GUID, dwFlags uint32, cInTypes uint32, pInTypes *DMO_PARTIAL_MEDIATYPE, cOutTypes uint32, pOutTypes *DMO_PARTIAL_MEDIATYPE) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(procDMORegister.Addr(), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(clsidDMO)), uintptr(unsafe.Pointer(guidCategory)), uintptr(dwFlags), uintptr(cInTypes), uintptr(unsafe.Pointer(pInTypes)), uintptr(cOutTypes), uintptr(unsafe.Pointer(pOutTypes)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DMOUnregister calls msdmo!DMOUnregister.
 // https://learn.microsoft.com/windows/win32/api/dmoreg/nf-dmoreg-dmounregister
-func DMOUnregister(clsidDMO *win32.GUID, guidCategory *win32.GUID) foundation.HRESULT {
+func DMOUnregister(clsidDMO *win32.GUID, guidCategory *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procDMOUnregister.Addr(), uintptr(unsafe.Pointer(clsidDMO)), uintptr(unsafe.Pointer(guidCategory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoCopyMediaType calls msdmo!MoCopyMediaType.
 // https://learn.microsoft.com/windows/win32/api/dmort/nf-dmort-mocopymediatype
-func MoCopyMediaType(pmtDest *DMO_MEDIA_TYPE, pmtSrc *DMO_MEDIA_TYPE) foundation.HRESULT {
+func MoCopyMediaType(pmtDest *DMO_MEDIA_TYPE, pmtSrc *DMO_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procMoCopyMediaType.Addr(), uintptr(unsafe.Pointer(pmtDest)), uintptr(unsafe.Pointer(pmtSrc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoCreateMediaType calls msdmo!MoCreateMediaType.
 // https://learn.microsoft.com/windows/win32/api/dmort/nf-dmort-mocreatemediatype
-func MoCreateMediaType(ppmt **DMO_MEDIA_TYPE, cbFormat uint32) foundation.HRESULT {
+func MoCreateMediaType(ppmt **DMO_MEDIA_TYPE, cbFormat uint32) error {
 	r1, _, _ := syscall.SyscallN(procMoCreateMediaType.Addr(), uintptr(unsafe.Pointer(ppmt)), uintptr(cbFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoDeleteMediaType calls msdmo!MoDeleteMediaType.
 // https://learn.microsoft.com/windows/win32/api/dmort/nf-dmort-modeletemediatype
-func MoDeleteMediaType(pmt *DMO_MEDIA_TYPE) foundation.HRESULT {
+func MoDeleteMediaType(pmt *DMO_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procMoDeleteMediaType.Addr(), uintptr(unsafe.Pointer(pmt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoDuplicateMediaType calls msdmo!MoDuplicateMediaType.
 // https://learn.microsoft.com/windows/win32/api/dmort/nf-dmort-moduplicatemediatype
-func MoDuplicateMediaType(ppmtDest **DMO_MEDIA_TYPE, pmtSrc *DMO_MEDIA_TYPE) foundation.HRESULT {
+func MoDuplicateMediaType(ppmtDest **DMO_MEDIA_TYPE, pmtSrc *DMO_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procMoDuplicateMediaType.Addr(), uintptr(unsafe.Pointer(ppmtDest)), uintptr(unsafe.Pointer(pmtSrc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoFreeMediaType calls msdmo!MoFreeMediaType.
 // https://learn.microsoft.com/windows/win32/api/dmort/nf-dmort-mofreemediatype
-func MoFreeMediaType(pmt *DMO_MEDIA_TYPE) foundation.HRESULT {
+func MoFreeMediaType(pmt *DMO_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procMoFreeMediaType.Addr(), uintptr(unsafe.Pointer(pmt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoInitMediaType calls msdmo!MoInitMediaType.
 // https://learn.microsoft.com/windows/win32/api/dmort/nf-dmort-moinitmediatype
-func MoInitMediaType(pmt *DMO_MEDIA_TYPE, cbFormat uint32) foundation.HRESULT {
+func MoInitMediaType(pmt *DMO_MEDIA_TYPE, cbFormat uint32) error {
 	r1, _, _ := syscall.SyscallN(procMoInitMediaType.Addr(), uintptr(unsafe.Pointer(pmt)), uintptr(cbFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

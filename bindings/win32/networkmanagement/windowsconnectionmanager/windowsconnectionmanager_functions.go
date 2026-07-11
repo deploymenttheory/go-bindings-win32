@@ -40,33 +40,36 @@ func FreeInterfaceContextTable(InterfaceContextTable *NET_INTERFACE_CONTEXT_TABL
 // GetInterfaceContextTableForHostName calls OnDemandConnRouteHelper!GetInterfaceContextTableForHostName.
 // https://learn.microsoft.com/windows/win32/api/ondemandconnroutehelper/nf-ondemandconnroutehelper-getinterfacecontexttableforhostname
 // Minimum OS: windows10.0.10240.
-func GetInterfaceContextTableForHostName(HostName foundation.PWSTR, ProxyName foundation.PWSTR, Flags uint32, ConnectionProfileFilterRawData *byte, ConnectionProfileFilterRawDataSize uint32, InterfaceContextTable **NET_INTERFACE_CONTEXT_TABLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetInterfaceContextTableForHostName.Addr(), uintptr(unsafe.Pointer(HostName)), uintptr(unsafe.Pointer(ProxyName)), uintptr(Flags), uintptr(unsafe.Pointer(ConnectionProfileFilterRawData)), uintptr(ConnectionProfileFilterRawDataSize), uintptr(unsafe.Pointer(InterfaceContextTable)))
-	return foundation.HRESULT(r1)
+func GetInterfaceContextTableForHostName(HostName string, ProxyName string, Flags uint32, ConnectionProfileFilterRawData *byte, ConnectionProfileFilterRawDataSize uint32, InterfaceContextTable **NET_INTERFACE_CONTEXT_TABLE) error {
+	_HostName := win32.UTF16Ptr(HostName)
+	_ProxyName := win32.UTF16Ptr(ProxyName)
+	r1, _, _ := syscall.SyscallN(procGetInterfaceContextTableForHostName.Addr(), uintptr(unsafe.Pointer(_HostName)), uintptr(unsafe.Pointer(_ProxyName)), uintptr(Flags), uintptr(unsafe.Pointer(ConnectionProfileFilterRawData)), uintptr(ConnectionProfileFilterRawDataSize), uintptr(unsafe.Pointer(InterfaceContextTable)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDemandGetRoutingHint calls OnDemandConnRouteHelper!OnDemandGetRoutingHint.
 // https://learn.microsoft.com/windows/win32/api/ondemandconnroutehelper/nf-ondemandconnroutehelper-ondemandgetroutinghint
 // Minimum OS: windows8.1.
-func OnDemandGetRoutingHint(destinationHostName foundation.PWSTR, interfaceIndex *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOnDemandGetRoutingHint.Addr(), uintptr(unsafe.Pointer(destinationHostName)), uintptr(unsafe.Pointer(interfaceIndex)))
-	return foundation.HRESULT(r1)
+func OnDemandGetRoutingHint(destinationHostName string, interfaceIndex *uint32) error {
+	_destinationHostName := win32.UTF16Ptr(destinationHostName)
+	r1, _, _ := syscall.SyscallN(procOnDemandGetRoutingHint.Addr(), uintptr(unsafe.Pointer(_destinationHostName)), uintptr(unsafe.Pointer(interfaceIndex)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDemandRegisterNotification calls OnDemandConnRouteHelper!OnDemandRegisterNotification.
 // https://learn.microsoft.com/windows/win32/api/ondemandconnroutehelper/nf-ondemandconnroutehelper-ondemandregisternotification
 // Minimum OS: windows8.1.
-func OnDemandRegisterNotification(callback ONDEMAND_NOTIFICATION_CALLBACK, callbackContext unsafe.Pointer, registrationHandle *foundation.HANDLE) foundation.HRESULT {
+func OnDemandRegisterNotification(callback ONDEMAND_NOTIFICATION_CALLBACK, callbackContext unsafe.Pointer, registrationHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procOnDemandRegisterNotification.Addr(), uintptr(callback), uintptr(unsafe.Pointer(callbackContext)), uintptr(unsafe.Pointer(registrationHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDemandUnRegisterNotification calls OnDemandConnRouteHelper!OnDemandUnRegisterNotification.
 // https://learn.microsoft.com/windows/win32/api/ondemandconnroutehelper/nf-ondemandconnroutehelper-ondemandunregisternotification
 // Minimum OS: windows8.1.
-func OnDemandUnRegisterNotification(registrationHandle foundation.HANDLE) foundation.HRESULT {
+func OnDemandUnRegisterNotification(registrationHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procOnDemandUnRegisterNotification.Addr(), uintptr(registrationHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WcmFreeMemory calls wcmapi!WcmFreeMemory.
@@ -79,31 +82,38 @@ func WcmFreeMemory(pMemory unsafe.Pointer) {
 // WcmGetProfileList calls wcmapi!WcmGetProfileList.
 // https://learn.microsoft.com/windows/win32/api/wcmapi/nf-wcmapi-wcmgetprofilelist
 // Minimum OS: windows8.0.
-func WcmGetProfileList(pReserved unsafe.Pointer, ppProfileList **WCM_PROFILE_INFO_LIST) uint32 {
-	r1, _, _ := syscall.SyscallN(procWcmGetProfileList.Addr(), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(ppProfileList)))
+func WcmGetProfileList(ppProfileList **WCM_PROFILE_INFO_LIST) uint32 {
+	r1, _, _ := syscall.SyscallN(procWcmGetProfileList.Addr(), 0, uintptr(unsafe.Pointer(ppProfileList)))
 	return uint32(r1)
 }
 
 // WcmQueryProperty calls wcmapi!WcmQueryProperty.
 // https://learn.microsoft.com/windows/win32/api/wcmapi/nf-wcmapi-wcmqueryproperty
 // Minimum OS: windows8.0.
-func WcmQueryProperty(pInterface *win32.GUID, strProfileName foundation.PWSTR, Property WCM_PROPERTY, pReserved unsafe.Pointer, pdwDataSize *uint32, ppData **byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procWcmQueryProperty.Addr(), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(strProfileName)), uintptr(Property), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(pdwDataSize)), uintptr(unsafe.Pointer(ppData)))
+func WcmQueryProperty(pInterface *win32.GUID, strProfileName string, Property WCM_PROPERTY, pdwDataSize *uint32, ppData **byte) uint32 {
+	_strProfileName := win32.UTF16Ptr(strProfileName)
+	r1, _, _ := syscall.SyscallN(procWcmQueryProperty.Addr(), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(Property), 0, uintptr(unsafe.Pointer(pdwDataSize)), uintptr(unsafe.Pointer(ppData)))
 	return uint32(r1)
 }
 
 // WcmSetProfileList calls wcmapi!WcmSetProfileList.
 // https://learn.microsoft.com/windows/win32/api/wcmapi/nf-wcmapi-wcmsetprofilelist
 // Minimum OS: windows8.0.
-func WcmSetProfileList(pProfileList *WCM_PROFILE_INFO_LIST, dwPosition uint32, fIgnoreUnknownProfiles foundation.BOOL, pReserved unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procWcmSetProfileList.Addr(), uintptr(unsafe.Pointer(pProfileList)), uintptr(dwPosition), uintptr(fIgnoreUnknownProfiles), uintptr(unsafe.Pointer(pReserved)))
+func WcmSetProfileList(pProfileList *WCM_PROFILE_INFO_LIST, dwPosition uint32, fIgnoreUnknownProfiles bool) uint32 {
+	_fIgnoreUnknownProfiles := win32.Bool32(fIgnoreUnknownProfiles)
+	r1, _, _ := syscall.SyscallN(procWcmSetProfileList.Addr(), uintptr(unsafe.Pointer(pProfileList)), uintptr(dwPosition), uintptr(_fIgnoreUnknownProfiles), 0)
 	return uint32(r1)
 }
 
 // WcmSetProperty calls wcmapi!WcmSetProperty.
 // https://learn.microsoft.com/windows/win32/api/wcmapi/nf-wcmapi-wcmsetproperty
 // Minimum OS: windows8.0.
-func WcmSetProperty(pInterface *win32.GUID, strProfileName foundation.PWSTR, Property WCM_PROPERTY, pReserved unsafe.Pointer, dwDataSize uint32, pbData *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procWcmSetProperty.Addr(), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(strProfileName)), uintptr(Property), uintptr(unsafe.Pointer(pReserved)), uintptr(dwDataSize), uintptr(unsafe.Pointer(pbData)))
+func WcmSetProperty(pInterface *win32.GUID, strProfileName string, Property WCM_PROPERTY, pbData []byte) uint32 {
+	_strProfileName := win32.UTF16Ptr(strProfileName)
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWcmSetProperty.Addr(), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(Property), 0, uintptr(len(pbData)), uintptr(unsafe.Pointer(_pbData)))
 	return uint32(r1)
 }

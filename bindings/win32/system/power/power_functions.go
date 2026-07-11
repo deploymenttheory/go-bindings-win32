@@ -181,8 +181,9 @@ func DevicePowerOpen(DebugMask uint32) foundation.BOOLEAN {
 // DevicePowerSetDeviceState calls POWRPROF!DevicePowerSetDeviceState.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-devicepowersetdevicestate
 // Minimum OS: windows6.0.6000.
-func DevicePowerSetDeviceState(DeviceDescription foundation.PWSTR, SetFlags uint32, SetData unsafe.Pointer) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procDevicePowerSetDeviceState.Addr(), uintptr(unsafe.Pointer(DeviceDescription)), uintptr(SetFlags), uintptr(unsafe.Pointer(SetData)))
+func DevicePowerSetDeviceState(DeviceDescription string, SetFlags uint32, SetData unsafe.Pointer) (uint32, error) {
+	_DeviceDescription := win32.UTF16Ptr(DeviceDescription)
+	r1, _, e1 := syscall.SyscallN(procDevicePowerSetDeviceState.Addr(), uintptr(unsafe.Pointer(_DeviceDescription)), uintptr(SetFlags), uintptr(unsafe.Pointer(SetData)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -225,9 +226,9 @@ func GetCurrentPowerPolicies(pGlobalPowerPolicy *GLOBAL_POWER_POLICY, pPowerPoli
 // GetDevicePowerState calls KERNEL32!GetDevicePowerState.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdevicepowerstate
 // Minimum OS: windows5.1.2600.
-func GetDevicePowerState(hDevice foundation.HANDLE, pfOn *foundation.BOOL) foundation.BOOL {
+func GetDevicePowerState(hDevice foundation.HANDLE, pfOn *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procGetDevicePowerState.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(pfOn)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetPwrCapabilities calls POWRPROF!GetPwrCapabilities.
@@ -296,9 +297,9 @@ func IsPwrSuspendAllowed() foundation.BOOLEAN {
 // IsSystemResumeAutomatic calls KERNEL32!IsSystemResumeAutomatic.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-issystemresumeautomatic
 // Minimum OS: windows5.1.2600.
-func IsSystemResumeAutomatic() foundation.BOOL {
+func IsSystemResumeAutomatic() bool {
 	r1, _, _ := syscall.SyscallN(procIsSystemResumeAutomatic.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PowerCanRestoreIndividualDefaultPowerScheme calls POWRPROF!PowerCanRestoreIndividualDefaultPowerScheme.
@@ -411,8 +412,9 @@ func PowerGetUserConfiguredDCPowerMode(PowerModeGuid *win32.GUID) uint32 {
 // PowerImportPowerScheme calls POWRPROF!PowerImportPowerScheme.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powerimportpowerscheme
 // Minimum OS: windows6.0.6000.
-func PowerImportPowerScheme(RootPowerKey systemregistry.HKEY, ImportFileNamePath foundation.PWSTR, DestinationSchemeGuid **win32.GUID) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPowerImportPowerScheme.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(ImportFileNamePath)), uintptr(unsafe.Pointer(DestinationSchemeGuid)))
+func PowerImportPowerScheme(RootPowerKey systemregistry.HKEY, ImportFileNamePath string, DestinationSchemeGuid **win32.GUID) foundation.WIN32_ERROR {
+	_ImportFileNamePath := win32.UTF16Ptr(ImportFileNamePath)
+	r1, _, _ := syscall.SyscallN(procPowerImportPowerScheme.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(_ImportFileNamePath)), uintptr(unsafe.Pointer(DestinationSchemeGuid)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -425,14 +427,16 @@ func PowerIsSettingRangeDefined(SubKeyGuid *win32.GUID, SettingGuid *win32.GUID)
 }
 
 // PowerOpenSystemPowerKey calls POWRPROF!PowerOpenSystemPowerKey.
-func PowerOpenSystemPowerKey(phSystemPowerKey *systemregistry.HKEY, Access uint32, OpenExisting foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPowerOpenSystemPowerKey.Addr(), uintptr(unsafe.Pointer(phSystemPowerKey)), uintptr(Access), uintptr(OpenExisting))
+func PowerOpenSystemPowerKey(phSystemPowerKey *systemregistry.HKEY, Access uint32, OpenExisting bool) uint32 {
+	_OpenExisting := win32.Bool32(OpenExisting)
+	r1, _, _ := syscall.SyscallN(procPowerOpenSystemPowerKey.Addr(), uintptr(unsafe.Pointer(phSystemPowerKey)), uintptr(Access), uintptr(_OpenExisting))
 	return uint32(r1)
 }
 
 // PowerOpenUserPowerKey calls POWRPROF!PowerOpenUserPowerKey.
-func PowerOpenUserPowerKey(phUserPowerKey *systemregistry.HKEY, Access uint32, OpenExisting foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPowerOpenUserPowerKey.Addr(), uintptr(unsafe.Pointer(phUserPowerKey)), uintptr(Access), uintptr(OpenExisting))
+func PowerOpenUserPowerKey(phUserPowerKey *systemregistry.HKEY, Access uint32, OpenExisting bool) uint32 {
+	_OpenExisting := win32.Bool32(OpenExisting)
+	r1, _, _ := syscall.SyscallN(procPowerOpenUserPowerKey.Addr(), uintptr(unsafe.Pointer(phUserPowerKey)), uintptr(Access), uintptr(_OpenExisting))
 	return uint32(r1)
 }
 
@@ -575,9 +579,9 @@ func PowerReadValueUnitsSpecifier(RootPowerKey systemregistry.HKEY, SubGroupOfPo
 // PowerRegisterForEffectivePowerModeNotifications calls POWRPROF!PowerRegisterForEffectivePowerModeNotifications.
 // https://learn.microsoft.com/windows/win32/api/powersetting/nf-powersetting-powerregisterforeffectivepowermodenotifications
 // Minimum OS: windows10.0.17763.
-func PowerRegisterForEffectivePowerModeNotifications(Version uint32, Callback EFFECTIVE_POWER_MODE_CALLBACK, Context unsafe.Pointer, RegistrationHandle *unsafe.Pointer) foundation.HRESULT {
+func PowerRegisterForEffectivePowerModeNotifications(Version uint32, Callback EFFECTIVE_POWER_MODE_CALLBACK, Context unsafe.Pointer, RegistrationHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPowerRegisterForEffectivePowerModeNotifications.Addr(), uintptr(Version), uintptr(Callback), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(RegistrationHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PowerRegisterSuspendResumeNotification calls POWRPROF!PowerRegisterSuspendResumeNotification.
@@ -694,9 +698,9 @@ func PowerSettingUnregisterNotification(RegistrationHandle HPOWERNOTIFY) foundat
 // PowerUnregisterFromEffectivePowerModeNotifications calls POWRPROF!PowerUnregisterFromEffectivePowerModeNotifications.
 // https://learn.microsoft.com/windows/win32/api/powersetting/nf-powersetting-powerunregisterfromeffectivepowermodenotifications
 // Minimum OS: windows10.0.17763.
-func PowerUnregisterFromEffectivePowerModeNotifications(RegistrationHandle unsafe.Pointer) foundation.HRESULT {
+func PowerUnregisterFromEffectivePowerModeNotifications(RegistrationHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPowerUnregisterFromEffectivePowerModeNotifications.Addr(), uintptr(unsafe.Pointer(RegistrationHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PowerUnregisterSuspendResumeNotification calls POWRPROF!PowerUnregisterSuspendResumeNotification.
@@ -885,9 +889,9 @@ func RegisterSuspendResumeNotification(hRecipient foundation.HANDLE, Flags uiwin
 // RequestWakeupLatency calls KERNEL32!RequestWakeupLatency.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-requestwakeuplatency
 // Minimum OS: windows5.1.2600.
-func RequestWakeupLatency(latency LATENCY_TIME) foundation.BOOL {
+func RequestWakeupLatency(latency LATENCY_TIME) bool {
 	r1, _, _ := syscall.SyscallN(procRequestWakeupLatency.Addr(), uintptr(latency))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetActivePwrScheme calls POWRPROF!SetActivePwrScheme.
@@ -915,8 +919,10 @@ func SetSuspendState(bHibernate foundation.BOOLEAN, bForce foundation.BOOLEAN, b
 // SetSystemPowerState calls KERNEL32!SetSystemPowerState.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setsystempowerstate
 // Minimum OS: windows5.1.2600.
-func SetSystemPowerState(fSuspend foundation.BOOL, fForce foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetSystemPowerState.Addr(), uintptr(fSuspend), uintptr(fForce))
+func SetSystemPowerState(fSuspend bool, fForce bool) error {
+	_fSuspend := win32.Bool32(fSuspend)
+	_fForce := win32.Bool32(fForce)
+	r1, _, e1 := syscall.SyscallN(procSetSystemPowerState.Addr(), uintptr(_fSuspend), uintptr(_fForce))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -984,8 +990,10 @@ func WriteProcessorPwrScheme(uiID uint32, pMachineProcessorPowerPolicy *MACHINE_
 // WritePwrScheme calls POWRPROF!WritePwrScheme.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-writepwrscheme
 // Minimum OS: windows5.1.2600.
-func WritePwrScheme(puiID *uint32, lpszSchemeName foundation.PWSTR, lpszDescription foundation.PWSTR, lpScheme *POWER_POLICY) (foundation.BOOLEAN, error) {
-	r1, _, e1 := syscall.SyscallN(procWritePwrScheme.Addr(), uintptr(unsafe.Pointer(puiID)), uintptr(unsafe.Pointer(lpszSchemeName)), uintptr(unsafe.Pointer(lpszDescription)), uintptr(unsafe.Pointer(lpScheme)))
+func WritePwrScheme(puiID *uint32, lpszSchemeName string, lpszDescription string, lpScheme *POWER_POLICY) (foundation.BOOLEAN, error) {
+	_lpszSchemeName := win32.UTF16Ptr(lpszSchemeName)
+	_lpszDescription := win32.UTF16Ptr(lpszDescription)
+	r1, _, e1 := syscall.SyscallN(procWritePwrScheme.Addr(), uintptr(unsafe.Pointer(puiID)), uintptr(unsafe.Pointer(_lpszSchemeName)), uintptr(unsafe.Pointer(_lpszDescription)), uintptr(unsafe.Pointer(lpScheme)))
 	if e1 != 0 {
 		return foundation.BOOLEAN(r1), e1
 	}

@@ -243,8 +243,8 @@ var (
 	procImageRemoveCertificate                 = modimagehlp.NewProc("ImageRemoveCertificate")
 	procImageUnload                            = modimagehlp.NewProc("ImageUnload")
 	procMapAndLoad                             = modimagehlp.NewProc("MapAndLoad")
+	procMapFileAndCheckSum                     = modimagehlp.NewProc("MapFileAndCheckSumW")
 	procMapFileAndCheckSumA                    = modimagehlp.NewProc("MapFileAndCheckSumA")
-	procMapFileAndCheckSumW                    = modimagehlp.NewProc("MapFileAndCheckSumW")
 	procReBaseImage                            = modimagehlp.NewProc("ReBaseImage")
 	procReBaseImage64                          = modimagehlp.NewProc("ReBaseImage64")
 	procSetImageConfigInformation              = modimagehlp.NewProc("SetImageConfigInformation")
@@ -267,12 +267,12 @@ var (
 	procDecodeSystemPointer                    = modKERNEL32.NewProc("DecodeSystemPointer")
 	procEncodePointer                          = modKERNEL32.NewProc("EncodePointer")
 	procEncodeSystemPointer                    = modKERNEL32.NewProc("EncodeSystemPointer")
+	procFatalAppExit                           = modKERNEL32.NewProc("FatalAppExitW")
 	procFatalAppExitA                          = modKERNEL32.NewProc("FatalAppExitA")
-	procFatalAppExitW                          = modKERNEL32.NewProc("FatalAppExitW")
 	procFatalExit                              = modKERNEL32.NewProc("FatalExit")
 	procFlushInstructionCache                  = modKERNEL32.NewProc("FlushInstructionCache")
+	procFormatMessage                          = modKERNEL32.NewProc("FormatMessageW")
 	procFormatMessageA                         = modKERNEL32.NewProc("FormatMessageA")
-	procFormatMessageW                         = modKERNEL32.NewProc("FormatMessageW")
 	procGetEnabledXStateFeatures               = modKERNEL32.NewProc("GetEnabledXStateFeatures")
 	procGetErrorMode                           = modKERNEL32.NewProc("GetErrorMode")
 	procGetThreadContext                       = modKERNEL32.NewProc("GetThreadContext")
@@ -283,8 +283,8 @@ var (
 	procInitializeContext2                     = modKERNEL32.NewProc("InitializeContext2")
 	procIsDebuggerPresent                      = modKERNEL32.NewProc("IsDebuggerPresent")
 	procLocateXStateFeature                    = modKERNEL32.NewProc("LocateXStateFeature")
+	procOutputDebugString                      = modKERNEL32.NewProc("OutputDebugStringW")
 	procOutputDebugStringA                     = modKERNEL32.NewProc("OutputDebugStringA")
-	procOutputDebugStringW                     = modKERNEL32.NewProc("OutputDebugStringW")
 	procRaiseException                         = modKERNEL32.NewProc("RaiseException")
 	procRaiseFailFastException                 = modKERNEL32.NewProc("RaiseFailFastException")
 	procReadProcessMemory                      = modKERNEL32.NewProc("ReadProcessMemory")
@@ -423,15 +423,16 @@ func CopyContext(Destination *CONTEXT, ContextFlags CONTEXT_FLAGS, Source *CONTE
 }
 
 // DbgHelpCreateUserDump calls dbghelp!DbgHelpCreateUserDump.
-func DbgHelpCreateUserDump(FileName foundation.PSTR, Callback PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData unsafe.Pointer) foundation.BOOL {
+func DbgHelpCreateUserDump(FileName foundation.PSTR, Callback PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procDbgHelpCreateUserDump.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(Callback), uintptr(unsafe.Pointer(UserData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DbgHelpCreateUserDumpW calls dbghelp!DbgHelpCreateUserDumpW.
-func DbgHelpCreateUserDumpW(FileName foundation.PWSTR, Callback PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDbgHelpCreateUserDumpW.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(Callback), uintptr(unsafe.Pointer(UserData)))
-	return foundation.BOOL(r1)
+func DbgHelpCreateUserDumpW(FileName string, Callback PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData unsafe.Pointer) bool {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, _ := syscall.SyscallN(procDbgHelpCreateUserDumpW.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(Callback), uintptr(unsafe.Pointer(UserData)))
+	return r1 != 0
 }
 
 // DebugActiveProcess calls KERNEL32!DebugActiveProcess.
@@ -477,8 +478,9 @@ func DebugBreakProcess(Process foundation.HANDLE) error {
 // DebugSetProcessKillOnExit calls KERNEL32!DebugSetProcessKillOnExit.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-debugsetprocesskillonexit
 // Minimum OS: windows5.1.2600.
-func DebugSetProcessKillOnExit(KillOnExit foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDebugSetProcessKillOnExit.Addr(), uintptr(KillOnExit))
+func DebugSetProcessKillOnExit(KillOnExit bool) error {
+	_KillOnExit := win32.Bool32(KillOnExit)
+	r1, _, e1 := syscall.SyscallN(procDebugSetProcessKillOnExit.Addr(), uintptr(_KillOnExit))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -492,9 +494,9 @@ func DecodePointer(Ptr unsafe.Pointer) unsafe.Pointer {
 }
 
 // DecodeRemotePointer calls api-ms-win-core-util-l1-1-1!DecodeRemotePointer.
-func DecodeRemotePointer(ProcessHandle foundation.HANDLE, Ptr unsafe.Pointer, DecodedPtr *unsafe.Pointer) foundation.HRESULT {
+func DecodeRemotePointer(ProcessHandle foundation.HANDLE, Ptr unsafe.Pointer, DecodedPtr *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDecodeRemotePointer.Addr(), uintptr(ProcessHandle), uintptr(unsafe.Pointer(Ptr)), uintptr(unsafe.Pointer(DecodedPtr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DecodeSystemPointer calls KERNEL32!DecodeSystemPointer.
@@ -510,9 +512,9 @@ func EncodePointer(Ptr unsafe.Pointer) unsafe.Pointer {
 }
 
 // EncodeRemotePointer calls api-ms-win-core-util-l1-1-1!EncodeRemotePointer.
-func EncodeRemotePointer(ProcessHandle foundation.HANDLE, Ptr unsafe.Pointer, EncodedPtr *unsafe.Pointer) foundation.HRESULT {
+func EncodeRemotePointer(ProcessHandle foundation.HANDLE, Ptr unsafe.Pointer, EncodedPtr *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procEncodeRemotePointer.Addr(), uintptr(ProcessHandle), uintptr(unsafe.Pointer(Ptr)), uintptr(unsafe.Pointer(EncodedPtr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EncodeSystemPointer calls KERNEL32!EncodeSystemPointer.
@@ -533,8 +535,10 @@ func EnumDirTree(hProcess foundation.HANDLE, RootPath foundation.PSTR, InputPath
 
 // EnumDirTreeW calls dbghelp!EnumDirTreeW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-enumdirtreew
-func EnumDirTreeW(hProcess foundation.HANDLE, RootPath foundation.PWSTR, InputPathName foundation.PWSTR, OutputPathBuffer foundation.PWSTR, cb PENUMDIRTREE_CALLBACKW, data unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procEnumDirTreeW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(RootPath)), uintptr(unsafe.Pointer(InputPathName)), uintptr(unsafe.Pointer(OutputPathBuffer)), uintptr(cb), uintptr(unsafe.Pointer(data)))
+func EnumDirTreeW(hProcess foundation.HANDLE, RootPath string, InputPathName string, OutputPathBuffer foundation.PWSTR, cb PENUMDIRTREE_CALLBACKW, data unsafe.Pointer) error {
+	_RootPath := win32.UTF16Ptr(RootPath)
+	_InputPathName := win32.UTF16Ptr(InputPathName)
+	r1, _, e1 := syscall.SyscallN(procEnumDirTreeW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_RootPath)), uintptr(unsafe.Pointer(_InputPathName)), uintptr(unsafe.Pointer(OutputPathBuffer)), uintptr(cb), uintptr(unsafe.Pointer(data)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -581,18 +585,19 @@ func EnumerateLoadedModulesW64(hProcess foundation.HANDLE, EnumLoadedModulesCall
 	return nil
 }
 
+// FatalAppExit calls KERNEL32!FatalAppExitW.
+// https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-fatalappexitw
+// Minimum OS: windows5.1.2600.
+func FatalAppExit(uAction uint32, lpMessageText string) {
+	_lpMessageText := win32.UTF16Ptr(lpMessageText)
+	syscall.SyscallN(procFatalAppExit.Addr(), uintptr(uAction), uintptr(unsafe.Pointer(_lpMessageText)))
+}
+
 // FatalAppExitA calls KERNEL32!FatalAppExitA.
 // https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-fatalappexita
 // Minimum OS: windows5.1.2600.
 func FatalAppExitA(uAction uint32, lpMessageText foundation.PSTR) {
 	syscall.SyscallN(procFatalAppExitA.Addr(), uintptr(uAction), uintptr(unsafe.Pointer(lpMessageText)))
-}
-
-// FatalAppExitW calls KERNEL32!FatalAppExitW.
-// https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-fatalappexitw
-// Minimum OS: windows5.1.2600.
-func FatalAppExitW(uAction uint32, lpMessageText foundation.PWSTR) {
-	syscall.SyscallN(procFatalAppExitW.Addr(), uintptr(uAction), uintptr(unsafe.Pointer(lpMessageText)))
 }
 
 // FatalExit calls KERNEL32!FatalExit.
@@ -626,8 +631,10 @@ func FindDebugInfoFileEx(FileName foundation.PSTR, SymbolPath foundation.PSTR, D
 
 // FindDebugInfoFileExW calls dbghelp!FindDebugInfoFileExW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-finddebuginfofileexw
-func FindDebugInfoFileExW(FileName foundation.PWSTR, SymbolPath foundation.PWSTR, DebugFilePath foundation.PWSTR, Callback PFIND_DEBUG_FILE_CALLBACKW, CallerData unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindDebugInfoFileExW.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(SymbolPath)), uintptr(unsafe.Pointer(DebugFilePath)), uintptr(Callback), uintptr(unsafe.Pointer(CallerData)))
+func FindDebugInfoFileExW(FileName string, SymbolPath string, DebugFilePath foundation.PWSTR, Callback PFIND_DEBUG_FILE_CALLBACKW, CallerData unsafe.Pointer) (foundation.HANDLE, error) {
+	_FileName := win32.UTF16Ptr(FileName)
+	_SymbolPath := win32.UTF16Ptr(SymbolPath)
+	r1, _, e1 := syscall.SyscallN(procFindDebugInfoFileExW.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(_SymbolPath)), uintptr(unsafe.Pointer(DebugFilePath)), uintptr(Callback), uintptr(unsafe.Pointer(CallerData)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -659,8 +666,10 @@ func FindExecutableImageEx(FileName foundation.PSTR, SymbolPath foundation.PSTR,
 
 // FindExecutableImageExW calls dbghelp!FindExecutableImageExW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-findexecutableimageexw
-func FindExecutableImageExW(FileName foundation.PWSTR, SymbolPath foundation.PWSTR, ImageFilePath foundation.PWSTR, Callback PFIND_EXE_FILE_CALLBACKW, CallerData unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindExecutableImageExW.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(SymbolPath)), uintptr(unsafe.Pointer(ImageFilePath)), uintptr(Callback), uintptr(unsafe.Pointer(CallerData)))
+func FindExecutableImageExW(FileName string, SymbolPath string, ImageFilePath foundation.PWSTR, Callback PFIND_EXE_FILE_CALLBACKW, CallerData unsafe.Pointer) (foundation.HANDLE, error) {
+	_FileName := win32.UTF16Ptr(FileName)
+	_SymbolPath := win32.UTF16Ptr(SymbolPath)
+	r1, _, e1 := syscall.SyscallN(procFindExecutableImageExW.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(_SymbolPath)), uintptr(unsafe.Pointer(ImageFilePath)), uintptr(Callback), uintptr(unsafe.Pointer(CallerData)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -669,15 +678,15 @@ func FindExecutableImageExW(FileName foundation.PWSTR, SymbolPath foundation.PWS
 }
 
 // FindFileInPath calls dbghelp!FindFileInPath.
-func FindFileInPath(hprocess foundation.HANDLE, SearchPathA foundation.PSTR, FileName foundation.PSTR, id unsafe.Pointer, two uint32, three uint32, flags uint32, FilePath foundation.PSTR) foundation.BOOL {
+func FindFileInPath(hprocess foundation.HANDLE, SearchPathA foundation.PSTR, FileName foundation.PSTR, id unsafe.Pointer, two uint32, three uint32, flags uint32, FilePath foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procFindFileInPath.Addr(), uintptr(hprocess), uintptr(unsafe.Pointer(SearchPathA)), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(id)), uintptr(two), uintptr(three), uintptr(flags), uintptr(unsafe.Pointer(FilePath)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FindFileInSearchPath calls dbghelp!FindFileInSearchPath.
-func FindFileInSearchPath(hprocess foundation.HANDLE, SearchPathA foundation.PSTR, FileName foundation.PSTR, one uint32, two uint32, three uint32, FilePath foundation.PSTR) foundation.BOOL {
+func FindFileInSearchPath(hprocess foundation.HANDLE, SearchPathA foundation.PSTR, FileName foundation.PSTR, one uint32, two uint32, three uint32, FilePath foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procFindFileInSearchPath.Addr(), uintptr(hprocess), uintptr(unsafe.Pointer(SearchPathA)), uintptr(unsafe.Pointer(FileName)), uintptr(one), uintptr(two), uintptr(three), uintptr(unsafe.Pointer(FilePath)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FlushInstructionCache calls KERNEL32!FlushInstructionCache.
@@ -691,22 +700,22 @@ func FlushInstructionCache(hProcess foundation.HANDLE, lpBaseAddress unsafe.Poin
 	return nil
 }
 
-// FormatMessageA calls KERNEL32!FormatMessageA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-formatmessagea
+// FormatMessage calls KERNEL32!FormatMessageW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-formatmessagew
 // Minimum OS: windows5.1.2600.
-func FormatMessageA(dwFlags FORMAT_MESSAGE_OPTIONS, lpSource unsafe.Pointer, dwMessageId uint32, dwLanguageId uint32, lpBuffer foundation.PSTR, nSize uint32, Arguments **int8) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procFormatMessageA.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpSource)), uintptr(dwMessageId), uintptr(dwLanguageId), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(Arguments)))
+func FormatMessage(dwFlags FORMAT_MESSAGE_OPTIONS, lpSource unsafe.Pointer, dwMessageId uint32, dwLanguageId uint32, lpBuffer foundation.PWSTR, nSize uint32, Arguments **int8) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procFormatMessage.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpSource)), uintptr(dwMessageId), uintptr(dwLanguageId), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(Arguments)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
-// FormatMessageW calls KERNEL32!FormatMessageW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-formatmessagew
+// FormatMessageA calls KERNEL32!FormatMessageA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-formatmessagea
 // Minimum OS: windows5.1.2600.
-func FormatMessageW(dwFlags FORMAT_MESSAGE_OPTIONS, lpSource unsafe.Pointer, dwMessageId uint32, dwLanguageId uint32, lpBuffer foundation.PWSTR, nSize uint32, Arguments **int8) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procFormatMessageW.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpSource)), uintptr(dwMessageId), uintptr(dwLanguageId), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(Arguments)))
+func FormatMessageA(dwFlags FORMAT_MESSAGE_OPTIONS, lpSource unsafe.Pointer, dwMessageId uint32, dwLanguageId uint32, lpBuffer foundation.PSTR, nSize uint32, Arguments **int8) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procFormatMessageA.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpSource)), uintptr(dwMessageId), uintptr(dwLanguageId), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(Arguments)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -812,9 +821,9 @@ func GetTimestampForLoadedLibrary(Module foundation.HMODULE) (uint32, error) {
 // GetXStateFeaturesMask calls KERNEL32!GetXStateFeaturesMask.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getxstatefeaturesmask
 // Minimum OS: windows6.1.
-func GetXStateFeaturesMask(Context *CONTEXT, FeatureMask *uint64) foundation.BOOL {
+func GetXStateFeaturesMask(Context *CONTEXT, FeatureMask *uint64) bool {
 	r1, _, _ := syscall.SyscallN(procGetXStateFeaturesMask.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(FeatureMask)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ImageAddCertificate calls imagehlp!ImageAddCertificate.
@@ -853,8 +862,12 @@ func ImageDirectoryEntryToDataEx(Base unsafe.Pointer, MappedAsImage foundation.B
 // ImageEnumerateCertificates calls imagehlp!ImageEnumerateCertificates.
 // https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-imageenumeratecertificates
 // Minimum OS: windows5.1.2600.
-func ImageEnumerateCertificates(FileHandle foundation.HANDLE, TypeFilter uint16, CertificateCount *uint32, Indices *uint32, IndexCount uint32) error {
-	r1, _, e1 := syscall.SyscallN(procImageEnumerateCertificates.Addr(), uintptr(FileHandle), uintptr(TypeFilter), uintptr(unsafe.Pointer(CertificateCount)), uintptr(unsafe.Pointer(Indices)), uintptr(IndexCount))
+func ImageEnumerateCertificates(FileHandle foundation.HANDLE, TypeFilter uint16, CertificateCount *uint32, Indices []uint32) error {
+	var _Indices *uint32
+	if len(Indices) > 0 {
+		_Indices = &Indices[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procImageEnumerateCertificates.Addr(), uintptr(FileHandle), uintptr(TypeFilter), uintptr(unsafe.Pointer(CertificateCount)), uintptr(unsafe.Pointer(_Indices)), uintptr(len(Indices)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -999,9 +1012,9 @@ func InitializeContext2(Buffer unsafe.Pointer, ContextFlags CONTEXT_FLAGS, Conte
 // IsDebuggerPresent calls KERNEL32!IsDebuggerPresent.
 // https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-isdebuggerpresent
 // Minimum OS: windows5.1.2600.
-func IsDebuggerPresent() foundation.BOOL {
+func IsDebuggerPresent() bool {
 	r1, _, _ := syscall.SyscallN(procIsDebuggerPresent.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LocateXStateFeature calls KERNEL32!LocateXStateFeature.
@@ -1025,12 +1038,23 @@ func MakeSureDirectoryPathExists(DirPath foundation.PSTR) error {
 // MapAndLoad calls imagehlp!MapAndLoad.
 // https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-mapandload
 // Minimum OS: windows5.1.2600.
-func MapAndLoad(ImageName foundation.PSTR, DllPath foundation.PSTR, LoadedImage *LOADED_IMAGE, DotDll foundation.BOOL, ReadOnly foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procMapAndLoad.Addr(), uintptr(unsafe.Pointer(ImageName)), uintptr(unsafe.Pointer(DllPath)), uintptr(unsafe.Pointer(LoadedImage)), uintptr(DotDll), uintptr(ReadOnly))
+func MapAndLoad(ImageName foundation.PSTR, DllPath foundation.PSTR, LoadedImage *LOADED_IMAGE, DotDll bool, ReadOnly bool) error {
+	_DotDll := win32.Bool32(DotDll)
+	_ReadOnly := win32.Bool32(ReadOnly)
+	r1, _, e1 := syscall.SyscallN(procMapAndLoad.Addr(), uintptr(unsafe.Pointer(ImageName)), uintptr(unsafe.Pointer(DllPath)), uintptr(unsafe.Pointer(LoadedImage)), uintptr(_DotDll), uintptr(_ReadOnly))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// MapFileAndCheckSum calls imagehlp!MapFileAndCheckSumW.
+// https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-mapfileandchecksumw
+// Minimum OS: windows5.1.2600.
+func MapFileAndCheckSum(Filename string, HeaderSum *uint32, CheckSum *uint32) uint32 {
+	_Filename := win32.UTF16Ptr(Filename)
+	r1, _, _ := syscall.SyscallN(procMapFileAndCheckSum.Addr(), uintptr(unsafe.Pointer(_Filename)), uintptr(unsafe.Pointer(HeaderSum)), uintptr(unsafe.Pointer(CheckSum)))
+	return uint32(r1)
 }
 
 // MapFileAndCheckSumA calls imagehlp!MapFileAndCheckSumA.
@@ -1038,14 +1062,6 @@ func MapAndLoad(ImageName foundation.PSTR, DllPath foundation.PSTR, LoadedImage 
 // Minimum OS: windows5.1.2600.
 func MapFileAndCheckSumA(Filename foundation.PSTR, HeaderSum *uint32, CheckSum *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMapFileAndCheckSumA.Addr(), uintptr(unsafe.Pointer(Filename)), uintptr(unsafe.Pointer(HeaderSum)), uintptr(unsafe.Pointer(CheckSum)))
-	return uint32(r1)
-}
-
-// MapFileAndCheckSumW calls imagehlp!MapFileAndCheckSumW.
-// https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-mapfileandchecksumw
-// Minimum OS: windows5.1.2600.
-func MapFileAndCheckSumW(Filename foundation.PWSTR, HeaderSum *uint32, CheckSum *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMapFileAndCheckSumW.Addr(), uintptr(unsafe.Pointer(Filename)), uintptr(unsafe.Pointer(HeaderSum)), uintptr(unsafe.Pointer(CheckSum)))
 	return uint32(r1)
 }
 
@@ -1062,9 +1078,9 @@ func MessageBeep(uType uiwindowsandmessaging.MESSAGEBOX_STYLE) error {
 
 // MiniDumpReadDumpStream calls dbghelp!MiniDumpReadDumpStream.
 // https://learn.microsoft.com/windows/win32/api/minidumpapiset/nf-minidumpapiset-minidumpreaddumpstream
-func MiniDumpReadDumpStream(BaseOfDump unsafe.Pointer, StreamNumber uint32, Dir **MINIDUMP_DIRECTORY, StreamPointer *unsafe.Pointer, StreamSize *uint32) foundation.BOOL {
+func MiniDumpReadDumpStream(BaseOfDump unsafe.Pointer, StreamNumber uint32, Dir **MINIDUMP_DIRECTORY, StreamPointer *unsafe.Pointer, StreamSize *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procMiniDumpReadDumpStream.Addr(), uintptr(unsafe.Pointer(BaseOfDump)), uintptr(StreamNumber), uintptr(unsafe.Pointer(Dir)), uintptr(unsafe.Pointer(StreamPointer)), uintptr(unsafe.Pointer(StreamSize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MiniDumpWriteDump calls dbghelp!MiniDumpWriteDump.
@@ -1089,6 +1105,14 @@ func OpenThreadWaitChainSession(Flags OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS, call
 	return ret, nil
 }
 
+// OutputDebugString calls KERNEL32!OutputDebugStringW.
+// https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-outputdebugstringw
+// Minimum OS: windows5.1.2600.
+func OutputDebugString(lpOutputString string) {
+	_lpOutputString := win32.UTF16Ptr(lpOutputString)
+	syscall.SyscallN(procOutputDebugString.Addr(), uintptr(unsafe.Pointer(_lpOutputString)))
+}
+
 // OutputDebugStringA calls KERNEL32!OutputDebugStringA.
 // https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-outputdebugstringa
 // Minimum OS: windows5.1.2600.
@@ -1096,18 +1120,15 @@ func OutputDebugStringA(lpOutputString foundation.PSTR) {
 	syscall.SyscallN(procOutputDebugStringA.Addr(), uintptr(unsafe.Pointer(lpOutputString)))
 }
 
-// OutputDebugStringW calls KERNEL32!OutputDebugStringW.
-// https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-outputdebugstringw
-// Minimum OS: windows5.1.2600.
-func OutputDebugStringW(lpOutputString foundation.PWSTR) {
-	syscall.SyscallN(procOutputDebugStringW.Addr(), uintptr(unsafe.Pointer(lpOutputString)))
-}
-
 // RaiseException calls KERNEL32!RaiseException.
 // https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-raiseexception
 // Minimum OS: windows5.1.2600.
-func RaiseException(dwExceptionCode uint32, dwExceptionFlags uint32, nNumberOfArguments uint32, lpArguments *uintptr) {
-	syscall.SyscallN(procRaiseException.Addr(), uintptr(dwExceptionCode), uintptr(dwExceptionFlags), uintptr(nNumberOfArguments), uintptr(unsafe.Pointer(lpArguments)))
+func RaiseException(dwExceptionCode uint32, dwExceptionFlags uint32, lpArguments []uintptr) {
+	var _lpArguments *uintptr
+	if len(lpArguments) > 0 {
+		_lpArguments = &lpArguments[0]
+	}
+	syscall.SyscallN(procRaiseException.Addr(), uintptr(dwExceptionCode), uintptr(dwExceptionFlags), uintptr(len(lpArguments)), uintptr(unsafe.Pointer(_lpArguments)))
 }
 
 // RaiseFailFastException calls KERNEL32!RaiseFailFastException.
@@ -1118,9 +1139,10 @@ func RaiseFailFastException(pExceptionRecord *EXCEPTION_RECORD, pContextRecord *
 }
 
 // RangeMapAddPeImageSections calls dbghelp!RangeMapAddPeImageSections.
-func RangeMapAddPeImageSections(RmapHandle unsafe.Pointer, ImageName foundation.PWSTR, MappedImage unsafe.Pointer, MappingBytes uint32, ImageBase uint64, UserTag uint64, MappingFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRangeMapAddPeImageSections.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(unsafe.Pointer(ImageName)), uintptr(unsafe.Pointer(MappedImage)), uintptr(MappingBytes), uintptr(ImageBase), uintptr(UserTag), uintptr(MappingFlags))
-	return foundation.BOOL(r1)
+func RangeMapAddPeImageSections(RmapHandle unsafe.Pointer, ImageName string, MappedImage unsafe.Pointer, MappingBytes uint32, ImageBase uint64, UserTag uint64, MappingFlags uint32) bool {
+	_ImageName := win32.UTF16Ptr(ImageName)
+	r1, _, _ := syscall.SyscallN(procRangeMapAddPeImageSections.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(unsafe.Pointer(_ImageName)), uintptr(unsafe.Pointer(MappedImage)), uintptr(MappingBytes), uintptr(ImageBase), uintptr(UserTag), uintptr(MappingFlags))
+	return r1 != 0
 }
 
 // RangeMapCreate calls dbghelp!RangeMapCreate.
@@ -1135,28 +1157,31 @@ func RangeMapFree(RmapHandle unsafe.Pointer) {
 }
 
 // RangeMapRead calls dbghelp!RangeMapRead.
-func RangeMapRead(RmapHandle unsafe.Pointer, Offset uint64, Buffer unsafe.Pointer, RequestBytes uint32, Flags uint32, DoneBytes *uint32) foundation.BOOL {
+func RangeMapRead(RmapHandle unsafe.Pointer, Offset uint64, Buffer unsafe.Pointer, RequestBytes uint32, Flags uint32, DoneBytes *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procRangeMapRead.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(RequestBytes), uintptr(Flags), uintptr(unsafe.Pointer(DoneBytes)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RangeMapRemove calls dbghelp!RangeMapRemove.
-func RangeMapRemove(RmapHandle unsafe.Pointer, UserTag uint64) foundation.BOOL {
+func RangeMapRemove(RmapHandle unsafe.Pointer, UserTag uint64) bool {
 	r1, _, _ := syscall.SyscallN(procRangeMapRemove.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(UserTag))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RangeMapWrite calls dbghelp!RangeMapWrite.
-func RangeMapWrite(RmapHandle unsafe.Pointer, Offset uint64, Buffer unsafe.Pointer, RequestBytes uint32, Flags uint32, DoneBytes *uint32) foundation.BOOL {
+func RangeMapWrite(RmapHandle unsafe.Pointer, Offset uint64, Buffer unsafe.Pointer, RequestBytes uint32, Flags uint32, DoneBytes *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procRangeMapWrite.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(RequestBytes), uintptr(Flags), uintptr(unsafe.Pointer(DoneBytes)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ReBaseImage calls imagehlp!ReBaseImage.
 // https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-rebaseimage
 // Minimum OS: windows5.1.2600.
-func ReBaseImage(CurrentImageName foundation.PSTR, SymbolPath foundation.PSTR, fReBase foundation.BOOL, fRebaseSysfileOk foundation.BOOL, fGoingDown foundation.BOOL, CheckImageSize uint32, OldImageSize *uint32, OldImageBase *uintptr, NewImageSize *uint32, NewImageBase *uintptr, TimeStamp uint32) error {
-	r1, _, e1 := syscall.SyscallN(procReBaseImage.Addr(), uintptr(unsafe.Pointer(CurrentImageName)), uintptr(unsafe.Pointer(SymbolPath)), uintptr(fReBase), uintptr(fRebaseSysfileOk), uintptr(fGoingDown), uintptr(CheckImageSize), uintptr(unsafe.Pointer(OldImageSize)), uintptr(unsafe.Pointer(OldImageBase)), uintptr(unsafe.Pointer(NewImageSize)), uintptr(unsafe.Pointer(NewImageBase)), uintptr(TimeStamp))
+func ReBaseImage(CurrentImageName foundation.PSTR, SymbolPath foundation.PSTR, fReBase bool, fRebaseSysfileOk bool, fGoingDown bool, CheckImageSize uint32, OldImageSize *uint32, OldImageBase *uintptr, NewImageSize *uint32, NewImageBase *uintptr, TimeStamp uint32) error {
+	_fReBase := win32.Bool32(fReBase)
+	_fRebaseSysfileOk := win32.Bool32(fRebaseSysfileOk)
+	_fGoingDown := win32.Bool32(fGoingDown)
+	r1, _, e1 := syscall.SyscallN(procReBaseImage.Addr(), uintptr(unsafe.Pointer(CurrentImageName)), uintptr(unsafe.Pointer(SymbolPath)), uintptr(_fReBase), uintptr(_fRebaseSysfileOk), uintptr(_fGoingDown), uintptr(CheckImageSize), uintptr(unsafe.Pointer(OldImageSize)), uintptr(unsafe.Pointer(OldImageBase)), uintptr(unsafe.Pointer(NewImageSize)), uintptr(unsafe.Pointer(NewImageBase)), uintptr(TimeStamp))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1166,8 +1191,11 @@ func ReBaseImage(CurrentImageName foundation.PSTR, SymbolPath foundation.PSTR, f
 // ReBaseImage64 calls imagehlp!ReBaseImage64.
 // https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-rebaseimage64
 // Minimum OS: windows5.1.2600.
-func ReBaseImage64(CurrentImageName foundation.PSTR, SymbolPath foundation.PSTR, fReBase foundation.BOOL, fRebaseSysfileOk foundation.BOOL, fGoingDown foundation.BOOL, CheckImageSize uint32, OldImageSize *uint32, OldImageBase *uint64, NewImageSize *uint32, NewImageBase *uint64, TimeStamp uint32) error {
-	r1, _, e1 := syscall.SyscallN(procReBaseImage64.Addr(), uintptr(unsafe.Pointer(CurrentImageName)), uintptr(unsafe.Pointer(SymbolPath)), uintptr(fReBase), uintptr(fRebaseSysfileOk), uintptr(fGoingDown), uintptr(CheckImageSize), uintptr(unsafe.Pointer(OldImageSize)), uintptr(unsafe.Pointer(OldImageBase)), uintptr(unsafe.Pointer(NewImageSize)), uintptr(unsafe.Pointer(NewImageBase)), uintptr(TimeStamp))
+func ReBaseImage64(CurrentImageName foundation.PSTR, SymbolPath foundation.PSTR, fReBase bool, fRebaseSysfileOk bool, fGoingDown bool, CheckImageSize uint32, OldImageSize *uint32, OldImageBase *uint64, NewImageSize *uint32, NewImageBase *uint64, TimeStamp uint32) error {
+	_fReBase := win32.Bool32(fReBase)
+	_fRebaseSysfileOk := win32.Bool32(fRebaseSysfileOk)
+	_fGoingDown := win32.Bool32(fGoingDown)
+	r1, _, e1 := syscall.SyscallN(procReBaseImage64.Addr(), uintptr(unsafe.Pointer(CurrentImageName)), uintptr(unsafe.Pointer(SymbolPath)), uintptr(_fReBase), uintptr(_fRebaseSysfileOk), uintptr(_fGoingDown), uintptr(CheckImageSize), uintptr(unsafe.Pointer(OldImageSize)), uintptr(unsafe.Pointer(OldImageBase)), uintptr(unsafe.Pointer(NewImageSize)), uintptr(unsafe.Pointer(NewImageBase)), uintptr(TimeStamp))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1214,23 +1242,32 @@ func RemoveVectoredExceptionHandler(Handle unsafe.Pointer) uint32 {
 }
 
 // ReportSymbolLoadSummary calls dbghelp!ReportSymbolLoadSummary.
-func ReportSymbolLoadSummary(hProcess foundation.HANDLE, pLoadModule foundation.PWSTR, pSymbolData *DBGHELP_DATA_REPORT_STRUCT) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procReportSymbolLoadSummary.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pLoadModule)), uintptr(unsafe.Pointer(pSymbolData)))
-	return foundation.BOOL(r1)
+func ReportSymbolLoadSummary(hProcess foundation.HANDLE, pLoadModule string, pSymbolData *DBGHELP_DATA_REPORT_STRUCT) bool {
+	_pLoadModule := win32.UTF16Ptr(pLoadModule)
+	r1, _, _ := syscall.SyscallN(procReportSymbolLoadSummary.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_pLoadModule)), uintptr(unsafe.Pointer(pSymbolData)))
+	return r1 != 0
 }
 
 // RtlAddFunctionTable calls KERNEL32!RtlAddFunctionTable.
 // https://learn.microsoft.com/windows/win32/api/winnt/nf-winnt-rtladdfunctiontable
-func RtlAddFunctionTable(FunctionTable *IMAGE_RUNTIME_FUNCTION_ENTRY, EntryCount uint32, BaseAddress uint64) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procRtlAddFunctionTable.Addr(), uintptr(unsafe.Pointer(FunctionTable)), uintptr(EntryCount), uintptr(BaseAddress))
+func RtlAddFunctionTable(FunctionTable []IMAGE_RUNTIME_FUNCTION_ENTRY, BaseAddress uint64) foundation.BOOLEAN {
+	var _FunctionTable *IMAGE_RUNTIME_FUNCTION_ENTRY
+	if len(FunctionTable) > 0 {
+		_FunctionTable = &FunctionTable[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlAddFunctionTable.Addr(), uintptr(unsafe.Pointer(_FunctionTable)), uintptr(len(FunctionTable)), uintptr(BaseAddress))
 	return foundation.BOOLEAN(r1)
 }
 
 // RtlAddGrowableFunctionTable calls ntdll!RtlAddGrowableFunctionTable.
 // https://learn.microsoft.com/windows/win32/api/winnt/nf-winnt-rtladdgrowablefunctiontable
 // Minimum OS: windows8.0.
-func RtlAddGrowableFunctionTable(DynamicTable *unsafe.Pointer, FunctionTable *IMAGE_RUNTIME_FUNCTION_ENTRY, EntryCount uint32, MaximumEntryCount uint32, RangeBase uintptr, RangeEnd uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procRtlAddGrowableFunctionTable.Addr(), uintptr(unsafe.Pointer(DynamicTable)), uintptr(unsafe.Pointer(FunctionTable)), uintptr(EntryCount), uintptr(MaximumEntryCount), uintptr(RangeBase), uintptr(RangeEnd))
+func RtlAddGrowableFunctionTable(DynamicTable *unsafe.Pointer, FunctionTable []IMAGE_RUNTIME_FUNCTION_ENTRY, EntryCount uint32, RangeBase uintptr, RangeEnd uintptr) uint32 {
+	var _FunctionTable *IMAGE_RUNTIME_FUNCTION_ENTRY
+	if len(FunctionTable) > 0 {
+		_FunctionTable = &FunctionTable[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlAddGrowableFunctionTable.Addr(), uintptr(unsafe.Pointer(DynamicTable)), uintptr(unsafe.Pointer(_FunctionTable)), uintptr(EntryCount), uintptr(len(FunctionTable)), uintptr(RangeBase), uintptr(RangeEnd))
 	return uint32(r1)
 }
 
@@ -1277,8 +1314,9 @@ func RtlGrowFunctionTable(DynamicTable unsafe.Pointer, NewEntryCount uint32) {
 
 // RtlInstallFunctionTableCallback calls KERNEL32!RtlInstallFunctionTableCallback.
 // https://learn.microsoft.com/windows/win32/api/winnt/nf-winnt-rtlinstallfunctiontablecallback
-func RtlInstallFunctionTableCallback(TableIdentifier uint64, BaseAddress uint64, Length uint32, Callback PGET_RUNTIME_FUNCTION_CALLBACK, Context unsafe.Pointer, OutOfProcessCallbackDll foundation.PWSTR) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procRtlInstallFunctionTableCallback.Addr(), uintptr(TableIdentifier), uintptr(BaseAddress), uintptr(Length), uintptr(Callback), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(OutOfProcessCallbackDll)))
+func RtlInstallFunctionTableCallback(TableIdentifier uint64, BaseAddress uint64, Length uint32, Callback PGET_RUNTIME_FUNCTION_CALLBACK, Context unsafe.Pointer, OutOfProcessCallbackDll string) foundation.BOOLEAN {
+	_OutOfProcessCallbackDll := win32.UTF16Ptr(OutOfProcessCallbackDll)
+	r1, _, _ := syscall.SyscallN(procRtlInstallFunctionTableCallback.Addr(), uintptr(TableIdentifier), uintptr(BaseAddress), uintptr(Length), uintptr(Callback), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(_OutOfProcessCallbackDll)))
 	return foundation.BOOLEAN(r1)
 }
 
@@ -1340,8 +1378,10 @@ func SearchTreeForFile(RootPath foundation.PSTR, InputPathName foundation.PSTR, 
 
 // SearchTreeForFileW calls dbghelp!SearchTreeForFileW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-searchtreeforfilew
-func SearchTreeForFileW(RootPath foundation.PWSTR, InputPathName foundation.PWSTR, OutputPathBuffer foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSearchTreeForFileW.Addr(), uintptr(unsafe.Pointer(RootPath)), uintptr(unsafe.Pointer(InputPathName)), uintptr(unsafe.Pointer(OutputPathBuffer)))
+func SearchTreeForFileW(RootPath string, InputPathName string, OutputPathBuffer foundation.PWSTR) error {
+	_RootPath := win32.UTF16Ptr(RootPath)
+	_InputPathName := win32.UTF16Ptr(InputPathName)
+	r1, _, e1 := syscall.SyscallN(procSearchTreeForFileW.Addr(), uintptr(unsafe.Pointer(_RootPath)), uintptr(unsafe.Pointer(_InputPathName)), uintptr(unsafe.Pointer(OutputPathBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1411,29 +1451,29 @@ func SetUnhandledExceptionFilter(lpTopLevelExceptionFilter LPTOP_LEVEL_EXCEPTION
 // SetXStateFeaturesMask calls KERNEL32!SetXStateFeaturesMask.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setxstatefeaturesmask
 // Minimum OS: windows6.1.
-func SetXStateFeaturesMask(Context *CONTEXT, FeatureMask uint64) foundation.BOOL {
+func SetXStateFeaturesMask(Context *CONTEXT, FeatureMask uint64) bool {
 	r1, _, _ := syscall.SyscallN(procSetXStateFeaturesMask.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(FeatureMask))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // StackWalk2 calls dbghelp!StackWalk2.
-func StackWalk2(MachineType uint32, hProcess foundation.HANDLE, hThread foundation.HANDLE, StackFrame *STACKFRAME_EX, ContextRecord unsafe.Pointer, ReadMemoryRoutine PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine PGET_MODULE_BASE_ROUTINE64, TranslateAddress PTRANSLATE_ADDRESS_ROUTINE64, GetTargetAttributeValue PGET_TARGET_ATTRIBUTE_VALUE64, Flags uint32) foundation.BOOL {
+func StackWalk2(MachineType uint32, hProcess foundation.HANDLE, hThread foundation.HANDLE, StackFrame *STACKFRAME_EX, ContextRecord unsafe.Pointer, ReadMemoryRoutine PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine PGET_MODULE_BASE_ROUTINE64, TranslateAddress PTRANSLATE_ADDRESS_ROUTINE64, GetTargetAttributeValue PGET_TARGET_ATTRIBUTE_VALUE64, Flags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procStackWalk2.Addr(), uintptr(MachineType), uintptr(hProcess), uintptr(hThread), uintptr(unsafe.Pointer(StackFrame)), uintptr(unsafe.Pointer(ContextRecord)), uintptr(ReadMemoryRoutine), uintptr(FunctionTableAccessRoutine), uintptr(GetModuleBaseRoutine), uintptr(TranslateAddress), uintptr(GetTargetAttributeValue), uintptr(Flags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // StackWalk64 calls dbghelp!StackWalk64.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-stackwalk64
-func StackWalk64(MachineType uint32, hProcess foundation.HANDLE, hThread foundation.HANDLE, StackFrame *STACKFRAME64, ContextRecord unsafe.Pointer, ReadMemoryRoutine PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine PGET_MODULE_BASE_ROUTINE64, TranslateAddress PTRANSLATE_ADDRESS_ROUTINE64) foundation.BOOL {
+func StackWalk64(MachineType uint32, hProcess foundation.HANDLE, hThread foundation.HANDLE, StackFrame *STACKFRAME64, ContextRecord unsafe.Pointer, ReadMemoryRoutine PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine PGET_MODULE_BASE_ROUTINE64, TranslateAddress PTRANSLATE_ADDRESS_ROUTINE64) bool {
 	r1, _, _ := syscall.SyscallN(procStackWalk64.Addr(), uintptr(MachineType), uintptr(hProcess), uintptr(hThread), uintptr(unsafe.Pointer(StackFrame)), uintptr(unsafe.Pointer(ContextRecord)), uintptr(ReadMemoryRoutine), uintptr(FunctionTableAccessRoutine), uintptr(GetModuleBaseRoutine), uintptr(TranslateAddress))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // StackWalkEx calls dbghelp!StackWalkEx.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-stackwalkex
-func StackWalkEx(MachineType uint32, hProcess foundation.HANDLE, hThread foundation.HANDLE, StackFrame *STACKFRAME_EX, ContextRecord unsafe.Pointer, ReadMemoryRoutine PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine PGET_MODULE_BASE_ROUTINE64, TranslateAddress PTRANSLATE_ADDRESS_ROUTINE64, Flags uint32) foundation.BOOL {
+func StackWalkEx(MachineType uint32, hProcess foundation.HANDLE, hThread foundation.HANDLE, StackFrame *STACKFRAME_EX, ContextRecord unsafe.Pointer, ReadMemoryRoutine PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine PGET_MODULE_BASE_ROUTINE64, TranslateAddress PTRANSLATE_ADDRESS_ROUTINE64, Flags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procStackWalkEx.Addr(), uintptr(MachineType), uintptr(hProcess), uintptr(hThread), uintptr(unsafe.Pointer(StackFrame)), uintptr(unsafe.Pointer(ContextRecord)), uintptr(ReadMemoryRoutine), uintptr(FunctionTableAccessRoutine), uintptr(GetModuleBaseRoutine), uintptr(TranslateAddress), uintptr(Flags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SymAddSourceStream calls dbghelp!SymAddSourceStream.
@@ -1448,15 +1488,16 @@ func SymAddSourceStream(hProcess foundation.HANDLE, Base uint64, StreamFile foun
 
 // SymAddSourceStreamA calls dbghelp!SymAddSourceStreamA.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symaddsourcestreama
-func SymAddSourceStreamA(hProcess foundation.HANDLE, Base uint64, StreamFile foundation.PSTR, Buffer *byte, Size uintptr) foundation.BOOL {
+func SymAddSourceStreamA(hProcess foundation.HANDLE, Base uint64, StreamFile foundation.PSTR, Buffer *byte, Size uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procSymAddSourceStreamA.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(StreamFile)), uintptr(unsafe.Pointer(Buffer)), uintptr(Size))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SymAddSourceStreamW calls dbghelp!SymAddSourceStreamW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symaddsourcestreamw
-func SymAddSourceStreamW(hProcess foundation.HANDLE, Base uint64, FileSpec foundation.PWSTR, Buffer *byte, Size uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procSymAddSourceStreamW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(FileSpec)), uintptr(unsafe.Pointer(Buffer)), uintptr(Size))
+func SymAddSourceStreamW(hProcess foundation.HANDLE, Base uint64, FileSpec string, Buffer *byte, Size uintptr) error {
+	_FileSpec := win32.UTF16Ptr(FileSpec)
+	r1, _, e1 := syscall.SyscallN(procSymAddSourceStreamW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(_FileSpec)), uintptr(unsafe.Pointer(Buffer)), uintptr(Size))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1475,8 +1516,9 @@ func SymAddSymbol(hProcess foundation.HANDLE, BaseOfDll uint64, Name foundation.
 
 // SymAddSymbolW calls dbghelp!SymAddSymbolW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symaddsymbolw
-func SymAddSymbolW(hProcess foundation.HANDLE, BaseOfDll uint64, Name foundation.PWSTR, Address uint64, Size uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymAddSymbolW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(Name)), uintptr(Address), uintptr(Size), uintptr(Flags))
+func SymAddSymbolW(hProcess foundation.HANDLE, BaseOfDll uint64, Name string, Address uint64, Size uint32, Flags uint32) error {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procSymAddSymbolW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(_Name)), uintptr(Address), uintptr(Size), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1519,8 +1561,9 @@ func SymDeleteSymbol(hProcess foundation.HANDLE, BaseOfDll uint64, Name foundati
 
 // SymDeleteSymbolW calls dbghelp!SymDeleteSymbolW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symdeletesymbolw
-func SymDeleteSymbolW(hProcess foundation.HANDLE, BaseOfDll uint64, Name foundation.PWSTR, Address uint64, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymDeleteSymbolW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(Name)), uintptr(Address), uintptr(Flags))
+func SymDeleteSymbolW(hProcess foundation.HANDLE, BaseOfDll uint64, Name string, Address uint64, Flags uint32) error {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procSymDeleteSymbolW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(_Name)), uintptr(Address), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1539,8 +1582,10 @@ func SymEnumLines(hProcess foundation.HANDLE, Base uint64, Obj foundation.PSTR, 
 
 // SymEnumLinesW calls dbghelp!SymEnumLinesW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symenumlinesw
-func SymEnumLinesW(hProcess foundation.HANDLE, Base uint64, Obj foundation.PWSTR, File foundation.PWSTR, EnumLinesCallback PSYM_ENUMLINES_CALLBACKW, UserContext unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSymEnumLinesW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(Obj)), uintptr(unsafe.Pointer(File)), uintptr(EnumLinesCallback), uintptr(unsafe.Pointer(UserContext)))
+func SymEnumLinesW(hProcess foundation.HANDLE, Base uint64, Obj string, File string, EnumLinesCallback PSYM_ENUMLINES_CALLBACKW, UserContext unsafe.Pointer) error {
+	_Obj := win32.UTF16Ptr(Obj)
+	_File := win32.UTF16Ptr(File)
+	r1, _, e1 := syscall.SyscallN(procSymEnumLinesW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(_Obj)), uintptr(unsafe.Pointer(_File)), uintptr(EnumLinesCallback), uintptr(unsafe.Pointer(UserContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1579,8 +1624,9 @@ func SymEnumSourceFiles(hProcess foundation.HANDLE, ModBase uint64, Mask foundat
 
 // SymEnumSourceFilesW calls dbghelp!SymEnumSourceFilesW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symenumsourcefilesw
-func SymEnumSourceFilesW(hProcess foundation.HANDLE, ModBase uint64, Mask foundation.PWSTR, cbSrcFiles PSYM_ENUMSOURCEFILES_CALLBACKW, UserContext unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSymEnumSourceFilesW.Addr(), uintptr(hProcess), uintptr(ModBase), uintptr(unsafe.Pointer(Mask)), uintptr(cbSrcFiles), uintptr(unsafe.Pointer(UserContext)))
+func SymEnumSourceFilesW(hProcess foundation.HANDLE, ModBase uint64, Mask string, cbSrcFiles PSYM_ENUMSOURCEFILES_CALLBACKW, UserContext unsafe.Pointer) error {
+	_Mask := win32.UTF16Ptr(Mask)
+	r1, _, e1 := syscall.SyscallN(procSymEnumSourceFilesW.Addr(), uintptr(hProcess), uintptr(ModBase), uintptr(unsafe.Pointer(_Mask)), uintptr(cbSrcFiles), uintptr(unsafe.Pointer(UserContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1599,8 +1645,10 @@ func SymEnumSourceLines(hProcess foundation.HANDLE, Base uint64, Obj foundation.
 
 // SymEnumSourceLinesW calls dbghelp!SymEnumSourceLinesW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symenumsourcelinesw
-func SymEnumSourceLinesW(hProcess foundation.HANDLE, Base uint64, Obj foundation.PWSTR, File foundation.PWSTR, Line uint32, Flags uint32, EnumLinesCallback PSYM_ENUMLINES_CALLBACKW, UserContext unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSymEnumSourceLinesW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(Obj)), uintptr(unsafe.Pointer(File)), uintptr(Line), uintptr(Flags), uintptr(EnumLinesCallback), uintptr(unsafe.Pointer(UserContext)))
+func SymEnumSourceLinesW(hProcess foundation.HANDLE, Base uint64, Obj string, File string, Line uint32, Flags uint32, EnumLinesCallback PSYM_ENUMLINES_CALLBACKW, UserContext unsafe.Pointer) error {
+	_Obj := win32.UTF16Ptr(Obj)
+	_File := win32.UTF16Ptr(File)
+	r1, _, e1 := syscall.SyscallN(procSymEnumSourceLinesW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(_Obj)), uintptr(unsafe.Pointer(_File)), uintptr(Line), uintptr(Flags), uintptr(EnumLinesCallback), uintptr(unsafe.Pointer(UserContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1608,9 +1656,9 @@ func SymEnumSourceLinesW(hProcess foundation.HANDLE, Base uint64, Obj foundation
 }
 
 // SymEnumSym calls dbghelp!SymEnumSym.
-func SymEnumSym(hProcess foundation.HANDLE, BaseOfDll uint64, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext unsafe.Pointer) foundation.BOOL {
+func SymEnumSym(hProcess foundation.HANDLE, BaseOfDll uint64, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSymEnumSym.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(EnumSymbolsCallback), uintptr(unsafe.Pointer(UserContext)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SymEnumSymbols calls dbghelp!SymEnumSymbols.
@@ -1635,8 +1683,9 @@ func SymEnumSymbolsEx(hProcess foundation.HANDLE, BaseOfDll uint64, Mask foundat
 
 // SymEnumSymbolsExW calls dbghelp!SymEnumSymbolsExW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symenumsymbolsexw
-func SymEnumSymbolsExW(hProcess foundation.HANDLE, BaseOfDll uint64, Mask foundation.PWSTR, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext unsafe.Pointer, Options uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymEnumSymbolsExW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(Mask)), uintptr(EnumSymbolsCallback), uintptr(unsafe.Pointer(UserContext)), uintptr(Options))
+func SymEnumSymbolsExW(hProcess foundation.HANDLE, BaseOfDll uint64, Mask string, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext unsafe.Pointer, Options uint32) error {
+	_Mask := win32.UTF16Ptr(Mask)
+	r1, _, e1 := syscall.SyscallN(procSymEnumSymbolsExW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(_Mask)), uintptr(EnumSymbolsCallback), uintptr(unsafe.Pointer(UserContext)), uintptr(Options))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1665,8 +1714,9 @@ func SymEnumSymbolsForAddrW(hProcess foundation.HANDLE, Address uint64, EnumSymb
 
 // SymEnumSymbolsW calls dbghelp!SymEnumSymbolsW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symenumsymbolsw
-func SymEnumSymbolsW(hProcess foundation.HANDLE, BaseOfDll uint64, Mask foundation.PWSTR, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSymEnumSymbolsW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(Mask)), uintptr(EnumSymbolsCallback), uintptr(unsafe.Pointer(UserContext)))
+func SymEnumSymbolsW(hProcess foundation.HANDLE, BaseOfDll uint64, Mask string, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext unsafe.Pointer) error {
+	_Mask := win32.UTF16Ptr(Mask)
+	r1, _, e1 := syscall.SyscallN(procSymEnumSymbolsW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(_Mask)), uintptr(EnumSymbolsCallback), uintptr(unsafe.Pointer(UserContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1695,8 +1745,9 @@ func SymEnumTypesByName(hProcess foundation.HANDLE, BaseOfDll uint64, mask found
 
 // SymEnumTypesByNameW calls dbghelp!SymEnumTypesByNameW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symenumtypesbynamew
-func SymEnumTypesByNameW(hProcess foundation.HANDLE, BaseOfDll uint64, mask foundation.PWSTR, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSymEnumTypesByNameW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(mask)), uintptr(EnumSymbolsCallback), uintptr(unsafe.Pointer(UserContext)))
+func SymEnumTypesByNameW(hProcess foundation.HANDLE, BaseOfDll uint64, mask string, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext unsafe.Pointer) error {
+	_mask := win32.UTF16Ptr(mask)
+	r1, _, e1 := syscall.SyscallN(procSymEnumTypesByNameW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(_mask)), uintptr(EnumSymbolsCallback), uintptr(unsafe.Pointer(UserContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1766,8 +1817,9 @@ func SymFindDebugInfoFile(hProcess foundation.HANDLE, FileName foundation.PSTR, 
 
 // SymFindDebugInfoFileW calls dbghelp!SymFindDebugInfoFileW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symfinddebuginfofilew
-func SymFindDebugInfoFileW(hProcess foundation.HANDLE, FileName foundation.PWSTR, DebugFilePath foundation.PWSTR, Callback PFIND_DEBUG_FILE_CALLBACKW, CallerData unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procSymFindDebugInfoFileW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(DebugFilePath)), uintptr(Callback), uintptr(unsafe.Pointer(CallerData)))
+func SymFindDebugInfoFileW(hProcess foundation.HANDLE, FileName string, DebugFilePath foundation.PWSTR, Callback PFIND_DEBUG_FILE_CALLBACKW, CallerData unsafe.Pointer) (foundation.HANDLE, error) {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procSymFindDebugInfoFileW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(DebugFilePath)), uintptr(Callback), uintptr(unsafe.Pointer(CallerData)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1788,8 +1840,9 @@ func SymFindExecutableImage(hProcess foundation.HANDLE, FileName foundation.PSTR
 
 // SymFindExecutableImageW calls dbghelp!SymFindExecutableImageW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symfindexecutableimagew
-func SymFindExecutableImageW(hProcess foundation.HANDLE, FileName foundation.PWSTR, ImageFilePath foundation.PWSTR, Callback PFIND_EXE_FILE_CALLBACKW, CallerData unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procSymFindExecutableImageW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(ImageFilePath)), uintptr(Callback), uintptr(unsafe.Pointer(CallerData)))
+func SymFindExecutableImageW(hProcess foundation.HANDLE, FileName string, ImageFilePath foundation.PWSTR, Callback PFIND_EXE_FILE_CALLBACKW, CallerData unsafe.Pointer) (foundation.HANDLE, error) {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procSymFindExecutableImageW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(ImageFilePath)), uintptr(Callback), uintptr(unsafe.Pointer(CallerData)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1809,8 +1862,10 @@ func SymFindFileInPath(hprocess foundation.HANDLE, SearchPathA foundation.PSTR, 
 
 // SymFindFileInPathW calls dbghelp!SymFindFileInPathW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symfindfileinpathw
-func SymFindFileInPathW(hprocess foundation.HANDLE, SearchPathA foundation.PWSTR, FileName foundation.PWSTR, id unsafe.Pointer, two uint32, three uint32, flags SYM_FIND_ID_OPTION, FoundFile foundation.PWSTR, callback PFINDFILEINPATHCALLBACKW, context unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSymFindFileInPathW.Addr(), uintptr(hprocess), uintptr(unsafe.Pointer(SearchPathA)), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(id)), uintptr(two), uintptr(three), uintptr(flags), uintptr(unsafe.Pointer(FoundFile)), uintptr(callback), uintptr(unsafe.Pointer(context)))
+func SymFindFileInPathW(hprocess foundation.HANDLE, SearchPathA string, FileName string, id unsafe.Pointer, two uint32, three uint32, flags SYM_FIND_ID_OPTION, FoundFile foundation.PWSTR, callback PFINDFILEINPATHCALLBACKW, context unsafe.Pointer) error {
+	_SearchPathA := win32.UTF16Ptr(SearchPathA)
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procSymFindFileInPathW.Addr(), uintptr(hprocess), uintptr(unsafe.Pointer(_SearchPathA)), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(id)), uintptr(two), uintptr(three), uintptr(flags), uintptr(unsafe.Pointer(FoundFile)), uintptr(callback), uintptr(unsafe.Pointer(context)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1889,8 +1944,9 @@ func SymFromName(hProcess foundation.HANDLE, Name foundation.PSTR, Symbol *SYMBO
 
 // SymFromNameW calls dbghelp!SymFromNameW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symfromnamew
-func SymFromNameW(hProcess foundation.HANDLE, Name foundation.PWSTR, Symbol *SYMBOL_INFOW) error {
-	r1, _, e1 := syscall.SyscallN(procSymFromNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(Symbol)))
+func SymFromNameW(hProcess foundation.HANDLE, Name string, Symbol *SYMBOL_INFOW) error {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procSymFromNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(Symbol)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1937,15 +1993,19 @@ func SymFunctionTableAccess64AccessRoutines(hProcess foundation.HANDLE, AddrBase
 
 // SymGetExtendedOption calls dbghelp!SymGetExtendedOption.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetextendedoption
-func SymGetExtendedOption(option IMAGEHLP_EXTENDED_OPTIONS) foundation.BOOL {
+func SymGetExtendedOption(option IMAGEHLP_EXTENDED_OPTIONS) bool {
 	r1, _, _ := syscall.SyscallN(procSymGetExtendedOption.Addr(), uintptr(option))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SymGetFileLineOffsets64 calls dbghelp!SymGetFileLineOffsets64.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetfilelineoffsets64
-func SymGetFileLineOffsets64(hProcess foundation.HANDLE, ModuleName foundation.PSTR, FileName foundation.PSTR, Buffer *uint64, BufferLines uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSymGetFileLineOffsets64.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(ModuleName)), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLines))
+func SymGetFileLineOffsets64(hProcess foundation.HANDLE, ModuleName foundation.PSTR, FileName foundation.PSTR, Buffer []uint64) (uint32, error) {
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSymGetFileLineOffsets64.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(ModuleName)), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2026,8 +2086,10 @@ func SymGetLineFromName64(hProcess foundation.HANDLE, ModuleName foundation.PSTR
 
 // SymGetLineFromNameW64 calls dbghelp!SymGetLineFromNameW64.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetlinefromnamew64
-func SymGetLineFromNameW64(hProcess foundation.HANDLE, ModuleName foundation.PWSTR, FileName foundation.PWSTR, dwLineNumber uint32, plDisplacement *int32, Line *IMAGEHLP_LINEW64) error {
-	r1, _, e1 := syscall.SyscallN(procSymGetLineFromNameW64.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(ModuleName)), uintptr(unsafe.Pointer(FileName)), uintptr(dwLineNumber), uintptr(unsafe.Pointer(plDisplacement)), uintptr(unsafe.Pointer(Line)))
+func SymGetLineFromNameW64(hProcess foundation.HANDLE, ModuleName string, FileName string, dwLineNumber uint32, plDisplacement *int32, Line *IMAGEHLP_LINEW64) error {
+	_ModuleName := win32.UTF16Ptr(ModuleName)
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procSymGetLineFromNameW64.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_ModuleName)), uintptr(unsafe.Pointer(_FileName)), uintptr(dwLineNumber), uintptr(unsafe.Pointer(plDisplacement)), uintptr(unsafe.Pointer(Line)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2122,9 +2184,9 @@ func SymGetOptions() uint32 {
 }
 
 // SymGetParentWindow calls dbghelp!SymGetParentWindow.
-func SymGetParentWindow(pHwnd *foundation.HWND) foundation.BOOL {
+func SymGetParentWindow(pHwnd *foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procSymGetParentWindow.Addr(), uintptr(unsafe.Pointer(pHwnd)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SymGetScope calls dbghelp!SymGetScope.
@@ -2179,8 +2241,12 @@ func SymGetSourceFile(hProcess foundation.HANDLE, Base uint64, Params foundation
 
 // SymGetSourceFileChecksum calls dbghelp!SymGetSourceFileChecksum.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsourcefilechecksum
-func SymGetSourceFileChecksum(hProcess foundation.HANDLE, Base uint64, FileSpec foundation.PSTR, pCheckSumType *uint32, pChecksum *byte, checksumSize uint32, pActualBytesWritten *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileChecksum.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(FileSpec)), uintptr(unsafe.Pointer(pCheckSumType)), uintptr(unsafe.Pointer(pChecksum)), uintptr(checksumSize), uintptr(unsafe.Pointer(pActualBytesWritten)))
+func SymGetSourceFileChecksum(hProcess foundation.HANDLE, Base uint64, FileSpec foundation.PSTR, pCheckSumType *uint32, pChecksum []byte, pActualBytesWritten *uint32) error {
+	var _pChecksum *byte
+	if len(pChecksum) > 0 {
+		_pChecksum = &pChecksum[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileChecksum.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(FileSpec)), uintptr(unsafe.Pointer(pCheckSumType)), uintptr(unsafe.Pointer(_pChecksum)), uintptr(len(pChecksum)), uintptr(unsafe.Pointer(pActualBytesWritten)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2189,8 +2255,13 @@ func SymGetSourceFileChecksum(hProcess foundation.HANDLE, Base uint64, FileSpec 
 
 // SymGetSourceFileChecksumW calls dbghelp!SymGetSourceFileChecksumW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsourcefilechecksumw
-func SymGetSourceFileChecksumW(hProcess foundation.HANDLE, Base uint64, FileSpec foundation.PWSTR, pCheckSumType *uint32, pChecksum *byte, checksumSize uint32, pActualBytesWritten *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileChecksumW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(FileSpec)), uintptr(unsafe.Pointer(pCheckSumType)), uintptr(unsafe.Pointer(pChecksum)), uintptr(checksumSize), uintptr(unsafe.Pointer(pActualBytesWritten)))
+func SymGetSourceFileChecksumW(hProcess foundation.HANDLE, Base uint64, FileSpec string, pCheckSumType *uint32, pChecksum []byte, pActualBytesWritten *uint32) error {
+	_FileSpec := win32.UTF16Ptr(FileSpec)
+	var _pChecksum *byte
+	if len(pChecksum) > 0 {
+		_pChecksum = &pChecksum[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileChecksumW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(_FileSpec)), uintptr(unsafe.Pointer(pCheckSumType)), uintptr(unsafe.Pointer(_pChecksum)), uintptr(len(pChecksum)), uintptr(unsafe.Pointer(pActualBytesWritten)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2208,21 +2279,24 @@ func SymGetSourceFileFromToken(hProcess foundation.HANDLE, Token unsafe.Pointer,
 }
 
 // SymGetSourceFileFromTokenByTokenName calls dbghelp!SymGetSourceFileFromTokenByTokenName.
-func SymGetSourceFileFromTokenByTokenName(hProcess foundation.HANDLE, Token unsafe.Pointer, TokenName foundation.PSTR, Params foundation.PSTR, FilePath foundation.PSTR, Size uint32) foundation.BOOL {
+func SymGetSourceFileFromTokenByTokenName(hProcess foundation.HANDLE, Token unsafe.Pointer, TokenName foundation.PSTR, Params foundation.PSTR, FilePath foundation.PSTR, Size uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSymGetSourceFileFromTokenByTokenName.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(TokenName)), uintptr(unsafe.Pointer(Params)), uintptr(unsafe.Pointer(FilePath)), uintptr(Size))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SymGetSourceFileFromTokenByTokenNameW calls dbghelp!SymGetSourceFileFromTokenByTokenNameW.
-func SymGetSourceFileFromTokenByTokenNameW(hProcess foundation.HANDLE, Token unsafe.Pointer, TokenName foundation.PWSTR, Params foundation.PWSTR, FilePath foundation.PWSTR, Size uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSymGetSourceFileFromTokenByTokenNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(TokenName)), uintptr(unsafe.Pointer(Params)), uintptr(unsafe.Pointer(FilePath)), uintptr(Size))
-	return foundation.BOOL(r1)
+func SymGetSourceFileFromTokenByTokenNameW(hProcess foundation.HANDLE, Token unsafe.Pointer, TokenName string, Params string, FilePath foundation.PWSTR, Size uint32) bool {
+	_TokenName := win32.UTF16Ptr(TokenName)
+	_Params := win32.UTF16Ptr(Params)
+	r1, _, _ := syscall.SyscallN(procSymGetSourceFileFromTokenByTokenNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(_TokenName)), uintptr(unsafe.Pointer(_Params)), uintptr(unsafe.Pointer(FilePath)), uintptr(Size))
+	return r1 != 0
 }
 
 // SymGetSourceFileFromTokenW calls dbghelp!SymGetSourceFileFromTokenW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsourcefilefromtokenw
-func SymGetSourceFileFromTokenW(hProcess foundation.HANDLE, Token unsafe.Pointer, Params foundation.PWSTR, FilePath foundation.PWSTR, Size uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileFromTokenW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(Params)), uintptr(unsafe.Pointer(FilePath)), uintptr(Size))
+func SymGetSourceFileFromTokenW(hProcess foundation.HANDLE, Token unsafe.Pointer, Params string, FilePath foundation.PWSTR, Size uint32) error {
+	_Params := win32.UTF16Ptr(Params)
+	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileFromTokenW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(_Params)), uintptr(unsafe.Pointer(FilePath)), uintptr(Size))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2240,21 +2314,25 @@ func SymGetSourceFileToken(hProcess foundation.HANDLE, Base uint64, FileSpec fou
 }
 
 // SymGetSourceFileTokenByTokenName calls dbghelp!SymGetSourceFileTokenByTokenName.
-func SymGetSourceFileTokenByTokenName(hProcess foundation.HANDLE, Base uint64, FileSpec foundation.PSTR, TokenName foundation.PSTR, TokenParameters foundation.PSTR, Token *unsafe.Pointer, Size *uint32) foundation.BOOL {
+func SymGetSourceFileTokenByTokenName(hProcess foundation.HANDLE, Base uint64, FileSpec foundation.PSTR, TokenName foundation.PSTR, TokenParameters foundation.PSTR, Token *unsafe.Pointer, Size *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSymGetSourceFileTokenByTokenName.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(FileSpec)), uintptr(unsafe.Pointer(TokenName)), uintptr(unsafe.Pointer(TokenParameters)), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(Size)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SymGetSourceFileTokenByTokenNameW calls dbghelp!SymGetSourceFileTokenByTokenNameW.
-func SymGetSourceFileTokenByTokenNameW(hProcess foundation.HANDLE, Base uint64, FileSpec foundation.PWSTR, TokenName foundation.PWSTR, TokenParameters foundation.PWSTR, Token *unsafe.Pointer, Size *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSymGetSourceFileTokenByTokenNameW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(FileSpec)), uintptr(unsafe.Pointer(TokenName)), uintptr(unsafe.Pointer(TokenParameters)), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(Size)))
-	return foundation.BOOL(r1)
+func SymGetSourceFileTokenByTokenNameW(hProcess foundation.HANDLE, Base uint64, FileSpec string, TokenName string, TokenParameters string, Token *unsafe.Pointer, Size *uint32) bool {
+	_FileSpec := win32.UTF16Ptr(FileSpec)
+	_TokenName := win32.UTF16Ptr(TokenName)
+	_TokenParameters := win32.UTF16Ptr(TokenParameters)
+	r1, _, _ := syscall.SyscallN(procSymGetSourceFileTokenByTokenNameW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(_FileSpec)), uintptr(unsafe.Pointer(_TokenName)), uintptr(unsafe.Pointer(_TokenParameters)), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(Size)))
+	return r1 != 0
 }
 
 // SymGetSourceFileTokenW calls dbghelp!SymGetSourceFileTokenW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsourcefiletokenw
-func SymGetSourceFileTokenW(hProcess foundation.HANDLE, Base uint64, FileSpec foundation.PWSTR, Token *unsafe.Pointer, Size *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileTokenW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(FileSpec)), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(Size)))
+func SymGetSourceFileTokenW(hProcess foundation.HANDLE, Base uint64, FileSpec string, Token *unsafe.Pointer, Size *uint32) error {
+	_FileSpec := win32.UTF16Ptr(FileSpec)
+	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileTokenW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(_FileSpec)), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(Size)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2263,8 +2341,10 @@ func SymGetSourceFileTokenW(hProcess foundation.HANDLE, Base uint64, FileSpec fo
 
 // SymGetSourceFileW calls dbghelp!SymGetSourceFileW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsourcefilew
-func SymGetSourceFileW(hProcess foundation.HANDLE, Base uint64, Params foundation.PWSTR, FileSpec foundation.PWSTR, FilePath foundation.PWSTR, Size uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(Params)), uintptr(unsafe.Pointer(FileSpec)), uintptr(unsafe.Pointer(FilePath)), uintptr(Size))
+func SymGetSourceFileW(hProcess foundation.HANDLE, Base uint64, Params string, FileSpec string, FilePath foundation.PWSTR, Size uint32) error {
+	_Params := win32.UTF16Ptr(Params)
+	_FileSpec := win32.UTF16Ptr(FileSpec)
+	r1, _, e1 := syscall.SyscallN(procSymGetSourceFileW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(_Params)), uintptr(unsafe.Pointer(_FileSpec)), uintptr(unsafe.Pointer(FilePath)), uintptr(Size))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2283,8 +2363,10 @@ func SymGetSourceVarFromToken(hProcess foundation.HANDLE, Token unsafe.Pointer, 
 
 // SymGetSourceVarFromTokenW calls dbghelp!SymGetSourceVarFromTokenW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsourcevarfromtokenw
-func SymGetSourceVarFromTokenW(hProcess foundation.HANDLE, Token unsafe.Pointer, Params foundation.PWSTR, VarName foundation.PWSTR, Value foundation.PWSTR, Size uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymGetSourceVarFromTokenW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(Params)), uintptr(unsafe.Pointer(VarName)), uintptr(unsafe.Pointer(Value)), uintptr(Size))
+func SymGetSourceVarFromTokenW(hProcess foundation.HANDLE, Token unsafe.Pointer, Params string, VarName string, Value foundation.PWSTR, Size uint32) error {
+	_Params := win32.UTF16Ptr(Params)
+	_VarName := win32.UTF16Ptr(VarName)
+	r1, _, e1 := syscall.SyscallN(procSymGetSourceVarFromTokenW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(_Params)), uintptr(unsafe.Pointer(_VarName)), uintptr(unsafe.Pointer(Value)), uintptr(Size))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2343,8 +2425,10 @@ func SymGetSymbolFile(hProcess foundation.HANDLE, SymPath foundation.PSTR, Image
 
 // SymGetSymbolFileW calls dbghelp!SymGetSymbolFileW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsymbolfilew
-func SymGetSymbolFileW(hProcess foundation.HANDLE, SymPath foundation.PWSTR, ImageFile foundation.PWSTR, Type uint32, SymbolFile foundation.PWSTR, cSymbolFile uintptr, DbgFile foundation.PWSTR, cDbgFile uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procSymGetSymbolFileW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(SymPath)), uintptr(unsafe.Pointer(ImageFile)), uintptr(Type), uintptr(unsafe.Pointer(SymbolFile)), uintptr(cSymbolFile), uintptr(unsafe.Pointer(DbgFile)), uintptr(cDbgFile))
+func SymGetSymbolFileW(hProcess foundation.HANDLE, SymPath string, ImageFile string, Type uint32, SymbolFile foundation.PWSTR, cSymbolFile uintptr, DbgFile foundation.PWSTR, cDbgFile uintptr) error {
+	_SymPath := win32.UTF16Ptr(SymPath)
+	_ImageFile := win32.UTF16Ptr(ImageFile)
+	r1, _, e1 := syscall.SyscallN(procSymGetSymbolFileW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_SymPath)), uintptr(unsafe.Pointer(_ImageFile)), uintptr(Type), uintptr(unsafe.Pointer(SymbolFile)), uintptr(cSymbolFile), uintptr(unsafe.Pointer(DbgFile)), uintptr(cDbgFile))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2363,8 +2447,9 @@ func SymGetTypeFromName(hProcess foundation.HANDLE, BaseOfDll uint64, Name found
 
 // SymGetTypeFromNameW calls dbghelp!SymGetTypeFromNameW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgettypefromnamew
-func SymGetTypeFromNameW(hProcess foundation.HANDLE, BaseOfDll uint64, Name foundation.PWSTR, Symbol *SYMBOL_INFOW) error {
-	r1, _, e1 := syscall.SyscallN(procSymGetTypeFromNameW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(Symbol)))
+func SymGetTypeFromNameW(hProcess foundation.HANDLE, BaseOfDll uint64, Name string, Symbol *SYMBOL_INFOW) error {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procSymGetTypeFromNameW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(Symbol)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2392,15 +2477,16 @@ func SymGetTypeInfoEx(hProcess foundation.HANDLE, ModBase uint64, Params *IMAGEH
 }
 
 // SymGetUnwindInfo calls dbghelp!SymGetUnwindInfo.
-func SymGetUnwindInfo(hProcess foundation.HANDLE, Address uint64, Buffer unsafe.Pointer, Size *uint32) foundation.BOOL {
+func SymGetUnwindInfo(hProcess foundation.HANDLE, Address uint64, Buffer unsafe.Pointer, Size *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSymGetUnwindInfo.Addr(), uintptr(hProcess), uintptr(Address), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(Size)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SymInitialize calls dbghelp!SymInitialize.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-syminitialize
-func SymInitialize(hProcess foundation.HANDLE, UserSearchPath foundation.PSTR, fInvadeProcess foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSymInitialize.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(UserSearchPath)), uintptr(fInvadeProcess))
+func SymInitialize(hProcess foundation.HANDLE, UserSearchPath foundation.PSTR, fInvadeProcess bool) error {
+	_fInvadeProcess := win32.Bool32(fInvadeProcess)
+	r1, _, e1 := syscall.SyscallN(procSymInitialize.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(UserSearchPath)), uintptr(_fInvadeProcess))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2409,8 +2495,10 @@ func SymInitialize(hProcess foundation.HANDLE, UserSearchPath foundation.PSTR, f
 
 // SymInitializeW calls dbghelp!SymInitializeW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-syminitializew
-func SymInitializeW(hProcess foundation.HANDLE, UserSearchPath foundation.PWSTR, fInvadeProcess foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSymInitializeW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(UserSearchPath)), uintptr(fInvadeProcess))
+func SymInitializeW(hProcess foundation.HANDLE, UserSearchPath string, fInvadeProcess bool) error {
+	_UserSearchPath := win32.UTF16Ptr(UserSearchPath)
+	_fInvadeProcess := win32.Bool32(fInvadeProcess)
+	r1, _, e1 := syscall.SyscallN(procSymInitializeW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_UserSearchPath)), uintptr(_fInvadeProcess))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2439,8 +2527,10 @@ func SymLoadModuleEx(hProcess foundation.HANDLE, hFile foundation.HANDLE, ImageN
 
 // SymLoadModuleExW calls dbghelp!SymLoadModuleExW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symloadmoduleexw
-func SymLoadModuleExW(hProcess foundation.HANDLE, hFile foundation.HANDLE, ImageName foundation.PWSTR, ModuleName foundation.PWSTR, BaseOfDll uint64, DllSize uint32, Data *MODLOAD_DATA, Flags SYM_LOAD_FLAGS) (uint64, error) {
-	r1, _, e1 := syscall.SyscallN(procSymLoadModuleExW.Addr(), uintptr(hProcess), uintptr(hFile), uintptr(unsafe.Pointer(ImageName)), uintptr(unsafe.Pointer(ModuleName)), uintptr(BaseOfDll), uintptr(DllSize), uintptr(unsafe.Pointer(Data)), uintptr(Flags))
+func SymLoadModuleExW(hProcess foundation.HANDLE, hFile foundation.HANDLE, ImageName string, ModuleName string, BaseOfDll uint64, DllSize uint32, Data *MODLOAD_DATA, Flags SYM_LOAD_FLAGS) (uint64, error) {
+	_ImageName := win32.UTF16Ptr(ImageName)
+	_ModuleName := win32.UTF16Ptr(ModuleName)
+	r1, _, e1 := syscall.SyscallN(procSymLoadModuleExW.Addr(), uintptr(hProcess), uintptr(hFile), uintptr(unsafe.Pointer(_ImageName)), uintptr(unsafe.Pointer(_ModuleName)), uintptr(BaseOfDll), uintptr(DllSize), uintptr(unsafe.Pointer(Data)), uintptr(Flags))
 	if e1 != 0 {
 		return uint64(r1), e1
 	}
@@ -2459,8 +2549,10 @@ func SymMatchFileName(FileName foundation.PSTR, Match foundation.PSTR, FileNameS
 
 // SymMatchFileNameW calls dbghelp!SymMatchFileNameW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symmatchfilenamew
-func SymMatchFileNameW(FileName foundation.PWSTR, Match foundation.PWSTR, FileNameStop *foundation.PWSTR, MatchStop *foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSymMatchFileNameW.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(Match)), uintptr(unsafe.Pointer(FileNameStop)), uintptr(unsafe.Pointer(MatchStop)))
+func SymMatchFileNameW(FileName string, Match string, FileNameStop *foundation.PWSTR, MatchStop *foundation.PWSTR) error {
+	_FileName := win32.UTF16Ptr(FileName)
+	_Match := win32.UTF16Ptr(Match)
+	r1, _, e1 := syscall.SyscallN(procSymMatchFileNameW.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(_Match)), uintptr(unsafe.Pointer(FileNameStop)), uintptr(unsafe.Pointer(MatchStop)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2469,8 +2561,9 @@ func SymMatchFileNameW(FileName foundation.PWSTR, Match foundation.PWSTR, FileNa
 
 // SymMatchString calls dbghelp!SymMatchString.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symmatchstring
-func SymMatchString(string_ foundation.PSTR, expression foundation.PSTR, fCase foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSymMatchString.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(expression)), uintptr(fCase))
+func SymMatchString(string_ foundation.PSTR, expression foundation.PSTR, fCase bool) error {
+	_fCase := win32.Bool32(fCase)
+	r1, _, e1 := syscall.SyscallN(procSymMatchString.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(expression)), uintptr(_fCase))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2479,15 +2572,19 @@ func SymMatchString(string_ foundation.PSTR, expression foundation.PSTR, fCase f
 
 // SymMatchStringA calls dbghelp!SymMatchStringA.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symmatchstringa
-func SymMatchStringA(string_ foundation.PSTR, expression foundation.PSTR, fCase foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSymMatchStringA.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(expression)), uintptr(fCase))
-	return foundation.BOOL(r1)
+func SymMatchStringA(string_ foundation.PSTR, expression foundation.PSTR, fCase bool) bool {
+	_fCase := win32.Bool32(fCase)
+	r1, _, _ := syscall.SyscallN(procSymMatchStringA.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(expression)), uintptr(_fCase))
+	return r1 != 0
 }
 
 // SymMatchStringW calls dbghelp!SymMatchStringW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symmatchstringw
-func SymMatchStringW(string_ foundation.PWSTR, expression foundation.PWSTR, fCase foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSymMatchStringW.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(expression)), uintptr(fCase))
+func SymMatchStringW(string_ string, expression string, fCase bool) error {
+	_string_ := win32.UTF16Ptr(string_)
+	_expression := win32.UTF16Ptr(expression)
+	_fCase := win32.Bool32(fCase)
+	r1, _, e1 := syscall.SyscallN(procSymMatchStringW.Addr(), uintptr(unsafe.Pointer(_string_)), uintptr(unsafe.Pointer(_expression)), uintptr(_fCase))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2596,8 +2693,9 @@ func SymSearch(hProcess foundation.HANDLE, BaseOfDll uint64, Index uint32, SymTa
 
 // SymSearchW calls dbghelp!SymSearchW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsearchw
-func SymSearchW(hProcess foundation.HANDLE, BaseOfDll uint64, Index uint32, SymTag uint32, Mask foundation.PWSTR, Address uint64, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext unsafe.Pointer, Options uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymSearchW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(Index), uintptr(SymTag), uintptr(unsafe.Pointer(Mask)), uintptr(Address), uintptr(EnumSymbolsCallback), uintptr(unsafe.Pointer(UserContext)), uintptr(Options))
+func SymSearchW(hProcess foundation.HANDLE, BaseOfDll uint64, Index uint32, SymTag uint32, Mask string, Address uint64, EnumSymbolsCallback PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext unsafe.Pointer, Options uint32) error {
+	_Mask := win32.UTF16Ptr(Mask)
+	r1, _, e1 := syscall.SyscallN(procSymSearchW.Addr(), uintptr(hProcess), uintptr(BaseOfDll), uintptr(Index), uintptr(SymTag), uintptr(unsafe.Pointer(_Mask)), uintptr(Address), uintptr(EnumSymbolsCallback), uintptr(unsafe.Pointer(UserContext)), uintptr(Options))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2616,9 +2714,10 @@ func SymSetContext(hProcess foundation.HANDLE, StackFrame *IMAGEHLP_STACK_FRAME,
 
 // SymSetExtendedOption calls dbghelp!SymSetExtendedOption.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsetextendedoption
-func SymSetExtendedOption(option IMAGEHLP_EXTENDED_OPTIONS, value foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSymSetExtendedOption.Addr(), uintptr(option), uintptr(value))
-	return foundation.BOOL(r1)
+func SymSetExtendedOption(option IMAGEHLP_EXTENDED_OPTIONS, value bool) bool {
+	_value := win32.Bool32(value)
+	r1, _, _ := syscall.SyscallN(procSymSetExtendedOption.Addr(), uintptr(option), uintptr(_value))
+	return r1 != 0
 }
 
 // SymSetHomeDirectory calls dbghelp!SymSetHomeDirectory.
@@ -2634,8 +2733,9 @@ func SymSetHomeDirectory(hProcess foundation.HANDLE, dir foundation.PSTR) (found
 
 // SymSetHomeDirectoryW calls dbghelp!SymSetHomeDirectoryW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsethomedirectoryw
-func SymSetHomeDirectoryW(hProcess foundation.HANDLE, dir foundation.PWSTR) (foundation.PWSTR, error) {
-	r1, _, e1 := syscall.SyscallN(procSymSetHomeDirectoryW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(dir)))
+func SymSetHomeDirectoryW(hProcess foundation.HANDLE, dir string) (foundation.PWSTR, error) {
+	_dir := win32.UTF16Ptr(dir)
+	r1, _, e1 := syscall.SyscallN(procSymSetHomeDirectoryW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_dir)))
 	ret := foundation.PWSTR(unsafe.Pointer(r1))
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -2702,8 +2802,9 @@ func SymSetSearchPath(hProcess foundation.HANDLE, SearchPathA foundation.PSTR) e
 
 // SymSetSearchPathW calls dbghelp!SymSetSearchPathW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsetsearchpathw
-func SymSetSearchPathW(hProcess foundation.HANDLE, SearchPathA foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSymSetSearchPathW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(SearchPathA)))
+func SymSetSearchPathW(hProcess foundation.HANDLE, SearchPathA string) error {
+	_SearchPathA := win32.UTF16Ptr(SearchPathA)
+	r1, _, e1 := syscall.SyscallN(procSymSetSearchPathW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_SearchPathA)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2723,8 +2824,12 @@ func SymSrvDeltaName(hProcess foundation.HANDLE, SymPath foundation.PSTR, Type f
 
 // SymSrvDeltaNameW calls dbghelp!SymSrvDeltaNameW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsrvdeltanamew
-func SymSrvDeltaNameW(hProcess foundation.HANDLE, SymPath foundation.PWSTR, Type foundation.PWSTR, File1 foundation.PWSTR, File2 foundation.PWSTR) (foundation.PWSTR, error) {
-	r1, _, e1 := syscall.SyscallN(procSymSrvDeltaNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(SymPath)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(File1)), uintptr(unsafe.Pointer(File2)))
+func SymSrvDeltaNameW(hProcess foundation.HANDLE, SymPath string, Type string, File1 string, File2 string) (foundation.PWSTR, error) {
+	_SymPath := win32.UTF16Ptr(SymPath)
+	_Type := win32.UTF16Ptr(Type)
+	_File1 := win32.UTF16Ptr(File1)
+	_File2 := win32.UTF16Ptr(File2)
+	r1, _, e1 := syscall.SyscallN(procSymSrvDeltaNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_SymPath)), uintptr(unsafe.Pointer(_Type)), uintptr(unsafe.Pointer(_File1)), uintptr(unsafe.Pointer(_File2)))
 	ret := foundation.PWSTR(unsafe.Pointer(r1))
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -2744,8 +2849,9 @@ func SymSrvGetFileIndexInfo(File foundation.PSTR, Info *SYMSRV_INDEX_INFO, Flags
 
 // SymSrvGetFileIndexInfoW calls dbghelp!SymSrvGetFileIndexInfoW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsrvgetfileindexinfow
-func SymSrvGetFileIndexInfoW(File foundation.PWSTR, Info *SYMSRV_INDEX_INFOW, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymSrvGetFileIndexInfoW.Addr(), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(Info)), uintptr(Flags))
+func SymSrvGetFileIndexInfoW(File string, Info *SYMSRV_INDEX_INFOW, Flags uint32) error {
+	_File := win32.UTF16Ptr(File)
+	r1, _, e1 := syscall.SyscallN(procSymSrvGetFileIndexInfoW.Addr(), uintptr(unsafe.Pointer(_File)), uintptr(unsafe.Pointer(Info)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2764,8 +2870,10 @@ func SymSrvGetFileIndexString(hProcess foundation.HANDLE, SrvPath foundation.PST
 
 // SymSrvGetFileIndexStringW calls dbghelp!SymSrvGetFileIndexStringW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsrvgetfileindexstringw
-func SymSrvGetFileIndexStringW(hProcess foundation.HANDLE, SrvPath foundation.PWSTR, File foundation.PWSTR, Index foundation.PWSTR, Size uintptr, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymSrvGetFileIndexStringW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(SrvPath)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(Index)), uintptr(Size), uintptr(Flags))
+func SymSrvGetFileIndexStringW(hProcess foundation.HANDLE, SrvPath string, File string, Index foundation.PWSTR, Size uintptr, Flags uint32) error {
+	_SrvPath := win32.UTF16Ptr(SrvPath)
+	_File := win32.UTF16Ptr(File)
+	r1, _, e1 := syscall.SyscallN(procSymSrvGetFileIndexStringW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_SrvPath)), uintptr(unsafe.Pointer(_File)), uintptr(unsafe.Pointer(Index)), uintptr(Size), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2784,8 +2892,9 @@ func SymSrvGetFileIndexes(File foundation.PSTR, Id *win32.GUID, Val1 *uint32, Va
 
 // SymSrvGetFileIndexesW calls dbghelp!SymSrvGetFileIndexesW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsrvgetfileindexesw
-func SymSrvGetFileIndexesW(File foundation.PWSTR, Id *win32.GUID, Val1 *uint32, Val2 *uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSymSrvGetFileIndexesW.Addr(), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Val1)), uintptr(unsafe.Pointer(Val2)), uintptr(Flags))
+func SymSrvGetFileIndexesW(File string, Id *win32.GUID, Val1 *uint32, Val2 *uint32, Flags uint32) error {
+	_File := win32.UTF16Ptr(File)
+	r1, _, e1 := syscall.SyscallN(procSymSrvGetFileIndexesW.Addr(), uintptr(unsafe.Pointer(_File)), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(Val1)), uintptr(unsafe.Pointer(Val2)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2805,8 +2914,11 @@ func SymSrvGetSupplement(hProcess foundation.HANDLE, SymPath foundation.PSTR, No
 
 // SymSrvGetSupplementW calls dbghelp!SymSrvGetSupplementW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsrvgetsupplementw
-func SymSrvGetSupplementW(hProcess foundation.HANDLE, SymPath foundation.PWSTR, Node foundation.PWSTR, File foundation.PWSTR) (foundation.PWSTR, error) {
-	r1, _, e1 := syscall.SyscallN(procSymSrvGetSupplementW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(SymPath)), uintptr(unsafe.Pointer(Node)), uintptr(unsafe.Pointer(File)))
+func SymSrvGetSupplementW(hProcess foundation.HANDLE, SymPath string, Node string, File string) (foundation.PWSTR, error) {
+	_SymPath := win32.UTF16Ptr(SymPath)
+	_Node := win32.UTF16Ptr(Node)
+	_File := win32.UTF16Ptr(File)
+	r1, _, e1 := syscall.SyscallN(procSymSrvGetSupplementW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_SymPath)), uintptr(unsafe.Pointer(_Node)), uintptr(unsafe.Pointer(_File)))
 	ret := foundation.PWSTR(unsafe.Pointer(r1))
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -2826,8 +2938,9 @@ func SymSrvIsStore(hProcess foundation.HANDLE, path foundation.PSTR) error {
 
 // SymSrvIsStoreW calls dbghelp!SymSrvIsStoreW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsrvisstorew
-func SymSrvIsStoreW(hProcess foundation.HANDLE, path foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSymSrvIsStoreW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(path)))
+func SymSrvIsStoreW(hProcess foundation.HANDLE, path string) error {
+	_path := win32.UTF16Ptr(path)
+	r1, _, e1 := syscall.SyscallN(procSymSrvIsStoreW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_path)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2847,8 +2960,10 @@ func SymSrvStoreFile(hProcess foundation.HANDLE, SrvPath foundation.PSTR, File f
 
 // SymSrvStoreFileW calls dbghelp!SymSrvStoreFileW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsrvstorefilew
-func SymSrvStoreFileW(hProcess foundation.HANDLE, SrvPath foundation.PWSTR, File foundation.PWSTR, Flags SYM_SRV_STORE_FILE_FLAGS) (foundation.PWSTR, error) {
-	r1, _, e1 := syscall.SyscallN(procSymSrvStoreFileW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(SrvPath)), uintptr(unsafe.Pointer(File)), uintptr(Flags))
+func SymSrvStoreFileW(hProcess foundation.HANDLE, SrvPath string, File string, Flags SYM_SRV_STORE_FILE_FLAGS) (foundation.PWSTR, error) {
+	_SrvPath := win32.UTF16Ptr(SrvPath)
+	_File := win32.UTF16Ptr(File)
+	r1, _, e1 := syscall.SyscallN(procSymSrvStoreFileW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_SrvPath)), uintptr(unsafe.Pointer(_File)), uintptr(Flags))
 	ret := foundation.PWSTR(unsafe.Pointer(r1))
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -2869,8 +2984,11 @@ func SymSrvStoreSupplement(hProcess foundation.HANDLE, SrvPath foundation.PSTR, 
 
 // SymSrvStoreSupplementW calls dbghelp!SymSrvStoreSupplementW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symsrvstoresupplementw
-func SymSrvStoreSupplementW(hProcess foundation.HANDLE, SymPath foundation.PWSTR, Node foundation.PWSTR, File foundation.PWSTR, Flags uint32) (foundation.PWSTR, error) {
-	r1, _, e1 := syscall.SyscallN(procSymSrvStoreSupplementW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(SymPath)), uintptr(unsafe.Pointer(Node)), uintptr(unsafe.Pointer(File)), uintptr(Flags))
+func SymSrvStoreSupplementW(hProcess foundation.HANDLE, SymPath string, Node string, File string, Flags uint32) (foundation.PWSTR, error) {
+	_SymPath := win32.UTF16Ptr(SymPath)
+	_Node := win32.UTF16Ptr(Node)
+	_File := win32.UTF16Ptr(File)
+	r1, _, e1 := syscall.SyscallN(procSymSrvStoreSupplementW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_SymPath)), uintptr(unsafe.Pointer(_Node)), uintptr(unsafe.Pointer(_File)), uintptr(Flags))
 	ret := foundation.PWSTR(unsafe.Pointer(r1))
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -2926,8 +3044,9 @@ func UnDecorateSymbolName(name foundation.PSTR, outputString foundation.PSTR, ma
 
 // UnDecorateSymbolNameW calls dbghelp!UnDecorateSymbolNameW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-undecoratesymbolnamew
-func UnDecorateSymbolNameW(name foundation.PWSTR, outputString foundation.PWSTR, maxStringLength uint32, flags uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procUnDecorateSymbolNameW.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(outputString)), uintptr(maxStringLength), uintptr(flags))
+func UnDecorateSymbolNameW(name string, outputString foundation.PWSTR, maxStringLength uint32, flags uint32) (uint32, error) {
+	_name := win32.UTF16Ptr(name)
+	r1, _, e1 := syscall.SyscallN(procUnDecorateSymbolNameW.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(outputString)), uintptr(maxStringLength), uintptr(flags))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2967,9 +3086,9 @@ func UpdateDebugInfoFile(ImageFileName foundation.PSTR, SymbolPath foundation.PS
 // UpdateDebugInfoFileEx calls imagehlp!UpdateDebugInfoFileEx.
 // https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-updatedebuginfofileex
 // Minimum OS: windows5.1.2600.
-func UpdateDebugInfoFileEx(ImageFileName foundation.PSTR, SymbolPath foundation.PSTR, DebugFilePath foundation.PSTR, NtHeaders *IMAGE_NT_HEADERS32, OldCheckSum uint32) foundation.BOOL {
+func UpdateDebugInfoFileEx(ImageFileName foundation.PSTR, SymbolPath foundation.PSTR, DebugFilePath foundation.PSTR, NtHeaders *IMAGE_NT_HEADERS32, OldCheckSum uint32) bool {
 	r1, _, _ := syscall.SyscallN(procUpdateDebugInfoFileEx.Addr(), uintptr(unsafe.Pointer(ImageFileName)), uintptr(unsafe.Pointer(SymbolPath)), uintptr(unsafe.Pointer(DebugFilePath)), uintptr(unsafe.Pointer(NtHeaders)), uintptr(OldCheckSum))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WaitForDebugEvent calls KERNEL32!WaitForDebugEvent.

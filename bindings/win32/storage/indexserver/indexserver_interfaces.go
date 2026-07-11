@@ -57,15 +57,18 @@ type IPhraseSink struct {
 var IID_IPhraseSink = win32.GUID{Data1: 0xcc906ff0, Data2: 0xc058, Data3: 0x101a, Data4: [8]byte{0xb5, 0x54, 0x08, 0x00, 0x2b, 0x33, 0xb0, 0xe6}}
 
 // PutSmallPhrase dispatches through IPhraseSink's vtable slot 3.
-func (self *IPhraseSink) PutSmallPhrase(pwcNoun foundation.PWSTR, cwcNoun uint32, pwcModifier foundation.PWSTR, cwcModifier uint32, ulAttachmentType uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwcNoun)), uintptr(cwcNoun), uintptr(unsafe.Pointer(pwcModifier)), uintptr(cwcModifier), uintptr(ulAttachmentType))
-	return foundation.HRESULT(r1)
+func (self *IPhraseSink) PutSmallPhrase(pwcNoun string, cwcNoun uint32, pwcModifier string, cwcModifier uint32, ulAttachmentType uint32) error {
+	_pwcNoun := win32.UTF16Ptr(pwcNoun)
+	_pwcModifier := win32.UTF16Ptr(pwcModifier)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcNoun)), uintptr(cwcNoun), uintptr(unsafe.Pointer(_pwcModifier)), uintptr(cwcModifier), uintptr(ulAttachmentType))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PutPhrase dispatches through IPhraseSink's vtable slot 4.
-func (self *IPhraseSink) PutPhrase(pwcPhrase foundation.PWSTR, cwcPhrase uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwcPhrase)), uintptr(cwcPhrase))
-	return foundation.HRESULT(r1)
+func (self *IPhraseSink) PutPhrase(pwcPhrase string, cwcPhrase uint32) error {
+	_pwcPhrase := win32.UTF16Ptr(pwcPhrase)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcPhrase)), uintptr(cwcPhrase))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3d7df9a7-8da6-4fbf-a45b-7592f06d93a9
@@ -77,7 +80,7 @@ type IPixelFilter struct {
 var IID_IPixelFilter = win32.GUID{Data1: 0x3d7df9a7, Data2: 0x8da6, Data3: 0x4fbf, Data4: [8]byte{0xa4, 0x5b, 0x75, 0x92, 0xf0, 0x6d, 0x93, 0xa9}}
 
 // GetImageInfo dispatches through IPixelFilter's vtable slot 8.
-func (self *IPixelFilter) GetImageInfo(imageInfo *IMAGE_INFO) foundation.HRESULT {
+func (self *IPixelFilter) GetImageInfo(imageInfo *IMAGE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

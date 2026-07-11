@@ -39,8 +39,8 @@ type CLFS_MGMT_NOTIFICATION struct {
 	LogIsPinned  uint16
 }
 
-// CLFS_MGMT_POLICY_PolicyParameters_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLFS_MGMT_POLICY_PolicyParameters_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLFS_MGMT_POLICY_PolicyParameters_e__Union struct {
 	Data [1]uint64
 }
@@ -197,8 +197,8 @@ type COPYFILE2_EXTENDED_PARAMETERS_V2 struct {
 	Reserved            [6]unsafe.Pointer
 }
 
-// COPYFILE2_MESSAGE_Info_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// COPYFILE2_MESSAGE_Info_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type COPYFILE2_MESSAGE_Info_e__Union struct {
 	Data [9]uint64
 }
@@ -462,8 +462,8 @@ type FILE_ID_BOTH_DIR_INFO struct {
 	FileName        [1]uint16
 }
 
-// FILE_ID_DESCRIPTOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FILE_ID_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FILE_ID_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -524,8 +524,8 @@ type FILE_NAME_INFO struct {
 	FileName       [1]uint16
 }
 
-// FILE_NOTIFY_EXTENDED_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FILE_NOTIFY_EXTENDED_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FILE_NOTIFY_EXTENDED_INFORMATION_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -560,8 +560,8 @@ type FILE_REMOTE_PROTOCOL_INFO_GenericReserved_e__Struct struct {
 	Reserved [8]uint32
 }
 
-// FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union struct {
 	Data [16]uint32
 }
@@ -580,8 +580,8 @@ type FILE_REMOTE_PROTOCOL_INFO struct {
 	ProtocolSpecific     FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union
 }
 
-// FILE_RENAME_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FILE_RENAME_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FILE_RENAME_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -595,8 +595,8 @@ type FILE_RENAME_INFO struct {
 }
 
 // FILE_SEGMENT_ELEMENT: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-file_segment_element
-// FILE_SEGMENT_ELEMENT is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FILE_SEGMENT_ELEMENT is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FILE_SEGMENT_ELEMENT struct {
 	Data [1]uint64
 }
@@ -662,8 +662,8 @@ type IORING_BUFFER_INFO struct {
 	Length  uint32
 }
 
-// IORING_BUFFER_REF_BufferUnion is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IORING_BUFFER_REF_BufferUnion is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IORING_BUFFER_REF_BufferUnion struct {
 	Data [1]uint64
 }
@@ -695,8 +695,8 @@ type IORING_CREATE_FLAGS struct {
 	Advisory IORING_CREATE_ADVISORY_FLAGS
 }
 
-// IORING_HANDLE_REF_HandleUnion is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IORING_HANDLE_REF_HandleUnion is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IORING_HANDLE_REF_HandleUnion struct {
 	Data [1]uint64
 }
@@ -952,8 +952,8 @@ type NTMS_I1_LIBREQUESTINFORMATIONW struct {
 	SzComputer      [64]uint16
 }
 
-// NTMS_I1_OBJECTINFORMATIONA_Info_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NTMS_I1_OBJECTINFORMATIONA_Info_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NTMS_I1_OBJECTINFORMATIONA_Info_e__Union struct {
 	Data [157]uint32
 }
@@ -971,8 +971,8 @@ type NTMS_I1_OBJECTINFORMATIONA struct {
 	Info               NTMS_I1_OBJECTINFORMATIONA_Info_e__Union
 }
 
-// NTMS_I1_OBJECTINFORMATIONW_Info_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NTMS_I1_OBJECTINFORMATIONW_Info_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NTMS_I1_OBJECTINFORMATIONW_Info_e__Union struct {
 	Data [237]uint32
 }
@@ -1194,8 +1194,8 @@ type NTMS_NOTIFICATIONINFORMATION struct {
 	ObjectId    win32.GUID
 }
 
-// NTMS_OBJECTINFORMATIONA_Info_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NTMS_OBJECTINFORMATIONA_Info_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NTMS_OBJECTINFORMATIONA_Info_e__Union struct {
 	Data [80]uint64
 }
@@ -1214,8 +1214,8 @@ type NTMS_OBJECTINFORMATIONA struct {
 	Info               NTMS_OBJECTINFORMATIONA_Info_e__Union
 }
 
-// NTMS_OBJECTINFORMATIONW_Info_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NTMS_OBJECTINFORMATIONW_Info_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NTMS_OBJECTINFORMATIONW_Info_e__Union struct {
 	Data [120]uint64
 }

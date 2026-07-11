@@ -177,8 +177,8 @@ type CONTAINER_VOLUME_STATE struct {
 	Flags uint32
 }
 
-// CREATE_DISK_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CREATE_DISK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CREATE_DISK_Anonymous_e__Union struct {
 	Data [5]uint32
 }
@@ -529,8 +529,8 @@ type DEVICE_LB_PROVISIONING_DESCRIPTOR struct {
 	MaxUnmapBlockDescriptorCount uint32
 }
 
-// DEVICE_LOCATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEVICE_LOCATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEVICE_LOCATION_Anonymous_e__Union struct {
 	Data [2]uint32
 }
@@ -567,8 +567,8 @@ type DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT struct {
 	OutputBlockLength   uint32
 }
 
-// DEVICE_MEDIA_INFO_DeviceSpecific_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEVICE_MEDIA_INFO_DeviceSpecific_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEVICE_MEDIA_INFO_DeviceSpecific_e__Union struct {
 	Data [4]uint64
 }
@@ -604,8 +604,8 @@ type DEVICE_STORAGE_ADDRESS_RANGE struct {
 	LengthInBytes uint64
 }
 
-// DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -630,8 +630,8 @@ type DEVICE_WRITE_AGGREGATION_DESCRIPTOR struct {
 	BenefitsFromWriteAggregation foundation.BOOLEAN
 }
 
-// DISK_CACHE_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISK_CACHE_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISK_CACHE_INFORMATION_Anonymous_e__Union struct {
 	Data [3]uint16
 }
@@ -653,8 +653,8 @@ type DISK_CONTROLLER_NUMBER struct {
 	DiskNumber       uint32
 }
 
-// DISK_DETECTION_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISK_DETECTION_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISK_DETECTION_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -736,8 +736,8 @@ type DISK_LOGGING struct {
 	BufferSize    uint32
 }
 
-// DISK_PARTITION_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISK_PARTITION_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISK_PARTITION_INFO_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -782,8 +782,8 @@ type DRIVE_LAYOUT_INFORMATION struct {
 	PartitionEntry [1]PARTITION_INFORMATION
 }
 
-// DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [5]uint64
 }
@@ -1028,8 +1028,8 @@ type FILE_MAKE_COMPATIBLE_BUFFER struct {
 	CloseDisc foundation.BOOLEAN
 }
 
-// FILE_OBJECTID_BUFFER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FILE_OBJECTID_BUFFER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FILE_OBJECTID_BUFFER_Anonymous_e__Union struct {
 	Data [48]byte
 }
@@ -1303,8 +1303,8 @@ type FS_BPIO_INPUT struct {
 	Reserved2 uint64
 }
 
-// FS_BPIO_OUTPUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FS_BPIO_OUTPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FS_BPIO_OUTPUT_Anonymous_e__Union struct {
 	Data [82]uint32
 }
@@ -1446,8 +1446,8 @@ type LOOKUP_STREAM_FROM_CLUSTER_OUTPUT struct {
 	BufferSizeRequired uint32
 }
 
-// MARK_HANDLE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MARK_HANDLE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MARK_HANDLE_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1459,8 +1459,8 @@ type MARK_HANDLE_INFO struct {
 	HandleInfo   uint32
 }
 
-// MARK_HANDLE_INFO32_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MARK_HANDLE_INFO32_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MARK_HANDLE_INFO32_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1757,8 +1757,8 @@ type PARTITION_INFORMATION struct {
 	RewritePartition    foundation.BOOLEAN
 }
 
-// PARTITION_INFORMATION_EX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PARTITION_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PARTITION_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [14]uint64
 }
@@ -1802,8 +1802,8 @@ type PERF_BIN struct {
 	BinsRanges   [1]BIN_RANGE
 }
 
-// PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union struct {
 	Data [2]uint16
 }
@@ -1881,14 +1881,14 @@ type QUERY_BAD_RANGES_OUTPUT_RANGE struct {
 	LengthInBytes uint64
 }
 
-// QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union struct {
 	Data [1]uint32
 }
 
-// QUERY_FILE_LAYOUT_INPUT_Filter_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// QUERY_FILE_LAYOUT_INPUT_Filter_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type QUERY_FILE_LAYOUT_INPUT_Filter_e__Union struct {
 	Data [2]uint64
 }
@@ -2416,8 +2416,8 @@ type SD_ENUM_SDS_OUTPUT struct {
 	SDEntry              [1]SD_ENUM_SDS_ENTRY
 }
 
-// SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -2428,8 +2428,8 @@ type SD_GLOBAL_CHANGE_INPUT struct {
 	Anonymous  SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union
 }
 
-// SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union struct {
 	Data [8]uint64
 }
@@ -2477,8 +2477,8 @@ type SET_PARTITION_INFORMATION struct {
 	PartitionType byte
 }
 
-// SET_PARTITION_INFORMATION_EX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SET_PARTITION_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SET_PARTITION_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [14]uint64
 }
@@ -2599,8 +2599,8 @@ type STORAGE_BUS_RESET_REQUEST struct {
 	PathId byte
 }
 
-// STORAGE_COUNTER_Value_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_COUNTER_Value_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_COUNTER_Value_e__Union struct {
 	Data [1]uint64
 }
@@ -2657,8 +2657,8 @@ type STORAGE_CRYPTO_DESCRIPTOR_V2 struct {
 	CryptoCapabilities        [1]STORAGE_CRYPTO_CAPABILITY_V2
 }
 
-// STORAGE_CRYPTO_KEY_TYPE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_CRYPTO_KEY_TYPE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_CRYPTO_KEY_TYPE struct {
 	Data [1]byte
 }
@@ -2848,8 +2848,8 @@ type STORAGE_FAILURE_PREDICTION_CONFIG struct {
 	Reserved uint16
 }
 
-// STORAGE_FEATURE_SUPPORT_Flags_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_FEATURE_SUPPORT_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_FEATURE_SUPPORT_Flags_e__Union struct {
 	Data [1]uint64
 }
@@ -3041,8 +3041,8 @@ type STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR struct {
 	MediumProductType uint32
 }
 
-// STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union struct {
 	Data [1]byte
 }
@@ -3070,8 +3070,8 @@ type STORAGE_OFFLOAD_READ_OUTPUT struct {
 	Token            STORAGE_OFFLOAD_TOKEN
 }
 
-// STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union struct {
 	Data [504]byte
 }
@@ -3091,8 +3091,8 @@ type STORAGE_OFFLOAD_WRITE_OUTPUT struct {
 	LengthCopied      uint64
 }
 
-// STORAGE_OPERATIONAL_REASON_RawBytes_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_OPERATIONAL_REASON_RawBytes_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_OPERATIONAL_REASON_RawBytes_e__Union struct {
 	Data [1]uint32
 }
@@ -3215,8 +3215,8 @@ type STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT struct {
 	ProtocolSpecificData STORAGE_PROTOCOL_SPECIFIC_DATA_EXT
 }
 
-// STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE struct {
 	Data [1]uint32
 }
@@ -3279,8 +3279,8 @@ type STORAGE_QUERY_DEPENDENT_VOLUME_REQUEST struct {
 	RequestFlags uint32
 }
 
-// STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union struct {
 	Data [17]uint32
 }
@@ -3333,15 +3333,15 @@ type STORAGE_RPMB_DESCRIPTOR struct {
 	FrameFormat                 STORAGE_RPMB_FRAME_TYPE
 }
 
-// STORAGE_SECURITY_COMPLIANCE_BITMASK is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_SECURITY_COMPLIANCE_BITMASK is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_SECURITY_COMPLIANCE_BITMASK struct {
 	Data [1]byte
 }
 
 // STORAGE_SPEC_VERSION: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_spec_version
-// STORAGE_SPEC_VERSION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_SPEC_VERSION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_SPEC_VERSION struct {
 	Data [1]uint32
 }
@@ -3417,8 +3417,8 @@ type STORAGE_WRITE_CACHE_PROPERTY struct {
 	NVCacheEnabled             foundation.BOOLEAN
 }
 
-// STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union struct {
 	Data [2]uint32
 }
@@ -3465,8 +3465,8 @@ type STREAMS_QUERY_PARAMETERS_OUTPUT_BUFFER struct {
 	StreamIdMax           uint32
 }
 
-// STREAM_EXTENT_ENTRY_ExtentInformation_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STREAM_EXTENT_ENTRY_ExtentInformation_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STREAM_EXTENT_ENTRY_ExtentInformation_e__Union struct {
 	Data [4]uint64
 }
@@ -3476,8 +3476,8 @@ type STREAM_EXTENT_ENTRY struct {
 	ExtentInformation STREAM_EXTENT_ENTRY_ExtentInformation_e__Union
 }
 
-// STREAM_INFORMATION_ENTRY_StreamInformation is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// STREAM_INFORMATION_ENTRY_StreamInformation is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type STREAM_INFORMATION_ENTRY_StreamInformation struct {
 	Data [2]uint64
 }
@@ -3623,8 +3623,8 @@ type TXFS_QUERY_RM_INFORMATION struct {
 	TmLogPathOffset         uint32
 }
 
-// TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -3731,8 +3731,8 @@ type USN_RECORD_EXTENT struct {
 	Length int64
 }
 
-// USN_RECORD_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// USN_RECORD_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type USN_RECORD_UNION struct {
 	Data [10]uint64
 }

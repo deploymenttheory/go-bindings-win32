@@ -22,8 +22,8 @@ var (
 	procGetCurrentInputMessageSource = modUSER32.NewProc("GetCurrentInputMessageSource")
 	procGetRawInputBuffer            = modUSER32.NewProc("GetRawInputBuffer")
 	procGetRawInputData              = modUSER32.NewProc("GetRawInputData")
+	procGetRawInputDeviceInfo        = modUSER32.NewProc("GetRawInputDeviceInfoW")
 	procGetRawInputDeviceInfoA       = modUSER32.NewProc("GetRawInputDeviceInfoA")
-	procGetRawInputDeviceInfoW       = modUSER32.NewProc("GetRawInputDeviceInfoW")
 	procGetRawInputDeviceList        = modUSER32.NewProc("GetRawInputDeviceList")
 	procGetRegisteredRawInputDevices = modUSER32.NewProc("GetRegisteredRawInputDevices")
 	procRegisterRawInputDevices      = modUSER32.NewProc("RegisterRawInputDevices")
@@ -32,17 +32,21 @@ var (
 // DefRawInputProc calls USER32!DefRawInputProc.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defrawinputproc
 // Minimum OS: windows5.1.2600.
-func DefRawInputProc(paRawInput **RAWINPUT, nInput int32, cbSizeHeader uint32) foundation.LRESULT {
-	r1, _, _ := syscall.SyscallN(procDefRawInputProc.Addr(), uintptr(unsafe.Pointer(paRawInput)), uintptr(nInput), uintptr(cbSizeHeader))
+func DefRawInputProc(paRawInput []*RAWINPUT, cbSizeHeader uint32) foundation.LRESULT {
+	var _paRawInput **RAWINPUT
+	if len(paRawInput) > 0 {
+		_paRawInput = &paRawInput[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDefRawInputProc.Addr(), uintptr(unsafe.Pointer(_paRawInput)), uintptr(len(paRawInput)), uintptr(cbSizeHeader))
 	return foundation.LRESULT(r1)
 }
 
 // GetCIMSSM calls USER32!GetCIMSSM.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getcimssm
 // Minimum OS: windows8.0.
-func GetCIMSSM(inputMessageSource *INPUT_MESSAGE_SOURCE) foundation.BOOL {
+func GetCIMSSM(inputMessageSource *INPUT_MESSAGE_SOURCE) bool {
 	r1, _, _ := syscall.SyscallN(procGetCIMSSM.Addr(), uintptr(unsafe.Pointer(inputMessageSource)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetCurrentInputMessageSource calls USER32!GetCurrentInputMessageSource.
@@ -75,22 +79,22 @@ func GetRawInputData(hRawInput HRAWINPUT, uiCommand RAW_INPUT_DATA_COMMAND_FLAGS
 	return uint32(r1)
 }
 
-// GetRawInputDeviceInfoA calls USER32!GetRawInputDeviceInfoA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getrawinputdeviceinfoa
+// GetRawInputDeviceInfo calls USER32!GetRawInputDeviceInfoW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getrawinputdeviceinfow
 // Minimum OS: windows5.1.2600.
-func GetRawInputDeviceInfoA(hDevice foundation.HANDLE, uiCommand RAW_INPUT_DEVICE_INFO_COMMAND, pData unsafe.Pointer, pcbSize *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetRawInputDeviceInfoA.Addr(), uintptr(hDevice), uintptr(uiCommand), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pcbSize)))
+func GetRawInputDeviceInfo(hDevice foundation.HANDLE, uiCommand RAW_INPUT_DEVICE_INFO_COMMAND, pData unsafe.Pointer, pcbSize *uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetRawInputDeviceInfo.Addr(), uintptr(hDevice), uintptr(uiCommand), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pcbSize)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
-// GetRawInputDeviceInfoW calls USER32!GetRawInputDeviceInfoW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getrawinputdeviceinfow
+// GetRawInputDeviceInfoA calls USER32!GetRawInputDeviceInfoA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getrawinputdeviceinfoa
 // Minimum OS: windows5.1.2600.
-func GetRawInputDeviceInfoW(hDevice foundation.HANDLE, uiCommand RAW_INPUT_DEVICE_INFO_COMMAND, pData unsafe.Pointer, pcbSize *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetRawInputDeviceInfoW.Addr(), uintptr(hDevice), uintptr(uiCommand), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pcbSize)))
+func GetRawInputDeviceInfoA(hDevice foundation.HANDLE, uiCommand RAW_INPUT_DEVICE_INFO_COMMAND, pData unsafe.Pointer, pcbSize *uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetRawInputDeviceInfoA.Addr(), uintptr(hDevice), uintptr(uiCommand), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pcbSize)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -122,8 +126,12 @@ func GetRegisteredRawInputDevices(pRawInputDevices *RAWINPUTDEVICE, puiNumDevice
 // RegisterRawInputDevices calls USER32!RegisterRawInputDevices.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerrawinputdevices
 // Minimum OS: windows5.1.2600.
-func RegisterRawInputDevices(pRawInputDevices *RAWINPUTDEVICE, uiNumDevices uint32, cbSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procRegisterRawInputDevices.Addr(), uintptr(unsafe.Pointer(pRawInputDevices)), uintptr(uiNumDevices), uintptr(cbSize))
+func RegisterRawInputDevices(pRawInputDevices []RAWINPUTDEVICE, cbSize uint32) error {
+	var _pRawInputDevices *RAWINPUTDEVICE
+	if len(pRawInputDevices) > 0 {
+		_pRawInputDevices = &pRawInputDevices[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procRegisterRawInputDevices.Addr(), uintptr(unsafe.Pointer(_pRawInputDevices)), uintptr(len(pRawInputDevices)), uintptr(cbSize))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

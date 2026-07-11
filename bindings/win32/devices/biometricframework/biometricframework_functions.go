@@ -75,209 +75,215 @@ var (
 // WinBioAcquireFocus calls winbio!WinBioAcquireFocus.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioacquirefocus
 // Minimum OS: windows6.1.
-func WinBioAcquireFocus() foundation.HRESULT {
+func WinBioAcquireFocus() error {
 	r1, _, _ := syscall.SyscallN(procWinBioAcquireFocus.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioAsyncEnumBiometricUnits calls winbio!WinBioAsyncEnumBiometricUnits.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioasyncenumbiometricunits
 // Minimum OS: windows8.0.
-func WinBioAsyncEnumBiometricUnits(FrameworkHandle uint32, Factor uint32) foundation.HRESULT {
+func WinBioAsyncEnumBiometricUnits(FrameworkHandle uint32, Factor uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncEnumBiometricUnits.Addr(), uintptr(FrameworkHandle), uintptr(Factor))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioAsyncEnumDatabases calls winbio!WinBioAsyncEnumDatabases.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioasyncenumdatabases
 // Minimum OS: windows8.0.
-func WinBioAsyncEnumDatabases(FrameworkHandle uint32, Factor uint32) foundation.HRESULT {
+func WinBioAsyncEnumDatabases(FrameworkHandle uint32, Factor uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncEnumDatabases.Addr(), uintptr(FrameworkHandle), uintptr(Factor))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioAsyncEnumServiceProviders calls winbio!WinBioAsyncEnumServiceProviders.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioasyncenumserviceproviders
 // Minimum OS: windows8.0.
-func WinBioAsyncEnumServiceProviders(FrameworkHandle uint32, Factor uint32) foundation.HRESULT {
+func WinBioAsyncEnumServiceProviders(FrameworkHandle uint32, Factor uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncEnumServiceProviders.Addr(), uintptr(FrameworkHandle), uintptr(Factor))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioAsyncMonitorFrameworkChanges calls winbio!WinBioAsyncMonitorFrameworkChanges.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioasyncmonitorframeworkchanges
 // Minimum OS: windows8.0.
-func WinBioAsyncMonitorFrameworkChanges(FrameworkHandle uint32, ChangeTypes uint32) foundation.HRESULT {
+func WinBioAsyncMonitorFrameworkChanges(FrameworkHandle uint32, ChangeTypes uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioAsyncMonitorFrameworkChanges.Addr(), uintptr(FrameworkHandle), uintptr(ChangeTypes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioAsyncOpenFramework calls winbio!WinBioAsyncOpenFramework.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioasyncopenframework
 // Minimum OS: windows8.0.
-func WinBioAsyncOpenFramework(NotificationMethod WINBIO_ASYNC_NOTIFICATION_METHOD, TargetWindow foundation.HWND, MessageCode uint32, CallbackRoutine PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData unsafe.Pointer, AsynchronousOpen foundation.BOOL, FrameworkHandle *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWinBioAsyncOpenFramework.Addr(), uintptr(NotificationMethod), uintptr(TargetWindow), uintptr(MessageCode), uintptr(CallbackRoutine), uintptr(unsafe.Pointer(UserData)), uintptr(AsynchronousOpen), uintptr(unsafe.Pointer(FrameworkHandle)))
-	return foundation.HRESULT(r1)
+func WinBioAsyncOpenFramework(NotificationMethod WINBIO_ASYNC_NOTIFICATION_METHOD, TargetWindow foundation.HWND, MessageCode uint32, CallbackRoutine PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData unsafe.Pointer, AsynchronousOpen bool, FrameworkHandle *uint32) error {
+	_AsynchronousOpen := win32.Bool32(AsynchronousOpen)
+	r1, _, _ := syscall.SyscallN(procWinBioAsyncOpenFramework.Addr(), uintptr(NotificationMethod), uintptr(TargetWindow), uintptr(MessageCode), uintptr(CallbackRoutine), uintptr(unsafe.Pointer(UserData)), uintptr(_AsynchronousOpen), uintptr(unsafe.Pointer(FrameworkHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioAsyncOpenSession calls winbio!WinBioAsyncOpenSession.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioasyncopensession
 // Minimum OS: windows8.0.
-func WinBioAsyncOpenSession(Factor uint32, PoolType WINBIO_POOL, Flags uint32, UnitArray *uint32, UnitCount uintptr, DatabaseId *win32.GUID, NotificationMethod WINBIO_ASYNC_NOTIFICATION_METHOD, TargetWindow foundation.HWND, MessageCode uint32, CallbackRoutine PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData unsafe.Pointer, AsynchronousOpen foundation.BOOL, SessionHandle *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWinBioAsyncOpenSession.Addr(), uintptr(Factor), uintptr(PoolType), uintptr(Flags), uintptr(unsafe.Pointer(UnitArray)), uintptr(UnitCount), uintptr(unsafe.Pointer(DatabaseId)), uintptr(NotificationMethod), uintptr(TargetWindow), uintptr(MessageCode), uintptr(CallbackRoutine), uintptr(unsafe.Pointer(UserData)), uintptr(AsynchronousOpen), uintptr(unsafe.Pointer(SessionHandle)))
-	return foundation.HRESULT(r1)
+func WinBioAsyncOpenSession(Factor uint32, PoolType WINBIO_POOL, Flags uint32, UnitArray []uint32, DatabaseId *win32.GUID, NotificationMethod WINBIO_ASYNC_NOTIFICATION_METHOD, TargetWindow foundation.HWND, MessageCode uint32, CallbackRoutine PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData unsafe.Pointer, AsynchronousOpen bool, SessionHandle *uint32) error {
+	var _UnitArray *uint32
+	if len(UnitArray) > 0 {
+		_UnitArray = &UnitArray[0]
+	}
+	_AsynchronousOpen := win32.Bool32(AsynchronousOpen)
+	r1, _, _ := syscall.SyscallN(procWinBioAsyncOpenSession.Addr(), uintptr(Factor), uintptr(PoolType), uintptr(Flags), uintptr(unsafe.Pointer(_UnitArray)), uintptr(len(UnitArray)), uintptr(unsafe.Pointer(DatabaseId)), uintptr(NotificationMethod), uintptr(TargetWindow), uintptr(MessageCode), uintptr(CallbackRoutine), uintptr(unsafe.Pointer(UserData)), uintptr(_AsynchronousOpen), uintptr(unsafe.Pointer(SessionHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioCancel calls winbio!WinBioCancel.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiocancel
 // Minimum OS: windows6.1.
-func WinBioCancel(SessionHandle uint32) foundation.HRESULT {
+func WinBioCancel(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCancel.Addr(), uintptr(SessionHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioCaptureSample calls winbio!WinBioCaptureSample.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiocapturesample
 // Minimum OS: windows6.1.
-func WinBioCaptureSample(SessionHandle uint32, Purpose byte, Flags byte, UnitId *uint32, Sample **WINBIO_BIR, SampleSize *uintptr, RejectDetail *uint32) foundation.HRESULT {
+func WinBioCaptureSample(SessionHandle uint32, Purpose byte, Flags byte, UnitId *uint32, Sample **WINBIO_BIR, SampleSize *uintptr, RejectDetail *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCaptureSample.Addr(), uintptr(SessionHandle), uintptr(Purpose), uintptr(Flags), uintptr(unsafe.Pointer(UnitId)), uintptr(unsafe.Pointer(Sample)), uintptr(unsafe.Pointer(SampleSize)), uintptr(unsafe.Pointer(RejectDetail)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioCaptureSampleWithCallback calls winbio!WinBioCaptureSampleWithCallback.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiocapturesamplewithcallback
 // Minimum OS: windows6.1.
-func WinBioCaptureSampleWithCallback(SessionHandle uint32, Purpose byte, Flags byte, CaptureCallback PWINBIO_CAPTURE_CALLBACK, CaptureCallbackContext unsafe.Pointer) foundation.HRESULT {
+func WinBioCaptureSampleWithCallback(SessionHandle uint32, Purpose byte, Flags byte, CaptureCallback PWINBIO_CAPTURE_CALLBACK, CaptureCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCaptureSampleWithCallback.Addr(), uintptr(SessionHandle), uintptr(Purpose), uintptr(Flags), uintptr(CaptureCallback), uintptr(unsafe.Pointer(CaptureCallbackContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioCloseFramework calls winbio!WinBioCloseFramework.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiocloseframework
 // Minimum OS: windows8.0.
-func WinBioCloseFramework(FrameworkHandle uint32) foundation.HRESULT {
+func WinBioCloseFramework(FrameworkHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCloseFramework.Addr(), uintptr(FrameworkHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioCloseSession calls winbio!WinBioCloseSession.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioclosesession
 // Minimum OS: windows6.1.
-func WinBioCloseSession(SessionHandle uint32) foundation.HRESULT {
+func WinBioCloseSession(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioCloseSession.Addr(), uintptr(SessionHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioControlUnit calls winbio!WinBioControlUnit.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiocontrolunit
 // Minimum OS: windows6.1.
-func WinBioControlUnit(SessionHandle uint32, UnitId uint32, Component WINBIO_COMPONENT, ControlCode uint32, SendBuffer *byte, SendBufferSize uintptr, ReceiveBuffer *byte, ReceiveBufferSize uintptr, ReceiveDataSize *uintptr, OperationStatus *uint32) foundation.HRESULT {
+func WinBioControlUnit(SessionHandle uint32, UnitId uint32, Component WINBIO_COMPONENT, ControlCode uint32, SendBuffer *byte, SendBufferSize uintptr, ReceiveBuffer *byte, ReceiveBufferSize uintptr, ReceiveDataSize *uintptr, OperationStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioControlUnit.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(Component), uintptr(ControlCode), uintptr(unsafe.Pointer(SendBuffer)), uintptr(SendBufferSize), uintptr(unsafe.Pointer(ReceiveBuffer)), uintptr(ReceiveBufferSize), uintptr(unsafe.Pointer(ReceiveDataSize)), uintptr(unsafe.Pointer(OperationStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioControlUnitPrivileged calls winbio!WinBioControlUnitPrivileged.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiocontrolunitprivileged
 // Minimum OS: windows6.1.
-func WinBioControlUnitPrivileged(SessionHandle uint32, UnitId uint32, Component WINBIO_COMPONENT, ControlCode uint32, SendBuffer *byte, SendBufferSize uintptr, ReceiveBuffer *byte, ReceiveBufferSize uintptr, ReceiveDataSize *uintptr, OperationStatus *uint32) foundation.HRESULT {
+func WinBioControlUnitPrivileged(SessionHandle uint32, UnitId uint32, Component WINBIO_COMPONENT, ControlCode uint32, SendBuffer *byte, SendBufferSize uintptr, ReceiveBuffer *byte, ReceiveBufferSize uintptr, ReceiveDataSize *uintptr, OperationStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioControlUnitPrivileged.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(Component), uintptr(ControlCode), uintptr(unsafe.Pointer(SendBuffer)), uintptr(SendBufferSize), uintptr(unsafe.Pointer(ReceiveBuffer)), uintptr(ReceiveBufferSize), uintptr(unsafe.Pointer(ReceiveDataSize)), uintptr(unsafe.Pointer(OperationStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioDeleteTemplate calls winbio!WinBioDeleteTemplate.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiodeletetemplate
 // Minimum OS: windows6.1.
-func WinBioDeleteTemplate(SessionHandle uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte) foundation.HRESULT {
+func WinBioDeleteTemplate(SessionHandle uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte) error {
 	r1, _, _ := syscall.SyscallN(procWinBioDeleteTemplate.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnrollBegin calls winbio!WinBioEnrollBegin.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenrollbegin
 // Minimum OS: windows6.1.
-func WinBioEnrollBegin(SessionHandle uint32, SubFactor byte, UnitId uint32) foundation.HRESULT {
+func WinBioEnrollBegin(SessionHandle uint32, SubFactor byte, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollBegin.Addr(), uintptr(SessionHandle), uintptr(SubFactor), uintptr(UnitId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnrollCapture calls winbio!WinBioEnrollCapture.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenrollcapture
 // Minimum OS: windows6.1.
-func WinBioEnrollCapture(SessionHandle uint32, RejectDetail *uint32) foundation.HRESULT {
+func WinBioEnrollCapture(SessionHandle uint32, RejectDetail *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollCapture.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(RejectDetail)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnrollCaptureWithCallback calls winbio!WinBioEnrollCaptureWithCallback.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenrollcapturewithcallback
 // Minimum OS: windows6.1.
-func WinBioEnrollCaptureWithCallback(SessionHandle uint32, EnrollCallback PWINBIO_ENROLL_CAPTURE_CALLBACK, EnrollCallbackContext unsafe.Pointer) foundation.HRESULT {
+func WinBioEnrollCaptureWithCallback(SessionHandle uint32, EnrollCallback PWINBIO_ENROLL_CAPTURE_CALLBACK, EnrollCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollCaptureWithCallback.Addr(), uintptr(SessionHandle), uintptr(EnrollCallback), uintptr(unsafe.Pointer(EnrollCallbackContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnrollCommit calls winbio!WinBioEnrollCommit.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenrollcommit
 // Minimum OS: windows6.1.
-func WinBioEnrollCommit(SessionHandle uint32, Identity *WINBIO_IDENTITY, IsNewTemplate *byte) foundation.HRESULT {
+func WinBioEnrollCommit(SessionHandle uint32, Identity *WINBIO_IDENTITY, IsNewTemplate *byte) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollCommit.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(Identity)), uintptr(unsafe.Pointer(IsNewTemplate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnrollDiscard calls winbio!WinBioEnrollDiscard.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenrolldiscard
 // Minimum OS: windows6.1.
-func WinBioEnrollDiscard(SessionHandle uint32) foundation.HRESULT {
+func WinBioEnrollDiscard(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollDiscard.Addr(), uintptr(SessionHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnrollSelect calls winbio!WinBioEnrollSelect.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenrollselect
 // Minimum OS: windows10.0.10240.
-func WinBioEnrollSelect(SessionHandle uint32, SelectorValue uint64) foundation.HRESULT {
+func WinBioEnrollSelect(SessionHandle uint32, SelectorValue uint64) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnrollSelect.Addr(), uintptr(SessionHandle), uintptr(SelectorValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnumBiometricUnits calls winbio!WinBioEnumBiometricUnits.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenumbiometricunits
 // Minimum OS: windows6.1.
-func WinBioEnumBiometricUnits(Factor uint32, UnitSchemaArray **WINBIO_UNIT_SCHEMA, UnitCount *uintptr) foundation.HRESULT {
+func WinBioEnumBiometricUnits(Factor uint32, UnitSchemaArray **WINBIO_UNIT_SCHEMA, UnitCount *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnumBiometricUnits.Addr(), uintptr(Factor), uintptr(unsafe.Pointer(UnitSchemaArray)), uintptr(unsafe.Pointer(UnitCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnumDatabases calls winbio!WinBioEnumDatabases.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenumdatabases
 // Minimum OS: windows6.1.
-func WinBioEnumDatabases(Factor uint32, StorageSchemaArray **WINBIO_STORAGE_SCHEMA, StorageCount *uintptr) foundation.HRESULT {
+func WinBioEnumDatabases(Factor uint32, StorageSchemaArray **WINBIO_STORAGE_SCHEMA, StorageCount *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnumDatabases.Addr(), uintptr(Factor), uintptr(unsafe.Pointer(StorageSchemaArray)), uintptr(unsafe.Pointer(StorageCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnumEnrollments calls winbio!WinBioEnumEnrollments.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenumenrollments
 // Minimum OS: windows6.1.
-func WinBioEnumEnrollments(SessionHandle uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactorArray **byte, SubFactorCount *uintptr) foundation.HRESULT {
+func WinBioEnumEnrollments(SessionHandle uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactorArray **byte, SubFactorCount *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnumEnrollments.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(unsafe.Pointer(SubFactorArray)), uintptr(unsafe.Pointer(SubFactorCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioEnumServiceProviders calls winbio!WinBioEnumServiceProviders.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioenumserviceproviders
 // Minimum OS: windows6.1.
-func WinBioEnumServiceProviders(Factor uint32, BspSchemaArray **WINBIO_BSP_SCHEMA, BspCount *uintptr) foundation.HRESULT {
+func WinBioEnumServiceProviders(Factor uint32, BspSchemaArray **WINBIO_BSP_SCHEMA, BspCount *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioEnumServiceProviders.Addr(), uintptr(Factor), uintptr(unsafe.Pointer(BspSchemaArray)), uintptr(unsafe.Pointer(BspCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioFree calls winbio!WinBioFree.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiofree
 // Minimum OS: windows6.1.
-func WinBioFree(Address unsafe.Pointer) foundation.HRESULT {
+func WinBioFree(Address unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioFree.Addr(), uintptr(unsafe.Pointer(Address)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioGetDomainLogonSetting calls winbio!WinBioGetDomainLogonSetting.
@@ -297,9 +303,9 @@ func WinBioGetEnabledSetting(Value *byte, Source *WINBIO_SETTING_SOURCE) {
 // WinBioGetEnrolledFactors calls winbio!WinBioGetEnrolledFactors.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiogetenrolledfactors
 // Minimum OS: windows10.0.10240.
-func WinBioGetEnrolledFactors(AccountOwner *WINBIO_IDENTITY, EnrolledFactors *uint32) foundation.HRESULT {
+func WinBioGetEnrolledFactors(AccountOwner *WINBIO_IDENTITY, EnrolledFactors *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioGetEnrolledFactors.Addr(), uintptr(unsafe.Pointer(AccountOwner)), uintptr(unsafe.Pointer(EnrolledFactors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioGetLogonSetting calls winbio!WinBioGetLogonSetting.
@@ -312,177 +318,181 @@ func WinBioGetLogonSetting(Value *byte, Source *WINBIO_SETTING_SOURCE) {
 // WinBioGetProperty calls winbio!WinBioGetProperty.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiogetproperty
 // Minimum OS: windows6.1.
-func WinBioGetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte, PropertyBuffer *unsafe.Pointer, PropertyBufferSize *uintptr) foundation.HRESULT {
+func WinBioGetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte, PropertyBuffer *unsafe.Pointer, PropertyBufferSize *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioGetProperty.Addr(), uintptr(SessionHandle), uintptr(PropertyType), uintptr(PropertyId), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(unsafe.Pointer(PropertyBufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioIdentify calls winbio!WinBioIdentify.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioidentify
 // Minimum OS: windows6.1.
-func WinBioIdentify(SessionHandle uint32, UnitId *uint32, Identity *WINBIO_IDENTITY, SubFactor *byte, RejectDetail *uint32) foundation.HRESULT {
+func WinBioIdentify(SessionHandle uint32, UnitId *uint32, Identity *WINBIO_IDENTITY, SubFactor *byte, RejectDetail *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioIdentify.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(UnitId)), uintptr(unsafe.Pointer(Identity)), uintptr(unsafe.Pointer(SubFactor)), uintptr(unsafe.Pointer(RejectDetail)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioIdentifyWithCallback calls winbio!WinBioIdentifyWithCallback.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioidentifywithcallback
 // Minimum OS: windows6.1.
-func WinBioIdentifyWithCallback(SessionHandle uint32, IdentifyCallback PWINBIO_IDENTIFY_CALLBACK, IdentifyCallbackContext unsafe.Pointer) foundation.HRESULT {
+func WinBioIdentifyWithCallback(SessionHandle uint32, IdentifyCallback PWINBIO_IDENTIFY_CALLBACK, IdentifyCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioIdentifyWithCallback.Addr(), uintptr(SessionHandle), uintptr(IdentifyCallback), uintptr(unsafe.Pointer(IdentifyCallbackContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioImproveBegin calls winbio!WinBioImproveBegin.
-func WinBioImproveBegin(SessionHandle uint32, UnitId uint32) foundation.HRESULT {
+func WinBioImproveBegin(SessionHandle uint32, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioImproveBegin.Addr(), uintptr(SessionHandle), uintptr(UnitId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioImproveEnd calls winbio!WinBioImproveEnd.
-func WinBioImproveEnd(SessionHandle uint32) foundation.HRESULT {
+func WinBioImproveEnd(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioImproveEnd.Addr(), uintptr(SessionHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioIsESSCapable calls winbio!WinBioIsESSCapable.
-func WinBioIsESSCapable(Value *byte) foundation.HRESULT {
+func WinBioIsESSCapable(Value *byte) error {
 	r1, _, _ := syscall.SyscallN(procWinBioIsESSCapable.Addr(), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioLocateSensor calls winbio!WinBioLocateSensor.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiolocatesensor
 // Minimum OS: windows6.1.
-func WinBioLocateSensor(SessionHandle uint32, UnitId *uint32) foundation.HRESULT {
+func WinBioLocateSensor(SessionHandle uint32, UnitId *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioLocateSensor.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(UnitId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioLocateSensorWithCallback calls winbio!WinBioLocateSensorWithCallback.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiolocatesensorwithcallback
 // Minimum OS: windows6.1.
-func WinBioLocateSensorWithCallback(SessionHandle uint32, LocateCallback PWINBIO_LOCATE_SENSOR_CALLBACK, LocateCallbackContext unsafe.Pointer) foundation.HRESULT {
+func WinBioLocateSensorWithCallback(SessionHandle uint32, LocateCallback PWINBIO_LOCATE_SENSOR_CALLBACK, LocateCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioLocateSensorWithCallback.Addr(), uintptr(SessionHandle), uintptr(LocateCallback), uintptr(unsafe.Pointer(LocateCallbackContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioLockUnit calls winbio!WinBioLockUnit.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiolockunit
 // Minimum OS: windows6.1.
-func WinBioLockUnit(SessionHandle uint32, UnitId uint32) foundation.HRESULT {
+func WinBioLockUnit(SessionHandle uint32, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioLockUnit.Addr(), uintptr(SessionHandle), uintptr(UnitId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioLogonIdentifiedUser calls winbio!WinBioLogonIdentifiedUser.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiologonidentifieduser
 // Minimum OS: windows6.1.
-func WinBioLogonIdentifiedUser(SessionHandle uint32) foundation.HRESULT {
+func WinBioLogonIdentifiedUser(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioLogonIdentifiedUser.Addr(), uintptr(SessionHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioMonitorPresence calls winbio!WinBioMonitorPresence.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiomonitorpresence
 // Minimum OS: windows10.0.10240.
-func WinBioMonitorPresence(SessionHandle uint32, UnitId uint32) foundation.HRESULT {
+func WinBioMonitorPresence(SessionHandle uint32, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioMonitorPresence.Addr(), uintptr(SessionHandle), uintptr(UnitId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioOpenSession calls winbio!WinBioOpenSession.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioopensession
 // Minimum OS: windows6.1.
-func WinBioOpenSession(Factor uint32, PoolType WINBIO_POOL, Flags uint32, UnitArray *uint32, UnitCount uintptr, DatabaseId *win32.GUID, SessionHandle *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWinBioOpenSession.Addr(), uintptr(Factor), uintptr(PoolType), uintptr(Flags), uintptr(unsafe.Pointer(UnitArray)), uintptr(UnitCount), uintptr(unsafe.Pointer(DatabaseId)), uintptr(unsafe.Pointer(SessionHandle)))
-	return foundation.HRESULT(r1)
+func WinBioOpenSession(Factor uint32, PoolType WINBIO_POOL, Flags uint32, UnitArray []uint32, DatabaseId *win32.GUID, SessionHandle *uint32) error {
+	var _UnitArray *uint32
+	if len(UnitArray) > 0 {
+		_UnitArray = &UnitArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinBioOpenSession.Addr(), uintptr(Factor), uintptr(PoolType), uintptr(Flags), uintptr(unsafe.Pointer(_UnitArray)), uintptr(len(UnitArray)), uintptr(unsafe.Pointer(DatabaseId)), uintptr(unsafe.Pointer(SessionHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioRegisterEventMonitor calls winbio!WinBioRegisterEventMonitor.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioregistereventmonitor
 // Minimum OS: windows6.1.
-func WinBioRegisterEventMonitor(SessionHandle uint32, EventMask uint32, EventCallback PWINBIO_EVENT_CALLBACK, EventCallbackContext unsafe.Pointer) foundation.HRESULT {
+func WinBioRegisterEventMonitor(SessionHandle uint32, EventMask uint32, EventCallback PWINBIO_EVENT_CALLBACK, EventCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioRegisterEventMonitor.Addr(), uintptr(SessionHandle), uintptr(EventMask), uintptr(EventCallback), uintptr(unsafe.Pointer(EventCallbackContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioReleaseFocus calls winbio!WinBioReleaseFocus.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioreleasefocus
 // Minimum OS: windows6.1.
-func WinBioReleaseFocus() foundation.HRESULT {
+func WinBioReleaseFocus() error {
 	r1, _, _ := syscall.SyscallN(procWinBioReleaseFocus.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioRemoveAllCredentials calls winbio!WinBioRemoveAllCredentials.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioremoveallcredentials
 // Minimum OS: windows6.1.
-func WinBioRemoveAllCredentials() foundation.HRESULT {
+func WinBioRemoveAllCredentials() error {
 	r1, _, _ := syscall.SyscallN(procWinBioRemoveAllCredentials.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioRemoveAllDomainCredentials calls winbio!WinBioRemoveAllDomainCredentials.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioremovealldomaincredentials
 // Minimum OS: windows6.1.
-func WinBioRemoveAllDomainCredentials() foundation.HRESULT {
+func WinBioRemoveAllDomainCredentials() error {
 	r1, _, _ := syscall.SyscallN(procWinBioRemoveAllDomainCredentials.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioSetCredential calls winbio!WinBioSetCredential.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiosetcredential
 // Minimum OS: windows8.1.
-func WinBioSetCredential(Type WINBIO_CREDENTIAL_TYPE, Credential *byte, CredentialSize uintptr, Format WINBIO_CREDENTIAL_FORMAT) foundation.HRESULT {
+func WinBioSetCredential(Type WINBIO_CREDENTIAL_TYPE, Credential *byte, CredentialSize uintptr, Format WINBIO_CREDENTIAL_FORMAT) error {
 	r1, _, _ := syscall.SyscallN(procWinBioSetCredential.Addr(), uintptr(Type), uintptr(unsafe.Pointer(Credential)), uintptr(CredentialSize), uintptr(Format))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioSetProperty calls winbio!WinBioSetProperty.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiosetproperty
 // Minimum OS: windows10.0.10240.
-func WinBioSetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte, PropertyBuffer unsafe.Pointer, PropertyBufferSize uintptr) foundation.HRESULT {
+func WinBioSetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte, PropertyBuffer unsafe.Pointer, PropertyBufferSize uintptr) error {
 	r1, _, _ := syscall.SyscallN(procWinBioSetProperty.Addr(), uintptr(SessionHandle), uintptr(PropertyType), uintptr(PropertyId), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioUnlockUnit calls winbio!WinBioUnlockUnit.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiounlockunit
 // Minimum OS: windows6.1.
-func WinBioUnlockUnit(SessionHandle uint32, UnitId uint32) foundation.HRESULT {
+func WinBioUnlockUnit(SessionHandle uint32, UnitId uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioUnlockUnit.Addr(), uintptr(SessionHandle), uintptr(UnitId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioUnregisterEventMonitor calls winbio!WinBioUnregisterEventMonitor.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiounregistereventmonitor
 // Minimum OS: windows6.1.
-func WinBioUnregisterEventMonitor(SessionHandle uint32) foundation.HRESULT {
+func WinBioUnregisterEventMonitor(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioUnregisterEventMonitor.Addr(), uintptr(SessionHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioVerify calls winbio!WinBioVerify.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioverify
 // Minimum OS: windows6.1.
-func WinBioVerify(SessionHandle uint32, Identity *WINBIO_IDENTITY, SubFactor byte, UnitId *uint32, Match *byte, RejectDetail *uint32) foundation.HRESULT {
+func WinBioVerify(SessionHandle uint32, Identity *WINBIO_IDENTITY, SubFactor byte, UnitId *uint32, Match *byte, RejectDetail *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioVerify.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(unsafe.Pointer(UnitId)), uintptr(unsafe.Pointer(Match)), uintptr(unsafe.Pointer(RejectDetail)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioVerifyWithCallback calls winbio!WinBioVerifyWithCallback.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioverifywithcallback
 // Minimum OS: windows6.1.
-func WinBioVerifyWithCallback(SessionHandle uint32, Identity *WINBIO_IDENTITY, SubFactor byte, VerifyCallback PWINBIO_VERIFY_CALLBACK, VerifyCallbackContext unsafe.Pointer) foundation.HRESULT {
+func WinBioVerifyWithCallback(SessionHandle uint32, Identity *WINBIO_IDENTITY, SubFactor byte, VerifyCallback PWINBIO_VERIFY_CALLBACK, VerifyCallbackContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWinBioVerifyWithCallback.Addr(), uintptr(SessionHandle), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(VerifyCallback), uintptr(unsafe.Pointer(VerifyCallbackContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioWait calls winbio!WinBioWait.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiowait
 // Minimum OS: windows6.1.
-func WinBioWait(SessionHandle uint32) foundation.HRESULT {
+func WinBioWait(SessionHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(procWinBioWait.Addr(), uintptr(SessionHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

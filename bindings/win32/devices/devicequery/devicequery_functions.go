@@ -41,77 +41,188 @@ func DevCloseObjectQuery(hDevQuery HDEVQUERY) {
 }
 
 // DevCreateObjectQuery calls api-ms-win-devices-query-l1-1-0!DevCreateObjectQuery.
-func DevCreateObjectQuery(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *DEVPROP_FILTER_EXPRESSION, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevCreateObjectQuery.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(cFilterExpressionCount), uintptr(unsafe.Pointer(pFilter)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return foundation.HRESULT(r1)
+func DevCreateObjectQuery(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []DEVPROP_FILTER_EXPRESSION, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) error {
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevCreateObjectQuery.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DevCreateObjectQueryEx calls api-ms-win-devices-query-l1-1-1!DevCreateObjectQueryEx.
-func DevCreateObjectQueryEx(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *DEVPROP_FILTER_EXPRESSION, cExtendedParameterCount uint32, pExtendedParameters *DEV_QUERY_PARAMETER, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryEx.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(cFilterExpressionCount), uintptr(unsafe.Pointer(pFilter)), uintptr(cExtendedParameterCount), uintptr(unsafe.Pointer(pExtendedParameters)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return foundation.HRESULT(r1)
+func DevCreateObjectQueryEx(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []DEVPROP_FILTER_EXPRESSION, pExtendedParameters []DEV_QUERY_PARAMETER, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) error {
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	var _pExtendedParameters *DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryEx.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DevCreateObjectQueryFromId calls api-ms-win-devices-query-l1-1-0!DevCreateObjectQueryFromId.
-func DevCreateObjectQueryFromId(ObjectType DEV_OBJECT_TYPE, pszObjectId foundation.PWSTR, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *DEVPROP_FILTER_EXPRESSION, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromId.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(pszObjectId)), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(cFilterExpressionCount), uintptr(unsafe.Pointer(pFilter)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return foundation.HRESULT(r1)
+func DevCreateObjectQueryFromId(ObjectType DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []DEVPROP_FILTER_EXPRESSION, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) error {
+	_pszObjectId := win32.UTF16Ptr(pszObjectId)
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromId.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszObjectId)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DevCreateObjectQueryFromIdEx calls api-ms-win-devices-query-l1-1-1!DevCreateObjectQueryFromIdEx.
-func DevCreateObjectQueryFromIdEx(ObjectType DEV_OBJECT_TYPE, pszObjectId foundation.PWSTR, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *DEVPROP_FILTER_EXPRESSION, cExtendedParameterCount uint32, pExtendedParameters *DEV_QUERY_PARAMETER, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromIdEx.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(pszObjectId)), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(cFilterExpressionCount), uintptr(unsafe.Pointer(pFilter)), uintptr(cExtendedParameterCount), uintptr(unsafe.Pointer(pExtendedParameters)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return foundation.HRESULT(r1)
+func DevCreateObjectQueryFromIdEx(ObjectType DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []DEVPROP_FILTER_EXPRESSION, pExtendedParameters []DEV_QUERY_PARAMETER, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) error {
+	_pszObjectId := win32.UTF16Ptr(pszObjectId)
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	var _pExtendedParameters *DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromIdEx.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszObjectId)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DevCreateObjectQueryFromIds calls api-ms-win-devices-query-l1-1-0!DevCreateObjectQueryFromIds.
-func DevCreateObjectQueryFromIds(ObjectType DEV_OBJECT_TYPE, pszzObjectIds foundation.PWSTR, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *DEVPROP_FILTER_EXPRESSION, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromIds.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(pszzObjectIds)), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(cFilterExpressionCount), uintptr(unsafe.Pointer(pFilter)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return foundation.HRESULT(r1)
+func DevCreateObjectQueryFromIds(ObjectType DEV_OBJECT_TYPE, pszzObjectIds string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []DEVPROP_FILTER_EXPRESSION, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) error {
+	_pszzObjectIds := win32.UTF16Ptr(pszzObjectIds)
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromIds.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszzObjectIds)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DevCreateObjectQueryFromIdsEx calls api-ms-win-devices-query-l1-1-1!DevCreateObjectQueryFromIdsEx.
-func DevCreateObjectQueryFromIdsEx(ObjectType DEV_OBJECT_TYPE, pszzObjectIds foundation.PWSTR, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *DEVPROP_FILTER_EXPRESSION, cExtendedParameterCount uint32, pExtendedParameters *DEV_QUERY_PARAMETER, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromIdsEx.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(pszzObjectIds)), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(cFilterExpressionCount), uintptr(unsafe.Pointer(pFilter)), uintptr(cExtendedParameterCount), uintptr(unsafe.Pointer(pExtendedParameters)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
-	return foundation.HRESULT(r1)
+func DevCreateObjectQueryFromIdsEx(ObjectType DEV_OBJECT_TYPE, pszzObjectIds string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []DEVPROP_FILTER_EXPRESSION, pExtendedParameters []DEV_QUERY_PARAMETER, pCallback PDEV_QUERY_RESULT_CALLBACK, pContext unsafe.Pointer, phDevQuery *HDEVQUERY) error {
+	_pszzObjectIds := win32.UTF16Ptr(pszzObjectIds)
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	var _pExtendedParameters *DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevCreateObjectQueryFromIdsEx.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszzObjectIds)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(pCallback), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(phDevQuery)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DevFindProperty calls api-ms-win-devices-query-l1-1-0!DevFindProperty.
-func DevFindProperty(pKey *foundation.DEVPROPKEY, Store devicesproperties.DEVPROPSTORE, pszLocaleName foundation.PWSTR, cProperties uint32, pProperties *devicesproperties.DEVPROPERTY) *devicesproperties.DEVPROPERTY {
-	r1, _, _ := syscall.SyscallN(procDevFindProperty.Addr(), uintptr(unsafe.Pointer(pKey)), uintptr(Store), uintptr(unsafe.Pointer(pszLocaleName)), uintptr(cProperties), uintptr(unsafe.Pointer(pProperties)))
+func DevFindProperty(pKey *foundation.DEVPROPKEY, Store devicesproperties.DEVPROPSTORE, pszLocaleName string, pProperties []devicesproperties.DEVPROPERTY) *devicesproperties.DEVPROPERTY {
+	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevFindProperty.Addr(), uintptr(unsafe.Pointer(pKey)), uintptr(Store), uintptr(unsafe.Pointer(_pszLocaleName)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)))
 	return (*devicesproperties.DEVPROPERTY)(unsafe.Pointer(r1))
 }
 
 // DevFreeObjectProperties calls api-ms-win-devices-query-l1-1-0!DevFreeObjectProperties.
-func DevFreeObjectProperties(cPropertyCount uint32, pProperties *devicesproperties.DEVPROPERTY) {
-	syscall.SyscallN(procDevFreeObjectProperties.Addr(), uintptr(cPropertyCount), uintptr(unsafe.Pointer(pProperties)))
+func DevFreeObjectProperties(pProperties []devicesproperties.DEVPROPERTY) {
+	var _pProperties *devicesproperties.DEVPROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	syscall.SyscallN(procDevFreeObjectProperties.Addr(), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)))
 }
 
 // DevFreeObjects calls api-ms-win-devices-query-l1-1-0!DevFreeObjects.
-func DevFreeObjects(cObjectCount uint32, pObjects *DEV_OBJECT) {
-	syscall.SyscallN(procDevFreeObjects.Addr(), uintptr(cObjectCount), uintptr(unsafe.Pointer(pObjects)))
+func DevFreeObjects(pObjects []DEV_OBJECT) {
+	var _pObjects *DEV_OBJECT
+	if len(pObjects) > 0 {
+		_pObjects = &pObjects[0]
+	}
+	syscall.SyscallN(procDevFreeObjects.Addr(), uintptr(len(pObjects)), uintptr(unsafe.Pointer(_pObjects)))
 }
 
 // DevGetObjectProperties calls api-ms-win-devices-query-l1-1-0!DevGetObjectProperties.
-func DevGetObjectProperties(ObjectType DEV_OBJECT_TYPE, pszObjectId foundation.PWSTR, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, pcPropertyCount *uint32, ppProperties **devicesproperties.DEVPROPERTY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevGetObjectProperties.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(pszObjectId)), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(unsafe.Pointer(pcPropertyCount)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func DevGetObjectProperties(ObjectType DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pcPropertyCount *uint32, ppProperties **devicesproperties.DEVPROPERTY) error {
+	_pszObjectId := win32.UTF16Ptr(pszObjectId)
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevGetObjectProperties.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszObjectId)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(unsafe.Pointer(pcPropertyCount)), uintptr(unsafe.Pointer(ppProperties)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DevGetObjectPropertiesEx calls api-ms-win-devices-query-l1-1-1!DevGetObjectPropertiesEx.
-func DevGetObjectPropertiesEx(ObjectType DEV_OBJECT_TYPE, pszObjectId foundation.PWSTR, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cExtendedParameterCount uint32, pExtendedParameters *DEV_QUERY_PARAMETER, pcPropertyCount *uint32, ppProperties **devicesproperties.DEVPROPERTY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevGetObjectPropertiesEx.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(pszObjectId)), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(cExtendedParameterCount), uintptr(unsafe.Pointer(pExtendedParameters)), uintptr(unsafe.Pointer(pcPropertyCount)), uintptr(unsafe.Pointer(ppProperties)))
-	return foundation.HRESULT(r1)
+func DevGetObjectPropertiesEx(ObjectType DEV_OBJECT_TYPE, pszObjectId string, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pExtendedParameters []DEV_QUERY_PARAMETER, pcPropertyCount *uint32, ppProperties **devicesproperties.DEVPROPERTY) error {
+	_pszObjectId := win32.UTF16Ptr(pszObjectId)
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pExtendedParameters *DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevGetObjectPropertiesEx.Addr(), uintptr(ObjectType), uintptr(unsafe.Pointer(_pszObjectId)), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(unsafe.Pointer(pcPropertyCount)), uintptr(unsafe.Pointer(ppProperties)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DevGetObjects calls api-ms-win-devices-query-l1-1-0!DevGetObjects.
-func DevGetObjects(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *DEVPROP_FILTER_EXPRESSION, pcObjectCount *uint32, ppObjects **DEV_OBJECT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevGetObjects.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(cFilterExpressionCount), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(pcObjectCount)), uintptr(unsafe.Pointer(ppObjects)))
-	return foundation.HRESULT(r1)
+func DevGetObjects(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []DEVPROP_FILTER_EXPRESSION, pcObjectCount *uint32, ppObjects **DEV_OBJECT) error {
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevGetObjects.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(unsafe.Pointer(pcObjectCount)), uintptr(unsafe.Pointer(ppObjects)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DevGetObjectsEx calls api-ms-win-devices-query-l1-1-1!DevGetObjectsEx.
-func DevGetObjectsEx(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, cRequestedProperties uint32, pRequestedProperties *devicesproperties.DEVPROPCOMPKEY, cFilterExpressionCount uint32, pFilter *DEVPROP_FILTER_EXPRESSION, cExtendedParameterCount uint32, pExtendedParameters *DEV_QUERY_PARAMETER, pcObjectCount *uint32, ppObjects **DEV_OBJECT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDevGetObjectsEx.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(cRequestedProperties), uintptr(unsafe.Pointer(pRequestedProperties)), uintptr(cFilterExpressionCount), uintptr(unsafe.Pointer(pFilter)), uintptr(cExtendedParameterCount), uintptr(unsafe.Pointer(pExtendedParameters)), uintptr(unsafe.Pointer(pcObjectCount)), uintptr(unsafe.Pointer(ppObjects)))
-	return foundation.HRESULT(r1)
+func DevGetObjectsEx(ObjectType DEV_OBJECT_TYPE, QueryFlags uint32, pRequestedProperties []devicesproperties.DEVPROPCOMPKEY, pFilter []DEVPROP_FILTER_EXPRESSION, pExtendedParameters []DEV_QUERY_PARAMETER, pcObjectCount *uint32, ppObjects **DEV_OBJECT) error {
+	var _pRequestedProperties *devicesproperties.DEVPROPCOMPKEY
+	if len(pRequestedProperties) > 0 {
+		_pRequestedProperties = &pRequestedProperties[0]
+	}
+	var _pFilter *DEVPROP_FILTER_EXPRESSION
+	if len(pFilter) > 0 {
+		_pFilter = &pFilter[0]
+	}
+	var _pExtendedParameters *DEV_QUERY_PARAMETER
+	if len(pExtendedParameters) > 0 {
+		_pExtendedParameters = &pExtendedParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDevGetObjectsEx.Addr(), uintptr(ObjectType), uintptr(QueryFlags), uintptr(len(pRequestedProperties)), uintptr(unsafe.Pointer(_pRequestedProperties)), uintptr(len(pFilter)), uintptr(unsafe.Pointer(_pFilter)), uintptr(len(pExtendedParameters)), uintptr(unsafe.Pointer(_pExtendedParameters)), uintptr(unsafe.Pointer(pcObjectCount)), uintptr(unsafe.Pointer(ppObjects)))
+	return win32.HRESULTError(int32(r1))
 }

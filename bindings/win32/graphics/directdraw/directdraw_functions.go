@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -21,57 +20,57 @@ var (
 	procDirectDrawCreate        = modDDRAW.NewProc("DirectDrawCreate")
 	procDirectDrawCreateClipper = modDDRAW.NewProc("DirectDrawCreateClipper")
 	procDirectDrawCreateEx      = modDDRAW.NewProc("DirectDrawCreateEx")
+	procDirectDrawEnumerate     = modDDRAW.NewProc("DirectDrawEnumerateW")
 	procDirectDrawEnumerateA    = modDDRAW.NewProc("DirectDrawEnumerateA")
+	procDirectDrawEnumerateEx   = modDDRAW.NewProc("DirectDrawEnumerateExW")
 	procDirectDrawEnumerateExA  = modDDRAW.NewProc("DirectDrawEnumerateExA")
-	procDirectDrawEnumerateExW  = modDDRAW.NewProc("DirectDrawEnumerateExW")
-	procDirectDrawEnumerateW    = modDDRAW.NewProc("DirectDrawEnumerateW")
 )
 
 // DirectDrawCreate calls DDRAW!DirectDrawCreate.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreate
-func DirectDrawCreate(lpGUID *win32.GUID, lplpDD **IDirectDraw, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func DirectDrawCreate(lpGUID *win32.GUID, lplpDD **IDirectDraw, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectDrawCreate.Addr(), uintptr(unsafe.Pointer(lpGUID)), uintptr(unsafe.Pointer(lplpDD)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectDrawCreateClipper calls DDRAW!DirectDrawCreateClipper.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreateclipper
-func DirectDrawCreateClipper(dwFlags uint32, lplpDDClipper **IDirectDrawClipper, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func DirectDrawCreateClipper(dwFlags uint32, lplpDDClipper **IDirectDrawClipper, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectDrawCreateClipper.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lplpDDClipper)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectDrawCreateEx calls DDRAW!DirectDrawCreateEx.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreateex
-func DirectDrawCreateEx(lpGuid *win32.GUID, lplpDD *unsafe.Pointer, iid *win32.GUID, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func DirectDrawCreateEx(lpGuid *win32.GUID, lplpDD *unsafe.Pointer, iid *win32.GUID, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectDrawCreateEx.Addr(), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(lplpDD)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// DirectDrawEnumerate calls DDRAW!DirectDrawEnumerateW.
+// https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawenumeratew
+func DirectDrawEnumerate(lpCallback LPDDENUMCALLBACKW, lpContext unsafe.Pointer) error {
+	r1, _, _ := syscall.SyscallN(procDirectDrawEnumerate.Addr(), uintptr(lpCallback), uintptr(unsafe.Pointer(lpContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectDrawEnumerateA calls DDRAW!DirectDrawEnumerateA.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawenumeratea
-func DirectDrawEnumerateA(lpCallback LPDDENUMCALLBACKA, lpContext unsafe.Pointer) foundation.HRESULT {
+func DirectDrawEnumerateA(lpCallback LPDDENUMCALLBACKA, lpContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDirectDrawEnumerateA.Addr(), uintptr(lpCallback), uintptr(unsafe.Pointer(lpContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// DirectDrawEnumerateEx calls DDRAW!DirectDrawEnumerateExW.
+// https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawenumerateexw
+func DirectDrawEnumerateEx(lpCallback LPDDENUMCALLBACKEXW, lpContext unsafe.Pointer, dwFlags uint32) error {
+	r1, _, _ := syscall.SyscallN(procDirectDrawEnumerateEx.Addr(), uintptr(lpCallback), uintptr(unsafe.Pointer(lpContext)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectDrawEnumerateExA calls DDRAW!DirectDrawEnumerateExA.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawenumerateexa
-func DirectDrawEnumerateExA(lpCallback LPDDENUMCALLBACKEXA, lpContext unsafe.Pointer, dwFlags uint32) foundation.HRESULT {
+func DirectDrawEnumerateExA(lpCallback LPDDENUMCALLBACKEXA, lpContext unsafe.Pointer, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procDirectDrawEnumerateExA.Addr(), uintptr(lpCallback), uintptr(unsafe.Pointer(lpContext)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
-}
-
-// DirectDrawEnumerateExW calls DDRAW!DirectDrawEnumerateExW.
-// https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawenumerateexw
-func DirectDrawEnumerateExW(lpCallback LPDDENUMCALLBACKEXW, lpContext unsafe.Pointer, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirectDrawEnumerateExW.Addr(), uintptr(lpCallback), uintptr(unsafe.Pointer(lpContext)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
-}
-
-// DirectDrawEnumerateW calls DDRAW!DirectDrawEnumerateW.
-// https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawenumeratew
-func DirectDrawEnumerateW(lpCallback LPDDENUMCALLBACKW, lpContext unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDirectDrawEnumerateW.Addr(), uintptr(lpCallback), uintptr(unsafe.Pointer(lpContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

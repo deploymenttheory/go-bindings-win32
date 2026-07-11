@@ -23,51 +23,51 @@ type IDirectSound struct {
 var IID_IDirectSound = win32.GUID{Data1: 0x279afa83, Data2: 0x4981, Data3: 0x11ce, Data4: [8]byte{0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60}}
 
 // CreateSoundBuffer dispatches through IDirectSound's vtable slot 3.
-func (self *IDirectSound) CreateSoundBuffer(pcDSBufferDesc *DSBUFFERDESC, ppDSBuffer **IDirectSoundBuffer, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectSound) CreateSoundBuffer(pcDSBufferDesc *DSBUFFERDESC, ppDSBuffer **IDirectSoundBuffer, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDSBufferDesc)), uintptr(unsafe.Pointer(ppDSBuffer)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectSound's vtable slot 4.
-func (self *IDirectSound) GetCaps(pDSCaps *DSCAPS) foundation.HRESULT {
+func (self *IDirectSound) GetCaps(pDSCaps *DSCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDSCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DuplicateSoundBuffer dispatches through IDirectSound's vtable slot 5.
-func (self *IDirectSound) DuplicateSoundBuffer(pDSBufferOriginal *IDirectSoundBuffer, ppDSBufferDuplicate **IDirectSoundBuffer) foundation.HRESULT {
+func (self *IDirectSound) DuplicateSoundBuffer(pDSBufferOriginal *IDirectSoundBuffer, ppDSBufferDuplicate **IDirectSoundBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDSBufferOriginal)), uintptr(unsafe.Pointer(ppDSBufferDuplicate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCooperativeLevel dispatches through IDirectSound's vtable slot 6.
-func (self *IDirectSound) SetCooperativeLevel(hwnd foundation.HWND, dwLevel uint32) foundation.HRESULT {
+func (self *IDirectSound) SetCooperativeLevel(hwnd foundation.HWND, dwLevel uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(dwLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Compact dispatches through IDirectSound's vtable slot 7.
-func (self *IDirectSound) Compact() foundation.HRESULT {
+func (self *IDirectSound) Compact() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpeakerConfig dispatches through IDirectSound's vtable slot 8.
-func (self *IDirectSound) GetSpeakerConfig(pdwSpeakerConfig *uint32) foundation.HRESULT {
+func (self *IDirectSound) GetSpeakerConfig(pdwSpeakerConfig *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSpeakerConfig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSpeakerConfig dispatches through IDirectSound's vtable slot 9.
-func (self *IDirectSound) SetSpeakerConfig(dwSpeakerConfig uint32) foundation.HRESULT {
+func (self *IDirectSound) SetSpeakerConfig(dwSpeakerConfig uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwSpeakerConfig))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectSound's vtable slot 10.
-func (self *IDirectSound) Initialize(pcGuidDevice *win32.GUID) foundation.HRESULT {
+func (self *IDirectSound) Initialize(pcGuidDevice *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcGuidDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 279afa86-4981-11ce-a521-0020af0be560
@@ -79,81 +79,81 @@ type IDirectSound3DBuffer struct {
 var IID_IDirectSound3DBuffer = win32.GUID{Data1: 0x279afa86, Data2: 0x4981, Data3: 0x11ce, Data4: [8]byte{0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60}}
 
 // GetAllParameters dispatches through IDirectSound3DBuffer's vtable slot 3.
-func (self *IDirectSound3DBuffer) GetAllParameters(pDs3dBuffer *DS3DBUFFER) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) GetAllParameters(pDs3dBuffer *DS3DBUFFER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDs3dBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConeAngles dispatches through IDirectSound3DBuffer's vtable slot 4.
-func (self *IDirectSound3DBuffer) GetConeAngles(pdwInsideConeAngle *uint32, pdwOutsideConeAngle *uint32) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) GetConeAngles(pdwInsideConeAngle *uint32, pdwOutsideConeAngle *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwInsideConeAngle)), uintptr(unsafe.Pointer(pdwOutsideConeAngle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConeOrientation dispatches through IDirectSound3DBuffer's vtable slot 5.
-func (self *IDirectSound3DBuffer) GetConeOrientation(pvOrientation *graphicsdirect3d.D3DVECTOR) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) GetConeOrientation(pvOrientation *graphicsdirect3d.D3DVECTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvOrientation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConeOutsideVolume dispatches through IDirectSound3DBuffer's vtable slot 6.
-func (self *IDirectSound3DBuffer) GetConeOutsideVolume(plConeOutsideVolume *int32) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) GetConeOutsideVolume(plConeOutsideVolume *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plConeOutsideVolume)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxDistance dispatches through IDirectSound3DBuffer's vtable slot 7.
-func (self *IDirectSound3DBuffer) GetMaxDistance(pflMaxDistance *float32) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) GetMaxDistance(pflMaxDistance *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflMaxDistance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMinDistance dispatches through IDirectSound3DBuffer's vtable slot 8.
-func (self *IDirectSound3DBuffer) GetMinDistance(pflMinDistance *float32) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) GetMinDistance(pflMinDistance *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflMinDistance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMode dispatches through IDirectSound3DBuffer's vtable slot 9.
-func (self *IDirectSound3DBuffer) GetMode(pdwMode *uint32) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) GetMode(pdwMode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPosition dispatches through IDirectSound3DBuffer's vtable slot 10.
-func (self *IDirectSound3DBuffer) GetPosition(pvPosition *graphicsdirect3d.D3DVECTOR) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) GetPosition(pvPosition *graphicsdirect3d.D3DVECTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVelocity dispatches through IDirectSound3DBuffer's vtable slot 11.
-func (self *IDirectSound3DBuffer) GetVelocity(pvVelocity *graphicsdirect3d.D3DVECTOR) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) GetVelocity(pvVelocity *graphicsdirect3d.D3DVECTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvVelocity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllParameters dispatches through IDirectSound3DBuffer's vtable slot 12.
-func (self *IDirectSound3DBuffer) SetAllParameters(pcDs3dBuffer *DS3DBUFFER, dwApply uint32) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) SetAllParameters(pcDs3dBuffer *DS3DBUFFER, dwApply uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDs3dBuffer)), uintptr(dwApply))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConeAngles dispatches through IDirectSound3DBuffer's vtable slot 13.
-func (self *IDirectSound3DBuffer) SetConeAngles(dwInsideConeAngle uint32, dwOutsideConeAngle uint32, dwApply uint32) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) SetConeAngles(dwInsideConeAngle uint32, dwOutsideConeAngle uint32, dwApply uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwInsideConeAngle), uintptr(dwOutsideConeAngle), uintptr(dwApply))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConeOutsideVolume dispatches through IDirectSound3DBuffer's vtable slot 15.
-func (self *IDirectSound3DBuffer) SetConeOutsideVolume(lConeOutsideVolume int32, dwApply uint32) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) SetConeOutsideVolume(lConeOutsideVolume int32, dwApply uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(lConeOutsideVolume), uintptr(dwApply))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMode dispatches through IDirectSound3DBuffer's vtable slot 18.
-func (self *IDirectSound3DBuffer) SetMode(dwMode uint32, dwApply uint32) foundation.HRESULT {
+func (self *IDirectSound3DBuffer) SetMode(dwMode uint32, dwApply uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwMode), uintptr(dwApply))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 279afa84-4981-11ce-a521-0020af0be560
@@ -165,57 +165,57 @@ type IDirectSound3DListener struct {
 var IID_IDirectSound3DListener = win32.GUID{Data1: 0x279afa84, Data2: 0x4981, Data3: 0x11ce, Data4: [8]byte{0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60}}
 
 // GetAllParameters dispatches through IDirectSound3DListener's vtable slot 3.
-func (self *IDirectSound3DListener) GetAllParameters(pListener *DS3DLISTENER) foundation.HRESULT {
+func (self *IDirectSound3DListener) GetAllParameters(pListener *DS3DLISTENER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pListener)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDistanceFactor dispatches through IDirectSound3DListener's vtable slot 4.
-func (self *IDirectSound3DListener) GetDistanceFactor(pflDistanceFactor *float32) foundation.HRESULT {
+func (self *IDirectSound3DListener) GetDistanceFactor(pflDistanceFactor *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflDistanceFactor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDopplerFactor dispatches through IDirectSound3DListener's vtable slot 5.
-func (self *IDirectSound3DListener) GetDopplerFactor(pflDopplerFactor *float32) foundation.HRESULT {
+func (self *IDirectSound3DListener) GetDopplerFactor(pflDopplerFactor *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflDopplerFactor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOrientation dispatches through IDirectSound3DListener's vtable slot 6.
-func (self *IDirectSound3DListener) GetOrientation(pvOrientFront *graphicsdirect3d.D3DVECTOR, pvOrientTop *graphicsdirect3d.D3DVECTOR) foundation.HRESULT {
+func (self *IDirectSound3DListener) GetOrientation(pvOrientFront *graphicsdirect3d.D3DVECTOR, pvOrientTop *graphicsdirect3d.D3DVECTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvOrientFront)), uintptr(unsafe.Pointer(pvOrientTop)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPosition dispatches through IDirectSound3DListener's vtable slot 7.
-func (self *IDirectSound3DListener) GetPosition(pvPosition *graphicsdirect3d.D3DVECTOR) foundation.HRESULT {
+func (self *IDirectSound3DListener) GetPosition(pvPosition *graphicsdirect3d.D3DVECTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRolloffFactor dispatches through IDirectSound3DListener's vtable slot 8.
-func (self *IDirectSound3DListener) GetRolloffFactor(pflRolloffFactor *float32) foundation.HRESULT {
+func (self *IDirectSound3DListener) GetRolloffFactor(pflRolloffFactor *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflRolloffFactor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVelocity dispatches through IDirectSound3DListener's vtable slot 9.
-func (self *IDirectSound3DListener) GetVelocity(pvVelocity *graphicsdirect3d.D3DVECTOR) foundation.HRESULT {
+func (self *IDirectSound3DListener) GetVelocity(pvVelocity *graphicsdirect3d.D3DVECTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvVelocity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllParameters dispatches through IDirectSound3DListener's vtable slot 10.
-func (self *IDirectSound3DListener) SetAllParameters(pcListener *DS3DLISTENER, dwApply uint32) foundation.HRESULT {
+func (self *IDirectSound3DListener) SetAllParameters(pcListener *DS3DLISTENER, dwApply uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcListener)), uintptr(dwApply))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitDeferredSettings dispatches through IDirectSound3DListener's vtable slot 17.
-func (self *IDirectSound3DListener) CommitDeferredSettings() foundation.HRESULT {
+func (self *IDirectSound3DListener) CommitDeferredSettings() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c50a7e93-f395-4834-9ef6-7fa99de50966
@@ -227,9 +227,9 @@ type IDirectSound8 struct {
 var IID_IDirectSound8 = win32.GUID{Data1: 0xc50a7e93, Data2: 0xf395, Data3: 0x4834, Data4: [8]byte{0x9e, 0xf6, 0x7f, 0xa9, 0x9d, 0xe5, 0x09, 0x66}}
 
 // VerifyCertification dispatches through IDirectSound8's vtable slot 11.
-func (self *IDirectSound8) VerifyCertification(pdwCertified *uint32) foundation.HRESULT {
+func (self *IDirectSound8) VerifyCertification(pdwCertified *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCertified)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 279afa85-4981-11ce-a521-0020af0be560
@@ -241,111 +241,111 @@ type IDirectSoundBuffer struct {
 var IID_IDirectSoundBuffer = win32.GUID{Data1: 0x279afa85, Data2: 0x4981, Data3: 0x11ce, Data4: [8]byte{0xa5, 0x21, 0x00, 0x20, 0xaf, 0x0b, 0xe5, 0x60}}
 
 // GetCaps dispatches through IDirectSoundBuffer's vtable slot 3.
-func (self *IDirectSoundBuffer) GetCaps(pDSBufferCaps *DSBCAPS) foundation.HRESULT {
+func (self *IDirectSoundBuffer) GetCaps(pDSBufferCaps *DSBCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDSBufferCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPosition dispatches through IDirectSoundBuffer's vtable slot 4.
-func (self *IDirectSoundBuffer) GetCurrentPosition(pdwCurrentPlayCursor *uint32, pdwCurrentWriteCursor *uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) GetCurrentPosition(pdwCurrentPlayCursor *uint32, pdwCurrentWriteCursor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCurrentPlayCursor)), uintptr(unsafe.Pointer(pdwCurrentWriteCursor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormat dispatches through IDirectSoundBuffer's vtable slot 5.
-func (self *IDirectSoundBuffer) GetFormat(pwfxFormat unsafe.Pointer, dwSizeAllocated uint32, pdwSizeWritten *uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) GetFormat(pwfxFormat unsafe.Pointer, dwSizeAllocated uint32, pdwSizeWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwfxFormat)), uintptr(dwSizeAllocated), uintptr(unsafe.Pointer(pdwSizeWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolume dispatches through IDirectSoundBuffer's vtable slot 6.
-func (self *IDirectSoundBuffer) GetVolume(plVolume *int32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) GetVolume(plVolume *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plVolume)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPan dispatches through IDirectSoundBuffer's vtable slot 7.
-func (self *IDirectSoundBuffer) GetPan(plPan *int32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) GetPan(plPan *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPan)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFrequency dispatches through IDirectSoundBuffer's vtable slot 8.
-func (self *IDirectSoundBuffer) GetFrequency(pdwFrequency *uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) GetFrequency(pdwFrequency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFrequency)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IDirectSoundBuffer's vtable slot 9.
-func (self *IDirectSoundBuffer) GetStatus(pdwStatus *uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) GetStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectSoundBuffer's vtable slot 10.
-func (self *IDirectSoundBuffer) Initialize(pDirectSound *IDirectSound, pcDSBufferDesc *DSBUFFERDESC) foundation.HRESULT {
+func (self *IDirectSoundBuffer) Initialize(pDirectSound *IDirectSound, pcDSBufferDesc *DSBUFFERDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectSound)), uintptr(unsafe.Pointer(pcDSBufferDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Lock dispatches through IDirectSoundBuffer's vtable slot 11.
-func (self *IDirectSoundBuffer) Lock(dwOffset uint32, dwBytes uint32, ppvAudioPtr1 *unsafe.Pointer, pdwAudioBytes1 *uint32, ppvAudioPtr2 *unsafe.Pointer, pdwAudioBytes2 *uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) Lock(dwOffset uint32, dwBytes uint32, ppvAudioPtr1 *unsafe.Pointer, pdwAudioBytes1 *uint32, ppvAudioPtr2 *unsafe.Pointer, pdwAudioBytes2 *uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwOffset), uintptr(dwBytes), uintptr(unsafe.Pointer(ppvAudioPtr1)), uintptr(unsafe.Pointer(pdwAudioBytes1)), uintptr(unsafe.Pointer(ppvAudioPtr2)), uintptr(unsafe.Pointer(pdwAudioBytes2)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Play dispatches through IDirectSoundBuffer's vtable slot 12.
-func (self *IDirectSoundBuffer) Play(dwReserved1 uint32, dwPriority uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) Play(dwReserved1 uint32, dwPriority uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwReserved1), uintptr(dwPriority), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentPosition dispatches through IDirectSoundBuffer's vtable slot 13.
-func (self *IDirectSoundBuffer) SetCurrentPosition(dwNewPosition uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) SetCurrentPosition(dwNewPosition uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwNewPosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormat dispatches through IDirectSoundBuffer's vtable slot 14.
-func (self *IDirectSoundBuffer) SetFormat(pcfxFormat unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectSoundBuffer) SetFormat(pcfxFormat unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcfxFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVolume dispatches through IDirectSoundBuffer's vtable slot 15.
-func (self *IDirectSoundBuffer) SetVolume(lVolume int32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) SetVolume(lVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(lVolume))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPan dispatches through IDirectSoundBuffer's vtable slot 16.
-func (self *IDirectSoundBuffer) SetPan(lPan int32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) SetPan(lPan int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lPan))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFrequency dispatches through IDirectSoundBuffer's vtable slot 17.
-func (self *IDirectSoundBuffer) SetFrequency(dwFrequency uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) SetFrequency(dwFrequency uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwFrequency))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IDirectSoundBuffer's vtable slot 18.
-func (self *IDirectSoundBuffer) Stop() foundation.HRESULT {
+func (self *IDirectSoundBuffer) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IDirectSoundBuffer's vtable slot 19.
-func (self *IDirectSoundBuffer) Unlock(pvAudioPtr1 unsafe.Pointer, dwAudioBytes1 uint32, pvAudioPtr2 unsafe.Pointer, dwAudioBytes2 uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer) Unlock(pvAudioPtr1 unsafe.Pointer, dwAudioBytes1 uint32, pvAudioPtr2 unsafe.Pointer, dwAudioBytes2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvAudioPtr1)), uintptr(dwAudioBytes1), uintptr(unsafe.Pointer(pvAudioPtr2)), uintptr(dwAudioBytes2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Restore dispatches through IDirectSoundBuffer's vtable slot 20.
-func (self *IDirectSoundBuffer) Restore() foundation.HRESULT {
+func (self *IDirectSoundBuffer) Restore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6825a449-7524-4d82-920f-50e36ab3ab1e
@@ -357,21 +357,21 @@ type IDirectSoundBuffer8 struct {
 var IID_IDirectSoundBuffer8 = win32.GUID{Data1: 0x6825a449, Data2: 0x7524, Data3: 0x4d82, Data4: [8]byte{0x92, 0x0f, 0x50, 0xe3, 0x6a, 0xb3, 0xab, 0x1e}}
 
 // SetFX dispatches through IDirectSoundBuffer8's vtable slot 21.
-func (self *IDirectSoundBuffer8) SetFX(dwEffectsCount uint32, pDSFXDesc *DSEFFECTDESC, pdwResultCodes *uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer8) SetFX(dwEffectsCount uint32, pDSFXDesc *DSEFFECTDESC, pdwResultCodes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwEffectsCount), uintptr(unsafe.Pointer(pDSFXDesc)), uintptr(unsafe.Pointer(pdwResultCodes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AcquireResources dispatches through IDirectSoundBuffer8's vtable slot 22.
-func (self *IDirectSoundBuffer8) AcquireResources(dwFlags uint32, dwEffectsCount uint32, pdwResultCodes *uint32) foundation.HRESULT {
+func (self *IDirectSoundBuffer8) AcquireResources(dwFlags uint32, dwEffectsCount uint32, pdwResultCodes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(dwEffectsCount), uintptr(unsafe.Pointer(pdwResultCodes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjectInPath dispatches through IDirectSoundBuffer8's vtable slot 23.
-func (self *IDirectSoundBuffer8) GetObjectInPath(rguidObject *win32.GUID, dwIndex uint32, rguidInterface *win32.GUID, ppObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectSoundBuffer8) GetObjectInPath(rguidObject *win32.GUID, dwIndex uint32, rguidInterface *win32.GUID, ppObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidObject)), uintptr(dwIndex), uintptr(unsafe.Pointer(rguidInterface)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b0210781-89cd-11d0-af08-00a0c925cd16
@@ -383,21 +383,21 @@ type IDirectSoundCapture struct {
 var IID_IDirectSoundCapture = win32.GUID{Data1: 0xb0210781, Data2: 0x89cd, Data3: 0x11d0, Data4: [8]byte{0xaf, 0x08, 0x00, 0xa0, 0xc9, 0x25, 0xcd, 0x16}}
 
 // CreateCaptureBuffer dispatches through IDirectSoundCapture's vtable slot 3.
-func (self *IDirectSoundCapture) CreateCaptureBuffer(pcDSCBufferDesc *DSCBUFFERDESC, ppDSCBuffer **IDirectSoundCaptureBuffer, pUnkOuter *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectSoundCapture) CreateCaptureBuffer(pcDSCBufferDesc *DSCBUFFERDESC, ppDSCBuffer **IDirectSoundCaptureBuffer, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDSCBufferDesc)), uintptr(unsafe.Pointer(ppDSCBuffer)), uintptr(unsafe.Pointer(pUnkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCaps dispatches through IDirectSoundCapture's vtable slot 4.
-func (self *IDirectSoundCapture) GetCaps(pDSCCaps *DSCCAPS) foundation.HRESULT {
+func (self *IDirectSoundCapture) GetCaps(pDSCCaps *DSCCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDSCCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectSoundCapture's vtable slot 5.
-func (self *IDirectSoundCapture) Initialize(pcGuidDevice *win32.GUID) foundation.HRESULT {
+func (self *IDirectSoundCapture) Initialize(pcGuidDevice *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcGuidDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b0210782-89cd-11d0-af08-00a0c925cd16
@@ -409,57 +409,57 @@ type IDirectSoundCaptureBuffer struct {
 var IID_IDirectSoundCaptureBuffer = win32.GUID{Data1: 0xb0210782, Data2: 0x89cd, Data3: 0x11d0, Data4: [8]byte{0xaf, 0x08, 0x00, 0xa0, 0xc9, 0x25, 0xcd, 0x16}}
 
 // GetCaps dispatches through IDirectSoundCaptureBuffer's vtable slot 3.
-func (self *IDirectSoundCaptureBuffer) GetCaps(pDSCBCaps *DSCBCAPS) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer) GetCaps(pDSCBCaps *DSCBCAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDSCBCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentPosition dispatches through IDirectSoundCaptureBuffer's vtable slot 4.
-func (self *IDirectSoundCaptureBuffer) GetCurrentPosition(pdwCapturePosition *uint32, pdwReadPosition *uint32) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer) GetCurrentPosition(pdwCapturePosition *uint32, pdwReadPosition *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCapturePosition)), uintptr(unsafe.Pointer(pdwReadPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormat dispatches through IDirectSoundCaptureBuffer's vtable slot 5.
-func (self *IDirectSoundCaptureBuffer) GetFormat(pwfxFormat unsafe.Pointer, dwSizeAllocated uint32, pdwSizeWritten *uint32) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer) GetFormat(pwfxFormat unsafe.Pointer, dwSizeAllocated uint32, pdwSizeWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwfxFormat)), uintptr(dwSizeAllocated), uintptr(unsafe.Pointer(pdwSizeWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IDirectSoundCaptureBuffer's vtable slot 6.
-func (self *IDirectSoundCaptureBuffer) GetStatus(pdwStatus *uint32) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer) GetStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IDirectSoundCaptureBuffer's vtable slot 7.
-func (self *IDirectSoundCaptureBuffer) Initialize(pDirectSoundCapture *IDirectSoundCapture, pcDSCBufferDesc *DSCBUFFERDESC) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer) Initialize(pDirectSoundCapture *IDirectSoundCapture, pcDSCBufferDesc *DSCBUFFERDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectSoundCapture)), uintptr(unsafe.Pointer(pcDSCBufferDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Lock dispatches through IDirectSoundCaptureBuffer's vtable slot 8.
-func (self *IDirectSoundCaptureBuffer) Lock(dwOffset uint32, dwBytes uint32, ppvAudioPtr1 *unsafe.Pointer, pdwAudioBytes1 *uint32, ppvAudioPtr2 *unsafe.Pointer, pdwAudioBytes2 *uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer) Lock(dwOffset uint32, dwBytes uint32, ppvAudioPtr1 *unsafe.Pointer, pdwAudioBytes1 *uint32, ppvAudioPtr2 *unsafe.Pointer, pdwAudioBytes2 *uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwOffset), uintptr(dwBytes), uintptr(unsafe.Pointer(ppvAudioPtr1)), uintptr(unsafe.Pointer(pdwAudioBytes1)), uintptr(unsafe.Pointer(ppvAudioPtr2)), uintptr(unsafe.Pointer(pdwAudioBytes2)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IDirectSoundCaptureBuffer's vtable slot 9.
-func (self *IDirectSoundCaptureBuffer) Start(dwFlags uint32) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer) Start(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IDirectSoundCaptureBuffer's vtable slot 10.
-func (self *IDirectSoundCaptureBuffer) Stop() foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IDirectSoundCaptureBuffer's vtable slot 11.
-func (self *IDirectSoundCaptureBuffer) Unlock(pvAudioPtr1 unsafe.Pointer, dwAudioBytes1 uint32, pvAudioPtr2 unsafe.Pointer, dwAudioBytes2 uint32) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer) Unlock(pvAudioPtr1 unsafe.Pointer, dwAudioBytes1 uint32, pvAudioPtr2 unsafe.Pointer, dwAudioBytes2 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvAudioPtr1)), uintptr(dwAudioBytes1), uintptr(unsafe.Pointer(pvAudioPtr2)), uintptr(dwAudioBytes2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 00990df4-0dbb-4872-833e-6d303e80aeb6
@@ -471,15 +471,15 @@ type IDirectSoundCaptureBuffer8 struct {
 var IID_IDirectSoundCaptureBuffer8 = win32.GUID{Data1: 0x00990df4, Data2: 0x0dbb, Data3: 0x4872, Data4: [8]byte{0x83, 0x3e, 0x6d, 0x30, 0x3e, 0x80, 0xae, 0xb6}}
 
 // GetObjectInPath dispatches through IDirectSoundCaptureBuffer8's vtable slot 12.
-func (self *IDirectSoundCaptureBuffer8) GetObjectInPath(rguidObject *win32.GUID, dwIndex uint32, rguidInterface *win32.GUID, ppObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer8) GetObjectInPath(rguidObject *win32.GUID, dwIndex uint32, rguidInterface *win32.GUID, ppObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidObject)), uintptr(dwIndex), uintptr(unsafe.Pointer(rguidInterface)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFXStatus dispatches through IDirectSoundCaptureBuffer8's vtable slot 13.
-func (self *IDirectSoundCaptureBuffer8) GetFXStatus(dwEffectsCount uint32, pdwFXStatus *uint32) foundation.HRESULT {
+func (self *IDirectSoundCaptureBuffer8) GetFXStatus(dwEffectsCount uint32, pdwFXStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwEffectsCount), uintptr(unsafe.Pointer(pdwFXStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ad74143d-903d-4ab7-8066-28d363036d65
@@ -491,27 +491,27 @@ type IDirectSoundCaptureFXAec struct {
 var IID_IDirectSoundCaptureFXAec = win32.GUID{Data1: 0xad74143d, Data2: 0x903d, Data3: 0x4ab7, Data4: [8]byte{0x80, 0x66, 0x28, 0xd3, 0x63, 0x03, 0x6d, 0x65}}
 
 // SetAllParameters dispatches through IDirectSoundCaptureFXAec's vtable slot 3.
-func (self *IDirectSoundCaptureFXAec) SetAllParameters(pDscFxAec *DSCFXAec) foundation.HRESULT {
+func (self *IDirectSoundCaptureFXAec) SetAllParameters(pDscFxAec *DSCFXAec) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDscFxAec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundCaptureFXAec's vtable slot 4.
-func (self *IDirectSoundCaptureFXAec) GetAllParameters(pDscFxAec *DSCFXAec) foundation.HRESULT {
+func (self *IDirectSoundCaptureFXAec) GetAllParameters(pDscFxAec *DSCFXAec) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDscFxAec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IDirectSoundCaptureFXAec's vtable slot 5.
-func (self *IDirectSoundCaptureFXAec) GetStatus(pdwStatus *uint32) foundation.HRESULT {
+func (self *IDirectSoundCaptureFXAec) GetStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IDirectSoundCaptureFXAec's vtable slot 6.
-func (self *IDirectSoundCaptureFXAec) Reset() foundation.HRESULT {
+func (self *IDirectSoundCaptureFXAec) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ed311e41-fbae-4175-9625-cd0854f693ca
@@ -523,21 +523,21 @@ type IDirectSoundCaptureFXNoiseSuppress struct {
 var IID_IDirectSoundCaptureFXNoiseSuppress = win32.GUID{Data1: 0xed311e41, Data2: 0xfbae, Data3: 0x4175, Data4: [8]byte{0x96, 0x25, 0xcd, 0x08, 0x54, 0xf6, 0x93, 0xca}}
 
 // SetAllParameters dispatches through IDirectSoundCaptureFXNoiseSuppress's vtable slot 3.
-func (self *IDirectSoundCaptureFXNoiseSuppress) SetAllParameters(pcDscFxNoiseSuppress *DSCFXNoiseSuppress) foundation.HRESULT {
+func (self *IDirectSoundCaptureFXNoiseSuppress) SetAllParameters(pcDscFxNoiseSuppress *DSCFXNoiseSuppress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDscFxNoiseSuppress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundCaptureFXNoiseSuppress's vtable slot 4.
-func (self *IDirectSoundCaptureFXNoiseSuppress) GetAllParameters(pDscFxNoiseSuppress *DSCFXNoiseSuppress) foundation.HRESULT {
+func (self *IDirectSoundCaptureFXNoiseSuppress) GetAllParameters(pDscFxNoiseSuppress *DSCFXNoiseSuppress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDscFxNoiseSuppress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IDirectSoundCaptureFXNoiseSuppress's vtable slot 5.
-func (self *IDirectSoundCaptureFXNoiseSuppress) Reset() foundation.HRESULT {
+func (self *IDirectSoundCaptureFXNoiseSuppress) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 880842e3-145f-43e6-a934-a71806e50547
@@ -549,15 +549,15 @@ type IDirectSoundFXChorus struct {
 var IID_IDirectSoundFXChorus = win32.GUID{Data1: 0x880842e3, Data2: 0x145f, Data3: 0x43e6, Data4: [8]byte{0xa9, 0x34, 0xa7, 0x18, 0x06, 0xe5, 0x05, 0x47}}
 
 // SetAllParameters dispatches through IDirectSoundFXChorus's vtable slot 3.
-func (self *IDirectSoundFXChorus) SetAllParameters(pcDsFxChorus *DSFXChorus) foundation.HRESULT {
+func (self *IDirectSoundFXChorus) SetAllParameters(pcDsFxChorus *DSFXChorus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDsFxChorus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundFXChorus's vtable slot 4.
-func (self *IDirectSoundFXChorus) GetAllParameters(pDsFxChorus *DSFXChorus) foundation.HRESULT {
+func (self *IDirectSoundFXChorus) GetAllParameters(pDsFxChorus *DSFXChorus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDsFxChorus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4bbd1154-62f6-4e2c-a15c-d3b6c417f7a0
@@ -569,15 +569,15 @@ type IDirectSoundFXCompressor struct {
 var IID_IDirectSoundFXCompressor = win32.GUID{Data1: 0x4bbd1154, Data2: 0x62f6, Data3: 0x4e2c, Data4: [8]byte{0xa1, 0x5c, 0xd3, 0xb6, 0xc4, 0x17, 0xf7, 0xa0}}
 
 // SetAllParameters dispatches through IDirectSoundFXCompressor's vtable slot 3.
-func (self *IDirectSoundFXCompressor) SetAllParameters(pcDsFxCompressor *DSFXCompressor) foundation.HRESULT {
+func (self *IDirectSoundFXCompressor) SetAllParameters(pcDsFxCompressor *DSFXCompressor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDsFxCompressor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundFXCompressor's vtable slot 4.
-func (self *IDirectSoundFXCompressor) GetAllParameters(pDsFxCompressor *DSFXCompressor) foundation.HRESULT {
+func (self *IDirectSoundFXCompressor) GetAllParameters(pDsFxCompressor *DSFXCompressor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDsFxCompressor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8ecf4326-455f-4d8b-bda9-8d5d3e9e3e0b
@@ -589,15 +589,15 @@ type IDirectSoundFXDistortion struct {
 var IID_IDirectSoundFXDistortion = win32.GUID{Data1: 0x8ecf4326, Data2: 0x455f, Data3: 0x4d8b, Data4: [8]byte{0xbd, 0xa9, 0x8d, 0x5d, 0x3e, 0x9e, 0x3e, 0x0b}}
 
 // SetAllParameters dispatches through IDirectSoundFXDistortion's vtable slot 3.
-func (self *IDirectSoundFXDistortion) SetAllParameters(pcDsFxDistortion *DSFXDistortion) foundation.HRESULT {
+func (self *IDirectSoundFXDistortion) SetAllParameters(pcDsFxDistortion *DSFXDistortion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDsFxDistortion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundFXDistortion's vtable slot 4.
-func (self *IDirectSoundFXDistortion) GetAllParameters(pDsFxDistortion *DSFXDistortion) foundation.HRESULT {
+func (self *IDirectSoundFXDistortion) GetAllParameters(pDsFxDistortion *DSFXDistortion) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDsFxDistortion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8bd28edf-50db-4e92-a2bd-445488d1ed42
@@ -609,15 +609,15 @@ type IDirectSoundFXEcho struct {
 var IID_IDirectSoundFXEcho = win32.GUID{Data1: 0x8bd28edf, Data2: 0x50db, Data3: 0x4e92, Data4: [8]byte{0xa2, 0xbd, 0x44, 0x54, 0x88, 0xd1, 0xed, 0x42}}
 
 // SetAllParameters dispatches through IDirectSoundFXEcho's vtable slot 3.
-func (self *IDirectSoundFXEcho) SetAllParameters(pcDsFxEcho *DSFXEcho) foundation.HRESULT {
+func (self *IDirectSoundFXEcho) SetAllParameters(pcDsFxEcho *DSFXEcho) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDsFxEcho)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundFXEcho's vtable slot 4.
-func (self *IDirectSoundFXEcho) GetAllParameters(pDsFxEcho *DSFXEcho) foundation.HRESULT {
+func (self *IDirectSoundFXEcho) GetAllParameters(pDsFxEcho *DSFXEcho) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDsFxEcho)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 903e9878-2c92-4072-9b2c-ea68f5396783
@@ -629,15 +629,15 @@ type IDirectSoundFXFlanger struct {
 var IID_IDirectSoundFXFlanger = win32.GUID{Data1: 0x903e9878, Data2: 0x2c92, Data3: 0x4072, Data4: [8]byte{0x9b, 0x2c, 0xea, 0x68, 0xf5, 0x39, 0x67, 0x83}}
 
 // SetAllParameters dispatches through IDirectSoundFXFlanger's vtable slot 3.
-func (self *IDirectSoundFXFlanger) SetAllParameters(pcDsFxFlanger *DSFXFlanger) foundation.HRESULT {
+func (self *IDirectSoundFXFlanger) SetAllParameters(pcDsFxFlanger *DSFXFlanger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDsFxFlanger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundFXFlanger's vtable slot 4.
-func (self *IDirectSoundFXFlanger) GetAllParameters(pDsFxFlanger *DSFXFlanger) foundation.HRESULT {
+func (self *IDirectSoundFXFlanger) GetAllParameters(pDsFxFlanger *DSFXFlanger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDsFxFlanger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d616f352-d622-11ce-aac5-0020af0b99a3
@@ -649,15 +649,15 @@ type IDirectSoundFXGargle struct {
 var IID_IDirectSoundFXGargle = win32.GUID{Data1: 0xd616f352, Data2: 0xd622, Data3: 0x11ce, Data4: [8]byte{0xaa, 0xc5, 0x00, 0x20, 0xaf, 0x0b, 0x99, 0xa3}}
 
 // SetAllParameters dispatches through IDirectSoundFXGargle's vtable slot 3.
-func (self *IDirectSoundFXGargle) SetAllParameters(pcDsFxGargle *DSFXGargle) foundation.HRESULT {
+func (self *IDirectSoundFXGargle) SetAllParameters(pcDsFxGargle *DSFXGargle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDsFxGargle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundFXGargle's vtable slot 4.
-func (self *IDirectSoundFXGargle) GetAllParameters(pDsFxGargle *DSFXGargle) foundation.HRESULT {
+func (self *IDirectSoundFXGargle) GetAllParameters(pDsFxGargle *DSFXGargle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDsFxGargle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4b166a6a-0d66-43f3-80e3-ee6280dee1a4
@@ -669,39 +669,39 @@ type IDirectSoundFXI3DL2Reverb struct {
 var IID_IDirectSoundFXI3DL2Reverb = win32.GUID{Data1: 0x4b166a6a, Data2: 0x0d66, Data3: 0x43f3, Data4: [8]byte{0x80, 0xe3, 0xee, 0x62, 0x80, 0xde, 0xe1, 0xa4}}
 
 // SetAllParameters dispatches through IDirectSoundFXI3DL2Reverb's vtable slot 3.
-func (self *IDirectSoundFXI3DL2Reverb) SetAllParameters(pcDsFxI3DL2Reverb *DSFXI3DL2Reverb) foundation.HRESULT {
+func (self *IDirectSoundFXI3DL2Reverb) SetAllParameters(pcDsFxI3DL2Reverb *DSFXI3DL2Reverb) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDsFxI3DL2Reverb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundFXI3DL2Reverb's vtable slot 4.
-func (self *IDirectSoundFXI3DL2Reverb) GetAllParameters(pDsFxI3DL2Reverb *DSFXI3DL2Reverb) foundation.HRESULT {
+func (self *IDirectSoundFXI3DL2Reverb) GetAllParameters(pDsFxI3DL2Reverb *DSFXI3DL2Reverb) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDsFxI3DL2Reverb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPreset dispatches through IDirectSoundFXI3DL2Reverb's vtable slot 5.
-func (self *IDirectSoundFXI3DL2Reverb) SetPreset(dwPreset uint32) foundation.HRESULT {
+func (self *IDirectSoundFXI3DL2Reverb) SetPreset(dwPreset uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwPreset))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreset dispatches through IDirectSoundFXI3DL2Reverb's vtable slot 6.
-func (self *IDirectSoundFXI3DL2Reverb) GetPreset(pdwPreset *uint32) foundation.HRESULT {
+func (self *IDirectSoundFXI3DL2Reverb) GetPreset(pdwPreset *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPreset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetQuality dispatches through IDirectSoundFXI3DL2Reverb's vtable slot 7.
-func (self *IDirectSoundFXI3DL2Reverb) SetQuality(lQuality int32) foundation.HRESULT {
+func (self *IDirectSoundFXI3DL2Reverb) SetQuality(lQuality int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lQuality))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetQuality dispatches through IDirectSoundFXI3DL2Reverb's vtable slot 8.
-func (self *IDirectSoundFXI3DL2Reverb) GetQuality(plQuality *int32) foundation.HRESULT {
+func (self *IDirectSoundFXI3DL2Reverb) GetQuality(plQuality *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plQuality)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c03ca9fe-fe90-4204-8078-82334cd177da
@@ -713,15 +713,15 @@ type IDirectSoundFXParamEq struct {
 var IID_IDirectSoundFXParamEq = win32.GUID{Data1: 0xc03ca9fe, Data2: 0xfe90, Data3: 0x4204, Data4: [8]byte{0x80, 0x78, 0x82, 0x33, 0x4c, 0xd1, 0x77, 0xda}}
 
 // SetAllParameters dispatches through IDirectSoundFXParamEq's vtable slot 3.
-func (self *IDirectSoundFXParamEq) SetAllParameters(pcDsFxParamEq *DSFXParamEq) foundation.HRESULT {
+func (self *IDirectSoundFXParamEq) SetAllParameters(pcDsFxParamEq *DSFXParamEq) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDsFxParamEq)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundFXParamEq's vtable slot 4.
-func (self *IDirectSoundFXParamEq) GetAllParameters(pDsFxParamEq *DSFXParamEq) foundation.HRESULT {
+func (self *IDirectSoundFXParamEq) GetAllParameters(pDsFxParamEq *DSFXParamEq) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDsFxParamEq)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 46858c3a-0dc6-45e3-b760-d4eef16cb325
@@ -733,15 +733,15 @@ type IDirectSoundFXWavesReverb struct {
 var IID_IDirectSoundFXWavesReverb = win32.GUID{Data1: 0x46858c3a, Data2: 0x0dc6, Data3: 0x45e3, Data4: [8]byte{0xb7, 0x60, 0xd4, 0xee, 0xf1, 0x6c, 0xb3, 0x25}}
 
 // SetAllParameters dispatches through IDirectSoundFXWavesReverb's vtable slot 3.
-func (self *IDirectSoundFXWavesReverb) SetAllParameters(pcDsFxWavesReverb *DSFXWavesReverb) foundation.HRESULT {
+func (self *IDirectSoundFXWavesReverb) SetAllParameters(pcDsFxWavesReverb *DSFXWavesReverb) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcDsFxWavesReverb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllParameters dispatches through IDirectSoundFXWavesReverb's vtable slot 4.
-func (self *IDirectSoundFXWavesReverb) GetAllParameters(pDsFxWavesReverb *DSFXWavesReverb) foundation.HRESULT {
+func (self *IDirectSoundFXWavesReverb) GetAllParameters(pDsFxWavesReverb *DSFXWavesReverb) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDsFxWavesReverb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: edcb4c7a-daab-4216-a42e-6c50596ddc1d
@@ -753,9 +753,9 @@ type IDirectSoundFullDuplex struct {
 var IID_IDirectSoundFullDuplex = win32.GUID{Data1: 0xedcb4c7a, Data2: 0xdaab, Data3: 0x4216, Data4: [8]byte{0xa4, 0x2e, 0x6c, 0x50, 0x59, 0x6d, 0xdc, 0x1d}}
 
 // Initialize dispatches through IDirectSoundFullDuplex's vtable slot 3.
-func (self *IDirectSoundFullDuplex) Initialize(pCaptureGuid *win32.GUID, pRenderGuid *win32.GUID, lpDscBufferDesc *DSCBUFFERDESC, lpDsBufferDesc *DSBUFFERDESC, hWnd foundation.HWND, dwLevel uint32, lplpDirectSoundCaptureBuffer8 **IDirectSoundCaptureBuffer8, lplpDirectSoundBuffer8 **IDirectSoundBuffer8) foundation.HRESULT {
+func (self *IDirectSoundFullDuplex) Initialize(pCaptureGuid *win32.GUID, pRenderGuid *win32.GUID, lpDscBufferDesc *DSCBUFFERDESC, lpDsBufferDesc *DSBUFFERDESC, hWnd foundation.HWND, dwLevel uint32, lplpDirectSoundCaptureBuffer8 **IDirectSoundCaptureBuffer8, lplpDirectSoundBuffer8 **IDirectSoundBuffer8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCaptureGuid)), uintptr(unsafe.Pointer(pRenderGuid)), uintptr(unsafe.Pointer(lpDscBufferDesc)), uintptr(unsafe.Pointer(lpDsBufferDesc)), uintptr(hWnd), uintptr(dwLevel), uintptr(unsafe.Pointer(lplpDirectSoundCaptureBuffer8)), uintptr(unsafe.Pointer(lplpDirectSoundBuffer8)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b0210783-89cd-11d0-af08-00a0c925cd16
@@ -767,7 +767,7 @@ type IDirectSoundNotify struct {
 var IID_IDirectSoundNotify = win32.GUID{Data1: 0xb0210783, Data2: 0x89cd, Data3: 0x11d0, Data4: [8]byte{0xaf, 0x08, 0x00, 0xa0, 0xc9, 0x25, 0xcd, 0x16}}
 
 // SetNotificationPositions dispatches through IDirectSoundNotify's vtable slot 3.
-func (self *IDirectSoundNotify) SetNotificationPositions(dwPositionNotifies uint32, pcPositionNotifies *DSBPOSITIONNOTIFY) foundation.HRESULT {
+func (self *IDirectSoundNotify) SetNotificationPositions(dwPositionNotifies uint32, pcPositionNotifies *DSBPOSITIONNOTIFY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwPositionNotifies), uintptr(unsafe.Pointer(pcPositionNotifies)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

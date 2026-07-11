@@ -24,21 +24,21 @@ type IAccountsSettingsPaneInterop struct {
 var IID_IAccountsSettingsPaneInterop = win32.GUID{Data1: 0xd3ee12ad, Data2: 0x3865, Data3: 0x4362, Data4: [8]byte{0x97, 0x46, 0xb7, 0x5a, 0x68, 0x2d, 0xf0, 0xe6}}
 
 // GetForWindow dispatches through IAccountsSettingsPaneInterop's vtable slot 6.
-func (self *IAccountsSettingsPaneInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, accountsSettingsPane *unsafe.Pointer) foundation.HRESULT {
+func (self *IAccountsSettingsPaneInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, accountsSettingsPane *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(accountsSettingsPane)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowManageAccountsForWindowAsync dispatches through IAccountsSettingsPaneInterop's vtable slot 7.
-func (self *IAccountsSettingsPaneInterop) ShowManageAccountsForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncAction *unsafe.Pointer) foundation.HRESULT {
+func (self *IAccountsSettingsPaneInterop) ShowManageAccountsForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncAction *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowAddAccountForWindowAsync dispatches through IAccountsSettingsPaneInterop's vtable slot 8.
-func (self *IAccountsSettingsPaneInterop) ShowAddAccountForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncAction *unsafe.Pointer) foundation.HRESULT {
+func (self *IAccountsSettingsPaneInterop) ShowAddAccountForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncAction *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IActivationFactory: https://learn.microsoft.com/windows/win32/api/activation/nn-activation-iactivationfactory
@@ -51,9 +51,9 @@ type IActivationFactory struct {
 var IID_IActivationFactory = win32.GUID{Data1: 0x00000035, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // ActivateInstance dispatches through IActivationFactory's vtable slot 6.
-func (self *IActivationFactory) ActivateInstance(instance **IInspectable) foundation.HRESULT {
+func (self *IActivationFactory) ActivateInstance(instance **IInspectable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(instance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAgileReference: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-iagilereference
@@ -66,9 +66,9 @@ type IAgileReference struct {
 var IID_IAgileReference = win32.GUID{Data1: 0xc03f6a43, Data2: 0x65a4, Data3: 0x9818, Data4: [8]byte{0x98, 0x7e, 0xe0, 0xb8, 0x10, 0xd2, 0xa6, 0xf2}}
 
 // Resolve dispatches through IAgileReference's vtable slot 3.
-func (self *IAgileReference) Resolve(riid *win32.GUID, ppvObjectReference *unsafe.Pointer) foundation.HRESULT {
+func (self *IAgileReference) Resolve(riid *win32.GUID, ppvObjectReference *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObjectReference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IApartmentShutdown: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-iapartmentshutdown
@@ -94,9 +94,9 @@ type IAppServiceConnectionExtendedExecution struct {
 var IID_IAppServiceConnectionExtendedExecution = win32.GUID{Data1: 0x65219584, Data2: 0xf9cb, Data3: 0x4ae3, Data4: [8]byte{0x81, 0xf9, 0xa2, 0x8a, 0x6c, 0xa4, 0x50, 0xd9}}
 
 // OpenForExtendedExecutionAsync dispatches through IAppServiceConnectionExtendedExecution's vtable slot 3.
-func (self *IAppServiceConnectionExtendedExecution) OpenForExtendedExecutionAsync(riid *win32.GUID, operation *unsafe.Pointer) foundation.HRESULT {
+func (self *IAppServiceConnectionExtendedExecution) OpenForExtendedExecutionAsync(riid *win32.GUID, operation *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(operation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBufferByteAccess: https://learn.microsoft.com/windows/win32/api/robuffer/ns-robuffer-ibufferbyteaccess
@@ -109,9 +109,9 @@ type IBufferByteAccess struct {
 var IID_IBufferByteAccess = win32.GUID{Data1: 0x905a0fef, Data2: 0xbc53, Data3: 0x11df, Data4: [8]byte{0x8c, 0x49, 0x00, 0x1e, 0x4f, 0xc6, 0x86, 0xda}}
 
 // Buffer dispatches through IBufferByteAccess's vtable slot 3.
-func (self *IBufferByteAccess) Buffer(value **byte) foundation.HRESULT {
+func (self *IBufferByteAccess) Buffer(value **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f0a56423-a664-4fbd-8b43-409a45e8d9a1
@@ -123,33 +123,33 @@ type ICastingController struct {
 var IID_ICastingController = win32.GUID{Data1: 0xf0a56423, Data2: 0xa664, Data3: 0x4fbd, Data4: [8]byte{0x8b, 0x43, 0x40, 0x9a, 0x45, 0xe8, 0xd9, 0xa1}}
 
 // Initialize dispatches through ICastingController's vtable slot 3.
-func (self *ICastingController) Initialize(castingEngine *systemcom.IUnknown, castingSource *systemcom.IUnknown) foundation.HRESULT {
+func (self *ICastingController) Initialize(castingEngine *systemcom.IUnknown, castingSource *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(castingEngine)), uintptr(unsafe.Pointer(castingSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Connect dispatches through ICastingController's vtable slot 4.
-func (self *ICastingController) Connect() foundation.HRESULT {
+func (self *ICastingController) Connect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through ICastingController's vtable slot 5.
-func (self *ICastingController) Disconnect() foundation.HRESULT {
+func (self *ICastingController) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Advise dispatches through ICastingController's vtable slot 6.
-func (self *ICastingController) Advise(eventHandler *ICastingEventHandler, cookie *uint32) foundation.HRESULT {
+func (self *ICastingController) Advise(eventHandler *ICastingEventHandler, cookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eventHandler)), uintptr(unsafe.Pointer(cookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnAdvise dispatches through ICastingController's vtable slot 7.
-func (self *ICastingController) UnAdvise(cookie uint32) foundation.HRESULT {
+func (self *ICastingController) UnAdvise(cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c79a6cb7-bebd-47a6-a2ad-4d45ad79c7bc
@@ -161,15 +161,16 @@ type ICastingEventHandler struct {
 var IID_ICastingEventHandler = win32.GUID{Data1: 0xc79a6cb7, Data2: 0xbebd, Data3: 0x47a6, Data4: [8]byte{0xa2, 0xad, 0x4d, 0x45, 0xad, 0x79, 0xc7, 0xbc}}
 
 // OnStateChanged dispatches through ICastingEventHandler's vtable slot 3.
-func (self *ICastingEventHandler) OnStateChanged(newState CASTING_CONNECTION_STATE) foundation.HRESULT {
+func (self *ICastingEventHandler) OnStateChanged(newState CASTING_CONNECTION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(newState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnError dispatches through ICastingEventHandler's vtable slot 4.
-func (self *ICastingEventHandler) OnError(errorStatus CASTING_CONNECTION_ERROR_STATUS, errorMessage foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(errorStatus), uintptr(unsafe.Pointer(errorMessage)))
-	return foundation.HRESULT(r1)
+func (self *ICastingEventHandler) OnError(errorStatus CASTING_CONNECTION_ERROR_STATUS, errorMessage string) error {
+	_errorMessage := win32.UTF16Ptr(errorMessage)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(errorStatus), uintptr(unsafe.Pointer(_errorMessage)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 45101ab7-7c3a-4bce-9500-12c09024b298
@@ -181,15 +182,15 @@ type ICastingSourceInfo struct {
 var IID_ICastingSourceInfo = win32.GUID{Data1: 0x45101ab7, Data2: 0x7c3a, Data3: 0x4bce, Data4: [8]byte{0x95, 0x00, 0x12, 0xc0, 0x90, 0x24, 0xb2, 0x98}}
 
 // GetController dispatches through ICastingSourceInfo's vtable slot 3.
-func (self *ICastingSourceInfo) GetController(controller **ICastingController) foundation.HRESULT {
+func (self *ICastingSourceInfo) GetController(controller **ICastingController) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(controller)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperties dispatches through ICastingSourceInfo's vtable slot 4.
-func (self *ICastingSourceInfo) GetProperties(props **uishellpropertiessystem.INamedPropertyStore) foundation.HRESULT {
+func (self *ICastingSourceInfo) GetProperties(props **uishellpropertiessystem.INamedPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(props)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICoreInputInterop: https://learn.microsoft.com/windows/win32/api/corewindow/nn-corewindow-icoreinputinterop
@@ -202,15 +203,15 @@ type ICoreInputInterop struct {
 var IID_ICoreInputInterop = win32.GUID{Data1: 0x40bfe3e3, Data2: 0xb75a, Data3: 0x4479, Data4: [8]byte{0xac, 0x96, 0x47, 0x53, 0x65, 0x74, 0x9b, 0xb8}}
 
 // SetInputSource dispatches through ICoreInputInterop's vtable slot 3.
-func (self *ICoreInputInterop) SetInputSource(value *systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreInputInterop) SetInputSource(value *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MessageHandled dispatches through ICoreInputInterop's vtable slot 4.
-func (self *ICoreInputInterop) Put_MessageHandled(value byte) foundation.HRESULT {
+func (self *ICoreInputInterop) Put_MessageHandled(value byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b8a2acd7-a0f0-40ee-8ee7-c82f59cc5cd4
@@ -222,15 +223,15 @@ type ICoreInputInterop2 struct {
 var IID_ICoreInputInterop2 = win32.GUID{Data1: 0xb8a2acd7, Data2: 0xa0f0, Data3: 0x40ee, Data4: [8]byte{0x8e, 0xe7, 0xc8, 0x2f, 0x59, 0xcc, 0x5c, 0xd4}}
 
 // Get_WindowHandle dispatches through ICoreInputInterop2's vtable slot 6.
-func (self *ICoreInputInterop2) Get_WindowHandle(window *foundation.HWND) foundation.HRESULT {
+func (self *ICoreInputInterop2) Get_WindowHandle(window *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(window)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeHostingContext dispatches through ICoreInputInterop2's vtable slot 7.
-func (self *ICoreInputInterop2) ChangeHostingContext(newParentWindow foundation.HWND, newViewInstanceId uint32) foundation.HRESULT {
+func (self *ICoreInputInterop2) ChangeHostingContext(newParentWindow foundation.HWND, newViewInstanceId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(newParentWindow), uintptr(newViewInstanceId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7a5b6fd1-cd73-4b6c-9cf4-2e869eaf470a
@@ -242,51 +243,51 @@ type ICoreWindowAdapterInterop struct {
 var IID_ICoreWindowAdapterInterop = win32.GUID{Data1: 0x7a5b6fd1, Data2: 0xcd73, Data3: 0x4b6c, Data4: [8]byte{0x9c, 0xf4, 0x2e, 0x86, 0x9e, 0xaf, 0x47, 0x0a}}
 
 // Get_AppActivationClientAdapter dispatches through ICoreWindowAdapterInterop's vtable slot 6.
-func (self *ICoreWindowAdapterInterop) Get_AppActivationClientAdapter(value **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreWindowAdapterInterop) Get_AppActivationClientAdapter(value **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ApplicationViewClientAdapter dispatches through ICoreWindowAdapterInterop's vtable slot 7.
-func (self *ICoreWindowAdapterInterop) Get_ApplicationViewClientAdapter(value **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreWindowAdapterInterop) Get_ApplicationViewClientAdapter(value **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CoreApplicationViewClientAdapter dispatches through ICoreWindowAdapterInterop's vtable slot 8.
-func (self *ICoreWindowAdapterInterop) Get_CoreApplicationViewClientAdapter(value **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreWindowAdapterInterop) Get_CoreApplicationViewClientAdapter(value **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HoloViewClientAdapter dispatches through ICoreWindowAdapterInterop's vtable slot 9.
-func (self *ICoreWindowAdapterInterop) Get_HoloViewClientAdapter(value **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreWindowAdapterInterop) Get_HoloViewClientAdapter(value **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PositionerClientAdapter dispatches through ICoreWindowAdapterInterop's vtable slot 10.
-func (self *ICoreWindowAdapterInterop) Get_PositionerClientAdapter(value **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreWindowAdapterInterop) Get_PositionerClientAdapter(value **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SystemNavigationClientAdapter dispatches through ICoreWindowAdapterInterop's vtable slot 11.
-func (self *ICoreWindowAdapterInterop) Get_SystemNavigationClientAdapter(value **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreWindowAdapterInterop) Get_SystemNavigationClientAdapter(value **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TitleBarClientAdapter dispatches through ICoreWindowAdapterInterop's vtable slot 12.
-func (self *ICoreWindowAdapterInterop) Get_TitleBarClientAdapter(value **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreWindowAdapterInterop) Get_TitleBarClientAdapter(value **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWindowClientAdapter dispatches through ICoreWindowAdapterInterop's vtable slot 13.
-func (self *ICoreWindowAdapterInterop) SetWindowClientAdapter(value *systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreWindowAdapterInterop) SetWindowClientAdapter(value *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0576ab31-a310-4c40-ba31-fd37e0298dfa
@@ -298,15 +299,15 @@ type ICoreWindowComponentInterop struct {
 var IID_ICoreWindowComponentInterop = win32.GUID{Data1: 0x0576ab31, Data2: 0xa310, Data3: 0x4c40, Data4: [8]byte{0xba, 0x31, 0xfd, 0x37, 0xe0, 0x29, 0x8d, 0xfa}}
 
 // ConfigureComponentInput dispatches through ICoreWindowComponentInterop's vtable slot 3.
-func (self *ICoreWindowComponentInterop) ConfigureComponentInput(hostViewInstanceId uint32, hwndHost foundation.HWND, inputSourceVisual *systemcom.IUnknown) foundation.HRESULT {
+func (self *ICoreWindowComponentInterop) ConfigureComponentInput(hostViewInstanceId uint32, hwndHost foundation.HWND, inputSourceVisual *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hostViewInstanceId), uintptr(hwndHost), uintptr(unsafe.Pointer(inputSourceVisual)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetViewInstanceId dispatches through ICoreWindowComponentInterop's vtable slot 4.
-func (self *ICoreWindowComponentInterop) GetViewInstanceId(componentViewInstanceId *uint32) foundation.HRESULT {
+func (self *ICoreWindowComponentInterop) GetViewInstanceId(componentViewInstanceId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(componentViewInstanceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICoreWindowInterop: https://learn.microsoft.com/windows/win32/api/corewindow/nn-corewindow-icorewindowinterop
@@ -319,15 +320,15 @@ type ICoreWindowInterop struct {
 var IID_ICoreWindowInterop = win32.GUID{Data1: 0x45d64a29, Data2: 0xa63e, Data3: 0x4cb6, Data4: [8]byte{0xb4, 0x98, 0x57, 0x81, 0xd2, 0x98, 0xcb, 0x4f}}
 
 // Get_WindowHandle dispatches through ICoreWindowInterop's vtable slot 3.
-func (self *ICoreWindowInterop) Get_WindowHandle(hwnd *foundation.HWND) foundation.HRESULT {
+func (self *ICoreWindowInterop) Get_WindowHandle(hwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MessageHandled dispatches through ICoreWindowInterop's vtable slot 4.
-func (self *ICoreWindowInterop) Put_MessageHandled(value byte) foundation.HRESULT {
+func (self *ICoreWindowInterop) Put_MessageHandled(value byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 83c78b3c-d88b-4950-aa6e-22b8d22aabd3
@@ -339,21 +340,23 @@ type ICorrelationVectorInformation struct {
 var IID_ICorrelationVectorInformation = win32.GUID{Data1: 0x83c78b3c, Data2: 0xd88b, Data3: 0x4950, Data4: [8]byte{0xaa, 0x6e, 0x22, 0xb8, 0xd2, 0x2a, 0xab, 0xd3}}
 
 // Get_LastCorrelationVectorForThread dispatches through ICorrelationVectorInformation's vtable slot 6.
-func (self *ICorrelationVectorInformation) Get_LastCorrelationVectorForThread(cv *HSTRING) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cv)))
-	return foundation.HRESULT(r1)
+func (self *ICorrelationVectorInformation) Get_LastCorrelationVectorForThread() (HSTRING, error) {
+	var _cv HSTRING
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_cv)))
+	return _cv, win32.HRESULTError(int32(r1))
 }
 
 // Get_NextCorrelationVectorForThread dispatches through ICorrelationVectorInformation's vtable slot 7.
-func (self *ICorrelationVectorInformation) Get_NextCorrelationVectorForThread(cv *HSTRING) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cv)))
-	return foundation.HRESULT(r1)
+func (self *ICorrelationVectorInformation) Get_NextCorrelationVectorForThread() (HSTRING, error) {
+	var _cv HSTRING
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_cv)))
+	return _cv, win32.HRESULTError(int32(r1))
 }
 
 // Put_NextCorrelationVectorForThread dispatches through ICorrelationVectorInformation's vtable slot 8.
-func (self *ICorrelationVectorInformation) Put_NextCorrelationVectorForThread(cv HSTRING) foundation.HRESULT {
+func (self *ICorrelationVectorInformation) Put_NextCorrelationVectorForThread(cv HSTRING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(cv))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 152b8a3b-b9b9-4685-b56e-974847bc7545
@@ -365,9 +368,10 @@ type ICorrelationVectorSource struct {
 var IID_ICorrelationVectorSource = win32.GUID{Data1: 0x152b8a3b, Data2: 0xb9b9, Data3: 0x4685, Data4: [8]byte{0xb5, 0x6e, 0x97, 0x48, 0x47, 0xbc, 0x75, 0x45}}
 
 // Get_CorrelationVector dispatches through ICorrelationVectorSource's vtable slot 3.
-func (self *ICorrelationVectorSource) Get_CorrelationVector(cv *HSTRING) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cv)))
-	return foundation.HRESULT(r1)
+func (self *ICorrelationVectorSource) Get_CorrelationVector() (HSTRING, error) {
+	var _cv HSTRING
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_cv)))
+	return _cv, win32.HRESULTError(int32(r1))
 }
 
 // IDragDropManagerInterop: https://learn.microsoft.com/windows/win32/api/dragdropinterop/nn-dragdropinterop-idragdropmanagerinterop
@@ -380,9 +384,9 @@ type IDragDropManagerInterop struct {
 var IID_IDragDropManagerInterop = win32.GUID{Data1: 0x5ad8cba7, Data2: 0x4c01, Data3: 0x4dac, Data4: [8]byte{0x90, 0x74, 0x82, 0x78, 0x94, 0x29, 0x2d, 0x63}}
 
 // GetForWindow dispatches through IDragDropManagerInterop's vtable slot 6.
-func (self *IDragDropManagerInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IDragDropManagerInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IHolographicSpaceInterop: https://learn.microsoft.com/windows/win32/api/holographicspaceinterop/nn-holographicspaceinterop-iholographicspaceinterop
@@ -395,9 +399,9 @@ type IHolographicSpaceInterop struct {
 var IID_IHolographicSpaceInterop = win32.GUID{Data1: 0x5c4ee536, Data2: 0x6a98, Data3: 0x4b86, Data4: [8]byte{0xa1, 0x70, 0x58, 0x70, 0x13, 0xd6, 0xfd, 0x4b}}
 
 // CreateForWindow dispatches through IHolographicSpaceInterop's vtable slot 6.
-func (self *IHolographicSpaceInterop) CreateForWindow(window foundation.HWND, riid *win32.GUID, holographicSpace *unsafe.Pointer) foundation.HRESULT {
+func (self *IHolographicSpaceInterop) CreateForWindow(window foundation.HWND, riid *win32.GUID, holographicSpace *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(holographicSpace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IInputPaneInterop: https://learn.microsoft.com/windows/win32/api/inputpaneinterop/nn-inputpaneinterop-iinputpaneinterop
@@ -410,9 +414,9 @@ type IInputPaneInterop struct {
 var IID_IInputPaneInterop = win32.GUID{Data1: 0x75cf2c57, Data2: 0x9195, Data3: 0x4931, Data4: [8]byte{0x83, 0x32, 0xf0, 0xb4, 0x09, 0xe9, 0x16, 0xaf}}
 
 // GetForWindow dispatches through IInputPaneInterop's vtable slot 6.
-func (self *IInputPaneInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, inputPane *unsafe.Pointer) foundation.HRESULT {
+func (self *IInputPaneInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, inputPane *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(inputPane)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IInspectable: https://learn.microsoft.com/windows/win32/api/inspectable/nn-inspectable-iinspectable
@@ -425,21 +429,21 @@ type IInspectable struct {
 var IID_IInspectable = win32.GUID{Data1: 0xaf86e2e0, Data2: 0xb12d, Data3: 0x4c6a, Data4: [8]byte{0x9c, 0x5a, 0xd7, 0xaa, 0x65, 0x10, 0x1e, 0x90}}
 
 // GetIids dispatches through IInspectable's vtable slot 3.
-func (self *IInspectable) GetIids(iidCount *uint32, iids **win32.GUID) foundation.HRESULT {
+func (self *IInspectable) GetIids(iidCount *uint32, iids **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iidCount)), uintptr(unsafe.Pointer(iids)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRuntimeClassName dispatches through IInspectable's vtable slot 4.
-func (self *IInspectable) GetRuntimeClassName(className *HSTRING) foundation.HRESULT {
+func (self *IInspectable) GetRuntimeClassName(className *HSTRING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(className)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTrustLevel dispatches through IInspectable's vtable slot 5.
-func (self *IInspectable) GetTrustLevel(trustLevel *TrustLevel) foundation.HRESULT {
+func (self *IInspectable) GetTrustLevel(trustLevel *TrustLevel) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(trustLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILanguageExceptionErrorInfo: https://learn.microsoft.com/windows/win32/api/restrictederrorinfo/nn-restrictederrorinfo-ilanguageexceptionerrorinfo
@@ -452,9 +456,9 @@ type ILanguageExceptionErrorInfo struct {
 var IID_ILanguageExceptionErrorInfo = win32.GUID{Data1: 0x04a2dbf3, Data2: 0xdf83, Data3: 0x116c, Data4: [8]byte{0x09, 0x46, 0x08, 0x12, 0xab, 0xf6, 0xe0, 0x7d}}
 
 // GetLanguageException dispatches through ILanguageExceptionErrorInfo's vtable slot 3.
-func (self *ILanguageExceptionErrorInfo) GetLanguageException(languageException **systemcom.IUnknown) foundation.HRESULT {
+func (self *ILanguageExceptionErrorInfo) GetLanguageException(languageException **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(languageException)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILanguageExceptionErrorInfo2: https://learn.microsoft.com/windows/win32/api/restrictederrorinfo/nn-restrictederrorinfo-ilanguageexceptionerrorinfo2
@@ -467,21 +471,21 @@ type ILanguageExceptionErrorInfo2 struct {
 var IID_ILanguageExceptionErrorInfo2 = win32.GUID{Data1: 0x5746e5c4, Data2: 0x5b97, Data3: 0x424c, Data4: [8]byte{0xb6, 0x20, 0x28, 0x22, 0x91, 0x57, 0x34, 0xdd}}
 
 // GetPreviousLanguageExceptionErrorInfo dispatches through ILanguageExceptionErrorInfo2's vtable slot 4.
-func (self *ILanguageExceptionErrorInfo2) GetPreviousLanguageExceptionErrorInfo(previousLanguageExceptionErrorInfo **ILanguageExceptionErrorInfo2) foundation.HRESULT {
+func (self *ILanguageExceptionErrorInfo2) GetPreviousLanguageExceptionErrorInfo(previousLanguageExceptionErrorInfo **ILanguageExceptionErrorInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(previousLanguageExceptionErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CapturePropagationContext dispatches through ILanguageExceptionErrorInfo2's vtable slot 5.
-func (self *ILanguageExceptionErrorInfo2) CapturePropagationContext(languageException *systemcom.IUnknown) foundation.HRESULT {
+func (self *ILanguageExceptionErrorInfo2) CapturePropagationContext(languageException *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(languageException)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropagationContextHead dispatches through ILanguageExceptionErrorInfo2's vtable slot 6.
-func (self *ILanguageExceptionErrorInfo2) GetPropagationContextHead(propagatedLanguageExceptionErrorInfoHead **ILanguageExceptionErrorInfo2) foundation.HRESULT {
+func (self *ILanguageExceptionErrorInfo2) GetPropagationContextHead(propagatedLanguageExceptionErrorInfoHead **ILanguageExceptionErrorInfo2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propagatedLanguageExceptionErrorInfoHead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILanguageExceptionStackBackTrace: https://learn.microsoft.com/windows/win32/api/restrictederrorinfo/nn-restrictederrorinfo-ilanguageexceptionstackbacktrace
@@ -494,9 +498,9 @@ type ILanguageExceptionStackBackTrace struct {
 var IID_ILanguageExceptionStackBackTrace = win32.GUID{Data1: 0xcbe53fb5, Data2: 0xf967, Data3: 0x4258, Data4: [8]byte{0x8d, 0x34, 0x42, 0xf5, 0xe2, 0x58, 0x33, 0xde}}
 
 // GetStackBackTrace dispatches through ILanguageExceptionStackBackTrace's vtable slot 3.
-func (self *ILanguageExceptionStackBackTrace) GetStackBackTrace(maxFramesToCapture uint32, stackBackTrace *uintptr, framesCaptured *uint32) foundation.HRESULT {
+func (self *ILanguageExceptionStackBackTrace) GetStackBackTrace(maxFramesToCapture uint32, stackBackTrace *uintptr, framesCaptured *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(maxFramesToCapture), uintptr(unsafe.Pointer(stackBackTrace)), uintptr(unsafe.Pointer(framesCaptured)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILanguageExceptionTransform: https://learn.microsoft.com/windows/win32/api/restrictederrorinfo/nn-restrictederrorinfo-ilanguageexceptiontransform
@@ -509,9 +513,9 @@ type ILanguageExceptionTransform struct {
 var IID_ILanguageExceptionTransform = win32.GUID{Data1: 0xfeb5a271, Data2: 0xa6cd, Data3: 0x45ce, Data4: [8]byte{0x88, 0x0a, 0x69, 0x67, 0x06, 0xba, 0xdc, 0x65}}
 
 // GetTransformedRestrictedErrorInfo dispatches through ILanguageExceptionTransform's vtable slot 3.
-func (self *ILanguageExceptionTransform) GetTransformedRestrictedErrorInfo(restrictedErrorInfo **IRestrictedErrorInfo) foundation.HRESULT {
+func (self *ILanguageExceptionTransform) GetTransformedRestrictedErrorInfo(restrictedErrorInfo **IRestrictedErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(restrictedErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5b0d3235-4dba-4d44-865e-8f1d0e4fd04d
@@ -523,9 +527,9 @@ type IMemoryBufferByteAccess struct {
 var IID_IMemoryBufferByteAccess = win32.GUID{Data1: 0x5b0d3235, Data2: 0x4dba, Data3: 0x4d44, Data4: [8]byte{0x86, 0x5e, 0x8f, 0x1d, 0x0e, 0x4f, 0xd0, 0x4d}}
 
 // GetBuffer dispatches through IMemoryBufferByteAccess's vtable slot 3.
-func (self *IMemoryBufferByteAccess) GetBuffer(value **byte, capacity *uint32) foundation.HRESULT {
+func (self *IMemoryBufferByteAccess) GetBuffer(value **byte, capacity *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(capacity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMessageDispatcher: https://learn.microsoft.com/windows/win32/api/imessagedispatcher/nn-imessagedispatcher-imessagedispatcher
@@ -538,9 +542,9 @@ type IMessageDispatcher struct {
 var IID_IMessageDispatcher = win32.GUID{Data1: 0xf5f84c8f, Data2: 0xcfd0, Data3: 0x4cd6, Data4: [8]byte{0xb6, 0x6b, 0xc5, 0xd2, 0x6f, 0xf1, 0x68, 0x9d}}
 
 // PumpMessages dispatches through IMessageDispatcher's vtable slot 6.
-func (self *IMessageDispatcher) PumpMessages() foundation.HRESULT {
+func (self *IMessageDispatcher) PumpMessages() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPlayToManagerInterop: https://learn.microsoft.com/windows/win32/api/playtomanagerinterop/nn-playtomanagerinterop-iplaytomanagerinterop
@@ -553,15 +557,15 @@ type IPlayToManagerInterop struct {
 var IID_IPlayToManagerInterop = win32.GUID{Data1: 0x24394699, Data2: 0x1f2c, Data3: 0x4eb3, Data4: [8]byte{0x8c, 0xd7, 0x0e, 0xc1, 0xda, 0x42, 0xa5, 0x40}}
 
 // GetForWindow dispatches through IPlayToManagerInterop's vtable slot 6.
-func (self *IPlayToManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, playToManager *unsafe.Pointer) foundation.HRESULT {
+func (self *IPlayToManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, playToManager *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(playToManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowPlayToUIForWindow dispatches through IPlayToManagerInterop's vtable slot 7.
-func (self *IPlayToManagerInterop) ShowPlayToUIForWindow(appWindow foundation.HWND) foundation.HRESULT {
+func (self *IPlayToManagerInterop) ShowPlayToUIForWindow(appWindow foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRestrictedErrorInfo: https://learn.microsoft.com/windows/win32/api/restrictederrorinfo/nn-restrictederrorinfo-irestrictederrorinfo
@@ -574,15 +578,15 @@ type IRestrictedErrorInfo struct {
 var IID_IRestrictedErrorInfo = win32.GUID{Data1: 0x82ba7092, Data2: 0x4c88, Data3: 0x427d, Data4: [8]byte{0xa7, 0xbc, 0x16, 0xdd, 0x93, 0xfe, 0xb6, 0x7e}}
 
 // GetErrorDetails dispatches through IRestrictedErrorInfo's vtable slot 3.
-func (self *IRestrictedErrorInfo) GetErrorDetails(description *foundation.BSTR, error_ *foundation.HRESULT, restrictedDescription *foundation.BSTR, capabilitySid *foundation.BSTR) foundation.HRESULT {
+func (self *IRestrictedErrorInfo) GetErrorDetails(description *foundation.BSTR, error_ *foundation.HRESULT, restrictedDescription *foundation.BSTR, capabilitySid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)), uintptr(unsafe.Pointer(error_)), uintptr(unsafe.Pointer(restrictedDescription)), uintptr(unsafe.Pointer(capabilitySid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReference dispatches through IRestrictedErrorInfo's vtable slot 4.
-func (self *IRestrictedErrorInfo) GetReference(reference *foundation.BSTR) foundation.HRESULT {
+func (self *IRestrictedErrorInfo) GetReference(reference *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(reference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IShareWindowCommandEventArgsInterop: https://learn.microsoft.com/windows/win32/api/sharewindowcommandsourceinterop/nn-sharewindowcommandsourceinterop-isharewindowcommandeventargsinterop
@@ -595,9 +599,10 @@ type IShareWindowCommandEventArgsInterop struct {
 var IID_IShareWindowCommandEventArgsInterop = win32.GUID{Data1: 0x6571a721, Data2: 0x643d, Data3: 0x43d4, Data4: [8]byte{0xac, 0xa4, 0x6b, 0x6f, 0x5f, 0x30, 0xf1, 0xad}}
 
 // GetWindow dispatches through IShareWindowCommandEventArgsInterop's vtable slot 3.
-func (self *IShareWindowCommandEventArgsInterop) GetWindow(value *foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IShareWindowCommandEventArgsInterop) GetWindow() (foundation.HWND, error) {
+	var _value foundation.HWND
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // IShareWindowCommandSourceInterop: https://learn.microsoft.com/windows/win32/api/sharewindowcommandsourceinterop/nn-sharewindowcommandsourceinterop-isharewindowcommandsourceinterop
@@ -610,9 +615,9 @@ type IShareWindowCommandSourceInterop struct {
 var IID_IShareWindowCommandSourceInterop = win32.GUID{Data1: 0x461a191f, Data2: 0x8424, Data3: 0x43a6, Data4: [8]byte{0xa0, 0xfa, 0x34, 0x51, 0xa2, 0x2f, 0x56, 0xab}}
 
 // GetForWindow dispatches through IShareWindowCommandSourceInterop's vtable slot 3.
-func (self *IShareWindowCommandSourceInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, shareWindowCommandSource *unsafe.Pointer) foundation.HRESULT {
+func (self *IShareWindowCommandSourceInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, shareWindowCommandSource *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(shareWindowCommandSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISpatialInteractionManagerInterop: https://learn.microsoft.com/windows/win32/api/spatialinteractionmanagerinterop/nn-spatialinteractionmanagerinterop-ispatialinteractionmanagerinterop
@@ -625,9 +630,9 @@ type ISpatialInteractionManagerInterop struct {
 var IID_ISpatialInteractionManagerInterop = win32.GUID{Data1: 0x5c4ee536, Data2: 0x6a98, Data3: 0x4b86, Data4: [8]byte{0xa1, 0x70, 0x58, 0x70, 0x13, 0xd6, 0xfd, 0x4b}}
 
 // GetForWindow dispatches through ISpatialInteractionManagerInterop's vtable slot 6.
-func (self *ISpatialInteractionManagerInterop) GetForWindow(window foundation.HWND, riid *win32.GUID, spatialInteractionManager *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpatialInteractionManagerInterop) GetForWindow(window foundation.HWND, riid *win32.GUID, spatialInteractionManager *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(spatialInteractionManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISystemMediaTransportControlsInterop: https://learn.microsoft.com/windows/win32/api/systemmediatransportcontrolsinterop/nn-systemmediatransportcontrolsinterop-isystemmediatransportcontrolsinterop
@@ -640,9 +645,9 @@ type ISystemMediaTransportControlsInterop struct {
 var IID_ISystemMediaTransportControlsInterop = win32.GUID{Data1: 0xddb0472d, Data2: 0xc911, Data3: 0x4a1f, Data4: [8]byte{0x86, 0xd9, 0xdc, 0x3d, 0x71, 0xa9, 0x5f, 0x5a}}
 
 // GetForWindow dispatches through ISystemMediaTransportControlsInterop's vtable slot 6.
-func (self *ISystemMediaTransportControlsInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, mediaTransportControl *unsafe.Pointer) foundation.HRESULT {
+func (self *ISystemMediaTransportControlsInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, mediaTransportControl *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(mediaTransportControl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIViewSettingsInterop: https://learn.microsoft.com/windows/win32/api/uiviewsettingsinterop/nn-uiviewsettingsinterop-iuiviewsettingsinterop
@@ -655,9 +660,9 @@ type IUIViewSettingsInterop struct {
 var IID_IUIViewSettingsInterop = win32.GUID{Data1: 0x3694dbf9, Data2: 0x8f68, Data3: 0x44be, Data4: [8]byte{0x8f, 0xf5, 0x19, 0x5c, 0x98, 0xed, 0xe8, 0xa6}}
 
 // GetForWindow dispatches through IUIViewSettingsInterop's vtable slot 6.
-func (self *IUIViewSettingsInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IUIViewSettingsInterop) GetForWindow(hwnd foundation.HWND, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUserActivityInterop: https://learn.microsoft.com/windows/win32/api/useractivityinterop/nn-useractivityinterop-iuseractivityinterop
@@ -670,9 +675,9 @@ type IUserActivityInterop struct {
 var IID_IUserActivityInterop = win32.GUID{Data1: 0x1ade314d, Data2: 0x0e0a, Data3: 0x40d9, Data4: [8]byte{0x82, 0x4c, 0x9a, 0x08, 0x8a, 0x50, 0x05, 0x9f}}
 
 // CreateSessionForWindow dispatches through IUserActivityInterop's vtable slot 6.
-func (self *IUserActivityInterop) CreateSessionForWindow(window foundation.HWND, iid *win32.GUID, value *unsafe.Pointer) foundation.HRESULT {
+func (self *IUserActivityInterop) CreateSessionForWindow(window foundation.HWND, iid *win32.GUID, value *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUserActivityRequestManagerInterop: https://learn.microsoft.com/windows/win32/api/useractivityinterop/nn-useractivityinterop-iuseractivityrequestmanagerinterop
@@ -685,9 +690,9 @@ type IUserActivityRequestManagerInterop struct {
 var IID_IUserActivityRequestManagerInterop = win32.GUID{Data1: 0xdd69f876, Data2: 0x9699, Data3: 0x4715, Data4: [8]byte{0x90, 0x95, 0xe3, 0x7e, 0xa3, 0x0d, 0xfa, 0x1b}}
 
 // GetForWindow dispatches through IUserActivityRequestManagerInterop's vtable slot 6.
-func (self *IUserActivityRequestManagerInterop) GetForWindow(window foundation.HWND, iid *win32.GUID, value *unsafe.Pointer) foundation.HRESULT {
+func (self *IUserActivityRequestManagerInterop) GetForWindow(window foundation.HWND, iid *win32.GUID, value *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUserActivitySourceHostInterop: https://learn.microsoft.com/windows/win32/api/useractivityinterop/nn-useractivityinterop-iuseractivitysourcehostinterop
@@ -700,9 +705,9 @@ type IUserActivitySourceHostInterop struct {
 var IID_IUserActivitySourceHostInterop = win32.GUID{Data1: 0xc15df8bc, Data2: 0x8844, Data3: 0x487a, Data4: [8]byte{0xb8, 0x5b, 0x75, 0x78, 0xe0, 0xf6, 0x14, 0x19}}
 
 // SetActivitySourceHost dispatches through IUserActivitySourceHostInterop's vtable slot 6.
-func (self *IUserActivitySourceHostInterop) SetActivitySourceHost(activitySourceHost HSTRING) foundation.HRESULT {
+func (self *IUserActivitySourceHostInterop) SetActivitySourceHost(activitySourceHost HSTRING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(activitySourceHost))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUserConsentVerifierInterop: https://learn.microsoft.com/windows/win32/api/userconsentverifierinterop/nn-userconsentverifierinterop-iuserconsentverifierinterop
@@ -715,9 +720,9 @@ type IUserConsentVerifierInterop struct {
 var IID_IUserConsentVerifierInterop = win32.GUID{Data1: 0x39e050c3, Data2: 0x4e74, Data3: 0x441a, Data4: [8]byte{0x8d, 0xc0, 0xb8, 0x11, 0x04, 0xdf, 0x94, 0x9c}}
 
 // RequestVerificationForWindowAsync dispatches through IUserConsentVerifierInterop's vtable slot 6.
-func (self *IUserConsentVerifierInterop) RequestVerificationForWindowAsync(appWindow foundation.HWND, message HSTRING, riid *win32.GUID, asyncOperation *unsafe.Pointer) foundation.HRESULT {
+func (self *IUserConsentVerifierInterop) RequestVerificationForWindowAsync(appWindow foundation.HWND, message HSTRING, riid *win32.GUID, asyncOperation *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(message), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncOperation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWeakReference: https://learn.microsoft.com/windows/win32/api/weakreference/nn-weakreference-iweakreference
@@ -730,9 +735,9 @@ type IWeakReference struct {
 var IID_IWeakReference = win32.GUID{Data1: 0x00000037, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Resolve dispatches through IWeakReference's vtable slot 3.
-func (self *IWeakReference) Resolve(riid *win32.GUID, objectReference *unsafe.Pointer) foundation.HRESULT {
+func (self *IWeakReference) Resolve(riid *win32.GUID, objectReference *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(objectReference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWeakReferenceSource: https://learn.microsoft.com/windows/win32/api/weakreference/nn-weakreference-iweakreferencesource
@@ -745,9 +750,9 @@ type IWeakReferenceSource struct {
 var IID_IWeakReferenceSource = win32.GUID{Data1: 0x00000038, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // GetWeakReference dispatches through IWeakReferenceSource's vtable slot 3.
-func (self *IWeakReferenceSource) GetWeakReference(weakReference **IWeakReference) foundation.HRESULT {
+func (self *IWeakReferenceSource) GetWeakReference(weakReference **IWeakReference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(weakReference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWebAuthenticationCoreManagerInterop: https://learn.microsoft.com/windows/win32/api/webauthenticationcoremanagerinterop/nn-webauthenticationcoremanagerinterop-iwebauthenticationcoremanagerinterop
@@ -760,13 +765,13 @@ type IWebAuthenticationCoreManagerInterop struct {
 var IID_IWebAuthenticationCoreManagerInterop = win32.GUID{Data1: 0xf4b8e804, Data2: 0x811e, Data3: 0x4436, Data4: [8]byte{0xb6, 0x9c, 0x44, 0xcb, 0x67, 0xb7, 0x20, 0x84}}
 
 // RequestTokenForWindowAsync dispatches through IWebAuthenticationCoreManagerInterop's vtable slot 6.
-func (self *IWebAuthenticationCoreManagerInterop) RequestTokenForWindowAsync(appWindow foundation.HWND, request *IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) foundation.HRESULT {
+func (self *IWebAuthenticationCoreManagerInterop) RequestTokenForWindowAsync(appWindow foundation.HWND, request *IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestTokenWithWebAccountForWindowAsync dispatches through IWebAuthenticationCoreManagerInterop's vtable slot 7.
-func (self *IWebAuthenticationCoreManagerInterop) RequestTokenWithWebAccountForWindowAsync(appWindow foundation.HWND, request *IInspectable, webAccount *IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) foundation.HRESULT {
+func (self *IWebAuthenticationCoreManagerInterop) RequestTokenWithWebAccountForWindowAsync(appWindow foundation.HWND, request *IInspectable, webAccount *IInspectable, riid *win32.GUID, asyncInfo *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(request)), uintptr(unsafe.Pointer(webAccount)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

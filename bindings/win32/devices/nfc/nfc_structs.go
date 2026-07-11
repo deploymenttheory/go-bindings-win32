@@ -58,8 +58,8 @@ type NFC_LLCP_SOCKET_CL_PAYLOAD struct {
 	SPayload NFC_DATA_BUFFER
 }
 
-// NFC_LLCP_SOCKET_CONNECT_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NFC_LLCP_SOCKET_CONNECT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NFC_LLCP_SOCKET_CONNECT_INFO_Anonymous_e__Union struct {
 	Data [2]uint32
 }
@@ -191,8 +191,8 @@ type NFC_SE_ROUTING_TABLE struct {
 	TableEntries    [1]NFC_SE_ROUTING_TABLE_ENTRY
 }
 
-// NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union struct {
 	Data [4]uint64
 }
@@ -310,8 +310,8 @@ type SECURE_ELEMENT_ROUTING_TABLE struct {
 	TableEntries    [1]SECURE_ELEMENT_ROUTING_TABLE_ENTRY
 }
 
-// SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union struct {
 	Data [9]uint32
 }

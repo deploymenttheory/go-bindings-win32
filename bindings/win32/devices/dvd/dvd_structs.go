@@ -24,8 +24,8 @@ type AACS_MEDIA_ID struct {
 	MAC     [16]byte
 }
 
-// AACS_READ_BINDING_NONCE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// AACS_READ_BINDING_NONCE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type AACS_READ_BINDING_NONCE_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -93,8 +93,8 @@ type DVD_BD_SPARE_AREA_INFORMATION struct {
 	NumberOfAllocatedSpareBlocks [4]byte
 }
 
-// DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [1]byte
 }
@@ -104,8 +104,8 @@ type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR struct {
 	Reserved0 [3]byte
 }
 
-// DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union struct {
 	Data [4]byte
 }
@@ -143,8 +143,8 @@ type DVD_DISC_CONTROL_BLOCK_SESSION_ITEM struct {
 	AsByte [16]byte
 }
 
-// DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT_WriteProtectActions_e__Union struct {
 	Data [4]byte
 }

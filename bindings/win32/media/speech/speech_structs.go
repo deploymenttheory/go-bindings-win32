@@ -131,8 +131,8 @@ type SPPHRASEELEMENT struct {
 	SREngineConfidence     float32
 }
 
-// SPPHRASEPROPERTY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SPPHRASEPROPERTY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SPPHRASEPROPERTY_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -328,8 +328,8 @@ type SPTRANSITIONENTRY_Anonymous1_e__Struct struct {
 	FHasProperty uint32
 }
 
-// SPTRANSITIONENTRY_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SPTRANSITIONENTRY_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SPTRANSITIONENTRY_Anonymous2_e__Union struct {
 	Data [3]uint64
 }

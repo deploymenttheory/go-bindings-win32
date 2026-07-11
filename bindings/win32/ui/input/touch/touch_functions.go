@@ -87,8 +87,12 @@ func GetGestureInfo(hGestureInfo HGESTUREINFO, pGestureInfo *GESTUREINFO) error 
 // GetTouchInputInfo calls USER32!GetTouchInputInfo.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-gettouchinputinfo
 // Minimum OS: windows6.1.
-func GetTouchInputInfo(hTouchInput HTOUCHINPUT, cInputs uint32, pInputs *TOUCHINPUT, cbSize int32) error {
-	r1, _, e1 := syscall.SyscallN(procGetTouchInputInfo.Addr(), uintptr(hTouchInput), uintptr(cInputs), uintptr(unsafe.Pointer(pInputs)), uintptr(cbSize))
+func GetTouchInputInfo(hTouchInput HTOUCHINPUT, pInputs []TOUCHINPUT, cbSize int32) error {
+	var _pInputs *TOUCHINPUT
+	if len(pInputs) > 0 {
+		_pInputs = &pInputs[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetTouchInputInfo.Addr(), uintptr(hTouchInput), uintptr(len(pInputs)), uintptr(unsafe.Pointer(_pInputs)), uintptr(cbSize))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -98,9 +102,9 @@ func GetTouchInputInfo(hTouchInput HTOUCHINPUT, cInputs uint32, pInputs *TOUCHIN
 // IsTouchWindow calls USER32!IsTouchWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-istouchwindow
 // Minimum OS: windows6.1.
-func IsTouchWindow(hwnd foundation.HWND, pulFlags *uint32) foundation.BOOL {
+func IsTouchWindow(hwnd foundation.HWND, pulFlags *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procIsTouchWindow.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pulFlags)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RegisterTouchWindow calls USER32!RegisterTouchWindow.
@@ -117,8 +121,12 @@ func RegisterTouchWindow(hwnd foundation.HWND, ulFlags REGISTER_TOUCH_WINDOW_FLA
 // SetGestureConfig calls USER32!SetGestureConfig.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setgestureconfig
 // Minimum OS: windows6.1.
-func SetGestureConfig(hwnd foundation.HWND, dwReserved uint32, cIDs uint32, pGestureConfig *GESTURECONFIG, cbSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetGestureConfig.Addr(), uintptr(hwnd), uintptr(dwReserved), uintptr(cIDs), uintptr(unsafe.Pointer(pGestureConfig)), uintptr(cbSize))
+func SetGestureConfig(hwnd foundation.HWND, dwReserved uint32, pGestureConfig []GESTURECONFIG, cbSize uint32) error {
+	var _pGestureConfig *GESTURECONFIG
+	if len(pGestureConfig) > 0 {
+		_pGestureConfig = &pGestureConfig[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetGestureConfig.Addr(), uintptr(hwnd), uintptr(dwReserved), uintptr(len(pGestureConfig)), uintptr(unsafe.Pointer(_pGestureConfig)), uintptr(cbSize))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

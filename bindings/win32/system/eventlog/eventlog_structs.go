@@ -49,8 +49,8 @@ type EVT_RPC_LOGIN struct {
 	Flags    uint32
 }
 
-// EVT_VARIANT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVT_VARIANT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVT_VARIANT_Anonymous_e__Union struct {
 	Data [1]uint64
 }

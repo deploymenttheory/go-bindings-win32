@@ -25,21 +25,21 @@ type IAction struct {
 var IID_IAction = win32.GUID{Data1: 0xbae54997, Data2: 0x48b1, Data3: 0x4cbe, Data4: [8]byte{0x99, 0x65, 0xd6, 0xbe, 0x26, 0x3e, 0xbe, 0xa4}}
 
 // Get_Id dispatches through IAction's vtable slot 7.
-func (self *IAction) Get_Id(pId *foundation.BSTR) foundation.HRESULT {
+func (self *IAction) Get_Id(pId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Id dispatches through IAction's vtable slot 8.
-func (self *IAction) Put_Id(Id foundation.BSTR) foundation.HRESULT {
+func (self *IAction) Put_Id(Id foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Type dispatches through IAction's vtable slot 9.
-func (self *IAction) Get_Type(pType *TASK_ACTION_TYPE) foundation.HRESULT {
+func (self *IAction) Get_Type(pType *TASK_ACTION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IActionCollection: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iactioncollection
@@ -52,57 +52,57 @@ type IActionCollection struct {
 var IID_IActionCollection = win32.GUID{Data1: 0x02820e19, Data2: 0x7b98, Data3: 0x4ed2, Data4: [8]byte{0xb2, 0xe8, 0xfd, 0xcc, 0xce, 0xff, 0x61, 0x9b}}
 
 // Get_Count dispatches through IActionCollection's vtable slot 7.
-func (self *IActionCollection) Get_Count(pCount *int32) foundation.HRESULT {
+func (self *IActionCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through IActionCollection's vtable slot 8.
-func (self *IActionCollection) Get_Item(index int32, ppAction **IAction) foundation.HRESULT {
+func (self *IActionCollection) Get_Item(index int32, ppAction **IAction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(ppAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IActionCollection's vtable slot 9.
-func (self *IActionCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) foundation.HRESULT {
+func (self *IActionCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_XmlText dispatches through IActionCollection's vtable slot 10.
-func (self *IActionCollection) Get_XmlText(pText *foundation.BSTR) foundation.HRESULT {
+func (self *IActionCollection) Get_XmlText(pText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_XmlText dispatches through IActionCollection's vtable slot 11.
-func (self *IActionCollection) Put_XmlText(text foundation.BSTR) foundation.HRESULT {
+func (self *IActionCollection) Put_XmlText(text foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through IActionCollection's vtable slot 12.
-func (self *IActionCollection) Create(type_ TASK_ACTION_TYPE, ppAction **IAction) foundation.HRESULT {
+func (self *IActionCollection) Create(type_ TASK_ACTION_TYPE, ppAction **IAction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(ppAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IActionCollection's vtable slot 14.
-func (self *IActionCollection) Clear() foundation.HRESULT {
+func (self *IActionCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Context dispatches through IActionCollection's vtable slot 15.
-func (self *IActionCollection) Get_Context(pContext *foundation.BSTR) foundation.HRESULT {
+func (self *IActionCollection) Get_Context(pContext *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Context dispatches through IActionCollection's vtable slot 16.
-func (self *IActionCollection) Put_Context(context foundation.BSTR) foundation.HRESULT {
+func (self *IActionCollection) Put_Context(context foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IBootTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iboottrigger
@@ -115,15 +115,15 @@ type IBootTrigger struct {
 var IID_IBootTrigger = win32.GUID{Data1: 0x2a9c35da, Data2: 0xd357, Data3: 0x41f4, Data4: [8]byte{0xbb, 0xc1, 0x20, 0x7a, 0xc1, 0xb1, 0xf3, 0xcb}}
 
 // Get_Delay dispatches through IBootTrigger's vtable slot 20.
-func (self *IBootTrigger) Get_Delay(pDelay *foundation.BSTR) foundation.HRESULT {
+func (self *IBootTrigger) Get_Delay(pDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Delay dispatches through IBootTrigger's vtable slot 21.
-func (self *IBootTrigger) Put_Delay(delay foundation.BSTR) foundation.HRESULT {
+func (self *IBootTrigger) Put_Delay(delay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(delay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IComHandlerAction: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-icomhandleraction
@@ -136,27 +136,27 @@ type IComHandlerAction struct {
 var IID_IComHandlerAction = win32.GUID{Data1: 0x6d2fd252, Data2: 0x75c5, Data3: 0x4f66, Data4: [8]byte{0x90, 0xba, 0x2a, 0x7d, 0x8c, 0xc3, 0x03, 0x9f}}
 
 // Get_ClassId dispatches through IComHandlerAction's vtable slot 10.
-func (self *IComHandlerAction) Get_ClassId(pClsid *foundation.BSTR) foundation.HRESULT {
+func (self *IComHandlerAction) Get_ClassId(pClsid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ClassId dispatches through IComHandlerAction's vtable slot 11.
-func (self *IComHandlerAction) Put_ClassId(clsid foundation.BSTR) foundation.HRESULT {
+func (self *IComHandlerAction) Put_ClassId(clsid foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Data dispatches through IComHandlerAction's vtable slot 12.
-func (self *IComHandlerAction) Get_Data(pData *foundation.BSTR) foundation.HRESULT {
+func (self *IComHandlerAction) Get_Data(pData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Data dispatches through IComHandlerAction's vtable slot 13.
-func (self *IComHandlerAction) Put_Data(data foundation.BSTR) foundation.HRESULT {
+func (self *IComHandlerAction) Put_Data(data foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDailyTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-idailytrigger
@@ -169,27 +169,27 @@ type IDailyTrigger struct {
 var IID_IDailyTrigger = win32.GUID{Data1: 0x126c5cd8, Data2: 0xb288, Data3: 0x41d5, Data4: [8]byte{0x8d, 0xbf, 0xe4, 0x91, 0x44, 0x6a, 0xdc, 0x5c}}
 
 // Get_DaysInterval dispatches through IDailyTrigger's vtable slot 20.
-func (self *IDailyTrigger) Get_DaysInterval(pDays *int16) foundation.HRESULT {
+func (self *IDailyTrigger) Get_DaysInterval(pDays *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDays)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DaysInterval dispatches through IDailyTrigger's vtable slot 21.
-func (self *IDailyTrigger) Put_DaysInterval(days int16) foundation.HRESULT {
+func (self *IDailyTrigger) Put_DaysInterval(days int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(days))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RandomDelay dispatches through IDailyTrigger's vtable slot 22.
-func (self *IDailyTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) foundation.HRESULT {
+func (self *IDailyTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRandomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RandomDelay dispatches through IDailyTrigger's vtable slot 23.
-func (self *IDailyTrigger) Put_RandomDelay(randomDelay foundation.BSTR) foundation.HRESULT {
+func (self *IDailyTrigger) Put_RandomDelay(randomDelay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(randomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEmailAction: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iemailaction
@@ -202,123 +202,123 @@ type IEmailAction struct {
 var IID_IEmailAction = win32.GUID{Data1: 0x10f62c64, Data2: 0x7e16, Data3: 0x4314, Data4: [8]byte{0xa0, 0xc2, 0x0c, 0x36, 0x83, 0xf9, 0x9d, 0x40}}
 
 // Get_Server dispatches through IEmailAction's vtable slot 10.
-func (self *IEmailAction) Get_Server(pServer *foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Get_Server(pServer *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pServer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Server dispatches through IEmailAction's vtable slot 11.
-func (self *IEmailAction) Put_Server(server foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Put_Server(server foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(server)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Subject dispatches through IEmailAction's vtable slot 12.
-func (self *IEmailAction) Get_Subject(pSubject *foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Get_Subject(pSubject *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSubject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Subject dispatches through IEmailAction's vtable slot 13.
-func (self *IEmailAction) Put_Subject(subject foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Put_Subject(subject foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_To dispatches through IEmailAction's vtable slot 14.
-func (self *IEmailAction) Get_To(pTo *foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Get_To(pTo *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_To dispatches through IEmailAction's vtable slot 15.
-func (self *IEmailAction) Put_To(to foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Put_To(to foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(to)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Cc dispatches through IEmailAction's vtable slot 16.
-func (self *IEmailAction) Get_Cc(pCc *foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Get_Cc(pCc *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Cc dispatches through IEmailAction's vtable slot 17.
-func (self *IEmailAction) Put_Cc(cc foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Put_Cc(cc foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Bcc dispatches through IEmailAction's vtable slot 18.
-func (self *IEmailAction) Get_Bcc(pBcc *foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Get_Bcc(pBcc *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBcc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Bcc dispatches through IEmailAction's vtable slot 19.
-func (self *IEmailAction) Put_Bcc(bcc foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Put_Bcc(bcc foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bcc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ReplyTo dispatches through IEmailAction's vtable slot 20.
-func (self *IEmailAction) Get_ReplyTo(pReplyTo *foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Get_ReplyTo(pReplyTo *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReplyTo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ReplyTo dispatches through IEmailAction's vtable slot 21.
-func (self *IEmailAction) Put_ReplyTo(replyTo foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Put_ReplyTo(replyTo foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(replyTo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_From dispatches through IEmailAction's vtable slot 22.
-func (self *IEmailAction) Get_From(pFrom *foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Get_From(pFrom *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFrom)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_From dispatches through IEmailAction's vtable slot 23.
-func (self *IEmailAction) Put_From(from foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Put_From(from foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(from)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HeaderFields dispatches through IEmailAction's vtable slot 24.
-func (self *IEmailAction) Get_HeaderFields(ppHeaderFields **ITaskNamedValueCollection) foundation.HRESULT {
+func (self *IEmailAction) Get_HeaderFields(ppHeaderFields **ITaskNamedValueCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppHeaderFields)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_HeaderFields dispatches through IEmailAction's vtable slot 25.
-func (self *IEmailAction) Put_HeaderFields(pHeaderFields *ITaskNamedValueCollection) foundation.HRESULT {
+func (self *IEmailAction) Put_HeaderFields(pHeaderFields *ITaskNamedValueCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeaderFields)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Body dispatches through IEmailAction's vtable slot 26.
-func (self *IEmailAction) Get_Body(pBody *foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Get_Body(pBody *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Body dispatches through IEmailAction's vtable slot 27.
-func (self *IEmailAction) Put_Body(body foundation.BSTR) foundation.HRESULT {
+func (self *IEmailAction) Put_Body(body foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(body)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Attachments dispatches through IEmailAction's vtable slot 28.
-func (self *IEmailAction) Get_Attachments(pAttachements **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IEmailAction) Get_Attachments(pAttachements **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttachements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Attachments dispatches through IEmailAction's vtable slot 29.
-func (self *IEmailAction) Put_Attachments(pAttachements *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IEmailAction) Put_Attachments(pAttachements *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttachements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumWorkItems: https://learn.microsoft.com/windows/win32/api/mstask/nn-mstask-ienumworkitems
@@ -331,27 +331,27 @@ type IEnumWorkItems struct {
 var IID_IEnumWorkItems = win32.GUID{Data1: 0x148bd528, Data2: 0xa2ab, Data3: 0x11ce, Data4: [8]byte{0xb1, 0x1f, 0x00, 0xaa, 0x00, 0x53, 0x05, 0x03}}
 
 // Next dispatches through IEnumWorkItems's vtable slot 3.
-func (self *IEnumWorkItems) Next(celt uint32, rgpwszNames **foundation.PWSTR, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumWorkItems) Next(celt uint32, rgpwszNames **foundation.PWSTR, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgpwszNames)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumWorkItems's vtable slot 4.
-func (self *IEnumWorkItems) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumWorkItems) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumWorkItems's vtable slot 5.
-func (self *IEnumWorkItems) Reset() foundation.HRESULT {
+func (self *IEnumWorkItems) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumWorkItems's vtable slot 6.
-func (self *IEnumWorkItems) Clone(ppEnumWorkItems **IEnumWorkItems) foundation.HRESULT {
+func (self *IEnumWorkItems) Clone(ppEnumWorkItems **IEnumWorkItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumWorkItems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEventTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-ieventtrigger
@@ -364,39 +364,39 @@ type IEventTrigger struct {
 var IID_IEventTrigger = win32.GUID{Data1: 0xd45b0167, Data2: 0x9653, Data3: 0x4eef, Data4: [8]byte{0xb9, 0x4f, 0x07, 0x32, 0xca, 0x7a, 0xf2, 0x51}}
 
 // Get_Subscription dispatches through IEventTrigger's vtable slot 20.
-func (self *IEventTrigger) Get_Subscription(pQuery *foundation.BSTR) foundation.HRESULT {
+func (self *IEventTrigger) Get_Subscription(pQuery *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pQuery)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Subscription dispatches through IEventTrigger's vtable slot 21.
-func (self *IEventTrigger) Put_Subscription(query foundation.BSTR) foundation.HRESULT {
+func (self *IEventTrigger) Put_Subscription(query foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(query)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Delay dispatches through IEventTrigger's vtable slot 22.
-func (self *IEventTrigger) Get_Delay(pDelay *foundation.BSTR) foundation.HRESULT {
+func (self *IEventTrigger) Get_Delay(pDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Delay dispatches through IEventTrigger's vtable slot 23.
-func (self *IEventTrigger) Put_Delay(delay foundation.BSTR) foundation.HRESULT {
+func (self *IEventTrigger) Put_Delay(delay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(delay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ValueQueries dispatches through IEventTrigger's vtable slot 24.
-func (self *IEventTrigger) Get_ValueQueries(ppNamedXPaths **ITaskNamedValueCollection) foundation.HRESULT {
+func (self *IEventTrigger) Get_ValueQueries(ppNamedXPaths **ITaskNamedValueCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNamedXPaths)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ValueQueries dispatches through IEventTrigger's vtable slot 25.
-func (self *IEventTrigger) Put_ValueQueries(pNamedXPaths *ITaskNamedValueCollection) foundation.HRESULT {
+func (self *IEventTrigger) Put_ValueQueries(pNamedXPaths *ITaskNamedValueCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNamedXPaths)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IExecAction: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iexecaction
@@ -409,39 +409,39 @@ type IExecAction struct {
 var IID_IExecAction = win32.GUID{Data1: 0x4c3d624d, Data2: 0xfd6b, Data3: 0x49a3, Data4: [8]byte{0xb9, 0xb7, 0x09, 0xcb, 0x3c, 0xd3, 0xf0, 0x47}}
 
 // Get_Path dispatches through IExecAction's vtable slot 10.
-func (self *IExecAction) Get_Path(pPath *foundation.BSTR) foundation.HRESULT {
+func (self *IExecAction) Get_Path(pPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Path dispatches through IExecAction's vtable slot 11.
-func (self *IExecAction) Put_Path(path foundation.BSTR) foundation.HRESULT {
+func (self *IExecAction) Put_Path(path foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Arguments dispatches through IExecAction's vtable slot 12.
-func (self *IExecAction) Get_Arguments(pArgument *foundation.BSTR) foundation.HRESULT {
+func (self *IExecAction) Get_Arguments(pArgument *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArgument)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Arguments dispatches through IExecAction's vtable slot 13.
-func (self *IExecAction) Put_Arguments(argument foundation.BSTR) foundation.HRESULT {
+func (self *IExecAction) Put_Arguments(argument foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(argument)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_WorkingDirectory dispatches through IExecAction's vtable slot 14.
-func (self *IExecAction) Get_WorkingDirectory(pWorkingDirectory *foundation.BSTR) foundation.HRESULT {
+func (self *IExecAction) Get_WorkingDirectory(pWorkingDirectory *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWorkingDirectory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_WorkingDirectory dispatches through IExecAction's vtable slot 15.
-func (self *IExecAction) Put_WorkingDirectory(workingDirectory foundation.BSTR) foundation.HRESULT {
+func (self *IExecAction) Put_WorkingDirectory(workingDirectory foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(workingDirectory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f2a82542-bda5-4e6b-9143-e2bf4f8987b6
@@ -453,15 +453,15 @@ type IExecAction2 struct {
 var IID_IExecAction2 = win32.GUID{Data1: 0xf2a82542, Data2: 0xbda5, Data3: 0x4e6b, Data4: [8]byte{0x91, 0x43, 0xe2, 0xbf, 0x4f, 0x89, 0x87, 0xb6}}
 
 // Get_HideAppWindow dispatches through IExecAction2's vtable slot 16.
-func (self *IExecAction2) Get_HideAppWindow(pHideAppWindow *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IExecAction2) Get_HideAppWindow(pHideAppWindow *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHideAppWindow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_HideAppWindow dispatches through IExecAction2's vtable slot 17.
-func (self *IExecAction2) Put_HideAppWindow(hideAppWindow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IExecAction2) Put_HideAppWindow(hideAppWindow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hideAppWindow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IIdleSettings: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iidlesettings
@@ -474,51 +474,51 @@ type IIdleSettings struct {
 var IID_IIdleSettings = win32.GUID{Data1: 0x84594461, Data2: 0x0053, Data3: 0x4342, Data4: [8]byte{0xa8, 0xfd, 0x08, 0x8f, 0xab, 0xf1, 0x1f, 0x32}}
 
 // Get_IdleDuration dispatches through IIdleSettings's vtable slot 7.
-func (self *IIdleSettings) Get_IdleDuration(pDelay *foundation.BSTR) foundation.HRESULT {
+func (self *IIdleSettings) Get_IdleDuration(pDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_IdleDuration dispatches through IIdleSettings's vtable slot 8.
-func (self *IIdleSettings) Put_IdleDuration(delay foundation.BSTR) foundation.HRESULT {
+func (self *IIdleSettings) Put_IdleDuration(delay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(delay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_WaitTimeout dispatches through IIdleSettings's vtable slot 9.
-func (self *IIdleSettings) Get_WaitTimeout(pTimeout *foundation.BSTR) foundation.HRESULT {
+func (self *IIdleSettings) Get_WaitTimeout(pTimeout *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_WaitTimeout dispatches through IIdleSettings's vtable slot 10.
-func (self *IIdleSettings) Put_WaitTimeout(timeout foundation.BSTR) foundation.HRESULT {
+func (self *IIdleSettings) Put_WaitTimeout(timeout foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(timeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StopOnIdleEnd dispatches through IIdleSettings's vtable slot 11.
-func (self *IIdleSettings) Get_StopOnIdleEnd(pStop *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IIdleSettings) Get_StopOnIdleEnd(pStop *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStop)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_StopOnIdleEnd dispatches through IIdleSettings's vtable slot 12.
-func (self *IIdleSettings) Put_StopOnIdleEnd(stop foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IIdleSettings) Put_StopOnIdleEnd(stop foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(stop))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RestartOnIdle dispatches through IIdleSettings's vtable slot 13.
-func (self *IIdleSettings) Get_RestartOnIdle(pRestart *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IIdleSettings) Get_RestartOnIdle(pRestart *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRestart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RestartOnIdle dispatches through IIdleSettings's vtable slot 14.
-func (self *IIdleSettings) Put_RestartOnIdle(restart foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IIdleSettings) Put_RestartOnIdle(restart foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(restart))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IIdleTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iidletrigger
@@ -540,27 +540,27 @@ type ILogonTrigger struct {
 var IID_ILogonTrigger = win32.GUID{Data1: 0x72dade38, Data2: 0xfae4, Data3: 0x4b3e, Data4: [8]byte{0xba, 0xf4, 0x5d, 0x00, 0x9a, 0xf0, 0x2b, 0x1c}}
 
 // Get_Delay dispatches through ILogonTrigger's vtable slot 20.
-func (self *ILogonTrigger) Get_Delay(pDelay *foundation.BSTR) foundation.HRESULT {
+func (self *ILogonTrigger) Get_Delay(pDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Delay dispatches through ILogonTrigger's vtable slot 21.
-func (self *ILogonTrigger) Put_Delay(delay foundation.BSTR) foundation.HRESULT {
+func (self *ILogonTrigger) Put_Delay(delay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(delay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UserId dispatches through ILogonTrigger's vtable slot 22.
-func (self *ILogonTrigger) Get_UserId(pUser *foundation.BSTR) foundation.HRESULT {
+func (self *ILogonTrigger) Get_UserId(pUser *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_UserId dispatches through ILogonTrigger's vtable slot 23.
-func (self *ILogonTrigger) Put_UserId(user foundation.BSTR) foundation.HRESULT {
+func (self *ILogonTrigger) Put_UserId(user foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(user)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMaintenanceSettings: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-imaintenancesettings
@@ -573,39 +573,39 @@ type IMaintenanceSettings struct {
 var IID_IMaintenanceSettings = win32.GUID{Data1: 0xa6024fa8, Data2: 0x9652, Data3: 0x4adb, Data4: [8]byte{0xa6, 0xbf, 0x5c, 0xfc, 0xd8, 0x77, 0xa7, 0xba}}
 
 // Put_Period dispatches through IMaintenanceSettings's vtable slot 7.
-func (self *IMaintenanceSettings) Put_Period(value foundation.BSTR) foundation.HRESULT {
+func (self *IMaintenanceSettings) Put_Period(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Period dispatches through IMaintenanceSettings's vtable slot 8.
-func (self *IMaintenanceSettings) Get_Period(target *foundation.BSTR) foundation.HRESULT {
+func (self *IMaintenanceSettings) Get_Period(target *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(target)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Deadline dispatches through IMaintenanceSettings's vtable slot 9.
-func (self *IMaintenanceSettings) Put_Deadline(value foundation.BSTR) foundation.HRESULT {
+func (self *IMaintenanceSettings) Put_Deadline(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Deadline dispatches through IMaintenanceSettings's vtable slot 10.
-func (self *IMaintenanceSettings) Get_Deadline(target *foundation.BSTR) foundation.HRESULT {
+func (self *IMaintenanceSettings) Get_Deadline(target *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(target)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Exclusive dispatches through IMaintenanceSettings's vtable slot 11.
-func (self *IMaintenanceSettings) Put_Exclusive(value foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMaintenanceSettings) Put_Exclusive(value foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Exclusive dispatches through IMaintenanceSettings's vtable slot 12.
-func (self *IMaintenanceSettings) Get_Exclusive(target *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMaintenanceSettings) Get_Exclusive(target *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(target)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMonthlyDOWTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-imonthlydowtrigger
@@ -618,63 +618,63 @@ type IMonthlyDOWTrigger struct {
 var IID_IMonthlyDOWTrigger = win32.GUID{Data1: 0x77d025a3, Data2: 0x90fa, Data3: 0x43aa, Data4: [8]byte{0xb5, 0x2e, 0xcd, 0xa5, 0x49, 0x9b, 0x94, 0x6a}}
 
 // Get_DaysOfWeek dispatches through IMonthlyDOWTrigger's vtable slot 20.
-func (self *IMonthlyDOWTrigger) Get_DaysOfWeek(pDays *int16) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Get_DaysOfWeek(pDays *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDays)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DaysOfWeek dispatches through IMonthlyDOWTrigger's vtable slot 21.
-func (self *IMonthlyDOWTrigger) Put_DaysOfWeek(days int16) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Put_DaysOfWeek(days int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(days))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_WeeksOfMonth dispatches through IMonthlyDOWTrigger's vtable slot 22.
-func (self *IMonthlyDOWTrigger) Get_WeeksOfMonth(pWeeks *int16) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Get_WeeksOfMonth(pWeeks *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWeeks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_WeeksOfMonth dispatches through IMonthlyDOWTrigger's vtable slot 23.
-func (self *IMonthlyDOWTrigger) Put_WeeksOfMonth(weeks int16) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Put_WeeksOfMonth(weeks int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(weeks))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MonthsOfYear dispatches through IMonthlyDOWTrigger's vtable slot 24.
-func (self *IMonthlyDOWTrigger) Get_MonthsOfYear(pMonths *int16) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Get_MonthsOfYear(pMonths *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMonths)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MonthsOfYear dispatches through IMonthlyDOWTrigger's vtable slot 25.
-func (self *IMonthlyDOWTrigger) Put_MonthsOfYear(months int16) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Put_MonthsOfYear(months int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(months))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RunOnLastWeekOfMonth dispatches through IMonthlyDOWTrigger's vtable slot 26.
-func (self *IMonthlyDOWTrigger) Get_RunOnLastWeekOfMonth(pLastWeek *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Get_RunOnLastWeekOfMonth(pLastWeek *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLastWeek)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RunOnLastWeekOfMonth dispatches through IMonthlyDOWTrigger's vtable slot 27.
-func (self *IMonthlyDOWTrigger) Put_RunOnLastWeekOfMonth(lastWeek foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Put_RunOnLastWeekOfMonth(lastWeek foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(lastWeek))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RandomDelay dispatches through IMonthlyDOWTrigger's vtable slot 28.
-func (self *IMonthlyDOWTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRandomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RandomDelay dispatches through IMonthlyDOWTrigger's vtable slot 29.
-func (self *IMonthlyDOWTrigger) Put_RandomDelay(randomDelay foundation.BSTR) foundation.HRESULT {
+func (self *IMonthlyDOWTrigger) Put_RandomDelay(randomDelay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(randomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMonthlyTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-imonthlytrigger
@@ -687,51 +687,51 @@ type IMonthlyTrigger struct {
 var IID_IMonthlyTrigger = win32.GUID{Data1: 0x97c45ef1, Data2: 0x6b02, Data3: 0x4a1a, Data4: [8]byte{0x9c, 0x0e, 0x1e, 0xbf, 0xba, 0x15, 0x00, 0xac}}
 
 // Get_DaysOfMonth dispatches through IMonthlyTrigger's vtable slot 20.
-func (self *IMonthlyTrigger) Get_DaysOfMonth(pDays *int32) foundation.HRESULT {
+func (self *IMonthlyTrigger) Get_DaysOfMonth(pDays *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDays)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DaysOfMonth dispatches through IMonthlyTrigger's vtable slot 21.
-func (self *IMonthlyTrigger) Put_DaysOfMonth(days int32) foundation.HRESULT {
+func (self *IMonthlyTrigger) Put_DaysOfMonth(days int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(days))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MonthsOfYear dispatches through IMonthlyTrigger's vtable slot 22.
-func (self *IMonthlyTrigger) Get_MonthsOfYear(pMonths *int16) foundation.HRESULT {
+func (self *IMonthlyTrigger) Get_MonthsOfYear(pMonths *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMonths)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MonthsOfYear dispatches through IMonthlyTrigger's vtable slot 23.
-func (self *IMonthlyTrigger) Put_MonthsOfYear(months int16) foundation.HRESULT {
+func (self *IMonthlyTrigger) Put_MonthsOfYear(months int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(months))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RunOnLastDayOfMonth dispatches through IMonthlyTrigger's vtable slot 24.
-func (self *IMonthlyTrigger) Get_RunOnLastDayOfMonth(pLastDay *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMonthlyTrigger) Get_RunOnLastDayOfMonth(pLastDay *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLastDay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RunOnLastDayOfMonth dispatches through IMonthlyTrigger's vtable slot 25.
-func (self *IMonthlyTrigger) Put_RunOnLastDayOfMonth(lastDay foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMonthlyTrigger) Put_RunOnLastDayOfMonth(lastDay foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(lastDay))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RandomDelay dispatches through IMonthlyTrigger's vtable slot 26.
-func (self *IMonthlyTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) foundation.HRESULT {
+func (self *IMonthlyTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRandomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RandomDelay dispatches through IMonthlyTrigger's vtable slot 27.
-func (self *IMonthlyTrigger) Put_RandomDelay(randomDelay foundation.BSTR) foundation.HRESULT {
+func (self *IMonthlyTrigger) Put_RandomDelay(randomDelay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(randomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetworkSettings: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-inetworksettings
@@ -744,27 +744,27 @@ type INetworkSettings struct {
 var IID_INetworkSettings = win32.GUID{Data1: 0x9f7dea84, Data2: 0xc30b, Data3: 0x4245, Data4: [8]byte{0x80, 0xb6, 0x00, 0xe9, 0xf6, 0x46, 0xf1, 0xb4}}
 
 // Get_Name dispatches through INetworkSettings's vtable slot 7.
-func (self *INetworkSettings) Get_Name(pName *foundation.BSTR) foundation.HRESULT {
+func (self *INetworkSettings) Get_Name(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through INetworkSettings's vtable slot 8.
-func (self *INetworkSettings) Put_Name(name foundation.BSTR) foundation.HRESULT {
+func (self *INetworkSettings) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through INetworkSettings's vtable slot 9.
-func (self *INetworkSettings) Get_Id(pId *foundation.BSTR) foundation.HRESULT {
+func (self *INetworkSettings) Get_Id(pId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Id dispatches through INetworkSettings's vtable slot 10.
-func (self *INetworkSettings) Put_Id(id foundation.BSTR) foundation.HRESULT {
+func (self *INetworkSettings) Put_Id(id foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPrincipal: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iprincipal
@@ -777,75 +777,75 @@ type IPrincipal struct {
 var IID_IPrincipal = win32.GUID{Data1: 0xd98d51e5, Data2: 0xc9b4, Data3: 0x496a, Data4: [8]byte{0xa9, 0xc1, 0x18, 0x98, 0x02, 0x61, 0xcf, 0x0f}}
 
 // Get_Id dispatches through IPrincipal's vtable slot 7.
-func (self *IPrincipal) Get_Id(pId *foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal) Get_Id(pId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Id dispatches through IPrincipal's vtable slot 8.
-func (self *IPrincipal) Put_Id(Id foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal) Put_Id(Id foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DisplayName dispatches through IPrincipal's vtable slot 9.
-func (self *IPrincipal) Get_DisplayName(pName *foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal) Get_DisplayName(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DisplayName dispatches through IPrincipal's vtable slot 10.
-func (self *IPrincipal) Put_DisplayName(name foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal) Put_DisplayName(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UserId dispatches through IPrincipal's vtable slot 11.
-func (self *IPrincipal) Get_UserId(pUser *foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal) Get_UserId(pUser *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_UserId dispatches through IPrincipal's vtable slot 12.
-func (self *IPrincipal) Put_UserId(user foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal) Put_UserId(user foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(user)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LogonType dispatches through IPrincipal's vtable slot 13.
-func (self *IPrincipal) Get_LogonType(pLogon *TASK_LOGON_TYPE) foundation.HRESULT {
+func (self *IPrincipal) Get_LogonType(pLogon *TASK_LOGON_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLogon)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_LogonType dispatches through IPrincipal's vtable slot 14.
-func (self *IPrincipal) Put_LogonType(logon TASK_LOGON_TYPE) foundation.HRESULT {
+func (self *IPrincipal) Put_LogonType(logon TASK_LOGON_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(logon))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_GroupId dispatches through IPrincipal's vtable slot 15.
-func (self *IPrincipal) Get_GroupId(pGroup *foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal) Get_GroupId(pGroup *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_GroupId dispatches through IPrincipal's vtable slot 16.
-func (self *IPrincipal) Put_GroupId(group foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal) Put_GroupId(group foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(group)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RunLevel dispatches through IPrincipal's vtable slot 17.
-func (self *IPrincipal) Get_RunLevel(pRunLevel *TASK_RUNLEVEL_TYPE) foundation.HRESULT {
+func (self *IPrincipal) Get_RunLevel(pRunLevel *TASK_RUNLEVEL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRunLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RunLevel dispatches through IPrincipal's vtable slot 18.
-func (self *IPrincipal) Put_RunLevel(runLevel TASK_RUNLEVEL_TYPE) foundation.HRESULT {
+func (self *IPrincipal) Put_RunLevel(runLevel TASK_RUNLEVEL_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(runLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPrincipal2: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iprincipal2
@@ -858,33 +858,33 @@ type IPrincipal2 struct {
 var IID_IPrincipal2 = win32.GUID{Data1: 0x248919ae, Data2: 0xe345, Data3: 0x4a6d, Data4: [8]byte{0x8a, 0xeb, 0xe0, 0xd3, 0x16, 0x5c, 0x90, 0x4e}}
 
 // Get_ProcessTokenSidType dispatches through IPrincipal2's vtable slot 7.
-func (self *IPrincipal2) Get_ProcessTokenSidType(pProcessTokenSidType *TASK_PROCESSTOKENSID_TYPE) foundation.HRESULT {
+func (self *IPrincipal2) Get_ProcessTokenSidType(pProcessTokenSidType *TASK_PROCESSTOKENSID_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProcessTokenSidType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ProcessTokenSidType dispatches through IPrincipal2's vtable slot 8.
-func (self *IPrincipal2) Put_ProcessTokenSidType(processTokenSidType TASK_PROCESSTOKENSID_TYPE) foundation.HRESULT {
+func (self *IPrincipal2) Put_ProcessTokenSidType(processTokenSidType TASK_PROCESSTOKENSID_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(processTokenSidType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RequiredPrivilegeCount dispatches through IPrincipal2's vtable slot 9.
-func (self *IPrincipal2) Get_RequiredPrivilegeCount(pCount *int32) foundation.HRESULT {
+func (self *IPrincipal2) Get_RequiredPrivilegeCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RequiredPrivilege dispatches through IPrincipal2's vtable slot 10.
-func (self *IPrincipal2) Get_RequiredPrivilege(index int32, pPrivilege *foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal2) Get_RequiredPrivilege(index int32, pPrivilege *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(pPrivilege)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddRequiredPrivilege dispatches through IPrincipal2's vtable slot 11.
-func (self *IPrincipal2) AddRequiredPrivilege(privilege foundation.BSTR) foundation.HRESULT {
+func (self *IPrincipal2) AddRequiredPrivilege(privilege foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(privilege)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProvideTaskPage: https://learn.microsoft.com/windows/win32/api/mstask/nn-mstask-iprovidetaskpage
@@ -897,9 +897,10 @@ type IProvideTaskPage struct {
 var IID_IProvideTaskPage = win32.GUID{Data1: 0x4086658a, Data2: 0xcbbb, Data3: 0x11cf, Data4: [8]byte{0xb6, 0x04, 0x00, 0xc0, 0x4f, 0xd8, 0xd5, 0x65}}
 
 // GetPage dispatches through IProvideTaskPage's vtable slot 3.
-func (self *IProvideTaskPage) GetPage(tpType TASKPAGE, fPersistChanges foundation.BOOL, phPage *uicontrols.HPROPSHEETPAGE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(tpType), uintptr(fPersistChanges), uintptr(unsafe.Pointer(phPage)))
-	return foundation.HRESULT(r1)
+func (self *IProvideTaskPage) GetPage(tpType TASKPAGE, fPersistChanges bool, phPage *uicontrols.HPROPSHEETPAGE) error {
+	_fPersistChanges := win32.Bool32(fPersistChanges)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(tpType), uintptr(_fPersistChanges), uintptr(unsafe.Pointer(phPage)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRegisteredTask: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iregisteredtask
@@ -912,99 +913,99 @@ type IRegisteredTask struct {
 var IID_IRegisteredTask = win32.GUID{Data1: 0x9c86f320, Data2: 0xdee3, Data3: 0x4dd1, Data4: [8]byte{0xb9, 0x72, 0xa3, 0x03, 0xf2, 0x6b, 0x06, 0x1e}}
 
 // Get_Name dispatches through IRegisteredTask's vtable slot 7.
-func (self *IRegisteredTask) Get_Name(pName *foundation.BSTR) foundation.HRESULT {
+func (self *IRegisteredTask) Get_Name(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Path dispatches through IRegisteredTask's vtable slot 8.
-func (self *IRegisteredTask) Get_Path(pPath *foundation.BSTR) foundation.HRESULT {
+func (self *IRegisteredTask) Get_Path(pPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRegisteredTask's vtable slot 9.
-func (self *IRegisteredTask) Get_State(pState *TASK_STATE) foundation.HRESULT {
+func (self *IRegisteredTask) Get_State(pState *TASK_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through IRegisteredTask's vtable slot 10.
-func (self *IRegisteredTask) Get_Enabled(pEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRegisteredTask) Get_Enabled(pEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Enabled dispatches through IRegisteredTask's vtable slot 11.
-func (self *IRegisteredTask) Put_Enabled(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRegisteredTask) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInstances dispatches through IRegisteredTask's vtable slot 14.
-func (self *IRegisteredTask) GetInstances(flags int32, ppRunningTasks **IRunningTaskCollection) foundation.HRESULT {
+func (self *IRegisteredTask) GetInstances(flags int32, ppRunningTasks **IRunningTaskCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(ppRunningTasks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LastRunTime dispatches through IRegisteredTask's vtable slot 15.
-func (self *IRegisteredTask) Get_LastRunTime(pLastRunTime *float64) foundation.HRESULT {
+func (self *IRegisteredTask) Get_LastRunTime(pLastRunTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLastRunTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LastTaskResult dispatches through IRegisteredTask's vtable slot 16.
-func (self *IRegisteredTask) Get_LastTaskResult(pLastTaskResult *int32) foundation.HRESULT {
+func (self *IRegisteredTask) Get_LastTaskResult(pLastTaskResult *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLastTaskResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfMissedRuns dispatches through IRegisteredTask's vtable slot 17.
-func (self *IRegisteredTask) Get_NumberOfMissedRuns(pNumberOfMissedRuns *int32) foundation.HRESULT {
+func (self *IRegisteredTask) Get_NumberOfMissedRuns(pNumberOfMissedRuns *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumberOfMissedRuns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NextRunTime dispatches through IRegisteredTask's vtable slot 18.
-func (self *IRegisteredTask) Get_NextRunTime(pNextRunTime *float64) foundation.HRESULT {
+func (self *IRegisteredTask) Get_NextRunTime(pNextRunTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNextRunTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Definition dispatches through IRegisteredTask's vtable slot 19.
-func (self *IRegisteredTask) Get_Definition(ppDefinition **ITaskDefinition) foundation.HRESULT {
+func (self *IRegisteredTask) Get_Definition(ppDefinition **ITaskDefinition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDefinition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Xml dispatches through IRegisteredTask's vtable slot 20.
-func (self *IRegisteredTask) Get_Xml(pXml *foundation.BSTR) foundation.HRESULT {
+func (self *IRegisteredTask) Get_Xml(pXml *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXml)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecurityDescriptor dispatches through IRegisteredTask's vtable slot 21.
-func (self *IRegisteredTask) GetSecurityDescriptor(securityInformation int32, pSddl *foundation.BSTR) foundation.HRESULT {
+func (self *IRegisteredTask) GetSecurityDescriptor(securityInformation int32, pSddl *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(securityInformation), uintptr(unsafe.Pointer(pSddl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSecurityDescriptor dispatches through IRegisteredTask's vtable slot 22.
-func (self *IRegisteredTask) SetSecurityDescriptor(sddl foundation.BSTR, flags int32) foundation.HRESULT {
+func (self *IRegisteredTask) SetSecurityDescriptor(sddl foundation.BSTR, flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sddl)), uintptr(flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IRegisteredTask's vtable slot 23.
-func (self *IRegisteredTask) Stop(flags int32) foundation.HRESULT {
+func (self *IRegisteredTask) Stop(flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRunTimes dispatches through IRegisteredTask's vtable slot 24.
-func (self *IRegisteredTask) GetRunTimes(pstStart *foundation.SYSTEMTIME, pstEnd *foundation.SYSTEMTIME, pCount *uint32, pRunTimes **foundation.SYSTEMTIME) foundation.HRESULT {
+func (self *IRegisteredTask) GetRunTimes(pstStart *foundation.SYSTEMTIME, pstEnd *foundation.SYSTEMTIME, pCount *uint32, pRunTimes **foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstStart)), uintptr(unsafe.Pointer(pstEnd)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(pRunTimes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRegisteredTaskCollection: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iregisteredtaskcollection
@@ -1017,15 +1018,15 @@ type IRegisteredTaskCollection struct {
 var IID_IRegisteredTaskCollection = win32.GUID{Data1: 0x86627eb4, Data2: 0x42a7, Data3: 0x41e4, Data4: [8]byte{0xa4, 0xd9, 0xac, 0x33, 0xa7, 0x2f, 0x2d, 0x52}}
 
 // Get_Count dispatches through IRegisteredTaskCollection's vtable slot 7.
-func (self *IRegisteredTaskCollection) Get_Count(pCount *int32) foundation.HRESULT {
+func (self *IRegisteredTaskCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IRegisteredTaskCollection's vtable slot 9.
-func (self *IRegisteredTaskCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRegisteredTaskCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRegistrationInfo: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iregistrationinfo
@@ -1038,105 +1039,105 @@ type IRegistrationInfo struct {
 var IID_IRegistrationInfo = win32.GUID{Data1: 0x416d8b73, Data2: 0xcb41, Data3: 0x4ea1, Data4: [8]byte{0x80, 0x5c, 0x9b, 0xe9, 0xa5, 0xac, 0x4a, 0x74}}
 
 // Get_Description dispatches through IRegistrationInfo's vtable slot 7.
-func (self *IRegistrationInfo) Get_Description(pDescription *foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Get_Description(pDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Description dispatches through IRegistrationInfo's vtable slot 8.
-func (self *IRegistrationInfo) Put_Description(description foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Put_Description(description foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(description)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Author dispatches through IRegistrationInfo's vtable slot 9.
-func (self *IRegistrationInfo) Get_Author(pAuthor *foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Get_Author(pAuthor *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAuthor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Author dispatches through IRegistrationInfo's vtable slot 10.
-func (self *IRegistrationInfo) Put_Author(author foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Put_Author(author foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(author)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Version dispatches through IRegistrationInfo's vtable slot 11.
-func (self *IRegistrationInfo) Get_Version(pVersion *foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Get_Version(pVersion *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Version dispatches through IRegistrationInfo's vtable slot 12.
-func (self *IRegistrationInfo) Put_Version(version foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Put_Version(version foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(version)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Date dispatches through IRegistrationInfo's vtable slot 13.
-func (self *IRegistrationInfo) Get_Date(pDate *foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Get_Date(pDate *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Date dispatches through IRegistrationInfo's vtable slot 14.
-func (self *IRegistrationInfo) Put_Date(date foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Put_Date(date foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(date)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Documentation dispatches through IRegistrationInfo's vtable slot 15.
-func (self *IRegistrationInfo) Get_Documentation(pDocumentation *foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Get_Documentation(pDocumentation *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDocumentation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Documentation dispatches through IRegistrationInfo's vtable slot 16.
-func (self *IRegistrationInfo) Put_Documentation(documentation foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Put_Documentation(documentation foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_XmlText dispatches through IRegistrationInfo's vtable slot 17.
-func (self *IRegistrationInfo) Get_XmlText(pText *foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Get_XmlText(pText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_XmlText dispatches through IRegistrationInfo's vtable slot 18.
-func (self *IRegistrationInfo) Put_XmlText(text foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Put_XmlText(text foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_URI dispatches through IRegistrationInfo's vtable slot 19.
-func (self *IRegistrationInfo) Get_URI(pUri *foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Get_URI(pUri *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_URI dispatches through IRegistrationInfo's vtable slot 20.
-func (self *IRegistrationInfo) Put_URI(uri foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Put_URI(uri foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(uri)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SecurityDescriptor dispatches through IRegistrationInfo's vtable slot 21.
-func (self *IRegistrationInfo) Get_SecurityDescriptor(pSddl *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IRegistrationInfo) Get_SecurityDescriptor(pSddl *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSddl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Source dispatches through IRegistrationInfo's vtable slot 23.
-func (self *IRegistrationInfo) Get_Source(pSource *foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Get_Source(pSource *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Source dispatches through IRegistrationInfo's vtable slot 24.
-func (self *IRegistrationInfo) Put_Source(source foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationInfo) Put_Source(source foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(source)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRegistrationTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iregistrationtrigger
@@ -1149,15 +1150,15 @@ type IRegistrationTrigger struct {
 var IID_IRegistrationTrigger = win32.GUID{Data1: 0x4c8fec3a, Data2: 0xc218, Data3: 0x4e0c, Data4: [8]byte{0xb2, 0x3d, 0x62, 0x90, 0x24, 0xdb, 0x91, 0xa2}}
 
 // Get_Delay dispatches through IRegistrationTrigger's vtable slot 20.
-func (self *IRegistrationTrigger) Get_Delay(pDelay *foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationTrigger) Get_Delay(pDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Delay dispatches through IRegistrationTrigger's vtable slot 21.
-func (self *IRegistrationTrigger) Put_Delay(delay foundation.BSTR) foundation.HRESULT {
+func (self *IRegistrationTrigger) Put_Delay(delay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(delay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRepetitionPattern: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-irepetitionpattern
@@ -1170,39 +1171,39 @@ type IRepetitionPattern struct {
 var IID_IRepetitionPattern = win32.GUID{Data1: 0x7fb9acf1, Data2: 0x26be, Data3: 0x400e, Data4: [8]byte{0x85, 0xb5, 0x29, 0x4b, 0x9c, 0x75, 0xdf, 0xd6}}
 
 // Get_Interval dispatches through IRepetitionPattern's vtable slot 7.
-func (self *IRepetitionPattern) Get_Interval(pInterval *foundation.BSTR) foundation.HRESULT {
+func (self *IRepetitionPattern) Get_Interval(pInterval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInterval)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Interval dispatches through IRepetitionPattern's vtable slot 8.
-func (self *IRepetitionPattern) Put_Interval(interval foundation.BSTR) foundation.HRESULT {
+func (self *IRepetitionPattern) Put_Interval(interval foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interval)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Duration dispatches through IRepetitionPattern's vtable slot 9.
-func (self *IRepetitionPattern) Get_Duration(pDuration *foundation.BSTR) foundation.HRESULT {
+func (self *IRepetitionPattern) Get_Duration(pDuration *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Duration dispatches through IRepetitionPattern's vtable slot 10.
-func (self *IRepetitionPattern) Put_Duration(duration foundation.BSTR) foundation.HRESULT {
+func (self *IRepetitionPattern) Put_Duration(duration foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(duration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StopAtDurationEnd dispatches through IRepetitionPattern's vtable slot 11.
-func (self *IRepetitionPattern) Get_StopAtDurationEnd(pStop *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRepetitionPattern) Get_StopAtDurationEnd(pStop *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStop)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_StopAtDurationEnd dispatches through IRepetitionPattern's vtable slot 12.
-func (self *IRepetitionPattern) Put_StopAtDurationEnd(stop foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IRepetitionPattern) Put_StopAtDurationEnd(stop foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(stop))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRunningTask: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-irunningtask
@@ -1215,51 +1216,51 @@ type IRunningTask struct {
 var IID_IRunningTask = win32.GUID{Data1: 0x653758fb, Data2: 0x7b9a, Data3: 0x4f1e, Data4: [8]byte{0xa4, 0x71, 0xbe, 0xeb, 0x8e, 0x9b, 0x83, 0x4e}}
 
 // Get_Name dispatches through IRunningTask's vtable slot 7.
-func (self *IRunningTask) Get_Name(pName *foundation.BSTR) foundation.HRESULT {
+func (self *IRunningTask) Get_Name(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InstanceGuid dispatches through IRunningTask's vtable slot 8.
-func (self *IRunningTask) Get_InstanceGuid(pGuid *foundation.BSTR) foundation.HRESULT {
+func (self *IRunningTask) Get_InstanceGuid(pGuid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Path dispatches through IRunningTask's vtable slot 9.
-func (self *IRunningTask) Get_Path(pPath *foundation.BSTR) foundation.HRESULT {
+func (self *IRunningTask) Get_Path(pPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through IRunningTask's vtable slot 10.
-func (self *IRunningTask) Get_State(pState *TASK_STATE) foundation.HRESULT {
+func (self *IRunningTask) Get_State(pState *TASK_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentAction dispatches through IRunningTask's vtable slot 11.
-func (self *IRunningTask) Get_CurrentAction(pName *foundation.BSTR) foundation.HRESULT {
+func (self *IRunningTask) Get_CurrentAction(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IRunningTask's vtable slot 12.
-func (self *IRunningTask) Stop() foundation.HRESULT {
+func (self *IRunningTask) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IRunningTask's vtable slot 13.
-func (self *IRunningTask) Refresh() foundation.HRESULT {
+func (self *IRunningTask) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EnginePID dispatches through IRunningTask's vtable slot 14.
-func (self *IRunningTask) Get_EnginePID(pPID *uint32) foundation.HRESULT {
+func (self *IRunningTask) Get_EnginePID(pPID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRunningTaskCollection: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-irunningtaskcollection
@@ -1272,15 +1273,15 @@ type IRunningTaskCollection struct {
 var IID_IRunningTaskCollection = win32.GUID{Data1: 0x6a67614b, Data2: 0x6828, Data3: 0x4fec, Data4: [8]byte{0xaa, 0x54, 0x6d, 0x52, 0xe8, 0xf1, 0xf2, 0xdb}}
 
 // Get_Count dispatches through IRunningTaskCollection's vtable slot 7.
-func (self *IRunningTaskCollection) Get_Count(pCount *int32) foundation.HRESULT {
+func (self *IRunningTaskCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through IRunningTaskCollection's vtable slot 9.
-func (self *IRunningTaskCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRunningTaskCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IScheduledWorkItem: https://learn.microsoft.com/windows/win32/api/mstask/nn-mstask-ischeduledworkitem
@@ -1293,177 +1294,181 @@ type IScheduledWorkItem struct {
 var IID_IScheduledWorkItem = win32.GUID{Data1: 0xa6b952f0, Data2: 0xa4b1, Data3: 0x11d0, Data4: [8]byte{0x99, 0x7d, 0x00, 0xaa, 0x00, 0x68, 0x87, 0xec}}
 
 // CreateTrigger dispatches through IScheduledWorkItem's vtable slot 3.
-func (self *IScheduledWorkItem) CreateTrigger(piNewTrigger *uint16, ppTrigger **ITaskTrigger) foundation.HRESULT {
+func (self *IScheduledWorkItem) CreateTrigger(piNewTrigger *uint16, ppTrigger **ITaskTrigger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piNewTrigger)), uintptr(unsafe.Pointer(ppTrigger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteTrigger dispatches through IScheduledWorkItem's vtable slot 4.
-func (self *IScheduledWorkItem) DeleteTrigger(iTrigger uint16) foundation.HRESULT {
+func (self *IScheduledWorkItem) DeleteTrigger(iTrigger uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iTrigger))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTriggerCount dispatches through IScheduledWorkItem's vtable slot 5.
-func (self *IScheduledWorkItem) GetTriggerCount(pwCount *uint16) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetTriggerCount(pwCount *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTrigger dispatches through IScheduledWorkItem's vtable slot 6.
-func (self *IScheduledWorkItem) GetTrigger(iTrigger uint16, ppTrigger **ITaskTrigger) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetTrigger(iTrigger uint16, ppTrigger **ITaskTrigger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iTrigger), uintptr(unsafe.Pointer(ppTrigger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTriggerString dispatches through IScheduledWorkItem's vtable slot 7.
-func (self *IScheduledWorkItem) GetTriggerString(iTrigger uint16, ppwszTrigger *foundation.PWSTR) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetTriggerString(iTrigger uint16, ppwszTrigger *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(iTrigger), uintptr(unsafe.Pointer(ppwszTrigger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRunTimes dispatches through IScheduledWorkItem's vtable slot 8.
-func (self *IScheduledWorkItem) GetRunTimes(pstBegin *foundation.SYSTEMTIME, pstEnd *foundation.SYSTEMTIME, pCount *uint16, rgstTaskTimes **foundation.SYSTEMTIME) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetRunTimes(pstBegin *foundation.SYSTEMTIME, pstEnd *foundation.SYSTEMTIME, pCount *uint16, rgstTaskTimes **foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstBegin)), uintptr(unsafe.Pointer(pstEnd)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(rgstTaskTimes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextRunTime dispatches through IScheduledWorkItem's vtable slot 9.
-func (self *IScheduledWorkItem) GetNextRunTime(pstNextRun *foundation.SYSTEMTIME) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetNextRunTime(pstNextRun *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstNextRun)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIdleWait dispatches through IScheduledWorkItem's vtable slot 10.
-func (self *IScheduledWorkItem) SetIdleWait(wIdleMinutes uint16, wDeadlineMinutes uint16) foundation.HRESULT {
+func (self *IScheduledWorkItem) SetIdleWait(wIdleMinutes uint16, wDeadlineMinutes uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(wIdleMinutes), uintptr(wDeadlineMinutes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIdleWait dispatches through IScheduledWorkItem's vtable slot 11.
-func (self *IScheduledWorkItem) GetIdleWait(pwIdleMinutes *uint16, pwDeadlineMinutes *uint16) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetIdleWait(pwIdleMinutes *uint16, pwDeadlineMinutes *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwIdleMinutes)), uintptr(unsafe.Pointer(pwDeadlineMinutes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Run dispatches through IScheduledWorkItem's vtable slot 12.
-func (self *IScheduledWorkItem) Run() foundation.HRESULT {
+func (self *IScheduledWorkItem) Run() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Terminate dispatches through IScheduledWorkItem's vtable slot 13.
-func (self *IScheduledWorkItem) Terminate() foundation.HRESULT {
+func (self *IScheduledWorkItem) Terminate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditWorkItem dispatches through IScheduledWorkItem's vtable slot 14.
-func (self *IScheduledWorkItem) EditWorkItem(hParent foundation.HWND, dwReserved uint32) foundation.HRESULT {
+func (self *IScheduledWorkItem) EditWorkItem(hParent foundation.HWND, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hParent), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMostRecentRunTime dispatches through IScheduledWorkItem's vtable slot 15.
-func (self *IScheduledWorkItem) GetMostRecentRunTime(pstLastRun *foundation.SYSTEMTIME) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetMostRecentRunTime(pstLastRun *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstLastRun)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IScheduledWorkItem's vtable slot 16.
-func (self *IScheduledWorkItem) GetStatus(phrStatus *foundation.HRESULT) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetStatus(phrStatus *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExitCode dispatches through IScheduledWorkItem's vtable slot 17.
-func (self *IScheduledWorkItem) GetExitCode(pdwExitCode *uint32) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetExitCode(pdwExitCode *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwExitCode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetComment dispatches through IScheduledWorkItem's vtable slot 18.
-func (self *IScheduledWorkItem) SetComment(pwszComment foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszComment)))
-	return foundation.HRESULT(r1)
+func (self *IScheduledWorkItem) SetComment(pwszComment string) error {
+	_pwszComment := win32.UTF16Ptr(pwszComment)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszComment)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetComment dispatches through IScheduledWorkItem's vtable slot 19.
-func (self *IScheduledWorkItem) GetComment(ppwszComment *foundation.PWSTR) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetComment(ppwszComment *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszComment)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCreator dispatches through IScheduledWorkItem's vtable slot 20.
-func (self *IScheduledWorkItem) SetCreator(pwszCreator foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszCreator)))
-	return foundation.HRESULT(r1)
+func (self *IScheduledWorkItem) SetCreator(pwszCreator string) error {
+	_pwszCreator := win32.UTF16Ptr(pwszCreator)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszCreator)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCreator dispatches through IScheduledWorkItem's vtable slot 21.
-func (self *IScheduledWorkItem) GetCreator(ppwszCreator *foundation.PWSTR) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetCreator(ppwszCreator *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszCreator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWorkItemData dispatches through IScheduledWorkItem's vtable slot 22.
-func (self *IScheduledWorkItem) SetWorkItemData(cbData uint16, rgbData *byte) foundation.HRESULT {
+func (self *IScheduledWorkItem) SetWorkItemData(cbData uint16, rgbData *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(cbData), uintptr(unsafe.Pointer(rgbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWorkItemData dispatches through IScheduledWorkItem's vtable slot 23.
-func (self *IScheduledWorkItem) GetWorkItemData(pcbData *uint16, prgbData **byte) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetWorkItemData(pcbData *uint16, prgbData **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(prgbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetErrorRetryCount dispatches through IScheduledWorkItem's vtable slot 24.
-func (self *IScheduledWorkItem) SetErrorRetryCount(wRetryCount uint16) foundation.HRESULT {
+func (self *IScheduledWorkItem) SetErrorRetryCount(wRetryCount uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(wRetryCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorRetryCount dispatches through IScheduledWorkItem's vtable slot 25.
-func (self *IScheduledWorkItem) GetErrorRetryCount(pwRetryCount *uint16) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetErrorRetryCount(pwRetryCount *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwRetryCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetErrorRetryInterval dispatches through IScheduledWorkItem's vtable slot 26.
-func (self *IScheduledWorkItem) SetErrorRetryInterval(wRetryInterval uint16) foundation.HRESULT {
+func (self *IScheduledWorkItem) SetErrorRetryInterval(wRetryInterval uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(wRetryInterval))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorRetryInterval dispatches through IScheduledWorkItem's vtable slot 27.
-func (self *IScheduledWorkItem) GetErrorRetryInterval(pwRetryInterval *uint16) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetErrorRetryInterval(pwRetryInterval *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwRetryInterval)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFlags dispatches through IScheduledWorkItem's vtable slot 28.
-func (self *IScheduledWorkItem) SetFlags(dwFlags uint32) foundation.HRESULT {
+func (self *IScheduledWorkItem) SetFlags(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IScheduledWorkItem's vtable slot 29.
-func (self *IScheduledWorkItem) GetFlags(pdwFlags *uint32) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAccountInformation dispatches through IScheduledWorkItem's vtable slot 30.
-func (self *IScheduledWorkItem) SetAccountInformation(pwszAccountName foundation.PWSTR, pwszPassword foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszAccountName)), uintptr(unsafe.Pointer(pwszPassword)))
-	return foundation.HRESULT(r1)
+func (self *IScheduledWorkItem) SetAccountInformation(pwszAccountName string, pwszPassword string) error {
+	_pwszAccountName := win32.UTF16Ptr(pwszAccountName)
+	_pwszPassword := win32.UTF16Ptr(pwszPassword)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAccountName)), uintptr(unsafe.Pointer(_pwszPassword)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAccountInformation dispatches through IScheduledWorkItem's vtable slot 31.
-func (self *IScheduledWorkItem) GetAccountInformation(ppwszAccountName *foundation.PWSTR) foundation.HRESULT {
+func (self *IScheduledWorkItem) GetAccountInformation(ppwszAccountName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszAccountName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISessionStateChangeTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-isessionstatechangetrigger
@@ -1476,39 +1481,39 @@ type ISessionStateChangeTrigger struct {
 var IID_ISessionStateChangeTrigger = win32.GUID{Data1: 0x754da71b, Data2: 0x4385, Data3: 0x4475, Data4: [8]byte{0x9d, 0xd9, 0x59, 0x82, 0x94, 0xfa, 0x36, 0x41}}
 
 // Get_Delay dispatches through ISessionStateChangeTrigger's vtable slot 20.
-func (self *ISessionStateChangeTrigger) Get_Delay(pDelay *foundation.BSTR) foundation.HRESULT {
+func (self *ISessionStateChangeTrigger) Get_Delay(pDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Delay dispatches through ISessionStateChangeTrigger's vtable slot 21.
-func (self *ISessionStateChangeTrigger) Put_Delay(delay foundation.BSTR) foundation.HRESULT {
+func (self *ISessionStateChangeTrigger) Put_Delay(delay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(delay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UserId dispatches through ISessionStateChangeTrigger's vtable slot 22.
-func (self *ISessionStateChangeTrigger) Get_UserId(pUser *foundation.BSTR) foundation.HRESULT {
+func (self *ISessionStateChangeTrigger) Get_UserId(pUser *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_UserId dispatches through ISessionStateChangeTrigger's vtable slot 23.
-func (self *ISessionStateChangeTrigger) Put_UserId(user foundation.BSTR) foundation.HRESULT {
+func (self *ISessionStateChangeTrigger) Put_UserId(user foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(user)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StateChange dispatches through ISessionStateChangeTrigger's vtable slot 24.
-func (self *ISessionStateChangeTrigger) Get_StateChange(pType *TASK_SESSION_STATE_CHANGE_TYPE) foundation.HRESULT {
+func (self *ISessionStateChangeTrigger) Get_StateChange(pType *TASK_SESSION_STATE_CHANGE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_StateChange dispatches through ISessionStateChangeTrigger's vtable slot 25.
-func (self *ISessionStateChangeTrigger) Put_StateChange(type_ TASK_SESSION_STATE_CHANGE_TYPE) foundation.HRESULT {
+func (self *ISessionStateChangeTrigger) Put_StateChange(type_ TASK_SESSION_STATE_CHANGE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(type_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IShowMessageAction: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-ishowmessageaction
@@ -1521,27 +1526,27 @@ type IShowMessageAction struct {
 var IID_IShowMessageAction = win32.GUID{Data1: 0x505e9e68, Data2: 0xaf89, Data3: 0x46b8, Data4: [8]byte{0xa3, 0x0f, 0x56, 0x16, 0x2a, 0x83, 0xd5, 0x37}}
 
 // Get_Title dispatches through IShowMessageAction's vtable slot 10.
-func (self *IShowMessageAction) Get_Title(pTitle *foundation.BSTR) foundation.HRESULT {
+func (self *IShowMessageAction) Get_Title(pTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTitle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Title dispatches through IShowMessageAction's vtable slot 11.
-func (self *IShowMessageAction) Put_Title(title foundation.BSTR) foundation.HRESULT {
+func (self *IShowMessageAction) Put_Title(title foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(title)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MessageBody dispatches through IShowMessageAction's vtable slot 12.
-func (self *IShowMessageAction) Get_MessageBody(pMessageBody *foundation.BSTR) foundation.HRESULT {
+func (self *IShowMessageAction) Get_MessageBody(pMessageBody *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMessageBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MessageBody dispatches through IShowMessageAction's vtable slot 13.
-func (self *IShowMessageAction) Put_MessageBody(messageBody foundation.BSTR) foundation.HRESULT {
+func (self *IShowMessageAction) Put_MessageBody(messageBody foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(messageBody)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITask: https://learn.microsoft.com/windows/win32/api/mstask/nn-mstask-itask
@@ -1554,75 +1559,78 @@ type ITask struct {
 var IID_ITask = win32.GUID{Data1: 0x148bd524, Data2: 0xa2ab, Data3: 0x11ce, Data4: [8]byte{0xb1, 0x1f, 0x00, 0xaa, 0x00, 0x53, 0x05, 0x03}}
 
 // SetApplicationName dispatches through ITask's vtable slot 32.
-func (self *ITask) SetApplicationName(pwszApplicationName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszApplicationName)))
-	return foundation.HRESULT(r1)
+func (self *ITask) SetApplicationName(pwszApplicationName string) error {
+	_pwszApplicationName := win32.UTF16Ptr(pwszApplicationName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszApplicationName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetApplicationName dispatches through ITask's vtable slot 33.
-func (self *ITask) GetApplicationName(ppwszApplicationName *foundation.PWSTR) foundation.HRESULT {
+func (self *ITask) GetApplicationName(ppwszApplicationName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszApplicationName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetParameters dispatches through ITask's vtable slot 34.
-func (self *ITask) SetParameters(pwszParameters foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszParameters)))
-	return foundation.HRESULT(r1)
+func (self *ITask) SetParameters(pwszParameters string) error {
+	_pwszParameters := win32.UTF16Ptr(pwszParameters)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszParameters)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParameters dispatches through ITask's vtable slot 35.
-func (self *ITask) GetParameters(ppwszParameters *foundation.PWSTR) foundation.HRESULT {
+func (self *ITask) GetParameters(ppwszParameters *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWorkingDirectory dispatches through ITask's vtable slot 36.
-func (self *ITask) SetWorkingDirectory(pwszWorkingDirectory foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszWorkingDirectory)))
-	return foundation.HRESULT(r1)
+func (self *ITask) SetWorkingDirectory(pwszWorkingDirectory string) error {
+	_pwszWorkingDirectory := win32.UTF16Ptr(pwszWorkingDirectory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszWorkingDirectory)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWorkingDirectory dispatches through ITask's vtable slot 37.
-func (self *ITask) GetWorkingDirectory(ppwszWorkingDirectory *foundation.PWSTR) foundation.HRESULT {
+func (self *ITask) GetWorkingDirectory(ppwszWorkingDirectory *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszWorkingDirectory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPriority dispatches through ITask's vtable slot 38.
-func (self *ITask) SetPriority(dwPriority uint32) foundation.HRESULT {
+func (self *ITask) SetPriority(dwPriority uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(dwPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPriority dispatches through ITask's vtable slot 39.
-func (self *ITask) GetPriority(pdwPriority *uint32) foundation.HRESULT {
+func (self *ITask) GetPriority(pdwPriority *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTaskFlags dispatches through ITask's vtable slot 40.
-func (self *ITask) SetTaskFlags(dwFlags uint32) foundation.HRESULT {
+func (self *ITask) SetTaskFlags(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTaskFlags dispatches through ITask's vtable slot 41.
-func (self *ITask) GetTaskFlags(pdwFlags *uint32) foundation.HRESULT {
+func (self *ITask) GetTaskFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaxRunTime dispatches through ITask's vtable slot 42.
-func (self *ITask) SetMaxRunTime(dwMaxRunTimeMS uint32) foundation.HRESULT {
+func (self *ITask) SetMaxRunTime(dwMaxRunTimeMS uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(dwMaxRunTimeMS))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxRunTime dispatches through ITask's vtable slot 43.
-func (self *ITask) GetMaxRunTime(pdwMaxRunTimeMS *uint32) foundation.HRESULT {
+func (self *ITask) GetMaxRunTime(pdwMaxRunTimeMS *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMaxRunTimeMS)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskDefinition: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itaskdefinition
@@ -1635,87 +1643,87 @@ type ITaskDefinition struct {
 var IID_ITaskDefinition = win32.GUID{Data1: 0xf5bc8fc5, Data2: 0x536d, Data3: 0x4f77, Data4: [8]byte{0xb8, 0x52, 0xfb, 0xc1, 0x35, 0x6f, 0xde, 0xb6}}
 
 // Get_RegistrationInfo dispatches through ITaskDefinition's vtable slot 7.
-func (self *ITaskDefinition) Get_RegistrationInfo(ppRegistrationInfo **IRegistrationInfo) foundation.HRESULT {
+func (self *ITaskDefinition) Get_RegistrationInfo(ppRegistrationInfo **IRegistrationInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRegistrationInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RegistrationInfo dispatches through ITaskDefinition's vtable slot 8.
-func (self *ITaskDefinition) Put_RegistrationInfo(pRegistrationInfo *IRegistrationInfo) foundation.HRESULT {
+func (self *ITaskDefinition) Put_RegistrationInfo(pRegistrationInfo *IRegistrationInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRegistrationInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Triggers dispatches through ITaskDefinition's vtable slot 9.
-func (self *ITaskDefinition) Get_Triggers(ppTriggers **ITriggerCollection) foundation.HRESULT {
+func (self *ITaskDefinition) Get_Triggers(ppTriggers **ITriggerCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTriggers)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Triggers dispatches through ITaskDefinition's vtable slot 10.
-func (self *ITaskDefinition) Put_Triggers(pTriggers *ITriggerCollection) foundation.HRESULT {
+func (self *ITaskDefinition) Put_Triggers(pTriggers *ITriggerCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTriggers)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Settings dispatches through ITaskDefinition's vtable slot 11.
-func (self *ITaskDefinition) Get_Settings(ppSettings **ITaskSettings) foundation.HRESULT {
+func (self *ITaskDefinition) Get_Settings(ppSettings **ITaskSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Settings dispatches through ITaskDefinition's vtable slot 12.
-func (self *ITaskDefinition) Put_Settings(pSettings *ITaskSettings) foundation.HRESULT {
+func (self *ITaskDefinition) Put_Settings(pSettings *ITaskSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Data dispatches through ITaskDefinition's vtable slot 13.
-func (self *ITaskDefinition) Get_Data(pData *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskDefinition) Get_Data(pData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Data dispatches through ITaskDefinition's vtable slot 14.
-func (self *ITaskDefinition) Put_Data(data foundation.BSTR) foundation.HRESULT {
+func (self *ITaskDefinition) Put_Data(data foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Principal dispatches through ITaskDefinition's vtable slot 15.
-func (self *ITaskDefinition) Get_Principal(ppPrincipal **IPrincipal) foundation.HRESULT {
+func (self *ITaskDefinition) Get_Principal(ppPrincipal **IPrincipal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPrincipal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Principal dispatches through ITaskDefinition's vtable slot 16.
-func (self *ITaskDefinition) Put_Principal(pPrincipal *IPrincipal) foundation.HRESULT {
+func (self *ITaskDefinition) Put_Principal(pPrincipal *IPrincipal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrincipal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Actions dispatches through ITaskDefinition's vtable slot 17.
-func (self *ITaskDefinition) Get_Actions(ppActions **IActionCollection) foundation.HRESULT {
+func (self *ITaskDefinition) Get_Actions(ppActions **IActionCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppActions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Actions dispatches through ITaskDefinition's vtable slot 18.
-func (self *ITaskDefinition) Put_Actions(pActions *IActionCollection) foundation.HRESULT {
+func (self *ITaskDefinition) Put_Actions(pActions *IActionCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pActions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_XmlText dispatches through ITaskDefinition's vtable slot 19.
-func (self *ITaskDefinition) Get_XmlText(pXml *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskDefinition) Get_XmlText(pXml *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXml)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_XmlText dispatches through ITaskDefinition's vtable slot 20.
-func (self *ITaskDefinition) Put_XmlText(xml foundation.BSTR) foundation.HRESULT {
+func (self *ITaskDefinition) Put_XmlText(xml foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xml)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskFolder: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itaskfolder
@@ -1728,63 +1736,63 @@ type ITaskFolder struct {
 var IID_ITaskFolder = win32.GUID{Data1: 0x8cfac062, Data2: 0xa080, Data3: 0x4c15, Data4: [8]byte{0x9a, 0x88, 0xaa, 0x7c, 0x2a, 0xf8, 0x0d, 0xfc}}
 
 // Get_Name dispatches through ITaskFolder's vtable slot 7.
-func (self *ITaskFolder) Get_Name(pName *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskFolder) Get_Name(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Path dispatches through ITaskFolder's vtable slot 8.
-func (self *ITaskFolder) Get_Path(pPath *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskFolder) Get_Path(pPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFolder dispatches through ITaskFolder's vtable slot 9.
-func (self *ITaskFolder) GetFolder(path foundation.BSTR, ppFolder **ITaskFolder) foundation.HRESULT {
+func (self *ITaskFolder) GetFolder(path foundation.BSTR, ppFolder **ITaskFolder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(ppFolder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFolders dispatches through ITaskFolder's vtable slot 10.
-func (self *ITaskFolder) GetFolders(flags int32, ppFolders **ITaskFolderCollection) foundation.HRESULT {
+func (self *ITaskFolder) GetFolders(flags int32, ppFolders **ITaskFolderCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(ppFolders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteFolder dispatches through ITaskFolder's vtable slot 12.
-func (self *ITaskFolder) DeleteFolder(subFolderName foundation.BSTR, flags int32) foundation.HRESULT {
+func (self *ITaskFolder) DeleteFolder(subFolderName foundation.BSTR, flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subFolderName)), uintptr(flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTask dispatches through ITaskFolder's vtable slot 13.
-func (self *ITaskFolder) GetTask(path foundation.BSTR, ppTask **IRegisteredTask) foundation.HRESULT {
+func (self *ITaskFolder) GetTask(path foundation.BSTR, ppTask **IRegisteredTask) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(ppTask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTasks dispatches through ITaskFolder's vtable slot 14.
-func (self *ITaskFolder) GetTasks(flags int32, ppTasks **IRegisteredTaskCollection) foundation.HRESULT {
+func (self *ITaskFolder) GetTasks(flags int32, ppTasks **IRegisteredTaskCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(ppTasks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteTask dispatches through ITaskFolder's vtable slot 15.
-func (self *ITaskFolder) DeleteTask(name foundation.BSTR, flags int32) foundation.HRESULT {
+func (self *ITaskFolder) DeleteTask(name foundation.BSTR, flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecurityDescriptor dispatches through ITaskFolder's vtable slot 18.
-func (self *ITaskFolder) GetSecurityDescriptor(securityInformation int32, pSddl *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskFolder) GetSecurityDescriptor(securityInformation int32, pSddl *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(securityInformation), uintptr(unsafe.Pointer(pSddl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSecurityDescriptor dispatches through ITaskFolder's vtable slot 19.
-func (self *ITaskFolder) SetSecurityDescriptor(sddl foundation.BSTR, flags int32) foundation.HRESULT {
+func (self *ITaskFolder) SetSecurityDescriptor(sddl foundation.BSTR, flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sddl)), uintptr(flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskFolderCollection: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itaskfoldercollection
@@ -1797,15 +1805,15 @@ type ITaskFolderCollection struct {
 var IID_ITaskFolderCollection = win32.GUID{Data1: 0x79184a66, Data2: 0x8664, Data3: 0x423f, Data4: [8]byte{0x97, 0xf1, 0x63, 0x73, 0x56, 0xa5, 0xd8, 0x12}}
 
 // Get_Count dispatches through ITaskFolderCollection's vtable slot 7.
-func (self *ITaskFolderCollection) Get_Count(pCount *int32) foundation.HRESULT {
+func (self *ITaskFolderCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ITaskFolderCollection's vtable slot 9.
-func (self *ITaskFolderCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITaskFolderCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskHandler: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itaskhandler
@@ -1818,27 +1826,27 @@ type ITaskHandler struct {
 var IID_ITaskHandler = win32.GUID{Data1: 0x839d7762, Data2: 0x5121, Data3: 0x4009, Data4: [8]byte{0x92, 0x34, 0x4f, 0x0d, 0x19, 0x39, 0x4f, 0x04}}
 
 // Start dispatches through ITaskHandler's vtable slot 3.
-func (self *ITaskHandler) Start(pHandlerServices *systemcom.IUnknown, data foundation.BSTR) foundation.HRESULT {
+func (self *ITaskHandler) Start(pHandlerServices *systemcom.IUnknown, data foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHandlerServices)), uintptr(unsafe.Pointer(data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through ITaskHandler's vtable slot 4.
-func (self *ITaskHandler) Stop(pRetCode *foundation.HRESULT) foundation.HRESULT {
+func (self *ITaskHandler) Stop(pRetCode *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetCode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through ITaskHandler's vtable slot 5.
-func (self *ITaskHandler) Pause() foundation.HRESULT {
+func (self *ITaskHandler) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through ITaskHandler's vtable slot 6.
-func (self *ITaskHandler) Resume() foundation.HRESULT {
+func (self *ITaskHandler) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskHandlerStatus: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itaskhandlerstatus
@@ -1851,15 +1859,15 @@ type ITaskHandlerStatus struct {
 var IID_ITaskHandlerStatus = win32.GUID{Data1: 0xeaec7a8f, Data2: 0x27a0, Data3: 0x4ddc, Data4: [8]byte{0x86, 0x75, 0x14, 0x72, 0x6a, 0x01, 0xa3, 0x8a}}
 
 // UpdateStatus dispatches through ITaskHandlerStatus's vtable slot 3.
-func (self *ITaskHandlerStatus) UpdateStatus(percentComplete int16, statusMessage foundation.BSTR) foundation.HRESULT {
+func (self *ITaskHandlerStatus) UpdateStatus(percentComplete int16, statusMessage foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(percentComplete), uintptr(unsafe.Pointer(statusMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TaskCompleted dispatches through ITaskHandlerStatus's vtable slot 4.
-func (self *ITaskHandlerStatus) TaskCompleted(taskErrCode foundation.HRESULT) foundation.HRESULT {
+func (self *ITaskHandlerStatus) TaskCompleted(taskErrCode foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(taskErrCode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskNamedValueCollection: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itasknamedvaluecollection
@@ -1872,39 +1880,39 @@ type ITaskNamedValueCollection struct {
 var IID_ITaskNamedValueCollection = win32.GUID{Data1: 0xb4ef826b, Data2: 0x63c3, Data3: 0x46e4, Data4: [8]byte{0xa5, 0x04, 0xef, 0x69, 0xe4, 0xf7, 0xea, 0x4d}}
 
 // Get_Count dispatches through ITaskNamedValueCollection's vtable slot 7.
-func (self *ITaskNamedValueCollection) Get_Count(pCount *int32) foundation.HRESULT {
+func (self *ITaskNamedValueCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through ITaskNamedValueCollection's vtable slot 8.
-func (self *ITaskNamedValueCollection) Get_Item(index int32, ppPair **ITaskNamedValuePair) foundation.HRESULT {
+func (self *ITaskNamedValueCollection) Get_Item(index int32, ppPair **ITaskNamedValuePair) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(ppPair)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ITaskNamedValueCollection's vtable slot 9.
-func (self *ITaskNamedValueCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITaskNamedValueCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through ITaskNamedValueCollection's vtable slot 10.
-func (self *ITaskNamedValueCollection) Create(name foundation.BSTR, value foundation.BSTR, ppPair **ITaskNamedValuePair) foundation.HRESULT {
+func (self *ITaskNamedValueCollection) Create(name foundation.BSTR, value foundation.BSTR, ppPair **ITaskNamedValuePair) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(ppPair)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through ITaskNamedValueCollection's vtable slot 11.
-func (self *ITaskNamedValueCollection) Remove(index int32) foundation.HRESULT {
+func (self *ITaskNamedValueCollection) Remove(index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(index))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through ITaskNamedValueCollection's vtable slot 12.
-func (self *ITaskNamedValueCollection) Clear() foundation.HRESULT {
+func (self *ITaskNamedValueCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskNamedValuePair: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itasknamedvaluepair
@@ -1917,27 +1925,27 @@ type ITaskNamedValuePair struct {
 var IID_ITaskNamedValuePair = win32.GUID{Data1: 0x39038068, Data2: 0x2b46, Data3: 0x4afd, Data4: [8]byte{0x86, 0x62, 0x7b, 0xb6, 0xf8, 0x68, 0xd2, 0x21}}
 
 // Get_Name dispatches through ITaskNamedValuePair's vtable slot 7.
-func (self *ITaskNamedValuePair) Get_Name(pName *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskNamedValuePair) Get_Name(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through ITaskNamedValuePair's vtable slot 8.
-func (self *ITaskNamedValuePair) Put_Name(name foundation.BSTR) foundation.HRESULT {
+func (self *ITaskNamedValuePair) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Value dispatches through ITaskNamedValuePair's vtable slot 9.
-func (self *ITaskNamedValuePair) Get_Value(pValue *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskNamedValuePair) Get_Value(pValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Value dispatches through ITaskNamedValuePair's vtable slot 10.
-func (self *ITaskNamedValuePair) Put_Value(value foundation.BSTR) foundation.HRESULT {
+func (self *ITaskNamedValuePair) Put_Value(value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskScheduler: https://learn.microsoft.com/windows/win32/api/mstask/nn-mstask-itaskscheduler
@@ -1950,51 +1958,57 @@ type ITaskScheduler struct {
 var IID_ITaskScheduler = win32.GUID{Data1: 0x148bd527, Data2: 0xa2ab, Data3: 0x11ce, Data4: [8]byte{0xb1, 0x1f, 0x00, 0xaa, 0x00, 0x53, 0x05, 0x03}}
 
 // SetTargetComputer dispatches through ITaskScheduler's vtable slot 3.
-func (self *ITaskScheduler) SetTargetComputer(pwszComputer foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszComputer)))
-	return foundation.HRESULT(r1)
+func (self *ITaskScheduler) SetTargetComputer(pwszComputer string) error {
+	_pwszComputer := win32.UTF16Ptr(pwszComputer)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszComputer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTargetComputer dispatches through ITaskScheduler's vtable slot 4.
-func (self *ITaskScheduler) GetTargetComputer(ppwszComputer *foundation.PWSTR) foundation.HRESULT {
+func (self *ITaskScheduler) GetTargetComputer(ppwszComputer *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszComputer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Enum dispatches through ITaskScheduler's vtable slot 5.
-func (self *ITaskScheduler) Enum(ppEnumWorkItems **IEnumWorkItems) foundation.HRESULT {
+func (self *ITaskScheduler) Enum(ppEnumWorkItems **IEnumWorkItems) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumWorkItems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Activate dispatches through ITaskScheduler's vtable slot 6.
-func (self *ITaskScheduler) Activate(pwszName foundation.PWSTR, riid *win32.GUID, ppUnk **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+func (self *ITaskScheduler) Activate(pwszName string, riid *win32.GUID, ppUnk **systemcom.IUnknown) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through ITaskScheduler's vtable slot 7.
-func (self *ITaskScheduler) Delete(pwszName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)))
-	return foundation.HRESULT(r1)
+func (self *ITaskScheduler) Delete(pwszName string) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NewWorkItem dispatches through ITaskScheduler's vtable slot 8.
-func (self *ITaskScheduler) NewWorkItem(pwszTaskName foundation.PWSTR, rclsid *win32.GUID, riid *win32.GUID, ppUnk **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszTaskName)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+func (self *ITaskScheduler) NewWorkItem(pwszTaskName string, rclsid *win32.GUID, riid *win32.GUID, ppUnk **systemcom.IUnknown) error {
+	_pwszTaskName := win32.UTF16Ptr(pwszTaskName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszTaskName)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddWorkItem dispatches through ITaskScheduler's vtable slot 9.
-func (self *ITaskScheduler) AddWorkItem(pwszTaskName foundation.PWSTR, pWorkItem *IScheduledWorkItem) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszTaskName)), uintptr(unsafe.Pointer(pWorkItem)))
-	return foundation.HRESULT(r1)
+func (self *ITaskScheduler) AddWorkItem(pwszTaskName string, pWorkItem *IScheduledWorkItem) error {
+	_pwszTaskName := win32.UTF16Ptr(pwszTaskName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszTaskName)), uintptr(unsafe.Pointer(pWorkItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsOfType dispatches through ITaskScheduler's vtable slot 10.
-func (self *ITaskScheduler) IsOfType(pwszName foundation.PWSTR, riid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszName)), uintptr(unsafe.Pointer(riid)))
-	return foundation.HRESULT(r1)
+func (self *ITaskScheduler) IsOfType(pwszName string, riid *win32.GUID) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(riid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskService: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itaskservice
@@ -2007,51 +2021,51 @@ type ITaskService struct {
 var IID_ITaskService = win32.GUID{Data1: 0x2faba4c7, Data2: 0x4da9, Data3: 0x4013, Data4: [8]byte{0x96, 0x97, 0x20, 0xcc, 0x3f, 0xd4, 0x0f, 0x85}}
 
 // GetFolder dispatches through ITaskService's vtable slot 7.
-func (self *ITaskService) GetFolder(path foundation.BSTR, ppFolder **ITaskFolder) foundation.HRESULT {
+func (self *ITaskService) GetFolder(path foundation.BSTR, ppFolder **ITaskFolder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(ppFolder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRunningTasks dispatches through ITaskService's vtable slot 8.
-func (self *ITaskService) GetRunningTasks(flags int32, ppRunningTasks **IRunningTaskCollection) foundation.HRESULT {
+func (self *ITaskService) GetRunningTasks(flags int32, ppRunningTasks **IRunningTaskCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(ppRunningTasks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NewTask dispatches through ITaskService's vtable slot 9.
-func (self *ITaskService) NewTask(flags uint32, ppDefinition **ITaskDefinition) foundation.HRESULT {
+func (self *ITaskService) NewTask(flags uint32, ppDefinition **ITaskDefinition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(ppDefinition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Connected dispatches through ITaskService's vtable slot 11.
-func (self *ITaskService) Get_Connected(pConnected *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskService) Get_Connected(pConnected *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConnected)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TargetServer dispatches through ITaskService's vtable slot 12.
-func (self *ITaskService) Get_TargetServer(pServer *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskService) Get_TargetServer(pServer *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pServer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ConnectedUser dispatches through ITaskService's vtable slot 13.
-func (self *ITaskService) Get_ConnectedUser(pUser *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskService) Get_ConnectedUser(pUser *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ConnectedDomain dispatches through ITaskService's vtable slot 14.
-func (self *ITaskService) Get_ConnectedDomain(pDomain *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskService) Get_ConnectedDomain(pDomain *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDomain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HighestVersion dispatches through ITaskService's vtable slot 15.
-func (self *ITaskService) Get_HighestVersion(pVersion *uint32) foundation.HRESULT {
+func (self *ITaskService) Get_HighestVersion(pVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskSettings: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itasksettings
@@ -2064,243 +2078,243 @@ type ITaskSettings struct {
 var IID_ITaskSettings = win32.GUID{Data1: 0x8fd4711d, Data2: 0x2d02, Data3: 0x4c8c, Data4: [8]byte{0x87, 0xe3, 0xef, 0xf6, 0x99, 0xde, 0x12, 0x7e}}
 
 // Get_AllowDemandStart dispatches through ITaskSettings's vtable slot 7.
-func (self *ITaskSettings) Get_AllowDemandStart(pAllowDemandStart *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_AllowDemandStart(pAllowDemandStart *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllowDemandStart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowDemandStart dispatches through ITaskSettings's vtable slot 8.
-func (self *ITaskSettings) Put_AllowDemandStart(allowDemandStart foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_AllowDemandStart(allowDemandStart foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(allowDemandStart))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RestartInterval dispatches through ITaskSettings's vtable slot 9.
-func (self *ITaskSettings) Get_RestartInterval(pRestartInterval *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskSettings) Get_RestartInterval(pRestartInterval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRestartInterval)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RestartInterval dispatches through ITaskSettings's vtable slot 10.
-func (self *ITaskSettings) Put_RestartInterval(restartInterval foundation.BSTR) foundation.HRESULT {
+func (self *ITaskSettings) Put_RestartInterval(restartInterval foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(restartInterval)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RestartCount dispatches through ITaskSettings's vtable slot 11.
-func (self *ITaskSettings) Get_RestartCount(pRestartCount *int32) foundation.HRESULT {
+func (self *ITaskSettings) Get_RestartCount(pRestartCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRestartCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RestartCount dispatches through ITaskSettings's vtable slot 12.
-func (self *ITaskSettings) Put_RestartCount(restartCount int32) foundation.HRESULT {
+func (self *ITaskSettings) Put_RestartCount(restartCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(restartCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MultipleInstances dispatches through ITaskSettings's vtable slot 13.
-func (self *ITaskSettings) Get_MultipleInstances(pPolicy *TASK_INSTANCES_POLICY) foundation.HRESULT {
+func (self *ITaskSettings) Get_MultipleInstances(pPolicy *TASK_INSTANCES_POLICY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPolicy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MultipleInstances dispatches through ITaskSettings's vtable slot 14.
-func (self *ITaskSettings) Put_MultipleInstances(policy TASK_INSTANCES_POLICY) foundation.HRESULT {
+func (self *ITaskSettings) Put_MultipleInstances(policy TASK_INSTANCES_POLICY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(policy))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StopIfGoingOnBatteries dispatches through ITaskSettings's vtable slot 15.
-func (self *ITaskSettings) Get_StopIfGoingOnBatteries(pStopIfOnBatteries *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_StopIfGoingOnBatteries(pStopIfOnBatteries *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStopIfOnBatteries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_StopIfGoingOnBatteries dispatches through ITaskSettings's vtable slot 16.
-func (self *ITaskSettings) Put_StopIfGoingOnBatteries(stopIfOnBatteries foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_StopIfGoingOnBatteries(stopIfOnBatteries foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(stopIfOnBatteries))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DisallowStartIfOnBatteries dispatches through ITaskSettings's vtable slot 17.
-func (self *ITaskSettings) Get_DisallowStartIfOnBatteries(pDisallowStart *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_DisallowStartIfOnBatteries(pDisallowStart *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDisallowStart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DisallowStartIfOnBatteries dispatches through ITaskSettings's vtable slot 18.
-func (self *ITaskSettings) Put_DisallowStartIfOnBatteries(disallowStart foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_DisallowStartIfOnBatteries(disallowStart foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(disallowStart))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowHardTerminate dispatches through ITaskSettings's vtable slot 19.
-func (self *ITaskSettings) Get_AllowHardTerminate(pAllowHardTerminate *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_AllowHardTerminate(pAllowHardTerminate *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllowHardTerminate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowHardTerminate dispatches through ITaskSettings's vtable slot 20.
-func (self *ITaskSettings) Put_AllowHardTerminate(allowHardTerminate foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_AllowHardTerminate(allowHardTerminate foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(allowHardTerminate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StartWhenAvailable dispatches through ITaskSettings's vtable slot 21.
-func (self *ITaskSettings) Get_StartWhenAvailable(pStartWhenAvailable *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_StartWhenAvailable(pStartWhenAvailable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartWhenAvailable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_StartWhenAvailable dispatches through ITaskSettings's vtable slot 22.
-func (self *ITaskSettings) Put_StartWhenAvailable(startWhenAvailable foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_StartWhenAvailable(startWhenAvailable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(startWhenAvailable))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_XmlText dispatches through ITaskSettings's vtable slot 23.
-func (self *ITaskSettings) Get_XmlText(pText *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskSettings) Get_XmlText(pText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_XmlText dispatches through ITaskSettings's vtable slot 24.
-func (self *ITaskSettings) Put_XmlText(text foundation.BSTR) foundation.HRESULT {
+func (self *ITaskSettings) Put_XmlText(text foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RunOnlyIfNetworkAvailable dispatches through ITaskSettings's vtable slot 25.
-func (self *ITaskSettings) Get_RunOnlyIfNetworkAvailable(pRunOnlyIfNetworkAvailable *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_RunOnlyIfNetworkAvailable(pRunOnlyIfNetworkAvailable *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRunOnlyIfNetworkAvailable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RunOnlyIfNetworkAvailable dispatches through ITaskSettings's vtable slot 26.
-func (self *ITaskSettings) Put_RunOnlyIfNetworkAvailable(runOnlyIfNetworkAvailable foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_RunOnlyIfNetworkAvailable(runOnlyIfNetworkAvailable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(runOnlyIfNetworkAvailable))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ExecutionTimeLimit dispatches through ITaskSettings's vtable slot 27.
-func (self *ITaskSettings) Get_ExecutionTimeLimit(pExecutionTimeLimit *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskSettings) Get_ExecutionTimeLimit(pExecutionTimeLimit *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExecutionTimeLimit)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ExecutionTimeLimit dispatches through ITaskSettings's vtable slot 28.
-func (self *ITaskSettings) Put_ExecutionTimeLimit(executionTimeLimit foundation.BSTR) foundation.HRESULT {
+func (self *ITaskSettings) Put_ExecutionTimeLimit(executionTimeLimit foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(executionTimeLimit)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through ITaskSettings's vtable slot 29.
-func (self *ITaskSettings) Get_Enabled(pEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_Enabled(pEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Enabled dispatches through ITaskSettings's vtable slot 30.
-func (self *ITaskSettings) Put_Enabled(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DeleteExpiredTaskAfter dispatches through ITaskSettings's vtable slot 31.
-func (self *ITaskSettings) Get_DeleteExpiredTaskAfter(pExpirationDelay *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskSettings) Get_DeleteExpiredTaskAfter(pExpirationDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExpirationDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DeleteExpiredTaskAfter dispatches through ITaskSettings's vtable slot 32.
-func (self *ITaskSettings) Put_DeleteExpiredTaskAfter(expirationDelay foundation.BSTR) foundation.HRESULT {
+func (self *ITaskSettings) Put_DeleteExpiredTaskAfter(expirationDelay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(expirationDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Priority dispatches through ITaskSettings's vtable slot 33.
-func (self *ITaskSettings) Get_Priority(pPriority *int32) foundation.HRESULT {
+func (self *ITaskSettings) Get_Priority(pPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Priority dispatches through ITaskSettings's vtable slot 34.
-func (self *ITaskSettings) Put_Priority(priority int32) foundation.HRESULT {
+func (self *ITaskSettings) Put_Priority(priority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(priority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Compatibility dispatches through ITaskSettings's vtable slot 35.
-func (self *ITaskSettings) Get_Compatibility(pCompatLevel *TASK_COMPATIBILITY) foundation.HRESULT {
+func (self *ITaskSettings) Get_Compatibility(pCompatLevel *TASK_COMPATIBILITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCompatLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Compatibility dispatches through ITaskSettings's vtable slot 36.
-func (self *ITaskSettings) Put_Compatibility(compatLevel TASK_COMPATIBILITY) foundation.HRESULT {
+func (self *ITaskSettings) Put_Compatibility(compatLevel TASK_COMPATIBILITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(compatLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Hidden dispatches through ITaskSettings's vtable slot 37.
-func (self *ITaskSettings) Get_Hidden(pHidden *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_Hidden(pHidden *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHidden)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Hidden dispatches through ITaskSettings's vtable slot 38.
-func (self *ITaskSettings) Put_Hidden(hidden foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_Hidden(hidden foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(hidden))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IdleSettings dispatches through ITaskSettings's vtable slot 39.
-func (self *ITaskSettings) Get_IdleSettings(ppIdleSettings **IIdleSettings) foundation.HRESULT {
+func (self *ITaskSettings) Get_IdleSettings(ppIdleSettings **IIdleSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIdleSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_IdleSettings dispatches through ITaskSettings's vtable slot 40.
-func (self *ITaskSettings) Put_IdleSettings(pIdleSettings *IIdleSettings) foundation.HRESULT {
+func (self *ITaskSettings) Put_IdleSettings(pIdleSettings *IIdleSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdleSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RunOnlyIfIdle dispatches through ITaskSettings's vtable slot 41.
-func (self *ITaskSettings) Get_RunOnlyIfIdle(pRunOnlyIfIdle *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_RunOnlyIfIdle(pRunOnlyIfIdle *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRunOnlyIfIdle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RunOnlyIfIdle dispatches through ITaskSettings's vtable slot 42.
-func (self *ITaskSettings) Put_RunOnlyIfIdle(runOnlyIfIdle foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_RunOnlyIfIdle(runOnlyIfIdle foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(runOnlyIfIdle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_WakeToRun dispatches through ITaskSettings's vtable slot 43.
-func (self *ITaskSettings) Get_WakeToRun(pWake *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Get_WakeToRun(pWake *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWake)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_WakeToRun dispatches through ITaskSettings's vtable slot 44.
-func (self *ITaskSettings) Put_WakeToRun(wake foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings) Put_WakeToRun(wake foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(wake))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NetworkSettings dispatches through ITaskSettings's vtable slot 45.
-func (self *ITaskSettings) Get_NetworkSettings(ppNetworkSettings **INetworkSettings) foundation.HRESULT {
+func (self *ITaskSettings) Get_NetworkSettings(ppNetworkSettings **INetworkSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNetworkSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_NetworkSettings dispatches through ITaskSettings's vtable slot 46.
-func (self *ITaskSettings) Put_NetworkSettings(pNetworkSettings *INetworkSettings) foundation.HRESULT {
+func (self *ITaskSettings) Put_NetworkSettings(pNetworkSettings *INetworkSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNetworkSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskSettings2: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itasksettings2
@@ -2313,27 +2327,27 @@ type ITaskSettings2 struct {
 var IID_ITaskSettings2 = win32.GUID{Data1: 0x2c05c3f0, Data2: 0x6eed, Data3: 0x4c05, Data4: [8]byte{0xa1, 0x5f, 0xed, 0x7d, 0x7a, 0x98, 0xa3, 0x69}}
 
 // Get_DisallowStartOnRemoteAppSession dispatches through ITaskSettings2's vtable slot 7.
-func (self *ITaskSettings2) Get_DisallowStartOnRemoteAppSession(pDisallowStart *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings2) Get_DisallowStartOnRemoteAppSession(pDisallowStart *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDisallowStart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DisallowStartOnRemoteAppSession dispatches through ITaskSettings2's vtable slot 8.
-func (self *ITaskSettings2) Put_DisallowStartOnRemoteAppSession(disallowStart foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings2) Put_DisallowStartOnRemoteAppSession(disallowStart foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(disallowStart))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UseUnifiedSchedulingEngine dispatches through ITaskSettings2's vtable slot 9.
-func (self *ITaskSettings2) Get_UseUnifiedSchedulingEngine(pUseUnifiedEngine *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings2) Get_UseUnifiedSchedulingEngine(pUseUnifiedEngine *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUseUnifiedEngine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_UseUnifiedSchedulingEngine dispatches through ITaskSettings2's vtable slot 10.
-func (self *ITaskSettings2) Put_UseUnifiedSchedulingEngine(useUnifiedEngine foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings2) Put_UseUnifiedSchedulingEngine(useUnifiedEngine foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(useUnifiedEngine))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskSettings3: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itasksettings3
@@ -2346,57 +2360,57 @@ type ITaskSettings3 struct {
 var IID_ITaskSettings3 = win32.GUID{Data1: 0x0ad9d0d7, Data2: 0x0c7f, Data3: 0x4ebb, Data4: [8]byte{0x9a, 0x5f, 0xd1, 0xc6, 0x48, 0xdc, 0xa5, 0x28}}
 
 // Get_DisallowStartOnRemoteAppSession dispatches through ITaskSettings3's vtable slot 47.
-func (self *ITaskSettings3) Get_DisallowStartOnRemoteAppSession(pDisallowStart *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings3) Get_DisallowStartOnRemoteAppSession(pDisallowStart *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDisallowStart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DisallowStartOnRemoteAppSession dispatches through ITaskSettings3's vtable slot 48.
-func (self *ITaskSettings3) Put_DisallowStartOnRemoteAppSession(disallowStart foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings3) Put_DisallowStartOnRemoteAppSession(disallowStart foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(disallowStart))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UseUnifiedSchedulingEngine dispatches through ITaskSettings3's vtable slot 49.
-func (self *ITaskSettings3) Get_UseUnifiedSchedulingEngine(pUseUnifiedEngine *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings3) Get_UseUnifiedSchedulingEngine(pUseUnifiedEngine *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUseUnifiedEngine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_UseUnifiedSchedulingEngine dispatches through ITaskSettings3's vtable slot 50.
-func (self *ITaskSettings3) Put_UseUnifiedSchedulingEngine(useUnifiedEngine foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings3) Put_UseUnifiedSchedulingEngine(useUnifiedEngine foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(useUnifiedEngine))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaintenanceSettings dispatches through ITaskSettings3's vtable slot 51.
-func (self *ITaskSettings3) Get_MaintenanceSettings(ppMaintenanceSettings **IMaintenanceSettings) foundation.HRESULT {
+func (self *ITaskSettings3) Get_MaintenanceSettings(ppMaintenanceSettings **IMaintenanceSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMaintenanceSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MaintenanceSettings dispatches through ITaskSettings3's vtable slot 52.
-func (self *ITaskSettings3) Put_MaintenanceSettings(pMaintenanceSettings *IMaintenanceSettings) foundation.HRESULT {
+func (self *ITaskSettings3) Put_MaintenanceSettings(pMaintenanceSettings *IMaintenanceSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaintenanceSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMaintenanceSettings dispatches through ITaskSettings3's vtable slot 53.
-func (self *ITaskSettings3) CreateMaintenanceSettings(ppMaintenanceSettings **IMaintenanceSettings) foundation.HRESULT {
+func (self *ITaskSettings3) CreateMaintenanceSettings(ppMaintenanceSettings **IMaintenanceSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMaintenanceSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Volatile dispatches through ITaskSettings3's vtable slot 54.
-func (self *ITaskSettings3) Get_Volatile(pVolatile *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings3) Get_Volatile(pVolatile *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVolatile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Volatile dispatches through ITaskSettings3's vtable slot 55.
-func (self *ITaskSettings3) Put_Volatile(Volatile foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITaskSettings3) Put_Volatile(Volatile foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(Volatile))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskTrigger: https://learn.microsoft.com/windows/win32/api/mstask/nn-mstask-itasktrigger
@@ -2409,21 +2423,21 @@ type ITaskTrigger struct {
 var IID_ITaskTrigger = win32.GUID{Data1: 0x148bd52b, Data2: 0xa2ab, Data3: 0x11ce, Data4: [8]byte{0xb1, 0x1f, 0x00, 0xaa, 0x00, 0x53, 0x05, 0x03}}
 
 // SetTrigger dispatches through ITaskTrigger's vtable slot 3.
-func (self *ITaskTrigger) SetTrigger(pTrigger *TASK_TRIGGER) foundation.HRESULT {
+func (self *ITaskTrigger) SetTrigger(pTrigger *TASK_TRIGGER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrigger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTrigger dispatches through ITaskTrigger's vtable slot 4.
-func (self *ITaskTrigger) GetTrigger(pTrigger *TASK_TRIGGER) foundation.HRESULT {
+func (self *ITaskTrigger) GetTrigger(pTrigger *TASK_TRIGGER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrigger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTriggerString dispatches through ITaskTrigger's vtable slot 5.
-func (self *ITaskTrigger) GetTriggerString(ppwszTrigger *foundation.PWSTR) foundation.HRESULT {
+func (self *ITaskTrigger) GetTriggerString(ppwszTrigger *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszTrigger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITaskVariables: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itaskvariables
@@ -2436,21 +2450,21 @@ type ITaskVariables struct {
 var IID_ITaskVariables = win32.GUID{Data1: 0x3e4c9351, Data2: 0xd966, Data3: 0x4b8b, Data4: [8]byte{0xbb, 0x87, 0xce, 0xba, 0x68, 0xbb, 0x01, 0x07}}
 
 // GetInput dispatches through ITaskVariables's vtable slot 3.
-func (self *ITaskVariables) GetInput(pInput *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskVariables) GetInput(pInput *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutput dispatches through ITaskVariables's vtable slot 4.
-func (self *ITaskVariables) SetOutput(input foundation.BSTR) foundation.HRESULT {
+func (self *ITaskVariables) SetOutput(input foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(input)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContext dispatches through ITaskVariables's vtable slot 5.
-func (self *ITaskVariables) GetContext(pContext *foundation.BSTR) foundation.HRESULT {
+func (self *ITaskVariables) GetContext(pContext *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITimeTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itimetrigger
@@ -2463,15 +2477,15 @@ type ITimeTrigger struct {
 var IID_ITimeTrigger = win32.GUID{Data1: 0xb45747e0, Data2: 0xeba7, Data3: 0x4276, Data4: [8]byte{0x9f, 0x29, 0x85, 0xc5, 0xbb, 0x30, 0x00, 0x06}}
 
 // Get_RandomDelay dispatches through ITimeTrigger's vtable slot 20.
-func (self *ITimeTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) foundation.HRESULT {
+func (self *ITimeTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRandomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RandomDelay dispatches through ITimeTrigger's vtable slot 21.
-func (self *ITimeTrigger) Put_RandomDelay(randomDelay foundation.BSTR) foundation.HRESULT {
+func (self *ITimeTrigger) Put_RandomDelay(randomDelay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(randomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itrigger
@@ -2484,81 +2498,81 @@ type ITrigger struct {
 var IID_ITrigger = win32.GUID{Data1: 0x09941815, Data2: 0xea89, Data3: 0x4b5b, Data4: [8]byte{0x89, 0xe0, 0x2a, 0x77, 0x38, 0x01, 0xfa, 0xc3}}
 
 // Get_Type dispatches through ITrigger's vtable slot 7.
-func (self *ITrigger) Get_Type(pType *TASK_TRIGGER_TYPE2) foundation.HRESULT {
+func (self *ITrigger) Get_Type(pType *TASK_TRIGGER_TYPE2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through ITrigger's vtable slot 8.
-func (self *ITrigger) Get_Id(pId *foundation.BSTR) foundation.HRESULT {
+func (self *ITrigger) Get_Id(pId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Id dispatches through ITrigger's vtable slot 9.
-func (self *ITrigger) Put_Id(id foundation.BSTR) foundation.HRESULT {
+func (self *ITrigger) Put_Id(id foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Repetition dispatches through ITrigger's vtable slot 10.
-func (self *ITrigger) Get_Repetition(ppRepeat **IRepetitionPattern) foundation.HRESULT {
+func (self *ITrigger) Get_Repetition(ppRepeat **IRepetitionPattern) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRepeat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Repetition dispatches through ITrigger's vtable slot 11.
-func (self *ITrigger) Put_Repetition(pRepeat *IRepetitionPattern) foundation.HRESULT {
+func (self *ITrigger) Put_Repetition(pRepeat *IRepetitionPattern) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRepeat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ExecutionTimeLimit dispatches through ITrigger's vtable slot 12.
-func (self *ITrigger) Get_ExecutionTimeLimit(pTimeLimit *foundation.BSTR) foundation.HRESULT {
+func (self *ITrigger) Get_ExecutionTimeLimit(pTimeLimit *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeLimit)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ExecutionTimeLimit dispatches through ITrigger's vtable slot 13.
-func (self *ITrigger) Put_ExecutionTimeLimit(timelimit foundation.BSTR) foundation.HRESULT {
+func (self *ITrigger) Put_ExecutionTimeLimit(timelimit foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(timelimit)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StartBoundary dispatches through ITrigger's vtable slot 14.
-func (self *ITrigger) Get_StartBoundary(pStart *foundation.BSTR) foundation.HRESULT {
+func (self *ITrigger) Get_StartBoundary(pStart *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_StartBoundary dispatches through ITrigger's vtable slot 15.
-func (self *ITrigger) Put_StartBoundary(start foundation.BSTR) foundation.HRESULT {
+func (self *ITrigger) Put_StartBoundary(start foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(start)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EndBoundary dispatches through ITrigger's vtable slot 16.
-func (self *ITrigger) Get_EndBoundary(pEnd *foundation.BSTR) foundation.HRESULT {
+func (self *ITrigger) Get_EndBoundary(pEnd *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EndBoundary dispatches through ITrigger's vtable slot 17.
-func (self *ITrigger) Put_EndBoundary(end foundation.BSTR) foundation.HRESULT {
+func (self *ITrigger) Put_EndBoundary(end foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(end)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through ITrigger's vtable slot 18.
-func (self *ITrigger) Get_Enabled(pEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITrigger) Get_Enabled(pEnabled *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Enabled dispatches through ITrigger's vtable slot 19.
-func (self *ITrigger) Put_Enabled(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITrigger) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITriggerCollection: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-itriggercollection
@@ -2571,33 +2585,33 @@ type ITriggerCollection struct {
 var IID_ITriggerCollection = win32.GUID{Data1: 0x85df5081, Data2: 0x1b24, Data3: 0x4f32, Data4: [8]byte{0x87, 0x8a, 0xd9, 0xd1, 0x4d, 0xf4, 0xcb, 0x77}}
 
 // Get_Count dispatches through ITriggerCollection's vtable slot 7.
-func (self *ITriggerCollection) Get_Count(pCount *int32) foundation.HRESULT {
+func (self *ITriggerCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through ITriggerCollection's vtable slot 8.
-func (self *ITriggerCollection) Get_Item(index int32, ppTrigger **ITrigger) foundation.HRESULT {
+func (self *ITriggerCollection) Get_Item(index int32, ppTrigger **ITrigger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(ppTrigger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ITriggerCollection's vtable slot 9.
-func (self *ITriggerCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITriggerCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through ITriggerCollection's vtable slot 10.
-func (self *ITriggerCollection) Create(type_ TASK_TRIGGER_TYPE2, ppTrigger **ITrigger) foundation.HRESULT {
+func (self *ITriggerCollection) Create(type_ TASK_TRIGGER_TYPE2, ppTrigger **ITrigger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(ppTrigger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through ITriggerCollection's vtable slot 12.
-func (self *ITriggerCollection) Clear() foundation.HRESULT {
+func (self *ITriggerCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWeeklyTrigger: https://learn.microsoft.com/windows/win32/api/taskschd/nn-taskschd-iweeklytrigger
@@ -2610,37 +2624,37 @@ type IWeeklyTrigger struct {
 var IID_IWeeklyTrigger = win32.GUID{Data1: 0x5038fc98, Data2: 0x82ff, Data3: 0x436d, Data4: [8]byte{0x87, 0x28, 0xa5, 0x12, 0xa5, 0x7c, 0x9d, 0xc1}}
 
 // Get_DaysOfWeek dispatches through IWeeklyTrigger's vtable slot 20.
-func (self *IWeeklyTrigger) Get_DaysOfWeek(pDays *int16) foundation.HRESULT {
+func (self *IWeeklyTrigger) Get_DaysOfWeek(pDays *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDays)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DaysOfWeek dispatches through IWeeklyTrigger's vtable slot 21.
-func (self *IWeeklyTrigger) Put_DaysOfWeek(days int16) foundation.HRESULT {
+func (self *IWeeklyTrigger) Put_DaysOfWeek(days int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(days))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_WeeksInterval dispatches through IWeeklyTrigger's vtable slot 22.
-func (self *IWeeklyTrigger) Get_WeeksInterval(pWeeks *int16) foundation.HRESULT {
+func (self *IWeeklyTrigger) Get_WeeksInterval(pWeeks *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWeeks)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_WeeksInterval dispatches through IWeeklyTrigger's vtable slot 23.
-func (self *IWeeklyTrigger) Put_WeeksInterval(weeks int16) foundation.HRESULT {
+func (self *IWeeklyTrigger) Put_WeeksInterval(weeks int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(weeks))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RandomDelay dispatches through IWeeklyTrigger's vtable slot 24.
-func (self *IWeeklyTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) foundation.HRESULT {
+func (self *IWeeklyTrigger) Get_RandomDelay(pRandomDelay *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRandomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RandomDelay dispatches through IWeeklyTrigger's vtable slot 25.
-func (self *IWeeklyTrigger) Put_RandomDelay(randomDelay foundation.BSTR) foundation.HRESULT {
+func (self *IWeeklyTrigger) Put_RandomDelay(randomDelay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(randomDelay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

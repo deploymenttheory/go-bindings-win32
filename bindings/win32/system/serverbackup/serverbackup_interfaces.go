@@ -23,15 +23,15 @@ type IWsbApplicationAsync struct {
 var IID_IWsbApplicationAsync = win32.GUID{Data1: 0x0843f6f7, Data2: 0x895c, Data3: 0x44a6, Data4: [8]byte{0xb0, 0xc2, 0x05, 0xa5, 0x02, 0x2a, 0xa3, 0xa1}}
 
 // QueryStatus dispatches through IWsbApplicationAsync's vtable slot 3.
-func (self *IWsbApplicationAsync) QueryStatus(phrResult *foundation.HRESULT) foundation.HRESULT {
+func (self *IWsbApplicationAsync) QueryStatus(phrResult *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IWsbApplicationAsync's vtable slot 4.
-func (self *IWsbApplicationAsync) Abort() foundation.HRESULT {
+func (self *IWsbApplicationAsync) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWsbApplicationBackupSupport: https://learn.microsoft.com/windows/win32/api/wsbapp/nn-wsbapp-iwsbapplicationbackupsupport
@@ -44,9 +44,12 @@ type IWsbApplicationBackupSupport struct {
 var IID_IWsbApplicationBackupSupport = win32.GUID{Data1: 0x1eff3510, Data2: 0x4a27, Data3: 0x46ad, Data4: [8]byte{0xb9, 0xe0, 0x08, 0x33, 0x2f, 0x0f, 0x4f, 0x6d}}
 
 // CheckConsistency dispatches through IWsbApplicationBackupSupport's vtable slot 3.
-func (self *IWsbApplicationBackupSupport) CheckConsistency(wszWriterMetadata foundation.PWSTR, wszComponentName foundation.PWSTR, wszComponentLogicalPath foundation.PWSTR, cVolumes uint32, rgwszSourceVolumePath *foundation.PWSTR, rgwszSnapshotVolumePath *foundation.PWSTR, ppAsync **IWsbApplicationAsync) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszWriterMetadata)), uintptr(unsafe.Pointer(wszComponentName)), uintptr(unsafe.Pointer(wszComponentLogicalPath)), uintptr(cVolumes), uintptr(unsafe.Pointer(rgwszSourceVolumePath)), uintptr(unsafe.Pointer(rgwszSnapshotVolumePath)), uintptr(unsafe.Pointer(ppAsync)))
-	return foundation.HRESULT(r1)
+func (self *IWsbApplicationBackupSupport) CheckConsistency(wszWriterMetadata string, wszComponentName string, wszComponentLogicalPath string, cVolumes uint32, rgwszSourceVolumePath *foundation.PWSTR, rgwszSnapshotVolumePath *foundation.PWSTR, ppAsync **IWsbApplicationAsync) error {
+	_wszWriterMetadata := win32.UTF16Ptr(wszWriterMetadata)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszComponentLogicalPath := win32.UTF16Ptr(wszComponentLogicalPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszWriterMetadata)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszComponentLogicalPath)), uintptr(cVolumes), uintptr(unsafe.Pointer(rgwszSourceVolumePath)), uintptr(unsafe.Pointer(rgwszSnapshotVolumePath)), uintptr(unsafe.Pointer(ppAsync)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWsbApplicationRestoreSupport: https://learn.microsoft.com/windows/win32/api/wsbapp/nn-wsbapp-iwsbapplicationrestoresupport
@@ -59,25 +62,31 @@ type IWsbApplicationRestoreSupport struct {
 var IID_IWsbApplicationRestoreSupport = win32.GUID{Data1: 0x8d3bdb38, Data2: 0x4ee8, Data3: 0x4718, Data4: [8]byte{0x85, 0xf9, 0xc7, 0xdb, 0xc4, 0xab, 0x77, 0xaa}}
 
 // PreRestore dispatches through IWsbApplicationRestoreSupport's vtable slot 3.
-func (self *IWsbApplicationRestoreSupport) PreRestore(wszWriterMetadata foundation.PWSTR, wszComponentName foundation.PWSTR, wszComponentLogicalPath foundation.PWSTR, bNoRollForward foundation.BOOLEAN) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszWriterMetadata)), uintptr(unsafe.Pointer(wszComponentName)), uintptr(unsafe.Pointer(wszComponentLogicalPath)), uintptr(bNoRollForward))
-	return foundation.HRESULT(r1)
+func (self *IWsbApplicationRestoreSupport) PreRestore(wszWriterMetadata string, wszComponentName string, wszComponentLogicalPath string, bNoRollForward foundation.BOOLEAN) error {
+	_wszWriterMetadata := win32.UTF16Ptr(wszWriterMetadata)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszComponentLogicalPath := win32.UTF16Ptr(wszComponentLogicalPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszWriterMetadata)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszComponentLogicalPath)), uintptr(bNoRollForward))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PostRestore dispatches through IWsbApplicationRestoreSupport's vtable slot 4.
-func (self *IWsbApplicationRestoreSupport) PostRestore(wszWriterMetadata foundation.PWSTR, wszComponentName foundation.PWSTR, wszComponentLogicalPath foundation.PWSTR, bNoRollForward foundation.BOOLEAN) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszWriterMetadata)), uintptr(unsafe.Pointer(wszComponentName)), uintptr(unsafe.Pointer(wszComponentLogicalPath)), uintptr(bNoRollForward))
-	return foundation.HRESULT(r1)
+func (self *IWsbApplicationRestoreSupport) PostRestore(wszWriterMetadata string, wszComponentName string, wszComponentLogicalPath string, bNoRollForward foundation.BOOLEAN) error {
+	_wszWriterMetadata := win32.UTF16Ptr(wszWriterMetadata)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszComponentLogicalPath := win32.UTF16Ptr(wszComponentLogicalPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszWriterMetadata)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszComponentLogicalPath)), uintptr(bNoRollForward))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OrderComponents dispatches through IWsbApplicationRestoreSupport's vtable slot 5.
-func (self *IWsbApplicationRestoreSupport) OrderComponents(cComponents uint32, rgComponentName *foundation.PWSTR, rgComponentLogicalPaths *foundation.PWSTR, prgComponentName **foundation.PWSTR, prgComponentLogicalPath **foundation.PWSTR) foundation.HRESULT {
+func (self *IWsbApplicationRestoreSupport) OrderComponents(cComponents uint32, rgComponentName *foundation.PWSTR, rgComponentLogicalPaths *foundation.PWSTR, prgComponentName **foundation.PWSTR, prgComponentLogicalPath **foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cComponents), uintptr(unsafe.Pointer(rgComponentName)), uintptr(unsafe.Pointer(rgComponentLogicalPaths)), uintptr(unsafe.Pointer(prgComponentName)), uintptr(unsafe.Pointer(prgComponentLogicalPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsRollForwardSupported dispatches through IWsbApplicationRestoreSupport's vtable slot 6.
-func (self *IWsbApplicationRestoreSupport) IsRollForwardSupported(pbRollForwardSupported *byte) foundation.HRESULT {
+func (self *IWsbApplicationRestoreSupport) IsRollForwardSupported(pbRollForwardSupported *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRollForwardSupported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

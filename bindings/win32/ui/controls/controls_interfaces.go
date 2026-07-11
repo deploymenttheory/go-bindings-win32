@@ -25,177 +25,178 @@ type IImageList struct {
 var IID_IImageList = win32.GUID{Data1: 0x46eb5926, Data2: 0x582e, Data3: 0x4017, Data4: [8]byte{0x9f, 0xdf, 0xe8, 0x99, 0x8d, 0xaa, 0x09, 0x50}}
 
 // Add dispatches through IImageList's vtable slot 3.
-func (self *IImageList) Add(hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP, pi *int32) foundation.HRESULT {
+func (self *IImageList) Add(hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP, pi *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hbmImage), uintptr(hbmMask), uintptr(unsafe.Pointer(pi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReplaceIcon dispatches through IImageList's vtable slot 4.
-func (self *IImageList) ReplaceIcon(i int32, hicon uiwindowsandmessaging.HICON, pi *int32) foundation.HRESULT {
+func (self *IImageList) ReplaceIcon(i int32, hicon uiwindowsandmessaging.HICON, pi *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(i), uintptr(hicon), uintptr(unsafe.Pointer(pi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOverlayImage dispatches through IImageList's vtable slot 5.
-func (self *IImageList) SetOverlayImage(iImage int32, iOverlay int32) foundation.HRESULT {
+func (self *IImageList) SetOverlayImage(iImage int32, iOverlay int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iImage), uintptr(iOverlay))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Replace dispatches through IImageList's vtable slot 6.
-func (self *IImageList) Replace(i int32, hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP) foundation.HRESULT {
+func (self *IImageList) Replace(i int32, hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(i), uintptr(hbmImage), uintptr(hbmMask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddMasked dispatches through IImageList's vtable slot 7.
-func (self *IImageList) AddMasked(hbmImage graphicsgdi.HBITMAP, crMask foundation.COLORREF, pi *int32) foundation.HRESULT {
+func (self *IImageList) AddMasked(hbmImage graphicsgdi.HBITMAP, crMask foundation.COLORREF, pi *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hbmImage), uintptr(crMask), uintptr(unsafe.Pointer(pi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Draw dispatches through IImageList's vtable slot 8.
-func (self *IImageList) Draw(pimldp *IMAGELISTDRAWPARAMS) foundation.HRESULT {
+func (self *IImageList) Draw(pimldp *IMAGELISTDRAWPARAMS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pimldp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IImageList's vtable slot 9.
-func (self *IImageList) Remove(i int32) foundation.HRESULT {
+func (self *IImageList) Remove(i int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(i))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIcon dispatches through IImageList's vtable slot 10.
-func (self *IImageList) GetIcon(i int32, flags uint32, picon *uiwindowsandmessaging.HICON) foundation.HRESULT {
+func (self *IImageList) GetIcon(i int32, flags uint32, picon *uiwindowsandmessaging.HICON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(i), uintptr(flags), uintptr(unsafe.Pointer(picon)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImageInfo dispatches through IImageList's vtable slot 11.
-func (self *IImageList) GetImageInfo(i int32, pImageInfo *IMAGEINFO) foundation.HRESULT {
+func (self *IImageList) GetImageInfo(i int32, pImageInfo *IMAGEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(i), uintptr(unsafe.Pointer(pImageInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Copy dispatches through IImageList's vtable slot 12.
-func (self *IImageList) Copy(iDst int32, punkSrc *systemcom.IUnknown, iSrc int32, uFlags uint32) foundation.HRESULT {
+func (self *IImageList) Copy(iDst int32, punkSrc *systemcom.IUnknown, iSrc int32, uFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(iDst), uintptr(unsafe.Pointer(punkSrc)), uintptr(iSrc), uintptr(uFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Merge dispatches through IImageList's vtable slot 13.
-func (self *IImageList) Merge(i1 int32, punk2 *systemcom.IUnknown, i2 int32, dx int32, dy int32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IImageList) Merge(i1 int32, punk2 *systemcom.IUnknown, i2 int32, dx int32, dy int32, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(i1), uintptr(unsafe.Pointer(punk2)), uintptr(i2), uintptr(dx), uintptr(dy), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IImageList's vtable slot 14.
-func (self *IImageList) Clone(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IImageList) Clone(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImageRect dispatches through IImageList's vtable slot 15.
-func (self *IImageList) GetImageRect(i int32, prc *foundation.RECT) foundation.HRESULT {
+func (self *IImageList) GetImageRect(i int32, prc *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(i), uintptr(unsafe.Pointer(prc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIconSize dispatches through IImageList's vtable slot 16.
-func (self *IImageList) GetIconSize(cx *int32, cy *int32) foundation.HRESULT {
+func (self *IImageList) GetIconSize(cx *int32, cy *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cx)), uintptr(unsafe.Pointer(cy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIconSize dispatches through IImageList's vtable slot 17.
-func (self *IImageList) SetIconSize(cx int32, cy int32) foundation.HRESULT {
+func (self *IImageList) SetIconSize(cx int32, cy int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(cx), uintptr(cy))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImageCount dispatches through IImageList's vtable slot 18.
-func (self *IImageList) GetImageCount(pi *int32) foundation.HRESULT {
+func (self *IImageList) GetImageCount(pi *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetImageCount dispatches through IImageList's vtable slot 19.
-func (self *IImageList) SetImageCount(uNewCount uint32) foundation.HRESULT {
+func (self *IImageList) SetImageCount(uNewCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(uNewCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBkColor dispatches through IImageList's vtable slot 20.
-func (self *IImageList) SetBkColor(clrBk foundation.COLORREF, pclr *foundation.COLORREF) foundation.HRESULT {
+func (self *IImageList) SetBkColor(clrBk foundation.COLORREF, pclr *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(clrBk), uintptr(unsafe.Pointer(pclr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBkColor dispatches through IImageList's vtable slot 21.
-func (self *IImageList) GetBkColor(pclr *foundation.COLORREF) foundation.HRESULT {
+func (self *IImageList) GetBkColor(pclr *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginDrag dispatches through IImageList's vtable slot 22.
-func (self *IImageList) BeginDrag(iTrack int32, dxHotspot int32, dyHotspot int32) foundation.HRESULT {
+func (self *IImageList) BeginDrag(iTrack int32, dxHotspot int32, dyHotspot int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(iTrack), uintptr(dxHotspot), uintptr(dyHotspot))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndDrag dispatches through IImageList's vtable slot 23.
-func (self *IImageList) EndDrag() foundation.HRESULT {
+func (self *IImageList) EndDrag() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DragEnter dispatches through IImageList's vtable slot 24.
-func (self *IImageList) DragEnter(hwndLock foundation.HWND, x int32, y int32) foundation.HRESULT {
+func (self *IImageList) DragEnter(hwndLock foundation.HWND, x int32, y int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hwndLock), uintptr(x), uintptr(y))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DragLeave dispatches through IImageList's vtable slot 25.
-func (self *IImageList) DragLeave(hwndLock foundation.HWND) foundation.HRESULT {
+func (self *IImageList) DragLeave(hwndLock foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(hwndLock))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DragMove dispatches through IImageList's vtable slot 26.
-func (self *IImageList) DragMove(x int32, y int32) foundation.HRESULT {
+func (self *IImageList) DragMove(x int32, y int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(x), uintptr(y))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDragCursorImage dispatches through IImageList's vtable slot 27.
-func (self *IImageList) SetDragCursorImage(punk *systemcom.IUnknown, iDrag int32, dxHotspot int32, dyHotspot int32) foundation.HRESULT {
+func (self *IImageList) SetDragCursorImage(punk *systemcom.IUnknown, iDrag int32, dxHotspot int32, dyHotspot int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punk)), uintptr(iDrag), uintptr(dxHotspot), uintptr(dyHotspot))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DragShowNolock dispatches through IImageList's vtable slot 28.
-func (self *IImageList) DragShowNolock(fShow foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(fShow))
-	return foundation.HRESULT(r1)
+func (self *IImageList) DragShowNolock(fShow bool) error {
+	_fShow := win32.Bool32(fShow)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(_fShow))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDragImage dispatches through IImageList's vtable slot 29.
-func (self *IImageList) GetDragImage(ppt *foundation.POINT, pptHotspot *foundation.POINT, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IImageList) GetDragImage(ppt *foundation.POINT, pptHotspot *foundation.POINT, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppt)), uintptr(unsafe.Pointer(pptHotspot)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemFlags dispatches through IImageList's vtable slot 30.
-func (self *IImageList) GetItemFlags(i int32, dwFlags *IMAGE_LIST_ITEM_FLAGS) foundation.HRESULT {
+func (self *IImageList) GetItemFlags(i int32, dwFlags *IMAGE_LIST_ITEM_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(i), uintptr(unsafe.Pointer(dwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOverlayImage dispatches through IImageList's vtable slot 31.
-func (self *IImageList) GetOverlayImage(iOverlay int32, piIndex *int32) foundation.HRESULT {
+func (self *IImageList) GetOverlayImage(iOverlay int32, piIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(iOverlay), uintptr(unsafe.Pointer(piIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IImageList2: https://learn.microsoft.com/windows/win32/api/commoncontrols/nn-commoncontrols-iimagelist2
@@ -208,73 +209,73 @@ type IImageList2 struct {
 var IID_IImageList2 = win32.GUID{Data1: 0x192b9d83, Data2: 0x50fc, Data3: 0x457b, Data4: [8]byte{0x90, 0xa0, 0x2b, 0x82, 0xa8, 0xb5, 0xda, 0xe1}}
 
 // Resize dispatches through IImageList2's vtable slot 32.
-func (self *IImageList2) Resize(cxNewIconSize int32, cyNewIconSize int32) foundation.HRESULT {
+func (self *IImageList2) Resize(cxNewIconSize int32, cyNewIconSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(cxNewIconSize), uintptr(cyNewIconSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOriginalSize dispatches through IImageList2's vtable slot 33.
-func (self *IImageList2) GetOriginalSize(iImage int32, dwFlags uint32, pcx *int32, pcy *int32) foundation.HRESULT {
+func (self *IImageList2) GetOriginalSize(iImage int32, dwFlags uint32, pcx *int32, pcy *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(iImage), uintptr(dwFlags), uintptr(unsafe.Pointer(pcx)), uintptr(unsafe.Pointer(pcy)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOriginalSize dispatches through IImageList2's vtable slot 34.
-func (self *IImageList2) SetOriginalSize(iImage int32, cx int32, cy int32) foundation.HRESULT {
+func (self *IImageList2) SetOriginalSize(iImage int32, cx int32, cy int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(iImage), uintptr(cx), uintptr(cy))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCallback dispatches through IImageList2's vtable slot 35.
-func (self *IImageList2) SetCallback(punk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IImageList2) SetCallback(punk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCallback dispatches through IImageList2's vtable slot 36.
-func (self *IImageList2) GetCallback(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IImageList2) GetCallback(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ForceImagePresent dispatches through IImageList2's vtable slot 37.
-func (self *IImageList2) ForceImagePresent(iImage int32, dwFlags uint32) foundation.HRESULT {
+func (self *IImageList2) ForceImagePresent(iImage int32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(iImage), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DiscardImages dispatches through IImageList2's vtable slot 38.
-func (self *IImageList2) DiscardImages(iFirstImage int32, iLastImage int32, dwFlags uint32) foundation.HRESULT {
+func (self *IImageList2) DiscardImages(iFirstImage int32, iLastImage int32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(iFirstImage), uintptr(iLastImage), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PreloadImages dispatches through IImageList2's vtable slot 39.
-func (self *IImageList2) PreloadImages(pimldp *IMAGELISTDRAWPARAMS) foundation.HRESULT {
+func (self *IImageList2) PreloadImages(pimldp *IMAGELISTDRAWPARAMS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pimldp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatistics dispatches through IImageList2's vtable slot 40.
-func (self *IImageList2) GetStatistics(pils *IMAGELISTSTATS) foundation.HRESULT {
+func (self *IImageList2) GetStatistics(pils *IMAGELISTSTATS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pils)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IImageList2's vtable slot 41.
-func (self *IImageList2) Initialize(cx int32, cy int32, flags IMAGELIST_CREATION_FLAGS, cInitial int32, cGrow int32) foundation.HRESULT {
+func (self *IImageList2) Initialize(cx int32, cy int32, flags IMAGELIST_CREATION_FLAGS, cInitial int32, cGrow int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(cx), uintptr(cy), uintptr(flags), uintptr(cInitial), uintptr(cGrow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Replace2 dispatches through IImageList2's vtable slot 42.
-func (self *IImageList2) Replace2(i int32, hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP, punk *systemcom.IUnknown, dwFlags uint32) foundation.HRESULT {
+func (self *IImageList2) Replace2(i int32, hbmImage graphicsgdi.HBITMAP, hbmMask graphicsgdi.HBITMAP, punk *systemcom.IUnknown, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(i), uintptr(hbmImage), uintptr(hbmMask), uintptr(unsafe.Pointer(punk)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReplaceFromImageList dispatches through IImageList2's vtable slot 43.
-func (self *IImageList2) ReplaceFromImageList(i int32, pil *IImageList, iSrc int32, punk *systemcom.IUnknown, dwFlags uint32) foundation.HRESULT {
+func (self *IImageList2) ReplaceFromImageList(i int32, pil *IImageList, iSrc int32, punk *systemcom.IUnknown, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(i), uintptr(unsafe.Pointer(pil)), uintptr(iSrc), uintptr(unsafe.Pointer(punk)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

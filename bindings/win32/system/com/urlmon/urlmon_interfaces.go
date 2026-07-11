@@ -23,9 +23,10 @@ type IBindCallbackRedirect struct {
 var IID_IBindCallbackRedirect = win32.GUID{Data1: 0x11c81bc2, Data2: 0x121e, Data3: 0x4ed5, Data4: [8]byte{0xb9, 0xc4, 0xb4, 0x30, 0xbd, 0x54, 0xf2, 0xc0}}
 
 // Redirect dispatches through IBindCallbackRedirect's vtable slot 3.
-func (self *IBindCallbackRedirect) Redirect(lpcUrl foundation.PWSTR, vbCancel *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpcUrl)), uintptr(unsafe.Pointer(vbCancel)))
-	return foundation.HRESULT(r1)
+func (self *IBindCallbackRedirect) Redirect(lpcUrl string, vbCancel *foundation.VARIANT_BOOL) error {
+	_lpcUrl := win32.UTF16Ptr(lpcUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpcUrl)), uintptr(unsafe.Pointer(vbCancel)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a9eda967-f50e-4a33-b358-206f6ef3086d
@@ -37,9 +38,9 @@ type IBindHttpSecurity struct {
 var IID_IBindHttpSecurity = win32.GUID{Data1: 0xa9eda967, Data2: 0xf50e, Data3: 0x4a33, Data4: [8]byte{0xb3, 0x58, 0x20, 0x6f, 0x6e, 0xf3, 0x08, 0x6d}}
 
 // GetIgnoreCertMask dispatches through IBindHttpSecurity's vtable slot 3.
-func (self *IBindHttpSecurity) GetIgnoreCertMask(pdwIgnoreCertMask *uint32) foundation.HRESULT {
+func (self *IBindHttpSecurity) GetIgnoreCertMask(pdwIgnoreCertMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwIgnoreCertMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9cd-baf9-11ce-8c82-00aa004ba90b
@@ -51,9 +52,10 @@ type IBindProtocol struct {
 var IID_IBindProtocol = win32.GUID{Data1: 0x79eac9cd, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // CreateBinding dispatches through IBindProtocol's vtable slot 3.
-func (self *IBindProtocol) CreateBinding(szUrl foundation.PWSTR, pbc *systemcom.IBindCtx, ppb **systemcom.IBinding) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szUrl)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(ppb)))
-	return foundation.HRESULT(r1)
+func (self *IBindProtocol) CreateBinding(szUrl string, pbc *systemcom.IBindCtx, ppb **systemcom.IBinding) error {
+	_szUrl := win32.UTF16Ptr(szUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szUrl)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(ppb)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 711c7600-6b48-11d1-b403-00aa00b92af1
@@ -65,15 +67,15 @@ type ICatalogFileInfo struct {
 var IID_ICatalogFileInfo = win32.GUID{Data1: 0x711c7600, Data2: 0x6b48, Data3: 0x11d1, Data4: [8]byte{0xb4, 0x03, 0x00, 0xaa, 0x00, 0xb9, 0x2a, 0xf1}}
 
 // GetCatalogFile dispatches through ICatalogFileInfo's vtable slot 3.
-func (self *ICatalogFileInfo) GetCatalogFile(ppszCatalogFile *foundation.PSTR) foundation.HRESULT {
+func (self *ICatalogFileInfo) GetCatalogFile(ppszCatalogFile *foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCatalogFile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetJavaTrust dispatches through ICatalogFileInfo's vtable slot 4.
-func (self *ICatalogFileInfo) GetJavaTrust(ppJavaTrust *unsafe.Pointer) foundation.HRESULT {
+func (self *ICatalogFileInfo) GetJavaTrust(ppJavaTrust *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppJavaTrust)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9d1-baf9-11ce-8c82-00aa004ba90b
@@ -85,9 +87,11 @@ type ICodeInstall struct {
 var IID_ICodeInstall = win32.GUID{Data1: 0x79eac9d1, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // OnCodeInstallProblem dispatches through ICodeInstall's vtable slot 4.
-func (self *ICodeInstall) OnCodeInstallProblem(ulStatusCode uint32, szDestination foundation.PWSTR, szSource foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulStatusCode), uintptr(unsafe.Pointer(szDestination)), uintptr(unsafe.Pointer(szSource)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *ICodeInstall) OnCodeInstallProblem(ulStatusCode uint32, szDestination string, szSource string, dwReserved uint32) error {
+	_szDestination := win32.UTF16Ptr(szDestination)
+	_szSource := win32.UTF16Ptr(szSource)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulStatusCode), uintptr(unsafe.Pointer(_szDestination)), uintptr(unsafe.Pointer(_szSource)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 69d14c80-c18e-11d0-a9ce-006097942311
@@ -99,21 +103,21 @@ type IDataFilter struct {
 var IID_IDataFilter = win32.GUID{Data1: 0x69d14c80, Data2: 0xc18e, Data3: 0x11d0, Data4: [8]byte{0xa9, 0xce, 0x00, 0x60, 0x97, 0x94, 0x23, 0x11}}
 
 // DoEncode dispatches through IDataFilter's vtable slot 3.
-func (self *IDataFilter) DoEncode(dwFlags uint32, lInBufferSize int32, pbInBuffer *byte, lOutBufferSize int32, pbOutBuffer *byte, lInBytesAvailable int32, plInBytesRead *int32, plOutBytesWritten *int32, dwReserved uint32) foundation.HRESULT {
+func (self *IDataFilter) DoEncode(dwFlags uint32, lInBufferSize int32, pbInBuffer *byte, lOutBufferSize int32, pbOutBuffer *byte, lInBytesAvailable int32, plInBytesRead *int32, plOutBytesWritten *int32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(lInBufferSize), uintptr(unsafe.Pointer(pbInBuffer)), uintptr(lOutBufferSize), uintptr(unsafe.Pointer(pbOutBuffer)), uintptr(lInBytesAvailable), uintptr(unsafe.Pointer(plInBytesRead)), uintptr(unsafe.Pointer(plOutBytesWritten)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DoDecode dispatches through IDataFilter's vtable slot 4.
-func (self *IDataFilter) DoDecode(dwFlags uint32, lInBufferSize int32, pbInBuffer *byte, lOutBufferSize int32, pbOutBuffer *byte, lInBytesAvailable int32, plInBytesRead *int32, plOutBytesWritten *int32, dwReserved uint32) foundation.HRESULT {
+func (self *IDataFilter) DoDecode(dwFlags uint32, lInBufferSize int32, pbInBuffer *byte, lOutBufferSize int32, pbOutBuffer *byte, lInBytesAvailable int32, plInBytesRead *int32, plOutBytesWritten *int32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(lInBufferSize), uintptr(unsafe.Pointer(pbInBuffer)), uintptr(lOutBufferSize), uintptr(unsafe.Pointer(pbOutBuffer)), uintptr(lInBytesAvailable), uintptr(unsafe.Pointer(plInBytesRead)), uintptr(unsafe.Pointer(plOutBytesWritten)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEncodingLevel dispatches through IDataFilter's vtable slot 5.
-func (self *IDataFilter) SetEncodingLevel(dwEncLevel uint32) foundation.HRESULT {
+func (self *IDataFilter) SetEncodingLevel(dwEncLevel uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwEncLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 70bdde00-c18e-11d0-a9ce-006097942311
@@ -125,9 +129,11 @@ type IEncodingFilterFactory struct {
 var IID_IEncodingFilterFactory = win32.GUID{Data1: 0x70bdde00, Data2: 0xc18e, Data3: 0x11d0, Data4: [8]byte{0xa9, 0xce, 0x00, 0x60, 0x97, 0x94, 0x23, 0x11}}
 
 // GetDefaultFilter dispatches through IEncodingFilterFactory's vtable slot 4.
-func (self *IEncodingFilterFactory) GetDefaultFilter(pwzCodeIn foundation.PWSTR, pwzCodeOut foundation.PWSTR, ppDF **IDataFilter) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwzCodeIn)), uintptr(unsafe.Pointer(pwzCodeOut)), uintptr(unsafe.Pointer(ppDF)))
-	return foundation.HRESULT(r1)
+func (self *IEncodingFilterFactory) GetDefaultFilter(pwzCodeIn string, pwzCodeOut string, ppDF **IDataFilter) error {
+	_pwzCodeIn := win32.UTF16Ptr(pwzCodeIn)
+	_pwzCodeOut := win32.UTF16Ptr(pwzCodeOut)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzCodeIn)), uintptr(unsafe.Pointer(_pwzCodeOut)), uintptr(unsafe.Pointer(ppDF)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: af0ff408-129d-4b20-91f0-02bd23d88352
@@ -139,9 +145,9 @@ type IGetBindHandle struct {
 var IID_IGetBindHandle = win32.GUID{Data1: 0xaf0ff408, Data2: 0x129d, Data3: 0x4b20, Data4: [8]byte{0x91, 0xf0, 0x02, 0xbd, 0x23, 0xd8, 0x83, 0x52}}
 
 // GetBindHandle dispatches through IGetBindHandle's vtable slot 3.
-func (self *IGetBindHandle) GetBindHandle(enumRequestedHandle BINDHANDLETYPES, pRetHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IGetBindHandle) GetBindHandle(enumRequestedHandle BINDHANDLETYPES, pRetHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(enumRequestedHandle), uintptr(unsafe.Pointer(pRetHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9d2-baf9-11ce-8c82-00aa004ba90b
@@ -153,15 +159,19 @@ type IHttpNegotiate struct {
 var IID_IHttpNegotiate = win32.GUID{Data1: 0x79eac9d2, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // BeginningTransaction dispatches through IHttpNegotiate's vtable slot 3.
-func (self *IHttpNegotiate) BeginningTransaction(szURL foundation.PWSTR, szHeaders foundation.PWSTR, dwReserved uint32, pszAdditionalHeaders *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szURL)), uintptr(unsafe.Pointer(szHeaders)), uintptr(dwReserved), uintptr(unsafe.Pointer(pszAdditionalHeaders)))
-	return foundation.HRESULT(r1)
+func (self *IHttpNegotiate) BeginningTransaction(szURL string, szHeaders string, dwReserved uint32, pszAdditionalHeaders *foundation.PWSTR) error {
+	_szURL := win32.UTF16Ptr(szURL)
+	_szHeaders := win32.UTF16Ptr(szHeaders)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szURL)), uintptr(unsafe.Pointer(_szHeaders)), uintptr(dwReserved), uintptr(unsafe.Pointer(pszAdditionalHeaders)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnResponse dispatches through IHttpNegotiate's vtable slot 4.
-func (self *IHttpNegotiate) OnResponse(dwResponseCode uint32, szResponseHeaders foundation.PWSTR, szRequestHeaders foundation.PWSTR, pszAdditionalRequestHeaders *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwResponseCode), uintptr(unsafe.Pointer(szResponseHeaders)), uintptr(unsafe.Pointer(szRequestHeaders)), uintptr(unsafe.Pointer(pszAdditionalRequestHeaders)))
-	return foundation.HRESULT(r1)
+func (self *IHttpNegotiate) OnResponse(dwResponseCode uint32, szResponseHeaders string, szRequestHeaders string, pszAdditionalRequestHeaders *foundation.PWSTR) error {
+	_szResponseHeaders := win32.UTF16Ptr(szResponseHeaders)
+	_szRequestHeaders := win32.UTF16Ptr(szRequestHeaders)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwResponseCode), uintptr(unsafe.Pointer(_szResponseHeaders)), uintptr(unsafe.Pointer(_szRequestHeaders)), uintptr(unsafe.Pointer(pszAdditionalRequestHeaders)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4f9f9fcb-e0f4-48eb-b7ab-fa2ea9365cb4
@@ -173,9 +183,9 @@ type IHttpNegotiate2 struct {
 var IID_IHttpNegotiate2 = win32.GUID{Data1: 0x4f9f9fcb, Data2: 0xe0f4, Data3: 0x48eb, Data4: [8]byte{0xb7, 0xab, 0xfa, 0x2e, 0xa9, 0x36, 0x5c, 0xb4}}
 
 // GetRootSecurityId dispatches through IHttpNegotiate2's vtable slot 5.
-func (self *IHttpNegotiate2) GetRootSecurityId(pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) foundation.HRESULT {
+func (self *IHttpNegotiate2) GetRootSecurityId(pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSecurityId)), uintptr(unsafe.Pointer(pcbSecurityId)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 57b6c80a-34c2-4602-bc26-66a02fc57153
@@ -187,9 +197,9 @@ type IHttpNegotiate3 struct {
 var IID_IHttpNegotiate3 = win32.GUID{Data1: 0x57b6c80a, Data2: 0x34c2, Data3: 0x4602, Data4: [8]byte{0xbc, 0x26, 0x66, 0xa0, 0x2f, 0xc5, 0x71, 0x53}}
 
 // GetSerializedClientCertContext dispatches through IHttpNegotiate3's vtable slot 6.
-func (self *IHttpNegotiate3) GetSerializedClientCertContext(ppbCert **byte, pcbCert *uint32) foundation.HRESULT {
+func (self *IHttpNegotiate3) GetSerializedClientCertContext(ppbCert **byte, pcbCert *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppbCert)), uintptr(unsafe.Pointer(pcbCert)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9d7-bafa-11ce-8c82-00aa004ba90b
@@ -201,9 +211,9 @@ type IHttpSecurity struct {
 var IID_IHttpSecurity = win32.GUID{Data1: 0x79eac9d7, Data2: 0xbafa, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // OnSecurityProblem dispatches through IHttpSecurity's vtable slot 4.
-func (self *IHttpSecurity) OnSecurityProblem(dwProblem uint32) foundation.HRESULT {
+func (self *IHttpSecurity) OnSecurityProblem(dwProblem uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwProblem))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9e0-baf9-11ce-8c82-00aa004ba90b
@@ -223,15 +233,15 @@ type IInternetBindInfo struct {
 var IID_IInternetBindInfo = win32.GUID{Data1: 0x79eac9e1, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // GetBindInfo dispatches through IInternetBindInfo's vtable slot 3.
-func (self *IInternetBindInfo) GetBindInfo(grfBINDF *uint32, pbindinfo *systemcom.BINDINFO) foundation.HRESULT {
+func (self *IInternetBindInfo) GetBindInfo(grfBINDF *uint32, pbindinfo *systemcom.BINDINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(grfBINDF)), uintptr(unsafe.Pointer(pbindinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBindString dispatches through IInternetBindInfo's vtable slot 4.
-func (self *IInternetBindInfo) GetBindString(ulStringType uint32, ppwzStr *foundation.PWSTR, cEl uint32, pcElFetched *uint32) foundation.HRESULT {
+func (self *IInternetBindInfo) GetBindString(ulStringType uint32, ppwzStr *foundation.PWSTR, cEl uint32, pcElFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulStringType), uintptr(unsafe.Pointer(ppwzStr)), uintptr(cEl), uintptr(unsafe.Pointer(pcElFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a3e015b7-a82c-4dcd-a150-569aeeed36ab
@@ -243,9 +253,9 @@ type IInternetBindInfoEx struct {
 var IID_IInternetBindInfoEx = win32.GUID{Data1: 0xa3e015b7, Data2: 0xa82c, Data3: 0x4dcd, Data4: [8]byte{0xa1, 0x50, 0x56, 0x9a, 0xee, 0xed, 0x36, 0xab}}
 
 // GetBindInfoEx dispatches through IInternetBindInfoEx's vtable slot 5.
-func (self *IInternetBindInfoEx) GetBindInfoEx(grfBINDF *uint32, pbindinfo *systemcom.BINDINFO, grfBINDF2 *uint32, pdwReserved *uint32) foundation.HRESULT {
+func (self *IInternetBindInfoEx) GetBindInfoEx(grfBINDF *uint32, pbindinfo *systemcom.BINDINFO, grfBINDF2 *uint32, pdwReserved *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(grfBINDF)), uintptr(unsafe.Pointer(pbindinfo)), uintptr(unsafe.Pointer(grfBINDF2)), uintptr(unsafe.Pointer(pdwReserved)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3af280b6-cb3f-11d0-891e-00c04fb6bfc4
@@ -257,21 +267,21 @@ type IInternetHostSecurityManager struct {
 var IID_IInternetHostSecurityManager = win32.GUID{Data1: 0x3af280b6, Data2: 0xcb3f, Data3: 0x11d0, Data4: [8]byte{0x89, 0x1e, 0x00, 0xc0, 0x4f, 0xb6, 0xbf, 0xc4}}
 
 // GetSecurityId dispatches through IInternetHostSecurityManager's vtable slot 3.
-func (self *IInternetHostSecurityManager) GetSecurityId(pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) foundation.HRESULT {
+func (self *IInternetHostSecurityManager) GetSecurityId(pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSecurityId)), uintptr(unsafe.Pointer(pcbSecurityId)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessUrlAction dispatches through IInternetHostSecurityManager's vtable slot 4.
-func (self *IInternetHostSecurityManager) ProcessUrlAction(dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32) foundation.HRESULT {
+func (self *IInternetHostSecurityManager) ProcessUrlAction(dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryCustomPolicy dispatches through IInternetHostSecurityManager's vtable slot 5.
-func (self *IInternetHostSecurityManager) QueryCustomPolicy(guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext *byte, cbContext uint32, dwReserved uint32) foundation.HRESULT {
+func (self *IInternetHostSecurityManager) QueryCustomPolicy(guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext *byte, cbContext uint32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(ppPolicy)), uintptr(unsafe.Pointer(pcbPolicy)), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9eb-baf9-11ce-8c82-00aa004ba90b
@@ -283,15 +293,15 @@ type IInternetPriority struct {
 var IID_IInternetPriority = win32.GUID{Data1: 0x79eac9eb, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // SetPriority dispatches through IInternetPriority's vtable slot 3.
-func (self *IInternetPriority) SetPriority(nPriority int32) foundation.HRESULT {
+func (self *IInternetPriority) SetPriority(nPriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(nPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPriority dispatches through IInternetPriority's vtable slot 4.
-func (self *IInternetPriority) GetPriority(pnPriority *int32) foundation.HRESULT {
+func (self *IInternetPriority) GetPriority(pnPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9e4-baf9-11ce-8c82-00aa004ba90b
@@ -303,27 +313,27 @@ type IInternetProtocol struct {
 var IID_IInternetProtocol = win32.GUID{Data1: 0x79eac9e4, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // Read dispatches through IInternetProtocol's vtable slot 9.
-func (self *IInternetProtocol) Read(pv unsafe.Pointer, cb uint32, pcbRead *uint32) foundation.HRESULT {
+func (self *IInternetProtocol) Read(pv unsafe.Pointer, cb uint32, pcbRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Seek dispatches through IInternetProtocol's vtable slot 10.
-func (self *IInternetProtocol) Seek(dlibMove int64, dwOrigin uint32, plibNewPosition *uint64) foundation.HRESULT {
+func (self *IInternetProtocol) Seek(dlibMove int64, dwOrigin uint32, plibNewPosition *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dlibMove), uintptr(dwOrigin), uintptr(unsafe.Pointer(plibNewPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockRequest dispatches through IInternetProtocol's vtable slot 11.
-func (self *IInternetProtocol) LockRequest(dwOptions uint32) foundation.HRESULT {
+func (self *IInternetProtocol) LockRequest(dwOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockRequest dispatches through IInternetProtocol's vtable slot 12.
-func (self *IInternetProtocol) UnlockRequest() foundation.HRESULT {
+func (self *IInternetProtocol) UnlockRequest() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c7a98e66-1010-492c-a1c8-c809e1f75905
@@ -335,9 +345,9 @@ type IInternetProtocolEx struct {
 var IID_IInternetProtocolEx = win32.GUID{Data1: 0xc7a98e66, Data2: 0x1010, Data3: 0x492c, Data4: [8]byte{0xa1, 0xc8, 0xc8, 0x09, 0xe1, 0xf7, 0x59, 0x05}}
 
 // StartEx dispatches through IInternetProtocolEx's vtable slot 13.
-func (self *IInternetProtocolEx) StartEx(pUri *systemcom.IUri, pOIProtSink *IInternetProtocolSink, pOIBindInfo *IInternetBindInfo, grfPI uint32, dwReserved foundation.HANDLE_PTR) foundation.HRESULT {
+func (self *IInternetProtocolEx) StartEx(pUri *systemcom.IUri, pOIProtSink *IInternetProtocolSink, pOIBindInfo *IInternetBindInfo, grfPI uint32, dwReserved foundation.HANDLE_PTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)), uintptr(unsafe.Pointer(pOIProtSink)), uintptr(unsafe.Pointer(pOIBindInfo)), uintptr(grfPI), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9ec-baf9-11ce-8c82-00aa004ba90b
@@ -349,27 +359,34 @@ type IInternetProtocolInfo struct {
 var IID_IInternetProtocolInfo = win32.GUID{Data1: 0x79eac9ec, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // ParseUrl dispatches through IInternetProtocolInfo's vtable slot 3.
-func (self *IInternetProtocolInfo) ParseUrl(pwzUrl foundation.PWSTR, ParseAction PARSEACTION, dwParseFlags uint32, pwzResult foundation.PWSTR, cchResult uint32, pcchResult *uint32, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwzUrl)), uintptr(ParseAction), uintptr(dwParseFlags), uintptr(unsafe.Pointer(pwzResult)), uintptr(cchResult), uintptr(unsafe.Pointer(pcchResult)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *IInternetProtocolInfo) ParseUrl(pwzUrl string, ParseAction PARSEACTION, dwParseFlags uint32, pwzResult foundation.PWSTR, cchResult uint32, pcchResult *uint32, dwReserved uint32) error {
+	_pwzUrl := win32.UTF16Ptr(pwzUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzUrl)), uintptr(ParseAction), uintptr(dwParseFlags), uintptr(unsafe.Pointer(pwzResult)), uintptr(cchResult), uintptr(unsafe.Pointer(pcchResult)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CombineUrl dispatches through IInternetProtocolInfo's vtable slot 4.
-func (self *IInternetProtocolInfo) CombineUrl(pwzBaseUrl foundation.PWSTR, pwzRelativeUrl foundation.PWSTR, dwCombineFlags uint32, pwzResult foundation.PWSTR, cchResult uint32, pcchResult *uint32, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwzBaseUrl)), uintptr(unsafe.Pointer(pwzRelativeUrl)), uintptr(dwCombineFlags), uintptr(unsafe.Pointer(pwzResult)), uintptr(cchResult), uintptr(unsafe.Pointer(pcchResult)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *IInternetProtocolInfo) CombineUrl(pwzBaseUrl string, pwzRelativeUrl string, dwCombineFlags uint32, pwzResult string, cchResult uint32, pcchResult *uint32, dwReserved uint32) error {
+	_pwzBaseUrl := win32.UTF16Ptr(pwzBaseUrl)
+	_pwzRelativeUrl := win32.UTF16Ptr(pwzRelativeUrl)
+	_pwzResult := win32.UTF16Ptr(pwzResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzBaseUrl)), uintptr(unsafe.Pointer(_pwzRelativeUrl)), uintptr(dwCombineFlags), uintptr(unsafe.Pointer(_pwzResult)), uintptr(cchResult), uintptr(unsafe.Pointer(pcchResult)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CompareUrl dispatches through IInternetProtocolInfo's vtable slot 5.
-func (self *IInternetProtocolInfo) CompareUrl(pwzUrl1 foundation.PWSTR, pwzUrl2 foundation.PWSTR, dwCompareFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwzUrl1)), uintptr(unsafe.Pointer(pwzUrl2)), uintptr(dwCompareFlags))
-	return foundation.HRESULT(r1)
+func (self *IInternetProtocolInfo) CompareUrl(pwzUrl1 string, pwzUrl2 string, dwCompareFlags uint32) error {
+	_pwzUrl1 := win32.UTF16Ptr(pwzUrl1)
+	_pwzUrl2 := win32.UTF16Ptr(pwzUrl2)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzUrl1)), uintptr(unsafe.Pointer(_pwzUrl2)), uintptr(dwCompareFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryInfo dispatches through IInternetProtocolInfo's vtable slot 6.
-func (self *IInternetProtocolInfo) QueryInfo(pwzUrl foundation.PWSTR, OueryOption QUERYOPTION, dwQueryFlags uint32, pBuffer unsafe.Pointer, cbBuffer uint32, pcbBuf *uint32, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwzUrl)), uintptr(OueryOption), uintptr(dwQueryFlags), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcbBuf)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *IInternetProtocolInfo) QueryInfo(pwzUrl string, OueryOption QUERYOPTION, dwQueryFlags uint32, pBuffer unsafe.Pointer, cbBuffer uint32, pcbBuf *uint32, dwReserved uint32) error {
+	_pwzUrl := win32.UTF16Ptr(pwzUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzUrl)), uintptr(OueryOption), uintptr(dwQueryFlags), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcbBuf)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9e3-baf9-11ce-8c82-00aa004ba90b
@@ -381,39 +398,40 @@ type IInternetProtocolRoot struct {
 var IID_IInternetProtocolRoot = win32.GUID{Data1: 0x79eac9e3, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // Start dispatches through IInternetProtocolRoot's vtable slot 3.
-func (self *IInternetProtocolRoot) Start(szUrl foundation.PWSTR, pOIProtSink *IInternetProtocolSink, pOIBindInfo *IInternetBindInfo, grfPI uint32, dwReserved foundation.HANDLE_PTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szUrl)), uintptr(unsafe.Pointer(pOIProtSink)), uintptr(unsafe.Pointer(pOIBindInfo)), uintptr(grfPI), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *IInternetProtocolRoot) Start(szUrl string, pOIProtSink *IInternetProtocolSink, pOIBindInfo *IInternetBindInfo, grfPI uint32, dwReserved foundation.HANDLE_PTR) error {
+	_szUrl := win32.UTF16Ptr(szUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szUrl)), uintptr(unsafe.Pointer(pOIProtSink)), uintptr(unsafe.Pointer(pOIBindInfo)), uintptr(grfPI), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Continue dispatches through IInternetProtocolRoot's vtable slot 4.
-func (self *IInternetProtocolRoot) Continue(pProtocolData *PROTOCOLDATA) foundation.HRESULT {
+func (self *IInternetProtocolRoot) Continue(pProtocolData *PROTOCOLDATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProtocolData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IInternetProtocolRoot's vtable slot 5.
-func (self *IInternetProtocolRoot) Abort(hrReason foundation.HRESULT, dwOptions uint32) foundation.HRESULT {
+func (self *IInternetProtocolRoot) Abort(hrReason foundation.HRESULT, dwOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hrReason), uintptr(dwOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Terminate dispatches through IInternetProtocolRoot's vtable slot 6.
-func (self *IInternetProtocolRoot) Terminate(dwOptions uint32) foundation.HRESULT {
+func (self *IInternetProtocolRoot) Terminate(dwOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Suspend dispatches through IInternetProtocolRoot's vtable slot 7.
-func (self *IInternetProtocolRoot) Suspend() foundation.HRESULT {
+func (self *IInternetProtocolRoot) Suspend() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through IInternetProtocolRoot's vtable slot 8.
-func (self *IInternetProtocolRoot) Resume() foundation.HRESULT {
+func (self *IInternetProtocolRoot) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9e5-baf9-11ce-8c82-00aa004ba90b
@@ -425,27 +443,29 @@ type IInternetProtocolSink struct {
 var IID_IInternetProtocolSink = win32.GUID{Data1: 0x79eac9e5, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // Switch dispatches through IInternetProtocolSink's vtable slot 3.
-func (self *IInternetProtocolSink) Switch(pProtocolData *PROTOCOLDATA) foundation.HRESULT {
+func (self *IInternetProtocolSink) Switch(pProtocolData *PROTOCOLDATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProtocolData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReportProgress dispatches through IInternetProtocolSink's vtable slot 4.
-func (self *IInternetProtocolSink) ReportProgress(ulStatusCode uint32, szStatusText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulStatusCode), uintptr(unsafe.Pointer(szStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IInternetProtocolSink) ReportProgress(ulStatusCode uint32, szStatusText string) error {
+	_szStatusText := win32.UTF16Ptr(szStatusText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulStatusCode), uintptr(unsafe.Pointer(_szStatusText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReportData dispatches through IInternetProtocolSink's vtable slot 5.
-func (self *IInternetProtocolSink) ReportData(grfBSCF uint32, ulProgress uint32, ulProgressMax uint32) foundation.HRESULT {
+func (self *IInternetProtocolSink) ReportData(grfBSCF uint32, ulProgress uint32, ulProgressMax uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(grfBSCF), uintptr(ulProgress), uintptr(ulProgressMax))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReportResult dispatches through IInternetProtocolSink's vtable slot 6.
-func (self *IInternetProtocolSink) ReportResult(hrResult foundation.HRESULT, dwError uint32, szResult foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hrResult), uintptr(dwError), uintptr(unsafe.Pointer(szResult)))
-	return foundation.HRESULT(r1)
+func (self *IInternetProtocolSink) ReportResult(hrResult foundation.HRESULT, dwError uint32, szResult string) error {
+	_szResult := win32.UTF16Ptr(szResult)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hrResult), uintptr(dwError), uintptr(unsafe.Pointer(_szResult)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9f0-baf9-11ce-8c82-00aa004ba90b
@@ -457,21 +477,21 @@ type IInternetProtocolSinkStackable struct {
 var IID_IInternetProtocolSinkStackable = win32.GUID{Data1: 0x79eac9f0, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // SwitchSink dispatches through IInternetProtocolSinkStackable's vtable slot 3.
-func (self *IInternetProtocolSinkStackable) SwitchSink(pOIProtSink *IInternetProtocolSink) foundation.HRESULT {
+func (self *IInternetProtocolSinkStackable) SwitchSink(pOIProtSink *IInternetProtocolSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOIProtSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitSwitch dispatches through IInternetProtocolSinkStackable's vtable slot 4.
-func (self *IInternetProtocolSinkStackable) CommitSwitch() foundation.HRESULT {
+func (self *IInternetProtocolSinkStackable) CommitSwitch() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RollbackSwitch dispatches through IInternetProtocolSinkStackable's vtable slot 5.
-func (self *IInternetProtocolSinkStackable) RollbackSwitch() foundation.HRESULT {
+func (self *IInternetProtocolSinkStackable) RollbackSwitch() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9ee-baf9-11ce-8c82-00aa004ba90b
@@ -483,51 +503,56 @@ type IInternetSecurityManager struct {
 var IID_IInternetSecurityManager = win32.GUID{Data1: 0x79eac9ee, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // SetSecuritySite dispatches through IInternetSecurityManager's vtable slot 3.
-func (self *IInternetSecurityManager) SetSecuritySite(pSite *IInternetSecurityMgrSite) foundation.HRESULT {
+func (self *IInternetSecurityManager) SetSecuritySite(pSite *IInternetSecurityMgrSite) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSite)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecuritySite dispatches through IInternetSecurityManager's vtable slot 4.
-func (self *IInternetSecurityManager) GetSecuritySite(ppSite **IInternetSecurityMgrSite) foundation.HRESULT {
+func (self *IInternetSecurityManager) GetSecuritySite(ppSite **IInternetSecurityMgrSite) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSite)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MapUrlToZone dispatches through IInternetSecurityManager's vtable slot 5.
-func (self *IInternetSecurityManager) MapUrlToZone(pwszUrl foundation.PWSTR, pdwZone *uint32, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszUrl)), uintptr(unsafe.Pointer(pdwZone)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func (self *IInternetSecurityManager) MapUrlToZone(pwszUrl string, pdwZone *uint32, dwFlags uint32) error {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(pdwZone)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecurityId dispatches through IInternetSecurityManager's vtable slot 6.
-func (self *IInternetSecurityManager) GetSecurityId(pwszUrl foundation.PWSTR, pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszUrl)), uintptr(unsafe.Pointer(pbSecurityId)), uintptr(unsafe.Pointer(pcbSecurityId)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *IInternetSecurityManager) GetSecurityId(pwszUrl string, pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) error {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(pbSecurityId)), uintptr(unsafe.Pointer(pcbSecurityId)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessUrlAction dispatches through IInternetSecurityManager's vtable slot 7.
-func (self *IInternetSecurityManager) ProcessUrlAction(pwszUrl foundation.PWSTR, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszUrl)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *IInternetSecurityManager) ProcessUrlAction(pwszUrl string, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32) error {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryCustomPolicy dispatches through IInternetSecurityManager's vtable slot 8.
-func (self *IInternetSecurityManager) QueryCustomPolicy(pwszUrl foundation.PWSTR, guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext *byte, cbContext uint32, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszUrl)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(ppPolicy)), uintptr(unsafe.Pointer(pcbPolicy)), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *IInternetSecurityManager) QueryCustomPolicy(pwszUrl string, guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext *byte, cbContext uint32, dwReserved uint32) error {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(ppPolicy)), uintptr(unsafe.Pointer(pcbPolicy)), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetZoneMapping dispatches through IInternetSecurityManager's vtable slot 9.
-func (self *IInternetSecurityManager) SetZoneMapping(dwZone uint32, lpszPattern foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(lpszPattern)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func (self *IInternetSecurityManager) SetZoneMapping(dwZone uint32, lpszPattern string, dwFlags uint32) error {
+	_lpszPattern := win32.UTF16Ptr(lpszPattern)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(_lpszPattern)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetZoneMappings dispatches through IInternetSecurityManager's vtable slot 10.
-func (self *IInternetSecurityManager) GetZoneMappings(dwZone uint32, ppenumString **systemcom.IEnumString, dwFlags uint32) foundation.HRESULT {
+func (self *IInternetSecurityManager) GetZoneMappings(dwZone uint32, ppenumString **systemcom.IEnumString, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(ppenumString)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f164edf1-cc7c-4f0d-9a94-34222625c393
@@ -539,9 +564,10 @@ type IInternetSecurityManagerEx struct {
 var IID_IInternetSecurityManagerEx = win32.GUID{Data1: 0xf164edf1, Data2: 0xcc7c, Data3: 0x4f0d, Data4: [8]byte{0x9a, 0x94, 0x34, 0x22, 0x26, 0x25, 0xc3, 0x93}}
 
 // ProcessUrlActionEx dispatches through IInternetSecurityManagerEx's vtable slot 11.
-func (self *IInternetSecurityManagerEx) ProcessUrlActionEx(pwszUrl foundation.PWSTR, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32, pdwOutFlags *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszUrl)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(pdwOutFlags)))
-	return foundation.HRESULT(r1)
+func (self *IInternetSecurityManagerEx) ProcessUrlActionEx(pwszUrl string, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32, pdwOutFlags *uint32) error {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(pdwOutFlags)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f1e50292-a795-4117-8e09-2b560a72ac60
@@ -553,27 +579,27 @@ type IInternetSecurityManagerEx2 struct {
 var IID_IInternetSecurityManagerEx2 = win32.GUID{Data1: 0xf1e50292, Data2: 0xa795, Data3: 0x4117, Data4: [8]byte{0x8e, 0x09, 0x2b, 0x56, 0x0a, 0x72, 0xac, 0x60}}
 
 // MapUrlToZoneEx2 dispatches through IInternetSecurityManagerEx2's vtable slot 12.
-func (self *IInternetSecurityManagerEx2) MapUrlToZoneEx2(pUri *systemcom.IUri, pdwZone *uint32, dwFlags uint32, ppwszMappedUrl *foundation.PWSTR, pdwOutFlags *uint32) foundation.HRESULT {
+func (self *IInternetSecurityManagerEx2) MapUrlToZoneEx2(pUri *systemcom.IUri, pdwZone *uint32, dwFlags uint32, ppwszMappedUrl *foundation.PWSTR, pdwOutFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)), uintptr(unsafe.Pointer(pdwZone)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppwszMappedUrl)), uintptr(unsafe.Pointer(pdwOutFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessUrlActionEx2 dispatches through IInternetSecurityManagerEx2's vtable slot 13.
-func (self *IInternetSecurityManagerEx2) ProcessUrlActionEx2(pUri *systemcom.IUri, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uintptr, pdwOutFlags *uint32) foundation.HRESULT {
+func (self *IInternetSecurityManagerEx2) ProcessUrlActionEx2(pUri *systemcom.IUri, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uintptr, pdwOutFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(pdwOutFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecurityIdEx2 dispatches through IInternetSecurityManagerEx2's vtable slot 14.
-func (self *IInternetSecurityManagerEx2) GetSecurityIdEx2(pUri *systemcom.IUri, pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) foundation.HRESULT {
+func (self *IInternetSecurityManagerEx2) GetSecurityIdEx2(pUri *systemcom.IUri, pbSecurityId *byte, pcbSecurityId *uint32, dwReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)), uintptr(unsafe.Pointer(pbSecurityId)), uintptr(unsafe.Pointer(pcbSecurityId)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryCustomPolicyEx2 dispatches through IInternetSecurityManagerEx2's vtable slot 15.
-func (self *IInternetSecurityManagerEx2) QueryCustomPolicyEx2(pUri *systemcom.IUri, guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext *byte, cbContext uint32, dwReserved uintptr) foundation.HRESULT {
+func (self *IInternetSecurityManagerEx2) QueryCustomPolicyEx2(pUri *systemcom.IUri, guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext *byte, cbContext uint32, dwReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(ppPolicy)), uintptr(unsafe.Pointer(pcbPolicy)), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9ed-baf9-11ce-8c82-00aa004ba90b
@@ -585,15 +611,16 @@ type IInternetSecurityMgrSite struct {
 var IID_IInternetSecurityMgrSite = win32.GUID{Data1: 0x79eac9ed, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // GetWindow dispatches through IInternetSecurityMgrSite's vtable slot 3.
-func (self *IInternetSecurityMgrSite) GetWindow(phwnd *foundation.HWND) foundation.HRESULT {
+func (self *IInternetSecurityMgrSite) GetWindow(phwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableModeless dispatches through IInternetSecurityMgrSite's vtable slot 4.
-func (self *IInternetSecurityMgrSite) EnableModeless(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *IInternetSecurityMgrSite) EnableModeless(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9e7-baf9-11ce-8c82-00aa004ba90b
@@ -605,45 +632,50 @@ type IInternetSession struct {
 var IID_IInternetSession = win32.GUID{Data1: 0x79eac9e7, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // RegisterNameSpace dispatches through IInternetSession's vtable slot 3.
-func (self *IInternetSession) RegisterNameSpace(pCF *systemcom.IClassFactory, rclsid *win32.GUID, pwzProtocol foundation.PWSTR, cPatterns uint32, ppwzPatterns *foundation.PWSTR, dwReserved uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCF)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pwzProtocol)), uintptr(cPatterns), uintptr(unsafe.Pointer(ppwzPatterns)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+func (self *IInternetSession) RegisterNameSpace(pCF *systemcom.IClassFactory, rclsid *win32.GUID, pwzProtocol string, cPatterns uint32, ppwzPatterns *foundation.PWSTR, dwReserved uint32) error {
+	_pwzProtocol := win32.UTF16Ptr(pwzProtocol)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCF)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(_pwzProtocol)), uintptr(cPatterns), uintptr(unsafe.Pointer(ppwzPatterns)), uintptr(dwReserved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterNameSpace dispatches through IInternetSession's vtable slot 4.
-func (self *IInternetSession) UnregisterNameSpace(pCF *systemcom.IClassFactory, pszProtocol foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCF)), uintptr(unsafe.Pointer(pszProtocol)))
-	return foundation.HRESULT(r1)
+func (self *IInternetSession) UnregisterNameSpace(pCF *systemcom.IClassFactory, pszProtocol string) error {
+	_pszProtocol := win32.UTF16Ptr(pszProtocol)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCF)), uintptr(unsafe.Pointer(_pszProtocol)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterMimeFilter dispatches through IInternetSession's vtable slot 5.
-func (self *IInternetSession) RegisterMimeFilter(pCF *systemcom.IClassFactory, rclsid *win32.GUID, pwzType foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCF)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pwzType)))
-	return foundation.HRESULT(r1)
+func (self *IInternetSession) RegisterMimeFilter(pCF *systemcom.IClassFactory, rclsid *win32.GUID, pwzType string) error {
+	_pwzType := win32.UTF16Ptr(pwzType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCF)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(_pwzType)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterMimeFilter dispatches through IInternetSession's vtable slot 6.
-func (self *IInternetSession) UnregisterMimeFilter(pCF *systemcom.IClassFactory, pwzType foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCF)), uintptr(unsafe.Pointer(pwzType)))
-	return foundation.HRESULT(r1)
+func (self *IInternetSession) UnregisterMimeFilter(pCF *systemcom.IClassFactory, pwzType string) error {
+	_pwzType := win32.UTF16Ptr(pwzType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCF)), uintptr(unsafe.Pointer(_pwzType)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBinding dispatches through IInternetSession's vtable slot 7.
-func (self *IInternetSession) CreateBinding(pBC *systemcom.IBindCtx, szUrl foundation.PWSTR, pUnkOuter *systemcom.IUnknown, ppUnk **systemcom.IUnknown, ppOInetProt **IInternetProtocol, dwOption uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(szUrl)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(ppUnk)), uintptr(unsafe.Pointer(ppOInetProt)), uintptr(dwOption))
-	return foundation.HRESULT(r1)
+func (self *IInternetSession) CreateBinding(pBC *systemcom.IBindCtx, szUrl string, pUnkOuter *systemcom.IUnknown, ppUnk **systemcom.IUnknown, ppOInetProt **IInternetProtocol, dwOption uint32) error {
+	_szUrl := win32.UTF16Ptr(szUrl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(_szUrl)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(ppUnk)), uintptr(unsafe.Pointer(ppOInetProt)), uintptr(dwOption))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSessionOption dispatches through IInternetSession's vtable slot 8.
-func (self *IInternetSession) SetSessionOption(dwOption uint32, pBuffer unsafe.Pointer, dwBufferLength uint32, dwReserved uint32) foundation.HRESULT {
+func (self *IInternetSession) SetSessionOption(dwOption uint32, pBuffer unsafe.Pointer, dwBufferLength uint32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwOption), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwBufferLength), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSessionOption dispatches through IInternetSession's vtable slot 9.
-func (self *IInternetSession) GetSessionOption(dwOption uint32, pBuffer unsafe.Pointer, pdwBufferLength *uint32, dwReserved uint32) foundation.HRESULT {
+func (self *IInternetSession) GetSessionOption(dwOption uint32, pBuffer unsafe.Pointer, pdwBufferLength *uint32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwOption), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pdwBufferLength)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9e8-baf9-11ce-8c82-00aa004ba90b
@@ -655,15 +687,15 @@ type IInternetThreadSwitch struct {
 var IID_IInternetThreadSwitch = win32.GUID{Data1: 0x79eac9e8, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // Prepare dispatches through IInternetThreadSwitch's vtable slot 3.
-func (self *IInternetThreadSwitch) Prepare() foundation.HRESULT {
+func (self *IInternetThreadSwitch) Prepare() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Continue dispatches through IInternetThreadSwitch's vtable slot 4.
-func (self *IInternetThreadSwitch) Continue() foundation.HRESULT {
+func (self *IInternetThreadSwitch) Continue() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9ef-baf9-11ce-8c82-00aa004ba90b
@@ -675,75 +707,79 @@ type IInternetZoneManager struct {
 var IID_IInternetZoneManager = win32.GUID{Data1: 0x79eac9ef, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // GetZoneAttributes dispatches through IInternetZoneManager's vtable slot 3.
-func (self *IInternetZoneManager) GetZoneAttributes(dwZone uint32, pZoneAttributes *ZONEATTRIBUTES) foundation.HRESULT {
+func (self *IInternetZoneManager) GetZoneAttributes(dwZone uint32, pZoneAttributes *ZONEATTRIBUTES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(pZoneAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetZoneAttributes dispatches through IInternetZoneManager's vtable slot 4.
-func (self *IInternetZoneManager) SetZoneAttributes(dwZone uint32, pZoneAttributes *ZONEATTRIBUTES) foundation.HRESULT {
+func (self *IInternetZoneManager) SetZoneAttributes(dwZone uint32, pZoneAttributes *ZONEATTRIBUTES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(pZoneAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetZoneCustomPolicy dispatches through IInternetZoneManager's vtable slot 5.
-func (self *IInternetZoneManager) GetZoneCustomPolicy(dwZone uint32, guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, urlZoneReg URLZONEREG) foundation.HRESULT {
+func (self *IInternetZoneManager) GetZoneCustomPolicy(dwZone uint32, guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, urlZoneReg URLZONEREG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(ppPolicy)), uintptr(unsafe.Pointer(pcbPolicy)), uintptr(urlZoneReg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetZoneCustomPolicy dispatches through IInternetZoneManager's vtable slot 6.
-func (self *IInternetZoneManager) SetZoneCustomPolicy(dwZone uint32, guidKey *win32.GUID, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG) foundation.HRESULT {
+func (self *IInternetZoneManager) SetZoneCustomPolicy(dwZone uint32, guidKey *win32.GUID, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetZoneActionPolicy dispatches through IInternetZoneManager's vtable slot 7.
-func (self *IInternetZoneManager) GetZoneActionPolicy(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG) foundation.HRESULT {
+func (self *IInternetZoneManager) GetZoneActionPolicy(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetZoneActionPolicy dispatches through IInternetZoneManager's vtable slot 8.
-func (self *IInternetZoneManager) SetZoneActionPolicy(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG) foundation.HRESULT {
+func (self *IInternetZoneManager) SetZoneActionPolicy(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PromptAction dispatches through IInternetZoneManager's vtable slot 9.
-func (self *IInternetZoneManager) PromptAction(dwAction uint32, hwndParent foundation.HWND, pwszUrl foundation.PWSTR, pwszText foundation.PWSTR, dwPromptFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwAction), uintptr(hwndParent), uintptr(unsafe.Pointer(pwszUrl)), uintptr(unsafe.Pointer(pwszText)), uintptr(dwPromptFlags))
-	return foundation.HRESULT(r1)
+func (self *IInternetZoneManager) PromptAction(dwAction uint32, hwndParent foundation.HWND, pwszUrl string, pwszText string, dwPromptFlags uint32) error {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	_pwszText := win32.UTF16Ptr(pwszText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwAction), uintptr(hwndParent), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(_pwszText)), uintptr(dwPromptFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LogAction dispatches through IInternetZoneManager's vtable slot 10.
-func (self *IInternetZoneManager) LogAction(dwAction uint32, pwszUrl foundation.PWSTR, pwszText foundation.PWSTR, dwLogFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwAction), uintptr(unsafe.Pointer(pwszUrl)), uintptr(unsafe.Pointer(pwszText)), uintptr(dwLogFlags))
-	return foundation.HRESULT(r1)
+func (self *IInternetZoneManager) LogAction(dwAction uint32, pwszUrl string, pwszText string, dwLogFlags uint32) error {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	_pwszText := win32.UTF16Ptr(pwszText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwAction), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(_pwszText)), uintptr(dwLogFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateZoneEnumerator dispatches through IInternetZoneManager's vtable slot 11.
-func (self *IInternetZoneManager) CreateZoneEnumerator(pdwEnum *uint32, pdwCount *uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IInternetZoneManager) CreateZoneEnumerator(pdwEnum *uint32, pdwCount *uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwEnum)), uintptr(unsafe.Pointer(pdwCount)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetZoneAt dispatches through IInternetZoneManager's vtable slot 12.
-func (self *IInternetZoneManager) GetZoneAt(dwEnum uint32, dwIndex uint32, pdwZone *uint32) foundation.HRESULT {
+func (self *IInternetZoneManager) GetZoneAt(dwEnum uint32, dwIndex uint32, pdwZone *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwEnum), uintptr(dwIndex), uintptr(unsafe.Pointer(pdwZone)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroyZoneEnumerator dispatches through IInternetZoneManager's vtable slot 13.
-func (self *IInternetZoneManager) DestroyZoneEnumerator(dwEnum uint32) foundation.HRESULT {
+func (self *IInternetZoneManager) DestroyZoneEnumerator(dwEnum uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwEnum))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyTemplatePoliciesToZone dispatches through IInternetZoneManager's vtable slot 14.
-func (self *IInternetZoneManager) CopyTemplatePoliciesToZone(dwTemplate uint32, dwZone uint32, dwReserved uint32) foundation.HRESULT {
+func (self *IInternetZoneManager) CopyTemplatePoliciesToZone(dwTemplate uint32, dwZone uint32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwTemplate), uintptr(dwZone), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a4c23339-8e06-431e-9bf4-7e711c085648
@@ -755,15 +791,15 @@ type IInternetZoneManagerEx struct {
 var IID_IInternetZoneManagerEx = win32.GUID{Data1: 0xa4c23339, Data2: 0x8e06, Data3: 0x431e, Data4: [8]byte{0x9b, 0xf4, 0x7e, 0x71, 0x1c, 0x08, 0x56, 0x48}}
 
 // GetZoneActionPolicyEx dispatches through IInternetZoneManagerEx's vtable slot 15.
-func (self *IInternetZoneManagerEx) GetZoneActionPolicyEx(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG, dwFlags uint32) foundation.HRESULT {
+func (self *IInternetZoneManagerEx) GetZoneActionPolicyEx(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetZoneActionPolicyEx dispatches through IInternetZoneManagerEx's vtable slot 16.
-func (self *IInternetZoneManagerEx) SetZoneActionPolicyEx(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG, dwFlags uint32) foundation.HRESULT {
+func (self *IInternetZoneManagerEx) SetZoneActionPolicyEx(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: edc17559-dd5d-4846-8eef-8becba5a4abf
@@ -775,27 +811,30 @@ type IInternetZoneManagerEx2 struct {
 var IID_IInternetZoneManagerEx2 = win32.GUID{Data1: 0xedc17559, Data2: 0xdd5d, Data3: 0x4846, Data4: [8]byte{0x8e, 0xef, 0x8b, 0xec, 0xba, 0x5a, 0x4a, 0xbf}}
 
 // GetZoneAttributesEx dispatches through IInternetZoneManagerEx2's vtable slot 17.
-func (self *IInternetZoneManagerEx2) GetZoneAttributesEx(dwZone uint32, pZoneAttributes *ZONEATTRIBUTES, dwFlags uint32) foundation.HRESULT {
+func (self *IInternetZoneManagerEx2) GetZoneAttributesEx(dwZone uint32, pZoneAttributes *ZONEATTRIBUTES, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(pZoneAttributes)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetZoneSecurityState dispatches through IInternetZoneManagerEx2's vtable slot 18.
-func (self *IInternetZoneManagerEx2) GetZoneSecurityState(dwZoneIndex uint32, fRespectPolicy foundation.BOOL, pdwState *uint32, pfPolicyEncountered *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwZoneIndex), uintptr(fRespectPolicy), uintptr(unsafe.Pointer(pdwState)), uintptr(unsafe.Pointer(pfPolicyEncountered)))
-	return foundation.HRESULT(r1)
+func (self *IInternetZoneManagerEx2) GetZoneSecurityState(dwZoneIndex uint32, fRespectPolicy bool, pdwState *uint32, pfPolicyEncountered *foundation.BOOL) error {
+	_fRespectPolicy := win32.Bool32(fRespectPolicy)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwZoneIndex), uintptr(_fRespectPolicy), uintptr(unsafe.Pointer(pdwState)), uintptr(unsafe.Pointer(pfPolicyEncountered)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIESecurityState dispatches through IInternetZoneManagerEx2's vtable slot 19.
-func (self *IInternetZoneManagerEx2) GetIESecurityState(fRespectPolicy foundation.BOOL, pdwState *uint32, pfPolicyEncountered *foundation.BOOL, fNoCache foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(fRespectPolicy), uintptr(unsafe.Pointer(pdwState)), uintptr(unsafe.Pointer(pfPolicyEncountered)), uintptr(fNoCache))
-	return foundation.HRESULT(r1)
+func (self *IInternetZoneManagerEx2) GetIESecurityState(fRespectPolicy bool, pdwState *uint32, pfPolicyEncountered *foundation.BOOL, fNoCache bool) error {
+	_fRespectPolicy := win32.Bool32(fRespectPolicy)
+	_fNoCache := win32.Bool32(fNoCache)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(_fRespectPolicy), uintptr(unsafe.Pointer(pdwState)), uintptr(unsafe.Pointer(pfPolicyEncountered)), uintptr(_fNoCache))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FixUnsecureSettings dispatches through IInternetZoneManagerEx2's vtable slot 20.
-func (self *IInternetZoneManagerEx2) FixUnsecureSettings() foundation.HRESULT {
+func (self *IInternetZoneManagerEx2) FixUnsecureSettings() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a5ca5f7f-1847-4d87-9c5b-918509f7511d
@@ -807,9 +846,10 @@ type IMonikerProp struct {
 var IID_IMonikerProp = win32.GUID{Data1: 0xa5ca5f7f, Data2: 0x1847, Data3: 0x4d87, Data4: [8]byte{0x9c, 0x5b, 0x91, 0x85, 0x09, 0xf7, 0x51, 0x1d}}
 
 // PutProperty dispatches through IMonikerProp's vtable slot 3.
-func (self *IMonikerProp) PutProperty(mkp MONIKERPROPERTY, val foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(mkp), uintptr(unsafe.Pointer(val)))
-	return foundation.HRESULT(r1)
+func (self *IMonikerProp) PutProperty(mkp MONIKERPROPERTY, val string) error {
+	_val := win32.UTF16Ptr(val)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(mkp), uintptr(unsafe.Pointer(_val)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9c9-baf9-11ce-8c82-00aa004ba90b
@@ -821,39 +861,41 @@ type IPersistMoniker struct {
 var IID_IPersistMoniker = win32.GUID{Data1: 0x79eac9c9, Data2: 0xbaf9, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // GetClassID dispatches through IPersistMoniker's vtable slot 3.
-func (self *IPersistMoniker) GetClassID(pClassID *win32.GUID) foundation.HRESULT {
+func (self *IPersistMoniker) GetClassID(pClassID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClassID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDirty dispatches through IPersistMoniker's vtable slot 4.
-func (self *IPersistMoniker) IsDirty() foundation.HRESULT {
+func (self *IPersistMoniker) IsDirty() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Load dispatches through IPersistMoniker's vtable slot 5.
-func (self *IPersistMoniker) Load(fFullyAvailable foundation.BOOL, pimkName *systemcom.IMoniker, pibc *systemcom.IBindCtx, grfMode uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fFullyAvailable), uintptr(unsafe.Pointer(pimkName)), uintptr(unsafe.Pointer(pibc)), uintptr(grfMode))
-	return foundation.HRESULT(r1)
+func (self *IPersistMoniker) Load(fFullyAvailable bool, pimkName *systemcom.IMoniker, pibc *systemcom.IBindCtx, grfMode uint32) error {
+	_fFullyAvailable := win32.Bool32(fFullyAvailable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_fFullyAvailable), uintptr(unsafe.Pointer(pimkName)), uintptr(unsafe.Pointer(pibc)), uintptr(grfMode))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Save dispatches through IPersistMoniker's vtable slot 6.
-func (self *IPersistMoniker) Save(pimkName *systemcom.IMoniker, pbc *systemcom.IBindCtx, fRemember foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pimkName)), uintptr(unsafe.Pointer(pbc)), uintptr(fRemember))
-	return foundation.HRESULT(r1)
+func (self *IPersistMoniker) Save(pimkName *systemcom.IMoniker, pbc *systemcom.IBindCtx, fRemember bool) error {
+	_fRemember := win32.Bool32(fRemember)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pimkName)), uintptr(unsafe.Pointer(pbc)), uintptr(_fRemember))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveCompleted dispatches through IPersistMoniker's vtable slot 7.
-func (self *IPersistMoniker) SaveCompleted(pimkName *systemcom.IMoniker, pibc *systemcom.IBindCtx) foundation.HRESULT {
+func (self *IPersistMoniker) SaveCompleted(pimkName *systemcom.IMoniker, pibc *systemcom.IBindCtx) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pimkName)), uintptr(unsafe.Pointer(pibc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurMoniker dispatches through IPersistMoniker's vtable slot 8.
-func (self *IPersistMoniker) GetCurMoniker(ppimkName **systemcom.IMoniker) foundation.HRESULT {
+func (self *IPersistMoniker) GetCurMoniker(ppimkName **systemcom.IMoniker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppimkName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b15b8dc1-c7e1-11d0-8680-00aa00bdcb71
@@ -865,27 +907,28 @@ type ISoftDistExt struct {
 var IID_ISoftDistExt = win32.GUID{Data1: 0xb15b8dc1, Data2: 0xc7e1, Data3: 0x11d0, Data4: [8]byte{0x86, 0x80, 0x00, 0xaa, 0x00, 0xbd, 0xcb, 0x71}}
 
 // ProcessSoftDist dispatches through ISoftDistExt's vtable slot 3.
-func (self *ISoftDistExt) ProcessSoftDist(szCDFURL foundation.PWSTR, pSoftDistElement *dataxmlmsxml.IXMLElement, lpsdi *SOFTDISTINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szCDFURL)), uintptr(unsafe.Pointer(pSoftDistElement)), uintptr(unsafe.Pointer(lpsdi)))
-	return foundation.HRESULT(r1)
+func (self *ISoftDistExt) ProcessSoftDist(szCDFURL string, pSoftDistElement *dataxmlmsxml.IXMLElement, lpsdi *SOFTDISTINFO) error {
+	_szCDFURL := win32.UTF16Ptr(szCDFURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szCDFURL)), uintptr(unsafe.Pointer(pSoftDistElement)), uintptr(unsafe.Pointer(lpsdi)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFirstCodeBase dispatches through ISoftDistExt's vtable slot 4.
-func (self *ISoftDistExt) GetFirstCodeBase(szCodeBase *foundation.PWSTR, dwMaxSize *uint32) foundation.HRESULT {
+func (self *ISoftDistExt) GetFirstCodeBase(szCodeBase *foundation.PWSTR, dwMaxSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szCodeBase)), uintptr(unsafe.Pointer(dwMaxSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextCodeBase dispatches through ISoftDistExt's vtable slot 5.
-func (self *ISoftDistExt) GetNextCodeBase(szCodeBase *foundation.PWSTR, dwMaxSize *uint32) foundation.HRESULT {
+func (self *ISoftDistExt) GetNextCodeBase(szCodeBase *foundation.PWSTR, dwMaxSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szCodeBase)), uintptr(unsafe.Pointer(dwMaxSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AsyncInstallDistributionUnit dispatches through ISoftDistExt's vtable slot 6.
-func (self *ISoftDistExt) AsyncInstallDistributionUnit(pbc *systemcom.IBindCtx, pvReserved unsafe.Pointer, flags uint32, lpcbh *CODEBASEHOLD) foundation.HRESULT {
+func (self *ISoftDistExt) AsyncInstallDistributionUnit(pbc *systemcom.IBindCtx, pvReserved unsafe.Pointer, flags uint32, lpcbh *CODEBASEHOLD) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(pvReserved)), uintptr(flags), uintptr(unsafe.Pointer(lpcbh)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e982ce48-0b96-440c-bc37-0c869b27a29e
@@ -897,15 +940,15 @@ type IUriBuilderFactory struct {
 var IID_IUriBuilderFactory = win32.GUID{Data1: 0xe982ce48, Data2: 0x0b96, Data3: 0x440c, Data4: [8]byte{0xbc, 0x37, 0x0c, 0x86, 0x9b, 0x27, 0xa2, 0x9e}}
 
 // CreateIUriBuilder dispatches through IUriBuilderFactory's vtable slot 3.
-func (self *IUriBuilderFactory) CreateIUriBuilder(dwFlags uint32, dwReserved uintptr, ppIUriBuilder **systemcom.IUriBuilder) foundation.HRESULT {
+func (self *IUriBuilderFactory) CreateIUriBuilder(dwFlags uint32, dwReserved uintptr, ppIUriBuilder **systemcom.IUriBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppIUriBuilder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateInitializedIUriBuilder dispatches through IUriBuilderFactory's vtable slot 4.
-func (self *IUriBuilderFactory) CreateInitializedIUriBuilder(dwFlags uint32, dwReserved uintptr, ppIUriBuilder **systemcom.IUriBuilder) foundation.HRESULT {
+func (self *IUriBuilderFactory) CreateInitializedIUriBuilder(dwFlags uint32, dwReserved uintptr, ppIUriBuilder **systemcom.IUriBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(ppIUriBuilder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a158a630-ed6f-45fb-b987-f68676f57752
@@ -917,9 +960,9 @@ type IUriContainer struct {
 var IID_IUriContainer = win32.GUID{Data1: 0xa158a630, Data2: 0xed6f, Data3: 0x45fb, Data4: [8]byte{0xb9, 0x87, 0xf6, 0x86, 0x76, 0xf5, 0x77, 0x52}}
 
 // GetIUri dispatches through IUriContainer's vtable slot 3.
-func (self *IUriContainer) GetIUri(ppIUri **systemcom.IUri) foundation.HRESULT {
+func (self *IUriContainer) GetIUri(ppIUri **systemcom.IUri) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIUri)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: dd1ec3b3-8391-4fdb-a9e6-347c3caaa7dd
@@ -931,9 +974,10 @@ type IWinInetCacheHints struct {
 var IID_IWinInetCacheHints = win32.GUID{Data1: 0xdd1ec3b3, Data2: 0x8391, Data3: 0x4fdb, Data4: [8]byte{0xa9, 0xe6, 0x34, 0x7c, 0x3c, 0xaa, 0xa7, 0xdd}}
 
 // SetCacheExtension dispatches through IWinInetCacheHints's vtable slot 3.
-func (self *IWinInetCacheHints) SetCacheExtension(pwzExt foundation.PWSTR, pszCacheFile unsafe.Pointer, pcbCacheFile *uint32, pdwWinInetError *uint32, pdwReserved *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwzExt)), uintptr(unsafe.Pointer(pszCacheFile)), uintptr(unsafe.Pointer(pcbCacheFile)), uintptr(unsafe.Pointer(pdwWinInetError)), uintptr(unsafe.Pointer(pdwReserved)))
-	return foundation.HRESULT(r1)
+func (self *IWinInetCacheHints) SetCacheExtension(pwzExt string, pszCacheFile unsafe.Pointer, pcbCacheFile *uint32, pdwWinInetError *uint32, pdwReserved *uint32) error {
+	_pwzExt := win32.UTF16Ptr(pwzExt)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzExt)), uintptr(unsafe.Pointer(pszCacheFile)), uintptr(unsafe.Pointer(pcbCacheFile)), uintptr(unsafe.Pointer(pdwWinInetError)), uintptr(unsafe.Pointer(pdwReserved)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7857aeac-d31f-49bf-884e-dd46df36780a
@@ -945,9 +989,10 @@ type IWinInetCacheHints2 struct {
 var IID_IWinInetCacheHints2 = win32.GUID{Data1: 0x7857aeac, Data2: 0xd31f, Data3: 0x49bf, Data4: [8]byte{0x88, 0x4e, 0xdd, 0x46, 0xdf, 0x36, 0x78, 0x0a}}
 
 // SetCacheExtension2 dispatches through IWinInetCacheHints2's vtable slot 4.
-func (self *IWinInetCacheHints2) SetCacheExtension2(pwzExt foundation.PWSTR, pwzCacheFile foundation.PWSTR, pcchCacheFile *uint32, pdwWinInetError *uint32, pdwReserved *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwzExt)), uintptr(unsafe.Pointer(pwzCacheFile)), uintptr(unsafe.Pointer(pcchCacheFile)), uintptr(unsafe.Pointer(pdwWinInetError)), uintptr(unsafe.Pointer(pdwReserved)))
-	return foundation.HRESULT(r1)
+func (self *IWinInetCacheHints2) SetCacheExtension2(pwzExt string, pwzCacheFile foundation.PWSTR, pcchCacheFile *uint32, pdwWinInetError *uint32, pdwReserved *uint32) error {
+	_pwzExt := win32.UTF16Ptr(pwzExt)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzExt)), uintptr(unsafe.Pointer(pwzCacheFile)), uintptr(unsafe.Pointer(pcchCacheFile)), uintptr(unsafe.Pointer(pdwWinInetError)), uintptr(unsafe.Pointer(pdwReserved)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f134c4b7-b1f8-4e75-b886-74b90943becb
@@ -959,15 +1004,15 @@ type IWinInetFileStream struct {
 var IID_IWinInetFileStream = win32.GUID{Data1: 0xf134c4b7, Data2: 0xb1f8, Data3: 0x4e75, Data4: [8]byte{0xb8, 0x86, 0x74, 0xb9, 0x09, 0x43, 0xbe, 0xcb}}
 
 // SetHandleForUnlock dispatches through IWinInetFileStream's vtable slot 3.
-func (self *IWinInetFileStream) SetHandleForUnlock(hWinInetLockHandle uintptr, dwReserved uintptr) foundation.HRESULT {
+func (self *IWinInetFileStream) SetHandleForUnlock(hWinInetLockHandle uintptr, dwReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hWinInetLockHandle), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDeleteFile dispatches through IWinInetFileStream's vtable slot 4.
-func (self *IWinInetFileStream) SetDeleteFile(dwReserved uintptr) foundation.HRESULT {
+func (self *IWinInetFileStream) SetDeleteFile(dwReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9d8-bafa-11ce-8c82-00aa004ba90b
@@ -979,9 +1024,9 @@ type IWinInetHttpInfo struct {
 var IID_IWinInetHttpInfo = win32.GUID{Data1: 0x79eac9d8, Data2: 0xbafa, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // QueryInfo dispatches through IWinInetHttpInfo's vtable slot 4.
-func (self *IWinInetHttpInfo) QueryInfo(dwOption uint32, pBuffer unsafe.Pointer, pcbBuf *uint32, pdwFlags *uint32, pdwReserved *uint32) foundation.HRESULT {
+func (self *IWinInetHttpInfo) QueryInfo(dwOption uint32, pBuffer unsafe.Pointer, pcbBuf *uint32, pdwFlags *uint32, pdwReserved *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwOption), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbBuf)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(unsafe.Pointer(pdwReserved)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f286fa56-c1fd-4270-8e67-b3eb790a81e8
@@ -993,9 +1038,9 @@ type IWinInetHttpTimeouts struct {
 var IID_IWinInetHttpTimeouts = win32.GUID{Data1: 0xf286fa56, Data2: 0xc1fd, Data3: 0x4270, Data4: [8]byte{0x8e, 0x67, 0xb3, 0xeb, 0x79, 0x0a, 0x81, 0xe8}}
 
 // GetRequestTimeouts dispatches through IWinInetHttpTimeouts's vtable slot 3.
-func (self *IWinInetHttpTimeouts) GetRequestTimeouts(pdwConnectTimeout *uint32, pdwSendTimeout *uint32, pdwReceiveTimeout *uint32) foundation.HRESULT {
+func (self *IWinInetHttpTimeouts) GetRequestTimeouts(pdwConnectTimeout *uint32, pdwSendTimeout *uint32, pdwReceiveTimeout *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwConnectTimeout)), uintptr(unsafe.Pointer(pdwSendTimeout)), uintptr(unsafe.Pointer(pdwReceiveTimeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9d6-bafa-11ce-8c82-00aa004ba90b
@@ -1007,9 +1052,9 @@ type IWinInetInfo struct {
 var IID_IWinInetInfo = win32.GUID{Data1: 0x79eac9d6, Data2: 0xbafa, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // QueryOption dispatches through IWinInetInfo's vtable slot 3.
-func (self *IWinInetInfo) QueryOption(dwOption uint32, pBuffer unsafe.Pointer, pcbBuf *uint32) foundation.HRESULT {
+func (self *IWinInetInfo) QueryOption(dwOption uint32, pBuffer unsafe.Pointer, pcbBuf *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwOption), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbBuf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 79eac9d5-bafa-11ce-8c82-00aa004ba90b
@@ -1021,9 +1066,9 @@ type IWindowForBindingUI struct {
 var IID_IWindowForBindingUI = win32.GUID{Data1: 0x79eac9d5, Data2: 0xbafa, Data3: 0x11ce, Data4: [8]byte{0x8c, 0x82, 0x00, 0xaa, 0x00, 0x4b, 0xa9, 0x0b}}
 
 // GetWindow dispatches through IWindowForBindingUI's vtable slot 3.
-func (self *IWindowForBindingUI) GetWindow(rguidReason *win32.GUID, phwnd *foundation.HWND) foundation.HRESULT {
+func (self *IWindowForBindingUI) GetWindow(rguidReason *win32.GUID, phwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidReason)), uintptr(unsafe.Pointer(phwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 53c84785-8425-4dc5-971b-e58d9c19f9b6
@@ -1035,9 +1080,9 @@ type IWrappedProtocol struct {
 var IID_IWrappedProtocol = win32.GUID{Data1: 0x53c84785, Data2: 0x8425, Data3: 0x4dc5, Data4: [8]byte{0x97, 0x1b, 0xe5, 0x8d, 0x9c, 0x19, 0xf9, 0xb6}}
 
 // GetWrapperCode dispatches through IWrappedProtocol's vtable slot 3.
-func (self *IWrappedProtocol) GetWrapperCode(pnCode *int32, dwReserved uintptr) foundation.HRESULT {
+func (self *IWrappedProtocol) GetWrapperCode(pnCode *int32, dwReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnCode)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: cd45f185-1b21-48e2-967b-ead743a8914e
@@ -1049,21 +1094,21 @@ type IZoneIdentifier struct {
 var IID_IZoneIdentifier = win32.GUID{Data1: 0xcd45f185, Data2: 0x1b21, Data3: 0x48e2, Data4: [8]byte{0x96, 0x7b, 0xea, 0xd7, 0x43, 0xa8, 0x91, 0x4e}}
 
 // GetId dispatches through IZoneIdentifier's vtable slot 3.
-func (self *IZoneIdentifier) GetId(pdwZone *uint32) foundation.HRESULT {
+func (self *IZoneIdentifier) GetId(pdwZone *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwZone)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetId dispatches through IZoneIdentifier's vtable slot 4.
-func (self *IZoneIdentifier) SetId(dwZone uint32) foundation.HRESULT {
+func (self *IZoneIdentifier) SetId(dwZone uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwZone))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IZoneIdentifier's vtable slot 5.
-func (self *IZoneIdentifier) Remove() foundation.HRESULT {
+func (self *IZoneIdentifier) Remove() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eb5e760c-09ef-45c0-b510-70830ce31e6a
@@ -1075,37 +1120,38 @@ type IZoneIdentifier2 struct {
 var IID_IZoneIdentifier2 = win32.GUID{Data1: 0xeb5e760c, Data2: 0x09ef, Data3: 0x45c0, Data4: [8]byte{0xb5, 0x10, 0x70, 0x83, 0x0c, 0xe3, 0x1e, 0x6a}}
 
 // GetLastWriterPackageFamilyName dispatches through IZoneIdentifier2's vtable slot 6.
-func (self *IZoneIdentifier2) GetLastWriterPackageFamilyName(packageFamilyName *foundation.PWSTR) foundation.HRESULT {
+func (self *IZoneIdentifier2) GetLastWriterPackageFamilyName(packageFamilyName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packageFamilyName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLastWriterPackageFamilyName dispatches through IZoneIdentifier2's vtable slot 7.
-func (self *IZoneIdentifier2) SetLastWriterPackageFamilyName(packageFamilyName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packageFamilyName)))
-	return foundation.HRESULT(r1)
+func (self *IZoneIdentifier2) SetLastWriterPackageFamilyName(packageFamilyName string) error {
+	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_packageFamilyName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveLastWriterPackageFamilyName dispatches through IZoneIdentifier2's vtable slot 8.
-func (self *IZoneIdentifier2) RemoveLastWriterPackageFamilyName() foundation.HRESULT {
+func (self *IZoneIdentifier2) RemoveLastWriterPackageFamilyName() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAppZoneId dispatches through IZoneIdentifier2's vtable slot 9.
-func (self *IZoneIdentifier2) GetAppZoneId(zone *uint32) foundation.HRESULT {
+func (self *IZoneIdentifier2) GetAppZoneId(zone *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(zone)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAppZoneId dispatches through IZoneIdentifier2's vtable slot 10.
-func (self *IZoneIdentifier2) SetAppZoneId(zone uint32) foundation.HRESULT {
+func (self *IZoneIdentifier2) SetAppZoneId(zone uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(zone))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAppZoneId dispatches through IZoneIdentifier2's vtable slot 11.
-func (self *IZoneIdentifier2) RemoveAppZoneId() foundation.HRESULT {
+func (self *IZoneIdentifier2) RemoveAppZoneId() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

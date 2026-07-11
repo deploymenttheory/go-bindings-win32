@@ -5,14 +5,14 @@ honestly — a function's Go signature tells you which domain it uses.
 
 ## The four domains
 
-| Domain | How the API reports failure | Idiomatic Go shape |
+| Domain | How the API reports failure | Go shape |
 |---|---|---|
 | **`GetLastError`** | A `BOOL`/handle return plus a thread-local error code you fetch separately. The metadata marks these `SetLastError`. | `BOOL` + `SetLastError` → **`error`**; a value + `SetLastError` → **`(T, error)`**. The error is a `windows.Errno`. |
 | **`HRESULT`** | A 32-bit status returned directly; negative = failure. Used by COM and many newer flat APIs. | **`error`** via `win32.HRESULTError` (nil when the `HRESULT` is ≥ 0). |
 | **`NTSTATUS`** | A 32-bit status from the native (`ntdll`) layer. | Returned as the typed value; compare against the `STATUS_*` constants. |
 | **`NET_API_STATUS`** and other **domain codes** | A `DWORD` return code specific to a subsystem (networking, setup, registry…). No `SetLastError`. | Returned as **`uint32`** (or the typed enum); compare against the subsystem's constants (`NERR_Success`, `ERROR_*`). |
 
-The idiomatic layer only lowers a return to `error` when the contract actually
+The bindings only lower a return to `error` when the contract actually
 supports it (`SetLastError` or `HRESULT`). A `NET_API_STATUS` stays a `uint32`
 because that *is* the API's error channel — pretending otherwise would hide
 information.
@@ -50,8 +50,8 @@ if hr := structuredstorage.CreateStreamOnHGlobal(0, 1, &stream); hr != 0 {
 	// raw HRESULT still available as a value; or:
 	return win32.HRESULTError(int32(hr))
 }
-// idiomatic COM methods already return error:
-if err := idioStream.Seek(0, 0, &pos); err != nil { /* ... */ }
+// COM methods already return error:
+if err := stream.Seek(0, 0, &pos); err != nil { /* ... */ }
 ```
 
 `win32.Succeeded(hr)` and `win32.HRESULTError(hr)` are in the runtime.
@@ -67,7 +67,7 @@ case 2224: // NERR_UserExists
 }
 ```
 
-The subsystem's own constants are re-exported into the same idiomatic package
+The subsystem's own constants live in the same package
 (`netmanagement.NERR_Success`, …), so you compare without importing anything
 extra.
 

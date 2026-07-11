@@ -28,31 +28,43 @@ var (
 // DSCreateISecurityInfoObject calls DSSEC!DSCreateISecurityInfoObject.
 // https://learn.microsoft.com/windows/win32/api/dssec/nf-dssec-dscreateisecurityinfoobject
 // Minimum OS: windowsserver2008.
-func DSCreateISecurityInfoObject(pwszObjectPath foundation.PWSTR, pwszObjectClass foundation.PWSTR, dwFlags uint32, ppSI **securityauthorizationui.ISecurityInformation, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObject.Addr(), uintptr(unsafe.Pointer(pwszObjectPath)), uintptr(unsafe.Pointer(pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSI)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
-	return foundation.HRESULT(r1)
+func DSCreateISecurityInfoObject(pwszObjectPath string, pwszObjectClass string, dwFlags uint32, ppSI **securityauthorizationui.ISecurityInformation, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) error {
+	_pwszObjectPath := win32.UTF16Ptr(pwszObjectPath)
+	_pwszObjectClass := win32.UTF16Ptr(pwszObjectClass)
+	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObject.Addr(), uintptr(unsafe.Pointer(_pwszObjectPath)), uintptr(unsafe.Pointer(_pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSI)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DSCreateISecurityInfoObjectEx calls DSSEC!DSCreateISecurityInfoObjectEx.
 // https://learn.microsoft.com/windows/win32/api/dssec/nf-dssec-dscreateisecurityinfoobjectex
 // Minimum OS: windowsserver2008.
-func DSCreateISecurityInfoObjectEx(pwszObjectPath foundation.PWSTR, pwszObjectClass foundation.PWSTR, pwszServer foundation.PWSTR, pwszUserName foundation.PWSTR, pwszPassword foundation.PWSTR, dwFlags uint32, ppSI **securityauthorizationui.ISecurityInformation, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObjectEx.Addr(), uintptr(unsafe.Pointer(pwszObjectPath)), uintptr(unsafe.Pointer(pwszObjectClass)), uintptr(unsafe.Pointer(pwszServer)), uintptr(unsafe.Pointer(pwszUserName)), uintptr(unsafe.Pointer(pwszPassword)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSI)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
-	return foundation.HRESULT(r1)
+func DSCreateISecurityInfoObjectEx(pwszObjectPath string, pwszObjectClass string, pwszServer string, pwszUserName string, pwszPassword string, dwFlags uint32, ppSI **securityauthorizationui.ISecurityInformation, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) error {
+	_pwszObjectPath := win32.UTF16Ptr(pwszObjectPath)
+	_pwszObjectClass := win32.UTF16Ptr(pwszObjectClass)
+	_pwszServer := win32.UTF16Ptr(pwszServer)
+	_pwszUserName := win32.UTF16Ptr(pwszUserName)
+	_pwszPassword := win32.UTF16Ptr(pwszPassword)
+	r1, _, _ := syscall.SyscallN(procDSCreateISecurityInfoObjectEx.Addr(), uintptr(unsafe.Pointer(_pwszObjectPath)), uintptr(unsafe.Pointer(_pwszObjectClass)), uintptr(unsafe.Pointer(_pwszServer)), uintptr(unsafe.Pointer(_pwszUserName)), uintptr(unsafe.Pointer(_pwszPassword)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppSI)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DSCreateSecurityPage calls DSSEC!DSCreateSecurityPage.
 // https://learn.microsoft.com/windows/win32/api/dssec/nf-dssec-dscreatesecuritypage
 // Minimum OS: windowsserver2003.
-func DSCreateSecurityPage(pwszObjectPath foundation.PWSTR, pwszObjectClass foundation.PWSTR, dwFlags uint32, phPage *uicontrols.HPROPSHEETPAGE, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDSCreateSecurityPage.Addr(), uintptr(unsafe.Pointer(pwszObjectPath)), uintptr(unsafe.Pointer(pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(phPage)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
-	return foundation.HRESULT(r1)
+func DSCreateSecurityPage(pwszObjectPath string, pwszObjectClass string, dwFlags uint32, phPage *uicontrols.HPROPSHEETPAGE, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) error {
+	_pwszObjectPath := win32.UTF16Ptr(pwszObjectPath)
+	_pwszObjectClass := win32.UTF16Ptr(pwszObjectClass)
+	r1, _, _ := syscall.SyscallN(procDSCreateSecurityPage.Addr(), uintptr(unsafe.Pointer(_pwszObjectPath)), uintptr(unsafe.Pointer(_pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(phPage)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DSEditSecurity calls DSSEC!DSEditSecurity.
 // https://learn.microsoft.com/windows/win32/api/dssec/nf-dssec-dseditsecurity
 // Minimum OS: windowsserver2008.
-func DSEditSecurity(hwndOwner foundation.HWND, pwszObjectPath foundation.PWSTR, pwszObjectClass foundation.PWSTR, dwFlags uint32, pwszCaption foundation.PWSTR, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDSEditSecurity.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(pwszObjectPath)), uintptr(unsafe.Pointer(pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(pwszCaption)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
-	return foundation.HRESULT(r1)
+func DSEditSecurity(hwndOwner foundation.HWND, pwszObjectPath string, pwszObjectClass string, dwFlags uint32, pwszCaption string, pfnReadSD PFNREADOBJECTSECURITY, pfnWriteSD PFNWRITEOBJECTSECURITY, lpContext foundation.LPARAM) error {
+	_pwszObjectPath := win32.UTF16Ptr(pwszObjectPath)
+	_pwszObjectClass := win32.UTF16Ptr(pwszObjectClass)
+	_pwszCaption := win32.UTF16Ptr(pwszCaption)
+	r1, _, _ := syscall.SyscallN(procDSEditSecurity.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(_pwszObjectPath)), uintptr(unsafe.Pointer(_pwszObjectClass)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszCaption)), uintptr(pfnReadSD), uintptr(pfnWriteSD), uintptr(lpContext))
+	return win32.HRESULTError(int32(r1))
 }

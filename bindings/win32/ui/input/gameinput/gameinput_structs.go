@@ -199,8 +199,8 @@ type GameInputForceFeedbackMotorInfo struct {
 	IsInertiaEffectSupported          byte
 }
 
-// GameInputForceFeedbackParams_data_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GameInputForceFeedbackParams_data_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GameInputForceFeedbackParams_data_e__Union struct {
 	Data [13]uint64
 }

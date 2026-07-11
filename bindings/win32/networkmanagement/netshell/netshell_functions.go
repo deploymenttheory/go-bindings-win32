@@ -30,24 +30,35 @@ var (
 // MatchEnumTag calls NETSH!MatchEnumTag.
 // https://learn.microsoft.com/windows/win32/api/netsh/nf-netsh-matchenumtag
 // Minimum OS: windows5.1.2600.
-func MatchEnumTag(hModule foundation.HANDLE, pwcArg foundation.PWSTR, dwNumArg uint32, pEnumTable *TOKEN_VALUE, pdwValue *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMatchEnumTag.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(pwcArg)), uintptr(dwNumArg), uintptr(unsafe.Pointer(pEnumTable)), uintptr(unsafe.Pointer(pdwValue)))
+func MatchEnumTag(hModule foundation.HANDLE, pwcArg string, dwNumArg uint32, pEnumTable *TOKEN_VALUE, pdwValue *uint32) uint32 {
+	_pwcArg := win32.UTF16Ptr(pwcArg)
+	r1, _, _ := syscall.SyscallN(procMatchEnumTag.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(_pwcArg)), uintptr(dwNumArg), uintptr(unsafe.Pointer(pEnumTable)), uintptr(unsafe.Pointer(pdwValue)))
 	return uint32(r1)
 }
 
 // MatchToken calls NETSH!MatchToken.
 // https://learn.microsoft.com/windows/win32/api/netsh/nf-netsh-matchtoken
 // Minimum OS: windows5.1.2600.
-func MatchToken(pwszUserToken foundation.PWSTR, pwszCmdToken foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMatchToken.Addr(), uintptr(unsafe.Pointer(pwszUserToken)), uintptr(unsafe.Pointer(pwszCmdToken)))
-	return foundation.BOOL(r1)
+func MatchToken(pwszUserToken string, pwszCmdToken string) bool {
+	_pwszUserToken := win32.UTF16Ptr(pwszUserToken)
+	_pwszCmdToken := win32.UTF16Ptr(pwszCmdToken)
+	r1, _, _ := syscall.SyscallN(procMatchToken.Addr(), uintptr(unsafe.Pointer(_pwszUserToken)), uintptr(unsafe.Pointer(_pwszCmdToken)))
+	return r1 != 0
 }
 
 // PreprocessCommand calls NETSH!PreprocessCommand.
 // https://learn.microsoft.com/windows/win32/api/netsh/nf-netsh-preprocesscommand
 // Minimum OS: windows5.1.2600.
-func PreprocessCommand(hModule foundation.HANDLE, ppwcArguments *foundation.PWSTR, dwCurrentIndex uint32, dwArgCount uint32, pttTags *TAG_TYPE, dwTagCount uint32, dwMinArgs uint32, dwMaxArgs uint32, pdwTagType *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPreprocessCommand.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(ppwcArguments)), uintptr(dwCurrentIndex), uintptr(dwArgCount), uintptr(unsafe.Pointer(pttTags)), uintptr(dwTagCount), uintptr(dwMinArgs), uintptr(dwMaxArgs), uintptr(unsafe.Pointer(pdwTagType)))
+func PreprocessCommand(hModule foundation.HANDLE, ppwcArguments []foundation.PWSTR, dwCurrentIndex uint32, pttTags []TAG_TYPE, dwMinArgs uint32, dwMaxArgs uint32, pdwTagType *uint32) uint32 {
+	var _ppwcArguments *foundation.PWSTR
+	if len(ppwcArguments) > 0 {
+		_ppwcArguments = &ppwcArguments[0]
+	}
+	var _pttTags *TAG_TYPE
+	if len(pttTags) > 0 {
+		_pttTags = &pttTags[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPreprocessCommand.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(_ppwcArguments)), uintptr(dwCurrentIndex), uintptr(len(ppwcArguments)), uintptr(unsafe.Pointer(_pttTags)), uintptr(len(pttTags)), uintptr(dwMinArgs), uintptr(dwMaxArgs), uintptr(unsafe.Pointer(pdwTagType)))
 	return uint32(r1)
 }
 
@@ -62,8 +73,9 @@ func PrintError(hModule foundation.HANDLE, dwErrId uint32) uint32 {
 // PrintMessage calls NETSH!PrintMessage.
 // https://learn.microsoft.com/windows/win32/api/netsh/nf-netsh-printmessage
 // Minimum OS: windows5.1.2600.
-func PrintMessage(pwszFormat foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPrintMessage.Addr(), uintptr(unsafe.Pointer(pwszFormat)))
+func PrintMessage(pwszFormat string) uint32 {
+	_pwszFormat := win32.UTF16Ptr(pwszFormat)
+	r1, _, _ := syscall.SyscallN(procPrintMessage.Addr(), uintptr(unsafe.Pointer(_pwszFormat)))
 	return uint32(r1)
 }
 

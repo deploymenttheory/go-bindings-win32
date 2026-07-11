@@ -21,7 +21,9 @@ var (
 )
 
 // DoPrivacyDlg calls SHDOCVW!DoPrivacyDlg.
-func DoPrivacyDlg(hwndOwner foundation.HWND, pszUrl foundation.PWSTR, pPrivacyEnum *IEnumPrivacyRecords, fReportAllSites foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDoPrivacyDlg.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(pszUrl)), uintptr(unsafe.Pointer(pPrivacyEnum)), uintptr(fReportAllSites))
-	return foundation.HRESULT(r1)
+func DoPrivacyDlg(hwndOwner foundation.HWND, pszUrl string, pPrivacyEnum *IEnumPrivacyRecords, fReportAllSites bool) error {
+	_pszUrl := win32.UTF16Ptr(pszUrl)
+	_fReportAllSites := win32.Bool32(fReportAllSites)
+	r1, _, _ := syscall.SyscallN(procDoPrivacyDlg.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(pPrivacyEnum)), uintptr(_fReportAllSites))
+	return win32.HRESULTError(int32(r1))
 }

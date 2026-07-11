@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect2d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
@@ -23,15 +22,15 @@ type IGeometrySource2DInterop struct {
 var IID_IGeometrySource2DInterop = win32.GUID{Data1: 0x0657af73, Data2: 0x53fd, Data3: 0x47cf, Data4: [8]byte{0x84, 0xff, 0xc8, 0x49, 0x2d, 0x2a, 0x80, 0xa3}}
 
 // GetGeometry dispatches through IGeometrySource2DInterop's vtable slot 3.
-func (self *IGeometrySource2DInterop) GetGeometry(value **graphicsdirect2d.ID2D1Geometry) foundation.HRESULT {
+func (self *IGeometrySource2DInterop) GetGeometry(value **graphicsdirect2d.ID2D1Geometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TryGetGeometryUsingFactory dispatches through IGeometrySource2DInterop's vtable slot 4.
-func (self *IGeometrySource2DInterop) TryGetGeometryUsingFactory(factory *graphicsdirect2d.ID2D1Factory, value **graphicsdirect2d.ID2D1Geometry) foundation.HRESULT {
+func (self *IGeometrySource2DInterop) TryGetGeometryUsingFactory(factory *graphicsdirect2d.ID2D1Factory, value **graphicsdirect2d.ID2D1Geometry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IGraphicsEffectD2D1Interop: https://learn.microsoft.com/windows/win32/api/windows.graphics.effects.interop/nn-windows-graphics-effects-interop-igraphicseffectd2d1interop
@@ -44,37 +43,38 @@ type IGraphicsEffectD2D1Interop struct {
 var IID_IGraphicsEffectD2D1Interop = win32.GUID{Data1: 0x2fc57384, Data2: 0xa068, Data3: 0x44d7, Data4: [8]byte{0xa3, 0x31, 0x30, 0x98, 0x2f, 0xcf, 0x71, 0x77}}
 
 // GetEffectId dispatches through IGraphicsEffectD2D1Interop's vtable slot 3.
-func (self *IGraphicsEffectD2D1Interop) GetEffectId(id *win32.GUID) foundation.HRESULT {
+func (self *IGraphicsEffectD2D1Interop) GetEffectId(id *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNamedPropertyMapping dispatches through IGraphicsEffectD2D1Interop's vtable slot 4.
-func (self *IGraphicsEffectD2D1Interop) GetNamedPropertyMapping(name foundation.PWSTR, index *uint32, mapping *GRAPHICS_EFFECT_PROPERTY_MAPPING) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(index)), uintptr(unsafe.Pointer(mapping)))
-	return foundation.HRESULT(r1)
+func (self *IGraphicsEffectD2D1Interop) GetNamedPropertyMapping(name string, index *uint32, mapping *GRAPHICS_EFFECT_PROPERTY_MAPPING) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(index)), uintptr(unsafe.Pointer(mapping)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyCount dispatches through IGraphicsEffectD2D1Interop's vtable slot 5.
-func (self *IGraphicsEffectD2D1Interop) GetPropertyCount(count *uint32) foundation.HRESULT {
+func (self *IGraphicsEffectD2D1Interop) GetPropertyCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through IGraphicsEffectD2D1Interop's vtable slot 6.
-func (self *IGraphicsEffectD2D1Interop) GetProperty(index uint32, value *uintptr) foundation.HRESULT {
+func (self *IGraphicsEffectD2D1Interop) GetProperty(index uint32, value *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSource dispatches through IGraphicsEffectD2D1Interop's vtable slot 7.
-func (self *IGraphicsEffectD2D1Interop) GetSource(index uint32, source *uintptr) foundation.HRESULT {
+func (self *IGraphicsEffectD2D1Interop) GetSource(index uint32, source *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(source)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceCount dispatches through IGraphicsEffectD2D1Interop's vtable slot 8.
-func (self *IGraphicsEffectD2D1Interop) GetSourceCount(count *uint32) foundation.HRESULT {
+func (self *IGraphicsEffectD2D1Interop) GetSourceCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

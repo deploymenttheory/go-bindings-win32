@@ -84,8 +84,8 @@ type D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT struct {
 	ReturnCode     foundation.HRESULT
 }
 
-// D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -588,20 +588,20 @@ type D3DGAMMARAMP struct {
 	Blue  [256]uint16
 }
 
-// D3DHVERTEX_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DHVERTEX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DHVERTEX_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DHVERTEX_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DHVERTEX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DHVERTEX_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DHVERTEX_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DHVERTEX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DHVERTEX_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
@@ -712,14 +712,14 @@ type D3DLIGHTINGELEMENT struct {
 	DvNormal   graphicsdirect3d.D3DVECTOR
 }
 
-// D3DLINE_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DLINE_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DLINE_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
-// D3DLINE_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DLINE_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DLINE_Anonymous2_e__Union struct {
 	Data [1]uint16
 }
@@ -742,44 +742,44 @@ type D3DLOCKED_RECT struct {
 	PBits unsafe.Pointer
 }
 
-// D3DLVERTEX_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DLVERTEX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DLVERTEX_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DLVERTEX_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DLVERTEX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DLVERTEX_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DLVERTEX_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DLVERTEX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DLVERTEX_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DLVERTEX_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DLVERTEX_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DLVERTEX_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DLVERTEX_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DLVERTEX_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DLVERTEX_Anonymous5_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DLVERTEX_Anonymous6_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DLVERTEX_Anonymous6_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DLVERTEX_Anonymous6_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DLVERTEX_Anonymous7_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DLVERTEX_Anonymous7_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DLVERTEX_Anonymous7_e__Union struct {
 	Data [1]uint32
 }
@@ -795,32 +795,32 @@ type D3DLVERTEX struct {
 	Anonymous7 D3DLVERTEX_Anonymous7_e__Union
 }
 
-// D3DMATERIAL_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// D3DMATERIAL_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
-// D3DMATERIAL_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL_Anonymous3_e__Union struct {
 	Data [4]uint32
 }
 
-// D3DMATERIAL_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL_Anonymous4_e__Union struct {
 	Data [4]uint32
 }
 
-// D3DMATERIAL_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL_Anonymous5_e__Union struct {
 	Data [1]uint32
 }
@@ -836,32 +836,32 @@ type D3DMATERIAL struct {
 	DwRampSize uint32
 }
 
-// D3DMATERIAL7_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL7_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL7_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// D3DMATERIAL7_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL7_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL7_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
-// D3DMATERIAL7_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL7_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL7_Anonymous3_e__Union struct {
 	Data [4]uint32
 }
 
-// D3DMATERIAL7_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL7_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL7_Anonymous4_e__Union struct {
 	Data [4]uint32
 }
 
-// D3DMATERIAL7_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DMATERIAL7_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DMATERIAL7_Anonymous5_e__Union struct {
 	Data [1]uint32
 }
@@ -1025,14 +1025,14 @@ type D3DSPAN struct {
 	WFirst uint16
 }
 
-// D3DSTATE_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DSTATE_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DSTATE_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DSTATE_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DSTATE_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DSTATE_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -1074,50 +1074,50 @@ type D3DTEXTURELOAD struct {
 	HSrcTexture  uint32
 }
 
-// D3DTLVERTEX_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTLVERTEX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTLVERTEX_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DTLVERTEX_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTLVERTEX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTLVERTEX_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DTLVERTEX_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTLVERTEX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTLVERTEX_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DTLVERTEX_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTLVERTEX_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTLVERTEX_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DTLVERTEX_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTLVERTEX_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTLVERTEX_Anonymous5_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DTLVERTEX_Anonymous6_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTLVERTEX_Anonymous6_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTLVERTEX_Anonymous6_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DTLVERTEX_Anonymous7_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTLVERTEX_Anonymous7_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTLVERTEX_Anonymous7_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DTLVERTEX_Anonymous8_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTLVERTEX_Anonymous8_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTLVERTEX_Anonymous8_e__Union struct {
 	Data [1]uint32
 }
@@ -1151,20 +1151,20 @@ type D3DTRANSFORMDATA struct {
 	DrExtent           D3DRECT
 }
 
-// D3DTRIANGLE_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTRIANGLE_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTRIANGLE_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
-// D3DTRIANGLE_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTRIANGLE_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTRIANGLE_Anonymous2_e__Union struct {
 	Data [1]uint16
 }
 
-// D3DTRIANGLE_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DTRIANGLE_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DTRIANGLE_Anonymous3_e__Union struct {
 	Data [1]uint16
 }
@@ -1184,50 +1184,50 @@ type D3DTRIPATCH_INFO struct {
 	Degree            D3DDEGREETYPE
 }
 
-// D3DVERTEX_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DVERTEX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DVERTEX_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DVERTEX_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DVERTEX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DVERTEX_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DVERTEX_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DVERTEX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DVERTEX_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DVERTEX_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DVERTEX_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DVERTEX_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DVERTEX_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DVERTEX_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DVERTEX_Anonymous5_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DVERTEX_Anonymous6_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DVERTEX_Anonymous6_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DVERTEX_Anonymous6_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DVERTEX_Anonymous7_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DVERTEX_Anonymous7_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DVERTEX_Anonymous7_e__Union struct {
 	Data [1]uint32
 }
 
-// D3DVERTEX_Anonymous8_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3DVERTEX_Anonymous8_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3DVERTEX_Anonymous8_e__Union struct {
 	Data [1]uint32
 }

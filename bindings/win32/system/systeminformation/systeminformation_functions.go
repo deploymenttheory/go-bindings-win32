@@ -30,12 +30,12 @@ var (
 	procGetSystemTimeAdjustmentPrecise     = modapi_ms_win_core_sysinfo_l1_2_4.NewProc("GetSystemTimeAdjustmentPrecise")
 	procSetSystemTimeAdjustmentPrecise     = modapi_ms_win_core_sysinfo_l1_2_4.NewProc("SetSystemTimeAdjustmentPrecise")
 	procGetDeveloperDriveEnablementState   = modapi_ms_win_core_sysinfo_l1_2_6.NewProc("GetDeveloperDriveEnablementState")
+	procGetSystemWow64Directory2           = modapi_ms_win_core_wow64_l1_1_1.NewProc("GetSystemWow64Directory2W")
 	procGetSystemWow64Directory2A          = modapi_ms_win_core_wow64_l1_1_1.NewProc("GetSystemWow64Directory2A")
-	procGetSystemWow64Directory2W          = modapi_ms_win_core_wow64_l1_1_1.NewProc("GetSystemWow64Directory2W")
 	procDnsHostnameToComputerNameExW       = modKERNEL32.NewProc("DnsHostnameToComputerNameExW")
 	procEnumSystemFirmwareTables           = modKERNEL32.NewProc("EnumSystemFirmwareTables")
+	procGetComputerNameEx                  = modKERNEL32.NewProc("GetComputerNameExW")
 	procGetComputerNameExA                 = modKERNEL32.NewProc("GetComputerNameExA")
-	procGetComputerNameExW                 = modKERNEL32.NewProc("GetComputerNameExW")
 	procGetFirmwareType                    = modKERNEL32.NewProc("GetFirmwareType")
 	procGetLocalTime                       = modKERNEL32.NewProc("GetLocalTime")
 	procGetLogicalProcessorInformation     = modKERNEL32.NewProc("GetLogicalProcessorInformation")
@@ -47,8 +47,8 @@ var (
 	procGetRuntimeAttestationReport        = modKERNEL32.NewProc("GetRuntimeAttestationReport")
 	procGetSystemCpuSetInformation         = modKERNEL32.NewProc("GetSystemCpuSetInformation")
 	procGetSystemDEPPolicy                 = modKERNEL32.NewProc("GetSystemDEPPolicy")
+	procGetSystemDirectory                 = modKERNEL32.NewProc("GetSystemDirectoryW")
 	procGetSystemDirectoryA                = modKERNEL32.NewProc("GetSystemDirectoryA")
-	procGetSystemDirectoryW                = modKERNEL32.NewProc("GetSystemDirectoryW")
 	procGetSystemFirmwareTable             = modKERNEL32.NewProc("GetSystemFirmwareTable")
 	procGetSystemInfo                      = modKERNEL32.NewProc("GetSystemInfo")
 	procGetSystemLeapSecondInformation     = modKERNEL32.NewProc("GetSystemLeapSecondInformation")
@@ -56,32 +56,32 @@ var (
 	procGetSystemTimeAdjustment            = modKERNEL32.NewProc("GetSystemTimeAdjustment")
 	procGetSystemTimeAsFileTime            = modKERNEL32.NewProc("GetSystemTimeAsFileTime")
 	procGetSystemTimePreciseAsFileTime     = modKERNEL32.NewProc("GetSystemTimePreciseAsFileTime")
+	procGetSystemWindowsDirectory          = modKERNEL32.NewProc("GetSystemWindowsDirectoryW")
 	procGetSystemWindowsDirectoryA         = modKERNEL32.NewProc("GetSystemWindowsDirectoryA")
-	procGetSystemWindowsDirectoryW         = modKERNEL32.NewProc("GetSystemWindowsDirectoryW")
+	procGetSystemWow64Directory            = modKERNEL32.NewProc("GetSystemWow64DirectoryW")
 	procGetSystemWow64DirectoryA           = modKERNEL32.NewProc("GetSystemWow64DirectoryA")
-	procGetSystemWow64DirectoryW           = modKERNEL32.NewProc("GetSystemWow64DirectoryW")
 	procGetTickCount                       = modKERNEL32.NewProc("GetTickCount")
 	procGetTickCount64                     = modKERNEL32.NewProc("GetTickCount64")
 	procGetVersion                         = modKERNEL32.NewProc("GetVersion")
+	procGetVersionEx                       = modKERNEL32.NewProc("GetVersionExW")
 	procGetVersionExA                      = modKERNEL32.NewProc("GetVersionExA")
-	procGetVersionExW                      = modKERNEL32.NewProc("GetVersionExW")
+	procGetWindowsDirectory                = modKERNEL32.NewProc("GetWindowsDirectoryW")
 	procGetWindowsDirectoryA               = modKERNEL32.NewProc("GetWindowsDirectoryA")
-	procGetWindowsDirectoryW               = modKERNEL32.NewProc("GetWindowsDirectoryW")
 	procGlobalMemoryStatus                 = modKERNEL32.NewProc("GlobalMemoryStatus")
 	procGlobalMemoryStatusEx               = modKERNEL32.NewProc("GlobalMemoryStatusEx")
 	procIsUserCetAvailableInEnvironment    = modKERNEL32.NewProc("IsUserCetAvailableInEnvironment")
 	procIsWow64GuestMachineSupported       = modKERNEL32.NewProc("IsWow64GuestMachineSupported")
+	procSetComputerName                    = modKERNEL32.NewProc("SetComputerNameW")
 	procSetComputerNameA                   = modKERNEL32.NewProc("SetComputerNameA")
+	procSetComputerNameEx                  = modKERNEL32.NewProc("SetComputerNameExW")
 	procSetComputerNameEx2W                = modKERNEL32.NewProc("SetComputerNameEx2W")
 	procSetComputerNameExA                 = modKERNEL32.NewProc("SetComputerNameExA")
-	procSetComputerNameExW                 = modKERNEL32.NewProc("SetComputerNameExW")
-	procSetComputerNameW                   = modKERNEL32.NewProc("SetComputerNameW")
 	procSetLocalTime                       = modKERNEL32.NewProc("SetLocalTime")
 	procSetSystemTime                      = modKERNEL32.NewProc("SetSystemTime")
 	procSetSystemTimeAdjustment            = modKERNEL32.NewProc("SetSystemTimeAdjustment")
 	procVerSetConditionMask                = modKERNEL32.NewProc("VerSetConditionMask")
+	procVerifyVersionInfo                  = modKERNEL32.NewProc("VerifyVersionInfoW")
 	procVerifyVersionInfoA                 = modKERNEL32.NewProc("VerifyVersionInfoA")
-	procVerifyVersionInfoW                 = modKERNEL32.NewProc("VerifyVersionInfoW")
 	procRtlConvertDeviceFamilyInfoToString = modntdll.NewProc("RtlConvertDeviceFamilyInfoToString")
 	procRtlGetDeviceFamilyInfoEnum         = modntdll.NewProc("RtlGetDeviceFamilyInfoEnum")
 	procRtlGetProductInfo                  = modntdll.NewProc("RtlGetProductInfo")
@@ -91,9 +91,10 @@ var (
 )
 
 // DnsHostnameToComputerNameExW calls KERNEL32!DnsHostnameToComputerNameExW.
-func DnsHostnameToComputerNameExW(Hostname foundation.PWSTR, ComputerName foundation.PWSTR, nSize *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDnsHostnameToComputerNameExW.Addr(), uintptr(unsafe.Pointer(Hostname)), uintptr(unsafe.Pointer(ComputerName)), uintptr(unsafe.Pointer(nSize)))
-	return foundation.BOOL(r1)
+func DnsHostnameToComputerNameExW(Hostname string, ComputerName foundation.PWSTR, nSize *uint32) bool {
+	_Hostname := win32.UTF16Ptr(Hostname)
+	r1, _, _ := syscall.SyscallN(procDnsHostnameToComputerNameExW.Addr(), uintptr(unsafe.Pointer(_Hostname)), uintptr(unsafe.Pointer(ComputerName)), uintptr(unsafe.Pointer(nSize)))
+	return r1 != 0
 }
 
 // EnumSystemFirmwareTables calls KERNEL32!EnumSystemFirmwareTables.
@@ -107,22 +108,22 @@ func EnumSystemFirmwareTables(FirmwareTableProviderSignature FIRMWARE_TABLE_PROV
 	return uint32(r1), nil
 }
 
-// GetComputerNameExA calls KERNEL32!GetComputerNameExA.
-// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getcomputernameexa
+// GetComputerNameEx calls KERNEL32!GetComputerNameExW.
+// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getcomputernameexw
 // Minimum OS: windows5.0.
-func GetComputerNameExA(NameType COMPUTER_NAME_FORMAT, lpBuffer foundation.PSTR, nSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetComputerNameExA.Addr(), uintptr(NameType), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(nSize)))
+func GetComputerNameEx(NameType COMPUTER_NAME_FORMAT, lpBuffer foundation.PWSTR, nSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetComputerNameEx.Addr(), uintptr(NameType), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(nSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// GetComputerNameExW calls KERNEL32!GetComputerNameExW.
-// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getcomputernameexw
+// GetComputerNameExA calls KERNEL32!GetComputerNameExA.
+// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getcomputernameexa
 // Minimum OS: windows5.0.
-func GetComputerNameExW(NameType COMPUTER_NAME_FORMAT, lpBuffer foundation.PWSTR, nSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetComputerNameExW.Addr(), uintptr(NameType), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(nSize)))
+func GetComputerNameExA(NameType COMPUTER_NAME_FORMAT, lpBuffer foundation.PSTR, nSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetComputerNameExA.Addr(), uintptr(NameType), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(nSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -149,9 +150,9 @@ func GetFirmwareType(FirmwareType *FIRMWARE_TYPE) error {
 // GetIntegratedDisplaySize calls api-ms-win-core-sysinfo-l1-2-3!GetIntegratedDisplaySize.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getintegrateddisplaysize
 // Minimum OS: windows10.0.10240.
-func GetIntegratedDisplaySize(sizeInInches *float64) foundation.HRESULT {
+func GetIntegratedDisplaySize(sizeInInches *float64) error {
 	r1, _, _ := syscall.SyscallN(procGetIntegratedDisplaySize.Addr(), uintptr(unsafe.Pointer(sizeInInches)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLocalTime calls KERNEL32!GetLocalTime.
@@ -191,15 +192,15 @@ func GetNativeSystemInfo(lpSystemInfo *SYSTEM_INFO) {
 }
 
 // GetOsManufacturingMode calls api-ms-win-core-sysinfo-l1-2-3!GetOsManufacturingMode.
-func GetOsManufacturingMode(pbEnabled *foundation.BOOL) foundation.BOOL {
+func GetOsManufacturingMode(pbEnabled *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procGetOsManufacturingMode.Addr(), uintptr(unsafe.Pointer(pbEnabled)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetOsSafeBootMode calls api-ms-win-core-sysinfo-l1-2-0!GetOsSafeBootMode.
-func GetOsSafeBootMode(Flags *uint32) foundation.BOOL {
+func GetOsSafeBootMode(Flags *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetOsSafeBootMode.Addr(), uintptr(unsafe.Pointer(Flags)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetPhysicallyInstalledSystemMemory calls KERNEL32!GetPhysicallyInstalledSystemMemory.
@@ -227,22 +228,22 @@ func GetProcessorSystemCycleTime(Group uint16, Buffer *SYSTEM_PROCESSOR_CYCLE_TI
 // GetProductInfo calls KERNEL32!GetProductInfo.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getproductinfo
 // Minimum OS: windows6.0.6000.
-func GetProductInfo(dwOSMajorVersion uint32, dwOSMinorVersion uint32, dwSpMajorVersion uint32, dwSpMinorVersion uint32, pdwReturnedProductType *OS_PRODUCT_TYPE) foundation.BOOL {
+func GetProductInfo(dwOSMajorVersion uint32, dwOSMinorVersion uint32, dwSpMajorVersion uint32, dwSpMinorVersion uint32, pdwReturnedProductType *OS_PRODUCT_TYPE) bool {
 	r1, _, _ := syscall.SyscallN(procGetProductInfo.Addr(), uintptr(dwOSMajorVersion), uintptr(dwOSMinorVersion), uintptr(dwSpMajorVersion), uintptr(dwSpMinorVersion), uintptr(unsafe.Pointer(pdwReturnedProductType)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetRuntimeAttestationReport calls KERNEL32!GetRuntimeAttestationReport.
-func GetRuntimeAttestationReport(Nonce *byte, PackageVersion uint16, ReportTypesBitmap uint64, ReportBuffer unsafe.Pointer, ReportBufferSize *uint32) foundation.BOOL {
+func GetRuntimeAttestationReport(Nonce *byte, PackageVersion uint16, ReportTypesBitmap uint64, ReportBuffer unsafe.Pointer, ReportBufferSize *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetRuntimeAttestationReport.Addr(), uintptr(unsafe.Pointer(Nonce)), uintptr(PackageVersion), uintptr(ReportTypesBitmap), uintptr(unsafe.Pointer(ReportBuffer)), uintptr(unsafe.Pointer(ReportBufferSize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetSystemCpuSetInformation calls KERNEL32!GetSystemCpuSetInformation.
 // https://learn.microsoft.com/windows/win32/ProcThread/getsystemcpusetinformation
-func GetSystemCpuSetInformation(Information *SYSTEM_CPU_SET_INFORMATION, BufferLength uint32, ReturnedLength *uint32, Process foundation.HANDLE, Flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetSystemCpuSetInformation.Addr(), uintptr(unsafe.Pointer(Information)), uintptr(BufferLength), uintptr(unsafe.Pointer(ReturnedLength)), uintptr(Process), uintptr(Flags))
-	return foundation.BOOL(r1)
+func GetSystemCpuSetInformation(Information *SYSTEM_CPU_SET_INFORMATION, BufferLength uint32, ReturnedLength *uint32, Process foundation.HANDLE) bool {
+	r1, _, _ := syscall.SyscallN(procGetSystemCpuSetInformation.Addr(), uintptr(unsafe.Pointer(Information)), uintptr(BufferLength), uintptr(unsafe.Pointer(ReturnedLength)), uintptr(Process), 0)
+	return r1 != 0
 }
 
 // GetSystemDEPPolicy calls KERNEL32!GetSystemDEPPolicy.
@@ -253,22 +254,22 @@ func GetSystemDEPPolicy() DEP_SYSTEM_POLICY_TYPE {
 	return DEP_SYSTEM_POLICY_TYPE(r1)
 }
 
-// GetSystemDirectoryA calls KERNEL32!GetSystemDirectoryA.
-// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemdirectorya
+// GetSystemDirectory calls KERNEL32!GetSystemDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemdirectoryw
 // Minimum OS: windows5.0.
-func GetSystemDirectoryA(lpBuffer foundation.PSTR, uSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetSystemDirectoryA.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
+func GetSystemDirectory(lpBuffer foundation.PWSTR, uSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetSystemDirectory.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
-// GetSystemDirectoryW calls KERNEL32!GetSystemDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemdirectoryw
+// GetSystemDirectoryA calls KERNEL32!GetSystemDirectoryA.
+// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemdirectorya
 // Minimum OS: windows5.0.
-func GetSystemDirectoryW(lpBuffer foundation.PWSTR, uSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetSystemDirectoryW.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
+func GetSystemDirectoryA(lpBuffer foundation.PSTR, uSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetSystemDirectoryA.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -294,9 +295,9 @@ func GetSystemInfo(lpSystemInfo *SYSTEM_INFO) {
 }
 
 // GetSystemLeapSecondInformation calls KERNEL32!GetSystemLeapSecondInformation.
-func GetSystemLeapSecondInformation(Enabled *foundation.BOOL, Flags *uint32) foundation.BOOL {
+func GetSystemLeapSecondInformation(Enabled *foundation.BOOL, Flags *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetSystemLeapSecondInformation.Addr(), uintptr(unsafe.Pointer(Enabled)), uintptr(unsafe.Pointer(Flags)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetSystemTime calls KERNEL32!GetSystemTime.
@@ -342,6 +343,17 @@ func GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime *foundation.FILETIME)
 	syscall.SyscallN(procGetSystemTimePreciseAsFileTime.Addr(), uintptr(unsafe.Pointer(lpSystemTimeAsFileTime)))
 }
 
+// GetSystemWindowsDirectory calls KERNEL32!GetSystemWindowsDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemwindowsdirectoryw
+// Minimum OS: windows5.0.
+func GetSystemWindowsDirectory(lpBuffer foundation.PWSTR, uSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetSystemWindowsDirectory.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // GetSystemWindowsDirectoryA calls KERNEL32!GetSystemWindowsDirectoryA.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemwindowsdirectorya
 // Minimum OS: windows5.0.
@@ -353,11 +365,22 @@ func GetSystemWindowsDirectoryA(lpBuffer foundation.PSTR, uSize uint32) (uint32,
 	return uint32(r1), nil
 }
 
-// GetSystemWindowsDirectoryW calls KERNEL32!GetSystemWindowsDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemwindowsdirectoryw
-// Minimum OS: windows5.0.
-func GetSystemWindowsDirectoryW(lpBuffer foundation.PWSTR, uSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetSystemWindowsDirectoryW.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
+// GetSystemWow64Directory calls KERNEL32!GetSystemWow64DirectoryW.
+// https://learn.microsoft.com/windows/win32/api/wow64apiset/nf-wow64apiset-getsystemwow64directoryw
+// Minimum OS: windows5.1.2600.
+func GetSystemWow64Directory(lpBuffer foundation.PWSTR, uSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetSystemWow64Directory.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
+// GetSystemWow64Directory2 calls api-ms-win-core-wow64-l1-1-1!GetSystemWow64Directory2W.
+// https://learn.microsoft.com/windows/win32/api/wow64apiset/nf-wow64apiset-getsystemwow64directory2w
+// Minimum OS: windows10.0.10586.
+func GetSystemWow64Directory2(lpBuffer foundation.PWSTR, uSize uint32, ImageFileMachineType IMAGE_FILE_MACHINE) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetSystemWow64Directory2.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize), uintptr(ImageFileMachineType))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -375,33 +398,11 @@ func GetSystemWow64Directory2A(lpBuffer foundation.PSTR, uSize uint32, ImageFile
 	return uint32(r1), nil
 }
 
-// GetSystemWow64Directory2W calls api-ms-win-core-wow64-l1-1-1!GetSystemWow64Directory2W.
-// https://learn.microsoft.com/windows/win32/api/wow64apiset/nf-wow64apiset-getsystemwow64directory2w
-// Minimum OS: windows10.0.10586.
-func GetSystemWow64Directory2W(lpBuffer foundation.PWSTR, uSize uint32, ImageFileMachineType IMAGE_FILE_MACHINE) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetSystemWow64Directory2W.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize), uintptr(ImageFileMachineType))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
 // GetSystemWow64DirectoryA calls KERNEL32!GetSystemWow64DirectoryA.
 // https://learn.microsoft.com/windows/win32/api/wow64apiset/nf-wow64apiset-getsystemwow64directorya
 // Minimum OS: windows5.1.2600.
 func GetSystemWow64DirectoryA(lpBuffer foundation.PSTR, uSize uint32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetSystemWow64DirectoryA.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetSystemWow64DirectoryW calls KERNEL32!GetSystemWow64DirectoryW.
-// https://learn.microsoft.com/windows/win32/api/wow64apiset/nf-wow64apiset-getsystemwow64directoryw
-// Minimum OS: windows5.1.2600.
-func GetSystemWow64DirectoryW(lpBuffer foundation.PWSTR, uSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetSystemWow64DirectoryW.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -432,6 +433,17 @@ func GetVersion() uint32 {
 	return uint32(r1)
 }
 
+// GetVersionEx calls KERNEL32!GetVersionExW.
+// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexw
+// Minimum OS: windows5.0.
+func GetVersionEx(lpVersionInformation *OSVERSIONINFOW) error {
+	r1, _, e1 := syscall.SyscallN(procGetVersionEx.Addr(), uintptr(unsafe.Pointer(lpVersionInformation)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetVersionExA calls KERNEL32!GetVersionExA.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexa
 // Minimum OS: windows5.0.
@@ -443,15 +455,15 @@ func GetVersionExA(lpVersionInformation *OSVERSIONINFOA) error {
 	return nil
 }
 
-// GetVersionExW calls KERNEL32!GetVersionExW.
-// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexw
+// GetWindowsDirectory calls KERNEL32!GetWindowsDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getwindowsdirectoryw
 // Minimum OS: windows5.0.
-func GetVersionExW(lpVersionInformation *OSVERSIONINFOW) error {
-	r1, _, e1 := syscall.SyscallN(procGetVersionExW.Addr(), uintptr(unsafe.Pointer(lpVersionInformation)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func GetWindowsDirectory(lpBuffer foundation.PWSTR, uSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetWindowsDirectory.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
+	if e1 != 0 {
+		return uint32(r1), e1
 	}
-	return nil
+	return uint32(r1), nil
 }
 
 // GetWindowsDirectoryA calls KERNEL32!GetWindowsDirectoryA.
@@ -459,17 +471,6 @@ func GetVersionExW(lpVersionInformation *OSVERSIONINFOW) error {
 // Minimum OS: windows5.0.
 func GetWindowsDirectoryA(lpBuffer foundation.PSTR, uSize uint32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetWindowsDirectoryA.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetWindowsDirectoryW calls KERNEL32!GetWindowsDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getwindowsdirectoryw
-// Minimum OS: windows5.0.
-func GetWindowsDirectoryW(lpBuffer foundation.PWSTR, uSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetWindowsDirectoryW.Addr(), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -496,20 +497,17 @@ func GlobalMemoryStatusEx(lpBuffer *MEMORYSTATUSEX) error {
 
 // IsUserCetAvailableInEnvironment calls KERNEL32!IsUserCetAvailableInEnvironment.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-isusercetavailableinenvironment
-func IsUserCetAvailableInEnvironment(UserCetEnvironment USER_CET_ENVIRONMENT) foundation.BOOL {
+func IsUserCetAvailableInEnvironment(UserCetEnvironment USER_CET_ENVIRONMENT) bool {
 	r1, _, _ := syscall.SyscallN(procIsUserCetAvailableInEnvironment.Addr(), uintptr(UserCetEnvironment))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsWow64GuestMachineSupported calls KERNEL32!IsWow64GuestMachineSupported.
 // https://learn.microsoft.com/windows/win32/api/wow64apiset/nf-wow64apiset-iswow64guestmachinesupported
 // Minimum OS: windows10.0.16299.
-func IsWow64GuestMachineSupported(WowGuestMachine IMAGE_FILE_MACHINE, MachineIsSupported *foundation.BOOL) (foundation.HRESULT, error) {
-	r1, _, e1 := syscall.SyscallN(procIsWow64GuestMachineSupported.Addr(), uintptr(WowGuestMachine), uintptr(unsafe.Pointer(MachineIsSupported)))
-	if e1 != 0 {
-		return foundation.HRESULT(r1), e1
-	}
-	return foundation.HRESULT(r1), nil
+func IsWow64GuestMachineSupported(WowGuestMachine IMAGE_FILE_MACHINE, MachineIsSupported *foundation.BOOL) error {
+	r1, _, _ := syscall.SyscallN(procIsWow64GuestMachineSupported.Addr(), uintptr(WowGuestMachine), uintptr(unsafe.Pointer(MachineIsSupported)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RtlConvertDeviceFamilyInfoToString calls ntdll!RtlConvertDeviceFamilyInfoToString.
@@ -549,6 +547,18 @@ func RtlSwitchedVVI(VersionInfo *OSVERSIONINFOEXW, TypeMask uint32, ConditionMas
 	return uint32(r1)
 }
 
+// SetComputerName calls KERNEL32!SetComputerNameW.
+// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-setcomputernamew
+// Minimum OS: windows5.0.
+func SetComputerName(lpComputerName string) error {
+	_lpComputerName := win32.UTF16Ptr(lpComputerName)
+	r1, _, e1 := syscall.SyscallN(procSetComputerName.Addr(), uintptr(unsafe.Pointer(_lpComputerName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetComputerNameA calls KERNEL32!SetComputerNameA.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-setcomputernamea
 // Minimum OS: windows5.0.
@@ -560,10 +570,23 @@ func SetComputerNameA(lpComputerName foundation.PSTR) error {
 	return nil
 }
 
+// SetComputerNameEx calls KERNEL32!SetComputerNameExW.
+// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-setcomputernameexw
+// Minimum OS: windows5.0.
+func SetComputerNameEx(NameType COMPUTER_NAME_FORMAT, lpBuffer string) error {
+	_lpBuffer := win32.UTF16Ptr(lpBuffer)
+	r1, _, e1 := syscall.SyscallN(procSetComputerNameEx.Addr(), uintptr(NameType), uintptr(unsafe.Pointer(_lpBuffer)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetComputerNameEx2W calls KERNEL32!SetComputerNameEx2W.
-func SetComputerNameEx2W(NameType COMPUTER_NAME_FORMAT, Flags uint32, lpBuffer foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetComputerNameEx2W.Addr(), uintptr(NameType), uintptr(Flags), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.BOOL(r1)
+func SetComputerNameEx2W(NameType COMPUTER_NAME_FORMAT, Flags uint32, lpBuffer string) bool {
+	_lpBuffer := win32.UTF16Ptr(lpBuffer)
+	r1, _, _ := syscall.SyscallN(procSetComputerNameEx2W.Addr(), uintptr(NameType), uintptr(Flags), uintptr(unsafe.Pointer(_lpBuffer)))
+	return r1 != 0
 }
 
 // SetComputerNameExA calls KERNEL32!SetComputerNameExA.
@@ -571,28 +594,6 @@ func SetComputerNameEx2W(NameType COMPUTER_NAME_FORMAT, Flags uint32, lpBuffer f
 // Minimum OS: windows5.0.
 func SetComputerNameExA(NameType COMPUTER_NAME_FORMAT, lpBuffer foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procSetComputerNameExA.Addr(), uintptr(NameType), uintptr(unsafe.Pointer(lpBuffer)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetComputerNameExW calls KERNEL32!SetComputerNameExW.
-// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-setcomputernameexw
-// Minimum OS: windows5.0.
-func SetComputerNameExW(NameType COMPUTER_NAME_FORMAT, lpBuffer foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetComputerNameExW.Addr(), uintptr(NameType), uintptr(unsafe.Pointer(lpBuffer)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetComputerNameW calls KERNEL32!SetComputerNameW.
-// https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-setcomputernamew
-// Minimum OS: windows5.0.
-func SetComputerNameW(lpComputerName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetComputerNameW.Addr(), uintptr(unsafe.Pointer(lpComputerName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -624,8 +625,9 @@ func SetSystemTime(lpSystemTime *foundation.SYSTEMTIME) error {
 // SetSystemTimeAdjustment calls KERNEL32!SetSystemTimeAdjustment.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-setsystemtimeadjustment
 // Minimum OS: windows5.0.
-func SetSystemTimeAdjustment(dwTimeAdjustment uint32, bTimeAdjustmentDisabled foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetSystemTimeAdjustment.Addr(), uintptr(dwTimeAdjustment), uintptr(bTimeAdjustmentDisabled))
+func SetSystemTimeAdjustment(dwTimeAdjustment uint32, bTimeAdjustmentDisabled bool) error {
+	_bTimeAdjustmentDisabled := win32.Bool32(bTimeAdjustmentDisabled)
+	r1, _, e1 := syscall.SyscallN(procSetSystemTimeAdjustment.Addr(), uintptr(dwTimeAdjustment), uintptr(_bTimeAdjustmentDisabled))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -635,8 +637,9 @@ func SetSystemTimeAdjustment(dwTimeAdjustment uint32, bTimeAdjustmentDisabled fo
 // SetSystemTimeAdjustmentPrecise calls api-ms-win-core-sysinfo-l1-2-4!SetSystemTimeAdjustmentPrecise.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-setsystemtimeadjustmentprecise
 // Minimum OS: windows10.0.10240.
-func SetSystemTimeAdjustmentPrecise(dwTimeAdjustment uint64, bTimeAdjustmentDisabled foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetSystemTimeAdjustmentPrecise.Addr(), uintptr(dwTimeAdjustment), uintptr(bTimeAdjustmentDisabled))
+func SetSystemTimeAdjustmentPrecise(dwTimeAdjustment uint64, bTimeAdjustmentDisabled bool) error {
+	_bTimeAdjustmentDisabled := win32.Bool32(bTimeAdjustmentDisabled)
+	r1, _, e1 := syscall.SyscallN(procSetSystemTimeAdjustmentPrecise.Addr(), uintptr(dwTimeAdjustment), uintptr(_bTimeAdjustmentDisabled))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -651,22 +654,22 @@ func VerSetConditionMask(ConditionMask uint64, TypeMask VER_FLAGS, Condition byt
 	return uint64(r1)
 }
 
-// VerifyVersionInfoA calls KERNEL32!VerifyVersionInfoA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-verifyversioninfoa
+// VerifyVersionInfo calls KERNEL32!VerifyVersionInfoW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-verifyversioninfow
 // Minimum OS: windows5.0.
-func VerifyVersionInfoA(lpVersionInformation *OSVERSIONINFOEXA, dwTypeMask VER_FLAGS, dwlConditionMask uint64) error {
-	r1, _, e1 := syscall.SyscallN(procVerifyVersionInfoA.Addr(), uintptr(unsafe.Pointer(lpVersionInformation)), uintptr(dwTypeMask), uintptr(dwlConditionMask))
+func VerifyVersionInfo(lpVersionInformation *OSVERSIONINFOEXW, dwTypeMask VER_FLAGS, dwlConditionMask uint64) error {
+	r1, _, e1 := syscall.SyscallN(procVerifyVersionInfo.Addr(), uintptr(unsafe.Pointer(lpVersionInformation)), uintptr(dwTypeMask), uintptr(dwlConditionMask))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// VerifyVersionInfoW calls KERNEL32!VerifyVersionInfoW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-verifyversioninfow
+// VerifyVersionInfoA calls KERNEL32!VerifyVersionInfoA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-verifyversioninfoa
 // Minimum OS: windows5.0.
-func VerifyVersionInfoW(lpVersionInformation *OSVERSIONINFOEXW, dwTypeMask VER_FLAGS, dwlConditionMask uint64) error {
-	r1, _, e1 := syscall.SyscallN(procVerifyVersionInfoW.Addr(), uintptr(unsafe.Pointer(lpVersionInformation)), uintptr(dwTypeMask), uintptr(dwlConditionMask))
+func VerifyVersionInfoA(lpVersionInformation *OSVERSIONINFOEXA, dwTypeMask VER_FLAGS, dwlConditionMask uint64) error {
+	r1, _, e1 := syscall.SyscallN(procVerifyVersionInfoA.Addr(), uintptr(unsafe.Pointer(lpVersionInformation)), uintptr(dwTypeMask), uintptr(dwlConditionMask))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

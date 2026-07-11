@@ -18,8 +18,8 @@ type INPUT_INJECTION_VALUE struct {
 	Index uint16
 }
 
-// INPUT_TRANSFORM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INPUT_TRANSFORM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INPUT_TRANSFORM_Anonymous_e__Union struct {
 	Data [16]uint32
 }
@@ -100,8 +100,8 @@ type POINTER_TOUCH_INFO struct {
 	Pressure     uint32
 }
 
-// POINTER_TYPE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// POINTER_TYPE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type POINTER_TYPE_INFO_Anonymous_e__Union struct {
 	Data [18]uint64
 }

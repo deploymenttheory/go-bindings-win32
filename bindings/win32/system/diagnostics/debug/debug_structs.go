@@ -200,6 +200,20 @@ type DIMM_ADDR_VALID_BITS struct {
 	Data [4]byte
 }
 
+// DIMM_ADDR_VALID_BITS_DDR4 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DIMM_ADDR_VALID_BITS_DDR4 struct {
+	Data [4]byte
+}
+
+// DIMM_ADDR_VALID_BITS_DDR5 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DIMM_ADDR_VALID_BITS_DDR5 struct {
+	Data [4]byte
+}
+
 type DIMM_INFO struct {
 	DimmAddress DIMM_ADDRESS
 	ValidBits   DIMM_ADDR_VALID_BITS
@@ -708,6 +722,14 @@ type IMAGE_FUNCTION_ENTRY struct {
 	EndOfPrologue   uint32
 }
 
+// IMAGE_FUNCTION_ENTRY64: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-image_function_entry64
+// IMAGE_FUNCTION_ENTRY64 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_FUNCTION_ENTRY64 struct {
+	Data [6]uint32
+}
+
 type IMAGE_LOAD_CONFIG_CODE_INTEGRITY struct {
 	Flags         uint16
 	Catalog       uint16
@@ -769,6 +791,14 @@ type IMAGE_LOAD_CONFIG_DIRECTORY32 struct {
 	UmaFunctionPointers                      uint32
 }
 
+// IMAGE_LOAD_CONFIG_DIRECTORY64: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-image_load_config_directory64
+// IMAGE_LOAD_CONFIG_DIRECTORY64 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_LOAD_CONFIG_DIRECTORY64 struct {
+	Data [82]uint32
+}
+
 // IMAGE_NT_HEADERS32: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-image_nt_headers32
 type IMAGE_NT_HEADERS32 struct {
 	Signature      uint32
@@ -780,7 +810,7 @@ type IMAGE_NT_HEADERS32 struct {
 type IMAGE_NT_HEADERS64 struct {
 	Signature      uint32
 	FileHeader     IMAGE_FILE_HEADER
-	OptionalHeader [60]uint32
+	OptionalHeader IMAGE_OPTIONAL_HEADER64
 }
 
 // IMAGE_OPTIONAL_HEADER32: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-image_optional_header32
@@ -816,6 +846,14 @@ type IMAGE_OPTIONAL_HEADER32 struct {
 	LoaderFlags                 uint32
 	NumberOfRvaAndSizes         uint32
 	DataDirectory               [16]IMAGE_DATA_DIRECTORY
+}
+
+// IMAGE_OPTIONAL_HEADER64: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-image_optional_header64
+// IMAGE_OPTIONAL_HEADER64 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_OPTIONAL_HEADER64 struct {
+	Data [60]uint32
 }
 
 type IMAGE_ROM_HEADERS struct {
@@ -869,6 +907,13 @@ type IMAGE_SECTION_HEADER struct {
 	NumberOfRelocations  uint16
 	NumberOfLinenumbers  uint16
 	Characteristics      IMAGE_SECTION_CHARACTERISTICS
+}
+
+// IPMI_OS_SEL_RECORD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IPMI_OS_SEL_RECORD struct {
+	Data [21]byte
 }
 
 // KDHELP64: https://learn.microsoft.com/windows/win32/api/dbghelp/ns-dbghelp-kdhelp64
@@ -955,18 +1000,80 @@ type M128A struct {
 	High int64
 }
 
+// MEMORY_DEFECT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MEMORY_DEFECT struct {
+	Data [36]byte
+}
+
+// MINIDUMP_CALLBACK_INFORMATION: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_callback_information
+// MINIDUMP_CALLBACK_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_CALLBACK_INFORMATION struct {
+	Data [4]uint32
+}
+
+// MINIDUMP_CALLBACK_INPUT: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_callback_input
+// MINIDUMP_CALLBACK_INPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_CALLBACK_INPUT struct {
+	Data [324]uint32
+}
+
+// MINIDUMP_CALLBACK_OUTPUT: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_callback_output
+// MINIDUMP_CALLBACK_OUTPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_CALLBACK_OUTPUT struct {
+	Data [14]uint32
+}
+
 // MINIDUMP_DIRECTORY: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_directory
 type MINIDUMP_DIRECTORY struct {
 	StreamType uint32
 	Location   MINIDUMP_LOCATION_DESCRIPTOR
 }
 
+// MINIDUMP_EXCEPTION: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_exception
+// MINIDUMP_EXCEPTION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_EXCEPTION struct {
+	Data [38]uint32
+}
+
+// MINIDUMP_EXCEPTION_INFORMATION: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_exception_information
+// MINIDUMP_EXCEPTION_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_EXCEPTION_INFORMATION struct {
+	Data [4]uint32
+}
+
+// MINIDUMP_EXCEPTION_INFORMATION64 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_EXCEPTION_INFORMATION64 struct {
+	Data [6]uint32
+}
+
 // MINIDUMP_EXCEPTION_STREAM: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_exception_stream
 type MINIDUMP_EXCEPTION_STREAM struct {
 	ThreadId        uint32
 	Alignment       uint32
-	ExceptionRecord [38]uint32
+	ExceptionRecord MINIDUMP_EXCEPTION
 	ThreadContext   MINIDUMP_LOCATION_DESCRIPTOR
+}
+
+// MINIDUMP_FUNCTION_TABLE_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_function_table_descriptor
+// MINIDUMP_FUNCTION_TABLE_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_FUNCTION_TABLE_DESCRIPTOR struct {
+	Data [8]uint32
 }
 
 // MINIDUMP_FUNCTION_TABLE_STREAM: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_function_table_stream
@@ -987,6 +1094,22 @@ type MINIDUMP_HANDLE_DATA_STREAM struct {
 	Reserved            uint32
 }
 
+// MINIDUMP_HANDLE_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_handle_descriptor
+// MINIDUMP_HANDLE_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_HANDLE_DESCRIPTOR struct {
+	Data [8]uint32
+}
+
+// MINIDUMP_HANDLE_DESCRIPTOR_2: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_handle_descriptor_2
+// MINIDUMP_HANDLE_DESCRIPTOR_2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_HANDLE_DESCRIPTOR_2 struct {
+	Data [10]uint32
+}
+
 // MINIDUMP_HANDLE_OBJECT_INFORMATION: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_handle_object_information
 type MINIDUMP_HANDLE_OBJECT_INFORMATION struct {
 	NextInfoRva uint32
@@ -1002,9 +1125,33 @@ type MINIDUMP_HANDLE_OPERATION_LIST struct {
 	Reserved        uint32
 }
 
+// MINIDUMP_HEADER: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_header
+// MINIDUMP_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_HEADER struct {
+	Data [8]uint32
+}
+
+// MINIDUMP_INCLUDE_MODULE_CALLBACK: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_include_module_callback
+// MINIDUMP_INCLUDE_MODULE_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_INCLUDE_MODULE_CALLBACK struct {
+	Data [2]uint32
+}
+
 // MINIDUMP_INCLUDE_THREAD_CALLBACK: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_include_thread_callback
 type MINIDUMP_INCLUDE_THREAD_CALLBACK struct {
 	ThreadId uint32
+}
+
+// MINIDUMP_IO_CALLBACK: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_io_callback
+// MINIDUMP_IO_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_IO_CALLBACK struct {
+	Data [7]uint32
 }
 
 // MINIDUMP_LOCATION_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_location_descriptor
@@ -1013,10 +1160,58 @@ type MINIDUMP_LOCATION_DESCRIPTOR struct {
 	Rva      uint32
 }
 
+// MINIDUMP_LOCATION_DESCRIPTOR64: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_location_descriptor64
+// MINIDUMP_LOCATION_DESCRIPTOR64 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_LOCATION_DESCRIPTOR64 struct {
+	Data [4]uint32
+}
+
+// MINIDUMP_MEMORY64_LIST: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_memory64_list
+// MINIDUMP_MEMORY64_LIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_MEMORY64_LIST struct {
+	Data [8]uint32
+}
+
+// MINIDUMP_MEMORY_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_memory_descriptor
+// MINIDUMP_MEMORY_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_MEMORY_DESCRIPTOR struct {
+	Data [4]uint32
+}
+
+// MINIDUMP_MEMORY_DESCRIPTOR64: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_memory_descriptor64
+// MINIDUMP_MEMORY_DESCRIPTOR64 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_MEMORY_DESCRIPTOR64 struct {
+	Data [4]uint32
+}
+
+// MINIDUMP_MEMORY_INFO: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_memory_info
+// MINIDUMP_MEMORY_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_MEMORY_INFO struct {
+	Data [12]uint32
+}
+
+// MINIDUMP_MEMORY_INFO_LIST: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_memory_info_list
+// MINIDUMP_MEMORY_INFO_LIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_MEMORY_INFO_LIST struct {
+	Data [4]uint32
+}
+
 // MINIDUMP_MEMORY_LIST: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_memory_list
 type MINIDUMP_MEMORY_LIST struct {
 	NumberOfMemoryRanges uint32
-	MemoryRanges         [4]uint32
+	MemoryRanges         [1]MINIDUMP_MEMORY_DESCRIPTOR
 }
 
 // MINIDUMP_MISC_INFO: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_misc_info
@@ -1103,20 +1298,79 @@ type MINIDUMP_MISC_INFO_5 struct {
 	TimeZone                  systemtime.TIME_ZONE_INFORMATION
 	BuildString               [260]uint16
 	DbgBldStr                 [40]uint16
-	XStateData                [132]uint32
+	XStateData                XSTATE_CONFIG_FEATURE_MSC_INFO
 	ProcessCookie             uint32
+}
+
+// MINIDUMP_MODULE: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_module
+// MINIDUMP_MODULE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_MODULE struct {
+	Data [27]uint32
+}
+
+// MINIDUMP_MODULE_CALLBACK: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_module_callback
+// MINIDUMP_MODULE_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_MODULE_CALLBACK struct {
+	Data [26]uint32
 }
 
 // MINIDUMP_MODULE_LIST: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_module_list
 type MINIDUMP_MODULE_LIST struct {
 	NumberOfModules uint32
-	Modules         [27]uint32
+	Modules         [1]MINIDUMP_MODULE
+}
+
+// MINIDUMP_PROCESS_VM_COUNTERS_1 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_PROCESS_VM_COUNTERS_1 struct {
+	Data [20]uint32
+}
+
+// MINIDUMP_PROCESS_VM_COUNTERS_2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_PROCESS_VM_COUNTERS_2 struct {
+	Data [38]uint32
+}
+
+// MINIDUMP_READ_MEMORY_FAILURE_CALLBACK: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_read_memory_failure_callback
+// MINIDUMP_READ_MEMORY_FAILURE_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_READ_MEMORY_FAILURE_CALLBACK struct {
+	Data [4]uint32
 }
 
 // MINIDUMP_STRING: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_string
 type MINIDUMP_STRING struct {
 	Length uint32
 	Buffer [1]uint16
+}
+
+// MINIDUMP_SYSTEM_BASIC_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_SYSTEM_BASIC_INFORMATION struct {
+	Data [13]uint32
+}
+
+// MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION struct {
+	Data [8]uint32
+}
+
+// MINIDUMP_SYSTEM_FILECACHE_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_SYSTEM_FILECACHE_INFORMATION struct {
+	Data [15]uint32
 }
 
 // MINIDUMP_SYSTEM_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -1149,25 +1403,79 @@ type MINIDUMP_SYSTEM_INFO struct {
 type MINIDUMP_SYSTEM_MEMORY_INFO_1 struct {
 	Revision      uint16
 	Flags         uint16
-	BasicInfo     [13]uint32
-	FileCacheInfo [15]uint32
-	BasicPerfInfo [8]uint32
-	PerfInfo      [86]uint32
+	BasicInfo     MINIDUMP_SYSTEM_BASIC_INFORMATION
+	FileCacheInfo MINIDUMP_SYSTEM_FILECACHE_INFORMATION
+	BasicPerfInfo MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION
+	PerfInfo      MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION
 }
 
 type MINIDUMP_SYSTEM_MEMORY_INFO_2 struct {
 	Revision      uint16
 	Flags         uint16
-	BasicInfo     [13]uint32
-	FileCacheInfo [15]uint32
-	BasicPerfInfo [8]uint32
-	PerfInfo      [94]uint32
+	BasicInfo     MINIDUMP_SYSTEM_BASIC_INFORMATION
+	FileCacheInfo MINIDUMP_SYSTEM_FILECACHE_INFORMATION
+	BasicPerfInfo MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION
+	PerfInfo      MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2
+}
+
+// MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION struct {
+	Data [86]uint32
+}
+
+// MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2 struct {
+	Data [94]uint32
+}
+
+// MINIDUMP_THREAD: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread
+// MINIDUMP_THREAD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_THREAD struct {
+	Data [12]uint32
+}
+
+// MINIDUMP_THREAD_CALLBACK: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_callback
+// MINIDUMP_THREAD_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_THREAD_CALLBACK struct {
+	Data [316]uint32
+}
+
+// MINIDUMP_THREAD_EX: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_ex
+// MINIDUMP_THREAD_EX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_THREAD_EX struct {
+	Data [16]uint32
+}
+
+// MINIDUMP_THREAD_EX_CALLBACK: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_ex_callback
+// MINIDUMP_THREAD_EX_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_THREAD_EX_CALLBACK struct {
+	Data [320]uint32
 }
 
 // MINIDUMP_THREAD_EX_LIST: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_ex_list
 type MINIDUMP_THREAD_EX_LIST struct {
 	NumberOfThreads uint32
-	Threads         [16]uint32
+	Threads         [1]MINIDUMP_THREAD_EX
+}
+
+// MINIDUMP_THREAD_INFO: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_info
+// MINIDUMP_THREAD_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_THREAD_INFO struct {
+	Data [16]uint32
 }
 
 // MINIDUMP_THREAD_INFO_LIST: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_info_list
@@ -1180,12 +1488,26 @@ type MINIDUMP_THREAD_INFO_LIST struct {
 // MINIDUMP_THREAD_LIST: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_thread_list
 type MINIDUMP_THREAD_LIST struct {
 	NumberOfThreads uint32
-	Threads         [12]uint32
+	Threads         [1]MINIDUMP_THREAD
+}
+
+// MINIDUMP_THREAD_NAME is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_THREAD_NAME struct {
+	Data [3]uint32
 }
 
 type MINIDUMP_THREAD_NAME_LIST struct {
 	NumberOfThreadNames uint32
-	ThreadNames         [3]uint32
+	ThreadNames         [1]MINIDUMP_THREAD_NAME
+}
+
+// MINIDUMP_TOKEN_INFO_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_TOKEN_INFO_HEADER struct {
+	Data [4]uint32
 }
 
 type MINIDUMP_TOKEN_INFO_LIST struct {
@@ -1193,6 +1515,14 @@ type MINIDUMP_TOKEN_INFO_LIST struct {
 	TokenListEntries  uint32
 	ListHeaderSize    uint32
 	ElementHeaderSize uint32
+}
+
+// MINIDUMP_UNLOADED_MODULE: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_unloaded_module
+// MINIDUMP_UNLOADED_MODULE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_UNLOADED_MODULE struct {
+	Data [6]uint32
 }
 
 // MINIDUMP_UNLOADED_MODULE_LIST: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_unloaded_module_list
@@ -1205,6 +1535,43 @@ type MINIDUMP_UNLOADED_MODULE_LIST struct {
 type MINIDUMP_USER_RECORD struct {
 	Type   uint32
 	Memory MINIDUMP_LOCATION_DESCRIPTOR
+}
+
+// MINIDUMP_USER_STREAM: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_user_stream
+// MINIDUMP_USER_STREAM is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_USER_STREAM struct {
+	Data [4]uint32
+}
+
+// MINIDUMP_USER_STREAM_INFORMATION: https://learn.microsoft.com/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_user_stream_information
+// MINIDUMP_USER_STREAM_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_USER_STREAM_INFORMATION struct {
+	Data [3]uint32
+}
+
+// MINIDUMP_VM_POST_READ_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_VM_POST_READ_CALLBACK struct {
+	Data [7]uint32
+}
+
+// MINIDUMP_VM_PRE_READ_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_VM_PRE_READ_CALLBACK struct {
+	Data [5]uint32
+}
+
+// MINIDUMP_VM_QUERY_CALLBACK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MINIDUMP_VM_QUERY_CALLBACK struct {
+	Data [2]uint32
 }
 
 // MODLOAD_CVMISC: https://learn.microsoft.com/windows/win32/api/dbghelp/ns-dbghelp-modload_cvmisc
@@ -1479,6 +1846,104 @@ type WAITCHAIN_NODE_INFO struct {
 	Anonymous    WAITCHAIN_NODE_INFO_Anonymous_e__Union
 }
 
+// WHEA_AER_BRIDGE_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_AER_BRIDGE_DESCRIPTOR struct {
+	Data [44]byte
+}
+
+// WHEA_AER_ENDPOINT_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_AER_ENDPOINT_DESCRIPTOR struct {
+	Data [32]byte
+}
+
+// WHEA_AER_ROOTPORT_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_AER_ROOTPORT_DESCRIPTOR struct {
+	Data [36]byte
+}
+
+// WHEA_DEVICE_DRIVER_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_DEVICE_DRIVER_DESCRIPTOR struct {
+	Data [116]byte
+}
+
+// WHEA_DRIVER_BUFFER_SET is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_DRIVER_BUFFER_SET struct {
+	Data [40]byte
+}
+
+// WHEA_ERROR_SOURCE_CONFIGURATION_DD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_ERROR_SOURCE_CONFIGURATION_DD struct {
+	Data [24]byte
+}
+
+// WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER struct {
+	Data [84]byte
+}
+
+// WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER_V1 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER_V1 struct {
+	Data [44]byte
+}
+
+// WHEA_ERROR_SOURCE_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_ERROR_SOURCE_DESCRIPTOR struct {
+	Data [972]byte
+}
+
+// WHEA_GENERIC_ERROR_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_GENERIC_ERROR_DESCRIPTOR struct {
+	Data [52]byte
+}
+
+// WHEA_GENERIC_ERROR_DESCRIPTOR_V2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_GENERIC_ERROR_DESCRIPTOR_V2 struct {
+	Data [80]byte
+}
+
+// WHEA_IPF_CMC_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_IPF_CMC_DESCRIPTOR struct {
+	Data [4]byte
+}
+
+// WHEA_IPF_CPE_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_IPF_CPE_DESCRIPTOR struct {
+	Data [4]byte
+}
+
+// WHEA_IPF_MCA_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_IPF_MCA_DESCRIPTOR struct {
+	Data [4]byte
+}
+
 // WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union struct {
@@ -1506,6 +1971,34 @@ type WHEA_PCI_SLOT_NUMBER_u_e__Union struct {
 
 type WHEA_PCI_SLOT_NUMBER struct {
 	U WHEA_PCI_SLOT_NUMBER_u_e__Union
+}
+
+// WHEA_XPF_CMC_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_XPF_CMC_DESCRIPTOR struct {
+	Data [932]byte
+}
+
+// WHEA_XPF_MCE_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_XPF_MCE_DESCRIPTOR struct {
+	Data [920]byte
+}
+
+// WHEA_XPF_MC_BANK_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_XPF_MC_BANK_DESCRIPTOR struct {
+	Data [28]byte
+}
+
+// WHEA_XPF_NMI_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WHEA_XPF_NMI_DESCRIPTOR struct {
+	Data [3]byte
 }
 
 // WOW64_CONTEXT: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-wow64_context
@@ -1631,6 +2124,13 @@ type XSTATE_CONFIGURATION struct {
 	AllNonLargeFeatureSize               uint32
 	MaxSveVectorLength                   uint16
 	Spare1                               uint16
+}
+
+// XSTATE_CONFIG_FEATURE_MSC_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XSTATE_CONFIG_FEATURE_MSC_INFO struct {
+	Data [132]uint32
 }
 
 type XSTATE_CONTEXT struct {

@@ -9,7 +9,7 @@ package ime
 type IMCENUMPROC uintptr
 
 // PFNLOG is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.HRESULT) foundation.BOOL.
+// syscall) using the shape func(*IMEDP, foundation.HRESULT) foundation.BOOL.
 type PFNLOG uintptr
 
 // REGISTERWORDENUMPROCA is a callback pointer: create one with NewCallback (package

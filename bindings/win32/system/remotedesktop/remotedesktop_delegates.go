@@ -21,7 +21,7 @@ type PVIRTUALCHANNELCLOSE uintptr
 type PVIRTUALCHANNELENTRY uintptr
 
 // PVIRTUALCHANNELINIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, unsafe.Pointer, int32, uint32, PCHANNEL_INIT_EVENT_FN) uint32.
+// syscall) using the shape func(*unsafe.Pointer, *CHANNEL_DEF, int32, uint32, PCHANNEL_INIT_EVENT_FN) uint32.
 type PVIRTUALCHANNELINIT uintptr
 
 // PVIRTUALCHANNELOPEN is a callback pointer: create one with NewCallback (package

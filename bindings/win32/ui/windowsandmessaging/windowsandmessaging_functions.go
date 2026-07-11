@@ -988,7 +988,7 @@ func CreateCursor(hInst foundation.HINSTANCE, xHotSpot int32, yHotSpot int32, nW
 // CreateDialogIndirectParam calls USER32!CreateDialogIndirectParamW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdialogindirectparamw
 // Minimum OS: windows5.0.
-func CreateDialogIndirectParam(hInstance foundation.HINSTANCE, lpTemplate unsafe.Pointer, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (foundation.HWND, error) {
+func CreateDialogIndirectParam(hInstance foundation.HINSTANCE, lpTemplate *DLGTEMPLATE, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (foundation.HWND, error) {
 	r1, _, e1 := syscall.SyscallN(procCreateDialogIndirectParam.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpTemplate)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
@@ -1000,7 +1000,7 @@ func CreateDialogIndirectParam(hInstance foundation.HINSTANCE, lpTemplate unsafe
 // CreateDialogIndirectParamA calls USER32!CreateDialogIndirectParamA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdialogindirectparama
 // Minimum OS: windows5.0.
-func CreateDialogIndirectParamA(hInstance foundation.HINSTANCE, lpTemplate unsafe.Pointer, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (foundation.HWND, error) {
+func CreateDialogIndirectParamA(hInstance foundation.HINSTANCE, lpTemplate *DLGTEMPLATE, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (foundation.HWND, error) {
 	r1, _, e1 := syscall.SyscallN(procCreateDialogIndirectParamA.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(lpTemplate)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
@@ -1349,7 +1349,7 @@ func DestroyWindow(hWnd foundation.HWND) error {
 // DialogBoxIndirectParam calls USER32!DialogBoxIndirectParamW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dialogboxindirectparamw
 // Minimum OS: windows5.0.
-func DialogBoxIndirectParam(hInstance foundation.HINSTANCE, hDialogTemplate unsafe.Pointer, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (uintptr, error) {
+func DialogBoxIndirectParam(hInstance foundation.HINSTANCE, hDialogTemplate *DLGTEMPLATE, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (uintptr, error) {
 	r1, _, e1 := syscall.SyscallN(procDialogBoxIndirectParam.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(hDialogTemplate)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
 	if e1 != 0 {
 		return uintptr(r1), e1
@@ -1360,7 +1360,7 @@ func DialogBoxIndirectParam(hInstance foundation.HINSTANCE, hDialogTemplate unsa
 // DialogBoxIndirectParamA calls USER32!DialogBoxIndirectParamA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dialogboxindirectparama
 // Minimum OS: windows5.0.
-func DialogBoxIndirectParamA(hInstance foundation.HINSTANCE, hDialogTemplate unsafe.Pointer, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (uintptr, error) {
+func DialogBoxIndirectParamA(hInstance foundation.HINSTANCE, hDialogTemplate *DLGTEMPLATE, hWndParent foundation.HWND, lpDialogFunc DLGPROC, dwInitParam foundation.LPARAM) (uintptr, error) {
 	r1, _, e1 := syscall.SyscallN(procDialogBoxIndirectParamA.Addr(), uintptr(hInstance), uintptr(unsafe.Pointer(hDialogTemplate)), uintptr(hWndParent), uintptr(lpDialogFunc), uintptr(dwInitParam))
 	if e1 != 0 {
 		return uintptr(r1), e1

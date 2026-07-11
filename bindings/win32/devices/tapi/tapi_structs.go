@@ -18,7 +18,374 @@ type ADDRALIAS struct {
 	Type      uint16
 }
 
+// DTR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DTR struct {
+	Data [14]byte
+}
+
 type DispatchMapper struct {
+}
+
+// LINEADDRESSCAPS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineaddresscaps
+// LINEADDRESSCAPS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEADDRESSCAPS struct {
+	Data [228]byte
+}
+
+// LINEADDRESSSTATUS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineaddressstatus
+// LINEADDRESSSTATUS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEADDRESSSTATUS struct {
+	Data [64]byte
+}
+
+// LINEAGENTACTIVITYENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentactivityentry
+// LINEAGENTACTIVITYENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTACTIVITYENTRY struct {
+	Data [12]byte
+}
+
+// LINEAGENTACTIVITYLIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentactivitylist
+// LINEAGENTACTIVITYLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTACTIVITYLIST struct {
+	Data [24]byte
+}
+
+// LINEAGENTCAPS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentcaps
+// LINEAGENTCAPS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTCAPS struct {
+	Data [72]byte
+}
+
+// LINEAGENTENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagententry
+// LINEAGENTENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTENTRY struct {
+	Data [28]byte
+}
+
+// LINEAGENTGROUPENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentgroupentry
+// LINEAGENTGROUPENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTGROUPENTRY struct {
+	Data [24]byte
+}
+
+// LINEAGENTGROUPLIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentgrouplist
+// LINEAGENTGROUPLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTGROUPLIST struct {
+	Data [24]byte
+}
+
+// LINEAGENTINFO: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentinfo
+// LINEAGENTINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTINFO struct {
+	Data [56]byte
+}
+
+// LINEAGENTLIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentlist
+// LINEAGENTLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTLIST struct {
+	Data [24]byte
+}
+
+// LINEAGENTSESSIONENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentsessionentry
+// LINEAGENTSESSIONENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTSESSIONENTRY struct {
+	Data [28]byte
+}
+
+// LINEAGENTSESSIONINFO: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentsessioninfo
+// LINEAGENTSESSIONINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTSESSIONINFO struct {
+	Data [76]byte
+}
+
+// LINEAGENTSESSIONLIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentsessionlist
+// LINEAGENTSESSIONLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTSESSIONLIST struct {
+	Data [24]byte
+}
+
+// LINEAGENTSTATUS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineagentstatus
+// LINEAGENTSTATUS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAGENTSTATUS struct {
+	Data [56]byte
+}
+
+// LINEAPPINFO: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineappinfo
+// LINEAPPINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEAPPINFO struct {
+	Data [40]byte
+}
+
+// LINECALLINFO: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linecallinfo
+// LINECALLINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINECALLINFO struct {
+	Data [324]byte
+}
+
+// LINECALLLIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linecalllist
+// LINECALLLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINECALLLIST struct {
+	Data [24]byte
+}
+
+// LINECALLPARAMS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linecallparams
+// LINECALLPARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINECALLPARAMS struct {
+	Data [176]byte
+}
+
+// LINECALLSTATUS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linecallstatus
+// LINECALLSTATUS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINECALLSTATUS struct {
+	Data [56]byte
+}
+
+// LINECALLTREATMENTENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linecalltreatmententry
+// LINECALLTREATMENTENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINECALLTREATMENTENTRY struct {
+	Data [12]byte
+}
+
+// LINECARDENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linecardentry
+// LINECARDENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINECARDENTRY struct {
+	Data [44]byte
+}
+
+// LINECOUNTRYENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linecountryentry
+// LINECOUNTRYENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINECOUNTRYENTRY struct {
+	Data [44]byte
+}
+
+// LINECOUNTRYLIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linecountrylist
+// LINECOUNTRYLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINECOUNTRYLIST struct {
+	Data [24]byte
+}
+
+// LINEDEVCAPS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linedevcaps
+// LINEDEVCAPS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEDEVCAPS struct {
+	Data [268]byte
+}
+
+// LINEDEVSTATUS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linedevstatus
+// LINEDEVSTATUS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEDEVSTATUS struct {
+	Data [88]byte
+}
+
+// LINEDIALPARAMS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linedialparams
+// LINEDIALPARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEDIALPARAMS struct {
+	Data [16]byte
+}
+
+// LINEEXTENSIONID: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineextensionid
+// LINEEXTENSIONID is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEEXTENSIONID struct {
+	Data [16]byte
+}
+
+// LINEFORWARD: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineforward
+// LINEFORWARD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEFORWARD struct {
+	Data [24]byte
+}
+
+// LINEFORWARDLIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineforwardlist
+// LINEFORWARDLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEFORWARDLIST struct {
+	Data [32]byte
+}
+
+// LINEGENERATETONE: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linegeneratetone
+// LINEGENERATETONE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEGENERATETONE struct {
+	Data [16]byte
+}
+
+// LINEINITIALIZEEXPARAMS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineinitializeexparams
+// LINEINITIALIZEEXPARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEINITIALIZEEXPARAMS struct {
+	Data [28]byte
+}
+
+// LINELOCATIONENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linelocationentry
+// LINELOCATIONENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINELOCATIONENTRY struct {
+	Data [68]byte
+}
+
+// LINEMEDIACONTROLCALLSTATE: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linemediacontrolcallstate
+// LINEMEDIACONTROLCALLSTATE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEMEDIACONTROLCALLSTATE struct {
+	Data [8]byte
+}
+
+// LINEMEDIACONTROLDIGIT: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linemediacontroldigit
+// LINEMEDIACONTROLDIGIT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEMEDIACONTROLDIGIT struct {
+	Data [12]byte
+}
+
+// LINEMEDIACONTROLMEDIA: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linemediacontrolmedia
+// LINEMEDIACONTROLMEDIA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEMEDIACONTROLMEDIA struct {
+	Data [12]byte
+}
+
+// LINEMEDIACONTROLTONE: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linemediacontroltone
+// LINEMEDIACONTROLTONE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEMEDIACONTROLTONE struct {
+	Data [24]byte
+}
+
+// LINEMESSAGE: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linemessage
+// LINEMESSAGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEMESSAGE struct {
+	Data [40]byte
+}
+
+// LINEMONITORTONE: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linemonitortone
+// LINEMONITORTONE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEMONITORTONE struct {
+	Data [20]byte
+}
+
+// LINEPROVIDERENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineproviderentry
+// LINEPROVIDERENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEPROVIDERENTRY struct {
+	Data [12]byte
+}
+
+// LINEPROVIDERLIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineproviderlist
+// LINEPROVIDERLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEPROVIDERLIST struct {
+	Data [24]byte
+}
+
+// LINEPROXYREQUEST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineproxyrequest
+// LINEPROXYREQUEST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEPROXYREQUEST struct {
+	Data [108]byte
+}
+
+// LINEPROXYREQUESTLIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineproxyrequestlist
+// LINEPROXYREQUESTLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEPROXYREQUESTLIST struct {
+	Data [24]byte
+}
+
+// LINEQUEUEENTRY: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linequeueentry
+// LINEQUEUEENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEQUEUEENTRY struct {
+	Data [12]byte
+}
+
+// LINEQUEUEINFO: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linequeueinfo
+// LINEQUEUEINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEQUEUEINFO struct {
+	Data [52]byte
+}
+
+// LINEQUEUELIST: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linequeuelist
+// LINEQUEUELIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEQUEUELIST struct {
+	Data [24]byte
 }
 
 // LINEREQMAKECALL: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linereqmakecall
@@ -27,6 +394,52 @@ type LINEREQMAKECALL struct {
 	SzAppName     [40]foundation.CHAR
 	SzCalledParty [40]foundation.CHAR
 	SzComment     [80]foundation.CHAR
+}
+
+// LINEREQMAKECALLW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEREQMAKECALLW struct {
+	Data [480]byte
+}
+
+// LINEREQMEDIACALL: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linereqmediacall
+// LINEREQMEDIACALL is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEREQMEDIACALL struct {
+	Data [344]byte
+}
+
+// LINEREQMEDIACALLW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINEREQMEDIACALLW struct {
+	Data [624]byte
+}
+
+// LINETERMCAPS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linetermcaps
+// LINETERMCAPS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINETERMCAPS struct {
+	Data [12]byte
+}
+
+// LINETRANSLATECAPS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linetranslatecaps
+// LINETRANSLATECAPS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINETRANSLATECAPS struct {
+	Data [44]byte
+}
+
+// LINETRANSLATEOUTPUT: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-linetranslateoutput
+// LINETRANSLATEOUTPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LINETRANSLATEOUTPUT struct {
+	Data [40]byte
 }
 
 // MSP_EVENT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -58,6 +471,61 @@ type NSID struct {
 	Xtype   uint32
 	LTime   int32
 	Address NSID_address_e__Union
+}
+
+// PHONEBUTTONINFO: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-phonebuttoninfo
+// PHONEBUTTONINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PHONEBUTTONINFO struct {
+	Data [40]byte
+}
+
+// PHONECAPS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-phonecaps
+// PHONECAPS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PHONECAPS struct {
+	Data [196]byte
+}
+
+// PHONEEXTENSIONID: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-phoneextensionid
+// PHONEEXTENSIONID is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PHONEEXTENSIONID struct {
+	Data [16]byte
+}
+
+// PHONEINITIALIZEEXPARAMS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-phoneinitializeexparams
+// PHONEINITIALIZEEXPARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PHONEINITIALIZEEXPARAMS struct {
+	Data [28]byte
+}
+
+// PHONEMESSAGE: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-phonemessage
+// PHONEMESSAGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PHONEMESSAGE struct {
+	Data [40]byte
+}
+
+// PHONESTATUS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-phonestatus
+// PHONESTATUS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PHONESTATUS struct {
+	Data [104]byte
+}
+
+// RENDDATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RENDDATA struct {
+	Data [14]byte
 }
 
 type Rendezvous struct {
@@ -115,4 +583,12 @@ type TUISPICREATEDIALOGINSTANCEPARAMS struct {
 	LpszUIDLLName foundation.PWSTR
 	LpParams      unsafe.Pointer
 	DwSize        uint32
+}
+
+// VARSTRING: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-varstring
+// VARSTRING is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type VARSTRING struct {
+	Data [24]byte
 }

@@ -14,6 +14,7 @@ import (
 	graphicsdirectdraw "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/directdraw"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/media"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 	mediaaudiodirectsound "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio/directsound"
 	mediamediafoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediafoundation"
 	mediawindowsmediaformat "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/windowsmediaformat"
@@ -3187,13 +3188,13 @@ type IAudioData struct {
 var IID_IAudioData = win32.GUID{Data1: 0x54c719c0, Data2: 0xaf60, Data3: 0x11d0, Data4: [8]byte{0x82, 0x12, 0x00, 0xc0, 0x4f, 0xc3, 0x2c, 0x45}}
 
 // GetFormat dispatches through IAudioData's vtable slot 6.
-func (self *IAudioData) GetFormat(pWaveFormatCurrent unsafe.Pointer) error {
+func (self *IAudioData) GetFormat(pWaveFormatCurrent *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWaveFormatCurrent)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormat dispatches through IAudioData's vtable slot 7.
-func (self *IAudioData) SetFormat(lpWaveFormat unsafe.Pointer) error {
+func (self *IAudioData) SetFormat(lpWaveFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWaveFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3208,13 +3209,13 @@ type IAudioMediaStream struct {
 var IID_IAudioMediaStream = win32.GUID{Data1: 0xf7537560, Data2: 0xa3be, Data3: 0x11d0, Data4: [8]byte{0x82, 0x12, 0x00, 0xc0, 0x4f, 0xc3, 0x2c, 0x45}}
 
 // GetFormat dispatches through IAudioMediaStream's vtable slot 9.
-func (self *IAudioMediaStream) GetFormat(pWaveFormatCurrent unsafe.Pointer) error {
+func (self *IAudioMediaStream) GetFormat(pWaveFormatCurrent *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWaveFormatCurrent)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormat dispatches through IAudioMediaStream's vtable slot 10.
-func (self *IAudioMediaStream) SetFormat(lpWaveFormat unsafe.Pointer) error {
+func (self *IAudioMediaStream) SetFormat(lpWaveFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWaveFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -4281,13 +4282,13 @@ type IBDA_MUX struct {
 var IID_IBDA_MUX = win32.GUID{Data1: 0x942aafec, Data2: 0x4c05, Data3: 0x4c74, Data4: [8]byte{0xb8, 0xeb, 0x87, 0x06, 0xc2, 0xa4, 0x94, 0x3f}}
 
 // SetPidList dispatches through IBDA_MUX's vtable slot 3.
-func (self *IBDA_MUX) SetPidList(ulPidListCount uint32, pbPidListBuffer unsafe.Pointer) error {
+func (self *IBDA_MUX) SetPidList(ulPidListCount uint32, pbPidListBuffer *BDA_MUX_PIDLISTITEM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulPidListCount), uintptr(unsafe.Pointer(pbPidListBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPidList dispatches through IBDA_MUX's vtable slot 4.
-func (self *IBDA_MUX) GetPidList(pulPidListCount *uint32, pbPidListBuffer unsafe.Pointer) error {
+func (self *IBDA_MUX) GetPidList(pulPidListCount *uint32, pbPidListBuffer *BDA_MUX_PIDLISTITEM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulPidListCount)), uintptr(unsafe.Pointer(pbPidListBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9425,7 +9426,7 @@ func (self *IMpegAudioDecoder) Put_DualMode(IntDecode uint32) error {
 }
 
 // Get_AudioFormat dispatches through IMpegAudioDecoder's vtable slot 15.
-func (self *IMpegAudioDecoder) Get_AudioFormat(lpFmt unsafe.Pointer) error {
+func (self *IMpegAudioDecoder) Get_AudioFormat(lpFmt *MPEG1WAVEFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpFmt)))
 	return win32.HRESULTError(int32(r1))
 }

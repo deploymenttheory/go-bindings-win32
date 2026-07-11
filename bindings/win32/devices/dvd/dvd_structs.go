@@ -93,6 +93,13 @@ type DVD_BD_SPARE_AREA_INFORMATION struct {
 	NumberOfAllocatedSpareBlocks [4]byte
 }
 
+// DVD_COPYRIGHT_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DVD_COPYRIGHT_DESCRIPTOR struct {
+	Data [4]byte
+}
+
 // DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union struct {
@@ -102,6 +109,20 @@ type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union struct {
 type DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR struct {
 	Anonymous DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR_Anonymous_e__Union
 	Reserved0 [3]byte
+}
+
+// DVD_COPY_PROTECT_KEY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DVD_COPY_PROTECT_KEY struct {
+	Data [25]byte
+}
+
+// DVD_DESCRIPTOR_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DVD_DESCRIPTOR_HEADER struct {
+	Data [5]byte
 }
 
 // DVD_DISC_CONTROL_BLOCK_HEADER_ProhibitedActions_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -190,8 +211,15 @@ type DVD_DUAL_LAYER_REMAPPING_INFORMATION struct {
 }
 
 type DVD_FULL_LAYER_DESCRIPTOR struct {
-	CommonHeader  [17]byte
+	CommonHeader  DVD_LAYER_DESCRIPTOR
 	MediaSpecific [2031]byte
+}
+
+// DVD_LAYER_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DVD_LAYER_DESCRIPTOR struct {
+	Data [17]byte
 }
 
 type DVD_LIST_OF_RECOGNIZED_FORMAT_LAYERS struct {
@@ -249,6 +277,13 @@ type DVD_RAM_SPARE_AREA_INFORMATION struct {
 	AllocatedSupplementalSpareSectors [4]byte
 }
 
+// DVD_READ_STRUCTURE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DVD_READ_STRUCTURE struct {
+	Data [17]byte
+}
+
 type DVD_RECORDING_MANAGEMENT_AREA_DATA struct {
 	LastRecordedRMASectorNumber [4]byte
 	RMDBytes                    [1]byte
@@ -300,4 +335,11 @@ type HD_DVD_R_MEDIUM_STATUS struct {
 	Bitfield                          byte
 	NumberOfRemainingRMDsInRDZ        byte
 	NumberOfRemainingRMDsInCurrentRMZ [2]byte
+}
+
+// STORAGE_SET_READ_AHEAD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type STORAGE_SET_READ_AHEAD struct {
+	Data [16]byte
 }

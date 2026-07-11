@@ -92,6 +92,14 @@ type ASSOCIATIONELEMENT struct {
 	PszClass foundation.PWSTR
 }
 
+// AUTO_SCROLL_DATA: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-auto_scroll_data
+// AUTO_SCROLL_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AUTO_SCROLL_DATA struct {
+	Data [48]byte
+}
+
 type AccessibilityDockingService struct {
 }
 
@@ -240,6 +248,14 @@ type BROWSEINFOW struct {
 	IImage         int32
 }
 
+// CABINETSTATE: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-cabinetstate
+// CABINETSTATE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CABINETSTATE struct {
+	Data [12]byte
+}
+
 // CATEGORY_INFO: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ns-shobjidl_core-category_info
 type CATEGORY_INFO struct {
 	Cif     CATEGORYINFO_FLAGS
@@ -247,6 +263,14 @@ type CATEGORY_INFO struct {
 }
 
 type CDBurn struct {
+}
+
+// CIDA: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-cida
+// CIDA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CIDA struct {
+	Data [8]byte
 }
 
 // CMINVOKECOMMANDINFO: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ns-shobjidl_core-cminvokecommandinfo
@@ -327,6 +351,14 @@ type CONFIRM_CONFLICT_RESULT_INFO struct {
 	IItemIndex uint32
 }
 
+// CPLINFO: https://learn.microsoft.com/windows/win32/api/cpl/ns-cpl-cplinfo
+// CPLINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CPLINFO struct {
+	Data [20]byte
+}
+
 // CREDENTIAL_PROVIDER_CREDENTIAL_SERIALIZATION: https://learn.microsoft.com/windows/win32/api/credentialprovider/ns-credentialprovider-credential_provider_credential_serialization
 type CREDENTIAL_PROVIDER_CREDENTIAL_SERIALIZATION struct {
 	UlAuthenticationPackage uint32
@@ -360,6 +392,14 @@ type CScriptErrorList struct {
 type ConflictFolder struct {
 }
 
+// DATABLOCK_HEADER: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-datablock_header
+// DATABLOCK_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DATABLOCK_HEADER struct {
+	Data [8]byte
+}
+
 // DEFCONTEXTMENU: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-defcontextmenu
 type DEFCONTEXTMENU struct {
 	Hwnd                foundation.HWND
@@ -371,6 +411,14 @@ type DEFCONTEXTMENU struct {
 	PunkAssociationInfo *systemcom.IUnknown
 	CKeys               uint32
 	AKeys               *systemregistry.HKEY
+}
+
+// DELEGATEITEMID: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ns-shobjidl_core-delegateitemid
+// DELEGATEITEMID is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DELEGATEITEMID struct {
+	Data [7]byte
 }
 
 // DESKBANDINFO: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ns-shobjidl_core-deskbandinfo
@@ -437,6 +485,22 @@ type DRAGINFOW struct {
 	GrfKeyState uint32
 }
 
+// DROPDESCRIPTION: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-dropdescription
+// DROPDESCRIPTION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DROPDESCRIPTION struct {
+	Data [1044]byte
+}
+
+// DROPFILES: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-dropfiles
+// DROPFILES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DROPFILES struct {
+	Data [20]byte
+}
+
 type DefFolderMenu struct {
 }
 
@@ -461,6 +525,38 @@ type DriveSizeCategorizer struct {
 type DriveTypeCategorizer struct {
 }
 
+// EXP_DARWIN_LINK: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-exp_darwin_link
+// EXP_DARWIN_LINK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type EXP_DARWIN_LINK struct {
+	Data [788]byte
+}
+
+// EXP_PROPERTYSTORAGE: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-exp_propertystorage
+// EXP_PROPERTYSTORAGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type EXP_PROPERTYSTORAGE struct {
+	Data [9]byte
+}
+
+// EXP_SPECIAL_FOLDER: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-exp_special_folder
+// EXP_SPECIAL_FOLDER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type EXP_SPECIAL_FOLDER struct {
+	Data [16]byte
+}
+
+// EXP_SZ_LINK: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-exp_sz_link
+// EXP_SZ_LINK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type EXP_SZ_LINK struct {
+	Data [788]byte
+}
+
 // EXTRASEARCH: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ns-shobjidl_core-extrasearch
 type EXTRASEARCH struct {
 	GuidSearch      win32.GUID
@@ -478,6 +574,46 @@ type ExecuteUnknown struct {
 }
 
 type ExplorerBrowser struct {
+}
+
+// FILEDESCRIPTORA: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-filedescriptora
+// FILEDESCRIPTORA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FILEDESCRIPTORA struct {
+	Data [332]byte
+}
+
+// FILEDESCRIPTORW: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-filedescriptorw
+// FILEDESCRIPTORW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FILEDESCRIPTORW struct {
+	Data [592]byte
+}
+
+// FILEGROUPDESCRIPTORA: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-filegroupdescriptora
+// FILEGROUPDESCRIPTORA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FILEGROUPDESCRIPTORA struct {
+	Data [336]byte
+}
+
+// FILEGROUPDESCRIPTORW: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-filegroupdescriptorw
+// FILEGROUPDESCRIPTORW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FILEGROUPDESCRIPTORW struct {
+	Data [596]byte
+}
+
+// FILE_ATTRIBUTES_ARRAY: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-file_attributes_array
+// FILE_ATTRIBUTES_ARRAY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FILE_ATTRIBUTES_ARRAY struct {
+	Data [16]byte
 }
 
 // FOLDERSETDATA: https://learn.microsoft.com/windows/win32/api/shdeprecated/ns-shdeprecated-foldersetdata
@@ -658,6 +794,22 @@ type NC_ADDRESS struct {
 	PrefixLength byte
 }
 
+// NEWCPLINFOA: https://learn.microsoft.com/windows/win32/api/cpl/ns-cpl-newcplinfoa
+// NEWCPLINFOA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NEWCPLINFOA struct {
+	Data [252]byte
+}
+
+// NEWCPLINFOW: https://learn.microsoft.com/windows/win32/api/cpl/ns-cpl-newcplinfow
+// NEWCPLINFOW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NEWCPLINFOW struct {
+	Data [476]byte
+}
+
 // NOTIFYICONDATAA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type NOTIFYICONDATAA_Anonymous_e__Union struct {
@@ -735,6 +887,22 @@ type NSTCCUSTOMDRAW struct {
 	Himl       uicontrols.HIMAGELIST
 	ILevel     int32
 	IIndent    int32
+}
+
+// NT_CONSOLE_PROPS: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-nt_console_props
+// NT_CONSOLE_PROPS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NT_CONSOLE_PROPS struct {
+	Data [204]byte
+}
+
+// NT_FE_CONSOLE_PROPS: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-nt_fe_console_props
+// NT_FE_CONSOLE_PROPS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NT_FE_CONSOLE_PROPS struct {
+	Data [12]byte
 }
 
 type NamespaceTreeControl struct {
@@ -935,6 +1103,30 @@ type SFV_SETITEMPOS struct {
 	Pt   foundation.POINT
 }
 
+// SHARDAPPIDINFO: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shardappidinfo
+// SHARDAPPIDINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHARDAPPIDINFO struct {
+	Data [16]byte
+}
+
+// SHARDAPPIDINFOIDLIST: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shardappidinfoidlist
+// SHARDAPPIDINFOIDLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHARDAPPIDINFOIDLIST struct {
+	Data [16]byte
+}
+
+// SHARDAPPIDINFOLINK: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shardappidinfolink
+// SHARDAPPIDINFOLINK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHARDAPPIDINFOLINK struct {
+	Data [16]byte
+}
+
 // SHCOLUMNDATA: https://learn.microsoft.com/windows/win32/api/shlobj/ns-shlobj-shcolumndata
 type SHCOLUMNDATA struct {
 	DwFlags          uint32
@@ -942,6 +1134,14 @@ type SHCOLUMNDATA struct {
 	DwReserved       uint32
 	PwszExt          foundation.PWSTR
 	WszFile          [260]uint16
+}
+
+// SHCOLUMNINFO: https://learn.microsoft.com/windows/win32/api/shlobj/ns-shlobj-shcolumninfo
+// SHCOLUMNINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHCOLUMNINFO struct {
+	Data [450]byte
 }
 
 // SHCOLUMNINIT: https://learn.microsoft.com/windows/win32/api/shlobj/ns-shlobj-shcolumninit
@@ -966,6 +1166,38 @@ type SHCREATEPROCESSINFOW struct {
 	DwCreationFlags      uint32
 	LpStartupInfo        *systemthreading.STARTUPINFOW
 	LpProcessInformation *systemthreading.PROCESS_INFORMATION
+}
+
+// SHChangeDWORDAsIDList: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shchangedwordasidlist
+// SHChangeDWORDAsIDList is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHChangeDWORDAsIDList struct {
+	Data [12]byte
+}
+
+// SHChangeNotifyEntry: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shchangenotifyentry
+// SHChangeNotifyEntry is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHChangeNotifyEntry struct {
+	Data [12]byte
+}
+
+// SHChangeProductKeyAsIDList: https://learn.microsoft.com/windows/win32/api/shlobj/ns-shlobj-shchangeproductkeyasidlist
+// SHChangeProductKeyAsIDList is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHChangeProductKeyAsIDList struct {
+	Data [82]byte
+}
+
+// SHChangeUpdateImageIDList: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shchangeupdateimageidlist
+// SHChangeUpdateImageIDList is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHChangeUpdateImageIDList struct {
+	Data [540]byte
 }
 
 // SHDESCRIPTIONID: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shdescriptionid
@@ -1030,6 +1262,30 @@ type SHELLEXECUTEINFOW struct {
 	DwHotKey     uint32
 	Anonymous    SHELLEXECUTEINFOW_Anonymous_e__Union
 	HProcess     foundation.HANDLE
+}
+
+// SHELLFLAGSTATE: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shellflagstate
+// SHELLFLAGSTATE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHELLFLAGSTATE struct {
+	Data [4]byte
+}
+
+// SHELLSTATEA: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shellstatea
+// SHELLSTATEA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHELLSTATEA struct {
+	Data [32]byte
+}
+
+// SHELLSTATEW: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-shellstatew
+// SHELLSTATEW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHELLSTATEW struct {
+	Data [32]byte
 }
 
 // SHELL_ITEM_RESOURCE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ns-shobjidl_core-shell_item_resource

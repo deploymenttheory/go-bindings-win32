@@ -302,8 +302,64 @@ type DELETE_USN_JOURNAL_DATA struct {
 	DeleteFlags  USN_DELETE_FLAGS
 }
 
+// DEVICEDUMP_PRIVATE_SUBSECTION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVICEDUMP_PRIVATE_SUBSECTION struct {
+	Data [9]byte
+}
+
+// DEVICEDUMP_PUBLIC_SUBSECTION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVICEDUMP_PUBLIC_SUBSECTION struct {
+	Data [85]byte
+}
+
 type DEVICEDUMP_RESTRICTED_SUBSECTION struct {
 	BData [1]byte
+}
+
+// DEVICEDUMP_SECTION_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVICEDUMP_SECTION_HEADER struct {
+	Data [244]byte
+}
+
+// DEVICEDUMP_STORAGEDEVICE_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVICEDUMP_STORAGEDEVICE_DATA struct {
+	Data [300]byte
+}
+
+// DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP struct {
+	Data [96]byte
+}
+
+// DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD struct {
+	Data [60]byte
+}
+
+// DEVICEDUMP_STRUCTURE_VERSION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVICEDUMP_STRUCTURE_VERSION struct {
+	Data [12]byte
+}
+
+// DEVICEDUMP_SUBSECTION_POINTER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVICEDUMP_SUBSECTION_POINTER struct {
+	Data [12]byte
 }
 
 // DEVICE_COPY_OFFLOAD_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-device_copy_offload_descriptor
@@ -773,6 +829,13 @@ type DISK_RECORD struct {
 	NumberOfBytes  uint32
 	DeviceNumber   byte
 	ReadRequest    foundation.BOOLEAN
+}
+
+// DRIVERSTATUS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DRIVERSTATUS struct {
+	Data [12]byte
 }
 
 // DRIVE_LAYOUT_INFORMATION: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-drive_layout_information
@@ -1325,6 +1388,13 @@ type FS_BPIO_RESULTS struct {
 	FailureReason        [128]uint16
 }
 
+// GETVERSIONINPARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type GETVERSIONINPARAMS struct {
+	Data [24]byte
+}
+
 // GET_CHANGER_PARAMETERS: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-get_changer_parameters
 type GET_CHANGER_PARAMETERS struct {
 	Size                       uint32
@@ -1391,6 +1461,13 @@ type GET_MEDIA_TYPES struct {
 	DeviceType     uint32
 	MediaInfoCount uint32
 	MediaInfo      [1]DEVICE_MEDIA_INFO
+}
+
+// GP_LOG_PAGE_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type GP_LOG_PAGE_DESCRIPTOR struct {
+	Data [4]byte
 }
 
 type HISTOGRAM_BUCKET struct {
@@ -1949,6 +2026,14 @@ type REASSIGN_BLOCKS struct {
 	BlockNumber [1]uint32
 }
 
+// REASSIGN_BLOCKS_EX: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-reassign_blocks_ex
+// REASSIGN_BLOCKS_EX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type REASSIGN_BLOCKS_EX struct {
+	Data [12]byte
+}
+
 type REFS_SMR_VOLUME_GC_PARAMETERS struct {
 	Version           uint32
 	Flags             uint32
@@ -2453,6 +2538,20 @@ type SD_QUERY_STATS_OUTPUT struct {
 	SdhAllocationSize uint64
 	NumSDTotal        uint64
 	NumSDUnused       uint64
+}
+
+// SENDCMDINPARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SENDCMDINPARAMS struct {
+	Data [33]byte
+}
+
+// SENDCMDOUTPARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SENDCMDOUTPARAMS struct {
+	Data [17]byte
 }
 
 type SET_DAX_ALLOC_ALIGNMENT_HINT_INPUT struct {

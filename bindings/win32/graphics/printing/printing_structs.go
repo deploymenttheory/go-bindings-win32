@@ -1061,22 +1061,62 @@ type MONITOR_INFO_2W struct {
 	PDLLName     foundation.PWSTR
 }
 
+// MXDC_ESCAPE_HEADER_T: https://learn.microsoft.com/windows/win32/printdocs/mxdcescapeheader
+// MXDC_ESCAPE_HEADER_T is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MXDC_ESCAPE_HEADER_T struct {
+	Data [12]byte
+}
+
+// MXDC_GET_FILENAME_DATA_T: https://learn.microsoft.com/windows/win32/printdocs/mxdcgetfilenamedata
+// MXDC_GET_FILENAME_DATA_T is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MXDC_GET_FILENAME_DATA_T struct {
+	Data [6]byte
+}
+
+// MXDC_PRINTTICKET_DATA_T: https://learn.microsoft.com/windows/win32/printdocs/mxdcprintticketpassthrough
+// MXDC_PRINTTICKET_DATA_T is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MXDC_PRINTTICKET_DATA_T struct {
+	Data [5]byte
+}
+
 // MXDC_PRINTTICKET_ESCAPE_T: https://learn.microsoft.com/windows/win32/printdocs/mxdcprintticketescape
 type MXDC_PRINTTICKET_ESCAPE_T struct {
-	MxdcEscape      [12]byte
-	PrintTicketData [5]byte
+	MxdcEscape      MXDC_ESCAPE_HEADER_T
+	PrintTicketData MXDC_PRINTTICKET_DATA_T
+}
+
+// MXDC_S0PAGE_DATA_T: https://learn.microsoft.com/windows/win32/printdocs/mxdcs0pagedata
+// MXDC_S0PAGE_DATA_T is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MXDC_S0PAGE_DATA_T struct {
+	Data [5]byte
 }
 
 // MXDC_S0PAGE_PASSTHROUGH_ESCAPE_T: https://learn.microsoft.com/windows/win32/printdocs/mxdcs0pagepassthroughescape
 type MXDC_S0PAGE_PASSTHROUGH_ESCAPE_T struct {
-	MxdcEscape    [12]byte
-	XpsS0PageData [5]byte
+	MxdcEscape    MXDC_ESCAPE_HEADER_T
+	XpsS0PageData MXDC_S0PAGE_DATA_T
 }
 
 // MXDC_S0PAGE_RESOURCE_ESCAPE_T: https://learn.microsoft.com/windows/win32/printdocs/mxdcs0pageresourceescape
 type MXDC_S0PAGE_RESOURCE_ESCAPE_T struct {
-	MxdcEscape                   [12]byte
-	XpsS0PageResourcePassthrough [273]byte
+	MxdcEscape                   MXDC_ESCAPE_HEADER_T
+	XpsS0PageResourcePassthrough MXDC_XPS_S0PAGE_RESOURCE_T
+}
+
+// MXDC_XPS_S0PAGE_RESOURCE_T: https://learn.microsoft.com/windows/win32/printdocs/mxdcxpss0pageresource
+// MXDC_XPS_S0PAGE_RESOURCE_T is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MXDC_XPS_S0PAGE_RESOURCE_T struct {
+	Data [273]byte
 }
 
 type NOTIFICATION_CONFIG_1 struct {

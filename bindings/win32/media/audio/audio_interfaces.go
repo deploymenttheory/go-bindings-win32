@@ -178,7 +178,7 @@ type IAudioClient struct {
 var IID_IAudioClient = win32.GUID{Data1: 0x1cb9ad4c, Data2: 0xdbfa, Data3: 0x4c32, Data4: [8]byte{0xb1, 0x78, 0xc2, 0xf5, 0x68, 0xa7, 0x03, 0xb2}}
 
 // Initialize dispatches through IAudioClient's vtable slot 3.
-func (self *IAudioClient) Initialize(ShareMode AUDCLNT_SHAREMODE, StreamFlags uint32, hnsBufferDuration int64, hnsPeriodicity int64, pFormat unsafe.Pointer, AudioSessionGuid *win32.GUID) error {
+func (self *IAudioClient) Initialize(ShareMode AUDCLNT_SHAREMODE, StreamFlags uint32, hnsBufferDuration int64, hnsPeriodicity int64, pFormat *WAVEFORMATEX, AudioSessionGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ShareMode), uintptr(StreamFlags), uintptr(hnsBufferDuration), uintptr(hnsPeriodicity), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(AudioSessionGuid)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -202,13 +202,13 @@ func (self *IAudioClient) GetCurrentPadding(pNumPaddingFrames *uint32) error {
 }
 
 // IsFormatSupported dispatches through IAudioClient's vtable slot 7.
-func (self *IAudioClient) IsFormatSupported(ShareMode AUDCLNT_SHAREMODE, pFormat unsafe.Pointer, ppClosestMatch *unsafe.Pointer) error {
+func (self *IAudioClient) IsFormatSupported(ShareMode AUDCLNT_SHAREMODE, pFormat *WAVEFORMATEX, ppClosestMatch **WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ShareMode), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(ppClosestMatch)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetMixFormat dispatches through IAudioClient's vtable slot 8.
-func (self *IAudioClient) GetMixFormat(ppDeviceFormat *unsafe.Pointer) error {
+func (self *IAudioClient) GetMixFormat(ppDeviceFormat **WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDeviceFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -271,7 +271,7 @@ func (self *IAudioClient2) SetClientProperties(pProperties *AudioClientPropertie
 }
 
 // GetBufferSizeLimits dispatches through IAudioClient2's vtable slot 17.
-func (self *IAudioClient2) GetBufferSizeLimits(pFormat unsafe.Pointer, bEventDriven bool, phnsMinBufferDuration *int64, phnsMaxBufferDuration *int64) error {
+func (self *IAudioClient2) GetBufferSizeLimits(pFormat *WAVEFORMATEX, bEventDriven bool, phnsMinBufferDuration *int64, phnsMaxBufferDuration *int64) error {
 	_bEventDriven := win32.Bool32(bEventDriven)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)), uintptr(_bEventDriven), uintptr(unsafe.Pointer(phnsMinBufferDuration)), uintptr(unsafe.Pointer(phnsMaxBufferDuration)))
 	return win32.HRESULTError(int32(r1))
@@ -287,19 +287,19 @@ type IAudioClient3 struct {
 var IID_IAudioClient3 = win32.GUID{Data1: 0x7ed4ee07, Data2: 0x8e67, Data3: 0x4cd4, Data4: [8]byte{0x8c, 0x1a, 0x2b, 0x7a, 0x59, 0x87, 0xad, 0x42}}
 
 // GetSharedModeEnginePeriod dispatches through IAudioClient3's vtable slot 18.
-func (self *IAudioClient3) GetSharedModeEnginePeriod(pFormat unsafe.Pointer, pDefaultPeriodInFrames *uint32, pFundamentalPeriodInFrames *uint32, pMinPeriodInFrames *uint32, pMaxPeriodInFrames *uint32) error {
+func (self *IAudioClient3) GetSharedModeEnginePeriod(pFormat *WAVEFORMATEX, pDefaultPeriodInFrames *uint32, pFundamentalPeriodInFrames *uint32, pMinPeriodInFrames *uint32, pMaxPeriodInFrames *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(pDefaultPeriodInFrames)), uintptr(unsafe.Pointer(pFundamentalPeriodInFrames)), uintptr(unsafe.Pointer(pMinPeriodInFrames)), uintptr(unsafe.Pointer(pMaxPeriodInFrames)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentSharedModeEnginePeriod dispatches through IAudioClient3's vtable slot 19.
-func (self *IAudioClient3) GetCurrentSharedModeEnginePeriod(ppFormat *unsafe.Pointer, pCurrentPeriodInFrames *uint32) error {
+func (self *IAudioClient3) GetCurrentSharedModeEnginePeriod(ppFormat **WAVEFORMATEX, pCurrentPeriodInFrames *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFormat)), uintptr(unsafe.Pointer(pCurrentPeriodInFrames)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // InitializeSharedAudioStream dispatches through IAudioClient3's vtable slot 20.
-func (self *IAudioClient3) InitializeSharedAudioStream(StreamFlags uint32, PeriodInFrames uint32, pFormat unsafe.Pointer, AudioSessionGuid *win32.GUID) error {
+func (self *IAudioClient3) InitializeSharedAudioStream(StreamFlags uint32, PeriodInFrames uint32, pFormat *WAVEFORMATEX, AudioSessionGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(StreamFlags), uintptr(PeriodInFrames), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(AudioSessionGuid)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -428,7 +428,7 @@ func (self *IAudioFormatEnumerator) GetCount(count *uint32) error {
 }
 
 // GetFormat dispatches through IAudioFormatEnumerator's vtable slot 4.
-func (self *IAudioFormatEnumerator) GetFormat(index uint32, format *unsafe.Pointer) error {
+func (self *IAudioFormatEnumerator) GetFormat(index uint32, format **WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(format)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1595,13 +1595,13 @@ func (self *ISpatialAudioClient) GetSupportedAudioObjectFormatEnumerator(enumera
 }
 
 // GetMaxFrameCount dispatches through ISpatialAudioClient's vtable slot 7.
-func (self *ISpatialAudioClient) GetMaxFrameCount(objectFormat unsafe.Pointer, frameCountPerBuffer *uint32) error {
+func (self *ISpatialAudioClient) GetMaxFrameCount(objectFormat *WAVEFORMATEX, frameCountPerBuffer *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objectFormat)), uintptr(unsafe.Pointer(frameCountPerBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // IsAudioObjectFormatSupported dispatches through ISpatialAudioClient's vtable slot 8.
-func (self *ISpatialAudioClient) IsAudioObjectFormatSupported(objectFormat unsafe.Pointer) error {
+func (self *ISpatialAudioClient) IsAudioObjectFormatSupported(objectFormat *WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(objectFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1634,7 +1634,7 @@ func (self *ISpatialAudioClient2) IsOffloadCapable(category AUDIO_STREAM_CATEGOR
 }
 
 // GetMaxFrameCountForCategory dispatches through ISpatialAudioClient2's vtable slot 12.
-func (self *ISpatialAudioClient2) GetMaxFrameCountForCategory(category AUDIO_STREAM_CATEGORY, offloadEnabled bool, objectFormat unsafe.Pointer, frameCountPerBuffer *uint32) error {
+func (self *ISpatialAudioClient2) GetMaxFrameCountForCategory(category AUDIO_STREAM_CATEGORY, offloadEnabled bool, objectFormat *WAVEFORMATEX, frameCountPerBuffer *uint32) error {
 	_offloadEnabled := win32.Bool32(offloadEnabled)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(category), uintptr(_offloadEnabled), uintptr(unsafe.Pointer(objectFormat)), uintptr(unsafe.Pointer(frameCountPerBuffer)))
 	return win32.HRESULTError(int32(r1))
@@ -1740,7 +1740,7 @@ func (self *ISpatialAudioMetadataItems) GetMaxValueBufferLength(maxValueBufferLe
 }
 
 // GetInfo dispatches through ISpatialAudioMetadataItems's vtable slot 7.
-func (self *ISpatialAudioMetadataItems) GetInfo(info unsafe.Pointer) error {
+func (self *ISpatialAudioMetadataItems) GetInfo(info *SpatialAudioMetadataItemsInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(info)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1902,7 +1902,7 @@ func (self *ISpatialAudioObjectForHrtf) SetEnvironment(environment SpatialAudioH
 }
 
 // SetDistanceDecay dispatches through ISpatialAudioObjectForHrtf's vtable slot 11.
-func (self *ISpatialAudioObjectForHrtf) SetDistanceDecay(distanceDecay unsafe.Pointer) error {
+func (self *ISpatialAudioObjectForHrtf) SetDistanceDecay(distanceDecay *SpatialAudioHrtfDistanceDecay) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(distanceDecay)))
 	return win32.HRESULTError(int32(r1))
 }

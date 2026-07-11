@@ -52,7 +52,7 @@ func TimeGetDevCaps(ptc *TIMECAPS, cbtc uint32) uint32 {
 // TimeGetSystemTime calls WINMM!timeGetSystemTime.
 // https://learn.microsoft.com/windows/win32/api/timeapi/nf-timeapi-timegetsystemtime
 // Minimum OS: windows5.0.
-func TimeGetSystemTime(pmmt unsafe.Pointer, cbmmt uint32) uint32 {
+func TimeGetSystemTime(pmmt *MMTIME, cbmmt uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procTimeGetSystemTime.Addr(), uintptr(unsafe.Pointer(pmmt)), uintptr(cbmmt))
 	return uint32(r1)
 }

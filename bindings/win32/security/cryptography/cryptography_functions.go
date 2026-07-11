@@ -3925,7 +3925,7 @@ func FindCertsByIssuer(pCertChains *CERT_CHAIN, pcbCertChains *uint32, pcCertCha
 }
 
 // FreeToken calls infocardapi!FreeToken.
-func FreeToken(pAllocMemory unsafe.Pointer) bool {
+func FreeToken(pAllocMemory *GENERIC_XML_TOKEN) bool {
 	r1, _, _ := syscall.SyscallN(procFreeToken.Addr(), uintptr(unsafe.Pointer(pAllocMemory)))
 	return r1 != 0
 }
@@ -4026,7 +4026,7 @@ func GetSignatureInterface(pszProviderName string, pszAlgId string, ppFunctionTa
 }
 
 // GetToken calls infocardapi!GetToken.
-func GetToken(pPolicyChain []POLICY_ELEMENT, securityToken *unsafe.Pointer, phProofTokenCrypto **INFORMATIONCARD_CRYPTO_HANDLE) error {
+func GetToken(pPolicyChain []POLICY_ELEMENT, securityToken **GENERIC_XML_TOKEN, phProofTokenCrypto **INFORMATIONCARD_CRYPTO_HANDLE) error {
 	var _pPolicyChain *POLICY_ELEMENT
 	if len(pPolicyChain) > 0 {
 		_pPolicyChain = &pPolicyChain[0]

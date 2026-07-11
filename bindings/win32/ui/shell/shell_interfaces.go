@@ -2217,7 +2217,7 @@ func (self *IColumnProvider) Initialize(psci *SHCOLUMNINIT) error {
 }
 
 // GetColumnInfo dispatches through IColumnProvider's vtable slot 4.
-func (self *IColumnProvider) GetColumnInfo(dwIndex uint32, psci unsafe.Pointer) error {
+func (self *IColumnProvider) GetColumnInfo(dwIndex uint32, psci *SHCOLUMNINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(psci)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9459,7 +9459,7 @@ type IShellDetails struct {
 var IID_IShellDetails = win32.GUID{Data1: 0x000214ec, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // GetDetailsOf dispatches through IShellDetails's vtable slot 3.
-func (self *IShellDetails) GetDetailsOf(pidl *uishellcommon.ITEMIDLIST, iColumn uint32, pDetails unsafe.Pointer) error {
+func (self *IShellDetails) GetDetailsOf(pidl *uishellcommon.ITEMIDLIST, iColumn uint32, pDetails *uishellcommon.SHELLDETAILS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pidl)), uintptr(iColumn), uintptr(unsafe.Pointer(pDetails)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -9928,7 +9928,7 @@ func (self *IShellFolder2) GetDetailsEx(pidl *uishellcommon.ITEMIDLIST, pscid *f
 }
 
 // GetDetailsOf dispatches through IShellFolder2's vtable slot 18.
-func (self *IShellFolder2) GetDetailsOf(pidl *uishellcommon.ITEMIDLIST, iColumn uint32, psd unsafe.Pointer) error {
+func (self *IShellFolder2) GetDetailsOf(pidl *uishellcommon.ITEMIDLIST, iColumn uint32, psd *uishellcommon.SHELLDETAILS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pidl)), uintptr(iColumn), uintptr(unsafe.Pointer(psd)))
 	return win32.HRESULTError(int32(r1))
 }

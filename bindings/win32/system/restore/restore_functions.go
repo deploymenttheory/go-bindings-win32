@@ -33,7 +33,7 @@ func SRRemoveRestorePoint(dwRPNum uint32) uint32 {
 // SRSetRestorePoint calls sfc!SRSetRestorePointW.
 // https://learn.microsoft.com/windows/win32/api/srrestoreptapi/nf-srrestoreptapi-srsetrestorepointw
 // Minimum OS: windows5.1.2600.
-func SRSetRestorePoint(pRestorePtSpec unsafe.Pointer, pSMgrStatus unsafe.Pointer) bool {
+func SRSetRestorePoint(pRestorePtSpec *RESTOREPOINTINFOW, pSMgrStatus *STATEMGRSTATUS) bool {
 	r1, _, _ := syscall.SyscallN(procSRSetRestorePoint.Addr(), uintptr(unsafe.Pointer(pRestorePtSpec)), uintptr(unsafe.Pointer(pSMgrStatus)))
 	return r1 != 0
 }
@@ -41,7 +41,7 @@ func SRSetRestorePoint(pRestorePtSpec unsafe.Pointer, pSMgrStatus unsafe.Pointer
 // SRSetRestorePointA calls sfc!SRSetRestorePointA.
 // https://learn.microsoft.com/windows/win32/api/srrestoreptapi/nf-srrestoreptapi-srsetrestorepointa
 // Minimum OS: windows5.1.2600.
-func SRSetRestorePointA(pRestorePtSpec unsafe.Pointer, pSMgrStatus unsafe.Pointer) bool {
+func SRSetRestorePointA(pRestorePtSpec *RESTOREPOINTINFOA, pSMgrStatus *STATEMGRSTATUS) bool {
 	r1, _, _ := syscall.SyscallN(procSRSetRestorePointA.Addr(), uintptr(unsafe.Pointer(pRestorePtSpec)), uintptr(unsafe.Pointer(pSMgrStatus)))
 	return r1 != 0
 }

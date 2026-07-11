@@ -170,6 +170,20 @@ type BTH_HCI_EVENT_INFO struct {
 	Connected      byte
 }
 
+// BTH_INFO_REQ is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BTH_INFO_REQ struct {
+	Data [10]byte
+}
+
+// BTH_INFO_RSP is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BTH_INFO_RSP struct {
+	Data [47]byte
+}
+
 // BTH_L2CAP_EVENT_INFO: https://learn.microsoft.com/windows/win32/api/bthdef/ns-bthdef-bth_l2cap_event_info
 type BTH_L2CAP_EVENT_INFO struct {
 	BthAddress uint64
@@ -242,15 +256,53 @@ type BTH_LE_UUID struct {
 	Value       BTH_LE_UUID_Value_e__Union
 }
 
+// BTH_PING_REQ is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BTH_PING_REQ struct {
+	Data [53]byte
+}
+
 type BTH_PING_RSP struct {
 	DataLen byte
 	Data    [44]byte
+}
+
+// BTH_QUERY_DEVICE: https://learn.microsoft.com/windows/win32/api/ws2bth/ns-ws2bth-bth_query_device
+// BTH_QUERY_DEVICE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BTH_QUERY_DEVICE struct {
+	Data [5]byte
+}
+
+// BTH_QUERY_SERVICE: https://learn.microsoft.com/windows/win32/api/ws2bth/ns-ws2bth-bth_query_service
+// BTH_QUERY_SERVICE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BTH_QUERY_SERVICE struct {
+	Data [256]byte
 }
 
 // BTH_RADIO_IN_RANGE: https://learn.microsoft.com/windows/win32/api/bthdef/ns-bthdef-bth_radio_in_range
 type BTH_RADIO_IN_RANGE struct {
 	DeviceInfo          BTH_DEVICE_INFO
 	PreviousDeviceFlags uint32
+}
+
+// BTH_SET_SERVICE: https://learn.microsoft.com/windows/win32/api/ws2bth/ns-ws2bth-bth_set_service
+// BTH_SET_SERVICE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BTH_SET_SERVICE struct {
+	Data [45]byte
+}
+
+// RFCOMM_COMMAND is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RFCOMM_COMMAND struct {
+	Data [11]byte
 }
 
 type RFCOMM_MSC_DATA struct {
@@ -300,6 +352,14 @@ type SDP_STRING_TYPE_DATA struct {
 type SDP_ULARGE_INTEGER_16 struct {
 	LowPart  uint64
 	HighPart uint64
+}
+
+// SOCKADDR_BTH: https://learn.microsoft.com/windows/win32/api/ws2bth/ns-ws2bth-sockaddr_bth
+// SOCKADDR_BTH is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SOCKADDR_BTH struct {
+	Data [30]byte
 }
 
 // SdpAttributeRange: https://learn.microsoft.com/windows/win32/api/bthsdpdef/ns-bthsdpdef-sdpattributerange

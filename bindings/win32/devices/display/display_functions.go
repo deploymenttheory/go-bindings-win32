@@ -232,8 +232,12 @@ func DestroyPhysicalMonitor(hMonitor foundation.HANDLE) error {
 // DestroyPhysicalMonitors calls dxva2!DestroyPhysicalMonitors.
 // https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-destroyphysicalmonitors
 // Minimum OS: windows6.0.6000.
-func DestroyPhysicalMonitors(dwPhysicalMonitorArraySize uint32, pPhysicalMonitorArray unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procDestroyPhysicalMonitors.Addr(), uintptr(dwPhysicalMonitorArraySize), uintptr(unsafe.Pointer(pPhysicalMonitorArray)))
+func DestroyPhysicalMonitors(pPhysicalMonitorArray []PHYSICAL_MONITOR) error {
+	var _pPhysicalMonitorArray *PHYSICAL_MONITOR
+	if len(pPhysicalMonitorArray) > 0 {
+		_pPhysicalMonitorArray = &pPhysicalMonitorArray[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procDestroyPhysicalMonitors.Addr(), uintptr(len(pPhysicalMonitorArray)), uintptr(unsafe.Pointer(_pPhysicalMonitorArray)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -804,8 +808,12 @@ func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsd
 // GetPhysicalMonitorsFromHMONITOR calls dxva2!GetPhysicalMonitorsFromHMONITOR.
 // https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getphysicalmonitorsfromhmonitor
 // Minimum OS: windows6.0.6000.
-func GetPhysicalMonitorsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, dwPhysicalMonitorArraySize uint32, pPhysicalMonitorArray unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetPhysicalMonitorsFromHMONITOR.Addr(), uintptr(hMonitor), uintptr(dwPhysicalMonitorArraySize), uintptr(unsafe.Pointer(pPhysicalMonitorArray)))
+func GetPhysicalMonitorsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, pPhysicalMonitorArray []PHYSICAL_MONITOR) error {
+	var _pPhysicalMonitorArray *PHYSICAL_MONITOR
+	if len(pPhysicalMonitorArray) > 0 {
+		_pPhysicalMonitorArray = &pPhysicalMonitorArray[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetPhysicalMonitorsFromHMONITOR.Addr(), uintptr(hMonitor), uintptr(len(pPhysicalMonitorArray)), uintptr(unsafe.Pointer(_pPhysicalMonitorArray)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -815,15 +823,19 @@ func GetPhysicalMonitorsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, dwPhysicalMo
 // GetPhysicalMonitorsFromIDirect3DDevice9 calls dxva2!GetPhysicalMonitorsFromIDirect3DDevice9.
 // https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getphysicalmonitorsfromidirect3ddevice9
 // Minimum OS: windows6.0.6000.
-func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, dwPhysicalMonitorArraySize uint32, pPhysicalMonitorArray unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(procGetPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(dwPhysicalMonitorArraySize), uintptr(unsafe.Pointer(pPhysicalMonitorArray)))
+func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, pPhysicalMonitorArray []PHYSICAL_MONITOR) error {
+	var _pPhysicalMonitorArray *PHYSICAL_MONITOR
+	if len(pPhysicalMonitorArray) > 0 {
+		_pPhysicalMonitorArray = &pPhysicalMonitorArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(len(pPhysicalMonitorArray)), uintptr(unsafe.Pointer(_pPhysicalMonitorArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimingReport calls dxva2!GetTimingReport.
 // https://learn.microsoft.com/windows/win32/api/lowlevelmonitorconfigurationapi/nf-lowlevelmonitorconfigurationapi-gettimingreport
 // Minimum OS: windows6.0.6000.
-func GetTimingReport(hMonitor foundation.HANDLE, pmtrMonitorTimingReport unsafe.Pointer) (int32, error) {
+func GetTimingReport(hMonitor foundation.HANDLE, pmtrMonitorTimingReport *MC_TIMING_REPORT) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetTimingReport.Addr(), uintptr(hMonitor), uintptr(unsafe.Pointer(pmtrMonitorTimingReport)))
 	if e1 != 0 {
 		return int32(r1), e1

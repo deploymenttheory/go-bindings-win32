@@ -17,7 +17,7 @@ type LPCALL_BACK_USER_INTERRUPT_ROUTINE uintptr
 type LPTOP_LEVEL_EXCEPTION_FILTER uintptr
 
 // MINIDUMP_CALLBACK_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(unsafe.Pointer, *MINIDUMP_CALLBACK_INPUT, *MINIDUMP_CALLBACK_OUTPUT) foundation.BOOL.
 type MINIDUMP_CALLBACK_ROUTINE uintptr
 
 // PCOGETACTIVATIONSTATE is a callback pointer: create one with NewCallback (package

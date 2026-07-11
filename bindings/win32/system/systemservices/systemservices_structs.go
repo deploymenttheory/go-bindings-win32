@@ -201,6 +201,13 @@ type HIBERFILE_BUCKET struct {
 	PhysicalMemoryPercent [3]uint32
 }
 
+// IMAGE_ALPHA64_RUNTIME_FUNCTION_ENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_ALPHA64_RUNTIME_FUNCTION_ENTRY struct {
+	Data [10]uint32
+}
+
 type IMAGE_ALPHA_RUNTIME_FUNCTION_ENTRY struct {
 	BeginAddress     uint32
 	EndAddress       uint32
@@ -270,9 +277,30 @@ type IMAGE_AUX_SYMBOL_EX struct {
 	Data [10]uint16
 }
 
+// IMAGE_AUX_SYMBOL_TOKEN_DEF is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_AUX_SYMBOL_TOKEN_DEF struct {
+	Data [9]uint16
+}
+
 type IMAGE_BASE_RELOCATION struct {
 	VirtualAddress uint32
 	SizeOfBlock    uint32
+}
+
+// IMAGE_BDD_DYNAMIC_RELOCATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_BDD_DYNAMIC_RELOCATION struct {
+	Data [8]byte
+}
+
+// IMAGE_BDD_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_BDD_INFO struct {
+	Data [8]byte
 }
 
 type IMAGE_BOUND_FORWARDER_REF struct {
@@ -300,9 +328,51 @@ type IMAGE_DEBUG_MISC struct {
 	Data     [1]byte
 }
 
+// IMAGE_DOS_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_DOS_HEADER struct {
+	Data [32]uint16
+}
+
+// IMAGE_DYNAMIC_RELOCATION32 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_DYNAMIC_RELOCATION32 struct {
+	Data [8]byte
+}
+
+// IMAGE_DYNAMIC_RELOCATION32_V2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_DYNAMIC_RELOCATION32_V2 struct {
+	Data [20]byte
+}
+
+// IMAGE_DYNAMIC_RELOCATION64 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_DYNAMIC_RELOCATION64 struct {
+	Data [12]byte
+}
+
+// IMAGE_DYNAMIC_RELOCATION64_V2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_DYNAMIC_RELOCATION64_V2 struct {
+	Data [24]byte
+}
+
 type IMAGE_DYNAMIC_RELOCATION_TABLE struct {
 	Version uint32
 	Size    uint32
+}
+
+// IMAGE_EPILOGUE_DYNAMIC_RELOCATION_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_EPILOGUE_DYNAMIC_RELOCATION_HEADER struct {
+	Data [8]byte
 }
 
 type IMAGE_EXPORT_DIRECTORY struct {
@@ -317,6 +387,20 @@ type IMAGE_EXPORT_DIRECTORY struct {
 	AddressOfFunctions    uint32
 	AddressOfNames        uint32
 	AddressOfNameOrdinals uint32
+}
+
+// IMAGE_FUNCTION_OVERRIDE_DYNAMIC_RELOCATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_FUNCTION_OVERRIDE_DYNAMIC_RELOCATION struct {
+	Data [16]byte
+}
+
+// IMAGE_FUNCTION_OVERRIDE_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_FUNCTION_OVERRIDE_HEADER struct {
+	Data [4]byte
 }
 
 type IMAGE_HOT_PATCH_BASE struct {
@@ -360,6 +444,20 @@ type IMAGE_IMPORT_BY_NAME struct {
 	Name [1]foundation.CHAR
 }
 
+// IMAGE_IMPORT_CONTROL_TRANSFER_ARM64_RELOCATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_IMPORT_CONTROL_TRANSFER_ARM64_RELOCATION struct {
+	Data [4]byte
+}
+
+// IMAGE_IMPORT_CONTROL_TRANSFER_DYNAMIC_RELOCATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_IMPORT_CONTROL_TRANSFER_DYNAMIC_RELOCATION struct {
+	Data [4]byte
+}
+
 // IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union struct {
@@ -374,6 +472,13 @@ type IMAGE_IMPORT_DESCRIPTOR struct {
 	FirstThunk     uint32
 }
 
+// IMAGE_INDIR_CONTROL_TRANSFER_DYNAMIC_RELOCATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_INDIR_CONTROL_TRANSFER_DYNAMIC_RELOCATION struct {
+	Data [2]byte
+}
+
 // IMAGE_LINENUMBER_Type_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_LINENUMBER_Type_e__Union struct {
@@ -383,6 +488,13 @@ type IMAGE_LINENUMBER_Type_e__Union struct {
 type IMAGE_LINENUMBER struct {
 	Type       IMAGE_LINENUMBER_Type_e__Union
 	Linenumber uint16
+}
+
+// IMAGE_OS2_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_OS2_HEADER struct {
+	Data [32]uint16
 }
 
 // IMAGE_POLICY_ENTRY_u_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -406,6 +518,13 @@ type IMAGE_POLICY_METADATA struct {
 
 type IMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER struct {
 	PrologueByteCount byte
+}
+
+// IMAGE_RELOCATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_RELOCATION struct {
+	Data [5]uint16
 }
 
 type IMAGE_RESOURCE_DATA_ENTRY struct {
@@ -467,6 +586,27 @@ type IMAGE_SEPARATE_DEBUG_HEADER struct {
 	Reserved           [2]uint32
 }
 
+// IMAGE_SWITCHTABLE_BRANCH_DYNAMIC_RELOCATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_SWITCHTABLE_BRANCH_DYNAMIC_RELOCATION struct {
+	Data [2]byte
+}
+
+// IMAGE_SYMBOL is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_SYMBOL struct {
+	Data [9]uint16
+}
+
+// IMAGE_SYMBOL_EX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_SYMBOL_EX struct {
+	Data [10]uint16
+}
+
 // IMAGE_TLS_DIRECTORY32_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_TLS_DIRECTORY32_Anonymous_e__Union struct {
@@ -480,6 +620,20 @@ type IMAGE_TLS_DIRECTORY32 struct {
 	AddressOfCallBacks    uint32
 	SizeOfZeroFill        uint32
 	Anonymous             IMAGE_TLS_DIRECTORY32_Anonymous_e__Union
+}
+
+// IMAGE_TLS_DIRECTORY64 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_TLS_DIRECTORY64 struct {
+	Data [10]uint32
+}
+
+// IMAGE_VXD_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_VXD_HEADER struct {
+	Data [98]uint16
 }
 
 // IMPORT_OBJECT_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -531,6 +685,13 @@ type MAXVERSIONTESTED_INFO struct {
 type NETWORK_APP_INSTANCE_EA struct {
 	AppInstanceID win32.GUID
 	CsvFlags      uint32
+}
+
+// NON_PAGED_DEBUG_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NON_PAGED_DEBUG_INFO struct {
+	Data [8]uint32
 }
 
 type NOTIFY_USER_POWER_SETTING struct {

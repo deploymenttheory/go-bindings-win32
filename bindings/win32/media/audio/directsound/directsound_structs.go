@@ -5,11 +5,10 @@
 package directsound
 
 import (
-	"unsafe"
-
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 )
 
 type DS3DBUFFER struct {
@@ -54,7 +53,7 @@ type DSBUFFERDESC struct {
 	DwFlags         uint32
 	DwBufferBytes   uint32
 	DwReserved      uint32
-	LpwfxFormat     unsafe.Pointer
+	LpwfxFormat     *mediaaudio.WAVEFORMATEX
 	Guid3DAlgorithm win32.GUID
 }
 
@@ -63,7 +62,7 @@ type DSBUFFERDESC1 struct {
 	DwFlags       uint32
 	DwBufferBytes uint32
 	DwReserved    uint32
-	LpwfxFormat   unsafe.Pointer
+	LpwfxFormat   *mediaaudio.WAVEFORMATEX
 }
 
 type DSCAPS struct {
@@ -105,7 +104,7 @@ type DSCBUFFERDESC struct {
 	DwFlags       uint32
 	DwBufferBytes uint32
 	DwReserved    uint32
-	LpwfxFormat   unsafe.Pointer
+	LpwfxFormat   *mediaaudio.WAVEFORMATEX
 	DwFXCount     uint32
 	LpDSCFXDesc   *DSCEFFECTDESC
 }
@@ -115,7 +114,7 @@ type DSCBUFFERDESC1 struct {
 	DwFlags       uint32
 	DwBufferBytes uint32
 	DwReserved    uint32
-	LpwfxFormat   unsafe.Pointer
+	LpwfxFormat   *mediaaudio.WAVEFORMATEX
 }
 
 type DSCCAPS struct {

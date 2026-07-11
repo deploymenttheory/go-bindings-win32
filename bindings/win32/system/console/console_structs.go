@@ -147,6 +147,13 @@ type ExtKeyDef struct {
 	Keys [3]ExtKeySubst
 }
 
+// ExtKeyDefBuf is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ExtKeyDefBuf struct {
+	Data [238]uint16
+}
+
 type ExtKeySubst struct {
 	WMod         uint16
 	WVirKey      uint16

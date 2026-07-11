@@ -10,14 +10,54 @@ type AudioReverb struct {
 type AudioVolumeMeter struct {
 }
 
+// FXECHO_INITDATA: https://learn.microsoft.com/windows/win32/api/xapofx/ns-xapofx-fxecho_initdata
+// FXECHO_INITDATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FXECHO_INITDATA struct {
+	Data [4]byte
+}
+
+// FXECHO_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xapofx/ns-xapofx-fxecho_parameters
+// FXECHO_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FXECHO_PARAMETERS struct {
+	Data [12]byte
+}
+
 // FXEQ: https://learn.microsoft.com/windows/win32/xaudio2/fxeq-constants
 type FXEQ struct {
+}
+
+// FXEQ_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xapofx/ns-xapofx-fxeq_parameters
+// FXEQ_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FXEQ_PARAMETERS struct {
+	Data [48]byte
 }
 
 type FXEcho struct {
 }
 
+// FXMASTERINGLIMITER_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xapofx/ns-xapofx-fxmasteringlimiter_parameters
+// FXMASTERINGLIMITER_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FXMASTERINGLIMITER_PARAMETERS struct {
+	Data [8]byte
+}
+
 type FXMasteringLimiter struct {
+}
+
+// FXREVERB_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xapofx/ns-xapofx-fxreverb_parameters
+// FXREVERB_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FXREVERB_PARAMETERS struct {
+	Data [8]byte
 }
 
 type FXReverb struct {
@@ -67,4 +107,140 @@ type HrtfPosition struct {
 	X float32
 	Y float32
 	Z float32
+}
+
+// XAPO_LOCKFORPROCESS_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xapo/ns-xapo-xapo_lockforprocess_parameters
+// XAPO_LOCKFORPROCESS_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAPO_LOCKFORPROCESS_PARAMETERS struct {
+	Data [12]byte
+}
+
+// XAPO_PROCESS_BUFFER_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xapo/ns-xapo-xapo_process_buffer_parameters
+// XAPO_PROCESS_BUFFER_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAPO_PROCESS_BUFFER_PARAMETERS struct {
+	Data [16]byte
+}
+
+// XAPO_REGISTRATION_PROPERTIES: https://learn.microsoft.com/windows/win32/api/xapo/ns-xapo-xapo_registration_properties
+// XAPO_REGISTRATION_PROPERTIES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAPO_REGISTRATION_PROPERTIES struct {
+	Data [1068]byte
+}
+
+// XAUDIO2FX_REVERB_I3DL2_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xaudio2fx/ns-xaudio2fx-xaudio2fx_reverb_i3dl2_parameters
+// XAUDIO2FX_REVERB_I3DL2_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2FX_REVERB_I3DL2_PARAMETERS struct {
+	Data [52]byte
+}
+
+// XAUDIO2FX_REVERB_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xaudio2fx/ns-xaudio2fx-xaudio2fx_reverb_parameters
+// XAUDIO2FX_REVERB_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2FX_REVERB_PARAMETERS struct {
+	Data [57]byte
+}
+
+// XAUDIO2FX_VOLUMEMETER_LEVELS: https://learn.microsoft.com/windows/win32/api/xaudio2fx/ns-xaudio2fx-xaudio2fx_volumemeter_levels
+// XAUDIO2FX_VOLUMEMETER_LEVELS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2FX_VOLUMEMETER_LEVELS struct {
+	Data [20]byte
+}
+
+// XAUDIO2_BUFFER: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_buffer
+// XAUDIO2_BUFFER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_BUFFER struct {
+	Data [44]byte
+}
+
+// XAUDIO2_BUFFER_WMA: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_buffer_wma
+// XAUDIO2_BUFFER_WMA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_BUFFER_WMA struct {
+	Data [12]byte
+}
+
+// XAUDIO2_DEBUG_CONFIGURATION: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration
+// XAUDIO2_DEBUG_CONFIGURATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_DEBUG_CONFIGURATION struct {
+	Data [24]byte
+}
+
+// XAUDIO2_EFFECT_CHAIN: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_effect_chain
+// XAUDIO2_EFFECT_CHAIN is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_EFFECT_CHAIN struct {
+	Data [12]byte
+}
+
+// XAUDIO2_EFFECT_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_effect_descriptor
+// XAUDIO2_EFFECT_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_EFFECT_DESCRIPTOR struct {
+	Data [16]byte
+}
+
+// XAUDIO2_FILTER_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_filter_parameters
+// XAUDIO2_FILTER_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_FILTER_PARAMETERS struct {
+	Data [12]byte
+}
+
+// XAUDIO2_PERFORMANCE_DATA: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_performance_data
+// XAUDIO2_PERFORMANCE_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_PERFORMANCE_DATA struct {
+	Data [64]byte
+}
+
+// XAUDIO2_SEND_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_send_descriptor
+// XAUDIO2_SEND_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_SEND_DESCRIPTOR struct {
+	Data [12]byte
+}
+
+// XAUDIO2_VOICE_DETAILS: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_voice_details
+// XAUDIO2_VOICE_DETAILS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_VOICE_DETAILS struct {
+	Data [16]byte
+}
+
+// XAUDIO2_VOICE_SENDS: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_voice_sends
+// XAUDIO2_VOICE_SENDS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_VOICE_SENDS struct {
+	Data [12]byte
+}
+
+// XAUDIO2_VOICE_STATE: https://learn.microsoft.com/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_voice_state
+// XAUDIO2_VOICE_STATE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type XAUDIO2_VOICE_STATE struct {
+	Data [20]byte
 }

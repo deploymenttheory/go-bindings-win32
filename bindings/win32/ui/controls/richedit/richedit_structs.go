@@ -109,6 +109,14 @@ type CHARRANGE struct {
 	CpMax int32
 }
 
+// CLIPBOARDFORMAT: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-clipboardformat
+// CLIPBOARDFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CLIPBOARDFORMAT struct {
+	Data [7]uint32
+}
+
 // COMPCOLOR: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-compcolor
 type COMPCOLOR struct {
 	CrText       foundation.COLORREF
@@ -116,10 +124,153 @@ type COMPCOLOR struct {
 	DwEffects    uint32
 }
 
+// EDITSTREAM: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-editstream
+// EDITSTREAM is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type EDITSTREAM struct {
+	Data [5]uint32
+}
+
+// ENCORRECTTEXT: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-encorrecttext
+// ENCORRECTTEXT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENCORRECTTEXT struct {
+	Data [9]uint32
+}
+
+// ENDCOMPOSITIONNOTIFY: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-endcompositionnotify
+// ENDCOMPOSITIONNOTIFY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENDCOMPOSITIONNOTIFY struct {
+	Data [7]uint32
+}
+
+// ENDROPFILES: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-endropfiles
+// ENDROPFILES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENDROPFILES struct {
+	Data [10]uint32
+}
+
+// ENLINK: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-enlink
+// ENLINK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENLINK struct {
+	Data [13]uint32
+}
+
+// ENLOWFIRTF: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-enlowfirtf
+// ENLOWFIRTF is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENLOWFIRTF struct {
+	Data [8]uint32
+}
+
+// ENOLEOPFAILED: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-enoleopfailed
+// ENOLEOPFAILED is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENOLEOPFAILED struct {
+	Data [9]uint32
+}
+
+// ENPROTECTED: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-enprotected
+// ENPROTECTED is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENPROTECTED struct {
+	Data [13]uint32
+}
+
+// ENSAVECLIPBOARD: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-ensaveclipboard
+// ENSAVECLIPBOARD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENSAVECLIPBOARD struct {
+	Data [8]uint32
+}
+
+// FINDTEXTA: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-findtexta
+// FINDTEXTA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FINDTEXTA struct {
+	Data [4]uint32
+}
+
+// FINDTEXTEXA: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-findtextexa
+// FINDTEXTEXA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FINDTEXTEXA struct {
+	Data [6]uint32
+}
+
+// FINDTEXTEXW: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-findtextexw
+// FINDTEXTEXW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FINDTEXTEXW struct {
+	Data [6]uint32
+}
+
+// FINDTEXTW: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-findtextw
+// FINDTEXTW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FINDTEXTW struct {
+	Data [4]uint32
+}
+
+// FORMATRANGE: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-formatrange
+// FORMATRANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FORMATRANGE struct {
+	Data [14]uint32
+}
+
+// GETCONTEXTMENUEX: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-getcontextmenuex
+// GETCONTEXTMENUEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type GETCONTEXTMENUEX struct {
+	Data [7]uint32
+}
+
+// GETTEXTEX: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-gettextex
+// GETTEXTEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type GETTEXTEX struct {
+	Data [7]uint32
+}
+
 // GETTEXTLENGTHEX: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-gettextlengthex
 type GETTEXTLENGTHEX struct {
 	Flags    GETTEXTLENGTHEX_FLAGS
 	Codepage uint32
+}
+
+// GROUPTYPINGCHANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type GROUPTYPINGCHANGE struct {
+	Data [7]uint32
+}
+
+// HYPHENATEINFO: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-hyphenateinfo
+// HYPHENATEINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HYPHENATEINFO struct {
+	Data [3]uint32
 }
 
 // HYPHRESULT: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-hyphresult
@@ -133,6 +284,22 @@ type HYPHRESULT struct {
 type IMECOMPTEXT struct {
 	Cb    int32
 	Flags IMECOMPTEXT_FLAGS
+}
+
+// MSGFILTER: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-msgfilter
+// MSGFILTER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MSGFILTER struct {
+	Data [11]uint32
+}
+
+// OBJECTPOSITIONS: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-objectpositions
+// OBJECTPOSITIONS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OBJECTPOSITIONS struct {
+	Data [9]uint32
 }
 
 // PARAFORMAT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -174,6 +341,14 @@ type PARAFORMAT2 struct {
 	WBorders         PARAFORMAT_BORDERS
 }
 
+// PUNCTUATION: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-punctuation
+// PUNCTUATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PUNCTUATION struct {
+	Data [3]uint32
+}
+
 // REOBJECT: https://learn.microsoft.com/windows/win32/api/richole/ns-richole-reobject
 type REOBJECT struct {
 	CbStruct uint32
@@ -186,6 +361,38 @@ type REOBJECT struct {
 	Dvaspect uint32
 	DwFlags  REOBJECT_FLAGS
 	DwUser   uint32
+}
+
+// REPASTESPECIAL: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-repastespecial
+// REPASTESPECIAL is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type REPASTESPECIAL struct {
+	Data [3]uint32
+}
+
+// REQRESIZE: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-reqresize
+// REQRESIZE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type REQRESIZE struct {
+	Data [10]uint32
+}
+
+// RICHEDIT_IMAGE_PARAMETERS: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-richedit_image_parameters
+// RICHEDIT_IMAGE_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RICHEDIT_IMAGE_PARAMETERS struct {
+	Data [8]uint32
+}
+
+// SELCHANGE: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-selchange
+// SELCHANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SELCHANGE struct {
+	Data [9]uint32
 }
 
 // SETTEXTEX: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-settextex
@@ -224,4 +431,20 @@ type TABLEROWPARMS struct {
 	CpStartRow   int32
 	BTableLevel  byte
 	ICell        byte
+}
+
+// TEXTRANGEA: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-textrangea
+// TEXTRANGEA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TEXTRANGEA struct {
+	Data [4]uint32
+}
+
+// TEXTRANGEW: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-textrangew
+// TEXTRANGEW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TEXTRANGEW struct {
+	Data [4]uint32
 }

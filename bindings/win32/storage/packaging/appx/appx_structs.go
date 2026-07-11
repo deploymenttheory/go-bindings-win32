@@ -80,6 +80,22 @@ type FindPackageDependencyCriteria struct {
 	PackageFamilyName foundation.PWSTR
 }
 
+// PACKAGE_ID: https://learn.microsoft.com/windows/win32/api/appmodel/ns-appmodel-package_id
+// PACKAGE_ID is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PACKAGE_ID struct {
+	Data [12]uint32
+}
+
+// PACKAGE_INFO: https://learn.microsoft.com/windows/win32/api/appmodel/ns-appmodel-package_info
+// PACKAGE_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PACKAGE_INFO struct {
+	Data [20]uint32
+}
+
 // PACKAGE_VERSION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type PACKAGE_VERSION_Anonymous_e__Union struct {

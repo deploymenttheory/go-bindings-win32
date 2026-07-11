@@ -4,6 +4,41 @@
 
 package sideshow
 
+// APPLICATION_EVENT_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type APPLICATION_EVENT_DATA struct {
+	Data [45]byte
+}
+
+// CONTENT_MISSING_EVENT_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CONTENT_MISSING_EVENT_DATA struct {
+	Data [40]byte
+}
+
+// DEVICE_USER_CHANGE_EVENT_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVICE_USER_CHANGE_EVENT_DATA struct {
+	Data [6]byte
+}
+
+// EVENT_DATA_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type EVENT_DATA_HEADER struct {
+	Data [28]byte
+}
+
+// NEW_EVENT_DATA_AVAILABLE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NEW_EVENT_DATA_AVAILABLE struct {
+	Data [8]byte
+}
+
 type SCF_CONTEXTMENU_EVENT struct {
 	PreviousPage   uint32
 	TargetPage     uint32

@@ -1311,13 +1311,13 @@ func (self *IFECommon) SetDefaultIME() error {
 }
 
 // InvokeWordRegDialog dispatches through IFECommon's vtable slot 5.
-func (self *IFECommon) InvokeWordRegDialog(pimedlg unsafe.Pointer) error {
+func (self *IFECommon) InvokeWordRegDialog(pimedlg *IMEDLG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pimedlg)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // InvokeDictToolDialog dispatches through IFECommon's vtable slot 6.
-func (self *IFECommon) InvokeDictToolDialog(pimedlg unsafe.Pointer) error {
+func (self *IFECommon) InvokeDictToolDialog(pimedlg *IMEDLG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pimedlg)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1332,7 +1332,7 @@ type IFEDictionary struct {
 var IID_IFEDictionary = win32.GUID{Data1: 0x019f7153, Data2: 0xe6db, Data3: 0x11d0, Data4: [8]byte{0x83, 0xc3, 0x00, 0xc0, 0x4f, 0xdd, 0xb8, 0x2e}}
 
 // Open dispatches through IFEDictionary's vtable slot 3.
-func (self *IFEDictionary) Open(pchDictPath foundation.PSTR, pshf unsafe.Pointer) error {
+func (self *IFEDictionary) Open(pchDictPath foundation.PSTR, pshf *IMESHF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchDictPath)), uintptr(unsafe.Pointer(pshf)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1344,7 +1344,7 @@ func (self *IFEDictionary) Close() error {
 }
 
 // GetHeader dispatches through IFEDictionary's vtable slot 5.
-func (self *IFEDictionary) GetHeader(pchDictPath foundation.PSTR, pshf unsafe.Pointer, pjfmt *IMEFMT, pulType *uint32) error {
+func (self *IFEDictionary) GetHeader(pchDictPath foundation.PSTR, pshf *IMESHF, pjfmt *IMEFMT, pulType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchDictPath)), uintptr(unsafe.Pointer(pshf)), uintptr(unsafe.Pointer(pjfmt)), uintptr(unsafe.Pointer(pulType)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1356,7 +1356,7 @@ func (self *IFEDictionary) DisplayProperty(hwnd foundation.HWND) error {
 }
 
 // GetPosTable dispatches through IFEDictionary's vtable slot 7.
-func (self *IFEDictionary) GetPosTable(prgPosTbl *unsafe.Pointer, pcPosTbl *int32) error {
+func (self *IFEDictionary) GetPosTable(prgPosTbl **POSTBL, pcPosTbl *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prgPosTbl)), uintptr(unsafe.Pointer(pcPosTbl)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1377,37 +1377,37 @@ func (self *IFEDictionary) NextWords(pchBuffer *byte, cbBuffer uint32, pcWrd *ui
 }
 
 // Create dispatches through IFEDictionary's vtable slot 10.
-func (self *IFEDictionary) Create(pchDictPath foundation.PSTR, pshf unsafe.Pointer) error {
+func (self *IFEDictionary) Create(pchDictPath foundation.PSTR, pshf *IMESHF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchDictPath)), uintptr(unsafe.Pointer(pshf)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetHeader dispatches through IFEDictionary's vtable slot 11.
-func (self *IFEDictionary) SetHeader(pshf unsafe.Pointer) error {
+func (self *IFEDictionary) SetHeader(pshf *IMESHF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pshf)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ExistWord dispatches through IFEDictionary's vtable slot 12.
-func (self *IFEDictionary) ExistWord(pwrd unsafe.Pointer) error {
+func (self *IFEDictionary) ExistWord(pwrd *IMEWRD) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwrd)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ExistDependency dispatches through IFEDictionary's vtable slot 13.
-func (self *IFEDictionary) ExistDependency(pdp unsafe.Pointer) error {
+func (self *IFEDictionary) ExistDependency(pdp *IMEDP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdp)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterWord dispatches through IFEDictionary's vtable slot 14.
-func (self *IFEDictionary) RegisterWord(reg IMEREG, pwrd unsafe.Pointer) error {
+func (self *IFEDictionary) RegisterWord(reg IMEREG, pwrd *IMEWRD) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(reg), uintptr(unsafe.Pointer(pwrd)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterDependency dispatches through IFEDictionary's vtable slot 15.
-func (self *IFEDictionary) RegisterDependency(reg IMEREG, pdp unsafe.Pointer) error {
+func (self *IFEDictionary) RegisterDependency(reg IMEREG, pdp *IMEDP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(reg), uintptr(unsafe.Pointer(pdp)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1462,7 +1462,7 @@ func (self *IFELanguage) Close() error {
 }
 
 // GetJMorphResult dispatches through IFELanguage's vtable slot 5.
-func (self *IFELanguage) GetJMorphResult(dwRequest uint32, dwCMode uint32, cwchInput int32, pwchInput string, pfCInfo *uint32, ppResult *unsafe.Pointer) error {
+func (self *IFELanguage) GetJMorphResult(dwRequest uint32, dwCMode uint32, cwchInput int32, pwchInput string, pfCInfo *uint32, ppResult **MORRSLT) error {
 	_pwchInput := win32.UTF16Ptr(pwchInput)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwRequest), uintptr(dwCMode), uintptr(cwchInput), uintptr(unsafe.Pointer(_pwchInput)), uintptr(unsafe.Pointer(pfCInfo)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))

@@ -328,6 +328,13 @@ type ATM_CONNECTION_ID struct {
 	VCI          uint32
 }
 
+// ATM_PVC_PARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ATM_PVC_PARAMS struct {
+	Data [23]uint32
+}
+
 type ATM_QOS_CLASS_IE struct {
 	QOSClassForward  byte
 	QOSClassBackward byte
@@ -681,6 +688,13 @@ type IN_RECVERR struct {
 	Info     uint32
 	Type     byte
 	Code     byte
+}
+
+// IPTLS_METADATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IPTLS_METADATA struct {
+	Data [8]byte
 }
 
 // IPV4_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -1720,6 +1734,13 @@ type TCP_ACK_FREQUENCY_PARAMETERS struct {
 	TcpDelayedAckFrequency byte
 }
 
+// TCP_HDR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TCP_HDR struct {
+	Data [20]byte
+}
+
 type TCP_ICW_PARAMETERS struct {
 	Level TCP_ICW_LEVEL
 }
@@ -1826,9 +1847,36 @@ type TCP_OPT_FASTOPEN struct {
 	Cookie [1]byte
 }
 
+// TCP_OPT_MSS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TCP_OPT_MSS struct {
+	Data [4]byte
+}
+
+// TCP_OPT_SACK_tcp_opt_sack_block is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TCP_OPT_SACK_tcp_opt_sack_block struct {
+	Data [8]byte
+}
+
+type TCP_OPT_SACK struct {
+	Kind   byte
+	Length byte
+	Block  [1]TCP_OPT_SACK_tcp_opt_sack_block
+}
+
 type TCP_OPT_SACK_PERMITTED struct {
 	Kind   byte
 	Length byte
+}
+
+// TCP_OPT_TS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TCP_OPT_TS struct {
+	Data [10]byte
 }
 
 type TCP_OPT_UNKNOWN struct {

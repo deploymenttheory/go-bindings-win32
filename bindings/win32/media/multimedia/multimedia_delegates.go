@@ -33,7 +33,7 @@ type CAPSTATUSCALLBACKW uintptr
 type CAPVIDEOCALLBACK uintptr
 
 // CAPWAVECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, unsafe.Pointer) foundation.LRESULT.
+// syscall) using the shape func(foundation.HWND, *mediaaudio.WAVEHDR) foundation.LRESULT.
 type CAPWAVECALLBACK uintptr
 
 // CAPYIELDCALLBACK is a callback pointer: create one with NewCallback (package

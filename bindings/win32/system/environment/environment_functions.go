@@ -135,7 +135,7 @@ func EnclaveCopyOutOfEnclave(UnsecureAddress unsafe.Pointer, EnclaveAddress unsa
 }
 
 // EnclaveEncryptDataForTrustlet calls vertdll!EnclaveEncryptDataForTrustlet.
-func EnclaveEncryptDataForTrustlet(DataToEncrypt unsafe.Pointer, DataToEncryptSize uint32, TrustletBindingData unsafe.Pointer, EncryptedData unsafe.Pointer, BufferSize uint32, EncryptedDataSize *uint32) error {
+func EnclaveEncryptDataForTrustlet(DataToEncrypt unsafe.Pointer, DataToEncryptSize uint32, TrustletBindingData *TRUSTLET_BINDING_DATA, EncryptedData unsafe.Pointer, BufferSize uint32, EncryptedDataSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveEncryptDataForTrustlet.Addr(), uintptr(unsafe.Pointer(DataToEncrypt)), uintptr(DataToEncryptSize), uintptr(unsafe.Pointer(TrustletBindingData)), uintptr(unsafe.Pointer(EncryptedData)), uintptr(BufferSize), uintptr(unsafe.Pointer(EncryptedDataSize)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -174,7 +174,7 @@ func EnclaveSealData(DataToEncrypt unsafe.Pointer, DataToEncryptSize uint32, Ide
 // EnclaveUnsealData calls vertdll!EnclaveUnsealData.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclaveunsealdata
 // Minimum OS: windows10.0.16299.
-func EnclaveUnsealData(ProtectedBlob unsafe.Pointer, ProtectedBlobSize uint32, DecryptedData unsafe.Pointer, BufferSize uint32, DecryptedDataSize *uint32, SealingIdentity unsafe.Pointer, UnsealingFlags *uint32) error {
+func EnclaveUnsealData(ProtectedBlob unsafe.Pointer, ProtectedBlobSize uint32, DecryptedData unsafe.Pointer, BufferSize uint32, DecryptedDataSize *uint32, SealingIdentity *ENCLAVE_IDENTITY, UnsealingFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveUnsealData.Addr(), uintptr(unsafe.Pointer(ProtectedBlob)), uintptr(ProtectedBlobSize), uintptr(unsafe.Pointer(DecryptedData)), uintptr(BufferSize), uintptr(unsafe.Pointer(DecryptedDataSize)), uintptr(unsafe.Pointer(SealingIdentity)), uintptr(unsafe.Pointer(UnsealingFlags)))
 	return win32.HRESULTError(int32(r1))
 }

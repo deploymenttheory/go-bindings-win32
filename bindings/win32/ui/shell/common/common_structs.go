@@ -16,7 +16,23 @@ type COMDLG_FILTERSPEC struct {
 
 // ITEMIDLIST: https://learn.microsoft.com/windows/win32/api/shtypes/ns-shtypes-itemidlist
 type ITEMIDLIST struct {
-	Mkid [3]byte
+	Mkid SHITEMID
+}
+
+// SHELLDETAILS: https://learn.microsoft.com/windows/win32/api/shtypes/ns-shtypes-shelldetails
+// SHELLDETAILS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHELLDETAILS struct {
+	Data [280]byte
+}
+
+// SHITEMID: https://learn.microsoft.com/windows/win32/api/shtypes/ns-shtypes-shitemid
+// SHITEMID is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SHITEMID struct {
+	Data [3]byte
 }
 
 // STRRET_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing

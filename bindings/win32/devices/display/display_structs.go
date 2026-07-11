@@ -977,6 +977,14 @@ type LINEATTRS struct {
 	ElStyleState FLOAT_LONG
 }
 
+// MC_TIMING_REPORT: https://learn.microsoft.com/windows/win32/api/lowlevelmonitorconfigurationapi/ns-lowlevelmonitorconfigurationapi-mc_timing_report
+// MC_TIMING_REPORT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MC_TIMING_REPORT struct {
+	Data [9]byte
+}
+
 type MIPI_DSI_CAPS struct {
 	DSITypeMajor                  byte
 	DSITypeMinor                  byte
@@ -1150,6 +1158,14 @@ type PERBANDINFO struct {
 	SzlBand         foundation.SIZE
 	UlHorzRes       uint32
 	UlVertRes       uint32
+}
+
+// PHYSICAL_MONITOR: https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/ns-physicalmonitorenumerationapi-physical_monitor
+// PHYSICAL_MONITOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PHYSICAL_MONITOR struct {
+	Data [264]byte
 }
 
 type POINTE struct {

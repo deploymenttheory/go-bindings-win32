@@ -18,8 +18,29 @@ type ACTIVE_LATENCY_CONFIGURATION struct {
 	Anonymous ACTIVE_LATENCY_CONFIGURATION_Anonymous_e__Union
 }
 
+// BUCKET_COUNTER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BUCKET_COUNTER struct {
+	Data [16]byte
+}
+
+// DEBUG_BIT_FIELD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEBUG_BIT_FIELD struct {
+	Data [2]byte
+}
+
 type DSSD_POWER_STATE_DESCRIPTOR struct {
 	Bitfield byte
+}
+
+// FIRMWARE_ACTIVATION_HISTORY_ENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FIRMWARE_ACTIVATION_HISTORY_ENTRY struct {
+	Data [64]byte
 }
 
 type IO_COMMAND_SET_VECTOR struct {
@@ -34,6 +55,27 @@ type LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union struct {
 
 type LATENCY_MONITOR_FEATURE_STATUS struct {
 	Anonymous LATENCY_MONITOR_FEATURE_STATUS_Anonymous_e__Union
+}
+
+// LATENCY_STAMP is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LATENCY_STAMP struct {
+	Data [96]byte
+}
+
+// LATENCY_STAMP_UNITS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LATENCY_STAMP_UNITS struct {
+	Data [2]byte
+}
+
+// MEASURED_LATENCY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MEASURED_LATENCY struct {
+	Data [24]byte
 }
 
 type NVMEOF_AUTH_DHCHAP_CHALLENGE struct {
@@ -1126,7 +1168,15 @@ type NVME_DEVICE_SELF_TEST_LOG struct {
 	CurrentOperation  NVME_DEVICE_SELF_TEST_LOG_CurrentOperation_e__Struct
 	CurrentCompletion NVME_DEVICE_SELF_TEST_LOG_CurrentCompletion_e__Struct
 	Reserved          [2]byte
-	ResultData        [560]byte
+	ResultData        [20]NVME_DEVICE_SELF_TEST_RESULT_DATA
+}
+
+// NVME_DEVICE_SELF_TEST_RESULT_DATA: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_device_self_test_result_data
+// NVME_DEVICE_SELF_TEST_RESULT_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_DEVICE_SELF_TEST_RESULT_DATA struct {
+	Data [28]byte
 }
 
 // NVME_DIRECTIVE_IDENTIFY_RETURN_PARAMETERS: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_directive_identify_return_parameters
@@ -1224,6 +1274,14 @@ type NVME_DISCOVERY_INFO_MGMT_HEADER struct {
 	ENAME     [256]byte
 	EVER      [64]byte
 	Reserved2 [424]byte
+}
+
+// NVME_ENDURANCE_GROUP_LOG: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_endurance_group_log
+// NVME_ENDURANCE_GROUP_LOG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_ENDURANCE_GROUP_LOG struct {
+	Data [512]byte
 }
 
 type NVME_ERROR_INFO_LOG_ParameterErrorLocation_e__Struct struct {
@@ -1724,6 +1782,13 @@ type NVME_IDENTIFY_ZNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET struct {
 	Reserved [4095]byte
 }
 
+// NVME_LATENCY_MONITORING_ENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_LATENCY_MONITORING_ENTRY struct {
+	Data [4096]byte
+}
+
 // NVME_LBA_FORMAT: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_lba_format
 // NVME_LBA_FORMAT is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
@@ -1783,6 +1848,76 @@ type NVME_NVM_SUBSYSTEM_RESET struct {
 
 type NVME_NVM_SUBSYSTEM_SHUTDOWN struct {
 	NSSC uint32
+}
+
+// NVME_OCP_DEVICE_CAPABILITIES_LOG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_OCP_DEVICE_CAPABILITIES_LOG struct {
+	Data [4096]byte
+}
+
+// NVME_OCP_DEVICE_ERROR_RECOVERY_LOG_V2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_OCP_DEVICE_ERROR_RECOVERY_LOG_V2 struct {
+	Data [512]byte
+}
+
+// NVME_OCP_DEVICE_FIRMWARE_ACTIVATION_HISTORY_LOG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_OCP_DEVICE_FIRMWARE_ACTIVATION_HISTORY_LOG struct {
+	Data [4096]byte
+}
+
+// NVME_OCP_DEVICE_LATENCY_MONITOR_LOG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_OCP_DEVICE_LATENCY_MONITOR_LOG struct {
+	Data [512]byte
+}
+
+// NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3 struct {
+	Data [512]byte
+}
+
+// NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG struct {
+	Data [512]byte
+}
+
+// NVME_OCP_DEVICE_TCG_HISTORY_LOG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_OCP_DEVICE_TCG_HISTORY_LOG struct {
+	Data [4096]byte
+}
+
+// NVME_OCP_DEVICE_UNSUPPORTED_REQUIREMENTS_LOG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_OCP_DEVICE_UNSUPPORTED_REQUIREMENTS_LOG struct {
+	Data [4096]byte
+}
+
+// NVME_PERSISTENT_EVENT_LOG_EVENT_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_PERSISTENT_EVENT_LOG_EVENT_HEADER struct {
+	Data [24]byte
+}
+
+// NVME_PERSISTENT_EVENT_LOG_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_PERSISTENT_EVENT_LOG_HEADER struct {
+	Data [512]byte
 }
 
 // NVME_POWER_STATE_DESC: https://learn.microsoft.com/windows/win32/api/nvme/ns-nvme-nvme_power_state_desc
@@ -1867,14 +2002,21 @@ type NVME_RESERVATION_RELEASE_DATA_STRUCTURE struct {
 }
 
 type NVME_RESERVATION_REPORT_STATUS_DATA_STRUCTURE struct {
-	Header                    [24]byte
+	Header                    NVME_RESERVATION_REPORT_STATUS_HEADER
 	RegisteredControllersData [1]NVME_REGISTERED_CONTROLLER_DATA
 }
 
 type NVME_RESERVATION_REPORT_STATUS_EXTENDED_DATA_STRUCTURE struct {
-	Header                            [24]byte
+	Header                            NVME_RESERVATION_REPORT_STATUS_HEADER
 	Reserved1                         [40]byte
 	RegisteredControllersExtendedData [1]NVME_REGISTERED_CONTROLLER_EXTENDED_DATA
+}
+
+// NVME_RESERVATION_REPORT_STATUS_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_RESERVATION_REPORT_STATUS_HEADER struct {
+	Data [24]byte
 }
 
 type NVME_SANITIZE_STATUS struct {
@@ -2072,6 +2214,13 @@ type NVME_WCS_DEVICE_CAPABILITIES struct {
 	Anonymous NVME_WCS_DEVICE_CAPABILITIES_Anonymous_e__Union
 }
 
+// NVME_WCS_DEVICE_ERROR_RECOVERY_LOG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_WCS_DEVICE_ERROR_RECOVERY_LOG struct {
+	Data [512]byte
+}
+
 // NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union struct {
@@ -2080,6 +2229,20 @@ type NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union struct {
 
 type NVME_WCS_DEVICE_RESET_ACTION struct {
 	Anonymous NVME_WCS_DEVICE_RESET_ACTION_Anonymous_e__Union
+}
+
+// NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG struct {
+	Data [512]byte
+}
+
+// NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2 struct {
+	Data [512]byte
 }
 
 type NVME_ZONE_DESCRIPTOR_Anonymous1_e__Struct struct {
@@ -2131,8 +2294,29 @@ type TCG_ACTIVATE_METHOD_SPECIFIC struct {
 	RangeStartLengthPolicy byte
 }
 
+// TCG_ASSIGN_METHOD_SPECIFIC is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TCG_ASSIGN_METHOD_SPECIFIC struct {
+	Data [4]byte
+}
+
+// TCG_AUTH_METHOD_SPECIFIC is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TCG_AUTH_METHOD_SPECIFIC struct {
+	Data [9]byte
+}
+
 type TCG_BLOCKSID_METHOD_SPECIFIC struct {
 	ClearEvents byte
+}
+
+// TCG_HISTORY_ENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TCG_HISTORY_ENTRY struct {
+	Data [48]byte
 }
 
 type TCG_REACTIVATE_METHOD_SPECIFIC struct {

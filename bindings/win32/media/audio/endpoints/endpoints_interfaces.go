@@ -316,14 +316,14 @@ func (self *IHardwareAudioEngineBase) GetAvailableOffloadConnectorCount(_pwstrDe
 }
 
 // GetEngineFormat dispatches through IHardwareAudioEngineBase's vtable slot 4.
-func (self *IHardwareAudioEngineBase) GetEngineFormat(pDevice *mediaaudio.IMMDevice, _bRequestDeviceFormat bool, _ppwfxFormat *unsafe.Pointer) error {
+func (self *IHardwareAudioEngineBase) GetEngineFormat(pDevice *mediaaudio.IMMDevice, _bRequestDeviceFormat bool, _ppwfxFormat **mediaaudio.WAVEFORMATEX) error {
 	__bRequestDeviceFormat := win32.Bool32(_bRequestDeviceFormat)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(__bRequestDeviceFormat), uintptr(unsafe.Pointer(_ppwfxFormat)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetEngineDeviceFormat dispatches through IHardwareAudioEngineBase's vtable slot 5.
-func (self *IHardwareAudioEngineBase) SetEngineDeviceFormat(pDevice *mediaaudio.IMMDevice, _pwfxFormat unsafe.Pointer) error {
+func (self *IHardwareAudioEngineBase) SetEngineDeviceFormat(pDevice *mediaaudio.IMMDevice, _pwfxFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(_pwfxFormat)))
 	return win32.HRESULTError(int32(r1))
 }

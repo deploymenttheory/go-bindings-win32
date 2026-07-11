@@ -2531,6 +2531,13 @@ type KSPROPERTY_SERIAL struct {
 	PropertyLength uint32
 }
 
+// KSPROPERTY_SERIALHDR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type KSPROPERTY_SERIALHDR struct {
+	Data [20]byte
+}
+
 type KSPROPERTY_SPHLI struct {
 	HLISS    uint16
 	Reserved uint16
@@ -3866,6 +3873,13 @@ type NABTSFEC_BUFFER struct {
 	GroupID  uint16
 	Reserved uint16
 	Data     [448]byte
+}
+
+// NABTS_BUFFER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NABTS_BUFFER struct {
+	Data [543]byte
 }
 
 type NABTS_BUFFER_LINE struct {

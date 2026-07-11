@@ -6586,7 +6586,7 @@ func (self *IIsdbSIParameterDescriptor) GetParameterVersion(pbVal *byte) error {
 }
 
 // GetUpdateTime dispatches through IIsdbSIParameterDescriptor's vtable slot 6.
-func (self *IIsdbSIParameterDescriptor) GetUpdateTime(pVal unsafe.Pointer) error {
+func (self *IIsdbSIParameterDescriptor) GetUpdateTime(pVal *MPEG_DATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -10706,19 +10706,19 @@ type IMpeg2Data struct {
 var IID_IMpeg2Data = win32.GUID{Data1: 0x9b396d40, Data2: 0xf380, Data3: 0x4e3c, Data4: [8]byte{0xa5, 0x14, 0x1a, 0x82, 0xbf, 0x6e, 0xbf, 0xe6}}
 
 // GetSection dispatches through IMpeg2Data's vtable slot 3.
-func (self *IMpeg2Data) GetSection(pid uint16, tid byte, pFilter unsafe.Pointer, dwTimeout uint32, ppSectionList **ISectionList) error {
+func (self *IMpeg2Data) GetSection(pid uint16, tid byte, pFilter *MPEG2_FILTER, dwTimeout uint32, ppSectionList **ISectionList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(pid), uintptr(tid), uintptr(unsafe.Pointer(pFilter)), uintptr(dwTimeout), uintptr(unsafe.Pointer(ppSectionList)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetTable dispatches through IMpeg2Data's vtable slot 4.
-func (self *IMpeg2Data) GetTable(pid uint16, tid byte, pFilter unsafe.Pointer, dwTimeout uint32, ppSectionList **ISectionList) error {
+func (self *IMpeg2Data) GetTable(pid uint16, tid byte, pFilter *MPEG2_FILTER, dwTimeout uint32, ppSectionList **ISectionList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(pid), uintptr(tid), uintptr(unsafe.Pointer(pFilter)), uintptr(dwTimeout), uintptr(unsafe.Pointer(ppSectionList)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamOfSections dispatches through IMpeg2Data's vtable slot 5.
-func (self *IMpeg2Data) GetStreamOfSections(pid uint16, tid byte, pFilter unsafe.Pointer, hDataReadyEvent foundation.HANDLE, ppMpegStream **IMpeg2Stream) error {
+func (self *IMpeg2Data) GetStreamOfSections(pid uint16, tid byte, pFilter *MPEG2_FILTER, hDataReadyEvent foundation.HANDLE, ppMpegStream **IMpeg2Stream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(pid), uintptr(tid), uintptr(unsafe.Pointer(pFilter)), uintptr(hDataReadyEvent), uintptr(unsafe.Pointer(ppMpegStream)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -10733,13 +10733,13 @@ type IMpeg2Stream struct {
 var IID_IMpeg2Stream = win32.GUID{Data1: 0x400cc286, Data2: 0x32a0, Data3: 0x4ce4, Data4: [8]byte{0x90, 0x41, 0x39, 0x57, 0x11, 0x25, 0xa6, 0x35}}
 
 // Initialize dispatches through IMpeg2Stream's vtable slot 3.
-func (self *IMpeg2Stream) Initialize(requestType MPEG_REQUEST_TYPE, pMpeg2Data *IMpeg2Data, pContext unsafe.Pointer, pid uint16, tid byte, pFilter unsafe.Pointer, hDataReadyEvent foundation.HANDLE) error {
+func (self *IMpeg2Stream) Initialize(requestType MPEG_REQUEST_TYPE, pMpeg2Data *IMpeg2Data, pContext *MPEG_CONTEXT, pid uint16, tid byte, pFilter *MPEG2_FILTER, hDataReadyEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(requestType), uintptr(unsafe.Pointer(pMpeg2Data)), uintptr(unsafe.Pointer(pContext)), uintptr(pid), uintptr(tid), uintptr(unsafe.Pointer(pFilter)), uintptr(hDataReadyEvent))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SupplyDataBuffer dispatches through IMpeg2Stream's vtable slot 4.
-func (self *IMpeg2Stream) SupplyDataBuffer(pStreamBuffer unsafe.Pointer) error {
+func (self *IMpeg2Stream) SupplyDataBuffer(pStreamBuffer *MPEG_STREAM_BUFFER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStreamBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -11135,13 +11135,13 @@ func (self *IPMT) GetRecordDescriptorByTag(dwRecordIndex uint32, bTag byte, pdwC
 }
 
 // QueryServiceGatewayInfo dispatches through IPMT's vtable slot 16.
-func (self *IPMT) QueryServiceGatewayInfo(ppDSMCCList *unsafe.Pointer, puiCount *uint32) error {
+func (self *IPMT) QueryServiceGatewayInfo(ppDSMCCList **DSMCC_ELEMENT, puiCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDSMCCList)), uintptr(unsafe.Pointer(puiCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // QueryMPEInfo dispatches through IPMT's vtable slot 17.
-func (self *IPMT) QueryMPEInfo(ppMPEList *unsafe.Pointer, puiCount *uint32) error {
+func (self *IPMT) QueryMPEInfo(ppMPEList **MPE_ELEMENT, puiCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMPEList)), uintptr(unsafe.Pointer(puiCount)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -11787,13 +11787,13 @@ type ISectionList struct {
 var IID_ISectionList = win32.GUID{Data1: 0xafec1eb5, Data2: 0x2a64, Data3: 0x46c6, Data4: [8]byte{0xbf, 0x4b, 0xae, 0x3c, 0xcb, 0x6a, 0xfd, 0xb0}}
 
 // Initialize dispatches through ISectionList's vtable slot 3.
-func (self *ISectionList) Initialize(requestType MPEG_REQUEST_TYPE, pMpeg2Data *IMpeg2Data, pContext unsafe.Pointer, pid uint16, tid byte, pFilter unsafe.Pointer, timeout uint32, hDoneEvent foundation.HANDLE) error {
+func (self *ISectionList) Initialize(requestType MPEG_REQUEST_TYPE, pMpeg2Data *IMpeg2Data, pContext *MPEG_CONTEXT, pid uint16, tid byte, pFilter *MPEG2_FILTER, timeout uint32, hDoneEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(requestType), uintptr(unsafe.Pointer(pMpeg2Data)), uintptr(unsafe.Pointer(pContext)), uintptr(pid), uintptr(tid), uintptr(unsafe.Pointer(pFilter)), uintptr(timeout), uintptr(hDoneEvent))
 	return win32.HRESULTError(int32(r1))
 }
 
 // InitializeWithRawSections dispatches through ISectionList's vtable slot 4.
-func (self *ISectionList) InitializeWithRawSections(pmplSections unsafe.Pointer) error {
+func (self *ISectionList) InitializeWithRawSections(pmplSections *MPEG_PACKET_LIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmplSections)))
 	return win32.HRESULTError(int32(r1))
 }

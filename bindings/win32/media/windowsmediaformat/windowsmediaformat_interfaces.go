@@ -3256,13 +3256,13 @@ type IWMStreamPrioritization struct {
 var IID_IWMStreamPrioritization = win32.GUID{Data1: 0x8c1c6090, Data2: 0xf9a8, Data3: 0x4748, Data4: [8]byte{0x8e, 0xc3, 0xdd, 0x11, 0x08, 0xba, 0x1e, 0x77}}
 
 // GetPriorityRecords dispatches through IWMStreamPrioritization's vtable slot 3.
-func (self *IWMStreamPrioritization) GetPriorityRecords(pRecordArray unsafe.Pointer, pcRecords *uint16) error {
+func (self *IWMStreamPrioritization) GetPriorityRecords(pRecordArray *WM_STREAM_PRIORITY_RECORD, pcRecords *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRecordArray)), uintptr(unsafe.Pointer(pcRecords)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetPriorityRecords dispatches through IWMStreamPrioritization's vtable slot 4.
-func (self *IWMStreamPrioritization) SetPriorityRecords(pRecordArray unsafe.Pointer, cRecords uint16) error {
+func (self *IWMStreamPrioritization) SetPriorityRecords(pRecordArray *WM_STREAM_PRIORITY_RECORD, cRecords uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRecordArray)), uintptr(cRecords))
 	return win32.HRESULTError(int32(r1))
 }
@@ -3416,7 +3416,7 @@ type IWMSyncReader2 struct {
 var IID_IWMSyncReader2 = win32.GUID{Data1: 0xfaed3d21, Data2: 0x1b6b, Data3: 0x4af7, Data4: [8]byte{0x8c, 0xb6, 0x3e, 0x18, 0x9b, 0xbc, 0x18, 0x7b}}
 
 // SetRangeByTimecode dispatches through IWMSyncReader2's vtable slot 24.
-func (self *IWMSyncReader2) SetRangeByTimecode(wStreamNum uint16, pStart unsafe.Pointer, pEnd unsafe.Pointer) error {
+func (self *IWMSyncReader2) SetRangeByTimecode(wStreamNum uint16, pStart *WMT_TIMECODE_EXTENSION_DATA, pEnd *WMT_TIMECODE_EXTENSION_DATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(pStart)), uintptr(unsafe.Pointer(pEnd)))
 	return win32.HRESULTError(int32(r1))
 }

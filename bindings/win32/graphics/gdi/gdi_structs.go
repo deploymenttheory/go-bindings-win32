@@ -82,6 +82,14 @@ type BITMAPCOREINFO struct {
 	BmciColors [1]RGBTRIPLE
 }
 
+// BITMAPFILEHEADER: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-bitmapfileheader
+// BITMAPFILEHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BITMAPFILEHEADER struct {
+	Data [7]uint16
+}
+
 // BITMAPINFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-bitmapinfo
 type BITMAPINFO struct {
 	BmiHeader BITMAPINFOHEADER
@@ -1223,6 +1231,14 @@ type MAT2 struct {
 	EM12 FIXED
 	EM21 FIXED
 	EM22 FIXED
+}
+
+// METAHEADER: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-metaheader
+// METAHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type METAHEADER struct {
+	Data [9]uint16
 }
 
 // METARECORD: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-metarecord

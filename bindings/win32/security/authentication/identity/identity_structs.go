@@ -1033,6 +1033,13 @@ type MSV1_0_PASSTHROUGH_RESPONSE struct {
 	ValidationData *byte
 }
 
+// MSV1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MSV1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL struct {
+	Data [37]byte
+}
+
 type MSV1_0_S4U_LOGON struct {
 	MessageType       MSV1_0_LOGON_SUBMIT_TYPE
 	Flags             uint32
@@ -2916,6 +2923,14 @@ type TRUSTED_PASSWORD_INFO struct {
 // TRUSTED_POSIX_OFFSET_INFO: https://learn.microsoft.com/windows/win32/api/ntsecapi/ns-ntsecapi-trusted_posix_offset_info
 type TRUSTED_POSIX_OFFSET_INFO struct {
 	Offset uint32
+}
+
+// USER_ALL_INFORMATION: https://learn.microsoft.com/windows/win32/api/subauth/ns-subauth-user_all_information
+// USER_ALL_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USER_ALL_INFORMATION struct {
+	Data [79]uint32
 }
 
 type USER_SESSION_KEY struct {

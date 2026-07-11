@@ -658,6 +658,13 @@ type PROJECTION_INFO2 struct {
 	Anonymous          PROJECTION_INFO2_Anonymous_e__Union
 }
 
+// RASADPARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASADPARAMS struct {
+	Data [6]uint32
+}
+
 type RASAMBA struct {
 	DwSize         uint32
 	DwError        uint32
@@ -694,6 +701,13 @@ type RASCOMMSETTINGS struct {
 	BAlign    byte
 }
 
+// RASCONNA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASCONNA struct {
+	Data [181]uint32
+}
+
 type RASCONNSTATUSA struct {
 	DwSize          uint32
 	Rasconnstate    RASCONNSTATE
@@ -716,6 +730,13 @@ type RASCONNSTATUSW struct {
 	LocalEndPoint   RASTUNNELENDPOINT
 	RemoteEndPoint  RASTUNNELENDPOINT
 	Rasconnsubstate RASCONNSUBSTATE
+}
+
+// RASCONNW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASCONNW struct {
+	Data [347]uint32
 }
 
 type RASCREDENTIALSA struct {
@@ -742,6 +763,13 @@ type RASCTRYINFO struct {
 	DwCountryNameOffset uint32
 }
 
+// RASCUSTOMSCRIPTEXTENSIONS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASCUSTOMSCRIPTEXTENSIONS struct {
+	Data [3]uint32
+}
+
 type RASDEVINFOA struct {
 	DwSize       uint32
 	SzDeviceType [17]foundation.CHAR
@@ -752,6 +780,49 @@ type RASDEVINFOW struct {
 	DwSize       uint32
 	SzDeviceType [17]uint16
 	SzDeviceName [129]uint16
+}
+
+// RASDEVSPECIFICINFO: https://learn.microsoft.com/windows/win32/api/ras/ns-ras-rasdevspecificinfo
+// RASDEVSPECIFICINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASDEVSPECIFICINFO struct {
+	Data [3]uint32
+}
+
+// RASDIALDLG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASDIALDLG struct {
+	Data [12]uint32
+}
+
+// RASDIALEXTENSIONS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASDIALEXTENSIONS struct {
+	Data [15]uint32
+}
+
+// RASDIALPARAMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASDIALPARAMSA struct {
+	Data [269]uint32
+}
+
+// RASDIALPARAMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASDIALPARAMSW struct {
+	Data [530]uint32
+}
+
+// RASEAPINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASEAPINFO struct {
+	Data [3]uint32
 }
 
 type RASEAPUSERIDENTITYA struct {
@@ -828,6 +899,20 @@ type RASENTRYA struct {
 	IdiType                    IKEV2_ID_PAYLOAD_TYPE
 	IdrType                    IKEV2_ID_PAYLOAD_TYPE
 	FDisableIKEv2Fragmentation foundation.BOOL
+}
+
+// RASENTRYDLGA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASENTRYDLGA struct {
+	Data [76]uint32
+}
+
+// RASENTRYDLGW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASENTRYDLGW struct {
+	Data [140]uint32
 }
 
 type RASENTRYNAMEA struct {
@@ -908,6 +993,14 @@ type RASENTRYW struct {
 	FDisableIKEv2Fragmentation foundation.BOOL
 }
 
+// RASIKEV2_PROJECTION_INFO: https://learn.microsoft.com/windows/win32/api/ras/ns-ras-rasikev2_projection_info
+// RASIKEV2_PROJECTION_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASIKEV2_PROJECTION_INFO struct {
+	Data [23]uint32
+}
+
 type RASIPADDR struct {
 	A byte
 	B byte
@@ -937,6 +1030,20 @@ type RASNOUSERW struct {
 	SzUserName  [257]uint16
 	SzPassword  [257]uint16
 	SzDomain    [16]uint16
+}
+
+// RASPBDLGA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASPBDLGA struct {
+	Data [15]uint32
+}
+
+// RASPBDLGW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RASPBDLGW struct {
+	Data [15]uint32
 }
 
 type RASPPPCCP struct {

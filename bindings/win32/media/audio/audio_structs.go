@@ -9,6 +9,147 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+// ACMDRIVERDETAILSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMDRIVERDETAILSA struct {
+	Data [924]byte
+}
+
+// ACMDRIVERDETAILSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMDRIVERDETAILSW struct {
+	Data [1804]byte
+}
+
+// ACMDRVFORMATSUGGEST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMDRVFORMATSUGGEST struct {
+	Data [32]byte
+}
+
+// ACMDRVOPENDESCA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMDRVOPENDESCA struct {
+	Data [44]byte
+}
+
+// ACMDRVOPENDESCW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMDRVOPENDESCW struct {
+	Data [44]byte
+}
+
+// ACMDRVSTREAMHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMDRVSTREAMHEADER struct {
+	Data [124]byte
+}
+
+// ACMDRVSTREAMINSTANCE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMDRVSTREAMINSTANCE struct {
+	Data [68]byte
+}
+
+// ACMDRVSTREAMSIZE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMDRVSTREAMSIZE struct {
+	Data [16]byte
+}
+
+// ACMFILTERCHOOSEA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFILTERCHOOSEA struct {
+	Data [268]byte
+}
+
+// ACMFILTERCHOOSEW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFILTERCHOOSEW struct {
+	Data [444]byte
+}
+
+// ACMFILTERDETAILSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFILTERDETAILSA struct {
+	Data [156]byte
+}
+
+// ACMFILTERDETAILSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFILTERDETAILSW struct {
+	Data [284]byte
+}
+
+// ACMFILTERTAGDETAILSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFILTERTAGDETAILSA struct {
+	Data [72]byte
+}
+
+// ACMFILTERTAGDETAILSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFILTERTAGDETAILSW struct {
+	Data [120]byte
+}
+
+// ACMFORMATCHOOSEA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFORMATCHOOSEA struct {
+	Data [268]byte
+}
+
+// ACMFORMATCHOOSEW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFORMATCHOOSEW struct {
+	Data [444]byte
+}
+
+// ACMFORMATDETAILSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFORMATDETAILSA struct {
+	Data [156]byte
+}
+
+// ACMFORMATTAGDETAILSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFORMATTAGDETAILSA struct {
+	Data [72]byte
+}
+
+// ACMFORMATTAGDETAILSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMFORMATTAGDETAILSW struct {
+	Data [120]byte
+}
+
+// ACMSTREAMHEADER: https://learn.microsoft.com/windows/win32/api/msacm/ns-msacm-acmstreamheader
+// ACMSTREAMHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ACMSTREAMHEADER struct {
+	Data [124]byte
+}
+
 type AMBISONICS_PARAMS struct {
 	U32Size            uint32
 	U32Version         uint32
@@ -54,6 +195,36 @@ type AUDIO_VOLUME_NOTIFICATION_DATA struct {
 	AfChannelVolumes [1]float32
 }
 
+// AUXCAPS2A is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AUXCAPS2A struct {
+	Data [96]byte
+}
+
+// AUXCAPS2W is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AUXCAPS2W struct {
+	Data [128]byte
+}
+
+// AUXCAPSA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-auxcapsa
+// AUXCAPSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AUXCAPSA struct {
+	Data [48]byte
+}
+
+// AUXCAPSW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-auxcapsw
+// AUXCAPSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AUXCAPSW struct {
+	Data [80]byte
+}
+
 type AudioClient3ActivationParams struct {
 	TracingContextId win32.GUID
 }
@@ -84,7 +255,248 @@ type DIRECTX_AUDIO_ACTIVATION_PARAMS struct {
 type DeviceTopology struct {
 }
 
+// ECHOWAVEFILTER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ECHOWAVEFILTER struct {
+	Data [40]byte
+}
+
+// MIDIEVENT: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-midievent
+// MIDIEVENT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIEVENT struct {
+	Data [16]byte
+}
+
+// MIDIHDR: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-midihdr
+// MIDIHDR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIHDR struct {
+	Data [112]byte
+}
+
+// MIDIINCAPS2A is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIINCAPS2A struct {
+	Data [92]byte
+}
+
+// MIDIINCAPS2W is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIINCAPS2W struct {
+	Data [124]byte
+}
+
+// MIDIINCAPSA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-midiincapsa
+// MIDIINCAPSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIINCAPSA struct {
+	Data [44]byte
+}
+
+// MIDIINCAPSW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-midiincapsw
+// MIDIINCAPSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIINCAPSW struct {
+	Data [76]byte
+}
+
+// MIDIOUTCAPS2A is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIOUTCAPS2A struct {
+	Data [100]byte
+}
+
+// MIDIOUTCAPS2W is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIOUTCAPS2W struct {
+	Data [132]byte
+}
+
+// MIDIOUTCAPSA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-midioutcapsa
+// MIDIOUTCAPSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIOUTCAPSA struct {
+	Data [52]byte
+}
+
+// MIDIOUTCAPSW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-midioutcapsw
+// MIDIOUTCAPSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIOUTCAPSW struct {
+	Data [84]byte
+}
+
+// MIDIPROPTEMPO: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-midiproptempo
+// MIDIPROPTEMPO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIPROPTEMPO struct {
+	Data [8]byte
+}
+
+// MIDIPROPTIMEDIV: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-midiproptimediv
+// MIDIPROPTIMEDIV is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIPROPTIMEDIV struct {
+	Data [8]byte
+}
+
+// MIDISTRMBUFFVER: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-midistrmbuffver
+// MIDISTRMBUFFVER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDISTRMBUFFVER struct {
+	Data [12]byte
+}
+
+// MIXERCAPS2A is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCAPS2A struct {
+	Data [96]byte
+}
+
+// MIXERCAPS2W is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCAPS2W struct {
+	Data [128]byte
+}
+
+// MIXERCAPSA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercapsa
+// MIXERCAPSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCAPSA struct {
+	Data [48]byte
+}
+
+// MIXERCAPSW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercapsw
+// MIXERCAPSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCAPSW struct {
+	Data [80]byte
+}
+
+// MIXERCONTROLA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercontrola
+// MIXERCONTROLA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCONTROLA struct {
+	Data [148]byte
+}
+
+// MIXERCONTROLDETAILS: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercontroldetails
+// MIXERCONTROLDETAILS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCONTROLDETAILS struct {
+	Data [32]byte
+}
+
+// MIXERCONTROLDETAILS_BOOLEAN: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercontroldetails_boolean
+// MIXERCONTROLDETAILS_BOOLEAN is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCONTROLDETAILS_BOOLEAN struct {
+	Data [4]byte
+}
+
+// MIXERCONTROLDETAILS_LISTTEXTA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercontroldetails_listtexta
+// MIXERCONTROLDETAILS_LISTTEXTA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCONTROLDETAILS_LISTTEXTA struct {
+	Data [72]byte
+}
+
+// MIXERCONTROLDETAILS_LISTTEXTW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercontroldetails_listtextw
+// MIXERCONTROLDETAILS_LISTTEXTW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCONTROLDETAILS_LISTTEXTW struct {
+	Data [136]byte
+}
+
+// MIXERCONTROLDETAILS_SIGNED: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercontroldetails_signed
+// MIXERCONTROLDETAILS_SIGNED is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCONTROLDETAILS_SIGNED struct {
+	Data [4]byte
+}
+
+// MIXERCONTROLDETAILS_UNSIGNED: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercontroldetails_unsigned
+// MIXERCONTROLDETAILS_UNSIGNED is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCONTROLDETAILS_UNSIGNED struct {
+	Data [4]byte
+}
+
+// MIXERCONTROLW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixercontrolw
+// MIXERCONTROLW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERCONTROLW struct {
+	Data [228]byte
+}
+
+// MIXERLINEA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixerlinea
+// MIXERLINEA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERLINEA struct {
+	Data [172]byte
+}
+
+// MIXERLINECONTROLSA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixerlinecontrolsa
+// MIXERLINECONTROLSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERLINECONTROLSA struct {
+	Data [28]byte
+}
+
+// MIXERLINECONTROLSW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixerlinecontrolsw
+// MIXERLINECONTROLSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERLINECONTROLSW struct {
+	Data [28]byte
+}
+
+// MIXERLINEW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-mixerlinew
+// MIXERLINEW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXERLINEW struct {
+	Data [284]byte
+}
+
 type MMDeviceEnumerator struct {
+}
+
+// PCMWAVEFORMAT: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-pcmwaveformat
+// PCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PCMWAVEFORMAT struct {
+	Data [16]byte
 }
 
 // SpatialAudioClientActivationParams: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/ns-spatialaudioclient-spatialaudioclientactivationparams
@@ -97,9 +509,211 @@ type SpatialAudioClientActivationParams struct {
 	MinorVersion3    int32
 }
 
+// SpatialAudioHrtfActivationParams: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfactivationparams
+// SpatialAudioHrtfActivationParams is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioHrtfActivationParams struct {
+	Data [72]byte
+}
+
+// SpatialAudioHrtfActivationParams2: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfactivationparams2
+// SpatialAudioHrtfActivationParams2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioHrtfActivationParams2 struct {
+	Data [76]byte
+}
+
+// SpatialAudioHrtfDirectivity: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfdirectivity
+// SpatialAudioHrtfDirectivity is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioHrtfDirectivity struct {
+	Data [8]byte
+}
+
+// SpatialAudioHrtfDirectivityCardioid: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfdirectivitycardioid
+// SpatialAudioHrtfDirectivityCardioid is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioHrtfDirectivityCardioid struct {
+	Data [12]byte
+}
+
+// SpatialAudioHrtfDirectivityCone: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfdirectivitycone
+// SpatialAudioHrtfDirectivityCone is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioHrtfDirectivityCone struct {
+	Data [16]byte
+}
+
 // SpatialAudioHrtfDirectivityUnion: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfdirectivityunion
 // SpatialAudioHrtfDirectivityUnion is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type SpatialAudioHrtfDirectivityUnion struct {
 	Data [16]byte
+}
+
+// SpatialAudioHrtfDistanceDecay: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfdistancedecay
+// SpatialAudioHrtfDistanceDecay is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioHrtfDistanceDecay struct {
+	Data [20]byte
+}
+
+// SpatialAudioMetadataItemsInfo: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/ns-spatialaudiometadata-spatialaudiometadataitemsinfo
+// SpatialAudioMetadataItemsInfo is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioMetadataItemsInfo struct {
+	Data [10]byte
+}
+
+// SpatialAudioObjectRenderStreamActivationParams: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/ns-spatialaudioclient-spatialaudioobjectrenderstreamactivationparams
+// SpatialAudioObjectRenderStreamActivationParams is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioObjectRenderStreamActivationParams struct {
+	Data [40]byte
+}
+
+// SpatialAudioObjectRenderStreamActivationParams2: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/ns-spatialaudioclient-spatialaudioobjectrenderstreamactivationparams2
+// SpatialAudioObjectRenderStreamActivationParams2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioObjectRenderStreamActivationParams2 struct {
+	Data [44]byte
+}
+
+// SpatialAudioObjectRenderStreamForMetadataActivationParams: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/ns-spatialaudiometadata-spatialaudioobjectrenderstreamformetadataactivationparams
+// SpatialAudioObjectRenderStreamForMetadataActivationParams is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioObjectRenderStreamForMetadataActivationParams struct {
+	Data [66]byte
+}
+
+// SpatialAudioObjectRenderStreamForMetadataActivationParams2: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/ns-spatialaudiometadata-spatialaudioobjectrenderstreamformetadataactivationparams2
+// SpatialAudioObjectRenderStreamForMetadataActivationParams2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SpatialAudioObjectRenderStreamForMetadataActivationParams2 struct {
+	Data [72]byte
+}
+
+// VOLUMEWAVEFILTER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type VOLUMEWAVEFILTER struct {
+	Data [36]byte
+}
+
+// WAVEFILTER: https://learn.microsoft.com/windows/win32/api/mmreg/ns-mmreg-wavefilter
+// WAVEFILTER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEFILTER struct {
+	Data [32]byte
+}
+
+// WAVEFORMAT: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-waveformat
+// WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEFORMAT struct {
+	Data [14]byte
+}
+
+// WAVEFORMATEX: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-waveformatex
+// WAVEFORMATEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEFORMATEX struct {
+	Data [18]byte
+}
+
+// WAVEFORMATEXTENSIBLE: https://learn.microsoft.com/windows/win32/api/mmreg/ns-mmreg-waveformatextensible
+// WAVEFORMATEXTENSIBLE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEFORMATEXTENSIBLE struct {
+	Data [40]byte
+}
+
+// WAVEHDR: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-wavehdr
+// WAVEHDR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEHDR struct {
+	Data [48]byte
+}
+
+// WAVEINCAPS2A is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEINCAPS2A struct {
+	Data [96]byte
+}
+
+// WAVEINCAPS2W is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEINCAPS2W struct {
+	Data [128]byte
+}
+
+// WAVEINCAPSA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-waveincapsa
+// WAVEINCAPSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEINCAPSA struct {
+	Data [48]byte
+}
+
+// WAVEINCAPSW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-waveincapsw
+// WAVEINCAPSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEINCAPSW struct {
+	Data [80]byte
+}
+
+// WAVEOUTCAPS2A is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEOUTCAPS2A struct {
+	Data [100]byte
+}
+
+// WAVEOUTCAPS2W is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEOUTCAPS2W struct {
+	Data [132]byte
+}
+
+// WAVEOUTCAPSA: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-waveoutcapsa
+// WAVEOUTCAPSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEOUTCAPSA struct {
+	Data [52]byte
+}
+
+// WAVEOUTCAPSW: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-waveoutcapsw
+// WAVEOUTCAPSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEOUTCAPSW struct {
+	Data [84]byte
+}
+
+// TACMFORMATDETAILSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TACMFORMATDETAILSW struct {
+	Data [284]byte
 }

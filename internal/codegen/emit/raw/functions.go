@@ -152,7 +152,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 	for i := range function.Params {
 		resolvedParams[i] = g.mapper.GoType(&function.Params[i].Type, context, scratch)
 	}
-	slicePlans, elidedCounts := planSliceParams(function, resolvedParams)
+	slicePlans, elidedCounts := planSliceParams(function.Params, resolvedParams, true)
 
 	returnContext := context
 	returnContext.IsReturn = true
@@ -450,46 +450,108 @@ type slicePlan struct {
 	countIndex     int    // the count parameter this slice supplies
 }
 
-// planSliceParams finds (array pointer, input count) parameter pairs — via the
-// ingested [NativeArrayInfo] CountParamIndex — and plans collapsing each into a
-// single []T parameter. Returns the array-index→plan and count-index→array-
-// index maps. A pair qualifies only when the count is referenced by exactly
-// one array, the array is a typed pointer (not void*), and the count is an
-// input integer.
-func planSliceParams(function *win32meta.Function, resolved []typemap.Resolved) (map[int]slicePlan, map[int]int) {
+// planSliceParams finds parameter pairs to collapse into a single slice
+// parameter, returning the buffer-index→plan and size-index→buffer-index maps.
+// Two shapes qualify:
+//
+//   - typed arrays (typedArrays=true): an array pointer plus its
+//     [NativeArrayInfo] CountParamIndex input count → []T. The count must be
+//     referenced by exactly one array, the array a typed pointer (not void*),
+//     and the count an input integer.
+//   - byte buffers: a literal void* or byte* plus its [MemorySize]
+//     BytesParamIndex input size → []byte. The size must be referenced by
+//     exactly one buffer and by no [NativeArrayInfo] count (a size shared
+//     with a typed-array collapse stays raw rather than un-collapsing the
+//     array). Typed non-byte pointers keep their type rather than blobbing.
+//
+// A buffer that is [retval] or [Reserved] never collapses: those params are
+// consumed earlier in the shaping loop, and a surviving size elision would
+// reference an undeclared identifier.
+func planSliceParams(params []win32meta.Param, resolved []typemap.Resolved, typedArrays bool) (map[int]slicePlan, map[int]int) {
 	references := map[int]int{}
-	for i := range function.Params {
-		if j := function.Params[i].NativeArrayCountParamIndex; j >= 0 {
+	for i := range params {
+		if j := params[i].NativeArrayCountParamIndex; j >= 0 {
 			references[j]++
 		}
 	}
 	plans := map[int]slicePlan{}
 	elided := map[int]int{}
-	for i := range function.Params {
-		param := &function.Params[i]
-		countIndex := param.NativeArrayCountParamIndex
-		if countIndex < 0 || countIndex >= len(function.Params) || countIndex == i {
+	if typedArrays {
+		for i := range params {
+			param := &params[i]
+			if param.IsRetVal || param.IsReserved {
+				continue
+			}
+			countIndex := param.NativeArrayCountParamIndex
+			if countIndex < 0 || countIndex >= len(params) || countIndex == i {
+				continue
+			}
+			if references[countIndex] != 1 {
+				continue // ambiguous shared count
+			}
+			array := resolved[i]
+			if array.Kind != typemap.KindPointer || !strings.HasPrefix(array.GoType, "*") {
+				continue
+			}
+			element := array.GoType[1:]
+			if element == "" || strings.Contains(element, "unsafe.") {
+				continue
+			}
+			countParam := &params[countIndex]
+			if countParam.IsOut || countParam.IsReserved || !isIntegerCount(resolved[countIndex]) {
+				continue
+			}
+			plans[i] = slicePlan{element: element, rawPointerType: array.GoType, countIndex: countIndex}
+			elided[countIndex] = i
+		}
+	}
+	sizeReferences := map[int]int{}
+	for i := range params {
+		if j := params[i].MemorySizeBytesParamIndex; j >= 0 {
+			sizeReferences[j]++
+		}
+	}
+	for i := range params {
+		param := &params[i]
+		if param.IsRetVal || param.IsReserved {
 			continue
 		}
-		if references[countIndex] != 1 {
-			continue // ambiguous shared count
-		}
-		array := resolved[i]
-		if array.Kind != typemap.KindPointer || !strings.HasPrefix(array.GoType, "*") {
+		if _, planned := plans[i]; planned {
 			continue
 		}
-		element := array.GoType[1:]
-		if element == "" || strings.Contains(element, "unsafe.") {
+		if !isVoidPointer(&param.Type) && !isBytePointer(&param.Type) {
 			continue
 		}
-		countParam := &function.Params[countIndex]
-		if countParam.IsOut || countParam.IsReserved || !isIntegerCount(resolved[countIndex]) {
+		sizeIndex := param.MemorySizeBytesParamIndex
+		if sizeIndex < 0 || sizeIndex >= len(params) || sizeIndex == i {
 			continue
 		}
-		plans[i] = slicePlan{element: element, rawPointerType: array.GoType, countIndex: countIndex}
-		elided[countIndex] = i
+		if sizeReferences[sizeIndex] != 1 || references[sizeIndex] != 0 {
+			continue // shared size, or a typed-array count owns this param
+		}
+		if _, taken := elided[sizeIndex]; taken {
+			continue
+		}
+		sizeParam := &params[sizeIndex]
+		if sizeParam.IsOut || sizeParam.IsReserved || !isIntegerCount(resolved[sizeIndex]) {
+			continue
+		}
+		plans[i] = slicePlan{element: "byte", rawPointerType: "*byte", countIndex: sizeIndex}
+		elided[sizeIndex] = i
 	}
 	return plans, elided
+}
+
+// isVoidPointer reports whether a metadata type is literally void*.
+func isVoidPointer(ref *win32meta.TypeRef) bool {
+	return ref.Kind == "PointerTo" && ref.Child != nil &&
+		ref.Child.Kind == "Native" && ref.Child.Name == "Void"
+}
+
+// isBytePointer reports whether a metadata type is literally byte*.
+func isBytePointer(ref *win32meta.TypeRef) bool {
+	return ref.Kind == "PointerTo" && ref.Child != nil &&
+		ref.Child.Kind == "Native" && ref.Child.Name == "Byte"
 }
 
 // retVal elevation modes.
